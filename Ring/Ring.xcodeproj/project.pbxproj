@@ -1,0 +1,861 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
+		043866241D22C3BC00E06CE2 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* Account.swift */; };
+		043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866251D22C42F00E06CE2 /* AccountModel.swift */; };
+		043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866321D22CE8C00E06CE2 /* MeViewController.swift */; };
+		043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866351D22D06500E06CE2 /* AccountTableViewCell.swift */; };
+		043866381D2304A700E06CE2 /* BoolStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866371D2304A700E06CE2 /* BoolStringExtension.swift */; };
+		0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */; };
+		043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */; };
+		043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */; };
+		04399A011D1C2D9D00E99CD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043999FF1D1C2D9D00E99CD9 /* Main.storyboard */; };
+		04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04399A021D1C2D9D00E99CD9 /* Assets.xcassets */; };
+		04399A061D1C2D9D00E99CD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04399A041D1C2D9D00E99CD9 /* LaunchScreen.storyboard */; };
+		04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A101D1C2D9D00E99CD9 /* RingTests.swift */; };
+		04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */; };
+		04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A291D1C2DE300E99CD9 /* CoreMedia.framework */; };
+		04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A2B1D1C2DE900E99CD9 /* AVFoundation.framework */; };
+		04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A931D1C2F5800E99CD9 /* libiconv.tbd */; };
+		04399A971D1C2F6100E99CD9 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A951D1C2F6100E99CD9 /* libbz2.tbd */; };
+		04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A961D1C2F6100E99CD9 /* libz.tbd */; };
+		04399AAC1D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AA61D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm */; };
+		04399AAD1D1C304300E99CD9 /* DRingAdaptator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AA81D1C304300E99CD9 /* DRingAdaptator.mm */; };
+		04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
+		04399AE41D1C341A00E99CD9 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB21D1C341A00E99CD9 /* libavcodec.a */; };
+		04399AE51D1C341A00E99CD9 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB31D1C341A00E99CD9 /* libavdevice.a */; };
+		04399AE61D1C341A00E99CD9 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB41D1C341A00E99CD9 /* libavfilter.a */; };
+		04399AE71D1C341A00E99CD9 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB51D1C341A00E99CD9 /* libavformat.a */; };
+		04399AE81D1C341A00E99CD9 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB61D1C341A00E99CD9 /* libavutil.a */; };
+		04399AE91D1C341A00E99CD9 /* libFLAC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB71D1C341A00E99CD9 /* libFLAC.a */; };
+		04399AEA1D1C341A00E99CD9 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB81D1C341A00E99CD9 /* libgmp.a */; };
+		04399AEB1D1C341A00E99CD9 /* libgnutls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB91D1C341A00E99CD9 /* libgnutls.a */; };
+		04399AED1D1C341A00E99CD9 /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABB1D1C341A00E99CD9 /* libhogweed.a */; };
+		04399AEE1D1C341A00E99CD9 /* libiax.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABC1D1C341A00E99CD9 /* libiax.a */; };
+		04399AEF1D1C341A00E99CD9 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
+		04399AF01D1C341A00E99CD9 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */; };
+		04399AF11D1C341A00E99CD9 /* libmsgpackc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABF1D1C341A00E99CD9 /* libmsgpackc.a */; };
+		04399AF21D1C341A00E99CD9 /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC01D1C341A00E99CD9 /* libnettle.a */; };
+		04399AF31D1C341A00E99CD9 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC11D1C341A00E99CD9 /* libogg.a */; };
+		04399AF41D1C341A00E99CD9 /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC21D1C341A00E99CD9 /* libopendht.a */; };
+		04399AF51D1C341A00E99CD9 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC31D1C341A00E99CD9 /* libopus.a */; };
+		04399AF61D1C341A00E99CD9 /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC41D1C341A00E99CD9 /* libpcre.a */; };
+		04399AF71D1C341A00E99CD9 /* libpcreposix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC51D1C341A00E99CD9 /* libpcreposix.a */; };
+		04399AF81D1C341A00E99CD9 /* libpj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC61D1C341A00E99CD9 /* libpj.a */; };
+		04399AF91D1C341A00E99CD9 /* libpjlib-util.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC71D1C341A00E99CD9 /* libpjlib-util.a */; };
+		04399AFA1D1C341A00E99CD9 /* libpjmedia-audiodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC81D1C341A00E99CD9 /* libpjmedia-audiodev.a */; };
+		04399AFB1D1C341A00E99CD9 /* libpjmedia-codec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC91D1C341A00E99CD9 /* libpjmedia-codec.a */; };
+		04399AFC1D1C341A00E99CD9 /* libpjmedia-videodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACA1D1C341A00E99CD9 /* libpjmedia-videodev.a */; };
+		04399AFD1D1C341A00E99CD9 /* libpjmedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACB1D1C341A00E99CD9 /* libpjmedia.a */; };
+		04399AFE1D1C341A00E99CD9 /* libpjnath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACC1D1C341A00E99CD9 /* libpjnath.a */; };
+		04399AFF1D1C341A00E99CD9 /* libpjsip-simple.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACD1D1C341A00E99CD9 /* libpjsip-simple.a */; };
+		04399B001D1C341A00E99CD9 /* libpjsip-ua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACE1D1C341A00E99CD9 /* libpjsip-ua.a */; };
+		04399B011D1C341A00E99CD9 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACF1D1C341A00E99CD9 /* libpjsip.a */; };
+		04399B021D1C341A00E99CD9 /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD01D1C341A00E99CD9 /* libpjsua.a */; };
+		04399B031D1C341A00E99CD9 /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD11D1C341A00E99CD9 /* libpjsua2.a */; };
+		04399B041D1C341A00E99CD9 /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD21D1C341A00E99CD9 /* libpostproc.a */; };
+		04399B051D1C341A00E99CD9 /* libresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD31D1C341A00E99CD9 /* libresample.a */; };
+		04399B061D1C341A00E99CD9 /* libring.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD41D1C341A00E99CD9 /* libring.a */; };
+		04399B071D1C341A00E99CD9 /* libsamplerate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD51D1C341A00E99CD9 /* libsamplerate.a */; };
+		04399B081D1C341A00E99CD9 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD61D1C341A00E99CD9 /* libsndfile.a */; };
+		04399B091D1C341A00E99CD9 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD71D1C341A00E99CD9 /* libspeex.a */; };
+		04399B0A1D1C341A00E99CD9 /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD81D1C341A00E99CD9 /* libspeexdsp.a */; };
+		04399B0B1D1C341A00E99CD9 /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD91D1C341A00E99CD9 /* libsrtp.a */; };
+		04399B0C1D1C341A00E99CD9 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADA1D1C341A00E99CD9 /* libswresample.a */; };
+		04399B0D1D1C341A00E99CD9 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADB1D1C341A00E99CD9 /* libswscale.a */; };
+		04399B0E1D1C341A00E99CD9 /* libthreadutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADC1D1C341A00E99CD9 /* libthreadutil.a */; };
+		04399B0F1D1C341A00E99CD9 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
+		04399B101D1C341A00E99CD9 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADE1D1C341A00E99CD9 /* libvorbis.a */; };
+		04399B111D1C341A00E99CD9 /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADF1D1C341A00E99CD9 /* libvorbisenc.a */; };
+		04399B121D1C341A00E99CD9 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE01D1C341A00E99CD9 /* libvorbisfile.a */; };
+		04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
+		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
+		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04399A0D1D1C2D9D00E99CD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 043999F21D1C2D9D00E99CD9;
+			remoteInfo = Ring;
+		};
+		04399A181D1C2D9D00E99CD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 043999F21D1C2D9D00E99CD9;
+			remoteInfo = Ring;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		043866231D22C3BC00E06CE2 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		043866251D22C42F00E06CE2 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		043866321D22CE8C00E06CE2 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		043866351D22D06500E06CE2 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
+		043866371D2304A700E06CE2 /* BoolStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolStringExtension.swift; sourceTree = "<group>"; };
+		0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
+		043999F31D1C2D9D00E99CD9 /* Ring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ring.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		043999F91D1C2D9D00E99CD9 /* Ring.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ring.xcdatamodel; sourceTree = "<group>"; };
+		04399A001D1C2D9D00E99CD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04399A021D1C2D9D00E99CD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04399A051D1C2D9D00E99CD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04399A071D1C2D9D00E99CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04399A0C1D1C2D9D00E99CD9 /* RingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04399A101D1C2D9D00E99CD9 /* RingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingTests.swift; sourceTree = "<group>"; };
+		04399A121D1C2D9D00E99CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingUITests.swift; sourceTree = "<group>"; };
+		04399A1D1D1C2D9D00E99CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04399A291D1C2DE300E99CD9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		04399A2B1D1C2DE900E99CD9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		04399A931D1C2F5800E99CD9 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		04399A951D1C2F6100E99CD9 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		04399A961D1C2F6100E99CD9 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		04399AA51D1C304300E99CD9 /* ConfigurationManagerAdaptator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationManagerAdaptator.h; sourceTree = "<group>"; };
+		04399AA61D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConfigurationManagerAdaptator.mm; sourceTree = "<group>"; };
+		04399AA71D1C304300E99CD9 /* DRingAdaptator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRingAdaptator.h; sourceTree = "<group>"; };
+		04399AA81D1C304300E99CD9 /* DRingAdaptator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DRingAdaptator.mm; sourceTree = "<group>"; };
+		04399AA91D1C304300E99CD9 /* Ring-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ring-Bridging-Header.h"; sourceTree = "<group>"; };
+		04399AAA1D1C304300E99CD9 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		04399AAB1D1C304300E99CD9 /* Utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
+		04399AB21D1C341A00E99CD9 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../fat/lib/libavcodec.a; sourceTree = "<group>"; };
+		04399AB31D1C341A00E99CD9 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = ../fat/lib/libavdevice.a; sourceTree = "<group>"; };
+		04399AB41D1C341A00E99CD9 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = ../fat/lib/libavfilter.a; sourceTree = "<group>"; };
+		04399AB51D1C341A00E99CD9 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../fat/lib/libavformat.a; sourceTree = "<group>"; };
+		04399AB61D1C341A00E99CD9 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../fat/lib/libavutil.a; sourceTree = "<group>"; };
+		04399AB71D1C341A00E99CD9 /* libFLAC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFLAC.a; path = ../fat/lib/libFLAC.a; sourceTree = "<group>"; };
+		04399AB81D1C341A00E99CD9 /* libgmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgmp.a; path = ../fat/lib/libgmp.a; sourceTree = "<group>"; };
+		04399AB91D1C341A00E99CD9 /* libgnutls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgnutls.a; path = ../fat/lib/libgnutls.a; sourceTree = "<group>"; };
+		04399ABB1D1C341A00E99CD9 /* libhogweed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhogweed.a; path = ../fat/lib/libhogweed.a; sourceTree = "<group>"; };
+		04399ABC1D1C341A00E99CD9 /* libiax.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiax.a; path = ../fat/lib/libiax.a; sourceTree = "<group>"; };
+		04399ABD1D1C341A00E99CD9 /* libixml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libixml.a; path = ../fat/lib/libixml.a; sourceTree = "<group>"; };
+		04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjsoncpp.a; path = ../fat/lib/libjsoncpp.a; sourceTree = "<group>"; };
+		04399ABF1D1C341A00E99CD9 /* libmsgpackc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmsgpackc.a; path = ../fat/lib/libmsgpackc.a; sourceTree = "<group>"; };
+		04399AC01D1C341A00E99CD9 /* libnettle.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnettle.a; path = ../fat/lib/libnettle.a; sourceTree = "<group>"; };
+		04399AC11D1C341A00E99CD9 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = ../fat/lib/libogg.a; sourceTree = "<group>"; };
+		04399AC21D1C341A00E99CD9 /* libopendht.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopendht.a; path = ../fat/lib/libopendht.a; sourceTree = "<group>"; };
+		04399AC31D1C341A00E99CD9 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopus.a; path = ../fat/lib/libopus.a; sourceTree = "<group>"; };
+		04399AC41D1C341A00E99CD9 /* libpcre.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpcre.a; path = ../fat/lib/libpcre.a; sourceTree = "<group>"; };
+		04399AC51D1C341A00E99CD9 /* libpcreposix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpcreposix.a; path = ../fat/lib/libpcreposix.a; sourceTree = "<group>"; };
+		04399AC61D1C341A00E99CD9 /* libpj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpj.a; path = ../fat/lib/libpj.a; sourceTree = "<group>"; };
+		04399AC71D1C341A00E99CD9 /* libpjlib-util.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjlib-util.a"; path = "../fat/lib/libpjlib-util.a"; sourceTree = "<group>"; };
+		04399AC81D1C341A00E99CD9 /* libpjmedia-audiodev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-audiodev.a"; path = "../fat/lib/libpjmedia-audiodev.a"; sourceTree = "<group>"; };
+		04399AC91D1C341A00E99CD9 /* libpjmedia-codec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-codec.a"; path = "../fat/lib/libpjmedia-codec.a"; sourceTree = "<group>"; };
+		04399ACA1D1C341A00E99CD9 /* libpjmedia-videodev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-videodev.a"; path = "../fat/lib/libpjmedia-videodev.a"; sourceTree = "<group>"; };
+		04399ACB1D1C341A00E99CD9 /* libpjmedia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjmedia.a; path = ../fat/lib/libpjmedia.a; sourceTree = "<group>"; };
+		04399ACC1D1C341A00E99CD9 /* libpjnath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjnath.a; path = ../fat/lib/libpjnath.a; sourceTree = "<group>"; };
+		04399ACD1D1C341A00E99CD9 /* libpjsip-simple.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-simple.a"; path = "../fat/lib/libpjsip-simple.a"; sourceTree = "<group>"; };
+		04399ACE1D1C341A00E99CD9 /* libpjsip-ua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-ua.a"; path = "../fat/lib/libpjsip-ua.a"; sourceTree = "<group>"; };
+		04399ACF1D1C341A00E99CD9 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = ../fat/lib/libpjsip.a; sourceTree = "<group>"; };
+		04399AD01D1C341A00E99CD9 /* libpjsua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsua.a; path = ../fat/lib/libpjsua.a; sourceTree = "<group>"; };
+		04399AD11D1C341A00E99CD9 /* libpjsua2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsua2.a; path = ../fat/lib/libpjsua2.a; sourceTree = "<group>"; };
+		04399AD21D1C341A00E99CD9 /* libpostproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpostproc.a; path = ../fat/lib/libpostproc.a; sourceTree = "<group>"; };
+		04399AD31D1C341A00E99CD9 /* libresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libresample.a; path = ../fat/lib/libresample.a; sourceTree = "<group>"; };
+		04399AD41D1C341A00E99CD9 /* libring.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libring.a; path = ../fat/lib/libring.a; sourceTree = "<group>"; };
+		04399AD51D1C341A00E99CD9 /* libsamplerate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsamplerate.a; path = ../fat/lib/libsamplerate.a; sourceTree = "<group>"; };
+		04399AD61D1C341A00E99CD9 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../fat/lib/libsndfile.a; sourceTree = "<group>"; };
+		04399AD71D1C341A00E99CD9 /* libspeex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspeex.a; path = ../fat/lib/libspeex.a; sourceTree = "<group>"; };
+		04399AD81D1C341A00E99CD9 /* libspeexdsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspeexdsp.a; path = ../fat/lib/libspeexdsp.a; sourceTree = "<group>"; };
+		04399AD91D1C341A00E99CD9 /* libsrtp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsrtp.a; path = ../fat/lib/libsrtp.a; sourceTree = "<group>"; };
+		04399ADA1D1C341A00E99CD9 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = ../fat/lib/libswresample.a; sourceTree = "<group>"; };
+		04399ADB1D1C341A00E99CD9 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../fat/lib/libswscale.a; sourceTree = "<group>"; };
+		04399ADC1D1C341A00E99CD9 /* libthreadutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libthreadutil.a; path = ../fat/lib/libthreadutil.a; sourceTree = "<group>"; };
+		04399ADD1D1C341A00E99CD9 /* libupnp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libupnp.a; path = ../fat/lib/libupnp.a; sourceTree = "<group>"; };
+		04399ADE1D1C341A00E99CD9 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = ../fat/lib/libvorbis.a; sourceTree = "<group>"; };
+		04399ADF1D1C341A00E99CD9 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = ../fat/lib/libvorbisenc.a; sourceTree = "<group>"; };
+		04399AE01D1C341A00E99CD9 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../fat/lib/libvorbisfile.a; sourceTree = "<group>"; };
+		04399AE11D1C341A00E99CD9 /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = ../fat/lib/libvpx.a; sourceTree = "<group>"; };
+		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
+		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		043999F01D1C2D9D00E99CD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
+				04399AE41D1C341A00E99CD9 /* libavcodec.a in Frameworks */,
+				04399AE51D1C341A00E99CD9 /* libavdevice.a in Frameworks */,
+				04399AE61D1C341A00E99CD9 /* libavfilter.a in Frameworks */,
+				04399AE71D1C341A00E99CD9 /* libavformat.a in Frameworks */,
+				04399AE81D1C341A00E99CD9 /* libavutil.a in Frameworks */,
+				04399AE91D1C341A00E99CD9 /* libFLAC.a in Frameworks */,
+				04399AEA1D1C341A00E99CD9 /* libgmp.a in Frameworks */,
+				04399AEB1D1C341A00E99CD9 /* libgnutls.a in Frameworks */,
+				04399AED1D1C341A00E99CD9 /* libhogweed.a in Frameworks */,
+				04399AEE1D1C341A00E99CD9 /* libiax.a in Frameworks */,
+				04399AEF1D1C341A00E99CD9 /* libixml.a in Frameworks */,
+				04399AF01D1C341A00E99CD9 /* libjsoncpp.a in Frameworks */,
+				04399AF11D1C341A00E99CD9 /* libmsgpackc.a in Frameworks */,
+				04399AF21D1C341A00E99CD9 /* libnettle.a in Frameworks */,
+				04399AF31D1C341A00E99CD9 /* libogg.a in Frameworks */,
+				04399AF41D1C341A00E99CD9 /* libopendht.a in Frameworks */,
+				04399AF51D1C341A00E99CD9 /* libopus.a in Frameworks */,
+				04399AF61D1C341A00E99CD9 /* libpcre.a in Frameworks */,
+				04399AF71D1C341A00E99CD9 /* libpcreposix.a in Frameworks */,
+				04399AF81D1C341A00E99CD9 /* libpj.a in Frameworks */,
+				04399AF91D1C341A00E99CD9 /* libpjlib-util.a in Frameworks */,
+				04399AFA1D1C341A00E99CD9 /* libpjmedia-audiodev.a in Frameworks */,
+				04399AFB1D1C341A00E99CD9 /* libpjmedia-codec.a in Frameworks */,
+				04399AFC1D1C341A00E99CD9 /* libpjmedia-videodev.a in Frameworks */,
+				04399AFD1D1C341A00E99CD9 /* libpjmedia.a in Frameworks */,
+				04399AFE1D1C341A00E99CD9 /* libpjnath.a in Frameworks */,
+				04399AFF1D1C341A00E99CD9 /* libpjsip-simple.a in Frameworks */,
+				04399B001D1C341A00E99CD9 /* libpjsip-ua.a in Frameworks */,
+				04399B011D1C341A00E99CD9 /* libpjsip.a in Frameworks */,
+				04399B021D1C341A00E99CD9 /* libpjsua.a in Frameworks */,
+				04399B031D1C341A00E99CD9 /* libpjsua2.a in Frameworks */,
+				04399B041D1C341A00E99CD9 /* libpostproc.a in Frameworks */,
+				04399B051D1C341A00E99CD9 /* libresample.a in Frameworks */,
+				04399B061D1C341A00E99CD9 /* libring.a in Frameworks */,
+				04399B071D1C341A00E99CD9 /* libsamplerate.a in Frameworks */,
+				04399B081D1C341A00E99CD9 /* libsndfile.a in Frameworks */,
+				04399B091D1C341A00E99CD9 /* libspeex.a in Frameworks */,
+				04399B0A1D1C341A00E99CD9 /* libspeexdsp.a in Frameworks */,
+				04399B0B1D1C341A00E99CD9 /* libsrtp.a in Frameworks */,
+				04399B0C1D1C341A00E99CD9 /* libswresample.a in Frameworks */,
+				04399B0D1D1C341A00E99CD9 /* libswscale.a in Frameworks */,
+				04399B0E1D1C341A00E99CD9 /* libthreadutil.a in Frameworks */,
+				04399B0F1D1C341A00E99CD9 /* libupnp.a in Frameworks */,
+				04399B101D1C341A00E99CD9 /* libvorbis.a in Frameworks */,
+				04399B111D1C341A00E99CD9 /* libvorbisenc.a in Frameworks */,
+				04399B121D1C341A00E99CD9 /* libvorbisfile.a in Frameworks */,
+				04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */,
+				04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */,
+				04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */,
+				04399A971D1C2F6100E99CD9 /* libbz2.tbd in Frameworks */,
+				04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */,
+				04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */,
+				04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */,
+				04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04399A091D1C2D9D00E99CD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04399A141D1C2D9D00E99CD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		043866221D22C38400E06CE2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				043866231D22C3BC00E06CE2 /* Account.swift */,
+				043866251D22C42F00E06CE2 /* AccountModel.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		0438662D1D22C87500E06CE2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				043866321D22CE8C00E06CE2 /* MeViewController.swift */,
+				0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		043866341D22D04E00E06CE2 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				043866351D22D06500E06CE2 /* AccountTableViewCell.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		043866391D2307C000E06CE2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				043866371D2304A700E06CE2 /* BoolStringExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		043999EA1D1C2D9D00E99CD9 = {
+			isa = PBXGroup;
+			children = (
+				04399A991D1C2F6400E99CD9 /* SYS_DEPS */,
+				04399A921D1C2E3600E99CD9 /* RING_DEPS */,
+				043999F51D1C2D9D00E99CD9 /* Ring */,
+				04399A0F1D1C2D9D00E99CD9 /* RingTests */,
+				04399A1A1D1C2D9D00E99CD9 /* RingUITests */,
+				043999F41D1C2D9D00E99CD9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		043999F41D1C2D9D00E99CD9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				043999F31D1C2D9D00E99CD9 /* Ring.app */,
+				04399A0C1D1C2D9D00E99CD9 /* RingTests.xctest */,
+				04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		043999F51D1C2D9D00E99CD9 /* Ring */ = {
+			isa = PBXGroup;
+			children = (
+				043866341D22D04E00E06CE2 /* UI */,
+				0438662D1D22C87500E06CE2 /* ViewController */,
+				043866221D22C38400E06CE2 /* Models */,
+				04399AAF1D1C305600E99CD9 /* DRingAdaptator */,
+				043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */,
+				043999FF1D1C2D9D00E99CD9 /* Main.storyboard */,
+				04399A021D1C2D9D00E99CD9 /* Assets.xcassets */,
+				04399A041D1C2D9D00E99CD9 /* LaunchScreen.storyboard */,
+				04399A071D1C2D9D00E99CD9 /* Info.plist */,
+				043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */,
+				043866391D2307C000E06CE2 /* Extensions */,
+			);
+			path = Ring;
+			sourceTree = "<group>";
+		};
+		04399A0F1D1C2D9D00E99CD9 /* RingTests */ = {
+			isa = PBXGroup;
+			children = (
+				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
+				04399A121D1C2D9D00E99CD9 /* Info.plist */,
+			);
+			path = RingTests;
+			sourceTree = "<group>";
+		};
+		04399A1A1D1C2D9D00E99CD9 /* RingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */,
+				04399A1D1D1C2D9D00E99CD9 /* Info.plist */,
+			);
+			path = RingUITests;
+			sourceTree = "<group>";
+		};
+		04399A921D1C2E3600E99CD9 /* RING_DEPS */ = {
+			isa = PBXGroup;
+			children = (
+				04399AB21D1C341A00E99CD9 /* libavcodec.a */,
+				04399AB31D1C341A00E99CD9 /* libavdevice.a */,
+				04399AB41D1C341A00E99CD9 /* libavfilter.a */,
+				04399AB51D1C341A00E99CD9 /* libavformat.a */,
+				04399AB61D1C341A00E99CD9 /* libavutil.a */,
+				04399AB71D1C341A00E99CD9 /* libFLAC.a */,
+				04399AB81D1C341A00E99CD9 /* libgmp.a */,
+				04399AB91D1C341A00E99CD9 /* libgnutls.a */,
+				04399ABB1D1C341A00E99CD9 /* libhogweed.a */,
+				04399ABC1D1C341A00E99CD9 /* libiax.a */,
+				04399ABD1D1C341A00E99CD9 /* libixml.a */,
+				04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */,
+				04399ABF1D1C341A00E99CD9 /* libmsgpackc.a */,
+				04399AC01D1C341A00E99CD9 /* libnettle.a */,
+				04399AC11D1C341A00E99CD9 /* libogg.a */,
+				04399AC21D1C341A00E99CD9 /* libopendht.a */,
+				04399AC31D1C341A00E99CD9 /* libopus.a */,
+				04399AC41D1C341A00E99CD9 /* libpcre.a */,
+				04399AC51D1C341A00E99CD9 /* libpcreposix.a */,
+				04399AC61D1C341A00E99CD9 /* libpj.a */,
+				04399AC71D1C341A00E99CD9 /* libpjlib-util.a */,
+				04399AC81D1C341A00E99CD9 /* libpjmedia-audiodev.a */,
+				04399AC91D1C341A00E99CD9 /* libpjmedia-codec.a */,
+				04399ACA1D1C341A00E99CD9 /* libpjmedia-videodev.a */,
+				04399ACB1D1C341A00E99CD9 /* libpjmedia.a */,
+				04399ACC1D1C341A00E99CD9 /* libpjnath.a */,
+				04399ACD1D1C341A00E99CD9 /* libpjsip-simple.a */,
+				04399ACE1D1C341A00E99CD9 /* libpjsip-ua.a */,
+				04399ACF1D1C341A00E99CD9 /* libpjsip.a */,
+				04399AD01D1C341A00E99CD9 /* libpjsua.a */,
+				04399AD11D1C341A00E99CD9 /* libpjsua2.a */,
+				04399AD21D1C341A00E99CD9 /* libpostproc.a */,
+				04399AD31D1C341A00E99CD9 /* libresample.a */,
+				04399AD41D1C341A00E99CD9 /* libring.a */,
+				04399AD51D1C341A00E99CD9 /* libsamplerate.a */,
+				04399AD61D1C341A00E99CD9 /* libsndfile.a */,
+				04399AD71D1C341A00E99CD9 /* libspeex.a */,
+				04399AD81D1C341A00E99CD9 /* libspeexdsp.a */,
+				04399AD91D1C341A00E99CD9 /* libsrtp.a */,
+				04399ADA1D1C341A00E99CD9 /* libswresample.a */,
+				04399ADB1D1C341A00E99CD9 /* libswscale.a */,
+				04399ADC1D1C341A00E99CD9 /* libthreadutil.a */,
+				04399ADD1D1C341A00E99CD9 /* libupnp.a */,
+				04399ADE1D1C341A00E99CD9 /* libvorbis.a */,
+				04399ADF1D1C341A00E99CD9 /* libvorbisenc.a */,
+				04399AE01D1C341A00E99CD9 /* libvorbisfile.a */,
+				04399AE11D1C341A00E99CD9 /* libvpx.a */,
+				04399AE21D1C341A00E99CD9 /* libx264.a */,
+				04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */,
+			);
+			name = RING_DEPS;
+			sourceTree = "<group>";
+		};
+		04399A991D1C2F6400E99CD9 /* SYS_DEPS */ = {
+			isa = PBXGroup;
+			children = (
+				043866201D218B1100E06CE2 /* AudioToolbox.framework */,
+				04399A2B1D1C2DE900E99CD9 /* AVFoundation.framework */,
+				04399A291D1C2DE300E99CD9 /* CoreMedia.framework */,
+				04399A951D1C2F6100E99CD9 /* libbz2.tbd */,
+				04399A931D1C2F5800E99CD9 /* libiconv.tbd */,
+				04399A961D1C2F6100E99CD9 /* libz.tbd */,
+			);
+			name = SYS_DEPS;
+			sourceTree = "<group>";
+		};
+		04399AAF1D1C305600E99CD9 /* DRingAdaptator */ = {
+			isa = PBXGroup;
+			children = (
+				04399AA91D1C304300E99CD9 /* Ring-Bridging-Header.h */,
+				04399AA51D1C304300E99CD9 /* ConfigurationManagerAdaptator.h */,
+				04399AA61D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm */,
+				04399AA71D1C304300E99CD9 /* DRingAdaptator.h */,
+				04399AA81D1C304300E99CD9 /* DRingAdaptator.mm */,
+				04399AAA1D1C304300E99CD9 /* Utils.h */,
+				04399AAB1D1C304300E99CD9 /* Utils.mm */,
+			);
+			name = DRingAdaptator;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		043999F21D1C2D9D00E99CD9 /* Ring */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04399A201D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "Ring" */;
+			buildPhases = (
+				043999EF1D1C2D9D00E99CD9 /* Sources */,
+				043999F01D1C2D9D00E99CD9 /* Frameworks */,
+				043999F11D1C2D9D00E99CD9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ring;
+			productName = Ring;
+			productReference = 043999F31D1C2D9D00E99CD9 /* Ring.app */;
+			productType = "com.apple.product-type.application";
+		};
+		04399A0B1D1C2D9D00E99CD9 /* RingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04399A231D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "RingTests" */;
+			buildPhases = (
+				04399A081D1C2D9D00E99CD9 /* Sources */,
+				04399A091D1C2D9D00E99CD9 /* Frameworks */,
+				04399A0A1D1C2D9D00E99CD9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04399A0E1D1C2D9D00E99CD9 /* PBXTargetDependency */,
+			);
+			name = RingTests;
+			productName = RingTests;
+			productReference = 04399A0C1D1C2D9D00E99CD9 /* RingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		04399A161D1C2D9D00E99CD9 /* RingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04399A261D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "RingUITests" */;
+			buildPhases = (
+				04399A131D1C2D9D00E99CD9 /* Sources */,
+				04399A141D1C2D9D00E99CD9 /* Frameworks */,
+				04399A151D1C2D9D00E99CD9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04399A191D1C2D9D00E99CD9 /* PBXTargetDependency */,
+			);
+			name = RingUITests;
+			productName = RingUITests;
+			productReference = 04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		043999EB1D1C2D9D00E99CD9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Savoir-faire Linux";
+				TargetAttributes = {
+					043999F21D1C2D9D00E99CD9 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 73LS4VP8J7;
+					};
+					04399A0B1D1C2D9D00E99CD9 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 043999F21D1C2D9D00E99CD9;
+					};
+					04399A161D1C2D9D00E99CD9 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 043999F21D1C2D9D00E99CD9;
+					};
+				};
+			};
+			buildConfigurationList = 043999EE1D1C2D9D00E99CD9 /* Build configuration list for PBXProject "Ring" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 043999EA1D1C2D9D00E99CD9;
+			productRefGroup = 043999F41D1C2D9D00E99CD9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				043999F21D1C2D9D00E99CD9 /* Ring */,
+				04399A0B1D1C2D9D00E99CD9 /* RingTests */,
+				04399A161D1C2D9D00E99CD9 /* RingUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		043999F11D1C2D9D00E99CD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04399A061D1C2D9D00E99CD9 /* LaunchScreen.storyboard in Resources */,
+				04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */,
+				04399A011D1C2D9D00E99CD9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04399A0A1D1C2D9D00E99CD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04399A151D1C2D9D00E99CD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		043999EF1D1C2D9D00E99CD9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04399AAC1D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm in Sources */,
+				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
+				043866381D2304A700E06CE2 /* BoolStringExtension.swift in Sources */,
+				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
+				043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */,
+				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
+				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
+				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
+				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
+				04399AAD1D1C304300E99CD9 /* DRingAdaptator.mm in Sources */,
+				043866241D22C3BC00E06CE2 /* Account.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04399A081D1C2D9D00E99CD9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04399A131D1C2D9D00E99CD9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04399A0E1D1C2D9D00E99CD9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 043999F21D1C2D9D00E99CD9 /* Ring */;
+			targetProxy = 04399A0D1D1C2D9D00E99CD9 /* PBXContainerItemProxy */;
+		};
+		04399A191D1C2D9D00E99CD9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 043999F21D1C2D9D00E99CD9 /* Ring */;
+			targetProxy = 04399A181D1C2D9D00E99CD9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		043999FF1D1C2D9D00E99CD9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04399A001D1C2D9D00E99CD9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		04399A041D1C2D9D00E99CD9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04399A051D1C2D9D00E99CD9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04399A1E1D1C2D9D00E99CD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		04399A1F1D1C2D9D00E99CD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04399A211D1C2D9D00E99CD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				INFOPLIST_FILE = Ring/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.Ring;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Ring-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		04399A221D1C2D9D00E99CD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				INFOPLIST_FILE = Ring/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.Ring;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Ring-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		04399A241D1C2D9D00E99CD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ring.app/Ring";
+			};
+			name = Debug;
+		};
+		04399A251D1C2D9D00E99CD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ring.app/Ring";
+			};
+			name = Release;
+		};
+		04399A271D1C2D9D00E99CD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Ring;
+			};
+			name = Debug;
+		};
+		04399A281D1C2D9D00E99CD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Ring;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		043999EE1D1C2D9D00E99CD9 /* Build configuration list for PBXProject "Ring" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04399A1E1D1C2D9D00E99CD9 /* Debug */,
+				04399A1F1D1C2D9D00E99CD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04399A201D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "Ring" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04399A211D1C2D9D00E99CD9 /* Debug */,
+				04399A221D1C2D9D00E99CD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04399A231D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "RingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04399A241D1C2D9D00E99CD9 /* Debug */,
+				04399A251D1C2D9D00E99CD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04399A261D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "RingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04399A271D1C2D9D00E99CD9 /* Debug */,
+				04399A281D1C2D9D00E99CD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				043999F91D1C2D9D00E99CD9 /* Ring.xcdatamodel */,
+			);
+			currentVersion = 043999F91D1C2D9D00E99CD9 /* Ring.xcdatamodel */;
+			path = Ring.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+}
