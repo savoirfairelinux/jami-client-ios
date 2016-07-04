@@ -1,0 +1,9 @@
+
+#Deps libs
+DEPS/
+fat/
+
+#Xcode user data
+Ring/Ring.xcodeproj/project.xcworkspace/xcshareddata/
+Ring/Ring.xcodeproj/project.xcworkspace/xcuserdata/
+Ring/Ring.xcodeproj/xcuserdata/
