@@ -38,7 +38,6 @@
 		04399AEA1D1C341A00E99CD9 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB81D1C341A00E99CD9 /* libgmp.a */; };
 		04399AEB1D1C341A00E99CD9 /* libgnutls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB91D1C341A00E99CD9 /* libgnutls.a */; };
 		04399AED1D1C341A00E99CD9 /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABB1D1C341A00E99CD9 /* libhogweed.a */; };
-		04399AEE1D1C341A00E99CD9 /* libiax.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABC1D1C341A00E99CD9 /* libiax.a */; };
 		04399AEF1D1C341A00E99CD9 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
 		04399AF01D1C341A00E99CD9 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */; };
 		04399AF11D1C341A00E99CD9 /* libmsgpackc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABF1D1C341A00E99CD9 /* libmsgpackc.a */; };
@@ -139,7 +138,6 @@
 		04399AB81D1C341A00E99CD9 /* libgmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgmp.a; path = ../fat/lib/libgmp.a; sourceTree = "<group>"; };
 		04399AB91D1C341A00E99CD9 /* libgnutls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgnutls.a; path = ../fat/lib/libgnutls.a; sourceTree = "<group>"; };
 		04399ABB1D1C341A00E99CD9 /* libhogweed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhogweed.a; path = ../fat/lib/libhogweed.a; sourceTree = "<group>"; };
-		04399ABC1D1C341A00E99CD9 /* libiax.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiax.a; path = ../fat/lib/libiax.a; sourceTree = "<group>"; };
 		04399ABD1D1C341A00E99CD9 /* libixml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libixml.a; path = ../fat/lib/libixml.a; sourceTree = "<group>"; };
 		04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjsoncpp.a; path = ../fat/lib/libjsoncpp.a; sourceTree = "<group>"; };
 		04399ABF1D1C341A00E99CD9 /* libmsgpackc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmsgpackc.a; path = ../fat/lib/libmsgpackc.a; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 				04399AEA1D1C341A00E99CD9 /* libgmp.a in Frameworks */,
 				04399AEB1D1C341A00E99CD9 /* libgnutls.a in Frameworks */,
 				04399AED1D1C341A00E99CD9 /* libhogweed.a in Frameworks */,
-				04399AEE1D1C341A00E99CD9 /* libiax.a in Frameworks */,
 				04399AEF1D1C341A00E99CD9 /* libixml.a in Frameworks */,
 				04399AF01D1C341A00E99CD9 /* libjsoncpp.a in Frameworks */,
 				04399AF11D1C341A00E99CD9 /* libmsgpackc.a in Frameworks */,
@@ -365,7 +362,6 @@
 				04399AB81D1C341A00E99CD9 /* libgmp.a */,
 				04399AB91D1C341A00E99CD9 /* libgnutls.a */,
 				04399ABB1D1C341A00E99CD9 /* libhogweed.a */,
-				04399ABC1D1C341A00E99CD9 /* libiax.a */,
 				04399ABD1D1C341A00E99CD9 /* libixml.a */,
 				04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */,
 				04399ABF1D1C341A00E99CD9 /* libmsgpackc.a */,
