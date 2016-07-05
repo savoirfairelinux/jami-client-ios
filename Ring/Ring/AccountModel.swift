@@ -22,20 +22,20 @@ import Foundation
 
 class AccountModel {
 
-    //MARK: - Properties
+    // MARK: - Properties
     let confAdapt = ConfigurationManagerAdaptator.sharedManager()
     var accountList: Array<Account> = []
-    
-    //MARK: - Singleton
+
+    // MARK: - Singleton
     static let sharedInstance = AccountModel()
-    
+
     private init() {
-        NSNotificationCenter.defaultCenter().addObserverForName("AccountsChanged", object: nil, queue: nil, usingBlock: {_ in
+        NSNotificationCenter.defaultCenter().addObserverForName("AccountsChanged", object: nil, queue: nil, usingBlock: { _ in
             self.reload()
         })
     }
 
-    //MARK: - Methods
+    // MARK: - Methods
     func reload() {
         accountList.removeAll()
         for acc in confAdapt.getAccountList() {
@@ -43,20 +43,20 @@ class AccountModel {
             accountList.append(Account(accID: accID))
         }
     }
-    
+
     func addAccount() {
-        
-        //TODO: This need work for all account type
+
+        // TODO: This need work for all account type
         let details = confAdapt.getAccountTemplate("RING")
         details.setValue("iOS", forKey: "Account.alias")
         details.setValue("iOS", forKey: "Account.displayName")
-        confAdapt.addAccount(details! as [NSObject : AnyObject])
+        confAdapt.addAccount(details! as [NSObject: AnyObject])
     }
-    
+
     func removeAccount(row: Int) {
         if row < accountList.count {
             confAdapt.removeAccount(accountList[row].id)
         }
     }
-    
+
 }

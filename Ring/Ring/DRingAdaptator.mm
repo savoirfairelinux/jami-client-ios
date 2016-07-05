@@ -15,7 +15,8 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+ * USA.
  */
 
 #import "DRingAdaptator.h"
@@ -24,30 +25,25 @@
 
 @implementation DRingAdaptator
 
-- (BOOL) initDaemon
-{
-    int flag = DRing::DRING_FLAG_CONSOLE_LOG | DRing::DRING_FLAG_DEBUG;
-    return DRing::init(static_cast<DRing::InitFlag>(flag));
+- (BOOL)initDaemon {
+  int flag = DRing::DRING_FLAG_CONSOLE_LOG | DRing::DRING_FLAG_DEBUG;
+  return DRing::init(static_cast<DRing::InitFlag>(flag));
 }
 
-- (BOOL) startDaemon
-{
-   return DRing::start();
+- (BOOL)startDaemon {
+  return DRing::start();
 }
 
-- (void) fini
-{
-    DRing::fini();
+- (void)fini {
+  DRing::fini();
 }
 
-- (void) pollEvents
-{
-    DRing::pollEvents();
+- (void)pollEvents {
+  DRing::pollEvents();
 }
 
-- (NSString*)getVersion
-{
-    return [NSString stringWithUTF8String:DRing::version()];
+- (NSString*)getVersion {
+  return [NSString stringWithUTF8String:DRing::version()];
 }
 
 @end

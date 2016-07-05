@@ -26,13 +26,13 @@ enum AccountType: String {
 }
 
 struct Account {
-    
-    //MARK: - Properties
+
+    // MARK: - Properties
     let id: String
-    
-    //FIXME: This should be private
+
+    // FIXME: This should be private
     var details: Dictionary<String, String>
-    
+
     var alias: String? {
         get {
             return details["Account.alias"]
@@ -41,7 +41,7 @@ struct Account {
             details["Account.alias"] = newValue
         }
     }
-    
+
     var videoEnabled: Bool {
         get {
             return (details["Account.videoEnabled"]?.toBool())!
@@ -110,7 +110,7 @@ struct Account {
         }
         set {
             details["Account.enable"] = newValue.toString()
-            ConfigurationManagerAdaptator.sharedManager().setAccountActive(self.id, newValue)
+            ConfigurationManagerAdaptator.sharedManager().setAccountActive(self.id, active: newValue)
         }
     }
 
@@ -149,14 +149,14 @@ struct Account {
             details["Account.displayName"] = newValue
         }
     }
-    
-    //MARK: - Init
+
+    // MARK: - Init
     init(accID: String) {
         id = accID
         details = ConfigurationManagerAdaptator.sharedManager().getAccountDetails(id) as! Dictionary<String, String>
     }
-    
+
     func save() {
-        ConfigurationManagerAdaptator.sharedManager().setAccountDetails(id, details)
+        ConfigurationManagerAdaptator.sharedManager().setAccountDetails(id, details: details)
     }
 }
