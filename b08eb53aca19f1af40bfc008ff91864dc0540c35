@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_5982a753",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-07-05T21:22:06Z",
+      "side": 1,
+      "message": "Are you sure you don\u0027t need more stuff here ?\n\nLike the evil DS_Store files for instance",
+      "revId": "b08eb53aca19f1af40bfc008ff91864dc0540c35",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
