@@ -22,17 +22,16 @@ import UIKit
 
 class AccountDetailsViewController: UIViewController {
 
-    //MARK: - Properties
+    // MARK: - Properties
     var account: Account!
-    
+
     @IBOutlet weak var detailsLabel: UILabel!
-    
-    
-    //MARK: - UIViewController
+
+    // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //FIXME: This is just a placeholder
+
+        // FIXME: This is just a placeholder
         detailsLabel.text = account.details.description
     }
 
