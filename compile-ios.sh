@@ -64,10 +64,16 @@ CXX="xcrun -sdk $SDK clang++"
 
 IOS_TOP_DIR="$(pwd)"
 DAEMON_DIR="$(pwd)/../daemon"
+
 cd $DAEMON_DIR
 
 # TEMPORARY (until everything is merged)
-git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/38/4438/5 && git checkout FETCH_HEAD
+git checkout master
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/27/4427/8 && git cherry-pick FETCH_HEAD
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/25/4425/7 && git cherry-pick FETCH_HEAD
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/63/4363/17 && git cherry-pick FETCH_HEAD
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/97/4397/19 && git cherry-pick FETCH_HEAD
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/33/4433/6 && git cherry-pick FETCH_HEAD
 
 for ARCH in "${ARCHS[@]}"
 do
@@ -76,7 +82,7 @@ do
 
     if test -z "$HOST"
     then
-        if $ARCH eq "arm64"
+        if [ "$ARCH" = "arm64" ]
         then
             HOST=aarch64-apple-darwin_ios
         else
