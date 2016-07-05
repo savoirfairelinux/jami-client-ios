@@ -110,7 +110,7 @@ struct Account {
         }
         set {
             details["Account.enable"] = newValue.toString()
-            ConfigurationManagerAdaptator.sharedManager().setAccountActive(self.id, newValue)
+            ConfigurationManagerAdaptator.sharedManager().setAccountActive(self.id, active: newValue)
         }
     }
 
@@ -157,6 +157,6 @@ struct Account {
     }
     
     func save() {
-        ConfigurationManagerAdaptator.sharedManager().setAccountDetails(id, details)
+        ConfigurationManagerAdaptator.sharedManager().setAccountDetails(id, details: details)
     }
 }
