@@ -15,7 +15,8 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+ * USA.
  */
 
 #import <Foundation/Foundation.h>
@@ -24,16 +25,18 @@
 
 + (id)sharedManager;
 
-- (void) registerConfigurationHandler;
+- (void)registerConfigurationHandler;
 
-- (NSArray*) getAccountList;
-- (NSMutableDictionary*) getAccountTemplate: (NSString*) accountType;
-- (NSString*) addAccount: (NSDictionary*) details;
-- (void) removeAccount: (NSString*) accountID;
-- (void) setAccountActive: (NSString*) accountID : (bool) active;
-- (uint64_t) sendAccountTextMessage: (NSString*) accountID : (NSString*) to : (NSDictionary*) payloads;
-- (NSDictionary*) getAccountDetails: (NSString*) accountID;
-- (NSDictionary*) getVolatileAccountDetails: (NSString*) accountID;
-- (void) setAccountDetails: (NSString*) accountID :  (NSDictionary*) details;
-- (int) getMessageStatus: (uint64_t) msgID;
+- (NSArray *)getAccountList;
+- (NSMutableDictionary *)getAccountTemplate:(NSString *)accountType;
+- (NSString *)addAccount:(NSDictionary *)details;
+- (void)removeAccount:(NSString *)accountID;
+- (void)setAccountActive:(NSString *)accountID active:(bool)active;
+- (uint64_t)sendAccountTextMessage:(NSString *)accountID
+                                to:(NSString *)to
+                          payloads:(NSDictionary *)payloads;
+- (NSDictionary *)getAccountDetails:(NSString *)accountID;
+- (NSDictionary *)getVolatileAccountDetails:(NSString *)accountID;
+- (void)setAccountDetails:(NSString *)accountID details:(NSDictionary *)details;
+- (int)getMessageStatus:(uint64_t)msgID;
 @end
