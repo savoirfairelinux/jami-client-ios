@@ -63,11 +63,29 @@ CC="xcrun -sdk $SDK clang"
 CXX="xcrun -sdk $SDK clang++"
 
 IOS_TOP_DIR="$(pwd)"
-DAEMON_DIR="$(pwd)/../daemon"
+
+if [ -z "$DAEMON_DIR" ]; then
+    DAEMON_DIR="$(pwd)/../daemon"
+    echo "DAEMON_DIR not provided trying to find it in $DAEMON_DIR"
+fi
+if [ ! -d "$DAEMON_DIR" ]; then
+    echo 'Daemon not found.'
+    echo 'If you cloned the daemon in a custom location override' \
+            'DAEMON_DIR to point to it'
+    echo "You can also use our meta repo which contains both:
+          https://gerrit-ring.savoirfairelinux.com/#/admin/projects/ring-project"
+    exit 1
+fi
+
 cd $DAEMON_DIR
 
 # TEMPORARY (until everything is merged)
-git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/38/4438/5 && git checkout FETCH_HEAD
+git checkout master
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/27/4427/8 && git cherry-pick FETCH_HEAD
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/25/4425/7 && git cherry-pick FETCH_HEAD
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/63/4363/17 && git cherry-pick FETCH_HEAD
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/97/4397/19 && git cherry-pick FETCH_HEAD
+git fetch https://gerrit-ring.savoirfairelinux.com/ring-daemon refs/changes/33/4433/6 && git cherry-pick FETCH_HEAD
 
 for ARCH in "${ARCHS[@]}"
 do
@@ -76,7 +94,7 @@ do
 
     if test -z "$HOST"
     then
-        if $ARCH eq "arm64"
+        if [ "$ARCH" = "arm64" ]
         then
             HOST=aarch64-apple-darwin_ios
         else
