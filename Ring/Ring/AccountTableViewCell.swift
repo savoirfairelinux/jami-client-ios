@@ -22,14 +22,14 @@ import UIKit
 
 class AccountTableViewCell: UITableViewCell {
 
-    //MARK: - Properties
+    // MARK: - Properties
     @IBOutlet weak var activeSwitch: UISwitch!
     @IBOutlet weak var accountNameLabel: UILabel!
     @IBOutlet weak var accountTypeLabel: UILabel!
-    
+
     var account: Account!
-    
-    //MARK: - UITableViewCell
+
+    // MARK: - UITableViewCell
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -37,8 +37,8 @@ class AccountTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
-    //MARK: - Actions
+
+    // MARK: - Actions
     @IBAction func switchAccountState(sender: UISwitch) {
         account.isEnabled = sender.on
     }
