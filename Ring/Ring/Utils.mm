@@ -15,43 +15,45 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+ * USA.
  */
 
 #import "Utils.h"
 
 @implementation Utils
 
-+ (NSArray*) vectorToArray: (const std::vector<std::string>&) vector
-{
-    NSMutableArray* resArray = [NSMutableArray new];
-    std::for_each(vector.begin(), vector.end(), ^(std::string str) {
-        id nsstr = [NSString stringWithUTF8String:str.c_str()];
-        [resArray addObject:nsstr];
-    });
-    return resArray;
++ (NSArray *)vectorToArray:(const std::vector<std::string> &)vector {
+  NSMutableArray *resArray = [NSMutableArray new];
+  std::for_each(vector.begin(), vector.end(), ^(std::string str) {
+    id nsstr = [NSString stringWithUTF8String:str.c_str()];
+    [resArray addObject:nsstr];
+  });
+  return resArray;
 }
 
-+ (NSMutableDictionary*) mapToDictionnary: (const std::map<std::string, std::string>&) map
-{
-    NSMutableDictionary* resDictionnary = [NSMutableDictionary new];
++ (NSMutableDictionary *)mapToDictionnary:
+    (const std::map<std::string, std::string> &)map {
+  NSMutableDictionary *resDictionnary = [NSMutableDictionary new];
 
-    std::for_each(map.begin(), map.end(), ^(std::pair<std::string, std::string> keyValue) {
+  std::for_each(
+      map.begin(), map.end(), ^(std::pair<std::string, std::string> keyValue) {
         id key = [NSString stringWithUTF8String:keyValue.first.c_str()];
         id value = [NSString stringWithUTF8String:keyValue.second.c_str()];
         [resDictionnary setObject:value forKey:key];
-    });
+      });
 
-    return resDictionnary;
+  return resDictionnary;
 }
 
-+ (std::map<std::string, std::string>) dictionnaryToMap: (NSDictionary*) dict
-{
-    std::map<std::string, std::string>resMap;
-    for (id key in dict)
-        resMap.insert(std::pair<std::string, std::string>(std::string([key UTF8String]), std::string([[dict objectForKey:key] UTF8String])));
++ (std::map<std::string, std::string>)dictionnaryToMap:(NSDictionary *)dict {
+  std::map<std::string, std::string> resMap;
+  for (id key in dict)
+    resMap.insert(std::pair<std::string, std::string>(
+        std::string([key UTF8String]),
+        std::string([[dict objectForKey:key] UTF8String])));
 
-    return resMap;
+  return resMap;
 }
 
 @end

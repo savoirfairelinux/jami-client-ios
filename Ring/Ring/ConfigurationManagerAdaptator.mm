@@ -15,7 +15,8 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+ * USA.
  */
 
 #import "ConfigurationManagerAdaptator.h"
@@ -30,103 +31,105 @@ using namespace DRing;
 #pragma mark Singleton Methods
 
 + (id)sharedManager {
-    static ConfigurationManagerAdaptator *sharedMyManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedMyManager = [[self alloc] init];
-    });
-    return sharedMyManager;
+  static ConfigurationManagerAdaptator *sharedMyManager = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    sharedMyManager = [[self alloc] init];
+  });
+  return sharedMyManager;
 }
 
 - (id)init {
-    if (self = [super init]) {
-        [self registerConfigurationHandler];
-    }
-    return self;
+  if (self = [super init]) {
+    [self registerConfigurationHandler];
+  }
+  return self;
 }
 
-- (NSArray*) getAccountList
-{
-    auto accountVector = getAccountList();
+- (NSArray *)getAccountList {
+  auto accountVector = getAccountList();
 
-    return [Utils vectorToArray:accountVector];
+  return [Utils vectorToArray:accountVector];
 }
 
-- (NSMutableDictionary*) getAccountTemplate: (NSString*) accountType
-{
-    auto accountTemplate = getAccountTemplate(std::string([accountType UTF8String]));
+- (NSMutableDictionary *)getAccountTemplate:(NSString *)accountType {
+  auto accountTemplate =
+      getAccountTemplate(std::string([accountType UTF8String]));
 
-    return [Utils mapToDictionnary:accountTemplate];
+  return [Utils mapToDictionnary:accountTemplate];
 }
 
-- (NSString*) addAccount: (NSDictionary*) details
-{
-    auto accountID = addAccount([Utils dictionnaryToMap:details]);
+- (NSString *)addAccount:(NSDictionary *)details {
+  auto accountID = addAccount([Utils dictionnaryToMap:details]);
 
-    return [NSString stringWithUTF8String:accountID.c_str()];
+  return [NSString stringWithUTF8String:accountID.c_str()];
 }
 
-- (void) removeAccount: (NSString*) accountID
-{
-    removeAccount(std::string([accountID UTF8String]));
+- (void)removeAccount:(NSString *)accountID {
+  removeAccount(std::string([accountID UTF8String]));
 }
 
-- (void) setAccountActive: (NSString*) accountID : (bool) active
-{
-    setAccountActive(std::string([accountID UTF8String]), active);
+- (void)setAccountActive:(NSString *)accountID active:(bool)active {
+  setAccountActive(std::string([accountID UTF8String]), active);
 }
 
-- (uint64_t) sendAccountTextMessage: (NSString*) accountID : (NSString*) to : (NSDictionary*) payloads
-{
-    return sendAccountTextMessage(std::string([accountID UTF8String]), std::string([to UTF8String]),
-                                  [Utils dictionnaryToMap:payloads]);
+- (uint64_t)sendAccountTextMessage:(NSString *)accountID
+                                to:(NSString *)to
+                          payloads:(NSDictionary *)payloads {
+  return sendAccountTextMessage(std::string([accountID UTF8String]),
+                                std::string([to UTF8String]),
+                                [Utils dictionnaryToMap:payloads]);
 }
 
-- (NSDictionary*) getAccountDetails: (NSString*) accountID
-{
-    auto accDetails = getAccountDetails(std::string([accountID UTF8String]));
-    return [Utils mapToDictionnary:accDetails];
+- (NSDictionary *)getAccountDetails:(NSString *)accountID {
+  auto accDetails = getAccountDetails(std::string([accountID UTF8String]));
+  return [Utils mapToDictionnary:accDetails];
 }
 
-- (NSDictionary*) getVolatileAccountDetails: (NSString*) accountID
-{
-    auto volatileDetails = getVolatileAccountDetails(std::string([accountID UTF8String]));
-    return [Utils mapToDictionnary:volatileDetails];
+- (NSDictionary *)getVolatileAccountDetails:(NSString *)accountID {
+  auto volatileDetails =
+      getVolatileAccountDetails(std::string([accountID UTF8String]));
+  return [Utils mapToDictionnary:volatileDetails];
 }
 
-- (void) setAccountDetails: (NSString*) accountID :  (NSDictionary*) details
-{
-    setAccountDetails(std::string([accountID UTF8String]), [Utils dictionnaryToMap:details]);
+- (void)setAccountDetails:(NSString *)accountID
+                  details:(NSDictionary *)details {
+  setAccountDetails(std::string([accountID UTF8String]),
+                    [Utils dictionnaryToMap:details]);
 }
 
-- (int) getMessageStatus:(uint64_t) msgID
-{
-    return getMessageStatus(msgID);
+- (int)getMessageStatus:(uint64_t)msgID {
+  return getMessageStatus(msgID);
 }
 
-- (void) registerConfigurationHandler
-{
-    std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
-    
-    confHandlers.insert(exportable_callback<ConfigurationSignal::IncomingAccountMessage>(
-                                                                                         [&](const std::string& account_id,
-                                                                                             const std::string& from,
-                                                                                             const std::map<std::string, std::string>& payloads) {
-        
-        NSDictionary* userInfo = @{@"accountID": [NSString stringWithUTF8String:account_id.c_str()],
-                                   @"from": [NSString stringWithUTF8String:from.c_str()],
-                                   @"payloads": [Utils mapToDictionnary:payloads]};
-        
-        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-        [nc postNotificationName:@"IncomingAccountMessage" object:self userInfo:userInfo];
-    }));
-    
-    confHandlers.insert(exportable_callback<ConfigurationSignal::AccountsChanged>([&](){
-        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-        [nc postNotificationName:@"AccountsChanged" object:[ConfigurationManagerAdaptator sharedManager]];
-    }));
-    
-    registerConfHandlers(confHandlers);
+- (void)registerConfigurationHandler {
+  std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
+
+  confHandlers.insert(
+      exportable_callback<ConfigurationSignal::IncomingAccountMessage>(
+          [&](const std::string &account_id, const std::string &from,
+              const std::map<std::string, std::string> &payloads) {
+
+            NSDictionary *userInfo = @{
+              @"accountID" : [NSString stringWithUTF8String:account_id.c_str()],
+              @"from" : [NSString stringWithUTF8String:from.c_str()],
+              @"payloads" : [Utils mapToDictionnary:payloads]
+            };
+
+            NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+            [nc postNotificationName:@"IncomingAccountMessage"
+                              object:self
+                            userInfo:userInfo];
+          }));
+
+  confHandlers.insert(
+      exportable_callback<ConfigurationSignal::AccountsChanged>([&]() {
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:@"AccountsChanged"
+                          object:[ConfigurationManagerAdaptator sharedManager]];
+      }));
+
+  registerConfHandlers(confHandlers);
 }
 
 @end
