@@ -16,6 +16,24 @@
       "revId": "b08eb53aca19f1af40bfc008ff91864dc0540c35",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_998fdf75",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-07-06T12:52:24Z",
+      "side": 1,
+      "message": "Completely agree, here are some example directly from Github:\nhttps://github.com/github/gitignore\nhttps://github.com/github/gitignore/blob/master/Global/OSX.gitignore (for DS_Store etc...)\nhttps://github.com/github/gitignore/blob/master/Swift.gitignore\nhttps://github.com/github/gitignore/blob/master/Objective-C.gitignore",
+      "parentUuid": "7a7fa997_5982a753",
+      "revId": "b08eb53aca19f1af40bfc008ff91864dc0540c35",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
