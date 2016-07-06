@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_d9955789",
+        "filename": "compile-ios.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-07-06T02:14:17Z",
+      "side": 1,
+      "message": "Not related to this patch but for the android client we allow to override this:\n\nif [ -z \"$DAEMON_DIR\" ]; then\n    DAEMON_DIR\u003d\"$(pwd)/../daemon\"\n    echo \"DAEMON_DIR not provided trying to find it in $DAEMON_DIR\"\nfi\n\nif [ ! -d \"$DAEMON_DIR\" ]; then\n    echo \u0027Daemon not found.\u0027\n    echo \u0027If you cloned the daemon in a custom location override\u0027 \\\n            \u0027DAEMON_DIR to point to it\u0027\n    echo \"You can also use our meta repo which contains both:\n          https://gerrit-ring.savoirfairelinux.com/#/admin/projects/ring-project\"\n    exit 1\nfi",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "2f2e1c9715c65d2d3c1a2e1d14fa015a955c160c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
