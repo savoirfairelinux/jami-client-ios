@@ -34,6 +34,29 @@
       "revId": "b08eb53aca19f1af40bfc008ff91864dc0540c35",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_59e94719",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-07-06T13:04:58Z",
+      "side": 1,
+      "message": "I saw on Tuleap that this issue is not specific (\"Create an iOS client\").\nI also see that the other public patches are referencing the same issue.\nMaybe we should create another platform in Tuleap and use it as we do with the Android client.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "b08eb53aca19f1af40bfc008ff91864dc0540c35",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
