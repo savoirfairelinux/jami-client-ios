@@ -82,8 +82,14 @@
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		04404E551D513CA4000F9FA3 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04404E541D513CA4000F9FA3 /* MainTabBarViewController.swift */; };
+		044C231E1D2C2A1D0046F46E /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044C231D1D2C2A1D0046F46E /* QRCodeViewController.swift */; };
 		0456743D1D53B57000B6A16B /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456743C1D53B57000B6A16B /* CreateAccountViewController.swift */; };
 		0456743F1D53DD4000B6A16B /* ic_warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 0456743E1D53DD4000B6A16B /* ic_warning.png */; };
+		046543D01D2C364F0083CEB3 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543CE1D2C364F0083CEB3 /* Contact+CoreDataProperties.swift */; };
+		046543D11D2C364F0083CEB3 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543CF1D2C364F0083CEB3 /* Contact.swift */; };
+		046543D31D2C41810083CEB3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543D21D2C41810083CEB3 /* HomeViewController.swift */; };
+		046543D81D2E9F060083CEB3 /* CDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543D71D2E9F060083CEB3 /* CDManager.swift */; };
+		046543DA1D2EADDB0083CEB3 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543D91D2EADDB0083CEB3 /* Table.swift */; };
 		04BA2D571D4A8A4F00BC3FED /* Introduction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04BA2D561D4A8A4F00BC3FED /* Introduction.storyboard */; };
 		04BA2D591D4A967100BC3FED /* IntroductionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA2D581D4A967100BC3FED /* IntroductionPageViewController.swift */; };
 		04BA2D5E1D4FB6C800BC3FED /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA2D5D1D4FB6C800BC3FED /* PermissionsViewController.swift */; };
@@ -193,8 +199,14 @@
 		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		04404E541D513CA4000F9FA3 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		044C231D1D2C2A1D0046F46E /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		0456743C1D53B57000B6A16B /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		0456743E1D53DD4000B6A16B /* ic_warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_warning.png; sourceTree = "<group>"; };
+		046543CE1D2C364F0083CEB3 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		046543CF1D2C364F0083CEB3 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		046543D21D2C41810083CEB3 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		046543D71D2E9F060083CEB3 /* CDManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDManager.swift; sourceTree = "<group>"; };
+		046543D91D2EADDB0083CEB3 /* Table.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		04BA2D561D4A8A4F00BC3FED /* Introduction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Introduction.storyboard; sourceTree = "<group>"; };
 		04BA2D581D4A967100BC3FED /* IntroductionPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionPageViewController.swift; sourceTree = "<group>"; };
 		04BA2D5D1D4FB6C800BC3FED /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
@@ -293,6 +305,8 @@
 		043866221D22C38400E06CE2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				046543CE1D2C364F0083CEB3 /* Contact+CoreDataProperties.swift */,
+				046543CF1D2C364F0083CEB3 /* Contact.swift */,
 				043866231D22C3BC00E06CE2 /* Account.swift */,
 				043866251D22C42F00E06CE2 /* AccountModel.swift */,
 			);
@@ -305,6 +319,8 @@
 				04BA2D581D4A967100BC3FED /* IntroductionPageViewController.swift */,
 				043866321D22CE8C00E06CE2 /* MeViewController.swift */,
 				0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */,
+				044C231D1D2C2A1D0046F46E /* QRCodeViewController.swift */,
+				046543D21D2C41810083CEB3 /* HomeViewController.swift */,
 				04BA2D5D1D4FB6C800BC3FED /* PermissionsViewController.swift */,
 				04404E541D513CA4000F9FA3 /* MainTabBarViewController.swift */,
 				0456743C1D53B57000B6A16B /* CreateAccountViewController.swift */,
@@ -354,6 +370,7 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				046543D61D2E9E670083CEB3 /* CoreData */,
 				04BA2D5C1D4F993D00BC3FED /* Resources */,
 				043866341D22D04E00E06CE2 /* UI */,
 				0438662D1D22C87500E06CE2 /* ViewController */,
@@ -475,6 +492,15 @@
 			name = DRingAdaptator;
 			sourceTree = "<group>";
 		};
+		046543D61D2E9E670083CEB3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				046543D71D2E9F060083CEB3 /* CDManager.swift */,
+				046543D91D2EADDB0083CEB3 /* Table.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		04BA2D5C1D4F993D00BC3FED /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,6 +588,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 73LS4VP8J7;
 						LastSwiftMigration = 0810;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					04399A0B1D1C2D9D00E99CD9 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -638,14 +669,20 @@
 				043866381D2304A700E06CE2 /* BoolStringExtension.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
 				043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */,
+				046543D31D2C41810083CEB3 /* HomeViewController.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
+				046543D11D2C364F0083CEB3 /* Contact.swift in Sources */,
+				044C231E1D2C2A1D0046F46E /* QRCodeViewController.swift in Sources */,
+				046543D01D2C364F0083CEB3 /* Contact+CoreDataProperties.swift in Sources */,
 				04BA2D5E1D4FB6C800BC3FED /* PermissionsViewController.swift in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
+				046543DA1D2EADDB0083CEB3 /* Table.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04BA2D601D50E61D00BC3FED /* RoundedButton.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdaptator.mm in Sources */,
 				043866241D22C3BC00E06CE2 /* Account.swift in Sources */,
+				046543D81D2E9F060083CEB3 /* CDManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,9 +31,9 @@ class PermissionsViewController: UIViewController {
     @IBOutlet weak var contactSwitch: UISwitch!
 
     enum Permissions {
-        case Granted
-        case Undetermined
-        case Denied
+        case granted
+        case undetermined
+        case denied
     }
 
     // MARK: - UIViewController
@@ -50,21 +50,21 @@ class PermissionsViewController: UIViewController {
     // MARK: - Refresh UI with permission status
 
     func updateAllSwitch() {
-        updateSwitchStatus(button: microphoneSwitch, status: requestMicrophonePermissionStatus())
-        updateSwitchStatus(button: cameraSwitch, status: requestCameraPermissionStatus())
-        updateSwitchStatus(button: contactSwitch, status: requestContactListPermissionStatus())
+        updateSwitchStatus(microphoneSwitch, status: requestMicrophonePermissionStatus())
+        updateSwitchStatus(cameraSwitch, status: requestCameraPermissionStatus())
+        updateSwitchStatus(contactSwitch, status: requestContactListPermissionStatus())
     }
 
-    func updateSwitchStatus(button: UISwitch, status: Permissions) {
+    func updateSwitchStatus(_ button: UISwitch, status: Permissions) {
         DispatchQueue.main.async {
             switch status {
-            case .Denied:
+            case .denied:
                 button.setOn(false, animated: false)
                 button.tintColor = UIColor.red
-            case .Undetermined:
+            case .undetermined:
                 button.setOn(false, animated: false)
                 button.tintColor = UIColor.darkGray
-            case .Granted:
+            case .granted:
                 button.setOn(true, animated: false)
             }
         }
@@ -72,8 +72,8 @@ class PermissionsViewController: UIViewController {
 
     // MARK: - Handle denied permissions
 
-    func showAlertDeniedPermissions(button: UISwitch, permissionName: String) {
-        updateSwitchStatus(button: button, status: .Denied)
+    func showAlertDeniedPermissions(_ button: UISwitch, permissionName: String) {
+        updateSwitchStatus(button, status: .denied)
         let alertController = UIAlertController(title: "Permission for was denied.",
             message: "Please enable access to in the Settings app",
             preferredStyle: .alert)
@@ -89,7 +89,7 @@ class PermissionsViewController: UIViewController {
     }
 
     func goToApplicationsSettings() {
-        let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+        let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
         UIApplication.shared.openURL(settingsUrl! as URL)
     }
 
@@ -99,30 +99,30 @@ class PermissionsViewController: UIViewController {
         let recordPermission = AVAudioSession.sharedInstance().recordPermission()
         switch recordPermission {
         case AVAudioSessionRecordPermission.denied:
-            return .Denied
+            return .denied
         case AVAudioSessionRecordPermission.undetermined:
-            return .Undetermined
+            return .undetermined
         case AVAudioSessionRecordPermission.granted:
-            return .Granted
+            return .granted
         default:
             break
         }
-        return .Undetermined
+        return .undetermined
     }
 
     func requestCameraPermissionStatus() -> Permissions {
         let cameraPermission = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         switch cameraPermission {
         case .authorized:
-            return .Granted
+            return .granted
         case .denied:
-            return .Denied
+            return .denied
         case .notDetermined:
-            return .Undetermined
+            return .undetermined
         case .restricted:
             break
         }
-        return .Undetermined
+        return .undetermined
     }
 
     func requestContactListPermissionStatus() -> Permissions {
@@ -130,21 +130,21 @@ class PermissionsViewController: UIViewController {
             let status = CNContactStore.authorizationStatus(for: .contacts)
             switch status {
             case .authorized:
-                return .Granted
+                return .granted
             case .restricted, .denied:
-                return .Denied
+                return .denied
             case .notDetermined:
-                return .Undetermined
+                return .undetermined
             }
         } else {
             let status = ABAddressBookGetAuthorizationStatus()
             switch status {
             case .authorized:
-                return .Granted
+                return .granted
             case .restricted, .denied:
-                return .Denied
+                return .denied
             case .notDetermined:
-                return .Undetermined
+                return .undetermined
             }
         }
 
@@ -155,13 +155,13 @@ class PermissionsViewController: UIViewController {
     @IBAction func requestMicrophonePermission(_ sender: UISwitch) {
         let recordPermission = requestMicrophonePermissionStatus()
         switch recordPermission {
-        case .Undetermined:
+        case .undetermined:
             AVAudioSession.sharedInstance().requestRecordPermission({ granted in
-                let status = granted ? Permissions.Granted : Permissions.Denied
-                self.updateSwitchStatus(button: sender, status: status)
+                let status = granted ? Permissions.granted : Permissions.denied
+                self.updateSwitchStatus(sender, status: status)
             })
-        case .Denied:
-            showAlertDeniedPermissions(button: sender, permissionName: "Microphone")
+        case .denied:
+            showAlertDeniedPermissions(sender, permissionName: "Microphone")
         default:
             break
         }
@@ -170,14 +170,14 @@ class PermissionsViewController: UIViewController {
     @IBAction func requestCameraPermission(_ sender: UISwitch) {
         let cameraPermission = requestCameraPermissionStatus()
         switch cameraPermission {
-        case .Undetermined:
+        case .undetermined:
             AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo,
                 completionHandler: { granted in
-                    let status = granted ? Permissions.Granted : Permissions.Denied
-                    self.updateSwitchStatus(button: sender, status: status)
+                    let status = granted ? Permissions.granted : Permissions.denied
+                    self.updateSwitchStatus(sender, status: status)
             })
-        case .Denied:
-            showAlertDeniedPermissions(button: sender, permissionName: "Camera")
+        case .denied:
+            showAlertDeniedPermissions(sender, permissionName: "Camera")
         default:
             break
         }
@@ -186,21 +186,21 @@ class PermissionsViewController: UIViewController {
     @IBAction func requestContactListPermission(_ sender: UISwitch) {
         let contactPermission = requestContactListPermissionStatus()
         switch contactPermission {
-        case .Undetermined:
+        case .undetermined:
             if #available(iOS 9.0, *) {
                 CNContactStore().requestAccess(for: .contacts, completionHandler: {
                     success, error in
-                    let status = success ? Permissions.Granted : Permissions.Denied
-                    self.updateSwitchStatus(button: sender, status: status)
+                    let status = success ? Permissions.granted : Permissions.denied
+                    self.updateSwitchStatus(sender, status: status)
                 })
             } else {
                 ABAddressBookRequestAccessWithCompletion(nil) { success, error in
-                    let status = success ? Permissions.Granted : Permissions.Denied
-                    self.updateSwitchStatus(button: sender, status: status)
+                    let status = success ? Permissions.granted : Permissions.denied
+                    self.updateSwitchStatus(sender, status: status)
                 }
             }
-        case .Denied:
-            showAlertDeniedPermissions(button: sender, permissionName: "Contact List")
+        case .denied:
+            showAlertDeniedPermissions(sender, permissionName: "Contact List")
         default:
             break
         }

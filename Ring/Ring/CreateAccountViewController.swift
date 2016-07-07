@@ -40,7 +40,7 @@ class CreateAccountViewController: UIViewController {
 
     // MARK: - TextField validation feedback
 
-    func giveVisualFeedback(field: UITextField) {
+    func giveVisualFeedback(_ field: UITextField) {
         if !(field.text?.isEmpty)! {
             field.rightViewMode = .never
             return
@@ -77,7 +77,7 @@ class CreateAccountViewController: UIViewController {
             }
         }
 
-        giveVisualFeedback(field: usernameTextField)
-        giveVisualFeedback(field: passwordTextField)
+        giveVisualFeedback(usernameTextField)
+        giveVisualFeedback(passwordTextField)
     }
 }
