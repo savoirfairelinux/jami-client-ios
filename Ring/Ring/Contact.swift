@@ -18,22 +18,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import Foundation
+import CoreData
 
-class AccountDetailsViewController: UIViewController {
-
-    // MARK: - Properties
-    var account: Account!
-
-    @IBOutlet weak var detailsLabel: UILabel!
-
-    // MARK: - UIViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-}
+class Contact: ManagedObject { }
