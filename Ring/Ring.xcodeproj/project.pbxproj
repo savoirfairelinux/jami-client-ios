@@ -78,6 +78,12 @@
 		04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
+		044C231E1D2C2A1D0046F46E /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044C231D1D2C2A1D0046F46E /* QRCodeViewController.swift */; };
+		046543D01D2C364F0083CEB3 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543CE1D2C364F0083CEB3 /* Contact+CoreDataProperties.swift */; };
+		046543D11D2C364F0083CEB3 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543CF1D2C364F0083CEB3 /* Contact.swift */; };
+		046543D31D2C41810083CEB3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543D21D2C41810083CEB3 /* HomeViewController.swift */; };
+		046543D81D2E9F060083CEB3 /* CDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543D71D2E9F060083CEB3 /* CDManager.swift */; };
+		046543DA1D2EADDB0083CEB3 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046543D91D2EADDB0083CEB3 /* Table.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +185,12 @@
 		04399AE11D1C341A00E99CD9 /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = ../fat/lib/libvpx.a; sourceTree = "<group>"; };
 		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
+		044C231D1D2C2A1D0046F46E /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		046543CE1D2C364F0083CEB3 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		046543CF1D2C364F0083CEB3 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		046543D21D2C41810083CEB3 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		046543D71D2E9F060083CEB3 /* CDManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDManager.swift; sourceTree = "<group>"; };
+		046543D91D2EADDB0083CEB3 /* Table.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +276,8 @@
 		043866221D22C38400E06CE2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				046543CE1D2C364F0083CEB3 /* Contact+CoreDataProperties.swift */,
+				046543CF1D2C364F0083CEB3 /* Contact.swift */,
 				043866231D22C3BC00E06CE2 /* Account.swift */,
 				043866251D22C42F00E06CE2 /* AccountModel.swift */,
 			);
@@ -275,6 +289,8 @@
 			children = (
 				043866321D22CE8C00E06CE2 /* MeViewController.swift */,
 				0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */,
+				044C231D1D2C2A1D0046F46E /* QRCodeViewController.swift */,
+				046543D21D2C41810083CEB3 /* HomeViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -320,6 +336,7 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				046543D61D2E9E670083CEB3 /* CoreData */,
 				043866341D22D04E00E06CE2 /* UI */,
 				0438662D1D22C87500E06CE2 /* ViewController */,
 				043866221D22C38400E06CE2 /* Models */,
@@ -436,6 +453,15 @@
 			name = DRingAdaptator;
 			sourceTree = "<group>";
 		};
+		046543D61D2E9E670083CEB3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				046543D71D2E9F060083CEB3 /* CDManager.swift */,
+				046543D91D2EADDB0083CEB3 /* Table.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -505,6 +531,11 @@
 					043999F21D1C2D9D00E99CD9 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 73LS4VP8J7;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					04399A0B1D1C2D9D00E99CD9 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -573,12 +604,18 @@
 				043866381D2304A700E06CE2 /* BoolStringExtension.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
 				043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */,
+				046543D31D2C41810083CEB3 /* HomeViewController.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
+				046543D11D2C364F0083CEB3 /* Contact.swift in Sources */,
+				044C231E1D2C2A1D0046F46E /* QRCodeViewController.swift in Sources */,
+				046543D01D2C364F0083CEB3 /* Contact+CoreDataProperties.swift in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
+				046543DA1D2EADDB0083CEB3 /* Table.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdaptator.mm in Sources */,
 				043866241D22C3BC00E06CE2 /* Account.swift in Sources */,
+				046543D81D2E9F060083CEB3 /* CDManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
