@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_59186784",
+        "filename": "compile-ios.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-07-07T20:28:30Z",
+      "side": 1,
+      "message": "I don\u0027t think you should touch the daemon state.\n\nYou may want to implement a new feature in the ios client based on a patch aplied on top of the daemon\u0027s master.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 19
+      },
+      "revId": "718da27410f8287f39aa33abd9ee0d6c38ac3d35",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
