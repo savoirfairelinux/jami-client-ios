@@ -22,6 +22,30 @@
       "revId": "718da27410f8287f39aa33abd9ee0d6c38ac3d35",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_1912ef62",
+        "filename": "compile-ios.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2016-07-07T20:29:48Z",
+      "side": 1,
+      "message": "Oops. Done",
+      "parentUuid": "7a7fa997_59186784",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 19
+      },
+      "revId": "718da27410f8287f39aa33abd9ee0d6c38ac3d35",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
