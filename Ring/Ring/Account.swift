@@ -30,8 +30,7 @@ struct Account {
     // MARK: - Properties
     let id: String
 
-    // FIXME: This should be private
-    var details: Dictionary<String, String>
+    private var details: Dictionary<String, String>
 
     var alias: String? {
         get {
