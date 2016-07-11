@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041B2FF11D33FE4B000148F8 /* libnatpmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041B2FF01D33FE4B000148F8 /* libnatpmp.a */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
 		043866241D22C3BC00E06CE2 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* Account.swift */; };
 		043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866251D22C42F00E06CE2 /* AccountModel.swift */; };
@@ -103,6 +104,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		041B2FF01D33FE4B000148F8 /* libnatpmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnatpmp.a; path = ../fat/lib/libnatpmp.a; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		043866231D22C3BC00E06CE2 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		043866251D22C42F00E06CE2 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041B2FF11D33FE4B000148F8 /* libnatpmp.a in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
 				04399AE41D1C341A00E99CD9 /* libavcodec.a in Frameworks */,
 				04399AE51D1C341A00E99CD9 /* libavdevice.a in Frameworks */,
@@ -370,6 +373,7 @@
 		04399A921D1C2E3600E99CD9 /* RING_DEPS */ = {
 			isa = PBXGroup;
 			children = (
+				041B2FF01D33FE4B000148F8 /* libnatpmp.a */,
 				04399AB21D1C341A00E99CD9 /* libavcodec.a */,
 				04399AB31D1C341A00E99CD9 /* libavdevice.a */,
 				04399AB41D1C341A00E99CD9 /* libavfilter.a */,
