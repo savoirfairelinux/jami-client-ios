@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a7ca5a3_15fe346c",
+        "filename": "Ring/Ring/Contact+CoreDataProperties.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-07-12T19:49:09Z",
+      "side": 1,
+      "message": "I see in your model that all these fields are optional and that none of them is a primary key.\nIs this wanted?",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "ccb1f34e6fb6e8775213f04c47407ec2ad19c8f6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
