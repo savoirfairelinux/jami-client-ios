@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		041B2FF11D33FE4B000148F8 /* libnatpmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041B2FF01D33FE4B000148F8 /* libnatpmp.a */; };
+		041B2FF31D340EB1000148F8 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B2FF21D340EB1000148F8 /* ConversationsViewController.swift */; };
+		041B2FF61D34162B000148F8 /* Messages+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B2FF41D34162B000148F8 /* Messages+CoreDataProperties.swift */; };
+		041B2FF71D34162B000148F8 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B2FF51D34162B000148F8 /* Messages.swift */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
 		043866241D22C3BC00E06CE2 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* Account.swift */; };
 		043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866251D22C42F00E06CE2 /* AccountModel.swift */; };
@@ -105,6 +108,9 @@
 
 /* Begin PBXFileReference section */
 		041B2FF01D33FE4B000148F8 /* libnatpmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnatpmp.a; path = ../fat/lib/libnatpmp.a; sourceTree = "<group>"; };
+		041B2FF21D340EB1000148F8 /* ConversationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
+		041B2FF41D34162B000148F8 /* Messages+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Messages+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		041B2FF51D34162B000148F8 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		043866231D22C3BC00E06CE2 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		043866251D22C42F00E06CE2 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
@@ -276,6 +282,8 @@
 		043866221D22C38400E06CE2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				041B2FF41D34162B000148F8 /* Messages+CoreDataProperties.swift */,
+				041B2FF51D34162B000148F8 /* Messages.swift */,
 				046543CE1D2C364F0083CEB3 /* Contact+CoreDataProperties.swift */,
 				046543CF1D2C364F0083CEB3 /* Contact.swift */,
 				043866231D22C3BC00E06CE2 /* Account.swift */,
@@ -291,6 +299,7 @@
 				0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */,
 				044C231D1D2C2A1D0046F46E /* QRCodeViewController.swift */,
 				046543D21D2C41810083CEB3 /* HomeViewController.swift */,
+				041B2FF21D340EB1000148F8 /* ConversationsViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -612,8 +621,11 @@
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
 				046543DA1D2EADDB0083CEB3 /* Table.swift in Sources */,
+				041B2FF61D34162B000148F8 /* Messages+CoreDataProperties.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdaptator.mm in Sources */,
+				041B2FF31D340EB1000148F8 /* ConversationsViewController.swift in Sources */,
+				041B2FF71D34162B000148F8 /* Messages.swift in Sources */,
 				043866241D22C3BC00E06CE2 /* Account.swift in Sources */,
 				046543D81D2E9F060083CEB3 /* CDManager.swift in Sources */,
 			);

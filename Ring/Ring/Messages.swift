@@ -21,12 +21,8 @@
 import Foundation
 import CoreData
 
-extension Contact {
+class Messages: ManagedObject {
 
-    @NSManaged var accountID: String?
-    @NSManaged var displayName: String?
-    @NSManaged var lastUsed: NSNumber?
-    @NSManaged var uri: String?
-    @NSManaged var messages: Messages?
+// Insert code here to add functionality to your managed object subclass
 
 }
