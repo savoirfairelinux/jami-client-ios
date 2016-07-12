@@ -22,6 +22,30 @@
       "revId": "ccb1f34e6fb6e8775213f04c47407ec2ad19c8f6",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_d53e7c29",
+        "filename": "Ring/Ring/Contact+CoreDataProperties.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2016-07-12T19:51:20Z",
+      "side": 1,
+      "message": "No the model isn\u0027t really finished. I dont even use the cache for coredata access. As i said this not really finished",
+      "parentUuid": "5a7ca5a3_15fe346c",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "ccb1f34e6fb6e8775213f04c47407ec2ad19c8f6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
