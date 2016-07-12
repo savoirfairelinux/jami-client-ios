@@ -34,6 +34,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 AccountModel.sharedInstance.reload()
             }
         }
+        NSNotificationCenter.defaultCenter().addObserverForName("IncomingAccountMessage", object: nil, queue: nil, usingBlock: { notif in
+            let uri = notif.userInfo!["from"] as! String
+            let predicate = NSPredicate(format: "uri CONTAINS %@", uri)
+
+            // TODO: Need to be find and create if not exist
+            let contacts = Table<Contact>.find(predicate)
+            if contacts.count == 0 {
+                // FIXME
+                // Table.create(setup: ManagedObject -> Void)
+            }
+
+            Table<Messages>.create() {
+                $0.contact = contacts[0]
+                $0.payload = notif.userInfo!["payloads"]!["text/plain"] as? String
+                $0.sentOut = false
+                $0.received = NSDate().timeIntervalSince1970
+            }
+        })
         return true
     }
 

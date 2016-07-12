@@ -105,21 +105,21 @@ using namespace DRing;
   std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 
   confHandlers.insert(
-      exportable_callback<ConfigurationSignal::IncomingAccountMessage>(
-          [&](const std::string& account_id, const std::string& from,
-              const std::map<std::string, std::string>& payloads) {
+      exportable_callback<ConfigurationSignal::IncomingAccountMessage>([&](
+          const std::string& account_id, const std::string& from,
+          const std::map<std::string, std::string>& payloads) {
 
-            NSDictionary* userInfo = @{
-              @"accountID" : [NSString stringWithUTF8String:account_id.c_str()],
-              @"from" : [NSString stringWithUTF8String:from.c_str()],
-              @"payloads" : [Utils mapToDictionnary:payloads]
-            };
+        NSDictionary* userInfo = @{
+          @"accountID" : [NSString stringWithUTF8String:account_id.c_str()],
+          @"from" : [NSString stringWithUTF8String:from.c_str()],
+          @"payloads" : [Utils mapToDictionnary:payloads]
+        };
 
-            NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-            [nc postNotificationName:@"IncomingAccountMessage"
-                              object:self
-                            userInfo:userInfo];
-          }));
+        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:@"IncomingAccountMessage"
+                          object:[ConfigurationManagerAdaptator sharedManager]
+                        userInfo:userInfo];
+      }));
 
   confHandlers.insert(
       exportable_callback<ConfigurationSignal::AccountsChanged>([&]() {

@@ -64,6 +64,14 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             // TODO: Handle that correctly
             print("Error Opening Capture input")
         }
+        if (TARGET_IPHONE_SIMULATOR != 0) {
+            let predicate = NSPredicate(format: "uri == %@", "ring:ef8417c3cf73df274ba9dce0ba280092832d2dfd")
+            Table<Contact>.createIfNotExist(predicate) {
+                $0.uri = "ring:ef8417c3cf73df274ba9dce0ba280092832d2dfd"
+                $0.lastUsed = NSDate().timeIntervalSince1970
+            }
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
