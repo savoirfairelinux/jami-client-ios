@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a7ca5a3_f5c61849",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-07-12T17:43:03Z",
+      "side": 1,
+      "message": "I do not think that this is the correct Tuleap ticket because it is related to a deamon issue. Furthermore, there is not any change directly impacting the said patch.\nI think that you need a dedicated ticket where we could log that this patch only works on simulator.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "cf1798d4ccf730685ffc5e8d80585e33d3506ce8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
