@@ -18,22 +18,24 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import CoreData
+import UIKit
 
-class HomeViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource {
+class ConversationsViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource {
 
     // MARK: - Properties
+    @IBOutlet weak var textField: UITextField!
+    var contact: Contact!
     var fetchedResultsController: NSFetchedResultsController!
     @IBOutlet weak var tableView: UITableView!
 
-    // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let sortDescriptor = NSSortDescriptor(key: "lastUsed", ascending: false)
+        let predicate = NSPredicate(format: "contact.uri == %@", contact.uri!)
+        let sortDescriptor = NSSortDescriptor(key: "received", ascending: true)
 
-        fetchedResultsController = Table<Contact>.fetchedResultsController([sortDescriptor])
+        fetchedResultsController = Table<Messages>.fetchedResultsController([sortDescriptor], predicate: predicate)
         fetchedResultsController.delegate = self
 
         do {
@@ -45,6 +47,7 @@ class HomeViewController: UIViewController, NSFetchedResultsControllerDelegate, 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - UITableViewDataSource
@@ -62,17 +65,17 @@ class HomeViewController: UIViewController, NSFetchedResultsControllerDelegate, 
     }
 
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
-        guard let selectedObject = fetchedResultsController.objectAtIndexPath(indexPath) as? Contact
+        guard let selectedObject = fetchedResultsController.objectAtIndexPath(indexPath) as? Messages
         else {
             fatalError("Error fetching contacts")
         }
-        cell.textLabel!.text = selectedObject.displayName != nil ? selectedObject.displayName : selectedObject.uri
+        cell.textLabel!.text = selectedObject.payload
     }
 
     func tableView(tableView: UITableView,
         cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-            let cell = tableView.dequeueReusableCellWithIdentifier("contactCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("messageCell", forIndexPath: indexPath)
             configureCell(cell, indexPath: indexPath)
             return cell
     }
@@ -112,16 +115,20 @@ class HomeViewController: UIViewController, NSFetchedResultsControllerDelegate, 
         tableView.endUpdates()
     }
 
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "conversationView" {
-            let cell = sender as! UITableViewCell
-            if let indexPath = tableView.indexPathForCell(cell) {
-                let contact = fetchedResultsController.objectAtIndexPath(indexPath) as? Contact
-                let vc = segue.destinationViewController as! ConversationsViewController
-                vc.contact = contact
+    // MARK: - Actions
+    @IBAction func onSendPressed(sender: AnyObject) {
+        if let text = textField.text {
+            let manager = ConfigurationManagerAdaptator.sharedManager()
+            let payloads = ["text/plain": text]
+            let accID = AccountModel.sharedInstance.accountList[0].id
+            manager.sendAccountTextMessage(accID, to: contact.uri, payloads: payloads)
+            Table<Messages>.create() {
+                $0.contact = self.contact
+                $0.payload = text
+                $0.sentOut = true
+                $0.received = NSDate().timeIntervalSince1970
             }
+            textField.text = nil
         }
     }
 

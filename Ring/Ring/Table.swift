@@ -55,15 +55,29 @@ class Table<T: ManagedObject> {
     }
 
     // MARK: - Read functions
-    static func fetchedResultsController(sortDescriptors: [NSSortDescriptor] = []) -> NSFetchedResultsController {
+    static func fetchedResultsController(sortDescriptors: [NSSortDescriptor] = [], predicate: NSPredicate? = nil) -> NSFetchedResultsController {
 
         let moc = CDManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest(entityName: Contact.entityName)
+        let request = NSFetchRequest(entityName: T.entityName)
         request.sortDescriptors = sortDescriptors
+        request.predicate = predicate
         return NSFetchedResultsController(fetchRequest: request,
             managedObjectContext: moc,
             sectionNameKeyPath: nil,
             cacheName: nil)
+    }
+
+    static func find(predicate: NSPredicate) -> [T] {
+        let moc = CDManager.sharedInstance.managedObjectContext
+        let request = NSFetchRequest(entityName: T.entityName)
+        request.predicate = predicate
+        do {
+            let res = try moc.executeFetchRequest(request) as! [T]
+            return res
+        } catch {
+            print("Find for \(T.entityName) failed")
+        }
+        return []
     }
 
     // MARK: - Delete functions

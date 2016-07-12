@@ -21,12 +21,11 @@
 import Foundation
 import CoreData
 
-extension Contact {
+extension Messages {
 
-    @NSManaged var accountID: String?
-    @NSManaged var displayName: String?
-    @NSManaged var lastUsed: NSNumber?
-    @NSManaged var uri: String?
-    @NSManaged var messages: Messages?
+    @NSManaged var payload: String?
+    @NSManaged var received: NSNumber?
+    @NSManaged var sentOut: NSNumber?
+    @NSManaged var contact: Contact?
 
 }
