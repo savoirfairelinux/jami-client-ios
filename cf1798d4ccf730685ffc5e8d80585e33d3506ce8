@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5a7ca5a3_15e8747b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-07-13T18:26:12Z",
+      "side": 1,
+      "message": "I am not sure we should link to other gerrit patchsets. Maybe explain a bit more because \u00274419\u0027 when merged will loose its sense",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "cf1798d4ccf730685ffc5e8d80585e33d3506ce8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a7ca5a3_f5c61849",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
