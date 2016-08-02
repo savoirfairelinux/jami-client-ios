@@ -20,18 +20,20 @@
 
 import UIKit
 
-class AccountDetailsViewController: UIViewController {
-
-    // MARK: - Properties
-    var account: Account!
-    @IBOutlet weak var detailsLabel: UILabel!
+class MainTabBarViewController: UITabBarController {
 
     // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
-        // FIXME: This is just a placeholder
-        detailsLabel.text = account.details.description
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if AccountModel.sharedInstance.accountList.count == 0 {
+            let storyboard = UIStoryboard(name: "Introduction", bundle: nil)
+            let viewController = storyboard.instantiateInitialViewController()!
+            self.presentViewController(viewController, animated: false, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
