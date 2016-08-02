@@ -11,6 +11,7 @@
 		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
 		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
+		04093B441D63792800009EBD /* Logo_temp.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 04093B431D63792800009EBD /* Logo_temp.tiff */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
 		043866241D22C3BC00E06CE2 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* Account.swift */; };
 		043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866251D22C42F00E06CE2 /* AccountModel.swift */; };
@@ -80,6 +81,13 @@
 		04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
+		04404E551D513CA4000F9FA3 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04404E541D513CA4000F9FA3 /* MainTabBarViewController.swift */; };
+		0456743D1D53B57000B6A16B /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456743C1D53B57000B6A16B /* CreateAccountViewController.swift */; };
+		0456743F1D53DD4000B6A16B /* ic_warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 0456743E1D53DD4000B6A16B /* ic_warning.png */; };
+		04BA2D571D4A8A4F00BC3FED /* Introduction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04BA2D561D4A8A4F00BC3FED /* Introduction.storyboard */; };
+		04BA2D591D4A967100BC3FED /* IntroductionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA2D581D4A967100BC3FED /* IntroductionPageViewController.swift */; };
+		04BA2D5E1D4FB6C800BC3FED /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA2D5D1D4FB6C800BC3FED /* PermissionsViewController.swift */; };
+		04BA2D601D50E61D00BC3FED /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA2D5F1D50E61D00BC3FED /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +112,7 @@
 		02419BCE1DC3E75700DF0734 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../fat/lib/libboost_system.a; sourceTree = "<group>"; };
 		02419BD11DC3E76A00DF0734 /* libcryptopp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcryptopp.a; path = ../fat/lib/libcryptopp.a; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
+		04093B431D63792800009EBD /* Logo_temp.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Logo_temp.tiff; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		043866231D22C3BC00E06CE2 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		043866251D22C42F00E06CE2 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
@@ -183,6 +192,13 @@
 		04399AE11D1C341A00E99CD9 /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = ../fat/lib/libvpx.a; sourceTree = "<group>"; };
 		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
+		04404E541D513CA4000F9FA3 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		0456743C1D53B57000B6A16B /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		0456743E1D53DD4000B6A16B /* ic_warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_warning.png; sourceTree = "<group>"; };
+		04BA2D561D4A8A4F00BC3FED /* Introduction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Introduction.storyboard; sourceTree = "<group>"; };
+		04BA2D581D4A967100BC3FED /* IntroductionPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionPageViewController.swift; sourceTree = "<group>"; };
+		04BA2D5D1D4FB6C800BC3FED /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
+		04BA2D5F1D50E61D00BC3FED /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,8 +302,12 @@
 		0438662D1D22C87500E06CE2 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				04BA2D581D4A967100BC3FED /* IntroductionPageViewController.swift */,
 				043866321D22CE8C00E06CE2 /* MeViewController.swift */,
 				0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */,
+				04BA2D5D1D4FB6C800BC3FED /* PermissionsViewController.swift */,
+				04404E541D513CA4000F9FA3 /* MainTabBarViewController.swift */,
+				0456743C1D53B57000B6A16B /* CreateAccountViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -334,6 +354,7 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				04BA2D5C1D4F993D00BC3FED /* Resources */,
 				043866341D22D04E00E06CE2 /* UI */,
 				0438662D1D22C87500E06CE2 /* ViewController */,
 				043866221D22C38400E06CE2 /* Models */,
@@ -345,6 +366,8 @@
 				04399A071D1C2D9D00E99CD9 /* Info.plist */,
 				043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */,
 				043866391D2307C000E06CE2 /* Extensions */,
+				04BA2D561D4A8A4F00BC3FED /* Introduction.storyboard */,
+				04BA2D611D510BD600BC3FED /* CustomControls */,
 			);
 			path = Ring;
 			sourceTree = "<group>";
@@ -450,6 +473,23 @@
 				04399AAB1D1C304300E99CD9 /* Utils.mm */,
 			);
 			name = DRingAdaptator;
+			sourceTree = "<group>";
+		};
+		04BA2D5C1D4F993D00BC3FED /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0456743E1D53DD4000B6A16B /* ic_warning.png */,
+				04093B431D63792800009EBD /* Logo_temp.tiff */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		04BA2D611D510BD600BC3FED /* CustomControls */ = {
+			isa = PBXGroup;
+			children = (
+				04BA2D5F1D50E61D00BC3FED /* RoundedButton.swift */,
+			);
+			name = CustomControls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -560,9 +600,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0456743F1D53DD4000B6A16B /* ic_warning.png in Resources */,
+				04BA2D571D4A8A4F00BC3FED /* Introduction.storyboard in Resources */,
 				04399A061D1C2D9D00E99CD9 /* LaunchScreen.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */,
 				04399A011D1C2D9D00E99CD9 /* Main.storyboard in Resources */,
+				04093B441D63792800009EBD /* Logo_temp.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,15 +630,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04404E551D513CA4000F9FA3 /* MainTabBarViewController.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm in Sources */,
+				04BA2D591D4A967100BC3FED /* IntroductionPageViewController.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
+				0456743D1D53B57000B6A16B /* CreateAccountViewController.swift in Sources */,
 				043866381D2304A700E06CE2 /* BoolStringExtension.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
 				043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
+				04BA2D5E1D4FB6C800BC3FED /* PermissionsViewController.swift in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
+				04BA2D601D50E61D00BC3FED /* RoundedButton.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdaptator.mm in Sources */,
 				043866241D22C3BC00E06CE2 /* Account.swift in Sources */,
 			);
@@ -689,11 +737,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -729,9 +778,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

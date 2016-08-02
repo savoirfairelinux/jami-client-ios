@@ -20,22 +20,22 @@
 
 import UIKit
 
-class AccountDetailsViewController: UIViewController {
+class RoundedButton: UIButton {
 
-    // MARK: - Properties
-    var account: Account!
-    @IBOutlet weak var detailsLabel: UILabel!
+    /*
+     // Only override drawRect: if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func drawRect(rect: CGRect) {
+     // Drawing code
+     }
+     */
 
-    // MARK: - UIViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // FIXME: This is just a placeholder
-        detailsLabel.text = account.details.description
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.layer.borderColor = self.backgroundColor?.cgColor
+        self.layer.borderWidth = 1.0
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 15.0
     }
 
 }

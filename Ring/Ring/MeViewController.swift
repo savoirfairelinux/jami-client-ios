@@ -91,10 +91,6 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == accountModel.accountList.count {
-            accountModel.addAccount()
-            accountTableView.reloadData()
-        }
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -126,5 +122,4 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             vc.account = cell.account
         }
     }
-
 }
