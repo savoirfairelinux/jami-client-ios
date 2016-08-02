@@ -46,6 +46,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera is used for video call</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Address Book is used to manage contact in the app</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone is used for audio call</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

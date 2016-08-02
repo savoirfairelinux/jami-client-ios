@@ -22,6 +22,11 @@ import Foundation
 
 class AccountModel {
 
+    enum AccountType: String {
+        case SIP
+        case RING
+    }
+
     // MARK: - Properties
     let confAdapt = ConfigurationManagerAdaptator.sharedManager() as AnyObject
     var accountList: Array<Account> = []
@@ -44,15 +49,15 @@ class AccountModel {
         }
     }
 
-    func addAccount() {
+    func addAccount(accountType: AccountType, username: String, password: String, registerOnNetwork: Bool) {
         // TODO: This need work for all account type
-        let details:NSMutableDictionary? = confAdapt.getAccountTemplate("RING")
+        let details:NSMutableDictionary? = confAdapt.getAccountTemplate(accountType.rawValue)
         if details == nil {
             print("Error retrieving Ring account template, can not continue");
             return;
         }
-        details!.setValue("iOS", forKey: "Account.alias")
-        details!.setValue("iOS", forKey: "Account.displayName")
+        details!.setValue(username, forKey: "Account.alias")
+        details!.setValue(username, forKey: "Account.displayName")
         let convertedDetails = details as NSDictionary? as? [AnyHashable: Any] ?? [:]
         let addResult:String! = confAdapt.addAccount(convertedDetails)
         print(addResult);
