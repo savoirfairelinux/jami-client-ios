@@ -22,6 +22,11 @@ import Foundation
 
 class AccountModel {
 
+    enum AccountType: String {
+        case SIP
+        case RING
+    }
+
     // MARK: - Properties
     let confAdapt = ConfigurationManagerAdaptator.sharedManager()
     var accountList: Array<Account> = []
@@ -44,12 +49,10 @@ class AccountModel {
         }
     }
 
-    func addAccount() {
-
-        // TODO: This need work for all account type
-        let details = confAdapt.getAccountTemplate("RING")
-        details.setValue("iOS", forKey: "Account.alias")
-        details.setValue("iOS", forKey: "Account.displayName")
+    func addAccount(accountType accountType: AccountType, username: String, password: String, registerOnNetwork: Bool) {
+        let details = confAdapt.getAccountTemplate(accountType.rawValue)
+        details.setValue(username, forKey: "Account.alias")
+        details.setValue(username, forKey: "Account.displayName")
         confAdapt.addAccount(details! as [NSObject: AnyObject])
     }
 
