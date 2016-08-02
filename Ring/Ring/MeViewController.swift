@@ -92,7 +92,10 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == accountModel.accountList.count {
-            accountModel.addAccount()
+            accountModel.addAccount(accountType: .RING,
+                username: "iOS",
+                password: "iOS",
+                registerOnNetwork: true)
             accountTableView.reloadData()
         }
     }
