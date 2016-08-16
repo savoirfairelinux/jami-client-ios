@@ -85,6 +85,9 @@
 		04BA2D591D4A967100BC3FED /* IntroductionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA2D581D4A967100BC3FED /* IntroductionPageViewController.swift */; };
 		04BA2D5E1D4FB6C800BC3FED /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA2D5D1D4FB6C800BC3FED /* PermissionsViewController.swift */; };
 		04BA2D601D50E61D00BC3FED /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA2D5F1D50E61D00BC3FED /* RoundedButton.swift */; };
+		7A8EEFD167CBFD7865D544CE /* Pods_RingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B69FE61876EECB0570711C /* Pods_RingUITests.framework */; };
+		D9FE2DCBD78D8791B554A279 /* Pods_RingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE4195F8D8EA4DE9C262BAB /* Pods_RingTests.framework */; };
+		EFEF27A4EA11647DEAEAD777 /* Pods_Ring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5710525C93920CC84230F124 /* Pods_Ring.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +196,15 @@
 		04BA2D581D4A967100BC3FED /* IntroductionPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionPageViewController.swift; sourceTree = "<group>"; };
 		04BA2D5D1D4FB6C800BC3FED /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		04BA2D5F1D50E61D00BC3FED /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		5710525C93920CC84230F124 /* Pods_Ring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AE4195F8D8EA4DE9C262BAB /* Pods_RingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A95FF8B3C124529E04ABB56 /* Pods-Ring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ring.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ring/Pods-Ring.release.xcconfig"; sourceTree = "<group>"; };
+		8B172A8DCEE3EEBD6FAE9457 /* Pods-RingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RingTests/Pods-RingTests.debug.xcconfig"; sourceTree = "<group>"; };
+		ACF6E4C3913F649E013B7DC0 /* Pods-Ring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ring.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ring/Pods-Ring.debug.xcconfig"; sourceTree = "<group>"; };
+		B98F3EA861EDFA2E2113B861 /* Pods-RingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RingUITests/Pods-RingUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C1B69FE61876EECB0570711C /* Pods_RingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC9F0D3E28AAE70EAF4F4CB3 /* Pods-RingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RingUITests/Pods-RingUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F5C54BA580CD33A125AF13F7 /* Pods-RingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RingTests/Pods-RingTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +266,7 @@
 				04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */,
 				04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */,
 				04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */,
+				EFEF27A4EA11647DEAEAD777 /* Pods_Ring.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +274,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9FE2DCBD78D8791B554A279 /* Pods_RingTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +282,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A8EEFD167CBFD7865D544CE /* Pods_RingUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +336,8 @@
 				04399A0F1D1C2D9D00E99CD9 /* RingTests */,
 				04399A1A1D1C2D9D00E99CD9 /* RingUITests */,
 				043999F41D1C2D9D00E99CD9 /* Products */,
+				9B38E9B50BA05F4964E6E603 /* Pods */,
+				6DC92B4F5DDD27C6C0A6F61A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -472,6 +489,29 @@
 			name = CustomControls;
 			sourceTree = "<group>";
 		};
+		6DC92B4F5DDD27C6C0A6F61A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5710525C93920CC84230F124 /* Pods_Ring.framework */,
+				5AE4195F8D8EA4DE9C262BAB /* Pods_RingTests.framework */,
+				C1B69FE61876EECB0570711C /* Pods_RingUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9B38E9B50BA05F4964E6E603 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ACF6E4C3913F649E013B7DC0 /* Pods-Ring.debug.xcconfig */,
+				6A95FF8B3C124529E04ABB56 /* Pods-Ring.release.xcconfig */,
+				8B172A8DCEE3EEBD6FAE9457 /* Pods-RingTests.debug.xcconfig */,
+				F5C54BA580CD33A125AF13F7 /* Pods-RingTests.release.xcconfig */,
+				B98F3EA861EDFA2E2113B861 /* Pods-RingUITests.debug.xcconfig */,
+				CC9F0D3E28AAE70EAF4F4CB3 /* Pods-RingUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -479,9 +519,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04399A201D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "Ring" */;
 			buildPhases = (
+				2FAB999429F1DAAFE21867DE /* [CP] Check Pods Manifest.lock */,
 				043999EF1D1C2D9D00E99CD9 /* Sources */,
 				043999F01D1C2D9D00E99CD9 /* Frameworks */,
 				043999F11D1C2D9D00E99CD9 /* Resources */,
+				D9D159F39BC54579B0870D6B /* [CP] Embed Pods Frameworks */,
+				8D86557A7E2E1F30DD1EAFC4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -496,9 +539,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04399A231D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "RingTests" */;
 			buildPhases = (
+				8585BB146D027D54C96ADD09 /* [CP] Check Pods Manifest.lock */,
 				04399A081D1C2D9D00E99CD9 /* Sources */,
 				04399A091D1C2D9D00E99CD9 /* Frameworks */,
 				04399A0A1D1C2D9D00E99CD9 /* Resources */,
+				5F15299C9CBE77BD5B90EC05 /* [CP] Embed Pods Frameworks */,
+				D058EE8998E0667107662B8C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -514,9 +560,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04399A261D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "RingUITests" */;
 			buildPhases = (
+				EBE935F1C9AC86AC7392DA4F /* [CP] Check Pods Manifest.lock */,
 				04399A131D1C2D9D00E99CD9 /* Sources */,
 				04399A141D1C2D9D00E99CD9 /* Frameworks */,
 				04399A151D1C2D9D00E99CD9 /* Resources */,
+				7BD29C4C691F30DE61C8DB26 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -601,6 +649,129 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2FAB999429F1DAAFE21867DE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5F15299C9CBE77BD5B90EC05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RingTests/Pods-RingTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BD29C4C691F30DE61C8DB26 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RingUITests/Pods-RingUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8585BB146D027D54C96ADD09 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8D86557A7E2E1F30DD1EAFC4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ring/Pods-Ring-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D058EE8998E0667107662B8C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RingTests/Pods-RingTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9D159F39BC54579B0870D6B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ring/Pods-Ring-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBE935F1C9AC86AC7392DA4F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		043999EF1D1C2D9D00E99CD9 /* Sources */ = {
@@ -766,6 +937,7 @@
 		};
 		04399A211D1C2D9D00E99CD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF6E4C3913F649E013B7DC0 /* Pods-Ring.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -787,6 +959,7 @@
 		};
 		04399A221D1C2D9D00E99CD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A95FF8B3C124529E04ABB56 /* Pods-Ring.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -807,6 +980,7 @@
 		};
 		04399A241D1C2D9D00E99CD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B172A8DCEE3EEBD6FAE9457 /* Pods-RingTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = RingTests/Info.plist;
@@ -819,6 +993,7 @@
 		};
 		04399A251D1C2D9D00E99CD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5C54BA580CD33A125AF13F7 /* Pods-RingTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = RingTests/Info.plist;
@@ -831,6 +1006,7 @@
 		};
 		04399A271D1C2D9D00E99CD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B98F3EA861EDFA2E2113B861 /* Pods-RingUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = RingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -842,6 +1018,7 @@
 		};
 		04399A281D1C2D9D00E99CD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC9F0D3E28AAE70EAF4F4CB3 /* Pods-RingUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = RingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

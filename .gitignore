@@ -19,4 +19,5 @@ Ring/Ring.xcodeproj/xcuserdata/
 
 # CocoaPods
 Pods/
-
+Podfile.lock
+Ring.xcworkspace/
