@@ -98,7 +98,7 @@ do
 
 	echo "Building contrib"
     make fetch
-	make -j4 || exit 1
+	make || exit 1
 
 	cd ../..
 	echo "Building daemon"
