@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02419BCF1DC3E75700DF0734 /* libboost_random.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCD1DC3E75700DF0734 /* libboost_random.a */; };
+		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
+		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
 		043866241D22C3BC00E06CE2 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* Account.swift */; };
 		043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866251D22C42F00E06CE2 /* AccountModel.swift */; };
@@ -60,7 +63,6 @@
 		04399B021D1C341A00E99CD9 /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD01D1C341A00E99CD9 /* libpjsua.a */; };
 		04399B031D1C341A00E99CD9 /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD11D1C341A00E99CD9 /* libpjsua2.a */; };
 		04399B041D1C341A00E99CD9 /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD21D1C341A00E99CD9 /* libpostproc.a */; };
-		04399B051D1C341A00E99CD9 /* libresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD31D1C341A00E99CD9 /* libresample.a */; };
 		04399B061D1C341A00E99CD9 /* libring.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD41D1C341A00E99CD9 /* libring.a */; };
 		04399B071D1C341A00E99CD9 /* libsamplerate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD51D1C341A00E99CD9 /* libsamplerate.a */; };
 		04399B081D1C341A00E99CD9 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD61D1C341A00E99CD9 /* libsndfile.a */; };
@@ -97,6 +99,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02419BCD1DC3E75700DF0734 /* libboost_random.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_random.a; path = ../fat/lib/libboost_random.a; sourceTree = "<group>"; };
+		02419BCE1DC3E75700DF0734 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../fat/lib/libboost_system.a; sourceTree = "<group>"; };
+		02419BD11DC3E76A00DF0734 /* libcryptopp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcryptopp.a; path = ../fat/lib/libcryptopp.a; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		043866231D22C3BC00E06CE2 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		043866251D22C42F00E06CE2 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
@@ -184,6 +189,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */,
+				02419BCF1DC3E75700DF0734 /* libboost_random.a in Frameworks */,
+				02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
 				04399AE41D1C341A00E99CD9 /* libavcodec.a in Frameworks */,
 				04399AE51D1C341A00E99CD9 /* libavdevice.a in Frameworks */,
@@ -216,7 +224,6 @@
 				04399B021D1C341A00E99CD9 /* libpjsua.a in Frameworks */,
 				04399B031D1C341A00E99CD9 /* libpjsua2.a in Frameworks */,
 				04399B041D1C341A00E99CD9 /* libpostproc.a in Frameworks */,
-				04399B051D1C341A00E99CD9 /* libresample.a in Frameworks */,
 				04399B061D1C341A00E99CD9 /* libring.a in Frameworks */,
 				04399B071D1C341A00E99CD9 /* libsamplerate.a in Frameworks */,
 				04399B081D1C341A00E99CD9 /* libsndfile.a in Frameworks */,
@@ -295,6 +302,9 @@
 		043999EA1D1C2D9D00E99CD9 = {
 			isa = PBXGroup;
 			children = (
+				02419BD11DC3E76A00DF0734 /* libcryptopp.a */,
+				02419BCD1DC3E75700DF0734 /* libboost_random.a */,
+				02419BCE1DC3E75700DF0734 /* libboost_system.a */,
 				04399A991D1C2F6400E99CD9 /* SYS_DEPS */,
 				04399A921D1C2E3600E99CD9 /* RING_DEPS */,
 				043999F51D1C2D9D00E99CD9 /* Ring */,
