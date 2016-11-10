@@ -748,6 +748,7 @@
 				DEVELOPMENT_TEAM = KM95526DS8;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = Ring/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring;
@@ -770,6 +771,7 @@
 				DEVELOPMENT_TEAM = KM95526DS8;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = Ring/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring;
