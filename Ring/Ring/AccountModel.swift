@@ -23,14 +23,14 @@ import Foundation
 class AccountModel {
 
     // MARK: - Properties
-    let confAdapt = ConfigurationManagerAdaptator.sharedManager()
+    let confAdapt = ConfigurationManagerAdaptator.sharedManager() as AnyObject
     var accountList: Array<Account> = []
 
     // MARK: - Singleton
     static let sharedInstance = AccountModel()
 
-    private init() {
-        NSNotificationCenter.defaultCenter().addObserverForName("AccountsChanged", object: nil, queue: nil, usingBlock: { _ in
+    fileprivate init() {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "AccountsChanged"), object: nil, queue: nil, using: { _ in
             self.reload()
         })
     }
@@ -45,15 +45,20 @@ class AccountModel {
     }
 
     func addAccount() {
-
         // TODO: This need work for all account type
-        let details = confAdapt.getAccountTemplate("RING")
-        details.setValue("iOS", forKey: "Account.alias")
-        details.setValue("iOS", forKey: "Account.displayName")
-        confAdapt.addAccount(details! as [NSObject: AnyObject])
+        let details:NSMutableDictionary? = confAdapt.getAccountTemplate("RING")
+        if details == nil {
+            print("Error retrieving Ring account template, can not continue");
+            return;
+        }
+        details!.setValue("iOS", forKey: "Account.alias")
+        details!.setValue("iOS", forKey: "Account.displayName")
+        let convertedDetails = details as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        let addResult:String! = confAdapt.addAccount(convertedDetails)
+        print(addResult);
     }
 
-    func removeAccount(row: Int) {
+    func removeAccount(_ row: Int) {
         if row < accountList.count {
             confAdapt.removeAccount(accountList[row].id)
         }
