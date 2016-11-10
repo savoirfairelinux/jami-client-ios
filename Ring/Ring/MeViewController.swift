@@ -46,9 +46,9 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     // MARK: - QRCode
-    func createQRFromString(str: String) {
+    func createQRFromString(_ str: String) {
 
-        let data = str.dataUsingEncoding(NSISOLatin1StringEncoding, allowLossyConversion: false)
+        let data = str.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
 
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter!.setValue(data, forKey: "inputMessage")
@@ -58,23 +58,23 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let scaleX = qrImageView.frame.size.width / qrImage.extent.size.width
         let scaleY = qrImageView.frame.size.height / qrImage.extent.size.height
 
-        let resultQrImage = qrImage.imageByApplyingTransform(CGAffineTransformMakeScale(scaleX, scaleY))
-        qrImageView.image = UIImage(CIImage: resultQrImage)
+        let resultQrImage = qrImage.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
+        qrImageView.image = UIImage(ciImage: resultQrImage)
     }
 
     // MARK: - TableView
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1;
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return accountModel.accountList.count + 1
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.row < accountModel.accountList.count {
-            let cell = tableView.dequeueReusableCellWithIdentifier("accountTableCell", forIndexPath: indexPath) as! AccountTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "accountTableCell", for: indexPath) as! AccountTableViewCell
             let account = accountModel.accountList[indexPath.row]
 
             cell.account = account
@@ -84,45 +84,45 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("addAccountTableCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "addAccountTableCell", for: indexPath)
             return cell
         }
 
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == accountModel.accountList.count {
             accountModel.addAccount()
             accountTableView.reloadData()
         }
     }
 
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.row == accountModel.accountList.count {
             return false
         }
         return true
     }
 
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
             accountModel.removeAccount(indexPath.row)
             accountTableView.reloadData()
         }
     }
 
     // MARK: - Actions
-    @IBAction func addAccountClicked(sender: AnyObject) {
-        let index = NSIndexPath(forRow: accountModel.accountList.count, inSection: 0)
-        accountTableView.selectRowAtIndexPath(index, animated: false, scrollPosition: UITableViewScrollPosition.None)
-        tableView(accountTableView, didSelectRowAtIndexPath: index)
+    @IBAction func addAccountClicked(_ sender: AnyObject) {
+        let index = IndexPath(row: accountModel.accountList.count, section: 0)
+        accountTableView.selectRow(at: index, animated: false, scrollPosition: UITableViewScrollPosition.none)
+        tableView(accountTableView, didSelectRowAt: index)
     }
 
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "accountDetails" {
             let cell = sender as! AccountTableViewCell
-            let vc = segue.destinationViewController as! AccountDetailsViewController
+            let vc = segue.destination as! AccountDetailsViewController
             vc.account = cell.account
         }
     }

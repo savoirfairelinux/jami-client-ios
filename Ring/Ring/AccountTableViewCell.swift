@@ -34,12 +34,12 @@ class AccountTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
     // MARK: - Actions
-    @IBAction func switchAccountState(sender: UISwitch) {
-        account.isEnabled = sender.on
+    @IBAction func switchAccountState(_ sender: UISwitch) {
+        account.isEnabled = sender.isOn
     }
 }
