@@ -274,6 +274,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		02DE64671DDD15FC007D20EC /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				043999FF1D1C2D9D00E99CD9 /* Main.storyboard */,
+				04399A041D1C2D9D00E99CD9 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		043866221D22C38400E06CE2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,14 +343,13 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				02DE64671DDD15FC007D20EC /* Storyboards */,
 				043866341D22D04E00E06CE2 /* UI */,
 				0438662D1D22C87500E06CE2 /* ViewController */,
 				043866221D22C38400E06CE2 /* Models */,
 				04399AAF1D1C305600E99CD9 /* DRingAdaptator */,
 				043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */,
-				043999FF1D1C2D9D00E99CD9 /* Main.storyboard */,
 				04399A021D1C2D9D00E99CD9 /* Assets.xcassets */,
-				04399A041D1C2D9D00E99CD9 /* LaunchScreen.storyboard */,
 				04399A071D1C2D9D00E99CD9 /* Info.plist */,
 				043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */,
 				043866391D2307C000E06CE2 /* Extensions */,
