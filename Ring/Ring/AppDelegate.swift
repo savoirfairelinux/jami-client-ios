@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (dRingAdapt.initDaemon() == true) {
             if (dRingAdapt.startDaemon() == true) {
                 Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(AppDelegate.pollFunction), userInfo: nil, repeats: true)
-                AccountModel.sharedInstance.reload()
+                RINGAccountsService.sharedInstance.reload()
             }
         }
         return true
