@@ -18,22 +18,26 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import Foundation
 
-class AccountDetailsViewController: UIViewController {
-
-    // MARK: - Properties
-    var account: AccountModel!
-
-    @IBOutlet weak var detailsLabel: UILabel!
-
-    // MARK: - UIViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
+extension String {
+    func toBool() -> Bool? {
+        switch self {
+        case "True", "true", "yes", "1":
+            return true
+        case "False", "false", "no", "0":
+            return false
+        default:
+            return nil
+        }
     }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+extension Bool {
+    func toString() -> String {
+        if self == true {
+            return "true"
+        }
+        return "false"
     }
-
 }

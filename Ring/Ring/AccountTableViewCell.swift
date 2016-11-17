@@ -27,7 +27,7 @@ class AccountTableViewCell: UITableViewCell {
     @IBOutlet weak var accountNameLabel: UILabel!
     @IBOutlet weak var accountTypeLabel: UILabel!
 
-    var account: Account!
+    var account: AccountModel!
 
     // MARK: - UITableViewCell
     override func awakeFromNib() {
