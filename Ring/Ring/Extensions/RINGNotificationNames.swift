@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,20 +20,6 @@
 
 import UIKit
 
-class AccountDetailsViewController: UIViewController {
-
-    // MARK: - Properties
-    var account: RINGAccountModel!
-
-    @IBOutlet weak var detailsLabel: UILabel!
-
-    // MARK: - UIViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
+extension Notification.Name {
+    static let accountsChanged = Notification.Name("AccountsChanged")
 }

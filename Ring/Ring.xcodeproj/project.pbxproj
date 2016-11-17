@@ -11,12 +11,16 @@
 		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
 		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
+		02E1A0211DDE4A3700D75B59 /* RINGAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* RINGAccountModel.swift */; };
+		02E1A0221DDE4A3700D75B59 /* RINGAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9B1C91DDE409C00FE123D /* RINGAccountViewModel.swift */; };
+		02E1A0231DDE4A3700D75B59 /* RINGAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866251D22C42F00E06CE2 /* RINGAccountsService.swift */; };
+		02E1A0241DDE4A3700D75B59 /* RINGNotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9B1C61DDE123A00FE123D /* RINGNotificationNames.swift */; };
+		02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866371D2304A700E06CE2 /* BoolStringExtension.swift */; };
+		02F9B1BD1DDDF2E400FE123D /* RINGWalkthroughStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02F9B1BC1DDDF2E400FE123D /* RINGWalkthroughStoryboard.storyboard */; };
+		02F9B1C41DDDFF4300FE123D /* RINGMainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9B1C31DDDFF4300FE123D /* RINGMainTabBarViewController.swift */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
-		043866241D22C3BC00E06CE2 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* Account.swift */; };
-		043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866251D22C42F00E06CE2 /* AccountModel.swift */; };
 		043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866321D22CE8C00E06CE2 /* MeViewController.swift */; };
 		043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866351D22D06500E06CE2 /* AccountTableViewCell.swift */; };
-		043866381D2304A700E06CE2 /* BoolStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866371D2304A700E06CE2 /* BoolStringExtension.swift */; };
 		0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */; };
 		043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */; };
 		043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */; };
@@ -104,12 +108,16 @@
 		02419BCE1DC3E75700DF0734 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../fat/lib/libboost_system.a; sourceTree = "<group>"; };
 		02419BD11DC3E76A00DF0734 /* libcryptopp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcryptopp.a; path = ../fat/lib/libcryptopp.a; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
+		02F9B1BC1DDDF2E400FE123D /* RINGWalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = RINGWalkthroughStoryboard.storyboard; path = Walkthrough/RINGWalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
+		02F9B1C31DDDFF4300FE123D /* RINGMainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGMainTabBarViewController.swift; path = MainTabBar/RINGMainTabBarViewController.swift; sourceTree = "<group>"; };
+		02F9B1C61DDE123A00FE123D /* RINGNotificationNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGNotificationNames.swift; path = Extensions/RINGNotificationNames.swift; sourceTree = "<group>"; };
+		02F9B1C91DDE409C00FE123D /* RINGAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGAccountViewModel.swift; path = Account/RINGAccountViewModel.swift; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		043866231D22C3BC00E06CE2 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		043866251D22C42F00E06CE2 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		043866231D22C3BC00E06CE2 /* RINGAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGAccountModel.swift; path = Account/RINGAccountModel.swift; sourceTree = "<group>"; };
+		043866251D22C42F00E06CE2 /* RINGAccountsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGAccountsService.swift; path = Services/RINGAccountsService.swift; sourceTree = "<group>"; };
 		043866321D22CE8C00E06CE2 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		043866351D22D06500E06CE2 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
-		043866371D2304A700E06CE2 /* BoolStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolStringExtension.swift; sourceTree = "<group>"; };
+		043866371D2304A700E06CE2 /* BoolStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoolStringExtension.swift; path = Extensions/BoolStringExtension.swift; sourceTree = "<group>"; };
 		0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
 		043999F31D1C2D9D00E99CD9 /* Ring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -277,19 +285,36 @@
 		02DE64671DDD15FC007D20EC /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				02F9B1BC1DDDF2E400FE123D /* RINGWalkthroughStoryboard.storyboard */,
 				043999FF1D1C2D9D00E99CD9 /* Main.storyboard */,
 				04399A041D1C2D9D00E99CD9 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		043866221D22C38400E06CE2 /* Models */ = {
+		02E1A0261DDE4C2E00D75B59 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				043866231D22C3BC00E06CE2 /* Account.swift */,
-				043866251D22C42F00E06CE2 /* AccountModel.swift */,
+				043866251D22C42F00E06CE2 /* RINGAccountsService.swift */,
 			);
-			name = Models;
+			name = Services;
+			sourceTree = "<group>";
+		};
+		02E1A0271DDE4C3900D75B59 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				043866231D22C3BC00E06CE2 /* RINGAccountModel.swift */,
+				02F9B1C91DDE409C00FE123D /* RINGAccountViewModel.swift */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		02F9B1C21DDDFF0E00FE123D /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				02F9B1C31DDDFF4300FE123D /* RINGMainTabBarViewController.swift */,
+			);
+			name = MainTabBar;
 			sourceTree = "<group>";
 		};
 		0438662D1D22C87500E06CE2 /* ViewController */ = {
@@ -312,6 +337,7 @@
 		043866391D2307C000E06CE2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				02F9B1C61DDE123A00FE123D /* RINGNotificationNames.swift */,
 				043866371D2304A700E06CE2 /* BoolStringExtension.swift */,
 			);
 			name = Extensions;
@@ -343,16 +369,18 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				02E1A0271DDE4C3900D75B59 /* Account */,
+				02E1A0261DDE4C2E00D75B59 /* Services */,
+				02F9B1C21DDDFF0E00FE123D /* MainTabBar */,
 				02DE64671DDD15FC007D20EC /* Storyboards */,
 				043866341D22D04E00E06CE2 /* UI */,
 				0438662D1D22C87500E06CE2 /* ViewController */,
-				043866221D22C38400E06CE2 /* Models */,
+				043866391D2307C000E06CE2 /* Extensions */,
 				04399AAF1D1C305600E99CD9 /* DRingAdaptator */,
 				043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */,
 				04399A021D1C2D9D00E99CD9 /* Assets.xcassets */,
 				04399A071D1C2D9D00E99CD9 /* Info.plist */,
 				043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */,
-				043866391D2307C000E06CE2 /* Extensions */,
 			);
 			path = Ring;
 			sourceTree = "<group>";
@@ -568,6 +596,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02F9B1BD1DDDF2E400FE123D /* RINGWalkthroughStoryboard.storyboard in Resources */,
 				04399A061D1C2D9D00E99CD9 /* LaunchScreen.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */,
 				04399A011D1C2D9D00E99CD9 /* Main.storyboard in Resources */,
@@ -595,17 +624,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */,
+				02E1A0211DDE4A3700D75B59 /* RINGAccountModel.swift in Sources */,
+				02E1A0221DDE4A3700D75B59 /* RINGAccountViewModel.swift in Sources */,
+				02E1A0231DDE4A3700D75B59 /* RINGAccountsService.swift in Sources */,
+				02E1A0241DDE4A3700D75B59 /* RINGNotificationNames.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
-				043866381D2304A700E06CE2 /* BoolStringExtension.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
-				043866261D22C42F00E06CE2 /* AccountModel.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
+				02F9B1C41DDDFF4300FE123D /* RINGMainTabBarViewController.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdaptator.mm in Sources */,
-				043866241D22C3BC00E06CE2 /* Account.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

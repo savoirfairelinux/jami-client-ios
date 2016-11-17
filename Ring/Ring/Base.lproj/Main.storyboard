@@ -251,7 +251,7 @@
         <!--Ring-->
         <scene sceneID="oqo-zJ-m0o">
             <objects>
-                <tabBarController title="Ring" id="qdG-Sd-QaE" sceneMemberID="viewController">
+                <tabBarController title="Ring" id="qdG-Sd-QaE" customClass="RINGMainTabBarViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="zN5-xb-CQh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
