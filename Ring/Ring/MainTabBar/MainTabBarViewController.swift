@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,26 +18,19 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
+import UIKit
 
-extension String {
-    func toBool() -> Bool? {
-        switch self {
-        case "True", "true", "yes", "1":
-            return true
-        case "False", "false", "no", "0":
-            return false
-        default:
-            return nil
+class MainTabBarViewController: UITabBarController {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !AccountsService.sharedInstance.hasAccounts() {
+            self.presentWalkthrough()
         }
     }
-}
 
-extension Bool {
-    func toString() -> String {
-        if self == true {
-            return "true"
-        }
-        return "false"
+    fileprivate func presentWalkthrough() {
+        let storyboard = UIStoryboard(name: "WalkthroughStoryboard", bundle: nil)
+        let viewController = storyboard.instantiateInitialViewController()!
+        self.present(viewController, animated: false, completion: nil)
     }
 }

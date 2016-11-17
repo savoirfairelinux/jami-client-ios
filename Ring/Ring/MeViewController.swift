@@ -23,7 +23,7 @@ import UIKit
 class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Properties
-    let accountModel = AccountModel.sharedInstance
+    let lAccountService = AccountsService.sharedInstance
     @IBOutlet weak var accountTableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var qrImageView: UIImageView!
@@ -32,8 +32,8 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if accountModel.accountList.count > 0 {
-            let acc = accountModel.accountList[0]
+        if lAccountService.accounts.count > 0 {
+            let acc = lAccountService.accounts[0]
             nameLabel.text = acc.displayName
             if let username = acc.username {
                 createQRFromString(username);
@@ -68,14 +68,14 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return accountModel.accountList.count + 1
+        return lAccountService.accounts.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if indexPath.row < accountModel.accountList.count {
+        if indexPath.row < lAccountService.accounts.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "accountTableCell", for: indexPath) as! AccountTableViewCell
-            let account = accountModel.accountList[indexPath.row]
+            let account = lAccountService.accounts[indexPath.row]
 
             cell.account = account
             cell.accountNameLabel.text = account.alias
@@ -91,14 +91,14 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == accountModel.accountList.count {
-            accountModel.addAccount()
+        if indexPath.row == lAccountService.accounts.count {
+            lAccountService.addAccount()
             accountTableView.reloadData()
         }
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == accountModel.accountList.count {
+        if indexPath.row == lAccountService.accounts.count {
             return false
         }
         return true
@@ -106,14 +106,14 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            accountModel.removeAccount(indexPath.row)
+            lAccountService.removeAccount(indexPath.row)
             accountTableView.reloadData()
         }
     }
 
     // MARK: - Actions
     @IBAction func addAccountClicked(_ sender: AnyObject) {
-        let index = IndexPath(row: accountModel.accountList.count, section: 0)
+        let index = IndexPath(row: lAccountService.accounts.count, section: 0)
         accountTableView.selectRow(at: index, animated: false, scrollPosition: UITableViewScrollPosition.none)
         tableView(accountTableView, didSelectRowAt: index)
     }

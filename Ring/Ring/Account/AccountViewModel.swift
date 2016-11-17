@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,20 +20,10 @@
 
 import UIKit
 
-class AccountDetailsViewController: UIViewController {
+struct AccountViewModel {
+    fileprivate var account: AccountModel
 
-    // MARK: - Properties
-    var account: AccountModel!
-
-    @IBOutlet weak var detailsLabel: UILabel!
-
-    // MARK: - UIViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    init (withAccount account: AccountModel) {
+        self.account = account
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
 }
