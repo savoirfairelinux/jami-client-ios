@@ -1,7 +1,7 @@
 #! /bin/sh
 
 export BUILDFORIOS=1
-MIN_IOS_VERSION=9.3
+export MIN_IOS_VERSION=9.3
 IOS_TARGET_PLATFORM=iPhoneSimulator
 RELEASE=0
 
@@ -119,12 +119,12 @@ do
     CXXFLAGS="-std=c++11 -stdlib=libc++ $CFLAGS"
     LDFLAGS="$CFLAGS"
 
-	./autogen.sh || exit 1
-	mkdir -p "build-ios-$ARCH"
+    ./autogen.sh || exit 1
+    mkdir -p "build-ios-$ARCH"
     cd build-ios-$ARCH
 
     RING_CONF="--host=$HOST \
-			  --without-dbus \
+			        --without-dbus \
               --enable-static \
               --disable-shared \
               --disable-video \
@@ -135,7 +135,7 @@ do
         RING_CONF+=" --enable-debug"
     fi
 
-	$DAEMON_DIR/configure $RING_CONF \
+    $DAEMON_DIR/configure $RING_CONF \
                             CC="$CC $CFLAGS" \
                             CXX="$CXX $CXXFLAGS" \
                             LD="$LD" \
