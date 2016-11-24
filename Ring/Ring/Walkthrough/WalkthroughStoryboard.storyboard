@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="azk-5X-z35">
             <objects>
-                <navigationController storyboardIdentifier="WalkthroughStoryboard" navigationBarHidden="YES" id="GnB-zf-djy" sceneMemberID="viewController">
+                <navigationController id="GnB-zf-djy" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pgv-sV-7YL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="EHH-WC-Pef">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="zOM-us-BHp" kind="relationship" relationship="rootViewController" id="Cs0-7s-oVR"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c5B-LX-9rY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-566" y="143"/>
+            <point key="canvasLocation" x="-489" y="24"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="BPo-UM-NNL">
@@ -36,13 +40,159 @@
                     <view key="view" contentMode="scaleToFill" id="GmX-eQ-kCs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0q-9u-3WR" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="85.5" y="277" width="204" height="30"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Link this device to an account">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Pvr-wr-tIH" kind="show" id="tOa-xB-5VR"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNW-0s-B79">
+                                <rect key="frame" x="179.5" y="323" width="16" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ve-ZD-TXf" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="111.5" y="360" width="152" height="30"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Create a Ring account">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="dmb-i6-bo9" kind="show" id="gq5-YB-bwO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="8Ve-ZD-TXf" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="5e8-du-W6W"/>
+                            <constraint firstItem="gNW-0s-B79" firstAttribute="top" secondItem="R0q-9u-3WR" secondAttribute="bottom" constant="16" id="ALB-n1-zaM"/>
+                            <constraint firstItem="gNW-0s-B79" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="Zam-9D-oqp"/>
+                            <constraint firstItem="8Ve-ZD-TXf" firstAttribute="top" secondItem="gNW-0s-B79" secondAttribute="bottom" constant="16" id="dTL-r1-hi6"/>
+                            <constraint firstItem="R0q-9u-3WR" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="qhM-55-a9z"/>
+                            <constraint firstItem="gNW-0s-B79" firstAttribute="centerY" secondItem="GmX-eQ-kCs" secondAttribute="centerY" id="ziU-9e-jKq"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LPh-IM-uvN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWI-c5-979" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="143"/>
+            <point key="canvasLocation" x="325.60000000000002" y="23.838080959520241"/>
+        </scene>
+        <!--Create Profile View Controller-->
+        <scene sceneID="NEP-n0-rvD">
+            <objects>
+                <viewController id="dmb-i6-bo9" customClass="CreateProfileViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tU2-L3-HzU"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zbo-H6-yOO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FYO-p5-MWn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8M5-AJ-pxH" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="172.5" y="318.5" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="skip:" destination="dmb-i6-bo9" eventType="touchUpInside" id="PAR-5w-VRm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="8M5-AJ-pxH" firstAttribute="centerX" secondItem="FYO-p5-MWn" secondAttribute="centerX" id="kWB-xC-CED"/>
+                            <constraint firstItem="8M5-AJ-pxH" firstAttribute="centerY" secondItem="FYO-p5-MWn" secondAttribute="centerY" id="nsJ-Gi-lEl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="ja8-pO-qtF" kind="show" identifier="ProfileToAccountSegue" id="3D3-9L-iuy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YDh-Qj-wfv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1105" y="367"/>
+        </scene>
+        <!--Create Ring Account View Controller-->
+        <scene sceneID="hlW-WP-KN4">
+            <objects>
+                <viewController id="ja8-pO-qtF" customClass="CreateRingAccountViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lys-bB-GcZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="5jn-tZ-fJ1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iHs-VJ-9vN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exC-LF-5rp" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="111.5" y="318.5" width="152" height="30"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Create a Ring account">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createRingAccount:" destination="ja8-pO-qtF" eventType="touchUpInside" id="dqx-z5-xdu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="exC-LF-5rp" firstAttribute="centerY" secondItem="iHs-VJ-9vN" secondAttribute="centerY" id="3gQ-AK-GLL"/>
+                            <constraint firstItem="exC-LF-5rp" firstAttribute="centerX" secondItem="iHs-VJ-9vN" secondAttribute="centerX" id="eBl-JO-6ae"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="E3W-r7-J4y" kind="show" identifier="AccountToPermissionsSegue" id="KYM-Jg-1oB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fjG-WS-Fbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1868" y="367"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="c8H-6M-3dO">
+            <objects>
+                <viewController id="E3W-r7-J4y" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fe9-Ak-7RC"/>
+                        <viewControllerLayoutGuide type="bottom" id="9DO-dt-Omo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DGL-2A-dSe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bS8-E0-lOu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2646" y="367"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="JGg-HD-FXJ">
+            <objects>
+                <viewController id="Pvr-wr-tIH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gkO-23-STp"/>
+                        <viewControllerLayoutGuide type="bottom" id="6TZ-Qs-gfp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q5g-8U-TUZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aLY-Iv-Nss" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1106" y="-330"/>
         </scene>
     </scenes>
 </document>
