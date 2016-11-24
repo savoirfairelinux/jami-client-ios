@@ -10,6 +10,9 @@
 		02419BCF1DC3E75700DF0734 /* libboost_random.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCD1DC3E75700DF0734 /* libboost_random.a */; };
 		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
 		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
+		0294ECD81DE5F0E0006BD537 /* RINGRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294ECD71DE5F0E0006BD537 /* RINGRoundedButton.swift */; };
+		0294ECDB1DE5F891006BD537 /* RINGCreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294ECDA1DE5F891006BD537 /* RINGCreateProfileViewController.swift */; };
+		0294ECDD1DE5F974006BD537 /* RINGCreateRingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294ECDC1DE5F974006BD537 /* RINGCreateRingAccountViewController.swift */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
 		02E1A0211DDE4A3700D75B59 /* RINGAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* RINGAccountModel.swift */; };
 		02E1A0221DDE4A3700D75B59 /* RINGAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9B1C91DDE409C00FE123D /* RINGAccountViewModel.swift */; };
@@ -107,6 +110,9 @@
 		02419BCD1DC3E75700DF0734 /* libboost_random.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_random.a; path = ../fat/lib/libboost_random.a; sourceTree = "<group>"; };
 		02419BCE1DC3E75700DF0734 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../fat/lib/libboost_system.a; sourceTree = "<group>"; };
 		02419BD11DC3E76A00DF0734 /* libcryptopp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcryptopp.a; path = ../fat/lib/libcryptopp.a; sourceTree = "<group>"; };
+		0294ECD71DE5F0E0006BD537 /* RINGRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGRoundedButton.swift; path = UI/RINGRoundedButton.swift; sourceTree = "<group>"; };
+		0294ECDA1DE5F891006BD537 /* RINGCreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGCreateProfileViewController.swift; path = Walkthrough/RINGCreateProfileViewController.swift; sourceTree = "<group>"; };
+		0294ECDC1DE5F974006BD537 /* RINGCreateRingAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGCreateRingAccountViewController.swift; path = Walkthrough/RINGCreateRingAccountViewController.swift; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
 		02F9B1BC1DDDF2E400FE123D /* RINGWalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = RINGWalkthroughStoryboard.storyboard; path = Walkthrough/RINGWalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
 		02F9B1C31DDDFF4300FE123D /* RINGMainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGMainTabBarViewController.swift; path = MainTabBar/RINGMainTabBarViewController.swift; sourceTree = "<group>"; };
@@ -275,6 +281,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0294ECD91DE5F4E4006BD537 /* Walkthrough */ = {
+			isa = PBXGroup;
+			children = (
+				0294ECDA1DE5F891006BD537 /* RINGCreateProfileViewController.swift */,
+				0294ECDC1DE5F974006BD537 /* RINGCreateRingAccountViewController.swift */,
+			);
+			name = Walkthrough;
+			sourceTree = "<group>";
+		};
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				043866351D22D06500E06CE2 /* AccountTableViewCell.swift */,
+				0294ECD71DE5F0E0006BD537 /* RINGRoundedButton.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -369,6 +385,7 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				0294ECD91DE5F4E4006BD537 /* Walkthrough */,
 				02E1A0271DDE4C3900D75B59 /* Account */,
 				02E1A0261DDE4C2E00D75B59 /* Services */,
 				02F9B1C21DDDFF0E00FE123D /* MainTabBar */,
@@ -556,7 +573,7 @@
 				TargetAttributes = {
 					043999F21D1C2D9D00E99CD9 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 73LS4VP8J7;
+						DevelopmentTeam = KM95526DS8;
 						LastSwiftMigration = 0810;
 					};
 					04399A0B1D1C2D9D00E99CD9 = {
@@ -628,9 +645,12 @@
 				02E1A0211DDE4A3700D75B59 /* RINGAccountModel.swift in Sources */,
 				02E1A0221DDE4A3700D75B59 /* RINGAccountViewModel.swift in Sources */,
 				02E1A0231DDE4A3700D75B59 /* RINGAccountsService.swift in Sources */,
+				0294ECDB1DE5F891006BD537 /* RINGCreateProfileViewController.swift in Sources */,
 				02E1A0241DDE4A3700D75B59 /* RINGNotificationNames.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
+				0294ECD81DE5F0E0006BD537 /* RINGRoundedButton.swift in Sources */,
+				0294ECDD1DE5F974006BD537 /* RINGCreateRingAccountViewController.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
@@ -785,12 +805,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = KM95526DS8;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.Ring;
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Ring-Bridging-Header.h";
@@ -807,12 +828,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = KM95526DS8;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.Ring;
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Ring-Bridging-Header.h";
