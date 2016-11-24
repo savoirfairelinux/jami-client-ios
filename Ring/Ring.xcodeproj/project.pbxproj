@@ -20,6 +20,9 @@
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdaptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdaptor.mm */; };
 		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdaptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdaptor.mm */; };
 		024B61331DF765CA00C4F9DE /* DaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E081DF7585F000358C9 /* DaemonService.swift */; };
+		028CC4031E09748F0025E8B4 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028CC4011E09748F0025E8B4 /* CreateProfileViewController.swift */; };
+		028CC4041E09748F0025E8B4 /* CreateRingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028CC4021E09748F0025E8B4 /* CreateRingAccountViewController.swift */; };
+		028CC4061E0976B10025E8B4 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028CC4051E0976B10025E8B4 /* RoundedButton.swift */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
 		02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFA1DF755BB000358C9 /* AccountModel.swift */; };
 		02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */; };
@@ -129,6 +132,9 @@
 		024B612F1DF7656A00C4F9DE /* FixtureFailStartDRingAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailStartDRingAdaptor.h; path = Fixtures/DRingAdaptor/FixtureFailStartDRingAdaptor.h; sourceTree = "<group>"; };
 		024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdaptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailStartDRingAdaptor.mm; path = Fixtures/DRingAdaptor/FixtureFailStartDRingAdaptor.mm; sourceTree = "<group>"; };
 		028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RingTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		028CC4011E09748F0025E8B4 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateProfileViewController.swift; path = Walkthrough/CreateProfileViewController.swift; sourceTree = "<group>"; };
+		028CC4021E09748F0025E8B4 /* CreateRingAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateRingAccountViewController.swift; path = Walkthrough/CreateRingAccountViewController.swift; sourceTree = "<group>"; };
+		028CC4051E0976B10025E8B4 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = UI/RoundedButton.swift; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
 		02B22DFA1DF755BB000358C9 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountModel.swift; path = Account/AccountModel.swift; sourceTree = "<group>"; };
 		02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountViewModel.swift; path = Account/AccountViewModel.swift; sourceTree = "<group>"; };
@@ -323,6 +329,15 @@
 			name = DRingAdaptor;
 			sourceTree = "<group>";
 		};
+		028CC4001E09746C0025E8B4 /* Walkthrough */ = {
+			isa = PBXGroup;
+			children = (
+				028CC4011E09748F0025E8B4 /* CreateProfileViewController.swift */,
+				028CC4021E09748F0025E8B4 /* CreateRingAccountViewController.swift */,
+			);
+			name = Walkthrough;
+			sourceTree = "<group>";
+		};
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +398,7 @@
 		043866341D22D04E00E06CE2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				028CC4051E0976B10025E8B4 /* RoundedButton.swift */,
 				043866351D22D06500E06CE2 /* AccountTableViewCell.swift */,
 			);
 			name = UI;
@@ -423,6 +439,7 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				028CC4001E09746C0025E8B4 /* Walkthrough */,
 				02E1A0271DDE4C3900D75B59 /* Account */,
 				02E1A0261DDE4C2E00D75B59 /* Services */,
 				02F9B1C21DDDFF0E00FE123D /* MainTabBar */,
@@ -722,13 +739,16 @@
 				02E81B9B1E003C07009B97D4 /* AccountConfigurationManagerAdaptorDelegate.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountConfigurationManagerAdaptator.mm in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
+				028CC4031E09748F0025E8B4 /* CreateProfileViewController.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
+				028CC4041E09748F0025E8B4 /* CreateRingAccountViewController.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
+				028CC4061E0976B10025E8B4 /* RoundedButton.swift in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdaptator.mm in Sources */,
