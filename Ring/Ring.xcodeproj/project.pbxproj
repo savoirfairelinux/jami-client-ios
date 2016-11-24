@@ -17,6 +17,9 @@
 		02674C851E0C757B0065EDF9 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02674C811E0C757B0065EDF9 /* RxCocoa.framework */; };
 		02674C861E0C757B0065EDF9 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02674C821E0C757B0065EDF9 /* RxSwift.framework */; };
 		0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C2FE1E0C438F00CF00BA /* AccountAdapterDelegate.swift */; };
+		0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */; };
+		0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */; };
+		0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3071E0C68BF00CF00BA /* RoundedButton.swift */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
 		02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFA1DF755BB000358C9 /* AccountModel.swift */; };
 		02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */; };
@@ -125,6 +128,9 @@
 		02674C831E0C757B0065EDF9 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		0273C2FE1E0C438F00CF00BA /* AccountAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAdapterDelegate.swift; path = Services/AccountAdapterDelegate.swift; sourceTree = "<group>"; };
 		0273C3001E0C445200CF00BA /* RingPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RingPrefixHeader.pch; path = Ring/RingPrefixHeader.pch; sourceTree = "<group>"; };
+		0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateProfileViewController.swift; path = Walkthrough/CreateProfileViewController.swift; sourceTree = "<group>"; };
+		0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateRingAccountViewController.swift; path = Walkthrough/CreateRingAccountViewController.swift; sourceTree = "<group>"; };
+		0273C3071E0C68BF00CF00BA /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = UI/RoundedButton.swift; sourceTree = "<group>"; };
 		028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RingTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
 		02B22DFA1DF755BB000358C9 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountModel.swift; path = Account/AccountModel.swift; sourceTree = "<group>"; };
@@ -296,6 +302,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0273C3021E0C689600CF00BA /* Walkthrough */ = {
+			isa = PBXGroup;
+			children = (
+				0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */,
+				0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */,
+			);
+			name = Walkthrough;
+			sourceTree = "<group>";
+		};
 		028568231DF60E5C003A8D8D /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +404,7 @@
 		043866341D22D04E00E06CE2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0273C3071E0C68BF00CF00BA /* RoundedButton.swift */,
 				043866351D22D06500E06CE2 /* AccountTableViewCell.swift */,
 			);
 			name = UI;
@@ -429,6 +445,7 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				0273C3021E0C689600CF00BA /* Walkthrough */,
 				02EFCACF1E0C3DD600FD8ED1 /* Bridging */,
 				02E1A0271DDE4C3900D75B59 /* Account */,
 				02E1A0261DDE4C2E00D75B59 /* Services */,
@@ -692,9 +709,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */,
 				02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
+				0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
@@ -703,6 +722,7 @@
 				02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
+				0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
