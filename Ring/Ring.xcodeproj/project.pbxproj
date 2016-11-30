@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0209CAD41E01A6F30059F0C1 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209CAD21E01A6F30059F0C1 /* RxSwift.framework */; };
+		0209CAD71E01A7020059F0C1 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209CAD61E01A7020059F0C1 /* RxCocoa.framework */; };
+		0209CAD81E01A71A0059F0C1 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209CAD61E01A7020059F0C1 /* RxCocoa.framework */; };
+		0209CAD91E01A71A0059F0C1 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209CAD21E01A6F30059F0C1 /* RxSwift.framework */; };
+		0209CADA1E01A71A0059F0C1 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209CAD31E01A6F30059F0C1 /* RxTest.framework */; };
+		0209CADC1E01A71B0059F0C1 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209CADB1E01A71B0059F0C1 /* RxBlocking.framework */; };
 		02419BCF1DC3E75700DF0734 /* libboost_random.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCD1DC3E75700DF0734 /* libboost_random.a */; };
 		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
 		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
@@ -109,6 +115,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0209CAD21E01A6F30059F0C1 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		0209CAD31E01A6F30059F0C1 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
+		0209CAD61E01A7020059F0C1 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		0209CADB1E01A71B0059F0C1 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		02146ED21DFB0098000B4568 /* Ring-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Ring-Bridging-Header.h"; path = "Bridging/Ring-Bridging-Header.h"; sourceTree = "<group>"; };
 		02419BCD1DC3E75700DF0734 /* libboost_random.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_random.a; path = ../fat/lib/libboost_random.a; sourceTree = "<group>"; };
 		02419BCE1DC3E75700DF0734 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../fat/lib/libboost_system.a; sourceTree = "<group>"; };
@@ -211,6 +221,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0209CAD71E01A7020059F0C1 /* RxCocoa.framework in Frameworks */,
+				0209CAD41E01A6F30059F0C1 /* RxSwift.framework in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
 				02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */,
 				02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */,
@@ -275,6 +287,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0209CADC1E01A71B0059F0C1 /* RxBlocking.framework in Frameworks */,
+				0209CAD81E01A71A0059F0C1 /* RxCocoa.framework in Frameworks */,
+				0209CAD91E01A71A0059F0C1 /* RxSwift.framework in Frameworks */,
+				0209CADA1E01A71A0059F0C1 /* RxTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +326,10 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0209CADB1E01A71B0059F0C1 /* RxBlocking.framework */,
+				0209CAD61E01A7020059F0C1 /* RxCocoa.framework */,
+				0209CAD21E01A6F30059F0C1 /* RxSwift.framework */,
+				0209CAD31E01A6F30059F0C1 /* RxTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -535,6 +555,7 @@
 				043999EF1D1C2D9D00E99CD9 /* Sources */,
 				043999F01D1C2D9D00E99CD9 /* Frameworks */,
 				043999F11D1C2D9D00E99CD9 /* Resources */,
+				0209CAD11E01A6B50059F0C1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -552,6 +573,7 @@
 				04399A081D1C2D9D00E99CD9 /* Sources */,
 				04399A091D1C2D9D00E99CD9 /* Frameworks */,
 				04399A0A1D1C2D9D00E99CD9 /* Resources */,
+				0209CAD01E01A58D0059F0C1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -655,6 +677,41 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0209CAD01E01A58D0059F0C1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxTest.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		0209CAD11E01A6B50059F0C1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		043999EF1D1C2D9D00E99CD9 /* Sources */ = {
@@ -830,6 +887,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KM95526DS8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
@@ -858,6 +919,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KM95526DS8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
@@ -878,6 +943,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -894,6 +963,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
