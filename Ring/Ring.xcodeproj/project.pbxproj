@@ -535,6 +535,7 @@
 				043999EF1D1C2D9D00E99CD9 /* Sources */,
 				043999F01D1C2D9D00E99CD9 /* Frameworks */,
 				043999F11D1C2D9D00E99CD9 /* Resources */,
+				0273C3011E0C655900CF00BA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -655,6 +656,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0273C3011E0C655900CF00BA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxTest.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		043999EF1D1C2D9D00E99CD9 /* Sources */ = {
