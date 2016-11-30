@@ -12,7 +12,6 @@
         <!--Navigation Controller-->
         <scene sceneID="azk-5X-z35">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c5B-LX-9rY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="RINGWalkthroughStoryboard" id="GnB-zf-djy" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pgv-sV-7YL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -26,6 +25,7 @@
                         <segue destination="zOM-us-BHp" kind="relationship" relationship="rootViewController" id="Cs0-7s-oVR"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c5B-LX-9rY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-489" y="24"/>
         </scene>
@@ -139,9 +139,6 @@
                                 <state key="normal" title="Create a Ring account">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="createRingAccount:" destination="ja8-pO-qtF" eventType="touchUpInside" id="dqx-z5-xdu"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -151,6 +148,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="mCreateAccountButton" destination="exC-LF-5rp" id="fuI-6e-uk5"/>
                         <segue destination="E3W-r7-J4y" kind="show" identifier="AccountToPermissionsSegue" id="KYM-Jg-1oB"/>
                     </connections>
                 </viewController>

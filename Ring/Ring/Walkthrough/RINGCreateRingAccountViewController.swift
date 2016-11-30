@@ -20,8 +20,33 @@
 
 import UIKit
 
+import RxCocoa
+
 class RINGCreateRingAccountViewController: UIViewController {
-    @IBAction func createRingAccount(_ sender: Any) {
-        print("Create Ring account.")
+    @IBOutlet weak var mCreateAccountButton: RINGRoundedButton!
+
+    var mAccountViewModel: RINGAccountViewModel?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.mAccountViewModel = RINGAccountViewModel.init(
+            withAccount: nil,
+            createAccountAction:self.mCreateAccountButton
+                .rx
+                .tap
+                .takeUntil(self.rx.deallocated)
+                .asObservable()
+        )
+
+        _ = self.mAccountViewModel?.mAccount?.asObservable().subscribe(onNext: { accountModel in
+            print(accountModel)
+        }, onError: { error in
+            print(error.localizedDescription)
+        }, onCompleted: { 
+            print("mAccountViewModel Completed")
+        }, onDisposed: { 
+            print("mAccountViewModel Disposed")
+        })
     }
 }

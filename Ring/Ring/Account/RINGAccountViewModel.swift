@@ -18,12 +18,43 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import RxCocoa
+import RxSwift
 
 struct RINGAccountViewModel {
-    fileprivate var account: RINGAccountModel
+    fileprivate var fpAccount: Variable<RINGAccountModel>?
+    var mAccount: Variable<RINGAccountModel>? {
+        set {
+            fpAccount = newValue
+        }
+        get {
+            let lAccount = fpAccount
+            return lAccount
+        }
+    }
 
-    init (withAccount account: RINGAccountModel) {
-        self.account = account
+    fileprivate var fpCreateAccountObservable: Observable<Void>?
+    var mCreateAccountObservable: Observable<Void>? {
+        set {
+            fpCreateAccountObservable = newValue
+            _ = fpCreateAccountObservable?.subscribe(onNext: {
+                print("Create account action")
+            }, onError: { error in
+                print("CreateAccountObservable error : %@", error.localizedDescription)
+            }, onCompleted: {
+                print("CreateAccountObservable completed")
+            }, onDisposed: {
+                print("CreateAccountObservable disposed")
+            })
+        }
+        get {
+            let lCreateAccountObservable = fpCreateAccountObservable
+            return lCreateAccountObservable
+        }
+    }
+
+    init (withAccount account: Variable<RINGAccountModel>?, createAccountAction: Observable<Void>?) {
+        self.mAccount = account
+        self.mCreateAccountObservable = createAccountAction
     }
 }
