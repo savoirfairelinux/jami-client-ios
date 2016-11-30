@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020DB8D51DEDEED5000D5C02 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 020DB8D11DEDEED5000D5C02 /* RxCocoa.framework */; };
+		020DB8D61DEDEED5000D5C02 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 020DB8D21DEDEED5000D5C02 /* RxSwift.framework */; };
 		02419BCF1DC3E75700DF0734 /* libboost_random.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCD1DC3E75700DF0734 /* libboost_random.a */; };
 		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
 		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
@@ -14,6 +16,10 @@
 		0294ECDB1DE5F891006BD537 /* RINGCreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294ECDA1DE5F891006BD537 /* RINGCreateProfileViewController.swift */; };
 		0294ECDD1DE5F974006BD537 /* RINGCreateRingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294ECDC1DE5F974006BD537 /* RINGCreateRingAccountViewController.swift */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
+		02D7AB611DEDF0F9002D553D /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 020DB8D01DEDEED5000D5C02 /* RxBlocking.framework */; };
+		02D7AB621DEDF0FA002D553D /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 020DB8D01DEDEED5000D5C02 /* RxBlocking.framework */; };
+		02D7AB631DEDF0FD002D553D /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 020DB8D31DEDEED5000D5C02 /* RxTest.framework */; };
+		02D7AB641DEDF0FE002D553D /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 020DB8D31DEDEED5000D5C02 /* RxTest.framework */; };
 		02E1A0211DDE4A3700D75B59 /* RINGAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* RINGAccountModel.swift */; };
 		02E1A0221DDE4A3700D75B59 /* RINGAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9B1C91DDE409C00FE123D /* RINGAccountViewModel.swift */; };
 		02E1A0231DDE4A3700D75B59 /* RINGAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866251D22C42F00E06CE2 /* RINGAccountsService.swift */; };
@@ -107,6 +113,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		020DB8D01DEDEED5000D5C02 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		020DB8D11DEDEED5000D5C02 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		020DB8D21DEDEED5000D5C02 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		020DB8D31DEDEED5000D5C02 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		02419BCD1DC3E75700DF0734 /* libboost_random.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_random.a; path = ../fat/lib/libboost_random.a; sourceTree = "<group>"; };
 		02419BCE1DC3E75700DF0734 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../fat/lib/libboost_system.a; sourceTree = "<group>"; };
 		02419BD11DC3E76A00DF0734 /* libcryptopp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcryptopp.a; path = ../fat/lib/libcryptopp.a; sourceTree = "<group>"; };
@@ -204,6 +214,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				020DB8D51DEDEED5000D5C02 /* RxCocoa.framework in Frameworks */,
+				020DB8D61DEDEED5000D5C02 /* RxSwift.framework in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
 				02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */,
 				02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */,
@@ -268,6 +280,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D7AB631DEDF0FD002D553D /* RxTest.framework in Frameworks */,
+				02D7AB611DEDF0F9002D553D /* RxBlocking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +289,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D7AB641DEDF0FE002D553D /* RxTest.framework in Frameworks */,
+				02D7AB621DEDF0FA002D553D /* RxBlocking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +309,10 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				020DB8D01DEDEED5000D5C02 /* RxBlocking.framework */,
+				020DB8D11DEDEED5000D5C02 /* RxCocoa.framework */,
+				020DB8D21DEDEED5000D5C02 /* RxSwift.framework */,
+				020DB8D31DEDEED5000D5C02 /* RxTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -515,6 +535,7 @@
 				043999EF1D1C2D9D00E99CD9 /* Sources */,
 				043999F01D1C2D9D00E99CD9 /* Frameworks */,
 				043999F11D1C2D9D00E99CD9 /* Resources */,
+				020DB8D81DEDEEDE000D5C02 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -635,6 +656,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		020DB8D81DEDEEDE000D5C02 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxTest.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		043999EF1D1C2D9D00E99CD9 /* Sources */ = {
@@ -806,6 +847,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = KM95526DS8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -829,6 +874,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = KM95526DS8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -846,6 +895,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingTests;
@@ -859,6 +912,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingTests;
@@ -871,6 +928,10 @@
 		04399A271D1C2D9D00E99CD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITests;
@@ -883,6 +944,10 @@
 		04399A281D1C2D9D00E99CD9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITests;
