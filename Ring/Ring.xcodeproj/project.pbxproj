@@ -20,6 +20,7 @@
 		02D7AB621DEDF0FA002D553D /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 020DB8D01DEDEED5000D5C02 /* RxBlocking.framework */; };
 		02D7AB631DEDF0FD002D553D /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 020DB8D31DEDEED5000D5C02 /* RxTest.framework */; };
 		02D7AB641DEDF0FE002D553D /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 020DB8D31DEDEED5000D5C02 /* RxTest.framework */; };
+		02DD26731DEF41410060A576 /* RINGDaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD26721DEF41410060A576 /* RINGDaemonService.swift */; };
 		02E1A0211DDE4A3700D75B59 /* RINGAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* RINGAccountModel.swift */; };
 		02E1A0221DDE4A3700D75B59 /* RINGAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9B1C91DDE409C00FE123D /* RINGAccountViewModel.swift */; };
 		02E1A0231DDE4A3700D75B59 /* RINGAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866251D22C42F00E06CE2 /* RINGAccountsService.swift */; };
@@ -124,6 +125,7 @@
 		0294ECDA1DE5F891006BD537 /* RINGCreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGCreateProfileViewController.swift; path = Walkthrough/RINGCreateProfileViewController.swift; sourceTree = "<group>"; };
 		0294ECDC1DE5F974006BD537 /* RINGCreateRingAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGCreateRingAccountViewController.swift; path = Walkthrough/RINGCreateRingAccountViewController.swift; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
+		02DD26721DEF41410060A576 /* RINGDaemonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGDaemonService.swift; path = Services/RINGDaemonService.swift; sourceTree = "<group>"; };
 		02F9B1BC1DDDF2E400FE123D /* RINGWalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = RINGWalkthroughStoryboard.storyboard; path = Walkthrough/RINGWalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
 		02F9B1C31DDDFF4300FE123D /* RINGMainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGMainTabBarViewController.swift; path = MainTabBar/RINGMainTabBarViewController.swift; sourceTree = "<group>"; };
 		02F9B1C61DDE123A00FE123D /* RINGNotificationNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGNotificationNames.swift; path = Extensions/RINGNotificationNames.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				043866251D22C42F00E06CE2 /* RINGAccountsService.swift */,
+				02DD26721DEF41410060A576 /* RINGDaemonService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				02F9B1C41DDDFF4300FE123D /* RINGMainTabBarViewController.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdaptator.mm in Sources */,
+				02DD26731DEF41410060A576 /* RINGDaemonService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,6 +865,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Ring-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -887,6 +892,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Ring-Bridging-Header.h";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
