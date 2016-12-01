@@ -25,4 +25,4 @@
 //
 
 #import "ConfigurationManagerAdaptator.h"
-#import "DRingAdaptator.h"
+#import "DRingAdapter.h"

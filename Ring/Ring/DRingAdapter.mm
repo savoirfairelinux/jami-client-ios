@@ -19,12 +19,31 @@
  * USA.
  */
 
-#import <Foundation/Foundation.h>
+#import "DRingAdapter.h"
 
-@interface DRingAdaptator : NSObject
-- (BOOL)initDaemon;
-- (BOOL)startDaemon;
-- (void)fini;
-- (void)pollEvents;
-- (nonnull NSString*)getVersion;
+#import "dring/dring.h"
+
+@implementation DRingAdapter
+
+- (BOOL)initDaemon {
+  int flag = DRing::DRING_FLAG_CONSOLE_LOG | DRing::DRING_FLAG_DEBUG;
+  return DRing::init(static_cast<DRing::InitFlag>(flag));
+}
+
+- (BOOL)startDaemon {
+  return DRing::start();
+}
+
+- (void)fini {
+  DRing::fini();
+}
+
+- (void)pollEvents {
+  DRing::pollEvents();
+}
+
+- (NSString*)getVersion {
+  return [NSString stringWithUTF8String:DRing::version()];
+}
+
 @end
