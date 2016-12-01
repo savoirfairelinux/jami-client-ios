@@ -2,6 +2,7 @@
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,20 +26,11 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let dRingAdapt = DRingAdaptator()
+    let daemonService = DaemonService.init(dRingAdaptor: DRingAdaptator())
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        if (dRingAdapt.initDaemon() == true) {
-            if (dRingAdapt.startDaemon() == true) {
-                Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(AppDelegate.pollFunction), userInfo: nil, repeats: true)
-                AccountsService.sharedInstance.reload()
-            }
-        }
+        self.startDaemon()
         return true
-    }
-
-    func pollFunction() {
-        self.dRingAdapt.pollEvents()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -61,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         self.saveContext()
-        self.dRingAdapt.fini()
+        self.stopDaemon()
     }
 
     // MARK: - Core Data stack
@@ -127,5 +119,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    // MARK: - Ring Daemon
+    fileprivate func startDaemon() {
+        do {
+            try self.daemonService.startDaemon()
+        } catch StartDaemonError.InitializationFailure {
+            print("Daemon failed to initialize.")
+        } catch StartDaemonError.StartFailure {
+            print("Daemon failed to start.")
+        } catch StartDaemonError.DaemonAlreadyRunning {
+            print("Daemon already running.")
+        } catch {
+            print("Unknown error in Daemon start.")
+        }
+    }
+
+    fileprivate func stopDaemon() {
+        do {
+            try self.daemonService.stopDaemon()
+        } catch StopDaemonError.DaemonNotRunning {
+            print("Daemon failed to stop because it was not already running.")
+        } catch {
+            print("Unknown error in Daemon stop.")
+        }
+    }
 }
 

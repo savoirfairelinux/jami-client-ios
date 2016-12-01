@@ -17,6 +17,7 @@
 		02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E001DF755E5000358C9 /* MainTabBarViewController.swift */; };
 		02B22E031DF755F7000358C9 /* WalkthroughStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B22E021DF755F7000358C9 /* WalkthroughStoryboard.storyboard */; };
 		02B22E051DF75605000358C9 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E041DF75605000358C9 /* NotificationNames.swift */; };
+		02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E081DF7585F000358C9 /* DaemonService.swift */; };
 		02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866371D2304A700E06CE2 /* BoolStringExtension.swift */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
 		043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866321D22CE8C00E06CE2 /* MeViewController.swift */; };
@@ -114,6 +115,7 @@
 		02B22E001DF755E5000358C9 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarViewController.swift; path = MainTabBar/MainTabBarViewController.swift; sourceTree = "<group>"; };
 		02B22E021DF755F7000358C9 /* WalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WalkthroughStoryboard.storyboard; path = Walkthrough/WalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
 		02B22E041DF75605000358C9 /* NotificationNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationNames.swift; path = Extensions/NotificationNames.swift; sourceTree = "<group>"; };
+		02B22E081DF7585F000358C9 /* DaemonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DaemonService.swift; path = Services/DaemonService.swift; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		043866321D22CE8C00E06CE2 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		043866351D22D06500E06CE2 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 		02E1A0261DDE4C2E00D75B59 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				02B22E081DF7585F000358C9 /* DaemonService.swift */,
 				02B22DFE1DF755DB000358C9 /* AccountsService.swift */,
 			);
 			name = Services;
@@ -626,6 +629,7 @@
 			files = (
 				02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm in Sources */,
+				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
