@@ -11,6 +11,10 @@
 		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
 		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
 		028566891DF5BA8B003A8D8D /* RINGDaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028566881DF5BA8B003A8D8D /* RINGDaemonService.swift */; };
+		028568211DF5FD87003A8D8D /* RINGDaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028568201DF5FD87003A8D8D /* RINGDaemonServiceTests.swift */; };
+		028568221DF5FDD3003A8D8D /* RINGDaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028566881DF5BA8B003A8D8D /* RINGDaemonService.swift */; };
+		0285682F1DF60F79003A8D8D /* RINGFixtureFailInitDRingAdaptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0285682E1DF60F79003A8D8D /* RINGFixtureFailInitDRingAdaptor.mm */; };
+		028568331DF611A3003A8D8D /* RINGFixtureFailStartDRingAdaptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 028568321DF611A3003A8D8D /* RINGFixtureFailStartDRingAdaptor.mm */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
 		02E1A0211DDE4A3700D75B59 /* RINGAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866231D22C3BC00E06CE2 /* RINGAccountModel.swift */; };
 		02E1A0221DDE4A3700D75B59 /* RINGAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F9B1C91DDE409C00FE123D /* RINGAccountViewModel.swift */; };
@@ -109,6 +113,12 @@
 		02419BCE1DC3E75700DF0734 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../fat/lib/libboost_system.a; sourceTree = "<group>"; };
 		02419BD11DC3E76A00DF0734 /* libcryptopp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcryptopp.a; path = ../fat/lib/libcryptopp.a; sourceTree = "<group>"; };
 		028566881DF5BA8B003A8D8D /* RINGDaemonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGDaemonService.swift; path = Services/RINGDaemonService.swift; sourceTree = "<group>"; };
+		028568201DF5FD87003A8D8D /* RINGDaemonServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RINGDaemonServiceTests.swift; sourceTree = "<group>"; };
+		0285682D1DF60F79003A8D8D /* RINGFixtureFailInitDRingAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RINGFixtureFailInitDRingAdaptor.h; path = Fixtures/DRingAdaptor/RINGFixtureFailInitDRingAdaptor.h; sourceTree = "<group>"; };
+		0285682E1DF60F79003A8D8D /* RINGFixtureFailInitDRingAdaptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RINGFixtureFailInitDRingAdaptor.mm; path = Fixtures/DRingAdaptor/RINGFixtureFailInitDRingAdaptor.mm; sourceTree = "<group>"; };
+		028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RingTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		028568311DF611A3003A8D8D /* RINGFixtureFailStartDRingAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RINGFixtureFailStartDRingAdaptor.h; path = Fixtures/DRingAdaptor/RINGFixtureFailStartDRingAdaptor.h; sourceTree = "<group>"; };
+		028568321DF611A3003A8D8D /* RINGFixtureFailStartDRingAdaptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RINGFixtureFailStartDRingAdaptor.mm; path = Fixtures/DRingAdaptor/RINGFixtureFailStartDRingAdaptor.mm; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
 		02F9B1BC1DDDF2E400FE123D /* RINGWalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = RINGWalkthroughStoryboard.storyboard; path = Walkthrough/RINGWalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
 		02F9B1C31DDDFF4300FE123D /* RINGMainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RINGMainTabBarViewController.swift; path = MainTabBar/RINGMainTabBarViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +287,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		028568231DF60E5C003A8D8D /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				028568241DF60E65003A8D8D /* DRingAdaptor */,
+			);
+			name = Fixtures;
+			sourceTree = "<group>";
+		};
+		028568241DF60E65003A8D8D /* DRingAdaptor */ = {
+			isa = PBXGroup;
+			children = (
+				028568311DF611A3003A8D8D /* RINGFixtureFailStartDRingAdaptor.h */,
+				028568321DF611A3003A8D8D /* RINGFixtureFailStartDRingAdaptor.mm */,
+				0285682D1DF60F79003A8D8D /* RINGFixtureFailInitDRingAdaptor.h */,
+				0285682E1DF60F79003A8D8D /* RINGFixtureFailInitDRingAdaptor.mm */,
+			);
+			name = DRingAdaptor;
+			sourceTree = "<group>";
+		};
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +420,9 @@
 		04399A0F1D1C2D9D00E99CD9 /* RingTests */ = {
 			isa = PBXGroup;
 			children = (
+				028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */,
+				028568231DF60E5C003A8D8D /* Fixtures */,
+				028568201DF5FD87003A8D8D /* RINGDaemonServiceTests.swift */,
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
 			);
@@ -649,7 +681,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0285682F1DF60F79003A8D8D /* RINGFixtureFailInitDRingAdaptor.mm in Sources */,
 				04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */,
+				028568211DF5FD87003A8D8D /* RINGDaemonServiceTests.swift in Sources */,
+				028568331DF611A3003A8D8D /* RINGFixtureFailStartDRingAdaptor.mm in Sources */,
+				028568221DF5FDD3003A8D8D /* RINGDaemonService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,10 +866,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RingTests/RingTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ring.app/Ring";
 			};
@@ -843,10 +882,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RingTests/RingTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ring.app/Ring";
 			};
@@ -857,7 +899,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = RingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Ring;
@@ -869,7 +911,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = RingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Ring;
