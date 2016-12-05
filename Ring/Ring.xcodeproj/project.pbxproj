@@ -10,6 +10,10 @@
 		02419BCF1DC3E75700DF0734 /* libboost_random.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCD1DC3E75700DF0734 /* libboost_random.a */; };
 		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
 		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
+		024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */; };
+		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */; };
+		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */; };
+		024B61331DF765CA00C4F9DE /* DaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E081DF7585F000358C9 /* DaemonService.swift */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
 		02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFA1DF755BB000358C9 /* AccountModel.swift */; };
 		02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */; };
@@ -108,6 +112,12 @@
 		02419BCD1DC3E75700DF0734 /* libboost_random.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_random.a; path = ../fat/lib/libboost_random.a; sourceTree = "<group>"; };
 		02419BCE1DC3E75700DF0734 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../fat/lib/libboost_system.a; sourceTree = "<group>"; };
 		02419BD11DC3E76A00DF0734 /* libcryptopp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcryptopp.a; path = ../fat/lib/libcryptopp.a; sourceTree = "<group>"; };
+		024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonServiceTests.swift; sourceTree = "<group>"; };
+		024B612D1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailInitDRingAdapter.h; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.h; sourceTree = "<group>"; };
+		024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailInitDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.mm; sourceTree = "<group>"; };
+		024B612F1DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailStartDRingAdapter.h; path = Fixtures/DRingAdaptor/FixtureFailStartDRingAdapter.h; sourceTree = "<group>"; };
+		024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailStartDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailStartDRingAdapter.mm; sourceTree = "<group>"; };
+		028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RingTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
 		02B22DFA1DF755BB000358C9 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountModel.swift; path = Account/AccountModel.swift; sourceTree = "<group>"; };
 		02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountViewModel.swift; path = Account/AccountViewModel.swift; sourceTree = "<group>"; };
@@ -277,6 +287,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		028568231DF60E5C003A8D8D /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				028568241DF60E65003A8D8D /* DRingAdapter */,
+			);
+			name = Fixtures;
+			sourceTree = "<group>";
+		};
+		028568241DF60E65003A8D8D /* DRingAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				024B612D1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.h */,
+				024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */,
+				024B612F1DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.h */,
+				024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */,
+			);
+			name = DRingAdapter;
+			sourceTree = "<group>";
+		};
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +420,9 @@
 		04399A0F1D1C2D9D00E99CD9 /* RingTests */ = {
 			isa = PBXGroup;
 			children = (
+				024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */,
+				028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */,
+				028568231DF60E5C003A8D8D /* Fixtures */,
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
 			);
@@ -649,7 +681,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */,
+				024B61331DF765CA00C4F9DE /* DaemonService.swift in Sources */,
 				04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */,
+				024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */,
+				024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,10 +866,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RingTests/RingTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ring.app/Ring";
 			};
@@ -843,10 +882,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RingTests/RingTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ring.app/Ring";
 			};
@@ -857,7 +899,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = RingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Ring;
@@ -869,7 +911,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = RingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Ring;
