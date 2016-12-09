@@ -2,6 +2,7 @@
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,16 +16,33 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
- * USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 #import <Foundation/Foundation.h>
 
-@interface DRingAdaptator : NSObject
-- (BOOL)initDaemon;
-- (BOOL)startDaemon;
-- (void)fini;
-- (void)pollEvents;
-- (nonnull NSString*)getVersion;
+@interface AccountConfigurationManagerAdaptator : NSObject
+
++ (id)sharedManager;
+
+- (void)registerConfigurationHandler;
+
+- (NSDictionary *)getAccountDetails:(NSString *)accountID;
+
+- (NSDictionary *)getVolatileAccountDetails:(NSString *)accountID;
+
+- (void)setAccountDetails:(NSString *)accountID
+                  details:(NSDictionary *)details;
+
+- (void)setAccountActive:(NSString *)accountID
+                  active:(bool)active;
+
+- (NSMutableDictionary *)getAccountTemplate:(NSString *)accountType;
+
+- (NSString *)addAccount:(NSDictionary *)details;
+
+- (void)removeAccount:(NSString *)accountID;
+
+- (NSArray *)getAccountList;
+
 @end
