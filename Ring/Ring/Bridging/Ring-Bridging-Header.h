@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
+ *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -18,8 +19,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-
-extension Notification.Name {
-    static let accountsChanged = Notification.Name("AccountsChanged")
-}
+/**
+ Expose Objective-C bridging classes to Swift.
+ */
+#import "ConfigurationManagerAdaptator.h"
+#import "DRingAdaptator.h"
+#import "NotificationNames.h"
