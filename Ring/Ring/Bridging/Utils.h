@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,17 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+#import <Foundation/Foundation.h>
 
-extension Notification.Name {
-    static let accountsChanged = Notification.Name("AccountsChanged")
-}
+#import <map>
+#import <string>
+#import <vector>
+
+@interface Utils : NSObject
+
++ (NSArray*)vectorToArray:(const std::vector<std::string>&)vector;
++ (NSMutableDictionary*)mapToDictionnary:
+    (const std::map<std::string, std::string>&)map;
++ (std::map<std::string, std::string>)dictionnaryToMap:(NSDictionary*)dict;
+
+@end
