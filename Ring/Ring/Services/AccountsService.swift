@@ -19,20 +19,33 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+/**
+ A service managing the accounts of the Daemon.
+ For the moment, only RING accounts are supported.
+ Its responsabilities:
+ - create a Ring Account
+ - delete a Ring Account
+ Its callbacks:
+ - does not currently expose any signal or callback of any kind.
+ */
 class AccountsService {
-    // MARK: - Properties
-    fileprivate let fpConfAdapt = ConfigurationManagerAdaptator.sharedManager() as AnyObject
-
-    /// Fileprivate Accounts list.
-    ///
-    /// Can be used for all the operations, but won't be accessed from outside this file.
-    ///
-    /// - SeeAlso: `accounts`
+    // MARK: Private members
+    /**
+     The ConfigurationManagerAdaptor making the bridge with the daemon.
+     */
+    fileprivate let fpConfAdapt = AccountConfigurationManagerAdaptator.sharedManager() as AnyObject
+    /**
+     Fileprivate Accounts list.
+     Can be used for all the operations, but won't be accessed from outside this file.
+     - SeeAlso: `accounts`
+     */
     fileprivate var fpAccountList: Array<AccountModel>
 
-    /// Accounts list public interface
-    ///
-    /// Can be used to access by constant the list of accounts.
+    // MARK: Private members
+    /**
+     Accounts list public interface
+     Can be used to access by constant the list of accounts.
+     */
     fileprivate(set) var accounts: Array<AccountModel> {
         set {
             fpAccountList = newValue
@@ -49,7 +62,7 @@ class AccountsService {
     fileprivate init() {
         fpAccountList = []
 
-        NotificationCenter.default.addObserver(forName: .accountsChanged,
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kNotificationAccountsChanged),
                                                object: nil,
                                                queue: nil,
                                                using: { _ in
@@ -88,5 +101,10 @@ class AccountsService {
         if row < fpAccountList.count {
             fpConfAdapt.removeAccount(fpAccountList[row].id)
         }
+    }
+
+    // MARK: - Callback handler
+    internal class ConfigurationCallbackHandler {
+
     }
 }
