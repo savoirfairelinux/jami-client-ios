@@ -21,11 +21,29 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ Forward declaration of the Swift delegate.
+ We have to do this because the Ring-Swift.h generated file can't be imported from a .h file.
+ The plain import is done in the .mm file.
+ */
+@protocol AccountConfigurationManagerAdaptorDelegate;
+
+/**
+ Class making the bridge between the Ring Daemon and the application.
+ It only concerns "Accounts related" features.
+ Its responsabilities:
+    - register to daemon callbacks,
+    - forward callbacks to the application thanks to the integrated delegation pattern,
+    - forward instructions coming from the app to the daemon
+ */
 @interface AccountConfigurationManagerAdaptator : NSObject
 
-+ (id)sharedManager;
+/**
+ Delegate where all the accounts events will be forwarded.
+ */
+@property (nonatomic, weak) id <AccountConfigurationManagerAdaptorDelegate> delegate;
 
-- (void)registerConfigurationHandler;
++ (instancetype)sharedManager;
 
 - (NSDictionary *)getAccountDetails:(NSString *)accountID;
 

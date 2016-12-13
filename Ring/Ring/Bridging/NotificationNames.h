@@ -23,6 +23,4 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const kNotificationAccountsChanged;
-
-#endif /* NotificationNames_hpp */
+#endif
