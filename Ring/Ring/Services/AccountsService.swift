@@ -19,9 +19,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class AccountsService {
+class AccountsService: AccountConfigurationManagerAdaptorDelegate {
     // MARK: - Properties
-    fileprivate let fpConfAdapt = AccountConfigurationManagerAdaptator.sharedManager() as AnyObject
+    fileprivate let fpConfAdapt = AccountConfigurationManagerAdaptator.sharedManager()
+        as AccountConfigurationManagerAdaptator
 
     /// Fileprivate Accounts list.
     ///
@@ -48,13 +49,7 @@ class AccountsService {
 
     fileprivate init() {
         fpAccountList = []
-
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kNotificationAccountsChanged),
-                                               object: nil,
-                                               queue: nil,
-                                               using: { _ in
-                                                self.reload()
-        })
+        fpConfAdapt.delegate = self as AccountConfigurationManagerAdaptorDelegate
     }
 
     // MARK: - Methods
@@ -88,5 +83,9 @@ class AccountsService {
         if row < fpAccountList.count {
             fpConfAdapt.removeAccount(fpAccountList[row].id)
         }
+    }
+
+    func accountsChanged() {
+
     }
 }

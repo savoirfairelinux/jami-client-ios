@@ -21,9 +21,13 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol AccountConfigurationManagerAdaptorDelegate;
+
 @interface AccountConfigurationManagerAdaptator : NSObject
 
-+ (id)sharedManager;
+@property (nonatomic, weak) id <AccountConfigurationManagerAdaptorDelegate> delegate;
+
++ (instancetype)sharedManager;
 
 - (void)registerConfigurationHandler;
 

@@ -19,6 +19,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+#import "Ring-Swift.h"
+
 #import "AccountConfigurationManagerAdaptator.h"
 #import "Utils.h"
 #import "NotificationNames.h"
@@ -30,7 +32,7 @@
 using namespace DRing;
 
 #pragma mark Singleton Methods
-+ (id)sharedManager {
++ (instancetype)sharedManager {
     static AccountConfigurationManagerAdaptator* sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -45,15 +47,16 @@ using namespace DRing;
     }
     return self;
 }
+
 #pragma mark -
 
 #pragma mark Callbacks
 - (void)registerConfigurationHandler {
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     confHandlers.insert(exportable_callback<ConfigurationSignal::AccountsChanged>([&]() {
-        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-        [nc postNotificationName:kNotificationAccountsChanged
-                          object:[AccountConfigurationManagerAdaptator sharedManager]];
+        if ([[AccountConfigurationManagerAdaptator sharedManager] delegate]) {
+            [[[AccountConfigurationManagerAdaptator sharedManager] delegate] accountsChanged];
+        }
     }));
     registerConfHandlers(confHandlers);
 }
