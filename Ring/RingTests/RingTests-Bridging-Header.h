@@ -23,8 +23,7 @@
 //  Use this file to import your target's public headers that you would like to
 //  expose to Swift.
 //
-
-#import "ConfigurationManagerAdaptator.h"
+#import "AccountConfigurationManagerAdaptator.h"
 #import "DRingAdaptator.h"
 #import "FixtureFailInitDRingAdaptor.h"
 #import "FixtureFailStartDRingAdaptor.h"
