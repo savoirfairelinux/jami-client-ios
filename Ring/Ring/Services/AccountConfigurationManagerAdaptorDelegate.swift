@@ -18,11 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#ifndef NotificationNames_hpp
-#define NotificationNames_hpp
-
-#import <Foundation/Foundation.h>
-
-extern NSString * const kNotificationAccountsChanged;
-
-#endif /* NotificationNames_hpp */
+@objc protocol AccountConfigurationManagerAdaptorDelegate {
+    func accountsChanged()
+}
