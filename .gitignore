@@ -21,3 +21,6 @@ Ring/Ring.xcodeproj/xcuserdata/
 Pods/
 
 Ring/Build/
+
+# Carthage
+Ring/Carthage/
