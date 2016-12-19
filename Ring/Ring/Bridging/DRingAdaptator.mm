@@ -2,6 +2,7 @@
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,24 +26,73 @@
 @implementation DRingAdaptator
 
 - (BOOL)initDaemon {
-  int flag = DRing::DRING_FLAG_CONSOLE_LOG | DRing::DRING_FLAG_DEBUG;
-  return DRing::init(static_cast<DRing::InitFlag>(flag));
+    if (![[NSThread currentThread] isMainThread]) {
+        __block bool success;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            success = [self initDaemonInternal];
+        });
+        return success;
+    }
+    else {
+        return [self initDaemonInternal];
+    }
+}
+
+- (BOOL) initDaemonInternal {
+    int flag = DRing::DRING_FLAG_CONSOLE_LOG | DRing::DRING_FLAG_DEBUG;
+    return DRing::init(static_cast<DRing::InitFlag>(flag));
 }
 
 - (BOOL)startDaemon {
-  return DRing::start();
+    if (![[NSThread currentThread] isMainThread]) {
+        __block bool success;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            success = [self startDaemonInternal];
+        });
+        return success;
+    }
+    else {
+        return [self startDaemonInternal];
+    }
+}
+
+- (BOOL)startDaemonInternal {
+    return DRing::start();
 }
 
 - (void)fini {
-  DRing::fini();
+    if (![[NSThread currentThread] isMainThread]) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            DRing::fini();
+        });
+    }
+    else {
+        DRing::fini();
+    }
 }
 
 - (void)pollEvents {
-  DRing::pollEvents();
+    if (![[NSThread currentThread] isMainThread]) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            DRing::pollEvents();
+        });
+    }
+    else {
+        DRing::pollEvents();
+    }
 }
 
 - (NSString*)getVersion {
-  return [NSString stringWithUTF8String:DRing::version()];
+    if (![[NSThread currentThread] isMainThread]) {
+        __block NSString *version;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            version = [NSString stringWithUTF8String:DRing::version()];
+        });
+        return version;
+    }
+    else {
+        return [NSString stringWithUTF8String:DRing::version()];
+    }
 }
 
 @end
