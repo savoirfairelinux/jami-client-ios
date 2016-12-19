@@ -13,6 +13,7 @@
 		0209CAD91E01A71A0059F0C1 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209CAD21E01A6F30059F0C1 /* RxSwift.framework */; };
 		0209CADA1E01A71A0059F0C1 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209CAD31E01A6F30059F0C1 /* RxTest.framework */; };
 		0209CADC1E01A71B0059F0C1 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0209CADB1E01A71B0059F0C1 /* RxBlocking.framework */; };
+		0209CAE01E03455C0059F0C1 /* DaemonThreadManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0209CADF1E03455C0059F0C1 /* DaemonThreadManager.mm */; };
 		02419BCF1DC3E75700DF0734 /* libboost_random.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCD1DC3E75700DF0734 /* libboost_random.a */; };
 		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
 		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
@@ -20,6 +21,7 @@
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdaptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdaptor.mm */; };
 		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdaptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdaptor.mm */; };
 		024B61331DF765CA00C4F9DE /* DaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E081DF7585F000358C9 /* DaemonService.swift */; };
+		024CD9331E084F2900D5259C /* DRingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CD9321E084F2900D5259C /* DRingDelegate.swift */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
 		02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFA1DF755BB000358C9 /* AccountModel.swift */; };
 		02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */; };
@@ -119,6 +121,8 @@
 		0209CAD31E01A6F30059F0C1 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		0209CAD61E01A7020059F0C1 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		0209CADB1E01A71B0059F0C1 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		0209CADF1E03455C0059F0C1 /* DaemonThreadManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DaemonThreadManager.mm; path = Bridging/DaemonThreadManager.mm; sourceTree = "<group>"; };
+		0209CAE11E0345C90059F0C1 /* DaemonThreadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DaemonThreadManager.h; path = Bridging/DaemonThreadManager.h; sourceTree = "<group>"; };
 		02146ED21DFB0098000B4568 /* Ring-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Ring-Bridging-Header.h"; path = "Bridging/Ring-Bridging-Header.h"; sourceTree = "<group>"; };
 		02419BCD1DC3E75700DF0734 /* libboost_random.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_random.a; path = ../fat/lib/libboost_random.a; sourceTree = "<group>"; };
 		02419BCE1DC3E75700DF0734 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../fat/lib/libboost_system.a; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 		024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdaptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailInitDRingAdaptor.mm; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdaptor.mm; sourceTree = "<group>"; };
 		024B612F1DF7656A00C4F9DE /* FixtureFailStartDRingAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailStartDRingAdaptor.h; path = Fixtures/DRingAdaptor/FixtureFailStartDRingAdaptor.h; sourceTree = "<group>"; };
 		024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdaptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailStartDRingAdaptor.mm; path = Fixtures/DRingAdaptor/FixtureFailStartDRingAdaptor.mm; sourceTree = "<group>"; };
+		024CD9321E084F2900D5259C /* DRingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DRingDelegate.swift; path = Services/DRingDelegate.swift; sourceTree = "<group>"; };
 		028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RingTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
 		02B22DFA1DF755BB000358C9 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountModel.swift; path = Account/AccountModel.swift; sourceTree = "<group>"; };
@@ -348,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				02E81B9A1E003C07009B97D4 /* AccountConfigurationManagerAdaptorDelegate.swift */,
+				024CD9321E084F2900D5259C /* DRingDelegate.swift */,
 				02B22E081DF7585F000358C9 /* DaemonService.swift */,
 				02B22DFE1DF755DB000358C9 /* AccountsService.swift */,
 			);
@@ -541,6 +547,8 @@
 				04399AA81D1C304300E99CD9 /* DRingAdaptator.mm */,
 				04399AAA1D1C304300E99CD9 /* Utils.h */,
 				04399AAB1D1C304300E99CD9 /* Utils.mm */,
+				0209CADF1E03455C0059F0C1 /* DaemonThreadManager.mm */,
+				0209CAE11E0345C90059F0C1 /* DaemonThreadManager.h */,
 			);
 			name = Bridging;
 			sourceTree = "<group>";
@@ -723,8 +731,10 @@
 				04399AAC1D1C304300E99CD9 /* AccountConfigurationManagerAdaptator.mm in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
+				024CD9331E084F2900D5259C /* DRingDelegate.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
+				0209CAE01E03455C0059F0C1 /* DaemonThreadManager.mm in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */,

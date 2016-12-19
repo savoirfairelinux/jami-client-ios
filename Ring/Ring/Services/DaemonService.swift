@@ -45,13 +45,13 @@ enum StopDaemonError: Error {
 /**
  A service managing the daemon main features and lifecycle.
  Its responsabilities:
-    - start the deamon
-    - stop the daemon
-    - orchestrate the poll events calls of the deamon
+ - start the deamon
+ - stop the daemon
+ - orchestrate the poll events calls of the deamon
  Its callbacks:
-    - does not currently expose any signal or callback of any kind.
+ - does not currently expose any signal or callback of any kind.
  */
-class DaemonService {
+class DaemonService: NSObject, DRingDelegate {
     // MARK: Private members
     /// Indicates whether the daemon is started or not.
     fileprivate(set) internal var daemonStarted = false
@@ -65,9 +65,13 @@ class DaemonService {
     /// The timer scheduling the calls to the poll method.
     fileprivate var pollingTimer:Timer?
 
-    // MARK: Initialization
-    init(dRingAdaptor:DRingAdaptator) {
+    // MARK: - Singleton
+    static let sharedInstance = DaemonService(dRingAdaptor: DRingAdaptator())
+
+    fileprivate init(dRingAdaptor:DRingAdaptator) {
         self.dRingAdaptor = dRingAdaptor
+        super.init()
+        self.dRingAdaptor.delegate = self
     }
 
     // MARK: Public API
@@ -81,21 +85,24 @@ class DaemonService {
             throw StartDaemonError.DaemonAlreadyRunning
         }
 
-        print("Starting daemon...")
-        if self.dRingAdaptor.initDaemon() {
-            print("Daemon initialized.")
-            if self.dRingAdaptor.startDaemon() {
-                self.startRingServicePolling()
-                self.daemonStarted = true
-                print("Daemon started.")
-            }
-            else {
-                throw StartDaemonError.StartFailure
-            }
-        }
-        else {
-            throw StartDaemonError.InitializationFailure
-        }
+        print("Initialize daemon...")
+
+        self.dRingAdaptor.initDaemon()
+
+        /*if self.dRingAdaptor.initDaemon() {
+         print("Daemon initialized.")
+         if self.dRingAdaptor.startDaemon() {
+         self.startRingServicePolling()
+         self.daemonStarted = true
+         print("Daemon started.")
+         }
+         else {
+         throw StartDaemonError.StartFailure
+         }
+         }
+         else {
+         throw StartDaemonError.InitializationFailure
+         }*/
     }
 
     /**
@@ -132,6 +139,34 @@ class DaemonService {
      This method must be @objc exposed to be called by the timer.
      */
     @objc fileprivate func pollFunction() {
+        print("Poll function")
         self.dRingAdaptor.pollEvents()
+    }
+
+    func daemonInitialized(success: Bool) {
+        if success {
+            print("Start deamon...")
+            self.dRingAdaptor.startDaemon { (success) in
+                if success {
+                    self.startRingServicePolling()
+                    self.daemonStarted = true
+                    print("Daemon started.")
+                }
+                else {
+                    print("Daemon failed to start.")
+                }
+            }
+        }
+        else {
+            print("Daemon failed to initialize.")
+        }
+    }
+
+    func daemonStarted(success: Bool) {
+
+    }
+
+    func daemonStopped(success: Bool) {
+
     }
 }

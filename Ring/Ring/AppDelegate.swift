@@ -26,7 +26,6 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let daemonService = DaemonService.init(dRingAdaptor: DRingAdaptator())
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.startDaemon()
@@ -122,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Ring Daemon
     fileprivate func startDaemon() {
         do {
-            try self.daemonService.startDaemon()
+            try DaemonService.sharedInstance.startDaemon()
         } catch StartDaemonError.InitializationFailure {
             print("Daemon failed to initialize.")
         } catch StartDaemonError.StartFailure {
@@ -136,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     fileprivate func stopDaemon() {
         do {
-            try self.daemonService.stopDaemon()
+            try DaemonService.sharedInstance.stopDaemon()
         } catch StopDaemonError.DaemonNotRunning {
             print("Daemon failed to stop because it was not already running.")
         } catch {

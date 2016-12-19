@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,17 +20,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DRingDelegate;
+@interface DaemonThreadManager: NSObject
 
-@interface DRingAdaptator : NSObject
++ (instancetype)sharedManager;
 
-@property (nonatomic, weak) id <DRingDelegate> delegate;
-
-- (void)initDaemon;
-- (void)initDaemonWithCallbackBlock:(nullable void (^)(BOOL))callbackBlock;
-- (void)startDaemonWithCallbackBlock:(nullable void (^)(BOOL))callbackBlock;
-- (void)fini;
-- (void)pollEvents;
-- (nonnull NSString*)getVersion;
+@property (readonly, strong, nonatomic) NSThread *daemonThread;
 
 @end
