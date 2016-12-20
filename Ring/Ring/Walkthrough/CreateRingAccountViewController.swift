@@ -20,8 +20,58 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 class CreateRingAccountViewController: UIViewController {
-    @IBAction func createRingAccount(_ sender: Any) {
-        print("Create Ring account.")
+
+    var mAccountViewModel: AccountViewModel = AccountViewModel()
+
+    @IBOutlet weak var mCreateAccountButton: RoundedButton!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.bindViews()
+    }
+
+    /**
+     Bind all the necessary of this View to its ViewModel.
+     That allows to build the binding part of the MVVM pattern.
+     */
+    fileprivate func bindViews() {
+        //~ Create the stream. Won't start until an observer subscribes to it.
+        let createAccountObservable:Observable<Void> = self.mCreateAccountButton
+            .rx
+            .tap
+            .takeUntil(self.rx.deallocated)
+
+        mAccountViewModel.configureAddAccountObservers(
+            observable: createAccountObservable,
+            onStart: { [weak self] in
+                self?.setCreateAccountAsLoading()
+            },
+            onSuccess: { [weak self] in
+                print("Account created.")
+                self?.setCreateAccountAsIdle()
+            },
+            onError:  { [weak self] (error) in
+                print("Error creating account...")
+                if error != nil {
+                    print(error!)
+                }
+                self?.setCreateAccountAsIdle()
+        })
+    }
+
+    fileprivate func setCreateAccountAsLoading() {
+        print("Creating account...")
+        self.mCreateAccountButton.setTitle("Loading...", for: .normal)
+        self.mCreateAccountButton.isUserInteractionEnabled = false
+    }
+
+    fileprivate func setCreateAccountAsIdle() {
+        self.mCreateAccountButton.setTitle("Create a Ring account", for: .normal)
+        self.mCreateAccountButton.isUserInteractionEnabled = true
     }
 }
