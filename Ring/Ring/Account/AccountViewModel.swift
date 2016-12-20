@@ -18,12 +18,41 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import RxSwift
 
-struct AccountViewModel {
-    fileprivate var account: AccountModel
+/**
+ Protocol representing the blueprint of properties of this ViewModel
+ */
+protocol AccountViewModelProtocol {
+    /**
+     PublishSubject reacting to an action of tapping on a button asking for the creation of an
+     account.
+     */
+    var addAccountButtonDidTap: PublishSubject<Void> { get }
+}
 
-    init (withAccount account: AccountModel) {
-        self.account = account
+/**
+ A structure representing the ViewModel (MVVM) of the accounts managed by Ring.
+ Its responsabilities:
+ - expose to the Views a public API for its interactions concerning the Accounts,
+ - react to the Views user events concerning the Accounts (add an account...)
+ */
+struct AccountViewModel: AccountViewModelProtocol {
+    /**
+     Dispose bag that contains the Disposable objects of the ViewModel, and managing their disposes.
+     */
+    fileprivate let disposeBag = DisposeBag()
+
+    let addAccountButtonDidTap = PublishSubject<Void>()
+
+    init () {
+        //~ Subscribing to the event to trigger the concrete action.
+        //~ The trigger will be converted in a new signal in a future patch to break the strong link
+        //~ between this ViewModel and the Service.
+        self.addAccountButtonDidTap
+            .subscribe(onNext:{
+                AccountsService.sharedInstance.addAccount()
+            })
+            .addDisposableTo(self.disposeBag)
     }
 }
