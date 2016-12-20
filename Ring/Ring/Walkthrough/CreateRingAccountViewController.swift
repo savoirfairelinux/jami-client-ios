@@ -20,8 +20,31 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 class CreateRingAccountViewController: UIViewController {
-    @IBAction func createRingAccount(_ sender: Any) {
-        print("Create Ring account.")
+
+    var mAccountViewModel: AccountViewModel = AccountViewModel()
+
+    @IBOutlet weak var mCreateAccountButton: RoundedButton!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.bindViews()
+    }
+
+    /**
+     Bind all the necessary of this View to its ViewModel.
+     That allows to build the binding part of the MVVM pattern.
+     */
+    fileprivate func bindViews() {
+        //~ Bind create account button with ViewModel
+        _ = self.mCreateAccountButton
+            .rx
+            .tap
+            .takeUntil(self.rx.deallocated)
+            .bindTo(self.mAccountViewModel.addAccountAction)
     }
 }
