@@ -139,9 +139,6 @@
                                 <state key="normal" title="Create a Ring account">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="createRingAccount:" destination="ja8-pO-qtF" eventType="touchUpInside" id="dqx-z5-xdu"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -151,6 +148,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="mCreateAccountButton" destination="exC-LF-5rp" id="z71-gN-58V"/>
                         <segue destination="E3W-r7-J4y" kind="show" identifier="AccountToPermissionsSegue" id="KYM-Jg-1oB"/>
                     </connections>
                 </viewController>
