@@ -22,6 +22,30 @@
       "revId": "0d69386008b14532381b9c7a2550517f96b3e3ff",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_815f3e72",
+        "filename": "Ring/RingTests/DaemonServiceTests.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-12-22T16:17:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ace114c_e1dac216",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 5
+      },
+      "revId": "0d69386008b14532381b9c7a2550517f96b3e3ff",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
