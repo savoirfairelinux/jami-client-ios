@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3ace114c_0174aefb",
+        "filename": "Ring/Ring/Services/DaemonService.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-12-22T16:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ace114c_81ec1ec9",
+      "range": {
+        "startLine": 60,
+        "startChar": 38,
+        "endLine": 60,
+        "endChar": 47
+      },
+      "revId": "927a0c43d46fb07d04ca72a644d2655a21177da9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ace114c_21d1aafb",
         "filename": "Ring/Ring/Services/DaemonService.swift",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-22T13:44:18Z",
       "side": 1,
       "message": "missing space here",
+      "range": {
+        "startLine": 69,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 23
+      },
+      "revId": "927a0c43d46fb07d04ca72a644d2655a21177da9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_a1603a36",
+        "filename": "Ring/Ring/Services/DaemonService.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-12-22T16:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ace114c_21d1aafb",
       "range": {
         "startLine": 69,
         "startChar": 21,
