@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ace114c_c1e226d5",
+        "filename": "Ring/Ring/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-12-22T13:36:04Z",
+      "side": 1,
+      "message": "Same remark as for fileprivate.\n\nIf someone tries to assign a new value to this property, an error will be thrown, so the \u0027l\u0027 seems overkill.\nAgain I may ignore another usecase.",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 23
+      },
+      "revId": "cbceb835ee66f780f92b81dc891121248da51bcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_a1dd9a16",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-12-22T13:36:04Z",
+      "side": 1,
+      "message": "I am not a fan of describing the accessibility of this property in the name. So far I haven\u0027t seen this in other swift example but I may not know a special need for this.\n\nIMO when a property is fileprivate, it can only be used within this class (or subclass and extensions). This means it is not possible to mistakenly use it from outside this class, specifying it is fileprivate in the name (fp) seems overkill",
+      "range": {
+        "startLine": 24,
+        "startChar": 20,
+        "endLine": 24,
+        "endChar": 31
+      },
+      "revId": "cbceb835ee66f780f92b81dc891121248da51bcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_01c10e2e",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-12-22T13:36:04Z",
+      "side": 1,
+      "message": "Adaptor or Adapter",
+      "range": {
+        "startLine": 24,
+        "startChar": 54,
+        "endLine": 24,
+        "endChar": 63
+      },
+      "revId": "cbceb835ee66f780f92b81dc891121248da51bcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
