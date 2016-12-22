@@ -24,4 +24,3 @@
  */
 #import "AccountAdapter.h"
 #import "DRingAdapter.h"
-#import "NotificationNames.h"
