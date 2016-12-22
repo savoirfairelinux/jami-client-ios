@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ace114c_24af78e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-12-22T23:05:55Z",
+      "side": 1,
+      "message": "in what",
+      "range": {
+        "startLine": 14,
+        "startChar": 29,
+        "endLine": 14,
+        "endChar": 40
+      },
+      "revId": "a929070db640bb34e25d34ea31d7b9cad83f1640",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_84aaecd2",
+        "filename": "Ring/Ring/Bridging/AccountAdapter.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-12-22T23:05:55Z",
+      "side": 1,
+      "message": "Just a warning but I think the confHandlers contains some callbacks not related to accounts. It means that at some points this initialization will need to be shared with other services I think.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 39
+      },
+      "revId": "a929070db640bb34e25d34ea31d7b9cad83f1640",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
