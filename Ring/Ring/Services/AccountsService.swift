@@ -19,20 +19,27 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class AccountsService {
-    // MARK: - Properties
-    fileprivate let confAdapter = AccountAdapter.sharedManager() as AnyObject
+class AccountsService: AccountAdapterDelegate {
+    // MARK: Private members
+    /**
+     AccountConfigurationManagerAdaptator instance.
+     Used to register the service to daemon events.
+     */
+    fileprivate let confAdapter = AccountAdapter.sharedManager() as AccountAdapter
 
-    /// Fileprivate Accounts list.
-    ///
-    /// Can be used for all the operations, but won't be accessed from outside this file.
-    ///
-    /// - SeeAlso: `accounts`
+    /**
+     Fileprivate Accounts list.
+     Can be used for all the operations, but won't be accessed from outside this file.
+
+     - SeeAlso: `accounts`
+     */
     fileprivate var accountList: Array<AccountModel>
 
-    /// Accounts list public interface
-    ///
-    /// Can be used to access by constant the list of accounts.
+    // MARK: - Public members
+    /**
+     Accounts list public interface.
+     Can be used to access by constant the list of accounts.
+     */
     fileprivate(set) var accounts: Array<AccountModel> {
         set {
             accountList = newValue
@@ -49,12 +56,9 @@ class AccountsService {
     fileprivate init() {
         accountList = []
 
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kNotificationAccountsChanged),
-                                               object: nil,
-                                               queue: nil,
-                                               using: { _ in
-                                                self.reload()
-        })
+        //~ Registering to the AccountConfigurationManagerAdaptator with self as delegate in order
+        //~ to receive delegation callbacks.
+        confAdapter.delegate = self
     }
 
     // MARK: - Methods
@@ -88,5 +92,10 @@ class AccountsService {
         if row < accountList.count {
             confAdapter.removeAccount(accountList[row].id)
         }
+    }
+
+    // MARK: - AccountAdapterDelegate
+    func accountsChanged() {
+        print("Accounts changed.")
     }
 }
