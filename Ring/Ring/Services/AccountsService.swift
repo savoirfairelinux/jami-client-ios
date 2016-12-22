@@ -21,7 +21,7 @@
 
 class AccountsService {
     // MARK: - Properties
-    fileprivate let confAdapter = ConfigurationManagerAdaptator.sharedManager() as AnyObject
+    fileprivate let confAdapter = AccountAdapter.sharedManager() as AnyObject
 
     /// Fileprivate Accounts list.
     ///
@@ -49,7 +49,7 @@ class AccountsService {
     fileprivate init() {
         accountList = []
 
-        NotificationCenter.default.addObserver(forName: .accountsChanged,
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kNotificationAccountsChanged),
                                                object: nil,
                                                queue: nil,
                                                using: { _ in
