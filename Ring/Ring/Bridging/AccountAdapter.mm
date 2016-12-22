@@ -19,19 +19,19 @@
  * USA.
  */
 
-#import "ConfigurationManagerAdaptator.h"
+#import "AccountAdapter.h"
 #import "Utils.h"
 
 #import "dring/configurationmanager_interface.h"
 
-@implementation ConfigurationManagerAdaptator
+@implementation AccountAdapter
 
 using namespace DRing;
 
 #pragma mark Singleton Methods
 
 + (id)sharedManager {
-  static ConfigurationManagerAdaptator* sharedMyManager = nil;
+  static AccountAdapter* sharedMyManager = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     sharedMyManager = [[self alloc] init];
@@ -125,7 +125,7 @@ using namespace DRing;
       exportable_callback<ConfigurationSignal::AccountsChanged>([&]() {
         NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationName:@"AccountsChanged"
-                          object:[ConfigurationManagerAdaptator sharedManager]];
+                          object:[AccountAdapter sharedManager]];
       }));
 
   registerConfHandlers(confHandlers);

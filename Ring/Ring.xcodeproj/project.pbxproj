@@ -20,9 +20,9 @@
 		02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFE1DF755DB000358C9 /* AccountsService.swift */; };
 		02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E001DF755E5000358C9 /* MainTabBarViewController.swift */; };
 		02B22E031DF755F7000358C9 /* WalkthroughStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B22E021DF755F7000358C9 /* WalkthroughStoryboard.storyboard */; };
-		02B22E051DF75605000358C9 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E041DF75605000358C9 /* NotificationNames.swift */; };
 		02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E081DF7585F000358C9 /* DaemonService.swift */; };
 		02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866371D2304A700E06CE2 /* BoolStringExtension.swift */; };
+		02EFCAD11E0C3F6200FD8ED1 /* NotificationNames.mm in Sources */ = {isa = PBXBuildFile; fileRef = 02EFCAD01E0C3F6200FD8ED1 /* NotificationNames.mm */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
 		043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866321D22CE8C00E06CE2 /* MeViewController.swift */; };
 		043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866351D22D06500E06CE2 /* AccountTableViewCell.swift */; };
@@ -39,7 +39,7 @@
 		04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A931D1C2F5800E99CD9 /* libiconv.tbd */; };
 		04399A971D1C2F6100E99CD9 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A951D1C2F6100E99CD9 /* libbz2.tbd */; };
 		04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A961D1C2F6100E99CD9 /* libz.tbd */; };
-		04399AAC1D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AA61D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm */; };
+		04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AA61D1C304300E99CD9 /* AccountAdapter.mm */; };
 		04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AA81D1C304300E99CD9 /* DRingAdapter.mm */; };
 		04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
 		04399AE41D1C341A00E99CD9 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB21D1C341A00E99CD9 /* libavcodec.a */; };
@@ -124,8 +124,9 @@
 		02B22DFE1DF755DB000358C9 /* AccountsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountsService.swift; path = Services/AccountsService.swift; sourceTree = "<group>"; };
 		02B22E001DF755E5000358C9 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarViewController.swift; path = MainTabBar/MainTabBarViewController.swift; sourceTree = "<group>"; };
 		02B22E021DF755F7000358C9 /* WalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WalkthroughStoryboard.storyboard; path = Walkthrough/WalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
-		02B22E041DF75605000358C9 /* NotificationNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationNames.swift; path = Extensions/NotificationNames.swift; sourceTree = "<group>"; };
 		02B22E081DF7585F000358C9 /* DaemonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DaemonService.swift; path = Services/DaemonService.swift; sourceTree = "<group>"; };
+		02EFCAD01E0C3F6200FD8ED1 /* NotificationNames.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NotificationNames.mm; path = Bridging/NotificationNames.mm; sourceTree = "<group>"; };
+		02EFCAD21E0C3F8200FD8ED1 /* NotificationNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NotificationNames.h; path = Bridging/NotificationNames.h; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		043866321D22CE8C00E06CE2 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		043866351D22D06500E06CE2 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -149,13 +150,13 @@
 		04399A931D1C2F5800E99CD9 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		04399A951D1C2F6100E99CD9 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		04399A961D1C2F6100E99CD9 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		04399AA51D1C304300E99CD9 /* ConfigurationManagerAdaptator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationManagerAdaptator.h; sourceTree = "<group>"; };
-		04399AA61D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConfigurationManagerAdaptator.mm; sourceTree = "<group>"; };
-		04399AA71D1C304300E99CD9 /* DRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRingAdapter.h; sourceTree = "<group>"; };
-		04399AA81D1C304300E99CD9 /* DRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DRingAdapter.mm; sourceTree = "<group>"; };
-		04399AA91D1C304300E99CD9 /* Ring-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ring-Bridging-Header.h"; sourceTree = "<group>"; };
-		04399AAA1D1C304300E99CD9 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
-		04399AAB1D1C304300E99CD9 /* Utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
+		04399AA51D1C304300E99CD9 /* AccountAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccountAdapter.h; path = Bridging/AccountAdapter.h; sourceTree = "<group>"; };
+		04399AA61D1C304300E99CD9 /* AccountAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AccountAdapter.mm; path = Bridging/AccountAdapter.mm; sourceTree = "<group>"; };
+		04399AA71D1C304300E99CD9 /* DRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DRingAdapter.h; path = Bridging/DRingAdapter.h; sourceTree = "<group>"; };
+		04399AA81D1C304300E99CD9 /* DRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DRingAdapter.mm; path = Bridging/DRingAdapter.mm; sourceTree = "<group>"; };
+		04399AA91D1C304300E99CD9 /* Ring-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Ring-Bridging-Header.h"; path = "Bridging/Ring-Bridging-Header.h"; sourceTree = "<group>"; };
+		04399AAA1D1C304300E99CD9 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Bridging/Utils.h; sourceTree = "<group>"; };
+		04399AAB1D1C304300E99CD9 /* Utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Utils.mm; path = Bridging/Utils.mm; sourceTree = "<group>"; };
 		04399AB21D1C341A00E99CD9 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../fat/lib/libavcodec.a; sourceTree = "<group>"; };
 		04399AB31D1C341A00E99CD9 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = ../fat/lib/libavdevice.a; sourceTree = "<group>"; };
 		04399AB41D1C341A00E99CD9 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = ../fat/lib/libavfilter.a; sourceTree = "<group>"; };
@@ -341,6 +342,22 @@
 			name = Account;
 			sourceTree = "<group>";
 		};
+		02EFCACF1E0C3DD600FD8ED1 /* Bridging */ = {
+			isa = PBXGroup;
+			children = (
+				04399AA91D1C304300E99CD9 /* Ring-Bridging-Header.h */,
+				04399AA51D1C304300E99CD9 /* AccountAdapter.h */,
+				04399AA61D1C304300E99CD9 /* AccountAdapter.mm */,
+				04399AA71D1C304300E99CD9 /* DRingAdapter.h */,
+				04399AA81D1C304300E99CD9 /* DRingAdapter.mm */,
+				04399AAA1D1C304300E99CD9 /* Utils.h */,
+				04399AAB1D1C304300E99CD9 /* Utils.mm */,
+				02EFCAD01E0C3F6200FD8ED1 /* NotificationNames.mm */,
+				02EFCAD21E0C3F8200FD8ED1 /* NotificationNames.h */,
+			);
+			name = Bridging;
+			sourceTree = "<group>";
+		};
 		02F9B1C21DDDFF0E00FE123D /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,7 +386,6 @@
 		043866391D2307C000E06CE2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				02B22E041DF75605000358C9 /* NotificationNames.swift */,
 				043866371D2304A700E06CE2 /* BoolStringExtension.swift */,
 			);
 			name = Extensions;
@@ -401,6 +417,7 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				02EFCACF1E0C3DD600FD8ED1 /* Bridging */,
 				02E1A0271DDE4C3900D75B59 /* Account */,
 				02E1A0261DDE4C2E00D75B59 /* Services */,
 				02F9B1C21DDDFF0E00FE123D /* MainTabBar */,
@@ -512,13 +529,6 @@
 		04399AAF1D1C305600E99CD9 /* DRingAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				04399AA91D1C304300E99CD9 /* Ring-Bridging-Header.h */,
-				04399AA51D1C304300E99CD9 /* ConfigurationManagerAdaptator.h */,
-				04399AA61D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm */,
-				04399AA71D1C304300E99CD9 /* DRingAdapter.h */,
-				04399AA81D1C304300E99CD9 /* DRingAdapter.mm */,
-				04399AAA1D1C304300E99CD9 /* Utils.h */,
-				04399AAB1D1C304300E99CD9 /* Utils.mm */,
 			);
 			name = DRingAdapter;
 			sourceTree = "<group>";
@@ -660,7 +670,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */,
-				04399AAC1D1C304300E99CD9 /* ConfigurationManagerAdaptator.mm in Sources */,
+				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
@@ -668,10 +678,10 @@
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */,
+				02EFCAD11E0C3F6200FD8ED1 /* NotificationNames.mm in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
-				02B22E051DF75605000358C9 /* NotificationNames.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */,
 			);
@@ -834,7 +844,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Ring-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -857,7 +867,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Ring-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

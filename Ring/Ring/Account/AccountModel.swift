@@ -91,7 +91,7 @@ struct AccountModel {
         get {return (details[accountEnabledKey]?.toBool())!}
         set {
             details[accountEnabledKey] = newValue.toString()
-            (ConfigurationManagerAdaptator.sharedManager() as AnyObject).setAccountActive(self.id, active: newValue)
+            (AccountAdapter.sharedManager() as AnyObject).setAccountActive(self.id, active: newValue)
         }
     }
 
@@ -118,10 +118,10 @@ struct AccountModel {
     // MARK: - Init
     init(accountID: String) {
         id = accountID
-        details = (ConfigurationManagerAdaptator.sharedManager() as AnyObject).getAccountDetails(id) as! Dictionary<String, String>
+        details = (AccountAdapter.sharedManager() as AnyObject).getAccountDetails(id) as! Dictionary<String, String>
     }
 
     func save() {
-        (ConfigurationManagerAdaptator.sharedManager() as AnyObject).setAccountDetails(id, details: details)
+        (AccountAdapter.sharedManager() as AnyObject).setAccountDetails(id, details: details)
     }
 }
