@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3ace114c_c109c696",
+        "filename": "Ring/Ring/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-12-22T16:07:02Z",
+      "side": 1,
+      "message": "Agreed for this one, refactor zeal.",
+      "parentUuid": "3ace114c_c1e226d5",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 23
+      },
+      "revId": "cbceb835ee66f780f92b81dc891121248da51bcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ace114c_a1dd9a16",
         "filename": "Ring/Ring/Services/AccountsService.swift",
         "patchSetId": 6
@@ -59,6 +83,54 @@
       "writtenOn": "2016-12-22T13:36:04Z",
       "side": 1,
       "message": "Adaptor or Adapter",
+      "range": {
+        "startLine": 24,
+        "startChar": 54,
+        "endLine": 24,
+        "endChar": 63
+      },
+      "revId": "cbceb835ee66f780f92b81dc891121248da51bcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_011d8ebd",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-12-22T16:07:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ace114c_a1dd9a16",
+      "range": {
+        "startLine": 24,
+        "startChar": 20,
+        "endLine": 24,
+        "endChar": 31
+      },
+      "revId": "cbceb835ee66f780f92b81dc891121248da51bcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_e11f22b6",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-12-22T16:07:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ace114c_01c10e2e",
       "range": {
         "startLine": 24,
         "startChar": 54,
