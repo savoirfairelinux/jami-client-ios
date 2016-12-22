@@ -19,10 +19,24 @@
  * USA.
  */
 
-//
-//  Use this file to import your target's public headers that you would like to
-//  expose to Swift.
-//
+#import <Foundation/Foundation.h>
 
-#import "ConfigurationManagerAdaptator.h"
-#import "DRingAdapter.h"
+@interface AccountAdapter : NSObject
+
++ (id)sharedManager;
+
+- (void)registerConfigurationHandler;
+
+- (NSArray*)getAccountList;
+- (NSMutableDictionary*)getAccountTemplate:(NSString*)accountType;
+- (NSString*)addAccount:(NSDictionary*)details;
+- (void)removeAccount:(NSString*)accountID;
+- (void)setAccountActive:(NSString*)accountID active:(bool)active;
+- (uint64_t)sendAccountTextMessage:(NSString*)accountID
+                                to:(NSString*)to
+                          payloads:(NSDictionary*)payloads;
+- (NSDictionary*)getAccountDetails:(NSString*)accountID;
+- (NSDictionary*)getVolatileAccountDetails:(NSString*)accountID;
+- (void)setAccountDetails:(NSString*)accountID details:(NSDictionary*)details;
+- (int)getMessageStatus:(uint64_t)msgID;
+@end
