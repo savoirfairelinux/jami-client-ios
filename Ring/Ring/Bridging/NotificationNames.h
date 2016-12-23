@@ -18,19 +18,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+#ifndef NotificationNames_hpp
+#define NotificationNames_hpp
 
-class MainTabBarViewController: UITabBarController {
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if !AccountsService.hasAccounts() {
-            self.presentWalkthrough()
-        }
-    }
+#import <Foundation/Foundation.h>
 
-    fileprivate func presentWalkthrough() {
-        let storyboard = UIStoryboard(name: "WalkthroughStoryboard", bundle: nil)
-        let viewController = storyboard.instantiateInitialViewController()!
-        self.present(viewController, animated: false, completion: nil)
-    }
-}
+extern NSString * const kNotificationAccountsChanged;
+
+#endif /* NotificationNames_hpp */
