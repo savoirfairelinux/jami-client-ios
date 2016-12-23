@@ -56,7 +56,7 @@ class CreateRingAccountViewController: UIViewController {
                 self?.setCreateAccountAsIdle()
             },
             onError:  { [weak self] (error) in
-                print("Error creating account...")
+                print("Error creating account.")
                 if error != nil {
                     print(error!)
                 }

@@ -33,12 +33,18 @@ struct AccountViewModel {
     fileprivate let disposeBag = DisposeBag()
 
     /**
+     An accountservice instance.
+     */
+    fileprivate let accountService = AccountsService()
+
+    /**
      Create the observers to the streams passed in parameters.
      It will allow this ViewModel to react to other entities' events.
 
      - Parameter observable: An observable stream to subscribe on.
      Any observed event on this stream will trigger the action of creating an account.
      - Parameter onStart: Closure that will be triggered when the action will begin.
+     - Parameter onStart: Closure that will be triggered when the action will succeed.
      - Parameter onError: Closure that will be triggered in case of error.
     */
     func configureAddAccountObservers(observable: Observable<Void>,
@@ -50,15 +56,13 @@ struct AccountViewModel {
                 if onStart != nil {
                     onStart!()
                 }
-                AccountsService.sharedInstance.addAccount()
+                self.accountService
+                    .addAccount(onSuccess: onSuccess,
+                                onError: onError)
             }, onError: { (error) in
                 if onError != nil {
                     onError!(error)
                 }
-            }, onCompleted: {
-                //~ Nothing to do.
-            }, onDisposed: {
-                //~ Nothing to do.
             })
             .addDisposableTo(disposeBag)
     }

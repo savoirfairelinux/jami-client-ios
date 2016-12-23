@@ -1,4 +1,4 @@
-/*
+ /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
@@ -23,6 +23,7 @@
 
 #import "AccountAdapter.h"
 #import "Utils.h"
+#import "NotificationNames.h"
 
 #import "dring/configurationmanager_interface.h"
 
@@ -52,10 +53,9 @@ using namespace DRing;
 - (void)registerConfigurationHandler {
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     confHandlers.insert(exportable_callback<ConfigurationSignal::AccountsChanged>([&]() {
-        //~ Using sharedManager to avoid as possible to retain self in the block.
-        if ([[AccountAdapter sharedManager] delegate]) {
-            [[[AccountAdapter sharedManager] delegate] accountsChanged];
-        }
+        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:kNotificationAccountsChanged
+                          object:[AccountAdapter sharedManager]];
     }));
     registerConfHandlers(confHandlers);
 }
