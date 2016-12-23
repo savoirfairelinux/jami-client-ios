@@ -18,19 +18,25 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import RxCocoa
 import RxSwift
 
 /**
- A structure representing the ViewModel (MVVM) of the accounts managed by Ring.
+ A class representing the ViewModel (MVVM) of the accounts managed by Ring.
  Its responsabilities:
  - expose to the Views a public API for its interactions concerning the Accounts,
  - react to the Views user events concerning the Accounts (add an account...)
  */
-struct AccountViewModel {
+class AccountViewModel {
     /**
      Dispose bag that contains the Disposable objects of the ViewModel, and managing their disposes.
      */
     fileprivate let disposeBag = DisposeBag()
+
+    /**
+     An accountservice instance.
+     */
+    fileprivate let accountService = AccountsService()
 
     /**
      Create the observers to the streams passed in parameters.
@@ -39,26 +45,34 @@ struct AccountViewModel {
      - Parameter observable: An observable stream to subscribe on.
      Any observed event on this stream will trigger the action of creating an account.
      - Parameter onStart: Closure that will be triggered when the action will begin.
+     - Parameter onSuccessCallback: Closure that will be triggered when the action will succeed.
      - Parameter onError: Closure that will be triggered in case of error.
-    */
+     */
     func configureAddAccountObservers(observable: Observable<Void>,
-                                      onStart: ((() -> Void)?),
-                                      onSuccess: ((() -> Void)?),
-                                      onError: (((Error?) -> Void)?)) {
+                                      onStartCallback: ((() -> Void)?),
+                                      onSuccessCallback: ((() -> Void)?),
+                                      onErrorCallback: (((Error?) -> Void)?)) {
         _ = observable
-            .subscribe(onNext: {
-                if onStart != nil {
-                    onStart!()
+            .subscribe(onNext: { [weak self] in
+                if onStartCallback != nil {
+                    onStartCallback!()
                 }
-                AccountsService.sharedInstance.addAccount()
+
+                self?.accountService.addAccount(
+                    onSuccessCallback: {
+                        if onSuccessCallback != nil {
+                            onSuccessCallback!()
+                        }
+                },
+                    onErrorCallback: { error in
+                        if onErrorCallback != nil {
+                            onErrorCallback!(error)
+                        }
+                })
             }, onError: { (error) in
-                if onError != nil {
-                    onError!(error)
+                if onErrorCallback != nil {
+                    onErrorCallback!(error)
                 }
-            }, onCompleted: {
-                //~ Nothing to do.
-            }, onDisposed: {
-                //~ Nothing to do.
             })
             .addDisposableTo(disposeBag)
     }
