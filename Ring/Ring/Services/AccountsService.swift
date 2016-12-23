@@ -22,7 +22,12 @@
 import RxCocoa
 import RxSwift
 
-class AccountsService: AccountAdapterDelegate {
+enum AccountRxEvent {
+    case AddAccount
+    case AccountChanged
+}
+
+class AccountsService {
     // MARK: Private members
     /**
      AccountConfigurationManagerAdaptator instance.
@@ -36,7 +41,25 @@ class AccountsService: AccountAdapterDelegate {
 
      - SeeAlso: `accounts`
      */
-    fileprivate var accountList: Array<AccountModel>
+    fileprivate var accountList: Array<AccountModel> = []
+
+    /**
+     Dispose bag that contains the Disposable objects of the ViewModel, and managing their disposes.
+     */
+    fileprivate let disposeBag = DisposeBag()
+
+    /**
+     PublishSubject forwarding AccountRxEvent events.
+     The service can observe this stream to know what has been done.
+     
+     - SeeAlso: `AccountRxEvent`
+     */
+    fileprivate var responseStream: PublishSubject<AccountRxEvent>?
+
+    /**
+     The disposable returned when adding an account.
+     */
+    fileprivate var addAccountStream: Disposable?
 
     // MARK: - Public members
     /**
@@ -53,20 +76,68 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    // MARK: - Singleton
-    static let sharedInstance = AccountsService()
+    // MARK: - Lifecycle
+    init() {
+        //~ Create the response stream and add it to the dispose bag.
+        self.responseStream = PublishSubject<AccountRxEvent>()
+        self.responseStream?.addDisposableTo(disposeBag)
 
-    fileprivate init() {
-        accountList = []
+        //~ Register to the objc bridge between the daemon and the app.
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: #selector(accountsChanged),
+                         name: NSNotification.Name(rawValue: kNotificationAccountsChanged),
+                         object: nil)
 
-        //~ Registering to the AccountConfigurationManagerAdaptator with self as delegate in order
-        //~ to receive delegation callbacks.
-        confAdapter.delegate = self
+        reload()
+    }
+
+    deinit {
+        //~ Unregister the bridge events.
+        NotificationCenter
+            .default
+            .removeObserver(self,
+                            name: NSNotification.Name(rawValue: kNotificationAccountsChanged),
+                            object: nil)
+    }
+
+    // MARK: - Static Methods
+    static func hasAccounts() -> Bool {
+        return AccountAdapter.sharedManager().getAccountList().count > 0
     }
 
     // MARK: - Methods
-    func hasAccounts() -> Bool {
-        return accountList.count > 0
+    func addAccount(onSuccessCallback: ((() -> Void)?),
+                    onErrorCallback: (((Error?) -> Void)?)) {
+
+        //~ Dispose a currently undisposed stream to subscribe with new callbacks after that.
+        if self.addAccountStream != nil {
+            self.addAccountStream?.dispose()
+        }
+
+        self.addAccountStream = responseStream?
+            .subscribe(
+                onNext: { [weak self] (event) in
+                    switch event {
+                    case .AddAccount : self?.addAccount()
+                        break
+                    case .AccountChanged :
+                        if onSuccessCallback != nil {
+                            onSuccessCallback!()
+                        }
+                        break
+                    }
+            }, onError: { (error) in
+                print(error)
+                if onErrorCallback != nil {
+                    onErrorCallback!(error)
+                }
+            })
+        self.addAccountStream?.addDisposableTo(disposeBag)
+
+        //~ Request the action
+        self.responseStream?.onNext(.AddAccount)
     }
 
     func reload() {
@@ -77,7 +148,7 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    func addAccount() {
+    fileprivate func addAccount() {
         // TODO: This need work for all account type
         let details:NSMutableDictionary? = confAdapter.getAccountTemplate("RING")
         if details == nil {
@@ -97,8 +168,11 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    // MARK: - AccountAdapterDelegate
-    func accountsChanged() {
+    /**
+     Callback received from Notification.
+     */
+    @objc func accountsChanged() {
         print("Accounts changed.")
+        self.responseStream?.onNext(.AccountChanged)
     }
 }
