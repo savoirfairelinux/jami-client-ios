@@ -25,7 +25,7 @@ import RxSwift
 
 class CreateRingAccountViewController: UIViewController {
 
-    var mAccountViewModel: AccountViewModel = AccountViewModel()
+    let accountViewModel = AccountViewModel()
 
     @IBOutlet weak var mCreateAccountButton: RoundedButton!
 
@@ -46,17 +46,17 @@ class CreateRingAccountViewController: UIViewController {
             .tap
             .takeUntil(self.rx.deallocated)
 
-        mAccountViewModel.configureAddAccountObservers(
+        self.accountViewModel.configureAddAccountObservers(
             observable: createAccountObservable,
-            onStart: { [weak self] in
+            onStartCallback: { [weak self] in
                 self?.setCreateAccountAsLoading()
             },
-            onSuccess: { [weak self] in
+            onSuccessCallback: { [weak self] in
                 print("Account created.")
                 self?.setCreateAccountAsIdle()
             },
-            onError:  { [weak self] (error) in
-                print("Error creating account...")
+            onErrorCallback:  { [weak self] (error) in
+                print("Error creating account.")
                 if error != nil {
                     print(error!)
                 }

@@ -23,7 +23,7 @@ import UIKit
 class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Properties
-    let accountService = AccountsService.sharedInstance
+    let accountService = AccountsService()
     @IBOutlet weak var accountTableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var qrImageView: UIImageView!
@@ -39,10 +39,6 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 createQRFromString(username);
             }
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 
     // MARK: - QRCode
@@ -92,7 +88,7 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == accountService.accounts.count {
-            accountService.addAccount()
+            //accountService.addAccount()
             accountTableView.reloadData()
         }
     }
