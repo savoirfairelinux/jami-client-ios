@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ace114c_d2c3d236",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 156
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_f2c04e2c",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 148
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_92dd4a17",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 223
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_b2e2c6d3",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 211
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_f2d7eeeb",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 70
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_52e7e2e4",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 66
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_72ec5ec8",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 325,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 1
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_12d15afb",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 328,
+        "startChar": 0,
+        "endLine": 328,
+        "endChar": 52
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_d2daf216",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 685,
+        "startChar": 0,
+        "endLine": 685,
+        "endChar": 57
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_32ced65b",
+        "filename": "Ring/Ring.xcodeproj/project.pbxproj",
+        "patchSetId": 4
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:51:47Z",
+      "side": 1,
+      "message": "# RxTests and RxBlocking make the most sense in the context of unit/integration tests",
+      "range": {
+        "startLine": 686,
+        "startChar": 0,
+        "endLine": 686,
+        "endChar": 53
+      },
+      "revId": "b505173762be4bb679be5d50eacab62c5f869a88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
