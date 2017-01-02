@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ace114c_72877e10",
+        "filename": "Ring/Ring/Bridging/DRingAdapter.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2017-01-02T19:13:17Z",
+      "side": 1,
+      "message": "Is this function name correct ?",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 12
+      },
+      "revId": "4e5cd184cc5135210e73ff9bba8c1eaeaf41b63e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
