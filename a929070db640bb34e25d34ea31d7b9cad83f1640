@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3ace114c_92eeaa8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-01-03T14:59:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ace114c_24af78e5",
+      "range": {
+        "startLine": 14,
+        "startChar": 29,
+        "endLine": 14,
+        "endChar": 40
+      },
+      "revId": "a929070db640bb34e25d34ea31d7b9cad83f1640",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ace114c_84aaecd2",
         "filename": "Ring/Ring/Bridging/AccountAdapter.mm",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-22T23:05:55Z",
       "side": 1,
       "message": "Just a warning but I think the confHandlers contains some callbacks not related to accounts. It means that at some points this initialization will need to be shared with other services I think.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 39
+      },
+      "revId": "a929070db640bb34e25d34ea31d7b9cad83f1640",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_b2f3a672",
+        "filename": "Ring/Ring/Bridging/AccountAdapter.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-01-03T14:59:16Z",
+      "side": 1,
+      "message": "Actually you can perform as many registerConfHandlers as you want to.\nIt is a map that links a signal to a callback by a one-to-one relation. So you can register conf handlers from several files as far as there are no duplicates. If this is the case the last callback will override the first one.",
+      "parentUuid": "3ace114c_84aaecd2",
       "range": {
         "startLine": 52,
         "startChar": 0,
