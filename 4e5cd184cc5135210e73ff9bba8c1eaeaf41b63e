@@ -22,6 +22,30 @@
       "revId": "4e5cd184cc5135210e73ff9bba8c1eaeaf41b63e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ace114c_d280b28d",
+        "filename": "Ring/Ring/Bridging/DRingAdapter.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-01-03T15:40:47Z",
+      "side": 1,
+      "message": "Yes absolutely, it matches with the daemon method name.",
+      "parentUuid": "3ace114c_72877e10",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 12
+      },
+      "revId": "4e5cd184cc5135210e73ff9bba8c1eaeaf41b63e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
