@@ -65,7 +65,7 @@ class AccountViewModel {
                     self?.addAccountDisposable = AccountsService.sharedInstance
                         .responseStream
                         .subscribe(onNext:{ (event) in
-                            if event == AccountRxEvent.AccountChanged {
+                            if event.eventType == ServiceEventType.AccountsChanged {
                                 onSuccessCallback?()
                             }
                         }, onError: { error in
