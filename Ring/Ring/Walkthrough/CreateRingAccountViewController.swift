@@ -48,14 +48,14 @@ class CreateRingAccountViewController: UIViewController {
 
         mAccountViewModel.configureAddAccountObservers(
             observable: createAccountObservable,
-            onStart: { [weak self] in
+            onStartCallback: { [weak self] in
                 self?.setCreateAccountAsLoading()
             },
-            onSuccess: { [weak self] in
+            onSuccessCallback: { [weak self] in
                 print("Account created.")
                 self?.setCreateAccountAsIdle()
             },
-            onError:  { [weak self] (error) in
+            onErrorCallback:  { [weak self] (error) in
                 print("Error creating account...")
                 if error != nil {
                     print(error!)
