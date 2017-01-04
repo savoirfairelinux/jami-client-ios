@@ -22,15 +22,6 @@
 import RxCocoa
 import RxSwift
 
-/**
- Events that can be sent to the response stream
-
- - AccountChanged: the accounts have been changed daemon-side
- */
-enum AccountRxEvent {
-    case AccountChanged
-}
-
 class AccountsService: AccountAdapterDelegate {
     // MARK: Private members
     /**
@@ -70,7 +61,7 @@ class AccountsService: AccountAdapterDelegate {
 
      - SeeAlso: `AccountRxEvent`
      */
-    let responseStream = PublishSubject<AccountRxEvent>()
+    let responseStream = PublishSubject<ServiceEvent>()
 
     // MARK: - Singleton
     static let sharedInstance = AccountsService()
@@ -121,6 +112,9 @@ class AccountsService: AccountAdapterDelegate {
     // MARK: - AccountAdapterDelegate
     func accountsChanged() {
         print("Accounts changed.")
-        self.responseStream.onNext(.AccountChanged)
+        reload()
+
+        let event = ServiceEvent.init(withEventType: .AccountsChanged)
+        self.responseStream.onNext(event)
     }
 }
