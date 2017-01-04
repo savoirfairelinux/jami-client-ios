@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ace114c_93954ce6",
+        "filename": "Ring/Ring/Account/AccountViewModel.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-01-04T23:09:20Z",
+      "side": 1,
+      "message": "Why switching to a class now?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 5
+      },
+      "revId": "2467c54d43ff9768baff8b5fe6292ed6effeff97",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
