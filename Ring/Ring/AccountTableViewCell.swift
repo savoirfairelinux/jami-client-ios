@@ -40,6 +40,6 @@ class AccountTableViewCell: UITableViewCell {
 
     // MARK: - Actions
     @IBAction func switchAccountState(_ sender: UISwitch) {
-        account.isEnabled = sender.isOn
+//        account.isEnabled = sender.isOn
     }
 }
