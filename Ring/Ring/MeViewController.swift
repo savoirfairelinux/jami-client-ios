@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *
@@ -33,11 +33,11 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
 
         if accountService.accounts.count > 0 {
-            let acc = accountService.accounts[0]
-            nameLabel.text = acc.displayName
-            if let username = acc.username {
-                createQRFromString(username);
-            }
+//            let acc = accountService.accounts[0]
+//            nameLabel.text = acc.displayName
+//            if let username = acc.username {
+//                createQRFromString(username);
+//            }
         }
     }
 
@@ -78,9 +78,9 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             let account = accountService.accounts[indexPath.row]
 
             cell.account = account
-            cell.accountNameLabel.text = account.alias
-            cell.activeSwitch.setOn(account.isEnabled, animated: false)
-            cell.accountTypeLabel.text = account.accountType.rawValue
+//            cell.accountNameLabel.text = account.alias
+//            cell.activeSwitch.setOn(account.isEnabled, animated: false)
+//            cell.accountTypeLabel.text = account.accountType.rawValue
 
             return cell
         } else {
