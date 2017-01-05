@@ -1,0 +1,7 @@
+Verified+1: Jenkins CI <jenkins@ring-packaging.cx>
+Code-Review+2: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+Submitted-by: Romain B. <romain.bertozzi@savoirfairelinux.com>
+Submitted-at: Thu, 05 Jan 2017 13:52:17 -0500
+Reviewed-on: https://gerrit-ring.savoirfairelinux.com/5893
+Project: ring-client-ios
+Branch: refs/heads/master
