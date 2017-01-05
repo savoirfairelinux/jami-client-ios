@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
@@ -37,6 +37,25 @@ class AccountViewModel {
      Useful to dispose it before starting a new one.
      */
     fileprivate var addAccountDisposable: Disposable?
+
+    /**
+     The account under this ViewModel.
+     */
+    fileprivate var account: AccountModel?
+
+    /**
+     Default constructor
+     */
+    init() {
+        self.account = nil
+    }
+
+    /**
+     Constructor with AccountModel.
+     */
+    init(withAccountModel account: AccountModel?) {
+        self.account = account
+    }
 
     /**
      Create the observers to the streams passed in parameters.
