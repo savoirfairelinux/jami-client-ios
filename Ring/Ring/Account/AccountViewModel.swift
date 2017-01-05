@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
@@ -37,6 +37,25 @@ class AccountViewModel {
      Useful to dispose it before starting a new one.
      */
     fileprivate var addAccountDisposable: Disposable?
+
+    /**
+     The account under this ViewModel.
+     */
+    fileprivate var account: AccountModel?
+
+    /**
+     Default constructor
+     */
+    init() {
+        self.account = nil
+    }
+
+    /**
+     Constructor with AccountModel.
+     */
+    init(withAccountModel account: AccountModel?) {
+        self.account = account
+    }
 
     /**
      Create the observers to the streams passed in parameters.
@@ -80,5 +99,92 @@ class AccountViewModel {
                     onErrorCallback?(error)
             })
             .addDisposableTo(disposeBag)
+    }
+
+    /**
+     Getter exposing the type of the account.
+
+     - Returns: true if the account is considered as a SIP account
+     */
+    func isAccountSip() -> Bool {
+        let sipString = AccountType.SIP.rawValue
+        let accountType = self.account?.details
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .AccountType))
+        return sipString.compare(accountType!) == ComparisonResult.orderedSame
+    }
+
+    /**
+     Getter exposing the type of the account.
+
+     - Returns: true if the account is considered as a Ring account
+     */
+    func isAccountRing() -> Bool {
+        let ringString = AccountType.Ring.rawValue
+        let accountType = self.account?.details
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .AccountType))
+        return ringString.compare(accountType!) == ComparisonResult.orderedSame
+    }
+
+    /**
+     Getter exposing the registration state of the account.
+
+     - Returns: the registration state of the account as a String.
+     */
+    func getRegistrationState() -> String {
+        return (self.account?.volatileDetails
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .AccountRegistrationStatus)))!
+    }
+
+    /**
+     Getter exposing the enable state of the account.
+
+     - Returns: true if the account is enabled, false otherwise.
+     */
+    func isEnabled() -> Bool {
+        return (self.account?.details
+            .getBool(forConfigKeyModel: ConfigKeyModel.init(withKey: .AccountEnable)))!
+    }
+
+    /**
+     Getter exposing the error state of the account.
+
+     - Returns: true if the account is considered as being in error, false otherwise.
+     */
+    func isInError() -> Bool {
+        let state = self.getRegistrationState()
+        return (state.compare(AccountState.Error.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.ErrorAuth.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.ErrorConfStun.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.ErrorExistStun.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.ErrorGeneric.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.ErrorHost.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.ErrorNetwork.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.ErrorNotAcceptable.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.ErrorServiceUnavailable.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.ErrorRequestTimeout.rawValue) == ComparisonResult.orderedSame)
+    }
+
+    /**
+     Setter on the credentials of the account.
+
+     - Parameter: a list of credentials to apply to the account. A nil parameter will clear the
+     credentials of the account.
+     */
+    func setCredentials(_ credentials: Array<Dictionary<String, String>>?) {
+        self.account?.credentialDetails.removeAll()
+        if credentials != nil {
+            for (credential) in credentials! {
+                do {
+                    let accountCredentialModel = try AccountCredentialsModel(withRawaData: credential)
+                    self.account?.credentialDetails.append(accountCredentialModel)
+                }
+                catch CredentialsError.NotEnoughData {
+                    print("Not enough data to create a credential")
+                }
+                catch {
+                    print("Unexpected error")
+                }
+            }
+        }
     }
 }
