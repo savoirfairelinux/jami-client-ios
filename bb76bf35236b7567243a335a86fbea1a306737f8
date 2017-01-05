@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ace114c_13db9cee",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-01-05T18:51:43Z",
+      "side": 1,
+      "message": "Headers added here but no other addition have been made",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 14
+      },
+      "revId": "bb76bf35236b7567243a335a86fbea1a306737f8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
