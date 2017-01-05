@@ -30,6 +30,9 @@
 		02B22E031DF755F7000358C9 /* WalkthroughStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B22E021DF755F7000358C9 /* WalkthroughStoryboard.storyboard */; };
 		02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E081DF7585F000358C9 /* DaemonService.swift */; };
 		02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9B63E1E1D4E8C00F82F0C /* ServiceEvent.swift */; };
+		02DD80C81E1EAD70009A3510 /* AccountConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C71E1EAD70009A3510 /* AccountConfigModel.swift */; };
+		02DD80CA1E1EAF1A009A3510 /* AccountCredentialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */; };
+		02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80CC1E1EB2E4009A3510 /* ConfigKeyModel.swift */; };
 		02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866371D2304A700E06CE2 /* BoolStringExtension.swift */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
 		043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866321D22CE8C00E06CE2 /* MeViewController.swift */; };
@@ -144,6 +147,9 @@
 		02B22E021DF755F7000358C9 /* WalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WalkthroughStoryboard.storyboard; path = Walkthrough/WalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
 		02B22E081DF7585F000358C9 /* DaemonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DaemonService.swift; path = Services/DaemonService.swift; sourceTree = "<group>"; };
 		02C9B63E1E1D4E8C00F82F0C /* ServiceEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceEvent.swift; path = Services/ServiceEvent.swift; sourceTree = "<group>"; };
+		02DD80C71E1EAD70009A3510 /* AccountConfigModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountConfigModel.swift; path = Account/AccountConfigModel.swift; sourceTree = "<group>"; };
+		02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountCredentialsModel.swift; path = Account/AccountCredentialsModel.swift; sourceTree = "<group>"; };
+		02DD80CC1E1EB2E4009A3510 /* ConfigKeyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigKeyModel.swift; path = Account/ConfigKeyModel.swift; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		043866321D22CE8C00E06CE2 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		043866351D22D06500E06CE2 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -372,6 +378,9 @@
 			children = (
 				02B22DFA1DF755BB000358C9 /* AccountModel.swift */,
 				02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */,
+				02DD80C71E1EAD70009A3510 /* AccountConfigModel.swift */,
+				02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */,
+				02DD80CC1E1EB2E4009A3510 /* ConfigKeyModel.swift */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -719,9 +728,11 @@
 				0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */,
 				02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
+				02DD80C81E1EAD70009A3510 /* AccountConfigModel.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
+				02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
@@ -730,6 +741,7 @@
 				02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
+				02DD80CA1E1EAF1A009A3510 /* AccountCredentialsModel.swift in Sources */,
 				0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
