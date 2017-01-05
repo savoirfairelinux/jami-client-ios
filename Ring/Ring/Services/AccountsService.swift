@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Authors: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *           Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
@@ -97,10 +97,10 @@ class AccountsService: AccountAdapterDelegate {
 
     func reload() {
         accountList.removeAll()
-        for account in confAdapter.getAccountList() {
-            let accountID = account as! String
-            accountList.append(AccountModel(accountID: accountID))
-        }
+        //for account in confAdapter.getAccountList() {
+            //let accountID = account as! String
+            //accountList.append(AccountModel())
+        //}
     }
 
     func addAccount() {
