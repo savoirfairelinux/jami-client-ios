@@ -21,11 +21,6 @@
 
 import Foundation
 
-enum AccountType: String {
-    case SIP = "SIP"
-    case RING = "RING"
-}
-
 struct AccountModel {
 
     // MARK: - Keys
@@ -43,85 +38,28 @@ struct AccountModel {
     fileprivate let accountTypeKey = "Account.type"
     fileprivate let accountDisplayNameKey = "Account.displayName"
 
-    // MARK: - Properties
+    // MARK: Public members
     let id: String
+    var registeringUsername = false
 
-    fileprivate var details: Dictionary<String, String>
+    // MARK: Private members
+    fileprivate let details: AccountConfigModel
+    fileprivate let volatileDetails: AccountConfigModel
+    fileprivate let devices = Dictionary<String,String>()
+    fileprivate var credentialDetails = Array<AccountCredentialsModel>()
 
-    var alias: String? {
-        get {return details[accountAliasKey]}
-        set {details[accountAliasKey] = newValue}
+    init(withAccountId accountId: String) {
+        self.id = accountId
+        self.details = AccountConfigModel()
+        self.volatileDetails = AccountConfigModel()
     }
 
-    var videoEnabled: Bool {
-        get {return (details[accountVideoEnabledKey]?.toBool())!}
-        set {details[accountVideoEnabledKey] = newValue.toString()}
-    }
-    var username: String? {
-        get {return details[accountUsernameKey]}
-        set {details[accountUsernameKey] = newValue}
+    func test() {
+        
     }
 
-    var autoAnswer: Bool {
-        get {return (details[accountAutoAnswerKey]?.toBool())!}
-        set {details[accountAutoAnswerKey] = newValue.toString()}
-    }
-
-    var turnEnabled: Bool {
-        get {return (details[accountTurnEnabledKey]?.toBool())!}
-        set {details[accountTurnEnabledKey] = newValue.toString()}
-    }
-
-    var turnUsername: String? {
-        get {return details[accountTurnUsernameKey]}
-        set {details[accountTurnUsernameKey] = newValue}
-    }
-
-    var turnServer: String? {
-        get {return details[accountTurnServerKey]}
-        set {details[accountTurnServerKey] = newValue}
-    }
-
-    var turnPassword: String? {
-        get {return details[accountTurnPasswordKey]}
-        set {details[accountTurnPasswordKey] = newValue}
-    }
-
-    var isEnabled: Bool {
-        get {return (details[accountEnabledKey]?.toBool())!}
-        set {
-            details[accountEnabledKey] = newValue.toString()
-            (AccountAdapter.sharedManager() as AnyObject).setAccountActive(self.id, active: newValue)
-        }
-    }
-
-    var upnpEnabled: Bool {
-        get {return (details[accountUpnpEnabledKey]?.toBool())!}
-        set {details[accountUpnpEnabledKey] = newValue.toString()}
-    }
-
-    var accountHostname: String? {
-        get {return details[accountHostnameKey]}
-        set {details[accountHostnameKey] = newValue}
-    }
-
-    var accountType: AccountType {
-        get {return AccountType(rawValue: details[accountTypeKey]!)!}
-        set {details[accountTypeKey] = newValue.rawValue}
-    }
-
-    var displayName: String? {
-        get {return details[accountDisplayNameKey]}
-        set {details[accountDisplayNameKey] = newValue}
-    }
-
-    // MARK: - Init
-    init(accountID: String) {
-        id = accountID
-        details = (AccountAdapter.sharedManager() as AnyObject).getAccountDetails(id) as! Dictionary<String, String>
-    }
-
-    func save() {
-        (AccountAdapter.sharedManager() as AnyObject).setAccountDetails(id, details: details)
-    }
+//    var displayName: String? {
+//        get {return details[accountDisplayNameKey]}
+//        set {details[accountDisplayNameKey] = newValue}
+//    }
 }

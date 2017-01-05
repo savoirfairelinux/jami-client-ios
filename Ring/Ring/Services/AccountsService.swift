@@ -85,7 +85,7 @@ class AccountsService: AccountAdapterDelegate {
         accountList.removeAll()
         for account in confAdapter.getAccountList() {
             let accountID = account as! String
-            accountList.append(AccountModel(accountID: accountID))
+            //accountList.append(AccountModel())
         }
     }
 
