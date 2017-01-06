@@ -77,6 +77,10 @@ if [ ! -d "$DAEMON_DIR" ]; then
     exit 1
 fi
 
+if [ -z "$NPROC"  ]; then
+    NPROC=`sysctl -n hw.ncpu || echo -n 1`
+fi
+
 cd $DAEMON_DIR
 
 for ARCH in "${ARCHS[@]}"
@@ -97,8 +101,8 @@ do
 	SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --enable-ffmpeg
 
 	echo "Building contrib"
-    make fetch
-	make || exit 1
+        make fetch
+	make -j$NPROC || exit 1
 
 	cd ../..
 	echo "Building daemon"
@@ -146,7 +150,7 @@ do
     # We need to copy this file or else it's just an empty file
     rsync -a $DAEMON_DIR/src/buildinfo.cpp ./src/buildinfo.cpp
 
-    make -j4 || exit 1
+    make -j$NPROC || exit 1
     make install || exit 1
 
     rsync -ar $DAEMON_DIR/contrib/$HOST/lib/*.a $IOS_TOP_DIR/DEPS/$ARCH/lib/
