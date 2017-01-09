@@ -22,6 +22,13 @@
 import Foundation
 
 /**
+ Errors that can be thrown when trying to build an AccountModel
+ */
+enum AccountModelError: Error {
+    case UnexpectedError
+}
+
+/**
  A structure representing an account.
  */
 struct AccountModel {
@@ -42,10 +49,25 @@ struct AccountModel {
     }
 
     init(withAccountId accountId: String,
-         details: Dictionary<String, String>?,
-         volatileDetails: Dictionary<String, String>?) {
+         details: Dictionary<String, String>,
+         volatileDetails: Dictionary<String, String>,
+         credentials: Array<Dictionary<String, String>>,
+         devices: Dictionary<String, String>) throws {
         self.id = accountId
         self.details = AccountConfigModel(withDetails: details)
         self.volatileDetails = AccountConfigModel(withDetails: details)
+        for credential in credentials {
+            do {
+                let cred = try AccountCredentialsModel.init(withRawaData: credential)
+                credentialDetails.append(cred)
+            } catch CredentialsError.NotEnoughData {
+                print("Not enough data to build a credential object.")
+                throw CredentialsError.NotEnoughData
+            } catch {
+                print("Unexpected error.")
+                throw AccountModelError.UnexpectedError
+            }
+        }
+        self.devices = devices
     }
 }
