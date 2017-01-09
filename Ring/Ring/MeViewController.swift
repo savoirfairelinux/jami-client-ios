@@ -92,7 +92,6 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == accountService.accounts.count {
-            accountService.addAccount()
             accountTableView.reloadData()
         }
     }
