@@ -22,6 +22,11 @@
 import RxCocoa
 import RxSwift
 
+enum AddAccountError: Error {
+    case TemplateNotConform
+    case UnknownError
+}
+
 class AccountsService: AccountAdapterDelegate {
     // MARK: Private members
     /**
@@ -98,23 +103,76 @@ class AccountsService: AccountAdapterDelegate {
     func reload() {
         accountList.removeAll()
         //for account in confAdapter.getAccountList() {
-            //let accountID = account as! String
-            //accountList.append(AccountModel())
+        //let accountID = account as! String
+        //accountList.append(AccountModel())
         //}
     }
 
-    func addAccount() {
-        // TODO: This need work for all account type
-        let details:NSMutableDictionary? = confAdapter.getAccountTemplate("RING")
-        if details == nil {
-            print("Error retrieving Ring account template, can not continue");
-            return;
+    /**
+     Entry point to create a brand-new Ring account.
+
+     - Parameter username: the username chosen by the user, if any
+     - Parameter password: the password chosen by the user
+
+     - Throws: AddAccountError
+     */
+    func addRingAccount(withUsername username: String?, password: String) throws {
+        do {
+            var ringDetails = try self.getRingInitialAccountDetails()
+            if username != nil {
+                ringDetails.updateValue(username!, forKey: ConfigKey.AccountRegisteredName.rawValue)
+            }
+            ringDetails.updateValue(password, forKey: ConfigKey.ArchivePassword.rawValue)
+            let accountId = self.confAdapter.addAccount(ringDetails)
+            guard accountId != nil else {
+                throw AddAccountError.UnknownError
+            }
         }
-        details!.setValue("iOS", forKey: "Account.alias")
-        details!.setValue("iOS", forKey: "Account.displayName")
-        let convertedDetails = details as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        let addResult:String! = confAdapter.addAccount(convertedDetails)
-        print(addResult);
+        catch {
+            throw error
+        }
+    }
+
+    /**
+     Entry point to create a brand-new SIP account.
+
+     Not supported yet.
+     */
+    fileprivate func addSipAccount() {
+        print("Not supported yet")
+    }
+
+    /**
+     Gathers all the initial default details contained by any accounts, Ring or SIP.
+
+     - Returns the details.
+     */
+    fileprivate func getInitialAccountDetails() throws -> Dictionary<String, String> {
+        let details: NSMutableDictionary = confAdapter.getAccountTemplate(AccountType.Ring.rawValue)
+        var accountDetails = details as NSDictionary? as? Dictionary<String, String> ?? nil
+        if accountDetails == nil {
+            throw AddAccountError.TemplateNotConform
+        }
+        accountDetails!.updateValue("false", forKey: ConfigKey.VideoEnabled.rawValue)
+        accountDetails!.updateValue("sipinfo", forKey: ConfigKey.AccountDTMFType.rawValue)
+        return accountDetails!
+    }
+
+    /**
+     Gathers all the initial default details contained in a Ring accounts.
+
+     - Returns the details.
+     */
+    fileprivate func getRingInitialAccountDetails() throws -> Dictionary<String, String> {
+        do {
+            var defaultDetails = try getInitialAccountDetails()
+            defaultDetails.updateValue("Ring", forKey: ConfigKey.AccountAlias.rawValue)
+            defaultDetails.updateValue("bootstrap.ring.cx", forKey: ConfigKey.AccountHostname.rawValue)
+            defaultDetails.updateValue("true", forKey: ConfigKey.AccountUpnpEnabled.rawValue)
+            return defaultDetails
+        } catch {
+            throw error
+        }
     }
 
     func removeAccount(_ row: Int) {
