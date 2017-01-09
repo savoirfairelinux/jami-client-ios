@@ -42,10 +42,23 @@ struct AccountModel {
     }
 
     init(withAccountId accountId: String,
-         details: Dictionary<String, String>?,
-         volatileDetails: Dictionary<String, String>?) {
+         details: Dictionary<String, String>,
+         volatileDetails: Dictionary<String, String>,
+         credentials: Array<Dictionary<String, String>>,
+         devices: Dictionary<String, String>) {
         self.id = accountId
         self.details = AccountConfigModel(withDetails: details)
         self.volatileDetails = AccountConfigModel(withDetails: details)
+        for credential in credentials {
+            do {
+                let cred = try AccountCredentialsModel.init(withRawaData: credential)
+                credentialDetails.append(cred)
+            } catch CredentialsError.NotEnoughData {
+                
+            } catch {
+
+            }
+        }
+        self.devices = devices
     }
 }
