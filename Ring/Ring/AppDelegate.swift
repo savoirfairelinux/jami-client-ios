@@ -21,34 +21,75 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let daemonService = DaemonService.init(dRingAdaptor: DRingAdapter())
+    let locationManager = CLLocationManager()
+    var wakeUpTimer:Timer?
+
+    /**
+     Keeps the id of the main background task in order to end it when the app comes back 
+     in foreground
+     */
+    var appBackgroundTask:UIBackgroundTaskIdentifier?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.startDaemon()
         return true
     }
 
+    func wakeUp() {
+        self.locationManager.stopUpdatingLocation()
+        self.locationManager.startUpdatingLocation()
+    }
+
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
+        self.locationManager.allowsBackgroundLocationUpdates = true
+        self.locationManager.startUpdatingLocation()
+        self.wakeUpTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                target: self,
+                                                selector: #selector(self.wakeUp),
+                                                userInfo: nil,
+                                                repeats: true)
     }
+
+//    func expirationHandler() {
+//        print("Background task exired")
+//        if self.appBackgroundTask != nil {
+//            UIApplication.shared.endBackgroundTask(self.appBackgroundTask!)
+//        }
+//        self.appBackgroundTask = UIBackgroundTaskInvalid
+//        self.appBackgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+//            self?.expirationHandler()
+//        }
+//    }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//        self.appBackgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+//            self?.expirationHandler()
+//        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        self.wakeUpTimer?.invalidate()
+        self.locationManager.stopUpdatingLocation()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+//        if self.appBackgroundTask != nil {
+//            UIApplication.shared.endBackgroundTask(self.appBackgroundTask!)
+//        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
