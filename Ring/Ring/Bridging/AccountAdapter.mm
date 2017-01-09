@@ -51,12 +51,27 @@ using namespace DRing;
 #pragma mark Callbacks registration
 - (void)registerConfigurationHandler {
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
+
     confHandlers.insert(exportable_callback<ConfigurationSignal::AccountsChanged>([&]() {
         //~ Using sharedManager to avoid as possible to retain self in the block.
         if ([[AccountAdapter sharedManager] delegate]) {
             [[[AccountAdapter sharedManager] delegate] accountsChanged];
         }
     }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::GetAppDataPath>([&](const std::string& name, std::vector<std::string>* ret) {
+        if (name == "cache") {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            ret->push_back(std::string([documentsDirectory UTF8String]));
+        }
+        else {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            ret->push_back(std::string([documentsDirectory UTF8String]));
+        }
+    }));
+
     registerConfHandlers(confHandlers);
 }
 #pragma mark -
