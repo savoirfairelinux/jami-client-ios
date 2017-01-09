@@ -74,7 +74,13 @@ class AccountViewModel {
                     self?.addAccountDisposable?.addDisposableTo((self?.disposeBag)!)
 
                     //~ Launch the action.
-                    AccountsService.sharedInstance.addAccount()
+                    do {
+                        try AccountsService.sharedInstance.addRingAccount(withUsername: nil,
+                                                                          password: "coucou")
+                    }
+                    catch {
+                        onErrorCallback?(error)
+                    }
                 },
                 onError: { (error) in
                     onErrorCallback?(error)
