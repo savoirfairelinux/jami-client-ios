@@ -19,6 +19,8 @@
  */
 
 import Foundation
+import RxCocoa
+import RxSwift
 
 /**
  Errors that can be thrown when trying to start the daemon:
@@ -60,14 +62,37 @@ class DaemonService {
     fileprivate let dRingAdaptor: DRingAdapter
 
     /// The time interval separating each poll.
-    fileprivate let pollingTimeInterval = 0.05
+    fileprivate var pollingTimeInterval = 0.05
 
     /// The timer scheduling the calls to the poll method.
     fileprivate var pollingTimer: Timer?
 
+    /// Rx DisposeBag
+    fileprivate let disposeBag = DisposeBag()
+
     // MARK: Initialization
     init(dRingAdaptor: DRingAdapter) {
         self.dRingAdaptor = dRingAdaptor
+
+        NotificationCenter.default
+            .rx
+            .notification(Notification.Name.UIApplicationDidEnterBackground)
+            .subscribe(onNext: { [weak self] event in
+                self?.pollingTimer?.invalidate()
+                self?.pollingTimeInterval = 1.0
+                self?.startRingServicePolling()
+            })
+            .addDisposableTo(disposeBag)
+
+        NotificationCenter.default
+            .rx
+            .notification(Notification.Name.UIApplicationDidBecomeActive)
+            .subscribe(onNext: { [weak self] event in
+                self?.pollingTimer?.invalidate()
+                self?.pollingTimeInterval = 0.05
+                self?.startRingServicePolling()
+            })
+            .addDisposableTo(disposeBag)
     }
 
     // MARK: Public API
@@ -119,7 +144,7 @@ class DaemonService {
     /**
      Initiates the timer scheduling the calls to the daemon poll event method. It then starts it.
      */
-    fileprivate func startRingServicePolling() {
+    func startRingServicePolling() {
         self.pollingTimer = Timer.scheduledTimer(timeInterval: pollingTimeInterval,
                                                  target: self,
                                                  selector: #selector(self.pollFunction),
@@ -131,7 +156,8 @@ class DaemonService {
      Performs the call to the daemon pollEvents method each time the pollingTimer decides to.
      This method must be @objc exposed to be called by the timer.
      */
-    @objc fileprivate func pollFunction() {
+    @objc func pollFunction() {
+        print("Poll event", NSDate())
         self.dRingAdaptor.pollEvents()
     }
 }
