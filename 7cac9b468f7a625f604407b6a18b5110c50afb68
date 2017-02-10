@@ -22,6 +22,30 @@
       "revId": "7cac9b468f7a625f604407b6a18b5110c50afb68",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1acb0d3e_6d632c1b",
+        "filename": "compile-ios.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-02-10T17:08:07Z",
+      "side": 1,
+      "message": "As tested, this flag is defined by the daemon as -std\u003dgnu++14",
+      "parentUuid": "1acb0d3e_4dbbd072",
+      "range": {
+        "startLine": 123,
+        "startChar": 14,
+        "endLine": 123,
+        "endChar": 24
+      },
+      "revId": "7cac9b468f7a625f604407b6a18b5110c50afb68",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
