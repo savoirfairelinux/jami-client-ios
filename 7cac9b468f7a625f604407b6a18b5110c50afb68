@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1acb0d3e_4dbbd072",
+        "filename": "compile-ios.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2017-02-10T16:46:01Z",
+      "side": 1,
+      "message": "Is this flag necessary ? The daemon configure script is supposed to define it as well right ?",
+      "range": {
+        "startLine": 123,
+        "startChar": 14,
+        "endLine": 123,
+        "endChar": 24
+      },
+      "revId": "7cac9b468f7a625f604407b6a18b5110c50afb68",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
