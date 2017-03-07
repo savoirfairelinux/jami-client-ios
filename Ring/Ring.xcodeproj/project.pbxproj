@@ -22,7 +22,7 @@
 		0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3071E0C68BF00CF00BA /* RoundedButton.swift */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
 		02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFA1DF755BB000358C9 /* AccountModel.swift */; };
-		02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */; };
+		02B22DFD1DF755BB000358C9 /* CreateRingAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFB1DF755BB000358C9 /* CreateRingAccountViewModel.swift */; };
 		02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFE1DF755DB000358C9 /* AccountsService.swift */; };
 		02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E001DF755E5000358C9 /* MainTabBarViewController.swift */; };
 		02B22E031DF755F7000358C9 /* WalkthroughStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B22E021DF755F7000358C9 /* WalkthroughStoryboard.storyboard */; };
@@ -134,7 +134,7 @@
 		028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RingTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
 		02B22DFA1DF755BB000358C9 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountModel.swift; path = Account/AccountModel.swift; sourceTree = "<group>"; };
-		02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountViewModel.swift; path = Account/AccountViewModel.swift; sourceTree = "<group>"; };
+		02B22DFB1DF755BB000358C9 /* CreateRingAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateRingAccountViewModel.swift; path = Account/CreateRingAccountViewModel.swift; sourceTree = "<group>"; };
 		02B22DFE1DF755DB000358C9 /* AccountsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountsService.swift; path = Services/AccountsService.swift; sourceTree = "<group>"; };
 		02B22E001DF755E5000358C9 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarViewController.swift; path = MainTabBar/MainTabBarViewController.swift; sourceTree = "<group>"; };
 		02B22E021DF755F7000358C9 /* WalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WalkthroughStoryboard.storyboard; path = Walkthrough/WalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
@@ -365,7 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				02B22DFA1DF755BB000358C9 /* AccountModel.swift */,
-				02B22DFB1DF755BB000358C9 /* AccountViewModel.swift */,
+				02B22DFB1DF755BB000358C9 /* CreateRingAccountViewModel.swift */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -719,7 +719,7 @@
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
-				02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */,
+				02B22DFD1DF755BB000358C9 /* CreateRingAccountViewModel.swift in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
 				0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */,
