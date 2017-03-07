@@ -22,6 +22,15 @@
 import RxCocoa
 import RxSwift
 
+/**
+ Events that can be sent to the response stream
+
+ - AccountChanged: the accounts have been changed daemon-side
+ */
+enum AccountRxEvent {
+    case AccountChanged
+}
+
 class AccountsService: AccountAdapterDelegate {
     // MARK: Private members
     /**
@@ -38,6 +47,18 @@ class AccountsService: AccountAdapterDelegate {
      */
     fileprivate var accountList: Array<AccountModel>
 
+    fileprivate let disposeBag = DisposeBag()
+
+    /**
+     PublishSubject forwarding AccountRxEvent events.
+     This stream is used strictly inside this service.
+     External observers should use the public shared responseStream.
+
+     - SeeAlso: `AccountRxEvent`
+     - SeeAlso: `sharedResponseStream`
+     */
+    fileprivate let responseStream = PublishSubject<AccountRxEvent>()
+
     // MARK: - Public members
     /**
      Accounts list public interface.
@@ -53,15 +74,29 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    /**
+     Public shared stream forwarding the events of the responseStream.
+     External observers must subscribe to this stream to get results.
+
+     - SeeAlso: `responseStream`
+     - SeeAlso: `AccountRxEvent`
+     */
+    var sharedResponseStream: Observable<AccountRxEvent>
+
     // MARK: - Singleton
     static let sharedInstance = AccountsService()
 
     fileprivate init() {
-        accountList = []
+        self.accountList = []
+
+        self.responseStream.addDisposableTo(disposeBag)
+
+        //~ Create a shared stream based on the responseStream one.
+        self.sharedResponseStream = responseStream.share()
 
         //~ Registering to the AccountConfigurationManagerAdaptator with self as delegate in order
         //~ to receive delegation callbacks.
-        confAdapter.delegate = self
+        self.confAdapter.delegate = self
     }
 
     // MARK: - Methods
@@ -100,5 +135,6 @@ class AccountsService: AccountAdapterDelegate {
     // MARK: - AccountAdapterDelegate
     func accountsChanged() {
         print("Accounts changed.")
+        self.responseStream.onNext(.AccountChanged)
     }
 }

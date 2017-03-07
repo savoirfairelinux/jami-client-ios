@@ -21,16 +21,22 @@
 import RxSwift
 
 /**
- A structure representing the ViewModel (MVVM) of the accounts managed by Ring.
+ A class representing the ViewModel (MVVM) of the accounts managed by Ring.
  Its responsabilities:
  - expose to the Views a public API for its interactions concerning the Accounts,
  - react to the Views user events concerning the Accounts (add an account...)
  */
-struct AccountViewModel {
+class AccountViewModel {
     /**
      Dispose bag that contains the Disposable objects of the ViewModel, and managing their disposes.
      */
     fileprivate let disposeBag = DisposeBag()
+
+    /**
+     Retains the currently active stream adding an account.
+     Useful to dispose it before starting a new one.
+     */
+    fileprivate var addAccountDisposable: Disposable?
 
     /**
      Create the observers to the streams passed in parameters.
@@ -38,27 +44,40 @@ struct AccountViewModel {
 
      - Parameter observable: An observable stream to subscribe on.
      Any observed event on this stream will trigger the action of creating an account.
-     - Parameter onStart: Closure that will be triggered when the action will begin.
-     - Parameter onError: Closure that will be triggered in case of error.
-    */
+     - Parameter onStartCallback: Closure that will be triggered when the action will begin.
+     - Parameter onSuccessCallback: Closure that will be triggered when the action will succeed.
+     - Parameter onErrorCallback: Closure that will be triggered in case of error.
+     */
     func configureAddAccountObservers(observable: Observable<Void>,
-                                      onStart: ((() -> Void)?),
-                                      onSuccess: ((() -> Void)?),
-                                      onError: (((Error?) -> Void)?)) {
+                                      onStartCallback: ((() -> Void)?),
+                                      onSuccessCallback: ((() -> Void)?),
+                                      onErrorCallback: (((Error?) -> Void)?)) {
         _ = observable
-            .subscribe(onNext: {
-                if onStart != nil {
-                    onStart!()
-                }
-                AccountsService.sharedInstance.addAccount()
-            }, onError: { (error) in
-                if onError != nil {
-                    onError!(error)
-                }
-            }, onCompleted: {
-                //~ Nothing to do.
-            }, onDisposed: {
-                //~ Nothing to do.
+            .subscribe(
+                onNext: { [weak self] in
+                    //~ Let the caller know that the action has just begun.
+                    onStartCallback?()
+
+                    //~ Dispose any previously running stream. There is only one add account action
+                    //~ simultaneously authorized.
+                    self?.addAccountDisposable?.dispose()
+                    //~ Subscribe on the AccountsService responseStream to get results.
+                    self?.addAccountDisposable = AccountsService.sharedInstance
+                        .sharedResponseStream
+                        .subscribe(onNext:{ (event) in
+                            if event == AccountRxEvent.AccountChanged {
+                                onSuccessCallback?()
+                            }
+                        }, onError: { error in
+                            onErrorCallback?(error)
+                        })
+                    self?.addAccountDisposable?.addDisposableTo((self?.disposeBag)!)
+
+                    //~ Launch the action.
+                    AccountsService.sharedInstance.addAccount()
+                },
+                onError: { (error) in
+                    onErrorCallback?(error)
             })
             .addDisposableTo(disposeBag)
     }
