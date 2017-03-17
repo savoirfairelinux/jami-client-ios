@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="-489" y="24"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="BPo-UM-NNL">
             <objects>
-                <viewController id="zOM-us-BHp" sceneMemberID="viewController">
+                <viewController id="zOM-us-BHp" customClass="WelcomeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lps-eE-m7k"/>
                         <viewControllerLayoutGuide type="bottom" id="OgW-31-HCB"/>
@@ -42,7 +42,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0q-9u-3WR" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="85.5" y="277" width="204" height="30"/>
+                                <rect key="frame" x="32" y="396" width="311" height="30"/>
                                 <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Link this device to an account">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,14 +51,8 @@
                                     <segue destination="Pvr-wr-tIH" kind="show" id="tOa-xB-5VR"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNW-0s-B79">
-                                <rect key="frame" x="179.5" y="323" width="16" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ve-ZD-TXf" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="111.5" y="360" width="152" height="30"/>
+                                <rect key="frame" x="32" y="458" width="311" height="30"/>
                                 <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Create a Ring account">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,18 +61,50 @@
                                     <segue destination="dmb-i6-bo9" kind="show" id="gq5-YB-bwO"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Ring account allows you to reach people securely in peer to peer through fully distributed network" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PxM-F8-mIM">
+                                <rect key="frame" x="8" y="303" width="359" height="61"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Ring" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SnZ-RF-3dF">
+                                <rect key="frame" x="98" y="242" width="180.5" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7CK-fT-m09">
+                                <rect key="frame" x="32" y="96" width="311" height="114"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="8Ve-ZD-TXf" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="5e8-du-W6W"/>
-                            <constraint firstItem="gNW-0s-B79" firstAttribute="top" secondItem="R0q-9u-3WR" secondAttribute="bottom" constant="16" id="ALB-n1-zaM"/>
-                            <constraint firstItem="gNW-0s-B79" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="Zam-9D-oqp"/>
-                            <constraint firstItem="8Ve-ZD-TXf" firstAttribute="top" secondItem="gNW-0s-B79" secondAttribute="bottom" constant="16" id="dTL-r1-hi6"/>
-                            <constraint firstItem="R0q-9u-3WR" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="qhM-55-a9z"/>
-                            <constraint firstItem="gNW-0s-B79" firstAttribute="centerY" secondItem="GmX-eQ-kCs" secondAttribute="centerY" id="ziU-9e-jKq"/>
+                            <constraint firstItem="7CK-fT-m09" firstAttribute="leading" secondItem="GmX-eQ-kCs" secondAttribute="leading" constant="32" id="4Om-pc-UdK"/>
+                            <constraint firstItem="PxM-F8-mIM" firstAttribute="centerY" secondItem="GmX-eQ-kCs" secondAttribute="centerY" id="5Er-8I-ZCY"/>
+                            <constraint firstItem="R0q-9u-3WR" firstAttribute="top" secondItem="PxM-F8-mIM" secondAttribute="bottom" constant="32" id="KQV-lz-9Fv"/>
+                            <constraint firstItem="PxM-F8-mIM" firstAttribute="top" secondItem="SnZ-RF-3dF" secondAttribute="bottom" constant="32" id="Rz6-ot-0yZ"/>
+                            <constraint firstItem="SnZ-RF-3dF" firstAttribute="top" secondItem="7CK-fT-m09" secondAttribute="bottom" constant="32" id="S1E-3a-5AO"/>
+                            <constraint firstAttribute="trailing" secondItem="7CK-fT-m09" secondAttribute="trailing" constant="32" id="SOU-ZH-ukL"/>
+                            <constraint firstAttribute="trailing" secondItem="8Ve-ZD-TXf" secondAttribute="trailing" constant="32" id="STX-lh-2lm"/>
+                            <constraint firstItem="PxM-F8-mIM" firstAttribute="leading" secondItem="GmX-eQ-kCs" secondAttribute="leading" constant="8" id="bWP-6N-0jk"/>
+                            <constraint firstAttribute="trailing" secondItem="PxM-F8-mIM" secondAttribute="trailing" constant="8" id="c3Y-0k-Y10"/>
+                            <constraint firstItem="R0q-9u-3WR" firstAttribute="leading" secondItem="GmX-eQ-kCs" secondAttribute="leading" constant="32" id="j8w-bt-cIA"/>
+                            <constraint firstItem="7CK-fT-m09" firstAttribute="top" secondItem="Lps-eE-m7k" secondAttribute="bottom" constant="32" id="lUd-yx-bVy"/>
+                            <constraint firstItem="8Ve-ZD-TXf" firstAttribute="leading" secondItem="GmX-eQ-kCs" secondAttribute="leading" constant="32" id="noU-Zq-OcG"/>
+                            <constraint firstItem="PxM-F8-mIM" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="prm-f7-83R"/>
+                            <constraint firstItem="8Ve-ZD-TXf" firstAttribute="top" secondItem="R0q-9u-3WR" secondAttribute="bottom" constant="32" id="tnY-Tm-9mP"/>
+                            <constraint firstAttribute="trailing" secondItem="R0q-9u-3WR" secondAttribute="trailing" constant="32" id="twG-Za-y8Z"/>
+                            <constraint firstItem="SnZ-RF-3dF" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="yRy-Cy-QCN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LPh-IM-uvN"/>
+                    <connections>
+                        <outlet property="createAccountButton" destination="8Ve-ZD-TXf" id="OBF-nO-YAa"/>
+                        <outlet property="descriptionLabel" destination="PxM-F8-mIM" id="Bbw-uI-ltO"/>
+                        <outlet property="linkDeviceButton" destination="R0q-9u-3WR" id="W2P-ar-nh0"/>
+                        <outlet property="ringImageView" destination="7CK-fT-m09" id="y0f-95-hCZ"/>
+                        <outlet property="welcomeLabel" destination="SnZ-RF-3dF" id="Rgf-TM-GFn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWI-c5-979" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
