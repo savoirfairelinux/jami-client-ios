@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -29,60 +29,88 @@
             </objects>
             <point key="canvasLocation" x="-489" y="24"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="BPo-UM-NNL">
             <objects>
-                <viewController id="zOM-us-BHp" sceneMemberID="viewController">
+                <viewController id="zOM-us-BHp" customClass="WelcomeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lps-eE-m7k"/>
                         <viewControllerLayoutGuide type="bottom" id="OgW-31-HCB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GmX-eQ-kCs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0q-9u-3WR" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="85.5" y="277" width="204" height="30"/>
-                                <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Link this device to an account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Pvr-wr-tIH" kind="show" id="tOa-xB-5VR"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNW-0s-B79">
-                                <rect key="frame" x="179.5" y="323" width="16" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ve-ZD-TXf" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="111.5" y="360" width="152" height="30"/>
-                                <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Create a Ring account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="dmb-i6-bo9" kind="show" id="gq5-YB-bwO"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DXu-A1-gcl">
+                                <rect key="frame" x="16" y="80" width="288" height="320"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="logo-ring-beta2-blanc" translatesAutoresizingMaskIntoConstraints="NO" id="7CK-fT-m09">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="106"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to Ring" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SnZ-RF-3dF">
+                                        <rect key="frame" x="54" y="122" width="180.5" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="A Ring account allows you to reach people securely in peer to peer through fully distributed network" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PxM-F8-mIM">
+                                        <rect key="frame" x="8.5" y="167" width="271" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0q-9u-3WR" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
+                                        <rect key="frame" x="42" y="244" width="204" height="30"/>
+                                        <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="d0X-Cl-Ry4"/>
+                                        </constraints>
+                                        <state key="normal" title="Link this device to an account">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Pvr-wr-tIH" kind="show" id="tOa-xB-5VR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ve-ZD-TXf" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
+                                        <rect key="frame" x="68" y="290" width="152" height="30"/>
+                                        <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="5Qb-T3-Su0"/>
+                                        </constraints>
+                                        <state key="normal" title="Create a Ring account">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="dmb-i6-bo9" kind="show" id="gq5-YB-bwO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="8Ve-ZD-TXf" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="5e8-du-W6W"/>
-                            <constraint firstItem="gNW-0s-B79" firstAttribute="top" secondItem="R0q-9u-3WR" secondAttribute="bottom" constant="16" id="ALB-n1-zaM"/>
-                            <constraint firstItem="gNW-0s-B79" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="Zam-9D-oqp"/>
-                            <constraint firstItem="8Ve-ZD-TXf" firstAttribute="top" secondItem="gNW-0s-B79" secondAttribute="bottom" constant="16" id="dTL-r1-hi6"/>
-                            <constraint firstItem="R0q-9u-3WR" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="qhM-55-a9z"/>
-                            <constraint firstItem="gNW-0s-B79" firstAttribute="centerY" secondItem="GmX-eQ-kCs" secondAttribute="centerY" id="ziU-9e-jKq"/>
+                            <constraint firstItem="DXu-A1-gcl" firstAttribute="centerY" secondItem="GmX-eQ-kCs" secondAttribute="centerY" id="65t-Vk-4ms"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DXu-A1-gcl" secondAttribute="trailing" constant="16" id="Ief-ih-29J"/>
+                            <constraint firstItem="OgW-31-HCB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DXu-A1-gcl" secondAttribute="bottom" constant="16" id="NQ7-yl-xKL"/>
+                            <constraint firstItem="DXu-A1-gcl" firstAttribute="centerX" secondItem="GmX-eQ-kCs" secondAttribute="centerX" id="RZK-gk-Fpg"/>
+                            <constraint firstItem="DXu-A1-gcl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GmX-eQ-kCs" secondAttribute="leading" constant="16" id="XDW-06-xaK"/>
+                            <constraint firstItem="DXu-A1-gcl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Lps-eE-m7k" secondAttribute="bottom" constant="16" id="fqS-K5-fFB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LPh-IM-uvN"/>
+                    <connections>
+                        <outlet property="createAccountButton" destination="8Ve-ZD-TXf" id="OBF-nO-YAa"/>
+                        <outlet property="descriptionLabel" destination="PxM-F8-mIM" id="Bbw-uI-ltO"/>
+                        <outlet property="linkDeviceButton" destination="R0q-9u-3WR" id="W2P-ar-nh0"/>
+                        <outlet property="ringImageView" destination="7CK-fT-m09" id="y0f-95-hCZ"/>
+                        <outlet property="welcomeLabel" destination="SnZ-RF-3dF" id="Rgf-TM-GFn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWI-c5-979" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="325.60000000000002" y="23.838080959520241"/>
+            <point key="canvasLocation" x="324.375" y="23.75"/>
         </scene>
         <!--Create Profile View Controller-->
         <scene sceneID="NEP-n0-rvD">
@@ -93,11 +121,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Zbo-H6-yOO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FYO-p5-MWn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8M5-AJ-pxH" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="172.5" y="318.5" width="30" height="30"/>
+                                <rect key="frame" x="145" y="225" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Skip">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -130,11 +158,11 @@
                         <viewControllerLayoutGuide type="bottom" id="5jn-tZ-fJ1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iHs-VJ-9vN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exC-LF-5rp" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="111.5" y="318.5" width="152" height="30"/>
+                                <rect key="frame" x="84" y="225" width="152" height="30"/>
                                 <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Create a Ring account">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -165,7 +193,7 @@
                         <viewControllerLayoutGuide type="bottom" id="9DO-dt-Omo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DGL-2A-dSe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -183,7 +211,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6TZ-Qs-gfp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="q5g-8U-TUZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -193,4 +221,7 @@
             <point key="canvasLocation" x="1106" y="-330"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo-ring-beta2-blanc" width="590" height="216"/>
+    </resources>
 </document>
