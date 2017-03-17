@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,13 +20,26 @@
 
 import UIKit
 
-class RoundedButton: UIButton {
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.layer.borderColor = self.backgroundColor?.cgColor
-        self.layer.borderWidth = 1.0
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 15.0
-        self.contentEdgeInsets = UIEdgeInsetsMake(8.0, 8.0, 8.0, 8.0)
+class WelcomeViewController: UIViewController {
+
+    @IBOutlet weak var ringImageView: UIImageView!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var linkDeviceButton: RoundedButton!
+    @IBOutlet weak var createAccountButton: RoundedButton!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.setupUI()
     }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    func setupUI() {
+
+    }
+
 }
