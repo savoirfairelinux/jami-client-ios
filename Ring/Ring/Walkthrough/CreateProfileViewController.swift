@@ -21,7 +21,13 @@
 import UIKit
 
 class CreateProfileViewController: UIViewController {
+
     @IBAction func skip(_ sender: Any) {
         performSegue(withIdentifier: "ProfileToAccountSegue", sender: sender)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 }
