@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,13 +20,24 @@
 
 import UIKit
 
-class CreateProfileViewController: UIViewController {
-    @IBAction func skip(_ sender: Any) {
-        performSegue(withIdentifier: "ProfileToAccountSegue", sender: sender)
-    }
+class WelcomeViewController: UIViewController {
+
+    @IBOutlet weak var ringImageView: UIImageView!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var linkDeviceButton: RoundedButton!
+    @IBOutlet weak var createAccountButton: RoundedButton!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }
