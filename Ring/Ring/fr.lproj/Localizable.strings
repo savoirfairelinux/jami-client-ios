@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Ring
+
+  Created by Silbino Goncalves Matado on 17-03-20.
+  Copyright © 2017 Savoir-faire Linux. All rights reserved.
+*/
+
+//Welcome Screen
+
+"WelcomeTitle" = "Bienvenue sur Ring";
+"WelcomeText" = "Un compte Ring permet de se connecter sécuritairement avec un autre interlocuteur à travers un réseau distribué";
+"LinkDeviceButton" = "Lier cet appareil à un compte";
+"CreateAccount" = "Créer un compte Ring";
+
