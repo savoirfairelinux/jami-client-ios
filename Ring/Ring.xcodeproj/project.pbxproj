@@ -102,6 +102,7 @@
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
 		56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */; };
+		56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +232,7 @@
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountModelHelper.swift; path = Account/AccountModelHelper.swift; sourceTree = "<group>"; };
 		56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		56AC64DA1E8012CA00EA1AA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Walkthrough.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -466,6 +468,7 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				56AC64D61E80121200EA1AA9 /* Internationalization */,
 				0273C3021E0C689600CF00BA /* Walkthrough */,
 				02EFCACF1E0C3DD600FD8ED1 /* Bridging */,
 				02E1A0271DDE4C3900D75B59 /* Account */,
@@ -574,6 +577,14 @@
 				04399A961D1C2F6100E99CD9 /* libz.tbd */,
 			);
 			name = SYS_DEPS;
+			sourceTree = "<group>";
+		};
+		56AC64D61E80121200EA1AA9 /* Internationalization */ = {
+			isa = PBXGroup;
+			children = (
+				56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */,
+			);
+			name = Internationalization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -685,6 +696,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */,
 				02B22E031DF755F7000358C9 /* WalkthroughStoryboard.storyboard in Resources */,
 				04399A061D1C2D9D00E99CD9 /* LaunchScreen.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */,
@@ -812,6 +824,14 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				56AC64DA1E8012CA00EA1AA9 /* Base */,
+			);
+			name = Walkthrough.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -819,6 +839,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -867,6 +888,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
