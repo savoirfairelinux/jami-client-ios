@@ -36,6 +36,9 @@ class CreateRingAccountViewController: UITableViewController {
     var mAccountViewModel: AccountViewModel = AccountViewModel()
 
     @IBOutlet weak var mCreateAccountButton: RoundedButton!
+    
+    @IBOutlet weak var createAccountTitleLabel: UILabel!
+    
 
     /**
      Cell identifiers
@@ -89,6 +92,8 @@ class CreateRingAccountViewController: UITableViewController {
     fileprivate func setupUI() {
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.createAccountTitleLabel.text = NSLocalizedString("CreateAccountFormTitle", comment: "")
     }
 
     fileprivate func setCreateAccountAsLoading() {
@@ -120,21 +125,25 @@ class CreateRingAccountViewController: UITableViewController {
         
         if currentCellType == .registerPublicUsername {
             let cell = tableView.dequeueReusableCell(withIdentifier: switchCellId, for: indexPath) as! SwitchCell
-            cell.titleLabel.text = "text..."
+            cell.titleLabel.text = NSLocalizedString("RegisterPublicUsername", comment: "")
             cell.titleLabel.textColor = .white
             cell.registerSwitch.isOn = false
             return cell
         } else if currentCellType == .usernameField {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
+            cell.textField.placeholder = NSLocalizedString("EnterNewUsernamePlaceholder", comment: "")
             return cell
         } else if currentCellType == .passwordNotice {
-            let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellId, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellId, for: indexPath) as! TextCell
+            cell.label.text = NSLocalizedString("ChooseStrongPassword", comment: "")
             return cell
         } else if currentCellType == .newPasswordField {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
+            cell.textField.placeholder = NSLocalizedString("NewPasswordPlaceholder", comment: "")
             return cell
         } else if currentCellType == .repeatPasswordField {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
+            cell.textField.placeholder = NSLocalizedString("RepeatPasswordPlaceholder", comment: "")
             return cell
         } else {
             return UITableViewCell()
