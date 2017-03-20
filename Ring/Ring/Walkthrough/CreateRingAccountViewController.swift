@@ -106,6 +106,24 @@ class CreateRingAccountViewController: UITableViewController {
         self.mCreateAccountButton.setTitle("Create a Ring account", for: .normal)
         self.mCreateAccountButton.isUserInteractionEnabled = true
     }
+
+    /**
+     Show or hide the username field cell in function of the switch state
+     */
+    
+    @objc fileprivate func toggleRegisterSwitch(sender: UISwitch) {
+        
+        let usernameFieldCellIndex = 1
+        
+        if !sender.isOn {
+            self.cells.remove(at: usernameFieldCellIndex)
+            self.tableView.deleteRows(at: [IndexPath(row: usernameFieldCellIndex, section: 0)], with: .automatic)
+        } else {
+            self.cells.insert(.usernameField, at: usernameFieldCellIndex)
+            self.tableView.insertRows(at: [IndexPath(row: usernameFieldCellIndex, section: 0)], with: .automatic)
+        }
+        
+    }
     
     //MARK: TableView datasource
     
@@ -128,6 +146,7 @@ class CreateRingAccountViewController: UITableViewController {
             cell.titleLabel.text = NSLocalizedString("RegisterPublicUsername", comment: "")
             cell.titleLabel.textColor = .white
             cell.registerSwitch.isOn = false
+            cell.registerSwitch.addTarget(self, action: #selector(toggleRegisterSwitch(sender:)), for: .valueChanged)
             return cell
         } else if currentCellType == .usernameField {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
