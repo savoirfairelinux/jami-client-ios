@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -40,6 +40,19 @@ class WelcomeViewController: UIViewController {
 
     func setupUI() {
 
-    }
+        let walkthroughTableName = "Walkthrough"
 
+        self.welcomeLabel.text = NSLocalizedString("WelcomeTitle",
+                                                   tableName: walkthroughTableName,
+                                                   comment: "")
+        self.descriptionLabel.text = NSLocalizedString("WelcomeText",
+                                                       tableName: walkthroughTableName,
+                                                       comment: "")
+        self.linkDeviceButton.setTitle(NSLocalizedString("LinkDeviceButton",
+                                                         tableName: walkthroughTableName,
+                                                         comment: ""), for: .normal)
+        self.createAccountButton.setTitle(NSLocalizedString("CreateAccount",
+                                                            tableName: walkthroughTableName,
+                                                            comment: ""), for: .normal)
+    }
 }
