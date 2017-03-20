@@ -18,18 +18,20 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-//Welcome Screen
+import UIKit
 
-"WelcomeTitle" = "Welcome to Ring";
-"WelcomeText" = "A Ring account allows you to reach people securely in peer to peer through fully distributed network";
-"LinkDeviceButton" = "Link this device to an account";
-"CreateAccount" = "Create a Ring account";
+class RoundedTextField: UITextField {
 
-//Create Account form
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 1.0
+        self.clipsToBounds = true
+    }
 
-"CreateAccountFormTitle" = "Create your Ring account";
-"RegisterPublicUsername" = "Register public username (experimental)";
-"ChooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"EnterNewUsernamePlaceholder" = "Enter new username";
-"NewPasswordPlaceholder" = "New Password";
-"RepeatPasswordPlaceholder" = "Repeat new password";
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.frame.size.height / 2.0
+    }
+
+}
