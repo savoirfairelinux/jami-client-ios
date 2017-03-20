@@ -174,7 +174,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="69" id="xv3-kL-wNV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="69" id="xv3-kL-wNV" customClass="SwitchCell" customModule="Ring" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xv3-kL-wNV" id="u8d-10-5fQ">
@@ -201,6 +201,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="registerSwitch" destination="eXQ-lo-PPY" id="SlD-P6-SiF"/>
+                                    <outlet property="titleLabel" destination="l6E-2a-51c" id="28k-pL-Ri6"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

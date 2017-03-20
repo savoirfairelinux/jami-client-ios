@@ -96,6 +96,7 @@
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */; };
 		56AC64D91E8012CA00EA1AA9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Localizable.strings */; };
+		56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +222,7 @@
 		56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		56AC64DA1E8012CA00EA1AA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		56AC64DC1E80135A00EA1AA9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +312,7 @@
 		0273C3021E0C689600CF00BA /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				56AC64DD1E804EB500EA1AA9 /* Cells */,
 				0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */,
 				0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */,
 			);
@@ -569,6 +572,14 @@
 			name = Internationalization;
 			sourceTree = "<group>";
 		};
+		56AC64DD1E804EB500EA1AA9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -735,6 +746,7 @@
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
+				56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				02B22DFD1DF755BB000358C9 /* AccountViewModel.swift in Sources */,
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
