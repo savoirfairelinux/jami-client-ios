@@ -23,11 +23,27 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+fileprivate enum CreateRingAccountCellType {
+    case registerPublicUsername
+    case usernameField
+    case passwordNotice
+    case newPasswordField
+    case repeatPasswordField
+}
+
 class CreateRingAccountViewController: UITableViewController {
 
     var mAccountViewModel = CreateRingAccountViewModel()
 
     @IBOutlet weak var mCreateAccountButton: RoundedButton!
+
+    /**
+     Cell identifiers
+     */
+    
+    let switchCellId = "SwitchCellId"
+    let textFieldCellId = "TextFieldCellId"
+    let tableViewCellId = "TableViewCellId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +51,6 @@ class CreateRingAccountViewController: UITableViewController {
         self.bindViews()
 
         self.setupUI()
-
     }
 
     /**
@@ -88,18 +103,41 @@ class CreateRingAccountViewController: UITableViewController {
     }
 
     //MARK: TableView datasource
-
+    fileprivate var cells :[CreateRingAccountCellType] = [.registerPublicUsername, .passwordNotice, .newPasswordField, .repeatPasswordField]
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return cells.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath)
-        return cell
+        
+        let currentCellType = cells[indexPath.row]
+        
+        if currentCellType == .registerPublicUsername {
+            let cell = tableView.dequeueReusableCell(withIdentifier: switchCellId, for: indexPath) as! SwitchCell
+            cell.titleLabel.text = "text..."
+            cell.titleLabel.textColor = .white
+            cell.registerSwitch.isOn = false
+            return cell
+        } else if currentCellType == .usernameField {
+            let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
+            return cell
+        } else if currentCellType == .passwordNotice {
+            let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellId, for: indexPath)
+            return cell
+        } else if currentCellType == .newPasswordField {
+            let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
+            return cell
+        } else if currentCellType == .repeatPasswordField {
+            let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
 
 }
