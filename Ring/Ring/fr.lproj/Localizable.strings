@@ -25,3 +25,12 @@
 "LinkDeviceButton" = "Lier cet appareil à un compte";
 "CreateAccount" = "Créer un compte Ring";
 
+//Create Account form
+
+"CreateAccountFormTitle" = "Créer votre compte Ring";
+"RegisterPublicUsername" = "Enregister un nom d'utilisateur (expérimental)";
+"ChooseStrongPassword" = "Saisir un mot de passe sécuritaire facile à retenir pour protéger votre compte Ring";
+"EnterNewUsernamePlaceholder" = "Saisir un nouveau nom d'utilisateur";
+"NewPasswordPlaceholder" = "Nouveau mot de passe";
+"RepeatPasswordPlaceholder" = "Saisir à nouveau le mot de passe";
+
