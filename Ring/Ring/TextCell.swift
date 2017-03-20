@@ -18,18 +18,21 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-//Welcome Screen
+import UIKit
 
-"WelcomeTitle" = "Welcome to Ring";
-"WelcomeText" = "A Ring account allows you to reach people securely in peer to peer through fully distributed network";
-"LinkDeviceButton" = "Link this device to an account";
-"CreateAccount" = "Create a Ring account";
+class TextCell: UITableViewCell {
+    
+    @IBOutlet weak var label: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
 
-//Create Account form
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
 
-"CreateAccountFormTitle" = "Create your Ring account";
-"RegisterPublicUsername" = "Register public username (experimental)";
-"ChooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"EnterNewUsernamePlaceholder" = "Enter new username";
-"NewPasswordPlaceholder" = "New Password";
-"RepeatPasswordPlaceholder" = "Repeat new password";
+        // Configure the view for the selected state
+    }
+
+}
