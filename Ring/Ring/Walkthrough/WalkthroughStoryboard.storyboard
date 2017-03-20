@@ -156,7 +156,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="MnN-De-arJ">
-                            <rect key="frame" x="0.0" y="97" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="166" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsT-SB-0AP" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
@@ -204,6 +204,32 @@
                                 <connections>
                                     <outlet property="registerSwitch" destination="eXQ-lo-PPY" id="SlD-P6-SiF"/>
                                     <outlet property="titleLabel" destination="l6E-2a-51c" id="28k-pL-Ri6"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" rowHeight="69" id="hll-q9-QzR" customClass="TextFieldCell" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="97" width="375" height="69"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hll-q9-QzR" id="b0d-cJ-IJT">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dWn-2T-XDN">
+                                            <rect key="frame" x="8" y="8" width="359" height="52.5"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="dWn-2T-XDN" secondAttribute="bottom" constant="8" id="ExW-Ye-ifb"/>
+                                        <constraint firstAttribute="trailing" secondItem="dWn-2T-XDN" secondAttribute="trailing" constant="8" id="TZI-tk-XCc"/>
+                                        <constraint firstItem="dWn-2T-XDN" firstAttribute="top" secondItem="b0d-cJ-IJT" secondAttribute="top" constant="8" id="gXN-EW-HYY"/>
+                                        <constraint firstItem="dWn-2T-XDN" firstAttribute="leading" secondItem="b0d-cJ-IJT" secondAttribute="leading" constant="8" id="zAm-rb-vhR"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="textField" destination="dWn-2T-XDN" id="xz6-aa-Izw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
