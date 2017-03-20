@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -30,6 +30,11 @@ class WelcomeViewController: UIViewController {
     let createProfileSegueIdentifier = "CreateProfileSegue"
     let linkDeviceToAccountSegueIdentifier = "LinkDeviceToAccountSegue"
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -53,5 +58,23 @@ class WelcomeViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
+    func setupUI() {
+
+    let walkthroughTableName = "Walkthrough"
+
+        self.welcomeLabel.text = NSLocalizedString("WelcomeTitle",
+                                                   tableName: walkthroughTableName,
+                                                   comment: "")
+        self.descriptionLabel.text = NSLocalizedString("WelcomeText",
+                                                       tableName: walkthroughTableName,
+                                                       comment: "")
+        self.linkDeviceButton.setTitle(NSLocalizedString("LinkDeviceButton",
+                                                         tableName: walkthroughTableName,
+                                                         comment: ""), for: .normal)
+        self.createAccountButton.setTitle(NSLocalizedString("CreateAccount",
+                                                            tableName: walkthroughTableName,
+                                                            comment: ""), for: .normal)
     }
 }
