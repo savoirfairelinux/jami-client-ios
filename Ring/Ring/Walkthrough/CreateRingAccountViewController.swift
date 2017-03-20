@@ -23,7 +23,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class CreateRingAccountViewController: UIViewController {
+class CreateRingAccountViewController: UITableViewController {
 
     var mAccountViewModel = CreateRingAccountViewModel()
 
@@ -33,6 +33,9 @@ class CreateRingAccountViewController: UIViewController {
         super.viewDidLoad()
 
         self.bindViews()
+
+        self.setupUI()
+
     }
 
     /**
@@ -64,6 +67,15 @@ class CreateRingAccountViewController: UIViewController {
         })
     }
 
+    /**
+     Customize the views
+     */
+
+    fileprivate func setupUI() {
+        self.tableView.estimatedRowHeight = 44.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+    }
+
     fileprivate func setCreateAccountAsLoading() {
         print("Creating account...")
         self.mCreateAccountButton.setTitle("Loading...", for: .normal)
@@ -74,4 +86,20 @@ class CreateRingAccountViewController: UIViewController {
         self.mCreateAccountButton.setTitle("Create a Ring account", for: .normal)
         self.mCreateAccountButton.isUserInteractionEnabled = true
     }
+
+    //MARK: TableView datasource
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath)
+        return cell
+    }
+
 }

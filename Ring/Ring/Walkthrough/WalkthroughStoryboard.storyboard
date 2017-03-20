@@ -142,7 +142,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="ja8-pO-qtF" kind="show" identifier="ProfileToAccountSegue" id="3D3-9L-iuy"/>
+                        <segue destination="kzh-87-Ao9" kind="show" identifier="ProfileToAccountSegue" id="CDO-bH-qiw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YDh-Qj-wfv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -150,39 +150,74 @@
             <point key="canvasLocation" x="1105" y="367"/>
         </scene>
         <!--Create Ring Account View Controller-->
-        <scene sceneID="hlW-WP-KN4">
+        <scene sceneID="XTt-go-ZNJ">
             <objects>
-                <viewController id="ja8-pO-qtF" customClass="CreateRingAccountViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lys-bB-GcZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="5jn-tZ-fJ1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iHs-VJ-9vN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                <tableViewController id="kzh-87-Ao9" customClass="CreateRingAccountViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="69" sectionHeaderHeight="28" sectionFooterHeight="28" id="e9y-lu-Idq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exC-LF-5rp" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="84" y="225" width="152" height="30"/>
-                                <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Create a Ring account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="exC-LF-5rp" firstAttribute="centerY" secondItem="iHs-VJ-9vN" secondAttribute="centerY" id="3gQ-AK-GLL"/>
-                            <constraint firstItem="exC-LF-5rp" firstAttribute="centerX" secondItem="iHs-VJ-9vN" secondAttribute="centerX" id="eBl-JO-6ae"/>
-                        </constraints>
-                    </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="MnN-De-arJ">
+                            <rect key="frame" x="0.0" y="97" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsT-SB-0AP" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
+                                    <rect key="frame" x="111" y="7" width="152" height="30"/>
+                                    <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="Create a Ring account">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="gsT-SB-0AP" firstAttribute="centerY" secondItem="MnN-De-arJ" secondAttribute="centerY" id="2hh-DT-Non"/>
+                                <constraint firstItem="gsT-SB-0AP" firstAttribute="centerX" secondItem="MnN-De-arJ" secondAttribute="centerX" id="tMA-Qg-oxa"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="69" id="xv3-kL-wNV">
+                                <rect key="frame" x="0.0" y="28" width="375" height="69"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xv3-kL-wNV" id="u8d-10-5fQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Register public username (experimental)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6E-2a-51c">
+                                            <rect key="frame" x="8" y="8" width="302" height="52.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eXQ-lo-PPY">
+                                            <rect key="frame" x="318" y="19" width="51" height="31"/>
+                                        </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="l6E-2a-51c" secondAttribute="bottom" constant="8" id="3mf-5d-kOd"/>
+                                        <constraint firstItem="eXQ-lo-PPY" firstAttribute="centerY" secondItem="u8d-10-5fQ" secondAttribute="centerY" id="UJ8-RD-ddQ"/>
+                                        <constraint firstItem="l6E-2a-51c" firstAttribute="leading" secondItem="u8d-10-5fQ" secondAttribute="leading" constant="8" id="UsX-gS-0TN"/>
+                                        <constraint firstAttribute="trailing" secondItem="eXQ-lo-PPY" secondAttribute="trailing" constant="8" id="cE9-Xf-bT3"/>
+                                        <constraint firstItem="eXQ-lo-PPY" firstAttribute="leading" secondItem="l6E-2a-51c" secondAttribute="trailing" constant="8" id="cyW-Kw-ea3"/>
+                                        <constraint firstItem="l6E-2a-51c" firstAttribute="top" secondItem="u8d-10-5fQ" secondAttribute="top" constant="8" id="oun-Kt-auw"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kzh-87-Ao9" id="fWb-k5-HBL"/>
+                            <outlet property="delegate" destination="kzh-87-Ao9" id="DE2-dv-wl2"/>
+                        </connections>
+                    </tableView>
                     <connections>
-                        <outlet property="mCreateAccountButton" destination="exC-LF-5rp" id="z71-gN-58V"/>
-                        <segue destination="E3W-r7-J4y" kind="show" identifier="AccountToPermissionsSegue" id="KYM-Jg-1oB"/>
+                        <outlet property="mCreateAccountButton" destination="gsT-SB-0AP" id="9Fj-aJ-0Ik"/>
+                        <segue destination="E3W-r7-J4y" kind="show" identifier="AccountToPermissionsSegue" id="Zig-iC-h9U"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fjG-WS-Fbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W0G-TV-Z9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1868" y="367"/>
+            <point key="canvasLocation" x="1965.5999999999999" y="366.56671664167919"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="c8H-6M-3dO">
@@ -200,7 +235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bS8-E0-lOu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2646" y="367"/>
+            <point key="canvasLocation" x="2852" y="367"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="JGg-HD-FXJ">
