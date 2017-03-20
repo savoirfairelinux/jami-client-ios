@@ -43,6 +43,8 @@ class CreateRingAccountViewModel {
      */
     fileprivate var account: AccountModel?
 
+    var registerUsername = Variable<Bool>(true)
+
     /**
      Default constructor
      */
