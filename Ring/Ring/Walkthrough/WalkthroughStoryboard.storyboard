@@ -155,8 +155,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="gnd-b0-Ncm">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your Ring account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIX-eC-baN">
+                                    <rect key="frame" x="8" y="8" width="359" height="114"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="AIX-eC-baN" firstAttribute="leading" secondItem="gnd-b0-Ncm" secondAttribute="leading" constant="8" id="D6R-DY-N4I"/>
+                                <constraint firstAttribute="trailing" secondItem="AIX-eC-baN" secondAttribute="trailing" constant="8" id="c58-zW-D8i"/>
+                                <constraint firstAttribute="bottom" secondItem="AIX-eC-baN" secondAttribute="bottom" constant="8" id="k5Z-6d-hx8"/>
+                                <constraint firstItem="AIX-eC-baN" firstAttribute="top" secondItem="gnd-b0-Ncm" secondAttribute="top" constant="8" id="peB-GQ-GOz"/>
+                            </constraints>
+                        </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="MnN-De-arJ">
-                            <rect key="frame" x="0.0" y="235" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="365" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsT-SB-0AP" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
@@ -175,7 +194,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCellId" rowHeight="69" id="xv3-kL-wNV" customClass="SwitchCell" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="69"/>
+                                <rect key="frame" x="0.0" y="158" width="375" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xv3-kL-wNV" id="u8d-10-5fQ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
@@ -207,7 +226,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCellId" rowHeight="69" id="hll-q9-QzR" customClass="TextFieldCell" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="97" width="375" height="69"/>
+                                <rect key="frame" x="0.0" y="227" width="375" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hll-q9-QzR" id="b0d-cJ-IJT">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
@@ -233,7 +252,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCellId" rowHeight="69" id="ExW-Pf-YtL" customClass="TextCell" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="166" width="375" height="69"/>
+                                <rect key="frame" x="0.0" y="296" width="375" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ExW-Pf-YtL" id="D4j-0H-Fhi">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
