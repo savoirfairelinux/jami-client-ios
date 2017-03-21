@@ -101,6 +101,12 @@
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
+		5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */; };
+		5557FD4B1E81AECF0043E394 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFA1DF755BB000358C9 /* AccountModel.swift */; };
+		5557FD4C1E81AF840043E394 /* AccountConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C71E1EAD70009A3510 /* AccountConfigModel.swift */; };
+		5557FD4D1E81AFF50043E394 /* ConfigKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80CC1E1EB2E4009A3510 /* ConfigKeyModel.swift */; };
+		5557FD4E1E81B1F20043E394 /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
+		5557FD4F1E81B2990043E394 /* AccountCredentialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,6 +235,7 @@
 		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountModelHelper.swift; path = Account/AccountModelHelper.swift; sourceTree = "<group>"; };
+		5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModelHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -483,6 +490,7 @@
 		04399A0F1D1C2D9D00E99CD9 /* RingTests */ = {
 			isa = PBXGroup;
 			children = (
+				5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */,
 				024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */,
 				029CE9D61E1D8C860000C8E1 /* ServiceDaemonTests.swift */,
 				028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */,
@@ -759,9 +767,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */,
+				5557FD4E1E81B1F20043E394 /* AccountModelHelper.swift in Sources */,
+				5557FD4F1E81B2990043E394 /* AccountCredentialsModel.swift in Sources */,
+				5557FD4B1E81AECF0043E394 /* AccountModel.swift in Sources */,
+				5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */,
+				5557FD4C1E81AF840043E394 /* AccountConfigModel.swift in Sources */,
 				024B61331DF765CA00C4F9DE /* DaemonService.swift in Sources */,
 				04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */,
 				029CE9D71E1D8C860000C8E1 /* ServiceDaemonTests.swift in Sources */,
+				5557FD4D1E81AFF50043E394 /* ConfigKeyModel.swift in Sources */,
 				024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */,
 				029CE9D81E1D8DC70000C8E1 /* ServiceEvent.swift in Sources */,
 				024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */,
