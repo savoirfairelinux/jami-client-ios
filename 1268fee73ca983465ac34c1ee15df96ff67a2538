@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bab3e1c7_32d10dce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-03-21T15:58:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bab3e1c7_b202ddb2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 31
+      },
+      "revId": "1268fee73ca983465ac34c1ee15df96ff67a2538",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bab3e1c7_9231d9a4",
         "filename": "Ring/Ring/WelcomeViewController.swift",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "bab3e1c7_52d601c7",
+        "filename": "Ring/Ring/WelcomeViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-03-21T15:58:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bab3e1c7_9231d9a4",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 2
+      },
+      "revId": "1268fee73ca983465ac34c1ee15df96ff67a2538",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bab3e1c7_d2ff51a9",
         "filename": "Ring/Ring/WelcomeViewController.swift",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2017-03-21T13:50:58Z",
       "side": 1,
       "message": "Please remove these whitespaces.\nYou can configure your IDE to take care of it for you.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 4
+      },
+      "revId": "1268fee73ca983465ac34c1ee15df96ff67a2538",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bab3e1c7_f2da95e8",
+        "filename": "Ring/Ring/WelcomeViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-03-21T15:58:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bab3e1c7_d2ff51a9",
       "range": {
         "startLine": 12,
         "startChar": 0,
