@@ -43,12 +43,78 @@ class CreateRingAccountViewModel {
      */
     fileprivate var account: AccountModel?
 
-    var registerUsername = Variable<Bool>(true)
-
     /**
      The accountService instance injected in initializer.
      */
     fileprivate let accountService: AccountsService
+
+    //MARK: - Rx Variables and Observers
+
+    var username = Variable<String>("")
+    var password = Variable<String>("")
+    var repeatPassword = Variable<String>("")
+
+    var usernameValid :Observable<Bool> {
+        return username.asObservable().map({ username in
+            return !username.isEmpty
+        })
+    }
+
+    var passwordValid :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.username.asObservable(),
+                                              self.password.asObservable(),
+                                              self.repeatPassword.asObservable())
+        { (username, password, repeatPassword) in
+            return password.characters.count >= 6
+        }
+    }
+
+    var passwordsEqual :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.password.asObservable(),
+                                              self.repeatPassword.asObservable())
+        { password, repeatPassword in
+            return password == repeatPassword
+        }
+    }
+
+    var canCreateAccount :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.registerUsername.asObservable(),
+                                              self.usernameValid,
+                                              self.passwordValid,
+                                              self.passwordsEqual)
+        { registerUsername, usernameValid, passwordValid, passwordsEquals in
+            if registerUsername {
+                return usernameValid && passwordValid && passwordsEquals
+            } else {
+                return passwordValid && passwordsEquals
+            }
+        }
+    }
+
+    var registerUsername = Variable<Bool>(true)
+
+    //Observes if the field is not empty
+    var hasNewPassword :Observable<Bool> {
+        return self.password.asObservable().map({ password in
+            return password.characters.count == 0
+        })
+    }
+
+    //Observes if the password is valid and is not empty to show the error message
+    var hidePasswordError :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.passwordValid, hasNewPassword)
+        { isPasswordValid, hasNewPassword in
+            return isPasswordValid || hasNewPassword
+        }
+    }
+
+    //Observes if the password is valid and is not empty to show the error message
+    var hideRepeatPasswordError :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.passwordValid, self.passwordsEqual) { isPasswordValid,
+            isPasswordsEquals in
+            return !isPasswordValid || isPasswordsEquals
+        }
+    }
 
     /**
      Default constructor
@@ -119,4 +185,5 @@ class CreateRingAccountViewModel {
             })
             .addDisposableTo(disposeBag)
     }
+
 }
