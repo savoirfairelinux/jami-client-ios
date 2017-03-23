@@ -767,13 +767,10 @@
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
-<<<<<<< HEAD
 				02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */,
 				5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */,
-=======
 				56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */,
 				56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */,
->>>>>>> 5c9a4b4... CreateRingAccountViewController.swift: change superclass
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,

@@ -81,6 +81,8 @@ class CreateRingAccountViewController: UITableViewController {
                 }
                 self?.setCreateAccountAsIdle()
         })
+
+        _ = self.mAccountViewModel.isValid.bindTo(self.mCreateAccountButton.rx.isEnabled)
     }
 
     /**
@@ -146,6 +148,7 @@ class CreateRingAccountViewController: UITableViewController {
         } else if currentCellType == .usernameField {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
             cell.textField.placeholder = NSLocalizedString("EnterNewUsernamePlaceholder", tableName: "Walkthrough", comment: "")
+            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.username)
             return cell
         } else if currentCellType == .passwordNotice {
             let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellId, for: indexPath) as! TextCell
@@ -154,10 +157,12 @@ class CreateRingAccountViewController: UITableViewController {
         } else if currentCellType == .newPasswordField {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
             cell.textField.placeholder = NSLocalizedString("NewPasswordPlaceholder", tableName: "Walkthrough", comment: "")
+            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.password)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
             cell.textField.placeholder = NSLocalizedString("RepeatPasswordPlaceholder", tableName: "Walkthrough", comment: "")
+            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.repeatPassword)
             return cell
         }
     }
