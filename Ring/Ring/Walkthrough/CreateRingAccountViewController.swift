@@ -35,6 +35,8 @@ class CreateRingAccountViewController: UITableViewController {
 
     var mAccountViewModel = CreateRingAccountViewModel()
 
+    let disposeBag = DisposeBag()
+
     @IBOutlet weak var mCreateAccountButton: RoundedButton!
     @IBOutlet weak var createAccountTitleLabel: UILabel!
 
@@ -81,6 +83,8 @@ class CreateRingAccountViewController: UITableViewController {
                 }
                 self?.setCreateAccountAsIdle()
         })
+
+        _ = self.mAccountViewModel.isValid.bindTo(self.mCreateAccountButton.rx.isEnabled).addDisposableTo(disposeBag)
     }
 
     /**
@@ -146,6 +150,7 @@ class CreateRingAccountViewController: UITableViewController {
         } else if currentCellType == .usernameField {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
             cell.textField.placeholder = NSLocalizedString("EnterNewUsernamePlaceholder", tableName: "Walkthrough", comment: "")
+            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.username).addDisposableTo(disposeBag)
             return cell
         } else if currentCellType == .passwordNotice {
             let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellId, for: indexPath) as! TextCell
@@ -154,10 +159,12 @@ class CreateRingAccountViewController: UITableViewController {
         } else if currentCellType == .newPasswordField {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
             cell.textField.placeholder = NSLocalizedString("NewPasswordPlaceholder", tableName: "Walkthrough", comment: "")
+            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.password).addDisposableTo(disposeBag)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
             cell.textField.placeholder = NSLocalizedString("RepeatPasswordPlaceholder", tableName: "Walkthrough", comment: "")
+            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.repeatPassword).addDisposableTo(disposeBag)
             return cell
         }
     }
