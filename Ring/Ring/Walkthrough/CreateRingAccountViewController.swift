@@ -35,6 +35,8 @@ class CreateRingAccountViewController: UITableViewController {
 
     var mAccountViewModel = CreateRingAccountViewModel()
 
+    let disposeBag = DisposeBag()
+
     @IBOutlet weak var mCreateAccountButton: RoundedButton!
     @IBOutlet weak var createAccountTitleLabel: UILabel!
 
@@ -81,6 +83,8 @@ class CreateRingAccountViewController: UITableViewController {
                 }
                 self?.setCreateAccountAsIdle()
         })
+
+        _ = self.mAccountViewModel.canCreateAccount.bindTo(self.mCreateAccountButton.rx.isEnabled).addDisposableTo(disposeBag)
     }
 
     /**
@@ -147,6 +151,21 @@ class CreateRingAccountViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
             cell.textField.isSecureTextEntry = false
             cell.textField.placeholder = NSLocalizedString("EnterNewUsernamePlaceholder", tableName: "Walkthrough", comment: "")
+
+            //Binds the username field value to the ViewModel
+            _ = cell.textField.rx.text.orEmpty
+                .throttle(1, scheduler: MainScheduler.instance)
+                .distinctUntilChanged()
+                .bindTo(self.mAccountViewModel.username)
+                .addDisposableTo(disposeBag)
+
+            //Switch to new password cell when return button is touched
+            _ = cell.textField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
+                self.switchToCell(withType: .newPasswordField)
+            })
+
+            _ = self.mAccountViewModel.usernameValidationMessage.bindTo(cell.errorMessageLabel.rx.text)
+
             return cell
         } else if currentCellType == .passwordNotice {
             let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellId, for: indexPath) as! TextCell
@@ -156,13 +175,58 @@ class CreateRingAccountViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
             cell.textField.isSecureTextEntry = true
             cell.textField.placeholder = NSLocalizedString("NewPasswordPlaceholder", tableName: "Walkthrough", comment: "")
+            cell.errorMessageLabel.text = NSLocalizedString("PasswordCharactersNumberError", tableName: "Walkthrough", comment: "")
+
+            //Binds the password field value to the ViewModel
+            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.password).addDisposableTo(disposeBag)
+
+            //Observes if the field is not empty
+            let textFieldNotEmpty = cell.textField.rx.text.map({
+                    return $0!.characters.count > 0
+                }
+            ).asObservable()
+
+            //Observes if the password is valid and is not empty to show the error message
+            let hideErrorMessage = Observable<Bool>.combineLatest(self.mAccountViewModel.passwordValid, textFieldNotEmpty) { isPasswordValid, textFieldNotEmpty in
+                return isPasswordValid || !textFieldNotEmpty
+            }
+
+            //Binds the observer to show the error label if the field is not empty
+            _ = hideErrorMessage.bindTo(cell.errorMessageLabel.rx.isHidden).addDisposableTo(disposeBag)
+
+            //Switch to the repeat pasword cell when return button is touched
+            _ = cell.textField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
+                self.switchToCell(withType: .repeatPasswordField)
+            })
+
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellId, for: indexPath) as! TextFieldCell
             cell.textField.isSecureTextEntry = true
+            cell.errorMessageLabel.text = NSLocalizedString("PasswordNotMatchingError", tableName: "Walkthrough", comment: "")
             cell.textField.placeholder = NSLocalizedString("RepeatPasswordPlaceholder", tableName: "Walkthrough", comment: "")
+
+            //Binds the repeat password field value to the ViewModel
+            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.repeatPassword).addDisposableTo(disposeBag)
+
+            //Observes if the password is valid and is not empty to show the error message
+            let hideErrorMessage = Observable<Bool>.combineLatest(self.mAccountViewModel.passwordValid, self.mAccountViewModel.passwordsEqual) { isPasswordValid, isPasswordsEquals in
+                return !isPasswordValid || isPasswordsEquals
+            }
+
+            //Binds the observer to the text field 'hidden' property
+            _ = hideErrorMessage.bindTo(cell.errorMessageLabel.rx.isHidden).addDisposableTo(disposeBag)
+
             return cell
         }
     }
 
+    fileprivate func switchToCell(withType cellType: CreateRingAccountCellType) {
+        if let cellIndex = self.cells.index(of: cellType) {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellIndex, section: 0)) as? TextFieldCell {
+                cell.textField.becomeFirstResponder()
+            }
+            self.tableView.scrollToRow(at: IndexPath(row: cellIndex, section: 0), at: .bottom, animated: false)
+        }
+    }
 }
