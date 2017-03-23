@@ -33,3 +33,6 @@
 "EnterNewUsernamePlaceholder" = "Enter new username";
 "NewPasswordPlaceholder" = "New Password";
 "RepeatPasswordPlaceholder" = "Repeat new password";
+"PasswordCharactersNumberError" = "6 characters minimum";
+"PasswordNotMatchingError" = "Passwords do not match";
+"LookingForUsernameAvailability" = "Looking for username availability...";

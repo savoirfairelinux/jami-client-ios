@@ -38,12 +38,91 @@ class CreateRingAccountViewModel {
      */
     fileprivate var addAccountDisposable: Disposable?
 
+    //MARK: - Rx Variables and Observers
+
+    var username = Variable<String>("")
+    var password = Variable<String>("")
+    var repeatPassword = Variable<String>("")
+
+    var usernameValid :Observable<Bool> {
+        return username.asObservable().map({ username in
+            return !username.isEmpty
+        })
+    }
+
+    var passwordValid :Observable<Bool> {
+            return Observable<Bool>.combineLatest(self.username.asObservable(),
+                                                  self.password.asObservable(),
+                                                  self.repeatPassword.asObservable())
+            { (username, password, repeatPassword) in
+                return password.characters.count >= 6
+        }
+    }
+
+    var passwordsEqual :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.password.asObservable(),
+                                              self.repeatPassword.asObservable())
+        { password, repeatPassword in
+            return password == repeatPassword
+        }
+    }
+
+    var canCreateAccount :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.passwordValid, self.passwordsEqual)
+        { isPasswordValid, isPasswordsEquals in
+            return isPasswordValid == isPasswordsEquals
+        }
+    }
+
+    var usernameValidationMessage :Observable<String> {
+        return self.username.asObservable().flatMapLatest({ username in
+            return self.usernameValidation(username: username)
+        })
+    }
+
+    func usernameValidation(username: String) -> Observable<String> {
+
+        if username.isEmpty {
+            return Observable.just("...")
+        }
+
+        let observable = Observable<String>.create({ observer in
+            print("value = \(username)")
+            print("Subscribed")
+
+            observer.onNext("Searching...")
+
+            let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
+            timer.scheduleOneshot(deadline: DispatchTime.now() + .seconds(2))
+
+            let cancel = Disposables.create {
+                print("Disposed")
+                timer.cancel()
+            }
+
+            timer.setEventHandler {
+                if cancel.isDisposed {
+                    return
+                }
+                observer.onNext("DONE!")
+            }
+            timer.resume()
+            
+            return cancel
+        })
+
+        return observable
+    }
+
+    var showUsernameField = Variable<Bool>(true)
+
+    //MARK: -
+
     /**
      The account under this ViewModel.
      */
-    fileprivate var account: AccountModel?
 
-    var showUsernameField = Variable<Bool>(true)
+    fileprivate var account: AccountModel?
 
     /**
      Default constructor
