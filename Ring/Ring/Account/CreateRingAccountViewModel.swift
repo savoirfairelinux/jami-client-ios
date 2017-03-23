@@ -38,6 +38,28 @@ class CreateRingAccountViewModel {
      */
     fileprivate var addAccountDisposable: Disposable?
 
+    var username = Variable<String>("")
+    var password = Variable<String>("")
+    var repeatPassword = Variable<String>("")
+
+    var isPasswordValid :Observable<Bool> {
+            return Observable<Bool>.combineLatest(self.username.asObservable(), self.password.asObservable(), self.repeatPassword.asObservable()) { (username, password, repeatPassword) in
+                return password.characters.count >= 6
+        }
+    }
+
+    var isPasswordsEquals :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.password.asObservable(), self.repeatPassword.asObservable()) { password, repeatPassword in
+            return password == repeatPassword
+        }
+    }
+
+    var canCreateAccount :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.isPasswordValid, self.isPasswordsEquals) { isPasswordValid, isPasswordsEquals in
+            return isPasswordValid == isPasswordsEquals
+        }
+    }
+
     /**
      The account under this ViewModel.
      */
