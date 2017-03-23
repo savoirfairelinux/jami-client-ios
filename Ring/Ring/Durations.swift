@@ -18,21 +18,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-//Welcome Screen
+import Foundation
 
-"WelcomeTitle" = "Welcome to Ring";
-"WelcomeText" = "A Ring account allows you to reach people securely in peer to peer through fully distributed network";
-"LinkDeviceButton" = "Link this device to an account";
-"CreateAccount" = "Create a Ring account";
+/**
+ Time interval between TextField events in seconds
+*/
 
-//Create Account form
-
-"CreateAccountFormTitle" = "Create your Ring account";
-"RegisterPublicUsername" = "Register public username (experimental)";
-"ChooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"EnterNewUsernamePlaceholder" = "Enter new username";
-"NewPasswordPlaceholder" = "New Password";
-"RepeatPasswordPlaceholder" = "Repeat new password";
-"PasswordCharactersNumberError" = "6 characters minimum";
-"PasswordNotMatchingError" = "Passwords do not match";
-"LookingForUsernameAvailability" = "Looking for username availability...";
+let textFieldThrottlingDuration = 0.5
