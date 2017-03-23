@@ -43,8 +43,6 @@ class CreateRingAccountViewModel {
      */
     fileprivate var account: AccountModel?
 
-    var registerUsername = Variable<Bool>(true)
-
     /**
      The accountService instance injected in initializer.
      */
@@ -119,4 +117,98 @@ class CreateRingAccountViewModel {
             })
             .addDisposableTo(disposeBag)
     }
+
+    //MARK: - Rx Variables and Observers
+
+    var username = Variable<String>("")
+    var password = Variable<String>("")
+    var repeatPassword = Variable<String>("")
+
+    var usernameValid :Observable<Bool> {
+        return username.asObservable().map({ username in
+            return !username.isEmpty
+        })
+    }
+
+    var passwordValid :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.username.asObservable(),
+                                              self.password.asObservable(),
+                                              self.repeatPassword.asObservable())
+        { (username, password, repeatPassword) in
+            return password.characters.count >= 6
+        }
+    }
+
+    var passwordsEqual :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.password.asObservable(),
+                                              self.repeatPassword.asObservable())
+        { password, repeatPassword in
+            return password == repeatPassword
+        }
+    }
+
+    var canCreateAccount :Observable<Bool> {
+        return Observable<Bool>.combineLatest(self.registerUsername.asObservable(),
+                                              self.usernameValid,
+                                              self.passwordValid,
+                                              self.passwordsEqual)
+        { registerUsername, usernameValid, passwordValid, passwordsEquals in
+            if registerUsername {
+                return usernameValid && passwordValid && passwordsEquals
+            } else {
+                return passwordValid && passwordsEquals
+            }
+        }
+    }
+
+    var usernameValidationMessage :Observable<String> {
+        return self.username.asObservable().flatMap({ username in
+            return self.usernameValidation(username: username)
+        })
+    }
+
+    var registerUsername = Variable<Bool>(true)
+
+    //MARK: -
+
+    /**
+     Returns an Observable that send the state of the username validation request to the user
+     or just an empty string if the field is empty or the username is valid
+     */
+
+    fileprivate func usernameValidation(username: String) -> Observable<String> {
+
+        if username.isEmpty {
+            return Observable.just("")
+        }
+
+        let observable = Observable<String>.create({ observer in
+
+            observer.onNext(NSLocalizedString("LookingForUsernameAvailability",
+                                              tableName: LocalizedStringTableNames.walkthrough,
+                                              comment: ""))
+
+            //Fake timer to simulate a request...
+            let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
+            timer.scheduleOneshot(deadline: DispatchTime.now() + .seconds(2))
+
+            let cancel = Disposables.create {
+                timer.cancel()
+            }
+
+            timer.setEventHandler {
+                if cancel.isDisposed {
+                    return
+                }
+                observer.onNext("")
+            }
+            timer.resume()
+
+            return cancel
+
+        }).throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
+
+        return observable
+    }
+
 }
