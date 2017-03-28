@@ -81,6 +81,9 @@ class DaemonService {
             throw StartDaemonError.DaemonAlreadyRunning
         }
 
+        //~ Init adapter to register callbacks from the daemon.
+        SystemAdapter.sharedManager()
+
         print("Starting daemon...")
         if self.dRingAdaptor.initDaemon() {
             print("Daemon initialized.")
