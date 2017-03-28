@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_ac47e74a",
+        "filename": "Ring/Ring/WelcomeViewController.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-03-28T14:33:21Z",
+      "side": 1,
+      "message": "Could you please store this string in a constant variable, and use the constant instead?",
+      "range": {
+        "startLine": 42,
+        "startChar": 79,
+        "endLine": 42,
+        "endChar": 90
+      },
+      "revId": "65877ced86c0e4c91473db1e974b14852f236302",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_4c74339c",
+        "filename": "Ring/Ring/WelcomeViewController.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-03-28T14:33:21Z",
+      "side": 1,
+      "message": "Could you please write line with less than 100 chars? It is easier to review here :)",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 130
+      },
+      "revId": "65877ced86c0e4c91473db1e974b14852f236302",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
