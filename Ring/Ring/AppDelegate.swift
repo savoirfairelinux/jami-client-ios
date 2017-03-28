@@ -26,9 +26,10 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let daemonService = DaemonService.init(dRingAdaptor: DRingAdapter())
+    let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
         return true
     }

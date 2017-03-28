@@ -107,6 +107,7 @@
 		5557FD4D1E81AFF50043E394 /* ConfigKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80CC1E1EB2E4009A3510 /* ConfigKeyModel.swift */; };
 		5557FD4E1E81B1F20043E394 /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
 		5557FD4F1E81B2990043E394 /* AccountCredentialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */; };
+		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,6 +237,8 @@
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountModelHelper.swift; path = Account/AccountModelHelper.swift; sourceTree = "<group>"; };
 		5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModelHelperTests.swift; sourceTree = "<group>"; };
+		557086501E8ADB9D001A7CE4 /* SystemAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemAdapter.h; path = Bridging/SystemAdapter.h; sourceTree = "<group>"; };
+		557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SystemAdapter.mm; path = Bridging/SystemAdapter.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,6 +404,8 @@
 				04399AA91D1C304300E99CD9 /* Ring-Bridging-Header.h */,
 				04399AA51D1C304300E99CD9 /* AccountAdapter.h */,
 				04399AA61D1C304300E99CD9 /* AccountAdapter.mm */,
+				557086501E8ADB9D001A7CE4 /* SystemAdapter.h */,
+				557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */,
 				04399AA71D1C304300E99CD9 /* DRingAdapter.h */,
 				04399AA81D1C304300E99CD9 /* DRingAdapter.mm */,
 				04399AAA1D1C304300E99CD9 /* Utils.h */,
@@ -736,6 +741,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
 				0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */,
 				02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
