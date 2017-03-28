@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_2c73f7b2",
+        "filename": "Ring/Ring.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-03-28T15:26:16Z",
+      "side": 1,
+      "message": "How did this happen, and what does it mean?",
+      "revId": "6e1a90414794f34580760139efcbd31670e9fe36",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_8c546bcb",
+        "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-03-28T15:26:16Z",
+      "side": 1,
+      "message": "Can you write line under 100 chars :)",
+      "revId": "6e1a90414794f34580760139efcbd31670e9fe36",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_ecc07f7e",
+        "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-03-28T15:26:16Z",
+      "side": 1,
+      "message": "-Could you keep the variable syntax in this file (mName)?\n-You create this outlet but it seems not bound to any view.\n-To what element do you want to bind this outlet?",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 56
+      },
+      "revId": "6e1a90414794f34580760139efcbd31670e9fe36",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
