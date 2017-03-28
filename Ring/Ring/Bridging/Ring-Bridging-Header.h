@@ -23,4 +23,5 @@
  Expose Objective-C bridging classes to Swift.
  */
 #import "AccountAdapter.h"
+#import "SystemAdapter.h"
 #import "DRingAdapter.h"
