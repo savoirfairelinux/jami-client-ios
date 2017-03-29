@@ -44,17 +44,25 @@ class CreateRingAccountViewModel {
     fileprivate var account: AccountModel?
 
     /**
+     The accountService instance injected in initializer.
+     */
+    fileprivate let accountService: AccountsService
+
+    /**
      Default constructor
      */
-    init() {
+    init(withAccountService accountService: AccountsService) {
         self.account = nil
+        self.accountService = accountService
     }
 
     /**
      Constructor with AccountModel.
      */
-    init(withAccountModel account: AccountModel?) {
+    init(withAccountService accountService: AccountsService,
+         accountModel account: AccountModel?) {
         self.account = account
+        self.accountService = accountService
     }
 
     /**
@@ -81,9 +89,12 @@ class CreateRingAccountViewModel {
                     //~ simultaneously authorized.
                     self?.addAccountDisposable?.dispose()
                     //~ Subscribe on the AccountsService responseStream to get results.
-                    self?.addAccountDisposable = AccountsService.sharedInstance
+                    self?.addAccountDisposable = self?.accountService
                         .sharedResponseStream
                         .subscribe(onNext:{ (event) in
+                            if event.eventType == ServiceEventType.AccountAdded {
+                                print("Account added.")
+                            }
                             if event.eventType == ServiceEventType.AccountsChanged {
                                 onSuccessCallback?()
                             }
@@ -93,7 +104,13 @@ class CreateRingAccountViewModel {
                     self?.addAccountDisposable?.addDisposableTo((self?.disposeBag)!)
 
                     //~ Launch the action.
-                    AccountsService.sharedInstance.addAccount()
+                    do {
+                        try self?.accountService.addRingAccount(withUsername: nil,
+                                                                password: "coucou")
+                    }
+                    catch {
+                        onErrorCallback?(error)
+                    }
                 },
                 onError: { (error) in
                     onErrorCallback?(error)
