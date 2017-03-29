@@ -25,7 +25,7 @@ import RxSwift
 
 class CreateRingAccountViewController: UIViewController {
 
-    var mAccountViewModel = CreateRingAccountViewModel()
+    var mAccountViewModel = CreateRingAccountViewModel(withAccountService: AppDelegate.accountService)
 
     @IBOutlet weak var mCreateAccountButton: RoundedButton!
 
