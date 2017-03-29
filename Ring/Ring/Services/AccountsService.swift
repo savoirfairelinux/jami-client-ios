@@ -22,13 +22,17 @@
 import RxCocoa
 import RxSwift
 
+enum AddAccountError: Error {
+    case TemplateNotConform
+    case UnknownError
+}
+
 class AccountsService: AccountAdapterDelegate {
     // MARK: Private members
     /**
-     AccountConfigurationManagerAdaptator instance.
-     Used to register the service to daemon events.
+     Used to register the service to daemon events, injected by constructor.
      */
-    fileprivate let confAdapter = AccountAdapter.sharedManager() as AccountAdapter
+    fileprivate let accountAdapter: AccountAdapter
 
     /**
      Fileprivate Accounts list.
@@ -74,10 +78,9 @@ class AccountsService: AccountAdapterDelegate {
      */
     var sharedResponseStream: Observable<ServiceEvent>
 
-    // MARK: - Singleton
-    static let sharedInstance = AccountsService()
+    fileprivate(set) var currentAccount: AccountModel?
 
-    fileprivate init() {
+    init(withAccountAdapter accountAdapter: AccountAdapter) {
         self.accountList = []
 
         self.responseStream.addDisposableTo(disposeBag)
@@ -85,9 +88,12 @@ class AccountsService: AccountAdapterDelegate {
         //~ Create a shared stream based on the responseStream one.
         self.sharedResponseStream = responseStream.share()
 
-        //~ Registering to the AccountConfigurationManagerAdaptator with self as delegate in order
-        //~ to receive delegation callbacks.
-        self.confAdapter.delegate = self
+        self.currentAccount = nil
+
+        self.accountAdapter = accountAdapter
+        //~ Registering to the accountAdatpter with self as delegate in order to receive delegation
+        //~ callbacks.
+        AccountAdapter.delegate = self
     }
 
     // MARK: - Methods
@@ -98,28 +104,185 @@ class AccountsService: AccountAdapterDelegate {
     func reload() {
         accountList.removeAll()
         //for account in confAdapter.getAccountList() {
-            //let accountID = account as! String
-            //accountList.append(AccountModel())
+        //let accountID = account as! String
+        //accountList.append(AccountModel())
         //}
     }
 
-    func addAccount() {
-        // TODO: This need work for all account type
-        let details:NSMutableDictionary? = confAdapter.getAccountTemplate("RING")
-        if details == nil {
-            print("Error retrieving Ring account template, can not continue");
-            return;
+    /**
+     Entry point to create a brand-new Ring account.
+
+     - Parameter username: the username chosen by the user, if any
+     - Parameter password: the password chosen by the user
+
+     - Throws: AddAccountError
+     */
+    func addRingAccount(withUsername username: String?, password: String) throws {
+        do {
+            var ringDetails = try self.getRingInitialAccountDetails()
+            if username != nil {
+                ringDetails.updateValue(username!, forKey: ConfigKey.AccountRegisteredName.rawValue)
+            }
+            ringDetails.updateValue(password, forKey: ConfigKey.ArchivePassword.rawValue)
+            let accountId = self.accountAdapter.addAccount(ringDetails)
+            guard accountId != nil else {
+                throw AddAccountError.UnknownError
+            }
+
+            let account = self.getAccount(fromAccountId: accountId!)
+
+            if account == nil {
+                let details = self.getAccountDetails(fromAccountId: accountId!)
+                let volatileDetails = self.getVolatileAccountDetails(fromAccountId: accountId!)
+                let credentials = self.getAccountCredentials(fromAccountId: accountId!)
+                let devices = getKnownRingDevices(fromAccountId: accountId!)
+
+                let newAccount = try AccountModel(withAccountId: accountId!,
+                                                  details: details,
+                                                  volatileDetails: volatileDetails,
+                                                  credentials: credentials,
+                                                  devices: devices)
+                //TODO: set registration state as ready for a SIP account
+
+                self.setCurrentAccount(newAccount)
+
+                let accountModelHelper = AccountModelHelper(withAccount: newAccount)
+                var accountAddedEvent = ServiceEvent(withEventType: .AccountAdded)
+                accountAddedEvent.addEventInput(.Id, value: newAccount.id)
+                accountAddedEvent.addEventInput(.State, value: accountModelHelper.getRegistrationState())
+                self.responseStream.onNext(accountAddedEvent)
+            }
         }
-        details!.setValue("iOS", forKey: "Account.alias")
-        details!.setValue("iOS", forKey: "Account.displayName")
-        let convertedDetails = details as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        let addResult:String! = confAdapter.addAccount(convertedDetails)
-        print(addResult);
+        catch {
+            throw error
+        }
+    }
+
+    /**
+     Entry point to create a brand-new SIP account.
+
+     Not supported yet.
+     */
+    fileprivate func addSipAccount() {
+        print("Not supported yet")
+    }
+
+    /**
+     Current account setter.
+
+     This will reorganize the order of the accounts. The current account needs to be first.
+
+     - Parameter account: the account to set as current.
+     */
+    func setCurrentAccount(_ account: AccountModel) {
+        self.currentAccount = account
+        //TODO: handle the order of the list of accounts: current account must be first.
+    }
+
+    /**
+     Gets an account from the list of accounts handled by the application.
+
+     - Parameter id: the id of the account to get.
+
+     - Returns: the account if found, nil otherwise.
+     */
+    func getAccount(fromAccountId id: String) -> AccountModel? {
+        for account in self.accountList {
+            if id.compare(account.id) == ComparisonResult.orderedSame {
+                return account
+            }
+        }
+        return nil
+    }
+
+    /**
+     Gets all the details of an account from the daemon.
+
+     - Parameter id: the id of the account.
+
+     - Returns: the details of the accounts.
+     */
+    func getAccountDetails(fromAccountId id: String) -> Dictionary<String, String> {
+        let details: NSDictionary = accountAdapter.getAccountDetails(id) as NSDictionary
+        let accountDetails = details as NSDictionary? as? Dictionary<String, String> ?? nil
+        return accountDetails!
+    }
+
+    /**
+     Gets all the volatile details of an account from the daemon.
+
+     - Parameter id: the id of the account.
+
+     - Returns: the volatile details of the accounts.
+     */
+    func getVolatileAccountDetails(fromAccountId id: String) -> Dictionary<String, String> {
+        let details: NSDictionary = accountAdapter.getVolatileAccountDetails(id) as NSDictionary
+        let accountDetails = details as NSDictionary? as? Dictionary<String, String> ?? nil
+        return accountDetails!
+    }
+
+    /**
+     Gets the credentials of an account from the daemon.
+
+     - Parameter id: the id of the account.
+
+     - Returns: the list of credentials.
+     */
+    func getAccountCredentials(fromAccountId id: String) -> Array<Dictionary<String, String>> {
+        let creds: NSArray = accountAdapter.getCredentials(id) as NSArray
+        let credentials = creds as NSArray? as? Array<Dictionary<String, String>> ?? nil
+        return credentials!
+    }
+
+    /**
+     Gets the known Ring devices of an account from the daemon.
+
+     - Parameter id: the id of the account.
+
+     - Returns: the known Ring devices.
+     */
+    func getKnownRingDevices(fromAccountId id: String) -> Dictionary<String, String> {
+        let devices: NSDictionary = accountAdapter.getKnownRingDevices(id) as NSDictionary
+        let ringDevices = devices as NSDictionary? as? Dictionary<String, String> ?? nil
+        return ringDevices!
+    }
+
+    /**
+     Gathers all the initial default details contained by any accounts, Ring or SIP.
+
+     - Returns the details.
+     */
+    fileprivate func getInitialAccountDetails() throws -> Dictionary<String, String> {
+        let details: NSMutableDictionary = accountAdapter.getAccountTemplate(AccountType.Ring.rawValue)
+        var accountDetails = details as NSDictionary? as? Dictionary<String, String> ?? nil
+        if accountDetails == nil {
+            throw AddAccountError.TemplateNotConform
+        }
+        accountDetails!.updateValue("false", forKey: ConfigKey.VideoEnabled.rawValue)
+        accountDetails!.updateValue("sipinfo", forKey: ConfigKey.AccountDTMFType.rawValue)
+        return accountDetails!
+    }
+
+    /**
+     Gathers all the initial default details contained in a Ring accounts.
+
+     - Returns the details.
+     */
+    fileprivate func getRingInitialAccountDetails() throws -> Dictionary<String, String> {
+        do {
+            var defaultDetails = try getInitialAccountDetails()
+            defaultDetails.updateValue("Ring", forKey: ConfigKey.AccountAlias.rawValue)
+            defaultDetails.updateValue("bootstrap.ring.cx", forKey: ConfigKey.AccountHostname.rawValue)
+            defaultDetails.updateValue("true", forKey: ConfigKey.AccountUpnpEnabled.rawValue)
+            return defaultDetails
+        } catch {
+            throw error
+        }
     }
 
     func removeAccount(_ row: Int) {
         if row < accountList.count {
-            confAdapter.removeAccount(accountList[row].id)
+            self.accountAdapter.removeAccount(accountList[row].id)
         }
     }
 
@@ -128,7 +291,7 @@ class AccountsService: AccountAdapterDelegate {
         print("Accounts changed.")
         reload()
 
-        let event = ServiceEvent.init(withEventType: .AccountsChanged)
+        let event = ServiceEvent(withEventType: .AccountsChanged)
         self.responseStream.onNext(event)
     }
 }
