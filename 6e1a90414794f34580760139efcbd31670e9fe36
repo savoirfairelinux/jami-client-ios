@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "7aade967_0037dae4",
+        "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-03-30T15:04:01Z",
+      "side": 1,
+      "message": "Yes. Fixed in the next patch set",
+      "parentUuid": "7aade967_8c546bcb",
+      "revId": "6e1a90414794f34580760139efcbd31670e9fe36",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_ecc07f7e",
         "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
         "patchSetId": 14
@@ -47,6 +65,30 @@
       "writtenOn": "2017-03-28T15:26:16Z",
       "side": 1,
       "message": "-Could you keep the variable syntax in this file (mName)?\n-You create this outlet but it seems not bound to any view.\n-To what element do you want to bind this outlet?",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 56
+      },
+      "revId": "6e1a90414794f34580760139efcbd31670e9fe36",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_c030e2ea",
+        "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-03-30T15:04:01Z",
+      "side": 1,
+      "message": "Yes.\n- The hungarian notation is applied in this file in the next patch set\n- The IBOutlet is bound to the storyboard in the next patch set",
+      "parentUuid": "7aade967_ecc07f7e",
       "range": {
         "startLine": 39,
         "startChar": 4,
