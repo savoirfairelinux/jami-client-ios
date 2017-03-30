@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_20ca16a2",
+        "filename": "Ring/Ring/WelcomeViewController.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-03-30T15:50:32Z",
+      "side": 1,
+      "message": "Do you think that this is possible to make this constant available for the whole walkthrough part of the application?\nI think that you will reuse it in other viewcontrollers.\n\nIf it\u0027s the case, we should find a nice way to do it.",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 44
+      },
+      "revId": "1fbc5cb369f6d2e357f4320022015bddcc04f79a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
