@@ -31,7 +31,7 @@ enum AccountModelError: Error {
 /**
  A class representing an account.
  */
-class AccountModel {
+class AccountModel : Equatable {
     // MARK: Public members
     let id: String
 
@@ -49,25 +49,18 @@ class AccountModel {
     }
 
     init(withAccountId accountId: String,
-         details: Dictionary<String, String>,
-         volatileDetails: Dictionary<String, String>,
-         credentials: Array<Dictionary<String, String>>,
+         details: AccountConfigModel,
+         volatileDetails: AccountConfigModel,
+         credentials: [AccountCredentialsModel],
          devices: Dictionary<String, String>) throws {
         self.id = accountId
-        self.details = AccountConfigModel(withDetails: details)
-        self.volatileDetails = AccountConfigModel(withDetails: details)
-        for credential in credentials {
-            do {
-                let cred = try AccountCredentialsModel(withRawaData: credential)
-                credentialDetails.append(cred)
-            } catch CredentialsError.NotEnoughData {
-                print("Not enough data to build a credential object.")
-                throw CredentialsError.NotEnoughData
-            } catch {
-                print("Unexpected error.")
-                throw AccountModelError.UnexpectedError
-            }
-        }
+        self.details = details
+        self.volatileDetails = volatileDetails
         self.devices = devices
     }
+
+    public static func ==(lhs: AccountModel, rhs: AccountModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+
 }
