@@ -25,6 +25,7 @@
 #import "Utils.h"
 
 #import "dring/configurationmanager_interface.h"
+#import "RegistrationResponse.h"
 
 @implementation AccountAdapter
 
@@ -51,6 +52,18 @@ static id <AccountAdapterDelegate> _delegate;
             [AccountAdapter.delegate accountsChanged];
         }
     }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::RegistrationStateChanged>([&](const std::string& account_id, const std::string& state, int detailsCode, const std::string& detailsStr) {
+        if (AccountAdapter.delegate) {
+            RegistrationResponse* response = [RegistrationResponse new];
+            response.accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            response.state = [NSString stringWithUTF8String:state.c_str()];
+            response.detailsCode = (RegistrationResponseDetailsCode)detailsCode;
+            response.details = [NSString stringWithUTF8String:detailsStr.c_str()];
+            [AccountAdapter.delegate registrationStateChangedWith:response];
+        }
+    }));
+
     registerConfHandlers(confHandlers);
 }
 #pragma mark -

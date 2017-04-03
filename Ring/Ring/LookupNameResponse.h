@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,9 +18,22 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-@objc protocol AccountAdapterDelegate {
+#import <Foundation/Foundation.h>
+#import "NameRegistrationAdapter.h"
 
-    func accountsChanged()
-    func registrationStateChanged(with response: RegistrationResponse)
+//Represents the status of the lookup response from to the daemon
+typedef NS_ENUM(NSInteger, LookupNameState) {
+    LookupNameStateFound = 0,
+    LookupNameStateInvalidName,
+    LookupNameStateNotFound,
+    LookupNameStateError
+};
 
-}
+@interface LookupNameResponse : NSObject
+
+@property (nonatomic, retain) NSString* accountId;
+@property (nonatomic) LookupNameState state;
+@property (nonatomic, retain) NSString* address;
+@property (nonatomic, retain) NSString* name;
+
+@end
