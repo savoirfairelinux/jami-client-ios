@@ -51,6 +51,7 @@ static id <AccountAdapterDelegate> _delegate;
             [AccountAdapter.delegate accountsChanged];
         }
     }));
+
     registerConfHandlers(confHandlers);
 }
 #pragma mark -

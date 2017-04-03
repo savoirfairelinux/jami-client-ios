@@ -43,6 +43,24 @@ class CreateRingAccountViewModel {
      */
     fileprivate var account: AccountModel?
 
+
+    fileprivate var blockchainService: BlockchainService = BlockchainService()
+
+    //MARK: - Rx Variables and Observers
+
+    //Bindings from the UI
+    var username = Variable<String>("")
+    var password = Variable<String>("")
+    var repeatPassword = Variable<String>("")
+    var registerUsername = Variable<Bool>(true)
+
+    //Username and password validation state
+    var passwordValid :Observable<Bool>!
+    var passwordsEqual :Observable<Bool>!
+    var canCreateAccount :Observable<Bool>!
+    var usernameValidationStatus :Observable<UsernameValidationStatus>!
+    var usernameValidationMessage :Observable<String>!
+
     /**
      The accountService instance injected in initializer.
      */
@@ -54,15 +72,16 @@ class CreateRingAccountViewModel {
     init(withAccountService accountService: AccountsService) {
         self.account = nil
         self.accountService = accountService
+        self.initObservables()
     }
 
     /**
      Constructor with AccountModel.
      */
-    init(withAccountService accountService: AccountsService,
-         accountModel account: AccountModel?) {
+    init(withAccountService accountService: AccountsService, accountModel account: AccountModel?) {
         self.account = account
         self.accountService = accountService
+        self.initObservables()
     }
 
     /**
@@ -118,97 +137,56 @@ class CreateRingAccountViewModel {
             .addDisposableTo(disposeBag)
     }
 
-    //MARK: - Rx Variables and Observers
+    /**
+     Init all obsevables needed to validate the user inputs for account creation
+     */
 
-    var username = Variable<String>("")
-    var password = Variable<String>("")
-    var repeatPassword = Variable<String>("")
+    func initObservables() {
 
-    var usernameValid :Observable<Bool> {
-        return username.asObservable().map({ username in
-            return !username.isEmpty
-        })
-    }
-
-    var passwordValid :Observable<Bool> {
-        return Observable<Bool>.combineLatest(self.username.asObservable(),
-                                              self.password.asObservable(),
-                                              self.repeatPassword.asObservable())
-        { (username, password, repeatPassword) in
+        self.passwordValid = password.asObservable().map { password in
             return password.characters.count >= 6
-        }
-    }
+        }.shareReplay(1).observeOn(MainScheduler.instance)
 
-    var passwordsEqual :Observable<Bool> {
-        return Observable<Bool>.combineLatest(self.password.asObservable(),
-                                              self.repeatPassword.asObservable())
-        { password, repeatPassword in
-            return password == repeatPassword
-        }
-    }
+        self.passwordsEqual = Observable<Bool>
+            .combineLatest(self.password.asObservable(),self.repeatPassword.asObservable()) { password, repeatPassword in
+                return password == repeatPassword
+        }.shareReplay(1).observeOn(MainScheduler.instance)
 
-    var canCreateAccount :Observable<Bool> {
-        return Observable<Bool>.combineLatest(self.registerUsername.asObservable(),
-                                              self.usernameValid,
-                                              self.passwordValid,
-                                              self.passwordsEqual)
-        { registerUsername, usernameValid, passwordValid, passwordsEquals in
+        self.usernameValidationStatus = self.username.asObservable().flatMapLatest({ username in
+            return self.blockchainService.usernameValidation(username: username)
+        }).shareReplay(1).observeOn(MainScheduler.instance)
+
+        self.canCreateAccount = Observable<Bool>.combineLatest(self.registerUsername.asObservable(),
+                                                               self.usernameValidationStatus,
+                                                               self.passwordValid,
+                                                               self.passwordsEqual)
+        { registerUsername, usernameValidationStatus, passwordValid, passwordsEquals in
             if registerUsername {
-                return usernameValid && passwordValid && passwordsEquals
+                return (usernameValidationStatus == .valid) && passwordValid && passwordsEquals
             } else {
                 return passwordValid && passwordsEquals
             }
-        }
-    }
+        }.shareReplay(1).observeOn(MainScheduler.instance)
 
-    var usernameValidationMessage :Observable<String> {
-        return self.username.asObservable().flatMap({ username in
-            return self.usernameValidation(username: username)
-        })
+        self.usernameValidationMessage = self.usernameValidationStatus.asObservable().map ({ status in
+            switch status {
+            case .lookingUp:
+                return NSLocalizedString("LookingForUsernameAvailability",
+                                         tableName: LocalizedStringTableNames.walkthrough,
+                                         comment: "")
+            case .invalid:
+                return NSLocalizedString("InvalidUsername",
+                                         tableName: LocalizedStringTableNames.walkthrough,
+                                         comment: "")
+            case .alreadyTaken:
+                return NSLocalizedString("UsernameAlreadyTaken",
+                                         tableName: LocalizedStringTableNames.walkthrough,
+                                         comment: "")
+            default:
+                return ""
+            }
+        }).shareReplay(1).observeOn(MainScheduler.instance)
     }
-
-    var registerUsername = Variable<Bool>(true)
 
     //MARK: -
-
-    /**
-     Returns an Observable that send the state of the username validation request to the user
-     or just an empty string if the field is empty or the username is valid
-     */
-
-    fileprivate func usernameValidation(username: String) -> Observable<String> {
-
-        if username.isEmpty {
-            return Observable.just("")
-        }
-
-        let observable = Observable<String>.create({ observer in
-
-            observer.onNext(NSLocalizedString("LookingForUsernameAvailability",
-                                              tableName: LocalizedStringTableNames.walkthrough,
-                                              comment: ""))
-
-            //Fake timer to simulate a request...
-            let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
-            timer.scheduleOneshot(deadline: DispatchTime.now() + .seconds(2))
-
-            let cancel = Disposables.create {
-                timer.cancel()
-            }
-
-            timer.setEventHandler {
-                if cancel.isDisposed {
-                    return
-                }
-                observer.onNext("")
-            }
-            timer.resume()
-
-            return cancel
-
-        }).throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
-
-        return observable
-    }
-
 }
