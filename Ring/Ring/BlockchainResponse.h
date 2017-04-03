@@ -1,8 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,11 +18,21 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-/**
- Expose Objective-C bridging classes to Swift.
- */
-#import "AccountAdapter.h"
-#import "SystemAdapter.h"
-#import "DRingAdapter.h"
+#import <Foundation/Foundation.h>
 #import "BlockchainAdapter.h"
-#import "BlockchainResponse.h"
+
+//Represents the status of the lookup response from to the daemon
+typedef NS_ENUM(NSInteger, LookupState) {
+    found = 0,
+    invalidName,
+    error
+};
+
+@interface BlockchainResponse : NSObject
+
+@property (nonatomic, retain) NSString* accountId;
+@property (nonatomic) LookupState state;
+@property (nonatomic, retain) NSString* address;
+@property (nonatomic, retain) NSString* name;
+
+@end
