@@ -21,5 +21,6 @@
 @objc protocol AccountAdapterDelegate {
 
     func accountsChanged()
-    
+    func registrationStateChanged(with response: RegistrationResponse)
+
 }
