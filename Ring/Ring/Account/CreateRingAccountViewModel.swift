@@ -54,83 +54,50 @@ class CreateRingAccountViewModel {
     var password = Variable<String>("")
     var repeatPassword = Variable<String>("")
 
-    var usernameValid :Observable<Bool> {
-        return username.asObservable().map({ username in
-            return !username.isEmpty
-        })
-    }
-
-    var passwordValid :Observable<Bool> {
-        return Observable<Bool>.combineLatest(self.username.asObservable(),
-                                              self.password.asObservable(),
-                                              self.repeatPassword.asObservable())
-        { (username, password, repeatPassword) in
-            return password.characters.count >= 6
-        }
-    }
-
-    var passwordsEqual :Observable<Bool> {
-        return Observable<Bool>.combineLatest(self.password.asObservable(),
-                                              self.repeatPassword.asObservable())
-        { password, repeatPassword in
-            return password == repeatPassword
-        }
-    }
-
-    var canCreateAccount :Observable<Bool> {
-        return Observable<Bool>.combineLatest(self.registerUsername.asObservable(),
-                                              self.usernameValid,
-                                              self.passwordValid,
-                                              self.passwordsEqual)
-        { registerUsername, usernameValid, passwordValid, passwordsEquals in
-            if registerUsername {
-                return usernameValid && passwordValid && passwordsEquals
-            } else {
-                return passwordValid && passwordsEquals
-            }
-        }
-    }
-
+    var passwordValid :Observable<Bool>!
+    var passwordsEqual :Observable<Bool>!
+    var canCreateAccount :Observable<Bool>!
     var registerUsername = Variable<Bool>(true)
 
-    //Observes if the field is not empty
-    var hasNewPassword :Observable<Bool> {
-        return self.password.asObservable().map({ password in
-            return password.characters.count == 0
-        })
-    }
+    var hasNewPassword :Observable<Bool>!
+    var hidePasswordError :Observable<Bool>!
+    var hideRepeatPasswordError :Observable<Bool>!
 
-    //Observes if the password is valid and is not empty to show the error message
-    var hidePasswordError :Observable<Bool> {
-        return Observable<Bool>.combineLatest(self.passwordValid, hasNewPassword)
-        { isPasswordValid, hasNewPassword in
-            return isPasswordValid || hasNewPassword
-        }
-    }
+    /**
+     The nameService instance injected in initializer.
+     */
+    fileprivate var nameService: NameService
 
-    //Observes if the password is valid and is not empty to show the error message
-    var hideRepeatPasswordError :Observable<Bool> {
-        return Observable<Bool>.combineLatest(self.passwordValid, self.passwordsEqual) { isPasswordValid,
-            isPasswordsEquals in
-            return !isPasswordValid || isPasswordsEquals
-        }
-    }
+    //MARK: - Rx Variables and Observers
+
+    /**
+     Message presented to the user in function of the status of the current username lookup request
+     */
+    var usernameValidationMessage :Observable<String>!
+
+    //MARK: -
 
     /**
      Default constructor
      */
-    init(withAccountService accountService: AccountsService) {
+    init(withAccountService accountService: AccountsService, nameService: NameService) {
         self.account = nil
         self.accountService = accountService
+        self.nameService = nameService
+        self.initObservables()
+        self.initObservers()
     }
 
     /**
      Constructor with AccountModel.
      */
     init(withAccountService accountService: AccountsService,
-         accountModel account: AccountModel?) {
+         accountModel account: AccountModel?, nameService: NameService) {
         self.account = account
         self.accountService = accountService
+        self.nameService = nameService
+        self.initObservables()
+        self.initObservers()
     }
 
     /**
@@ -163,9 +130,25 @@ class CreateRingAccountViewModel {
                             if event.eventType == ServiceEventType.AccountAdded {
                                 print("Account added.")
                             }
+
                             if event.eventType == ServiceEventType.AccountsChanged {
                                 onSuccessCallback?()
                             }
+
+                            if event.eventType == ServiceEventType.RegistrationStateChanged {
+
+                                if event.getEventInput(ServiceEventInput.RegistrationState) == Unregistered {
+                                    //Register username
+                                    if (self?.registerUsername.value)! {
+
+                                        self?.nameService
+                                            .registerName(withAccount: (self?.accountService.currentAccount?.id)!,
+                                                          password: (self?.password.value)!,
+                                                          name: (self?.username.value)!)
+                                    }
+                                }
+                            }
+
                         }, onError: { error in
                             onErrorCallback?(error)
                         })
@@ -173,8 +156,9 @@ class CreateRingAccountViewModel {
 
                     //~ Launch the action.
                     do {
-                        try self?.accountService.addRingAccount(withUsername: nil,
-                                                                password: "coucou")
+                        //Add account
+                        try self?.accountService.addRingAccount(withUsername: self?.username.value,
+                                                                password: (self?.password.value)!)
                     }
                     catch {
                         onErrorCallback?(error)
@@ -186,4 +170,76 @@ class CreateRingAccountViewModel {
             .addDisposableTo(disposeBag)
     }
 
+    /**
+     Init obsevables needed to validate the user inputs for account creation
+     */
+    func initObservables() {
+
+        self.passwordValid = password.asObservable().map { password in
+            return password.characters.count >= 6
+        }.shareReplay(1).observeOn(MainScheduler.instance)
+
+        self.passwordsEqual = Observable<Bool>.combineLatest(self.password.asObservable(),
+                                                             self.repeatPassword.asObservable()) { password,repeatPassword in
+                                                                return password == repeatPassword
+        }.shareReplay(1).observeOn(MainScheduler.instance)
+
+        self.canCreateAccount = Observable<Bool>.combineLatest(self.registerUsername.asObservable(),
+                                                               self.nameService.usernameValidationStatus,
+                                                               self.passwordValid,
+                                                               self.passwordsEqual)
+        { registerUsername, usernameValidationStatus, passwordValid, passwordsEquals in
+            if registerUsername {
+                return usernameValidationStatus == .valid && passwordValid && passwordsEquals
+            } else {
+                return passwordValid && passwordsEquals
+            }
+        }.shareReplay(1).observeOn(MainScheduler.instance)
+
+        self.usernameValidationMessage = self.nameService.usernameValidationStatus
+            .asObservable().map ({ status in
+                switch status {
+                case .lookingUp:
+                    return NSLocalizedString("LookingForUsernameAvailability",
+                                             tableName: LocalizedStringTableNames.walkthrough,
+                                             comment: "")
+                case .invalid:
+                    return NSLocalizedString("InvalidUsername",
+                                             tableName: LocalizedStringTableNames.walkthrough,
+                                             comment: "")
+                case .alreadyTaken:
+                    return NSLocalizedString("UsernameAlreadyTaken",
+                                             tableName: LocalizedStringTableNames.walkthrough,
+                                             comment: "")
+                default:
+                    return ""
+                }
+        }).shareReplay(1).observeOn(MainScheduler.instance)
+
+        hasNewPassword = self.password.asObservable().map({ password in
+            return password.characters.count > 0
+        })
+
+        hidePasswordError = Observable<Bool>.combineLatest(self.passwordValid, hasNewPassword) { isPasswordValid, hasNewPassword in
+            return isPasswordValid || !hasNewPassword
+        }
+
+        let hasRepeatPassword = self.repeatPassword.asObservable().map({ repeatPassword in
+            return repeatPassword.characters.count > 0
+        })
+
+        hideRepeatPasswordError = Observable<Bool>.combineLatest(self.passwordValid,self.passwordsEqual, hasRepeatPassword) { isPasswordValid, isPasswordsEquals, hasRepeatPassword in
+            return !isPasswordValid || isPasswordsEquals || !hasRepeatPassword
+        }
+
+    }
+
+    /**
+     Init observers needed to validate the user inputs for account creation
+     */
+    func initObservers() {
+        self.username.asObservable().subscribe(onNext: { [unowned self] username in
+            self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+        }).addDisposableTo(disposeBag)
+    }
 }

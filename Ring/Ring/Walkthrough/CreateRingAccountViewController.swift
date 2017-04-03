@@ -33,7 +33,8 @@ fileprivate enum CreateRingAccountCellType {
 
 class CreateRingAccountViewController: UITableViewController {
 
-    var mAccountViewModel = CreateRingAccountViewModel(withAccountService: AppDelegate.accountService)
+    var mAccountViewModel = CreateRingAccountViewModel(withAccountService: AppDelegate.accountService,
+                                                       nameService: AppDelegate.nameService)
 
     @IBOutlet weak var mCreateAccountButton: RoundedButton!
     @IBOutlet weak var mCreateAccountTitleLabel: UILabel!
@@ -90,7 +91,8 @@ class CreateRingAccountViewController: UITableViewController {
         }).addDisposableTo(mDisposeBag)
 
         _ = self.mAccountViewModel.canCreateAccount
-            .bindTo(self.mCreateAccountButton.rx.isEnabled).addDisposableTo(mDisposeBag)
+            .bindTo(self.mCreateAccountButton.rx.isEnabled)
+            .addDisposableTo(mDisposeBag)
     }
 
     /**
@@ -177,6 +179,8 @@ class CreateRingAccountViewController: UITableViewController {
 
             //Binds the username field value to the ViewModel
             _ = cell.textField.rx.text.orEmpty
+                .throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
+                .distinctUntilChanged()
                 .bindTo(self.mAccountViewModel.username)
                 .addDisposableTo(mDisposeBag)
 
@@ -184,6 +188,10 @@ class CreateRingAccountViewController: UITableViewController {
             _ = cell.textField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
                 self.switchToCell(withType: .newPasswordField)
             }).addDisposableTo(mDisposeBag)
+
+            _ = self.mAccountViewModel.usernameValidationMessage
+                .bindTo(cell.errorMessageLabel.rx.text)
+                .addDisposableTo(mDisposeBag)
 
             return cell
         } else if currentCellType == .passwordNotice {
