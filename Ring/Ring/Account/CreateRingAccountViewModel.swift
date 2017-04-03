@@ -39,6 +39,12 @@ class CreateRingAccountViewModel {
     fileprivate var addAccountDisposable: Disposable?
 
     /**
+     Retains the currently active stream looking up a name.
+     Useful to dispose it before starting a new one.
+     */
+    fileprivate var lookupNameDisposable: Disposable?
+
+    /**
      The account under this ViewModel.
      */
     fileprivate var account: AccountModel?
@@ -165,28 +171,29 @@ class CreateRingAccountViewModel {
             return Observable.just("")
         }
 
-        let observable = Observable<String>.create({ observer in
+        let observable = Observable<String>.create({ [weak self] observer in
 
             observer.onNext(NSLocalizedString("LookingForUsernameAvailability",
                                               tableName: LocalizedStringTableNames.walkthrough,
                                               comment: ""))
 
-            //Fake timer to simulate a request...
-            let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
-            timer.scheduleOneshot(deadline: DispatchTime.now() + .seconds(2))
+            self?.lookupNameDisposable?.dispose()
 
-            let cancel = Disposables.create {
-                timer.cancel()
-            }
+            let accountAdapter = AccountAdapter.sharedManager()!
+            accountAdapter.lookupName(withAccount: "", nameserver: "", name: username)
 
-            timer.setEventHandler {
-                if cancel.isDisposed {
-                    return
-                }
-                observer.onNext("")
-            }
-            timer.resume()
+            self?.lookupNameDisposable = AccountsService.sharedInstance.sharedResponseStream
+                .subscribe(onNext: { event in
+                    if (event.eventType == ServiceEventType.RegisterNameFound) {
+                        observer.onNext("This username is already taken")
+                    }
+                }, onError: { error in
+                    observer.onNext("")
+                })
 
+            self?.lookupNameDisposable?.addDisposableTo((self?.disposeBag)!)
+
+            let cancel = Disposables.create()
             return cancel
 
         }).throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)

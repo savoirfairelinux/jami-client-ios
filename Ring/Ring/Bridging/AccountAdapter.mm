@@ -57,6 +57,20 @@ using namespace DRing;
             [[[AccountAdapter sharedManager] delegate] accountsChanged];
         }
     }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::RegisteredNameFound>([&](const std::string& account_id,
+                                                                                          int state,
+                                                                                          const std::string&address,
+                                                                                          const std::string& name) {
+        if ([[AccountAdapter sharedManager] delegate]) {
+            [[[AccountAdapter sharedManager] delegate]
+             registeredNameFoundWith:[NSString stringWithUTF8String:account_id.c_str()]
+             state:(LookupNameState)state
+             address:[NSString stringWithUTF8String:address.c_str()]
+             name:[NSString stringWithUTF8String:name.c_str()]];
+        }
+    }));
+
     registerConfHandlers(confHandlers);
 }
 #pragma mark -
@@ -100,6 +114,11 @@ using namespace DRing;
     auto accountTemplate = getAccountTemplate(std::string([accountType UTF8String]));
     return [Utils mapToDictionnary:accountTemplate];
 }
+
+- (void)lookupNameWithAccount:(NSString*)account nameserver:(NSString*)nameserver name:(NSString*)name  {
+    lookupName(std::string([account UTF8String]),std::string([nameserver UTF8String]),std::string([name UTF8String]));
+}
+
 #pragma mark -
 
 @end

@@ -21,5 +21,9 @@
 @objc protocol AccountAdapterDelegate {
 
     func accountsChanged()
-    
+
+    func registeredNameFound(with accountId: String,
+                             state: LookupNameState,
+                             address: String,
+                             name: String)
 }

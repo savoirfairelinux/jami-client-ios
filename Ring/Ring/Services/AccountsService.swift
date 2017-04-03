@@ -123,6 +123,10 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func lookupName(with account: String, nameserver: String, name: String) {
+        confAdapter.lookupName(withAccount: account, nameserver: nameserver, name: name)
+    }
+
     // MARK: - AccountAdapterDelegate
     func accountsChanged() {
         print("Accounts changed.")
@@ -130,5 +134,25 @@ class AccountsService: AccountAdapterDelegate {
 
         let event = ServiceEvent.init(withEventType: .AccountsChanged)
         self.responseStream.onNext(event)
+    }
+
+    class RegisterNameError: Error {
+
+    }
+
+    func registeredNameFound(with accountId: String,
+                             state: LookupNameState,
+                             address: String,
+                             name: String) {
+        if state == .Found {
+            let event = ServiceEvent.init(withEventType: .RegisterNameFound)
+            self.responseStream.onNext(event)
+        } else if state == .InvalidName {
+            let event = ServiceEvent.init(withEventType: .RegisterNameFound)
+            self.responseStream.onNext(event)
+        } else {
+            let error = RegisterNameError()
+            self.responseStream.onError(error)
+        }
     }
 }

@@ -28,6 +28,12 @@
  */
 @protocol AccountAdapterDelegate;
 
+typedef NS_ENUM(NSInteger, LookupNameState) {
+    Found = 0,
+    InvalidName,
+    Error
+};
+
 /**
  Class making the bridge between the Ring Daemon and the application.
  It only concerns "Accounts related" features.
@@ -62,5 +68,8 @@
 - (void)removeAccount:(NSString *)accountID;
 
 - (NSArray *)getAccountList;
+
+- (void)lookupNameWithAccount:(NSString*)account nameserver:(NSString*)nameserver
+                         name:(NSString*)name;
 
 @end
