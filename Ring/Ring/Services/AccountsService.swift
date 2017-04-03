@@ -131,4 +131,5 @@ class AccountsService: AccountAdapterDelegate {
         let event = ServiceEvent.init(withEventType: .AccountsChanged)
         self.responseStream.onNext(event)
     }
+
 }

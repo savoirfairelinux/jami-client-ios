@@ -18,8 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import "Ring-Swift.h"
-
 #import "SystemAdapter.h"
 
 #import "dring/configurationmanager_interface.h"
