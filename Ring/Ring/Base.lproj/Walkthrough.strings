@@ -36,3 +36,5 @@
 "PasswordCharactersNumberError" = "6 characters minimum";
 "PasswordNotMatchingError" = "Passwords do not match";
 "LookingForUsernameAvailability" = "Looking for username availability...";
+"InvalidUsername" = "Invalid username";
+"UsernameAlreadyTaken" = "Username already taken";
