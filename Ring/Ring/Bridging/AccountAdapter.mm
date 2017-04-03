@@ -57,6 +57,7 @@ using namespace DRing;
             [[[AccountAdapter sharedManager] delegate] accountsChanged];
         }
     }));
+
     registerConfHandlers(confHandlers);
 }
 #pragma mark -
@@ -100,6 +101,7 @@ using namespace DRing;
     auto accountTemplate = getAccountTemplate(std::string([accountType UTF8String]));
     return [Utils mapToDictionnary:accountTemplate];
 }
+
 #pragma mark -
 
 @end

@@ -21,5 +21,5 @@
 @objc protocol AccountAdapterDelegate {
 
     func accountsChanged()
-    
+
 }
