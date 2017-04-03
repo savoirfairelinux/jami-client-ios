@@ -25,3 +25,7 @@
 #import "AccountAdapter.h"
 #import "SystemAdapter.h"
 #import "DRingAdapter.h"
+#import "NameRegistrationAdapter.h"
+#import "LookupNameResponse.h"
+#import "RegistrationResponse.h"
+#import "NameRegistrationResponse.h"

@@ -31,7 +31,7 @@ enum AccountModelError: Error {
 /**
  A class representing an account.
  */
-class AccountModel {
+class AccountModel : Equatable {
     // MARK: Public members
     let id: String
 
@@ -70,4 +70,9 @@ class AccountModel {
         }
         self.devices = devices
     }
+
+    public static func ==(lhs: AccountModel, rhs: AccountModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+
 }

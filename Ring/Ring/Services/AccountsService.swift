@@ -78,7 +78,35 @@ class AccountsService: AccountAdapterDelegate {
      */
     var sharedResponseStream: Observable<ServiceEvent>
 
-    fileprivate(set) var currentAccount: AccountModel?
+    /**
+     Current account computed property
+
+     This will reorganize the order of the accounts. The current account needs to be first.
+
+     - Parameter account: the account to set as current.
+     */
+
+    fileprivate(set) var currentAccount: AccountModel? {
+        get {
+            return self.accountList.first
+        }
+
+        set {
+            //Get the current account from account list if already exists
+            let currentAccount = self.accountList.filter({ account in
+                return account == newValue
+            }).first
+
+            //If current account already exists in the list, move it to the first index
+            if let currentAccount = currentAccount {
+                let index = self.accountList.index(of: currentAccount)
+                self.accountList.remove(at: index!)
+                self.accountList.insert(currentAccount, at: 0)
+            } else {
+                self.accountList.append(newValue!)
+            }
+        }
+    }
 
     init(withAccountAdapter accountAdapter: AccountAdapter) {
         self.accountList = []
@@ -100,11 +128,30 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func reload() {
-        accountList.removeAll()
-        //for account in confAdapter.getAccountList() {
-            //let accountID = account as! String
-            //accountList.append(AccountModel())
-        //}
+
+        for account in accountAdapter.getAccountList() {
+            let accountId = account as! String
+
+            let details = self.getAccountDetails(fromAccountId: accountId)
+            let volatileDetails = self.getVolatileAccountDetails(fromAccountId: accountId)
+            let credentials = self.getAccountCredentials(fromAccountId: accountId)
+            let devices = getKnownRingDevices(fromAccountId: accountId)
+
+            let account = self.getAccount(fromAccountId: accountId)
+
+            account?.details = AccountConfigModel(withDetails: details)
+            account?.volatileDetails = AccountConfigModel(withDetails: volatileDetails)
+            account?.devices = devices
+
+            //update credentials
+            for rawData in credentials {
+                do {
+                    try account?.credentialDetails.append(AccountCredentialsModel(withRawaData: rawData))
+                } catch {
+
+                }
+            }
+        }
     }
 
     /**
@@ -127,7 +174,7 @@ class AccountsService: AccountAdapterDelegate {
                 throw AddAccountError.UnknownError
             }
 
-            let account = self.getAccount(fromAccountId: accountId!)
+            var account = self.getAccount(fromAccountId: accountId!)
 
             if account == nil {
                 let details = self.getAccountDetails(fromAccountId: accountId!)
@@ -135,21 +182,21 @@ class AccountsService: AccountAdapterDelegate {
                 let credentials = self.getAccountCredentials(fromAccountId: accountId!)
                 let devices = getKnownRingDevices(fromAccountId: accountId!)
 
-                let newAccount = try AccountModel(withAccountId: accountId!,
+                account = try AccountModel(withAccountId: accountId!,
                                                   details: details,
                                                   volatileDetails: volatileDetails,
                                                   credentials: credentials,
                                                   devices: devices)
                 //TODO: set registration state as ready for a SIP account
 
-                self.setCurrentAccount(newAccount)
-
-                let accountModelHelper = AccountModelHelper(withAccount: newAccount)
+                let accountModelHelper = AccountModelHelper(withAccount: account!)
                 var accountAddedEvent = ServiceEvent(withEventType: .AccountAdded)
-                accountAddedEvent.addEventInput(.Id, value: newAccount.id)
+                accountAddedEvent.addEventInput(.Id, value: account?.id)
                 accountAddedEvent.addEventInput(.State, value: accountModelHelper.getRegistrationState())
                 self.responseStream.onNext(accountAddedEvent)
             }
+
+            self.currentAccount = account
         }
         catch {
             throw error
@@ -163,18 +210,6 @@ class AccountsService: AccountAdapterDelegate {
      */
     fileprivate func addSipAccount() {
         print("Not supported yet")
-    }
-
-    /**
-     Current account setter.
-
-     This will reorganize the order of the accounts. The current account needs to be first.
-
-     - Parameter account: the account to set as current.
-     */
-    func setCurrentAccount(_ account: AccountModel) {
-        self.currentAccount = account
-        //TODO: handle the order of the list of accounts: current account must be first.
     }
 
     /**
@@ -292,4 +327,14 @@ class AccountsService: AccountAdapterDelegate {
         let event = ServiceEvent(withEventType: .AccountsChanged)
         self.responseStream.onNext(event)
     }
+
+    func registrationStateChanged(with response: RegistrationResponse) {
+        print("RegistrationStateChanged.")
+        reload()
+
+        var event = ServiceEvent(withEventType: .RegistrationStateChanged)
+        event.addEventInput(.RegistrationState, value: response.state)
+        self.responseStream.onNext(event)
+    }
+
 }
