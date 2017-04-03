@@ -25,6 +25,7 @@
  */
 enum ServiceEventType {
     case AccountsChanged
+    case RegisterNameFound
 }
 
 /**
@@ -32,6 +33,7 @@ enum ServiceEventType {
  */
 enum ServiceEventInput {
     case Id
+    case LookupNameState
 }
 
 /**

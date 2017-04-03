@@ -25,3 +25,4 @@
 #import "AccountAdapter.h"
 #import "SystemAdapter.h"
 #import "DRingAdapter.h"
+#import "BlockchainAdapter.h"

@@ -110,6 +110,9 @@
 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
 		564C44591E8D7F8F000F92B1 /* LocalizedStringTableNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44581E8D7F8F000F92B1 /* LocalizedStringTableNames.swift */; };
 		564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C445A1E8EA44E000F92B1 /* Durations.swift */; };
+		564C44601E943C37000F92B1 /* BlockchainAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 564C445F1E943C37000F92B1 /* BlockchainAdapter.mm */; };
+		564C44621E943DE6000F92B1 /* BlockchainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44611E943DE6000F92B1 /* BlockchainService.swift */; };
+		564C44641E943E1E000F92B1 /* BlockchainAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44631E943E1E000F92B1 /* BlockchainAdapterDelegate.swift */; };
 		56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */; };
 		56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */; };
 		56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */; };
@@ -249,6 +252,10 @@
 		557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SystemAdapter.mm; path = Bridging/SystemAdapter.mm; sourceTree = "<group>"; };
 		564C44581E8D7F8F000F92B1 /* LocalizedStringTableNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStringTableNames.swift; sourceTree = "<group>"; };
 		564C445A1E8EA44E000F92B1 /* Durations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Durations.swift; sourceTree = "<group>"; };
+		564C445E1E943C37000F92B1 /* BlockchainAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockchainAdapter.h; sourceTree = "<group>"; };
+		564C445F1E943C37000F92B1 /* BlockchainAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BlockchainAdapter.mm; sourceTree = "<group>"; };
+		564C44611E943DE6000F92B1 /* BlockchainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockchainService.swift; sourceTree = "<group>"; };
+		564C44631E943E1E000F92B1 /* BlockchainAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockchainAdapterDelegate.swift; sourceTree = "<group>"; };
 		56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		56AC64DA1E8012CA00EA1AA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Walkthrough.strings; sourceTree = "<group>"; };
 		56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
@@ -398,6 +405,8 @@
 				02B22DFE1DF755DB000358C9 /* AccountsService.swift */,
 				0273C2FE1E0C438F00CF00BA /* AccountAdapterDelegate.swift */,
 				02C9B63E1E1D4E8C00F82F0C /* ServiceEvent.swift */,
+				564C44611E943DE6000F92B1 /* BlockchainService.swift */,
+				564C44631E943E1E000F92B1 /* BlockchainAdapterDelegate.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -427,6 +436,8 @@
 				04399AA81D1C304300E99CD9 /* DRingAdapter.mm */,
 				04399AAA1D1C304300E99CD9 /* Utils.h */,
 				04399AAB1D1C304300E99CD9 /* Utils.mm */,
+				564C445E1E943C37000F92B1 /* BlockchainAdapter.h */,
+				564C445F1E943C37000F92B1 /* BlockchainAdapter.mm */,
 			);
 			name = Bridging;
 			sourceTree = "<group>";
@@ -804,6 +815,7 @@
 				56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */,
 				56AC650E1E85694D00EA1AA9 /* RoundedTextField.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
+				564C44641E943E1E000F92B1 /* BlockchainAdapterDelegate.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
@@ -815,10 +827,12 @@
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
 				02DD80CA1E1EAF1A009A3510 /* AccountCredentialsModel.swift in Sources */,
 				0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */,
+				564C44621E943DE6000F92B1 /* BlockchainService.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
 				02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */,
+				564C44601E943C37000F92B1 /* BlockchainAdapter.mm in Sources */,
 				564C44591E8D7F8F000F92B1 /* LocalizedStringTableNames.swift in Sources */,
 				56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */,
 			);
