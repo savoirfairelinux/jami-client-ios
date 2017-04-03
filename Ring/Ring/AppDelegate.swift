@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     static let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
     static let accountService = AccountsService(withAccountAdapter: AccountAdapter())
+    static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         SystemAdapter().registerConfigurationHandler()

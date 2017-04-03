@@ -27,6 +27,7 @@
 enum ServiceEventType {
     case AccountAdded
     case AccountsChanged
+    case RegistrationStateChanged
 }
 
 /**
@@ -35,6 +36,7 @@ enum ServiceEventType {
 enum ServiceEventInput {
     case Id
     case State
+    case RegistrationState
 }
 
 /**
@@ -67,7 +69,7 @@ struct ServiceEvent {
     /**
      Allows to add an entry in the metadata of the event.
      */
-    mutating func addEventInput(_ input: ServiceEventInput, value: Any) {
+    mutating func addEventInput<T>(_ input: ServiceEventInput, value: T) {
         inputs.updateValue(value, forKey: input)
     }
 
