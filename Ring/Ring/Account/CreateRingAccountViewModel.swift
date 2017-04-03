@@ -99,6 +99,10 @@ class CreateRingAccountViewModel {
                     onErrorCallback?(error)
             })
             .addDisposableTo(disposeBag)
+
+        _ = self.username.asObservable().subscribe(onNext: { username in
+            print("username = \(username)")
+        })
     }
 
     //MARK: - Rx Variables and Observers
@@ -114,12 +118,9 @@ class CreateRingAccountViewModel {
     }
 
     var passwordValid :Observable<Bool> {
-        return Observable<Bool>.combineLatest(self.username.asObservable(),
-                                              self.password.asObservable(),
-                                              self.repeatPassword.asObservable())
-        { (username, password, repeatPassword) in
+        return password.asObservable().map({ password in
             return password.characters.count >= 6
-        }
+        })
     }
 
     var passwordsEqual :Observable<Bool> {
@@ -132,22 +133,45 @@ class CreateRingAccountViewModel {
 
     var canCreateAccount :Observable<Bool> {
         return Observable<Bool>.combineLatest(self.registerUsername.asObservable(),
-                                              self.usernameValid,
+                                              self.usernameValidationStatus,
                                               self.passwordValid,
                                               self.passwordsEqual)
-        { registerUsername, usernameValid, passwordValid, passwordsEquals in
+        { registerUsername, usernameValidationStatus, passwordValid, passwordsEquals in
             if registerUsername {
-                return usernameValid && passwordValid && passwordsEquals
+                return (usernameValidationStatus == .valid) && passwordValid && passwordsEquals
             } else {
                 return passwordValid && passwordsEquals
             }
         }
     }
 
-    var usernameValidationMessage :Observable<String> {
-        return self.username.asObservable().flatMap({ username in
+    var usernameValidationStatus :Observable<UsernameValidationStatus> {
+        return self.username.asObservable().flatMapLatest({ username in
             return self.usernameValidation(username: username)
-        })
+        }).observeOn(MainScheduler.instance)
+    }
+
+    var usernameValidationMessage :Observable<String> {
+        return self.usernameValidationStatus.asObservable().map ({ status in
+            switch status {
+            case .lookingUp:
+                return NSLocalizedString("LookingForUsernameAvailability",
+                                         tableName: LocalizedStringTableNames.walkthrough,
+                                         comment: "")
+            case .invalid:
+                return NSLocalizedString("InvalidUsername",
+                                         tableName: LocalizedStringTableNames.walkthrough,
+                                         comment: "")
+            case .alreadyTaken:
+                return NSLocalizedString("UsernameAlreadyTaken",
+                                         tableName: LocalizedStringTableNames.walkthrough,
+                                         comment: "")
+            case .empty:
+                return "empty"
+            case .valid:
+                return "valid"
+            }
+        }).observeOn(MainScheduler.instance)
     }
 
     var registerUsername = Variable<Bool>(true)
@@ -159,37 +183,51 @@ class CreateRingAccountViewModel {
      or just an empty string if the field is empty or the username is valid
      */
 
-    fileprivate func usernameValidation(username: String) -> Observable<String> {
+    enum UsernameValidationStatus {
+        case empty
+        case lookingUp
+        case invalid
+        case alreadyTaken
+        case valid
+    }
+
+    fileprivate func usernameValidation(username: String) -> Observable<UsernameValidationStatus> {
 
         if username.isEmpty {
-            return Observable.just("")
+            return Observable.just(.empty)
         }
 
-        let observable = Observable<String>.create({ observer in
+        let observable = Observable<UsernameValidationStatus>.create({ [unowned self] observer in
 
-            observer.onNext(NSLocalizedString("LookingForUsernameAvailability",
-                                              tableName: LocalizedStringTableNames.walkthrough,
-                                              comment: ""))
+            //TODO: Add to dispose bag
+            //FIX: events called twice...
+            //TODO: Add throttle
 
-            //Fake timer to simulate a request...
-            let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
-            timer.scheduleOneshot(deadline: DispatchTime.now() + .seconds(2))
+            let blockchainService = BlockchainService.sharedInstance
 
-            let cancel = Disposables.create {
-                timer.cancel()
-            }
+            blockchainService.sharedResponseStream.subscribe(onNext: { event in
+                    if (event.eventType == ServiceEventType.RegisterNameFound) {
+                        if let state :LookupNameState = event.getEventInput(ServiceEventInput.LookupNameState) {
+                            if state == .Found {
+                                observer.onNext(.alreadyTaken)
+                            } else if state == .InvalidName {
+                                observer.onNext(.invalid)
+                            } else {
+                                observer.onNext(.valid)
+                            }
+                            observer.onCompleted()
+                        }
+                    }
+                }).addDisposableTo(self.disposeBag)
 
-            timer.setEventHandler {
-                if cancel.isDisposed {
-                    return
-                }
-                observer.onNext("")
-            }
-            timer.resume()
+            //Request
+            blockchainService.lookupName(with: "", nameserver: "", name: username)
 
-            return cancel
+            observer.onNext(.lookingUp)
 
-        }).throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
+            return Disposables.create()
+
+        })
 
         return observable
     }

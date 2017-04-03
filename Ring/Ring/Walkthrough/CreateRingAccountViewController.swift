@@ -189,6 +189,7 @@ class CreateRingAccountViewController: UITableViewController {
 
             _ = self.mAccountViewModel.usernameValidationMessage
                 .bindTo(cell.errorMessageLabel.rx.text)
+                .addDisposableTo(disposeBag)
 
             return cell
         } else if currentCellType == .passwordNotice {
