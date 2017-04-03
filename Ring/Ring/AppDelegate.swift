@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     static let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
     static let accountService = AccountsService(withAccountAdapter: AccountAdapter())
+    static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         SystemAdapter().registerConfigurationHandler()
@@ -123,8 +124,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Ring Daemon
     fileprivate func startDaemon() {
+
         do {
             try AppDelegate.daemonService.startDaemon()
+            AppDelegate.accountService.loadAccounts()
         } catch StartDaemonError.InitializationFailure {
             print("Daemon failed to initialize.")
         } catch StartDaemonError.StartFailure {
