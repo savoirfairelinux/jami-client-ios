@@ -41,9 +41,7 @@
 /**
  Delegate where all the accounts events will be forwarded.
  */
-@property (nonatomic, weak) id <AccountAdapterDelegate> delegate;
-
-+ (instancetype)sharedManager;
+@property (class, nonatomic, weak) id <AccountAdapterDelegate> delegate;
 
 - (NSDictionary *)getAccountDetails:(NSString *)accountID;
 

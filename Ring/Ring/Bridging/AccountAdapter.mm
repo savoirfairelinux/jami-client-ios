@@ -30,16 +30,10 @@
 
 using namespace DRing;
 
-#pragma mark Singleton Methods
-+ (instancetype)sharedManager {
-    static AccountAdapter* sharedMyManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedMyManager = [[self alloc] init];
-    });
-    return sharedMyManager;
-}
+/// Static delegate that will receive the propagated daemon events
+static id <AccountAdapterDelegate> _delegate;
 
+#pragma mark Init
 - (id)init {
     if (self = [super init]) {
         [self registerConfigurationHandler];
@@ -53,8 +47,8 @@ using namespace DRing;
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     confHandlers.insert(exportable_callback<ConfigurationSignal::AccountsChanged>([&]() {
         //~ Using sharedManager to avoid as possible to retain self in the block.
-        if ([[AccountAdapter sharedManager] delegate]) {
-            [[[AccountAdapter sharedManager] delegate] accountsChanged];
+        if (AccountAdapter.delegate) {
+            [AccountAdapter.delegate accountsChanged];
         }
     }));
     registerConfHandlers(confHandlers);
@@ -99,6 +93,16 @@ using namespace DRing;
 - (NSMutableDictionary *)getAccountTemplate:(NSString *)accountType {
     auto accountTemplate = getAccountTemplate(std::string([accountType UTF8String]));
     return [Utils mapToDictionnary:accountTemplate];
+}
+#pragma mark -
+
+#pragma mark AccountAdapterDelegate
++ (id <AccountAdapterDelegate>)delegate {
+    return _delegate;
+}
+
++ (void) setDelegate:(id<AccountAdapterDelegate>)delegate {
+    _delegate = delegate;
 }
 #pragma mark -
 
