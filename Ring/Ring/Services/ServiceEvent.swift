@@ -22,8 +22,10 @@
  Events types that can be configured as identifier for the ServiceEvent.
 
  - AccountChanged: the accounts have been changed daemon-side
+ - AccountAdded: an account has been added
  */
 enum ServiceEventType {
+    case AccountAdded
     case AccountsChanged
 }
 
@@ -32,6 +34,7 @@ enum ServiceEventType {
  */
 enum ServiceEventInput {
     case Id
+    case State
 }
 
 /**

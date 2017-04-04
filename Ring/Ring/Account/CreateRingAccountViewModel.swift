@@ -92,6 +92,9 @@ class CreateRingAccountViewModel {
                     self?.addAccountDisposable = self?.accountService
                         .sharedResponseStream
                         .subscribe(onNext:{ (event) in
+                            if event.eventType == ServiceEventType.AccountAdded {
+                                print("Account added.")
+                            }
                             if event.eventType == ServiceEventType.AccountsChanged {
                                 onSuccessCallback?()
                             }
@@ -101,7 +104,13 @@ class CreateRingAccountViewModel {
                     self?.addAccountDisposable?.addDisposableTo((self?.disposeBag)!)
 
                     //~ Launch the action.
-                    self?.accountService.addAccount()
+                    do {
+                        try self?.accountService.addRingAccount(withUsername: nil,
+                                                                password: "coucou")
+                    }
+                    catch {
+                        onErrorCallback?(error)
+                    }
                 },
                 onError: { (error) in
                     onErrorCallback?(error)
