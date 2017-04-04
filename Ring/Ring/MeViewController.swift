@@ -23,7 +23,7 @@ import UIKit
 class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Properties
-    let accountService = AccountsService.sharedInstance
+    let accountService = AppDelegate.accountService
     @IBOutlet weak var accountTableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var qrImageView: UIImageView!

@@ -25,10 +25,9 @@ import RxSwift
 class AccountsService: AccountAdapterDelegate {
     // MARK: Private members
     /**
-     AccountConfigurationManagerAdaptator instance.
-     Used to register the service to daemon events.
+     Used to register the service to daemon events, injected by constructor.
      */
-    fileprivate let confAdapter = AccountAdapter.sharedManager() as AccountAdapter
+    fileprivate let accountAdapter: AccountAdapter
 
     /**
      Fileprivate Accounts list.
@@ -74,10 +73,7 @@ class AccountsService: AccountAdapterDelegate {
      */
     var sharedResponseStream: Observable<ServiceEvent>
 
-    // MARK: - Singleton
-    static let sharedInstance = AccountsService()
-
-    fileprivate init() {
+    init(withAccountAdapter accountAdapter: AccountAdapter) {
         self.accountList = []
 
         self.responseStream.addDisposableTo(disposeBag)
@@ -85,9 +81,10 @@ class AccountsService: AccountAdapterDelegate {
         //~ Create a shared stream based on the responseStream one.
         self.sharedResponseStream = responseStream.share()
 
-        //~ Registering to the AccountConfigurationManagerAdaptator with self as delegate in order
-        //~ to receive delegation callbacks.
-        self.confAdapter.delegate = self
+        self.accountAdapter = accountAdapter
+        //~ Registering to the accountAdatpter with self as delegate in order to receive delegation
+        //~ callbacks.
+        AccountAdapter.delegate = self
     }
 
     // MARK: - Methods
@@ -105,7 +102,7 @@ class AccountsService: AccountAdapterDelegate {
 
     func addAccount() {
         // TODO: This need work for all account type
-        let details:NSMutableDictionary? = confAdapter.getAccountTemplate("RING")
+        let details:NSMutableDictionary? = self.accountAdapter.getAccountTemplate("RING")
         if details == nil {
             print("Error retrieving Ring account template, can not continue");
             return;
@@ -113,13 +110,13 @@ class AccountsService: AccountAdapterDelegate {
         details!.setValue("iOS", forKey: "Account.alias")
         details!.setValue("iOS", forKey: "Account.displayName")
         let convertedDetails = details as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        let addResult:String! = confAdapter.addAccount(convertedDetails)
+        let addResult:String! = self.accountAdapter.addAccount(convertedDetails)
         print(addResult);
     }
 
     func removeAccount(_ row: Int) {
         if row < accountList.count {
-            confAdapter.removeAccount(accountList[row].id)
+            self.accountAdapter.removeAccount(accountList[row].id)
         }
     }
 

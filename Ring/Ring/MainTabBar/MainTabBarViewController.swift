@@ -21,9 +21,11 @@
 import UIKit
 
 class MainTabBarViewController: UITabBarController {
+    fileprivate let accountService = AppDelegate.accountService
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !AccountsService.sharedInstance.hasAccounts() {
+        if !accountService.hasAccounts() {
             self.presentWalkthrough()
         }
     }
