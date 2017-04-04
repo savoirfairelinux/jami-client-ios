@@ -94,6 +94,16 @@ static id <AccountAdapterDelegate> _delegate;
     auto accountTemplate = getAccountTemplate(std::string([accountType UTF8String]));
     return [Utils mapToDictionnary:accountTemplate];
 }
+
+- (NSArray *)getCredentials:(NSString *)accountID {
+    auto credentials = getCredentials(std::string([accountID UTF8String]));
+    return [Utils vectorOfMapsToArray:credentials];
+}
+
+- (NSDictionary *)getKnownRingDevices:(NSString *)accountID {
+    auto ringDevices = getKnownRingDevices(std::string([accountID UTF8String]));
+    return [Utils mapToDictionnary:ringDevices];
+}
 #pragma mark -
 
 #pragma mark AccountAdapterDelegate

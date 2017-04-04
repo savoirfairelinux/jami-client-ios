@@ -61,4 +61,8 @@
 
 - (NSArray *)getAccountList;
 
+- (NSArray *)getCredentials:(NSString *)accountID;
+
+- (NSDictionary *)getKnownRingDevices:(NSString *)accountID;
+
 @end
