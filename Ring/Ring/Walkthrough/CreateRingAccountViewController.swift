@@ -22,6 +22,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import PKHUD
 
 fileprivate enum CreateRingAccountCellType {
     case registerPublicUsername
@@ -76,13 +77,12 @@ class CreateRingAccountViewController: UITableViewController {
             onSuccessCallback: { [weak self] in
                 print("Account created.")
                 self?.setCreateAccountAsIdle()
+                self?.showDeviceAddedAlert()
             },
             onErrorCallback:  { [weak self] (error) in
                 print("Error creating account...")
-                if error != nil {
-                    print(error!)
-                }
                 self?.setCreateAccountAsIdle()
+                self?.showErrorAlert(error!)
         })
 
         _ = self.mAccountViewModel.registerUsername.asObservable()
@@ -112,11 +112,49 @@ class CreateRingAccountViewController: UITableViewController {
         print("Creating account...")
         self.mCreateAccountButton.setTitle("Loading...", for: .normal)
         self.mCreateAccountButton.isUserInteractionEnabled = false
+
+        let title = NSLocalizedString("WaitCreateAccountTitle",
+                                      tableName:LocalizedStringTableNames.walkthrough,
+                                      comment: "")
+
+        HUD.show(.labeledProgress(title: title,subtitle: nil))
     }
 
     fileprivate func setCreateAccountAsIdle() {
         self.mCreateAccountButton.setTitle("Create a Ring account", for: .normal)
         self.mCreateAccountButton.isUserInteractionEnabled = true
+
+        HUD.hide()
+    }
+
+    fileprivate func showDeviceAddedAlert() {
+        DispatchQueue.main.async {
+
+            let title = NSLocalizedString("AccountAddedTitle",
+                                          tableName: LocalizedStringTableNames.walkthrough,
+                                          comment: "")
+
+//            let message = NSLocalizedString("AccountDeviceAddedMesage",
+//                                            tableName: LocalizedStringTableNames.walkthrough,
+//                                            comment: "")
+
+//            let alert = UIAlertController.init(title: title,
+//                                               message: message,
+//                                               preferredStyle: .alert)
+
+            HUD.flash(.labeledSuccess(title: title, subtitle: nil), delay: 1.0)
+        }
+    }
+
+    fileprivate func showErrorAlert(_ error: AccountRegistrationError) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController.init(title: error.title,
+                                               message: error.message,
+                                               preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     /**
