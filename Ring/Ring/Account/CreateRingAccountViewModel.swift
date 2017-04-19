@@ -117,10 +117,18 @@ class CreateRingAccountViewModel {
     func configureAddAccountObservers(observable: Observable<Void>,
                                       onStartCallback: ((() -> Void)?),
                                       onSuccessCallback: ((() -> Void)?),
-                                      onErrorCallback: (((Error?) -> Void)?)) {
+                                      onErrorCallback: (((AccountRegistrationError?) -> Void)?)) {
         _ = observable
             .subscribe(
                 onNext: { [weak self] in
+
+                    guard let registerUsername = self?.registerUsername.value,
+                        let username = self?.username.value,
+                        let password = self?.password.value else {
+                            onErrorCallback?(AccountRegistrationError.unknown)
+                            return
+                    }
+
                     //~ Let the caller know that the action has just begun.
                     onStartCallback?()
 
@@ -131,45 +139,48 @@ class CreateRingAccountViewModel {
                     self?.addAccountDisposable = self?.accountService
                         .sharedResponseStream
                         .subscribe(onNext:{ (event) in
+
                             if event.eventType == ServiceEventType.AccountAdded {
                                 print("Account added.")
-                            }
-
-                            if event.eventType == ServiceEventType.AccountsChanged {
-                                onSuccessCallback?()
                             }
 
                             if event.eventType == ServiceEventType.RegistrationStateChanged {
 
                                 if event.getEventInput(ServiceEventInput.RegistrationState) == Unregistered {
-                                    //Register username
-                                    if (self?.registerUsername.value)! {
 
-                                        self?.nameService
-                                            .registerName(withAccount: (self?.accountService.currentAccount?.id)!,
-                                                          password: (self?.password.value)!,
-                                                          name: (self?.username.value)!)
+                                    onSuccessCallback?()
+
+                                    //Register username if needs
+                                    if registerUsername {
+                                        if let currentAccountId = self?.accountService.currentAccount?.id {
+                                            self?.nameService.registerName(withAccount: currentAccountId,
+                                                              password: password,
+                                                              name: username)
+                                        }
                                     }
+                                } else if event.getEventInput(ServiceEventInput.RegistrationState) == ErrorGeneric  {
+                                    onErrorCallback?(AccountRegistrationError.generic)
+                                } else if event.getEventInput(ServiceEventInput.RegistrationState) == ErrorNetwork {
+                                    onErrorCallback?(AccountRegistrationError.network)
                                 }
                             }
-
                         }, onError: { error in
-                            onErrorCallback?(error)
+                            onErrorCallback?(AccountRegistrationError.unknown)
                         })
                     self?.addAccountDisposable?.addDisposableTo((self?.disposeBag)!)
 
                     //~ Launch the action.
                     do {
                         //Add account
-                        try self?.accountService.addRingAccount(withUsername: self?.username.value,
-                                                                password: (self?.password.value)!)
+                        try self?.accountService.addRingAccount(withUsername: username,
+                                                                password: password)
                         }
                     catch {
-                        onErrorCallback?(error)
+                        onErrorCallback?(AccountRegistrationError.unknown)
                     }
                 },
                 onError: { (error) in
-                    onErrorCallback?(error)
+                    onErrorCallback?(AccountRegistrationError.unknown)
             })
             .addDisposableTo(disposeBag)
     }
@@ -229,5 +240,50 @@ class CreateRingAccountViewModel {
         self.username.asObservable().subscribe(onNext: { [unowned self] username in
             self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
         }).addDisposableTo(disposeBag)
+    }
+}
+
+//MARK: Errors
+
+enum AccountRegistrationError: Error {
+    case generic
+    case network
+    case unknown
+}
+
+extension AccountRegistrationError: LocalizedError {
+
+    var title: String {
+        switch self {
+        case .generic:
+            return NSLocalizedString("AccountCannotBeFoundTitle",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        case .network:
+            return NSLocalizedString("AccountNoNetworkTitle",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        default:
+            return NSLocalizedString("AccountDefaultErrorTitle",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        }
+    }
+
+    var message: String {
+        switch self {
+        case .generic:
+            return NSLocalizedString("AcountCannotBeFoundMessage",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        case .network:
+            return NSLocalizedString("AccountNoNetworkMessage",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        default:
+            return NSLocalizedString("AccountDefaultErrorMessage",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        }
     }
 }
