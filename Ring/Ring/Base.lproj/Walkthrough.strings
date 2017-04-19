@@ -38,3 +38,28 @@
 "LookingForUsernameAvailability" = "Looking for username availability...";
 "InvalidUsername" = "Invalid username";
 "UsernameAlreadyTaken" = "Username already taken";
+
+//Progress View
+"WaitCreateAccountTitle" = "Adding account";
+<<<<<<< Updated upstream
+"WaitCreateAccountDetails" = "Please wait while your new account is added...";
+=======
+>>>>>>> Stashed changes
+
+//Error alerts
+"AccountCannotBeFoundTitle" = "Can't find account";
+"AcountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
+
+"AccountAddedTitle" = "Account Added";
+<<<<<<< Updated upstream
+//Draft
+"AccountDeviceAddedTitle" = "Account device added";
+"AccountDeviceAddedMesage" = "You have successfully setup your Ring account.";
+=======
+>>>>>>> Stashed changes
+
+"AccountNoNetworkTitle" = "Can't connect to the network";
+"AccountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
+
+"AccountDefaultErrorTitle" = "Unknown error";
+"AccountDefaultErrorMessage" = "The account couldn't be created.";
