@@ -48,6 +48,11 @@ class CreateRingAccountViewModel {
      */
     fileprivate let accountService: AccountsService
 
+    /**
+     The nameService instance injected in initializer.
+     */
+    fileprivate var nameService: NameService
+
     //MARK: - Rx Variables and Observers
 
     var username = Variable<String>("")
@@ -63,12 +68,7 @@ class CreateRingAccountViewModel {
     var hidePasswordError :Observable<Bool>!
     var hideRepeatPasswordError :Observable<Bool>!
 
-    /**
-     The nameService instance injected in initializer.
-     */
-    fileprivate var nameService: NameService
-
-    //MARK: - Rx Variables and Observers
+    var accountCreationState = PublishSubject<AccountCreationState>()
 
     /**
      Message presented to the user in function of the status of the current username lookup request
@@ -101,79 +101,20 @@ class CreateRingAccountViewModel {
     }
 
     /**
-     Create the observers to the streams passed in parameters.
-     It will allow this ViewModel to react to other entities' events.
-
-     - Parameter observable: An observable stream to subscribe on.
-     Any observed event on this stream will trigger the action of creating an account.
-     - Parameter onStartCallback: Closure that will be triggered when the action will begin.
-     - Parameter onSuccessCallback: Closure that will be triggered when the action will succeed.
-     - Parameter onErrorCallback: Closure that will be triggered in case of error.
+     Start the process of account creation
      */
-    func configureAddAccountObservers(observable: Observable<Void>,
-                                      onStartCallback: ((() -> Void)?),
-                                      onSuccessCallback: ((() -> Void)?),
-                                      onErrorCallback: (((Error?) -> Void)?)) {
-        _ = observable
-            .subscribe(
-                onNext: { [weak self] in
-                    //~ Let the caller know that the action has just begun.
-                    onStartCallback?()
+    func createAccount() {
 
-                    //~ Dispose any previously running stream. There is only one add account action
-                    //~ simultaneously authorized.
-                    self?.addAccountDisposable?.dispose()
-                    //~ Subscribe on the AccountsService responseStream to get results.
-                    self?.addAccountDisposable = self?.accountService
-                        .sharedResponseStream
-                        .subscribe(onNext:{ (event) in
-                            if event.eventType == ServiceEventType.AccountAdded {
-                                print("Account added.")
-                            }
-
-                            if event.eventType == ServiceEventType.AccountsChanged {
-                                onSuccessCallback?()
-                            }
-
-                            if event.eventType == ServiceEventType.RegistrationStateChanged {
-
-                                if event.getEventInput(ServiceEventInput.RegistrationState) == Unregistered {
-                                    //Register username
-                                    if (self?.registerUsername.value)! {
-
-                                        self?.nameService
-                                            .registerName(withAccount: (self?.accountService.currentAccount?.id)!,
-                                                          password: (self?.password.value)!,
-                                                          name: (self?.username.value)!)
-                                    }
-                                }
-                            }
-
-                        }, onError: { error in
-                            onErrorCallback?(error)
-                        })
-                    self?.addAccountDisposable?.addDisposableTo((self?.disposeBag)!)
-
-                    //~ Launch the action.
-                    do {
-                        //Add account
-                        try self?.accountService.addRingAccount(withUsername: self?.username.value,
-                                                                password: (self?.password.value)!)
-                    }
-                    catch {
-                        onErrorCallback?(error)
-                    }
-                },
-                onError: { (error) in
-                    onErrorCallback?(error)
-            })
-            .addDisposableTo(disposeBag)
+        //Add account
+        accountCreationState.onNext(.started)
+        self.accountService.addRingAccount(withUsername: self.username.value,
+                                               password: self.password.value)
     }
 
     /**
      Init obsevables needed to validate the user inputs for account creation
      */
-    func initObservables() {
+    fileprivate func initObservables() {
 
         self.passwordValid = password.asObservable().map { password in
             return password.characters.count >= 6
@@ -231,15 +172,101 @@ class CreateRingAccountViewModel {
         hideRepeatPasswordError = Observable<Bool>.combineLatest(self.passwordValid,self.passwordsEqual, hasRepeatPassword) { isPasswordValid, isPasswordsEquals, hasRepeatPassword in
             return !isPasswordValid || isPasswordsEquals || !hasRepeatPassword
         }
-
     }
 
     /**
-     Init observers needed to validate the user inputs for account creation
+     Init observers for account creation
      */
-    func initObservers() {
+    fileprivate func initObservers() {
+
+        //Loookup name request observer
         self.username.asObservable().subscribe(onNext: { [unowned self] username in
             self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
         }).addDisposableTo(disposeBag)
+
+        //Name registration observer
+        self.accountService
+            .sharedResponseStream
+            .filter({ event in
+                return event.eventType == ServiceEventType.RegistrationStateChanged &&
+                    event.getEventInput(ServiceEventInput.RegistrationState) == Unregistered &&
+                    self.registerUsername.value
+            })
+            .subscribe(onNext:{ [unowned self] event in
+
+                //Launch the process of name registration
+                if let currentAccountId = self.accountService.currentAccount?.id {
+                    self.nameService.registerName(withAccount: currentAccountId,
+                                                  password: self.password.value,
+                                                  name: self.username.value)
+                }
+            })
+            .addDisposableTo(disposeBag)
+
+        //Account creation state observer
+        self.accountService
+            .sharedResponseStream
+            .subscribe(onNext: { [unowned self] event in
+                if event.getEventInput(ServiceEventInput.RegistrationState) == Unregistered {
+                    self.accountCreationState.onNext(.success)
+                } else if event.getEventInput(ServiceEventInput.RegistrationState) == ErrorGeneric {
+                    self.accountCreationState.onError(AccountCreationError.generic)
+                } else if event.getEventInput(ServiceEventInput.RegistrationState) == ErrorNetwork {
+                    self.accountCreationState.onError(AccountCreationError.network)
+                }
+            }, onError: { error in
+                self.accountCreationState.onError(AccountCreationError.unknown)
+            }).addDisposableTo(disposeBag)
+    }
+}
+
+//MARK: Account Creation state
+
+enum AccountCreationState {
+    case started
+    case success
+    case error(error: AccountCreationError)
+}
+
+enum AccountCreationError: Error {
+    case generic
+    case network
+    case unknown
+}
+
+extension AccountCreationError: LocalizedError {
+
+    var title: String {
+        switch self {
+        case .generic:
+            return NSLocalizedString("AccountCannotBeFoundTitle",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        case .network:
+            return NSLocalizedString("AccountNoNetworkTitle",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        default:
+            return NSLocalizedString("AccountDefaultErrorTitle",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        }
+    }
+
+    var message: String {
+        switch self {
+        case .generic:
+            return NSLocalizedString("AcountCannotBeFoundMessage",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        case .network:
+            return NSLocalizedString("AccountNoNetworkMessage",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        default:
+            return NSLocalizedString("AccountDefaultErrorMessage",
+                                     tableName: LocalizedStringTableNames.walkthrough,
+                                     comment: "")
+        }
     }
 }

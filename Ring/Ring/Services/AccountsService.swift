@@ -157,9 +157,8 @@ class AccountsService: AccountAdapterDelegate {
      - Parameter username: the username chosen by the user, if any
      - Parameter password: the password chosen by the user
 
-     - Throws: AddAccountError
      */
-    func addRingAccount(withUsername username: String?, password: String) throws {
+    func addRingAccount(withUsername username: String?, password: String) {
         do {
             var ringDetails = try self.getRingInitialAccountDetails()
             if username != nil {
@@ -196,7 +195,7 @@ class AccountsService: AccountAdapterDelegate {
             self.currentAccount = account
         }
         catch {
-            throw error
+            self.responseStream.onError(error)
         }
     }
 
