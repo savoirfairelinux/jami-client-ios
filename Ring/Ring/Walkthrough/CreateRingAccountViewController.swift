@@ -22,6 +22,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import PKHUD
 
 fileprivate enum CreateRingAccountCellType {
     case registerPublicUsername
@@ -62,35 +63,42 @@ class CreateRingAccountViewController: UITableViewController {
      That allows to build the binding part of the MVVM pattern.
      */
     fileprivate func bindViews() {
-        //~ Create the stream. Won't start until an observer subscribes to it.
-        let createAccountObservable:Observable<Void> = self.mCreateAccountButton
+
+        //Add Account button action
+        self.mCreateAccountButton
             .rx
             .tap
             .takeUntil(self.rx.deallocated)
+            .subscribe(onNext: {
+                self.mAccountViewModel.createAccount()
+            })
+            .addDisposableTo(self.mDisposeBag)
 
-        mAccountViewModel.configureAddAccountObservers(
-            observable: createAccountObservable,
-            onStartCallback: { [weak self] in
-                self?.setCreateAccountAsLoading()
-            },
-            onSuccessCallback: { [weak self] in
-                print("Account created.")
-                self?.setCreateAccountAsIdle()
-            },
-            onErrorCallback:  { [weak self] (error) in
-                print("Error creating account...")
-                if error != nil {
-                    print(error!)
+        //Add Account Registration state
+        self.mAccountViewModel.accountCreationState.observeOn(MainScheduler.instance).subscribe(
+            onNext: { state in
+                switch state {
+                case .started:
+                    self.setCreateAccountAsLoading()
+                case .success:
+                    self.showDeviceAddedAlert()
+                    self.dismiss(animated: true, completion: nil)
+                default:
+                    return
                 }
-                self?.setCreateAccountAsIdle()
-        })
+            },
+            onError: { error in
+                self.showErrorAlert(error as! AccountCreationError)
+            }).addDisposableTo(mDisposeBag)
 
-        _ = self.mAccountViewModel.registerUsername.asObservable()
+        //Show or hide user name field
+        self.mAccountViewModel.registerUsername.asObservable()
             .subscribe(onNext: { [weak self] showUsernameField in
                 self?.toggleRegisterSwitch(showUsernameField)
         }).addDisposableTo(mDisposeBag)
 
-        _ = self.mAccountViewModel.canCreateAccount
+        //Enables create account button
+        self.mAccountViewModel.canCreateAccount
             .bindTo(self.mCreateAccountButton.rx.isEnabled)
             .addDisposableTo(mDisposeBag)
     }
@@ -109,14 +117,37 @@ class CreateRingAccountViewController: UITableViewController {
     }
 
     fileprivate func setCreateAccountAsLoading() {
-        print("Creating account...")
-        self.mCreateAccountButton.setTitle("Loading...", for: .normal)
-        self.mCreateAccountButton.isUserInteractionEnabled = false
+            print("Creating account...")
+            self.mCreateAccountButton.setTitle("Loading...", for: .normal)
+            self.mCreateAccountButton.isUserInteractionEnabled = false
+
+            let title = NSLocalizedString("WaitCreateAccountTitle",
+                                          tableName:LocalizedStringTableNames.walkthrough,
+                                          comment: "")
+
+            HUD.show(.labeledProgress(title: title,subtitle: nil))
     }
 
     fileprivate func setCreateAccountAsIdle() {
-        self.mCreateAccountButton.setTitle("Create a Ring account", for: .normal)
-        self.mCreateAccountButton.isUserInteractionEnabled = true
+            self.mCreateAccountButton.setTitle("Create a Ring account", for: .normal)
+            self.mCreateAccountButton.isUserInteractionEnabled = true
+            HUD.hide()
+    }
+
+    fileprivate func showDeviceAddedAlert() {
+            let title = NSLocalizedString("AccountAddedTitle",
+                                          tableName: LocalizedStringTableNames.walkthrough,
+                                          comment: "")
+
+            HUD.flash(.labeledSuccess(title: title, subtitle: nil), delay: alertFlashDuration)
+    }
+
+    fileprivate func showErrorAlert(_ error: AccountCreationError) {
+            let alert = UIAlertController.init(title: error.title,
+                                               message: error.message,
+                                               preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
     }
 
     /**
