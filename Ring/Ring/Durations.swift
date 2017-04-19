@@ -23,5 +23,6 @@ import Foundation
 /**
  Time interval between TextField events in seconds
 */
-
 let textFieldThrottlingDuration = 0.5
+
+let alertFlashDuration = 1.0

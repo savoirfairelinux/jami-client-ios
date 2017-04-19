@@ -115,6 +115,7 @@
 		564C44601E943C37000F92B1 /* NameRegistrationAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 564C445F1E943C37000F92B1 /* NameRegistrationAdapter.mm */; };
 		564C44621E943DE6000F92B1 /* NameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44611E943DE6000F92B1 /* NameService.swift */; };
 		564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44631E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift */; };
+		568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 568F56721EA7E38F00132D7D /* PKHUD.framework */; };
 		56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */; };
 		56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */; };
 		56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */; };
@@ -263,6 +264,7 @@
 		564C445F1E943C37000F92B1 /* NameRegistrationAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NameRegistrationAdapter.mm; sourceTree = "<group>"; };
 		564C44611E943DE6000F92B1 /* NameService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameService.swift; sourceTree = "<group>"; };
 		564C44631E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameRegistrationAdapterDelegate.swift; sourceTree = "<group>"; };
+		568F56721EA7E38F00132D7D /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		56AC64DA1E8012CA00EA1AA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Walkthrough.strings; sourceTree = "<group>"; };
 		56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */,
 				02674C851E0C757B0065EDF9 /* RxCocoa.framework in Frameworks */,
 				02674C861E0C757B0065EDF9 /* RxSwift.framework in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
@@ -389,6 +392,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				568F56721EA7E38F00132D7D /* PKHUD.framework */,
 				02674C801E0C757B0065EDF9 /* RxBlocking.framework */,
 				02674C811E0C757B0065EDF9 /* RxCocoa.framework */,
 				02674C821E0C757B0065EDF9 /* RxSwift.framework */,
@@ -818,6 +822,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
 			);
 			outputPaths = (
 			);
