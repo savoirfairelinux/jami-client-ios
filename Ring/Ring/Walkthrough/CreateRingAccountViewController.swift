@@ -46,16 +46,30 @@ class CreateRingAccountViewController: UITableViewController {
 
     let mSwitchCellId = "SwitchCellId"
     let mTextFieldCellId = "TextFieldCellId"
-    let mTableViewCellId = "TableViewCellId"
+    let mTextCellId = "TextCellId"
 
     var mDisposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.registerCells()
+
         self.bindViews()
 
         self.setupUI()
+    }
+
+    func registerCells() {
+        self.tableView.register(UINib.init(nibName: "SwitchCell", bundle: nil),
+                                forCellReuseIdentifier: mSwitchCellId)
+
+        self.tableView.register(UINib.init(nibName: "TextFieldCell", bundle: nil),
+                                forCellReuseIdentifier: mTextFieldCellId)
+
+        self.tableView.register(UINib.init(nibName: "TextCell", bundle: nil),
+                                forCellReuseIdentifier: mTextCellId)
+
     }
 
     /**
@@ -227,7 +241,7 @@ class CreateRingAccountViewController: UITableViewController {
 
             return cell
         } else if currentCellType == .passwordNotice {
-            let cell = tableView.dequeueReusableCell(withIdentifier: mTableViewCellId,
+            let cell = tableView.dequeueReusableCell(withIdentifier: mTextCellId,
                                                      for: indexPath) as! TextCell
             cell.label.text = NSLocalizedString("ChooseStrongPassword",
                                                 tableName: LocalizedStringTableNames.walkthrough,
