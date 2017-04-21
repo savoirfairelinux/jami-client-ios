@@ -118,6 +118,7 @@
 		5669A7FA1EA904AF003C7B93 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7F91EA904AF003C7B93 /* SwitchCell.xib */; };
 		5669A7FC1EA904D2003C7B93 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */; };
 		5669A7FE1EA904E4003C7B93 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7FD1EA904E4003C7B93 /* TextCell.xib */; };
+		5669A8031EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */; };
 		568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 568F56721EA7E38F00132D7D /* PKHUD.framework */; };
 		56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */; };
 		56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */; };
@@ -271,6 +272,7 @@
 		5669A7F91EA904AF003C7B93 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
 		5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		5669A7FD1EA904E4003C7B93 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
+		5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkDeviceToAccountViewController.swift; sourceTree = "<group>"; };
 		568F56721EA7E38F00132D7D /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		56AC64DA1E8012CA00EA1AA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Walkthrough.strings; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				56AC64DD1E804EB500EA1AA9 /* Cells */,
 				0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */,
 				0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */,
+				5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */,
 			);
 			name = Walkthrough;
 			sourceTree = "<group>";
@@ -854,6 +857,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
+				5669A8031EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift in Sources */,
 				0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */,
 				02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
