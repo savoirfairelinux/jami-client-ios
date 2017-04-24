@@ -32,4 +32,8 @@
 - (void)registerNameWithAccount:(NSString*)account password:(NSString*)password
                            name:(NSString*)name;
 
+- (void)lookupAddressWithAccount:(NSString*)account nameserver:(NSString*)nameserver
+                         address:(NSString*)address;
+
+
 @end
