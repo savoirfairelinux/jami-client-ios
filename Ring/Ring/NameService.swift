@@ -47,9 +47,14 @@ class NameService: NameRegistrationAdapterDelegate {
     fileprivate let nameRegistrationAdapter :NameRegistrationAdapter
 
     /**
-     Status of the current username lookup request
+     Status of the current username validation request
      */
     var usernameValidationStatus = PublishSubject<UsernameValidationStatus>()
+
+    /**
+     Status of the current username lookup request
+     */
+    var usernameLookupStatus = PublishSubject<LookupNameResponse>()
 
     /**
     Make a username lookup request to the daemon
@@ -62,6 +67,13 @@ class NameService: NameRegistrationAdapterDelegate {
             usernameValidationStatus.onNext(.lookingUp)
             self.nameRegistrationAdapter.lookupName(withAccount: account, nameserver: nameserver, name: name)
         }
+    }
+
+    /**
+     Make an address lookup request to the daemon
+    */
+    func lookupAddress(withAccount account: String, nameserver: String, address: String) {
+        self.nameRegistrationAdapter.lookupAddress(withAccount: account, nameserver: nameserver, address: address)
     }
 
     /**
@@ -84,6 +96,8 @@ class NameService: NameRegistrationAdapterDelegate {
         } else {
             print("Lookup name error")
         }
+
+        usernameLookupStatus.onNext(response)
     }
 
     internal func nameRegistrationEnded(with response: NameRegistrationResponse) {

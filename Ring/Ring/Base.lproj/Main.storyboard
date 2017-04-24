@@ -204,11 +204,11 @@
             </objects>
             <point key="canvasLocation" x="-954" y="-438"/>
         </scene>
-        <!--Item-->
+        <!--Home-->
         <scene sceneID="RrV-5t-V1t">
             <objects>
                 <navigationController id="m3Y-hs-SzS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="vc8-sv-IF0"/>
+                    <tabBarItem key="tabBarItem" title="Home" id="vc8-sv-IF0"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="G6y-tt-W3p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -224,7 +224,7 @@
         <!--Home-->
         <scene sceneID="UuZ-iE-GB0">
             <objects>
-                <viewController title="Home" id="NIj-Cd-aWO" sceneMemberID="viewController">
+                <viewController title="Home" id="NIj-Cd-aWO" customClass="SmartlistViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s1e-Lp-B2j"/>
                         <viewControllerLayoutGuide type="bottom" id="aoH-Yk-Qrn"/>
@@ -241,8 +241,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="1QA-0Y-BFL"/>
                     <navigationItem key="navigationItem" id="b8m-eG-Q9D"/>
+                    <connections>
+                        <outlet property="tableView" destination="B6Y-MZ-L7L" id="dXp-J4-x68"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzQ-ll-5bo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
