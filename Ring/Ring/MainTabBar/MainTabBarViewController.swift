@@ -23,6 +23,12 @@ import UIKit
 class MainTabBarViewController: UITabBarController {
     fileprivate let accountService = AppDelegate.accountService
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        UITabBarItem.appearance()
+            .setTitleTextAttributes( [NSForegroundColorAttributeName : Colors.ringMainColor], for: .selected)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if !accountService.hasAccounts() {

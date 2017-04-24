@@ -18,22 +18,29 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Foundation/Foundation.h>
+import UIKit
+import RxSwift
 
-@protocol NameRegistrationAdapterDelegate;
+class ConversationCell: UITableViewCell {
 
-@interface NameRegistrationAdapter : NSObject
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var newMessagesIndicator: UIView!
+    @IBOutlet weak var newMessagesLabel: UILabel!
+    @IBOutlet weak var lastMessageDateLabel: UILabel!
 
-@property (class, nonatomic, weak) id <NameRegistrationAdapterDelegate> delegate;
+    override func awakeFromNib() {
+        super.awakeFromNib()
 
-- (void)lookupNameWithAccount:(NSString*)account nameserver:(NSString*)nameserver
-                         name:(NSString*)name;
+    }
 
-- (void)registerNameWithAccount:(NSString*)account password:(NSString*)password
-                           name:(NSString*)name;
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        self.newMessagesIndicator.backgroundColor = UIColor.red
+    }
 
-- (void)lookupAddressWithAccount:(NSString*)account nameserver:(NSString*)nameserver
-                         address:(NSString*)address;
-
-
-@end
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        self.newMessagesIndicator.backgroundColor = UIColor.red
+    }
+}
