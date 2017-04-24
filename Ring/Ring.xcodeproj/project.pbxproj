@@ -119,6 +119,9 @@
 		5669A7FC1EA904D2003C7B93 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */; };
 		5669A7FE1EA904E4003C7B93 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7FD1EA904E4003C7B93 /* TextCell.xib */; };
 		5669A8031EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */; };
+		5669A8061EAE5A31003C7B93 /* MessagesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5669A8051EAE5A31003C7B93 /* MessagesAdapter.mm */; };
+		5669A8081EAE63C4003C7B93 /* MessagesAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A8071EAE63C4003C7B93 /* MessagesAdapterDelegate.swift */; };
+		5669A80A1EAE7876003C7B93 /* MessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A8091EAE7876003C7B93 /* MessagesService.swift */; };
 		568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 568F56721EA7E38F00132D7D /* PKHUD.framework */; };
 		56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */; };
 		56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */; };
@@ -272,6 +275,10 @@
 		5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		5669A7FD1EA904E4003C7B93 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
 		5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkDeviceToAccountViewController.swift; sourceTree = "<group>"; };
+		5669A8041EAE5A31003C7B93 /* MessagesAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesAdapter.h; sourceTree = "<group>"; };
+		5669A8051EAE5A31003C7B93 /* MessagesAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MessagesAdapter.mm; sourceTree = "<group>"; };
+		5669A8071EAE63C4003C7B93 /* MessagesAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesAdapterDelegate.swift; sourceTree = "<group>"; };
+		5669A8091EAE7876003C7B93 /* MessagesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesService.swift; sourceTree = "<group>"; };
 		568F56721EA7E38F00132D7D /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		56AC64DA1E8012CA00EA1AA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Walkthrough.strings; sourceTree = "<group>"; };
@@ -429,6 +436,8 @@
 				02C9B63E1E1D4E8C00F82F0C /* ServiceEvent.swift */,
 				564C44611E943DE6000F92B1 /* NameService.swift */,
 				564C44631E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift */,
+				5669A8091EAE7876003C7B93 /* MessagesService.swift */,
+				5669A8071EAE63C4003C7B93 /* MessagesAdapterDelegate.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -456,6 +465,8 @@
 				04399AA81D1C304300E99CD9 /* DRingAdapter.mm */,
 				04399AAA1D1C304300E99CD9 /* Utils.h */,
 				04399AAB1D1C304300E99CD9 /* Utils.mm */,
+				5669A8041EAE5A31003C7B93 /* MessagesAdapter.h */,
+				5669A8051EAE5A31003C7B93 /* MessagesAdapter.mm */,
 				563AEC741EA66487003A5641 /* AccountCreation */,
 				563AEC731EA6627F003A5641 /* NameRegistration */,
 			);
@@ -860,7 +871,9 @@
 				02DD80C81E1EAD70009A3510 /* AccountConfigModel.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */,
+				5669A8081EAE63C4003C7B93 /* MessagesAdapterDelegate.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
+				5669A8061EAE5A31003C7B93 /* MessagesAdapter.mm in Sources */,
 				02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */,
 				56BE9BE71E97D9F300973440 /* LookupNameResponse.m in Sources */,
 				5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */,
@@ -882,6 +895,7 @@
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
 				02DD80CA1E1EAF1A009A3510 /* AccountCredentialsModel.swift in Sources */,
 				0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */,
+				5669A80A1EAE7876003C7B93 /* MessagesService.swift in Sources */,
 				564C44621E943DE6000F92B1 /* NameService.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
