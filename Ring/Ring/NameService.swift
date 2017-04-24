@@ -44,7 +44,7 @@ class NameService: NameRegistrationAdapterDelegate {
     fileprivate let lookupNameCallDelay = 0.5
 
     /**
-     Status of the current username lookup request
+     Status of the current username validation request
      */
     var usernameValidationStatus = PublishSubject<UsernameValidationStatus>()
 
@@ -52,6 +52,11 @@ class NameService: NameRegistrationAdapterDelegate {
         self.nameRegistrationAdapter = nameRegistrationAdapter
         NameRegistrationAdapter.delegate = self
     }
+
+    /**
+     Status of the current username lookup request
+     */
+    var usernameLookupStatus = PublishSubject<LookupNameResponse>()
 
     /**
     Make a username lookup request to the daemon
@@ -76,6 +81,13 @@ class NameService: NameRegistrationAdapterDelegate {
     }
 
     /**
+     Make an address lookup request to the daemon
+    */
+    func lookupAddress(withAccount account: String, nameserver: String, address: String) {
+        self.nameRegistrationAdapter.lookupAddress(withAccount: account, nameserver: nameserver, address: address)
+    }
+
+    /**
      Register the username into the the blockchain
      */
     func registerName(withAccount account: String, password: String, name: String) {
@@ -95,6 +107,8 @@ class NameService: NameRegistrationAdapterDelegate {
         } else {
             print("Lookup name error")
         }
+
+        usernameLookupStatus.onNext(response)
     }
 
     internal func nameRegistrationEnded(with response: NameRegistrationResponse) {
