@@ -50,7 +50,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i1O-Yc-WGd" id="Bz1-A3-Z3f">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bm0-lC-K2F">
@@ -96,7 +96,7 @@
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ok2-8L-eMm" id="m64-AI-t2h">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZv-uf-BsD" userLabel="Account Name Label">
@@ -224,7 +224,7 @@
         <!--Home-->
         <scene sceneID="UuZ-iE-GB0">
             <objects>
-                <viewController title="Home" id="NIj-Cd-aWO" sceneMemberID="viewController">
+                <viewController title="Home" id="NIj-Cd-aWO" customClass="SmartlistViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s1e-Lp-B2j"/>
                         <viewControllerLayoutGuide type="bottom" id="aoH-Yk-Qrn"/>
@@ -243,6 +243,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" id="1QA-0Y-BFL"/>
                     <navigationItem key="navigationItem" id="b8m-eG-Q9D"/>
+                    <connections>
+                        <outlet property="tableView" destination="B6Y-MZ-L7L" id="dXp-J4-x68"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzQ-ll-5bo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

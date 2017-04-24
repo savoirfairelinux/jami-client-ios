@@ -1,8 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,14 +18,26 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-/**
- Expose Objective-C bridging classes to Swift.
- */
-#import "AccountAdapter.h"
-#import "SystemAdapter.h"
-#import "DRingAdapter.h"
-#import "NameRegistrationAdapter.h"
-#import "LookupNameResponse.h"
-#import "RegistrationResponse.h"
-#import "NameRegistrationResponse.h"
-#import "MessagesAdapter.h"
+class ConversationModel {
+
+    var messages = [MessageModel]()
+    var recipient: ContactModel
+    var lastMessageDate: Date?
+
+    init(withRecipient recipient: ContactModel) {
+        self.recipient = recipient
+    }
+
+    lazy var viewModel: ConversationViewModel = {
+        return ConversationViewModel(withConversation: self)
+    }()
+}
+
+extension ConversationModel {
+
+    var unreadMessagesCount: Int {
+        return self.messages.filter({ message in
+            return message.status != .read
+        }).count
+    }
+}

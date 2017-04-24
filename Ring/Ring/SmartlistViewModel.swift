@@ -18,22 +18,27 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Foundation/Foundation.h>
+import UIKit
+import RxSwift
 
-@protocol NameRegistrationAdapterDelegate;
+class SmartlistViewModel: NSObject {
 
-@interface NameRegistrationAdapter : NSObject
+    fileprivate let messagesService: MessagesService
 
-@property (class, nonatomic, weak) id <NameRegistrationAdapterDelegate> delegate;
+    let conversations :Observable<[ConversationViewModel]>
 
-- (void)lookupNameWithAccount:(NSString*)account nameserver:(NSString*)nameserver
-                         name:(NSString*)name;
+    init(withMessagesService messagesService: MessagesService) {
+        self.messagesService = messagesService
 
-- (void)registerNameWithAccount:(NSString*)account password:(NSString*)password
-                           name:(NSString*)name;
+        //Create observable from sorted conversations and flatMap them to view models
+        self.conversations = self.messagesService.conversationsStream.map({ conversations in
+            return conversations.sorted(by: {
+                //TODO: Sort by status
+                return $0.lastMessageDate! > $1.lastMessageDate!
+            }).flatMap({ conversationModel in
+                return conversationModel.viewModel
+            })
+        }).observeOn(MainScheduler.instance)
+    }
 
-- (void)lookupAddressWithAccount:(NSString*)account nameserver:(NSString*)nameserver
-                         address:(NSString*)address;
-
-
-@end
+}
