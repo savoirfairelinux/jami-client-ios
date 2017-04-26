@@ -23,15 +23,25 @@ import RxSwift
 
 class MessagesService: MessagesAdapterDelegate {
 
+    let textPlainMIMEType = "text/plain"
+
     fileprivate let messageAdapter :MessagesAdapter
+
+    fileprivate let disposeBag = DisposeBag()
+
+    let conversationsStream = PublishSubject<[ConversationModel]>()
+
+    var conversations = [ConversationModel]()
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
+
+
         MessagesAdapter.delegate = self
     }
 
     func sendMessage(withContent content: String, from senderAccount: AccountModel, to receiverAccount: String) {
-        let content = ["text/plain" : content]
+        let content = [textPlainMIMEType : content]
         self.messageAdapter.sendMessage(withContent: content, withAccountId: senderAccount.id, to: receiverAccount)
     }
 
@@ -44,7 +54,27 @@ class MessagesService: MessagesAdapterDelegate {
     func didReceiveMessage(_ message: Dictionary<String, String>, from senderAccount: String,
                            to receiverAccountId: String) {
 
-        print("didReceiveMessage: \(message) from: \(senderAccount) to: \(receiverAccountId)")
+        if let content = message[textPlainMIMEType] {
+            let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: senderAccount)
+
+            //Get conversations for this sender
+            var currentConversation = conversations.filter({ conversation in
+                return conversation.recipient == senderAccount
+            }).first
+
+            //Create a new conversation for this sender if not exists
+            if currentConversation == nil {
+                currentConversation = ConversationModel(withRecipient: receiverAccountId)
+                currentConversation?.recipient = senderAccount
+                self.conversations.append(currentConversation!)
+            }
+
+            //Add the received message into the conversation
+            currentConversation?.messages.append(message)
+            currentConversation?.lastMessageDate = message.receivedDate
+
+            self.conversationsStream.onNext(conversations)
+        }
     }
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64,
