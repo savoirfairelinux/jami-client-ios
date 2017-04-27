@@ -27,6 +27,11 @@ class ConversationViewModel {
 
     private let formatter = DateFormatter()
 
+    let messages = Variable<[MessageViewModel]>([])
+
+    private let messagesService = AppDelegate.messagesService
+    private let accountService = AppDelegate.accountService
+
     init(withConversation conversation: ConversationModel) {
         self.conversation = conversation
         formatter.dateStyle = .short
@@ -57,5 +62,11 @@ class ConversationViewModel {
         } else {
             return ""
         }
+    }
+
+    func sendMessage(withContent content: String) {
+        self.messagesService.sendMessage(withContent: content,
+                                         from: accountService.currentAccount!,
+                                         to: self.conversation.recipient)
     }
 }
