@@ -31,18 +31,40 @@ class MessagesService: MessagesAdapterDelegate {
 
     let conversationsStream = PublishSubject<[ConversationModel]>()
 
-    var conversations = [ConversationModel]()
+    fileprivate var conversations = [ConversationModel]()
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
-
-
         MessagesAdapter.delegate = self
     }
 
     func sendMessage(withContent content: String, from senderAccount: AccountModel, to receiverAccount: String) {
-        let content = [textPlainMIMEType : content]
-        self.messageAdapter.sendMessage(withContent: content, withAccountId: senderAccount.id, to: receiverAccount)
+        let contentDict = [textPlainMIMEType : content]
+
+        self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: receiverAccount)
+
+        let key = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
+
+        self.addMessage(withContent: content, byAuthor: senderAccount.details.get(withConfigKeyModel: key), toConversationWith: receiverAccount)
+    }
+
+    fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
+        //Get conversations for this sender
+        var currentConversation = conversations.filter({ conversation in
+            return conversation.recipient == account
+        }).first
+
+        //Create a new conversation for this sender if not exists
+        if currentConversation == nil {
+            currentConversation = ConversationModel(withRecipient: content)
+            currentConversation?.recipient = account
+            self.conversations.append(currentConversation!)
+        }
+
+        let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: author)
+        currentConversation?.add(message: message)
+
+        self.conversationsStream.onNext(conversations)
     }
 
     func status(forMessageId messageId: UInt64) -> MessageStatus {
@@ -55,25 +77,7 @@ class MessagesService: MessagesAdapterDelegate {
                            to receiverAccountId: String) {
 
         if let content = message[textPlainMIMEType] {
-            let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: senderAccount)
-
-            //Get conversations for this sender
-            var currentConversation = conversations.filter({ conversation in
-                return conversation.recipient == senderAccount
-            }).first
-
-            //Create a new conversation for this sender if not exists
-            if currentConversation == nil {
-                currentConversation = ConversationModel(withRecipient: receiverAccountId)
-                currentConversation?.recipient = senderAccount
-                self.conversations.append(currentConversation!)
-            }
-
-            //Add the received message into the conversation
-            currentConversation?.messages.append(message)
-            currentConversation?.lastMessageDate = message.receivedDate
-
-            self.conversationsStream.onNext(conversations)
+            self.addMessage(withContent: content, byAuthor: senderAccount, toConversationWith: senderAccount)
         }
     }
 

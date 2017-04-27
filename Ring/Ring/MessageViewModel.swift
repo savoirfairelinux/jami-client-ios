@@ -18,24 +18,28 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class MessageModel {
+import RxSwift
 
-    var id: UInt64?
-    var receivedDate: Date
-    var content: String
-    var author: String
-    var status: MessageStatus
+class MessageViewModel {
 
-    lazy var viewModel :MessageViewModel = {
-        return MessageViewModel(withMessage: self)
-    }()
+    fileprivate let accountService = AppDelegate.accountService
 
-    init(withId id: UInt64?, receivedDate: Date, content: String, author: String) {
-        self.id = id
-        self.receivedDate = receivedDate
-        self.content = content
-        self.author = author
-        self.status = .unknown
+    fileprivate var message :MessageModel
+
+    init(withMessage message: MessageModel) {
+        self.message = message
     }
 
+    var content: String {
+        return self.message.content
+    }
+
+    func bubblePosition() -> BubblePosition {
+        let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
+        if self.message.author == accountService.currentAccount?.details.get(withConfigKeyModel: accountUsernameKey) {
+            return .sent
+        } else {
+            return .received
+        }
+    }
 }
