@@ -120,4 +120,18 @@ struct AccountModelHelper {
         }
         return self.account
     }
+
+    var ringId :String? {
+        
+        let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
+        let accountUsername = self.account.details.get(withConfigKeyModel: accountUsernameKey)
+
+        let ringIdPrefix = "ring:"
+        if accountUsername.contains(ringIdPrefix) {
+            let index = accountUsername.range(of: ringIdPrefix)?.upperBound
+            return accountUsername.substring(from: index!)
+        } else {
+            return nil
+        }
+    }
 }
