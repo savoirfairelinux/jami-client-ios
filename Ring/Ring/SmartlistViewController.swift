@@ -30,6 +30,8 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let SmartlistRowHeight :CGFloat = 64.0
 
+    var selectedItem: ConversationViewModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -61,8 +63,15 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
             cell.lastMessagePreviewLabel.text = viewModel.lastMessage
         }.addDisposableTo(disposeBag)
 
+        //Deselect the row
         self.tableView.rx.itemSelected.asObservable().subscribe(onNext: { indexPath in
             self.tableView.deselectRow(at: indexPath, animated: true)
+        }).addDisposableTo(disposeBag)
+
+        //Show the Messages screens and pass the viewModel
+        self.tableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
+            self.selectedItem = item
+            self.performSegue(withIdentifier: "ShowMessages", sender: nil)
         }).addDisposableTo(disposeBag)
     }
 
@@ -70,7 +79,9 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        if let msgVC = segue.destination as? ConversationViewController {
+            msgVC.viewModel = self.selectedItem
+        }
     }
 
 }

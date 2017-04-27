@@ -40,9 +40,7 @@
 		0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */; };
 		043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */; };
 		043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */; };
-		04399A011D1C2D9D00E99CD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043999FF1D1C2D9D00E99CD9 /* Main.storyboard */; };
 		04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04399A021D1C2D9D00E99CD9 /* Assets.xcassets */; };
-		04399A061D1C2D9D00E99CD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04399A041D1C2D9D00E99CD9 /* LaunchScreen.storyboard */; };
 		04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A101D1C2D9D00E99CD9 /* RingTests.swift */; };
 		04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */; };
 		04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A291D1C2DE300E99CD9 /* CoreMedia.framework */; };
@@ -122,7 +120,6 @@
 		5669A8031EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */; };
 		568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 568F56721EA7E38F00132D7D /* PKHUD.framework */; };
 		56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */; };
-		56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */; };
 		56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */; };
 		56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64E01E80542300EA1AA9 /* TextFieldCell.swift */; };
 		56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64E21E805F0200EA1AA9 /* TextCell.swift */; };
@@ -141,9 +138,17 @@
 		56BBC9BA1ED715FE00CDAF8B /* ContactHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9B81ED715FE00CDAF8B /* ContactHelper.swift */; };
 		56BBC9BC1ED7161200CDAF8B /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */; };
 		56BBC9BF1ED7168400CDAF8B /* SmartlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9BE1ED7168400CDAF8B /* SmartlistViewModel.swift */; };
-		56BBC9C51ED8BF3300CDAF8B /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9C41ED8BF3300CDAF8B /* libargon2.a */; };
-		56BBC9DB1EDDC7F700CDAF8B /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9D91EDDC0B400CDAF8B /* LookupNameResponse.m */; };
-		56BBC9DC1EDDC82600CDAF8B /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9AF1ED7155700CDAF8B /* ConversationViewModel.swift */; };
+		56BBC9CD1EDC5E7000CDAF8B /* MessageAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9C71EDC5E7000CDAF8B /* MessageAccessoryView.swift */; };
+		56BBC9CE1EDC5E7000CDAF8B /* MessageAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56BBC9C81EDC5E7000CDAF8B /* MessageAccessoryView.xib */; };
+		56BBC9CF1EDC5E7000CDAF8B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9C91EDC5E7000CDAF8B /* MessageCell.swift */; };
+		56BBC9D01EDC5E7000CDAF8B /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56BBC9CA1EDC5E7000CDAF8B /* MessageCell.xib */; };
+		56BBC9D11EDC5E7000CDAF8B /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9CB1EDC5E7000CDAF8B /* MessagesViewController.swift */; };
+		56BBC9D21EDC5E7000CDAF8B /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9CC1EDC5E7000CDAF8B /* MessageViewModel.swift */; };
+		56BBC9D41EDC7A6D00CDAF8B /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
+		56BBC9D51EDCA85900CDAF8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043999FF1D1C2D9D00E99CD9 /* Main.storyboard */; };
+		56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */; };
+		56BBC9E01EDDC9E600CDAF8B /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9AF1ED7155700CDAF8B /* ConversationViewModel.swift */; };
+		56BBC9E11EDDCA5900CDAF8B /* Walkthrough.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,9 +318,15 @@
 		56BBC9B81ED715FE00CDAF8B /* ContactHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactHelper.swift; sourceTree = "<group>"; };
 		56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Helpers.swift"; path = "Extensions/Date+Helpers.swift"; sourceTree = "<group>"; };
 		56BBC9BE1ED7168400CDAF8B /* SmartlistViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartlistViewModel.swift; sourceTree = "<group>"; };
-		56BBC9C41ED8BF3300CDAF8B /* libargon2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libargon2.a; path = ../fat/lib/libargon2.a; sourceTree = "<group>"; };
-		56BBC9D81EDDC0B400CDAF8B /* LookupNameResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookupNameResponse.h; sourceTree = "<group>"; };
-		56BBC9D91EDDC0B400CDAF8B /* LookupNameResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookupNameResponse.m; sourceTree = "<group>"; };
+		56BBC9C71EDC5E7000CDAF8B /* MessageAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageAccessoryView.swift; sourceTree = "<group>"; };
+		56BBC9C81EDC5E7000CDAF8B /* MessageAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageAccessoryView.xib; sourceTree = "<group>"; };
+		56BBC9C91EDC5E7000CDAF8B /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		56BBC9CA1EDC5E7000CDAF8B /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		56BBC9CB1EDC5E7000CDAF8B /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		56BBC9CC1EDC5E7000CDAF8B /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libargon2.a; path = ../fat/lib/libargon2.a; sourceTree = "<group>"; };
+		56BBC9DD1EDDC9D300CDAF8B /* LookupNameResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookupNameResponse.h; sourceTree = "<group>"; };
+		56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookupNameResponse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,7 +334,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56BBC9C51ED8BF3300CDAF8B /* libargon2.a in Frameworks */,
+				56BBC9D41EDC7A6D00CDAF8B /* libargon2.a in Frameworks */,
 				568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */,
 				02674C851E0C757B0065EDF9 /* RxCocoa.framework in Frameworks */,
 				02674C861E0C757B0065EDF9 /* RxSwift.framework in Frameworks */,
@@ -437,7 +448,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				56BBC9C41ED8BF3300CDAF8B /* libargon2.a */,
+				56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */,
 				568F56721EA7E38F00132D7D /* PKHUD.framework */,
 				02674C801E0C757B0065EDF9 /* RxBlocking.framework */,
 				02674C811E0C757B0065EDF9 /* RxCocoa.framework */,
@@ -687,8 +698,8 @@
 		563AEC731EA6627F003A5641 /* NameRegistration */ = {
 			isa = PBXGroup;
 			children = (
-				56BBC9D81EDDC0B400CDAF8B /* LookupNameResponse.h */,
-				56BBC9D91EDDC0B400CDAF8B /* LookupNameResponse.m */,
+				56BBC9DD1EDDC9D300CDAF8B /* LookupNameResponse.h */,
+				56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */,
 				564C445E1E943C37000F92B1 /* NameRegistrationAdapter.h */,
 				564C445F1E943C37000F92B1 /* NameRegistrationAdapter.mm */,
 				56308BA51EA00E5700660275 /* NameRegistrationResponse.h */,
@@ -744,6 +755,12 @@
 		56BBC9A41ED7150200CDAF8B /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				56BBC9C71EDC5E7000CDAF8B /* MessageAccessoryView.swift */,
+				56BBC9C81EDC5E7000CDAF8B /* MessageAccessoryView.xib */,
+				56BBC9C91EDC5E7000CDAF8B /* MessageCell.swift */,
+				56BBC9CA1EDC5E7000CDAF8B /* MessageCell.xib */,
+				56BBC9CB1EDC5E7000CDAF8B /* MessagesViewController.swift */,
+				56BBC9CC1EDC5E7000CDAF8B /* MessageViewModel.swift */,
 				56BBC9A51ED7151500CDAF8B /* MessageModel.swift */,
 			);
 			name = Messages;
@@ -849,6 +866,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = KM95526DS8;
 						LastSwiftMigration = 0810;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					04399A0B1D1C2D9D00E99CD9 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -887,17 +909,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */,
 				02B22E031DF755F7000358C9 /* WalkthroughStoryboard.storyboard in Resources */,
 				5669A7FE1EA904E4003C7B93 /* TextCell.xib in Resources */,
-				04399A061D1C2D9D00E99CD9 /* LaunchScreen.storyboard in Resources */,
 				56BBC9AC1ED7154300CDAF8B /* Smartlist.strings in Resources */,
 				56BBC9AA1ED7153800CDAF8B /* Global.strings in Resources */,
+				56BBC9CE1EDC5E7000CDAF8B /* MessageAccessoryView.xib in Resources */,
+				56BBC9D51EDCA85900CDAF8B /* Main.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */,
-				04399A011D1C2D9D00E99CD9 /* Main.storyboard in Resources */,
+				56BBC9D01EDC5E7000CDAF8B /* MessageCell.xib in Resources */,
 				5669A7FA1EA904AF003C7B93 /* SwitchCell.xib in Resources */,
 				56BBC9B51ED7156500CDAF8B /* ConversationCell.xib in Resources */,
 				5669A7FC1EA904D2003C7B93 /* TextFieldCell.xib in Resources */,
+				56BBC9E11EDDCA5900CDAF8B /* Walkthrough.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -941,7 +964,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56BBC9DC1EDDC82600CDAF8B /* ConversationViewModel.swift in Sources */,
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
 				5669A8031EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift in Sources */,
 				0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */,
@@ -951,7 +973,9 @@
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
+				56BBC9CF1EDC5E7000CDAF8B /* MessageCell.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
+				56BBC9D21EDC5E7000CDAF8B /* MessageViewModel.swift in Sources */,
 				02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */,
 				56BBC9A81ED7152300CDAF8B /* SmartlistViewController.swift in Sources */,
 				5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */,
@@ -960,8 +984,8 @@
 				56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */,
 				56AC650E1E85694D00EA1AA9 /* RoundedTextField.swift in Sources */,
 				56BBC9BF1ED7168400CDAF8B /* SmartlistViewModel.swift in Sources */,
+				56BBC9D11EDC5E7000CDAF8B /* MessagesViewController.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
-				56BBC9DB1EDDC7F700CDAF8B /* LookupNameResponse.m in Sources */,
 				564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
@@ -977,11 +1001,14 @@
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
+				56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */,
+				56BBC9CD1EDC5E7000CDAF8B /* MessageAccessoryView.swift in Sources */,
 				02DD80CA1E1EAF1A009A3510 /* AccountCredentialsModel.swift in Sources */,
 				56559B171EEED50D00BF20E1 /* Colors.swift in Sources */,
 				0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */,
 				56BBC9BC1ED7161200CDAF8B /* Date+Helpers.swift in Sources */,
 				564C44621E943DE6000F92B1 /* NameService.swift in Sources */,
+				56BBC9E01EDDC9E600CDAF8B /* ConversationViewModel.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,

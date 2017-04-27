@@ -248,11 +248,75 @@
                     <navigationItem key="navigationItem" id="b8m-eG-Q9D"/>
                     <connections>
                         <outlet property="tableView" destination="B6Y-MZ-L7L" id="dXp-J4-x68"/>
+                        <segue destination="Qlv-cA-wRT" kind="show" identifier="ShowMessages" id="X75-kM-dPZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzQ-ll-5bo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-97.5" y="-1177.8169014084508"/>
+        </scene>
+        <!--Conversation View Controller-->
+        <scene sceneID="N9T-Vl-P5n">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="Qlv-cA-wRT" customClass="ConversationViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wEb-Zj-bvJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="S9d-I1-nWj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="jPi-CC-dFO">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M1r-X5-oFv">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCellId" id="8rX-Qa-Ypu">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8rX-Qa-Ypu" id="7vA-nx-B3h">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYu-2x-JXM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="oH9-4M-JpG">
+                                        <rect key="frame" x="142" y="209" width="37" height="37"/>
+                                        <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="oH9-4M-JpG" firstAttribute="centerY" secondItem="PYu-2x-JXM" secondAttribute="centerY" id="105-id-Oqu"/>
+                                    <constraint firstItem="oH9-4M-JpG" firstAttribute="centerX" secondItem="PYu-2x-JXM" secondAttribute="centerX" id="Fk6-H6-Vdq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="M1r-X5-oFv" secondAttribute="trailing" id="4Dh-nK-p84"/>
+                            <constraint firstItem="M1r-X5-oFv" firstAttribute="top" secondItem="jPi-CC-dFO" secondAttribute="top" id="BFo-2E-BaG"/>
+                            <constraint firstAttribute="bottom" secondItem="M1r-X5-oFv" secondAttribute="bottom" id="PoM-IX-CFt"/>
+                            <constraint firstAttribute="trailing" secondItem="PYu-2x-JXM" secondAttribute="trailing" id="X7H-Er-Udk"/>
+                            <constraint firstItem="PYu-2x-JXM" firstAttribute="leading" secondItem="jPi-CC-dFO" secondAttribute="leading" id="dQk-7P-cld"/>
+                            <constraint firstItem="PYu-2x-JXM" firstAttribute="top" secondItem="jPi-CC-dFO" secondAttribute="top" id="g9s-sd-GJC"/>
+                            <constraint firstItem="M1r-X5-oFv" firstAttribute="leading" secondItem="jPi-CC-dFO" secondAttribute="leading" id="i0E-9E-6co"/>
+                            <constraint firstAttribute="bottom" secondItem="PYu-2x-JXM" secondAttribute="bottom" id="j3b-gd-iBK"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="spinnerView" destination="PYu-2x-JXM" id="hxZ-lU-3XC"/>
+                        <outlet property="tableView" destination="M1r-X5-oFv" id="5Lh-Iu-nQb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bv6-qf-2Pa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="844" y="-1179"/>
         </scene>
         <!--Ring-->
         <scene sceneID="oqo-zJ-m0o">
