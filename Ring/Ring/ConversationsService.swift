@@ -27,15 +27,69 @@ class ConversationsService: MessagesAdapterDelegate {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
 
-    let conversations = Variable([ConversationModel]())
+    var conversations = Variable([ConversationModel]())
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
         MessagesAdapter.delegate = self
+
+    }
+
+    func sendMessage(withContent content: String, from senderAccount: AccountModel, to recipient: ContactModel) {
+
+        let contentDict = [textPlainMIMEType : content]
+        self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipient.ringId)
+
+        let accountHelper = AccountModelHelper(withAccount: senderAccount)
+        self.addMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: recipient.ringId)
+    }
+
+    fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
+
+        let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: author)
+
+        //Get conversations for this sender
+        var currentConversation = conversations.value.filter({ conversation in
+            return conversation.recipient.ringId == account
+        }).first
+
+        //Get the current array of conversations
+        var currentConversations = self.conversations.value
+
+        //Create a new conversation for this sender if not exists
+        if currentConversation == nil {
+            currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: account), accountId: author)
+            currentConversations.append(currentConversation!)
+        }
+
+        //Add the received message into the conversation
+        currentConversation?.messages.append(message)
+
+        //Upate the value of the Variable
+        self.conversations.value = currentConversations
+
     }
 
     func status(forMessageId messageId: UInt64) -> MessageStatus {
         return self.messageAdapter.status(forMessageId: messageId)
+    }
+
+    func setMessagesAsRead(forConversation conversation: ConversationModel) {
+
+        //Get the current array of conversations
+        let currentConversations = self.conversations.value
+
+        //Filter unread messages
+        let unreadMessages = conversation.messages.filter({ messages in
+            return messages.status != .read
+        })
+
+        for message in unreadMessages {
+            message.status = .read
+        }
+
+        //Upate the value of the Variable
+        self.conversations.value = currentConversations
     }
 
     //MARK: Message Adapter delegate
@@ -44,27 +98,7 @@ class ConversationsService: MessagesAdapterDelegate {
                            to receiverAccountId: String) {
 
         if let content = message[textPlainMIMEType] {
-            let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: senderAccount)
-
-            //Get conversations for this sender
-            var currentConversation = conversations.value.filter({ conversation in
-                return conversation.recipient.ringId == senderAccount
-            }).first
-
-            //Get the current array of conversations
-            var currentConversations = self.conversations.value
-
-            //Create a new conversation for this sender if not exists
-            if currentConversation == nil {
-                currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: senderAccount), accountId: receiverAccountId)
-                currentConversations.append(currentConversation!)
-            }
-
-            //Add the received message into the conversation
-            currentConversation?.messages.append(message)
-
-            //Upate the value of the Variable
-            self.conversations.value = currentConversations
+            self.addMessage(withContent: content, byAuthor: senderAccount, toConversationWith: senderAccount)
         }
     }
 
