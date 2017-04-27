@@ -27,11 +27,22 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var newMessagesIndicator: UIView!
     @IBOutlet weak var newMessagesLabel: UILabel!
+    @IBOutlet weak var newMessagesLabelHeight: NSLayoutConstraint!
     @IBOutlet weak var lastMessageDateLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
 
+    func hideNewMessagesLabel(_ hidden: Bool) {
+
+        self.newMessagesIndicator.isHidden = hidden
+
+        if hidden {
+            self.newMessagesLabelHeight.priority = 999
+        } else {
+            self.newMessagesLabelHeight.priority = 1
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
