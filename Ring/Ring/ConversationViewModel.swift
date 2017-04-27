@@ -33,17 +33,34 @@ class ConversationViewModel {
 
     private var recipientViewModel: ContactViewModel?
 
+    let messages :Observable<[MessageViewModel]>
+
+    private let messagesService = AppDelegate.messagesService
+    private let accountService = AppDelegate.accountService
+
     init(withConversation conversation: ConversationModel) {
         self.conversation = conversation
+
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
+
+        //Create observable from sorted conversations and flatMap them to view models
+        self.messages = self.messagesService.conversations.asObservable().map({ conversations in
+            return conversations.filter({ conv in
+                return conv.recipient == conversation.recipient
+            }).flatMap({ conversation in
+                conversation.messages.map({ message in
+                    return MessageViewModel(withMessage: message)
+                })
+            })
+        }).observeOn(MainScheduler.instance)
     }
 
     var userName: Observable<String> {
         if recipientViewModel == nil {
             recipientViewModel = ContactViewModel(withContact: self.conversation.recipient)
         }
-        return recipientViewModel!.userName.asObservable()
+        return recipientViewModel!.userName.asObservable().observeOn(MainScheduler.instance)
     }
 
     var unreadMessages: String {
@@ -56,12 +73,6 @@ class ConversationViewModel {
             let text = NSLocalizedString("NewMessages", tableName: "Smartlist", comment: "")
             return "\(self.unreadMessagesCount) \(text)"
         }
-    }
-
-    var unreadMessagesCount: Int {
-        return self.conversation.messages.filter({ message in
-            return message.status != .read
-        }).count
     }
 
     var hasUnreadMessages: Bool {
@@ -93,5 +104,25 @@ class ConversationViewModel {
         } else {
             return dateFormatter.string(from: self.conversation.lastMessageDate)
         }
+    }
+
+    var hideNewMessagesLabel: Bool {
+        return self.unreadMessagesCount == 0
+    }
+
+    func sendMessage(withContent content: String) {
+        self.messagesService.sendMessage(withContent: content,
+                                         from: accountService.currentAccount!,
+                                         to: self.conversation.recipient)
+    }
+
+    func setMessagesAsRead() {
+        self.messagesService.setMessagesAsRead(forConversation: self.conversation)
+    }
+
+    fileprivate var unreadMessagesCount: Int {
+        return self.conversation.messages.filter({ message in
+            return message.status != .read
+        }).count
     }
 }

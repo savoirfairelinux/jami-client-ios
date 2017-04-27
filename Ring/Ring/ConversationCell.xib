@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="268" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="268" height="63.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="268" height="63"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_contact_picture" translatesAutoresizingMaskIntoConstraints="NO" id="pFB-Jn-TNP">
@@ -32,7 +32,10 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="2 New Messages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbF-Al-DWO">
-                        <rect key="frame" x="78" y="34" width="101" height="25.5"/>
+                        <rect key="frame" x="78" y="21" width="101" height="38.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" priority="1" id="bFs-FK-hRF"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -44,7 +47,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l8T-mk-oLF">
-                        <rect key="frame" x="64" y="42" width="10" height="10"/>
+                        <rect key="frame" x="64" y="35.5" width="10" height="10"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="KTz-ti-dto"/>
@@ -56,8 +59,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fJ-Wf-1e0">
-                        <rect key="frame" x="64" y="4" width="119" height="26"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fJ-Wf-1e0">
+                        <rect key="frame" x="64" y="4" width="119" height="17"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -66,13 +69,12 @@
                 <constraints>
                     <constraint firstItem="2fJ-Wf-1e0" firstAttribute="leading" secondItem="pFB-Jn-TNP" secondAttribute="trailing" constant="8" id="2NV-6m-dri"/>
                     <constraint firstAttribute="bottom" secondItem="xbF-Al-DWO" secondAttribute="bottom" constant="4" id="6fl-kd-1vK"/>
-                    <constraint firstItem="xbF-Al-DWO" firstAttribute="top" secondItem="2fJ-Wf-1e0" secondAttribute="bottom" constant="4" id="7zS-Z4-7p7"/>
+                    <constraint firstItem="xbF-Al-DWO" firstAttribute="top" secondItem="2fJ-Wf-1e0" secondAttribute="bottom" id="7zS-Z4-7p7"/>
                     <constraint firstItem="l8T-mk-oLF" firstAttribute="centerY" secondItem="xbF-Al-DWO" secondAttribute="centerY" id="8jR-AT-tOp"/>
                     <constraint firstItem="pFB-Jn-TNP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9mO-5E-3lA"/>
                     <constraint firstItem="xbF-Al-DWO" firstAttribute="leading" secondItem="l8T-mk-oLF" secondAttribute="trailing" constant="4" id="Lzk-fm-KCE"/>
                     <constraint firstItem="7Yv-cC-LKx" firstAttribute="leading" secondItem="xbF-Al-DWO" secondAttribute="trailing" constant="8" id="OIB-2n-f3H"/>
                     <constraint firstAttribute="trailing" secondItem="7Yv-cC-LKx" secondAttribute="trailing" constant="16" id="UOx-Og-IuZ"/>
-                    <constraint firstItem="xbF-Al-DWO" firstAttribute="height" secondItem="2fJ-Wf-1e0" secondAttribute="height" id="gJY-vB-faC"/>
                     <constraint firstItem="2fJ-Wf-1e0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="omS-kb-QbN"/>
                     <constraint firstItem="l8T-mk-oLF" firstAttribute="leading" secondItem="pFB-Jn-TNP" secondAttribute="trailing" constant="8" id="sk5-sT-cnR"/>
                     <constraint firstItem="pFB-Jn-TNP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="suq-ak-BYg"/>
@@ -85,6 +87,7 @@
                 <outlet property="nameLabel" destination="2fJ-Wf-1e0" id="0Mb-yC-vh6"/>
                 <outlet property="newMessagesIndicator" destination="l8T-mk-oLF" id="Jzt-ek-TI2"/>
                 <outlet property="newMessagesLabel" destination="xbF-Al-DWO" id="2Bd-Xi-Ib7"/>
+                <outlet property="newMessagesLabelHeight" destination="bFs-FK-hRF" id="kBl-v5-ED8"/>
                 <outlet property="profileImage" destination="pFB-Jn-TNP" id="zuf-CZ-9wL"/>
             </connections>
             <point key="canvasLocation" x="-236" y="-74"/>

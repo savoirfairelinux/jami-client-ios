@@ -18,20 +18,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class MessageModel {
+import UIKit
 
-    var id: UInt64?
-    var receivedDate: Date
-    var content: String
-    var author: String
-    var status: MessageStatus
-
-    init(withId id: UInt64?, receivedDate: Date, content: String, author: String, recipient: ContactModel) {
-        self.id = id
-        self.receivedDate = receivedDate
-        self.content = content
-        self.author = author
-        self.status = .unknown
-    }
-
+class Colors {
+    static let ringMainColor = UIColor(colorLiteralRed: 10.0/255.0,
+                                       green: 116.0/255.0,
+                                       blue: 137.0/255.0,
+                                       alpha: 1.0)
 }
+
+
