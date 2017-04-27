@@ -137,6 +137,8 @@
 		56E97E1C1EB145DC003B48F1 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E97E1A1EB145DC003B48F1 /* ConversationCell.swift */; };
 		56E97E1D1EB145DC003B48F1 /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56E97E1B1EB145DC003B48F1 /* ConversationCell.xib */; };
 		56E97E1F1EB14BFF003B48F1 /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E97E1E1EB14BFF003B48F1 /* ConversationViewModel.swift */; };
+		56E97E211EB26983003B48F1 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E97E201EB26983003B48F1 /* MessageViewModel.swift */; };
+		56E97E231EB272AD003B48F1 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E97E221EB272AD003B48F1 /* MessagesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -302,6 +304,8 @@
 		56E97E1A1EB145DC003B48F1 /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		56E97E1B1EB145DC003B48F1 /* ConversationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
 		56E97E1E1EB14BFF003B48F1 /* ConversationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
+		56E97E201EB26983003B48F1 /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		56E97E221EB272AD003B48F1 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -700,13 +704,15 @@
 		5669A8151EAFDD7B003C7B93 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
-				5669A8161EAFDD99003C7B93 /* ConversationModel.swift */,
-				5669A8181EAFDDAA003C7B93 /* MessageModel.swift */,
-				5669A81A1EAFE027003C7B93 /* SmartlistViewModel.swift */,
 				5669A81E1EAFE051003C7B93 /* SmartlistViewController.swift */,
+				5669A81A1EAFE027003C7B93 /* SmartlistViewModel.swift */,
 				56E97E1A1EB145DC003B48F1 /* ConversationCell.swift */,
 				56E97E1B1EB145DC003B48F1 /* ConversationCell.xib */,
 				56E97E1E1EB14BFF003B48F1 /* ConversationViewModel.swift */,
+				5669A8161EAFDD99003C7B93 /* ConversationModel.swift */,
+				56E97E201EB26983003B48F1 /* MessageViewModel.swift */,
+				5669A8181EAFDDAA003C7B93 /* MessageModel.swift */,
+				56E97E221EB272AD003B48F1 /* MessagesViewController.swift */,
 			);
 			name = Conversations;
 			sourceTree = "<group>";
@@ -908,6 +914,7 @@
 				5669A8061EAE5A31003C7B93 /* MessagesAdapter.mm in Sources */,
 				02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */,
 				56BE9BE71E97D9F300973440 /* LookupNameResponse.m in Sources */,
+				56E97E231EB272AD003B48F1 /* MessagesViewController.swift in Sources */,
 				5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
 				56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */,
@@ -927,6 +934,7 @@
 				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
+				56E97E211EB26983003B48F1 /* MessageViewModel.swift in Sources */,
 				02DD80CA1E1EAF1A009A3510 /* AccountCredentialsModel.swift in Sources */,
 				0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */,
 				5669A80A1EAE7876003C7B93 /* MessagesService.swift in Sources */,

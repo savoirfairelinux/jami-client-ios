@@ -31,12 +31,10 @@ class MessagesService: MessagesAdapterDelegate {
 
     let conversationsStream = PublishSubject<[ConversationModel]>()
 
-    var conversations = [ConversationModel]()
+    fileprivate var conversations = [ConversationModel]()
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
-
-
         MessagesAdapter.delegate = self
     }
 
@@ -69,9 +67,7 @@ class MessagesService: MessagesAdapterDelegate {
                 self.conversations.append(currentConversation!)
             }
 
-            //Add the received message into the conversation
-            currentConversation?.messages.append(message)
-            currentConversation?.lastMessageDate = message.receivedDate
+            currentConversation?.add(message: message)
 
             self.conversationsStream.onNext(conversations)
         }

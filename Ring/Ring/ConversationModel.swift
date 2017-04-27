@@ -31,6 +31,16 @@ class ConversationModel {
     lazy var viewModel: ConversationViewModel = {
         return ConversationViewModel(withConversation: self)
     }()
+
+    func add(message: MessageModel) {
+        self.messages.append(message)
+
+        self.viewModel.messages.value = self.messages.map({ message in
+            return message.viewModel
+        })
+
+        self.lastMessageDate = message.receivedDate
+    }
 }
 
 extension ConversationModel {

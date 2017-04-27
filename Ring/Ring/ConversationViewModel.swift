@@ -19,12 +19,15 @@
  */
 
 import UIKit
+import RxSwift
 
 class ConversationViewModel {
 
     private let conversation: ConversationModel
 
     private let formatter = DateFormatter()
+
+    let messages = Variable<[MessageViewModel]>([])
 
     init(withConversation conversation: ConversationModel) {
         self.conversation = conversation
