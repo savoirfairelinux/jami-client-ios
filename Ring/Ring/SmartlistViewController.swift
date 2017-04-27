@@ -30,6 +30,8 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let SmartlistRowHeight :CGFloat = 64.0
 
+    var selectedItem: ConversationViewModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -49,14 +51,21 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
         self.tableView.register(UINib.init(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: "ConversationCellId")
 
         //Bind the TableView to the ViewModel
-        self.viewModel.conversations.bindTo(tableView.rx.items(cellIdentifier: "ConversationCellId", cellType: ConversationCell.self) ) { index, viewModel, cell in
+        self.viewModel.conversations.asObservable().bindTo(tableView.rx.items(cellIdentifier: "ConversationCellId", cellType: ConversationCell.self) ) { index, viewModel, cell in
             viewModel.userName.bindTo(cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
             cell.newMessagesLabel.text = viewModel.unreadMessages
             cell.lastMessageDateLabel.text = viewModel.lastMessageReceivedDate
         }.addDisposableTo(disposeBag)
 
+        //Deselect the row
         self.tableView.rx.itemSelected.asObservable().subscribe(onNext: { indexPath in
             self.tableView.deselectRow(at: indexPath, animated: true)
+        }).addDisposableTo(disposeBag)
+
+        //Show the Messages screens and pass the viewModel
+        self.tableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
+            self.selectedItem = item
+            self.performSegue(withIdentifier: "ShowMessages", sender: nil)
         }).addDisposableTo(disposeBag)
     }
 
@@ -64,7 +73,9 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        if let msgVC = segue.destination as? MessagesViewController {
+            msgVC.viewModel = self.selectedItem
+        }
     }
 
 }

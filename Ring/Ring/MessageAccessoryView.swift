@@ -18,13 +18,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConversationModel {
+import UIKit
 
-    var messages = [MessageModel]()
-    var recipient: ContactModel
-    var lastMessageDate = Date()
+class MessageAccessoryView: UIView {
 
-    init(withRecipient recipient: ContactModel) {
-        self.recipient = recipient
+    @IBOutlet weak var messageTextField: UITextField!
+
+    class func instanceFromNib() -> MessageAccessoryView {
+        return UINib(nibName: "MessageAccessoryView", bundle: nil)
+            .instantiate(withOwner: nil, options: nil).first as! MessageAccessoryView
     }
+
 }
