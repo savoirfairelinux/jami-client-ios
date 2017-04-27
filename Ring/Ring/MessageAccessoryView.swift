@@ -18,24 +18,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class MessageModel {
+import UIKit
 
-    var id: UInt64?
-    var receivedDate: Date
-    var content: String
-    var author: String
-    var status: MessageStatus
+class MessageAccessoryView: UIView {
 
-    lazy var viewModel :MessageViewModel = {
-        return MessageViewModel(withMessage: self)
-    }()
+    @IBOutlet weak var messageTextField: UITextField!
 
-    init(withId id: UInt64?, receivedDate: Date, content: String, author: String) {
-        self.id = id
-        self.receivedDate = receivedDate
-        self.content = content
-        self.author = author
-        self.status = .unknown
+    class func instanceFromNib() -> MessageAccessoryView {
+        return UINib(nibName: "MessageAccessoryView", bundle: nil)
+            .instantiate(withOwner: nil, options: nil).first as! MessageAccessoryView
     }
 
 }
