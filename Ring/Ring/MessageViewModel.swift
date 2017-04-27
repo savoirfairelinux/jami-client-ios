@@ -18,36 +18,28 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConversationModel {
+import RxSwift
 
-    var messages = [MessageModel]()
-    var recipient: ContactModel
-    var lastMessageDate: Date?
+class MessageViewModel {
 
-    init(withRecipient recipient: ContactModel) {
-        self.recipient = recipient
+    fileprivate let accountService = AppDelegate.accountService
+
+    fileprivate var message :MessageModel
+
+    init(withMessage message: MessageModel) {
+        self.message = message
     }
 
-    lazy var viewModel: ConversationViewModel = {
-        return ConversationViewModel(withConversation: self)
-    }()
-
-    func add(message: MessageModel) {
-        self.messages.append(message)
-
-        self.viewModel.messages.value = self.messages.map({ message in
-            return message.viewModel
-        })
-
-        self.lastMessageDate = message.receivedDate
+    var content: String {
+        return self.message.content
     }
-}
 
-extension ConversationModel {
-
-    var unreadMessagesCount: Int {
-        return self.messages.filter({ message in
-            return message.status != .read
-        }).count
+    func bubblePosition() -> BubblePosition {
+        let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
+        if self.message.author == accountService.currentAccount?.details.get(withConfigKeyModel: accountUsernameKey) {
+            return .sent
+        } else {
+            return .received
+        }
     }
 }

@@ -26,6 +26,10 @@ class MessageModel {
     var author: String
     var status: MessageStatus
 
+    lazy var viewModel :MessageViewModel = {
+        return MessageViewModel(withMessage: self)
+    }()
+
     init(withId id: UInt64?, receivedDate: Date, content: String, author: String) {
         self.id = id
         self.receivedDate = receivedDate
