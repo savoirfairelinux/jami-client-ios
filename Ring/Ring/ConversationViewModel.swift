@@ -23,7 +23,7 @@ import RxSwift
 
 class ConversationViewModel {
 
-    private let conversation: ConversationModel
+    let conversation: ConversationModel
 
     //Displays the entire date ( for messages received before the current week )
     private let dateFormatter = DateFormatter()
@@ -33,17 +33,34 @@ class ConversationViewModel {
 
     private var recipientViewModel: ContactViewModel?
 
+    let messages :Observable<[MessageViewModel]>
+
+    private let messagesService = AppDelegate.messagesService
+    private let accountService = AppDelegate.accountService
+
     init(withConversation conversation: ConversationModel) {
         self.conversation = conversation
+
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
+
+        //Create observable from sorted conversations and flatMap them to view models
+        self.messages = self.messagesService.conversations.asObservable().map({ conversations in
+            return conversations.filter({ conv in
+                return conv.recipient == conversation.recipient
+            }).flatMap({ conversation in
+                conversation.messages.map({ message in
+                    return MessageViewModel(withMessage: message)
+                })
+            })
+        }).observeOn(MainScheduler.instance)
     }
 
     var userName: Observable<String> {
         if recipientViewModel == nil {
             recipientViewModel = ContactViewModel(withContact: self.conversation.recipient)
         }
-        return recipientViewModel!.userName.asObservable()
+        return recipientViewModel!.userName.asObservable().observeOn(MainScheduler.instance)
     }
 
     var unreadMessages: String {
@@ -93,5 +110,11 @@ class ConversationViewModel {
         } else {
             return dateFormatter.string(from: self.conversation.lastMessageDate)
         }
+    }
+
+    func sendMessage(withContent content: String) {
+        self.messagesService.sendMessage(withContent: content,
+                                         from: accountService.currentAccount!,
+                                         to: self.conversation.recipient)
     }
 }

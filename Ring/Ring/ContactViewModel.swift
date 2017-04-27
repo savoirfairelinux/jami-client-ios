@@ -31,16 +31,27 @@ class ContactViewModel {
     init(withContact contact: ContactModel) {
         self.contact = contact
 
-        self.userName = Variable(self.contact.ringId)
+        self.userName = Variable("")
 
-        //Lookup the user name
-        nameService.usernameLookupStatus.filter({ [unowned self] lookupNameResponse in
-            return lookupNameResponse.state == .found && lookupNameResponse.address != nil && lookupNameResponse.address == self.contact.ringId
-        }).subscribe(onNext: { [unowned self] lookupNameResponse in
-                self.contact.userName = lookupNameResponse.name
-                self.userName.value = lookupNameResponse.name
-        }).addDisposableTo(disposeBag)
+        if self.contact.userName == nil {
+            //Lookup the user name
+            nameService.usernameLookupStatus.filter({ [unowned self] lookupNameResponse in
+                return lookupNameResponse.address != nil && lookupNameResponse.address == self.contact.ringId
+            }).subscribe(onNext: { [unowned self] lookupNameResponse in
 
-        nameService.lookupAddress(withAccount: "", nameserver: "", address: self.contact.ringId)
+                if lookupNameResponse.state == .found {
+                    self.contact.userName = lookupNameResponse.name
+                    self.userName.value = lookupNameResponse.name
+                } else  {
+                    self.userName.value = contact.ringId
+                }
+
+            }).addDisposableTo(disposeBag)
+
+            nameService.lookupAddress(withAccount: "", nameserver: "", address: self.contact.ringId)
+        } else {
+            self.userName.value = self.contact.userName!
+        }
+
     }
 }

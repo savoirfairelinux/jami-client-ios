@@ -24,14 +24,17 @@ class MessageModel {
     var receivedDate: Date
     var content: String
     var author: String
+    var recipient: ContactModel
     var status: MessageStatus
+    var conversation: ConversationModel?
 
-    init(withId id: UInt64?, receivedDate: Date, content: String, author: String) {
+    init(withId id: UInt64?, receivedDate: Date, content: String, author: String, recipient: ContactModel) {
         self.id = id
         self.receivedDate = receivedDate
         self.content = content
         self.author = author
         self.status = .unknown
+        self.recipient = recipient
     }
 
 }
