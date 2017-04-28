@@ -18,9 +18,18 @@ class MessagesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.estimatedRowHeight = 30
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.separatorStyle = .none
+
+        self.tableView.register(UINib.init(nibName: "MessageCell", bundle: nil),
+                                forCellReuseIdentifier: "MessageCellId")
+
         //Bind the TableView to the ViewModel
-        self.viewModel?.messages.asObservable().bindTo(tableView.rx.items(cellIdentifier: "MessageCellId") ) { index, viewModel, cell in
-            cell.textLabel?.text = viewModel.content
+        self.viewModel?.messages.asObservable()
+            .bindTo(tableView.rx.items(cellIdentifier: "MessageCellId", cellType: MessageCell.self))
+            { index, viewModel, cell in
+            cell.messageLabel.text = viewModel.content
         }.addDisposableTo(disposeBag)
     }
     

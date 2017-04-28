@@ -134,6 +134,8 @@
 		56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64E21E805F0200EA1AA9 /* TextCell.swift */; };
 		56AC650E1E85694D00EA1AA9 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC650D1E85694D00EA1AA9 /* RoundedTextField.swift */; };
 		56BE9BE71E97D9F300973440 /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BE9BE61E97D9F300973440 /* LookupNameResponse.m */; };
+		56DAC00A1EB295B300CA8221 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAC0081EB295B300CA8221 /* MessageCell.swift */; };
+		56DAC00B1EB295B300CA8221 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56DAC0091EB295B300CA8221 /* MessageCell.xib */; };
 		56E97E1C1EB145DC003B48F1 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E97E1A1EB145DC003B48F1 /* ConversationCell.swift */; };
 		56E97E1D1EB145DC003B48F1 /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56E97E1B1EB145DC003B48F1 /* ConversationCell.xib */; };
 		56E97E1F1EB14BFF003B48F1 /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E97E1E1EB14BFF003B48F1 /* ConversationViewModel.swift */; };
@@ -301,6 +303,8 @@
 		56AC650D1E85694D00EA1AA9 /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		56BE9BE51E97D9F300973440 /* LookupNameResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookupNameResponse.h; sourceTree = "<group>"; };
 		56BE9BE61E97D9F300973440 /* LookupNameResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookupNameResponse.m; sourceTree = "<group>"; };
+		56DAC0081EB295B300CA8221 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		56DAC0091EB295B300CA8221 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		56E97E1A1EB145DC003B48F1 /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		56E97E1B1EB145DC003B48F1 /* ConversationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
 		56E97E1E1EB14BFF003B48F1 /* ConversationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
@@ -713,6 +717,8 @@
 				56E97E201EB26983003B48F1 /* MessageViewModel.swift */,
 				5669A8181EAFDDAA003C7B93 /* MessageModel.swift */,
 				56E97E221EB272AD003B48F1 /* MessagesViewController.swift */,
+				56DAC0081EB295B300CA8221 /* MessageCell.swift */,
+				56DAC0091EB295B300CA8221 /* MessageCell.xib */,
 			);
 			name = Conversations;
 			sourceTree = "<group>";
@@ -852,6 +858,7 @@
 				02B22E031DF755F7000358C9 /* WalkthroughStoryboard.storyboard in Resources */,
 				5669A7FE1EA904E4003C7B93 /* TextCell.xib in Resources */,
 				04399A061D1C2D9D00E99CD9 /* LaunchScreen.storyboard in Resources */,
+				56DAC00B1EB295B300CA8221 /* MessageCell.xib in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */,
 				04399A011D1C2D9D00E99CD9 /* Main.storyboard in Resources */,
 				5669A7FA1EA904AF003C7B93 /* SwitchCell.xib in Resources */,
@@ -910,6 +917,7 @@
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */,
 				5669A8081EAE63C4003C7B93 /* MessagesAdapterDelegate.swift in Sources */,
+				56DAC00A1EB295B300CA8221 /* MessageCell.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
 				5669A8061EAE5A31003C7B93 /* MessagesAdapter.mm in Sources */,
 				02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */,
