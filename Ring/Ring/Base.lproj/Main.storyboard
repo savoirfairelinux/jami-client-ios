@@ -255,7 +255,7 @@
         <!--Messages View Controller-->
         <scene sceneID="ulg-mB-joF">
             <objects>
-                <tableViewController id="wru-Xu-GNz" customClass="MessagesViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="wru-Xu-GNz" customClass="MessagesViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="SqV-zq-MWQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -283,7 +283,6 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="zN5-xb-CQh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="m3Y-hs-SzS" kind="relationship" relationship="viewControllers" id="tnG-cB-lXh"/>
