@@ -18,28 +18,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
+import UIKit
 
-class MessageViewModel {
+class MessageAccessoryView: UIView {
 
-    fileprivate let accountService = AppDelegate.accountService
+    @IBOutlet weak var messageTextField: UITextField!
 
-    fileprivate var message :MessageModel
-
-    init(withMessage message: MessageModel) {
-        self.message = message
+    class func instanceFromNib() -> MessageAccessoryView {
+        return UINib(nibName: "MessageAccessoryView", bundle: nil)
+            .instantiate(withOwner: nil, options: nil).first as! MessageAccessoryView
     }
 
-    var content: String {
-        return self.message.content
-    }
-
-    func bubblePosition() -> BubblePosition {
-        let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
-        if self.message.author == accountService.currentAccount?.details.get(withConfigKeyModel: accountUsernameKey) {
-            return .sent
-        } else {
-            return .received
-        }
-    }
 }

@@ -136,6 +136,8 @@
 		56BE9BE71E97D9F300973440 /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BE9BE61E97D9F300973440 /* LookupNameResponse.m */; };
 		56DAC00A1EB295B300CA8221 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAC0081EB295B300CA8221 /* MessageCell.swift */; };
 		56DAC00B1EB295B300CA8221 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56DAC0091EB295B300CA8221 /* MessageCell.xib */; };
+		56DAC00D1EB3A26C00CA8221 /* MessageAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAC00C1EB3A26C00CA8221 /* MessageAccessoryView.swift */; };
+		56DAC00F1EB3A27800CA8221 /* MessageAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56DAC00E1EB3A27800CA8221 /* MessageAccessoryView.xib */; };
 		56E97E1C1EB145DC003B48F1 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E97E1A1EB145DC003B48F1 /* ConversationCell.swift */; };
 		56E97E1D1EB145DC003B48F1 /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56E97E1B1EB145DC003B48F1 /* ConversationCell.xib */; };
 		56E97E1F1EB14BFF003B48F1 /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E97E1E1EB14BFF003B48F1 /* ConversationViewModel.swift */; };
@@ -305,6 +307,8 @@
 		56BE9BE61E97D9F300973440 /* LookupNameResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookupNameResponse.m; sourceTree = "<group>"; };
 		56DAC0081EB295B300CA8221 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		56DAC0091EB295B300CA8221 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		56DAC00C1EB3A26C00CA8221 /* MessageAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageAccessoryView.swift; sourceTree = "<group>"; };
+		56DAC00E1EB3A27800CA8221 /* MessageAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageAccessoryView.xib; sourceTree = "<group>"; };
 		56E97E1A1EB145DC003B48F1 /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		56E97E1B1EB145DC003B48F1 /* ConversationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
 		56E97E1E1EB14BFF003B48F1 /* ConversationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
@@ -719,6 +723,8 @@
 				56E97E221EB272AD003B48F1 /* MessagesViewController.swift */,
 				56DAC0081EB295B300CA8221 /* MessageCell.swift */,
 				56DAC0091EB295B300CA8221 /* MessageCell.xib */,
+				56DAC00C1EB3A26C00CA8221 /* MessageAccessoryView.swift */,
+				56DAC00E1EB3A27800CA8221 /* MessageAccessoryView.xib */,
 			);
 			name = Conversations;
 			sourceTree = "<group>";
@@ -858,6 +864,7 @@
 				02B22E031DF755F7000358C9 /* WalkthroughStoryboard.storyboard in Resources */,
 				5669A7FE1EA904E4003C7B93 /* TextCell.xib in Resources */,
 				04399A061D1C2D9D00E99CD9 /* LaunchScreen.storyboard in Resources */,
+				56DAC00F1EB3A27800CA8221 /* MessageAccessoryView.xib in Resources */,
 				56DAC00B1EB295B300CA8221 /* MessageCell.xib in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */,
 				04399A011D1C2D9D00E99CD9 /* Main.storyboard in Resources */,
@@ -909,6 +916,7 @@
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
 				5669A81F1EAFE051003C7B93 /* SmartlistViewController.swift in Sources */,
 				5669A8031EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift in Sources */,
+				56DAC00D1EB3A26C00CA8221 /* MessageAccessoryView.swift in Sources */,
 				0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */,
 				02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */,
 				56E97E1F1EB14BFF003B48F1 /* ConversationViewModel.swift in Sources */,
