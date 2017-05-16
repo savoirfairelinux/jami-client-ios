@@ -127,6 +127,8 @@
 		5669A81B1EAFE027003C7B93 /* SmartlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A81A1EAFE027003C7B93 /* SmartlistViewModel.swift */; };
 		5669A81F1EAFE051003C7B93 /* SmartlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A81E1EAFE051003C7B93 /* SmartlistViewController.swift */; };
 		568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 568F56721EA7E38F00132D7D /* PKHUD.framework */; };
+		569D864E1ECCA6040064D88B /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D864D1ECCA6040064D88B /* ContactModel.swift */; };
+		569D86501ECCACCE0064D88B /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D864F1ECCACCE0064D88B /* ContactViewModel.swift */; };
 		56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */; };
 		56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */; };
 		56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */; };
@@ -291,6 +293,8 @@
 		5669A81A1EAFE027003C7B93 /* SmartlistViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartlistViewModel.swift; sourceTree = "<group>"; };
 		5669A81E1EAFE051003C7B93 /* SmartlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartlistViewController.swift; sourceTree = "<group>"; };
 		568F56721EA7E38F00132D7D /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
+		569D864D1ECCA6040064D88B /* ContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
+		569D864F1ECCACCE0064D88B /* ContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		56AC64DA1E8012CA00EA1AA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Walkthrough.strings; sourceTree = "<group>"; };
 		56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
@@ -555,6 +559,7 @@
 				0273C3021E0C689600CF00BA /* Walkthrough */,
 				02EFCACF1E0C3DD600FD8ED1 /* Bridging */,
 				02E1A0271DDE4C3900D75B59 /* Account */,
+				569D864C1ECCA5D80064D88B /* Contacts */,
 				5669A8151EAFDD7B003C7B93 /* Conversations */,
 				02E1A0261DDE4C2E00D75B59 /* Services */,
 				02F9B1C21DDDFF0E00FE123D /* MainTabBar */,
@@ -709,6 +714,16 @@
 				56E97E1E1EB14BFF003B48F1 /* ConversationViewModel.swift */,
 			);
 			name = Conversations;
+			sourceTree = "<group>";
+		};
+		569D864C1ECCA5D80064D88B /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				569D864D1ECCA6040064D88B /* ContactModel.swift */,
+				569D864F1ECCACCE0064D88B /* ContactViewModel.swift */,
+			);
+			name = Contacts;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		56AC64D61E80121200EA1AA9 /* Internationalization */ = {
@@ -908,6 +923,8 @@
 				5669A8061EAE5A31003C7B93 /* MessagesAdapter.mm in Sources */,
 				02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */,
 				56BE9BE71E97D9F300973440 /* LookupNameResponse.m in Sources */,
+				56E97E231EB272AD003B48F1 /* MessagesViewController.swift in Sources */,
+				569D864E1ECCA6040064D88B /* ContactModel.swift in Sources */,
 				5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
 				56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */,
@@ -932,6 +949,7 @@
 				5669A80A1EAE7876003C7B93 /* MessagesService.swift in Sources */,
 				564C44621E943DE6000F92B1 /* NameService.swift in Sources */,
 				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
+				569D86501ECCACCE0064D88B /* ContactViewModel.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
 				02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */,

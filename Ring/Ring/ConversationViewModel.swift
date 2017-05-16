@@ -19,6 +19,7 @@
  */
 
 import UIKit
+import RxSwift
 
 class ConversationViewModel {
 
@@ -31,8 +32,8 @@ class ConversationViewModel {
         formatter.dateStyle = .short
     }
 
-    var userName: String {
-        return conversation.recipient
+    var userName: Observable<String> {
+        return self.conversation.recipient.viewModel.userName.asObservable()
     }
 
     var unreadMessages: String {

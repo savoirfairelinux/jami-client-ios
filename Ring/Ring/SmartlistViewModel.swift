@@ -38,7 +38,7 @@ class SmartlistViewModel: NSObject {
             }).flatMap({ conversationModel in
                 return conversationModel.viewModel
             })
-        })
+        }).observeOn(MainScheduler.instance)
     }
 
 }

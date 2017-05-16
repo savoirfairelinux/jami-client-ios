@@ -18,26 +18,22 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConversationModel {
+import UIKit
 
-    var messages = [MessageModel]()
-    var recipient: ContactModel
-    var lastMessageDate: Date?
+class ContactModel {
 
-    init(withRecipient recipient: ContactModel) {
-        self.recipient = recipient
+    var ringId: String
+    var userName: String?
+
+    lazy var viewModel :ContactViewModel = {
+        return ContactViewModel(withContact: self)
+    }()
+
+    init(withRingId ringId: String) {
+        self.ringId = ringId
     }
 
-    lazy var viewModel: ConversationViewModel = {
-        return ConversationViewModel(withConversation: self)
-    }()
-}
-
-extension ConversationModel {
-
-    var unreadMessagesCount: Int {
-        return self.messages.filter({ message in
-            return message.status != .read
-        }).count
+    public static func ==(lhs: ContactModel, rhs: ContactModel) -> Bool {
+        return lhs.ringId == rhs.ringId
     }
 }

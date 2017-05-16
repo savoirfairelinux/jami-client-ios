@@ -35,14 +35,7 @@ class MessagesService: MessagesAdapterDelegate {
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
-
-
         MessagesAdapter.delegate = self
-    }
-
-    func sendMessage(withContent content: String, from senderAccount: AccountModel, to receiverAccount: String) {
-        let content = [textPlainMIMEType : content]
-        self.messageAdapter.sendMessage(withContent: content, withAccountId: senderAccount.id, to: receiverAccount)
     }
 
     func status(forMessageId messageId: UInt64) -> MessageStatus {
@@ -59,13 +52,12 @@ class MessagesService: MessagesAdapterDelegate {
 
             //Get conversations for this sender
             var currentConversation = conversations.filter({ conversation in
-                return conversation.recipient == senderAccount
+                return conversation.recipient.ringId == senderAccount
             }).first
 
             //Create a new conversation for this sender if not exists
             if currentConversation == nil {
-                currentConversation = ConversationModel(withRecipient: receiverAccountId)
-                currentConversation?.recipient = senderAccount
+                currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: senderAccount))
                 self.conversations.append(currentConversation!)
             }
 
