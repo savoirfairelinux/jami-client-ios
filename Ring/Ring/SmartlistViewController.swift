@@ -49,7 +49,7 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
 
         //Bind the TableView to the ViewModel
         self.viewModel.conversations.bindTo(tableView.rx.items(cellIdentifier: "ConversationCellId", cellType: ConversationCell.self) ) { index, viewModel, cell in
-            cell.nameLabel.text = viewModel.userName
+            viewModel.userName.bindTo(cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
             cell.newMessagesLabel.text = viewModel.unreadMessages
             cell.lastMessageDateLabel.text = viewModel.lastMessageReceivedDate
         }.addDisposableTo(disposeBag)

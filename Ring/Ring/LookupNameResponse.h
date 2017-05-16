@@ -23,7 +23,8 @@
 
 //Represents the status of the lookup response from to the daemon
 typedef NS_ENUM(NSInteger, LookupNameState) {
-    LookupNameStateFound = 0,
+    LookupNameStateUnknown = -1,
+    LookupNameStateFound,
     LookupNameStateInvalidName,
     LookupNameStateNotFound,
     LookupNameStateError
@@ -35,5 +36,7 @@ typedef NS_ENUM(NSInteger, LookupNameState) {
 @property (nonatomic) LookupNameState state;
 @property (nonatomic, retain) NSString* address;
 @property (nonatomic, retain) NSString* name;
+
+- (instancetype)init;
 
 @end

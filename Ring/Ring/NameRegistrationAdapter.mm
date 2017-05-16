@@ -79,6 +79,10 @@ static id <NameRegistrationAdapterDelegate> _delegate;
     lookupName(std::string([account UTF8String]),std::string([nameserver UTF8String]),std::string([name UTF8String]));
 }
 
+- (void)lookupAddressWithAccount:(NSString*)account nameserver:(NSString*)nameserver address:(NSString*)address {
+    lookupAddress(std::string([account UTF8String]), std::string([nameserver UTF8String]), std::string([address UTF8String]));
+}
+
 - (void)registerNameWithAccount:(NSString*)account password:(NSString*)password name:(NSString*)name {
     registerName(std::string([account UTF8String]), std::string([password UTF8String]), std::string([name UTF8String]));
 }
