@@ -38,26 +38,25 @@ class MessagesService: MessagesAdapterDelegate {
         MessagesAdapter.delegate = self
     }
 
-    func sendMessage(withContent content: String, from senderAccount: AccountModel, to receiverAccount: String) {
+    func sendMessage(withContent content: String, from senderAccount: AccountModel, to recipient: ContactModel) {
         let contentDict = [textPlainMIMEType : content]
 
-        self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: receiverAccount)
+        self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipient.ringId)
 
         let key = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
 
-        self.addMessage(withContent: content, byAuthor: senderAccount.details.get(withConfigKeyModel: key), toConversationWith: receiverAccount)
+        self.addMessage(withContent: content, byAuthor: senderAccount.details.get(withConfigKeyModel: key), toConversationWith: recipient.ringId)
     }
 
     fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
         //Get conversations for this sender
         var currentConversation = conversations.filter({ conversation in
-            return conversation.recipient == account
+            return conversation.recipient.ringId == account
         }).first
 
         //Create a new conversation for this sender if not exists
         if currentConversation == nil {
-            currentConversation = ConversationModel(withRecipient: content)
-            currentConversation?.recipient = account
+            currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: account))
             self.conversations.append(currentConversation!)
         }
 

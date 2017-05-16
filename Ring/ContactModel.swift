@@ -18,22 +18,22 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Foundation/Foundation.h>
+import UIKit
 
-@protocol NameRegistrationAdapterDelegate;
+class ContactModel {
 
-@interface NameRegistrationAdapter : NSObject
+    var ringId: String
+    var userName: String?
 
-@property (class, nonatomic, weak) id <NameRegistrationAdapterDelegate> delegate;
+    lazy var viewModel :ContactViewModel = {
+        return ContactViewModel(withContact: self)
+    }()
 
-- (void)lookupNameWithAccount:(NSString*)account nameserver:(NSString*)nameserver
-                         name:(NSString*)name;
+    init(withRingId ringId: String) {
+        self.ringId = ringId
+    }
 
-- (void)registerNameWithAccount:(NSString*)account password:(NSString*)password
-                           name:(NSString*)name;
-
-- (void)lookupAddressWithAccount:(NSString*)account nameserver:(NSString*)nameserver
-                         address:(NSString*)address;
-
-
-@end
+    public static func ==(lhs: ContactModel, rhs: ContactModel) -> Bool {
+        return lhs.ringId == rhs.ringId
+    }
+}
