@@ -21,10 +21,10 @@
 class ConversationModel {
 
     var messages = [MessageModel]()
-    var recipient :String
+    var recipient: ContactModel
     var lastMessageDate: Date?
 
-    init(withRecipient recipient: String) {
+    init(withRecipient recipient: ContactModel) {
         self.recipient = recipient
     }
 
