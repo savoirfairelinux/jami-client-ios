@@ -22,4 +22,13 @@
 
 @implementation LookupNameResponse
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.state = LookupNameStateUnknown;
+    }
+    return self;
+}
+
 @end
