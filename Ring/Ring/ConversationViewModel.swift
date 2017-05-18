@@ -24,7 +24,6 @@ import RxSwift
 class ConversationViewModel {
 
     let conversation: ConversationModel
-    let userName: Observable<String>
 
     //Displays the entire date ( for messages received before the current week )
     private let dateFormatter = DateFormatter()
@@ -36,6 +35,7 @@ class ConversationViewModel {
 
     let messages :Observable<[MessageViewModel]>
 
+    //Services
     private let conversationsService = AppDelegate.conversationsService
     private let accountService = AppDelegate.accountService
 
@@ -44,10 +44,6 @@ class ConversationViewModel {
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
-
-        self.userName = ContactHelper.lookupUserName(forRingId: self.conversation.recipient.ringId,
-                                                nameService: AppDelegate.nameService,
-                                                disposeBag: self.disposeBag).asObservable()
 
         //Create observable from sorted conversations and flatMap them to view models
         self.messages = self.conversationsService.conversations.asObservable().map({ conversations in
@@ -61,6 +57,23 @@ class ConversationViewModel {
         }).observeOn(MainScheduler.instance)
 
     }
+
+    lazy var userName: Variable<String> = {
+
+        if let userName = self.conversation.recipient.userName {
+            return Variable(userName)
+        } else {
+            let tmp :Variable<String> = ContactHelper.lookupUserName(forRingId: self.conversation.recipient.ringId,
+                                                nameService: AppDelegate.nameService,
+                                                disposeBag: self.disposeBag)
+
+            tmp.asObservable().subscribe(onNext: { userNameFound in
+                self.conversation.recipient.userName = userNameFound
+            }).addDisposableTo(self.disposeBag)
+
+            return tmp
+        }
+    }()
 
     var unreadMessages: String {
        return self.unreadMessagesCount.description
@@ -113,6 +126,10 @@ class ConversationViewModel {
         return self.unreadMessagesCount == 0
     }
 
+    var hideDate: Bool {
+        return self.conversation.messages.count == 0
+    }
+
     func sendMessage(withContent content: String) {
         self.conversationsService
             .sendMessage(withContent: content,
@@ -126,7 +143,7 @@ class ConversationViewModel {
 
     fileprivate func saveMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
         self.conversationsService
-            .saveMessage(withContent: content, byAuthor: author, toConversationWith: account)
+            .saveMessage(withContent: content, byAuthor: author, toConversationWith: account, currentAccountId: (accountService.currentAccount?.id)!)
             .subscribe(onCompleted: {
                 print("Message saved")
             })

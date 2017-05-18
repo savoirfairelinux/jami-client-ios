@@ -18,32 +18,41 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-
 import RxSwift
 
-class ContactHelper {
+class ContactViewModel {
 
-    static func lookupUserName(forRingId ringId: String, nameService: NameService, disposeBag: DisposeBag) -> Variable<String> {
+    private let nameService = AppDelegate.nameService
+    private let disposeBag = DisposeBag()
+    private let contact: ContactModel
 
-        let userName = Variable("")
+    let userName = Variable("")
 
-        //Lookup the user name observer
+    init(withContact contact: ContactModel) {
+        self.contact = contact
+
+        if let userName = self.contact.userName {
+            self.userName.value = userName
+        } else {
+            self.lookupUserName()
+        }
+    }
+
+    func lookupUserName() {
+
         nameService.usernameLookupStatus
             .observeOn(MainScheduler.instance)
-            .filter({ lookupNameResponse in
-                return lookupNameResponse.address != nil && lookupNameResponse.address == ringId
-            }).subscribe(onNext: { lookupNameResponse in
+            .filter({ [unowned self] lookupNameResponse in
+                return lookupNameResponse.address != nil && lookupNameResponse.address == self.contact.ringId
+            }).subscribe(onNext: { [unowned self] lookupNameResponse in
                 if lookupNameResponse.state == .found {
-                    userName.value = lookupNameResponse.name
+                    self.contact.userName = lookupNameResponse.name
+                    self.userName.value = lookupNameResponse.name
                 } else {
-                    userName.value = lookupNameResponse.address
+                    self.userName.value = lookupNameResponse.address
                 }
             }).addDisposableTo(disposeBag)
 
-        nameService.lookupAddress(withAccount: "", nameserver: "", address: ringId)
-
-        return userName
+        nameService.lookupAddress(withAccount: "", nameserver: "", address: self.contact.ringId)
     }
-
 }

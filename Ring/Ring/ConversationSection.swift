@@ -18,11 +18,18 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-"Yesterday" = "Yesterday";
+import RxDataSources
 
-"UserFound" = "User found";
-"Conversations" = "Conversations";
+struct ConversationSection {
+    var header: String
+    var items: [ConversationViewModel]
+}
 
-"Searching" = "Searching...";
-"NoResults" = "No results";
+extension ConversationSection: SectionModelType {
+    typealias Item = ConversationViewModel
 
+    init(original: ConversationSection, items: [Item]) {
+        self = original
+        self.items = items
+    }
+}
