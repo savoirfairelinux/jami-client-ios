@@ -129,6 +129,7 @@
 		568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 568F56721EA7E38F00132D7D /* PKHUD.framework */; };
 		569D864E1ECCA6040064D88B /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D864D1ECCA6040064D88B /* ContactModel.swift */; };
 		569D86501ECCACCE0064D88B /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D864F1ECCACCE0064D88B /* ContactViewModel.swift */; };
+		569D86531ECE33BB0064D88B /* ConversationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D86521ECE33BB0064D88B /* ConversationSection.swift */; };
 		56AC64D51E7C7F4000EA1AA9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */; };
 		56AC64D91E8012CA00EA1AA9 /* Walkthrough.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56AC64DB1E8012CA00EA1AA9 /* Walkthrough.strings */; };
 		56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */; };
@@ -301,6 +302,7 @@
 		568F56721EA7E38F00132D7D /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		569D864D1ECCA6040064D88B /* ContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
 		569D864F1ECCACCE0064D88B /* ContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
+		569D86521ECE33BB0064D88B /* ConversationSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationSection.swift; sourceTree = "<group>"; };
 		56AC64D41E7C7F4000EA1AA9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		56AC64DA1E8012CA00EA1AA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Walkthrough.strings; sourceTree = "<group>"; };
 		56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
@@ -730,6 +732,7 @@
 				56DAC0091EB295B300CA8221 /* MessageCell.xib */,
 				56DAC00C1EB3A26C00CA8221 /* MessageAccessoryView.swift */,
 				56DAC00E1EB3A27800CA8221 /* MessageAccessoryView.xib */,
+				569D86521ECE33BB0064D88B /* ConversationSection.swift */,
 			);
 			name = Conversations;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
 			);
 			outputPaths = (
 			);
@@ -958,6 +962,7 @@
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
 				5669A8171EAFDD99003C7B93 /* ConversationModel.swift in Sources */,
+				569D86531ECE33BB0064D88B /* ConversationSection.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
 				56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
