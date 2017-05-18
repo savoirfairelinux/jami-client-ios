@@ -234,19 +234,80 @@
                         <viewControllerLayoutGuide type="bottom" id="aoH-Yk-Qrn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="khr-49-0iv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B6Y-MZ-L7L">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <searchBar contentMode="redraw" placeholder="Enter name..." translatesAutoresizingMaskIntoConstraints="NO" id="uCX-a5-egQ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="NIj-Cd-aWO" id="nrQ-TN-RFw"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B6Y-MZ-L7L">
+                                <rect key="frame" x="0.0" y="44" width="320" height="411"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeB-7A-alJ">
+                                <rect key="frame" x="0.0" y="44" width="320" height="411"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No conversations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tuk-H4-adP">
+                                        <rect key="frame" x="93.5" y="195" width="133" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Tuk-H4-adP" firstAttribute="centerY" secondItem="aeB-7A-alJ" secondAttribute="centerY" id="DWU-Br-H6b"/>
+                                    <constraint firstItem="Tuk-H4-adP" firstAttribute="centerX" secondItem="aeB-7A-alJ" secondAttribute="centerX" id="EhK-Zq-lbK"/>
+                                </constraints>
+                            </view>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1pl-Jb-V2A">
+                                <rect key="frame" x="0.0" y="44" width="320" height="411"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IQr-J3-Dyb">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1pl-Jb-V2A" firstAttribute="top" secondItem="uCX-a5-egQ" secondAttribute="bottom" id="0kW-Z4-4kE"/>
+                            <constraint firstAttribute="trailing" secondItem="aeB-7A-alJ" secondAttribute="trailing" id="6lb-NM-Kv1"/>
+                            <constraint firstItem="aoH-Yk-Qrn" firstAttribute="top" secondItem="B6Y-MZ-L7L" secondAttribute="bottom" id="8dr-z2-qYT"/>
+                            <constraint firstItem="aoH-Yk-Qrn" firstAttribute="top" secondItem="1pl-Jb-V2A" secondAttribute="bottom" id="DRW-kt-vzQ"/>
+                            <constraint firstItem="B6Y-MZ-L7L" firstAttribute="leading" secondItem="khr-49-0iv" secondAttribute="leading" id="I1L-uJ-KI4"/>
+                            <constraint firstItem="1pl-Jb-V2A" firstAttribute="leading" secondItem="khr-49-0iv" secondAttribute="leading" id="N3f-tu-YZd"/>
+                            <constraint firstItem="B6Y-MZ-L7L" firstAttribute="top" secondItem="uCX-a5-egQ" secondAttribute="bottom" id="QM6-tE-fRQ"/>
+                            <constraint firstAttribute="trailing" secondItem="uCX-a5-egQ" secondAttribute="trailing" id="XcJ-y7-DKa"/>
+                            <constraint firstAttribute="trailing" secondItem="B6Y-MZ-L7L" secondAttribute="trailing" id="b7u-DV-d1S"/>
+                            <constraint firstItem="uCX-a5-egQ" firstAttribute="leading" secondItem="khr-49-0iv" secondAttribute="leading" id="bB2-ML-Tck"/>
+                            <constraint firstItem="aeB-7A-alJ" firstAttribute="leading" secondItem="khr-49-0iv" secondAttribute="leading" id="dWi-wQ-oVH"/>
+                            <constraint firstItem="uCX-a5-egQ" firstAttribute="top" secondItem="s1e-Lp-B2j" secondAttribute="bottom" id="sBi-PG-yh3"/>
+                            <constraint firstItem="aeB-7A-alJ" firstAttribute="top" secondItem="uCX-a5-egQ" secondAttribute="bottom" id="wlD-ZX-Pgo"/>
+                            <constraint firstItem="aoH-Yk-Qrn" firstAttribute="top" secondItem="aeB-7A-alJ" secondAttribute="bottom" id="zub-RB-pYy"/>
+                            <constraint firstAttribute="trailing" secondItem="1pl-Jb-V2A" secondAttribute="trailing" id="zul-Kh-urI"/>
+                        </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" title="Home" id="1QA-0Y-BFL"/>
                     <navigationItem key="navigationItem" id="b8m-eG-Q9D"/>
                     <connections>
+                        <outlet property="conversationsTableView" destination="B6Y-MZ-L7L" id="1qp-yP-v0E"/>
+                        <outlet property="noConversationsView" destination="aeB-7A-alJ" id="LsS-ch-rh0"/>
+                        <outlet property="searchBar" destination="uCX-a5-egQ" id="xsm-gp-Yjb"/>
+                        <outlet property="searchResultsTableView" destination="1pl-Jb-V2A" id="Ywb-Lm-6S7"/>
+                        <outlet property="searchTableViewLabel" destination="IQr-J3-Dyb" id="wOe-wg-q30"/>
                         <outlet property="tableView" destination="B6Y-MZ-L7L" id="dXp-J4-x68"/>
                         <segue destination="Qlv-cA-wRT" kind="show" identifier="ShowMessages" id="X75-kM-dPZ"/>
                     </connections>
@@ -263,7 +324,7 @@
                         <viewControllerLayoutGuide type="top" id="wEb-Zj-bvJ"/>
                         <viewControllerLayoutGuide type="bottom" id="S9d-I1-nWj"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="jPi-CC-dFO">
+                    <view key="view" contentMode="scaleToFill" id="jPi-CC-dFO">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

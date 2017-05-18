@@ -70,7 +70,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
     }
 
     func setupUI() {
-        self.viewModel?.userName.bind(to: self.navigationItem.rx.title).addDisposableTo(disposeBag)
+        self.viewModel?.userName.asObservable().bind(to: self.navigationItem.rx.title).addDisposableTo(disposeBag)
 
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
@@ -131,8 +131,11 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
     }
 
     fileprivate func scrollToBottom(animated: Bool) {
-        let last = IndexPath(row: self.tableView.numberOfRows(inSection: 0) - 1, section: 0)
-        self.tableView.scrollToRow(at: last, at: .bottom, animated: animated)
+        let numberOfRows = self.tableView.numberOfRows(inSection: 0)
+        if  numberOfRows > 0 {
+            let last = IndexPath(row: numberOfRows - 1, section: 0)
+            self.tableView.scrollToRow(at: last, at: .bottom, animated: animated)
+        }
     }
 
     fileprivate var isBottomContentOffset: Bool {

@@ -32,14 +32,21 @@ class ConversationsService: MessagesAdapterDelegate {
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
         MessagesAdapter.delegate = self
-
     }
 
-    func sendMessage(withContent content: String, from senderAccount: AccountModel, to recipient: ContactModel) -> Completable {
+    func sendMessage(withContent content: String,
+                     from senderAccount: AccountModel,
+                     to recipient: ContactModel) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
             let contentDict = [self.textPlainMIMEType : content]
             self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipient.ringId)
+
+            let accountHelper = AccountModelHelper(withAccount: senderAccount)
+
+            if accountHelper.ringId! != recipient.ringId {
+                _ = self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: recipient.ringId, currentAccountId: senderAccount.id)
+            }
 
             completable(.completed)
 
@@ -47,14 +54,21 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
-    func saveMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) -> Completable {
+    func addConversation(conversation: ConversationModel) {
+        self.conversations.value.append(conversation)
+    }
+
+    func saveMessage(withContent content: String,
+                     byAuthor author: String,
+                     toConversationWith recipientRingId: String,
+                     currentAccountId: String) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
             let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: author)
 
             //Get conversations for this sender
             var currentConversation = self.conversations.value.filter({ conversation in
-                return conversation.recipient.ringId == account
+                return conversation.recipient.ringId == recipientRingId
             }).first
 
             //Get the current array of conversations
@@ -62,7 +76,7 @@ class ConversationsService: MessagesAdapterDelegate {
 
             //Create a new conversation for this sender if not exists
             if currentConversation == nil {
-                currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: account), accountId: author)
+                currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: recipientRingId), accountId: currentAccountId)
                 currentConversations.append(currentConversation!)
             }
 
@@ -115,7 +129,7 @@ class ConversationsService: MessagesAdapterDelegate {
                            to receiverAccountId: String) {
 
         if let content = message[textPlainMIMEType] {
-            self.saveMessage(withContent: content, byAuthor: senderAccount, toConversationWith: senderAccount)
+            self.saveMessage(withContent: content, byAuthor: senderAccount, toConversationWith: senderAccount, currentAccountId: receiverAccountId)
                 .subscribe(onCompleted: {
                     print("Message saved")
                 })

@@ -23,6 +23,7 @@ import UIKit
 class ContactModel {
 
     var ringId: String
+    var userName: String?
 
     init(withRingId ringId: String) {
         self.ringId = ringId
