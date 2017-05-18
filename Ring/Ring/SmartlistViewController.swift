@@ -22,43 +22,91 @@ import UIKit
 import RxSwift
 import RxDataSources
 
+//Constants
+fileprivate let conversationCellIdentifier = "ConversationCellId"
+fileprivate let conversationCellNibName = "ConversationCell"
+fileprivate let smartlistRowHeight :CGFloat = 64.0
+fileprivate let showMessages = "ShowMessages"
+
 class SmartlistViewController: UIViewController, UITableViewDelegate {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var conversationsTableView: UITableView!
+    @IBOutlet weak var searchResultsTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    fileprivate let viewModel = SmartlistViewModel(withMessagesService: AppDelegate.messagesService)
+    fileprivate let disposeBag = DisposeBag()
 
-    let viewModel = SmartlistViewModel(withMessagesService: AppDelegate.messagesService)
-
-    let disposeBag = DisposeBag()
-
-    let SmartlistRowHeight :CGFloat = 64.0
-
-    var selectedItem: ConversationViewModel?
+    //ConverationViewModel to be passed to the Messages screen
+    fileprivate var selectedItem: ConversationViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupTableView()
+
+        self.setupDataSources()
+        self.setupTableViews()
+        self.setupSearchBar()
     }
 
-    func setupTableView() {
+    func setupDataSources() {
+
+        //Create a common DataSource for conversations and filtered conversations
+        let dataSource = RxTableViewSectionedReloadDataSource<ConversationSection>()
+
+        //Configure cells for this DataSource
+        dataSource.configureCell = { (ds: TableViewSectionedDataSource, tv: UITableView, ip: IndexPath, item: ConversationViewModel) in
+            let cell = tv.dequeueReusableCell(withIdentifier:conversationCellIdentifier, for: ip) as! ConversationCell
+            item.userName.bindTo(cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
+            cell.newMessagesLabel.text = item.unreadMessages
+            cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
+            return cell
+        }
+
+        /* Projects each element of observable ConversationViewModels sequence into a ConversationSection sequence
+         to be consumable by the RxDataSource for conversations and filtered conversation tableviews
+         */
+
+        self.viewModel.conversationsViewModels.asObservable().map({ conversationsViewModels in
+            return [ConversationSection(header: "", items: conversationsViewModels)]
+        }).bindTo(self.conversationsTableView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
+
+        self.viewModel.searchResultsViewModels.asObservable().map({ conversationsViewModels in
+            return [ConversationSection(header: "", items: conversationsViewModels)]
+        }).bindTo(self.searchResultsTableView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
+    }
+
+    func setupTableViews() {
 
         //Set row height
-        self.tableView.rowHeight = SmartlistRowHeight
+        self.conversationsTableView.rowHeight = smartlistRowHeight
+        self.searchResultsTableView.rowHeight = smartlistRowHeight
 
         //Register Cell
-        self.tableView.register(UINib.init(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: "ConversationCellId")
+        self.conversationsTableView.register(UINib.init(nibName: conversationCellNibName, bundle: nil), forCellReuseIdentifier: conversationCellIdentifier)
+        self.searchResultsTableView.register(UINib.init(nibName: conversationCellNibName, bundle: nil), forCellReuseIdentifier: conversationCellIdentifier)
 
-        //Bind the TableView to the ViewModel
-        self.viewModel.conversations.bindTo(tableView.rx.items(cellIdentifier: "ConversationCellId", cellType: ConversationCell.self) ) { index, viewModel, cell in
-            viewModel.userName.bindTo(cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
-            cell.newMessagesLabel.text = viewModel.unreadMessages
-            cell.lastMessageDateLabel.text = viewModel.lastMessageReceivedDate
-        }.addDisposableTo(disposeBag)
-
+        //Bind to ViewModel to show or hide the filtered results
+        self.viewModel.isSearching.subscribe(onNext: { isSearching in
+            self.searchResultsTableView.isHidden = !isSearching
+        }).addDisposableTo(disposeBag)
+        
         //Show the Messages screens and pass the viewModel
-        self.tableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
+        self.conversationsTableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
             self.selectedItem = item
             self.performSegue(withIdentifier: "ShowMessages", sender: nil)
         }).addDisposableTo(disposeBag)
+
+        //Show the Messages screens and pass the viewModel
+        self.searchResultsTableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
+            self.selectedItem = item
+            self.performSegue(withIdentifier: "ShowMessages", sender: nil)
+        }).addDisposableTo(disposeBag)
+    }
+
+    func setupSearchBar() {
+
+        //Bind the SearchBar to the ViewModel
+        self.searchBar.rx.text.orEmpty.bindTo(self.viewModel.searchBarText).addDisposableTo(disposeBag)
     }
 
     // MARK: - Navigation
