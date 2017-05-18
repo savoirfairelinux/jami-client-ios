@@ -69,4 +69,11 @@ class ConversationViewModel {
                                          from: accountService.currentAccount!,
                                          to: self.conversation.recipient)
     }
+
+    func selected() {
+        if self.conversation.newConversation {
+            messagesService.addConversation(conversation: self.conversation)
+            self.conversation.newConversation = false
+        }
+    }
 }

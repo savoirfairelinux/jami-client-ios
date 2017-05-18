@@ -48,6 +48,11 @@ class MessagesService: MessagesAdapterDelegate {
         self.addMessage(withContent: content, byAuthor: senderAccount.details.get(withConfigKeyModel: key), toConversationWith: recipient.ringId)
     }
 
+    func addConversation(conversation: ConversationModel) {
+        self.conversations.append(conversation)
+        self.conversationsStream.onNext(conversations)
+    }
+
     fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
         //Get conversations for this sender
         var currentConversation = conversations.filter({ conversation in
@@ -57,6 +62,7 @@ class MessagesService: MessagesAdapterDelegate {
         //Create a new conversation for this sender if not exists
         if currentConversation == nil {
             currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: account))
+            currentConversation?.newConversation = false
             self.conversations.append(currentConversation!)
         }
 

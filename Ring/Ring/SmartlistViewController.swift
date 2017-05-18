@@ -22,50 +22,165 @@ import UIKit
 import RxSwift
 import RxDataSources
 
+//Constants
+fileprivate let conversationCellIdentifier = "ConversationCellId"
+fileprivate let conversationCellNibName = "ConversationCell"
+fileprivate let smartlistRowHeight :CGFloat = 64.0
+fileprivate let showMessages = "ShowMessages"
+
 class SmartlistViewController: UIViewController, UITableViewDelegate {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var conversationsTableView: UITableView!
+    @IBOutlet weak var searchResultsTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    fileprivate let viewModel = SmartlistViewModel(withMessagesService: AppDelegate.messagesService,
+                                                   nameService: AppDelegate.nameService,
+                                                   contactsService: AppDelegate.contactsService)
+    fileprivate let disposeBag = DisposeBag()
 
-    let viewModel = SmartlistViewModel(withMessagesService: AppDelegate.messagesService)
-
-    let disposeBag = DisposeBag()
-
-    let SmartlistRowHeight :CGFloat = 64.0
-
-    var selectedItem: ConversationViewModel?
+    //ConverationViewModel to be passed to the Messages screen
+    fileprivate var selectedItem: ConversationViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupTableView()
+
+        self.setupDataSources()
+        self.setupTableViews()
+        self.setupSearchBar()
+
+        /* 
+         Register to keyboard notifications to adjust tableView insets when the keybaord appears
+        or disappears
+        */
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-    func setupTableView() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+
+    func keyboardWillShow(withNotification notification: Notification) {
+        let userInfo: Dictionary = notification.userInfo!
+        let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        let tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
+
+        self.conversationsTableView.contentInset.bottom = keyboardHeight - tabBarHeight
+        self.searchResultsTableView.contentInset.bottom = keyboardHeight - tabBarHeight
+        self.conversationsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
+        self.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
+    }
+
+    func keyboardWillHide(withNotification notification: Notification) {
+        self.conversationsTableView.contentInset.bottom = 0
+        self.searchResultsTableView.contentInset.bottom = 0
+
+        self.conversationsTableView.scrollIndicatorInsets.bottom = 0
+        self.searchResultsTableView.scrollIndicatorInsets.bottom = 0
+    }
+
+    func setupDataSources() {
+
+        //Create DataSources for conversations and filtered conversations
+        let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationSection>()
+        let searchResultsDatasource = RxTableViewSectionedReloadDataSource<ConversationSection>()
+
+        //Configure cells closure for the datasources
+        let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
+            -> UITableViewCell = {
+            (ds: TableViewSectionedDataSource<ConversationSection>, tv: UITableView, ip: IndexPath, item: ConversationSection.Item) in
+            let cell = tv.dequeueReusableCell(withIdentifier:conversationCellIdentifier, for: ip) as! ConversationCell
+            item.userName.bindTo(cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
+            cell.newMessagesLabel.text = item.unreadMessages
+            cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
+            return cell
+        }
+
+        conversationsDataSource.configureCell = configureCell
+        searchResultsDatasource.configureCell = configureCell
+
+        /* Projects each element of observable ConversationViewModels sequence into a ConversationSection sequence
+         to be consumable by the RxDataSource for conversations and filtered conversation tableviews
+         */
+
+        self.viewModel.conversationsViewModels.asObservable().map({ conversationsViewModels in
+            return [ConversationSection(header: "", items: conversationsViewModels)]
+        }).bindTo(self.conversationsTableView.rx.items(dataSource: conversationsDataSource)).addDisposableTo(disposeBag)
+
+        self.viewModel.searchResultsViewModels.asObservable().map({ conversationsViewModels in
+            return [ConversationSection(header: "", items: conversationsViewModels)]
+        }).bindTo(self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource)).addDisposableTo(disposeBag)
+    }
+
+    func setupTableViews() {
 
         //Set row height
-        self.tableView.rowHeight = SmartlistRowHeight
+        self.conversationsTableView.rowHeight = smartlistRowHeight
+        self.searchResultsTableView.rowHeight = smartlistRowHeight
 
         //Register Cell
-        self.tableView.register(UINib.init(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: "ConversationCellId")
+        self.conversationsTableView.register(UINib.init(nibName: conversationCellNibName, bundle: nil), forCellReuseIdentifier: conversationCellIdentifier)
+        self.searchResultsTableView.register(UINib.init(nibName: conversationCellNibName, bundle: nil), forCellReuseIdentifier: conversationCellIdentifier)
 
-        //Bind the TableView to the ViewModel
-        self.viewModel.conversations.bindTo(tableView.rx.items(cellIdentifier: "ConversationCellId", cellType: ConversationCell.self) ) { index, viewModel, cell in
-            viewModel.userName.bindTo(cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
-            cell.newMessagesLabel.text = viewModel.unreadMessages
-            cell.lastMessageDateLabel.text = viewModel.lastMessageReceivedDate
-        }.addDisposableTo(disposeBag)
-
+        //Bind to ViewModel to show or hide the filtered results
+        self.viewModel.isSearching.subscribe(onNext: { isSearching in
+            self.searchResultsTableView.isHidden = !isSearching
+        }).addDisposableTo(disposeBag)
+        
         //Show the Messages screens and pass the viewModel
-        self.tableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
+        self.conversationsTableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
             self.selectedItem = item
             self.performSegue(withIdentifier: "ShowMessages", sender: nil)
         }).addDisposableTo(disposeBag)
+
+        //Show the Messages screens and pass the viewModel
+        self.searchResultsTableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
+            self.selectedItem = item
+            self.performSegue(withIdentifier: "ShowMessages", sender: nil)
+        }).addDisposableTo(disposeBag)
+    }
+
+    func setupSearchBar() {
+
+        self.searchBar.returnKeyType = .done
+
+        //Bind the SearchBar to the ViewModel
+        self.searchBar.rx.text.orEmpty
+            .throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
+            .bindTo(self.viewModel.searchBarText)
+            .addDisposableTo(disposeBag)
+
+        //Cancel button event
+        self.searchBar.rx.cancelButtonClicked.subscribe(onNext: {
+            self.cancelSearch()
+        }).addDisposableTo(disposeBag)
+
+        //Search button event
+        self.searchBar.rx.searchButtonClicked.subscribe(onNext: {
+            self.searchBar.resignFirstResponder()
+        }).addDisposableTo(disposeBag)
+    }
+
+    func cancelSearch() {
+        self.searchBar.resignFirstResponder()
+        self.searchBar.text = ""
+        self.searchResultsTableView.isHidden = true
     }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        self.cancelSearch()
+
         if let msgVC = segue.destination as? MessagesViewController {
+            self.selectedItem?.selected()
             msgVC.viewModel = self.selectedItem
         }
     }

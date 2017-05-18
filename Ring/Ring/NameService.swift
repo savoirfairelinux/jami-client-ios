@@ -54,7 +54,7 @@ class NameService: NameRegistrationAdapterDelegate {
     /**
      Status of the current username lookup request
      */
-    var usernameLookupStatus = BehaviorSubject<LookupNameResponse>(value: LookupNameResponse())
+    var usernameLookupStatus = PublishSubject<LookupNameResponse>()
 
     /**
     Make a username lookup request to the daemon
