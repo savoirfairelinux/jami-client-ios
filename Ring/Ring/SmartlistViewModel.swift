@@ -21,43 +21,156 @@
 import UIKit
 import RxSwift
 
-class SmartlistViewModel: NSObject {
+class SmartlistViewModel {
 
+    fileprivate let disposeBag = DisposeBag()
+
+    //Services
     fileprivate let messagesService: MessagesService
+    fileprivate let nameService: NameService
 
-    fileprivate var conversationViewModels :[ConversationViewModel]
+    let searchBarText = Variable<String>("")
+    var isSearching :Observable<Bool>!
+    var conversations :Observable<[ConversationSection]>!
+    var searchResults :Observable<[ConversationSection]>!
+    var hideNoConversationsMessage: Observable<Bool>!
+    var searchStatus = PublishSubject<String>()
 
-    let conversations :Observable<[ConversationViewModel]>
+    fileprivate var filteredResults = Variable([ConversationViewModel]())
+    fileprivate var contactFoundConversation = Variable<ConversationViewModel?>(nil)
 
-    init(withMessagesService messagesService: MessagesService) {
+    fileprivate var conversationViewModels = [ConversationViewModel]()
+
+    init(withMessagesService messagesService: MessagesService, nameService: NameService) {
+
         self.messagesService = messagesService
-
-        var conversationViewModels = [ConversationViewModel]()
-        self.conversationViewModels = conversationViewModels
+        self.nameService = nameService
 
         //Create observable from sorted conversations and flatMap them to view models
-        self.conversations = self.messagesService.conversations.asObservable().map({ conversations in
+        let observableConversationViewModels :Observable<[ConversationViewModel]> = self.messagesService
+            .conversations.asObservable().map({ conversations in
             return conversations.sorted(by: {
-
-                //TODO: Sort by status
                 return $0.lastMessageDate > $1.lastMessageDate
-            }).flatMap({ conversationModel in
+            }).flatMap({ conversationModel -> ConversationViewModel? in
 
                 var conversationViewModel: ConversationViewModel?
 
                 //Get the current ConversationViewModel if exists or create it
-                if let foundConversationViewModel = conversationViewModels.filter({ conversationViewModel in
+                if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
                     return conversationViewModel.conversation === conversationModel
                 }).first {
                     conversationViewModel = foundConversationViewModel
                 } else {
                     conversationViewModel = ConversationViewModel(withConversation: conversationModel)
-                    conversationViewModels.append(conversationViewModel!)
+                    self.conversationViewModels.append(conversationViewModel!)
                 }
 
                 return conversationViewModel
             })
+        })
+
+        //Create observable from conversations viewModels to ConversationSection
+        self.conversations = observableConversationViewModels.map({ conversationsViewModels in
+            return [ConversationSection(header: "", items: conversationsViewModels)]
         }).observeOn(MainScheduler.instance)
+
+        //Create observable from filtered conversatiosn and contact founds viewModels to ConversationSection
+        self.searchResults = Observable<[ConversationSection]>.combineLatest(self.contactFoundConversation.asObservable(), self.filteredResults.asObservable(), resultSelector: { contactFoundConversation, filteredResults in
+
+            var sections = [ConversationSection]()
+
+            if filteredResults.count > 0 {
+                let headerTitle = NSLocalizedString("Conversations", tableName: "Smartlist", comment: "")
+                sections.append(ConversationSection(header: headerTitle, items: filteredResults))
+            }
+
+            if contactFoundConversation != nil {
+                let headerTitle = NSLocalizedString("UserFound", tableName: "Smartlist", comment: "")
+                sections.append(ConversationSection(header: headerTitle, items: [contactFoundConversation!]))
+            }
+
+            return sections
+        }).observeOn(MainScheduler.instance)
+
+        self.hideNoConversationsMessage = Observable
+            .combineLatest( self.conversations, self.searchBarText.asObservable(), resultSelector: { conversations, searchBarText in
+            return conversations.first!.items.count > 0 || searchBarText.characters.count > 0
+        }).observeOn(MainScheduler.instance)
+
+        //Observes if the user is searching
+        self.isSearching = searchBarText.asObservable().map({ text in
+            return text.characters.count > 0
+        }).observeOn(MainScheduler.instance)
+
+        //Observes search bar text
+        searchBarText.asObservable().subscribe(onNext: { [unowned self] text in
+            self.search(withText: text)
+        }).addDisposableTo(disposeBag)
+
+        //Observe username lookup
+        self.nameService.usernameLookupStatus.subscribe(onNext: { usernameLookupStatus in
+            if usernameLookupStatus.state == .found && (usernameLookupStatus.name == self.searchBarText.value ) {
+
+                if let conversation = self.conversationViewModels.filter({ conversationViewModel in
+                    conversationViewModel.conversation.recipient.userName == self.searchBarText.value
+                }).first {
+                    self.contactFoundConversation.value = conversation
+                } else {
+                    let contact = ContactModel(withRingId: usernameLookupStatus.address)
+                    contact.userName = usernameLookupStatus.name
+
+                    //Create new converation
+                    let conversation = ConversationModel(withRecipient: contact)
+                    let newConversation = ConversationViewModel(withConversation: conversation)
+
+                    self.contactFoundConversation.value = newConversation
+                }
+                
+                self.searchStatus.onNext("")
+            } else if usernameLookupStatus.state == .notFound {
+                if self.filteredResults.value.count == 0 {
+                    let searchStatusText = NSLocalizedString("NoResults", tableName: "Smartlist", comment: "")
+                    self.searchStatus.onNext(searchStatusText)
+                } else {
+                    self.searchStatus.onNext("")
+                }
+            }
+        }).addDisposableTo(disposeBag)
     }
 
+    fileprivate func search(withText text: String) {
+
+        self.contactFoundConversation.value = nil
+        self.filteredResults.value.removeAll()
+        self.searchStatus.onNext("")
+
+        if text.characters.count > 0 {
+
+            //Filter conversations by user name or RingId
+            let filteredConversations = self.conversationViewModels.filter({ conversationViewModel in
+                if let recipientUserName = conversationViewModel.conversation.recipient.userName {
+                    return recipientUserName.contains(text)
+                } else {
+                    return false
+                }
+            })
+
+            if filteredConversations.count > 0 {
+                self.filteredResults.value = filteredConversations
+            }
+
+            self.nameService.lookupName(withAccount: "", nameserver: "", name: text)
+            let searchStatusText = NSLocalizedString("Searching", tableName: "Smartlist", comment: "")
+            self.searchStatus.onNext(searchStatusText)
+        }
+    }
+
+    func selected(item selectedItem: ConversationViewModel) {
+
+        if !self.conversationViewModels.contains(where: { viewModel in
+            return viewModel === selectedItem
+        }) {
+            self.messagesService.addConversation(conversation: selectedItem.conversation)
+        }
+    }
 }

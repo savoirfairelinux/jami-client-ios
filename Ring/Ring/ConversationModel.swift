@@ -22,7 +22,7 @@ class ConversationModel {
 
     var messages = [MessageModel]()
     var recipient: ContactModel
-    var lastMessageDate = Date()
+    var lastMessageDate: Date = Date()
 
     init(withRecipient recipient: ContactModel) {
         self.recipient = recipient

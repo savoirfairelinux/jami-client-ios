@@ -24,12 +24,10 @@ import RxSwift
 class MessagesService: MessagesAdapterDelegate {
 
     fileprivate let messageAdapter :MessagesAdapter
-
     fileprivate let disposeBag = DisposeBag()
+    fileprivate let textPlainMIMEType = "text/plain"
 
     var conversations = Variable([ConversationModel]())
-
-    fileprivate let textPlainMIMEType = "text/plain"
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
@@ -43,15 +41,26 @@ class MessagesService: MessagesAdapterDelegate {
         self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipient.ringId)
 
         let accountHelper = AccountModelHelper(withAccount: senderAccount)
-        self.addMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: recipient.ringId)
+
+        if accountHelper.ringId! != recipient.ringId {
+            self.addMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: recipient.ringId)
+        }
+    }
+
+    func addConversation(conversation: ConversationModel) {
+        self.conversations.value.append(conversation)
     }
 
     fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
 
         let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: author)
 
+        if author != account {
+            message.status = .read
+        }
+
         //Get conversations for this sender
-        var currentConversation = conversations.value.filter({ conversation in
+        var currentConversation = self.conversations.value.filter({ conversation in
             return conversation.recipient.ringId == account
         }).first
 

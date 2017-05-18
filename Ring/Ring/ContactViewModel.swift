@@ -31,19 +31,27 @@ class ContactViewModel {
     init(withContact contact: ContactModel) {
         self.contact = contact
 
-        //Lookup the user name
+        if let userName = self.contact.userName {
+            self.userName.value = userName
+        } else {
+            self.lookupUserName()
+        }
+    }
+
+    func lookupUserName() {
+
         nameService.usernameLookupStatus
             .observeOn(MainScheduler.instance)
             .filter({ [unowned self] lookupNameResponse in
                 return lookupNameResponse.address != nil && lookupNameResponse.address == self.contact.ringId
-        }).subscribe(onNext: { [unowned self] lookupNameResponse in
-            if lookupNameResponse.state == .found {
-                self.contact.userName = lookupNameResponse.name
-                self.userName.value = lookupNameResponse.name
-            } else {
-                self.userName.value = lookupNameResponse.address
-            }
-        }).addDisposableTo(disposeBag)
+            }).subscribe(onNext: { [unowned self] lookupNameResponse in
+                if lookupNameResponse.state == .found {
+                    self.contact.userName = lookupNameResponse.name
+                    self.userName.value = lookupNameResponse.name
+                } else {
+                    self.userName.value = lookupNameResponse.address
+                }
+            }).addDisposableTo(disposeBag)
 
         nameService.lookupAddress(withAccount: "", nameserver: "", address: self.contact.ringId)
     }

@@ -24,6 +24,7 @@ import RxSwift
 class ConversationViewModel {
 
     let conversation: ConversationModel
+    let messages :Observable<[MessageViewModel]>
 
     //Displays the entire date ( for messages received before the current week )
     private let dateFormatter = DateFormatter()
@@ -33,8 +34,7 @@ class ConversationViewModel {
 
     private var recipientViewModel: ContactViewModel?
 
-    let messages :Observable<[MessageViewModel]>
-
+    //Services
     private let messagesService = AppDelegate.messagesService
     private let accountService = AppDelegate.accountService
 
@@ -81,6 +81,10 @@ class ConversationViewModel {
 
     var lastMessageReceivedDate: String {
 
+        if self.conversation.messages.count == 0 {
+            return ""
+        }
+
         let dateToday = Date()
 
         //Get components from today date
@@ -108,6 +112,10 @@ class ConversationViewModel {
 
     var hideNewMessagesLabel: Bool {
         return self.unreadMessagesCount == 0
+    }
+
+    var hideDate: Bool {
+        return self.conversation.messages.count == 0
     }
 
     func sendMessage(withContent content: String) {
