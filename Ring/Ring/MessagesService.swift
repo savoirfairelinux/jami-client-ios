@@ -47,6 +47,10 @@ class MessagesService: MessagesAdapterDelegate {
         self.addMessage(withContent: content, byAuthor: senderAccount.details.get(withConfigKeyModel: key), toConversationWith: recipient.ringId)
     }
 
+    func addConversation(conversation: ConversationModel) {
+        self.conversations.value.append(conversation)
+    }
+
     fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
 
         let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: author, recipient: ContactModel(withRingId: account))
@@ -57,12 +61,13 @@ class MessagesService: MessagesAdapterDelegate {
         }).first
 
         //Get the current array of conversations
-        var currentConversations = self.conversations.value
+        let currentConversations = self.conversations.value
 
         //Create a new conversation for this sender if not exists
         if currentConversation == nil {
             currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: account))
-            currentConversations.append(currentConversation!)
+            currentConversation?.newConversation = false
+            self.conversations.value.append(currentConversation!)
         }
 
         //Add the received message into the conversation

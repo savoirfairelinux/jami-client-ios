@@ -25,6 +25,8 @@ class ConversationViewModel {
 
     let conversation: ConversationModel
 
+    let messages :Observable<[MessageViewModel]>
+
     //Displays the entire date ( for messages received before the current week )
     private let dateFormatter = DateFormatter()
 
@@ -33,8 +35,7 @@ class ConversationViewModel {
 
     private var recipientViewModel: ContactViewModel?
 
-    let messages :Observable<[MessageViewModel]>
-
+    //Services
     private let messagesService = AppDelegate.messagesService
     private let accountService = AppDelegate.accountService
 
@@ -116,5 +117,12 @@ class ConversationViewModel {
         self.messagesService.sendMessage(withContent: content,
                                          from: accountService.currentAccount!,
                                          to: self.conversation.recipient)
+    }
+
+    func selected() {
+        if self.conversation.newConversation {
+            messagesService.addConversation(conversation: self.conversation)
+            self.conversation.newConversation = false
+        }
     }
 }

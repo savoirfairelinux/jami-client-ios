@@ -18,14 +18,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConversationModel {
+#import <Foundation/Foundation.h>
 
-    var messages = [MessageModel]()
-    var recipient: ContactModel
-    var lastMessageDate: Date = Date()
-    var newConversation = true
+@protocol ContactsAdapterDelegate;
 
-    init(withRecipient recipient: ContactModel) {
-        self.recipient = recipient
-    }
-}
+@interface ContactsAdapter : NSObject
+
+@property (class, nonatomic, weak) id <ContactsAdapterDelegate> delegate;
+
+- (void)addContactWithURI:(NSString*)uri withAccountId:(NSString*)accountId;
+- (NSArray<NSDictionary<NSString*,NSString*>*>*)contactsWithAccountId:(NSString*)accountId;
+
+@end

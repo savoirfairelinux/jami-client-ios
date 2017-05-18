@@ -18,14 +18,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConversationModel {
+@objc protocol ContactsAdapterDelegate {
 
-    var messages = [MessageModel]()
-    var recipient: ContactModel
-    var lastMessageDate: Date = Date()
-    var newConversation = true
-
-    init(withRecipient recipient: ContactModel) {
-        self.recipient = recipient
-    }
+    func addedContact(withURI uri:String, forAccountId accountId: String, confirmed: Bool)
 }

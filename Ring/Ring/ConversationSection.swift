@@ -18,14 +18,18 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConversationModel {
+import RxDataSources
 
-    var messages = [MessageModel]()
-    var recipient: ContactModel
-    var lastMessageDate: Date = Date()
-    var newConversation = true
+struct ConversationSection {
+    var header: String
+    var items: [ConversationViewModel]
+}
 
-    init(withRecipient recipient: ContactModel) {
-        self.recipient = recipient
+extension ConversationSection: SectionModelType {
+    typealias Item = ConversationViewModel
+
+    init(original: ConversationSection, items: [Item]) {
+        self = original
+        self.items = items
     }
 }
