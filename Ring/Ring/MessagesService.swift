@@ -27,9 +27,9 @@ class MessagesService: MessagesAdapterDelegate {
 
     fileprivate let disposeBag = DisposeBag()
 
-    var conversations = Variable([ConversationModel]())
-
     fileprivate let textPlainMIMEType = "text/plain"
+
+    var conversations = Variable([ConversationModel]())
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
@@ -43,35 +43,16 @@ class MessagesService: MessagesAdapterDelegate {
         self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipient.ringId)
 
         let key = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
+        let senderUserName = senderAccount.details.get(withConfigKeyModel: key)
+        let senderRingId = senderUserName.replacingOccurrences(of: "ring:", with: "")
 
-        self.addMessage(withContent: content, byAuthor: senderAccount.details.get(withConfigKeyModel: key), toConversationWith: recipient.ringId)
+        if senderRingId != recipient.ringId {
+            self.addMessage(withContent: content, byAuthor: senderRingId, toConversationWith: recipient.ringId)
+        }
     }
 
-    fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
-
-        let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: author, recipient: ContactModel(withRingId: account))
-
-        //Get conversations for this sender
-        var currentConversation = conversations.value.filter({ conversation in
-            return conversation.recipient.ringId == account
-        }).first
-
-        //Get the current array of conversations
-        var currentConversations = self.conversations.value
-
-        //Create a new conversation for this sender if not exists
-        if currentConversation == nil {
-            currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: account))
-            currentConversations.append(currentConversation!)
-        }
-
-        //Add the received message into the conversation
-        currentConversation?.messages.append(message)
-        currentConversation?.lastMessageDate = message.receivedDate
-
-        //Upate the value of the Variable
-        self.conversations.value = currentConversations
-
+    func addConversation(conversation: ConversationModel) {
+        self.conversations.value.append(conversation)
     }
 
     func status(forMessageId messageId: UInt64) -> MessageStatus {
@@ -89,6 +70,38 @@ class MessagesService: MessagesAdapterDelegate {
 
         //Upate the value of the Variable
         self.conversations.value = currentConversations
+    }
+
+    fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
+
+        let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: author, recipient: ContactModel(withRingId: account))
+
+        if author != account {
+            message.status = .read
+        }
+
+        //Get conversations for this sender
+        var currentConversation = self.conversations.value.filter({ conversation in
+            return conversation.recipient.ringId == account
+        }).first
+
+        //Get the current array of conversations
+        var currentConversations = self.conversations.value
+
+        //Create a new conversation for this sender if not exists
+        if currentConversation == nil {
+            currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: account))
+            currentConversation?.newConversation = false
+            currentConversations.append(currentConversation!)
+        }
+
+        //Add the received message into the conversation
+        currentConversation?.messages.append(message)
+        currentConversation?.lastMessageDate = message.receivedDate
+
+        //Upate the value of the Variable
+        self.conversations.value = currentConversations
+        
     }
 
     //MARK: Message Adapter delegate

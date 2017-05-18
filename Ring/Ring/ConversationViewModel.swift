@@ -24,6 +24,7 @@ import RxSwift
 class ConversationViewModel {
 
     let conversation: ConversationModel
+    let messages :Observable<[MessageViewModel]>
 
     //Displays the entire date ( for messages received before the current week )
     private let dateFormatter = DateFormatter()
@@ -33,8 +34,7 @@ class ConversationViewModel {
 
     private var recipientViewModel: ContactViewModel?
 
-    let messages :Observable<[MessageViewModel]>
-
+    //Services
     private let messagesService = AppDelegate.messagesService
     private let accountService = AppDelegate.accountService
 
@@ -122,7 +122,19 @@ class ConversationViewModel {
 
     fileprivate var unreadMessagesCount: Int {
         return self.conversation.messages.filter({ message in
-            return message.status != .read
+
+            let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
+            let accountUsername = accountService.currentAccount?.details
+                .get(withConfigKeyModel: accountUsernameKey)
+            
+            return message.status != .read && "ring:".appending(message.author) != accountUsername
         }).count
+    }
+
+    func selected() {
+        if self.conversation.newConversation {
+            messagesService.addConversation(conversation: self.conversation)
+            self.conversation.newConversation = false
+        }
     }
 }

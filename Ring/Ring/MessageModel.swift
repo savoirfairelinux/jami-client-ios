@@ -25,6 +25,7 @@ class MessageModel {
     var content: String
     var author: String
     var status: MessageStatus
+    var recipient: ContactModel
 
     init(withId id: UInt64?, receivedDate: Date, content: String, author: String, recipient: ContactModel) {
         self.id = id
@@ -32,6 +33,7 @@ class MessageModel {
         self.content = content
         self.author = author
         self.status = .unknown
+        self.recipient = recipient
     }
 
 }

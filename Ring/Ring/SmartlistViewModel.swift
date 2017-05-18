@@ -21,25 +21,39 @@
 import UIKit
 import RxSwift
 
-class SmartlistViewModel: NSObject {
+class SmartlistViewModel {
 
+    fileprivate let disposeBag = DisposeBag()
+
+    //Services
     fileprivate let messagesService: MessagesService
-
-    fileprivate var conversationViewModels :[ConversationViewModel]
+    fileprivate let nameService: NameService
+    fileprivate let contactsService: ContactsService
 
     let conversations :Observable<[ConversationViewModel]>
+    let searchResults :Observable<[ConversationViewModel]>
+    let searchBarText = Variable<String>("")
+    let isSearching :Observable<Bool>
 
-    init(withMessagesService messagesService: MessagesService) {
+    fileprivate var conversationViewModels :[ConversationViewModel]
+    fileprivate var searchResultsViewModels :Variable<[ConversationViewModel]>
+
+    init(withMessagesService messagesService: MessagesService, nameService: NameService,
+         contactsService: ContactsService) {
+
         self.messagesService = messagesService
+        self.nameService = nameService
+        self.contactsService = contactsService
 
         var conversationViewModels = [ConversationViewModel]()
         self.conversationViewModels = conversationViewModels
 
+        let searchResultsViewModels = Variable([ConversationViewModel]())
+        self.searchResultsViewModels = searchResultsViewModels
+
         //Create observable from sorted conversations and flatMap them to view models
         self.conversations = self.messagesService.conversations.asObservable().map({ conversations in
             return conversations.sorted(by: {
-                
-                //TODO: Sort by status
                 return $0.lastMessageDate > $1.lastMessageDate
             }).flatMap({ conversationModel in
 
@@ -58,6 +72,46 @@ class SmartlistViewModel: NSObject {
                 return conversationViewModel
             })
         }).observeOn(MainScheduler.instance)
+
+        self.searchResults = self.searchResultsViewModels.asObservable().observeOn(MainScheduler.instance)
+
+        self.isSearching = searchBarText.asObservable().map({ text in
+            return text.characters.count > 0
+        }).observeOn(MainScheduler.instance)
+
+        //Observes search bar text
+        searchBarText.asObservable().subscribe(onNext: { [unowned self] text in
+            self.search(withText: text)
+        }).addDisposableTo(disposeBag)
+
+        //Observes contact search result
+        self.contactsService.contactFound.subscribe(onNext: { contact in
+            let conversation = ConversationModel(withRecipient: contact)
+            let newConversation = ConversationViewModel(withConversation: conversation)
+            self.searchResultsViewModels.value = [newConversation]
+        }).addDisposableTo(disposeBag)
     }
 
+    func search(withText text: String) {
+        self.searchResultsViewModels.value.removeAll()
+
+        if text.characters.count > 0 {
+
+            //Filter conversations by user name or RingId
+            let filteredConversations = self.conversationViewModels.filter({ conversationViewModel in
+                if let recipientUserName = conversationViewModel.conversation.recipient.userName {
+                    return recipientUserName.contains(text)
+                } else {
+                    return conversationViewModel.conversation.recipient.ringId.contains(text)
+                }
+            })
+
+            //Lookup the contact if no already in the smartlist
+            if filteredConversations.count == 0 {
+                self.contactsService.searchContact(withText: text)
+            } else {
+                self.searchResultsViewModels.value = filteredConversations
+            }
+        }
+    }
 }

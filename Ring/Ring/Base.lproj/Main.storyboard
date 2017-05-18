@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PERSON  PLACEHOLDER" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcL-Nj-NcH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PERSON  PLACEHOLDER" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcL-Nj-NcH">
                                 <rect key="frame" x="16" y="102" width="180" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="CUM-z9-ubY"/>
@@ -210,12 +210,12 @@
             </objects>
             <point key="canvasLocation" x="-954" y="-438"/>
         </scene>
-        <!--Home-->
+        <!--Item-->
         <scene sceneID="RrV-5t-V1t">
             <objects>
                 <navigationController id="m3Y-hs-SzS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="vc8-sv-IF0"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G6y-tt-W3p">
+                    <tabBarItem key="tabBarItem" title="Item" id="vc8-sv-IF0"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="G6y-tt-W3p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -241,20 +241,53 @@
                         <viewControllerLayoutGuide type="bottom" id="aoH-Yk-Qrn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="khr-49-0iv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B6Y-MZ-L7L">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="Enter name or phone number..." showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uCX-a5-egQ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" returnKeyType="done"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="NIj-Cd-aWO" id="nrQ-TN-RFw"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B6Y-MZ-L7L">
+                                <rect key="frame" x="0.0" y="44" width="320" height="411"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1pl-Jb-V2A">
+                                <rect key="frame" x="0.0" y="44" width="320" height="411"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1pl-Jb-V2A" firstAttribute="top" secondItem="uCX-a5-egQ" secondAttribute="bottom" id="0kW-Z4-4kE"/>
+                            <constraint firstItem="aoH-Yk-Qrn" firstAttribute="top" secondItem="B6Y-MZ-L7L" secondAttribute="bottom" id="8dr-z2-qYT"/>
+                            <constraint firstItem="aoH-Yk-Qrn" firstAttribute="top" secondItem="1pl-Jb-V2A" secondAttribute="bottom" id="DRW-kt-vzQ"/>
+                            <constraint firstItem="B6Y-MZ-L7L" firstAttribute="leading" secondItem="khr-49-0iv" secondAttribute="leading" id="I1L-uJ-KI4"/>
+                            <constraint firstItem="1pl-Jb-V2A" firstAttribute="leading" secondItem="khr-49-0iv" secondAttribute="leading" id="N3f-tu-YZd"/>
+                            <constraint firstItem="B6Y-MZ-L7L" firstAttribute="top" secondItem="uCX-a5-egQ" secondAttribute="bottom" id="QM6-tE-fRQ"/>
+                            <constraint firstAttribute="trailing" secondItem="uCX-a5-egQ" secondAttribute="trailing" id="XcJ-y7-DKa"/>
+                            <constraint firstAttribute="trailing" secondItem="B6Y-MZ-L7L" secondAttribute="trailing" id="b7u-DV-d1S"/>
+                            <constraint firstItem="uCX-a5-egQ" firstAttribute="leading" secondItem="khr-49-0iv" secondAttribute="leading" id="bB2-ML-Tck"/>
+                            <constraint firstItem="uCX-a5-egQ" firstAttribute="top" secondItem="s1e-Lp-B2j" secondAttribute="bottom" id="sBi-PG-yh3"/>
+                            <constraint firstAttribute="trailing" secondItem="1pl-Jb-V2A" secondAttribute="trailing" id="zul-Kh-urI"/>
+                        </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" title="Home" id="1QA-0Y-BFL"/>
                     <navigationItem key="navigationItem" id="b8m-eG-Q9D"/>
                     <connections>
-                        <outlet property="tableView" destination="B6Y-MZ-L7L" id="dXp-J4-x68"/>
+                        <outlet property="conversationsTableView" destination="B6Y-MZ-L7L" id="1qp-yP-v0E"/>
+                        <outlet property="searchBar" destination="uCX-a5-egQ" id="xsm-gp-Yjb"/>
+                        <outlet property="searchResultsTableView" destination="1pl-Jb-V2A" id="Ywb-Lm-6S7"/>
                         <segue destination="wru-Xu-GNz" kind="show" identifier="ShowMessages" id="Uao-6A-mR7"/>
                     </connections>
                 </viewController>
@@ -267,7 +300,7 @@
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="wru-Xu-GNz" customClass="MessagesViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="SqV-zq-MWQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
