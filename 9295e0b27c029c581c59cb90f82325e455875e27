@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aaae553_33ad8a32",
+        "filename": "Ring/Ring/Account/CreateRingAccountViewModel.swift",
+        "patchSetId": 18
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-25T21:53:42Z",
+      "side": 1,
+      "message": "Should be below properties declaration",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 5
+      },
+      "revId": "9295e0b27c029c581c59cb90f82325e455875e27",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_b3689af6",
+        "filename": "Ring/Ring/Account/CreateRingAccountViewModel.swift",
+        "patchSetId": 18
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-25T21:53:42Z",
+      "side": 1,
+      "message": "Should be done in another patch",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 5
+      },
+      "revId": "9295e0b27c029c581c59cb90f82325e455875e27",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_3386eaba",
+        "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
+        "patchSetId": 18
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-25T21:53:42Z",
+      "side": 1,
+      "message": "add to disposeBag",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 55
+      },
+      "revId": "9295e0b27c029c581c59cb90f82325e455875e27",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_13b08e8a",
+        "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
+        "patchSetId": 18
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-25T21:53:42Z",
+      "side": 1,
+      "message": "Should be in viewModel",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 13
+      },
+      "revId": "9295e0b27c029c581c59cb90f82325e455875e27",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_73a46257",
+        "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
+        "patchSetId": 18
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-25T21:53:42Z",
+      "side": 1,
+      "message": "add to disposeBag",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 65
+      },
+      "revId": "9295e0b27c029c581c59cb90f82325e455875e27",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_73bb0273",
+        "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
+        "patchSetId": 18
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-25T21:53:42Z",
+      "side": 1,
+      "message": "Should be in ViewModel",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 45
+      },
+      "revId": "9295e0b27c029c581c59cb90f82325e455875e27",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
