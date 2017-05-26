@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aaae553_36233807",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-26T20:38:15Z",
+      "side": 1,
+      "message": "Should be in startDaemon() method",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 49
+      },
+      "revId": "a27e569aaef581678947962c06fcd9dc7a0020b6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_7611b0ab",
+        "filename": "Ring/Ring/NameService.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-26T20:38:15Z",
+      "side": 1,
+      "message": "Useless",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 45
+      },
+      "revId": "a27e569aaef581678947962c06fcd9dc7a0020b6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_16263c17",
+        "filename": "Ring/Ring/NameService.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-26T20:38:15Z",
+      "side": 1,
+      "message": "The service should give access to the Response object and not only to the state",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "a27e569aaef581678947962c06fcd9dc7a0020b6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_f61cc0c3",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-26T20:38:15Z",
+      "side": 1,
+      "message": "Useless",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "a27e569aaef581678947962c06fcd9dc7a0020b6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
