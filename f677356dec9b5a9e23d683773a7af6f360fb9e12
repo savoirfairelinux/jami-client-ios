@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aaae553_dc0203b4",
+        "filename": "Ring/Ring/Account/CreateRingAccountViewModel.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-30T20:00:44Z",
+      "side": 1,
+      "message": "Should be in another subscription with a filter on ServiceEventType.RegistrationStateChanged",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 29
+      },
+      "revId": "f677356dec9b5a9e23d683773a7af6f360fb9e12",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
