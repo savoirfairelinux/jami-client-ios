@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aaae553_5cfe136d",
+        "filename": "Ring/Ring/Walkthrough/CreateRingAccountViewController.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-05-30T21:03:58Z",
+      "side": 1,
+      "message": "This should be refactor to usr rx observables and not callbacks",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 10
+      },
+      "revId": "3289877a1f7019a13a31997c97f7c78766911070",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
