@@ -40,9 +40,9 @@ struct AccountModelHelper {
      */
     func isAccountSip() -> Bool {
         let sipString = AccountType.SIP.rawValue
-        let accountType = self.account.details
+        let accountType = self.account.details?
             .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .AccountType))
-        return sipString.compare(accountType) == ComparisonResult.orderedSame
+        return sipString.compare(accountType!) == ComparisonResult.orderedSame
     }
 
     /**
@@ -52,9 +52,9 @@ struct AccountModelHelper {
      */
     func isAccountRing() -> Bool {
         let ringString = AccountType.Ring.rawValue
-        let accountType = self.account.details
+        let accountType = self.account.details?
             .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .AccountType))
-        return ringString.compare(accountType) == ComparisonResult.orderedSame
+        return ringString.compare(accountType!) == ComparisonResult.orderedSame
     }
 
     /**
@@ -63,7 +63,7 @@ struct AccountModelHelper {
      - Returns: true if the account is enabled, false otherwise.
      */
     func isEnabled() -> Bool {
-        return (self.account.details
+        return (self.account.details!
             .getBool(forConfigKeyModel: ConfigKeyModel.init(withKey: .AccountEnable)))
     }
 
@@ -73,7 +73,7 @@ struct AccountModelHelper {
      - Returns: the registration state of the account as a String.
      */
     func getRegistrationState() -> String {
-        return (self.account.volatileDetails
+        return (self.account.volatileDetails!
             .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .AccountRegistrationStatus)))
     }
 
@@ -124,12 +124,12 @@ struct AccountModelHelper {
     var ringId :String? {
 
         let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
-        let accountUsername = self.account.details.get(withConfigKeyModel: accountUsernameKey)
+        let accountUsername = self.account.details?.get(withConfigKeyModel: accountUsernameKey)
 
         let ringIdPrefix = "ring:"
-        if accountUsername.contains(ringIdPrefix) {
-            let index = accountUsername.range(of: ringIdPrefix)?.upperBound
-            return accountUsername.substring(from: index!)
+        if accountUsername!.contains(ringIdPrefix) {
+            let index = accountUsername?.range(of: ringIdPrefix)?.upperBound
+            return accountUsername?.substring(from: index!)
         } else {
             return nil
         }

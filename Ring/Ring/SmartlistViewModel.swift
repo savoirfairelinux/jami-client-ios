@@ -18,7 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
 
 class SmartlistViewModel {
@@ -63,7 +62,7 @@ class SmartlistViewModel {
 
                 //Get the current ConversationViewModel if exists or create it
                 if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
-                    return conversationViewModel.conversation === conversationModel
+                    return conversationViewModel.conversation.isEqual(conversationModel)
                 }).first {
                     conversationViewModel = foundConversationViewModel
                 } else {
@@ -114,11 +113,11 @@ class SmartlistViewModel {
         }).addDisposableTo(disposeBag)
 
         //Observe username lookup
-        self.nameService.usernameLookupStatus.subscribe(onNext: { usernameLookupStatus in
+        self.nameService.usernameLookupStatus.observeOn(MainScheduler.instance).subscribe(onNext: { usernameLookupStatus in
             if usernameLookupStatus.state == .found && (usernameLookupStatus.name == self.searchBarText.value ) {
 
                 if let conversation = self.conversationViewModels.filter({ conversationViewModel in
-                    conversationViewModel.conversation.recipient.ringId == usernameLookupStatus.address
+                    conversationViewModel.conversation.recipient?.ringId == usernameLookupStatus.address
                 }).first {
                     self.contactFoundConversation.value = conversation
                 } else {
@@ -154,7 +153,7 @@ class SmartlistViewModel {
 
             //Filter conversations by user name or RingId
             let filteredConversations = self.conversationViewModels.filter({ conversationViewModel in
-                if let recipientUserName = conversationViewModel.conversation.recipient.userName {
+                if let recipientUserName = conversationViewModel.conversation.recipient?.userName {
                     return recipientUserName.lowercased().hasPrefix(text.lowercased())
                 } else {
                     return false
@@ -176,7 +175,10 @@ class SmartlistViewModel {
         if !self.conversationViewModels.contains(where: { viewModel in
             return viewModel === selectedItem
         }) {
-            self.conversationsService.addConversation(conversation: selectedItem.conversation)
+            self.conversationsService
+                .addConversation(conversation: selectedItem.conversation)
+                .subscribe()
+                .addDisposableTo(disposeBag)
         }
     }
 }

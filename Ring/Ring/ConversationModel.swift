@@ -18,15 +18,17 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConversationModel {
+import RealmSwift
 
-    var messages = [MessageModel]()
-    var recipient: ContactModel
-    var accountId: String
+class ConversationModel :Object {
 
-    init(withRecipient recipient: ContactModel, accountId: String) {
+    let messages = List<MessageModel>()
+    dynamic var recipient :ContactModel?
+    dynamic var accountId: String = ""
+
+    convenience init(withRecipient recipient: ContactModel, accountId: String) {
+        self.init()
         self.recipient = recipient
         self.accountId = accountId
     }
-
 }

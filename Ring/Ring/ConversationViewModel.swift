@@ -20,10 +20,12 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 
 class ConversationViewModel {
 
     let conversation: ConversationModel
+    let realm = AppDelegate.realm
 
     //Displays the entire date ( for messages received before the current week )
     private let dateFormatter = DateFormatter()
@@ -46,7 +48,7 @@ class ConversationViewModel {
         hourFormatter.dateFormat = "HH:mm"
 
         //Create observable from sorted conversations and flatMap them to view models
-        self.messages = self.conversationsService.conversations.asObservable().map({ conversations in
+        self.messages = self.conversationsService.conversations.map({ conversations in
             return conversations.filter({ currentConversation in
                 return currentConversation.recipient == conversation.recipient
             }).flatMap({ conversation in
@@ -55,20 +57,20 @@ class ConversationViewModel {
                 })
             })
         }).observeOn(MainScheduler.instance)
-
     }
 
     lazy var userName: Variable<String> = {
-
-        if let userName = self.conversation.recipient.userName {
+        if let userName = self.conversation.recipient?.userName {
             return Variable(userName)
         } else {
-            let tmp :Variable<String> = ContactHelper.lookupUserName(forRingId: self.conversation.recipient.ringId,
+            let tmp :Variable<String> = ContactHelper.lookupUserName(forRingId: self.conversation.recipient!.ringId,
                                                 nameService: AppDelegate.nameService,
                                                 disposeBag: self.disposeBag)
 
             tmp.asObservable().subscribe(onNext: { userNameFound in
-                self.conversation.recipient.userName = userNameFound
+                try! self.realm.write {
+                    self.conversation.recipient?.userName = userNameFound
+                }
             }).addDisposableTo(self.disposeBag)
 
             return tmp
@@ -134,10 +136,10 @@ class ConversationViewModel {
         self.conversationsService
             .sendMessage(withContent: content,
                          from: accountService.currentAccount!,
-                         to: self.conversation.recipient)
+                         to: self.conversation.recipient!)
             .subscribe(onCompleted: {
                 let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipient.ringId)
+                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: (self.conversation.recipient?.ringId)!)
             }).addDisposableTo(disposeBag)
     }
 

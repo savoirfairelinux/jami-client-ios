@@ -1,3 +1,3 @@
-github "ReactiveX/RxSwift"
+github "RxSwiftCommunity/RxRealm"
 github "RxSwiftCommunity/RxDataSources" == 1.0.3
 github "pkluz/PKHUD"
