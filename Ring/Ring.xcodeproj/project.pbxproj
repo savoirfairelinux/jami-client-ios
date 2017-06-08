@@ -39,7 +39,6 @@
 		043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866351D22D06500E06CE2 /* AccountTableViewCell.swift */; };
 		0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */; };
 		043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */; };
-		043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */; };
 		04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04399A021D1C2D9D00E99CD9 /* Assets.xcassets */; };
 		04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A101D1C2D9D00E99CD9 /* RingTests.swift */; };
 		04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */; };
@@ -100,20 +99,20 @@
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
 		5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */; };
-		5557FD4B1E81AECF0043E394 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFA1DF755BB000358C9 /* AccountModel.swift */; };
-		5557FD4C1E81AF840043E394 /* AccountConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C71E1EAD70009A3510 /* AccountConfigModel.swift */; };
 		5557FD4D1E81AFF50043E394 /* ConfigKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80CC1E1EB2E4009A3510 /* ConfigKeyModel.swift */; };
-		5557FD4E1E81B1F20043E394 /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
-		5557FD4F1E81B2990043E394 /* AccountCredentialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */; };
 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
 		562FB6CD1EFAD18A00C61A78 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FB6CC1EFAD18A00C61A78 /* ConversationViewController.swift */; };
 		56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56308BA61EA00E5700660275 /* NameRegistrationResponse.m */; };
 		563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 563AEC761EA664C0003A5641 /* RegistrationResponse.m */; };
+		564775831EE5CFC500A0C855 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564775811EE5CFC500A0C855 /* Realm.framework */; };
+		564775841EE5CFC500A0C855 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564775821EE5CFC500A0C855 /* RealmSwift.framework */; };
 		564C44591E8D7F8F000F92B1 /* LocalizedStringTableNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44581E8D7F8F000F92B1 /* LocalizedStringTableNames.swift */; };
 		564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C445A1E8EA44E000F92B1 /* Durations.swift */; };
 		564C44601E943C37000F92B1 /* NameRegistrationAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 564C445F1E943C37000F92B1 /* NameRegistrationAdapter.mm */; };
 		564C44621E943DE6000F92B1 /* NameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44611E943DE6000F92B1 /* NameService.swift */; };
 		564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44631E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift */; };
+		56559B0E1EE8777600BF20E1 /* RxRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56559B0D1EE8777600BF20E1 /* RxRealm.framework */; };
+		56559B141EE89E7900BF20E1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56559B131EE89E7900BF20E1 /* DeviceModel.swift */; };
 		5669A7FA1EA904AF003C7B93 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7F91EA904AF003C7B93 /* SwitchCell.xib */; };
 		5669A7FC1EA904D2003C7B93 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */; };
 		5669A7FE1EA904E4003C7B93 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7FD1EA904E4003C7B93 /* TextCell.xib */; };
@@ -207,7 +206,6 @@
 		0438663A1D2313B700E06CE2 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
 		043999F31D1C2D9D00E99CD9 /* Ring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		043999F91D1C2D9D00E99CD9 /* Ring.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ring.xcdatamodel; sourceTree = "<group>"; };
 		04399A001D1C2D9D00E99CD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04399A021D1C2D9D00E99CD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04399A051D1C2D9D00E99CD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -286,6 +284,8 @@
 		56308BA61EA00E5700660275 /* NameRegistrationResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameRegistrationResponse.m; sourceTree = "<group>"; };
 		563AEC751EA664C0003A5641 /* RegistrationResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationResponse.h; sourceTree = "<group>"; };
 		563AEC761EA664C0003A5641 /* RegistrationResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationResponse.m; sourceTree = "<group>"; };
+		564775811EE5CFC500A0C855 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		564775821EE5CFC500A0C855 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		564C44581E8D7F8F000F92B1 /* LocalizedStringTableNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStringTableNames.swift; sourceTree = "<group>"; };
 		564C445A1E8EA44E000F92B1 /* Durations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Durations.swift; sourceTree = "<group>"; };
 		564C445E1E943C37000F92B1 /* NameRegistrationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameRegistrationAdapter.h; sourceTree = "<group>"; };
@@ -293,6 +293,8 @@
 		564C44611E943DE6000F92B1 /* NameService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameService.swift; sourceTree = "<group>"; };
 		564C44631E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameRegistrationAdapterDelegate.swift; sourceTree = "<group>"; };
 		56559B161EEED50D00BF20E1 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		56559B0D1EE8777600BF20E1 /* RxRealm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRealm.framework; path = Carthage/Build/iOS/RxRealm.framework; sourceTree = "<group>"; };
+		56559B131EE89E7900BF20E1 /* DeviceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		5669A7F91EA904AF003C7B93 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
 		5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		5669A7FD1EA904E4003C7B93 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
@@ -337,6 +339,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56559B0E1EE8777600BF20E1 /* RxRealm.framework in Frameworks */,
+				564775831EE5CFC500A0C855 /* Realm.framework in Frameworks */,
+				564775841EE5CFC500A0C855 /* RealmSwift.framework in Frameworks */,
 				56BBC9D41EDC7A6D00CDAF8B /* libargon2.a in Frameworks */,
 				568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */,
 				02674C851E0C757B0065EDF9 /* RxCocoa.framework in Frameworks */,
@@ -451,6 +456,9 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				56559B0D1EE8777600BF20E1 /* RxRealm.framework */,
+				564775811EE5CFC500A0C855 /* Realm.framework */,
+				564775821EE5CFC500A0C855 /* RealmSwift.framework */,
 				56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */,
 				568F56721EA7E38F00132D7D /* PKHUD.framework */,
 				02674C801E0C757B0065EDF9 /* RxBlocking.framework */,
@@ -495,6 +503,7 @@
 				02DD80C71E1EAD70009A3510 /* AccountConfigModel.swift */,
 				02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */,
 				02DD80CC1E1EB2E4009A3510 /* ConfigKeyModel.swift */,
+				56559B131EE89E7900BF20E1 /* DeviceModel.swift */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -599,7 +608,6 @@
 				043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */,
 				04399A021D1C2D9D00E99CD9 /* Assets.xcassets */,
 				04399A071D1C2D9D00E99CD9 /* Info.plist */,
-				043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */,
 			);
 			path = Ring;
 			sourceTree = "<group>";
@@ -956,6 +964,9 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxRealm.framework",
 			);
 			outputPaths = (
 			);
@@ -986,6 +997,8 @@
 				56BBC9E31EDDCC8100CDAF8B /* ConversationSection.swift in Sources */,
 				56BBC9A81ED7152300CDAF8B /* SmartlistViewController.swift in Sources */,
 				5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */,
+				56559B141EE89E7900BF20E1 /* DeviceModel.swift in Sources */,
+				569D86581ECF62510064D88B /* ContactsAdapter.mm in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
 				56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */,
 				56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */,
@@ -1005,7 +1018,6 @@
 				56BBC9B01ED7155700CDAF8B /* ConversationModel.swift in Sources */,
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
 				02B22DFD1DF755BB000358C9 /* CreateRingAccountViewModel.swift in Sources */,
-				043999FA1D1C2D9D00E99CD9 /* Ring.xcdatamodeld in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
 				0438663B1D2313B700E06CE2 /* AccountDetailsViewController.swift in Sources */,
 				56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */,
@@ -1034,11 +1046,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */,
-				5557FD4E1E81B1F20043E394 /* AccountModelHelper.swift in Sources */,
-				5557FD4F1E81B2990043E394 /* AccountCredentialsModel.swift in Sources */,
-				5557FD4B1E81AECF0043E394 /* AccountModel.swift in Sources */,
 				5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */,
-				5557FD4C1E81AF840043E394 /* AccountConfigModel.swift in Sources */,
 				024B61331DF765CA00C4F9DE /* DaemonService.swift in Sources */,
 				04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */,
 				029CE9D71E1D8C860000C8E1 /* ServiceEventTests.swift in Sources */,
@@ -1353,19 +1361,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		043999F81D1C2D9D00E99CD9 /* Ring.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				043999F91D1C2D9D00E99CD9 /* Ring.xcdatamodel */,
-			);
-			currentVersion = 043999F91D1C2D9D00E99CD9 /* Ring.xcdatamodel */;
-			path = Ring.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 043999EB1D1C2D9D00E99CD9 /* Project object */;
 }

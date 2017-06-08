@@ -20,17 +20,22 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 
 class ConversationsService: MessagesAdapterDelegate {
 
     fileprivate let messageAdapter :MessagesAdapter
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    fileprivate let realm :Realm = try! Realm()
+    fileprivate let results :Results<ConversationModel>!
 
-    var conversations = Variable([ConversationModel]())
+    var conversations :Observable<Results<ConversationModel>>
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
+        self.results = realm.objects(ConversationModel.self)
+        self.conversations = Observable.collection(from: results)
         MessagesAdapter.delegate = self
     }
 
@@ -54,8 +59,14 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
-    func addConversation(conversation: ConversationModel) {
-        self.conversations.value.append(conversation)
+    func addConversation(conversation: ConversationModel) -> Completable {
+        return Completable.create(subscribe: { [unowned self] completable in
+            try! self.realm.write {
+                self.realm.add(conversation)
+            }
+            completable(.completed)
+            return Disposables.create { }
+        })
     }
 
     func saveMessage(withContent content: String,
@@ -64,27 +75,26 @@ class ConversationsService: MessagesAdapterDelegate {
                      currentAccountId: String) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
-            let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: author)
+            let message = MessageModel(withId: 0, receivedDate: Date(), content: content, author: author)
 
             //Get conversations for this sender
-            var currentConversation = self.conversations.value.filter({ conversation in
-                return conversation.recipient.ringId == recipientRingId
+            var currentConversation = self.results.filter({ conversation in
+                return conversation.recipient?.ringId == recipientRingId
             }).first
-
-            //Get the current array of conversations
-            var currentConversations = self.conversations.value
 
             //Create a new conversation for this sender if not exists
             if currentConversation == nil {
                 currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: recipientRingId), accountId: currentAccountId)
-                currentConversations.append(currentConversation!)
+
+                try! self.realm.write {
+                    self.realm.add(currentConversation!)
+                }
             }
 
             //Add the received message into the conversation
-            currentConversation?.messages.append(message)
-
-            //Upate the value of the Variable
-            self.conversations.value = currentConversations
+            try! self.realm.write {
+                currentConversation?.messages.append(message)
+            }
 
             completable(.completed)
 
@@ -99,22 +109,18 @@ class ConversationsService: MessagesAdapterDelegate {
 
     func setMessagesAsRead(forConversation conversation: ConversationModel) -> Completable {
 
-        return Completable.create(subscribe: { completable in
-
-            //Get the current array of conversations
-            let currentConversations = self.conversations.value
+        return Completable.create(subscribe: { [unowned self] completable in
 
             //Filter unread messages
             let unreadMessages = conversation.messages.filter({ messages in
                 return messages.status != .read
             })
 
-            for message in unreadMessages {
-                message.status = .read
+            try! self.realm.write {
+                for message in unreadMessages {
+                    message.status = .read
+                }
             }
-
-            //Upate the value of the Variable
-            self.conversations.value = currentConversations
 
             completable(.completed)
 

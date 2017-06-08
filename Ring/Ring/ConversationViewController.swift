@@ -100,11 +100,12 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
                                 forCellReuseIdentifier: "MessageCellId")
 
         //Bind the TableView to the ViewModel
-        self.viewModel?.messages.bind(to: tableView.rx.items(cellIdentifier: "MessageCellId", cellType: MessageCell.self))
-            { index, messageViewModel, cell in
+        self.viewModel?.messages
+            .bind(to: tableView.rx.items(cellIdentifier: "MessageCellId",
+                                         cellType: MessageCell.self)) { index, messageViewModel, cell in
                 cell.messageLabel.text = messageViewModel.content
                 cell.bubblePosition = messageViewModel.bubblePosition()
-            }.addDisposableTo(disposeBag)
+        }.addDisposableTo(disposeBag)
 
         //Scroll to bottom when reloaded
         self.tableView.rx.methodInvoked(#selector(UITableView.reloadData)).subscribe(onNext: { element in

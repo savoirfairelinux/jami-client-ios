@@ -18,20 +18,22 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class MessageModel {
+import RealmSwift
 
-    var id: UInt64?
-    var receivedDate: Date
-    var content: String
-    var author: String
-    var status: MessageStatus
+class MessageModel: Object {
 
-    init(withId id: UInt64?, receivedDate: Date, content: String, author: String) {
+    dynamic var id: Int64 = 0
+    dynamic var receivedDate: Date = Date()
+    dynamic var content: String = ""
+    dynamic var author: String = ""
+    dynamic var status: MessageStatus = .unknown
+
+    convenience init(withId id: Int64, receivedDate: Date, content: String, author: String) {
+        self.init()
         self.id = id
         self.receivedDate = receivedDate
         self.content = content
         self.author = author
         self.status = .unknown
     }
-
 }

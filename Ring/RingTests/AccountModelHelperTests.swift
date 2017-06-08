@@ -19,6 +19,8 @@
  */
 
 import XCTest
+import RealmSwift
+@testable import Ring
 
 /**
  A test class designed to validate that the AccountModel helper runs as expected.
@@ -163,7 +165,7 @@ class AccountModelHelperTests: XCTestCase {
         XCTAssertEqual(modifiedAccount.credentialDetails.count, 1)
         XCTAssertEqual(modifiedAccount.credentialDetails[0].username, username)
         XCTAssertEqual(modifiedAccount.credentialDetails[0].password, password)
-        XCTAssertEqual(modifiedAccount.credentialDetails[0].realm, realm)
+        XCTAssertEqual(modifiedAccount.credentialDetails[0].accountRealm, realm)
 
         modifiedAccount = helper.setCredentials(nil)
         XCTAssertEqual(modifiedAccount.credentialDetails.count, 0)
