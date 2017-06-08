@@ -18,14 +18,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import RealmSwift
 
-class ContactModel {
+class ContactModel :Object {
 
-    var ringId: String
-    var userName: String?
+    dynamic var ringId: String = ""
+    dynamic var userName: String?
 
-    init(withRingId ringId: String) {
+    convenience init(withRingId ringId: String) {
+        self.init()
         self.ringId = ringId
     }
 
