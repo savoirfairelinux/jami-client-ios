@@ -18,14 +18,17 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConversationModel {
+import RealmSwift
 
-    var messages = [MessageModel]()
-    var recipient: ContactModel
-    var lastMessageDate: Date = Date()
-    var newConversation = true
+class ConversationModel :Object {
 
-    init(withRecipient recipient: ContactModel) {
+    let messages = List<MessageModel>()
+    dynamic var recipient :ContactModel?
+    dynamic var lastMessageDate: Date = Date()
+    dynamic var isNew = true
+
+    convenience init(withRecipient recipient: ContactModel) {
+        self.init()
         self.recipient = recipient
     }
 

@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,17 +18,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#ifndef RingPrefixHeader_pch
-#define RingPrefixHeader_pch
+import RealmSwift
+import RxRealm
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
+class DeviceModel: Object {
+    
+    dynamic var deviceId = ""
 
-/* 
- *  Because Realm does not support mix ObjC/Swift projects. This workaround fixes compilation failure
- *  due to the RealmSwiftObject missing declartion from *-Swift.h
- *  See https://github.com/realm/realm-cocoa/issues/3073 for more details
- */
-#define RealmSwiftObject NSObject
-
-#endif
+    convenience init(withDeviceId deviceId: String) {
+        self.init()
+        self.deviceId = deviceId
+    }
+}

@@ -18,23 +18,23 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import RealmSwift
 import RxSwift
+import RxRealm
 
 class MessagesService: MessagesAdapterDelegate {
 
     fileprivate let messageAdapter :MessagesAdapter
-
     fileprivate let disposeBag = DisposeBag()
-
     fileprivate let textPlainMIMEType = "text/plain"
+    fileprivate let realm :Realm = try! Realm()
 
-    var conversations = Variable([ConversationModel]())
+    let conversations :Observable<Results<ConversationModel>>
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
+        self.conversations = Observable.collection(from: realm.objects(ConversationModel.self))
         MessagesAdapter.delegate = self
-
     }
 
     func sendMessage(withContent content: String, from senderAccount: AccountModel, to recipient: ContactModel) {
@@ -43,16 +43,16 @@ class MessagesService: MessagesAdapterDelegate {
         self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipient.ringId)
 
         let key = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
-        let senderUserName = senderAccount.details.get(withConfigKeyModel: key)
-        let senderRingId = senderUserName.replacingOccurrences(of: "ring:", with: "")
+        let senderUserName = senderAccount.details?.get(withConfigKeyModel: key)
+        let senderRingId = senderUserName?.replacingOccurrences(of: "ring:", with: "")
 
         if senderRingId != recipient.ringId {
-            self.addMessage(withContent: content, byAuthor: senderRingId, toConversationWith: recipient.ringId)
+            self.addMessage(withContent: content, byAuthor: senderRingId!, toConversationWith: recipient.ringId)
         }
     }
 
     func addConversation(conversation: ConversationModel) {
-        self.conversations.value.append(conversation)
+        Observable.from(object: conversation).subscribe(realm.rx.add()).addDisposableTo(disposeBag)
     }
 
     func status(forMessageId messageId: UInt64) -> MessageStatus {
@@ -61,47 +61,44 @@ class MessagesService: MessagesAdapterDelegate {
 
     func setMessagesAsRead(forConversation conversation: ConversationModel) {
 
-        //Get the current array of conversations
-        let currentConversations = self.conversations.value
-
-        for message in conversation.messages {
-            message.status = .read
+        try! realm.write {
+            for message in conversation.messages.filter({ message in
+                return message.status != .read
+            }) {
+                message.status = .read
+            }
         }
 
-        //Upate the value of the Variable
-        self.conversations.value = currentConversations
     }
 
     fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
 
-        let message = MessageModel(withId: nil, receivedDate: Date(), content: content, author: author, recipient: ContactModel(withRingId: account))
+        let message = MessageModel(withId: 0, receivedDate: Date(), content: content, author: author, recipient: ContactModel(withRingId: account))
 
         if author != account {
             message.status = .read
         }
 
-        //Get conversations for this sender
-        var currentConversation = self.conversations.value.filter({ conversation in
-            return conversation.recipient.ringId == account
-        }).first
+        let results = realm.objects(ConversationModel.self)
 
-        //Get the current array of conversations
-        var currentConversations = self.conversations.value
+        //Get conversations for this sender
+        var currentConversation = results.filter({ conversation in
+            return conversation.recipient?.ringId == account
+        }).first
 
         //Create a new conversation for this sender if not exists
         if currentConversation == nil {
             currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: account))
-            currentConversation?.newConversation = false
-            currentConversations.append(currentConversation!)
+            currentConversation?.isNew = false
+
+            Observable.from(object: currentConversation!).subscribe(realm.rx.add()).addDisposableTo(disposeBag)
         }
 
-        //Add the received message into the conversation
-        currentConversation?.messages.append(message)
-        currentConversation?.lastMessageDate = message.receivedDate
-
-        //Upate the value of the Variable
-        self.conversations.value = currentConversations
-        
+        try! realm.write {
+            //Add the received message into the conversation
+            currentConversation?.messages.append(message)
+            currentConversation?.lastMessageDate = message.receivedDate
+        }
     }
 
     //MARK: Message Adapter delegate

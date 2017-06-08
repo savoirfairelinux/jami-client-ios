@@ -42,7 +42,7 @@ class MessagesViewController: UITableViewController, UITextFieldDelegate {
     }
 
     func setupUI() {
-        self.viewModel?.userName.bindTo(self.navigationItem.rx.title).addDisposableTo(disposeBag)
+        self.viewModel?.userName.bind(to: self.navigationItem.rx.title).addDisposableTo(disposeBag)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +68,7 @@ class MessagesViewController: UITableViewController, UITextFieldDelegate {
 
         //Bind the TableView to the ViewModel
         self.viewModel?.messages.asObservable()
-            .bindTo(tableView.rx.items(cellIdentifier: "MessageCellId", cellType: MessageCell.self))
+            .bind(to: tableView.rx.items(cellIdentifier: "MessageCellId", cellType: MessageCell.self))
             { index, messageViewModel, cell in
                 cell.messageLabel.text = messageViewModel.content
                 cell.bubblePosition = messageViewModel.bubblePosition()

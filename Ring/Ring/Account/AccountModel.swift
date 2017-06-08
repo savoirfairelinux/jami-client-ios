@@ -19,6 +19,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import RealmSwift
 import Foundation
 
 /**
@@ -31,32 +32,32 @@ enum AccountModelError: Error {
 /**
  A class representing an account.
  */
-class AccountModel : Equatable {
+class AccountModel : Object {
     // MARK: Public members
-    let id: String
+    dynamic var id: String = ""
 
-    var registeringUsername = false
-    var devices = Dictionary<String,String>()
-    var details: AccountConfigModel
-    var volatileDetails: AccountConfigModel
-    var credentialDetails = Array<AccountCredentialsModel>()
+    dynamic var registeringUsername = false
+    dynamic var details: AccountConfigModel?
+    dynamic var volatileDetails: AccountConfigModel?
+    let credentialDetails = List<AccountCredentialsModel>()
+    let devices = List<DeviceModel>()
 
     // MARK: Init
-    init(withAccountId accountId: String) {
+    convenience init(withAccountId accountId: String) {
+        self.init()
         self.id = accountId
-        self.details = AccountConfigModel()
-        self.volatileDetails = AccountConfigModel()
     }
 
-    init(withAccountId accountId: String,
+    convenience init(withAccountId accountId: String,
          details: AccountConfigModel,
          volatileDetails: AccountConfigModel,
-         credentials: [AccountCredentialsModel],
-         devices: Dictionary<String, String>) throws {
+         credentials: List<AccountCredentialsModel>,
+         devices: [DeviceModel]) throws {
+        self.init()
         self.id = accountId
         self.details = details
         self.volatileDetails = volatileDetails
-        self.devices = devices
+        self.devices.append(objectsIn: devices)
     }
 
     public static func ==(lhs: AccountModel, rhs: AccountModel) -> Bool {

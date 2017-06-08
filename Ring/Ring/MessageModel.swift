@@ -18,16 +18,19 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class MessageModel {
+import RealmSwift
 
-    var id: UInt64?
-    var receivedDate: Date
-    var content: String
-    var author: String
-    var status: MessageStatus
-    var recipient: ContactModel
+class MessageModel: Object {
 
-    init(withId id: UInt64?, receivedDate: Date, content: String, author: String, recipient: ContactModel) {
+    dynamic var id: UInt64 = 0
+    dynamic var receivedDate: Date = Date()
+    dynamic var content: String = ""
+    dynamic var author: String = ""
+    dynamic var status: MessageStatus = .unknown
+    dynamic var recipient :ContactModel?
+
+    convenience init(withId id: UInt64, receivedDate: Date, content: String, author: String, recipient: ContactModel) {
+        self.init()
         self.id = id
         self.receivedDate = receivedDate
         self.content = content
@@ -36,4 +39,10 @@ class MessageModel {
         self.recipient = recipient
     }
 
+    // compiler error here
+    override static func ignoredProperties() -> [String] {
+        var ignoredProperties = super.ignoredProperties()
+        ignoredProperties.append("id")
+        return ignoredProperties
+    }
 }

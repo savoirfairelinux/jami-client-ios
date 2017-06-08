@@ -18,6 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import RealmSwift
+
 /**
  The different states that an account can have during time.
 
@@ -61,18 +63,11 @@ enum AccountType: String {
  - expose a clear interface to manipulate the configuration of an account
  - keep this configuration
  */
-struct AccountConfigModel {
+class AccountConfigModel :Object {
     /**
      The collection of configuration elements.
      */
     fileprivate var configValues = Dictionary<ConfigKeyModel, String>()
-
-    /**
-     Default constructor.
-     */
-    init() {
-        //~ Empty initializer
-    }
 
     /**
      Constructor.
@@ -81,7 +76,8 @@ struct AccountConfigModel {
 
      - Parameter details: an optional collection of configuration elements
      */
-    init(withDetails details: Dictionary<String, String>?) {
+    convenience init(withDetails details: Dictionary<String, String>?) {
+        self.init()
         if details != nil {
             for (key, value) in details! {
                 if let confKey = ConfigKey(rawValue: key) {

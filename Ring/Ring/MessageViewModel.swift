@@ -38,7 +38,7 @@ class MessageViewModel {
 
         let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
         
-        if "ring:".appending(self.message.author) == accountService.currentAccount?.details.get(withConfigKeyModel: accountUsernameKey) {
+        if "ring:".appending(self.message.author) == accountService.currentAccount?.details?.get(withConfigKeyModel: accountUsernameKey) {
             return .sent
         } else {
             return .received

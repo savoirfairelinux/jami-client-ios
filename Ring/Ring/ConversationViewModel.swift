@@ -58,7 +58,7 @@ class ConversationViewModel {
 
     var userName: Observable<String> {
         if recipientViewModel == nil {
-            recipientViewModel = ContactViewModel(withContact: self.conversation.recipient)
+            recipientViewModel = ContactViewModel(withContact: self.conversation.recipient!)
         }
         return recipientViewModel!.userName.asObservable().observeOn(MainScheduler.instance)
     }
@@ -113,7 +113,7 @@ class ConversationViewModel {
     func sendMessage(withContent content: String) {
         self.messagesService.sendMessage(withContent: content,
                                          from: accountService.currentAccount!,
-                                         to: self.conversation.recipient)
+                                         to: self.conversation.recipient!)
     }
 
     func setMessagesAsRead() {
@@ -124,7 +124,7 @@ class ConversationViewModel {
         return self.conversation.messages.filter({ message in
 
             let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
-            let accountUsername = accountService.currentAccount?.details
+            let accountUsername = self.accountService.currentAccount?.details?
                 .get(withConfigKeyModel: accountUsernameKey)
             
             return message.status != .read && "ring:".appending(message.author) != accountUsername
@@ -132,9 +132,9 @@ class ConversationViewModel {
     }
 
     func selected() {
-        if self.conversation.newConversation {
+        if self.conversation.isNew {
             messagesService.addConversation(conversation: self.conversation)
-            self.conversation.newConversation = false
+            self.conversation.isNew = false
         }
     }
 }

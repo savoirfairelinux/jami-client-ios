@@ -18,7 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
 
 class SmartlistViewModel {
@@ -99,10 +98,10 @@ class SmartlistViewModel {
 
             //Filter conversations by user name or RingId
             let filteredConversations = self.conversationViewModels.filter({ conversationViewModel in
-                if let recipientUserName = conversationViewModel.conversation.recipient.userName {
+                if let recipientUserName = conversationViewModel.conversation.recipient?.userName {
                     return recipientUserName.contains(text)
                 } else {
-                    return conversationViewModel.conversation.recipient.ringId.contains(text)
+                    return conversationViewModel.conversation.recipient!.ringId.contains(text)
                 }
             })
 
