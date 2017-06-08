@@ -24,4 +24,11 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+/*
+ *  Because Realm does not support mix ObjC/Swift projects. This workaround fixes compilation failure
+ *  due to the RealmSwiftObject missing declartion from *-Swift.h
+ *  See https://github.com/realm/realm-cocoa/issues/3073 for more details
+ */
+#define RealmSwiftObject NSObject
+
 #endif

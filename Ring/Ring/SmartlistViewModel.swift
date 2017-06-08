@@ -18,7 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
 
 class SmartlistViewModel {
@@ -57,7 +56,7 @@ class SmartlistViewModel {
 
                 //Get the current ConversationViewModel if exists or create it
                 if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
-                    return conversationViewModel.conversation === conversationModel
+                    return conversationViewModel.conversation.isEqual(conversationModel)
                 }).first {
                     conversationViewModel = foundConversationViewModel
                 } else {
@@ -112,7 +111,7 @@ class SmartlistViewModel {
             if usernameLookupStatus.state == .found && (usernameLookupStatus.name == self.searchBarText.value ) {
 
                 if let conversation = self.conversationViewModels.filter({ conversationViewModel in
-                    conversationViewModel.conversation.recipient.userName == self.searchBarText.value
+                    conversationViewModel.conversation.recipient?.userName == self.searchBarText.value
                 }).first {
                     self.contactFoundConversation.value = conversation
                 } else {
@@ -148,7 +147,7 @@ class SmartlistViewModel {
 
             //Filter conversations by user name or RingId
             let filteredConversations = self.conversationViewModels.filter({ conversationViewModel in
-                if let recipientUserName = conversationViewModel.conversation.recipient.userName {
+                if let recipientUserName = conversationViewModel.conversation.recipient?.userName {
                     return recipientUserName.contains(text)
                 } else {
                     return false

@@ -18,6 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import RealmSwift
+
 /**
  Errors that can be thrown when trying create an AccountCredentialsModel
 
@@ -33,10 +35,10 @@ enum CredentialsError: Error {
  Its responsability:
  - keep the credentials of an account.
  */
-struct AccountCredentialsModel {
-    fileprivate(set) var username: String
-    fileprivate(set) var password: String
-    fileprivate(set) var realm: String
+class AccountCredentialsModel :Object {
+    dynamic var username: String = ""
+    dynamic var password: String = ""
+    dynamic var accountRealm: String = ""
 
     /**
      Constructor.
@@ -44,33 +46,35 @@ struct AccountCredentialsModel {
      - Parameters:
         - username: the username of the account
         - password: the password of the account
-        - realm : the realm of the account
+        - accountRealm : the realm of the account
      */
-    init(withUsername username: String, password: String, realm: String) {
+    convenience init(withUsername username: String, password: String, accountRealm: String) {
+        self.init()
         self.username = username
         self.password = password
-        self.realm = realm
+        self.accountRealm = accountRealm
     }
 
     /**
      Constructor.
 
      - Parameter raw: raw data to populate the credentials. This collection must contain all the
-     needed elements (username, password, realm).
+     needed elements (username, password, accountRealm).
 
      - Throws: CredentialsError
      */
-    init(withRawaData raw: Dictionary<String, String>) throws {
+    convenience init(withRawaData raw: Dictionary<String, String>) throws {
+        self.init()
         let username = raw[ConfigKey.AccountUsername.rawValue]
         let password = raw[ConfigKey.AccountPassword.rawValue]
-        let realm = raw[ConfigKey.AccountRealm.rawValue]
+        let accountRealm = raw[ConfigKey.AccountRealm.rawValue]
 
-        if username == nil || password == nil || realm == nil {
+        if username == nil || password == nil || accountRealm == nil {
             throw CredentialsError.NotEnoughData
         }
 
         self.username = username!
         self.password = password!
-        self.realm = realm!
+        self.accountRealm = accountRealm!
     }
 }

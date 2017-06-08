@@ -24,7 +24,6 @@
 //  expose to Swift.
 //
 
-#import "AccountAdapter.h"
-#import "DRingAdapter.h"
+#import "Ring-Bridging-Header.h"
 #import "FixtureFailInitDRingAdapter.h"
 #import "FixtureFailStartDRingAdapter.h"
