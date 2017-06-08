@@ -106,7 +106,7 @@ class CreateRingAccountViewController: UITableViewController {
         }).addDisposableTo(mDisposeBag)
 
         _ = self.mAccountViewModel.canCreateAccount
-            .bindTo(self.mCreateAccountButton.rx.isEnabled)
+            .bind(to: self.mCreateAccountButton.rx.isEnabled)
             .addDisposableTo(mDisposeBag)
     }
 
@@ -212,7 +212,7 @@ class CreateRingAccountViewController: UITableViewController {
                                                      comment: "")
             cell.titleLabel.textColor = .white
 
-            _ = cell.registerSwitch.rx.value.bindTo(self.mAccountViewModel.registerUsername)
+            _ = cell.registerSwitch.rx.value.bind(to: self.mAccountViewModel.registerUsername)
                 .addDisposableTo(mDisposeBag)
 
             return cell
@@ -227,7 +227,7 @@ class CreateRingAccountViewController: UITableViewController {
             //Binds the username field value to the ViewModel
             _ = cell.textField.rx.text.orEmpty
                 .throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
-                .bindTo(self.mAccountViewModel.username)
+                .bind(to: self.mAccountViewModel.username)
                 .addDisposableTo(mDisposeBag)
 
             //Switch to new password cell when return button is touched
@@ -236,7 +236,7 @@ class CreateRingAccountViewController: UITableViewController {
             }).addDisposableTo(mDisposeBag)
 
             _ = self.mAccountViewModel.usernameValidationMessage
-                .bindTo(cell.errorMessageLabel.rx.text)
+                .bind(to: cell.errorMessageLabel.rx.text)
                 .addDisposableTo(mDisposeBag)
 
             return cell
@@ -260,11 +260,11 @@ class CreateRingAccountViewController: UITableViewController {
                                                             comment: "")
 
             //Binds the password field value to the ViewModel
-            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.password)
+            _ = cell.textField.rx.text.orEmpty.bind(to: self.mAccountViewModel.password)
                 .addDisposableTo(mDisposeBag)
 
             //Binds the observer to show the error label if the field is not empty
-            _ = self.mAccountViewModel.hidePasswordError.bindTo(cell.errorMessageLabel.rx.isHidden)
+            _ = self.mAccountViewModel.hidePasswordError.bind(to: cell.errorMessageLabel.rx.isHidden)
                 .addDisposableTo(mDisposeBag)
 
             //Switch to the repeat pasword cell when return button is touched
@@ -287,11 +287,11 @@ class CreateRingAccountViewController: UITableViewController {
                                                             comment: "")
 
             //Binds the repeat password field value to the ViewModel
-            _ = cell.textField.rx.text.orEmpty.bindTo(self.mAccountViewModel.repeatPassword)
+            _ = cell.textField.rx.text.orEmpty.bind(to: self.mAccountViewModel.repeatPassword)
                 .addDisposableTo(mDisposeBag)
 
             //Binds the observer to the text field 'hidden' property
-            _ = self.mAccountViewModel.hideRepeatPasswordError.bindTo(cell.errorMessageLabel.rx.isHidden)
+            _ = self.mAccountViewModel.hideRepeatPasswordError.bind(to: cell.errorMessageLabel.rx.isHidden)
                 .addDisposableTo(mDisposeBag)
 
             return cell

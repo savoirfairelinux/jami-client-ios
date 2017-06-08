@@ -101,7 +101,7 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
             -> UITableViewCell = {
             (ds: TableViewSectionedDataSource<ConversationSection>, tv: UITableView, ip: IndexPath, item: ConversationSection.Item) in
             let cell = tv.dequeueReusableCell(withIdentifier:conversationCellIdentifier, for: ip) as! ConversationCell
-            item.userName.bindTo(cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
+            item.userName.bind(to: cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
             cell.newMessagesLabel.text = item.unreadMessages
             cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
             cell.hideNewMessagesLabel(item.hideNewMessagesLabel)
@@ -117,11 +117,11 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
 
         self.viewModel.conversations.map({ conversationsViewModels in
             return [ConversationSection(header: "", items: conversationsViewModels)]
-        }).bindTo(self.conversationsTableView.rx.items(dataSource: conversationsDataSource)).addDisposableTo(disposeBag)
+        }).bind(to: self.conversationsTableView.rx.items(dataSource: conversationsDataSource)).addDisposableTo(disposeBag)
 
         self.viewModel.searchResults.map({ conversationsViewModels in
             return [ConversationSection(header: "", items: conversationsViewModels)]
-        }).bindTo(self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource)).addDisposableTo(disposeBag)
+        }).bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource)).addDisposableTo(disposeBag)
     }
 
     func setupTableViews() {
@@ -169,7 +169,7 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
         //Bind the SearchBar to the ViewModel
         self.searchBar.rx.text.orEmpty
             .throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
-            .bindTo(self.viewModel.searchBarText)
+            .bind(to: self.viewModel.searchBarText)
             .addDisposableTo(disposeBag)
 
         //Cancel button event

@@ -19,29 +19,14 @@
  */
 
 import RealmSwift
+import RxRealm
 
-class MessageModel: Object {
+class DeviceModel: Object {
 
-    dynamic var id: UInt64 = 0
-    dynamic var receivedDate: Date = Date()
-    dynamic var content: String = ""
-    dynamic var author: String = ""
-    dynamic var status: MessageStatus = .unknown
-    dynamic var recipient :ContactModel?
+    dynamic var deviceId = ""
 
-    convenience init(withId id: UInt64, receivedDate: Date, content: String, author: String, recipient: ContactModel) {
+    convenience init(withDeviceId deviceId: String) {
         self.init()
-        self.id = id
-        self.receivedDate = receivedDate
-        self.content = content
-        self.author = author
-        self.status = .unknown
-        self.recipient = recipient
-    }
-
-    override static func ignoredProperties() -> [String] {
-        var ignoredProperties = super.ignoredProperties()
-        ignoredProperties.append("id")
-        return ignoredProperties
+        self.deviceId = deviceId
     }
 }
