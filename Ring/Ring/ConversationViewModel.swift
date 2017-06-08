@@ -58,7 +58,7 @@ class ConversationViewModel {
 
     var userName: Observable<String> {
         if recipientViewModel == nil {
-            recipientViewModel = ContactViewModel(withContact: self.conversation.recipient)
+            recipientViewModel = ContactViewModel(withContact: self.conversation.recipient!)
         }
         return recipientViewModel!.userName.asObservable().observeOn(MainScheduler.instance)
     }
@@ -121,7 +121,7 @@ class ConversationViewModel {
     func sendMessage(withContent content: String) {
         self.messagesService.sendMessage(withContent: content,
                                          from: accountService.currentAccount!,
-                                         to: self.conversation.recipient)
+                                         to: self.conversation.recipient!)
     }
 
     func setMessagesAsRead() {

@@ -19,12 +19,14 @@
  */
 
 import RxSwift
+import RealmSwift
 
 class ContactViewModel {
 
     private let nameService = AppDelegate.nameService
     private let disposeBag = DisposeBag()
     private let contact: ContactModel
+    private let realm = try! Realm()
 
     let userName = Variable("")
 
@@ -46,7 +48,11 @@ class ContactViewModel {
                 return lookupNameResponse.address != nil && lookupNameResponse.address == self.contact.ringId
             }).subscribe(onNext: { [unowned self] lookupNameResponse in
                 if lookupNameResponse.state == .found {
-                    self.contact.userName = lookupNameResponse.name
+
+                    try! self.realm.write {
+                        self.contact.userName = lookupNameResponse.name
+                    }
+
                     self.userName.value = lookupNameResponse.name
                 } else {
                     self.userName.value = lookupNameResponse.address

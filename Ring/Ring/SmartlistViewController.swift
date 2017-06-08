@@ -68,7 +68,7 @@ class SmartlistViewController: UIViewController {
         self.navigationItem.title = title
 
         self.viewModel.hideNoConversationsMessage
-            .bindTo(self.noConversationsView.rx.isHidden)
+            .bind(to: self.noConversationsView.rx.isHidden)
             .addDisposableTo(disposeBag)
     }
 
@@ -108,7 +108,7 @@ class SmartlistViewController: UIViewController {
             -> UITableViewCell = {
             (ds: TableViewSectionedDataSource<ConversationSection>, tv: UITableView, ip: IndexPath, item: ConversationSection.Item) in
             let cell = tv.dequeueReusableCell(withIdentifier:conversationCellIdentifier, for: ip) as! ConversationCell
-            item.userName.bindTo(cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
+            item.userName.bind(to: cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
             cell.newMessagesLabel.text = item.unreadMessages
             cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
             cell.hideNewMessagesLabel(item.hideNewMessagesLabel)
@@ -119,11 +119,11 @@ class SmartlistViewController: UIViewController {
         searchResultsDatasource.configureCell = configureCell
 
         self.viewModel.conversations
-            .bindTo(self.conversationsTableView.rx.items(dataSource: conversationsDataSource))
+            .bind(to: self.conversationsTableView.rx.items(dataSource: conversationsDataSource))
             .addDisposableTo(disposeBag)
 
         self.viewModel.searchResults
-            .bindTo(self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
+            .bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
             .addDisposableTo(disposeBag)
 
         searchResultsDatasource.titleForHeaderInSection = { ds, index in
@@ -170,7 +170,7 @@ class SmartlistViewController: UIViewController {
         //Bind the search status label
         self.viewModel.searchStatus
             .observeOn(MainScheduler.instance)
-            .bindTo(self.searchTableViewLabel.rx.text)
+            .bind(to: self.searchTableViewLabel.rx.text)
             .addDisposableTo(disposeBag)
     }
 
@@ -181,7 +181,7 @@ class SmartlistViewController: UIViewController {
         //Bind the SearchBar to the ViewModel
         self.searchBar.rx.text.orEmpty
             .debounce(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
-            .bindTo(self.viewModel.searchBarText)
+            .bind(to: self.viewModel.searchBarText)
             .addDisposableTo(disposeBag)
 
         //Cancel button event

@@ -21,6 +21,7 @@
 
 import RxCocoa
 import RxSwift
+import RealmSwift
 
 enum AddAccountError: Error {
     case TemplateNotConform
@@ -141,10 +142,12 @@ class AccountsService: AccountAdapterDelegate {
         for account in accountList {
             account.details = self.getAccountDetails(fromAccountId: account.id)
             account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: account.id)
-            account.devices = getKnownRingDevices(fromAccountId: account.id)
+            account.devices.append(objectsIn: getKnownRingDevices(fromAccountId: account.id))
 
             do {
-                account.credentialDetails = try self.getAccountCredentials(fromAccountId: account.id)
+                let credentialDetails = try self.getAccountCredentials(fromAccountId: account.id)
+                account.credentialDetails.removeAll()
+                account.credentialDetails.append(objectsIn: credentialDetails)
             } catch {
                 print(error)
             }
@@ -259,12 +262,12 @@ class AccountsService: AccountAdapterDelegate {
 
      - Returns: the list of credentials.
      */
-    func getAccountCredentials(fromAccountId id: String) throws -> [AccountCredentialsModel] {
+    func getAccountCredentials(fromAccountId id: String) throws -> List<AccountCredentialsModel> {
         let creds: NSArray = accountAdapter.getCredentials(id) as NSArray
         let rawCredentials = creds as NSArray? as? Array<Dictionary<String, String>> ?? nil
 
         if let rawCredentials = rawCredentials {
-            var credentialsList = [AccountCredentialsModel]()
+            let credentialsList = List<AccountCredentialsModel>()
             for rawCredentials in rawCredentials {
                 do {
                     let credentials = try AccountCredentialsModel(withRawaData: rawCredentials)
@@ -290,10 +293,15 @@ class AccountsService: AccountAdapterDelegate {
 
      - Returns: the known Ring devices.
      */
-    func getKnownRingDevices(fromAccountId id: String) -> Dictionary<String, String> {
-        let devices: NSDictionary = accountAdapter.getKnownRingDevices(id) as NSDictionary
-        let ringDevices = devices as NSDictionary? as? Dictionary<String, String> ?? nil
-        return ringDevices!
+    func getKnownRingDevices(fromAccountId id: String) -> [DeviceModel] {
+        let knownRingDevices = accountAdapter.getKnownRingDevices(id)! as NSDictionary
+
+        var devices = [DeviceModel]()
+        for key in knownRingDevices.allKeys {
+            devices.append(DeviceModel(withDeviceId: key as! String))
+        }
+
+        return devices
     }
 
     /**
