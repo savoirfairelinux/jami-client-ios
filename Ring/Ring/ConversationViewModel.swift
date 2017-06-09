@@ -49,8 +49,8 @@ class ConversationViewModel {
 
         //Create observable from sorted conversations and flatMap them to view models
         self.messages = self.conversationsService.conversations.map({ conversations in
-            return conversations.filter({ currentConversation in
-                return currentConversation.recipient == conversation.recipient
+            return conversations.filter({ conv in
+                return conv.isEqual(conversation) 
             }).flatMap({ conversation in
                 conversation.messages.map({ message in
                     return MessageViewModel(withMessage: message)
