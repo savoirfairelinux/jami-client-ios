@@ -129,6 +129,12 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
+    func deleteConversation(conversation: ConversationModel) {
+        try! realm.write {
+            realm.delete(conversation)
+        }
+    }
+
     //MARK: Message Adapter delegate
 
     func didReceiveMessage(_ message: Dictionary<String, String>, from senderAccount: String,

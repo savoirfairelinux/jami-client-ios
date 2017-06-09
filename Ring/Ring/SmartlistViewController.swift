@@ -79,10 +79,17 @@ class SmartlistViewController: UIViewController {
         self.viewModel.hideNoConversationsMessage
             .bind(to: self.noConversationsView.rx.isHidden)
             .addDisposableTo(disposeBag)
+
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.conversationsTableView.setEditing(editing, animated: true)
     }
 
     func keyboardWillShow(withNotification notification: Notification) {
@@ -123,6 +130,11 @@ class SmartlistViewController: UIViewController {
             cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
             cell.lastMessagePreviewLabel.text = item.lastMessage
             return cell
+        }
+
+        //Allows to delete
+        conversationsDataSource.canEditRowAtIndexPath = { _ in
+            return true
         }
 
         conversationsDataSource.configureCell = configureCell
@@ -171,11 +183,11 @@ class SmartlistViewController: UIViewController {
         }).addDisposableTo(disposeBag)
 
         //Deselect the rows
-        self.conversationsTableView.rx.itemSelected.asObservable().subscribe(onNext: { indexPath in
+        self.conversationsTableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.conversationsTableView.deselectRow(at: indexPath, animated: true)
         }).addDisposableTo(disposeBag)
 
-        self.searchResultsTableView.rx.itemSelected.asObservable().subscribe(onNext: { indexPath in
+        self.searchResultsTableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.searchResultsTableView.deselectRow(at: indexPath, animated: true)
         }).addDisposableTo(disposeBag)
 
@@ -186,6 +198,12 @@ class SmartlistViewController: UIViewController {
             .addDisposableTo(disposeBag)
 
         self.searchResultsTableView.rx.setDelegate(self).addDisposableTo(disposeBag)
+
+        //Swipe to delete action
+        self.conversationsTableView.rx.itemDeleted.subscribe(onNext:{ [unowned self] indexPath in
+            let convToDelete :ConversationViewModel = try! self.conversationsTableView.rx.model(at: indexPath)
+            self.viewModel.delete(conversation: convToDelete)
+        }).addDisposableTo(disposeBag)
     }
 
     func setupSearchBar() {
