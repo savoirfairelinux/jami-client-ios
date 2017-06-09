@@ -108,7 +108,7 @@ class SmartlistViewModel {
         }).observeOn(MainScheduler.instance)
 
         //Observes search bar text
-        searchBarText.asObservable().subscribe(onNext: { [unowned self] text in
+        searchBarText.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] text in
             self.search(withText: text)
         }).addDisposableTo(disposeBag)
 
@@ -117,7 +117,7 @@ class SmartlistViewModel {
             if usernameLookupStatus.state == .found && (usernameLookupStatus.name == self.searchBarText.value ) {
 
                 if let conversation = self.conversationViewModels.filter({ conversationViewModel in
-                    conversationViewModel.conversation.recipient?.ringId == usernameLookupStatus.address
+                    !conversationViewModel.conversation.isInvalidated && conversationViewModel.conversation.recipient?.ringId == usernameLookupStatus.address
                 }).first {
                     self.contactFoundConversation.value = conversation
                 } else {
@@ -153,6 +153,9 @@ class SmartlistViewModel {
 
             //Filter conversations by user name or RingId
             let filteredConversations = self.conversationViewModels.filter({ conversationViewModel in
+                if conversationViewModel.conversation.isInvalidated {
+                    return false
+                }
                 if let recipientUserName = conversationViewModel.conversation.recipient?.userName {
                     return recipientUserName.lowercased().hasPrefix(text.lowercased())
                 } else {
@@ -179,6 +182,16 @@ class SmartlistViewModel {
                 .addConversation(conversation: selectedItem.conversation)
                 .subscribe()
                 .addDisposableTo(disposeBag)
+        }
+    }
+
+    func delete(conversationViewModel: ConversationViewModel) {
+
+        if let index = self.conversationViewModels.index(where: ({ cvm in
+            cvm.conversation.recipient?.ringId == conversationViewModel.conversation.recipient?.ringId
+        })) {
+            self.conversationsService.deleteConversation(conversation: conversationViewModel.conversation)
+            self.conversationViewModels.remove(at: index)
         }
     }
 }
