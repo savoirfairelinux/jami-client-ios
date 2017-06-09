@@ -34,7 +34,7 @@ class SmartlistViewModel {
     let searchBarText = Variable<String>("")
     let isSearching :Observable<Bool>
 
-    fileprivate var conversationViewModels :[ConversationViewModel]
+    fileprivate var conversationViewModels :Variable<[ConversationViewModel]>
     fileprivate var searchResultsViewModels :Variable<[ConversationViewModel]>
 
     init(withMessagesService messagesService: MessagesService, nameService: NameService,
@@ -44,14 +44,14 @@ class SmartlistViewModel {
         self.nameService = nameService
         self.contactsService = contactsService
 
-        var conversationViewModels = [ConversationViewModel]()
+        let conversationViewModels = Variable([ConversationViewModel]())
         self.conversationViewModels = conversationViewModels
 
         let searchResultsViewModels = Variable([ConversationViewModel]())
         self.searchResultsViewModels = searchResultsViewModels
 
         //Create observable from sorted conversations and flatMap them to view models
-        self.conversations = self.messagesService.conversations.asObservable().map({ conversations in
+        self.conversations = self.messagesService.conversations.map({ conversations in
             return conversations.sorted(by: {
                 return $0.lastMessageDate > $1.lastMessageDate
             }).flatMap({ conversationModel in
@@ -59,13 +59,13 @@ class SmartlistViewModel {
                 var conversationViewModel: ConversationViewModel?
 
                 //Get the current ConversationViewModel if exists or create it
-                if let foundConversationViewModel = conversationViewModels.filter({ conversationViewModel in
-                    return conversationViewModel.conversation === conversationModel
+                if let foundConversationViewModel = conversationViewModels.value.filter({ conversationViewModel in
+                    return conversationViewModel.conversation.isEqual(conversationModel) 
                 }).first {
                     conversationViewModel = foundConversationViewModel
                 } else {
                     conversationViewModel = ConversationViewModel(withConversation: conversationModel)
-                    conversationViewModels.append(conversationViewModel!)
+                    conversationViewModels.value.append(conversationViewModel!)
                 }
 
                 return conversationViewModel
@@ -79,12 +79,12 @@ class SmartlistViewModel {
         }).observeOn(MainScheduler.instance)
 
         //Observes search bar text
-        searchBarText.asObservable().subscribe(onNext: { [unowned self] text in
+        searchBarText.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] text in
             self.search(withText: text)
         }).addDisposableTo(disposeBag)
 
         //Observes contact search result
-        self.contactsService.contactFound.subscribe(onNext: { contact in
+        self.contactsService.contactFound.observeOn(MainScheduler.instance).subscribe(onNext: { contact in
             let conversation = ConversationModel(withRecipient: contact)
             let newConversation = ConversationViewModel(withConversation: conversation)
             self.searchResultsViewModels.value = [newConversation]
@@ -97,7 +97,10 @@ class SmartlistViewModel {
         if text.characters.count > 0 {
 
             //Filter conversations by user name or RingId
-            let filteredConversations = self.conversationViewModels.filter({ conversationViewModel in
+            let filteredConversations = self.conversationViewModels.value.filter({ conversationViewModel in
+                if conversationViewModel.conversation.isInvalidated {
+                    return false
+                }
                 if let recipientUserName = conversationViewModel.conversation.recipient?.userName {
                     return recipientUserName.contains(text)
                 } else {
@@ -112,5 +115,9 @@ class SmartlistViewModel {
                 self.searchResultsViewModels.value = filteredConversations
             }
         }
+    }
+
+    func delete(conversation: ConversationViewModel) {
+        self.messagesService.deleteConversation(conversation: conversation.conversation)
     }
 }

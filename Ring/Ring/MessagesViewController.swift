@@ -86,7 +86,10 @@ class MessagesViewController: UITableViewController, UITextFieldDelegate {
     fileprivate func scrollToBottomIfNeed() {
         if self.isBottomContentOffset {
             let last = IndexPath(row: self.tableView.numberOfRows(inSection: 0) - 1, section: 0)
-            self.tableView.scrollToRow(at: last, at: .bottom, animated: true)
+
+            if last.row >= 0 {
+                self.tableView.scrollToRow(at: last, at: .bottom, animated: true)
+            }
         }
     }
 

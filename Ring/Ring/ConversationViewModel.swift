@@ -45,8 +45,11 @@ class ConversationViewModel {
         hourFormatter.dateFormat = "HH:mm"
 
         //Create observable from sorted conversations and flatMap them to view models
-        self.messages = self.messagesService.conversations.asObservable().map({ conversations in
+        self.messages = self.messagesService.conversations.map({ conversations in
             return conversations.filter({ conv in
+                if conversation.isInvalidated {
+                    return false
+                }
                 return conv.recipient == conversation.recipient
             }).flatMap({ conversation in
                 conversation.messages.map({ message in
@@ -134,7 +137,6 @@ class ConversationViewModel {
     func selected() {
         if self.conversation.isNew {
             messagesService.addConversation(conversation: self.conversation)
-            self.conversation.isNew = false
         }
     }
 }

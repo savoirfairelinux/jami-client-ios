@@ -28,12 +28,14 @@ class MessagesService: MessagesAdapterDelegate {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
     fileprivate let realm :Realm = try! Realm()
+    fileprivate let results :Results<ConversationModel>!
 
-    let conversations :Observable<Results<ConversationModel>>
+    let conversations :Observable<[ConversationModel]>
 
     init(withMessageAdapter messageAdapter: MessagesAdapter) {
         self.messageAdapter = messageAdapter
-        self.conversations = Observable.collection(from: realm.objects(ConversationModel.self))
+        self.results = realm.objects(ConversationModel.self)
+        self.conversations = Observable.array(from: self.results)
         MessagesAdapter.delegate = self
     }
 
@@ -52,7 +54,9 @@ class MessagesService: MessagesAdapterDelegate {
     }
 
     func addConversation(conversation: ConversationModel) {
-        Observable.from(object: conversation).subscribe(realm.rx.add()).addDisposableTo(disposeBag)
+        try! realm.write {
+            realm.add(conversation)
+        }
     }
 
     func status(forMessageId messageId: UInt64) -> MessageStatus {
@@ -71,6 +75,14 @@ class MessagesService: MessagesAdapterDelegate {
 
     }
 
+    func deleteConversation(conversation: ConversationModel) {
+        try! realm.write {
+            realm.delete(conversation)
+            realm.refresh()
+        }
+
+    }
+
     fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
 
         let message = MessageModel(withId: 0, receivedDate: Date(), content: content, author: author, recipient: ContactModel(withRingId: account))
@@ -78,8 +90,6 @@ class MessagesService: MessagesAdapterDelegate {
         if author != account {
             message.status = .read
         }
-
-        let results = realm.objects(ConversationModel.self)
 
         //Get conversations for this sender
         var currentConversation = results.filter({ conversation in
