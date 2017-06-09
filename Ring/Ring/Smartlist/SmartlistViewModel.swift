@@ -108,7 +108,7 @@ class SmartlistViewModel {
         }).observeOn(MainScheduler.instance)
 
         //Observes search bar text
-        searchBarText.asObservable().subscribe(onNext: { [unowned self] text in
+        searchBarText.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] text in
             self.search(withText: text)
         }).addDisposableTo(disposeBag)
 
@@ -179,6 +179,16 @@ class SmartlistViewModel {
                 .addConversation(conversation: selectedItem.conversation)
                 .subscribe()
                 .addDisposableTo(disposeBag)
+        }
+    }
+
+    func delete(conversationViewModel: ConversationViewModel) {
+
+        if let index = self.conversationViewModels.index(where: ({ cvm in
+            cvm.conversation.recipient?.ringId == conversationViewModel.conversation.recipient?.ringId
+        })) {
+            self.conversationsService.deleteConversation(conversation: conversationViewModel.conversation)
+            self.conversationViewModels.remove(at: index)
         }
     }
 }
