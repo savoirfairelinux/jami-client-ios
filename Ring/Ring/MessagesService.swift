@@ -52,7 +52,9 @@ class MessagesService: MessagesAdapterDelegate {
     }
 
     func addConversation(conversation: ConversationModel) {
-        Observable.from(object: conversation).subscribe(realm.rx.add()).addDisposableTo(disposeBag)
+        try! realm.write {
+            realm.add(conversation)
+        }
     }
 
     func status(forMessageId messageId: UInt64) -> MessageStatus {
@@ -69,6 +71,12 @@ class MessagesService: MessagesAdapterDelegate {
             }
         }
 
+    }
+
+    func deleteConversation(conversation: ConversationModel) {
+        try! realm.write {
+            realm.delete(conversation)
+        }
     }
 
     fileprivate func addMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
@@ -91,7 +99,9 @@ class MessagesService: MessagesAdapterDelegate {
             currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: account))
             currentConversation?.isNew = false
 
-            Observable.from(object: currentConversation!).subscribe(realm.rx.add()).addDisposableTo(disposeBag)
+            try! realm.write {
+                realm.add(currentConversation!)
+            }
         }
 
         try! realm.write {

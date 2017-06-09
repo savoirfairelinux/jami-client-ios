@@ -34,7 +34,7 @@ class SmartlistViewModel {
     let searchBarText = Variable<String>("")
     let isSearching :Observable<Bool>
 
-    fileprivate var conversationViewModels :[ConversationViewModel]
+    fileprivate var conversationViewModels :Variable<[ConversationViewModel]>
     fileprivate var searchResultsViewModels :Variable<[ConversationViewModel]>
 
     init(withMessagesService messagesService: MessagesService, nameService: NameService,
@@ -44,7 +44,7 @@ class SmartlistViewModel {
         self.nameService = nameService
         self.contactsService = contactsService
 
-        var conversationViewModels = [ConversationViewModel]()
+        let conversationViewModels = Variable([ConversationViewModel]())
         self.conversationViewModels = conversationViewModels
 
         let searchResultsViewModels = Variable([ConversationViewModel]())
@@ -59,13 +59,13 @@ class SmartlistViewModel {
                 var conversationViewModel: ConversationViewModel?
 
                 //Get the current ConversationViewModel if exists or create it
-                if let foundConversationViewModel = conversationViewModels.filter({ conversationViewModel in
-                    return conversationViewModel.conversation === conversationModel
+                if let foundConversationViewModel = conversationViewModels.value.filter({ conversationViewModel in
+                    return conversationViewModel.conversation.isEqual(conversationModel) 
                 }).first {
                     conversationViewModel = foundConversationViewModel
                 } else {
                     conversationViewModel = ConversationViewModel(withConversation: conversationModel)
-                    conversationViewModels.append(conversationViewModel!)
+                    conversationViewModels.value.append(conversationViewModel!)
                 }
 
                 return conversationViewModel
@@ -97,7 +97,7 @@ class SmartlistViewModel {
         if text.characters.count > 0 {
 
             //Filter conversations by user name or RingId
-            let filteredConversations = self.conversationViewModels.filter({ conversationViewModel in
+            let filteredConversations = self.conversationViewModels.value.filter({ conversationViewModel in
                 if let recipientUserName = conversationViewModel.conversation.recipient?.userName {
                     return recipientUserName.contains(text)
                 } else {
@@ -112,5 +112,10 @@ class SmartlistViewModel {
                 self.searchResultsViewModels.value = filteredConversations
             }
         }
+    }
+
+    func deleteConversation(at index: Int) {
+        let conversationViewModel = self.conversationViewModels.value[index]
+        self.messagesService.deleteConversation(conversation: conversationViewModel.conversation)
     }
 }
