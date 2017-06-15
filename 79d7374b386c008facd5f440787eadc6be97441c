@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aa4ed85_6987a162",
+        "filename": "Ring/Ring/ContactViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-06-15T21:23:22Z",
+      "side": 1,
+      "message": "Should be a helper",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 24
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_097ced71",
+        "filename": "Ring/Ring/ContactViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-06-15T21:23:22Z",
+      "side": 1,
+      "message": "should use ringId instead of contact object",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_2981a94a",
+        "filename": "Ring/Ring/ContactViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-06-15T21:23:22Z",
+      "side": 1,
+      "message": "Should be removed",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 63
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_89e69d43",
+        "filename": "Ring/Ring/ConversationModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-06-15T21:23:22Z",
+      "side": 1,
+      "message": "AccountId is needed",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 25
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_e9d95184",
+        "filename": "Ring/Ring/ConversationModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-06-15T21:23:22Z",
+      "side": 1,
+      "message": "Useless",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 32
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_4982e553",
+        "filename": "Ring/Ring/ConversationViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-06-15T21:23:22Z",
+      "side": 1,
+      "message": "Check if recipient.username exist or add a cache system",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 9
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_c971f578",
+        "filename": "Ring/Ring/MessagesService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-06-15T21:23:22Z",
+      "side": 1,
+      "message": "Should be called ConversationsService",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 48
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_a9683988",
+        "filename": "Ring/Ring/MessagesService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-06-15T21:23:22Z",
+      "side": 1,
+      "message": "Should be named conversationsService",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 48
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_896bfd84",
+        "filename": "Ring/Ring/SmartlistViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-06-15T21:23:22Z",
+      "side": 1,
+      "message": "Should be named conversationsObservable",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 58
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
