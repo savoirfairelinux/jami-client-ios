@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1aa4ed85_ec363fe7",
+        "filename": "Ring/Ring/ContactViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-19T15:33:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_6987a162",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 24
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa4ed85_097ced71",
         "filename": "Ring/Ring/ContactViewModel.swift",
         "patchSetId": 10
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "1aa4ed85_8c330bf6",
+        "filename": "Ring/Ring/ContactViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-19T15:33:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_097ced71",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa4ed85_2981a94a",
         "filename": "Ring/Ring/ContactViewModel.swift",
         "patchSetId": 10
@@ -59,6 +107,30 @@
       "writtenOn": "2017-06-15T21:23:22Z",
       "side": 1,
       "message": "Should be removed",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 63
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_ac3047e9",
+        "filename": "Ring/Ring/ContactViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-19T15:33:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_2981a94a",
       "range": {
         "startLine": 41,
         "startChar": 0,
@@ -140,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "1aa4ed85_0ca5db03",
+        "filename": "Ring/Ring/ConversationViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-19T15:33:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_4982e553",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 9
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa4ed85_c971f578",
         "filename": "Ring/Ring/MessagesService.swift",
         "patchSetId": 10
@@ -186,6 +282,30 @@
     },
     {
       "key": {
+        "uuid": "1aa4ed85_2caa17d5",
+        "filename": "Ring/Ring/MessagesService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-19T15:33:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_a9683988",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 48
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa4ed85_896bfd84",
         "filename": "Ring/Ring/SmartlistViewModel.swift",
         "patchSetId": 10
@@ -197,6 +317,30 @@
       "writtenOn": "2017-06-15T21:23:22Z",
       "side": 1,
       "message": "Should be named conversationsObservable",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 58
+      },
+      "revId": "79d7374b386c008facd5f440787eadc6be97441c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_ccaee3e7",
+        "filename": "Ring/Ring/SmartlistViewModel.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-19T15:33:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_896bfd84",
       "range": {
         "startLine": 30,
         "startChar": 0,
