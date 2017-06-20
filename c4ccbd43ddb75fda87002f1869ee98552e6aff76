@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "da33351e_a1f4fe87",
+        "filename": "Ring/Ring/ConversationsService.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-20T19:10:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da33351e_a1ca3e6c",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 5
+      },
+      "revId": "c4ccbd43ddb75fda87002f1869ee98552e6aff76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da33351e_01c84a73",
         "filename": "Ring/Ring/ConversationsService.swift",
         "patchSetId": 12
@@ -36,6 +60,30 @@
       "writtenOn": "2017-06-20T14:17:18Z",
       "side": 1,
       "message": "Should be in completable",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "c4ccbd43ddb75fda87002f1869ee98552e6aff76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da33351e_a13b5e37",
+        "filename": "Ring/Ring/ConversationsService.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-20T19:10:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da33351e_01c84a73",
       "range": {
         "startLine": 47,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "da33351e_01f20a9a",
+        "filename": "Ring/Ring/ConversationsService.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-20T19:10:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da33351e_e1c44661",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 5
+      },
+      "revId": "c4ccbd43ddb75fda87002f1869ee98552e6aff76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da33351e_41a1b2a8",
         "filename": "Ring/Ring/SmartlistViewController.swift",
         "patchSetId": 12
@@ -82,6 +154,30 @@
       "writtenOn": "2017-06-20T14:17:18Z",
       "side": 1,
       "message": "Useless",
+      "range": {
+        "startLine": 58,
+        "startChar": 46,
+        "endLine": 58,
+        "endChar": 62
+      },
+      "revId": "c4ccbd43ddb75fda87002f1869ee98552e6aff76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da33351e_e1ee06b4",
+        "filename": "Ring/Ring/SmartlistViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-20T19:10:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da33351e_41a1b2a8",
       "range": {
         "startLine": 58,
         "startChar": 46,
