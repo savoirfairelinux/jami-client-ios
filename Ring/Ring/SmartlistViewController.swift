@@ -53,8 +53,8 @@ class SmartlistViewController: UIViewController, UITableViewDelegate {
         self.tableView.register(UINib.init(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: "ConversationCellId")
 
         //Bind the TableView to the ViewModel
-        self.viewModel.conversationsObservable.bindTo(tableView.rx.items(cellIdentifier: "ConversationCellId", cellType: ConversationCell.self) ) { index, viewModel, cell in
-            viewModel.userName.bindTo(cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
+        self.viewModel.conversationsObservable.bind(to: tableView.rx.items(cellIdentifier: "ConversationCellId", cellType: ConversationCell.self) ) { index, viewModel, cell in
+            viewModel.userName.bind(to: cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
             cell.newMessagesLabel.text = viewModel.unreadMessages
             cell.lastMessageDateLabel.text = viewModel.lastMessageReceivedDate
             cell.newMessagesIndicator.isHidden = !viewModel.hasUnreadMessages
