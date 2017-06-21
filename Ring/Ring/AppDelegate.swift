@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         do {
             try AppDelegate.daemonService.startDaemon()
-            AppDelegate.accountService.loadAccounts()
+            //AppDelegate.accountService.loadAccounts()
         } catch StartDaemonError.InitializationFailure {
             print("Daemon failed to initialize.")
         } catch StartDaemonError.StartFailure {

@@ -25,6 +25,11 @@
 "LinkDeviceButton" = "Link this device to an account";
 "CreateAccount" = "Create a Ring account";
 
+//Create Profile
+
+"ProfileNameNotice" = "Your profile is only shared with your contacts";
+"ProfileNamePlaceholder" = "Enter your name (optional)";
+
 //Create Account form
 
 "CreateAccountFormTitle" = "Create your Ring account";

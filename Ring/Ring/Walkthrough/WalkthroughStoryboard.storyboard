@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -115,51 +115,13 @@
                         <outlet property="descriptionLabel" destination="PxM-F8-mIM" id="Bbw-uI-ltO"/>
                         <outlet property="linkDeviceButton" destination="R0q-9u-3WR" id="W2P-ar-nh0"/>
                         <outlet property="welcomeLabel" destination="SnZ-RF-3dF" id="Rgf-TM-GFn"/>
-                        <segue destination="dmb-i6-bo9" kind="show" identifier="CreateProfileSegue" id="GoD-mz-wCr"/>
-                        <segue destination="dmb-i6-bo9" kind="show" identifier="LinkDeviceToAccountSegue" id="k4b-a3-FoK"/>
+                        <segue destination="GpS-19-JaX" kind="show" identifier="CreateProfileSegue" id="XfP-ci-YZa"/>
+                        <segue destination="GpS-19-JaX" kind="show" identifier="LinkDeviceToAccountSegue" id="te2-jr-zXY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWI-c5-979" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-66" y="366"/>
-        </scene>
-        <!--Create Profile View Controller-->
-        <scene sceneID="NEP-n0-rvD">
-            <objects>
-                <viewController id="dmb-i6-bo9" customClass="CreateProfileViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tU2-L3-HzU"/>
-                        <viewControllerLayoutGuide type="bottom" id="Zbo-H6-yOO"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="FYO-p5-MWn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8M5-AJ-pxH" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="145" y="225" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Skip">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="skip:" destination="dmb-i6-bo9" eventType="touchUpInside" id="PAR-5w-VRm"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="8M5-AJ-pxH" firstAttribute="centerX" secondItem="FYO-p5-MWn" secondAttribute="centerX" id="kWB-xC-CED"/>
-                            <constraint firstItem="8M5-AJ-pxH" firstAttribute="centerY" secondItem="FYO-p5-MWn" secondAttribute="centerY" id="nsJ-Gi-lEl"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <segue destination="kzh-87-Ao9" kind="show" identifier="ProfileToAccountSegue" id="CDO-bH-qiw"/>
-                        <segue destination="bDM-Sb-hbx" kind="show" identifier="ProfileToLinkSegue" id="dop-gF-ixP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YDh-Qj-wfv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1105" y="367"/>
+            <point key="canvasLocation" x="-56" y="353"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="2lN-mL-RUf">
@@ -302,11 +264,77 @@
             </objects>
             <point key="canvasLocation" x="3049" y="581"/>
         </scene>
+        <!--Create Profile View Controller-->
+        <scene sceneID="6B2-C4-hJO">
+            <objects>
+                <tableViewController id="GpS-19-JaX" customClass="CreateProfileViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="69" sectionHeaderHeight="28" sectionFooterHeight="28" id="xFD-ha-Y3R">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="lHT-y9-kze" userLabel="Header">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your profile" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qK-6S-ixB">
+                                    <rect key="frame" x="8" y="8" width="304" height="114"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="8qK-6S-ixB" secondAttribute="bottom" constant="8" id="03C-J1-wAL"/>
+                                <constraint firstItem="8qK-6S-ixB" firstAttribute="top" secondItem="lHT-y9-kze" secondAttribute="top" constant="8" id="2Dh-AL-fok"/>
+                                <constraint firstAttribute="trailing" secondItem="8qK-6S-ixB" secondAttribute="trailing" constant="8" id="Qwy-jb-s6x"/>
+                                <constraint firstItem="8qK-6S-ixB" firstAttribute="leading" secondItem="lHT-y9-kze" secondAttribute="leading" constant="8" id="szw-wl-1yW"/>
+                            </constraints>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="NcU-0x-cn4" userLabel="Footer">
+                            <rect key="frame" x="0.0" y="130" width="320" height="54"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCn-o7-2IV" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
+                                    <rect key="frame" x="145" y="8" width="30" height="30"/>
+                                    <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="HS2-uD-l2F"/>
+                                    </constraints>
+                                    <state key="normal" title="Skip">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="skip:" destination="GpS-19-JaX" eventType="touchUpInside" id="XDT-I2-4jA"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="YCn-o7-2IV" firstAttribute="centerX" secondItem="NcU-0x-cn4" secondAttribute="centerX" id="B22-1y-S5N"/>
+                                <constraint firstItem="YCn-o7-2IV" firstAttribute="top" secondItem="NcU-0x-cn4" secondAttribute="top" constant="8" id="eTw-Wp-R7U"/>
+                                <constraint firstAttribute="bottom" secondItem="YCn-o7-2IV" secondAttribute="bottom" constant="16" id="i5o-RC-hmI"/>
+                            </constraints>
+                        </view>
+                        <connections>
+                            <outlet property="dataSource" destination="GpS-19-JaX" id="tF3-dM-dAf"/>
+                            <outlet property="delegate" destination="GpS-19-JaX" id="zB3-9t-uW9"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="bDM-Sb-hbx" kind="show" identifier="ProfileToLinkSegue" id="JBf-cv-z0G"/>
+                        <segue destination="kzh-87-Ao9" kind="show" identifier="ProfileToAccountSegue" id="gzh-Hr-cST"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7E1-tv-UWl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="938" y="259"/>
+        </scene>
     </scenes>
     <resources>
         <image name="logo-ring-beta2-blanc" width="180" height="66"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k4b-a3-FoK"/>
+        <segue reference="te2-jr-zXY"/>
     </inferredMetricsTieBreakers>
 </document>

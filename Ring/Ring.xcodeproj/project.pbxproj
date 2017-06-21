@@ -108,6 +108,9 @@
 		5557FD4E1E81B1F20043E394 /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
 		5557FD4F1E81B2990043E394 /* AccountCredentialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */; };
 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
+		562FB6CF1EFAE8BD00C61A78 /* CreateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FB6CE1EFAE8BD00C61A78 /* CreateProfileViewModel.swift */; };
+		562FB6D11EFAEF6600C61A78 /* ProfileImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 562FB6D01EFAEF6600C61A78 /* ProfileImageCell.xib */; };
+		562FB6D31EFAF44F00C61A78 /* ProfileImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FB6D21EFAF44F00C61A78 /* ProfileImageCell.swift */; };
 		56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56308BA61EA00E5700660275 /* NameRegistrationResponse.m */; };
 		563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 563AEC761EA664C0003A5641 /* RegistrationResponse.m */; };
 		564C44591E8D7F8F000F92B1 /* LocalizedStringTableNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44581E8D7F8F000F92B1 /* LocalizedStringTableNames.swift */; };
@@ -275,6 +278,9 @@
 		5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModelHelperTests.swift; sourceTree = "<group>"; };
 		557086501E8ADB9D001A7CE4 /* SystemAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemAdapter.h; path = Bridging/SystemAdapter.h; sourceTree = "<group>"; };
 		557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SystemAdapter.mm; path = Bridging/SystemAdapter.mm; sourceTree = "<group>"; };
+		562FB6CE1EFAE8BD00C61A78 /* CreateProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewModel.swift; sourceTree = "<group>"; };
+		562FB6D01EFAEF6600C61A78 /* ProfileImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileImageCell.xib; sourceTree = "<group>"; };
+		562FB6D21EFAF44F00C61A78 /* ProfileImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageCell.swift; sourceTree = "<group>"; };
 		56308BA51EA00E5700660275 /* NameRegistrationResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameRegistrationResponse.h; sourceTree = "<group>"; };
 		56308BA61EA00E5700660275 /* NameRegistrationResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameRegistrationResponse.m; sourceTree = "<group>"; };
 		563AEC751EA664C0003A5641 /* RegistrationResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationResponse.h; sourceTree = "<group>"; };
@@ -411,6 +417,7 @@
 				0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */,
 				0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */,
 				5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */,
+				562FB6CE1EFAE8BD00C61A78 /* CreateProfileViewModel.swift */,
 			);
 			name = Walkthrough;
 			sourceTree = "<group>";
@@ -737,6 +744,8 @@
 				5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */,
 				56AC64E21E805F0200EA1AA9 /* TextCell.swift */,
 				5669A7FD1EA904E4003C7B93 /* TextCell.xib */,
+				562FB6D21EFAF44F00C61A78 /* ProfileImageCell.swift */,
+				562FB6D01EFAEF6600C61A78 /* ProfileImageCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -896,6 +905,7 @@
 				04399A031D1C2D9D00E99CD9 /* Assets.xcassets in Resources */,
 				04399A011D1C2D9D00E99CD9 /* Main.storyboard in Resources */,
 				5669A7FA1EA904AF003C7B93 /* SwitchCell.xib in Resources */,
+				562FB6D11EFAEF6600C61A78 /* ProfileImageCell.xib in Resources */,
 				56BBC9B51ED7156500CDAF8B /* ConversationCell.xib in Resources */,
 				5669A7FC1EA904D2003C7B93 /* TextFieldCell.xib in Resources */,
 			);
@@ -965,6 +975,8 @@
 				564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
+				562FB6CF1EFAE8BD00C61A78 /* CreateProfileViewModel.swift in Sources */,
+				562FB6D31EFAF44F00C61A78 /* ProfileImageCell.swift in Sources */,
 				043866331D22CE8C00E06CE2 /* MeViewController.swift in Sources */,
 				56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */,
 				56BBC9B91ED715FE00CDAF8B /* ContactModel.swift in Sources */,
