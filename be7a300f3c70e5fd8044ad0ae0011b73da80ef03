@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba3841fe_20362a04",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-29T15:23:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba3841fe_c05dbe4a",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 42
+      },
+      "revId": "be7a300f3c70e5fd8044ad0ae0011b73da80ef03",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3841fe_00584655",
         "filename": "Ring/Ring/ConversationViewModel.swift",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ba3841fe_803bb6ea",
+        "filename": "Ring/Ring/ConversationViewModel.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-29T15:23:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba3841fe_00584655",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 33
+      },
+      "revId": "be7a300f3c70e5fd8044ad0ae0011b73da80ef03",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3841fe_e0544223",
         "filename": "Ring/Ring/ConversationsService.swift",
         "patchSetId": 6
@@ -59,6 +107,30 @@
       "writtenOn": "2017-06-28T18:00:29Z",
       "side": 1,
       "message": "^",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 52
+      },
+      "revId": "be7a300f3c70e5fd8044ad0ae0011b73da80ef03",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_60403257",
+        "filename": "Ring/Ring/ConversationsService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-06-29T15:23:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba3841fe_e0544223",
       "range": {
         "startLine": 30,
         "startChar": 0,
