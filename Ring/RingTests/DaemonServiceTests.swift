@@ -19,6 +19,7 @@
  */
 
 import XCTest
+@testable import Ring
 
 /**
  A test class designed to validate that the daemon service runs as expected.
