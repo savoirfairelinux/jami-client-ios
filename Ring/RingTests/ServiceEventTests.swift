@@ -19,6 +19,7 @@
  */
 
 import XCTest
+@testable import Ring
 
 /**
  A test class designed to validate that the ServiceEvent class is reacting properly.
