@@ -20,7 +20,7 @@
 
 @objc protocol MessagesAdapterDelegate {
 
-    func didReceiveMessage(_ message: Dictionary<String, String>, from senderAccount: String,
+    func didReceiveMessage(_ message: [String: String], from senderAccount: String,
                            to receiverAccountId: String)
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64, from senderAccountId: String,

@@ -59,7 +59,7 @@ class WelcomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
 
-        var profileCreationType :ProfileCreationType?
+        var profileCreationType: ProfileCreationType?
 
         if segue.identifier == createProfileSegueIdentifier {
             profileCreationType = .createProfile

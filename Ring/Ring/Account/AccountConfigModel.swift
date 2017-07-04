@@ -28,30 +28,30 @@ import RealmSwift
  - errors concerning the state of the accounts
  */
 enum AccountState: String {
-    case Registered = "REGISTERED"
-    case Ready = "READY"
-    case Unregistered = "UNREGISTERED"
-    case Trying = "TRYING"
-    case Error = "ERROR"
-    case ErrorGeneric = "ERROR_GENERIC"
-    case ErrorAuth = "ERROR_AUTH"
-    case ErrorNetwork = "ERROR_NETWORK"
-    case ErrorHost = "ERROR_HOST"
-    case ErrorConfStun = "ERROR_CONF_STUN"
-    case ErrorExistStun = "ERROR_EXIST_STUN"
-    case ErrorServiceUnavailable = "ERROR_SERVICE_UNAVAILABLE"
-    case ErrorNotAcceptable = "ERROR_NOT_ACCEPTABLE"
-    case ErrorRequestTimeout = "Request Timeout"
-    case ErrorNeedMigration = "ERROR_NEED_MIGRATION"
-    case Initializing = "INITIALIZING"
+    case registered = "REGISTERED"
+    case ready = "READY"
+    case unregistered = "UNREGISTERED"
+    case trying = "TRYING"
+    case error = "ERROR"
+    case errorGeneric = "ERROR_GENERIC"
+    case errorAuth = "ERROR_AUTH"
+    case errorNetwork = "ERROR_NETWORK"
+    case errorHost = "ERROR_HOST"
+    case errorConfStun = "ERROR_CONF_STUN"
+    case errorExistStun = "ERROR_EXIST_STUN"
+    case errorServiceUnavailable = "ERROR_SERVICE_UNAVAILABLE"
+    case errorNotAcceptable = "ERROR_NOT_ACCEPTABLE"
+    case errorRequestTimeout = "Request Timeout"
+    case errorNeedMigration = "ERROR_NEED_MIGRATION"
+    case initializing = "INITIALIZING"
 }
 
 /**
  The different types of account handled by Ring.
  */
 enum AccountType: String {
-    case Ring = "RING"
-    case SIP = "SIP"
+    case ring = "RING"
+    case sip = "SIP"
 }
 
 /**
@@ -63,11 +63,11 @@ enum AccountType: String {
  - expose a clear interface to manipulate the configuration of an account
  - keep this configuration
  */
-class AccountConfigModel :Object {
+class AccountConfigModel: Object {
     /**
      The collection of configuration elements.
      */
-    fileprivate var configValues = Dictionary<ConfigKeyModel, String>()
+    fileprivate var configValues = [ConfigKeyModel: String]()
 
     /**
      Constructor.
@@ -76,7 +76,7 @@ class AccountConfigModel :Object {
 
      - Parameter details: an optional collection of configuration elements
      */
-    convenience init(withDetails details: Dictionary<String, String>?) {
+    convenience init(withDetails details: [String: String]?) {
         self.init()
         if details != nil {
             for (key, value) in details! {
@@ -98,7 +98,7 @@ class AccountConfigModel :Object {
 
      - Returns: a boolean indicating the value of the configuration element.
      */
-    func getBool(forConfigKeyModel configKeyModel : ConfigKeyModel) -> Bool {
+    func getBool(forConfigKeyModel configKeyModel: ConfigKeyModel) -> Bool {
         return "true".caseInsensitiveCompare(self.get(withConfigKeyModel: configKeyModel))
             == ComparisonResult.orderedSame
     }
@@ -111,8 +111,8 @@ class AccountConfigModel :Object {
      - Returns: the value of the configuration element as a String. The result will be an empty
      string in case of an issue.
      */
-    func get(withConfigKeyModel configKeyModel : ConfigKeyModel) -> String {
-        let value:String? = self.configValues[configKeyModel]
+    func get(withConfigKeyModel configKeyModel: ConfigKeyModel) -> String {
+        let value: String? = self.configValues[configKeyModel]
         return value != nil ? value! : ""
     }
 }

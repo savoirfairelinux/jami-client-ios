@@ -24,8 +24,8 @@ import RxSwift
 import RealmSwift
 
 enum AddAccountError: Error {
-    case TemplateNotConform
-    case UnknownError
+    case templateNotConform
+    case unknownError
 }
 
 class AccountsService: AccountAdapterDelegate {
@@ -41,7 +41,7 @@ class AccountsService: AccountAdapterDelegate {
 
      - SeeAlso: `accounts`
      */
-    fileprivate var accountList: Array<AccountModel>
+    fileprivate var accountList: [AccountModel]
 
     fileprivate let disposeBag = DisposeBag()
 
@@ -60,7 +60,7 @@ class AccountsService: AccountAdapterDelegate {
      Accounts list public interface.
      Can be used to access by constant the list of accounts.
      */
-    fileprivate(set) var accounts: Array<AccountModel> {
+    fileprivate(set) var accounts: [AccountModel] {
         set {
             accountList = newValue
         }
@@ -126,8 +126,9 @@ class AccountsService: AccountAdapterDelegate {
 
     func loadAccounts() {
         for accountId in accountAdapter.getAccountList() {
-            let account = AccountModel(withAccountId: accountId as! String)
-            self.accountList.append(account)
+            if  let id = accountId as? String {
+                self.accountList.append(AccountModel(withAccountId: id))
+            }
         }
 
         reloadAccounts()
@@ -135,7 +136,7 @@ class AccountsService: AccountAdapterDelegate {
 
     // MARK: - Methods
     func hasAccounts() -> Bool {
-        return accountList.count > 0
+        return !accountList.isEmpty
     }
 
     fileprivate func reloadAccounts() {
@@ -165,12 +166,12 @@ class AccountsService: AccountAdapterDelegate {
         do {
             var ringDetails = try self.getRingInitialAccountDetails()
             if username != nil {
-                ringDetails.updateValue(username!, forKey: ConfigKey.AccountRegisteredName.rawValue)
+                ringDetails.updateValue(username!, forKey: ConfigKey.accountRegisteredName.rawValue)
             }
-            ringDetails.updateValue(password, forKey: ConfigKey.ArchivePassword.rawValue)
+            ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
             let accountId = self.accountAdapter.addAccount(ringDetails)
             guard accountId != nil else {
-                throw AddAccountError.UnknownError
+                throw AddAccountError.unknownError
             }
 
             var account = self.getAccount(fromAccountId: accountId!)
@@ -189,15 +190,14 @@ class AccountsService: AccountAdapterDelegate {
                 //TODO: set registration state as ready for a SIP account
 
                 let accountModelHelper = AccountModelHelper(withAccount: account!)
-                var accountAddedEvent = ServiceEvent(withEventType: .AccountAdded)
-                accountAddedEvent.addEventInput(.Id, value: account?.id)
-                accountAddedEvent.addEventInput(.State, value: accountModelHelper.getRegistrationState())
+                var accountAddedEvent = ServiceEvent(withEventType: .accountAdded)
+                accountAddedEvent.addEventInput(.id, value: account?.id)
+                accountAddedEvent.addEventInput(.state, value: accountModelHelper.getRegistrationState())
                 self.responseStream.onNext(accountAddedEvent)
             }
 
             self.currentAccount = account
-        }
-        catch {
+        } catch {
             self.responseStream.onError(error)
         }
     }
@@ -236,7 +236,7 @@ class AccountsService: AccountAdapterDelegate {
      */
     func getAccountDetails(fromAccountId id: String) -> AccountConfigModel {
         let details: NSDictionary = accountAdapter.getAccountDetails(id) as NSDictionary
-        let accountDetailsDict = details as NSDictionary? as? Dictionary<String, String> ?? nil
+        let accountDetailsDict = details as NSDictionary? as? [String: String] ?? nil
         let accountDetails = AccountConfigModel(withDetails: accountDetailsDict)
         return accountDetails
     }
@@ -250,7 +250,7 @@ class AccountsService: AccountAdapterDelegate {
      */
     func getVolatileAccountDetails(fromAccountId id: String) -> AccountConfigModel {
         let details: NSDictionary = accountAdapter.getVolatileAccountDetails(id) as NSDictionary
-        let accountDetailsDict = details as NSDictionary? as? Dictionary<String, String> ?? nil
+        let accountDetailsDict = details as NSDictionary? as? [String: String] ?? nil
         let accountDetails = AccountConfigModel(withDetails: accountDetailsDict)
         return accountDetails
     }
@@ -264,7 +264,7 @@ class AccountsService: AccountAdapterDelegate {
      */
     func getAccountCredentials(fromAccountId id: String) throws -> List<AccountCredentialsModel> {
         let creds: NSArray = accountAdapter.getCredentials(id) as NSArray
-        let rawCredentials = creds as NSArray? as? Array<Dictionary<String, String>> ?? nil
+        let rawCredentials = creds as NSArray? as? [[String: String]] ?? nil
 
         if let rawCredentials = rawCredentials {
             let credentialsList = List<AccountCredentialsModel>()
@@ -272,17 +272,17 @@ class AccountsService: AccountAdapterDelegate {
                 do {
                     let credentials = try AccountCredentialsModel(withRawaData: rawCredentials)
                     credentialsList.append(credentials)
-                } catch CredentialsError.NotEnoughData {
+                } catch CredentialsError.notEnoughData {
                     print("Not enough data to build a credential object.")
-                    throw CredentialsError.NotEnoughData
+                    throw CredentialsError.notEnoughData
                 } catch {
                     print("Unexpected error.")
-                    throw AccountModelError.UnexpectedError
+                    throw AccountModelError.unexpectedError
                 }
             }
             return credentialsList
         } else {
-            throw AccountModelError.UnexpectedError
+            throw AccountModelError.unexpectedError
         }
     }
 
@@ -297,8 +297,11 @@ class AccountsService: AccountAdapterDelegate {
         let knownRingDevices = accountAdapter.getKnownRingDevices(id)! as NSDictionary
 
         var devices = [DeviceModel]()
+
         for key in knownRingDevices.allKeys {
-            devices.append(DeviceModel(withDeviceId: key as! String))
+            if let key = key as? String {
+                devices.append(DeviceModel(withDeviceId: key))
+            }
         }
 
         return devices
@@ -309,14 +312,14 @@ class AccountsService: AccountAdapterDelegate {
 
      - Returns the details.
      */
-    fileprivate func getInitialAccountDetails() throws -> Dictionary<String, String> {
-        let details: NSMutableDictionary = accountAdapter.getAccountTemplate(AccountType.Ring.rawValue)
-        var accountDetails = details as NSDictionary? as? Dictionary<String, String> ?? nil
+    fileprivate func getInitialAccountDetails() throws -> [String: String] {
+        let details: NSMutableDictionary = accountAdapter.getAccountTemplate(AccountType.ring.rawValue)
+        var accountDetails = details as NSDictionary? as? [String: String] ?? nil
         if accountDetails == nil {
-            throw AddAccountError.TemplateNotConform
+            throw AddAccountError.templateNotConform
         }
-        accountDetails!.updateValue("false", forKey: ConfigKey.VideoEnabled.rawValue)
-        accountDetails!.updateValue("sipinfo", forKey: ConfigKey.AccountDTMFType.rawValue)
+        accountDetails!.updateValue("false", forKey: ConfigKey.videoEnabled.rawValue)
+        accountDetails!.updateValue("sipinfo", forKey: ConfigKey.accountDTMFType.rawValue)
         return accountDetails!
     }
 
@@ -325,12 +328,12 @@ class AccountsService: AccountAdapterDelegate {
 
      - Returns the details.
      */
-    fileprivate func getRingInitialAccountDetails() throws -> Dictionary<String, String> {
+    fileprivate func getRingInitialAccountDetails() throws -> [String: String] {
         do {
             var defaultDetails = try getInitialAccountDetails()
-            defaultDetails.updateValue("Ring", forKey: ConfigKey.AccountAlias.rawValue)
-            defaultDetails.updateValue("bootstrap.ring.cx", forKey: ConfigKey.AccountHostname.rawValue)
-            defaultDetails.updateValue("true", forKey: ConfigKey.AccountUpnpEnabled.rawValue)
+            defaultDetails.updateValue("Ring", forKey: ConfigKey.accountAlias.rawValue)
+            defaultDetails.updateValue("bootstrap.ring.cx", forKey: ConfigKey.accountHostname.rawValue)
+            defaultDetails.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
             return defaultDetails
         } catch {
             throw error
@@ -348,7 +351,7 @@ class AccountsService: AccountAdapterDelegate {
         print("Accounts changed.")
         reloadAccounts()
 
-        let event = ServiceEvent(withEventType: .AccountsChanged)
+        let event = ServiceEvent(withEventType: .accountsChanged)
         self.responseStream.onNext(event)
     }
 
@@ -356,8 +359,8 @@ class AccountsService: AccountAdapterDelegate {
         print("RegistrationStateChanged.")
         reloadAccounts()
 
-        var event = ServiceEvent(withEventType: .RegistrationStateChanged)
-        event.addEventInput(.RegistrationState, value: response.state)
+        var event = ServiceEvent(withEventType: .registrationStateChanged)
+        event.addEventInput(.registrationState, value: response.state)
         self.responseStream.onNext(event)
     }
 

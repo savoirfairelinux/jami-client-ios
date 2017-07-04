@@ -24,8 +24,6 @@ class LinkDeviceToAccountViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
     }
 
 }

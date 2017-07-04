@@ -20,7 +20,7 @@
 
 import RealmSwift
 
-class ContactModel :Object {
+class ContactModel: Object {
 
     dynamic var ringId: String = ""
     dynamic var userName: String?
@@ -30,7 +30,7 @@ class ContactModel :Object {
         self.ringId = ringId
     }
 
-    public static func ==(lhs: ContactModel, rhs: ContactModel) -> Bool {
+    public static func == (lhs: ContactModel, rhs: ContactModel) -> Bool {
         return lhs.ringId == rhs.ringId
     }
 }

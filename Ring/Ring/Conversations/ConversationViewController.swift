@@ -27,7 +27,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
 
     var viewModel: ConversationViewModel?
     var textFieldShouldEndEditing = false
-    var bottomOffset :CGFloat = 0
+    var bottomOffset: CGFloat = 0
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var spinnerView: UIView!
@@ -52,7 +52,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
     func keyboardWillShow(withNotification notification: Notification) {
 
         let userInfo: Dictionary = notification.userInfo!
-        let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
+        guard let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
+
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
 
@@ -102,13 +103,13 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
         //Bind the TableView to the ViewModel
         self.viewModel?.messages
             .bind(to: tableView.rx.items(cellIdentifier: "MessageCellId",
-                                         cellType: MessageCell.self)) { index, messageViewModel, cell in
+                                         cellType: MessageCell.self)) { _, messageViewModel, cell in
                 cell.messageLabel.text = messageViewModel.content
                 cell.bubblePosition = messageViewModel.bubblePosition()
         }.addDisposableTo(disposeBag)
 
         //Scroll to bottom when reloaded
-        self.tableView.rx.methodInvoked(#selector(UITableView.reloadData)).subscribe(onNext: { element in
+        self.tableView.rx.methodInvoked(#selector(UITableView.reloadData)).subscribe(onNext: { _ in
             self.scrollToBottomIfNeed()
             self.updateBottomOffset()
         }).addDisposableTo(disposeBag)
@@ -158,7 +159,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
     func setupBindings() {
 
         //Binds the keyboard Send button action to the ViewModel
-        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { event in
+        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { _ in
             self.viewModel?.sendMessage(withContent: self.messageAccessoryView.messageTextField.text!)
             self.messageAccessoryView.messageTextField.text = ""
         }).addDisposableTo(disposeBag)

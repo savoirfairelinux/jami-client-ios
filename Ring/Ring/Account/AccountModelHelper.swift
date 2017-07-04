@@ -39,9 +39,9 @@ struct AccountModelHelper {
      - Returns: true if the account is considered as a SIP account
      */
     func isAccountSip() -> Bool {
-        let sipString = AccountType.SIP.rawValue
+        let sipString = AccountType.sip.rawValue
         let accountType = self.account.details?
-            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .AccountType))
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType))
         return sipString.compare(accountType!) == ComparisonResult.orderedSame
     }
 
@@ -51,9 +51,9 @@ struct AccountModelHelper {
      - Returns: true if the account is considered as a Ring account
      */
     func isAccountRing() -> Bool {
-        let ringString = AccountType.Ring.rawValue
+        let ringString = AccountType.ring.rawValue
         let accountType = self.account.details?
-            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .AccountType))
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType))
         return ringString.compare(accountType!) == ComparisonResult.orderedSame
     }
 
@@ -64,7 +64,7 @@ struct AccountModelHelper {
      */
     func isEnabled() -> Bool {
         return (self.account.details!
-            .getBool(forConfigKeyModel: ConfigKeyModel.init(withKey: .AccountEnable)))
+            .getBool(forConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable)))
     }
 
     /**
@@ -74,7 +74,7 @@ struct AccountModelHelper {
      */
     func getRegistrationState() -> String {
         return (self.account.volatileDetails!
-            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .AccountRegistrationStatus)))
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountRegistrationStatus)))
     }
 
     /**
@@ -84,16 +84,16 @@ struct AccountModelHelper {
      */
     func isInError() -> Bool {
         let state = self.getRegistrationState()
-        return (state.compare(AccountState.Error.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.ErrorAuth.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.ErrorConfStun.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.ErrorExistStun.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.ErrorGeneric.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.ErrorHost.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.ErrorNetwork.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.ErrorNotAcceptable.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.ErrorServiceUnavailable.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.ErrorRequestTimeout.rawValue) == ComparisonResult.orderedSame)
+        return (state.compare(AccountState.error.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.errorAuth.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.errorConfStun.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.errorExistStun.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.errorGeneric.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.errorHost.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.errorNetwork.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.errorNotAcceptable.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.errorServiceUnavailable.rawValue) == ComparisonResult.orderedSame) ||
+            (state.compare(AccountState.errorRequestTimeout.rawValue) == ComparisonResult.orderedSame)
     }
 
     /**
@@ -102,18 +102,16 @@ struct AccountModelHelper {
      - Parameter: a list of credentials to apply to the account. A nil parameter will clear the
      credentials of the account.
      */
-    mutating func setCredentials(_ credentials: Array<Dictionary<String, String>>?) -> AccountModel {
+    mutating func setCredentials(_ credentials: [[String: String]]?) -> AccountModel {
         self.account.credentialDetails.removeAll()
         if credentials != nil {
             for (credential) in credentials! {
                 do {
                     let accountCredentialModel = try AccountCredentialsModel(withRawaData: credential)
                     self.account.credentialDetails.append(accountCredentialModel)
-                }
-                catch CredentialsError.NotEnoughData {
+                } catch CredentialsError.notEnoughData {
                     print("Not enough data to create a credential")
-                }
-                catch {
+                } catch {
                     print("Unexpected error")
                 }
             }
@@ -121,9 +119,9 @@ struct AccountModelHelper {
         return self.account
     }
 
-    var ringId :String? {
+    var ringId: String? {
 
-        let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
+        let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.accountUsername)
         let accountUsername = self.account.details?.get(withConfigKeyModel: accountUsernameKey)
 
         let ringIdPrefix = "ring:"

@@ -27,7 +27,7 @@ enum ProfileCreationType {
 
 class CreateProfileViewController: UIViewController {
 
-    var profileCreationType :ProfileCreationType?
+    var profileCreationType: ProfileCreationType?
 
     @IBAction func skip(_ sender: Any) {
         if profileCreationType == .linkDeviceToAccount {
