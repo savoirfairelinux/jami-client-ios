@@ -25,18 +25,18 @@
  - AccountAdded: an account has been added
  */
 enum ServiceEventType {
-    case AccountAdded
-    case AccountsChanged
-    case RegistrationStateChanged
+    case accountAdded
+    case accountsChanged
+    case registrationStateChanged
 }
 
 /**
  Keys that can be set as keys of the private input dictionary
  */
 enum ServiceEventInput {
-    case Id
-    case State
-    case RegistrationState
+    case id
+    case state
+    case registrationState
 }
 
 /**
@@ -56,7 +56,7 @@ struct ServiceEvent {
     /**
      Contains all the metadata of the event.
      */
-    fileprivate var inputs = Dictionary<ServiceEventInput, Any>()
+    fileprivate var inputs = [ServiceEventInput: Any]()
 
     /**
      Initializer

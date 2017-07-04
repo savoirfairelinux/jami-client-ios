@@ -23,7 +23,7 @@ import RxSwift
 class MessageViewModel {
 
     fileprivate let accountService = AppDelegate.accountService
-    fileprivate var message :MessageModel
+    fileprivate var message: MessageModel
 
     init(withMessage message: MessageModel) {
         self.message = message

@@ -32,7 +32,7 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if accountService.accounts.count > 0 {
+        if !accountService.accounts.isEmpty {
 //            let acc = accountService.accounts[0]
 //            nameLabel.text = acc.displayName
 //            if let username = acc.username {
@@ -64,7 +64,7 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     // MARK: - TableView
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1;
+        return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,15 +74,17 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.row < accountService.accounts.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "accountTableCell", for: indexPath) as! AccountTableViewCell
-            let account = accountService.accounts[indexPath.row]
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "accountTableCell", for: indexPath) as? AccountTableViewCell {
+                let account = accountService.accounts[indexPath.row]
 
-            cell.account = account
-//            cell.accountNameLabel.text = account.alias
-//            cell.activeSwitch.setOn(account.isEnabled, animated: false)
-//            cell.accountTypeLabel.text = account.accountType.rawValue
-
-            return cell
+                cell.account = account
+                //            cell.accountNameLabel.text = account.alias
+                //            cell.activeSwitch.setOn(account.isEnabled, animated: false)
+                //            cell.accountTypeLabel.text = account.accountType.rawValue
+                return cell
+            } else {
+                return tableView.dequeueReusableCell(withIdentifier: "accountTableCell", for: indexPath)
+            }
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "addAccountTableCell", for: indexPath)
             return cell
@@ -104,7 +106,7 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
             accountService.removeAccount(indexPath.row)
             accountTableView.reloadData()
         }
@@ -119,9 +121,9 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "accountDetails" {
-            let cell = sender as! AccountTableViewCell
-            let vc = segue.destination as! AccountDetailsViewController
+        if  segue.identifier == "accountDetails",
+            let cell = sender as? AccountTableViewCell,
+            let vc = segue.destination as? AccountDetailsViewController {
             vc.account = cell.account
         }
     }

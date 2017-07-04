@@ -28,10 +28,10 @@ fileprivate let conversationCellIdentifier = "ConversationCellId"
 fileprivate let conversationCellNibName = "ConversationCell"
 fileprivate let showMessages = "ShowMessages"
 
-fileprivate let smartlistRowHeight :CGFloat = 64.0
-fileprivate let tableHeaderViewHeight :CGFloat = 24.0
-fileprivate let firstSectionHeightForHeader :CGFloat = 31.0 //Compensate the offset due to the label on the top of the tableView
-fileprivate let defaultSectionHeightForHeader :CGFloat = 55.0
+fileprivate let smartlistRowHeight: CGFloat = 64.0
+fileprivate let tableHeaderViewHeight: CGFloat = 24.0
+fileprivate let firstSectionHeightForHeader: CGFloat = 31.0 //Compensate the offset due to the label on the top of the tableView
+fileprivate let defaultSectionHeightForHeader: CGFloat = 55.0
 
 class SmartlistViewController: UIViewController {
 
@@ -48,7 +48,6 @@ class SmartlistViewController: UIViewController {
     @IBOutlet weak var searchTableViewLabel: UILabel!
 
     fileprivate let disposeBag = DisposeBag()
-
 
     //ConverationViewModel to be passed to the Messages screen
     fileprivate var selectedItem: ConversationViewModel?
@@ -94,7 +93,7 @@ class SmartlistViewController: UIViewController {
 
     func keyboardWillShow(withNotification notification: Notification) {
         let userInfo: Dictionary = notification.userInfo!
-        let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
+        guard let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         let tabBarHeight = (self.tabBarController?.tabBar.frame.size.height)!
@@ -122,14 +121,20 @@ class SmartlistViewController: UIViewController {
         //Configure cells closure for the datasources
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
             -> UITableViewCell = {
-            (ds: TableViewSectionedDataSource<ConversationSection>, tv: UITableView, ip: IndexPath, item: ConversationSection.Item) in
-            let cell = tv.dequeueReusableCell(withIdentifier:conversationCellIdentifier, for: ip) as! ConversationCell
-            item.userName.asObservable().bind(to: cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
-            cell.newMessagesLabel.text = item.unreadMessages
-            cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
-            cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
-            cell.lastMessagePreviewLabel.text = item.lastMessage
-            return cell
+                (   dataSource: TableViewSectionedDataSource<ConversationSection>,
+                tableView: UITableView,
+                indexPath: IndexPath,
+                item: ConversationSection.Item) in
+                if let cell = tableView.dequeueReusableCell(withIdentifier: conversationCellIdentifier, for: indexPath) as? ConversationCell {
+                    item.userName.asObservable().bind(to: cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
+                    cell.newMessagesLabel.text = item.unreadMessages
+                    cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
+                    cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
+                    cell.lastMessagePreviewLabel.text = item.lastMessage
+                    return cell
+                } else {
+                    return tableView.dequeueReusableCell(withIdentifier: conversationCellIdentifier, for: indexPath)
+                }
         }
 
         //Allows to delete
@@ -150,8 +155,8 @@ class SmartlistViewController: UIViewController {
             .addDisposableTo(disposeBag)
 
         //Set header titles
-        searchResultsDatasource.titleForHeaderInSection = { ds, index in
-            return ds.sectionModels[index].header
+        searchResultsDatasource.titleForHeaderInSection = { dataSource, index in
+            return dataSource.sectionModels[index].header
         }
     }
 

@@ -807,10 +807,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04399A201D1C2D9D00E99CD9 /* Build configuration list for PBXNativeTarget "Ring" */;
 			buildPhases = (
+				1ABE07C31F0C28E000D36361 /* ⚠️ Swiftlint Analysis */,
+				0273C3011E0C655900CF00BA /* ⚙️ Copy Frameworks */,
 				043999EF1D1C2D9D00E99CD9 /* Sources */,
 				043999F01D1C2D9D00E99CD9 /* Frameworks */,
 				043999F11D1C2D9D00E99CD9 /* Resources */,
-				0273C3011E0C655900CF00BA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -947,7 +948,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0273C3011E0C655900CF00BA /* ShellScript */ = {
+		0273C3011E0C655900CF00BA /* ⚙️ Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -961,11 +962,26 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxRealm.framework",
 			);
+			name = "⚙️ Copy Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		1ABE07C31F0C28E000D36361 /* ⚠️ Swiftlint Analysis */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚠️ Swiftlint Analysis";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

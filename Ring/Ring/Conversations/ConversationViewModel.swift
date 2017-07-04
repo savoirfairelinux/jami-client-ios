@@ -25,7 +25,13 @@ import RealmSwift
 class ConversationViewModel {
 
     let conversation: ConversationModel
-    let realm = try! Realm()
+    private lazy var realm: Realm = {
+        guard let realm = try? Realm() else {
+            fatalError("Enable to instantiate Realm")
+        }
+
+        return realm
+    }()
 
     //Displays the entire date ( for messages received before the current week )
     private let dateFormatter = DateFormatter()
@@ -35,7 +41,7 @@ class ConversationViewModel {
 
     private let disposeBag = DisposeBag()
 
-    let messages :Observable<[MessageViewModel]>
+    let messages: Observable<[MessageViewModel]>
 
     //Services
     private let conversationsService = AppDelegate.conversationsService
@@ -63,14 +69,20 @@ class ConversationViewModel {
         if let userName = self.conversation.recipient?.userName {
             return Variable(userName)
         } else {
-            let tmp :Variable<String> = ContactHelper.lookupUserName(forRingId: self.conversation.recipient!.ringId,
+            let tmp: Variable<String> = ContactHelper.lookupUserName(forRingId: self.conversation.recipient!.ringId,
                                                 nameService: AppDelegate.nameService,
                                                 disposeBag: self.disposeBag)
 
-            tmp.asObservable().subscribe(onNext: { userNameFound in
-                try! self.realm.write {
-                    self.conversation.recipient?.userName = userNameFound
+            tmp.asObservable().subscribe(onNext: { [unowned self] userNameFound in
+
+                do {
+                    try self.realm.write {
+                        self.conversation.recipient?.userName = userNameFound
+                    }
+                } catch let error {
+                    print ("Realm persistence with error: \(error)")
                 }
+
             }).addDisposableTo(self.disposeBag)
 
             return tmp
@@ -129,7 +141,7 @@ class ConversationViewModel {
     }
 
     var hideDate: Bool {
-        return self.conversation.messages.count == 0
+        return self.conversation.messages.isEmpty
     }
 
     func sendMessage(withContent content: String) {

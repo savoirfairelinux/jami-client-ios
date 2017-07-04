@@ -30,9 +30,9 @@ class SmartlistViewModel {
     fileprivate let accountsService: AccountsService
 
     let searchBarText = Variable<String>("")
-    var isSearching :Observable<Bool>!
-    var conversations :Observable<[ConversationSection]>!
-    var searchResults :Observable<[ConversationSection]>!
+    var isSearching: Observable<Bool>!
+    var conversations: Observable<[ConversationSection]>!
+    var searchResults: Observable<[ConversationSection]>!
     var hideNoConversationsMessage: Observable<Bool>!
     var searchStatus = PublishSubject<String>()
 
@@ -47,7 +47,7 @@ class SmartlistViewModel {
         self.accountsService = accountsService
 
         //Create observable from sorted conversations and flatMap them to view models
-        let conversationsObservable :Observable<[ConversationViewModel]> = self.conversationsService.conversations.asObservable().map({ conversations in
+        let conversationsObservable: Observable<[ConversationViewModel]> = self.conversationsService.conversations.asObservable().map({ conversations in
             return conversations.sorted(by: { conversation1, conversations2 in
 
                 guard let lastMessage1 = conversation1.messages.last,
@@ -80,7 +80,9 @@ class SmartlistViewModel {
         }).observeOn(MainScheduler.instance)
 
         //Create observable from filtered conversatiosn and contact founds viewModels to ConversationSection
-        self.searchResults = Observable<[ConversationSection]>.combineLatest(self.contactFoundConversation.asObservable(), self.filteredResults.asObservable(), resultSelector: { contactFoundConversation, filteredResults in
+        self.searchResults = Observable<[ConversationSection]>.combineLatest(self.contactFoundConversation.asObservable(),
+                                                                             self.filteredResults.asObservable(),
+                                                                             resultSelector: { contactFoundConversation, filteredResults in
 
             var sections = [ConversationSection]()
 
@@ -89,7 +91,7 @@ class SmartlistViewModel {
                 sections.append(ConversationSection(header: headerTitle, items: [contactFoundConversation!]))
             }
 
-            if filteredResults.count > 0 {
+            if !filteredResults.isEmpty {
                 let headerTitle = NSLocalizedString("Conversations", tableName: "Smartlist", comment: "")
                 sections.append(ConversationSection(header: headerTitle, items: filteredResults))
             }
@@ -99,12 +101,12 @@ class SmartlistViewModel {
 
         self.hideNoConversationsMessage = Observable
             .combineLatest( self.conversations, self.searchBarText.asObservable(), resultSelector: { conversations, searchBarText in
-            return conversations.first!.items.count > 0 || searchBarText.characters.count > 0
+            return !conversations.first!.items.isEmpty || !searchBarText.characters.isEmpty
         }).observeOn(MainScheduler.instance)
 
         //Observes if the user is searching
         self.isSearching = searchBarText.asObservable().map({ text in
-            return text.characters.count > 0
+            return !text.characters.isEmpty
         }).observeOn(MainScheduler.instance)
 
         //Observes search bar text
@@ -133,7 +135,7 @@ class SmartlistViewModel {
 
                 self.searchStatus.onNext("")
             } else {
-                if self.filteredResults.value.count == 0 {
+                if self.filteredResults.value.isEmpty {
                     let searchStatusText = NSLocalizedString("NoResults", tableName: "Smartlist", comment: "")
                     self.searchStatus.onNext(searchStatusText)
                 } else {
@@ -149,7 +151,7 @@ class SmartlistViewModel {
         self.filteredResults.value.removeAll()
         self.searchStatus.onNext("")
 
-        if text.characters.count > 0 {
+        if !text.isEmpty {
 
             //Filter conversations by user name or RingId
             let filteredConversations = self.conversationViewModels.filter({ conversationViewModel in
@@ -160,7 +162,7 @@ class SmartlistViewModel {
                 }
             })
 
-            if filteredConversations.count > 0 {
+            if !filteredConversations.isEmpty {
                 self.filteredResults.value = filteredConversations
             }
 

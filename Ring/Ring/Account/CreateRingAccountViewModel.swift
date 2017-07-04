@@ -53,29 +53,29 @@ class CreateRingAccountViewModel {
      */
     fileprivate var nameService: NameService
 
-    //MARK: - Rx Variables and Observers
+    // MARK: - Rx Variables and Observers
 
     var username = Variable<String>("")
     var password = Variable<String>("")
     var repeatPassword = Variable<String>("")
 
-    var passwordValid :Observable<Bool>!
-    var passwordsEqual :Observable<Bool>!
-    var canCreateAccount :Observable<Bool>!
+    var passwordValid: Observable<Bool>!
+    var passwordsEqual: Observable<Bool>!
+    var canCreateAccount: Observable<Bool>!
     var registerUsername = Variable<Bool>(true)
 
-    var hasNewPassword :Observable<Bool>!
-    var hidePasswordError :Observable<Bool>!
-    var hideRepeatPasswordError :Observable<Bool>!
+    var hasNewPassword: Observable<Bool>!
+    var hidePasswordError: Observable<Bool>!
+    var hideRepeatPasswordError: Observable<Bool>!
 
     var accountCreationState = PublishSubject<AccountCreationState>()
 
     /**
      Message presented to the user in function of the status of the current username lookup request
      */
-    var usernameValidationMessage :Observable<String>!
+    var usernameValidationMessage: Observable<String>!
 
-    //MARK: -
+    // MARK: -
 
     /**
      Default constructor
@@ -121,15 +121,14 @@ class CreateRingAccountViewModel {
         }.shareReplay(1).observeOn(MainScheduler.instance)
 
         self.passwordsEqual = Observable<Bool>.combineLatest(self.password.asObservable(),
-                                                             self.repeatPassword.asObservable()) { password,repeatPassword in
+                                                             self.repeatPassword.asObservable()) { password, repeatPassword in
                                                                 return password == repeatPassword
         }.shareReplay(1).observeOn(MainScheduler.instance)
 
         self.canCreateAccount = Observable<Bool>.combineLatest(self.registerUsername.asObservable(),
                                                                self.nameService.usernameValidationStatus,
                                                                self.passwordValid,
-                                                               self.passwordsEqual)
-        { registerUsername, usernameValidationStatus, passwordValid, passwordsEquals in
+                                                               self.passwordsEqual) { registerUsername, usernameValidationStatus, passwordValid, passwordsEquals in
             if registerUsername {
                 return usernameValidationStatus == .valid && passwordValid && passwordsEquals
             } else {
@@ -158,7 +157,7 @@ class CreateRingAccountViewModel {
         }).shareReplay(1).observeOn(MainScheduler.instance)
 
         hasNewPassword = self.password.asObservable().map({ password in
-            return password.characters.count > 0
+            return !password.characters.isEmpty
         })
 
         hidePasswordError = Observable<Bool>.combineLatest(self.passwordValid, hasNewPassword) { isPasswordValid, hasNewPassword in
@@ -166,10 +165,10 @@ class CreateRingAccountViewModel {
         }
 
         let hasRepeatPassword = self.repeatPassword.asObservable().map({ repeatPassword in
-            return repeatPassword.characters.count > 0
+            return !repeatPassword.characters.isEmpty
         })
 
-        hideRepeatPasswordError = Observable<Bool>.combineLatest(self.passwordValid,self.passwordsEqual, hasRepeatPassword) { isPasswordValid, isPasswordsEquals, hasRepeatPassword in
+        hideRepeatPasswordError = Observable<Bool>.combineLatest(self.passwordValid, self.passwordsEqual, hasRepeatPassword) { isPasswordValid, isPasswordsEquals, hasRepeatPassword in
             return !isPasswordValid || isPasswordsEquals || !hasRepeatPassword
         }
     }
@@ -188,11 +187,11 @@ class CreateRingAccountViewModel {
         self.accountService
             .sharedResponseStream
             .filter({ event in
-                return event.eventType == ServiceEventType.RegistrationStateChanged &&
-                    event.getEventInput(ServiceEventInput.RegistrationState) == Unregistered &&
+                return event.eventType == ServiceEventType.registrationStateChanged &&
+                    event.getEventInput(ServiceEventInput.registrationState) == Unregistered &&
                     self.registerUsername.value
             })
-            .subscribe(onNext:{ [unowned self] event in
+            .subscribe(onNext: { [unowned self] _ in
 
                 //Launch the process of name registration
                 if let currentAccountId = self.accountService.currentAccount?.id {
@@ -207,20 +206,20 @@ class CreateRingAccountViewModel {
         self.accountService
             .sharedResponseStream
             .subscribe(onNext: { [unowned self] event in
-                if event.getEventInput(ServiceEventInput.RegistrationState) == Unregistered {
+                if event.getEventInput(ServiceEventInput.registrationState) == Unregistered {
                     self.accountCreationState.onNext(.success)
-                } else if event.getEventInput(ServiceEventInput.RegistrationState) == ErrorGeneric {
+                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
                     self.accountCreationState.onError(AccountCreationError.generic)
-                } else if event.getEventInput(ServiceEventInput.RegistrationState) == ErrorNetwork {
+                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
                     self.accountCreationState.onError(AccountCreationError.network)
                 }
-            }, onError: { error in
+            }, onError: { _ in
                 self.accountCreationState.onError(AccountCreationError.unknown)
             }).addDisposableTo(disposeBag)
     }
 }
 
-//MARK: Account Creation state
+// MARK: Account Creation state
 
 enum AccountCreationState {
     case started
