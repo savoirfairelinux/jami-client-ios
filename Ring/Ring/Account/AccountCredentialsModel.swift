@@ -26,7 +26,7 @@ import RealmSwift
  - NotEnoughData: some information are missing to create the object
  */
 enum CredentialsError: Error {
-    case NotEnoughData
+    case notEnoughData
 }
 
 /**
@@ -35,7 +35,7 @@ enum CredentialsError: Error {
  Its responsability:
  - keep the credentials of an account.
  */
-class AccountCredentialsModel :Object {
+class AccountCredentialsModel: Object {
     dynamic var username: String = ""
     dynamic var password: String = ""
     dynamic var accountRealm: String = ""
@@ -63,14 +63,14 @@ class AccountCredentialsModel :Object {
 
      - Throws: CredentialsError
      */
-    convenience init(withRawaData raw: Dictionary<String, String>) throws {
+    convenience init(withRawaData raw: [String: String]) throws {
         self.init()
-        let username = raw[ConfigKey.AccountUsername.rawValue]
-        let password = raw[ConfigKey.AccountPassword.rawValue]
-        let accountRealm = raw[ConfigKey.AccountRealm.rawValue]
+        let username = raw[ConfigKey.accountUsername.rawValue]
+        let password = raw[ConfigKey.accountPassword.rawValue]
+        let accountRealm = raw[ConfigKey.accountRealm.rawValue]
 
         if username == nil || password == nil || accountRealm == nil {
-            throw CredentialsError.NotEnoughData
+            throw CredentialsError.notEnoughData
         }
 
         self.username = username!

@@ -24,18 +24,25 @@ import RealmSwift
 
 class ConversationsService: MessagesAdapterDelegate {
 
-    fileprivate let messageAdapter :MessagesAdapter
+    fileprivate let messageAdapter: MessagesAdapter
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
-    fileprivate let realm :Realm = try! Realm()
-    fileprivate let results :Results<ConversationModel>!
 
-    var conversations :Observable<Results<ConversationModel>>
+    private var realm: Realm!
 
-    init(withMessageAdapter messageAdapter: MessagesAdapter) {
-        self.messageAdapter = messageAdapter
-        self.results = realm.objects(ConversationModel.self)
-        self.conversations = Observable.collection(from: results)
+    fileprivate let results: Results<ConversationModel>
+
+    var conversations: Observable<Results<ConversationModel>>
+
+    init(withMessageAdapter adapter: MessagesAdapter) {
+        guard let realm = try? Realm() else {
+            fatalError("Enable to instantiate Realm")
+        }
+
+        messageAdapter = adapter
+        self.realm = realm
+        results = realm.objects(ConversationModel.self)
+        conversations = Observable.collection(from: results)
         MessagesAdapter.delegate = self
     }
 
@@ -44,7 +51,7 @@ class ConversationsService: MessagesAdapterDelegate {
                      to recipient: ContactModel) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
-            let contentDict = [self.textPlainMIMEType : content]
+            let contentDict = [self.textPlainMIMEType: content]
             self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipient.ringId)
 
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
@@ -61,10 +68,15 @@ class ConversationsService: MessagesAdapterDelegate {
 
     func addConversation(conversation: ConversationModel) -> Completable {
         return Completable.create(subscribe: { [unowned self] completable in
-            try! self.realm.write {
-                self.realm.add(conversation)
+            do {
+                try self.realm.write { [unowned self] in
+                    self.realm.add(conversation)
+                }
+                completable(.completed)
+            } catch let error {
+                completable(.error(error))
             }
-            completable(.completed)
+
             return Disposables.create { }
         })
     }
@@ -86,17 +98,24 @@ class ConversationsService: MessagesAdapterDelegate {
             if currentConversation == nil {
                 currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: recipientRingId), accountId: currentAccountId)
 
-                try! self.realm.write {
-                    self.realm.add(currentConversation!)
+                do {
+                    try self.realm.write { [unowned self] in
+                        self.realm.add(currentConversation!)
+                    }
+                } catch let error {
+                    completable(.error(error))
                 }
             }
 
             //Add the received message into the conversation
-            try! self.realm.write {
-                currentConversation?.messages.append(message)
+            do {
+                try self.realm.write {
+                    currentConversation?.messages.append(message)
+                }
+                completable(.completed)
+            } catch let error {
+                completable(.error(error))
             }
-
-            completable(.completed)
 
             return Disposables.create { }
 
@@ -116,22 +135,26 @@ class ConversationsService: MessagesAdapterDelegate {
                 return messages.status != .read
             })
 
-            try! self.realm.write {
-                for message in unreadMessages {
-                    message.status = .read
+            do {
+                try self.realm.write {
+                    for message in unreadMessages {
+                        message.status = .read
+                    }
                 }
-            }
+                completable(.completed)
 
-            completable(.completed)
+            } catch let error {
+                completable(.error(error))
+            }
 
             return Disposables.create { }
 
         })
     }
 
-    //MARK: Message Adapter delegate
+    // MARK: Message Adapter delegate
 
-    func didReceiveMessage(_ message: Dictionary<String, String>, from senderAccount: String,
+    func didReceiveMessage(_ message: [String: String], from senderAccount: String,
                            to receiverAccountId: String) {
 
         if let content = message[textPlainMIMEType] {

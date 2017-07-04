@@ -45,15 +45,15 @@ class AccountModelHelperTests: XCTestCase {
      Tests that the SIP account type is properly detected.
      */
     func testIsSip() {
-        var data = Dictionary<String, String>()
-        data[ConfigKey.AccountType.rawValue] = AccountType.SIP.rawValue
+        var data = [String: String]()
+        data[ConfigKey.accountType.rawValue] = AccountType.sip.rawValue
         var config = AccountConfigModel(withDetails: data)
         account?.details = config
 
         var helper = AccountModelHelper(withAccount: account!)
         XCTAssertTrue(helper.isAccountSip())
 
-        data[ConfigKey.AccountType.rawValue] = AccountType.Ring.rawValue
+        data[ConfigKey.accountType.rawValue] = AccountType.ring.rawValue
         config = AccountConfigModel(withDetails: data)
         account?.details = config
 
@@ -65,15 +65,15 @@ class AccountModelHelperTests: XCTestCase {
      Tests that the Ring account type is properly detected.
      */
     func testIsRing() {
-        var data = Dictionary<String, String>()
-        data[ConfigKey.AccountType.rawValue] = AccountType.Ring.rawValue
+        var data = [String: String]()
+        data[ConfigKey.accountType.rawValue] = AccountType.ring.rawValue
         var config = AccountConfigModel(withDetails: data)
         account?.details = config
 
         var helper = AccountModelHelper(withAccount: account!)
         XCTAssertTrue(helper.isAccountRing())
 
-        data[ConfigKey.AccountType.rawValue] = AccountType.SIP.rawValue
+        data[ConfigKey.accountType.rawValue] = AccountType.sip.rawValue
         config = AccountConfigModel(withDetails: data)
         account?.details = config
 
@@ -85,21 +85,21 @@ class AccountModelHelperTests: XCTestCase {
      Tests that the account's enabled state is properly detected.
      */
     func testIsEnabled() {
-        var data = Dictionary<String, String>()
-        data[ConfigKey.AccountEnable.rawValue] = "true"
+        var data = [String: String]()
+        data[ConfigKey.accountEnable.rawValue] = "true"
         var config = AccountConfigModel(withDetails: data)
         account?.details = config
 
         var helper = AccountModelHelper(withAccount: account!)
         XCTAssertTrue(helper.isEnabled())
 
-        data[ConfigKey.AccountEnable.rawValue] = "false"
+        data[ConfigKey.accountEnable.rawValue] = "false"
         config = AccountConfigModel(withDetails: data)
         account?.details = config
         helper = AccountModelHelper(withAccount: account!)
         XCTAssertFalse(helper.isEnabled())
 
-        data.removeValue(forKey: ConfigKey.AccountEnable.rawValue)
+        data.removeValue(forKey: ConfigKey.accountEnable.rawValue)
         config = AccountConfigModel(withDetails: data)
         account?.details = config
         helper = AccountModelHelper(withAccount: account!)
@@ -110,34 +110,34 @@ class AccountModelHelperTests: XCTestCase {
      Tests that the account's registration state is properly detected.
      */
     func testRegistrationState() {
-        var data = Dictionary<String, String>()
-        data[ConfigKey.AccountRegistrationStatus.rawValue] = AccountState.Registered.rawValue
+        var data = [String: String]()
+        data[ConfigKey.accountRegistrationStatus.rawValue] = AccountState.registered.rawValue
         var config = AccountConfigModel(withDetails: data)
         account?.volatileDetails = config
 
         var helper = AccountModelHelper(withAccount: account!)
-        XCTAssertEqual(helper.getRegistrationState(), AccountState.Registered.rawValue)
+        XCTAssertEqual(helper.getRegistrationState(), AccountState.registered.rawValue)
 
-        data[ConfigKey.AccountRegistrationStatus.rawValue] = AccountState.Error.rawValue
+        data[ConfigKey.accountRegistrationStatus.rawValue] = AccountState.error.rawValue
         config = AccountConfigModel(withDetails: data)
         account?.volatileDetails = config
         helper = AccountModelHelper(withAccount: account!)
-        XCTAssertNotEqual(helper.getRegistrationState(), AccountState.Registered.rawValue)
+        XCTAssertNotEqual(helper.getRegistrationState(), AccountState.registered.rawValue)
     }
 
     /**
      Tests that the account's error state is properly detected.
      */
     func testIsInError() {
-        var data = Dictionary<String, String>()
-        data[ConfigKey.AccountRegistrationStatus.rawValue] = AccountState.Registered.rawValue
+        var data = [String: String]()
+        data[ConfigKey.accountRegistrationStatus.rawValue] = AccountState.registered.rawValue
         var config = AccountConfigModel(withDetails: data)
         account?.volatileDetails = config
 
         var helper = AccountModelHelper(withAccount: account!)
-        XCTAssertFalse(helper.isInError());
+        XCTAssertFalse(helper.isInError())
 
-        data[ConfigKey.AccountRegistrationStatus.rawValue] = AccountState.Error.rawValue
+        data[ConfigKey.accountRegistrationStatus.rawValue] = AccountState.error.rawValue
         config = AccountConfigModel(withDetails: data)
         account?.volatileDetails = config
         helper = AccountModelHelper(withAccount: account!)
@@ -152,11 +152,11 @@ class AccountModelHelperTests: XCTestCase {
         let password = "password"
         let realm = "realm"
 
-        var credentials = Array<Dictionary<String, String>>()
-        var credential = Dictionary<String, String>()
-        credential[ConfigKey.AccountUsername.rawValue] = username
-        credential[ConfigKey.AccountPassword.rawValue] = password
-        credential[ConfigKey.AccountRealm.rawValue] = realm
+        var credentials = [[String: String]]()
+        var credential = [String: String]()
+        credential[ConfigKey.accountUsername.rawValue] = username
+        credential[ConfigKey.accountPassword.rawValue] = password
+        credential[ConfigKey.accountRealm.rawValue] = realm
         credentials.append(credential)
 
         var helper = AccountModelHelper(withAccount: account!)

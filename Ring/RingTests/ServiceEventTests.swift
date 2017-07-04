@@ -30,7 +30,7 @@ class ServiceEventTests: XCTestCase {
     fileprivate var event: ServiceEvent?
 
     override func setUp() {
-        self.event = ServiceEvent(withEventType: .AccountsChanged)
+        self.event = ServiceEvent(withEventType: .accountsChanged)
     }
 
     /**
@@ -38,7 +38,7 @@ class ServiceEventTests: XCTestCase {
      */
     func testCreateEvent() {
         XCTAssertNotNil(self.event)
-        XCTAssertTrue(self.event?.eventType == ServiceEventType.AccountsChanged)
+        XCTAssertTrue(self.event?.eventType == ServiceEventType.accountsChanged)
     }
 
     /**
@@ -46,9 +46,9 @@ class ServiceEventTests: XCTestCase {
      */
     func testAddStringMetadata() {
         let testString = "Identifier"
-        self.event?.addEventInput(.Id, value: testString)
+        self.event?.addEventInput(.id, value: testString)
 
-        let resultString: String = (self.event?.getEventInput(.Id))!
+        let resultString: String = (self.event?.getEventInput(.id))!
         XCTAssertEqual(resultString, testString)
     }
 
@@ -57,9 +57,9 @@ class ServiceEventTests: XCTestCase {
      */
     func testAddIntMetadata() {
         let testInt = 1
-        self.event?.addEventInput(.Id, value: testInt)
+        self.event?.addEventInput(.id, value: testInt)
 
-        let resultInt: Int = (self.event?.getEventInput(.Id))!
+        let resultInt: Int = (self.event?.getEventInput(.id))!
         XCTAssertEqual(resultInt, testInt)
     }
 }

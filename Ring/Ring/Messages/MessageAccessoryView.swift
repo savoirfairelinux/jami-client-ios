@@ -25,8 +25,10 @@ class MessageAccessoryView: UIView {
     @IBOutlet weak var messageTextField: UITextField!
 
     class func instanceFromNib() -> MessageAccessoryView {
-        return UINib(nibName: "MessageAccessoryView", bundle: nil)
-            .instantiate(withOwner: nil, options: nil).first as! MessageAccessoryView
+        guard let view = UINib(nibName: "MessageAccessoryView", bundle: nil).instantiate(withOwner: nil, options: nil).first as? MessageAccessoryView  else {
+            fatalError("The view you are trying to instantiate is not a MessageAccessoryView")
+        }
+        return view
     }
 
 }

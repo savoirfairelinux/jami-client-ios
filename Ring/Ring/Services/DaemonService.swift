@@ -28,9 +28,9 @@ import Foundation
  - StartFailure: the daemon failed to start.
  */
 enum StartDaemonError: Error {
-    case DaemonAlreadyRunning
-    case InitializationFailure
-    case StartFailure
+    case daemonAlreadyRunning
+    case initializationFailure
+    case startFailure
 }
 
 /**
@@ -39,7 +39,7 @@ enum StartDaemonError: Error {
  - DaemonNotRunning: the daemon is not running and can not be stopped.
  */
 enum StopDaemonError: Error {
-    case DaemonNotRunning
+    case daemonNotRunning
 }
 
 /**
@@ -78,7 +78,7 @@ class DaemonService {
      */
     func startDaemon() throws {
         guard !self.daemonStarted else {
-            throw StartDaemonError.DaemonAlreadyRunning
+            throw StartDaemonError.daemonAlreadyRunning
         }
 
         print("Starting daemon...")
@@ -88,13 +88,11 @@ class DaemonService {
                 self.startRingServicePolling()
                 self.daemonStarted = true
                 print("Daemon started.")
+            } else {
+                throw StartDaemonError.startFailure
             }
-            else {
-                throw StartDaemonError.StartFailure
-            }
-        }
-        else {
-            throw StartDaemonError.InitializationFailure
+        } else {
+            throw StartDaemonError.initializationFailure
         }
     }
 
@@ -105,7 +103,7 @@ class DaemonService {
      */
     func stopDaemon() throws {
         guard self.daemonStarted else {
-            throw StopDaemonError.DaemonNotRunning
+            throw StopDaemonError.daemonNotRunning
         }
 
         print("Stopping daemon...")

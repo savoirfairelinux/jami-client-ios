@@ -37,7 +37,7 @@ class NameService: NameRegistrationAdapterDelegate {
     /**
      Used to make lookup name request to the daemon
     */
-    fileprivate let nameRegistrationAdapter :NameRegistrationAdapter
+    fileprivate let nameRegistrationAdapter: NameRegistrationAdapter
 
     fileprivate var delayedLookupNameCall: DispatchWorkItem?
 
@@ -94,7 +94,7 @@ class NameService: NameRegistrationAdapterDelegate {
         self.nameRegistrationAdapter.registerName(withAccount: account, password: password, name: name)
     }
 
-    //MARK: NameService delegate
+    // MARK: NameService delegate
 
     internal func registeredNameFound(with response: LookupNameResponse) {
 
