@@ -29,7 +29,7 @@ class RoundedButton: UIButton {
         self.layer.borderWidth = 1.0
         self.clipsToBounds = true
         self.layer.cornerRadius = 15.0
-        self.contentEdgeInsets = UIEdgeInsetsMake(8.0, 8.0, 8.0, 8.0)
+        self.contentEdgeInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
 
         //Text colors
         self.setTitleColor(UIColor.white, for: .normal)

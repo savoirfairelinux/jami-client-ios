@@ -26,7 +26,7 @@ class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UITabBarItem.appearance()
-            .setTitleTextAttributes( [NSForegroundColorAttributeName : Colors.ringMainColor], for: .selected)
+            .setTitleTextAttributes( [NSForegroundColorAttributeName: Colors.ringMainColor], for: .selected)
     }
 
     override func viewDidAppear(_ animated: Bool) {

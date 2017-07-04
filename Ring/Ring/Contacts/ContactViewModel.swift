@@ -26,7 +26,13 @@ class ContactViewModel {
     private let nameService = AppDelegate.nameService
     private let disposeBag = DisposeBag()
     private let contact: ContactModel
-    private let realm = try! Realm()
+    private lazy var realm: Realm = {
+        guard let realm = try? Realm() else {
+            fatalError("Enable to instantiate Realm")
+        }
+
+        return realm
+    }()
 
     let userName = Variable("")
 
@@ -49,8 +55,12 @@ class ContactViewModel {
             }).subscribe(onNext: { [unowned self] lookupNameResponse in
                 if lookupNameResponse.state == .found {
 
-                    try! self.realm.write {
-                        self.contact.userName = lookupNameResponse.name
+                    do {
+                        try self.realm.write { [unowned self] in
+                            self.contact.userName = lookupNameResponse.name
+                        }
+                    } catch let error {
+                        print ("Realm persistence with error: \(error)")
                     }
 
                     self.userName.value = lookupNameResponse.name

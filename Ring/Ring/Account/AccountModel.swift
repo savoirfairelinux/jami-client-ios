@@ -26,13 +26,13 @@ import Foundation
  Errors that can be thrown when trying to build an AccountModel
  */
 enum AccountModelError: Error {
-    case UnexpectedError
+    case unexpectedError
 }
 
 /**
  A class representing an account.
  */
-class AccountModel : Object {
+class AccountModel: Object {
     // MARK: Public members
     dynamic var id: String = ""
     dynamic var registeringUsername = false
@@ -48,10 +48,10 @@ class AccountModel : Object {
     }
 
     convenience init(withAccountId accountId: String,
-         details: AccountConfigModel,
-         volatileDetails: AccountConfigModel,
-         credentials: List<AccountCredentialsModel>,
-         devices: [DeviceModel]) throws {
+                     details: AccountConfigModel,
+                     volatileDetails: AccountConfigModel,
+                     credentials: List<AccountCredentialsModel>,
+                     devices: [DeviceModel]) throws {
         self.init()
         self.id = accountId
         self.details = details
@@ -59,7 +59,7 @@ class AccountModel : Object {
         self.devices.append(objectsIn: devices)
     }
 
-    public static func ==(lhs: AccountModel, rhs: AccountModel) -> Bool {
+    public static func == (lhs: AccountModel, rhs: AccountModel) -> Bool {
         return lhs.id == rhs.id
     }
 

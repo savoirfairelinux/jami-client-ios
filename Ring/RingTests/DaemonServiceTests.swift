@@ -71,7 +71,7 @@ class DaemonServiceTests: XCTestCase {
     func testAlreadyRunningException() {
         let daemonService = testStart()
         XCTAssertThrowsError(try daemonService.startDaemon()) { (error) in
-            XCTAssertEqual(error as? StartDaemonError, StartDaemonError.DaemonAlreadyRunning)
+            XCTAssertEqual(error as? StartDaemonError, StartDaemonError.daemonAlreadyRunning)
         }
     }
 
@@ -81,7 +81,7 @@ class DaemonServiceTests: XCTestCase {
     func testDaemonNotRunningException() {
         let daemonService = DaemonService.init(dRingAdaptor: DRingAdapter())
         XCTAssertThrowsError(try daemonService.stopDaemon()) { (error) in
-            XCTAssertEqual(error as? StopDaemonError, StopDaemonError.DaemonNotRunning)
+            XCTAssertEqual(error as? StopDaemonError, StopDaemonError.daemonNotRunning)
         }
     }
 
@@ -92,7 +92,7 @@ class DaemonServiceTests: XCTestCase {
     func testDaemonFailToInit() {
         let daemonService = DaemonService.init(dRingAdaptor: FixtureFailInitDRingAdapter())
         XCTAssertThrowsError(try daemonService.startDaemon()) { (error) in
-            XCTAssertEqual(error as? StartDaemonError, StartDaemonError.InitializationFailure)
+            XCTAssertEqual(error as? StartDaemonError, StartDaemonError.initializationFailure)
         }
     }
 
@@ -103,7 +103,7 @@ class DaemonServiceTests: XCTestCase {
     func testDaemonFailToStart() {
         let daemonService = DaemonService.init(dRingAdaptor: FixtureFailStartDRingAdapter())
         XCTAssertThrowsError(try daemonService.startDaemon()) { (error) in
-            XCTAssertEqual(error as? StartDaemonError, StartDaemonError.StartFailure)
+            XCTAssertEqual(error as? StartDaemonError, StartDaemonError.startFailure)
         }
     }
 }

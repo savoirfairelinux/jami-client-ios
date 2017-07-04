@@ -20,10 +20,10 @@
 
 import RealmSwift
 
-class ConversationModel :Object {
+class ConversationModel: Object {
 
     let messages = List<MessageModel>()
-    dynamic var recipient :ContactModel?
+    dynamic var recipient: ContactModel?
     dynamic var accountId: String = ""
 
     convenience init(withRecipient recipient: ContactModel, accountId: String) {
