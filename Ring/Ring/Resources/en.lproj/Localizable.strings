@@ -18,6 +18,20 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+// Global
+"HomeTabBarTitle" = "Home";
+
+// Smartlist
+"Yesterday" = "Yesterday";
+
+"UserFound" = "User found";
+"Conversations" = "Conversations";
+
+"Searching" = "Searching...";
+"NoResults" = "No results";
+
+// Walkthrough
+
 //Welcome Screen
 
 "WelcomeTitle" = "Welcome to Ring";
