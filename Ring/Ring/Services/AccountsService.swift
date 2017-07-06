@@ -22,6 +22,7 @@
 import RxCocoa
 import RxSwift
 import RealmSwift
+import SwiftyBeaver
 
 enum AddAccountError: Error {
     case templateNotConform
@@ -30,6 +31,12 @@ enum AddAccountError: Error {
 
 class AccountsService: AccountAdapterDelegate {
     // MARK: Private members
+
+    /**
+     logguer
+     */
+    private let log = SwiftyBeaver.self
+
     /**
      Used to register the service to daemon events, injected by constructor.
      */
@@ -150,7 +157,7 @@ class AccountsService: AccountAdapterDelegate {
                 account.credentialDetails.removeAll()
                 account.credentialDetails.append(objectsIn: credentialDetails)
             } catch {
-                print(error)
+                log.error("\(error)")
             }
         }
     }
@@ -208,7 +215,7 @@ class AccountsService: AccountAdapterDelegate {
      Not supported yet.
      */
     fileprivate func addSipAccount() {
-        print("Not supported yet")
+        log.info("Not supported yet")
     }
 
     /**
@@ -273,10 +280,10 @@ class AccountsService: AccountAdapterDelegate {
                     let credentials = try AccountCredentialsModel(withRawaData: rawCredentials)
                     credentialsList.append(credentials)
                 } catch CredentialsError.notEnoughData {
-                    print("Not enough data to build a credential object.")
+                    log.error("Not enough data to build a credential object.")
                     throw CredentialsError.notEnoughData
                 } catch {
-                    print("Unexpected error.")
+                    log.error("Unexpected error.")
                     throw AccountModelError.unexpectedError
                 }
             }
@@ -348,7 +355,7 @@ class AccountsService: AccountAdapterDelegate {
 
     // MARK: - AccountAdapterDelegate
     func accountsChanged() {
-        print("Accounts changed.")
+        log.debug("Accounts changed.")
         reloadAccounts()
 
         let event = ServiceEvent(withEventType: .accountsChanged)
@@ -356,7 +363,7 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func registrationStateChanged(with response: RegistrationResponse) {
-        print("RegistrationStateChanged.")
+        log.debug("RegistrationStateChanged.")
         reloadAccounts()
 
         var event = ServiceEvent(withEventType: .registrationStateChanged)

@@ -21,6 +21,7 @@
 
 import UIKit
 import RealmSwift
+import SwiftyBeaver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,8 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let accountService = AccountsService(withAccountAdapter: AccountAdapter())
     static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     static let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
+    private let log = SwiftyBeaver.self
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        // initialize log format
+        let console = ConsoleDestination()
+        console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
+        log.addDestination(console)
+
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
         return true
@@ -60,13 +68,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try AppDelegate.daemonService.startDaemon()
             AppDelegate.accountService.loadAccounts()
         } catch StartDaemonError.initializationFailure {
-            print("Daemon failed to initialize.")
+            log.error("Daemon failed to initialize.")
         } catch StartDaemonError.startFailure {
-            print("Daemon failed to start.")
+            log.error("Daemon failed to start.")
         } catch StartDaemonError.daemonAlreadyRunning {
-            print("Daemon already running.")
+            log.error("Daemon already running.")
         } catch {
-            print("Unknown error in Daemon start.")
+            log.error("Unknown error in Daemon start.")
         }
     }
 
@@ -74,9 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try AppDelegate.daemonService.stopDaemon()
         } catch StopDaemonError.daemonNotRunning {
-            print("Daemon failed to stop because it was not already running.")
+            log.error("Daemon failed to stop because it was not already running.")
         } catch {
-            print("Unknown error in Daemon stop.")
+            log.error("Unknown error in Daemon stop.")
         }
     }
 }
