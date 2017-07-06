@@ -18,16 +18,31 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
+class ContactModel {
 
-class ContactModel: Object {
+    var ringId: String = ""
+    var userName: String?
+    var confirmed: Bool = false
+    var added: Date!
 
-    dynamic var ringId: String = ""
-    dynamic var userName: String?
-
-    convenience init(withRingId ringId: String) {
-        self.init()
+    init(withRingId ringId: String) {
         self.ringId = ringId
+    }
+
+    init(withDictionary dictionary: [String : String]) {
+
+        if let ringId = dictionary["id"] {
+            self.ringId = ringId
+        }
+
+        if let confirmed = dictionary["confirmed"] {
+            self.confirmed = confirmed.toBool()!
+        }
+
+        if let added = dictionary["added"] {
+            let addedDate = Date(timeIntervalSince1970: Double(added)!)
+            self.added = addedDate
+        }
     }
 
     public static func == (lhs: ContactModel, rhs: ContactModel) -> Bool {
