@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,24 +20,8 @@
 
 import Foundation
 
-extension String {
-    func toBool() -> Bool? {
-        switch self {
-        case "True", "true", "yes", "1":
-            return true
-        case "False", "false", "no", "0":
-            return false
-        default:
-            return nil
-        }
-    }
-}
-
 extension Bool {
     func toString() -> String {
-        if self == true {
-            return "true"
-        }
-        return "false"
+        return self ? "true" : "false"
     }
 }

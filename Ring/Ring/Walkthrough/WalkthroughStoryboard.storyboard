@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GnB-zf-djy">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -42,7 +42,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DXu-A1-gcl">
-                                <rect key="frame" x="25" y="100" width="271" height="280"/>
+                                <rect key="frame" x="25" y="90" width="271" height="300"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="logo-ring-beta2-blanc" translatesAutoresizingMaskIntoConstraints="NO" id="7CK-fT-m09">
                                         <rect key="frame" x="45.5" y="0.0" width="180" height="66"/>
@@ -64,28 +64,34 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0q-9u-3WR" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                        <rect key="frame" x="33.5" y="204" width="204" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0q-9u-3WR" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="204" width="231" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="d0X-Cl-Ry4"/>
+                                            <constraint firstAttribute="height" constant="40" id="d0X-Cl-Ry4"/>
                                         </constraints>
                                         <state key="normal" title="Link this device to an account">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="linkDeviceToAccountAction:" destination="zOM-us-BHp" eventType="touchUpInside" id="bul-x6-xBK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ve-ZD-TXf" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                        <rect key="frame" x="33.5" y="250" width="204" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ve-ZD-TXf" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="260" width="231" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="5Qb-T3-Su0"/>
+                                            <constraint firstAttribute="height" constant="40" id="5Qb-T3-Su0"/>
                                         </constraints>
                                         <state key="normal" title="Create a Ring account">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="createAccountAction:" destination="zOM-us-BHp" eventType="touchUpInside" id="o0k-MC-tsv"/>
                                         </connections>
@@ -93,9 +99,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8Ve-ZD-TXf" firstAttribute="leading" secondItem="R0q-9u-3WR" secondAttribute="leading" id="U0b-w9-yjf"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="R0q-9u-3WR" secondAttribute="trailing" constant="32" id="WpG-GI-pPu"/>
+                                    <constraint firstAttribute="trailing" secondItem="R0q-9u-3WR" secondAttribute="trailing" constant="20" id="WpG-GI-pPu"/>
                                     <constraint firstItem="8Ve-ZD-TXf" firstAttribute="trailing" secondItem="R0q-9u-3WR" secondAttribute="trailing" id="bE8-0O-Ead"/>
-                                    <constraint firstItem="R0q-9u-3WR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DXu-A1-gcl" secondAttribute="leading" constant="32" id="yWE-sO-6tc"/>
+                                    <constraint firstItem="R0q-9u-3WR" firstAttribute="leading" secondItem="DXu-A1-gcl" secondAttribute="leading" constant="20" id="yWE-sO-6tc"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -135,12 +141,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8M5-AJ-pxH" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="145" y="225" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8M5-AJ-pxH" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="110" y="220" width="100" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="2t1-a8-dxY"/>
+                                    <constraint firstAttribute="height" constant="40" id="cln-HK-ZE8"/>
+                                </constraints>
                                 <state key="normal" title="Skip">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="skip:" destination="dmb-i6-bo9" eventType="touchUpInside" id="PAR-5w-VRm"/>
                                 </connections>
@@ -192,22 +205,25 @@
                             <rect key="frame" x="0.0" y="130" width="320" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQJ-hF-j2O" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                    <rect key="frame" x="120.5" y="8" width="79" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQJ-hF-j2O" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                    <rect key="frame" x="110" y="7" width="100" height="40"/>
                                     <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="RGF-Ib-dT9"/>
+                                        <constraint firstAttribute="height" constant="40" id="RGF-Ib-dT9"/>
+                                        <constraint firstAttribute="width" constant="100" id="p9O-j8-fcB"/>
                                     </constraints>
                                     <state key="normal" title="Link Device">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="UQJ-hF-j2O" firstAttribute="centerX" secondItem="bQ2-6Y-CIW" secondAttribute="centerX" id="7LD-pW-9BH"/>
-                                <constraint firstItem="UQJ-hF-j2O" firstAttribute="top" secondItem="bQ2-6Y-CIW" secondAttribute="top" constant="8" id="FY8-ef-pse"/>
-                                <constraint firstAttribute="bottom" secondItem="UQJ-hF-j2O" secondAttribute="bottom" constant="16" id="pmA-aY-Do4"/>
+                                <constraint firstItem="UQJ-hF-j2O" firstAttribute="centerY" secondItem="bQ2-6Y-CIW" secondAttribute="centerY" id="f6F-dX-f0m"/>
                             </constraints>
                         </view>
                         <connections>
@@ -251,21 +267,25 @@
                             <rect key="frame" x="0.0" y="130" width="320" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsT-SB-0AP" customClass="RoundedButton" customModule="Ring" customModuleProvider="target">
-                                    <rect key="frame" x="84" y="8" width="152" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsT-SB-0AP" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                    <rect key="frame" x="70" y="7" width="180" height="40"/>
                                     <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="KVf-AW-ms7"/>
+                                        <constraint firstAttribute="height" constant="40" id="b0c-dD-zDx"/>
                                     </constraints>
                                     <state key="normal" title="Create a Ring account">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="gsT-SB-0AP" firstAttribute="top" secondItem="MnN-De-arJ" secondAttribute="top" constant="8" id="pqs-B0-TWU"/>
-                                <constraint firstAttribute="bottom" secondItem="gsT-SB-0AP" secondAttribute="bottom" constant="16" id="qOI-R4-9EJ"/>
+                                <constraint firstAttribute="trailing" secondItem="gsT-SB-0AP" secondAttribute="trailing" constant="70" id="MsB-8o-KHc"/>
+                                <constraint firstItem="gsT-SB-0AP" firstAttribute="leading" secondItem="MnN-De-arJ" secondAttribute="leading" constant="70" id="PjH-ny-nr4"/>
+                                <constraint firstItem="gsT-SB-0AP" firstAttribute="centerY" secondItem="MnN-De-arJ" secondAttribute="centerY" id="gt1-U3-e6s"/>
                                 <constraint firstItem="gsT-SB-0AP" firstAttribute="centerX" secondItem="MnN-De-arJ" secondAttribute="centerX" id="tMA-Qg-oxa"/>
                             </constraints>
                         </view>
@@ -275,14 +295,14 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="mCreateAccountButton" destination="gsT-SB-0AP" id="9Fj-aJ-0Ik"/>
-                        <outlet property="mCreateAccountTitleLabel" destination="AIX-eC-baN" id="YUL-yb-Ecy"/>
+                        <outlet property="createAccountButton" destination="gsT-SB-0AP" id="SxP-Y3-eoo"/>
+                        <outlet property="createAccountTitleLabel" destination="AIX-eC-baN" id="kg4-gi-v7Q"/>
                         <segue destination="E3W-r7-J4y" kind="show" identifier="AccountToPermissionsSegue" id="Zig-iC-h9U"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0G-TV-Z9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2078" y="581"/>
+            <point key="canvasLocation" x="2077.5" y="580"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="c8H-6M-3dO">

@@ -20,8 +20,9 @@
 
 import UIKit
 import RxSwift
+import Reusable
 
-class ConversationCell: UITableViewCell {
+class ConversationCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -29,11 +30,6 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var newMessagesLabel: UILabel!
     @IBOutlet weak var lastMessageDateLabel: UILabel!
     @IBOutlet weak var lastMessagePreviewLabel: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

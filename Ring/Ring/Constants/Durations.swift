@@ -20,9 +20,16 @@
 
 import Foundation
 
-/**
- Time interval between TextField events in seconds
-*/
-let textFieldThrottlingDuration = 0.5
+public enum Durations {
+    case textFieldThrottlingDuration
+    case alertFlashDuration
 
-let alertFlashDuration = 1.0
+    var value: Double {
+        switch self {
+        case .textFieldThrottlingDuration:
+            return 0.5
+        case .alertFlashDuration:
+            return 1.0
+        }
+    }
+}

@@ -19,51 +19,46 @@
  */
 
 // Global
-"HomeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "Home";
+"global.ok" = "Ok";
 
 // Smartlist
-"Yesterday" = "Yesterday";
-
-"UserFound" = "User found";
-"Conversations" = "Conversations";
-
-"Searching" = "Searching...";
-"NoResults" = "No results";
+"smartlist.yesterday" = "Yesterday";
+"smartlist.userFound" = "User found";
+"smartlist.conversations" = "Conversations";
+"smartlist.searching" = "Searching...";
+"smartlist.noResults" = "No results";
 
 // Walkthrough
 
 //Welcome Screen
-
-"WelcomeTitle" = "Welcome to Ring";
-"WelcomeText" = "A Ring account allows you to reach people securely in peer to peer through fully distributed network";
-"LinkDeviceButton" = "Link this device to an account";
-"CreateAccount" = "Create a Ring account";
+"welcome.title" = "Welcome to Ring";
+"welcome.text" = "A Ring account allows you to reach people securely in peer to peer through fully distributed network";
+"welcome.linkDeviceButton" = "Link this device to an account";
+"welcome.createAccount" = "Create a Ring account";
 
 //Create Account form
-
-"CreateAccountFormTitle" = "Create your Ring account";
-"RegisterPublicUsername" = "Register public username (experimental)";
-"ChooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"EnterNewUsernamePlaceholder" = "Enter new username";
-"NewPasswordPlaceholder" = "New Password";
-"RepeatPasswordPlaceholder" = "Repeat new password";
-"PasswordCharactersNumberError" = "6 characters minimum";
-"PasswordNotMatchingError" = "Passwords do not match";
-"LookingForUsernameAvailability" = "Looking for username availability...";
-"InvalidUsername" = "Invalid username";
-"UsernameAlreadyTaken" = "Username already taken";
+"createAccount.createAccountFormTitle" = "Create your Ring account";
+"createAccount.registerPublicUsername" = "Register public username (experimental)";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
+"createAccount.enterNewUsernamePlaceholder" = "Enter new username";
+"createAccount.newPasswordPlaceholder" = "New Password";
+"createAccount.repeatPasswordPlaceholder" = "Repeat new password";
+"createAccount.passwordCharactersNumberError" = "6 characters minimum";
+"createAccount.passwordNotMatchingError" = "Passwords do not match";
+"createAccount.lookingForUsernameAvailability" = "Looking for username availability...";
+"createAccount.invalidUsername" = "Invalid username";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.loading" = "Loading...";
 
 //Progress View
-"WaitCreateAccountTitle" = "Adding account";
+"createAccount.waitCreateAccountTitle" = "Adding account";
 
 //Alerts
-"AccountCannotBeFoundTitle" = "Can't find account";
-"AcountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-
-"AccountAddedTitle" = "Account Added";
-
-"AccountNoNetworkTitle" = "Can't connect to the network";
-"AccountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-
-"AccountDefaultErrorTitle" = "Unknown error";
-"AccountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.acountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Unknown error";
+"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";

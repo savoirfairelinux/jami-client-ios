@@ -27,13 +27,4 @@ class AccountDetailsViewController: UIViewController {
 
     @IBOutlet weak var detailsLabel: UILabel!
 
-    // MARK: - UIViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
 }

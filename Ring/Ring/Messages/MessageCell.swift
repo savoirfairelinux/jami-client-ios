@@ -19,13 +19,14 @@
  */
 
 import UIKit
+import Reusable
 
 enum BubblePosition {
     case received
     case sent
 }
 
-class MessageCell: UITableViewCell {
+class MessageCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var bubble: UIView!
     @IBOutlet weak var messageLabel: UILabel!
@@ -44,7 +45,7 @@ class MessageCell: UITableViewCell {
                 self.containerLeadingConstraint.priority = 1
                 self.minimumLeadingConstraint.priority = 999
 
-                self.bubble.backgroundColor = Colors.ringMainColor
+                self.bubble.backgroundColor = UIColor.ringMain
                 self.messageLabel.textColor = UIColor.white
             } else {
                 self.minimumLeadingConstraint.priority = 1

@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,21 +18,14 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import Foundation
 import UIKit
 
-class RoundedButton: UIButton {
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+extension UIColor {
 
-        //Button layout
-        self.layer.borderColor = self.backgroundColor?.cgColor
-        self.layer.borderWidth = 1.0
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 15.0
-        self.contentEdgeInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+    static let ringMain = UIColor(colorLiteralRed: 10.0/255.0,
+                                  green: 116.0/255.0,
+                                  blue: 137.0/255.0,
+                                  alpha: 1.0)
 
-        //Text colors
-        self.setTitleColor(UIColor.white, for: .normal)
-        self.setTitleColor(UIColor.gray, for: .disabled)
-    }
 }

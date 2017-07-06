@@ -73,7 +73,7 @@ class ContactViewModel {
                 } else {
                     self.userName.value = lookupNameResponse.address
                 }
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
         nameService.lookupAddress(withAccount: "", nameserver: "", address: self.contact.ringId)
     }

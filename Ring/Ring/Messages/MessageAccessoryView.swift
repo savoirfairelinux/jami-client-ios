@@ -19,16 +19,10 @@
  */
 
 import UIKit
+import Reusable
 
-class MessageAccessoryView: UIView {
+class MessageAccessoryView: UIView, NibLoadable {
 
     @IBOutlet weak var messageTextField: UITextField!
-
-    class func instanceFromNib() -> MessageAccessoryView {
-        guard let view = UINib(nibName: "MessageAccessoryView", bundle: nil).instantiate(withOwner: nil, options: nil).first as? MessageAccessoryView  else {
-            fatalError("The view you are trying to instantiate is not a MessageAccessoryView")
-        }
-        return view
-    }
 
 }

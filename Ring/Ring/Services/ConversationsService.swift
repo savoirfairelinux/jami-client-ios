@@ -18,7 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
 import RealmSwift
 import SwiftyBeaver
@@ -159,20 +158,26 @@ class ConversationsService: MessagesAdapterDelegate {
     }
 
     func deleteConversation(conversation: ConversationModel) {
-        try! realm.write {
 
-            //Remove all messages from the conversation
-            for message in conversation.messages {
-                realm.delete(message)
+        do {
+            try realm.write {
+
+                //Remove all messages from the conversation
+                for message in conversation.messages {
+                    realm.delete(message)
+                }
+
+                realm.delete(conversation)
             }
-
-            realm.delete(conversation)
+        } catch let error {
+            self.log.error("\(error)")
         }
     }
 
-    //MARK: Message Adapter delegate
+    // MARK: Message Adapter delegate
 
-    func didReceiveMessage(_ message: [String: String], from senderAccount: String,
+    func didReceiveMessage(_ message: [String: String],
+                           from senderAccount: String,
                            to receiverAccountId: String) {
 
         if let content = message[textPlainMIMEType] {
@@ -180,12 +185,14 @@ class ConversationsService: MessagesAdapterDelegate {
                 .subscribe(onCompleted: { [unowned self] in
                     self.log.info("Message saved")
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
         }
     }
 
-    func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64,
-                              from senderAccountId: String, to receiverAccount: String) {
+    func messageStatusChanged(_ status: MessageStatus,
+                              for messageId: UInt64,
+                              from senderAccountId: String,
+                              to receiverAccount: String) {
         log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(senderAccountId) to: \(receiverAccount)")
     }
 }
