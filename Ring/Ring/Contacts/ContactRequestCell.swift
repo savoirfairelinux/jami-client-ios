@@ -19,31 +19,20 @@
  */
 
 import UIKit
-
+import Reusable
 import RxSwift
 
-class ContactHelper {
+class ContactRequestCell: UITableViewCell, NibReusable {
 
-    static func lookupUserName(forRingId ringId: String, nameService: NameService, disposeBag: DisposeBag) -> Variable<String> {
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var discardButton: UIButton!
+    @IBOutlet weak var banButton: UIButton!
 
-        let userName = Variable("")
+    var disposeBag = DisposeBag()
 
-        //Lookup the user name observer
-        nameService.usernameLookupStatus
-            .observeOn(MainScheduler.instance)
-            .filter({ lookupNameResponse in
-                return lookupNameResponse.address != nil && lookupNameResponse.address == ringId
-            }).subscribe(onNext: { lookupNameResponse in
-                if lookupNameResponse.state == .found {
-                    userName.value = lookupNameResponse.name
-                } else {
-                    userName.value = lookupNameResponse.address
-                }
-            }).disposed(by: disposeBag)
-
-        nameService.lookupAddress(withAccount: "", nameserver: "", address: ringId)
-
-        return userName
+    override func prepareForReuse() {
+        self.disposeBag = DisposeBag()
     }
-
 }
