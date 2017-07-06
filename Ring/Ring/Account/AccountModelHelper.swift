@@ -18,11 +18,18 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import SwiftyBeaver
+
 /**
  A structure exposing the fields and methods for an Account
  */
 struct AccountModelHelper {
     fileprivate var account: AccountModel
+
+    /**
+     logguer
+     */
+    private let log = SwiftyBeaver.self
 
     /**
      Constructor
@@ -110,9 +117,9 @@ struct AccountModelHelper {
                     let accountCredentialModel = try AccountCredentialsModel(withRawaData: credential)
                     self.account.credentialDetails.append(accountCredentialModel)
                 } catch CredentialsError.notEnoughData {
-                    print("Not enough data to create a credential")
+                    log.error("Not enough data to create a credential")
                 } catch {
-                    print("Unexpected error")
+                    log.error("Unexpected error")
                 }
             }
         }

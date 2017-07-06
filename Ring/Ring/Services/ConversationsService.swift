@@ -21,8 +21,14 @@
 import UIKit
 import RxSwift
 import RealmSwift
+import SwiftyBeaver
 
 class ConversationsService: MessagesAdapterDelegate {
+
+    /**
+     logguer
+     */
+    private let log = SwiftyBeaver.self
 
     fileprivate let messageAdapter: MessagesAdapter
     fileprivate let disposeBag = DisposeBag()
@@ -171,8 +177,8 @@ class ConversationsService: MessagesAdapterDelegate {
 
         if let content = message[textPlainMIMEType] {
             self.saveMessage(withContent: content, byAuthor: senderAccount, toConversationWith: senderAccount, currentAccountId: receiverAccountId)
-                .subscribe(onCompleted: {
-                    print("Message saved")
+                .subscribe(onCompleted: { [unowned self] in
+                    self.log.info("Message saved")
                 })
                 .addDisposableTo(disposeBag)
         }
@@ -180,7 +186,6 @@ class ConversationsService: MessagesAdapterDelegate {
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64,
                               from senderAccountId: String, to receiverAccount: String) {
-
-        print("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(senderAccountId) to: \(receiverAccount)")
+        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(senderAccountId) to: \(receiverAccount)")
     }
 }

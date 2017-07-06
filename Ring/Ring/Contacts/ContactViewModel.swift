@@ -20,8 +20,14 @@
 
 import RxSwift
 import RealmSwift
+import SwiftyBeaver
 
 class ContactViewModel {
+
+    /**
+     logguer
+     */
+    private let log = SwiftyBeaver.self
 
     private let nameService = AppDelegate.nameService
     private let disposeBag = DisposeBag()
@@ -60,7 +66,7 @@ class ContactViewModel {
                             self.contact.userName = lookupNameResponse.name
                         }
                     } catch let error {
-                        print ("Realm persistence with error: \(error)")
+                        self.log.error("Realm persistence with error: \(error)")
                     }
 
                     self.userName.value = lookupNameResponse.name

@@ -21,8 +21,14 @@
 import UIKit
 import RxSwift
 import RealmSwift
+import SwiftyBeaver
 
 class ConversationViewModel {
+
+    /**
+     logguer
+     */
+    private let log = SwiftyBeaver.self
 
     let conversation: ConversationModel
     private lazy var realm: Realm = {
@@ -80,7 +86,7 @@ class ConversationViewModel {
                         self.conversation.recipient?.userName = userNameFound
                     }
                 } catch let error {
-                    print ("Realm persistence with error: \(error)")
+                    self.log.error("Realm persistence with error: \(error)")
                 }
 
             }).addDisposableTo(self.disposeBag)
@@ -158,8 +164,8 @@ class ConversationViewModel {
     fileprivate func saveMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
         self.conversationsService
             .saveMessage(withContent: content, byAuthor: author, toConversationWith: account, currentAccountId: (accountService.currentAccount?.id)!)
-            .subscribe(onCompleted: {
-                print("Message saved")
+            .subscribe(onCompleted: { [unowned self] in
+                self.log.debug("Message saved")
             })
             .addDisposableTo(disposeBag)
     }
@@ -167,8 +173,8 @@ class ConversationViewModel {
     func setMessagesAsRead() {
         self.conversationsService
             .setMessagesAsRead(forConversation: self.conversation)
-            .subscribe(onCompleted: {
-                print("Message set as read")
+            .subscribe(onCompleted: { [unowned self] in
+                self.log.debug("Message set as read")
             }).addDisposableTo(disposeBag)
     }
 
