@@ -25,6 +25,8 @@ import SwiftyBeaver
 import RxSwift
 import Chameleon
 
+import Contacts
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -33,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let accountService = AccountsService(withAccountAdapter: AccountAdapter())
     static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     static let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
+    static let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
+
     private let log = SwiftyBeaver.self
 
     fileprivate let disposeBag = DisposeBag()
@@ -53,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
 
         self.loadAccounts()
+
         return true
     }
 
@@ -77,7 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         do {
             try AppDelegate.daemonService.startDaemon()
-
         } catch StartDaemonError.initializationFailure {
             log.error("Daemon failed to initialize.")
         } catch StartDaemonError.startFailure {
@@ -112,6 +116,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if accountList.isEmpty {
             self.presentWalkthrough()
         } else {
+            AppDelegate.contactsService.loadContacts(withAccount: AppDelegate.accountService.currentAccount!)
+            AppDelegate.contactsService.loadContactRequests(withAccount: AppDelegate.accountService.currentAccount!)
             self.presentMainTabBar()
         }
     }
