@@ -89,7 +89,7 @@ class ConversationViewModel {
                     self.log.error("Realm persistence with error: \(error)")
                 }
 
-            }).addDisposableTo(self.disposeBag)
+            }).disposed(by: self.disposeBag)
 
             return tmp
         }
@@ -134,7 +134,7 @@ class ConversationViewModel {
         if todayDay == day && todayMonth == month && todayYear == year {
             return hourFormatter.string(from: lastMessageDate)
         } else if day == todayDay - 1 {
-            return NSLocalizedString("Yesterday", tableName: "Smartlist", comment: "")
+            return L10n.yesterday.smartString
         } else if todayYear == year && todayWeekOfYear == weekOfYear {
             return lastMessageDate.dayOfWeek()
         } else {
@@ -158,7 +158,7 @@ class ConversationViewModel {
             .subscribe(onCompleted: {
                 let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
                 self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: (self.conversation.recipient?.ringId)!)
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
     }
 
     fileprivate func saveMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
@@ -167,7 +167,7 @@ class ConversationViewModel {
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message saved")
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func setMessagesAsRead() {
@@ -175,7 +175,7 @@ class ConversationViewModel {
             .setMessagesAsRead(forConversation: self.conversation)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message set as read")
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
     }
 
     fileprivate var unreadMessagesCount: Int {

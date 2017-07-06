@@ -18,7 +18,7 @@
 		0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C2FE1E0C438F00CF00BA /* AccountAdapterDelegate.swift */; };
 		0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */; };
 		0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */; };
-		0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3071E0C68BF00CF00BA /* RoundedButton.swift */; };
+		0273C3081E0C68BF00CF00BA /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3071E0C68BF00CF00BA /* DesignableButton.swift */; };
 		029CE9D71E1D8C860000C8E1 /* ServiceEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CE9D61E1D8C860000C8E1 /* ServiceEventTests.swift */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
 		02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFA1DF755BB000358C9 /* AccountModel.swift */; };
@@ -30,9 +30,8 @@
 		02DD80C81E1EAD70009A3510 /* AccountConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C71E1EAD70009A3510 /* AccountConfigModel.swift */; };
 		02DD80CA1E1EAF1A009A3510 /* AccountCredentialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */; };
 		02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD80CC1E1EB2E4009A3510 /* ConfigKeyModel.swift */; };
-		02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866371D2304A700E06CE2 /* BoolStringExtension.swift */; };
+		02E1A0251DDE4ABA00D75B59 /* String+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866371D2304A700E06CE2 /* String+Bool.swift */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
-		043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866351D22D06500E06CE2 /* AccountTableViewCell.swift */; };
 		043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */; };
 		04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04399A021D1C2D9D00E99CD9 /* Images.xcassets */; };
 		04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A101D1C2D9D00E99CD9 /* RingTests.swift */; };
@@ -94,6 +93,9 @@
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		1A1E476D1F0E808500EA9A36 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1E476C1F0E808500EA9A36 /* Reusable.framework */; };
 		1A1E476F1F0E894600EA9A36 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */; };
+		1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */; };
+		1A3D28A91F0EBF0200B524EE /* UIView+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */; };
+		1A8306331F0EDAA50099D98C /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8306321F0EDAA50099D98C /* AccountTableViewCell.swift */; };
 		1ABE07BA1F0C16F100D36361 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07B91F0C16F100D36361 /* ContactViewModel.swift */; };
 		1ABE07BC1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07BB1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard */; };
 		1ABE07D21F0D8FE800D36361 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07D01F0D8FE800D36361 /* Images.swift */; };
@@ -128,7 +130,7 @@
 		56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */; };
 		56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64E01E80542300EA1AA9 /* TextFieldCell.swift */; };
 		56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64E21E805F0200EA1AA9 /* TextCell.swift */; };
-		56AC650E1E85694D00EA1AA9 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC650D1E85694D00EA1AA9 /* RoundedTextField.swift */; };
+		56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC650D1E85694D00EA1AA9 /* DesignableTextField.swift */; };
 		56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC99E1ED714CB00CDAF8B /* MessagesAdapter.mm */; };
 		56BBC9A21ED714DF00CDAF8B /* MessagesAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9A01ED714DF00CDAF8B /* MessagesAdapterDelegate.swift */; };
 		56BBC9A31ED714DF00CDAF8B /* ConversationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9A11ED714DF00CDAF8B /* ConversationsService.swift */; };
@@ -187,7 +189,7 @@
 		0273C3001E0C445200CF00BA /* RingPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RingPrefixHeader.pch; path = Ring/RingPrefixHeader.pch; sourceTree = "<group>"; };
 		0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateRingAccountViewController.swift; sourceTree = "<group>"; };
-		0273C3071E0C68BF00CF00BA /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		0273C3071E0C68BF00CF00BA /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RingTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		029CE9D61E1D8C860000C8E1 /* ServiceEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEventTests.swift; sourceTree = "<group>"; };
 		02AED8181DD4C4B100F740BA /* librestbed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librestbed.a; path = ../DEPS/x86_64/lib/librestbed.a; sourceTree = "<group>"; };
@@ -201,8 +203,7 @@
 		02DD80C91E1EAF1A009A3510 /* AccountCredentialsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCredentialsModel.swift; sourceTree = "<group>"; };
 		02DD80CC1E1EB2E4009A3510 /* ConfigKeyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigKeyModel.swift; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		043866351D22D06500E06CE2 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
-		043866371D2304A700E06CE2 /* BoolStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolStringExtension.swift; sourceTree = "<group>"; };
+		043866371D2304A700E06CE2 /* String+Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bool.swift"; sourceTree = "<group>"; };
 		043999F31D1C2D9D00E99CD9 /* Ring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04399A021D1C2D9D00E99CD9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -274,6 +275,9 @@
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		1A1E476C1F0E808500EA9A36 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
+		1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bool+String.swift"; sourceTree = "<group>"; };
+		1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ring.swift"; sourceTree = "<group>"; };
+		1A8306321F0EDAA50099D98C /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
 		1ABE07B91F0C16F100D36361 /* ContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		1ABE07BB1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
 		1ABE07D01F0D8FE800D36361 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
@@ -312,15 +316,13 @@
 		56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		56AC64E01E80542300EA1AA9 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		56AC64E21E805F0200EA1AA9 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
-		56AC650D1E85694D00EA1AA9 /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
+		56AC650D1E85694D00EA1AA9 /* DesignableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		56BBC99D1ED714CB00CDAF8B /* MessagesAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesAdapter.h; sourceTree = "<group>"; };
 		56BBC99E1ED714CB00CDAF8B /* MessagesAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MessagesAdapter.mm; sourceTree = "<group>"; };
 		56BBC9A01ED714DF00CDAF8B /* MessagesAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesAdapterDelegate.swift; sourceTree = "<group>"; };
 		56BBC9A11ED714DF00CDAF8B /* ConversationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsService.swift; sourceTree = "<group>"; };
 		56BBC9A51ED7151500CDAF8B /* MessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		56BBC9A71ED7152300CDAF8B /* SmartlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartlistViewController.swift; sourceTree = "<group>"; };
-		56BBC9A91ED7153800CDAF8B /* Global.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Global.strings; path = Base.lproj/Global.strings; sourceTree = "<group>"; };
-		56BBC9AB1ED7154300CDAF8B /* Smartlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Smartlist.strings; path = Base.lproj/Smartlist.strings; sourceTree = "<group>"; };
 		56BBC9AE1ED7155700CDAF8B /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		56BBC9AF1ED7155700CDAF8B /* ConversationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
 		56BBC9B21ED7156500CDAF8B /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 		02E1A0271DDE4C3900D75B59 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				1A8306321F0EDAA50099D98C /* AccountTableViewCell.swift */,
 				02B22DFA1DF755BB000358C9 /* AccountModel.swift */,
 				5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */,
 				02B22DFB1DF755BB000358C9 /* CreateRingAccountViewModel.swift */,
@@ -540,9 +543,8 @@
 		043866341D22D04E00E06CE2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				0273C3071E0C68BF00CF00BA /* RoundedButton.swift */,
-				043866351D22D06500E06CE2 /* AccountTableViewCell.swift */,
-				56AC650D1E85694D00EA1AA9 /* RoundedTextField.swift */,
+				0273C3071E0C68BF00CF00BA /* DesignableButton.swift */,
+				56AC650D1E85694D00EA1AA9 /* DesignableTextField.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -551,7 +553,9 @@
 			isa = PBXGroup;
 			children = (
 				56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */,
-				043866371D2304A700E06CE2 /* BoolStringExtension.swift */,
+				043866371D2304A700E06CE2 /* String+Bool.swift */,
+				1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */,
+				1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -589,7 +593,6 @@
 				56BBC9AD1ED7154800CDAF8B /* Conversations */,
 				56BBC9A41ED7150200CDAF8B /* Messages */,
 				564C44571E8D7F68000F92B1 /* Constants */,
-				56AC64D61E80121200EA1AA9 /* Internationalization */,
 				0273C3021E0C689600CF00BA /* Walkthrough */,
 				02EFCACF1E0C3DD600FD8ED1 /* Bridging */,
 				02E1A0271DDE4C3900D75B59 /* Account */,
@@ -761,15 +764,6 @@
 				564C445A1E8EA44E000F92B1 /* Durations.swift */,
 			);
 			path = Constants;
-			sourceTree = "<group>";
-		};
-		56AC64D61E80121200EA1AA9 /* Internationalization */ = {
-			isa = PBXGroup;
-			children = (
-				56BBC9AB1ED7154300CDAF8B /* Smartlist.strings */,
-				56BBC9A91ED7153800CDAF8B /* Global.strings */,
-			);
-			name = Internationalization;
 			sourceTree = "<group>";
 		};
 		56AC64DD1E804EB500EA1AA9 /* Cells */ = {
@@ -1038,7 +1032,7 @@
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
 				5669A8031EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift in Sources */,
 				0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */,
-				02E1A0251DDE4ABA00D75B59 /* BoolStringExtension.swift in Sources */,
+				02E1A0251DDE4ABA00D75B59 /* String+Bool.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				02DD80C81E1EAD70009A3510 /* AccountConfigModel.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
@@ -1046,6 +1040,7 @@
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
 				56BBC9CF1EDC5E7000CDAF8B /* MessageCell.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
+				1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */,
 				56BBC9D21EDC5E7000CDAF8B /* MessageViewModel.swift in Sources */,
 				02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */,
 				56BBC9E31EDDCC8100CDAF8B /* ConversationSection.swift in Sources */,
@@ -1059,7 +1054,7 @@
 				56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */,
 				1ABE07E21F0D924700D36361 /* Strings.swift in Sources */,
 				56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */,
-				56AC650E1E85694D00EA1AA9 /* RoundedTextField.swift in Sources */,
+				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
 				56BBC9BF1ED7168400CDAF8B /* SmartlistViewModel.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
 				564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */,
@@ -1075,17 +1070,18 @@
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
 				02B22DFD1DF755BB000358C9 /* CreateRingAccountViewModel.swift in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
+				1A8306331F0EDAA50099D98C /* AccountTableViewCell.swift in Sources */,
 				56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */,
+				1A3D28A91F0EBF0200B524EE /* UIView+Ring.swift in Sources */,
 				1ABE07D21F0D8FE800D36361 /* Images.swift in Sources */,
 				56BBC9CD1EDC5E7000CDAF8B /* MessageAccessoryView.swift in Sources */,
 				02DD80CA1E1EAF1A009A3510 /* AccountCredentialsModel.swift in Sources */,
-				0273C3081E0C68BF00CF00BA /* RoundedButton.swift in Sources */,
+				0273C3081E0C68BF00CF00BA /* DesignableButton.swift in Sources */,
 				56BBC9BC1ED7161200CDAF8B /* Date+Helpers.swift in Sources */,
 				562FB6CD1EFAD18A00C61A78 /* ConversationViewController.swift in Sources */,
 				564C44621E943DE6000F92B1 /* NameService.swift in Sources */,
 				56BBC9E01EDDC9E600CDAF8B /* ConversationViewModel.swift in Sources */,
 				1ABE07BA1F0C16F100D36361 /* ContactViewModel.swift in Sources */,
-				043866361D22D06500E06CE2 /* AccountTableViewCell.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
 				02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */,

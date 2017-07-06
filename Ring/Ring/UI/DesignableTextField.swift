@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,26 +20,7 @@
 
 import UIKit
 
-class AccountTableViewCell: UITableViewCell {
-
-    // MARK: - Properties
-    @IBOutlet weak var activeSwitch: UISwitch!
-    @IBOutlet weak var accountNameLabel: UILabel!
-    @IBOutlet weak var accountTypeLabel: UILabel!
-
-    var account: AccountModel!
-
-    // MARK: - UITableViewCell
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
-    // MARK: - Actions
-    @IBAction func switchAccountState(_ sender: UISwitch) {
-//        account.isEnabled = sender.isOn
-    }
+@IBDesignable
+class DesignableTextField: UITextField {
+    // just to make the UIView+Ring extension IBDesignable
 }

@@ -18,21 +18,17 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import Foundation
 
-class RoundedButton: UIButton {
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
-        //Button layout
-        self.layer.borderColor = self.backgroundColor?.cgColor
-        self.layer.borderWidth = 1.0
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 15.0
-        self.contentEdgeInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
-
-        //Text colors
-        self.setTitleColor(UIColor.white, for: .normal)
-        self.setTitleColor(UIColor.gray, for: .disabled)
+extension String {
+    func toBool() -> Bool? {
+        switch self.lowercased() {
+        case "true", "yes", "1":
+            return true
+        case "false", "no", "0":
+            return false
+        default:
+            return nil
+        }
     }
 }

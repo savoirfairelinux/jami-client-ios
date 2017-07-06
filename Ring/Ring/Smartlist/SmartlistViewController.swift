@@ -22,6 +22,7 @@ import UIKit
 import RxSwift
 import RxDataSources
 import RxCocoa
+import Reusable
 
 //Constants
 fileprivate let conversationCellIdentifier = "ConversationCellId"
@@ -70,14 +71,12 @@ class SmartlistViewController: UIViewController {
 
     func setupUI() {
 
-        let title = NSLocalizedString("HomeTabBarTitle", tableName: "Global", comment: "")
-
-        self.title = title
-        self.navigationItem.title = title
+        self.title = L10n.homeTabBarTitle.smartString
+        self.navigationItem.title = L10n.homeTabBarTitle.smartString
 
         self.viewModel.hideNoConversationsMessage
             .bind(to: self.noConversationsView.rx.isHidden)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
@@ -125,16 +124,15 @@ class SmartlistViewController: UIViewController {
                 tableView: UITableView,
                 indexPath: IndexPath,
                 item: ConversationSection.Item) in
-                if let cell = tableView.dequeueReusableCell(withIdentifier: conversationCellIdentifier, for: indexPath) as? ConversationCell {
-                    item.userName.asObservable().bind(to: cell.nameLabel.rx.text).addDisposableTo(self.disposeBag)
-                    cell.newMessagesLabel.text = item.unreadMessages
-                    cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
-                    cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
-                    cell.lastMessagePreviewLabel.text = item.lastMessage
-                    return cell
-                } else {
-                    return tableView.dequeueReusableCell(withIdentifier: conversationCellIdentifier, for: indexPath)
-                }
+
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConversationCell.self)
+
+                item.userName.asObservable().bind(to: cell.nameLabel.rx.text).disposed(by: self.disposeBag)
+                cell.newMessagesLabel.text = item.unreadMessages
+                cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
+                cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
+                cell.lastMessagePreviewLabel.text = item.lastMessage
+                return cell
         }
 
         //Allows to delete
@@ -148,11 +146,11 @@ class SmartlistViewController: UIViewController {
         //Bind TableViews to DataSources
         self.viewModel.conversations
             .bind(to: self.conversationsTableView.rx.items(dataSource: conversationsDataSource))
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         self.viewModel.searchResults
             .bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         //Set header titles
         searchResultsDatasource.titleForHeaderInSection = { dataSource, index in
@@ -173,42 +171,43 @@ class SmartlistViewController: UIViewController {
         //Bind to ViewModel to show or hide the filtered results
         self.viewModel.isSearching.subscribe(onNext: { isSearching in
             self.searchResultsTableView.isHidden = !isSearching
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         //Show the Messages screens and pass the viewModel for Conversations
         self.conversationsTableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
             self.selectedItem = item
             self.performSegue(withIdentifier: showMessages, sender: nil)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         //Show the Messages screens and pass the viewModel for Search Results
         self.searchResultsTableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { item in
             self.selectedItem = item
             self.performSegue(withIdentifier: showMessages, sender: nil)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         //Deselect the rows
         self.conversationsTableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.conversationsTableView.deselectRow(at: indexPath, animated: true)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         self.searchResultsTableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.searchResultsTableView.deselectRow(at: indexPath, animated: true)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         //Bind the search status label
         self.viewModel.searchStatus
             .observeOn(MainScheduler.instance)
             .bind(to: self.searchTableViewLabel.rx.text)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
-        self.searchResultsTableView.rx.setDelegate(self).addDisposableTo(disposeBag)
+        self.searchResultsTableView.rx.setDelegate(self).disposed(by: disposeBag)
 
         //Swipe to delete action
-        self.conversationsTableView.rx.itemDeleted.subscribe(onNext:{ [unowned self] indexPath in
-            let convToDelete :ConversationViewModel = try! self.conversationsTableView.rx.model(at: indexPath)
-            self.viewModel.delete(conversationViewModel: convToDelete)
-        }).addDisposableTo(disposeBag)
+        self.conversationsTableView.rx.itemDeleted.subscribe(onNext: { [unowned self] indexPath in
+            if let convToDelete: ConversationViewModel = try? self.conversationsTableView.rx.model(at: indexPath) {
+                self.viewModel.delete(conversationViewModel: convToDelete)
+            }
+        }).disposed(by: disposeBag)
     }
 
     func setupSearchBar() {
@@ -219,27 +218,27 @@ class SmartlistViewController: UIViewController {
         self.searchBar.rx.text.orEmpty
             .debounce(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
             .bind(to: self.viewModel.searchBarText)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         //Show Cancel button
         self.searchBar.rx.textDidBeginEditing.subscribe(onNext: { [unowned self] in
             self.searchBar.setShowsCancelButton(true, animated: true)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         //Hide Cancel button
         self.searchBar.rx.textDidEndEditing.subscribe(onNext: { [unowned self] in
             self.searchBar.setShowsCancelButton(false, animated: true)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         //Cancel button event
         self.searchBar.rx.cancelButtonClicked.subscribe(onNext: { [unowned self] in
             self.cancelSearch()
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         //Search button event
         self.searchBar.rx.searchButtonClicked.subscribe(onNext: { [unowned self] in
             self.searchBar.resignFirstResponder()
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
 
     func cancelSearch() {

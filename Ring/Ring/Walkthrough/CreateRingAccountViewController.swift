@@ -42,7 +42,7 @@ class CreateRingAccountViewController: UITableViewController {
     var mAccountViewModel = CreateRingAccountViewModel(withAccountService: AppDelegate.accountService,
                                                        nameService: AppDelegate.nameService)
 
-    @IBOutlet weak var mCreateAccountButton: RoundedButton!
+    @IBOutlet weak var mCreateAccountButton: DesignableButton!
     @IBOutlet weak var mCreateAccountTitleLabel: UILabel!
 
     /**
@@ -91,7 +91,7 @@ class CreateRingAccountViewController: UITableViewController {
             .subscribe(onNext: {
                 self.mAccountViewModel.createAccount()
             })
-            .addDisposableTo(self.mDisposeBag)
+            .disposed(by: self.mDisposeBag)
 
         //Add Account Registration state
         self.mAccountViewModel.accountCreationState.observeOn(MainScheduler.instance).subscribe(
@@ -112,18 +112,18 @@ class CreateRingAccountViewController: UITableViewController {
                     self.showErrorAlert(error)
                 }
                 self.setCreateAccountAsIdle()
-        }).addDisposableTo(mDisposeBag)
+        }).disposed(by: mDisposeBag)
 
         //Show or hide user name field
         self.mAccountViewModel.registerUsername.asObservable()
             .subscribe(onNext: { [weak self] showUsernameField in
                 self?.toggleRegisterSwitch(showUsernameField)
-            }).addDisposableTo(mDisposeBag)
+            }).disposed(by: mDisposeBag)
 
         //Enables create account button
         self.mAccountViewModel.canCreateAccount
             .bind(to: self.mCreateAccountButton.rx.isEnabled)
-            .addDisposableTo(mDisposeBag)
+            .disposed(by: mDisposeBag)
     }
 
     /**
@@ -133,22 +133,14 @@ class CreateRingAccountViewController: UITableViewController {
     fileprivate func setupUI() {
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
-
-        self.mCreateAccountTitleLabel.text = NSLocalizedString("CreateAccountFormTitle",
-                                                               tableName: LocalizedStringTableNames.walkthrough,
-                                                               comment: "")
+        self.mCreateAccountTitleLabel.text = L10n.createAccountFormTitle.smartString
     }
 
     fileprivate func setCreateAccountAsLoading() {
         log.debug("Creating account...")
         self.mCreateAccountButton.setTitle("Loading...", for: .normal)
         self.mCreateAccountButton.isUserInteractionEnabled = false
-
-        let title = NSLocalizedString("WaitCreateAccountTitle",
-                                      tableName:LocalizedStringTableNames.walkthrough,
-                                      comment: "")
-
-        HUD.show(.labeledProgress(title: title, subtitle: nil))
+        HUD.show(.labeledProgress(title: L10n.waitCreateAccountTitle.smartString, subtitle: nil))
     }
 
     fileprivate func setCreateAccountAsIdle() {
@@ -158,11 +150,7 @@ class CreateRingAccountViewController: UITableViewController {
     }
 
     fileprivate func showDeviceAddedAlert() {
-        let title = NSLocalizedString("AccountAddedTitle",
-                                      tableName: LocalizedStringTableNames.walkthrough,
-                                      comment: "")
-
-        HUD.flash(.labeledSuccess(title: title, subtitle: nil), delay: alertFlashDuration)
+        HUD.flash(.labeledSuccess(title: L10n.accountAddedTitle.smartString, subtitle: nil), delay: alertFlashDuration)
     }
 
     fileprivate func showErrorAlert(_ error: AccountCreationError) {
@@ -212,115 +200,71 @@ class CreateRingAccountViewController: UITableViewController {
         let currentCellType = mCells[indexPath.row]
 
         if currentCellType == .registerPublicUsername {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: mSwitchCellId,
-                                                        for: indexPath) as? SwitchCell {
-                cell.titleLabel.text = NSLocalizedString("RegisterPublicUsername",
-                                                         tableName: LocalizedStringTableNames.walkthrough,
-                                                         comment: "")
-                cell.titleLabel.textColor = .white
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SwitchCell.self)
 
-                _ = cell.registerSwitch.rx.value.bind(to: self.mAccountViewModel.registerUsername)
-                    .addDisposableTo(mDisposeBag)
-
-                return cell
-            } else {
-                return tableView.dequeueReusableCell(withIdentifier: mSwitchCellId, for: indexPath)
-            }
-
+            cell.titleLabel.text = L10n.registerPublicUsername.smartString
+            cell.titleLabel.textColor = .white
+            cell.registerSwitch.rx.value.bind(to: self.mAccountViewModel.registerUsername).disposed(by: mDisposeBag)
+            return cell
         } else if currentCellType == .usernameField {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: mTextFieldCellId,
-                                                        for: indexPath) as? TextFieldCell {
-                cell.textField.isSecureTextEntry = false
-                cell.textField.placeholder = NSLocalizedString("EnterNewUsernamePlaceholder",
-                                                               tableName: LocalizedStringTableNames.walkthrough,
-                                                               comment: "")
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TextFieldCell.self)
 
-                //Binds the username field value to the ViewModel
-                _ = cell.textField.rx.text.orEmpty
-                    .throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
-                    .distinctUntilChanged()
-                    .bind(to: self.mAccountViewModel.username)
-                    .addDisposableTo(mDisposeBag)
+            cell.textField.isSecureTextEntry = false
+            cell.textField.placeholder = L10n.enterNewUsernamePlaceholder.smartString
 
-                //Switch to new password cell when return button is touched
-                _ = cell.textField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
-                    self.switchToCell(withType: .newPasswordField)
-                }).addDisposableTo(mDisposeBag)
+            //Binds the username field value to the ViewModel
+            cell.textField.rx.text.orEmpty
+                .throttle(textFieldThrottlingDuration, scheduler: MainScheduler.instance)
+                .distinctUntilChanged()
+                .bind(to: self.mAccountViewModel.username)
+                .disposed(by: mDisposeBag)
 
-                _ = self.mAccountViewModel.usernameValidationMessage
-                    .bind(to: cell.errorMessageLabel.rx.text)
-                    .addDisposableTo(mDisposeBag)
+            //Switch to new password cell when return button is touched
+            cell.textField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
+                self.switchToCell(withType: .newPasswordField)
+            }).disposed(by: mDisposeBag)
 
-                return cell
-            } else {
-                return tableView.dequeueReusableCell(withIdentifier: mTextFieldCellId, for: indexPath)
-            }
-
+            self.mAccountViewModel.usernameValidationMessage.bind(to: cell.errorMessageLabel.rx.text).disposed(by: mDisposeBag)
+            return cell
         } else if currentCellType == .passwordNotice {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: mTextCellId, for: indexPath) as? TextCell {
-                cell.label.text = NSLocalizedString("ChooseStrongPassword",
-                                                    tableName: LocalizedStringTableNames.walkthrough,
-                                                    comment: "")
-                return cell
-            } else {
-                return tableView.dequeueReusableCell(withIdentifier: mTextCellId, for: indexPath)
-            }
-
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TextCell.self)
+            cell.label.text = L10n.chooseStrongPassword.smartString
+            return cell
         } else if currentCellType == .newPasswordField {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: mTextFieldCellId,
-                                                        for: indexPath) as? TextFieldCell {
-                cell.textField.isSecureTextEntry = true
-                cell.textField.placeholder = NSLocalizedString("NewPasswordPlaceholder",
-                                                               tableName: LocalizedStringTableNames.walkthrough,
-                                                               comment: "")
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TextFieldCell.self)
 
-                cell.errorMessageLabel.text = NSLocalizedString("PasswordCharactersNumberError",
-                                                                tableName: LocalizedStringTableNames.walkthrough,
-                                                                comment: "")
+            cell.textField.isSecureTextEntry = true
+            cell.textField.placeholder = L10n.newPasswordPlaceholder.smartString
+            cell.errorMessageLabel.text = L10n.passwordCharactersNumberError.smartString
 
-                //Binds the password field value to the ViewModel
-                _ = cell.textField.rx.text.orEmpty.bind(to: self.mAccountViewModel.password)
-                    .addDisposableTo(mDisposeBag)
+            //Binds the password field value to the ViewModel
+            cell.textField.rx.text.orEmpty.bind(to: self.mAccountViewModel.password).disposed(by: mDisposeBag)
 
-                //Binds the observer to show the error label if the field is not empty
-                _ = self.mAccountViewModel.hidePasswordError.bind(to: cell.errorMessageLabel.rx.isHidden)
-                    .addDisposableTo(mDisposeBag)
+            //Binds the observer to show the error label if the field is not empty
+            self.mAccountViewModel.hidePasswordError.bind(to: cell.errorMessageLabel.rx.isHidden).disposed(by: mDisposeBag)
 
-                //Switch to the repeat pasword cell when return button is touched
-                _ = cell.textField.rx.controlEvent(.editingDidEndOnExit)
-                    .subscribe(onNext: {
-                        self.switchToCell(withType: .repeatPasswordField)
-                    }).addDisposableTo(mDisposeBag)
+            //Switch to the repeat pasword cell when return button is touched
+            cell.textField.rx.controlEvent(.editingDidEndOnExit)
+                .subscribe(onNext: {
+                    self.switchToCell(withType: .repeatPasswordField)
+                }).disposed(by: mDisposeBag)
 
-                return cell
-            } else {
-                return tableView.dequeueReusableCell(withIdentifier: mTextFieldCellId, for: indexPath)
-            }
-
+            return cell
         } else {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: mTextFieldCellId,
-                                                        for: indexPath) as? TextFieldCell {
-                cell.textField.isSecureTextEntry = true
-                cell.textField.placeholder = NSLocalizedString("RepeatPasswordPlaceholder",
-                                                               tableName: LocalizedStringTableNames.walkthrough,
-                                                               comment: "")
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TextFieldCell.self)
 
-                cell.errorMessageLabel.text = NSLocalizedString("PasswordNotMatchingError",
-                                                                tableName: LocalizedStringTableNames.walkthrough,
-                                                                comment: "")
+            cell.textField.isSecureTextEntry = true
+            cell.textField.placeholder = L10n.repeatPasswordPlaceholder.smartString
+            cell.errorMessageLabel.text = L10n.passwordNotMatchingError.smartString
 
-                //Binds the repeat password field value to the ViewModel
-                _ = cell.textField.rx.text.orEmpty.bind(to: self.mAccountViewModel.repeatPassword)
-                    .addDisposableTo(mDisposeBag)
+            //Binds the repeat password field value to the ViewModel
+            cell.textField.rx.text.orEmpty.bind(to: self.mAccountViewModel.repeatPassword).disposed(by: mDisposeBag)
 
-                //Binds the observer to the text field 'hidden' property
-                _ = self.mAccountViewModel.hideRepeatPasswordError.bind(to: cell.errorMessageLabel.rx.isHidden)
-                    .addDisposableTo(mDisposeBag)
+            //Binds the observer to the text field 'hidden' property
+            self.mAccountViewModel.hideRepeatPasswordError.bind(to: cell.errorMessageLabel.rx.isHidden).disposed(by: mDisposeBag)
 
-                return cell
-            } else {
-                return tableView.dequeueReusableCell(withIdentifier: mTextFieldCellId, for: indexPath)
-            }
+            return cell
+
         }
     }
 

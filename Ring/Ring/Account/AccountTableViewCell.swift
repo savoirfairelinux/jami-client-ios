@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,19 +19,19 @@
  */
 
 import UIKit
+import Reusable
 
-class RoundedTextField: UITextField {
+class AccountTableViewCell: UITableViewCell, NibReusable {
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.borderWidth = 1.0
-        self.clipsToBounds = true
+    // MARK: - Properties
+    @IBOutlet weak var activeSwitch: UISwitch!
+    @IBOutlet weak var accountNameLabel: UILabel!
+    @IBOutlet weak var accountTypeLabel: UILabel!
+
+    var account: AccountModel!
+
+    // MARK: - Actions
+    @IBAction func switchAccountState(_ sender: UISwitch) {
+//        account.isEnabled = sender.isOn
     }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.layer.cornerRadius = self.frame.size.height / 2.0
-    }
-
 }

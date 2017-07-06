@@ -20,8 +20,9 @@
 
 import UIKit
 import RxSwift
+import Reusable
 
-class ConversationCell: UITableViewCell {
+class ConversationCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
