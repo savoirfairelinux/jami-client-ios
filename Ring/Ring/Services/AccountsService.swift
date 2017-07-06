@@ -119,7 +119,7 @@ class AccountsService: AccountAdapterDelegate {
     init(withAccountAdapter accountAdapter: AccountAdapter) {
         self.accountList = []
 
-        self.responseStream.addDisposableTo(disposeBag)
+        self.responseStream.disposed(by: disposeBag)
 
         //~ Create a shared stream based on the responseStream one.
         self.sharedResponseStream = responseStream.share()

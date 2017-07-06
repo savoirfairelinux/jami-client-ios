@@ -19,8 +19,9 @@
  */
 
 import UIKit
+import Reusable
 
-class TextCell: UITableViewCell {
+class TextCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var label: UILabel!
 

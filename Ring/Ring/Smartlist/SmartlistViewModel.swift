@@ -87,13 +87,11 @@ class SmartlistViewModel {
             var sections = [ConversationSection]()
 
             if contactFoundConversation != nil {
-                let headerTitle = NSLocalizedString("UserFound", tableName: "Smartlist", comment: "")
-                sections.append(ConversationSection(header: headerTitle, items: [contactFoundConversation!]))
+                sections.append(ConversationSection(header: L10n.userFound.smartString, items: [contactFoundConversation!]))
             }
 
             if !filteredResults.isEmpty {
-                let headerTitle = NSLocalizedString("Conversations", tableName: "Smartlist", comment: "")
-                sections.append(ConversationSection(header: headerTitle, items: filteredResults))
+                sections.append(ConversationSection(header: L10n.conversations.smartString, items: filteredResults))
             }
 
             return sections
@@ -112,7 +110,7 @@ class SmartlistViewModel {
         //Observes search bar text
         searchBarText.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] text in
             self.search(withText: text)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         //Observe username lookup
         self.nameService.usernameLookupStatus.observeOn(MainScheduler.instance).subscribe(onNext: { usernameLookupStatus in
@@ -136,13 +134,12 @@ class SmartlistViewModel {
                 self.searchStatus.onNext("")
             } else {
                 if self.filteredResults.value.isEmpty {
-                    let searchStatusText = NSLocalizedString("NoResults", tableName: "Smartlist", comment: "")
-                    self.searchStatus.onNext(searchStatusText)
+                    self.searchStatus.onNext(L10n.noResults.smartString)
                 } else {
                     self.searchStatus.onNext("")
                 }
             }
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
 
     fileprivate func search(withText text: String) {
@@ -167,8 +164,7 @@ class SmartlistViewModel {
             }
 
             self.nameService.lookupName(withAccount: "", nameserver: "", name: text)
-            let searchStatusText = NSLocalizedString("Searching", tableName: "Smartlist", comment: "")
-            self.searchStatus.onNext(searchStatusText)
+            self.searchStatus.onNext(L10n.searching.smartString)
         }
     }
 
@@ -180,7 +176,7 @@ class SmartlistViewModel {
             self.conversationsService
                 .addConversation(conversation: selectedItem.conversation)
                 .subscribe()
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
         }
     }
 

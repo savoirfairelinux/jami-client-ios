@@ -24,8 +24,8 @@ class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var linkDeviceButton: RoundedButton!
-    @IBOutlet weak var createAccountButton: RoundedButton!
+    @IBOutlet weak var linkDeviceButton: DesignableButton!
+    @IBOutlet weak var createAccountButton: DesignableButton!
 
     let createProfileSegueIdentifier = "CreateProfileSegue"
     let linkDeviceToAccountSegueIdentifier = "LinkDeviceToAccountSegue"
@@ -74,17 +74,9 @@ class WelcomeViewController: UIViewController {
 
     func setupUI() {
 
-        self.welcomeLabel.text = NSLocalizedString("WelcomeTitle",
-                                                   tableName: LocalizedStringTableNames.walkthrough,
-                                                   comment: "")
-        self.descriptionLabel.text = NSLocalizedString("WelcomeText",
-                                                       tableName: LocalizedStringTableNames.walkthrough,
-                                                       comment: "")
-        self.linkDeviceButton.setTitle(NSLocalizedString("LinkDeviceButton",
-                                                         tableName: LocalizedStringTableNames.walkthrough,
-                                                         comment: ""), for: .normal)
-        self.createAccountButton.setTitle(NSLocalizedString("CreateAccount",
-                                                            tableName: LocalizedStringTableNames.walkthrough,
-                                                            comment: ""), for: .normal)
+        self.welcomeLabel.text = L10n.welcomeTitle.smartString
+        self.descriptionLabel.text = L10n.welcomeText.smartString
+        self.linkDeviceButton.setTitle(L10n.linkDeviceButton.smartString, for: .normal)
+        self.createAccountButton.setTitle(L10n.createAccount.smartString, for: .normal)
     }
 }

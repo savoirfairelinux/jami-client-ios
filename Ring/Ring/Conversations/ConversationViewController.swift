@@ -71,7 +71,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
     }
 
     func setupUI() {
-        self.viewModel?.userName.asObservable().bind(to: self.navigationItem.rx.title).addDisposableTo(disposeBag)
+        self.viewModel?.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
 
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
@@ -97,22 +97,21 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
         self.tableView.separatorStyle = .none
 
         //Register cell
-        self.tableView.register(UINib.init(nibName: "MessageCell", bundle: nil),
-                                forCellReuseIdentifier: "MessageCellId")
+        self.tableView.register(cellType: MessageCell.self)
 
         //Bind the TableView to the ViewModel
         self.viewModel?.messages
-            .bind(to: tableView.rx.items(cellIdentifier: "MessageCellId",
+            .bind(to: tableView.rx.items(cellIdentifier: "MessageCell",
                                          cellType: MessageCell.self)) { _, messageViewModel, cell in
                 cell.messageLabel.text = messageViewModel.content
                 cell.bubblePosition = messageViewModel.bubblePosition()
-        }.addDisposableTo(disposeBag)
+        }.disposed(by: disposeBag)
 
         //Scroll to bottom when reloaded
         self.tableView.rx.methodInvoked(#selector(UITableView.reloadData)).subscribe(onNext: { _ in
             self.scrollToBottomIfNeed()
             self.updateBottomOffset()
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
 
     fileprivate func updateBottomOffset() {
@@ -153,7 +152,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
     }
 
     lazy var messageAccessoryView: MessageAccessoryView = {
-        return MessageAccessoryView.instanceFromNib()
+        return MessageAccessoryView.loadFromNib()
     }()
 
     func setupBindings() {
@@ -162,7 +161,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
         self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { _ in
             self.viewModel?.sendMessage(withContent: self.messageAccessoryView.messageTextField.text!)
             self.messageAccessoryView.messageTextField.text = ""
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched

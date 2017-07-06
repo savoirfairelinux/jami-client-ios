@@ -39,7 +39,7 @@ class ContactHelper {
                 } else {
                     userName.value = lookupNameResponse.address
                 }
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
         nameService.lookupAddress(withAccount: "", nameserver: "", address: ringId)
 

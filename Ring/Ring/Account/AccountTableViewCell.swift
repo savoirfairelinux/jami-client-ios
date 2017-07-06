@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,20 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
+import UIKit
+import Reusable
 
-struct LocalizedStringTableNames {
-    static let walkthrough = "Walkthrough"
+class AccountTableViewCell: UITableViewCell, NibReusable {
+
+    // MARK: - Properties
+    @IBOutlet weak var activeSwitch: UISwitch!
+    @IBOutlet weak var accountNameLabel: UILabel!
+    @IBOutlet weak var accountTypeLabel: UILabel!
+
+    var account: AccountModel!
+
+    // MARK: - Actions
+    @IBAction func switchAccountState(_ sender: UISwitch) {
+//        account.isEnabled = sender.isOn
+    }
 }

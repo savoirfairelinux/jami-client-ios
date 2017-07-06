@@ -20,18 +20,7 @@
 
 import UIKit
 
-class RoundedTextField: UITextField {
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.borderWidth = 1.0
-        self.clipsToBounds = true
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.layer.cornerRadius = self.frame.size.height / 2.0
-    }
-
+@IBDesignable
+class DesignableTextField: UITextField {
+    // just to make the UIView+Ring extension IBDesignable
 }

@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,9 +20,7 @@
 
 import UIKit
 
-class Colors {
-    static let ringMainColor = UIColor(colorLiteralRed: 10.0/255.0,
-                                       green: 116.0/255.0,
-                                       blue: 137.0/255.0,
-                                       alpha: 1.0)
+@IBDesignable
+class DesignableButton: UIButton {
+    // just to make the UIView+Ring extension IBDesignable
 }

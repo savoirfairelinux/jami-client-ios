@@ -19,8 +19,9 @@
  */
 
 import UIKit
+import Reusable
 
-class TextFieldCell: UITableViewCell {
+class TextFieldCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!

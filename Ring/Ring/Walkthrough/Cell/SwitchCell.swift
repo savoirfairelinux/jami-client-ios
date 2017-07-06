@@ -19,8 +19,9 @@
  */
 
 import UIKit
+import Reusable
 
-class SwitchCell: UITableViewCell {
+class SwitchCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var registerSwitch: UISwitch!

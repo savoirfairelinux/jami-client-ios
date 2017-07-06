@@ -18,28 +18,17 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import Foundation
 
-class AccountTableViewCell: UITableViewCell {
-
-    // MARK: - Properties
-    @IBOutlet weak var activeSwitch: UISwitch!
-    @IBOutlet weak var accountNameLabel: UILabel!
-    @IBOutlet weak var accountTypeLabel: UILabel!
-
-    var account: AccountModel!
-
-    // MARK: - UITableViewCell
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
-    // MARK: - Actions
-    @IBAction func switchAccountState(_ sender: UISwitch) {
-//        account.isEnabled = sender.isOn
+extension String {
+    func toBool() -> Bool? {
+        switch self.lowercased() {
+        case "true", "yes", "1":
+            return true
+        case "false", "no", "0":
+            return false
+        default:
+            return nil
+        }
     }
 }

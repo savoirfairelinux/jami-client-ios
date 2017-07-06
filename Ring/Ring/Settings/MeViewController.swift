@@ -33,11 +33,11 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
 
         if !accountService.accounts.isEmpty {
-//            let acc = accountService.accounts[0]
-//            nameLabel.text = acc.displayName
-//            if let username = acc.username {
-//                createQRFromString(username);
-//            }
+            //            let acc = accountService.accounts[0]
+            //            nameLabel.text = acc.displayName
+            //            if let username = acc.username {
+            //                createQRFromString(username);
+            //            }
         }
     }
 
@@ -74,17 +74,15 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.row < accountService.accounts.count {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "accountTableCell", for: indexPath) as? AccountTableViewCell {
-                let account = accountService.accounts[indexPath.row]
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: AccountTableViewCell.self)
+            let account = accountService.accounts[indexPath.row]
 
-                cell.account = account
-                //            cell.accountNameLabel.text = account.alias
-                //            cell.activeSwitch.setOn(account.isEnabled, animated: false)
-                //            cell.accountTypeLabel.text = account.accountType.rawValue
-                return cell
-            } else {
-                return tableView.dequeueReusableCell(withIdentifier: "accountTableCell", for: indexPath)
-            }
+            cell.account = account
+            //            cell.accountNameLabel.text = account.alias
+            //            cell.activeSwitch.setOn(account.isEnabled, animated: false)
+            //            cell.accountTypeLabel.text = account.accountType.rawValue
+            return cell
+
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "addAccountTableCell", for: indexPath)
             return cell
@@ -127,5 +125,4 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             vc.account = cell.account
         }
     }
-
 }

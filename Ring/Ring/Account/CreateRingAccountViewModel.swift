@@ -140,17 +140,11 @@ class CreateRingAccountViewModel {
             .asObservable().map ({ status in
                 switch status {
                 case .lookingUp:
-                    return NSLocalizedString("LookingForUsernameAvailability",
-                                             tableName: LocalizedStringTableNames.walkthrough,
-                                             comment: "")
+                    return L10n.lookingForUsernameAvailability.smartString
                 case .invalid:
-                    return NSLocalizedString("InvalidUsername",
-                                             tableName: LocalizedStringTableNames.walkthrough,
-                                             comment: "")
+                    return L10n.invalidUsername.smartString
                 case .alreadyTaken:
-                    return NSLocalizedString("UsernameAlreadyTaken",
-                                             tableName: LocalizedStringTableNames.walkthrough,
-                                             comment: "")
+                    return L10n.usernameAlreadyTaken.smartString
                 default:
                     return ""
                 }
@@ -181,7 +175,7 @@ class CreateRingAccountViewModel {
         //Loookup name request observer
         self.username.asObservable().subscribe(onNext: { [unowned self] username in
             self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         //Name registration observer
         self.accountService
@@ -200,7 +194,7 @@ class CreateRingAccountViewModel {
                                                   name: self.username.value)
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         //Account creation state observer
         self.accountService
@@ -215,7 +209,7 @@ class CreateRingAccountViewModel {
                 }
             }, onError: { _ in
                 self.accountCreationState.onError(AccountCreationError.unknown)
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
     }
 }
 
@@ -238,34 +232,22 @@ extension AccountCreationError: LocalizedError {
     var title: String {
         switch self {
         case .generic:
-            return NSLocalizedString("AccountCannotBeFoundTitle",
-                                     tableName: LocalizedStringTableNames.walkthrough,
-                                     comment: "")
+            return L10n.accountCannotBeFoundTitle.smartString
         case .network:
-            return NSLocalizedString("AccountNoNetworkTitle",
-                                     tableName: LocalizedStringTableNames.walkthrough,
-                                     comment: "")
+            return L10n.accountNoNetworkTitle.smartString
         default:
-            return NSLocalizedString("AccountDefaultErrorTitle",
-                                     tableName: LocalizedStringTableNames.walkthrough,
-                                     comment: "")
+            return L10n.accountDefaultErrorTitle.smartString
         }
     }
 
     var message: String {
         switch self {
         case .generic:
-            return NSLocalizedString("AcountCannotBeFoundMessage",
-                                     tableName: LocalizedStringTableNames.walkthrough,
-                                     comment: "")
+            return L10n.accountDefaultErrorMessage.smartString
         case .network:
-            return NSLocalizedString("AccountNoNetworkMessage",
-                                     tableName: LocalizedStringTableNames.walkthrough,
-                                     comment: "")
+            return L10n.accountNoNetworkMessage.smartString
         default:
-            return NSLocalizedString("AccountDefaultErrorMessage",
-                                     tableName: LocalizedStringTableNames.walkthrough,
-                                     comment: "")
+            return L10n.accountDefaultErrorMessage.smartString
         }
     }
 }
