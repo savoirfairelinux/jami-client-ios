@@ -21,6 +21,7 @@
 
 import UIKit
 import RealmSwift
+import Contacts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,10 +31,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let accountService = AccountsService(withAccountAdapter: AccountAdapter())
     static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     static let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
+    let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
+
+//        let contact = ContactModel(withRingId: "31c422cca4db649bedb9896bc39ab8c05f3f4a11")
+//        let vCard = CNMutableContact()
+//        vCard.setValue("Gainsbourg", forKey: CNContactFamilyNameKey)
+//        vCard.setValue("Serge", forKey: CNContactGivenNameKey)
+//        let image = UIImage(named: "logo-ring-beta2-blanc")
+//        let imageData = UIImagePNGRepresentation(image!)
+//        vCard.setValue(imageData, forKey: CNContactImageDataKey)
+//        contactsService.sendTrustRequest(toContact: contact , vCard: vCard, withAccount: AppDelegate.accountService.currentAccount!)
+
         return true
     }
 

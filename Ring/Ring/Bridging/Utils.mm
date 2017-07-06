@@ -69,4 +69,27 @@
     return [NSArray arrayWithArray:array];
 }
 
++ (NSData*)dataFromVectorOfUInt8:(std::vector<uint8_t>)vectorOfUInt8 {
+
+    NSMutableData* data = [[NSMutableData alloc] init];
+
+    std::for_each(vectorOfUInt8.begin(), vectorOfUInt8.end(), ^(uint8_t byte) {
+        [data appendBytes:&byte length:1];
+    });
+
+    return data;
+}
+
++ (std::vector<uint8_t>)vectorOfUInt8FromData:(NSData*)data {
+
+    std::vector<uint8_t> vector;
+    char *bytes = (char*)data.bytes;
+
+    for ( int i = 0; i < data.length; i++ ) {
+        vector.push_back(bytes[i]);
+    }
+
+    return vector;
+}
+
 @end
