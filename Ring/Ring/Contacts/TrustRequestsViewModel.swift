@@ -18,17 +18,23 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
+import UIKit
 
-class ConversationModel: Object {
+class TrustRequestsViewModel {
 
-    let messages = List<MessageModel>()
-    dynamic var recipientRingId: String = ""
-    dynamic var accountId: String = ""
+    let contactsService: ContactsService
+    let accountsService: AccountsService
 
-    convenience init(withRecipientRingId recipientRingId: String, accountId: String) {
-        self.init()
-        self.recipientRingId = recipientRingId
-        self.accountId = accountId
+    init(withContactsService contactsService: ContactsService, accountsService: AccountsService) {
+        self.contactsService = contactsService
+        self.accountsService = accountsService
+    }
+
+    func userName(at indexPath: IndexPath) {
+
+    }
+
+    func status(at indexPath: IndexPath) {
+
     }
 }

@@ -24,6 +24,8 @@ import RealmSwift
 import SwiftyBeaver
 import RxSwift
 
+import Contacts
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -32,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let accountService = AccountsService(withAccountAdapter: AccountAdapter())
     static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     static let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
+    static let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
+
     private let log = SwiftyBeaver.self
 
     fileprivate let disposeBag = DisposeBag()
@@ -48,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
         self.loadAccounts()
+
         return true
     }
 
@@ -72,7 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         do {
             try AppDelegate.daemonService.startDaemon()
-
         } catch StartDaemonError.initializationFailure {
             log.error("Daemon failed to initialize.")
         } catch StartDaemonError.startFailure {
@@ -98,6 +102,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.accountService.loadAccounts()
             .subscribe(onSuccess: { (accountList: [AccountModel]) in
                 self.checkAccount(accountList: accountList)
+
+                AppDelegate.contactsService
+                    .setCurrentAccount(currentAccount: AppDelegate.accountService.currentAccount!)
+
+                AppDelegate.contactsService
+                    .setAccounts(accounts: AppDelegate.accountService.accounts)
+
             }, onError: { _ in
                 self.presentWalkthrough()
             }).disposed(by: disposeBag)

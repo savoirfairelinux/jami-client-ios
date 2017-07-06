@@ -67,7 +67,7 @@ class AccountsService: AccountAdapterDelegate {
      Accounts list public interface.
      Can be used to access by constant the list of accounts.
      */
-    fileprivate(set) var accounts: [AccountModel] {
+    var accounts: [AccountModel] {
         set {
             accountList = newValue
         }
@@ -94,7 +94,7 @@ class AccountsService: AccountAdapterDelegate {
      - Parameter account: the account to set as current.
      */
 
-    fileprivate(set) var currentAccount: AccountModel? {
+    var currentAccount: AccountModel? {
         get {
             return self.accountList.first
         }
@@ -157,12 +157,12 @@ class AccountsService: AccountAdapterDelegate {
         for account in accountList {
             account.details = self.getAccountDetails(fromAccountId: account.id)
             account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: account.id)
-            account.devices.append(objectsIn: getKnownRingDevices(fromAccountId: account.id))
+            account.devices.append(contentsOf: getKnownRingDevices(fromAccountId: account.id))
 
             do {
                 let credentialDetails = try self.getAccountCredentials(fromAccountId: account.id)
                 account.credentialDetails.removeAll()
-                account.credentialDetails.append(objectsIn: credentialDetails)
+                account.credentialDetails.append(contentsOf: credentialDetails)
             } catch {
                 log.error("\(error)")
             }
@@ -276,12 +276,12 @@ class AccountsService: AccountAdapterDelegate {
 
      - Returns: the list of credentials.
      */
-    func getAccountCredentials(fromAccountId id: String) throws -> List<AccountCredentialsModel> {
+    func getAccountCredentials(fromAccountId id: String) throws -> [AccountCredentialsModel] {
         let creds: NSArray = accountAdapter.getCredentials(id) as NSArray
         let rawCredentials = creds as NSArray? as? [[String: String]] ?? nil
 
         if let rawCredentials = rawCredentials {
-            let credentialsList = List<AccountCredentialsModel>()
+            var credentialsList = [AccountCredentialsModel]()
             for rawCredentials in rawCredentials {
                 do {
                     let credentials = try AccountCredentialsModel(withRawaData: rawCredentials)
