@@ -18,17 +18,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
-
-class ConversationModel :Object {
-
-    let messages = List<MessageModel>()
-    dynamic var recipientRingId: String = ""
-    dynamic var accountId: String = ""
-
-    convenience init(withRecipientRingId recipientRingId: String, accountId: String) {
-        self.init()
-        self.recipientRingId = recipientRingId
-        self.accountId = accountId
-    }
+@objc protocol ContactsAdapterDelegate {
+    func incomingTrustRequestReceived(from senderAccount: String, to accountId: String,
+                                      withPayload payload: Data, receivedDate: Date)
+    func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool)
+    func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool)
 }

@@ -24,6 +24,8 @@ import RxSwift
 
 class ContactHelper {
 
+    fileprivate static let ringIdPrefix = "ring:"
+
     static func lookupUserName(forRingId ringId: String, nameService: NameService, disposeBag: DisposeBag) -> Variable<String> {
 
         let userName = Variable("")
@@ -46,4 +48,16 @@ class ContactHelper {
         return userName
     }
 
+    static func ringId(fromURI uri: String) -> String? {
+        if uri.contains(ContactHelper.ringIdPrefix) {
+            let index = uri.range(of: ContactHelper.ringIdPrefix)?.upperBound
+            return uri.substring(from: index!)
+        } else {
+            return nil
+        }
+    }
+
+    static func uri(fromRingId ringId: String) -> String {
+        return ContactHelper.ringIdPrefix.appending(ringId)
+    }
 }

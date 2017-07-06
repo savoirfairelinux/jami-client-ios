@@ -22,6 +22,9 @@
  A structure exposing the fields and methods for an Account
  */
 struct AccountModelHelper {
+
+    fileprivate static let ringIdPrefix = "ring:"
+
     fileprivate var account: AccountModel
 
     /**
@@ -126,12 +129,15 @@ struct AccountModelHelper {
         let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.AccountUsername)
         let accountUsername = self.account.details?.get(withConfigKeyModel: accountUsernameKey)
 
-        let ringIdPrefix = "ring:"
-        if accountUsername!.contains(ringIdPrefix) {
-            let index = accountUsername?.range(of: ringIdPrefix)?.upperBound
+        if accountUsername!.contains(AccountModelHelper.ringIdPrefix) {
+            let index = accountUsername?.range(of: AccountModelHelper.ringIdPrefix)?.upperBound
             return accountUsername?.substring(from: index!)
         } else {
             return nil
         }
+    }
+
+    static func uri(fromRingId ringId: String) -> String {
+        return self.ringIdPrefix.appending(ringId)
     }
 }

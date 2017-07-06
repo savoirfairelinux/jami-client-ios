@@ -40,6 +40,7 @@ class ConversationViewModel {
     //Services
     private let conversationsService = AppDelegate.conversationsService
     private let accountService = AppDelegate.accountService
+    private let contactsService = AppDelegate.contactsService
 
     init(withConversation conversation: ConversationModel) {
         self.conversation = conversation
@@ -60,17 +61,22 @@ class ConversationViewModel {
     }
 
     lazy var userName: Variable<String> = {
-        if let userName = self.conversation.recipient?.userName {
+
+        let contact = self.contactsService.contact(withRingId: self.conversation.recipientRingId,
+                                                   account: self.accountService.currentAccount!)
+
+        if let userName = contact?.userName {
             return Variable(userName)
         } else {
-            let tmp :Variable<String> = ContactHelper.lookupUserName(forRingId: self.conversation.recipient!.ringId,
+            let tmp :Variable<String> = ContactHelper.lookupUserName(forRingId: self.conversation.recipientRingId,
                                                 nameService: AppDelegate.nameService,
                                                 disposeBag: self.disposeBag)
 
             tmp.asObservable().subscribe(onNext: { userNameFound in
-                try! self.realm.write {
-                    self.conversation.recipient?.userName = userNameFound
-                }
+
+                //TODO: Fix string "" problem...
+
+                contact?.userName = userNameFound
             }).addDisposableTo(self.disposeBag)
 
             return tmp
@@ -136,10 +142,10 @@ class ConversationViewModel {
         self.conversationsService
             .sendMessage(withContent: content,
                          from: accountService.currentAccount!,
-                         to: self.conversation.recipient!)
+                         to: self.conversation.recipientRingId)
             .subscribe(onCompleted: {
                 let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: (self.conversation.recipient?.ringId)!)
+                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipientRingId)
             }).addDisposableTo(disposeBag)
     }
 

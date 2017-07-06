@@ -39,7 +39,8 @@ class SmartlistViewController: UIViewController {
 
     fileprivate let viewModel = SmartlistViewModel(withConversationsService: AppDelegate.conversationsService,
                                                    nameService: AppDelegate.nameService,
-                                                   accountsService: AppDelegate.accountService)
+                                                   accountsService: AppDelegate.accountService,
+                                                   contactsService: AppDelegate.contactsService)
 
     @IBOutlet weak var conversationsTableView: UITableView!
     @IBOutlet weak var searchResultsTableView: UITableView!
