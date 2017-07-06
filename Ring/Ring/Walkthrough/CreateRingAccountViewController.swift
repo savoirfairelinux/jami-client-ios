@@ -19,10 +19,10 @@
  */
 
 import UIKit
-
 import RxCocoa
 import RxSwift
 import PKHUD
+import SwiftyBeaver
 
 fileprivate enum CreateRingAccountCellType {
     case registerPublicUsername
@@ -33,6 +33,11 @@ fileprivate enum CreateRingAccountCellType {
 }
 
 class CreateRingAccountViewController: UITableViewController {
+
+    /**
+     logguer
+     */
+    private let log = SwiftyBeaver.self
 
     var mAccountViewModel = CreateRingAccountViewModel(withAccountService: AppDelegate.accountService,
                                                        nameService: AppDelegate.nameService)
@@ -135,7 +140,7 @@ class CreateRingAccountViewController: UITableViewController {
     }
 
     fileprivate func setCreateAccountAsLoading() {
-        print("Creating account...")
+        log.debug("Creating account...")
         self.mCreateAccountButton.setTitle("Loading...", for: .normal)
         self.mCreateAccountButton.isUserInteractionEnabled = false
 

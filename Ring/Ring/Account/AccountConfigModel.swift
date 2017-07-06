@@ -19,6 +19,7 @@
  */
 
 import RealmSwift
+import SwiftyBeaver
 
 /**
  The different states that an account can have during time.
@@ -70,6 +71,11 @@ class AccountConfigModel: Object {
     fileprivate var configValues = [ConfigKeyModel: String]()
 
     /**
+     logguer
+    */
+    private let log = SwiftyBeaver.self
+
+    /**
      Constructor.
 
      The keys of the configuration elements must be known from Ring to be taken in account.
@@ -85,7 +91,7 @@ class AccountConfigModel: Object {
                     configValues.updateValue(value, forKey: configKeyModel)
                 } else {
                     //~ The key given in parameter is not known from Ring.
-                    print("Can't find key", key)
+                    log.warning("Can't find key: \(key)")
                 }
             }
         }

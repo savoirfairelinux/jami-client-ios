@@ -20,6 +20,7 @@
 
 import UIKit
 import RxSwift
+import SwiftyBeaver
 
 /**
  Represents the status of a username validation request when the user is typing his username
@@ -33,6 +34,10 @@ enum UsernameValidationStatus {
 }
 
 class NameService: NameRegistrationAdapterDelegate {
+    /**
+     logguer
+     */
+    private let log = SwiftyBeaver.self
 
     /**
      Used to make lookup name request to the daemon
@@ -105,7 +110,7 @@ class NameService: NameRegistrationAdapterDelegate {
         } else if response.state == .invalidName {
             usernameValidationStatus.onNext(.invalid)
         } else {
-            print("Lookup name error")
+            log.error("Lookup name error")
         }
 
         usernameLookupStatus.onNext(response)
@@ -113,9 +118,9 @@ class NameService: NameRegistrationAdapterDelegate {
 
     internal func nameRegistrationEnded(with response: NameRegistrationResponse) {
         if response.state == .success {
-            print("Registred name : \(response.name)")
+            log.debug("Registred name : \(response.name)")
         } else {
-            print("Name Registration failed. State = \(response.state.rawValue)")
+            log.debug("Name Registration failed. State = \(response.state.rawValue)")
         }
     }
 }

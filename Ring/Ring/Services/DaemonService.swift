@@ -19,6 +19,7 @@
  */
 
 import Foundation
+import SwiftyBeaver
 
 /**
  Errors that can be thrown when trying to start the daemon:
@@ -53,6 +54,12 @@ enum StopDaemonError: Error {
  */
 class DaemonService {
     // MARK: Private members
+
+    /**
+     logguer
+     */
+    private let log = SwiftyBeaver.self
+
     /// Indicates whether the daemon is started or not.
     fileprivate(set) internal var daemonStarted = false
 
@@ -81,13 +88,13 @@ class DaemonService {
             throw StartDaemonError.daemonAlreadyRunning
         }
 
-        print("Starting daemon...")
+        log.debug("Starting daemon...")
         if self.dRingAdaptor.initDaemon() {
-            print("Daemon initialized.")
+            log.debug("Daemon initialized.")
             if self.dRingAdaptor.startDaemon() {
                 self.startRingServicePolling()
                 self.daemonStarted = true
-                print("Daemon started.")
+                log.debug("Daemon started.")
             } else {
                 throw StartDaemonError.startFailure
             }
@@ -106,11 +113,11 @@ class DaemonService {
             throw StopDaemonError.daemonNotRunning
         }
 
-        print("Stopping daemon...")
+        log.debug("Stopping daemon...")
         self.pollingTimer?.invalidate()
         self.dRingAdaptor.fini()
         self.daemonStarted = false
-        print("Daemon stopped.")
+        log.debug("Daemon stopped.")
     }
 
     // MARK: Private Core
