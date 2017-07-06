@@ -47,22 +47,23 @@ class ConversationsService: MessagesAdapterDelegate {
         messageAdapter = adapter
         self.realm = realm
         results = realm.objects(ConversationModel.self)
-        conversations = Observable.collection(from: results)
+
+        conversations = Observable.collection(from: results, synchronousStart: true)
         MessagesAdapter.delegate = self
     }
 
     func sendMessage(withContent content: String,
                      from senderAccount: AccountModel,
-                     to recipient: ContactModel) -> Completable {
+                     to recipientRingId: String) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
             let contentDict = [self.textPlainMIMEType: content]
-            self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipient.ringId)
+            self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientRingId)
 
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
 
-            if accountHelper.ringId! != recipient.ringId {
-                _ = self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: recipient.ringId, currentAccountId: senderAccount.id)
+            if accountHelper.ringId! != recipientRingId {
+                _ = self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: recipientRingId, currentAccountId: senderAccount.id)
             }
 
             completable(.completed)
@@ -96,12 +97,12 @@ class ConversationsService: MessagesAdapterDelegate {
 
             //Get conversations for this sender
             var currentConversation = self.results.filter({ conversation in
-                return conversation.recipient?.ringId == recipientRingId
+                return conversation.recipientRingId == recipientRingId
             }).first
 
             //Create a new conversation for this sender if not exists
             if currentConversation == nil {
-                currentConversation = ConversationModel(withRecipient: ContactModel(withRingId: recipientRingId), accountId: currentAccountId)
+                currentConversation = ConversationModel(withRecipientRingId: recipientRingId, accountId: currentAccountId)
 
                 do {
                     try self.realm.write { [unowned self] in
@@ -181,7 +182,10 @@ class ConversationsService: MessagesAdapterDelegate {
                            to receiverAccountId: String) {
 
         if let content = message[textPlainMIMEType] {
-            self.saveMessage(withContent: content, byAuthor: senderAccount, toConversationWith: senderAccount, currentAccountId: receiverAccountId)
+            self.saveMessage(withContent: content,
+                             byAuthor: senderAccount,
+                             toConversationWith: senderAccount,
+                             currentAccountId: receiverAccountId)
                 .subscribe(onCompleted: { [unowned self] in
                     self.log.info("Message saved")
                 })

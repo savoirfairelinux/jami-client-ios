@@ -32,5 +32,8 @@
     (const std::map<std::string, std::string>&)map;
 + (std::map<std::string, std::string>)dictionnaryToMap:(NSDictionary*)dict;
 + (NSArray*)vectorOfMapsToArray:(const std::vector<std::map<std::string, std::string>>&)vectorOfMaps;
++ (NSData*)dataFromVectorOfUInt8:(std::vector<uint8_t>)vectorOfUInt8;
++ (std::vector<uint8_t>)vectorOfUInt8FromData:(NSData*)data;
+
 
 @end
