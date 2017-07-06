@@ -18,17 +18,19 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
+import RxSwift
+import Contacts
+import SwiftyBeaver
 
-class ConversationModel: Object {
+class ContactRequestItem {
 
-    let messages = List<MessageModel>()
-    dynamic var recipientRingId: String = ""
-    dynamic var accountId: String = ""
+    let contactRequest: ContactRequestModel
 
-    convenience init(withRecipientRingId recipientRingId: String, accountId: String) {
-        self.init()
-        self.recipientRingId = recipientRingId
-        self.accountId = accountId
+    let userName = Variable("")
+    let profileImageData: Data?
+
+    init(withContactRequest contactRequest: ContactRequestModel) {
+        self.contactRequest = contactRequest
+        self.profileImageData = self.contactRequest.vCard?.imageData
     }
 }
