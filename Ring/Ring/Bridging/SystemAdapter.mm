@@ -24,6 +24,8 @@
 
 #import "dring/configurationmanager_interface.h"
 
+#import "Utils.h"
+
 @implementation SystemAdapter
 
 using namespace DRing;

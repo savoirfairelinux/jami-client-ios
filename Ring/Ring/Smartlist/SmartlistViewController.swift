@@ -38,7 +38,8 @@ class SmartlistViewController: UIViewController {
 
     fileprivate let viewModel = SmartlistViewModel(withConversationsService: AppDelegate.conversationsService,
                                                    nameService: AppDelegate.nameService,
-                                                   accountsService: AppDelegate.accountService)
+                                                   accountsService: AppDelegate.accountService,
+                                                   contactsService: AppDelegate.contactsService)
 
     @IBOutlet weak var conversationsTableView: UITableView!
     @IBOutlet weak var searchResultsTableView: UITableView!
@@ -125,11 +126,14 @@ class SmartlistViewController: UIViewController {
 
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConversationCell.self)
 
-                item.userName.asObservable().bind(to: cell.nameLabel.rx.text).disposed(by: self.disposeBag)
+                item.userName.asObservable().observeOn(MainScheduler.instance).bind(to: cell.nameLabel.rx.text).disposed(by: self.disposeBag)
                 cell.newMessagesLabel.text = item.unreadMessages
                 cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
                 cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
                 cell.lastMessagePreviewLabel.text = item.lastMessage
+
+                print("item.userName = \(item.userName.value); indexPath (\(indexPath.row),\(indexPath.section))")
+
                 return cell
         }
 

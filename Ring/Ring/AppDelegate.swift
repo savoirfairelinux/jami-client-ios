@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let accountService = AccountsService(withAccountAdapter: AccountAdapter())
     static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     static let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
+    static let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
+
     private let log = SwiftyBeaver.self
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -42,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
+
         return true
     }
 

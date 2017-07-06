@@ -49,9 +49,12 @@ class ConversationViewModel {
 
     let messages: Observable<[MessageViewModel]>
 
+    var userName = BehaviorSubject(value: "")
+
     //Services
     private let conversationsService = AppDelegate.conversationsService
     private let accountService = AppDelegate.accountService
+    private let contactsService = AppDelegate.contactsService
 
     init(withConversation conversation: ConversationModel) {
         self.conversation = conversation
@@ -69,31 +72,31 @@ class ConversationViewModel {
                 })
             })
         }).observeOn(MainScheduler.instance)
-    }
 
-    lazy var userName: Variable<String> = {
-        if let userName = self.conversation.recipient?.userName {
-            return Variable(userName)
+        let contact = self.contactsService.contact(withRingId: self.conversation.recipientRingId,
+                                                   account: self.accountService.currentAccount!)
+
+        if let contactUserName = contact?.userName {
+            userName.onNext(contactUserName)
         } else {
-            let tmp: Variable<String> = ContactHelper.lookupUserName(forRingId: self.conversation.recipient!.ringId,
-                                                nameService: AppDelegate.nameService,
-                                                disposeBag: self.disposeBag)
 
-            tmp.asObservable().subscribe(onNext: { [unowned self] userNameFound in
+            let recipientRingId = self.conversation.recipientRingId
 
-                do {
-                    try self.realm.write {
-                        self.conversation.recipient?.userName = userNameFound
-                    }
-                } catch let error {
-                    self.log.error("Realm persistence with error: \(error)")
-                }
+            //Return an observer for the username lookup
+            AppDelegate.nameService.usernameLookupStatus
+                .filter({ lookupNameResponse in
+                    return lookupNameResponse.state == .found &&
+                        lookupNameResponse.address != nil &&
+                        lookupNameResponse.address == recipientRingId
+                }).subscribe(onNext: { lookupNameResponse in
+                    self.userName.onNext(lookupNameResponse.name!)
+                    contact?.userName = lookupNameResponse.name!
+                }).disposed(by: disposeBag)
 
-            }).disposed(by: self.disposeBag)
-
-            return tmp
+            AppDelegate.nameService.lookupAddress(withAccount: "", nameserver: "", address: self.conversation.recipientRingId)
         }
-    }()
+
+    }
 
     var unreadMessages: String {
        return self.unreadMessagesCount.description
@@ -154,11 +157,11 @@ class ConversationViewModel {
         self.conversationsService
             .sendMessage(withContent: content,
                          from: accountService.currentAccount!,
-                         to: self.conversation.recipient!)
+                         to: self.conversation.recipientRingId)
             .subscribe(onCompleted: {
                 let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: (self.conversation.recipient?.ringId)!)
-            }).disposed(by: disposeBag)
+                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipientRingId)
+            }).addDisposableTo(disposeBag)
     }
 
     fileprivate func saveMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
