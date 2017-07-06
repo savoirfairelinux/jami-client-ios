@@ -67,7 +67,7 @@ class DaemonService {
     fileprivate let dRingAdaptor: DRingAdapter
 
     /// The time interval separating each poll.
-    fileprivate let pollingTimeInterval = 0.05
+    fileprivate let pollingTimeInterval = 0.01
 
     /// The timer scheduling the calls to the poll method.
     fileprivate var pollingTimer: Timer?
