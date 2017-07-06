@@ -92,6 +92,7 @@
 		04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
+		1A1E476D1F0E808500EA9A36 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1E476C1F0E808500EA9A36 /* Reusable.framework */; };
 		1ABE07BA1F0C16F100D36361 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07B91F0C16F100D36361 /* ContactViewModel.swift */; };
 		1ABE07BC1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07BB1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard */; };
 		1ABE07D21F0D8FE800D36361 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07D01F0D8FE800D36361 /* Images.swift */; };
@@ -270,6 +271,7 @@
 		04399AE11D1C341A00E99CD9 /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = ../fat/lib/libvpx.a; sourceTree = "<group>"; };
 		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
+		1A1E476C1F0E808500EA9A36 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		1ABE07B91F0C16F100D36361 /* ContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		1ABE07BB1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
 		1ABE07D01F0D8FE800D36361 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A1E476D1F0E808500EA9A36 /* Reusable.framework in Frameworks */,
 				56559B0E1EE8777600BF20E1 /* RxRealm.framework in Frameworks */,
 				564775831EE5CFC500A0C855 /* Realm.framework in Frameworks */,
 				564775841EE5CFC500A0C855 /* RealmSwift.framework in Frameworks */,
@@ -461,6 +464,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A1E476C1F0E808500EA9A36 /* Reusable.framework */,
 				56559B0D1EE8777600BF20E1 /* RxRealm.framework */,
 				564775811EE5CFC500A0C855 /* Realm.framework */,
 				564775821EE5CFC500A0C855 /* RealmSwift.framework */,
@@ -982,6 +986,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxRealm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
 			);
 			name = "⚙️ Copy Frameworks";
 			outputPaths = (
