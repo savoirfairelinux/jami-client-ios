@@ -30,3 +30,4 @@
 #import "RegistrationResponse.h"
 #import "NameRegistrationResponse.h"
 #import "MessagesAdapter.h"
+#import "Chameleon/Chameleon.h"

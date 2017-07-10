@@ -3,3 +3,4 @@ github "RxSwiftCommunity/RxDataSources" == 1.0.3
 github "pkluz/PKHUD"
 github "AliSoftware/Reusable" ~> 4.0
 github "SwiftyBeaver/SwiftyBeaver"
+github "ViccAlexander/Chameleon"

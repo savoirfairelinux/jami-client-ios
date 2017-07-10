@@ -20,6 +20,11 @@
 
 import RxSwift
 
+enum BubblePosition {
+    case received
+    case sent
+}
+
 class MessageViewModel {
 
     fileprivate let accountService = AppDelegate.accountService

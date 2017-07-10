@@ -26,6 +26,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
     let disposeBag = DisposeBag()
 
     var viewModel: ConversationViewModel?
+    var messageViewModels: [MessageViewModel]?
     var textFieldShouldEndEditing = false
     var bottomOffset: CGFloat = 0
 
@@ -92,20 +93,21 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
     }
 
     func setupTableView() {
+        self.tableView.dataSource = self
+
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.separatorStyle = .none
 
         //Register cell
-        self.tableView.register(cellType: MessageCell.self)
+        self.tableView.register(cellType: MessageCellSent.self)
+        self.tableView.register(cellType: MessageCellReceived.self)
 
         //Bind the TableView to the ViewModel
-        self.viewModel?.messages
-            .bind(to: tableView.rx.items(cellIdentifier: "MessageCell",
-                                         cellType: MessageCell.self)) { _, messageViewModel, cell in
-                cell.messageLabel.text = messageViewModel.content
-                cell.bubblePosition = messageViewModel.bubblePosition()
-        }.disposed(by: disposeBag)
+        self.viewModel?.messages.subscribe(onNext: { [weak self] (messageViewModels) in
+            self?.messageViewModels = messageViewModels
+            self?.tableView.reloadData()
+        }).disposed(by: self.disposeBag)
 
         //Scroll to bottom when reloaded
         self.tableView.rx.methodInvoked(#selector(UITableView.reloadData)).subscribe(onNext: { _ in
@@ -167,6 +169,31 @@ class ConversationViewController: UIViewController, UITextFieldDelegate {
     // Avoid the keyboard to be hidden when the Send button is touched
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return textFieldShouldEndEditing
+    }
+
+}
+
+extension ConversationViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.messageViewModels?.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        if let messageViewModel = self.messageViewModels?[indexPath.row] {
+            if messageViewModel.bubblePosition() == .received {
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
+                cell.messageLabel.text = messageViewModel.content
+                return cell
+            }
+
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
+            cell.messageLabel.text = messageViewModel.content
+            return cell
+        }
+
+        return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
+
     }
 
 }
