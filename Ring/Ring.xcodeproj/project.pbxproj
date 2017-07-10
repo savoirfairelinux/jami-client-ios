@@ -93,6 +93,12 @@
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		1A1E476D1F0E808500EA9A36 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1E476C1F0E808500EA9A36 /* Reusable.framework */; };
 		1A1E476F1F0E894600EA9A36 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */; };
+		1A3CA32B1F102BB700283748 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3CA32A1F102BB700283748 /* Chameleon.framework */; };
+		1A3CA32D1F13DA7200283748 /* Chameleon+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CA32C1F13DA7200283748 /* Chameleon+Ring.swift */; };
+		1A3CA32F1F1400AF00283748 /* MessageCellReceived.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A3CA32E1F1400AF00283748 /* MessageCellReceived.xib */; };
+		1A3CA3351F140EB300283748 /* MessableBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CA3341F140EB300283748 /* MessableBubble.swift */; };
+		1A3CA3381F14133300283748 /* MessageCellSent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CA3361F14133300283748 /* MessageCellSent.swift */; };
+		1A3CA3391F14133300283748 /* MessageCellSent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A3CA3371F14133300283748 /* MessageCellSent.xib */; };
 		1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */; };
 		1A3D28A91F0EBF0200B524EE /* UIView+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */; };
 		1A8306331F0EDAA50099D98C /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8306321F0EDAA50099D98C /* AccountTableViewCell.swift */; };
@@ -145,8 +151,7 @@
 		56BBC9BF1ED7168400CDAF8B /* SmartlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9BE1ED7168400CDAF8B /* SmartlistViewModel.swift */; };
 		56BBC9CD1EDC5E7000CDAF8B /* MessageAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9C71EDC5E7000CDAF8B /* MessageAccessoryView.swift */; };
 		56BBC9CE1EDC5E7000CDAF8B /* MessageAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56BBC9C81EDC5E7000CDAF8B /* MessageAccessoryView.xib */; };
-		56BBC9CF1EDC5E7000CDAF8B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9C91EDC5E7000CDAF8B /* MessageCell.swift */; };
-		56BBC9D01EDC5E7000CDAF8B /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56BBC9CA1EDC5E7000CDAF8B /* MessageCell.xib */; };
+		56BBC9CF1EDC5E7000CDAF8B /* MessageCellReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9C91EDC5E7000CDAF8B /* MessageCellReceived.swift */; };
 		56BBC9D21EDC5E7000CDAF8B /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9CC1EDC5E7000CDAF8B /* MessageViewModel.swift */; };
 		56BBC9D41EDC7A6D00CDAF8B /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
 		56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */; };
@@ -274,6 +279,12 @@
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		1A1E476C1F0E808500EA9A36 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
+		1A3CA32A1F102BB700283748 /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
+		1A3CA32C1F13DA7200283748 /* Chameleon+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chameleon+Ring.swift"; sourceTree = "<group>"; };
+		1A3CA32E1F1400AF00283748 /* MessageCellReceived.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellReceived.xib; sourceTree = "<group>"; };
+		1A3CA3341F140EB300283748 /* MessableBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessableBubble.swift; sourceTree = "<group>"; };
+		1A3CA3361F14133300283748 /* MessageCellSent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellSent.swift; sourceTree = "<group>"; };
+		1A3CA3371F14133300283748 /* MessageCellSent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellSent.xib; sourceTree = "<group>"; };
 		1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bool+String.swift"; sourceTree = "<group>"; };
 		1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ring.swift"; sourceTree = "<group>"; };
 		1A8306321F0EDAA50099D98C /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -332,8 +343,7 @@
 		56BBC9BE1ED7168400CDAF8B /* SmartlistViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartlistViewModel.swift; sourceTree = "<group>"; };
 		56BBC9C71EDC5E7000CDAF8B /* MessageAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageAccessoryView.swift; sourceTree = "<group>"; };
 		56BBC9C81EDC5E7000CDAF8B /* MessageAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageAccessoryView.xib; sourceTree = "<group>"; };
-		56BBC9C91EDC5E7000CDAF8B /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
-		56BBC9CA1EDC5E7000CDAF8B /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		56BBC9C91EDC5E7000CDAF8B /* MessageCellReceived.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellReceived.swift; sourceTree = "<group>"; };
 		56BBC9CC1EDC5E7000CDAF8B /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libargon2.a; path = ../fat/lib/libargon2.a; sourceTree = "<group>"; };
 		56BBC9DD1EDDC9D300CDAF8B /* LookupNameResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookupNameResponse.h; sourceTree = "<group>"; };
@@ -346,6 +356,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A3CA32B1F102BB700283748 /* Chameleon.framework in Frameworks */,
 				1A1E476F1F0E894600EA9A36 /* SwiftyBeaver.framework in Frameworks */,
 				1A1E476D1F0E808500EA9A36 /* Reusable.framework in Frameworks */,
 				56559B0E1EE8777600BF20E1 /* RxRealm.framework in Frameworks */,
@@ -467,6 +478,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A3CA32A1F102BB700283748 /* Chameleon.framework */,
 				1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */,
 				1A1E476C1F0E808500EA9A36 /* Reusable.framework */,
 				56559B0D1EE8777600BF20E1 /* RxRealm.framework */,
@@ -555,6 +567,7 @@
 				1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */,
 				1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */,
 				1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */,
+				1A3CA32C1F13DA7200283748 /* Chameleon+Ring.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -782,10 +795,13 @@
 			children = (
 				56BBC9C71EDC5E7000CDAF8B /* MessageAccessoryView.swift */,
 				56BBC9C81EDC5E7000CDAF8B /* MessageAccessoryView.xib */,
-				56BBC9C91EDC5E7000CDAF8B /* MessageCell.swift */,
-				56BBC9CA1EDC5E7000CDAF8B /* MessageCell.xib */,
+				1A3CA32E1F1400AF00283748 /* MessageCellReceived.xib */,
+				56BBC9C91EDC5E7000CDAF8B /* MessageCellReceived.swift */,
+				1A3CA3361F14133300283748 /* MessageCellSent.swift */,
+				1A3CA3371F14133300283748 /* MessageCellSent.xib */,
 				56BBC9CC1EDC5E7000CDAF8B /* MessageViewModel.swift */,
 				56BBC9A51ED7151500CDAF8B /* MessageModel.swift */,
+				1A3CA3341F140EB300283748 /* MessableBubble.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -940,8 +956,9 @@
 				5669A7FE1EA904E4003C7B93 /* TextCell.xib in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
 				56BBC9CE1EDC5E7000CDAF8B /* MessageAccessoryView.xib in Resources */,
+				1A3CA32F1F1400AF00283748 /* MessageCellReceived.xib in Resources */,
+				1A3CA3391F14133300283748 /* MessageCellSent.xib in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
-				56BBC9D01EDC5E7000CDAF8B /* MessageCell.xib in Resources */,
 				1ABE07E01F0D91A800D36361 /* Main.storyboard in Resources */,
 				5669A7FA1EA904AF003C7B93 /* SwitchCell.xib in Resources */,
 				56BBC9B51ED7156500CDAF8B /* ConversationCell.xib in Resources */,
@@ -983,6 +1000,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxRealm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
 			);
 			name = "⚙️ Copy Frameworks";
 			outputPaths = (
@@ -1036,7 +1054,8 @@
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
-				56BBC9CF1EDC5E7000CDAF8B /* MessageCell.swift in Sources */,
+				1A3CA3351F140EB300283748 /* MessableBubble.swift in Sources */,
+				56BBC9CF1EDC5E7000CDAF8B /* MessageCellReceived.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
 				1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */,
 				56BBC9D21EDC5E7000CDAF8B /* MessageViewModel.swift in Sources */,
@@ -1048,6 +1067,7 @@
 				56559B141EE89E7900BF20E1 /* DeviceModel.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
 				5628B4211F0C35C8008B1E11 /* WelcomeViewController.swift in Sources */,
+				1A3CA32D1F13DA7200283748 /* Chameleon+Ring.swift in Sources */,
 				5628B41C1F0C358D008B1E11 /* AccountDetailsViewController.swift in Sources */,
 				56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */,
 				1ABE07E21F0D924700D36361 /* Strings.swift in Sources */,
@@ -1056,6 +1076,7 @@
 				56BBC9BF1ED7168400CDAF8B /* SmartlistViewModel.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
 				564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */,
+				1A3CA3381F14133300283748 /* MessageCellSent.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
 				56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */,

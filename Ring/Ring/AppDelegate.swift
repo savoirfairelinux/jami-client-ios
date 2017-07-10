@@ -23,6 +23,7 @@ import UIKit
 import RealmSwift
 import SwiftyBeaver
 import RxSwift
+import Chameleon
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
+
+        Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
+        Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
+
         self.loadAccounts()
         return true
     }

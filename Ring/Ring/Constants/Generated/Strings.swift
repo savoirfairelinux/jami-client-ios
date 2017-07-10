@@ -63,6 +63,8 @@ enum L10n {
   enum Global {
     /// Home
     static let homeTabBarTitle = L10n.tr("global.homeTabBarTitle")
+    /// Me
+    static let meTabBarTitle = L10n.tr("global.meTabBarTitle")
     /// Ok
     static let ok = L10n.tr("global.ok")
   }

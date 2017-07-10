@@ -20,6 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Home";
+"global.meTabBarTitle" = "Me";
 "global.ok" = "Ok";
 
 // Smartlist
