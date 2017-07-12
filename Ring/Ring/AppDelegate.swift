@@ -22,6 +22,7 @@
 import UIKit
 import RealmSwift
 import SwiftyBeaver
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,7 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
     private let log = SwiftyBeaver.self
 
+    fileprivate let disposeBag = DisposeBag()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
 
         // initialize log format
         let console = ConsoleDestination()
@@ -42,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
+        self.loadAccounts()
         return true
     }
 
@@ -66,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         do {
             try AppDelegate.daemonService.startDaemon()
-            AppDelegate.accountService.loadAccounts()
+
         } catch StartDaemonError.initializationFailure {
             log.error("Daemon failed to initialize.")
         } catch StartDaemonError.startFailure {
@@ -86,5 +92,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             log.error("Unknown error in Daemon stop.")
         }
+    }
+
+    fileprivate func loadAccounts() {
+        AppDelegate.accountService.loadAccounts()
+            .subscribe(onSuccess: { (accountList: [AccountModel]) in
+                self.checkAccount(accountList: accountList)
+            }, onError: { _ in
+                self.presentWalkthrough()
+            }).disposed(by: disposeBag)
+    }
+
+    fileprivate func checkAccount(accountList: [AccountModel]) {
+        if accountList.isEmpty {
+            self.presentWalkthrough()
+        } else {
+            self.presentMainTabBar()
+        }
+    }
+
+    fileprivate func presentWalkthrough() {
+        let storyboard = UIStoryboard(name: "WalkthroughStoryboard", bundle: nil)
+        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+        self.window?.makeKeyAndVisible()
+    }
+
+    fileprivate func presentMainTabBar() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+        self.window?.makeKeyAndVisible()
     }
 }

@@ -31,14 +31,6 @@ class MainTabBarViewController: UITabBarController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !accountService.hasAccounts() {
-            self.presentWalkthrough()
-        }
-    }
 
-    fileprivate func presentWalkthrough() {
-        let storyboard = UIStoryboard(name: "WalkthroughStoryboard", bundle: nil)
-        let viewController = storyboard.instantiateInitialViewController()!
-        self.present(viewController, animated: false, completion: nil)
     }
 }

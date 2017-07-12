@@ -88,7 +88,10 @@ class CreateRingAccountViewController: UITableViewController {
                 case .success:
                     self.setCreateAccountAsIdle()
                     self.showDeviceAddedAlert()
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "MainStoryboard") as UIViewController
                     self.dismiss(animated: true, completion: nil)
+                    self.present(vc, animated: true, completion: nil)
                 default:
                     return
                 }
