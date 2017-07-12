@@ -45,12 +45,21 @@ enum StoryboardScene {
   enum LaunchScreen: StoryboardSceneType {
     static let storyboardName = "LaunchScreen"
   }
-  enum Main: StoryboardSceneType {
+  enum Main: String, StoryboardSceneType {
     static let storyboardName = "Main"
 
     static func initialViewController() -> Ring.MainTabBarViewController {
       guard let vc = storyboard().instantiateInitialViewController() as? Ring.MainTabBarViewController else {
         fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+
+    case mainStoryboardScene = "MainStoryboard"
+    static func instantiateMainStoryboard() -> Ring.MainTabBarViewController {
+      guard let vc = StoryboardScene.Main.mainStoryboardScene.viewController() as? Ring.MainTabBarViewController
+      else {
+        fatalError("ViewController 'MainStoryboard' is not of the expected class Ring.MainTabBarViewController.")
       }
       return vc
     }

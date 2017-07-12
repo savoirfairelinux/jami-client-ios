@@ -131,7 +131,7 @@ class AccountsService: AccountAdapterDelegate {
 
     }
 
-    func loadAccounts() {
+    fileprivate func loadAccountsFromDaemon() {
         for accountId in accountAdapter.getAccountList() {
             if  let id = accountId as? String {
                 self.accountList.append(AccountModel(withAccountId: id))
@@ -139,6 +139,13 @@ class AccountsService: AccountAdapterDelegate {
         }
 
         reloadAccounts()
+    }
+
+    func loadAccounts() -> Single<[AccountModel]> {
+        return Single<[AccountModel]>.just({
+            loadAccountsFromDaemon()
+            return accountList
+        }())
     }
 
     // MARK: - Methods
