@@ -1,8 +1,9 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,10 +30,20 @@ import Chameleon
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    static let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
-    static let accountService = AccountsService(withAccountAdapter: AccountAdapter())
-    static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
-    static let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
+    private let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
+    private let accountService = AccountsService(withAccountAdapter: AccountAdapter())
+    private let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
+    private let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
+    public lazy var injectionBag: InjectionBag = {
+        return InjectionBag(withDaemonService: self.daemonService,
+                            withAccountService: self.accountService,
+                            withNameService: self.nameService,
+                            withConversationService: self.conversationsService)
+    }()
+    private lazy var appCoordinator: AppCoordinator = {
+        return AppCoordinator(with: self.injectionBag)
+    }()
+
     private let log = SwiftyBeaver.self
 
     fileprivate let disposeBag = DisposeBag()
@@ -46,26 +57,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
         log.addDestination(console)
 
+        // starts the daemon
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
 
+        // themetize the app
         Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
         Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
 
-        self.loadAccounts()
+        // load accounts during splashscreen
+        // and ask the AppCoordinator to handle the first screen once loading is finished
+        self.accountService.loadAccounts().subscribe { [unowned self] (_) in
+            self.window?.rootViewController = self.appCoordinator.rootViewController
+            self.window?.makeKeyAndVisible()
+            self.appCoordinator.start()
+        }.disposed(by: self.disposeBag)
+
         return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -76,8 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate func startDaemon() {
 
         do {
-            try AppDelegate.daemonService.startDaemon()
-
+            try self.daemonService.startDaemon()
         } catch StartDaemonError.initializationFailure {
             log.error("Daemon failed to initialize.")
         } catch StartDaemonError.startFailure {
@@ -91,40 +98,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     fileprivate func stopDaemon() {
         do {
-            try AppDelegate.daemonService.stopDaemon()
+            try self.daemonService.stopDaemon()
         } catch StopDaemonError.daemonNotRunning {
             log.error("Daemon failed to stop because it was not already running.")
         } catch {
             log.error("Unknown error in Daemon stop.")
         }
-    }
-
-    fileprivate func loadAccounts() {
-        AppDelegate.accountService.loadAccounts()
-            .subscribe(onSuccess: { (accountList: [AccountModel]) in
-                self.checkAccount(accountList: accountList)
-            }, onError: { _ in
-                self.presentWalkthrough()
-            }).disposed(by: disposeBag)
-    }
-
-    fileprivate func checkAccount(accountList: [AccountModel]) {
-        if accountList.isEmpty {
-            self.presentWalkthrough()
-        } else {
-            self.presentMainTabBar()
-        }
-    }
-
-    fileprivate func presentWalkthrough() {
-        let storyboard = UIStoryboard(name: "WalkthroughStoryboard", bundle: nil)
-        self.window?.rootViewController = storyboard.instantiateInitialViewController()
-        self.window?.makeKeyAndVisible()
-    }
-
-    fileprivate func presentMainTabBar() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.window?.rootViewController = storyboard.instantiateInitialViewController()
-        self.window?.makeKeyAndVisible()
     }
 }

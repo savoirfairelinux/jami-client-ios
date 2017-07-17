@@ -21,6 +21,11 @@
 import Foundation
 import UIKit
 
+private enum GradientAnchor {
+    case start
+    case end
+}
+
 extension UIView {
 
     @IBInspectable
@@ -70,6 +75,73 @@ extension UIView {
         set {
             self.layer.borderColor = newValue.cgColor
         }
+    }
+
+    @IBInspectable
+    var gradientStartColor: UIColor {
+
+        get {
+            return self.retrieveGradientColor(for: .start)
+        }
+
+        set {
+            self.applyGradientColor(for: .start, with: newValue)
+        }
+    }
+
+    @IBInspectable
+    var gradientEndColor: UIColor {
+        get {
+            return self.retrieveGradientColor(for: .end)
+        }
+
+        set {
+            self.applyGradientColor(for: .end, with: newValue)
+        }
+    }
+
+    private func applyGradientColor(for anchor: GradientAnchor, with color: UIColor) {
+        if let layer = self.layer.sublayers?[0] as? CAGradientLayer {
+            // reuse the gradient layer that has already been set
+            if anchor == .start {
+                layer.colors = [color.cgColor, self.retrieveGradientColor(for: .end).cgColor]
+            } else {
+                layer.colors = [self.retrieveGradientColor(for: .start).cgColor, color.cgColor]
+            }
+            return
+        }
+
+        let layer = CAGradientLayer()
+        layer.frame = CGRect(origin: .zero, size: self.frame.size)
+        layer.startPoint = CGPoint(x: 0.5, y: 0)
+        layer.endPoint = CGPoint(x: 0.5, y: 1)
+
+        if anchor == .start {
+            layer.colors = [color.cgColor, self.retrieveGradientColor(for: .end).cgColor]
+        } else {
+            layer.colors = [self.retrieveGradientColor(for: .start).cgColor, color.cgColor]
+        }
+        layer.cornerRadius = self.cornerRadius
+
+        self.layer.addSublayer(layer)
+
+    }
+
+    private func retrieveGradientColor(for anchor: GradientAnchor) -> UIColor {
+        if let layer = self.layer.sublayers?[0] as? CAGradientLayer,
+            let colors = layer.colors as? [CGColor] {
+            if anchor == .start && !colors.isEmpty {
+                return UIColor(cgColor: colors[0])
+            }
+
+            if anchor == .end && colors.count >= 1 {
+                return UIColor(cgColor: colors[1])
+            }
+
+            return UIColor.clear
+        }
+
+        return UIColor.clear
     }
 
 }

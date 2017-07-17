@@ -19,18 +19,32 @@
  */
 
 import Foundation
-import UIKit
+import RxSwift
 
-extension UIColor {
+class MeViewModel: Stateable {
 
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
 
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
+    var accountNumber: Int {
+        return self.accountService.accounts.count
+    }
+
+    let accountService: AccountsService
+
+    init(withInjectionBag injectionBag: InjectionBag) {
+        self.accountService = injectionBag.accountService
+    }
+
+    func account(at row: Int) -> AccountModel {
+        return self.accountService.accounts[row]
+    }
+
+    func deleteAccount(at row: Int) {
+        self.accountService.removeAccount(row)
+    }
 
 }
