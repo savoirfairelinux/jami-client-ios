@@ -19,18 +19,14 @@
  */
 
 import Foundation
-import UIKit
+import RxSwift
 
-extension UIColor {
+/// Represent a navigation state. We mostly use it as an enum
+public protocol State {
+}
 
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
-
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
-
+/// A Stateable exposes a navigation state on which StateableResponsive will be subscribed
+public protocol Stateable {
+    /// The state that will be emitted and catch by the StateableResponsive classes to process the navigation
+    var state: Observable<State> { get }
 }

@@ -29,7 +29,7 @@ class ContactViewModel {
      */
     private let log = SwiftyBeaver.self
 
-    private let nameService = AppDelegate.nameService
+    private let nameService: NameService
     private let disposeBag = DisposeBag()
     private let contact: ContactModel
     private lazy var realm: Realm = {
@@ -42,7 +42,9 @@ class ContactViewModel {
 
     let userName = Variable("")
 
-    init(withContact contact: ContactModel) {
+    init(withInjectionBag injectionBag: InjectionBag,
+         withContact contact: ContactModel) {
+        self.nameService = injectionBag.nameService
         self.contact = contact
 
         if let userName = self.contact.userName {
