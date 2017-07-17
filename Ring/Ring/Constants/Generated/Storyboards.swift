@@ -42,33 +42,94 @@ extension UIViewController {
 }
 
 enum StoryboardScene {
-  enum LaunchScreen: StoryboardSceneType {
-    static let storyboardName = "LaunchScreen"
-  }
-  enum Main: String, StoryboardSceneType {
-    static let storyboardName = "Main"
+  enum ContactRequestsViewController: StoryboardSceneType {
+    static let storyboardName = "ContactRequestsViewController"
 
-    static func initialViewController() -> Ring.MainTabBarViewController {
-      guard let vc = storyboard().instantiateInitialViewController() as? Ring.MainTabBarViewController else {
+    static func initialViewController() -> Ring.ContactRequestsViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.ContactRequestsViewController else {
         fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
       }
       return vc
     }
+  }
+  enum ConversationViewController: StoryboardSceneType {
+    static let storyboardName = "ConversationViewController"
 
-    case mainStoryboardScene = "MainStoryboard"
-    static func instantiateMainStoryboard() -> Ring.MainTabBarViewController {
-      guard let vc = StoryboardScene.Main.mainStoryboardScene.viewController() as? Ring.MainTabBarViewController
-      else {
-        fatalError("ViewController 'MainStoryboard' is not of the expected class Ring.MainTabBarViewController.")
+    static func initialViewController() -> Ring.ConversationViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.ConversationViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
       }
       return vc
     }
   }
-  enum WalkthroughStoryboard: StoryboardSceneType {
-    static let storyboardName = "WalkthroughStoryboard"
+  enum CreateAccountViewController: StoryboardSceneType {
+    static let storyboardName = "CreateAccountViewController"
 
-    static func initialViewController() -> UINavigationController {
-      guard let vc = storyboard().instantiateInitialViewController() as? UINavigationController else {
+    static func initialViewController() -> Ring.CreateAccountViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.CreateAccountViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
+  enum CreateProfileViewController: StoryboardSceneType {
+    static let storyboardName = "CreateProfileViewController"
+
+    static func initialViewController() -> Ring.CreateProfileViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.CreateProfileViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
+  enum LaunchScreen: StoryboardSceneType {
+    static let storyboardName = "LaunchScreen"
+  }
+  enum LinkDeviceViewController: StoryboardSceneType {
+    static let storyboardName = "LinkDeviceViewController"
+
+    static func initialViewController() -> Ring.LinkDeviceViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.LinkDeviceViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
+  enum MeDetailViewController: StoryboardSceneType {
+    static let storyboardName = "MeDetailViewController"
+
+    static func initialViewController() -> Ring.MeDetailViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.MeDetailViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
+  enum MeViewController: StoryboardSceneType {
+    static let storyboardName = "MeViewController"
+
+    static func initialViewController() -> Ring.MeViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.MeViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
+  enum SmartlistViewController: StoryboardSceneType {
+    static let storyboardName = "SmartlistViewController"
+
+    static func initialViewController() -> Ring.SmartlistViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.SmartlistViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
+  enum WelcomeViewController: StoryboardSceneType {
+    static let storyboardName = "WelcomeViewController"
+
+    static func initialViewController() -> Ring.WelcomeViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.WelcomeViewController else {
         fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
       }
       return vc
@@ -77,17 +138,6 @@ enum StoryboardScene {
 }
 
 enum StoryboardSegue {
-  enum Main: String, StoryboardSegueType {
-    case showMessages = "ShowMessages"
-    case accountDetails
-  }
-  enum WalkthroughStoryboard: String, StoryboardSegueType {
-    case accountToPermissionsSegue = "AccountToPermissionsSegue"
-    case createProfileSegue = "CreateProfileSegue"
-    case linkDeviceToAccountSegue = "LinkDeviceToAccountSegue"
-    case profileToAccountSegue = "ProfileToAccountSegue"
-    case profileToLinkSegue = "ProfileToLinkSegue"
-  }
 }
 
 private final class BundleToken {}

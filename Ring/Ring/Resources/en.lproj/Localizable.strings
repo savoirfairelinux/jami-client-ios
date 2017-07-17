@@ -20,6 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Home";
+"global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Me";
 "global.ok" = "Ok";
 
@@ -34,25 +35,26 @@
 
 //Welcome Screen
 "welcome.title" = "Welcome to Ring";
-"welcome.text" = "A Ring account allows you to reach people securely in peer to peer through fully distributed network";
-"welcome.linkDeviceButton" = "Link this device to an account";
+"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.linkDevice" = "Link this device to an account";
 "welcome.createAccount" = "Create a Ring account";
+
+//Creation Profile Screen
+"createProfile.createAccount" = "Skip to Create Account";
+"createProfile.linkDevice" = "Skip to Link Device";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";
-"createAccount.registerPublicUsername" = "Register public username (experimental)";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "Enter new username";
-"createAccount.newPasswordPlaceholder" = "New Password";
-"createAccount.repeatPasswordPlaceholder" = "Repeat new password";
+"createAccount.enterNewUsernamePlaceholder" = "username";
+"createAccount.newPasswordPlaceholder" = "password";
+"createAccount.repeatPasswordPlaceholder" = "confirm password";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
-"createAccount.passwordNotMatchingError" = "Passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "Looking for username availability...";
-"createAccount.invalidUsername" = "Invalid username";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
-"createAccount.loading" = "Loading...";
-
-//Progress View
+"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.lookingForUsernameAvailability" = "looking for username availability";
+"createAccount.invalidUsername" = "invalid username";
+"createAccount.usernameAlreadyTaken" = "username already taken";
+"createAccount.loading" = "Loading";
 "createAccount.waitCreateAccountTitle" = "Adding account";
 
 //Alerts
