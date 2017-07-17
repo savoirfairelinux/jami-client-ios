@@ -27,10 +27,12 @@ enum BubblePosition {
 
 class MessageViewModel {
 
-    fileprivate let accountService = AppDelegate.accountService
+    fileprivate let accountService: AccountsService
     fileprivate var message: MessageModel
 
-    init(withMessage message: MessageModel) {
+    init(withInjectionBag injectionBag: InjectionBag,
+         withMessage message: MessageModel) {
+        self.accountService = injectionBag.accountService
         self.message = message
     }
 

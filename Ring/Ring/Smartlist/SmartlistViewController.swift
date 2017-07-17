@@ -36,9 +36,12 @@ class SmartlistViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    fileprivate let viewModel = SmartlistViewModel(withConversationsService: AppDelegate.conversationsService,
-                                                   nameService: AppDelegate.nameService,
-                                                   accountsService: AppDelegate.accountService)
+    // swiftlint:disable force_cast
+    fileprivate lazy var viewModel: SmartlistViewModel = {
+        // FIXME: use ViewModelBased protocol to inject ViewModel
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return SmartlistViewModel(withInjectionBag: appDelegate.injectionBag)
+    }()
 
     @IBOutlet weak var conversationsTableView: UITableView!
     @IBOutlet weak var searchResultsTableView: UITableView!

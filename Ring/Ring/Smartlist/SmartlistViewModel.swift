@@ -40,11 +40,11 @@ class SmartlistViewModel {
     fileprivate var contactFoundConversation = Variable<ConversationViewModel?>(nil)
     fileprivate var conversationViewModels = [ConversationViewModel]()
 
-    init(withConversationsService conversationsService: ConversationsService, nameService: NameService, accountsService: AccountsService) {
+    init(withInjectionBag injectionBag: InjectionBag) {
 
-        self.conversationsService = conversationsService
-        self.nameService = nameService
-        self.accountsService = accountsService
+        self.conversationsService = injectionBag.conversationsService
+        self.nameService = injectionBag.nameService
+        self.accountsService = injectionBag.accountService
 
         //Create observable from sorted conversations and flatMap them to view models
         let conversationsObservable: Observable<[ConversationViewModel]> = self.conversationsService.conversations.asObservable().map({ conversations in
@@ -66,7 +66,7 @@ class SmartlistViewModel {
                 }).first {
                     conversationViewModel = foundConversationViewModel
                 } else {
-                    conversationViewModel = ConversationViewModel(withConversation: conversationModel)
+                    conversationViewModel = ConversationViewModel(withInjectionBag: injectionBag, withConversation: conversationModel)
                     self.conversationViewModels.append(conversationViewModel!)
                 }
 
@@ -126,7 +126,7 @@ class SmartlistViewModel {
 
                     //Create new converation
                     let conversation = ConversationModel(withRecipient: contact, accountId: "")
-                    let newConversation = ConversationViewModel(withConversation: conversation)
+                    let newConversation = ConversationViewModel(withInjectionBag: injectionBag, withConversation: conversation)
 
                     self.contactFoundConversation.value = newConversation
                 }

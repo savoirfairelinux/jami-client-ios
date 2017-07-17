@@ -19,18 +19,22 @@
  */
 
 import Foundation
-import UIKit
 
-extension UIColor {
+class InjectionBag {
 
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
+    let daemonService: DaemonService
+    let accountService: AccountsService
+    let nameService: NameService
+    let conversationsService: ConversationsService
 
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
+    init (withDaemonService daemonService: DaemonService,
+          withAccountService accountService: AccountsService,
+          withNameService nameService: NameService,
+          withConversationService conversationService: ConversationsService) {
+        self.daemonService = daemonService
+        self.accountService = accountService
+        self.nameService = nameService
+        self.conversationsService = conversationService
+    }
 
 }
