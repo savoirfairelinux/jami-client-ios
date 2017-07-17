@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Welcome View Controller-->
+        <scene sceneID="4AN-bE-bMJ">
+            <objects>
+                <viewController id="ILs-xb-iKr" customClass="WelcomeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ETz-GA-Th5"/>
+                        <viewControllerLayoutGuide type="bottom" id="kDG-lW-7DA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dg0-kS-rT7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_ring" translatesAutoresizingMaskIntoConstraints="NO" id="11r-JK-mPT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8TU-za-C7U" userLabel="Gradient View" customClass="DesignableView" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
+                                        <color key="value" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
+                                        <color key="value" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="logo-ring-beta2-blanc" translatesAutoresizingMaskIntoConstraints="NO" id="2Pc-uJ-SAI">
+                                <rect key="frame" x="97.5" y="233" width="180" height="66"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2Pc-uJ-SAI" secondAttribute="height" multiplier="30:11" id="Qre-jC-ga0"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Ring is a free and universal communication platform which preserves the users' privacy and freedoms" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
+                                <rect key="frame" x="62.5" y="356" width="250" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to Ring" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbn-cd-UXk">
+                                <rect key="frame" x="97" y="319" width="180.5" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="62.5" y="503" width="250" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="YW4-Sc-61P"/>
+                                </constraints>
+                                <state key="normal" title="Link this device to an account">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="62.5" y="443" width="250" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="FEf-kf-jCs"/>
+                                    <constraint firstAttribute="width" constant="250" id="epE-7u-SMQ"/>
+                                </constraints>
+                                <state key="normal" title="Create a Ring account">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="bu0-90-MB5" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="40" id="0hJ-6T-D3J"/>
+                            <constraint firstItem="Lbn-cd-UXk" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="20" id="0p4-iF-1bx"/>
+                            <constraint firstItem="bu0-90-MB5" firstAttribute="leading" secondItem="E4b-Zv-unB" secondAttribute="leading" id="4YM-7O-C4z"/>
+                            <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="11r-JK-mPT" secondAttribute="centerX" id="6F8-oT-4bJ"/>
+                            <constraint firstItem="kDG-lW-7DA" firstAttribute="top" secondItem="8TU-za-C7U" secondAttribute="bottom" id="7MN-tF-bVG"/>
+                            <constraint firstItem="8TU-za-C7U" firstAttribute="top" secondItem="Dg0-kS-rT7" secondAttribute="top" id="HvO-Th-xtu"/>
+                            <constraint firstItem="11r-JK-mPT" firstAttribute="top" secondItem="ETz-GA-Th5" secondAttribute="bottom" constant="-20" id="J8h-vu-fWk"/>
+                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="U37-r7-lNe"/>
+                            <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="11r-JK-mPT" secondAttribute="centerX" id="VZy-9e-HEs"/>
+                            <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="Lbn-cd-UXk" secondAttribute="bottom" constant="8" symbolic="YES" id="XNv-Kr-c8f"/>
+                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="11r-JK-mPT" secondAttribute="centerX" id="XvC-l1-BpA"/>
+                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="cYv-WZ-CCB"/>
+                            <constraint firstItem="kDG-lW-7DA" firstAttribute="top" secondItem="11r-JK-mPT" secondAttribute="bottom" id="hKL-lg-yh3"/>
+                            <constraint firstItem="11r-JK-mPT" firstAttribute="leading" secondItem="Dg0-kS-rT7" secondAttribute="leading" id="iUW-Ed-weL"/>
+                            <constraint firstItem="Lbn-cd-UXk" firstAttribute="centerY" secondItem="11r-JK-mPT" secondAttribute="centerY" id="ltS-fp-RRp"/>
+                            <constraint firstItem="bu0-90-MB5" firstAttribute="trailing" secondItem="E4b-Zv-unB" secondAttribute="trailing" id="rLA-EI-gkd"/>
+                            <constraint firstAttribute="trailing" secondItem="11r-JK-mPT" secondAttribute="trailing" id="shP-7c-cRl"/>
+                            <constraint firstItem="8TU-za-C7U" firstAttribute="leading" secondItem="Dg0-kS-rT7" secondAttribute="leading" id="svU-pm-Bc1"/>
+                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="uLc-95-Qpb"/>
+                            <constraint firstItem="Lbn-cd-UXk" firstAttribute="centerX" secondItem="11r-JK-mPT" secondAttribute="centerX" id="utT-IM-LCb"/>
+                            <constraint firstAttribute="trailing" secondItem="8TU-za-C7U" secondAttribute="trailing" id="z6w-VC-Pft"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="SVR-Ry-7d7"/>
+                    <connections>
+                        <outlet property="createAccountButton" destination="bu0-90-MB5" id="YNt-Tc-Snc"/>
+                        <outlet property="linkDeviceButton" destination="QLK-gs-fOJ" id="AXP-0r-10g"/>
+                        <outlet property="welcomeTextLabel" destination="E4b-Zv-unB" id="ygV-A3-EZD"/>
+                        <outlet property="welcomeTitleLabel" destination="Lbn-cd-UXk" id="32i-zZ-klu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yc1-qm-cpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-333.60000000000002" y="30.134932533733135"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background_ring" width="750" height="1334"/>
+        <image name="logo-ring-beta2-blanc" width="180" height="66"/>
+    </resources>
+</document>

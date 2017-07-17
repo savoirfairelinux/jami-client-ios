@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,21 +19,8 @@
  */
 
 import UIKit
-import Reusable
 
-class TextCell: UITableViewCell, NibReusable {
-
-    @IBOutlet weak var label: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+@IBDesignable
+class DesignableView: UIView {
+    // just to make the UIView+Ring extension IBDesignable
 }

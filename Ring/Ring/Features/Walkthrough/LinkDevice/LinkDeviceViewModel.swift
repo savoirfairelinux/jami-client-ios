@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,23 +18,22 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import Reusable
+import Foundation
+import RxSwift
 
-class TextFieldCell: UITableViewCell, NibReusable {
+class LinkDeviceViewModel: Stateable {
 
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var errorMessageLabel: UILabel!
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    init (with injectionBag: InjectionBag) {
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func linkDevice () {
+        self.stateSubject.onNext(WalkthroughState.deviceLinked)
     }
 
 }

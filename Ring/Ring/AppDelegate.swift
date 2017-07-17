@@ -29,10 +29,17 @@ import Chameleon
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    static let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
-    static let accountService = AccountsService(withAccountAdapter: AccountAdapter())
-    static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
-    static let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
+    private let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
+    private let accountService = AccountsService(withAccountAdapter: AccountAdapter())
+    private let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
+    private let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
+    public lazy var injectionBag: InjectionBag = {
+        return InjectionBag(withDaemonService: self.daemonService,
+                            withAccountService: self.accountService,
+                            withNameService: self.nameService,
+                            withConversationService: self.conversationsService)
+    }()
+
     private let log = SwiftyBeaver.self
 
     fileprivate let disposeBag = DisposeBag()
@@ -76,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate func startDaemon() {
 
         do {
-            try AppDelegate.daemonService.startDaemon()
+            try self.daemonService.startDaemon()
 
         } catch StartDaemonError.initializationFailure {
             log.error("Daemon failed to initialize.")
@@ -91,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     fileprivate func stopDaemon() {
         do {
-            try AppDelegate.daemonService.stopDaemon()
+            try self.daemonService.stopDaemon()
         } catch StopDaemonError.daemonNotRunning {
             log.error("Daemon failed to stop because it was not already running.")
         } catch {
@@ -100,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     fileprivate func loadAccounts() {
-        AppDelegate.accountService.loadAccounts()
+        self.accountService.loadAccounts()
             .subscribe(onSuccess: { (accountList: [AccountModel]) in
                 self.checkAccount(accountList: accountList)
             }, onError: { _ in
@@ -116,15 +123,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    private lazy var coordinator: WalkthroughCoordinator = {
+        return WalkthroughCoordinator(with: self.injectionBag)
+    }()
+
     fileprivate func presentWalkthrough() {
-        let storyboard = UIStoryboard(name: "WalkthroughStoryboard", bundle: nil)
-        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+//        let storyboard = UIStoryboard(name: "WalkthroughStoryboard", bundle: nil)
+//        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = self.coordinator.rootViewController
         self.window?.makeKeyAndVisible()
+        self.coordinator.start()
     }
 
     fileprivate func presentMainTabBar() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = self.coordinator.rootViewController
         self.window?.makeKeyAndVisible()
+        self.coordinator.start()
     }
 }

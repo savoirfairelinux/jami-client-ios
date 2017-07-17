@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,23 +18,23 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import Reusable
+import Foundation
 
-class SwitchCell: UITableViewCell, NibReusable {
+class InjectionBag {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var registerSwitch: UISwitch!
+    let daemonService: DaemonService
+    let accountService: AccountsService
+    let nameService: NameService
+    let conversationsService: ConversationsService
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    init (withDaemonService daemonService: DaemonService,
+          withAccountService accountService: AccountsService,
+          withNameService nameService: NameService,
+          withConversationService conversationService: ConversationsService) {
+        self.daemonService = daemonService
+        self.accountService = accountService
+        self.nameService = nameService
+        self.conversationsService = conversationService
     }
 
 }

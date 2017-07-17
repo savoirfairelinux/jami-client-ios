@@ -23,7 +23,12 @@ import UIKit
 class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Properties
-    let accountService = AppDelegate.accountService
+    // swiftlint:disable force_cast
+    private lazy var accountService: AccountsService = {
+        // FIXME: use ViewModelBased protocol to inject ViewModel
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.injectionBag.accountService
+    }()
     @IBOutlet weak var accountTableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var qrImageView: UIImageView!

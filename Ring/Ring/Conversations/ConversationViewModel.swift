@@ -50,10 +50,16 @@ class ConversationViewModel {
     let messages: Observable<[MessageViewModel]>
 
     //Services
-    private let conversationsService = AppDelegate.conversationsService
-    private let accountService = AppDelegate.accountService
+    private let conversationsService: ConversationsService
+    private let accountService: AccountsService
+    private let nameService: NameService
 
-    init(withConversation conversation: ConversationModel) {
+    init(withInjectionBag injectionBag: InjectionBag,
+         withConversation conversation: ConversationModel) {
+        self.accountService = injectionBag.accountService
+        self.conversationsService = injectionBag.conversationsService
+        self.nameService = injectionBag.nameService
+
         self.conversation = conversation
 
         dateFormatter.dateStyle = .medium
@@ -65,7 +71,7 @@ class ConversationViewModel {
                 return conv.isEqual(conversation)
             }).flatMap({ conversation in
                 conversation.messages.map({ message in
-                    return MessageViewModel(withMessage: message)
+                    return MessageViewModel(withInjectionBag: injectionBag, withMessage: message)
                 })
             })
         }).observeOn(MainScheduler.instance)
@@ -76,7 +82,7 @@ class ConversationViewModel {
             return Variable(userName)
         } else {
             let tmp: Variable<String> = ContactHelper.lookupUserName(forRingId: self.conversation.recipient!.ringId,
-                                                nameService: AppDelegate.nameService,
+                                                nameService: self.nameService,
                                                 disposeBag: self.disposeBag)
 
             tmp.asObservable().subscribe(onNext: { [unowned self] userNameFound in

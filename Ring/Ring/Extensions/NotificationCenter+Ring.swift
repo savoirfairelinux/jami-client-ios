@@ -19,18 +19,21 @@
  */
 
 import Foundation
-import UIKit
+import RxSwift
 
-extension UIColor {
-
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
-
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
-
+extension NotificationCenter {
+    static var keyboardHeight: Observable<CGFloat> {
+        return Observable
+            .from([
+                NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillShow)
+                    .map { notification -> CGFloat in
+                        (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                },
+                NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide)
+                    .map { _ -> CGFloat in
+                        0
+                }
+                ])
+            .merge()
+    }
 }

@@ -21,7 +21,6 @@
 import UIKit
 
 class MainTabBarViewController: UITabBarController {
-    fileprivate let accountService = AppDelegate.accountService
 
     override func viewDidLoad() {
         super.viewDidLoad()
