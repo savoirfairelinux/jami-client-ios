@@ -32,7 +32,7 @@ fileprivate enum CreateRingAccountCellType {
     case repeatPasswordField
 }
 
-class CreateRingAccountViewController: UITableViewController {
+class CreateRingAccountViewController2: UITableViewController {
 
     /**
      logguer

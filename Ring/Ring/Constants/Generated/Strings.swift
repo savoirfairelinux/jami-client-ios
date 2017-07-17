@@ -60,6 +60,13 @@ enum L10n {
     static let waitCreateAccountTitle = L10n.tr("createAccount.waitCreateAccountTitle")
   }
 
+  enum Createprofile {
+    /// Skip to Create Account
+    static let createAccount = L10n.tr("createProfile.createAccount")
+    /// Skip to Link Device
+    static let linkDevice = L10n.tr("createProfile.linkDevice")
+  }
+
   enum Global {
     /// Home
     static let homeTabBarTitle = L10n.tr("global.homeTabBarTitle")
@@ -86,8 +93,8 @@ enum L10n {
     /// Create a Ring account
     static let createAccount = L10n.tr("welcome.createAccount")
     /// Link this device to an account
-    static let linkDeviceButton = L10n.tr("welcome.linkDeviceButton")
-    /// A Ring account allows you to reach people securely in peer to peer through fully distributed network
+    static let linkDevice = L10n.tr("welcome.linkDevice")
+    /// Ring is a free and universal communication platform which preserves the users' privacy and freedoms
     static let text = L10n.tr("welcome.text")
     /// Welcome to Ring
     static let title = L10n.tr("welcome.title")
