@@ -33,7 +33,7 @@ class ContactHelper {
             .observeOn(MainScheduler.instance)
             .filter({ lookupNameResponse in
                 return lookupNameResponse.address != nil && lookupNameResponse.address == ringId
-            }).subscribe(onNext: { lookupNameResponse in
+            }).subscribe(onNext: { [unowned userName] (lookupNameResponse) in
                 if lookupNameResponse.state == .found {
                     userName.value = lookupNameResponse.name
                 } else {

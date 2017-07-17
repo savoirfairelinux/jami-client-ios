@@ -15,6 +15,7 @@ private class RingImagesBundleToken {}
 
 // swiftlint:disable type_body_length
 public enum RingAsset: String {
+  case backgroundRing = "background_ring"
   case icContactPicture = "ic_contact_picture"
   case logoRingBeta2Blanc = "logo-ring-beta2-blanc"
 
