@@ -120,7 +120,7 @@ do
         CFLAGS+=" -O3"
     fi
 
-    CXXFLAGS="-stdlib=libc++ $CFLAGS"
+    CXXFLAGS="-std=c++14 -stdlib=libc++ $CFLAGS"
     LDFLAGS="$CFLAGS"
 
 	./autogen.sh || exit 1
