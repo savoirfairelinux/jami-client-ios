@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wnr-WM-Mfv">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Create Account View Controller-->
+        <scene sceneID="EGC-3O-f9n">
+            <objects>
+                <tableViewController id="Wnr-WM-Mfv" customClass="CreateAccountViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="69" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ymf-GG-jYH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="bfY-tR-Uew" userLabel="Header">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your Ring account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ps0-55-1qj">
+                                    <rect key="frame" x="8" y="8" width="359" height="114"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="ps0-55-1qj" firstAttribute="top" secondItem="bfY-tR-Uew" secondAttribute="top" constant="8" id="2yS-Ff-519"/>
+                                <constraint firstAttribute="trailing" secondItem="ps0-55-1qj" secondAttribute="trailing" constant="8" id="Cd9-MW-TaU"/>
+                                <constraint firstItem="ps0-55-1qj" firstAttribute="leading" secondItem="bfY-tR-Uew" secondAttribute="leading" constant="8" id="UMf-Y9-Vgz"/>
+                                <constraint firstAttribute="bottom" secondItem="ps0-55-1qj" secondAttribute="bottom" constant="8" id="xbo-KK-cNn"/>
+                            </constraints>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="PSt-0r-Md2" userLabel="Footer">
+                            <rect key="frame" x="0.0" y="130" width="375" height="54"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lJ-kJ-yHQ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                    <rect key="frame" x="70" y="7" width="235" height="40"/>
+                                    <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="kgw-54-UCP"/>
+                                    </constraints>
+                                    <state key="normal" title="Create a Ring account">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="2lJ-kJ-yHQ" firstAttribute="centerY" secondItem="PSt-0r-Md2" secondAttribute="centerY" id="B5l-Vv-emX"/>
+                                <constraint firstAttribute="trailing" secondItem="2lJ-kJ-yHQ" secondAttribute="trailing" constant="70" id="edQ-mL-xt6"/>
+                                <constraint firstItem="2lJ-kJ-yHQ" firstAttribute="leading" secondItem="PSt-0r-Md2" secondAttribute="leading" constant="70" id="oWH-jk-ivw"/>
+                                <constraint firstItem="2lJ-kJ-yHQ" firstAttribute="centerX" secondItem="PSt-0r-Md2" secondAttribute="centerX" id="oXE-mh-hnr"/>
+                            </constraints>
+                        </view>
+                    </tableView>
+                    <connections>
+                        <outlet property="createAccountButton" destination="2lJ-kJ-yHQ" id="53b-TS-ObZ"/>
+                        <outlet property="createAccountTitle" destination="ps0-55-1qj" id="qnm-Tg-CMm"/>
+                        <outlet property="createAccountTitleLabel" destination="ps0-55-1qj" id="au0-hW-Dfa"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="leA-yR-WUQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2077.5" y="580"/>
+        </scene>
+    </scenes>
+</document>

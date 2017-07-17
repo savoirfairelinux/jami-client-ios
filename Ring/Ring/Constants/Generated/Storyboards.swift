@@ -42,6 +42,26 @@ extension UIViewController {
 }
 
 enum StoryboardScene {
+  enum CreateAccountViewController: StoryboardSceneType {
+    static let storyboardName = "CreateAccountViewController"
+
+    static func initialViewController() -> Ring.CreateAccountViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.CreateAccountViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
+  enum CreateProfileViewController: StoryboardSceneType {
+    static let storyboardName = "CreateProfileViewController"
+
+    static func initialViewController() -> Ring.CreateProfileViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.CreateProfileViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
   enum LaunchScreen: StoryboardSceneType {
     static let storyboardName = "LaunchScreen"
   }
@@ -69,6 +89,16 @@ enum StoryboardScene {
 
     static func initialViewController() -> UINavigationController {
       guard let vc = storyboard().instantiateInitialViewController() as? UINavigationController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
+  enum WelcomeViewController: StoryboardSceneType {
+    static let storyboardName = "WelcomeViewController"
+
+    static func initialViewController() -> Ring.WelcomeViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.WelcomeViewController else {
         fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
       }
       return vc

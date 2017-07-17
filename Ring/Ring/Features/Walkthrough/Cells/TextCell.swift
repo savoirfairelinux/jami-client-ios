@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,21 +19,10 @@
  */
 
 import UIKit
+import Reusable
 
-enum ProfileCreationType {
-    case linkDeviceToAccount
-    case createProfile
-}
+class TextCell: UITableViewCell, NibReusable {
 
-class CreateProfileViewController: UIViewController {
+    @IBOutlet weak var label: UILabel!
 
-    var profileCreationType: ProfileCreationType?
-
-    @IBAction func skip(_ sender: Any) {
-        if profileCreationType == .linkDeviceToAccount {
-            performSegue(withIdentifier: "ProfileToLinkSegue", sender: sender)
-        } else if profileCreationType == .createProfile {
-            performSegue(withIdentifier: "ProfileToAccountSegue", sender: sender)
-        }
-    }
 }

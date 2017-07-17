@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Welcome View Controller-->
+        <scene sceneID="4AN-bE-bMJ">
+            <objects>
+                <viewController id="ILs-xb-iKr" customClass="WelcomeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ETz-GA-Th5"/>
+                        <viewControllerLayoutGuide type="bottom" id="kDG-lW-7DA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dg0-kS-rT7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="R3A-eq-A88">
+                                <rect key="frame" x="24" y="183.5" width="327.5" height="300"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="logo-ring-beta2-blanc" translatesAutoresizingMaskIntoConstraints="NO" id="2Pc-uJ-SAI">
+                                        <rect key="frame" x="74" y="0.0" width="180" height="66"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="6jW-ya-wXY"/>
+                                            <constraint firstAttribute="height" constant="66" id="fFB-D3-rZQ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to Ring" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbn-cd-UXk">
+                                        <rect key="frame" x="73.5" y="82" width="180.5" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="A Ring account allows you to reach people securely in peer to peer through fully distributed network" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
+                                        <rect key="frame" x="0.0" y="127" width="327.5" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="204" width="287.5" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="YW4-Sc-61P"/>
+                                        </constraints>
+                                        <state key="normal" title="Link this device to an account">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="260" width="287.5" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="FEf-kf-jCs"/>
+                                        </constraints>
+                                        <state key="normal" title="Create a Ring account">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="bu0-90-MB5" firstAttribute="leading" secondItem="QLK-gs-fOJ" secondAttribute="leading" id="1BD-Ok-f3N"/>
+                                    <constraint firstItem="bu0-90-MB5" firstAttribute="trailing" secondItem="QLK-gs-fOJ" secondAttribute="trailing" id="KNz-yB-mKp"/>
+                                    <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="R3A-eq-A88" secondAttribute="leading" constant="20" id="owT-ok-MyK"/>
+                                    <constraint firstAttribute="trailing" secondItem="QLK-gs-fOJ" secondAttribute="trailing" constant="20" id="uO5-qS-BCb"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="R3A-eq-A88" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dg0-kS-rT7" secondAttribute="leading" constant="16" id="2MI-dJ-FsR"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="R3A-eq-A88" secondAttribute="trailing" constant="16" id="2vy-83-F3d"/>
+                            <constraint firstItem="R3A-eq-A88" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" id="RDn-XQ-3zG"/>
+                            <constraint firstItem="R3A-eq-A88" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="SYS-Zp-se6"/>
+                            <constraint firstItem="R3A-eq-A88" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ETz-GA-Th5" secondAttribute="bottom" constant="16" id="jZB-Rr-Lhu"/>
+                            <constraint firstItem="kDG-lW-7DA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="R3A-eq-A88" secondAttribute="bottom" constant="16" id="jk2-lV-31p"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="SVR-Ry-7d7"/>
+                    <connections>
+                        <outlet property="createAccountButton" destination="bu0-90-MB5" id="YNt-Tc-Snc"/>
+                        <outlet property="linkDeviceButton" destination="QLK-gs-fOJ" id="AXP-0r-10g"/>
+                        <outlet property="welcomeTextLabel" destination="E4b-Zv-unB" id="ygV-A3-EZD"/>
+                        <outlet property="welcomeTitleLabel" destination="Lbn-cd-UXk" id="32i-zZ-klu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yc1-qm-cpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-71" y="118"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo-ring-beta2-blanc" width="180" height="66"/>
+    </resources>
+</document>
