@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,8 +19,11 @@
  */
 
 import UIKit
+import Reusable
 
-@IBDesignable
-class DesignableButton: UIButton {
-    // just to make the UIView+Ring extension IBDesignable
+class SwitchCell: UITableViewCell, NibReusable {
+
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var registerSwitch: UISwitch!
+
 }
