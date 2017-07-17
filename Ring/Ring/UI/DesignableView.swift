@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,20 +20,7 @@
 
 import UIKit
 
-enum ProfileCreationType {
-    case linkDeviceToAccount
-    case createProfile
-}
-
-class CreateProfileViewController: UIViewController {
-
-    var profileCreationType: ProfileCreationType?
-
-    @IBAction func skip(_ sender: Any) {
-        if profileCreationType == .linkDeviceToAccount {
-            performSegue(withIdentifier: "ProfileToLinkSegue", sender: sender)
-        } else if profileCreationType == .createProfile {
-            performSegue(withIdentifier: "ProfileToAccountSegue", sender: sender)
-        }
-    }
+@IBDesignable
+class DesignableView: UIView {
+    // just to make the UIView+Ring extension IBDesignable
 }

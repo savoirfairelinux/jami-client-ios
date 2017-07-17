@@ -116,15 +116,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    let coordinator = WalkthroughCoordinator(with: InjectionBag())
+
     fileprivate func presentWalkthrough() {
-        let storyboard = UIStoryboard(name: "WalkthroughStoryboard", bundle: nil)
-        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+//        let storyboard = UIStoryboard(name: "WalkthroughStoryboard", bundle: nil)
+//        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = self.coordinator.rootViewController
         self.window?.makeKeyAndVisible()
+        self.coordinator.start()
     }
 
     fileprivate func presentMainTabBar() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = self.coordinator.rootViewController
         self.window?.makeKeyAndVisible()
+        self.coordinator.start()
     }
 }

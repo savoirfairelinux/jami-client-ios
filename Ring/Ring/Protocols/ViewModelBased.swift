@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,23 +18,20 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import Foundation
 import Reusable
+import UIKit
 
-class TextFieldCell: UITableViewCell, NibReusable {
+protocol ViewModelBased {
+    associatedtype ViewModel
 
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var errorMessageLabel: UILabel!
+    var viewModel: ViewModel { get set }
+}
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+extension ViewModelBased where Self: UIViewController, Self: StoryboardBased {
+    static func instantiate(with viewModel: ViewModel) -> Self {
+        var viewController = Self.instantiate()
+        viewController.viewModel = viewModel
+        return viewController
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

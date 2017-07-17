@@ -18,9 +18,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import Foundation
+import RxSwift
 
-@IBDesignable
-class DesignableButton: UIButton {
-    // just to make the UIView+Ring extension IBDesignable
+public protocol State {
+}
+
+public protocol Stateable {
+    var state: Observable<State> { get }
 }

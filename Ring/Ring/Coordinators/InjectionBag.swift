@@ -18,9 +18,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import Foundation
 
-@IBDesignable
-class DesignableButton: UIButton {
-    // just to make the UIView+Ring extension IBDesignable
+class InjectionBag {
+
+    let daemonService           = DaemonService(dRingAdaptor: DRingAdapter())
+    let accountService          = AccountsService(withAccountAdapter: AccountAdapter())
+    let nameService             = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
+    let conversationsService    = ConversationsService(withMessageAdapter: MessagesAdapter())
+
 }

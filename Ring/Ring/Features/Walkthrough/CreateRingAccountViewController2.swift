@@ -32,7 +32,7 @@ fileprivate enum CreateRingAccountCellType {
     case repeatPasswordField
 }
 
-class CreateRingAccountViewController: UITableViewController {
+class CreateRingAccountViewController2: UITableViewController {
 
     /**
      logguer
@@ -191,7 +191,7 @@ class CreateRingAccountViewController: UITableViewController {
         if currentCellType == .registerPublicUsername {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SwitchCell.self)
 
-            cell.titleLabel.text = L10n.Createaccount.registerPublicUsername.smartString
+            //cell.titleLabel.text = L10n.Createaccount.registerPublicUsername.smartString
             cell.titleLabel.textColor = .white
             cell.registerSwitch.rx.value.bind(to: self.accountViewModel.registerUsername).disposed(by: disposeBag)
             return cell
