@@ -20,7 +20,7 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController2: UIViewController {
 
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -76,7 +76,7 @@ class WelcomeViewController: UIViewController {
 
         self.welcomeLabel.text = L10n.Welcome.title.smartString
         self.descriptionLabel.text = L10n.Welcome.text.smartString
-        self.linkDeviceButton.setTitle(L10n.Welcome.linkDeviceButton.smartString, for: .normal)
+        self.linkDeviceButton.setTitle(L10n.Welcome.linkDevice.smartString, for: .normal)
         self.createAccountButton.setTitle(L10n.Welcome.createAccount.smartString, for: .normal)
     }
 }

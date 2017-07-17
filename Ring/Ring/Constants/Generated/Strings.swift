@@ -86,7 +86,7 @@ enum L10n {
     /// Create a Ring account
     static let createAccount = L10n.tr("welcome.createAccount")
     /// Link this device to an account
-    static let linkDeviceButton = L10n.tr("welcome.linkDeviceButton")
+    static let linkDevice = L10n.tr("welcome.linkDevice")
     /// A Ring account allows you to reach people securely in peer to peer through fully distributed network
     static let text = L10n.tr("welcome.text")
     /// Welcome to Ring

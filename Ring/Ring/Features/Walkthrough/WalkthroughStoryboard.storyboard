@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="-1016" y="365"/>
         </scene>
-        <!--Welcome View Controller-->
+        <!--Welcome View Controller2-->
         <scene sceneID="BPo-UM-NNL">
             <objects>
-                <viewController id="zOM-us-BHp" customClass="WelcomeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zOM-us-BHp" customClass="WelcomeViewController2" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lps-eE-m7k"/>
                         <viewControllerLayoutGuide type="bottom" id="OgW-31-HCB"/>
@@ -76,9 +76,6 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="linkDeviceToAccountAction:" destination="zOM-us-BHp" eventType="touchUpInside" id="bul-x6-xBK"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ve-ZD-TXf" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                         <rect key="frame" x="20" y="260" width="231" height="40"/>
@@ -92,9 +89,6 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="createAccountAction:" destination="zOM-us-BHp" eventType="touchUpInside" id="o0k-MC-tsv"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -117,10 +111,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="LPh-IM-uvN"/>
                     <connections>
-                        <outlet property="createAccountButton" destination="8Ve-ZD-TXf" id="OBF-nO-YAa"/>
-                        <outlet property="descriptionLabel" destination="PxM-F8-mIM" id="Bbw-uI-ltO"/>
-                        <outlet property="linkDeviceButton" destination="R0q-9u-3WR" id="W2P-ar-nh0"/>
-                        <outlet property="welcomeLabel" destination="SnZ-RF-3dF" id="Rgf-TM-GFn"/>
                         <segue destination="dmb-i6-bo9" kind="show" identifier="CreateProfileSegue" id="GoD-mz-wCr"/>
                         <segue destination="dmb-i6-bo9" kind="show" identifier="LinkDeviceToAccountSegue" id="k4b-a3-FoK"/>
                     </connections>

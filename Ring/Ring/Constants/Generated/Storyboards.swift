@@ -74,6 +74,16 @@ enum StoryboardScene {
       return vc
     }
   }
+  enum WelcomeViewController: StoryboardSceneType {
+    static let storyboardName = "WelcomeViewController"
+
+    static func initialViewController() -> Ring.WelcomeViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.WelcomeViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
 }
 
 enum StoryboardSegue {

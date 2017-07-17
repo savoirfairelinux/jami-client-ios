@@ -16,8 +16,6 @@
 		02674C851E0C757B0065EDF9 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02674C811E0C757B0065EDF9 /* RxCocoa.framework */; };
 		02674C861E0C757B0065EDF9 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02674C821E0C757B0065EDF9 /* RxSwift.framework */; };
 		0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C2FE1E0C438F00CF00BA /* AccountAdapterDelegate.swift */; };
-		0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */; };
-		0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */; };
 		0273C3081E0C68BF00CF00BA /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3071E0C68BF00CF00BA /* DesignableButton.swift */; };
 		029CE9D71E1D8C860000C8E1 /* ServiceEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CE9D61E1D8C860000C8E1 /* ServiceEventTests.swift */; };
 		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
@@ -91,6 +89,22 @@
 		04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
+		1A0C4EC31F1D48F600550433 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EBE1F1D48F600550433 /* CreateProfileViewController.swift */; };
+		1A0C4EC41F1D48F600550433 /* CreateRingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EBF1F1D48F600550433 /* CreateRingAccountViewController.swift */; };
+		1A0C4EC51F1D48F600550433 /* LinkDeviceToAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EC01F1D48F600550433 /* LinkDeviceToAccountViewController.swift */; };
+		1A0C4EC61F1D48F600550433 /* WalkthroughStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0C4EC11F1D48F600550433 /* WalkthroughStoryboard.storyboard */; };
+		1A0C4ECF1F1D491400550433 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EC91F1D491400550433 /* SwitchCell.swift */; };
+		1A0C4ED01F1D491400550433 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A0C4ECA1F1D491400550433 /* SwitchCell.xib */; };
+		1A0C4ED11F1D491400550433 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4ECB1F1D491400550433 /* TextCell.swift */; };
+		1A0C4ED21F1D491400550433 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A0C4ECC1F1D491400550433 /* TextCell.xib */; };
+		1A0C4ED31F1D491400550433 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4ECD1F1D491400550433 /* TextFieldCell.swift */; };
+		1A0C4ED41F1D491400550433 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A0C4ECE1F1D491400550433 /* TextFieldCell.xib */; };
+		1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0C4ED91F1D4B1B00550433 /* WelcomeViewController.storyboard */; };
+		1A0C4EDC1F1D4B7E00550433 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EDB1F1D4B7E00550433 /* WelcomeViewController.swift */; };
+		1A0C4EE11F1D625C00550433 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EE01F1D625C00550433 /* Coordinator.swift */; };
+		1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EE21F1D673600550433 /* InjectionBag.swift */; };
+		1A0C4EE51F1D67DF00550433 /* WalkthroughCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EE41F1D67DF00550433 /* WalkthroughCoordinator.swift */; };
+		1A0C4EE61F1D6C1900550433 /* WelcomeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EC21F1D48F600550433 /* WelcomeViewController2.swift */; };
 		1A1E476D1F0E808500EA9A36 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1E476C1F0E808500EA9A36 /* Reusable.framework */; };
 		1A1E476F1F0E894600EA9A36 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */; };
 		1A3CA32B1F102BB700283748 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3CA32A1F102BB700283748 /* Chameleon.framework */; };
@@ -104,7 +118,6 @@
 		1A8306331F0EDAA50099D98C /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8306321F0EDAA50099D98C /* AccountTableViewCell.swift */; };
 		1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */; };
 		1ABE07BA1F0C16F100D36361 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07B91F0C16F100D36361 /* ContactViewModel.swift */; };
-		1ABE07BC1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07BB1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard */; };
 		1ABE07D21F0D8FE800D36361 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07D01F0D8FE800D36361 /* Images.swift */; };
 		1ABE07D31F0D8FE800D36361 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07D11F0D8FE800D36361 /* Storyboards.swift */; };
 		1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DA1F0D915100D36361 /* Localizable.strings */; };
@@ -116,7 +129,6 @@
 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
 		5628B41C1F0C358D008B1E11 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628B41A1F0C358D008B1E11 /* AccountDetailsViewController.swift */; };
 		5628B41D1F0C358D008B1E11 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628B41B1F0C358D008B1E11 /* MeViewController.swift */; };
-		5628B4211F0C35C8008B1E11 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628B4201F0C35C8008B1E11 /* WelcomeViewController.swift */; };
 		562FB6CD1EFAD18A00C61A78 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FB6CC1EFAD18A00C61A78 /* ConversationViewController.swift */; };
 		56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56308BA61EA00E5700660275 /* NameRegistrationResponse.m */; };
 		563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 563AEC761EA664C0003A5641 /* RegistrationResponse.m */; };
@@ -128,14 +140,7 @@
 		564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44631E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift */; };
 		56559B0E1EE8777600BF20E1 /* RxRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56559B0D1EE8777600BF20E1 /* RxRealm.framework */; };
 		56559B141EE89E7900BF20E1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56559B131EE89E7900BF20E1 /* DeviceModel.swift */; };
-		5669A7FA1EA904AF003C7B93 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7F91EA904AF003C7B93 /* SwitchCell.xib */; };
-		5669A7FC1EA904D2003C7B93 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */; };
-		5669A7FE1EA904E4003C7B93 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5669A7FD1EA904E4003C7B93 /* TextCell.xib */; };
-		5669A8031EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */; };
 		568F56751EA7E5DE00132D7D /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 568F56721EA7E38F00132D7D /* PKHUD.framework */; };
-		56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */; };
-		56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64E01E80542300EA1AA9 /* TextFieldCell.swift */; };
-		56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC64E21E805F0200EA1AA9 /* TextCell.swift */; };
 		56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC650D1E85694D00EA1AA9 /* DesignableTextField.swift */; };
 		56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC99E1ED714CB00CDAF8B /* MessagesAdapter.mm */; };
 		56BBC9A21ED714DF00CDAF8B /* MessagesAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9A01ED714DF00CDAF8B /* MessagesAdapterDelegate.swift */; };
@@ -191,8 +196,6 @@
 		02674C831E0C757B0065EDF9 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		0273C2FE1E0C438F00CF00BA /* AccountAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountAdapterDelegate.swift; sourceTree = "<group>"; };
 		0273C3001E0C445200CF00BA /* RingPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RingPrefixHeader.pch; path = Ring/RingPrefixHeader.pch; sourceTree = "<group>"; };
-		0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
-		0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateRingAccountViewController.swift; sourceTree = "<group>"; };
 		0273C3071E0C68BF00CF00BA /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RingTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		029CE9D61E1D8C860000C8E1 /* ServiceEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEventTests.swift; sourceTree = "<group>"; };
@@ -277,6 +280,22 @@
 		04399AE11D1C341A00E99CD9 /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = ../fat/lib/libvpx.a; sourceTree = "<group>"; };
 		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
+		1A0C4EBE1F1D48F600550433 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		1A0C4EBF1F1D48F600550433 /* CreateRingAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateRingAccountViewController.swift; sourceTree = "<group>"; };
+		1A0C4EC01F1D48F600550433 /* LinkDeviceToAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkDeviceToAccountViewController.swift; sourceTree = "<group>"; };
+		1A0C4EC11F1D48F600550433 /* WalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
+		1A0C4EC21F1D48F600550433 /* WelcomeViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController2.swift; sourceTree = "<group>"; };
+		1A0C4EC91F1D491400550433 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		1A0C4ECA1F1D491400550433 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
+		1A0C4ECB1F1D491400550433 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
+		1A0C4ECC1F1D491400550433 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
+		1A0C4ECD1F1D491400550433 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		1A0C4ECE1F1D491400550433 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
+		1A0C4ED91F1D4B1B00550433 /* WelcomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WelcomeViewController.storyboard; path = Welcome/WelcomeViewController.storyboard; sourceTree = "<group>"; };
+		1A0C4EDB1F1D4B7E00550433 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeViewController.swift; path = Welcome/WelcomeViewController.swift; sourceTree = "<group>"; };
+		1A0C4EE01F1D625C00550433 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		1A0C4EE21F1D673600550433 /* InjectionBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionBag.swift; sourceTree = "<group>"; };
+		1A0C4EE41F1D67DF00550433 /* WalkthroughCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinator.swift; sourceTree = "<group>"; };
 		1A1E476C1F0E808500EA9A36 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		1A3CA32A1F102BB700283748 /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
@@ -290,7 +309,6 @@
 		1A8306321F0EDAA50099D98C /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
 		1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ring.swift"; sourceTree = "<group>"; };
 		1ABE07B91F0C16F100D36361 /* ContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
-		1ABE07BB1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalkthroughStoryboard.storyboard; sourceTree = "<group>"; };
 		1ABE07D01F0D8FE800D36361 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		1ABE07D11F0D8FE800D36361 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		1ABE07DB1F0D915100D36361 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -303,7 +321,6 @@
 		557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SystemAdapter.mm; sourceTree = "<group>"; };
 		5628B41A1F0C358D008B1E11 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
 		5628B41B1F0C358D008B1E11 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
-		5628B4201F0C35C8008B1E11 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		562FB6CC1EFAD18A00C61A78 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		56308BA51EA00E5700660275 /* NameRegistrationResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameRegistrationResponse.h; sourceTree = "<group>"; };
 		56308BA61EA00E5700660275 /* NameRegistrationResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameRegistrationResponse.m; sourceTree = "<group>"; };
@@ -318,14 +335,7 @@
 		564C44631E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameRegistrationAdapterDelegate.swift; sourceTree = "<group>"; };
 		56559B0D1EE8777600BF20E1 /* RxRealm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRealm.framework; path = Carthage/Build/iOS/RxRealm.framework; sourceTree = "<group>"; };
 		56559B131EE89E7900BF20E1 /* DeviceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
-		5669A7F91EA904AF003C7B93 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
-		5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
-		5669A7FD1EA904E4003C7B93 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
-		5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkDeviceToAccountViewController.swift; sourceTree = "<group>"; };
 		568F56721EA7E38F00132D7D /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
-		56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
-		56AC64E01E80542300EA1AA9 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
-		56AC64E21E805F0200EA1AA9 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		56AC650D1E85694D00EA1AA9 /* DesignableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		56BBC99D1ED714CB00CDAF8B /* MessagesAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesAdapter.h; sourceTree = "<group>"; };
 		56BBC99E1ED714CB00CDAF8B /* MessagesAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MessagesAdapter.mm; sourceTree = "<group>"; };
@@ -443,19 +453,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0273C3021E0C689600CF00BA /* Walkthrough */ = {
-			isa = PBXGroup;
-			children = (
-				56AC64DD1E804EB500EA1AA9 /* Cells */,
-				5628B4201F0C35C8008B1E11 /* WelcomeViewController.swift */,
-				0273C3031E0C68B100CF00BA /* CreateProfileViewController.swift */,
-				0273C3041E0C68B100CF00BA /* CreateRingAccountViewController.swift */,
-				5669A8021EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift */,
-				1ABE07BB1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard */,
-			);
-			path = Walkthrough;
-			sourceTree = "<group>";
-		};
 		028568231DF60E5C003A8D8D /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
@@ -599,13 +596,14 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				1A0C4EDF1F1D624100550433 /* Coordinators */,
+				1A0C4EBC1F1D48AA00550433 /* Features */,
 				1ABE07C61F0D86B300D36361 /* Resources */,
 				56BBC9BD1ED7165800CDAF8B /* Smartlist */,
 				56BBC9B61ED7158600CDAF8B /* Contacts */,
 				56BBC9AD1ED7154800CDAF8B /* Conversations */,
 				56BBC9A41ED7150200CDAF8B /* Messages */,
 				564C44571E8D7F68000F92B1 /* Constants */,
-				0273C3021E0C689600CF00BA /* Walkthrough */,
 				02EFCACF1E0C3DD600FD8ED1 /* Bridging */,
 				02E1A0271DDE4C3900D75B59 /* Account */,
 				02E1A0261DDE4C2E00D75B59 /* Services */,
@@ -715,6 +713,85 @@
 			name = SYS_DEPS;
 			sourceTree = "<group>";
 		};
+		1A0C4EBC1F1D48AA00550433 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				1A0C4EBD1F1D48DD00550433 /* Walkthrough */,
+			);
+			name = Features;
+			sourceTree = "<group>";
+		};
+		1A0C4EBD1F1D48DD00550433 /* Walkthrough */ = {
+			isa = PBXGroup;
+			children = (
+				1A0C4ED51F1D49D800550433 /* Welcome */,
+				1A0C4ED71F1D4AC300550433 /* CreateProfile */,
+				1A0C4ED61F1D4AB300550433 /* CreateAccount */,
+				1A0C4ED81F1D4AD600550433 /* LinkDevice */,
+				1A0C4EC81F1D48F900550433 /* Cells */,
+				1A0C4EBE1F1D48F600550433 /* CreateProfileViewController.swift */,
+				1A0C4EBF1F1D48F600550433 /* CreateRingAccountViewController.swift */,
+				1A0C4EC01F1D48F600550433 /* LinkDeviceToAccountViewController.swift */,
+				1A0C4EC11F1D48F600550433 /* WalkthroughStoryboard.storyboard */,
+				1A0C4EC21F1D48F600550433 /* WelcomeViewController2.swift */,
+				1A0C4EE41F1D67DF00550433 /* WalkthroughCoordinator.swift */,
+			);
+			name = Walkthrough;
+			path = Features/Walkthrough;
+			sourceTree = "<group>";
+		};
+		1A0C4EC81F1D48F900550433 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1A0C4EC91F1D491400550433 /* SwitchCell.swift */,
+				1A0C4ECA1F1D491400550433 /* SwitchCell.xib */,
+				1A0C4ECB1F1D491400550433 /* TextCell.swift */,
+				1A0C4ECC1F1D491400550433 /* TextCell.xib */,
+				1A0C4ECD1F1D491400550433 /* TextFieldCell.swift */,
+				1A0C4ECE1F1D491400550433 /* TextFieldCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1A0C4ED51F1D49D800550433 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				1A0C4ED91F1D4B1B00550433 /* WelcomeViewController.storyboard */,
+				1A0C4EDB1F1D4B7E00550433 /* WelcomeViewController.swift */,
+			);
+			name = Welcome;
+			sourceTree = "<group>";
+		};
+		1A0C4ED61F1D4AB300550433 /* CreateAccount */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreateAccount;
+			sourceTree = "<group>";
+		};
+		1A0C4ED71F1D4AC300550433 /* CreateProfile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreateProfile;
+			sourceTree = "<group>";
+		};
+		1A0C4ED81F1D4AD600550433 /* LinkDevice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LinkDevice;
+			sourceTree = "<group>";
+		};
+		1A0C4EDF1F1D624100550433 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				1A0C4EE01F1D625C00550433 /* Coordinator.swift */,
+				1A0C4EE21F1D673600550433 /* InjectionBag.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		1ABE07C51F0D862D00D36361 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
@@ -774,20 +851,6 @@
 				564C445A1E8EA44E000F92B1 /* Durations.swift */,
 			);
 			path = Constants;
-			sourceTree = "<group>";
-		};
-		56AC64DD1E804EB500EA1AA9 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				56AC64DE1E804ECC00EA1AA9 /* SwitchCell.swift */,
-				5669A7F91EA904AF003C7B93 /* SwitchCell.xib */,
-				56AC64E01E80542300EA1AA9 /* TextFieldCell.swift */,
-				5669A7FB1EA904D2003C7B93 /* TextFieldCell.xib */,
-				56AC64E21E805F0200EA1AA9 /* TextCell.swift */,
-				5669A7FD1EA904E4003C7B93 /* TextCell.xib */,
-			);
-			name = Cells;
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		56BBC9A41ED7150200CDAF8B /* Messages */ = {
@@ -953,18 +1016,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5669A7FE1EA904E4003C7B93 /* TextCell.xib in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
 				56BBC9CE1EDC5E7000CDAF8B /* MessageAccessoryView.xib in Resources */,
 				1A3CA32F1F1400AF00283748 /* MessageCellReceived.xib in Resources */,
 				1A3CA3391F14133300283748 /* MessageCellSent.xib in Resources */,
+				1A0C4ED01F1D491400550433 /* SwitchCell.xib in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
 				1ABE07E01F0D91A800D36361 /* Main.storyboard in Resources */,
-				5669A7FA1EA904AF003C7B93 /* SwitchCell.xib in Resources */,
 				56BBC9B51ED7156500CDAF8B /* ConversationCell.xib in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
-				5669A7FC1EA904D2003C7B93 /* TextFieldCell.xib in Resources */,
-				1ABE07BC1F0C22CC00D36361 /* WalkthroughStoryboard.storyboard in Resources */,
+				1A0C4ED41F1D491400550433 /* TextFieldCell.xib in Resources */,
+				1A0C4ED21F1D491400550433 /* TextCell.xib in Resources */,
+				1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */,
+				1A0C4EC61F1D48F600550433 /* WalkthroughStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1045,20 +1109,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
-				5669A8031EAA58E6003C7B93 /* LinkDeviceToAccountViewController.swift in Sources */,
-				0273C3051E0C68B100CF00BA /* CreateProfileViewController.swift in Sources */,
 				02E1A0251DDE4ABA00D75B59 /* String+Bool.swift in Sources */,
+				1A0C4EE11F1D625C00550433 /* Coordinator.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				02DD80C81E1EAD70009A3510 /* AccountConfigModel.swift in Sources */,
+				1A0C4EDC1F1D4B7E00550433 /* WelcomeViewController.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
-				0273C3061E0C68B100CF00BA /* CreateRingAccountViewController.swift in Sources */,
+				1A0C4ED11F1D491400550433 /* TextCell.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
 				1A3CA3351F140EB300283748 /* MessableBubble.swift in Sources */,
+				1A0C4EE51F1D67DF00550433 /* WalkthroughCoordinator.swift in Sources */,
 				56BBC9CF1EDC5E7000CDAF8B /* MessageCellReceived.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
 				1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */,
 				56BBC9D21EDC5E7000CDAF8B /* MessageViewModel.swift in Sources */,
+				1A0C4EE61F1D6C1900550433 /* WelcomeViewController2.swift in Sources */,
 				02DD80CD1E1EB2E4009A3510 /* ConfigKeyModel.swift in Sources */,
 				56BBC9E31EDDCC8100CDAF8B /* ConversationSection.swift in Sources */,
 				56BBC9A81ED7152300CDAF8B /* SmartlistViewController.swift in Sources */,
@@ -1066,22 +1132,24 @@
 				1ABE07D31F0D8FE800D36361 /* Storyboards.swift in Sources */,
 				56559B141EE89E7900BF20E1 /* DeviceModel.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
-				5628B4211F0C35C8008B1E11 /* WelcomeViewController.swift in Sources */,
 				1A3CA32D1F13DA7200283748 /* Chameleon+Ring.swift in Sources */,
 				5628B41C1F0C358D008B1E11 /* AccountDetailsViewController.swift in Sources */,
-				56AC64E11E80542300EA1AA9 /* TextFieldCell.swift in Sources */,
 				1ABE07E21F0D924700D36361 /* Strings.swift in Sources */,
-				56AC64E31E805F0200EA1AA9 /* TextCell.swift in Sources */,
+				1A0C4EC51F1D48F600550433 /* LinkDeviceToAccountViewController.swift in Sources */,
+				1A0C4ED31F1D491400550433 /* TextFieldCell.swift in Sources */,
 				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
 				56BBC9BF1ED7168400CDAF8B /* SmartlistViewModel.swift in Sources */,
+				1A0C4EC41F1D48F600550433 /* CreateRingAccountViewController.swift in Sources */,
+				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
 				02B22E011DF755E5000358C9 /* MainTabBarViewController.swift in Sources */,
 				564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */,
 				1A3CA3381F14133300283748 /* MessageCellSent.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				02B22DFC1DF755BB000358C9 /* AccountModel.swift in Sources */,
-				56AC64DF1E804ECC00EA1AA9 /* SwitchCell.swift in Sources */,
+				1A0C4ECF1F1D491400550433 /* SwitchCell.swift in Sources */,
 				56BBC9B91ED715FE00CDAF8B /* ContactModel.swift in Sources */,
 				56BBC9BA1ED715FE00CDAF8B /* ContactHelper.swift in Sources */,
+				1A0C4EC31F1D48F600550433 /* CreateProfileViewController.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				56BBC9A31ED714DF00CDAF8B /* ConversationsService.swift in Sources */,
 				56BBC9B01ED7155700CDAF8B /* ConversationModel.swift in Sources */,
