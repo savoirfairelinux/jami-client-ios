@@ -90,7 +90,11 @@ class ContactsService {
     func accept(contactRequest: ContactRequestModel, withAccount account: AccountModel) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
             let success = self.contactsAdapter.acceptTrustRequest(fromContact: contactRequest.ringId,
+<<<<<<< HEAD
+                                                                 withAccountId: account.id)
+=======
                                                                   withAccountId: account.id)
+>>>>>>> navigation: apply the Coordinator pattern
             if success {
                 observable.on(.completed)
             } else {
