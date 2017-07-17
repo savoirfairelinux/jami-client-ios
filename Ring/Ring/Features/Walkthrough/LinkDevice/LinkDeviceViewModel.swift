@@ -19,18 +19,21 @@
  */
 
 import Foundation
-import UIKit
+import RxSwift
 
-extension UIColor {
+class LinkDeviceViewModel: Stateable {
 
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
 
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
+    init (with injectionBag: InjectionBag) {
+    }
+
+    func linkDevice () {
+        self.stateSubject.onNext(WalkthroughState.deviceLinked)
+    }
 
 }

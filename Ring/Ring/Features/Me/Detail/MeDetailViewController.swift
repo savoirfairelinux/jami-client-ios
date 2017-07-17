@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
+ *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,19 +18,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import UIKit
 
-extension UIColor {
+class MeDetailViewController: UIViewController {
 
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
+    // MARK: - Properties
+    var account: AccountModel!
 
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
+    @IBOutlet weak var detailsLabel: UILabel!
 
 }

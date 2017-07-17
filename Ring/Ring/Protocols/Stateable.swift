@@ -19,18 +19,11 @@
  */
 
 import Foundation
-import UIKit
+import RxSwift
 
-extension UIColor {
+public protocol State {
+}
 
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
-
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
-
+public protocol Stateable {
+    var state: Observable<State> { get }
 }
