@@ -19,18 +19,22 @@
  */
 
 import Foundation
+import Reusable
 import UIKit
 
-extension UIColor {
+protocol ViewModel: class {
+    init(with injectionBag: InjectionBag)
+}
 
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
+protocol ViewModelBased: class {
+    associatedtype VMType: ViewModel
+    var viewModel: VMType! { get set }
+}
 
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
-
+extension ViewModelBased where Self: UIViewController, Self: StoryboardBased {
+    static func instantiate(with injectionBag: InjectionBag) -> Self {
+        let viewController = Self.instantiate()
+        viewController.viewModel = VMType(with: injectionBag)
+        return viewController
+    }
 }
