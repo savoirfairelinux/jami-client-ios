@@ -65,3 +65,13 @@
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Accept";
+"alerts.incomingCallButtonIgnore" = "Ignore";
+
+//Calls
+"calls.callItemTitle" = "Call";
+"calls.unknown" = "Unknown";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";

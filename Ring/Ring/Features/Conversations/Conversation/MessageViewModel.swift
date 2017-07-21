@@ -25,7 +25,17 @@ enum BubblePosition {
     case sent
 }
 
-class MessageViewModel {
+protocol HistoryItem {
+
+    var content: String { get }
+    func bubblePosition() -> BubblePosition
+}
+
+class CallHistoryItem {
+
+}
+
+class MessageItem: HistoryItem {
 
     fileprivate let accountService: AccountsService
     fileprivate var message: MessageModel

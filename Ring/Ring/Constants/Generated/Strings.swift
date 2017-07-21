@@ -22,6 +22,25 @@ enum L10n {
     static let accountNoNetworkTitle = L10n.tr("Localizable", "alerts.accountNoNetworkTitle")
     /// Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.
     static let acountCannotBeFoundMessage = L10n.tr("Localizable", "alerts.acountCannotBeFoundMessage")
+    /// Incoming call from 
+    static let incomingCallAllertTitle = L10n.tr("Localizable", "alerts.incomingCallAllertTitle")
+    /// Accept
+    static let incomingCallButtonAccept = L10n.tr("Localizable", "alerts.incomingCallButtonAccept")
+    /// Ignore
+    static let incomingCallButtonIgnore = L10n.tr("Localizable", "alerts.incomingCallButtonIgnore")
+  }
+
+  enum Calls {
+    /// Call finished
+    static let callFinished = L10n.tr("Localizable", "calls.callFinished")
+    /// Calling...
+    static let calling = L10n.tr("Localizable", "calls.calling")
+    /// Call
+    static let callItemTitle = L10n.tr("Localizable", "calls.callItemTitle")
+    /// wants to talk to you
+    static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo")
+    /// Unknown
+    static let unknown = L10n.tr("Localizable", "calls.unknown")
   }
 
   enum Createaccount {
