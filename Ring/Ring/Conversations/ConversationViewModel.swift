@@ -73,29 +73,28 @@ class ConversationViewModel {
             })
         }).observeOn(MainScheduler.instance)
 
-        let contact = accountService.currentAccount?.contacts[self.conversation.recipientRingId]
+        if let contact = accountService.currentAccount?.contacts[self.conversation.recipientRingId] {
+            if !contact.userName.isEmpty {
+                userName.onNext(contact.userName)
+            } else {
+                let recipientRingId = self.conversation.recipientRingId
 
-        if let contactUserName = contact?.userName {
-            userName.onNext(contactUserName)
-        } else {
+                //Return an observer for the username lookup
+                AppDelegate.nameService.usernameLookupStatus
+                    .filter({ lookupNameResponse in
+                        return lookupNameResponse.address != nil &&
+                            lookupNameResponse.address == recipientRingId
+                    }).subscribe(onNext: { lookupNameResponse in
+                        if lookupNameResponse.state == .found {
+                            self.userName.onNext(lookupNameResponse.name)
+                            contact.userName = lookupNameResponse.name
+                        } else {
+                            self.userName.onNext(lookupNameResponse.address)
+                        }
+                    }).disposed(by: disposeBag)
 
-            let recipientRingId = self.conversation.recipientRingId
-
-            //Return an observer for the username lookup
-            AppDelegate.nameService.usernameLookupStatus
-                .filter({ lookupNameResponse in
-                    return lookupNameResponse.address != nil &&
-                        lookupNameResponse.address == recipientRingId
-                }).subscribe(onNext: { lookupNameResponse in
-                    if let name = lookupNameResponse.name {
-                        self.userName.onNext(name)
-                        contact?.userName = name
-                    } else if let address = lookupNameResponse.address {
-                        self.userName.onNext(address)
-                    }
-                }).disposed(by: disposeBag)
-
-            AppDelegate.nameService.lookupAddress(withAccount: "", nameserver: "", address: self.conversation.recipientRingId)
+                AppDelegate.nameService.lookupAddress(withAccount: "", nameserver: "", address: self.conversation.recipientRingId)
+            }
         }
     }
 

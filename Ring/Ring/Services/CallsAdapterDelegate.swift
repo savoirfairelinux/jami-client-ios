@@ -1,8 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,17 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-/**
- Expose Objective-C bridging classes to Swift.
- */
-#import "AccountAdapter.h"
-#import "SystemAdapter.h"
-#import "DRingAdapter.h"
-#import "NameRegistrationAdapter.h"
-#import "LookupNameResponse.h"
-#import "RegistrationResponse.h"
-#import "NameRegistrationResponse.h"
-#import "MessagesAdapter.h"
-#import "Chameleon/Chameleon.h"
-#import "ContactsAdapter.h"
-#import "CallsAdapter.h"
+@objc protocol CallsAdapterDelegate {
+    func didChangeCallState(withCallId callId: String, state: String, errorCode: NSInteger)
+    func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String])
+    func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String)
+}
