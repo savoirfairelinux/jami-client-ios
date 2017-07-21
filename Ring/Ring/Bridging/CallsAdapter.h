@@ -1,8 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,17 +18,22 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-/**
- Expose Objective-C bridging classes to Swift.
- */
-#import "AccountAdapter.h"
-#import "SystemAdapter.h"
-#import "DRingAdapter.h"
-#import "NameRegistrationAdapter.h"
-#import "LookupNameResponse.h"
-#import "RegistrationResponse.h"
-#import "NameRegistrationResponse.h"
-#import "MessagesAdapter.h"
-#import "Chameleon/Chameleon.h"
-#import "ContactsAdapter.h"
-#import "CallsAdapter.h"
+#import <Foundation/Foundation.h>
+
+@protocol CallsAdapterDelegate;
+
+@interface CallsAdapter : NSObject
+
+@property (class, nonatomic, weak) id <CallsAdapterDelegate> delegate;
+
+- (BOOL)acceptCallWithId:(NSString*)callId;
+- (BOOL)refuseCallWithId:(NSString*)callId;
+- (BOOL)hangUpCallWithId:(NSString*)callId;
+- (BOOL)holdCallWithId:(NSString*)callId;
+- (BOOL)unholdCallWithId:(NSString*)callId;
+
+- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId;
+- (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId;
+- (NSArray<NSString*>*)calls;
+
+@end
