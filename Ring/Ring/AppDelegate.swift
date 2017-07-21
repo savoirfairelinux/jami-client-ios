@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     static let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
     static let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
+    static let callsService = CallsService(withCallsAdapter: CallsAdapter())
 
     private let log = SwiftyBeaver.self
 

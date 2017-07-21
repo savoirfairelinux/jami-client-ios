@@ -400,7 +400,7 @@
                         <viewControllerLayoutGuide type="top" id="wEb-Zj-bvJ"/>
                         <viewControllerLayoutGuide type="bottom" id="S9d-I1-nWj"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jPi-CC-dFO">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="jPi-CC-dFO">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
