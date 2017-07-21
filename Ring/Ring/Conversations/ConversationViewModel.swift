@@ -47,7 +47,7 @@ class ConversationViewModel {
 
     private let disposeBag = DisposeBag()
 
-    let messages: Observable<[MessageViewModel]>
+    let history: Observable<[HistoryItem]>
 
     var userName = BehaviorSubject(value: "")
 
@@ -55,6 +55,7 @@ class ConversationViewModel {
     private let conversationsService = AppDelegate.conversationsService
     private let accountService = AppDelegate.accountService
     private let contactsService = AppDelegate.contactsService
+    private let callsService = AppDelegate.callsService
 
     init(withConversation conversation: ConversationModel) {
         self.conversation = conversation
@@ -63,15 +64,20 @@ class ConversationViewModel {
         hourFormatter.dateFormat = "HH:mm"
 
         //Create observable from sorted conversations and flatMap them to view models
-        self.messages = self.conversationsService.conversations.map({ conversations in
+        self.history = self.conversationsService.conversations.map({ conversations in
             return conversations.filter({ conv in
                 return conv.isEqual(conversation)
             }).flatMap({ conversation in
                 conversation.messages.map({ message in
-                    return MessageViewModel(withMessage: message)
+                    return MessageItem(withMessage: message)
                 })
             })
         }).observeOn(MainScheduler.instance)
+
+        //TODO: Merge messages and calls to create the history
+        self.callsService.history.subscribe(onNext: { history in
+            self.log.info("CALL HISTORY = \(history)")
+        })
 
         let contact = contactsService.contact(withRingId: self.conversation.recipientRingId)
 
@@ -187,5 +193,17 @@ class ConversationViewModel {
         return self.conversation.messages.filter({ message in
             return message.status != .read && message.author != accountHelper.ringId!
         }).count
+    }
+
+    func placeCall() {
+        self.callsService.placeCall(withAccount: self.accountService.currentAccount!, toRingId: self.conversation.recipientRingId).subscribe(onSuccess: { [unowned self] callModel in
+                self.log.info("Call placed: \(callModel.callId)")
+                let callViewController = StoryboardScene.CallScene.initialViewController()
+                callViewController.viewModel = CallViewModel(withCallsService: AppDelegate.callsService,
+                                                             contactsService: AppDelegate.contactsService,
+                                                             call: callModel)
+            }, onError: { [unowned self] error in
+                self.log.error("Failed to place the call")
+        }).disposed(by: self.disposeBag)
     }
 }

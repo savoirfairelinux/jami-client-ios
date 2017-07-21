@@ -31,6 +31,19 @@ enum L10n {
     static let acountCannotBeFoundMessage = L10n.tr("alerts.acountCannotBeFoundMessage")
   }
 
+  enum Calls {
+    /// Call finished
+    static let callFinished = L10n.tr("calls.callFinished")
+    /// Calling...
+    static let calling = L10n.tr("calls.calling")
+    /// Call
+    static let callItemTitle = L10n.tr("calls.callItemTitle")
+    /// wants to talk to you
+    static let incomingCallInfo = L10n.tr("calls.incomingCallInfo")
+    /// Unknown
+    static let unknown = L10n.tr("calls.unknown")
+  }
+
   enum Createaccount {
     /// Choose strong password you will remember to protect your Ring account.
     static let chooseStrongPassword = L10n.tr("createAccount.chooseStrongPassword")

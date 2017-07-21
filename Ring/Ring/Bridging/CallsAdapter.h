@@ -18,44 +18,22 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
+#import <Foundation/Foundation.h>
 
-enum BubblePosition {
-    case received
-    case sent
-}
+@protocol CallsAdapterDelegate;
 
-protocol HistoryItem {
+@interface CallsAdapter : NSObject
 
-    var content: String { get }
-    func bubblePosition() -> BubblePosition
-}
+@property (class, nonatomic, weak) id <CallsAdapterDelegate> delegate;
 
-class CallHistoryItem {
+- (BOOL)acceptCallWithId:(NSString*)callId;
+- (BOOL)refuseCallWithId:(NSString*)callId;
+- (BOOL)hangUpCallWithId:(NSString*)callId;
+- (BOOL)holdCallWithId:(NSString*)callId;
+- (BOOL)unholdCallWithId:(NSString*)callId;
 
-}
+- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId;
+- (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId;
+- (NSArray<NSString*>*)calls;
 
-class MessageItem: HistoryItem {
-
-    fileprivate let accountService = AppDelegate.accountService
-    fileprivate var message: MessageModel
-
-    init(withMessage message: MessageModel) {
-        self.message = message
-    }
-
-    var content: String {
-        return self.message.content
-    }
-
-    func bubblePosition() -> BubblePosition {
-
-        let accountHelper = AccountModelHelper(withAccount: accountService.currentAccount!)
-
-        if self.message.author == accountHelper.ringId! {
-            return .sent
-        } else {
-            return .received
-        }
-    }
-}
+@end

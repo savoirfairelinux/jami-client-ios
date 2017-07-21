@@ -18,44 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
-
-enum BubblePosition {
-    case received
-    case sent
-}
-
-protocol HistoryItem {
-
-    var content: String { get }
-    func bubblePosition() -> BubblePosition
-}
-
-class CallHistoryItem {
-
-}
-
-class MessageItem: HistoryItem {
-
-    fileprivate let accountService = AppDelegate.accountService
-    fileprivate var message: MessageModel
-
-    init(withMessage message: MessageModel) {
-        self.message = message
-    }
-
-    var content: String {
-        return self.message.content
-    }
-
-    func bubblePosition() -> BubblePosition {
-
-        let accountHelper = AccountModelHelper(withAccount: accountService.currentAccount!)
-
-        if self.message.author == accountHelper.ringId! {
-            return .sent
-        } else {
-            return .received
-        }
-    }
+@objc protocol CallsAdapterDelegate {
+    func didChangeCallState(withCallId callId: String, state: String, stateCode: NSInteger)
+    func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String])
+    func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String)
 }

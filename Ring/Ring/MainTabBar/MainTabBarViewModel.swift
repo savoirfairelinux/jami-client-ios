@@ -1,7 +1,6 @@
 /*
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -19,17 +18,29 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-/**
- Expose Objective-C bridging classes to Swift.
- */
-#import "AccountAdapter.h"
-#import "SystemAdapter.h"
-#import "DRingAdapter.h"
-#import "NameRegistrationAdapter.h"
-#import "LookupNameResponse.h"
-#import "RegistrationResponse.h"
-#import "NameRegistrationResponse.h"
-#import "MessagesAdapter.h"
-#import "Chameleon/Chameleon.h"
-#import "ContactsAdapter.h"
-#import "CallsAdapter.h"
+import RxSwift
+
+class MainTabBarViewModel {
+
+    fileprivate let callsService: CallsService
+    let showCallScene: Observable<CallModel>
+    let hideCallScene: Observable<Void>
+
+    init(withCallsService callsService: CallsService) {
+
+        self.callsService = callsService
+
+        self.showCallScene = callsService.currentCall.filter({ call in
+            return call.state == .incoming && call.callType == .incoming
+                || call.state == .connecting && call.callType == .outgoing
+        }).map({ call in
+            return call
+        })
+
+        self.hideCallScene = callsService.currentCall.filter({ call in
+            return call.state == .over
+        }).map({ _ in
+            return
+        })
+    }
+}
