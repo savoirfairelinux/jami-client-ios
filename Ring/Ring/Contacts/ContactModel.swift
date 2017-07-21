@@ -21,7 +21,7 @@
 class ContactModel {
 
     var ringId: String = ""
-    var userName: String?
+    var userName: String = ""
     var confirmed: Bool = false
     var added: Date!
 

@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,16 +19,39 @@
  */
 
 import UIKit
+import Reusable
+import RxSwift
 
 class MainTabBarViewController: UITabBarController {
-    fileprivate let accountService = AppDelegate.accountService
+
+    fileprivate let viewModel = MainTabBarViewModel(withCallsService: AppDelegate.callsService)
+    fileprivate let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupBindings()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    func setupBindings() {
 
+        self.viewModel.showCallScene.subscribe(onNext: { call in
+            //Instanciate Call view controller
+            let callViewController = StoryboardScene.CallScene.initialViewController()
+            callViewController.viewModel = CallViewModel(withCallsService: AppDelegate.callsService,
+                                                         call: call)
+            //Show call scene
+            self.present(callViewController, animated: false, completion: nil)
+        }).disposed(by: self.disposeBag)
+
+        self.viewModel.hideCallScene.subscribe(onNext: { _ in
+            //Hide call scene after delay in seconds
+            self.hideCallScene(afterDelay: 2.0)
+        }).disposed(by: self.disposeBag)
+    }
+
+    func hideCallScene(afterDelay delay: Float) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            self.presentedViewController?.dismiss(animated: false, completion: nil)
+        })
     }
 }
