@@ -33,7 +33,7 @@ class ConversationViewModel: ViewModel {
     var conversation: ConversationModel! {
         didSet {
             //Create observable from sorted conversations and flatMap them to view models
-            self.messages = self.conversationsService.conversations.map({ [unowned self] conversations in
+            self.history = self.conversationsService.conversations.map({ [unowned self] conversations in
                 return conversations.filter({ conv in
                     let recipient1 = conv.recipientRingId
                     let recipient2 = self.conversation.recipientRingId
@@ -43,7 +43,7 @@ class ConversationViewModel: ViewModel {
                     return false
                 }).flatMap({ conversation in
                     conversation.messages.map({ [unowned self] message in
-                        return MessageViewModel(withInjectionBag: self.injectionBag, withMessage: message)
+                        return MessageItem(withInjectionBag: self.injectionBag, withMessage: message)
                     })
                 })
             }).observeOn(MainScheduler.instance)
@@ -91,7 +91,7 @@ class ConversationViewModel: ViewModel {
 
     private let disposeBag = DisposeBag()
 
-    var messages: Observable<[MessageViewModel]>!
+    var history: Observable<[HistoryItem]>!
 
     var userName = BehaviorSubject(value: "")
 
@@ -100,6 +100,7 @@ class ConversationViewModel: ViewModel {
     private let accountService: AccountsService
     private let nameService: NameService
     private let contactsService: ContactsService
+    private let callsService: CallsService
     private let injectionBag: InjectionBag
 
     required init(with injectionBag: InjectionBag) {
@@ -108,6 +109,7 @@ class ConversationViewModel: ViewModel {
         self.conversationsService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.contactsService = injectionBag.contactsService
+        self.callsService = injectionBag.callsService
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
@@ -201,5 +203,13 @@ class ConversationViewModel: ViewModel {
         return self.conversation.messages.filter({ message in
             return message.status != .read && message.author != accountHelper.ringId!
         }).count
+    }
+
+    func placeCall() {
+        self.callsService.placeCall(withAccount: self.accountService.currentAccount!, toRingId: self.conversation.recipientRingId).subscribe(onSuccess: { [unowned self] callModel in
+                self.log.info("Call placed: \(callModel.callId)")
+                    }, onError: { [unowned self] error in
+                self.log.error("Failed to place the call")
+        }).disposed(by: self.disposeBag)
     }
 }

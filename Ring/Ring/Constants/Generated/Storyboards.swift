@@ -42,6 +42,16 @@ extension UIViewController {
 }
 
 enum StoryboardScene {
+  enum CallViewController: StoryboardSceneType {
+    static let storyboardName = "CallViewController"
+
+    static func initialViewController() -> Ring.CallViewController {
+      guard let vc = storyboard().instantiateInitialViewController() as? Ring.CallViewController else {
+        fatalError("Failed to instantiate initialViewController for \(self.storyboardName)")
+      }
+      return vc
+    }
+  }
   enum ContactRequestsViewController: StoryboardSceneType {
     static let storyboardName = "ContactRequestsViewController"
 

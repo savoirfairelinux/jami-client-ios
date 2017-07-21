@@ -12,6 +12,7 @@ private class RingStringsBundleToken {}
 // swiftlint:disable variable_name
 // swiftlint:disable valid_docs
 
+// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 enum L10n {
 
   enum Alerts {
@@ -29,6 +30,19 @@ enum L10n {
     static let accountNoNetworkTitle = L10n.tr("alerts.accountNoNetworkTitle")
     /// Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.
     static let acountCannotBeFoundMessage = L10n.tr("alerts.acountCannotBeFoundMessage")
+  }
+
+  enum Calls {
+    /// Call finished
+    static let callFinished = L10n.tr("calls.callFinished")
+    /// Calling...
+    static let calling = L10n.tr("calls.calling")
+    /// Call
+    static let callItemTitle = L10n.tr("calls.callItemTitle")
+    /// wants to talk to you
+    static let incomingCallInfo = L10n.tr("calls.incomingCallInfo")
+    /// Unknown
+    static let unknown = L10n.tr("calls.unknown")
   }
 
   enum Createaccount {

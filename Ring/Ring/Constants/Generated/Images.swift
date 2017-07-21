@@ -11,15 +11,12 @@
 private class RingImagesBundleToken {}
 
 // swiftlint:disable file_length
-// swiftlint:disable line_length
-
-// swiftlint:disable type_body_length
 public enum RingAsset: String {
   case backgroundRing = "background_ring"
   case icContactPicture = "ic_contact_picture"
   case logoRingBeta2Blanc = "logo-ring-beta2-blanc"
 
-  /** 
+  /**
     Loads from application's Bundle if image exists, then loads from current bundle, fatalError if image does not exist
   */
   public var smartImage: Image {

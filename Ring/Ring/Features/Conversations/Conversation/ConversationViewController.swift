@@ -30,7 +30,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     let disposeBag = DisposeBag()
 
     var viewModel: ConversationViewModel!
-    var messageViewModels: [MessageViewModel]?
+    var messageViewModels: [MessageItem]?
     var textFieldShouldEndEditing = false
     var bottomOffset: CGFloat = 0
 
@@ -77,6 +77,19 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
+
+        //Call item
+        let callItem = UIBarButtonItem()
+        callItem.title = L10n.Calls.callItemTitle.string
+        callItem.rx.tap.subscribe(onNext: { [unowned self] in
+            self.callItemTapped()
+        }).disposed(by: self.disposeBag)
+
+        self.navigationItem.rightBarButtonItem = callItem
+    }
+
+    fileprivate func callItemTapped() {
+        self.viewModel?.placeCall()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -105,8 +118,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.tableView.register(cellType: MessageCellReceived.self)
 
         //Bind the TableView to the ViewModel
-        self.viewModel.messages.subscribe(onNext: { [weak self] (messageViewModels) in
-            self?.messageViewModels = messageViewModels
+        self.viewModel.history.subscribe(onNext: { [weak self] (messageViewModels) in
+            self?.messageViewModels = messageViewModels as? [MessageItem]
             self?.tableView.reloadData()
         }).disposed(by: self.disposeBag)
 
