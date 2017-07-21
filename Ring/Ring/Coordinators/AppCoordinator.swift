@@ -63,11 +63,16 @@ class AppCoordinator: Coordinator, StateableResponsive {
         let conversationsCoordinator = ConversationsCoordinator(with: self.injectionBag)
         let contactRequestsCoordinator = ContactRequestsCoordinator(with: self.injectionBag)
         let meCoordinator = MeCoordinator(with: self.injectionBag)
+        let callCoordinator = CallCoordinator(with: self.injectionBag)
 
-        self.tabBarViewController.viewControllers = [conversationsCoordinator.rootViewController, contactRequestsCoordinator.rootViewController, meCoordinator.rootViewController]
+        self.tabBarViewController.viewControllers = [conversationsCoordinator.rootViewController,
+                                                     contactRequestsCoordinator.rootViewController,
+                                                     meCoordinator.rootViewController,
+                                                     callCoordinator.rootViewController]
         self.addChildCoordinator(childCoordinator: conversationsCoordinator)
         self.addChildCoordinator(childCoordinator: contactRequestsCoordinator)
         self.addChildCoordinator(childCoordinator: meCoordinator)
+        self.addChildCoordinator(childCoordinator: callCoordinator)
 
         self.rootViewController.rx.viewDidAppear.take(1).subscribe(onNext: { [unowned self, unowned conversationsCoordinator, unowned contactRequestsCoordinator, unowned meCoordinator] (_) in
             conversationsCoordinator.start()

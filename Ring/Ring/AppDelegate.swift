@@ -38,13 +38,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     private let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
     private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
+    private let callsService = CallsService(withCallsAdapter: CallsAdapter())
 
     public lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
                             withAccountService: self.accountService,
                             withNameService: self.nameService,
                             withConversationService: self.conversationsService,
-                            withContactsService: self.contactsService)
+                            withContactsService: self.contactsService,
+                            withCallService: self.callsService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
