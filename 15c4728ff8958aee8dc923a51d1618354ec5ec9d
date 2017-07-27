@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba3841fe_76058dc1",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-07-27T15:48:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba3841fe_db22c400",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 34
+      },
+      "revId": "15c4728ff8958aee8dc923a51d1618354ec5ec9d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3841fe_1b1d4cbe",
         "filename": "Ring/Ring/Services/ContactsService.swift",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-26T14:06:42Z",
       "side": 1,
       "message": "This should be a completable throwing exceptions",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 48
+      },
+      "revId": "15c4728ff8958aee8dc923a51d1618354ec5ec9d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_560a09d3",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-07-27T15:48:08Z",
+      "side": 1,
+      "message": "It\u0027s not possible to zip two Completables with RxSwift",
+      "parentUuid": "ba3841fe_1b1d4cbe",
       "range": {
         "startLine": 95,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ba3841fe_b60f15e1",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-07-27T15:48:08Z",
+      "side": 1,
+      "message": "It\u0027s not possible to zip two Completables with RxSwift",
+      "parentUuid": "ba3841fe_7b79f8fb",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 48
+      },
+      "revId": "15c4728ff8958aee8dc923a51d1618354ec5ec9d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3841fe_5b7eb4e5",
         "filename": "Ring/Ring/Services/ContactsService.swift",
         "patchSetId": 7
@@ -82,6 +154,30 @@
       "writtenOn": "2017-07-26T14:06:42Z",
       "side": 1,
       "message": "^",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 48
+      },
+      "revId": "15c4728ff8958aee8dc923a51d1618354ec5ec9d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_961491f6",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 394
+      },
+      "writtenOn": "2017-07-27T15:48:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba3841fe_5b7eb4e5",
       "range": {
         "startLine": 134,
         "startChar": 0,
