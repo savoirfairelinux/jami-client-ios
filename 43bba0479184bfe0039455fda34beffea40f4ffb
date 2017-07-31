@@ -1,0 +1,418 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3841fe_915dbbec",
+        "filename": "Ring/Ring/Contacts/ContactModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "if the dictionary does not have a Date, you are in a case where it could crash. Either you provide a default date, or \"added\" should be an optional",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 20
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_d16e2396",
+        "filename": "Ring/Ring/Contacts/ContactRequestsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self] in both closures",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 40
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_316caf9c",
+        "filename": "Ring/Ring/Contacts/ContactRequestsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 59
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_1169ab8b",
+        "filename": "Ring/Ring/Contacts/ContactRequestsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 51
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_710597c1",
+        "filename": "Ring/Ring/Conversations/ConversationModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "why dynamic ?",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 11
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_510a13d3",
+        "filename": "Ring/Ring/Conversations/ConversationModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "why dynamic ?",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 11
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_91149bf6",
+        "filename": "Ring/Ring/Conversations/ConversationViewModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 60
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_d1f583cc",
+        "filename": "Ring/Ring/Conversations/ConversationViewModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 162,
+        "startChar": 36,
+        "endLine": 162,
+        "endChar": 37
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_712c774b",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 48
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_11008ba9",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "type: success",
+      "range": {
+        "startLine": 94,
+        "startChar": 15,
+        "endLine": 94,
+        "endChar": 21
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_513173a1",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 48
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_b126ff66",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 50
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_912bfb2f",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 48
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_f11fe707",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 48
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_d11c6316",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 51
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_311aef17",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 48
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_1117ebee",
+        "filename": "Ring/Ring/Smartlist/SmartlistViewModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 123
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3841fe_71d3d738",
+        "filename": "Ring/Ring/Smartlist/SmartlistViewModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-07-31T15:49:54Z",
+      "side": 1,
+      "message": "add [unowned self]",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 101
+      },
+      "revId": "43bba0479184bfe0039455fda34beffea40f4ffb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
