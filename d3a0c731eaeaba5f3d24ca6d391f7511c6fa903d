@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3841fe_35ef78b2",
+        "filename": "Ring/Ring/Features/Walkthrough/Welcome/WelcomeViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-08-04T17:45:12Z",
+      "side": 1,
+      "message": "How do you use this?\nThanks!",
+      "revId": "d3a0c731eaeaba5f3d24ca6d391f7511c6fa903d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
