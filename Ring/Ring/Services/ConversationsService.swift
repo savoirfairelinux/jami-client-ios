@@ -40,17 +40,19 @@ class ConversationsService: MessagesAdapterDelegate {
     var conversations: Observable<Results<ConversationModel>>
 
     init(withMessageAdapter adapter: MessagesAdapter) {
-        guard let realm = try? Realm() else {
-            fatalError("Enable to instantiate Realm")
+
+        do {
+            let realm = try Realm()
+            messageAdapter = adapter
+            self.realm = realm
+            results = realm.objects(ConversationModel.self)
+
+            conversations = Observable.collection(from: results, synchronousStart: true)
+            MessagesAdapter.delegate = self
+        } catch {
+            fatalError("unable to instantiate Realm (\(error))")
         }
-
-        messageAdapter = adapter
-        self.realm = realm
-        results = realm.objects(ConversationModel.self)
-
-        conversations = Observable.collection(from: results, synchronousStart: true)
-        MessagesAdapter.delegate = self
-    }
+}
 
     func sendMessage(withContent content: String,
                      from senderAccount: AccountModel,
