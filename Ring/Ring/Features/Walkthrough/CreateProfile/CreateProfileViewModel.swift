@@ -19,18 +19,33 @@
  */
 
 import Foundation
-import UIKit
+import RxSwift
 
-extension UIColor {
+class CreateProfileViewModel: Stateable, ViewModel {
 
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
 
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
+    // MARK: - Rx Singles for L10n
+    lazy var skipButtonTitle: Observable<String> = {
+        if self.walkthroughType == .createAccount {
+            return Observable<String>.of(L10n.Createprofile.createAccount.smartString)
+        } else {
+            return Observable<String>.of(L10n.Createprofile.linkDevice.smartString)
+        }
+
+    }()
+
+    var walkthroughType: WalkthroughType!
+
+    required init (with injectionBag: InjectionBag) {
+    }
+
+    func proceedWithAccountCreationOrDeviceLink() {
+        self.stateSubject.onNext(WalkthroughState.profileCreated(withType: self.walkthroughType))
+    }
 
 }
