@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gUS-mM-rdY">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Invitations-->
+        <scene sceneID="wW4-22-iqo">
+            <objects>
+                <viewController title="Invitations" id="gUS-mM-rdY" customClass="ContactRequestsViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DDk-7J-YQx"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y4B-Y3-6GH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m1T-eD-duJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bPe-Vn-J7U">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXe-K6-eM8">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No invitations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSV-RV-i1C">
+                                        <rect key="frame" x="135" y="312.5" width="104" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="pSV-RV-i1C" firstAttribute="centerY" secondItem="cXe-K6-eM8" secondAttribute="centerY" id="ADj-lP-FWa"/>
+                                    <constraint firstItem="pSV-RV-i1C" firstAttribute="centerX" secondItem="cXe-K6-eM8" secondAttribute="centerX" id="p8k-zl-EPN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Y4B-Y3-6GH" firstAttribute="top" secondItem="bPe-Vn-J7U" secondAttribute="bottom" id="08Z-pN-cbh"/>
+                            <constraint firstAttribute="trailing" secondItem="cXe-K6-eM8" secondAttribute="trailing" id="4kr-6B-acK"/>
+                            <constraint firstItem="cXe-K6-eM8" firstAttribute="leading" secondItem="m1T-eD-duJ" secondAttribute="leading" id="6Ew-hd-hlD"/>
+                            <constraint firstItem="bPe-Vn-J7U" firstAttribute="top" secondItem="DDk-7J-YQx" secondAttribute="bottom" id="EyB-4G-cLb"/>
+                            <constraint firstItem="Y4B-Y3-6GH" firstAttribute="top" secondItem="cXe-K6-eM8" secondAttribute="bottom" id="ZkQ-wy-gvg"/>
+                            <constraint firstAttribute="trailing" secondItem="bPe-Vn-J7U" secondAttribute="trailing" id="eRC-Zj-mtk"/>
+                            <constraint firstItem="cXe-K6-eM8" firstAttribute="top" secondItem="DDk-7J-YQx" secondAttribute="bottom" id="gNJ-Yf-pLu"/>
+                            <constraint firstItem="bPe-Vn-J7U" firstAttribute="leading" secondItem="m1T-eD-duJ" secondAttribute="leading" id="jOx-2Z-yoO"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="dMs-kf-EuK"/>
+                    <connections>
+                        <outlet property="noInvitationsPlaceholder" destination="cXe-K6-eM8" id="fuk-gt-pdZ"/>
+                        <outlet property="tableView" destination="bPe-Vn-J7U" id="rc3-OT-FCs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SVT-Sr-5RW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-51" y="351"/>
+        </scene>
+    </scenes>
+</document>
