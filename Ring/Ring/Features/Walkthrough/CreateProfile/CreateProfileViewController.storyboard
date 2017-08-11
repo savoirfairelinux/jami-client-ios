@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1yn-Mj-8Ek">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Create Profile View Controller-->
+        <scene sceneID="tJD-hy-eho">
+            <objects>
+                <viewController id="1yn-Mj-8Ek" customClass="CreateProfileViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jiD-fm-HFk"/>
+                        <viewControllerLayoutGuide type="bottom" id="GVt-PH-FqG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="N1T-Xh-FH1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_ring" translatesAutoresizingMaskIntoConstraints="NO" id="Gv4-18-FVt">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kur-G7-4Nq" userLabel="Gradient View" customClass="DesignableView" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
+                                        <color key="value" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
+                                        <color key="value" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Po-6e-k14" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="313.5" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="m9R-vQ-tPe"/>
+                                    <constraint firstAttribute="height" constant="40" id="uVC-dY-9Ym"/>
+                                </constraints>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Gv4-18-FVt" secondAttribute="trailing" id="1Ev-WL-COb"/>
+                            <constraint firstAttribute="trailing" secondItem="kur-G7-4Nq" secondAttribute="trailing" id="1U8-xt-ygk"/>
+                            <constraint firstItem="5Po-6e-k14" firstAttribute="centerX" secondItem="N1T-Xh-FH1" secondAttribute="centerX" id="4eR-3k-6Z2"/>
+                            <constraint firstItem="Gv4-18-FVt" firstAttribute="top" secondItem="N1T-Xh-FH1" secondAttribute="top" id="5PT-u8-86G"/>
+                            <constraint firstItem="GVt-PH-FqG" firstAttribute="top" secondItem="Gv4-18-FVt" secondAttribute="bottom" id="DHv-Q6-GhU"/>
+                            <constraint firstItem="GVt-PH-FqG" firstAttribute="top" secondItem="kur-G7-4Nq" secondAttribute="bottom" id="Jvj-VY-Nb7"/>
+                            <constraint firstItem="Gv4-18-FVt" firstAttribute="leading" secondItem="N1T-Xh-FH1" secondAttribute="leading" id="LiW-7Y-wcc"/>
+                            <constraint firstItem="kur-G7-4Nq" firstAttribute="top" secondItem="N1T-Xh-FH1" secondAttribute="top" id="hSt-o1-S41"/>
+                            <constraint firstItem="5Po-6e-k14" firstAttribute="centerY" secondItem="N1T-Xh-FH1" secondAttribute="centerY" id="lQW-P9-Vmv"/>
+                            <constraint firstItem="kur-G7-4Nq" firstAttribute="leading" secondItem="N1T-Xh-FH1" secondAttribute="leading" id="r5d-rQ-Kg3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="skipButton" destination="5Po-6e-k14" id="DUG-Am-Mwn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6ma-i4-SuK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1104.8" y="366.56671664167919"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background_ring" width="750" height="1334"/>
+    </resources>
+</document>
