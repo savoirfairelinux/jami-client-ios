@@ -19,18 +19,29 @@
  */
 
 import Foundation
-import UIKit
+import RxSwift
 
-extension UIColor {
+/// This Coordinator drives the Contact Requests navigation
+class ContactRequestsCoordinator: Coordinator, StateableResponsive {
 
-    static let ringMain = UIColor(colorLiteralRed: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
+    var rootViewController: UIViewController {
+        return self.navigationViewController
+    }
 
-    static let ringSecondary = UIColor(colorLiteralRed: 0.0/255.0,
-                                  green: 76.0/255.0,
-                                  blue: 96.0/255.0,
-                                  alpha: 1.0)
+    var childCoordinators = [Coordinator]()
 
+    private let navigationViewController = UINavigationController()
+    private let injectionBag: InjectionBag
+    let disposeBag = DisposeBag()
+
+    let stateSubject = PublishSubject<State>()
+
+    required init (with injectionBag: InjectionBag) {
+        self.injectionBag = injectionBag
+    }
+
+    func start () {
+        let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
+        self.present(viewController: contactRequestsViewController, withStyle: .show, withAnimation: true)
+    }
 }
