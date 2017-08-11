@@ -49,37 +49,59 @@ extension UIViewController {
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 enum StoryboardScene {
+  enum ContactRequestsViewController: StoryboardType {
+    static let storyboardName = "ContactRequestsViewController"
+
+    static let initialScene = InitialSceneType<Ring.ContactRequestsViewController>(storyboard: ContactRequestsViewController.self)
+  }
+  enum ConversationViewController: StoryboardType {
+    static let storyboardName = "ConversationViewController"
+
+    static let initialScene = InitialSceneType<Ring.ConversationViewController>(storyboard: ConversationViewController.self)
+  }
+  enum CreateAccountViewController: StoryboardType {
+    static let storyboardName = "CreateAccountViewController"
+
+    static let initialScene = InitialSceneType<Ring.CreateAccountViewController>(storyboard: CreateAccountViewController.self)
+  }
+  enum CreateProfileViewController: StoryboardType {
+    static let storyboardName = "CreateProfileViewController"
+
+    static let initialScene = InitialSceneType<Ring.CreateProfileViewController>(storyboard: CreateProfileViewController.self)
+  }
   enum LaunchScreen: StoryboardType {
     static let storyboardName = "LaunchScreen"
 
     static let initialScene = InitialSceneType<UIViewController>(storyboard: LaunchScreen.self)
   }
-  enum Main: StoryboardType {
-    static let storyboardName = "Main"
+  enum LinkDeviceViewController: StoryboardType {
+    static let storyboardName = "LinkDeviceViewController"
 
-    static let initialScene = InitialSceneType<Ring.MainTabBarViewController>(storyboard: Main.self)
-
-    static let mainStoryboard = SceneType<Ring.MainTabBarViewController>(storyboard: Main.self, identifier: "MainStoryboard")
+    static let initialScene = InitialSceneType<Ring.LinkDeviceViewController>(storyboard: LinkDeviceViewController.self)
   }
-  enum WalkthroughStoryboard: StoryboardType {
-    static let storyboardName = "WalkthroughStoryboard"
+  enum MeDetailViewController: StoryboardType {
+    static let storyboardName = "MeDetailViewController"
 
-    static let initialScene = InitialSceneType<UINavigationController>(storyboard: WalkthroughStoryboard.self)
+    static let initialScene = InitialSceneType<Ring.MeDetailViewController>(storyboard: MeDetailViewController.self)
+  }
+  enum MeViewController: StoryboardType {
+    static let storyboardName = "MeViewController"
+
+    static let initialScene = InitialSceneType<Ring.MeViewController>(storyboard: MeViewController.self)
+  }
+  enum SmartlistViewController: StoryboardType {
+    static let storyboardName = "SmartlistViewController"
+
+    static let initialScene = InitialSceneType<Ring.SmartlistViewController>(storyboard: SmartlistViewController.self)
+  }
+  enum WelcomeViewController: StoryboardType {
+    static let storyboardName = "WelcomeViewController"
+
+    static let initialScene = InitialSceneType<Ring.WelcomeViewController>(storyboard: WelcomeViewController.self)
   }
 }
 
 enum StoryboardSegue {
-  enum Main: String, SegueType {
-    case showMessages = "ShowMessages"
-    case accountDetails
-  }
-  enum WalkthroughStoryboard: String, SegueType {
-    case accountToPermissionsSegue = "AccountToPermissionsSegue"
-    case createProfileSegue = "CreateProfileSegue"
-    case linkDeviceToAccountSegue = "LinkDeviceToAccountSegue"
-    case profileToAccountSegue = "ProfileToAccountSegue"
-    case profileToLinkSegue = "ProfileToLinkSegue"
-  }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 

@@ -90,7 +90,7 @@ class ContactsService {
     func accept(contactRequest: ContactRequestModel, withAccount account: AccountModel) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
             let success = self.contactsAdapter.acceptTrustRequest(fromContact: contactRequest.ringId,
-                                                                 withAccountId: account.id)
+                                                                  withAccountId: account.id)
             if success {
                 observable.on(.completed)
             } else {

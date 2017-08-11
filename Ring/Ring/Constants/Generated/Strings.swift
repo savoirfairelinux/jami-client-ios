@@ -29,31 +29,38 @@ enum L10n {
     static let chooseStrongPassword = L10n.tr("Localizable", "createAccount.chooseStrongPassword")
     /// Create your Ring account
     static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle")
-    /// Enter new username
+    /// username
     static let enterNewUsernamePlaceholder = L10n.tr("Localizable", "createAccount.enterNewUsernamePlaceholder")
-    /// Invalid username
+    /// invalid username
     static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername")
-    /// Loading...
+    /// Loading
     static let loading = L10n.tr("Localizable", "createAccount.loading")
-    /// Looking for username availability...
+    /// looking for username availability
     static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability")
-    /// New Password
+    /// password
     static let newPasswordPlaceholder = L10n.tr("Localizable", "createAccount.newPasswordPlaceholder")
     /// 6 characters minimum
     static let passwordCharactersNumberError = L10n.tr("Localizable", "createAccount.passwordCharactersNumberError")
-    /// Passwords do not match
+    /// passwords do not match
     static let passwordNotMatchingError = L10n.tr("Localizable", "createAccount.passwordNotMatchingError")
-    /// Register public username (experimental)
-    static let registerPublicUsername = L10n.tr("Localizable", "createAccount.registerPublicUsername")
-    /// Repeat new password
+    /// confirm password
     static let repeatPasswordPlaceholder = L10n.tr("Localizable", "createAccount.repeatPasswordPlaceholder")
-    /// Username already taken
+    /// username already taken
     static let usernameAlreadyTaken = L10n.tr("Localizable", "createAccount.usernameAlreadyTaken")
     /// Adding account
     static let waitCreateAccountTitle = L10n.tr("Localizable", "createAccount.waitCreateAccountTitle")
   }
 
+  enum Createprofile {
+    /// Skip to Create Account
+    static let createAccount = L10n.tr("Localizable", "createProfile.createAccount")
+    /// Skip to Link Device
+    static let linkDevice = L10n.tr("Localizable", "createProfile.linkDevice")
+  }
+
   enum Global {
+    /// Invitations
+    static let contactRequestsTabBarTitle = L10n.tr("Localizable", "global.contactRequestsTabBarTitle")
     /// Home
     static let homeTabBarTitle = L10n.tr("Localizable", "global.homeTabBarTitle")
     /// Me
@@ -79,8 +86,8 @@ enum L10n {
     /// Create a Ring account
     static let createAccount = L10n.tr("Localizable", "welcome.createAccount")
     /// Link this device to an account
-    static let linkDeviceButton = L10n.tr("Localizable", "welcome.linkDeviceButton")
-    /// A Ring account allows you to reach people securely in peer to peer through fully distributed network
+    static let linkDevice = L10n.tr("Localizable", "welcome.linkDevice")
+    /// Ring is a free and universal communication platform which preserves the users' privacy and freedoms
     static let text = L10n.tr("Localizable", "welcome.text")
     /// Welcome to Ring
     static let title = L10n.tr("Localizable", "welcome.title")
