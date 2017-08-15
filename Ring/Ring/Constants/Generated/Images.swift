@@ -1,47 +1,94 @@
-// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
-#if os(iOS) || os(tvOS) || os(watchOS)
-  import UIKit.UIImage
-  public typealias Image = UIImage
-#elseif os(OSX)
+#if os(OSX)
   import AppKit.NSImage
-  public typealias Image = NSImage
+  typealias AssetColorTypeAlias = NSColor
+  typealias Image = NSImage
+#elseif os(iOS) || os(tvOS) || os(watchOS)
+  import UIKit.UIImage
+  typealias AssetColorTypeAlias = UIColor
+  typealias Image = UIImage
 #endif
 
-private class RingImagesBundleToken {}
-
 // swiftlint:disable file_length
-// swiftlint:disable line_length
 
-// swiftlint:disable type_body_length
-public enum RingAsset: String {
-  case icContactPicture = "ic_contact_picture"
-  case logoRingBeta2Blanc = "logo-ring-beta2-blanc"
+@available(*, deprecated, renamed: "ImageAsset")
+typealias AssetType = ImageAsset
 
-  /** 
-    Loads from application's Bundle if image exists, then loads from current bundle, fatalError if image does not exist
-  */
-  public var smartImage: Image {
-    if let appimage = Image(named: self.rawValue, in: nil, compatibleWith: nil) {
-      return appimage
-    } else if let fmkImage = Image(named: self.rawValue, in: Bundle(for: RingImagesBundleToken.self), compatibleWith: nil) {
-      return fmkImage
-    } else {
-      fatalError("Impossible to load image \(self.rawValue)")
-    }
-  }
+struct ImageAsset {
+  fileprivate var name: String
 
   var image: Image {
-	if let img = Image(named: self.rawValue, in: Bundle(for: RingImagesBundleToken.self), compatibleWith: nil) {
-        return img
-    }
-    fatalError("Impossible to load image \(self.rawValue)")
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX)
+    let image = bundle.image(forResource: name)
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else { fatalError("Unable to load image named \(name).") }
+    return result
   }
 }
-// swiftlint:enable type_body_length
 
-public extension Image {
-  convenience init!(asset: RingAsset) {
-    self.init(named: asset.rawValue)
+struct ColorAsset {
+  fileprivate var name: String
+
+  #if swift(>=3.2)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  var color: AssetColorTypeAlias {
+    return AssetColorTypeAlias(asset: self)
+  }
+  #endif
+}
+
+// swiftlint:disable identifier_name line_length nesting type_body_length type_name
+enum Asset {
+  static let icContactPicture = ImageAsset(name: "ic_contact_picture")
+  static let logoRingBeta2Blanc = ImageAsset(name: "logo-ring-beta2-blanc")
+
+  // swiftlint:disable trailing_comma
+  static let allColors: [ColorAsset] = [
+  ]
+  static let allImages: [ImageAsset] = [
+    icContactPicture,
+    logoRingBeta2Blanc,
+  ]
+  // swiftlint:enable trailing_comma
+  @available(*, deprecated, renamed: "allImages")
+  static let allValues: [AssetType] = allImages
+}
+// swiftlint:enable identifier_name line_length nesting type_body_length type_name
+
+extension Image {
+  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
+  @available(OSX, deprecated,
+    message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
+  convenience init!(asset: ImageAsset) {
+    #if os(iOS) || os(tvOS)
+    let bundle = Bundle(for: BundleToken.self)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX) || os(watchOS)
+    self.init(named: asset.name)
+    #endif
   }
 }
+
+extension AssetColorTypeAlias {
+  #if swift(>=3.2)
+  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
+  convenience init!(asset: ColorAsset) {
+    let bundle = Bundle(for: BundleToken.self)
+    #if os(iOS) || os(tvOS)
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(OSX)
+    self.init(named: asset.name, bundle: bundle)
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+  #endif
+}
+
+private final class BundleToken {}

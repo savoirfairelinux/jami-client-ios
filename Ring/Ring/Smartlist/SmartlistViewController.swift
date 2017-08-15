@@ -70,8 +70,8 @@ class SmartlistViewController: UIViewController {
 
     func setupUI() {
 
-        self.title = L10n.Global.homeTabBarTitle.smartString
-        self.navigationItem.title = L10n.Global.homeTabBarTitle.smartString
+        self.title = L10n.Global.homeTabBarTitle
+        self.navigationItem.title = L10n.Global.homeTabBarTitle
 
         self.viewModel.hideNoConversationsMessage
             .bind(to: self.noConversationsView.rx.isHidden)

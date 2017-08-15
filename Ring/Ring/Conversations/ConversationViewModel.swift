@@ -138,7 +138,7 @@ class ConversationViewModel {
         if todayDay == day && todayMonth == month && todayYear == year {
             return hourFormatter.string(from: lastMessageDate)
         } else if day == todayDay - 1 {
-            return L10n.Smartlist.yesterday.smartString
+            return L10n.Smartlist.yesterday
         } else if todayYear == year && todayWeekOfYear == weekOfYear {
             return lastMessageDate.dayOfWeek()
         } else {

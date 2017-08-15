@@ -32,8 +32,8 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = L10n.Global.meTabBarTitle.smartString
-        self.navigationItem.title = L10n.Global.meTabBarTitle.smartString
+        self.title = L10n.Global.meTabBarTitle
+        self.navigationItem.title = L10n.Global.meTabBarTitle
 
         if !accountService.accounts.isEmpty {
             //            let acc = accountService.accounts[0]

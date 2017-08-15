@@ -88,11 +88,11 @@ class SmartlistViewModel {
             var sections = [ConversationSection]()
 
             if contactFoundConversation != nil {
-                sections.append(ConversationSection(header: L10n.Smartlist.userFound.smartString, items: [contactFoundConversation!]))
+                sections.append(ConversationSection(header: L10n.Smartlist.userFound, items: [contactFoundConversation!]))
             }
 
             if !filteredResults.isEmpty {
-                sections.append(ConversationSection(header: L10n.Smartlist.conversations.smartString, items: filteredResults))
+                sections.append(ConversationSection(header: L10n.Smartlist.conversations, items: filteredResults))
             }
 
             return sections
@@ -133,7 +133,7 @@ class SmartlistViewModel {
                 self.searchStatus.onNext("")
             } else {
                 if self.filteredResults.value.isEmpty {
-                    self.searchStatus.onNext(L10n.Smartlist.noResults.smartString)
+                    self.searchStatus.onNext(L10n.Smartlist.noResults)
                 } else {
                     self.searchStatus.onNext("")
                 }
@@ -166,7 +166,7 @@ class SmartlistViewModel {
             }
 
             self.nameService.lookupName(withAccount: "", nameserver: "", name: text)
-            self.searchStatus.onNext(L10n.Smartlist.searching.smartString)
+            self.searchStatus.onNext(L10n.Smartlist.searching)
         }
     }
 

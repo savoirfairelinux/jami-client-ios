@@ -122,31 +122,31 @@ class CreateRingAccountViewController: UITableViewController {
     fileprivate func setupUI() {
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.createAccountTitleLabel.text = L10n.Createaccount.createAccountFormTitle.smartString
+        self.createAccountTitleLabel.text = L10n.Createaccount.createAccountFormTitle
     }
 
     fileprivate func setCreateAccountAsLoading() {
         log.debug("Creating account...")
-        self.createAccountButton.setTitle(L10n.Createaccount.loading.smartString, for: .normal)
+        self.createAccountButton.setTitle(L10n.Createaccount.loading, for: .normal)
         self.createAccountButton.isUserInteractionEnabled = false
-        HUD.show(.labeledProgress(title: L10n.Createaccount.waitCreateAccountTitle.smartString, subtitle: nil))
+        HUD.show(.labeledProgress(title: L10n.Createaccount.waitCreateAccountTitle, subtitle: nil))
     }
 
     fileprivate func setCreateAccountAsIdle() {
-        self.createAccountButton.setTitle(L10n.Welcome.createAccount.smartString, for: .normal)
+        self.createAccountButton.setTitle(L10n.Welcome.createAccount, for: .normal)
         self.createAccountButton.isUserInteractionEnabled = true
         HUD.hide()
     }
 
     fileprivate func showDeviceAddedAlert() {
-        HUD.flash(.labeledSuccess(title: L10n.Alerts.accountAddedTitle.smartString, subtitle: nil), delay: Durations.alertFlashDuration.value)
+        HUD.flash(.labeledSuccess(title: L10n.Alerts.accountAddedTitle, subtitle: nil), delay: Durations.alertFlashDuration.value)
     }
 
     fileprivate func showErrorAlert(_ error: AccountCreationError) {
         let alert = UIAlertController.init(title: error.title,
                                            message: error.message,
                                            preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: L10n.Global.ok.smartString, style: .default, handler: nil))
+        alert.addAction(UIAlertAction.init(title: L10n.Global.ok, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
@@ -191,7 +191,7 @@ class CreateRingAccountViewController: UITableViewController {
         if currentCellType == .registerPublicUsername {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SwitchCell.self)
 
-            cell.titleLabel.text = L10n.Createaccount.registerPublicUsername.smartString
+            cell.titleLabel.text = L10n.Createaccount.registerPublicUsername
             cell.titleLabel.textColor = .white
             cell.registerSwitch.rx.value.bind(to: self.accountViewModel.registerUsername).disposed(by: disposeBag)
             return cell
@@ -199,7 +199,7 @@ class CreateRingAccountViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TextFieldCell.self)
 
             cell.textField.isSecureTextEntry = false
-            cell.textField.placeholder = L10n.Createaccount.enterNewUsernamePlaceholder.smartString
+            cell.textField.placeholder = L10n.Createaccount.enterNewUsernamePlaceholder
 
             //Binds the username field value to the ViewModel
             cell.textField.rx.text.orEmpty
@@ -217,14 +217,14 @@ class CreateRingAccountViewController: UITableViewController {
             return cell
         } else if currentCellType == .passwordNotice {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TextCell.self)
-            cell.label.text = L10n.Createaccount.chooseStrongPassword.smartString
+            cell.label.text = L10n.Createaccount.chooseStrongPassword
             return cell
         } else if currentCellType == .newPasswordField {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TextFieldCell.self)
 
             cell.textField.isSecureTextEntry = true
-            cell.textField.placeholder = L10n.Createaccount.newPasswordPlaceholder.smartString
-            cell.errorMessageLabel.text = L10n.Createaccount.passwordCharactersNumberError.smartString
+            cell.textField.placeholder = L10n.Createaccount.newPasswordPlaceholder
+            cell.errorMessageLabel.text = L10n.Createaccount.passwordCharactersNumberError
 
             //Binds the password field value to the ViewModel
             cell.textField.rx.text.orEmpty.bind(to: self.accountViewModel.password).disposed(by: disposeBag)
@@ -243,8 +243,8 @@ class CreateRingAccountViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TextFieldCell.self)
 
             cell.textField.isSecureTextEntry = true
-            cell.textField.placeholder = L10n.Createaccount.repeatPasswordPlaceholder.smartString
-            cell.errorMessageLabel.text = L10n.Createaccount.passwordNotMatchingError.smartString
+            cell.textField.placeholder = L10n.Createaccount.repeatPasswordPlaceholder
+            cell.errorMessageLabel.text = L10n.Createaccount.passwordNotMatchingError
 
             //Binds the repeat password field value to the ViewModel
             cell.textField.rx.text.orEmpty.bind(to: self.accountViewModel.repeatPassword).disposed(by: disposeBag)

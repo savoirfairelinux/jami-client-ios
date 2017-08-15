@@ -74,9 +74,9 @@ class WelcomeViewController: UIViewController {
 
     func setupUI() {
 
-        self.welcomeLabel.text = L10n.Welcome.title.smartString
-        self.descriptionLabel.text = L10n.Welcome.text.smartString
-        self.linkDeviceButton.setTitle(L10n.Welcome.linkDeviceButton.smartString, for: .normal)
-        self.createAccountButton.setTitle(L10n.Welcome.createAccount.smartString, for: .normal)
+        self.welcomeLabel.text = L10n.Welcome.title
+        self.descriptionLabel.text = L10n.Welcome.text
+        self.linkDeviceButton.setTitle(L10n.Welcome.linkDeviceButton, for: .normal)
+        self.createAccountButton.setTitle(L10n.Welcome.createAccount, for: .normal)
     }
 }

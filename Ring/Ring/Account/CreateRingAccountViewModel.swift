@@ -140,11 +140,11 @@ class CreateRingAccountViewModel {
             .asObservable().map ({ status in
                 switch status {
                 case .lookingUp:
-                    return L10n.Createaccount.lookingForUsernameAvailability.smartString
+                    return L10n.Createaccount.lookingForUsernameAvailability
                 case .invalid:
-                    return L10n.Createaccount.invalidUsername.smartString
+                    return L10n.Createaccount.invalidUsername
                 case .alreadyTaken:
-                    return L10n.Createaccount.usernameAlreadyTaken.smartString
+                    return L10n.Createaccount.usernameAlreadyTaken
                 default:
                     return ""
                 }
@@ -232,22 +232,22 @@ extension AccountCreationError: LocalizedError {
     var title: String {
         switch self {
         case .generic:
-            return L10n.Alerts.accountCannotBeFoundTitle.smartString
+            return L10n.Alerts.accountCannotBeFoundTitle
         case .network:
-            return L10n.Alerts.accountNoNetworkTitle.smartString
+            return L10n.Alerts.accountNoNetworkTitle
         default:
-            return L10n.Alerts.accountDefaultErrorTitle.smartString
+            return L10n.Alerts.accountDefaultErrorTitle
         }
     }
 
     var message: String {
         switch self {
         case .generic:
-            return L10n.Alerts.accountDefaultErrorMessage.smartString
+            return L10n.Alerts.accountDefaultErrorMessage
         case .network:
-            return L10n.Alerts.accountNoNetworkMessage.smartString
+            return L10n.Alerts.accountNoNetworkMessage
         default:
-            return L10n.Alerts.accountDefaultErrorMessage.smartString
+            return L10n.Alerts.accountDefaultErrorMessage
         }
     }
 }
