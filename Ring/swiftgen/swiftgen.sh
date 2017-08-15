@@ -1,5 +1,5 @@
 #!/bin/bash
-EXPECTED_VERSION="SwiftGen v4.2.1 (Stencil v0.9.0, StencilSwiftKit v1.0.2, SwiftGenKit v1.1.0)"
+EXPECTED_VERSION="SwiftGen v5.0.0 (Stencil v0.9.0, StencilSwiftKit v2.0.1, SwiftGenKit v2.0.0)"
 
 # Here execute the various SwiftGen commands you need
 run_swiftgen() {
@@ -10,7 +10,7 @@ run_swiftgen() {
 
 	echo "SwiftGen: Generating files..."
 	swiftgen storyboards "$SRCDIR" -p "$TPLDIR/storyboards.stencil" --output "$OUTDIR/Storyboards.swift"
-	swiftgen images "$SRCDIR/Resources/Images.xcassets" -p "$TPLDIR/images.stencil" --output "$OUTDIR/Images.swift"
+	swiftgen xcassets "$SRCDIR/Resources/Images.xcassets" -p "$TPLDIR/images.stencil" --output "$OUTDIR/Images.swift"
 	swiftgen strings "$SRCDIR/Resources/en.lproj/Localizable.strings" -p "$TPLDIR/strings.stencil" --output "$OUTDIR/Strings.swift"
 }
 

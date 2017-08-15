@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-{% if structuredStrings %}
+{% if tables.count > 0 %}
 import Foundation
 
 private class RingStringsBundleToken {}
@@ -14,30 +14,40 @@ private class RingStringsBundleToken {}
 // swiftlint:disable valid_docs
 {% macro parametersBlock params %}{% for type in params.types %}_ p{{forloop.counter}}: {{type}}{% if not forloop.last %}, {% endif %}{% endfor %}{% endmacro %}
 {% macro argumentsBlock params %}{% for type in params.types %}p{{forloop.counter}}{% if not forloop.last %}, {% endif %}{% endfor %}{% endmacro %}
-{% macro recursiveBlock strings sp %}
-{{sp}}  {% for string in strings.strings %}
+{% macro recursiveBlock table item sp %}
+{{sp}}  {% for string in item.strings %}
 {{sp}}  /// {{string.translation}}
-{{sp}}  {% if string.params %}
-{{sp}}  static func {{string.keytail|swiftIdentifier|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.params %}) -> LocalizableString {
-{{sp}}    return {{enumName}}.tr("{{string.key}}", {% call argumentsBlock string.params %})
+{{sp}}  {% if string.types %}
+{{sp}}  static func {{string.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> LocalizableString {
+{{sp}}    return {{enumName}}.tr("{{string.key}}", {% call argumentsBlock string.types %})
 {{sp}}  }
 {{sp}}  {% else %}
-{{sp}}  static let {{string.keytail|swiftIdentifier|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
+{{sp}}  static let {{string.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{string.key}}")
 {{sp}}  {% endif %}
 {{sp}}  {% endfor %}
-{{sp}}  {% if strings.subenums %}
-{{sp}}  {% for subenum in strings.subenums %}
+{{sp}}  {% if item.children %}
+{{sp}}  {% for child in item.children %}
 
-{{sp}}  enum {{subenum.name|swiftIdentifier|snakeToCamelCase}} {
+{{sp}}  enum {{child.name|swiftIdentifier|snakeToCamelCase}} {
 {{sp}}    {% set sp2 %}{{sp}}  {% endset %}
-{{sp}}    {% call recursiveBlock subenum sp2 %}
+{{sp}}    {% call recursiveBlock table child sp2 %}
 {{sp}}  }
 {{sp}}  {% endfor %}
 {{sp}}  {% endif %}
 {% endmacro %}
 
+// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+{% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
 enum {{enumName}} {
-  {% call recursiveBlock structuredStrings sp %}
+  {% if tables.count > 1 %}
+  {% for table in tables %}
+  enum {{table.name|swiftIdentifier|snakeToCamelCase}} {
+    {% call recursiveBlock table.name table.levels "  " %}
+  }
+  {% endfor %}
+  {% else %}
+  {% call recursiveBlock tables.first.name tables.first.levels "" %}
+  {% endif %}
 }
 
 	struct LocalizableString {

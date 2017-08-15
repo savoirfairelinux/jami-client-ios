@@ -1,6 +1,6 @@
 // Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
 
-{% if images %}
+{% if catalogs %}
 #if os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIImage
   public typealias Image = UIImage
@@ -11,16 +11,32 @@
 
 private class RingImagesBundleToken {}
 
+{% macro casesBlock images sp %}
+{{sp}}  {% for image in images %}
+{{sp}}  {% if image.value %}
+{{sp}}  case {{image.name|swiftIdentifier|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = "{{image.value}}"
+{{sp}}  {% elif image.items %}
+{{sp}}  enum {{image.name|swiftIdentifier|snakeToCamelCase|escapeReservedKeywords}} {
+{{sp}}    {% set sp2 %}{{sp}}  {% endset %}
+{{sp}}    {% call casesBlock image.items sp2 %}
+{{sp}}  }
+{{sp}}  {% endif %}
+{{sp}}  {% endfor %}
+{% endmacro %}
 // swiftlint:disable file_length
-// swiftlint:disable line_length
-
-// swiftlint:disable type_body_length
+{% set enumName %}{{param.enumName|default:"Asset"}}{% endset %}
 public enum Ring{{enumName}}: String {
-  {% for image in images %}
-  case {{image|swiftIdentifier|snakeToCamelCase|lowerFirstWord}} = "{{image}}"
+  {% if catalogs.count > 1 %}
+  {% for catalog in catalogs %}
+  enum {{catalog.name|swiftIdentifier|snakeToCamelCase|escapeReservedKeywords}} {
+    {% call casesBlock catalog.assets "  " %}
+  }
   {% endfor %}
+  {% else %}
+  {% call casesBlock catalogs.first.assets "" %}
+  {% endif %}
 
-  /** 
+  /**
     Loads from application's Bundle if image exists, then loads from current bundle, fatalError if image does not exist
   */
   public var smartImage: Image {
