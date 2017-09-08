@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_a8785f2c",
+        "filename": "Ring/Ring/Calls/CallCoordinator.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-09-08T20:35:08Z",
+      "side": 1,
+      "message": "I do not think this should be here",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 40
+      },
+      "revId": "fa327ff0bcadc3155274c73bdbf08e3336e6ce88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_a8917f54",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 226
+      },
+      "writtenOn": "2017-09-08T20:35:08Z",
+      "side": 1,
+      "message": "This function should be called goToCall and only launch the call screen\nThe callService.placeCall should be done in the callViewModel",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 5
+      },
+      "revId": "fa327ff0bcadc3155274c73bdbf08e3336e6ce88",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
