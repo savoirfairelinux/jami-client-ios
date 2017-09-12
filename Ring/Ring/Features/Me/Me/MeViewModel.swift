@@ -25,26 +25,19 @@ class MeViewModel: Stateable, ViewModel {
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
+
+    let accountService: AccountsService
+    var userName: Single<String?>
+    let ringId: Single<String?>
+
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
 
-    var accountNumber: Int {
-        return self.accountService.accounts.count
-    }
-
-    let accountService: AccountsService
-
     required init(with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
-    }
-
-    func account(at row: Int) -> AccountModel {
-        return self.accountService.accounts[row]
-    }
-
-    func deleteAccount(at row: Int) {
-        self.accountService.removeAccount(row)
+        self.userName = Single.just(self.accountService.currentAccount?.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)))
+        self.ringId = Single.just(self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)))
     }
 
 }

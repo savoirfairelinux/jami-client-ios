@@ -20,16 +20,20 @@
 
 import UIKit
 import Reusable
+import RxSwift
 
-class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoryboardBased, ViewModelBased {
+class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, StoryboardBased, ViewModelBased {
 
     // MARK: - outlets
-    @IBOutlet weak var accountTableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var qrImageView: UIImageView!
+    @IBOutlet weak var ringIdLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var importButton: UIButton!
+    @IBOutlet weak var photoButton: UIButton!
 
     // MARK: - members
     var viewModel: MeViewModel!
+    fileprivate let disposeBag = DisposeBag()
 
     // MARK: - functions
     override func viewDidLoad() {
@@ -37,76 +41,88 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
         self.title = L10n.Global.meTabBarTitle
         self.navigationItem.title = L10n.Global.meTabBarTitle
+        self.setupUI()
+    }
 
+    func setupUI() {
+
+        self.viewModel.userName.asObservable()
+            .bind(to: self.nameLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        self.viewModel.ringId.asObservable()
+            .bind(to: self.ringIdLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(tapGestureRecognizer)
+
+        photoButton.rx.tap.subscribe(onNext: {
+            self.takePicture()
+        }).disposed(by: self.disposeBag)
+        photoButton.backgroundColor = UIColor(white: 1, alpha: 0)
+
+        importButton.rx.tap.subscribe(onNext: {
+            self.importPicture()
+        }).disposed(by: self.disposeBag)
+        importButton.backgroundColor = UIColor(white: 1, alpha: 0)
+    }
+
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+
+    }
+
+    func takePicture() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.front
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+
+    func importPicture() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    // MARK: - Delegates
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var image: UIImage!
+
+        if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
+            image = img
+
+        } else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            image = img
+        }
+
+        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.image = image.convert(toSize:CGSize(width:100.0, height:100.0), scale: UIScreen.main.scale).circleMasked
+        dismiss(animated:true, completion: nil)
     }
 
     // MARK: - QRCode
-    func createQRFromString(_ str: String) {
+//    func createQRFromString(_ str: String) {
+//
+//        let data = str.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+//
+//        let filter = CIFilter(name: "CIQRCodeGenerator")
+//        filter!.setValue(data, forKey: "inputMessage")
+//
+//        let qrImage: CIImage = filter!.outputImage!
+//
+//        let scaleX = qrImageView.frame.size.width / qrImage.extent.size.width
+//        let scaleY = qrImageView.frame.size.height / qrImage.extent.size.height
+//
+//        let resultQrImage = qrImage.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
+//        qrImageView.image = UIImage(ciImage: resultQrImage)
+//    }
 
-        let data = str.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
-
-        let filter = CIFilter(name: "CIQRCodeGenerator")
-        filter!.setValue(data, forKey: "inputMessage")
-
-        let qrImage: CIImage = filter!.outputImage!
-
-        let scaleX = qrImageView.frame.size.width / qrImage.extent.size.width
-        let scaleY = qrImageView.frame.size.height / qrImage.extent.size.height
-
-        let resultQrImage = qrImage.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
-        qrImageView.image = UIImage(ciImage: resultQrImage)
-    }
-
-    // MARK: - TableView
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.accountNumber + 1
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        if indexPath.row < self.viewModel.accountNumber {
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: AccountTableViewCell.self)
-            let account = self.viewModel.account(at: indexPath.row)
-
-            cell.account = account
-
-            return cell
-
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "addAccountTableCell", for: indexPath)
-            return cell
-        }
-
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == self.viewModel.accountNumber {
-            accountTableView.reloadData()
-        }
-    }
-
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == self.viewModel.accountNumber {
-            return false
-        }
-        return true
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
-            self.viewModel.deleteAccount(at: indexPath.row)
-            accountTableView.reloadData()
-        }
-    }
-
-    // MARK: - Actions
-    @IBAction func addAccountClicked(_ sender: AnyObject) {
-        let index = IndexPath(row: self.viewModel.accountNumber, section: 0)
-        accountTableView.selectRow(at: index, animated: false, scrollPosition: UITableViewScrollPosition.none)
-        tableView(accountTableView, didSelectRowAt: index)
-    }
 }
