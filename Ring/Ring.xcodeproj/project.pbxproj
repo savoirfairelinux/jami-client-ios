@@ -83,6 +83,7 @@
 		04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
+		0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586C94A1F684DF600613517 /* UIImage+Helpers.swift */; };
 		1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0C4ED91F1D4B1B00550433 /* WelcomeViewController.storyboard */; };
 		1A0C4EDC1F1D4B7E00550433 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EDB1F1D4B7E00550433 /* WelcomeViewController.swift */; };
 		1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EE21F1D673600550433 /* InjectionBag.swift */; };
@@ -136,7 +137,6 @@
 		1A2D18FD1F292DAD00B2C785 /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A2D18FB1F292DAD00B2C785 /* ConversationCell.xib */; };
 		1A2D18FF1F29352D00B2C785 /* MeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18FE1F29352D00B2C785 /* MeViewModel.swift */; };
 		1A2D19011F29353A00B2C785 /* MeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D19001F29353A00B2C785 /* MeDetailViewModel.swift */; };
-		1A2D19041F2937DF00B2C785 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D19031F2937DF00B2C785 /* AccountTableViewCell.swift */; };
 		1A3CA32B1F102BB700283748 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3CA32A1F102BB700283748 /* Chameleon.framework */; };
 		1A3CA32D1F13DA7200283748 /* Chameleon+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CA32C1F13DA7200283748 /* Chameleon+Ring.swift */; };
 		1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */; };
@@ -295,6 +295,7 @@
 		04399AE11D1C341A00E99CD9 /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = ../fat/lib/libvpx.a; sourceTree = "<group>"; };
 		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
+		0586C94A1F684DF600613517 /* UIImage+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Helpers.swift"; sourceTree = "<group>"; };
 		1A0C4ED91F1D4B1B00550433 /* WelcomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WelcomeViewController.storyboard; path = Welcome/WelcomeViewController.storyboard; sourceTree = "<group>"; };
 		1A0C4EDB1F1D4B7E00550433 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeViewController.swift; path = Welcome/WelcomeViewController.swift; sourceTree = "<group>"; };
 		1A0C4EE21F1D673600550433 /* InjectionBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionBag.swift; sourceTree = "<group>"; };
@@ -348,7 +349,6 @@
 		1A2D18FB1F292DAD00B2C785 /* ConversationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
 		1A2D18FE1F29352D00B2C785 /* MeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewModel.swift; sourceTree = "<group>"; };
 		1A2D19001F29353A00B2C785 /* MeDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeDetailViewModel.swift; sourceTree = "<group>"; };
-		1A2D19031F2937DF00B2C785 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
 		1A3CA32A1F102BB700283748 /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
 		1A3CA32C1F13DA7200283748 /* Chameleon+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chameleon+Ring.swift"; sourceTree = "<group>"; };
 		1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bool+String.swift"; sourceTree = "<group>"; };
@@ -610,6 +610,7 @@
 				1A2D18991F2642C000B2C785 /* NotificationCenter+Ring.swift */,
 				1A2D189B1F264AD900B2C785 /* UIViewController+Ring.swift */,
 				1A2D18A51F27F7A400B2C785 /* UIViewController+Rx.swift */,
+				0586C94A1F684DF600613517 /* UIImage+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -914,7 +915,6 @@
 		1A2D18D91F2918F300B2C785 /* Me */ = {
 			isa = PBXGroup;
 			children = (
-				1A2D19021F2937BB00B2C785 /* Cells */,
 				1A2D18EC1F2919D800B2C785 /* MeViewController.storyboard */,
 				1A5DC02B1F3565250075E8EF /* MeViewController.swift */,
 				1A2D18FE1F29352D00B2C785 /* MeViewModel.swift */,
@@ -941,14 +941,6 @@
 			);
 			name = Cells;
 			path = ../SmartList/Cells;
-			sourceTree = "<group>";
-		};
-		1A2D19021F2937BB00B2C785 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				1A2D19031F2937DF00B2C785 /* AccountTableViewCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		1A5DC0331F3567080075E8EF /* ContactRequests */ = {
@@ -1248,6 +1240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
+				0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */,
 				1A2D18AC1F29149D00B2C785 /* MeCoordinator.swift in Sources */,
 				1A2D18C51F29180700B2C785 /* ContactModel.swift in Sources */,
 				1A2D18F71F292D7200B2C785 /* MessageCellSent.swift in Sources */,
@@ -1291,7 +1284,6 @@
 				1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
 				564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */,
-				1A2D19041F2937DF00B2C785 /* AccountTableViewCell.swift in Sources */,
 				1A2D18AA1F29131900B2C785 /* ConversationsCoordinator.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				1A2041861F1EA19600C08435 /* CreateAccountViewController.swift in Sources */,
