@@ -28,6 +28,7 @@ enum ServiceEventType {
     case accountAdded
     case accountsChanged
     case registrationStateChanged
+    case presenceUpdated
 }
 
 /**
@@ -37,6 +38,8 @@ enum ServiceEventInput {
     case id
     case state
     case registrationState
+    case uri
+    case presenceStatus
 }
 
 /**
