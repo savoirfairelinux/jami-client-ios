@@ -27,8 +27,6 @@ import RxSwift
 import Chameleon
 import Contacts
 
-import Contacts
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -38,13 +36,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     private let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
     private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
+    private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
 
     public lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
                             withAccountService: self.accountService,
                             withNameService: self.nameService,
                             withConversationService: self.conversationsService,
-                            withContactsService: self.contactsService)
+                            withContactsService: self.contactsService,
+                            withPresenceService: self.presenceService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -77,6 +77,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let currentAccount = self.accountService.currentAccount {
                 self.contactsService.loadContacts(withAccount: currentAccount)
                 self.contactsService.loadContactRequests(withAccount: currentAccount)
+//                for contact in self.contactsService.contacts.value {
+//                    self.presenceService.subscribeBuddy(withAccountId: currentAccount.id,
+//                                                        withUri: contact.ringId,
+//                                                        withFlag: true)
+//                }
             }
             self.window?.rootViewController = self.appCoordinator.rootViewController
             self.window?.makeKeyAndVisible()
