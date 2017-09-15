@@ -30,6 +30,26 @@ class ConversationViewModel: ViewModel {
      */
     private let log = SwiftyBeaver.self
 
+    //Services
+    private let conversationsService: ConversationsService
+    private let accountService: AccountsService
+    private let nameService: NameService
+    private let contactsService: ContactsService
+    private let presenceService: PresenceService
+    private let injectionBag: InjectionBag
+
+    required init(with injectionBag: InjectionBag) {
+        self.injectionBag = injectionBag
+        self.accountService = injectionBag.accountService
+        self.conversationsService = injectionBag.conversationsService
+        self.nameService = injectionBag.nameService
+        self.contactsService = injectionBag.contactsService
+        self.presenceService = injectionBag.presenceService
+
+        dateFormatter.dateStyle = .medium
+        hourFormatter.dateFormat = "HH:mm"
+    }
+
     var conversation: ConversationModel! {
         didSet {
             //Create observable from sorted conversations and flatMap them to view models
@@ -47,6 +67,19 @@ class ConversationViewModel: ViewModel {
                     })
                 })
             }).observeOn(MainScheduler.instance)
+
+            self.presenceService
+                .sharedResponseStream
+                .filter({ event in
+                    return event.eventType == ServiceEventType.presenceUpdated
+                })
+                .subscribe(onNext: { [unowned self] event in
+                    if let uri: String = event.getEventInput(.uri) {
+                        self.log.debug("yaya!!!!!!!!: uri: :\(uri)")
+                        self.recipientPresence.value = true
+                    }
+                })
+                .disposed(by: disposeBag)
 
             let contact = self.contactsService.contact(withRingId: self.conversation.recipientRingId)
 
@@ -95,23 +128,7 @@ class ConversationViewModel: ViewModel {
 
     var userName = BehaviorSubject(value: "")
 
-    //Services
-    private let conversationsService: ConversationsService
-    private let accountService: AccountsService
-    private let nameService: NameService
-    private let contactsService: ContactsService
-    private let injectionBag: InjectionBag
-
-    required init(with injectionBag: InjectionBag) {
-        self.injectionBag = injectionBag
-        self.accountService = injectionBag.accountService
-        self.conversationsService = injectionBag.conversationsService
-        self.nameService = injectionBag.nameService
-        self.contactsService = injectionBag.contactsService
-
-        dateFormatter.dateStyle = .medium
-        hourFormatter.dateFormat = "HH:mm"
-    }
+    var recipientPresence = Variable(false)
 
     var unreadMessages: String {
        return self.unreadMessagesCount.description
@@ -201,5 +218,13 @@ class ConversationViewModel: ViewModel {
         return self.conversation.messages.filter({ message in
             return message.status != .read && message.author != accountHelper.ringId!
         }).count
+    }
+
+    var hidePresenceIndicator: Bool {
+        if self.presenceService.contactPresence[self.conversation.recipientRingId] == true {
+            log.debug("false")
+            return false
+        }
+        return true
     }
 }

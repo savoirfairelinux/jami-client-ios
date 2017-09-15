@@ -123,6 +123,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
                 cell.lastMessagePreviewLabel.text = item.lastMessage
 
+                item.recipientPresence.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .bind(to: cell.presenceIndicator.rx.isHidden)
+                    .disposed(by: self.disposeBag)
+                cell.presenceIndicator.layer.cornerRadius = 6
+
                 return cell
         }
 
