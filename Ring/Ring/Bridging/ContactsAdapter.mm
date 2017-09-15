@@ -112,6 +112,7 @@ static id <ContactsAdapterDelegate> _delegate;
 
 //Contacts
 - (void)addContactWithURI:(NSString*)uri accountId:(NSString*)accountId {
+    NSLog(@"addContact(): %@", uri);
     addContact(std::string([accountId UTF8String]), std::string([uri UTF8String]));
 }
 
@@ -126,6 +127,7 @@ static id <ContactsAdapterDelegate> _delegate;
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)contactsWithAccountId:(NSString*)accountId {
     std::vector<std::map<std::string, std::string>> contacts = getContacts(std::string([accountId UTF8String]));
+    NSLog(@"contacts.size(): %lu", contacts.size());
     return [Utils vectorOfMapsToArray:contacts];
 }
 

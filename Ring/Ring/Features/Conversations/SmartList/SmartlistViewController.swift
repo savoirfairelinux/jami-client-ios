@@ -117,11 +117,20 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConversationCell.self)
 
-                item.userName.asObservable().observeOn(MainScheduler.instance).bind(to: cell.nameLabel.rx.text).disposed(by: self.disposeBag)
+                item.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .bind(to: cell.nameLabel.rx.text)
+                    .disposed(by: self.disposeBag)
                 cell.newMessagesLabel.text = item.unreadMessages
                 cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
                 cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
                 cell.lastMessagePreviewLabel.text = item.lastMessage
+
+                item.recipientPresence.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { value in !value }
+                    .bind(to: cell.presenceIndicator.rx.isHidden)
+                    .disposed(by: self.disposeBag)
 
                 return cell
         }
