@@ -30,6 +30,26 @@ class ConversationViewModel: ViewModel {
      */
     private let log = SwiftyBeaver.self
 
+    //Services
+    private let conversationsService: ConversationsService
+    private let accountService: AccountsService
+    private let nameService: NameService
+    private let contactsService: ContactsService
+    private let presenceService: PresenceService
+    private let injectionBag: InjectionBag
+
+    required init(with injectionBag: InjectionBag) {
+        self.injectionBag = injectionBag
+        self.accountService = injectionBag.accountService
+        self.conversationsService = injectionBag.conversationsService
+        self.nameService = injectionBag.nameService
+        self.contactsService = injectionBag.contactsService
+        self.presenceService = injectionBag.presenceService
+
+        dateFormatter.dateStyle = .medium
+        hourFormatter.dateFormat = "HH:mm"
+    }
+
     var conversation: ConversationModel! {
         didSet {
             //Create observable from sorted conversations and flatMap them to view models
@@ -50,12 +70,26 @@ class ConversationViewModel: ViewModel {
 
             let contact = self.contactsService.contact(withRingId: self.conversation.recipientRingId)
 
-            if let contact = contact {
+	    if let contact = contact {
                 self.inviteButtonIsAvailable.onNext(!contact.confirmed)
             }
             self.contactsService.contactStatus.subscribe(onNext: { contact in
                 self.inviteButtonIsAvailable.onNext(!contact.confirmed)
             }).disposed(by: self.disposeBag)
+
+            // subscribe to presence updates for the conversation's associated contact
+            self.presenceService
+                .sharedResponseStream
+                .filter({ presenceUpdateEvent in
+                    return presenceUpdateEvent.eventType == ServiceEventType.presenceUpdated
+                        && presenceUpdateEvent.getEventInput(.uri) == contact?.ringId
+                })
+                .subscribe(onNext: { [unowned self] presenceUpdateEvent in
+                    if let uri: String = presenceUpdateEvent.getEventInput(.uri) {
+                        self.contactPresence.onNext(self.presenceService.contactPresence[uri]!)
+                    }
+                })
+                .disposed(by: disposeBag)
 
             if let contactUserName = contact?.userName {
                 self.userName.onNext(contactUserName)
@@ -63,7 +97,7 @@ class ConversationViewModel: ViewModel {
 
                 let recipientRingId = self.conversation.recipientRingId
 
-                //Return an observer for the username lookup
+                // Return an observer for the username lookup
                 self.nameService.usernameLookupStatus
                     .filter({ lookupNameResponse in
                         return lookupNameResponse.address != nil &&
@@ -101,25 +135,10 @@ class ConversationViewModel: ViewModel {
     var messages: Observable<[MessageViewModel]>!
 
     var userName = BehaviorSubject(value: "")
+
     var inviteButtonIsAvailable = BehaviorSubject(value: true)
 
-    //Services
-    private let conversationsService: ConversationsService
-    private let accountService: AccountsService
-    private let nameService: NameService
-    private let contactsService: ContactsService
-    private let injectionBag: InjectionBag
-
-    required init(with injectionBag: InjectionBag) {
-        self.injectionBag = injectionBag
-        self.accountService = injectionBag.accountService
-        self.conversationsService = injectionBag.conversationsService
-        self.nameService = injectionBag.nameService
-        self.contactsService = injectionBag.contactsService
-
-        dateFormatter.dateStyle = .medium
-        hourFormatter.dateFormat = "HH:mm"
-    }
+    var contactPresence = BehaviorSubject(value: false)
 
     var unreadMessages: String {
        return self.unreadMessagesCount.description
