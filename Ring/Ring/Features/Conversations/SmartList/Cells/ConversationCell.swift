@@ -30,6 +30,7 @@ class ConversationCell: UITableViewCell, NibReusable {
     @IBOutlet weak var newMessagesLabel: UILabel!
     @IBOutlet weak var lastMessageDateLabel: UILabel!
     @IBOutlet weak var lastMessagePreviewLabel: UILabel!
+    @IBOutlet weak var presenceIndicator: UIView!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

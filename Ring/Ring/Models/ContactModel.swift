@@ -24,6 +24,7 @@ class ContactModel {
     var userName: String?
     var confirmed: Bool = false
     var added: Date = Date()
+    var present: Bool = false
 
     init(withRingId ringId: String) {
         self.ringId = ringId
