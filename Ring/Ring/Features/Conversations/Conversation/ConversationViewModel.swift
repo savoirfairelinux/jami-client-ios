@@ -202,4 +202,10 @@ class ConversationViewModel: ViewModel {
             return message.status != .read && message.author != accountHelper.ringId!
         }).count
     }
+
+    func sendContactRequest() {
+        self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!).subscribe(onCompleted: {
+            self.log.info("request sent")
+        }).disposed(by: disposeBag)
+    }
 }

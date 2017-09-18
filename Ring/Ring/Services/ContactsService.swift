@@ -118,10 +118,14 @@ class ContactsService {
         }
     }
 
-    func sendContactRequest(toContactRingId ringId: String, vCard: CNContact, withAccount account: AccountModel) -> Completable {
+    func sendContactRequest(toContactRingId ringId: String, vCard: CNContact?, withAccount account: AccountModel) -> Completable {
         return Completable.create { [unowned self] completable in
             do {
-                let payload = try CNContactVCardSerialization.data(with: [vCard])
+
+                var payload: Data?
+                if let vCard = vCard {
+                  payload = try CNContactVCardSerialization.data(with: [vCard])
+                }
                 self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: account.id)
                 completable(.completed)
             } catch {
@@ -234,6 +238,11 @@ extension ContactsService: ContactsAdapterDelegate {
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool) {
         //Update trust request list
         self.removeContactRequest(withRingId: uri)
+        // update contact status
+        if let contact = self.contact(withRingId: uri) {
+            contact.confirmed = confirmed
+        }
+
         log.debug("Contact added :\(uri)")
     }
 

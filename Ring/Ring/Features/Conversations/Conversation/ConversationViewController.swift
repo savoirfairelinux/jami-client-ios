@@ -77,6 +77,19 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
+
+        //invite button
+        let inviteItem = UIBarButtonItem()
+        inviteItem.image = UIImage(named: "add_person")
+        inviteItem.rx.tap.subscribe(onNext: { [unowned self] in
+            self.inviteItemTapped()
+        }).disposed(by: self.disposeBag)
+
+        self.navigationItem.rightBarButtonItem = inviteItem
+    }
+
+    func inviteItemTapped() {
+       self.viewModel?.sendContactRequest()
     }
 
     override func viewDidAppear(_ animated: Bool) {
