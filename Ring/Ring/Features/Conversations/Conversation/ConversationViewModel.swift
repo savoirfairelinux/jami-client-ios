@@ -50,6 +50,14 @@ class ConversationViewModel: ViewModel {
 
             let contact = self.contactsService.contact(withRingId: self.conversation.recipientRingId)
 
+            if let contact = contact {
+                self.inviteButtonIsAvailable.onNext(!contact.confirmed)
+            }
+            self.contactsService.contactStatus.subscribe(onNext: { contact in
+                self.inviteButtonIsAvailable.onNext(!contact.confirmed)
+            }).disposed(by: self.disposeBag)
+
+
             if let contactUserName = contact?.userName {
                 self.userName.onNext(contactUserName)
             } else {
@@ -94,6 +102,7 @@ class ConversationViewModel: ViewModel {
     var messages: Observable<[MessageViewModel]>!
 
     var userName = BehaviorSubject(value: "")
+    var inviteButtonIsAvailable = BehaviorSubject(value: true)
 
     //Services
     private let conversationsService: ConversationsService
@@ -201,5 +210,11 @@ class ConversationViewModel: ViewModel {
         return self.conversation.messages.filter({ message in
             return message.status != .read && message.author != accountHelper.ringId!
         }).count
+    }
+
+    func sendContactRequest() {
+        self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!).subscribe(onCompleted: {
+            self.log.info("request sent")
+        }).disposed(by: disposeBag)
     }
 }

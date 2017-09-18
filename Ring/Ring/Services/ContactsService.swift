@@ -38,6 +38,8 @@ class ContactsService {
     let contactRequests = Variable([ContactRequestModel]())
     let contacts = Variable([ContactModel]())
 
+    let contactStatus = PublishSubject<ContactModel>()
+
     init(withContactsAdapter contactsAdapter: ContactsAdapter) {
         self.contactsAdapter = contactsAdapter
         ContactsAdapter.delegate = self
@@ -118,10 +120,14 @@ class ContactsService {
         }
     }
 
-    func sendContactRequest(toContactRingId ringId: String, vCard: CNContact, withAccount account: AccountModel) -> Completable {
+    func sendContactRequest(toContactRingId ringId: String, vCard: CNContact?, withAccount account: AccountModel) -> Completable {
         return Completable.create { [unowned self] completable in
             do {
-                let payload = try CNContactVCardSerialization.data(with: [vCard])
+
+                var payload: Data?
+                if let vCard = vCard {
+                  payload = try CNContactVCardSerialization.data(with: [vCard])
+                }
                 self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: account.id)
                 completable(.completed)
             } catch {
@@ -234,6 +240,36 @@ extension ContactsService: ContactsAdapterDelegate {
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool) {
         //Update trust request list
         self.removeContactRequest(withRingId: uri)
+
+        //if contact list is empty thats mean app just starts and we receive all contacts was added
+        if self.contacts.value.isEmpty {
+            return
+        }
+        // update contact status
+        if let contact = self.contact(withRingId: uri) {
+            if contact.confirmed != confirmed {
+                contact.confirmed = confirmed
+                contactStatus.onNext(contact)
+            }
+        }
+            //sync contacts with daemon contacts
+        else {
+
+            let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: accountId)
+
+            //Serialize them
+            if let contacts = contactsDictionaries?.map({ contactDict in
+                return ContactModel(withDictionary: contactDict)
+            }) {
+                for contact in contacts {
+                    if self.contacts.value.index(of: contact) == nil {
+                        self.contacts.value.append(contact)
+                        contactStatus.onNext(contact)
+                    }
+                }
+            }
+
+        }
         log.debug("Contact added :\(uri)")
     }
 
