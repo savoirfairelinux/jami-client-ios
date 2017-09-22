@@ -378,4 +378,16 @@ class AccountsService: AccountAdapterDelegate {
         self.responseStream.onNext(event)
     }
 
+    // MARK: - profile
+
+    func saveVCard(vCard: CNContact, forAccounr account: AccountModel) -> Observable<Void> {
+        let vCardSaved = VCardUtils.saveVCard(vCard: vCard, withName: account.id, inFolder: VCardFolders.profile.rawValue)
+        return vCardSaved
+    }
+
+    func loadVCard(forAccounr account: AccountModel) -> Single<CNContact> {
+        let vCardSaved = VCardUtils.loadVCard(named: account.id, inFolder: VCardFolders.profile.rawValue)
+        return vCardSaved
+    }
+
 }

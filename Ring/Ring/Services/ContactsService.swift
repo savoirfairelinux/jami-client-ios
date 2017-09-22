@@ -159,43 +159,6 @@ class ContactsService {
         }
     }
 
-    func loadVCard(named name: String) -> Single<CNContact> {
-        return Single.create(subscribe: { single in
-            if let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                do {
-                    if let data = FileManager.default.contents(atPath: directoryURL.appendingPathComponent(name).absoluteString) {
-                        let vCard = try CNContactVCardSerialization.contacts(with: data).first!
-                        single(.success(vCard))
-                    }
-                } catch {
-                    single(.error(ContactServiceError.loadVCardFailed))
-                }
-            } else {
-                single(.error(ContactServiceError.loadVCardFailed))
-            }
-
-            return Disposables.create { }
-        })
-    }
-
-    func saveVCard(vCard: CNContact, withName name: String) -> Observable<Void> {
-        return Observable.create { observable in
-            if let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                do {
-                    let data = try CNContactVCardSerialization.data(with: [vCard])
-                    try data.write(to: directoryURL.appendingPathComponent(name))
-                    observable.on(.completed)
-                } catch {
-                    observable.on(.error(ContactServiceError.saveVCardFailed))
-                }
-            } else {
-                observable.on(.error(ContactServiceError.saveVCardFailed))
-            }
-
-            return Disposables.create { }
-        }
-    }
-
     fileprivate func removeContactRequest(withRingId ringId: String) {
         guard let contactRequestToRemove = self.contactRequests.value.filter({ $0.ringId == ringId}).first else {
             return
@@ -276,5 +239,17 @@ extension ContactsService: ContactsAdapterDelegate {
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool) {
         self.removeContact(withRingId: uri)
         log.debug("Contact removed :\(uri)")
+    }
+
+    // MARK: - profile
+
+    func saveVCard(vCard: CNContact, forContactWithRingId ringID: String) -> Observable<Void> {
+        let vCardSaved = VCardUtils.saveVCard(vCard: vCard, withName: ringID, inFolder: VCardFolders.contacts.rawValue)
+        return vCardSaved
+    }
+
+    func loadVCard(forContactWithRingId ringID: String) -> Single<CNContact> {
+        let vCardSaved = VCardUtils.loadVCard(named:ringID, inFolder: VCardFolders.contacts.rawValue)
+        return vCardSaved
     }
 }
