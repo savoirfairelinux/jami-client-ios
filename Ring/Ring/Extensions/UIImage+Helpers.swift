@@ -45,4 +45,20 @@ extension UIImage {
 
         return copied!
     }
+
+    func convertToData(ofMaxSize maxSize: Int) -> Data? {
+        guard let imageData = UIImageJPEGRepresentation(self, 1) else {
+            return nil
+        }
+        var fileSize = imageData.count
+        var i = 10
+        while fileSize > maxSize && i >= 0 {
+            guard let imageData = UIImageJPEGRepresentation(self, CGFloat(0.1 * Double(i))) else {
+                return nil
+            }
+            fileSize = imageData.count
+            i -= 1
+        }
+        return imageData
+    }
 }

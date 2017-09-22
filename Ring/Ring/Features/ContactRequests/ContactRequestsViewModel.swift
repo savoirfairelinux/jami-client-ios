@@ -61,7 +61,7 @@ class ContactRequestsViewModel: ViewModel {
         let acceptCompleted = self.contactsService.accept(contactRequest: item.contactRequest, withAccount: self.accountsService.currentAccount!)
 
         if let vCard = item.contactRequest.vCard {
-            let saveVCardCompleted = self.contactsService.saveVCard(vCard: vCard, withName: item.contactRequest.ringId)
+            let saveVCardCompleted = self.contactsService.saveVCard(vCard: vCard, forContactWithRingId: item.contactRequest.ringId)
             return Observable<Void>.zip(acceptCompleted, saveVCardCompleted) { _, _ in
                 return
             }
