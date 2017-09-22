@@ -24,6 +24,7 @@ import Reusable
 
 class ConversationCell: UITableViewCell, NibReusable {
 
+    @IBOutlet weak var fallbackAvatar: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var newMessagesIndicator: UIView!
@@ -33,12 +34,22 @@ class ConversationCell: UITableViewCell, NibReusable {
     @IBOutlet weak var presenceIndicator: UIView!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
+        let presenceBGColor = self.presenceIndicator.backgroundColor
+        let fallbackAvatarBGColor = self.fallbackAvatar.backgroundColor
+        let newMessagesIndicatorBGColor = self.newMessagesIndicator.backgroundColor
         super.setSelected(selected, animated: animated)
-        self.newMessagesIndicator.backgroundColor = UIColor.red
+        self.newMessagesIndicator.backgroundColor = newMessagesIndicatorBGColor
+        self.presenceIndicator.backgroundColor = presenceBGColor
+        self.fallbackAvatar.backgroundColor = fallbackAvatarBGColor
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        self.newMessagesIndicator.backgroundColor = UIColor.red
+        let presenceBGColor = self.presenceIndicator.backgroundColor
+        let fallbackAvatarBGColor = self.fallbackAvatar.backgroundColor
+        let newMessagesIndicatorBGColor = self.newMessagesIndicator.backgroundColor
+        super.setSelected(highlighted, animated: animated)
+        self.newMessagesIndicator.backgroundColor = newMessagesIndicatorBGColor
+        self.presenceIndicator.backgroundColor = presenceBGColor
+        self.fallbackAvatar.backgroundColor = fallbackAvatarBGColor
     }
 }
