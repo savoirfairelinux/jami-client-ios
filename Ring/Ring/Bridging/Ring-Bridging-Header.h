@@ -33,5 +33,5 @@
 #import "Chameleon/Chameleon.h"
 #import "ContactsAdapter.h"
 #import "PresenceAdapter.h"
-
 #import <CommonCrypto/CommonCrypto.h>
+#import <Contacts/Contacts.h>

@@ -54,6 +54,10 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             .bind(to: self.ringIdLabel.rx.text)
             .disposed(by: disposeBag)
 
+        self.viewModel.image?.asObservable()
+            .bind(to: self.profileImageView.rx.image)
+            .disposed(by: disposeBag)
+
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(tapGestureRecognizer)
@@ -103,8 +107,10 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             image = img
         }
 
+        image = image.convert(toSize:CGSize(width:100.0, height:100.0), scale: UIScreen.main.scale)
+        self.viewModel.saveProfile(withImage: image)
         profileImageView.contentMode = .scaleAspectFit
-        profileImageView.image = image.convert(toSize:CGSize(width:100.0, height:100.0), scale: UIScreen.main.scale).circleMasked
+        profileImageView.image = image.circleMasked
         dismiss(animated:true, completion: nil)
     }
 
