@@ -23,6 +23,7 @@ import RxSwift
 import RxDataSources
 import RxCocoa
 import Reusable
+import SwiftyBeaver
 
 //Constants
 fileprivate struct SmartlistConstants {
@@ -33,6 +34,8 @@ fileprivate struct SmartlistConstants {
 }
 
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
+
+    private let log = SwiftyBeaver.self
 
     // MARK: outlets
     @IBOutlet weak var tableView: UITableView!
@@ -45,6 +48,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     // MARK: members
     var viewModel: SmartlistViewModel!
     fileprivate let disposeBag = DisposeBag()
+
+    fileprivate var backgroundColorObservable: Observable<UIColor>!
 
     // MARK: functions
     override func viewDidLoad() {
@@ -120,6 +125,31 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 item.userName.asObservable()
                     .observeOn(MainScheduler.instance)
                     .bind(to: cell.nameLabel.rx.text)
+                    .disposed(by: self.disposeBag)
+
+                // Avatar placeholder initial
+                item.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { value in value.prefixString()?.capitalized }
+                    .bind(to: cell.fallbackAvatar.rx.text)
+                    .disposed(by: self.disposeBag)
+
+                // UIColor that observes "best Id" prefix
+                self.backgroundColorObservable = item.userName.asObservable()
+                    .map { name in
+                        let scanner = Scanner(string: name.toMD5HexString()!.prefixString()!)
+                        var index: UInt64 = 0
+                        if scanner.scanHexInt64(&index) {
+                            return avatarColors[Int(index)]!
+                        }
+                        return defaultAvatarColor!
+                    }
+
+                // Set placeholder avatar to backgroundColorObservable
+                self.backgroundColorObservable
+                    .subscribe(onNext: { backgroundColor in
+                        cell.fallbackAvatar.backgroundColor = backgroundColor
+                    })
                     .disposed(by: self.disposeBag)
 
                 cell.newMessagesLabel.text = item.unreadMessages
