@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -31,6 +31,19 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0z-cM-gKq" userLabel="Fallback Avatar">
+                        <rect key="frame" x="16" y="18" width="40" height="40"/>
+                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Yesterday" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Yv-cC-LKx">
                         <rect key="frame" x="281" y="31" width="61" height="15"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
@@ -93,6 +106,7 @@
                 <constraints>
                     <constraint firstItem="2fJ-Wf-1e0" firstAttribute="leading" secondItem="pFB-Jn-TNP" secondAttribute="trailing" constant="4" id="2NV-6m-dri"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7Yv-cC-LKx" secondAttribute="bottom" constant="8" id="2O6-wC-voj"/>
+                    <constraint firstItem="e0z-cM-gKq" firstAttribute="leading" secondItem="pFB-Jn-TNP" secondAttribute="leading" id="8PJ-pZ-MXg"/>
                     <constraint firstItem="eug-ak-r49" firstAttribute="leading" secondItem="pFB-Jn-TNP" secondAttribute="trailing" constant="4" id="9ah-Ed-RlY"/>
                     <constraint firstItem="pFB-Jn-TNP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9mO-5E-3lA"/>
                     <constraint firstItem="Fpi-20-ZYV" firstAttribute="bottom" secondItem="pFB-Jn-TNP" secondAttribute="bottom" id="BMe-Il-GoN"/>
@@ -102,15 +116,19 @@
                     <constraint firstAttribute="trailing" secondItem="7Yv-cC-LKx" secondAttribute="trailing" constant="16" id="UOx-Og-IuZ"/>
                     <constraint firstItem="JTE-eF-Y5s" firstAttribute="top" secondItem="pFB-Jn-TNP" secondAttribute="top" id="W3A-IX-eXJ"/>
                     <constraint firstItem="7Yv-cC-LKx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Wei-7X-4zv"/>
+                    <constraint firstItem="e0z-cM-gKq" firstAttribute="bottom" secondItem="pFB-Jn-TNP" secondAttribute="bottom" id="ZEj-AJ-OZO"/>
+                    <constraint firstItem="e0z-cM-gKq" firstAttribute="trailing" secondItem="JTE-eF-Y5s" secondAttribute="trailing" id="fyt-Cw-MG2"/>
                     <constraint firstItem="eug-ak-r49" firstAttribute="trailing" secondItem="2fJ-Wf-1e0" secondAttribute="trailing" id="mdZ-Uh-312"/>
                     <constraint firstItem="2fJ-Wf-1e0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="omS-kb-QbN"/>
                     <constraint firstAttribute="bottom" secondItem="eug-ak-r49" secondAttribute="bottom" constant="8" id="rzH-w5-tpt"/>
                     <constraint firstItem="eug-ak-r49" firstAttribute="top" secondItem="2fJ-Wf-1e0" secondAttribute="bottom" constant="4" id="se0-Ur-K7G"/>
                     <constraint firstItem="pFB-Jn-TNP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="suq-ak-BYg"/>
                     <constraint firstItem="7Yv-cC-LKx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xVO-gP-WdP"/>
+                    <constraint firstItem="e0z-cM-gKq" firstAttribute="top" secondItem="JTE-eF-Y5s" secondAttribute="top" id="xfx-HF-Lm0"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="fallbackAvatar" destination="e0z-cM-gKq" id="fHH-qP-bx3"/>
                 <outlet property="lastMessageDateLabel" destination="7Yv-cC-LKx" id="pFf-hW-zD8"/>
                 <outlet property="lastMessagePreviewLabel" destination="eug-ak-r49" id="3jj-Lx-jbU"/>
                 <outlet property="nameLabel" destination="2fJ-Wf-1e0" id="0Mb-yC-vh6"/>
