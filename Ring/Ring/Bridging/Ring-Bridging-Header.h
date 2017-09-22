@@ -32,3 +32,4 @@
 #import "MessagesAdapter.h"
 #import "Chameleon/Chameleon.h"
 #import "ContactsAdapter.h"
+#import <CommonCrypto/CommonCrypto.h>

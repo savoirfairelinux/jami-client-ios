@@ -2,6 +2,7 @@
  *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,5 +31,21 @@ extension String {
         default:
             return nil
         }
+    }
+
+    func toMD5() -> Data? {
+        let messageData = self.data(using:.utf8)!
+        var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
+
+        _ = digestData.withUnsafeMutableBytes { digestBytes in
+            messageData.withUnsafeBytes { messageBytes in
+                CC_MD5(messageBytes, CC_LONG(messageData.count), digestBytes)
+            }
+        }
+        return digestData
+    }
+
+    func upperPrefix() -> String? {
+        return String(self.characters.prefix(1)).capitalized
     }
 }
