@@ -31,6 +31,7 @@ class ContactRequestItem {
 
     init(withContactRequest contactRequest: ContactRequestModel) {
         self.contactRequest = contactRequest
+        self.userName.value = contactRequest.ringId
         self.profileImageData = self.contactRequest.vCard?.imageData
     }
 }
