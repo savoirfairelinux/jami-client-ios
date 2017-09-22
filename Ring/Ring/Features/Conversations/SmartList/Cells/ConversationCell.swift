@@ -24,6 +24,7 @@ import Reusable
 
 class ConversationCell: UITableViewCell, NibReusable {
 
+    @IBOutlet weak var fallbackProfileImage: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var newMessagesIndicator: UIView!
