@@ -22,7 +22,6 @@
 		02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFE1DF755DB000358C9 /* AccountsService.swift */; };
 		02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E081DF7585F000358C9 /* DaemonService.swift */; };
 		02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9B63E1E1D4E8C00F82F0C /* ServiceEvent.swift */; };
-		02E1A0251DDE4ABA00D75B59 /* String+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043866371D2304A700E06CE2 /* String+Bool.swift */; };
 		043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
 		043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */; };
 		04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04399A021D1C2D9D00E99CD9 /* Images.xcassets */; };
@@ -183,6 +182,7 @@
 		56BBC9D41EDC7A6D00CDAF8B /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
 		56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */; };
 		56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56C715FE1F0D36C600770048 /* ContactsAdapter.mm */; };
+		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -225,7 +225,6 @@
 		02B22E081DF7585F000358C9 /* DaemonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonService.swift; sourceTree = "<group>"; };
 		02C9B63E1E1D4E8C00F82F0C /* ServiceEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEvent.swift; sourceTree = "<group>"; };
 		043866201D218B1100E06CE2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		043866371D2304A700E06CE2 /* String+Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bool.swift"; sourceTree = "<group>"; };
 		043999F31D1C2D9D00E99CD9 /* Ring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04399A021D1C2D9D00E99CD9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -406,6 +405,7 @@
 		56C715FE1F0D36C600770048 /* ContactsAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContactsAdapter.mm; sourceTree = "<group>"; };
 		56C716001F0D36D900770048 /* ContactsAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsAdapterDelegate.swift; sourceTree = "<group>"; };
 		56C716021F0D466100770048 /* ContactsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
+		62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -602,7 +602,7 @@
 			isa = PBXGroup;
 			children = (
 				56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */,
-				043866371D2304A700E06CE2 /* String+Bool.swift */,
+				62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */,
 				1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */,
 				1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */,
 				1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */,
@@ -1244,7 +1244,6 @@
 				1A2D18AC1F29149D00B2C785 /* MeCoordinator.swift in Sources */,
 				1A2D18C51F29180700B2C785 /* ContactModel.swift in Sources */,
 				1A2D18F71F292D7200B2C785 /* MessageCellSent.swift in Sources */,
-				02E1A0251DDE4ABA00D75B59 /* String+Bool.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
@@ -1300,6 +1299,7 @@
 				1A2041911F1FD46300C08435 /* DesignableView.swift in Sources */,
 				1A3D28A91F0EBF0200B524EE /* UIView+Ring.swift in Sources */,
 				1A2041881F1EA1EA00C08435 /* CreateAccountViewModel.swift in Sources */,
+				62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */,
 				1ABE07D21F0D8FE800D36361 /* Images.swift in Sources */,
 				0273C3081E0C68BF00CF00BA /* DesignableButton.swift in Sources */,
 				1A5DC0321F3566140075E8EF /* ConversationSection.swift in Sources */,

@@ -23,6 +23,7 @@ import RxSwift
 import RxDataSources
 import RxCocoa
 import Reusable
+import SwiftyBeaver
 
 //Constants
 fileprivate struct SmartlistConstants {
@@ -33,6 +34,8 @@ fileprivate struct SmartlistConstants {
 }
 
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
+
+    private let log = SwiftyBeaver.self
 
     // MARK: outlets
     @IBOutlet weak var tableView: UITableView!
@@ -45,6 +48,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     // MARK: members
     var viewModel: SmartlistViewModel!
     fileprivate let disposeBag = DisposeBag()
+
+    var backgroundColorObservable: Observable<UIColor>! // Create observable that will change backgroundColor based on center
 
     // MARK: functions
     override func viewDidLoad() {
@@ -122,6 +127,24 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
                 cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
                 cell.lastMessagePreviewLabel.text = item.lastMessage
+
+                item.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { value in value.upperPrefix() }
+                    .bind(to: cell.fallbackProfileImage.rx.text)
+                    .disposed(by: self.disposeBag)
+
+                self.backgroundColorObservable = item.userName.asObservable()
+                    .map { [unowned self] name in
+                        self.log.debug(name.upperPrefix()!.lowercased() + "000ff")
+                        return UIColor(hexString: "ff00ff")
+                    }
+
+                self.backgroundColorObservable
+                    .subscribe(onNext: { backgroundColor in
+                        cell.fallbackProfileImage.backgroundColor = backgroundColor
+                    })
+                    .disposed(by: self.disposeBag)
 
                 return cell
         }
