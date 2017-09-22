@@ -35,6 +35,8 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     fileprivate let cellIdentifier = "ContactRequestCell"
     fileprivate let log = SwiftyBeaver.self
 
+    fileprivate var backgroundColorObservable: Observable<UIColor>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,6 +67,31 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     .asObservable()
                     .observeOn(MainScheduler.instance)
                     .bind(to: cell.nameLabel.rx.text)
+                    .disposed(by: cell.disposeBag)
+
+                // Avatar placeholder initial
+                item.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { value in value.prefixString()?.capitalized }
+                    .bind(to: cell.fallbackAvatar.rx.text)
+                    .disposed(by: cell.disposeBag)
+
+                // UIColor that observes "best Id" prefix
+                self.backgroundColorObservable = item.userName.asObservable()
+                    .map { name in
+                        let scanner = Scanner(string: name.toMD5HexString()!.prefixString()!)
+                        var index: UInt64 = 0
+                        if scanner.scanHexInt64(&index) {
+                            return avatarColors[Int(index)]!
+                        }
+                        return defaultAvatarColor!
+                    }
+
+                // Set placeholder avatar to backgroundColorObservable
+                self.backgroundColorObservable
+                    .subscribe(onNext: { backgroundColor in
+                        cell.fallbackAvatar.backgroundColor = backgroundColor
+                    })
                     .disposed(by: cell.disposeBag)
 
                 if let imageData = item.profileImageData {
