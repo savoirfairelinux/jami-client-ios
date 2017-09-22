@@ -33,3 +33,4 @@
 #import "Chameleon/Chameleon.h"
 #import "ContactsAdapter.h"
 #import "PresenceAdapter.h"
+#import "Contacts/Contacts.h"
