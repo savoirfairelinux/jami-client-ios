@@ -126,7 +126,7 @@ class ContactsService {
 
                 var payload: Data?
                 if let vCard = vCard {
-                  payload = try CNContactVCardSerialization.data(with: [vCard])
+                  payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 10000)
                 }
                 self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: account.id)
                 completable(.completed)

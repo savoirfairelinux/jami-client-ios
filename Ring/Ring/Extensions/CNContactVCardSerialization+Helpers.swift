@@ -55,7 +55,9 @@ extension CNContactVCardSerialization {
         var photofieldName = VCardFields.photoPNG
 
         if let compressionSize = compressedSize, image.count > compressionSize {
-            guard let compressedImage = UIImage(data: image)?.convertToData(ofMaxSize: compressionSize)else {
+            // scale and compress image before sending vCard
+            let imageScaled =  UIImage(data: image)?.convert(toSize: CGSize(width:50.0, height:50.0), scale: UIScreen.main.scale)
+            guard let compressedImage = imageScaled?.convertToData(ofMaxSize: compressionSize)else {
                 vcData = vcString.data(using: .utf8)!
                 return vcData
             }
