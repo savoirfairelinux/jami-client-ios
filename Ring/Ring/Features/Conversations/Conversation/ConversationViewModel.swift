@@ -231,10 +231,12 @@ class ConversationViewModel: ViewModel {
     }
 
     func sendContactRequest() {
-        self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!)
-            .subscribe(onCompleted: {
-                self.log.info("request sent")
-            })
-            .disposed(by: disposeBag)
+        self.accountService.loadVCard(forAccounr: self.accountService.currentAccount!)
+            .subscribe(onSuccess: { card in
+                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!).subscribe(onCompleted: {
+                    self.log.info("contact request sent")
+                }).disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
+
     }
 }

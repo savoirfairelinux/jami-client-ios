@@ -65,10 +65,10 @@ extension CNContactVCardSerialization {
                 image = UIImagePNGRepresentation(scaledImage)!
             }
         }
-        
+
         if let compressionSize = compressedSize, image.count > compressionSize {
             // image before sending vCard
-            guard let compressedImage = UIImage(data: image)?.convertToData(ofMaxSize: compressionSize)else {
+            guard let compressedImage = UIImage(data: image)?.convertToData(ofMaxSize: compressionSize) else {
                 vcData = vcString.data(using: .utf8)!
                 return vcData
             }
