@@ -14,16 +14,8 @@ run_swiftgen() {
 	swiftgen strings -t structured-swift3 "$SRCDIR/Resources/en.lproj/Localizable.strings" --output "$OUTDIR/Strings.swift"
 }
 
-
-
 # Main script to check if SwiftGen is installed, check the version, and run it only if version matches
 if which swiftgen >/dev/null; then
-	CURRENT_VERSION=`swiftgen --version`
-	if [ "$CURRENT_VERSION" != "$EXPECTED_VERSION" ]; then
-		echo "error: SwiftGen version mismatch (expected ${EXPECTED_VERSION%% \(*\)}, got ${CURRENT_VERSION%% \(*\)})"
-		exit 1
-	fi
-
 	run_swiftgen
 else
 	echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
