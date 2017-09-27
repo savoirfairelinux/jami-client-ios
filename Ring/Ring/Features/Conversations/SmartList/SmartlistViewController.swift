@@ -127,6 +127,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     .bind(to: cell.nameLabel.rx.text)
                     .disposed(by: self.disposeBag)
 
+
+
                 // Avatar placeholder initial
                 item.userName.asObservable()
                     .observeOn(MainScheduler.instance)
