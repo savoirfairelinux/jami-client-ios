@@ -103,7 +103,7 @@ class ConversationViewModel: ViewModel {
                         return lookupNameResponse.address != nil &&
                             lookupNameResponse.address == recipientRingId
                     }).subscribe(onNext: { [unowned self] lookupNameResponse in
-                        if let name = lookupNameResponse.name {
+                        if let name = lookupNameResponse.name, !name.isEmpty {
                             self.userName.onNext(name)
                             contact?.userName = name
                         } else if let address = lookupNameResponse.address {

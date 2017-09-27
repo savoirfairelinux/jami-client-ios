@@ -95,7 +95,7 @@ class ContactRequestsViewModel: ViewModel {
                 return lookupNameResponse.address == item.contactRequest.ringId
             })
             .subscribe(onNext: { lookupNameResponse in
-                if lookupNameResponse.state == .found {
+                if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
                     item.userName.value = lookupNameResponse.name
                 } else {
                     item.userName.value = lookupNameResponse.address
