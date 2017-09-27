@@ -96,6 +96,9 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
                 if let imageData = item.profileImageData {
                     cell.profileImageView.image = UIImage(data: imageData)
+                    if !imageData.isEmpty {
+                        cell.fallbackAvatar.isHidden = true
+                    }
                 }
 
                 //Accept button
