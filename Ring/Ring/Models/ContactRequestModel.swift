@@ -25,8 +25,8 @@ class ContactRequestModel {
 
     let ringId: String
     let accountId: String
-    let vCard: CNContact?
-    let receivedDate: Date
+    var vCard: CNContact?
+    var receivedDate: Date
 
     enum ContactRequestKey: String {
         case from

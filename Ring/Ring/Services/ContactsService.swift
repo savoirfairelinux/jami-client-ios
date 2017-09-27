@@ -192,6 +192,13 @@ extension ContactsService: ContactsAdapterDelegate {
                                                          receivedDate: receivedDate,
                                                          accountId: accountId)
                 self.contactRequests.value.append(contactRequest)
+            } else {
+                // If the contact request already exists, update it's relevant data
+                if let contactRequest = self.contactRequest(withRingId: senderAccount) {
+                    let vCards = try CNContactVCardSerialization.contacts(with: payload)
+                    contactRequest.vCard = vCards.first
+                    contactRequest.receivedDate = receivedDate
+                }
             }
 
             log.debug("Incoming trust request received from :\(senderAccount)")
