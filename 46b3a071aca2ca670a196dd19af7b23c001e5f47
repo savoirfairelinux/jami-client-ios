@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_5ca6acc2",
+        "filename": "Ring/Ring/Bridging/Ring-Bridging-Header.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-09-27T13:33:39Z",
+      "side": 1,
+      "message": "\u003cnon-project header file\u003e ?",
+      "revId": "46b3a071aca2ca670a196dd19af7b23c001e5f47",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_1c9c2469",
+        "filename": "Ring/Ring/Extensions/CNContactVCardSerialization+Helpers.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-09-27T13:33:39Z",
+      "side": 1,
+      "message": "compression",
+      "range": {
+        "startLine": 24,
+        "startChar": 25,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "46b3a071aca2ca670a196dd19af7b23c001e5f47",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_3c9f6861",
+        "filename": "Ring/Ring/Extensions/CNContactVCardSerialization+Helpers.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-09-27T13:33:39Z",
+      "side": 1,
+      "message": "useful",
+      "range": {
+        "startLine": 24,
+        "startChar": 57,
+        "endLine": 24,
+        "endChar": 64
+      },
+      "revId": "46b3a071aca2ca670a196dd19af7b23c001e5f47",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_bc8258fe",
+        "filename": "Ring/Ring/Extensions/CNContactVCardSerialization+Helpers.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-09-27T13:33:39Z",
+      "side": 1,
+      "message": "smallest",
+      "range": {
+        "startLine": 57,
+        "startChar": 22,
+        "endLine": 57,
+        "endChar": 29
+      },
+      "revId": "46b3a071aca2ca670a196dd19af7b23c001e5f47",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_7ca1f0a8",
+        "filename": "Ring/Ring/Extensions/CNContactVCardSerialization+Helpers.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-09-27T13:33:39Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "46b3a071aca2ca670a196dd19af7b23c001e5f47",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_dc78fc2d",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-09-27T13:33:39Z",
+      "side": 1,
+      "message": "extra space?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 5
+      },
+      "revId": "46b3a071aca2ca670a196dd19af7b23c001e5f47",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
