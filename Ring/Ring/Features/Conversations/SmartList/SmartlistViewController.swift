@@ -136,13 +136,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
                 // UIColor that observes "best Id" prefix
                 self.backgroundColorObservable = item.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
                     .map { name in
                         let scanner = Scanner(string: name.toMD5HexString().prefixString())
                         var index: UInt64 = 0
                         if scanner.scanHexInt64(&index) {
-                            return avatarColors[Int(index)]!
+                            return avatarColors[Int(index)]
                         }
-                        return defaultAvatarColor!
+                        return defaultAvatarColor
                     }
 
                 // Set placeholder avatar to backgroundColorObservable
@@ -151,6 +152,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                         cell.fallbackAvatar.backgroundColor = backgroundColor
                     })
                     .disposed(by: self.disposeBag)
+
+                // Set image if any
+                if let imageData = item.profileImageData {
+                    cell.profileImage.image = UIImage(data: imageData)
+                    if !imageData.isEmpty {
+                        cell.fallbackAvatar.isHidden = true
+                    }
+                }
 
                 cell.newMessagesLabel.text = item.unreadMessages
                 cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
