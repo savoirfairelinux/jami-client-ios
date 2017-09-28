@@ -22,22 +22,22 @@ import Foundation
 
 // Colors from material.io
 let avatarColors = [
-    UIColor(hexString: "#f44336"), // Red
-    UIColor(hexString: "#e91e63"), // Pink
-    UIColor(hexString: "#9c27b0"), // Purple
-    UIColor(hexString: "#673ab7"), // Deep Purple
-    UIColor(hexString: "#3f51b5"), // Indigo
-    UIColor(hexString: "#2196f3"), // Blue
-    UIColor(hexString: "#00bcd4"), // Cyan
-    UIColor(hexString: "#009688"), // Teal
-    UIColor(hexString: "#4caf50"), // Green
-    UIColor(hexString: "#8bc34a"), // Light Green
-    UIColor(hexString: "#9e9e9e"), // Grey
-    UIColor(hexString: "#cddc39"), // Lime
-    UIColor(hexString: "#ffc107"), // Amber
-    UIColor(hexString: "#ff5722"), // Deep Orange
-    UIColor(hexString: "#795548"), // Brown
-    UIColor(hexString: "#607d8b")  // Blue Grey
+    UIColor(hexString: "#f44336")!, // Red
+    UIColor(hexString: "#e91e63")!, // Pink
+    UIColor(hexString: "#9c27b0")!, // Purple
+    UIColor(hexString: "#673ab7")!, // Deep Purple
+    UIColor(hexString: "#3f51b5")!, // Indigo
+    UIColor(hexString: "#2196f3")!, // Blue
+    UIColor(hexString: "#00bcd4")!, // Cyan
+    UIColor(hexString: "#009688")!, // Teal
+    UIColor(hexString: "#4caf50")!, // Green
+    UIColor(hexString: "#8bc34a")!, // Light Green
+    UIColor(hexString: "#9e9e9e")!, // Grey
+    UIColor(hexString: "#cddc39")!, // Lime
+    UIColor(hexString: "#ffc107")!, // Amber
+    UIColor(hexString: "#ff5722")!, // Deep Orange
+    UIColor(hexString: "#795548")!, // Brown
+    UIColor(hexString: "#607d8b")!  // Blue Grey
 ];
 
-let defaultAvatarColor = UIColor(hexString: "808080")
+let defaultAvatarColor = UIColor(hexString: "808080")!
