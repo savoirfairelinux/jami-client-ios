@@ -68,9 +68,21 @@ class ConversationViewModel: ViewModel {
                 })
             }).observeOn(MainScheduler.instance)
 
-            let contact = self.contactsService.contact(withRingId: self.conversation.recipientRingId)
+            let contactRingId = self.conversation.recipientRingId
 
-	    if let contact = contact {
+            let contact = self.contactsService.contact(withRingId: contactRingId)
+
+            self.contactsService.loadVCard(forContactWithRingId: contactRingId)
+                .subscribe(onSuccess: { vCard in
+                    guard let imageData = vCard.imageData else {
+                        self.log.warning("vCard for ringId: \(contactRingId) has no image")
+                        return
+                    }
+                    self.profileImageData = imageData
+                })
+                .disposed(by: self.disposeBag)
+
+            if let contact = contact {
                 self.inviteButtonIsAvailable.onNext(!contact.confirmed)
             }
             self.contactsService.contactStatus.subscribe(onNext: { contact in
@@ -135,6 +147,8 @@ class ConversationViewModel: ViewModel {
     var messages: Observable<[MessageViewModel]>!
 
     var userName = BehaviorSubject(value: "")
+
+    var profileImageData: Data?
 
     var inviteButtonIsAvailable = BehaviorSubject(value: true)
 
