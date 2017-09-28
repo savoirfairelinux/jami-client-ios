@@ -257,6 +257,7 @@ extension ContactsService: ContactsAdapterDelegate {
 
     func loadVCard(forContactWithRingId ringID: String) -> Single<CNContact> {
         let vCardSaved = VCardUtils.loadVCard(named:ringID, inFolder: VCardFolders.contacts.rawValue)
+        self.log.debug("loaded vCard for ringId: \(ringID)")
         return vCardSaved
     }
 }

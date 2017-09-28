@@ -46,6 +46,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         self.setupTableView()
         self.setupBindings()
     }
@@ -78,13 +79,14 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
                 // UIColor that observes "best Id" prefix
                 self.backgroundColorObservable = item.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
                     .map { name in
                         let scanner = Scanner(string: name.toMD5HexString().prefixString())
                         var index: UInt64 = 0
                         if scanner.scanHexInt64(&index) {
-                            return avatarColors[Int(index)]!
+                            return avatarColors[Int(index)]
                         }
-                        return defaultAvatarColor!
+                        return defaultAvatarColor
                     }
 
                 // Set placeholder avatar to backgroundColorObservable
