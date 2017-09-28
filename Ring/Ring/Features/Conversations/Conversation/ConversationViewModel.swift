@@ -38,6 +38,8 @@ class ConversationViewModel: ViewModel {
     private let presenceService: PresenceService
     private let injectionBag: InjectionBag
 
+    var profileImageData: Data?
+
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         self.accountService = injectionBag.accountService
@@ -68,9 +70,18 @@ class ConversationViewModel: ViewModel {
                 })
             }).observeOn(MainScheduler.instance)
 
-            let contact = self.contactsService.contact(withRingId: self.conversation.recipientRingId)
+            let contactRingId = self.conversation.recipientRingId
 
-	    if let contact = contact {
+            let contact = self.contactsService.contact(withRingId: contactRingId)
+
+            self.contactsService.loadVCard(forContactWithRingId: contactRingId)
+                .subscribe(onSuccess: { vCard in
+                    self.log.debug("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ - loaded VCARD")
+                    self.profileImageData = vCard.imageData
+                })
+                .disposed(by: self.disposeBag)
+
+            if let contact = contact {
                 self.inviteButtonIsAvailable.onNext(!contact.confirmed)
             }
             self.contactsService.contactStatus.subscribe(onNext: { contact in
