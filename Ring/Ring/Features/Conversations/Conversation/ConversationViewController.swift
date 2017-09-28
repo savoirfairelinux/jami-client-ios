@@ -118,6 +118,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         //Register cell
         self.tableView.register(cellType: MessageCellSent.self)
         self.tableView.register(cellType: MessageCellReceived.self)
+        self.tableView.register(cellType: MessageCellGenerated.self)
 
         //Bind the TableView to the ViewModel
         self.viewModel.messages.subscribe(onNext: { [weak self] (messageViewModels) in
@@ -200,6 +201,12 @@ extension ConversationViewController: UITableViewDataSource {
             if messageViewModel.bubblePosition() == .received {
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
                 cell.messageLabel.text = messageViewModel.content
+                return cell
+            }
+
+            if messageViewModel.bubblePosition() == .generated {
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellGenerated.self)
+                cell.messageLabel.text = messageViewModel.contentForGeneatedMessage
                 return cell
             }
 
