@@ -70,13 +70,18 @@ class ConversationViewModel: ViewModel {
 
             let contact = self.contactsService.contact(withRingId: self.conversation.recipientRingId)
 
-	    if let contact = contact {
+            if let contact = contact {
                 self.inviteButtonIsAvailable.onNext(!contact.confirmed)
             }
             self.contactsService.contactStatus.subscribe(onNext: { contact in
-                self.inviteButtonIsAvailable.onNext(!contact.confirmed)
-            }).disposed(by: self.disposeBag)
 
+                self.inviteButtonIsAvailable.onNext(!contact.confirmed)
+                if contact.confirmed {
+                    _ = self.dispatchOnce
+
+                }
+            }).disposed(by: self.disposeBag)
+            
             // subscribe to presence updates for the conversation's associated contact
             self.presenceService
                 .sharedResponseStream
@@ -115,6 +120,19 @@ class ConversationViewModel: ViewModel {
             }
         }
     }
+
+    lazy var dispatchOnce : Void  = { // or anyName I choose
+
+        let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
+        self.conversationsService.saveMessage(withContent:
+            "ACCEPTED" , byAuthor: "middle", toConversationWith: self.conversation.recipientRingId, currentAccountId: (self.accountService.currentAccount?.id)!).subscribe(onCompleted: {
+                self.log.info("contact request sent")
+            }, onError: { (error) in
+                self.log.info("contact request sent")
+            })
+
+        return
+    }()
 
     private lazy var realm: Realm = {
         guard let realm = try? Realm() else {
@@ -233,10 +251,33 @@ class ConversationViewModel: ViewModel {
     func sendContactRequest() {
         self.accountService.loadVCard(forAccounr: self.accountService.currentAccount!)
             .subscribe(onSuccess: { card in
+                if let _ = self.contactsService.contact(withRingId: self.conversation.recipientRingId) {
+
+                }
+
+                else {
+                    var name = ""
+                    do {
+                        name = try self.userName.value()
+                        name = " to " + name
+                    } catch {
+                        name = ""
+                    }
+
+                    let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
+                    self.conversationsService.saveMessage(withContent:
+                        "You have been sent invitation" + name, byAuthor: "middle", toConversationWith: self.conversation.recipientRingId, currentAccountId: (self.accountService.currentAccount?.id)!).subscribe(onCompleted: {
+                            self.log.info("contact request sent")
+                        }, onError: { (error) in
+                            self.log.info("contact request sent")
+                        })
+                }
+                
                 self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!).subscribe(onCompleted: {
+
                     self.log.info("contact request sent")
                 }).disposed(by: self.disposeBag)
             }).disposed(by: self.disposeBag)
-
+        
     }
 }

@@ -23,6 +23,7 @@ import RxSwift
 enum BubblePosition {
     case received
     case sent
+    case middle
 }
 
 class MessageViewModel {
@@ -46,8 +47,12 @@ class MessageViewModel {
 
         if self.message.author == accountHelper.ringId! {
             return .sent
-        } else {
-            return .received
+        } else if self.message.author == "middle"{
+            return .middle
+        }
+        else {
+            return.received
+
         }
     }
 }

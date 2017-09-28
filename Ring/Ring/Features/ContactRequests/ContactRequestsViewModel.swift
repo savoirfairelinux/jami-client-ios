@@ -26,6 +26,7 @@ class ContactRequestsViewModel: ViewModel {
 
     let contactsService: ContactsService
     let accountsService: AccountsService
+    let conversationService: ConversationsService
     let nameService: NameService
 
     fileprivate let disposeBag = DisposeBag()
@@ -33,6 +34,7 @@ class ContactRequestsViewModel: ViewModel {
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService
         self.accountsService = injectionBag.accountService
+        self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
     }
 
@@ -59,6 +61,14 @@ class ContactRequestsViewModel: ViewModel {
 
     func accept(withItem item: ContactRequestItem) -> Observable<Void> {
         let acceptCompleted = self.contactsService.accept(contactRequest: item.contactRequest, withAccount: self.accountsService.currentAccount!)
+
+        self.conversationService.saveMessage(withContent:
+            "You receive contact request" , byAuthor: "middle", toConversationWith: item.contactRequest.ringId, currentAccountId: (self.accountsService.currentAccount?.id)!).subscribe(onCompleted: {
+                //self.log.info("contact request sent")
+            }, onError: { (error) in
+                //self.log.info("contact request sent")
+            })
+
 
         if let vCard = item.contactRequest.vCard {
             let saveVCardCompleted = self.contactsService.saveVCard(vCard: vCard, forContactWithRingId: item.contactRequest.ringId)

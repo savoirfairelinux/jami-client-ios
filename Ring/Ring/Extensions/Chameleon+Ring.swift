@@ -54,5 +54,9 @@ extension Chameleon {
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).tintColor = secondaryContentColor
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).backgroundColor = secondaryColor
         UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellReceived.self]).textColor = secondaryContentColor
+
+        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellInTheMiddle.self]).tintColor = UIColor.clear
+        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellInTheMiddle.self]).backgroundColor = UIColor.clear
+       // UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellInTheMiddle.self]).textColor = primaryColor
     }
 }
