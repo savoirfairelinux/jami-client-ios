@@ -221,7 +221,7 @@ extension ContactsService: ContactsAdapterDelegate {
         if let contact = self.contact(withRingId: uri) {
             if contact.confirmed != confirmed {
                 contact.confirmed = confirmed
-                contactStatus.onNext(contact)
+                self.contactStatus.onNext(contact)
             }
         }
             //sync contacts with daemon contacts

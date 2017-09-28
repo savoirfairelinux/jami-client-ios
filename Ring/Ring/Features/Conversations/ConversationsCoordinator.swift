@@ -64,7 +64,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
 
     private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
         let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
-        conversationViewController.viewModel.conversation = conversationViewModel.conversation
+        conversationViewController.viewModel = conversationViewModel
         self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true)
     }
 }

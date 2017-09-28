@@ -71,6 +71,7 @@ class ConversationViewModel: ViewModel {
             let contactRingId = self.conversation.recipientRingId
 
             let contact = self.contactsService.contact(withRingId: contactRingId)
+            let disposeBag = DisposeBag()
 
             self.contactsService.loadVCard(forContactWithRingId: contactRingId)
                 .subscribe(onSuccess: { vCard in
@@ -85,9 +86,16 @@ class ConversationViewModel: ViewModel {
             if let contact = contact {
                 self.inviteButtonIsAvailable.onNext(!contact.confirmed)
             }
-            self.contactsService.contactStatus.subscribe(onNext: { contact in
-                self.inviteButtonIsAvailable.onNext(!contact.confirmed)
-            }).disposed(by: self.disposeBag)
+            self.contactsService.contactStatus.filter({ cont in
+                return cont.ringId == contact?.ringId
+            })
+                .subscribe(onNext: { [unowned self] cont in
+
+                    self.inviteButtonIsAvailable.onNext(!cont.confirmed)
+                    if cont.confirmed {
+                        self.generateMessage(ofType: GeneratedMessageType.contactRequestAccepted)
+                    }
+                }).disposed(by: self.disposeBag)
 
             // subscribe to presence updates for the conversation's associated contact
             self.presenceService
@@ -163,7 +171,7 @@ class ConversationViewModel: ViewModel {
     }
 
     var lastMessage: String {
-        if let lastMessage = conversation.messages.last?.content {
+        if let lastMessage = conversation.messages.last?.content.replacingOccurrences(of: MessageKey.generatedMessageKey.rawValue, with: "") {
             return lastMessage
         } else {
             return ""
@@ -245,12 +253,40 @@ class ConversationViewModel: ViewModel {
     }
 
     func sendContactRequest() {
+
+        let contactExists =  self.contactsService.contact(withRingId: self.conversation.recipientRingId) != nil ? true : false
         self.accountService.loadVCard(forAccounr: self.accountService.currentAccount!)
+           // .observeOn(MainScheduler.instance)
             .subscribe(onSuccess: { card in
-                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!).subscribe(onCompleted: {
+                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!)
+                 .delaySubscription(1, scheduler: MainScheduler.instance)
+                .subscribe(onCompleted: {
+                    if !contactExists {
+                        self.generateMessage(ofType: GeneratedMessageType.sendContactRequest)
+                    }
                     self.log.info("contact request sent")
                 }).disposed(by: self.disposeBag)
             }).disposed(by: self.disposeBag)
+    }
 
+    func generateMessage(ofType messageType: GeneratedMessageType) {
+        if self.generatedMessageExists(ofType: messageType) {
+            return
+        }
+
+        let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
+        self.conversationsService.saveMessage(withContent:
+            messageType.createMsg(), byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipientRingId, currentAccountId: (self.accountService.currentAccount?.id)!)
+           .subscribe()
+    }
+
+    func generatedMessageExists(ofType messageType: GeneratedMessageType) -> Bool {
+        for message in self.conversation.messages {
+
+            if message.content == messageType.createMsg() {
+                return true
+            }
+        }
+        return false
     }
 }
