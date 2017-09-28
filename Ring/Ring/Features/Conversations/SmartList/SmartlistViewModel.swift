@@ -47,7 +47,7 @@ class SmartlistViewModel: Stateable, ViewModel {
     fileprivate var contactFoundConversation = Variable<ConversationViewModel?>(nil)
     fileprivate var conversationViewModels = [ConversationViewModel]()
 
-    required init(with injectionBag: InjectionBag) {
+      required init(with injectionBag: InjectionBag) {
 
         self.conversationsService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
