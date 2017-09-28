@@ -198,6 +198,8 @@ extension ContactsService: ContactsAdapterDelegate {
                     let vCards = try CNContactVCardSerialization.contacts(with: payload)
                     contactRequest.vCard = vCards.first
                     contactRequest.receivedDate = receivedDate
+                    saveVCard(vCard: contactRequest.vCard!, forContactWithRingId: senderAccount)
+                        .subscribe()
                 }
             }
 
