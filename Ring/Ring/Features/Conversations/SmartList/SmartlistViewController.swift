@@ -153,6 +153,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     })
                     .disposed(by: self.disposeBag)
 
+                // Set image if any
+                if let imageData = item.profileImageData {
+                    cell.profileImage.image = UIImage(data: imageData)
+                    if !imageData.isEmpty {
+                        cell.fallbackAvatar.isHidden = true
+                    }
+                }
+
                 cell.newMessagesLabel.text = item.unreadMessages
                 cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
                 cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
