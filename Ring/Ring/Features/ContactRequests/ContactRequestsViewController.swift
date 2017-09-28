@@ -46,6 +46,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         self.setupTableView()
         self.setupBindings()
     }
