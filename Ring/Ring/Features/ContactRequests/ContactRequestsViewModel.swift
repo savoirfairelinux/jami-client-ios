@@ -47,14 +47,16 @@ class ContactRequestsViewModel: ViewModel {
                         let item = ContactRequestItem(withContactRequest: contactRequest)
                         self.lookupUserName(withItem: item)
                         return item
-                }
+                    }
             })
     }()
 
     lazy var hasInvitations: Observable<Bool> = {
-        return self.contactRequestItems.map({ items in
-            return !items.isEmpty
-        })
+        return self.contactsService.contactRequests
+            .asObservable()
+            .map({ items in
+                return !items.isEmpty
+            })
     }()
 
     func accept(withItem item: ContactRequestItem) -> Observable<Void> {
