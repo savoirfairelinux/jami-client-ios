@@ -95,9 +95,12 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     })
                     .disposed(by: cell.disposeBag)
 
+                // Set image if any
+                cell.fallbackAvatar.isHidden = false
+                cell.profileImageView.image = nil
                 if let imageData = item.profileImageData {
-                    cell.profileImageView.image = UIImage(data: imageData)
-                    if !imageData.isEmpty {
+                    if let image = UIImage(data: imageData) {
+                        cell.profileImageView.image = image
                         cell.fallbackAvatar.isHidden = true
                     }
                 }
