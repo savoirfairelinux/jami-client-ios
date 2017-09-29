@@ -54,11 +54,11 @@ class ContactsService {
     }
 
     func contactRequest(withRingId ringId: String) -> ContactRequestModel? {
-        guard let contact = self.contactRequests.value.filter({ $0.ringId == ringId }).first else {
+        guard let contactRequest = self.contactRequests.value.filter({ $0.ringId == ringId }).first else {
             return nil
         }
 
-        return contact
+        return contactRequest
     }
 
     func loadContacts(withAccount account: AccountModel) {
@@ -84,7 +84,9 @@ class ContactsService {
             return ContactRequestModel(withDictionary: dictionary, accountId: account.id)
         }) {
             for contactRequest in contactRequests {
-                self.contactRequests.value.append(contactRequest)
+                if self.contactRequest(withRingId: contactRequest.ringId) == nil {
+                    self.contactRequests.value.append(contactRequest)
+                }
             }
         }
     }
