@@ -26,6 +26,7 @@ class ContactRequestsViewModel: ViewModel {
 
     let contactsService: ContactsService
     let accountsService: AccountsService
+    let conversationService: ConversationsService
     let nameService: NameService
 
     fileprivate let disposeBag = DisposeBag()
@@ -33,6 +34,7 @@ class ContactRequestsViewModel: ViewModel {
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService
         self.accountsService = injectionBag.accountService
+        self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
     }
 
@@ -61,6 +63,20 @@ class ContactRequestsViewModel: ViewModel {
 
     func accept(withItem item: ContactRequestItem) -> Observable<Void> {
         let acceptCompleted = self.contactsService.accept(contactRequest: item.contactRequest, withAccount: self.accountsService.currentAccount!)
+
+        let accountHelper = AccountModelHelper(withAccount: self.accountsService.currentAccount!)
+        self.conversationService.saveMessage(withContent:
+            GeneratedMessageType.receivedContactRequest.createMsg(),
+                                             byAuthor: accountHelper.ringId!,
+                                             toConversationWith: item.contactRequest.ringId,
+                                             currentAccountId: (self.accountsService.currentAccount?.id)!)
+            .subscribe()
+        self.conversationService.saveMessage(withContent:
+            GeneratedMessageType.contactRequestAccepted.createMsg(),
+                                             byAuthor: accountHelper.ringId!,
+                                             toConversationWith: item.contactRequest.ringId,
+                                             currentAccountId: (self.accountsService.currentAccount?.id)!)
+            .subscribe()
 
         if let vCard = item.contactRequest.vCard {
             let saveVCardCompleted = self.contactsService.saveVCard(vCard: vCard, forContactWithRingId: item.contactRequest.ringId)

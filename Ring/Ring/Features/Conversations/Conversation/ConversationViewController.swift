@@ -81,7 +81,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         //invite button
         let inviteItem = UIBarButtonItem()
         inviteItem.image = UIImage(named: "add_person")
-        inviteItem.rx.tap.subscribe(onNext: { [unowned self] in
+        inviteItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
             self.inviteItemTapped()
         }).disposed(by: self.disposeBag)
 
@@ -118,6 +119,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         //Register cell
         self.tableView.register(cellType: MessageCellSent.self)
         self.tableView.register(cellType: MessageCellReceived.self)
+        self.tableView.register(cellType: MessageCellGenerated.self)
 
         //Bind the TableView to the ViewModel
         self.viewModel.messages.subscribe(onNext: { [weak self] (messageViewModels) in
@@ -200,6 +202,12 @@ extension ConversationViewController: UITableViewDataSource {
             if messageViewModel.bubblePosition() == .received {
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
                 cell.messageLabel.text = messageViewModel.content
+                return cell
+            }
+
+            if messageViewModel.bubblePosition() == .generated {
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellGenerated.self)
+                cell.messageLabel.text = messageViewModel.contentForGeneatedMessage
                 return cell
             }
 
