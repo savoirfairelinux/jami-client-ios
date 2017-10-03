@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -85,9 +86,16 @@ class ConversationViewModel: ViewModel {
             if let contact = contact {
                 self.inviteButtonIsAvailable.onNext(!contact.confirmed)
             }
-            self.contactsService.contactStatus.subscribe(onNext: { contact in
-                self.inviteButtonIsAvailable.onNext(!contact.confirmed)
-            }).disposed(by: self.disposeBag)
+            self.contactsService.contactStatus.filter({ cont in
+                return cont.ringId == contact?.ringId
+            })
+                .subscribe(onNext: { [unowned self] cont in
+
+                    self.inviteButtonIsAvailable.onNext(!cont.confirmed)
+                    if cont.confirmed {
+                        self.generateMessage(ofType: GeneratedMessageType.contactRequestAccepted)
+                    }
+                }).disposed(by: self.disposeBag)
 
             // subscribe to presence updates for the conversation's associated contact
             self.presenceService
@@ -216,13 +224,13 @@ class ConversationViewModel: ViewModel {
                          to: self.conversation.recipientRingId)
             .subscribe(onCompleted: { [unowned self] in
                 let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipientRingId)
+                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipientRingId, generated: false)
             }).disposed(by: self.disposeBag)
     }
 
-    fileprivate func saveMessage(withContent content: String, byAuthor author: String, toConversationWith account: String) {
+    fileprivate func saveMessage(withContent content: String, byAuthor author: String, toConversationWith account: String, generated: Bool) {
         self.conversationsService
-            .saveMessage(withContent: content, byAuthor: author, toConversationWith: account, currentAccountId: (accountService.currentAccount?.id)!)
+            .saveMessage(withContent: content, byAuthor: author, toConversationWith: account, currentAccountId: (accountService.currentAccount?.id)!, generated: generated)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message saved")
             })
@@ -245,12 +253,45 @@ class ConversationViewModel: ViewModel {
     }
 
     func sendContactRequest() {
-        self.accountService.loadVCard(forAccounr: self.accountService.currentAccount!)
-            .subscribe(onSuccess: { card in
-                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!).subscribe(onCompleted: {
-                    self.log.info("contact request sent")
-                }).disposed(by: self.disposeBag)
-            }).disposed(by: self.disposeBag)
 
+        let contactExists =  self.contactsService.contact(withRingId: self.conversation.recipientRingId) != nil ? true : false
+        self.accountService.loadVCard(forAccounr: self.accountService.currentAccount!)
+            .subscribe(onSuccess: { [unowned self] (card) in
+                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!)
+                    .subscribe(onCompleted: {
+                        if !contactExists {
+                            self.generateMessage(ofType: GeneratedMessageType.sendContactRequest)
+                        }
+                        self.log.info("contact request sent")
+                    }).disposed(by: self.disposeBag)
+            }, onError: { [unowned self]  _ in
+                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!)
+                    .subscribe(onCompleted: {
+                        if !contactExists {
+                            self.generateMessage(ofType: GeneratedMessageType.sendContactRequest)
+                        }
+                        self.log.info("contact request sent")
+                    }).disposed(by: self.disposeBag)
+
+            }).disposed(by: self.disposeBag)
+    }
+
+    func generateMessage(ofType messageType: GeneratedMessageType) {
+        if self.generatedMessageExists(ofType: messageType) {
+            return
+        }
+
+        let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
+        self.saveMessage(withContent:
+            messageType.rawValue, byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipientRingId, generated: true)
+    }
+
+    func generatedMessageExists(ofType messageType: GeneratedMessageType) -> Bool {
+        for message in self.conversation.messages
+            where message.content == messageType.rawValue {
+
+                return true
+        }
+        return false
     }
 }
