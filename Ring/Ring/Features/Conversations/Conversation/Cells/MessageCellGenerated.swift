@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,24 +18,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
+import Foundation
+import Reusable
 
-class MessageModel: Object {
+class MessageCellGenerated: UITableViewCell, NibReusable {
 
-    dynamic var id: Int64 = 0
-    dynamic var receivedDate: Date = Date()
-    dynamic var content: String = ""
-    dynamic var author: String = ""
-    dynamic var status: MessageStatus = .unknown
-    dynamic var isGenerated: Bool = false
-
-    convenience init(withId id: Int64, receivedDate: Date, content: String, author: String) {
-        self.init()
-        self.id = id
-        self.receivedDate = receivedDate
-        self.content = content
-        self.author = author
-        self.status = .unknown
-        self.isGenerated = false
-    }
+    @IBOutlet weak var bubble: MessageBubble!
+    @IBOutlet weak var messageLabel: UILabel!
 }
