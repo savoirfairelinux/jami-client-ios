@@ -40,6 +40,9 @@ class ConversationsService: MessagesAdapterDelegate {
     var conversations: Observable<Results<ConversationModel>>
 
     init(withMessageAdapter adapter: MessagesAdapter) {
+
+        let config = Realm.Configuration(schemaVersion: 1)
+        Realm.Configuration.defaultConfiguration = config
         guard let realm = try? Realm() else {
             fatalError("Enable to instantiate Realm")
         }
@@ -63,7 +66,7 @@ class ConversationsService: MessagesAdapterDelegate {
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
 
             if accountHelper.ringId! != recipientRingId {
-                _ = self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: recipientRingId, currentAccountId: senderAccount.id)
+                _ = self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: recipientRingId, currentAccountId: senderAccount.id, generated: false)
             }
 
             completable(.completed)
@@ -90,10 +93,14 @@ class ConversationsService: MessagesAdapterDelegate {
     func saveMessage(withContent content: String,
                      byAuthor author: String,
                      toConversationWith recipientRingId: String,
-                     currentAccountId: String) -> Completable {
+                     currentAccountId: String,
+                     generated: Bool?) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
             let message = MessageModel(withId: 0, receivedDate: Date(), content: content, author: author)
+            if let generated = generated {
+                message.isGenerated = generated
+            }
 
             //Get conversations for this sender
             var currentConversation = self.results.filter({ conversation in
@@ -185,7 +192,7 @@ class ConversationsService: MessagesAdapterDelegate {
             self.saveMessage(withContent: content,
                              byAuthor: senderAccount,
                              toConversationWith: senderAccount,
-                             currentAccountId: receiverAccountId)
+                             currentAccountId: receiverAccountId, generated: false)
                 .subscribe(onCompleted: { [unowned self] in
                     self.log.info("Message saved")
                 })
