@@ -27,6 +27,7 @@ class MessageModel: Object {
     dynamic var content: String = ""
     dynamic var author: String = ""
     dynamic var status: MessageStatus = .unknown
+    dynamic var isGenerated: Bool = false
 
     convenience init(withId id: Int64, receivedDate: Date, content: String, author: String) {
         self.init()
@@ -35,5 +36,6 @@ class MessageModel: Object {
         self.content = content
         self.author = author
         self.status = .unknown
+        self.isGenerated = false
     }
 }

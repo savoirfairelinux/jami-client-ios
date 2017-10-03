@@ -23,6 +23,13 @@ import RxSwift
 enum BubblePosition {
     case received
     case sent
+    case generated
+}
+
+enum GeneratedMessageType: String {
+    case sendContactRequest = "The invitation has been sent"
+    case receivedContactRequest = "Contact request received"
+    case contactRequestAccepted = "ACCEPTED"
 }
 
 class MessageViewModel {
@@ -41,13 +48,15 @@ class MessageViewModel {
     }
 
     func bubblePosition() -> BubblePosition {
-
+        if self.message.isGenerated {
+            return .generated
+        }
         let accountHelper = AccountModelHelper(withAccount: accountService.currentAccount!)
 
         if self.message.author == accountHelper.ringId! {
             return .sent
         } else {
-            return .received
+            return.received
         }
     }
 }
