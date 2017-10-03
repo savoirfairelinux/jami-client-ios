@@ -70,7 +70,9 @@ class ContactsService {
             return ContactModel(withDictionary: contactDict)
         }) {
             for contact in contacts {
-                self.contacts.value.append(contact)
+                if self.contacts.value.index(of: contact) == nil {
+                    self.contacts.value.append(contact)
+                }
             }
         }
     }
@@ -212,16 +214,11 @@ extension ContactsService: ContactsAdapterDelegate {
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool) {
         //Update trust request list
         self.removeContactRequest(withRingId: uri)
-
-        //if contact list is empty thats mean app just starts and we receive all contacts was added
-        if self.contacts.value.isEmpty {
-            return
-        }
         // update contact status
         if let contact = self.contact(withRingId: uri) {
             if contact.confirmed != confirmed {
                 contact.confirmed = confirmed
-                contactStatus.onNext(contact)
+                self.contactStatus.onNext(contact)
             }
         }
             //sync contacts with daemon contacts
