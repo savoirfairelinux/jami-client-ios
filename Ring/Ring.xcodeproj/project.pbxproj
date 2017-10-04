@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		02419BCF1DC3E75700DF0734 /* libboost_random.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCD1DC3E75700DF0734 /* libboost_random.a */; };
 		02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BCE1DC3E75700DF0734 /* libboost_system.a */; };
-		02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02419BD11DC3E76A00DF0734 /* libcryptopp.a */; };
 		024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */; };
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */; };
 		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */; };
@@ -441,7 +440,6 @@
 				02674C861E0C757B0065EDF9 /* RxSwift.framework in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
 				02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */,
-				02419BD21DC3E76A00DF0734 /* libcryptopp.a in Frameworks */,
 				02419BCF1DC3E75700DF0734 /* libboost_random.a in Frameworks */,
 				02419BD01DC3E75700DF0734 /* libboost_system.a in Frameworks */,
 				04399AE41D1C341A00E99CD9 /* libavcodec.a in Frameworks */,
