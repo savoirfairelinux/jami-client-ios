@@ -80,7 +80,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
 
     func start () {
         let welcomeViewController = WelcomeViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: welcomeViewController, withStyle: .show, withAnimation: true, withStateable: welcomeViewController.viewModel)
+        self.present(viewController: welcomeViewController, withStyle: .show, withAnimation: false, withStateable: welcomeViewController.viewModel)
     }
 
     private func showCreateProfile (with walkthroughType: WalkthroughType) {

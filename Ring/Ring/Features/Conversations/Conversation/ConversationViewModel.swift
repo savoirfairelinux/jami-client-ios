@@ -253,9 +253,8 @@ class ConversationViewModel: ViewModel {
     }
 
     func sendContactRequest() {
-
         let contactExists =  self.contactsService.contact(withRingId: self.conversation.recipientRingId) != nil ? true : false
-        self.accountService.loadVCard(forAccounr: self.accountService.currentAccount!)
+        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue)
             .subscribe(onSuccess: { [unowned self] (card) in
                 self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!)
                     .subscribe(onCompleted: {
