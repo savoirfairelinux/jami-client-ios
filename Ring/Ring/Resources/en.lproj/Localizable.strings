@@ -41,6 +41,7 @@
 
 //Creation Profile Screen
 "createProfile.createAccount" = "Skip to Create Account";
+"createProfile.createAccountWithProfile" = "Next";
 "createProfile.linkDevice" = "Skip to Link Device";
 
 //Create Account form
@@ -65,3 +66,6 @@
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.profileTakePhoto" = "Take photo";
+"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileCancelPhoto" = "Cancel";

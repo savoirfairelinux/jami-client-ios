@@ -26,6 +26,10 @@ enum VCardFolders: String {
     case contacts
     case profile
 }
+
+enum VCardFiles: String {
+    case myProfile
+}
 class VCardUtils {
 
     class func saveVCard(vCard: CNContact, withName name: String, inFolder folder: String) -> Observable<Void> {

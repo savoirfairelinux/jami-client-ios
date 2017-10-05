@@ -28,20 +28,52 @@ class CreateProfileViewModel: Stateable, ViewModel {
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
+    var profileName = Variable<String>("")
+    var profilePhoto = Variable<UIImage?>(nil)
 
-    // MARK: - Rx Singles for L10n
-    lazy var skipButtonTitle: Observable<String> = {
-        if self.walkthroughType == .createAccount {
-            return Observable<String>.of(L10n.Createprofile.createAccount)
-        } else {
-            return Observable<String>.of(L10n.Createprofile.linkDevice)
+    lazy var profileExists: Observable<Bool>  = {
+
+        return Observable.combineLatest(self.profileName.asObservable(),
+                                        self.profilePhoto.asObservable()) {(username, image) -> Bool in
+
+            if !username.isEmpty {
+                return true
+            }
+
+            let defaultImage = UIImage(named: "ic_contact_picture")
+            if let image = image, !defaultImage!.isEqual(image) {
+                return true
+            }
+            return false
         }
-
     }()
 
-    var walkthroughType: WalkthroughType!
+    var skipButtonTitle = Variable<String>("")
+
+    var walkthroughType: WalkthroughType! {
+        didSet {
+            if self.walkthroughType == .createAccount {
+                self.skipButtonTitle.value = L10n.Createprofile.createAccount
+            } else {
+                self.skipButtonTitle.value = L10n.Createprofile.linkDevice
+            }
+
+            profileExists.subscribe(onNext: { [unowned self] (state) in
+                if state {
+                    self.skipButtonTitle.value = L10n.Createprofile.createAccountWithProfile
+                } else if self.walkthroughType == .createAccount {
+                    self.skipButtonTitle.value = L10n.Createprofile.createAccount
+                } else {
+                    self.skipButtonTitle.value = L10n.Createprofile.linkDevice
+                }
+            }).disposed(by: self.disposeBag)
+        }
+    }
+
+    let disposeBag = DisposeBag()
 
     required init (with injectionBag: InjectionBag) {
+
     }
 
     func proceedWithAccountCreationOrDeviceLink() {

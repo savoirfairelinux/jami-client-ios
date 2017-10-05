@@ -85,10 +85,10 @@ class AppCoordinator: Coordinator, StateableResponsive {
         let walkthroughCoordinator = WalkthroughCoordinator(with: self.injectionBag)
         self.addChildCoordinator(childCoordinator: walkthroughCoordinator)
         let walkthroughViewController = walkthroughCoordinator.rootViewController
-        self.present(viewController: walkthroughViewController, withStyle: .popup, withAnimation: true)
+        self.present(viewController: walkthroughViewController, withStyle: .popup, withAnimation: false)
         walkthroughCoordinator.start()
 
-        walkthroughViewController.rx.viewDidDisappear.subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
+        walkthroughViewController.rx.controllerWasDismissed.subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
             walkthroughCoordinator?.stateSubject.dispose()
             self?.removeChildCoordinator(childCoordinator: walkthroughCoordinator)
         }).disposed(by: self.disposeBag)
