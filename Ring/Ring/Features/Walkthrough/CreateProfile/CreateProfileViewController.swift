@@ -10,7 +10,7 @@ import UIKit
 import Reusable
 import RxSwift
 
-class CreateProfileViewController: UIViewController, StoryboardBased, ViewModelBased {
+class CreateProfileViewController: EditProfileViewController, StoryboardBased, ViewModelBased {
 
     // MARK: outlets
     @IBOutlet weak var skipButton: DesignableButton!
@@ -24,12 +24,24 @@ class CreateProfileViewController: UIViewController, StoryboardBased, ViewModelB
         super.viewDidLoad()
 
         // Bind ViewModel to View
-        self.viewModel.skipButtonTitle.bind(to: self.skipButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
+
+        self.viewModel.skipButtonTitle.asObservable().bind(to: self.skipButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
+
+        // Bind View to ViewModel
+        self.profileName.rx.text.orEmpty.bind(to: self.viewModel.profileName).disposed(by: self.disposeBag)
+
+        if self.profileImageView.image != nil {
+            let imageObs: Observable<UIImage?> = self.profileImageView
+                .rx.observe(UIImage.self, "image")
+            imageObs.bind(to: self.viewModel.profilePhoto).disposed(by: self.disposeBag)
+        }
 
         // Bind View Actions to ViewModel
         self.skipButton.rx.tap.subscribe(onNext: { [unowned self] in
+            if let name = self.profileName.text {
+                self.model.updateName(name)
+            }
             self.viewModel.proceedWithAccountCreationOrDeviceLink()
         }).disposed(by: self.disposeBag)
     }
-
 }
