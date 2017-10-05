@@ -21,49 +21,21 @@
 import Foundation
 import RxSwift
 
-class MeViewModel: Stateable, ViewModel {
+class MeViewModel: ViewModel, Stateable {
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
 
-    let accountService: AccountsService
     var userName: Single<String?>
     let ringId: Single<String?>
-    var image: Single<Image?>?
 
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
 
     required init(with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
-        self.userName = Single.just(self.accountService.currentAccount?.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)))
-        self.ringId = Single.just(self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)))
-
-        guard let account = self.accountService.currentAccount else {
-            return
-        }
-
-        let disposebag = DisposeBag()
-        self.accountService.loadVCard(forAccounr: account)
-            .subscribe(onSuccess: { card in
-                if let data = card.imageData {
-                    self.image = Single.just(UIImage(data: data)?.convert(toSize:CGSize(width:100.0, height:100.0), scale: UIScreen.main.scale).circleMasked)
-                } else {
-                    self.image = Single.just(nil)
-                }
-            }).disposed(by: disposebag)
-    }
-
-    func saveProfile(withImage image: UIImage) {
-        let vcard = CNMutableContact()
-
-        vcard.imageData = UIImagePNGRepresentation(image)
-        vcard.familyName = (self.accountService.currentAccount!
-            .volatileDetails!.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)))
-
-        self.accountService
-            .saveVCard(vCard: vcard, forAccounr: self.accountService.currentAccount!)
-            .subscribe()
+        let accountService = injectionBag.accountService
+        self.userName = Single.just(accountService.currentAccount?.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)))
+        self.ringId = Single.just(accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)))
     }
 }
