@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1yn-Mj-8Ek">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1yn-Mj-8Ek">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -36,8 +37,49 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_contact_picture" translatesAutoresizingMaskIntoConstraints="NO" id="Wss-Rm-aKz">
+                                <rect key="frame" x="127" y="70" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="MYf-Pf-9Xj"/>
+                                    <constraint firstAttribute="height" constant="120" id="wi5-sQ-QNa"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Ebb-h3-1X3">
+                                <rect key="frame" x="36" y="220" width="303" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dAQ-UM-9wY"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rb7-PD-nlD">
+                                <rect key="frame" x="20" y="271" width="335" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="agY-Gs-xpt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Po-6e-k14" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="313.5" width="200" height="40"/>
+                                <rect key="frame" x="87.5" y="312" width="200" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="m9R-vQ-tPe"/>
@@ -54,17 +96,29 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Gv4-18-FVt" secondAttribute="trailing" id="1Ev-WL-COb"/>
                             <constraint firstAttribute="trailing" secondItem="kur-G7-4Nq" secondAttribute="trailing" id="1U8-xt-ygk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ebb-h3-1X3" secondAttribute="trailing" constant="20" id="44H-1a-Kml"/>
                             <constraint firstItem="5Po-6e-k14" firstAttribute="centerX" secondItem="N1T-Xh-FH1" secondAttribute="centerX" id="4eR-3k-6Z2"/>
                             <constraint firstItem="Gv4-18-FVt" firstAttribute="top" secondItem="N1T-Xh-FH1" secondAttribute="top" id="5PT-u8-86G"/>
+                            <constraint firstItem="rb7-PD-nlD" firstAttribute="top" secondItem="Ebb-h3-1X3" secondAttribute="bottom" constant="1" id="93f-Xt-9nz"/>
+                            <constraint firstItem="rb7-PD-nlD" firstAttribute="leading" secondItem="N1T-Xh-FH1" secondAttribute="leading" constant="20" id="Bv7-sh-iaU"/>
                             <constraint firstItem="GVt-PH-FqG" firstAttribute="top" secondItem="Gv4-18-FVt" secondAttribute="bottom" id="DHv-Q6-GhU"/>
+                            <constraint firstItem="Ebb-h3-1X3" firstAttribute="centerX" secondItem="N1T-Xh-FH1" secondAttribute="centerX" id="GWJ-Ar-qem"/>
+                            <constraint firstItem="Ebb-h3-1X3" firstAttribute="top" secondItem="Wss-Rm-aKz" secondAttribute="bottom" constant="30" id="IDm-de-if3"/>
                             <constraint firstItem="GVt-PH-FqG" firstAttribute="top" secondItem="kur-G7-4Nq" secondAttribute="bottom" id="Jvj-VY-Nb7"/>
                             <constraint firstItem="Gv4-18-FVt" firstAttribute="leading" secondItem="N1T-Xh-FH1" secondAttribute="leading" id="LiW-7Y-wcc"/>
+                            <constraint firstItem="5Po-6e-k14" firstAttribute="top" secondItem="rb7-PD-nlD" secondAttribute="bottom" constant="40" id="RJ0-y3-Fsz"/>
                             <constraint firstItem="kur-G7-4Nq" firstAttribute="top" secondItem="N1T-Xh-FH1" secondAttribute="top" id="hSt-o1-S41"/>
-                            <constraint firstItem="5Po-6e-k14" firstAttribute="centerY" secondItem="N1T-Xh-FH1" secondAttribute="centerY" id="lQW-P9-Vmv"/>
+                            <constraint firstItem="rb7-PD-nlD" firstAttribute="centerX" secondItem="N1T-Xh-FH1" secondAttribute="centerX" id="lqC-uZ-05b"/>
+                            <constraint firstItem="Wss-Rm-aKz" firstAttribute="top" secondItem="jiD-fm-HFk" secondAttribute="bottom" constant="50" id="mcf-Sl-c4z"/>
                             <constraint firstItem="kur-G7-4Nq" firstAttribute="leading" secondItem="N1T-Xh-FH1" secondAttribute="leading" id="r5d-rQ-Kg3"/>
+                            <constraint firstItem="Wss-Rm-aKz" firstAttribute="centerX" secondItem="N1T-Xh-FH1" secondAttribute="centerX" id="xAq-Dn-KVD"/>
+                            <constraint firstItem="Ebb-h3-1X3" firstAttribute="leading" secondItem="N1T-Xh-FH1" secondAttribute="leadingMargin" constant="20" id="zA8-Dy-xtb"/>
+                            <constraint firstAttribute="trailing" secondItem="rb7-PD-nlD" secondAttribute="trailing" constant="20" id="zeR-9G-YTG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="profileImageView" destination="Wss-Rm-aKz" id="Q3Z-ch-BNJ"/>
+                        <outlet property="profileName" destination="Ebb-h3-1X3" id="UGL-Fz-ZaN"/>
                         <outlet property="skipButton" destination="5Po-6e-k14" id="DUG-Am-Mwn"/>
                     </connections>
                 </viewController>
@@ -75,5 +129,6 @@
     </scenes>
     <resources>
         <image name="background_ring" width="750" height="1334"/>
+        <image name="ic_contact_picture" width="128" height="128"/>
     </resources>
 </document>

@@ -72,4 +72,13 @@ extension Reactive where Base : UIViewController {
         let source = self.sentMessage(#selector(Base.didReceiveMemoryWarning)).map { _ in }
         return ControlEvent(events: source)
     }
+
+    public var controllerWasDismissed: ControlEvent<Bool> {
+
+        let source = self.sentMessage(#selector(Base.viewWillDisappear)).filter { _ in
+            return self.base.isBeingDismissed
+            }.map { $0.first as? Bool ?? false }
+
+        return ControlEvent(events: source)
+    }
 }
