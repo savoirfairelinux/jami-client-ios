@@ -24,6 +24,10 @@ import Reusable
 class MessageCellSent: UITableViewCell, NibReusable {
 
     @IBOutlet weak var bubble: MessageBubble!
+    @IBOutlet weak var bubbleBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var bottomCorner: UIView!
+    @IBOutlet weak var topCorner: UIView!
 
 }
