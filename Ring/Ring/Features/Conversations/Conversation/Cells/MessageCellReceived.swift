@@ -21,9 +21,5 @@
 import UIKit
 import Reusable
 
-class MessageCellReceived: UITableViewCell, NibReusable {
-
-    @IBOutlet weak var bubble: MessageBubble!
-    @IBOutlet weak var messageLabel: UILabel!
-
+class MessageCellReceived: MessageCell {
 }
