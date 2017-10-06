@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,16 +18,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import Reusable
+import Foundation
 
-class MessageCellReceived: UITableViewCell, NibReusable {
-
-    @IBOutlet weak var bubble: MessageBubble!
-    @IBOutlet weak var bubbleBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var bottomCorner: UIView!
-    @IBOutlet weak var topCorner: UIView!
-
+extension UILabel {
+    func setTextWithLineSpacing(withText: String, withLineSpacing: CGFloat) {
+        let attrString = NSMutableAttributedString(string: withText)
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = withLineSpacing
+        attrString.addAttribute(NSParagraphStyleAttributeName,
+                                value: style,
+                                range: NSRange(location: 0, length: withText.characters.count))
+        self.attributedText = attrString
+    }
 }

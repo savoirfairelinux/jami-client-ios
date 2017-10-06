@@ -33,4 +33,19 @@ extension UIColor {
                                   blue: 96.0/255.0,
                                   alpha: 1.0)
 
+    static let ringMsgCellSent = UIColor(colorLiteralRed: 207.0/255.0,
+                                           green: 235.0/255.0,
+                                           blue: 245.0/255.0,
+                                           alpha: 1.0)
+
+    static let ringMsgCellReceived = UIColor(colorLiteralRed: 235.0/255.0,
+                                       green: 239.0/255.0,
+                                       blue: 239.0/255.0,
+                                       alpha: 1.0)
+
+    static let ringMsgCellText = UIColor(colorLiteralRed: 48.0/255.0,
+                                             green: 48.0/255.0,
+                                             blue: 48.0/255.0,
+                                             alpha: 1.0)
+
 }
