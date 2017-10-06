@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,5 +22,12 @@
 import UIKit
 import Reusable
 
-class MessageCellSent: MessageCell {
+class MessageCell: UITableViewCell, NibReusable {
+
+    @IBOutlet weak var bubble: MessageBubble!
+    @IBOutlet weak var bubbleBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var bottomCorner: UIView!
+    @IBOutlet weak var topCorner: UIView!
 }

@@ -31,15 +31,12 @@ extension Chameleon {
         case .contrast:
             contentColor = ContrastColorOf(primaryColor, returnFlat: false)
             secondaryContentColor = ContrastColorOf(secondaryColor, returnFlat: false)
-            break
         case .light:
             contentColor = UIColor.white
             secondaryContentColor = UIColor.white
-            break
         case .dark:
             contentColor = UIColor.flatBlackColorDark()
             secondaryContentColor = UIColor.flatBlackColorDark()
-            break
         }
 
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.flatGray()
@@ -48,12 +45,12 @@ extension Chameleon {
         MessageBubble.appearance().backgroundColor = secondaryColor
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).tintColor = contentColor
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).backgroundColor = primaryColor
-        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellSent.self]).textColor = contentColor
+        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).backgroundColor = UIColor.ringMsgCellSent
+        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellSent.self]).textColor = UIColor.ringMsgCellSentText
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).tintColor = secondaryContentColor
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).backgroundColor = secondaryColor
-        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellReceived.self]).textColor = secondaryContentColor
+        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).backgroundColor = UIColor.ringMsgCellReceived
+        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellReceived.self]).textColor = UIColor.ringMsgCellReceivedText
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).tintColor = UIColor.clear
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).backgroundColor = UIColor.clear
