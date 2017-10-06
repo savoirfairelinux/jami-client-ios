@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,48 +15,68 @@
             <rect key="frame" x="0.0" y="0.0" width="510" height="47"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="510" height="46.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="510" height="47"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBd-CS-7Qv" userLabel="Top Corner">
+                        <rect key="frame" x="16" y="8" width="15" height="15"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="fjJ-O1-VNm"/>
+                            <constraint firstAttribute="width" constant="15" id="gch-Wg-ytg"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcL-CH-BiH" userLabel="Bottom Corner">
+                        <rect key="frame" x="16" y="24" width="15" height="15"/>
+                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="ocR-DU-zKZ"/>
+                            <constraint firstAttribute="height" constant="15" id="ooc-tv-fiO"/>
+                        </constraints>
+                    </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kZJ-Ay-LTR" customClass="MessageBubble" customModule="Ring" customModuleProvider="target">
-                        <rect key="frame" x="16" y="8" width="152.5" height="30.5"/>
+                        <rect key="frame" x="16" y="8" width="190.5" height="30.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyR-7c-S2k">
-                                <rect key="frame" x="8" y="4" width="136.5" height="22.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyR-7c-S2k">
+                                <rect key="frame" x="10" y="8" width="170.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="1Kj-UZ-gu7"/>
-                            <constraint firstItem="lyR-7c-S2k" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="8" id="8m5-sR-xnh"/>
-                            <constraint firstAttribute="bottom" secondItem="lyR-7c-S2k" secondAttribute="bottom" constant="4" id="gwN-uX-PWd"/>
-                            <constraint firstAttribute="trailing" secondItem="lyR-7c-S2k" secondAttribute="trailing" constant="8" id="uzV-kG-oGN"/>
-                            <constraint firstItem="lyR-7c-S2k" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" constant="4" id="ycc-WI-Jk6"/>
+                            <constraint firstItem="lyR-7c-S2k" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="10" id="8m5-sR-xnh"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="28" id="UWN-H4-Sh9"/>
+                            <constraint firstAttribute="bottom" secondItem="lyR-7c-S2k" secondAttribute="bottom" constant="8" id="gwN-uX-PWd"/>
+                            <constraint firstAttribute="trailing" secondItem="lyR-7c-S2k" secondAttribute="trailing" constant="10" id="uzV-kG-oGN"/>
+                            <constraint firstItem="lyR-7c-S2k" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" constant="8" id="ycc-WI-Jk6"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="4"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" constant="8" id="1QQ-bu-6Bl"/>
+                    <constraint firstItem="XcL-CH-BiH" firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" id="2d4-0F-VWg"/>
+                    <constraint firstItem="WBd-CS-7Qv" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" id="4Zp-8q-rFJ"/>
                     <constraint firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" priority="1" constant="16" id="99Y-bR-Ioq"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" priority="1" constant="64" id="Eso-cy-OYs"/>
+                    <constraint firstItem="XcL-CH-BiH" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" id="GaI-yj-QFt"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" constant="64" id="TCY-7X-mFs"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="jhd-A8-c1o"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="nWe-5k-Qpn"/>
+                    <constraint firstItem="WBd-CS-7Qv" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" id="yBG-sT-w2a"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottomCorner" destination="XcL-CH-BiH" id="4gw-IC-EAM"/>
                 <outlet property="bubble" destination="kZJ-Ay-LTR" id="hdG-fG-L69"/>
+                <outlet property="bubbleBottomConstraint" destination="1QQ-bu-6Bl" id="a4F-pf-cXL"/>
+                <outlet property="bubbleTopConstraint" destination="jhd-A8-c1o" id="40k-2d-6rW"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
+                <outlet property="topCorner" destination="WBd-CS-7Qv" id="GCm-Hv-5Ei"/>
             </connections>
-            <point key="canvasLocation" x="-411" y="-132"/>
+            <point key="canvasLocation" x="-411" y="-132.5"/>
         </tableViewCell>
     </objects>
 </document>

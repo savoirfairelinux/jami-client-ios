@@ -21,8 +21,21 @@
 import UIKit
 import RxSwift
 import Reusable
+import SwiftyBeaver
+
+enum BubbleChaining {
+    case singleMessage
+    case firstOfConversation
+    case lastOfConversation
+    case firstOfSequence
+    case lastOfSequence
+    case middleOfSequence
+    case error
+}
 
 class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
+
+    let log = SwiftyBeaver.self
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var spinnerView: UIView!
@@ -33,6 +46,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     var messageViewModels: [MessageViewModel]?
     var textFieldShouldEndEditing = false
     var bottomOffset: CGFloat = 0
+    let scrollOffsetThreshold: CGFloat = 600
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,6 +151,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             - ( self.tableView.frame.size.height
                 - self.tableView.contentInset.top
                 - self.tableView.contentInset.bottom )
+        log.debug("self.bottomOffset : \(self.bottomOffset)")
     }
 
     fileprivate func messagesLoadingFinished() {
@@ -144,8 +159,10 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }
 
     fileprivate func scrollToBottomIfNeed() {
+        let boffset = self.isBottomContentOffset
+        log.debug("isBottomContentOffset : \(boffset)")
         if self.isBottomContentOffset {
-            self.scrollToBottom(animated: true)
+            self.scrollToBottom(animated: false)
         }
     }
 
@@ -158,7 +175,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }
 
     fileprivate var isBottomContentOffset: Bool {
-        return self.tableView.contentOffset.y + self.tableView.contentInset.top >= bottomOffset
+        updateBottomOffset()
+        let offset = abs((self.tableView.contentOffset.y + self.tableView.contentInset.top) - bottomOffset)
+        return offset <= scrollOffsetThreshold
     }
 
     override var inputAccessoryView: UIView {
@@ -187,6 +206,49 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         return textFieldShouldEndEditing
     }
 
+    func getBubbleChaining(cellForRowAt indexPath: IndexPath) -> BubbleChaining {
+        if let msgViewModel = self.messageViewModels?[indexPath.row] {
+            // who owns this msg?
+            let msgOwner = msgViewModel.bubblePosition()
+            if self.messageViewModels?.count == 1 || indexPath.row == 0 {
+                if self.messageViewModels?.count == indexPath.row + 1 {
+                    return BubbleChaining.singleMessage
+                }
+                let nextMsgViewModel = indexPath.row + 1 <= (self.messageViewModels?.count)!
+                    ? self.messageViewModels?[indexPath.row + 1] : nil
+                if nextMsgViewModel != nil {
+                    return msgOwner != nextMsgViewModel?.bubblePosition()
+                        ? BubbleChaining.singleMessage : BubbleChaining.firstOfConversation
+                }
+            } else if self.messageViewModels?.count == indexPath.row + 1 {
+                let lastMsgViewModel = indexPath.row - 1 >= 0 && indexPath.row - 1 < (self.messageViewModels?.count)!
+                    ? self.messageViewModels?[indexPath.row - 1] : nil
+                if lastMsgViewModel != nil {
+                    return msgOwner != lastMsgViewModel?.bubblePosition()
+                        ? BubbleChaining.singleMessage : BubbleChaining.lastOfConversation
+                }
+            }
+            // is there a previous msg?
+            let lastMsgViewModel = indexPath.row - 1 >= 0 && indexPath.row - 1 < (self.messageViewModels?.count)!
+                ? self.messageViewModels?[indexPath.row - 1] : nil
+            // is there a next msg?
+            let nextMsgViewModel = indexPath.row + 1 <= (self.messageViewModels?.count)!
+                ? self.messageViewModels?[indexPath.row + 1] : nil
+            var chaining = BubbleChaining.singleMessage
+            if (lastMsgViewModel != nil) && (nextMsgViewModel != nil) {
+                if msgOwner != lastMsgViewModel?.bubblePosition() && msgOwner == nextMsgViewModel?.bubblePosition() {
+                    chaining = BubbleChaining.firstOfSequence
+                } else if msgOwner != nextMsgViewModel?.bubblePosition() && msgOwner == lastMsgViewModel?.bubblePosition() {
+                    chaining = BubbleChaining.lastOfSequence
+                } else if msgOwner == nextMsgViewModel?.bubblePosition() && msgOwner == lastMsgViewModel?.bubblePosition() {
+                    chaining = BubbleChaining.middleOfSequence
+                }
+            }
+            return chaining
+        }
+        return BubbleChaining.error
+    }
+
 }
 
 extension ConversationViewController: UITableViewDataSource {
@@ -197,15 +259,72 @@ extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if let messageViewModel = self.messageViewModels?[indexPath.row] {
+            let chaining = self.getBubbleChaining(cellForRowAt: indexPath)
             if messageViewModel.bubblePosition() == .received {
+                // left side (outgoing)
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
-                cell.messageLabel.text = messageViewModel.content
+                cell.bubble.cornerRadius = 15
+                cell.bubble.backgroundColor = UIColor.ringMsgCellReceived
+                cell.messageLabel.textColor = UIColor.ringMsgCellText
+                cell.messageLabel.setTextWithLineSpacing(withText: messageViewModel.content, withLineSpacing: 2)
+
+                /// chaining
+                // reset
+                cell.topCorner.isHidden = true
+                cell.topCorner.backgroundColor = UIColor.ringMsgCellReceived
+                cell.bottomCorner.isHidden = true
+                cell.bottomCorner.backgroundColor = UIColor.ringMsgCellReceived
+                cell.bubbleBottomConstraint.constant = 16
+                cell.bubbleTopConstraint.constant = 16
+                switch chaining {
+                case .middleOfSequence:
+                    cell.topCorner.isHidden = false
+                    cell.bottomCorner.isHidden = false
+                    cell.bubbleBottomConstraint.constant = 1
+                    cell.bubbleTopConstraint.constant = 1
+                case .firstOfSequence, .firstOfConversation:
+                    cell.bottomCorner.isHidden = false
+                    cell.bubbleBottomConstraint.constant = 1
+                case .lastOfSequence, .lastOfConversation:
+                    cell.topCorner.isHidden = false
+                    cell.bubbleTopConstraint.constant = 1
+                default: break
+                }
+
+                return cell
+            } else {
+                // right side (incoming)
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
+                cell.bubble.cornerRadius = 15
+                cell.bubble.backgroundColor = UIColor.ringMsgCellSent
+                cell.messageLabel.textColor = UIColor.ringMsgCellText
+                cell.messageLabel.setTextWithLineSpacing(withText: messageViewModel.content, withLineSpacing: 2)
+
+                /// chaining
+                // reset
+                cell.topCorner.isHidden = true
+                cell.topCorner.backgroundColor = UIColor.ringMsgCellSent
+                cell.bottomCorner.isHidden = true
+                cell.bottomCorner.backgroundColor = UIColor.ringMsgCellSent
+                cell.bubbleBottomConstraint.constant = 16
+                cell.bubbleTopConstraint.constant = 16
+                switch chaining {
+                case .middleOfSequence:
+                    cell.topCorner.isHidden = false
+                    cell.bottomCorner.isHidden = false
+                    cell.bubbleBottomConstraint.constant = 1
+                    cell.bubbleTopConstraint.constant = 1
+                case .firstOfSequence, .firstOfConversation:
+                    cell.bottomCorner.isHidden = false
+                    cell.bubbleBottomConstraint.constant = 1
+                case .lastOfSequence, .lastOfConversation:
+                    cell.topCorner.isHidden = false
+                    cell.bubbleTopConstraint.constant = 1
+                default: break
+                }
+
                 return cell
             }
-
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
-            cell.messageLabel.text = messageViewModel.content
-            return cell
         }
 
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
