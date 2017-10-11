@@ -287,6 +287,24 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         }
     }
 
+    func insertTimeLabel(toCell cell: MessageCell,
+                         withChaining chaining: BubbleChaining,
+                         withTime time: String,
+                         withType type: BubblePosition) {
+
+        //cell.timeLabel.backgroundColor = type == .received ? UIColor.blue : UIColor.red
+        cell.timeLabel.text = "\(time)"
+        cell.timeLabel.textColor = UIColor.ringMsgCellTimeText
+        cell.timeLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
+        if chaining == BubbleChaining.firstOfSequence || chaining == BubbleChaining.singleMessage {
+            cell.bubbleTopConstraint.constant = 32
+            cell.timeLabel.isHidden = false
+        } else {
+            cell.timeLabel.isHidden = true
+        }
+
+    }
+
 }
 
 extension ConversationViewController: UITableViewDataSource {
@@ -298,6 +316,7 @@ extension ConversationViewController: UITableViewDataSource {
 
         if let messageViewModel = self.messageViewModels?[indexPath.row] {
             let chaining = self.getBubbleChaining(cellForRowAt: indexPath)
+            log.debug("chaining: \(chaining)")
             if messageViewModel.bubblePosition() == .received {
                 // left side (incoming)
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
@@ -311,6 +330,8 @@ extension ConversationViewController: UITableViewDataSource {
                 } else if isLastMessage(cellForRowAt: indexPath) {
                     cell.bubbleBottomConstraint.constant = 16
                 }
+
+                insertTimeLabel(toCell: cell, withChaining: chaining, withTime: "12:34PM", withType: .received)
 
                 return cell
             } else {
@@ -326,6 +347,8 @@ extension ConversationViewController: UITableViewDataSource {
                 } else if isLastMessage(cellForRowAt: indexPath) {
                     cell.bubbleBottomConstraint.constant = 16
                 }
+
+                insertTimeLabel(toCell: cell, withChaining: chaining, withTime: "12:34PM", withType: .sent)
 
                 return cell
             }
