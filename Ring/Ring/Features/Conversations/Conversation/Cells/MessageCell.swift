@@ -30,4 +30,7 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var leftDivider: UIView!
+    @IBOutlet weak var rightDivider: UIView!
 }
