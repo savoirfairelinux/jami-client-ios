@@ -287,6 +287,65 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         }
     }
 
+    func insertTimeLabel(toCell cell: MessageCell,
+                         withChaining chaining: BubbleChaining,
+                         withTime time: Date,
+                         withType type: BubblePosition) {
+
+        // A. reusable initialization
+        cell.timeLabel.isHidden = true
+
+        // B. get the current time
+        let currentDateTime = Date()
+
+        // C. hmmm ???
+        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .minute) == .orderedSame {
+            log.debug("too early")
+            return
+        }
+
+        // D. prepare formatting
+        let dateFormatter = DateFormatter()
+        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
+            if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekday) == .orderedSame {
+                if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
+                    // age: [0, received the previous day[
+                    dateFormatter.dateFormat = "h:mma"
+                } else {
+                    // age: [received the previous day, received 7 days ago[
+                    dateFormatter.dateFormat = "E h:mma"
+                }
+            } else {
+                // age: [received 7 days ago, received the previous year[
+                let day = Calendar.current.component(.day, from: time)
+                let suffix = day == 1 ? "st" : (day == 2 ? "nd" : (day == 3 ? "rd" : "th"))
+                dateFormatter.dateFormat = "MMM d'\(suffix),' h:mma"
+            }
+        } else {
+            // age: [received the previous year, inf[
+            dateFormatter.dateFormat = "MMM d'th yyyy,' h:mma"
+        }
+
+        // E. generate the string containing the message time
+        let timeString = dateFormatter.string(from: time).uppercased()
+
+        // F. setup the label
+        cell.timeLabel.text = "\(timeString)"
+        cell.timeLabel.textColor = UIColor.ringMsgCellTimeText
+        cell.timeLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
+
+        // G. Only show for new messages if beyond an arbitrary time frame of x minutes
+        // from the previously shown time.
+        // 1. find previous time
+        // 2. make sure the hour is the same
+        // 3. make sure the minute difference is within x minutes
+        // 4. remove step C
+        if chaining == BubbleChaining.firstOfSequence || chaining == BubbleChaining.singleMessage {
+            cell.bubbleTopConstraint.constant = 32
+            cell.timeLabel.isHidden = false
+        }
+    }
+
 }
 
 extension ConversationViewController: UITableViewDataSource {
@@ -298,6 +357,7 @@ extension ConversationViewController: UITableViewDataSource {
 
         if let messageViewModel = self.messageViewModels?[indexPath.row] {
             let chaining = self.getBubbleChaining(cellForRowAt: indexPath)
+
             if messageViewModel.bubblePosition() == .received {
                 // left side (incoming)
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
@@ -311,6 +371,8 @@ extension ConversationViewController: UITableViewDataSource {
                 } else if isLastMessage(cellForRowAt: indexPath) {
                     cell.bubbleBottomConstraint.constant = 16
                 }
+
+                insertTimeLabel(toCell: cell, withChaining: chaining, withTime: messageViewModel.receivedTime, withType: .received)
 
                 return cell
             } else {
@@ -326,6 +388,8 @@ extension ConversationViewController: UITableViewDataSource {
                 } else if isLastMessage(cellForRowAt: indexPath) {
                     cell.bubbleBottomConstraint.constant = 16
                 }
+
+                insertTimeLabel(toCell: cell, withChaining: chaining, withTime: messageViewModel.receivedTime, withType: .sent)
 
                 return cell
             }
