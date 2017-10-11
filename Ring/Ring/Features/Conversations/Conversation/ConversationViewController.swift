@@ -45,6 +45,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     var textFieldShouldEndEditing = false
     var bottomOffset: CGFloat = 0
     let scrollOffsetThreshold: CGFloat = 600
+    var shownTimes = [Int: Date]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -285,6 +286,115 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             cell.bubbleTopConstraint.constant = 1
         default: break
         }
+
+        // consider the time labels
+        if cell.timeLabel.isHidden == false {
+            cell.bubbleTopConstraint.constant = 32
+        }
+    }
+
+    func findPreviousShownTime(cellRow row: Int) -> Date? {
+        var rowKey = row
+        while rowKey >= 0 {
+            rowKey -= 1
+            let value = self.shownTimes[rowKey]
+            if value != nil {
+                return value
+            }
+        }
+        return nil
+    }
+
+    func insertTimeLabel(forCell cell: MessageCell,
+                         cellForRowAt indexPath: IndexPath,
+                         withMessageVM messageVM: MessageViewModel,
+                         withType type: BubblePosition) {
+        // get the message time
+        let time = messageVM.receivedDate
+
+        // hide for potentially reused cell
+        cell.timeLabel.isHidden = true
+        cell.leftDivider.isHidden = true
+        cell.rightDivider.isHidden = true
+
+        // only show time for new messages if beyond an arbitrary time frame
+        // from the previously shown time
+        // if the hour is the same and the minute are the same, and
+        // it's not the first message of the conversation, then return
+        if !isFirstMessage(cellForRowAt: indexPath) {
+            if let lastTime = findPreviousShownTime(cellRow: indexPath.row) {
+                let hourComp = Calendar.current.compare(lastTime, to: time, toGranularity: .hour)
+                let minuteComp = Calendar.current.compare(lastTime, to: time, toGranularity: .minute)
+                if hourComp == .orderedSame && minuteComp == .orderedSame {
+                    return
+                }
+            }
+        }
+
+        // get the current time
+        let currentDateTime = Date()
+
+        // prepare formatter
+        let dateFormatter = DateFormatter()
+        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
+            if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
+                if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
+                    // age: [0, received the previous day[
+                    dateFormatter.dateFormat = "h:mma"
+                } else {
+                    // age: [received the previous day, received 7 days ago[
+                    dateFormatter.dateFormat = "E h:mma"
+                }
+            } else {
+                // age: [received 7 days ago, received the previous year[
+                let day = Calendar.current.component(.day, from: time)
+                // apply appropriate suffix to day value
+                let suffix = day == 1 ? "st" : (day == 2 ? "nd" : (day == 3 ? "rd" : "th"))
+                dateFormatter.dateFormat = "MMM d'\(suffix),' h:mma"
+            }
+        } else {
+            // age: [received the previous year, inf[
+            dateFormatter.dateFormat = "MMM d'th yyyy,' h:mma"
+        }
+
+        // generate the string containing the message time
+        let timeString = dateFormatter.string(from: time).uppercased()
+
+        // setup the label
+        cell.timeLabel.text = "\(timeString)"
+        cell.timeLabel.textColor = UIColor.ringMsgCellTimeText
+        cell.timeLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
+
+        // show the time
+        cell.timeLabel.isHidden = false
+        cell.leftDivider.isHidden = false
+        cell.rightDivider.isHidden = false
+
+        // track the last shown time
+        self.shownTimes[indexPath.row] = time
+    }
+
+    func formatCell(withCell cell: MessageCell,
+                    cellForRowAt indexPath: IndexPath,
+                    withMessageVM messageVM: MessageViewModel) {
+        // get position (sent/received)
+        let type = messageVM.bubblePosition()
+
+        // hide/show time labels
+        insertTimeLabel(forCell: cell, cellForRowAt: indexPath, withMessageVM: messageVM, withType: type)
+
+        // get chaining
+        let chaining = self.getBubbleChaining(cellForRowAt: indexPath)
+
+        // bubble grouping for cell
+        applyBubbleStyleToCell(toCell: cell, withChaining: chaining, withContent: messageVM.content, withType: type)
+
+        // Special cases where top/bottom margins should be larger
+        if isFirstMessage(cellForRowAt: indexPath) {
+            cell.bubbleTopConstraint.constant = 32
+        } else if isLastMessage(cellForRowAt: indexPath) {
+            cell.bubbleBottomConstraint.constant = 16
+        }
     }
 
 }
@@ -295,22 +405,13 @@ extension ConversationViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         if let messageViewModel = self.messageViewModels?[indexPath.row] {
-            let chaining = self.getBubbleChaining(cellForRowAt: indexPath)
             if messageViewModel.bubblePosition() == .received {
                 // left side (incoming)
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
 
                 // Format cell
-                applyBubbleStyleToCell(toCell: cell, withChaining: chaining, withContent: messageViewModel.content, withType: .received)
-
-                // Special cases where top/bottom margins should be larger
-                if isFirstMessage(cellForRowAt: indexPath) {
-                    cell.bubbleTopConstraint.constant = 16
-                } else if isLastMessage(cellForRowAt: indexPath) {
-                    cell.bubbleBottomConstraint.constant = 16
-                }
+                formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
 
                 return cell
             } else {
@@ -318,14 +419,7 @@ extension ConversationViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
 
                 // Format cell
-                applyBubbleStyleToCell(toCell: cell, withChaining: chaining, withContent: messageViewModel.content, withType: .sent)
-
-                // Special cases where top/bottom margins should be larger
-                if isFirstMessage(cellForRowAt: indexPath) {
-                    cell.bubbleTopConstraint.constant = 16
-                } else if isLastMessage(cellForRowAt: indexPath) {
-                    cell.bubbleBottomConstraint.constant = 16
-                }
+                formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
 
                 return cell
             }
