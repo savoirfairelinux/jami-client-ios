@@ -47,6 +47,18 @@ class MessageViewModel {
         return self.message.content
     }
 
+    var receivedDate: Date {
+        return self.message.receivedDate
+    }
+
+    var id: Int64 {
+        return self.message.id
+    }
+
+    var status: MessageStatus {
+        return self.message.status
+    }
+
     func bubblePosition() -> BubblePosition {
         if self.message.isGenerated {
             return .generated
