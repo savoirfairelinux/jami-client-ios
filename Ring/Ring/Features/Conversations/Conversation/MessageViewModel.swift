@@ -26,6 +26,14 @@ enum BubblePosition {
     case generated
 }
 
+enum MessageSequencing {
+    case singleMessage
+    case firstOfSequence
+    case lastOfSequence
+    case middleOfSequence
+    case unknown
+}
+
 enum GeneratedMessageType: String {
     case sendContactRequest = "The invitation has been sent"
     case receivedContactRequest = "Contact request received"
@@ -37,14 +45,30 @@ class MessageViewModel {
     fileprivate let accountService: AccountsService
     fileprivate var message: MessageModel
 
+    var timeStringShown: String?
+    var sequencing: MessageSequencing = .unknown
+
     init(withInjectionBag injectionBag: InjectionBag,
          withMessage message: MessageModel) {
         self.accountService = injectionBag.accountService
         self.message = message
+        self.timeStringShown = nil
     }
 
     var content: String {
         return self.message.content
+    }
+
+    var receivedDate: Date {
+        return self.message.receivedDate
+    }
+
+    var id: Int64 {
+        return self.message.id
+    }
+
+    var status: MessageStatus {
+        return self.message.status
     }
 
     func bubblePosition() -> BubblePosition {
