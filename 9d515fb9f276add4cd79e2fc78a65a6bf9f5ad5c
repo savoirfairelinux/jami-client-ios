@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_f06d1706",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-10-11T20:30:47Z",
+      "side": 1,
+      "message": "Do you need this? In XCode8 it should be set by default to false",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 97
+      },
+      "revId": "9d515fb9f276add4cd79e2fc78a65a6bf9f5ad5c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_b0638f19",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-10-11T20:30:47Z",
+      "side": 1,
+      "message": "could be done in storyboard",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 262,
+        "endChar": 37
+      },
+      "revId": "9d515fb9f276add4cd79e2fc78a65a6bf9f5ad5c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_f0b6b789",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-10-11T20:30:47Z",
+      "side": 1,
+      "message": "Chameleon extension already defined it",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 47
+      },
+      "revId": "9d515fb9f276add4cd79e2fc78a65a6bf9f5ad5c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
