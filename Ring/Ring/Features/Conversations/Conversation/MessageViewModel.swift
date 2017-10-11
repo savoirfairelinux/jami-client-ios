@@ -37,14 +37,29 @@ class MessageViewModel {
     fileprivate let accountService: AccountsService
     fileprivate var message: MessageModel
 
+    var showsTime: Bool
+
     init(withInjectionBag injectionBag: InjectionBag,
          withMessage message: MessageModel) {
         self.accountService = injectionBag.accountService
         self.message = message
+        self.showsTime = false
     }
 
     var content: String {
         return self.message.content
+    }
+
+    var receivedDate: Date {
+        return self.message.receivedDate
+    }
+
+    var id: Int64 {
+        return self.message.id
+    }
+
+    var status: MessageStatus {
+        return self.message.status
     }
 
     func bubblePosition() -> BubblePosition {
