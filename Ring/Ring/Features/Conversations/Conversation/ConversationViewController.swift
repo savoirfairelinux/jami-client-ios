@@ -287,6 +287,61 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         }
     }
 
+    func insertTimeLabel(toCell cell: MessageCell,
+                         withChaining chaining: BubbleChaining,
+                         withTime time: Date,
+                         withType type: BubblePosition) {
+        cell.timeLabel.isHidden = true
+
+        let stringToDateFormatter = DateFormatter()
+        stringToDateFormatter.dateFormat = "dd-mm-yyyy"
+        let otherDate = stringToDateFormatter.date(from: "09-09-2017")
+
+        let dateFormatter = DateFormatter()
+
+        // now
+        let currentDateTime = Date()
+
+        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .minute) == .orderedSame {
+            log.debug("too early")
+            return
+        }
+
+        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
+            if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekday) == .orderedSame {
+                if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
+                    // age: [0, received the previous day[
+                    dateFormatter.dateFormat = "h:mma"
+                } else {
+                    // age: [received the previous day, received 7 days ago[
+                    dateFormatter.dateFormat = "E h:mma"
+                }
+            } else {
+                // age: [received 7 days ago, received the previous year[ && dd == 1
+                dateFormatter.dateFormat = "MMM dd'st,' h:mma"
+                // age: [received 7 days ago, received the previous year[ && dd == 2
+                dateFormatter.dateFormat = "MMM dd'nd,' h:mma"
+                // age: [received 7 days ago, received the previous year[ && dd == 3
+                dateFormatter.dateFormat = "MMM dd'rd,' h:mma"
+                // age: [received 7 days ago, received the previous year[ && dd > 3
+                dateFormatter.dateFormat = "MMM dd'th,' h:mma"
+            }
+        } else {
+            // age: [received the previous year, inf[
+            dateFormatter.dateFormat = "MMM dd'th yyyy,' h:mma"
+        }
+
+        let timeString = dateFormatter.string(from: time).uppercased()
+
+        cell.timeLabel.text = "\(timeString)"
+        cell.timeLabel.textColor = UIColor.ringMsgCellTimeText
+        cell.timeLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
+        if chaining == BubbleChaining.firstOfSequence || chaining == BubbleChaining.singleMessage {
+            cell.bubbleTopConstraint.constant = 32
+            cell.timeLabel.isHidden = false
+        }
+    }
+
 }
 
 extension ConversationViewController: UITableViewDataSource {
@@ -298,6 +353,7 @@ extension ConversationViewController: UITableViewDataSource {
 
         if let messageViewModel = self.messageViewModels?[indexPath.row] {
             let chaining = self.getBubbleChaining(cellForRowAt: indexPath)
+
             if messageViewModel.bubblePosition() == .received {
                 // left side (incoming)
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
@@ -311,6 +367,8 @@ extension ConversationViewController: UITableViewDataSource {
                 } else if isLastMessage(cellForRowAt: indexPath) {
                     cell.bubbleBottomConstraint.constant = 16
                 }
+
+                insertTimeLabel(toCell: cell, withChaining: chaining, withTime: messageViewModel.receivedTime, withType: .received)
 
                 return cell
             } else {
@@ -326,6 +384,8 @@ extension ConversationViewController: UITableViewDataSource {
                 } else if isLastMessage(cellForRowAt: indexPath) {
                     cell.bubbleBottomConstraint.constant = 16
                 }
+
+                insertTimeLabel(toCell: cell, withChaining: chaining, withTime: messageViewModel.receivedTime, withType: .sent)
 
                 return cell
             }
