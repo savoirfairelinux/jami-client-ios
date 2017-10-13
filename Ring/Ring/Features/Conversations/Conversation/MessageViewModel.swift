@@ -63,8 +63,8 @@ class MessageViewModel {
         return self.message.receivedDate
     }
 
-    var id: Int64 {
-        return self.message.id
+    var id: UInt64 {
+        return UInt64(self.message.id)!
     }
 
     var status: MessageStatus {
