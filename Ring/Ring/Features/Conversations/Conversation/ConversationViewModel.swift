@@ -223,14 +223,21 @@ class ConversationViewModel: ViewModel {
                          from: accountService.currentAccount!,
                          to: self.conversation.recipientRingId)
             .subscribe(onCompleted: { [unowned self] in
-                let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipientRingId, generated: false)
+                self.log.debug("Message sent")
             }).disposed(by: self.disposeBag)
     }
 
-    fileprivate func saveMessage(withContent content: String, byAuthor author: String, toConversationWith account: String, generated: Bool) {
+    fileprivate func saveMessage(withId messageId: String,
+                                 withContent content: String,
+                                 byAuthor author: String,
+                                 toConversationWith account: String,
+                                 generated: Bool) {
         self.conversationsService
-            .saveMessage(withContent: content, byAuthor: author, toConversationWith: account, currentAccountId: (accountService.currentAccount?.id)!, generated: generated)
+            .saveMessage(withId: messageId,
+                         withContent: content,
+                         byAuthor: author,
+                         toConversationWith: account,
+                         currentAccountId: (accountService.currentAccount?.id)!, generated: generated)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message saved")
             })
@@ -282,8 +289,11 @@ class ConversationViewModel: ViewModel {
         }
 
         let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-        self.saveMessage(withContent:
-            messageType.rawValue, byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipientRingId, generated: true)
+        self.saveMessage(withId: "",
+                         withContent: messageType.rawValue,
+                         byAuthor: accountHelper.ringId!,
+                         toConversationWith: self.conversation.recipientRingId,
+                         generated: true)
     }
 
     func generatedMessageExists(ofType messageType: GeneratedMessageType) -> Bool {
