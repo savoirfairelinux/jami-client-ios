@@ -70,6 +70,10 @@ class ConversationsService: MessagesAdapterDelegate {
                                      toConversationWith: recipientRingId,
                                      currentAccountId: senderAccount.id,
                                      generated: false)
+                    .subscribe(onCompleted: { [unowned self] in
+                        self.log.debug("Message saved")
+                    })
+                    .disposed(by: self.disposeBag)
             }
 
             completable(.completed)

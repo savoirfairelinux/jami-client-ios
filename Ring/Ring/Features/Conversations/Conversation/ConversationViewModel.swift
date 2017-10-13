@@ -223,8 +223,7 @@ class ConversationViewModel: ViewModel {
                          from: accountService.currentAccount!,
                          to: self.conversation.recipientRingId)
             .subscribe(onCompleted: { [unowned self] in
-                let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-                self.saveMessage(withContent: content, byAuthor: accountHelper.ringId!, toConversationWith: self.conversation.recipientRingId, generated: false)
+                self.log.debug("Message sent")
             }).disposed(by: self.disposeBag)
     }
 
