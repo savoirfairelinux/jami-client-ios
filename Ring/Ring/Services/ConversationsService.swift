@@ -60,16 +60,19 @@ class ConversationsService: MessagesAdapterDelegate {
 
         return Completable.create(subscribe: { [unowned self] completable in
             let contentDict = [self.textPlainMIMEType: content]
-            self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientRingId)
-
+            let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientRingId))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
-
             if accountHelper.ringId! != recipientRingId {
-                _ = self.saveMessage(withContent: content,
+                _ = self.saveMessage(withId: messageId,
+                                     withContent: content,
                                      byAuthor: accountHelper.ringId!,
                                      toConversationWith: recipientRingId,
                                      currentAccountId: senderAccount.id,
                                      generated: false)
+                    .subscribe(onCompleted: { [unowned self] in
+                        self.log.debug("Message saved")
+                    })
+                    .disposed(by: self.disposeBag)
             }
 
             completable(.completed)
@@ -93,14 +96,15 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
-    func saveMessage(withContent content: String,
+    func saveMessage(withId messageId: String,
+                     withContent content: String,
                      byAuthor author: String,
                      toConversationWith recipientRingId: String,
                      currentAccountId: String,
                      generated: Bool?) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
-            let message = MessageModel(withId: 0, receivedDate: Date(), content: content, author: author)
+            let message = MessageModel(withId: messageId, receivedDate: Date(), content: content, author: author)
             if let generated = generated {
                 message.isGenerated = generated
             }
@@ -192,7 +196,8 @@ class ConversationsService: MessagesAdapterDelegate {
                            to receiverAccountId: String) {
 
         if let content = message[textPlainMIMEType] {
-            self.saveMessage(withContent: content,
+            self.saveMessage(withId: "",
+                             withContent: content,
                              byAuthor: senderAccount,
                              toConversationWith: senderAccount,
                              currentAccountId: receiverAccountId,
