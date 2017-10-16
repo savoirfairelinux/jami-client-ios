@@ -66,7 +66,7 @@ class ContactRequestsViewModel: ViewModel {
         let acceptCompleted = self.contactsService.accept(contactRequest: item.contactRequest, withAccount: self.accountsService.currentAccount!)
 
         let accountHelper = AccountModelHelper(withAccount: self.accountsService.currentAccount!)
-        self.conversationService.saveMessage(withId: 0,
+        self.conversationService.saveMessage(withId: "",
                                              withContent: GeneratedMessageType.receivedContactRequest.rawValue,
                                              byAuthor: accountHelper.ringId!,
                                              toConversationWith: item.contactRequest.ringId,
@@ -75,7 +75,7 @@ class ContactRequestsViewModel: ViewModel {
                 self.log.debug("Message saved")
             })
             .disposed(by: disposeBag)
-        self.conversationService.saveMessage(withId: 0,
+        self.conversationService.saveMessage(withId: "",
                                              withContent: GeneratedMessageType.contactRequestAccepted.rawValue,
                                              byAuthor: accountHelper.ringId!,
                                              toConversationWith: item.contactRequest.ringId,

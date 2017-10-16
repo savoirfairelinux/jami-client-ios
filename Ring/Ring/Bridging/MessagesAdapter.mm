@@ -59,10 +59,10 @@ static id <MessagesAdapterDelegate> _delegate;
     confHandlers.insert(exportable_callback<ConfigurationSignal::AccountMessageStatusChanged>([&](const std::string& account_id, uint64_t message_id, const std::string& to, int state) {
         if (MessagesAdapter.delegate) {
             NSString* fromAccountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSString* toAccount = [NSString stringWithUTF8String:to.c_str()];
+            NSString* toUri = [NSString stringWithUTF8String:to.c_str()];
             [MessagesAdapter.delegate messageStatusChanged:(MessageStatus)state
                                                        for:message_id from:fromAccountId
-                                                        to:toAccount];
+                                                        to:toUri];
         }
     }));
 
