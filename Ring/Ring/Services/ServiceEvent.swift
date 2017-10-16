@@ -30,6 +30,7 @@ enum ServiceEventType {
     case registrationStateChanged
     case presenceUpdated
     case messageStateChanged
+    case knownDevicesChanged
 }
 
 /**

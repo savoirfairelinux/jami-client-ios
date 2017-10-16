@@ -69,3 +69,6 @@
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.profileCancelPhoto" = "Cancel";
+
+//Account Page
+"accountPage.devicesListHeader" = "Devices";
