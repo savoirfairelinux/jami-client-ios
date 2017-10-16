@@ -33,6 +33,9 @@ class ConversationsService: MessagesAdapterDelegate {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
 
+    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    var sharedResponseStream: Observable<ServiceEvent>
+
     private var realm: Realm!
 
     fileprivate let results: Results<ConversationModel>
@@ -40,6 +43,8 @@ class ConversationsService: MessagesAdapterDelegate {
     var conversations: Observable<Results<ConversationModel>>
 
     init(withMessageAdapter adapter: MessagesAdapter) {
+        self.responseStream.disposed(by: disposeBag)
+        self.sharedResponseStream = responseStream.share()
 
         guard let realm = try? Realm() else {
             fatalError("Enable to instantiate Realm")
@@ -50,8 +55,31 @@ class ConversationsService: MessagesAdapterDelegate {
         results = realm.objects(ConversationModel.self)
 
         conversations = Observable.collection(from: results, synchronousStart: true)
+
         MessagesAdapter.delegate = self
 
+        /**
+         If the app was closed prior to messages receiving a "stable"
+         status, incorrect status values will remain in the database.
+         Get updated message status from the daemon for each
+         message as conversations are loaded from the database.
+         Only sent messages having an 'unknown' or 'sending' status
+         are considered for updating.
+         */
+        for conversation in results.toArray() {
+            for message in (conversation.messages) {
+                if message.id != "" && (message.status == .unknown || message.status == .sending ) {
+                    let updatedMessageStatus = self.status(forMessageId: message.id)
+                    if updatedMessageStatus != message.status {
+                        self.setMessageStatus(withMessage: message, withStatus: updatedMessageStatus)
+                            .subscribe(onCompleted: { [] in
+                                print("Message status updated - load")
+                            })
+                            .disposed(by: self.disposeBag)
+                    }
+                }
+            }
+        }
     }
 
     func sendMessage(withContent content: String,
@@ -142,8 +170,8 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
-    func status(forMessageId messageId: UInt64) -> MessageStatus {
-        return self.messageAdapter.status(forMessageId: messageId)
+    func status(forMessageId messageId: String) -> MessageStatus {
+        return self.messageAdapter.status(forMessageId: UInt64(messageId)!)
     }
 
     func setMessagesAsRead(forConversation conversation: ConversationModel) -> Completable {
@@ -169,6 +197,24 @@ class ConversationsService: MessagesAdapterDelegate {
 
             return Disposables.create { }
 
+        })
+    }
+
+    func setMessageStatus(withMessage message: MessageModel,
+                          withStatus status: MessageStatus) -> Completable {
+
+        return Completable.create(subscribe: { [unowned self] completable in
+            do {
+                try self.realm.write {
+                    message.status = status
+                }
+                completable(.completed)
+
+            } catch let error {
+                self.log.error("\(error)")
+            }
+
+            return Disposables.create { }
         })
     }
 
@@ -211,8 +257,33 @@ class ConversationsService: MessagesAdapterDelegate {
 
     func messageStatusChanged(_ status: MessageStatus,
                               for messageId: UInt64,
-                              from senderAccountId: String,
-                              to receiverAccount: String) {
-        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(senderAccountId) to: \(receiverAccount)")
+                              from accountId: String,
+                              to uri: String) {
+
+        //Get conversations for this sender
+        let conversation = self.results.filter({ conversation in
+            return conversation.recipientRingId == uri &&
+                conversation.accountId == accountId
+        }).first
+
+        //Find message
+        if let message = conversation?.messages.filter({ messages in
+            return messages.id == String(messageId) && messages.status != status
+        }).first {
+            self.setMessageStatus(withMessage: message,
+                                  withStatus: status)
+                .subscribe(onCompleted: { [unowned self] in
+                    self.log.info("Message status updated")
+                    var event = ServiceEvent(withEventType: .messageStateChanged)
+                    event.addEventInput(.messageStatus, value: status)
+                    event.addEventInput(.messageId, value: String(messageId))
+                    event.addEventInput(.id, value: accountId)
+                    event.addEventInput(.uri, value: uri)
+                    self.responseStream.onNext(event)
+                })
+                .disposed(by: disposeBag)
+        }
+
+        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(accountId) to: \(uri)")
     }
 }

@@ -80,15 +80,27 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="78h-fZ-7yf" userLabel="Sending Indicator">
+                        <rect key="frame" x="275.5" y="16" width="20" height="20"/>
+                    </activityIndicatorView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Failed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5a-HI-uhr" userLabel="Failed Status Label">
+                        <rect key="frame" x="253" y="16" width="42.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.94117647058823528" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" constant="8" id="1QQ-bu-6Bl" userLabel="Bubble Bottom Constraint"/>
                     <constraint firstItem="h8N-aw-5lV" firstAttribute="leading" secondItem="ogn-wv-fZy" secondAttribute="trailing" constant="16" id="1jW-JR-t5r"/>
+                    <constraint firstItem="78h-fZ-7yf" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="-8" id="4ME-jl-Uol"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" priority="1" constant="64" id="99Y-bR-Ioq"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" priority="1" constant="16" id="Eso-cy-OYs"/>
                     <constraint firstItem="ogn-wv-fZy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="Fxg-Wa-Rb9"/>
+                    <constraint firstItem="78h-fZ-7yf" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" constant="8" id="Gei-s7-aWx"/>
                     <constraint firstItem="2U4-l3-KET" firstAttribute="centerY" secondItem="ogn-wv-fZy" secondAttribute="centerY" id="J6Y-Ti-HDv"/>
                     <constraint firstItem="EMh-bG-ilg" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" id="MY3-Aj-94K"/>
+                    <constraint firstItem="P5a-HI-uhr" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" constant="8" id="O07-uI-R80"/>
                     <constraint firstItem="ogn-wv-fZy" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RaG-SO-xFo"/>
                     <constraint firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" constant="16" id="TCY-7X-mFs"/>
                     <constraint firstItem="h8N-aw-5lV" firstAttribute="centerY" secondItem="ogn-wv-fZy" secondAttribute="centerY" id="Xdu-7c-MbP"/>
@@ -99,6 +111,7 @@
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="64" id="nWe-5k-Qpn"/>
                     <constraint firstItem="2U4-l3-KET" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="uoy-US-ksI"/>
                     <constraint firstItem="EMh-bG-ilg" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" id="zEh-jv-0Ha"/>
+                    <constraint firstItem="P5a-HI-uhr" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="-8" id="zI5-Gc-i6d"/>
                     <constraint firstItem="hdz-AQ-xHI" firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" id="zWA-Jg-F6Q"/>
                 </constraints>
             </tableViewCellContentView>
@@ -107,9 +120,11 @@
                 <outlet property="bubble" destination="kZJ-Ay-LTR" id="hdG-fG-L69"/>
                 <outlet property="bubbleBottomConstraint" destination="1QQ-bu-6Bl" id="woo-UQ-wXK"/>
                 <outlet property="bubbleTopConstraint" destination="jhd-A8-c1o" id="cll-eA-OC5"/>
+                <outlet property="failedStatusLabel" destination="P5a-HI-uhr" id="6Sq-NU-j0d"/>
                 <outlet property="leftDivider" destination="2U4-l3-KET" id="y4j-CT-gez"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
                 <outlet property="rightDivider" destination="h8N-aw-5lV" id="9pc-93-BG6"/>
+                <outlet property="sendingIndicator" destination="78h-fZ-7yf" id="GrK-FT-q39"/>
                 <outlet property="timeLabel" destination="ogn-wv-fZy" id="7yt-vi-cSp"/>
                 <outlet property="topCorner" destination="EMh-bG-ilg" id="nHl-hn-BZ1"/>
             </connections>
