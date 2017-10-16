@@ -59,10 +59,10 @@ static id <MessagesAdapterDelegate> _delegate;
     confHandlers.insert(exportable_callback<ConfigurationSignal::AccountMessageStatusChanged>([&](const std::string& account_id, uint64_t message_id, const std::string& to, int state) {
         if (MessagesAdapter.delegate) {
             NSString* fromAccountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSString* toAccount = [NSString stringWithUTF8String:to.c_str()];
+            NSString* toUri = [NSString stringWithUTF8String:to.c_str()];
             [MessagesAdapter.delegate messageStatusChanged:(MessageStatus)state
                                                        for:message_id from:fromAccountId
-                                                        to:toAccount];
+                                                        to:toUri];
         }
     }));
 
@@ -77,12 +77,28 @@ static id <MessagesAdapterDelegate> _delegate;
 }
 #pragma mark -
 
+- (void)fini {
+
+}
+
 - (NSUInteger)sendMessageWithContent:(NSDictionary*)content withAccountId:(NSString*)accountId
                        to:(NSString*)toAccountId {
 
-    return (NSUInteger) sendAccountTextMessage(std::string([accountId UTF8String]),
-                           std::string([toAccountId UTF8String]),
-                           [Utils dictionnaryToMap:content]);
+    if (![[NSThread currentThread] isMainThread]) {
+        __block NSUInteger messageId;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            messageId = (NSUInteger) sendAccountTextMessage(std::string([accountId UTF8String]),
+                                                           std::string([toAccountId UTF8String]),
+                                                           [Utils dictionnaryToMap:content]);
+        });
+        return messageId;
+    }
+    else {
+        return (NSUInteger) sendAccountTextMessage(std::string([accountId UTF8String]),
+                                                   std::string([toAccountId UTF8String]),
+                                                   [Utils dictionnaryToMap:content]);
+    }
+
 }
 
 - (MessageStatus)statusForMessageId:(uint64_t)messageId {

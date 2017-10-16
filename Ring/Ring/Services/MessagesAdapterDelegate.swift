@@ -23,6 +23,6 @@
     func didReceiveMessage(_ message: [String: String], from senderAccount: String,
                            to receiverAccountId: String)
 
-    func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64, from senderAccountId: String,
-                              to receiverAccount: String)
+    func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64, from accountId: String,
+                              to uri: String)
 }

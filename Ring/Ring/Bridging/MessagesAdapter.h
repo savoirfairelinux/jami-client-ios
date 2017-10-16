@@ -22,7 +22,6 @@
 
 typedef NS_ENUM(int, MessageStatus)  {
     MessageStatusUnknown = 0,
-    MessageStatusIdle,
     MessageStatusSending,
     MessageStatusSent,
     MessageStatusRead,

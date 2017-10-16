@@ -227,7 +227,7 @@ class ConversationViewModel: ViewModel {
             }).disposed(by: self.disposeBag)
     }
 
-    fileprivate func saveMessage(withId messageId: Int64,
+    fileprivate func saveMessage(withId messageId: String,
                                  withContent content: String,
                                  byAuthor author: String,
                                  toConversationWith account: String,
@@ -289,7 +289,7 @@ class ConversationViewModel: ViewModel {
         }
 
         let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-        self.saveMessage(withId: 0,
+        self.saveMessage(withId: "",
                          withContent: messageType.rawValue,
                          byAuthor: accountHelper.ringId!,
                          toConversationWith: self.conversation.recipientRingId,
