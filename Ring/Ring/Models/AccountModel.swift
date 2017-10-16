@@ -55,7 +55,7 @@ class AccountModel: Equatable {
         self.id = accountId
         self.details = details
         self.volatileDetails = volatileDetails
-        self.devices.append(contentsOf: devices)
+        self.devices = devices
     }
 
     public static func == (lhs: AccountModel, rhs: AccountModel) -> Bool {
