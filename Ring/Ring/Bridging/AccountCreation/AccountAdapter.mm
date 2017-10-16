@@ -64,6 +64,22 @@ static id <AccountAdapterDelegate> _delegate;
         }
     }));
 
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ExportOnRingEnded>([&](const std::string& account_id, int state, const std::string& pin) {
+        if (AccountAdapter.delegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSInteger stateN = state;
+            NSString* pinN = [NSString stringWithUTF8String:pin.c_str()];
+            [AccountAdapter.delegate exportOnRingEndededForAccout:accountId state:stateN pin:pinN];
+        }
+    }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::KnownDevicesChanged>([&](const std::string& account_id, const std::map<std::string, std::string>& devices) {
+        if (AccountAdapter.delegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSMutableDictionary* knDev = [Utils mapToDictionnary:devices];
+            [AccountAdapter.delegate knownDevicesChangedFor:accountId devices:knDev];
+        }
+    }));
     registerConfHandlers(confHandlers);
 }
 #pragma mark -
@@ -128,5 +144,12 @@ static id <AccountAdapterDelegate> _delegate;
     _delegate = delegate;
 }
 #pragma mark -
+
+#pragma mark -
+
+- (Boolean)exportOnRing:(NSString *)accountID
+               password: (NSString *)password {
+    return exportOnRing(std::string([accountID UTF8String]), std::string([password UTF8String]));
+}
 
 @end
