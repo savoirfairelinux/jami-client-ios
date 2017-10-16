@@ -21,12 +21,15 @@
 import UIKit
 import Reusable
 import RxSwift
+import RxCocoa
+import RxDataSources
 
 class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBased {
 
     // MARK: - outlets
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ringIdLabel: UILabel!
+    @IBOutlet weak var settingsTable: UITableView!
 
     // MARK: - members
     var viewModel: MeViewModel!
@@ -50,5 +53,56 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: disposeBag)
 
         super.setupUI()
+
+        //setup Table
+        self.settingsTable.estimatedRowHeight = 50
+        self.settingsTable.rowHeight = UITableViewAutomaticDimension
+        self.settingsTable.separatorStyle = .none
+
+        //Register cell
+        self.setUpDataSource()
+        self.settingsTable.register(cellType: DeviceCell.self)
+        self.settingsTable.register(cellType: LinkNewDeviceCell.self)
+ }
+
+    func setUpDataSource() {
+
+        let settingsItmeDataSource = RxTableViewSectionedReloadDataSource<SettingsSection>()
+
+        let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SettingsSection.Item)
+            -> UITableViewCell = {
+                ( dataSource: TableViewSectionedDataSource<SettingsSection>,
+                tableView: UITableView,
+                indexPath: IndexPath,
+                item: SettingsSection.Item) in
+                switch dataSource[indexPath] {
+
+                case .device(let device):
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeviceCell.self)
+
+                cell.deviceIdLabel.text = device.deviceId
+                cell.selectionStyle = .none
+                    return cell
+
+                case .linkNew:
+                    let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LinkNewDeviceCell.self)
+
+                    cell.addDeviceButton.rx.tap.subscribe(onNext: { [unowned self] in
+                                                                    self.viewModel.linkDevice()
+                                                                }).disposed(by: cell.disposeBag)
+                                                                cell.selectionStyle = .none
+                    return cell
+                }
+        }
+
+        settingsItmeDataSource.configureCell = configureCell
+         self.viewModel.settings
+            .bind(to: self.settingsTable.rx.items(dataSource: settingsItmeDataSource))
+                    .disposed(by: disposeBag)
+
+        //Set header titles
+        settingsItmeDataSource.titleForHeaderInSection = { dataSource, index in
+            return dataSource.sectionModels[index].header
+        }
     }
 }
