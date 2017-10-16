@@ -19,6 +19,7 @@
  */
 
 import RxSwift
+import SwiftyBeaver
 
 enum BubblePosition {
     case received
@@ -42,17 +43,43 @@ enum GeneratedMessageType: String {
 
 class MessageViewModel {
 
+    fileprivate let log = SwiftyBeaver.self
+
     fileprivate let accountService: AccountsService
+    fileprivate let conversationsService: ConversationsService
     fileprivate var message: MessageModel
 
     var timeStringShown: String?
     var sequencing: MessageSequencing = .unknown
 
+    private let disposeBag = DisposeBag()
+
     init(withInjectionBag injectionBag: InjectionBag,
          withMessage message: MessageModel) {
         self.accountService = injectionBag.accountService
+        self.conversationsService = injectionBag.conversationsService
         self.message = message
         self.timeStringShown = nil
+        self.status.onNext(message.status)
+
+        // subscribe to message status updates for outgoing messages
+        self.conversationsService
+            .sharedResponseStream
+            .filter({ messageUpdateEvent in
+                let account = self.accountService.getAccount(fromAccountId: messageUpdateEvent.getEventInput(.id)!)
+                let accountHelper = AccountModelHelper(withAccount: account!)
+                return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
+                    messageUpdateEvent.getEventInput(.messageId) == self.message.id &&
+                    accountHelper.ringId == self.message.author
+            })
+            .subscribe(onNext: { [unowned self] messageUpdateEvent in
+                if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
+                    let msgId: String = messageUpdateEvent.getEventInput(.messageId)!
+                    //self.log.debug("messageUpdateEvent - msgid: \(msgId) status: \(status.rawValue)")
+                    self.status.onNext(status)
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     var content: String {
@@ -63,13 +90,11 @@ class MessageViewModel {
         return self.message.receivedDate
     }
 
-    var id: Int64 {
-        return self.message.id
+    var id: UInt64 {
+        return UInt64(self.message.id)!
     }
 
-    var status: MessageStatus {
-        return self.message.status
-    }
+    var status = BehaviorSubject<MessageStatus>(value: .unknown)
 
     func bubblePosition() -> BubblePosition {
         if self.message.isGenerated {
