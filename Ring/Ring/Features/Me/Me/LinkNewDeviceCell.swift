@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,10 +18,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-@objc protocol AccountAdapterDelegate {
+import UIKit
+import Reusable
+import RxSwift
 
-    func accountsChanged()
-    func registrationStateChanged(with response: RegistrationResponse)
-    func knownDevicesChanged(for account: String, devices: [String: String])
-    func exportOnRingEndeded(forAccout account: String, state: Int, pin: String)
+class LinkNewDeviceCell: UITableViewCell, NibReusable {
+
+    @IBOutlet weak var addDeviceButton: UIButton!
+    let disposeBag = DisposeBag()
 }
