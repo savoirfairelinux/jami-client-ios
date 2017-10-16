@@ -157,7 +157,7 @@ class AccountsService: AccountAdapterDelegate {
         for account in accountList {
             account.details = self.getAccountDetails(fromAccountId: account.id)
             account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: account.id)
-            account.devices.append(contentsOf: getKnownRingDevices(fromAccountId: account.id))
+            account.devices = getKnownRingDevices(fromAccountId: account.id)
 
             do {
                 let credentialDetails = try self.getAccountCredentials(fromAccountId: account.id)
@@ -376,6 +376,37 @@ class AccountsService: AccountAdapterDelegate {
         var event = ServiceEvent(withEventType: .registrationStateChanged)
         event.addEventInput(.registrationState, value: response.state)
         self.responseStream.onNext(event)
+    }
+
+    func knownDevicesChanged(for account: String, devices: [String: String]) {
+        reloadAccounts()
+        let changedAccount = getAccount(fromAccountId: account)
+        if let changedAccount = changedAccount {
+            let accountHelper = AccountModelHelper(withAccount: changedAccount)
+            if let  uri = accountHelper.ringId {
+                var event = ServiceEvent(withEventType: .knownDevicesChanged)
+                event.addEventInput(.uri, value: uri)
+                self.responseStream.onNext(event)
+            }
+        }
+    }
+
+    func exportOnRing(withPassword password: String)
+        -> Completable {
+            return Completable.create { [unowned self] completable in
+                let export =  self.accountAdapter.export(onRing: self.currentAccount?.id, password: password)
+                if export {
+                    completable(.completed)
+                } else {
+                    completable(.error(ContactServiceError.vCardSerializationFailed))
+                }
+                return Disposables.create { }
+            }
+    }
+
+    func exportOnRingEndeded(forAccout account: String, state: Int, pin: String) {
+
+        log.info(pin)
     }
 
 }
