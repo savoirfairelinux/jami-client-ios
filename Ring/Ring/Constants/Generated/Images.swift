@@ -47,6 +47,7 @@ struct ColorAsset {
 enum Asset {
   static let addPerson = ImageAsset(name: "add_person")
   static let backgroundRing = ImageAsset(name: "background_ring")
+  static let device = ImageAsset(name: "device")
   static let icContactPicture = ImageAsset(name: "ic_contact_picture")
   static let logoRingBeta2Blanc = ImageAsset(name: "logo-ring-beta2-blanc")
 
@@ -56,6 +57,7 @@ enum Asset {
   static let allImages: [ImageAsset] = [
     addPerson,
     backgroundRing,
+    device,
     icContactPicture,
     logoRingBeta2Blanc,
   ]

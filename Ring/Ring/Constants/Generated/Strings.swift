@@ -7,6 +7,11 @@ import Foundation
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 enum L10n {
 
+  enum Accountpage {
+    /// Devices
+    static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
+  }
+
   enum Alerts {
     /// Account Added
     static let accountAddedTitle = L10n.tr("Localizable", "alerts.accountAddedTitle")
