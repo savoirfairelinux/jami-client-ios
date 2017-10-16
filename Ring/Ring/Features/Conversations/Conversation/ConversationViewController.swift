@@ -384,6 +384,19 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         } else if self.messageViewModels?.count == indexPath.row + 1 {
             cell.bubbleBottomConstraint.constant = 16
         }
+
+        if messageVM.bubblePosition() == .sent {
+            cell.sendingIndicator.isHidden = false
+            cell.sendingIndicator.startAnimating()
+            messageVM.status.asObservable()
+                .observeOn(MainScheduler.instance)
+                .map { value in
+                    //self.log.debug("id: \(messageVM.id), status \(value.rawValue)")
+                    return value == MessageStatus.sending ? false : true
+                }
+                .bind(to: cell.sendingIndicator.rx.isHidden)
+                .disposed(by: self.disposeBag)
+        }
     }
 
 }

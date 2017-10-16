@@ -22,14 +22,14 @@ import RealmSwift
 
 class MessageModel: Object {
 
-    dynamic var id: Int64 = 0
+    dynamic var id: String = ""
     dynamic var receivedDate: Date = Date()
     dynamic var content: String = ""
     dynamic var author: String = ""
     dynamic var status: MessageStatus = .unknown
     dynamic var isGenerated: Bool = false
 
-    convenience init(withId id: Int64, receivedDate: Date, content: String, author: String) {
+    convenience init(withId id: String, receivedDate: Date, content: String, author: String) {
         self.init()
         self.id = id
         self.receivedDate = receivedDate

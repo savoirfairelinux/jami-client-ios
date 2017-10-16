@@ -33,4 +33,5 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var leftDivider: UIView!
     @IBOutlet weak var rightDivider: UIView!
+    @IBOutlet weak var sendingIndicator: UIActivityIndicatorView!
 }
