@@ -33,6 +33,9 @@ class ConversationsService: MessagesAdapterDelegate {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
 
+    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    var sharedResponseStream: Observable<ServiceEvent>
+
     private var realm: Realm!
 
     fileprivate let results: Results<ConversationModel>
@@ -40,6 +43,8 @@ class ConversationsService: MessagesAdapterDelegate {
     var conversations: Observable<Results<ConversationModel>>
 
     init(withMessageAdapter adapter: MessagesAdapter) {
+        self.responseStream.disposed(by: disposeBag)
+        self.sharedResponseStream = responseStream.share()
 
         guard let realm = try? Realm() else {
             fatalError("Enable to instantiate Realm")
@@ -60,10 +65,10 @@ class ConversationsService: MessagesAdapterDelegate {
 
         return Completable.create(subscribe: { [unowned self] completable in
             let contentDict = [self.textPlainMIMEType: content]
-            let messageId = self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientRingId)
+            let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientRingId))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
             if accountHelper.ringId! != recipientRingId {
-                _ = self.saveMessage(withId: Int64(messageId),
+                _ = self.saveMessage(withId: messageId,
                                      withContent: content,
                                      byAuthor: accountHelper.ringId!,
                                      toConversationWith: recipientRingId,
@@ -96,7 +101,7 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
-    func saveMessage(withId messageId: Int64,
+    func saveMessage(withId messageId: String,
                      withContent content: String,
                      byAuthor author: String,
                      toConversationWith recipientRingId: String,
@@ -142,8 +147,8 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
-    func status(forMessageId messageId: UInt64) -> MessageStatus {
-        return self.messageAdapter.status(forMessageId: messageId)
+    func status(forMessageId messageId: String) -> MessageStatus {
+        return self.messageAdapter.status(forMessageId: UInt64(messageId)!)
     }
 
     func setMessagesAsRead(forConversation conversation: ConversationModel) -> Completable {
@@ -172,6 +177,40 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
+    func setMessageStatus(withMessageId id: String,
+                          withRingId ringId: String,
+                          withAccountId accountId: String,
+                          withStatus status: MessageStatus) -> Completable {
+
+        return Completable.create(subscribe: { [unowned self] completable in
+
+            //Get conversations for this sender
+            let conversation = self.results.filter({ conversation in
+                return conversation.recipientRingId == ringId &&
+                    conversation.accountId == accountId
+            }).first
+
+            //Find message
+            if let messages = conversation?.messages.filter({ messages in
+                return messages.id == id
+            }) {
+                do {
+                    try self.realm.write {
+                        for message in messages {
+                            message.status = status
+                        }
+                    }
+                    completable(.completed)
+
+                } catch let error {
+                    completable(.error(error))
+                }
+            }
+
+            return Disposables.create { }
+        })
+    }
+
     func deleteConversation(conversation: ConversationModel) {
 
         do {
@@ -196,7 +235,7 @@ class ConversationsService: MessagesAdapterDelegate {
                            to receiverAccountId: String) {
 
         if let content = message[textPlainMIMEType] {
-            self.saveMessage(withId: 0,
+            self.saveMessage(withId: "",
                              withContent: content,
                              byAuthor: senderAccount,
                              toConversationWith: senderAccount,
@@ -211,8 +250,25 @@ class ConversationsService: MessagesAdapterDelegate {
 
     func messageStatusChanged(_ status: MessageStatus,
                               for messageId: UInt64,
-                              from senderAccountId: String,
-                              to receiverAccount: String) {
-        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(senderAccountId) to: \(receiverAccount)")
+                              from accountId: String,
+                              to uri: String) {
+
+        var event = ServiceEvent(withEventType: .messageStateChanged)
+        event.addEventInput(.messageStatus, value: status)
+        event.addEventInput(.messageId, value: String(messageId))
+        event.addEventInput(.id, value: accountId)
+        event.addEventInput(.uri, value: uri)
+        self.responseStream.onNext(event)
+
+        self.setMessageStatus(withMessageId: String(messageId),
+                              withRingId: uri,
+                              withAccountId: accountId,
+                              withStatus: status)
+            .subscribe(onCompleted: { [unowned self] in
+                self.log.info("Message status updated")
+            })
+            .disposed(by: disposeBag)
+
+        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(accountId) to: \(uri)")
     }
 }
