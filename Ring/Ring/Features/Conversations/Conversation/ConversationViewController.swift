@@ -38,6 +38,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     var bottomOffset: CGFloat = 0
     let scrollOffsetThreshold: CGFloat = 600
 
+    fileprivate var backgroundColorObservable: Observable<UIColor>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,6 +80,19 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
     func setupUI() {
         self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
+
+        // UIColor that observes "best Id" prefix
+        self.backgroundColorObservable = viewModel.userName.asObservable()
+            .observeOn(MainScheduler.instance)
+            .map { name in
+                let scanner = Scanner(string: name.toMD5HexString().prefixString())
+                var index: UInt64 = 0
+                if scanner.scanHexInt64(&index) {
+                    return avatarColors[Int(index)]
+                }
+                return defaultAvatarColor
+            }
+
 
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
@@ -351,7 +366,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             }
         }
 
-        switch adjustedSequencing {
+        messageVM.sequencing = adjustedSequencing
+
+        switch messageVM.sequencing {
         case .middleOfSequence:
             cell.topCorner.isHidden = false
             cell.bottomCorner.isHidden = false
@@ -397,6 +414,42 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                 .map { value in value == MessageStatus.failure ? false : true }
                 .bind(to: cell.failedStatusLabel.rx.isHidden)
                 .disposed(by: self.disposeBag)
+        } else {
+            // avatar
+            guard let fallbackAvatar = cell.fallbackAvatar else {
+                return
+            }
+
+            fallbackAvatar.isHidden = true
+            cell.profileImage?.isHidden = true
+            if messageVM.sequencing == .lastOfSequence || messageVM.sequencing == .singleMessage {
+                cell.profileImage?.isHidden = false
+
+                // Avatar placeholder initial
+                viewModel.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { value in value.prefixString().capitalized }
+                    .bind(to: fallbackAvatar.rx.text)
+                    .disposed(by: self.disposeBag)
+
+                // Set placeholder avatar to backgroundColorObservable
+                self.backgroundColorObservable
+                    .subscribe(onNext: { backgroundColor in
+                        fallbackAvatar.backgroundColor = backgroundColor
+                    })
+                    .disposed(by: self.disposeBag)
+
+                // Set image if any
+                cell.profileImage?.image = nil
+                if let imageData = viewModel.profileImageData {
+                    if let image = UIImage(data: imageData) {
+                        cell.profileImage?.image = image
+                        fallbackAvatar.isHidden = true
+                    }
+                } else {
+                    fallbackAvatar.isHidden = false
+                }
+            }
         }
     }
 
