@@ -19,8 +19,37 @@
                 <rect key="frame" x="0.0" y="0.0" width="510" height="47"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="skH-sJ-Ip9" userLabel="Profile Image">
+                        <rect key="frame" x="16" y="4" width="32" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="32" id="fov-2e-ylg"/>
+                            <constraint firstAttribute="height" constant="32" id="sTy-db-CSI"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9a-6w-Efg" userLabel="Fallback Avatar">
+                        <rect key="frame" x="16" y="4" width="32" height="32"/>
+                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="C5R-RV-ZRw"/>
+                            <constraint firstAttribute="width" constant="32" id="jnE-tr-sYI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBd-CS-7Qv" userLabel="Top Corner">
-                        <rect key="frame" x="16" y="8" width="15" height="15"/>
+                        <rect key="frame" x="64" y="8" width="15" height="15"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="fjJ-O1-VNm"/>
@@ -28,7 +57,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcL-CH-BiH" userLabel="Bottom Corner">
-                        <rect key="frame" x="16" y="24" width="15" height="15"/>
+                        <rect key="frame" x="64" y="24" width="15" height="15"/>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="ocR-DU-zKZ"/>
@@ -36,7 +65,7 @@
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kZJ-Ay-LTR" customClass="MessageBubble" customModule="Ring" customModuleProvider="target">
-                        <rect key="frame" x="16" y="8" width="190.5" height="30.5"/>
+                        <rect key="frame" x="64" y="8" width="190.5" height="30.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyR-7c-S2k">
                                 <rect key="frame" x="10" y="8" width="170.5" height="14.5"/>
@@ -83,6 +112,7 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="skH-sJ-Ip9" firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" constant="-2" id="005-jN-Zor"/>
                     <constraint firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" constant="8" id="1QQ-bu-6Bl"/>
                     <constraint firstItem="XcL-CH-BiH" firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" id="2d4-0F-VWg"/>
                     <constraint firstItem="WBd-CS-7Qv" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" id="4Zp-8q-rFJ"/>
@@ -93,11 +123,14 @@
                     <constraint firstItem="eza-Ni-w3g" firstAttribute="leading" secondItem="mhg-uK-iD9" secondAttribute="trailing" constant="16" id="Pdf-ru-PnO"/>
                     <constraint firstItem="zuX-zz-1Qq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="QoG-Zs-Lv7"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" constant="64" id="TCY-7X-mFs"/>
+                    <constraint firstItem="skH-sJ-Ip9" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="-16" id="YCa-xJ-gRb"/>
                     <constraint firstItem="zuX-zz-1Qq" firstAttribute="trailing" secondItem="mhg-uK-iD9" secondAttribute="leading" constant="-16" id="aUU-d6-Dse"/>
+                    <constraint firstItem="F9a-6w-Efg" firstAttribute="leading" secondItem="skH-sJ-Ip9" secondAttribute="leading" id="fx8-vF-4od"/>
                     <constraint firstItem="mhg-uK-iD9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gD0-yo-bga"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="jhd-A8-c1o"/>
-                    <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="nWe-5k-Qpn"/>
+                    <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="64" id="nWe-5k-Qpn"/>
                     <constraint firstItem="eza-Ni-w3g" firstAttribute="centerY" secondItem="mhg-uK-iD9" secondAttribute="centerY" id="vhB-Uv-04a"/>
+                    <constraint firstItem="F9a-6w-Efg" firstAttribute="bottom" secondItem="skH-sJ-Ip9" secondAttribute="bottom" id="w03-vx-kON"/>
                     <constraint firstItem="zuX-zz-1Qq" firstAttribute="centerY" secondItem="mhg-uK-iD9" secondAttribute="centerY" id="xFW-jt-00h"/>
                     <constraint firstItem="WBd-CS-7Qv" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" id="yBG-sT-w2a"/>
                     <constraint firstAttribute="trailingMargin" secondItem="eza-Ni-w3g" secondAttribute="trailing" constant="16" id="yMp-aN-6PX"/>
@@ -108,8 +141,10 @@
                 <outlet property="bubble" destination="kZJ-Ay-LTR" id="hdG-fG-L69"/>
                 <outlet property="bubbleBottomConstraint" destination="1QQ-bu-6Bl" id="a4F-pf-cXL"/>
                 <outlet property="bubbleTopConstraint" destination="jhd-A8-c1o" id="40k-2d-6rW"/>
+                <outlet property="fallbackAvatar" destination="F9a-6w-Efg" id="JGo-mt-PVe"/>
                 <outlet property="leftDivider" destination="zuX-zz-1Qq" id="9Jc-cV-VTA"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
+                <outlet property="profileImage" destination="skH-sJ-Ip9" id="pM2-t7-YhV"/>
                 <outlet property="rightDivider" destination="eza-Ni-w3g" id="Jfy-s9-5t7"/>
                 <outlet property="timeLabel" destination="mhg-uK-iD9" id="x8D-vK-F6G"/>
                 <outlet property="topCorner" destination="WBd-CS-7Qv" id="GCm-Hv-5Ei"/>
