@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_0734dcdc",
+        "filename": "Ring/Ring/Features/Me/Me/DeviceCell.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-10-19T21:17:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_e719f07a",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 50
+      },
+      "revId": "4a1401159bbcff2022e7f86545433f902448fd09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_272bd883",
         "filename": "Ring/Ring/Features/Me/Me/LinkNewDeviceCell.swift",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_2752b813",
+        "filename": "Ring/Ring/Features/Me/Me/LinkNewDeviceCell.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-10-19T21:17:48Z",
+      "side": 1,
+      "message": "yes, because in view controller is subscription to tap button event",
+      "parentUuid": "7a42497e_272bd883",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 33
+      },
+      "revId": "4a1401159bbcff2022e7f86545433f902448fd09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_4726e4bb",
         "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
         "patchSetId": 6
@@ -59,6 +107,30 @@
       "writtenOn": "2017-10-19T20:43:35Z",
       "side": 1,
       "message": "need these?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 56
+      },
+      "revId": "4a1401159bbcff2022e7f86545433f902448fd09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_e730d0ea",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-10-19T21:17:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_4726e4bb",
       "range": {
         "startLine": 31,
         "startChar": 4,
