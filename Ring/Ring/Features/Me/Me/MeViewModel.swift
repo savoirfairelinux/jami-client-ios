@@ -131,6 +131,6 @@ class MeViewModel: ViewModel, Stateable {
     }
 
     func linkDevice() {
-
+        self.stateSubject.onNext(MeState.linkNewDevice)
     }
 }

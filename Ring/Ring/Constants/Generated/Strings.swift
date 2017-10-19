@@ -82,6 +82,21 @@ enum L10n {
     static let ok = L10n.tr("Localizable", "global.ok")
   }
 
+  enum Linkdevice {
+    /// An error occured during the export
+    static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError")
+    /// To complete the process, you need to open Ring on the new device and choose the option "Link this device to an account." Your pin is valid for 10 minutes
+    static let explanationMessage = L10n.tr("Localizable", "linkDevice.explanationMessage")
+    /// Verifying
+    static let hudMessage = L10n.tr("Localizable", "linkDevice.hudMessage")
+    /// A network error occured during the export
+    static let networkError = L10n.tr("Localizable", "linkDevice.networkError")
+    /// The password you entered does not unlock this account
+    static let passwordError = L10n.tr("Localizable", "linkDevice.passwordError")
+    /// Link new device
+    static let title = L10n.tr("Localizable", "linkDevice.title")
+  }
+
   enum Smartlist {
     /// Conversations
     static let conversations = L10n.tr("Localizable", "smartlist.conversations")

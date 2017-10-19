@@ -79,6 +79,11 @@ enum StoryboardScene {
 
     static let initialScene = InitialSceneType<Ring.LinkDeviceViewController>(storyboard: LinkDeviceViewController.self)
   }
+  enum LinkNewDeviceViewController: StoryboardType {
+    static let storyboardName = "LinkNewDeviceViewController"
+
+    static let initialScene = InitialSceneType<Ring.LinkNewDeviceViewController>(storyboard: LinkNewDeviceViewController.self)
+  }
   enum MeDetailViewController: StoryboardType {
     static let storyboardName = "MeDetailViewController"
 

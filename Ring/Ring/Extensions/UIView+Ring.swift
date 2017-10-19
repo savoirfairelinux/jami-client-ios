@@ -144,4 +144,11 @@ extension UIView {
         return UIColor.clear
     }
 
+    public func convertViewToImage() -> UIImage? {
+        UIGraphicsBeginImageContext(self.bounds.size)
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 }
