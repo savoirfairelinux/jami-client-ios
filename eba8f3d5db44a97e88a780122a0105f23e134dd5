@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_c4cdd288",
+        "filename": "Ring/Ring/EditProfileViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-10-19T20:30:16Z",
+      "side": 1,
+      "message": "model -\u003e viewModel ?",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "eba8f3d5db44a97e88a780122a0105f23e134dd5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
