@@ -24,8 +24,10 @@ import RxSwift
 /// Represents Me navigation state
 ///
 /// - meDetail: user want its account detail
+/// -linkDevice: link new device to account
 public enum MeState: State {
     case meDetail
+    case linkNewDevice
 }
 
 /// This Coordinator drives the me/settings navigation
@@ -51,7 +53,9 @@ class MeCoordinator: Coordinator, StateableResponsive {
             switch state {
             case .meDetail:
                 self.showMeDetail()
-                break
+
+            case .linkNewDevice:
+                 self.showLinkDeviceWindow()
             }
         }).disposed(by: self.disposeBag)
 
@@ -65,5 +69,10 @@ class MeCoordinator: Coordinator, StateableResponsive {
     private func showMeDetail () {
         let meDetailViewController = MeDetailViewController.instantiate(with: self.injectionBag)
         self.present(viewController: meDetailViewController, withStyle: .show, withAnimation: true)
+    }
+
+    private func showLinkDeviceWindow() {
+        let linkDeviceVC = LinkNewDeviceViewController.instantiate(with: self.injectionBag)
+        self.present(viewController: linkDeviceVC, withStyle: .appear, withAnimation: false)
     }
 }

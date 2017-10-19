@@ -69,3 +69,10 @@
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.profileCancelPhoto" = "Cancel";
+
+//Link New Device
+"linkDevice.title" = "Link new device";
+"linkDevice.passwordError" = "The password you entered does not unlock this account";
+"linkDevice.networkError" = "A network error occured during the export";
+"linkDevice.defaultError" = "An error occured during the export";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";

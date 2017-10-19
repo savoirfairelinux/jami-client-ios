@@ -30,6 +30,7 @@ enum ServiceEventType {
     case registrationStateChanged
     case presenceUpdated
     case knownDevicesChanged
+    case exportOnRingEnded
 }
 
 /**
@@ -41,6 +42,7 @@ enum ServiceEventInput {
     case registrationState
     case uri
     case presenceStatus
+    case pin
 }
 
 /**

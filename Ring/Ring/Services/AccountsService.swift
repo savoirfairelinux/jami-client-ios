@@ -29,6 +29,10 @@ enum AddAccountError: Error {
     case unknownError
 }
 
+enum LinkNewDeviceError: Error {
+    case unknownError
+}
+
 class AccountsService: AccountAdapterDelegate {
     // MARK: Private members
 
@@ -398,7 +402,7 @@ class AccountsService: AccountAdapterDelegate {
                 if export {
                     completable(.completed)
                 } else {
-                    completable(.error(ContactServiceError.vCardSerializationFailed))
+                    completable(.error(LinkNewDeviceError.unknownError))
                 }
                 return Disposables.create { }
             }
@@ -406,7 +410,18 @@ class AccountsService: AccountAdapterDelegate {
 
     func exportOnRingEndeded(forAccout account: String, state: Int, pin: String) {
 
-        log.info(pin)
+        let changedAccount = getAccount(fromAccountId: account)
+        if let changedAccount = changedAccount {
+            let accountHelper = AccountModelHelper(withAccount: changedAccount)
+            if let  uri = accountHelper.ringId {
+                var event = ServiceEvent(withEventType: .exportOnRingEnded)
+                event.addEventInput(.uri, value: uri)
+                event.addEventInput(.state, value: state)
+                event.addEventInput(.pin, value: pin)
+                self.responseStream.onNext(event)
+            }
+        }
+
     }
 
 }
