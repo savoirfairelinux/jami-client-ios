@@ -33,6 +33,7 @@ public enum PresentationStyle {
     case show
     case present
     case popup
+    case appear
 }
 
 /// A Coordinator drives the navigation of a whole part of the application
@@ -95,6 +96,12 @@ extension Coordinator {
             break
         case .show: self.rootViewController.show(viewController, sender: nil)
             break
+        case .appear:
+            viewController.modalPresentationStyle = .overFullScreen
+            viewController.modalTransitionStyle = .crossDissolve
+            self.rootViewController.present(viewController,
+                                            animated: animation,
+                                            completion: nil)
         }
     }
 }

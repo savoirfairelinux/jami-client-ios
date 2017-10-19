@@ -136,8 +136,6 @@ class MeViewModel: ViewModel, Stateable {
     }
 
     func linkDevice() {
-
-        self.accountService.exportOnRing(withPassword: "123456").subscribe()
-
+        self.stateSubject.onNext(MeState.linkNewDevice)
     }
 }
