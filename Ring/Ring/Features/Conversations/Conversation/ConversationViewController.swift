@@ -93,7 +93,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                 return defaultAvatarColor
             }
 
-
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
 
@@ -402,17 +401,20 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             cell.bubbleBottomConstraint.constant = 16
         }
 
-        if messageVM.bubblePosition() == .sent {
+        if messageVM.bubblePosition() == .generated {
+            cell.failedStatusLabel.isHidden = true
+            cell.sendingIndicator.stopAnimating()
+        } else if messageVM.bubblePosition() == .sent {
             messageVM.status.asObservable()
                 .observeOn(MainScheduler.instance)
                 .map { value in value == MessageStatus.sending ? true : false }
                 .bind(to: cell.sendingIndicator.rx.isAnimating)
-                .disposed(by: disposeBag)
+                .disposed(by: cell.disposeBag)
             messageVM.status.asObservable()
                 .observeOn(MainScheduler.instance)
                 .map { value in value == MessageStatus.failure ? false : true }
                 .bind(to: cell.failedStatusLabel.rx.isHidden)
-                .disposed(by: disposeBag)
+                .disposed(by: cell.disposeBag)
         } else {
             // avatar
             guard let fallbackAvatar = cell.fallbackAvatar else {
@@ -429,14 +431,14 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                     .observeOn(MainScheduler.instance)
                     .map { value in value.prefixString().capitalized }
                     .bind(to: fallbackAvatar.rx.text)
-                    .disposed(by: disposeBag)
+                    .disposed(by: cell.disposeBag)
 
                 // Set placeholder avatar to backgroundColorObservable
                 self.backgroundColorObservable
                     .subscribe(onNext: { backgroundColor in
                         fallbackAvatar.backgroundColor = backgroundColor
                     })
-                    .disposed(by: disposeBag)
+                    .disposed(by: cell.disposeBag)
 
                 // Set image if any
                 cell.profileImage?.image = nil

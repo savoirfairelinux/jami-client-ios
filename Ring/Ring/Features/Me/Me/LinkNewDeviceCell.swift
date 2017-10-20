@@ -25,5 +25,9 @@ import RxSwift
 class LinkNewDeviceCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var addDeviceButton: UIButton!
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
+
+    override func prepareForReuse() {
+        self.disposeBag = DisposeBag()
+    }
 }
