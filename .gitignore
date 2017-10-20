@@ -11,6 +11,9 @@ Ring/Ring.xcodeproj/project.xcworkspace/xcshareddata/
 Ring/Ring.xcodeproj/project.xcworkspace/xcuserdata/
 Ring/Ring.xcodeproj/xcuserdata/
 
+# Generated
+Ring/Ring/Constants/Generated/
+
 # Obj-C/Swift specific
 *.hmap
 *.ipa
