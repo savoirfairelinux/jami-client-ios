@@ -125,14 +125,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 item.userName.asObservable()
                     .observeOn(MainScheduler.instance)
                     .bind(to: cell.nameLabel.rx.text)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
 
                 // Avatar placeholder initial
                 item.userName.asObservable()
                     .observeOn(MainScheduler.instance)
                     .map { value in value.prefixString().capitalized }
                     .bind(to: cell.fallbackAvatar.rx.text)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
 
                 // UIColor that observes "best Id" prefix
                 self.backgroundColorObservable = item.userName.asObservable()
@@ -151,7 +151,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     .subscribe(onNext: { backgroundColor in
                         cell.fallbackAvatar.backgroundColor = backgroundColor
                     })
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
 
                 // Set image if any
                 cell.fallbackAvatar.isHidden = false
@@ -172,7 +172,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     .observeOn(MainScheduler.instance)
                     .map { value in !value }
                     .bind(to: cell.presenceIndicator.rx.isHidden)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
 
                 return cell
         }
