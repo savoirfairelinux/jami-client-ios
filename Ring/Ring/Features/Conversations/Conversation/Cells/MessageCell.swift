@@ -39,5 +39,9 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var fallbackAvatar: UILabel!
 
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
+
+    override func prepareForReuse() {
+        self.disposeBag = DisposeBag()
+    }
 }
