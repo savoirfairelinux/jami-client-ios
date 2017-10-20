@@ -52,4 +52,10 @@ class ConversationCell: UITableViewCell, NibReusable {
         self.presenceIndicator.backgroundColor = presenceBGColor
         self.fallbackAvatar.backgroundColor = fallbackAvatarBGColor
     }
+
+    var disposeBag = DisposeBag()
+
+    override func prepareForReuse() {
+        self.disposeBag = DisposeBag()
+    }
 }
