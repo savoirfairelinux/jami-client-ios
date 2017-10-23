@@ -22,6 +22,12 @@ enum L10n {
     static let accountNoNetworkTitle = L10n.tr("Localizable", "alerts.accountNoNetworkTitle")
     /// Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.
     static let acountCannotBeFoundMessage = L10n.tr("Localizable", "alerts.acountCannotBeFoundMessage")
+    /// Cancel
+    static let profileCancelPhoto = L10n.tr("Localizable", "alerts.profileCancelPhoto")
+    /// Take photo
+    static let profileTakePhoto = L10n.tr("Localizable", "alerts.profileTakePhoto")
+    /// Upload photo
+    static let profileUploadPhoto = L10n.tr("Localizable", "alerts.profileUploadPhoto")
   }
 
   enum Createaccount {
@@ -54,6 +60,8 @@ enum L10n {
   enum Createprofile {
     /// Skip to Create Account
     static let createAccount = L10n.tr("Localizable", "createProfile.createAccount")
+    /// Next
+    static let createAccountWithProfile = L10n.tr("Localizable", "createProfile.createAccountWithProfile")
     /// Skip to Link Device
     static let linkDevice = L10n.tr("Localizable", "createProfile.linkDevice")
   }
