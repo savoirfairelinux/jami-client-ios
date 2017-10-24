@@ -200,6 +200,8 @@
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
 		62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */; };
 		62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */; };
+		62DFAB2C1F9FF030002D6F9C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DFAB2B1F9FF030002D6F9C /* Reachability.framework */; };
+		62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */; };
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
 		62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
 /* End PBXBuildFile section */
@@ -443,6 +445,8 @@
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
 		62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PresenceAdapter.mm; sourceTree = "<group>"; };
 		62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceService.swift; sourceTree = "<group>"; };
+		62DFAB2B1F9FF030002D6F9C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -490,6 +494,7 @@
 				04399AFB1D1C341A00E99CD9 /* libpjmedia-codec.a in Frameworks */,
 				04399AFC1D1C341A00E99CD9 /* libpjmedia-videodev.a in Frameworks */,
 				04399AFD1D1C341A00E99CD9 /* libpjmedia.a in Frameworks */,
+				62DFAB2C1F9FF030002D6F9C /* Reachability.framework in Frameworks */,
 				04399AFE1D1C341A00E99CD9 /* libpjnath.a in Frameworks */,
 				04399AFF1D1C341A00E99CD9 /* libpjsip-simple.a in Frameworks */,
 				04399B001D1C341A00E99CD9 /* libpjsip-ua.a in Frameworks */,
@@ -561,6 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */,
+				62DFAB2B1F9FF030002D6F9C /* Reachability.framework */,
 				0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */,
 				1A3CA32A1F102BB700283748 /* Chameleon.framework */,
 				1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */,
@@ -595,6 +601,7 @@
 				1A5DC01F1F355DCF0075E8EF /* ContactsService.swift */,
 				62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */,
 				62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */,
+				62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1282,6 +1289,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
 				"$(SRCROOT)/Carthage/build/iOS/AMPopTip.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 			);
 			name = "⚙️ Copy Frameworks";
 			outputPaths = (
@@ -1419,6 +1427,7 @@
 				564C44621E943DE6000F92B1 /* NameService.swift in Sources */,
 				1A5DC02C1F3565250075E8EF /* MeViewController.swift in Sources */,
 				1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */,
+				62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */,
 				0EDE34C91F8691BB00FFA15C /* EditProfileViewModel.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				1A2D18D11F29182500B2C785 /* ConversationViewController.swift in Sources */,

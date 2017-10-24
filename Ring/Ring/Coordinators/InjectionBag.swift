@@ -29,19 +29,22 @@ class InjectionBag {
     let conversationsService: ConversationsService
     let contactsService: ContactsService
     let presenceService: PresenceService
+    let networkService: NetworkService
 
     init (withDaemonService daemonService: DaemonService,
           withAccountService accountService: AccountsService,
           withNameService nameService: NameService,
           withConversationService conversationService: ConversationsService,
           withContactsService contactsService: ContactsService,
-          withPresenceService presenceService: PresenceService) {
+          withPresenceService presenceService: PresenceService,
+          withNetworkService networkService: NetworkService) {
         self.daemonService = daemonService
         self.accountService = accountService
         self.nameService = nameService
         self.conversationsService = conversationService
         self.contactsService = contactsService
         self.presenceService = presenceService
+        self.networkService = networkService
     }
 
 }
