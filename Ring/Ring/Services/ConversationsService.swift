@@ -68,9 +68,10 @@ class ConversationsService: MessagesAdapterDelegate {
          */
         for conversation in results.toArray() {
             for message in (conversation.messages) {
-                if message.id != "" && (message.status == .unknown || message.status == .sending ) {
+                if !message.id.isEmpty && (message.status == .unknown || message.status == .sending ) {
                     let updatedMessageStatus = self.status(forMessageId: message.id)
-                    if updatedMessageStatus != message.status {
+                    if updatedMessageStatus.rawValue > message.status.rawValue ||
+                        (updatedMessageStatus == .failure && message.status == .sending) {
                         self.setMessageStatus(withMessage: message, withStatus: updatedMessageStatus)
                             .subscribe(onCompleted: { [] in
                                 print("Message status updated - load")
@@ -268,7 +269,9 @@ class ConversationsService: MessagesAdapterDelegate {
 
         //Find message
         if let message = conversation?.messages.filter({ messages in
-            return !messages.id.isEmpty && messages.id == String(messageId) && messages.status != status
+            return !messages.id.isEmpty && messages.id == String(messageId) &&
+                (status.rawValue > messages.status.rawValue || (status == .failure && messages.status == .sending))
+
         }).first {
             self.setMessageStatus(withMessage: message,
                                   withStatus: status)
