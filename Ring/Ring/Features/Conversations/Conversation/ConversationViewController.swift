@@ -215,7 +215,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         for (index, messageViewModel) in self.messageViewModels!.enumerated() {
             // time labels
             let time = messageViewModel.receivedDate
-            if index == 0 {
+            if index == 0 ||  messageViewModel.bubblePosition() == .generated {
                 // always show first message's time
                 messageViewModel.timeStringShown = getTimeLabelString(forTime: time)
                 lastShownTime = time
@@ -388,8 +388,17 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     func formatCell(withCell cell: MessageCell,
                     cellForRowAt indexPath: IndexPath,
                     withMessageVM messageVM: MessageViewModel) {
+
         // hide/show time label
         formatTimeLabel(forCell: cell, withMessageVM: messageVM)
+
+        if messageVM.bubblePosition() == .generated {
+            cell.bubble.backgroundColor = UIColor.ringMsgCellReceived
+            cell.messageLabel.setTextWithLineSpacing(withText: messageVM.content, withLineSpacing: 2)
+            // generated messages should always show the time
+            cell.bubbleTopConstraint.constant = 32
+            return
+        }
 
         // bubble grouping for cell
         applyBubbleStyleToCell(toCell: cell, cellForRowAt: indexPath, withMessageVM: messageVM)
@@ -401,10 +410,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             cell.bubbleBottomConstraint.constant = 16
         }
 
-        if messageVM.bubblePosition() == .generated {
-            cell.failedStatusLabel.isHidden = true
-            cell.sendingIndicator.stopAnimating()
-        } else if messageVM.bubblePosition() == .sent {
+        if messageVM.bubblePosition() == .sent {
             messageVM.status.asObservable()
                 .observeOn(MainScheduler.instance)
                 .map { value in value == MessageStatus.sending ? true : false }
@@ -415,7 +421,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                 .map { value in value == MessageStatus.failure ? false : true }
                 .bind(to: cell.failedStatusLabel.rx.isHidden)
                 .disposed(by: cell.disposeBag)
-        } else {
+        } else if messageVM.bubblePosition() == .received {
             // avatar
             guard let fallbackAvatar = cell.fallbackAvatar else {
                 return
@@ -453,7 +459,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             }
         }
     }
-
 }
 
 extension ConversationViewController: UITableViewDataSource {
@@ -467,8 +472,12 @@ extension ConversationViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
                 formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
                 return cell
-            } else {
+            } else if messageViewModel.bubblePosition() == .sent {
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
+                formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
+                return cell
+            } else if messageViewModel.bubblePosition() == .generated {
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellGenerated.self)
                 formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
                 return cell
             }
