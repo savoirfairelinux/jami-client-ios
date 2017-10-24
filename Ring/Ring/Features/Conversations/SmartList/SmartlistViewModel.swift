@@ -19,8 +19,11 @@
  */
 
 import RxSwift
+import SwiftyBeaver
 
 class SmartlistViewModel: Stateable, ViewModel {
+
+    private let log = SwiftyBeaver.self
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
@@ -35,6 +38,7 @@ class SmartlistViewModel: Stateable, ViewModel {
     fileprivate let nameService: NameService
     fileprivate let accountsService: AccountsService
     fileprivate let contactsService: ContactsService
+    fileprivate let networkService: NetworkService
 
     let searchBarText = Variable<String>("")
     var isSearching: Observable<Bool>!
@@ -42,10 +46,15 @@ class SmartlistViewModel: Stateable, ViewModel {
     var searchResults: Observable<[ConversationSection]>!
     var hideNoConversationsMessage: Observable<Bool>!
     var searchStatus = PublishSubject<String>()
+    var connectionState = PublishSubject<ConnectionType>()
 
     fileprivate var filteredResults = Variable([ConversationViewModel]())
     fileprivate var contactFoundConversation = Variable<ConversationViewModel?>(nil)
     fileprivate var conversationViewModels = [ConversationViewModel]()
+
+    func networkConnectionState() -> ConnectionType {
+        return self.networkService.connectionState.value
+    }
 
     required init(with injectionBag: InjectionBag) {
 
@@ -53,6 +62,14 @@ class SmartlistViewModel: Stateable, ViewModel {
         self.nameService = injectionBag.nameService
         self.accountsService = injectionBag.accountService
         self.contactsService = injectionBag.contactsService
+        self.networkService = injectionBag.networkService
+
+        // Observe connectivity changes
+        self.networkService.connectionStateObservable
+            .subscribe(onNext: { value in
+                self.connectionState.onNext(value)
+            })
+            .disposed(by: self.disposeBag)
 
         //Create observable from sorted conversations and flatMap them to view models
         let conversationsObservable: Observable<[ConversationViewModel]> = self.conversationsService.conversations.asObservable().map({ conversations in

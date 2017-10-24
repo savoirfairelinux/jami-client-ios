@@ -5,3 +5,4 @@ github "AliSoftware/Reusable" ~> 4.0
 github "SwiftyBeaver/SwiftyBeaver"
 github "ViccAlexander/Chameleon"
 github "andreamazz/AMPopTip"
+github "ashleymills/Reachability.swift"
