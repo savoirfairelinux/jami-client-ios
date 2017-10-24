@@ -44,6 +44,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var noConversationsView: UIView!
     @IBOutlet weak var searchTableViewLabel: UILabel!
+    @IBOutlet weak var networkAlertLabel: UILabel!
+    @IBOutlet weak var networkAlertLabelTopConstraint: NSLayoutConstraint!
 
     // MARK: members
     var viewModel: SmartlistViewModel!
@@ -76,6 +78,25 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.viewModel.hideNoConversationsMessage
             .bind(to: self.noConversationsView.rx.isHidden)
             .disposed(by: disposeBag)
+
+        let connectionState = self.viewModel.networkConnectionState()
+        self.networkAlertLabelTopConstraint.constant = connectionState == .none || connectionState == .cellular ? 0.0 : -44.0
+
+        self.viewModel.networkStatus
+            .subscribe(onNext: { connectionState in
+                let newAlertHeight = connectionState == .none || connectionState == .cellular ? 0.0 : -44.0
+
+                if connectionState == .none {
+
+                } else if connectionState == .cellular {
+
+                }
+                UIView.animate(withDuration: 0.25) {
+                    self.networkAlertLabelTopConstraint.constant = CGFloat(newAlertHeight)
+                    self.view.layoutIfNeeded()
+                }
+            })
+            .disposed(by: self.disposeBag)
 
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
@@ -255,6 +276,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     func setupSearchBar() {
 
         self.searchBar.returnKeyType = .done
+
+        self.searchBar.layer.shadowColor = UIColor.black.cgColor
+        self.searchBar.layer.shadowOpacity = 0.5
+        self.searchBar.layer.shadowOffset = CGSize.zero
+        self.searchBar.layer.shadowRadius = 2
 
         //Bind the SearchBar to the ViewModel
         self.searchBar.rx.text.orEmpty
