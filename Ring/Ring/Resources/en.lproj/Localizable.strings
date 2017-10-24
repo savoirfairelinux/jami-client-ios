@@ -30,6 +30,8 @@
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
+"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
 
