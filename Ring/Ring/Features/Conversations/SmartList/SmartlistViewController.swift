@@ -44,6 +44,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var noConversationsView: UIView!
     @IBOutlet weak var searchTableViewLabel: UILabel!
+    @IBOutlet weak var networkAlertLabel: UILabel!
+    @IBOutlet weak var networkAlertLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var settingsButton: UIButton!
 
     // MARK: members
     var viewModel: SmartlistViewModel!
@@ -76,6 +79,24 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.viewModel.hideNoConversationsMessage
             .bind(to: self.noConversationsView.rx.isHidden)
             .disposed(by: disposeBag)
+
+        self.networkAlertLabelTopConstraint.constant = self.viewModel.networkConnectionState() == .none ? 0.0 : -56.0
+        self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
+
+        self.viewModel.connectionState
+            .subscribe(onNext: { connectionState in
+                let newAlertHeight = connectionState == .none ? 0.0 : -56.0
+                UIView.animate(withDuration: 0.25) {
+                    self.networkAlertLabelTopConstraint.constant = CGFloat(newAlertHeight)
+                    self.view.layoutIfNeeded()
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.settingsButton.backgroundColor = nil
+        self.settingsButton.rx.tap.subscribe(onNext: { _ in
+            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+        }).disposed(by: self.disposeBag)
 
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
@@ -255,6 +276,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     func setupSearchBar() {
 
         self.searchBar.returnKeyType = .done
+
+        self.searchBar.layer.shadowColor = UIColor.black.cgColor
+        self.searchBar.layer.shadowOpacity = 0.5
+        self.searchBar.layer.shadowOffset = CGSize.zero
+        self.searchBar.layer.shadowRadius = 2
 
         //Bind the SearchBar to the ViewModel
         self.searchBar.rx.text.orEmpty

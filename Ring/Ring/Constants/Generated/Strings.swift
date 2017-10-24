@@ -80,6 +80,8 @@ enum L10n {
   enum Smartlist {
     /// Conversations
     static let conversations = L10n.tr("Localizable", "smartlist.conversations")
+    /// No network connectivity Make sure cellular access is granted in your settings
+    static let noNetworkConnectivity = L10n.tr("Localizable", "smartlist.noNetworkConnectivity")
     /// No results
     static let noResults = L10n.tr("Localizable", "smartlist.noResults")
     /// Searching...
