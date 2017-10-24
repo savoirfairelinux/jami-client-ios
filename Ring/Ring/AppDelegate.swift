@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
     private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
+    private let networkService = NetworkService()
 
     public lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
@@ -44,7 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             withNameService: self.nameService,
                             withConversationService: self.conversationsService,
                             withContactsService: self.contactsService,
-                            withPresenceService: self.presenceService)
+                            withPresenceService: self.presenceService,
+                            withNetworkService: self.networkService
+                            )
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -68,6 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // starts the daemon
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
+
+        self.networkService.monitorNetworkType()
 
         // themetize the app
         Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
