@@ -21,8 +21,5 @@
 import Foundation
 import Reusable
 
-class MessageCellGenerated: UITableViewCell, NibReusable {
-
-    @IBOutlet weak var bubble: MessageBubble!
-    @IBOutlet weak var messageLabel: UILabel!
+class MessageCellGenerated: MessageCell {
 }
