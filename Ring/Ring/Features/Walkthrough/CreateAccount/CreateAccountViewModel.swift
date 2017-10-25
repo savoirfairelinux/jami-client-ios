@@ -103,6 +103,7 @@ enum AccountCreationError: Error {
     case generic
     case network
     case unknown
+    case linkError
 }
 
 extension AccountCreationError: LocalizedError {
@@ -113,6 +114,8 @@ extension AccountCreationError: LocalizedError {
             return L10n.Alerts.accountCannotBeFoundTitle
         case .network:
             return L10n.Alerts.accountNoNetworkTitle
+        case .linkError:
+            return L10n.Alerts.accountCannotBeFoundTitle
         default:
             return L10n.Alerts.accountDefaultErrorTitle
         }
@@ -124,6 +127,8 @@ extension AccountCreationError: LocalizedError {
             return L10n.Alerts.accountDefaultErrorMessage
         case .network:
             return L10n.Alerts.accountNoNetworkMessage
+        case .linkError:
+            return L10n.Alerts.acountCannotBeFoundMessage
         default:
             return L10n.Alerts.accountDefaultErrorMessage
         }

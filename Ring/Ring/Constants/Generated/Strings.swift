@@ -2,6 +2,7 @@
 
 import Foundation
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
@@ -21,6 +22,8 @@ enum L10n {
     static let accountDefaultErrorMessage = L10n.tr("Localizable", "alerts.accountDefaultErrorMessage")
     /// Unknown error
     static let accountDefaultErrorTitle = L10n.tr("Localizable", "alerts.accountDefaultErrorTitle")
+    /// Account Linked
+    static let accountLinkedTitle = L10n.tr("Localizable", "alerts.accountLinkedTitle")
     /// Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.
     static let accountNoNetworkMessage = L10n.tr("Localizable", "alerts.accountNoNetworkMessage")
     /// Can't connect to the network
@@ -95,6 +98,23 @@ enum L10n {
     static let passwordError = L10n.tr("Localizable", "linkDevice.passwordError")
     /// Link new device
     static let title = L10n.tr("Localizable", "linkDevice.title")
+  }
+
+  enum Linktoaccount {
+    /// To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
+    static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage")
+    /// Link device
+    static let linkButtonTitle = L10n.tr("Localizable", "linkToAccount.linkButtonTitle")
+    /// Enter Password
+    static let passwordLabel = L10n.tr("Localizable", "linkToAccount.passwordLabel")
+    /// password
+    static let passwordPlaceholder = L10n.tr("Localizable", "linkToAccount.passwordPlaceholder")
+    /// Enter PIN
+    static let pinLabel = L10n.tr("Localizable", "linkToAccount.pinLabel")
+    /// PIN
+    static let pinPlaceholder = L10n.tr("Localizable", "linkToAccount.pinPlaceholder")
+    /// Account linking
+    static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle")
   }
 
   enum Smartlist {

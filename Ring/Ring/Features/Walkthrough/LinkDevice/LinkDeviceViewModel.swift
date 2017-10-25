@@ -28,12 +28,51 @@ class LinkDeviceViewModel: Stateable, ViewModel {
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
+    private let accountService: AccountsService
+    private let accountCreationState = Variable<AccountCreationState>(.unknown)
+    lazy var createState: Observable<AccountCreationState> = {
+        return self.accountCreationState.asObservable()
+    }()
+
+    lazy var linkButtonEnabledState: Observable<Bool>  = {
+        return Observable.combineLatest(self.password.asObservable(),
+                                        self.pin.asObservable()) {(password, pin) -> Bool in
+                                            if !password.isEmpty && !pin.isEmpty {
+                                                return true
+                                            }
+                                            return false
+        }
+    }()
+
+    let pin = Variable<String>("")
+    let password = Variable<String>("")
+    let disposeBag = DisposeBag()
 
     required init (with injectionBag: InjectionBag) {
+        self.accountService = injectionBag.accountService
+
+        //Account creation state observer
+        self.accountService
+            .sharedResponseStream
+            .subscribe(onNext: { [unowned self] event in
+                if event.getEventInput(ServiceEventInput.registrationState) == Registered {
+                    self.accountCreationState.value = .success
+                    Observable<Int>.timer(Durations.alertFlashDuration.value, period: nil, scheduler: MainScheduler.instance).subscribe(onNext: { [unowned self] (_) in
+                        self.stateSubject.onNext(WalkthroughState.deviceLinked)
+                    }).disposed(by: self.disposeBag)
+                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
+                    self.accountCreationState.value = .error(error: AccountCreationError.linkError)
+                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
+                    self.accountCreationState.value = .error(error: AccountCreationError.network)
+                }
+                }, onError: { [unowned self] _ in
+                    self.accountCreationState.value = .error(error: AccountCreationError.unknown)
+            }).disposed(by: disposeBag)
     }
 
     func linkDevice () {
-        self.stateSubject.onNext(WalkthroughState.deviceLinked)
+        self.accountCreationState.value = .started
+        self.accountService.linkToRingAccount(withPin: self.pin.value,
+                                              password: self.password.value)
     }
-
 }
