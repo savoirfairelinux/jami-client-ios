@@ -58,9 +58,18 @@
 "createAccount.loading" = "Loading";
 "createAccount.waitCreateAccountTitle" = "Adding account";
 
+//Link To Account form
+"linkToAccount.waitLinkToAccountTitle" = "Account linking";
+"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.passwordPlaceholder" = "password";
+"linkToAccount.pinPlaceholder" = "PIN";
+"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.pinLabel" = "Enter PIN";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Can't find account";
-"alerts.acountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
 "alerts.accountNoNetworkTitle" = "Can't connect to the network";
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
@@ -69,6 +78,7 @@
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.profileCancelPhoto" = "Cancel";
+"alerts.accountLinkedTitle" = "Linking account";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
