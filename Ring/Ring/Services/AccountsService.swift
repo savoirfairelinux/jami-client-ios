@@ -220,6 +220,42 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func linkToRingAccount(withPin pin: String, password: String) {
+        do {
+            var ringDetails = try self.getRingInitialAccountDetails()
+            ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+            ringDetails.updateValue(pin, forKey: ConfigKey.archivePIN.rawValue)
+            let accountId = self.accountAdapter.addAccount(ringDetails)
+            guard accountId != nil else {
+                throw AddAccountError.unknownError
+            }
+
+            var account = self.getAccount(fromAccountId: accountId!)
+
+            if account == nil {
+                let details = self.getAccountDetails(fromAccountId: accountId!)
+                let volatileDetails = self.getVolatileAccountDetails(fromAccountId: accountId!)
+                let credentials = try self.getAccountCredentials(fromAccountId: accountId!)
+                let devices = getKnownRingDevices(fromAccountId: accountId!)
+
+                account = try AccountModel(withAccountId: accountId!,
+                                           details: details,
+                                           volatileDetails: volatileDetails,
+                                           credentials: credentials,
+                                           devices: devices)
+
+                let accountModelHelper = AccountModelHelper(withAccount: account!)
+                var accountAddedEvent = ServiceEvent(withEventType: .accountAdded)
+                accountAddedEvent.addEventInput(.id, value: account?.id)
+                accountAddedEvent.addEventInput(.state, value: accountModelHelper.getRegistrationState())
+                self.responseStream.onNext(accountAddedEvent)
+            }
+            self.currentAccount = account
+        } catch {
+            self.responseStream.onError(error)
+        }
+    }
+
     /**
      Entry point to create a brand-new SIP account.
 

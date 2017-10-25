@@ -89,6 +89,7 @@
 		0ED2B6FA1F96A075001572F0 /* LinkNewDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED2B6F91F96A075001572F0 /* LinkNewDeviceViewController.storyboard */; };
 		0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B6FB1F96A158001572F0 /* LinkNewDeviceViewController.swift */; };
 		0ED2B6FE1F96A16C001572F0 /* LinkNewDeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B6FD1F96A16C001572F0 /* LinkNewDeviceViewModel.swift */; };
+		0ED666101F9FED1C00743D42 /* AMPopTip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */; };
 		0EDCC8601F98150500B121D7 /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */; };
 		0EDE34C71F868E1200FFA15C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE34C61F868E1200FFA15C /* EditProfileViewController.swift */; };
 		0EDE34C91F8691BB00FFA15C /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE34C81F8691BB00FFA15C /* EditProfileViewModel.swift */; };
@@ -319,6 +320,7 @@
 		0ED2B6F91F96A075001572F0 /* LinkNewDeviceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LinkNewDeviceViewController.storyboard; sourceTree = "<group>"; };
 		0ED2B6FB1F96A158001572F0 /* LinkNewDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceViewController.swift; sourceTree = "<group>"; };
 		0ED2B6FD1F96A16C001572F0 /* LinkNewDeviceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceViewModel.swift; sourceTree = "<group>"; };
+		0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPopTip.framework; path = Carthage/Build/iOS/AMPopTip.framework; sourceTree = "<group>"; };
 		0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
 		0EDE34C61F868E1200FFA15C /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		0EDE34C81F8691BB00FFA15C /* EditProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ED666101F9FED1C00743D42 /* AMPopTip.framework in Frameworks */,
 				0EEFBA3C1F83DA21000EDBAD /* libsecp256k1.a in Frameworks */,
 				1A3CA32B1F102BB700283748 /* Chameleon.framework in Frameworks */,
 				1A1E476F1F0E894600EA9A36 /* SwiftyBeaver.framework in Frameworks */,
@@ -557,6 +560,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */,
 				0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */,
 				1A3CA32A1F102BB700283748 /* Chameleon.framework */,
 				1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */,
@@ -1177,6 +1181,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = KM95526DS8;
 						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1276,6 +1281,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
+				"$(SRCROOT)/Carthage/build/iOS/AMPopTip.framework",
 			);
 			name = "⚙️ Copy Frameworks";
 			outputPaths = (
@@ -1289,6 +1295,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reusable.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyBeaver.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Chameleon.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AMPopTip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1582,6 +1589,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM95526DS8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1597,6 +1605,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1612,6 +1621,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM95526DS8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1627,6 +1637,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cx.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
