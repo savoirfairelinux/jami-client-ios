@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_cddcd577",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-10-25T18:02:41Z",
+      "side": 1,
+      "message": "acountCannotBeFoundMessage -\u003e accountCannotBeFoundMessage",
+      "range": {
+        "startLine": 131,
+        "startChar": 31,
+        "endLine": 131,
+        "endChar": 57
+      },
+      "revId": "60e521c7db1cccf092d87fadad1e43c4a7eac8da",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_cdc33589",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-10-25T18:02:41Z",
+      "side": 1,
+      "message": "-tab",
+      "revId": "60e521c7db1cccf092d87fadad1e43c4a7eac8da",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_add98985",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-10-25T18:02:41Z",
+      "side": 1,
+      "message": "Linking account?",
+      "range": {
+        "startLine": 62,
+        "startChar": 42,
+        "endLine": 62,
+        "endChar": 57
+      },
+      "revId": "60e521c7db1cccf092d87fadad1e43c4a7eac8da",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
