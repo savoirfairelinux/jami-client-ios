@@ -87,7 +87,7 @@ class ConversationViewModel: ViewModel {
                 self.inviteButtonIsAvailable.onNext(!contact.confirmed)
             }
             self.contactsService.contactStatus.filter({ cont in
-                return cont.ringId == contact?.ringId
+                return cont.ringId == contactRingId
             })
                 .subscribe(onNext: { [unowned self] cont in
 
