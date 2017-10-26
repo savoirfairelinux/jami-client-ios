@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,7 +51,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to Ring" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbn-cd-UXk">
-                                <rect key="frame" x="97.5" y="319" width="180.5" height="29"/>
+                                <rect key="frame" x="100.5" y="319" width="174.5" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -93,8 +93,9 @@
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="U37-r7-lNe"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="Lbn-cd-UXk" secondAttribute="bottom" constant="8" symbolic="YES" id="XNv-Kr-c8f"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="YLx-WX-rgL"/>
-                            <constraint firstItem="Lbn-cd-UXk" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" id="ax2-Za-jO0"/>
+                            <constraint firstItem="Lbn-cd-UXk" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" priority="750" id="ax2-Za-jO0"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="cYv-WZ-CCB"/>
+                            <constraint firstItem="kDG-lW-7DA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="10" id="dHd-v7-FYo"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="gQM-Bw-BRN"/>
                             <constraint firstItem="kDG-lW-7DA" firstAttribute="top" secondItem="11r-JK-mPT" secondAttribute="bottom" id="hKL-lg-yh3"/>
                             <constraint firstItem="11r-JK-mPT" firstAttribute="leading" secondItem="Dg0-kS-rT7" secondAttribute="leading" id="iUW-Ed-weL"/>
@@ -104,6 +105,7 @@
                             <constraint firstAttribute="trailing" secondItem="11r-JK-mPT" secondAttribute="trailing" id="shP-7c-cRl"/>
                             <constraint firstItem="11r-JK-mPT" firstAttribute="top" secondItem="Dg0-kS-rT7" secondAttribute="top" id="sq0-Fa-BSF"/>
                             <constraint firstItem="8TU-za-C7U" firstAttribute="leading" secondItem="Dg0-kS-rT7" secondAttribute="leading" id="svU-pm-Bc1"/>
+                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ETz-GA-Th5" secondAttribute="bottom" constant="10" id="t1u-DE-jkN"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="uLc-95-Qpb"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="ukg-Rd-bL3"/>
                             <constraint firstAttribute="trailing" secondItem="8TU-za-C7U" secondAttribute="trailing" id="z6w-VC-Pft"/>

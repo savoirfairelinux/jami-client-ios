@@ -16,8 +16,8 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
     // MARK: outlets
     @IBOutlet weak var linkButton: DesignableButton!
-    @IBOutlet weak var pinTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var pinTextField: DesignableTextField!
+    @IBOutlet weak var passwordTextField: DesignableTextField!
     @IBOutlet weak var pinInfoButton: UIButton!
     @IBOutlet weak var pinLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
