@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQs-TS-z4j">
-                        <rect key="frame" x="40" y="5" width="325" height="33.5"/>
+                        <rect key="frame" x="40" y="15" width="325" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -34,11 +34,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="OQs-TS-z4j" firstAttribute="centerY" secondItem="fvy-0B-phe" secondAttribute="centerY" id="1ub-Tt-uhc"/>
-                    <constraint firstItem="OQs-TS-z4j" firstAttribute="top" secondItem="fvy-0B-phe" secondAttribute="top" constant="5" id="Bm7-bn-pZ8"/>
+                    <constraint firstItem="OQs-TS-z4j" firstAttribute="top" secondItem="fvy-0B-phe" secondAttribute="top" constant="15" id="Bm7-bn-pZ8"/>
                     <constraint firstItem="rQq-Mc-A6A" firstAttribute="leading" secondItem="fvy-0B-phe" secondAttribute="leading" constant="10" id="CCb-8S-cPs"/>
                     <constraint firstItem="OQs-TS-z4j" firstAttribute="leading" secondItem="rQq-Mc-A6A" secondAttribute="trailing" constant="10" id="SBZ-1f-gmH"/>
                     <constraint firstAttribute="trailing" secondItem="OQs-TS-z4j" secondAttribute="trailing" constant="10" id="c1v-0c-oUl"/>
-                    <constraint firstAttribute="bottom" secondItem="OQs-TS-z4j" secondAttribute="bottom" constant="5" id="uZX-qs-oIK"/>
+                    <constraint firstAttribute="bottom" secondItem="OQs-TS-z4j" secondAttribute="bottom" constant="15" id="uZX-qs-oIK"/>
                     <constraint firstItem="rQq-Mc-A6A" firstAttribute="centerY" secondItem="fvy-0B-phe" secondAttribute="centerY" id="vxW-wo-3mL"/>
                 </constraints>
             </tableViewCellContentView>

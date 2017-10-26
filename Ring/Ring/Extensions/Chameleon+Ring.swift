@@ -41,6 +41,9 @@ extension Chameleon {
 
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.flatGray()
 
+        ButtonTransparentBackground.appearance().tintColor = secondaryColor
+        ButtonTransparentBackground.appearance().backgroundColor = UIColor.clear
+
         MessageBubble.appearance().tintColor = secondaryContentColor
         MessageBubble.appearance().backgroundColor = secondaryColor
 
