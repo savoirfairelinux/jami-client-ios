@@ -73,25 +73,48 @@ class MeViewModel: ViewModel, Stateable {
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
 
-    var userName: Single<String?>
-    let ringId: Single<String?>
+    lazy var userName: Observable<String?> = {
+        // return username if exists, is no start name lookup
+        let accountName = self.accountService.currentAccount?.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName))
+        if accountName != nil && !accountName!.isEmpty {
+            return Observable.from(optional: accountName)
+        }
+        guard let account = self.accountService.currentAccount else {
+            return Observable.from(optional: accountName)
+        }
+        let accountHelper = AccountModelHelper(withAccount: account)
+        guard let uri = accountHelper.ringId else {
+            return Observable.from(optional: accountName)
+        }
+        let time = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: time) {
+            self.nameService.lookupAddress(withAccount: "", nameserver: "", address: uri)
+        }
+        return self.nameService.usernameLookupStatus
+            .filter({ lookupNameResponse in
+                return lookupNameResponse.address != nil &&
+                    lookupNameResponse.address == uri && lookupNameResponse.state == .found
+            })
+            .map({ lookupNameResponse in
+                return lookupNameResponse.name
+            })
+    }()
+
+    lazy var ringId: Observable<String?> = {
+        return Observable.from(optional: self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)))
+    }()
 
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
-
     let disposeBag = DisposeBag()
 
     let accountService: AccountsService
+    let nameService: NameService
 
     //table section
-    var settings: Observable<[SettingsSection]> = Observable.just([SettingsSection]())
-
-    required init(with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
-        self.userName = Single.just(accountService.currentAccount?.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)))
-        self.ringId = Single.just(accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)))
-        if let account = accountService.currentAccount {
+    lazy var settings: Observable<[SettingsSection]> = {
+        if let account = self.accountService.currentAccount {
             let accountHelper = AccountModelHelper(withAccount: account)
             let uri = accountHelper.ringId
             let devices = Observable.from(optional: account.devices)
@@ -104,15 +127,12 @@ class MeViewModel: ViewModel, Stateable {
                     return account.devices
                 })
 
-            self.settings = devices.concat(accountDevice)
+            return devices.concat(accountDevice)
                 .map { devices in
-
                     let addNewDevice = SettingsSection.linkNewDevice(header: "", items: [SettingsSection.SectionRow.linkNew])
-
                     var rows: [SettingsSection.SectionRow]?
 
                     if !devices.isEmpty {
-
                         rows = [SettingsSection.SectionRow.device(device: devices[0])]
                         for i in 1 ..< devices.count {
                             let device = devices[i]
@@ -128,6 +148,12 @@ class MeViewModel: ViewModel, Stateable {
                     }
             }
         }
+        return Observable.just([SettingsSection]())
+    }()
+
+    required init (with injectionBag: InjectionBag) {
+        self.accountService = injectionBag.accountService
+        self.nameService = injectionBag.nameService
     }
 
     func linkDevice() {
