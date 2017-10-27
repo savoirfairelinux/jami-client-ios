@@ -45,7 +45,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     override func setupUI() {
-        self.viewModel.userName.asObservable()
+        self.viewModel.userName
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: disposeBag)
 
