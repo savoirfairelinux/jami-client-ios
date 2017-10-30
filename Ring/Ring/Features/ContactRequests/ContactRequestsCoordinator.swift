@@ -30,14 +30,17 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive {
 
     var childCoordinators = [Coordinator]()
 
-    private let navigationViewController = UINavigationController()
+    private let navigationViewController = BaseViewController(with: TabBarItemType.contactRequest)
     private let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
+    let contactService: ContactsService
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
+        self.contactService = injectionBag.contactsService
+        self.navigationViewController.viewModel = ContactRequestTabBarItem(with: self.injectionBag)
     }
 
     func start () {
