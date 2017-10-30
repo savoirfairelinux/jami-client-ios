@@ -218,6 +218,11 @@ class ConversationViewModel: ViewModel {
     }
 
     func sendMessage(withContent content: String) {
+        // send a contact request if this is the first message (implicitly not a contact)
+        if self.conversation.messages.isEmpty {
+            self.sendContactRequest()
+        }
+
         self.conversationsService
             .sendMessage(withContent: content,
                          from: accountService.currentAccount!,
