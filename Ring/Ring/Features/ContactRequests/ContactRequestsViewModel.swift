@@ -22,7 +22,13 @@ import RxSwift
 import Contacts
 import SwiftyBeaver
 
-class ContactRequestsViewModel: ViewModel {
+class ContactRequestsViewModel: Stateable, ViewModel {
+
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
 
     let contactsService: ContactsService
     let accountsService: AccountsService
@@ -32,11 +38,15 @@ class ContactRequestsViewModel: ViewModel {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
 
+    fileprivate let injectionBag: InjectionBag
+
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService
         self.accountsService = injectionBag.accountService
         self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
+
+        self.injectionBag = injectionBag
 
         self.contactsService.contactRequests
             .asObservable()
@@ -133,5 +143,13 @@ class ContactRequestsViewModel: ViewModel {
         self.nameService.lookupAddress(withAccount: (accountsService.currentAccount?.id)!,
                                               nameserver: "",
                                               address: item.contactRequest.ringId)
+    }
+
+    func showConversation (forRingId ringId: String) {
+        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+        let conversation = self.conversationService.findConversation(withRingId: ringId,
+                                                                     withAccountId: (accountsService.currentAccount?.id)!)
+        conversationViewModel.conversation = conversation
+        self.stateSubject.onNext(ConversationsState.conversationDetail(conversationViewModel: conversationViewModel))
     }
 }

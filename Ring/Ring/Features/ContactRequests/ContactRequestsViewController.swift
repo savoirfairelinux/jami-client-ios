@@ -40,6 +40,13 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.rx.modelSelected(ContactRequestItem.self)
+            .subscribe({ [unowned self] item in
+                if let ringId = item.element?.contactRequest.ringId {
+                    self.viewModel.showConversation(forRingId: ringId)
+                }
+            }).disposed(by: disposeBag)
+
         self.title = L10n.Global.contactRequestsTabBarTitle
         self.navigationItem.title = L10n.Global.contactRequestsTabBarTitle
     }
@@ -53,7 +60,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     func setupTableView() {
         self.tableView.estimatedRowHeight = 100.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.allowsSelection = false
+        self.tableView.allowsSelection = true
 
         //Register cell
         self.tableView.register(cellType: ContactRequestCell.self)

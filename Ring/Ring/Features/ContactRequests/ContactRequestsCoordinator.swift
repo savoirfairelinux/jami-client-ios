@@ -38,10 +38,24 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive {
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
+
+        self.stateSubject.subscribe(onNext: { [unowned self] (state) in
+            guard let state = state as? ConversationsState else { return }
+            switch state {
+            case .conversationDetail (let conversationViewModel):
+                self.showConversation(withConversationViewModel: conversationViewModel)
+            }
+        }).disposed(by: self.disposeBag)
     }
 
     func start () {
         let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: contactRequestsViewController, withStyle: .show, withAnimation: true)
+        self.present(viewController: contactRequestsViewController, withStyle: .show, withAnimation: true, withStateable: contactRequestsViewController.viewModel)
+    }
+
+    private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
+        conversationViewController.viewModel = conversationViewModel
+        self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true)
     }
 }
