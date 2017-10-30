@@ -73,31 +73,36 @@ class SmartlistViewModel: Stateable, ViewModel {
 
         //Create observable from sorted conversations and flatMap them to view models
         let conversationsObservable: Observable<[ConversationViewModel]> = self.conversationsService.conversations.asObservable().map({ conversations in
-            return conversations.sorted(by: { conversation1, conversations2 in
+            return conversations
+                .sorted(by: { conversation1, conversations2 in
 
-                guard let lastMessage1 = conversation1.messages.last,
-                let lastMessage2 = conversations2.messages.last else {
-                    return true
-                }
+                    guard let lastMessage1 = conversation1.messages.last,
+                        let lastMessage2 = conversations2.messages.last else {
+                            return true
+                    }
 
-                return lastMessage1.receivedDate > lastMessage2.receivedDate
-            }).flatMap({ conversationModel in
+                    return lastMessage1.receivedDate > lastMessage2.receivedDate
+                })
+                .filter({ self.contactsService.contact(withRingId: $0.recipientRingId) != nil
+                    || (!$0.messages.isEmpty && (self.contactsService.contactRequest(withRingId:$0.recipientRingId) == nil))
+                })
+                .flatMap({ conversationModel in
 
-                var conversationViewModel: ConversationViewModel?
+                    var conversationViewModel: ConversationViewModel?
 
-                //Get the current ConversationViewModel if exists or create it
-                if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
-                    return conversationViewModel.conversation.isEqual(conversationModel)
-                }).first {
-                    conversationViewModel = foundConversationViewModel
-                } else {
-                    conversationViewModel = ConversationViewModel(with: injectionBag)
-                    conversationViewModel?.conversation = conversationModel
-                    self.conversationViewModels.append(conversationViewModel!)
-                }
+                    //Get the current ConversationViewModel if exists or create it
+                    if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
+                        return conversationViewModel.conversation.isEqual(conversationModel)
+                    }).first {
+                        conversationViewModel = foundConversationViewModel
+                    } else {
+                        conversationViewModel = ConversationViewModel(with: injectionBag)
+                        conversationViewModel?.conversation = conversationModel
+                        self.conversationViewModels.append(conversationViewModel!)
+                    }
 
-                return conversationViewModel
-            })
+                    return conversationViewModel
+                })
         })
 
         //Create observable from conversations viewModels to ConversationSection
