@@ -35,12 +35,18 @@ class ContactsService {
     fileprivate let contactsAdapter: ContactsAdapter
     fileprivate let log = SwiftyBeaver.self
 
+    fileprivate let disposeBag = DisposeBag()
+    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    var sharedResponseStream: Observable<ServiceEvent>
+
     let contactRequests = Variable([ContactRequestModel]())
     let contacts = Variable([ContactModel]())
 
     let contactStatus = PublishSubject<ContactModel>()
 
     init(withContactsAdapter contactsAdapter: ContactsAdapter) {
+        self.responseStream.disposed(by: disposeBag)
+        self.sharedResponseStream = responseStream.share()
         self.contactsAdapter = contactsAdapter
         ContactsAdapter.delegate = self
     }
