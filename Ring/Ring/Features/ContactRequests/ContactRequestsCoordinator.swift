@@ -38,6 +38,7 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive {
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
+        self.rootViewController.tabBarItem = UITabBarItem(title: L10n.Global.meTabBarTitle, image: UIImage(named: "contact_request_icon"), selectedImage: UIImage(named: "contact_request_icon"))
     }
 
     func start () {

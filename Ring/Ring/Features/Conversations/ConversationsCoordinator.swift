@@ -55,6 +55,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
             }
         }).disposed(by: self.disposeBag)
 
+        self.rootViewController.tabBarItem = UITabBarItem(title: L10n.Global.homeTabBarTitle, image: UIImage(named: "conversation_icon"), selectedImage: UIImage(named: "conversation_icon"))
     }
 
     func start () {

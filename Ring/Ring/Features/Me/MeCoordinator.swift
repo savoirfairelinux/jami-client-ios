@@ -58,6 +58,7 @@ class MeCoordinator: Coordinator, StateableResponsive {
                  self.showLinkDeviceWindow()
             }
         }).disposed(by: self.disposeBag)
+        self.rootViewController.tabBarItem = UITabBarItem(title: L10n.Global.meTabBarTitle, image: UIImage(named: "account_icon"), selectedImage: UIImage(named: "account_icon"))
 
     }
 
