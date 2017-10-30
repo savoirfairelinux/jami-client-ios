@@ -74,7 +74,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     func setupUI() {
 
-        self.title = L10n.Global.homeTabBarTitle
         self.navigationItem.title = L10n.Global.homeTabBarTitle
 
         self.viewModel.hideNoConversationsMessage

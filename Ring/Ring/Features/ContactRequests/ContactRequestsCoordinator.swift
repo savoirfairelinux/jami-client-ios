@@ -30,14 +30,18 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive {
 
     var childCoordinators = [Coordinator]()
 
-    private let navigationViewController = UINavigationController()
+    private let navigationViewController = BaseViewController(with: TabBarItemType.contactRequest)
     private let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
+    let contactService: ContactsService
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
+        self.contactService = injectionBag.contactsService
+        self.rootViewController.tabBarItem = UITabBarItem(title: L10n.Global.meTabBarTitle, image: UIImage(named: "contact_request_icon"), selectedImage: UIImage(named: "contact_request_icon"))
+        self.navigationViewController.viewModel = ContactRequestTabBarItem(with: self.injectionBag)
     }
 
     func start () {
