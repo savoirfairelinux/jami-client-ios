@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Home";
 "global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Me";
+"global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
 
 // Smartlist

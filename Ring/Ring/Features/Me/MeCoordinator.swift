@@ -39,7 +39,7 @@ class MeCoordinator: Coordinator, StateableResponsive {
 
     var childCoordinators = [Coordinator]()
 
-    private let navigationViewController = UINavigationController()
+    private let navigationViewController = BaseViewController(with: TabBarItemType.account)
     private let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
@@ -58,7 +58,6 @@ class MeCoordinator: Coordinator, StateableResponsive {
                  self.showLinkDeviceWindow()
             }
         }).disposed(by: self.disposeBag)
-
     }
 
     func start () {

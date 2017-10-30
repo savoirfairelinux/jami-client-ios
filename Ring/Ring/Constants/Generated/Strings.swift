@@ -79,7 +79,7 @@ enum L10n {
     static let contactRequestsTabBarTitle = L10n.tr("Localizable", "global.contactRequestsTabBarTitle")
     /// Home
     static let homeTabBarTitle = L10n.tr("Localizable", "global.homeTabBarTitle")
-    /// Me
+    /// Account
     static let meTabBarTitle = L10n.tr("Localizable", "global.meTabBarTitle")
     /// Ok
     static let ok = L10n.tr("Localizable", "global.ok")
