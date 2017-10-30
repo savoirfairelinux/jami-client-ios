@@ -283,24 +283,8 @@ class ConversationViewModel: ViewModel {
     }
 
     func generateMessage(ofType messageType: GeneratedMessageType) {
-        if self.generatedMessageExists(ofType: messageType) {
-            return
-        }
-
-        let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-        self.saveMessage(withId: "",
-                         withContent: messageType.rawValue,
-                         byAuthor: accountHelper.ringId!,
-                         toConversationWith: self.conversation.recipientRingId,
-                         generated: true)
-    }
-
-    func generatedMessageExists(ofType messageType: GeneratedMessageType) -> Bool {
-        for message in self.conversation.messages
-            where message.content == messageType.rawValue {
-
-                return true
-        }
-        return false
+        self.conversationsService.generateMessage(ofType: messageType,
+                                                  forRindId: self.conversation.recipientRingId,
+                                                  forAccount: self.accountService.currentAccount!)
     }
 }

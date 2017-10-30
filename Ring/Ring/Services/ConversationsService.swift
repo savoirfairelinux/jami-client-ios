@@ -171,6 +171,47 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
+    func findConversation(withRingId ringId: String,
+                          withAccountId accountId: String) -> ConversationModel? {
+        return self.results
+            .filter({ conversation in
+                return conversation.recipientRingId == ringId && conversation.accountId == accountId
+            })
+            .first
+    }
+
+    func generateMessage(ofType messageType: GeneratedMessageType,
+                         forRindId ringId: String,
+                         forAccount account: AccountModel) {
+
+        if let conversation = self.findConversation(withRingId: ringId, withAccountId: account.id) {
+            if self.generatedMessageExists(ofType: messageType, inConversation: conversation) {
+                return
+            }
+        }
+
+        let accountHelper = AccountModelHelper(withAccount: account)
+        self.saveMessage(withId: "",
+                         withContent: messageType.rawValue,
+                         byAuthor: accountHelper.ringId!,
+                         toConversationWith: ringId,
+                         currentAccountId: account.id,
+                         generated: true)
+            .subscribe(onCompleted: { [unowned self] in
+                self.log.debug("Message saved")
+             })
+            .disposed(by: disposeBag)
+    }
+
+    func generatedMessageExists(ofType messageType: GeneratedMessageType,
+                                inConversation conversation: ConversationModel) -> Bool {
+        for message in conversation.messages
+            where message.content == messageType.rawValue {
+                return true
+        }
+        return false
+    }
+
     func status(forMessageId messageId: String) -> MessageStatus {
         return self.messageAdapter.status(forMessageId: UInt64(messageId)!)
     }
