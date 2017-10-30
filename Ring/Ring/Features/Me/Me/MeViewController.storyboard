@@ -15,10 +15,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Me-->
+        <!--Me View Controller-->
         <scene sceneID="JC9-vU-UJ4">
             <objects>
-                <viewController title="Me" id="RuW-kz-iBP" customClass="MeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="RuW-kz-iBP" customClass="MeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SYf-gf-IKh"/>
                         <viewControllerLayoutGuide type="bottom" id="tam-QD-Xpf"/>
@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ring id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="rC6-Ga-QjY" userLabel="RingId Label">
-                                <rect key="frame" x="21" y="209" width="333" height="18"/>
+                                <rect key="frame" x="21" y="249" width="333" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="UsR-G7-bkE"/>
                                 </constraints>
@@ -75,14 +75,13 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_contact_picture" translatesAutoresizingMaskIntoConstraints="NO" id="8HY-Zl-94u">
                                 <rect key="frame" x="137" y="70" width="100" height="100"/>
-                                <rect key="frame" x="137" y="30" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="3Ik-A7-Cyx"/>
                                     <constraint firstAttribute="width" constant="100" id="xE6-h0-miE"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username is not registered" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8x-Sv-T50">
-                                <rect key="frame" x="21" y="232" width="333" height="23"/>
+                                <rect key="frame" x="21" y="272" width="333" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -117,7 +116,6 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Me" id="AKc-Hb-EHr"/>
                     <navigationItem key="navigationItem" id="vC8-Ti-TTd"/>
                     <connections>
                         <outlet property="nameLabel" destination="w8x-Sv-T50" id="IgU-9F-Fkh"/>
