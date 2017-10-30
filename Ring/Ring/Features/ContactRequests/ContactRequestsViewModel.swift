@@ -37,6 +37,17 @@ class ContactRequestsViewModel: ViewModel {
         self.accountsService = injectionBag.accountService
         self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
+
+        self.contactsService.contactRequests
+            .asObservable()
+            .subscribe(onNext: {[unowned self] contactRequests in
+                guard let account = self.accountsService.currentAccount else { return }
+                guard let ringId = contactRequests.last?.ringId else { return }
+                self.conversationService.generateMessage(ofType: GeneratedMessageType.receivedContactRequest,
+                                                         forRindId: ringId,
+                                                         forAccount: account)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     lazy var contactRequestItems: Observable<[ContactRequestItem]> = {
