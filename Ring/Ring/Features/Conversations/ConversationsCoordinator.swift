@@ -37,23 +37,27 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
 
     var childCoordinators = [Coordinator]()
 
-    private let navigationViewController = UINavigationController()
+    private let navigationViewController = BaseViewController(with: TabBarItemType.chat)
     private let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
+    let conversationsService: ConversationsService
+    let accountService: AccountsService
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
+        self.conversationsService = injectionBag.conversationsService
+        self.accountService = injectionBag.accountService
 
         self.stateSubject.subscribe(onNext: { [unowned self] (state) in
             guard let state = state as? ConversationsState else { return }
             switch state {
             case .conversationDetail (let conversationViewModel):
                 self.showConversation(withConversationViewModel: conversationViewModel)
-                break
             }
         }).disposed(by: self.disposeBag)
+        self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
 
     }
 

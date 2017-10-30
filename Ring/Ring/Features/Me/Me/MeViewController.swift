@@ -39,7 +39,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     // MARK: - functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = L10n.Global.meTabBarTitle
         self.navigationItem.title = L10n.Global.meTabBarTitle
         self.setupUI()
     }

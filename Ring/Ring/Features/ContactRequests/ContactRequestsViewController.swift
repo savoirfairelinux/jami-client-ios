@@ -40,7 +40,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = L10n.Global.contactRequestsTabBarTitle
         self.navigationItem.title = L10n.Global.contactRequestsTabBarTitle
     }
 

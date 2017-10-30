@@ -138,7 +138,6 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Home" id="o5c-No-Dpq"/>
                     <navigationItem key="navigationItem" id="zLl-0A-Dht"/>
                     <connections>
                         <outlet property="cellularAlertLabel" destination="dHy-gp-i6K" id="W9w-Mi-GTY"/>
