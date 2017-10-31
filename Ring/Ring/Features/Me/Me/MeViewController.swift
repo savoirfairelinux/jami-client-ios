@@ -81,6 +81,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeviceCell.self)
 
                     cell.deviceIdLabel.text = device.deviceId
+                    if let deviceName = device.deviceName {
+                        cell.deviceNameLabel.text = deviceName
+                    }
                     cell.selectionStyle = .none
                     return cell
 

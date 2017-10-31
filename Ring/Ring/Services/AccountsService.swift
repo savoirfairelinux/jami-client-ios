@@ -354,7 +354,7 @@ class AccountsService: AccountAdapterDelegate {
 
         for key in knownRingDevices.allKeys {
             if let key = key as? String {
-                devices.append(DeviceModel(withDeviceId: key))
+                devices.append(DeviceModel(withDeviceId: key, deviceName: knownRingDevices.value(forKey: key) as? String))
             }
         }
 
