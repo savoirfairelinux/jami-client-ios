@@ -23,6 +23,15 @@ import RxSwift
 import Reusable
 import SwiftyBeaver
 
+extension UITextField {
+    func setPadding(_ left: CGFloat, _ right: CGFloat) {
+        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: left, height: self.frame.size.height))
+        self.rightView = UIView(frame: CGRect(x: 0, y: 0, width: right, height: self.frame.size.height))
+        self.leftViewMode = .always
+        self.rightViewMode = .always
+    }
+}
+
 class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
 
     let log = SwiftyBeaver.self
@@ -48,6 +57,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.setupBindings()
 
         self.messageAccessoryView.messageTextField.delegate = self
+
+        self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
 
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
