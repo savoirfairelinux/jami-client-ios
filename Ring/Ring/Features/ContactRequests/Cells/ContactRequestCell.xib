@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="470" height="72"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KZx-bh-W5G" id="YU4-Oq-lYT">
-                <rect key="frame" x="0.0" y="0.0" width="470" height="72"/>
+                <rect key="frame" x="0.0" y="0.0" width="470" height="71.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-Nn-INi" userLabel="Fallback Avatar">
@@ -46,66 +46,65 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="feR-9F-sZM">
-                        <rect key="frame" x="236" y="37.5" width="70" height="30"/>
+                        <rect key="frame" x="244" y="33.5" width="70" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="F6k-BD-rff"/>
                             <constraint firstAttribute="height" constant="30" id="mgC-Pn-LLR"/>
                         </constraints>
                         <state key="normal" title="Accept">
-                            <color key="titleColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.0" green="0.69803921568627447" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </state>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                <real key="value" value="1"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="15"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="value" red="0.0" green="0.69803921568627447" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="5"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <integer key="value" value="2"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWB-HR-tae">
-                        <rect key="frame" x="310" y="37.5" width="70" height="30"/>
+                        <rect key="frame" x="318" y="33.5" width="70" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="BU4-ED-Mry"/>
                             <constraint firstAttribute="height" constant="30" id="fQt-vU-mXY"/>
                         </constraints>
-                        <state key="normal" title="Discard">
-                            <color key="titleColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" title="Ignore">
+                            <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                <real key="value" value="1"/>
+                                <integer key="value" value="2"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="5"/>
+                                <integer key="value" value="15"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pni-bm-rkr">
-                        <rect key="frame" x="384" y="37.5" width="70" height="30"/>
+                        <rect key="frame" x="392" y="33.5" width="70" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Bee-OT-mx8"/>
                             <constraint firstAttribute="width" constant="70" id="dsw-SF-fZe"/>
                         </constraints>
                         <state key="normal" title="Ban">
-                            <color key="titleColor" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                <real key="value" value="1"/>
+                                <integer key="value" value="2"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="0.039215686270000001" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="5"/>
+                                <integer key="value" value="15"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
@@ -120,18 +119,18 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Pni-bm-rkr" firstAttribute="top" secondItem="Dla-OF-biH" secondAttribute="bottom" constant="8" id="0jS-6Q-w8N"/>
+                    <constraint firstItem="Pni-bm-rkr" firstAttribute="top" secondItem="Dla-OF-biH" secondAttribute="bottom" constant="4" id="0jS-6Q-w8N"/>
                     <constraint firstItem="xS9-Kd-lrg" firstAttribute="centerY" secondItem="YU4-Oq-lYT" secondAttribute="centerY" id="DPx-jS-V0h"/>
-                    <constraint firstItem="feR-9F-sZM" firstAttribute="top" secondItem="Dla-OF-biH" secondAttribute="bottom" constant="8" id="Gba-vQ-Ebp"/>
-                    <constraint firstAttribute="bottom" secondItem="Pni-bm-rkr" secondAttribute="bottom" constant="4" id="KNE-9A-qWk"/>
-                    <constraint firstItem="fWB-HR-tae" firstAttribute="top" secondItem="Dla-OF-biH" secondAttribute="bottom" constant="8" id="QMX-zx-zpZ"/>
+                    <constraint firstItem="feR-9F-sZM" firstAttribute="top" secondItem="Dla-OF-biH" secondAttribute="bottom" constant="4" id="Gba-vQ-Ebp"/>
+                    <constraint firstAttribute="bottom" secondItem="Pni-bm-rkr" secondAttribute="bottom" constant="8" id="KNE-9A-qWk"/>
+                    <constraint firstItem="fWB-HR-tae" firstAttribute="top" secondItem="Dla-OF-biH" secondAttribute="bottom" constant="4" id="QMX-zx-zpZ"/>
                     <constraint firstItem="Pni-bm-rkr" firstAttribute="leading" secondItem="fWB-HR-tae" secondAttribute="trailing" constant="4" id="XcH-3n-PeT"/>
-                    <constraint firstAttribute="bottom" secondItem="fWB-HR-tae" secondAttribute="bottom" constant="4" id="Z44-tV-yAn"/>
-                    <constraint firstAttribute="bottom" secondItem="feR-9F-sZM" secondAttribute="bottom" constant="4" id="hAP-C0-nE5"/>
+                    <constraint firstAttribute="bottom" secondItem="fWB-HR-tae" secondAttribute="bottom" constant="8" id="Z44-tV-yAn"/>
+                    <constraint firstAttribute="bottom" secondItem="feR-9F-sZM" secondAttribute="bottom" constant="8" id="hAP-C0-nE5"/>
                     <constraint firstItem="Dla-OF-biH" firstAttribute="top" secondItem="YU4-Oq-lYT" secondAttribute="top" constant="8" id="hqf-Iv-xvb"/>
                     <constraint firstItem="fWB-HR-tae" firstAttribute="leading" secondItem="feR-9F-sZM" secondAttribute="trailing" constant="4" id="lfX-2s-AsZ"/>
                     <constraint firstItem="xS9-Kd-lrg" firstAttribute="leading" secondItem="YU4-Oq-lYT" secondAttribute="leading" constant="16" id="ogz-Qb-1Pz"/>
-                    <constraint firstAttribute="trailing" secondItem="Pni-bm-rkr" secondAttribute="trailing" constant="16" id="sDu-vC-6gU"/>
+                    <constraint firstAttribute="trailing" secondItem="Pni-bm-rkr" secondAttribute="trailing" constant="8" id="sDu-vC-6gU"/>
                     <constraint firstAttribute="trailing" secondItem="Dla-OF-biH" secondAttribute="trailing" constant="8" id="wFU-JT-uD3"/>
                     <constraint firstItem="Dla-OF-biH" firstAttribute="leading" secondItem="xS9-Kd-lrg" secondAttribute="trailing" constant="8" id="zIp-sT-nb3"/>
                 </constraints>
