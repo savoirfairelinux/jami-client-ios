@@ -18,32 +18,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQs-TS-z4j">
-                        <rect key="frame" x="40" y="15" width="325" height="13.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Device ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQs-TS-z4j">
+                        <rect key="frame" x="40" y="10" width="325" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="device" translatesAutoresizingMaskIntoConstraints="NO" id="rQq-Mc-A6A">
-                        <rect key="frame" x="10" y="12" width="20" height="20"/>
+                        <rect key="frame" x="10" y="13.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="GWa-IT-XzN"/>
                             <constraint firstAttribute="height" constant="20" id="yTt-mK-xNR"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emx-P1-xQc">
+                        <rect key="frame" x="40" y="29" width="39.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="OQs-TS-z4j" firstAttribute="centerY" secondItem="fvy-0B-phe" secondAttribute="centerY" id="1ub-Tt-uhc"/>
-                    <constraint firstItem="OQs-TS-z4j" firstAttribute="top" secondItem="fvy-0B-phe" secondAttribute="top" constant="15" id="Bm7-bn-pZ8"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Emx-P1-xQc" secondAttribute="trailing" constant="10" id="3NP-Bl-2xN"/>
+                    <constraint firstAttribute="bottom" secondItem="Emx-P1-xQc" secondAttribute="bottom" constant="10" id="6wl-pE-Xen"/>
+                    <constraint firstItem="OQs-TS-z4j" firstAttribute="top" secondItem="fvy-0B-phe" secondAttribute="top" constant="10" id="Bm7-bn-pZ8"/>
                     <constraint firstItem="rQq-Mc-A6A" firstAttribute="leading" secondItem="fvy-0B-phe" secondAttribute="leading" constant="10" id="CCb-8S-cPs"/>
+                    <constraint firstItem="Emx-P1-xQc" firstAttribute="bottom" secondItem="rQq-Mc-A6A" secondAttribute="bottom" id="Igo-g6-XCa"/>
                     <constraint firstItem="OQs-TS-z4j" firstAttribute="leading" secondItem="rQq-Mc-A6A" secondAttribute="trailing" constant="10" id="SBZ-1f-gmH"/>
+                    <constraint firstItem="Emx-P1-xQc" firstAttribute="leading" secondItem="OQs-TS-z4j" secondAttribute="leading" id="VnE-T5-ZB0"/>
+                    <constraint firstItem="Emx-P1-xQc" firstAttribute="top" secondItem="OQs-TS-z4j" secondAttribute="bottom" constant="1" id="XT2-Vy-7Bn"/>
                     <constraint firstAttribute="trailing" secondItem="OQs-TS-z4j" secondAttribute="trailing" constant="10" id="c1v-0c-oUl"/>
-                    <constraint firstAttribute="bottom" secondItem="OQs-TS-z4j" secondAttribute="bottom" constant="15" id="uZX-qs-oIK"/>
-                    <constraint firstItem="rQq-Mc-A6A" firstAttribute="centerY" secondItem="fvy-0B-phe" secondAttribute="centerY" id="vxW-wo-3mL"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="deviceIdLabel" destination="OQs-TS-z4j" id="UZg-Z8-A28"/>
+                <outlet property="deviceNameLabel" destination="Emx-P1-xQc" id="Z5C-rX-Jmc"/>
             </connections>
             <point key="canvasLocation" x="85.5" y="124"/>
         </tableViewCell>
