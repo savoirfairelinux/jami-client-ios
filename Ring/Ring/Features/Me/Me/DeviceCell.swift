@@ -24,4 +24,5 @@ import RxSwift
 
 class DeviceCell: UITableViewCell, NibReusable {
     @IBOutlet weak var deviceIdLabel: UILabel!
+    @IBOutlet weak var deviceNameLabel: UILabel!
 }
