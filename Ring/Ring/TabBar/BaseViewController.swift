@@ -54,6 +54,7 @@ class BaseViewController: UINavigationController {
     }
     convenience init(with type: TabBarItemType) {
         self.init()
+        self.navigationBar.isTranslucent = false
         self.tabBarItem = type.tabBarItem
     }
 }
