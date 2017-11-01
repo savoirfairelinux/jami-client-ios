@@ -170,6 +170,10 @@ class CreateAccountViewModel: Stateable, ViewModel {
     lazy var passwordValidationState: Observable<PasswordValidationState> = {
         return Observable.combineLatest(self.password.asObservable(), self.confirmPassword.asObservable())
         { (password: String, confirmPassword: String) -> PasswordValidationState in
+            if password.isEmpty && confirmPassword.isEmpty {
+                return .validated
+            }
+
             if password.characters.count < 6 {
                 return .error(message: L10n.Createaccount.passwordCharactersNumberError)
             }
@@ -186,17 +190,19 @@ class CreateAccountViewModel: Stateable, ViewModel {
         return Observable.combineLatest(self.passwordValidationState.asObservable(),
                                         self.usernameValidationState.asObservable(),
                                         self.registerUsername.asObservable(),
+                                        self.username.asObservable(),
                                         self.createState,
                                         resultSelector:
             { ( passwordValidationState: PasswordValidationState,
                 usernameValidationState: UsernameValidationState,
                 registerUsername: Bool,
+                username: String,
                 creationState: AccountCreationState) -> Bool in
 
                 var canAsk = true
 
                 if registerUsername {
-                    canAsk = canAsk && usernameValidationState.isAvailable
+                    canAsk = canAsk && usernameValidationState.isAvailable && !username.isEmpty
                 }
 
                 canAsk = canAsk && passwordValidationState.isValidated
@@ -220,13 +226,10 @@ class CreateAccountViewModel: Stateable, ViewModel {
             switch status {
             case .lookingUp:
                 self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.Createaccount.lookingForUsernameAvailability)
-                break
             case .invalid:
                 self?.usernameValidationState.value = .invalid(message: L10n.Createaccount.invalidUsername)
-                break
             case .alreadyTaken:
                 self?.usernameValidationState.value = .unavailable(message: L10n.Createaccount.usernameAlreadyTaken)
-                break
             default:
                 self?.usernameValidationState.value = .available
             }
@@ -277,3 +280,4 @@ class CreateAccountViewModel: Stateable, ViewModel {
                                            password: self.password.value)
     }
 }
+
