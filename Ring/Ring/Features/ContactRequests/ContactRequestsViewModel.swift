@@ -34,6 +34,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     let accountsService: AccountsService
     let conversationService: ConversationsService
     let nameService: NameService
+    let presenceService: PresenceService
 
     fileprivate let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
@@ -45,6 +46,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         self.accountsService = injectionBag.accountService
         self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
+        self.presenceService = injectionBag.presenceService
 
         self.injectionBag = injectionBag
 
@@ -96,6 +98,10 @@ class ContactRequestsViewModel: Stateable, ViewModel {
                 self.log.debug("Message saved")
             })
             .disposed(by: disposeBag)
+
+        self.presenceService.subscribeBuddy(withAccountId: (self.accountsService.currentAccount?.id)!,
+                                            withUri: item.contactRequest.ringId,
+                                            withFlag: true)
 
         if let vCard = item.contactRequest.vCard {
             let saveVCardCompleted = self.contactsService.saveVCard(vCard: vCard, forContactWithRingId: item.contactRequest.ringId)
