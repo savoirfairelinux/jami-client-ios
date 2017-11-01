@@ -62,12 +62,6 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
             .bind(to: self.pinLabel.rx.isVisible)
             .addDisposableTo(self.disposeBag)
 
-        passwordField.rx.text
-            .map({!$0!.isEmpty})
-            .shareReplay(1)
-            .bind(to: okButton.rx.isEnabled)
-            .addDisposableTo(self.disposeBag)
-
         self.viewModel.observableState
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
@@ -115,3 +109,4 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         self.explanationMessage.text = self.viewModel.explanationMessage
     }
 }
+

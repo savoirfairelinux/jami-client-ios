@@ -35,13 +35,9 @@ class LinkDeviceViewModel: Stateable, ViewModel {
     }()
 
     lazy var linkButtonEnabledState: Observable<Bool>  = {
-        return Observable.combineLatest(self.password.asObservable(),
-                                        self.pin.asObservable()) {(password, pin) -> Bool in
-                                            if !password.isEmpty && !pin.isEmpty {
-                                                return true
-                                            }
-                                            return false
-        }
+        return self.pin.asObservable().map({ pin in
+            return !pin.isEmpty
+        })
     }()
 
     let pin = Variable<String>("")
@@ -76,3 +72,4 @@ class LinkDeviceViewModel: Stateable, ViewModel {
                                               password: self.password.value)
     }
 }
+
