@@ -30,26 +30,25 @@ enum VCardFields: String {
     case photoJPEG = "PHOTO;TYPE=JPEG;ENCODING=BASE64:"
     case photoPNG  = "PHOTO;TYPE=PNG;ENCODING=BASE64:"
     case end       = "END:VCARD"
+    case name      = "N:"
+    case fullName  = "FN:"
 }
 
 extension CNContactVCardSerialization {
 
     class func dataWithImageAndUUID(from contact: CNContact, andImageCompression compressedSize: Int?) throws -> Data {
 
-        var vcData = try CNContactVCardSerialization.data(with: [contact])
+        let beginString = VCardFields.begin.rawValue + "\n"
+        let entryUID = VCardFields.uid.rawValue + contact.identifier + "\n"
+        let name = contact.familyName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let firstname = VCardFields.name.rawValue + name + "\n"
+        let fullName = VCardFields.fullName.rawValue + name + "\n"
+        let endString = VCardFields.end.rawValue
 
-        guard var vcString = String(data: vcData, encoding: String.Encoding.utf8) else {
-            return vcData
-        }
-
-        let entryUID = VCardFields.uid.rawValue + contact.identifier
-        vcString = vcString.replacingOccurrences(of: VCardFields.begin.rawValue,
-                                                 with: (VCardFields.begin.rawValue +
-                                                    "\n" + entryUID))
+        var vCardString = beginString + entryUID + firstname + fullName + endString
 
         guard var image = contact.imageData  else {
-            vcData = vcString.data(using: .utf8)!
-            return vcData
+            return vCardString.data(using: .utf8)!
         }
 
         var photofieldName = VCardFields.photoPNG
@@ -57,7 +56,8 @@ extension CNContactVCardSerialization {
         // if we need smallest image first scale it and than compress
         var scaledImage: UIImage?
         if compressedSize != nil {
-            scaledImage =  UIImage(data: image)?.convert(toSize: CGSize(width:50.0, height:50.0), scale: 1)
+             scaledImage =  UIImage(data: image)?
+                .convert(toSize: CGSize(width: 50.0, height: 50.0), scale: 1)
         }
 
         if let scaledImage = scaledImage {
@@ -68,9 +68,9 @@ extension CNContactVCardSerialization {
 
         if let compressionSize = compressedSize, image.count > compressionSize {
             // compress image before sending vCard
-            guard let compressedImage = UIImage(data: image)?.convertToData(ofMaxSize: compressionSize)else {
-                vcData = vcString.data(using: .utf8)!
-                return vcData
+            guard let compressedImage = UIImage(data: image)?
+                .convertToData(ofMaxSize: compressionSize)else {
+                return vCardString.data(using: .utf8)!
             }
 
             image = compressedImage
@@ -79,10 +79,9 @@ extension CNContactVCardSerialization {
 
         let base64Image =  image.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
         let vcardImageString = photofieldName.rawValue + base64Image + "\n"
-        vcString = vcString.replacingOccurrences(of: VCardFields.end.rawValue, with: (vcardImageString + VCardFields.end.rawValue))
+        vCardString = vCardString.replacingOccurrences(of: VCardFields.end.rawValue, with: (vcardImageString + VCardFields.end.rawValue))
 
-        vcData = vcString.data(using: .utf8)!
+        return vCardString.data(using: .utf8)!
 
-        return vcData
     }
 }
