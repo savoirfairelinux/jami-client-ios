@@ -259,9 +259,11 @@ class ConversationViewModel: ViewModel {
 
     fileprivate var unreadMessagesCount: Int {
         let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-        return self.conversation.messages.filter({ message in
+        let unreadMessages =  self.conversation.messages
+            .filter({ message in
             return message.status != .read && message.author != accountHelper.ringId!
-        }).count
+        })
+        return unreadMessages.count
     }
 
     func sendContactRequest() {
