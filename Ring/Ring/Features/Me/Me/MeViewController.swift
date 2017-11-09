@@ -67,8 +67,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     func setUpDataSource() {
 
-        let settingsItmeDataSource = RxTableViewSectionedReloadDataSource<SettingsSection>()
-
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SettingsSection.Item)
             -> UITableViewCell = {
                 ( dataSource: TableViewSectionedDataSource<SettingsSection>,
@@ -98,13 +96,13 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 }
         }
 
-        settingsItmeDataSource.configureCell = configureCell
+        let settingsItemDataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: configureCell)
         self.viewModel.settings
-            .bind(to: self.settingsTable.rx.items(dataSource: settingsItmeDataSource))
+            .bind(to: self.settingsTable.rx.items(dataSource: settingsItemDataSource))
             .disposed(by: disposeBag)
 
         //Set header titles
-        settingsItmeDataSource.titleForHeaderInSection = { dataSource, index in
+        settingsItemDataSource.titleForHeaderInSection = { dataSource, index in
             return dataSource.sectionModels[index].header
         }
     }
