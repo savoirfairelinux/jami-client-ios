@@ -136,10 +136,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     func setupDataSources() {
 
-        //Create DataSources for conversations and filtered conversations
-        let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationSection>()
-        let searchResultsDatasource = RxTableViewSectionedReloadDataSource<ConversationSection>()
-
         //Configure cells closure for the datasources
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
             -> UITableViewCell = {
@@ -205,13 +201,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 return cell
         }
 
+        //Create DataSources for conversations and filtered conversations
+        let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
+        let searchResultsDatasource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
+
         //Allows to delete
         conversationsDataSource.canEditRowAtIndexPath = { _ in
             return true
         }
-
-        conversationsDataSource.configureCell = configureCell
-        searchResultsDatasource.configureCell = configureCell
 
         //Bind TableViews to DataSources
         self.viewModel.conversations

@@ -199,6 +199,7 @@
 		56BBC9D41EDC7A6D00CDAF8B /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
 		56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */; };
 		56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56C715FE1F0D36C600770048 /* ContactsAdapter.mm */; };
+		5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C093F001FB495830011D90E /* Differentiator.framework */; };
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
 		621231FB1F8D6FEE009B86F0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231FA1F8D6FEE009B86F0 /* MessageCell.swift */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
@@ -447,6 +448,7 @@
 		56C715FE1F0D36C600770048 /* ContactsAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContactsAdapter.mm; sourceTree = "<group>"; };
 		56C716001F0D36D900770048 /* ContactsAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsAdapterDelegate.swift; sourceTree = "<group>"; };
 		56C716021F0D466100770048 /* ContactsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
+		5C093F001FB495830011D90E /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		621231FA1F8D6FEE009B86F0 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */,
 				0ED666101F9FED1C00743D42 /* AMPopTip.framework in Frameworks */,
 				0EEFBA3C1F83DA21000EDBAD /* libsecp256k1.a in Frameworks */,
 				1A3CA32B1F102BB700283748 /* Chameleon.framework in Frameworks */,
@@ -573,6 +576,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C093F001FB495830011D90E /* Differentiator.framework */,
 				0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */,
 				62DFAB2B1F9FF030002D6F9C /* Reachability.framework */,
 				0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */,
@@ -1310,6 +1314,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
 				"$(SRCROOT)/Carthage/build/iOS/AMPopTip.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 			);
 			name = "⚙️ Copy Frameworks";
 			outputPaths = (
@@ -1324,6 +1329,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyBeaver.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Chameleon.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AMPopTip.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
