@@ -1,5 +1,5 @@
-github "RxSwiftCommunity/RxRealm"
-github "RxSwiftCommunity/RxDataSources" == 1.0.3
+github "RxSwiftCommunity/RxRealm" ~> 0.7
+github "RxSwiftCommunity/RxDataSources" ~> 3.0
 github "pkluz/PKHUD"
 github "AliSoftware/Reusable" ~> 4.0
 github "SwiftyBeaver/SwiftyBeaver"
