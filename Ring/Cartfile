@@ -1,6 +1,6 @@
 github "RxSwiftCommunity/RxRealm" ~> 0.7
 github "RxSwiftCommunity/RxDataSources" ~> 3.0
-github "pkluz/PKHUD"
+github "pkluz/PKHUD" ~> 5.0
 github "AliSoftware/Reusable" ~> 4.0
 github "SwiftyBeaver/SwiftyBeaver"
 github "ViccAlexander/Chameleon"
