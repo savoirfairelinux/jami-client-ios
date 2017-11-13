@@ -47,7 +47,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     var bottomOffset: CGFloat = 0
     let scrollOffsetThreshold: CGFloat = 600
 
-    fileprivate var backgroundColorObservable: Observable<UIColor>!
+    fileprivate var fallbackBGColorObservable: Observable<UIColor>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +93,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
 
         // UIColor that observes "best Id" prefix
-        self.backgroundColorObservable = viewModel.userName.asObservable()
+        self.fallbackBGColorObservable = viewModel.userName.asObservable()
             .observeOn(MainScheduler.instance)
             .map { name in
                 let scanner = Scanner(string: name.toMD5HexString().prefixString())
@@ -443,18 +443,34 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             if messageVM.sequencing == .lastOfSequence || messageVM.sequencing == .singleMessage {
                 cell.profileImage?.isHidden = false
 
+                // Set placeholder avatar
+                do {
+                    let name = try viewModel.userName.value()
+                    let scanner = Scanner(string: name.toMD5HexString().prefixString())
+                    var index: UInt64 = 0
+                    if scanner.scanHexInt64(&index) {
+                        fallbackAvatar.backgroundColor = avatarColors[Int(index)]
+                        if viewModel.conversation.recipientRingId != name {
+                            fallbackAvatar.text = name.prefixString().capitalized
+                        }
+                    }
+                } catch { }
+
+                // Observe in case of a lookup
+                self.fallbackBGColorObservable
+                    .subscribe(onNext: { [weak fallbackAvatar] backgroundColor in
+                        fallbackAvatar?.backgroundColor = backgroundColor
+                    })
+                    .disposed(by: cell.disposeBag)
+
                 // Avatar placeholder initial
                 viewModel.userName.asObservable()
                     .observeOn(MainScheduler.instance)
+                    .filter({ userName in
+                        return userName != self.viewModel.conversation.recipientRingId
+                    })
                     .map { value in value.prefixString().capitalized }
                     .bind(to: fallbackAvatar.rx.text)
-                    .disposed(by: cell.disposeBag)
-
-                // Set placeholder avatar to backgroundColorObservable
-                self.backgroundColorObservable
-                    .subscribe(onNext: { backgroundColor in
-                        fallbackAvatar.backgroundColor = backgroundColor
-                    })
                     .disposed(by: cell.disposeBag)
 
                 // Set image if any
@@ -479,19 +495,13 @@ extension ConversationViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let messageViewModel = self.messageViewModels?[indexPath.row] {
-            if messageViewModel.bubblePosition() == .received {
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellReceived.self)
-                formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
-                return cell
-            } else if messageViewModel.bubblePosition() == .sent {
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
-                formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
-                return cell
-            } else if messageViewModel.bubblePosition() == .generated {
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellGenerated.self)
-                formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
-                return cell
-            }
+            let type =  messageViewModel.bubblePosition() == .received ? MessageCellReceived.self :
+                        messageViewModel.bubblePosition() == .sent ? MessageCellSent.self :
+                        messageViewModel.bubblePosition() == .generated ? MessageCellGenerated.self :
+                        MessageCellGenerated.self
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: type)
+            formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
+            return cell
         }
 
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)

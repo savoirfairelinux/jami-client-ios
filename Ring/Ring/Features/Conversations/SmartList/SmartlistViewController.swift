@@ -154,6 +154,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 // Avatar placeholder initial
                 item.userName.asObservable()
                     .observeOn(MainScheduler.instance)
+                    .filter({ userName in
+                        return userName != item.conversation.recipientRingId
+                    })
                     .map { value in value.prefixString().capitalized }
                     .bind(to: cell.fallbackAvatar.rx.text)
                     .disposed(by: cell.disposeBag)

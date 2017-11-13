@@ -76,6 +76,9 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 // Avatar placeholder initial
                 item.userName.asObservable()
                     .observeOn(MainScheduler.instance)
+                    .filter({ userName in
+                        return userName != item.contactRequest.ringId
+                    })
                     .map { value in value.prefixString().capitalized }
                     .bind(to: cell.fallbackAvatar.rx.text)
                     .disposed(by: cell.disposeBag)

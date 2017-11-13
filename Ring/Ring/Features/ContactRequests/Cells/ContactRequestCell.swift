@@ -31,6 +31,18 @@ class ContactRequestCell: UITableViewCell, NibReusable {
     @IBOutlet weak var discardButton: UIButton!
     @IBOutlet weak var banButton: UIButton!
 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        let fallbackAvatarBGColor = self.fallbackAvatar.backgroundColor
+        super.setSelected(selected, animated: animated)
+        self.fallbackAvatar.backgroundColor = fallbackAvatarBGColor
+    }
+
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        let fallbackAvatarBGColor = self.fallbackAvatar.backgroundColor
+        super.setSelected(highlighted, animated: animated)
+        self.fallbackAvatar.backgroundColor = fallbackAvatarBGColor
+    }
+
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
