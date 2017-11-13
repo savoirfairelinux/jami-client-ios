@@ -50,9 +50,15 @@ class VCardUtils {
         }
     }
 
-    class func loadVCard(named name: String, inFolder folder: String) -> Single<CNContact> {
+    class func loadVCard(named name: String, inFolder folder: String, contactService: ContactsService? = nil) -> Single<CNContact> {
         return Single.create(subscribe: { single in
-            if let directoryURL = VCardUtils.getFilePath(forFile: name, inFolder: folder, createIfNotExists: false) {
+            if let contactRequest = contactService?.contactRequest(withRingId: name) {
+                if let vCard = contactRequest.vCard {
+                    single(.success(vCard))
+                } else {
+                    single(.error(ContactServiceError.loadVCardFailed))
+                }
+            } else if let directoryURL = VCardUtils.getFilePath(forFile: name, inFolder: folder, createIfNotExists: false) {
                 do {
                     if let data = FileManager.default.contents(atPath: directoryURL.path) {
                         let vCard = try CNContactVCardSerialization.contacts(with: data)
