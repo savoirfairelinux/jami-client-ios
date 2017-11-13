@@ -74,8 +74,23 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     .disposed(by: cell.disposeBag)
 
                 // Avatar placeholder initial
+                cell.fallbackAvatar.text = nil
+                let name = item.userName.value
+                let scanner = Scanner(string: name.toMD5HexString().prefixString())
+                var index: UInt64 = 0
+                if scanner.scanHexInt64(&index) {
+                    cell.fallbackAvatar.isHidden = false
+                    cell.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
+                    if item.contactRequest.ringId != name {
+                        cell.fallbackAvatar.text = name.prefixString().capitalized
+                    }
+                }
+
                 item.userName.asObservable()
                     .observeOn(MainScheduler.instance)
+                    .filter({ [weak item] userName in
+                        return userName != item?.contactRequest.ringId
+                    })
                     .map { value in value.prefixString().capitalized }
                     .bind(to: cell.fallbackAvatar.rx.text)
                     .disposed(by: cell.disposeBag)

@@ -112,7 +112,7 @@ class ConversationViewModel: ViewModel {
                 .disposed(by: disposeBag)
 
             if let contactUserName = contact?.userName {
-                self.userName.onNext(contactUserName)
+                self.userName.value = contactUserName
             } else {
 
                 let recipientRingId = self.conversation.recipientRingId
@@ -124,10 +124,10 @@ class ConversationViewModel: ViewModel {
                             lookupNameResponse.address == recipientRingId
                     }).subscribe(onNext: { [unowned self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
-                            self.userName.onNext(name)
+                            self.userName.value = name
                             contact?.userName = name
                         } else if let address = lookupNameResponse.address {
-                            self.userName.onNext(address)
+                            self.userName.value = address
                         }
                     }).disposed(by: disposeBag)
 
@@ -154,7 +154,7 @@ class ConversationViewModel: ViewModel {
 
     var messages: Observable<[MessageViewModel]>!
 
-    var userName = BehaviorSubject(value: "")
+    var userName = Variable<String>("")
 
     var profileImageData: Data?
 
