@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_fbffc8a8",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-11-14T22:37:38Z",
+      "side": 1,
+      "message": "I agree that removing the default letter is a must, but I think that having 3 possible avatar types may be too much. I suggest we toss that idea around, as it should apply to all clients.",
+      "parentUuid": "7a42497e_dbdc8c77",
+      "range": {
+        "startLine": 456,
+        "startChar": 24,
+        "endLine": 456,
+        "endChar": 38
+      },
+      "revId": "aaa3aadf34def18b285a687026e00598f2c31cd2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_5b2cfc4a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-11-14T22:37:38Z",
+      "side": 1,
+      "message": "Removing the \"R\" and the default color. Something that we did in initial implementations of the fallback avatar on other platforms. If we can\u0027t get a username there is a greater problem.",
+      "parentUuid": "7a42497e_bb92609d",
+      "range": {
+        "startLine": 456,
+        "startChar": 47,
+        "endLine": 456,
+        "endChar": 48
+      },
+      "revId": "aaa3aadf34def18b285a687026e00598f2c31cd2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_5be99c19",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2017-11-14T14:39:27Z",
       "side": 1,
       "message": "fallbackAvatar is strongly retained in this closure. It could be useful to weakify it.",
+      "range": {
+        "startLine": 466,
+        "startChar": 24,
+        "endLine": 466,
+        "endChar": 38
+      },
+      "revId": "aaa3aadf34def18b285a687026e00598f2c31cd2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_3b3130a3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-11-14T22:37:38Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "7a42497e_5be99c19",
       "range": {
         "startLine": 466,
         "startChar": 24,
