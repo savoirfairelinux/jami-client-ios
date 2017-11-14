@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_bb92609d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-11-14T14:39:27Z",
+      "side": 1,
+      "message": "Why \"R\"?\nThis should be specified and set as localizable or constant for example.",
+      "range": {
+        "startLine": 456,
+        "startChar": 47,
+        "endLine": 456,
+        "endChar": 48
+      },
+      "revId": "aaa3aadf34def18b285a687026e00598f2c31cd2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_5be99c19",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-11-14T14:39:27Z",
+      "side": 1,
+      "message": "fallbackAvatar is strongly retained in this closure. It could be useful to weakify it.",
+      "range": {
+        "startLine": 466,
+        "startChar": 24,
+        "endLine": 466,
+        "endChar": 38
+      },
+      "revId": "aaa3aadf34def18b285a687026e00598f2c31cd2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
