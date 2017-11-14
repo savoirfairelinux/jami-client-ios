@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_dbdc8c77",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2017-11-14T15:06:58Z",
+      "side": 1,
+      "message": "Goal of a letter in a circle is to make the icon more personal and increase engagement if we don\u0027t have a profile picture for a contact.\nI think that using \"R\" as a default replacement lettre defeats the purpose of lettre icons and makes more likely that a contact named \"Roman\" (with a name starting with \"R\") will be ignored when the user scans the letters.\nIMO if we don\u0027t even have a username or profile name, then no lettre should be shown at all, since the name of the contact doesn\u0027t start by \"R\", and the \"ring:\" prefix is purely technical and is not expected to be known/understood by users.  It would be like using \"H\" for an icon of a webpage.\nIn this case a placeholder contact icon can be used instead (maybe tinted with a color derived from the contact URI).",
+      "range": {
+        "startLine": 456,
+        "startChar": 24,
+        "endLine": 456,
+        "endChar": 38
+      },
+      "revId": "aaa3aadf34def18b285a687026e00598f2c31cd2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_5be99c19",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
         "patchSetId": 2
