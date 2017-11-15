@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_9bab2489",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-11-15T22:31:44Z",
+      "side": 1,
+      "message": "Yeah, so when the RingId is the only available name, we show just the colored circle for now. I suggest another patch for the addition of the fallback fallback avatar image overlay.",
+      "parentUuid": "7a42497e_dbe64c16",
+      "range": {
+        "startLine": 456,
+        "startChar": 24,
+        "endLine": 456,
+        "endChar": 38
+      },
+      "revId": "aaa3aadf34def18b285a687026e00598f2c31cd2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_5be99c19",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
         "patchSetId": 2
