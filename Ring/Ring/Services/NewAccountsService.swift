@@ -26,7 +26,7 @@ enum AccountError: Error {
     case unknownError
 }
 
-final class NewAccountService {
+final class NewAccountsService {
 
     fileprivate let log = SwiftyBeaver.self
     fileprivate let accountAdapter: AccountAdapter
@@ -142,7 +142,7 @@ final class NewAccountService {
 
 }
 
-extension NewAccountService {
+extension NewAccountsService {
 
     fileprivate func loadAccountsIdsFromDaemon() -> [String] {
         return self.accountAdapter.getAccountList() as? [String] ?? []
@@ -228,7 +228,7 @@ extension NewAccountService {
 
 }
 
-extension NewAccountService: AccountAdapterDelegate {
+extension NewAccountsService: AccountAdapterDelegate {
 
     func accountsChanged() {
         log.debug("Accounts changed.")

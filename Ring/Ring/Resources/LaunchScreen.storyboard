@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -49,10 +49,10 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="0tt-6B-dHo" secondAttribute="bottom" id="Bwv-uE-mOw"/>
                             <constraint firstItem="QbZ-1j-Ebd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="GdO-YK-ig4"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="QbZ-1j-Ebd" secondAttribute="bottom" id="OrU-s1-c96"/>
                             <constraint firstItem="vy5-r8-oQ3" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="PE3-VY-U9r"/>
                             <constraint firstItem="vy5-r8-oQ3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="U34-24-7hY"/>
                             <constraint firstItem="0tt-6B-dHo" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="WEG-5j-2f3"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="QbZ-1j-Ebd" secondAttribute="bottom" id="cuZ-iQ-p7p"/>
                             <constraint firstItem="0tt-6B-dHo" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="h0e-hO-zEy"/>
                             <constraint firstAttribute="trailing" secondItem="0tt-6B-dHo" secondAttribute="trailing" id="hq4-6q-gx1"/>
                             <constraint firstItem="QbZ-1j-Ebd" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="mB5-R8-Vf7"/>

@@ -83,19 +83,19 @@ extension Coordinator {
                  withStyle style: PresentationStyle,
                  withAnimation animation: Bool) {
         switch style {
-        case .present: self.rootViewController.present(viewController,
-                                                       animated: animation,
-                                                       completion: nil)
-            break
+        case .present:
+            self.rootViewController.present(viewController,
+                                            animated: animation,
+                                            completion: nil)
         case .popup:
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .coverVertical
             self.rootViewController.present(viewController,
                                             animated: animation,
                                             completion: nil)
-            break
-        case .show: self.rootViewController.show(viewController, sender: nil)
-            break
+        case .show:
+            self.rootViewController.show(viewController,
+                                         sender: nil)
         case .appear:
             viewController.modalPresentationStyle = .overFullScreen
             viewController.modalTransitionStyle = .crossDissolve

@@ -200,7 +200,9 @@
 		56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */; };
 		56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56C715FE1F0D36C600770048 /* ContactsAdapter.mm */; };
 		5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C093F001FB495830011D90E /* Differentiator.framework */; };
-		5CBEBEB61FB4B50F00A47455 /* NewAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBEBEB51FB4B50F00A47455 /* NewAccountService.swift */; };
+		5CBEBEB61FB4B50F00A47455 /* NewAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBEBEB51FB4B50F00A47455 /* NewAccountsService.swift */; };
+		5CC50ABD1FBA58C9003CCCF4 /* InitialLoadingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CC50ABC1FBA58C9003CCCF4 /* InitialLoadingViewController.storyboard */; };
+		5CC50ABF1FBA59A4003CCCF4 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC50ABE1FBA59A4003CCCF4 /* InitialLoadingViewController.swift */; };
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
 		621231FB1F8D6FEE009B86F0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231FA1F8D6FEE009B86F0 /* MessageCell.swift */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
@@ -450,7 +452,9 @@
 		56C716001F0D36D900770048 /* ContactsAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsAdapterDelegate.swift; sourceTree = "<group>"; };
 		56C716021F0D466100770048 /* ContactsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
 		5C093F001FB495830011D90E /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
-		5CBEBEB51FB4B50F00A47455 /* NewAccountService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAccountService.swift; sourceTree = "<group>"; };
+		5CBEBEB51FB4B50F00A47455 /* NewAccountsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAccountsService.swift; sourceTree = "<group>"; };
+		5CC50ABC1FBA58C9003CCCF4 /* InitialLoadingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialLoadingViewController.storyboard; sourceTree = "<group>"; };
+		5CC50ABE1FBA59A4003CCCF4 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		621231FA1F8D6FEE009B86F0 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
@@ -601,7 +605,7 @@
 		02E1A0261DDE4C2E00D75B59 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				5CBEBEB51FB4B50F00A47455 /* NewAccountService.swift */,
+				5CBEBEB51FB4B50F00A47455 /* NewAccountsService.swift */,
 				56BBC9A01ED714DF00CDAF8B /* MessagesAdapterDelegate.swift */,
 				56BBC9A11ED714DF00CDAF8B /* ConversationsService.swift */,
 				02B22E081DF7585F000358C9 /* DaemonService.swift */,
@@ -873,6 +877,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				5CC50AB91FBA585A003CCCF4 /* InitialLoading */,
 				0E9D84471FA7D9EC00C561EB /* TabBar */,
 				0EDE34C51F868D2D00FFA15C /* Shared */,
 				1A0C4EBD1F1D48DD00550433 /* Walkthrough */,
@@ -1142,6 +1147,15 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		5CC50AB91FBA585A003CCCF4 /* InitialLoading */ = {
+			isa = PBXGroup;
+			children = (
+				5CC50ABC1FBA58C9003CCCF4 /* InitialLoadingViewController.storyboard */,
+				5CC50ABE1FBA59A4003CCCF4 /* InitialLoadingViewController.swift */,
+			);
+			path = InitialLoading;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1262,6 +1276,7 @@
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
 				1A2D18E61F29197100B2C785 /* MessageAccessoryView.xib in Resources */,
 				1A2D18F81F292D7200B2C785 /* MessageCellSent.xib in Resources */,
+				5CC50ABD1FBA58C9003CCCF4 /* InitialLoadingViewController.storyboard in Resources */,
 				1A2D18F61F292D7200B2C785 /* MessageCellReceived.xib in Resources */,
 				0ED2B6FA1F96A075001572F0 /* LinkNewDeviceViewController.storyboard in Resources */,
 				1A2D18EF1F291A0100B2C785 /* MeDetailViewController.storyboard in Resources */,
@@ -1374,7 +1389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
-				5CBEBEB61FB4B50F00A47455 /* NewAccountService.swift in Sources */,
+				5CBEBEB61FB4B50F00A47455 /* NewAccountsService.swift in Sources */,
 				0E2D5F531F9145C800D574BF /* LinkNewDeviceCell.swift in Sources */,
 				0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */,
 				621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */,
@@ -1389,6 +1404,7 @@
 				1A2D18A11F27A6D600B2C785 /* LinkDeviceViewController.swift in Sources */,
 				1A0C4EDC1F1D4B7E00550433 /* WelcomeViewController.swift in Sources */,
 				1A2D18D81F2918EE00B2C785 /* MeDetailViewController.swift in Sources */,
+				5CC50ABF1FBA59A4003CCCF4 /* InitialLoadingViewController.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
 				1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */,
