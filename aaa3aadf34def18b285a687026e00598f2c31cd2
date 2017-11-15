@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_dbe64c16",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2017-11-15T19:13:03Z",
+      "side": 1,
+      "message": "Indeed should be consistent in all clients\n\n* a raw RingID will show when no username have been registered and no profile name is available. This will be the case in many scenarios\n* a raw RingID has no personal/literal meaning and is not meant to be read/remembered by humans (at worst, it might be visually compared with other RingIDs). Also the first char is often a number that can be misled for an amount of unread stuff. IMO we should not use the first letter of the raw ringID for the icon\n* showing a gray or colored plain contact icon for \"ringID\" contacts seems reasonable in this scenario, where there is no name of any kind available for a contact\n* other idea ?",
+      "parentUuid": "7a42497e_fbffc8a8",
+      "range": {
+        "startLine": 456,
+        "startChar": 24,
+        "endLine": 456,
+        "endChar": 38
+      },
+      "revId": "aaa3aadf34def18b285a687026e00598f2c31cd2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_5be99c19",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
         "patchSetId": 2
