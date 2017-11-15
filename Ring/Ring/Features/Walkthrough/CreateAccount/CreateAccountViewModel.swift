@@ -155,7 +155,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let confirmPasswordTitle = L10n.Createaccount.repeatPasswordPlaceholder
 
     // MARK: - Low level services
-    private let accountService: AccountsService
+    private let accountService: NewAccountsService
     private let nameService: NameService
 
     // MARK: - Rx Variables for UI binding
@@ -214,7 +214,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     }()
 
     required init (with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
+        self.accountService = injectionBag.newAccountsService
         self.nameService = injectionBag.nameService
 
         //Loookup name request observer
@@ -237,26 +237,26 @@ class CreateAccountViewModel: Stateable, ViewModel {
 
         //Name registration observer
         self.accountService
-            .sharedResponseStream
+            .daemonSignalsObservable
             .filter({ [unowned self] (event) in
                 return event.eventType == ServiceEventType.registrationStateChanged &&
                     event.getEventInput(ServiceEventInput.registrationState) == Unregistered &&
                     self.registerUsername.value
             })
             .subscribe(onNext: { [unowned self] _ in
-
-                //Launch the process of name registration
-                if let currentAccountId = self.accountService.currentAccount?.id {
-                    self.nameService.registerName(withAccount: currentAccountId,
+                self.accountService.currentAccount().subscribe(onSuccess: { (account) in
+                    self.nameService.registerName(withAccount: account.id,
                                                   password: self.password.value,
                                                   name: self.username.value)
-                }
+                }, onError: { (error) in
+                    print(error)
+                }).disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
 
         //Account creation state observer
         self.accountService
-            .sharedResponseStream
+            .daemonSignalsObservable
             .subscribe(onNext: { [unowned self] event in
                 if event.getEventInput(ServiceEventInput.registrationState) == Unregistered {
                     self.accountCreationState.value = .success
@@ -268,7 +268,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
                 } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
                     self.accountCreationState.value = .error(error: AccountCreationError.network)
                 }
-                }, onError: { [unowned self] _ in
+            }, onError: { [unowned self] _ in
                     self.accountCreationState.value = .error(error: AccountCreationError.unknown)
             }).disposed(by: disposeBag)
 
@@ -276,8 +276,11 @@ class CreateAccountViewModel: Stateable, ViewModel {
 
     func createAccount() {
         self.accountCreationState.value = .started
-        self.accountService.addRingAccount(withUsername: self.username.value,
-                                           password: self.password.value)
+        self.accountService
+            .addRingAccount(username: self.username.value, password: self.password.value)
+            .subscribe(onNext: { (_) in
+            }, onError: { (_) in
+            })
+            .disposed(by: self.disposeBag)
     }
 }
-

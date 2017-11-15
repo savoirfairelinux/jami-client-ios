@@ -40,7 +40,7 @@ final class NewAccountsService {
         self.accountAdapter = accountAdapter
         //~ Registering to the accountAdatpter with self as delegate in order to receive delegation
         //~ callbacks.
-//        AccountAdapter.delegate = self
+        AccountAdapter.delegate = self
     }
 
     func currentAccount() -> Single<AccountModel> {
