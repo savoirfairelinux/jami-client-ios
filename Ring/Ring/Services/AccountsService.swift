@@ -28,11 +28,6 @@ enum LinkNewDeviceError: Error {
     case unknownError
 }
 
-enum AddAccountError: Error {
-    case templateNotConform
-    case unknownError
-}
-
 class AccountsService: AccountAdapterDelegate {
     // MARK: Private members
 
@@ -131,7 +126,7 @@ class AccountsService: AccountAdapterDelegate {
         self.accountAdapter = accountAdapter
         //~ Registering to the accountAdatpter with self as delegate in order to receive delegation
         //~ callbacks.
-        AccountAdapter.delegate = self
+//        AccountAdapter.delegate = self
 
     }
 
@@ -189,7 +184,7 @@ class AccountsService: AccountAdapterDelegate {
             ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
             let accountId = self.accountAdapter.addAccount(ringDetails)
             guard accountId != nil else {
-                throw AddAccountError.unknownError
+                throw AccountError.unknownError
             }
 
             var account = self.getAccount(fromAccountId: accountId!)
@@ -227,7 +222,7 @@ class AccountsService: AccountAdapterDelegate {
             ringDetails.updateValue(pin, forKey: ConfigKey.archivePIN.rawValue)
             let accountId = self.accountAdapter.addAccount(ringDetails)
             guard accountId != nil else {
-                throw AddAccountError.unknownError
+                throw AccountError.unknownError
             }
 
             var account = self.getAccount(fromAccountId: accountId!)
@@ -370,7 +365,7 @@ class AccountsService: AccountAdapterDelegate {
         let details: NSMutableDictionary = accountAdapter.getAccountTemplate(AccountType.ring.rawValue)
         var accountDetails = details as NSDictionary? as? [String: String] ?? nil
         if accountDetails == nil {
-            throw AddAccountError.templateNotConform
+            throw AccountError.templateNotConform
         }
         accountDetails!.updateValue("false", forKey: ConfigKey.videoEnabled.rawValue)
         accountDetails!.updateValue("sipinfo", forKey: ConfigKey.accountDTMFType.rawValue)
