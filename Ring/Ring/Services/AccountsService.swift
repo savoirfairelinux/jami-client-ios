@@ -444,8 +444,7 @@ class AccountsService: AccountAdapterDelegate {
             }
     }
 
-    func exportOnRingEndeded(forAccout account: String, state: Int, pin: String) {
-
+    func exportOnRingEnded(for account: String, state: Int, pin: String) {
         let changedAccount = getAccount(fromAccountId: account)
         if let changedAccount = changedAccount {
             let accountHelper = AccountModelHelper(withAccount: changedAccount)

@@ -79,7 +79,7 @@ final class NewAccountsService {
     }
 
     func addRingAccount(username: String?, password: String) -> Observable<AccountModel> {
-        let single: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
+        let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
             do {
                 var ringDetails = try self.loadInitialAccountDetailsFromDaemon()
                 if let username = username {
@@ -100,44 +100,26 @@ final class NewAccountsService {
         })
 
         let filteredDaemonSignals = self.daemonSignals.filter { (serviceEvent) -> Bool in
-            return serviceEvent.eventType == ServiceEventType.accountsChanged
+            if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
+                throw AccountCreationError.generic
+            } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
+                throw AccountCreationError.network
+            }
+
+            let isRegistrationStateChanged = serviceEvent.eventType == ServiceEventType.registrationStateChanged
+            let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
+            return isRegistrationStateChanged && isRegistered
         }
 
-        return Observable.combineLatest(single.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, _) -> AccountModel in
+        return Observable.combineLatest(createAccountSingle.asObservable(),
+                                        filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
+            guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
+                throw AccountError.unknownError
+            }
             return accountModel
         }.flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
             return self.getAccount(fromAccountId: accountModel.id).asObservable()
-        }).retry(3)
-    }
-
-    func linkToRingAccount(withPin pin: String, password: String) -> Observable<AccountModel> {
-        let single = Single<AccountModel>.create(subscribe: { (single) -> Disposable in
-            do {
-                var ringDetails = try self.loadInitialAccountDetailsFromDaemon()
-                ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
-                ringDetails.updateValue(pin, forKey: ConfigKey.archivePIN.rawValue)
-
-                guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
-                    throw AddAccountError.unknownError
-                }
-                let account = try self.buildAccountFromDaemon(accountId: accountId)
-                single(.success(account))
-            } catch {
-                single(.error(error))
-            }
-            return Disposables.create {
-            }
         })
-
-        let filteredDaemonSignals = self.daemonSignals.filter { (serviceEvent) -> Bool in
-            return serviceEvent.eventType == ServiceEventType.accountsChanged
-        }
-
-        return Observable.combineLatest(single.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, _) -> AccountModel in
-            return accountModel
-        }.flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
-                return self.getAccount(fromAccountId: accountModel.id).asObservable()
-        }).retry(3)
     }
 
 }
@@ -220,7 +202,6 @@ extension NewAccountsService {
             accountModel.credentialDetails.removeAll()
             accountModel.credentialDetails.append(contentsOf: credentialDetails)
         } catch {
-            log.error("\(error)")
             throw error
         }
         return accountModel
@@ -238,47 +219,20 @@ extension NewAccountsService: AccountAdapterDelegate {
     }
 
     func registrationStateChanged(with response: RegistrationResponse) {
-        log.debug("RegistrationStateChanged.")
+        log.debug("Registration state changed.")
 
         var event = ServiceEvent(withEventType: .registrationStateChanged)
         event.addEventInput(.registrationState, value: response.state)
+        event.addEventInput(.accountId, value: response.accountId)
         self.daemonSignals.onNext(event)
     }
 
     func knownDevicesChanged(for account: String, devices: [String: String]) {
-//        let changedAccount = self.getAccount(fromAccountId: account)
-//        if let changedAccount = changedAccount {
-//            let accountHelper = AccountModelHelper(withAccount: changedAccount)
-//            if let  uri = accountHelper.ringId {
-//                var event = ServiceEvent(withEventType: .knownDevicesChanged)
-//                event.addEventInput(.uri, value: uri)
-//                self.responseStream.onNext(event)
-//            }
-//        }
-//        let changedAccount = self.getAccount(fromAccountId: account).subscribe(onSuccess: { [unowned self] account in
-//            let accountHelper = AccountModelHelper(withAccount: changedAccount)
-//            if let uri = accountHelper.ringId {
-//                var event = ServiceEvent(withEventType: .knownDevicesChanged)
-//                event.addEventInput(.uri, value: uri)
-//                self.daemonSignals.onNext(event)
-//            }
-//        }, onError: { error in
-//
-//        })
+        log.debug("Known devices changed.")
     }
 
-    func exportOnRingEndeded(forAccout account: String, state: Int, pin: String) {
-//        let changedAccount = getAccount(fromAccountId: account)
-//        if let changedAccount = changedAccount {
-//            let accountHelper = AccountModelHelper(withAccount: changedAccount)
-//            if let  uri = accountHelper.ringId {
-//                var event = ServiceEvent(withEventType: .exportOnRingEnded)
-//                event.addEventInput(.uri, value: uri)
-//                event.addEventInput(.state, value: state)
-//                event.addEventInput(.pin, value: pin)
-//                self.responseStream.onNext(event)
-//            }
-//        }
+    func exportOnRingEnded(for account: String, state: Int, pin: String) {
+        log.debug("Export on Ring ended.")
     }
 
 }

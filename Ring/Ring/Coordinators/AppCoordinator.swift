@@ -87,8 +87,8 @@ class AppCoordinator: Coordinator, StateableResponsive {
                 } else {
                     self.stateSubject.onNext(AppState.needToOnboard)
                 }
-                }, onError: { (error) in
-                    print(error)
+            }, onError: { (error) in
+                print(error)
             })
             .disposed(by: self.disposeBag)
     }

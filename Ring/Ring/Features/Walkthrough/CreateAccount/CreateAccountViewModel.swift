@@ -234,52 +234,26 @@ class CreateAccountViewModel: Stateable, ViewModel {
                 self?.usernameValidationState.value = .available
             }
         }).disposed(by: self.disposeBag)
-
-        //Name registration observer
-        self.accountService
-            .daemonSignalsObservable
-            .filter({ [unowned self] (event) in
-                return event.eventType == ServiceEventType.registrationStateChanged &&
-                    event.getEventInput(ServiceEventInput.registrationState) == Unregistered &&
-                    self.registerUsername.value
-            })
-            .subscribe(onNext: { [unowned self] _ in
-                self.accountService.currentAccount().subscribe(onSuccess: { (account) in
-                    self.nameService.registerName(withAccount: account.id,
-                                                  password: self.password.value,
-                                                  name: self.username.value)
-                }, onError: { (error) in
-                    print(error)
-                }).disposed(by: self.disposeBag)
-            })
-            .disposed(by: disposeBag)
-
-        //Account creation state observer
-        self.accountService
-            .daemonSignalsObservable
-            .subscribe(onNext: { [unowned self] event in
-                if event.getEventInput(ServiceEventInput.registrationState) == Unregistered {
-                    self.accountCreationState.value = .success
-                    Observable<Int>.timer(Durations.alertFlashDuration.value, period: nil, scheduler: MainScheduler.instance).subscribe(onNext: { [unowned self] (_) in
-                        self.stateSubject.onNext(WalkthroughState.accountCreated)
-                    }).disposed(by: self.disposeBag)
-                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
-                    self.accountCreationState.value = .error(error: AccountCreationError.generic)
-                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                    self.accountCreationState.value = .error(error: AccountCreationError.network)
-                }
-            }, onError: { [unowned self] _ in
-                    self.accountCreationState.value = .error(error: AccountCreationError.unknown)
-            }).disposed(by: disposeBag)
-
     }
 
     func createAccount() {
         self.accountCreationState.value = .started
+        
         self.accountService
             .addRingAccount(username: self.username.value, password: self.password.value)
-            .subscribe(onNext: { (_) in
-            }, onError: { (_) in
+            .subscribe(onNext: { [unowned self] (account) in
+                self.accountCreationState.value = .success
+                self.stateSubject.onNext(WalkthroughState.accountCreated)
+
+                self.nameService.registerName(withAccount: account.id,
+                                              password: self.password.value,
+                                              name: self.username.value)
+            }, onError: { [unowned self] (error) in
+                if let error = error as? AccountCreationError {
+                    self.accountCreationState.value = .error(error: error)
+                } else {
+                    self.accountCreationState.value = .error(error: AccountCreationError.unknown)
+                }
             })
             .disposed(by: self.disposeBag)
     }
