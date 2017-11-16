@@ -42,6 +42,7 @@ enum ServiceEventType {
  Keys that can be set as keys of the private input dictionary
  */
 enum ServiceEventInput {
+    case accountId
     case id
     case state
     case registrationState
