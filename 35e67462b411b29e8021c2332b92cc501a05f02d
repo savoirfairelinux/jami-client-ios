@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_fbc0682c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-11-16T20:39:21Z",
+      "side": 1,
+      "message": "\u003e When would this occur?\n\nI\u0027m sorry, what do you mean?",
+      "parentUuid": "7a42497e_3bbbf0c5",
+      "range": {
+        "startLine": 457,
+        "startChar": 24,
+        "endLine": 457,
+        "endChar": 27
+      },
+      "revId": "35e67462b411b29e8021c2332b92cc501a05f02d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_9b8204ff",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
         "patchSetId": 5
