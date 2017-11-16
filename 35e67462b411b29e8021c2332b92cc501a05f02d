@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_3b8db032",
+        "filename": "Ring/Ring/Features/ContactRequests/ContactRequestsViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-11-16T19:47:04Z",
+      "side": 1,
+      "message": "I have my doubts concerning the retention of this class in this closure. Could lead to a retention cycle. Could you please check this?",
+      "range": {
+        "startLine": 80,
+        "startChar": 43,
+        "endLine": 80,
+        "endChar": 47
+      },
+      "revId": "35e67462b411b29e8021c2332b92cc501a05f02d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_7b873810",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-11-16T19:47:04Z",
+      "side": 1,
+      "message": "We should process caught errors.",
+      "range": {
+        "startLine": 457,
+        "startChar": 24,
+        "endLine": 457,
+        "endChar": 27
+      },
+      "revId": "35e67462b411b29e8021c2332b92cc501a05f02d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_9b8204ff",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-11-16T19:47:04Z",
+      "side": 1,
+      "message": "I think that self is retained in this closure.",
+      "range": {
+        "startLine": 470,
+        "startChar": 43,
+        "endLine": 470,
+        "endChar": 47
+      },
+      "revId": "35e67462b411b29e8021c2332b92cc501a05f02d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_db7bec27",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-11-16T19:47:04Z",
+      "side": 1,
+      "message": "Same doubts as the previous comment. Thx!",
+      "range": {
+        "startLine": 158,
+        "startChar": 43,
+        "endLine": 158,
+        "endChar": 47
+      },
+      "revId": "35e67462b411b29e8021c2332b92cc501a05f02d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
