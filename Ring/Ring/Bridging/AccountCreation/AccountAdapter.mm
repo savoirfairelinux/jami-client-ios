@@ -69,7 +69,7 @@ static id <AccountAdapterDelegate> _delegate;
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
             NSInteger stateN = state;
             NSString* pinN = [NSString stringWithUTF8String:pin.c_str()];
-            [AccountAdapter.delegate exportOnRingEndededForAccout:accountId state:stateN pin:pinN];
+            [AccountAdapter.delegate exportOnRingEndedFor:accountId state:stateN pin:pinN];
         }
     }));
 
