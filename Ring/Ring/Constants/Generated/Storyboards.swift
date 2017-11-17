@@ -70,6 +70,13 @@ enum StoryboardScene {
 
     static let initialScene = InitialSceneType<Ring.CreateProfileViewController>(storyboard: CreateProfileViewController.self)
   }
+  enum InitialLoadingViewController: StoryboardType {
+    static let storyboardName = "InitialLoadingViewController"
+
+    static let initialScene = InitialSceneType<Ring.InitialLoadingViewController>(storyboard: InitialLoadingViewController.self)
+
+    static let initialLoadingViewController = SceneType<Ring.InitialLoadingViewController>(storyboard: InitialLoadingViewController.self, identifier: "InitialLoadingViewController")
+  }
   enum LaunchScreen: StoryboardType {
     static let storyboardName = "LaunchScreen"
 

@@ -209,6 +209,9 @@
 		56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */; };
 		56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56C715FE1F0D36C600770048 /* ContactsAdapter.mm */; };
 		5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C093F001FB495830011D90E /* Differentiator.framework */; };
+		5C0FACC51FBE2B3F007B8032 /* NewAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0FACC41FBE2B3F007B8032 /* NewAccountsService.swift */; };
+		5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE66F731FBF769B00EE9291 /* InitialLoadingViewController.storyboard */; };
+		5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE66F741FBF769B00EE9291 /* InitialLoadingViewController.swift */; };
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
 		621231FB1F8D6FEE009B86F0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231FA1F8D6FEE009B86F0 /* MessageCell.swift */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
@@ -467,6 +470,9 @@
 		56C716001F0D36D900770048 /* ContactsAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsAdapterDelegate.swift; sourceTree = "<group>"; };
 		56C716021F0D466100770048 /* ContactsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
 		5C093F001FB495830011D90E /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
+		5C0FACC41FBE2B3F007B8032 /* NewAccountsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountsService.swift; sourceTree = "<group>"; };
+		5CE66F731FBF769B00EE9291 /* InitialLoadingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InitialLoadingViewController.storyboard; sourceTree = "<group>"; };
+		5CE66F741FBF769B00EE9291 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		621231FA1F8D6FEE009B86F0 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
@@ -961,6 +967,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				5CE66F721FBF765D00EE9291 /* InitialLoading */,
 				0E9D84471FA7D9EC00C561EB /* TabBar */,
 				0EDE34C51F868D2D00FFA15C /* Shared */,
 				1A0C4EBD1F1D48DD00550433 /* Walkthrough */,
@@ -1230,6 +1237,16 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		5CE66F721FBF765D00EE9291 /* InitialLoading */ = {
+			isa = PBXGroup;
+			children = (
+				5CE66F731FBF769B00EE9291 /* InitialLoadingViewController.storyboard */,
+				5CE66F741FBF769B00EE9291 /* InitialLoadingViewController.swift */,
+			);
+			name = InitialLoading;
+			path = Features/InitialLoading;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1411,6 +1428,7 @@
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
 				1A5DC0381F35675E0075E8EF /* ContactRequestCell.xib in Resources */,
 				1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */,
+				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
 				0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */,
 				1A2D18B31F2915C500B2C785 /* ConversationViewController.storyboard in Resources */,
@@ -1529,6 +1547,7 @@
 				1A0C4EDC1F1D4B7E00550433 /* WelcomeViewController.swift in Sources */,
 				1A2D18D81F2918EE00B2C785 /* MeDetailViewController.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
+				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
 				1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */,
 				1A5DC0241F3564360075E8EF /* ContactRequestModel.swift in Sources */,
