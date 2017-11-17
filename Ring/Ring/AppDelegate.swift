@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
     private let accountService = AccountsService(withAccountAdapter: AccountAdapter())
+    private let newAccountsService = NewAccountsService(withAccountAdapter: AccountAdapter())
     private let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
     private let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
     private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
@@ -43,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
                             withAccountService: self.accountService,
+                            withNewAccountsService: self.newAccountsService,
                             withNameService: self.nameService,
                             withConversationService: self.conversationsService,
                             withContactsService: self.contactsService,
@@ -56,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let log = SwiftyBeaver.self
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -108,8 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Ring Daemon
-    fileprivate func startDaemon() {
-
+    private func startDaemon() {
         do {
             try self.daemonService.startDaemon()
         } catch StartDaemonError.initializationFailure {
@@ -123,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    fileprivate func stopDaemon() {
+    private func stopDaemon() {
         do {
             try self.daemonService.stopDaemon()
         } catch StopDaemonError.daemonNotRunning {
