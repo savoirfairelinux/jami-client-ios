@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,7 +19,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import RxSwift
 
 enum PasswordValidationState {
@@ -135,8 +135,6 @@ extension AccountCreationError: LocalizedError {
     }
 }
 
-// swiftlint:disable opening_brace
-// swiftlint:disable closure_parameter_position
 class CreateAccountViewModel: Stateable, ViewModel {
 
     // MARK: - Rx Stateable
@@ -155,7 +153,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let confirmPasswordTitle = L10n.Createaccount.repeatPasswordPlaceholder
 
     // MARK: - Low level services
-    private let accountService: AccountsService
+    private let accountService: NewAccountsService
     private let nameService: NameService
 
     // MARK: - Rx Variables for UI binding
@@ -168,13 +166,12 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let confirmPassword = Variable<String>("")
     let registerUsername = Variable<Bool>(true)
     lazy var passwordValidationState: Observable<PasswordValidationState> = {
-        return Observable.combineLatest(self.password.asObservable(), self.confirmPassword.asObservable())
-        { (password: String, confirmPassword: String) -> PasswordValidationState in
+        return Observable.combineLatest(self.password.asObservable(), self.confirmPassword.asObservable()) { (password: String, confirmPassword: String) -> PasswordValidationState in
             if password.isEmpty && confirmPassword.isEmpty {
                 return .validated
             }
 
-            if password.characters.count < 6 {
+            if password.count < 6 {
                 return .error(message: L10n.Createaccount.passwordCharactersNumberError)
             }
 
@@ -214,7 +211,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     }()
 
     required init (with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
+        self.accountService = injectionBag.newAccountsService
         self.nameService = injectionBag.nameService
 
         //Loookup name request observer
@@ -234,49 +231,30 @@ class CreateAccountViewModel: Stateable, ViewModel {
                 self?.usernameValidationState.value = .available
             }
         }).disposed(by: self.disposeBag)
-
-        //Name registration observer
-        self.accountService
-            .sharedResponseStream
-            .filter({ [unowned self] (event) in
-                return event.eventType == ServiceEventType.registrationStateChanged &&
-                    event.getEventInput(ServiceEventInput.registrationState) == Unregistered &&
-                    self.registerUsername.value
-            })
-            .subscribe(onNext: { [unowned self] _ in
-
-                //Launch the process of name registration
-                if let currentAccountId = self.accountService.currentAccount?.id {
-                    self.nameService.registerName(withAccount: currentAccountId,
-                                                  password: self.password.value,
-                                                  name: self.username.value)
-                }
-            })
-            .disposed(by: disposeBag)
-
-        //Account creation state observer
-        self.accountService
-            .sharedResponseStream
-            .subscribe(onNext: { [unowned self] event in
-                if event.getEventInput(ServiceEventInput.registrationState) == Unregistered {
-                    self.accountCreationState.value = .success
-                    Observable<Int>.timer(Durations.alertFlashDuration.value, period: nil, scheduler: MainScheduler.instance).subscribe(onNext: { [unowned self] (_) in
-                        self.stateSubject.onNext(WalkthroughState.accountCreated)
-                    }).disposed(by: self.disposeBag)
-                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
-                    self.accountCreationState.value = .error(error: AccountCreationError.generic)
-                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                    self.accountCreationState.value = .error(error: AccountCreationError.network)
-                }
-                }, onError: { [unowned self] _ in
-                    self.accountCreationState.value = .error(error: AccountCreationError.unknown)
-            }).disposed(by: disposeBag)
-
     }
 
     func createAccount() {
         self.accountCreationState.value = .started
-        self.accountService.addRingAccount(withUsername: self.username.value,
-                                           password: self.password.value)
+
+        let username = self.username.value
+        let password = self.password.value
+
+        self.accountService
+            .addRingAccount(username: username, password: password)
+            .subscribe(onNext: { [unowned self] (account) in
+                self.accountCreationState.value = .success
+                self.stateSubject.onNext(WalkthroughState.accountCreated)
+
+                self.nameService.registerName(withAccount: account.id,
+                                              password: password,
+                                              name: username)
+                }, onError: { [unowned self] (error) in
+                    if let error = error as? AccountCreationError {
+                        self.accountCreationState.value = .error(error: error)
+                    } else {
+                        self.accountCreationState.value = .error(error: AccountCreationError.unknown)
+                    }
+            })
+            .disposed(by: self.disposeBag)
     }
 }
