@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="COY-AX-993">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Initial Loading View Controller-->
+        <scene sceneID="TMt-ny-p8w">
+            <objects>
+                <viewController storyboardIdentifier="InitialLoadingViewController" id="COY-AX-993" customClass="InitialLoadingViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dJI-hR-sdc"/>
+                        <viewControllerLayoutGuide type="bottom" id="yiq-Ru-NtI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aRx-1z-bhh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mT3-yy-Ins">
+                                <rect key="frame" x="162" y="320.5" width="51" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_ring" translatesAutoresizingMaskIntoConstraints="NO" id="0jH-Qw-sbt">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vx3-sT-ceQ" userLabel="Gradient View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="logo-ring-beta2-blanc" translatesAutoresizingMaskIntoConstraints="NO" id="noP-kw-7tM">
+                                        <rect key="frame" x="97.5" y="300.5" width="180" height="66"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="T5f-Vn-hsM">
+                                        <rect key="frame" x="169.5" y="374.5" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="OXD-aw-oL2"/>
+                                            <constraint firstAttribute="width" constant="37" id="W9J-rm-eGu"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="T5f-Vn-hsM" firstAttribute="top" secondItem="noP-kw-7tM" secondAttribute="bottom" constant="8" id="9DO-PZ-5no"/>
+                                    <constraint firstItem="T5f-Vn-hsM" firstAttribute="centerX" secondItem="vx3-sT-ceQ" secondAttribute="centerX" id="LBl-Ca-4f2"/>
+                                    <constraint firstItem="noP-kw-7tM" firstAttribute="centerY" secondItem="vx3-sT-ceQ" secondAttribute="centerY" id="OjY-lE-ODE"/>
+                                    <constraint firstItem="noP-kw-7tM" firstAttribute="centerX" secondItem="vx3-sT-ceQ" secondAttribute="centerX" id="q4D-DQ-coq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0jH-Qw-sbt" firstAttribute="leading" secondItem="aRx-1z-bhh" secondAttribute="leading" id="7DO-cX-ZHu"/>
+                            <constraint firstAttribute="bottom" secondItem="vx3-sT-ceQ" secondAttribute="bottom" id="Dbq-On-bgN"/>
+                            <constraint firstItem="mT3-yy-Ins" firstAttribute="centerX" secondItem="aRx-1z-bhh" secondAttribute="centerX" id="TUh-hS-ILM"/>
+                            <constraint firstItem="0jH-Qw-sbt" firstAttribute="top" secondItem="aRx-1z-bhh" secondAttribute="top" id="Ttd-hs-cxC"/>
+                            <constraint firstAttribute="trailing" secondItem="0jH-Qw-sbt" secondAttribute="trailing" id="bQI-fo-zjq"/>
+                            <constraint firstItem="mT3-yy-Ins" firstAttribute="centerY" secondItem="aRx-1z-bhh" secondAttribute="centerY" id="hcy-ws-hgV"/>
+                            <constraint firstAttribute="trailing" secondItem="vx3-sT-ceQ" secondAttribute="trailing" id="iio-7B-a2J"/>
+                            <constraint firstItem="vx3-sT-ceQ" firstAttribute="top" secondItem="aRx-1z-bhh" secondAttribute="top" id="ltY-hm-fnP"/>
+                            <constraint firstItem="yiq-Ru-NtI" firstAttribute="top" secondItem="0jH-Qw-sbt" secondAttribute="bottom" id="vPl-N3-Vvw"/>
+                            <constraint firstItem="vx3-sT-ceQ" firstAttribute="leading" secondItem="aRx-1z-bhh" secondAttribute="leading" id="yoR-WM-6bH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vc6-gh-ZiE"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u5I-td-CmB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.5" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background_ring" width="750" height="1334"/>
+        <image name="logo-ring-beta2-blanc" width="180" height="66"/>
+    </resources>
+</document>
