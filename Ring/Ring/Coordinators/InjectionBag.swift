@@ -18,13 +18,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
-
 /// We can centralize in this bag every service that is to be used by every layer of the app
 class InjectionBag {
 
     let daemonService: DaemonService
     let accountService: AccountsService
+    let newAccountsService: NewAccountsService
     let nameService: NameService
     let conversationsService: ConversationsService
     let contactsService: ContactsService
@@ -33,6 +32,7 @@ class InjectionBag {
 
     init (withDaemonService daemonService: DaemonService,
           withAccountService accountService: AccountsService,
+          withNewAccountsService newAccountsService: NewAccountsService,
           withNameService nameService: NameService,
           withConversationService conversationService: ConversationsService,
           withContactsService contactsService: ContactsService,
@@ -40,6 +40,7 @@ class InjectionBag {
           withNetworkService networkService: NetworkService) {
         self.daemonService = daemonService
         self.accountService = accountService
+        self.newAccountsService = newAccountsService
         self.nameService = nameService
         self.conversationsService = conversationService
         self.contactsService = contactsService
