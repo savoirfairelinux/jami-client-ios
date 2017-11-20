@@ -40,7 +40,7 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive {
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         self.contactService = injectionBag.contactsService
-        self.navigationViewController.viewModel = ContactRequestTabBarItem(with: self.injectionBag)
+        self.navigationViewController.viewModel = ContactRequestTabBarItemViewModel(with: self.injectionBag)
         self.stateSubject.subscribe(onNext: { [unowned self] (state) in
             guard let state = state as? ConversationsState else { return }
             switch state {
