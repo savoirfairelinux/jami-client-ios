@@ -106,6 +106,12 @@ class ConversationViewModel: ViewModel {
                 }).disposed(by: self.disposeBag)
 
             // subscribe to presence updates for the conversation's associated contact
+            if let contactPresence = self.presenceService.contactPresence[contactRingId] {
+                self.contactPresence.value = contactPresence
+            } else {
+                self.log.warning("Contact presence unkown for: \(contactRingId)")
+                self.contactPresence.value = false
+            }
             self.presenceService
                 .sharedResponseStream
                 .filter({ presenceUpdateEvent in
@@ -114,7 +120,7 @@ class ConversationViewModel: ViewModel {
                 })
                 .subscribe(onNext: { [unowned self] presenceUpdateEvent in
                     if let uri: String = presenceUpdateEvent.getEventInput(.uri) {
-                        self.contactPresence.onNext(self.presenceService.contactPresence[uri]!)
+                        self.contactPresence.value = self.presenceService.contactPresence[uri]!
                     }
                 })
                 .disposed(by: disposeBag)
@@ -122,7 +128,7 @@ class ConversationViewModel: ViewModel {
             if let contactUserName = contact?.userName {
                 self.userName.value = contactUserName
             } else {
-
+                self.userName.value = contactRingId
                 // Return an observer for the username lookup
                 self.nameService.usernameLookupStatus
                     .filter({ lookupNameResponse in
@@ -158,7 +164,7 @@ class ConversationViewModel: ViewModel {
 
     var inviteButtonIsAvailable = BehaviorSubject(value: true)
 
-    var contactPresence = BehaviorSubject(value: false)
+    var contactPresence = Variable<Bool>(false)
 
     var unreadMessages: String {
        return self.unreadMessagesCount.description

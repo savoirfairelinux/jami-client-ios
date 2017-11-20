@@ -26,6 +26,7 @@ class ConversationCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var fallbackAvatar: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var fallbackAvatarImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var newMessagesIndicator: UIView!
     @IBOutlet weak var newMessagesLabel: UILabel!

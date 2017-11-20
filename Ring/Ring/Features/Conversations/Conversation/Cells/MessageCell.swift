@@ -38,6 +38,7 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var failedStatusLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var fallbackAvatar: UILabel!
+    @IBOutlet weak var fallbackAvatarImage: UIImageView!
 
     var disposeBag = DisposeBag()
 
