@@ -18,11 +18,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import RxSwift
 
 protocol TabBarItemViewModel {
-    var itemBadgeValue: Observable<String?> {get set}
+    var itemBadgeValueObservable: Observable<String?> { get set }
 }
 
 public enum TabBarItemType {
@@ -33,28 +32,35 @@ public enum TabBarItemType {
     var tabBarItem: UITabBarItem {
         switch self {
         case .chat:
-            return UITabBarItem(title: L10n.Global.homeTabBarTitle, image: UIImage(named: "conversation_icon"), selectedImage: UIImage(named: "conversation_icon"))
+            return UITabBarItem(title: L10n.Global.homeTabBarTitle,
+                                image: UIImage(named: "conversation_icon"),
+                                selectedImage: UIImage(named: "conversation_icon"))
         case .account:
-            return UITabBarItem(title: L10n.Global.meTabBarTitle, image: UIImage(named: "account_icon"), selectedImage: UIImage(named: "account_icon"))
+            return UITabBarItem(title: L10n.Global.meTabBarTitle,
+                                image: UIImage(named: "account_icon"),
+                                selectedImage: UIImage(named: "account_icon"))
         case .contactRequest:
-            return UITabBarItem(title: L10n.Global.contactRequestsTabBarTitle, image: UIImage(named: "contact_request_icon"), selectedImage: UIImage(named: "contact_request_icon"))
+            return UITabBarItem(title: L10n.Global.contactRequestsTabBarTitle,
+                                image: UIImage(named: "contact_request_icon"),
+                                selectedImage: UIImage(named: "contact_request_icon"))
         }
     }
 }
 
 class BaseViewController: UINavigationController {
 
-    let disposeBag = DisposeBag()
-
     var viewModel: TabBarItemViewModel? {
         didSet {
-            self.viewModel?.itemBadgeValue.bind(to: self.tabBarItem.rx.badgeValue)
-                .disposed(by: self.disposeBag)
+            _ = self.viewModel?.itemBadgeValueObservable
+                .takeUntil(self.rx.deallocated)
+                .bind(to: self.tabBarItem.rx.badgeValue)
         }
     }
+
     convenience init(with type: TabBarItemType) {
         self.init()
         self.navigationBar.isTranslucent = false
         self.tabBarItem = type.tabBarItem
     }
+
 }

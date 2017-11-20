@@ -200,6 +200,7 @@
 		56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */; };
 		56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56C715FE1F0D36C600770048 /* ContactsAdapter.mm */; };
 		5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C093F001FB495830011D90E /* Differentiator.framework */; };
+		5CBADD081FC36DA5009CEFD7 /* ConversationModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBADD071FC36DA5009CEFD7 /* ConversationModelHelper.swift */; };
 		5CE66F781FBF80B700EE9291 /* NewAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE66F771FBF80B700EE9291 /* NewAccountsService.swift */; };
 		5CE66F7C1FBF811200EE9291 /* InitialLoadingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE66F7A1FBF811200EE9291 /* InitialLoadingViewController.storyboard */; };
 		5CE66F7D1FBF811200EE9291 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE66F7B1FBF811200EE9291 /* InitialLoadingViewController.swift */; };
@@ -452,6 +453,7 @@
 		56C716001F0D36D900770048 /* ContactsAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsAdapterDelegate.swift; sourceTree = "<group>"; };
 		56C716021F0D466100770048 /* ContactsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
 		5C093F001FB495830011D90E /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
+		5CBADD071FC36DA5009CEFD7 /* ConversationModelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModelHelper.swift; sourceTree = "<group>"; };
 		5CE66F771FBF80B700EE9291 /* NewAccountsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAccountsService.swift; sourceTree = "<group>"; };
 		5CE66F7A1FBF811200EE9291 /* InitialLoadingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InitialLoadingViewController.storyboard; sourceTree = "<group>"; };
 		5CE66F7B1FBF811200EE9291 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
@@ -1032,6 +1034,7 @@
 				1A2D18BD1F29180700B2C785 /* ContactModel.swift */,
 				1A2D18BE1F29180700B2C785 /* ConversationModel.swift */,
 				1A2D18BF1F29180700B2C785 /* DeviceModel.swift */,
+				5CBADD071FC36DA5009CEFD7 /* ConversationModelHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1467,6 +1470,7 @@
 				5CE66F781FBF80B700EE9291 /* NewAccountsService.swift in Sources */,
 				1A3D28A91F0EBF0200B524EE /* UIView+Ring.swift in Sources */,
 				1A2041881F1EA1EA00C08435 /* CreateAccountViewModel.swift in Sources */,
+				5CBADD081FC36DA5009CEFD7 /* ConversationModelHelper.swift in Sources */,
 				62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */,
 				1ABE07D21F0D8FE800D36361 /* Images.swift in Sources */,
 				0273C3081E0C68BF00CF00BA /* DesignableButton.swift in Sources */,
