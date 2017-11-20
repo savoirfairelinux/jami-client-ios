@@ -75,6 +75,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
                 // Avatar placeholder initial
                 cell.fallbackAvatar.text = nil
+                cell.fallbackAvatarImage.isHidden = true
                 let name = item.userName.value
                 let scanner = Scanner(string: name.toMD5HexString().prefixString())
                 var index: UInt64 = 0
@@ -83,6 +84,8 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     cell.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
                     if item.contactRequest.ringId != name {
                         cell.fallbackAvatar.text = name.prefixString().capitalized
+                    } else {
+                        cell.fallbackAvatarImage.isHidden = false
                     }
                 }
 
@@ -93,6 +96,12 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     })
                     .map { value in value.prefixString().capitalized }
                     .bind(to: cell.fallbackAvatar.rx.text)
+                    .disposed(by: cell.disposeBag)
+
+                item.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { [weak item] userName in userName != item?.contactRequest.ringId }
+                    .bind(to: cell.fallbackAvatarImage.rx.isHidden)
                     .disposed(by: cell.disposeBag)
 
                 // UIColor that observes "best Id" prefix
