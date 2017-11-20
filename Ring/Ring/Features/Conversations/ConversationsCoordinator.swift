@@ -18,7 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import RxSwift
 
 /// Represents Conversations navigation state
@@ -31,24 +30,25 @@ enum ConversationsState: State {
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
 class ConversationsCoordinator: Coordinator, StateableResponsive {
 
+    // MARK: Coordinator
     var rootViewController: UIViewController {
         return self.navigationViewController
     }
 
     var childCoordinators = [Coordinator]()
+    // MARK: -
 
-    private let navigationViewController = BaseViewController(with: TabBarItemType.chat)
-    private let injectionBag: InjectionBag
+    // MARK: StateableResponsive
     let disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
-    let conversationsService: ConversationsService
-    let accountService: AccountsService
+    // MARK: -
+
+    private let navigationViewController = BaseViewController(with: TabBarItemType.chat)
+    private let injectionBag: InjectionBag
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
-        self.conversationsService = injectionBag.conversationsService
-        self.accountService = injectionBag.accountService
 
         self.stateSubject.subscribe(onNext: { [unowned self] (state) in
             guard let state = state as? ConversationsState else { return }
@@ -57,8 +57,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
                 self.showConversation(withConversationViewModel: conversationViewModel)
             }
         }).disposed(by: self.disposeBag)
-        self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
 
+        self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
     }
 
     func start () {
