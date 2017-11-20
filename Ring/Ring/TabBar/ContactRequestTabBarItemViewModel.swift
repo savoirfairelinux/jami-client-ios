@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,19 +19,28 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import RxSwift
 
-class ContactRequestTabBarItem: ViewModel, TabBarItemViewModel {
+final class ContactRequestTabBarItemViewModel: ViewModel, TabBarItemViewModel {
 
-    var itemBadgeValue: Observable<String?>
+    private let itemBadgeValue: Variable<String?> = Variable(nil)
+    lazy var itemBadgeValueObservable: Observable<String?> = {
+        return self.itemBadgeValue.asObservable()
+    }()
+
+    private let contactsService: ContactsService
+    private let disposeBag = DisposeBag()
 
     required init(with injectionBag: InjectionBag) {
-        let contactService = injectionBag.contactsService
-        self.itemBadgeValue = contactService.contactRequests.asObservable().map({items in
-            if items.isEmpty {
-                return nil
+        self.contactsService = injectionBag.contactsService
+
+        self.contactsService.contactRequests.asObservable().subscribe(onNext: { [weak self] requests in
+            if requests.isEmpty {
+                self?.itemBadgeValue.value = nil
+            } else {
+                self?.itemBadgeValue.value = String(requests.count)
             }
-            return "\(items.count)"})
+        }).disposed(by: self.disposeBag)
     }
+
 }

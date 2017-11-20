@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,11 +19,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import RxSwift
 
 protocol TabBarItemViewModel {
-    var itemBadgeValue: Observable<String?> {get set}
+    var itemBadgeValueObservable: Observable<String?> { get set }
 }
 
 public enum TabBarItemType {
@@ -33,28 +33,38 @@ public enum TabBarItemType {
     var tabBarItem: UITabBarItem {
         switch self {
         case .chat:
-            return UITabBarItem(title: L10n.Global.homeTabBarTitle, image: UIImage(named: "conversation_icon"), selectedImage: UIImage(named: "conversation_icon"))
+            let conversationIcon = UIImage(asset: Asset.conversationIcon)
+            return UITabBarItem(title: L10n.Global.homeTabBarTitle,
+                                image: conversationIcon,
+                                selectedImage: conversationIcon)
         case .account:
-            return UITabBarItem(title: L10n.Global.meTabBarTitle, image: UIImage(named: "account_icon"), selectedImage: UIImage(named: "account_icon"))
+            let accountIcon = UIImage(asset: Asset.accountIcon)
+            return UITabBarItem(title: L10n.Global.meTabBarTitle,
+                                image: accountIcon,
+                                selectedImage: accountIcon)
         case .contactRequest:
-            return UITabBarItem(title: L10n.Global.contactRequestsTabBarTitle, image: UIImage(named: "contact_request_icon"), selectedImage: UIImage(named: "contact_request_icon"))
+            let contactRequestIcon = UIImage(asset: Asset.contactRequestIcon)
+            return UITabBarItem(title: L10n.Global.contactRequestsTabBarTitle,
+                                image: contactRequestIcon,
+                                selectedImage: contactRequestIcon)
         }
     }
 }
 
 class BaseViewController: UINavigationController {
 
-    let disposeBag = DisposeBag()
-
     var viewModel: TabBarItemViewModel? {
         didSet {
-            self.viewModel?.itemBadgeValue.bind(to: self.tabBarItem.rx.badgeValue)
-                .disposed(by: self.disposeBag)
+            _ = self.viewModel?.itemBadgeValueObservable
+                .takeUntil(self.rx.deallocated)
+                .bind(to: self.tabBarItem.rx.badgeValue)
         }
     }
+
     convenience init(with type: TabBarItemType) {
         self.init()
         self.navigationBar.isTranslucent = false
         self.tabBarItem = type.tabBarItem
     }
+
 }
