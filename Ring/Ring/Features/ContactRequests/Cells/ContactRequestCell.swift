@@ -26,6 +26,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var fallbackAvatar: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var fallbackAvatarImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var discardButton: UIButton!
