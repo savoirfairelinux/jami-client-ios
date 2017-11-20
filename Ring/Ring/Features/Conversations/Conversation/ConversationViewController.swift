@@ -445,6 +445,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
                 // Set placeholder avatar
                 fallbackAvatar.text = nil
+                cell.fallbackAvatarImage.isHidden = true
                 let name = viewModel.userName.value
                 let scanner = Scanner(string: name.toMD5HexString().prefixString())
                 var index: UInt64 = 0
@@ -453,6 +454,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                     fallbackAvatar.backgroundColor = avatarColors[Int(index)]
                     if viewModel.conversation.recipientRingId != name {
                         fallbackAvatar.text = name.prefixString().capitalized
+                    } else {
+                        cell.fallbackAvatarImage.isHidden = true
                     }
                 }
 
@@ -471,6 +474,12 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                     })
                     .map { value in value.prefixString().capitalized }
                     .bind(to: fallbackAvatar.rx.text)
+                    .disposed(by: cell.disposeBag)
+
+                viewModel.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { [weak self] userName in userName != self?.viewModel.conversation.recipientRingId }
+                    .bind(to: cell.fallbackAvatarImage.rx.isHidden)
                     .disposed(by: cell.disposeBag)
 
                 // Set image if any
