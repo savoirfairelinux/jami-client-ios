@@ -153,6 +153,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
                 // Avatar placeholder initial
                 cell.fallbackAvatar.text = nil
+                cell.fallbackAvatarImage.isHidden = true
                 let name = item.userName.value
                 let scanner = Scanner(string: name.toMD5HexString().prefixString())
                 var index: UInt64 = 0
@@ -161,6 +162,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     cell.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
                     if item.conversation.recipientRingId != name {
                         cell.fallbackAvatar.text = name.prefixString().capitalized
+                    } else {
+                        cell.fallbackAvatarImage.isHidden = false
                     }
                 }
 
@@ -171,6 +174,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     })
                     .map { value in value.prefixString().capitalized }
                     .bind(to: cell.fallbackAvatar.rx.text)
+                    .disposed(by: cell.disposeBag)
+
+                item.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { [weak item] userName in userName != item?.conversation.recipientRingId }
+                    .bind(to: cell.fallbackAvatarImage.rx.isHidden)
                     .disposed(by: cell.disposeBag)
 
                 // UIColor that observes "best Id" prefix
