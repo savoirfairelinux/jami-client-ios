@@ -44,6 +44,13 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fallback_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="Rg3-gP-VHQ" userLabel="Fallback image">
+                        <rect key="frame" x="16" y="18" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="NNq-lB-xLS"/>
+                            <constraint firstAttribute="width" constant="40" id="fdG-Ph-C6j"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Yesterday" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Yv-cC-LKx">
                         <rect key="frame" x="281" y="31" width="61" height="15"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
@@ -120,10 +127,12 @@
                     <constraint firstItem="JTE-eF-Y5s" firstAttribute="trailing" secondItem="pFB-Jn-TNP" secondAttribute="trailing" id="MgK-cd-QXM"/>
                     <constraint firstItem="Fpi-20-ZYV" firstAttribute="trailing" secondItem="pFB-Jn-TNP" secondAttribute="trailing" id="Oav-3c-X7k"/>
                     <constraint firstAttribute="trailing" secondItem="7Yv-cC-LKx" secondAttribute="trailing" constant="16" id="UOx-Og-IuZ"/>
+                    <constraint firstItem="Rg3-gP-VHQ" firstAttribute="leading" secondItem="e0z-cM-gKq" secondAttribute="leading" id="UVw-aO-f5u"/>
                     <constraint firstItem="JTE-eF-Y5s" firstAttribute="top" secondItem="pFB-Jn-TNP" secondAttribute="top" id="W3A-IX-eXJ"/>
                     <constraint firstItem="7Yv-cC-LKx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Wei-7X-4zv"/>
                     <constraint firstItem="e0z-cM-gKq" firstAttribute="bottom" secondItem="pFB-Jn-TNP" secondAttribute="bottom" id="ZEj-AJ-OZO"/>
                     <constraint firstItem="e0z-cM-gKq" firstAttribute="trailing" secondItem="JTE-eF-Y5s" secondAttribute="trailing" id="fyt-Cw-MG2"/>
+                    <constraint firstItem="Rg3-gP-VHQ" firstAttribute="top" secondItem="e0z-cM-gKq" secondAttribute="top" id="j2s-YP-du8"/>
                     <constraint firstItem="eug-ak-r49" firstAttribute="trailing" secondItem="2fJ-Wf-1e0" secondAttribute="trailing" id="mdZ-Uh-312"/>
                     <constraint firstItem="2fJ-Wf-1e0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="omS-kb-QbN"/>
                     <constraint firstAttribute="bottom" secondItem="eug-ak-r49" secondAttribute="bottom" constant="8" id="rzH-w5-tpt"/>
@@ -135,6 +144,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="fallbackAvatar" destination="e0z-cM-gKq" id="fHH-qP-bx3"/>
+                <outlet property="fallbackAvatarImage" destination="Rg3-gP-VHQ" id="Dk8-rq-MdX"/>
                 <outlet property="lastMessageDateLabel" destination="7Yv-cC-LKx" id="pFf-hW-zD8"/>
                 <outlet property="lastMessagePreviewLabel" destination="eug-ak-r49" id="3jj-Lx-jbU"/>
                 <outlet property="nameLabel" destination="2fJ-Wf-1e0" id="0Mb-yC-vh6"/>
@@ -146,4 +156,7 @@
             <point key="canvasLocation" x="70" y="-92"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="fallback_avatar" width="82" height="82"/>
+    </resources>
 </document>

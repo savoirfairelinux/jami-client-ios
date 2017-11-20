@@ -52,6 +52,7 @@ enum Asset {
   static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   static let conversationIcon = ImageAsset(name: "conversation_icon")
   static let device = ImageAsset(name: "device")
+  static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   static let icContactPicture = ImageAsset(name: "ic_contact_picture")
   static let logoRingBeta2Blanc = ImageAsset(name: "logo-ring-beta2-blanc")
   static let settingsIcon = ImageAsset(name: "settings_icon")
@@ -66,6 +67,7 @@ enum Asset {
     contactRequestIcon,
     conversationIcon,
     device,
+    fallbackAvatar,
     icContactPicture,
     logoRingBeta2Blanc,
     settingsIcon,
