@@ -91,7 +91,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()
         self.appCoordinator.start()
-
+        do {
+            try DBBridging().start()
+        } catch {
+            log.error("unable create tables")
+        }
         return true
     }
 
