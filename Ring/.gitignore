@@ -1,0 +1,5 @@
+report.xml
+*.cer*
+*.p12
+fastlane/test_output/
+*.mobileprovision
