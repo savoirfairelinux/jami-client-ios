@@ -80,6 +80,12 @@
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586C94A1F684DF600613517 /* UIImage+Helpers.swift */; };
+		0E0FF1A71FC38070003898C2 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0FF1A61FC38070003898C2 /* SQLite.framework */; };
+		0E0FF1AA1FC3843E003898C2 /* RingDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1A91FC3843E003898C2 /* RingDB.swift */; };
+		0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */; };
+		0E0FF1B51FC3947B003898C2 /* DBBridging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B41FC3947B003898C2 /* DBBridging.swift */; };
+		0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */; };
+		0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */; };
 		0E2D5F531F9145C800D574BF /* LinkNewDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */; };
 		0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */; };
 		0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */; };
@@ -318,6 +324,12 @@
 		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		0586C94A1F684DF600613517 /* UIImage+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Helpers.swift"; sourceTree = "<group>"; };
+		0E0FF1A61FC38070003898C2 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		0E0FF1A91FC3843E003898C2 /* RingDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingDB.swift; sourceTree = "<group>"; };
+		0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataHelper.swift; sourceTree = "<group>"; };
+		0E0FF1B41FC3947B003898C2 /* DBBridging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBBridging.swift; sourceTree = "<group>"; };
+		0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDataHepler.swift; sourceTree = "<group>"; };
+		0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionDataHelper.swift; sourceTree = "<group>"; };
 		0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceCell.swift; sourceTree = "<group>"; };
 		0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkNewDeviceCell.xib; sourceTree = "<group>"; };
 		0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellGenerated.swift; sourceTree = "<group>"; };
@@ -466,6 +478,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E0FF1A71FC38070003898C2 /* SQLite.framework in Frameworks */,
 				5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */,
 				0ED666101F9FED1C00743D42 /* AMPopTip.framework in Frameworks */,
 				0EEFBA3C1F83DA21000EDBAD /* libsecp256k1.a in Frameworks */,
@@ -576,6 +589,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E0FF1A61FC38070003898C2 /* SQLite.framework */,
 				5C093F001FB495830011D90E /* Differentiator.framework */,
 				0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */,
 				62DFAB2B1F9FF030002D6F9C /* Reachability.framework */,
@@ -710,6 +724,7 @@
 		043999F51D1C2D9D00E99CD9 /* Ring */ = {
 			isa = PBXGroup;
 			children = (
+				0E0FF1A81FC38409003898C2 /* Database */,
 				02E1A0261DDE4C2E00D75B59 /* Services */,
 				1A2D18B81F2916BA00B2C785 /* Models */,
 				564C44571E8D7F68000F92B1 /* Constants */,
@@ -817,6 +832,26 @@
 				04399A961D1C2F6100E99CD9 /* libz.tbd */,
 			);
 			name = SYS_DEPS;
+			sourceTree = "<group>";
+		};
+		0E0FF1A81FC38409003898C2 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				0E0FF1AB1FC38BD1003898C2 /* DBHelpers */,
+				0E0FF1A91FC3843E003898C2 /* RingDB.swift */,
+				0E0FF1B41FC3947B003898C2 /* DBBridging.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		0E0FF1AB1FC38BD1003898C2 /* DBHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */,
+				0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */,
+				0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */,
+			);
+			path = DBHelpers;
 			sourceTree = "<group>";
 		};
 		0E5AFE0A1F8EBC040040D539 /* Cells */ = {
@@ -1315,6 +1350,7 @@
 				"$(SRCROOT)/Carthage/build/iOS/AMPopTip.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
 			);
 			name = "⚙️ Copy Frameworks";
 			outputPaths = (
@@ -1330,6 +1366,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Chameleon.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AMPopTip.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SQLite.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1404,9 +1441,12 @@
 				1ABE07D31F0D8FE800D36361 /* Storyboards.swift in Sources */,
 				0EDE34C71F868E1200FFA15C /* EditProfileViewController.swift in Sources */,
 				62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */,
+				0E0FF1B51FC3947B003898C2 /* DBBridging.swift in Sources */,
 				1A2D18E51F29197100B2C785 /* MessageAccessoryView.swift in Sources */,
+				0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */,
 				1A2D18C61F29180700B2C785 /* ConversationModel.swift in Sources */,
 				0EE1B54E1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift in Sources */,
+				0E0FF1AA1FC3843E003898C2 /* RingDB.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
 				1A3CA32D1F13DA7200283748 /* Chameleon+Ring.swift in Sources */,
 				0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */,
@@ -1434,6 +1474,7 @@
 				1A2D18B71F29164700B2C785 /* SmartlistViewModel.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				56BBC9A31ED714DF00CDAF8B /* ConversationsService.swift in Sources */,
+				0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */,
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
 				0EB479951FA28A7300106AFD /* ButtonTransparentBackground.swift in Sources */,
@@ -1457,6 +1498,7 @@
 				564C44621E943DE6000F92B1 /* NameService.swift in Sources */,
 				1A5DC02C1F3565250075E8EF /* MeViewController.swift in Sources */,
 				1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */,
+				0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */,
 				62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */,
 				0EDE34C91F8691BB00FFA15C /* EditProfileViewModel.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
