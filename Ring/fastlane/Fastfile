@@ -1,0 +1,86 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.66.2"
+
+default_platform :ios
+
+platform :ios do
+  desc "Runs all the tests"
+  lane :test do
+    scan
+  end
+
+  desc "Syncs certificates and provisioning profiles"
+  lane :certs do
+    unlock_keychain
+    match(
+      type: "development",
+      readonly: false
+    )
+    match(
+      type: "appstore",
+      readonly: false,
+      force_for_new_devices: true
+    )
+  end
+
+  desc "Test build without packaging"
+  lane :build do
+    unlock_keychain
+    # TODO: check if fixed in upsteam fastlane and test/use
+    # https://github.com/fastlane/fastlane/issues/10637
+    #disable_automatic_code_signing(path: "Ring.xcodeproj")
+    match(
+      force: true,
+      type: "development"
+    )
+    gym(
+      scheme: "Ring",
+      clean: true,
+      configuration: "Development",
+      export_method: 'development',
+      xcargs: "PROVISIONING_PROFILE_SPECIFIER='match Development com.savoirfairelinux.ring' DEVELOPMENT_TEAM=MSHYCBXK85",
+      skip_package_ipa: true
+    )
+    # TODO: check if fixed in upsteam fastlane and test/use
+    # https://github.com/fastlane/fastlane/issues/10637
+    # enable_automatic_code_signing(path: "Ring.xcodeproj")
+  end
+
+  desc "Submit a new Beta Build to Apple TestFlight"
+  lane :beta do
+    unlock_keychain
+    match(
+      type: "appstore"
+    )
+    increment_build_number
+    gym(
+      scheme: "Ring",
+      configuration: "Release",
+      export_method: 'app-store',
+      xcargs: "PROVISIONING_PROFILE_SPECIFIER='match AppStore com.savoirfairelinux.ring' DEVELOPMENT_TEAM=MSHYCBXK85",
+    )
+    pilot(
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+  end
+
+  error do |lane, exception|
+    # This block is called, only if the executed lane has failed
+  end
+end
