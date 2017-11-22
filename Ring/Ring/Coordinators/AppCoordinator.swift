@@ -81,6 +81,13 @@ class AppCoordinator: Coordinator, StateableResponsive {
         }).disposed(by: self.disposeBag)
     }
 
+    func showDatabaseError() {
+        let alertController = UIAlertController(title: L10n.Alerts.dbFailedTitle,
+                                                message: L10n.Alerts.dbFailedMessage,
+                                                preferredStyle: .alert)
+        self.present(viewController: alertController, withStyle: .present, withAnimation: false)
+    }
+
     private func showWalkthrough () {
         let walkthroughCoordinator = WalkthroughCoordinator(with: self.injectionBag)
         self.addChildCoordinator(childCoordinator: walkthroughCoordinator)
