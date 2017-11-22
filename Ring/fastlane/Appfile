@@ -1,0 +1,7 @@
+app_identifier "com.savoirfairelinux.ring" # The bundle identifier of your app
+apple_id "mobile@savoirfairelinux.com" # Your Apple email address
+
+team_id "MSHYCBXK85" # Developer Portal Team ID
+
+# you can even provide different app identifiers, Apple IDs and team names per lane:
+# More information: https://docs.fastlane.tools/advanced/#appfile
