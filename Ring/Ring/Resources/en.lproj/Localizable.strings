@@ -81,6 +81,8 @@
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.profileCancelPhoto" = "Cancel";
 "alerts.accountLinkedTitle" = "Linking account";
+"alerts.dbFailedTitle" = "An error happned when launching Ring";
+"alerts.dbFailedMessage" = "Please close application and try to open it again";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";

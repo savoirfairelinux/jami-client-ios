@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()
         self.appCoordinator.start()
-
+        self.startDB()
         return true
     }
 
@@ -122,6 +122,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             log.error("Daemon failed to stop because it was not already running.")
         } catch {
             log.error("Unknown error in Daemon stop.")
+        }
+    }
+
+    private func startDB() {
+        do {
+            let dbManager = DBBridging(profileHepler: ProfileDataHelper(),
+                                       conversationHelper: ConversationDataHelper(),
+                                       interactionHepler: InteractionDataHelper())
+            try dbManager.start()
+        } catch {
+            let time = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: time) {
+                self.appCoordinator.showDatabaseError()
+            }
         }
     }
 }

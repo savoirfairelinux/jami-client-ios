@@ -30,6 +30,10 @@ enum L10n {
     static let accountNoNetworkMessage = L10n.tr("Localizable", "alerts.accountNoNetworkMessage")
     /// Can't connect to the network
     static let accountNoNetworkTitle = L10n.tr("Localizable", "alerts.accountNoNetworkTitle")
+    /// Please close application and try to open it again
+    static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage")
+    /// An error happned when launching Ring
+    static let dbFailedTitle = L10n.tr("Localizable", "alerts.dbFailedTitle")
     /// Cancel
     static let profileCancelPhoto = L10n.tr("Localizable", "alerts.profileCancelPhoto")
     /// Take photo
