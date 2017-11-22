@@ -162,6 +162,51 @@ final class NewAccountsService {
             })
     }
 
+    func linkToRingAccount(withPin pin: String, password: String) -> Observable<AccountModel> {
+        //~ Single asking the daemon to add a new account with the associated metadata
+        let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
+            do {
+                var ringDetails = try self.loadRingInitialAccountDetailsFromDaemon()
+                ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+                ringDetails.updateValue(pin, forKey: ConfigKey.archivePIN.rawValue)
+                guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
+                    throw AccountError.unknownError
+                }
+                let account = try self.buildAccountFromDaemon(accountId: accountId)
+                single(.success(account))
+            } catch {
+                single(.error(error))
+            }
+            return Disposables.create {
+            }
+        })
+
+        //~ Filter the daemon signals to isolate the "account created" one.
+        let filteredDaemonSignals = self.daemonSignals.filter { (serviceEvent) -> Bool in
+            if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
+                throw AccountCreationError.linkError
+            } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
+                throw AccountCreationError.network
+            }
+
+            let isRegistrationStateChanged = serviceEvent.eventType == ServiceEventType.registrationStateChanged
+            let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
+            return isRegistrationStateChanged && isRegistered
+        }
+
+        //~ Make sure that we have the correct account added in the daemon, and return it.
+        return Observable
+            .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
+                guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
+                    throw AccountError.unknownError
+                }
+                return accountModel
+            }
+            .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
+                return self.getAccount(fromAccountId: accountModel.id).asObservable()
+            })
+    }
+
 }
 
 // MARK: - Private daemon wrappers
