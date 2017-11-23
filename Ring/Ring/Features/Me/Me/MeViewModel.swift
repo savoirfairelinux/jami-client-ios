@@ -3,6 +3,7 @@
  *
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,7 +20,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
+import SwiftyBeaver
 import RxSwift
 import RxDataSources
 
@@ -68,92 +69,82 @@ enum SettingsSection: SectionModelType {
     }
 }
 
-class MeViewModel: ViewModel, Stateable {
+final class MeViewModel: ViewModel, Stateable {
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
 
-    lazy var userName: Observable<String?> = {
-        // return username if exists, is no start name lookup
-        let accountName = self.accountService.currentAccount?.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName))
-        if accountName != nil && !accountName!.isEmpty {
-            return Observable.from(optional: accountName)
-        }
-        guard let account = self.accountService.currentAccount else {
-            return Observable.from(optional: accountName)
-        }
-        let accountHelper = AccountModelHelper(withAccount: account)
-        guard let uri = accountHelper.ringId else {
-            return Observable.from(optional: accountName)
-        }
-        let time = DispatchTime.now() + 2
-        DispatchQueue.main.asyncAfter(deadline: time) {
-            self.nameService.lookupAddress(withAccount: "", nameserver: "", address: uri)
-        }
-        return self.nameService.usernameLookupStatus
-            .filter({ lookupNameResponse in
-                return lookupNameResponse.address != nil &&
-                    lookupNameResponse.address == uri && lookupNameResponse.state == .found
-            })
-            .map({ lookupNameResponse in
-                return lookupNameResponse.name
-            })
-    }()
-
-    lazy var ringId: Observable<String?> = {
-        return Observable.from(optional: self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)))
-    }()
-
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
-    let disposeBag = DisposeBag()
 
-    let accountService: AccountsService
-    let nameService: NameService
+    private let disposeBag = DisposeBag()
 
-    //table section
-    lazy var settings: Observable<[SettingsSection]> = {
-        if let account = self.accountService.currentAccount {
-            let accountHelper = AccountModelHelper(withAccount: account)
-            let uri = accountHelper.ringId
-            let devices = Observable.from(optional: account.devices)
-            let accountDevice: Observable<[DeviceModel]> = self.accountService
-                .sharedResponseStream
-                .filter({ (event) in
-                    return event.eventType == ServiceEventType.knownDevicesChanged &&
-                        event.getEventInput(ServiceEventInput.uri) == uri
-                }).map({ _ in
-                    return account.devices
-                })
+    private let accountService: NewAccountsService
+    private let nameService: NameService
 
-            return devices.concat(accountDevice)
-                .map { devices in
-                    let addNewDevice = SettingsSection.linkNewDevice(header: "", items: [SettingsSection.SectionRow.linkNew])
-                    var rows: [SettingsSection.SectionRow]?
+    private let log = SwiftyBeaver.self
 
-                    if !devices.isEmpty {
-                        rows = [SettingsSection.SectionRow.device(device: devices[0])]
-                        for i in 1 ..< devices.count {
-                            let device = devices[i]
-                            rows!.append (SettingsSection.SectionRow.device(device: device))
-                        }
-                    }
+    private let accountUsername = Variable<String>("")
+    lazy var accountUsernameObservable: Observable<String> = {
+        return self.accountUsername.asObservable()
+    }()
 
-                    if rows != nil {
-                        let devicesSection = SettingsSection.linkedDevices(header: L10n.Accountpage.devicesListHeader, items: rows!)
-                        return [devicesSection, addNewDevice]
-                    } else {
-                        return [addNewDevice]
-                    }
-            }
-        }
-        return Observable.just([SettingsSection]())
+    private let accountRingId = Variable<String>("")
+    lazy var accountRingIdObservable: Observable<String> = {
+        return self.accountRingId.asObservable()
+    }()
+
+    private let accountSettings = Variable<[SettingsSection]>([])
+    lazy var accountSettingsObservable: Observable<[SettingsSection]> = {
+        return self.accountSettings.asObservable()
     }()
 
     required init (with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
+        self.accountService = injectionBag.newAccountsService
         self.nameService = injectionBag.nameService
+
+        self.accountService.currentAccount()
+            .do(onNext: { [weak self] (account) in
+                let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.accountUsername)
+                let ringId = account.details?.get(withConfigKeyModel: accountUsernameKey)
+                self?.accountRingId.value = ringId ?? "No RingId found"
+
+                let addNewDevice = SettingsSection.linkNewDevice(header: "",
+                                                                 items: [SettingsSection.SectionRow.linkNew])
+                var rows: [SettingsSection.SectionRow]
+                if !account.devices.isEmpty {
+                    rows = [SettingsSection.SectionRow.device(device: account.devices[0])]
+                    for i in 1 ..< account.devices.count {
+                        let device = account.devices[i]
+                        rows.append (SettingsSection.SectionRow.device(device: device))
+                    }
+                    let devicesSection = SettingsSection.linkedDevices(header: L10n.Accountpage.devicesListHeader,
+                                                                       items: rows)
+                    self?.accountSettings.value = [devicesSection, addNewDevice]
+                } else {
+                    self?.accountSettings.value = [addNewDevice]
+                }
+            }, onError: { [weak self] (error) in
+                self?.accountRingId.value = "No RingId found"
+                self?.log.error("No RingId found - \(error.localizedDescription)")
+            })
+            .flatMap { (account) -> PrimitiveSequence<SingleTrait, String> in
+                let registeredNameKey = ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)
+                if let registeredName = account.volatileDetails?.get(withConfigKeyModel: registeredNameKey) {
+                    return Single.just(registeredName)
+                } else {
+                    //TODO: call nameserver single
+                    return Single.just("")
+                }
+            }
+            .subscribe(onSuccess: { [weak self] (username) in
+                self?.accountUsername.value = username
+            }, onError: { [weak self] (error) in
+                self?.accountUsername.value = "No username found"
+                self?.log.error("No username found - \(error.localizedDescription)")
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func linkDevice() {
