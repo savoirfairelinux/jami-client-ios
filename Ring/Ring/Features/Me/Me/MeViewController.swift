@@ -44,11 +44,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     override func setupUI() {
-        self.viewModel.userName
+        self.viewModel.accountUsernameObservable
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: disposeBag)
 
-        self.viewModel.ringId.asObservable()
+        self.viewModel.accountRingIdObservable
             .bind(to: self.ringIdLabel.rx.text)
             .disposed(by: disposeBag)
 
@@ -97,7 +97,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         }
 
         let settingsItemDataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: configureCell)
-        self.viewModel.settings
+        self.viewModel
+            .accountSettingsObservable
             .bind(to: self.settingsTable.rx.items(dataSource: settingsItemDataSource))
             .disposed(by: disposeBag)
 
