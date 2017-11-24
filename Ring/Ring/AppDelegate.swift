@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         self.appCoordinator.start()
         do {
-            try DBBridging().start()
+            try DBManager().start()
         } catch {
             log.error("unable create tables")
         }
