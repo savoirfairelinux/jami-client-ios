@@ -127,7 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func startDB() {
         do {
-            let dbManager = DBBridging(profileHepler: ProfileDataHelper(),
+            let dbManager = DBManager(profileHepler: ProfileDataHelper(),
                                        conversationHelper: ConversationDataHelper(),
                                        interactionHepler: InteractionDataHelper())
             try dbManager.start()
