@@ -48,11 +48,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             withConversationService: self.conversationsService,
                             withContactsService: self.contactsService,
                             withPresenceService: self.presenceService,
-                            withNetworkService: self.networkService
+                            withNetworkService: self.networkService,
+                            withContactRequestsManager: self.contactRequestsManager
                             )
     }()
+
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
+    }()
+
+    private lazy var contactRequestsManager: ContactRequestsManager = {
+        return ContactRequestsManager(with: self.newAccountsService,
+                                      contactsService: self.contactsService,
+                                      conversationsService: self.conversationsService,
+                                      presenceService: self.presenceService)
     }()
 
     private let log = SwiftyBeaver.self
