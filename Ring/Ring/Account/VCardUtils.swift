@@ -30,23 +30,24 @@ enum VCardFolders: String {
 enum VCardFiles: String {
     case myProfile
 }
+
 class VCardUtils {
 
-    class func saveVCard(vCard: CNContact, withName name: String, inFolder folder: String) -> Observable<Void> {
-        return Observable.create { observable in
+    class func saveVCard(vCard: CNContact, withName name: String, inFolder folder: String) -> Completable {
+        return Completable.create { completable in
             if let directoryURL = VCardUtils.getFilePath(forFile: name, inFolder: folder, createIfNotExists: true) {
                 do {
                     let data = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: nil)
                     try data.write(to: directoryURL)
-                    observable.on(.completed)
+                    completable(.completed)
 
                 } catch {
-                    observable.on(.error(ContactServiceError.saveVCardFailed))
+                    completable(.error(ContactServiceError.saveVCardFailed))
                 }
             } else {
-                observable.on(.error(ContactServiceError.saveVCardFailed))
+                completable(.error(ContactServiceError.saveVCardFailed))
             }
-            return Disposables.create { }
+            return Disposables.create()
         }
     }
 

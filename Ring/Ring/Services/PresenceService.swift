@@ -39,19 +39,26 @@ class PresenceService {
         PresenceAdapter.delegate = self
     }
 
-    func subscribeBuddies(withAccount account: AccountModel, withContacts contacts: [ContactModel]) {
+    func subscribeBuddies(withAccount account: AccountModel, withContacts contacts: [ContactModel]) -> Completable {
+        var subscriptions = [Completable]()
         for contact in contacts {
-            subscribeBuddy(withAccountId: account.id,
-                           withUri: contact.ringId,
-                           withFlag: true)
+            let subscription = self.subscribeBuddy(withAccountId: account.id,
+                                                   withUri: contact.ringId,
+                                                   withFlag: true)
+            subscriptions.append(subscription)
         }
+        return Completable.merge(subscriptions)
     }
 
     func subscribeBuddy(withAccountId accountId: String,
                         withUri uri: String,
-                        withFlag flag: Bool) {
-        presenceAdapter.subscribeBuddy(withURI: uri, withAccountId: accountId, withFlag: flag)
-        contactPresence[uri] = false
+                        withFlag flag: Bool) -> Completable {
+        return Completable.create(subscribe: { [unowned self] (completable) -> Disposable in
+            self.presenceAdapter.subscribeBuddy(withURI: uri, withAccountId: accountId, withFlag: flag)
+            self.contactPresence[uri] = false
+            completable(.completed)
+            return Disposables.create()
+        })
     }
 }
 

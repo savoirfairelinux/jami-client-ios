@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@ import RxSwift
 import Contacts
 import SwiftyBeaver
 
-class ContactRequestsViewModel: Stateable, ViewModel {
+final class ContactRequestsViewModel: Stateable, ViewModel {
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
@@ -30,51 +31,43 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         return self.stateSubject.asObservable()
     }()
 
-    let contactsService: ContactsService
-    let accountsService: AccountsService
-    let conversationService: ConversationsService
-    let nameService: NameService
-    let presenceService: PresenceService
+    private let contactsService: ContactsService
+    private let accountsService: NewAccountsService
+    private let conversationService: ConversationsService
+    fileprivate let nameService: NameService
+    private let presenceService: PresenceService
+    private let contactRequestsManager: ContactRequestsManager
 
     fileprivate let disposeBag = DisposeBag()
-    fileprivate let log = SwiftyBeaver.self
+    private let log = SwiftyBeaver.self
 
-    fileprivate let injectionBag: InjectionBag
+    private let injectionBag: InjectionBag
 
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService
-        self.accountsService = injectionBag.accountService
+        self.accountsService = injectionBag.newAccountsService
         self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.presenceService = injectionBag.presenceService
+        self.contactRequestsManager = injectionBag.contactRequestsManager
 
         self.injectionBag = injectionBag
-
-        self.contactsService.contactRequests
-            .asObservable()
-            .subscribe(onNext: {[unowned self] contactRequests in
-                guard let account = self.accountsService.currentAccount else { return }
-                guard let ringId = contactRequests.last?.ringId else { return }
-                self.conversationService.generateMessage(ofType: GeneratedMessageType.receivedContactRequest,
-                                                         forRindId: ringId,
-                                                         forAccount: account)
-            })
-            .disposed(by: self.disposeBag)
     }
 
     lazy var contactRequestItems: Observable<[ContactRequestItem]> = {
-        return self.contactsService.contactRequests
-            .asObservable()
-            .map({ [unowned self] contactRequests in
-                return contactRequests
-                    .filter { $0.accountId == self.accountsService.currentAccount?.id }
-                    .sorted { $0.receivedDate > $1.receivedDate }
-                    .map { contactRequest in
-                        let item = ContactRequestItem(withContactRequest: contactRequest)
-                        self.lookupUserName(withItem: item)
-                        return item
-                    }
-            })
+        let contactRequestsObs = self.contactsService.contactRequests.asObservable()
+        let currentAccountObs = self.accountsService.currentAccount().asObservable()
+
+        return Observable.combineLatest(contactRequestsObs, currentAccountObs, resultSelector: { (requests, account) -> [ContactRequestItem] in
+            return requests
+                .filter { $0.accountId == account.id }
+                .sorted { $0.receivedDate > $1.receivedDate }
+                .map { contactRequest in
+                    let item = ContactRequestItem(withContactRequest: contactRequest)
+                    //TODO: Lookup username
+                    return item
+                }
+        })
     }()
 
     lazy var hasInvitations: Observable<Bool> = {
@@ -85,77 +78,62 @@ class ContactRequestsViewModel: Stateable, ViewModel {
             })
     }()
 
-    func accept(withItem item: ContactRequestItem) -> Observable<Void> {
-        let acceptCompleted = self.contactsService.accept(contactRequest: item.contactRequest, withAccount: self.accountsService.currentAccount!)
-
-        let accountHelper = AccountModelHelper(withAccount: self.accountsService.currentAccount!)
-        self.conversationService.saveMessage(withId: "",
-                                             withContent: GeneratedMessageType.contactRequestAccepted.rawValue,
-                                             byAuthor: accountHelper.ringId!,
-                                             toConversationWith: item.contactRequest.ringId,
-                                             currentAccountId: (self.accountsService.currentAccount?.id)!, generated: true)
-            .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("Message saved")
-            })
-            .disposed(by: disposeBag)
-
-        self.presenceService.subscribeBuddy(withAccountId: (self.accountsService.currentAccount?.id)!,
-                                            withUri: item.contactRequest.ringId,
-                                            withFlag: true)
-
-        if let vCard = item.contactRequest.vCard {
-            let saveVCardCompleted = self.contactsService.saveVCard(vCard: vCard, forContactWithRingId: item.contactRequest.ringId)
-            return Observable<Void>.zip(acceptCompleted, saveVCardCompleted) { _, _ in
-                return
-            }
-        } else {
-            return acceptCompleted.asObservable()
-        }
+    func accept(withItem item: ContactRequestItem) -> Completable {
+        return self.accountsService.currentAccount().asObservable()
+            .flatMap { [unowned self] (account) -> Completable in
+                return self.contactRequestsManager.accept(contactRequest: item.contactRequest,
+                                                          account: account)
+            }.asCompletable()
     }
 
-    func discard(withItem item: ContactRequestItem) -> Observable<Void> {
-        return self.contactsService.discard(contactRequest: item.contactRequest,
-                                            withAccount: self.accountsService.currentAccount!)
+    func discard(withItem item: ContactRequestItem) -> Completable {
+        return self.accountsService.currentAccount().asObservable()
+            .flatMap { [unowned self] (account) -> Completable in
+                return self.contactRequestsManager.discard(contactRequest: item.contactRequest,
+                                                           account: account)
+            }.asCompletable()
     }
 
-    func ban(withItem item: ContactRequestItem) -> Observable<Void> {
-        let discardCompleted = self.contactsService.discard(contactRequest: item.contactRequest,
-                                                            withAccount: self.accountsService.currentAccount!)
-
-        let removeCompleted = self.contactsService.removeContact(withRingId: item.contactRequest.ringId,
-                                                                 ban: true,
-                                                                 withAccount: self.accountsService.currentAccount!)
-
-        return Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
-            return
-        }
-    }
-
-    fileprivate func lookupUserName(withItem item: ContactRequestItem) {
-
-        self.nameService.usernameLookupStatus.asObservable()
-            .filter({ lookupNameResponse in
-                return lookupNameResponse.address == item.contactRequest.ringId
-            })
-            .subscribe(onNext: { lookupNameResponse in
-                if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
-                    item.userName.value = lookupNameResponse.name
-                } else {
-                    item.userName.value = lookupNameResponse.address
-                }
-            })
-            .disposed(by: self.disposeBag)
-
-        self.nameService.lookupAddress(withAccount: (accountsService.currentAccount?.id)!,
-                                              nameserver: "",
-                                              address: item.contactRequest.ringId)
+    func ban(withItem item: ContactRequestItem) -> Completable {
+        return self.accountsService.currentAccount().asObservable()
+            .flatMap { [unowned self] (account) -> Completable in
+                return self.contactRequestsManager.ban(contactRequest: item.contactRequest,
+                                                       account: account)
+            }.asCompletable()
     }
 
     func showConversation (forRingId ringId: String) {
-        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        let conversation = self.conversationService.findConversation(withRingId: ringId,
-                                                                     withAccountId: (accountsService.currentAccount?.id)!)
-        conversationViewModel.conversation = conversation
-        self.stateSubject.onNext(ConversationsState.conversationDetail(conversationViewModel: conversationViewModel))
+        self.accountsService.currentAccount().subscribe(onSuccess: { [unowned self] (account) in
+            let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+            let conversation = self.conversationService.findConversation(withRingId: ringId,
+                                                                         withAccountId: account.id)
+            conversationViewModel.conversation = conversation
+            self.stateSubject.onNext(ConversationsState.conversationDetail(conversationViewModel: conversationViewModel))
+        }, onError: { [unowned self] (error) in
+            self.log.error("No account available")
+        }).disposed(by: self.disposeBag)
     }
 }
+
+//extension ContactRequestsViewModel {
+//
+//    fileprivate func lookupUserName(withItem item: ContactRequestItem) {
+//        self.nameService.usernameLookupStatus.asObservable()
+//            .filter({ lookupNameResponse in
+//                return lookupNameResponse.address == item.contactRequest.ringId
+//            })
+//            .subscribe(onNext: { lookupNameResponse in
+//                if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
+//                    item.userName.value = lookupNameResponse.name
+//                } else {
+//                    item.userName.value = lookupNameResponse.address
+//                }
+//            })
+//            .disposed(by: self.disposeBag)
+//
+//                self.nameService.lookupAddress(withAccount: (accountsService.currentAccount?.id)!,
+//                                                      nameserver: "",
+//                                                      address: item.contactRequest.ringId)
+//    }
+//
+//}

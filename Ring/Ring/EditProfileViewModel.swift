@@ -42,14 +42,16 @@ class EditProfileViewModel {
       }
 
     func saveProfile() {
-
         let vcard = CNMutableContact()
         if let image = self.image.value, !image.isEqual(defaultImage) {
             vcard.imageData = UIImagePNGRepresentation(image)
         }
-            vcard.familyName = self.profileName.value
-        _ = VCardUtils.saveVCard(vCard: vcard, withName: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue).subscribe()
-
+        vcard.familyName = self.profileName.value
+        VCardUtils.saveVCard(vCard: vcard,
+                             withName: VCardFiles.myProfile.rawValue,
+                             inFolder: VCardFolders.profile.rawValue)
+            .subscribe()
+            .disposed(by: self.disposeBag)
     }
 
     func updateImage(_ image: Image) {

@@ -93,22 +93,22 @@ class ContactsService {
         }
     }
 
-    func accept(contactRequest: ContactRequestModel, withAccount account: AccountModel) -> Observable<Void> {
-        return Observable.create { [unowned self] observable in
+    func accept(contactRequest: ContactRequestModel, withAccount account: AccountModel) -> Completable {
+        return Completable.create { [unowned self] completable in
             let success = self.contactsAdapter.acceptTrustRequest(fromContact: contactRequest.ringId,
                                                                   withAccountId: account.id)
             if success {
-                observable.on(.completed)
+                completable(.completed)
             } else {
-                observable.on(.error(ContactServiceError.acceptTrustRequestFailed))
+                completable(.error(ContactServiceError.acceptTrustRequestFailed))
             }
 
-            return Disposables.create { }
+            return Disposables.create ()
         }
     }
 
-    func discard(contactRequest: ContactRequestModel, withAccount account: AccountModel) -> Observable<Void> {
-        return Observable.create { [unowned self] observable in
+    func discard(contactRequest: ContactRequestModel, withAccount account: AccountModel) -> Completable {
+        return Completable.create { [unowned self] completable in
             let success = self.contactsAdapter.discardTrustRequest(fromContact: contactRequest.ringId,
                                                                    withAccountId: account.id)
 
@@ -116,11 +116,11 @@ class ContactsService {
             self.removeContactRequest(withRingId: contactRequest.ringId)
 
             if success {
-                observable.on(.completed)
+                completable(.completed)
             } else {
-                observable.on(.error(ContactServiceError.diacardTrusRequestFailed))
+                completable(.error(ContactServiceError.diacardTrusRequestFailed))
             }
-            return Disposables.create { }
+            return Disposables.create()
         }
     }
 
@@ -150,16 +150,17 @@ class ContactsService {
         }
     }
 
-    func removeContact(contact: ContactModel, ban: Bool, withAccount account: AccountModel) -> Observable<Void> {
+    func removeContact(contact: ContactModel, ban: Bool, withAccount account: AccountModel) -> Completable {
         return removeContact(withRingId: contact.ringId, ban: ban, withAccount: account)
     }
 
-    func removeContact(withRingId ringId: String, ban: Bool, withAccount account: AccountModel) -> Observable<Void> {
-        return Observable.create { [unowned self] observable in
+    func removeContact(withRingId ringId: String, ban: Bool, withAccount account: AccountModel) -> Completable {
+        return Completable.create { [unowned self] completable in
             self.contactsAdapter.removeContact(withURI: ringId, accountId: account.id, ban: ban)
             self.removeContactRequest(withRingId: ringId)
-            observable.on(.completed)
-            return Disposables.create { }
+            completable(.completed)
+
+            return Disposables.create()
         }
     }
 
@@ -249,9 +250,10 @@ extension ContactsService: ContactsAdapterDelegate {
 
     // MARK: - profile
 
-    func saveVCard(vCard: CNContact, forContactWithRingId ringID: String) -> Observable<Void> {
-        let vCardSaved = VCardUtils.saveVCard(vCard: vCard, withName: ringID, inFolder: VCardFolders.contacts.rawValue)
-        return vCardSaved
+    func saveVCard(vCard: CNContact, forContactWithRingId ringID: String) -> Completable {
+        return VCardUtils.saveVCard(vCard: vCard,
+                                    withName: ringID,
+                                    inFolder: VCardFolders.contacts.rawValue)
     }
 
     func loadVCard(forContactWithRingId ringID: String) -> Single<CNContact> {

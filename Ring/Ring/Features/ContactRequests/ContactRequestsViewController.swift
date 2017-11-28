@@ -146,7 +146,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     }
 
     func setupBindings() {
-
         self.viewModel
             .hasInvitations
             .observeOn(MainScheduler.instance)
@@ -155,26 +154,26 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     }
 
     func acceptButtonTapped(withItem item: ContactRequestItem) {
-        viewModel.accept(withItem: item).subscribe(onError: { [unowned self] error in
-            self.log.error("Accept trust request failed")
-            }, onCompleted: { [unowned self] in
-                self.log.info("Accept trust request done")
+        self.viewModel.accept(withItem: item).subscribe(onCompleted: { [weak self] in
+            self?.log.info("Accept trust request done")
+        }, onError: { [weak self] error in
+            self?.log.error("Accept trust request failed")
         }).disposed(by: self.disposeBag)
     }
 
     func discardButtonTapped(withItem item: ContactRequestItem) {
-        viewModel.discard(withItem: item).subscribe(onError: { [unowned self] error in
-            self.log.error("Discard trust request failed")
-            }, onCompleted: { [unowned self] in
-                self.log.info("Discard trust request done")
+        self.viewModel.discard(withItem: item).subscribe(onCompleted: { [weak self] in
+            self?.log.info("Discard trust request done")
+        }, onError: { [weak self] error in
+            self?.log.error("Discard trust request failed")
         }).disposed(by: self.disposeBag)
     }
 
     func banButtonTapped(withItem item: ContactRequestItem) {
-        viewModel.ban(withItem: item).subscribe(onError: { [unowned self] error in
-            self.log.error("Ban trust request failed")
-            }, onCompleted: { [unowned self] in
-                self.log.info("Ban trust request done")
+        self.viewModel.ban(withItem: item).subscribe(onCompleted: { [weak self] in
+            self?.log.info("Ban trust request done")
+        }, onError: { [weak self] (error) in
+            self?.log.error("Ban trust request failed")
         }).disposed(by: self.disposeBag)
     }
 }
