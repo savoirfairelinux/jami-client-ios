@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,17 +19,23 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
+import Foundation
 
-class ConversationModel: Object {
+class ConversationModel: Equatable {
 
-    let messages = List<MessageModel>()
-    @objc dynamic var recipientRingId: String = ""
-    @objc dynamic var accountId: String = ""
+    var messages = [MessageModel]()
+    var recipientRingId: String = ""
+    var accountId: String = ""
+    var accountUri: String = ""
+    var participantProfile: Profile?
 
-    convenience init(withRecipientRingId recipientRingId: String, accountId: String) {
+    convenience init(withRecipientRingId recipientRingId: String, accountId: String, accountUri: String) {
         self.init()
         self.recipientRingId = recipientRingId
         self.accountId = accountId
+        self.accountUri = accountUri
+    }
+    public static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
+        return (lhs.recipientRingId == rhs.recipientRingId && lhs.accountId == rhs.accountId)
     }
 }

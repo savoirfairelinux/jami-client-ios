@@ -18,24 +18,21 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
+class MessageModel {
 
-class MessageModel: Object {
-
-    @objc dynamic var id: String = ""
-    @objc dynamic var receivedDate: Date = Date()
-    @objc dynamic var content: String = ""
-    @objc dynamic var author: String = ""
-    @objc dynamic var status: MessageStatus = .unknown
-    @objc dynamic var isGenerated: Bool = false
+    var messageId: Int64 = -1
+    var daemonId: String = ""
+    var receivedDate: Date = Date()
+    var content: String = ""
+    var author: String = ""
+    var status: MessageStatus = .unknown
+    var isGenerated: Bool = false
 
     convenience init(withId id: String, receivedDate: Date, content: String, author: String) {
         self.init()
-        self.id = id
+        self.daemonId = id
         self.receivedDate = receivedDate
         self.content = content
         self.author = author
-        self.status = .unknown
-        self.isGenerated = false
     }
 }
