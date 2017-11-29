@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,25 +19,25 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import Reusable
 import RxSwift
 import PKHUD
 
-class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
+final class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
 
-    @IBOutlet weak var titleLable: UILabel!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var okButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var pinLabel: UILabel!
-    @IBOutlet weak var explanationMessage: UILabel!
-    @IBOutlet weak var errorMessage: UILabel!
-    @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet private weak var titleLable: UILabel!
+    @IBOutlet private weak var passwordField: UITextField!
+    @IBOutlet private weak var okButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var pinLabel: UILabel!
+    @IBOutlet private weak var explanationMessage: UILabel!
+    @IBOutlet private weak var errorMessage: UILabel!
+    @IBOutlet private weak var background: UIImageView!
+    @IBOutlet private weak var containerView: UIView!
 
     var viewModel: LinkNewDeviceViewModel!
-    let disposeBag = DisposeBag()
+
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
 
@@ -46,21 +47,21 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         // initial state
         self.viewModel.isInitialState
             .bind(to: self.titleLable.rx.isHidden)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         self.viewModel.isInitialState.bind(to: self.passwordField.rx.isHidden)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         self.viewModel.isInitialState.bind(to: self.cancelButton.rx.isHidden)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         // error state
         self.viewModel.isErrorState.bind(to: self.errorMessage.rx.isVisible)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         // success state
         self.viewModel.isSuccessState
             .bind(to: self.explanationMessage.rx.isVisible)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         self.viewModel.isSuccessState
             .bind(to: self.pinLabel.rx.isVisible)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
 
         self.viewModel.observableState
             .observeOn(MainScheduler.instance)
@@ -77,7 +78,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                 default:
                     break
                 }
-            }).addDisposableTo(self.disposeBag)
+            }).disposed(by: self.disposeBag)
 
         cancelButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.dismiss(animated: true, completion: nil)
@@ -109,4 +110,3 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         self.explanationMessage.text = self.viewModel.explanationMessage
     }
 }
-
