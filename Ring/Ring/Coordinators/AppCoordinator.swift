@@ -64,7 +64,6 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         self.injectionBag = injectionBag
 
         self.navigationController.setNavigationBarHidden(true, animated: false)
-        self.prepareMainInterface()
 
         self.stateSubject.subscribe(onNext: { [unowned self] (state) in
             guard let state = state as? AppState else { return }
@@ -74,6 +73,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
             case .needToOnboard:
                 self.showWalkthrough()
             case .allSet:
+                self.prepareMainInterface()
                 self.showMainInterface()
             }
         }).disposed(by: self.disposeBag)

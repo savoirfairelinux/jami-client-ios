@@ -25,7 +25,7 @@ import RxSwift
 ///
 /// - meDetail: user want its account detail
 /// -linkDevice: link new device to account
-public enum MeState: State {
+enum MeState: State {
     case meDetail
     case linkNewDevice
 }

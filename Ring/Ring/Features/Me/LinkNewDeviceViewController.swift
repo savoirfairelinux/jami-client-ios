@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,25 +19,25 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import Reusable
 import RxSwift
 import PKHUD
 
-class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
+final class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
 
-    @IBOutlet weak var titleLable: UILabel!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var okButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var pinLabel: UILabel!
-    @IBOutlet weak var explanationMessage: UILabel!
-    @IBOutlet weak var errorMessage: UILabel!
-    @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet private weak var titleLable: UILabel!
+    @IBOutlet private weak var passwordField: UITextField!
+    @IBOutlet private weak var okButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var pinLabel: UILabel!
+    @IBOutlet private weak var explanationMessage: UILabel!
+    @IBOutlet private weak var errorMessage: UILabel!
+    @IBOutlet private weak var background: UIImageView!
+    @IBOutlet private weak var containerView: UIView!
 
     var viewModel: LinkNewDeviceViewModel!
-    let disposeBag = DisposeBag()
+
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
 
