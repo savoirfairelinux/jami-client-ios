@@ -93,7 +93,10 @@ class ContactRequestsViewModel: Stateable, ViewModel {
                                              withContent: GeneratedMessageType.contactRequestAccepted.rawValue,
                                              byAuthor: accountHelper.ringId!,
                                              toConversationWith: item.contactRequest.ringId,
-                                             currentAccountId: (self.accountsService.currentAccount?.id)!, generated: true)
+                                             toAccountId: (self.accountsService.currentAccount?.id)!,
+                                             toAccountUri: accountHelper.ringId!,
+                                             generated: true,
+                                             shouldRefreshConversations: true)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message saved")
             })
@@ -155,7 +158,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
         let conversation = self.conversationService.findConversation(withRingId: ringId,
                                                                      withAccountId: (accountsService.currentAccount?.id)!)
-        conversationViewModel.conversation = conversation
+        conversationViewModel.conversation = Variable<ConversationModel>(conversation!)
         self.stateSubject.onNext(ConversationsState.conversationDetail(conversationViewModel: conversationViewModel))
     }
 }
