@@ -21,7 +21,6 @@
 
 import UIKit
 import RxSwift
-import RealmSwift
 import SwiftyBeaver
 
 class ConversationViewModel: ViewModel {
@@ -51,25 +50,34 @@ class ConversationViewModel: ViewModel {
         hourFormatter.dateFormat = "HH:mm"
     }
 
-    var conversation: ConversationModel! {
+    var conversation: Variable<ConversationModel>! {
         didSet {
-            //Create observable from sorted conversations and flatMap them to view models
-            self.messages = self.conversationsService.conversations.map({ [unowned self] conversations in
-                return conversations.filter({ conv in
-                    let recipient1 = conv.recipientRingId
-                    let recipient2 = self.conversation.recipientRingId
-                    if recipient1 == recipient2 {
-                        return true
-                    }
-                    return false
-                }).flatMap({ conversation in
-                    conversation.messages.map({ [unowned self] message in
-                        return MessageViewModel(withInjectionBag: self.injectionBag, withMessage: message)
-                    })
-                })
-            }).observeOn(MainScheduler.instance)
+            let contactRingId = self.conversation.value.recipientRingId
 
-            let contactRingId = self.conversation.recipientRingId
+            self.conversationsService
+                .conversationsForCurrentAccount
+                .map({ [unowned self] conversations in
+                    return conversations.filter({ conv in
+                        let recipient1 = conv.recipientRingId
+                        let recipient2 = contactRingId
+                        if recipient1 == recipient2 {
+                            return true
+                        }
+                        return false
+                    }).map({ conversation -> (ConversationModel) in
+                        self.conversation.value = conversation
+                        return conversation
+                    })
+                        .flatMap({ conversation in
+                            conversation.messages.map({ [unowned self] message in
+                                return MessageViewModel(withInjectionBag: self.injectionBag, withMessage: message)
+                            })
+                        })
+                })
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { messageViewModel in
+                    self.messages.value = messageViewModel
+                }).disposed(by: self.disposeBag)
 
             let contact = self.contactsService.contact(withRingId: contactRingId)
 
@@ -115,13 +123,11 @@ class ConversationViewModel: ViewModel {
                 self.userName.value = contactUserName
             } else {
 
-                let recipientRingId = self.conversation.recipientRingId
-
                 // Return an observer for the username lookup
                 self.nameService.usernameLookupStatus
                     .filter({ lookupNameResponse in
                         return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == recipientRingId
+                            lookupNameResponse.address == contactRingId
                     }).subscribe(onNext: { [unowned self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
                             self.userName.value = name
@@ -131,18 +137,10 @@ class ConversationViewModel: ViewModel {
                         }
                     }).disposed(by: disposeBag)
 
-                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: self.conversation.recipientRingId)
+                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: contactRingId)
             }
         }
     }
-
-    private lazy var realm: Realm = {
-        guard let realm = try? Realm() else {
-            fatalError("Enable to instantiate Realm")
-        }
-
-        return realm
-    }()
 
     //Displays the entire date ( for messages received before the current week )
     private let dateFormatter = DateFormatter()
@@ -152,7 +150,7 @@ class ConversationViewModel: ViewModel {
 
     private let disposeBag = DisposeBag()
 
-    var messages: Observable<[MessageViewModel]>!
+    var messages = Variable([MessageViewModel]())
 
     var userName = Variable<String>("")
 
@@ -171,7 +169,8 @@ class ConversationViewModel: ViewModel {
     }
 
     var lastMessage: String {
-        if let lastMessage = conversation.messages.last?.content {
+        let messages = self.messages.value
+        if let lastMessage = messages.last?.content {
             return lastMessage
         } else {
             return ""
@@ -180,7 +179,7 @@ class ConversationViewModel: ViewModel {
 
     var lastMessageReceivedDate: String {
 
-        guard let lastMessageDate = self.conversation.messages.last?.receivedDate else {
+        guard let lastMessageDate = self.conversation.value.messages.last?.receivedDate else {
             return ""
         }
 
@@ -214,44 +213,36 @@ class ConversationViewModel: ViewModel {
     }
 
     var hideDate: Bool {
-        return self.conversation.messages.isEmpty
+        return self.conversation.value.messages.isEmpty
     }
 
     func sendMessage(withContent content: String) {
         // send a contact request if this is the first message (implicitly not a contact)
-        if self.conversation.messages.isEmpty {
+        if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
 
         self.conversationsService
             .sendMessage(withContent: content,
                          from: accountService.currentAccount!,
-                         to: self.conversation.recipientRingId)
+                         to: self.conversation.value.recipientRingId)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message sent")
             }).disposed(by: self.disposeBag)
     }
 
-    fileprivate func saveMessage(withId messageId: String,
-                                 withContent content: String,
-                                 byAuthor author: String,
-                                 toConversationWith account: String,
-                                 generated: Bool) {
-        self.conversationsService
-            .saveMessage(withId: messageId,
-                         withContent: content,
-                         byAuthor: author,
-                         toConversationWith: account,
-                         currentAccountId: (accountService.currentAccount?.id)!, generated: generated)
-            .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("Message saved")
-            })
-            .disposed(by: disposeBag)
-    }
-
     func setMessagesAsRead() {
+        guard let account = self.accountService.currentAccount else {
+            return
+        }
+        guard let ringId = AccountModelHelper(withAccount: account).ringId  else {
+            return
+        }
+
         self.conversationsService
-            .setMessagesAsRead(forConversation: self.conversation)
+            .setMessagesAsRead(forConversation: self.conversation.value,
+                               accountId: account.id,
+                               accountURI: ringId)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message set as read")
             }).disposed(by: disposeBag)
@@ -259,7 +250,7 @@ class ConversationViewModel: ViewModel {
 
     fileprivate var unreadMessagesCount: Int {
         let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
-        let unreadMessages =  self.conversation.messages
+        let unreadMessages =  self.conversation.value.messages
             .filter({ message in
             return message.status != .read && message.author != accountHelper.ringId!
         })
@@ -267,31 +258,35 @@ class ConversationViewModel: ViewModel {
     }
 
     func sendContactRequest() {
-        let contactExists =  self.contactsService.contact(withRingId: self.conversation.recipientRingId) != nil ? true : false
-        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue)
+        let contactExists =  self.contactsService.contact(withRingId: self.conversation.value.recipientRingId) != nil ? true : false
+        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
+                             inFolder: VCardFolders.profile.rawValue)
             .subscribe(onSuccess: { [unowned self] (card) in
-                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!)
+                self.contactsService.sendContactRequest(toContactRingId: self.conversation.value.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!)
                     .subscribe(onCompleted: {
                         if !contactExists {
                             self.generateMessage(ofType: GeneratedMessageType.sendContactRequest)
                         }
                         self.log.info("contact request sent")
+                    }, onError: { (error) in
+                        self.log.info(error)
                     }).disposed(by: self.disposeBag)
-            }, onError: { [unowned self]  _ in
-                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!)
+            }) { [unowned self] error in
+                self.contactsService.sendContactRequest(toContactRingId: self.conversation.value.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!)
                     .subscribe(onCompleted: {
                         if !contactExists {
                             self.generateMessage(ofType: GeneratedMessageType.sendContactRequest)
                         }
                         self.log.info("contact request sent")
+                    }, onError: { (error) in
+                        self.log.info(error)
                     }).disposed(by: self.disposeBag)
-
-            }).disposed(by: self.disposeBag)
+            }.disposed(by: self.disposeBag)
     }
 
     func generateMessage(ofType messageType: GeneratedMessageType) {
         self.conversationsService.generateMessage(ofType: messageType,
-                                                  forRindId: self.conversation.recipientRingId,
+                                                  forRindId: self.conversation.value.recipientRingId,
                                                   forAccount: self.accountService.currentAccount!)
     }
 }

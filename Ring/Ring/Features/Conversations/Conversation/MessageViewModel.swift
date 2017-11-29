@@ -69,7 +69,7 @@ class MessageViewModel {
                 let account = self.accountService.getAccount(fromAccountId: messageUpdateEvent.getEventInput(.id)!)
                 let accountHelper = AccountModelHelper(withAccount: account!)
                 return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
-                    messageUpdateEvent.getEventInput(.messageId) == self.message.id &&
+                    messageUpdateEvent.getEventInput(.messageId) == self.message.daemonId &&
                     accountHelper.ringId == self.message.author
             })
             .subscribe(onNext: { [unowned self] messageUpdateEvent in
@@ -89,7 +89,7 @@ class MessageViewModel {
     }
 
     var id: UInt64 {
-        return UInt64(self.message.id)!
+        return UInt64(self.message.daemonId)!
     }
 
     var status = BehaviorSubject<MessageStatus>(value: .unknown)
