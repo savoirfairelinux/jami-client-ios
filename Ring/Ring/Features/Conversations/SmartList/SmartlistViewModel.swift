@@ -72,7 +72,7 @@ class SmartlistViewModel: Stateable, ViewModel {
             .disposed(by: self.disposeBag)
 
         //Create observable from sorted conversations and flatMap them to view models
-        let conversationsObservable: Observable<[ConversationViewModel]> = self.conversationsService.conversations.asObservable().map({ conversations in
+        let conversationsObservable: Observable<[ConversationViewModel]> = self.conversationsService.conversationsForCurrentAccount.map({ conversations in
             return conversations
                 .sorted(by: { conversation1, conversations2 in
 
@@ -92,12 +92,12 @@ class SmartlistViewModel: Stateable, ViewModel {
 
                     //Get the current ConversationViewModel if exists or create it
                     if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
-                        return conversationViewModel.conversation.isEqual(conversationModel)
+                        return conversationViewModel.conversation.value == conversationModel
                     }).first {
                         conversationViewModel = foundConversationViewModel
                     } else {
                         conversationViewModel = ConversationViewModel(with: injectionBag)
-                        conversationViewModel?.conversation = conversationModel
+                        conversationViewModel?.conversation = Variable<ConversationModel>(conversationModel)
                         self.conversationViewModels.append(conversationViewModel!)
                     }
 
@@ -148,17 +148,24 @@ class SmartlistViewModel: Stateable, ViewModel {
             if usernameLookupStatus.state == .found && usernameLookupStatus.name == self.searchBarText.value {
 
                 if let conversation = self.conversationViewModels.filter({ conversationViewModel in
-                    conversationViewModel.conversation.recipientRingId == usernameLookupStatus.address
+                    conversationViewModel.conversation.value.recipientRingId == usernameLookupStatus.address
                 }).first {
                     self.contactFoundConversation.value = conversation
                 } else {
-                    if self.contactFoundConversation.value?.conversation
+                    if self.contactFoundConversation.value?.conversation.value
                         .recipientRingId != usernameLookupStatus.address {
 
+                        var accountURI = ""
+                        if let account = self.accountsService.currentAccount {
+                            if let uri = AccountModelHelper(withAccount: account).ringId {
+                            accountURI = uri
+                            }
+                        }
+
                         //Create new converation
-                        let conversation = ConversationModel(withRecipientRingId: usernameLookupStatus.address, accountId: "")
+                        let conversation = ConversationModel(withRecipientRingId: usernameLookupStatus.address, accountId: "", accountUri: accountURI)
                         let newConversation = ConversationViewModel(with: injectionBag)
-                        newConversation.conversation = conversation
+                        newConversation.conversation = Variable<ConversationModel>(conversation)
                         self.contactFoundConversation.value = newConversation
                     }
                 }
@@ -184,7 +191,7 @@ class SmartlistViewModel: Stateable, ViewModel {
             //Filter conversations by user name or RingId
             let filteredConversations = self.conversationViewModels.filter({ [unowned self] conversationViewModel in
 
-                let contact = self.contactsService.contact(withRingId: conversationViewModel.conversation.recipientRingId)
+                let contact = self.contactsService.contact(withRingId: conversationViewModel.conversation.value.recipientRingId)
 
                 if let recipientUserName = contact?.userName {
                     return recipientUserName.lowercased().hasPrefix(text.lowercased())
@@ -202,25 +209,13 @@ class SmartlistViewModel: Stateable, ViewModel {
         }
     }
 
-    func selected(item selectedItem: ConversationViewModel) {
-
-        if !self.conversationViewModels.contains(where: { viewModel in
-            return viewModel === selectedItem
-        }) {
-            self.conversationsService
-                .addConversation(conversation: selectedItem.conversation)
-                .subscribe()
-                .disposed(by: disposeBag)
-        }
-    }
-
     func delete(conversationViewModel: ConversationViewModel) {
 
         if let index = self.conversationViewModels.index(where: ({ cvm in
-            cvm.conversation.recipientRingId == conversationViewModel.conversation.recipientRingId
+            cvm.conversation.value == conversationViewModel.conversation.value
         })) {
 
-            self.conversationsService.deleteConversation(conversation: conversationViewModel.conversation)
+            self.conversationsService.deleteConversation(conversation: conversationViewModel.conversation.value)
             self.conversationViewModels.remove(at: index)
         }
     }

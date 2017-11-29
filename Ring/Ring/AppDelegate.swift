@@ -21,7 +21,6 @@
  */
 
 import UIKit
-import RealmSwift
 import SwiftyBeaver
 import RxSwift
 import Chameleon
@@ -38,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
     private let networkService = NetworkService()
+    private var conversationManager: ConversationsManager?
 
     public lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
@@ -80,11 +80,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // load accounts during splashscreen
         // and ask the AppCoordinator to handle the first screen once loading is finished
+        self.conversationManager = ConversationsManager(with: self.conversationsService, accountsService: self.accountService)
         self.accountService.loadAccounts().subscribe { [unowned self] (_) in
             if let currentAccount = self.accountService.currentAccount {
                 self.contactsService.loadContacts(withAccount: currentAccount)
                 self.contactsService.loadContactRequests(withAccount: currentAccount)
                 self.presenceService.subscribeBuddies(withAccount: currentAccount, withContacts: self.contactsService.contacts.value)
+                if let ringID = AccountModelHelper(withAccount: currentAccount).ringId {
+                    self.conversationManager?
+                        .prepareConversationsForAccount(accountId: currentAccount.id, accountUri: ringID)
+                }
             }
         }.disposed(by: self.disposeBag)
 
@@ -94,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try DBManager().start()
         } catch {
-            log.error("unable create tables")
+            log.error("unable create db tables")
         }
         return true
     }
