@@ -65,6 +65,7 @@ class AccountsService: AccountAdapterDelegate {
      - SeeAlso: `sharedResponseStream`
      */
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    let dbManager = DBManager()
 
     // MARK: - Public members
     /**
@@ -119,7 +120,6 @@ class AccountsService: AccountAdapterDelegate {
             }
         }
     }
-
     init(withAccountAdapter accountAdapter: AccountAdapter) {
         self.accountList = []
 
@@ -412,7 +412,17 @@ class AccountsService: AccountAdapterDelegate {
     func registrationStateChanged(with response: RegistrationResponse) {
         log.debug("RegistrationStateChanged.")
         reloadAccounts()
-
+        if let state = response.state, state == Registered {
+            if let account = self.currentAccount {
+                if let ringID = AccountModelHelper(withAccount: account).ringId {
+                    do {
+                        _ = try self.dbManager.getProfile(for: ringID, createIfNotExists: true)
+                    } catch {
+                        log.error("save profile failed")
+                    }
+                }
+            }
+        }
         var event = ServiceEvent(withEventType: .registrationStateChanged)
         event.addEventInput(.registrationState, value: response.state)
         self.responseStream.onNext(event)
