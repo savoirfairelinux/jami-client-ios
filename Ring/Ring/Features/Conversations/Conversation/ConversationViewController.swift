@@ -151,7 +151,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.tableView.register(cellType: MessageCellGenerated.self)
 
         //Bind the TableView to the ViewModel
-        self.viewModel.messages.subscribe(onNext: { [weak self] (messageViewModels) in
+        self.viewModel.messages.asObservable().subscribe(onNext: { [weak self] (messageViewModels) in
             self?.messageViewModels = messageViewModels
             self?.computeSequencing()
             self?.tableView.reloadData()
@@ -452,7 +452,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                 if scanner.scanHexInt64(&index) {
                     fallbackAvatar.isHidden = false
                     fallbackAvatar.backgroundColor = avatarColors[Int(index)]
-                    if viewModel.conversation.recipientRingId != name {
+                    if viewModel.conversation.value.recipientRingId != name {
                         fallbackAvatar.text = name.prefixString().capitalized
                     }
                 }
@@ -468,7 +468,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                 viewModel.userName.asObservable()
                     .observeOn(MainScheduler.instance)
                     .filter({ [weak self] userName in
-                        return userName != self?.viewModel.conversation.recipientRingId
+                        return userName != self?.viewModel.conversation.value.recipientRingId
                     })
                     .map { value in value.prefixString().capitalized }
                     .bind(to: fallbackAvatar.rx.text)

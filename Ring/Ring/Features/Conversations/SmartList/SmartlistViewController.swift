@@ -159,7 +159,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 if scanner.scanHexInt64(&index) {
                     cell.fallbackAvatar.isHidden = false
                     cell.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
-                    if item.conversation.recipientRingId != name {
+                    if item.conversation.value.recipientRingId != name {
                         cell.fallbackAvatar.text = name.prefixString().capitalized
                     }
                 }
@@ -167,7 +167,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 item.userName.asObservable()
                     .observeOn(MainScheduler.instance)
                     .filter({ [weak item] userName in
-                        return userName != item?.conversation.recipientRingId
+                        return userName != item?.conversation.value.recipientRingId
                     })
                     .map { value in value.prefixString().capitalized }
                     .bind(to: cell.fallbackAvatar.rx.text)
