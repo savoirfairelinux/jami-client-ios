@@ -84,6 +84,7 @@ enum DBBridgingError: Error {
     case getConversationFailed
     case updateMessageStatusFailed
     case deleteConversationFailed
+    case getProfileFailed
 }
 
 enum InteractionType: String {
@@ -127,8 +128,7 @@ class DBManager {
                 //use transaction to lock access to db from other threads while the following queries are executed
                 try dataBase.transaction {
 
-                    //profile for account should be creating when creating account
-                    guard let accountProfile = try self?.getProfile(for: accountUri, createIfNotExists: false) else {
+                    guard let accountProfile = try self?.getProfile(for: accountUri, createIfNotExists: true) else {
                         throw DBBridgingError.saveMessageFailed
                     }
 
@@ -168,7 +168,7 @@ class DBManager {
             }
     }
 
-    func getConversationsObservable(for accountID: String, accountURI: String) -> Observable<[ConversationModel1]> {
+    func getConversationsObservable(for accountID: String, accountURI: String) -> Observable<[ConversationModel]> {
 
         return Observable.create { observable in
 
@@ -205,7 +205,6 @@ class DBManager {
 
     func setMessagesAsRead(messagesIDs: [Int64], withStatus status: MessageStatus) -> Completable {
         return Completable.create { [unowned self] completable in
-
             var success = true
             for messageId in messagesIDs {
                 if !self.interactionHepler
@@ -268,11 +267,25 @@ class DBManager {
             }
     }
 
+    func profileObservable(for profileUri: String, createIfNotExists: Bool) -> Observable<Profile> {
+        return Observable.create { observable in
+            do {
+                if let profile = try self.getProfile(for: profileUri, createIfNotExists: createIfNotExists) {
+                    observable.onNext(profile)
+                    observable.on(.completed)
+                }
+            } catch {
+                observable.on(.error(DBBridgingError.getProfileFailed))
+            }
+            return Disposables.create { }
+        }
+    }
+
     // MARK: Private functions
 
-    private func buildConversationsForAccount(accountUri: String, accountID: String) throws -> [ConversationModel1] {
+    private func buildConversationsForAccount(accountUri: String, accountID: String) throws -> [ConversationModel] {
 
-        var conversationsToReturn = [ConversationModel1]()
+        var conversationsToReturn = [ConversationModel]()
 
         guard let accountProfile = try self.getProfile(for: accountUri, createIfNotExists: false) else {
             throw DBBridgingError.getConversationFailed
@@ -295,9 +308,9 @@ class DBManager {
             guard let participantProfile = try self.profileHepler.selectProfile(profileId: participant) else {
                 throw DBBridgingError.getConversationFailed
             }
-            let conversationModel1 = ConversationModel1(withRecipientRingId: participantProfile.uri,
-                                                        accountId: accountID)
-            conversationModel1.participantProfile = participantProfile
+            let conversationModel = ConversationModel(withRecipientRingId: participantProfile.uri,
+                                                       accountId: accountID, accountUri: accountUri)
+            conversationModel.participantProfile = participantProfile
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
                 .selectInteractionsForConversationWithAccount(conversationID: conversationID,
@@ -306,13 +319,17 @@ class DBManager {
                     throw DBBridgingError.getConversationFailed
             }
             for interaction in interactions {
-                if let message = self.convertToMessage(interaction: interaction, profile: participantProfile) {
+                var author = accountProfile.uri
+                if interaction.authorID == participantProfile.id {
+                    author = participantProfile.uri
+                }
+                if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
                 }
 
             }
-            conversationModel1.messages = messages
-            conversationsToReturn.append(conversationModel1)
+            conversationModel.messages = messages
+            conversationsToReturn.append(conversationModel)
         }
         return conversationsToReturn
     }
@@ -357,12 +374,12 @@ class DBManager {
         }
     }
 
-    private func convertToMessage(interaction: Interaction, profile: Profile) -> MessageModel? {
+    private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
         let message = MessageModel(withId: interaction.daemonID,
                                    receivedDate: date,
                                    content: interaction.body,
-                                   author: profile.uri)
+                                   author: author)
         message.isGenerated = self.isGenerated(message: message)
         if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
             message.status = status.toMessageStatus()
@@ -378,7 +395,7 @@ class DBManager {
         let interaction = Interaction(defaultID, accountProfileID, authorProfileID,
                                       conversationID, Int64(timeInterval),
                                       message.content, InteractionType.text.rawValue,
-                                      InteractionStatus.unknown.rawValue, message.id)
+                                      InteractionStatus.unknown.rawValue, message.daemonId)
         return self.interactionHepler.insert(item: interaction)
     }
 
