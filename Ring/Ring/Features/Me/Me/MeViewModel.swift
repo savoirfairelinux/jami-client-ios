@@ -104,6 +104,14 @@ final class MeViewModel: ViewModel, Stateable {
         self.accountService = injectionBag.newAccountsService
         self.nameService = injectionBag.nameService
 
+        self.refresh()
+    }
+
+    func linkDevice() {
+        self.stateSubject.onNext(MeState.linkNewDevice)
+    }
+
+    func refresh() {
         self.accountService.currentAccount()
             .do(onNext: { [weak self] (account) in
                 let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.accountUsername)
@@ -125,9 +133,9 @@ final class MeViewModel: ViewModel, Stateable {
                 } else {
                     self?.accountSettings.value = [addNewDevice]
                 }
-            }, onError: { [weak self] (error) in
-                self?.accountRingId.value = "No RingId found"
-                self?.log.error("No RingId found - \(error.localizedDescription)")
+                }, onError: { [weak self] (error) in
+                    self?.accountRingId.value = "No RingId found"
+                    self?.log.error("No RingId found - \(error.localizedDescription)")
             })
             .flatMap { (account) -> PrimitiveSequence<SingleTrait, String> in
                 let registeredNameKey = ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)
@@ -140,14 +148,10 @@ final class MeViewModel: ViewModel, Stateable {
             }
             .subscribe(onSuccess: { [weak self] (username) in
                 self?.accountUsername.value = username
-            }, onError: { [weak self] (error) in
-                self?.accountUsername.value = "No username found"
-                self?.log.error("No username found - \(error.localizedDescription)")
+                }, onError: { [weak self] (error) in
+                    self?.accountUsername.value = "No username found"
+                    self?.log.error("No username found - \(error.localizedDescription)")
             })
             .disposed(by: self.disposeBag)
-    }
-
-    func linkDevice() {
-        self.stateSubject.onNext(MeState.linkNewDevice)
     }
 }

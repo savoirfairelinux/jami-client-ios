@@ -32,6 +32,27 @@ enum AccountError: Error {
     case unknownError
 }
 
+enum ExportAccountError: Error {
+    case unknownError
+}
+
+enum PinError: Error {
+    case passwordError
+    case networkError
+    case defaultError
+
+    var description: String {
+        switch self {
+        case .passwordError:
+            return L10n.Linkdevice.passwordError
+        case .networkError:
+            return L10n.Linkdevice.networkError
+        case .defaultError:
+            return L10n.Linkdevice.defaultError
+        }
+    }
+}
+
 /// The New Accounts Service, with no model duplication from the daemon.
 final class NewAccountsService {
 
@@ -44,6 +65,8 @@ final class NewAccountsService {
 
     /// Stream for daemon signal, inaccessible from the outside
     fileprivate let daemonSignals = PublishSubject<ServiceEvent>()
+
+    fileprivate let disposeBag = DisposeBag()
 
     // MARK: - Members
     lazy var daemonSignalsObservable: Observable<ServiceEvent> = {
@@ -207,6 +230,44 @@ final class NewAccountsService {
             })
     }
 
+    func exportAccountOnRing(_ account: AccountModel, withPassword password: String) -> Observable<String> {
+        let export = self.exportAccount(account, withPassword: password)
+
+        let filteredDaemonSignals = self.daemonSignals.filter { (serviceEvent) -> Bool in
+            if serviceEvent.getEventInput(ServiceEventInput.state) == ErrorGeneric {
+                throw AccountCreationError.linkError
+            } else if serviceEvent.getEventInput(ServiceEventInput.state) == ErrorNetwork {
+                throw AccountCreationError.network
+            }
+
+            return serviceEvent.eventType == ServiceEventType.exportOnRingEnded
+        }.asObservable()
+
+        return Observable
+            .combineLatest(export, filteredDaemonSignals) { (_, serviceEvent) -> String in
+                let accountModelHelper = AccountModelHelper(withAccount: account)
+                guard let uri = accountModelHelper.ringId, uri == serviceEvent.getEventInput(.uri) else {
+                    throw ExportAccountError.unknownError
+                }
+                if let state: Int = serviceEvent.getEventInput(.state) {
+                    switch state {
+                    case ExportAccountResponse.success.rawValue:
+                        guard let pin: String = serviceEvent.getEventInput(.pin) else {
+                            throw PinError.defaultError
+                        }
+                        return pin
+                    case ExportAccountResponse.wrongPassword.rawValue:
+                        throw PinError.passwordError
+                    case ExportAccountResponse.networkProblem.rawValue:
+                        throw PinError.networkError
+                    default:
+                        throw PinError.defaultError
+                    }
+                }
+                throw PinError.defaultError
+            }
+    }
+
 }
 
 // MARK: - Private daemon wrappers
@@ -305,6 +366,19 @@ extension NewAccountsService {
         return accountModel
     }
 
+    fileprivate func exportAccount(_ account: AccountModel, withPassword password: String) -> Observable<Bool> {
+        return Observable.create { [unowned self] observable in
+            let export = self.accountAdapter.export(onRing: account.id, password: password)
+            if export {
+                observable.onNext(true)
+                observable.onCompleted()
+            } else {
+                observable.onError(LinkNewDeviceError.unknownError)
+            }
+            return Disposables.create()
+        }
+    }
+
 }
 
 // MARK: - AccountAdapterDelegate
@@ -332,6 +406,25 @@ extension NewAccountsService: AccountAdapterDelegate {
 
     func exportOnRingEnded(for account: String, state: Int, pin: String) {
         log.debug("Export on Ring ended.")
+
+        self.getAccount(fromAccountId: account)
+            .subscribe(onSuccess: { [unowned self] (account) in
+                let accountHelper = AccountModelHelper(withAccount: account)
+                if let uri = accountHelper.ringId {
+                    var event = ServiceEvent(withEventType: .exportOnRingEnded)
+                    event.addEventInput(.uri, value: uri)
+                    event.addEventInput(.state, value: state)
+                    event.addEventInput(.pin, value: pin)
+                    self.daemonSignals.onNext(event)
+                }
+                }, onError: { [unowned self] (error) in
+                    self.log.error("Account not found")
+                    var event = ServiceEvent(withEventType: .exportOnRingEnded)
+                    event.addEventInput(.state, value: state)
+                    event.addEventInput(.pin, value: pin)
+                    self.daemonSignals.onNext(event)
+            })
+            .disposed(by: self.disposeBag)
     }
 
 }

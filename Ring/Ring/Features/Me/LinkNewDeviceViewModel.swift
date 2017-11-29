@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,7 +19,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import RxSwift
 import RxDataSources
 
@@ -26,23 +26,6 @@ enum ExportAccountResponse: Int {
     case success = 0
     case wrongPassword = 1
     case networkProblem = 2
-}
-
-enum PinError {
-    case passwordError
-    case networkError
-    case defaultError
-
-    var description: String {
-        switch self {
-        case .passwordError:
-            return L10n.Linkdevice.passwordError
-        case .networkError:
-            return L10n.Linkdevice.networkError
-        case .defaultError:
-            return L10n.Linkdevice.defaultError
-        }
-    }
 }
 
 enum GeneratingPinState {
@@ -66,7 +49,6 @@ enum GeneratingPinState {
     }
 
     func isStateOfType(type: String) -> Bool {
-
         return self.rawValue == type
     }
 }
@@ -108,17 +90,16 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
         }
         }().share()
 
-    let accountService: AccountsService
+    private let accountsService: NewAccountsService
 
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     // MARK: L10n
     let linkDeviceTitleTitle  = L10n.Linkdevice.title
     let explanationMessage = L10n.Linkdevice.explanationMessage
 
     required init(with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
-
+        self.accountsService = injectionBag.newAccountsService
     }
 
     func linkDevice(with password: String?) {
@@ -127,40 +108,21 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
             self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
             return
         }
-        self.accountService.exportOnRing(withPassword: password).subscribe(onCompleted: {
-            if let account = self.accountService.currentAccount {
-                let accountHelper = AccountModelHelper(withAccount: account)
-                let uri = accountHelper.ringId
-                self.accountService.sharedResponseStream
-                    .filter({ exportComplitedEvent in
-                        return exportComplitedEvent.eventType == ServiceEventType.exportOnRingEnded
-                            && exportComplitedEvent.getEventInput(.uri) == uri
-                    })
-                    .subscribe(onNext: { [unowned self] exportComplitedEvent in
-                        if let state: Int = exportComplitedEvent.getEventInput(.state) {
-                            switch state {
-                            case ExportAccountResponse.success.rawValue:
-                                if let pin: String = exportComplitedEvent.getEventInput(.pin) {
-                                    self.generatingState.value = GeneratingPinState.success(pin: pin)
-                                } else {
-                                    self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
-                                }
-                            case ExportAccountResponse.wrongPassword.rawValue:
-                                self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
-                            case ExportAccountResponse.networkProblem.rawValue:
-                                self.generatingState.value = GeneratingPinState.error(error: PinError.networkError)
-                            default:
-                                self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
-                            }
-                        }
-                    })
-                    .disposed(by: self.disposeBag)
-            } else {
-                self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
+
+        self.accountsService.currentAccount().asObservable()
+            .flatMap { [unowned self] (account) -> Observable<String> in
+                return self.accountsService.exportAccountOnRing(account, withPassword: password)
             }
-        }, onError: { error in
-            self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
-        }).disposed(by: self.disposeBag)
+            .subscribe(onNext: { [weak self] pin in
+                self?.generatingState.value = GeneratingPinState.success(pin: pin)
+                }, onError: { [weak self] (error) in
+                    if let pinError = error as? PinError {
+                        self?.generatingState.value = GeneratingPinState.error(error: pinError)
+                    } else {
+                        self?.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
+                    }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func refresh() {
