@@ -145,7 +145,7 @@ class DBBridging {
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
-    func getConversationsObservable(for account: AccountModel) -> Observable<[ConversationModel1]> {
+    func getConversationsObservable(for account: AccountModel) -> Observable<[ConversationModel]> {
 
         return Observable.create { observable in
 
@@ -176,9 +176,9 @@ class DBBridging {
 
     // MARK: Private functions
 
-    private func buildConversationsForAccount(accountUri: String, accountID: String) throws -> [ConversationModel1] {
+    private func buildConversationsForAccount(accountUri: String, accountID: String) throws -> [ConversationModel] {
 
-        var conversationsToReturn = [ConversationModel1]()
+        var conversationsToReturn = [ConversationModel]()
 
         guard let accountProfile = try self.getProfile(for: accountUri, createIfNotExists: false) else {
             throw DBBridgingError.getConversationFailed
@@ -201,7 +201,7 @@ class DBBridging {
             guard let participantProfile = try self.profileHepler.selectProfile(profileId: participant) else {
                 throw DBBridgingError.getConversationFailed
             }
-            let conversationModel1 = ConversationModel1(withRecipientRingId: participantProfile.uri,
+            let conversationModel1 = ConversationModel(withRecipientRingId: participantProfile.uri,
                                                         accountId: accountID)
             conversationModel1.participantProfile = participantProfile
             var messages = [MessageModel]()
@@ -212,7 +212,11 @@ class DBBridging {
                     throw DBBridgingError.getConversationFailed
             }
             for interaction in interactions {
-                if let message = self.convertToMessage(interaction: interaction, profile: participantProfile) {
+                var author = accountProfile.uri
+                if interaction.authorID == participantProfile.id {
+                    author = participantProfile.uri
+                }
+                if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
                 }
 
@@ -263,12 +267,12 @@ class DBBridging {
         }
     }
 
-    private func convertToMessage(interaction: Interaction, profile: Profile) -> MessageModel? {
+    private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
         let message = MessageModel(withId: interaction.daemonID,
                                    receivedDate: date,
-                                   content: interaction.body,
-                                   author: profile.uri)
+                                   content: interaction.body,adsa
+                                   author: author)
         message.isGenerated = self.isGenerated(message: message)
         if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
             message.status = status.toMessageStatus()
@@ -288,7 +292,7 @@ class DBBridging {
         return self.interactionHepler.insert(item: interaction)
     }
 
-    private func getProfile(for profileUri: String, createIfNotExists: Bool) throws -> Profile? {
+    func getProfile(for profileUri: String, createIfNotExists: Bool) throws -> Profile? {
         if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
             return profile
         }
@@ -345,4 +349,3 @@ class DBBridging {
             .intersection(Set(contactConversations.map({$0.id}))))
     }
 }
-

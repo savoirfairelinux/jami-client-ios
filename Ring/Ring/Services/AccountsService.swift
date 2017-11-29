@@ -119,7 +119,6 @@ class AccountsService: AccountAdapterDelegate {
             }
         }
     }
-
     init(withAccountAdapter accountAdapter: AccountAdapter) {
         self.accountList = []
 

@@ -54,7 +54,7 @@ class ConversationViewModel: ViewModel {
     var conversation: ConversationModel! {
         didSet {
             //Create observable from sorted conversations and flatMap them to view models
-            self.messages = self.conversationsService.conversations.map({ [unowned self] conversations in
+            self.messages = self.conversationsService.conversations.asObservable().map({ [unowned self] conversations in
                 return conversations.filter({ conv in
                     let recipient1 = conv.recipientRingId
                     let recipient2 = self.conversation.recipientRingId

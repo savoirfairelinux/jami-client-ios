@@ -38,9 +38,22 @@ class ConversationsService: MessagesAdapterDelegate {
 
     private var realm: Realm!
 
-    fileprivate let results: Results<ConversationModel>
+     var currentAccount: AccountModel? {
+        didSet {
+            dbManager.getConversationsObservable(for: currentAccount!).map { conversationsModels in
+                self.conversations.value = conversationsModels
+            }.subscribe().disposed(by: self.disposeBag)
 
-    var conversations: Observable<Results<ConversationModel>>
+        }
+
+    }
+
+    //fileprivate let results: Results<ConversationModel>
+
+    //var conversations: Observable<Results<ConversationModel>>
+    var conversations = Variable([ConversationModel]())
+
+    var dbManager = DBBridging()
 
     init(withMessageAdapter adapter: MessagesAdapter) {
         self.responseStream.disposed(by: disposeBag)
@@ -52,9 +65,9 @@ class ConversationsService: MessagesAdapterDelegate {
 
         messageAdapter = adapter
         self.realm = realm
-        results = realm.objects(ConversationModel.self)
+       // results = realm.objects(ConversationModel.self)
 
-        conversations = Observable.collection(from: results, synchronousStart: true)
+        //conversations = Observable.collection(from: results, synchronousStart: true)
 
         MessagesAdapter.delegate = self
 
@@ -66,21 +79,21 @@ class ConversationsService: MessagesAdapterDelegate {
          Only sent messages having an 'unknown' or 'sending' status
          are considered for updating.
          */
-        for conversation in results.toArray() {
-            for message in (conversation.messages) {
-                if !message.id.isEmpty && (message.status == .unknown || message.status == .sending ) {
-                    let updatedMessageStatus = self.status(forMessageId: message.id)
-                    if (updatedMessageStatus.rawValue > message.status.rawValue && updatedMessageStatus != .failure) ||
-                        (updatedMessageStatus == .failure && message.status == .sending) {
-                        self.setMessageStatus(withMessage: message, withStatus: updatedMessageStatus)
-                            .subscribe(onCompleted: { [] in
-                                print("Message status updated - load")
-                            })
-                            .disposed(by: self.disposeBag)
-                    }
-                }
-            }
-        }
+//        for conversation in results.toArray() {
+//            for message in (conversation.messages) {
+//                if !message.id.isEmpty && (message.status == .unknown || message.status == .sending ) {
+//                    let updatedMessageStatus = self.status(forMessageId: message.id)
+//                    if (updatedMessageStatus.rawValue > message.status.rawValue && updatedMessageStatus != .failure) ||
+//                        (updatedMessageStatus == .failure && message.status == .sending) {
+//                        self.setMessageStatus(withMessage: message, withStatus: updatedMessageStatus)
+//                            .subscribe(onCompleted: { [] in
+//                                print("Message status updated - load")
+//                            })
+//                            .disposed(by: self.disposeBag)
+//                    }
+//                }
+//            }
+//        }
     }
 
     func sendMessage(withContent content: String,
@@ -112,14 +125,14 @@ class ConversationsService: MessagesAdapterDelegate {
 
     func addConversation(conversation: ConversationModel) -> Completable {
         return Completable.create(subscribe: { [unowned self] completable in
-            do {
-                try self.realm.write { [unowned self] in
-                    self.realm.add(conversation)
-                }
+//            do {
+//                //try self.realm.write { [unowned self] in
+//                   // self.realm.add(conversation)
+//                }
                 completable(.completed)
-            } catch let error {
-                completable(.error(error))
-            }
+//            } catch let error {
+//                completable(.error(error))
+//            }
 
             return Disposables.create { }
         })
@@ -138,33 +151,53 @@ class ConversationsService: MessagesAdapterDelegate {
                 message.isGenerated = generated
             }
 
-            //Get conversations for this sender
-            var currentConversation = self.results.filter({ conversation in
-                return conversation.recipientRingId == recipientRingId
-            }).first
+            var messageDirection = MessageDirection.incoming
 
-            //Create a new conversation for this sender if not exists
-            if currentConversation == nil {
-                currentConversation = ConversationModel(withRecipientRingId: recipientRingId, accountId: currentAccountId)
+            let helper = AccountModelHelper(withAccount: self.currentAccount!)
+            let uri = helper.ringId
 
-                do {
-                    try self.realm.write { [unowned self] in
-                        self.realm.add(currentConversation!)
-                    }
-                } catch let error {
-                    completable(.error(error))
-                }
+            if author == uri {
+                messageDirection = MessageDirection.outgoing
             }
 
-            //Add the received message into the conversation
-            do {
-                try self.realm.write {
-                    currentConversation?.messages.append(message)
-                }
+            self.dbManager.saveMessage(for: uri!, with: recipientRingId, message: message, type: messageDirection).subscribe(onCompleted: { [weak self] in
+                self?.dbManager.getConversationsObservable(for: (self?.currentAccount!)!)
+
+                    .map { conversationsModels in
+                    self?.conversations.value = conversationsModels
+                    }.subscribe().disposed(by: (self?.disposeBag)!)
                 completable(.completed)
-            } catch let error {
+            }, onError: { error in
                 completable(.error(error))
-            }
+            }).disposed(by: self.disposeBag)
+
+            //Get conversations for this sender
+//            var currentConversation = self.results.filter({ conversation in
+//                return conversation.recipientRingId == recipientRingId
+//            }).first
+//
+//            //Create a new conversation for this sender if not exists
+//            if currentConversation == nil {
+//                currentConversation = ConversationModel(withRecipientRingId: recipientRingId, accountId: currentAccountId)
+//
+//                do {
+//                    try self.realm.write { [unowned self] in
+//                        self.realm.add(currentConversation!)
+//                    }
+//                } catch let error {
+//                    completable(.error(error))
+//                }
+//            }
+//
+//            //Add the received message into the conversation
+//            do {
+//                try self.realm.write {
+//                    currentConversation?.messages.append(message)
+//                }
+//                completable(.completed)
+//            } catch let error {
+//                completable(.error(error))
+//            }
 
             return Disposables.create { }
 
@@ -173,7 +206,7 @@ class ConversationsService: MessagesAdapterDelegate {
 
     func findConversation(withRingId ringId: String,
                           withAccountId accountId: String) -> ConversationModel? {
-        return self.results
+        return self.conversations.value
             .filter({ conversation in
                 return conversation.recipientRingId == ringId && conversation.accountId == accountId
             })
@@ -262,19 +295,19 @@ class ConversationsService: MessagesAdapterDelegate {
 
     func deleteConversation(conversation: ConversationModel) {
 
-        do {
-            try realm.write {
-
-                //Remove all messages from the conversation
-                for message in conversation.messages {
-                    realm.delete(message)
-                }
-
-                realm.delete(conversation)
-            }
-        } catch let error {
-            self.log.error("\(error)")
-        }
+//        do {
+//            try realm.write {
+//
+//                //Remove all messages from the conversation
+//                for message in conversation.messages {
+//                    realm.delete(message)
+//                }
+//
+//                realm.delete(conversation)
+//            }
+//        } catch let error {
+//            self.log.error("\(error)")
+//        }
     }
 
     // MARK: Message Adapter delegate
@@ -303,7 +336,7 @@ class ConversationsService: MessagesAdapterDelegate {
                               to uri: String) {
 
         //Get conversations for this sender
-        let conversation = self.results.filter({ conversation in
+        let conversation = self.conversations.value.filter({ conversation in
             return conversation.recipientRingId == uri &&
                 conversation.accountId == accountId
         }).first

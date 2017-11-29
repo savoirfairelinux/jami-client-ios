@@ -96,6 +96,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             log.error("unable create tables")
         }
+
+        if let account = self.accountService.currentAccount {
+        self.conversationsService.currentAccount = account
+        }
+       // let helper = AccountModelHelper(withAccount: account)
+
         return true
     }
 

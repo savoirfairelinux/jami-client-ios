@@ -92,7 +92,7 @@ class SmartlistViewModel: Stateable, ViewModel {
 
                     //Get the current ConversationViewModel if exists or create it
                     if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
-                        return conversationViewModel.conversation.isEqual(conversationModel)
+                        return conversationViewModel.conversation == conversationModel
                     }).first {
                         conversationViewModel = foundConversationViewModel
                     } else {

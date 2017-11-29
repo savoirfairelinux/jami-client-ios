@@ -167,6 +167,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let password = Variable<String>("")
     let confirmPassword = Variable<String>("")
     let registerUsername = Variable<Bool>(true)
+    let dbManager = DBBridging()
     lazy var passwordValidationState: Observable<PasswordValidationState> = {
         return Observable.combineLatest(self.password.asObservable(), self.confirmPassword.asObservable())
         { (password: String, confirmPassword: String) -> PasswordValidationState in
@@ -261,6 +262,16 @@ class CreateAccountViewModel: Stateable, ViewModel {
                 if event.getEventInput(ServiceEventInput.registrationState) == Unregistered {
                     self.accountCreationState.value = .success
                     Observable<Int>.timer(Durations.alertFlashDuration.value, period: nil, scheduler: MainScheduler.instance).subscribe(onNext: { [unowned self] (_) in
+                        //
+                        do {
+                            let account = self.accountService.currentAccount
+                            let helper = AccountModelHelper(withAccount: account!)
+                            let url = helper.ringId
+
+                            try self.dbManager.getProfile(for: url!, createIfNotExists: true)
+                        } catch {
+
+                        }
                         self.stateSubject.onNext(WalkthroughState.accountCreated)
                     }).disposed(by: self.disposeBag)
                 } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
