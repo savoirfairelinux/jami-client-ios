@@ -51,10 +51,10 @@ class ConversationDataHelper {
         guard let dataBase = RingDB.instance.ringDB else {
             return false
         }
-        let insert = table.insert(id <- item.id,
+        let query = table.insert(id <- item.id,
                                   participantId <- item.participantID)
         do {
-            let rowId = try dataBase.run(insert)
+            let rowId = try dataBase.run(query)
             guard rowId > 0 else {
                 return false
             }
@@ -123,9 +123,9 @@ class ConversationDataHelper {
         guard let dataBase = RingDB.instance.ringDB else {
             return false
         }
-        let conversation = table.filter(id == conversationID)
+        let query = table.filter(id == conversationID)
         do {
-            if try dataBase.run(conversation.delete()) > 0 {
+            if try dataBase.run(query.delete()) > 0 {
                 return true
             } else {
                 return false

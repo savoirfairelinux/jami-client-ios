@@ -78,7 +78,7 @@ class InteractionDataHelper {
             return false
         }
 
-        let insert = table.insert(accountId <- item.accountID,
+        let query = table.insert(accountId <- item.accountID,
                                   authorId <- item.authorID,
                                   conversationId <- item.conversationID,
                                   timestamp <- item.timestamp,
@@ -87,7 +87,7 @@ class InteractionDataHelper {
                                   status <- item.status,
                                   daemonId <- item.daemonID)
         do {
-            let rowId = try dataBase.run(insert)
+            let rowId = try dataBase.run(query)
             guard rowId > 0 else {
                 return false
             }
@@ -251,9 +251,9 @@ class InteractionDataHelper {
         guard let dataBase = RingDB.instance.ringDB else {
             return false
         }
-        let interaction = table.filter(daemonId == interactionDaemonID)
+        let query = table.filter(daemonId == interactionDaemonID)
         do {
-            if try dataBase.run(interaction.update(status <- interactionStatus)) > 0 {
+            if try dataBase.run(query.update(status <- interactionStatus)) > 0 {
                 return true
             } else {
                 return false
@@ -267,9 +267,9 @@ class InteractionDataHelper {
         guard let dataBase = RingDB.instance.ringDB else {
             return false
         }
-        let interaction = table.filter(id == interactionID)
+        let query = table.filter(id == interactionID)
         do {
-            if try dataBase.run(interaction.update(status <- interactionStatus)) > 0 {
+            if try dataBase.run(query.update(status <- interactionStatus)) > 0 {
                 return true
             } else {
                 return false
@@ -283,9 +283,9 @@ class InteractionDataHelper {
         guard let dataBase = RingDB.instance.ringDB else {
             return false
         }
-        let interaction = table.filter(conversationId == convID)
+        let query = table.filter(conversationId == convID)
         do {
-            if try dataBase.run(interaction.delete()) > 0 {
+            if try dataBase.run(query.delete()) > 0 {
                 return true
             } else {
                 return false

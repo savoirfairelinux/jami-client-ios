@@ -63,13 +63,13 @@ class ProfileDataHelper {
             return false
         }
 
-        let insert = table.insert(uri <- item.uri,
+        let query = table.insert(uri <- item.uri,
                                   alias <- item.alias,
                                   photo <- item.photo,
                                   type <- item.type,
                                   status <- item.status)
         do {
-            let rowId = try dataBase.run(insert)
+            let rowId = try dataBase.run(query)
             guard rowId > 0 else {
                 return false
             }

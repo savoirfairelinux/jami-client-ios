@@ -162,7 +162,7 @@ class DBManager {
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
-    func getConversationsObservable(for accountID: String, accountURI: String) -> Observable<[ConversationModel1]> {
+    func getConversationsObservable(for accountID: String, accountURI: String) -> Observable<[ConversationModel]> {
 
         return Observable.create { observable in
 
@@ -268,9 +268,9 @@ class DBManager {
 
     // MARK: Private functions
 
-    private func buildConversationsForAccount(accountUri: String, accountID: String) throws -> [ConversationModel1] {
+    private func buildConversationsForAccount(accountUri: String, accountID: String) throws -> [ConversationModel] {
 
-        var conversationsToReturn = [ConversationModel1]()
+        var conversationsToReturn = [ConversationModel]()
 
         guard let accountProfile = try self.getProfile(for: accountUri, createIfNotExists: false) else {
             throw DBBridgingError.getConversationFailed
@@ -293,8 +293,8 @@ class DBManager {
             guard let participantProfile = try self.profileHepler.selectProfile(profileId: participant) else {
                 throw DBBridgingError.getConversationFailed
             }
-            let conversationModel1 = ConversationModel1(withRecipientRingId: participantProfile.uri,
-                                                        accountId: accountID)
+            let conversationModel1 = ConversationModel(withRecipientRingId: participantProfile.uri,
+                                                       accountId: accountID, accountUri: accountUri)
             conversationModel1.participantProfile = participantProfile
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
@@ -304,7 +304,11 @@ class DBManager {
                     throw DBBridgingError.getConversationFailed
             }
             for interaction in interactions {
-                if let message = self.convertToMessage(interaction: interaction, profile: participantProfile) {
+                var author = accountProfile.uri
+                if interaction.authorID == participantProfile.id {
+                    author = participantProfile.uri
+                }
+                if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
                 }
 
@@ -355,12 +359,12 @@ class DBManager {
         }
     }
 
-    private func convertToMessage(interaction: Interaction, profile: Profile) -> MessageModel? {
+    private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
         let message = MessageModel(withId: interaction.daemonID,
                                    receivedDate: date,
                                    content: interaction.body,
-                                   author: profile.uri)
+                                   author: author)
         message.isGenerated = self.isGenerated(message: message)
         if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
             message.status = status.toMessageStatus()
@@ -376,11 +380,11 @@ class DBManager {
         let interaction = Interaction(defaultID, accountProfileID, authorProfileID,
                                       conversationID, Int64(timeInterval),
                                       message.content, InteractionType.text.rawValue,
-                                      InteractionStatus.unknown.rawValue, message.id)
+                                      InteractionStatus.unknown.rawValue, message.daemonId)
         return self.interactionHepler.insert(item: interaction)
     }
 
-    private func getProfile(for profileUri: String, createIfNotExists: Bool) throws -> Profile? {
+    func getProfile(for profileUri: String, createIfNotExists: Bool) throws -> Profile? {
         if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
             return profile
         }
