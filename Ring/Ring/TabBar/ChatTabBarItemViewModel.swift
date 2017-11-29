@@ -30,7 +30,7 @@ class ChatTabBarItemViewModel: ViewModel, TabBarItemViewModel {
         let conversationService = injectionBag.conversationsService
         let contactsService = injectionBag.contactsService
         self.itemBadgeValue = {
-            return conversationService.conversations.map({ conversations in
+            return conversationService.conversationsForCurrentAccount.map({ conversations in
                 return conversations.map({ conversation in
                     let unreadMsg = conversation.messages.filter({ message in
                         if let account = accountService.currentAccount {
