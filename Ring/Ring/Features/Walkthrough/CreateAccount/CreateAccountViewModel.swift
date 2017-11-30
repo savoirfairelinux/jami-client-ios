@@ -215,22 +215,20 @@ class CreateAccountViewModel: Stateable, ViewModel {
         self.nameService = injectionBag.nameService
 
         //Loookup name request observer
-        self.username.asObservable().subscribe(onNext: { [unowned self] username in
-            self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
-        }).disposed(by: disposeBag)
-
-        self.nameService.usernameValidationStatus.asObservable().subscribe(onNext: { [weak self] (status) in
-            switch status {
-            case .lookingUp:
-                self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.Createaccount.lookingForUsernameAvailability)
-            case .invalid:
-                self?.usernameValidationState.value = .invalid(message: L10n.Createaccount.invalidUsername)
-            case .alreadyTaken:
-                self?.usernameValidationState.value = .unavailable(message: L10n.Createaccount.usernameAlreadyTaken)
-            default:
-                self?.usernameValidationState.value = .available
-            }
-        }).disposed(by: self.disposeBag)
+        self.username.asObservable().flatMap { [unowned self] (name) -> Observable<UsernameValidationStatus> in
+            return self.nameService.lookupName (withAccountId: "", nameserver: "", name: name)
+            }.subscribe(onNext: { [weak self] (status) in
+                switch status {
+                case .lookingUp:
+                    self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.Createaccount.lookingForUsernameAvailability)
+                case .invalid:
+                    self?.usernameValidationState.value = .invalid(message: L10n.Createaccount.invalidUsername)
+                case .exists:
+                    self?.usernameValidationState.value = .unavailable(message: L10n.Createaccount.usernameAlreadyTaken)
+                default:
+                    self?.usernameValidationState.value = .available
+                }
+            }).disposed(by: self.disposeBag)
     }
 
     func createAccount() {
@@ -245,9 +243,9 @@ class CreateAccountViewModel: Stateable, ViewModel {
                 self.accountCreationState.value = .success
                 self.stateSubject.onNext(WalkthroughState.accountCreated)
 
-                self.nameService.registerName(withAccount: account.id,
-                                              password: password,
-                                              name: username)
+                _ = self.nameService.registerName(withAccountId: account.id,
+                                                  password: password,
+                                                  name: username)
                 }, onError: { [unowned self] (error) in
                     if let error = error as? AccountCreationError {
                         self.accountCreationState.value = .error(error: error)
