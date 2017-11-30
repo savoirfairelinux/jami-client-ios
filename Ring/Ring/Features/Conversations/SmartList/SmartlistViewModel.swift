@@ -197,7 +197,9 @@ class SmartlistViewModel: Stateable, ViewModel {
                 self.filteredResults.value = filteredConversations
             }
 
-            self.nameService.lookupName(withAccount: "", nameserver: "", name: text)
+            self.nameService.lookupName(withAccountId: "", nameserver: "", name: text).subscribe(onNext: { (validationStatus) in
+                <#code#>
+            }, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
             self.searchStatus.onNext(L10n.Smartlist.searching)
         }
     }

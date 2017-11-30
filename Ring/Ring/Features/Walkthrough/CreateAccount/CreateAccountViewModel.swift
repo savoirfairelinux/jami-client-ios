@@ -215,11 +215,9 @@ class CreateAccountViewModel: Stateable, ViewModel {
         self.nameService = injectionBag.nameService
 
         //Loookup name request observer
-        self.username.asObservable().subscribe(onNext: { [unowned self] username in
-            self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
-        }).disposed(by: disposeBag)
-
-        self.nameService.usernameValidationStatus.asObservable().subscribe(onNext: { [weak self] (status) in
+        self.username.asObservable().flatMap { [unowned self] (name) -> Observable<UsernameValidationStatus> in
+            return self.nameService.lookupName (withAccountId: "", nameserver: "", name: name)
+        }.subscribe(onNext: { [weak self] (status) in
             switch status {
             case .lookingUp:
                 self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.Createaccount.lookingForUsernameAvailability)
@@ -245,7 +243,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
                 self.accountCreationState.value = .success
                 self.stateSubject.onNext(WalkthroughState.accountCreated)
 
-                self.nameService.registerName(withAccount: account.id,
+                _ = self.nameService.registerName(withAccountId: account.id,
                                               password: password,
                                               name: username)
                 }, onError: { [unowned self] (error) in
