@@ -114,24 +114,18 @@ class ConversationViewModel: ViewModel {
             if let contactUserName = contact?.userName {
                 self.userName.value = contactUserName
             } else {
-
-                let recipientRingId = self.conversation.recipientRingId
-
                 // Return an observer for the username lookup
-                self.nameService.usernameLookupStatus
-                    .filter({ lookupNameResponse in
-                        return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == recipientRingId
-                    }).subscribe(onNext: { [unowned self] lookupNameResponse in
-                        if let name = lookupNameResponse.name, !name.isEmpty {
+                self.nameService.lookupAddress(withAccountId: "", nameserver: "", address: self.conversation.recipientRingId)
+                    .subscribe(onSuccess: { [unowned self] (lookupResponse) in
+                        if let name = lookupResponse.name, !name.isEmpty {
                             self.userName.value = name
                             contact?.userName = name
-                        } else if let address = lookupNameResponse.address {
+                        } else if let address = lookupResponse.address {
                             self.userName.value = address
                         }
-                    }).disposed(by: disposeBag)
-
-                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: self.conversation.recipientRingId)
+                }, onError: { [unowned self] error in
+                    self.log.error("lookup error for address: \(self.conversation.recipientRingId) - \(error)")
+                }).disposed(by: disposeBag)
             }
         }
     }

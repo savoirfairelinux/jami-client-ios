@@ -52,12 +52,15 @@ class SmartlistViewModel: Stateable, ViewModel {
     fileprivate var contactFoundConversation = Variable<ConversationViewModel?>(nil)
     fileprivate var conversationViewModels = [ConversationViewModel]()
 
+    private let injectionBag: InjectionBag
+
     func networkConnectionState() -> ConnectionType {
         return self.networkService.connectionState.value
     }
 
     required init(with injectionBag: InjectionBag) {
 
+        self.injectionBag = injectionBag
         self.conversationsService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.accountsService = injectionBag.accountService
@@ -143,34 +146,6 @@ class SmartlistViewModel: Stateable, ViewModel {
             self.search(withText: text)
         }).disposed(by: disposeBag)
 
-        //Observe username lookup
-        self.nameService.usernameLookupStatus.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self, unowned injectionBag]  usernameLookupStatus in
-            if usernameLookupStatus.state == .found && usernameLookupStatus.name == self.searchBarText.value {
-
-                if let conversation = self.conversationViewModels.filter({ conversationViewModel in
-                    conversationViewModel.conversation.recipientRingId == usernameLookupStatus.address
-                }).first {
-                    self.contactFoundConversation.value = conversation
-                } else {
-                    if self.contactFoundConversation.value?.conversation
-                        .recipientRingId != usernameLookupStatus.address {
-
-                        //Create new converation
-                        let conversation = ConversationModel(withRecipientRingId: usernameLookupStatus.address, accountId: "")
-                        let newConversation = ConversationViewModel(with: injectionBag)
-                        newConversation.conversation = conversation
-                        self.contactFoundConversation.value = newConversation
-                    }
-                }
-                self.searchStatus.onNext("")
-            } else {
-                if self.filteredResults.value.isEmpty {
-                    self.searchStatus.onNext(L10n.Smartlist.noResults)
-                } else {
-                    self.searchStatus.onNext("")
-                }
-            }
-        }).disposed(by: disposeBag)
     }
 
     fileprivate func search(withText text: String) {
@@ -197,7 +172,34 @@ class SmartlistViewModel: Stateable, ViewModel {
                 self.filteredResults.value = filteredConversations
             }
 
-            self.nameService.lookupName(withAccount: "", nameserver: "", name: text)
+            self.nameService.lookupName(withAccountId: "", nameserver: "", name: text)
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { [unowned self] (validationStatus) in
+                    if case let UsernameValidationStatus.exists(name, address) = validationStatus, name == self.searchBarText.value {
+                    if let conversation = self.conversationViewModels.filter({ conversationViewModel in
+                        conversationViewModel.conversation.recipientRingId == address
+                    }).first {
+                        self.contactFoundConversation.value = conversation
+                    } else {
+                        if self.contactFoundConversation.value?.conversation.recipientRingId != address {
+                            //Create new converation
+                            let conversation = ConversationModel(withRecipientRingId: address, accountId: "")
+                            let newConversation = ConversationViewModel(with: self.injectionBag)
+                            newConversation.conversation = conversation
+                            self.contactFoundConversation.value = newConversation
+                        }
+                    }
+                    self.searchStatus.onNext("")
+                } else {
+                    if self.filteredResults.value.isEmpty {
+                        self.searchStatus.onNext(L10n.Smartlist.noResults)
+                    } else {
+                        self.searchStatus.onNext("")
+                    }
+                    }}, onError: {error in
+                    self.log.error("Error when looking up for name \(text) - \(error)")
+                }).disposed(by: disposeBag)
+
             self.searchStatus.onNext(L10n.Smartlist.searching)
         }
     }
