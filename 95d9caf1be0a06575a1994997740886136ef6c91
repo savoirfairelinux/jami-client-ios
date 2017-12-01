@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_cfd15fcf",
+        "filename": "Ring/.gitignore",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-12-01T20:55:14Z",
+      "side": 1,
+      "message": "Hum, does this means you have some certificates in your local repo that you don\u0027t want to version?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 5
+      },
+      "revId": "95d9caf1be0a06575a1994997740886136ef6c91",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_2f4ba3b1",
+        "filename": "Ring/Ring/Info.plist",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-12-01T20:55:14Z",
+      "side": 1,
+      "message": "These modifications are not related to fastlane I think",
+      "revId": "95d9caf1be0a06575a1994997740886136ef6c91",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_8fc75712",
+        "filename": "Ring/RingTests/Info.plist",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-12-01T20:55:14Z",
+      "side": 1,
+      "message": "These modifications are not related to fastlane I think",
+      "revId": "95d9caf1be0a06575a1994997740886136ef6c91",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_6fcc8b36",
+        "filename": "Ring/RingUITests/Info.plist",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-12-01T20:55:14Z",
+      "side": 1,
+      "message": "These modifications are not related to fastlane I think",
+      "revId": "95d9caf1be0a06575a1994997740886136ef6c91",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
