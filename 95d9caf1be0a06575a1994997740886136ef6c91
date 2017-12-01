@@ -73,6 +73,69 @@
       "revId": "95d9caf1be0a06575a1994997740886136ef6c91",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_afedf38d",
+        "filename": "Ring/fastlane/Fastfile",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-12-01T22:04:38Z",
+      "side": 1,
+      "message": "I think we updated fastlane to 2.68 in the end, and it possibly fixed some of the issues we had.",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 25
+      },
+      "revId": "95d9caf1be0a06575a1994997740886136ef6c91",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_8fee378a",
+        "filename": "Ring/fastlane/Fastfile",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-12-01T22:04:38Z",
+      "side": 1,
+      "message": "No longer required?",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 13
+      },
+      "revId": "95d9caf1be0a06575a1994997740886136ef6c91",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_cfe83f7f",
+        "filename": "Ring/fastlane/metadata/copyright.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-12-01T22:04:38Z",
+      "side": 1,
+      "message": "Why is this file necessary? We already have a COPYING at the root of the repository + copyright/licence notice at the header of every significant file.\n\nAlso, this says LGPL but Ring is GPLv3+",
+      "revId": "95d9caf1be0a06575a1994997740886136ef6c91",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
