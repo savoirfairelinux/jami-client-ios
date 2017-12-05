@@ -23,8 +23,8 @@ import RxRealm
 
 class DeviceModel: Object {
 
-    dynamic var deviceId = ""
-    dynamic var deviceName: String?
+    @objc dynamic var deviceId = ""
+    @objc dynamic var deviceName: String?
 
     convenience init(withDeviceId deviceId: String, deviceName: String?) {
         self.init()

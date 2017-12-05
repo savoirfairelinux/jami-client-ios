@@ -72,4 +72,3 @@ class LinkDeviceViewModel: Stateable, ViewModel {
                                               password: self.password.value)
     }
 }
-

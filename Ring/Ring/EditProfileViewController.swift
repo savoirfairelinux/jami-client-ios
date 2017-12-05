@@ -60,7 +60,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         }).disposed(by: disposeBag)
     }
 
-    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
 
         let alert = UIAlertController.init(title: nil,
                                            message: nil,

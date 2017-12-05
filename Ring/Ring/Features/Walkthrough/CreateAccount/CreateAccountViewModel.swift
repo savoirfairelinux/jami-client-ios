@@ -280,4 +280,3 @@ class CreateAccountViewModel: Stateable, ViewModel {
                                            password: self.password.value)
     }
 }
-

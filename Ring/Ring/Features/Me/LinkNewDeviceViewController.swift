@@ -46,21 +46,21 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         // initial state
         self.viewModel.isInitialState
             .bind(to: self.titleLable.rx.isHidden)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         self.viewModel.isInitialState.bind(to: self.passwordField.rx.isHidden)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         self.viewModel.isInitialState.bind(to: self.cancelButton.rx.isHidden)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         // error state
         self.viewModel.isErrorState.bind(to: self.errorMessage.rx.isVisible)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         // success state
         self.viewModel.isSuccessState
             .bind(to: self.explanationMessage.rx.isVisible)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         self.viewModel.isSuccessState
             .bind(to: self.pinLabel.rx.isVisible)
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
 
         self.viewModel.observableState
             .observeOn(MainScheduler.instance)
@@ -77,7 +77,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                 default:
                     break
                 }
-            }).addDisposableTo(self.disposeBag)
+            }).disposed(by: self.disposeBag)
 
         cancelButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.dismiss(animated: true, completion: nil)
@@ -109,4 +109,3 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         self.explanationMessage.text = self.viewModel.explanationMessage
     }
 }
-

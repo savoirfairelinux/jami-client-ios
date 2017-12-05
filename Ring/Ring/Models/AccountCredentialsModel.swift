@@ -36,9 +36,9 @@ enum CredentialsError: Error {
  - keep the credentials of an account.
  */
 class AccountCredentialsModel: Object {
-    dynamic var username: String = ""
-    dynamic var password: String = ""
-    dynamic var accountRealm: String = ""
+    @objc dynamic var username: String = ""
+    @objc dynamic var password: String = ""
+    @objc dynamic var accountRealm: String = ""
 
     /**
      Constructor.
