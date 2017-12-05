@@ -46,11 +46,32 @@ final class ContactRequestsManager {
         let contactRequestsObservable = self.contactsService.contactRequests.asObservable()
 
         Observable
-            .combineLatest(currentAccountObservable, contactRequestsObservable) { [weak self] (account, requests) in
-                guard let ringId = requests.last?.ringId else { return }
-                self?.conversationsService.generateMessage(ofType: GeneratedMessageType.receivedContactRequest,
-                                                           forRindId: ringId,
-                                                           forAccount: account)
+            .combineLatest(currentAccountObservable, contactRequestsObservable) { [unowned self] (account, requests) -> Completable in
+                guard let ringId = requests.last?.ringId else {
+                    return Completable.create(subscribe: { (completable) -> Disposable in
+                        completable(.completed)
+                        return Disposables.create()
+                    })
+                }
+                return self.conversationsService.generateMessage(ofType: GeneratedMessageType.receivedContactRequest,
+                                                                 forRindId: ringId,
+                                                                 forAccount: account)
+            }
+            .subscribe()
+            .disposed(by: self.disposeBag)
+    }
+
+    private func handleAcceptedContactRequests() {
+        self.contactsService.contactStatus
+            .flatMap { [unowned self] (contactModel) -> Observable<(ContactModel, AccountModel)> in
+                let contactObservable = Observable<ContactModel>.just(contactModel)
+                let accountObservable = self.accountsService.getAccount(fromAccountId: contactModel.forAccountId).asObservable()
+                return Observable.combineLatest(contactObservable, accountObservable)
+            }
+            .flatMap { [unowned self] (contact, account) -> Completable in
+                return self.conversationsService.generateMessage(ofType: GeneratedMessageType.contactRequestAccepted,
+                                                                 forRindId: contact.ringId,
+                                                                 forAccount: account)
             }
             .subscribe()
             .disposed(by: self.disposeBag)
@@ -58,7 +79,7 @@ final class ContactRequestsManager {
 
     func accept(contactRequest: ContactRequestModel, account: AccountModel) -> Completable {
         let accountHelper = AccountModelHelper(withAccount: account)
-        let completable = self.contactsService.accept(contactRequest: contactRequest, withAccount: account)
+        var completable = self.contactsService.accept(contactRequest: contactRequest, withAccount: account)
             .andThen(self.conversationsService.saveMessage(withId: "",
                                                            withContent: GeneratedMessageType.contactRequestAccepted.rawValue,
                                                            byAuthor: accountHelper.ringId!,
@@ -69,8 +90,8 @@ final class ContactRequestsManager {
                                                          withUri: contactRequest.ringId,
                                                          withFlag: true))
         if let vcard = contactRequest.vCard {
-            completable.andThen(self.contactsService.saveVCard(vCard: vcard,
-                                                               forContactWithRingId: contactRequest.ringId))
+            completable = completable.andThen(self.contactsService.saveVCard(vCard: vcard,
+                                                                             forContactWithRingId: contactRequest.ringId))
         }
         return completable
     }
@@ -87,6 +108,24 @@ final class ContactRequestsManager {
                                                         ban: true,
                                                         withAccount: account)
         return discard.andThen(remove)
+    }
+
+    func send(to recipientId: String, withAccount account: AccountModel) -> Completable {
+        var completable = VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue)
+            .asObservable()
+            .flatMap { [unowned self] (vCard) -> Completable in
+                return self.contactsService.sendContactRequest(toContactRingId: recipientId,
+                                                               vCard: vCard,
+                                                               withAccount: account)
+            }
+            .asCompletable()
+
+        if self.contactsService.contact(withRingId: recipientId) != nil {
+            completable = completable.andThen(self.conversationsService.generateMessage(ofType: GeneratedMessageType.sendContactRequest,
+                                                                                        forRindId: recipientId,
+                                                                                        forAccount: account))
+        }
+        return completable
     }
 
 }

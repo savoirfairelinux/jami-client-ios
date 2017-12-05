@@ -3,6 +3,7 @@
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +25,7 @@ import RxSwift
 import RealmSwift
 import SwiftyBeaver
 
-class ConversationViewModel: ViewModel {
+final class ConversationViewModel: ViewModel {
 
     /**
      logguer
@@ -33,19 +34,21 @@ class ConversationViewModel: ViewModel {
 
     //Services
     private let conversationsService: ConversationsService
-    private let accountService: AccountsService
     private let nameService: NameService
     private let contactsService: ContactsService
     private let presenceService: PresenceService
     private let injectionBag: InjectionBag
+    private let contactRequestsManager: ContactRequestsManager
+
+    var accountModel: AccountModel!
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
-        self.accountService = injectionBag.accountService
         self.conversationsService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.contactsService = injectionBag.contactsService
         self.presenceService = injectionBag.presenceService
+        self.contactRequestsManager = injectionBag.contactRequestsManager
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
@@ -64,7 +67,10 @@ class ConversationViewModel: ViewModel {
                     return false
                 }).flatMap({ conversation in
                     conversation.messages.map({ [unowned self] message in
-                        return MessageViewModel(withInjectionBag: self.injectionBag, withMessage: message)
+                        let accountHelper = AccountModelHelper(withAccount: self.accountModel)
+                        return MessageViewModel(withInjectionBag: self.injectionBag,
+                                                withMessage: message,
+                                                ringId: accountHelper.ringId ?? "")
                     })
                 })
             }).observeOn(MainScheduler.instance)
@@ -75,7 +81,7 @@ class ConversationViewModel: ViewModel {
 
             self.contactsService.loadVCard(forContactWithRingId: contactRingId)
                 .subscribe(onSuccess: { vCard in
-                    guard let imageData = vCard.imageData else {
+                    guard let vCard = vCard, let imageData = vCard.imageData else {
                         self.log.warning("vCard for ringId: \(contactRingId) has no image")
                         return
                     }
@@ -86,16 +92,15 @@ class ConversationViewModel: ViewModel {
             if let contact = contact {
                 self.inviteButtonIsAvailable.onNext(!contact.confirmed)
             }
-            self.contactsService.contactStatus.filter({ cont in
-                return cont.ringId == contactRingId
-            })
-                .subscribe(onNext: { [unowned self] cont in
 
+            self.contactsService.contactStatus
+                .filter({ cont in
+                    return cont.ringId == contactRingId
+                })
+                .subscribe(onNext: { [unowned self] cont in
                     self.inviteButtonIsAvailable.onNext(!cont.confirmed)
-                    if cont.confirmed {
-                        self.generateMessage(ofType: GeneratedMessageType.contactRequestAccepted)
-                    }
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
 
             // subscribe to presence updates for the conversation's associated contact
             self.presenceService
@@ -220,12 +225,17 @@ class ConversationViewModel: ViewModel {
     func sendMessage(withContent content: String) {
         // send a contact request if this is the first message (implicitly not a contact)
         if self.conversation.messages.isEmpty {
-            self.sendContactRequest()
+            self.contactRequestsManager.send(to: self.conversation.recipientRingId,
+                                             withAccount: self.accountModel)
+                .subscribe(onCompleted: {
+                    print("Contact request sent")
+                }, onError: { (error) in
+                    print(error.localizedDescription)
+                }).disposed(by: self.disposeBag)
         }
-
         self.conversationsService
             .sendMessage(withContent: content,
-                         from: accountService.currentAccount!,
+                         from: self.accountModel,
                          to: self.conversation.recipientRingId)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message sent")
@@ -242,7 +252,7 @@ class ConversationViewModel: ViewModel {
                          withContent: content,
                          byAuthor: author,
                          toConversationWith: account,
-                         currentAccountId: (accountService.currentAccount?.id)!, generated: generated)
+                         currentAccountId: accountModel!.id, generated: generated)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message saved")
             })
@@ -258,7 +268,7 @@ class ConversationViewModel: ViewModel {
     }
 
     fileprivate var unreadMessagesCount: Int {
-        let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
+        let accountHelper = AccountModelHelper(withAccount: accountModel!)
         let unreadMessages =  self.conversation.messages
             .filter({ message in
             return message.status != .read && message.author != accountHelper.ringId!
@@ -266,32 +276,8 @@ class ConversationViewModel: ViewModel {
         return unreadMessages.count
     }
 
-    func sendContactRequest() {
-        let contactExists =  self.contactsService.contact(withRingId: self.conversation.recipientRingId) != nil ? true : false
-        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue)
-            .subscribe(onSuccess: { [unowned self] (card) in
-                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!)
-                    .subscribe(onCompleted: {
-                        if !contactExists {
-                            self.generateMessage(ofType: GeneratedMessageType.sendContactRequest)
-                        }
-                        self.log.info("contact request sent")
-                    }).disposed(by: self.disposeBag)
-            }, onError: { [unowned self]  _ in
-                self.contactsService.sendContactRequest(toContactRingId: self.conversation.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!)
-                    .subscribe(onCompleted: {
-                        if !contactExists {
-                            self.generateMessage(ofType: GeneratedMessageType.sendContactRequest)
-                        }
-                        self.log.info("contact request sent")
-                    }).disposed(by: self.disposeBag)
-
-            }).disposed(by: self.disposeBag)
-    }
-
-    func generateMessage(ofType messageType: GeneratedMessageType) {
-        self.conversationsService.generateMessage(ofType: messageType,
-                                                  forRindId: self.conversation.recipientRingId,
-                                                  forAccount: self.accountService.currentAccount!)
+    func sendContactRequest() -> Completable {
+            return self.contactRequestsManager.send(to: self.conversation.recipientRingId,
+                                                    withAccount: accountModel)
     }
 }

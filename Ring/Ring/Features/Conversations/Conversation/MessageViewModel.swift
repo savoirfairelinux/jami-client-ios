@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -41,40 +42,36 @@ enum GeneratedMessageType: String {
     case contactRequestAccepted = "Contact accepted"
 }
 
-class MessageViewModel {
+final class MessageViewModel {
 
-    fileprivate let log = SwiftyBeaver.self
+    private let log = SwiftyBeaver.self
 
-    fileprivate let accountService: AccountsService
-    fileprivate let conversationsService: ConversationsService
-    fileprivate var message: MessageModel
+    private let accountService: NewAccountsService
+    private let conversationsService: ConversationsService
+    private var message: MessageModel
+    private let ringId: String
 
     var timeStringShown: String?
     var sequencing: MessageSequencing = .unknown
 
     private let disposeBag = DisposeBag()
 
-    init(withInjectionBag injectionBag: InjectionBag,
-         withMessage message: MessageModel) {
-        self.accountService = injectionBag.accountService
+    init(withInjectionBag injectionBag: InjectionBag, withMessage message: MessageModel, ringId: String) {
+        self.accountService = injectionBag.newAccountsService
         self.conversationsService = injectionBag.conversationsService
         self.message = message
         self.timeStringShown = nil
         self.status.onNext(message.status)
+        self.ringId = ringId
 
-        // subscribe to message status updates for outgoing messages
-        self.conversationsService
-            .sharedResponseStream
-            .filter({ messageUpdateEvent in
-                let account = self.accountService.getAccount(fromAccountId: messageUpdateEvent.getEventInput(.id)!)
-                let accountHelper = AccountModelHelper(withAccount: account!)
+        self.conversationsService.sharedResponseStream
+            .filter { [weak self] (messageUpdateEvent) -> Bool in
                 return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
-                    messageUpdateEvent.getEventInput(.messageId) == self.message.id &&
-                    accountHelper.ringId == self.message.author
-            })
-            .subscribe(onNext: { [unowned self] messageUpdateEvent in
+                    messageUpdateEvent.getEventInput(.messageId) == self?.message.id
+            }
+            .subscribe(onNext: { [weak self] (messageUpdateEvent) in
                 if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
-                    self.status.onNext(status)
+                    self?.status.onNext(status)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -98,9 +95,8 @@ class MessageViewModel {
         if self.message.isGenerated {
             return .generated
         }
-        let accountHelper = AccountModelHelper(withAccount: accountService.currentAccount!)
 
-        if self.message.author == accountHelper.ringId! {
+        if self.message.author == self.ringId {
             return .sent
         } else {
             return.received

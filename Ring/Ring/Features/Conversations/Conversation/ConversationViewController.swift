@@ -121,7 +121,11 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }
 
     func inviteItemTapped() {
-       self.viewModel?.sendContactRequest()
+        self.viewModel?.sendContactRequest().subscribe(onCompleted: {
+            print("Contact request sent")
+        }, onError: { (error) in
+            print(error.localizedDescription)
+        }).disposed(by: self.disposeBag)
     }
 
     override func viewDidAppear(_ animated: Bool) {

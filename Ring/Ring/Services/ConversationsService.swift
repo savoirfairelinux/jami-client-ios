@@ -22,6 +22,10 @@ import RxSwift
 import RealmSwift
 import SwiftyBeaver
 
+enum GenerateMessageError: Error {
+    case alreadyExists
+}
+
 class ConversationsService: MessagesAdapterDelegate {
 
     /**
@@ -182,25 +186,24 @@ class ConversationsService: MessagesAdapterDelegate {
 
     func generateMessage(ofType messageType: GeneratedMessageType,
                          forRindId ringId: String,
-                         forAccount account: AccountModel) {
+                         forAccount account: AccountModel) -> Completable {
 
         if let conversation = self.findConversation(withRingId: ringId, withAccountId: account.id) {
             if self.generatedMessageExists(ofType: messageType, inConversation: conversation) {
-                return
+                return Completable.create(subscribe: { (completable) -> Disposable in
+                    completable(.error(GenerateMessageError.alreadyExists))
+                    return Disposables.create()
+                })
             }
         }
 
         let accountHelper = AccountModelHelper(withAccount: account)
-        self.saveMessage(withId: "",
+        return self.saveMessage(withId: "",
                          withContent: messageType.rawValue,
                          byAuthor: accountHelper.ringId!,
                          toConversationWith: ringId,
                          currentAccountId: account.id,
                          generated: true)
-            .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("Message saved")
-             })
-            .disposed(by: disposeBag)
     }
 
     func generatedMessageExists(ofType messageType: GeneratedMessageType,
