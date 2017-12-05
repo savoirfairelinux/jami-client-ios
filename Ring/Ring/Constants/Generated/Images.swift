@@ -10,7 +10,6 @@
   typealias Image = UIImage
 #endif
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 @available(*, deprecated, renamed: "ImageAsset")
@@ -46,29 +45,29 @@ struct ColorAsset {
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
-  static let accountIcon = ImageAsset(name: "account_icon")
   static let addPerson = ImageAsset(name: "add_person")
   static let backgroundRing = ImageAsset(name: "background_ring")
-  static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
-  static let conversationIcon = ImageAsset(name: "conversation_icon")
-  static let device = ImageAsset(name: "device")
+  static let accountIcon = ImageAsset(name: "account_icon")
   static let icContactPicture = ImageAsset(name: "ic_contact_picture")
-  static let logoRingBeta2Blanc = ImageAsset(name: "logo-ring-beta2-blanc")
   static let settingsIcon = ImageAsset(name: "settings_icon")
+  static let conversationIcon = ImageAsset(name: "conversation_icon")
+  static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
+  static let device = ImageAsset(name: "device")
+  static let logoRingBeta2Blanc = ImageAsset(name: "logo-ring-beta2-blanc")
 
   // swiftlint:disable trailing_comma
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
-    accountIcon,
     addPerson,
     backgroundRing,
-    contactRequestIcon,
-    conversationIcon,
-    device,
+    accountIcon,
     icContactPicture,
-    logoRingBeta2Blanc,
     settingsIcon,
+    conversationIcon,
+    contactRequestIcon,
+    device,
+    logoRingBeta2Blanc,
   ]
   // swiftlint:enable trailing_comma
   @available(*, deprecated, renamed: "allImages")

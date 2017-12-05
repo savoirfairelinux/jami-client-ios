@@ -29,7 +29,7 @@ class ContactModel: Equatable {
         self.ringId = ringId
     }
 
-    init(withDictionary dictionary: [String : String]) {
+    init(withDictionary dictionary: [String: String]) {
 
         if let ringId = dictionary["id"] {
             self.ringId = ringId

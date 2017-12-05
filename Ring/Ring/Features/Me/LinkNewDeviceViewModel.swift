@@ -152,17 +152,15 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
                             default:
                                 self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
                             }
-
                         }
                     })
                     .disposed(by: self.disposeBag)
             } else {
                 self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
             }
-        })
-        { error in
+        }, onError: { error in
             self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
-        }.addDisposableTo(self.disposeBag)
+        }).disposed(by: self.disposeBag)
     }
 
     func refresh() {

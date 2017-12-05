@@ -26,7 +26,7 @@ import Reusable
 import SwiftyBeaver
 
 //Constants
-fileprivate struct SmartlistConstants {
+private struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 64.0
     static let tableHeaderViewHeight: CGFloat = 24.0
     static let firstSectionHeightForHeader: CGFloat = 31.0 //Compensate the offset due to the label on the top of the tableView
@@ -113,7 +113,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.conversationsTableView.setEditing(editing, animated: true)
     }
 
-    func keyboardWillShow(withNotification notification: Notification) {
+    @objc func keyboardWillShow(withNotification notification: Notification) {
         let userInfo: Dictionary = notification.userInfo!
         guard let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
@@ -126,7 +126,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
     }
 
-    func keyboardWillHide(withNotification notification: Notification) {
+    @objc func keyboardWillHide(withNotification notification: Notification) {
         self.conversationsTableView.contentInset.bottom = 0
         self.searchResultsTableView.contentInset.bottom = 0
 
@@ -221,7 +221,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let searchResultsDatasource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
 
         //Allows to delete
-        conversationsDataSource.canEditRowAtIndexPath = { _ in
+        conversationsDataSource.canEditRowAtIndexPath = { _, _  in
             return true
         }
 
@@ -336,7 +336,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
 }
 
-extension SmartlistViewController : UITableViewDelegate {
+extension SmartlistViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 
