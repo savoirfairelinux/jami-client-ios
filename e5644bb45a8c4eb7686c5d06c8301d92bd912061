@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_15a3589f",
+        "filename": "Ring/Ring/Database/DBBridging.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-12-05T20:36:34Z",
+      "side": 1,
+      "message": "\\n",
+      "revId": "e5644bb45a8c4eb7686c5d06c8301d92bd912061",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
