@@ -52,7 +52,6 @@ class AppCoordinator: Coordinator, StateableResponsive {
             switch state {
             case .needToOnboard:
                 self.showWalkthrough()
-                break
             }
         }).disposed(by: self.disposeBag)
 

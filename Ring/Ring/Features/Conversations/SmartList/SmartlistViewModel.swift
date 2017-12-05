@@ -84,7 +84,7 @@ class SmartlistViewModel: Stateable, ViewModel {
                     return lastMessage1.receivedDate > lastMessage2.receivedDate
                 })
                 .filter({ self.contactsService.contact(withRingId: $0.recipientRingId) != nil
-                    || (!$0.messages.isEmpty && (self.contactsService.contactRequest(withRingId:$0.recipientRingId) == nil))
+                    || (!$0.messages.isEmpty && (self.contactsService.contactRequest(withRingId: $0.recipientRingId) == nil))
                 })
                 .flatMap({ conversationModel in
 
@@ -130,12 +130,12 @@ class SmartlistViewModel: Stateable, ViewModel {
 
         self.hideNoConversationsMessage = Observable
             .combineLatest( self.conversations, self.searchBarText.asObservable(), resultSelector: { conversations, searchBarText in
-            return !conversations.first!.items.isEmpty || !searchBarText.characters.isEmpty
+            return !conversations.first!.items.isEmpty || !searchBarText.isEmpty
         }).observeOn(MainScheduler.instance)
 
         //Observes if the user is searching
         self.isSearching = searchBarText.asObservable().map({ text in
-            return !text.characters.isEmpty
+            return !text.isEmpty
         }).observeOn(MainScheduler.instance)
 
         //Observes search bar text

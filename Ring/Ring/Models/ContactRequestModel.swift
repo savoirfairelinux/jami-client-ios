@@ -43,7 +43,7 @@ class ContactRequestModel {
         self.accountId = accountId
     }
 
-    init(withDictionary dictionary: [String : String], accountId: String) {
+    init(withDictionary dictionary: [String: String], accountId: String) {
 
         if let ringId = dictionary[ContactRequestKey.from.rawValue] {
             self.ringId = ringId
