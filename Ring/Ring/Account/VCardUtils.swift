@@ -51,20 +51,19 @@ class VCardUtils {
         }
     }
 
-    class func loadVCard(named name: String, inFolder folder: String, contactService: ContactsService? = nil) -> Single<CNContact> {
+    class func loadVCard(named name: String, inFolder folder: String, contactService: ContactsService? = nil) -> Single<CNContact?> {
         return Single.create(subscribe: { single in
             if let contactRequest = contactService?.contactRequest(withRingId: name) {
                 if let vCard = contactRequest.vCard {
                     single(.success(vCard))
-                } else {
-                    single(.error(ContactServiceError.loadVCardFailed))
                 }
+                single(.success(nil))
             } else if let directoryURL = VCardUtils.getFilePath(forFile: name, inFolder: folder, createIfNotExists: false) {
                 do {
                     if let data = FileManager.default.contents(atPath: directoryURL.path) {
                         let vCard = try CNContactVCardSerialization.contacts(with: data)
                         if vCard.isEmpty {
-                            single(.error(ContactServiceError.loadVCardFailed))
+                            single(.success(nil))
                         } else {
                             single(.success(vCard.first!))
                         }
@@ -75,7 +74,7 @@ class VCardUtils {
             } else {
                 single(.error(ContactServiceError.loadVCardFailed))
             }
-            return Disposables.create { }
+            return Disposables.create()
         })
     }
 

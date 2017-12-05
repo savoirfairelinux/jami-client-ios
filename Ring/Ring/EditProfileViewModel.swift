@@ -33,12 +33,15 @@ class EditProfileViewModel {
 
         self.image.value = defaultImage
 
-        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue) .subscribe(onSuccess: { [unowned self]card in
-                             self.profileName.value = card.familyName
-                            if let data = card.imageData {
-                                self.image.value = UIImage(data: data)?.convert(toSize: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale).circleMasked
-                            }
-                        }).disposed(by: disposeBag)
+        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue)
+            .subscribe(onSuccess: { [unowned self] card in
+                if let card = card {
+                    self.profileName.value = card.familyName
+                    if let data = card.imageData {
+                        self.image.value = UIImage(data: data)?.convert(toSize: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale).circleMasked
+                    }
+                }
+            }).disposed(by: disposeBag)
       }
 
     func saveProfile() {
