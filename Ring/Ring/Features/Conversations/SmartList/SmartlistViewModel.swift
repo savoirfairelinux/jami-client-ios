@@ -31,14 +31,14 @@ class SmartlistViewModel: Stateable, ViewModel {
         return self.stateSubject.asObservable()
     }()
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     //Services
-    fileprivate let conversationsService: ConversationsService
-    fileprivate let nameService: NameService
-    fileprivate let accountsService: AccountsService
-    fileprivate let contactsService: ContactsService
-    fileprivate let networkService: NetworkService
+    private let conversationsService: ConversationsService
+    private let nameService: NameService
+    private let accountsService: NewAccountsService
+    private let contactsService: ContactsService
+    private let networkService: NetworkService
 
     let searchBarText = Variable<String>("")
     var isSearching: Observable<Bool>!
@@ -48,46 +48,43 @@ class SmartlistViewModel: Stateable, ViewModel {
     var searchStatus = PublishSubject<String>()
     var connectionState = PublishSubject<ConnectionType>()
 
-    fileprivate var filteredResults = Variable([ConversationViewModel]())
-    fileprivate var contactFoundConversation = Variable<ConversationViewModel?>(nil)
-    fileprivate var conversationViewModels = [ConversationViewModel]()
+    private var filteredResults = Variable([ConversationViewModel]())
+    private var contactFoundConversation = Variable<ConversationViewModel?>(nil)
+    private var conversationViewModels = [ConversationViewModel]()
 
     func networkConnectionState() -> ConnectionType {
         return self.networkService.connectionState.value
     }
 
     required init(with injectionBag: InjectionBag) {
-
         self.conversationsService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
-        self.accountsService = injectionBag.accountService
+        self.accountsService = injectionBag.newAccountsService
         self.contactsService = injectionBag.contactsService
         self.networkService = injectionBag.networkService
 
         // Observe connectivity changes
         self.networkService.connectionStateObservable
-            .subscribe(onNext: { value in
-                self.connectionState.onNext(value)
+            .subscribe(onNext: { [weak self] value in
+                self?.connectionState.onNext(value)
             })
             .disposed(by: self.disposeBag)
 
-        //Create observable from sorted conversations and flatMap them to view models
-        let conversationsObservable: Observable<[ConversationViewModel]> = self.conversationsService.conversations.asObservable().map({ conversations in
+        let currentAccountObservable = self.accountsService.currentAccount().asObservable()
+        let allConversationsObservable = self.conversationsService.conversations.asObservable()
+        let conversationsObservable = Observable.combineLatest(currentAccountObservable, allConversationsObservable) { (account, conversations) -> [ConversationViewModel] in
             return conversations
                 .sorted(by: { conversation1, conversations2 in
-
                     guard let lastMessage1 = conversation1.messages.last,
                         let lastMessage2 = conversations2.messages.last else {
                             return true
                     }
-
                     return lastMessage1.receivedDate > lastMessage2.receivedDate
                 })
                 .filter({ self.contactsService.contact(withRingId: $0.recipientRingId) != nil
                     || (!$0.messages.isEmpty && (self.contactsService.contactRequest(withRingId:$0.recipientRingId) == nil))
                 })
                 .flatMap({ conversationModel in
-
                     var conversationViewModel: ConversationViewModel?
 
                     //Get the current ConversationViewModel if exists or create it
@@ -98,12 +95,13 @@ class SmartlistViewModel: Stateable, ViewModel {
                     } else {
                         conversationViewModel = ConversationViewModel(with: injectionBag)
                         conversationViewModel?.conversation = conversationModel
+                        conversationViewModel?.accountModel = account
                         self.conversationViewModels.append(conversationViewModel!)
                     }
 
                     return conversationViewModel
                 })
-        })
+        }
 
         //Create observable from conversations viewModels to ConversationSection
         self.conversations = conversationsObservable.map({ conversationsViewModels in

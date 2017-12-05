@@ -24,13 +24,13 @@ class ContactModel: Equatable {
     var userName: String?
     var confirmed: Bool = false
     var added: Date = Date()
+    var forAccountId: String = ""
 
     init(withRingId ringId: String) {
         self.ringId = ringId
     }
 
-    init(withDictionary dictionary: [String : String]) {
-
+    init(withDictionary dictionary: [String: String]) {
         if let ringId = dictionary["id"] {
             self.ringId = ringId
         }
