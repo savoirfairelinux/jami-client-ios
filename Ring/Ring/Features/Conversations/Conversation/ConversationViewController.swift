@@ -68,7 +68,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-    func keyboardWillShow(withNotification notification: Notification) {
+    @objc func keyboardWillShow(withNotification notification: Notification) {
 
         let userInfo: Dictionary = notification.userInfo!
         guard let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -83,7 +83,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.updateBottomOffset()
     }
 
-    func keyboardWillHide(withNotification notification: Notification) {
+    @objc func keyboardWillHide(withNotification notification: Notification) {
         self.tableView.contentInset.bottom = 0
         self.tableView.scrollIndicatorInsets.bottom = 0
         self.updateBottomOffset()
@@ -396,6 +396,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func formatCell(withCell cell: MessageCell,
                     cellForRowAt indexPath: IndexPath,
                     withMessageVM messageVM: MessageViewModel) {
@@ -486,6 +487,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             }
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 }
 
 extension ConversationViewController: UITableViewDataSource {

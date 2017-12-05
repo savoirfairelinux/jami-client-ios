@@ -66,13 +66,10 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
             switch state {
             case .welcomeDone(let walkthroughType):
                 self.showCreateProfile(with: walkthroughType)
-                break
             case .profileCreated(let walkthroughType):
                 self.showFinalStep(with: walkthroughType)
-                break
             case .accountCreated, .deviceLinked:
                 self.rootViewController.dismiss(animated: true, completion: nil)
-                break
             }
         }).disposed(by: self.disposeBag)
 

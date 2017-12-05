@@ -23,8 +23,8 @@ import RealmSwift
 class ConversationModel: Object {
 
     let messages = List<MessageModel>()
-    dynamic var recipientRingId: String = ""
-    dynamic var accountId: String = ""
+    @objc dynamic var recipientRingId: String = ""
+    @objc dynamic var accountId: String = ""
 
     convenience init(withRecipientRingId recipientRingId: String, accountId: String) {
         self.init()

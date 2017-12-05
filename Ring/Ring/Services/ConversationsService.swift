@@ -125,6 +125,7 @@ class ConversationsService: MessagesAdapterDelegate {
         })
     }
 
+    // swiftlint:disable function_parameter_count
     func saveMessage(withId messageId: String,
                      withContent content: String,
                      byAuthor author: String,
@@ -170,6 +171,7 @@ class ConversationsService: MessagesAdapterDelegate {
 
         })
     }
+    // swiftlint:enable function_parameter_count
 
     func findConversation(withRingId ringId: String,
                           withAccountId accountId: String) -> ConversationModel? {
@@ -309,23 +311,25 @@ class ConversationsService: MessagesAdapterDelegate {
         }).first
 
         //Find message
-        if let message = conversation?.messages.filter({ messages in
+        if let messages: [MessageModel] = conversation?.messages.filter({ (messages) -> Bool in
             return  !messages.id.isEmpty && messages.id == String(messageId) &&
-                    ((status.rawValue > messages.status.rawValue && status != .failure) ||
+                ((status.rawValue > messages.status.rawValue && status != .failure) ||
                     (status == .failure && messages.status == .sending))
-        }).first {
-            self.setMessageStatus(withMessage: message,
-                                  withStatus: status)
-                .subscribe(onCompleted: { [unowned self] in
-                    self.log.info("Message status updated")
-                    var event = ServiceEvent(withEventType: .messageStateChanged)
-                    event.addEventInput(.messageStatus, value: status)
-                    event.addEventInput(.messageId, value: String(messageId))
-                    event.addEventInput(.id, value: accountId)
-                    event.addEventInput(.uri, value: uri)
-                    self.responseStream.onNext(event)
-                })
-                .disposed(by: disposeBag)
+        }) {
+            if let message = messages.first {
+                self.setMessageStatus(withMessage: message,
+                                      withStatus: status)
+                    .subscribe(onCompleted: { [unowned self] in
+                        self.log.info("Message status updated")
+                        var event = ServiceEvent(withEventType: .messageStateChanged)
+                        event.addEventInput(.messageStatus, value: status)
+                        event.addEventInput(.messageId, value: String(messageId))
+                        event.addEventInput(.id, value: accountId)
+                        event.addEventInput(.uri, value: uri)
+                        self.responseStream.onNext(event)
+                    })
+                    .disposed(by: disposeBag)
+            }
         }
 
         log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(accountId) to: \(uri)")

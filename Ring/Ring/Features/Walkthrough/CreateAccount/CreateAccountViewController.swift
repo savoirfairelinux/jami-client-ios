@@ -113,13 +113,10 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             switch state {
             case .started:
                 self?.showAccountCreationInProgress()
-                break
             case .success:
                 self?.hideAccountCreationHud()
-                break
             default:
                 self?.hideAccountCreationHud()
-                break
             }
         }, onError: { [weak self] (error) in
             self?.hideAccountCreationHud()
