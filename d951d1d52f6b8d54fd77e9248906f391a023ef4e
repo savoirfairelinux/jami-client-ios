@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_35c5b45b",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-12-05T20:21:44Z",
+      "side": 1,
+      "message": "successInteraction ... vv",
+      "range": {
+        "startLine": 246,
+        "startChar": 24,
+        "endLine": 246,
+        "endChar": 41
+      },
+      "revId": "d951d1d52f6b8d54fd77e9248906f391a023ef4e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_55c84074",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-12-05T20:21:44Z",
+      "side": 1,
+      "message": "filterParticipantsFor",
+      "range": {
+        "startLine": 332,
+        "startChar": 17,
+        "endLine": 332,
+        "endChar": 37
+      },
+      "revId": "d951d1d52f6b8d54fd77e9248906f391a023ef4e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
