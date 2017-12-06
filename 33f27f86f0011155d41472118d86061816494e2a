@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_55aa001a",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-06T15:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_f51cec15",
+      "range": {
+        "startLine": 296,
+        "startChar": 16,
+        "endLine": 296,
+        "endChar": 34
+      },
+      "revId": "33f27f86f0011155d41472118d86061816494e2a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_b5b9c4eb",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
         "patchSetId": 4
@@ -36,6 +60,24 @@
       "writtenOn": "2017-12-05T20:18:02Z",
       "side": 1,
       "message": "[unowned self]",
+      "revId": "33f27f86f0011155d41472118d86061816494e2a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_35a77451",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-06T15:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_b5b9c4eb",
       "revId": "33f27f86f0011155d41472118d86061816494e2a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_9563e819",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-06T15:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_15ceb883",
+      "range": {
+        "startLine": 274,
+        "startChar": 16,
+        "endLine": 274,
+        "endChar": 17
+      },
+      "revId": "33f27f86f0011155d41472118d86061816494e2a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_55be8000",
         "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
         "patchSetId": 4
@@ -76,6 +142,30 @@
       "writtenOn": "2017-12-05T20:18:02Z",
       "side": 1,
       "message": "to remove",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 24
+      },
+      "revId": "33f27f86f0011155d41472118d86061816494e2a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_7568dcf5",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-06T15:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_55be8000",
       "range": {
         "startLine": 166,
         "startChar": 0,
