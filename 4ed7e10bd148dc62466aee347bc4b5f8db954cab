@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_b57264e3",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-06T15:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_75945c37",
+      "revId": "4ed7e10bd148dc62466aee347bc4b5f8db954cab",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_d599f06f",
         "filename": "Ring/Ring/AppDelegate.swift",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-12-05T20:32:00Z",
       "side": 1,
       "message": "to",
+      "revId": "4ed7e10bd148dc62466aee347bc4b5f8db954cab",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_d56d7006",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-06T15:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_d599f06f",
       "revId": "4ed7e10bd148dc62466aee347bc4b5f8db954cab",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
