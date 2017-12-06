@@ -4,6 +4,7 @@ export BUILDFORIOS=1
 export MIN_IOS_VERSION=9.3
 IOS_TARGET_PLATFORM=iPhoneSimulator
 RELEASE=0
+SDK_VERSION=11.0
 
 while test -n "$1"
 do
