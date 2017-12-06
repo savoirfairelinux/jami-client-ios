@@ -16,6 +16,24 @@
       "revId": "e5644bb45a8c4eb7686c5d06c8301d92bd912061",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_95bc886e",
+        "filename": "Ring/Ring/Database/DBBridging.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-06T15:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_15a3589f",
+      "revId": "e5644bb45a8c4eb7686c5d06c8301d92bd912061",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
