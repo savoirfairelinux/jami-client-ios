@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_40e7dc40",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-12-06T21:26:12Z",
+      "side": 1,
+      "message": "Could you please softly unwrap this first conversationId?",
+      "range": {
+        "startLine": 151,
+        "startChar": 70,
+        "endLine": 151,
+        "endChar": 92
+      },
+      "revId": "8aed2a0a605c3f2d949802ba8395eec5355646b0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_00c4b490",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-12-06T21:26:12Z",
+      "side": 1,
+      "message": "Typo here.",
+      "range": {
+        "startLine": 202,
+        "startChar": 9,
+        "endLine": 202,
+        "endChar": 26
+      },
+      "revId": "8aed2a0a605c3f2d949802ba8395eec5355646b0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_e0c0a87e",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-12-06T21:26:12Z",
+      "side": 1,
+      "message": "We should check if this fails or not.",
+      "range": {
+        "startLine": 425,
+        "startChar": 8,
+        "endLine": 426,
+        "endChar": 72
+      },
+      "revId": "8aed2a0a605c3f2d949802ba8395eec5355646b0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
