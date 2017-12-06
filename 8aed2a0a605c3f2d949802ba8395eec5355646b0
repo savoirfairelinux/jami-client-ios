@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_20bbb00f",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-12-06T21:43:54Z",
+      "side": 1,
+      "message": "+1 for the subscribeOn.\nHowever, we think this should be called by the caller of the method, the entity that handle the concrete subscribe.\nWhat do you think?",
+      "revId": "8aed2a0a605c3f2d949802ba8395eec5355646b0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_00c4b490",
         "filename": "Ring/Ring/Database/DBManager.swift",
         "patchSetId": 9
