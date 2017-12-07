@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,19 +15,15 @@
         <scene sceneID="4AN-bE-bMJ">
             <objects>
                 <viewController id="ILs-xb-iKr" customClass="WelcomeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ETz-GA-Th5"/>
-                        <viewControllerLayoutGuide type="bottom" id="kDG-lW-7DA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Dg0-kS-rT7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="Dg0-kS-rT7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_ring" translatesAutoresizingMaskIntoConstraints="NO" id="11r-JK-mPT">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8TU-za-C7U" userLabel="Gradient View" customClass="DesignableView" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
@@ -38,26 +35,26 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="logo-ring-beta2-blanc" translatesAutoresizingMaskIntoConstraints="NO" id="2Pc-uJ-SAI">
-                                <rect key="frame" x="97.5" y="233" width="180" height="66"/>
+                                <rect key="frame" x="97.666666666666686" y="305.66666666666669" width="180" height="66"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2Pc-uJ-SAI" secondAttribute="height" multiplier="30:11" id="Qre-jC-ga0"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Ring is a free and universal communication platform which preserves the users' privacy and freedoms" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
-                                <rect key="frame" x="62.5" y="356" width="250" height="47"/>
+                                <rect key="frame" x="62.666666666666657" y="428.66666666666669" width="249.99999999999997" height="46.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to Ring" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbn-cd-UXk">
-                                <rect key="frame" x="100.5" y="319" width="174.5" height="29"/>
+                                <rect key="frame" x="100.66666666666667" y="391.66666666666669" width="174.33333333333331" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="62.5" y="503" width="250" height="40"/>
+                                <rect key="frame" x="62.666666666666657" y="575.33333333333337" width="249.99999999999997" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="YW4-Sc-61P"/>
@@ -70,7 +67,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="62.5" y="443" width="250" height="40"/>
+                                <rect key="frame" x="62.666666666666657" y="515.33333333333337" width="249.99999999999997" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="FEf-kf-jCs"/>
@@ -88,16 +85,16 @@
                             <constraint firstItem="bu0-90-MB5" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="40" id="0hJ-6T-D3J"/>
                             <constraint firstItem="Lbn-cd-UXk" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="20" id="0p4-iF-1bx"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="leading" secondItem="E4b-Zv-unB" secondAttribute="leading" id="4YM-7O-C4z"/>
-                            <constraint firstItem="kDG-lW-7DA" firstAttribute="top" secondItem="8TU-za-C7U" secondAttribute="bottom" id="7MN-tF-bVG"/>
+                            <constraint firstAttribute="bottom" secondItem="8TU-za-C7U" secondAttribute="bottom" id="7MN-tF-bVG"/>
                             <constraint firstItem="8TU-za-C7U" firstAttribute="top" secondItem="Dg0-kS-rT7" secondAttribute="top" id="HvO-Th-xtu"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="U37-r7-lNe"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="Lbn-cd-UXk" secondAttribute="bottom" constant="8" symbolic="YES" id="XNv-Kr-c8f"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="YLx-WX-rgL"/>
                             <constraint firstItem="Lbn-cd-UXk" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" priority="750" id="ax2-Za-jO0"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="cYv-WZ-CCB"/>
-                            <constraint firstItem="kDG-lW-7DA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="10" id="dHd-v7-FYo"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="10" id="dHd-v7-FYo"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="gQM-Bw-BRN"/>
-                            <constraint firstItem="kDG-lW-7DA" firstAttribute="top" secondItem="11r-JK-mPT" secondAttribute="bottom" id="hKL-lg-yh3"/>
+                            <constraint firstAttribute="bottom" secondItem="11r-JK-mPT" secondAttribute="bottom" id="hKL-lg-yh3"/>
                             <constraint firstItem="11r-JK-mPT" firstAttribute="leading" secondItem="Dg0-kS-rT7" secondAttribute="leading" id="iUW-Ed-weL"/>
                             <constraint firstItem="Lbn-cd-UXk" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="l7f-X1-d82"/>
                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="qaX-bX-RjJ"/>
@@ -105,11 +102,12 @@
                             <constraint firstAttribute="trailing" secondItem="11r-JK-mPT" secondAttribute="trailing" id="shP-7c-cRl"/>
                             <constraint firstItem="11r-JK-mPT" firstAttribute="top" secondItem="Dg0-kS-rT7" secondAttribute="top" id="sq0-Fa-BSF"/>
                             <constraint firstItem="8TU-za-C7U" firstAttribute="leading" secondItem="Dg0-kS-rT7" secondAttribute="leading" id="svU-pm-Bc1"/>
-                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ETz-GA-Th5" secondAttribute="bottom" constant="10" id="t1u-DE-jkN"/>
+                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Dg0-kS-rT7" secondAttribute="top" constant="10" id="t1u-DE-jkN"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="uLc-95-Qpb"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="ukg-Rd-bL3"/>
                             <constraint firstAttribute="trailing" secondItem="8TU-za-C7U" secondAttribute="trailing" id="z6w-VC-Pft"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="hvJ-fJ-PMc"/>
                     </view>
                     <navigationItem key="navigationItem" id="SVR-Ry-7d7"/>
                     <connections>
@@ -126,6 +124,6 @@
     </scenes>
     <resources>
         <image name="background_ring" width="750" height="1334"/>
-        <image name="logo-ring-beta2-blanc" width="180" height="66"/>
+        <image name="logo-ring-beta2-blanc" width="180" height="65"/>
     </resources>
 </document>
