@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_c0b48cf4",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T15:18:42Z",
+      "side": 1,
+      "message": "Yes, we should handle it here. Maybe more clear wold be still launch the app and show explanation allert",
+      "parentUuid": "7a42497e_00415439",
+      "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_e03d48bd",
         "filename": "Ring/Ring/Database/DBBridging.swift",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2017-12-06T20:36:53Z",
       "side": 1,
       "message": "I think that this class should be defined as final.",
+      "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_209c5069",
+        "filename": "Ring/Ring/Database/DBBridging.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T15:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_e03d48bd",
       "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_8088c423",
+        "filename": "Ring/Ring/Database/DBBridging.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T15:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_404b5c59",
+      "range": {
+        "startLine": 77,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 51
+      },
+      "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_8074449d",
         "filename": "Ring/Ring/Database/DBBridging.swift",
         "patchSetId": 15
@@ -70,6 +130,24 @@
       "writtenOn": "2017-12-06T20:36:53Z",
       "side": 1,
       "message": "We override the catched error here, is it wanted?",
+      "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_608db831",
+        "filename": "Ring/Ring/Database/DBBridging.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T15:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_8074449d",
       "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_c082ccff",
+        "filename": "Ring/Ring/Database/DBHelpers/ConversationDataHepler.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T15:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_c0a5ac05",
+      "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_a0aa20d2",
         "filename": "Ring/Ring/Database/DBHelpers/InteractionDataHelper.swift",
         "patchSetId": 15
@@ -104,6 +200,24 @@
       "writtenOn": "2017-12-06T20:36:53Z",
       "side": 1,
       "message": "This should be final.",
+      "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_a087c00e",
+        "filename": "Ring/Ring/Database/DBHelpers/InteractionDataHelper.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T15:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_a0aa20d2",
       "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
@@ -133,6 +247,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_007cb41f",
+        "filename": "Ring/Ring/Database/DBHelpers/InteractionDataHelper.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T15:18:42Z",
+      "side": 1,
+      "message": "Yes, they are refer to the same table, there is relationship many to many",
+      "parentUuid": "7a42497e_00967494",
+      "range": {
+        "startLine": 63,
+        "startChar": 16,
+        "endLine": 66,
+        "endChar": 98
+      },
+      "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_e092689e",
         "filename": "Ring/Ring/Database/DBHelpers/ProfileDataHelper.swift",
         "patchSetId": 15
@@ -150,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_e078a82d",
+        "filename": "Ring/Ring/Database/DBHelpers/ProfileDataHelper.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T15:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_e092689e",
+      "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_40907c95",
         "filename": "Ring/Ring/Database/RingDB.swift",
         "patchSetId": 15
@@ -161,6 +317,24 @@
       "writtenOn": "2017-12-06T20:36:53Z",
       "side": 1,
       "message": "This should be final.",
+      "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_60bf78d1",
+        "filename": "Ring/Ring/Database/RingDB.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T15:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_40907c95",
       "revId": "a83e580a78741af9bb5de7d83cbfb4bdc4677ce1",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
