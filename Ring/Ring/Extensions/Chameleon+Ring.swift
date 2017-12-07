@@ -41,9 +41,6 @@ extension Chameleon {
 
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.flatGray()
 
-        ButtonTransparentBackground.appearance().tintColor = secondaryColor
-        ButtonTransparentBackground.appearance().backgroundColor = UIColor.clear
-
         MessageBubble.appearance().tintColor = secondaryContentColor
         MessageBubble.appearance().backgroundColor = secondaryColor
 
@@ -57,5 +54,11 @@ extension Chameleon {
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).tintColor = UIColor.clear
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).backgroundColor = UIColor.clear
+
+        UIButton.appearance().backgroundColor = UIColor.clear
+        DesignableButton.appearance().backgroundColor = secondaryColor
+        ButtonTransparentBackground.appearance().tintColor = secondaryColor
+        ButtonTransparentBackground.appearance().backgroundColor = UIColor.clear
+        UIButton.appearance(whenContainedInInstancesOf: [UIView.self, UIImagePickerController.self]).tintColor = UIColor.white
     }
 }
