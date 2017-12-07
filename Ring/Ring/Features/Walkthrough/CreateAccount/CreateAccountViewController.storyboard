@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jUh-Lp-ulu">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jUh-Lp-ulu">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,15 +18,15 @@
                         <viewControllerLayoutGuide type="top" id="Wq5-qI-WER"/>
                         <viewControllerLayoutGuide type="bottom" id="fgQ-1h-rMi"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7Ub-Rk-fjK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="7Ub-Rk-fjK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_ring" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-E3-7tv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZ7-L9-OuJ" userLabel="Gradient View" customClass="DesignableView" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
@@ -38,7 +38,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZB-Gb-Dp2">
-                                <rect key="frame" x="16" y="28" width="343" height="631"/>
+                                <rect key="frame" x="16" y="52" width="343" height="718"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3i-8d-O4a" userLabel="Container View" customClass="DesignableView" customModule="Ring" customModuleProvider="target">
                                         <rect key="frame" x="-16" y="-18" width="375" height="667"/>
@@ -191,7 +191,6 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.093435211690000006" blue="0.097165417209999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="xYA-E3-7tv" firstAttribute="leading" secondItem="7Ub-Rk-fjK" secondAttribute="leading" id="1au-pT-kOj"/>
                             <constraint firstItem="WZ7-L9-OuJ" firstAttribute="top" secondItem="7Ub-Rk-fjK" secondAttribute="top" id="44e-Ab-mbh"/>
@@ -199,13 +198,13 @@
                             <constraint firstItem="xYA-E3-7tv" firstAttribute="top" secondItem="7Ub-Rk-fjK" secondAttribute="top" id="MWk-0f-CtJ"/>
                             <constraint firstItem="fgQ-1h-rMi" firstAttribute="top" secondItem="UZB-Gb-Dp2" secondAttribute="bottom" constant="8" symbolic="YES" id="Nff-ZG-Yuu"/>
                             <constraint firstItem="WZ7-L9-OuJ" firstAttribute="leading" secondItem="7Ub-Rk-fjK" secondAttribute="leading" id="PY4-51-dTX"/>
+                            <constraint firstAttribute="bottom" secondItem="WZ7-L9-OuJ" secondAttribute="bottom" id="Veo-r0-BMP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UZB-Gb-Dp2" secondAttribute="trailing" id="ZeU-39-hYg"/>
-                            <constraint firstItem="fgQ-1h-rMi" firstAttribute="top" secondItem="WZ7-L9-OuJ" secondAttribute="bottom" id="Zgp-E4-04L"/>
+                            <constraint firstAttribute="bottom" secondItem="xYA-E3-7tv" secondAttribute="bottom" id="cHJ-77-DRz"/>
                             <constraint firstAttribute="trailing" secondItem="xYA-E3-7tv" secondAttribute="trailing" id="haz-3o-WbQ"/>
                             <constraint firstAttribute="trailing" secondItem="WZ7-L9-OuJ" secondAttribute="trailing" id="ko3-9b-RwG"/>
                             <constraint firstItem="UZB-Gb-Dp2" firstAttribute="top" secondItem="Wq5-qI-WER" secondAttribute="bottom" constant="8" symbolic="YES" id="l58-kW-bAF"/>
                             <constraint firstAttribute="leadingMargin" secondItem="UZB-Gb-Dp2" secondAttribute="leading" id="n4K-YN-Ab0"/>
-                            <constraint firstItem="fgQ-1h-rMi" firstAttribute="top" secondItem="xYA-E3-7tv" secondAttribute="bottom" id="nz7-EU-vy2"/>
                             <constraint firstItem="g3i-8d-O4a" firstAttribute="width" secondItem="7Ub-Rk-fjK" secondAttribute="width" id="wcZ-tz-DCM"/>
                         </constraints>
                     </view>
