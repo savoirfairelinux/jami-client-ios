@@ -4,7 +4,6 @@
 import Foundation
 import UIKit
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 protocol StoryboardType {
