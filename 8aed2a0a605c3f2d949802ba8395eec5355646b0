@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_80b604db",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T16:09:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_40e7dc40",
+      "range": {
+        "startLine": 151,
+        "startChar": 70,
+        "endLine": 151,
+        "endChar": 92
+      },
+      "revId": "8aed2a0a605c3f2d949802ba8395eec5355646b0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_20bbb00f",
         "filename": "Ring/Ring/Database/DBManager.swift",
         "patchSetId": 9
@@ -36,6 +60,24 @@
       "writtenOn": "2017-12-06T21:43:54Z",
       "side": 1,
       "message": "+1 for the subscribeOn.\nHowever, we think this should be called by the caller of the method, the entity that handle the concrete subscribe.\nWhat do you think?",
+      "revId": "8aed2a0a605c3f2d949802ba8395eec5355646b0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_60bbf8c4",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T16:09:20Z",
+      "side": 1,
+      "message": "Yes, I am agree",
+      "parentUuid": "7a42497e_20bbb00f",
       "revId": "8aed2a0a605c3f2d949802ba8395eec5355646b0",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_c0b00ce0",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T16:09:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_00c4b490",
+      "range": {
+        "startLine": 202,
+        "startChar": 9,
+        "endLine": 202,
+        "endChar": 26
+      },
+      "revId": "8aed2a0a605c3f2d949802ba8395eec5355646b0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_e0c0a87e",
         "filename": "Ring/Ring/Database/DBManager.swift",
         "patchSetId": 9
@@ -76,6 +142,30 @@
       "writtenOn": "2017-12-06T21:26:12Z",
       "side": 1,
       "message": "We should check if this fails or not.",
+      "range": {
+        "startLine": 425,
+        "startChar": 8,
+        "endLine": 426,
+        "endChar": 72
+      },
+      "revId": "8aed2a0a605c3f2d949802ba8395eec5355646b0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_a0b500cf",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-07T16:09:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_e0c0a87e",
       "range": {
         "startLine": 425,
         "startChar": 8,
