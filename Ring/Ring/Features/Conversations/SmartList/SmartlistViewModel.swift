@@ -72,7 +72,7 @@ class SmartlistViewModel: Stateable, ViewModel {
             .disposed(by: self.disposeBag)
 
         //Create observable from sorted conversations and flatMap them to view models
-        let conversationsObservable: Observable<[ConversationViewModel]> = self.conversationsService.conversationsForCurrentAccount.map({ conversations in
+        let conversationsObservable: Observable<[ConversationViewModel]> = self.conversationsService.conversationsForCurrentAccount.map({ [weak self] conversations in
             return conversations
                 .sorted(by: { conversation1, conversations2 in
 
@@ -83,22 +83,25 @@ class SmartlistViewModel: Stateable, ViewModel {
 
                     return lastMessage1.receivedDate > lastMessage2.receivedDate
                 })
-                .filter({ self.contactsService.contact(withRingId: $0.recipientRingId) != nil
-                    || (!$0.messages.isEmpty && (self.contactsService.contactRequest(withRingId: $0.recipientRingId) == nil))
+                .filter({ self?.contactsService.contact(withRingId: $0.recipientRingId) != nil
+                    || (!$0.messages.isEmpty && (self?.contactsService.contactRequest(withRingId: $0.recipientRingId) == nil))
                 })
                 .flatMap({ conversationModel in
 
                     var conversationViewModel: ConversationViewModel?
 
                     //Get the current ConversationViewModel if exists or create it
-                    if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
+                    if let foundConversationViewModel = self?.conversationViewModels.filter({ conversationViewModel in
                         return conversationViewModel.conversation.value == conversationModel
                     }).first {
                         conversationViewModel = foundConversationViewModel
+                    } else if let contactFound = self?.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
+                        conversationViewModel = contactFound
+                        self?.conversationViewModels.append(contactFound)
                     } else {
                         conversationViewModel = ConversationViewModel(with: injectionBag)
                         conversationViewModel?.conversation = Variable<ConversationModel>(conversationModel)
-                        self.conversationViewModels.append(conversationViewModel!)
+                        self?.conversationViewModels.append(conversationViewModel!)
                     }
 
                     return conversationViewModel
