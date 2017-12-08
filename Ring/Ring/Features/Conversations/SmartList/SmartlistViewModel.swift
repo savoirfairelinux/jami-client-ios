@@ -95,6 +95,9 @@ class SmartlistViewModel: Stateable, ViewModel {
                         return conversationViewModel.conversation.isEqual(conversationModel)
                     }).first {
                         conversationViewModel = foundConversationViewModel
+                    } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
+                        conversationViewModel = contactFound
+                        self.conversationViewModels.append(contactFound)
                     } else {
                         conversationViewModel = ConversationViewModel(with: injectionBag)
                         conversationViewModel?.conversation = conversationModel
