@@ -86,14 +86,15 @@ class ConversationsManager: MessagesAdapterDelegate {
         if currentAccountUri == messageAccountUri {
             shouldUpdateConversationsList = true
         }
-
-        self.conversationService.saveMessage(withId: "",
-                                             withContent: content,
-                                             byAuthor: senderAccount,
+        let message = self.conversationService.createMessage(withId: "",
+                                                             withContent: content,
+                                                             byAuthor: senderAccount,
+                                                             generated: false,
+                                                             incoming: true)
+        self.conversationService.saveMessage(message: message,
                                              toConversationWith: senderAccount,
                                              toAccountId: receiverAccountId,
                                              toAccountUri: messageAccountUri,
-                                             generated: false,
                                              shouldRefreshConversations: shouldUpdateConversationsList)
             .subscribe()
             .disposed(by: self.disposeBag)
