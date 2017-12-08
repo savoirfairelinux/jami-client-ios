@@ -27,12 +27,13 @@ class MessageModel {
     var author: String = ""
     var status: MessageStatus = .unknown
     var isGenerated: Bool = false
+    var incoming: Bool
 
-    convenience init(withId id: String, receivedDate: Date, content: String, author: String) {
-        self.init()
+    init(withId id: String, receivedDate: Date, content: String, author: String, incoming: Bool) {
         self.daemonId = id
         self.receivedDate = receivedDate
         self.content = content
         self.author = author
+        self.incoming = incoming
     }
 }
