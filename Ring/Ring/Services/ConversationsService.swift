@@ -105,14 +105,16 @@ class ConversationsService {
             let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientRingId))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
             if accountHelper.ringId! != recipientRingId {
-                _ = self.saveMessage(withId: messageId,
-                                     withContent: content,
-                                     byAuthor: accountHelper.ringId!,
-                                     toConversationWith: recipientRingId,
-                                     toAccountId: senderAccount.id,
-                                     toAccountUri: accountHelper.ringId!,
-                                     generated: false,
-                                     shouldRefreshConversations: true)
+                let message = self.createMessage(withId: messageId,
+                                                 withContent: content,
+                                                 byAuthor: accountHelper.ringId!,
+                                                 generated: false,
+                                                 incoming: false)
+                self.saveMessage(message: message,
+                                 toConversationWith: recipientRingId,
+                                 toAccountId: senderAccount.id,
+                                 toAccountUri: accountHelper.ringId!,
+                                 shouldRefreshConversations: true)
                     .subscribe(onCompleted: { [unowned self] in
                         self.log.debug("Message saved")
                     })
@@ -125,51 +127,47 @@ class ConversationsService {
         })
     }
 
-    // swiftlint:disable function_parameter_count
-    func saveMessage(withId messageId: String,
-                     withContent content: String,
-                     byAuthor author: String,
+    func createMessage(withId messageId: String,
+                       withContent content: String,
+                       byAuthor author: String,
+                       generated: Bool?,
+                       incoming: Bool) -> MessageModel {
+        let message = MessageModel(withId: messageId, receivedDate: Date(), content: content, author: author, incoming: incoming)
+        if let generated = generated {
+            message.isGenerated = generated
+        }
+        return message
+    }
+
+    func saveMessage(message: MessageModel,
                      toConversationWith recipientRingId: String,
                      toAccountId: String,
                      toAccountUri: String,
-                     generated: Bool?,
                      shouldRefreshConversations: Bool) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
-            let message = MessageModel(withId: messageId, receivedDate: Date(), content: content, author: author)
-            if let generated = generated {
-                message.isGenerated = generated
-            }
-
-            var messageDirection = MessageDirection.incoming
-
-            if author == toAccountUri {
-                messageDirection = MessageDirection.outgoing
-            }
-
             self.dbManager.saveMessage(for: toAccountUri,
                                        with: recipientRingId,
                                        message: message,
-                                       type: messageDirection)
+                                       incoming: message.incoming)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onCompleted: { [weak self] in
-                if shouldRefreshConversations {
-                    self?.dbManager.getConversationsObservable(for: toAccountId, accountURI: toAccountUri)
-                        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                        .subscribe(onNext: { [weak self] conversationsModels in
-                            self?.conversations.value = conversationsModels
-                        })
-                        .disposed(by: (self?.disposeBag)!)
-                }
-                completable(.completed)
-            }, onError: { error in
-                completable(.error(error))
-            }).disposed(by: self.disposeBag)
+                    if shouldRefreshConversations {
+                        self?.dbManager.getConversationsObservable(for: toAccountId, accountURI: toAccountUri)
+                            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                            .subscribe(onNext: { [weak self] conversationsModels in
+                                self?.conversations.value = conversationsModels
+                            })
+                            .disposed(by: (self?.disposeBag)!)
+                    }
+                    completable(.completed)
+                    }, onError: { error in
+                        completable(.error(error))
+                }).disposed(by: self.disposeBag)
             return Disposables.create { }
 
         })
     }
-    // swiftlint:enable function_parameter_count
 
     func findConversation(withRingId ringId: String,
                           withAccountId accountId: String) -> ConversationModel? {
@@ -193,17 +191,21 @@ class ConversationsService {
         let uri = AccountModelHelper(withAccount: account).ringId
 
         let accountHelper = AccountModelHelper(withAccount: account)
-        self.saveMessage(withId: "",
-                         withContent: messageType.rawValue,
-                         byAuthor: accountHelper.ringId!,
+
+        let message = self.createMessage(withId: "",
+                                         withContent: messageType.rawValue,
+                                         byAuthor: accountHelper.ringId!,
+                                         generated: true,
+                                         incoming: true)
+
+        self.saveMessage(message: message,
                          toConversationWith: ringId,
                          toAccountId: account.id,
                          toAccountUri: uri!,
-                         generated: true,
                          shouldRefreshConversations: true)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message saved")
-             })
+            })
             .disposed(by: disposeBag)
     }
 
@@ -226,7 +228,7 @@ class ConversationsService {
 
             //Filter unread messages
             let unreadMessages = conversation.messages.filter({ messages in
-                return messages.status != .read
+                return messages.status != .read && messages.incoming
             })
 
             let messagesIds = unreadMessages.map({$0.messageId}).filter({$0 >= 0})
