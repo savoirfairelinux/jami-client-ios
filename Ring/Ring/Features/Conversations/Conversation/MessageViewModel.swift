@@ -98,12 +98,11 @@ class MessageViewModel {
         if self.message.isGenerated {
             return .generated
         }
-        let accountHelper = AccountModelHelper(withAccount: accountService.currentAccount!)
 
-        if self.message.author == accountHelper.ringId! {
-            return .sent
-        } else {
+        if self.message.incoming {
             return.received
+        } else {
+            return .sent
         }
     }
 }
