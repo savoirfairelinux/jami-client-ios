@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_fbf7bd8a",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2017-12-08T20:02:44Z",
+      "side": 1,
+      "message": "Hey, self is used in this whole closure without preventing memory issues.",
+      "revId": "b51b80743bd4f2c7322a1ac6133e1c46e47932ed",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
