@@ -27,8 +27,8 @@ import Contacts
 enum VCardFields: String {
     case begin     = "BEGIN:VCARD"
     case uid       = "UID:"
-    case photoJPEG = "PHOTO;TYPE=JPEG;ENCODING=BASE64:"
-    case photoPNG  = "PHOTO;TYPE=PNG;ENCODING=BASE64:"
+    case photoJPEG = "PHOTO;ENCODING=BASE64;TYPE=JPEG:"
+    case photoPNG  = "PHOTO;ENCODING=BASE64;TYPE=PNG:"
     case end       = "END:VCARD"
     case name      = "N:"
     case fullName  = "FN:"
@@ -71,7 +71,7 @@ extension CNContactVCardSerialization {
         if let compressionSize = compressedSize, image.count > compressionSize {
             // compress image before sending vCard
             guard let compressedImage = UIImage(data: image)?
-                .convertToData(ofMaxSize: compressionSize)else {
+                .convertToData(ofMaxSize: compressionSize) else {
                     return vCardString.data(using: .utf8)!
             }
 
