@@ -89,13 +89,17 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         let acceptCompleted = self.contactsService.accept(contactRequest: item.contactRequest, withAccount: self.accountsService.currentAccount!)
 
         let accountHelper = AccountModelHelper(withAccount: self.accountsService.currentAccount!)
-        self.conversationService.saveMessage(withId: "",
-                                             withContent: GeneratedMessageType.contactRequestAccepted.rawValue,
-                                             byAuthor: accountHelper.ringId!,
+
+        let message = MessageModel(withId: "",
+                                   receivedDate: Date(),
+                                   content: GeneratedMessageType.contactRequestAccepted.rawValue,
+                                   author: accountHelper.ringId!,
+                                   incoming: true)
+        message.isGenerated = true
+        self.conversationService.saveMessage(message: message,
                                              toConversationWith: item.contactRequest.ringId,
                                              toAccountId: (self.accountsService.currentAccount?.id)!,
                                              toAccountUri: accountHelper.ringId!,
-                                             generated: true,
                                              shouldRefreshConversations: true)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message saved")

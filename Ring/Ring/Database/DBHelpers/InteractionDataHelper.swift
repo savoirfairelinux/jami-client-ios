@@ -29,7 +29,8 @@ typealias Interaction = (
     body: String,
     type: String,
     status: String,
-    daemonID: String
+    daemonID: String,
+    incoming: Bool
 )
 
 final class InteractionDataHelper {
@@ -44,6 +45,7 @@ final class InteractionDataHelper {
     let type = Expression<String>("type")
     let status = Expression<String>("status")
     let daemonId = Expression<String>("daemon_id")
+    let incoming = Expression<Bool>("incoming")
 
     func createTable() throws {
         guard let dataBase = RingDB.instance.ringDB else {
@@ -60,6 +62,7 @@ final class InteractionDataHelper {
                 table.column(type)
                 table.column(status)
                 table.column(daemonId)
+                table.column(incoming)
                 table.foreignKey(accountId,
                                  references: RingDB.instance.tableProfiles, id, delete: .noAction)
                 table.foreignKey(authorId,
@@ -85,7 +88,8 @@ final class InteractionDataHelper {
                                   body <- item.body,
                                   type <- item.type,
                                   status <- item.status,
-                                  daemonId <- item.daemonID)
+                                  daemonId <- item.daemonID,
+                                  incoming <- item.incoming)
         do {
             let rowId = try dataBase.run(query)
             guard rowId > 0 else {
@@ -129,7 +133,8 @@ final class InteractionDataHelper {
                                body: item[body],
                                type: item[type],
                                status: item[status],
-                               daemonID: item[daemonId])
+                               daemonID: item[daemonId],
+                               incoming: item[incoming])
         }
         return nil
     }
@@ -149,7 +154,8 @@ final class InteractionDataHelper {
                                             body: item[body],
                                             type: item[type],
                                             status: item[status],
-                                            daemonID: item[daemonId]))
+                                            daemonID: item[daemonId],
+                                            incoming: item[incoming]))
         }
         return interactions
     }
@@ -170,7 +176,8 @@ final class InteractionDataHelper {
                                             body: item[body],
                                             type: item[type],
                                             status: item[status],
-                                            daemonID: item[daemonId]))
+                                            daemonID: item[daemonId],
+                                            incoming: item[incoming]))
         }
         return interactions
     }
@@ -191,7 +198,8 @@ final class InteractionDataHelper {
                                             body: item[body],
                                             type: item[type],
                                             status: item[status],
-                                            daemonID: item[daemonId]))
+                                            daemonID: item[daemonId],
+                                            incoming: item[incoming]))
         }
         return interactions
     }
@@ -213,7 +221,8 @@ final class InteractionDataHelper {
                                             body: item[body],
                                             type: item[type],
                                             status: item[status],
-                                            daemonID: item[daemonId]))
+                                            daemonID: item[daemonId],
+                                            incoming: item[incoming]))
         }
         return interactions
     }
@@ -234,7 +243,8 @@ final class InteractionDataHelper {
                                             body: item[body],
                                             type: item[type],
                                             status: item[status],
-                                            daemonID: item[daemonId]))
+                                            daemonID: item[daemonId],
+                                            incoming: item[incoming]))
         }
         if interactions.isEmpty {
             return nil

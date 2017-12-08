@@ -31,10 +31,6 @@ enum ProfileStatus: String {
     case untrasted = "UNTRUSTED"
 }
 
-enum MessageDirection {
-    case incoming
-    case outgoing
-}
 enum InteractionStatus: String {
     case invalid = "INVALID"
     case unknown = "UNKNOWN"
@@ -116,7 +112,7 @@ class DBManager {
         try interactionHepler.createTable()
     }
 
-    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, type: MessageDirection) -> Completable {
+    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, incoming: Bool) -> Completable {
 
         //create completable which will be executed on background thread
         return Completable.create { [weak self] completable in
@@ -137,11 +133,11 @@ class DBManager {
                     }
 
                     var author: Int64
-                    switch type {
-                    case .incoming:
-                        author = contactProfile.id
-                    case .outgoing:
-                        author = accountProfile.id
+
+                    if incoming {
+                       author = contactProfile.id
+                    } else {
+                       author = accountProfile.id
                     }
 
                     guard let conversationsID = try self?.getConversationsIDBetween(accountProfileID: accountProfile.id,
@@ -379,7 +375,8 @@ class DBManager {
         let message = MessageModel(withId: interaction.daemonID,
                                    receivedDate: date,
                                    content: interaction.body,
-                                   author: author)
+                                   author: author,
+                                   incoming: interaction.incoming)
         message.isGenerated = self.isGenerated(message: message)
         if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
             message.status = status.toMessageStatus()
@@ -396,7 +393,7 @@ class DBManager {
         let interaction = Interaction(defaultID, accountProfileID, authorProfileID,
                                       conversationID, Int64(timeInterval),
                                       message.content, InteractionType.text.rawValue,
-                                      InteractionStatus.unknown.rawValue, message.daemonId)
+                                      InteractionStatus.unknown.rawValue, message.daemonId, message.incoming )
         return self.interactionHepler.insert(item: interaction)
     }
 
