@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_e1d9ca84",
+        "filename": "Ring/Ring/Services/ConversationsService.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-12-12T21:42:58Z",
+      "side": 1,
+      "message": "to remove",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 4
+      },
+      "revId": "4f701fb97978633f5b211cf26e130347efeb3a7b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
