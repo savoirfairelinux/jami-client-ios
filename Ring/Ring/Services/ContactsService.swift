@@ -34,14 +34,20 @@ class ContactsService {
 
     fileprivate let contactsAdapter: ContactsAdapter
     fileprivate let log = SwiftyBeaver.self
+    fileprivate let disposeBag = DisposeBag()
 
     let contactRequests = Variable([ContactRequestModel]())
     let contacts = Variable([ContactModel]())
 
     let contactStatus = PublishSubject<ContactModel>()
 
+    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    var sharedResponseStream: Observable<ServiceEvent>
+
     init(withContactsAdapter contactsAdapter: ContactsAdapter) {
         self.contactsAdapter = contactsAdapter
+        self.responseStream.disposed(by: disposeBag)
+        self.sharedResponseStream = responseStream.share()
         ContactsAdapter.delegate = self
     }
 
@@ -98,6 +104,11 @@ class ContactsService {
             let success = self.contactsAdapter.acceptTrustRequest(fromContact: contactRequest.ringId,
                                                                   withAccountId: account.id)
             if success {
+                var event = ServiceEvent(withEventType: .contactAdded)
+                event.addEventInput(.accountId, value: account.id)
+                event.addEventInput(.state, value: true)
+                event.addEventInput(.uri, value: contactRequest.ringId)
+                self.responseStream.onNext(event)
                 observable.on(.completed)
             } else {
                 observable.on(.error(ContactServiceError.acceptTrustRequestFailed))
@@ -133,6 +144,10 @@ class ContactsService {
                   payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000)
                 }
                 self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: account.id)
+                var event = ServiceEvent(withEventType: .contactRequestSended)
+                event.addEventInput(.accountId, value: account.id)
+                event.addEventInput(.uri, value: ringId)
+                self.responseStream.onNext(event)
                 completable(.completed)
             } catch {
                 completable(.error(ContactServiceError.vCardSerializationFailed))
@@ -196,6 +211,11 @@ extension ContactsService: ContactsAdapterDelegate {
                                                          receivedDate: receivedDate,
                                                          accountId: accountId)
                 self.contactRequests.value.append(contactRequest)
+                var event = ServiceEvent(withEventType: .contactRequestReceived)
+                event.addEventInput(.accountId, value: accountId)
+                event.addEventInput(.uri, value: senderAccount)
+                event.addEventInput(.date, value: receivedDate)
+                self.responseStream.onNext(event)
             } else {
                 // If the contact request already exists, update it's relevant data
                 if let contactRequest = self.contactRequest(withRingId: senderAccount) {
@@ -219,6 +239,13 @@ extension ContactsService: ContactsAdapterDelegate {
             if contact.confirmed != confirmed {
                 contact.confirmed = confirmed
                 self.contactStatus.onNext(contact)
+                if confirmed {
+                    var event = ServiceEvent(withEventType: .contactAdded)
+                    event.addEventInput(.state, value: confirmed)
+                    event.addEventInput(.accountId, value: accountId)
+                    event.addEventInput(.uri, value: uri)
+                    self.responseStream.onNext(event)
+                }
             }
         }
             //sync contacts with daemon contacts

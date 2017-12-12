@@ -116,7 +116,7 @@ class DBManager {
         try interactionHepler.createTable()
     }
 
-    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, type: MessageDirection) -> Completable {
+    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, type: MessageDirection, interactionType: InteractionType) -> Completable {
 
         //create completable which will be executed on background thread
         return Completable.create { [weak self] completable in
@@ -154,8 +154,17 @@ class DBManager {
                     guard let conversationID = conversationsID.first else {
                             throw DBBridgingError.saveMessageFailed
                     }
-                    // for now we have only one conversation between two persons(with group chat could be many)
-                    if let success = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, message: message), success {
+                    var result: Bool?
+                    switch interactionType {
+                    case .text:
+                        // for now we have only one conversation between two persons(with group chat could be many)
+                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, message: message)
+                    case .contact:
+                        result = self?.addInteractionContactTo(conversation: conversationID, account: accountProfile.id, author: author, message: message)
+                    default:
+                        result = nil
+                    }
+                    if let success = result, success {
                         completable(.completed)
                     } else {
                         completable(.error(DBBridgingError.saveMessageFailed))
@@ -361,26 +370,19 @@ class DBManager {
         return participants.first
     }
 
-    private func isGenerated(message: MessageModel) -> Bool {
-        switch message.content {
-        case GeneratedMessageType.contactRequestAccepted.rawValue:
-            return true
-        case GeneratedMessageType.receivedContactRequest.rawValue:
-            return true
-        case GeneratedMessageType.sendContactRequest.rawValue:
-            return true
-        default:
-            return false
-        }
-    }
-
     private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
+        if interaction.type != InteractionType.text.rawValue &&
+            interaction.type != InteractionType.contact.rawValue {
+            return nil
+        }
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
         let message = MessageModel(withId: interaction.daemonID,
                                    receivedDate: date,
                                    content: interaction.body,
                                    author: author)
-        message.isGenerated = self.isGenerated(message: message)
+        if interaction.type == InteractionType.contact.rawValue {
+            message.isGenerated = true
+        }
         if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
             message.status = status.toMessageStatus()
         }
@@ -398,6 +400,18 @@ class DBManager {
                                       message.content, InteractionType.text.rawValue,
                                       InteractionStatus.unknown.rawValue, message.daemonId)
         return self.interactionHepler.insert(item: interaction)
+    }
+
+    private func addInteractionContactTo(conversation conversationID: Int64,
+                                  account accountProfileID: Int64,
+                                  author authorProfileID: Int64,
+                                  message: MessageModel) -> Bool {
+        let timeInterval = message.receivedDate.timeIntervalSince1970
+        let interaction = Interaction(defaultID, accountProfileID, authorProfileID,
+                                      conversationID, Int64(timeInterval),
+                                      message.content, InteractionType.contact.rawValue,
+                                      InteractionStatus.read.rawValue, message.daemonId)
+        return self.interactionHepler.insertIfNotExist(item: interaction)
     }
 
     private func getProfile(for profileUri: String, createIfNotExists: Bool) throws -> Profile? {
