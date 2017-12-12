@@ -156,9 +156,14 @@ class ContactRequestsViewModel: Stateable, ViewModel {
 
     func showConversation (forRingId ringId: String) {
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        let conversation = self.conversationService.findConversation(withRingId: ringId,
-                                                                     withAccountId: (accountsService.currentAccount?.id)!)
-        conversationViewModel.conversation = Variable<ConversationModel>(conversation!)
+        guard let account = accountsService.currentAccount else {
+            return
+        }
+
+        guard let conversation = self.conversationService.findConversation(withRingId: ringId, withAccountId: account.id) else {
+            return
+        }
+        conversationViewModel.conversation = Variable<ConversationModel>(conversation)
         self.stateSubject.onNext(ConversationsState.conversationDetail(conversationViewModel: conversationViewModel))
     }
 }
