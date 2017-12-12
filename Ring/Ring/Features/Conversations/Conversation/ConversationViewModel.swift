@@ -100,9 +100,7 @@ class ConversationViewModel: ViewModel {
                 .subscribe(onNext: { [unowned self] cont in
 
                     self.inviteButtonIsAvailable.onNext(!cont.confirmed)
-                    if cont.confirmed {
-                        self.generateMessage(ofType: GeneratedMessageType.contactRequestAccepted)
-                    }
+
                 }).disposed(by: self.disposeBag)
 
             // subscribe to presence updates for the conversation's associated contact
@@ -264,15 +262,11 @@ class ConversationViewModel: ViewModel {
     }
 
     func sendContactRequest() {
-        let contactExists =  self.contactsService.contact(withRingId: self.conversation.value.recipientRingId) != nil ? true : false
         VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
                              inFolder: VCardFolders.profile.rawValue)
             .subscribe(onSuccess: { [unowned self] (card) in
                 self.contactsService.sendContactRequest(toContactRingId: self.conversation.value.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!)
                     .subscribe(onCompleted: { [unowned self] in
-                        if !contactExists {
-                            self.generateMessage(ofType: GeneratedMessageType.sendContactRequest)
-                        }
                         self.log.info("contact request sent")
                     }, onError: { [unowned self] (error) in
                         self.log.info(error)
@@ -280,9 +274,6 @@ class ConversationViewModel: ViewModel {
             }) { [unowned self] error in
                 self.contactsService.sendContactRequest(toContactRingId: self.conversation.value.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!)
                     .subscribe(onCompleted: { [unowned self] in
-                        if !contactExists {
-                            self.generateMessage(ofType: GeneratedMessageType.sendContactRequest)
-                        }
                         self.log.info("contact request sent")
                     }, onError: { [unowned self] (error) in
                         self.log.info(error)
@@ -290,9 +281,4 @@ class ConversationViewModel: ViewModel {
             }.disposed(by: self.disposeBag)
     }
 
-    func generateMessage(ofType messageType: GeneratedMessageType) {
-        self.conversationsService.generateMessage(ofType: messageType,
-                                                  forRindId: self.conversation.value.recipientRingId,
-                                                  forAccount: self.accountService.currentAccount!)
-    }
 }
