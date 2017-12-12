@@ -49,17 +49,6 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         self.presenceService = injectionBag.presenceService
 
         self.injectionBag = injectionBag
-
-        self.contactsService.contactRequests
-            .asObservable()
-            .subscribe(onNext: {[unowned self] contactRequests in
-                guard let account = self.accountsService.currentAccount else { return }
-                guard let ringId = contactRequests.last?.ringId else { return }
-                self.conversationService.generateMessage(ofType: GeneratedMessageType.receivedContactRequest,
-                                                         forRindId: ringId,
-                                                         forAccount: account)
-            })
-            .disposed(by: self.disposeBag)
     }
 
     lazy var contactRequestItems: Observable<[ContactRequestItem]> = {
@@ -87,20 +76,6 @@ class ContactRequestsViewModel: Stateable, ViewModel {
 
     func accept(withItem item: ContactRequestItem) -> Observable<Void> {
         let acceptCompleted = self.contactsService.accept(contactRequest: item.contactRequest, withAccount: self.accountsService.currentAccount!)
-
-        let accountHelper = AccountModelHelper(withAccount: self.accountsService.currentAccount!)
-        self.conversationService.saveMessage(withId: "",
-                                             withContent: GeneratedMessageType.contactRequestAccepted.rawValue,
-                                             byAuthor: accountHelper.ringId!,
-                                             toConversationWith: item.contactRequest.ringId,
-                                             toAccountId: (self.accountsService.currentAccount?.id)!,
-                                             toAccountUri: accountHelper.ringId!,
-                                             generated: true,
-                                             shouldRefreshConversations: true)
-            .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("Message saved")
-            })
-            .disposed(by: disposeBag)
 
         self.presenceService.subscribeBuddy(withAccountId: (self.accountsService.currentAccount?.id)!,
                                             withUri: item.contactRequest.ringId,
