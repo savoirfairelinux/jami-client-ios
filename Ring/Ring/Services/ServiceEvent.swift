@@ -32,6 +32,9 @@ enum ServiceEventType {
     case messageStateChanged
     case knownDevicesChanged
     case exportOnRingEnded
+    case contactAdded
+    case contactRequestSended
+    case contactRequestReceived
 }
 
 /**
@@ -46,6 +49,8 @@ enum ServiceEventInput {
     case messageStatus
     case messageId
     case pin
+    case accountId
+    case date
 }
 
 /**
