@@ -150,7 +150,8 @@ class ConversationsService {
             self.dbManager.saveMessage(for: toAccountUri,
                                        with: recipientRingId,
                                        message: message,
-                                       type: messageDirection)
+                                       type: messageDirection,
+                                       interactionType: InteractionType.text)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onCompleted: { [weak self] in
                 if shouldRefreshConversations {
@@ -179,41 +180,31 @@ class ConversationsService {
             })
             .first
     }
-
+    
+    // swiftlint:enable function_parameter_count
     func generateMessage(ofType messageType: GeneratedMessageType,
-                         forRindId ringId: String,
-                         forAccount account: AccountModel) {
+                         contactRingId: String,
+                         accountRingId: String,
+                         accountId: String,
+                         date: Date,
+                         shouldUpdateConversation: Bool) {
 
-        if let conversation = self.findConversation(withRingId: ringId, withAccountId: account.id) {
-            if self.generatedMessageExists(ofType: messageType, inConversation: conversation) {
-                return
-            }
-        }
+        let message = MessageModel(withId: "", receivedDate: date, content: messageType.rawValue, author: accountRingId)
+        message.isGenerated = true
 
-        let uri = AccountModelHelper(withAccount: account).ringId
-
-        let accountHelper = AccountModelHelper(withAccount: account)
-        self.saveMessage(withId: "",
-                         withContent: messageType.rawValue,
-                         byAuthor: accountHelper.ringId!,
-                         toConversationWith: ringId,
-                         toAccountId: account.id,
-                         toAccountUri: uri!,
-                         generated: true,
-                         shouldRefreshConversations: true)
+        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, type: MessageDirection.incoming, interactionType: InteractionType.contact)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("Message saved")
-             })
-            .disposed(by: disposeBag)
-    }
-
-    func generatedMessageExists(ofType messageType: GeneratedMessageType,
-                                inConversation conversation: ConversationModel) -> Bool {
-        for message in conversation.messages
-            where message.content == messageType.rawValue {
-                return true
-        }
-        return false
+                if shouldUpdateConversation {
+                    self.dbManager.getConversationsObservable(for: accountId, accountURI: contactRingId)
+                        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                        .subscribe(onNext: { conversationsModels in
+                            self.conversations.value = conversationsModels
+                        })
+                        .disposed(by: (self.disposeBag))
+                }
+                }, onError: { _ in
+            }).disposed(by: self.disposeBag)
     }
 
     func status(forMessageId messageId: String) -> MessageStatus {

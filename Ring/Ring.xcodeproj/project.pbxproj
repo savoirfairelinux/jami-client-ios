@@ -90,6 +90,7 @@
 		0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */; };
 		0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */; };
 		0E403F831F7D79B000C80BC2 /* MessageCellGenerated.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */; };
+		0E48F9D31FDF150700D6CC08 /* ContactRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48F9D21FDF150700D6CC08 /* ContactRequestManager.swift */; };
 		0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6949781FA7E71C0029B60A /* BaseViewController.swift */; };
 		0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E983E6D1FC77C3E0082103E /* ConversationModel.swift */; };
 		0E9D84491FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */; };
@@ -335,6 +336,7 @@
 		0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkNewDeviceCell.xib; sourceTree = "<group>"; };
 		0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellGenerated.swift; sourceTree = "<group>"; };
 		0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellGenerated.xib; sourceTree = "<group>"; };
+		0E48F9D21FDF150700D6CC08 /* ContactRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestManager.swift; sourceTree = "<group>"; };
 		0E6949781FA7E71C0029B60A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0E983E6D1FC77C3E0082103E /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabBarItemViewModel.swift; sourceTree = "<group>"; };
@@ -677,6 +679,7 @@
 				62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */,
 				62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */,
 				0EF78DE21FD0AE3000FC6966 /* ConversationsManager.swift */,
+				0E48F9D21FDF150700D6CC08 /* ContactRequestManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1553,6 +1556,7 @@
 				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
 				1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */,
 				1A2D18FC1F292DAD00B2C785 /* ConversationCell.swift in Sources */,
+				0E48F9D31FDF150700D6CC08 /* ContactRequestManager.swift in Sources */,
 				1A5DC0371F35675E0075E8EF /* ContactRequestCell.swift in Sources */,
 				1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */,
 				1A5DC03D1F35678D0075E8EF /* ContactRequestItem.swift in Sources */,
