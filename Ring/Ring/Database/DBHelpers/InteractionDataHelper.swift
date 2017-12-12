@@ -294,4 +294,36 @@ final class InteractionDataHelper {
             return false
         }
     }
+
+    func insertIfNotExist(item: Interaction) -> Bool {
+        guard let dataBase = RingDB.instance.ringDB else {
+            return false
+        }
+
+        let querySelect = table.filter(accountId == item.accountID &&
+            conversationId == item.conversationID &&
+            body == item.body &&
+            type == item.type)
+        let queryInsert = table.insert(accountId <- item.accountID,
+                                       authorId <- item.authorID,
+                                       conversationId <- item.conversationID,
+                                       timestamp <- item.timestamp,
+                                       body <- item.body,
+                                       type <- item.type,
+                                       status <- item.status,
+                                       daemonId <- item.daemonID)
+        do {
+            let rows = try dataBase.scalar(querySelect.count)
+            if rows == 0 {
+                let row = try dataBase.run(queryInsert)
+                guard row > 0 else {
+                    return false
+                }
+                return true
+            }
+        } catch {
+            return false
+        }
+        return false
+    }
 }
