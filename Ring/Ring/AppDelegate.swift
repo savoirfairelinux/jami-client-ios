@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
     private let networkService = NetworkService()
     private var conversationManager: ConversationsManager?
+    private var contactRequestManager: ContactRequestManager?
 
     public lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
@@ -77,6 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // themetize the app
         Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
         Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
+
+        self.contactRequestManager = ContactRequestManager(accountService: self.accountService, contactService: self.contactsService, conversationService: self.conversationsService)
 
         // load accounts during splashscreen
         // and ask the AppCoordinator to handle the first screen once loading is finished
