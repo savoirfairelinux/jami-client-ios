@@ -85,6 +85,12 @@ class ContactRequestManager {
                     type = GeneratedMessageType.sendContactRequest
                 case ServiceEventType.contactRequestReceived:
                     type = GeneratedMessageType.receivedContactRequest
+                case ServiceEventType.contactRequestDiscarded:
+                    self.removeConversation(accountId: account.id,
+                                            accountRingId: ringId,
+                                            contactRingId: contactRingId,
+                                            shouldUpdateConversation: shouldUpdateConversations)
+                    return
                 default:
                     return
                 }
@@ -98,5 +104,21 @@ class ContactRequestManager {
 
             })
             .disposed(by: disposeBag)
+    }
+
+    private func removeConversation(accountId: String, accountRingId: String,
+                                    contactRingId: String,
+                                    shouldUpdateConversation: Bool) {
+
+        guard let conversation = self.conversationService.findConversation(withRingId: contactRingId, withAccountId: accountId) else {
+            return
+        }
+        // remove conversation if it contain only generated messages
+        let messagesNotGenerated = conversation.messages.filter({!$0.isGenerated})
+
+        if !messagesNotGenerated.isEmpty {
+            return
+        }
+        self.conversationService.deleteConversation(conversation: conversation)
     }
 }
