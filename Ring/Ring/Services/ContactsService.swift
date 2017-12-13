@@ -187,28 +187,32 @@ class ContactsService {
 extension ContactsService: ContactsAdapterDelegate {
 
     func incomingTrustRequestReceived(from senderAccount: String, to accountId: String, withPayload payload: Data, receivedDate: Date) {
-        do {
-            //Update trust request list
-            if self.contactRequest(withRingId: senderAccount) == nil {
-                let vCards = try CNContactVCardSerialization.contacts(with: payload)
-                let contactRequest = ContactRequestModel(withRingId: senderAccount,
-                                                         vCard: vCards.first,
-                                                         receivedDate: receivedDate,
-                                                         accountId: accountId)
-                self.contactRequests.value.append(contactRequest)
-            } else {
-                // If the contact request already exists, update it's relevant data
-                if let contactRequest = self.contactRequest(withRingId: senderAccount) {
-                    let vCards = try CNContactVCardSerialization.contacts(with: payload)
-                    contactRequest.vCard = vCards.first
-                    contactRequest.receivedDate = receivedDate
-                }
-            }
 
-            log.debug("Incoming trust request received from :\(senderAccount)")
+        var vCard: CNContact?
+        do {
+            let vCards = try CNContactVCardSerialization.contacts(with: payload)
+            vCard = vCards.first
         } catch {
+            vCard = nil
             log.error("Unable to parse the vCard :\(error)")
         }
+
+        //Update trust request list
+        if self.contactRequest(withRingId: senderAccount) == nil {
+            let contactRequest = ContactRequestModel(withRingId: senderAccount,
+                                                     vCard: vCard,
+                                                     receivedDate: receivedDate,
+                                                     accountId: accountId)
+            self.contactRequests.value.append(contactRequest)
+        } else {
+            // If the contact request already exists, update it's relevant data
+            if let contactRequest = self.contactRequest(withRingId: senderAccount) {
+                contactRequest.vCard = vCard
+                contactRequest.receivedDate = receivedDate
+            }
+            log.debug("Incoming trust request received from :\(senderAccount)")
+        }
+
     }
 
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool) {
