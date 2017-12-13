@@ -127,6 +127,10 @@ class ContactsService {
             self.removeContactRequest(withRingId: contactRequest.ringId)
 
             if success {
+                var event = ServiceEvent(withEventType: .contactRequestDiscarded)
+                event.addEventInput(.accountId, value: account.id)
+                event.addEventInput(.uri, value: contactRequest.ringId)
+                self.responseStream.onNext(event)
                 observable.on(.completed)
             } else {
                 observable.on(.error(ContactServiceError.diacardTrusRequestFailed))

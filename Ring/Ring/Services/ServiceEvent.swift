@@ -35,6 +35,7 @@ enum ServiceEventType {
     case contactAdded
     case contactRequestSended
     case contactRequestReceived
+    case contactRequestDiscarded
 }
 
 /**
