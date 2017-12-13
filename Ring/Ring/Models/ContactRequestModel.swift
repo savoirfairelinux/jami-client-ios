@@ -25,7 +25,7 @@ class ContactRequestModel {
 
     let ringId: String
     let accountId: String
-    var vCard: CNContact?
+    var vCard: CNContact? = nil
     var receivedDate: Date
 
     enum ContactRequestKey: String {
@@ -52,14 +52,17 @@ class ContactRequestModel {
         }
 
         if let vCardString = dictionary[ContactRequestKey.payload.rawValue] {
-            do {
-                self.vCard = try CNContactVCardSerialization.contacts(with: vCardString.data(using: String.Encoding.utf8)!).first!
-            } catch {
-                log.error("Unable to serialize the vCard : \(error)")
-                self.vCard = CNContact()
+            if let data = vCardString.data(using: String.Encoding.utf8), !data.isEmpty {
+                do {
+                    let vCards = try CNContactVCardSerialization.contacts(with: data)
+                    if let contactVCard = vCards.first {
+                        self.vCard = contactVCard
+                    }
+                } catch {
+                    log.error("Unable to serialize the vCard : \(error)")
+                    self.vCard = CNContact()
+                }
             }
-        } else {
-            self.vCard = nil
         }
 
         if let receivedDateString = dictionary[ContactRequestKey.received.rawValue] {
