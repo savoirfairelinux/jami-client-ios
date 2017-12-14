@@ -37,6 +37,40 @@ platform :ios do
     )
   end
 
+  desc "Submit a new Beta Build to Apple TestFlight"
+  lane :beta do
+    ensure_git_status_clean
+    unlock_keychain
+    match(
+      type: "appstore"
+    )
+    increment_build_number
+    gym(
+      scheme: "Ring",
+      clean: true,
+      configuration: "Release",
+      export_method: 'app-store',
+    )
+    pilot(
+      skip_waiting_for_build_processing: true
+    )
+    new_build_number = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
+    current_version = get_version_number
+    message = "project: bump to version #{current_version}.#{new_build_number} for release"
+    clean_build_artifacts
+    commit_version_bump(
+      xcodeproj: "Ring.xcodeproj",
+      message: message,
+      force: true
+    )
+    push_to_git_remote(
+      local_branch: "HEAD",
+      remote_branch: “refs/for/master/fastlane”,
+      force: false,
+      tags: false
+    )
+  end
+
   after_all do |lane|
     # This block is called, only if the executed lane was successful
   end
