@@ -37,6 +37,23 @@ platform :ios do
     )
   end
 
+  desc "create and push commit"
+  lane :beta do
+    ensure_git_status_clean
+    increment_build_number
+    new_build_number = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
+    current_build_number = Integer(new_build_number) - 1
+    current_version = get_version_number
+    message = "project: bump to version #{current_version}.#{new_build_number} for release"
+    clean_build_artifacts
+    commit_version_bump(
+      xcodeproj: "Ring.xcodeproj",
+      message: message,
+      force: true
+    )
+    push_to_git_remote
+  end
+
   after_all do |lane|
     # This block is called, only if the executed lane was successful
   end
