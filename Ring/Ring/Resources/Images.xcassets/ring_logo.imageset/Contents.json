@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "logo-ring-beta2-blanc.png",
+      "filename" : "logo-ring-tagline-EN-couleur-texteblanc.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "logo-ring-beta2-blanc@2x.png",
+      "filename" : "logo-ring-tagline-EN-couleur-texteblanc@2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "logo-ring-beta2-blanc@3x.png",
+      "filename" : "logo-ring-tagline-EN-couleur-texteblanc@3.png",
       "scale" : "3x"
     }
   ],
