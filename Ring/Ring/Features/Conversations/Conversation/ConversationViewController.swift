@@ -346,7 +346,11 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         let type = messageVM.bubblePosition()
         let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
 
+        cell.messageLabel.enabledTypes = [.url]
         cell.messageLabel.setTextWithLineSpacing(withText: messageVM.content, withLineSpacing: 2)
+        cell.messageLabel.handleURLTap { url in
+            UIApplication.shared.openURL(url)
+        }
 
         cell.topCorner.isHidden = true
         cell.topCorner.backgroundColor = bubbleColor
