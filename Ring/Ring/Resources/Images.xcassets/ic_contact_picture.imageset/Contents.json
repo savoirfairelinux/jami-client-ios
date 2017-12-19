@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic_contact_picture.png",
+      "filename" : "ic_contact_avatar.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "ic_contact_avatar@2.png",
       "scale" : "2x"
     },
     {
