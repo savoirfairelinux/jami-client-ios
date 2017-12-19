@@ -303,7 +303,7 @@ class DBManager {
         for conversationID in conversationsID {
             guard let participants = try self.getParticipantsForConversation(conversationID: conversationID),
                 !participants.isEmpty else {
-                    throw DBBridgingError.getConversationFailed
+                    continue
             }
             guard let participant =
                 self.filterParticipantsFor(account: accountProfile.id,
@@ -311,7 +311,7 @@ class DBManager {
                                             throw DBBridgingError.getConversationFailed
             }
             guard let participantProfile = try self.profileHepler.selectProfile(profileId: participant) else {
-                throw DBBridgingError.getConversationFailed
+                continue
             }
             let conversationModel = ConversationModel(withRecipientRingId: participantProfile.uri,
                                                        accountId: accountID, accountUri: accountUri)
@@ -321,7 +321,7 @@ class DBManager {
                 .selectInteractionsForConversationWithAccount(conversationID: conversationID,
                                                               accountProfileID: accountProfile.id),
                 !interactions.isEmpty else {
-                    throw DBBridgingError.getConversationFailed
+                    continue
             }
             for interaction in interactions {
                 var author = accountProfile.uri

@@ -321,7 +321,8 @@ final class InteractionDataHelper {
                                        body <- item.body,
                                        type <- item.type,
                                        status <- item.status,
-                                       daemonId <- item.daemonID)
+                                       daemonId <- item.daemonID,
+                                       incoming <- item.incoming)
         do {
             let rows = try dataBase.scalar(querySelect.count)
             if rows == 0 {
