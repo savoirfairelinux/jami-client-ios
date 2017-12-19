@@ -11,6 +11,7 @@ import Reusable
 import RxSwift
 import PKHUD
 import AMPopTip
+import SwiftyBeaver
 
 class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
 
@@ -21,10 +22,13 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     @IBOutlet weak var pinInfoButton: UIButton!
     @IBOutlet weak var pinLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     // MARK: members
     private let disposeBag = DisposeBag()
     var viewModel: LinkDeviceViewModel!
     let popTip = PopTip()
+
+    let log = SwiftyBeaver.self
 
     // MARK: functions
     override func viewDidLoad() {
@@ -109,6 +113,8 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
             popTip.entranceAnimation = .scale
             popTip.bubbleColor = UIColor.ringSecondary
             popTip.textColor = UIColor.white
+            let offset: CGFloat = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) ? 60.0 : 80.0
+            popTip.offset = offset - scrollView.contentOffset.y
             popTip.show(text: L10n.Linktoaccount.explanationPinMessage, direction: .down,
                         maxWidth: 250, in: self.view, from: pinInfoButton.frame)
         }
