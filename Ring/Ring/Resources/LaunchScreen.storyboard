@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,24 +21,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vy5-r8-oQ3">
-                                <rect key="frame" x="134.5" y="271" width="51" height="26.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_ring" translatesAutoresizingMaskIntoConstraints="NO" id="QbZ-1j-Ebd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0tt-6B-dHo" userLabel="Gradient View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="logo-ring-beta2-blanc" translatesAutoresizingMaskIntoConstraints="NO" id="kP1-oe-ZEx">
-                                        <rect key="frame" x="70" y="251" width="180" height="66"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="ring_logo" translatesAutoresizingMaskIntoConstraints="NO" id="kP1-oe-ZEx">
+                                        <rect key="frame" x="64.5" y="252.5" width="191" height="63"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.2274509804" green="0.75294117650000003" blue="0.82352941180000006" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="kP1-oe-ZEx" firstAttribute="centerX" secondItem="0tt-6B-dHo" secondAttribute="centerX" id="54e-9c-yxP"/>
                                     <constraint firstItem="kP1-oe-ZEx" firstAttribute="centerY" secondItem="0tt-6B-dHo" secondAttribute="centerY" id="fXn-9R-frB"/>
@@ -50,8 +44,6 @@
                             <constraint firstAttribute="bottom" secondItem="0tt-6B-dHo" secondAttribute="bottom" id="Bwv-uE-mOw"/>
                             <constraint firstItem="QbZ-1j-Ebd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="GdO-YK-ig4"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="QbZ-1j-Ebd" secondAttribute="bottom" id="OrU-s1-c96"/>
-                            <constraint firstItem="vy5-r8-oQ3" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="PE3-VY-U9r"/>
-                            <constraint firstItem="vy5-r8-oQ3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="U34-24-7hY"/>
                             <constraint firstItem="0tt-6B-dHo" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="WEG-5j-2f3"/>
                             <constraint firstItem="0tt-6B-dHo" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="h0e-hO-zEy"/>
                             <constraint firstAttribute="trailing" secondItem="0tt-6B-dHo" secondAttribute="trailing" id="hq4-6q-gx1"/>
@@ -67,6 +59,6 @@
     </scenes>
     <resources>
         <image name="background_ring" width="750" height="1334"/>
-        <image name="logo-ring-beta2-blanc" width="180" height="66"/>
+        <image name="ring_logo" width="191" height="63"/>
     </resources>
 </document>
