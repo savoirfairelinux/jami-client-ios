@@ -91,6 +91,7 @@
 		0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */; };
 		0E403F831F7D79B000C80BC2 /* MessageCellGenerated.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */; };
 		0E48F9D31FDF150700D6CC08 /* ContactRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48F9D21FDF150700D6CC08 /* ContactRequestManager.swift */; };
+		0E4909611FE97A94005CAA50 /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4909601FE97A94005CAA50 /* ActiveLabel.framework */; };
 		0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6949781FA7E71C0029B60A /* BaseViewController.swift */; };
 		0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E983E6D1FC77C3E0082103E /* ConversationModel.swift */; };
 		0E9D84491FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */; };
@@ -337,6 +338,7 @@
 		0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellGenerated.swift; sourceTree = "<group>"; };
 		0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellGenerated.xib; sourceTree = "<group>"; };
 		0E48F9D21FDF150700D6CC08 /* ContactRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestManager.swift; sourceTree = "<group>"; };
+		0E4909601FE97A94005CAA50 /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
 		0E6949781FA7E71C0029B60A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0E983E6D1FC77C3E0082103E /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabBarItemViewModel.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E4909611FE97A94005CAA50 /* ActiveLabel.framework in Frameworks */,
 				0E0FF1A71FC38070003898C2 /* SQLite.framework in Frameworks */,
 				5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */,
 				0ED666101F9FED1C00743D42 /* AMPopTip.framework in Frameworks */,
@@ -639,6 +642,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E4909601FE97A94005CAA50 /* ActiveLabel.framework */,
 				0E0FF1A61FC38070003898C2 /* SQLite.framework */,
 				5C093F001FB495830011D90E /* Differentiator.framework */,
 				0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */,
@@ -1451,6 +1455,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ActiveLabel.framework",
 			);
 			name = "⚙️ Copy Frameworks";
 			outputPaths = (
@@ -1467,6 +1472,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AMPopTip.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SQLite.framework",
+				"(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ActiveLabel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

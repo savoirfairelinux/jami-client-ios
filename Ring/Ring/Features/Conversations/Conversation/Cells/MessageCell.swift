@@ -22,13 +22,14 @@
 import UIKit
 import Reusable
 import RxSwift
+import ActiveLabel
 
 class MessageCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var bubble: MessageBubble!
     @IBOutlet weak var bubbleBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var messageLabel: ActiveLabel!
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
     @IBOutlet weak var timeLabel: UILabel!
