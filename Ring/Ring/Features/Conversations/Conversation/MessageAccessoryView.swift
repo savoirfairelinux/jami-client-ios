@@ -25,4 +25,16 @@ class MessageAccessoryView: UIView, NibLoadable {
 
     @IBOutlet weak var messageTextField: UITextField!
 
+    override open func didMoveToWindow() {
+        super.didMoveToWindow()
+        if #available(iOS 11.0, *) {
+            guard let window = self.window else {
+                return
+            }
+            self.bottomAnchor
+                .constraintLessThanOrEqualToSystemSpacingBelow(window.safeAreaLayoutGuide.bottomAnchor,
+                                                               multiplier: 1)
+                .isActive = true
+        }
+    }
 }
