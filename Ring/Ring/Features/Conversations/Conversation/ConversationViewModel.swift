@@ -23,7 +23,7 @@ import UIKit
 import RxSwift
 import SwiftyBeaver
 
-class ConversationViewModel: ViewModel {
+class ConversationViewModel: Stateable, ViewModel {
 
     /**
      logguer
@@ -37,6 +37,11 @@ class ConversationViewModel: ViewModel {
     private let contactsService: ContactsService
     private let presenceService: PresenceService
     private let injectionBag: InjectionBag
+
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -279,6 +284,10 @@ class ConversationViewModel: ViewModel {
                         self.log.info(error)
                     }).disposed(by: self.disposeBag)
             }.disposed(by: self.disposeBag)
+    }
+
+    func startCall() {
+        self.stateSubject.onNext(ConversationsState.call(uri: self.conversation.value.recipientRingId))
     }
 
 }
