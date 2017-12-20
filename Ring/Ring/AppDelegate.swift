@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
     private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
+    private let callService = CallsService(withCallsAdapter: CallsAdapter())
     private let networkService = NetworkService()
     private var conversationManager: ConversationsManager?
     private var contactRequestManager: ContactRequestManager?
@@ -47,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             withConversationService: self.conversationsService,
                             withContactsService: self.contactsService,
                             withPresenceService: self.presenceService,
-                            withNetworkService: self.networkService
-                            )
+                            withNetworkService: self.networkService,
+                            withCallService: self.callService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
