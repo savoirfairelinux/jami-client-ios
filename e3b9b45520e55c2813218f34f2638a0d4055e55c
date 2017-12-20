@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_0cceaa5a",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-12-20T17:21:36Z",
+      "side": 1,
+      "message": "extra line",
+      "revId": "e3b9b45520e55c2813218f34f2638a0d4055e55c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_ccecc2ca",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-12-20T17:21:36Z",
+      "side": 1,
+      "message": "I think we should stay away from adding conference related elements until the time comes, unless it\u0027s necessary.",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 34
+      },
+      "revId": "e3b9b45520e55c2813218f34f2638a0d4055e55c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_ac04d67e",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-12-20T17:21:36Z",
+      "side": 1,
+      "message": "valuesFromDictionary is not really explicit, how about withCallDetails or something?",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 56
+      },
+      "revId": "e3b9b45520e55c2813218f34f2638a0d4055e55c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_0cf50a83",
+        "filename": "Ring/Ring/Services/CallsAdapterDelegate.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2017-12-20T17:21:36Z",
+      "side": 1,
+      "message": "This sounds like it causes the peer to put the call on hold. How about just placeCallOnHold?",
+      "range": {
+        "startLine": 27,
+        "startChar": 9,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "e3b9b45520e55c2813218f34f2638a0d4055e55c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
