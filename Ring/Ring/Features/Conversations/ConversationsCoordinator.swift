@@ -26,6 +26,7 @@ import RxSwift
 /// - conversationDetail: user want to see a conversation detail
 enum ConversationsState: State {
     case conversationDetail(conversationViewModel: ConversationViewModel)
+    case call(uri: String)
 }
 
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
@@ -44,17 +45,30 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
     let stateSubject = PublishSubject<State>()
     let conversationsService: ConversationsService
     let accountService: AccountsService
+    let callService: CallsService
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         self.conversationsService = injectionBag.conversationsService
         self.accountService = injectionBag.accountService
+        self.callService = injectionBag.callService
+
+        self.callService.newcall.asObservable()
+        .filter({ call in
+            call.callType == .incoming
+        }).map({ call in
+            return call
+        }).subscribe(onNext: { (call) in
+             self.showCallAlert(call: call)
+        }).disposed(by: self.disposeBag)
 
         self.stateSubject.subscribe(onNext: { [unowned self] (state) in
             guard let state = state as? ConversationsState else { return }
             switch state {
             case .conversationDetail (let conversationViewModel):
                 self.showConversation(withConversationViewModel: conversationViewModel)
+            case .call(let call):
+                self.showCallScreen(call: call)
             }
         }).disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
@@ -69,6 +83,35 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
     private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
         let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
         conversationViewController.viewModel = conversationViewModel
-        self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true)
+        self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true, withStateable: conversationViewController.viewModel)
+    }
+
+    private func showCallScreen(call: String) {
+        let callViewController = CallViewController.instantiate(with: self.injectionBag)
+        callViewController.viewModel.placeCall(with: call)
+        self.present(viewController: callViewController, withStyle: .present, withAnimation: false)
+    }
+
+    private func incomingCall(call: CallModel) {
+        let callViewController = CallViewController.instantiate(with: self.injectionBag)
+        callViewController.viewModel.call = call
+        callViewController.viewModel.answerCall()
+        self.present(viewController: callViewController, withStyle: .present, withAnimation: false)
+
+    }
+
+    private func showCallAlert(call: CallModel) {
+        let alert = UIAlertController(title: L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonAccept, style: UIAlertActionStyle.default, handler: { (_) in
+            self.incomingCall(call: call)
+            alert.dismiss(animated: true, completion: nil)}))
+        alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonIgnore, style: UIAlertActionStyle.default, handler: { (_) in
+            self.injectionBag.callService.refuse(callId: call.callId)
+                .subscribe({_ in
+                    print("Call ignored")
+                }).disposed(by: self.disposeBag)
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(viewController: alert, withStyle: .present, withAnimation: true)
     }
 }

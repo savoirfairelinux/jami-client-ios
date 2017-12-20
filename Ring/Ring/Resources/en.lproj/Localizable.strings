@@ -83,6 +83,16 @@
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Accept";
+"alerts.incomingCallButtonIgnore" = "Ignore";
+
+//Calls
+"calls.callItemTitle" = "Call";
+"calls.unknown" = "Unknown";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
