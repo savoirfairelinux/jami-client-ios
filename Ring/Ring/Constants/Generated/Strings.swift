@@ -51,12 +51,31 @@ enum L10n {
     static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage")
     /// An error happned when launching Ring
     static let dbFailedTitle = L10n.tr("Localizable", "alerts.dbFailedTitle")
+    /// Incoming call from 
+    static let incomingCallAllertTitle = L10n.tr("Localizable", "alerts.incomingCallAllertTitle")
+    /// Accept
+    static let incomingCallButtonAccept = L10n.tr("Localizable", "alerts.incomingCallButtonAccept")
+    /// Ignore
+    static let incomingCallButtonIgnore = L10n.tr("Localizable", "alerts.incomingCallButtonIgnore")
     /// Cancel
     static let profileCancelPhoto = L10n.tr("Localizable", "alerts.profileCancelPhoto")
     /// Take photo
     static let profileTakePhoto = L10n.tr("Localizable", "alerts.profileTakePhoto")
     /// Upload photo
     static let profileUploadPhoto = L10n.tr("Localizable", "alerts.profileUploadPhoto")
+  }
+
+  enum Calls {
+    /// Call finished
+    static let callFinished = L10n.tr("Localizable", "calls.callFinished")
+    /// Calling...
+    static let calling = L10n.tr("Localizable", "calls.calling")
+    /// Call
+    static let callItemTitle = L10n.tr("Localizable", "calls.callItemTitle")
+    /// wants to talk to you
+    static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo")
+    /// Unknown
+    static let unknown = L10n.tr("Localizable", "calls.unknown")
   }
 
   enum Createaccount {
