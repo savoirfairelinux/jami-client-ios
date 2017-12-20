@@ -46,6 +46,8 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive {
             switch state {
             case .conversationDetail (let conversationViewModel):
                 self.showConversation(withConversationViewModel: conversationViewModel)
+            default:
+                break
             }
         }).disposed(by: self.disposeBag)
     }

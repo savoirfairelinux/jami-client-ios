@@ -43,7 +43,7 @@ class CallsService: CallsAdapterDelegate {
     fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard"
 
     let currentCall = ReplaySubject<CallModel>.create(bufferSize: 1)
-    let newcall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
+    let newIncomingCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
     let receivedVCard = PublishSubject<CNContact>()
 
     init(withCallsAdapter callsAdapter: CallsAdapter) {
@@ -111,12 +111,12 @@ class CallsService: CallsAdapterDelegate {
         })
     }
 
-    func placeCall(withAccount account: AccountModel, toRingId ringId: String) -> Single<CallModel> {
+    func placeCall(withAccount account: AccountModel, toRingId ringId: String, userName: String) -> Single<CallModel> {
 
         //Create and emit the call
         let call = CallModel(withCallId: ringId, callDetails: [String: String]())
         call.state = .connecting
-
+        call.registeredName = userName
         return Single<CallModel>.create(subscribe: { single in
             if let callId = self.callsAdapter.placeCall(withAccountId: account.id,
                                                         toRingId: "ring:\(ringId)"),
@@ -124,6 +124,7 @@ class CallsService: CallsAdapterDelegate {
                 call.update(withDictionary: callDictionary)
                 call.callId = callId
                 self.currentCall.onNext(call)
+                self.calls[callId] = call
                 single(.success(call))
             } else {
                 single(.error(CallServiceError.placeCallFailed))
@@ -142,6 +143,7 @@ class CallsService: CallsAdapterDelegate {
             var call = self.calls[callId]
             if call == nil {
                 call = CallModel(withCallId: callId, callDetails: callDictionary)
+                self.calls[callId] = call
             } else {
                 call?.update(withDictionary: callDictionary)
             }
@@ -214,7 +216,7 @@ class CallsService: CallsAdapterDelegate {
                 call?.update(withDictionary: callDictionary)
             }
             //Emit the call to the observers
-            self.newcall.value = call!
+            self.newIncomingCall.value = call!
         }
 
     }
