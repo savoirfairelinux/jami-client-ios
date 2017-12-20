@@ -107,7 +107,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
 
-        //invite button
+        //set navigation buttons - call and send contact request
         let inviteItem = UIBarButtonItem()
         inviteItem.image = UIImage(named: "add_person")
         inviteItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
@@ -115,13 +115,24 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             self.inviteItemTapped()
         }).disposed(by: self.disposeBag)
 
-        self.navigationItem.rightBarButtonItem = inviteItem
+        let callItem = UIBarButtonItem()
+        callItem.image = UIImage(asset: Asset.callButton)
+        callItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.placeCall()
+            }).disposed(by: self.disposeBag)
+
+        self.navigationItem.rightBarButtonItems = [callItem, inviteItem]
 
         self.viewModel.inviteButtonIsAvailable.asObservable().bind(to: inviteItem.rx.isEnabled).disposed(by: disposeBag)
     }
 
     func inviteItemTapped() {
        self.viewModel?.sendContactRequest()
+    }
+
+    func placeCall() {
+        self.viewModel.startCall()
     }
 
     override func viewDidAppear(_ animated: Bool) {

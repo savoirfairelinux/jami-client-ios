@@ -43,7 +43,7 @@ class CallsService: CallsAdapterDelegate {
     fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard"
 
     let currentCall = ReplaySubject<CallModel>.create(bufferSize: 1)
-    let newcall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
+    let newIncomingCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
     let receivedVCard = PublishSubject<CNContact>()
 
     init(withCallsAdapter callsAdapter: CallsAdapter) {
@@ -214,7 +214,7 @@ class CallsService: CallsAdapterDelegate {
                 call?.update(withDictionary: callDictionary)
             }
             //Emit the call to the observers
-            self.newcall.value = call!
+            self.newIncomingCall.value = call!
         }
 
     }
