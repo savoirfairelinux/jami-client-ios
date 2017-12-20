@@ -106,6 +106,10 @@
 		0E403F831F7D79B000C80BC2 /* MessageCellGenerated.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */; };
 		0E48F9D31FDF150700D6CC08 /* ContactRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48F9D21FDF150700D6CC08 /* ContactRequestManager.swift */; };
 		0E4909611FE97A94005CAA50 /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4909601FE97A94005CAA50 /* ActiveLabel.framework */; };
+		0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0E4909691FEAB156005CAA50 /* CallsAdapter.mm */; };
+		0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49096B1FEAB225005CAA50 /* CallsAdapterDelegate.swift */; };
+		0E49096E1FEAC0DE005CAA50 /* CallsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49096D1FEAC0DE005CAA50 /* CallsService.swift */; };
+		0E4909701FEAC1C6005CAA50 /* CallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49096F1FEAC1C6005CAA50 /* CallModel.swift */; };
 		0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6949781FA7E71C0029B60A /* BaseViewController.swift */; };
 		0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E983E6D1FC77C3E0082103E /* ConversationModel.swift */; };
 		0E9D84491FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */; };
@@ -356,6 +360,11 @@
 		0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellGenerated.xib; sourceTree = "<group>"; };
 		0E48F9D21FDF150700D6CC08 /* ContactRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestManager.swift; sourceTree = "<group>"; };
 		0E4909601FE97A94005CAA50 /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
+		0E4909681FEAB156005CAA50 /* CallsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallsAdapter.h; sourceTree = "<group>"; };
+		0E4909691FEAB156005CAA50 /* CallsAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = CallsAdapter.mm; sourceTree = "<group>"; };
+		0E49096B1FEAB225005CAA50 /* CallsAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsAdapterDelegate.swift; sourceTree = "<group>"; };
+		0E49096D1FEAC0DE005CAA50 /* CallsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsService.swift; sourceTree = "<group>"; };
+		0E49096F1FEAC1C6005CAA50 /* CallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallModel.swift; sourceTree = "<group>"; };
 		0E6949781FA7E71C0029B60A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0E983E6D1FC77C3E0082103E /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabBarItemViewModel.swift; sourceTree = "<group>"; };
@@ -704,6 +713,8 @@
 				62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */,
 				0EF78DE21FD0AE3000FC6966 /* ConversationsManager.swift */,
 				0E48F9D21FDF150700D6CC08 /* ContactRequestManager.swift */,
+				0E49096B1FEAB225005CAA50 /* CallsAdapterDelegate.swift */,
+				0E49096D1FEAC0DE005CAA50 /* CallsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -737,6 +748,8 @@
 				563AEC731EA6627F003A5641 /* NameRegistration */,
 				62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */,
 				62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */,
+				0E4909681FEAB156005CAA50 /* CallsAdapter.h */,
+				0E4909691FEAB156005CAA50 /* CallsAdapter.mm */,
 			);
 			path = Bridging;
 			sourceTree = "<group>";
@@ -1137,6 +1150,7 @@
 				1A2D18BD1F29180700B2C785 /* ContactModel.swift */,
 				1A2D18BF1F29180700B2C785 /* DeviceModel.swift */,
 				0E983E6D1FC77C3E0082103E /* ConversationModel.swift */,
+				0E49096F1FEAC1C6005CAA50 /* CallModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1581,6 +1595,7 @@
 				1A2D18C51F29180700B2C785 /* ContactModel.swift in Sources */,
 				1A2D18F71F292D7200B2C785 /* MessageCellSent.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
+				0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */,
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
 				1A2D18C71F29180700B2C785 /* DeviceModel.swift in Sources */,
@@ -1591,8 +1606,10 @@
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
+				0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */,
 				1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */,
 				1A5DC0241F3564360075E8EF /* ContactRequestModel.swift in Sources */,
+				0E4909701FEAC1C6005CAA50 /* CallModel.swift in Sources */,
 				1A5DC03F1F35678D0075E8EF /* ContactRequestsViewController.swift in Sources */,
 				1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */,
 				1A5DC01E1F355DA70075E8EF /* ContactsAdapterDelegate.swift in Sources */,
@@ -1673,6 +1690,7 @@
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				1A2D18D11F29182500B2C785 /* ConversationViewController.swift in Sources */,
 				0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */,
+				0E49096E1FEAC0DE005CAA50 /* CallsService.swift in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
 				1A2D19011F29353A00B2C785 /* MeDetailViewModel.swift in Sources */,
 				1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */,
