@@ -50,6 +50,7 @@ enum Asset {
   static let addPerson = ImageAsset(name: "add_person")
   static let backgroundRing = ImageAsset(name: "background_ring")
   static let blockIcon = ImageAsset(name: "block_icon")
+  static let callButton = ImageAsset(name: "call_button")
   static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   static let conversationIcon = ImageAsset(name: "conversation_icon")
   static let device = ImageAsset(name: "device")
@@ -66,6 +67,7 @@ enum Asset {
     addPerson,
     backgroundRing,
     blockIcon,
+    callButton,
     contactRequestIcon,
     conversationIcon,
     device,
