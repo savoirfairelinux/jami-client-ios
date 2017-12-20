@@ -117,11 +117,11 @@ class CallModel {
 
         self.dateReceived = Date()
 
-        if let displayName = dictionary[CallDetailKey.displayNameKey.rawValue] {
+        if let displayName = dictionary[CallDetailKey.displayNameKey.rawValue], !displayName.isEmpty {
             self.displayName = displayName
         }
 
-        if let registeredName = dictionary[CallDetailKey.registeredNameKey.rawValue] {
+        if let registeredName = dictionary[CallDetailKey.registeredNameKey.rawValue], !registeredName.isEmpty {
             self.registeredName = registeredName
         }
 
