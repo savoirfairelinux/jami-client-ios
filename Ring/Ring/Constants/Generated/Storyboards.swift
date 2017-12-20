@@ -50,6 +50,11 @@ extension UIViewController {
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 enum StoryboardScene {
+  enum CallViewController: StoryboardType {
+    static let storyboardName = "CallViewController"
+
+    static let initialScene = InitialSceneType<Ring.CallViewController>(storyboard: CallViewController.self)
+  }
   enum ContactRequestsViewController: StoryboardType {
     static let storyboardName = "ContactRequestsViewController"
 

@@ -107,14 +107,19 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
 
-        //invite button
+        //set navigation buttons - call and send contact request
         let inviteItem = UIBarButtonItem()
         inviteItem.image = UIImage(named: "add_person")
         inviteItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
             self.inviteItemTapped()
         }).disposed(by: self.disposeBag)
-
+        let callItem = UIBarButtonItem()
+        callItem.image = UIImage(asset: Asset.callButton)
+        callItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.placeCall()
+            }).disposed(by: self.disposeBag)
         self.viewModel.inviteButtonIsAvailable.asObservable().bind(to: inviteItem.rx.isEnabled).disposed(by: disposeBag)
 
         //block contact button
@@ -125,13 +130,14 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                 self.blockItemTapped()
             }).disposed(by: self.disposeBag)
 
-        self.navigationItem.rightBarButtonItems = [blockItem, inviteItem]
+        self.navigationItem.rightBarButtonItems = [blockItem, inviteItem, callItem]
 
         Observable<[UIBarButtonItem]>
             .combineLatest(self.viewModel.inviteButtonIsAvailable.asObservable(),
                            self.viewModel.blockButtonIsAvailable.asObservable(),
                            resultSelector: { inviteButton, blockButton in
                             var buttons = [UIBarButtonItem]()
+                            buttons.append(callItem)
                             if blockButton {
                                 buttons.append(blockItem)
                             }
@@ -159,6 +165,10 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         alert.addAction(blockAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
+    }
+
+    func placeCall() {
+        self.viewModel.startCall()
     }
 
     override func viewDidAppear(_ animated: Bool) {
