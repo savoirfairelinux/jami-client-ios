@@ -349,7 +349,10 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         cell.messageLabel.enabledTypes = [.url]
         cell.messageLabel.setTextWithLineSpacing(withText: messageVM.content, withLineSpacing: 2)
         cell.messageLabel.handleURLTap { url in
-            UIApplication.shared.openURL(url)
+            let urlString = url.absoluteString
+            if let prefixedUrl = URL(string: urlString.contains("http") ? urlString : "http://\(urlString)") {
+                UIApplication.shared.openURL(prefixedUrl)
+            }
         }
 
         cell.topCorner.isHidden = true
