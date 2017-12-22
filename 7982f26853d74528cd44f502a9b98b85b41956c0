@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_07da0378",
+        "filename": "Ring/Ring/Features/ContactRequests/ContactRequestsViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-22T20:41:40Z",
+      "side": 1,
+      "message": "it will be mo safe to use soft unwrap",
+      "range": {
+        "startLine": 104,
+        "startChar": 80,
+        "endLine": 104,
+        "endChar": 90
+      },
+      "revId": "7982f26853d74528cd44f502a9b98b85b41956c0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_c7f81be8",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-22T20:41:40Z",
+      "side": 1,
+      "message": "Maybe we should mention there that conversation will be removed?",
+      "range": {
+        "startLine": 342,
+        "startChar": 72,
+        "endLine": 342,
+        "endChar": 116
+      },
+      "revId": "7982f26853d74528cd44f502a9b98b85b41956c0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_27dd7f71",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-22T20:41:40Z",
+      "side": 1,
+      "message": "the function miss subscribe()",
+      "range": {
+        "startLine": 234,
+        "startChar": 33,
+        "endLine": 234,
+        "endChar": 46
+      },
+      "revId": "7982f26853d74528cd44f502a9b98b85b41956c0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
