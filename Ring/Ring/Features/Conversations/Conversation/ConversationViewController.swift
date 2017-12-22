@@ -115,13 +115,50 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             self.inviteItemTapped()
         }).disposed(by: self.disposeBag)
 
-        self.navigationItem.rightBarButtonItem = inviteItem
-
         self.viewModel.inviteButtonIsAvailable.asObservable().bind(to: inviteItem.rx.isEnabled).disposed(by: disposeBag)
+
+        //block contact button
+        let blockItem = UIBarButtonItem()
+        blockItem.image = UIImage(named: "block_icon")
+        blockItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.blockItemTapped()
+            }).disposed(by: self.disposeBag)
+
+        self.navigationItem.rightBarButtonItems = [blockItem, inviteItem]
+
+        Observable<[UIBarButtonItem]>
+            .combineLatest(self.viewModel.inviteButtonIsAvailable.asObservable(),
+                           self.viewModel.blockButtonIsAvailable.asObservable(),
+                           resultSelector: { inviteButton, blockButton in
+                            var buttons = [UIBarButtonItem]()
+                            if blockButton {
+                                buttons.append(blockItem)
+                            }
+                            if inviteButton {
+                                buttons.append(inviteItem)
+                            }
+                            return buttons
+            })
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] buttons in
+                self?.navigationItem.rightBarButtonItems = buttons
+            }).disposed(by: self.disposeBag)
     }
 
     func inviteItemTapped() {
        self.viewModel?.sendContactRequest()
+    }
+
+    func blockItemTapped() {
+        let alert = UIAlertController(title: L10n.Alerts.confirmBlockContactTitle, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
+        let blockAction = UIAlertAction(title: L10n.Actions.blockAction, style: .destructive) { (_: UIAlertAction!) -> Void in
+            self.viewModel.block()
+        }
+        let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction, style: .default) { (_: UIAlertAction!) -> Void in }
+        alert.addAction(blockAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {

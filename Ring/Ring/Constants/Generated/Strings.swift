@@ -13,6 +13,15 @@ enum L10n {
     static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
   }
 
+  enum Actions {
+    /// Block
+    static let blockAction = L10n.tr("Localizable", "actions.blockAction")
+    /// Cancel
+    static let cancelAction = L10n.tr("Localizable", "actions.cancelAction")
+    /// Delete
+    static let deleteAction = L10n.tr("Localizable", "actions.deleteAction")
+  }
+
   enum Alerts {
     /// Account Added
     static let accountAddedTitle = L10n.tr("Localizable", "alerts.accountAddedTitle")
@@ -30,6 +39,14 @@ enum L10n {
     static let accountNoNetworkMessage = L10n.tr("Localizable", "alerts.accountNoNetworkMessage")
     /// Can't connect to the network
     static let accountNoNetworkTitle = L10n.tr("Localizable", "alerts.accountNoNetworkTitle")
+    /// Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.
+    static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact")
+    /// Block Contact
+    static let confirmBlockContactTitle = L10n.tr("Localizable", "alerts.confirmBlockContactTitle")
+    /// Are you sure you want to delete this conversation permanently?
+    static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation")
+    /// Delete Conversation
+    static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle")
     /// Please close application and try to open it again
     static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage")
     /// An error happned when launching Ring
