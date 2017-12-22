@@ -169,13 +169,9 @@ class ContactsService {
         }
     }
 
-    func removeContact(contact: ContactModel, ban: Bool, withAccount account: AccountModel) -> Observable<Void> {
-        return removeContact(withRingId: contact.ringId, ban: ban, withAccount: account)
-    }
-
-    func removeContact(withRingId ringId: String, ban: Bool, withAccount account: AccountModel) -> Observable<Void> {
+    func removeContact(withRingId ringId: String, ban: Bool, withAccountId accountId: String) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
-            self.contactsAdapter.removeContact(withURI: ringId, accountId: account.id, ban: ban)
+            self.contactsAdapter.removeContact(withURI: ringId, accountId: accountId, ban: ban)
             self.removeContactRequest(withRingId: ringId)
             observable.on(.completed)
             return Disposables.create { }

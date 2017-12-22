@@ -225,6 +225,18 @@ class SmartlistViewModel: Stateable, ViewModel {
         }
     }
 
+    func blockConversationsContact(conversationViewModel: ConversationViewModel) {
+        if let index = self.conversationViewModels.index(where: ({ cvm in
+            cvm.conversation.value == conversationViewModel.conversation.value
+        })) {
+            let contactRingId = conversationViewModel.conversation.value.recipientRingId
+            let accountId = conversationViewModel.conversation.value.accountId
+            self.contactsService.removeContact(withRingId: contactRingId, ban: true, withAccountId: accountId)
+            self.conversationsService.deleteConversation(conversation: conversationViewModel.conversation.value)
+            self.conversationViewModels.remove(at: index)
+        }
+    }
+
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
         self.stateSubject.onNext(ConversationsState.conversationDetail(conversationViewModel: conversationViewModel))
     }
