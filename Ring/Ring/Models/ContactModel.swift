@@ -24,6 +24,7 @@ class ContactModel: Equatable {
     var userName: String?
     var confirmed: Bool = false
     var added: Date = Date()
+    var banned: Bool?
 
     init(withRingId ringId: String) {
         self.ringId = ringId
@@ -42,6 +43,9 @@ class ContactModel: Equatable {
         if let added = dictionary["added"] {
             let addedDate = Date(timeIntervalSince1970: Double(added)!)
             self.added = addedDate
+        }
+        if let banned = dictionary["banned"] {
+            self.banned = banned.toBool()
         }
     }
 

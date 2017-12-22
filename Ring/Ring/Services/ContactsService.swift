@@ -78,6 +78,7 @@ class ContactsService {
             for contact in contacts {
                 if self.contacts.value.index(of: contact) == nil {
                     self.contacts.value.append(contact)
+                    self.log.debug("contact: \(String(describing: contact.userName))")
                 }
             }
         }
@@ -118,17 +119,17 @@ class ContactsService {
         }
     }
 
-    func discard(contactRequest: ContactRequestModel, withAccount account: AccountModel) -> Observable<Void> {
+    func discard(contactRequest: ContactRequestModel, withAccountId accountId: String) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
             let success = self.contactsAdapter.discardTrustRequest(fromContact: contactRequest.ringId,
-                                                                   withAccountId: account.id)
+                                                                   withAccountId: accountId)
 
             //Update the Contact request list
             self.removeContactRequest(withRingId: contactRequest.ringId)
 
             if success {
                 var event = ServiceEvent(withEventType: .contactRequestDiscarded)
-                event.addEventInput(.accountId, value: account.id)
+                event.addEventInput(.accountId, value: accountId)
                 event.addEventInput(.uri, value: contactRequest.ringId)
                 self.responseStream.onNext(event)
                 observable.on(.completed)
@@ -169,13 +170,9 @@ class ContactsService {
         }
     }
 
-    func removeContact(contact: ContactModel, ban: Bool, withAccount account: AccountModel) -> Observable<Void> {
-        return removeContact(withRingId: contact.ringId, ban: ban, withAccount: account)
-    }
-
-    func removeContact(withRingId ringId: String, ban: Bool, withAccount account: AccountModel) -> Observable<Void> {
+    func removeContact(withRingId ringId: String, ban: Bool, withAccountId accountId: String) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
-            self.contactsAdapter.removeContact(withURI: ringId, accountId: account.id, ban: ban)
+            self.contactsAdapter.removeContact(withURI: ringId, accountId: accountId, ban: ban)
             self.removeContactRequest(withRingId: ringId)
             observable.on(.completed)
             return Disposables.create { }
@@ -200,6 +197,7 @@ class ContactsService {
             return
         }
         self.contacts.value.remove(at: index)
+        self.contactStatus.onNext(contactToRemove)
     }
 }
 
