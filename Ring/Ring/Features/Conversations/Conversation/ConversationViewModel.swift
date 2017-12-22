@@ -91,23 +91,28 @@ class ConversationViewModel: ViewModel {
                 })
                 .disposed(by: self.disposeBag)
 
+            // invite and block buttons
             if let contact = contact {
-                self.inviteButtonIsAvailable.onNext(!contact.confirmed)
+                let showInviteButton = !contact.confirmed && !contact.banned
+                self.inviteButtonIsAvailable.onNext(showInviteButton)
+                self.blockButtonIsAvailable.onNext(!contact.banned)
             }
+
             self.contactsService.contactStatus.filter({ cont in
                 return cont.ringId == contactRingId
             })
-                .subscribe(onNext: { [unowned self] cont in
-
-                    self.inviteButtonIsAvailable.onNext(!cont.confirmed)
-
+                .subscribe(onNext: { [unowned self] contact in
+                    let showInviteButton = !contact.confirmed && !contact.banned
+                    self.inviteButtonIsAvailable.onNext(showInviteButton)
+                    let isContact = self.contactsService.contact(withRingId: contact.ringId) != nil && !contact.banned
+                    self.blockButtonIsAvailable.onNext(isContact)
                 }).disposed(by: self.disposeBag)
 
             // subscribe to presence updates for the conversation's associated contact
             if let contactPresence = self.presenceService.contactPresence[contactRingId] {
                 self.contactPresence.value = contactPresence
             } else {
-                self.log.warning("Contact presence unkown for: \(contactRingId)")
+                self.log.warning("Contact presence unknown for: \(contactRingId)")
                 self.contactPresence.value = false
             }
             self.presenceService
@@ -161,6 +166,8 @@ class ConversationViewModel: ViewModel {
     var profileImageData: Data?
 
     var inviteButtonIsAvailable = BehaviorSubject(value: true)
+
+    var blockButtonIsAvailable = BehaviorSubject(value: false)
 
     var contactPresence = Variable<Bool>(false)
 
@@ -262,6 +269,11 @@ class ConversationViewModel: ViewModel {
     }
 
     func sendContactRequest() {
+        if let contact = self.contactsService
+            .contact(withRingId: self.conversation.value.recipientRingId),
+            contact.banned {
+            return
+        }
         VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
                              inFolder: VCardFolders.profile.rawValue)
             .subscribe(onSuccess: { [unowned self] (card) in
@@ -281,4 +293,40 @@ class ConversationViewModel: ViewModel {
             }.disposed(by: self.disposeBag)
     }
 
+    func block() {
+        let contactRingId = self.conversation.value.recipientRingId
+        let accountId = self.conversation.value.accountId
+        var blockComplete: Observable<Void>
+        let removeCompleted = self.contactsService.removeContact(withRingId: contactRingId,
+                                                                 ban: true,
+                                                                 withAccountId: accountId)
+        if let contactRequest = self.contactsService.contactRequest(withRingId: contactRingId) {
+            let discardCompleted = self.contactsService.discard(contactRequest: contactRequest,
+                                                                withAccountId: accountId)
+            blockComplete = Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
+                return
+            }
+        } else {
+            blockComplete = removeCompleted
+        }
+
+        blockComplete.asObservable()
+            .subscribe(onCompleted: { [weak self] in
+                if let conversation = self?.conversation.value {
+                    self?.conversationsService.deleteConversation(conversation: conversation)
+                }
+            }).disposed(by: self.disposeBag)
+    }
+
+    func ban(withItem item: ContactRequestItem) -> Observable<Void> {
+        let accountId = item.contactRequest.accountId
+        let discardCompleted = self.contactsService.discard(contactRequest: item.contactRequest,
+                                                            withAccountId: accountId)
+        let removeCompleted = self.contactsService.removeContact(withRingId: item.contactRequest.ringId,
+                                                                 ban: true,
+                                                                 withAccountId: accountId)
+        return Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
+            return
+        }
+    }
 }
