@@ -115,13 +115,42 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             self.inviteItemTapped()
         }).disposed(by: self.disposeBag)
 
-        self.navigationItem.rightBarButtonItem = inviteItem
-
         self.viewModel.inviteButtonIsAvailable.asObservable().bind(to: inviteItem.rx.isEnabled).disposed(by: disposeBag)
+
+        //block contact button
+        let blockItem = UIBarButtonItem()
+        blockItem.image = UIImage(named: "block_icon")
+        blockItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.blockItemTapped()
+            }).disposed(by: self.disposeBag)
+
+        self.navigationItem.rightBarButtonItems = [blockItem, inviteItem]
+
+        self.viewModel.inviteButtonIsAvailable.asObservable()
+            .subscribe(onNext: { [weak self] value in
+                //var actionItems = [UIBarButtonItem]
+                //actionItems.append(100)
+                self?.log.debug("inviteButtonIsAvailable: \(value)")
+                self?.log.debug("blockButtonIsAvailable: \(!value)")
+                self?.navigationItem.rightBarButtonItems = [blockItem, inviteItem]
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func inviteItemTapped() {
        self.viewModel?.sendContactRequest()
+    }
+
+    func blockItemTapped() {
+        let alert = UIAlertController(title: "Block Contact", message: "Are you sure you want to block this contact?", preferredStyle: .alert)
+        let blockAction = UIAlertAction(title: "Block", style: .destructive) { (_: UIAlertAction!) -> Void in
+            self.viewModel.block()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (_: UIAlertAction!) -> Void in }
+        alert.addAction(blockAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {

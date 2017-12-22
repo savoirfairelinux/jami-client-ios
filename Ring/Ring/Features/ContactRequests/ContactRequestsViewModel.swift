@@ -92,16 +92,16 @@ class ContactRequestsViewModel: Stateable, ViewModel {
 
     func discard(withItem item: ContactRequestItem) -> Observable<Void> {
         return self.contactsService.discard(contactRequest: item.contactRequest,
-                                            withAccount: self.accountsService.currentAccount!)
+                                            withAccountId: item.contactRequest.accountId)
     }
 
     func ban(withItem item: ContactRequestItem) -> Observable<Void> {
         let discardCompleted = self.contactsService.discard(contactRequest: item.contactRequest,
-                                                            withAccount: self.accountsService.currentAccount!)
-
+                                                            withAccountId: item.contactRequest.accountId)
+        let accountId = self.accountsService.currentAccount?.id
         let removeCompleted = self.contactsService.removeContact(withRingId: item.contactRequest.ringId,
                                                                  ban: true,
-                                                                 withAccount: self.accountsService.currentAccount!)
+                                                                 withAccountId: accountId!)
 
         return Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
             return

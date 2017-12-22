@@ -264,18 +264,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             self.searchResultsTableView.isHidden = !isSearching
         }).disposed(by: disposeBag)
 
-        //Show the Messages screens and pass the viewModel for Conversations
-        self.conversationsTableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { [unowned self] item in
-            self.cancelSearch()
-            self.viewModel.showConversation(withConversationViewModel: item)
-        }).disposed(by: disposeBag)
-
-        //Show the Messages screens and pass the viewModel for Search Results
-        self.searchResultsTableView.rx.modelSelected(ConversationViewModel.self).subscribe(onNext: { [unowned self] item in
-            self.cancelSearch()
-            self.viewModel.showConversation(withConversationViewModel: item)
-        }).disposed(by: disposeBag)
-
         //Deselect the rows
         self.conversationsTableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.conversationsTableView.deselectRow(at: indexPath, animated: true)
@@ -292,13 +280,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: disposeBag)
 
         self.searchResultsTableView.rx.setDelegate(self).disposed(by: disposeBag)
-
-        //Swipe to delete action
-        self.conversationsTableView.rx.itemDeleted.subscribe(onNext: { [unowned self] indexPath in
-            if let convToDelete: ConversationViewModel = try? self.conversationsTableView.rx.model(at: indexPath) {
-                self.viewModel.delete(conversationViewModel: convToDelete)
-            }
-        }).disposed(by: disposeBag)
+        self.conversationsTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
 
     func setupSearchBar() {
@@ -343,16 +325,67 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchResultsTableView.isHidden = true
     }
 
+    private func showDeleteConversationConfirmation(atIndex: IndexPath) {
+        let alert = UIAlertController(title: "Delete Conversation", message: "Are you sure you want to remove this conversation permanently?", preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_: UIAlertAction!) -> Void in
+            if let convToDelete: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
+                self.viewModel.delete(conversationViewModel: convToDelete)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (_: UIAlertAction!) -> Void in }
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func showBlockContactConfirmation(atIndex: IndexPath) {
+        let alert = UIAlertController(title: "Block Contact", message: "Are you sure you want to block this contact?", preferredStyle: .alert)
+        let blockAction = UIAlertAction(title: "Block", style: .destructive) { (_: UIAlertAction!) -> Void in
+            if let conversation: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
+                self.viewModel.blockConversationsContact(conversationViewModel: conversation)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (_: UIAlertAction!) -> Void in }
+        alert.addAction(blockAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension SmartlistViewController: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
         if section == 0 {
+            if tableView == self.conversationsTableView {
+                return 0
+            }
             return SmartlistConstants.firstSectionHeightForHeader
         } else {
             return SmartlistConstants.defaultSectionHeightForHeader
+        }
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let block = UITableViewRowAction(style: .normal, title: "Block") { _, index in
+            self.showBlockContactConfirmation(atIndex: index)
+        }
+        block.backgroundColor = .orange
+
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { _, index in
+            self.showDeleteConversationConfirmation(atIndex: index)
+        }
+        delete.backgroundColor = .red
+
+        return [delete, block]
+    }
+
+    private func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.cancelSearch()
+        if let convToShow: ConversationViewModel = try? tableView.rx.model(at: indexPath) {
+            self.viewModel.showConversation(withConversationViewModel: convToShow)
         }
     }
 }
