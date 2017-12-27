@@ -75,7 +75,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
     private func bindViewModelToView() {
         // handle username registration visibility
-        self.viewModel.registerUsername.asObservable().subscribe(onNext: { [unowned self] (isOn) in
+        self.viewModel.registerUsername.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] (isOn) in
             UIView.animate(withDuration: 0.3, animations: {
                 if isOn {
                     self.registerUsernameHeightConstraint.constant = self.registerUsernameHeightConstraintConstant
@@ -109,7 +111,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             .bind(to: self.registerUsernameErrorLabel.rx.text).disposed(by: self.disposeBag)
 
         // handle creation state
-        self.viewModel.createState.subscribe(onNext: { [weak self] (state) in
+        self.viewModel.createState
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (state) in
             switch state {
             case .started:
                 self?.showAccountCreationInProgress()
