@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		62AA15A51FF3FD870064A063 /* libring */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 62AA15A61FF3FD870064A063 /* Build configuration list for PBXAggregateTarget "libring" */;
+			buildPhases = (
+				62AA15AA1FF3FD8D0064A063 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = libring;
+			productName = libring;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */; };
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */; };
@@ -221,6 +235,7 @@
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
 		62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */; };
 		62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */; };
+		62AA15B21FF422810064A063 /* src in Resources */ = {isa = PBXBuildFile; fileRef = 62AA15B11FF422810064A063 /* src */; };
 		62DFAB2C1F9FF030002D6F9C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DFAB2B1F9FF030002D6F9C /* Reachability.framework */; };
 		62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */; };
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
@@ -488,6 +503,7 @@
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
 		62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PresenceAdapter.mm; sourceTree = "<group>"; };
 		62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceService.swift; sourceTree = "<group>"; };
+		62AA15B11FF422810064A063 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../daemon/src; sourceTree = "<group>"; };
 		62AD0BFB1FE037BF00BEA1F6 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		62AD0BFC1FE0384000BEA1F6 /* sq-AL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sq-AL"; path = "sq-AL.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		62AD0BFF1FE0387F00BEA1F6 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -775,6 +791,7 @@
 		043999EA1D1C2D9D00E99CD9 = {
 			isa = PBXGroup;
 			children = (
+				62AA15B01FF4226B0064A063 /* daemon */,
 				0273C3001E0C445200CF00BA /* RingPrefixHeader.pch */,
 				04399A991D1C2F6400E99CD9 /* SYS_DEPS */,
 				04399A921D1C2E3600E99CD9 /* RING_DEPS */,
@@ -1261,6 +1278,14 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		62AA15B01FF4226B0064A063 /* daemon */ = {
+			isa = PBXGroup;
+			children = (
+				62AA15B11FF422810064A063 /* src */,
+			);
+			name = daemon;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1353,6 +1378,10 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 043999F21D1C2D9D00E99CD9;
 					};
+					62AA15A51FF3FD870064A063 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 043999EE1D1C2D9D00E99CD9 /* Build configuration list for PBXProject "Ring" */;
@@ -1416,6 +1445,7 @@
 				043999F21D1C2D9D00E99CD9 /* Ring */,
 				04399A0B1D1C2D9D00E99CD9 /* RingTests */,
 				04399A161D1C2D9D00E99CD9 /* RingUITests */,
+				62AA15A51FF3FD870064A063 /* libring */,
 			);
 		};
 /* End PBXProject section */
@@ -1432,6 +1462,7 @@
 				1A2D18F61F292D7200B2C785 /* MessageCellReceived.xib in Resources */,
 				0ED2B6FA1F96A075001572F0 /* LinkNewDeviceViewController.storyboard in Resources */,
 				1A2D18EF1F291A0100B2C785 /* MeDetailViewController.storyboard in Resources */,
+				62AA15B21FF422810064A063 /* src in Resources */,
 				1A2D18B11F2915B600B2C785 /* SmartlistViewController.storyboard in Resources */,
 				0E403F831F7D79B000C80BC2 /* MessageCellGenerated.xib in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
@@ -1537,6 +1568,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PROJECT_DIR}/swiftgen/swiftgen.sh";
+		};
+		62AA15AA1FF3FD8D0064A063 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ../../daemon/build-ios-arm64\nmake -j4\nfind . -name '*.a' -exec cp {} ../../client-ios/fat/lib  \\;";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2129,6 +2173,30 @@
 			};
 			name = Development;
 		};
+		62AA15A71FF3FD870064A063 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		62AA15A81FF3FD870064A063 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Development;
+		};
+		62AA15A91FF3FD870064A063 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2168,6 +2236,16 @@
 				04399A271D1C2D9D00E99CD9 /* Debug */,
 				6229B5A81FCDB006006937DF /* Development */,
 				04399A281D1C2D9D00E99CD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		62AA15A61FF3FD870064A063 /* Build configuration list for PBXAggregateTarget "libring" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62AA15A71FF3FD870064A063 /* Debug */,
+				62AA15A81FF3FD870064A063 /* Development */,
+				62AA15A91FF3FD870064A063 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
