@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -19,78 +19,87 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
-"global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Account";
+"global.homeTabBarTitle" = "Início";
+"global.contactRequestsTabBarTitle" = "Convites";
+"global.meTabBarTitle" = "Conta";
 "global.ok" = "Ok";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
-"smartlist.userFound" = "User found";
-"smartlist.conversations" = "Conversations";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.yesterday" = "Ontem";
+"smartlist.userFound" = "Usuário encontrado";
+"smartlist.conversations" = "Conversas";
+"smartlist.searching" = "Buscando...";
+"smartlist.noResults" = "Nenhum resultado";
+"smartlist.noNetworkConnectivity" = "Sem conectividade";
+"smartlist.cellularAccess" = "Verifique se o acesso via celular está autorizado em suas configurações";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Ring account";
+"welcome.title" = "Bem-vindo ao Ring";
+"welcome.text" = "Ring é uma plataforma de comunicação gratuita e universal que preserva a privacidade e as liberdades de seus usuários";
+"welcome.linkDevice" = "Associar este dispositivo a uma conta";
+"welcome.createAccount" = "Criar uma conta no Ring";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Next";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.createAccount" = "Pular para Criar uma Conta";
+"createProfile.createAccountWithProfile" = "Próximo";
+"createProfile.linkDevice" = "Pular para Associar Dispositivo";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your Ring account";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "username";
-"createAccount.newPasswordPlaceholder" = "password";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.createAccountFormTitle" = "Criar sua conta Ring";
+"createAccount.chooseStrongPassword" = "Escolha uma senha difícil que você poderá lembrar para proteger a sua conta Ring.";
+"createAccount.enterNewUsernamePlaceholder" = "nome de usuário";
+"createAccount.newPasswordPlaceholder" = "senha";
+"createAccount.repeatPasswordPlaceholder" = "confirmar senha";
+"createAccount.passwordCharactersNumberError" = "Pelo menos 6 caracteres";
+"createAccount.passwordNotMatchingError" = "as senhas não coincidem";
+"createAccount.lookingForUsernameAvailability" = "procurando disponibilidade de nome de usuário";
+"createAccount.invalidUsername" = "nome de usuário inválido";
+"createAccount.usernameAlreadyTaken" = "nome de usuário já existente";
+"createAccount.loading" = "Carregando";
+"createAccount.waitCreateAccountTitle" = "Adicionando conta";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "password";
+"linkToAccount.waitLinkToAccountTitle" = "Associar conta";
+"linkToAccount.linkButtonTitle" = "Associar dispositivo";
+"linkToAccount.passwordPlaceholder" = "senha";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordLabel" = "Digitar Senha";
+"linkToAccount.pinLabel" = "Entre o PIN";
+"linkToAccount.explanationPinMessage" = "Para gerar o código PIN, acesse as configurações de gerenciamento de conta no dispositivo que contém a conta que você deseja usar. Em \"configurações de dispositivos\", selecione \"Associar outro dispositivo a esta conta\". Você receberá o PIN necessário para completar este formulário. O PIN só é válido por 10 minutos.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
-"alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
-"alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.accountCannotBeFoundTitle" = "Não foi possível localizar conta";
+"alerts.accountCannotBeFoundMessage" = "A conta não pôde ser encontrada na rede Ring. Certifique-se de que ela foi exportada do Ring de um dispositivo existente e que as credenciais fornecidas estão corretas.";
+"alerts.accountAddedTitle" = "Conta Adicionada";
+"alerts.accountNoNetworkTitle" = "Não foi possível conectar-se à rede.";
+"alerts.accountNoNetworkMessage" = "Não foi possível adicionar uma conta porque o Ring não pôde se conectar à rede. Verifique a conectividade do seu dispositivo.";
+"alerts.accountDefaultErrorTitle" = "Erro desconhecido";
+"alerts.accountDefaultErrorMessage" = "A conta não pôde ser criada.";
+"alerts.profileTakePhoto" = "Tirar foto";
+"alerts.profileUploadPhoto" = "Importar foto";
+"alerts.profileCancelPhoto" = "Cancelar";
+"alerts.accountLinkedTitle" = "Associar à uma conta";
+"alerts.dbFailedTitle" = "Ocorreu um erro ao iniciar Ring";
+"alerts.dbFailedMessage" = "Por favor, feche o programa e tente abri-lo novamente";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+
+//Actions
+"actions.blockAction" = "Bloquear";
+"actions.deleteAction" = "Deletar";
+"actions.cancelAction" = "Cancelar";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "Dispositivos";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.title" = "Adicionar novo dispositivo";
+"linkDevice.passwordError" = "A senha informada não desbloqueia esta conta";
+"linkDevice.networkError" = "Ocorreu um erro de rede durante a exportação";
+"linkDevice.defaultError" = "  Ocorreu um erro durante a exportação ";
+"linkDevice.explanationMessage" = "Para concluir o processo, você deve iniciar o Ring em no novo dispositivo e escolher a opção \"Vincular este dispositivo a uma conta\". Seu PIN é válido por 10 minutos.";
+"linkDevice.hudMessage" = "Verificando";

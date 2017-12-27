@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -19,77 +19,86 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "خانه";
 "global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Account";
-"global.ok" = "Ok";
+"global.meTabBarTitle" = "حساب کاربری";
+"global.ok" = "خب";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
+"smartlist.yesterday" = "دیروز";
 "smartlist.userFound" = "User found";
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "بدون اتصال شبکه";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Ring";
+"welcome.title" = "به رینگ خوش آمدید";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Ring account";
+"welcome.linkDevice" = "پیوند این افزاره به یک حساب";
+"welcome.createAccount" = "ساخت یک حساب رینگ";
 
 //Creation Profile Screen
 "createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Next";
+"createProfile.createAccountWithProfile" = "بعدی";
 "createProfile.linkDevice" = "Skip to Link Device";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your Ring account";
+"createAccount.createAccountFormTitle" = "حساب کاربری رینگ خود را بسازید";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "username";
-"createAccount.newPasswordPlaceholder" = "password";
+"createAccount.enterNewUsernamePlaceholder" = "نام کاربری";
+"createAccount.newPasswordPlaceholder" = "گذرواژه";
 "createAccount.repeatPasswordPlaceholder" = "confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
+"createAccount.passwordCharactersNumberError" = "کمینه ۶ نویسه";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for username availability";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.waitCreateAccountTitle" = "در حال افزودن حساب";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "password";
+"linkToAccount.passwordPlaceholder" = "گذرواژه";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
+"linkToAccount.pinLabel" = "پین را وارد کنید";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "نمی‌تواند حساب را یافت";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountNoNetworkTitle" = "نمی‌توان به شبکه وصل شد";
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "لغو";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+
+//Actions
+"actions.blockAction" = "مسدود";
+"actions.deleteAction" = "حذف";
+"actions.cancelAction" = "لغو";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "افزاره‌ها";
 
 //Link New Device
 "linkDevice.title" = "Link new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
+"linkDevice.passwordError" = "گذرواژه‌ای که وارد کردید قفل این حساب کاربری را باز نمی‌کند";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "An error occured during the export";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
