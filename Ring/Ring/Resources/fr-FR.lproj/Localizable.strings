@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -19,31 +19,31 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "Accueil";
 "global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Account";
-"global.ok" = "Ok";
+"global.meTabBarTitle" = "compte";
+"global.ok" = "d'accord";
 
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.userFound" = "User found";
-"smartlist.conversations" = "Conversations";
+"smartlist.conversations" = "Conversation";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "Aucune connexion au réseau n'est possible";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Ring";
+"welcome.title" = "Bienvenue sur ring";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Ring account";
+"welcome.createAccount" = "Créer un compte Ring";
 
 //Creation Profile Screen
 "createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Next";
+"createProfile.createAccountWithProfile" = "Suivant";
 "createProfile.linkDevice" = "Skip to Link Device";
 
 //Create Account form
@@ -79,10 +79,19 @@
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "Annuler";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+
+//Actions
+"actions.blockAction" = "Block";
+"actions.deleteAction" = "Supprimer";
+"actions.cancelAction" = "Annuler";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
@@ -90,7 +99,7 @@
 //Link New Device
 "linkDevice.title" = "Link new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
+"linkDevice.networkError" = "Un problème de réseau est survenu pendant l'export";
+"linkDevice.defaultError" = "Une erreur est survenue pendant l'export";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";

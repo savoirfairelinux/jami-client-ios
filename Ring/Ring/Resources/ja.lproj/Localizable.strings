@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -19,46 +19,46 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "ホーム";
 "global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Account";
-"global.ok" = "Ok";
+"global.meTabBarTitle" = "アカウント";
+"global.ok" = "OK";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
+"smartlist.yesterday" = "昨日";
 "smartlist.userFound" = "User found";
-"smartlist.conversations" = "Conversations";
+"smartlist.conversations" = "会話";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "ネットワーク接続がありません";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Ring";
+"welcome.title" = "Ring へようこそ";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Ring account";
+"welcome.linkDevice" = "このデバイスをアカウントへリンク";
+"welcome.createAccount" = "Ringアカウントを作成";
 
 //Creation Profile Screen
 "createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Next";
+"createProfile.createAccountWithProfile" = "次へ";
 "createProfile.linkDevice" = "Skip to Link Device";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your Ring account";
+"createAccount.createAccountFormTitle" = "Ringアカウントを作成";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
 "createAccount.enterNewUsernamePlaceholder" = "username";
 "createAccount.newPasswordPlaceholder" = "password";
 "createAccount.repeatPasswordPlaceholder" = "confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
+"createAccount.passwordCharactersNumberError" = "6文字以上";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for username availability";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.waitCreateAccountTitle" = "アカウントを追加";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
@@ -66,31 +66,40 @@
 "linkToAccount.passwordPlaceholder" = "password";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
+"linkToAccount.pinLabel" = "PINを入力してください";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "アカウントが見つかりません";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountNoNetworkTitle" = "ネットワークに接続できません";
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "キャンセル";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+
+//Actions
+"actions.blockAction" = "ブロック";
+"actions.deleteAction" = "削除";
+"actions.cancelAction" = "キャンセル";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "端末";
 
 //Link New Device
 "linkDevice.title" = "Link new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
+"linkDevice.networkError" = "エクスポート中にネットワークエラーが発生しました";
+"linkDevice.defaultError" = "エクスポート中にエラーが発生しました";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";

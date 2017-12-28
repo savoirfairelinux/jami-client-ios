@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -19,78 +19,87 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
-"global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Account";
-"global.ok" = "Ok";
+"global.homeTabBarTitle" = "Kreu";
+"global.contactRequestsTabBarTitle" = "Ftesa";
+"global.meTabBarTitle" = "Llogari";
+"global.ok" = "OK";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
-"smartlist.userFound" = "User found";
-"smartlist.conversations" = "Conversations";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.yesterday" = "Dje";
+"smartlist.userFound" = "U gjet përdorues";
+"smartlist.conversations" = "Biseda";
+"smartlist.searching" = "Po kërkohet…";
+"smartlist.noResults" = "S\’ka përfundime";
+"smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
+"smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Ring account";
+"welcome.title" = "Mirë se vini te Ring";
+"welcome.text" = "Ring është platformë komunikimi e lirë dhe universale që respekton privatësinë dhe liritë e përdoruesve të tij.";
+"welcome.linkDevice" = "Lidheni këtë pajisje me një llogari";
+"welcome.createAccount" = "Krijoni një llogari Ring";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Next";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.createAccount" = "Kalo te Krijoni Llogari";
+"createProfile.createAccountWithProfile" = "Pasuesi";
+"createProfile.linkDevice" = "Kaloni te Lidhni Pajisje";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your Ring account";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "username";
-"createAccount.newPasswordPlaceholder" = "password";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.createAccountFormTitle" = "Krijoni llogarinë tuaj Ring";
+"createAccount.chooseStrongPassword" = "Që të mbroni llogarinë tuaj Ring, zgjidhni fjalëkalim të fuqishëm, dhe që e mbani mend. ";
+"createAccount.enterNewUsernamePlaceholder" = "emër përdoruesi";
+"createAccount.newPasswordPlaceholder" = "fjalëkalim";
+"createAccount.repeatPasswordPlaceholder" = "ripohoni fjalëkalimin";
+"createAccount.passwordCharactersNumberError" = "Minimumi 6 shenja";
+"createAccount.passwordNotMatchingError" = "fjalëkalimet nuk përputhen";
+"createAccount.lookingForUsernameAvailability" = "po shihet nëse emri i përdoruesit është i pazënë… ";
+"createAccount.invalidUsername" = "emër përdoruesi i pavlefshëm";
+"createAccount.usernameAlreadyTaken" = "emër përdoruesi tashmë i zënë";
+"createAccount.loading" = "Po ngarkohet";
+"createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "password";
+"linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
+"linkToAccount.linkButtonTitle" = "Lidhni pajisje";
+"linkToAccount.passwordPlaceholder" = "fjalëkalim";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordLabel" = "Jepni Fjalëkalimin";
+"linkToAccount.pinLabel" = "Jepni PIN-in";
+"linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
-"alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
-"alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.accountCannotBeFoundTitle" = "S\’gjendet dot llogari";
+"alerts.accountCannotBeFoundMessage" = "Llogaria s\’u gjet dot në rrjetin Ring. Sigurohuni që qe eksportuar në Ring nga një pajisje ekzistuese, dhe që kredencialet e dhëna janë të sakta.";
+"alerts.accountAddedTitle" = "Llogaria u Shtua";
+"alerts.accountNoNetworkTitle" = "S\’lidhet dot te rrjeti";
+"alerts.accountNoNetworkMessage" = "Llogaria s\’u shtua dot, ngaqë Ring-u s\’u lidh dot me rrjetin e shpërndarë. Shihni lidhjen e pajisjes tuaj.";
+"alerts.accountDefaultErrorTitle" = "Gabim i panjohur";
+"alerts.accountDefaultErrorMessage" = "Llogaria s\’u krijua dot.";
+"alerts.profileTakePhoto" = "Bëni një foto";
+"alerts.profileUploadPhoto" = "Ngarkoni foto";
+"alerts.profileCancelPhoto" = "Anuloje";
+"alerts.accountLinkedTitle" = "Po lidhet llogaria";
+"alerts.dbFailedTitle" = "Ndodhi një gabim kur po nisej Ring-u";
+"alerts.dbFailedMessage" = "Ju lutemi, mbylleni aplikacionin dhe provoni ta rihapni";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+
+//Actions
+"actions.blockAction" = "Bllokoje";
+"actions.deleteAction" = "Fshije";
+"actions.cancelAction" = "Anuloje";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "Pajisje";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.title" = "Lidhni pajisje të re";
+"linkDevice.passwordError" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
+"linkDevice.networkError" = "Ndodhi një gabim rrjeti gjatë eksportimit";
+"linkDevice.defaultError" = "Ndodhi një gabim gjatë eksportimit";
+"linkDevice.explanationMessage" = "Që të plotësohet procesi. lypset ta hapni Ring-un te pajisja e re dhe të zgjidhni mundësinë \"Lidheni këtë pajisje me një llogari.\" PIN-i juaj vlen vetëm për 10 minuta";
+"linkDevice.hudMessage" = "Po verifikohet";

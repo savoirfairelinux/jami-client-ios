@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "Acasă";
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
@@ -30,7 +30,7 @@
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "Nu există conectivitate la rețea";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
@@ -39,7 +39,7 @@
 "welcome.title" = "Welcome to Ring";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Ring account";
+"welcome.createAccount" = "Crează un cont Ring";
 
 //Creation Profile Screen
 "createProfile.createAccount" = "Skip to Create Account";
@@ -58,7 +58,7 @@
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.waitCreateAccountTitle" = "Adaugare cont";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
@@ -83,6 +83,15 @@
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+
+//Actions
+"actions.blockAction" = "Block";
+"actions.deleteAction" = "Șterge";
+"actions.cancelAction" = "Cancel";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
