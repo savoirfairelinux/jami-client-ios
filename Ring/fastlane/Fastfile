@@ -63,12 +63,6 @@ platform :ios do
       message: message,
       force: true
     )
-    push_to_git_remote(
-      local_branch: "HEAD",
-      remote_branch: “refs/for/master/fastlane”,
-      force: false,
-      tags: false
-    )
   end
 
   after_all do |lane|
