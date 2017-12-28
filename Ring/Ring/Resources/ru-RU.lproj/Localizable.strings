@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -19,51 +19,51 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "Домой";
 "global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Account";
-"global.ok" = "Ok";
+"global.meTabBarTitle" = "Учётная запись";
+"global.ok" = "Да";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
+"smartlist.yesterday" = "Вчера";
 "smartlist.userFound" = "User found";
-"smartlist.conversations" = "Conversations";
+"smartlist.conversations" = "Беседы";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "Отсутствует сетевое подключение";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Ring";
+"welcome.title" = "Добро пожаловать в Ring";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Ring account";
+"welcome.createAccount" = "Создать Ring аккаунт";
 
 //Creation Profile Screen
 "createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Next";
+"createProfile.createAccountWithProfile" = "Далее";
 "createProfile.linkDevice" = "Skip to Link Device";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "username";
-"createAccount.newPasswordPlaceholder" = "password";
+"createAccount.enterNewUsernamePlaceholder" = "Имя пользователя";
+"createAccount.newPasswordPlaceholder" = "Пароль";
 "createAccount.repeatPasswordPlaceholder" = "confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
+"createAccount.passwordCharactersNumberError" = "Минимум 6 символов";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for username availability";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "password";
+"linkToAccount.passwordPlaceholder" = "Пароль";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Enter PIN";
@@ -77,12 +77,21 @@
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
+"alerts.profileTakePhoto" = "Фотографировать";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "Отмена";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+
+//Actions
+"actions.blockAction" = "Block";
+"actions.deleteAction" = "Удалить";
+"actions.cancelAction" = "Отмена";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";

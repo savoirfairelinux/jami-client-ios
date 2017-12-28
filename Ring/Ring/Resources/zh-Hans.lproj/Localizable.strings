@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -19,78 +19,87 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
-"global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Account";
-"global.ok" = "Ok";
+"global.homeTabBarTitle" = "首頁";
+"global.contactRequestsTabBarTitle" = "邀請";
+"global.meTabBarTitle" = "帳號";
+"global.ok" = "確定";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
-"smartlist.userFound" = "User found";
-"smartlist.conversations" = "Conversations";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.yesterday" = "昨天";
+"smartlist.userFound" = "已找到使用者";
+"smartlist.conversations" = "對話";
+"smartlist.searching" = "正在搜尋...";
+"smartlist.noResults" = "沒有結果";
+"smartlist.noNetworkConnectivity" = "沒有網路連接";
+"smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Ring account";
+"welcome.title" = "歡迎來到 Ring";
+"welcome.text" = "Ring 是一個自由且通用的通訊平臺，其尊重使用者的隱私與自由。";
+"welcome.linkDevice" = "連結這個裝置到一個帳號";
+"welcome.createAccount" = "建立一個 Ring 帳號";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Next";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.createAccount" = "跳到建立帳號";
+"createProfile.createAccountWithProfile" = "下一個";
+"createProfile.linkDevice" = "跳到連結裝置";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your Ring account";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "username";
-"createAccount.newPasswordPlaceholder" = "password";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.createAccountFormTitle" = "建立您的 Ring 帳號";
+"createAccount.chooseStrongPassword" = "選擇您可以記住用來保護您的 Ring 帳號的強式密碼。";
+"createAccount.enterNewUsernamePlaceholder" = "使用者名稱";
+"createAccount.newPasswordPlaceholder" = "密碼";
+"createAccount.repeatPasswordPlaceholder" = "確認密碼";
+"createAccount.passwordCharactersNumberError" = "最小6個字元";
+"createAccount.passwordNotMatchingError" = "密碼不符合";
+"createAccount.lookingForUsernameAvailability" = "正在確認使用者名稱是否可用";
+"createAccount.invalidUsername" = "無效的使用者名稱";
+"createAccount.usernameAlreadyTaken" = "使用者名稱已被使用";
+"createAccount.loading" = "正在載入";
+"createAccount.waitCreateAccountTitle" = "正在加入帳號";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "password";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.waitLinkToAccountTitle" = "帳號連結";
+"linkToAccount.linkButtonTitle" = "連結裝置";
+"linkToAccount.passwordPlaceholder" = "密碼";
+"linkToAccount.pinPlaceholder" = "PIN 碼";
+"linkToAccount.passwordLabel" = "輸入密碼";
+"linkToAccount.pinLabel" = "輸入 PIN 碼";
+"linkToAccount.explanationPinMessage" = "要生成 PIN 碼，請到包含您所使用的帳號的裝置上的帳號管理設定。在裝置設定中選取「連結其他裝置到這個帳號」。您將會收到所需的 PIN 碼來完成這份表單。PIN 碼只在 10 分鐘內有效。";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
-"alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
-"alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.accountCannotBeFoundTitle" = "找不到帳號";
+"alerts.accountCannotBeFoundMessage" = "在 Ring 網路中找不到帳號。請確定其已在 Ring 上從既有的裝置匯出，以及提供的憑證是正確的。";
+"alerts.accountAddedTitle" = "帳號已新增";
+"alerts.accountNoNetworkTitle" = "無法連接到網路";
+"alerts.accountNoNetworkMessage" = "因為 Ring 無法連線到分散式網路，所以無法新增帳號。請檢查您裝置的網路連線。";
+"alerts.accountDefaultErrorTitle" = "未知的錯誤";
+"alerts.accountDefaultErrorMessage" = "帳號無法建立。";
+"alerts.profileTakePhoto" = "照相";
+"alerts.profileUploadPhoto" = "上傳照片";
+"alerts.profileCancelPhoto" = "取消";
+"alerts.accountLinkedTitle" = "連結帳號";
+"alerts.dbFailedTitle" = "當啟動 Ring 時發生錯誤";
+"alerts.dbFailedMessage" = "請關閉應用程式並再次嘗試開啟它";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+
+//Actions
+"actions.blockAction" = "阻擋";
+"actions.deleteAction" = "刪除";
+"actions.cancelAction" = "取消";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "裝置";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.title" = "連結新裝置";
+"linkDevice.passwordError" = "您輸入的密碼無法解鎖這個帳號";
+"linkDevice.networkError" = "當匯出時遇到網路錯誤";
+"linkDevice.defaultError" = "當匯出時遇到錯誤";
+"linkDevice.explanationMessage" = "要完成此程序，您需要在新裝置上開啟 Ring 並選擇選項「連結這個裝置到一個帳號」。您的 PIN 碼在 10 分鐘內有效";
+"linkDevice.hudMessage" = "正在驗證";

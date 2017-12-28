@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Home";
 "global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Account";
+"global.meTabBarTitle" = "खाता";
 "global.ok" = "Ok";
 
 // Smartlist
@@ -30,7 +30,7 @@
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "नेटवर्क संपर्क नही है";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
@@ -83,6 +83,15 @@
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+
+//Actions
+"actions.blockAction" = "Block";
+"actions.deleteAction" = "Delete";
+"actions.cancelAction" = "Cancel";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
