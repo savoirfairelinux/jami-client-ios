@@ -301,14 +301,11 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                 }
             } else {
                 // age: [received 7 days ago, received the previous year[
-                let day = Calendar.current.component(.day, from: time)
-                // apply appropriate suffix to day value
-                let suffix = day == 1 ? "st" : (day == 2 ? "nd" : (day == 3 ? "rd" : "th"))
-                dateFormatter.dateFormat = "MMM d'\(suffix),' h:mma"
+                dateFormatter.dateFormat = "MMM d, h:mma"
             }
         } else {
             // age: [received the previous year, inf[
-            dateFormatter.dateFormat = "MMM d'th yyyy,' h:mma"
+            dateFormatter.dateFormat = "MMM d, yyyy h:mma"
         }
 
         // generate the string containing the message time
