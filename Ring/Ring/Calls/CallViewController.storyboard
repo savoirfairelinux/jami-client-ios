@@ -26,7 +26,21 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cOr-ft-BIO">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DMu-Or-dd7">
+                                            <rect key="frame" x="0.0" y="309" width="375" height="0.0"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" id="GKH-fc-lLl"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="DMu-Or-dd7" secondAttribute="trailing" id="5Aa-Zq-Wcw"/>
+                                        <constraint firstItem="DMu-Or-dd7" firstAttribute="centerY" secondItem="cOr-ft-BIO" secondAttribute="centerY" id="YVb-yp-TQG"/>
+                                        <constraint firstItem="DMu-Or-dd7" firstAttribute="leading" secondItem="cOr-ft-BIO" secondAttribute="leading" id="hFx-0M-Kk5"/>
+                                    </constraints>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <blurEffect style="light"/>
@@ -107,6 +121,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="B3b-V0-rjx" id="dU9-MG-0y3"/>
                         <outlet property="durationLabel" destination="zMN-6z-uXT" id="Uuf-ph-lrC"/>
+                        <outlet property="incomingVideo" destination="DMu-Or-dd7" id="ogh-ft-54u"/>
                         <outlet property="infoBottomLabel" destination="SdV-jx-Mla" id="yX9-em-p4w"/>
                         <outlet property="nameLabel" destination="73Y-N1-Yga" id="XcQ-V6-ZrF"/>
                         <outlet property="profileImageView" destination="fnt-PQ-Q6P" id="MgB-Ev-bTc"/>
