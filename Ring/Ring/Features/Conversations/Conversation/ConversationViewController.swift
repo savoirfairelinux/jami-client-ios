@@ -379,6 +379,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                                 withMessageVM messageVM: MessageViewModel) {
         let type = messageVM.bubblePosition()
         let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        cell.setup()
 
         cell.messageLabel.enabledTypes = [.url]
         cell.messageLabel.setTextWithLineSpacing(withText: messageVM.content, withLineSpacing: 2)
