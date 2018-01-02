@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
     private let callService = CallsService(withCallsAdapter: CallsAdapter())
+    private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let networkService = NetworkService()
     private var conversationManager: ConversationsManager?
     private var contactRequestManager: ContactRequestManager?
@@ -49,7 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             withContactsService: self.contactsService,
                             withPresenceService: self.presenceService,
                             withNetworkService: self.networkService,
-                            withCallService: self.callService)
+                            withCallService: self.callService,
+                            withVideoService: self.videoService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -74,6 +76,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
 
+        // disables hardware decoding
+        self.videoService.setDecodingAccelerated(withState: false)
+
+        // requests permission to use the camera
+        // will enumerate and add devices once permission has been granted
+        self.videoService.setupInputs()
+
+        // start monitoring for network changes
         self.networkService.monitorNetworkType()
 
         // themetize the app
@@ -87,15 +97,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.conversationManager = ConversationsManager(with: self.conversationsService, accountsService: self.accountService)
         self.startDB()
         self.accountService.loadAccounts().subscribe { [unowned self] (_) in
-            if let currentAccount = self.accountService.currentAccount {
-                self.contactsService.loadContacts(withAccount: currentAccount)
-                self.contactsService.loadContactRequests(withAccount: currentAccount)
-                self.presenceService.subscribeBuddies(withAccount: currentAccount, withContacts: self.contactsService.contacts.value)
-                if let ringID = AccountModelHelper(withAccount: currentAccount).ringId {
-                    self.conversationManager?
-                        .prepareConversationsForAccount(accountId: currentAccount.id, accountUri: ringID)
-                }
+            guard let currentAccount = self.accountService.currentAccount else {
+                self.log.error("Can't get current account!")
+                return
             }
+            self.contactsService.loadContacts(withAccount: currentAccount)
+            self.contactsService.loadContactRequests(withAccount: currentAccount)
+            self.presenceService.subscribeBuddies(withAccount: currentAccount, withContacts: self.contactsService.contacts.value)
+            if let ringID = AccountModelHelper(withAccount: currentAccount).ringId {
+                self.conversationManager?
+                    .prepareConversationsForAccount(accountId: currentAccount.id, accountUri: ringID)
+            }
+            // make sure video is enabled
+            let accountDetails = self.accountService.getAccountDetails(fromAccountId: currentAccount.id)
+            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.videoEnabled), withValue: "true")
+            self.accountService.setAccountDetails(forAccountId: currentAccount.id, withDetails: accountDetails)
         }.disposed(by: self.disposeBag)
 
         self.window?.rootViewController = self.appCoordinator.rootViewController
