@@ -128,10 +128,9 @@ do
     cd build-ios-$ARCH
 
     RING_CONF="--host=$HOST \
-			  --without-dbus \
+              --without-dbus \
               --enable-static \
               --disable-shared \
-              --disable-video \
               --prefix=$IOS_TOP_DIR/DEPS/$ARCH"
 
     if [ "$RELEASE" = "0" ]
