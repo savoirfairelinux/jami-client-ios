@@ -308,7 +308,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             }
         } else {
             // age: [received the previous year, inf[
-            dateFormatter.dateFormat = "MMM d'th yyyy,' h:mma"
+            dateFormatter.dateFormat = "MMM d'th 'yyyy', 'h:mma"
         }
 
         // generate the string containing the message time
