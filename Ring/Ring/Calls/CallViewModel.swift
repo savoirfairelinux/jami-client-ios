@@ -33,9 +33,15 @@ class CallViewModel: Stateable, ViewModel {
     fileprivate let callService: CallsService
     fileprivate let contactsService: ContactsService
     fileprivate let accountService: AccountsService
+    fileprivate let videoService: VideoService
     private let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
 
+    lazy var incomingFrame: Observable<FrameInfo> = {
+        return videoService.incomingVideoFrame.asObservable().map({ frame in
+            return frame
+        })
+    }()
     lazy var contactImageData: Observable<Data?> = {
         return callService.receivedVCard.asObservable().map({ vCard in
             return vCard.imageData
@@ -91,6 +97,7 @@ class CallViewModel: Stateable, ViewModel {
         self.callService = injectionBag.callService
         self.contactsService = injectionBag.contactsService
         self.accountService = injectionBag.accountService
+        self.videoService = injectionBag.videoService
     }
     static func formattedDurationFrom(interval: Int) -> String {
         let seconds = interval % 60

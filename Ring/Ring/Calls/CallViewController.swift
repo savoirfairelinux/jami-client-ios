@@ -31,6 +31,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var infoBottomLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var incomingVideo: UIImageView!
 
     var viewModel: CallViewModel!
 
@@ -55,6 +56,20 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func setupBindings() {
+
+        self.viewModel.incomingFrame.subscribeOn(MainScheduler.instance).subscribe(onNext: { frameInfo in
+            if let image = frameInfo.image {
+                DispatchQueue.main.async {
+                    // not cropped - portrait
+                    let aspect = CGFloat(frameInfo.width / frameInfo.height)
+                    let oldSize = self.incomingVideo.frame.size
+                    let newHeight = oldSize.width / aspect
+                    let newSize = CGSize(width: oldSize.width, height: newHeight)
+                    self.incomingVideo.frame = CGRect(origin: self.incomingVideo.frame.origin, size: newSize)
+                    self.incomingVideo.image = image
+                }
+            }
+        }).disposed(by: self.disposeBag)
 
         //Cancel button action
         self.cancelButton.rx.tap.subscribe(onNext: {
