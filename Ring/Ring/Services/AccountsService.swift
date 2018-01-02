@@ -201,11 +201,10 @@ class AccountsService: AccountAdapterDelegate {
                 let devices = getKnownRingDevices(fromAccountId: accountId!)
 
                 account = try AccountModel(withAccountId: accountId!,
-                                                  details: details,
-                                                  volatileDetails: volatileDetails,
-                                                  credentials: credentials,
-                                                  devices: devices)
-                //TODO: set registration state as ready for a SIP account
+                                           details: details,
+                                           volatileDetails: volatileDetails,
+                                           credentials: credentials,
+                                           devices: devices)
 
                 let accountModelHelper = AccountModelHelper(withAccount: account!)
                 var accountAddedEvent = ServiceEvent(withEventType: .accountAdded)
@@ -388,6 +387,8 @@ class AccountsService: AccountAdapterDelegate {
             defaultDetails.updateValue("Ring", forKey: ConfigKey.accountAlias.rawValue)
             defaultDetails.updateValue("bootstrap.ring.cx", forKey: ConfigKey.accountHostname.rawValue)
             defaultDetails.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
+            // make sure video is enabled
+            defaultDetails.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
             return defaultDetails
         } catch {
             throw error
