@@ -46,4 +46,38 @@ class MessageCell: UITableViewCell, NibReusable {
     override func prepareForReuse() {
         self.disposeBag = DisposeBag()
     }
+
+    func showCopyMenu() {
+        becomeFirstResponder()
+        let menu = UIMenuController.shared
+        if !menu.isMenuVisible {
+            menu.setTargetRect(self.bubble.frame, in: self)
+            menu.setMenuVisible(true, animated: true)
+        }
+    }
+
+    func setup() {
+        let longGestureRecognizer = UILongPressGestureRecognizer()
+        self.messageLabel.isUserInteractionEnabled = true
+        self.messageLabel.addGestureRecognizer(longGestureRecognizer)
+        longGestureRecognizer.rx.event.bind(onNext: { [weak self] _ in
+            self?.showCopyMenu()
+        }).disposed(by: self.disposeBag)
+    }
+
+    override func copy(_ sender: Any?) {
+        UIPasteboard.general.string = self.messageLabel.text
+        UIMenuController.shared.setMenuVisible(false, animated: true)
+    }
+
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UIResponderStandardEditActions.copy) {
+            return true
+        }
+        return false
+    }
 }
