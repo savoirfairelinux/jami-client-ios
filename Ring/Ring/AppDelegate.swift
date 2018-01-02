@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
     private let callService = CallsService(withCallsAdapter: CallsAdapter())
+    private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let networkService = NetworkService()
     private var conversationManager: ConversationsManager?
     private var contactRequestManager: ContactRequestManager?
@@ -49,7 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             withContactsService: self.contactsService,
                             withPresenceService: self.presenceService,
                             withNetworkService: self.networkService,
-                            withCallService: self.callService)
+                            withCallService: self.callService,
+                            withVideoService: self.videoService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -73,6 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // starts the daemon
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
+
+        self.videoService.enumerateVideoInputDevices()
 
         self.networkService.monitorNetworkType()
 
