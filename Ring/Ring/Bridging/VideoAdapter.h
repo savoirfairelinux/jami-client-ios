@@ -1,8 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2018 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,20 +18,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-/**
- Expose Objective-C bridging classes to Swift.
- */
-#import "AccountAdapter.h"
-#import "SystemAdapter.h"
-#import "DRingAdapter.h"
-#import "NameRegistrationAdapter.h"
-#import "LookupNameResponse.h"
-#import "RegistrationResponse.h"
-#import "NameRegistrationResponse.h"
-#import "MessagesAdapter.h"
-#import "Chameleon/Chameleon.h"
-#import "ContactsAdapter.h"
-#import "PresenceAdapter.h"
-#import "VideoAdapter.h"
-#import <CommonCrypto/CommonCrypto.h>
-#import <Contacts/Contacts.h>
+#import <Foundation/Foundation.h>
+
+@protocol VideoAdapterDelegate;
+
+@interface VideoAdapter : NSObject
+
+@property (class, nonatomic, weak) id <VideoAdapterDelegate> delegate;
+
+@end
