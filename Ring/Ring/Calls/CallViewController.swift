@@ -23,6 +23,7 @@ import UIKit
 import Chameleon
 import RxSwift
 import Reusable
+import SwiftyBeaver
 
 class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
@@ -31,10 +32,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var infoBottomLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var incomingVideo: UIImageView!
+    @IBOutlet weak var capturedVideo: UIImageView!
 
     var viewModel: CallViewModel!
 
     fileprivate let disposeBag = DisposeBag()
+
+    private let log = SwiftyBeaver.self
 
     override func viewDidLoad() {
         super.viewDidLoad()

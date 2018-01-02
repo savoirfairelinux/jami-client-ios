@@ -65,7 +65,9 @@ class AccountsService: AccountAdapterDelegate {
      - SeeAlso: `sharedResponseStream`
      */
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(),conversationHelper: ConversationDataHelper(),interactionHepler: InteractionDataHelper())
+    let dbManager = DBManager(profileHepler: ProfileDataHelper(),
+                              conversationHelper: ConversationDataHelper(),
+                              interactionHepler: InteractionDataHelper())
 
     // MARK: - Public members
     /**
@@ -120,6 +122,7 @@ class AccountsService: AccountAdapterDelegate {
             }
         }
     }
+
     init(withAccountAdapter accountAdapter: AccountAdapter) {
         self.accountList = []
 
@@ -201,11 +204,10 @@ class AccountsService: AccountAdapterDelegate {
                 let devices = getKnownRingDevices(fromAccountId: accountId!)
 
                 account = try AccountModel(withAccountId: accountId!,
-                                                  details: details,
-                                                  volatileDetails: volatileDetails,
-                                                  credentials: credentials,
-                                                  devices: devices)
-                //TODO: set registration state as ready for a SIP account
+                                           details: details,
+                                           volatileDetails: volatileDetails,
+                                           credentials: credentials,
+                                           devices: devices)
 
                 let accountModelHelper = AccountModelHelper(withAccount: account!)
                 var accountAddedEvent = ServiceEvent(withEventType: .accountAdded)
@@ -286,7 +288,7 @@ class AccountsService: AccountAdapterDelegate {
 
      - Parameter id: the id of the account.
 
-     - Returns: the details of the accounts.
+     - Returns: the details of the account.
      */
     func getAccountDetails(fromAccountId id: String) -> AccountConfigModel {
         let details: NSDictionary = accountAdapter.getAccountDetails(id) as NSDictionary
@@ -296,11 +298,21 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     /**
+     Sets all the details of an account in the daemon.
+     - Parameter id: the id of the account.
+     - Parameter newDetails: the new details to set for the account.
+     */
+    func setAccountDetails(forAccountId id: String, withDetails newDetails: AccountConfigModel) {
+        let details = newDetails.toDetails()
+        accountAdapter.setAccountDetails(id, details: details)
+    }
+
+    /**
      Gets all the volatile details of an account from the daemon.
 
      - Parameter id: the id of the account.
 
-     - Returns: the volatile details of the accounts.
+     - Returns: the volatile details of the account.
      */
     func getVolatileAccountDetails(fromAccountId id: String) -> AccountConfigModel {
         let details: NSDictionary = accountAdapter.getVolatileAccountDetails(id) as NSDictionary
@@ -372,7 +384,6 @@ class AccountsService: AccountAdapterDelegate {
         if accountDetails == nil {
             throw AddAccountError.templateNotConform
         }
-        accountDetails!.updateValue("false", forKey: ConfigKey.videoEnabled.rawValue)
         accountDetails!.updateValue("sipinfo", forKey: ConfigKey.accountDTMFType.rawValue)
         return accountDetails!
     }
@@ -388,6 +399,7 @@ class AccountsService: AccountAdapterDelegate {
             defaultDetails.updateValue("Ring", forKey: ConfigKey.accountAlias.rawValue)
             defaultDetails.updateValue("bootstrap.ring.cx", forKey: ConfigKey.accountHostname.rawValue)
             defaultDetails.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
+            defaultDetails.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
             return defaultDetails
         } catch {
             throw error

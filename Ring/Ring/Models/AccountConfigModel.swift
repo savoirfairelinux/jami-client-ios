@@ -121,4 +121,26 @@ class AccountConfigModel: Object {
         let value: String? = self.configValues[configKeyModel]
         return value != nil ? value! : ""
     }
+
+    /**
+     Getter for the configuration elements.
+
+     - Parameter configKeyModel: the ConfigKeyModel identifying the configuration element to get
+
+     - Parameter value: the string value to set at the key
+
+     */
+    func set(withConfigKeyModel configKeyModel: ConfigKeyModel, withValue value: String) {
+        self.configValues[configKeyModel] = value
+    }
+}
+
+extension AccountConfigModel {
+    func toDetails() -> [String: String]? {
+        var details = [String: String]()
+        for (key, value) in self.configValues {
+            details[key.key.rawValue] = value
+        }
+        return details
+    }
 }
