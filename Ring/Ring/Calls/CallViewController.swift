@@ -23,6 +23,7 @@ import UIKit
 import Chameleon
 import RxSwift
 import Reusable
+import SwiftyBeaver
 
 class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
@@ -31,10 +32,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var infoBottomLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var incomingVideo: UIImageView!
+    @IBOutlet weak var capturedVideo: UIImageView!
 
     var viewModel: CallViewModel!
 
     fileprivate let disposeBag = DisposeBag()
+
+    private let log = SwiftyBeaver.self
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +52,28 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func setupBindings() {
+
+        self.viewModel.incomingFrame.subscribeOn(MainScheduler.instance).subscribe(onNext: { frame in
+            if let image = frame {
+                DispatchQueue.main.async {
+                    // not cropped - portrait
+                    let aspect = CGFloat(image.size.width / image.size.height)
+                    let oldSize = self.incomingVideo.frame.size
+                    let newHeight = oldSize.width / aspect
+                    let newSize = CGSize(width: oldSize.width, height: newHeight)
+                    self.incomingVideo.frame = CGRect(origin: self.incomingVideo.frame.origin, size: newSize)
+                    self.incomingVideo.image = image
+                }
+            }
+        }).disposed(by: self.disposeBag)
+
+        self.viewModel.capturedFrame.subscribeOn(MainScheduler.instance).subscribe(onNext: { frame in
+            if let image = frame {
+                DispatchQueue.main.async {
+                    self.capturedVideo.image = image
+                }
+            }
+        }).disposed(by: self.disposeBag)
 
         //Cancel button action
         self.cancelButton.rx.tap
