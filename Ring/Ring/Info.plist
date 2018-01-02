@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Used to take user profile picture</string>
+	<string>Used to take user profile picture and record video</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to let the user choose a profile picture</string>
 	<key>UILaunchStoryboardName</key>

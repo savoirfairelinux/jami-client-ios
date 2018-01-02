@@ -31,6 +31,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var infoBottomLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var incomingVideo: UIImageView!
 
     var viewModel: CallViewModel!
 
@@ -55,6 +56,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func setupBindings() {
+
+        self.viewModel.incomingFrame.subscribeOn(MainScheduler.instance).subscribe(onNext: { frame in
+//            if let image = frame {
+//                DispatchQueue.main.async {
+//                    self.incomingVideo.image = image
+//                }
+//            }
+        }).disposed(by: self.disposeBag)
 
         //Cancel button action
         self.cancelButton.rx.tap.subscribe(onNext: {
