@@ -221,6 +221,10 @@
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
 		62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */; };
 		62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */; };
+		62AA15B21FF422810064A063 /* src in Resources */ = {isa = PBXBuildFile; fileRef = 62AA15B11FF422810064A063 /* src */; };
+		62AA15BF1FFC36840064A063 /* VideoAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62AA15BE1FFC36840064A063 /* VideoAdapter.mm */; };
+		62AA15C31FFC39C80064A063 /* VideoAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AA15C21FFC39C80064A063 /* VideoAdapterDelegate.swift */; };
+		62AA15CA1FFD3D7E0064A063 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AA15C91FFD3D7E0064A063 /* VideoService.swift */; };
 		62DFAB2C1F9FF030002D6F9C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DFAB2B1F9FF030002D6F9C /* Reachability.framework */; };
 		62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */; };
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
@@ -488,6 +492,11 @@
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
 		62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PresenceAdapter.mm; sourceTree = "<group>"; };
 		62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceService.swift; sourceTree = "<group>"; };
+		62AA15B11FF422810064A063 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../daemon/src; sourceTree = "<group>"; };
+		62AA15BD1FFC366D0064A063 /* VideoAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoAdapter.h; sourceTree = "<group>"; };
+		62AA15BE1FFC36840064A063 /* VideoAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoAdapter.mm; sourceTree = "<group>"; };
+		62AA15C21FFC39C80064A063 /* VideoAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAdapterDelegate.swift; sourceTree = "<group>"; };
+		62AA15C91FFD3D7E0064A063 /* VideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
 		62AD0BFB1FE037BF00BEA1F6 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		62AD0BFC1FE0384000BEA1F6 /* sq-AL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sq-AL"; path = "sq-AL.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		62AD0BFF1FE0387F00BEA1F6 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -701,6 +710,8 @@
 				0E48F9D21FDF150700D6CC08 /* ContactRequestManager.swift */,
 				0E49096B1FEAB225005CAA50 /* CallsAdapterDelegate.swift */,
 				0E49096D1FEAC0DE005CAA50 /* CallsService.swift */,
+				62AA15C21FFC39C80064A063 /* VideoAdapterDelegate.swift */,
+				62AA15C91FFD3D7E0064A063 /* VideoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -736,6 +747,8 @@
 				62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */,
 				0E4909681FEAB156005CAA50 /* CallsAdapter.h */,
 				0E4909691FEAB156005CAA50 /* CallsAdapter.mm */,
+				62AA15BD1FFC366D0064A063 /* VideoAdapter.h */,
+				62AA15BE1FFC36840064A063 /* VideoAdapter.mm */,
 			);
 			path = Bridging;
 			sourceTree = "<group>";
@@ -1579,10 +1592,12 @@
 				1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
+				62AA15BF1FFC36840064A063 /* VideoAdapter.mm in Sources */,
 				1A2D18C11F29180700B2C785 /* AccountConfigModel.swift in Sources */,
 				1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */,
 				5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */,
 				1ABE07D31F0D8FE800D36361 /* Storyboards.swift in Sources */,
+				62AA15CA1FFD3D7E0064A063 /* VideoService.swift in Sources */,
 				0EDE34C71F868E1200FFA15C /* EditProfileViewController.swift in Sources */,
 				62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */,
 				0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */,
@@ -1616,6 +1631,7 @@
 				1A2D18FF1F29352D00B2C785 /* MeViewModel.swift in Sources */,
 				62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */,
 				1A2D18B71F29164700B2C785 /* SmartlistViewModel.swift in Sources */,
+				62AA15C31FFC39C80064A063 /* VideoAdapterDelegate.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				56BBC9A31ED714DF00CDAF8B /* ConversationsService.swift in Sources */,
 				0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */,
