@@ -27,7 +27,7 @@ extension NotificationCenter {
             .from([
                 NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillShow)
                     .map { notification -> CGFloat in
-                        (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                        return (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
                 },
                 NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide)
                     .map { _ -> CGFloat in
