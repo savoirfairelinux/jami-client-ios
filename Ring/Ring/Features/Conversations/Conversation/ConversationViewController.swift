@@ -64,7 +64,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
          or disappears
          */
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
@@ -79,7 +79,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.tableView.contentInset.bottom = keyboardHeight
         self.tableView.scrollIndicatorInsets.bottom = keyboardHeight
 
-        self.scrollToBottom(animated: true)
+        self.scrollToBottom(animated: false)
         self.updateBottomOffset()
     }
 
