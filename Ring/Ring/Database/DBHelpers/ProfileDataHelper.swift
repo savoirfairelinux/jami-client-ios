@@ -136,4 +136,29 @@ final class ProfileDataHelper {
         }
         return nil
     }
+
+    func insertOrUpdateProfile(item: Profile) throws {
+        guard let dataBase = RingDB.instance.ringDB else {
+            throw DataAccessError.datastoreConnectionError
+        }
+        try dataBase.transaction {
+            let selectQuery = table.filter(uri == item.uri)
+            let rows = try dataBase.run(selectQuery.update(alias <- item.alias,
+                                                           photo <- item.photo,
+                                                           status <- item.status))
+            if rows > 0 {
+                return
+            }
+            let insertQuery = table.insert(uri <- item.uri,
+                                           alias <- item.alias,
+                                           photo <- item.photo,
+                                           type <- item.type,
+                                           status <- item.status)
+            let rowId = try dataBase.run(insertQuery)
+            guard rowId > 0 else {
+                throw DataAccessError.databaseError
+            }
+            return
+        }
+    }
 }

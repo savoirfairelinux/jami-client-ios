@@ -105,4 +105,23 @@ class VCardUtils {
             return path
         }
     }
+
+    class func getName(from vCard: CNContact?) -> String {
+        guard let vCard = vCard else {
+            return ""
+        }
+        var name = ""
+
+        if !vCard.givenName.isEmpty {
+            name = vCard.givenName
+        }
+
+        if !vCard.familyName.isEmpty {
+            if !name.isEmpty {
+                name += " "
+            }
+            name += vCard.familyName
+        }
+        return name
+    }
 }
