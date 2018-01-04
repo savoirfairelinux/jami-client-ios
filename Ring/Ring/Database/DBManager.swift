@@ -413,6 +413,17 @@ class DBManager {
         return self.interactionHepler.insertIfNotExist(item: interaction)
     }
 
+    func createOrUpdateRingPrifile(profileUri: String, alias: String?, image: String?, status: ProfileStatus) -> Bool {
+        let profile = Profile(defaultID, profileUri, alias, image, ProfileType.ring.rawValue,
+                              status.rawValue)
+        do {
+            try self.profileHepler.insertOrUpdateProfile(item: profile)
+        } catch {
+            return  false
+        }
+        return true
+    }
+
     private func getProfile(for profileUri: String, createIfNotExists: Bool) throws -> Profile? {
         if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
             return profile

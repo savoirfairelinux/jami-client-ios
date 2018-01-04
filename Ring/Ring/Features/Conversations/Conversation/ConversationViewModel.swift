@@ -81,15 +81,21 @@ class ConversationViewModel: ViewModel {
 
             let contact = self.contactsService.contact(withRingId: contactRingId)
 
-            self.contactsService.loadVCard(forContactWithRingId: contactRingId)
-                .subscribe(onSuccess: { vCard in
-                    guard let imageData = vCard.imageData else {
-                        self.log.warning("vCard for ringId: \(contactRingId) has no image")
-                        return
-                    }
-                    self.profileImageData = imageData
-                })
-                .disposed(by: self.disposeBag)
+            if let profile = conversation.value.participantProfile, let photo =  profile.photo {
+                if let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    self.profileImageData = data
+                }
+            } else {
+                self.contactsService.loadVCard(forContactWithRingId: contactRingId)
+                    .subscribe(onSuccess: { vCard in
+                        guard let imageData = vCard.imageData else {
+                            self.log.warning("vCard for ringId: \(contactRingId) has no image")
+                            return
+                        }
+                        self.profileImageData = imageData
+                    })
+                    .disposed(by: self.disposeBag)
+            }
 
             // invite and block buttons
             if let contact = contact {
