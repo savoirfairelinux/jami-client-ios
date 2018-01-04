@@ -43,6 +43,7 @@ class ContactsService {
 
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
+    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
 
     init(withContactsAdapter contactsAdapter: ContactsAdapter) {
         self.contactsAdapter = contactsAdapter
@@ -105,6 +106,16 @@ class ContactsService {
             let success = self.contactsAdapter.acceptTrustRequest(fromContact: contactRequest.ringId,
                                                                   withAccountId: account.id)
             if success {
+                var stringImage: String?
+                if let vCard = contactRequest.vCard, let image = vCard.imageData {
+                    stringImage = image.base64EncodedString()
+                }
+                let name = VCardUtils.getName(from: contactRequest.vCard)
+                _ = self.dbManager
+                    .createOrUpdateRingProfile(profileUri: contactRequest.ringId,
+                                               alias: name,
+                                               image: stringImage,
+                                               status: ProfileStatus.trusted)
                 var event = ServiceEvent(withEventType: .contactAdded)
                 event.addEventInput(.accountId, value: account.id)
                 event.addEventInput(.state, value: true)
@@ -202,7 +213,7 @@ extension ContactsService: ContactsAdapterDelegate {
             vCard = nil
             log.error("Unable to parse the vCard :\(error)")
         }
-
+        
         //Update trust request list
         if self.contactRequest(withRingId: senderAccount) == nil {
             let contactRequest = ContactRequestModel(withRingId: senderAccount,
