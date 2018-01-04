@@ -79,15 +79,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         self.presenceService.subscribeBuddy(withAccountId: (self.accountsService.currentAccount?.id)!,
                                             withUri: item.contactRequest.ringId,
                                             withFlag: true)
-
-        if let vCard = item.contactRequest.vCard {
-            let saveVCardCompleted = self.contactsService.saveVCard(vCard: vCard, forContactWithRingId: item.contactRequest.ringId)
-            return Observable<Void>.zip(acceptCompleted, saveVCardCompleted) { _, _ in
-                return
-            }
-        } else {
-            return acceptCompleted.asObservable()
-        }
+        return acceptCompleted.asObservable()
     }
 
     func discard(withItem item: ContactRequestItem) -> Observable<Void> {
