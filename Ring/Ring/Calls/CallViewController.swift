@@ -42,14 +42,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.setupBindings()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     func setupUI() {
         self.cancelButton.backgroundColor = UIColor.red
     }
@@ -63,7 +55,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }).disposed(by: self.disposeBag)
 
         //Data bindings
-        self.viewModel.contactImageData.subscribeOn(MainScheduler.instance).subscribe(onNext: { dataOrNil in
+        self.viewModel.contactImageData.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { dataOrNil in
             if let imageData = dataOrNil {
                 if let image = UIImage(data: imageData) {
                     self.profileImageView.image = image
@@ -71,7 +65,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             }
         }).disposed(by: self.disposeBag)
 
-        self.viewModel.dismisVC.subscribeOn(MainScheduler.instance).subscribe(onNext: { dismiss in
+        self.viewModel.dismisVC
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { dismiss in
             if dismiss {
                 self.removeFromScreen()
             }
@@ -88,9 +84,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func removeFromScreen() {
-        self.dismiss(animated: false) {
-            print("dismiss")
-        }
+        self.dismiss(animated: false)
     }
-
 }
