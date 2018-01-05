@@ -37,9 +37,40 @@ class CallViewModel: Stateable, ViewModel {
     private let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
 
-     var call: CallModel?
+    var call: CallModel? {
+        didSet {
+            guard let call = self.call else {
+                return
+            }
+            self.contactsService.getProfileForUri(uri: call.participantRingId)
+                .subscribe(onNext: { [unowned self] profile in
+                    self.profileUpdated(profile: profile)
+                })
+                .disposed(by: self.disposeBag)
+
+            self.callService
+                .sharedResponseStream
+                .filter({ (event) in
+                    if let uri: String = event.getEventInput(ServiceEventInput.uri) {
+                        return event.eventType == ServiceEventType.profileUpdated
+                            && uri == call.participantRingId
+                    }
+                    return false
+                })
+                .subscribe(onNext: { [unowned self] _ in
+                    self.contactsService.getProfileForUri(uri: call.participantRingId)
+                        .subscribe(onNext: { profile in
+                            self.profileUpdated(profile: profile)
+                        })
+                        .disposed(by: self.disposeBag)
+                })
+                .disposed(by: disposeBag)
+        }
+    }
 
     // data for ViewCintroller binding
+
+    var contactImageData = Variable<Data?>(nil)
 
     lazy var dismisVC: Observable<Bool> = {
         return callService.currentCall.map({[weak self] call in
@@ -91,6 +122,7 @@ class CallViewModel: Stateable, ViewModel {
             }
         })
     }()
+
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
         self.contactsService = injectionBag.contactsService
@@ -130,6 +162,7 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     func placeCall(with uri: String, userName: String) {
+
         guard let account = self.accountService.currentAccount else {
             return
         }
@@ -138,9 +171,16 @@ class CallViewModel: Stateable, ViewModel {
                                    userName: userName)
             .subscribe(onSuccess: { [unowned self] callModel in
                 self.call = callModel
-                self.log.info("Call placed: \(callModel.callId)")
-                }, onError: { [unowned self] error in
-                    self.log.error("Failed to place the call")
             }).disposed(by: self.disposeBag)
+    }
+
+    func profileUpdated(profile: Profile) {
+        guard let photo = profile.photo else {
+            return
+        }
+        guard let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? else {
+            return
+        }
+        self.contactImageData.value = data
     }
 }
