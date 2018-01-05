@@ -25,7 +25,51 @@ import Contacts
 
 class CallViewModel: Stateable, ViewModel {
 
-    var call: CallModel?
+    var call: CallModel? {
+        didSet {
+            self.contactsService.getProfileForUri(uri: (self.call?.fromRingId)!)
+                .subscribe(onNext: { [weak self] profile in
+                    if let photo = profile.photo {
+                        if let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                            self?.contactImageData.value = data
+                        }
+                    }
+                })
+                .disposed(by: self.disposeBag)
+            self.callService
+                .sharedResponseStream
+                .filter({ [unowned self] (event) in
+                    if let uri: String = event.getEventInput(ServiceEventInput.uri) {
+                        if let call = self.call {
+                        let calURI = call.fromRingId
+                        if uri == calURI {
+                            if event.eventType == ServiceEventType.profileUpdated {
+                                return true
+                            }
+                        }
+                        }
+                    }
+//                    return event.eventType == ServiceEventType.profileUpdated
+//                    &&
+//                        uri == self.call?.fromRingId
+//                    }
+                    return false
+                })
+                .subscribe(onNext: { [unowned self] _ in
+
+                    self.contactsService.getProfileForUri(uri: (self.call?.fromRingId)!)
+                        .subscribe(onNext: { [weak self] profile in
+                            if let photo = profile.photo {
+                                if let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                                    self?.contactImageData.value = data
+                                }
+                            }
+                        })
+                        .disposed(by: self.disposeBag)
+                })
+                .disposed(by: disposeBag)
+        }
+    }
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
@@ -35,12 +79,18 @@ class CallViewModel: Stateable, ViewModel {
     fileprivate let accountService: AccountsService
     private let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
+    var contactImageData = Variable<Data?>(nil)
 
-    lazy var contactImageData: Observable<Data?> = {
-        return callService.receivedVCard.asObservable().map({ vCard in
-            return vCard.imageData
-        })
-    }()
+//    lazy var contactImageData: Observable<Data?> = {
+//        return callService.receivedVCard.asObservable().map({ profile in
+//            if let photo = profile.photo {
+//                if let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+//                    return  data
+//                }
+//            }
+//            return nil
+//        })
+//    }()
     lazy var dismisVC: Observable<Bool> = {
         return callService.currentCall.map({call in
             return call.state == .over || call.state == .failure && call.callId == self.call?.callId
@@ -118,10 +168,20 @@ class CallViewModel: Stateable, ViewModel {
     func placeCall(with uri: String, userName: String) {
         self.callService.placeCall(withAccount: self.accountService.currentAccount!, toRingId: uri, userName: userName)
             .subscribe(onSuccess: { [unowned self] callModel in
+                callModel.fromRingId = uri
                 self.call = callModel
-                self.log.info("Call placed: \(callModel.callId)")
-                }, onError: { [unowned self] error in
-                    self.log.error("Failed to place the call")
+//                self.contactsService.getProfileForUri(uri: uri)
+//                    .subscribe(onNext: { [weak self] profile in
+//                        if let photo = profile.photo {
+//                            if let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+//                                self?.contactImageData.value = data
+//                            }
+//                        }
+//                    })
+//                    .disposed(by: self.disposeBag)
+//                self.log.info("Call placed: \(callModel.callId)")
+//                }, onError: { [unowned self] error in
+//                    self.log.error("Failed to place the call")
             }).disposed(by: self.disposeBag)
     }
 }

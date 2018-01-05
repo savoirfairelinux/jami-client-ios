@@ -40,14 +40,19 @@ class CallsService: CallsAdapterDelegate {
 
     fileprivate var calls = [String: CallModel]()
     fileprivate var base64VCard = [Int: String]() //The key is the vCard part number...
-    fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard"
+    fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
 
     let currentCall = ReplaySubject<CallModel>.create(bufferSize: 1)
     let newIncomingCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
-    let receivedVCard = PublishSubject<CNContact>()
+    //let receivedVCard = PublishSubject<Profile>()
+    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
+    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    var sharedResponseStream: Observable<ServiceEvent>
 
     init(withCallsAdapter callsAdapter: CallsAdapter) {
         self.callsAdapter = callsAdapter
+        self.responseStream.disposed(by: disposeBag)
+        self.sharedResponseStream = responseStream.share()
         CallsAdapter.delegate = self
     }
 
@@ -123,6 +128,7 @@ class CallsService: CallsAdapterDelegate {
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
                 call.update(withDictionary: callDictionary)
                 call.callId = callId
+                call.accountId = account.id
                 self.currentCall.onNext(call)
                 self.calls[callId] = call
                 single(.success(call))
@@ -150,6 +156,10 @@ class CallsService: CallsAdapterDelegate {
 
             //Update the call
             call?.state = CallState(rawValue: state)!
+            if call?.state == .ringing {
+                let accountID = call?.accountId
+                self.sendVCard(callID: callId, accountID: accountID!)
+            }
 
             //Emit the call to the observers
             self.currentCall.onNext(call!)
@@ -160,6 +170,47 @@ class CallsService: CallsAdapterDelegate {
                 self.calls[callId] = nil
             }
         }
+    }
+
+    func sendVCard(callID: String, accountID: String) {
+
+        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue) .subscribe(onSuccess: { [unowned self] card in
+            do {
+                let vCard = card
+                let vCardData = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000)
+                var vCardString = String(data: vCardData, encoding: String.Encoding.utf8) as String!
+                var vcardLength = vCardString!.count
+                let chunkSize = 1024
+                let chinkKey = Int64(arc4random_uniform(10000000))
+                let total = vcardLength / chunkSize + (((vcardLength % chunkSize) == 0) ? 0 : 1)
+                var i = 1
+                while vcardLength > 0 {
+                    var chink = [String: String]()
+                    let id = "id=" + "\(chinkKey)" + ","
+                    let part = "part=" + "\(i)" + ","
+                    let of = "of=" + "\(total)"
+                    let key = self.ringVCardMIMEType + id + part + of
+                    if vcardLength >= chunkSize {
+                        let body = String(vCardString!.prefix(chunkSize))
+                        let index = vCardString!.index(vCardString!.startIndex, offsetBy: (chunkSize))
+                        vCardString = String(vCardString!.suffix(from: index))
+                        vcardLength = vCardString!.count
+                        chink[key] = body
+                    } else {
+                        vcardLength = 0
+                        chink[key] = vCardString
+                    }
+                    i += 1
+                    self.sendChunk(callID: callID, message: chink, accountId: accountID)
+                }
+            } catch {
+
+            }
+        }).disposed(by: disposeBag)
+    }
+
+    func sendChunk(callID: String, message: [String: String], accountId: String) {
+        self.callsAdapter.sendTextMessage(withCallID: callID, message: message, accountId: accountId, sMixed: true)
     }
 
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String]) {
@@ -196,10 +247,30 @@ class CallsService: CallsAdapterDelegate {
                 //Create the vCard and emit it or throw an error
                 do {
                     if let vCard = try CNContactVCardSerialization.contacts(with: vCardData).first {
-                        self.receivedVCard.onNext(vCard)
+                        let name = VCardUtils.getName(from: vCard)
+                        var stringImage: String?
+                        if let image = vCard.imageData {
+                            stringImage = image.base64EncodedString()
+                        }
+                        let uri = uri.replacingOccurrences(of: "@ring.dht", with: "")
+                        _ = self.dbManager
+                            .createOrUpdateRingPrifile(profileUri: uri,
+                                                       alias: name,
+                                                       image: stringImage,
+                                                       status: ProfileStatus.untrasted)
+                        var event = ServiceEvent(withEventType: .profileUpdated)
+                        event.addEventInput(.uri, value: uri)
+                        self.responseStream.onNext(event)
+//                        self.dbManager.profileObservable(for: uri, createIfNotExists: false)
+//                            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+//                            .subscribe(onNext: { [weak self] profile in
+//                                self?.receivedVCard.onNext(profile)
+//                            })
+//                            .disposed(by: self.disposeBag)
+
                     }
                 } catch {
-                    self.receivedVCard.onError(error)
+                    //self.receivedVCard.onError(error)
                 }
             }
         }

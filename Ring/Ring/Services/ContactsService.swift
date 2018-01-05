@@ -295,4 +295,9 @@ extension ContactsService: ContactsAdapterDelegate {
         let vCard = VCardUtils.loadVCard(named: ringID, inFolder: VCardFolders.contacts.rawValue, contactService: self)
         return vCard
     }
+
+    func getProfileForUri(uri: String) ->Observable<Profile> {
+        return self.dbManager.profileObservable(for: uri, createIfNotExists: false)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+    }
 }

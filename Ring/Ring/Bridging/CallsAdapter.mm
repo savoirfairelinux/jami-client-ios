@@ -161,6 +161,10 @@ static id <CallsAdapterDelegate> _delegate;
     return [NSString stringWithUTF8String:callId.c_str()];
 }
 
+- (void)sendTextMessageWithCallID:(NSString*)callId message:(NSDictionary*)message accountId:(NSString*)accountId sMixed:(bool)isMixed {
+    sendTextMessage(std::string([callId UTF8String]), [Utils dictionnaryToMap:message], std::string([accountId UTF8String]), isMixed);
+}
+
 - (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId {
     std::map<std::string, std::string> callDetails = getCallDetails(std::string([callId UTF8String]));
     return [Utils mapToDictionnary:callDetails];

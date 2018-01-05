@@ -63,7 +63,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }).disposed(by: self.disposeBag)
 
         //Data bindings
-        self.viewModel.contactImageData.subscribeOn(MainScheduler.instance).subscribe(onNext: { dataOrNil in
+        self.viewModel.contactImageData.asObservable()
+            .subscribeOn(MainScheduler.instance)
+            .subscribe(onNext: { dataOrNil in
             if let imageData = dataOrNil {
                 if let image = UIImage(data: imageData) {
                     self.profileImageView.image = image
