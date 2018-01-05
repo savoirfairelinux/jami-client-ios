@@ -31,7 +31,6 @@ enum VCardFiles: String {
     case myProfile
 }
 class VCardUtils {
-
     class func saveVCard(vCard: CNContact, withName name: String, inFolder folder: String) -> Observable<Void> {
         return Observable.create { observable in
             if let directoryURL = VCardUtils.getFilePath(forFile: name, inFolder: folder, createIfNotExists: true) {
@@ -123,5 +122,41 @@ class VCardUtils {
             name += vCard.familyName
         }
         return name
+    }
+
+    class func sendVCard(card: CNContact, callID: String, accountID: String, sender: CallsService) {
+        do {
+            let vCard = card
+            let vCardData = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000)
+            guard var vCardString = String(data: vCardData, encoding: String.Encoding.utf8) else {
+                return
+            }
+            var vcardLength = vCardString.count
+            let chunkSize = 1024
+            let chinkKey = Int64(arc4random_uniform(10000000))
+            let total = vcardLength / chunkSize + (((vcardLength % chunkSize) == 0) ? 0 : 1)
+            var i = 1
+            while vcardLength > 0 {
+                var chink = [String: String]()
+                let id = "id=" + "\(chinkKey)" + ","
+                let part = "part=" + "\(i)" + ","
+                let of = "of=" + "\(total)"
+                let key = "x-ring/ring.profile.vcard;" + id + part + of
+                if vcardLength >= chunkSize {
+                    let body = String(vCardString.prefix(chunkSize))
+                    let index = vCardString.index(vCardString.startIndex, offsetBy: (chunkSize))
+                    vCardString = String(vCardString.suffix(from: index))
+                    vcardLength = vCardString.count
+                    chink[key] = body
+                } else {
+                    vcardLength = 0
+                    chink[key] = vCardString
+                }
+                i += 1
+                sender.sendChunk(callID: callID, message: chink, accountId: accountID)
+            }
+        } catch {
+            print(error)
+        }
     }
 }
