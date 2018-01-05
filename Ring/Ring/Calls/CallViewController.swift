@@ -56,6 +56,17 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }).disposed(by: self.disposeBag)
 
         //Data bindings
+
+        self.viewModel.contactImageData.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] dataOrNil in
+            if let imageData = dataOrNil {
+                if let image = UIImage(data: imageData) {
+                    self?.profileImageView.image = image
+                }
+            }
+        }).disposed(by: self.disposeBag)
+
         self.viewModel.dismisVC
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] dismiss in
@@ -83,5 +94,4 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func removeFromScreen() {
         self.dismiss(animated: false)
     }
-
 }
