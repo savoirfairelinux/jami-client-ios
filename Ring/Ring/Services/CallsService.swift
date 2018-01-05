@@ -32,6 +32,11 @@ enum CallServiceError: Error {
     case placeCallFailed
 }
 
+struct Base64VCard {
+    var data: [Int: String] //The key is the number of vCard part
+    var partsReceived: Int
+}
+
 class CallsService: CallsAdapterDelegate {
 
     fileprivate let disposeBag = DisposeBag()
@@ -39,14 +44,21 @@ class CallsService: CallsAdapterDelegate {
     fileprivate let log = SwiftyBeaver.self
 
     fileprivate var calls = [String: CallModel]()
-    fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard"
+
+    fileprivate var base64VCards = [Int: Base64VCard]() //The key is the vCard id
+    fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
 
     let currentCall = ReplaySubject<CallModel>.create(bufferSize: 1)
     let newCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
-
+    //let receivedVCard = PublishSubject<Profile>()
+    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
+    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    var sharedResponseStream: Observable<ServiceEvent>
 
     init(withCallsAdapter callsAdapter: CallsAdapter) {
         self.callsAdapter = callsAdapter
+        self.responseStream.disposed(by: disposeBag)
+        self.sharedResponseStream = responseStream.share()
         CallsAdapter.delegate = self
     }
 
@@ -115,13 +127,14 @@ class CallsService: CallsAdapterDelegate {
         //Create and emit the call
         let call = CallModel(withCallId: ringId, callDetails: [String: String]())
         call.state = .connecting
-        call.registeredName = userName
+       // call.registeredName = userName
         return Single<CallModel>.create(subscribe: { single in
             if let callId = self.callsAdapter.placeCall(withAccountId: account.id,
                                                         toRingId: "ring:\(ringId)"),
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
                 call.update(withDictionary: callDictionary)
                 call.callId = callId
+               // call.accountId = account.id
                 self.currentCall.onNext(call)
                 self.calls[callId] = call
                 single(.success(call))
@@ -149,6 +162,10 @@ class CallsService: CallsAdapterDelegate {
 
             //Update the call
             call?.state = CallState(rawValue: state)!
+            if call?.state == .ringing {
+                let accountID = call?.accountId
+                self.sendVCard(callID: callId, accountID: accountID!)
+            }
 
             //Emit the call to the observers
             self.currentCall.onNext(call!)
@@ -161,8 +178,109 @@ class CallsService: CallsAdapterDelegate {
         }
     }
 
+    func sendVCard(callID: String, accountID: String) {
+        if accountID.isEmpty || callID.isEmpty {
+            return
+        }
+        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
+                             inFolder: VCardFolders.profile.rawValue)
+            .subscribe(onSuccess: { [unowned self] card in
+                VCardUtils.sendVCard(card: card,
+                                     callID: callID,
+                                     accountID: accountID,
+                                     sender: self)
+            }).disposed(by: disposeBag)
+    }
+
+    func sendChunk(callID: String, message: [String: String], accountId: String) {
+        self.callsAdapter.sendTextMessage(withCallID: callID,
+                                          message: message,
+                                          accountId: accountId,
+                                          sMixed: true)
+    }
+
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String]) {
 
+        if let vCardKey = message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first {
+
+            //Parse the key to get the number of parts and the current part number
+            let components = vCardKey.components(separatedBy: ",")
+
+            guard let partComponent = components.filter({$0.hasPrefix("part=")}).first else {
+                return
+            }
+
+            guard let ofComponent = components.filter({$0.hasPrefix("of=")}).first else {
+                return
+            }
+
+            guard let idComponent = components.filter({$0.hasPrefix("x-ring/ring.profile.vcard;id=")}).first else {
+                return
+            }
+
+            guard let part = Int(partComponent.components(separatedBy: "=")[1]) else {
+                return
+            }
+
+            guard let of = Int(ofComponent.components(separatedBy: "=")[1]) else {
+                return
+            }
+
+            guard let id = Int(idComponent.components(separatedBy: "=")[1]) else {
+                return
+            }
+            var numberOfReceivedChunk = 1
+            if var chunk = self.base64VCards[id] {
+                chunk.data[part] = message[vCardKey]
+                chunk.partsReceived += 1
+                numberOfReceivedChunk = chunk.partsReceived
+                self.base64VCards[id] = chunk
+            } else {
+                let partMessage = message[vCardKey]
+                let data: [Int: String] = [part: partMessage!]
+                let chunk = Base64VCard(data: data, partsReceived: numberOfReceivedChunk)
+                self.base64VCards[id] = chunk
+            }
+
+            //Emit the vCard when all data are appended
+            if of == numberOfReceivedChunk {
+                guard let vcard = self.base64VCards[id] else {
+                    return
+                }
+
+                let vCardChunks = vcard.data
+
+                //Append data from sorted part numbers
+                var vCardData = Data()
+                for currentPartNumber in vCardChunks.keys.sorted() {
+                    if let currentData = vCardChunks[currentPartNumber]?.data(using: String.Encoding.utf8) {
+                        vCardData.append(currentData)
+                    }
+                }
+
+                //Create the vCard, save and db and emite an event
+                do {
+                    if let vCard = try CNContactVCardSerialization.contacts(with: vCardData).first {
+                        let name = VCardUtils.getName(from: vCard)
+                        var stringImage: String?
+                        if let image = vCard.imageData {
+                            stringImage = image.base64EncodedString()
+                        }
+                        let uri = uri.replacingOccurrences(of: "@ring.dht", with: "")
+                        _ = self.dbManager
+                            .createOrUpdateRingProfile(profileUri: uri,
+                                                       alias: name,
+                                                       image: stringImage,
+                                                       status: ProfileStatus.untrasted)
+                        var event = ServiceEvent(withEventType: .profileUpdated)
+                        event.addEventInput(.uri, value: uri)
+                        self.responseStream.onNext(event)
+                    }
+                } catch {
+                   self.log.error(error)
+                }
+            }
+        }
     }
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String) {

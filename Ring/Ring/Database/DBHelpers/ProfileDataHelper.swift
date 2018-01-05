@@ -158,7 +158,6 @@ final class ProfileDataHelper {
             guard rowId > 0 else {
                 throw DataAccessError.databaseError
             }
-            return
         }
     }
 }
