@@ -56,8 +56,14 @@ enum Asset {
   static let device = ImageAsset(name: "device")
   static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   static let icContactPicture = ImageAsset(name: "ic_contact_picture")
+  static let moreSettings = ImageAsset(name: "more_settings")
+  static let muteAudio = ImageAsset(name: "mute_audio")
+  static let muteVideo = ImageAsset(name: "mute_video")
+  static let pauseCall = ImageAsset(name: "pause_call")
   static let ringLogo = ImageAsset(name: "ring_logo")
   static let settingsIcon = ImageAsset(name: "settings_icon")
+  static let stopCall = ImageAsset(name: "stop_call")
+  static let switchCamera = ImageAsset(name: "switch_camera")
 
   // swiftlint:disable trailing_comma
   static let allColors: [ColorAsset] = [
@@ -73,8 +79,14 @@ enum Asset {
     device,
     fallbackAvatar,
     icContactPicture,
+    moreSettings,
+    muteAudio,
+    muteVideo,
+    pauseCall,
     ringLogo,
     settingsIcon,
+    stopCall,
+    switchCamera,
   ]
   // swiftlint:enable trailing_comma
   @available(*, deprecated, renamed: "allImages")
