@@ -22,6 +22,7 @@
 import RxSwift
 import SwiftyBeaver
 import Contacts
+import RxCocoa
 
 class CallViewModel: Stateable, ViewModel {
 
@@ -59,7 +60,7 @@ class CallViewModel: Stateable, ViewModel {
             return hide
         })
     }()
-    lazy var contactName: Observable<String> = {
+    lazy var contactName: Driver<String> = {
         return callService.currentCall.filter({ call in
             return call.state != .over && call.state != .inactive && call.callId == self.call?.callId
         }).map({ call in
@@ -70,9 +71,9 @@ class CallViewModel: Stateable, ViewModel {
             } else {
                 return L10n.Calls.unknown
             }
-        })
+        }).asDriver(onErrorJustReturn: "")
     }()
-    lazy var callDuration: Observable<String> = {
+    lazy var callDuration: Driver<String> = {
         let timer = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
             .takeUntil(self.callService.currentCall.filter { call in call.state == .over &&
                call.callId == self.call?.callId
@@ -85,7 +86,7 @@ class CallViewModel: Stateable, ViewModel {
             return call.state == .current
         }).flatMap({ _ in
             return timer
-        })
+        }).asDriver(onErrorJustReturn: "")
     }()
     lazy var bottomInfo: Observable<String> = {
         return callService.currentCall.map({ call in
@@ -98,6 +99,22 @@ class CallViewModel: Stateable, ViewModel {
             }
         })
     }()
+
+    lazy  var showCallOptions: Observable<Bool> = {
+        return Observable.combineLatest(self.callIsActive, self.screenTapped.asObservable()) {(active, tapped) -> Bool in
+            return active && tapped
+        }
+    }()
+
+    lazy var callIsActive: Observable<Bool> = {
+        self.callService.currentCall.filter({ call in
+            return call.state == .current && call.callId == self.call?.callId
+        }).map({_ in
+            return true
+        })
+    }()
+
+    var screenTapped = BehaviorSubject(value: false)
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
         self.contactsService = injectionBag.contactsService
@@ -135,5 +152,9 @@ class CallViewModel: Stateable, ViewModel {
                 }, onError: { [unowned self] error in
                     self.log.error("Failed to place the call")
             }).disposed(by: self.disposeBag)
+    }
+
+    func respondOnTap() {
+        self.screenTapped.onNext(true)
     }
 }
