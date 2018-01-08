@@ -135,7 +135,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         captureSession.addInput(captureDeviceInput)
         let videoOutput = AVCaptureVideoDataOutput()
-        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "sample buffer"))
+        videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
         guard captureSession.canAddOutput(videoOutput) else {
             throw VideoError.setupOutputDeviceFailed
         }

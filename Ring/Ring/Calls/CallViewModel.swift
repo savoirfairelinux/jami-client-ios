@@ -22,6 +22,7 @@
 import RxSwift
 import SwiftyBeaver
 import Contacts
+import RxCocoa
 
 class CallViewModel: Stateable, ViewModel {
 
@@ -37,17 +38,6 @@ class CallViewModel: Stateable, ViewModel {
     fileprivate let videoService: VideoService
     private let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
-
-    lazy var incomingFrame: Observable<UIImage?> = {
-        return videoService.incomingVideoFrame.asObservable().map({ frame in
-            return frame
-        })
-    }()
-    lazy var capturedFrame: Observable<UIImage?> = {
-        return videoService.capturedVideoFrame.asObservable().map({ frame in
-            return frame
-        })
-    }()
 
     var call: CallModel? {
         didSet {
@@ -84,6 +74,17 @@ class CallViewModel: Stateable, ViewModel {
 
     var contactImageData = Variable<Data?>(nil)
 
+    lazy var incomingFrame: Observable<UIImage?> = {
+        return videoService.incomingVideoFrame.asObservable().map({ frame in
+            return frame
+        })
+    }()
+    lazy var capturedFrame: Observable<UIImage?> = {
+        return videoService.capturedVideoFrame.asObservable().map({ frame in
+            return frame
+        })
+    }()
+
     lazy var dismisVC: Observable<Bool> = {
         return callService.currentCall.map({[weak self] call in
             return call.state == .over || call.state == .failure && call.callId == self?.call?.callId
@@ -92,7 +93,7 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var contactName: Observable<String> = {
+    lazy var contactName: Driver<String> = {
         return callService.currentCall.filter({ [weak self] call in
             return call.state != .over && call.state != .inactive && call.callId == self?.call?.callId
         }).map({ call in
@@ -103,10 +104,10 @@ class CallViewModel: Stateable, ViewModel {
             } else {
                 return L10n.Calls.unknown
             }
-        })
+        }).asDriver(onErrorJustReturn: "")
     }()
 
-    lazy var callDuration: Observable<String> = {
+    lazy var callDuration: Driver<String> = {
         let timer = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
             .takeUntil(self.callService.currentCall
                 .filter { [weak self] call in
@@ -120,7 +121,7 @@ class CallViewModel: Stateable, ViewModel {
             return call.state == .current
         }).flatMap({ _ in
             return timer
-        })
+        }).asDriver(onErrorJustReturn: "")
     }()
 
     lazy var bottomInfo: Observable<String> = {
@@ -134,6 +135,22 @@ class CallViewModel: Stateable, ViewModel {
             }
         })
     }()
+
+    lazy  var showCallOptions: Observable<Bool> = {
+        return Observable.combineLatest(self.callIsActive, self.screenTapped.asObservable()) {(active, tapped) -> Bool in
+            return active && tapped
+        }
+    }()
+
+    lazy var callIsActive: Observable<Bool> = {
+        self.callService.currentCall.filter({ call in
+            return call.state == .current && call.callId == self.call?.callId
+        }).map({_ in
+            return true
+        })
+    }()
+
+    var screenTapped = BehaviorSubject(value: false)
 
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
@@ -159,8 +176,6 @@ class CallViewModel: Stateable, ViewModel {
                     self?.log.error("Failed to cancel the call")
             }).disposed(by: self.disposeBag)
     }
-
-
 
     func answerCall() {
         guard let call = self.call else {
@@ -195,5 +210,9 @@ class CallViewModel: Stateable, ViewModel {
             return
         }
         self.contactImageData.value = data
+    }
+
+    func respondOnTap() {
+        self.screenTapped.onNext(true)
     }
 }
