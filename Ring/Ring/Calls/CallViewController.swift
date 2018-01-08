@@ -27,13 +27,31 @@ import SwiftyBeaver
 
 class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var infoBottomLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var incomingVideo: UIImageView!
-    @IBOutlet weak var capturedVideo: UIImageView!
+    //preview screen
+    @IBOutlet private weak var profileImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var durationLabel: UILabel!
+    @IBOutlet private weak var infoBottomLabel: UILabel!
+
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var mainView: UIView!
+
+    //video screen
+    @IBOutlet private weak var callView: UIView!
+    @IBOutlet private weak var incomingVideo: UIImageView!
+    @IBOutlet private weak var capturedVideo: UIImageView!
+    @IBOutlet private weak var infoContainer: UIView!
+    @IBOutlet private weak var callProfileImage: UIImageView!
+    @IBOutlet private weak var callNameLabel: UILabel!
+    @IBOutlet private weak var callInfoTimerLabel: UILabel!
+    @IBOutlet private weak var infoLabelConstraint: NSLayoutConstraint!
+
+    // call options buttons
+    @IBOutlet private weak var buttonsContainer: UIView!
+    @IBOutlet private weak var muteAudioButton: UIButton!
+    @IBOutlet private weak var muteVideoButton: UIButton!
+    @IBOutlet private weak var pauseCallButton: UIButton!
+    @IBOutlet private weak var switchCameraButton: UIButton!
 
     var viewModel: CallViewModel!
 
@@ -41,18 +59,23 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     private let log = SwiftyBeaver.self
 
+    private var task: DispatchWorkItem?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTaped))
+        self.mainView.addGestureRecognizer(tapGestureRecognizer)
         self.setupUI()
         self.setupBindings()
     }
 
     func setupUI() {
         self.cancelButton.backgroundColor = UIColor.red
+        self.infoContainer.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.buttonsContainer.backgroundColor = UIColor.black.withAlphaComponent(0.3)
     }
 
     func setupBindings() {
-
         //Cancel button action
         self.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -61,13 +84,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }).disposed(by: self.disposeBag)
 
         //Data bindings
-
         self.viewModel.contactImageData.asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] dataOrNil in
             if let imageData = dataOrNil {
                 if let image = UIImage(data: imageData) {
                     self?.profileImageView.image = image
+                    self?.callProfileImage.image = image
                 }
             }
         }).disposed(by: self.disposeBag)
@@ -80,23 +103,93 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             }
         }).disposed(by: self.disposeBag)
 
-        self.viewModel.contactName
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.nameLabel.rx.text)
+        self.viewModel.contactName.drive(self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
 
-        self.viewModel.callDuration
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.durationLabel.rx.text)
+        self.viewModel.contactName.drive(self.callNameLabel.rx.text)
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.callDuration.drive(self.durationLabel.rx.text)
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.callDuration.drive(self.callInfoTimerLabel.rx.text)
             .disposed(by: self.disposeBag)
 
         self.viewModel.bottomInfo
             .observeOn(MainScheduler.instance)
             .bind(to: self.infoBottomLabel.rx.text)
             .disposed(by: self.disposeBag)
+
+        self.viewModel.incomingFrame
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] frame in
+            if let image = frame {
+                DispatchQueue.main.async {
+                    self?.callView.isHidden = false
+                    self?.incomingVideo.image = image
+                }
+            }
+        }).disposed(by: self.disposeBag)
+
+        self.viewModel.capturedFrame
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] frame in
+            if let image = frame {
+                DispatchQueue.main.async {
+                    self?.capturedVideo.image = image
+                }
+            }
+        }).disposed(by: self.disposeBag)
+
+        self.viewModel.showCallOptions
+            .subscribeOn(MainScheduler.instance)
+            .subscribe(onNext: { show in
+                if show {
+                    self.showContactInfo()
+                }
+            }).disposed(by: self.disposeBag)
     }
 
     func removeFromScreen() {
         self.dismiss(animated: false)
+    }
+
+    @objc func screenTaped() {
+        self.viewModel.respondOnTap()
+    }
+
+    func showContactInfo() {
+        if !self.infoContainer.isHidden {
+            task?.cancel()
+            self.hideContactInfo()
+            return
+        }
+
+        self.infoLabelConstraint.constant = -200.00
+        self.buttonsContainer.isHidden = false
+        self.infoContainer.isHidden = false
+        self.view.layoutIfNeeded()
+
+        UIView.animate(withDuration: 0.2, delay: 0.0,
+                       options: .curveEaseOut,
+                       animations: { [weak self] in
+            self?.infoLabelConstraint.constant = 0.00
+            self?.view.layoutIfNeeded()
+        }, completion: nil)
+
+        task = DispatchWorkItem { self.hideContactInfo() }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: task!)
+    }
+
+    func hideContactInfo() {
+        UIView.animate(withDuration: 0.2, delay: 0.00,
+                       options: .curveEaseOut,
+                       animations: { [weak self] in
+            self?.infoLabelConstraint.constant = -200.00
+            self?.view.layoutIfNeeded()
+        }, completion: { [weak self] _ in
+            self?.infoContainer.isHidden = true
+            self?.buttonsContainer.isHidden = true
+        })
     }
 }
