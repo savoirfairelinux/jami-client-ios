@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5a3f45e8_a03d14be",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-01-09T18:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a3f45e8_fd2ea7a4",
+      "range": {
+        "startLine": 416,
+        "startChar": 9,
+        "endLine": 416,
+        "endChar": 34
+      },
+      "revId": "0eec3ec5ded3eebac465174a4bfa1dc9bf3a152f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a3f45e8_bd241fc7",
         "filename": "Ring/Ring/Services/ContactsService.swift",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2018-01-09T16:51:08Z",
       "side": 1,
       "message": "extra space",
+      "revId": "0eec3ec5ded3eebac465174a4bfa1dc9bf3a152f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_004b285a",
+        "filename": "Ring/Ring/Services/ContactsService.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-01-09T18:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a3f45e8_bd241fc7",
       "revId": "0eec3ec5ded3eebac465174a4bfa1dc9bf3a152f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
