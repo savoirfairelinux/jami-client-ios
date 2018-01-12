@@ -167,7 +167,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="RC6-BN-8ID"/>
                                                     <constraint firstAttribute="width" constant="50" id="wXp-ed-p3H"/>
                                                 </constraints>
-                                                <state key="normal" image="mute_video"/>
+                                                <state key="normal" image="video_running"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -187,7 +187,7 @@
                                                     <constraint firstAttribute="width" constant="50" id="KAL-kW-Ak4"/>
                                                     <constraint firstAttribute="height" constant="50" id="guZ-o3-hkm"/>
                                                 </constraints>
-                                                <state key="normal" image="mute_audio"/>
+                                                <state key="normal" image="audio_running"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -326,8 +326,8 @@
                         <outlet property="infoContainer" destination="3RN-4M-qR4" id="CUO-h6-mFf"/>
                         <outlet property="infoLabelConstraint" destination="72y-vN-PbI" id="sGV-5n-H9t"/>
                         <outlet property="mainView" destination="QpJ-Sx-9dG" id="0y9-R4-q5W"/>
-                        <outlet property="muteAudioButton" destination="UHr-JD-OOn" id="nWm-1S-3Im"/>
-                        <outlet property="muteVideoButton" destination="Ezt-ru-2cK" id="NXD-9b-dCI"/>
+                        <outlet property="muteAudioButton" destination="Ezt-ru-2cK" id="0Cf-gc-w9s"/>
+                        <outlet property="muteVideoButton" destination="UHr-JD-OOn" id="ciL-mV-cxA"/>
                         <outlet property="nameLabel" destination="73Y-N1-Yga" id="XcQ-V6-ZrF"/>
                         <outlet property="pauseCallButton" destination="f4r-vz-8h0" id="rqE-oX-VxA"/>
                         <outlet property="profileImageView" destination="fnt-PQ-Q6P" id="MgB-Ev-bTc"/>
@@ -338,30 +338,13 @@
             </objects>
             <point key="canvasLocation" x="-74.400000000000006" y="131.78410794602701"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="zIN-Yk-WAp">
-            <objects>
-                <viewController id="n3h-fo-GaE" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VPJ-zk-yXm"/>
-                        <viewControllerLayoutGuide type="bottom" id="DbS-bx-Lwr"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="htX-h9-kf0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fSK-jF-f8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
+        <image name="audio_running" width="24" height="24"/>
         <image name="ic_contact_picture" width="128" height="128"/>
-        <image name="mute_audio" width="24" height="24"/>
-        <image name="mute_video" width="24" height="24"/>
         <image name="pause_call" width="24" height="24"/>
         <image name="stop_call" width="24" height="24"/>
         <image name="switch_camera" width="24" height="24"/>
+        <image name="video_running" width="24" height="24"/>
     </resources>
 </document>
