@@ -32,6 +32,15 @@ enum CallServiceError: Error {
     case placeCallFailed
 }
 
+enum MediaType: String, CustomStringConvertible {
+    case audio = "MEDIA_TYPE_AUDIO"
+    case video = "MEDIA_TYPE_VIDEO"
+
+    var description: String {
+        return self.rawValue
+    }
+}
+
 struct Base64VCard {
     var data: [Int: String] //The key is the number of vCard part
     var partsReceived: Int
@@ -147,6 +156,41 @@ class CallsService: CallsAdapterDelegate {
         })
     }
 
+    func muteAudio(call callId: String, mute: Bool) {
+        self.callsAdapter
+            .muteMedia(callId,
+                       mediaType: String(describing: MediaType.audio),
+                       muted: mute)
+    }
+
+    func muteVideo(call callId: String, mute: Bool) {
+        self.callsAdapter
+            .muteMedia(callId,
+                       mediaType: String(describing: MediaType.video),
+                       muted: mute)
+    }
+
+    func sendVCard(callID: String, accountID: String) {
+        if accountID.isEmpty || callID.isEmpty {
+            return
+        }
+        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
+                             inFolder: VCardFolders.profile.rawValue)
+            .subscribe(onSuccess: { [unowned self] card in
+                VCardUtils.sendVCard(card: card,
+                                     callID: callID,
+                                     accountID: accountID,
+                                     sender: self)
+            }).disposed(by: disposeBag)
+    }
+
+    func sendChunk(callID: String, message: [String: String], accountId: String) {
+        self.callsAdapter.sendTextMessage(withCallID: callID,
+                                          message: message,
+                                          accountId: accountId,
+                                          sMixed: true)
+    }
+
     // MARK: CallsAdapterDelegate
 
     func didChangeCallState(withCallId callId: String, state: String, stateCode: NSInteger) {
@@ -181,27 +225,6 @@ class CallsService: CallsAdapterDelegate {
                 self.calls[callId] = nil
             }
         }
-    }
-
-    func sendVCard(callID: String, accountID: String) {
-        if accountID.isEmpty || callID.isEmpty {
-            return
-        }
-        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
-                             inFolder: VCardFolders.profile.rawValue)
-            .subscribe(onSuccess: { [unowned self] card in
-                VCardUtils.sendVCard(card: card,
-                                     callID: callID,
-                                     accountID: accountID,
-                                     sender: self)
-            }).disposed(by: disposeBag)
-    }
-
-    func sendChunk(callID: String, message: [String: String], accountId: String) {
-        self.callsAdapter.sendTextMessage(withCallID: callID,
-                                          message: message,
-                                          accountId: accountId,
-                                          sMixed: true)
     }
 
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String]) {
@@ -301,22 +324,32 @@ class CallsService: CallsAdapterDelegate {
             //Emit the call to the observers
             self.newCall.value = call!
         }
-
     }
 
     func newCallStarted(withAccountId accountId: String, callId: String, toURI uri: String) {
-
     }
 
     func callPlacedOnHold(withCallId callId: String, holding: Bool) {
-
+        guard let call = self.calls[callId] else {
+            return
+        }
+        call.peerHolding = holding
+        self.currentCall.onNext(call)
     }
 
-    func muteAudio(call callId: String, mute: Bool) {
-
+    func audioMuted(call callId: String, mute: Bool) {
+        guard let call = self.calls[callId] else {
+            return
+        }
+        call.audioMuted = mute
+        self.currentCall.onNext(call)
     }
 
-    func muteVideo(call callId: String, mute: Bool) {
-
+    func videoMuted(call callId: String, mute: Bool) {
+        guard let call = self.calls[callId] else {
+            return
+        }
+        call.videoMuted = mute
+        self.currentCall.onNext(call)
     }
 }
