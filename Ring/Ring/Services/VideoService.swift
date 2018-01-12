@@ -185,9 +185,30 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 completable(.error(VideoError.switchCameraFailed))
                 return Disposables.create { }
             }
-            self.captureSession.addInput(newVideoInput)
-            self.captureSession.commitConfiguration()
-            completable(.completed)
+            if self.captureSession.canAddInput(newVideoInput) {
+                self.captureSession.addInput(newVideoInput)
+                guard let currentCameraOutput: AVCaptureOutput = self.captureSession.outputs.first else {
+                    completable(.error(VideoError.switchCameraFailed))
+                    return Disposables.create {}
+                }
+                guard let connection = currentCameraOutput.connection(with: AVFoundation.AVMediaType.video) else {
+                    completable(.error(VideoError.switchCameraFailed))
+                    return Disposables.create {}
+                }
+                guard connection.isVideoOrientationSupported else {
+                    completable(.error(VideoError.switchCameraFailed))
+                    return Disposables.create {}
+                }
+                guard connection.isVideoMirroringSupported else {
+                    completable(.error(VideoError.switchCameraFailed))
+                    return Disposables.create {}
+                }
+                connection.videoOrientation = .portrait
+                self.captureSession.commitConfiguration()
+                completable(.completed)
+            } else {
+                completable(.error(VideoError.switchCameraFailed))
+            }
             return Disposables.create { }
         }
     }
@@ -251,6 +272,15 @@ class VideoService: FrameExtractorDelegate {
         } catch {
             self.log.error("Unkonwn error configuring capture device")
         }
+    }
+
+    func switchCamera() {
+        self.camera.switchCamera()
+            .subscribe(onCompleted: {
+            print ("camera switched")
+        }) { (error) in
+            print(error)
+        }.disposed(by: self.disposeBag)
     }
 }
 
