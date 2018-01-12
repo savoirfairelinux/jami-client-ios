@@ -25,6 +25,6 @@
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String)
     func newCallStarted(withAccountId accountId: String, callId: String, toURI uri: String)
     func callPlacedOnHold(withCallId callId: String, holding: Bool)
-    func muteAudio(call callId: String, mute: Bool)
-    func muteVideo(call callId: String, mute: Bool)
+    func audioMuted(call callId: String, mute: Bool)
+    func videoMuted(call callId: String, mute: Bool)
 }
