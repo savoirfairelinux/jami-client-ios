@@ -32,6 +32,15 @@ enum CallServiceError: Error {
     case placeCallFailed
 }
 
+enum MediaType: String, CustomStringConvertible {
+    case audio = "MEDIA_TYPE_AUDIO"
+    case video = "MEDIA_TYPE_VIDEO"
+
+    var description: String {
+        return self.rawValue
+    }
+}
+
 struct Base64VCard {
     var data: [Int: String] //The key is the number of vCard part
     var partsReceived: Int
@@ -102,6 +111,12 @@ class CallsService: CallsAdapterDelegate {
         return Completable.create(subscribe: { completable in
             let success = self.callsAdapter.holdCall(withId: callId)
             if success {
+                if let call = self.calls[callId] {
+                    if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
+                        call.update(withDictionary: callDictionary)
+                        self.currentCall.onNext(call)
+                    }
+                }
                 completable(.completed)
             } else {
                 completable(.error(CallServiceError.holdCallFailed))
@@ -114,6 +129,12 @@ class CallsService: CallsAdapterDelegate {
         return Completable.create(subscribe: { completable in
             let success = self.callsAdapter.unholdCall(withId: callId)
             if success {
+                if let call = self.calls[callId] {
+                    if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
+                        call.update(withDictionary: callDictionary)
+                        self.currentCall.onNext(call)
+                    }
+                }
                 completable(.completed)
             } else {
                 completable(.error(CallServiceError.unholdCallFailed))
@@ -312,11 +333,34 @@ class CallsService: CallsAdapterDelegate {
 
     }
 
-    func muteAudio(call callId: String, mute: Bool) {
+    func audioMuted(call callId: String, mute: Bool) {
+        guard let call = self.calls[callId] else {
+            return
+        }
+        call.audioMuted = mute
+        self.currentCall.onNext(call)
+    }
 
+    func videoMuted(call callId: String, mute: Bool) {
+        guard let call = self.calls[callId] else {
+            return
+        }
+        call.videoMuted = mute
+        self.currentCall.onNext(call)
+    }
+
+    func muteAudio(call callId: String, mute: Bool) {
+        self.callsAdapter
+            .muteMedia(callId,
+                       mediaType: String(describing: MediaType.audio),
+                       muted: mute)
     }
 
     func muteVideo(call callId: String, mute: Bool) {
-
+        self.callsAdapter
+            .muteMedia(callId,
+                       mediaType: String(describing: MediaType.video),
+                       muted: mute)
     }
+
 }

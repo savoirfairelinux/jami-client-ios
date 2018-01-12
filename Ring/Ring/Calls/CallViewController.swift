@@ -76,12 +76,32 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func setupBindings() {
-        //Cancel button action
+        //bind actions
         self.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
             self?.removeFromScreen()
             self?.viewModel.cancelCall()
         }).disposed(by: self.disposeBag)
+
+        self.muteAudioButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.muteAudio()
+            }).disposed(by: self.disposeBag)
+
+        self.muteVideoButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.muteVideo()
+            }).disposed(by: self.disposeBag)
+
+        self.pauseCallButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.pauseCall()
+            }).disposed(by: self.disposeBag)
+
+        self.switchCameraButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.switchCamera()
+            }).disposed(by: self.disposeBag)
 
         //Data bindings
         self.viewModel.contactImageData.asObservable()
@@ -148,6 +168,26 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self.showContactInfo()
                 }
             }).disposed(by: self.disposeBag)
+
+//        self.viewModel.videoButtonState
+//            .subscribeOn(MainScheduler.instance)
+//            .bind(to: self.muteVideoButton.rx.image())
+//            .disposed(by: self.disposeBag)
+//
+//        self.viewModel.videoMuted
+//            .subscribeOn(MainScheduler.instance)
+//            .bind(to: self.capturedVideo.rx.isHidden)
+//            .disposed(by: self.disposeBag)
+//
+//        self.viewModel.audioButtonState
+//            .subscribeOn(MainScheduler.instance)
+//            .bind(to: self.muteAudioButton.rx.image())
+//            .disposed(by: self.disposeBag)
+//
+//        self.viewModel.callPaused
+//            .subscribeOn(MainScheduler.instance)
+//            .bind(to: self.callView.rx.isHidden)
+//            .disposed(by: self.disposeBag)
     }
 
     func removeFromScreen() {
