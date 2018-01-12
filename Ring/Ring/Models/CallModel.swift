@@ -63,6 +63,7 @@ class CallModel {
     var accountId: String = ""
     var audioMuted: Bool = false
     var videoMuted: Bool = false
+    var peerHolding: Bool = false
 
     var stateValue = CallState.unknown.rawValue
     var callTypeValue = CallType.missed.rawValue
@@ -139,6 +140,10 @@ class CallModel {
 
         if let accountId = dictionary[CallDetailKey.accountIdKey.rawValue] {
             self.accountId = accountId
+        }
+
+        if let peerHolding = dictionary[CallDetailKey.peerHoldingKey.rawValue]?.toBool() {
+            self.peerHolding = peerHolding
         }
     }
 }

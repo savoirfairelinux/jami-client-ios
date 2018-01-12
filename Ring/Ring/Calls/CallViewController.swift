@@ -76,12 +76,32 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func setupBindings() {
-        //Cancel button action
+        //bind actions
         self.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
             self?.removeFromScreen()
             self?.viewModel.cancelCall()
         }).disposed(by: self.disposeBag)
+
+        self.muteAudioButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.muteAudio()
+            }).disposed(by: self.disposeBag)
+
+        self.muteVideoButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.muteVideo()
+            }).disposed(by: self.disposeBag)
+
+        self.pauseCallButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.pauseCall()
+            }).disposed(by: self.disposeBag)
+
+        self.switchCameraButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.switchCamera()
+            }).disposed(by: self.disposeBag)
 
         //Data bindings
         self.viewModel.contactImageData.asObservable()
@@ -125,7 +145,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .subscribe(onNext: { [weak self] frame in
             if let image = frame {
                 DispatchQueue.main.async {
-                    self?.callView.isHidden = false
                     self?.incomingVideo.image = image
                 }
             }
@@ -142,12 +161,37 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }).disposed(by: self.disposeBag)
 
         self.viewModel.showCallOptions
-            .subscribeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { show in
                 if show {
                     self.showContactInfo()
                 }
             }).disposed(by: self.disposeBag)
+
+        self.viewModel.videoButtonState
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.muteVideoButton.rx.image())
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.videoMuted
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.capturedVideo.rx.isHidden)
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.audioButtonState
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.muteAudioButton.rx.image())
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.callButtonState
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.pauseCallButton.rx.image())
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.callPaused
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.callView.rx.isHidden)
+            .disposed(by: self.disposeBag)
     }
 
     func removeFromScreen() {
