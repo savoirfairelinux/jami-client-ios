@@ -70,6 +70,12 @@ class CallViewModel: Stateable, ViewModel {
         }
     }
 
+//    lazy var callObservable: Observable<CallModel> = {
+//        return self.callService.currentCall.filter({ call in
+//            return call.callId == self.call?.callId
+//        })
+//    }().share()
+
     // data for ViewCintroller binding
 
     var contactImageData = Variable<Data?>(nil)
@@ -107,20 +113,23 @@ class CallViewModel: Stateable, ViewModel {
         }).asDriver(onErrorJustReturn: "")
     }()
 
+    //let timer: Observable<String>
+
+    lazy var timer = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+        .takeUntil(self.callService.currentCall
+            .filter { call in
+                call.state == .over &&
+                    call.callId == call.callId
+        })
+        .map({ elapsed in
+            return CallViewModel.formattedDurationFrom(interval: elapsed)
+        }).share()
+
     lazy var callDuration: Driver<String> = {
-        let timer = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
-            .takeUntil(self.callService.currentCall
-                .filter { [weak self] call in
-                    call.state == .over &&
-                        call.callId == self?.call?.callId
-            })
-            .map({ elapsed in
-                return CallViewModel.formattedDurationFrom(interval: elapsed)
-            })
         return self.callService.currentCall.filter({ call in
             return call.state == .current
         }).flatMap({ _ in
-            return timer
+            return self.timer
         }).asDriver(onErrorJustReturn: "")
     }()
 
@@ -151,6 +160,57 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     var screenTapped = BehaviorSubject(value: false)
+
+//    lazy var videoButtonState: Observable<UIImage> = {
+//        let onImage = UIImage(asset: Asset.muteVideo)
+//        let offImage = UIImage(asset: Asset.pauseCall)
+//
+//        return self.videoMuted.map({ muted in
+//            if muted {
+//            return offImage!
+//            }
+//            return onImage!
+//        })
+//    }()
+//
+//    lazy var videoMuted: Observable<Bool> = {
+//        return self.callService.currentCall.filter({ call in
+//            call.callId == self.call?.callId && call.state == .current
+//        }).map({call in
+//            return call.videoMuted
+//        })
+//    }().share()
+//
+//    lazy var audioButtonState: Observable<UIImage> = {
+//        let onImage = UIImage(asset: Asset.muteAudio)
+//        let offImage = UIImage(asset: Asset.pauseCall)
+//
+//        return self.videoMuted.map({ muted in
+//            if muted {
+//                return offImage!
+//            }
+//            return onImage!
+//        })
+//    }()
+//
+//    lazy var callPaused: Observable<Bool> = {
+//        return self.callService.currentCall.filter({ call in
+//            call.callId == self.call?.callId
+//        }).map({call in
+//            if  call.state == .current {
+//                return false
+//            }
+//            return true
+//        })
+//        }().share()
+//
+//    lazy var audioMuted: Observable<Bool> = {
+//        return self.callService.currentCall.filter({ call in
+//            call.callId == self.call?.callId && call.state == .current
+//        }).map({call in
+//            return call.audioMuted
+//        })
+//        }().share()
 
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
@@ -214,5 +274,47 @@ class CallViewModel: Stateable, ViewModel {
 
     func respondOnTap() {
         self.screenTapped.onNext(true)
+    }
+
+    // MARK: call options
+    func pauseCall() {
+        guard let call = self.call else {
+            return
+        }
+        if call.state != .hold {
+            self.callService.hold(callId: call.callId)
+                .subscribe(onCompleted: { [weak self] in
+                    self?.log.info("call placed on hold")
+                    }, onError: { [weak self](error) in
+                        self?.log.info(error)
+                }).disposed(by: self.disposeBag)
+        } else {
+            self.callService.unhold(callId: call.callId)
+                .subscribe(onCompleted: { [weak self] in
+                    self?.log.info("call unholded")
+                    }, onError: { [weak self](error) in
+                        self?.log.info(error)
+                }).disposed(by: self.disposeBag)
+        }
+    }
+
+    func muteAudio() {
+        guard let call = self.call else {
+            return
+        }
+        let mute = !call.audioMuted
+        self.callService.muteAudio(call: call.callId, mute: mute)
+    }
+
+    func muteVideo() {
+        guard let call = self.call else {
+            return
+        }
+        let mute = !call.videoMuted
+        self.callService.videoMute(call: call.callId, mute: mute)
+    }
+
+    func switchCamera() {
+        self.videoService.switchCamera()
     }
 }
