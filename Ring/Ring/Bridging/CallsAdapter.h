@@ -37,5 +37,6 @@
 - (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId;
 - (NSArray<NSString*>*)calls;
 - (void) sendTextMessageWithCallID:(NSString*)callId message:(NSDictionary*)message accountId:(NSString*)accountId sMixed:(bool)isMixed;
+- (void) muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted;
 
 @end

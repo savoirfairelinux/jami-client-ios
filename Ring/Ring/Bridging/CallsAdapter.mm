@@ -175,6 +175,18 @@ static id <CallsAdapterDelegate> _delegate;
     return [Utils vectorToArray:calls];
 }
 
+- (void)muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted {
+
+    if ([[NSThread currentThread] isMainThread]) {
+        dispatch_sync(dispatch_queue_create("video queue", nil), ^{
+            muteLocalMedia(std::string([callId UTF8String]), std::string([media UTF8String]), muted);
+        });
+    }
+    else {
+        muteLocalMedia(std::string([callId UTF8String]), std::string([media UTF8String]), muted);
+    }
+}
+
 #pragma mark AccountAdapterDelegate
 
 + (id <CallsAdapterDelegate>)delegate {
