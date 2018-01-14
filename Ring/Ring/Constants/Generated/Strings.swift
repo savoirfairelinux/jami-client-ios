@@ -85,6 +85,11 @@ enum L10n {
     /// Adding account
     static let waitCreateAccountTitle = L10n.tr("Localizable", "createAccount.waitCreateAccountTitle")
   }
+    
+    enum Contactrequest {
+        /// No invitations
+        static let noInvitationsPlaceholder = L10n.tr("Localizable", "contactRequests.noInvitationsPlaceholder")
+    }
 
   enum Createprofile {
     /// Skip to Create Account
@@ -119,6 +124,12 @@ enum L10n {
     static let passwordError = L10n.tr("Localizable", "linkDevice.passwordError")
     /// Link new device
     static let title = L10n.tr("Localizable", "linkDevice.title")
+    /// Ok
+    static let okButton = L10n.tr("Localizable", "linkDevice.okButton")
+    /// Cancel
+    static let cancelButton = L10n.tr("Localizable", "linkDevice.cancelButton")
+    /// Enter Password
+    static let entedPasswordFieldPlaceholder = L10n.tr("Localizable", "linkDevice.entedPasswordFieldPlaceholder")
   }
 
   enum Linktoaccount {
@@ -153,6 +164,8 @@ enum L10n {
     static let userFound = L10n.tr("Localizable", "smartlist.userFound")
     /// Yesterday
     static let yesterday = L10n.tr("Localizable", "smartlist.yesterday")
+    
+    static let enterName = L10n.tr("Localizable", "smartlist.enterName")
   }
 
   enum Welcome {

@@ -32,6 +32,7 @@
 "smartlist.noResults" = "No results";
 "smartlist.noNetworkConnectivity" = "No network connectivity";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.enterName" = "Enter name...";
 
 // Walkthrough
 
@@ -96,6 +97,9 @@
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
 
+//Contact Requests Screen
+"contactRequests.noInvitationsPlaceholder" = "No invitations";
+
 //Link New Device
 "linkDevice.title" = "Link new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
@@ -103,3 +107,6 @@
 "linkDevice.defaultError" = "An error occured during the export";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";
+"linkDevice.cancelButton" = "Ok";
+"linkDevice.cancelButton" = "Cancel";
+"linkDevice.entedPasswordFieldPlaceholder" = "Enter password";

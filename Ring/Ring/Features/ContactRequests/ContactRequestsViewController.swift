@@ -30,7 +30,8 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noInvitationsPlaceholder: UIView!
-
+    @IBOutlet weak var noInvitationsPlaceholderLabel: UILabel!
+    
     fileprivate let disposeBag = DisposeBag()
     fileprivate let cellIdentifier = "ContactRequestCell"
     fileprivate let log = SwiftyBeaver.self
@@ -46,6 +47,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 }
             }).disposed(by: disposeBag)
         self.navigationItem.title = L10n.Global.contactRequestsTabBarTitle
+        self.noInvitationsPlaceholderLabel.text = L10n.Contactrequest.noInvitationsPlaceholder
     }
 
     override func viewWillAppear(_ animated: Bool) {

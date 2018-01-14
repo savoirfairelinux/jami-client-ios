@@ -291,6 +291,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchBar.layer.shadowOpacity = 0.5
         self.searchBar.layer.shadowOffset = CGSize.zero
         self.searchBar.layer.shadowRadius = 2
+        
+        self.searchBar.placeholder = L10n.Smartlist.enterName
 
         //Bind the SearchBar to the ViewModel
         self.searchBar.rx.text.orEmpty
