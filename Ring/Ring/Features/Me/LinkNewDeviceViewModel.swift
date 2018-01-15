@@ -115,6 +115,9 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
     // MARK: L10n
     let linkDeviceTitleTitle  = L10n.Linkdevice.title
     let explanationMessage = L10n.Linkdevice.explanationMessage
+    let okButtonTitle = L10n.Linkdevice.okButton
+    let cancelButtonTitle = L10n.Linkdevice.cancelButton
+    let passwordFieldPlaceholder = L10n.Linkdevice.entedPasswordFieldPlaceholder
 
     required init(with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService

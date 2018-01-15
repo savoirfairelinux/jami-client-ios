@@ -107,5 +107,8 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
     private func applyL10n() {
         self.titleLable.text = self.viewModel.linkDeviceTitleTitle
         self.explanationMessage.text = self.viewModel.explanationMessage
+        self.okButton.setTitle(self.viewModel.okButtonTitle, for: .normal)
+        self.cancelButton.setTitle(self.viewModel.cancelButtonTitle, for: .normal)
+        self.passwordField.placeholder = self.viewModel.passwordFieldPlaceholder
     }
 }
