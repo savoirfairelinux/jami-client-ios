@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_b1ca886c",
+        "filename": "Ring/Ring/Account/VCardUtils.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-01-15T18:00:12Z",
+      "side": 1,
+      "message": "idKey?",
+      "range": {
+        "startLine": 136,
+        "startChar": 16,
+        "endLine": 136,
+        "endChar": 24
+      },
+      "revId": "b47ec7fdb9318e3bebdecd3c8e2062ea184a41f6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_11c89c73",
+        "filename": "Ring/Ring/Account/VCardUtils.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-01-15T18:00:12Z",
+      "side": 1,
+      "message": "chunk?",
+      "range": {
+        "startLine": 140,
+        "startChar": 20,
+        "endLine": 140,
+        "endChar": 25
+      },
+      "revId": "b47ec7fdb9318e3bebdecd3c8e2062ea184a41f6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
