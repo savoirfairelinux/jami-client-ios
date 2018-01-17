@@ -44,7 +44,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var audioOnlyImage: UIImageView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
-    @IBOutlet private weak var infoLabelConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var infoLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var callButtonsLeftConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var callButtonsRightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var infoLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var callPulse: UIView!
 
     @IBOutlet private weak var buttonsContainer: ButtonsContainerView!
@@ -56,6 +59,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     private let log = SwiftyBeaver.self
 
     private var task: DispatchWorkItem?
+
+    private var shouldRotateScreen = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,6 +160,12 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .observeOn(MainScheduler.instance)
             .bind(to: self.buttonsContainer.pauseCallButton.rx.image())
             .disposed(by: self.disposeBag)
+
+        self.viewModel.isActiveVideoCall
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] rotate in
+                self?.shouldRotateScreen = rotate
+            }).disposed(by: self.disposeBag)
 
         // disable switch camera button for audio only calls
         self.buttonsContainer.switchCameraButton.isEnabled = !(self.viewModel.isAudioOnly)
@@ -285,24 +296,40 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.view.layoutIfNeeded()
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        let orientation = UIDevice.current.orientation
+        switch orientation {
+        case .landscapeRight, .landscapeLeft:
+            let height = size.height - 150
+            self.infoLabelHeightConstraint.constant = height
+        default:
+           self.infoLabelHeightConstraint.constant = 200
+        }
+        self.viewModel.setCameraOrientation(orientation: UIDevice.current.orientation)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+
     func showContactInfo() {
         if !self.infoContainer.isHidden {
             task?.cancel()
             self.hideContactInfo()
             return
         }
-
-        self.infoLabelConstraint.constant = -200.00
+        self.infoLabelTopConstraint.constant = -200.00
+        self.callButtonsRightConstraint.constant = self.view.bounds.width
+        self.callButtonsLeftConstraint.constant = -self.view.bounds.width
         self.buttonsContainer.isHidden = false
         self.infoContainer.isHidden = false
         self.view.layoutIfNeeded()
 
         UIView.animate(withDuration: 0.2, delay: 0.0,
                        options: .curveEaseOut,
-                       animations: { [weak self] in
-            self?.infoLabelConstraint.constant = 0.00
-            self?.view.layoutIfNeeded()
-        }, completion: nil)
+                       animations: { [unowned self] in
+                        self.infoLabelTopConstraint.constant = 0.00
+                        self.callButtonsRightConstraint.constant = 0.00
+                        self.callButtonsLeftConstraint.constant = 0.00
+                        self.view.layoutIfNeeded()
+            }, completion: nil)
 
         task = DispatchWorkItem { self.hideContactInfo() }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: task!)
@@ -311,18 +338,36 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func hideContactInfo() {
         UIView.animate(withDuration: 0.2, delay: 0.00,
                        options: .curveEaseOut,
-                       animations: { [weak self] in
-            self?.infoLabelConstraint.constant = -200.00
-            self?.view.layoutIfNeeded()
-        }, completion: { [weak self] _ in
-            self?.infoContainer.isHidden = true
-            self?.buttonsContainer.isHidden = true
+                       animations: { [unowned self] in
+                        self.infoLabelTopConstraint.constant = -200.00
+                        self.callButtonsRightConstraint.constant = self.view.bounds.width
+                        self.callButtonsLeftConstraint.constant = -self.view.bounds.width
+                        self.view.layoutIfNeeded()
+            }, completion: { [weak self] _ in
+                self?.infoContainer.isHidden = true
+                self?.buttonsContainer.isHidden = true
         })
     }
 
     func showAllInfo() {
         self.buttonsContainer.isHidden = false
         self.infoContainer.isHidden = false
-        self.infoLabelConstraint.constant = 0.00
+        self.infoLabelTopConstraint.constant = 0.00
+    }
+
+    @objc func canRotate() {
+        // empty function to support call screen rotation
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+        super.viewWillDisappear(animated)
+    }
+
+    override var shouldAutorotate: Bool {
+        if self.viewModel.isAudioOnly {
+            return false
+        }
+        return super.shouldAutorotate
     }
 }
