@@ -44,9 +44,14 @@ protocol FrameExtractorDelegate: class {
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
+    let nameLandscape = "frontCameraLanscape"
+    let namePortrait = "frontCameraPortrait"
+    let nameCamera = "camera://"
+
     private let log = SwiftyBeaver.self
 
     private let quality = AVCaptureSession.Preset.medium
+    private var orientation = AVCaptureVideoOrientation.portrait
 
     var permissionGranted = Variable<Bool>(false)
 
@@ -64,7 +69,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         super.init()
     }
 
-    func getDeviceInfo(forPosition position: AVCaptureDevice.Position) throws -> DeviceInfo {
+    func getDeviceInfo(forPosition position: AVCaptureDevice.Position, orientation: UIDeviceOrientation) throws -> DeviceInfo {
         guard self.permissionGranted.value else {
             throw VideoError.needPermission
         }
@@ -82,11 +87,19 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 bestRate = frameRates.maxFrameRate
             }
         }
-        let devInfo: DeviceInfo = ["format": "BGRA",
-                                   "width": String(dimensions.height),
-                                   "height": String(dimensions.width),
-                                   "rate": String(bestRate)]
-        return devInfo
+        if orientation == .portrait || orientation == .portraitUpsideDown {
+            let devInfo: DeviceInfo = ["format": "BGRA",
+                                       "width": String(dimensions.height),
+                                       "height": String(dimensions.width),
+                                       "rate": String(bestRate)]
+            return devInfo
+        } else {
+            let devInfo: DeviceInfo = ["format": "BGRA",
+                                       "width": String(dimensions.width),
+                                       "height": String(dimensions.height),
+                                       "rate": String(bestRate)]
+            return devInfo
+        }
     }
 
     func startCapturing() {
@@ -120,7 +133,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
 
-    func configureSession(withPosition position: AVCaptureDevice.Position) throws {
+    func configureSession(withPosition position: AVCaptureDevice.Position,
+                          withOrientation orientation: AVCaptureVideoOrientation) throws {
         captureSession.beginConfiguration()
         guard self.permissionGranted.value else {
             throw VideoError.needPermission
@@ -149,7 +163,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         guard connection.isVideoMirroringSupported else {
             throw VideoError.unsupportedParameter
         }
-        connection.videoOrientation = .portrait
+        connection.videoOrientation = orientation
         connection.isVideoMirrored = position == .front
         captureSession.commitConfiguration()
     }
@@ -203,12 +217,36 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     completable(.error(VideoError.switchCameraFailed))
                     return Disposables.create {}
                 }
-                connection.videoOrientation = .portrait
+                connection.videoOrientation = self.orientation
                 self.captureSession.commitConfiguration()
                 completable(.completed)
             } else {
                 completable(.error(VideoError.switchCameraFailed))
             }
+            return Disposables.create { }
+        }
+    }
+
+    func rotateCamera(orientation: AVCaptureVideoOrientation) -> Completable {
+        return Completable.create { [unowned self] completable in
+            guard self.permissionGranted.value else {
+                completable(.error(VideoError.needPermission))
+                return Disposables.create {}
+            }
+            self.captureSession.beginConfiguration()
+            let videoOutput = self.captureSession.outputs[0]
+            guard let connection = videoOutput.connection(with: AVFoundation.AVMediaType.video) else {
+                completable(.error(VideoError.getConnectionFailed))
+                return Disposables.create {}
+            }
+            guard connection.isVideoOrientationSupported else {
+                completable(.error(VideoError.unsupportedParameter))
+                return Disposables.create {}
+            }
+            self.orientation = orientation
+            connection.videoOrientation = orientation
+            self.captureSession.commitConfiguration()
+            completable(.completed)
             return Disposables.create { }
         }
     }
@@ -239,6 +277,7 @@ class VideoService: FrameExtractorDelegate {
     let capturedVideoFrame = PublishSubject<UIImage?>()
 
     private let log = SwiftyBeaver.self
+    private var blockOutgoingFrame = true
 
     fileprivate let disposeBag = DisposeBag()
 
@@ -262,11 +301,13 @@ class VideoService: FrameExtractorDelegate {
 
     private func enumerateVideoInputDevices() {
         do {
-            try camera.configureSession(withPosition: AVCaptureDevice.Position.front)
+            try camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: AVCaptureVideoOrientation.portrait)
             self.log.debug("Camera successfully configured")
-            let frontCameraDevInfo: [String: String] = try camera.getDeviceInfo(forPosition: AVCaptureDevice.Position.front)
-            self.log.debug("Camera device info: \(frontCameraDevInfo as AnyObject)")
-            videoAdapter.addVideoDevice(withName: "frontCamera", withDevInfo: frontCameraDevInfo)
+            let frontLandscapeCameraDevInfo: [String: String] = try camera.getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .landscapeLeft)
+            let frontPortraitCameraDevInfo: [String: String] = try camera.getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .portrait)
+            videoAdapter.addVideoDevice(withName: camera.nameLandscape, withDevInfo: frontLandscapeCameraDevInfo)
+            videoAdapter.addVideoDevice(withName: camera.namePortrait, withDevInfo: frontPortraitCameraDevInfo)
+
         } catch let e as VideoError {
             self.log.error("Error during capture device enumeration: \(e)")
         } catch {
@@ -281,6 +322,33 @@ class VideoService: FrameExtractorDelegate {
         }) { error in
             print(error)
         }.disposed(by: self.disposeBag)
+    }
+
+    func setCameraOrientation(orientation: UIDeviceOrientation) {
+        self.blockOutgoingFrame = true
+        let deviceName: String =
+            (orientation == .landscapeLeft || orientation == .landscapeRight) ?
+                self.camera.nameLandscape : self.camera.namePortrait
+        self.switchInput(toDevice: self.camera.nameCamera + deviceName)
+        var newOrientation: AVCaptureVideoOrientation
+        switch orientation {
+        case .portrait:
+            newOrientation = AVCaptureVideoOrientation.portrait
+        case .portraitUpsideDown:
+            newOrientation = AVCaptureVideoOrientation.portraitUpsideDown
+        case .landscapeLeft:
+            newOrientation = AVCaptureVideoOrientation.landscapeRight
+        case .landscapeRight:
+            newOrientation = AVCaptureVideoOrientation.landscapeLeft
+        default:
+            newOrientation = AVCaptureVideoOrientation.portrait
+        }
+        self.camera.rotateCamera(orientation: newOrientation)
+            .subscribe(onCompleted: { [unowned self] in
+                self.log.debug("new camera orientation: \(orientation)")
+            }, onError: { error in
+                self.log.debug("camera re-orientation error: \(error)")
+            }).disposed(by: self.disposeBag)
     }
 }
 
@@ -306,6 +374,7 @@ extension VideoService: VideoAdapterDelegate {
     func startCapture(withDevice device: String) {
         self.log.debug("Capture started...")
         self.camera.startCapturing()
+        self.blockOutgoingFrame = false
     }
 
     func stopCapture() {
@@ -318,8 +387,10 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func captured(image: UIImage) {
-        videoAdapter.writeOutgoingFrame(with: image)
         self.capturedVideoFrame.onNext(image)
+        if self.blockOutgoingFrame {
+            return
+        }
+        videoAdapter.writeOutgoingFrame(with: image)
     }
-
 }
