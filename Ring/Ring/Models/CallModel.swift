@@ -51,6 +51,7 @@ enum CallDetailKey: String {
     case audioMutedKey = "AUDIO_MUTED"
     case videoMutedKey = "VIDEO_MUTED"
     case videoSourceKey = "VIDEO_SOURCE"
+    case audioOnlyKey = "AUDIO_ONLY"
 }
 
 class CallModel {
@@ -64,6 +65,8 @@ class CallModel {
     var audioMuted: Bool = false
     var videoMuted: Bool = false
     var peerHolding: Bool = false
+    var speakerActive: Bool = false
+    var isAudioOnly: Bool = false
 
     var stateValue = CallState.unknown.rawValue
     var callTypeValue = CallType.missed.rawValue
@@ -144,6 +147,10 @@ class CallModel {
 
         if let peerHolding = dictionary[CallDetailKey.peerHoldingKey.rawValue]?.toBool() {
             self.peerHolding = peerHolding
+        }
+
+        if let isAudioOnly = dictionary[CallDetailKey.audioOnlyKey.rawValue]?.toBool() {
+            self.isAudioOnly = isAudioOnly
         }
     }
 }
