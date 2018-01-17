@@ -131,18 +131,23 @@ class CallsService: CallsAdapterDelegate {
         })
     }
 
-    func placeCall(withAccount account: AccountModel, toRingId ringId: String, userName: String) -> Single<CallModel> {
+    func placeCall(withAccount account: AccountModel,
+                   toRingId ringId: String,
+                   userName: String,
+                   isAudioOnly: Bool = false) -> Single<CallModel> {
 
         //Create and emit the call
         var callDetails = [String: String]()
         callDetails[CallDetailKey.callTypeKey.rawValue] = String(describing: CallType.outgoing)
         callDetails[CallDetailKey.displayNameKey.rawValue] = userName
         callDetails[CallDetailKey.accountIdKey.rawValue] = account.id
+        callDetails[CallDetailKey.audioOnlyKey.rawValue] = isAudioOnly.toString()
         let call = CallModel(withCallId: ringId, callDetails: callDetails)
         call.state = .connecting
-        return Single<CallModel>.create(subscribe: { single in
+        return Single<CallModel>.create(subscribe: { [unowned self] single in
             if let callId = self.callsAdapter.placeCall(withAccountId: account.id,
-                                                        toRingId: "ring:\(ringId)"),
+                                                        toRingId: "ring:\(ringId)",
+                                                        details: callDetails),
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
                 call.update(withDictionary: callDictionary)
                 call.callId = callId
@@ -227,6 +232,7 @@ class CallsService: CallsAdapterDelegate {
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String]) {
 
         if let vCardKey = message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first {
@@ -310,6 +316,7 @@ class CallsService: CallsAdapterDelegate {
             }
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String) {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
