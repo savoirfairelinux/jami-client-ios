@@ -155,8 +155,9 @@ static id <CallsAdapterDelegate> _delegate;
     return unhold(std::string([callId UTF8String]));
 }
 
-- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId {
-    std::string callId = placeCall(std::string([accountId UTF8String]), std::string([ringId UTF8String]));
+- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId details:(NSDictionary*)details {
+    std::string callId;
+    callId = placeCall(std::string([accountId UTF8String]), std::string([ringId UTF8String]), [Utils dictionnaryToMap:details]);
     return [NSString stringWithUTF8String:callId.c_str()];
 }
 

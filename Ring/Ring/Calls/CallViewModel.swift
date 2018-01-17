@@ -36,8 +36,13 @@ class CallViewModel: Stateable, ViewModel {
     fileprivate let contactsService: ContactsService
     fileprivate let accountService: AccountsService
     fileprivate let videoService: VideoService
+    fileprivate let audioService: AudioService
+
     private let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
+
+    var isHeadsetConnected = false
+    var isAudioOnly = false
 
     var call: CallModel? {
         didSet {
@@ -67,6 +72,9 @@ class CallViewModel: Stateable, ViewModel {
                         .disposed(by: self.disposeBag)
                 })
                 .disposed(by: disposeBag)
+
+            isHeadsetConnected = self.audioService.isHeadsetConnected.value
+            isAudioOnly = call.isAudioOnly
         }
     }
 
@@ -141,18 +149,21 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy  var showCallOptions: Observable<Bool> = {
-        return Observable.combineLatest(self.callIsActive,
-                                        self.screenTapped.asObservable()) {(active, tapped) -> Bool in
-                                            return active && tapped
+    lazy var showCallOptions: Observable<Bool> = {
+        return Observable.combineLatest(self.screenTapped.asObservable(), callPaused) { (tapped, paused) in
+            if self.isAudioOnly {
+                return false
+            }
+            if tapped && !paused {
+                return true
+            }
+            return false
         }
     }()
 
-    lazy var callIsActive: Observable<Bool> = {
-        self.callService.currentCall.filter({ call in
-            return call.state == .current && call.callId == self.call?.callId
-        }).map({_ in
-            return true
+    lazy var showCancelOption: Observable<Bool> = {
+        return self.callService.currentCall.map({ call in
+            return call.state == .connecting || call.state == .ringing
         })
     }()
 
@@ -162,8 +173,9 @@ class CallViewModel: Stateable, ViewModel {
         let onImage = UIImage(asset: Asset.videoRunning)
         let offImage = UIImage(asset: Asset.videoMuted)
 
-        return self.videoMuted.map({ muted in
-            if muted {
+        return self.videoMuted.map({ [unowned self] muted in
+            let audioOnly = self.call?.isAudioOnly ?? false
+            if audioOnly || muted {
                 return offImage
             }
             return onImage
@@ -191,6 +203,28 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
+    lazy var speakerButtonState: Observable<UIImage?> = {
+        let offImage = UIImage(asset: Asset.disableSpeakerphone)
+        let onImage = UIImage(asset: Asset.enableSpeakerphone)
+
+        return self.isOutputToSpeaker
+            .map({ speaker in
+                if speaker {
+                    return onImage
+                }
+                return offImage
+            })
+    }()
+
+    lazy var isOutputToSpeaker: Observable<Bool> = {
+        return self.audioService.isOutputToSpeaker.asObservable()
+    }()
+
+    lazy var speakerSwitchable: Observable<Bool> = {
+        return self.audioService.isHeadsetConnected.asObservable()
+            .map { value in return !value }
+    }()
+
     lazy var audioMuted: Observable<Bool> = {
         return self.callService.currentCall.filter({ call in
             call.callId == self.call?.callId &&
@@ -200,7 +234,7 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var callButtonState: Observable<UIImage?> = {
+    lazy var pauseCallButtonState: Observable<UIImage?> = {
         let unpauseCall = UIImage(asset: Asset.unpauseCall)
         let pauseCall = UIImage(asset: Asset.pauseCall)
 
@@ -227,12 +261,18 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
+    lazy var containerViewModel: ButtonsContainerViewModel = {
+        return ButtonsContainerViewModel(with: self.callService, callID: (self.call?.callId)!)
+    }()
+
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
         self.contactsService = injectionBag.contactsService
         self.accountService = injectionBag.accountService
         self.videoService = injectionBag.videoService
+        self.audioService = injectionBag.audioService
     }
+
     static func formattedDurationFrom(interval: Int) -> String {
         let seconds = interval % 60
         let minutes = (interval / 60) % 60
@@ -264,14 +304,20 @@ class CallViewModel: Stateable, ViewModel {
             }).disposed(by: self.disposeBag)
     }
 
-    func placeCall(with uri: String, userName: String) {
+    func placeCall(with uri: String, userName: String, isAudioOnly: Bool = false) {
 
         guard let account = self.accountService.currentAccount else {
             return
         }
+        if isAudioOnly {
+            self.audioService.overrideToReceiver()
+        } else {
+            self.audioService.overrideToSpeaker()
+        }
         self.callService.placeCall(withAccount: account,
                                    toRingId: uri,
-                                   userName: userName)
+                                   userName: userName,
+                                   isAudioOnly: isAudioOnly)
             .subscribe(onSuccess: { [unowned self] callModel in
                 self.call = callModel
             }).disposed(by: self.disposeBag)
@@ -294,7 +340,7 @@ class CallViewModel: Stateable, ViewModel {
 
     // MARK: call options
 
-    func pauseCall() {
+    func togglePauseCall() {
         guard let call = self.call else {
             return
         }
@@ -315,7 +361,7 @@ class CallViewModel: Stateable, ViewModel {
         }
     }
 
-    func muteAudio() {
+    func toggleMuteAudio() {
         guard let call = self.call else {
             return
         }
@@ -323,7 +369,7 @@ class CallViewModel: Stateable, ViewModel {
         self.callService.muteAudio(call: call.callId, mute: mute)
     }
 
-    func muteVideo() {
+    func toggleMuteVideo() {
         guard let call = self.call else {
             return
         }
@@ -333,5 +379,9 @@ class CallViewModel: Stateable, ViewModel {
 
     func switchCamera() {
         self.videoService.switchCamera()
+    }
+
+    func switchSpeaker() {
+        self.audioService.switchSpeaker()
     }
 }

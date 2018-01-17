@@ -50,12 +50,15 @@ enum Asset {
   static let addPerson = ImageAsset(name: "add_person")
   static let audioMuted = ImageAsset(name: "audio_muted")
   static let audioRunning = ImageAsset(name: "audio_running")
+  static let backButton = ImageAsset(name: "back_button")
   static let backgroundRing = ImageAsset(name: "background_ring")
   static let blockIcon = ImageAsset(name: "block_icon")
   static let callButton = ImageAsset(name: "call_button")
   static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   static let conversationIcon = ImageAsset(name: "conversation_icon")
   static let device = ImageAsset(name: "device")
+  static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
+  static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   static let icContactPicture = ImageAsset(name: "ic_contact_picture")
   static let moreSettings = ImageAsset(name: "more_settings")
@@ -76,12 +79,15 @@ enum Asset {
     addPerson,
     audioMuted,
     audioRunning,
+    backButton,
     backgroundRing,
     blockIcon,
     callButton,
     contactRequestIcon,
     conversationIcon,
     device,
+    disableSpeakerphone,
+    enableSpeakerphone,
     fallbackAvatar,
     icContactPicture,
     moreSettings,
