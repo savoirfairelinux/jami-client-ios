@@ -285,6 +285,15 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.view.layoutIfNeeded()
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        let orientation = UIDevice.current.orientation
+        if orientation == .faceUp || orientation == .faceDown {
+            return
+        }
+        self.viewModel.setCameraOrientation(orientation: UIDevice.current.orientation)
+    }
+
     func showContactInfo() {
         if !self.infoContainer.isHidden {
             task?.cancel()
@@ -324,5 +333,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.buttonsContainer.isHidden = false
         self.infoContainer.isHidden = false
         self.infoLabelConstraint.constant = 0.00
+    }
+    @objc func canRotate() {
+        // empty function to support call screen rotation
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+        super.viewWillDisappear(animated)
     }
 }
