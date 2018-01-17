@@ -56,6 +56,8 @@ enum Asset {
   static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   static let conversationIcon = ImageAsset(name: "conversation_icon")
   static let device = ImageAsset(name: "device")
+  static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
+  static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   static let icContactPicture = ImageAsset(name: "ic_contact_picture")
   static let moreSettings = ImageAsset(name: "more_settings")
@@ -82,6 +84,8 @@ enum Asset {
     contactRequestIcon,
     conversationIcon,
     device,
+    disableSpeakerphone,
+    enableSpeakerphone,
     fallbackAvatar,
     icContactPicture,
     moreSettings,
