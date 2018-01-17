@@ -86,6 +86,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // start monitoring for network changes
         self.networkService.monitorNetworkType()
 
+        // set device to headset if present audio device
+        self.callService.overrideAudioRoute(.override)
+
         // themetize the app
         Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
         Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)

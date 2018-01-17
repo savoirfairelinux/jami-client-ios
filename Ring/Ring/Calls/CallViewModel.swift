@@ -142,18 +142,7 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy  var showCallOptions: Observable<Bool> = {
-        return Observable.combineLatest(self.callIsActive,
-                                        self.screenTapped.asObservable()) {(active, tapped) -> Bool in
-                                            return active && tapped
-        }
-    }()
-
-    lazy var callIsActive: Observable<Bool> = {
-        self.callService.currentCall.filter({ call in
-            return call.state == .current && call.callId == self.call?.callId
-        }).map({_ in
-            return true
-        })
+        return self.screenTapped.asObservable()
     }()
 
     var screenTapped = BehaviorSubject(value: false)
@@ -227,12 +216,17 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
+    lazy var containerViewModel: ButtonsContainerViewModel = {
+        return ButtonsContainerViewModel(with: self.callService, callID: (self.call?.callId)!)
+    }()
+
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
         self.contactsService = injectionBag.contactsService
         self.accountService = injectionBag.accountService
         self.videoService = injectionBag.videoService
     }
+
     static func formattedDurationFrom(interval: Int) -> String {
         let seconds = interval % 60
         let minutes = (interval / 60) % 60
@@ -333,5 +327,9 @@ class CallViewModel: Stateable, ViewModel {
 
     func switchCamera() {
         self.videoService.switchCamera()
+    }
+
+    func switchSpeaker() {
+        self.callService.switchSpeaker()
     }
 }

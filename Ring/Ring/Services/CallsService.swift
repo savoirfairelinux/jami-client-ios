@@ -64,11 +64,54 @@ class CallsService: CallsAdapterDelegate {
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
 
+    var isHeadsetConnected = Variable<Bool>(false)
+    var isOutputToSpeaker = Variable<Bool>(true)
+
     init(withCallsAdapter callsAdapter: CallsAdapter) {
         self.callsAdapter = callsAdapter
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
         CallsAdapter.delegate = self
+
+        // Listen for audio route changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(audioRouteChangeListener(_:)),
+            name: NSNotification.Name.AVAudioSessionRouteChange,
+            object: nil)
+    }
+
+    @objc private func audioRouteChangeListener(_ notification: Notification) {
+        let reasonRaw = notification.userInfo![AVAudioSessionRouteChangeReasonKey] as! UInt
+        self.log.debug("Audio route change: \(reasonRaw)")
+        guard let reason = AVAudioSessionRouteChangeReason(rawValue: reasonRaw) else {
+            return
+        }
+        overrideAudioRoute(reason)
+    }
+
+    func overrideAudioRoute(_ reason: AVAudioSessionRouteChangeReason) {
+        let wasHeadsetConnected = isHeadsetConnected.value
+        let bluetoothConnected = bluetoothAudioConnected()
+        let headphonesConnected = headphoneAudioConnected()
+        self.log.debug("Audio route status: bluetooth: \(bluetoothConnected), headphones: \(headphonesConnected)")
+        isHeadsetConnected.value = bluetoothConnected || headphonesConnected
+        if reason == .override && !isHeadsetConnected.value {
+            setAudioOutputDevice(index: 0)
+        } else if wasHeadsetConnected != isHeadsetConnected.value {
+            if bluetoothConnected {
+                setAudioOutputDevice(index: 1)
+            } else if headphonesConnected {
+                setAudioOutputDevice(index: 2)
+            } else if wasHeadsetConnected {
+                let outputPort = isOutputToSpeaker.value ? 0 : 3
+                setAudioOutputDevice(index: outputPort)
+            }
+        } else if reason == .categoryChange && bluetoothConnected {
+            // Hack switch to dummy device for first call using bluetooth
+            // CoreAudio needs some time to figure out the device settings for a connected bluetooth headset
+            setAudioOutputDevice(index: 4)
+        }
     }
 
     func accept(callId: String) -> Completable {
@@ -140,7 +183,7 @@ class CallsService: CallsAdapterDelegate {
         callDetails[CallDetailKey.accountIdKey.rawValue] = account.id
         let call = CallModel(withCallId: ringId, callDetails: callDetails)
         call.state = .connecting
-        return Single<CallModel>.create(subscribe: { single in
+        return Single<CallModel>.create(subscribe: { [unowned self] single in
             if let callId = self.callsAdapter.placeCall(withAccountId: account.id,
                                                         toRingId: "ring:\(ringId)"),
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
@@ -170,6 +213,18 @@ class CallsService: CallsAdapterDelegate {
                        muted: mute)
     }
 
+    func setAudioOutputDevice(index: NSInteger) {
+        self.callsAdapter.setAudioOutputDevice(index)
+    }
+
+    func setAudioInputDevice(index: NSInteger) {
+        self.callsAdapter.setAudioInputDevice(index)
+    }
+
+    func setAudioRingtoneDevice(index: NSInteger) {
+        self.callsAdapter.setAudioRingtoneDevice(index)
+    }
+
     func sendVCard(callID: String, accountID: String) {
         if accountID.isEmpty || callID.isEmpty {
             return
@@ -189,6 +244,46 @@ class CallsService: CallsAdapterDelegate {
                                           message: message,
                                           accountId: accountId,
                                           sMixed: true)
+    }
+
+    func switchSpeaker() {
+        guard let isSpeaker = self.speakerIsActive() else {
+            return
+        }
+        if isSpeaker {
+            isOutputToSpeaker.value = false
+            setAudioOutputDevice(index: 3)
+        } else {
+            isOutputToSpeaker.value = true
+            setAudioOutputDevice(index: 0)
+        }
+    }
+
+    func bluetoothAudioConnected() -> Bool {
+        let outputs = AVAudioSession.sharedInstance().currentRoute.outputs
+        for output in outputs {
+            if  output.portType == AVAudioSessionPortBluetoothA2DP ||
+                output.portType == AVAudioSessionPortBluetoothHFP ||
+                output.portType == AVAudioSessionPortBluetoothLE {
+                return true
+            }
+        }
+        return false
+    }
+
+    func headphoneAudioConnected() -> Bool {
+        let outputs = AVAudioSession.sharedInstance().currentRoute.outputs
+        for output in outputs where output.portType == AVAudioSessionPortHeadphones {
+            return true
+        }
+        return false
+    }
+
+    func speakerIsActive() -> Bool? {
+        if let output = AVAudioSession.sharedInstance().currentRoute.outputs.first {
+              return output.uid == AVAudioSessionPortBuiltInSpeaker
+        }
+        return nil
     }
 
     // MARK: CallsAdapterDelegate
