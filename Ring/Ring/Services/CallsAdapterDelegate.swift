@@ -27,4 +27,7 @@
     func callPlacedOnHold(withCallId callId: String, holding: Bool)
     func audioMuted(call callId: String, mute: Bool)
     func videoMuted(call callId: String, mute: Bool)
+    func setAudioOutputDevice(index: NSInteger)
+    func setAudioInputDevice(index: NSInteger)
+    func setAudioRingtoneDevice(index: NSInteger)
 }

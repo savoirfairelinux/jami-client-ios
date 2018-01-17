@@ -22,6 +22,7 @@
 #import "CallsAdapter.h"
 #import "Utils.h"
 #import "dring/callmanager_interface.h"
+#import "dring/configurationmanager_interface.h"
 #import "Ring-Swift.h"
 
 using namespace DRing;
@@ -176,6 +177,18 @@ static id <CallsAdapterDelegate> _delegate;
 
 - (BOOL)muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted {
     return muteLocalMedia(std::string([callId UTF8String]), std::string([media UTF8String]), muted);
+}
+
+- (void)setAudioOutputDevice:(NSInteger)index {
+    DRing::setAudioOutputDevice((int32_t)index);
+}
+
+- (void)setAudioInputDevice:(NSInteger)index {
+    DRing::setAudioInputDevice((int32_t)index);
+}
+
+- (void)setAudioRingtoneDevice:(NSInteger)index {
+    DRing::setAudioRingtoneDevice((int32_t)index);
 }
 
 #pragma mark AccountAdapterDelegate

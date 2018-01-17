@@ -39,4 +39,8 @@
 - (void) sendTextMessageWithCallID:(NSString*)callId message:(NSDictionary*)message accountId:(NSString*)accountId sMixed:(bool)isMixed;
 - (BOOL) muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted;
 
+- (void)setAudioOutputDevice:(NSInteger)index;
+- (void)setAudioInputDevice:(NSInteger)index;
+- (void)setAudioRingtoneDevice:(NSInteger)index;
+
 @end
