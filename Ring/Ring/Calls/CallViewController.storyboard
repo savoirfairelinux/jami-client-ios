@@ -156,13 +156,13 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JMw-We-9qW" userLabel="ButtonsContainer">
-                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="547" width="375" height="120"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Izv-6c-10X">
-                                        <rect key="frame" x="10" y="0.0" width="355" height="100"/>
+                                        <rect key="frame" x="10" y="50" width="355" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHr-JD-OOn">
-                                                <rect key="frame" x="0.0" y="25" width="50" height="50"/>
+                                                <rect key="frame" x="0.0" y="5" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="RC6-BN-8ID"/>
                                                     <constraint firstAttribute="width" constant="50" id="wXp-ed-p3H"/>
@@ -182,7 +182,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezt-ru-2cK">
-                                                <rect key="frame" x="76.5" y="25" width="50" height="50"/>
+                                                <rect key="frame" x="76.5" y="5" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="KAL-kW-Ak4"/>
                                                     <constraint firstAttribute="height" constant="50" id="guZ-o3-hkm"/>
@@ -201,15 +201,28 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dse-fL-2fw">
-                                                <rect key="frame" x="147.5" y="20" width="60" height="60"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dse-fL-2fw">
+                                                <rect key="frame" x="152.5" y="5" width="50" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="WC7-eo-WQH"/>
-                                                    <constraint firstAttribute="height" constant="60" id="asM-1d-UVq"/>
+                                                    <constraint firstAttribute="width" constant="50" id="WC7-eo-WQH"/>
+                                                    <constraint firstAttribute="height" constant="50" id="asM-1d-UVq"/>
                                                 </constraints>
+                                                <state key="normal" image="enable_speakerphone"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4r-vz-8h0">
-                                                <rect key="frame" x="229" y="25" width="50" height="50"/>
+                                                <rect key="frame" x="229" y="5" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="4Sf-02-f92"/>
                                                     <constraint firstAttribute="height" constant="50" id="vDG-Pl-BuV"/>
@@ -229,7 +242,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtr-Sb-gid">
-                                                <rect key="frame" x="305" y="25" width="50" height="50"/>
+                                                <rect key="frame" x="305" y="5" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="MvP-Tn-uT8"/>
                                                     <constraint firstAttribute="width" constant="50" id="hrU-Yx-SB1"/>
@@ -251,12 +264,35 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="b26-7B-HZt"/>
+                                        </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HX4-qn-0yH">
+                                        <rect key="frame" x="157" y="-10" width="60" height="60"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="5nY-3I-8Ej"/>
+                                            <constraint firstAttribute="width" constant="60" id="edI-L7-Aon"/>
+                                        </constraints>
+                                        <state key="normal" image="stop_call">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="30"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Izv-6c-10X" firstAttribute="top" secondItem="JMw-We-9qW" secondAttribute="top" id="8Mr-rd-h72"/>
-                                    <constraint firstAttribute="bottom" secondItem="Izv-6c-10X" secondAttribute="bottom" id="iRM-zn-rkF"/>
+                                    <constraint firstItem="HX4-qn-0yH" firstAttribute="centerX" secondItem="JMw-We-9qW" secondAttribute="centerX" id="PjD-fa-qEl"/>
+                                    <constraint firstItem="Izv-6c-10X" firstAttribute="top" secondItem="HX4-qn-0yH" secondAttribute="bottom" id="XtJ-AV-c6R"/>
+                                    <constraint firstAttribute="bottom" secondItem="Izv-6c-10X" secondAttribute="bottom" constant="10" id="iRM-zn-rkF"/>
                                     <constraint firstItem="Izv-6c-10X" firstAttribute="leading" secondItem="JMw-We-9qW" secondAttribute="leading" constant="10" id="nVQ-l7-Jif"/>
+                                    <constraint firstAttribute="height" constant="120" id="nae-8v-FYE"/>
                                     <constraint firstAttribute="trailing" secondItem="Izv-6c-10X" secondAttribute="trailing" constant="10" id="tbX-Og-u1h"/>
                                 </constraints>
                             </view>
@@ -294,7 +330,6 @@
                             <constraint firstItem="73Y-N1-Yga" firstAttribute="top" secondItem="fnt-PQ-Q6P" secondAttribute="bottom" constant="8" id="JC6-KJ-L8L"/>
                             <constraint firstItem="4n1-G8-SAO" firstAttribute="top" secondItem="B3b-V0-rjx" secondAttribute="bottom" constant="20" id="LfK-3C-U5e"/>
                             <constraint firstItem="SdV-jx-Mla" firstAttribute="centerX" secondItem="QpJ-Sx-9dG" secondAttribute="centerX" id="MXS-7j-cD5"/>
-                            <constraint firstItem="B3b-V0-rjx" firstAttribute="centerY" secondItem="JMw-We-9qW" secondAttribute="centerY" id="N16-SJ-iu5"/>
                             <constraint firstItem="uC8-vY-dHO" firstAttribute="top" secondItem="QpJ-Sx-9dG" secondAttribute="top" id="Rse-54-gPI"/>
                             <constraint firstItem="uC8-vY-dHO" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" id="UFy-Kq-FAS"/>
                             <constraint firstItem="zMN-6z-uXT" firstAttribute="top" secondItem="73Y-N1-Yga" secondAttribute="bottom" constant="16" id="YQp-tl-h73"/>
@@ -332,6 +367,7 @@
                         <outlet property="pauseCallButton" destination="f4r-vz-8h0" id="rqE-oX-VxA"/>
                         <outlet property="profileImageView" destination="fnt-PQ-Q6P" id="MgB-Ev-bTc"/>
                         <outlet property="switchCameraButton" destination="wtr-Sb-gid" id="D6f-Kh-B7u"/>
+                        <outlet property="switchSpeakerButton" destination="Dse-fL-2fw" id="NVK-ja-s4Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OFk-0u-Pap" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -341,10 +377,11 @@
     </scenes>
     <resources>
         <image name="audio_running" width="24" height="24"/>
+        <image name="enable_speakerphone" width="24" height="24"/>
         <image name="ic_contact_picture" width="128" height="128"/>
         <image name="pause_call" width="24" height="24"/>
         <image name="stop_call" width="24" height="24"/>
-        <image name="switch_camera" width="24" height="24"/>
+        <image name="switch_camera" width="25" height="25"/>
         <image name="video_running" width="24" height="24"/>
     </resources>
 </document>

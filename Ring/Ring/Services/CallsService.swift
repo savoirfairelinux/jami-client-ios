@@ -191,6 +191,33 @@ class CallsService: CallsAdapterDelegate {
                                           sMixed: true)
     }
 
+    func switchSpeaker() {
+        do {
+            let session: AVAudioSession = AVAudioSession.sharedInstance()
+
+            guard let isSpeaker = self.speakerIsActive() else {
+                return
+            }
+            if isSpeaker {
+                try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+                try session.setMode(AVAudioSessionModeDefault)
+            } else {
+                try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .allowBluetooth, .defaultToSpeaker])
+                try session.setMode(AVAudioSessionModeVoiceChat)
+            }
+        } catch {
+            print("audioSession error: (error.localizedDescription)")
+        }
+    }
+
+    func speakerIsActive() -> Bool? {
+       let session: AVAudioSession = AVAudioSession.sharedInstance()
+        if let output = session.currentRoute.outputs.first {
+              return output.uid == AVAudioSessionPortBuiltInSpeaker
+        }
+        return nil
+    }
+
     // MARK: CallsAdapterDelegate
 
     func didChangeCallState(withCallId callId: String, state: String, stateCode: NSInteger) {
