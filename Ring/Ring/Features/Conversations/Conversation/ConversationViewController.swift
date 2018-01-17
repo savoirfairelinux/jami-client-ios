@@ -90,7 +90,54 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }
 
     func setupUI() {
-        self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
+        //self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
+
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_button")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back_button")
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+
+        let displayName = "Displayname"
+        let username = "Username"
+
+        let navbarFrame = self.navigationController?.navigationBar.frame
+        let originY = (navbarFrame?.origin.y)!
+        let topHeight = ((navbarFrame?.size.height)! + originY) / 2
+        self.log.debug("topHeight: \(topHeight)")
+
+        let titleView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: topHeight))
+
+        let imageSize: CGFloat = 36.0
+        let infoPadding: CGFloat = 4.0
+        let imageOffsetY: CGFloat = 5.0
+        let image_view = UIImageView(frame: CGRect(x: 0, y: imageOffsetY, width: imageSize, height: imageSize))
+        //image_view.backgroundColor = UIColor.green.withAlphaComponent(0.5)
+        if let imageData = viewModel.profileImageData {
+            if let image = UIImage(data: imageData) {
+                (image_view as UIImageView).image = image.circleMasked
+            }
+        }
+        image_view.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
+        image_view.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
+        titleView.addSubview(image_view)
+
+        let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: 0, width: 128, height: 20))
+        //dnlabel.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        dnlabel.text = username
+        dnlabel.font = UIFont.systemFont(ofSize: 18)
+        dnlabel.textColor = UIColor.white
+        dnlabel.textAlignment = .left
+        titleView.addSubview(dnlabel)
+
+        let unlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: 20, width: 128, height: 24))
+        //unlabel.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        unlabel.text = displayName
+        unlabel.font = UIFont.systemFont(ofSize: 14)
+        unlabel.textColor = UIColor.white
+        unlabel.textAlignment = .left
+        titleView.addSubview(unlabel)
+
+        //titleView.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
+        self.navigationItem.titleView = titleView
 
         // UIColor that observes "best Id" prefix
         self.fallbackBGColorObservable = viewModel.userName.asObservable()

@@ -140,7 +140,7 @@ class CallsService: CallsAdapterDelegate {
         callDetails[CallDetailKey.accountIdKey.rawValue] = account.id
         let call = CallModel(withCallId: ringId, callDetails: callDetails)
         call.state = .connecting
-        return Single<CallModel>.create(subscribe: { single in
+        return Single<CallModel>.create(subscribe: { [unowned self] single in
             if let callId = self.callsAdapter.placeCall(withAccountId: account.id,
                                                         toRingId: "ring:\(ringId)"),
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {

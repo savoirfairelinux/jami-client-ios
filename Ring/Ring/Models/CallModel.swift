@@ -64,6 +64,7 @@ class CallModel {
     var audioMuted: Bool = false
     var videoMuted: Bool = false
     var peerHolding: Bool = false
+    var speakerActive: Bool = false
 
     var stateValue = CallState.unknown.rawValue
     var callTypeValue = CallType.missed.rawValue
