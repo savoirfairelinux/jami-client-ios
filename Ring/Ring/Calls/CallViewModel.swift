@@ -215,4 +215,8 @@ class CallViewModel: Stateable, ViewModel {
     func respondOnTap() {
         self.screenTapped.onNext(true)
     }
+
+    func setCameraOrientation(orientation: UIDeviceOrientation) {
+        videoService.setCameraOrientation(orientation: orientation)
+    }
 }

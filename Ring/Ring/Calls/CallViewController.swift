@@ -158,6 +158,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.viewModel.respondOnTap()
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.viewModel.setCameraOrientation(orientation: UIDevice.current.orientation)
+    }
+
     func showContactInfo() {
         if !self.infoContainer.isHidden {
             task?.cancel()
