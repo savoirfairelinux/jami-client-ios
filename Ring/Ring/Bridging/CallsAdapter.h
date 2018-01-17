@@ -33,7 +33,7 @@
 - (BOOL)holdCallWithId:(NSString*)callId;
 - (BOOL)unholdCallWithId:(NSString*)callId;
 
-- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId;
+- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId audioOnly:(bool)audioOnly;
 - (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId;
 - (NSArray<NSString*>*)calls;
 - (void) sendTextMessageWithCallID:(NSString*)callId message:(NSDictionary*)message accountId:(NSString*)accountId sMixed:(bool)isMixed;

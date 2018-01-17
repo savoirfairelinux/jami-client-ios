@@ -36,6 +36,8 @@ class CallViewModel: Stateable, ViewModel {
     fileprivate let contactsService: ContactsService
     fileprivate let accountService: AccountsService
     fileprivate let videoService: VideoService
+    fileprivate let audioService: AudioService
+
     private let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
 
@@ -141,18 +143,13 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy  var showCallOptions: Observable<Bool> = {
-        return Observable.combineLatest(self.callIsActive,
-                                        self.screenTapped.asObservable()) {(active, tapped) -> Bool in
-                                            return active && tapped
-        }
+    lazy var showCallOptions: Observable<Bool> = {
+        return self.screenTapped.asObservable()
     }()
 
-    lazy var callIsActive: Observable<Bool> = {
-        self.callService.currentCall.filter({ call in
-            return call.state == .current && call.callId == self.call?.callId
-        }).map({_ in
-            return true
+    lazy var showCancelOption: Observable<Bool> = {
+        return self.callService.currentCall.map({ call in
+            return call.state == .connecting || call.state == .ringing
         })
     }()
 
@@ -227,12 +224,18 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
+    lazy var containerViewModel: ButtonsContainerViewModel = {
+        return ButtonsContainerViewModel(with: self.callService, callID: (self.call?.callId)!)
+    }()
+
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
         self.contactsService = injectionBag.contactsService
         self.accountService = injectionBag.accountService
         self.videoService = injectionBag.videoService
+        self.audioService = injectionBag.audioService
     }
+
     static func formattedDurationFrom(interval: Int) -> String {
         let seconds = interval % 60
         let minutes = (interval / 60) % 60
@@ -264,14 +267,15 @@ class CallViewModel: Stateable, ViewModel {
             }).disposed(by: self.disposeBag)
     }
 
-    func placeCall(with uri: String, userName: String) {
+    func placeCall(with uri: String, userName: String, isAudio: Bool = false) {
 
         guard let account = self.accountService.currentAccount else {
             return
         }
         self.callService.placeCall(withAccount: account,
                                    toRingId: uri,
-                                   userName: userName)
+                                   userName: userName,
+                                   isAudio: isAudio)
             .subscribe(onSuccess: { [unowned self] callModel in
                 self.call = callModel
             }).disposed(by: self.disposeBag)
@@ -333,5 +337,9 @@ class CallViewModel: Stateable, ViewModel {
 
     func switchCamera() {
         self.videoService.switchCamera()
+    }
+
+    func switchSpeaker() {
+        self.audioService.switchSpeaker()
     }
 }

@@ -155,8 +155,15 @@ static id <CallsAdapterDelegate> _delegate;
     return unhold(std::string([callId UTF8String]));
 }
 
-- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId {
-    std::string callId = placeCall(std::string([accountId UTF8String]), std::string([ringId UTF8String]));
+- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId audioOnly:(bool)audioOnly {
+    std::string callId;
+    if (audioOnly) {
+        std::map<std::string, std::string> volatileDetails;
+        volatileDetails["AUDIO_ONLY"] = "true";
+        callId = placeCall(std::string([accountId UTF8String]), std::string([ringId UTF8String]), volatileDetails);
+    } else {
+        callId = placeCall(std::string([accountId UTF8String]), std::string([ringId UTF8String]));
+    }
     return [NSString stringWithUTF8String:callId.c_str()];
 }
 

@@ -27,6 +27,7 @@ import RxSwift
 enum ConversationsState: State {
     case conversationDetail(conversationViewModel: ConversationViewModel)
     case startCall(contactRingId: String, userName: String)
+    case startAudioCall(contactRingId: String, userName: String)
 }
 
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
@@ -64,6 +65,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
                 self.showConversation(withConversationViewModel: conversationViewModel)
             case .startCall(let contactRingId, let name):
                 self.startOutgoingCall(contactRingId: contactRingId, userName: name)
+            case .startAudioCall(let contactRingId, let name):
+                self.startOutgoingCall(contactRingId: contactRingId, userName: name, isAudio: true)
             }
         }).disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
@@ -81,9 +84,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
         self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true, withStateable: conversationViewController.viewModel)
     }
 
-    private func startOutgoingCall(contactRingId: String, userName: String) {
+    private func startOutgoingCall(contactRingId: String, userName: String, isAudio: Bool = false) {
         let callViewController = CallViewController.instantiate(with: self.injectionBag)
-        callViewController.viewModel.placeCall(with: contactRingId, userName: userName)
+        callViewController.viewModel.placeCall(with: contactRingId, userName: userName, isAudio: isAudio)
         self.present(viewController: callViewController, withStyle: .present, withAnimation: false)
     }
 

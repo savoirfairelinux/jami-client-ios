@@ -131,7 +131,10 @@ class CallsService: CallsAdapterDelegate {
         })
     }
 
-    func placeCall(withAccount account: AccountModel, toRingId ringId: String, userName: String) -> Single<CallModel> {
+    func placeCall(withAccount account: AccountModel,
+                   toRingId ringId: String,
+                   userName: String,
+                   isAudio: Bool = false) -> Single<CallModel> {
 
         //Create and emit the call
         var callDetails = [String: String]()
@@ -140,9 +143,10 @@ class CallsService: CallsAdapterDelegate {
         callDetails[CallDetailKey.accountIdKey.rawValue] = account.id
         let call = CallModel(withCallId: ringId, callDetails: callDetails)
         call.state = .connecting
-        return Single<CallModel>.create(subscribe: { single in
+        return Single<CallModel>.create(subscribe: { [unowned self] single in
             if let callId = self.callsAdapter.placeCall(withAccountId: account.id,
-                                                        toRingId: "ring:\(ringId)"),
+                                                        toRingId: "ring:\(ringId)",
+                                                        audioOnly: isAudio),
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
                 call.update(withDictionary: callDictionary)
                 call.callId = callId
