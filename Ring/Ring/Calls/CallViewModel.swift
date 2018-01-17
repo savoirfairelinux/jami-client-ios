@@ -146,19 +146,19 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var shouldRespondOnTap: Observable<Bool> = {
+    lazy var isActiveVideoCall: Observable<Bool> = {
         return self.callService.currentCall
             .filter({ [weak self] call in
                 return call.callId == self?.call?.callId
             }).map({ call in
-                return call.state == .current
+                return call.state == .current && !self.isAudioOnly
             })
     }()
 
     lazy var showCallOptions: Observable<Bool> = {
         return Observable.combineLatest(self.screenTapped.asObservable(),
-                                        shouldRespondOnTap) { [unowned self] (tapped, shouldRespond) in
-            if tapped && shouldRespond && !self.isAudioOnly {
+                                        isActiveVideoCall) { [unowned self] (tapped, shouldRespond) in
+            if tapped && shouldRespond {
                 return true
             }
             return false
@@ -377,5 +377,9 @@ class CallViewModel: Stateable, ViewModel {
 
     func switchSpeaker() {
         self.audioService.switchSpeaker()
+    }
+
+    func setCameraOrientation(orientation: UIDeviceOrientation) {
+        videoService.setCameraOrientation(orientation: orientation)
     }
 }
