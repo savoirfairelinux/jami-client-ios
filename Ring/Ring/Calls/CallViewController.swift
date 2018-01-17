@@ -34,6 +34,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var infoBottomLabel: UILabel!
 
     @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var callCancelButton: UIButton!
     @IBOutlet private weak var mainView: UIView!
 
     //video screen
@@ -52,6 +53,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var muteVideoButton: UIButton!
     @IBOutlet private weak var pauseCallButton: UIButton!
     @IBOutlet private weak var switchCameraButton: UIButton!
+    @IBOutlet private weak var switchSpeakerButton: UIButton!
 
     var viewModel: CallViewModel!
 
@@ -83,6 +85,12 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self?.viewModel.cancelCall()
         }).disposed(by: self.disposeBag)
 
+        self.callCancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.removeFromScreen()
+                self?.viewModel.cancelCall()
+            }).disposed(by: self.disposeBag)
+
         self.muteAudioButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.muteAudio()
@@ -103,6 +111,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.viewModel.switchCamera()
             }).disposed(by: self.disposeBag)
 
+        self.switchSpeakerButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.switchSpeaker()
+            }).disposed(by: self.disposeBag)
+        
         //Data bindings
         self.viewModel.contactImageData.asObservable()
             .observeOn(MainScheduler.instance)
@@ -191,6 +204,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.viewModel.callPaused
             .observeOn(MainScheduler.instance)
             .bind(to: self.callView.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.callIsActive
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.cancelButton.rx.isHidden)
             .disposed(by: self.disposeBag)
     }
 
