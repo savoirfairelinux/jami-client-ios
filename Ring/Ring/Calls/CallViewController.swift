@@ -33,7 +33,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var durationLabel: UILabel!
     @IBOutlet private weak var infoBottomLabel: UILabel!
 
-    @IBOutlet private weak var cancelButton: UIButton!
     @IBOutlet private weak var mainView: UIView!
 
     //video screen
@@ -42,16 +41,12 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var capturedVideo: UIImageView!
     @IBOutlet private weak var infoContainer: UIView!
     @IBOutlet private weak var callProfileImage: UIImageView!
+    @IBOutlet private weak var audioOnlyImage: UIImageView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
     @IBOutlet private weak var infoLabelConstraint: NSLayoutConstraint!
 
-    // call options buttons
-    @IBOutlet private weak var buttonsContainer: UIView!
-    @IBOutlet private weak var muteAudioButton: UIButton!
-    @IBOutlet private weak var muteVideoButton: UIButton!
-    @IBOutlet private weak var pauseCallButton: UIButton!
-    @IBOutlet private weak var switchCameraButton: UIButton!
+    @IBOutlet private weak var buttonsContainer: ButtonsContainerView!
 
     var viewModel: CallViewModel!
 
@@ -61,67 +56,113 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     private var task: DispatchWorkItem?
 
+    override var inputAccessoryView: UIView {
+        return self.buttonsContainer
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTaped))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
-        self.setupUI()
-        self.setupBindings()
-    }
-
-    func setupUI() {
-        self.cancelButton.backgroundColor = UIColor.red
         self.infoContainer.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        self.buttonsContainer.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.setUpCallButtons()
+        self.setupBindings()
+        if self.viewModel.isAudioOnly {
+            self.showAllInfo()
+        }
+        UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
     }
 
-    func setupBindings() {
+    func setUpCallButtons() {
+        self.buttonsContainer.viewModel = self.viewModel.containerViewModel
         //bind actions
-        self.cancelButton.rx.tap
+        self.buttonsContainer.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
-            self?.removeFromScreen()
-            self?.viewModel.cancelCall()
-        }).disposed(by: self.disposeBag)
-
-        self.muteAudioButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.muteAudio()
+                self?.removeFromScreen()
+                self?.viewModel.cancelCall()
             }).disposed(by: self.disposeBag)
 
-        self.muteVideoButton.rx.tap
+        self.buttonsContainer.muteAudioButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.muteVideo()
+                self?.viewModel.toggleMuteAudio()
             }).disposed(by: self.disposeBag)
 
-        self.pauseCallButton.rx.tap
+        if !(self.viewModel.call?.isAudioOnly ?? false) {
+            self.buttonsContainer.muteVideoButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.viewModel.toggleMuteVideo()
+                }).disposed(by: self.disposeBag)
+        }
+
+        self.buttonsContainer.pauseCallButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.pauseCall()
+                self?.viewModel.togglePauseCall()
             }).disposed(by: self.disposeBag)
 
-        self.switchCameraButton.rx.tap
+        self.buttonsContainer.switchCameraButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.switchCamera()
             }).disposed(by: self.disposeBag)
 
+        self.buttonsContainer.switchSpeakerButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.switchSpeaker()
+            }).disposed(by: self.disposeBag)
+
         //Data bindings
+        self.viewModel.videoButtonState
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.buttonsContainer.muteVideoButton.rx.image())
+            .disposed(by: self.disposeBag)
+
+        self.buttonsContainer.muteVideoButton.isEnabled = !(self.viewModel.call?.isAudioOnly ?? false)
+
+        self.viewModel.audioButtonState
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.buttonsContainer.muteAudioButton.rx.image())
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.speakerButtonState
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.buttonsContainer.switchSpeakerButton.rx.image())
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.speakerSwitchable
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.buttonsContainer.switchSpeakerButton.rx.isEnabled)
+            .disposed(by: self.disposeBag)
+
+        self.buttonsContainer.switchSpeakerButton.isEnabled = !(self.viewModel.isHeadsetConnected)
+
+        self.viewModel.pauseCallButtonState
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.buttonsContainer.pauseCallButton.rx.image())
+            .disposed(by: self.disposeBag)
+
+        // disable switch camera button for audio only calls
+        self.buttonsContainer.switchCameraButton.isEnabled = !(self.viewModel.isAudioOnly)
+    }
+
+    func setupBindings() {
+
         self.viewModel.contactImageData.asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] dataOrNil in
-            if let imageData = dataOrNil {
-                if let image = UIImage(data: imageData) {
-                    self?.profileImageView.image = image
-                    self?.callProfileImage.image = image
+                if let imageData = dataOrNil {
+                    if let image = UIImage(data: imageData) {
+                        self?.profileImageView.image = image
+                        self?.callProfileImage.image = image
+                    }
                 }
-            }
-        }).disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
 
         self.viewModel.dismisVC
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] dismiss in
-            if dismiss {
-                self?.removeFromScreen()
-            }
-        }).disposed(by: self.disposeBag)
+                if dismiss {
+                    self?.removeFromScreen()
+                }
+            }).disposed(by: self.disposeBag)
 
         self.viewModel.contactName.drive(self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
@@ -143,22 +184,22 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.viewModel.incomingFrame
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
-            if let image = frame {
-                DispatchQueue.main.async {
-                    self?.incomingVideo.image = image
+                if let image = frame {
+                    DispatchQueue.main.async {
+                        self?.incomingVideo.image = image
+                    }
                 }
-            }
-        }).disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
 
         self.viewModel.capturedFrame
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
-            if let image = frame {
-                DispatchQueue.main.async {
-                    self?.capturedVideo.image = image
+                if let image = frame {
+                    DispatchQueue.main.async {
+                        self?.capturedVideo.image = image
+                    }
                 }
-            }
-        }).disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
 
         self.viewModel.showCallOptions
             .observeOn(MainScheduler.instance)
@@ -168,38 +209,64 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 }
             }).disposed(by: self.disposeBag)
 
-        self.viewModel.videoButtonState
+        self.viewModel.showCancelOption
             .observeOn(MainScheduler.instance)
-            .bind(to: self.muteVideoButton.rx.image())
-            .disposed(by: self.disposeBag)
+            .subscribe(onNext: { show in
+                if show {
+                    self.showCancelButton()
+                } else if !self.viewModel.isAudioOnly {
+                    self.hideCancelButton()
+                }
+            }).disposed(by: self.disposeBag)
 
         self.viewModel.videoMuted
             .observeOn(MainScheduler.instance)
             .bind(to: self.capturedVideo.rx.isHidden)
             .disposed(by: self.disposeBag)
 
-        self.viewModel.audioButtonState
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.muteAudioButton.rx.image())
-            .disposed(by: self.disposeBag)
-
-        self.viewModel.callButtonState
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.pauseCallButton.rx.image())
-            .disposed(by: self.disposeBag)
+        self.audioOnlyImage.isHidden = !self.viewModel.isAudioOnly
 
         self.viewModel.callPaused
             .observeOn(MainScheduler.instance)
             .bind(to: self.callView.rx.isHidden)
             .disposed(by: self.disposeBag)
+        self.viewModel.callPaused
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] show in
+                if show {
+                    self.task?.cancel()
+                    self.showCallOptions()
+                }
+            }).disposed(by: self.disposeBag)
     }
 
     func removeFromScreen() {
         self.dismiss(animated: false)
     }
 
-    @objc func screenTaped() {
+    @objc func screenTapped() {
+        let callState = self.viewModel.call?.state
+        if callState == .connecting || callState == .ringing {
+            return
+        }
         self.viewModel.respondOnTap()
+    }
+
+    func showCancelButton() {
+        self.buttonsContainer.isHidden = false
+        self.buttonsContainer.bottomSpaceConstraint.constant = 90
+        self.view.layoutIfNeeded()
+    }
+
+    func hideCancelButton() {
+        self.buttonsContainer.isHidden = true
+        self.buttonsContainer.bottomSpaceConstraint.constant = 30
+        self.view.layoutIfNeeded()
+    }
+
+    func showCallOptions() {
+        self.buttonsContainer.isHidden = false
+        self.view.layoutIfNeeded()
     }
 
     func showContactInfo() {
@@ -235,5 +302,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self?.infoContainer.isHidden = true
             self?.buttonsContainer.isHidden = true
         })
+    }
+
+    func showAllInfo() {
+        self.buttonsContainer.isHidden = false
+        self.infoContainer.isHidden = false
+        self.infoLabelConstraint.constant = 0.00
     }
 }
