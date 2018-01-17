@@ -95,7 +95,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
     }
 
     private func showCallAlert(call: CallModel) {
-        let alert = UIAlertController(title: L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alertStyle = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) ? UIAlertControllerStyle.alert : UIAlertControllerStyle.actionSheet
+        let alert = UIAlertController(title: L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)", message: nil, preferredStyle: alertStyle)
         alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonAccept, style: UIAlertActionStyle.default, handler: { (_) in
             self.answerIncomingCall(call: call)
             alert.dismiss(animated: true, completion: nil)}))
@@ -108,7 +109,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
         }))
 
         if let controller = self.rootViewController.presentedViewController {
-        controller.present(alert, animated: false, completion: nil)
+            controller.present(alert, animated: false, completion: nil)
         } else {
             self.present(viewController: alert, withStyle: .present, withAnimation: true)
         }
