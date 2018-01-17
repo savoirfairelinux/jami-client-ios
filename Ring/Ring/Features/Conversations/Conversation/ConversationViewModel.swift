@@ -87,6 +87,7 @@ class ConversationViewModel: Stateable, ViewModel {
             let contact = self.contactsService.contact(withRingId: contactRingId)
 
             if let profile = conversation.value.participantProfile, let photo =  profile.photo {
+                self.displayName.value = profile.alias
                 if let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                     self.profileImageData = data
                 }
@@ -98,6 +99,7 @@ class ConversationViewModel: Stateable, ViewModel {
                             return
                         }
                         self.profileImageData = imageData
+                        self.displayName.value = VCardUtils.getName(from: vCard)
                     })
                     .disposed(by: self.disposeBag)
             }
@@ -171,6 +173,8 @@ class ConversationViewModel: Stateable, ViewModel {
     private let disposeBag = DisposeBag()
 
     var messages = Variable([MessageViewModel]())
+
+    var displayName = Variable<String?>(nil)
 
     var userName = Variable<String>("")
 

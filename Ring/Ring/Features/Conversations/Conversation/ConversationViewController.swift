@@ -32,6 +32,7 @@ extension UITextField {
     }
 }
 
+// swiftlint:disable type_body_length
 class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
 
     let log = SwiftyBeaver.self
@@ -89,8 +90,105 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.updateBottomOffset()
     }
 
+    func setupNavTitle(displayName: String? = nil, username: String?) {
+        let imageSize       = CGFloat(36.0)
+        let imageOffsetY    = CGFloat(5.0)
+        let infoPadding     = CGFloat(8.0)
+        let maxNameLength   = CGFloat(128.0)
+        var userNameYOffset = CGFloat(9.0)
+        var nameSize        = CGFloat(18.0)
+        let navbarFrame     = self.navigationController?.navigationBar.frame
+        let totalHeight     = ((navbarFrame?.size.height ?? 0) + (navbarFrame?.origin.y ?? 0)) / 2
+
+        // Replace "< Home" with a back arrow while we are crunching everything to the left side of the bar for now.
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_button")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back_button")
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+
+        let titleView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: totalHeight))
+
+        let profileImageView = UIImageView(frame: CGRect(x: 0, y: imageOffsetY, width: imageSize, height: imageSize))
+        profileImageView.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
+        profileImageView.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
+        if let imageData = viewModel.profileImageData {
+            if let image = UIImage(data: imageData) {
+                self.log.debug("standard avatar")
+                (profileImageView as UIImageView).image = image.circleMasked
+                titleView.addSubview(profileImageView)
+            } else {
+                // use fallback avatars
+                let name = viewModel.userName.value
+                let scanner = Scanner(string: name.toMD5HexString().prefixString())
+                var index: UInt64 = 0
+                if scanner.scanHexInt64(&index) {
+                    let fbaBGColor = avatarColors[Int(index)]
+                    let circle = UIView(frame: CGRect(x: 0.0, y: imageOffsetY, width: imageSize, height: imageSize))
+                    circle.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
+                    circle.layer.cornerRadius = imageSize / 2
+                    circle.backgroundColor = fbaBGColor
+                    circle.clipsToBounds = true
+                    titleView.addSubview(circle)
+                    if self.viewModel.conversation.value.recipientRingId != name {
+                        // use g-style fallback avatar
+                        self.log.debug("fallback avatar")
+                        let initialLabel: UILabel = UILabel.init(frame: CGRect.init(x: 0, y: imageOffsetY - 1, width: imageSize, height: imageSize))
+                        initialLabel.text = name.prefixString().capitalized
+                        initialLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                        initialLabel.textColor = UIColor.white
+                        initialLabel.textAlignment = .center
+                        titleView.addSubview(initialLabel)
+                    } else {
+                        // ringId only, so fallback fallback avatar
+                        self.log.debug("fallback fallback avatar")
+                        if let image = UIImage(named: "fallback_avatar") {
+                            (profileImageView as UIImageView).image = image.circleMasked
+                            titleView.addSubview(profileImageView)
+                        }
+                    }
+                }
+            }
+        }
+
+        if displayName != nil {
+            let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: 4, width: maxNameLength, height: 20))
+            dnlabel.text = displayName
+            dnlabel.font = UIFont.systemFont(ofSize: nameSize)
+            dnlabel.textColor = UIColor.white
+            dnlabel.textAlignment = .left
+            titleView.addSubview(dnlabel)
+
+            userNameYOffset = 20.0
+            nameSize = 14.0
+        }
+
+        let unlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: userNameYOffset, width: maxNameLength, height: 24))
+        unlabel.text = username
+        unlabel.font = UIFont.systemFont(ofSize: nameSize)
+        unlabel.textColor = UIColor.white
+        unlabel.textAlignment = .left
+        titleView.addSubview(unlabel)
+
+        self.navigationItem.titleView = titleView
+    }
+
     func setupUI() {
-        self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
+        } else {
+            self.setupNavTitle(displayName: self.viewModel.displayName.value, username: self.viewModel.userName.value)
+
+            Observable<(String, String?)>.combineLatest(self.viewModel.userName.asObservable(),
+                                                        self.viewModel.displayName.asObservable()) { username, displayName in
+                                                            return (username, displayName)
+                }
+                .observeOn(MainScheduler.instance)
+                .subscribe({ [weak self] names -> Void in
+                    self?.setupNavTitle(displayName: names.element?.1,
+                                        username: names.element?.0)
+                    return
+                })
+                .disposed(by: self.disposeBag)
+        }
 
         // UIColor that observes "best Id" prefix
         self.fallbackBGColorObservable = viewModel.userName.asObservable()
@@ -384,6 +482,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         return MessageSequencing.unknown
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func applyBubbleStyleToCell(toCell cell: MessageCell,
                                 cellForRowAt indexPath: IndexPath,
                                 withMessageVM messageVM: MessageViewModel) {
@@ -447,6 +546,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         }
 
     }
+    // swiftlint:enable cyclomatic_complexity
 
     // swiftlint:disable cyclomatic_complexity
     func formatCell(withCell cell: MessageCell,
@@ -550,6 +650,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }
     // swiftlint:enable cyclomatic_complexity
 }
+// swiftlint:enable type_body_length
 
 extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

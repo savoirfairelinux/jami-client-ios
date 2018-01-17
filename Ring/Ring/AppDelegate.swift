@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
     private let callService = CallsService(withCallsAdapter: CallsAdapter())
     private let videoService = VideoService(withVideoAdapter: VideoAdapter())
+    private let audioService = AudioService(withAudioAdapter: AudioAdapter())
     private let networkService = NetworkService()
     private var conversationManager: ConversationsManager?
     private var contactRequestManager: ContactRequestManager?
@@ -51,7 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             withPresenceService: self.presenceService,
                             withNetworkService: self.networkService,
                             withCallService: self.callService,
-                            withVideoService: self.videoService)
+                            withVideoService: self.videoService,
+                            withAudioService: self.audioService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -85,6 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // start monitoring for network changes
         self.networkService.monitorNetworkType()
+
+        // set device to headset if present
+        self.audioService.overrideAudioRoute(.override)
 
         // themetize the app
         Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)

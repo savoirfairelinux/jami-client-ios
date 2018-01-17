@@ -278,7 +278,7 @@ class VideoService: FrameExtractorDelegate {
         self.camera.switchCamera()
             .subscribe(onCompleted: {
             print ("camera switched")
-        }) { (error) in
+        }) { error in
             print(error)
         }.disposed(by: self.disposeBag)
     }
