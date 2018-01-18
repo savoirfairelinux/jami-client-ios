@@ -72,6 +72,6 @@ class MeCoordinator: Coordinator, StateableResponsive {
 
     private func showLinkDeviceWindow() {
         let linkDeviceVC = LinkNewDeviceViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: linkDeviceVC, withStyle: .appear, withAnimation: false)
+        self.present(viewController: linkDeviceVC, withStyle: .popup, withAnimation: false)
     }
 }
