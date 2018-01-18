@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,30 +19,31 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qQU-vB-ZuD" customClass="ButtonTransparentBackground" customModule="Ring" customModuleProvider="target">
-                        <rect key="frame" x="65.5" y="4.5" width="35" height="35"/>
+                        <rect key="frame" x="73.5" y="4.5" width="35" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="35" id="XIg-PF-p2r"/>
                             <constraint firstAttribute="height" constant="35" id="rZ3-3g-1AV"/>
                         </constraints>
                         <color key="tintColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link Another Device" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aw5-4m-yjX">
-                        <rect key="frame" x="110.5" y="4.5" width="154" height="35"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Gy-EN-BpG">
+                        <rect key="frame" x="118.5" y="4.5" width="138" height="35"/>
+                        <state key="normal" title="Link Another Device">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Aw5-4m-yjX" firstAttribute="top" secondItem="qQU-vB-ZuD" secondAttribute="top" id="5nH-9W-o0J"/>
-                    <constraint firstItem="Aw5-4m-yjX" firstAttribute="centerY" secondItem="fhq-ul-0n8" secondAttribute="centerY" id="AaA-ZQ-i3N"/>
-                    <constraint firstItem="Aw5-4m-yjX" firstAttribute="centerX" secondItem="fhq-ul-0n8" secondAttribute="centerX" id="Q1G-cd-PcV"/>
-                    <constraint firstItem="Aw5-4m-yjX" firstAttribute="leading" secondItem="qQU-vB-ZuD" secondAttribute="trailing" constant="10" id="Qnp-Hb-9Fq"/>
-                    <constraint firstItem="Aw5-4m-yjX" firstAttribute="bottom" secondItem="qQU-vB-ZuD" secondAttribute="bottom" id="bzk-WA-kKO"/>
+                    <constraint firstItem="5Gy-EN-BpG" firstAttribute="centerY" secondItem="fhq-ul-0n8" secondAttribute="centerY" id="MFh-yt-NY1"/>
+                    <constraint firstItem="5Gy-EN-BpG" firstAttribute="top" secondItem="qQU-vB-ZuD" secondAttribute="top" id="XnJ-Nr-eWE"/>
+                    <constraint firstItem="5Gy-EN-BpG" firstAttribute="centerX" secondItem="fhq-ul-0n8" secondAttribute="centerX" id="dXj-UN-Lws"/>
+                    <constraint firstItem="5Gy-EN-BpG" firstAttribute="bottom" secondItem="qQU-vB-ZuD" secondAttribute="bottom" id="e91-bu-CRx"/>
+                    <constraint firstItem="5Gy-EN-BpG" firstAttribute="leading" secondItem="qQU-vB-ZuD" secondAttribute="trailing" constant="10" id="qXb-0H-C6u"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addDeviceButton" destination="qQU-vB-ZuD" id="63f-uV-UkV"/>
+                <outlet property="addDeviceTitle" destination="5Gy-EN-BpG" id="Rzf-H1-FW1"/>
             </connections>
             <point key="canvasLocation" x="38.5" y="124"/>
         </tableViewCell>

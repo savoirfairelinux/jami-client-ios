@@ -84,30 +84,6 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
         return self.generatingState.asObservable()
     }()
 
-    lazy var isInitialState: Observable<Bool> = {
-        return self.observableState.map { state in
-            return !state.isStateOfType(type: "INITIAL")
-        }
-        }().share()
-
-    lazy var isSuccessState: Observable<Bool> = {
-        return self.observableState.map { state in
-            return !state.isStateOfType(type: "SUCCESS")
-        }
-        }().share()
-
-    lazy var isErrorState: Observable<Bool> = {
-        return self.observableState.map { state in
-            return !state.isStateOfType(type: "ERROR")
-        }
-        }().share()
-
-    lazy var isGeneratedPinState: Observable<Bool> = {
-        return self.observableState.map { state in
-            return !state.isStateOfType(type: "GENERATING_PIN")
-        }
-        }().share()
-
     let accountService: AccountsService
 
     let disposeBag = DisposeBag()

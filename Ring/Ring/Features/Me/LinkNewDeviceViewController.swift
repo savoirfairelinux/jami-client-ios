@@ -25,42 +25,14 @@ import PKHUD
 
 class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
 
-    @IBOutlet weak var titleLable: UILabel!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var okButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var pinLabel: UILabel!
-    @IBOutlet weak var explanationMessage: UILabel!
-    @IBOutlet weak var errorMessage: UILabel!
-    @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var containerView: UIView!
-
     var viewModel: LinkNewDeviceViewModel!
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
 
-        self.background.image = self.view.convertViewToImage()
-        self.applyL10n()
-
-        // initial state
-        self.viewModel.isInitialState
-            .bind(to: self.titleLable.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.viewModel.isInitialState.bind(to: self.passwordField.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.viewModel.isInitialState.bind(to: self.cancelButton.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        // error state
-        self.viewModel.isErrorState.bind(to: self.errorMessage.rx.isVisible)
-            .disposed(by: self.disposeBag)
-        // success state
-        self.viewModel.isSuccessState
-            .bind(to: self.explanationMessage.rx.isVisible)
-            .disposed(by: self.disposeBag)
-        self.viewModel.isSuccessState
-            .bind(to: self.pinLabel.rx.isVisible)
-            .disposed(by: self.disposeBag)
+        self.view.backgroundColor = UIColor.white.withAlphaComponent(0.0)
+        super.viewDidLoad()
+        self.showInitiaAlert()
 
         self.viewModel.observableState
             .observeOn(MainScheduler.instance)
@@ -69,43 +41,66 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                 case .generatingPin:
                     self?.showProgress()
                 case .success(let pin):
-                    self?.pinLabel.text = pin
                     self?.hideHud()
+                    self?.showSuccessAlert(pin: pin)
                 case .error(let pinError):
-                    self?.errorMessage.text = pinError.description
+                    self?.showErrorAlert(error: pinError.description)
                     self?.hideHud()
                 default:
                     break
                 }
             }).disposed(by: self.disposeBag)
-
-        cancelButton.rx.tap.subscribe(onNext: { [unowned self] in
-            self.dismiss(animated: true, completion: nil)
-        }).disposed(by: disposeBag)
-
-        okButton.rx.tap.subscribe(onNext: { [unowned self] in
-            if !self.passwordField.isHidden {
-                self.viewModel.linkDevice(with: self.passwordField.text)
-                self.passwordField.text = ""
-            } else if !self.errorMessage.isHidden {
-                self.viewModel.refresh()
-            } else {
-                self.dismiss(animated: true, completion: nil)
-            }
-        }).disposed(by: disposeBag)
-
-        super.viewDidLoad()
     }
 
     private func showProgress() {
-        HUD.show(.labeledProgress(title: L10n.Linkdevice.hudMessage, subtitle: nil), onView: self.containerView)
+        HUD.show(.labeledProgress(title: L10n.Linkdevice.hudMessage, subtitle: nil))
     }
     private func hideHud() {
-        HUD.hide(animated: true)
+        HUD.hide(animated: false)
     }
 
-    private func applyL10n() {
-        self.titleLable.text = self.viewModel.linkDeviceTitleTitle
-        self.explanationMessage.text = self.viewModel.explanationMessage
+    func showSuccessAlert(pin: String) {
+        let alert = UIAlertController(title: pin,
+                                      message: self.viewModel.explanationMessage,
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: L10n.Global.ok, style: .default) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func showInitiaAlert() {
+        let alert = UIAlertController(title: self.viewModel.linkDeviceTitleTitle,
+                                      message: nil,
+                                      preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction, style: .cancel) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        let actionLink = UIAlertAction(title: L10n.Global.ok, style: .default) { _ in
+            if let textFields = alert.textFields {
+                self.viewModel.linkDevice(with: textFields[0].text)
+            }
+            alert.dismiss(animated: false, completion: nil)
+        }
+        alert.addAction(actionCancel)
+        alert.addAction(actionLink)
+
+        alert.addTextField { (textField) in
+            textField.isSecureTextEntry = true
+            textField.placeholder = L10n.Linktoaccount.passwordLabel
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func showErrorAlert(error: String) {
+        let alert = UIAlertController(title: Error,
+                                      message: error,
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: L10n.Global.ok, style: .cancel) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
 }
