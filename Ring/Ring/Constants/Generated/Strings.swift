@@ -136,7 +136,7 @@ enum L10n {
     static let networkError = L10n.tr("Localizable", "linkDevice.networkError")
     /// The password you entered does not unlock this account
     static let passwordError = L10n.tr("Localizable", "linkDevice.passwordError")
-    /// Link new device
+    /// Link a new device
     static let title = L10n.tr("Localizable", "linkDevice.title")
   }
 

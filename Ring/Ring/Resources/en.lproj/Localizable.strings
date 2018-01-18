@@ -107,7 +107,7 @@
 "accountPage.devicesListHeader" = "Devices";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "An error occured during the export";
