@@ -91,6 +91,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.addDeviceButton.rx.tap.subscribe(onNext: { [unowned self] in
                         self.viewModel.linkDevice()
                     }).disposed(by: cell.disposeBag)
+                    cell.addDeviceTitle.rx.tap.subscribe(onNext: { [unowned self] in
+                        self.viewModel.linkDevice()
+                    }).disposed(by: cell.disposeBag)
                     cell.selectionStyle = .none
                     return cell
                 }
