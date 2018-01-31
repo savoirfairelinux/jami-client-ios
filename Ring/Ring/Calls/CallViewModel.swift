@@ -75,6 +75,8 @@ class CallViewModel: Stateable, ViewModel {
 
             isHeadsetConnected = self.audioService.isHeadsetConnected.value
             isAudioOnly = call.isAudioOnly
+
+            containerViewModel = ButtonsContainerViewModel(with: self.callService, audioService: self.audioService, callID: call.callId)
         }
     }
 
@@ -261,9 +263,11 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var containerViewModel: ButtonsContainerViewModel = {
-        return ButtonsContainerViewModel(with: self.callService, callID: (self.call?.callId)!)
-    }()
+    var containerViewModel: ButtonsContainerViewModel?
+
+//    lazy var containerViewModel: ButtonsContainerViewModel = {
+//        return ButtonsContainerViewModel(with: self.callService, audioService: self.audioService, callID: (self.call?.callId)!)
+//    }()
 
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
