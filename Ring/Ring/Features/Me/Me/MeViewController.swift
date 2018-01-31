@@ -54,6 +54,16 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
         super.setupUI()
 
+        let infoButton = UIButton(type: .infoLight)
+        let infoItem = UIBarButtonItem(customView: infoButton)
+        infoButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.infoItemTapped()
+            })
+            .disposed(by: self.disposeBag)
+
+        self.navigationItem.rightBarButtonItem = infoItem
+
         //setup Table
         self.settingsTable.estimatedRowHeight = 50
         self.settingsTable.rowHeight = UITableViewAutomaticDimension
@@ -63,6 +73,19 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.setUpDataSource()
         self.settingsTable.register(cellType: DeviceCell.self)
         self.settingsTable.register(cellType: LinkNewDeviceCell.self)
+    }
+
+    func infoItemTapped() {
+        let alert = UIAlertController(title: "\nRing\nbuild: 20180131\n\"In varietate concordia\"", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+        let image = UIImageView(image: UIImage(asset: Asset.ringIcon))
+        alert.view.addSubview(image)
+        image.translatesAutoresizingMaskIntoConstraints = false
+        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: alert.view, attribute: .centerX, multiplier: 1, constant: 0))
+        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerY, relatedBy: .equal, toItem: alert.view, attribute: .top, multiplier: 1, constant: 0.0))
+        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
+        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
+        self.present(alert, animated: true, completion: nil)
     }
 
     func setUpDataSource() {
