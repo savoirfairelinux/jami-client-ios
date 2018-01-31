@@ -262,7 +262,7 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var containerViewModel: ButtonsContainerViewModel = {
-        return ButtonsContainerViewModel(with: self.callService, callID: (self.call?.callId)!)
+        return ButtonsContainerViewModel(with: self.callService, audioService: self.audioService, callID: (self.call?.callId)!)
     }()
 
     required init(with injectionBag: InjectionBag) {

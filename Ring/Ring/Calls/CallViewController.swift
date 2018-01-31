@@ -56,10 +56,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     private var task: DispatchWorkItem?
 
-    override var inputAccessoryView: UIView {
-        return self.buttonsContainer
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
@@ -127,12 +123,12 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .bind(to: self.buttonsContainer.switchSpeakerButton.rx.image())
             .disposed(by: self.disposeBag)
 
-        self.viewModel.speakerSwitchable
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.buttonsContainer.switchSpeakerButton.rx.isEnabled)
-            .disposed(by: self.disposeBag)
+//        self.viewModel.speakerSwitchable
+//            .observeOn(MainScheduler.instance)
+//            .bind(to: self.buttonsContainer.switchSpeakerButton.rx.isEnabled)
+//            .disposed(by: self.disposeBag)
 
-        self.buttonsContainer.switchSpeakerButton.isEnabled = !(self.viewModel.isHeadsetConnected)
+        //self.buttonsContainer.switchSpeakerButton.isEnabled = !(self.viewModel.isHeadsetConnected)
 
         self.viewModel.pauseCallButtonState
             .observeOn(MainScheduler.instance)
@@ -254,13 +250,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func showCancelButton() {
         self.buttonsContainer.isHidden = false
-        self.buttonsContainer.bottomSpaceConstraint.constant = 90
+        //self.buttonsContainer.bottomSpaceConstraint.constant = 90
         self.view.layoutIfNeeded()
     }
 
     func hideCancelButton() {
         self.buttonsContainer.isHidden = true
-        self.buttonsContainer.bottomSpaceConstraint.constant = 30
+       // self.buttonsContainer.bottomSpaceConstraint.constant = 30
         self.view.layoutIfNeeded()
     }
 
