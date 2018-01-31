@@ -20,13 +20,13 @@
 
 // Global
 "global.homeTabBarTitle" = "خانه";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "دعوت نامه‌ها";
 "global.meTabBarTitle" = "حساب کاربری";
 "global.ok" = "خب";
 
 // Smartlist
 "smartlist.yesterday" = "دیروز";
-"smartlist.userFound" = "User found";
+"smartlist.userFound" = "کاربر پیدا شد";
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
@@ -64,7 +64,7 @@
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
 "linkToAccount.passwordPlaceholder" = "گذرواژه";
-"linkToAccount.pinPlaceholder" = "PIN";
+"linkToAccount.pinPlaceholder" = "پین";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "پین را وارد کنید";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -92,12 +92,22 @@
 "actions.blockAction" = "مسدود";
 "actions.deleteAction" = "حذف";
 "actions.cancelAction" = "لغو";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "قبول";
+"alerts.incomingCallButtonIgnore" = "رد";
+
+//Calls
+"calls.callItemTitle" = "برقراری تماس";
+"calls.unknown" = "ناشناخته";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "افزاره‌ها";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "گذرواژه‌ای که وارد کردید قفل این حساب کاربری را باز نمی‌کند";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "An error occured during the export";

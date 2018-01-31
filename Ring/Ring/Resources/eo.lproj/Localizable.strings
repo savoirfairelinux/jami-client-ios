@@ -92,12 +92,22 @@
 "actions.blockAction" = "Block";
 "actions.deleteAction" = "Forigi";
 "actions.cancelAction" = "Rezigni";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Akcepti";
+"alerts.incomingCallButtonIgnore" = "Malatenti";
+
+//Calls
+"calls.callItemTitle" = "Voko";
+"calls.unknown" = "Nekonata";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aparatoj";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "Eraro okazis dum la elporto";

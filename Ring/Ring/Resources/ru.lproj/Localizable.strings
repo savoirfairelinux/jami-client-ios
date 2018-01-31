@@ -20,40 +20,40 @@
 
 // Global
 "global.homeTabBarTitle" = "Домой";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Приглашения";
 "global.meTabBarTitle" = "Аккаунт";
 "global.ok" = "Ok";
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.userFound" = "User found";
+"smartlist.userFound" = "Пользователь найден";
 "smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Поиск…";
-"smartlist.noResults" = "No results";
+"smartlist.noResults" = "Результаты отсутствуют";
 "smartlist.noNetworkConnectivity" = "Нет подключения к сети";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Убедитесь что доступ через сеть сотовой связи разрешен";
 
 // Walkthrough
 
 //Welcome Screen
 "welcome.title" = "Добро пожаловать в Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Ring - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
 "welcome.linkDevice" = "Привязать это устройство к аккаунту";
 "welcome.createAccount" = "Создать аккаунт Ring";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
+"createProfile.createAccount" = "Пропустить создание учетной записи";
 "createProfile.createAccountWithProfile" = "Далее";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.linkDevice" = "Пропустить привязку к устройству";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Создать свой аккаунт Ring";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
+"createAccount.chooseStrongPassword" = "Используйте сложный пароль, который Вы сможете запомнить, чтобы защитить Вашу учетную запись Ring";
 "createAccount.enterNewUsernamePlaceholder" = "имя пользователя";
 "createAccount.newPasswordPlaceholder" = "пароль";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
+"createAccount.repeatPasswordPlaceholder" = "Подтвердить пароль";
 "createAccount.passwordCharactersNumberError" = "Минимум 6 символов";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.passwordNotMatchingError" = "Пароли не совпадают";
 "createAccount.lookingForUsernameAvailability" = "looking for username availability";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
@@ -92,12 +92,22 @@
 "actions.blockAction" = "Заблокировать";
 "actions.deleteAction" = "Удалить";
 "actions.cancelAction" = "Отмена";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Принять";
+"alerts.incomingCallButtonIgnore" = "Игнорировать";
+
+//Calls
+"calls.callItemTitle" = "Звонок";
+"calls.unknown" = "Неизвестно";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "Введенный пароль не подходит к этому аккаунту";
 "linkDevice.networkError" = "Во время экспорта произошла ошибка сети";
 "linkDevice.defaultError" = "Во время экспорта произошла ошибка";

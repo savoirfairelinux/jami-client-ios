@@ -92,12 +92,22 @@
 "actions.blockAction" = "Užblokuoti";
 "actions.deleteAction" = "Ištrinti";
 "actions.cancelAction" = "Atsisakyti";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Priimti";
+"alerts.incomingCallButtonIgnore" = "Nepaisyti";
+
+//Calls
+"calls.callItemTitle" = "Skambutis";
+"calls.unknown" = "Nežinomas";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
 "linkDevice.networkError" = "Eksportavimo metu, įvyko klaida";
 "linkDevice.defaultError" = "Eksportavimo metu, įvyko klaida";

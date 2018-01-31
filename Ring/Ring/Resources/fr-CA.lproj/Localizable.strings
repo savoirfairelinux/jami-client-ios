@@ -92,12 +92,22 @@
 "actions.blockAction" = "Bloquer";
 "actions.deleteAction" = "Supprimer";
 "actions.cancelAction" = "Annuler";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Accepter";
+"alerts.incomingCallButtonIgnore" = "Ignorer";
+
+//Calls
+"calls.callItemTitle" = "Appeler";
+"calls.unknown" = "Inconnu";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "Une erreur résaux c'est produite lors de l'exportation";
 "linkDevice.defaultError" = "Une erreur s'est produite lors de l'exportation";

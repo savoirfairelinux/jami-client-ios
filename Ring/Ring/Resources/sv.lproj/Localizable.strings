@@ -83,21 +83,31 @@
 "alerts.accountLinkedTitle" = "Kopplar konto";
 "alerts.dbFailedTitle" = "Ett fel inträffade när Ring startades";
 "alerts.dbFailedMessage" = "Stäng appen och försök starta den igen";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmBlockContact" = "Vill du verkligen blockera den här kontakten? Konversationshistoriken för den här kontakten, kommer också att raderas permanent.";
+"alerts.confirmBlockContactTitle" = "Blockera kontakt";
+"alerts.confirmDeleteConversation" = "Vill du verkligen ta bort den här konversationen permanent?";
+"alerts.confirmDeleteConversationTitle" = "Ta bort konversation";
 
 //Actions
 "actions.blockAction" = "Blockera";
 "actions.deleteAction" = "Ta bort";
 "actions.cancelAction" = "Avbryt";
+"alerts.incomingCallAllertTitle" = "Inkommande samtal från";
+"alerts.incomingCallButtonAccept" = "Acceptera";
+"alerts.incomingCallButtonIgnore" = "Ignorera";
+
+//Calls
+"calls.callItemTitle" = "Samtal";
+"calls.unknown" = "Okänd";
+"calls.incomingCallInfo" = "vill prata med dig";
+"calls.calling" = "Ringer upp...";
+"calls.callFinished" = "Samtalet avslutat";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
 
 //Link New Device
-"linkDevice.title" = "Koppla ny enhet";
+"linkDevice.title" = "Länka en ny enhet";
 "linkDevice.passwordError" = "Det angivna lösenordet låser inte upp detta konto";
 "linkDevice.networkError" = "Ett nätverksfel inträffade under exporten";
 "linkDevice.defaultError" = "Ett fel inträffade vid exporten";

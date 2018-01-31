@@ -92,12 +92,22 @@
 "actions.blockAction" = "Bloqueja";
 "actions.deleteAction" = "Suprimeix";
 "actions.cancelAction" = "Cancel·la";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Accepta";
+"alerts.incomingCallButtonIgnore" = "Ignore";
+
+//Calls
+"calls.callItemTitle" = "Trucada";
+"calls.unknown" = "Desconegut";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositius";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "S'ha produït un error durant l'exportació";
 "linkDevice.defaultError" = "An error occured during the export";

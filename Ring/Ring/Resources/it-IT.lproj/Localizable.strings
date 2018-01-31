@@ -92,12 +92,22 @@
 "actions.blockAction" = "Blocca";
 "actions.deleteAction" = "Elimina";
 "actions.cancelAction" = "Annulla";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Accetta";
+"alerts.incomingCallButtonIgnore" = "Ignora";
+
+//Calls
+"calls.callItemTitle" = "Chiamata";
+"calls.unknown" = "Sconosciuto";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivi";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "La password che hai inserito non sblocca questo account";
 "linkDevice.networkError" = "Si è verificato un errore nella rete durante l'esportazione";
 "linkDevice.defaultError" = "Si è verificato un errore durante l'esportazione";

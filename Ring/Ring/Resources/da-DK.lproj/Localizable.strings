@@ -92,12 +92,22 @@
 "actions.blockAction" = "Blokér";
 "actions.deleteAction" = "Slet";
 "actions.cancelAction" = "Annuller";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Accepter";
+"alerts.incomingCallButtonIgnore" = "Afvis";
+
+//Calls
+"calls.callItemTitle" = "Ring op";
+"calls.unknown" = "Ukendt";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheder";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "Den adgangskode du har indtastet låser ikke op for denne konto";
 "linkDevice.networkError" = "Der opstod en netværksfejl under eksporteringen";
 "linkDevice.defaultError" = "Der opstod en fejl under eksport";
