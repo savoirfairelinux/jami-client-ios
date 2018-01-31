@@ -321,16 +321,27 @@ class CallsService: CallsAdapterDelegate {
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String) {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
 
-            //Add or update new call
-            var call = self.calls[callId]
-            if call == nil {
-                call = CallModel(withCallId: callId, callDetails: callDictionary)
+            if !isCurrentCall() {
+                let call = CallModel(withCallId: callId, callDetails: callDictionary)
+                self.newCall.value = call
             } else {
-                call?.update(withDictionary: callDictionary)
+                self.refuse(callId: callId).subscribe(onCompleted: { [weak self] in
+                    self?.log.debug("call refused")
+                }, onError: { [weak self] _ in
+                    self?.log.debug("Could not to refuse a call")
+                }).disposed(by: self.disposeBag)
             }
-            //Emit the call to the observers
-            self.newCall.value = call!
         }
+    }
+
+    func isCurrentCall() -> Bool {
+        for call in self.calls.values {
+            if call.state == .current || call.state == .hold ||
+                call.state == .unhold || call.state == .ringing {
+                return true
+            }
+        }
+        return false
     }
 
     func newCallStarted(withAccountId accountId: String, callId: String, toURI uri: String) {
