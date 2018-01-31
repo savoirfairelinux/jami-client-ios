@@ -96,11 +96,14 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var dismisVC: Observable<Bool> = {
-        return callService.currentCall.map({[weak self] call in
-            return call.state == .over || call.state == .failure && call.callId == self?.call?.callId
-        }).map({ hide in
-            return hide
+        return callService.currentCall.filter({ [weak self] call in
+            return call.callId == self?.call?.callId
         })
+            .map({[weak self] call in
+                return call.state == .over || call.state == .failure
+            }).map({ hide in
+                return hide
+            })
     }()
 
     lazy var contactName: Driver<String> = {
@@ -138,10 +141,12 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var bottomInfo: Observable<String> = {
-        return callService.currentCall.map({ [weak self] call in
+        return callService.currentCall
+            .filter({ [weak self] call in
+            return call.callId == self?.call?.callId
+            }).map({ [weak self] call in
             if call.state == .connecting || call.state == .ringing &&
-                call.callType == .outgoing &&
-                call.callId == self?.call?.callId {
+                call.callType == .outgoing {
                 return L10n.Calls.calling
             } else if call.state == .over {
                 return L10n.Calls.callFinished
@@ -164,7 +169,10 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var showCancelOption: Observable<Bool> = {
-        return self.callService.currentCall.map({ call in
+        return self.callService.currentCall
+            .filter({ [weak self] call in
+                return call.callId == self?.call?.callId
+            }).map({ call in
             return call.state == .connecting || call.state == .ringing
         })
     }()
