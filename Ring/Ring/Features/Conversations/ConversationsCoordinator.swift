@@ -111,10 +111,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
             alert.dismiss(animated: true, completion: nil)
         }))
 
-        if let controller = self.rootViewController.presentedViewController {
-            controller.present(alert, animated: false, completion: nil)
-        } else {
-            self.present(viewController: alert, withStyle: .present, withAnimation: true)
-        }
+        self.present(viewController: alert, withStyle: .present, withAnimation: true)
     }
 }
