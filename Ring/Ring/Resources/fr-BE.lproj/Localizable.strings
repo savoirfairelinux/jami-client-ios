@@ -92,12 +92,22 @@
 "actions.blockAction" = "Block";
 "actions.deleteAction" = "Delete";
 "actions.cancelAction" = "Cancel";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Accept";
+"alerts.incomingCallButtonIgnore" = "Ignore";
+
+//Calls
+"calls.callItemTitle" = "Call";
+"calls.unknown" = "Unknown";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "An error occured during the export";

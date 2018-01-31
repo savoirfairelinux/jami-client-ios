@@ -92,12 +92,22 @@
 "actions.blockAction" = "ブロック";
 "actions.deleteAction" = "削除";
 "actions.cancelAction" = "キャンセル";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "受け入れ";
+"alerts.incomingCallButtonIgnore" = "無視";
+
+//Calls
+"calls.callItemTitle" = "通話";
+"calls.unknown" = "不明";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "端末";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "エクスポート中にネットワークエラーが発生しました";
 "linkDevice.defaultError" = "エクスポート中にエラーが発生しました";

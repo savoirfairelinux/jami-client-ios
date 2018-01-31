@@ -92,12 +92,22 @@
 "actions.blockAction" = "Block";
 "actions.deleteAction" = "Poista";
 "actions.cancelAction" = "Peru";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Hyväksy";
+"alerts.incomingCallButtonIgnore" = "Sivuuta";
+
+//Calls
+"calls.callItemTitle" = "Soita";
+"calls.unknown" = "Tuntematon";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "Antamasi salasana ei avaa tämän tunnuksen salaisuuksia";
 "linkDevice.networkError" = "Tiedonviennissä tapahtui verkkoyhteysvirhe";
 "linkDevice.defaultError" = "Tiedonviennissä tapahtui virhe";

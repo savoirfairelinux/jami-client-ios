@@ -92,12 +92,22 @@
 "actions.blockAction" = "Engelleme";
 "actions.deleteAction" = "Sil";
 "actions.cancelAction" = "İptal";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Kabul et";
+"alerts.incomingCallButtonIgnore" = "Göz ardı et";
+
+//Calls
+"calls.callItemTitle" = "Ara";
+"calls.unknown" = "Bilinmeyen";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "Girdiğiniz parola bu hesabı açmaz";
 "linkDevice.networkError" = "Dışa aktarma esnasında bir ağ hatası oluştu";
 "linkDevice.defaultError" = "Dışa aktarma esnasında bir hata oluştu";

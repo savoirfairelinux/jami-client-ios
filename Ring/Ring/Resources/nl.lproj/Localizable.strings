@@ -28,7 +28,7 @@
 "smartlist.yesterday" = "Gisteren";
 "smartlist.userFound" = "Gebruiker gevonden";
 "smartlist.conversations" = "Gesprekken";
-"smartlist.searching" = "Zoeken...";
+"smartlist.searching" = "Zoeken…";
 "smartlist.noResults" = "Geen resultaten";
 "smartlist.noNetworkConnectivity" = "Geen netwerkverbinding";
 "smartlist.cellularAccess" = "Zorg dat je toegang tot het mobiele netwerk toegestaan hebt in je instellingen";
@@ -83,21 +83,31 @@
 "alerts.accountLinkedTitle" = "Account koppelen";
 "alerts.dbFailedTitle" = "Er trad een fout op bij het opstarten van Ring";
 "alerts.dbFailedMessage" = "Sluit de app en probeer het opnieuw";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmBlockContact" = "Weet je zeker dat je dit contact wil blokkeren? De gespreksgeschiedenis met dit contact zal ook voorgoed verwijderd worden.";
+"alerts.confirmBlockContactTitle" = "Contact blokkeren";
+"alerts.confirmDeleteConversation" = "Weet je zeker dat je dit gesprek voorgoed wil verwijderen?";
+"alerts.confirmDeleteConversationTitle" = "Gesprek verwijderen";
 
 //Actions
 "actions.blockAction" = "Blokkeren";
 "actions.deleteAction" = "Verwijderen";
 "actions.cancelAction" = "Annuleren";
+"alerts.incomingCallAllertTitle" = "Inkomende oproep van";
+"alerts.incomingCallButtonAccept" = "Aanvaarden";
+"alerts.incomingCallButtonIgnore" = "Negeren";
+
+//Calls
+"calls.callItemTitle" = "Oproep";
+"calls.unknown" = "Onbekend";
+"calls.incomingCallInfo" = "wil met je praten";
+"calls.calling" = "Bellen…";
+"calls.callFinished" = "Oproep beëindigd";
 
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";
 
 //Link New Device
-"linkDevice.title" = "Nieuw apparaat koppelen";
+"linkDevice.title" = "Een nieuw apparaat koppelen";
 "linkDevice.passwordError" = "Het wachtwoord dat je hebt ingevoerd ontgrendelt deze account niet";
 "linkDevice.networkError" = "Er is een netwerkfout opgetreden tijdens het exporteren";
 "linkDevice.defaultError" = "Er is een fout opgetreden tijdens het exporteren";

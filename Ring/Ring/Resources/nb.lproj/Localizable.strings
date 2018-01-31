@@ -20,86 +20,96 @@
 
 // Global
 "global.homeTabBarTitle" = "Hjem";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Invitasjoner";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "OK";
 
 // Smartlist
 "smartlist.yesterday" = "Igår";
-"smartlist.userFound" = "User found";
+"smartlist.userFound" = "Bruker funnet";
 "smartlist.conversations" = "Samtaler";
 "smartlist.searching" = "Søker…";
-"smartlist.noResults" = "No results";
+"smartlist.noResults" = "Ingen resultater";
 "smartlist.noNetworkConnectivity" = "Mangler nettverksforbindelse";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Forsikre deg om at telefonnettverkstilgang er innvilget i innstillingene";
 
 // Walkthrough
 
 //Welcome Screen
 "welcome.title" = "Velkommen til Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Ring er fri programvare for universell kommunikasjon som respekterer privatlivets fred for dets brukere.";
 "welcome.linkDevice" = "Lenk denne enheten til en konto";
 "welcome.createAccount" = "Opprett en Ring-konto";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
+"createProfile.createAccount" = "Hopp til opprettelse av konto";
 "createProfile.createAccountWithProfile" = "Neste";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.linkDevice" = "Hopp til lenking av enhet";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Opprett din Ring-konto";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
+"createAccount.chooseStrongPassword" = "Velg et sterkt passord du husker for å beskytte din Ring-konto.";
 "createAccount.enterNewUsernamePlaceholder" = "brukernavn";
 "createAccount.newPasswordPlaceholder" = "passord";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
+"createAccount.repeatPasswordPlaceholder" = "bekreft passord";
 "createAccount.passwordCharactersNumberError" = "minimum 6 tegn";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.passwordNotMatchingError" = "passordene stemmer ikke overens";
+"createAccount.lookingForUsernameAvailability" = "Sjekker hvorvidt brukernavnet er tilgjengelig";
+"createAccount.invalidUsername" = "ugyldig brukernavn";
+"createAccount.usernameAlreadyTaken" = "brukernavn allerede i bruk";
+"createAccount.loading" = "Laster";
 "createAccount.waitCreateAccountTitle" = "Legger til konto";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.waitLinkToAccountTitle" = "Kontolenking";
+"linkToAccount.linkButtonTitle" = "Lenk enhet";
 "linkToAccount.passwordPlaceholder" = "passord";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.passwordLabel" = "Skriv inn passord";
 "linkToAccount.pinLabel" = "Skriv inn PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan ikke finne konto";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountCannotBeFoundMessage" = "Finner ikke kontoen på Ring-nettverket. Forsikre deg om at den ble eksportert fra Ring på en eksisterende enhet, og at oppgitte identitetsdetaljer er riktige.";
+"alerts.accountAddedTitle" = "Konto lagt til";
 "alerts.accountNoNetworkTitle" = "Kan ikke koble til nettverket";
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountDefaultErrorTitle" = "Ukjent feil";
+"alerts.accountDefaultErrorMessage" = "Kontoen kunne ikke opprettes.";
 "alerts.profileTakePhoto" = "Ta bilde";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Last opp bilde";
 "alerts.profileCancelPhoto" = "Avbryt";
-"alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
+"alerts.accountLinkedTitle" = "Lenker konto";
+"alerts.dbFailedTitle" = "Feil inntraff under oppstart av Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmBlockContactTitle" = "Blokker kontakt";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmDeleteConversationTitle" = "Slett samtale";
 
 //Actions
 "actions.blockAction" = "Blokker";
 "actions.deleteAction" = "Slett";
 "actions.cancelAction" = "Avbryt";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Aksepter";
+"alerts.incomingCallButtonIgnore" = "Ignorer";
+
+//Calls
+"calls.callItemTitle" = "Ring";
+"calls.unknown" = "Ukjent";
+"calls.incomingCallInfo" = "ønsker å snakke med deg";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "Passordet du skrev inn låser ikke opp denne kontoen";
 "linkDevice.networkError" = "En nettverksfeil inntraff under eksport";
 "linkDevice.defaultError" = "En feil inntraff under eksport";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "Bekrefter";

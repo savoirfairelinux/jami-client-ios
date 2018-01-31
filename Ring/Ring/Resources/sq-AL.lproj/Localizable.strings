@@ -92,12 +92,22 @@
 "actions.blockAction" = "Bllokoje";
 "actions.deleteAction" = "Fshije";
 "actions.cancelAction" = "Anuloje";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Pranoje";
+"alerts.incomingCallButtonIgnore" = "Shpërfille";
+
+//Calls
+"calls.callItemTitle" = "Call";
+"calls.unknown" = "E panjohur";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";
 
 //Link New Device
-"linkDevice.title" = "Lidhni pajisje të re";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti gjatë eksportimit";
 "linkDevice.defaultError" = "Ndodhi një gabim gjatë eksportimit";

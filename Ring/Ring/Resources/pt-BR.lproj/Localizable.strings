@@ -92,12 +92,22 @@
 "actions.blockAction" = "Bloquear";
 "actions.deleteAction" = "Deletar";
 "actions.cancelAction" = "Cancelar";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Aceitar";
+"alerts.incomingCallButtonIgnore" = "Ignorar";
+
+//Calls
+"calls.callItemTitle" = "Chamar";
+"calls.unknown" = "Desconhecido";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 
 //Link New Device
-"linkDevice.title" = "Adicionar novo dispositivo";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "A senha informada não desbloqueia esta conta";
 "linkDevice.networkError" = "Ocorreu um erro de rede durante a exportação";
 "linkDevice.defaultError" = "  Ocorreu um erro durante a exportação ";

@@ -92,12 +92,22 @@
 "actions.blockAction" = "Блокиране";
 "actions.deleteAction" = "Изтриване";
 "actions.cancelAction" = "Отказ";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Приемане";
+"alerts.incomingCallButtonIgnore" = "Игнориране";
+
+//Calls
+"calls.callItemTitle" = "Обаждане";
+"calls.unknown" = "Неизвестно";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "Възникна грешка при изнасянето";

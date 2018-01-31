@@ -83,15 +83,25 @@
 "alerts.accountLinkedTitle" = "連結帳號";
 "alerts.dbFailedTitle" = "當啟動 Ring 時發生錯誤";
 "alerts.dbFailedMessage" = "請關閉應用程式並再次嘗試開啟它";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmBlockContact" = "您確定要阻擋這個聯絡人嗎？這個聯絡人的對話紀錄將會永久刪除。";
+"alerts.confirmBlockContactTitle" = "阻擋聯絡人";
+"alerts.confirmDeleteConversation" = "您確定您想要永久刪除此對話嗎？";
+"alerts.confirmDeleteConversationTitle" = "刪除對話";
 
 //Actions
 "actions.blockAction" = "阻擋";
 "actions.deleteAction" = "刪除";
 "actions.cancelAction" = "取消";
+"alerts.incomingCallAllertTitle" = "來電從";
+"alerts.incomingCallButtonAccept" = "接聽";
+"alerts.incomingCallButtonIgnore" = "忽略";
+
+//Calls
+"calls.callItemTitle" = "通話";
+"calls.unknown" = "未知";
+"calls.incomingCallInfo" = "想要與您交談";
+"calls.calling" = "正在通話……";
+"calls.callFinished" = "通話結束";
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";

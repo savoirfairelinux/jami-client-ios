@@ -92,12 +92,22 @@
 "actions.blockAction" = "屏蔽";
 "actions.deleteAction" = "删除";
 "actions.cancelAction" = "取消";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "接听";
+"alerts.incomingCallButtonIgnore" = "忽略";
+
+//Calls
+"calls.callItemTitle" = "通话";
+"calls.unknown" = "未知";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "设备";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "您输入的密码无法解锁该帐户";
 "linkDevice.networkError" = "导出时发生网络错误";
 "linkDevice.defaultError" = "导出时发生错误";

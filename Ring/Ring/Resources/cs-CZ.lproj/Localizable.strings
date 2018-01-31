@@ -92,12 +92,22 @@
 "actions.blockAction" = "Blokovat";
 "actions.deleteAction" = "Odstranit";
 "actions.cancelAction" = "Zrušit";
+"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallButtonAccept" = "Přijmout";
+"alerts.incomingCallButtonIgnore" = "Přehlížet";
+
+//Calls
+"calls.callItemTitle" = "Volat";
+"calls.unknown" = "Neznámé";
+"calls.incomingCallInfo" = "wants to talk to you";
+"calls.calling" = "Calling...";
+"calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Zařízení";
 
 //Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "Vámi zadané heslo neodemkne tento účet";
 "linkDevice.networkError" = "Při vyvádění došlo k chybě sítě";
 "linkDevice.defaultError" = "Při vyvádění došlo k chybě";
