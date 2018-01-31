@@ -28,6 +28,7 @@ enum CallOptions {
 class ButtonsContainerViewModel {
 
     let callService: CallsService
+    let audioService: AudioService
     let callID: String
     let disposeBag = DisposeBag()
 
@@ -36,8 +37,9 @@ class ButtonsContainerViewModel {
         return self.avalaibleCallOptions.asObservable()
     }()
 
-    init(with callService: CallsService, callID: String) {
+    init(with callService: CallsService, audioService: AudioService, callID: String) {
         self.callService = callService
+        self.audioService = audioService
         self.callID = callID
         checkCallOptions()
     }
@@ -50,7 +52,8 @@ class ButtonsContainerViewModel {
                 return true
             })
         }()
-        callIsActive.subscribe(onNext: { active in
+        callIsActive
+            .subscribe(onNext: { active in
             if !active {
                 return
             }
@@ -65,7 +68,9 @@ class ButtonsContainerViewModel {
     private func connectToSpeaker() {
         let speakerIsAvailable: Observable<Bool> = {
             //TODO map to service
-            return Observable.just(true)
+            return self.audioService.enableSwitchAudio.map({ (hide)  in
+                !hide
+            })
         }()
         speakerIsAvailable.subscribe(onNext: { available in
             if available {

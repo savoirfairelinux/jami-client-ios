@@ -39,6 +39,10 @@ class AudioService {
     var isHeadsetConnected = Variable<Bool>(false)
     var isOutputToSpeaker = Variable<Bool>(true)
 
+    var enableSwitchAudio: Observable<Bool> {
+        return self.isHeadsetConnected.asObservable()
+    }
+
     init(withAudioAdapter audioAdapter: AudioAdapter) {
         self.audioAdapter = audioAdapter
 

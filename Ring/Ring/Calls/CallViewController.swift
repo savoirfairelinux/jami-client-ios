@@ -56,10 +56,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     private var task: DispatchWorkItem?
 
-    override var inputAccessoryView: UIView {
-        return self.buttonsContainer
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
@@ -126,13 +122,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .observeOn(MainScheduler.instance)
             .bind(to: self.buttonsContainer.switchSpeakerButton.rx.image())
             .disposed(by: self.disposeBag)
-
-        self.viewModel.speakerSwitchable
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.buttonsContainer.switchSpeakerButton.rx.isEnabled)
-            .disposed(by: self.disposeBag)
-
-        self.buttonsContainer.switchSpeakerButton.isEnabled = !(self.viewModel.isHeadsetConnected)
 
         self.viewModel.pauseCallButtonState
             .observeOn(MainScheduler.instance)
@@ -216,6 +205,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self.showCancelButton()
                 } else if !self.viewModel.isAudioOnly {
                     self.hideCancelButton()
+                } else {
+                    self.buttonsContainer.bottomSpaceConstraint.constant = 30
                 }
             }).disposed(by: self.disposeBag)
 

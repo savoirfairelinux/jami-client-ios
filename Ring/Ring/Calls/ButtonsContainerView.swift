@@ -38,6 +38,7 @@ class ButtonsContainerView: UIView, NibLoadable {
     var viewModel: ButtonsContainerViewModel? {
         didSet {
             self.viewModel?.observableCallOptions
+                .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { (callOptions) in
                     switch callOptions {
                     case .none:
