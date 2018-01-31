@@ -63,6 +63,7 @@ enum Asset {
   static let icContactPicture = ImageAsset(name: "ic_contact_picture")
   static let moreSettings = ImageAsset(name: "more_settings")
   static let pauseCall = ImageAsset(name: "pause_call")
+  static let ringIcon = ImageAsset(name: "ringIcon")
   static let ringLogo = ImageAsset(name: "ring_logo")
   static let settingsIcon = ImageAsset(name: "settings_icon")
   static let stopCall = ImageAsset(name: "stop_call")
@@ -92,6 +93,7 @@ enum Asset {
     icContactPicture,
     moreSettings,
     pauseCall,
+    ringIcon,
     ringLogo,
     settingsIcon,
     stopCall,
