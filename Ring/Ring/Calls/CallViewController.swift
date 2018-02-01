@@ -232,6 +232,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func removeFromScreen() {
+        UIDevice.current.isProximityMonitoringEnabled = false
         self.dismiss(animated: false)
     }
 
