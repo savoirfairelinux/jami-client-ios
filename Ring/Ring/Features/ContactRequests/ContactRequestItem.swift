@@ -27,11 +27,43 @@ class ContactRequestItem {
     let contactRequest: ContactRequestModel
 
     let userName = Variable("")
-    let profileImageData: Data?
+    let profileImageData = Variable<Data?>(nil)
+    let disposeBag = DisposeBag()
 
-    init(withContactRequest contactRequest: ContactRequestModel) {
+    init(withContactRequest contactRequest: ContactRequestModel, callService: CallsService,
+         contactService: ContactsService) {
         self.contactRequest = contactRequest
         self.userName.value = contactRequest.ringId
-        self.profileImageData = self.contactRequest.vCard?.imageData
+        self.profileImageData.value = self.contactRequest.vCard?.imageData
+
+        contactService.getProfileForUri(uri: contactRequest.ringId)
+            .subscribe(onNext: { [unowned self] profile in
+                if let photo = profile.photo,
+                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    self.profileImageData.value = data
+                }
+            })
+            .disposed(by: self.disposeBag)
+        callService
+            .sharedResponseStream
+            .filter({ (event) in
+                if let uri: String = event.getEventInput(ServiceEventInput.uri) {
+                    return event.eventType == ServiceEventType.profileUpdated
+                        && uri == contactRequest.ringId
+                }
+                return false
+            })
+            .subscribe(onNext: { [unowned self] _ in
+                contactService.getProfileForUri(uri: contactRequest.ringId)
+                    .subscribe(onNext: { profile in
+                        if let photo = profile.photo,
+                            let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                            self.profileImageData.value = data
+                        }
+                    })
+                    .disposed(by: self.disposeBag)
+
+            })
+            .disposed(by: self.disposeBag)
     }
 }

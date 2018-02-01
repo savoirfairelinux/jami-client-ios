@@ -144,6 +144,7 @@ class CallsService: CallsAdapterDelegate {
         callDetails[CallDetailKey.audioOnlyKey.rawValue] = isAudioOnly.toString()
         let call = CallModel(withCallId: ringId, callDetails: callDetails)
         call.state = .connecting
+        call.callType = .outgoing
         return Single<CallModel>.create(subscribe: { [unowned self] single in
             if let callId = self.callsAdapter.placeCall(withAccountId: account.id,
                                                         toRingId: "ring:\(ringId)",
