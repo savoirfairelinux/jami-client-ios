@@ -94,7 +94,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
         let callViewController = CallViewController.instantiate(with: self.injectionBag)
         callViewController.viewModel.call = call
         callViewController.viewModel.answerCall()
-        self.present(viewController: callViewController, withStyle: .present, withAnimation: false)
+            .subscribe(onCompleted: { [weak self] in
+                self?.present(viewController: callViewController, withStyle: .present, withAnimation: false)
+            }).disposed(by: self.disposeBag)
     }
 
     private func showCallAlert(call: CallModel) {
