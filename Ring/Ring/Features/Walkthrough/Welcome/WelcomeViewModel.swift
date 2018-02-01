@@ -30,7 +30,6 @@ class WelcomeViewModel: Stateable, ViewModel {
     }()
 
     // MARK: - Rx Singles for L10n
-    let welcomeTitle    = Observable<String>.of(L10n.Welcome.title)
     let welcomeText     = Observable<String>.of(L10n.Welcome.text)
     let createAccount   = Observable<String>.of(L10n.Welcome.createAccount)
     let linkDevice      = Observable<String>.of(L10n.Welcome.linkDevice)

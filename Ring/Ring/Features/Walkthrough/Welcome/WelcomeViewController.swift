@@ -28,7 +28,6 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     typealias VMType = WelcomeViewModel
     // MARK: outlets
-    @IBOutlet weak var welcomeTitleLabel: UILabel!
     @IBOutlet weak var welcomeTextLabel: UILabel!
     @IBOutlet weak var linkDeviceButton: DesignableButton!
     @IBOutlet weak var createAccountButton: DesignableButton!
@@ -41,7 +40,6 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         super.viewDidLoad()
 
         // Bind ViewModel to View
-        self.viewModel.welcomeTitle.bind(to: self.welcomeTitleLabel.rx.text).disposed(by: self.disposeBag)
         self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
         self.viewModel.createAccount.bind(to: self.createAccountButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
         self.viewModel.linkDevice.bind(to: self.linkDeviceButton.rx.title(for: .normal)).disposed(by: self.disposeBag)

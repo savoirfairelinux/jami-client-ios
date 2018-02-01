@@ -114,7 +114,6 @@
                         <outlet property="createAccountButton" destination="bu0-90-MB5" id="YNt-Tc-Snc"/>
                         <outlet property="linkDeviceButton" destination="QLK-gs-fOJ" id="AXP-0r-10g"/>
                         <outlet property="welcomeTextLabel" destination="E4b-Zv-unB" id="ygV-A3-EZD"/>
-                        <outlet property="welcomeTitleLabel" destination="Lbn-cd-UXk" id="32i-zZ-klu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yc1-qm-cpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
