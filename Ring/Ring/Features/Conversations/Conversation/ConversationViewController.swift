@@ -90,7 +90,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.updateBottomOffset()
     }
 
-    func setupNavTitle(displayName: String? = nil, username: String?) {
+    func setupNavTitle(profileImageData: Data?, displayName: String? = nil, username: String?) {
         let imageSize       = CGFloat(36.0)
         let imageOffsetY    = CGFloat(5.0)
         let infoPadding     = CGFloat(8.0)
@@ -110,13 +110,14 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         let profileImageView = UIImageView(frame: CGRect(x: 0, y: imageOffsetY, width: imageSize, height: imageSize))
         profileImageView.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
         profileImageView.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
-        if let imageData = viewModel.profileImageData, let image = UIImage(data: imageData) {
+
+        if let imageData = profileImageData, let image = UIImage(data: imageData) {
             self.log.debug("standard avatar")
             (profileImageView as UIImageView).image = image.circleMasked
             titleView.addSubview(profileImageView)
         } else {
             // use fallback avatars
-            let name = viewModel.userName.value
+            let name = self.viewModel.userName.value
             let scanner = Scanner(string: name.toMD5HexString().prefixString())
             var index: UInt64 = 0
             if scanner.scanHexInt64(&index) {
@@ -148,14 +149,13 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             }
         }
 
-        if displayName != nil {
+        if let name = displayName, !name.isEmpty {
             let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: 4, width: maxNameLength, height: 20))
-            dnlabel.text = displayName
+            dnlabel.text = name
             dnlabel.font = UIFont.systemFont(ofSize: nameSize)
             dnlabel.textColor = UIColor.white
             dnlabel.textAlignment = .left
             titleView.addSubview(dnlabel)
-
             userNameYOffset = 20.0
             nameSize = 14.0
         }
@@ -168,22 +168,27 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         titleView.addSubview(unlabel)
 
         self.navigationItem.titleView = titleView
+
     }
 
     func setupUI() {
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
         } else {
-            self.setupNavTitle(displayName: self.viewModel.displayName.value, username: self.viewModel.userName.value)
+            self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
+                               displayName: self.viewModel.displayName.value,
+                               username: self.viewModel.userName.value)
 
-            Observable<(String, String?)>.combineLatest(self.viewModel.userName.asObservable(),
-                                                        self.viewModel.displayName.asObservable()) { username, displayName in
-                                                            return (username, displayName)
+            Observable<(Data?, String?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
+                                                               self.viewModel.displayName.asObservable(),
+                                                               self.viewModel.userName.asObservable()) { profileImage, displayName, username in
+                                                            return (profileImage, displayName, username)
                 }
                 .observeOn(MainScheduler.instance)
-                .subscribe({ [weak self] names -> Void in
-                    self?.setupNavTitle(displayName: names.element?.1,
-                                        username: names.element?.0)
+                .subscribe({ [weak self] profileData -> Void in
+                    self?.setupNavTitle(profileImageData: profileData.element?.0,
+                                        displayName: profileData.element?.1,
+                                        username: profileData.element?.2)
                     return
                 })
                 .disposed(by: self.disposeBag)
@@ -656,14 +661,19 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
                 // Set image if any
                 cell.profileImage?.image = nil
-                if let imageData = viewModel.profileImageData {
-                    if let image = UIImage(data: imageData) {
-                        cell.profileImage?.image = image
-                        fallbackAvatar.isHidden = true
-                    }
-                } else {
-                    fallbackAvatar.isHidden = false
-                }
+                self.viewModel.profileImageData.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: { data in
+                        if let imageData = data {
+                            if let image = UIImage(data: imageData) {
+                                cell.profileImage?.image = image
+                                fallbackAvatar.isHidden = true
+                            }
+                        } else {
+                            cell.profileImage?.image = nil
+                            fallbackAvatar.isHidden = false
+                        }
+                    }).disposed(by: cell.disposeBag)
             }
         }
     }
