@@ -110,64 +110,70 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         let profileImageView = UIImageView(frame: CGRect(x: 0, y: imageOffsetY, width: imageSize, height: imageSize))
         profileImageView.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
         profileImageView.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
-        if let imageData = viewModel.profileImageData, let image = UIImage(data: imageData) {
-            self.log.debug("standard avatar")
-            (profileImageView as UIImageView).image = image.circleMasked
-            titleView.addSubview(profileImageView)
-        } else {
-            // use fallback avatars
-            let name = viewModel.userName.value
-            let scanner = Scanner(string: name.toMD5HexString().prefixString())
-            var index: UInt64 = 0
-            if scanner.scanHexInt64(&index) {
-                let fbaBGColor = avatarColors[Int(index)]
-                let circle = UIView(frame: CGRect(x: 0.0, y: imageOffsetY, width: imageSize, height: imageSize))
-                circle.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
-                circle.layer.cornerRadius = imageSize / 2
-                circle.backgroundColor = fbaBGColor
-                circle.clipsToBounds = true
-                titleView.addSubview(circle)
-                if self.viewModel.conversation.value.recipientRingId != name {
-                    // use g-style fallback avatar
-                    self.log.debug("fallback avatar")
-                    let initialLabel: UILabel = UILabel.init(frame: CGRect.init(x: 0, y: imageOffsetY - 1, width: imageSize, height: imageSize))
-                    initialLabel.center = circle.center
-                    initialLabel.text = name.prefixString().capitalized
-                    initialLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-                    initialLabel.textColor = UIColor.white
-                    initialLabel.textAlignment = .center
-                    titleView.addSubview(initialLabel)
+
+        self.viewModel.profileImageData.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] data in
+                if let imageData = data, let image = UIImage(data: imageData) {
+                    self.log.debug("standard avatar")
+                    (profileImageView as UIImageView).image = image.circleMasked
+                    titleView.addSubview(profileImageView)
                 } else {
-                    // ringId only, so fallback fallback avatar
-                    self.log.debug("fallback fallback avatar")
-                    if let image = UIImage(named: "fallback_avatar") {
-                        (profileImageView as UIImageView).image = image.circleMasked
-                        titleView.addSubview(profileImageView)
+                    // use fallback avatars
+                    let name = self.viewModel.userName.value
+                    let scanner = Scanner(string: name.toMD5HexString().prefixString())
+                    var index: UInt64 = 0
+                    if scanner.scanHexInt64(&index) {
+                        let fbaBGColor = avatarColors[Int(index)]
+                        let circle = UIView(frame: CGRect(x: 0.0, y: imageOffsetY, width: imageSize, height: imageSize))
+                        circle.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
+                        circle.layer.cornerRadius = imageSize / 2
+                        circle.backgroundColor = fbaBGColor
+                        circle.clipsToBounds = true
+                        titleView.addSubview(circle)
+                        if self.viewModel.conversation.value.recipientRingId != name {
+                            // use g-style fallback avatar
+                            self.log.debug("fallback avatar")
+                            let initialLabel: UILabel = UILabel.init(frame: CGRect.init(x: 0, y: imageOffsetY - 1, width: imageSize, height: imageSize))
+                            initialLabel.center = circle.center
+                            initialLabel.text = name.prefixString().capitalized
+                            initialLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                            initialLabel.textColor = UIColor.white
+                            initialLabel.textAlignment = .center
+                            titleView.addSubview(initialLabel)
+                        } else {
+                            // ringId only, so fallback fallback avatar
+                            self.log.debug("fallback fallback avatar")
+                            if let image = UIImage(named: "fallback_avatar") {
+                                (profileImageView as UIImageView).image = image.circleMasked
+                                titleView.addSubview(profileImageView)
+                            }
+                        }
                     }
                 }
-            }
-        }
 
-        if displayName != nil {
-            let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: 4, width: maxNameLength, height: 20))
-            dnlabel.text = displayName
-            dnlabel.font = UIFont.systemFont(ofSize: nameSize)
-            dnlabel.textColor = UIColor.white
-            dnlabel.textAlignment = .left
-            titleView.addSubview(dnlabel)
+                if let name = displayName, !name.isEmpty {
+                    let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: 4, width: maxNameLength, height: 20))
+                    dnlabel.text = name
+                    dnlabel.font = UIFont.systemFont(ofSize: nameSize)
+                    dnlabel.textColor = UIColor.white
+                    dnlabel.textAlignment = .left
+                    titleView.addSubview(dnlabel)
+                    userNameYOffset = 20.0
+                    nameSize = 14.0
+                }
 
-            userNameYOffset = 20.0
-            nameSize = 14.0
-        }
+                let unlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: userNameYOffset, width: maxNameLength, height: 24))
+                unlabel.text = username
+                unlabel.font = UIFont.systemFont(ofSize: nameSize)
+                unlabel.textColor = UIColor.white
+                unlabel.textAlignment = .left
+                titleView.addSubview(unlabel)
 
-        let unlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: userNameYOffset, width: maxNameLength, height: 24))
-        unlabel.text = username
-        unlabel.font = UIFont.systemFont(ofSize: nameSize)
-        unlabel.textColor = UIColor.white
-        unlabel.textAlignment = .left
-        titleView.addSubview(unlabel)
+                self.navigationItem.titleView = titleView
 
-        self.navigationItem.titleView = titleView
+            }).disposed(by: self.disposeBag)
+
     }
 
     func setupUI() {
@@ -656,14 +662,19 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
                 // Set image if any
                 cell.profileImage?.image = nil
-                if let imageData = viewModel.profileImageData {
-                    if let image = UIImage(data: imageData) {
-                        cell.profileImage?.image = image
-                        fallbackAvatar.isHidden = true
-                    }
-                } else {
-                    fallbackAvatar.isHidden = false
-                }
+                self.viewModel.profileImageData.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: { data in
+                        if let imageData = data {
+                            if let image = UIImage(data: imageData) {
+                                cell.profileImage?.image = image
+                                fallbackAvatar.isHidden = true
+                            }
+                        } else {
+                            cell.profileImage?.image = nil
+                            fallbackAvatar.isHidden = false
+                        }
+                    }).disposed(by: cell.disposeBag)
             }
         }
     }

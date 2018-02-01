@@ -126,12 +126,20 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 // Set image if any
                 cell.fallbackAvatar.isHidden = false
                 cell.profileImageView.image = nil
-                if let imageData = item.profileImageData {
-                    if let image = UIImage(data: imageData) {
-                        cell.profileImageView.image = image
-                        cell.fallbackAvatar.isHidden = true
-                    }
-                }
+
+                item.profileImageData.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: { data in
+                        if let imageData = data {
+                            if let image = UIImage(data: imageData) {
+                                cell.profileImageView.image = image
+                                cell.fallbackAvatar.isHidden = true
+                            }
+                        } else {
+                            cell.fallbackAvatar.isHidden = false
+                            cell.profileImageView.image = nil
+                        }
+                    }).disposed(by: cell.disposeBag)
 
                 //Accept button
                 cell.acceptButton.backgroundColor = UIColor.clear

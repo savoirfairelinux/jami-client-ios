@@ -204,12 +204,20 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 // Set image if any
                 cell.fallbackAvatar.isHidden = false
                 cell.profileImage.image = nil
-                if let imageData = item.profileImageData {
-                    if let image = UIImage(data: imageData) {
-                        cell.profileImage.image = image
-                        cell.fallbackAvatar.isHidden = true
-                    }
-                }
+
+                item.profileImageData.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: { data in
+                        if let imageData = data {
+                            if let image = UIImage(data: imageData) {
+                                cell.profileImage.image = image
+                                cell.fallbackAvatar.isHidden = true
+                            }
+                        } else {
+                            cell.fallbackAvatar.isHidden = false
+                            cell.profileImage.image = nil
+                        }
+                    }).disposed(by: cell.disposeBag)
 
                 cell.newMessagesLabel.text = item.unreadMessages
                 cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
