@@ -26,12 +26,10 @@ import RxSwift
 /// - conversationDetail: user want to see a conversation detail
 enum ConversationsState: State {
     case conversationDetail(conversationViewModel: ConversationViewModel)
-    case startCall(contactRingId: String, userName: String)
-    case startAudioCall(contactRingId: String, userName: String)
 }
 
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
-class ConversationsCoordinator: Coordinator, StateableResponsive {
+class ConversationsCoordinator: Coordinator, StateableResponsive, CallMakeable {
 
     var rootViewController: UIViewController {
         return self.navigationViewController
@@ -40,7 +38,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
     var childCoordinators = [Coordinator]()
 
     private let navigationViewController = BaseViewController(with: TabBarItemType.chat)
-    private let injectionBag: InjectionBag
+    let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
@@ -63,14 +61,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
             switch state {
             case .conversationDetail (let conversationViewModel):
                 self.showConversation(withConversationViewModel: conversationViewModel)
-            case .startCall(let contactRingId, let name):
-                self.startOutgoingCall(contactRingId: contactRingId, userName: name)
-            case .startAudioCall(let contactRingId, let name):
-                self.startOutgoingCall(contactRingId: contactRingId, userName: name, isAudioOnly: true)
             }
         }).disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
-
+        self.callbackPlaceCall()
     }
 
     func start () {
@@ -82,12 +76,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive {
         let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
         conversationViewController.viewModel = conversationViewModel
         self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true, withStateable: conversationViewController.viewModel)
-    }
-
-    private func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
-        let callViewController = CallViewController.instantiate(with: self.injectionBag)
-        callViewController.viewModel.placeCall(with: contactRingId, userName: userName, isAudioOnly: isAudioOnly)
-        self.present(viewController: callViewController, withStyle: .present, withAnimation: false)
     }
 
     private func answerIncomingCall(call: CallModel) {
