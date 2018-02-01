@@ -80,7 +80,7 @@ class CallViewModel: Stateable, ViewModel {
         }
     }
 
-    // data for ViewCintroller binding
+    // data for ViewController binding
 
     var contactImageData = Variable<Data?>(nil)
 
@@ -119,8 +119,6 @@ class CallViewModel: Stateable, ViewModel {
             }
         }).asDriver(onErrorJustReturn: "")
     }()
-
-    //let timer: Observable<String>
 
     lazy var callDuration: Driver<String> = {
         let timer = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
@@ -300,16 +298,8 @@ class CallViewModel: Stateable, ViewModel {
             }).disposed(by: self.disposeBag)
     }
 
-    func answerCall() {
-        guard let call = self.call else {
-            return
-        }
-        self.callService.accept(callId: call.callId)
-            .subscribe(onCompleted: { [weak self] in
-                self?.log.info("Call answered")
-                }, onError: { [weak self] error in
-                    self?.log.error("Failed to answer the call")
-            }).disposed(by: self.disposeBag)
+    func answerCall() -> Completable {
+        return self.callService.accept(call: call)
     }
 
     func placeCall(with uri: String, userName: String, isAudioOnly: Bool = false) {
