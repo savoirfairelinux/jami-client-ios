@@ -26,5 +26,6 @@
 - (BOOL)startDaemon;
 - (void)fini;
 - (void)pollEvents;
+- (void)connectivityChanged;
 - (nonnull NSString*)getVersion;
 @end
