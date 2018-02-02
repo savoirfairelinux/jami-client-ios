@@ -327,8 +327,14 @@ class CallsService: CallsAdapterDelegate {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
 
             if !isCurrentCall() {
-                let call = CallModel(withCallId: callId, callDetails: callDictionary)
-                self.newCall.value = call
+                var call = self.calls[callId]
+                if call == nil {
+                    call = CallModel(withCallId: callId, callDetails: callDictionary)
+                } else {
+                    call?.update(withDictionary: callDictionary)
+                }
+                //Emit the call to the observers
+                self.newCall.value = call!
             } else {
                 self.refuse(callId: callId).subscribe(onCompleted: { [weak self] in
                     self?.log.debug("call refused")
