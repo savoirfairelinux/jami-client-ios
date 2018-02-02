@@ -23,6 +23,7 @@
 #import "DRingAdapter.h"
 
 #import "dring/dring.h"
+#import "dring/configurationmanager_interface.h"
 
 @implementation DRingAdapter
 
@@ -80,6 +81,17 @@
     }
     else {
         DRing::pollEvents();
+    }
+}
+
+- (void)connectivityChanged {
+    if (![[NSThread currentThread] isMainThread]) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            DRing::connectivityChanged();
+        });
+    }
+    else {
+        DRing::connectivityChanged();
     }
 }
 

@@ -120,6 +120,11 @@ class DaemonService {
         log.debug("Daemon stopped.")
     }
 
+    func connectivityChanged() {
+        log.debug("connectivity changed")
+        self.dRingAdaptor.connectivityChanged()
+    }
+
     // MARK: Private Core
     /**
      Initiates the timer scheduling the calls to the daemon poll event method. It then starts it.

@@ -125,6 +125,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        self.log.warning("entering background")
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        self.log.warning("entering foreground")
+        self.daemonService.connectivityChanged()
+    }
+
     func applicationWillTerminate(_ application: UIApplication) {
         self.stopDaemon()
     }
