@@ -32,7 +32,6 @@ extension UITextField {
     }
 }
 
-// swiftlint:disable type_body_length
 class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
 
     let log = SwiftyBeaver.self
@@ -47,8 +46,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     var textFieldShouldEndEditing = false
     var bottomOffset: CGFloat = 0
     let scrollOffsetThreshold: CGFloat = 600
-
-    fileprivate var fallbackBGColorObservable: Observable<UIColor>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -193,18 +190,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                 })
                 .disposed(by: self.disposeBag)
         }
-
-        // UIColor that observes "best Id" prefix
-        self.fallbackBGColorObservable = viewModel.userName.asObservable()
-            .observeOn(MainScheduler.instance)
-            .map { name in
-                let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                var index: UInt64 = 0
-                if scanner.scanHexInt64(&index) {
-                    return avatarColors[Int(index)]
-                }
-                return defaultAvatarColor
-            }
 
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
@@ -390,6 +375,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         return textFieldShouldEndEditing
     }
 
+    // MARK: - message formatting
     func computeSequencing() {
         var lastShownTime: Date?
         for (index, messageViewModel) in self.messageViewModels!.enumerated() {
@@ -414,6 +400,46 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             // sequencing
             messageViewModel.sequencing = getMessageSequencing(forIndex: index)
         }
+    }
+
+    func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
+        if let messageItem = self.messageViewModels?[index] {
+            let msgOwner = messageItem.bubblePosition()
+            if self.messageViewModels?.count == 1 || index == 0 {
+                if self.messageViewModels?.count == index + 1 {
+                    return MessageSequencing.singleMessage
+                }
+                let nextMessageItem = index + 1 <= (self.messageViewModels?.count)!
+                    ? self.messageViewModels?[index + 1] : nil
+                if nextMessageItem != nil {
+                    return msgOwner != nextMessageItem?.bubblePosition()
+                        ? MessageSequencing.singleMessage : MessageSequencing.firstOfSequence
+                }
+            } else if self.messageViewModels?.count == index + 1 {
+                let lastMessageItem = index - 1 >= 0 && index - 1 < (self.messageViewModels?.count)!
+                    ? self.messageViewModels?[index - 1] : nil
+                if lastMessageItem != nil {
+                    return msgOwner != lastMessageItem?.bubblePosition()
+                        ? MessageSequencing.singleMessage : MessageSequencing.lastOfSequence
+                }
+            }
+            let lastMessageItem = index - 1 >= 0 && index - 1 < (self.messageViewModels?.count)!
+                ? self.messageViewModels?[index - 1] : nil
+            let nextMessageItem = index + 1 <= (self.messageViewModels?.count)!
+                ? self.messageViewModels?[index + 1] : nil
+            var sequencing = MessageSequencing.singleMessage
+            if (lastMessageItem != nil) && (nextMessageItem != nil) {
+                if msgOwner != lastMessageItem?.bubblePosition() && msgOwner == nextMessageItem?.bubblePosition() {
+                    sequencing = MessageSequencing.firstOfSequence
+                } else if msgOwner != nextMessageItem?.bubblePosition() && msgOwner == lastMessageItem?.bubblePosition() {
+                    sequencing = MessageSequencing.lastOfSequence
+                } else if msgOwner == nextMessageItem?.bubblePosition() && msgOwner == lastMessageItem?.bubblePosition() {
+                    sequencing = MessageSequencing.middleOfSequence
+                }
+            }
+            return sequencing
+        }
+        return MessageSequencing.unknown
     }
 
     func getTimeLabelString(forTime time: Date) -> String {
@@ -444,242 +470,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         return dateFormatter.string(from: time).uppercased()
     }
 
-    func formatTimeLabel(forCell cell: MessageCell,
-                         withMessageVM messageVM: MessageViewModel) {
-        // hide for potentially reused cell
-        cell.timeLabel.isHidden = true
-        cell.leftDivider.isHidden = true
-        cell.rightDivider.isHidden = true
-
-        if messageVM.timeStringShown == nil {
-            return
-        }
-
-        // setup the label
-        cell.timeLabel.text = messageVM.timeStringShown
-        cell.timeLabel.textColor = UIColor.ringMsgCellTimeText
-        cell.timeLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
-
-        // show the time
-        cell.timeLabel.isHidden = false
-        cell.leftDivider.isHidden = false
-        cell.rightDivider.isHidden = false
-    }
-
-    func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
-        if let msgViewModel = self.messageViewModels?[index] {
-            let msgOwner = msgViewModel.bubblePosition()
-            if self.messageViewModels?.count == 1 || index == 0 {
-                if self.messageViewModels?.count == index + 1 {
-                    return MessageSequencing.singleMessage
-                }
-                let nextMsgViewModel = index + 1 <= (self.messageViewModels?.count)!
-                    ? self.messageViewModels?[index + 1] : nil
-                if nextMsgViewModel != nil {
-                    return msgOwner != nextMsgViewModel?.bubblePosition()
-                        ? MessageSequencing.singleMessage : MessageSequencing.firstOfSequence
-                }
-            } else if self.messageViewModels?.count == index + 1 {
-                let lastMsgViewModel = index - 1 >= 0 && index - 1 < (self.messageViewModels?.count)!
-                    ? self.messageViewModels?[index - 1] : nil
-                if lastMsgViewModel != nil {
-                    return msgOwner != lastMsgViewModel?.bubblePosition()
-                        ? MessageSequencing.singleMessage : MessageSequencing.lastOfSequence
-                }
-            }
-            let lastMsgViewModel = index - 1 >= 0 && index - 1 < (self.messageViewModels?.count)!
-                ? self.messageViewModels?[index - 1] : nil
-            let nextMsgViewModel = index + 1 <= (self.messageViewModels?.count)!
-                ? self.messageViewModels?[index + 1] : nil
-            var sequencing = MessageSequencing.singleMessage
-            if (lastMsgViewModel != nil) && (nextMsgViewModel != nil) {
-                if msgOwner != lastMsgViewModel?.bubblePosition() && msgOwner == nextMsgViewModel?.bubblePosition() {
-                    sequencing = MessageSequencing.firstOfSequence
-                } else if msgOwner != nextMsgViewModel?.bubblePosition() && msgOwner == lastMsgViewModel?.bubblePosition() {
-                    sequencing = MessageSequencing.lastOfSequence
-                } else if msgOwner == nextMsgViewModel?.bubblePosition() && msgOwner == lastMsgViewModel?.bubblePosition() {
-                    sequencing = MessageSequencing.middleOfSequence
-                }
-            }
-            return sequencing
-        }
-        return MessageSequencing.unknown
-    }
-
-    // swiftlint:disable cyclomatic_complexity
-    func applyBubbleStyleToCell(toCell cell: MessageCell,
-                                cellForRowAt indexPath: IndexPath,
-                                withMessageVM messageVM: MessageViewModel) {
-        let type = messageVM.bubblePosition()
-        let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
-        cell.setup()
-
-        cell.messageLabel.enabledTypes = [.url]
-        cell.messageLabel.setTextWithLineSpacing(withText: messageVM.content, withLineSpacing: 2)
-        cell.messageLabel.handleURLTap { url in
-            let urlString = url.absoluteString
-            if let prefixedUrl = URL(string: urlString.contains("http") ? urlString : "http://\(urlString)") {
-                UIApplication.shared.openURL(prefixedUrl)
-            }
-        }
-
-        cell.topCorner.isHidden = true
-        cell.topCorner.backgroundColor = bubbleColor
-        cell.bottomCorner.isHidden = true
-        cell.bottomCorner.backgroundColor = bubbleColor
-        cell.bubbleBottomConstraint.constant = 8
-        cell.bubbleTopConstraint.constant = 8
-
-        var adjustedSequencing = messageVM.sequencing
-
-        if messageVM.timeStringShown != nil {
-            cell.bubbleTopConstraint.constant = 32
-            adjustedSequencing = indexPath.row == (self.messageViewModels?.count)! - 1 ?
-                .singleMessage : adjustedSequencing != .singleMessage && adjustedSequencing != .lastOfSequence ?
-                    .firstOfSequence : .singleMessage
-        }
-
-        if indexPath.row + 1 < (self.messageViewModels?.count)! {
-            if self.messageViewModels?[indexPath.row + 1].timeStringShown != nil {
-                switch adjustedSequencing {
-                case .firstOfSequence:
-                    adjustedSequencing = .singleMessage
-                case .middleOfSequence:
-                    adjustedSequencing = .lastOfSequence
-                default: break
-                }
-            }
-        }
-
-        messageVM.sequencing = adjustedSequencing
-
-        switch messageVM.sequencing {
-        case .middleOfSequence:
-            cell.topCorner.isHidden = false
-            cell.bottomCorner.isHidden = false
-            cell.bubbleBottomConstraint.constant = 1
-            cell.bubbleTopConstraint.constant = messageVM.timeStringShown != nil ? 32 : 1
-        case .firstOfSequence:
-            cell.bottomCorner.isHidden = false
-            cell.bubbleBottomConstraint.constant = 1
-            cell.bubbleTopConstraint.constant = messageVM.timeStringShown != nil ? 32 : 8
-        case .lastOfSequence:
-            cell.topCorner.isHidden = false
-            cell.bubbleTopConstraint.constant = messageVM.timeStringShown != nil ? 32 : 1
-        default: break
-        }
-
-    }
-    // swiftlint:enable cyclomatic_complexity
-
-    // swiftlint:disable cyclomatic_complexity
-    func formatCell(withCell cell: MessageCell,
-                    cellForRowAt indexPath: IndexPath,
-                    withMessageVM messageVM: MessageViewModel) {
-
-        // hide/show time label
-        formatTimeLabel(forCell: cell, withMessageVM: messageVM)
-
-        if messageVM.bubblePosition() == .generated {
-            cell.bubble.backgroundColor = UIColor.ringMsgCellReceived
-            cell.messageLabel.setTextWithLineSpacing(withText: messageVM.content, withLineSpacing: 2)
-            // generated messages should always show the time
-            cell.bubbleTopConstraint.constant = 32
-            return
-        }
-
-        // bubble grouping for cell
-        applyBubbleStyleToCell(toCell: cell, cellForRowAt: indexPath, withMessageVM: messageVM)
-
-        // special cases where top/bottom margins should be larger
-        if indexPath.row == 0 {
-            cell.bubbleTopConstraint.constant = 32
-        } else if self.messageViewModels?.count == indexPath.row + 1 {
-            cell.bubbleBottomConstraint.constant = 16
-        }
-
-        if messageVM.bubblePosition() == .sent {
-            messageVM.status.asObservable()
-                .observeOn(MainScheduler.instance)
-                .map { value in value == MessageStatus.sending ? true : false }
-                .bind(to: cell.sendingIndicator.rx.isAnimating)
-                .disposed(by: cell.disposeBag)
-            messageVM.status.asObservable()
-                .observeOn(MainScheduler.instance)
-                .map { value in value == MessageStatus.failure ? false : true }
-                .bind(to: cell.failedStatusLabel.rx.isHidden)
-                .disposed(by: cell.disposeBag)
-        } else if messageVM.bubblePosition() == .received {
-            // avatar
-            guard let fallbackAvatar = cell.fallbackAvatar else {
-                return
-            }
-
-            fallbackAvatar.isHidden = true
-            cell.profileImage?.isHidden = true
-            if messageVM.sequencing == .lastOfSequence || messageVM.sequencing == .singleMessage {
-                cell.profileImage?.isHidden = false
-
-                // Set placeholder avatar
-                fallbackAvatar.text = nil
-                cell.fallbackAvatarImage.isHidden = true
-                let name = viewModel.userName.value
-                let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                var index: UInt64 = 0
-                if scanner.scanHexInt64(&index) {
-                    fallbackAvatar.isHidden = false
-                    fallbackAvatar.backgroundColor = avatarColors[Int(index)]
-                    if viewModel.conversation.value.recipientRingId != name {
-                        fallbackAvatar.text = name.prefixString().capitalized
-                    } else {
-                        cell.fallbackAvatarImage.isHidden = true
-                    }
-                }
-
-                // Observe in case of a lookup
-                self.fallbackBGColorObservable
-                    .subscribe(onNext: { [weak fallbackAvatar] backgroundColor in
-                        fallbackAvatar?.backgroundColor = backgroundColor
-                    })
-                    .disposed(by: cell.disposeBag)
-
-                // Avatar placeholder initial
-                viewModel.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .filter({ [weak self] userName in
-                        return userName != self?.viewModel.conversation.value.recipientRingId
-                    })
-                    .map { value in value.prefixString().capitalized }
-                    .bind(to: fallbackAvatar.rx.text)
-                    .disposed(by: cell.disposeBag)
-
-                viewModel.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .map { [weak self] userName in userName != self?.viewModel.conversation.value.recipientRingId }
-                    .bind(to: cell.fallbackAvatarImage.rx.isHidden)
-                    .disposed(by: cell.disposeBag)
-
-                // Set image if any
-                cell.profileImage?.image = nil
-                self.viewModel.profileImageData.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { data in
-                        if let imageData = data {
-                            if let image = UIImage(data: imageData) {
-                                cell.profileImage?.image = image
-                                fallbackAvatar.isHidden = true
-                            }
-                        } else {
-                            cell.profileImage?.image = nil
-                            fallbackAvatar.isHidden = false
-                        }
-                    }).disposed(by: cell.disposeBag)
-            }
-        }
-    }
-    // swiftlint:enable cyclomatic_complexity
 }
-// swiftlint:enable type_body_length
 
 extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -687,18 +478,16 @@ extension ConversationViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let messageViewModel = self.messageViewModels?[indexPath.row] {
-            let type =  messageViewModel.bubblePosition() == .received ? MessageCellReceived.self :
-                        messageViewModel.bubblePosition() == .sent ? MessageCellSent.self :
-                        messageViewModel.bubblePosition() == .generated ? MessageCellGenerated.self :
+        if let item = self.messageViewModels?[indexPath.row] {
+            let type =  item.bubblePosition() == .received ? MessageCellReceived.self :
+                        item.bubblePosition() == .sent ? MessageCellSent.self :
+                        item.bubblePosition() == .generated ? MessageCellGenerated.self :
                         MessageCellGenerated.self
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: type)
-            formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
+            cell.initFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
             return cell
         }
-
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
-
     }
 
 }
