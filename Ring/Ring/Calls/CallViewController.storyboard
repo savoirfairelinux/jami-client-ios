@@ -32,6 +32,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <blurEffect style="light"/>
                             </visualEffectView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj8-CK-PQm" userLabel="Call Pulse">
+                                <rect key="frame" x="113" y="150" width="150" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_contact_picture" translatesAutoresizingMaskIntoConstraints="NO" id="fnt-PQ-Q6P">
                                 <rect key="frame" x="113" y="150" width="150" height="150"/>
                                 <constraints>
@@ -176,6 +180,7 @@
                         <constraints>
                             <constraint firstItem="LK6-u0-eLU" firstAttribute="leading" secondItem="QpJ-Sx-9dG" secondAttribute="leading" id="0oL-jv-UVj"/>
                             <constraint firstItem="zMN-6z-uXT" firstAttribute="centerX" secondItem="QpJ-Sx-9dG" secondAttribute="centerX" id="8Mt-nX-xlY"/>
+                            <constraint firstItem="Dj8-CK-PQm" firstAttribute="width" secondItem="fnt-PQ-Q6P" secondAttribute="width" id="8Pl-sx-ODH"/>
                             <constraint firstItem="zMN-6z-uXT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QpJ-Sx-9dG" secondAttribute="leading" constant="8" id="Bf4-J4-K9c"/>
                             <constraint firstItem="fnt-PQ-Q6P" firstAttribute="top" secondItem="WrD-XI-6aI" secondAttribute="bottom" constant="130" id="C6d-Dz-lnR"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" id="DB0-aS-tKo"/>
@@ -192,8 +197,11 @@
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerY" secondItem="QpJ-Sx-9dG" secondAttribute="centerY" id="bAN-gX-nPE"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zMN-6z-uXT" secondAttribute="trailing" constant="8" id="cZ0-u0-t7T"/>
                             <constraint firstAttribute="trailing" secondItem="LK6-u0-eLU" secondAttribute="trailing" id="cl9-Fw-bSb"/>
+                            <constraint firstItem="Dj8-CK-PQm" firstAttribute="centerY" secondItem="fnt-PQ-Q6P" secondAttribute="centerY" id="dgV-Hs-X23"/>
+                            <constraint firstItem="Dj8-CK-PQm" firstAttribute="height" secondItem="fnt-PQ-Q6P" secondAttribute="height" id="e4X-aR-tJh"/>
                             <constraint firstItem="4n1-G8-SAO" firstAttribute="top" secondItem="LK6-u0-eLU" secondAttribute="bottom" id="ePh-KL-t0K"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerX" secondItem="QpJ-Sx-9dG" secondAttribute="centerX" id="ff0-Nw-f2Y"/>
+                            <constraint firstItem="Dj8-CK-PQm" firstAttribute="centerX" secondItem="fnt-PQ-Q6P" secondAttribute="centerX" id="ghi-jQ-hK7"/>
                             <constraint firstItem="73Y-N1-Yga" firstAttribute="centerX" secondItem="QpJ-Sx-9dG" secondAttribute="centerX" id="p8J-P2-tcm"/>
                             <constraint firstItem="73Y-N1-Yga" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QpJ-Sx-9dG" secondAttribute="leading" constant="8" id="ryb-Wh-KM2"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="sCh-Gw-iu0"/>
@@ -208,6 +216,7 @@
                         <outlet property="callInfoTimerLabel" destination="fac-lR-4on" id="fMl-JM-d9Y"/>
                         <outlet property="callNameLabel" destination="cgd-Wa-clf" id="oEa-7j-Eac"/>
                         <outlet property="callProfileImage" destination="T4r-6x-bEH" id="Pi5-eB-Eve"/>
+                        <outlet property="callPulse" destination="Dj8-CK-PQm" id="9e6-JQ-U6k"/>
                         <outlet property="callView" destination="ZVy-nB-bKJ" id="Sah-TI-SVz"/>
                         <outlet property="capturedVideo" destination="KFB-xs-EVT" id="Tn5-ZN-o6r"/>
                         <outlet property="durationLabel" destination="zMN-6z-uXT" id="Uuf-ph-lrC"/>
