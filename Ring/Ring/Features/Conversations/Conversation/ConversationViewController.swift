@@ -687,18 +687,17 @@ extension ConversationViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let messageViewModel = self.messageViewModels?[indexPath.row] {
-            let type =  messageViewModel.bubblePosition() == .received ? MessageCellReceived.self :
-                        messageViewModel.bubblePosition() == .sent ? MessageCellSent.self :
-                        messageViewModel.bubblePosition() == .generated ? MessageCellGenerated.self :
+        if let item = self.messageViewModels?[indexPath.row] {
+            let type =  item.bubblePosition() == .received ? MessageCellReceived.self :
+                        item.bubblePosition() == .sent ? MessageCellSent.self :
+                        item.bubblePosition() == .generated ? MessageCellGenerated.self :
                         MessageCellGenerated.self
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: type)
-            formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: messageViewModel)
+            cell.initFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
+            //formatCell(withCell: cell, cellForRowAt: indexPath, withMessageVM: item)
             return cell
         }
-
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
-
     }
 
 }

@@ -80,4 +80,287 @@ class MessageCell: UITableViewCell, NibReusable {
         }
         return false
     }
+
+    //func initFromItem(_ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
+
+    //}
+
+    func formatCellTimeLabel(_ item: MessageViewModel) {
+        // hide for potentially reused cell
+        self.timeLabel.isHidden = true
+        self.leftDivider.isHidden = true
+        self.rightDivider.isHidden = true
+
+        if item.timeStringShown == nil {
+            return
+        }
+
+        // setup the label
+        self.timeLabel.text = item.timeStringShown
+        self.timeLabel.textColor = UIColor.ringMsgCellTimeText
+        self.timeLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
+
+        // show the time
+        self.timeLabel.isHidden = false
+        self.leftDivider.isHidden = false
+        self.rightDivider.isHidden = false
+    }
+
+    // swiftlint:disable cyclomatic_complexity
+    func applyBubbleStyleToCell(_ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
+        guard let item = items?[indexPath.row] else {
+            return
+        }
+
+        let type = item.bubblePosition()
+        let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        self.setup()
+
+        self.messageLabel.enabledTypes = [.url]
+        self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+        self.messageLabel.handleURLTap { url in
+            let urlString = url.absoluteString
+            if let prefixedUrl = URL(string: urlString.contains("http") ? urlString : "http://\(urlString)") {
+                UIApplication.shared.openURL(prefixedUrl)
+            }
+        }
+
+        self.topCorner.isHidden = true
+        self.topCorner.backgroundColor = bubbleColor
+        self.bottomCorner.isHidden = true
+        self.bottomCorner.backgroundColor = bubbleColor
+        self.bubbleBottomConstraint.constant = 8
+        self.bubbleTopConstraint.constant = 8
+
+        var adjustedSequencing = item.sequencing
+
+        if item.timeStringShown != nil {
+            self.bubbleTopConstraint.constant = 32
+            adjustedSequencing = indexPath.row == (items?.count)! - 1 ?
+                .singleMessage : adjustedSequencing != .singleMessage && adjustedSequencing != .lastOfSequence ?
+                    .firstOfSequence : .singleMessage
+        }
+
+        if indexPath.row + 1 < (items?.count)! {
+            if items?[indexPath.row + 1].timeStringShown != nil {
+                switch adjustedSequencing {
+                case .firstOfSequence:
+                    adjustedSequencing = .singleMessage
+                case .middleOfSequence:
+                    adjustedSequencing = .lastOfSequence
+                default: break
+                }
+            }
+        }
+
+        item.sequencing = adjustedSequencing
+
+        switch item.sequencing {
+        case .middleOfSequence:
+            self.topCorner.isHidden = false
+            self.bottomCorner.isHidden = false
+            self.bubbleBottomConstraint.constant = 1
+            self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
+        case .firstOfSequence:
+            self.bottomCorner.isHidden = false
+            self.bubbleBottomConstraint.constant = 1
+            self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 8
+        case .lastOfSequence:
+            self.topCorner.isHidden = false
+            self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
+        default: break
+        }
+    }
+    // swiftlint:enable cyclomatic_complexity
+
+    // swiftlint:disable cyclomatic_complexity
+    func initFromItem(_ conversationViewModel: ConversationViewModel,
+                      _ items: [MessageViewModel]?,
+                      cellForRowAt indexPath: IndexPath) {
+        guard let item = items?[indexPath.row] else {
+            return
+        }
+
+        // hide/show time label
+        formatCellTimeLabel(item)
+
+        if item.bubblePosition() == .generated {
+            self.bubble.backgroundColor = UIColor.ringMsgCellReceived
+            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+            // generated messages should always show the time
+            self.bubbleTopConstraint.constant = 32
+            return
+        }
+
+        // bubble grouping for cell
+        applyBubbleStyleToCell(items, cellForRowAt: indexPath)
+
+        // special cases where top/bottom margins should be larger
+        if indexPath.row == 0 {
+            self.bubbleTopConstraint.constant = 32
+        } else if items?.count == indexPath.row + 1 {
+            self.bubbleBottomConstraint.constant = 16
+        }
+
+        if item.bubblePosition() == .sent {
+            item.status.asObservable()
+                .observeOn(MainScheduler.instance)
+                .map { value in value == MessageStatus.sending ? true : false }
+                .bind(to: self.sendingIndicator.rx.isAnimating)
+                .disposed(by: self.disposeBag)
+            item.status.asObservable()
+                .observeOn(MainScheduler.instance)
+                .map { value in value == MessageStatus.failure ? false : true }
+                .bind(to: self.failedStatusLabel.rx.isHidden)
+                .disposed(by: self.disposeBag)
+        } else if item.bubblePosition() == .received {
+            // avatar
+            guard let fallbackAvatar = self.fallbackAvatar else {
+                return
+            }
+
+            self.fallbackAvatar.isHidden = true
+            self.profileImage?.isHidden = true
+            if item.sequencing == .lastOfSequence || item.sequencing == .singleMessage {
+                self.profileImage?.isHidden = false
+
+                // Set placeholder avatar
+                fallbackAvatar.text = nil
+                self.fallbackAvatarImage.isHidden = true
+                /// uuhhhhh..... username?
+                let name = conversationViewModel.userName.value
+                let scanner = Scanner(string: name.toMD5HexString().prefixString())
+                var index: UInt64 = 0
+                if scanner.scanHexInt64(&index) {
+                    fallbackAvatar.isHidden = false
+                    fallbackAvatar.backgroundColor = avatarColors[Int(index)]
+                    if conversationViewModel.conversation.value.recipientRingId != name {
+                        self.fallbackAvatar.text = name.prefixString().capitalized
+                    } else {
+                        self.fallbackAvatarImage.isHidden = true
+                    }
+                }
+
+                // Observe in case of a lookup
+                conversationViewModel.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { name in
+                        let scanner = Scanner(string: name.toMD5HexString().prefixString())
+                        var index: UInt64 = 0
+                        if scanner.scanHexInt64(&index) {
+                            return avatarColors[Int(index)]
+                        }
+                        return defaultAvatarColor
+                    }.subscribe(onNext: { backgroundColor in
+                        self.fallbackAvatar.backgroundColor = backgroundColor
+                    })
+                    .disposed(by: self.disposeBag)
+
+                // Avatar placeholder initial
+                conversationViewModel.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .filter({ userName in
+                        return userName != conversationViewModel.conversation.value.recipientRingId
+                    })
+                    .map { value in
+                        value.prefixString().capitalized
+                    }
+                    .bind(to: self.fallbackAvatar.rx.text)
+                    .disposed(by: self.disposeBag)
+
+                conversationViewModel.userName.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { userName in
+                        userName != conversationViewModel.conversation.value.recipientRingId
+                    }
+                    .bind(to: self.fallbackAvatarImage.rx.isHidden)
+                    .disposed(by: self.disposeBag)
+
+                // Set image if any
+                self.profileImage?.image = nil
+                conversationViewModel.profileImageData.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: { data in
+                        if let imageData = data {
+                            if let image = UIImage(data: imageData) {
+                                self.profileImage?.image = image
+                                fallbackAvatar.isHidden = true
+                            }
+                        } else {
+                            self.profileImage?.image = nil
+                            fallbackAvatar.isHidden = false
+                        }
+                    }).disposed(by: self.disposeBag)
+            }
+        }
+    }
+    // swiftlint:enable cyclomatic_complexity
+}
+
+func getTimeLabelString(forTime time: Date) -> String {
+    // get the current time
+    let currentDateTime = Date()
+
+    // prepare formatter
+    let dateFormatter = DateFormatter()
+    if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
+        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
+            if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
+                // age: [0, received the previous day[
+                dateFormatter.dateFormat = "h:mma"
+            } else {
+                // age: [received the previous day, received 7 days ago[
+                dateFormatter.dateFormat = "E h:mma"
+            }
+        } else {
+            // age: [received 7 days ago, received the previous year[
+            dateFormatter.dateFormat = "MMM d, h:mma"
+        }
+    } else {
+        // age: [received the previous year, inf[
+        dateFormatter.dateFormat = "MMM d, yyyy h:mma"
+    }
+
+    // generate the string containing the message time
+    return dateFormatter.string(from: time).uppercased()
+}
+
+func getMessageSequencing(_ items: [MessageViewModel]?, forIndex index: Int) -> MessageSequencing {
+    if let msgViewModel = items?[index] {
+        let msgOwner = msgViewModel.bubblePosition()
+        if items?.count == 1 || index == 0 {
+            if items?.count == index + 1 {
+                return MessageSequencing.singleMessage
+            }
+            let nextMsgViewModel = index + 1 <= (items?.count)!
+                ? items?[index + 1] : nil
+            if nextMsgViewModel != nil {
+                return msgOwner != nextMsgViewModel?.bubblePosition()
+                    ? MessageSequencing.singleMessage : MessageSequencing.firstOfSequence
+            }
+        } else if items?.count == index + 1 {
+            let lastMsgViewModel = index - 1 >= 0 && index - 1 < (items?.count)!
+                ? items?[index - 1] : nil
+            if lastMsgViewModel != nil {
+                return msgOwner != lastMsgViewModel?.bubblePosition()
+                    ? MessageSequencing.singleMessage : MessageSequencing.lastOfSequence
+            }
+        }
+        let lastMsgViewModel = index - 1 >= 0 && index - 1 < (items?.count)!
+            ? items?[index - 1] : nil
+        let nextMsgViewModel = index + 1 <= (items?.count)!
+            ? items?[index + 1] : nil
+        var sequencing = MessageSequencing.singleMessage
+        if (lastMsgViewModel != nil) && (nextMsgViewModel != nil) {
+            if msgOwner != lastMsgViewModel?.bubblePosition() && msgOwner == nextMsgViewModel?.bubblePosition() {
+                sequencing = MessageSequencing.firstOfSequence
+            } else if msgOwner != nextMsgViewModel?.bubblePosition() && msgOwner == lastMsgViewModel?.bubblePosition() {
+                sequencing = MessageSequencing.lastOfSequence
+            } else if msgOwner == nextMsgViewModel?.bubblePosition() && msgOwner == lastMsgViewModel?.bubblePosition() {
+                sequencing = MessageSequencing.middleOfSequence
+            }
+        }
+        return sequencing
+    }
+    return MessageSequencing.unknown
 }
