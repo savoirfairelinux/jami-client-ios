@@ -1241,8 +1241,8 @@
 		1A5DC0331F3567080075E8EF /* ContactRequests */ = {
 			isa = PBXGroup;
 			children = (
-				1A5DC0341F3567360075E8EF /* Cells */,
 				1A5DC0411F3567DF0075E8EF /* ContactRequestsCoordinator.swift */,
+				1A5DC0341F3567360075E8EF /* Cells */,
 				1A5DC03A1F35678D0075E8EF /* ContactRequestsViewController.storyboard */,
 				1A5DC03B1F35678D0075E8EF /* ContactRequestsViewController.swift */,
 				1A5DC03C1F35678D0075E8EF /* ContactRequestsViewModel.swift */,
