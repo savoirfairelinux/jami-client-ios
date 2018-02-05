@@ -53,8 +53,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     var viewModel: SmartlistViewModel!
     fileprivate let disposeBag = DisposeBag()
 
-    fileprivate var backgroundColorObservable: Observable<UIColor>!
-
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,101 +138,16 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func setupDataSources() {
-
         //Configure cells closure for the datasources
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
             -> UITableViewCell = {
                 (   dataSource: TableViewSectionedDataSource<ConversationSection>,
                     tableView: UITableView,
                     indexPath: IndexPath,
-                    item: ConversationSection.Item) in
+                    conversationItem: ConversationSection.Item) in
 
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConversationCell.self)
-
-                item.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .bind(to: cell.nameLabel.rx.text)
-                    .disposed(by: cell.disposeBag)
-
-                // Avatar placeholder initial
-                cell.fallbackAvatar.text = nil
-                cell.fallbackAvatarImage.isHidden = true
-                let name = item.userName.value
-                let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                var index: UInt64 = 0
-                if scanner.scanHexInt64(&index) {
-                    cell.fallbackAvatar.isHidden = false
-                    cell.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
-                    if item.conversation.value.recipientRingId != name {
-                        cell.fallbackAvatar.text = name.prefixString().capitalized
-                    } else {
-                        cell.fallbackAvatarImage.isHidden = false
-                    }
-                }
-
-                item.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .filter({ [weak item] userName in
-                        return userName != item?.conversation.value.recipientRingId
-                    })
-                    .map { value in value.prefixString().capitalized }
-                    .bind(to: cell.fallbackAvatar.rx.text)
-                    .disposed(by: cell.disposeBag)
-
-                item.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .map { [weak item] userName in userName != item?.conversation.value.recipientRingId }
-                    .bind(to: cell.fallbackAvatarImage.rx.isHidden)
-                    .disposed(by: cell.disposeBag)
-
-                // UIColor that observes "best Id" prefix
-                self.backgroundColorObservable = item.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .map { name in
-                        let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                        var index: UInt64 = 0
-                        if scanner.scanHexInt64(&index) {
-                            return avatarColors[Int(index)]
-                        }
-                        return defaultAvatarColor
-                    }
-
-                // Set placeholder avatar to backgroundColorObservable
-                self.backgroundColorObservable
-                    .subscribe(onNext: { backgroundColor in
-                        cell.fallbackAvatar.backgroundColor = backgroundColor
-                    })
-                    .disposed(by: cell.disposeBag)
-
-                // Set image if any
-                cell.fallbackAvatar.isHidden = false
-                cell.profileImage.image = nil
-
-                item.profileImageData.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { data in
-                        if let imageData = data {
-                            if let image = UIImage(data: imageData) {
-                                cell.profileImage.image = image
-                                cell.fallbackAvatar.isHidden = true
-                            }
-                        } else {
-                            cell.fallbackAvatar.isHidden = false
-                            cell.profileImage.image = nil
-                        }
-                    }).disposed(by: cell.disposeBag)
-
-                cell.newMessagesLabel.text = item.unreadMessages
-                cell.lastMessageDateLabel.text = item.lastMessageReceivedDate
-                cell.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
-                cell.lastMessagePreviewLabel.text = item.lastMessage
-
-                item.contactPresence.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .map { value in !value }
-                    .bind(to: cell.presenceIndicator.rx.isHidden)
-                    .disposed(by: cell.disposeBag)
-
+                cell.configureFromItem(conversationItem)
                 return cell
         }
 
