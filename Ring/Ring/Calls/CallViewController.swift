@@ -45,6 +45,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
     @IBOutlet private weak var infoLabelConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var callPulse: UIView!
 
     @IBOutlet private weak var buttonsContainer: ButtonsContainerView!
 
@@ -67,6 +68,29 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.showAllInfo()
         }
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
+
+        initCallAnimation()
+    }
+
+    func initCallAnimation() {
+        self.callPulse.alpha = 0.5
+        self.callPulse.layer.cornerRadius = self.callPulse.frame.size.width / 2
+        animateCallCircle()
+    }
+
+    func animateCallCircle() {
+        self.log.debug("animate pulse")
+        self.callPulse.alpha = 0.5
+        self.callPulse.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        UIView.animate(withDuration: 1.5, animations: {
+            self.callPulse.alpha = 0.0
+            self.callPulse.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+            self.view.layoutIfNeeded()
+        }, completion: { [unowned self] _ in
+            if self.viewModel.call?.state == .ringing || self.viewModel.call?.state == .connecting {
+                self.animateCallCircle()
+            }
+        })
     }
 
     func setUpCallButtons() {
