@@ -49,4 +49,90 @@ class ContactRequestCell: UITableViewCell, NibReusable {
     override func prepareForReuse() {
         self.disposeBag = DisposeBag()
     }
+
+    func initFromItem(_ item: ContactRequestItem) {
+        item.userName
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.nameLabel.rx.text)
+            .disposed(by: self.disposeBag)
+
+        // Avatar placeholder initial
+        self.fallbackAvatar.text = nil
+        self.fallbackAvatarImage.isHidden = true
+        let name = item.userName.value
+        let scanner = Scanner(string: name.toMD5HexString().prefixString())
+        var index: UInt64 = 0
+        if scanner.scanHexInt64(&index) {
+            self.fallbackAvatar.isHidden = false
+            self.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
+            if item.contactRequest.ringId != name {
+                self.fallbackAvatar.text = name.prefixString().capitalized
+            } else {
+                self.fallbackAvatarImage.isHidden = false
+            }
+        }
+
+        item.userName.asObservable()
+            .observeOn(MainScheduler.instance)
+            .filter({ [weak item] userName in
+                return userName != item?.contactRequest.ringId
+            })
+            .map { value in value.prefixString().capitalized }
+            .bind(to: self.fallbackAvatar.rx.text)
+            .disposed(by: self.disposeBag)
+
+        item.userName.asObservable()
+            .observeOn(MainScheduler.instance)
+            .map { [weak item] userName in userName != item?.contactRequest.ringId }
+            .bind(to: self.fallbackAvatarImage.rx.isHidden)
+            .disposed(by: self.disposeBag)
+
+        // UIColor that observes "best Id" prefix
+        item.userName.asObservable()
+            .observeOn(MainScheduler.instance)
+            .map { name in
+                let scanner = Scanner(string: name.toMD5HexString().prefixString())
+                var index: UInt64 = 0
+                if scanner.scanHexInt64(&index) {
+                    return avatarColors[Int(index)]
+                }
+                return defaultAvatarColor
+            }
+            .subscribe(onNext: { backgroundColor in
+                self.fallbackAvatar.backgroundColor = backgroundColor
+            })
+            .disposed(by: self.disposeBag)
+
+        // Set image if any
+        if let imageData = item.profileImageData.value {
+            if let image = UIImage(data: imageData) {
+                self.profileImageView.image = image
+                self.fallbackAvatar.isHidden = true
+            }
+        } else {
+            self.fallbackAvatar.isHidden = false
+            self.profileImageView.image = nil
+        }
+
+        item.profileImageData.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { data in
+                if let imageData = data {
+                    if let image = UIImage(data: imageData) {
+                        UIView.transition(with: self.profileImageView,
+                                          duration: 1.0,
+                                          options: .transitionCrossDissolve,
+                                          animations: {
+                                            self.profileImageView.image = image
+                        }, completion: { _ in
+                            self.fallbackAvatar.isHidden = true
+                        })
+                    }
+                } else {
+                    self.fallbackAvatar.isHidden = false
+                    self.profileImageView.image = nil
+                }
+            }).disposed(by: self.disposeBag)
+    }
 }
