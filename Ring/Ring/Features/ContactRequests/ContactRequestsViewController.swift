@@ -35,8 +35,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     fileprivate let cellIdentifier = "ContactRequestCell"
     fileprivate let log = SwiftyBeaver.self
 
-    fileprivate var backgroundColorObservable: Observable<UIColor>!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rx.modelSelected(ContactRequestItem.self)
@@ -67,79 +65,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             .contactRequestItems
             .observeOn(MainScheduler.instance)
             .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: ContactRequestCell.self)) { [unowned self] _, item, cell in
-                item.userName
-                    .asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .bind(to: cell.nameLabel.rx.text)
-                    .disposed(by: cell.disposeBag)
-
-                // Avatar placeholder initial
-                cell.fallbackAvatar.text = nil
-                cell.fallbackAvatarImage.isHidden = true
-                let name = item.userName.value
-                let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                var index: UInt64 = 0
-                if scanner.scanHexInt64(&index) {
-                    cell.fallbackAvatar.isHidden = false
-                    cell.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
-                    if item.contactRequest.ringId != name {
-                        cell.fallbackAvatar.text = name.prefixString().capitalized
-                    } else {
-                        cell.fallbackAvatarImage.isHidden = false
-                    }
-                }
-
-                item.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .filter({ [weak item] userName in
-                        return userName != item?.contactRequest.ringId
-                    })
-                    .map { value in value.prefixString().capitalized }
-                    .bind(to: cell.fallbackAvatar.rx.text)
-                    .disposed(by: cell.disposeBag)
-
-                item.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .map { [weak item] userName in userName != item?.contactRequest.ringId }
-                    .bind(to: cell.fallbackAvatarImage.rx.isHidden)
-                    .disposed(by: cell.disposeBag)
-
-                // UIColor that observes "best Id" prefix
-                self.backgroundColorObservable = item.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .map { name in
-                        let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                        var index: UInt64 = 0
-                        if scanner.scanHexInt64(&index) {
-                            return avatarColors[Int(index)]
-                        }
-                        return defaultAvatarColor
-                    }
-
-                // Set placeholder avatar to backgroundColorObservable
-                self.backgroundColorObservable
-                    .subscribe(onNext: { backgroundColor in
-                        cell.fallbackAvatar.backgroundColor = backgroundColor
-                    })
-                    .disposed(by: cell.disposeBag)
-
-                // Set image if any
-                cell.fallbackAvatar.isHidden = false
-                cell.profileImageView.image = nil
-
-                item.profileImageData.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { data in
-                        if let imageData = data {
-                            if let image = UIImage(data: imageData) {
-                                cell.profileImageView.image = image
-                                cell.fallbackAvatar.isHidden = true
-                            }
-                        } else {
-                            cell.fallbackAvatar.isHidden = false
-                            cell.profileImageView.image = nil
-                        }
-                    }).disposed(by: cell.disposeBag)
+                cell.configureFromItem(item)
 
                 //Accept button
                 cell.acceptButton.backgroundColor = UIColor.clear
