@@ -152,4 +152,11 @@ static id <AccountAdapterDelegate> _delegate;
     return exportOnRing(std::string([accountID UTF8String]), std::string([password UTF8String]));
 }
 
+- (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data {
+    pushNotificationReceived(std::string([from UTF8String]), [Utils dictionnaryToMap:data]);
+}
+- (void)setPushNotificationToken: (NSString*)token {
+    setPushNotificationToken(std::string([token UTF8String]));
+}
+
 @end
