@@ -65,7 +65,7 @@ class ConversationsManager: MessagesAdapterDelegate {
         guard let content = message[textPlainMIMEType] else {
             return
         }
-
+        
         guard let currentAccount = self.accountsService.currentAccount else {
             return
         }
