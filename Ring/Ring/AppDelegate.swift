@@ -25,10 +25,10 @@ import SwiftyBeaver
 import RxSwift
 import Chameleon
 import Contacts
+import PushKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     private let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
     private let accountService = AccountsService(withAccountAdapter: AccountAdapter())
@@ -42,6 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let networkService = NetworkService()
     private var conversationManager: ConversationsManager?
     private var contactRequestManager: ContactRequestManager?
+   // private let pushQueue = DispatchQueue(label: "push queue")
+
+    var voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
     public lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
@@ -117,11 +120,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let accountDetails = self.accountService.getAccountDetails(fromAccountId: currentAccount.id)
             accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.videoEnabled), withValue: "true")
             self.accountService.setAccountDetails(forAccountId: currentAccount.id, withDetails: accountDetails)
+            if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) == "true" {
+                self.voipRegistration()
+            } else {
+                self.accountService.setPushNotificationToken(token: "")
+            }
         }.disposed(by: self.disposeBag)
 
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()
         self.appCoordinator.start()
+        self.requestNotificationAuthorization(application: application)
         return true
     }
 
@@ -166,6 +175,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DispatchQueue.main.asyncAfter(deadline: time) {
                 self.appCoordinator.showDatabaseError()
             }
+        }
+    }
+
+    func voipRegistration() {
+        self.voipRegistry.delegate = self
+        self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
+    }
+
+    func voipUnregister() {
+       self.voipRegistry.desiredPushTypes = nil
+    }
+
+    func requestNotificationAuthorization(application: UIApplication) {
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = application.delegate as? UNUserNotificationCenterDelegate
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+    }
+}
+
+extension AppDelegate: PKPushRegistryDelegate {
+
+    func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
+        print("pushRegistry didInvalidatePushTokenForType")
+    }
+
+    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
+    }
+    func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
+
+        if type == PKPushType.voIP {
+            let deviceTokenString = pushCredentials.token.reduce("", {$0 + String(format: "%02x", $1)})
+            if let account = self.accountService.currentAccount {
+                let accountDetails = self.accountService.getAccountDetails(fromAccountId: account.id)
+                accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken), withValue: deviceTokenString)
+                self.accountService.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
+            }
+            self.accountService.setPushNotificationToken(token: deviceTokenString)
+            print("voip token", deviceTokenString)
         }
     }
 }

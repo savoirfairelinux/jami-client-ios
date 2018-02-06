@@ -23,6 +23,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <PushKit/PushKit.h>
 
 /*
  *  Because Realm does not support mix ObjC/Swift projects. This workaround fixes compilation failure

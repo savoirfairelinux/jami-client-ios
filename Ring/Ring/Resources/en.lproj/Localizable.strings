@@ -105,6 +105,8 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
+"accountPage.settingsHeader" = "Settings";
+"accountPage.enableProxy" = "Enable DHT Proxy";
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
