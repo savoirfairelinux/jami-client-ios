@@ -29,10 +29,12 @@ enum SettingsSection: SectionModelType {
 
     case linkedDevices(header: String, items: [SectionRow])
     case linkNewDevice(header: String, items: [SectionRow])
+    case enableProxy(header: String, items: [SectionRow])
 
     enum SectionRow {
         case device(device: DeviceModel)
         case linkNew
+        case proxy
     }
 
     var header: String {
@@ -44,6 +46,8 @@ enum SettingsSection: SectionModelType {
         case .linkNewDevice(let header, _):
             return header
 
+        case .enableProxy(let header, _):
+            return header
         }
     }
 
@@ -53,6 +57,9 @@ enum SettingsSection: SectionModelType {
             return items
 
         case .linkNewDevice(_, let items):
+            return items
+
+        case .enableProxy(_, let items):
             return items
         }
     }
@@ -64,6 +71,9 @@ enum SettingsSection: SectionModelType {
 
         case .linkNewDevice(let header, _):
             self = .linkNewDevice(header: header, items: items)
+
+        case .enableProxy(let header, _):
+            self = .enableProxy(header: header, items: items)
         }
     }
 }
@@ -130,6 +140,7 @@ class MeViewModel: ViewModel, Stateable {
             return devices.concat(accountDevice)
                 .map { devices in
                     let addNewDevice = SettingsSection.linkNewDevice(header: "", items: [SettingsSection.SectionRow.linkNew])
+                     let enableProxy = SettingsSection.enableProxy(header: L10n.Accountpage.settingsHeader, items: [SettingsSection.SectionRow.proxy])
                     var rows: [SettingsSection.SectionRow]?
 
                     if !devices.isEmpty {
@@ -142,13 +153,27 @@ class MeViewModel: ViewModel, Stateable {
 
                     if rows != nil {
                         let devicesSection = SettingsSection.linkedDevices(header: L10n.Accountpage.devicesListHeader, items: rows!)
-                        return [devicesSection, addNewDevice]
+                        return [devicesSection, addNewDevice, enableProxy]
                     } else {
-                        return [addNewDevice]
+                        return [addNewDevice, enableProxy]
                     }
             }
         }
         return Observable.just([SettingsSection]())
+    }()
+
+    lazy var proxyEnabled: Observable<Bool>? = {
+        if let account = self.accountService.currentAccount {
+            return self.accountService.proxyEnabled(accountID: account.id)
+        }
+        return nil
+    }()
+
+    lazy var currentproxyEnabled: Bool = {
+        if let account = self.accountService.currentAccount {
+            return self.accountService.getCurrentProxyState(accountID: account.id)
+        }
+        return false
     }()
 
     required init (with injectionBag: InjectionBag) {
@@ -158,5 +183,12 @@ class MeViewModel: ViewModel, Stateable {
 
     func linkDevice() {
         self.stateSubject.onNext(MeState.linkNewDevice)
+    }
+
+    func enableProxy(enable: Bool) {
+        guard let account = self.accountService.currentAccount else {
+            return
+        }
+        self.accountService.changeProxyAvailability(accountID: account.id, enable: enable)
     }
 }
