@@ -73,6 +73,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.setUpDataSource()
         self.settingsTable.register(cellType: DeviceCell.self)
         self.settingsTable.register(cellType: LinkNewDeviceCell.self)
+        self.settingsTable.register(cellType: ProxyCell.self)
     }
 
     func infoItemTapped() {
@@ -117,6 +118,23 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.addDeviceTitle.rx.tap.subscribe(onNext: { [unowned self] in
                         self.viewModel.linkDevice()
                     }).disposed(by: cell.disposeBag)
+                    cell.selectionStyle = .none
+                    return cell
+
+                case .proxy:
+                    let cell = tableView.dequeueReusableCell(for: indexPath,
+                                                             cellType: ProxyCell.self)
+                    cell.enableProxyLabel.text = L10n.Accountpage.enableProxy
+                    cell.switchProxy.isOn = self.viewModel.currentproxyEnabled
+                    self.viewModel.proxyEnabled?
+                        .observeOn(MainScheduler.instance)
+                        .bind(to: cell.switchProxy.rx.isOn)
+                        .disposed(by: cell.disposeBag)
+                    cell.switchProxy.rx.isOn
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [unowned self] (enable) in
+                            self.viewModel.enableProxy(enable: enable)
+                        }).disposed(by: cell.disposeBag)
                     cell.selectionStyle = .none
                     return cell
                 }

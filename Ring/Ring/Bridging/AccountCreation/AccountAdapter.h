@@ -68,4 +68,8 @@
 - (Boolean)exportOnRing:(NSString *)accountID
                password: (NSString *)password;
 
+- (void)pushNotificationReceived:(NSString *) from message:(NSDictionary*) data;
+- (void)setPushNotificationToken: (NSString *) token;
+- (void)enableProxyClientForAccount:(NSString *) accountID: (bool) enable;
+
 @end

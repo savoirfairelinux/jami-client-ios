@@ -66,6 +66,28 @@ class ConversationsManager: MessagesAdapterDelegate {
             return
         }
 
+        print("message received")
+        if #available(iOS 10.0, *) {
+            let notificationContent = UNMutableNotificationContent()
+
+            // Configure Notification Content
+            notificationContent.title = content
+
+
+            // Add Trigger
+            let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
+
+            // Create Notification Request
+            let notificationRequest = UNNotificationRequest(identifier: "cocoacasts_local_notification", content: notificationContent, trigger: notificationTrigger)
+
+            // Add Request to User Notification Center
+            UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+                if let error = error {
+                    print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
+                }
+            }
+        }
+
         guard let currentAccount = self.accountsService.currentAccount else {
             return
         }

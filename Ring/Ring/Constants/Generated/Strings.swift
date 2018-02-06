@@ -11,6 +11,10 @@ enum L10n {
   enum Accountpage {
     /// Devices
     static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
+    /// Enable DHT Proxy
+    static let enableProxy = L10n.tr("Localizable", "accountPage.enableProxy")
+    /// Settings
+    static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
   }
 
   enum Actions {

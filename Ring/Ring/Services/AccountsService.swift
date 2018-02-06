@@ -479,4 +479,94 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func setPushNotificationToken(token: String) {
+        self.accountAdapter.setPushNotificationToken(token)
+    }
+
+    func pushNotificationReceived(data: [AnyHashable: Any]) {
+        var notificationData = data
+        var newDictionary = [String: String]()
+        for key in notificationData.keys {
+            if let value = notificationData[key] {
+                let str = String(describing: value)
+                let keynew = String(describing: key)
+                notificationData[key] = str
+                newDictionary[keynew] = str
+            }
+        }
+        print("push data", newDictionary)
+        self.accountAdapter.pushNotificationReceived("", message: newDictionary)
+    }
+
+    func enableProxy(accountID: String, enable: Bool) {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled), withValue: enable.toString())
+        var proxy = ""
+        if enable {
+            proxy = "192.168.50.231:8000"
+        }
+  //          else {
+//           accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken), withValue: "")
+//        }
+        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
+        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
+        var event = ServiceEvent(withEventType: .proxyEnabled)
+        event.addEventInput(.state, value: enable)
+        event.addEventInput(.accountId, value: accountID)
+        self.responseStream.onNext(event)
+    }
+
+    func setProxyServer(accountID: String, enable: Bool) {
+        var proxy = ""
+        if enable {
+            proxy = "192.168.50.231:8000"
+        }
+        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
+        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
+    }
+
+    func getCurrentProxyState(accountID: String) -> Bool {
+        var proxyEnabled = false
+        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) == "true" {
+            proxyEnabled = true
+        }
+        return proxyEnabled
+    }
+
+    func proxyEnabled(accountID: String) -> Observable<Bool> {
+        let proxyChanged: Observable<Bool> = self.sharedResponseStream
+            .filter({ event in
+                if let accountId: String = event.getEventInput(.accountId) {
+                    return event.eventType == ServiceEventType.proxyEnabled
+                        && accountId == accountID
+                }
+                return false
+            }).map({ event in
+                if let state: Bool = event.getEventInput(.state) {
+                    return state
+                }
+                return false
+            })
+            .asObservable()
+        return proxyChanged
+    }
+
+    func changeProxyAvailability(accountID: String, enable: Bool) {
+        let proxyState = self.getCurrentProxyState(accountID: accountID)
+
+        if proxyState == enable {
+            return
+        }
+        self.enableProxy(accountID: accountID, enable: enable)
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        if !enable {
+            delegate.voipUnregister()
+            return
+        }
+        delegate.voipRegistration()
+    }
 }

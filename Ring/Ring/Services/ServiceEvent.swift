@@ -37,6 +37,7 @@ enum ServiceEventType {
     case contactRequestReceived
     case contactRequestDiscarded
     case profileUpdated
+    case proxyEnabled
 }
 
 /**
