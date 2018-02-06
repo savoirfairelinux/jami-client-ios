@@ -97,6 +97,9 @@ enum ConfigKey: String {
     case ringNsURI = "RingNS.uri"
     case accountPresenceSubscribeSupported = "Account.presenceSubscribeSupported"
     case accountDeviceName = "Account.deviceName"
+    case proxyEnabled = "Account.proxyEnabled"
+    case proxyServer = "Account.proxyServer"
+    case devicePushToken = "Account.proxyPushToken"
 }
 
 /**
