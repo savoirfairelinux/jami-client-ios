@@ -36,6 +36,8 @@ enum AddAccountError: Error {
 enum NotificationName: String {
     case enablePushNotifications
     case disablePushNotifications
+    case answerCallFromNotifications
+    case refuseCallFromNotifications
 }
 
 class AccountsService: AccountAdapterDelegate {
