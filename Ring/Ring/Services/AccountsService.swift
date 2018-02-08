@@ -503,7 +503,7 @@ class AccountsService: AccountAdapterDelegate {
         accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled), withValue: enable.toString())
         var proxy = ""
         if enable {
-            proxy = "192.168.51.6:8000"
+            proxy = "dhtproxy.ring.cx:8000"
         }
         accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
         self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)

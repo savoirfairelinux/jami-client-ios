@@ -28,7 +28,7 @@ import Contacts
 import PushKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
     private let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
     private let accountService = AccountsService(withAccountAdapter: AccountAdapter())
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
     private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
-    private let callService = CallsService(withCallsAdapter: CallsAdapter())
+     let callService = CallsService(withCallsAdapter: CallsAdapter())
     private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
     private let networkService = NetworkService()
@@ -71,7 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+        }
         // initialize log format
         let console = ConsoleDestination()
         console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
@@ -102,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // load accounts during splashscreen
         // and ask the AppCoordinator to handle the first screen once loading is finished
-        self.conversationManager = ConversationsManager(with: self.conversationsService, accountsService: self.accountService)
+        self.conversationManager = ConversationsManager(with: self.conversationsService, accountsService: self.accountService, nameService: self.nameService)
         self.startDB()
         self.accountService.loadAccounts().subscribe { [unowned self] (_) in
             guard let currentAccount = self.accountService.currentAccount else {
@@ -194,6 +196,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
+        }
+    }
+
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let data = response.notification.request.content.userInfo
+        let callID = data["callID"] as! String
+        switch response.actionIdentifier {
+        case "ACCEPT_ACTION":
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "answerCallNotifications"), object: nil, userInfo: data)
+        case "REFUSE_ACTION":
+            self.callService.refuse(callId: callID)
+                .subscribe({_ in
+                    print("Call ignored")
+                }).disposed(by: self.disposeBag)
+            print("Unsubscribe Reader")
+        default:
+            print("Other Action")
+        }
+
+        completionHandler()
+    }
+
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
+
+        if let identifier = identifier {
+
+            let data = notification.userInfo
+            let callID = data!["callID"] as! String
+            switch identifier {
+            case "ACCEPT_ACTION":
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "answerCallNotifications"), object: nil, userInfo: data)
+            case "REFUSE_ACTION":
+                self.callService.refuse(callId: callID)
+                    .subscribe({_ in
+                        print("Call ignored")
+                    }).disposed(by: self.disposeBag)
+                print("Unsubscribe Reader")
+            default:
+                print("Other Action")
+            }
+            completionHandler()
         }
     }
 }
