@@ -69,6 +69,23 @@ class CallsService: CallsAdapterDelegate {
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
         CallsAdapter.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refuseUnansweredCall(_:)),
+                                               name: NSNotification.Name(rawValue: NotificationName.refuseCallFromNotifications.rawValue),
+                                               object: nil)
+    }
+    
+    @objc func refuseUnansweredCall(_ notification: NSNotification) {
+        guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String,
+            self.call(callID: callid) == nil else {
+                return
+        }
+        self.refuse(callId: callid).subscribe({_ in
+            print("Call ignored")
+        }).disposed(by: self.disposeBag)
+    }
+
+    func call(callID: String) -> CallModel? {
+        return self.calls[callID]
     }
 
     func accept(call: CallModel?) -> Completable {
