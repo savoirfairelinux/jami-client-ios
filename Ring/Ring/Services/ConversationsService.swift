@@ -237,6 +237,10 @@ class ConversationsService {
         })
     }
 
+    func getProfile(uri: String) -> Observable<Profile> {
+       return self.dbManager.profileObservable(for: uri, createIfNotExists: false)
+    }
+
     func deleteConversation(conversation: ConversationModel) {
         self.dbManager.removeConversationBetween(accountUri: conversation.accountUri, and: conversation.recipientRingId)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))

@@ -65,6 +65,15 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, CallMakeable {
         }).disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.incomingCall(_:)), name: NSNotification.Name(rawValue: "answerCallNotifications"), object: nil)
+    }
+
+    @objc func incomingCall(_ notification: NSNotification) {
+        if let callid = notification.userInfo?["callID"] as? String {
+            if let call = self.callService.call(callID: callid) {
+                self.answerIncomingCall(call: call)
+            }
+        }
     }
 
     func start () {
@@ -78,7 +87,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, CallMakeable {
         self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true, withStateable: conversationViewController.viewModel)
     }
 
-    private func answerIncomingCall(call: CallModel) {
+     func answerIncomingCall(call: CallModel) {
         let callViewController = CallViewController.instantiate(with: self.injectionBag)
         callViewController.viewModel.call = call
         callViewController.viewModel.answerCall()
@@ -88,19 +97,27 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, CallMakeable {
     }
 
     private func showCallAlert(call: CallModel) {
-        let alertStyle = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) ? UIAlertControllerStyle.alert : UIAlertControllerStyle.actionSheet
-        let alert = UIAlertController(title: L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)", message: nil, preferredStyle: alertStyle)
-        alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonAccept, style: UIAlertActionStyle.default, handler: { (_) in
-            self.answerIncomingCall(call: call)
-            alert.dismiss(animated: true, completion: nil)}))
-        alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonIgnore, style: UIAlertActionStyle.default, handler: { (_) in
-            self.injectionBag.callService.refuse(callId: call.callId)
-                .subscribe({_ in
-                    print("Call ignored")
-                }).disposed(by: self.disposeBag)
-            alert.dismiss(animated: true, completion: nil)
-        }))
+        if UIApplication.shared.applicationState != .active && !call.callId.isEmpty {
+            var data = [String: String]()
+            data ["body"] = call.participantRingId
+            data ["callID"] = call.callId
+            let helper = LocalNotificationsHelper()
+            helper.presentCallNotification(data: data)
+        } else {
+            let alertStyle = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) ? UIAlertControllerStyle.alert : UIAlertControllerStyle.actionSheet
+            let alert = UIAlertController(title: L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)", message: nil, preferredStyle: alertStyle)
+            alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonAccept, style: UIAlertActionStyle.default, handler: { (_) in
+                self.answerIncomingCall(call: call)
+                alert.dismiss(animated: true, completion: nil)}))
+            alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonIgnore, style: UIAlertActionStyle.default, handler: { (_) in
+                self.injectionBag.callService.refuse(callId: call.callId)
+                    .subscribe({_ in
+                        print("Call ignored")
+                    }).disposed(by: self.disposeBag)
+                alert.dismiss(animated: true, completion: nil)
+            }))
 
-        self.present(viewController: alert, withStyle: .present, withAnimation: true)
+            self.present(viewController: alert, withStyle: .present, withAnimation: true)
+        }
     }
 }

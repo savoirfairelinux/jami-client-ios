@@ -71,6 +71,10 @@ class CallsService: CallsAdapterDelegate {
         CallsAdapter.delegate = self
     }
 
+    func call(callID: String) -> CallModel? {
+        return self.calls[callID]
+    }
+
     func accept(call: CallModel?) -> Completable {
         return Completable.create(subscribe: { completable in
             guard let callId = call?.callId else {
