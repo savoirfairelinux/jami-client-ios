@@ -25,12 +25,15 @@ class ConversationsManager: MessagesAdapterDelegate {
 
     let conversationService: ConversationsService
     let accountsService: AccountsService
-    let disposeBag = DisposeBag()
+    let nameService: NameService
+    private let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    private let notificationHandler = LocalNotificationsHelper()
 
-    init(with conversationService: ConversationsService, accountsService: AccountsService) {
+    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
+        self.nameService = nameService
         MessagesAdapter.delegate = self
         self.accountsService
             .sharedResponseStream
@@ -65,7 +68,28 @@ class ConversationsManager: MessagesAdapterDelegate {
         guard let content = message[textPlainMIMEType] else {
             return
         }
-        
+
+        if UIApplication.shared.applicationState != .active {
+            var data = [String: String]()
+            data [NotificationUserInfoKeys.messageContent.rawValue] = content
+            self.nameService.usernameLookupStatus.single()
+                .filter({ lookupNameResponse in
+                    return lookupNameResponse.address != nil &&
+                        lookupNameResponse.address == senderAccount
+                })
+                .subscribe(onNext: { [weak self] lookupNameResponse in
+                    if let name = lookupNameResponse.name, !name.isEmpty {
+                        data [NotificationUserInfoKeys.name.rawValue] = name
+                        self?.notificationHandler.presentMessageNotification(data: data)
+                    } else if let address = lookupNameResponse.address {
+                       data [NotificationUserInfoKeys.name.rawValue] = address
+                       self?.notificationHandler.presentMessageNotification(data: data)
+                    }
+                }).disposed(by: self.disposeBag)
+
+            self.nameService.lookupAddress(withAccount: "", nameserver: "", address: senderAccount)
+        }
+
         guard let currentAccount = self.accountsService.currentAccount else {
             return
         }
@@ -107,5 +131,4 @@ class ConversationsManager: MessagesAdapterDelegate {
                                                       from: accountId,
                                                       to: uri)
     }
-
 }
