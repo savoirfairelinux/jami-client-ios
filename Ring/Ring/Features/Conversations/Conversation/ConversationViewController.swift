@@ -700,5 +700,4 @@ extension ConversationViewController: UITableViewDataSource {
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
 
     }
-
 }

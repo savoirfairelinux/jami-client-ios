@@ -277,10 +277,10 @@ class VideoService: FrameExtractorDelegate {
     func switchCamera() {
         self.camera.switchCamera()
             .subscribe(onCompleted: {
-            print ("camera switched")
-        }) { error in
-            print(error)
-        }.disposed(by: self.disposeBag)
+                print ("camera switched")
+            }, onError: { (error) in
+                print(error)
+            }).disposed(by: self.disposeBag)
     }
 }
 
