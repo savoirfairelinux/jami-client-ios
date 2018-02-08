@@ -176,7 +176,8 @@ class SmartlistViewModel: Stateable, ViewModel {
                 }
                 self.searchStatus.onNext("")
             } else {
-                if self.filteredResults.value.isEmpty {
+                if self.filteredResults.value.isEmpty
+                && self.contactFoundConversation.value == nil {
                     self.searchStatus.onNext(L10n.Smartlist.noResults)
                 } else {
                     self.searchStatus.onNext("")

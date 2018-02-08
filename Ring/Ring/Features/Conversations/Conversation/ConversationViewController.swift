@@ -297,6 +297,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         super.viewDidAppear(animated)
 
         self.scrollToBottom(animated: false)
+        self.textFieldShouldEndEditing = false
         self.messagesLoadingFinished()
     }
 

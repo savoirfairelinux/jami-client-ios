@@ -72,6 +72,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+    }
+
     func setupUI() {
 
         self.navigationItem.title = L10n.Global.homeTabBarTitle
