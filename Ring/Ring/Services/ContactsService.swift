@@ -175,7 +175,9 @@ class ContactsService {
     func addContact(contact: ContactModel, withAccount account: AccountModel) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
             self.contactsAdapter.addContact(withURI: contact.ringId, accountId: account.id)
-            self.contacts.value.append(contact)
+            if self.contact(withRingId: contact.ringId) == nil {
+                self.contacts.value.append(contact)
+            }
             observable.on(.completed)
             return Disposables.create { }
         }
@@ -198,6 +200,21 @@ class ContactsService {
             return
         }
         self.contactRequests.value.remove(at: index)
+    }
+
+    func unbanContact(contact: ContactModel, account: AccountModel) {
+        contact.banned = false
+        self.addContact(contact: contact,
+                        withAccount: account)
+            .subscribe( onCompleted: {
+                var event = ServiceEvent(withEventType: .contactAdded)
+                event.addEventInput(.state, value: contact.confirmed)
+                event.addEventInput(.accountId, value: account.id)
+                event.addEventInput(.uri, value: contact.ringId)
+                self.responseStream.onNext(event)
+                self.contactStatus.onNext(contact)
+                self.contacts.value = self.contacts.value
+            }).disposed(by: self.disposeBag)
     }
 }
 
