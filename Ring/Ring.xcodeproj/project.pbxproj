@@ -100,8 +100,16 @@
 		0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B41FC3947B003898C2 /* DBManager.swift */; };
 		0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */; };
 		0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */; };
+		0E20E4C72031FF560087C868 /* BlockContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20E4C52031FF560087C868 /* BlockContactsCell.swift */; };
+		0E20E4C82031FF560087C868 /* BlockContactsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E20E4C62031FF560087C868 /* BlockContactsCell.xib */; };
 		0E2D5F531F9145C800D574BF /* LinkNewDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */; };
 		0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */; };
+		0E36979920322D46009A68CA /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36979720322D46009A68CA /* BlockListViewController.swift */; };
+		0E36979D20322D75009A68CA /* BlockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36979C20322D75009A68CA /* BlockListViewModel.swift */; };
+		0E36979F20322E6F009A68CA /* BlockListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36979E20322E6F009A68CA /* BlockListViewController.storyboard */; };
+		0E3697A1203235EA009A68CA /* BannedContactItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3697A0203235EA009A68CA /* BannedContactItem.swift */; };
+		0E3697A8203243D3009A68CA /* BannedContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3697A6203243D3009A68CA /* BannedContactCell.swift */; };
+		0E3697A9203243D3009A68CA /* BannedContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E3697A7203243D3009A68CA /* BannedContactCell.xib */; };
 		0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */; };
 		0E403F831F7D79B000C80BC2 /* MessageCellGenerated.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */; };
 		0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */; };
@@ -370,8 +378,16 @@
 		0E0FF1B41FC3947B003898C2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDataHepler.swift; sourceTree = "<group>"; };
 		0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionDataHelper.swift; sourceTree = "<group>"; };
+		0E20E4C52031FF560087C868 /* BlockContactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockContactsCell.swift; sourceTree = "<group>"; };
+		0E20E4C62031FF560087C868 /* BlockContactsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockContactsCell.xib; sourceTree = "<group>"; };
 		0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceCell.swift; sourceTree = "<group>"; };
 		0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkNewDeviceCell.xib; sourceTree = "<group>"; };
+		0E36979720322D46009A68CA /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
+		0E36979C20322D75009A68CA /* BlockListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewModel.swift; sourceTree = "<group>"; };
+		0E36979E20322E6F009A68CA /* BlockListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BlockListViewController.storyboard; sourceTree = "<group>"; };
+		0E3697A0203235EA009A68CA /* BannedContactItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannedContactItem.swift; sourceTree = "<group>"; };
+		0E3697A6203243D3009A68CA /* BannedContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannedContactCell.swift; sourceTree = "<group>"; };
+		0E3697A7203243D3009A68CA /* BannedContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannedContactCell.xib; sourceTree = "<group>"; };
 		0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellGenerated.swift; sourceTree = "<group>"; };
 		0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellGenerated.xib; sourceTree = "<group>"; };
 		0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -988,6 +1004,28 @@
 			path = DBHelpers;
 			sourceTree = "<group>";
 		};
+		0E20E4C22031FEFF0087C868 /* BlockListCell */ = {
+			isa = PBXGroup;
+			children = (
+				0E20E4C52031FF560087C868 /* BlockContactsCell.swift */,
+				0E20E4C62031FF560087C868 /* BlockContactsCell.xib */,
+			);
+			name = BlockListCell;
+			sourceTree = "<group>";
+		};
+		0E36979B20322D4D009A68CA /* BlockList */ = {
+			isa = PBXGroup;
+			children = (
+				0E36979720322D46009A68CA /* BlockListViewController.swift */,
+				0E36979C20322D75009A68CA /* BlockListViewModel.swift */,
+				0E36979E20322E6F009A68CA /* BlockListViewController.storyboard */,
+				0E3697A0203235EA009A68CA /* BannedContactItem.swift */,
+				0E3697A6203243D3009A68CA /* BannedContactCell.swift */,
+				0E3697A7203243D3009A68CA /* BannedContactCell.xib */,
+			);
+			name = BlockList;
+			sourceTree = "<group>";
+		};
 		0E44B62D202B9DC40060F71B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1012,6 +1050,7 @@
 		0E5AFE0A1F8EBC040040D539 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0E20E4C22031FEFF0087C868 /* BlockListCell */,
 				0EAA9DAD2029F054005E245C /* Proxy */,
 				0E5AFE0B1F8EBC1E0040D539 /* DeviceCell */,
 			);
@@ -1235,6 +1274,7 @@
 		1A2D18D91F2918F300B2C785 /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				0E36979B20322D4D009A68CA /* BlockList */,
 				0E5AFE0A1F8EBC040040D539 /* Cells */,
 				1A2D18EC1F2919D800B2C785 /* MeViewController.storyboard */,
 				1A5DC02B1F3565250075E8EF /* MeViewController.swift */,
@@ -1554,6 +1594,7 @@
 				0EAA9DB52029F0AA005E245C /* ProxyCell.xib in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
 				1A5DC0381F35675E0075E8EF /* ContactRequestCell.xib in Resources */,
+				0E20E4C82031FF560087C868 /* BlockContactsCell.xib in Resources */,
 				1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
@@ -1561,6 +1602,8 @@
 				1A2D18B31F2915C500B2C785 /* ConversationViewController.storyboard in Resources */,
 				0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */,
 				1A2D18A01F27A6D600B2C785 /* LinkDeviceViewController.storyboard in Resources */,
+				0E3697A9203243D3009A68CA /* BannedContactCell.xib in Resources */,
+				0E36979F20322E6F009A68CA /* BlockListViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1678,6 +1721,7 @@
 				621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */,
 				1A2D18AC1F29149D00B2C785 /* MeCoordinator.swift in Sources */,
 				1A2D18C51F29180700B2C785 /* ContactModel.swift in Sources */,
+				0E3697A8203243D3009A68CA /* BannedContactCell.swift in Sources */,
 				1A2D18F71F292D7200B2C785 /* MessageCellSent.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				0E68571120238546008B0717 /* CallMakeable.swift in Sources */,
@@ -1734,6 +1778,7 @@
 				1A2D18FC1F292DAD00B2C785 /* ConversationCell.swift in Sources */,
 				0E48F9D31FDF150700D6CC08 /* ContactRequestManager.swift in Sources */,
 				0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */,
+				0E20E4C72031FF560087C868 /* BlockContactsCell.swift in Sources */,
 				1A5DC0371F35675E0075E8EF /* ContactRequestCell.swift in Sources */,
 				1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */,
 				1A5DC03D1F35678D0075E8EF /* ContactRequestItem.swift in Sources */,
@@ -1741,11 +1786,13 @@
 				1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
 				564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */,
+				0E36979920322D46009A68CA /* BlockListViewController.swift in Sources */,
 				1A2D18AA1F29131900B2C785 /* ConversationsCoordinator.swift in Sources */,
 				62AF685E201A61FF003AA9E8 /* AudioService.swift in Sources */,
 				043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */,
 				1A2041861F1EA19600C08435 /* CreateAccountViewController.swift in Sources */,
 				0EDCC8601F98150500B121D7 /* UIView+Rx.swift in Sources */,
+				0E36979D20322D75009A68CA /* BlockListViewModel.swift in Sources */,
 				1A2D18C21F29180700B2C785 /* AccountCredentialsModel.swift in Sources */,
 				0E9D844B1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift in Sources */,
 				1A2D18FF1F29352D00B2C785 /* MeViewModel.swift in Sources */,
@@ -1762,6 +1809,7 @@
 				0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */,
 				56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */,
 				1A5DC0281F3564AA0075E8EF /* MessageModel.swift in Sources */,
+				0E3697A1203235EA009A68CA /* BannedContactItem.swift in Sources */,
 				56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */,
 				1A2041911F1FD46300C08435 /* DesignableView.swift in Sources */,
 				0ED2B6FE1F96A16C001572F0 /* LinkNewDeviceViewModel.swift in Sources */,

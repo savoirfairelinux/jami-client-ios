@@ -35,6 +35,7 @@ enum SettingsSection: SectionModelType {
         case device(device: DeviceModel)
         case linkNew
         case proxy
+        case blockedList
     }
 
     var header: String {
@@ -140,7 +141,7 @@ class MeViewModel: ViewModel, Stateable {
             return devices.concat(accountDevice)
                 .map { devices in
                     let addNewDevice = SettingsSection.linkNewDevice(header: "", items: [SettingsSection.SectionRow.linkNew])
-                     let enableProxy = SettingsSection.enableProxy(header: L10n.Accountpage.settingsHeader, items: [SettingsSection.SectionRow.proxy])
+                     let enableProxy = SettingsSection.enableProxy(header: L10n.Accountpage.settingsHeader, items: [SettingsSection.SectionRow.proxy, SettingsSection.SectionRow.blockedList])
                     var rows: [SettingsSection.SectionRow]?
 
                     if !devices.isEmpty {
@@ -190,5 +191,9 @@ class MeViewModel: ViewModel, Stateable {
             return
         }
         self.accountService.changeProxyAvailability(accountID: account.id, enable: enable)
+    }
+
+    func showBlockedContacts() {
+       self.stateSubject.onNext(MeState.blockedContacts)
     }
 }
