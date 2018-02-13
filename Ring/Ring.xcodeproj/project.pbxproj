@@ -239,6 +239,7 @@
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
 		621231FB1F8D6FEE009B86F0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231FA1F8D6FEE009B86F0 /* MessageCell.swift */; };
 		623660AA20092081002598C1 /* src in Resources */ = {isa = PBXBuildFile; fileRef = 623660A920092081002598C1 /* src */; };
+		627F11F120348FBF006560B5 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627F11F020348FBF006560B5 /* AvatarView.swift */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
 		62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */; };
 		62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */; };
@@ -517,6 +518,7 @@
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		621231FA1F8D6FEE009B86F0 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../daemon/src; sourceTree = "<group>"; };
+		627F11F020348FBF006560B5 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
 		62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PresenceAdapter.mm; sourceTree = "<group>"; };
@@ -862,6 +864,7 @@
 				043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */,
 				1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */,
 				04399A071D1C2D9D00E99CD9 /* Info.plist */,
+				627F11F020348FBF006560B5 /* AvatarView.swift */,
 			);
 			path = Ring;
 			sourceTree = "<group>";
@@ -1737,6 +1740,7 @@
 				1A5DC0321F3566140075E8EF /* ConversationSection.swift in Sources */,
 				1A2D18C41F29180700B2C785 /* ConfigKeyModel.swift in Sources */,
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
+				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
 				1A2D18F51F292D7200B2C785 /* MessageCellReceived.swift in Sources */,
 				56BBC9BC1ED7161200CDAF8B /* Date+Helpers.swift in Sources */,
