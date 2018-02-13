@@ -40,10 +40,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = L10n.Global.meTabBarTitle
-        self.setupUI()
+        self.configureBinding()
     }
 
-    override func setupUI() {
+    func configureBinding() {
         self.viewModel.userName
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: disposeBag)
@@ -51,8 +51,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.viewModel.ringId.asObservable()
             .bind(to: self.ringIdLabel.rx.text)
             .disposed(by: disposeBag)
-
-        super.setupUI()
 
         let infoButton = UIButton(type: .infoLight)
         let infoItem = UIBarButtonItem(customView: infoButton)
@@ -74,6 +72,25 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.settingsTable.register(cellType: DeviceCell.self)
         self.settingsTable.register(cellType: LinkNewDeviceCell.self)
         self.settingsTable.register(cellType: ProxyCell.self)
+        self.settingsTable.register(cellType: BlockContactsCell.self)
+
+        self.settingsTable.rx.itemSelected
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] indexPath in
+//                    if let cell = self?.settingsTable.cellForRow(at: indexPath) {
+//                        if let blockCell = cell as? BlockContactsCell {
+//                            self?.openBlockedList()
+//                        }
+//                    }
+                if (self?.settingsTable.cellForRow(at: indexPath) as? BlockContactsCell) != nil {
+                    self?.openBlockedList()
+                    self?.settingsTable.deselectRow(at: indexPath, animated: true)
+                }
+            }).disposed(by: self.disposeBag)
+    }
+
+    func openBlockedList() {
+        self.viewModel.showBlockedContacts()
     }
 
     func infoItemTapped() {
@@ -137,6 +154,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         }).disposed(by: cell.disposeBag)
                     cell.selectionStyle = .none
                     return cell
+
+                case .blockedList:
+                    let cell = tableView.dequeueReusableCell(for: indexPath,
+                    cellType: BlockContactsCell.self)
+                    cell.label.text = L10n.Accountpage.blockedContacts
+                    return cell
                 }
         }
 
@@ -149,5 +172,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         settingsItemDataSource.titleForHeaderInSection = { dataSource, index in
             return dataSource.sectionModels[index].header
         }
+
+
     }
 }
