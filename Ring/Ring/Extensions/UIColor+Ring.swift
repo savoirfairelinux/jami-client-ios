@@ -22,40 +22,19 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat) {
+        let red_ = CGFloat(red) / 255.0
+        let green_ = CGFloat(green) / 255.0
+        let blue_ = CGFloat(blue) / 255.0
+        self.init(red: red_, green: green_, blue: blue_, alpha: alpha)
+    }
 
-    static let ringMain = UIColor(red: 58.0/255.0,
-                                  green: 192.0/255.0,
-                                  blue: 210.0/255.0,
-                                  alpha: 1.0)
-
-    static let ringSecondary = UIColor(red: 0.0/255.0,
-                                       green: 76.0/255.0,
-                                       blue: 96.0/255.0,
-                                       alpha: 1.0)
-
-    static let ringMsgCellSent = UIColor(red: 58.0/255.0,
-                                         green: 192.0/255.0,
-                                         blue: 210.0/255.0,
-                                         alpha: 1.0)
-
-    static let ringMsgCellSentText = UIColor(red: 255.0/255.0,
-                                             green: 255.0/255.0,
-                                             blue: 255.0/255.0,
-                                             alpha: 1.0)
-
-    static let ringMsgCellReceived = UIColor(red: 235.0/255.0,
-                                             green: 239.0/255.0,
-                                             blue: 239.0/255.0,
-                                             alpha: 1.0)
-
-    static let ringMsgCellReceivedText = UIColor(red: 48.0/255.0,
-                                                 green: 48.0/255.0,
-                                                 blue: 48.0/255.0,
-                                                 alpha: 1.0)
-
-    static let ringMsgCellTimeText = UIColor(red: 128.0/255.0,
-                                             green: 128.0/255.0,
-                                             blue: 128.0/255.0,
-                                             alpha: 1.0)
-
+    static let ringMain = UIColor(red: 58, green: 192, blue: 210, alpha: 1.0)
+    static let ringSecondary = UIColor(red: 0, green: 76, blue: 96, alpha: 1.0)
+    static let ringMsgCellSent = UIColor(red: 58, green: 192, blue: 210, alpha: 1.0)
+    static let ringMsgCellSentText = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0)
+    static let ringMsgCellReceived = UIColor(red: 235, green: 239, blue: 239, alpha: 1.0)
+    static let ringMsgCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
+    static let ringMsgCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
+    static let ringUITableViewCellSelection = UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
 }

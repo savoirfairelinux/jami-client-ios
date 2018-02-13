@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,27 +18,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="470" height="71.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-Nn-INi" userLabel="Fallback Avatar">
-                        <rect key="frame" x="16" y="16" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="20"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fallback_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="B6v-9R-dRD" userLabel="Fallback image">
-                        <rect key="frame" x="16" y="16" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="3ok-c3-kW9"/>
-                            <constraint firstAttribute="width" constant="40" id="PkF-FM-Zff"/>
-                        </constraints>
-                    </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xS9-Kd-lrg">
                         <rect key="frame" x="16" y="16" width="40" height="40"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -128,7 +107,6 @@
                 <constraints>
                     <constraint firstItem="Pni-bm-rkr" firstAttribute="top" secondItem="Dla-OF-biH" secondAttribute="bottom" constant="4" id="0jS-6Q-w8N"/>
                     <constraint firstItem="xS9-Kd-lrg" firstAttribute="centerY" secondItem="YU4-Oq-lYT" secondAttribute="centerY" id="DPx-jS-V0h"/>
-                    <constraint firstItem="B6v-9R-dRD" firstAttribute="leading" secondItem="xS9-Kd-lrg" secondAttribute="leading" id="Dcd-fF-cHv"/>
                     <constraint firstItem="feR-9F-sZM" firstAttribute="top" secondItem="Dla-OF-biH" secondAttribute="bottom" constant="4" id="Gba-vQ-Ebp"/>
                     <constraint firstAttribute="bottom" secondItem="Pni-bm-rkr" secondAttribute="bottom" constant="8" id="KNE-9A-qWk"/>
                     <constraint firstItem="fWB-HR-tae" firstAttribute="top" secondItem="Dla-OF-biH" secondAttribute="bottom" constant="4" id="QMX-zx-zpZ"/>
@@ -138,7 +116,6 @@
                     <constraint firstItem="Dla-OF-biH" firstAttribute="top" secondItem="YU4-Oq-lYT" secondAttribute="top" constant="8" id="hqf-Iv-xvb"/>
                     <constraint firstItem="fWB-HR-tae" firstAttribute="leading" secondItem="feR-9F-sZM" secondAttribute="trailing" constant="4" id="lfX-2s-AsZ"/>
                     <constraint firstItem="xS9-Kd-lrg" firstAttribute="leading" secondItem="YU4-Oq-lYT" secondAttribute="leading" constant="16" id="ogz-Qb-1Pz"/>
-                    <constraint firstItem="B6v-9R-dRD" firstAttribute="top" secondItem="xS9-Kd-lrg" secondAttribute="top" id="sCh-oV-bKL"/>
                     <constraint firstAttribute="trailing" secondItem="Pni-bm-rkr" secondAttribute="trailing" constant="8" id="sDu-vC-6gU"/>
                     <constraint firstAttribute="trailing" secondItem="Dla-OF-biH" secondAttribute="trailing" constant="8" id="wFU-JT-uD3"/>
                     <constraint firstItem="Dla-OF-biH" firstAttribute="leading" secondItem="xS9-Kd-lrg" secondAttribute="trailing" constant="8" id="zIp-sT-nb3"/>
@@ -148,15 +125,10 @@
                 <outlet property="acceptButton" destination="feR-9F-sZM" id="N3u-Ww-sE5"/>
                 <outlet property="banButton" destination="Pni-bm-rkr" id="v1p-37-zfP"/>
                 <outlet property="discardButton" destination="fWB-HR-tae" id="ZMu-NC-hE4"/>
-                <outlet property="fallbackAvatar" destination="Wjc-Nn-INi" id="vCB-ug-eic"/>
-                <outlet property="fallbackAvatarImage" destination="B6v-9R-dRD" id="XV9-ww-vFG"/>
                 <outlet property="nameLabel" destination="Dla-OF-biH" id="tO5-og-I3P"/>
                 <outlet property="profileImageView" destination="xS9-Kd-lrg" id="Rxt-j1-fem"/>
             </connections>
             <point key="canvasLocation" x="177" y="-50"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="fallback_avatar" width="82" height="82"/>
-    </resources>
 </document>

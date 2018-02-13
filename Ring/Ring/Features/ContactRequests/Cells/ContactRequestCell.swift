@@ -24,24 +24,25 @@ import RxSwift
 
 class ContactRequestCell: UITableViewCell, NibReusable {
 
-    @IBOutlet weak var fallbackAvatar: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var fallbackAvatarImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var discardButton: UIButton!
     @IBOutlet weak var banButton: UIButton!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        let fallbackAvatarBGColor = self.fallbackAvatar.backgroundColor
-        super.setSelected(selected, animated: animated)
-        self.fallbackAvatar.backgroundColor = fallbackAvatarBGColor
+        self.backgroundColor = UIColor.ringUITableViewCellSelection
+        UIView.animate(withDuration: 0.5, animations: {
+            self.backgroundColor = UIColor.ringUITableViewCellSelection.lighten(byPercentage: 8.0)
+        })
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        let fallbackAvatarBGColor = self.fallbackAvatar.backgroundColor
-        super.setSelected(highlighted, animated: animated)
-        self.fallbackAvatar.backgroundColor = fallbackAvatarBGColor
+        if highlighted {
+            self.backgroundColor = UIColor.ringUITableViewCellSelection
+        } else {
+            self.backgroundColor = UIColor.clear
+        }
     }
 
     var disposeBag = DisposeBag()
@@ -51,80 +52,29 @@ class ContactRequestCell: UITableViewCell, NibReusable {
     }
 
     func configureFromItem(_ item: ContactRequestItem) {
+        // avatar
+        Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
+                                                  item.userName.asObservable()) { profileImage, username in
+                                                    return (profileImage, username)
+            }
+            .observeOn(MainScheduler.instance)
+            .startWith((item.profileImageData.value, item.userName.value))
+            .subscribe({ [weak self] profileData -> Void in
+                self?.profileImageView.subviews.forEach({ $0.removeFromSuperview() })
+                self?.profileImageView.addSubview(AvatarView(profileImageData: profileData.element?.0,
+                                                             username: (profileData.element?.1)!,
+                                                             size: 40))
+                return
+            })
+            .disposed(by: self.disposeBag)
+
+        // name
         item.userName
             .asObservable()
             .observeOn(MainScheduler.instance)
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
 
-        // Avatar placeholder initial
-        self.fallbackAvatar.text = nil
-        self.fallbackAvatarImage.isHidden = true
-        let name = item.userName.value
-        let scanner = Scanner(string: name.toMD5HexString().prefixString())
-        var index: UInt64 = 0
-        if scanner.scanHexInt64(&index) {
-            self.fallbackAvatar.isHidden = false
-            self.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
-            if item.contactRequest.ringId != name {
-                self.fallbackAvatar.text = name.prefixString().capitalized
-            } else {
-                self.fallbackAvatarImage.isHidden = false
-            }
-        }
-
-        item.userName.asObservable()
-            .observeOn(MainScheduler.instance)
-            .filter({ [weak item] userName in
-                return userName != item?.contactRequest.ringId
-            })
-            .map { value in value.prefixString().capitalized }
-            .bind(to: self.fallbackAvatar.rx.text)
-            .disposed(by: self.disposeBag)
-
-        item.userName.asObservable()
-            .observeOn(MainScheduler.instance)
-            .map { [weak item] userName in userName != item?.contactRequest.ringId }
-            .bind(to: self.fallbackAvatarImage.rx.isHidden)
-            .disposed(by: self.disposeBag)
-
-        // UIColor that observes "best Id" prefix
-        item.userName.asObservable()
-            .observeOn(MainScheduler.instance)
-            .map { name in
-                let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                var index: UInt64 = 0
-                if scanner.scanHexInt64(&index) {
-                    return avatarColors[Int(index)]
-                }
-                return defaultAvatarColor
-            }
-            .subscribe(onNext: { backgroundColor in
-                self.fallbackAvatar.backgroundColor = backgroundColor
-            })
-            .disposed(by: self.disposeBag)
-
-        // Set image if any
-        if let imageData = item.profileImageData.value {
-            if let image = UIImage(data: imageData) {
-                self.profileImageView.image = image
-                self.fallbackAvatar.isHidden = true
-            }
-        } else {
-            self.fallbackAvatar.isHidden = false
-            self.profileImageView.image = nil
-        }
-
-        item.profileImageData.asObservable()
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { data in
-                if let imageData = data, let image = UIImage(data: imageData) {
-                    self.fallbackAvatar.isHidden = true
-                    self.profileImageView.image = image
-                } else {
-                    self.fallbackAvatar.isHidden = false
-                    self.profileImageView.image = nil
-                }
-            }).disposed(by: self.disposeBag)
+        self.selectionStyle = .none
     }
 }
