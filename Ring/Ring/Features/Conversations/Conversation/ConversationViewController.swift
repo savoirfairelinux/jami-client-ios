@@ -47,6 +47,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     var bottomOffset: CGFloat = 0
     let scrollOffsetThreshold: CGFloat = 600
 
+    private var navigationTitleView = UIView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -91,18 +93,23 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         let imageSize       = CGFloat(36.0)
         let imageOffsetY    = CGFloat(5.0)
         let infoPadding     = CGFloat(8.0)
-        let maxNameLength   = CGFloat(128.0)
+        var maxNameLength   = CGFloat(128.0)
         var userNameYOffset = CGFloat(9.0)
         var nameSize        = CGFloat(18.0)
         let navbarFrame     = self.navigationController?.navigationBar.frame
-        let totalHeight     = ((navbarFrame?.size.height ?? 0) + (navbarFrame?.origin.y ?? 0)) / 2
+        let totalHeight     = navbarFrame?.size.height ?? 0
+
+        //textView.textContainer.lineBreakMode = .byTruncatingTail
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+            maxNameLength   = CGFloat(100.0)
+        }
 
         // Replace "< Home" with a back arrow while we are crunching everything to the left side of the bar for now.
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_button")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back_button")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
 
-        let titleView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: totalHeight))
+        let titleView = UIView.init(frame: CGRect(x: 0, y: 0, width: imageSize + maxNameLength + infoPadding, height: totalHeight))
 
         let profileImageView = UIImageView(frame: CGRect(x: 0, y: imageOffsetY, width: imageSize, height: imageSize))
         profileImageView.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
@@ -119,20 +126,23 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             dnlabel.font = UIFont.systemFont(ofSize: nameSize)
             dnlabel.textColor = UIColor.white
             dnlabel.textAlignment = .left
+            dnlabel.lineBreakMode = .byTruncatingTail
             titleView.addSubview(dnlabel)
             userNameYOffset = 20.0
-            nameSize = 14.0
+            nameSize = 12.0
         }
 
         let unlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: userNameYOffset, width: maxNameLength, height: 24))
         unlabel.text = username
         unlabel.font = UIFont.systemFont(ofSize: nameSize)
-        unlabel.textColor = UIColor.white
+        unlabel.textColor = UIColor.ringMsgCellSentText
         unlabel.textAlignment = .left
+        unlabel.lineBreakMode = .byTruncatingTail
         titleView.addSubview(unlabel)
-
-        self.navigationItem.titleView = titleView
-
+        self.navigationTitleView.subviews.forEach({ $0.removeFromSuperview() })
+        self.navigationTitleView.frame = titleView.frame
+        self.navigationTitleView.frame.origin = CGPoint(x: 35, y: 0)
+        self.navigationTitleView.addSubview(titleView)
     }
 
     func setupUI() {
@@ -256,8 +266,18 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
+        self.navigationTitleView.removeFromSuperview()
         self.textFieldShouldEndEditing = true
         self.viewModel.setMessagesAsRead()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        // add view for hide back button title
+        let title = UIView.init(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+        title.backgroundColor = UIColor.ringMain
+        self.navigationItem.titleView = title
+        self.navigationController?.navigationBar.addSubview(self.navigationTitleView)
+        super.viewWillAppear(animated)
     }
 
     func setupTableView() {
