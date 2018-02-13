@@ -87,6 +87,49 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.updateBottomOffset()
     }
 
+    func generateAvatarUIViewFromProfileData(profileImageData: Data?,
+                                             username: String?,
+                                             size: CGFloat = 32.0,
+                                             offset: CGPoint = CGPoint(x: 0.0, y: 0.0)) -> UIView? {
+        let avatarView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: size, height: size))
+        let avatarImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: size, height: size))
+        if let imageData = profileImageData, let image = UIImage(data: imageData) {
+            (avatarImageView as UIImageView).image = image.circleMasked
+            avatarView.addSubview(avatarImageView)
+        } else {
+            // use fallback avatars
+            let name = self.viewModel.userName.value
+            let scanner = Scanner(string: name.toMD5HexString().prefixString())
+            var index: UInt64 = 0
+            if scanner.scanHexInt64(&index) {
+                let fbaBGColor = avatarColors[Int(index)]
+                let circle = UIView(frame: CGRect(x: offset.x, y: offset.y, width: size, height: size))
+                circle.center = CGPoint.init(x: size / 2, y: avatarView.center.y)
+                circle.layer.cornerRadius = size / 2
+                circle.backgroundColor = fbaBGColor
+                circle.clipsToBounds = true
+                avatarView.addSubview(circle)
+                if self.viewModel.conversation.value.recipientRingId != name {
+                    // use g-style fallback avatar
+                    let initialLabel: UILabel = UILabel.init(frame: CGRect.init(x: offset.x, y: offset.y, width: size, height: size))
+                    initialLabel.center = circle.center
+                    initialLabel.text = name.prefixString().capitalized
+                    initialLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                    initialLabel.textColor = UIColor.white
+                    initialLabel.textAlignment = .center
+                    avatarView.addSubview(initialLabel)
+                } else {
+                    // ringId only, so fallback fallback avatar
+                    if let image = UIImage(named: "fallback_avatar") {
+                        (avatarImageView as UIImageView).image = image.circleMasked
+                        avatarView.addSubview(avatarImageView)
+                    }
+                }
+            }
+        }
+        return avatarView
+    }
+
     func setupNavTitle(profileImageData: Data?, displayName: String? = nil, username: String?) {
         let imageSize       = CGFloat(36.0)
         let imageOffsetY    = CGFloat(5.0)
@@ -108,42 +151,11 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         profileImageView.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
         profileImageView.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
 
-        if let imageData = profileImageData, let image = UIImage(data: imageData) {
-            self.log.debug("standard avatar")
-            (profileImageView as UIImageView).image = image.circleMasked
+        if let profileImageUIView = generateAvatarUIViewFromProfileData(profileImageData: profileImageData,
+                                                                        username: username,
+                                                                        size: 36) {
+            profileImageView.addSubview(profileImageUIView)
             titleView.addSubview(profileImageView)
-        } else {
-            // use fallback avatars
-            let name = self.viewModel.userName.value
-            let scanner = Scanner(string: name.toMD5HexString().prefixString())
-            var index: UInt64 = 0
-            if scanner.scanHexInt64(&index) {
-                let fbaBGColor = avatarColors[Int(index)]
-                let circle = UIView(frame: CGRect(x: 0.0, y: imageOffsetY, width: imageSize, height: imageSize))
-                circle.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
-                circle.layer.cornerRadius = imageSize / 2
-                circle.backgroundColor = fbaBGColor
-                circle.clipsToBounds = true
-                titleView.addSubview(circle)
-                if self.viewModel.conversation.value.recipientRingId != name {
-                    // use g-style fallback avatar
-                    self.log.debug("fallback avatar")
-                    let initialLabel: UILabel = UILabel.init(frame: CGRect.init(x: 0, y: imageOffsetY - 1, width: imageSize, height: imageSize))
-                    initialLabel.center = circle.center
-                    initialLabel.text = name.prefixString().capitalized
-                    initialLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-                    initialLabel.textColor = UIColor.white
-                    initialLabel.textAlignment = .center
-                    titleView.addSubview(initialLabel)
-                } else {
-                    // ringId only, so fallback fallback avatar
-                    self.log.debug("fallback fallback avatar")
-                    if let image = UIImage(named: "fallback_avatar") {
-                        (profileImageView as UIImageView).image = image.circleMasked
-                        titleView.addSubview(profileImageView)
-                    }
-                }
-            }
         }
 
         if let name = displayName, !name.isEmpty {
