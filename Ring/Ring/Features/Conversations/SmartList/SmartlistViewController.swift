@@ -213,6 +213,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         self.searchBar.returnKeyType = .done
 
+        self.searchBar.autocapitalizationType = .none
+
         self.searchBar.layer.shadowColor = UIColor.black.cgColor
         self.searchBar.layer.shadowOpacity = 0.5
         self.searchBar.layer.shadowOffset = CGSize.zero
