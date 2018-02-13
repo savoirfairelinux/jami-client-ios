@@ -2,6 +2,7 @@
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,9 +25,7 @@ import Reusable
 
 class ConversationCell: UITableViewCell, NibReusable {
 
-    @IBOutlet weak var fallbackAvatar: UILabel!
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var fallbackAvatarImage: UIImageView!
+    @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var newMessagesIndicator: UIView!
     @IBOutlet weak var newMessagesLabel: UILabel!
@@ -35,23 +34,18 @@ class ConversationCell: UITableViewCell, NibReusable {
     @IBOutlet weak var presenceIndicator: UIView!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        let presenceBGColor = self.presenceIndicator.backgroundColor
-        let fallbackAvatarBGColor = self.fallbackAvatar.backgroundColor
-        let newMessagesIndicatorBGColor = self.newMessagesIndicator.backgroundColor
-        super.setSelected(selected, animated: animated)
-        self.newMessagesIndicator.backgroundColor = newMessagesIndicatorBGColor
-        self.presenceIndicator.backgroundColor = presenceBGColor
-        self.fallbackAvatar.backgroundColor = fallbackAvatarBGColor
+        self.backgroundColor = UIColor.ringUITableViewCellSelection
+        UIView.animate(withDuration: 0.35, animations: {
+            self.backgroundColor = UIColor.ringUITableViewCellSelection.lighten(byPercentage: 5.0)
+        })
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        let presenceBGColor = self.presenceIndicator.backgroundColor
-        let fallbackAvatarBGColor = self.fallbackAvatar.backgroundColor
-        let newMessagesIndicatorBGColor = self.newMessagesIndicator.backgroundColor
-        super.setSelected(highlighted, animated: animated)
-        self.newMessagesIndicator.backgroundColor = newMessagesIndicatorBGColor
-        self.presenceIndicator.backgroundColor = presenceBGColor
-        self.fallbackAvatar.backgroundColor = fallbackAvatarBGColor
+        if highlighted {
+            self.backgroundColor = UIColor.ringUITableViewCellSelection
+        } else {
+            self.backgroundColor = UIColor.clear
+        }
     }
 
     var disposeBag = DisposeBag()
@@ -61,90 +55,47 @@ class ConversationCell: UITableViewCell, NibReusable {
     }
 
     func configureFromItem(_ item: ConversationSection.Item) {
-        item.userName.asObservable()
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.nameLabel.rx.text)
-            .disposed(by: self.disposeBag)
-
-        // Avatar placeholder initial
-        self.fallbackAvatar.text = nil
-        self.fallbackAvatarImage.isHidden = true
-        let name = item.userName.value
-        let scanner = Scanner(string: name.toMD5HexString().prefixString())
-        var index: UInt64 = 0
-        if scanner.scanHexInt64(&index) {
-            self.fallbackAvatar.isHidden = false
-            self.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
-            if item.conversation.value.recipientRingId != name {
-                self.fallbackAvatar.text = name.prefixString().capitalized
-            } else {
-                self.fallbackAvatarImage.isHidden = false
+        // avatar
+        Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
+                                                  item.userName.asObservable()) { profileImage, username in
+                                                            return (profileImage, username)
             }
-        }
-
-        item.userName.asObservable()
             .observeOn(MainScheduler.instance)
-            .filter({ [weak item] userName in
-                return userName != item?.conversation.value.recipientRingId
-            })
-            .map { value in value.prefixString().capitalized }
-            .bind(to: self.fallbackAvatar.rx.text)
-            .disposed(by: self.disposeBag)
-
-        item.userName.asObservable()
-            .observeOn(MainScheduler.instance)
-            .map { [weak item] userName in userName != item?.conversation.value.recipientRingId }
-            .bind(to: self.fallbackAvatarImage.rx.isHidden)
-            .disposed(by: self.disposeBag)
-
-        // UIColor that observes "best Id" prefix
-        item.userName.asObservable()
-            .observeOn(MainScheduler.instance)
-            .map { name in
-                let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                var index: UInt64 = 0
-                if scanner.scanHexInt64(&index) {
-                    return avatarColors[Int(index)]
-                }
-                return defaultAvatarColor
-            }
-            .subscribe(onNext: { backgroundColor in
-                self.fallbackAvatar.backgroundColor = backgroundColor
+            .startWith((item.profileImageData.value, item.userName.value))
+            .subscribe({ [weak self] profileData -> Void in
+                self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
+                self?.avatarView.addSubview(AvatarView(profileImageData: profileData.element?.0,
+                                                       username: (profileData.element?.1)!,
+                                                       size: 40))
+                return
             })
             .disposed(by: self.disposeBag)
 
-        // Set image if any
-        if let imageData = item.profileImageData.value {
-            if let image = UIImage(data: imageData) {
-                self.profileImage.image = image
-                self.fallbackAvatar.isHidden = true
-            }
-        } else {
-            self.fallbackAvatar.isHidden = false
-            self.profileImage.image = nil
-        }
-
-        item.profileImageData.asObservable()
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { data in
-                if let imageData = data, let image = UIImage(data: imageData) {
-                    self.fallbackAvatar.isHidden = true
-                    self.profileImage.image = image
-                } else {
-                    self.fallbackAvatar.isHidden = false
-                    self.profileImage.image = nil
-                }
-            }).disposed(by: self.disposeBag)
-
+        // unread messages
         self.newMessagesLabel.text = item.unreadMessages
-        self.lastMessageDateLabel.text = item.lastMessageReceivedDate
         self.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
-        self.lastMessagePreviewLabel.text = item.lastMessage
 
+        // presence
         item.contactPresence.asObservable()
             .observeOn(MainScheduler.instance)
             .map { value in !value }
             .bind(to: self.presenceIndicator.rx.isHidden)
             .disposed(by: self.disposeBag)
+
+        // username
+        item.userName.asObservable()
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.nameLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        self.nameLabel.lineBreakMode = .byTruncatingTail
+
+        // last message date
+        self.lastMessageDateLabel.text = item.lastMessageReceivedDate
+
+        // last message preview
+        self.lastMessagePreviewLabel.text = item.lastMessage
+        self.lastMessagePreviewLabel.lineBreakMode = .byTruncatingTail
+
+        self.selectionStyle = .none
     }
 }
