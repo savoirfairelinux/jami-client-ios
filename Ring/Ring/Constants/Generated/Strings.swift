@@ -9,12 +9,16 @@ import Foundation
 enum L10n {
 
   enum Accountpage {
+    /// Block List
+    static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
     /// Devices
     static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
     /// Enable Push Notifications
     static let enableProxy = L10n.tr("Localizable", "accountPage.enableProxy")
     /// Settings
     static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
+    /// UNBLOCK
+    static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact")
   }
 
   enum Actions {

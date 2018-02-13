@@ -107,6 +107,8 @@
 "accountPage.devicesListHeader" = "Devices";
 "accountPage.settingsHeader" = "Settings";
 "accountPage.enableProxy" = "Enable Push Notifications";
+"accountPage.blockedContacts" = "Block List";
+"accountPage.unblockContact" = "UNBLOCK";
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
