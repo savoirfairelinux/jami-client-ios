@@ -28,6 +28,7 @@ import RxSwift
 public enum MeState: State {
     case meDetail
     case linkNewDevice
+    case blockedContacts
 }
 
 /// This Coordinator drives the me/settings navigation
@@ -56,6 +57,8 @@ class MeCoordinator: Coordinator, StateableResponsive {
 
             case .linkNewDevice:
                  self.showLinkDeviceWindow()
+            case .blockedContacts:
+                self.showBlockedContacts()
             }
         }).disposed(by: self.disposeBag)
     }
@@ -63,6 +66,11 @@ class MeCoordinator: Coordinator, StateableResponsive {
     func start () {
         let meViewController = MeViewController.instantiate(with: self.injectionBag)
         self.present(viewController: meViewController, withStyle: .show, withAnimation: true, withStateable: meViewController.viewModel)
+    }
+
+    private func showBlockedContacts() {
+        let blockedContactsViewController = BlockListViewController.instantiate(with: self.injectionBag)
+        self.present(viewController: blockedContactsViewController, withStyle: .show, withAnimation: true)
     }
 
     private func showMeDetail () {
