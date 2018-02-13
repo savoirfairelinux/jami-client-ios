@@ -94,11 +94,16 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         let imageSize       = CGFloat(36.0)
         let imageOffsetY    = CGFloat(5.0)
         let infoPadding     = CGFloat(8.0)
-        let maxNameLength   = CGFloat(128.0)
+        var maxNameLength   = CGFloat(128.0)
         var userNameYOffset = CGFloat(9.0)
         var nameSize        = CGFloat(18.0)
         let navbarFrame     = self.navigationController?.navigationBar.frame
         let totalHeight     = ((navbarFrame?.size.height ?? 0) + (navbarFrame?.origin.y ?? 0)) / 2
+
+        //textView.textContainer.lineBreakMode = .byTruncatingTail
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+            maxNameLength   = CGFloat(72.0)
+        }
 
         // Replace "< Home" with a back arrow while we are crunching everything to the left side of the bar for now.
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_button")
@@ -155,6 +160,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             dnlabel.font = UIFont.systemFont(ofSize: nameSize)
             dnlabel.textColor = UIColor.white
             dnlabel.textAlignment = .left
+            dnlabel.lineBreakMode = .byTruncatingTail
             titleView.addSubview(dnlabel)
             userNameYOffset = 20.0
             nameSize = 14.0
@@ -165,6 +171,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         unlabel.font = UIFont.systemFont(ofSize: nameSize)
         unlabel.textColor = UIColor.white
         unlabel.textAlignment = .left
+        unlabel.lineBreakMode = .byTruncatingTail
         titleView.addSubview(unlabel)
 
         self.navigationItem.titleView = titleView
