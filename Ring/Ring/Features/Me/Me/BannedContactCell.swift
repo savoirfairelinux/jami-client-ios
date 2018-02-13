@@ -36,4 +36,24 @@ class BannedContactCell: UITableViewCell, NibReusable {
     override func prepareForReuse() {
         self.disposeBag = DisposeBag()
     }
+
+    func configureFromItem(_ item: BannedContactItem) {
+        // avatar
+        self.profileImageView.subviews.forEach({ $0.removeFromSuperview() })
+        self.profileImageView.addSubview(AvatarView(profileImageData: item.image,
+                                                    username: item.contact.userName ?? item.contact.ringId,
+                                                    size: 40))
+
+        if let displayName = item.displayName {
+            self.displayNameLabel.text = displayName
+        }
+
+        if let name = item.contact.userName {
+            self.userNameLabel.text = name
+        } else {
+            self.userNameLabel.text = item.contact.ringId
+        }
+
+        self.unblockButton.titleLabel?.text = L10n.Accountpage.unblockContact
+    }
 }

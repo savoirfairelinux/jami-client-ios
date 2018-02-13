@@ -55,43 +55,8 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
         self.viewModel
             .blockedContactsItems
             .observeOn(MainScheduler.instance)
-            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier,
-                                         cellType: BannedContactCell.self))
-            { [unowned self] _, item, cell in
-
-                if let displayName = item.displayName {
-                    cell.displayNameLabel.text = displayName
-                }
-
-                if let name = item.contact.userName {
-                    cell.userNameLabel.text = name
-                } else {
-                    cell.userNameLabel.text = item.contact.ringId
-                }
-
-                cell.fallbackAvatar.text = nil
-                cell.fallbackAvatarImage.isHidden = true
-                if let name = item.contact.userName {
-                    let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                    var index: UInt64 = 0
-                    if scanner.scanHexInt64(&index) {
-                        cell.fallbackAvatar.isHidden = false
-                        cell.fallbackAvatar.backgroundColor = avatarColors[Int(index)]
-                        if item.contact.ringId != name {
-                            cell.fallbackAvatar.text = name.prefixString().capitalized
-                        } else {
-                            cell.fallbackAvatarImage.isHidden = false
-                        }
-                    }
-                }
-                cell.fallbackAvatar.isHidden = false
-                cell.profileImageView.image = nil
-
-                if let imageData = item.image, let image = UIImage(data: imageData) {
-                    cell.profileImageView.image = image
-                    cell.fallbackAvatar.isHidden = true
-                }
-                cell.unblockButton.titleLabel?.text = L10n.Accountpage.unblockContact
+            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: BannedContactCell.self)) { [unowned self] _, item, cell in
+                cell.configureFromItem(item)
                 cell.unblockButton.rx.tap
                     .subscribe(onNext: { [unowned self] in
                         self.unbanContactTapped(withItem: item)

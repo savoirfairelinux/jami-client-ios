@@ -251,6 +251,7 @@
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
 		621231FB1F8D6FEE009B86F0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231FA1F8D6FEE009B86F0 /* MessageCell.swift */; };
 		623660AA20092081002598C1 /* src in Resources */ = {isa = PBXBuildFile; fileRef = 623660A920092081002598C1 /* src */; };
+		627F11F120348FBF006560B5 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627F11F020348FBF006560B5 /* AvatarView.swift */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
 		62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */; };
 		62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */; };
@@ -542,6 +543,7 @@
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		621231FA1F8D6FEE009B86F0 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../daemon/src; sourceTree = "<group>"; };
+		627F11F020348FBF006560B5 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
 		62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PresenceAdapter.mm; sourceTree = "<group>"; };
@@ -1016,12 +1018,11 @@
 		0E36979B20322D4D009A68CA /* BlockList */ = {
 			isa = PBXGroup;
 			children = (
+				6257022620377D7000D38941 /* Cells */,
 				0E36979720322D46009A68CA /* BlockListViewController.swift */,
 				0E36979C20322D75009A68CA /* BlockListViewModel.swift */,
 				0E36979E20322E6F009A68CA /* BlockListViewController.storyboard */,
 				0E3697A0203235EA009A68CA /* BannedContactItem.swift */,
-				0E3697A6203243D3009A68CA /* BannedContactCell.swift */,
-				0E3697A7203243D3009A68CA /* BannedContactCell.xib */,
 			);
 			name = BlockList;
 			sourceTree = "<group>";
@@ -1029,6 +1030,7 @@
 		0E44B62D202B9DC40060F71B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				627F11F020348FBF006560B5 /* AvatarView.swift */,
 				0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */,
 			);
 			path = Helpers;
@@ -1400,6 +1402,15 @@
 				623660A920092081002598C1 /* src */,
 			);
 			name = daemon;
+			sourceTree = "<group>";
+		};
+		6257022620377D7000D38941 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0E3697A7203243D3009A68CA /* BannedContactCell.xib */,
+				0E3697A6203243D3009A68CA /* BannedContactCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1821,6 +1832,7 @@
 				1A5DC0321F3566140075E8EF /* ConversationSection.swift in Sources */,
 				1A2D18C41F29180700B2C785 /* ConfigKeyModel.swift in Sources */,
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
+				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
 				1A2D18F51F292D7200B2C785 /* MessageCellReceived.swift in Sources */,
 				56BBC9BC1ED7161200CDAF8B /* Date+Helpers.swift in Sources */,
