@@ -38,7 +38,7 @@ enum MessageSequencing {
 enum GeneratedMessageType: String {
     case sendContactRequest = "The invitation has been sent"
     case receivedContactRequest = "Contact request received"
-    case contactRequestAccepted = "Contact accepted"
+    case contactRequestAccepted = "Contact added"
 }
 
 class MessageViewModel {
