@@ -33,6 +33,18 @@ extension String {
         }
     }
 
+    func isSHA1() -> Bool {
+        do {
+            let sha1Regex = try NSRegularExpression(pattern: "[0-9a-f]{40}", options: .caseInsensitive)
+            if !sha1Regex.matches(in: self, range: NSRange(location: 0, length: self.count)).isEmpty {
+                return true
+            }
+        } catch {
+            print("Bad regex")
+        }
+        return false
+    }
+
     func toMD5HexString() -> String {
         let messageData = self.data(using: .utf8)!
         var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))

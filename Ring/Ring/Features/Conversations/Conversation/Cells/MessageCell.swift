@@ -26,6 +26,7 @@ import ActiveLabel
 
 class MessageCell: UITableViewCell, NibReusable {
 
+    @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var bubble: MessageBubble!
     @IBOutlet weak var bubbleBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
@@ -37,9 +38,6 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var rightDivider: UIView!
     @IBOutlet weak var sendingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var failedStatusLabel: UILabel!
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var fallbackAvatar: UILabel!
-    @IBOutlet weak var fallbackAvatarImage: UIImageView!
 
     var disposeBag = DisposeBag()
 
@@ -169,10 +167,9 @@ class MessageCell: UITableViewCell, NibReusable {
     }
     // swiftlint:enable cyclomatic_complexity
 
-    // swiftlint:disable cyclomatic_complexity
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
-                      _ items: [MessageViewModel]?,
-                      cellForRowAt indexPath: IndexPath) {
+                           _ items: [MessageViewModel]?,
+                           cellForRowAt indexPath: IndexPath) {
         guard let item = items?[indexPath.row] else {
             return
         }
@@ -198,6 +195,7 @@ class MessageCell: UITableViewCell, NibReusable {
             self.bubbleBottomConstraint.constant = 16
         }
 
+        // sent message status
         if item.bubblePosition() == .sent {
             item.status.asObservable()
                 .observeOn(MainScheduler.instance)
@@ -210,92 +208,23 @@ class MessageCell: UITableViewCell, NibReusable {
                 .bind(to: self.failedStatusLabel.rx.isHidden)
                 .disposed(by: self.disposeBag)
         } else if item.bubblePosition() == .received {
-            // avatar
-            guard let fallbackAvatar = self.fallbackAvatar else {
-                return
-            }
-
-            self.fallbackAvatar.isHidden = true
-            self.profileImage?.isHidden = true
-            if item.sequencing == .lastOfSequence || item.sequencing == .singleMessage {
-                self.profileImage?.isHidden = false
-
-                // Set placeholder avatar
-                fallbackAvatar.text = nil
-                self.fallbackAvatarImage.isHidden = true
-                let name = conversationViewModel.userName.value
-                let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                var index: UInt64 = 0
-                if scanner.scanHexInt64(&index) {
-                    fallbackAvatar.isHidden = false
-                    fallbackAvatar.backgroundColor = avatarColors[Int(index)]
-                    if conversationViewModel.conversation.value.recipientRingId != name {
-                        self.fallbackAvatar.text = name.prefixString().capitalized
-                    } else {
-                        self.fallbackAvatarImage.isHidden = true
-                    }
+            // received message avatar
+            Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
+                                                      conversationViewModel.userName.asObservable()) { profileImage, username in
+                                                        return (profileImage, username)
                 }
+                .observeOn(MainScheduler.instance)
+                .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value))
+                .subscribe({ [weak self] profileData -> Void in
+                    self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
+                    self?.avatarView.addSubview(AvatarView(profileImageData: profileData.element?.0,
+                                                           username: (profileData.element?.1)!,
+                                                           size: 32))
+                    self?.avatarView.isHidden = !(item.sequencing == .lastOfSequence || item.sequencing == .singleMessage)
+                    return
+                })
+                .disposed(by: self.disposeBag)
 
-                // Avatar placeholder color
-                conversationViewModel.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .map { name in
-                        let scanner = Scanner(string: name.toMD5HexString().prefixString())
-                        var index: UInt64 = 0
-                        if scanner.scanHexInt64(&index) {
-                            return avatarColors[Int(index)]
-                        }
-                        return defaultAvatarColor
-                    }.subscribe(onNext: { backgroundColor in
-                        self.fallbackAvatar.backgroundColor = backgroundColor
-                    })
-                    .disposed(by: self.disposeBag)
-
-                // Avatar placeholder initial
-                conversationViewModel.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .filter({ userName in
-                        return userName != conversationViewModel.conversation.value.recipientRingId
-                    })
-                    .map { value in
-                        value.prefixString().capitalized
-                    }
-                    .bind(to: self.fallbackAvatar.rx.text)
-                    .disposed(by: self.disposeBag)
-
-                // If only the ringId is known, use fallback avatar image
-                conversationViewModel.userName.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .map { userName in
-                        userName != conversationViewModel.conversation.value.recipientRingId
-                    }
-                    .bind(to: self.fallbackAvatarImage.rx.isHidden)
-                    .disposed(by: self.disposeBag)
-
-                // Set image if any
-                if let imageData = conversationViewModel.profileImageData.value {
-                    if let image = UIImage(data: imageData) {
-                        self.profileImage.image = image
-                        self.fallbackAvatar.isHidden = true
-                    }
-                } else {
-                    self.fallbackAvatar.isHidden = false
-                    self.profileImage.image = nil
-                }
-
-                conversationViewModel.profileImageData.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { data in
-                        if let imageData = data, let image = UIImage(data: imageData) {
-                            self.profileImage.image = image
-                            self.fallbackAvatar.isHidden = true
-                        } else {
-                            self.fallbackAvatar.isHidden = false
-                            self.profileImage.image = nil
-                        }
-                    }).disposed(by: self.disposeBag)
-            }
         }
     }
-    // swiftlint:enable cyclomatic_complexity
 }
