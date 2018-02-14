@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5a3f45e8_0bc4db90",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-02-14T20:34:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a3f45e8_4b1d4366",
+      "revId": "7e0748a4ebb92e8d945072f8590774b481022d25",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a3f45e8_2b1a776e",
         "filename": "Ring/Ring/AppDelegate.swift",
         "patchSetId": 7
@@ -30,6 +48,30 @@
       "writtenOn": "2018-02-14T19:24:53Z",
       "side": 1,
       "message": "clearBadgeNumber",
+      "range": {
+        "startLine": 139,
+        "startChar": 13,
+        "endLine": 139,
+        "endChar": 28
+      },
+      "revId": "7e0748a4ebb92e8d945072f8590774b481022d25",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_ebc08f7e",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-02-14T20:34:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a3f45e8_2b1a776e",
       "range": {
         "startLine": 139,
         "startChar": 13,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "5a3f45e8_4bbee300",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-02-14T20:34:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a3f45e8_8b262bb9",
+      "range": {
+        "startLine": 222,
+        "startChar": 17,
+        "endLine": 222,
+        "endChar": 32
+      },
+      "revId": "7e0748a4ebb92e8d945072f8590774b481022d25",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a3f45e8_6b2bdf82",
         "filename": "Ring/Ring/Helpers/LocalNotificationsHelper.swift",
         "patchSetId": 7
@@ -76,6 +142,30 @@
       "writtenOn": "2018-02-14T19:24:53Z",
       "side": 1,
       "message": "default.wav, but could this be referenced like our images: \"Asset.soundName\" ?",
+      "range": {
+        "startLine": 154,
+        "startChar": 56,
+        "endLine": 154,
+        "endChar": 62
+      },
+      "revId": "7e0748a4ebb92e8d945072f8590774b481022d25",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_ab468721",
+        "filename": "Ring/Ring/Helpers/LocalNotificationsHelper.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-02-14T20:34:56Z",
+      "side": 1,
+      "message": "No, to create UNNotificationSound we need to provide audio file name, when Asset only could store data",
+      "parentUuid": "5a3f45e8_6b2bdf82",
       "range": {
         "startLine": 154,
         "startChar": 56,
