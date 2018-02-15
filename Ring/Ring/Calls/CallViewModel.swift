@@ -37,6 +37,7 @@ class CallViewModel: Stateable, ViewModel {
     fileprivate let accountService: AccountsService
     fileprivate let videoService: VideoService
     fileprivate let audioService: AudioService
+    fileprivate let profileService: ProfilesService
 
     private let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
@@ -49,30 +50,6 @@ class CallViewModel: Stateable, ViewModel {
             guard let call = self.call else {
                 return
             }
-            self.contactsService.getProfileForUri(uri: call.participantRingId)
-                .subscribe(onNext: { [unowned self] profile in
-                    self.profileUpdated(profile: profile)
-                })
-                .disposed(by: self.disposeBag)
-
-            self.callService
-                .sharedResponseStream
-                .filter({ (event) in
-                    if let uri: String = event.getEventInput(ServiceEventInput.uri) {
-                        return event.eventType == ServiceEventType.profileUpdated
-                            && uri == call.participantRingId
-                    }
-                    return false
-                })
-                .subscribe(onNext: { [unowned self] _ in
-                    self.contactsService.getProfileForUri(uri: call.participantRingId)
-                        .subscribe(onNext: { profile in
-                            self.profileUpdated(profile: profile)
-                        })
-                        .disposed(by: self.disposeBag)
-                })
-                .disposed(by: disposeBag)
-
             isHeadsetConnected = self.audioService.isHeadsetConnected.value
             isAudioOnly = call.isAudioOnly
 
@@ -82,7 +59,22 @@ class CallViewModel: Stateable, ViewModel {
 
     // data for ViewController binding
 
-    var contactImageData = Variable<Data?>(nil)
+    lazy var contactImageData: Observable<Data?>? = {
+        guard let call = self.call else {
+            return nil
+        }
+        return self.profileService.getProfile(ringId: call.participantRingId,
+                                                        createIfNotexists: true)
+            .filter({ profile in
+                guard let photo = profile.photo else {
+                    return false
+                }
+                return true
+            }).map({ profile in
+                return NSData(base64Encoded: profile.photo!,
+                              options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+            })
+    }()
 
     lazy var incomingFrame: Observable<UIImage?> = {
         return videoService.incomingVideoFrame.asObservable().map({ frame in
@@ -277,6 +269,7 @@ class CallViewModel: Stateable, ViewModel {
         self.accountService = injectionBag.accountService
         self.videoService = injectionBag.videoService
         self.audioService = injectionBag.audioService
+        self.profileService = injectionBag.profileService
     }
 
     static func formattedDurationFrom(interval: Int) -> String {
@@ -319,17 +312,6 @@ class CallViewModel: Stateable, ViewModel {
             .subscribe(onSuccess: { [unowned self] callModel in
                 self.call = callModel
             }).disposed(by: self.disposeBag)
-    }
-
-    func profileUpdated(profile: Profile) {
-        guard let photo = profile.photo else {
-            return
-        }
-        guard let data = NSData(base64Encoded: photo,
-                                options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? else {
-                                    return
-        }
-        self.contactImageData.value = data
     }
 
     func respondOnTap() {

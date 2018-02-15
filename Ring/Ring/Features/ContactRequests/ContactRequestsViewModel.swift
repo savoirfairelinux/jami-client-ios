@@ -35,7 +35,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     let conversationService: ConversationsService
     let nameService: NameService
     let presenceService: PresenceService
-    let callsService: CallsService
+    let profileService: ProfilesService
 
     fileprivate let disposeBag = DisposeBag()
     fileprivate let log = SwiftyBeaver.self
@@ -48,7 +48,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.presenceService = injectionBag.presenceService
-        self.callsService = injectionBag.callService
+        self.profileService = injectionBag.profileService
 
         self.injectionBag = injectionBag
     }
@@ -62,7 +62,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
                     .sorted { $0.receivedDate > $1.receivedDate }
                     .map { contactRequest in
                         let item = ContactRequestItem(withContactRequest: contactRequest,
-                                                      callService: self.callsService,
+                                                      profileService: self.profileService,
                                                       contactService: self.contactsService)
                         self.lookupUserName(withItem: item)
                         return item
