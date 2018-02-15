@@ -313,6 +313,21 @@ extension ContactsService: ContactsAdapterDelegate {
         return vCard
     }
 
+    func getContactRequestVCard(forContactWithRingId ringID: String) -> Single<CNContact> {
+        return Single.create(subscribe: { single in
+            if let contactRequest = self.contactRequest(withRingId: ringID) {
+                if let vCard = contactRequest.vCard {
+                    single(.success(vCard))
+                } else {
+                    single(.error(ContactServiceError.loadVCardFailed))
+                }
+            } else {
+                single(.error(ContactServiceError.loadVCardFailed))
+            }
+            return Disposables.create { }
+        })
+    }
+
     func getProfileForUri(uri: String) ->Observable<Profile> {
         return self.dbManager.profileObservable(for: uri, createIfNotExists: false)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))

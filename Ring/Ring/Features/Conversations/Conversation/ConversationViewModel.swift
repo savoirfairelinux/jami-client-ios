@@ -36,7 +36,7 @@ class ConversationViewModel: Stateable, ViewModel {
     private let nameService: NameService
     private let contactsService: ContactsService
     private let presenceService: PresenceService
-    private let callsService: CallsService
+    private let profileService: ProfilesService
     private let injectionBag: InjectionBag
 
     private let stateSubject = PublishSubject<State>()
@@ -51,7 +51,7 @@ class ConversationViewModel: Stateable, ViewModel {
         self.nameService = injectionBag.nameService
         self.contactsService = injectionBag.contactsService
         self.presenceService = injectionBag.presenceService
-        self.callsService = injectionBag.callService
+        self.profileService = injectionBag.profileService
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
@@ -87,24 +87,16 @@ class ConversationViewModel: Stateable, ViewModel {
                 }).disposed(by: self.disposeBag)
 
             let contact = self.contactsService.contact(withRingId: contactRingId)
-
-            if let profile = conversation.value.participantProfile, let photo =  profile.photo {
-                self.displayName.value = profile.alias
-                if let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self.profileImageData.value = data
-                }
-            } else {
-                self.contactsService.loadVCard(forContactWithRingId: contactRingId)
-                    .subscribe(onSuccess: { vCard in
-                        guard let imageData = vCard.imageData else {
-                            self.log.warning("vCard for ringId: \(contactRingId) has no image")
-                            return
-                        }
-                        self.profileImageData.value = imageData
-                        self.displayName.value = VCardUtils.getName(from: vCard)
-                    })
-                    .disposed(by: self.disposeBag)
-            }
+            self.contactsService.getContactRequestVCard(forContactWithRingId: contactRingId)
+                .subscribe(onSuccess: { vCard in
+                    guard let imageData = vCard.imageData else {
+                        self.log.warning("vCard for ringId: \(contactRingId) has no image")
+                        return
+                    }
+                    self.profileImageData.value = imageData
+                    self.displayName.value = VCardUtils.getName(from: vCard)
+                })
+                .disposed(by: self.disposeBag)
 
             // invite and block buttons
             if let contact = contact {
@@ -143,26 +135,15 @@ class ConversationViewModel: Stateable, ViewModel {
                 })
                 .disposed(by: disposeBag)
 
-            self.callsService
-                .sharedResponseStream
-                .filter({ (event) in
-                    if let uri: String = event.getEventInput(ServiceEventInput.uri) {
-                        return event.eventType == ServiceEventType.profileUpdated
-                            && uri == contactRingId
+            self.profileService.getProfile(ringId: contactRingId,
+                                                     createIfNotexists: false)
+                .subscribe(onNext: { [unowned self] profile in
+                    self.displayName.value = profile.alias
+                    if let photo = profile.photo,
+                        let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                        self.profileImageData.value = data
                     }
-                    return false
-                })
-                .subscribe(onNext: { [unowned self] _ in
-                    self.contactsService.getProfileForUri(uri: contactRingId)
-                        .subscribe(onNext: { profile in
-                            if let photo = profile.photo,
-                                let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                                self.profileImageData.value = data
-                            }
-                        })
-                        .disposed(by: self.disposeBag)
-                })
-                .disposed(by: disposeBag)
+                }).disposed(by: disposeBag)
 
             if let contactUserName = contact?.userName {
                 self.userName.value = contactUserName

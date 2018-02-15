@@ -41,11 +41,6 @@ enum MediaType: String, CustomStringConvertible {
     }
 }
 
-struct Base64VCard {
-    var data: [Int: String] //The key is the number of vCard part
-    var partsReceived: Int
-}
-
 class CallsService: CallsAdapterDelegate {
 
     fileprivate let disposeBag = DisposeBag()
@@ -54,26 +49,19 @@ class CallsService: CallsAdapterDelegate {
 
     fileprivate var calls = [String: CallModel]()
 
-    fileprivate var base64VCards = [Int: Base64VCard]() //The key is the vCard id
     fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
 
     let currentCall = ReplaySubject<CallModel>.create(bufferSize: 1)
     let newCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
-    //let receivedVCard = PublishSubject<Profile>()
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
-    var sharedResponseStream: Observable<ServiceEvent>
 
     init(withCallsAdapter callsAdapter: CallsAdapter) {
         self.callsAdapter = callsAdapter
-        self.responseStream.disposed(by: disposeBag)
-        self.sharedResponseStream = responseStream.share()
         CallsAdapter.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.refuseUnansweredCall(_:)),
                                                name: NSNotification.Name(rawValue: NotificationName.refuseCallFromNotifications.rawValue),
                                                object: nil)
     }
-    
+
     @objc func refuseUnansweredCall(_ notification: NSNotification) {
         guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String else {
             return
@@ -259,88 +247,13 @@ class CallsService: CallsAdapterDelegate {
         }
     }
 
-    // swiftlint:disable cyclomatic_complexity
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String]) {
 
-        if let vCardKey = message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first {
-
-            //Parse the key to get the number of parts and the current part number
-            let components = vCardKey.components(separatedBy: ",")
-
-            guard let partComponent = components.filter({$0.hasPrefix("part=")}).first else {
-                return
-            }
-
-            guard let ofComponent = components.filter({$0.hasPrefix("of=")}).first else {
-                return
-            }
-
-            guard let idComponent = components.filter({$0.hasPrefix("x-ring/ring.profile.vcard;id=")}).first else {
-                return
-            }
-
-            guard let part = Int(partComponent.components(separatedBy: "=")[1]) else {
-                return
-            }
-
-            guard let of = Int(ofComponent.components(separatedBy: "=")[1]) else {
-                return
-            }
-
-            guard let id = Int(idComponent.components(separatedBy: "=")[1]) else {
-                return
-            }
-            var numberOfReceivedChunk = 1
-            if var chunk = self.base64VCards[id] {
-                chunk.data[part] = message[vCardKey]
-                chunk.partsReceived += 1
-                numberOfReceivedChunk = chunk.partsReceived
-                self.base64VCards[id] = chunk
-            } else {
-                let partMessage = message[vCardKey]
-                let data: [Int: String] = [part: partMessage!]
-                let chunk = Base64VCard(data: data, partsReceived: numberOfReceivedChunk)
-                self.base64VCards[id] = chunk
-            }
-
-            //Emit the vCard when all data are appended
-            if of == numberOfReceivedChunk {
-                guard let vcard = self.base64VCards[id] else {
-                    return
-                }
-
-                let vCardChunks = vcard.data
-
-                //Append data from sorted part numbers
-                var vCardData = Data()
-                for currentPartNumber in vCardChunks.keys.sorted() {
-                    if let currentData = vCardChunks[currentPartNumber]?.data(using: String.Encoding.utf8) {
-                        vCardData.append(currentData)
-                    }
-                }
-
-                //Create the vCard, save and db and emite an event
-                do {
-                    if let vCard = try CNContactVCardSerialization.contacts(with: vCardData).first {
-                        let name = VCardUtils.getName(from: vCard)
-                        var stringImage: String?
-                        if let image = vCard.imageData {
-                            stringImage = image.base64EncodedString()
-                        }
-                        let uri = uri.replacingOccurrences(of: "@ring.dht", with: "")
-                        _ = self.dbManager
-                            .createOrUpdateRingProfile(profileUri: uri,
-                                                       alias: name,
-                                                       image: stringImage,
-                                                       status: ProfileStatus.untrasted)
-                        var event = ServiceEvent(withEventType: .profileUpdated)
-                        event.addEventInput(.uri, value: uri)
-                        self.responseStream.onNext(event)
-                    }
-                } catch {
-                   self.log.error(error)
-                }
-            }
+        if  message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first != nil {
+            var data = [String: Any]()
+            data[ProfileNotificationsKeys.ringID.rawValue] = uri
+            data[ProfileNotificationsKeys.message.rawValue] = message
+            NotificationCenter.default.post(name: NSNotification.Name(ProfileNotifications.messageReceived.rawValue), object: nil, userInfo: data)
         }
     }
     // swiftlint:enable cyclomatic_complexity
