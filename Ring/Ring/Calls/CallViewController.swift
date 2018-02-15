@@ -158,7 +158,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func setupBindings() {
 
-        self.viewModel.contactImageData.asObservable()
+        self.viewModel.contactImageData?.asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] dataOrNil in
                 if let imageData = dataOrNil {
