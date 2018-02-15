@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
     private let networkService = NetworkService()
+    private let profileService = ProfilesService()
     private var conversationManager: ConversationsManager?
     private var contactRequestManager: ContactRequestManager?
 
@@ -55,7 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withNetworkService: self.networkService,
                             withCallService: self.callService,
                             withVideoService: self.videoService,
-                            withAudioService: self.audioService)
+                            withAudioService: self.audioService,
+                            withProfileService: self.profileService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
