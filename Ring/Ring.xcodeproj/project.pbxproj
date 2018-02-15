@@ -135,6 +135,7 @@
 		0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */; };
 		0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */; };
 		0EB479951FA28A7300106AFD /* ButtonTransparentBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB479941FA28A7300106AFD /* ButtonTransparentBackground.swift */; };
+		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
 		0EBCAA4E202E60F000E2A545 /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EBCAA4D202E60F000E2A545 /* default.wav */; };
 		0ED2B6FA1F96A075001572F0 /* LinkNewDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED2B6F91F96A075001572F0 /* LinkNewDeviceViewController.storyboard */; };
 		0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B6FB1F96A158001572F0 /* LinkNewDeviceViewController.swift */; };
@@ -415,6 +416,7 @@
 		0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceCell.xib; sourceTree = "<group>"; };
 		0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
 		0EB479941FA28A7300106AFD /* ButtonTransparentBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTransparentBackground.swift; sourceTree = "<group>"; };
+		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
 		0EBCAA4D202E60F000E2A545 /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		0ED2B6F91F96A075001572F0 /* LinkNewDeviceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LinkNewDeviceViewController.storyboard; sourceTree = "<group>"; };
 		0ED2B6FB1F96A158001572F0 /* LinkNewDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceViewController.swift; sourceTree = "<group>"; };
@@ -769,6 +771,7 @@
 				62AA15C21FFC39C80064A063 /* VideoAdapterDelegate.swift */,
 				62AA15C91FFD3D7E0064A063 /* VideoService.swift */,
 				62AF685D201A61FF003AA9E8 /* AudioService.swift */,
+				0EBB72A82034F44200D88F46 /* ProfilesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1751,6 +1754,7 @@
 				1A0C4EE51F1D67DF00550433 /* WalkthroughCoordinator.swift in Sources */,
 				1A2D18DD1F29192D00B2C785 /* MessableBubble.swift in Sources */,
 				1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */,
+				0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
 				62AA15BF1FFC36840064A063 /* VideoAdapter.mm in Sources */,
