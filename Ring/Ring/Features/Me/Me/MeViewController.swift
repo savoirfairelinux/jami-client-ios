@@ -89,8 +89,20 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     func infoItemTapped() {
-        let alert = UIAlertController(title: "\nRing\nbuild: 20180131\n\"In varietate concordia\"", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+        var compileDate: String {
+            let dateDefault = "20180131"
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYYMMdd"
+            let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String ?? "Info.plist"
+            if let infoPath = Bundle.main.path(forResource: bundleName, ofType: nil),
+                let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
+                let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date {
+                return dateFormatter.string(from: infoDate)
+            }
+            return dateDefault
+        }
+        let alert = UIAlertController(title: "\nRing\nbuild: \(compileDate)\n\"In varietate concordia\"", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         let image = UIImageView(image: UIImage(asset: Asset.ringIcon))
         alert.view.addSubview(image)
         image.translatesAutoresizingMaskIntoConstraints = false
