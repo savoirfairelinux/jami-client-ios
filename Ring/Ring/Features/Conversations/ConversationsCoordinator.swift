@@ -116,8 +116,14 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, CallMakeable {
                     }).disposed(by: self.disposeBag)
                 alert.dismiss(animated: true, completion: nil)
             }))
-
             self.present(viewController: alert, withStyle: .present, withAnimation: true)
+
+            self.callService.currentCall.takeUntil(alert.rx.controllerWasDismissed).filter({ currentCall in
+                return currentCall.callId == call.callId &&
+                    (currentCall.state == .over || currentCall.state == .failure)
+            }).subscribe(onNext: { _ in
+                alert.dismiss(animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
         }
     }
 }
