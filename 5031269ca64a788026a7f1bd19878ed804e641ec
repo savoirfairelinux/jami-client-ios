@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5a3f45e8_0b25fbc1",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-02-15T21:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a3f45e8_ab7207e3",
+      "range": {
+        "startLine": 43,
+        "startChar": 13,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "5031269ca64a788026a7f1bd19878ed804e641ec",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a3f45e8_0b77bbd5",
         "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
         "patchSetId": 4
@@ -36,6 +60,24 @@
       "writtenOn": "2018-02-15T21:22:13Z",
       "side": 1,
       "message": "Vertical Whitespace Warning",
+      "revId": "5031269ca64a788026a7f1bd19878ed804e641ec",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_0b0cdb41",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-02-15T21:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a3f45e8_0b77bbd5",
       "revId": "5031269ca64a788026a7f1bd19878ed804e641ec",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
