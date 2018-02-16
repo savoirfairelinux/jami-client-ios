@@ -141,7 +141,7 @@ class MeViewModel: ViewModel, Stateable {
             return devices.concat(accountDevice)
                 .map { devices in
                     let addNewDevice = SettingsSection.linkNewDevice(header: "", items: [SettingsSection.SectionRow.linkNew])
-                    let enableProxy = SettingsSection.enableProxy(header: L10n.Accountpage.settingsHeader, items: [SettingsSection.SectionRow.proxy, SettingsSection.SectionRow.blockedList])
+                    let enableProxy = SettingsSection.enableProxy(header: L10n.Accountpage.settingsHeader, items: [SettingsSection.SectionRow.blockedList])
                     var rows: [SettingsSection.SectionRow]?
 
                     if !devices.isEmpty {
