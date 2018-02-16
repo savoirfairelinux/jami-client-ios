@@ -126,9 +126,12 @@ class ConversationsManager: MessagesAdapterDelegate {
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64, from accountId: String,
                               to uri: String) {
+        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else {
+            return
+        }
         self.conversationService.messageStatusChanged(status,
                                                       for: messageId,
-                                                      from: accountId,
+                                                      fromAccount: account,
                                                       to: uri)
     }
 }
