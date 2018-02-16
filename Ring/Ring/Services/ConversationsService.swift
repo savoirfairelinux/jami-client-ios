@@ -260,38 +260,44 @@ class ConversationsService {
 
     func messageStatusChanged(_ status: MessageStatus,
                               for messageId: UInt64,
-                              from accountId: String,
+                              fromAccount account: AccountModel,
                               to uri: String) {
 
         //Get conversations for this sender
-        let conversation = self.conversations.value.filter({ conversation in
-            return conversation.recipientRingId == uri &&
-                conversation.accountId == accountId
-        }).first
+        let accountHelper = AccountModelHelper(withAccount: account)
+        self.dbManager.getConversationsObservable(for: account.id, accountURI: accountHelper.ringId!)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(onNext: { [unowned self] conversationsModels in
+                let conversation = conversationsModels.filter({ conversation in
+                    return conversation.recipientRingId == uri &&
+                        conversation.accountId == account.id
+                }).first
 
-        //Find message
-        if let messages: [MessageModel] = conversation?.messages.filter({ (messages) -> Bool in
-            return  !messages.daemonId.isEmpty && messages.daemonId == String(messageId) &&
-                ((status.rawValue > messages.status.rawValue && status != .failure) ||
-                    (status == .failure && messages.status == .sending))
-        }) {
-            if let message = messages.first {
-                self.dbManager
-                    .updateMessageStatus(daemonID: message.daemonId, withStatus: status)
-                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                    .subscribe(onCompleted: { [unowned self] in
-                        self.log.info("Message status updated")
-                        var event = ServiceEvent(withEventType: .messageStateChanged)
-                        event.addEventInput(.messageStatus, value: status)
-                        event.addEventInput(.messageId, value: String(messageId))
-                        event.addEventInput(.id, value: accountId)
-                        event.addEventInput(.uri, value: uri)
-                        self.responseStream.onNext(event)
-                    })
-                    .disposed(by: disposeBag)
-            }
-        }
+                //Find message
+                if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
+                    return  !message.daemonId.isEmpty && message.daemonId == String(messageId) &&
+                        ((status.rawValue > message.status.rawValue && status != .failure) ||
+                            (status == .failure && message.status == .sending))
+                }) {
+                    if let message = messages.first {
+                        self.dbManager
+                            .updateMessageStatus(daemonID: message.daemonId, withStatus: status)
+                            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                            .subscribe(onCompleted: { [unowned self] in
+                                self.log.info("Message status updated")
+                                var event = ServiceEvent(withEventType: .messageStateChanged)
+                                event.addEventInput(.messageStatus, value: status)
+                                event.addEventInput(.messageId, value: String(messageId))
+                                event.addEventInput(.id, value: account.id)
+                                event.addEventInput(.uri, value: uri)
+                                self.responseStream.onNext(event)
+                            })
+                            .disposed(by: self.disposeBag)
+                    }
+                }
+            })
+            .disposed(by: self.disposeBag)
 
-        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(accountId) to: \(uri)")
+        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(account.id) to: \(uri)")
     }
 }
