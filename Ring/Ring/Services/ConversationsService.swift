@@ -146,6 +146,12 @@ class ConversationsService {
                      shouldRefreshConversations: Bool) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
+            // append new message so it can be found if a status update is received before the DB finishes save/reload
+            self.conversations.value.filter({ conversation in
+                return conversation.recipientRingId == recipientRingId &&
+                    conversation.accountId == toAccountId
+            }).first?.messages.append(message)
+
             self.dbManager.saveMessage(for: toAccountUri,
                                        with: recipientRingId,
                                        message: message,
@@ -165,8 +171,8 @@ class ConversationsService {
                     }, onError: { error in
                         completable(.error(error))
                 }).disposed(by: self.disposeBag)
-            return Disposables.create { }
 
+            return Disposables.create { }
         })
     }
 
@@ -260,20 +266,20 @@ class ConversationsService {
 
     func messageStatusChanged(_ status: MessageStatus,
                               for messageId: UInt64,
-                              from accountId: String,
+                              fromAccount account: AccountModel,
                               to uri: String) {
 
         //Get conversations for this sender
         let conversation = self.conversations.value.filter({ conversation in
             return conversation.recipientRingId == uri &&
-                conversation.accountId == accountId
+                conversation.accountId == account.id
         }).first
 
         //Find message
-        if let messages: [MessageModel] = conversation?.messages.filter({ (messages) -> Bool in
-            return  !messages.daemonId.isEmpty && messages.daemonId == String(messageId) &&
-                ((status.rawValue > messages.status.rawValue && status != .failure) ||
-                    (status == .failure && messages.status == .sending))
+        if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
+            return  !message.daemonId.isEmpty && message.daemonId == String(messageId) &&
+                ((status.rawValue > message.status.rawValue && status != .failure) ||
+                    (status == .failure && message.status == .sending))
         }) {
             if let message = messages.first {
                 self.dbManager
@@ -284,14 +290,14 @@ class ConversationsService {
                         var event = ServiceEvent(withEventType: .messageStateChanged)
                         event.addEventInput(.messageStatus, value: status)
                         event.addEventInput(.messageId, value: String(messageId))
-                        event.addEventInput(.id, value: accountId)
+                        event.addEventInput(.id, value: account.id)
                         event.addEventInput(.uri, value: uri)
                         self.responseStream.onNext(event)
                     })
-                    .disposed(by: disposeBag)
+                    .disposed(by: self.disposeBag)
             }
         }
 
-        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(accountId) to: \(uri)")
+        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(account.id) to: \(uri)")
     }
 }
