@@ -79,7 +79,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func animateCallCircle() {
-        self.log.debug("animate pulse")
         self.callPulse.alpha = 0.5
         self.callPulse.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         UIView.animate(withDuration: 1.5, animations: {
@@ -261,10 +260,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     @objc func screenTapped() {
-        let callState = self.viewModel.call?.state
-        if callState == .connecting || callState == .ringing {
-            return
-        }
         self.viewModel.respondOnTap()
     }
 
