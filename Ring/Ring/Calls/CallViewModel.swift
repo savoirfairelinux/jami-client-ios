@@ -146,12 +146,19 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
+    lazy var shouldRespondOnTap: Observable<Bool> = {
+        return self.callService.currentCall
+            .filter({ [weak self] call in
+                return call.callId == self?.call?.callId
+            }).map({ call in
+                return call.state == .current
+            })
+    }()
+
     lazy var showCallOptions: Observable<Bool> = {
-        return Observable.combineLatest(self.screenTapped.asObservable(), callPaused) { (tapped, paused) in
-            if self.isAudioOnly {
-                return false
-            }
-            if tapped && !paused {
+        return Observable.combineLatest(self.screenTapped.asObservable(),
+                                        shouldRespondOnTap) { [unowned self] (tapped, shouldRespond) in
+            if tapped && shouldRespond && !self.isAudioOnly {
                 return true
             }
             return false
@@ -161,7 +168,8 @@ class CallViewModel: Stateable, ViewModel {
     lazy var showCancelOption: Observable<Bool> = {
         return self.callService.currentCall
             .filter({ [weak self] call in
-                return call.callId == self?.call?.callId
+                return call.callId == self?.call?.callId &&
+                    (call.state == .connecting || call.state == .ringing || call.state == .current)
             }).map({ call in
             return call.state == .connecting || call.state == .ringing
         })
@@ -183,7 +191,7 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var videoMuted: Observable<Bool> = {
-        return self.callService.currentCall.filter({ call in
+        return self.callService.currentCall.filter({ [unowned self] call in
             call.callId == self.call?.callId &&
                 call.state == .current
         }).map({call in
@@ -226,7 +234,7 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var audioMuted: Observable<Bool> = {
-        return self.callService.currentCall.filter({ call in
+        return self.callService.currentCall.filter({ [unowned self] call in
             call.callId == self.call?.callId &&
                 call.state == .current
         }).map({call in
@@ -247,7 +255,7 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var callPaused: Observable<Bool> = {
-        return self.callService.currentCall.filter({ call in
+        return self.callService.currentCall.filter({ [unowned self] call in
             call.callId == self.call?.callId &&
                 (call.state == .hold ||
                     call.state == .unhold ||

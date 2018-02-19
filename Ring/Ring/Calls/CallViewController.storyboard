@@ -168,7 +168,7 @@
                                     <constraint firstItem="DMu-Or-dd7" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="yFh-zq-lXh"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LK6-u0-eLU" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LK6-u0-eLU" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="517" width="375" height="150"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
