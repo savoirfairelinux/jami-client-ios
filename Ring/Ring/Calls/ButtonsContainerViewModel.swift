@@ -46,14 +46,14 @@ class ButtonsContainerViewModel {
 
     private func checkCallOptions() {
         let callIsActive: Observable<Bool> = {
-            self.callService.currentCall.filter({ call in
+            self.callService.currentCall.filter({ [unowned self] call in
                 return call.state == .current && call.callId == self.callID
             }).map({_ in
                 return true
             })
         }()
         callIsActive
-            .subscribe(onNext: { active in
+            .subscribe(onNext: { [unowned self] active in
             if !active {
                 return
             }
@@ -71,7 +71,7 @@ class ButtonsContainerViewModel {
                 !hide
             })
         }()
-        speakerIsAvailable.subscribe(onNext: { available in
+        speakerIsAvailable.subscribe(onNext: { [unowned self] available in
             if available {
                 self.avalaibleCallOptions.onNext(.optionsWithSpeakerphone)
                 return
