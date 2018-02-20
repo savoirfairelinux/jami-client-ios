@@ -20,43 +20,55 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdz-AQ-xHI" userLabel="Bottom Corner">
-                        <rect key="frame" x="479" y="24" width="15" height="15"/>
+                        <rect key="frame" x="477" y="22" width="17" height="17"/>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="D0h-cW-9kB"/>
-                            <constraint firstAttribute="width" constant="15" id="wlh-ar-Nsv"/>
+                            <constraint firstAttribute="height" constant="17" id="D0h-cW-9kB"/>
+                            <constraint firstAttribute="width" constant="17" id="wlh-ar-Nsv"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMh-bG-ilg" userLabel="Top Corner">
-                        <rect key="frame" x="479" y="8" width="15" height="15"/>
+                        <rect key="frame" x="477" y="8" width="17" height="17"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="15" id="zaa-Rn-ziw"/>
-                            <constraint firstAttribute="height" constant="15" id="zuP-4P-1GS"/>
+                            <constraint firstAttribute="width" constant="17" id="zaa-Rn-ziw"/>
+                            <constraint firstAttribute="height" constant="17" id="zuP-4P-1GS"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kZJ-Ay-LTR" customClass="MessageBubble" customModule="Ring" customModuleProvider="target">
-                        <rect key="frame" x="303.5" y="8" width="190.5" height="31"/>
+                        <rect key="frame" x="286.5" y="8" width="207.5" height="31"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyR-7c-S2k" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="10" y="8" width="170.5" height="15"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
+                                <rect key="frame" x="14" y="7" width="179.5" height="17"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="1Kj-UZ-gu7"/>
-                            <constraint firstItem="lyR-7c-S2k" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="10" id="8m5-sR-xnh"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="28" id="BZE-kP-hPK"/>
-                            <constraint firstAttribute="bottom" secondItem="lyR-7c-S2k" secondAttribute="bottom" constant="8" id="gwN-uX-PWd"/>
-                            <constraint firstAttribute="trailing" secondItem="lyR-7c-S2k" secondAttribute="trailing" constant="10" id="uzV-kG-oGN"/>
-                            <constraint firstItem="lyR-7c-S2k" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" constant="8" id="ycc-WI-Jk6"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="1Kj-UZ-gu7"/>
+                            <constraint firstItem="lyR-7c-S2k" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="14" id="8m5-sR-xnh"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="BZE-kP-hPK"/>
+                            <constraint firstAttribute="bottom" secondItem="lyR-7c-S2k" secondAttribute="bottom" constant="7" id="gwN-uX-PWd"/>
+                            <constraint firstAttribute="trailing" secondItem="lyR-7c-S2k" secondAttribute="trailing" constant="14" id="uzV-kG-oGN"/>
+                            <constraint firstItem="lyR-7c-S2k" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" constant="7" id="ycc-WI-Jk6"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <integer key="value" value="15"/>
+                                <real key="value" value="17"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
@@ -81,10 +93,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="78h-fZ-7yf" userLabel="Sending Indicator">
-                        <rect key="frame" x="275.5" y="16" width="20" height="20"/>
+                        <rect key="frame" x="258.5" y="16" width="20" height="20"/>
                     </activityIndicatorView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Failed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5a-HI-uhr" userLabel="Failed Status Label">
-                        <rect key="frame" x="253" y="16" width="42.5" height="19.5"/>
+                        <rect key="frame" x="236" y="16" width="42.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.94117647058823528" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>

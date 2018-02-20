@@ -249,6 +249,7 @@
 		5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C093F001FB495830011D90E /* Differentiator.framework */; };
 		5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE66F731FBF769B00EE9291 /* InitialLoadingViewController.storyboard */; };
 		5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE66F741FBF769B00EE9291 /* InitialLoadingViewController.swift */; };
+		62006E04203F4DD6003C3197 /* UITextField+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */; };
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
 		621231FB1F8D6FEE009B86F0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231FA1F8D6FEE009B86F0 /* MessageCell.swift */; };
 		623660AA20092081002598C1 /* src in Resources */ = {isa = PBXBuildFile; fileRef = 623660A920092081002598C1 /* src */; };
@@ -542,6 +543,7 @@
 		5C093F001FB495830011D90E /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		5CE66F731FBF769B00EE9291 /* InitialLoadingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InitialLoadingViewController.storyboard; sourceTree = "<group>"; };
 		5CE66F741FBF769B00EE9291 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
+		62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Helpers.swift"; sourceTree = "<group>"; };
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		621231FA1F8D6FEE009B86F0 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../daemon/src; sourceTree = "<group>"; };
@@ -845,6 +847,7 @@
 				0EE1B54D1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift */,
 				621231F81F880EDF009B86F0 /* UILabel+Ring.swift */,
 				0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */,
+				62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1758,6 +1761,7 @@
 				1A5DC0241F3564360075E8EF /* ContactRequestModel.swift in Sources */,
 				0E4909701FEAC1C6005CAA50 /* CallModel.swift in Sources */,
 				1A5DC03F1F35678D0075E8EF /* ContactRequestsViewController.swift in Sources */,
+				62006E04203F4DD6003C3197 /* UITextField+Helpers.swift in Sources */,
 				1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */,
 				1A5DC01E1F355DA70075E8EF /* ContactsAdapterDelegate.swift in Sources */,
 				0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */,

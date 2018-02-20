@@ -92,7 +92,7 @@ class MessageCell: UITableViewCell, NibReusable {
         // setup the label
         self.timeLabel.text = item.timeStringShown
         self.timeLabel.textColor = UIColor.ringMsgCellTimeText
-        self.timeLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
+        self.timeLabel.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.medium)
 
         // show the time
         self.timeLabel.isHidden = false
@@ -170,6 +170,7 @@ class MessageCell: UITableViewCell, NibReusable {
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
                            _ items: [MessageViewModel]?,
                            cellForRowAt indexPath: IndexPath) {
+        self.backgroundColor = UIColor.clear
         guard let item = items?[indexPath.row] else {
             return
         }
