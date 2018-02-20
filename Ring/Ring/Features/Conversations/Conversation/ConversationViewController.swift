@@ -64,6 +64,16 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
          */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ConversationViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        self.log.debug("dismiss K")
+        self.textFieldShouldEndEditing = true
+        becomeFirstResponder()
+        view.endEditing(true)
     }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
@@ -136,6 +146,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }
 
     func setupUI() {
+        self.tableView.backgroundColor = UIColor.init(red: 248, green: 248, blue: 248, alpha: 1.0)
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
         } else {
@@ -330,12 +341,10 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }()
 
     func setupBindings() {
-
-        //Binds the keyboard Send button action to the ViewModel
-        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
+        self.messageAccessoryView.sendButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.viewModel.sendMessage(withContent: self.messageAccessoryView.messageTextField.text!)
             self.messageAccessoryView.messageTextField.text = ""
-        }).disposed(by: disposeBag)
+        }).disposed(by: self.disposeBag)
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched
