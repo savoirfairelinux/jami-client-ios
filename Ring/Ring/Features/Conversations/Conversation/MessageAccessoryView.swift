@@ -23,7 +23,7 @@ import Reusable
 
 class MessageAccessoryView: UIView, NibLoadable {
 
-    @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var messageTextField: UITextView!
 
     override open func didMoveToWindow() {
         super.didMoveToWindow()

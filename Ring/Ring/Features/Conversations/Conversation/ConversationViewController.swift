@@ -23,16 +23,7 @@ import RxSwift
 import Reusable
 import SwiftyBeaver
 
-extension UITextField {
-    func setPadding(_ left: CGFloat, _ right: CGFloat) {
-        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: left, height: self.frame.size.height))
-        self.rightView = UIView(frame: CGRect(x: 0, y: 0, width: right, height: self.frame.size.height))
-        self.leftViewMode = .always
-        self.rightViewMode = .always
-    }
-}
-
-class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
+class ConversationViewController: UIViewController, UITextViewDelegate, StoryboardBased, ViewModelBased {
 
     let log = SwiftyBeaver.self
 
@@ -55,8 +46,12 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.setupBindings()
 
         self.messageAccessoryView.messageTextField.delegate = self
+        //self.messageAccessoryView.messageTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
 
-        self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
+        self.messageAccessoryView.messageTextField.text = "type your message..."
+        self.messageAccessoryView.messageTextField.textColor = UIColor.lightGray
+        self.messageAccessoryView.messageTextField.textContainerInset = UIEdgeInsets(top: 6, left: 4, bottom: 2, right: 4)
+        self.messageAccessoryView.messageTextField.isScrollEnabled = true
 
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
@@ -64,6 +59,31 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
          */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Placeholder..."
+            textView.textColor = UIColor.lightGray
+        }
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Placeholder..."
+            textView.textColor = UIColor.lightGray
+        }
+        //textView.sizeToFit()
+        let fixedWidth = textView.frame.size.width
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        textView.frame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
     }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
@@ -365,10 +385,10 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     func setupBindings() {
 
         //Binds the keyboard Send button action to the ViewModel
-        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
-            self.viewModel.sendMessage(withContent: self.messageAccessoryView.messageTextField.text!)
-            self.messageAccessoryView.messageTextField.text = ""
-        }).disposed(by: disposeBag)
+//        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
+//            self.viewModel.sendMessage(withContent: self.messageAccessoryView.messageTextField.text!)
+//            self.messageAccessoryView.messageTextField.text = ""
+//        }).disposed(by: disposeBag)
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched

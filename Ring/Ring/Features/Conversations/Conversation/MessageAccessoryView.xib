@@ -15,11 +15,14 @@
             <rect key="frame" x="0.0" y="0.0" width="315" height="54"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type your message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJA-0c-Rp7">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="type your message..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gFb-Mh-IPN" userLabel="Message Text Field">
                     <rect key="frame" x="16" y="8" width="283" height="30"/>
-                    <nil key="textColor"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="qpX-2u-bPH"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <integer key="value" value="15"/>
@@ -31,18 +34,18 @@
                             <integer key="value" value="1"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                </textField>
+                </textView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="AJA-0c-Rp7" secondAttribute="bottom" constant="16" id="Gph-b4-ZJH"/>
-                <constraint firstAttribute="trailing" secondItem="AJA-0c-Rp7" secondAttribute="trailing" constant="16" id="UyK-3a-JcH"/>
-                <constraint firstItem="AJA-0c-Rp7" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" constant="8" id="mDu-cF-UdO"/>
-                <constraint firstItem="AJA-0c-Rp7" firstAttribute="leading" secondItem="Fja-dy-lIy" secondAttribute="leading" constant="16" id="tvd-4f-jdO"/>
+                <constraint firstAttribute="bottom" secondItem="gFb-Mh-IPN" secondAttribute="bottom" constant="16" id="Pqe-5D-Y0d"/>
+                <constraint firstItem="gFb-Mh-IPN" firstAttribute="leading" secondItem="Fja-dy-lIy" secondAttribute="leading" constant="16" id="YVI-lC-I0i"/>
+                <constraint firstAttribute="trailing" secondItem="gFb-Mh-IPN" secondAttribute="trailing" constant="16" id="bJK-e9-zLo"/>
+                <constraint firstItem="gFb-Mh-IPN" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" constant="8" id="uKu-T6-NvR"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="messageTextField" destination="AJA-0c-Rp7" id="ga9-yi-G2h"/>
+                <outlet property="messageTextField" destination="gFb-Mh-IPN" id="kMx-YL-BJK"/>
             </connections>
             <point key="canvasLocation" x="-15" y="-178"/>
         </view>
