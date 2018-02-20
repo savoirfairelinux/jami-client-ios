@@ -108,6 +108,8 @@ class MessageCell: UITableViewCell, NibReusable {
             return
         }
 
+        self.backgroundColor = UIColor.red
+
         let type = item.bubblePosition()
         let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
         self.setup()
@@ -171,8 +173,8 @@ class MessageCell: UITableViewCell, NibReusable {
 
     // swiftlint:disable cyclomatic_complexity
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
-                      _ items: [MessageViewModel]?,
-                      cellForRowAt indexPath: IndexPath) {
+                           _ items: [MessageViewModel]?,
+                           cellForRowAt indexPath: IndexPath) {
         guard let item = items?[indexPath.row] else {
             return
         }
