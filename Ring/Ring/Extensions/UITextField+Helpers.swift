@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,24 +18,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import Reusable
+import Foundation
 
-class MessageAccessoryView: UIView, NibLoadable {
-
-    @IBOutlet weak var messageTextField: UITextField!
-    @IBOutlet weak var sendButton: UIButton!
-
-    override open func didMoveToWindow() {
-        super.didMoveToWindow()
-        if #available(iOS 11.0, *) {
-            guard let window = self.window else {
-                return
-            }
-            self.bottomAnchor
-                .constraintLessThanOrEqualToSystemSpacingBelow(window.safeAreaLayoutGuide.bottomAnchor,
-                                                               multiplier: 1)
-                .isActive = true
-        }
+extension UITextField {
+    func setPadding(_ left: CGFloat, _ right: CGFloat) {
+        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: left, height: self.frame.size.height))
+        self.rightView = UIView(frame: CGRect(x: 0, y: 0, width: right, height: self.frame.size.height))
+        self.leftViewMode = .always
+        self.rightViewMode = .always
     }
 }
