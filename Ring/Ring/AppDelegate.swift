@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let networkService = NetworkService()
     private let profileService = ProfilesService()
     private var conversationManager: ConversationsManager?
-    private var contactRequestManager: ContactRequestManager?
+    private var interactionsManager: GeneratedInteractionsManager?
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
@@ -100,8 +100,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // themetize the app
         Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
         Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
-
-        self.contactRequestManager = ContactRequestManager(accountService: self.accountService, contactService: self.contactsService, conversationService: self.conversationsService)
+        self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
+                                                                contactService: self.contactsService,
+                                                                conversationService: self.conversationsService,
+                                                                callService: self.callService)
 
         // load accounts during splashscreen
         // and ask the AppCoordinator to handle the first screen once loading is finished

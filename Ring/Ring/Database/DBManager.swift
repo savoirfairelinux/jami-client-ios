@@ -154,9 +154,11 @@ class DBManager {
                     switch interactionType {
                     case .text:
                         // for now we have only one conversation between two persons(with group chat could be many)
-                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, message: message)
+                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, interactionType: InteractionType.text, message: message)
                     case .contact:
                         result = self?.addInteractionContactTo(conversation: conversationID, account: accountProfile.id, author: author, message: message)
+                    case .call:
+                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, interactionType: InteractionType.call, message: message)
                     default:
                         result = nil
                     }
@@ -368,7 +370,8 @@ class DBManager {
 
     private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
         if interaction.type != InteractionType.text.rawValue &&
-            interaction.type != InteractionType.contact.rawValue {
+            interaction.type != InteractionType.contact.rawValue &&
+            interaction.type != InteractionType.call.rawValue {
             return nil
         }
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
@@ -377,7 +380,7 @@ class DBManager {
                                    content: interaction.body,
                                    author: author,
                                    incoming: interaction.incoming)
-        if interaction.type == InteractionType.contact.rawValue {
+        if interaction.type == InteractionType.contact.rawValue || interaction.type == InteractionType.call.rawValue {
             message.isGenerated = true
         }
         if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
@@ -390,11 +393,12 @@ class DBManager {
     private func addMessageTo(conversation conversationID: Int64,
                               account accountProfileID: Int64,
                               author authorProfileID: Int64,
+                              interactionType: InteractionType,
                               message: MessageModel) -> Bool {
         let timeInterval = message.receivedDate.timeIntervalSince1970
         let interaction = Interaction(defaultID, accountProfileID, authorProfileID,
                                       conversationID, Int64(timeInterval),
-                                      message.content, InteractionType.text.rawValue,
+                                      message.content, interactionType.rawValue,
                                       InteractionStatus.unknown.rawValue, message.daemonId,
                                       message.incoming)
         return self.interactionHepler.insert(item: interaction)
