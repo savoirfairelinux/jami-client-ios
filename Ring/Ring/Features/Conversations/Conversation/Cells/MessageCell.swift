@@ -106,6 +106,8 @@ class MessageCell: UITableViewCell, NibReusable {
             return
         }
 
+        self.backgroundColor = UIColor.red
+
         let type = item.bubblePosition()
         let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
         self.setup()
