@@ -37,6 +37,7 @@ enum ServiceEventType {
     case contactRequestReceived
     case contactRequestDiscarded
     case proxyEnabled
+    case callEnded
 }
 
 /**
@@ -53,6 +54,8 @@ enum ServiceEventInput {
     case pin
     case accountId
     case date
+    case callType
+    case callTime
 }
 
 /**

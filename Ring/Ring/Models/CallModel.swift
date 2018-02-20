@@ -57,7 +57,7 @@ enum CallDetailKey: String {
 class CallModel {
 
     var callId: String = ""
-    var dateReceived: Date = Date()
+    var dateReceived: Date?
     var participantRingId: String = ""
     var displayName: String = ""
     var registeredName: String = ""
@@ -119,7 +119,9 @@ class CallModel {
 
     func update(withDictionary dictionary: [String: String]) {
 
-        self.dateReceived = Date()
+        if self.state == .current && self.dateReceived == nil {
+            self.dateReceived = Date()
+        }
 
         if let displayName = dictionary[CallDetailKey.displayNameKey.rawValue], !displayName.isEmpty {
             self.displayName = displayName

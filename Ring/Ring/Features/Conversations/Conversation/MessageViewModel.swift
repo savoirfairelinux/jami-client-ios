@@ -39,6 +39,10 @@ enum GeneratedMessageType: String {
     case sendContactRequest = "The invitation has been sent"
     case receivedContactRequest = "Contact request received"
     case contactRequestAccepted = "Contact added"
+    case missedIncomingCall = "Missed incoming call"
+    case missedOutgoingCall = "Missed outgoing call"
+    case incomingCall = "Incoming call"
+    case outgoingCall = "Outgoing call"
 }
 
 class MessageViewModel {

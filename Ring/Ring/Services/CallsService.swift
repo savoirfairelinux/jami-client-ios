@@ -53,9 +53,13 @@ class CallsService: CallsAdapterDelegate {
 
     let currentCall = ReplaySubject<CallModel>.create(bufferSize: 1)
     let newCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
+    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    var sharedResponseStream: Observable<ServiceEvent>
 
     init(withCallsAdapter callsAdapter: CallsAdapter) {
         self.callsAdapter = callsAdapter
+        self.responseStream.disposed(by: disposeBag)
+        self.sharedResponseStream = responseStream.share()
         CallsAdapter.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.refuseUnansweredCall(_:)),
                                                name: NSNotification.Name(rawValue: NotificationName.refuseCallFromNotifications.rawValue),
@@ -156,6 +160,7 @@ class CallsService: CallsAdapterDelegate {
         callDetails[CallDetailKey.displayNameKey.rawValue] = userName
         callDetails[CallDetailKey.accountIdKey.rawValue] = account.id
         callDetails[CallDetailKey.audioOnlyKey.rawValue] = isAudioOnly.toString()
+        callDetails[CallDetailKey.timeStampStartKey.rawValue] = ""
         let call = CallModel(withCallId: ringId, callDetails: callDetails)
         call.state = .connecting
         call.callType = .outgoing
@@ -216,9 +221,25 @@ class CallsService: CallsAdapterDelegate {
     func didChangeCallState(withCallId callId: String, state: String, stateCode: NSInteger) {
 
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
-
             //Add or update new call
             var call = self.calls[callId]
+            call?.state = CallState(rawValue: state)!
+            //Remove from the cache if the call is over and save message to history
+            if call?.state == .over || call?.state == .failure {
+                var time = 0.00
+                if let startTime = call?.dateReceived {
+                    time = Date().timeIntervalSince1970 - startTime.timeIntervalSince1970
+                }
+                var event = ServiceEvent(withEventType: .callEnded)
+                event.addEventInput(.uri, value: call?.participantRingId)
+                event.addEventInput(.accountId, value: call?.accountId)
+                event.addEventInput(.callType, value: call?.callType.rawValue)
+                event.addEventInput(.callTime, value: time)
+                self.responseStream.onNext(event)
+                self.currentCall.onNext(call!)
+                self.calls[callId] = nil
+                return
+            }
             if call == nil {
                 call = CallModel(withCallId: callId, callDetails: callDictionary)
                 self.calls[callId] = call
@@ -226,24 +247,15 @@ class CallsService: CallsAdapterDelegate {
                 call?.update(withDictionary: callDictionary)
             }
 
-            //Update the call
-            call?.state = CallState(rawValue: state)!
-
             //send vCard
             if (call?.state == .ringing && call?.callType == .outgoing) ||
                 (call?.state == .current && call?.callType == .incoming) {
                 let accountID = call?.accountId
                 self.sendVCard(callID: callId, accountID: accountID!)
             }
-
+            
             //Emit the call to the observers
             self.currentCall.onNext(call!)
-
-            //Remove from the cache if the call is over
-            if call?.state == .over {
-                // TODO save history
-                self.calls[callId] = nil
-            }
         }
     }
 
