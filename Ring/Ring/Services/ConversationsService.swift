@@ -190,17 +190,18 @@ class ConversationsService {
     }
 
     // swiftlint:enable function_parameter_count
-    func generateMessage(ofType messageType: GeneratedMessageType,
+    func generateMessage(messageContent: String,
                          contactRingId: String,
                          accountRingId: String,
                          accountId: String,
                          date: Date,
+                         interactionType: InteractionType,
                          shouldUpdateConversation: Bool) {
 
-        let message = MessageModel(withId: "", receivedDate: date, content: messageType.rawValue, author: accountRingId, incoming: false)
+        let message = MessageModel(withId: "", receivedDate: date, content: messageContent, author: accountRingId, incoming: false)
         message.isGenerated = true
 
-        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: false, interactionType: InteractionType.contact)
+        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: false, interactionType: interactionType)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: { [unowned self] in
                 if shouldUpdateConversation {

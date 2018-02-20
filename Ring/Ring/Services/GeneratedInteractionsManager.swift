@@ -21,17 +21,20 @@
 import Foundation
 import RxSwift
 
-class ContactRequestManager {
+class GeneratedInteractionsManager {
     let accountService: AccountsService
     let contactService: ContactsService
     let conversationService: ConversationsService
+    let callService: CallsService
     let disposeBag = DisposeBag()
 
-    init(accountService: AccountsService, contactService: ContactsService, conversationService: ConversationsService) {
+    init(accountService: AccountsService, contactService: ContactsService, conversationService: ConversationsService, callService: CallsService) {
         self.accountService = accountService
         self.contactService = contactService
         self.conversationService = conversationService
+        self.callService = callService
         self.subscribeToContactEvents()
+        self.subscribeToCallEvents()
     }
 
     private func subscribeToContactEvents() {
@@ -95,11 +98,12 @@ class ContactRequestManager {
                     return
                 }
 
-                self.conversationService.generateMessage(ofType: type,
+                self.conversationService.generateMessage(messageContent: type.rawValue,
                                                          contactRingId: contactRingId,
                                                          accountRingId: ringId,
                                                          accountId: account.id,
                                                          date: date,
+                                                         interactionType: InteractionType.contact,
                                                          shouldUpdateConversation: shouldUpdateConversations)
 
             })
@@ -120,5 +124,84 @@ class ContactRequestManager {
             return
         }
         self.conversationService.deleteConversation(conversation: conversation)
+    }
+
+    private func subscribeToCallEvents() {
+        self.callService
+            .sharedResponseStream
+            .subscribe(onNext: { [unowned self] callEvent in
+
+                guard let accountID: String = callEvent.getEventInput(.accountId) else {
+                    return
+                }
+
+                guard let contactRingId: String = callEvent.getEventInput(.uri) else {
+                    return
+                }
+
+                guard let time: Double = callEvent.getEventInput(.callTime) else {
+                    return
+                }
+
+                guard let callType: Int = callEvent.getEventInput(.callType) else {
+                    return
+                }
+
+                guard let account = self.accountService.getAccount(fromAccountId: accountID) else {
+                    return
+                }
+
+                guard let ringId = AccountModelHelper(withAccount: account).ringId else {
+                    return
+                }
+
+                var shouldUpdateConversations = false
+                if let currentAccount = self.accountService.currentAccount {
+                    if let currentrRingId = AccountModelHelper(withAccount: currentAccount).ringId, currentrRingId == ringId {
+                        shouldUpdateConversations = true
+                    }
+                }
+                var message = ""
+
+                if time > 0 {
+                    let timeString = self.convertSecondsToString(seconds: time)
+                    if callType == CallType.incoming.rawValue {
+                        message = GeneratedMessageType.incomingCall.rawValue + " - " + timeString
+                    } else if callType == CallType.outgoing.rawValue {
+                        message = GeneratedMessageType.outgoingCall.rawValue + " - " + timeString
+                    }
+                } else {
+                    if callType == CallType.incoming.rawValue {
+                        message = GeneratedMessageType.missedIncomingCall.rawValue
+                    } else if callType == CallType.outgoing.rawValue {
+                        message = GeneratedMessageType.missedOutgoingCall.rawValue
+                    }
+                }
+                self.conversationService.generateMessage(messageContent: message,
+                                                         contactRingId: contactRingId,
+                                                         accountRingId: ringId,
+                                                         accountId: account.id,
+                                                         date: Date(),
+                                                         interactionType: InteractionType.call,
+                                                         shouldUpdateConversation: shouldUpdateConversations)
+
+            })
+            .disposed(by: disposeBag)
+    }
+
+    func convertSecondsToString(seconds: Double) -> String {
+        var string = ""
+        var reminderSeconds = seconds
+        let hours = Int(seconds / 3600)
+        if hours > 0 {
+            reminderSeconds = seconds.truncatingRemainder(dividingBy: 3600)
+            string += String(format: "%02d", hours) + ":"
+
+        }
+        let min = Int(reminderSeconds / 60)
+        let sec = reminderSeconds.truncatingRemainder(dividingBy: 60)
+        string += String(format: "%02d:%02d", min, Int(sec))
+        print("string", string)
+        return string
     }
 }
