@@ -1,48 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Fja-dy-lIy" customClass="MessageAccessoryView" customModule="Ring" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="315" height="54"/>
+            <rect key="frame" x="0.0" y="0.0" width="315" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type your message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJA-0c-Rp7">
-                    <rect key="frame" x="16" y="8" width="283" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FR2-8E-BJK" customClass="KMPlaceholderTextView">
+                    <rect key="frame" x="32" y="8" width="251" height="48"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="15"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <integer key="value" value="1"/>
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                </textField>
+                </textView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="khO-I9-ZA9" userLabel="Top Border View">
+                    <rect key="frame" x="-0.5" y="0.0" width="315" height="1"/>
+                    <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="4uv-PB-gaO"/>
+                    </constraints>
+                </view>
             </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="AJA-0c-Rp7" secondAttribute="bottom" constant="16" id="Gph-b4-ZJH"/>
-                <constraint firstAttribute="trailing" secondItem="AJA-0c-Rp7" secondAttribute="trailing" constant="16" id="UyK-3a-JcH"/>
-                <constraint firstItem="AJA-0c-Rp7" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" constant="8" id="mDu-cF-UdO"/>
-                <constraint firstItem="AJA-0c-Rp7" firstAttribute="leading" secondItem="Fja-dy-lIy" secondAttribute="leading" constant="16" id="tvd-4f-jdO"/>
+                <constraint firstAttribute="trailing" secondItem="FR2-8E-BJK" secondAttribute="trailing" constant="32" id="BBa-zO-Lnn"/>
+                <constraint firstItem="FR2-8E-BJK" firstAttribute="leading" secondItem="Fja-dy-lIy" secondAttribute="leading" constant="32" id="Epc-cW-UN5"/>
+                <constraint firstItem="khO-I9-ZA9" firstAttribute="centerX" secondItem="Fja-dy-lIy" secondAttribute="centerX" id="FBs-JS-g0K"/>
+                <constraint firstItem="khO-I9-ZA9" firstAttribute="width" secondItem="Fja-dy-lIy" secondAttribute="width" id="Mp0-t9-Vd0"/>
+                <constraint firstItem="FR2-8E-BJK" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" constant="8" id="Oo7-Bm-qdN"/>
+                <constraint firstItem="khO-I9-ZA9" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" id="oY9-yf-jlL"/>
+                <constraint firstAttribute="bottom" secondItem="FR2-8E-BJK" secondAttribute="bottom" constant="8" id="uER-lv-UT3"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="messageTextField" destination="AJA-0c-Rp7" id="ga9-yi-G2h"/>
+                <outlet property="messageTextField" destination="FR2-8E-BJK" id="OdY-Id-seq"/>
             </connections>
             <point key="canvasLocation" x="-15" y="-178"/>
         </view>

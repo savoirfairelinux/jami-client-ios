@@ -20,10 +20,11 @@
 
 import UIKit
 import Reusable
+import KMPlaceholderTextView
 
 class MessageAccessoryView: UIView, NibLoadable {
 
-    @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var messageTextField: KMPlaceholderTextView!
 
     override open func didMoveToWindow() {
         super.didMoveToWindow()

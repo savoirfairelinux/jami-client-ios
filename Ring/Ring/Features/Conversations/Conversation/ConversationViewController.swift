@@ -54,9 +54,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.setupTableView()
         self.setupBindings()
 
-        self.messageAccessoryView.messageTextField.delegate = self
+        //self.messageAccessoryView.messageTextField.delegate = self
 
-        self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
+        //self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
 
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
@@ -365,10 +365,10 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     func setupBindings() {
 
         //Binds the keyboard Send button action to the ViewModel
-        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
-            self.viewModel.sendMessage(withContent: self.messageAccessoryView.messageTextField.text!)
-            self.messageAccessoryView.messageTextField.text = ""
-        }).disposed(by: disposeBag)
+//        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
+//            self.viewModel.sendMessage(withContent: self.messageAccessoryView.messageTextField.text!)
+//            self.messageAccessoryView.messageTextField.text = ""
+//        }).disposed(by: disposeBag)
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched

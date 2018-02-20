@@ -8,3 +8,4 @@ github "andreamazz/AMPopTip"
 github "ashleymills/Reachability.swift"
 github "stephencelis/SQLite.swift" ~> 0.11.4
 github "optonaut/ActiveLabel.swift"
+github "MoZhouqi/KMPlaceholderTextView" >= 1.3
