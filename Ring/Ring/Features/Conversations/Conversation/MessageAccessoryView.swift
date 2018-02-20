@@ -23,7 +23,9 @@ import Reusable
 
 class MessageAccessoryView: UIView, NibLoadable {
 
-    @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var messageTextView: UITextView!
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var messageAccessoryHeightConstraint: NSLayoutConstraint!
 
     override open func didMoveToWindow() {
         super.didMoveToWindow()

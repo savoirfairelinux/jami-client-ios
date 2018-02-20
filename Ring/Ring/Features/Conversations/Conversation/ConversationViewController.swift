@@ -32,7 +32,7 @@ extension UITextField {
     }
 }
 
-class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
+class ConversationViewController: UIViewController, UITextViewDelegate, StoryboardBased, ViewModelBased {
 
     let log = SwiftyBeaver.self
 
@@ -46,6 +46,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     var textFieldShouldEndEditing = false
     var bottomOffset: CGFloat = 0
     let scrollOffsetThreshold: CGFloat = 600
+    var textViewIsPlaceHolding = true
+    var placeHolderText = "type a message …"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +56,13 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.setupTableView()
         self.setupBindings()
 
-        self.messageAccessoryView.messageTextField.delegate = self
+        self.messageAccessoryView.backgroundColor = UIColor.green
 
-        self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
+        self.messageAccessoryView.messageTextView.delegate = self
+        self.messageAccessoryView.messageTextView.text = placeHolderText
+        self.messageAccessoryView.messageTextView.textColor = UIColor.lightGray
+        self.messageAccessoryView.messageTextView.textContainerInset = UIEdgeInsets(top: 8, left: 4, bottom: 2, right: 4)
+        self.messageAccessoryView.messageTextView.isScrollEnabled = true
 
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
@@ -64,6 +70,53 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
          */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ConversationViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.log.warning("textViewDidBeginEditing")
+        if textView.textColor == UIColor.lightGray {
+            self.textViewIsPlaceHolding = false
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.log.warning("textViewDidEndEditing")
+        if textView.text.isEmpty && !self.textViewIsPlaceHolding {
+            textView.text = placeHolderText
+            self.textViewIsPlaceHolding = false
+            textView.textColor = UIColor.lightGray
+            let newPosition = textView.beginningOfDocument
+            textView.selectedTextRange = textView.textRange(from: newPosition, to: newPosition)
+        } else {
+
+        }
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = placeHolderText
+            self.textViewIsPlaceHolding = false
+            textView.textColor = UIColor.lightGray
+            let newPosition = textView.beginningOfDocument
+            textView.selectedTextRange = textView.textRange(from: newPosition, to: newPosition)
+        }
+        //textView.sizeToFit()
+        let fixedWidth = textView.frame.size.width
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        self.messageAccessoryView.frame.size.height = newSize.height + 24//CGSize(width: max(newSize.width, fixedWidth), height: newSize.height + 24)
+        self.log.warning("self.messageAccessoryView.frame.size.height: \(self.messageAccessoryView.frame.size.height)")
+        self.log.warning("newSize.height: \(newSize.height)")
+    }
+
+    @objc func dismissKeyboard() {
+        self.textFieldShouldEndEditing = true
+        becomeFirstResponder()
+        view.endEditing(true)
     }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
@@ -74,8 +127,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
 
-        self.tableView.contentInset.bottom = keyboardHeight
-        self.tableView.scrollIndicatorInsets.bottom = keyboardHeight
+        self.tableView.contentInset.bottom = keyboardHeight - 24
+        self.tableView.scrollIndicatorInsets.bottom = keyboardHeight - 24
 
         self.scrollToBottom(animated: false)
         self.updateBottomOffset()
@@ -136,6 +189,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }
 
     func setupUI() {
+        self.tableView.backgroundColor = UIColor.init(red: 248, green: 248, blue: 248, alpha: 1.0)
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
         } else {
@@ -330,12 +384,12 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }()
 
     func setupBindings() {
-
-        //Binds the keyboard Send button action to the ViewModel
-        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
-            self.viewModel.sendMessage(withContent: self.messageAccessoryView.messageTextField.text!)
-            self.messageAccessoryView.messageTextField.text = ""
-        }).disposed(by: disposeBag)
+        self.messageAccessoryView.sendButton.rx.tap.subscribe(onNext: { [unowned self] in
+            if !self.messageAccessoryView.messageTextView.text.isEmpty {
+                self.viewModel.sendMessage(withContent: self.messageAccessoryView.messageTextView.text!)
+                self.messageAccessoryView.messageTextView.text = ""
+            }
+        }).disposed(by: self.disposeBag)
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched
