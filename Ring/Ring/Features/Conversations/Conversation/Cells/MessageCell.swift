@@ -30,6 +30,7 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var bubble: MessageBubble!
     @IBOutlet weak var bubbleBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var messageLabelMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabel: ActiveLabel!
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
@@ -92,7 +93,7 @@ class MessageCell: UITableViewCell, NibReusable {
         // setup the label
         self.timeLabel.text = item.timeStringShown
         self.timeLabel.textColor = UIColor.ringMsgCellTimeText
-        self.timeLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
+        self.timeLabel.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.medium)
 
         // show the time
         self.timeLabel.isHidden = false
@@ -170,6 +171,7 @@ class MessageCell: UITableViewCell, NibReusable {
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
                            _ items: [MessageViewModel]?,
                            cellForRowAt indexPath: IndexPath) {
+        self.backgroundColor = UIColor.clear
         guard let item = items?[indexPath.row] else {
             return
         }
@@ -181,7 +183,12 @@ class MessageCell: UITableViewCell, NibReusable {
             self.bubble.backgroundColor = UIColor.ringMsgCellReceived
             self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
             // generated messages should always show the time
-            self.bubbleTopConstraint.constant = 32
+            if indexPath.row == 0 {
+                messageLabelMarginConstraint.constant = 4
+                self.bubbleTopConstraint.constant = 36
+            } else {
+                self.bubbleTopConstraint.constant = 32
+            }
             return
         }
 
@@ -190,7 +197,8 @@ class MessageCell: UITableViewCell, NibReusable {
 
         // special cases where top/bottom margins should be larger
         if indexPath.row == 0 {
-            self.bubbleTopConstraint.constant = 32
+            messageLabelMarginConstraint.constant = 4
+            self.bubbleTopConstraint.constant = 36
         } else if items?.count == indexPath.row + 1 {
             self.bubbleBottomConstraint.constant = 16
         }
