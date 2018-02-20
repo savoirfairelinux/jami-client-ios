@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="O1m-sW-gim">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O1m-sW-gim">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,10 +14,6 @@
         <scene sceneID="2Fj-m2-pCD">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="O1m-sW-gim" customClass="ConversationViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Hdp-cb-K7b"/>
-                        <viewControllerLayoutGuide type="bottom" id="zju-EL-lSj"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lhx-ny-Zct">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,15 +49,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6Wq-EJ-CAF" firstAttribute="leading" secondItem="lhx-ny-Zct" secondAttribute="leading" id="5VA-aR-jIL"/>
-                            <constraint firstAttribute="trailing" secondItem="yc2-Jn-6vm" secondAttribute="trailing" id="6Ar-yh-iTT"/>
+                            <constraint firstItem="6Wq-EJ-CAF" firstAttribute="leading" secondItem="mrp-Ty-hZO" secondAttribute="leading" id="5VA-aR-jIL"/>
+                            <constraint firstItem="mrp-Ty-hZO" firstAttribute="trailing" secondItem="yc2-Jn-6vm" secondAttribute="trailing" id="6Ar-yh-iTT"/>
                             <constraint firstAttribute="bottom" secondItem="6Wq-EJ-CAF" secondAttribute="bottom" id="QKw-Wp-ff0"/>
                             <constraint firstItem="yc2-Jn-6vm" firstAttribute="top" secondItem="lhx-ny-Zct" secondAttribute="top" id="Qd0-eb-gyZ"/>
-                            <constraint firstAttribute="trailing" secondItem="6Wq-EJ-CAF" secondAttribute="trailing" id="W84-gc-kua"/>
-                            <constraint firstItem="yc2-Jn-6vm" firstAttribute="leading" secondItem="lhx-ny-Zct" secondAttribute="leading" id="Wzk-uM-Oge"/>
-                            <constraint firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="m6U-Gp-jhl"/>
+                            <constraint firstItem="mrp-Ty-hZO" firstAttribute="trailing" secondItem="6Wq-EJ-CAF" secondAttribute="trailing" id="W84-gc-kua"/>
+                            <constraint firstItem="yc2-Jn-6vm" firstAttribute="leading" secondItem="mrp-Ty-hZO" secondAttribute="leading" id="Wzk-uM-Oge"/>
+                            <constraint firstItem="mrp-Ty-hZO" firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="m6U-Gp-jhl"/>
                             <constraint firstItem="6Wq-EJ-CAF" firstAttribute="top" secondItem="lhx-ny-Zct" secondAttribute="top" id="v3Q-NK-vb1"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="mrp-Ty-hZO"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
