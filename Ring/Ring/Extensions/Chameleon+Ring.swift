@@ -59,6 +59,10 @@ extension Chameleon {
         DesignableButton.appearance().backgroundColor = secondaryColor
         ButtonTransparentBackground.appearance().tintColor = secondaryColor
         ButtonTransparentBackground.appearance().backgroundColor = UIColor.clear
-        UIButton.appearance(whenContainedInInstancesOf: [UIView.self, UIImagePickerController.self]).tintColor = UIColor.white
+        UIButton.appearance(whenContainedInInstancesOf: [UIView.self, UIImagePickerController.self]).tintColor = UIColor.ringMain
+        UINavigationBar.appearance().barTintColor = UIColor.ringNavigationBar
+        UISearchBar.appearance().backgroundColor = UIColor.ringNavigationBar
+        UIButton.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = UIColor.ringMain
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.ringMain]
     }
 }
