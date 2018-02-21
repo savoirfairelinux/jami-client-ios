@@ -72,6 +72,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
     }
 
@@ -211,14 +212,16 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     func setupSearchBar() {
 
+        self.view.bringSubview(toFront: self.searchBar)
+
         self.searchBar.returnKeyType = .done
 
         self.searchBar.autocapitalizationType = .none
-
-        self.searchBar.layer.shadowColor = UIColor.black.cgColor
-        self.searchBar.layer.shadowOpacity = 0.5
-        self.searchBar.layer.shadowOffset = CGSize.zero
-        self.searchBar.layer.shadowRadius = 2
+        self.searchBar.layer.shadowColor = UIColor.ringNavigationBar.darken(byPercentage: 0.1).cgColor
+        self.searchBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        self.searchBar.layer.shadowRadius = 1.0
+        self.searchBar.layer.shadowOpacity = 0.8
+        self.searchBar.layer.masksToBounds = false
 
         //Bind the SearchBar to the ViewModel
         self.searchBar.rx.text.orEmpty
