@@ -52,6 +52,8 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        UIApplication.shared.statusBarStyle = .default
+
         // L10n
         self.applyL10n()
 

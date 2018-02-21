@@ -23,8 +23,9 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Bind ViewModel to View
+        UIApplication.shared.statusBarStyle = .default
 
+        // Bind ViewModel to View
         self.viewModel.skipButtonTitle.asObservable().bind(to: self.skipButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
 
         // Bind View to ViewModel

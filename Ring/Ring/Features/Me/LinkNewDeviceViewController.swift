@@ -32,6 +32,9 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
 
         self.view.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         super.viewDidLoad()
+
+        UIApplication.shared.statusBarStyle = .default
+
         self.showInitialAlert()
 
         self.viewModel.observableState

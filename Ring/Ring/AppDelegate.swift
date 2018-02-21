@@ -100,6 +100,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // themetize the app
         Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
         Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
+
+        UIApplication.shared.statusBarStyle = .default
+
         self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
                                                                 contactService: self.contactsService,
                                                                 conversationService: self.conversationsService,

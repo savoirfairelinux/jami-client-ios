@@ -34,6 +34,8 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        UIApplication.shared.statusBarStyle = .default
+
         self.applyL10n()
 
         //bind view model to view

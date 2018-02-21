@@ -37,6 +37,10 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        UIApplication.shared.statusBarStyle = .default
+
+        self.applyShadow()
         self.tableView.rx.modelSelected(ContactRequestItem.self)
             .subscribe({ [unowned self] item in
                 if let ringId = item.element?.contactRequest.ringId {

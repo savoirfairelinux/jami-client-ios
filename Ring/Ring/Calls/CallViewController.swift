@@ -59,6 +59,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.shared.statusBarStyle = .lightContent
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
         self.infoContainer.backgroundColor = UIColor.black.withAlphaComponent(0.3)
