@@ -41,6 +41,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         super.viewDidLoad()
         self.navigationItem.title = L10n.Global.meTabBarTitle
         self.configureBindings()
+        self.applyShadow()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     func configureBindings() {
