@@ -37,4 +37,5 @@ extension UIColor {
     static let ringMsgCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
     static let ringMsgCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
     static let ringUITableViewCellSelection = UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
+    static let ringNavigationBar = UIColor(red: 235, green: 235, blue: 235, alpha: 1.0)
 }

@@ -39,6 +39,7 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupTableView()
+        self.applyShadow()
 
         self.viewModel.contactListNotEmpty
             .observeOn(MainScheduler.instance)

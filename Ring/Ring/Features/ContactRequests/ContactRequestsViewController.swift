@@ -50,6 +50,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         super.viewWillAppear(animated)
         self.setupTableView()
         self.setupBindings()
+        self.applyShadow()
     }
 
     func setupTableView() {

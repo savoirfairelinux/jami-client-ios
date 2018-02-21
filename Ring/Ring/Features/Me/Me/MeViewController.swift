@@ -43,6 +43,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.configureBindings()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.applyShadow()
+    }
+
     func configureBindings() {
         self.viewModel.userName
             .bind(to: self.nameLabel.rx.text)
