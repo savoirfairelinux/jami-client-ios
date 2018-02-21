@@ -29,8 +29,10 @@ extension UIColor {
         self.init(red: red_, green: green_, blue: blue_, alpha: alpha)
     }
 
-    static let ringMain = UIColor(red: 58, green: 192, blue: 210, alpha: 1.0)
+    //static let ringMain = UIColor(red: 58, green: 192, blue: 210, alpha: 1.0)
+    static let ringMain = UIColor(red: 0, green: 76, blue: 96, alpha: 1.0).lighten(byPercentage: 0.25)!
     static let ringSecondary = UIColor(red: 0, green: 76, blue: 96, alpha: 1.0)
+    static let ringNav = UIColor.ringSecondary.lighten(byPercentage: 0.25)!
     static let ringMsgCellSent = UIColor(red: 58, green: 192, blue: 210, alpha: 1.0)
     static let ringMsgCellSentText = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0)
     static let ringMsgCellReceived = UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
@@ -39,4 +41,5 @@ extension UIColor {
     static let ringMsgBackground = UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
     static let ringMsgTextFieldBackground = UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
     static let ringUITableViewCellSelection = UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
+    static let ringNavigationBar = UIColor(red: 235, green: 235, blue: 235, alpha: 1.0)
 }

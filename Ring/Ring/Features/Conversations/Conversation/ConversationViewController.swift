@@ -41,6 +41,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.applyShadow()
+
         self.setupUI()
         self.setupTableView()
         self.setupBindings()
@@ -115,7 +117,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: 4, width: maxNameLength, height: 20))
             dnlabel.text = name
             dnlabel.font = UIFont.systemFont(ofSize: nameSize)
-            dnlabel.textColor = UIColor.white
+            dnlabel.textColor = UIColor.ringNav
             dnlabel.textAlignment = .left
             titleView.addSubview(dnlabel)
             userNameYOffset = 20.0
@@ -125,7 +127,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         let unlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: userNameYOffset, width: maxNameLength, height: 24))
         unlabel.text = username
         unlabel.font = UIFont.systemFont(ofSize: nameSize)
-        unlabel.textColor = UIColor.white
+        unlabel.textColor = UIColor.ringNav
         unlabel.textAlignment = .left
         titleView.addSubview(unlabel)
 
