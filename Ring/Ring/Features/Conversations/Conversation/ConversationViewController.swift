@@ -117,7 +117,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
             let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: 4, width: maxNameLength, height: 20))
             dnlabel.text = name
             dnlabel.font = UIFont.systemFont(ofSize: nameSize)
-            dnlabel.textColor = UIColor.white
+            dnlabel.textColor = UIColor.ringSecondary
             dnlabel.textAlignment = .left
             titleView.addSubview(dnlabel)
             userNameYOffset = 20.0
@@ -127,7 +127,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         let unlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: userNameYOffset, width: maxNameLength, height: 24))
         unlabel.text = username
         unlabel.font = UIFont.systemFont(ofSize: nameSize)
-        unlabel.textColor = UIColor.white
+        unlabel.textColor = UIColor.ringSecondary
         unlabel.textAlignment = .left
         titleView.addSubview(unlabel)
 
@@ -176,6 +176,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
         // call button
         let audioCallItem = UIBarButtonItem()
+        audioCallItem.tintColor = UIColor.ringMain
         audioCallItem.image = UIImage(asset: Asset.callButton)
         audioCallItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
@@ -251,6 +252,11 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.scrollToBottom(animated: false)
         self.textFieldShouldEndEditing = false
         self.messagesLoadingFinished()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.ringNavigationBar.darken(byPercentage: 0.1).cgColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        self.navigationController?.navigationBar.layer.shadowRadius = 1.0
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.8
+        self.navigationController?.navigationBar.layer.masksToBounds = false
     }
 
     override func viewWillDisappear(_ animated: Bool) {

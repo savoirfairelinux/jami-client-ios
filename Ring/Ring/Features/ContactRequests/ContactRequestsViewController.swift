@@ -50,6 +50,11 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         super.viewWillAppear(animated)
         self.setupTableView()
         self.setupBindings()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.ringNavigationBar.darken(byPercentage: 0.1).cgColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        self.navigationController?.navigationBar.layer.shadowRadius = 1.0
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.8
+        self.navigationController?.navigationBar.layer.masksToBounds = false
     }
 
     func setupTableView() {
