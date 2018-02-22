@@ -20,18 +20,18 @@
 
 // Global
 "global.homeTabBarTitle" = "Ekran główny";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Zaproszenia";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "Ok";
 
 // Smartlist
 "smartlist.yesterday" = "Wczoraj";
-"smartlist.userFound" = "User found";
+"smartlist.userFound" = "Użytkownik znaleziony";
 "smartlist.conversations" = "Rozmowy";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
+"smartlist.searching" = "Szukam...";
+"smartlist.noResults" = "Brak rezultatów";
 "smartlist.noNetworkConnectivity" = "Brak połączenia z siecią";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Upewnij się, że dostęp do sieci komórkowej jest dozwolony w ustawieniach";
 
 // Walkthrough
 
@@ -105,6 +105,10 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Urządzenia";
+"accountPage.settingsHeader" = "Ustawienia";
+"accountPage.enableProxy" = "Enable Push Notifications";
+"accountPage.blockedContacts" = "Block List";
+"accountPage.unblockContact" = "UNBLOCK";
 
 //Link New Device
 "linkDevice.title" = "Link a new device";

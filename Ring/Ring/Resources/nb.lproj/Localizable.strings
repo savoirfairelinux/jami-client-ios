@@ -67,14 +67,14 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Skriv inn passord";
 "linkToAccount.pinLabel" = "Skriv inn PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "For å generere PIN-koden, gå til kontobehandlingsinnstillingen som har kontoen du ønsker å bruke. I \"Enhetsinnstillinger\", velg \"Lenk en annen enhet til denne kontoen\". Du vil motta nødvendig PIN for å fullføre dette skjemaet. PIN-koden er gyldig i 10 minutter.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan ikke finne konto";
 "alerts.accountCannotBeFoundMessage" = "Finner ikke kontoen på Ring-nettverket. Forsikre deg om at den ble eksportert fra Ring på en eksisterende enhet, og at oppgitte identitetsdetaljer er riktige.";
 "alerts.accountAddedTitle" = "Konto lagt til";
 "alerts.accountNoNetworkTitle" = "Kan ikke koble til nettverket";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Kunne ikke legge til ny konto fordi Ring ikke kunne koble til det distribuerte nettverket. Sjekk din enhetstilkobling.";
 "alerts.accountDefaultErrorTitle" = "Ukjent feil";
 "alerts.accountDefaultErrorMessage" = "Kontoen kunne ikke opprettes.";
 "alerts.profileTakePhoto" = "Ta bilde";
@@ -82,17 +82,17 @@
 "alerts.profileCancelPhoto" = "Avbryt";
 "alerts.accountLinkedTitle" = "Lenker konto";
 "alerts.dbFailedTitle" = "Feil inntraff under oppstart av Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.dbFailedMessage" = "Lukk programmet og prøv å åpne det igjen";
+"alerts.confirmBlockContact" = "Er du sikker på at du ønsker å blokkere denne kontakten? Samtalehistorikken med vedkommende vil bli slettet for godt.";
 "alerts.confirmBlockContactTitle" = "Blokker kontakt";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Er du sikker på at du vil slette denne samtalen for godt?";
 "alerts.confirmDeleteConversationTitle" = "Slett samtale";
 
 //Actions
 "actions.blockAction" = "Blokker";
 "actions.deleteAction" = "Slett";
 "actions.cancelAction" = "Avbryt";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Innkommende anrop fra";
 "alerts.incomingCallButtonAccept" = "Aksepter";
 "alerts.incomingCallButtonIgnore" = "Ignorer";
 
@@ -100,16 +100,20 @@
 "calls.callItemTitle" = "Ring";
 "calls.unknown" = "Ukjent";
 "calls.incomingCallInfo" = "ønsker å snakke med deg";
-"calls.calling" = "Calling...";
-"calls.callFinished" = "Call finished";
+"calls.calling" = "Ringer…";
+"calls.callFinished" = "Samtale fullført";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
+"accountPage.settingsHeader" = "Innstillinger";
+"accountPage.enableProxy" = "Skru på Push-merknader";
+"accountPage.blockedContacts" = "Blokkeringsliste";
+"accountPage.unblockContact" = "Avblokker";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Lenk en ny enhet";
 "linkDevice.passwordError" = "Passordet du skrev inn låser ikke opp denne kontoen";
 "linkDevice.networkError" = "En nettverksfeil inntraff under eksport";
 "linkDevice.defaultError" = "En feil inntraff under eksport";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "For å fullføre prosessen, må du åpne Ring på en ny enhet og velge \"Lenk denne enheten til en konto\". Din PIN-kode er gyldig i 10 minutter";
 "linkDevice.hudMessage" = "Bekrefter";

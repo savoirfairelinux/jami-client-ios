@@ -67,7 +67,7 @@
 "linkToAccount.pinPlaceholder" = "Pincode";
 "linkToAccount.passwordLabel" = "Voer wachtwoord in";
 "linkToAccount.pinLabel" = "Voer pincode in";
-"linkToAccount.explanationPinMessage" = "Ga naar de accountbeheerinstellingen op het apparaat dat de account bevat die je wil gebruiken om de pincode te genereren. Selecteer \"Een ander apparaat aan deze account koppelen\". Je zal de pincode krijgen die je nodig hebt om dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
+"linkToAccount.explanationPinMessage" = "Ga naar de accountbeheerinstellingen op het apparaat dat de account bevat die je wil gebruiken om de pincode te genereren. Selecteer ‘Een ander apparaat aan deze account koppelen’. Je zal de pincode krijgen die je nodig hebt om dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Account kan niet gevonden worden";
@@ -82,7 +82,7 @@
 "alerts.profileCancelPhoto" = "Annuleren";
 "alerts.accountLinkedTitle" = "Account koppelen";
 "alerts.dbFailedTitle" = "Er trad een fout op bij het opstarten van Ring";
-"alerts.dbFailedMessage" = "Sluit de app en probeer het opnieuw";
+"alerts.dbFailedMessage" = "Sluit de toepassing en probeer het opnieuw";
 "alerts.confirmBlockContact" = "Weet je zeker dat je dit contact wil blokkeren? De gespreksgeschiedenis met dit contact zal ook voorgoed verwijderd worden.";
 "alerts.confirmBlockContactTitle" = "Contact blokkeren";
 "alerts.confirmDeleteConversation" = "Weet je zeker dat je dit gesprek voorgoed wil verwijderen?";
@@ -105,11 +105,15 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";
+"accountPage.settingsHeader" = "Instellingen";
+"accountPage.enableProxy" = "Pushmeldingen inschakelen";
+"accountPage.blockedContacts" = "Blokkeringslijst";
+"accountPage.unblockContact" = "Deblokkeren";
 
 //Link New Device
 "linkDevice.title" = "Een nieuw apparaat koppelen";
 "linkDevice.passwordError" = "Het wachtwoord dat je hebt ingevoerd ontgrendelt deze account niet";
 "linkDevice.networkError" = "Er is een netwerkfout opgetreden tijdens het exporteren";
 "linkDevice.defaultError" = "Er is een fout opgetreden tijdens het exporteren";
-"linkDevice.explanationMessage" = "Om het proces te voltooien open je Ring op het nieuwe apparaat en kies je de optie \"Dit apparaat aan een account koppelen\". Je pincode is 10 minuten geldig";
+"linkDevice.explanationMessage" = "Om het proces te voltooien open je Ring op het nieuwe apparaat en kies je de optie ‘Dit apparaat aan een account koppelen’. Je pincode is 10 minuten geldig";
 "linkDevice.hudMessage" = "Verifiëren";

@@ -105,6 +105,10 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";
+"accountPage.settingsHeader" = "設定";
+"accountPage.enableProxy" = "啟用推送通知";
+"accountPage.blockedContacts" = "黑名單";
+"accountPage.unblockContact" = "取消阻擋";
 
 //Link New Device
 "linkDevice.title" = "連結新裝置";

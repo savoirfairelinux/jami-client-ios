@@ -105,6 +105,10 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
+"accountPage.settingsHeader" = "Inställningar";
+"accountPage.enableProxy" = "Aktivera push-meddelanden";
+"accountPage.blockedContacts" = "Blocklista";
+"accountPage.unblockContact" = "AVBLOCKERA";
 
 //Link New Device
 "linkDevice.title" = "Länka en ny enhet";

@@ -83,31 +83,35 @@
 "alerts.accountLinkedTitle" = "Po lidhet llogaria";
 "alerts.dbFailedTitle" = "Ndodhi një gabim kur po nisej Ring-u";
 "alerts.dbFailedMessage" = "Ju lutemi, mbylleni aplikacionin dhe provoni ta rihapni";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmBlockContact" = "Jeni i sigurt se doni të bllokohet ky kontakt? Edhe historiku i bisedave me këtë kontakt do të fshihet përgjithmonë.";
+"alerts.confirmBlockContactTitle" = "Bllokoje Kontaktin";
+"alerts.confirmDeleteConversation" = "Jeni i sigurt se doni të fshihet përgjithmonë kjo bisedë?";
+"alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
 
 //Actions
 "actions.blockAction" = "Bllokoje";
 "actions.deleteAction" = "Fshije";
 "actions.cancelAction" = "Anuloje";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Thirrje nga";
 "alerts.incomingCallButtonAccept" = "Pranoje";
 "alerts.incomingCallButtonIgnore" = "Shpërfille";
 
 //Calls
-"calls.callItemTitle" = "Call";
+"calls.callItemTitle" = "Thirre";
 "calls.unknown" = "E panjohur";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
-"calls.callFinished" = "Call finished";
+"calls.incomingCallInfo" = "dëshiron të flasë me ju";
+"calls.calling" = "Po thirret…";
+"calls.callFinished" = "Thirrja përfundoi";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";
+"accountPage.settingsHeader" = "Rregullime";
+"accountPage.enableProxy" = "Aktivizo Njoftime Push";
+"accountPage.blockedContacts" = "Bllokoje Listën";
+"accountPage.unblockContact" = "ZHBLLOKOJE";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Lidhni një pajisje të re";
 "linkDevice.passwordError" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti gjatë eksportimit";
 "linkDevice.defaultError" = "Ndodhi një gabim gjatë eksportimit";
