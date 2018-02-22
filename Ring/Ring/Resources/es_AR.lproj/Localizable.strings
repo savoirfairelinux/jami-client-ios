@@ -19,67 +19,67 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Domov";
+"global.homeTabBarTitle" = "Home";
 "global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Účet";
-"global.ok" = "OK";
+"global.meTabBarTitle" = "Account";
+"global.ok" = "Ok";
 
 // Smartlist
-"smartlist.yesterday" = "Včera";
+"smartlist.yesterday" = "Yesterday";
 "smartlist.userFound" = "User found";
-"smartlist.conversations" = "Konverzace";
-"smartlist.searching" = "Hledá se...";
+"smartlist.conversations" = "Conversations";
+"smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "Chybí připojení";
+"smartlist.noNetworkConnectivity" = "Sin conexión a red";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Vítejte v Ringu";
+"welcome.title" = "Welcome to Ring";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Připojit toto zařízení k účtu";
-"welcome.createAccount" = "Vytvořit účet Ring";
+"welcome.linkDevice" = "Link this device to an account";
+"welcome.createAccount" = "Create a Ring account";
 
 //Creation Profile Screen
 "createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Další";
+"createProfile.createAccountWithProfile" = "Next";
 "createProfile.linkDevice" = "Skip to Link Device";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Vytvořit účet Ring";
+"createAccount.createAccountFormTitle" = "Create your Ring account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "uživatelské jméno";
-"createAccount.newPasswordPlaceholder" = "heslo";
+"createAccount.enterNewUsernamePlaceholder" = "username";
+"createAccount.newPasswordPlaceholder" = "password";
 "createAccount.repeatPasswordPlaceholder" = "confirm password";
-"createAccount.passwordCharactersNumberError" = "Nejméně 6 znaků";
+"createAccount.passwordCharactersNumberError" = "6 characters minimum";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for username availability";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Přidávám účet";
+"createAccount.waitCreateAccountTitle" = "Añadiendo cuenta";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "heslo";
+"linkToAccount.passwordPlaceholder" = "password";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Zadejte PIN";
+"linkToAccount.pinLabel" = "Enter PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Nelze nalézt účet";
+"alerts.accountCannotBeFoundTitle" = "Can't find account";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Nelze se připojit k síti";
+"alerts.accountNoNetworkTitle" = "Can't connect to the network";
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Vyfotit";
+"alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Zrušit";
+"alerts.profileCancelPhoto" = "Cancelar";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -89,31 +89,31 @@
 "alerts.confirmDeleteConversationTitle" = "Delete Conversation";
 
 //Actions
-"actions.blockAction" = "Blokovat";
-"actions.deleteAction" = "Odstranit";
-"actions.cancelAction" = "Zrušit";
+"actions.blockAction" = "Block";
+"actions.deleteAction" = "Eliminar";
+"actions.cancelAction" = "Cancelar";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "Přijmout";
-"alerts.incomingCallButtonIgnore" = "Přehlížet";
+"alerts.incomingCallButtonAccept" = "Accept";
+"alerts.incomingCallButtonIgnore" = "Ignore";
 
 //Calls
-"calls.callItemTitle" = "Volat";
-"calls.unknown" = "Neznámé";
+"calls.callItemTitle" = "Call";
+"calls.unknown" = "Unknown";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.calling" = "Calling...";
 "calls.callFinished" = "Call finished";
 
 //Account Page
-"accountPage.devicesListHeader" = "Zařízení";
-"accountPage.settingsHeader" = "Nastavení";
+"accountPage.devicesListHeader" = "Devices";
+"accountPage.settingsHeader" = "Settings";
 "accountPage.enableProxy" = "Enable Push Notifications";
 "accountPage.blockedContacts" = "Block List";
 "accountPage.unblockContact" = "UNBLOCK";
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "Vámi zadané heslo neodemkne tento účet";
-"linkDevice.networkError" = "Při vyvádění došlo k chybě sítě";
-"linkDevice.defaultError" = "Při vyvádění došlo k chybě";
+"linkDevice.passwordError" = "The password you entered does not unlock this account";
+"linkDevice.networkError" = "A network error occured during the export";
+"linkDevice.defaultError" = "An error occured during the export";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";

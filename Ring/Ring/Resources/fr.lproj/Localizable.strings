@@ -105,6 +105,10 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";
+"accountPage.settingsHeader" = "Paramètres";
+"accountPage.enableProxy" = "Activer les notifications de type pousser";
+"accountPage.blockedContacts" = "Liste des utilisateurs bloqués";
+"accountPage.unblockContact" = "Débloquer";
 
 //Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";
