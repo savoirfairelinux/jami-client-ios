@@ -120,6 +120,7 @@
                 <outlet property="bubbleTopConstraint" destination="jhd-A8-c1o" id="40k-2d-6rW"/>
                 <outlet property="leftDivider" destination="zuX-zz-1Qq" id="9Jc-cV-VTA"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
+                <outlet property="messageLabelMarginConstraint" destination="O3h-2G-pe5" id="bHE-Hw-I9b"/>
                 <outlet property="rightDivider" destination="eza-Ni-w3g" id="Jfy-s9-5t7"/>
                 <outlet property="timeLabel" destination="mhg-uK-iD9" id="x8D-vK-F6G"/>
                 <outlet property="topCorner" destination="WBd-CS-7Qv" id="GCm-Hv-5Ei"/>

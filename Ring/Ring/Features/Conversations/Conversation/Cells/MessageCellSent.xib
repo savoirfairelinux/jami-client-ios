@@ -135,6 +135,7 @@
                 <outlet property="failedStatusLabel" destination="P5a-HI-uhr" id="6Sq-NU-j0d"/>
                 <outlet property="leftDivider" destination="2U4-l3-KET" id="y4j-CT-gez"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
+                <outlet property="messageLabelMarginConstraint" destination="Fxg-Wa-Rb9" id="zuW-JC-pWN"/>
                 <outlet property="rightDivider" destination="h8N-aw-5lV" id="9pc-93-BG6"/>
                 <outlet property="sendingIndicator" destination="78h-fZ-7yf" id="GrK-FT-q39"/>
                 <outlet property="timeLabel" destination="ogn-wv-fZy" id="7yt-vi-cSp"/>
