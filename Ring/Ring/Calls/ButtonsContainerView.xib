@@ -139,7 +139,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="gaC-GZ-ftw"/>
-                                <constraint firstAttribute="width" constant="350" id="mIk-2g-tbX"/>
+                                <constraint firstAttribute="width" priority="750" constant="350" id="mIk-2g-tbX"/>
                             </constraints>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxT-mA-1xU">
@@ -166,8 +166,10 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="ZxT-mA-1xU" firstAttribute="top" secondItem="a9g-pf-bHy" secondAttribute="top" constant="10" id="0QU-8q-IjM"/>
+                        <constraint firstItem="RHx-cL-CV5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a9g-pf-bHy" secondAttribute="leading" constant="12.5" id="FwG-sE-gpJ"/>
                         <constraint firstAttribute="height" priority="999" constant="150" id="W6T-0D-HwX"/>
                         <constraint firstAttribute="bottom" secondItem="ZxT-mA-1xU" secondAttribute="bottom" priority="250" constant="30" id="XhM-wC-j2L"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RHx-cL-CV5" secondAttribute="trailing" constant="12.5" id="aud-x3-DAu"/>
                         <constraint firstItem="RHx-cL-CV5" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="bmE-qo-8aJ"/>
                         <constraint firstAttribute="bottom" secondItem="RHx-cL-CV5" secondAttribute="bottom" constant="30" id="deA-Gc-8FZ"/>
                         <constraint firstItem="ZxT-mA-1xU" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="eV9-Wr-xF9"/>
