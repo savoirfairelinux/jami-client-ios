@@ -48,7 +48,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73Y-N1-Yga">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73Y-N1-Yga">
                                 <rect key="frame" x="188" y="308" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -122,6 +122,7 @@
                                                     <constraint firstItem="cgd-Wa-clf" firstAttribute="leading" secondItem="T4r-6x-bEH" secondAttribute="trailing" constant="10" id="f1b-Fu-RU9"/>
                                                     <constraint firstItem="cgd-Wa-clf" firstAttribute="centerY" secondItem="z3c-S7-uGw" secondAttribute="centerY" id="hhM-ww-O86"/>
                                                     <constraint firstAttribute="bottom" secondItem="fac-lR-4on" secondAttribute="bottom" constant="10" id="px3-II-ycz"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cgd-Wa-clf" secondAttribute="trailing" constant="10" id="sWn-1r-rwA"/>
                                                     <constraint firstItem="T4r-6x-bEH" firstAttribute="leading" secondItem="z3c-S7-uGw" secondAttribute="leading" constant="20" id="uwm-g8-FeG"/>
                                                 </constraints>
                                             </view>
