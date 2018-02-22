@@ -122,6 +122,7 @@
                                                     <constraint firstItem="cgd-Wa-clf" firstAttribute="leading" secondItem="T4r-6x-bEH" secondAttribute="trailing" constant="10" id="f1b-Fu-RU9"/>
                                                     <constraint firstItem="cgd-Wa-clf" firstAttribute="centerY" secondItem="z3c-S7-uGw" secondAttribute="centerY" id="hhM-ww-O86"/>
                                                     <constraint firstAttribute="bottom" secondItem="fac-lR-4on" secondAttribute="bottom" constant="10" id="px3-II-ycz"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cgd-Wa-clf" secondAttribute="trailing" constant="10" id="sWn-1r-rwA"/>
                                                     <constraint firstItem="T4r-6x-bEH" firstAttribute="leading" secondItem="z3c-S7-uGw" secondAttribute="leading" constant="20" id="uwm-g8-FeG"/>
                                                 </constraints>
                                             </view>
