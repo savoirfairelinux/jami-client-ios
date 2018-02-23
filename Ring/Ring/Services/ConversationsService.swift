@@ -299,12 +299,15 @@ class ConversationsService {
                         event.addEventInput(.id, value: account.id)
                         event.addEventInput(.uri, value: uri)
                         self.responseStream.onNext(event)
-                    })
-                    .disposed(by: self.disposeBag)
+                    }) { _ in
+                        self.messagesSemaphore.signal()
+                    }.disposed(by: self.disposeBag)
             } else {
                 self.log.warning("messageStatusChanged: Message not found")
                 self.messagesSemaphore.signal()
             }
+        } else {
+            self.messagesSemaphore.signal()
         }
 
         log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(account.id) to: \(uri)")
