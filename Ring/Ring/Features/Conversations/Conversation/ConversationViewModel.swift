@@ -330,7 +330,8 @@ class ConversationViewModel: Stateable, ViewModel {
         blockComplete.asObservable()
             .subscribe(onCompleted: { [weak self] in
                 if let conversation = self?.conversation.value {
-                    self?.conversationsService.deleteConversation(conversation: conversation)
+                    self?.conversationsService.deleteConversation(conversation: conversation,
+                                                                  keepContactInteraction: false)
                 }
             }).disposed(by: self.disposeBag)
     }

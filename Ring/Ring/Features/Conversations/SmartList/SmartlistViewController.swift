@@ -298,7 +298,7 @@ extension SmartlistViewController: UITableViewDelegate {
         }
         block.backgroundColor = .orange
 
-        let delete = UITableViewRowAction(style: .normal, title: "Delete") { _, index in
+        let delete = UITableViewRowAction(style: .normal, title: "Clear") { _, index in
             self.showDeleteConversationConfirmation(atIndex: index)
         }
         delete.backgroundColor = .red

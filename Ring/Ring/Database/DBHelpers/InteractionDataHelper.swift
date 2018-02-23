@@ -289,11 +289,27 @@ final class InteractionDataHelper {
         }
     }
 
-    func deleteInteractionsForConversation(convID: Int64) -> Bool {
+    func deleteAllIntercations(convID: Int64) -> Bool {
         guard let dataBase = RingDB.instance.ringDB else {
             return false
         }
         let query = table.filter(conversationId == convID)
+        do {
+            if try dataBase.run(query.delete()) > 0 {
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
+    }
+
+    func deleteMessageAndCallInteractions(convID: Int64) -> Bool {
+        guard let dataBase = RingDB.instance.ringDB else {
+            return false
+        }
+        let query = table.filter(conversationId == convID && (body != GeneratedMessageType.contactAdded.rawValue))
         do {
             if try dataBase.run(query.delete()) > 0 {
                 return true

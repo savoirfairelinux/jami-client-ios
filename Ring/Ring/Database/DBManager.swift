@@ -231,7 +231,7 @@ class DBManager {
             }
     }
 
-    func removeConversationBetween(accountUri: String, and participantUri: String) -> Completable {
+    func removeConversationBetween(accountUri: String, and participantUri: String, keepAddContactEvent: Bool) -> Completable {
         return Completable.create { [unowned self] completable in
             do {
                 guard let dataBase = RingDB.instance.ringDB else {
@@ -252,18 +252,26 @@ class DBManager {
                             throw DBBridgingError.deleteConversationFailed
                     }
 
-                    let successInteraction = self.interactionHepler
-                        .deleteInteractionsForConversation(convID: conversationsID.first!)
-                    if successInteraction {
-                        let successConversations = self.conversationHelper
-                            .deleteConversations(conversationID: conversationsID.first!)
-                        if successConversations {
+                    if keepAddContactEvent {
+                        let successInteraction = self.interactionHepler
+                            .deleteMessageAndCallInteractions(convID: conversationsID.first!)
+                        if successInteraction {
                             completable(.completed)
+                        }
+                    } else {
+                        let successInteraction = self.interactionHepler
+                            .deleteAllIntercations(convID: conversationsID.first!)
+                        if successInteraction {
+                            let successConversations = self.conversationHelper
+                                .deleteConversations(conversationID: conversationsID.first!)
+                            if successConversations {
+                                completable(.completed)
+                            } else {
+                                completable(.error(DBBridgingError.deleteConversationFailed))
+                            }
                         } else {
                             completable(.error(DBBridgingError.deleteConversationFailed))
                         }
-                    } else {
-                        completable(.error(DBBridgingError.deleteConversationFailed))
                     }
                 }
             } catch {
@@ -271,7 +279,7 @@ class DBManager {
             }
             return Disposables.create { }
 
-            }
+        }
     }
 
     func profileObservable(for profileUri: String, createIfNotExists: Bool) -> Observable<Profile> {
