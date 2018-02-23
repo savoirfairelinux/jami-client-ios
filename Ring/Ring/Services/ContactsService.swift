@@ -118,7 +118,6 @@ class ContactsService {
                                                status: ProfileStatus.trusted)
                 var event = ServiceEvent(withEventType: .contactAdded)
                 event.addEventInput(.accountId, value: account.id)
-                event.addEventInput(.state, value: true)
                 event.addEventInput(.uri, value: contactRequest.ringId)
                 self.responseStream.onNext(event)
                 observable.on(.completed)
@@ -160,7 +159,7 @@ class ContactsService {
                   payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000)
                 }
                 self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: account.id)
-                var event = ServiceEvent(withEventType: .contactRequestSended)
+                var event = ServiceEvent(withEventType: .contactAdded)
                 event.addEventInput(.accountId, value: account.id)
                 event.addEventInput(.uri, value: ringId)
                 self.responseStream.onNext(event)
@@ -208,7 +207,6 @@ class ContactsService {
                         withAccount: account)
             .subscribe( onCompleted: {
                 var event = ServiceEvent(withEventType: .contactAdded)
-                event.addEventInput(.state, value: contact.confirmed)
                 event.addEventInput(.accountId, value: account.id)
                 event.addEventInput(.uri, value: contact.ringId)
                 self.responseStream.onNext(event)
@@ -259,17 +257,11 @@ extension ContactsService: ContactsAdapterDelegate {
         self.removeContactRequest(withRingId: uri)
         // update contact status
         if let contact = self.contact(withRingId: uri) {
+            self.contactStatus.onNext(contact)
             if contact.confirmed != confirmed {
                 contact.confirmed = confirmed
-                self.contactStatus.onNext(contact)
-                if confirmed {
-                    var event = ServiceEvent(withEventType: .contactAdded)
-                    event.addEventInput(.state, value: confirmed)
-                    event.addEventInput(.accountId, value: accountId)
-                    event.addEventInput(.uri, value: uri)
-                    self.responseStream.onNext(event)
-                }
             }
+            self.contactStatus.onNext(contact)
         }
             //sync contacts with daemon contacts
         else {

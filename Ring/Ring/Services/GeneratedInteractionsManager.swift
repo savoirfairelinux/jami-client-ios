@@ -75,17 +75,7 @@ class GeneratedInteractionsManager {
                 switch contactRequestEvent.eventType {
 
                 case ServiceEventType.contactAdded:
-
-                    guard let contactConfirmed: Bool = contactRequestEvent.getEventInput(.state) else {
-                        return
-                    }
-
-                    if !contactConfirmed {
-                        return
-                    }
-                    type = GeneratedMessageType.contactRequestAccepted
-                case ServiceEventType.contactRequestSended:
-                    type = GeneratedMessageType.sendContactRequest
+                    type = GeneratedMessageType.contactAdded
                 case ServiceEventType.contactRequestReceived:
                     type = GeneratedMessageType.receivedContactRequest
                 case ServiceEventType.contactRequestDiscarded:

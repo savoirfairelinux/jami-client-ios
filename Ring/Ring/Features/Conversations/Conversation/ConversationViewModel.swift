@@ -100,8 +100,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
             // invite and block buttons
             if let contact = contact {
-                let showInviteButton = !contact.confirmed && !contact.banned
-                self.inviteButtonIsAvailable.onNext(showInviteButton)
+                self.inviteButtonIsAvailable.onNext(false)
                 self.blockButtonIsAvailable.onNext(!contact.banned)
             }
 
@@ -109,8 +108,7 @@ class ConversationViewModel: Stateable, ViewModel {
                 return cont.ringId == contactRingId
             })
                 .subscribe(onNext: { [unowned self] contact in
-                    let showInviteButton = !contact.confirmed && !contact.banned
-                    self.inviteButtonIsAvailable.onNext(showInviteButton)
+                    self.inviteButtonIsAvailable.onNext(false)
                     let isContact = self.contactsService.contact(withRingId: contact.ringId) != nil && !contact.banned
                     self.blockButtonIsAvailable.onNext(isContact)
                 }).disposed(by: self.disposeBag)
