@@ -23,8 +23,6 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.shared.statusBarStyle = .default
-
         // Bind ViewModel to View
         self.viewModel.skipButtonTitle.asObservable().bind(to: self.skipButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
 
@@ -44,5 +42,10 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
             }
             self.viewModel.proceedWithAccountCreationOrDeviceLink()
         }).disposed(by: self.disposeBag)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
     }
 }

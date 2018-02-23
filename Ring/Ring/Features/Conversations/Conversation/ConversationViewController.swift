@@ -41,8 +41,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.shared.statusBarStyle = .default
-
         self.applyShadow()
 
         self.setupUI()
@@ -58,6 +56,11 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ConversationViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
     }
 
     @objc func dismissKeyboard() {

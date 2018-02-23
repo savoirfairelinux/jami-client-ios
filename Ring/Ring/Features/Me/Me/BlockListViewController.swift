@@ -34,14 +34,15 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.shared.statusBarStyle = .default
-
         self.applyShadow()
         self.navigationItem.title = L10n.Accountpage.blockedContacts
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        UIApplication.shared.statusBarStyle = .default
+
         self.setupTableView()
 
         self.viewModel.contactListNotEmpty

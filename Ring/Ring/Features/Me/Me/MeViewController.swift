@@ -40,8 +40,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.shared.statusBarStyle = .default
-
         self.navigationItem.title = L10n.Global.meTabBarTitle
         self.configureBindings()
         self.applyShadow()
@@ -49,6 +47,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
     }
 
     func configureBindings() {

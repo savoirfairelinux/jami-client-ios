@@ -52,8 +52,6 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.shared.statusBarStyle = .default
-
         // L10n
         self.applyL10n()
 
@@ -65,6 +63,11 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
     }
 
     private func applyL10n() {
