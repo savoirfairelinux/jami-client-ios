@@ -69,6 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        // ignore sigpipe
+        typealias SigHandler = @convention(c) (Int32) -> Void
+        let SIG_IGN = unsafeBitCast(OpaquePointer(bitPattern: 1), to: SigHandler.self)
+        signal(SIGPIPE, SIG_IGN)
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
@@ -93,6 +98,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         // start monitoring for network changes
         self.networkService.monitorNetworkType()
+
+        // Observe connectivity changes and reconnect DHT
+        self.networkService.connectionStateObservable
+            .subscribe(onNext: { _ in
+                self.daemonService.connectivityChanged()
+            })
+            .disposed(by: self.disposeBag)
 
         // set device to headset if present
         self.audioService.overrideAudioRoute(.override)
