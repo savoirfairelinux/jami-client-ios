@@ -33,8 +33,6 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         self.view.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         super.viewDidLoad()
 
-        UIApplication.shared.statusBarStyle = .default
-
         self.showInitialAlert()
 
         self.viewModel.observableState
@@ -53,6 +51,11 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                     break
                 }
             }).disposed(by: self.disposeBag)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
     }
 
     private func showProgress() {

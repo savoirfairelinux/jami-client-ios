@@ -34,8 +34,6 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.shared.statusBarStyle = .default
-
         self.applyL10n()
 
         //bind view model to view
@@ -77,6 +75,11 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         // bind view to view model
         self.pinTextField.rx.text.orEmpty.bind(to: self.viewModel.pin).disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
     }
 
     private func applyL10n() {

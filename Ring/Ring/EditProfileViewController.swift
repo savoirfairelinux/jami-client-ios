@@ -40,6 +40,11 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         self.setupUI()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+
     func setupUI() {
 
         self.model.image.asObservable()

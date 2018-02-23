@@ -38,8 +38,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.shared.statusBarStyle = .default
-
         self.applyShadow()
         self.tableView.rx.modelSelected(ContactRequestItem.self)
             .subscribe({ [unowned self] item in
@@ -52,6 +50,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
         self.setupTableView()
         self.setupBindings()
     }
