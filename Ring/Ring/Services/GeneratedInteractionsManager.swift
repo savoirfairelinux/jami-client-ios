@@ -113,7 +113,7 @@ class GeneratedInteractionsManager {
         if !messagesNotGenerated.isEmpty {
             return
         }
-        self.conversationService.deleteConversation(conversation: conversation)
+        self.conversationService.deleteConversation(conversation: conversation, keepContactInteraction: false)
     }
 
     private func subscribeToCallEvents() {

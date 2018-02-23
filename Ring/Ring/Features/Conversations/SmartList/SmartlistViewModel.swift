@@ -221,7 +221,9 @@ class SmartlistViewModel: Stateable, ViewModel {
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
 
-            self.conversationsService.deleteConversation(conversation: conversationViewModel.conversation.value)
+            self.conversationsService
+                .deleteConversation(conversation: conversationViewModel.conversation.value,
+                                    keepContactInteraction: true)
             self.conversationViewModels.remove(at: index)
         }
     }
@@ -237,7 +239,9 @@ class SmartlistViewModel: Stateable, ViewModel {
                                                                      withAccountId: accountId)
             removeCompleted.asObservable()
                 .subscribe(onCompleted: { [weak self] in
-                    self?.conversationsService.deleteConversation(conversation: conversationViewModel.conversation.value)
+                    self?.conversationsService
+                        .deleteConversation(conversation: conversationViewModel.conversation.value,
+                                            keepContactInteraction: false)
                     self?.conversationViewModels.remove(at: index)
                 }).disposed(by: self.disposeBag)
         }
