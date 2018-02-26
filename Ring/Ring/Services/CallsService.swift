@@ -253,7 +253,7 @@ class CallsService: CallsAdapterDelegate {
                 let accountID = call?.accountId
                 self.sendVCard(callID: callId, accountID: accountID!)
             }
-            
+
             //Emit the call to the observers
             self.currentCall.onNext(call!)
         }
