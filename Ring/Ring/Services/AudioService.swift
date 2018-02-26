@@ -27,7 +27,6 @@ enum OutputPortType: Int {
     case bluetooth      = 1
     case headphones     = 2
     case receiver       = 3
-    case dummy          = 4
 }
 
 class AudioService {
@@ -54,6 +53,18 @@ class AudioService {
             object: nil)
     }
 
+    func startAVAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord,
+                                                            with: AVAudioSessionCategoryOptions.allowBluetooth)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            log.error("\(error)")
+        }
+        setToRing()
+    }
+
+    // swiftlint:disable force_cast
     @objc private func audioRouteChangeListener(_ notification: Notification) {
         let reasonRaw = notification.userInfo![AVAudioSessionRouteChangeReasonKey] as! UInt
         self.log.debug("Audio route change: \(reasonRaw)")
@@ -62,12 +73,13 @@ class AudioService {
         }
         overrideAudioRoute(reason)
     }
+    // swiftlint:enable force_cast
 
     func overrideAudioRoute(_ reason: AVAudioSessionRouteChangeReason) {
         let wasHeadsetConnected = isHeadsetConnected.value
         let bluetoothConnected = bluetoothAudioConnected()
         let headphonesConnected = headphoneAudioConnected()
-        self.log.debug("Audio route status: bluetooth: \(bluetoothConnected), headphones: \(headphonesConnected)")
+        self.log.debug("Audio route override - reason: \(reason.rawValue), status: bluetooth: \(bluetoothConnected), headphones: \(headphonesConnected)")
         isHeadsetConnected.value = bluetoothConnected || headphonesConnected
         if reason == .override && !isHeadsetConnected.value {
             setAudioOutputDevice(port: OutputPortType.builtinspk)
@@ -80,10 +92,6 @@ class AudioService {
                 let outputPort = isOutputToSpeaker.value ? OutputPortType.builtinspk : OutputPortType.receiver
                 setAudioOutputDevice(port: outputPort)
             }
-        } else if reason == .categoryChange && (isHeadsetConnected.value || !isOutputToSpeaker.value) {
-            // Hack switch to dummy device for first call using bluetooth/headset/receiver
-            // allowing the samplerate for the input bus to be correctly set
-            setAudioOutputDevice(port: OutputPortType.dummy)
         }
     }
 
@@ -95,6 +103,12 @@ class AudioService {
             overrideToReceiver()
         } else {
             overrideToSpeaker()
+        }
+    }
+
+    func setToRing() {
+        if !isHeadsetConnected.value {
+            setAudioOutputDevice(port: OutputPortType.builtinspk)
         }
     }
 

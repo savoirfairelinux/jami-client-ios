@@ -293,6 +293,9 @@ class CallViewModel: Stateable, ViewModel {
         }
         self.callService.hangUp(callId: call.callId)
             .subscribe(onCompleted: { [weak self] in
+                // switch to either spk or headset (if connected) for loud ringtone
+                // incase we were using rcv during the call
+                self?.audioService.setToRing()
                 self?.log.info("Call canceled")
                 }, onError: { [weak self] error in
                     self?.log.error("Failed to cancel the call")
@@ -300,6 +303,10 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     func answerCall() -> Completable {
+        // switch to rcv if that's what we were last using
+        if !self.audioService.isHeadsetConnected.value && !self.audioService.isOutputToSpeaker.value {
+            self.audioService.overrideToReceiver()
+        }
         return self.callService.accept(call: call)
     }
 
@@ -308,10 +315,9 @@ class CallViewModel: Stateable, ViewModel {
         guard let account = self.accountService.currentAccount else {
             return
         }
-        if isAudioOnly {
+        // switch to rcv if audio only and no headset connected
+        if isAudioOnly && !self.audioService.isHeadsetConnected.value {
             self.audioService.overrideToReceiver()
-        } else {
-            self.audioService.overrideToSpeaker()
         }
         self.callService.placeCall(withAccount: account,
                                    toRingId: uri,

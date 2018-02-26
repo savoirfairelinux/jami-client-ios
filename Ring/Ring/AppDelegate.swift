@@ -89,6 +89,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
 
+        // sets output device to whatever is currently available (either spk / headset)
+        self.audioService.startAVAudioSession()
+
         // disables hardware decoding
         self.videoService.setDecodingAccelerated(withState: false)
 
@@ -105,9 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.daemonService.connectivityChanged()
             })
             .disposed(by: self.disposeBag)
-
-        // set device to headset if present
-        self.audioService.overrideAudioRoute(.override)
 
         // themetize the app
         Chameleon.setGlobalThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
