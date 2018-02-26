@@ -308,11 +308,11 @@ class CallViewModel: Stateable, ViewModel {
         guard let account = self.accountService.currentAccount else {
             return
         }
-        if isAudioOnly {
-            self.audioService.overrideToReceiver()
-        } else {
-            self.audioService.overrideToSpeaker()
-        }
+//        if isAudioOnly {
+//            self.audioService.overrideToReceiver()
+//        } else {
+//            self.audioService.overrideToSpeaker()
+//        }
         self.callService.placeCall(withAccount: account,
                                    toRingId: uri,
                                    userName: userName,

@@ -46,6 +46,14 @@ class AudioService {
     init(withAudioAdapter audioAdapter: AudioAdapter) {
         self.audioAdapter = audioAdapter
 
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord,
+                                                            with: AVAudioSessionCategoryOptions.allowBluetooth)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            log.error("\(error)")
+        }
+
         // Listen for audio route changes
         NotificationCenter.default.addObserver(
             self,
@@ -70,7 +78,7 @@ class AudioService {
         self.log.debug("Audio route status: bluetooth: \(bluetoothConnected), headphones: \(headphonesConnected)")
         isHeadsetConnected.value = bluetoothConnected || headphonesConnected
         if reason == .override && !isHeadsetConnected.value {
-            setAudioOutputDevice(port: OutputPortType.builtinspk)
+            //setAudioOutputDevice(port: OutputPortType.builtinspk)
         } else if wasHeadsetConnected != isHeadsetConnected.value {
             if bluetoothConnected {
                 setAudioOutputDevice(port: OutputPortType.bluetooth)
