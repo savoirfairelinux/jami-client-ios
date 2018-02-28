@@ -21,15 +21,9 @@
 import Foundation
 import RxSwift
 
-/// Represents Conversations navigation state
-///
-/// - conversationDetail: user want to see a conversation detail
-enum ConversationsState: State {
-    case conversationDetail(conversationViewModel: ConversationViewModel)
-}
 
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
-class ConversationsCoordinator: Coordinator, StateableResponsive, CallMakeable {
+class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
 
     var rootViewController: UIViewController {
         return self.navigationViewController
@@ -55,14 +49,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, CallMakeable {
         }).subscribe(onNext: { (call) in
              self.showCallAlert(call: call)
         }).disposed(by: self.disposeBag)
-
-        self.stateSubject.subscribe(onNext: { [unowned self] (state) in
-            guard let state = state as? ConversationsState else { return }
-            switch state {
-            case .conversationDetail (let conversationViewModel):
-                self.showConversation(withConversationViewModel: conversationViewModel)
-            }
-        }).disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
         NotificationCenter.default.addObserver(self, selector: #selector(self.incomingCall(_:)), name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue), object: nil)
@@ -79,12 +65,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, CallMakeable {
     func start () {
         let smartListViewController = SmartlistViewController.instantiate(with: self.injectionBag)
         self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
-    }
-
-    private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
-        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
-        conversationViewController.viewModel = conversationViewModel
-        self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true, withStateable: conversationViewController.viewModel)
     }
 
      func answerIncomingCall(call: CallModel) {

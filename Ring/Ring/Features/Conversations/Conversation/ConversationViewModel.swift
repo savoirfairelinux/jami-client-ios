@@ -99,9 +99,8 @@ class ConversationViewModel: Stateable, ViewModel {
                 .disposed(by: self.disposeBag)
 
             // invite and block buttons
-            if let contact = contact {
+            if let _ = contact {
                 self.inviteButtonIsAvailable.onNext(false)
-                self.blockButtonIsAvailable.onNext(!contact.banned)
             }
 
             self.contactsService.contactStatus.filter({ cont in
@@ -109,8 +108,6 @@ class ConversationViewModel: Stateable, ViewModel {
             })
                 .subscribe(onNext: { [unowned self] contact in
                     self.inviteButtonIsAvailable.onNext(false)
-                    let isContact = self.contactsService.contact(withRingId: contact.ringId) != nil && !contact.banned
-                    self.blockButtonIsAvailable.onNext(isContact)
                 }).disposed(by: self.disposeBag)
 
             // subscribe to presence updates for the conversation's associated contact
@@ -183,8 +180,6 @@ class ConversationViewModel: Stateable, ViewModel {
     var profileImageData = Variable<Data?>(nil)
 
     var inviteButtonIsAvailable = BehaviorSubject(value: true)
-
-    var blockButtonIsAvailable = BehaviorSubject(value: false)
 
     var contactPresence = Variable<Bool>(false)
 
@@ -352,13 +347,17 @@ class ConversationViewModel: Stateable, ViewModel {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
-        self.stateSubject.onNext(PlaceCallState.startCall(contactRingId: self.conversation.value.recipientRingId, userName: self.userName.value))
+        self.stateSubject.onNext(ConversationState.startCall(contactRingId: self.conversation.value.recipientRingId, userName: self.userName.value))
     }
 
     func startAudioCall() {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
-        self.stateSubject.onNext(PlaceCallState.startAudioCall(contactRingId: self.conversation.value.recipientRingId, userName: self.userName.value))
+        self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: self.conversation.value.recipientRingId, userName: self.userName.value))
+    }
+
+    func showContactInfo() {
+        self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
     }
 }
