@@ -110,6 +110,11 @@
 		0E3697A1203235EA009A68CA /* BannedContactItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3697A0203235EA009A68CA /* BannedContactItem.swift */; };
 		0E3697A8203243D3009A68CA /* BannedContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3697A6203243D3009A68CA /* BannedContactCell.swift */; };
 		0E3697A9203243D3009A68CA /* BannedContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E3697A7203243D3009A68CA /* BannedContactCell.xib */; };
+		0E3BD4242044776300A50DDF /* ContactViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E3BD4232044776300A50DDF /* ContactViewController.storyboard */; };
+		0E3BD4262044778100A50DDF /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BD4252044778100A50DDF /* ContactViewModel.swift */; };
+		0E3BD4282044784000A50DDF /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BD4272044784000A50DDF /* ContactViewController.swift */; };
+		0E3BD4322044A41D00A50DDF /* GSKStretchyHeaderView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3BD4312044A41D00A50DDF /* GSKStretchyHeaderView.framework */; };
+		0E3BD4362044B39F00A50DDF /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BD4352044B39F00A50DDF /* ProfileHeaderView.swift */; };
 		0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */; };
 		0E403F831F7D79B000C80BC2 /* MessageCellGenerated.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */; };
 		0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */; };
@@ -122,8 +127,9 @@
 		0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E4909741FEAC943005CAA50 /* CallViewController.storyboard */; };
 		0E49097A1FEAC9E1005CAA50 /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4909791FEAC9E1005CAA50 /* CallViewController.swift */; };
 		0E49097C1FEACA4B005CAA50 /* CallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */; };
-		0E68571120238546008B0717 /* CallMakeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E68571020238546008B0717 /* CallMakeable.swift */; };
+		0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E68571020238546008B0717 /* ConversationNavigation.swift */; };
 		0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6949781FA7E71C0029B60A /* BaseViewController.swift */; };
+		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
 		0E7CF4DB20164B6700CD967D /* ButtonsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DA20164B6700CD967D /* ButtonsContainerView.swift */; };
 		0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */; };
 		0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DE2017918300CD967D /* ButtonsContainerView.xib */; };
@@ -391,6 +397,11 @@
 		0E3697A0203235EA009A68CA /* BannedContactItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannedContactItem.swift; sourceTree = "<group>"; };
 		0E3697A6203243D3009A68CA /* BannedContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannedContactCell.swift; sourceTree = "<group>"; };
 		0E3697A7203243D3009A68CA /* BannedContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannedContactCell.xib; sourceTree = "<group>"; };
+		0E3BD4232044776300A50DDF /* ContactViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactViewController.storyboard; sourceTree = "<group>"; };
+		0E3BD4252044778100A50DDF /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
+		0E3BD4272044784000A50DDF /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		0E3BD4312044A41D00A50DDF /* GSKStretchyHeaderView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GSKStretchyHeaderView.framework; path = Carthage/Build/iOS/GSKStretchyHeaderView.framework; sourceTree = "<group>"; };
+		0E3BD4352044B39F00A50DDF /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellGenerated.swift; sourceTree = "<group>"; };
 		0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellGenerated.xib; sourceTree = "<group>"; };
 		0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
@@ -405,8 +416,9 @@
 		0E4909791FEAC9E1005CAA50 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
 		0E63F1F3202907090001F248 /* Ring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ring.entitlements; sourceTree = "<group>"; };
-		0E68571020238546008B0717 /* CallMakeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallMakeable.swift; sourceTree = "<group>"; };
+		0E68571020238546008B0717 /* ConversationNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNavigation.swift; sourceTree = "<group>"; };
 		0E6949781FA7E71C0029B60A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		0E72374920460320006B0C7D /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		0E7CF4DA20164B6700CD967D /* ButtonsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsContainerView.swift; sourceTree = "<group>"; };
 		0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsContainerViewModel.swift; sourceTree = "<group>"; };
 		0E7CF4DE2017918300CD967D /* ButtonsContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonsContainerView.xib; sourceTree = "<group>"; };
@@ -616,6 +628,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E3BD4322044A41D00A50DDF /* GSKStretchyHeaderView.framework in Frameworks */,
 				0E4909611FE97A94005CAA50 /* ActiveLabel.framework in Frameworks */,
 				0E0FF1A71FC38070003898C2 /* SQLite.framework in Frameworks */,
 				5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */,
@@ -728,6 +741,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E3BD4312044A41D00A50DDF /* GSKStretchyHeaderView.framework */,
 				0E4909601FE97A94005CAA50 /* ActiveLabel.framework */,
 				0E0FF1A61FC38070003898C2 /* SQLite.framework */,
 				5C093F001FB495830011D90E /* Differentiator.framework */,
@@ -1033,6 +1047,18 @@
 			name = BlockList;
 			sourceTree = "<group>";
 		};
+		0E3BD4222044770000A50DDF /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				0E3BD4232044776300A50DDF /* ContactViewController.storyboard */,
+				0E3BD4252044778100A50DDF /* ContactViewModel.swift */,
+				0E3BD4272044784000A50DDF /* ContactViewController.swift */,
+				0E3BD4352044B39F00A50DDF /* ProfileHeaderView.swift */,
+				0E72374920460320006B0C7D /* ProfileHeaderView.xib */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
 		0E44B62D202B9DC40060F71B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1117,6 +1143,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				0E3BD4222044770000A50DDF /* Contact */,
 				5CE66F721FBF765D00EE9291 /* InitialLoading */,
 				0E4909711FEAC822005CAA50 /* Calls */,
 				0E9D84471FA7D9EC00C561EB /* TabBar */,
@@ -1198,7 +1225,7 @@
 				1A2041791F1E547F00C08435 /* Stateable.swift */,
 				1A20418C1F1EABCC00C08435 /* StateableResponsive.swift */,
 				1A20418E1F1EAC0E00C08435 /* Coordinator.swift */,
-				0E68571020238546008B0717 /* CallMakeable.swift */,
+				0E68571020238546008B0717 /* ConversationNavigation.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1596,6 +1623,7 @@
 				0EBCAA4E202E60F000E2A545 /* default.wav in Resources */,
 				1A2D18E61F29197100B2C785 /* MessageAccessoryView.xib in Resources */,
 				1A2D18F81F292D7200B2C785 /* MessageCellSent.xib in Resources */,
+				0E3BD4242044776300A50DDF /* ContactViewController.storyboard in Resources */,
 				1A2D18F61F292D7200B2C785 /* MessageCellReceived.xib in Resources */,
 				0ED2B6FA1F96A075001572F0 /* LinkNewDeviceViewController.storyboard in Resources */,
 				1A2D18EF1F291A0100B2C785 /* MeDetailViewController.storyboard in Resources */,
@@ -1615,6 +1643,7 @@
 				1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
+				0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */,
 				0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */,
 				1A2D18B31F2915C500B2C785 /* ConversationViewController.storyboard in Resources */,
 				0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */,
@@ -1662,6 +1691,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ActiveLabel.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/GSKStretchyHeaderView.framework",
 			);
 			name = "⚙️ Copy Frameworks";
 			outputPaths = (
@@ -1678,7 +1708,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AMPopTip.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SQLite.framework",
-				"(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ActiveLabel.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ActiveLabel.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/GSKStretchyHeaderView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1741,7 +1772,7 @@
 				0E3697A8203243D3009A68CA /* BannedContactCell.swift in Sources */,
 				1A2D18F71F292D7200B2C785 /* MessageCellSent.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
-				0E68571120238546008B0717 /* CallMakeable.swift in Sources */,
+				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
 				0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */,
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
@@ -1761,10 +1792,12 @@
 				1A5DC0241F3564360075E8EF /* ContactRequestModel.swift in Sources */,
 				0E4909701FEAC1C6005CAA50 /* CallModel.swift in Sources */,
 				1A5DC03F1F35678D0075E8EF /* ContactRequestsViewController.swift in Sources */,
+				0E3BD4282044784000A50DDF /* ContactViewController.swift in Sources */,
 				62006E04203F4DD6003C3197 /* UITextField+Helpers.swift in Sources */,
 				1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */,
 				1A5DC01E1F355DA70075E8EF /* ContactsAdapterDelegate.swift in Sources */,
 				0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */,
+				0E3BD4362044B39F00A50DDF /* ProfileHeaderView.swift in Sources */,
 				1A20418D1F1EABCC00C08435 /* StateableResponsive.swift in Sources */,
 				1A0C4EE51F1D67DF00550433 /* WalkthroughCoordinator.swift in Sources */,
 				1A2D18DD1F29192D00B2C785 /* MessableBubble.swift in Sources */,
@@ -1804,6 +1837,7 @@
 				0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */,
 				1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
+				0E3BD4262044778100A50DDF /* ContactViewModel.swift in Sources */,
 				564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */,
 				0E36979920322D46009A68CA /* BlockListViewController.swift in Sources */,
 				1A2D18AA1F29131900B2C785 /* ConversationsCoordinator.swift in Sources */,

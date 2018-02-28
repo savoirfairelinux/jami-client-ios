@@ -135,9 +135,17 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         unlabel.textColor = UIColor.ringMain
         unlabel.textAlignment = .left
         titleView.addSubview(unlabel)
+        let tapGesture = UITapGestureRecognizer()
+        titleView.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event.bind(onNext: { _ in
+            self.contactTapped()
+        }).disposed(by: disposeBag)
 
         self.navigationItem.titleView = titleView
+    }
 
+    func contactTapped() {
+        self.viewModel.showContactInfo()
     }
 
     func setupUI() {

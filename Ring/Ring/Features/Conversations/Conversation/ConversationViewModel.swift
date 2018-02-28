@@ -352,13 +352,17 @@ class ConversationViewModel: Stateable, ViewModel {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
-        self.stateSubject.onNext(PlaceCallState.startCall(contactRingId: self.conversation.value.recipientRingId, userName: self.userName.value))
+        self.stateSubject.onNext(ConversationState.startCall(contactRingId: self.conversation.value.recipientRingId, userName: self.userName.value))
     }
 
     func startAudioCall() {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
-        self.stateSubject.onNext(PlaceCallState.startAudioCall(contactRingId: self.conversation.value.recipientRingId, userName: self.userName.value))
+        self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: self.conversation.value.recipientRingId, userName: self.userName.value))
+    }
+
+    func showContactInfo() {
+        self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
     }
 }
