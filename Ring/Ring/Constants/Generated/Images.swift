@@ -54,6 +54,7 @@ enum Asset {
   static let backgroundRing = ImageAsset(name: "background_ring")
   static let blockIcon = ImageAsset(name: "block_icon")
   static let callButton = ImageAsset(name: "call_button")
+  static let clearConversation = ImageAsset(name: "clear_conversation")
   static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   static let conversationIcon = ImageAsset(name: "conversation_icon")
   static let device = ImageAsset(name: "device")
@@ -85,6 +86,7 @@ enum Asset {
     backgroundRing,
     blockIcon,
     callButton,
+    clearConversation,
     contactRequestIcon,
     conversationIcon,
     device,
