@@ -65,6 +65,11 @@ enum StoryboardScene {
 
     static let initialScene = InitialSceneType<Ring.ContactRequestsViewController>(storyboard: ContactRequestsViewController.self)
   }
+  enum ContactViewController: StoryboardType {
+    static let storyboardName = "ContactViewController"
+
+    static let initialScene = InitialSceneType<Ring.ContactViewController>(storyboard: ContactViewController.self)
+  }
   enum ConversationViewController: StoryboardType {
     static let storyboardName = "ConversationViewController"
 

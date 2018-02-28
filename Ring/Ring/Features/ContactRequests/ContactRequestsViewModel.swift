@@ -133,6 +133,6 @@ class ContactRequestsViewModel: Stateable, ViewModel {
             return
         }
         conversationViewModel.conversation = Variable<ConversationModel>(conversation)
-        self.stateSubject.onNext(ConversationsState.conversationDetail(conversationViewModel: conversationViewModel))
+        self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversationViewModel))
     }
 }

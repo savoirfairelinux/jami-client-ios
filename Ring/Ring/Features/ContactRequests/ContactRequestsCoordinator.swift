@@ -22,7 +22,7 @@ import Foundation
 import RxSwift
 
 /// This Coordinator drives the Contact Requests navigation
-class ContactRequestsCoordinator: Coordinator, StateableResponsive, CallMakeable {
+class ContactRequestsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
 
     var rootViewController: UIViewController {
         return self.navigationViewController
@@ -41,24 +41,11 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive, CallMakeable
         self.injectionBag = injectionBag
         self.contactService = injectionBag.contactsService
         self.navigationViewController.viewModel = ContactRequestTabBarItem(with: self.injectionBag)
-        self.stateSubject.subscribe(onNext: { [unowned self] (state) in
-            guard let state = state as? ConversationsState else { return }
-            switch state {
-            case .conversationDetail (let conversationViewModel):
-                self.showConversation(withConversationViewModel: conversationViewModel)
-            }
-        }).disposed(by: self.disposeBag)
         self.callbackPlaceCall()
     }
 
     func start () {
         let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
         self.present(viewController: contactRequestsViewController, withStyle: .show, withAnimation: true, withStateable: contactRequestsViewController.viewModel)
-    }
-
-    private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
-        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
-        conversationViewController.viewModel = conversationViewModel
-        self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true, withStateable: conversationViewController.viewModel)
     }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ProfileHeaderView" customModule="Ring" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O5s-f8-qTg">
+                    <rect key="frame" x="137" y="80" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="3zC-80-Zmb"/>
+                        <constraint firstAttribute="height" constant="100" id="tVC-6H-lWE"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXf-5b-Ea7">
+                    <rect key="frame" x="20" y="195" width="335" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXO-IT-XHT">
+                    <rect key="frame" x="20" y="205" width="335" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="O5s-f8-qTg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DrZ-le-vAP"/>
+                <constraint firstItem="O5s-f8-qTg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GeL-iJ-goM"/>
+                <constraint firstItem="RXO-IT-XHT" firstAttribute="top" secondItem="pXf-5b-Ea7" secondAttribute="bottom" constant="10" id="IQr-ZG-aeF"/>
+                <constraint firstItem="RXO-IT-XHT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Q3W-wd-Qr3"/>
+                <constraint firstItem="pXf-5b-Ea7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="S6G-4F-ywE"/>
+                <constraint firstItem="pXf-5b-Ea7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="a7d-QP-Vxc"/>
+                <constraint firstItem="RXO-IT-XHT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="g81-XI-CHg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pXf-5b-Ea7" secondAttribute="trailing" constant="20" id="gZI-4j-xO3"/>
+                <constraint firstItem="pXf-5b-Ea7" firstAttribute="top" secondItem="O5s-f8-qTg" secondAttribute="bottom" constant="15" id="qA9-se-9Xj"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="RXO-IT-XHT" secondAttribute="trailing" constant="20" id="yp2-PI-gHb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="maximumContentHeight">
+                    <real key="value" value="260"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="avatarView" destination="O5s-f8-qTg" id="37V-MG-dre"/>
+                <outlet property="displayName" destination="pXf-5b-Ea7" id="XwT-cN-xyc"/>
+                <outlet property="userName" destination="RXO-IT-XHT" id="tuJ-tQ-OQZ"/>
+            </connections>
+        </view>
+    </objects>
+</document>

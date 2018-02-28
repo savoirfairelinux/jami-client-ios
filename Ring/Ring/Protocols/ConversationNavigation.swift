@@ -20,29 +20,47 @@
 
 import RxSwift
 
-enum PlaceCallState: State {
+enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
     case startAudioCall(contactRingId: String, userName: String)
+    case conversationDetail(conversationViewModel: ConversationViewModel)
+    case contactDetail(conversationViewModel: ConversationModel)
 }
 
-protocol CallMakeable: class {
+protocol ConversationNavigation: class {
 
     var injectionBag: InjectionBag { get }
 }
 
-extension CallMakeable where Self: Coordinator, Self: StateableResponsive {
+extension ConversationNavigation where Self: Coordinator, Self: StateableResponsive {
 
-     func callbackPlaceCall() {
+    func callbackPlaceCall() {
         self.stateSubject.subscribe(onNext: { [unowned self] (state) in
-            guard let state = state as? PlaceCallState else { return }
+            guard let state = state as? ConversationState else { return }
             switch state {
             case .startCall(let contactRingId, let name):
                 self.startOutgoingCall(contactRingId: contactRingId, userName: name)
             case .startAudioCall(let contactRingId, let name):
                 self.startOutgoingCall(contactRingId: contactRingId, userName: name, isAudioOnly: true)
+            case .conversationDetail (let conversationViewModel):
+                self.showConversation(withConversationViewModel: conversationViewModel)
+            case .contactDetail(let conversationModel):
+                self.presentContactInfo(conversation: conversationModel)
             }
         }).disposed(by: self.disposeBag)
 
+    }
+
+    func presentContactInfo(conversation: ConversationModel) {
+        let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
+        contactViewController.viewModel.conversation = conversation
+        self.present(viewController: contactViewController, withStyle: .show, withAnimation: true, withStateable: contactViewController.viewModel)
+    }
+
+    private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
+        conversationViewController.viewModel = conversationViewModel
+        self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true, withStateable: conversationViewController.viewModel)
     }
 
     func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
