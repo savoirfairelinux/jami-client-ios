@@ -49,7 +49,7 @@ class AvatarView: UIView {
                 circle.backgroundColor = fbaBGColor
                 circle.clipsToBounds = true
                 self.addSubview(circle)
-                if !username.isSHA1() {
+                if !username.isSHA1() && !username.isEmpty {
                     // use g-style fallback avatar
                     let initialLabel: UILabel = UILabel.init(frame: CGRect.init(x: offset.x, y: offset.y, width: size, height: size))
                     initialLabel.center = circle.center
