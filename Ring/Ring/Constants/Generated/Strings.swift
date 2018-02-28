@@ -53,6 +53,8 @@ enum L10n {
     static let confirmBlockContactTitle = L10n.tr("Localizable", "alerts.confirmBlockContactTitle")
     /// Are you sure you want to delete this conversation permanently?
     static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation")
+    /// Are you sure you want to delete the conversation with this contact?
+    static let confirmDeleteConversationFromContact = L10n.tr("Localizable", "alerts.confirmDeleteConversationFromContact")
     /// Delete Conversation
     static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle")
     /// Please close application and try to open it again
@@ -84,6 +86,19 @@ enum L10n {
     static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo")
     /// Unknown
     static let unknown = L10n.tr("Localizable", "calls.unknown")
+  }
+
+  enum Contactpage {
+    /// Block Contact
+    static let blockContact = L10n.tr("Localizable", "contactPage.blockContact")
+    /// Clear Chat
+    static let clearConversation = L10n.tr("Localizable", "contactPage.clearConversation")
+    /// Send Message
+    static let sendMessage = L10n.tr("Localizable", "contactPage.sendMessage")
+    /// Start Audio Call
+    static let startAudioCall = L10n.tr("Localizable", "contactPage.startAudioCall")
+    /// Start Video Call
+    static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall")
   }
 
   enum Createaccount {
