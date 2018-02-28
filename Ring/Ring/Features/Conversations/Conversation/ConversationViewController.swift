@@ -58,6 +58,10 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         view.addGestureRecognizer(tap)
     }
 
+    deinit {
+        print("conversationcontrollerdestroyed")
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
@@ -135,9 +139,17 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         unlabel.textColor = UIColor.ringMain
         unlabel.textAlignment = .left
         titleView.addSubview(unlabel)
+        let tapGesture = UITapGestureRecognizer()
+        titleView.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event.bind(onNext: { [weak self] _ in
+            self?.contactTapped()
+        }).disposed(by: disposeBag)
 
         self.navigationItem.titleView = titleView
+    }
 
+    func contactTapped() {
+        self.viewModel.showContactInfo()
     }
 
     func setupUI() {
@@ -202,31 +214,18 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                 self.placeCall()
             }).disposed(by: self.disposeBag)
 
-        //block contact button
-        let blockItem = UIBarButtonItem()
-        blockItem.image = UIImage(named: "block_icon")
-        blockItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.blockItemTapped()
-            }).disposed(by: self.disposeBag)
-
         // Items are from right to left
-        self.navigationItem.rightBarButtonItems = [blockItem, videoCallItem, audioCallItem, inviteItem]
+        self.navigationItem.rightBarButtonItems = [videoCallItem, audioCallItem, inviteItem]
 
-        Observable<[UIBarButtonItem]>
-            .combineLatest(self.viewModel.inviteButtonIsAvailable.asObservable(),
-                           self.viewModel.blockButtonIsAvailable.asObservable(),
-                           resultSelector: { inviteButton, blockButton in
-                            var buttons = [UIBarButtonItem]()
-                            if blockButton {
-                                buttons.append(blockItem)
-                            }
-                            buttons.append(videoCallItem)
-                            buttons.append(audioCallItem)
-                            if inviteButton {
-                                buttons.append(inviteItem)
-                            }
-                            return buttons
+        self.viewModel.inviteButtonIsAvailable
+            .asObservable().map({ inviteButton in
+                var buttons = [UIBarButtonItem]()
+                buttons.append(videoCallItem)
+                buttons.append(audioCallItem)
+                if inviteButton {
+                    buttons.append(inviteItem)
+                }
+                return buttons
             })
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] buttons in
@@ -236,17 +235,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
     func inviteItemTapped() {
        self.viewModel?.sendContactRequest()
-    }
-
-    func blockItemTapped() {
-        let alert = UIAlertController(title: L10n.Alerts.confirmBlockContactTitle, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
-        let blockAction = UIAlertAction(title: L10n.Actions.blockAction, style: .destructive) { (_: UIAlertAction!) -> Void in
-            self.viewModel.block()
-        }
-        let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction, style: .default) { (_: UIAlertAction!) -> Void in }
-        alert.addAction(blockAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
     }
 
     func placeCall() {
@@ -259,6 +247,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.messageAccessoryView.messageTextField.becomeFirstResponder()
 
         self.scrollToBottom(animated: false)
         self.textFieldShouldEndEditing = false

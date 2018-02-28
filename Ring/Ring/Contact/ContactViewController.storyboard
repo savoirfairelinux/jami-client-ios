@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4oO-a5-k5Y">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Contact View Controller-->
+        <scene sceneID="ufa-hq-gXE">
+            <objects>
+                <viewController id="4oO-a5-k5Y" customClass="ContactViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l1v-RV-Jo2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cjc-Dl-AsW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="ProfileInfoCell" rowHeight="60" id="fHK-Bg-4wI">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fHK-Bg-4wI" id="Eoe-sh-EbE">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CcM-C0-9Qc">
+                                                    <rect key="frame" x="0.0" y="59" width="375" height="1"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Wce-19-zkv"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="CcM-C0-9Qc" firstAttribute="leading" secondItem="fHK-Bg-4wI" secondAttribute="leading" id="5vW-Qy-CMV"/>
+                                            <constraint firstAttribute="bottom" secondItem="CcM-C0-9Qc" secondAttribute="bottom" id="ED4-rl-PxK"/>
+                                            <constraint firstAttribute="trailing" secondItem="CcM-C0-9Qc" secondAttribute="trailing" id="XB6-gd-kTb"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Cjc-Dl-AsW" firstAttribute="top" secondItem="l1v-RV-Jo2" secondAttribute="top" id="FCK-2Z-zav"/>
+                            <constraint firstItem="Cjc-Dl-AsW" firstAttribute="leading" secondItem="cTQ-BN-ANe" secondAttribute="leading" id="JuN-WT-uvv"/>
+                            <constraint firstItem="cTQ-BN-ANe" firstAttribute="trailing" secondItem="Cjc-Dl-AsW" secondAttribute="trailing" id="PIn-ZO-UAi"/>
+                            <constraint firstItem="Cjc-Dl-AsW" firstAttribute="bottom" secondItem="cTQ-BN-ANe" secondAttribute="bottom" id="YSy-1B-Cde"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cTQ-BN-ANe"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Cjc-Dl-AsW" id="NB3-A4-6sy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T10-Oq-bRM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="-87.706146926536732"/>
+        </scene>
+    </scenes>
+</document>
