@@ -22,8 +22,9 @@ import UIKit
 import RxSwift
 import Reusable
 import SwiftyBeaver
+import MobileCoreServices
 
-class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
+class ConversationViewController: UIViewController, UITextFieldDelegate, UIDocumentPickerDelegate, StoryboardBased, ViewModelBased {
 
     let log = SwiftyBeaver.self
 
@@ -65,6 +66,10 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+    }
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        // you get from the urls parameter the urls from the files selected
     }
 
     @objc func dismissKeyboard() {
