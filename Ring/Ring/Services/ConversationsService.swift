@@ -39,6 +39,8 @@ class ConversationsService {
 
     var messagesSemaphore = DispatchSemaphore(value: 1)
 
+    var dataTransferMessageMap = [UInt64: Int64]()
+
     lazy var conversationsForCurrentAccount: Observable<[ConversationModel]> = {
         return self.conversations.asObservable()
     }()
@@ -189,7 +191,6 @@ class ConversationsService {
             .first
     }
 
-    // swiftlint:enable function_parameter_count
     func generateMessage(messageContent: String,
                          contactRingId: String,
                          accountRingId: String,
@@ -216,6 +217,44 @@ class ConversationsService {
             }).disposed(by: self.disposeBag)
     }
 
+    func generateDataTransferMessage(transferId: UInt64,
+                                     transferInfo: NSDataTransferInfo,
+                                     accountRingId: String,
+                                     accountId: String) {
+
+        let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: transferInfo.totalSize, countStyle: .file)
+        let messageContent = transferInfo.displayName + "\n" + fileSizeWithUnit
+        let isIncoming = transferInfo.flags == 1
+        let interactionType: InteractionType = isIncoming ? .iTransfer : .oTransfer
+        let date = Date()
+        let contactRingId = transferInfo.peer!
+
+        let id = Int64(arc4random_uniform(10000000))
+        let message = MessageModel(withId: String(id), receivedDate: date, content: messageContent, author: accountRingId, incoming: isIncoming)
+        self.log.warning("dataTransferMessageMap: \(transferId) : \(id)")
+        dataTransferMessageMap[transferId] = id
+        message.transferStatus = isIncoming ? .awaiting : .created
+        message.isGenerated = false
+        message.isTransfer = true
+
+        self.messagesSemaphore.wait()
+        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: isIncoming, interactionType: interactionType)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(onCompleted: { [unowned self] in
+                self.dbManager.getConversationsObservable(for: accountId, accountURI: accountRingId)
+                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                    .subscribe(onNext: { conversationsModels in
+                        self.conversations.value = conversationsModels
+                        self.messagesSemaphore.signal()
+                        // event ?
+                    })
+                    .disposed(by: (self.disposeBag))
+                }, onError: { _ in
+                    self.messagesSemaphore.signal()
+            })
+            .disposed(by: self.disposeBag)
+    }
+
     func status(forMessageId messageId: String) -> MessageStatus {
         return self.messageAdapter.status(forMessageId: UInt64(messageId)!)
     }
@@ -224,9 +263,9 @@ class ConversationsService {
 
         return Completable.create(subscribe: { [unowned self] completable in
 
-            //Filter unread messages
+            //Filter out read, outgoing, and transfer messages
             let unreadMessages = conversation.messages.filter({ messages in
-                return messages.status != .read && messages.incoming
+                return messages.status != .read && messages.incoming && !messages.isTransfer
             })
 
             let messagesIds = unreadMessages.map({$0.messageId}).filter({$0 >= 0})
@@ -276,14 +315,14 @@ class ConversationsService {
         self.messagesSemaphore.wait()
         //Get conversations for this sender
         let conversation = self.conversations.value.filter({ conversation in
-            return conversation.recipientRingId == uri &&
-                conversation.accountId == account.id
+            return  conversation.recipientRingId == uri &&
+                    conversation.accountId == account.id
         }).first
 
         //Find message
         if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
             return  !message.daemonId.isEmpty && message.daemonId == String(messageId) &&
-                ((status.rawValue > message.status.rawValue && status != .failure) ||
+                    ((status.rawValue > message.status.rawValue && status != .failure) ||
                     (status == .failure && message.status == .sending))
         }) {
             if let message = messages.first {
@@ -299,9 +338,10 @@ class ConversationsService {
                         event.addEventInput(.id, value: account.id)
                         event.addEventInput(.uri, value: uri)
                         self.responseStream.onNext(event)
-                    }) { _ in
+                    }, onError: { _ in
                         self.messagesSemaphore.signal()
-                    }.disposed(by: self.disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
             } else {
                 self.log.warning("messageStatusChanged: Message not found")
                 self.messagesSemaphore.signal()
@@ -311,5 +351,53 @@ class ConversationsService {
         }
 
         log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(account.id) to: \(uri)")
+    }
+
+    func transferStatusChanged(_ transferStatus: DataTransferStatus,
+                               for transferId: UInt64,
+                               fromAccount account: AccountModel,
+                               to uri: String) {
+        self.messagesSemaphore.wait()
+        //Get conversations for this sender
+        let conversation = self.conversations.value.filter({ conversation in
+            return  conversation.recipientRingId == uri &&
+                conversation.accountId == account.id
+        }).first
+
+        guard let id = dataTransferMessageMap[transferId] else {
+            self.log.error("ConversationService: transferStatusChanged - dataTransferMessageMap doesn't have transferId")
+            return
+        }
+        //Find message
+        if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
+            self.log.warning("messageIds: \(message.daemonId) == \(id)")
+            return  !message.daemonId.isEmpty &&
+                    message.daemonId == String(id)
+        }) {
+            if let message = messages.first {
+                self.dbManager
+                    .updateTransferStatus(daemonID: message.daemonId, withStatus: transferStatus)
+                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                    .subscribe(onCompleted: { [unowned self] in
+                        self.messagesSemaphore.signal()
+                        self.log.info("ConversationService: transferStatusChanged - transfer status updated")
+                        let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
+                        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+                        serviceEvent.addEventInput(.transferId, value: transferId)
+                        serviceEvent.addEventInput(.messageId, value: id)
+                        self.responseStream.onNext(serviceEvent)
+                    }, onError: { _ in
+                        self.messagesSemaphore.signal()
+                    })
+                    .disposed(by: self.disposeBag)
+            } else {
+                self.log.error("ConversationService: transferStatusChanged - transfer not found")
+                self.messagesSemaphore.signal()
+            }
+        } else {
+            self.messagesSemaphore.signal()
+        }
+
+        log.debug("ConversationService: transferStatusChanged - \(transferStatus.description) for id: \(transferId) from: \(account.id) to: \(uri)")
     }
 }

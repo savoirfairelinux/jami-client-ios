@@ -29,6 +29,10 @@ extension UIColor {
         self.init(red: red_, green: green_, blue: blue_, alpha: alpha)
     }
 
+    convenience init(hex: Int, alpha: CGFloat) {
+        self.init(red: (hex >> 16) & 0xff, green: (hex >> 8) & 0xff, blue: hex & 0xff, alpha: alpha)
+    }
+
     static let ringMain = UIColor(red: 54, green: 125, blue: 156, alpha: 1.0)
     static let ringSecondary = UIColor(red: 0, green: 76, blue: 96, alpha: 1.0)
     static let ringMainLight = UIColor(red: 0, green: 76, blue: 96, alpha: 1.0)
