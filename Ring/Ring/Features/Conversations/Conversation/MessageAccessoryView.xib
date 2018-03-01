@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type your message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJA-0c-Rp7">
-                    <rect key="frame" x="16" y="12" width="287" height="34"/>
+                    <rect key="frame" x="16" y="12" width="283" height="34"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
@@ -43,7 +43,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="yky-Ar-GQt" firstAttribute="centerX" secondItem="Fja-dy-lIy" secondAttribute="centerX" id="05e-1q-bdH"/>
-                <constraint firstAttribute="trailing" secondItem="AJA-0c-Rp7" secondAttribute="trailing" constant="12" id="73K-N5-liQ"/>
+                <constraint firstAttribute="trailing" secondItem="AJA-0c-Rp7" secondAttribute="trailing" constant="16" id="73K-N5-liQ"/>
                 <constraint firstItem="yky-Ar-GQt" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" id="9NC-Lo-r3E"/>
                 <constraint firstAttribute="bottom" secondItem="AJA-0c-Rp7" secondAttribute="bottom" constant="12" id="Gph-b4-ZJH"/>
                 <constraint firstItem="yky-Ar-GQt" firstAttribute="width" secondItem="Fja-dy-lIy" secondAttribute="width" id="QVZ-1h-6de"/>

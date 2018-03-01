@@ -187,6 +187,7 @@ class MessageCell: UITableViewCell, NibReusable {
                 messageLabelMarginConstraint.constant = 4
                 self.bubbleTopConstraint.constant = 36
             } else {
+                messageLabelMarginConstraint.constant = -2
                 self.bubbleTopConstraint.constant = 32
             }
             return

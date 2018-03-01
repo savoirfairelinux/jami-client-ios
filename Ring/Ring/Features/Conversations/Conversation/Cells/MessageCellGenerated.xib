@@ -49,7 +49,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wm5-ce-Sf6" userLabel="Left Divider">
-                        <rect key="frame" x="16" y="19" width="146" height="1"/>
+                        <rect key="frame" x="36" y="19" width="126" height="1"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="dEi-Ni-etd"/>
@@ -69,7 +69,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="WgT-u7-Mgl" secondAttribute="trailing" constant="16" id="6Dc-L8-sJC"/>
                     <constraint firstItem="WgT-u7-Mgl" firstAttribute="centerY" secondItem="4OM-U1-teG" secondAttribute="centerY" id="ALc-pa-7ZW"/>
                     <constraint firstItem="4OM-U1-teG" firstAttribute="top" secondItem="Dkz-SA-3Af" secondAttribute="topMargin" constant="-2" id="CbK-m1-TUR"/>
-                    <constraint firstItem="Wm5-ce-Sf6" firstAttribute="leading" secondItem="Dkz-SA-3Af" secondAttribute="leading" constant="16" id="Faa-N7-gPP"/>
+                    <constraint firstItem="Wm5-ce-Sf6" firstAttribute="leading" secondItem="Dkz-SA-3Af" secondAttribute="leadingMargin" constant="16" id="Faa-N7-gPP"/>
                     <constraint firstItem="WgT-u7-Mgl" firstAttribute="leading" secondItem="4OM-U1-teG" secondAttribute="trailing" constant="16" id="Foe-Zm-1oU"/>
                     <constraint firstItem="Wm5-ce-Sf6" firstAttribute="centerY" secondItem="4OM-U1-teG" secondAttribute="centerY" id="Q4u-AX-3D6"/>
                     <constraint firstAttribute="bottom" secondItem="xVQ-Jk-Sxy" secondAttribute="bottom" constant="8" id="Qbn-zO-KWj"/>
