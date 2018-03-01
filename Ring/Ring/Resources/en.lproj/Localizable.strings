@@ -1,4 +1,4 @@
-/*
+ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -129,3 +129,19 @@
 "contactPage.clearConversation" = "Clear Chat";
 "contactPage.blockContact" = "Block Contact";
 
+//DataTransfer
+"dataTransfer.invalidFile" = "Invalid file";
+"dataTransfer.notAbleToWriteFile" = "Not able to write file";
+"dataTransfer.transferStatusInvalid" = "Invalid";
+"dataTransfer.transferStatusCreated" = "initializing transfer";
+"dataTransfer.transferStatusUnsupported" = "unsupported";
+"dataTransfer.transferStatusWaitPeerAcceptance" = "waiting peer acceptance";
+"dataTransfer.transferStatusWaitHostAcceptance" = "waiting host acceptance";
+"dataTransfer.transferStatusOngoing" = "ongoing";
+"dataTransfer.transferStatusFinished" = "finished";
+"dataTransfer.transferStatusClosedByHost" = "closed by host";
+"dataTransfer.transferStatusClosedByPeer" = "closed by peer";
+"dataTransfer.transferStatusInvalidPathname" = "invalid pathname";
+"dataTransfer.transferStatusUnjoinablePeer" = "unjoinable peer";
+"dataTransfer.fileSaved" = "File saved";
+"dataTransfer.noSpaceLeftOnDevice" = "No space left on device";
