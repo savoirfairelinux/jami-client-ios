@@ -108,7 +108,12 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         let type = item.bubblePosition()
-        let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        var bubbleColor: UIColor
+        if item.isTransfer {
+            bubbleColor = type == .received ? UIColor.ringMsgCellReceived.darken(byPercentage: 0.1) : UIColor.ringMsgCellSent.darken(byPercentage: 0.1)
+        } else {
+            bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        }
         self.setup()
 
         self.messageLabel.enabledTypes = [.url]
@@ -191,6 +196,18 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.bubbleTopConstraint.constant = 32
             }
             return
+        } else if item.isTransfer {
+            let type = item.bubblePosition()
+            self.bubble.backgroundColor = type == .received ? UIColor.ringMsgCellReceived.darken(byPercentage: 0.1) : UIColor.ringMsgCellSent.darken(byPercentage: 0.1)
+            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+            // transfer messages should always show the time
+            if indexPath.row == 0 {
+                messageLabelMarginConstraint.constant = 4
+                self.bubbleTopConstraint.constant = 36
+            } else {
+                messageLabelMarginConstraint.constant = -2
+                self.bubbleTopConstraint.constant = 32
+            }
         }
 
         // bubble grouping for cell
