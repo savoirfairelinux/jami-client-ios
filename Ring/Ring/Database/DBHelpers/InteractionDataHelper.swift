@@ -76,9 +76,9 @@ final class InteractionDataHelper {
         }
     }
 
-    func insert(item: Interaction) -> Bool {
+    func insert(item: Interaction) -> Int64? {
         guard let dataBase = RingDB.instance.ringDB else {
-            return false
+            return nil
         }
 
         let query = table.insert(accountId <- item.accountID,
@@ -93,11 +93,11 @@ final class InteractionDataHelper {
         do {
             let rowId = try dataBase.run(query)
             guard rowId > 0 else {
-                return false
+                return nil
             }
-            return true
+            return rowId
         } catch _ {
-            return false
+            return nil
         }
     }
 
@@ -321,9 +321,9 @@ final class InteractionDataHelper {
         }
     }
 
-    func insertIfNotExist(item: Interaction) -> Bool {
+    func insertIfNotExist(item: Interaction) -> Int64? {
         guard let dataBase = RingDB.instance.ringDB else {
-            return false
+            return nil
         }
 
         let querySelect = table.filter(accountId == item.accountID &&
@@ -344,13 +344,13 @@ final class InteractionDataHelper {
             if rows == 0 {
                 let row = try dataBase.run(queryInsert)
                 guard row > 0 else {
-                    return false
+                    return nil
                 }
-                return true
+                return row
             }
         } catch {
-            return false
+            return nil
         }
-        return false
+        return nil
     }
 }
