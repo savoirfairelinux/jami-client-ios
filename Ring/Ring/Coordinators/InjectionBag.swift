@@ -33,6 +33,7 @@ class InjectionBag {
     let callService: CallsService
     let videoService: VideoService
     let audioService: AudioService
+    let dataTransferService: DataTransferService
     let profileService: ProfilesService
 
     init (withDaemonService daemonService: DaemonService,
@@ -45,6 +46,7 @@ class InjectionBag {
           withCallService callService: CallsService,
           withVideoService videoService: VideoService,
           withAudioService audioService: AudioService,
+          withDataTransferService dataTransferService: DataTransferService,
           withProfileService profileService: ProfilesService) {
         self.daemonService = daemonService
         self.accountService = accountService
@@ -56,6 +58,7 @@ class InjectionBag {
         self.callService = callService
         self.videoService = videoService
         self.audioService = audioService
+        self.dataTransferService = dataTransferService
         self.profileService = profileService
     }
 
