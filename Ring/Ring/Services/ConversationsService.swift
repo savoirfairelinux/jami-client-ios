@@ -189,7 +189,6 @@ class ConversationsService {
             .first
     }
 
-    // swiftlint:enable function_parameter_count
     func generateMessage(messageContent: String,
                          contactRingId: String,
                          accountRingId: String,
@@ -212,6 +211,33 @@ class ConversationsService {
                         })
                         .disposed(by: (self.disposeBag))
                 }
+                }, onError: { _ in
+            }).disposed(by: self.disposeBag)
+    }
+
+    func generateDataTransferMessage(transfer: DataTransferModel,
+                                     contactRingId: String,
+                                     accountRingId: String,
+                                     accountId: String) {
+
+        let messageContent = transfer.displayName
+        let interactionType: InteractionType = transfer.isIncoming ? .iTransfer : .oTransfer
+        let date = Date()
+
+        let message = MessageModel(withId: "", receivedDate: date, content: messageContent, author: accountRingId, incoming: transfer.isIncoming)
+        message.messageId = Int64(arc4random_uniform(10000000))
+        message.isGenerated = true
+        message.isTransfer = true
+
+        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: transfer.isIncoming, interactionType: interactionType)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(onCompleted: { [unowned self] in
+                self.dbManager.getConversationsObservable(for: accountId, accountURI: accountRingId)
+                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                    .subscribe(onNext: { conversationsModels in
+                        self.conversations.value = conversationsModels
+                    })
+                    .disposed(by: (self.disposeBag))
                 }, onError: { _ in
             }).disposed(by: self.disposeBag)
     }
