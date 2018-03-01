@@ -269,6 +269,10 @@
 		62AA15CA1FFD3D7E0064A063 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AA15C91FFD3D7E0064A063 /* VideoService.swift */; };
 		62AF685E201A61FF003AA9E8 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AF685D201A61FF003AA9E8 /* AudioService.swift */; };
 		62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62AF6861201A66CF003AA9E8 /* AudioAdapter.mm */; };
+		62B60AF420489E7C001BEACF /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B60AF320489E7C001BEACF /* DataTransferService.swift */; };
+		62B60AF62048A141001BEACF /* DataTransferModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B60AF52048A141001BEACF /* DataTransferModel.swift */; };
+		62B60AF92048A40D001BEACF /* DataTransferAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62B60AF82048A40D001BEACF /* DataTransferAdapter.mm */; };
+		62B60AFB2048A437001BEACF /* DataTransferAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B60AFA2048A437001BEACF /* DataTransferAdapterDelegate.swift */; };
 		62DFAB2C1F9FF030002D6F9C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DFAB2B1F9FF030002D6F9C /* Reachability.framework */; };
 		62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */; };
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
@@ -619,6 +623,11 @@
 		62AF685D201A61FF003AA9E8 /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
 		62AF6861201A66CF003AA9E8 /* AudioAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioAdapter.mm; sourceTree = "<group>"; };
 		62AF6863201A66F0003AA9E8 /* AudioAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioAdapter.h; sourceTree = "<group>"; };
+		62B60AF320489E7C001BEACF /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
+		62B60AF52048A141001BEACF /* DataTransferModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferModel.swift; sourceTree = "<group>"; };
+		62B60AF72048A35B001BEACF /* DataTransferAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataTransferAdapter.h; sourceTree = "<group>"; };
+		62B60AF82048A40D001BEACF /* DataTransferAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DataTransferAdapter.mm; sourceTree = "<group>"; };
+		62B60AFA2048A437001BEACF /* DataTransferAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferAdapterDelegate.swift; sourceTree = "<group>"; };
 		62DFAB2B1F9FF030002D6F9C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
 		62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
@@ -792,6 +801,8 @@
 				62AA15C91FFD3D7E0064A063 /* VideoService.swift */,
 				62AF685D201A61FF003AA9E8 /* AudioService.swift */,
 				0EBB72A82034F44200D88F46 /* ProfilesService.swift */,
+				62B60AF320489E7C001BEACF /* DataTransferService.swift */,
+				62B60AFA2048A437001BEACF /* DataTransferAdapterDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -831,6 +842,8 @@
 				62AA15BE1FFC36840064A063 /* VideoAdapter.mm */,
 				62AF6861201A66CF003AA9E8 /* AudioAdapter.mm */,
 				62AF6863201A66F0003AA9E8 /* AudioAdapter.h */,
+				62B60AF72048A35B001BEACF /* DataTransferAdapter.h */,
+				62B60AF82048A40D001BEACF /* DataTransferAdapter.mm */,
 			);
 			path = Bridging;
 			sourceTree = "<group>";
@@ -1305,6 +1318,7 @@
 				1A2D18BF1F29180700B2C785 /* DeviceModel.swift */,
 				0E983E6D1FC77C3E0082103E /* ConversationModel.swift */,
 				0E49096F1FEAC1C6005CAA50 /* CallModel.swift */,
+				62B60AF52048A141001BEACF /* DataTransferModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1524,10 +1538,16 @@
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -1808,6 +1828,7 @@
 				0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
+				62B60AF420489E7C001BEACF /* DataTransferService.swift in Sources */,
 				62AA15BF1FFC36840064A063 /* VideoAdapter.mm in Sources */,
 				1A2D18C11F29180700B2C785 /* AccountConfigModel.swift in Sources */,
 				1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */,
@@ -1834,6 +1855,7 @@
 				0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */,
 				0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */,
 				0E20E4C72031FF560087C868 /* BlockContactsCell.swift in Sources */,
+				62B60AF92048A40D001BEACF /* DataTransferAdapter.mm in Sources */,
 				1A5DC0371F35675E0075E8EF /* ContactRequestCell.swift in Sources */,
 				1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */,
 				1A5DC03D1F35678D0075E8EF /* ContactRequestItem.swift in Sources */,
@@ -1876,6 +1898,7 @@
 				0273C3081E0C68BF00CF00BA /* DesignableButton.swift in Sources */,
 				1A5DC0321F3566140075E8EF /* ConversationSection.swift in Sources */,
 				1A2D18C41F29180700B2C785 /* ConfigKeyModel.swift in Sources */,
+				62B60AFB2048A437001BEACF /* DataTransferAdapterDelegate.swift in Sources */,
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
 				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
@@ -1886,6 +1909,7 @@
 				0EF78DE31FD0AE3000FC6966 /* ConversationsManager.swift in Sources */,
 				0EAA9DB42029F0AA005E245C /* ProxyCell.swift in Sources */,
 				1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */,
+				62B60AF62048A141001BEACF /* DataTransferModel.swift in Sources */,
 				0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */,
 				62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */,
 				0EDE34C91F8691BB00FFA15C /* EditProfileViewModel.swift in Sources */,

@@ -22,8 +22,12 @@ import UIKit
 import RxSwift
 import Reusable
 import SwiftyBeaver
+import Photos
+import MobileCoreServices
 
-class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
+class ConversationViewController:   UIViewController, UITextFieldDelegate,
+                                    UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+                                    UIDocumentPickerDelegate, StoryboardBased, ViewModelBased {
 
     let log = SwiftyBeaver.self
 
@@ -58,9 +62,65 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         view.addGestureRecognizer(tap)
     }
 
-    deinit {
-        print("conversationcontrollerdestroyed")
+    func importDocument() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        documentPicker.delegate = self
+        documentPicker.modalPresentationStyle = .formSheet
+        self.present(documentPicker, animated: true, completion: nil)
     }
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        let filePath = urls[0].absoluteURL.path
+        self.log.debug("Successfully imported \(filePath)")
+        self.viewModel.sendFile(filePath: filePath)
+    }
+
+    func importImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imagePicker.modalPresentationStyle = .overFullScreen
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    // swiftlint:disable force_cast
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        let imageURL = info[UIImagePickerControllerReferenceURL] as! NSURL
+        self.log.debug("imageURL: \(String(describing: imageURL))")
+        let imagePath =  imageURL.path!
+        let targetImageURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imagePath)
+        self.log.debug("imagePath: \(String(describing: targetImageURL?.absoluteURL.path))")
+
+        self.viewModel.sendFile(filePath: (targetImageURL?.absoluteURL.path)!)
+
+//        let imagePath =  imageURL.path!
+//        self.log.debug("imagePath: \(String(describing: imagePath))")
+//
+//        let targetImageURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imagePath)
+//
+//        if let referenceURL = info[UIImagePickerControllerReferenceURL] {
+//            let fetchResult = PHAsset.fetchAssets(withALAssetURLs: [referenceURL as! URL], options: nil)
+//            if let phAsset = fetchResult.firstObject {
+//                let options = PHImageRequestOptions()
+//                options.isSynchronous = true
+//                PHImageManager.default().requestImageData(for: phAsset,
+//                                                          options: options,
+//                                                          resultHandler: { (imageData, _, _, _) -> Void in
+//                    if let newData: NSData = imageData as NSData? {
+//                        self.log.debug("saving to: \(String(describing: imagePath))")
+//                        newData.write(toFile: (targetImageURL?.path)!, atomically: true)
+//                    }
+//                })
+//            }
+//        }
+
+        // send file!
+        //self.viewModel.sendFile(filePath: imagePath)
+    }
+    // swiftlint:enable force_cast
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -156,11 +216,21 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
     func setupUI() {
 
+        // given image is black and transparent set to render as template image
+        self.messageAccessoryView.shareButton.tintColor = UIColor.ringMain
+
         self.messageAccessoryView.messageTextField.delegate = self
         self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
         self.tableView.backgroundColor = UIColor.ringMsgBackground
         self.messageAccessoryView.backgroundColor = UIColor.ringMsgTextFieldBackground
         self.view.backgroundColor = UIColor.ringMsgTextFieldBackground
+
+        self.messageAccessoryView.shareButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                // TODO: modal popup to choose between images/files
+                self.importImage()
+                //self.importDocument()
+            }).disposed(by: self.disposeBag)
 
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                            displayName: self.viewModel.displayName.value,

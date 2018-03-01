@@ -20,21 +20,28 @@
 
 import Foundation
 import RxSwift
+import SwiftyBeaver
 
 class ConversationsManager: MessagesAdapterDelegate {
+
+    let log = SwiftyBeaver.self
 
     let conversationService: ConversationsService
     let accountsService: AccountsService
     let nameService: NameService
+    let dataTransferService: DataTransferService
+
     private let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
     private let notificationHandler = LocalNotificationsHelper()
 
-    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService) {
+    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService, dataTransferService: DataTransferService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
         self.nameService = nameService
+        self.dataTransferService = dataTransferService
         MessagesAdapter.delegate = self
+
         self.accountsService
             .sharedResponseStream
             .filter({ (event) in
@@ -49,6 +56,37 @@ class ConversationsManager: MessagesAdapterDelegate {
                             .subscribe()
                             .disposed(by: self.disposeBag)
                     }
+                }
+            })
+            .disposed(by: disposeBag)
+
+        self.dataTransferService
+            .sharedResponseStream
+            .filter({ (event) in
+                return  event.eventType == ServiceEventType.dataTransferCreated ||
+                        event.eventType == ServiceEventType.dataTransferChanged
+            })
+            .subscribe(onNext: { [unowned self] event in
+                guard   let transferId: UInt64 = event.getEventInput(ServiceEventInput.transferId),
+                        let transfer = self.dataTransferService.transfer(withTransferId: transferId) else {
+                    self.log.error("ConversationsManager: can't find transfer")
+                    return
+                }
+                switch event.eventType {
+                case .dataTransferCreated:
+                    self.log.debug("ConversationsManager: dataTransferCreated - id:\(transfer.id)")
+                    guard let currentAccount = self.accountsService.currentAccount else {
+                        return
+                    }
+                    let accountHelper = AccountModelHelper(withAccount: currentAccount)
+                    self.conversationService.generateDataTransferMessage(transfer: transfer,
+                                                                         contactRingId: transfer.peerInfoHash,
+                                                                         accountRingId: accountHelper.ringId!,
+                                                                         accountId: currentAccount.id)
+                case .dataTransferChanged:
+                    self.log.debug("ConversationsManager: dataTransferChanged - id:\(transfer.id) status:\(stringFromEventCode(with: transfer.status))")
+                default:
+                    break
                 }
             })
             .disposed(by: disposeBag)

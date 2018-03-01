@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type your message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJA-0c-Rp7">
-                    <rect key="frame" x="16" y="12" width="283" height="34"/>
+                    <rect key="frame" x="16" y="12" width="241" height="34"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
@@ -39,23 +39,37 @@
                         <constraint firstAttribute="height" constant="1.2" id="D7A-43-3TV"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZ6-Cr-td2" userLabel="Upload Button">
+                    <rect key="frame" x="265" y="12" width="34" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="efZ-wn-OTj"/>
+                        <constraint firstAttribute="width" constant="34" id="i8S-m1-tB0"/>
+                    </constraints>
+                    <state key="normal" image="share_button"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="yky-Ar-GQt" firstAttribute="centerX" secondItem="Fja-dy-lIy" secondAttribute="centerX" id="05e-1q-bdH"/>
-                <constraint firstAttribute="trailing" secondItem="AJA-0c-Rp7" secondAttribute="trailing" constant="16" id="73K-N5-liQ"/>
+                <constraint firstItem="eZ6-Cr-td2" firstAttribute="leading" secondItem="AJA-0c-Rp7" secondAttribute="trailing" constant="8" id="73K-N5-liQ"/>
                 <constraint firstItem="yky-Ar-GQt" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" id="9NC-Lo-r3E"/>
                 <constraint firstAttribute="bottom" secondItem="AJA-0c-Rp7" secondAttribute="bottom" constant="12" id="Gph-b4-ZJH"/>
+                <constraint firstItem="eZ6-Cr-td2" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" constant="12" id="N2C-04-PmF"/>
                 <constraint firstItem="yky-Ar-GQt" firstAttribute="width" secondItem="Fja-dy-lIy" secondAttribute="width" id="QVZ-1h-6de"/>
                 <constraint firstItem="AJA-0c-Rp7" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" constant="12" id="mDu-cF-UdO"/>
                 <constraint firstItem="AJA-0c-Rp7" firstAttribute="leading" secondItem="Fja-dy-lIy" secondAttribute="leading" constant="16" id="tvd-4f-jdO"/>
+                <constraint firstAttribute="trailing" secondItem="eZ6-Cr-td2" secondAttribute="trailing" constant="16" id="wcA-SV-V26"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="messageTextField" destination="AJA-0c-Rp7" id="ga9-yi-G2h"/>
+                <outlet property="shareButton" destination="eZ6-Cr-td2" id="SSD-59-WS2"/>
             </connections>
-            <point key="canvasLocation" x="-15" y="-178"/>
+            <point key="canvasLocation" x="-15.5" y="-178"/>
         </view>
     </objects>
+    <resources>
+        <image name="share_button" width="24" height="24"/>
+    </resources>
 </document>
