@@ -25,7 +25,13 @@ typedef NS_ENUM(int, MessageStatus)  {
     MessageStatusSending,
     MessageStatusSent,
     MessageStatusRead,
-    MessageStatusFailure
+    MessageStatusFailure,
+    MessageStatusTransferCreated,
+    MessageStatusTransferAwaiting,
+    MessageStatusTransferCanceled,
+    MessageStatusTransferOngoing,
+    MessageStatusTransferSuccess,
+    MessageStatusTransferError
 };
 
 @protocol MessagesAdapterDelegate;

@@ -23,8 +23,11 @@ import UIKit
 import Reusable
 import RxSwift
 import ActiveLabel
+import SwiftyBeaver
 
 class MessageCell: UITableViewCell, NibReusable {
+
+    let log = SwiftyBeaver.self
 
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var bubble: MessageBubble!
@@ -32,6 +35,11 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabelMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabel: ActiveLabel!
+    @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -108,7 +116,12 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         let type = item.bubblePosition()
-        let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        var bubbleColor: UIColor
+        if item.isTransfer {
+            bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+        } else {
+            bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        }
         self.setup()
 
         self.messageLabel.enabledTypes = [.url]
@@ -166,8 +179,8 @@ class MessageCell: UITableViewCell, NibReusable {
         default: break
         }
     }
-    // swiftlint:enable cyclomatic_complexity
 
+    // swiftlint:disable function_body_length
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
                            _ items: [MessageViewModel]?,
                            cellForRowAt indexPath: IndexPath) {
@@ -191,6 +204,27 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.bubbleTopConstraint.constant = 32
             }
             return
+        } else if item.isTransfer {
+            self.messageLabel.lineBreakMode = .byTruncatingMiddle
+            let type = item.bubblePosition()
+            self.bubble.backgroundColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+            // transfer messages should always show the time
+            if indexPath.row == 0 {
+                messageLabelMarginConstraint.constant = 4
+                self.bubbleTopConstraint.constant = 36
+            } else {
+                messageLabelMarginConstraint.constant = -2
+                self.bubbleTopConstraint.constant = 32
+            }
+            if item.bubblePosition() == .received {
+                self.acceptButton.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+                self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
+                self.progressBar.tintColor = UIColor.ringMain
+            } else if item.bubblePosition() == .sent {
+                self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
+                self.progressBar.tintColor = UIColor.ringMain.lighten(byPercentage: 0.2)
+            }
         }
 
         // bubble grouping for cell
@@ -204,19 +238,42 @@ class MessageCell: UITableViewCell, NibReusable {
             self.bubbleBottomConstraint.constant = 16
         }
 
-        // sent message status
         if item.bubblePosition() == .sent {
-            item.status.asObservable()
-                .observeOn(MainScheduler.instance)
-                .map { value in value == MessageStatus.sending ? true : false }
-                .bind(to: self.sendingIndicator.rx.isAnimating)
-                .disposed(by: self.disposeBag)
-            item.status.asObservable()
-                .observeOn(MainScheduler.instance)
-                .map { value in value == MessageStatus.failure ? false : true }
-                .bind(to: self.failedStatusLabel.rx.isHidden)
-                .disposed(by: self.disposeBag)
+            if item.isTransfer {
+                // outgoing transfer
+            } else {
+                // sent message status
+                item.status.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { value in value == MessageStatus.sending ? true : false }
+                    .bind(to: self.sendingIndicator.rx.isAnimating)
+                    .disposed(by: self.disposeBag)
+                item.status.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { value in value == MessageStatus.failure ? false : true }
+                    .bind(to: self.failedStatusLabel.rx.isHidden)
+                    .disposed(by: self.disposeBag)
+            }
         } else if item.bubblePosition() == .received {
+            if item.isTransfer {
+                // incoming transfer
+                self.acceptButton.rx.tap
+                    .subscribe(onNext: { _ in
+                        self.log.info("accepting transferId \(item.id)")
+                        conversationViewModel.acceptFile(transferId: item.id)
+                    })
+                    .disposed(by: self.disposeBag)
+
+                item.status.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .filter { return $0 != MessageStatus.unknown }
+                    .subscribe(onNext: { status in
+                        self.log.info("transfer status change to: \(status.rawValue) for transferId: \(item.id)")
+                        self.onTransferStatusChanged(status: status)
+                    })
+                    .disposed(by: self.disposeBag)
+            }
+
             // received message avatar
             Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
                                                       conversationViewModel.userName.asObservable()) { profileImage, username in
@@ -236,4 +293,56 @@ class MessageCell: UITableViewCell, NibReusable {
 
         }
     }
+
+    func onTransferStatusChanged(status: MessageStatus) {
+        switch status {
+        case .transferError:
+            // show status
+            self.statusLabel.isHidden = false
+            self.statusLabel.text = "Error"
+            self.statusLabel.textColor = UIColor(hex: 0xf00000, alpha: 1.0)
+            // hide everything
+            self.sizeLabel.isHidden = true
+            self.progressBar.isHidden = true
+            self.acceptButton.isHidden = true
+            self.cancelButton.isHidden = true
+        case .transferAwaiting:
+            // size
+            self.sizeLabel.text = "99MB"
+            // hide status
+            self.statusLabel.isHidden = true
+        case .transferOngoing:
+            // status   §
+            self.statusLabel.isHidden = false
+            self.statusLabel.text = "Transferring"
+            self.statusLabel.textColor = UIColor.darkGray
+            // hide accept button only
+            self.acceptButton.isHidden = true
+        case .transferCanceled:
+            // status
+            self.statusLabel.isHidden = false
+            self.statusLabel.text = "Canceled"
+            self.statusLabel.textColor = UIColor.darkGray
+            // hide everything
+            self.sizeLabel.isHidden = true
+            self.progressBar.isHidden = true
+            self.acceptButton.isHidden = true
+            self.cancelButton.isHidden = true
+        case .transferSuccess:
+            // status
+            self.statusLabel.isHidden = false
+            self.statusLabel.text = "Complete"
+            self.statusLabel.textColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+            // hide everything
+            self.sizeLabel.isHidden = true
+            self.progressBar.isHidden = true
+            self.acceptButton.isHidden = true
+            self.cancelButton.isHidden = true
+        default: break
+        }
+    }
+    // swiftlint:enable function_body_length
+
+    // swiftlint:enable cyclomatic_complexity
+
 }

@@ -37,6 +37,8 @@ class ConversationViewModel: Stateable, ViewModel {
     private let contactsService: ContactsService
     private let presenceService: PresenceService
     private let profileService: ProfilesService
+    private let dataTransferService: DataTransferService
+
     private let injectionBag: InjectionBag
 
     private let stateSubject = PublishSubject<State>()
@@ -52,6 +54,7 @@ class ConversationViewModel: Stateable, ViewModel {
         self.contactsService = injectionBag.contactsService
         self.presenceService = injectionBag.presenceService
         self.profileService = injectionBag.profileService
+        self.dataTransferService = injectionBag.dataTransferService
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
@@ -275,7 +278,7 @@ class ConversationViewModel: Stateable, ViewModel {
         let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
         let unreadMessages =  self.conversation.value.messages
             .filter({ message in
-            return message.status != .read && message.author != accountHelper.ringId!
+            return message.status != .read  && !message.isTransfer && message.author != accountHelper.ringId!
         })
         return unreadMessages.count
     }
@@ -359,5 +362,16 @@ class ConversationViewModel: Stateable, ViewModel {
 
     func showContactInfo() {
         self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
+    }
+
+    func sendFile(filePath: String, displayName: String) {
+        self.dataTransferService.sendFile(filePath: filePath,
+                                          displayName: displayName,
+                                          accountId: (accountService.currentAccount?.id)!,
+                                          peerInfoHash: self.conversation.value.recipientRingId)
+    }
+
+    func acceptFile(transferId: UInt64) {
+        self.dataTransferService.acceptTransfer(withId: transferId)
     }
 }

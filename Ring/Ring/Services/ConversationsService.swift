@@ -189,7 +189,6 @@ class ConversationsService {
             .first
     }
 
-    // swiftlint:enable function_parameter_count
     func generateMessage(messageContent: String,
                          contactRingId: String,
                          accountRingId: String,
@@ -216,6 +215,34 @@ class ConversationsService {
             }).disposed(by: self.disposeBag)
     }
 
+    func generateDataTransferMessage(transfer: DataTransferModel,
+                                     contactRingId: String,
+                                     accountRingId: String,
+                                     accountId: String) {
+
+        let messageContent = transfer.displayName
+        let interactionType: InteractionType = transfer.isIncoming ? .iTransfer : .oTransfer
+        let date = Date()
+
+        let message = MessageModel(withId: String(transfer.id), receivedDate: date, content: messageContent, author: accountRingId, incoming: transfer.isIncoming)
+        message.messageId = transfer.uid
+        message.status = transfer.isIncoming ? .transferAwaiting : .transferCreated
+        message.isGenerated = false
+        message.isTransfer = true
+
+        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: transfer.isIncoming, interactionType: interactionType)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(onCompleted: { [unowned self] in
+                self.dbManager.getConversationsObservable(for: accountId, accountURI: accountRingId)
+                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                    .subscribe(onNext: { conversationsModels in
+                        self.conversations.value = conversationsModels
+                    })
+                    .disposed(by: (self.disposeBag))
+                }, onError: { _ in
+            }).disposed(by: self.disposeBag)
+    }
+
     func status(forMessageId messageId: String) -> MessageStatus {
         return self.messageAdapter.status(forMessageId: UInt64(messageId)!)
     }
@@ -224,9 +251,9 @@ class ConversationsService {
 
         return Completable.create(subscribe: { [unowned self] completable in
 
-            //Filter unread messages
+            //Filter out read, outgoing, and transfer messages
             let unreadMessages = conversation.messages.filter({ messages in
-                return messages.status != .read && messages.incoming
+                return messages.status != .read && messages.incoming && !messages.isTransfer
             })
 
             let messagesIds = unreadMessages.map({$0.messageId}).filter({$0 >= 0})
@@ -276,14 +303,14 @@ class ConversationsService {
         self.messagesSemaphore.wait()
         //Get conversations for this sender
         let conversation = self.conversations.value.filter({ conversation in
-            return conversation.recipientRingId == uri &&
-                conversation.accountId == account.id
+            return  conversation.recipientRingId == uri &&
+                    conversation.accountId == account.id
         }).first
 
         //Find message
         if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
             return  !message.daemonId.isEmpty && message.daemonId == String(messageId) &&
-                ((status.rawValue > message.status.rawValue && status != .failure) ||
+                    ((status.rawValue > message.status.rawValue && status != .failure) ||
                     (status == .failure && message.status == .sending))
         }) {
             if let message = messages.first {
