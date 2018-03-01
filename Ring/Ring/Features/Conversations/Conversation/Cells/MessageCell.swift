@@ -32,6 +32,10 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabelMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabel: ActiveLabel!
+    @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -191,6 +195,23 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.bubbleTopConstraint.constant = 32
             }
             return
+        } else if item.isTransfer {
+            let type = item.bubblePosition()
+            self.bubble.backgroundColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+            // transfer messages should always show the time
+            if indexPath.row == 0 {
+                messageLabelMarginConstraint.constant = 4
+                self.bubbleTopConstraint.constant = 36
+            } else {
+                messageLabelMarginConstraint.constant = -2
+                self.bubbleTopConstraint.constant = 32
+            }
+            if item.bubblePosition() == .received {
+                self.acceptButton.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+                self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
+                self.progressBar.tintColor = UIColor.ringMain
+            }
         }
 
         // bubble grouping for cell
