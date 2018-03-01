@@ -48,17 +48,22 @@ struct ColorAsset {
 enum Asset {
   static let accountIcon = ImageAsset(name: "account_icon")
   static let addPerson = ImageAsset(name: "add_person")
+  static let attachmentIcon = ImageAsset(name: "attachment_icon")
   static let audioMuted = ImageAsset(name: "audio_muted")
   static let audioRunning = ImageAsset(name: "audio_running")
   static let backButton = ImageAsset(name: "back_button")
   static let backgroundRing = ImageAsset(name: "background_ring")
   static let blockIcon = ImageAsset(name: "block_icon")
   static let callButton = ImageAsset(name: "call_button")
+  static let camera = ImageAsset(name: "camera")
   static let clearConversation = ImageAsset(name: "clear_conversation")
+  static let closeIcon = ImageAsset(name: "close_icon")
   static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   static let conversationIcon = ImageAsset(name: "conversation_icon")
   static let device = ImageAsset(name: "device")
   static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
+  static let doneIcon = ImageAsset(name: "done_icon")
+  static let downloadIcon = ImageAsset(name: "download_icon")
   static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   static let icContactPicture = ImageAsset(name: "ic_contact_picture")
@@ -68,6 +73,7 @@ enum Asset {
   static let ringLogo = ImageAsset(name: "ring_logo")
   static let sendButton = ImageAsset(name: "send_button")
   static let settingsIcon = ImageAsset(name: "settings_icon")
+  static let shareButton = ImageAsset(name: "share_button")
   static let stopCall = ImageAsset(name: "stop_call")
   static let switchCamera = ImageAsset(name: "switch_camera")
   static let unpauseCall = ImageAsset(name: "unpause_call")
@@ -80,17 +86,22 @@ enum Asset {
   static let allImages: [ImageAsset] = [
     accountIcon,
     addPerson,
+    attachmentIcon,
     audioMuted,
     audioRunning,
     backButton,
     backgroundRing,
     blockIcon,
     callButton,
+    camera,
     clearConversation,
+    closeIcon,
     contactRequestIcon,
     conversationIcon,
     device,
     disableSpeakerphone,
+    doneIcon,
+    downloadIcon,
     enableSpeakerphone,
     fallbackAvatar,
     icContactPicture,
@@ -100,6 +111,7 @@ enum Asset {
     ringLogo,
     sendButton,
     settingsIcon,
+    shareButton,
     stopCall,
     switchCamera,
     unpauseCall,
