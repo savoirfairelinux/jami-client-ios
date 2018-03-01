@@ -95,6 +95,10 @@ class MessageViewModel {
         return UInt64(self.message.daemonId)!
     }
 
+    var isTransfer: Bool {
+        return self.message.isTransfer
+    }
+
     var status = BehaviorSubject<MessageStatus>(value: .unknown)
 
     func bubblePosition() -> BubblePosition {
@@ -103,7 +107,7 @@ class MessageViewModel {
         }
 
         if self.message.incoming {
-            return.received
+            return .received
         } else {
             return .sent
         }

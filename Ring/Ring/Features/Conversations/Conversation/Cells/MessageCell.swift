@@ -32,6 +32,11 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabelMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabel: ActiveLabel!
+    @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -108,7 +113,12 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         let type = item.bubblePosition()
-        let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        var bubbleColor: UIColor
+        if item.isTransfer {
+            bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+        } else {
+            bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        }
         self.setup()
 
         self.messageLabel.enabledTypes = [.url]
@@ -166,7 +176,6 @@ class MessageCell: UITableViewCell, NibReusable {
         default: break
         }
     }
-    // swiftlint:enable cyclomatic_complexity
 
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
                            _ items: [MessageViewModel]?,
@@ -191,6 +200,27 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.bubbleTopConstraint.constant = 32
             }
             return
+        } else if item.isTransfer {
+            self.messageLabel.lineBreakMode = .byTruncatingMiddle
+            let type = item.bubblePosition()
+            self.bubble.backgroundColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+            // transfer messages should always show the time
+            if indexPath.row == 0 {
+                messageLabelMarginConstraint.constant = 4
+                self.bubbleTopConstraint.constant = 36
+            } else {
+                messageLabelMarginConstraint.constant = -2
+                self.bubbleTopConstraint.constant = 32
+            }
+            if item.bubblePosition() == .received {
+                self.acceptButton.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+                self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
+                self.progressBar.tintColor = UIColor.ringMain
+            } else if item.bubblePosition() == .sent {
+                self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
+                self.progressBar.tintColor = UIColor.ringMain.lighten(byPercentage: 0.2)
+            }
         }
 
         // bubble grouping for cell
@@ -205,7 +235,7 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         // sent message status
-        if item.bubblePosition() == .sent {
+        if item.bubblePosition() == .sent && !item.isTransfer {
             item.status.asObservable()
                 .observeOn(MainScheduler.instance)
                 .map { value in value == MessageStatus.sending ? true : false }
@@ -217,6 +247,10 @@ class MessageCell: UITableViewCell, NibReusable {
                 .bind(to: self.failedStatusLabel.rx.isHidden)
                 .disposed(by: self.disposeBag)
         } else if item.bubblePosition() == .received {
+            if item.isTransfer {
+
+            }
+
             // received message avatar
             Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
                                                       conversationViewModel.userName.asObservable()) { profileImage, username in
@@ -236,4 +270,6 @@ class MessageCell: UITableViewCell, NibReusable {
 
         }
     }
+    // swiftlint:enable cyclomatic_complexity
+
 }
