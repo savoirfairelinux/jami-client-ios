@@ -23,8 +23,11 @@ import UIKit
 import Reusable
 import RxSwift
 import ActiveLabel
+import SwiftyBeaver
 
 class MessageCell: UITableViewCell, NibReusable {
+
+    let log = SwiftyBeaver.self
 
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var bubble: MessageBubble!
@@ -32,6 +35,12 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabelMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabel: ActiveLabel!
+    @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var buttonsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -40,10 +49,47 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var sendingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var failedStatusLabel: UILabel!
 
+    var dataTransferProgressUpdater: Timer?
+
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
+        super.prepareForReuse()
+        self.stopProgressMonitor()
         self.disposeBag = DisposeBag()
+    }
+
+    func startProgressMonitor(_ item: MessageViewModel,
+                              _ conversationViewModel: ConversationViewModel) {
+        if self.dataTransferProgressUpdater != nil {
+            self.stopProgressMonitor()
+            return
+        }
+        guard let transferId = item.daemonId else { return }
+        self.dataTransferProgressUpdater = Timer.scheduledTimer(timeInterval: 0.25,
+                                                                target: self,
+                                                                selector: #selector(self.updateProgressBar),
+                                                                userInfo: ["transferId": transferId,
+                                                                           "conversationViewModel": conversationViewModel],
+                                                                repeats: true)
+    }
+
+    func stopProgressMonitor() {
+        guard let updater = self.dataTransferProgressUpdater else { return }
+        updater.invalidate()
+        self.dataTransferProgressUpdater = nil
+    }
+
+    @objc func updateProgressBar(timer: Timer) {
+        guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
+        guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
+        guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
+        if let progress = viewModel.getTransferProgress(transferId: transferId) {
+            DispatchQueue.main.async {
+                self.log.info("progressUpdate: \(progress) for id: \(transferId)")
+                self.progressBar.progress = progress
+            }
+        }
     }
 
     func showCopyMenu() {
@@ -108,11 +154,26 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         let type = item.bubblePosition()
-        let bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        var bubbleColor: UIColor
+        if item.isTransfer {
+            bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+        } else {
+            bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+        }
         self.setup()
 
         self.messageLabel.enabledTypes = [.url]
-        self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+        if item.isTransfer {
+            let contentArr = item.content.components(separatedBy: "\n")
+            if contentArr.count > 1 {
+                self.messageLabel.text = contentArr[0]
+                self.sizeLabel.text = contentArr[1]
+            } else {
+                self.messageLabel.text = item.content
+            }
+        } else {
+            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+        }
         self.messageLabel.handleURLTap { url in
             let urlString = url.absoluteString
             if let prefixedUrl = URL(string: urlString.contains("http") ? urlString : "http://\(urlString)") {
@@ -166,8 +227,8 @@ class MessageCell: UITableViewCell, NibReusable {
         default: break
         }
     }
-    // swiftlint:enable cyclomatic_complexity
 
+    /// swiftlint:disable function_body_length
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
                            _ items: [MessageViewModel]?,
                            cellForRowAt indexPath: IndexPath) {
@@ -182,7 +243,6 @@ class MessageCell: UITableViewCell, NibReusable {
         if item.bubblePosition() == .generated {
             self.bubble.backgroundColor = UIColor.ringMsgCellReceived
             self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
-            // generated messages should always show the time
             if indexPath.row == 0 {
                 messageLabelMarginConstraint.constant = 4
                 self.bubbleTopConstraint.constant = 36
@@ -191,6 +251,25 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.bubbleTopConstraint.constant = 32
             }
             return
+        } else if item.isTransfer {
+            self.messageLabel.lineBreakMode = .byTruncatingMiddle
+            let type = item.bubblePosition()
+            self.bubble.backgroundColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+            if indexPath.row == 0 {
+                messageLabelMarginConstraint.constant = 4
+                self.bubbleTopConstraint.constant = 36
+            } else {
+                messageLabelMarginConstraint.constant = -2
+                self.bubbleTopConstraint.constant = 32
+            }
+            if item.bubblePosition() == .received {
+                self.acceptButton.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+                self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
+                self.progressBar.tintColor = UIColor.ringMain
+            } else if item.bubblePosition() == .sent {
+                self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
+                self.progressBar.tintColor = UIColor.ringMain.lighten(byPercentage: 0.2)
+            }
         }
 
         // bubble grouping for cell
@@ -204,18 +283,22 @@ class MessageCell: UITableViewCell, NibReusable {
             self.bubbleBottomConstraint.constant = 16
         }
 
-        // sent message status
         if item.bubblePosition() == .sent {
-            item.status.asObservable()
-                .observeOn(MainScheduler.instance)
-                .map { value in value == MessageStatus.sending ? true : false }
-                .bind(to: self.sendingIndicator.rx.isAnimating)
-                .disposed(by: self.disposeBag)
-            item.status.asObservable()
-                .observeOn(MainScheduler.instance)
-                .map { value in value == MessageStatus.failure ? false : true }
-                .bind(to: self.failedStatusLabel.rx.isHidden)
-                .disposed(by: self.disposeBag)
+            if item.isTransfer {
+                // outgoing transfer
+            } else {
+                // sent message status
+                item.status.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { value in value == MessageStatus.sending ? true : false }
+                    .bind(to: self.sendingIndicator.rx.isAnimating)
+                    .disposed(by: self.disposeBag)
+                item.status.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map { value in value == MessageStatus.failure ? false : true }
+                    .bind(to: self.failedStatusLabel.rx.isHidden)
+                    .disposed(by: self.disposeBag)
+            }
         } else if item.bubblePosition() == .received {
             // received message avatar
             Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
@@ -236,4 +319,9 @@ class MessageCell: UITableViewCell, NibReusable {
 
         }
     }
+
+    // swiftlint:enable function_body_length
+
+    // swiftlint:enable cyclomatic_complexity
+
 }
