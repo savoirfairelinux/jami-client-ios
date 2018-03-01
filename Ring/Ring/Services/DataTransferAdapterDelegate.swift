@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2018 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,23 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class MessageModel {
-
-    var messageId: Int64 = -1
-    var daemonId: String = ""
-    var receivedDate: Date = Date()
-    var content: String = ""
-    var author: String = ""
-    var status: MessageStatus = .unknown
-    var isGenerated: Bool = false
-    var isTransfer: Bool = false
-    var incoming: Bool
-
-    init(withId id: String, receivedDate: Date, content: String, author: String, incoming: Bool) {
-        self.daemonId = id
-        self.receivedDate = receivedDate
-        self.content = content
-        self.author = author
-        self.incoming = incoming
-    }
+@objc protocol DataTransferAdapterDelegate {
+    func dataTransferEvent(withTransferId transferId: UInt64, withEventCode eventCode: Int)
 }
