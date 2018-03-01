@@ -98,12 +98,12 @@ class MessageViewModel {
     var status = BehaviorSubject<MessageStatus>(value: .unknown)
 
     func bubblePosition() -> BubblePosition {
-        if self.message.isGenerated {
+        if self.message.isGenerated && !self.message.isTransfer {
             return .generated
         }
 
         if self.message.incoming {
-            return.received
+            return .received
         } else {
             return .sent
         }
