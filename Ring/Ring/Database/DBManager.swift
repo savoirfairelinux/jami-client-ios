@@ -39,38 +39,57 @@ enum InteractionStatus: String {
     case succeed = "SUCCEED"
     case read = "READ"
     case unread = "UNREAD"
+    case transferCreated = "TRANSFER_CREATED"
+    case transferAwaiting = "TRANSFER_AWAITING"
+    case transferCanceled = "TRANSFER_CANCELED"
+    case transferOngoing = "TRANSFER_ONGOING"
+    case transferSuccess = "TRANSFER_FINISHED"
+    case transferError = "TRANSFER_ERROR"
 
     func toMessageStatus() -> MessageStatus {
         switch self {
-        case .invalid:
-            return MessageStatus.unknown
-        case .unknown:
-            return MessageStatus.unknown
-        case .sending:
-            return MessageStatus.sending
-        case .failed:
-            return MessageStatus.failure
-        case .succeed:
-            return MessageStatus.sent
-        case .read:
-            return MessageStatus.read
-        case .unread:
-            return MessageStatus.unknown
+        case .invalid: return MessageStatus.unknown
+        case .unknown: return MessageStatus.unknown
+        case .sending: return MessageStatus.sending
+        case .failed: return MessageStatus.failure
+        case .succeed: return MessageStatus.sent
+        case .read: return MessageStatus.read
+        case .unread: return MessageStatus.unknown
+        default: return MessageStatus.unknown
         }
     }
 
     init(status: MessageStatus) {
         switch status {
-        case .unknown:
-            self = .unknown
-        case .sending:
-            self = .sending
-        case .sent:
-            self = .succeed
-        case .read:
-            self = .read
-        case .failure:
-            self = .failed
+        case .unknown: self = .unknown
+        case .sending: self = .sending
+        case .sent: self = .succeed
+        case .read: self = .read
+        case .failure: self = .failed
+        }
+    }
+
+    func toDataTransferStatus() -> DataTransferStatus {
+        switch self {
+        case .transferCreated: return DataTransferStatus.created
+        case .transferAwaiting: return DataTransferStatus.awaiting
+        case .transferCanceled: return DataTransferStatus.canceled
+        case .transferOngoing: return DataTransferStatus.ongoing
+        case .transferSuccess: return DataTransferStatus.success
+        case .transferError: return DataTransferStatus.error
+        default: return DataTransferStatus.unknown
+        }
+    }
+
+    init(status: DataTransferStatus) {
+        switch status {
+        case .created: self = .transferCreated
+        case .awaiting: self = .transferAwaiting
+        case .canceled: self = .transferCanceled
+        case .ongoing: self = .transferOngoing
+        case .success: self = .transferSuccess
+        case .error: self = .transferError
+        case .unknown: self = .unknown
         }
     }
 }
@@ -84,10 +103,12 @@ enum DBBridgingError: Error {
 }
 
 enum InteractionType: String {
-    case invalid = "INVALID"
-    case text    = "TEXT"
-    case call    = "CALL"
-    case contact = "CONTACT"
+    case invalid    = "INVALID"
+    case text       = "TEXT"
+    case call       = "CALL"
+    case contact    = "CONTACT"
+    case iTransfer  = "INCOMING_DATA_TRANSFER"
+    case oTransfer  = "OUTGOING_DATA_TRANSFER"
 }
 
 class DBManager {
@@ -152,13 +173,11 @@ class DBManager {
                     }
                     var result: Bool?
                     switch interactionType {
-                    case .text:
-                        // for now we have only one conversation between two persons(with group chat could be many)
-                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, interactionType: InteractionType.text, message: message)
                     case .contact:
                         result = self?.addInteractionContactTo(conversation: conversationID, account: accountProfile.id, author: author, message: message)
-                    case .call:
-                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, interactionType: InteractionType.call, message: message)
+                    case .text, .call, .iTransfer, .oTransfer:
+                        // for now we have only one conversation between two persons(with group chat could be many)
+                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, interactionType: interactionType, message: message)
                     default:
                         result = nil
                     }
@@ -208,6 +227,21 @@ class DBManager {
 
             return Disposables.create { }
             }
+    }
+
+    func updateTransferStatus(daemonID: String, withStatus transferStatus: DataTransferStatus) -> Completable {
+        return Completable.create { [unowned self] completable in
+            let success = self.interactionHepler
+                .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
+                                               interactionStatus: InteractionStatus(status: transferStatus).rawValue)
+            if success {
+                completable(.completed)
+            } else {
+                completable(.error(DBBridgingError.updateMessageStatusFailed))
+            }
+
+            return Disposables.create { }
+        }
     }
 
     func setMessagesAsRead(messagesIDs: [Int64], withStatus status: MessageStatus) -> Completable {
@@ -379,7 +413,9 @@ class DBManager {
     private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
         if interaction.type != InteractionType.text.rawValue &&
             interaction.type != InteractionType.contact.rawValue &&
-            interaction.type != InteractionType.call.rawValue {
+            interaction.type != InteractionType.call.rawValue &&
+            interaction.type != InteractionType.iTransfer.rawValue &&
+            interaction.type != InteractionType.oTransfer.rawValue {
             return nil
         }
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
@@ -388,11 +424,21 @@ class DBManager {
                                    content: interaction.body,
                                    author: author,
                                    incoming: interaction.incoming)
-        if interaction.type == InteractionType.contact.rawValue || interaction.type == InteractionType.call.rawValue {
+        let isTransfer =    interaction.type == InteractionType.iTransfer.rawValue ||
+                            interaction.type == InteractionType.oTransfer.rawValue
+        if  interaction.type == InteractionType.contact.rawValue ||
+            interaction.type == InteractionType.call.rawValue {
             message.isGenerated = true
+        } else if isTransfer {
+            message.isGenerated = false
+            message.isTransfer = true
         }
         if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
-            message.status = status.toMessageStatus()
+            if isTransfer {
+                message.transferStatus = status.toDataTransferStatus()
+            } else {
+                message.status = status.toMessageStatus()
+            }
         }
         message.messageId = interaction.id
         return message

@@ -50,6 +50,7 @@ class MessageViewModel {
 
     fileprivate let accountService: AccountsService
     fileprivate let conversationsService: ConversationsService
+    fileprivate let dataTransferService: DataTransferService
     fileprivate var message: MessageModel
 
     var timeStringShown: String?
@@ -61,26 +62,63 @@ class MessageViewModel {
          withMessage message: MessageModel) {
         self.accountService = injectionBag.accountService
         self.conversationsService = injectionBag.conversationsService
+        self.dataTransferService = injectionBag.dataTransferService
         self.message = message
+        self.transferStatus.onNext(message.transferStatus)
         self.timeStringShown = nil
         self.status.onNext(message.status)
 
-        // subscribe to message status updates for outgoing messages
-        self.conversationsService
-            .sharedResponseStream
-            .filter({ messageUpdateEvent in
-                let account = self.accountService.getAccount(fromAccountId: messageUpdateEvent.getEventInput(.id)!)
-                let accountHelper = AccountModelHelper(withAccount: account!)
-                return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
-                    messageUpdateEvent.getEventInput(.messageId) == self.message.daemonId &&
-                    accountHelper.ringId == self.message.author
-            })
-            .subscribe(onNext: { [unowned self] messageUpdateEvent in
-                if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
-                    self.status.onNext(status)
-                }
-            })
-            .disposed(by: self.disposeBag)
+        if isTransfer {
+            self.dataTransferService
+                .sharedResponseStream
+                .filter({ (transferEvent) in
+                    let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId)!
+                    return  transferEvent.eventType == ServiceEventType.dataTransferChanged &&
+                            transferId == self.id
+                })
+                .subscribe(onNext: { [unowned self] transferEvent in
+                    guard   let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId),
+                            let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId) else {
+                        self.log.error("MessageViewModel: can't find transferInfo")
+                        return
+                    }
+                    self.log.debug("MessageViewModel: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: transferInfo.lastEvent))")
+                    var transferStatus: DataTransferStatus = .unknown
+                    switch transferInfo.lastEvent {
+                    case .closed_by_host, .closed_by_peer:
+                        transferStatus = DataTransferStatus.canceled
+                    case .invalid, .unsupported, .invalid_pathname, .unjoinable_peer:
+                        transferStatus = DataTransferStatus.error
+                    case .wait_peer_acceptance, .wait_host_acceptance:
+                        transferStatus = DataTransferStatus.awaiting
+                    case .ongoing:
+                        transferStatus = DataTransferStatus.ongoing
+                    case .finished:
+                        transferStatus = DataTransferStatus.success
+                    case .created:
+                        break
+                    }
+                    self.transferStatus.onNext(transferStatus)
+                })
+                .disposed(by: disposeBag)
+        } else {
+            // subscribe to message status updates for outgoing messages
+            self.conversationsService
+                .sharedResponseStream
+                .filter({ messageUpdateEvent in
+                    let account = self.accountService.getAccount(fromAccountId: messageUpdateEvent.getEventInput(.id)!)
+                    let accountHelper = AccountModelHelper(withAccount: account!)
+                    return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
+                        messageUpdateEvent.getEventInput(.messageId) == self.message.daemonId &&
+                        accountHelper.ringId == self.message.author
+                })
+                .subscribe(onNext: { [unowned self] messageUpdateEvent in
+                    if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
+                        self.status.onNext(status)
+                    }
+                })
+                .disposed(by: self.disposeBag)
+        }
     }
 
     var content: String {
@@ -91,11 +129,19 @@ class MessageViewModel {
         return self.message.receivedDate
     }
 
-    var id: UInt64 {
-        return UInt64(self.message.daemonId)!
+    var id: UInt64? {
+        return UInt64(self.message.daemonId)
+    }
+
+    var isTransfer: Bool {
+        return self.message.isTransfer
     }
 
     var status = BehaviorSubject<MessageStatus>(value: .unknown)
+
+    var transferStatus = BehaviorSubject<DataTransferStatus>(value: .unknown)
+    var lastTransferStatus: DataTransferStatus = .unknown
+    var transferProgress = BehaviorSubject<Float>(value: 0.0)
 
     func bubblePosition() -> BubblePosition {
         if self.message.isGenerated {
@@ -103,7 +149,7 @@ class MessageViewModel {
         }
 
         if self.message.incoming {
-            return.received
+            return .received
         } else {
             return .sent
         }
