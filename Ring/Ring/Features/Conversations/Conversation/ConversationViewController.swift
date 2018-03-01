@@ -22,8 +22,12 @@ import UIKit
 import RxSwift
 import Reusable
 import SwiftyBeaver
+import Photos
+import MobileCoreServices
 
-class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
+class ConversationViewController:   UIViewController, UITextFieldDelegate,
+                                    UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+                                    UIDocumentPickerDelegate, StoryboardBased, ViewModelBased {
 
     let log = SwiftyBeaver.self
 
@@ -58,13 +62,86 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         view.addGestureRecognizer(tap)
     }
 
-    deinit {
-        print("conversationcontrollerdestroyed")
+    func importImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imagePicker.modalPresentationStyle = .overFullScreen
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    func importDocument() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [(kUTTypeTXNTextAndMultimediaData as NSString) as String], in: .import)
+        documentPicker.delegate = self
+        documentPicker.modalPresentationStyle = .formSheet
+        self.present(documentPicker, animated: true, completion: nil)
+    }
+
+    // swiftlint:disable force_cast
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        let imageURL = info[UIImagePickerControllerReferenceURL] as! NSURL
+        self.log.debug("imageURL: \(String(describing: imageURL))")
+        let imagePath =  imageURL.path!
+
+
+        let temp = copyBundleResourceToTemporaryDirectory(resourceName: imagePath, fileExtension: imageURL.pathExtension!)
+        self.log.debug("tempfile: \(String(describing: temp))")
+
+//        let localPath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imagePath)
+//        let path = localPath?.relativePath
+//        let imageName = info[UIImagePickerControllerOriginalImage] as! UIImage
+//        let data = UIImagePNGRepresentation(imageName)
+//        do {
+//            self.log.debug("saving to: \(String(describing: imagePath))")
+//            try data?.write(to: URL(fileURLWithPath: imagePath), options: .atomic)
+//        } catch {
+//            self.log.error("couldn't copy file to temporary directory")
+//            picker.dismiss(animated: true, completion: nil)
+//        }
+//        let photoURL = NSURL(fileURLWithPath: path!)
+//        self.log.debug("image path: \(String(describing: photoURL.path))")
+
+        // ?????????
+//        var item: PHAsset!
+//        let targetImageURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imagePath)
+//        let phManager = PHImageManager.default()
+//        let options = PHImageRequestOptions()
+//        options.isSynchronous = true;
+//        phManager.requestImageData(for: item, options: options) { imageData, dataUTI, orientation, info in
+//            if let newData:NSData = imageData as! NSData {
+//                try! newData.write(toFile: (targetImageURL?.path)!, atomically: true)
+//            }
+//        }
+
+        //self.viewModel.sendFile(filePath: imagePath)
+        picker.dismiss(animated: true, completion: nil)
+    }
+    // swiftlint:enable force_cast
+
+    public func copyBundleResourceToTemporaryDirectory(resourceName: String, fileExtension: String) -> URL? {
+        if let bundleURL = Bundle.main.url(forResource: resourceName, withExtension: fileExtension) {
+            let tempDirectoryURL = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
+            let targetURL = tempDirectoryURL.appendingPathComponent(resourceName).appendingPathExtension(fileExtension)
+            do {
+                try FileManager.default.copyItem(at: bundleURL, to: targetURL)
+                return targetURL
+            } catch let error {
+                self.log.error("Unable to copy file: \(error)")
+                return nil
+            }
+        }
+        self.log.error("Unable to find bundle")
+        return nil
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+    }
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        // you get from the urls parameter the urls from the files selected
     }
 
     @objc func dismissKeyboard() {
@@ -156,11 +233,21 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
     func setupUI() {
 
+        // given image is black and transparent set to render as template image
+        self.messageAccessoryView.shareButton.tintColor = UIColor.ringMain
+
         self.messageAccessoryView.messageTextField.delegate = self
         self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
         self.tableView.backgroundColor = UIColor.ringMsgBackground
         self.messageAccessoryView.backgroundColor = UIColor.ringMsgTextFieldBackground
         self.view.backgroundColor = UIColor.ringMsgTextFieldBackground
+
+        self.messageAccessoryView.shareButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                // TODO: modal popup to choose between images/files
+                self.importImage()
+                //self.importDocument()
+            }).disposed(by: self.disposeBag)
 
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                            displayName: self.viewModel.displayName.value,

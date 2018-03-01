@@ -25,6 +25,7 @@ class MessageAccessoryView: UIView, NibLoadable {
 
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
 
     override open func didMoveToWindow() {
         super.didMoveToWindow()

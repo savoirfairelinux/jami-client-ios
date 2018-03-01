@@ -37,6 +37,8 @@ class ConversationViewModel: Stateable, ViewModel {
     private let contactsService: ContactsService
     private let presenceService: PresenceService
     private let profileService: ProfilesService
+    private let dataTransferService: DataTransferService
+
     private let injectionBag: InjectionBag
 
     private let stateSubject = PublishSubject<State>()
@@ -52,6 +54,7 @@ class ConversationViewModel: Stateable, ViewModel {
         self.contactsService = injectionBag.contactsService
         self.presenceService = injectionBag.presenceService
         self.profileService = injectionBag.profileService
+        self.dataTransferService = injectionBag.dataTransferService
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
@@ -360,4 +363,11 @@ class ConversationViewModel: Stateable, ViewModel {
     func showContactInfo() {
         self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
     }
+
+    func sendFile(filePath: String) {
+        self.dataTransferService.sendFile(filePath: filePath,
+                                          accountId: (accountService.currentAccount?.id)!,
+                                          peerInfoHash: self.conversation.value.recipientRingId)
+    }
+
 }

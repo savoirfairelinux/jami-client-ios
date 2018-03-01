@@ -137,6 +137,39 @@ enum L10n {
     static let linkDevice = L10n.tr("Localizable", "createProfile.linkDevice")
   }
 
+  enum Datatransfer {
+    /// File saved
+    static let fileSaved = L10n.tr("Localizable", "dataTransfer.fileSaved")
+    /// Invalid file
+    static let invalidFile = L10n.tr("Localizable", "dataTransfer.invalidFile")
+    /// No space left on device
+    static let noSpaceLeftOnDevice = L10n.tr("Localizable", "dataTransfer.noSpaceLeftOnDevice")
+    /// Not able to write file
+    static let notAbleToWriteFile = L10n.tr("Localizable", "dataTransfer.notAbleToWriteFile")
+    /// closed by host
+    static let transferStatusClosedByHost = L10n.tr("Localizable", "dataTransfer.transferStatusClosedByHost")
+    /// closed by peer
+    static let transferStatusClosedByPeer = L10n.tr("Localizable", "dataTransfer.transferStatusClosedByPeer")
+    /// initializing transfer
+    static let transferStatusCreated = L10n.tr("Localizable", "dataTransfer.transferStatusCreated")
+    /// finished
+    static let transferStatusFinished = L10n.tr("Localizable", "dataTransfer.transferStatusFinished")
+    /// Invalid
+    static let transferStatusInvalid = L10n.tr("Localizable", "dataTransfer.transferStatusInvalid")
+    /// invalid pathname
+    static let transferStatusInvalidPathname = L10n.tr("Localizable", "dataTransfer.transferStatusInvalidPathname")
+    /// ongoing
+    static let transferStatusOngoing = L10n.tr("Localizable", "dataTransfer.transferStatusOngoing")
+    /// unjoinable peer
+    static let transferStatusUnjoinablePeer = L10n.tr("Localizable", "dataTransfer.transferStatusUnjoinablePeer")
+    /// unsupported
+    static let transferStatusUnsupported = L10n.tr("Localizable", "dataTransfer.transferStatusUnsupported")
+    /// waiting host acceptance
+    static let transferStatusWaitHostAcceptance = L10n.tr("Localizable", "dataTransfer.transferStatusWaitHostAcceptance")
+    /// waiting peer acceptance
+    static let transferStatusWaitPeerAcceptance = L10n.tr("Localizable", "dataTransfer.transferStatusWaitPeerAcceptance")
+  }
+
   enum Global {
     /// Invitations
     static let contactRequestsTabBarTitle = L10n.tr("Localizable", "global.contactRequestsTabBarTitle")
