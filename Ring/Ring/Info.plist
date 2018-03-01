@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -54,6 +56,18 @@
 			<string>UIBarStyleDefault</string>
 			<key>Translucent</key>
 			<false/>
+		</dict>
+	</dict>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.com.savoirfairelinux.ring</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>ring</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
 		</dict>
 	</dict>
 	<key>UISupportedInterfaceOrientations</key>
