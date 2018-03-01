@@ -20,21 +20,28 @@
 
 import Foundation
 import RxSwift
+import SwiftyBeaver
 
 class ConversationsManager: MessagesAdapterDelegate {
+
+    let log = SwiftyBeaver.self
 
     let conversationService: ConversationsService
     let accountsService: AccountsService
     let nameService: NameService
+    let dataTransferService: DataTransferService
+
     private let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
     private let notificationHandler = LocalNotificationsHelper()
 
-    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService) {
+    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService, dataTransferService: DataTransferService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
         self.nameService = nameService
+        self.dataTransferService = dataTransferService
         MessagesAdapter.delegate = self
+
         self.accountsService
             .sharedResponseStream
             .filter({ (event) in
@@ -50,6 +57,17 @@ class ConversationsManager: MessagesAdapterDelegate {
                             .disposed(by: self.disposeBag)
                     }
                 }
+            })
+            .disposed(by: disposeBag)
+
+        self.dataTransferService
+            .sharedResponseStream
+            .filter({ (event) in
+                return  event.eventType == ServiceEventType.dataTransferCreated ||
+                        event.eventType == ServiceEventType.dataTransferChanged
+            })
+            .subscribe(onNext: { [unowned self] _ in
+                self.log.debug("ConversationsManager: data transfer event")
             })
             .disposed(by: disposeBag)
     }

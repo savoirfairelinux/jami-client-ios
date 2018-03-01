@@ -84,10 +84,12 @@ enum DBBridgingError: Error {
 }
 
 enum InteractionType: String {
-    case invalid = "INVALID"
-    case text    = "TEXT"
-    case call    = "CALL"
-    case contact = "CONTACT"
+    case invalid    = "INVALID"
+    case text       = "TEXT"
+    case call       = "CALL"
+    case contact    = "CONTACT"
+    case iTransfer  = "INCOMING_DATA_TRANSFER"
+    case oTransfer  = "OUTGOING_DATA_TRANSFER"
 }
 
 class DBManager {
@@ -152,13 +154,11 @@ class DBManager {
                     }
                     var result: Bool?
                     switch interactionType {
-                    case .text:
-                        // for now we have only one conversation between two persons(with group chat could be many)
-                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, interactionType: InteractionType.text, message: message)
                     case .contact:
                         result = self?.addInteractionContactTo(conversation: conversationID, account: accountProfile.id, author: author, message: message)
-                    case .call:
-                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, interactionType: InteractionType.call, message: message)
+                    case .text, .call, .iTransfer, .oTransfer:
+                        // for now we have only one conversation between two persons(with group chat could be many)
+                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, interactionType: interactionType, message: message)
                     default:
                         result = nil
                     }
@@ -379,7 +379,9 @@ class DBManager {
     private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
         if interaction.type != InteractionType.text.rawValue &&
             interaction.type != InteractionType.contact.rawValue &&
-            interaction.type != InteractionType.call.rawValue {
+            interaction.type != InteractionType.call.rawValue &&
+            interaction.type != InteractionType.iTransfer.rawValue &&
+            interaction.type != InteractionType.oTransfer.rawValue {
             return nil
         }
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
