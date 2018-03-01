@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let callService = CallsService(withCallsAdapter: CallsAdapter())
     private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
+    private let dataTransferService = DataTransferService(withDataTransferAdapter: DataTransferAdapter())
     private let networkService = NetworkService()
     private let profileService = ProfilesService()
     private var conversationManager: ConversationsManager?
@@ -57,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withCallService: self.callService,
                             withVideoService: self.videoService,
                             withAudioService: self.audioService,
+                            withDataTransferService: self.dataTransferService,
                             withProfileService: self.profileService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
@@ -122,7 +124,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         // load accounts during splashscreen
         // and ask the AppCoordinator to handle the first screen once loading is finished
-        self.conversationManager = ConversationsManager(with: self.conversationsService, accountsService: self.accountService, nameService: self.nameService)
+        self.conversationManager = ConversationsManager(with: self.conversationsService,
+                                                        accountsService: self.accountService,
+                                                        nameService: self.nameService,
+                                                        dataTransferService: self.dataTransferService)
         self.startDB()
         self.accountService.loadAccounts().subscribe { [unowned self] (_) in
             guard let currentAccount = self.accountService.currentAccount else {

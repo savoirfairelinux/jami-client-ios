@@ -22,8 +22,14 @@ import UIKit
 import RxSwift
 import Reusable
 import SwiftyBeaver
+import Photos
+import MobileCoreServices
 
-class ConversationViewController: UIViewController, UITextFieldDelegate, StoryboardBased, ViewModelBased {
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+class ConversationViewController: UIViewController, UITextFieldDelegate,
+                                  UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased {
 
     let log = SwiftyBeaver.self
 
@@ -58,6 +64,145 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         view.addGestureRecognizer(tap)
     }
 
+    func importDocument() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        documentPicker.delegate = self
+        documentPicker.modalPresentationStyle = .formSheet
+        self.present(documentPicker, animated: true, completion: nil)
+    }
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        let filePath = urls[0].absoluteURL.path
+        self.log.debug("Successfully imported \(filePath)")
+        let fileName = urls[0].absoluteURL.lastPathComponent
+        self.viewModel.sendFile(filePath: filePath, displayName: fileName)
+    }
+
+    @objc func imageTapped() {
+
+        let alert = UIAlertController.init(title: nil,
+                                           message: nil,
+                                           preferredStyle: .alert)
+
+        let pictureAction = UIAlertAction(title: "Upload photo or movie", style: UIAlertActionStyle.default) { _ in
+            self.importImage()
+        }
+
+        let documentsAction = UIAlertAction(title: "Upload file", style: UIAlertActionStyle.default) { _ in
+            self.importDocument()
+        }
+
+        let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertActionStyle.cancel)
+        alert.addAction(pictureAction)
+        alert.addAction(documentsAction)
+        alert.addAction(cancelAction)
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
+        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func takePicture() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.front
+            imagePicker.allowsEditing = true
+            imagePicker.modalPresentationStyle = .overFullScreen
+            self.present(imagePicker, animated: false, completion: nil)
+        }
+    }
+
+    func importImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imagePicker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        imagePicker.modalPresentationStyle = .overFullScreen
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    func copyImageToCache(image: UIImage, imagePath: String) {
+        guard let imageData =  UIImagePNGRepresentation(image) else { return }
+        do {
+            self.log.debug("copying image to: \(String(describing: imagePath))")
+            try imageData.write(to: URL(fileURLWithPath: imagePath), options: .atomic)
+        } catch {
+            self.log.error("couldn't copy image to cache")
+        }
+    }
+
+    // swiftlint:disable cyclomatic_complexity
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+
+        picker.dismiss(animated: true, completion: nil)
+
+        var image: UIImage!
+
+        if picker.sourceType == UIImagePickerControllerSourceType.camera {
+            // image from camera
+            if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
+                image = img
+            } else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                image = img
+            }
+            // copy image to tmp
+            let imageFileName = "IMG.png"
+            let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName)
+            self.log.debug("localCachePath: \(String(describing: localCachePath))")
+            copyImageToCache(image: image, imagePath: localCachePath!.path)
+            self.viewModel.sendFile(filePath: localCachePath!.path, displayName: imageFileName)
+        } else if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
+            // image from library
+            guard let imageURL = info[UIImagePickerControllerReferenceURL] as? URL else { return }
+            self.log.debug("imageURL: \(String(describing: imageURL))")
+
+            let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
+            var imageFileName = result.firstObject?.value(forKey: "filename") as? String ?? "Unknown"
+            self.log.debug("PHAsset fileName: \(String(describing: imageFileName))")
+
+            let pathExtension = (imageFileName as NSString).pathExtension
+            if pathExtension == "HEIC" || pathExtension == "HEIF" {
+                imageFileName = (imageFileName as NSString).deletingPathExtension + ".png"
+            }
+
+            let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName)
+            self.log.debug("localCachePath: \(String(describing: localCachePath))")
+
+            guard let phAsset = result.firstObject else { return }
+
+            if phAsset.mediaType == .image {
+                if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
+                    image = img
+                } else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                    image = img
+                }
+                // copy image to tmp
+                copyImageToCache(image: image, imagePath: localCachePath!.path)
+                self.viewModel.sendFile(filePath: localCachePath!.path, displayName: imageFileName)
+            } else if phAsset.mediaType == .video {
+                PHImageManager.default().requestAVAsset(forVideo: phAsset,
+                                                        options: PHVideoRequestOptions(),
+                                                        resultHandler: { (asset, _, _) -> Void in
+                    guard let asset = asset as? AVURLAsset else {
+                        self.log.error("couldn't get asset")
+                        return
+                    }
+                    guard let videoData = NSData(contentsOf: asset.url) else {
+                        self.log.error("couldn't get movie data")
+                        return
+                    }
+                    self.log.debug("copying movie to: \(String(describing: localCachePath))")
+                    videoData.write(toFile: (localCachePath?.path)!, atomically: true)
+                    self.viewModel.sendFile(filePath: localCachePath!.path, displayName: imageFileName)
+                })
+            }
+        }
+    }
+    // swiftlint:enable cyclomatic_complexity
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
@@ -76,6 +221,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
         var heightOffset = CGFloat(0.0)
         if keyboardHeight != self.messageAccessoryView.frame.height {
+            setShareButtonsVisibility(hide: true)
             heightOffset = -24.0
         }
 
@@ -87,9 +233,23 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
     }
 
     @objc func keyboardWillHide(withNotification notification: Notification) {
+        setShareButtonsVisibility(hide: false)
         self.tableView.contentInset.bottom = self.messageAccessoryView.frame.height
         self.tableView.scrollIndicatorInsets.bottom = self.messageAccessoryView.frame.height
         self.updateBottomOffset()
+    }
+
+    func setShareButtonsVisibility(hide: Bool) {
+        UIView.animate(withDuration: 4.0, animations: {
+            if hide {
+                self.messageAccessoryView.cameraButtonTrailingConstraint.priority = UILayoutPriority(rawValue: 250.00)
+                self.messageAccessoryView.messageTextFieldTrailingConstraint.priority = UILayoutPriority(rawValue: 900.00)
+            } else {
+                self.messageAccessoryView.cameraButtonTrailingConstraint.priority = UILayoutPriority(rawValue: 900.00)
+                self.messageAccessoryView.messageTextFieldTrailingConstraint.priority = UILayoutPriority(rawValue: 250.00)
+            }
+            self.messageAccessoryView.layoutIfNeeded()
+        })
     }
 
     func setupNavTitle(profileImageData: Data?, displayName: String? = nil, username: String?) {
@@ -152,11 +312,24 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
 
     func setupUI() {
 
+        self.messageAccessoryView.shareButton.tintColor = UIColor.ringMain
+        self.messageAccessoryView.cameraButton.tintColor = UIColor.ringMain
+
         self.messageAccessoryView.messageTextField.delegate = self
         self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
         self.tableView.backgroundColor = UIColor.ringMsgBackground
         self.messageAccessoryView.backgroundColor = UIColor.ringMsgTextFieldBackground
         self.view.backgroundColor = UIColor.ringMsgTextFieldBackground
+
+        self.messageAccessoryView.shareButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.imageTapped()
+            }).disposed(by: self.disposeBag)
+
+        self.messageAccessoryView.cameraButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.takePicture()
+            }).disposed(by: self.disposeBag)
 
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                            displayName: self.viewModel.displayName.value,
@@ -264,6 +437,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         //Register cell
         self.tableView.register(cellType: MessageCellSent.self)
         self.tableView.register(cellType: MessageCellReceived.self)
+        self.tableView.register(cellType: MessageCellDataTransferSent.self)
+        self.tableView.register(cellType: MessageCellDataTransferReceived.self)
         self.tableView.register(cellType: MessageCellGenerated.self)
 
         //Bind the TableView to the ViewModel
@@ -433,6 +608,69 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         return dateFormatter.string(from: time).uppercased()
     }
 
+    func changeTransferStatus(_ cell: MessageCell,
+                              _ indexPath: IndexPath?,
+                              _ status: DataTransferStatus,
+                              _ item: MessageViewModel,
+                              _ conversationViewModel: ConversationViewModel) {
+        switch status {
+        case .error:
+            // show status
+            cell.statusLabel.isHidden = false
+            cell.statusLabel.text = "Error"
+            cell.statusLabel.textColor = UIColor(hex: 0xf00000, alpha: 1.0)
+            // hide everything and shrink cell
+            cell.progressBar.isHidden = true
+            cell.acceptButton.isHidden = true
+            cell.cancelButton.isHidden = true
+            cell.buttonsHeightConstraint.constant = 0.0
+        case .awaiting:
+            cell.acceptButton.isHidden = false
+            cell.cancelButton.isHidden = false
+            cell.cancelButton.setTitle("Refuse", for: .normal)
+            // hide status
+            cell.statusLabel.isHidden = true
+            cell.progressBar.isHidden = true
+            cell.buttonsHeightConstraint.constant = 24.0
+        case .ongoing:
+            // status
+            cell.statusLabel.isHidden = false
+            cell.statusLabel.text = "Transferring"
+            cell.statusLabel.textColor = UIColor.darkGray
+            // TODO: start update progress timer process bar here
+            guard let transferId = item.daemonId else { return }
+            let progress = viewModel.getTransferProgress(transferId: transferId) ?? 0.0
+            cell.progressBar.progress = progress
+            cell.progressBar.isHidden = false
+            cell.startProgressMonitor(item, viewModel)
+            // hide accept button only
+            cell.acceptButton.isHidden = true
+            cell.cancelButton.isHidden = false
+            cell.cancelButton.setTitle("Cancel", for: .normal)
+            cell.buttonsHeightConstraint.constant = 24.0
+        case .canceled:
+            // status
+            cell.statusLabel.isHidden = false
+            cell.statusLabel.text = "Canceled"
+            cell.statusLabel.textColor = UIColor.orange
+            // hide everything and shrink cell
+            cell.progressBar.isHidden = true
+            cell.acceptButton.isHidden = true
+            cell.cancelButton.isHidden = true
+            cell.buttonsHeightConstraint.constant = 0.0
+        case .success:
+            // status
+            cell.statusLabel.isHidden = false
+            cell.statusLabel.text = "Complete"
+            cell.statusLabel.textColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+            // hide everything and shrink cell
+            cell.progressBar.isHidden = true
+            cell.acceptButton.isHidden = true
+            cell.cancelButton.isHidden = true
+            cell.buttonsHeightConstraint.constant = 0.0
+        default: break
+        }
+    }
 }
 
 extension ConversationViewController: UITableViewDataSource {
@@ -442,15 +680,69 @@ extension ConversationViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let item = self.messageViewModels?[indexPath.row] {
-            let type =  item.bubblePosition() == .received ? MessageCellReceived.self :
+            var type = MessageCell.self
+            if item.isTransfer {
+                type = item.bubblePosition() == .received ? MessageCellDataTransferReceived.self : MessageCellDataTransferSent.self
+            } else {
+                type =  item.bubblePosition() == .received ? MessageCellReceived.self :
                         item.bubblePosition() == .sent ? MessageCellSent.self :
                         item.bubblePosition() == .generated ? MessageCellGenerated.self :
                         MessageCellGenerated.self
+            }
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: type)
             cell.configureFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
+
+            if item.isTransfer && item.bubblePosition() == .received {
+                item.lastTransferStatus = .unknown
+                self.log.warning("cellForRowAt: \(indexPath.row), initialTransferStatus: \(item.initialTransferStatus), message.transferStatus: \(item.message.transferStatus)")
+                changeTransferStatus(cell, nil, item.message.transferStatus, item, viewModel)
+
+                cell.acceptButton.rx.tap
+                    .subscribe(onNext: { _ in
+                        guard let transferId = item.daemonId else { return }
+                        self.log.info("accepting transferId \(transferId)")
+                        if self.viewModel.acceptTransfer(transferId: transferId) != .success {
+                            _ = self.viewModel.cancelTransfer(transferId: transferId)
+                            item.initialTransferStatus = .canceled
+                            item.message.transferStatus = .canceled
+                            cell.stopProgressMonitor()
+                            tableView.reloadData()
+                        }
+                    })
+                    .disposed(by: cell.disposeBag)
+
+                cell.cancelButton.rx.tap
+                    .subscribe(onNext: { _ in
+                        guard let transferId = item.daemonId else { return }
+                        self.log.info("canceling transferId \(transferId)")
+                        _ = self.viewModel.cancelTransfer(transferId: transferId)
+                        item.initialTransferStatus = .canceled
+                        item.message.transferStatus = .canceled
+                        cell.stopProgressMonitor()
+                        tableView.reloadData()
+                    })
+                    .disposed(by: cell.disposeBag)
+
+                item.transferStatus.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .filter { return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
+                    .subscribe(onNext: { status in
+                        guard let currentIndexPath = tableView.indexPath(for: cell) else { return }
+                        guard let transferId = item.daemonId else { return }
+                        self.log.info("MessageCell: transfer status change to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
+                        self.changeTransferStatus(cell, currentIndexPath, status, item, self.viewModel)
+                        item.initialTransferStatus = status
+                        cell.stopProgressMonitor()
+                        tableView.reloadData()
+                    })
+                    .disposed(by: cell.disposeBag)
+            }
+
             return cell
         }
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
     }
 
 }
+// swiftlint:enable type_body_length
+// swiftlint:enable file_length
