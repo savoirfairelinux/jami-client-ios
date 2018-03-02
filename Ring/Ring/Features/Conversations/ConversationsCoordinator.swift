@@ -21,9 +21,9 @@
 import Foundation
 import RxSwift
 
-
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
 class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
+    var presentingVC = [String: Bool]()
 
     var rootViewController: UIViewController {
         return self.navigationViewController
@@ -42,6 +42,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.injectionBag = injectionBag
 
         self.callService = injectionBag.callService
+        self.addLockFlags()
 
         self.callService.newCall.asObservable()
             .map({ call in
@@ -67,12 +68,17 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
     }
 
+    func addLockFlags() {
+        presentingVC[VCType.contact.rawValue] = false
+        presentingVC[VCType.conversation.rawValue] = false
+    }
+
      func answerIncomingCall(call: CallModel) {
         let callViewController = CallViewController.instantiate(with: self.injectionBag)
         callViewController.viewModel.call = call
         callViewController.viewModel.answerCall()
             .subscribe(onCompleted: { [weak self] in
-                self?.present(viewController: callViewController, withStyle: .present, withAnimation: false)
+                self?.present(viewController: callViewController, withStyle: .present, withAnimation: false, disposeBag: (self?.disposeBag)!)
             }).disposed(by: self.disposeBag)
     }
 
@@ -96,7 +102,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     }).disposed(by: self.disposeBag)
                 alert.dismiss(animated: true, completion: nil)
             }))
-            self.present(viewController: alert, withStyle: .present, withAnimation: true)
+            self.present(viewController: alert, withStyle: .present, withAnimation: true, disposeBag: self.disposeBag)
 
             self.callService.currentCall.takeUntil(alert.rx.controllerWasDismissed).filter({ currentCall in
                 return currentCall.callId == call.callId &&

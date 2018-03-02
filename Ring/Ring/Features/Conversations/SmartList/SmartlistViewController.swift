@@ -317,8 +317,10 @@ extension SmartlistViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.cancelSearch()
-        if let convToShow: ConversationViewModel = try? tableView.rx.model(at: indexPath) {
-            self.viewModel.showConversation(withConversationViewModel: convToShow)
+        if self.navigationController?.topViewController == self {
+            if let convToShow: ConversationViewModel = try? tableView.rx.model(at: indexPath) {
+                self.viewModel.showConversation(withConversationViewModel: convToShow)
+            }
         }
     }
 }

@@ -33,6 +33,7 @@ public enum MeState: State {
 
 /// This Coordinator drives the me/settings navigation
 class MeCoordinator: Coordinator, StateableResponsive {
+    var presentingVC = [String: Bool]()
 
     var rootViewController: UIViewController {
         return self.navigationViewController
@@ -48,6 +49,7 @@ class MeCoordinator: Coordinator, StateableResponsive {
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
+        self.presentingVC[VCType.blockList.rawValue] = false
 
         self.stateSubject.subscribe(onNext: { [unowned self] (state) in
             guard let state = state as? MeState else { return }
@@ -69,17 +71,25 @@ class MeCoordinator: Coordinator, StateableResponsive {
     }
 
     private func showBlockedContacts() {
+        if let flag = self.presentingVC[VCType.blockList.rawValue], flag {
+            return
+        }
+        self.presentingVC[VCType.blockList.rawValue] = true
         let blockedContactsViewController = BlockListViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: blockedContactsViewController, withStyle: .show, withAnimation: true)
+        self.present(viewController: blockedContactsViewController,
+                     withStyle: .show,
+                     withAnimation: true,
+                     lockWhilePresenting: VCType.blockList.rawValue,
+                     disposeBag: self.disposeBag)
     }
 
     private func showMeDetail () {
         let meDetailViewController = MeDetailViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: meDetailViewController, withStyle: .show, withAnimation: true)
+        self.present(viewController: meDetailViewController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
     }
 
     private func showLinkDeviceWindow() {
         let linkDeviceVC = LinkNewDeviceViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: linkDeviceVC, withStyle: .popup, withAnimation: false)
+        self.present(viewController: linkDeviceVC, withStyle: .popup, withAnimation: false, disposeBag: self.disposeBag)
     }
 }

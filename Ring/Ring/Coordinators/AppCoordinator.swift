@@ -33,9 +33,16 @@ public enum AppState: State {
     case allSet
 }
 
+public enum VCType: String {
+    case conversation
+    case contact
+    case blockList
+}
+
 /// This Coordinator drives the global navigation of the app: it can present the main interface, the
 /// walkthrough or a loading interface
 final class AppCoordinator: Coordinator, StateableResponsive {
+    var presentingVC = [String: Bool]()
 
     // MARK: Coordinator
     var rootViewController: UIViewController {
@@ -117,7 +124,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         let alertController = UIAlertController(title: L10n.Alerts.dbFailedTitle,
                                                 message: L10n.Alerts.dbFailedMessage,
                                                 preferredStyle: .alert)
-        self.present(viewController: alertController, withStyle: .present, withAnimation: false)
+        self.present(viewController: alertController, withStyle: .present, withAnimation: false, disposeBag: self.disposeBag)
     }
 
     /// Presents the walkthrough as a popup with a fade effect
@@ -129,7 +136,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         let walkthroughViewController = walkthroughCoordinator.rootViewController
         self.present(viewController: walkthroughViewController,
                      withStyle: .appear,
-                     withAnimation: true)
+                     withAnimation: true,
+                     disposeBag: self.disposeBag)
 
         walkthroughViewController.rx.controllerWasDismissed.subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
             walkthroughCoordinator?.stateSubject.dispose()
