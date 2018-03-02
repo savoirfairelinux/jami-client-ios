@@ -82,6 +82,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.settingsTable.register(cellType: BlockContactsCell.self)
 
         self.settingsTable.rx.itemSelected
+            .throttle(RxTimeInterval(2), scheduler: MainScheduler.instance)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] indexPath in
                 if (self?.settingsTable.cellForRow(at: indexPath) as? BlockContactsCell) != nil {
