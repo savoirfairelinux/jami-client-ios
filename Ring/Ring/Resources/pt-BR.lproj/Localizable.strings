@@ -83,37 +83,46 @@
 "alerts.accountLinkedTitle" = "Associar à uma conta";
 "alerts.dbFailedTitle" = "Ocorreu um erro ao iniciar Ring";
 "alerts.dbFailedMessage" = "Por favor, feche o programa e tente abri-lo novamente";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmBlockContact" = "Tem certeza de que deseja bloquear este contato? O histórico de conversas com este contato também será excluído permanentemente.";
+"alerts.confirmBlockContactTitle" = "Bloquear Contato";
+"alerts.confirmDeleteConversation" = "Tem certeza de que deseja excluir esta conversa permanentemente?";
+"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
+"alerts.confirmDeleteConversationTitle" = "Excluir Conversa";
 
 //Actions
 "actions.blockAction" = "Bloquear";
 "actions.deleteAction" = "Deletar";
 "actions.cancelAction" = "Cancelar";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Recebendo chamada de";
 "alerts.incomingCallButtonAccept" = "Aceitar";
 "alerts.incomingCallButtonIgnore" = "Ignorar";
 
 //Calls
 "calls.callItemTitle" = "Chamar";
 "calls.unknown" = "Desconhecido";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
-"calls.callFinished" = "Call finished";
+"calls.incomingCallInfo" = "quer conversar com você";
+"calls.calling" = "Chamando...";
+"calls.callFinished" = "Chamada terminada";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Configurações";
-"accountPage.enableProxy" = "Enable Push Notifications";
-"accountPage.blockedContacts" = "Block List";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.enableProxy" = "Habilitar Notificações via Push";
+"accountPage.blockedContacts" = "Lista de Bloqueados";
+"accountPage.unblockContact" = "DESBLOQUEAR";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Associar um novo dispositivo";
 "linkDevice.passwordError" = "A senha informada não desbloqueia esta conta";
 "linkDevice.networkError" = "Ocorreu um erro de rede durante a exportação";
 "linkDevice.defaultError" = "  Ocorreu um erro durante a exportação ";
 "linkDevice.explanationMessage" = "Para concluir o processo, você deve iniciar o Ring em no novo dispositivo e escolher a opção \"Vincular este dispositivo a uma conta\". Seu PIN é válido por 10 minutos.";
 "linkDevice.hudMessage" = "Verificando";
+
+//Contact Page
+"contactPage.startAudioCall" = "Start Audio Call";
+"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.sendMessage" = "Send Message";
+"contactPage.clearConversation" = "Clear Chat";
+"contactPage.blockContact" = "Bloquear Contato";
+

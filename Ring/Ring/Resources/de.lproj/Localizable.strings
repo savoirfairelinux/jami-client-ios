@@ -86,6 +86,7 @@
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Kontakt sperren";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Unterhaltung löschen";
 
 //Actions
@@ -117,3 +118,11 @@
 "linkDevice.defaultError" = "Während des Exports ist ein Fehler aufgetreten";
 "linkDevice.explanationMessage" = "Um den Prozess abzuschließen, öffnen Sie Ring auf dem neuen Gerät und wählen Sie die Option \"Dieses Gerät mit einem Konto verknüpfen\". Ihre PIN ist 10 Minuten gültig.";
 "linkDevice.hudMessage" = "Verifiziere";
+
+//Contact Page
+"contactPage.startAudioCall" = "Start Audio Call";
+"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.sendMessage" = "Send Message";
+"contactPage.clearConversation" = "Clear Chat";
+"contactPage.blockContact" = "Kontakt sperren";
+

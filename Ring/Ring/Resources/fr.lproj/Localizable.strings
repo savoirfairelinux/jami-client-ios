@@ -22,7 +22,7 @@
 "global.homeTabBarTitle" = "Accueil";
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Compte";
-"global.ok" = "Ok";
+"global.ok" = "OK";
 
 // Smartlist
 "smartlist.yesterday" = "Hier";
@@ -86,6 +86,7 @@
 "alerts.confirmBlockContact" = "Êtes-vous certain de vouloir bloquer contact ? L'historique des conversations avec ce contact sera supprimé définitivement.";
 "alerts.confirmBlockContactTitle" = "Bloquer ce contact";
 "alerts.confirmDeleteConversation" = "Êtes-vous certain de vouloir supprimer définitivement cette conversation ? ";
+"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Supprimer cette conversation";
 
 //Actions
@@ -117,3 +118,11 @@
 "linkDevice.defaultError" = "Une erreur s'est produite lors de l'export";
 "linkDevice.explanationMessage" = "Pour terminer le processus, ouvrez Ring sur le nouvel appareil, et choisissez l'option \"Lier cet appareil à un compte\". Le NIP est valide pendant 10 minutes.";
 "linkDevice.hudMessage" = "Vérification";
+
+//Contact Page
+"contactPage.startAudioCall" = "Start Audio Call";
+"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.sendMessage" = "Send Message";
+"contactPage.clearConversation" = "Clear Chat";
+"contactPage.blockContact" = "Bloquer ce contact";
+

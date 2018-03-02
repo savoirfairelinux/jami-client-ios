@@ -86,6 +86,7 @@
 "alerts.confirmBlockContact" = "Jeni i sigurt se doni të bllokohet ky kontakt? Edhe historiku i bisedave me këtë kontakt do të fshihet përgjithmonë.";
 "alerts.confirmBlockContactTitle" = "Bllokoje Kontaktin";
 "alerts.confirmDeleteConversation" = "Jeni i sigurt se doni të fshihet përgjithmonë kjo bisedë?";
+"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
 
 //Actions
@@ -98,7 +99,7 @@
 
 //Calls
 "calls.callItemTitle" = "Thirre";
-"calls.unknown" = "E panjohur";
+"calls.unknown" = "I panjohur";
 "calls.incomingCallInfo" = "dëshiron të flasë me ju";
 "calls.calling" = "Po thirret…";
 "calls.callFinished" = "Thirrja përfundoi";
@@ -117,3 +118,11 @@
 "linkDevice.defaultError" = "Ndodhi një gabim gjatë eksportimit";
 "linkDevice.explanationMessage" = "Që të plotësohet procesi. lypset ta hapni Ring-un te pajisja e re dhe të zgjidhni mundësinë \"Lidheni këtë pajisje me një llogari.\" PIN-i juaj vlen vetëm për 10 minuta";
 "linkDevice.hudMessage" = "Po verifikohet";
+
+//Contact Page
+"contactPage.startAudioCall" = "Start Audio Call";
+"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.sendMessage" = "Send Message";
+"contactPage.clearConversation" = "Clear Chat";
+"contactPage.blockContact" = "Bllokoje Kontaktin";
+

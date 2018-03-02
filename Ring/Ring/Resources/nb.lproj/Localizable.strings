@@ -86,6 +86,7 @@
 "alerts.confirmBlockContact" = "Er du sikker på at du ønsker å blokkere denne kontakten? Samtalehistorikken med vedkommende vil bli slettet for godt.";
 "alerts.confirmBlockContactTitle" = "Blokker kontakt";
 "alerts.confirmDeleteConversation" = "Er du sikker på at du vil slette denne samtalen for godt?";
+"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Slett samtale";
 
 //Actions
@@ -117,3 +118,11 @@
 "linkDevice.defaultError" = "En feil inntraff under eksport";
 "linkDevice.explanationMessage" = "For å fullføre prosessen, må du åpne Ring på en ny enhet og velge \"Lenk denne enheten til en konto\". Din PIN-kode er gyldig i 10 minutter";
 "linkDevice.hudMessage" = "Bekrefter";
+
+//Contact Page
+"contactPage.startAudioCall" = "Start Audio Call";
+"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.sendMessage" = "Send Message";
+"contactPage.clearConversation" = "Clear Chat";
+"contactPage.blockContact" = "Blokker kontakt";
+
