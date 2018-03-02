@@ -141,7 +141,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         titleView.addSubview(unlabel)
         let tapGesture = UITapGestureRecognizer()
         titleView.addGestureRecognizer(tapGesture)
-        tapGesture.rx.event.bind(onNext: { [weak self] _ in
+        tapGesture.rx.event
+        .throttle(RxTimeInterval(2), scheduler: MainScheduler.instance)
+        .bind(onNext: { [weak self] _ in
             self?.contactTapped()
         }).disposed(by: disposeBag)
 

@@ -30,6 +30,7 @@ enum ConversationState: State {
 protocol ConversationNavigation: class {
 
     var injectionBag: InjectionBag { get }
+    func addLockFlags()
 }
 
 extension ConversationNavigation where Self: Coordinator, Self: StateableResponsive {
@@ -48,24 +49,39 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 self.presentContactInfo(conversation: conversationModel)
             }
         }).disposed(by: self.disposeBag)
-
     }
 
     func presentContactInfo(conversation: ConversationModel) {
+        if let flag = self.presentingVC[VCType.contact.rawValue], flag {
+            return
+        }
+        self.presentingVC[VCType.contact.rawValue] = true
         let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
         contactViewController.viewModel.conversation = conversation
-        self.present(viewController: contactViewController, withStyle: .show, withAnimation: true, withStateable: contactViewController.viewModel)
+        self.present(viewController: contactViewController,
+                     withStyle: .show,
+                     withAnimation: true,
+                     withStateable: contactViewController.viewModel,
+                     lockWhilePresenting: VCType.contact.rawValue)
     }
 
     private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+        if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
+            return
+        }
+        self.presentingVC[VCType.conversation.rawValue] = true
         let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
         conversationViewController.viewModel = conversationViewModel
-        self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true, withStateable: conversationViewController.viewModel)
+        self.present(viewController: conversationViewController,
+                     withStyle: .show,
+                     withAnimation: true,
+                     withStateable: conversationViewController.viewModel,
+                     lockWhilePresenting: VCType.conversation.rawValue)
     }
 
     func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
         let callViewController = CallViewController.instantiate(with: self.injectionBag)
         callViewController.viewModel.placeCall(with: contactRingId, userName: userName, isAudioOnly: isAudioOnly)
-        self.present(viewController: callViewController, withStyle: .present, withAnimation: false)
+        self.present(viewController: callViewController, withStyle: .present, withAnimation: false, disposeBag: self.disposeBag)
     }
 }

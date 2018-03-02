@@ -44,10 +44,11 @@ extension StateableResponsive where Self: Coordinator {
     func present(viewController: UIViewController,
                  withStyle style: PresentationStyle,
                  withAnimation animation: Bool,
-                 withStateable stateable: Stateable) {
+                 withStateable stateable: Stateable,
+                 lockWhilePresenting VCType: String? = nil) {
 
         // present the view controller according to the presentation style
-        self.present(viewController: viewController, withStyle: style, withAnimation: animation)
+        self.present(viewController: viewController, withStyle: style, withAnimation: animation, lockWhilePresenting: VCType, disposeBag: self.disposeBag)
 
         // bind the stateable to the inner state subject
         stateable.state.takeUntil(viewController.rx.deallocated).subscribe(onNext: { [weak self] (state) in

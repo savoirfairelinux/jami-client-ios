@@ -45,7 +45,7 @@ public enum WalkthroughState: State {
 
 /// This Coordinator drives the walkthrough navigation (welcome / profile / creation or link)
 class WalkthroughCoordinator: Coordinator, StateableResponsive {
-
+    var presentingVC = [String: Bool]()
     var rootViewController: UIViewController {
         return self.navigationViewController
     }

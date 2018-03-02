@@ -58,5 +58,4 @@ class InjectionBag {
         self.audioService = audioService
         self.profileService = profileService
     }
-
 }

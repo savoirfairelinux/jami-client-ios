@@ -45,6 +45,10 @@ protocol Coordinator: class {
     /// The array containing any child Coordinators
     var childCoordinators: [Coordinator] { get set }
 
+    ///flag to be setting to true during particular viewController is presenting
+    ///this property is added to prevent controller to be presenting multiple times, caused by UI lag
+    var presentingVC: [String: Bool] { get set }
+
     /// Initializes a new Coordinator with a dependancy injection bag
     ///
     /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that need it
@@ -81,7 +85,9 @@ extension Coordinator {
     ///   - animation: Wether the transition should be animated or not
     func present(viewController: UIViewController,
                  withStyle style: PresentationStyle,
-                 withAnimation animation: Bool) {
+                 withAnimation animation: Bool,
+                 lockWhilePresenting VCType: String? = nil,
+                 disposeBag: DisposeBag) {
         switch style {
         case .present: self.rootViewController.present(viewController,
                                                        animated: animation,
@@ -100,6 +106,18 @@ extension Coordinator {
             self.rootViewController.present(viewController,
                                             animated: animation,
                                             completion: nil)
+        }
+
+        if let viewControllerType = VCType {
+            viewController.rx.viewDidLoad.subscribe(onNext: { [weak self] _ in
+                self?.presentingVC[viewControllerType] = false
+                }, onError: { [weak self] _ in
+                    self?.presentingVC[viewControllerType] = false
+                }, onCompleted: { [weak self] in
+                    self?.presentingVC[viewControllerType] = false
+                }, onDisposed: {  [weak self] in
+                    self?.presentingVC[viewControllerType] = false
+            }).disposed(by: disposeBag)
         }
     }
 }

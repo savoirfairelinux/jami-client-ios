@@ -24,6 +24,7 @@ import RxSwift
 /// This Coordinator drives the Contact Requests navigation
 class ContactRequestsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
 
+    var presentingVC = [String: Bool]()
     var rootViewController: UIViewController {
         return self.navigationViewController
     }
@@ -41,9 +42,13 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive, Conversation
         self.injectionBag = injectionBag
         self.contactService = injectionBag.contactsService
         self.navigationViewController.viewModel = ContactRequestTabBarItem(with: self.injectionBag)
+        self.addLockFlags()
         self.callbackPlaceCall()
     }
-
+    func addLockFlags() {
+        presentingVC[VCType.contact.rawValue] = false
+        presentingVC[VCType.conversation.rawValue] = false
+    }
     func start () {
         let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
         self.present(viewController: contactRequestsViewController, withStyle: .show, withAnimation: true, withStateable: contactRequestsViewController.viewModel)
