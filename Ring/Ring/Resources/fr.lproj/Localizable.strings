@@ -22,7 +22,7 @@
 "global.homeTabBarTitle" = "Accueil";
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Compte";
-"global.ok" = "Ok";
+"global.ok" = "OK";
 
 // Smartlist
 "smartlist.yesterday" = "Hier";
