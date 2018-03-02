@@ -30,6 +30,8 @@ enum ConversationState: State {
 protocol ConversationNavigation: class {
 
     var injectionBag: InjectionBag { get }
+    var icConversationPresenting: Bool {get set}
+    var icContactPresenting: Bool {get set}
 }
 
 extension ConversationNavigation where Self: Coordinator, Self: StateableResponsive {
@@ -52,14 +54,40 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func presentContactInfo(conversation: ConversationModel) {
+        if self.icContactPresenting {
+            return
+        }
+        self.icContactPresenting = true
         let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
         contactViewController.viewModel.conversation = conversation
+        contactViewController.rx.viewDidLoad.subscribe(onNext: { [weak self] _ in
+            self?.icContactPresenting = false
+            }, onError: {[weak self] _ in
+                self?.icContactPresenting = false
+            }, onCompleted: { [weak self] in
+                self?.icContactPresenting = false
+        }) { [weak self] in
+            self?.icContactPresenting = false
+            }.disposed(by: self.disposeBag)
         self.present(viewController: contactViewController, withStyle: .show, withAnimation: true, withStateable: contactViewController.viewModel)
     }
 
     private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+        if self.icConversationPresenting {
+            return
+        }
+        self.icConversationPresenting = true
         let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
         conversationViewController.viewModel = conversationViewModel
+        conversationViewController.rx.viewDidLoad.subscribe(onNext: { [weak self] _ in
+            self?.icConversationPresenting = false
+        }, onError: {[weak self] _ in
+            self?.icConversationPresenting = false
+        }, onCompleted: { [weak self] in
+            self?.icConversationPresenting = false
+        }) { [weak self] in
+            self?.icConversationPresenting = false
+        }.disposed(by: self.disposeBag)
         self.present(viewController: conversationViewController, withStyle: .show, withAnimation: true, withStateable: conversationViewController.viewModel)
     }
 

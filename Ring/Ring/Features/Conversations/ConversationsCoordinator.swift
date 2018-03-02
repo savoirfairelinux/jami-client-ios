@@ -24,6 +24,10 @@ import RxSwift
 
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
 class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
+    var icConversationPresenting: Bool = false
+
+    var icContactPresenting: Bool = false
+
 
     var rootViewController: UIViewController {
         return self.navigationViewController

@@ -23,6 +23,10 @@ import RxSwift
 
 /// This Coordinator drives the Contact Requests navigation
 class ContactRequestsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
+    var icConversationPresenting: Bool = false
+
+    var icContactPresenting: Bool = false
+
 
     var rootViewController: UIViewController {
         return self.navigationViewController
