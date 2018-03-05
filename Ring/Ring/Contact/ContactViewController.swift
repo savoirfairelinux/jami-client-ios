@@ -76,7 +76,8 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.stretchyHeader.avatarView?.subviews.forEach({ $0.removeFromSuperview() })
                 self?.stretchyHeader.avatarView?.addSubview(AvatarView(profileImageData: profileData.element?.0,
                                                                        username: (profileData.element?.1)!,
-                                                                       size: 100))
+                                                                       size: 100,
+                                                                       labelFontSize: 30))
                 self?.titleView.avatarImage = AvatarView(profileImageData: profileData.element?.0,
                                                          username: (profileData.element?.1)!,
                                                          size: 36)
@@ -179,8 +180,13 @@ extension ContactViewController: UITableViewDelegate {
         let navigationHeight = self.navigationController?.navigationBar.bounds.height
         var size = self.view.bounds.size
         var titlViewThreshold: CGFloat = 0
+        let screenSize = UIScreen.main.bounds.size
         if let height = navigationHeight {
-            size.height -= (height - 10)
+            //height for ihoneX
+            if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone,
+                screenSize.height == 812.0 {
+                size.height -= (height - 10)
+            }
             titlViewThreshold = height
         }
         if scrollView.contentSize.height < size.height {
@@ -188,5 +194,26 @@ extension ContactViewController: UITableViewDelegate {
         }
         guard let titleView = navigationItem.titleView as? TitleView else { return }
         titleView.scrollViewDidScroll(scrollView, threshold: titlViewThreshold)
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.scrollViewDidStopScrolling()
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.scrollViewDidStopScrolling()
+        }
+    }
+
+    func scrollViewDidStopScrolling() {
+        var contentOffset = self.tableView.contentOffset
+        let middle = (self.stretchyHeader.maximumContentHeight - self.stretchyHeader.minimumContentHeight) * 0.4
+        if self.stretchyHeader.frame.height > middle {
+            contentOffset.y = -self.stretchyHeader.maximumContentHeight
+        } else {
+            contentOffset.y = -self.stretchyHeader.minimumContentHeight
+        }
+        self.tableView.setContentOffset(contentOffset, animated: true)
     }
 }

@@ -162,9 +162,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.messageAccessoryView.backgroundColor = UIColor.ringMsgTextFieldBackground
         self.view.backgroundColor = UIColor.ringMsgTextFieldBackground
 
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
-        } else {
+//        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+//            self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
+//        } else {
             self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                                displayName: self.viewModel.displayName.value,
                                username: self.viewModel.userName.value)
@@ -182,7 +182,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
                     return
                 })
                 .disposed(by: self.disposeBag)
-        }
+       // }
 
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
