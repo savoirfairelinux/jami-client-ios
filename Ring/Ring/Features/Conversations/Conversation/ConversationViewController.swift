@@ -162,27 +162,23 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         self.messageAccessoryView.backgroundColor = UIColor.ringMsgTextFieldBackground
         self.view.backgroundColor = UIColor.ringMsgTextFieldBackground
 
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            self.viewModel.userName.asObservable().bind(to: self.navigationItem.rx.title).disposed(by: disposeBag)
-        } else {
-            self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
-                               displayName: self.viewModel.displayName.value,
-                               username: self.viewModel.userName.value)
+        self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
+                           displayName: self.viewModel.displayName.value,
+                           username: self.viewModel.userName.value)
 
-            Observable<(Data?, String?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
-                                                               self.viewModel.displayName.asObservable(),
-                                                               self.viewModel.userName.asObservable()) { profileImage, displayName, username in
+        Observable<(Data?, String?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
+                                                           self.viewModel.displayName.asObservable(),
+                                                           self.viewModel.userName.asObservable()) { profileImage, displayName, username in
                                                             return (profileImage, displayName, username)
-                }
-                .observeOn(MainScheduler.instance)
-                .subscribe({ [weak self] profileData -> Void in
-                    self?.setupNavTitle(profileImageData: profileData.element?.0,
-                                        displayName: profileData.element?.1,
-                                        username: profileData.element?.2)
-                    return
-                })
-                .disposed(by: self.disposeBag)
-        }
+            }
+            .observeOn(MainScheduler.instance)
+            .subscribe({ [weak self] profileData -> Void in
+                self?.setupNavTitle(profileImageData: profileData.element?.0,
+                                    displayName: profileData.element?.1,
+                                    username: profileData.element?.2)
+                return
+            })
+            .disposed(by: self.disposeBag)
 
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
