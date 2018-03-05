@@ -40,23 +40,48 @@ class ContactViewModel: ViewModel, Stateable {
     private let profileService: ProfilesService
     private let accountService: AccountsService
     private let conversationService: ConversationsService
-    let tableSection = Observable<[SectionModel<String, ContactActions>]>
+    private let nameService: NameService
+    var tableSection = Observable<[SectionModel<String, ContactActions>]>
         .just([SectionModel(model: "ProfileInfoCell",
                             items:
             [ ContactActions(title: L10n.Contactpage.startAudioCall, image: Asset.callButton),
               ContactActions(title: L10n.Contactpage.startVideoCall, image: Asset.videoRunning),
-              ContactActions(title: L10n.Contactpage.sendMessage, image: Asset.conversationIcon),
-              ContactActions(title: L10n.Contactpage.clearConversation, image: Asset.clearConversation),
-              ContactActions(title: L10n.Contactpage.blockContact, image: Asset.blockIcon)])])
+              ContactActions(title: L10n.Contactpage.sendMessage, image: Asset.conversationIcon)])])
     var conversation: ConversationModel! {
         didSet {
-            self.userName.value = conversation.recipientRingId
             if let profile = conversation.participantProfile, let alias = profile.alias, !alias.isEmpty {
                 self.displayName.value = alias
             }
             if let contact = self.contactService.contact(withRingId: conversation.recipientRingId),
                 let name = contact.userName {
                 self.userName.value = name
+            } else {
+                self.userName.value = conversation.recipientRingId
+                self.nameService.usernameLookupStatus
+                    .filter({ [unowned self] lookupNameResponse in
+                        return lookupNameResponse.address != nil &&
+                            lookupNameResponse.address == self.conversation.recipientRingId
+                    }).subscribe(onNext: { [unowned self] lookupNameResponse in
+                        if let name = lookupNameResponse.name, !name.isEmpty {
+                            self.userName.value = name
+                        } else if let address = lookupNameResponse.address {
+                            self.userName.value = address
+                        }
+                    }).disposed(by: disposeBag)
+
+                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: conversation.recipientRingId)
+            }
+
+            // add option block contact if contact exists
+            if self.contactService.contact(withRingId: conversation.recipientRingId) != nil {
+                self.tableSection = Observable<[SectionModel<String, ContactActions>]>
+                    .just([SectionModel(model: "ProfileInfoCell",
+                                        items:
+                        [ ContactActions(title: L10n.Contactpage.startAudioCall, image: Asset.callButton),
+                          ContactActions(title: L10n.Contactpage.startVideoCall, image: Asset.videoRunning),
+                          ContactActions(title: L10n.Contactpage.sendMessage, image: Asset.conversationIcon),
+                          ContactActions(title: L10n.Contactpage.clearConversation, image: Asset.clearConversation),
+                          ContactActions(title: L10n.Contactpage.blockContact, image: Asset.blockIcon)])])
             }
             self.contactService
                 .getContactRequestVCard(forContactWithRingId: conversation.recipientRingId)
@@ -100,6 +125,7 @@ class ContactViewModel: ViewModel, Stateable {
         self.profileService = injectionBag.profileService
         self.accountService = injectionBag.accountService
         self.conversationService = injectionBag.conversationsService
+        self.nameService = injectionBag.nameService
     }
     func startCall() {
         self.stateSubject.onNext(ConversationState
