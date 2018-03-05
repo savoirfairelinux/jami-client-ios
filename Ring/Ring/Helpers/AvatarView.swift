@@ -26,7 +26,8 @@ class AvatarView: UIView {
     init(profileImageData: Data?,
          username: String,
          size: CGFloat = 32.0,
-         offset: CGPoint = CGPoint(x: 0.0, y: 0.0)) {
+         offset: CGPoint = CGPoint(x: 0.0, y: 0.0),
+         labelFontSize: CGFloat = 16.0) {
 
         let frame = CGRect(x: 0, y: 0, width: size, height: size)
 
@@ -54,7 +55,7 @@ class AvatarView: UIView {
                     let initialLabel: UILabel = UILabel.init(frame: CGRect.init(x: offset.x, y: offset.y, width: size, height: size))
                     initialLabel.center = circle.center
                     initialLabel.text = username.prefixString().capitalized
-                    initialLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                    initialLabel.font = UIFont.systemFont(ofSize: labelFontSize, weight: .semibold)
                     initialLabel.textColor = UIColor.white
                     initialLabel.textAlignment = .center
                     self.addSubview(initialLabel)
