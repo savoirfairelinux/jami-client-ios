@@ -29,14 +29,14 @@ class BlockListViewModel: ViewModel {
     let disposeBag = DisposeBag()
 
     lazy var blockedContactsItems: Observable<[BannedContactItem]> = {
-        return self.contacts.asObservable().map({ contacts in
+        return self.contacts.asObservable().map({ [weak self] contacts in
             var bannedItems = [BannedContactItem]()
             _ = contacts.filter {contact in contact.banned}
                 .map ({ contact in
-                    let items = self.initialItems.filter({ item in
+                    let items = self?.initialItems.filter({ item in
                         return item.contact.ringId == contact.ringId
                     })
-                    if let first = items.first {
+                    if let first = items?.first {
                         bannedItems.append(first)
                     }
                 })
