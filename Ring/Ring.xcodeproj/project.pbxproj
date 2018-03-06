@@ -117,6 +117,9 @@
 		0E3BD4362044B39F00A50DDF /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BD4352044B39F00A50DDF /* ProfileHeaderView.swift */; };
 		0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */; };
 		0E403F831F7D79B000C80BC2 /* MessageCellGenerated.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */; };
+		0E438A96204F318200402900 /* AccountHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E438A95204F318200402900 /* AccountHeader.xib */; };
+		0E438A98204F31BD00402900 /* AccountHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E438A97204F31BD00402900 /* AccountHeader.swift */; };
+		0E438A9A204F47E700402900 /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E438A99204F47E700402900 /* SettingsTableView.swift */; };
 		0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */; };
 		0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48F9D21FDF150700D6CC08 /* GeneratedInteractionsManager.swift */; };
 		0E4909611FE97A94005CAA50 /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4909601FE97A94005CAA50 /* ActiveLabel.framework */; };
@@ -405,6 +408,9 @@
 		0E3BD4352044B39F00A50DDF /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		0E403F801F7D797300C80BC2 /* MessageCellGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellGenerated.swift; sourceTree = "<group>"; };
 		0E403F821F7D79B000C80BC2 /* MessageCellGenerated.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellGenerated.xib; sourceTree = "<group>"; };
+		0E438A95204F318200402900 /* AccountHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountHeader.xib; sourceTree = "<group>"; };
+		0E438A97204F31BD00402900 /* AccountHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeader.swift; sourceTree = "<group>"; };
+		0E438A99204F47E700402900 /* SettingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
 		0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		0E48F9D21FDF150700D6CC08 /* GeneratedInteractionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedInteractionsManager.swift; sourceTree = "<group>"; };
 		0E4909601FE97A94005CAA50 /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
@@ -843,6 +849,7 @@
 				56AC650D1E85694D00EA1AA9 /* DesignableTextField.swift */,
 				1A2041901F1FD46200C08435 /* DesignableView.swift */,
 				0EB479941FA28A7300106AFD /* ButtonTransparentBackground.swift */,
+				0E438A99204F47E700402900 /* SettingsTableView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1317,6 +1324,8 @@
 				1A2D18EC1F2919D800B2C785 /* MeViewController.storyboard */,
 				1A5DC02B1F3565250075E8EF /* MeViewController.swift */,
 				1A2D18FE1F29352D00B2C785 /* MeViewModel.swift */,
+				0E438A95204F318200402900 /* AccountHeader.xib */,
+				0E438A97204F31BD00402900 /* AccountHeader.swift */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -1634,6 +1643,7 @@
 				1A2D18B11F2915B600B2C785 /* SmartlistViewController.storyboard in Resources */,
 				0E403F831F7D79B000C80BC2 /* MessageCellGenerated.xib in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
+				0E438A96204F318200402900 /* AccountHeader.xib in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
 				1A2041841F1EA0FC00C08435 /* CreateAccountViewController.storyboard in Resources */,
 				0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */,
@@ -1788,6 +1798,7 @@
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
+				0E438A9A204F47E700402900 /* SettingsTableView.swift in Sources */,
 				0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */,
 				1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */,
 				0E7CF4DB20164B6700CD967D /* ButtonsContainerView.swift in Sources */,
@@ -1869,6 +1880,7 @@
 				56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */,
 				1A2041911F1FD46300C08435 /* DesignableView.swift in Sources */,
 				0ED2B6FE1F96A16C001572F0 /* LinkNewDeviceViewModel.swift in Sources */,
+				0E438A98204F31BD00402900 /* AccountHeader.swift in Sources */,
 				1A3D28A91F0EBF0200B524EE /* UIView+Ring.swift in Sources */,
 				1A2041881F1EA1EA00C08435 /* CreateAccountViewModel.swift in Sources */,
 				62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */,

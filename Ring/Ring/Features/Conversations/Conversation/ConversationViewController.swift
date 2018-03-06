@@ -58,10 +58,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate, Storybo
         view.addGestureRecognizer(tap)
     }
 
-    deinit {
-        print("conversationcontrollerdestroyed")
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default

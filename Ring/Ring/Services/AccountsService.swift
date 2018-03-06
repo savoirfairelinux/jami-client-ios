@@ -567,4 +567,22 @@ class AccountsService: AccountAdapterDelegate {
         accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken), withValue: token)
         self.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
     }
+
+    // MARK: - observable account data
+
+    func devicesObservable(account: AccountModel) -> Observable<[DeviceModel]> {
+        let accountHelper = AccountModelHelper(withAccount: account)
+        let uri = accountHelper.ringId
+        let accountDevices = Observable.from(optional: account.devices)
+        let newDevice: Observable<[DeviceModel]> = self
+            .sharedResponseStream
+            .filter({ (event) in
+                return event.eventType == ServiceEventType.knownDevicesChanged &&
+                    event.getEventInput(ServiceEventInput.uri) == uri
+            }).map({ _ in
+                return account.devices
+            })
+
+        return accountDevices.concat(newDevice)
+    }
 }
