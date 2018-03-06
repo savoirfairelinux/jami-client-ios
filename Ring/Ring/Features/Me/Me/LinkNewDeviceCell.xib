@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qQU-vB-ZuD" customClass="ButtonTransparentBackground" customModule="Ring" customModuleProvider="target">
-                        <rect key="frame" x="73.5" y="4.5" width="35" height="35"/>
+                        <rect key="frame" x="65.5" y="4.5" width="35" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="35" id="XIg-PF-p2r"/>
                             <constraint firstAttribute="height" constant="35" id="rZ3-3g-1AV"/>
@@ -27,7 +27,8 @@
                         <color key="tintColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Gy-EN-BpG">
-                        <rect key="frame" x="118.5" y="4.5" width="138" height="35"/>
+                        <rect key="frame" x="110.5" y="4.5" width="154" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <state key="normal" title="Link Another Device">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>

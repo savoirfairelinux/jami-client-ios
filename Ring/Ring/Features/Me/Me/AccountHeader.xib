@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AccountHeader" customModule="Ring" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHp-YH-dZ5">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bD3-jT-xLr">
+                            <rect key="frame" x="137" y="80" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="2mb-uU-dHb"/>
+                                <constraint firstAttribute="width" constant="100" id="WSb-4Z-9t2"/>
+                            </constraints>
+                        </imageView>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oQJ-jT-wTv">
+                            <rect key="frame" x="20" y="200" width="335" height="27"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
+                            </userDefinedRuntimeAttributes>
+                        </textField>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RQI-jN-lhc">
+                            <rect key="frame" x="20" y="228" width="335" height="1"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="yUg-4a-h3g"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="RQI-jN-lhc" firstAttribute="top" secondItem="oQJ-jT-wTv" secondAttribute="bottom" constant="1" id="Pay-sK-Jbs"/>
+                        <constraint firstItem="RQI-jN-lhc" firstAttribute="leading" secondItem="CHp-YH-dZ5" secondAttribute="leading" constant="20" id="an2-mQ-cD5"/>
+                        <constraint firstItem="bD3-jT-xLr" firstAttribute="centerY" secondItem="CHp-YH-dZ5" secondAttribute="centerY" id="fk1-Ln-MyV"/>
+                        <constraint firstAttribute="trailing" secondItem="RQI-jN-lhc" secondAttribute="trailing" constant="20" id="i5F-Y2-n1Y"/>
+                        <constraint firstItem="oQJ-jT-wTv" firstAttribute="top" secondItem="bD3-jT-xLr" secondAttribute="bottom" constant="20" id="oKl-Yq-gZw"/>
+                        <constraint firstItem="bD3-jT-xLr" firstAttribute="centerX" secondItem="CHp-YH-dZ5" secondAttribute="centerX" id="pf4-Dp-CPJ"/>
+                        <constraint firstItem="oQJ-jT-wTv" firstAttribute="leading" secondItem="CHp-YH-dZ5" secondAttribute="leading" constant="20" id="txQ-DZ-CHU"/>
+                        <constraint firstAttribute="trailing" secondItem="oQJ-jT-wTv" secondAttribute="trailing" constant="20" id="u0a-qO-EDQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="CHp-YH-dZ5" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="C9b-rk-lYC"/>
+                <constraint firstItem="CHp-YH-dZ5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="XEI-v0-Cba"/>
+                <constraint firstItem="CHp-YH-dZ5" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="fPT-Ss-NTk"/>
+                <constraint firstItem="CHp-YH-dZ5" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="v1F-D0-1oe"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="maximumContentHeight">
+                    <real key="value" value="260"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="profileImageView" destination="bD3-jT-xLr" id="wNj-F7-4yD"/>
+                <outlet property="profileName" destination="oQJ-jT-wTv" id="yaH-GU-Sih"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="139"/>
+        </view>
+    </objects>
+</document>
