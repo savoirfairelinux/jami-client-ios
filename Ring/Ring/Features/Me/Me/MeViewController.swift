@@ -28,37 +28,51 @@ import RxDataSources
 class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBased {
 
     // MARK: - outlets
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var ringIdLabel: UILabel!
-    @IBOutlet weak var settingsTable: UITableView!
+    @IBOutlet private weak var settingsTable: SettingsTableView!
 
     // MARK: - members
     var viewModel: MeViewModel!
     fileprivate let disposeBag = DisposeBag()
+    private var stretchyHeader: AccountHeader!
 
     // MARK: - functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addHeaderView()
 
         self.navigationItem.title = L10n.Global.meTabBarTitle
         self.configureBindings()
         self.applyShadow()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
+    private func addHeaderView() {
+        guard let nibViews = Bundle.main
+            .loadNibNamed("AccountHeader", owner: self, options: nil) else {
+                supportEditProfile()
+                return
+        }
+        guard let headerView = nibViews.first as? AccountHeader else {
+            supportEditProfile()
+            return
+        }
+        self.stretchyHeader = headerView
+        self.settingsTable.addSubview(self.stretchyHeader)
+        self.settingsTable.delegate = self
+        self.profileImageView = stretchyHeader.profileImageView
+        self.profileName = stretchyHeader.profileName
     }
 
-    func configureBindings() {
-        self.viewModel.userName
-            .bind(to: self.nameLabel.rx.text)
-            .disposed(by: disposeBag)
+    private func supportEditProfile() {
+        // if loading grom nib failed add empty views requered by EditProfileViewController
+        let image = UIImageView()
+        let name = UITextField()
+        self.view.addSubview(image)
+        self.view.addSubview(name)
+        self.profileImageView = image
+        self.profileName = name
+    }
 
-        self.viewModel.ringId.asObservable()
-            .bind(to: self.ringIdLabel.rx.text)
-            .disposed(by: disposeBag)
-
+    private func configureBindings() {
         let infoButton = UIButton(type: .infoLight)
         let infoItem = UIBarButtonItem(customView: infoButton)
         infoButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
@@ -72,7 +86,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         //setup Table
         self.settingsTable.estimatedRowHeight = 50
         self.settingsTable.rowHeight = UITableViewAutomaticDimension
-        self.settingsTable.separatorStyle = .none
+        self.settingsTable.tableFooterView = UIView()
 
         //Register cell
         self.setUpDataSource()
@@ -92,11 +106,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             }).disposed(by: self.disposeBag)
     }
 
-    func openBlockedList() {
+    private func openBlockedList() {
         self.viewModel.showBlockedContacts()
     }
 
-    func infoItemTapped() {
+    private func infoItemTapped() {
         var compileDate: String {
             let dateDefault = "20180131"
             let dateFormatter = DateFormatter()
@@ -121,7 +135,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.present(alert, animated: true, completion: nil)
     }
 
-    func setUpDataSource() {
+    private func setUpDataSource() {
 
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SettingsSection.Item)
             -> UITableViewCell = {
@@ -175,6 +189,17 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cellType: BlockContactsCell.self)
                     cell.label.text = L10n.Accountpage.blockedContacts
                     return cell
+
+                case .sectionHeader(let title):
+                    let cell = UITableViewCell()
+                    cell.textLabel?.text = title
+                    cell.backgroundColor = UIColor.ringNavigationBar.darken(byPercentage: 0.02)
+                    return cell
+
+                case .ordinary(let label):
+                    let cell = UITableViewCell()
+                    cell.textLabel?.text = label
+                    return cell
                 }
         }
 
@@ -182,10 +207,47 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.viewModel.settings
             .bind(to: self.settingsTable.rx.items(dataSource: settingsItemDataSource))
             .disposed(by: disposeBag)
+    }
+}
 
-        //Set header titles
-        settingsItemDataSource.titleForHeaderInSection = { dataSource, index in
-            return dataSource.sectionModels[index].header
+extension MeViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let navigationHeight = self.navigationController?.navigationBar.bounds.height
+        var size = self.view.bounds.size
+        let screenSize = UIScreen.main.bounds.size
+        if let height = navigationHeight {
+            //height for ihoneX
+            if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone,
+                screenSize.height == 812.0 {
+                size.height -= (height - 10)
+            }
         }
+        if scrollView.contentSize.height < size.height {
+            scrollView.contentSize = size
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.scrollViewDidStopScrolling()
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.scrollViewDidStopScrolling()
+        }
+    }
+
+    private func scrollViewDidStopScrolling() {
+        var contentOffset = self.settingsTable.contentOffset
+        if self.stretchyHeader.frame.height <= self.stretchyHeader.minimumContentHeight {
+            return
+        }
+        let middle = (self.stretchyHeader.maximumContentHeight - self.stretchyHeader.minimumContentHeight) * 0.4
+        if self.stretchyHeader.frame.height > middle {
+            contentOffset.y = -self.stretchyHeader.maximumContentHeight
+        } else {
+            contentOffset.y = -self.stretchyHeader.minimumContentHeight
+        }
+        self.settingsTable.setContentOffset(contentOffset, animated: true)
     }
 }
