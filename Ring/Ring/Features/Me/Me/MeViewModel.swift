@@ -27,54 +27,43 @@ enum SettingsSection: SectionModelType {
 
     typealias Item = SectionRow
 
-    case linkedDevices(header: String, items: [SectionRow])
-    case linkNewDevice(header: String, items: [SectionRow])
-    case enableProxy(header: String, items: [SectionRow])
+    case linkedDevices(items: [SectionRow])
+    case linkNewDevice(items: [SectionRow])
+    case accountSettings(items: [SectionRow])
+    case credentials(items: [SectionRow])
 
     enum SectionRow {
         case device(device: DeviceModel)
         case linkNew
         case proxy
         case blockedList
-    }
-
-    var header: String {
-
-        switch self {
-        case .linkedDevices(let header, _):
-            return header
-
-        case .linkNewDevice(let header, _):
-            return header
-
-        case .enableProxy(let header, _):
-            return header
-        }
+        case sectionHeader(title: String)
+        case ordinary(label: String)
     }
 
     var items: [SectionRow] {
         switch self {
-        case .linkedDevices(_, let items):
+        case .linkedDevices(let items):
             return items
-
-        case .linkNewDevice(_, let items):
+        case .linkNewDevice(let items):
             return items
-
-        case .enableProxy(_, let items):
+        case .accountSettings(let items):
+            return items
+        case .credentials(let items):
             return items
         }
     }
 
     public init(original: SettingsSection, items: [SectionRow]) {
         switch original {
-        case .linkedDevices(let header, _):
-            self = .linkedDevices(header: header, items: items)
-
-        case .linkNewDevice(let header, _):
-            self = .linkNewDevice(header: header, items: items)
-
-        case .enableProxy(let header, _):
-            self = .enableProxy(header: header, items: items)
+        case .linkedDevices:
+            self = .linkedDevices(items: items)
+        case .linkNewDevice:
+            self = .linkNewDevice(items: items)
+        case .accountSettings:
+            self = .accountSettings(items: items)
+        case .credentials:
+            self = .credentials(items: items)
         }
     }
 }
@@ -83,19 +72,28 @@ class MeViewModel: ViewModel, Stateable {
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
+    let disposeBag = DisposeBag()
 
-    lazy var userName: Observable<String?> = {
+    let accountService: AccountsService
+    let nameService: NameService
+
+     // MARK: - configure table sections
+
+    lazy var userName: Observable<String> = {
         // return username if exists, is no start name lookup
-        let accountName = self.accountService.currentAccount?.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName))
-        if accountName != nil && !accountName!.isEmpty {
-            return Observable.from(optional: accountName)
-        }
         guard let account = self.accountService.currentAccount else {
-            return Observable.from(optional: accountName)
+            return Observable.just("")
+        }
+        let accountName = account.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName))
+        if let accountName = accountName, !accountName.isEmpty {
+            return Observable.just(accountName)
         }
         let accountHelper = AccountModelHelper(withAccount: account)
         guard let uri = accountHelper.ringId else {
-            return Observable.from(optional: accountName)
+            return Observable.just("")
         }
         let time = DispatchTime.now() + 2
         DispatchQueue.main.asyncAfter(deadline: time) {
@@ -111,56 +109,72 @@ class MeViewModel: ViewModel, Stateable {
             })
     }()
 
-    lazy var ringId: Observable<String?> = {
-        return Observable.from(optional: self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)))
-    }()
-
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
-    let disposeBag = DisposeBag()
-
-    let accountService: AccountsService
-    let nameService: NameService
-
-    //table section
-    lazy var settings: Observable<[SettingsSection]> = {
-        if let account = self.accountService.currentAccount {
-            let accountHelper = AccountModelHelper(withAccount: account)
-            let uri = accountHelper.ringId
-            let devices = Observable.from(optional: account.devices)
-            let accountDevice: Observable<[DeviceModel]> = self.accountService
-                .sharedResponseStream
-                .filter({ (event) in
-                    return event.eventType == ServiceEventType.knownDevicesChanged &&
-                        event.getEventInput(ServiceEventInput.uri) == uri
-                }).map({ _ in
-                    return account.devices
-                })
-
-            return devices.concat(accountDevice)
-                .map { devices in
-                    let addNewDevice = SettingsSection.linkNewDevice(header: "", items: [SettingsSection.SectionRow.linkNew])
-                    let enableProxy = SettingsSection.enableProxy(header: L10n.Accountpage.settingsHeader, items: [SettingsSection.SectionRow.blockedList])
-                    var rows: [SettingsSection.SectionRow]?
-
-                    if !devices.isEmpty {
-                        rows = [SettingsSection.SectionRow.device(device: devices[0])]
-                        for i in 1 ..< devices.count {
-                            let device = devices[i]
-                            rows!.append (SettingsSection.SectionRow.device(device: device))
-                        }
-                    }
-
-                    if rows != nil {
-                        let devicesSection = SettingsSection.linkedDevices(header: L10n.Accountpage.devicesListHeader, items: rows!)
-                        return [devicesSection, addNewDevice, enableProxy]
-                    } else {
-                        return [addNewDevice, enableProxy]
-                    }
-            }
+    lazy var ringId: Observable<String> = {
+        if let uri = self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)) {
+            let ringId = uri.replacingOccurrences(of: "ring:", with: "")
+            return Observable.just(ringId)
         }
-        return Observable.just([SettingsSection]())
+        return Observable.just("")
+    }()
+
+    lazy var accountCredentials: Observable<SettingsSection> = {
+        return Observable
+            .combineLatest(userName.startWith(""), ringId.startWith("")) { (name, ringID) in
+            var items: [SettingsSection.SectionRow] =  [.sectionHeader(title: L10n.Accountpage.credentialsHeader),
+                                                        .ordinary(label: "ringID: " + ringID)]
+            if !name.isEmpty {
+                items.append(.ordinary(label: L10n.Accountpage.username + " " + name))
+            } else {
+                items.append(.ordinary(label: L10n.Accountpage.usernameNotRegistered))
+            }
+            return SettingsSection
+                .credentials(items: items)
+        }
+    }()
+
+    lazy var linkNewDevice: Observable<SettingsSection> = {
+        return Observable.just(.linkNewDevice(items: [.linkNew]))
+    }()
+
+    lazy var accountSettings: Observable<SettingsSection> = {
+        return Observable
+            .just(.accountSettings( items: [.sectionHeader(title: L10n.Accountpage.settingsHeader),
+                                            .blockedList]))
+    }()
+
+    lazy var linkedDevices: Observable<SettingsSection> = {
+        // if account does not exist or devices list empty return empty section
+        let empptySection: SettingsSection = .linkedDevices(items: [.ordinary(label: "")])
+        guard let account = self.accountService.currentAccount else {
+            return Observable.just(empptySection)
+        }
+        return self.accountService.devicesObservable(account: account)
+            .map { devices -> SettingsSection in
+                var rows: [SettingsSection.SectionRow]?
+
+                if !devices.isEmpty {
+                    rows = [.device(device: devices[0])]
+                    for i in 1 ..< devices.count {
+                        let device = devices[i]
+                        rows!.append (.device(device: device))
+                    }
+                }
+                if rows != nil {
+                    rows?.insert(.sectionHeader(title: L10n.Accountpage.devicesListHeader), at: 0)
+                    let devicesSection: SettingsSection = .linkedDevices(items: rows!)
+                    return devicesSection
+                }
+                return empptySection
+        }
+    }()
+
+    lazy var settings: Observable<[SettingsSection]> = {
+        Observable.combineLatest(accountCredentials,
+                                 linkNewDevice,
+                                 linkedDevices,
+                                 accountSettings) { (credentials, linkNew, devices, settings) in
+            return [credentials, devices, linkNew, settings]
+        }
     }()
 
     lazy var proxyEnabled: Observable<Bool>? = {

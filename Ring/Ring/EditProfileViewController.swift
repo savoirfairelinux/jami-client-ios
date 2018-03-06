@@ -37,15 +37,18 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
     override func viewDidLoad() {
         super.viewDidLoad()
         self.model = EditProfileViewModel()
-        self.setupUI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setupUI()
         UIApplication.shared.statusBarStyle = .lightContent
     }
 
     func setupUI() {
+
+        profileName.returnKeyType = .done
+        profileName.autocorrectionType = .no
 
         self.model.image.asObservable()
             .bind(to: self.profileImageView.rx.image)
@@ -63,6 +66,10 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         self.profileName.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
            self.model.updateName(self.profileName.text!)
         }).disposed(by: disposeBag)
+    }
+
+    func resetProfileName() {
+        self.profileName.text = self.model.profileName.value
     }
 
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -128,10 +135,4 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         profileImageView.image = image.circleMasked
         dismiss(animated: true, completion: nil)
     }
-
-    //hide keyboard when touch outside of text field
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.profileName.resignFirstResponder()
-//        self.profileName.text = self.model.profileName.value
-//    }
 }
