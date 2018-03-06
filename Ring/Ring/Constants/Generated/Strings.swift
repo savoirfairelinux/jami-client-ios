@@ -11,6 +11,8 @@ enum L10n {
   enum Accountpage {
     /// Block List
     static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
+    /// Account Details
+    static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader")
     /// Devices
     static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
     /// Enable Push Notifications
@@ -19,6 +21,10 @@ enum L10n {
     static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
     /// UNBLOCK
     static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact")
+    /// username:
+    static let username = L10n.tr("Localizable", "accountPage.username")
+    /// username: not registered
+    static let usernameNotRegistered = L10n.tr("Localizable", "accountPage.usernameNotRegistered")
   }
 
   enum Actions {

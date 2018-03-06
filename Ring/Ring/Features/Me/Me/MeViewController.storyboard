@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RuW-kz-iBP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RuW-kz-iBP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Me View Controller-->
         <scene sceneID="JC9-vU-UJ4">
@@ -27,103 +21,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ring id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="rC6-Ga-QjY" userLabel="RingId Label">
-                                <rect key="frame" x="21" y="249" width="333" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="UsR-G7-bkE"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="GCe-jT-OCG">
-                                <rect key="frame" x="36" y="200" width="303" height="26"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tS0-P7-fYT">
-                                <rect key="frame" x="20" y="227" width="335" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="f7M-6A-gFC"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
-                                        <color key="value" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
-                                        <color key="value" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_contact_picture" translatesAutoresizingMaskIntoConstraints="NO" id="8HY-Zl-94u">
-                                <rect key="frame" x="137.5" y="70" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="3Ik-A7-Cyx"/>
-                                    <constraint firstAttribute="width" constant="100" id="xE6-h0-miE"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username is not registered" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8x-Sv-T50">
-                                <rect key="frame" x="21" y="272" width="333" height="23"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="40" estimatedSectionHeaderHeight="40" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eg8-N7-lDA">
-                                <rect key="frame" x="0.0" y="310" width="375" height="357"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" estimatedSectionHeaderHeight="40" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eg8-N7-lDA" customClass="SettingsTableView" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tam-QD-Xpf" firstAttribute="top" secondItem="eg8-N7-lDA" secondAttribute="bottom" id="2zg-J2-7oF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="rC6-Ga-QjY" secondAttribute="trailing" constant="5" id="4mU-no-jxy"/>
-                            <constraint firstItem="tS0-P7-fYT" firstAttribute="leading" secondItem="nkh-py-Uar" secondAttribute="leading" constant="20" id="6OH-dg-fT7"/>
-                            <constraint firstItem="GCe-jT-OCG" firstAttribute="top" secondItem="8HY-Zl-94u" secondAttribute="bottom" constant="30" id="E9u-9R-kVg"/>
-                            <constraint firstItem="8HY-Zl-94u" firstAttribute="top" secondItem="nkh-py-Uar" secondAttribute="topMargin" constant="50" id="FBb-kO-4nV"/>
-                            <constraint firstItem="tS0-P7-fYT" firstAttribute="top" secondItem="GCe-jT-OCG" secondAttribute="bottom" constant="1" id="FGU-ae-3wK"/>
-                            <constraint firstItem="8HY-Zl-94u" firstAttribute="centerX" secondItem="nkh-py-Uar" secondAttribute="centerX" id="H4W-Vc-cHV"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="GCe-jT-OCG" secondAttribute="trailing" constant="20" id="I2l-64-P0x"/>
-                            <constraint firstItem="tS0-P7-fYT" firstAttribute="centerX" secondItem="nkh-py-Uar" secondAttribute="centerX" id="JBF-Pu-rcp"/>
-                            <constraint firstItem="eg8-N7-lDA" firstAttribute="top" secondItem="w8x-Sv-T50" secondAttribute="bottom" constant="15" id="Nfa-oZ-Zfg"/>
-                            <constraint firstItem="GCe-jT-OCG" firstAttribute="leading" secondItem="nkh-py-Uar" secondAttribute="leadingMargin" constant="20" id="Sp4-fa-qoR"/>
-                            <constraint firstAttribute="trailing" secondItem="tS0-P7-fYT" secondAttribute="trailing" constant="20" id="Uvb-ZR-7rf"/>
-                            <constraint firstItem="GCe-jT-OCG" firstAttribute="centerX" secondItem="nkh-py-Uar" secondAttribute="centerX" id="WO3-X1-ObR"/>
-                            <constraint firstItem="w8x-Sv-T50" firstAttribute="trailing" secondItem="rC6-Ga-QjY" secondAttribute="trailing" id="cl3-7W-wQd"/>
-                            <constraint firstItem="rC6-Ga-QjY" firstAttribute="leading" secondItem="nkh-py-Uar" secondAttribute="leadingMargin" constant="5" id="g4K-vz-fbY"/>
-                            <constraint firstItem="w8x-Sv-T50" firstAttribute="top" secondItem="rC6-Ga-QjY" secondAttribute="bottom" constant="5" id="kSt-bN-hIG"/>
+                            <constraint firstItem="eg8-N7-lDA" firstAttribute="top" secondItem="nkh-py-Uar" secondAttribute="top" id="JOI-oc-UsI"/>
+                            <constraint firstItem="tam-QD-Xpf" firstAttribute="top" secondItem="eg8-N7-lDA" secondAttribute="bottom" id="jL3-gU-UHx"/>
                             <constraint firstItem="eg8-N7-lDA" firstAttribute="leading" secondItem="nkh-py-Uar" secondAttribute="leading" id="lt1-n4-Wb9"/>
-                            <constraint firstItem="w8x-Sv-T50" firstAttribute="centerX" secondItem="nkh-py-Uar" secondAttribute="centerX" id="mWZ-vm-Oj4"/>
-                            <constraint firstItem="rC6-Ga-QjY" firstAttribute="centerX" secondItem="nkh-py-Uar" secondAttribute="centerX" id="s2O-7d-18r"/>
-                            <constraint firstItem="w8x-Sv-T50" firstAttribute="leading" secondItem="rC6-Ga-QjY" secondAttribute="leading" id="t75-yu-OEC"/>
                             <constraint firstAttribute="trailing" secondItem="eg8-N7-lDA" secondAttribute="trailing" id="tv6-ma-ze2"/>
-                            <constraint firstItem="rC6-Ga-QjY" firstAttribute="top" secondItem="tS0-P7-fYT" secondAttribute="bottom" constant="21" id="yve-5B-6tl"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="vC8-Ti-TTd"/>
                     <connections>
-                        <outlet property="nameLabel" destination="w8x-Sv-T50" id="IgU-9F-Fkh"/>
-                        <outlet property="profileImageView" destination="8HY-Zl-94u" id="cY6-cO-WEq"/>
-                        <outlet property="profileName" destination="GCe-jT-OCG" id="FDX-fX-Fye"/>
-                        <outlet property="ringIdLabel" destination="rC6-Ga-QjY" id="nsg-Jw-OTS"/>
                         <outlet property="settingsTable" destination="eg8-N7-lDA" id="gJV-8a-jA3"/>
                     </connections>
                 </viewController>
@@ -132,7 +45,4 @@
             <point key="canvasLocation" x="-186.40000000000001" y="-483.50824587706148"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="ic_contact_picture" width="128" height="128"/>
-    </resources>
 </document>
