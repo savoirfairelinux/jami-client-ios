@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_34cad34f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-03-07T17:03:20Z",
+      "side": 1,
+      "message": "l",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 7
+      },
+      "revId": "8ee0df0922f18dd71e73bfaa94d665f6cbda02ce",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_d4b56fce",
+        "filename": "Ring/Ring/Contact/ContactViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-03-07T17:03:20Z",
+      "side": 1,
+      "message": "can we put 44? (16/36) ? (18/40) ? (44/100)",
+      "range": {
+        "startLine": 80,
+        "startChar": 86,
+        "endLine": 80,
+        "endChar": 88
+      },
+      "revId": "8ee0df0922f18dd71e73bfaa94d665f6cbda02ce",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_94948738",
+        "filename": "Ring/Ring/Contact/ContactViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-03-07T17:03:20Z",
+      "side": 1,
+      "message": "p",
+      "revId": "8ee0df0922f18dd71e73bfaa94d665f6cbda02ce",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_b48f0323",
+        "filename": "Ring/Ring/Contact/ContactViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-03-07T17:03:20Z",
+      "side": 1,
+      "message": "i think scrollViewWillBeginDecelerating makes it a bit more snappy. the deceleration ends only when the velocity is below some epsilon. maybe both?",
+      "range": {
+        "startLine": 199,
+        "startChar": 9,
+        "endLine": 199,
+        "endChar": 37
+      },
+      "revId": "8ee0df0922f18dd71e73bfaa94d665f6cbda02ce",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
