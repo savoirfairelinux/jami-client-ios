@@ -230,6 +230,20 @@ class DBManager {
             }
     }
 
+    func updateFileName(interactionID: Int64, name: String) -> Completable {
+        return Completable.create { [unowned self] completable in
+            let success = self.interactionHepler
+                .updateInteractionWithID(interactionID: interactionID, content: name)
+            if success {
+                completable(.completed)
+            } else {
+                completable(.error(DBBridgingError.updateMessageStatusFailed))
+            }
+
+            return Disposables.create { }
+        }
+    }
+
     func updateTransferStatus(daemonID: String, withStatus transferStatus: DataTransferStatus) -> Completable {
         return Completable.create { [unowned self] completable in
             let success = self.interactionHepler

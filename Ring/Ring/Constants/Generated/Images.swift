@@ -2,24 +2,24 @@
 
 #if os(OSX)
   import AppKit.NSImage
-  typealias AssetColorTypeAlias = NSColor
-  typealias Image = NSImage
+  internal typealias AssetColorTypeAlias = NSColor
+  internal typealias Image = NSImage
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIImage
-  typealias AssetColorTypeAlias = UIColor
-  typealias Image = UIImage
+  internal typealias AssetColorTypeAlias = UIColor
+  internal typealias Image = UIImage
 #endif
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 @available(*, deprecated, renamed: "ImageAsset")
-typealias AssetType = ImageAsset
+internal typealias AssetType = ImageAsset
 
-struct ImageAsset {
-  fileprivate var name: String
+internal struct ImageAsset {
+  internal fileprivate(set) var name: String
 
-  var image: Image {
+  internal var image: Image {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
@@ -33,57 +33,57 @@ struct ImageAsset {
   }
 }
 
-struct ColorAsset {
-  fileprivate var name: String
+internal struct ColorAsset {
+  internal fileprivate(set) var name: String
 
   #if swift(>=3.2)
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  var color: AssetColorTypeAlias {
+  internal var color: AssetColorTypeAlias {
     return AssetColorTypeAlias(asset: self)
   }
   #endif
 }
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-enum Asset {
-  static let accountIcon = ImageAsset(name: "account_icon")
-  static let addPerson = ImageAsset(name: "add_person")
-  static let attachmentIcon = ImageAsset(name: "attachment_icon")
-  static let audioMuted = ImageAsset(name: "audio_muted")
-  static let audioRunning = ImageAsset(name: "audio_running")
-  static let backButton = ImageAsset(name: "back_button")
-  static let backgroundRing = ImageAsset(name: "background_ring")
-  static let blockIcon = ImageAsset(name: "block_icon")
-  static let callButton = ImageAsset(name: "call_button")
-  static let camera = ImageAsset(name: "camera")
-  static let clearConversation = ImageAsset(name: "clear_conversation")
-  static let closeIcon = ImageAsset(name: "close_icon")
-  static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
-  static let conversationIcon = ImageAsset(name: "conversation_icon")
-  static let device = ImageAsset(name: "device")
-  static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
-  static let doneIcon = ImageAsset(name: "done_icon")
-  static let downloadIcon = ImageAsset(name: "download_icon")
-  static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
-  static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
-  static let icContactPicture = ImageAsset(name: "ic_contact_picture")
-  static let moreSettings = ImageAsset(name: "more_settings")
-  static let pauseCall = ImageAsset(name: "pause_call")
-  static let ringIcon = ImageAsset(name: "ringIcon")
-  static let ringLogo = ImageAsset(name: "ring_logo")
-  static let sendButton = ImageAsset(name: "send_button")
-  static let settingsIcon = ImageAsset(name: "settings_icon")
-  static let shareButton = ImageAsset(name: "share_button")
-  static let stopCall = ImageAsset(name: "stop_call")
-  static let switchCamera = ImageAsset(name: "switch_camera")
-  static let unpauseCall = ImageAsset(name: "unpause_call")
-  static let videoMuted = ImageAsset(name: "video_muted")
-  static let videoRunning = ImageAsset(name: "video_running")
+internal enum Asset {
+  internal static let accountIcon = ImageAsset(name: "account_icon")
+  internal static let addPerson = ImageAsset(name: "add_person")
+  internal static let attachmentIcon = ImageAsset(name: "attachment_icon")
+  internal static let audioMuted = ImageAsset(name: "audio_muted")
+  internal static let audioRunning = ImageAsset(name: "audio_running")
+  internal static let backButton = ImageAsset(name: "back_button")
+  internal static let backgroundRing = ImageAsset(name: "background_ring")
+  internal static let blockIcon = ImageAsset(name: "block_icon")
+  internal static let callButton = ImageAsset(name: "call_button")
+  internal static let camera = ImageAsset(name: "camera")
+  internal static let clearConversation = ImageAsset(name: "clear_conversation")
+  internal static let closeIcon = ImageAsset(name: "close_icon")
+  internal static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
+  internal static let conversationIcon = ImageAsset(name: "conversation_icon")
+  internal static let device = ImageAsset(name: "device")
+  internal static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
+  internal static let doneIcon = ImageAsset(name: "done_icon")
+  internal static let downloadIcon = ImageAsset(name: "download_icon")
+  internal static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
+  internal static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
+  internal static let icContactPicture = ImageAsset(name: "ic_contact_picture")
+  internal static let moreSettings = ImageAsset(name: "more_settings")
+  internal static let pauseCall = ImageAsset(name: "pause_call")
+  internal static let ringIcon = ImageAsset(name: "ringIcon")
+  internal static let ringLogo = ImageAsset(name: "ring_logo")
+  internal static let sendButton = ImageAsset(name: "send_button")
+  internal static let settingsIcon = ImageAsset(name: "settings_icon")
+  internal static let shareButton = ImageAsset(name: "share_button")
+  internal static let stopCall = ImageAsset(name: "stop_call")
+  internal static let switchCamera = ImageAsset(name: "switch_camera")
+  internal static let unpauseCall = ImageAsset(name: "unpause_call")
+  internal static let videoMuted = ImageAsset(name: "video_muted")
+  internal static let videoRunning = ImageAsset(name: "video_running")
 
   // swiftlint:disable trailing_comma
-  static let allColors: [ColorAsset] = [
+  internal static let allColors: [ColorAsset] = [
   ]
-  static let allImages: [ImageAsset] = [
+  internal static let allImages: [ImageAsset] = [
     accountIcon,
     addPerson,
     attachmentIcon,
@@ -120,11 +120,11 @@ enum Asset {
   ]
   // swiftlint:enable trailing_comma
   @available(*, deprecated, renamed: "allImages")
-  static let allValues: [AssetType] = allImages
+  internal static let allValues: [AssetType] = allImages
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
-extension Image {
+internal extension Image {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
@@ -138,7 +138,7 @@ extension Image {
   }
 }
 
-extension AssetColorTypeAlias {
+internal extension AssetColorTypeAlias {
   #if swift(>=3.2)
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
   convenience init!(asset: ColorAsset) {
