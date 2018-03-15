@@ -40,7 +40,7 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var buttonsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonsHeightConstraint: NSLayoutConstraint?
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -48,6 +48,9 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var rightDivider: UIView!
     @IBOutlet weak var sendingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var failedStatusLabel: UILabel!
+    @IBOutlet weak var bubbleViewMask: UIView?
+
+    private var transferImageView = UIImageView()
 
     var dataTransferProgressUpdater: Timer?
 
@@ -226,28 +229,38 @@ class MessageCell: UITableViewCell, NibReusable {
             self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
         default: break
         }
+        if item.shouldDisplayTransferedImage {
+           self.displayTransferedImage(message: item)
+        }
     }
 
     /// swiftlint:disable function_body_length
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
                            _ items: [MessageViewModel]?,
                            cellForRowAt indexPath: IndexPath) {
+
         self.backgroundColor = UIColor.clear
+        self.bubbleViewMask?.backgroundColor = UIColor.ringMsgBackground
+        self.transferImageView.backgroundColor = UIColor.ringMsgBackground
+        buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 999.0)
         guard let item = items?[indexPath.row] else {
             return
         }
 
+        self.transferImageView.removeFromSuperview()
+        self.bubbleViewMask?.isHidden = true
+
         // hide/show time label
-        formatCellTimeLabel(item)
+        self.formatCellTimeLabel(item)
 
         if item.bubblePosition() == .generated {
             self.bubble.backgroundColor = UIColor.ringMsgCellReceived
             self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
             if indexPath.row == 0 {
-                messageLabelMarginConstraint.constant = 4
+                self.messageLabelMarginConstraint.constant = 4
                 self.bubbleTopConstraint.constant = 36
             } else {
-                messageLabelMarginConstraint.constant = -2
+                self.messageLabelMarginConstraint.constant = -2
                 self.bubbleTopConstraint.constant = 32
             }
             return
@@ -256,10 +269,10 @@ class MessageCell: UITableViewCell, NibReusable {
             let type = item.bubblePosition()
             self.bubble.backgroundColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
             if indexPath.row == 0 {
-                messageLabelMarginConstraint.constant = 4
+                self.messageLabelMarginConstraint.constant = 4
                 self.bubbleTopConstraint.constant = 36
             } else {
-                messageLabelMarginConstraint.constant = -2
+                self.messageLabelMarginConstraint.constant = -2
                 self.bubbleTopConstraint.constant = 32
             }
             if item.bubblePosition() == .received {
@@ -273,11 +286,11 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         // bubble grouping for cell
-        applyBubbleStyleToCell(items, cellForRowAt: indexPath)
+        self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
 
         // special cases where top/bottom margins should be larger
         if indexPath.row == 0 {
-            messageLabelMarginConstraint.constant = 4
+            self.messageLabelMarginConstraint.constant = 4
             self.bubbleTopConstraint.constant = 36
         } else if items?.count == indexPath.row + 1 {
             self.bubbleBottomConstraint.constant = 16
@@ -316,12 +329,32 @@ class MessageCell: UITableViewCell, NibReusable {
                     return
                 })
                 .disposed(by: self.disposeBag)
-
-        }
+            }
     }
 
     // swiftlint:enable function_body_length
 
+    func displayTransferedImage(message: MessageViewModel) {
+        let maxDimsion: CGFloat = 250
+        if let image = message.getTransferedImage(maxSize: maxDimsion ) {
+            self.transferImageView.image = image
+            let size = image.size
+            self.transferImageView.contentMode = .center
+            buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 250.0)
+            self.bubble.addSubview(self.transferImageView)
+            self.bubbleViewMask?.isHidden = false
+            self.bottomCorner.isHidden = true
+            self.topCorner.isHidden = true
+            self.transferImageView.translatesAutoresizingMaskIntoConstraints = false
+            if message.bubblePosition() == .sent {
+                self.transferImageView.trailingAnchor.constraint(equalTo: self.bubble.trailingAnchor, constant: 0).isActive = true
+            } else if message.bubblePosition() == .received {
+                self.transferImageView.leadingAnchor.constraint(equalTo: self.bubble.leadingAnchor, constant: 0).isActive = true
+            }
+            self.transferImageView.topAnchor.constraint(equalTo: self.bubble.topAnchor, constant: 0).isActive = true
+            self.transferImageView.bottomAnchor.constraint(equalTo: self.bubble.bottomAnchor, constant: 0).isActive = true
+        }
+    }
     // swiftlint:enable cyclomatic_complexity
 
 }

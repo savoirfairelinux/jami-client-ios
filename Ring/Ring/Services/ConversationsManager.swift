@@ -78,11 +78,15 @@ class ConversationsManager: MessagesAdapterDelegate {
                 let accountHelper = AccountModelHelper(withAccount: currentAccount)
                 switch event.eventType {
                 case .dataTransferCreated:
+                    let photoIdentifier: String? = event.getEventInput(.localPhotolID)
                     self.log.debug("ConversationsManager: dataTransferCreated - id:\(transferId)")
-                    self.conversationService.generateDataTransferMessage(transferId: transferId,
-                                                                         transferInfo: transferInfo,
-                                                                         accountRingId: accountHelper.ringId!,
-                                                                         accountId: currentAccount.id)
+                    self.conversationService
+                        .generateDataTransferMessage(transferId: transferId,
+                                                     transferInfo: transferInfo,
+                                                     accountRingId: accountHelper.ringId!,
+                                                     accountId: currentAccount.id,
+                                                     photoIdentifier: photoIdentifier)
+
                 case .dataTransferChanged:
                     self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: transferInfo.lastEvent))")
                     var status: DataTransferStatus = .unknown

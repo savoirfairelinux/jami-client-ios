@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Unknown constraint types" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,7 +21,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUF-dd-SHE" userLabel="Avatar View">
-                        <rect key="frame" x="16" y="67.5" width="32" height="32"/>
+                        <rect key="frame" x="16" y="67" width="32" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="2Sx-kt-bxB"/>
@@ -28,7 +29,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mcd-XM-6nW" userLabel="Top Corner">
-                        <rect key="frame" x="64" y="8" width="17" height="17"/>
+                        <rect key="frame" x="64" y="8.5" width="17" height="17"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="ByW-4A-Bl3"/>
@@ -44,7 +45,7 @@
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k7r-gv-wn2" customClass="MessageBubble" customModule="Ring" customModuleProvider="target">
-                        <rect key="frame" x="64" y="8" width="382" height="93.5"/>
+                        <rect key="frame" x="64" y="8.5" width="382" height="93"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attachment_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Vif-9c-Vza" userLabel="File Icon">
                                 <rect key="frame" x="14" y="7" width="24" height="24"/>
@@ -103,21 +104,27 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="On9-4Y-HIE"/>
+                                    <constraint firstAttribute="height" priority="999" constant="24" id="On9-4Y-HIE"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LoC-UA-VKl">
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="93"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="dFz-uY-Lik" firstAttribute="top" secondItem="tc3-3o-eIM" secondAttribute="bottom" constant="4" id="6EE-zr-Tk1"/>
+                            <constraint firstAttribute="trailing" secondItem="LoC-UA-VKl" secondAttribute="trailing" id="6eD-bM-gZr"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="Csz-kZ-sEb"/>
                             <constraint firstItem="ZGC-d7-MmV" firstAttribute="top" secondItem="GOj-xs-tfd" secondAttribute="bottom" constant="8.5" id="ERj-sO-0Et"/>
+                            <constraint firstItem="LoC-UA-VKl" firstAttribute="top" secondItem="k7r-gv-wn2" secondAttribute="top" id="EcP-ub-ZL3"/>
                             <constraint firstItem="tc3-3o-eIM" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" constant="16" id="HPc-HU-Adv"/>
                             <constraint firstItem="tc3-3o-eIM" firstAttribute="top" secondItem="ZGC-d7-MmV" secondAttribute="bottom" constant="4" id="IKa-DO-b3E"/>
                             <constraint firstItem="GOj-xs-tfd" firstAttribute="top" secondItem="k7r-gv-wn2" secondAttribute="top" constant="7" id="Itc-nc-IMl"/>
                             <constraint firstItem="QMh-zf-aOl" firstAttribute="top" secondItem="ZGC-d7-MmV" secondAttribute="top" id="MfO-Gb-GQv"/>
                             <constraint firstAttribute="trailing" secondItem="QMh-zf-aOl" secondAttribute="trailing" constant="16" id="N77-TC-NQN"/>
                             <constraint firstItem="Vif-9c-Vza" firstAttribute="top" secondItem="k7r-gv-wn2" secondAttribute="top" constant="7" id="PSn-eZ-9uY"/>
+                            <constraint firstItem="LoC-UA-VKl" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" id="PUS-ya-vFi"/>
                             <constraint firstItem="Vif-9c-Vza" firstAttribute="trailing" secondItem="GOj-xs-tfd" secondAttribute="leading" constant="-8" id="Qdb-Qj-dcq"/>
                             <constraint firstItem="dFz-uY-Lik" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" constant="14" id="RiE-u9-OyX"/>
                             <constraint firstItem="ZGC-d7-MmV" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" constant="14" id="XvZ-rk-Lb4"/>
@@ -125,7 +132,9 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="ez2-An-LhR"/>
                             <constraint firstAttribute="trailing" secondItem="tc3-3o-eIM" secondAttribute="trailing" constant="16" id="h17-8t-vqq"/>
                             <constraint firstAttribute="bottom" secondItem="dFz-uY-Lik" secondAttribute="bottom" constant="7" id="uMF-UH-lRt"/>
+                            <constraint firstAttribute="bottom" secondItem="LoC-UA-VKl" secondAttribute="bottom" id="xqJ-Kf-sFD"/>
                             <constraint firstItem="Vif-9c-Vza" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" constant="14" id="ziG-Bm-awa"/>
+                            <constraint firstAttribute="top" secondItem="k7r-gv-wn2" secondAttribute="top" id="zsT-GC-e5W"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -134,14 +143,14 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WB7-Io-YuE" userLabel="Left Divider">
-                        <rect key="frame" x="36" y="19" width="126.5" height="1"/>
+                        <rect key="frame" x="36" y="19.5" width="126.5" height="1"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="AlE-Y2-o9R"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tI0-XY-IEm" userLabel="Right Divider">
-                        <rect key="frame" x="348.5" y="19" width="125.5" height="1"/>
+                        <rect key="frame" x="348.5" y="19.5" width="125.5" height="1"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="vAB-5v-8HU"/>
@@ -185,6 +194,7 @@
                 <outlet property="bubble" destination="k7r-gv-wn2" id="wjN-h3-Pin"/>
                 <outlet property="bubbleBottomConstraint" destination="4mP-JN-X4I" id="jga-fS-eYl"/>
                 <outlet property="bubbleTopConstraint" destination="BkQ-WJ-mRN" id="fkc-5o-yJD"/>
+                <outlet property="bubbleViewMask" destination="LoC-UA-VKl" id="qoM-Ht-WWq"/>
                 <outlet property="buttonsHeightConstraint" destination="On9-4Y-HIE" id="5pq-hK-wxO"/>
                 <outlet property="cancelButton" destination="KIE-mj-gUg" id="Hb5-rh-XGe"/>
                 <outlet property="leftDivider" destination="WB7-Io-YuE" id="XhH-sH-Vru"/>
@@ -197,7 +207,7 @@
                 <outlet property="timeLabel" destination="lC1-z1-ZwQ" id="c08-kn-J22"/>
                 <outlet property="topCorner" destination="Mcd-XM-6nW" id="Wut-yf-Db7"/>
             </connections>
-            <point key="canvasLocation" x="-411" y="-132.5"/>
+            <point key="canvasLocation" x="-411" y="-133"/>
         </tableViewCell>
     </objects>
     <resources>

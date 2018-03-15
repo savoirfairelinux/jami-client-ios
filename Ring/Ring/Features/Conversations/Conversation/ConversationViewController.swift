@@ -150,10 +150,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             }
             // copy image to tmp
             let imageFileName = "IMG.png"
-            let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName)
-            self.log.debug("localCachePath: \(String(describing: localCachePath))")
-            copyImageToCache(image: image, imagePath: localCachePath!.path)
-            self.viewModel.sendFile(filePath: localCachePath!.path, displayName: imageFileName)
+            guard let imageData =  UIImagePNGRepresentation(image) else { return }
+            self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
         } else if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
             // image from library
             guard let imageURL = info[UIImagePickerControllerReferenceURL] as? URL else { return }
@@ -161,7 +159,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
 
             let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
             var imageFileName = result.firstObject?.value(forKey: "filename") as? String ?? "Unknown"
-            self.log.debug("PHAsset fileName: \(String(describing: imageFileName))")
 
             let pathExtension = (imageFileName as NSString).pathExtension
             if pathExtension == "HEIC" || pathExtension == "HEIF" {
@@ -181,7 +178,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
                 }
                 // copy image to tmp
                 copyImageToCache(image: image, imagePath: localCachePath!.path)
-                self.viewModel.sendFile(filePath: localCachePath!.path, displayName: imageFileName)
+                self.viewModel.sendFile(filePath: localCachePath!.path,
+                                        displayName: imageFileName,
+                                        localIdentifier: result.firstObject?.localIdentifier)
             } else if phAsset.mediaType == .video {
                 PHImageManager.default().requestAVAsset(forVideo: phAsset,
                                                         options: PHVideoRequestOptions(),
@@ -623,7 +622,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             cell.progressBar.isHidden = true
             cell.acceptButton.isHidden = true
             cell.cancelButton.isHidden = true
-            cell.buttonsHeightConstraint.constant = 0.0
+            cell.buttonsHeightConstraint?.constant = 0.0
         case .awaiting:
             cell.acceptButton.isHidden = false
             cell.cancelButton.isHidden = false
@@ -631,7 +630,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             // hide status
             cell.statusLabel.isHidden = true
             cell.progressBar.isHidden = true
-            cell.buttonsHeightConstraint.constant = 24.0
+            cell.buttonsHeightConstraint?.constant = 24.0
         case .ongoing:
             // status
             cell.statusLabel.isHidden = false
@@ -647,7 +646,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             cell.acceptButton.isHidden = true
             cell.cancelButton.isHidden = false
             cell.cancelButton.setTitle("Cancel", for: .normal)
-            cell.buttonsHeightConstraint.constant = 24.0
+            cell.buttonsHeightConstraint?.constant = 24.0
         case .canceled:
             // status
             cell.statusLabel.isHidden = false
@@ -657,7 +656,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             cell.progressBar.isHidden = true
             cell.acceptButton.isHidden = true
             cell.cancelButton.isHidden = true
-            cell.buttonsHeightConstraint.constant = 0.0
+            cell.buttonsHeightConstraint?.constant = 0.0
         case .success:
             // status
             cell.statusLabel.isHidden = false
@@ -667,7 +666,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             cell.progressBar.isHidden = true
             cell.acceptButton.isHidden = true
             cell.cancelButton.isHidden = true
-            cell.buttonsHeightConstraint.constant = 0.0
+            cell.buttonsHeightConstraint?.constant = 0.0
         default: break
         }
     }
@@ -701,7 +700,7 @@ extension ConversationViewController: UITableViewDataSource {
                     .subscribe(onNext: { _ in
                         guard let transferId = item.daemonId else { return }
                         self.log.info("accepting transferId \(transferId)")
-                        if self.viewModel.acceptTransfer(transferId: transferId) != .success {
+                        if self.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
                             _ = self.viewModel.cancelTransfer(transferId: transferId)
                             item.initialTransferStatus = .canceled
                             item.message.transferStatus = .canceled
@@ -725,7 +724,8 @@ extension ConversationViewController: UITableViewDataSource {
 
                 item.transferStatus.asObservable()
                     .observeOn(MainScheduler.instance)
-                    .filter { return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
+                    .filter {
+                        return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
                     .subscribe(onNext: { status in
                         guard let currentIndexPath = tableView.indexPath(for: cell) else { return }
                         guard let transferId = item.daemonId else { return }
@@ -734,6 +734,24 @@ extension ConversationViewController: UITableViewDataSource {
                         item.initialTransferStatus = status
                         cell.stopProgressMonitor()
                         tableView.reloadData()
+                    })
+                    .disposed(by: cell.disposeBag)
+            } else if item.isTransfer && item.bubblePosition() == .sent {
+                item.transferStatus.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .filter {
+                        return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
+                    .subscribe(onNext: { status in
+                        guard let currentIndexPath = tableView.indexPath(for: cell) else { return }
+                        guard let transferId = item.daemonId else { return }
+                        self.log.info("MessageCell: transfer status change to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
+                        item.initialTransferStatus = status
+                        if status == .awaiting {
+                            if item.shouldDisplayTransferedImage {
+                                cell.displayTransferedImage(message: item)
+                            }
+                            tableView.reloadData()
+                        }
                     })
                     .disposed(by: cell.disposeBag)
             }

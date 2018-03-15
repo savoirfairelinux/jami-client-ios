@@ -6,245 +6,245 @@ import Foundation
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
-enum L10n {
+internal enum L10n {
 
-  enum Accountpage {
+  internal enum Accountpage {
     /// Block List
-    static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
+    internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
     /// Account Details
-    static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader")
+    internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader")
     /// Devices
-    static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
+    internal static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
     /// Enable Push Notifications
-    static let enableProxy = L10n.tr("Localizable", "accountPage.enableProxy")
+    internal static let enableProxy = L10n.tr("Localizable", "accountPage.enableProxy")
     /// Settings
-    static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
+    internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
     /// UNBLOCK
-    static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact")
+    internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact")
     /// username:
-    static let username = L10n.tr("Localizable", "accountPage.username")
+    internal static let username = L10n.tr("Localizable", "accountPage.username")
     /// username: not registered
-    static let usernameNotRegistered = L10n.tr("Localizable", "accountPage.usernameNotRegistered")
+    internal static let usernameNotRegistered = L10n.tr("Localizable", "accountPage.usernameNotRegistered")
   }
 
-  enum Actions {
+  internal enum Actions {
     /// Block
-    static let blockAction = L10n.tr("Localizable", "actions.blockAction")
+    internal static let blockAction = L10n.tr("Localizable", "actions.blockAction")
     /// Cancel
-    static let cancelAction = L10n.tr("Localizable", "actions.cancelAction")
+    internal static let cancelAction = L10n.tr("Localizable", "actions.cancelAction")
     /// Delete
-    static let deleteAction = L10n.tr("Localizable", "actions.deleteAction")
+    internal static let deleteAction = L10n.tr("Localizable", "actions.deleteAction")
   }
 
-  enum Alerts {
+  internal enum Alerts {
     /// Account Added
-    static let accountAddedTitle = L10n.tr("Localizable", "alerts.accountAddedTitle")
+    internal static let accountAddedTitle = L10n.tr("Localizable", "alerts.accountAddedTitle")
     /// Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.
-    static let accountCannotBeFoundMessage = L10n.tr("Localizable", "alerts.accountCannotBeFoundMessage")
+    internal static let accountCannotBeFoundMessage = L10n.tr("Localizable", "alerts.accountCannotBeFoundMessage")
     /// Can't find account
-    static let accountCannotBeFoundTitle = L10n.tr("Localizable", "alerts.accountCannotBeFoundTitle")
+    internal static let accountCannotBeFoundTitle = L10n.tr("Localizable", "alerts.accountCannotBeFoundTitle")
     /// The account couldn't be created.
-    static let accountDefaultErrorMessage = L10n.tr("Localizable", "alerts.accountDefaultErrorMessage")
+    internal static let accountDefaultErrorMessage = L10n.tr("Localizable", "alerts.accountDefaultErrorMessage")
     /// Unknown error
-    static let accountDefaultErrorTitle = L10n.tr("Localizable", "alerts.accountDefaultErrorTitle")
+    internal static let accountDefaultErrorTitle = L10n.tr("Localizable", "alerts.accountDefaultErrorTitle")
     /// Linking account
-    static let accountLinkedTitle = L10n.tr("Localizable", "alerts.accountLinkedTitle")
+    internal static let accountLinkedTitle = L10n.tr("Localizable", "alerts.accountLinkedTitle")
     /// Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.
-    static let accountNoNetworkMessage = L10n.tr("Localizable", "alerts.accountNoNetworkMessage")
+    internal static let accountNoNetworkMessage = L10n.tr("Localizable", "alerts.accountNoNetworkMessage")
     /// Can't connect to the network
-    static let accountNoNetworkTitle = L10n.tr("Localizable", "alerts.accountNoNetworkTitle")
+    internal static let accountNoNetworkTitle = L10n.tr("Localizable", "alerts.accountNoNetworkTitle")
     /// Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.
-    static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact")
+    internal static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact")
     /// Block Contact
-    static let confirmBlockContactTitle = L10n.tr("Localizable", "alerts.confirmBlockContactTitle")
+    internal static let confirmBlockContactTitle = L10n.tr("Localizable", "alerts.confirmBlockContactTitle")
     /// Are you sure you want to delete this conversation permanently?
-    static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation")
+    internal static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation")
     /// Are you sure you want to delete the conversation with this contact?
-    static let confirmDeleteConversationFromContact = L10n.tr("Localizable", "alerts.confirmDeleteConversationFromContact")
+    internal static let confirmDeleteConversationFromContact = L10n.tr("Localizable", "alerts.confirmDeleteConversationFromContact")
     /// Delete Conversation
-    static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle")
+    internal static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle")
     /// Please close application and try to open it again
-    static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage")
+    internal static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage")
     /// An error happned when launching Ring
-    static let dbFailedTitle = L10n.tr("Localizable", "alerts.dbFailedTitle")
+    internal static let dbFailedTitle = L10n.tr("Localizable", "alerts.dbFailedTitle")
     /// Incoming call from 
-    static let incomingCallAllertTitle = L10n.tr("Localizable", "alerts.incomingCallAllertTitle")
+    internal static let incomingCallAllertTitle = L10n.tr("Localizable", "alerts.incomingCallAllertTitle")
     /// Accept
-    static let incomingCallButtonAccept = L10n.tr("Localizable", "alerts.incomingCallButtonAccept")
+    internal static let incomingCallButtonAccept = L10n.tr("Localizable", "alerts.incomingCallButtonAccept")
     /// Ignore
-    static let incomingCallButtonIgnore = L10n.tr("Localizable", "alerts.incomingCallButtonIgnore")
+    internal static let incomingCallButtonIgnore = L10n.tr("Localizable", "alerts.incomingCallButtonIgnore")
     /// Cancel
-    static let profileCancelPhoto = L10n.tr("Localizable", "alerts.profileCancelPhoto")
+    internal static let profileCancelPhoto = L10n.tr("Localizable", "alerts.profileCancelPhoto")
     /// Take photo
-    static let profileTakePhoto = L10n.tr("Localizable", "alerts.profileTakePhoto")
+    internal static let profileTakePhoto = L10n.tr("Localizable", "alerts.profileTakePhoto")
     /// Upload photo
-    static let profileUploadPhoto = L10n.tr("Localizable", "alerts.profileUploadPhoto")
+    internal static let profileUploadPhoto = L10n.tr("Localizable", "alerts.profileUploadPhoto")
   }
 
-  enum Calls {
+  internal enum Calls {
     /// Call finished
-    static let callFinished = L10n.tr("Localizable", "calls.callFinished")
+    internal static let callFinished = L10n.tr("Localizable", "calls.callFinished")
     /// Calling...
-    static let calling = L10n.tr("Localizable", "calls.calling")
+    internal static let calling = L10n.tr("Localizable", "calls.calling")
     /// Call
-    static let callItemTitle = L10n.tr("Localizable", "calls.callItemTitle")
+    internal static let callItemTitle = L10n.tr("Localizable", "calls.callItemTitle")
     /// wants to talk to you
-    static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo")
+    internal static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo")
     /// Unknown
-    static let unknown = L10n.tr("Localizable", "calls.unknown")
+    internal static let unknown = L10n.tr("Localizable", "calls.unknown")
   }
 
-  enum Contactpage {
+  internal enum Contactpage {
     /// Block Contact
-    static let blockContact = L10n.tr("Localizable", "contactPage.blockContact")
+    internal static let blockContact = L10n.tr("Localizable", "contactPage.blockContact")
     /// Clear Chat
-    static let clearConversation = L10n.tr("Localizable", "contactPage.clearConversation")
+    internal static let clearConversation = L10n.tr("Localizable", "contactPage.clearConversation")
     /// Send Message
-    static let sendMessage = L10n.tr("Localizable", "contactPage.sendMessage")
+    internal static let sendMessage = L10n.tr("Localizable", "contactPage.sendMessage")
     /// Start Audio Call
-    static let startAudioCall = L10n.tr("Localizable", "contactPage.startAudioCall")
+    internal static let startAudioCall = L10n.tr("Localizable", "contactPage.startAudioCall")
     /// Start Video Call
-    static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall")
+    internal static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall")
   }
 
-  enum Createaccount {
+  internal enum Createaccount {
     /// Choose strong password you will remember to protect your Ring account.
-    static let chooseStrongPassword = L10n.tr("Localizable", "createAccount.chooseStrongPassword")
+    internal static let chooseStrongPassword = L10n.tr("Localizable", "createAccount.chooseStrongPassword")
     /// Create your Ring account
-    static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle")
+    internal static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle")
     /// username
-    static let enterNewUsernamePlaceholder = L10n.tr("Localizable", "createAccount.enterNewUsernamePlaceholder")
+    internal static let enterNewUsernamePlaceholder = L10n.tr("Localizable", "createAccount.enterNewUsernamePlaceholder")
     /// invalid username
-    static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername")
+    internal static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername")
     /// Loading
-    static let loading = L10n.tr("Localizable", "createAccount.loading")
+    internal static let loading = L10n.tr("Localizable", "createAccount.loading")
     /// looking for username availability
-    static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability")
+    internal static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability")
     /// password
-    static let newPasswordPlaceholder = L10n.tr("Localizable", "createAccount.newPasswordPlaceholder")
+    internal static let newPasswordPlaceholder = L10n.tr("Localizable", "createAccount.newPasswordPlaceholder")
     /// 6 characters minimum
-    static let passwordCharactersNumberError = L10n.tr("Localizable", "createAccount.passwordCharactersNumberError")
+    internal static let passwordCharactersNumberError = L10n.tr("Localizable", "createAccount.passwordCharactersNumberError")
     /// passwords do not match
-    static let passwordNotMatchingError = L10n.tr("Localizable", "createAccount.passwordNotMatchingError")
+    internal static let passwordNotMatchingError = L10n.tr("Localizable", "createAccount.passwordNotMatchingError")
     /// confirm password
-    static let repeatPasswordPlaceholder = L10n.tr("Localizable", "createAccount.repeatPasswordPlaceholder")
+    internal static let repeatPasswordPlaceholder = L10n.tr("Localizable", "createAccount.repeatPasswordPlaceholder")
     /// username already taken
-    static let usernameAlreadyTaken = L10n.tr("Localizable", "createAccount.usernameAlreadyTaken")
+    internal static let usernameAlreadyTaken = L10n.tr("Localizable", "createAccount.usernameAlreadyTaken")
     /// Adding account
-    static let waitCreateAccountTitle = L10n.tr("Localizable", "createAccount.waitCreateAccountTitle")
+    internal static let waitCreateAccountTitle = L10n.tr("Localizable", "createAccount.waitCreateAccountTitle")
   }
 
-  enum Createprofile {
+  internal enum Createprofile {
     /// Skip to Create Account
-    static let createAccount = L10n.tr("Localizable", "createProfile.createAccount")
+    internal static let createAccount = L10n.tr("Localizable", "createProfile.createAccount")
     /// Next
-    static let createAccountWithProfile = L10n.tr("Localizable", "createProfile.createAccountWithProfile")
+    internal static let createAccountWithProfile = L10n.tr("Localizable", "createProfile.createAccountWithProfile")
     /// Skip to Link Device
-    static let linkDevice = L10n.tr("Localizable", "createProfile.linkDevice")
+    internal static let linkDevice = L10n.tr("Localizable", "createProfile.linkDevice")
   }
 
-  enum Datatransfer {
+  internal enum Datatransfer {
     /// File saved
-    static let fileSaved = L10n.tr("Localizable", "dataTransfer.fileSaved")
+    internal static let fileSaved = L10n.tr("Localizable", "dataTransfer.fileSaved")
     /// Invalid file
-    static let invalidFile = L10n.tr("Localizable", "dataTransfer.invalidFile")
+    internal static let invalidFile = L10n.tr("Localizable", "dataTransfer.invalidFile")
     /// No space left on device
-    static let noSpaceLeftOnDevice = L10n.tr("Localizable", "dataTransfer.noSpaceLeftOnDevice")
+    internal static let noSpaceLeftOnDevice = L10n.tr("Localizable", "dataTransfer.noSpaceLeftOnDevice")
     /// Not able to write file
-    static let notAbleToWriteFile = L10n.tr("Localizable", "dataTransfer.notAbleToWriteFile")
+    internal static let notAbleToWriteFile = L10n.tr("Localizable", "dataTransfer.notAbleToWriteFile")
     /// closed by host
-    static let transferStatusClosedByHost = L10n.tr("Localizable", "dataTransfer.transferStatusClosedByHost")
+    internal static let transferStatusClosedByHost = L10n.tr("Localizable", "dataTransfer.transferStatusClosedByHost")
     /// closed by peer
-    static let transferStatusClosedByPeer = L10n.tr("Localizable", "dataTransfer.transferStatusClosedByPeer")
+    internal static let transferStatusClosedByPeer = L10n.tr("Localizable", "dataTransfer.transferStatusClosedByPeer")
     /// initializing transfer
-    static let transferStatusCreated = L10n.tr("Localizable", "dataTransfer.transferStatusCreated")
+    internal static let transferStatusCreated = L10n.tr("Localizable", "dataTransfer.transferStatusCreated")
     /// finished
-    static let transferStatusFinished = L10n.tr("Localizable", "dataTransfer.transferStatusFinished")
+    internal static let transferStatusFinished = L10n.tr("Localizable", "dataTransfer.transferStatusFinished")
     /// Invalid
-    static let transferStatusInvalid = L10n.tr("Localizable", "dataTransfer.transferStatusInvalid")
+    internal static let transferStatusInvalid = L10n.tr("Localizable", "dataTransfer.transferStatusInvalid")
     /// invalid pathname
-    static let transferStatusInvalidPathname = L10n.tr("Localizable", "dataTransfer.transferStatusInvalidPathname")
+    internal static let transferStatusInvalidPathname = L10n.tr("Localizable", "dataTransfer.transferStatusInvalidPathname")
     /// ongoing
-    static let transferStatusOngoing = L10n.tr("Localizable", "dataTransfer.transferStatusOngoing")
+    internal static let transferStatusOngoing = L10n.tr("Localizable", "dataTransfer.transferStatusOngoing")
     /// unjoinable peer
-    static let transferStatusUnjoinablePeer = L10n.tr("Localizable", "dataTransfer.transferStatusUnjoinablePeer")
+    internal static let transferStatusUnjoinablePeer = L10n.tr("Localizable", "dataTransfer.transferStatusUnjoinablePeer")
     /// unsupported
-    static let transferStatusUnsupported = L10n.tr("Localizable", "dataTransfer.transferStatusUnsupported")
+    internal static let transferStatusUnsupported = L10n.tr("Localizable", "dataTransfer.transferStatusUnsupported")
     /// waiting host acceptance
-    static let transferStatusWaitHostAcceptance = L10n.tr("Localizable", "dataTransfer.transferStatusWaitHostAcceptance")
+    internal static let transferStatusWaitHostAcceptance = L10n.tr("Localizable", "dataTransfer.transferStatusWaitHostAcceptance")
     /// waiting peer acceptance
-    static let transferStatusWaitPeerAcceptance = L10n.tr("Localizable", "dataTransfer.transferStatusWaitPeerAcceptance")
+    internal static let transferStatusWaitPeerAcceptance = L10n.tr("Localizable", "dataTransfer.transferStatusWaitPeerAcceptance")
   }
 
-  enum Global {
+  internal enum Global {
     /// Invitations
-    static let contactRequestsTabBarTitle = L10n.tr("Localizable", "global.contactRequestsTabBarTitle")
+    internal static let contactRequestsTabBarTitle = L10n.tr("Localizable", "global.contactRequestsTabBarTitle")
     /// Home
-    static let homeTabBarTitle = L10n.tr("Localizable", "global.homeTabBarTitle")
+    internal static let homeTabBarTitle = L10n.tr("Localizable", "global.homeTabBarTitle")
     /// Account
-    static let meTabBarTitle = L10n.tr("Localizable", "global.meTabBarTitle")
+    internal static let meTabBarTitle = L10n.tr("Localizable", "global.meTabBarTitle")
     /// Ok
-    static let ok = L10n.tr("Localizable", "global.ok")
+    internal static let ok = L10n.tr("Localizable", "global.ok")
   }
 
-  enum Linkdevice {
+  internal enum Linkdevice {
     /// An error occured during the export
-    static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError")
+    internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError")
     /// To complete the process, you need to open Ring on the new device and choose the option "Link this device to an account." Your pin is valid for 10 minutes
-    static let explanationMessage = L10n.tr("Localizable", "linkDevice.explanationMessage")
+    internal static let explanationMessage = L10n.tr("Localizable", "linkDevice.explanationMessage")
     /// Verifying
-    static let hudMessage = L10n.tr("Localizable", "linkDevice.hudMessage")
+    internal static let hudMessage = L10n.tr("Localizable", "linkDevice.hudMessage")
     /// A network error occured during the export
-    static let networkError = L10n.tr("Localizable", "linkDevice.networkError")
+    internal static let networkError = L10n.tr("Localizable", "linkDevice.networkError")
     /// The password you entered does not unlock this account
-    static let passwordError = L10n.tr("Localizable", "linkDevice.passwordError")
+    internal static let passwordError = L10n.tr("Localizable", "linkDevice.passwordError")
     /// Link a new device
-    static let title = L10n.tr("Localizable", "linkDevice.title")
+    internal static let title = L10n.tr("Localizable", "linkDevice.title")
   }
 
-  enum Linktoaccount {
+  internal enum Linktoaccount {
     /// To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
-    static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage")
+    internal static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage")
     /// Link device
-    static let linkButtonTitle = L10n.tr("Localizable", "linkToAccount.linkButtonTitle")
+    internal static let linkButtonTitle = L10n.tr("Localizable", "linkToAccount.linkButtonTitle")
     /// Enter Password
-    static let passwordLabel = L10n.tr("Localizable", "linkToAccount.passwordLabel")
+    internal static let passwordLabel = L10n.tr("Localizable", "linkToAccount.passwordLabel")
     /// password
-    static let passwordPlaceholder = L10n.tr("Localizable", "linkToAccount.passwordPlaceholder")
+    internal static let passwordPlaceholder = L10n.tr("Localizable", "linkToAccount.passwordPlaceholder")
     /// Enter PIN
-    static let pinLabel = L10n.tr("Localizable", "linkToAccount.pinLabel")
+    internal static let pinLabel = L10n.tr("Localizable", "linkToAccount.pinLabel")
     /// PIN
-    static let pinPlaceholder = L10n.tr("Localizable", "linkToAccount.pinPlaceholder")
+    internal static let pinPlaceholder = L10n.tr("Localizable", "linkToAccount.pinPlaceholder")
     /// Account linking
-    static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle")
+    internal static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle")
   }
 
-  enum Smartlist {
+  internal enum Smartlist {
     /// Be sure cellular access is granted in your settings
-    static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess")
+    internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess")
     /// Conversations
-    static let conversations = L10n.tr("Localizable", "smartlist.conversations")
+    internal static let conversations = L10n.tr("Localizable", "smartlist.conversations")
     /// No network connectivity
-    static let noNetworkConnectivity = L10n.tr("Localizable", "smartlist.noNetworkConnectivity")
+    internal static let noNetworkConnectivity = L10n.tr("Localizable", "smartlist.noNetworkConnectivity")
     /// No results
-    static let noResults = L10n.tr("Localizable", "smartlist.noResults")
+    internal static let noResults = L10n.tr("Localizable", "smartlist.noResults")
     /// Searching...
-    static let searching = L10n.tr("Localizable", "smartlist.searching")
+    internal static let searching = L10n.tr("Localizable", "smartlist.searching")
     /// User found
-    static let userFound = L10n.tr("Localizable", "smartlist.userFound")
+    internal static let userFound = L10n.tr("Localizable", "smartlist.userFound")
     /// Yesterday
-    static let yesterday = L10n.tr("Localizable", "smartlist.yesterday")
+    internal static let yesterday = L10n.tr("Localizable", "smartlist.yesterday")
   }
 
-  enum Welcome {
+  internal enum Welcome {
     /// Create a Ring account
-    static let createAccount = L10n.tr("Localizable", "welcome.createAccount")
+    internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount")
     /// Link this device to an account
-    static let linkDevice = L10n.tr("Localizable", "welcome.linkDevice")
+    internal static let linkDevice = L10n.tr("Localizable", "welcome.linkDevice")
     /// Ring is a free and universal communication platform which preserves the users' privacy and freedoms
-    static let text = L10n.tr("Localizable", "welcome.text")
+    internal static let text = L10n.tr("Localizable", "welcome.text")
     /// Welcome to Ring
-    static let title = L10n.tr("Localizable", "welcome.title")
+    internal static let title = L10n.tr("Localizable", "welcome.title")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
