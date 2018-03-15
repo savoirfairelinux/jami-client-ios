@@ -21,6 +21,9 @@
 import Foundation
 import SwiftyBeaver
 import RxSwift
+import Foundation
+import MobileCoreServices
+import Photos
 
 enum DataTransferServiceError: Error {
     case createTransferError
@@ -71,6 +74,10 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     private let log = SwiftyBeaver.self
 
+    //contain image if transfering file is image type, othewise contain nil
+    typealias ImageTuple = (Bool, UIImage?)
+    private var transferedImages = [String: ImageTuple]()
+
     fileprivate let dataTransferAdapter: DataTransferAdapter
 
     fileprivate let disposeBag = DisposeBag()
@@ -84,6 +91,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         DataTransferAdapter.delegate = self
     }
 
+    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
+
     // MARK: public
 
     func getTransferInfo(withId transferId: UInt64) -> NSDataTransferInfo? {
@@ -96,18 +105,89 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return info
     }
 
-    func acceptTransfer(withId transferId: UInt64) -> NSDataTransferError {
+    func acceptTransfer(withId transferId: UInt64, interactionID: Int64, fileName: inout String) -> NSDataTransferError {
         guard let info = getTransferInfo(withId: transferId) else {
             return NSDataTransferError.invalid_argument
         }
         // accept transfer
         if let pathUrl = getFilePathForTransfer(forFile: info.displayName) {
+            // if file name was changed because the same name already exist, update db
+            if pathUrl.lastPathComponent != info.displayName {
+                let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: info.totalSize, countStyle: .file)
+                let name = pathUrl.lastPathComponent + "\n" + fileSizeWithUnit
+                fileName = name
+                //update db
+                self.dbManager.updateFileName(interactionID: interactionID, name: name).subscribe(onCompleted: { [weak self] in
+                      self?.log.debug("file name updated")
+                }, onError: { [weak self] _ in
+                     self?.log.error("update name failed")
+                }).disposed(by: self.disposeBag)
+            }
             self.log.debug("DataTransferService: saving file to: \(pathUrl.path))")
             return acceptFileTransfer(withId: transferId, withPath: pathUrl.path)
         } else {
             self.log.error("DataTransferService: saving file error: bad local path")
             return .io
         }
+    }
+
+    /*
+     to avoid creating images multiple time keep images in dictionary
+     images saved in app document folder referenced by name
+     images from photo librairy referenced by local identifier
+    */
+
+    func getImage(for name: String, maxSize: CGFloat, identifier: String? = nil) -> UIImage? {
+        if let localImageIdentifier = identifier {
+            if let image = self.transferedImages[localImageIdentifier] {
+                return image.1
+            }
+            return self.getImageFromPhotoLibrairy(identifier: localImageIdentifier, maxSize: maxSize, name: name)
+        }
+        if let image = self.transferedImages[name] {
+            return image.1
+        }
+        return self.getImageFromFile(for: name, maxSize: maxSize)
+    }
+
+    func getImageFromPhotoLibrairy(identifier: String, maxSize: CGFloat, name: String) -> UIImage? {
+        let imageManager = PHImageManager.default()
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.resizeMode = PHImageRequestOptionsResizeMode.fast
+        requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
+        requestOptions.isSynchronous = true
+        var photo: UIImage? = nil
+        guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: PHFetchOptions()).firstObject else {
+            return photo
+        }
+        imageManager.requestImage(for: asset, targetSize: CGSize(width: maxSize, height: maxSize), contentMode: .aspectFit, options: requestOptions, resultHandler: {(result, _) -> Void in
+            let roundedImagemage = result?.setRoundCorner(radius: 20.0, offset: 1)
+            self.transferedImages[identifier] = (true, roundedImagemage)
+            photo = roundedImagemage
+        })
+        return photo
+    }
+
+    func getImageFromFile(for name: String, maxSize: CGFloat) -> UIImage? {
+        guard let pathUrl = getFilePath(fileName: name) else {return nil}
+        let fileExtension = pathUrl.pathExtension as CFString
+        guard let uti = UTTypeCreatePreferredIdentifierForTag(
+            kUTTagClassFilenameExtension,
+            fileExtension,
+            nil) else {return nil}
+        if UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage) {
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: pathUrl.path) {
+                let image = UIImage(contentsOfFile: pathUrl.path)
+                let resizedImage = image?.resizeIntoRectangle(of: CGSize(width: maxSize, height: maxSize))
+                let roundedImage = resizedImage?.setRoundCorner(radius: 20.0, offset: 1)
+                self.transferedImages[name] = (true, roundedImage)
+                return roundedImage
+            }
+        } else {
+            self.transferedImages[name] = (false, nil)
+        }
+        return nil
     }
 
     func cancelTransfer(withId transferId: UInt64) -> NSDataTransferError {
@@ -118,7 +198,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return err
     }
 
-    func sendFile(filePath: String, displayName: String, accountId: String, peerInfoHash: String) {
+    func sendFile(filePath: String, displayName: String, accountId: String, peerInfoHash: String, localIdentifier: String?) {
         var transferId: UInt64 = 0
         let info = NSDataTransferInfo()
         info.accountId = accountId
@@ -129,7 +209,24 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         let err = sendFile(withId: &transferId, withInfo: info)
         if err != .success {
             self.log.error("sendFile failed")
+        } else {
+            let serviceEventType: ServiceEventType = .dataTransferCreated
+            var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+            serviceEvent.addEventInput(.transferId, value: transferId)
+            if let localIdentifier = localIdentifier {
+                serviceEvent.addEventInput(.localPhotolID, value: localIdentifier)
+            }
+            self.responseStream.onNext(serviceEvent)
         }
+    }
+    func sendAndSaveFile(displayName: String, accountId: String, peerInfoHash: String, imageData: Data) {
+        guard let imagePath = self.getFilePathForTransfer(forFile: displayName) else {return}
+        do {
+            try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
+        } catch {
+            self.log.error("couldn't copy image to cache")
+        }
+        self.sendFile(filePath: imagePath.path, displayName: imagePath.lastPathComponent, accountId: accountId, peerInfoHash: peerInfoHash, localIdentifier: nil)
     }
 
     func getTransferProgress(withId transferId: UInt64) -> Float? {
@@ -144,6 +241,15 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     }
 
     // MARK: private
+
+    fileprivate func getFilePath(fileName: String) -> URL? {
+        let downloadsFolderName = "downloads"
+        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        let directoryURL = documentsURL.appendingPathComponent(downloadsFolderName)
+        return directoryURL.appendingPathComponent(fileName)
+    }
 
     fileprivate func getFilePathForTransfer(forFile fileName: String) -> URL? {
         let downloadsFolderName = "downloads"
@@ -228,7 +334,11 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         }
 
         self.log.info("DataTransferService: event: \(stringFromEventCode(with: event))")
-
+        let info = getTransferInfo(withId: transferId)
+        // do not emit an created event for outgoing transfer, since it already saved in db
+        if event == .created && info?.flags != 1 {
+          return
+        }
         // we aggregate all non-create type transfer events into the update category
         // emit service event
         let serviceEventType: ServiceEventType = event == .created ? .dataTransferCreated : .dataTransferChanged

@@ -364,15 +364,23 @@ class ConversationViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
     }
 
-    func sendFile(filePath: String, displayName: String) {
+    func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil) {
         self.dataTransferService.sendFile(filePath: filePath,
                                           displayName: displayName,
                                           accountId: (accountService.currentAccount?.id)!,
-                                          peerInfoHash: self.conversation.value.recipientRingId)
+                                          peerInfoHash: self.conversation.value.recipientRingId,
+                                          localIdentifier: localIdentifier)
     }
 
-    func acceptTransfer(transferId: UInt64) -> NSDataTransferError {
-        return self.dataTransferService.acceptTransfer(withId: transferId)
+    func sendAndSaveFile(displayName: String, imageData: Data) {
+        self.dataTransferService.sendAndSaveFile(displayName: displayName,
+                                                 accountId: (accountService.currentAccount?.id)!,
+                                                 peerInfoHash: self.conversation.value.recipientRingId,
+                                                 imageData: imageData)
+    }
+
+    func acceptTransfer(transferId: UInt64, interactionID: Int64, messageContent: inout String) -> NSDataTransferError {
+        return self.dataTransferService.acceptTransfer(withId: transferId, interactionID: interactionID, fileName: &messageContent)
     }
 
     func cancelTransfer(transferId: UInt64) -> NSDataTransferError {
