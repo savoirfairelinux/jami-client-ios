@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUF-dd-SHE" userLabel="Avatar View">
-                        <rect key="frame" x="16" y="67.5" width="32" height="32"/>
+                        <rect key="frame" x="16" y="67" width="32" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="2Sx-kt-bxB"/>
@@ -28,7 +28,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mcd-XM-6nW" userLabel="Top Corner">
-                        <rect key="frame" x="64" y="8" width="17" height="17"/>
+                        <rect key="frame" x="64" y="8.5" width="17" height="17"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="ByW-4A-Bl3"/>
@@ -44,7 +44,7 @@
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k7r-gv-wn2" customClass="MessageBubble" customModule="Ring" customModuleProvider="target">
-                        <rect key="frame" x="64" y="8" width="382" height="93.5"/>
+                        <rect key="frame" x="64" y="8.5" width="382" height="93"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attachment_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Vif-9c-Vza" userLabel="File Icon">
                                 <rect key="frame" x="14" y="7" width="24" height="24"/>
@@ -63,7 +63,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="42KB" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGC-d7-MmV" userLabel="Size Label" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="14" y="35" width="37" height="13.5"/>
+                                <rect key="frame" x="14" y="35" width="37" height="13"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -75,24 +75,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="753" verticalCompressionResistancePriority="751" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tc3-3o-eIM">
-                                <rect key="frame" x="16" y="52.5" width="350" height="2"/>
+                                <rect key="frame" x="16" y="52" width="350" height="2"/>
                             </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufs-kC-RwY" userLabel="Accept Button">
-                                <rect key="frame" x="14" y="62.5" width="81" height="24"/>
+                                <rect key="frame" x="14" y="62" width="81" height="24"/>
                                 <state key="normal" title="Accept" image="download_icon">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIE-mj-gUg" userLabel="Cancel Button">
-                                <rect key="frame" x="111" y="62.5" width="80" height="24"/>
+                                <rect key="frame" x="111" y="62" width="80" height="24"/>
                                 <state key="normal" title="Refuse" image="close_icon">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mWQ-Wk-Bfw">
+                                <rect key="frame" x="0.0" y="-0.5" width="382" height="93"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ufs-kC-RwY" firstAttribute="top" secondItem="tc3-3o-eIM" secondAttribute="bottom" constant="8" id="0he-2k-vrW"/>
+                            <constraint firstAttribute="bottom" secondItem="mWQ-Wk-Bfw" secondAttribute="bottom" id="90U-hf-2x2"/>
+                            <constraint firstItem="mWQ-Wk-Bfw" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" id="B42-HS-c7a"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="Csz-kZ-sEb"/>
                             <constraint firstItem="ZGC-d7-MmV" firstAttribute="top" secondItem="GOj-xs-tfd" secondAttribute="bottom" constant="4" id="ERj-sO-0Et"/>
                             <constraint firstItem="tc3-3o-eIM" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" constant="16" id="HPc-HU-Adv"/>
@@ -102,6 +110,7 @@
                             <constraint firstAttribute="trailing" secondItem="QMh-zf-aOl" secondAttribute="trailing" constant="16" id="N77-TC-NQN"/>
                             <constraint firstItem="Vif-9c-Vza" firstAttribute="top" secondItem="k7r-gv-wn2" secondAttribute="top" constant="7" id="PSn-eZ-9uY"/>
                             <constraint firstItem="Vif-9c-Vza" firstAttribute="trailing" secondItem="GOj-xs-tfd" secondAttribute="leading" constant="-8" id="Qdb-Qj-dcq"/>
+                            <constraint firstAttribute="trailing" secondItem="mWQ-Wk-Bfw" secondAttribute="trailing" id="Xfl-Ze-jqp"/>
                             <constraint firstItem="ZGC-d7-MmV" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" constant="14" id="XvZ-rk-Lb4"/>
                             <constraint firstAttribute="trailing" secondItem="GOj-xs-tfd" secondAttribute="trailing" constant="14" id="c9F-S6-bAt"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="ez2-An-LhR"/>
@@ -111,6 +120,7 @@
                             <constraint firstItem="KIE-mj-gUg" firstAttribute="top" secondItem="ufs-kC-RwY" secondAttribute="top" id="tvU-C8-Jid"/>
                             <constraint firstItem="ufs-kC-RwY" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" constant="14" id="yN1-5Y-ETh"/>
                             <constraint firstItem="Vif-9c-Vza" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" constant="14" id="ziG-Bm-awa"/>
+                            <constraint firstItem="mWQ-Wk-Bfw" firstAttribute="top" secondItem="k7r-gv-wn2" secondAttribute="top" id="zsT-GC-e5W"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -119,21 +129,21 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WB7-Io-YuE" userLabel="Left Divider">
-                        <rect key="frame" x="36" y="19" width="126.5" height="1"/>
+                        <rect key="frame" x="36" y="19.5" width="126.5" height="1"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="AlE-Y2-o9R"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tI0-XY-IEm" userLabel="Right Divider">
-                        <rect key="frame" x="348.5" y="19" width="125.5" height="1"/>
+                        <rect key="frame" x="348.5" y="19.5" width="125.5" height="1"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="vAB-5v-8HU"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11/14/2016 12:34PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lC1-z1-ZwQ" userLabel="Message Time">
-                        <rect key="frame" x="178.5" y="9" width="154" height="21"/>
+                        <rect key="frame" x="178.5" y="9.5" width="154" height="21"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -170,6 +180,7 @@
                 <outlet property="bubble" destination="k7r-gv-wn2" id="wjN-h3-Pin"/>
                 <outlet property="bubbleBottomConstraint" destination="4mP-JN-X4I" id="jga-fS-eYl"/>
                 <outlet property="bubbleTopConstraint" destination="BkQ-WJ-mRN" id="fkc-5o-yJD"/>
+                <outlet property="bubbleViewMask" destination="mWQ-Wk-Bfw" id="cuo-9x-55P"/>
                 <outlet property="cancelButton" destination="KIE-mj-gUg" id="Hb5-rh-XGe"/>
                 <outlet property="leftDivider" destination="WB7-Io-YuE" id="XhH-sH-Vru"/>
                 <outlet property="messageLabel" destination="GOj-xs-tfd" id="p2a-JA-ag3"/>
@@ -181,7 +192,7 @@
                 <outlet property="timeLabel" destination="lC1-z1-ZwQ" id="c08-kn-J22"/>
                 <outlet property="topCorner" destination="Mcd-XM-6nW" id="Wut-yf-Db7"/>
             </connections>
-            <point key="canvasLocation" x="-411" y="-132.5"/>
+            <point key="canvasLocation" x="-411" y="-133"/>
         </tableViewCell>
     </objects>
     <resources>
