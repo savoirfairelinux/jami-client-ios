@@ -59,6 +59,7 @@ enum ServiceEventInput {
     case callType
     case callTime
     case transferId
+    case localPhotolID
 }
 
 /**

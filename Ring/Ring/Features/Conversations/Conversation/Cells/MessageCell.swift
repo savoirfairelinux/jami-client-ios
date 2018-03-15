@@ -47,6 +47,9 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var rightDivider: UIView!
     @IBOutlet weak var sendingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var failedStatusLabel: UILabel!
+    @IBOutlet weak var bubbleViewMask: UIView?
+
+    private var transferImageView = UIImageView()
 
     var disposeBag = DisposeBag()
 
@@ -189,28 +192,37 @@ class MessageCell: UITableViewCell, NibReusable {
             self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
         default: break
         }
+        if item.shouldDisplayTransferedImage {
+           self.displayTransferedImage(message: item)
+        }
     }
 
     // swiftlint:disable function_body_length
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
                            _ items: [MessageViewModel]?,
                            cellForRowAt indexPath: IndexPath) {
+
         self.backgroundColor = UIColor.clear
+        self.bubbleViewMask?.backgroundColor = UIColor.ringMsgBackground
+        self.transferImageView.backgroundColor = UIColor.ringMsgBackground
         guard let item = items?[indexPath.row] else {
             return
         }
 
+        self.transferImageView.removeFromSuperview()
+        self.bubbleViewMask?.isHidden = true
+
         // hide/show time label
-        formatCellTimeLabel(item)
+        self.formatCellTimeLabel(item)
 
         if item.bubblePosition() == .generated {
             self.bubble.backgroundColor = UIColor.ringMsgCellReceived
             self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
             if indexPath.row == 0 {
-                messageLabelMarginConstraint.constant = 4
+                self.messageLabelMarginConstraint.constant = 4
                 self.bubbleTopConstraint.constant = 36
             } else {
-                messageLabelMarginConstraint.constant = -2
+                self.messageLabelMarginConstraint.constant = -2
                 self.bubbleTopConstraint.constant = 32
             }
             return
@@ -219,10 +231,10 @@ class MessageCell: UITableViewCell, NibReusable {
             let type = item.bubblePosition()
             self.bubble.backgroundColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
             if indexPath.row == 0 {
-                messageLabelMarginConstraint.constant = 4
+                self.messageLabelMarginConstraint.constant = 4
                 self.bubbleTopConstraint.constant = 36
             } else {
-                messageLabelMarginConstraint.constant = -2
+                self.messageLabelMarginConstraint.constant = -2
                 self.bubbleTopConstraint.constant = 32
             }
             if item.bubblePosition() == .received {
@@ -236,11 +248,11 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         // bubble grouping for cell
-        applyBubbleStyleToCell(items, cellForRowAt: indexPath)
+        self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
 
         // special cases where top/bottom margins should be larger
         if indexPath.row == 0 {
-            messageLabelMarginConstraint.constant = 4
+            self.messageLabelMarginConstraint.constant = 4
             self.bubbleTopConstraint.constant = 36
         } else if items?.count == indexPath.row + 1 {
             self.bubbleBottomConstraint.constant = 16
@@ -266,13 +278,13 @@ class MessageCell: UITableViewCell, NibReusable {
             if item.isTransfer {
                 // incoming transfer
                 item.lastTransferStatus = .unknown
-                onTransferStatusChanged(item.initialTransferStatus, item, conversationViewModel)
+                self.onTransferStatusChanged(item.initialTransferStatus, item, conversationViewModel)
 
                 self.acceptButton.rx.tap
                     .subscribe(onNext: { _ in
                         guard let transferId = item.daemonId else { return }
                         self.log.info("accepting transferId \(transferId)")
-                        if conversationViewModel.acceptTransfer(transferId: transferId) != .success {
+                        if conversationViewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
                             _ = conversationViewModel.cancelTransfer(transferId: transferId)
                         }
                     })
@@ -306,8 +318,7 @@ class MessageCell: UITableViewCell, NibReusable {
                     return
                 })
                 .disposed(by: self.disposeBag)
-
-        }
+            }
     }
 
     func onTransferStatusChanged(_ status: DataTransferStatus,
@@ -366,6 +377,9 @@ class MessageCell: UITableViewCell, NibReusable {
             // status
             self.statusLabel.isHidden = false
             self.statusLabel.text = "Complete"
+            let transferInfo = item.transferFileData
+            self.messageLabel.text = transferInfo.fileName
+            self.displayTransferedImage(message: item)
             self.statusLabel.textColor = UIColor(hex: 0x00b20b, alpha: 1.0)
             // hide everything and shrink cell
             self.progressBar.isHidden = true
@@ -385,6 +399,26 @@ class MessageCell: UITableViewCell, NibReusable {
         guard let conversationViewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
         if let progress = conversationViewModel.getTransferProgress(transferId: transferId) {
             self.progressBar.progress = progress
+        }
+    }
+
+    func displayTransferedImage(message: MessageViewModel) {
+        let maxDimsion: CGFloat = 250
+        if let image = message.getTransferedImage(maxSize: maxDimsion ) {
+            self.transferImageView.image = image
+            self.transferImageView.contentMode = .center
+            self.bubble.addSubview(self.transferImageView)
+            self.bubbleViewMask?.isHidden = false
+            self.bottomCorner.isHidden = true
+            self.topCorner.isHidden = true
+            self.transferImageView.translatesAutoresizingMaskIntoConstraints = false
+            if message.bubblePosition() == .sent {
+                self.transferImageView.trailingAnchor.constraint(equalTo: self.bubble.trailingAnchor, constant: 0).isActive = true
+            } else if message.bubblePosition() == .received {
+                self.transferImageView.leadingAnchor.constraint(equalTo: self.bubble.leadingAnchor, constant: 0).isActive = true
+            }
+            self.transferImageView.topAnchor.constraint(equalTo: self.bubble.topAnchor, constant: 0).isActive = true
+            self.transferImageView.bottomAnchor.constraint(equalTo: self.bubble.bottomAnchor, constant: 0).isActive = true
         }
     }
 

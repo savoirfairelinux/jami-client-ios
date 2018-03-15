@@ -87,14 +87,22 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xb-Fn-OlQ">
+                                <rect key="frame" x="0.0" y="0.0" width="398" height="94"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="1u5-hh-5O1" firstAttribute="top" secondItem="g6M-Dk-fEj" secondAttribute="bottom" constant="4" id="36i-u4-hCp"/>
                             <constraint firstItem="3Of-rh-aYr" firstAttribute="leading" secondItem="wHo-uZ-hv9" secondAttribute="leading" constant="14" id="8jY-re-9oy"/>
                             <constraint firstItem="Q5a-t4-mNC" firstAttribute="top" secondItem="wHo-uZ-hv9" secondAttribute="top" constant="7" id="I3a-21-7c2"/>
+                            <constraint firstAttribute="trailing" secondItem="1xb-Fn-OlQ" secondAttribute="trailing" id="LA1-pF-uVY"/>
                             <constraint firstItem="3Of-rh-aYr" firstAttribute="top" secondItem="wHo-uZ-hv9" secondAttribute="top" constant="7" id="TEY-Se-WRk"/>
                             <constraint firstItem="tp6-HD-XvQ" firstAttribute="leading" secondItem="wHo-uZ-hv9" secondAttribute="leading" constant="14" id="WKd-kJ-rbu"/>
+                            <constraint firstItem="1xb-Fn-OlQ" firstAttribute="leading" secondItem="wHo-uZ-hv9" secondAttribute="leading" id="Ywf-lo-43K"/>
                             <constraint firstAttribute="bottom" secondItem="tp6-HD-XvQ" secondAttribute="bottom" constant="7" id="bRd-HH-Yv2"/>
                             <constraint firstAttribute="trailing" secondItem="Q5a-t4-mNC" secondAttribute="trailing" constant="14" id="fqj-VR-cNo"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="fvs-Gc-mIE"/>
@@ -106,7 +114,9 @@
                             <constraint firstAttribute="trailing" secondItem="gxX-ha-WVD" secondAttribute="trailing" constant="16" id="nCL-V9-fqH"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="nGu-wE-V5F"/>
                             <constraint firstItem="gxX-ha-WVD" firstAttribute="top" secondItem="g6M-Dk-fEj" secondAttribute="top" id="oMN-04-Pyw"/>
+                            <constraint firstAttribute="bottom" secondItem="1xb-Fn-OlQ" secondAttribute="bottom" id="sRh-7i-8Oi"/>
                             <constraint firstItem="Q5a-t4-mNC" firstAttribute="leading" secondItem="3Of-rh-aYr" secondAttribute="trailing" constant="8" id="syc-s5-qWM"/>
+                            <constraint firstItem="1xb-Fn-OlQ" firstAttribute="top" secondItem="wHo-uZ-hv9" secondAttribute="top" id="yaf-dO-Yat"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -161,6 +171,7 @@
                 <outlet property="bubble" destination="wHo-uZ-hv9" id="hAG-xO-4M1"/>
                 <outlet property="bubbleBottomConstraint" destination="I1e-OS-jfN" id="fV5-ej-kRc"/>
                 <outlet property="bubbleTopConstraint" destination="slx-Oo-1bP" id="nNr-Rj-tV0"/>
+                <outlet property="bubbleViewMask" destination="1xb-Fn-OlQ" id="jX7-kq-xKK"/>
                 <outlet property="cancelButton" destination="tp6-HD-XvQ" id="6Q7-R4-7EE"/>
                 <outlet property="leftDivider" destination="ka8-KH-Tw8" id="gBy-rk-WR3"/>
                 <outlet property="messageLabel" destination="Q5a-t4-mNC" id="BFU-gb-0F3"/>
@@ -172,7 +183,7 @@
                 <outlet property="timeLabel" destination="I2N-A0-Nyl" id="HKq-si-UE6"/>
                 <outlet property="topCorner" destination="Y7m-13-qwk" id="aTc-bv-tNx"/>
             </connections>
-            <point key="canvasLocation" x="-411" y="-132.5"/>
+            <point key="canvasLocation" x="-411" y="-133"/>
         </tableViewCell>
     </objects>
     <resources>
