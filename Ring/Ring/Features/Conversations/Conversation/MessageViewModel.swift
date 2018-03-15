@@ -51,8 +51,7 @@ class MessageViewModel {
     fileprivate let accountService: AccountsService
     fileprivate let conversationsService: ConversationsService
     fileprivate let dataTransferService: DataTransferService
-    fileprivate var message: MessageModel
-
+    var message: MessageModel
     var timeStringShown: String?
     var sequencing: MessageSequencing = .unknown
     var dataTransferProgressUpdater: Timer?
@@ -154,6 +153,21 @@ class MessageViewModel {
         return self.message.isTransfer
     }
 
+    var shouldDisplayTransferedImage: Bool {
+        if !self.isTransfer {
+            return false
+        }
+        if !self.message.incoming {
+            return true
+        }
+
+        if self.message.transferStatus == .success {
+            return true
+        }
+
+        return false
+    }
+
     var status = BehaviorSubject<MessageStatus>(value: .unknown)
 
     var transferStatus = BehaviorSubject<DataTransferStatus>(value: .unknown)
@@ -170,5 +184,39 @@ class MessageViewModel {
         } else {
             return .sent
         }
+    }
+
+    typealias TransferParsingTuple = (fileName: String, fileSize: String?, identifier: String?)
+
+    var transferFileData: TransferParsingTuple {
+        let contentArr = self.content.components(separatedBy: "\n")
+        var name: String
+        var identifier: String?
+        var size: String?
+        if contentArr.count > 2 {
+            name = contentArr[0]
+            size = contentArr[1]
+            identifier = contentArr[2]
+        } else if contentArr.count > 1 {
+            name = contentArr[0]
+            size = contentArr[1]
+        } else {
+            name = content
+        }
+        return (name,size,identifier)
+    }
+
+
+    func getTransferedImage(maxSize: CGFloat) -> UIImage? {
+        if self.message.incoming &&
+            self.lastTransferStatus != .success &&
+            self.message.transferStatus != .success {
+            return nil
+        }
+        let transferInfo = transferFileData
+        return self.dataTransferService
+            .getImage(for: transferInfo.fileName,
+                      maxSize: maxSize,
+                      identifier: transferInfo.identifier)
     }
 }

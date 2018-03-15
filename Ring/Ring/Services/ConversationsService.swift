@@ -220,10 +220,14 @@ class ConversationsService {
     func generateDataTransferMessage(transferId: UInt64,
                                      transferInfo: NSDataTransferInfo,
                                      accountRingId: String,
-                                     accountId: String) {
+                                     accountId: String,
+                                     photoIdentifier: String?) {
 
         let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: transferInfo.totalSize, countStyle: .file)
-        let messageContent = transferInfo.displayName + "\n" + fileSizeWithUnit
+        var messageContent = transferInfo.displayName + "\n" + fileSizeWithUnit
+        if let photoIdentifier = photoIdentifier {
+           messageContent = transferInfo.displayName + "\n" + fileSizeWithUnit + "\n" + photoIdentifier
+        }
         let isIncoming = transferInfo.flags == 1
         let interactionType: InteractionType = isIncoming ? .iTransfer : .oTransfer
         let date = Date()

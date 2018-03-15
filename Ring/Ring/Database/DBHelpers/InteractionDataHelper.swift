@@ -289,6 +289,22 @@ final class InteractionDataHelper {
         }
     }
 
+    func updateInteractionWithID(interactionID: Int64, content: String) -> Bool {
+        guard let dataBase = RingDB.instance.ringDB else {
+            return false
+        }
+        let query = table.filter(id == interactionID)
+        do {
+            if try dataBase.run(query.update(body <- content)) > 0 {
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
+    }
+
     func deleteAllIntercations(convID: Int64) -> Bool {
         guard let dataBase = RingDB.instance.ringDB else {
             return false

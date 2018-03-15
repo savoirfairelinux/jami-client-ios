@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreImage
 
 extension UIImage {
     var circleMasked: UIImage? {
@@ -36,6 +37,23 @@ extension UIImage {
         return result
     }
 
+    func setRoundCorner(radius: CGFloat, offset: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
+        let bounds = CGRect(origin: .zero, size: self.size)
+        let path = UIBezierPath(roundedRect: bounds.insetBy(dx: offset, dy: offset), cornerRadius: radius)
+        let context = UIGraphicsGetCurrentContext()
+        context!.saveGState()
+        path.addClip()
+        self.draw(in: bounds)
+        UIColor.ringMsgBackground.setStroke()
+        path.lineWidth = offset * 2
+        path.stroke()
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return roundedImage
+    }
+
+
     // convenience function in UIImage extension to resize a given image
     func convert(toSize size: CGSize, scale: CGFloat) -> UIImage {
         let imgRect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: size)
@@ -61,5 +79,41 @@ extension UIImage {
             i -= 1
         }
         return imageData
+    }
+
+    func resizeIntoRectangle(of size: CGSize) -> UIImage {
+        if self.size.width < size.width && self.size.height < size.height {
+            return self
+        }
+        var newWidth = size.width
+        var newHeight = size.height
+        let ratio = self.size.width / self.size.height
+        if ratio > 0 {
+             newHeight = newWidth / ratio
+        } else if ratio < 0 {
+              newWidth = newHeight * ratio
+        }
+        guard let cgImage = self.cgImage else {return self}
+        let bitsPerComponent = cgImage.bitsPerComponent
+        let bytesPerRow = cgImage.bytesPerRow
+        guard let colorSpace = cgImage.colorSpace else {return self}
+        let bitmapInfo = cgImage.bitmapInfo
+
+        guard let context = CGContext(data: nil,
+                                      width: Int(newWidth),
+                                      height: Int(newHeight),
+                                      bitsPerComponent: bitsPerComponent,
+                                      bytesPerRow: bytesPerRow,
+                                      space: colorSpace,
+                                      bitmapInfo: bitmapInfo.rawValue) else {return self}
+
+        context.interpolationQuality = .high
+        context.draw(cgImage, in: CGRect(origin: .zero, size: CGSize(width: newWidth, height: newHeight)))
+
+        let image = context.makeImage().flatMap { UIImage(cgImage: $0) }
+        if let newImage: UIImage = image {
+            return newImage
+        }
+        return self
     }
 }

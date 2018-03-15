@@ -150,10 +150,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             }
             // copy image to tmp
             let imageFileName = "IMG.png"
-            let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName)
-            self.log.debug("localCachePath: \(String(describing: localCachePath))")
-            copyImageToCache(image: image, imagePath: localCachePath!.path)
-            self.viewModel.sendFile(filePath: localCachePath!.path, displayName: imageFileName)
+            guard let imageData =  UIImagePNGRepresentation(image) else { return }
+            self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
         } else if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
             // image from library
             guard let imageURL = info[UIImagePickerControllerReferenceURL] as? URL else { return }
@@ -161,7 +159,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
 
             let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
             var imageFileName = result.firstObject?.value(forKey: "filename") as? String ?? "Unknown"
-            self.log.debug("PHAsset fileName: \(String(describing: imageFileName))")
 
             let pathExtension = (imageFileName as NSString).pathExtension
             if pathExtension == "HEIC" || pathExtension == "HEIF" {
@@ -181,7 +178,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
                 }
                 // copy image to tmp
                 copyImageToCache(image: image, imagePath: localCachePath!.path)
-                self.viewModel.sendFile(filePath: localCachePath!.path, displayName: imageFileName)
+                self.viewModel.sendFile(filePath: localCachePath!.path, displayName: imageFileName, localIdentifier: result.firstObject?.localIdentifier)
             } else if phAsset.mediaType == .video {
                 PHImageManager.default().requestAVAsset(forVideo: phAsset,
                                                         options: PHVideoRequestOptions(),
