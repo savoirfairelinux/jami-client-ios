@@ -398,4 +398,13 @@ class ConversationViewModel: Stateable, ViewModel {
     func getTransferProgress(transferId: UInt64) -> Float? {
         return self.dataTransferService.getTransferProgress(withId: transferId)
     }
+
+    func isTransferImage(transferId: UInt64) -> Bool? {
+        return self.dataTransferService.isTransferImage(withId: transferId)
+    }
+
+    func getTransferSize(transferId: UInt64) -> Int64? {
+        guard let info = self.dataTransferService.getTransferInfo(withId: transferId) else { return nil }
+        return info.totalSize
+    }
 }

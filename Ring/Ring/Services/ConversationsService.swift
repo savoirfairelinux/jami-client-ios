@@ -243,12 +243,15 @@ class ConversationsService {
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [unowned self] messageId in
                 self.dataTransferMessageMap[transferId] = messageId
-                self.log.warning("messageId: \(messageId)")
                 self.dbManager.getConversationsObservable(for: accountId, accountURI: accountRingId)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onNext: { conversationsModels in
                         self.conversations.value = conversationsModels
                         self.messagesSemaphore.signal()
+                        let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
+                        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+                        serviceEvent.addEventInput(.transferId, value: transferId)
+                        self.responseStream.onNext(serviceEvent)
                     })
                     .disposed(by: (self.disposeBag))
                 }, onError: { [unowned self] _ in
@@ -366,14 +369,9 @@ class ConversationsService {
                 conversation.accountId == account.id
         }).first
 
-        guard let messageId = dataTransferMessageMap[transferId] else {
-            self.log.error("ConversationService: transferStatusChanged - dataTransferMessageMap doesn't have messageId")
-            return
-        }
         //Find message
         if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
-            self.log.warning("messageIds: \(message.messageId) == \(messageId)")
-            return  message.messageId == messageId
+            return  message.daemonId == String(transferId)
         }) {
             if let message = messages.first {
                 self.dbManager
@@ -385,7 +383,6 @@ class ConversationsService {
                         let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
                         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                         serviceEvent.addEventInput(.transferId, value: transferId)
-                        serviceEvent.addEventInput(.messageId, value: messageId)
                         self.responseStream.onNext(serviceEvent)
                     }, onError: { _ in
                         self.messagesSemaphore.signal()
