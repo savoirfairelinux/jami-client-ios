@@ -56,12 +56,13 @@ extension Chameleon {
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).backgroundColor = UIColor.clear
 
         UIButton.appearance().backgroundColor = UIColor.clear
+        UIButton.appearance().tintColor = UIColor.ringSecondary
         DesignableButton.appearance().backgroundColor = secondaryColor
         ButtonTransparentBackground.appearance().tintColor = secondaryColor
         ButtonTransparentBackground.appearance().backgroundColor = UIColor.clear
         UIButton.appearance(whenContainedInInstancesOf: [UIView.self, UIImagePickerController.self]).tintColor = UIColor.ringMain
         UINavigationBar.appearance().barTintColor = UIColor.ringNavigationBar
-        UISearchBar.appearance().backgroundColor = UIColor.ringNavigationBar
+        UISearchBar.appearance().backgroundColor = UIColor.clear
         UIButton.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = UIColor.ringMain
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.ringMain]
     }

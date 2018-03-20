@@ -163,7 +163,6 @@ class MessageCell: UITableViewCell, NibReusable {
         } else {
             bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
         }
-        self.setup()
 
         self.messageLabel.enabledTypes = [.url]
         if item.isTransfer {
@@ -175,6 +174,7 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.messageLabel.text = item.content
             }
         } else {
+            self.setup()
             self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
         }
         self.messageLabel.handleURLTap { url in
