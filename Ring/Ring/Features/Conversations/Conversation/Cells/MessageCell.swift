@@ -38,7 +38,7 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var acceptButton: UIButton?
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var buttonsHeightConstraint: NSLayoutConstraint?
     @IBOutlet weak var bottomCorner: UIView!
@@ -89,7 +89,6 @@ class MessageCell: UITableViewCell, NibReusable {
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
         if let progress = viewModel.getTransferProgress(transferId: transferId) {
             DispatchQueue.main.async {
-                self.log.info("progressUpdate: \(progress) for id: \(transferId)")
                 self.progressBar.progress = progress
             }
         }
@@ -276,7 +275,7 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.bubbleTopConstraint.constant = 32
             }
             if item.bubblePosition() == .received {
-                self.acceptButton.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+                self.acceptButton?.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
                 self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
                 self.progressBar.tintColor = UIColor.ringMain
             } else if item.bubblePosition() == .sent {
