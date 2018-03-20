@@ -131,6 +131,15 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         }
     }
 
+    func getFileUrl(fileName: String) -> URL? {
+        guard let pathUrl = getFilePath(fileName: fileName) else {return nil}
+        let fileManager = FileManager.default
+        var file: URL?
+        if fileManager.fileExists(atPath: pathUrl.path) {
+            file = NSURL.fileURL(withPath: pathUrl.path)
+        }
+        return file
+    }
     /*
      to avoid creating images multiple time keep images in dictionary
      images saved in app document folder referenced by name

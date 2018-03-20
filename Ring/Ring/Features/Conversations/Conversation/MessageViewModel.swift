@@ -208,6 +208,17 @@ class MessageViewModel {
         return (name, size, identifier)
     }
 
+    func transferedFile() -> URL? {
+        if !self.message.incoming {return nil}
+        if self.lastTransferStatus != .success &&
+            self.message.transferStatus != .success {
+            return nil
+        }
+        let transferInfo = transferFileData
+        return self.dataTransferService
+            .getFileUrl(fileName: transferInfo.fileName)
+    }
+
     func getTransferedImage(maxSize: CGFloat) -> UIImage? {
         if self.message.incoming &&
             self.lastTransferStatus != .success &&

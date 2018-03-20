@@ -216,6 +216,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchBar.returnKeyType = .done
         self.searchBar.autocapitalizationType = .none
         self.searchBar.tintColor = UIColor.ringMain
+        self.searchBar.backgroundColor = UIColor.ringNavigationBar
 
         self.view.bringSubview(toFront: self.searchBar)
 
