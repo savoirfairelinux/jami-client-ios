@@ -670,6 +670,24 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         default: break
         }
     }
+    func addShareAction(cell: MessageCell, item: MessageViewModel) {
+        let doubleTap = UITapGestureRecognizer()
+        doubleTap.numberOfTapsRequired = 2
+        cell.isUserInteractionEnabled = true
+        cell.addGestureRecognizer(doubleTap)
+        doubleTap.rx.event.bind(onNext: { [weak self] _ in
+            self?.showShareMenu(transfer: item)
+        }).disposed(by: cell.disposeBag)
+    }
+
+    func showShareMenu(transfer: MessageViewModel) {
+        guard let file = transfer.transferedFile() else {return}
+        let itemToShare = [file]
+        let activityViewController = UIActivityViewController(activityItems: itemToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.excludedActivityTypes = [UIActivityType.airDrop]
+        self.present(activityViewController, animated: true, completion: nil)
+    }
 }
 
 extension ConversationViewController: UITableViewDataSource {
@@ -736,6 +754,9 @@ extension ConversationViewController: UITableViewDataSource {
                         tableView.reloadData()
                     })
                     .disposed(by: cell.disposeBag)
+                if item.message.transferStatus == .success {
+                    self.addShareAction(cell: cell, item: item)
+                }
             } else if item.isTransfer && item.bubblePosition() == .sent {
                 item.transferStatus.asObservable()
                     .observeOn(MainScheduler.instance)
