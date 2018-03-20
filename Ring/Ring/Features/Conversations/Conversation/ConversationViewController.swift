@@ -126,9 +126,11 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
 
     func copyImageToCache(image: UIImage, imagePath: String) {
         guard let imageData =  UIImagePNGRepresentation(image) else { return }
+        // set the extension to png
+        let copiedImagePath = (imagePath as NSString).deletingPathExtension + ".png"
         do {
-            self.log.debug("copying image to: \(String(describing: imagePath))")
-            try imageData.write(to: URL(fileURLWithPath: imagePath), options: .atomic)
+            self.log.debug("copying image to: \(String(describing: copiedImagePath))")
+            try imageData.write(to: URL(fileURLWithPath: copiedImagePath), options: .atomic)
         } catch {
             self.log.error("couldn't copy image to cache")
         }
@@ -518,7 +520,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         for (index, messageViewModel) in self.messageViewModels!.enumerated() {
             // time labels
             let time = messageViewModel.receivedDate
-            if index == 0 ||  messageViewModel.bubblePosition() == .generated {
+            if index == 0 ||  messageViewModel.bubblePosition() == .generated || messageViewModel.isTransfer {
                 // always show first message's time
                 messageViewModel.timeStringShown = getTimeLabelString(forTime: time)
                 lastShownTime = time
@@ -613,6 +615,16 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
                               _ item: MessageViewModel,
                               _ conversationViewModel: ConversationViewModel) {
         switch status {
+        case .created:
+            if item.bubblePosition() == .sent {
+                cell.statusLabel.isHidden = false
+                cell.statusLabel.text = "Initializing…"
+                cell.statusLabel.textColor = UIColor.darkGray
+                cell.progressBar.isHidden = true
+                cell.cancelButton.isHidden = false
+                cell.cancelButton.setTitle("Cancel", for: .normal)
+                cell.buttonsHeightConstraint?.constant = 24.0
+            }
         case .error:
             // show status
             cell.statusLabel.isHidden = false
@@ -620,30 +632,46 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             cell.statusLabel.textColor = UIColor(hex: 0xf00000, alpha: 1.0)
             // hide everything and shrink cell
             cell.progressBar.isHidden = true
-            cell.acceptButton.isHidden = true
+            cell.acceptButton?.isHidden = true
             cell.cancelButton.isHidden = true
             cell.buttonsHeightConstraint?.constant = 0.0
         case .awaiting:
-            cell.acceptButton.isHidden = false
-            cell.cancelButton.isHidden = false
-            cell.cancelButton.setTitle("Refuse", for: .normal)
-            // hide status
-            cell.statusLabel.isHidden = true
             cell.progressBar.isHidden = true
+            cell.cancelButton.isHidden = false
             cell.buttonsHeightConstraint?.constant = 24.0
+            if item.bubblePosition() == .sent {
+                // status
+                cell.statusLabel.isHidden = false
+                cell.statusLabel.text = "Pending…"
+                cell.statusLabel.textColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+                cell.cancelButton.setTitle("Cancel", for: .normal)
+            } else if item.bubblePosition() == .received {
+                // accept automatically if less than 10MB and is an image
+                if let transferId = item.daemonId,
+                    let isImage = viewModel.isTransferImage(transferId: transferId),
+                    let size = viewModel.getTransferSize(transferId: transferId), isImage && size <= 10485760 {
+                    if viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
+                        _ = self.viewModel.cancelTransfer(transferId: transferId)
+                    }
+                }
+                // hide status
+                cell.statusLabel.isHidden = true
+                cell.acceptButton?.isHidden = false
+                cell.cancelButton.setTitle("Refuse", for: .normal)
+            }
         case .ongoing:
             // status
             cell.statusLabel.isHidden = false
             cell.statusLabel.text = "Transferring"
             cell.statusLabel.textColor = UIColor.darkGray
-            // TODO: start update progress timer process bar here
+            // start update progress timer process bar here
             guard let transferId = item.daemonId else { return }
             let progress = viewModel.getTransferProgress(transferId: transferId) ?? 0.0
             cell.progressBar.progress = progress
             cell.progressBar.isHidden = false
             cell.startProgressMonitor(item, viewModel)
             // hide accept button only
-            cell.acceptButton.isHidden = true
+            cell.acceptButton?.isHidden = true
             cell.cancelButton.isHidden = false
             cell.cancelButton.setTitle("Cancel", for: .normal)
             cell.buttonsHeightConstraint?.constant = 24.0
@@ -654,7 +682,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             cell.statusLabel.textColor = UIColor.orange
             // hide everything and shrink cell
             cell.progressBar.isHidden = true
-            cell.acceptButton.isHidden = true
+            cell.acceptButton?.isHidden = true
             cell.cancelButton.isHidden = true
             cell.buttonsHeightConstraint?.constant = 0.0
         case .success:
@@ -664,7 +692,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             cell.statusLabel.textColor = UIColor(hex: 0x00b20b, alpha: 1.0)
             // hide everything and shrink cell
             cell.progressBar.isHidden = true
-            cell.acceptButton.isHidden = true
+            cell.acceptButton?.isHidden = true
             cell.cancelButton.isHidden = true
             cell.buttonsHeightConstraint?.constant = 0.0
         default: break
@@ -691,22 +719,30 @@ extension ConversationViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: type)
             cell.configureFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
 
-            if item.isTransfer && item.bubblePosition() == .received {
+            if item.isTransfer {
                 item.lastTransferStatus = .unknown
-                self.log.warning("cellForRowAt: \(indexPath.row), initialTransferStatus: \(item.initialTransferStatus), message.transferStatus: \(item.message.transferStatus)")
                 changeTransferStatus(cell, nil, item.message.transferStatus, item, viewModel)
 
-                cell.acceptButton.rx.tap
-                    .subscribe(onNext: { _ in
+                item.transferStatus.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .filter {
+                        return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
+                    .subscribe(onNext: { status in
+                        guard let currentIndexPath = tableView.indexPath(for: cell) else { return }
                         guard let transferId = item.daemonId else { return }
-                        self.log.info("accepting transferId \(transferId)")
-                        if self.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
-                            _ = self.viewModel.cancelTransfer(transferId: transferId)
-                            item.initialTransferStatus = .canceled
-                            item.message.transferStatus = .canceled
+                        self.log.info("Transfer status change from: \(item.lastTransferStatus.description) to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
+                        if item.bubblePosition() == .sent &&
+                           item.shouldDisplayTransferedImage &&
+                           status != .error &&
+                           status != .canceled {
+                            cell.displayTransferedImage(message: item)
+                        } else {
+                            self.changeTransferStatus(cell, currentIndexPath, status, item, self.viewModel)
                             cell.stopProgressMonitor()
-                            tableView.reloadData()
                         }
+                        item.lastTransferStatus = status
+                        item.initialTransferStatus = status
+                        tableView.reloadData()
                     })
                     .disposed(by: cell.disposeBag)
 
@@ -722,37 +758,21 @@ extension ConversationViewController: UITableViewDataSource {
                     })
                     .disposed(by: cell.disposeBag)
 
-                item.transferStatus.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .filter {
-                        return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
-                    .subscribe(onNext: { status in
-                        guard let currentIndexPath = tableView.indexPath(for: cell) else { return }
-                        guard let transferId = item.daemonId else { return }
-                        self.log.info("MessageCell: transfer status change to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
-                        self.changeTransferStatus(cell, currentIndexPath, status, item, self.viewModel)
-                        item.initialTransferStatus = status
-                        cell.stopProgressMonitor()
-                        tableView.reloadData()
-                    })
-                    .disposed(by: cell.disposeBag)
-            } else if item.isTransfer && item.bubblePosition() == .sent {
-                item.transferStatus.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .filter {
-                        return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
-                    .subscribe(onNext: { status in
-                        guard tableView.indexPath(for: cell) != nil else { return }
-                        guard item.daemonId != nil else { return }
-                        item.initialTransferStatus = status
-                        if status == .awaiting {
-                            if item.shouldDisplayTransferedImage {
-                                cell.displayTransferedImage(message: item)
+                if item.bubblePosition() == .received {
+                    cell.acceptButton?.rx.tap
+                        .subscribe(onNext: { _ in
+                            guard let transferId = item.daemonId else { return }
+                            self.log.info("accepting transferId \(transferId)")
+                            if self.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
+                                _ = self.viewModel.cancelTransfer(transferId: transferId)
+                                item.initialTransferStatus = .canceled
+                                item.message.transferStatus = .canceled
+                                cell.stopProgressMonitor()
+                                tableView.reloadData()
                             }
-                            tableView.reloadData()
-                        }
-                    })
-                    .disposed(by: cell.disposeBag)
+                        })
+                        .disposed(by: cell.disposeBag)
+                }
             }
 
             return cell
