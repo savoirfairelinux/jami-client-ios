@@ -199,6 +199,16 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return nil
     }
 
+    func isTransferImage(withId transferId: UInt64) -> Bool? {
+        guard let info = getTransferInfo(withId: transferId) else { return nil }
+        guard let pathUrl = getFilePath(fileName: info.displayName ) else { return nil }
+        let fileExtension = pathUrl.pathExtension as CFString
+        guard let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
+                                                              fileExtension,
+                                                              nil) else {return nil}
+        return UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage)
+    }
+
     func cancelTransfer(withId transferId: UInt64) -> NSDataTransferError {
         let err = cancelDataTransfer(withId: transferId)
         if err != .success {
@@ -228,6 +238,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             self.responseStream.onNext(serviceEvent)
         }
     }
+
     func sendAndSaveFile(displayName: String, accountId: String, peerInfoHash: String, imageData: Data) {
         guard let imagePath = self.getFilePathForTransfer(forFile: displayName) else {return}
         do {
