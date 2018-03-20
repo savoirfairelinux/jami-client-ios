@@ -72,7 +72,10 @@ class MessageViewModel {
                 self.conversationsService.dataTransferMessageMap[transferId] == nil {
                 self.conversationsService.dataTransferMessageMap.removeValue(forKey: transferId)
                 switch self.initialTransferStatus {
-                case .awaiting, .created, .ongoing:
+                case .awaiting:
+                    message.transferStatus = .error
+                    self.initialTransferStatus = .error
+                case .created, .ongoing:
                     self.initialTransferStatus = .error
                 default: break
                 }
@@ -80,11 +83,9 @@ class MessageViewModel {
             self.conversationsService
                 .sharedResponseStream
                 .filter({ (transferEvent) in
-                    guard let messageId: Int64 = transferEvent.getEventInput(ServiceEventInput.messageId) else { return false }
                     guard let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId) else { return false }
                     return  transferEvent.eventType == ServiceEventType.dataTransferMessageUpdated &&
-                            transferId == self.daemonId &&
-                            messageId == self.messageId
+                            transferId == self.daemonId
                 })
                 .subscribe(onNext: { [unowned self] transferEvent in
                     guard   let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId),
@@ -106,7 +107,7 @@ class MessageViewModel {
                     case .finished:
                         transferStatus = DataTransferStatus.success
                     case .created:
-                        break
+                        transferStatus = DataTransferStatus.created
                     }
                     self.message.transferStatus = transferStatus
                     self.transferStatus.onNext(transferStatus)
@@ -158,8 +159,8 @@ class MessageViewModel {
             return false
         }
         if !self.message.incoming &&
-            (self.message.transferStatus == .success ||
-                self.message.transferStatus == .awaiting) {
+            (   self.message.transferStatus == .error ||
+                self.message.transferStatus != .canceled) {
             return true
         }
 

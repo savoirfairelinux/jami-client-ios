@@ -219,6 +219,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             self.responseStream.onNext(serviceEvent)
         }
     }
+
     func sendAndSaveFile(displayName: String, accountId: String, peerInfoHash: String, imageData: Data) {
         guard let imagePath = self.getFilePathForTransfer(forFile: displayName) else {return}
         do {
