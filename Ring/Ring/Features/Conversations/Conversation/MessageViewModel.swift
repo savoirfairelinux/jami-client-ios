@@ -72,7 +72,10 @@ class MessageViewModel {
                 self.conversationsService.dataTransferMessageMap[transferId] == nil {
                 self.conversationsService.dataTransferMessageMap.removeValue(forKey: transferId)
                 switch self.initialTransferStatus {
-                case .awaiting, .created, .ongoing:
+                case .awaiting:
+                    message.transferStatus = .error
+                    self.initialTransferStatus = .error
+                case .created, .ongoing:
                     self.initialTransferStatus = .error
                 default: break
                 }

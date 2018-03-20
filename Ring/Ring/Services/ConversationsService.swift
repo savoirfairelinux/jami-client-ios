@@ -368,6 +368,7 @@ class ConversationsService {
 
         guard let messageId = dataTransferMessageMap[transferId] else {
             self.log.error("ConversationService: transferStatusChanged - dataTransferMessageMap doesn't have messageId")
+            self.messagesSemaphore.signal()
             return
         }
         //Find message
