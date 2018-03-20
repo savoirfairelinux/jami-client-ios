@@ -52,7 +52,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attachment_icon" translatesAutoresizingMaskIntoConstraints="NO" id="3Of-rh-aYr" userLabel="File Icon">
                                 <rect key="frame" x="14" y="7" width="24" height="24"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="1Q0-U7-g3i"/>
                                     <constraint firstAttribute="height" constant="24" id="Kbg-8N-bfn"/>
@@ -83,6 +83,9 @@
                             </progressView>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tp6-HD-XvQ" userLabel="Cancel Button">
                                 <rect key="frame" x="14" y="62.5" width="80" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="ca7-7J-yhQ"/>
+                                </constraints>
                                 <state key="normal" title="Cancel" image="close_icon">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -172,6 +175,7 @@
                 <outlet property="bubbleBottomConstraint" destination="I1e-OS-jfN" id="fV5-ej-kRc"/>
                 <outlet property="bubbleTopConstraint" destination="slx-Oo-1bP" id="nNr-Rj-tV0"/>
                 <outlet property="bubbleViewMask" destination="1xb-Fn-OlQ" id="jX7-kq-xKK"/>
+                <outlet property="buttonsHeightConstraint" destination="ca7-7J-yhQ" id="wsU-xY-AY7"/>
                 <outlet property="cancelButton" destination="tp6-HD-XvQ" id="6Q7-R4-7EE"/>
                 <outlet property="leftDivider" destination="ka8-KH-Tw8" id="gBy-rk-WR3"/>
                 <outlet property="messageLabel" destination="Q5a-t4-mNC" id="BFU-gb-0F3"/>
