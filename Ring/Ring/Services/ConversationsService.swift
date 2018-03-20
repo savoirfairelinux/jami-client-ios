@@ -243,7 +243,6 @@ class ConversationsService {
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [unowned self] messageId in
                 self.dataTransferMessageMap[transferId] = messageId
-                self.log.warning("messageId: \(messageId)")
                 self.dbManager.getConversationsObservable(for: accountId, accountURI: accountRingId)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onNext: { conversationsModels in
@@ -368,11 +367,11 @@ class ConversationsService {
 
         guard let messageId = dataTransferMessageMap[transferId] else {
             self.log.error("ConversationService: transferStatusChanged - dataTransferMessageMap doesn't have messageId")
+            self.messagesSemaphore.signal()
             return
         }
         //Find message
         if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
-            self.log.warning("messageIds: \(message.messageId) == \(messageId)")
             return  message.messageId == messageId
         }) {
             if let message = messages.first {
