@@ -216,16 +216,16 @@ class MessageCell: UITableViewCell, NibReusable {
 
         switch item.sequencing {
         case .middleOfSequence:
-            self.topCorner.isHidden = false
-            self.bottomCorner.isHidden = false
+            self.topCorner.isHidden = item.isTransfer
+            self.bottomCorner.isHidden = item.isTransfer
             self.bubbleBottomConstraint.constant = 1
             self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
         case .firstOfSequence:
-            self.bottomCorner.isHidden = false
+            self.bottomCorner.isHidden = item.isTransfer
             self.bubbleBottomConstraint.constant = 1
             self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 8
         case .lastOfSequence:
-            self.topCorner.isHidden = false
+            self.topCorner.isHidden = item.isTransfer
             self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
         default: break
         }
