@@ -618,18 +618,18 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         case .created:
             if item.bubblePosition() == .sent {
                 cell.statusLabel.isHidden = false
-                cell.statusLabel.text = "Initializing…"
+                cell.statusLabel.text = L10n.Datatransfer.readableStatusCreated
                 cell.statusLabel.textColor = UIColor.darkGray
                 cell.progressBar.isHidden = true
                 cell.cancelButton.isHidden = false
-                cell.cancelButton.setTitle("Cancel", for: .normal)
+                cell.cancelButton.setTitle(L10n.Datatransfer.readableStatusCancel, for: .normal)
                 cell.buttonsHeightConstraint?.constant = 24.0
             }
         case .error:
             // show status
             cell.statusLabel.isHidden = false
-            cell.statusLabel.text = "Error"
-            cell.statusLabel.textColor = UIColor(hex: 0xf00000, alpha: 1.0)
+            cell.statusLabel.text = L10n.Datatransfer.readableStatusError
+            cell.statusLabel.textColor = UIColor.ringFailure
             // hide everything and shrink cell
             cell.progressBar.isHidden = true
             cell.acceptButton?.isHidden = true
@@ -642,9 +642,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             if item.bubblePosition() == .sent {
                 // status
                 cell.statusLabel.isHidden = false
-                cell.statusLabel.text = "Pending…"
-                cell.statusLabel.textColor = UIColor(hex: 0x00b20b, alpha: 1.0)
-                cell.cancelButton.setTitle("Cancel", for: .normal)
+                cell.statusLabel.text = L10n.Datatransfer.readableStatusAwaiting
+                cell.statusLabel.textColor = UIColor.ringSuccess
+                cell.cancelButton.setTitle(L10n.Datatransfer.readableStatusCancel, for: .normal)
             } else if item.bubblePosition() == .received {
                 // accept automatically if less than 10MB and is an image
                 if let transferId = item.daemonId,
@@ -657,12 +657,12 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
                 // hide status
                 cell.statusLabel.isHidden = true
                 cell.acceptButton?.isHidden = false
-                cell.cancelButton.setTitle("Refuse", for: .normal)
+                cell.cancelButton.setTitle(L10n.Datatransfer.readableStatusRefuse, for: .normal)
             }
         case .ongoing:
             // status
             cell.statusLabel.isHidden = false
-            cell.statusLabel.text = "Transferring"
+            cell.statusLabel.text = L10n.Datatransfer.readableStatusOngoing
             cell.statusLabel.textColor = UIColor.darkGray
             // start update progress timer process bar here
             guard let transferId = item.daemonId else { return }
@@ -673,13 +673,13 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             // hide accept button only
             cell.acceptButton?.isHidden = true
             cell.cancelButton.isHidden = false
-            cell.cancelButton.setTitle("Cancel", for: .normal)
+            cell.cancelButton.setTitle(L10n.Datatransfer.readableStatusCancel, for: .normal)
             cell.buttonsHeightConstraint?.constant = 24.0
         case .canceled:
             // status
             cell.statusLabel.isHidden = false
-            cell.statusLabel.text = "Canceled"
-            cell.statusLabel.textColor = UIColor.orange
+            cell.statusLabel.text = L10n.Datatransfer.readableStatusCanceled
+            cell.statusLabel.textColor = UIColor.ringWarning
             // hide everything and shrink cell
             cell.progressBar.isHidden = true
             cell.acceptButton?.isHidden = true
@@ -688,8 +688,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         case .success:
             // status
             cell.statusLabel.isHidden = false
-            cell.statusLabel.text = "Complete"
-            cell.statusLabel.textColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+            cell.statusLabel.text = L10n.Datatransfer.readableStatusSuccess
+            cell.statusLabel.textColor = UIColor.ringSuccess
             // hide everything and shrink cell
             cell.progressBar.isHidden = true
             cell.acceptButton?.isHidden = true
@@ -739,6 +739,7 @@ extension ConversationViewController: UITableViewDataSource {
             cell.configureFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
 
             if item.isTransfer {
+                cell.acceptButton?.setTitle(L10n.Datatransfer.readableStatusAccept, for: .normal)
                 item.lastTransferStatus = .unknown
                 changeTransferStatus(cell, nil, item.message.transferStatus, item, viewModel)
 

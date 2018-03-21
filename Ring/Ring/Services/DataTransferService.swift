@@ -55,17 +55,17 @@ enum DataTransferStatus: CustomStringConvertible {
 // swiftlint:disable cyclomatic_complexity
 func stringFromEventCode(with code: NSDataTransferEventCode) -> String {
     switch code {
-    case .invalid: return L10n.Datatransfer.transferStatusInvalid
-    case .created: return L10n.Datatransfer.transferStatusCreated
-    case .unsupported: return L10n.Datatransfer.transferStatusUnsupported
-    case .wait_host_acceptance: return L10n.Datatransfer.transferStatusWaitHostAcceptance
-    case .wait_peer_acceptance: return L10n.Datatransfer.transferStatusWaitPeerAcceptance
-    case .ongoing: return L10n.Datatransfer.transferStatusOngoing
-    case .finished: return L10n.Datatransfer.transferStatusFinished
-    case .closed_by_host: return L10n.Datatransfer.transferStatusClosedByHost
-    case .closed_by_peer: return L10n.Datatransfer.transferStatusClosedByPeer
-    case .invalid_pathname: return L10n.Datatransfer.transferStatusInvalidPathname
-    case .unjoinable_peer: return L10n.Datatransfer.transferStatusUnjoinablePeer
+    case .invalid: return "Invalid"
+    case .created: return "initializing transfer"
+    case .unsupported: return "unsupported"
+    case .wait_host_acceptance: return "waiting peer acceptance"
+    case .wait_peer_acceptance: return "waiting host acceptance"
+    case .ongoing: return "ongoing"
+    case .finished: return "finished"
+    case .closed_by_host: return "closed by host"
+    case .closed_by_peer: return "closed by peer"
+    case .invalid_pathname: return "invalid pathname"
+    case .unjoinable_peer: return "unjoinable peer"
     }
 }
 // swiftlint:enable cyclomatic_complexity

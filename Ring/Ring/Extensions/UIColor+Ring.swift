@@ -45,4 +45,7 @@ extension UIColor {
     static let ringMsgTextFieldBackground = UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
     static let ringUITableViewCellSelection = UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
     static let ringNavigationBar = UIColor(red: 235, green: 235, blue: 235, alpha: 1.0)
+    static let ringSuccess = UIColor(hex: 0x00b20b, alpha: 1.0)
+    static let ringFailure = UIColor(hex: 0xf00000, alpha: 1.0)
+    static let ringWarning = UIColor.orange
 }
