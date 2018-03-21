@@ -28,6 +28,7 @@ class ConversationModel: Equatable {
     var accountId: String = ""
     var accountUri: String = ""
     var participantProfile: Profile?
+    var conversationId: String = ""
 
     convenience init(withRecipientRingId recipientRingId: String, accountId: String, accountUri: String) {
         self.init()

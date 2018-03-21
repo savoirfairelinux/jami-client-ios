@@ -375,6 +375,7 @@ class DBManager {
             let conversationModel = ConversationModel(withRecipientRingId: participantProfile.uri,
                                                        accountId: accountID, accountUri: accountUri)
             conversationModel.participantProfile = participantProfile
+            conversationModel.conversationId = String(conversationID)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
                 .selectInteractionsForConversationWithAccount(conversationID: conversationID,

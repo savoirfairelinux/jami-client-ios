@@ -300,6 +300,7 @@ class ConversationsService {
         self.dbManager.removeConversationBetween(accountUri: conversation.accountUri, and: conversation.recipientRingId, keepAddContactEvent: keepContactInteraction)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: { [weak self] in
+                self?.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
                 self?.dbManager
                     .getConversationsObservable(for: conversation.accountId,
                                                 accountURI: conversation.accountUri)
@@ -311,6 +312,16 @@ class ConversationsService {
                 }, onError: { error in
                     self.log.error(error)
             }).disposed(by: self.disposeBag)
+    }
+
+    func removeSavedFiles(accountId: String, conversationId: String) {
+        let downloadsFolderName = "downloads"
+        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return
+        }
+        let directoryURL = documentsURL.appendingPathComponent(downloadsFolderName)
+            .appendingPathComponent(accountId).appendingPathComponent(conversationId)
+        try? FileManager.default.removeItem(atPath: directoryURL.path)
     }
 
     func messageStatusChanged(_ status: MessageStatus,

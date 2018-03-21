@@ -228,9 +228,6 @@ class MessageCell: UITableViewCell, NibReusable {
             self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
         default: break
         }
-        if item.shouldDisplayTransferedImage {
-           self.displayTransferedImage(message: item)
-        }
     }
 
     /// swiftlint:disable function_body_length
@@ -281,6 +278,10 @@ class MessageCell: UITableViewCell, NibReusable {
             } else if item.bubblePosition() == .sent {
                 self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
                 self.progressBar.tintColor = UIColor.ringMain.lighten(byPercentage: 0.2)
+            }
+
+            if item.shouldDisplayTransferedImage {
+                self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.conversationId)
             }
         }
 
@@ -333,9 +334,9 @@ class MessageCell: UITableViewCell, NibReusable {
 
     // swiftlint:enable function_body_length
 
-    func displayTransferedImage(message: MessageViewModel) {
+    func displayTransferedImage(message: MessageViewModel, conversationID: String) {
         let maxDimsion: CGFloat = 250
-        if let image = message.getTransferedImage(maxSize: maxDimsion ) {
+        if let image = message.getTransferedImage(maxSize: maxDimsion, conversationID: conversationID) {
             self.transferImageView.image = image
             self.transferImageView.contentMode = .center
             buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 250.0)

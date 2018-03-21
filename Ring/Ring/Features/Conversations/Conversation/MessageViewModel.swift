@@ -209,7 +209,8 @@ class MessageViewModel {
         return (name, size, identifier)
     }
 
-    func transferedFile() -> URL? {
+    func transferedFile(conversationID: String) -> URL? {
+        guard let account = self.accountService.currentAccount else {return nil}
         if !self.message.incoming {return nil}
         if self.lastTransferStatus != .success &&
             self.message.transferStatus != .success {
@@ -217,10 +218,12 @@ class MessageViewModel {
         }
         let transferInfo = transferFileData
         return self.dataTransferService
-            .getFileUrl(fileName: transferInfo.fileName)
+            .getFileUrl(fileName: transferInfo.fileName, accountID: account.id,
+                        conversationID: conversationID)
     }
 
-    func getTransferedImage(maxSize: CGFloat) -> UIImage? {
+    func getTransferedImage(maxSize: CGFloat, conversationID: String) -> UIImage? {
+        guard let account = self.accountService.currentAccount else {return nil}
         if self.message.incoming &&
             self.lastTransferStatus != .success &&
             self.message.transferStatus != .success {
@@ -230,6 +233,8 @@ class MessageViewModel {
         return self.dataTransferService
             .getImage(for: transferInfo.fileName,
                       maxSize: maxSize,
-                      identifier: transferInfo.identifier)
+                      identifier: transferInfo.identifier,
+                      accountID: account.id,
+                      conversationID: conversationID)
     }
 }
