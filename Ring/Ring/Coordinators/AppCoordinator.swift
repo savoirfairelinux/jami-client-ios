@@ -176,4 +176,11 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     private func showMainInterface () {
         self.navigationController.setViewControllers([self.tabBarViewController], animated: true)
     }
+
+    func openConversation (participantID: String) {
+        self.tabBarViewController.selectedIndex = 0
+        if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
+            conversationCoordinator.pushConversation(participantId: participantID)
+        }
+    }
 }
