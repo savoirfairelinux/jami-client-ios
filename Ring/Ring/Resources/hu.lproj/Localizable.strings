@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -107,6 +107,9 @@
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";
 "accountPage.settingsHeader" = "Beállítások";
+"accountPage.username" = "username:";
+"accountPage.usernameNotRegistered" = "username: not registered";
+"accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Push Notifications";
 "accountPage.blockedContacts" = "Block List";
 "accountPage.unblockContact" = "UNBLOCK";
@@ -125,4 +128,15 @@
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Clear Chat";
 "contactPage.blockContact" = "Block Contact";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusError" = "Hiba";
+"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusRefuse" = "Elutasítás";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "Elfogadás";
+"dataTransfer.readableStatusCancel" = "Mégse";
 

@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -86,7 +86,7 @@
 "alerts.confirmBlockContact" = "Jeni i sigurt se doni të bllokohet ky kontakt? Edhe historiku i bisedave me këtë kontakt do të fshihet përgjithmonë.";
 "alerts.confirmBlockContactTitle" = "Bllokoje Kontaktin";
 "alerts.confirmDeleteConversation" = "Jeni i sigurt se doni të fshihet përgjithmonë kjo bisedë?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
+"alerts.confirmDeleteConversationFromContact" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
 "alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
 
 //Actions
@@ -107,6 +107,9 @@
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";
 "accountPage.settingsHeader" = "Rregullime";
+"accountPage.username" = "emër përdoruesi:";
+"accountPage.usernameNotRegistered" = "emër përdoruesi: jo i regjistruar";
+"accountPage.credentialsHeader" = "Hollësi Llogarie";
 "accountPage.enableProxy" = "Aktivizo Njoftime Push";
 "accountPage.blockedContacts" = "Bllokoje Listën";
 "accountPage.unblockContact" = "ZHBLLOKOJE";
@@ -120,9 +123,20 @@
 "linkDevice.hudMessage" = "Po verifikohet";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
+"contactPage.startAudioCall" = "Filloni Thirrje Audio";
+"contactPage.startVideoCall" = "Filloni Thirrje Video";
+"contactPage.sendMessage" = "Dërgoni Mesazh";
+"contactPage.clearConversation" = "Pastroje Bisedën";
 "contactPage.blockContact" = "Bllokoje Kontaktin";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusError" = "Gabim";
+"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusRefuse" = "Hidhe tej";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "Pranoje";
+"dataTransfer.readableStatusCancel" = "Anuloje";
 
