@@ -140,7 +140,7 @@ class LocalNotificationsHelper {
             let callID = data [NotificationUserInfoKeys.callID.rawValue] else {
                 return
         }
-        timer = Timer.scheduledTimer(timeInterval: 10,
+        timer = Timer.scheduledTimer(timeInterval: 20,
                                      target: self,
                                      selector: #selector(cancelCall),
                                      userInfo: [NotificationUserInfoKeys.callID.rawValue: callID],
@@ -151,7 +151,6 @@ class LocalNotificationsHelper {
             content.body = name
             content.userInfo = data
             content.categoryIdentifier = self.callCategory
-            content.sound = UNNotificationSound(named: "defaul.wav")
             let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
             let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
             UNUserNotificationCenter.current().add(notificationRequest) { (error) in

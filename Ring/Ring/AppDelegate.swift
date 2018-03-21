@@ -276,7 +276,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     print("Call ignored")
                 }).disposed(by: self.disposeBag)
         default:
-            print("Other Action")
+            // automatically answer call when user tap the notifications
+            NotificationCenter.default.post(name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue),
+                                            object: nil,
+                                            userInfo: data)
         }
     }
 
@@ -289,7 +292,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
-            if (rootViewController.responds(to: Selector(("canRotate")))) {
+            if rootViewController.responds(to: Selector(("canRotate"))) {
                 return .all
             }
         }
