@@ -65,7 +65,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      lockWhilePresenting: VCType.contact.rawValue)
     }
 
-    private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+    func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
         if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
             return
         }

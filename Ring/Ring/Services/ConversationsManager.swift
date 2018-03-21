@@ -130,6 +130,7 @@ class ConversationsManager: MessagesAdapterDelegate {
         if UIApplication.shared.applicationState != .active {
             var data = [String: String]()
             data [NotificationUserInfoKeys.messageContent.rawValue] = content
+            data [NotificationUserInfoKeys.participantID.rawValue] = senderAccount
             self.nameService.usernameLookupStatus.single()
                 .filter({ lookupNameResponse in
                     return lookupNameResponse.address != nil &&
