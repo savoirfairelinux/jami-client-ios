@@ -147,6 +147,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if self.accountService.getCurrentProxyState(accountID: currentAccount.id) {
                 self.registerVoipNotifications()
             }
+            //in case if application was open when incoming call launched the push notifications
+            // reimit new call signal to show incoming call alert
+            self.callService.checkForIncomingCall()
         }.disposed(by: self.disposeBag)
 
         self.window?.rootViewController = self.appCoordinator.rootViewController
@@ -177,6 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        self.callService.checkForIncomingCall()
         self.clearBadgeNumber()
     }
 
@@ -261,6 +265,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func handleNotificationActions(data: [AnyHashable: Any], responseIdentifier: String) {
+        // if notification contains messageContent this is message notification
+        if let participantID = data[NotificationUserInfoKeys.participantID.rawValue] as? String {
+            self.appCoordinator.openConversation(participantID: participantID)
+            return
+        }
         guard let callID = data[NotificationUserInfoKeys.callID.rawValue] as? String else {
             return
         }
@@ -275,7 +284,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     print("Call ignored")
                 }).disposed(by: self.disposeBag)
         default:
-            print("Other Action")
+            // automatically answer call when user tap the notifications
+            NotificationCenter.default.post(name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue),
+                                            object: nil,
+                                            userInfo: data)
         }
     }
 
@@ -286,9 +298,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler()
     }
 
+    // handle notifications click before iOS 10.0
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        guard let info = notification.userInfo else {return}
+        if (info[NotificationUserInfoKeys.callID.rawValue] as? String) != nil {
+             handleNotificationActions(data: info, responseIdentifier: CallAcition.accept.rawValue)
+        } else if (info[NotificationUserInfoKeys.messageContent.rawValue] as? String) != nil {
+            handleNotificationActions(data: info, responseIdentifier: "messageReceived")
+        }
+    }
+
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
-            if (rootViewController.responds(to: Selector(("canRotate")))) {
+            if rootViewController.responds(to: Selector(("canRotate"))) {
                 return .all
             }
         }
