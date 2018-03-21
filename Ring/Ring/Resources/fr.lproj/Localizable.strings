@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -86,7 +86,7 @@
 "alerts.confirmBlockContact" = "Êtes-vous certain de vouloir bloquer contact ? L'historique des conversations avec ce contact sera supprimé définitivement.";
 "alerts.confirmBlockContactTitle" = "Bloquer ce contact";
 "alerts.confirmDeleteConversation" = "Êtes-vous certain de vouloir supprimer définitivement cette conversation ? ";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
+"alerts.confirmDeleteConversationFromContact" = "Êtes-vous certain de vouloir effacer cette conversation avec ce contact ? ";
 "alerts.confirmDeleteConversationTitle" = "Supprimer cette conversation";
 
 //Actions
@@ -107,6 +107,9 @@
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";
 "accountPage.settingsHeader" = "Paramètres";
+"accountPage.username" = "username:";
+"accountPage.usernameNotRegistered" = "username: not registered";
+"accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Activer les notifications de type pousser";
 "accountPage.blockedContacts" = "Liste des utilisateurs bloqués";
 "accountPage.unblockContact" = "Débloquer";
@@ -120,9 +123,20 @@
 "linkDevice.hudMessage" = "Vérification";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
+"contactPage.startAudioCall" = "Démarrer un appel audio";
+"contactPage.startVideoCall" = "Démarrer un appel vidéo";
+"contactPage.sendMessage" = "Écrire un message";
+"contactPage.clearConversation" = "Effacer les textos";
 "contactPage.blockContact" = "Bloquer ce contact";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusError" = "Erreur";
+"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusRefuse" = "Refuser";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "Accepter";
+"dataTransfer.readableStatusCancel" = "Annuler";
 

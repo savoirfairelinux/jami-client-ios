@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -86,7 +86,7 @@
 "alerts.confirmBlockContact" = "Vill du verkligen blockera den här kontakten? Konversationshistoriken för den här kontakten, kommer också att raderas permanent.";
 "alerts.confirmBlockContactTitle" = "Blockera kontakt";
 "alerts.confirmDeleteConversation" = "Vill du verkligen ta bort den här konversationen permanent?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
+"alerts.confirmDeleteConversationFromContact" = "Vill du verkligen ta bort konversationen med denna kontakt?";
 "alerts.confirmDeleteConversationTitle" = "Ta bort konversation";
 
 //Actions
@@ -107,6 +107,9 @@
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
 "accountPage.settingsHeader" = "Inställningar";
+"accountPage.username" = "Användarnamn:";
+"accountPage.usernameNotRegistered" = "Användarnamn: Inte registrerat";
+"accountPage.credentialsHeader" = "Kontoinformation";
 "accountPage.enableProxy" = "Aktivera push-meddelanden";
 "accountPage.blockedContacts" = "Blocklista";
 "accountPage.unblockContact" = "AVBLOCKERA";
@@ -120,9 +123,20 @@
 "linkDevice.hudMessage" = "Verifierar";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
+"contactPage.startAudioCall" = "Starta röstsamtal";
+"contactPage.startVideoCall" = "Starta videosamtal";
+"contactPage.sendMessage" = "Skicka meddelande";
+"contactPage.clearConversation" = "Rensa chatten";
 "contactPage.blockContact" = "Blockera kontakt";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusError" = "Fel";
+"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusRefuse" = "Neka";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "Acceptera";
+"dataTransfer.readableStatusCancel" = "Avbryt";
 
