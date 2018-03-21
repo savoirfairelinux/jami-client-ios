@@ -37,11 +37,15 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     let stateSubject = PublishSubject<State>()
     let callService: CallsService
+    let accountService: AccountsService
+    let conversationService: ConversationsService
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
 
         self.callService = injectionBag.callService
+        self.accountService = injectionBag.accountService
+        self.conversationService = injectionBag.conversationsService
         self.addLockFlags()
 
         self.callService.newCall.asObservable()
@@ -61,6 +65,18 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 return
         }
         self.answerIncomingCall(call: call)
+    }
+
+    func pushConversation(participantId: String) {
+        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+        guard let account = accountService.currentAccount else {
+            return
+        }
+        guard let conversation = self.conversationService.findConversation(withRingId: participantId, withAccountId: account.id) else {
+            return
+        }
+        conversationViewModel.conversation = Variable<ConversationModel>(conversation)
+        self.pushConversation(withConversationViewModel: conversationViewModel)
     }
 
     func start () {

@@ -34,6 +34,7 @@ public enum PresentationStyle {
     case present
     case popup
     case appear
+    case push
 }
 
 /// A Coordinator drives the navigation of a whole part of the application
@@ -106,6 +107,12 @@ extension Coordinator {
             self.rootViewController.present(viewController,
                                             animated: animation,
                                             completion: nil)
+        case .push:
+            if let contoller: UINavigationController  = self.rootViewController as? UINavigationController {
+                // ensure we on the root view controller
+                contoller.popViewController(animated: false)
+                contoller.pushViewController(viewController, animated: false)
+            }
         }
 
         if let viewControllerType = VCType {
