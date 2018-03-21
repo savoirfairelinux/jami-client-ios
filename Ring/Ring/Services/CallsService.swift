@@ -66,6 +66,12 @@ class CallsService: CallsAdapterDelegate {
                                                object: nil)
     }
 
+    func checkForIncomingCall() {
+        if let call = self.call(callID: self.newCall.value.callId), call.state == .incoming {
+            self.newCall.value = call
+        }
+    }
+
     @objc func refuseUnansweredCall(_ notification: NSNotification) {
         guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String else {
             return

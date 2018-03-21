@@ -181,7 +181,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .observeOn(MainScheduler.instance)
                         .bind(to: cell.switchProxy.rx.isOn)
                         .disposed(by: cell.disposeBag)
-                    cell.switchProxy.rx.isOn
+                    cell.switchProxy.rx.value.skip(1)
                         .observeOn(MainScheduler.instance)
                         .subscribe(onNext: { [weak self] (enable) in
                             self?.viewModel.enableProxy(enable: enable)

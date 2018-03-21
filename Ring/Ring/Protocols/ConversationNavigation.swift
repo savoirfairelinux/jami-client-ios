@@ -79,6 +79,20 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      lockWhilePresenting: VCType.conversation.rawValue)
     }
 
+    func pushConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
+        if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
+            return
+        }
+        self.presentingVC[VCType.conversation.rawValue] = true
+        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
+        conversationViewController.viewModel = conversationViewModel
+        self.present(viewController: conversationViewController,
+                     withStyle: .push,
+                     withAnimation: false,
+                     withStateable: conversationViewController.viewModel,
+                     lockWhilePresenting: VCType.conversation.rawValue)
+    }
+
     func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
         let callViewController = CallViewController.instantiate(with: self.injectionBag)
         callViewController.viewModel.placeCall(with: contactRingId, userName: userName, isAudioOnly: isAudioOnly)
