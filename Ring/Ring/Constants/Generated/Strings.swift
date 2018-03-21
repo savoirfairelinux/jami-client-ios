@@ -144,36 +144,24 @@ internal enum L10n {
   }
 
   internal enum Datatransfer {
-    /// File saved
-    internal static let fileSaved = L10n.tr("Localizable", "dataTransfer.fileSaved")
-    /// Invalid file
-    internal static let invalidFile = L10n.tr("Localizable", "dataTransfer.invalidFile")
-    /// No space left on device
-    internal static let noSpaceLeftOnDevice = L10n.tr("Localizable", "dataTransfer.noSpaceLeftOnDevice")
-    /// Not able to write file
-    internal static let notAbleToWriteFile = L10n.tr("Localizable", "dataTransfer.notAbleToWriteFile")
-    /// closed by host
-    internal static let transferStatusClosedByHost = L10n.tr("Localizable", "dataTransfer.transferStatusClosedByHost")
-    /// closed by peer
-    internal static let transferStatusClosedByPeer = L10n.tr("Localizable", "dataTransfer.transferStatusClosedByPeer")
-    /// initializing transfer
-    internal static let transferStatusCreated = L10n.tr("Localizable", "dataTransfer.transferStatusCreated")
-    /// finished
-    internal static let transferStatusFinished = L10n.tr("Localizable", "dataTransfer.transferStatusFinished")
-    /// Invalid
-    internal static let transferStatusInvalid = L10n.tr("Localizable", "dataTransfer.transferStatusInvalid")
-    /// invalid pathname
-    internal static let transferStatusInvalidPathname = L10n.tr("Localizable", "dataTransfer.transferStatusInvalidPathname")
-    /// ongoing
-    internal static let transferStatusOngoing = L10n.tr("Localizable", "dataTransfer.transferStatusOngoing")
-    /// unjoinable peer
-    internal static let transferStatusUnjoinablePeer = L10n.tr("Localizable", "dataTransfer.transferStatusUnjoinablePeer")
-    /// unsupported
-    internal static let transferStatusUnsupported = L10n.tr("Localizable", "dataTransfer.transferStatusUnsupported")
-    /// waiting host acceptance
-    internal static let transferStatusWaitHostAcceptance = L10n.tr("Localizable", "dataTransfer.transferStatusWaitHostAcceptance")
-    /// waiting peer acceptance
-    internal static let transferStatusWaitPeerAcceptance = L10n.tr("Localizable", "dataTransfer.transferStatusWaitPeerAcceptance")
+    /// Accept
+    internal static let readableStatusAccept = L10n.tr("Localizable", "dataTransfer.readableStatusAccept")
+    /// Pending…
+    internal static let readableStatusAwaiting = L10n.tr("Localizable", "dataTransfer.readableStatusAwaiting")
+    /// Cancel
+    internal static let readableStatusCancel = L10n.tr("Localizable", "dataTransfer.readableStatusCancel")
+    /// Canceled
+    internal static let readableStatusCanceled = L10n.tr("Localizable", "dataTransfer.readableStatusCanceled")
+    /// Initializing…
+    internal static let readableStatusCreated = L10n.tr("Localizable", "dataTransfer.readableStatusCreated")
+    /// Error
+    internal static let readableStatusError = L10n.tr("Localizable", "dataTransfer.readableStatusError")
+    /// Transferring
+    internal static let readableStatusOngoing = L10n.tr("Localizable", "dataTransfer.readableStatusOngoing")
+    /// Refuse
+    internal static let readableStatusRefuse = L10n.tr("Localizable", "dataTransfer.readableStatusRefuse")
+    /// Complete
+    internal static let readableStatusSuccess = L10n.tr("Localizable", "dataTransfer.readableStatusSuccess")
   }
 
   internal enum Global {

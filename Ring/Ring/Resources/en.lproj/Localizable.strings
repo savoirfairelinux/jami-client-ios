@@ -130,18 +130,13 @@
 "contactPage.blockContact" = "Block Contact";
 
 //DataTransfer
-"dataTransfer.invalidFile" = "Invalid file";
-"dataTransfer.notAbleToWriteFile" = "Not able to write file";
-"dataTransfer.transferStatusInvalid" = "Invalid";
-"dataTransfer.transferStatusCreated" = "initializing transfer";
-"dataTransfer.transferStatusUnsupported" = "unsupported";
-"dataTransfer.transferStatusWaitPeerAcceptance" = "waiting peer acceptance";
-"dataTransfer.transferStatusWaitHostAcceptance" = "waiting host acceptance";
-"dataTransfer.transferStatusOngoing" = "ongoing";
-"dataTransfer.transferStatusFinished" = "finished";
-"dataTransfer.transferStatusClosedByHost" = "closed by host";
-"dataTransfer.transferStatusClosedByPeer" = "closed by peer";
-"dataTransfer.transferStatusInvalidPathname" = "invalid pathname";
-"dataTransfer.transferStatusUnjoinablePeer" = "unjoinable peer";
-"dataTransfer.fileSaved" = "File saved";
-"dataTransfer.noSpaceLeftOnDevice" = "No space left on device";
+"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusError" = "Error";
+"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusCancel" = "Cancel";
+
