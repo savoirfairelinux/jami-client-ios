@@ -24,6 +24,7 @@ enum NotificationUserInfoKeys: String {
     case callID
     case name
     case messageContent
+    case participantID
 }
 
 enum NotificationCallTitle: String {
@@ -63,6 +64,7 @@ class LocalNotificationsHelper {
             let content = UNMutableNotificationContent()
             content.title = title
             content.body = body
+            content.userInfo = data
             content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
             let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
             let identifier = Int64(arc4random_uniform(10000000))
@@ -76,6 +78,7 @@ class LocalNotificationsHelper {
             let notification = UILocalNotification()
             notification.alertTitle = title
             notification.alertBody = body
+            notification.userInfo = data
             notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
             UIApplication.shared.scheduleLocalNotification(notification)
         }
@@ -140,7 +143,7 @@ class LocalNotificationsHelper {
             let callID = data [NotificationUserInfoKeys.callID.rawValue] else {
                 return
         }
-        timer = Timer.scheduledTimer(timeInterval: 10,
+        timer = Timer.scheduledTimer(timeInterval: 60,
                                      target: self,
                                      selector: #selector(cancelCall),
                                      userInfo: [NotificationUserInfoKeys.callID.rawValue: callID],
@@ -151,7 +154,6 @@ class LocalNotificationsHelper {
             content.body = name
             content.userInfo = data
             content.categoryIdentifier = self.callCategory
-            content.sound = UNNotificationSound(named: "defaul.wav")
             let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
             let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
             UNUserNotificationCenter.current().add(notificationRequest) { (error) in
