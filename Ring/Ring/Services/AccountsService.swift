@@ -507,7 +507,7 @@ class AccountsService: AccountAdapterDelegate {
     func enableProxy(accountID: String, enable: Bool) {
         let accountDetails = self.getAccountDetails(fromAccountId: accountID)
         accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled), withValue: enable.toString())
-        let proxy = enable ? "192.168.51.6:8000" : ""
+        let proxy = enable ? "dhtproxy.ring.cx:80" : ""
         accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
         self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
         var event = ServiceEvent(withEventType: .proxyEnabled)
