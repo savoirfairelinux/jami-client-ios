@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -39,11 +39,11 @@
 "welcome.title" = "Benvigut a Ring";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Enllaça aquest dispositiu a un compte";
-"welcome.createAccount" = "Crear un compte de Ring";
+"welcome.createAccount" = "Crea un compte al Ring";
 
 //Creation Profile Screen
 "createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Següent";
+"createProfile.createAccountWithProfile" = "Endavant";
 "createProfile.linkDevice" = "Skip to Link Device";
 
 //Create Account form
@@ -90,7 +90,7 @@
 "alerts.confirmDeleteConversationTitle" = "Delete Conversation";
 
 //Actions
-"actions.blockAction" = "Bloqueja";
+"actions.blockAction" = "Bloca";
 "actions.deleteAction" = "Suprimeix";
 "actions.cancelAction" = "Cancel·la";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
@@ -107,6 +107,9 @@
 //Account Page
 "accountPage.devicesListHeader" = "Dispositius";
 "accountPage.settingsHeader" = "Opcions";
+"accountPage.username" = "username:";
+"accountPage.usernameNotRegistered" = "username: not registered";
+"accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Push Notifications";
 "accountPage.blockedContacts" = "Block List";
 "accountPage.unblockContact" = "UNBLOCK";
@@ -125,4 +128,15 @@
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Clear Chat";
 "contactPage.blockContact" = "Block Contact";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusError" = "Error";
+"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusRefuse" = "Rebutja";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "Accepta";
+"dataTransfer.readableStatusCancel" = "Cancel·la";
 

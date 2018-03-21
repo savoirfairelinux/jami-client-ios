@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -86,7 +86,7 @@
 "alerts.confirmBlockContact" = "Weet je zeker dat je dit contact wil blokkeren? De gespreksgeschiedenis met dit contact zal ook voorgoed verwijderd worden.";
 "alerts.confirmBlockContactTitle" = "Contact blokkeren";
 "alerts.confirmDeleteConversation" = "Weet je zeker dat je dit gesprek voorgoed wil verwijderen?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
+"alerts.confirmDeleteConversationFromContact" = "Weet je zeker dat je het gesprek met dit contact wil verwijderen?";
 "alerts.confirmDeleteConversationTitle" = "Gesprek verwijderen";
 
 //Actions
@@ -107,6 +107,9 @@
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";
 "accountPage.settingsHeader" = "Instellingen";
+"accountPage.username" = "gebruikersnaam:";
+"accountPage.usernameNotRegistered" = "gebruikersnaam: niet geregistreerd";
+"accountPage.credentialsHeader" = "Accountgegevens";
 "accountPage.enableProxy" = "Pushmeldingen inschakelen";
 "accountPage.blockedContacts" = "Blokkeringslijst";
 "accountPage.unblockContact" = "Deblokkeren";
@@ -120,9 +123,20 @@
 "linkDevice.hudMessage" = "Verifiëren";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
+"contactPage.startAudioCall" = "Audio-oproep starten";
+"contactPage.startVideoCall" = "Video-oproep starten";
+"contactPage.sendMessage" = "Bericht versturen";
+"contactPage.clearConversation" = "Gesprek wissen";
 "contactPage.blockContact" = "Contact blokkeren";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusError" = "Fout";
+"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusRefuse" = "Afwijzen";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Geannuleerd";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "Aanvaarden";
+"dataTransfer.readableStatusCancel" = "Annuleren";
 

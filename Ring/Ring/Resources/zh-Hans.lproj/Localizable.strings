@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -86,7 +86,7 @@
 "alerts.confirmBlockContact" = "您確定要阻擋這個聯絡人嗎？這個聯絡人的對話紀錄將會永久刪除。";
 "alerts.confirmBlockContactTitle" = "阻擋聯絡人";
 "alerts.confirmDeleteConversation" = "您確定您想要永久刪除此對話嗎？";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
+"alerts.confirmDeleteConversationFromContact" = "您確定您想要刪除與此聯絡人的對話嗎？";
 "alerts.confirmDeleteConversationTitle" = "刪除對話";
 
 //Actions
@@ -107,6 +107,9 @@
 //Account Page
 "accountPage.devicesListHeader" = "裝置";
 "accountPage.settingsHeader" = "設定";
+"accountPage.username" = "使用者名稱：";
+"accountPage.usernameNotRegistered" = "使用者名稱：未註冊";
+"accountPage.credentialsHeader" = "帳號詳細資訊";
 "accountPage.enableProxy" = "啟用推送通知";
 "accountPage.blockedContacts" = "黑名單";
 "accountPage.unblockContact" = "取消阻擋";
@@ -120,9 +123,20 @@
 "linkDevice.hudMessage" = "正在驗證";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
+"contactPage.startAudioCall" = "開始語音通話";
+"contactPage.startVideoCall" = "開始視訊通話";
+"contactPage.sendMessage" = "傳送訊息";
+"contactPage.clearConversation" = "清除聊天紀錄";
 "contactPage.blockContact" = "阻擋聯絡人";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusError" = "錯誤";
+"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusRefuse" = "拒絕";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "接聽";
+"dataTransfer.readableStatusCancel" = "取消";
 
