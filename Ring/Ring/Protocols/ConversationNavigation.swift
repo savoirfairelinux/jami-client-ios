@@ -44,7 +44,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             case .startAudioCall(let contactRingId, let name):
                 self.startOutgoingCall(contactRingId: contactRingId, userName: name, isAudioOnly: true)
             case .conversationDetail (let conversationViewModel):
-                self.showConversation(withConversationViewModel: conversationViewModel)
+                self.showConversation(withConversationViewModel: conversationViewModel, withAnimation: true)
             case .contactDetail(let conversationModel):
                 self.presentContactInfo(conversation: conversationModel)
             }
@@ -65,7 +65,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      lockWhilePresenting: VCType.contact.rawValue)
     }
 
-    private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+    func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel, withAnimation: Bool) {
         if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
             return
         }
@@ -74,7 +74,21 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         conversationViewController.viewModel = conversationViewModel
         self.present(viewController: conversationViewController,
                      withStyle: .show,
-                     withAnimation: true,
+                     withAnimation: withAnimation,
+                     withStateable: conversationViewController.viewModel,
+                     lockWhilePresenting: VCType.conversation.rawValue)
+    }
+
+    func presentConversation (withConversationViewModel conversationViewModel: ConversationViewModel, withAnimation: Bool) {
+        if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
+            return
+        }
+        self.presentingVC[VCType.conversation.rawValue] = true
+        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
+        conversationViewController.viewModel = conversationViewModel
+        self.present(viewController: conversationViewController,
+                     withStyle: .present,
+                     withAnimation: withAnimation,
                      withStateable: conversationViewController.viewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)
     }
