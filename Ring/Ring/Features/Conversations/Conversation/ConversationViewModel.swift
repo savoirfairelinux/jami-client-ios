@@ -365,22 +365,28 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil) {
+        guard let accountId = accountService.currentAccount?.id else {return}
         self.dataTransferService.sendFile(filePath: filePath,
                                           displayName: displayName,
-                                          accountId: (accountService.currentAccount?.id)!,
+                                          accountId: accountId,
                                           peerInfoHash: self.conversation.value.recipientRingId,
                                           localIdentifier: localIdentifier)
     }
 
     func sendAndSaveFile(displayName: String, imageData: Data) {
+        guard let accountId = accountService.currentAccount?.id else {return}
         self.dataTransferService.sendAndSaveFile(displayName: displayName,
-                                                 accountId: (accountService.currentAccount?.id)!,
+                                                 accountId: accountId,
                                                  peerInfoHash: self.conversation.value.recipientRingId,
-                                                 imageData: imageData)
+                                                 imageData: imageData,
+                                                 conversationId: self.conversation.value.conversationId)
     }
 
     func acceptTransfer(transferId: UInt64, interactionID: Int64, messageContent: inout String) -> NSDataTransferError {
-        return self.dataTransferService.acceptTransfer(withId: transferId, interactionID: interactionID, fileName: &messageContent)
+        guard let accountId = accountService.currentAccount?.id else {return .unknown}
+        return self.dataTransferService.acceptTransfer(withId: transferId, interactionID: interactionID,
+                                                       fileName: &messageContent, accountID: accountId,
+                                                       conversationID: self.conversation.value.conversationId)
     }
 
     func cancelTransfer(transferId: UInt64) -> NSDataTransferError {

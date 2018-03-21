@@ -681,7 +681,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
     }
 
     func showShareMenu(transfer: MessageViewModel) {
-        guard let file = transfer.transferedFile() else {return}
+        guard let file = transfer.transferedFile(conversationID: self.viewModel.conversation.value.conversationId) else {return}
         let itemToShare = [file]
         let activityViewController = UIActivityViewController(activityItems: itemToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
@@ -768,7 +768,7 @@ extension ConversationViewController: UITableViewDataSource {
                         item.initialTransferStatus = status
                         if status == .awaiting {
                             if item.shouldDisplayTransferedImage {
-                                cell.displayTransferedImage(message: item)
+                                cell.displayTransferedImage(message: item, conversationID: self.viewModel.conversation.value.conversationId)
                             }
                             tableView.reloadData()
                         }

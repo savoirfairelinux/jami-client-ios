@@ -105,12 +105,17 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return info
     }
 
-    func acceptTransfer(withId transferId: UInt64, interactionID: Int64, fileName: inout String) -> NSDataTransferError {
+    func acceptTransfer(withId transferId: UInt64,
+                        interactionID: Int64,
+                        fileName: inout String,
+                        accountID: String,
+                        conversationID: String) -> NSDataTransferError {
         guard let info = getTransferInfo(withId: transferId) else {
             return NSDataTransferError.invalid_argument
         }
         // accept transfer
-        if let pathUrl = getFilePathForTransfer(forFile: info.displayName) {
+        if let pathUrl = getFilePathForTransfer(forFile: info.displayName, accountID: accountID,
+                                                conversationID: conversationID) {
             // if file name was changed because the same name already exist, update db
             if pathUrl.lastPathComponent != info.displayName {
                 let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: info.totalSize, countStyle: .file)
@@ -131,8 +136,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         }
     }
 
-    func getFileUrl(fileName: String) -> URL? {
-        guard let pathUrl = getFilePath(fileName: fileName) else {return nil}
+    func getFileUrl(fileName: String, accountID: String, conversationID: String) -> URL? {
+        guard let pathUrl = getFilePath(fileName: fileName, accountID: accountID, conversationID: conversationID) else {return nil}
         let fileManager = FileManager.default
         var file: URL?
         if fileManager.fileExists(atPath: pathUrl.path) {
@@ -146,7 +151,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
      images from photo librairy referenced by local identifier
     */
 
-    func getImage(for name: String, maxSize: CGFloat, identifier: String? = nil) -> UIImage? {
+    func getImage(for name: String, maxSize: CGFloat, identifier: String? = nil,
+                  accountID: String, conversationID: String) -> UIImage? {
         if let localImageIdentifier = identifier {
             if let image = self.transferedImages[localImageIdentifier] {
                 return image.1
@@ -156,7 +162,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         if let image = self.transferedImages[name] {
             return image.1
         }
-        return self.getImageFromFile(for: name, maxSize: maxSize)
+        return self.getImageFromFile(for: name, maxSize: maxSize, accountID: accountID,
+                                     conversationID: conversationID)
     }
 
     func getImageFromPhotoLibrairy(identifier: String, maxSize: CGFloat, name: String) -> UIImage? {
@@ -177,8 +184,12 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return photo
     }
 
-    func getImageFromFile(for name: String, maxSize: CGFloat) -> UIImage? {
-        guard let pathUrl = getFilePath(fileName: name) else {return nil}
+    func getImageFromFile(for name: String,
+                          maxSize: CGFloat,
+                          accountID: String,
+                          conversationID: String) -> UIImage? {
+        guard let pathUrl = getFilePath(fileName: name, accountID: accountID,
+                                        conversationID: conversationID) else {return nil}
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(
             kUTTagClassFilenameExtension,
@@ -228,8 +239,14 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             self.responseStream.onNext(serviceEvent)
         }
     }
-    func sendAndSaveFile(displayName: String, accountId: String, peerInfoHash: String, imageData: Data) {
-        guard let imagePath = self.getFilePathForTransfer(forFile: displayName) else {return}
+    func sendAndSaveFile(displayName: String,
+                         accountId: String,
+                         peerInfoHash: String,
+                         imageData: Data,
+                         conversationId: String) {
+        guard let imagePath = self.getFilePathForTransfer(forFile: displayName,
+                                                          accountID: accountId,
+                                                          conversationID: conversationId) else {return}
         do {
             try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
         } catch {
@@ -251,16 +268,55 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     // MARK: private
 
-    fileprivate func getFilePath(fileName: String) -> URL? {
+    fileprivate func getFilePath(fileName: String, accountID: String, conversationID: String) -> URL? {
         let downloadsFolderName = "downloads"
         guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(downloadsFolderName)
+            .appendingPathComponent(accountID).appendingPathComponent(conversationID)
         return directoryURL.appendingPathComponent(fileName)
     }
 
-    fileprivate func getFilePathForTransfer(forFile fileName: String) -> URL? {
+//    fileprivate func getFilePathForTransfer(forFile fileName: String) -> URL? {
+//        let downloadsFolderName = "downloads"
+//        let fileNameOnly = (fileName as NSString).deletingPathExtension
+//        let fileExtensionOnly = (fileName as NSString).pathExtension
+//        var filePathUrl: URL?
+//        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+//            return nil
+//        }
+//        let directoryURL = documentsURL.appendingPathComponent(downloadsFolderName)
+//        var isDirectory = ObjCBool(false)
+//        let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
+//        if directoryExists && isDirectory.boolValue {
+//            // check if file exists, if so add " (<duplicates+1>)" or "_<duplicates+1>"
+//            // first check /.../AppData/Documents/downloads/<fileNameOnly>.<fileExtensionOnly>
+//            var finalFileName = fileNameOnly + "." + fileExtensionOnly
+//            var filePathCheck = directoryURL.appendingPathComponent(finalFileName)
+//            var fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
+//            var duplicates = 2
+//            while fileExists {
+//                // check /.../AppData/Documents/downloads/<fileNameOnly>_<duplicates>.<fileExtensionOnly>
+//                finalFileName = fileNameOnly + "_" + String(duplicates) + "." + fileExtensionOnly
+//                filePathCheck = directoryURL.appendingPathComponent(finalFileName)
+//                fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
+//                duplicates += 1
+//            }
+//            return filePathCheck
+//        }
+//        // need to create dir
+//        do {
+//            try FileManager.default.createDirectory(atPath: directoryURL.path, withIntermediateDirectories: true, attributes: nil)
+//            filePathUrl = directoryURL.appendingPathComponent(fileName)
+//            return filePathUrl
+//        } catch _ as NSError {
+//            self.log.error("DataTransferService: error creating dir")
+//            return nil
+//        }
+//    }
+
+    fileprivate func getFilePathForTransfer(forFile fileName: String, accountID: String, conversationID: String) -> URL? {
         let downloadsFolderName = "downloads"
         let fileNameOnly = (fileName as NSString).deletingPathExtension
         let fileExtensionOnly = (fileName as NSString).pathExtension
@@ -269,6 +325,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(downloadsFolderName)
+            .appendingPathComponent(accountID).appendingPathComponent(conversationID)
         var isDirectory = ObjCBool(false)
         let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
         if directoryExists && isDirectory.boolValue {
@@ -297,6 +354,69 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             return nil
         }
     }
+
+//    fileprivate func getFilePathForTransfer(forFile fileName: String, accountID: String, conversationID: String) -> URL? {
+//        let downloadsFolderName = "downloads"
+//        let fileNameOnly = (fileName as NSString).deletingPathExtension
+//        let fileExtensionOnly = (fileName as NSString).pathExtension
+//        let fileManager = FileManager.default
+//        var filePathUrl: URL?
+//        guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+//            return nil
+//        }
+//        let directoryURL = documentsURL.appendingPathComponent(downloadsFolderName).appendingPathComponent(accountID).appendingPathComponent(conversationID)
+//        var isDirectory = ObjCBool(false)
+//        let directoryExists = fileManager.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
+//        if directoryExists && isDirectory.boolValue {
+//            var finalFileName = fileNameOnly + "." + fileExtensionOnly
+//            var filePathCheck = directoryURL.appendingPathComponent(finalFileName)
+//            var fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
+//            var duplicates = 2
+//            while fileExists {
+//                // check /.../AppData/Documents/downloads/<fileNameOnly>_<duplicates>.<fileExtensionOnly>
+//                finalFileName = fileNameOnly + "_" + String(duplicates) + "." + fileExtensionOnly
+//                filePathCheck = directoryURL.appendingPathComponent(finalFileName)
+//                fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
+//                duplicates += 1
+//            }
+//            return filePathCheck
+//        }
+////        }
+////            let downloadsForAccount = downloadsURL.appendingPathComponent(accountID)
+////            var isDirectory = ObjCBool(false)
+////            let directoryExists = fileManager.fileExists(atPath: downloadsForAccount.path, isDirectory: &isDirectory)
+////            if directoryExists && isDirectory.boolValue {
+////                let downloadsForConversation = downloadsForAccount.appendingPathComponent(accountID)
+////                var isDirectory = ObjCBool(false)
+////                let directoryExists = fileManager.fileExists(atPath: downloadsForConversation.path, isDirectory: &isDirectory)
+////                if directoryExists && isDirectory.boolValue {
+////                        // check if file exists, if so add " (<duplicates+1>)" or "_<duplicates+1>"
+////                        // first check /.../AppData/Documents/downloads/<fileNameOnly>.<fileExtensionOnly>
+////                        var finalFileName = fileNameOnly + "." + fileExtensionOnly
+////                        var filePathCheck = downloadsURL.appendingPathComponent(finalFileName)
+////                        var fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
+////                        var duplicates = 2
+////                        while fileExists {
+////                            // check /.../AppData/Documents/downloads/<fileNameOnly>_<duplicates>.<fileExtensionOnly>
+////                            finalFileName = fileNameOnly + "_" + String(duplicates) + "." + fileExtensionOnly
+////                            filePathCheck = downloadsURL.appendingPathComponent(finalFileName)
+////                            fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
+////                            duplicates += 1
+////                        }
+////                        return filePathCheck
+////                    }
+////                }
+////        }
+//        // need to create dir
+//        do {
+//            try FileManager.default.createDirectory(atPath: directoryURL.path, withIntermediateDirectories: true, attributes: nil)
+//            filePathUrl = directoryURL.appendingPathComponent(fileName)
+//            return filePathUrl
+//        } catch _ as NSError {
+//            self.log.error("DataTransferService: error creating dir")
+//            return nil
+//        }
+//    }
 
     // MARK: DataTransferAdapter
 
