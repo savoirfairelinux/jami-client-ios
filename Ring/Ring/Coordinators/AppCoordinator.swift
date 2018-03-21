@@ -176,4 +176,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     private func showMainInterface () {
         self.navigationController.setViewControllers([self.tabBarViewController], animated: true)
     }
+
+    func switchToConversation () {
+        self.tabBarViewController.selectedIndex = 0
+    }
 }

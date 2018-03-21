@@ -139,7 +139,7 @@ class MeViewModel: ViewModel, Stateable {
     lazy var accountSettings: Observable<SettingsSection> = {
         return Observable
             .just(.accountSettings( items: [.sectionHeader(title: L10n.Accountpage.settingsHeader),
-                                            .blockedList]))
+                                            .blockedList, .proxy]))
     }()
 
     lazy var linkedDevices: Observable<SettingsSection> = {

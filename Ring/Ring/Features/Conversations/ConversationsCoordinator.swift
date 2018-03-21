@@ -37,11 +37,15 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     let stateSubject = PublishSubject<State>()
     let callService: CallsService
+    let accountService: AccountsService
+    let conversationService: ConversationsService
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
 
         self.callService = injectionBag.callService
+        self.accountService = injectionBag.accountService
+        self.conversationService = injectionBag.conversationsService
         self.addLockFlags()
 
         self.callService.newCall.asObservable()
@@ -53,6 +57,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
         NotificationCenter.default.addObserver(self, selector: #selector(self.incomingCall(_:)), name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue), object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(self.incomingMessage(_:)), name: NSNotification.Name(NotificationName.openConversationFromPush.rawValue), object: nil)
     }
 
     @objc func incomingCall(_ notification: NSNotification) {
@@ -61,6 +66,19 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 return
         }
         self.answerIncomingCall(call: call)
+    }
+
+    @objc func incomingMessage(_ notification: NSNotification) {
+        guard let participantId = notification.userInfo?[NotificationUserInfoKeys.participantID.rawValue] as? String else { return }
+        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+        guard let account = accountService.currentAccount else {
+            return
+        }
+        guard let conversation = self.conversationService.findConversation(withRingId: participantId, withAccountId: account.id) else {
+            return
+        }
+        conversationViewModel.conversation = Variable<ConversationModel>(conversation)
+        self.showConversation(withConversationViewModel: conversationViewModel, withAnimation: false)
     }
 
     func start () {
