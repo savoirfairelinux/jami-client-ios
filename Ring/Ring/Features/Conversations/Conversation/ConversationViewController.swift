@@ -126,11 +126,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
 
     func copyImageToCache(image: UIImage, imagePath: String) {
         guard let imageData =  UIImagePNGRepresentation(image) else { return }
-        // set the extension to png
-        let copiedImagePath = (imagePath as NSString).deletingPathExtension + ".png"
         do {
-            self.log.debug("copying image to: \(String(describing: copiedImagePath))")
-            try imageData.write(to: URL(fileURLWithPath: copiedImagePath), options: .atomic)
+            self.log.debug("copying image to: \(String(describing: imagePath))")
+            try imageData.write(to: URL(fileURLWithPath: imagePath), options: .atomic)
         } catch {
             self.log.error("couldn't copy image to cache")
         }
@@ -162,8 +160,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
             var imageFileName = result.firstObject?.value(forKey: "filename") as? String ?? "Unknown"
 
+            // set the extension to png if not a jpg
             let pathExtension = (imageFileName as NSString).pathExtension
-            if pathExtension == "HEIC" || pathExtension == "HEIF" {
+            if pathExtension != "jpg" || pathExtension == "JPG" {
                 imageFileName = (imageFileName as NSString).deletingPathExtension + ".png"
             }
 
