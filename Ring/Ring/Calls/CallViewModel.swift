@@ -94,6 +94,9 @@ class CallViewModel: Stateable, ViewModel {
             .map({[weak self] call in
                 return call.state == .over || call.state == .failure
             }).map({ hide in
+                if hide {
+                    self.videoService.setCameraOrientation(orientation: .portrait)
+                }
                 return hide
             })
     }()
