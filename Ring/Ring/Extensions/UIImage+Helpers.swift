@@ -117,9 +117,17 @@ extension UIImage {
 
         let ratio = self.size.width / self.size.height
         if ratio > 1 {
-             newHeight = newWidth / ratio
+            newHeight = newWidth / ratio
         } else if ratio < 1, ratio != 0 {
-             newWidth = newHeight * ratio
+            // android image orientation bug?
+            if  self.imageOrientation == UIImageOrientation.right ||
+                self.imageOrientation == UIImageOrientation.left ||
+                self.imageOrientation == UIImageOrientation.rightMirrored ||
+                self.imageOrientation == UIImageOrientation.leftMirrored {
+                newHeight *= ratio
+            } else {
+                newWidth = newHeight * ratio
+            }
         }
 
         let newSize = CGSize(width: newWidth, height: newHeight)
@@ -139,8 +147,7 @@ extension UIImage {
 
         context.interpolationQuality = .high
         context.draw(cgImage, in: CGRect(origin: .zero, size: CGSize(width: newWidth, height: newHeight)))
-
-        let image = context.makeImage().flatMap { UIImage(cgImage: $0) }
+        let image = context.makeImage().flatMap { UIImage(cgImage: $0, scale: self.scale, orientation: self.imageOrientation) }
         if let newImage: UIImage = image {
             return newImage
         }
