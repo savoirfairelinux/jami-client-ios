@@ -716,6 +716,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         let itemToShare = [file]
         let activityViewController = UIActivityViewController(activityItems: itemToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
         activityViewController.excludedActivityTypes = [UIActivityType.airDrop]
         self.present(activityViewController, animated: true, completion: nil)
     }
