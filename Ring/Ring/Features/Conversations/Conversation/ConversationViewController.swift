@@ -160,9 +160,12 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
             var imageFileName = result.firstObject?.value(forKey: "filename") as? String ?? "Unknown"
 
-            // set the extension to png if not a jpg
+            // seems that HEIC, HEIF, and JPG files in the iOS photo library start with 0x89 0x50 (png)
+            // so funky cold medina
             let pathExtension = (imageFileName as NSString).pathExtension
-            if pathExtension != "jpg" || pathExtension == "JPG" {
+            if pathExtension.caseInsensitiveCompare("heic") == .orderedSame ||
+               pathExtension.caseInsensitiveCompare("heif") == .orderedSame ||
+               pathExtension.caseInsensitiveCompare("jpg") == .orderedSame {
                 imageFileName = (imageFileName as NSString).deletingPathExtension + ".png"
             }
 
