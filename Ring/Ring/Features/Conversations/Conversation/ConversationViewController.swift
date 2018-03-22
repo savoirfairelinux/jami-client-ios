@@ -746,7 +746,7 @@ extension ConversationViewController: UITableViewDataSource {
                     .observeOn(MainScheduler.instance)
                     .filter {
                         return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
-                    .subscribe(onNext: { status in
+                    .subscribe(onNext: { [unowned self] status in
                         guard let currentIndexPath = tableView.indexPath(for: cell) else { return }
                         guard let transferId = item.daemonId else { return }
                         self.log.info("Transfer status change from: \(item.lastTransferStatus.description) to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
@@ -763,7 +763,7 @@ extension ConversationViewController: UITableViewDataSource {
                     .disposed(by: cell.disposeBag)
 
                 cell.cancelButton.rx.tap
-                    .subscribe(onNext: { _ in
+                    .subscribe(onNext: { [unowned self] _ in
                         guard let transferId = item.daemonId else { return }
                         self.log.info("canceling transferId \(transferId)")
                         _ = self.viewModel.cancelTransfer(transferId: transferId)
@@ -776,7 +776,7 @@ extension ConversationViewController: UITableViewDataSource {
 
                 if item.bubblePosition() == .received {
                     cell.acceptButton?.rx.tap
-                        .subscribe(onNext: { _ in
+                        .subscribe(onNext: { [unowned self] _ in
                             guard let transferId = item.daemonId else { return }
                             self.log.info("accepting transferId \(transferId)")
                             if self.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
