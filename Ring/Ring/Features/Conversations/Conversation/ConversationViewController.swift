@@ -44,6 +44,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
     var bottomOffset: CGFloat = 0
     let scrollOffsetThreshold: CGFloat = 600
 
+    var keyboardDismissTapRecognizer: UITapGestureRecognizer!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,8 +62,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ConversationViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
 
     func importDocument() {
@@ -213,6 +214,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
 
     @objc func dismissKeyboard() {
         self.becomeFirstResponder()
+        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
@@ -226,6 +228,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         if keyboardHeight != self.messageAccessoryView.frame.height {
             setShareButtonsVisibility(hide: true)
             heightOffset = -24.0
+            self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
         }
 
         self.tableView.contentInset.bottom = keyboardHeight + heightOffset

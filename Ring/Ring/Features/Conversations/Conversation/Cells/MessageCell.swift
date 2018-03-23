@@ -163,8 +163,8 @@ class MessageCell: UITableViewCell, NibReusable {
             bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
         }
 
-        self.messageLabel.enabledTypes = [.url]
         if item.isTransfer {
+            self.messageLabel.enabledTypes = []
             let contentArr = item.content.components(separatedBy: "\n")
             if contentArr.count > 1 {
                 self.messageLabel.text = contentArr[0]
@@ -173,13 +173,14 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.messageLabel.text = item.content
             }
         } else {
+            self.messageLabel.enabledTypes = [.url]
             self.setup()
             self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
-        }
-        self.messageLabel.handleURLTap { url in
-            let urlString = url.absoluteString
-            if let prefixedUrl = URL(string: urlString.contains("http") ? urlString : "http://\(urlString)") {
-                UIApplication.shared.openURL(prefixedUrl)
+            self.messageLabel.handleURLTap { url in
+                let urlString = url.absoluteString
+                if let prefixedUrl = URL(string: urlString.contains("http") ? urlString : "http://\(urlString)") {
+                    UIApplication.shared.openURL(prefixedUrl)
+                }
             }
         }
 
