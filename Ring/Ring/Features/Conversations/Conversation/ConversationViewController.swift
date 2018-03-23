@@ -746,50 +746,50 @@ extension ConversationViewController: UITableViewDataSource {
                 cell.acceptButton?.setTitle(L10n.Datatransfer.readableStatusAccept, for: .normal)
                 item.lastTransferStatus = .unknown
                 changeTransferStatus(cell, nil, item.message.transferStatus, item, viewModel)
-
                 item.transferStatus.asObservable()
                     .observeOn(MainScheduler.instance)
                     .filter {
                         return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
-                    .subscribe(onNext: { [unowned self] status in
-                        guard let currentIndexPath = tableView.indexPath(for: cell) else { return }
+                    .subscribe(onNext: { [weak self, weak tableView] status in
+                        guard let currentIndexPath = tableView?.indexPath(for: cell) else { return }
                         guard let transferId = item.daemonId else { return }
-                        self.log.info("Transfer status change from: \(item.lastTransferStatus.description) to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
+                        guard let model = self?.viewModel else { return }
+                        self?.log.info("Transfer status change from: \(item.lastTransferStatus.description) to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
                         if item.bubblePosition() == .sent && item.shouldDisplayTransferedImage {
-                            cell.displayTransferedImage(message: item, conversationID: self.viewModel.conversation.value.conversationId)
+                            cell.displayTransferedImage(message: item, conversationID: model.conversation.value.conversationId)
                         } else {
-                            self.changeTransferStatus(cell, currentIndexPath, status, item, self.viewModel)
+                            self?.changeTransferStatus(cell, currentIndexPath, status, item, model)
                             cell.stopProgressMonitor()
                         }
                         item.lastTransferStatus = status
                         item.initialTransferStatus = status
-                        tableView.reloadData()
+                        tableView?.reloadData()
                     })
                     .disposed(by: cell.disposeBag)
 
                 cell.cancelButton.rx.tap
-                    .subscribe(onNext: { [unowned self] _ in
+                    .subscribe(onNext: { [weak self, weak tableView] _ in
                         guard let transferId = item.daemonId else { return }
-                        self.log.info("canceling transferId \(transferId)")
-                        _ = self.viewModel.cancelTransfer(transferId: transferId)
+                        self?.log.info("canceling transferId \(transferId)")
+                        _ = self?.viewModel.cancelTransfer(transferId: transferId)
                         item.initialTransferStatus = .canceled
                         item.message.transferStatus = .canceled
                         cell.stopProgressMonitor()
-                        tableView.reloadData()
+                        tableView?.reloadData()
                     })
                     .disposed(by: cell.disposeBag)
 
                 if item.bubblePosition() == .received {
                     cell.acceptButton?.rx.tap
-                        .subscribe(onNext: { [unowned self] _ in
+                        .subscribe(onNext: { [weak self, weak tableView] _ in
                             guard let transferId = item.daemonId else { return }
-                            self.log.info("accepting transferId \(transferId)")
-                            if self.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
-                                _ = self.viewModel.cancelTransfer(transferId: transferId)
+                            self?.log.info("accepting transferId \(transferId)")
+                            if self?.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
+                                _ = self?.viewModel.cancelTransfer(transferId: transferId)
                                 item.initialTransferStatus = .canceled
                                 item.message.transferStatus = .canceled
                                 cell.stopProgressMonitor()
-                                tableView.reloadData()
+                                tableView?.reloadData()
                             }
                         })
                         .disposed(by: cell.disposeBag)
