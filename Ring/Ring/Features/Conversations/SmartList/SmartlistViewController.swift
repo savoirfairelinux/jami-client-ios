@@ -61,7 +61,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.setupTableViews()
         self.setupSearchBar()
         self.setupUI()
-        self.applyShadow()
+        self.configureRingNavigationBar()
 
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
@@ -216,7 +216,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchBar.returnKeyType = .done
         self.searchBar.autocapitalizationType = .none
         self.searchBar.tintColor = UIColor.ringMain
-        self.searchBar.backgroundColor = UIColor.ringNavigationBar
+        self.searchBar.barTintColor =  UIColor.ringNavigationBar
 
         self.view.bringSubview(toFront: self.searchBar)
 

@@ -155,6 +155,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         let conversationsCoordinator = ConversationsCoordinator(with: self.injectionBag)
         let contactRequestsCoordinator = ContactRequestsCoordinator(with: self.injectionBag)
         let meCoordinator = MeCoordinator(with: self.injectionBag)
+        self.tabBarViewController.tabBar.tintColor = UIColor.ringMain
 
         self.tabBarViewController.viewControllers = [conversationsCoordinator.rootViewController,
                                                      contactRequestsCoordinator.rootViewController,

@@ -76,11 +76,17 @@ extension UIViewController {
 
     }
 
-    func applyShadow() {
+    func configureRingNavigationBar() {
+        self.navigationController?.navigationBar.barTintColor = UIColor.ringNavigationBar
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
         self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 2.5)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.2
         self.navigationController?.navigationBar.layer.shadowRadius = 3
         self.navigationController?.navigationBar.layer.masksToBounds = false
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        let textAttributes = [NSAttributedStringKey.foregroundColor: UIColor.ringMain]
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
+        self.navigationController?.navigationBar.tintColor = UIColor.ringMain
     }
 }

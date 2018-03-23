@@ -38,7 +38,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.applyShadow()
+        self.configureRingNavigationBar()
         self.tableView.rx.modelSelected(ContactRequestItem.self)
             .subscribe({ [unowned self] item in
                 if let ringId = item.element?.contactRequest.ringId {

@@ -34,7 +34,7 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.applyShadow()
+        self.configureRingNavigationBar()
         self.navigationItem.title = L10n.Accountpage.blockedContacts
     }
 
