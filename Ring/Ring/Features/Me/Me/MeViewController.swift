@@ -163,11 +163,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .linkNew:
                     let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LinkNewDeviceCell.self)
 
-                    cell.addDeviceButton.rx.tap.subscribe(onNext: { [unowned self] in
-                        self.viewModel.linkDevice()
+                    cell.addDeviceButton.rx.tap.subscribe(onNext: { [weak self] in
+                        self?.viewModel.linkDevice()
                     }).disposed(by: cell.disposeBag)
-                    cell.addDeviceTitle.rx.tap.subscribe(onNext: { [unowned self] in
-                        self.viewModel.linkDevice()
+                    cell.addDeviceTitle.rx.tap.subscribe(onNext: { [weak self] in
+                        self?.viewModel.linkDevice()
                     }).disposed(by: cell.disposeBag)
                     cell.selectionStyle = .none
                     return cell
@@ -183,8 +183,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .disposed(by: cell.disposeBag)
                     cell.switchProxy.rx.isOn
                         .observeOn(MainScheduler.instance)
-                        .subscribe(onNext: { [unowned self] (enable) in
-                            self.viewModel.enableProxy(enable: enable)
+                        .subscribe(onNext: { [weak self] (enable) in
+                            self?.viewModel.enableProxy(enable: enable)
                         }).disposed(by: cell.disposeBag)
                     cell.selectionStyle = .none
                     return cell

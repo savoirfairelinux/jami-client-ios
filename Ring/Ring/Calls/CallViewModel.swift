@@ -160,7 +160,7 @@ class CallViewModel: Stateable, ViewModel {
 
     lazy var showCallOptions: Observable<Bool> = {
         return Observable.combineLatest(self.screenTapped.asObservable(),
-                                        isActiveVideoCall) { [unowned self] (tapped, shouldRespond) in
+                                        isActiveVideoCall) { (tapped, shouldRespond) in
             if tapped && shouldRespond {
                 return true
             }
@@ -184,8 +184,8 @@ class CallViewModel: Stateable, ViewModel {
         let onImage = UIImage(asset: Asset.videoRunning)
         let offImage = UIImage(asset: Asset.videoMuted)
 
-        return self.videoMuted.map({ [unowned self] muted in
-            let audioOnly = self.call?.isAudioOnly ?? false
+        return self.videoMuted.map({ [weak self] muted in
+            let audioOnly = self?.call?.isAudioOnly ?? false
             if audioOnly || muted {
                 return offImage
             }
@@ -194,8 +194,8 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var videoMuted: Observable<Bool> = {
-        return self.callService.currentCall.filter({ [unowned self] call in
-            call.callId == self.call?.callId &&
+        return self.callService.currentCall.filter({ [weak self] call in
+            call.callId == self?.call?.callId &&
                 call.state == .current
         }).map({call in
             return call.videoMuted
@@ -237,8 +237,8 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var audioMuted: Observable<Bool> = {
-        return self.callService.currentCall.filter({ [unowned self] call in
-            call.callId == self.call?.callId &&
+        return self.callService.currentCall.filter({ [weak self] call in
+            call.callId == self?.call?.callId &&
                 call.state == .current
         }).map({call in
             return call.audioMuted
@@ -258,8 +258,8 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var callPaused: Observable<Bool> = {
-        return self.callService.currentCall.filter({ [unowned self] call in
-            call.callId == self.call?.callId &&
+        return self.callService.currentCall.filter({ [weak self] call in
+            call.callId == self?.call?.callId &&
                 (call.state == .hold ||
                     call.state == .unhold ||
                     call.state == .current)
@@ -326,8 +326,8 @@ class CallViewModel: Stateable, ViewModel {
                                    toRingId: uri,
                                    userName: userName,
                                    isAudioOnly: isAudioOnly)
-            .subscribe(onSuccess: { [unowned self] callModel in
-                self.call = callModel
+            .subscribe(onSuccess: { [weak self] callModel in
+                self?.call = callModel
             }).disposed(by: self.disposeBag)
     }
 

@@ -72,20 +72,20 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
                 //Accept button
                 cell.acceptButton.backgroundColor = UIColor.clear
-                cell.acceptButton.rx.tap.subscribe(onNext: { [unowned self] in
-                    self.acceptButtonTapped(withItem: item)
+                cell.acceptButton.rx.tap.subscribe(onNext: { [weak self] in
+                    self?.acceptButtonTapped(withItem: item)
                 }).disposed(by: cell.disposeBag)
 
                 //Discard button
                 cell.discardButton.backgroundColor = UIColor.clear
-                cell.discardButton.rx.tap.subscribe(onNext: { [unowned self] in
-                    self.discardButtonTapped(withItem: item)
+                cell.discardButton.rx.tap.subscribe(onNext: { [weak self] in
+                    self?.discardButtonTapped(withItem: item)
                 }).disposed(by: cell.disposeBag)
 
                 //Ban button
                 cell.banButton.backgroundColor = UIColor.clear
-                cell.banButton.rx.tap.subscribe(onNext: { [unowned self] in
-                    self.banButtonTapped(withItem: item)
+                cell.banButton.rx.tap.subscribe(onNext: { [weak self] in
+                    self?.banButtonTapped(withItem: item)
                 }).disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
