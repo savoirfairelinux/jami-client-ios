@@ -23,7 +23,6 @@ import Chameleon
 
 extension Chameleon {
     static func setRingThemeUsingPrimaryColor (_ primaryColor: UIColor, withSecondaryColor secondaryColor: UIColor, andContentStyle contentStyle: UIContentStyle) {
-
         var contentColor: UIColor
         var secondaryContentColor: UIColor
 
@@ -39,8 +38,6 @@ extension Chameleon {
             secondaryContentColor = UIColor.flatBlackColorDark()
         }
 
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.flatGray()
-
         MessageBubble.appearance().tintColor = secondaryContentColor
         MessageBubble.appearance().backgroundColor = secondaryColor
 
@@ -54,17 +51,5 @@ extension Chameleon {
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).tintColor = UIColor.clear
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).backgroundColor = UIColor.clear
-
-        UIButton.appearance().backgroundColor = UIColor.clear
-        UIButton.appearance().tintColor = UIColor.ringSecondary
-        DesignableButton.appearance().tintColor = UIColor.white
-        DesignableButton.appearance().backgroundColor = secondaryColor
-        ButtonTransparentBackground.appearance().tintColor = secondaryColor
-        ButtonTransparentBackground.appearance().backgroundColor = UIColor.clear
-        UIButton.appearance(whenContainedInInstancesOf: [UIView.self, UIImagePickerController.self]).tintColor = UIColor.ringMain
-        UINavigationBar.appearance().barTintColor = UIColor.ringNavigationBar
-        UISearchBar.appearance().backgroundColor = UIColor.clear
-        UIButton.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = UIColor.ringMain
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.ringMain]
     }
 }

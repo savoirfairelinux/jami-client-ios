@@ -47,7 +47,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.applyShadow()
+        self.configureRingNavigationBar()
 
         self.setupUI()
         self.setupTableView()
