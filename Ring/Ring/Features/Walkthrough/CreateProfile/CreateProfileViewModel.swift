@@ -48,27 +48,14 @@ class CreateProfileViewModel: Stateable, ViewModel {
         }
     }()
 
-    var skipButtonTitle = Variable<String>("")
-
-    var walkthroughType: WalkthroughType! {
-        didSet {
-            if self.walkthroughType == .createAccount {
-                self.skipButtonTitle.value = L10n.Createprofile.createAccount
-            } else {
-                self.skipButtonTitle.value = L10n.Createprofile.linkDevice
+    lazy var skipButtonTitle: Observable<String> = {
+        return profileExists.map({ exists -> String in
+            if exists {
+                return L10n.Createprofile.profileCreated
             }
-
-            profileExists.subscribe(onNext: { [unowned self] (state) in
-                if state {
-                    self.skipButtonTitle.value = L10n.Createprofile.createAccountWithProfile
-                } else if self.walkthroughType == .createAccount {
-                    self.skipButtonTitle.value = L10n.Createprofile.createAccount
-                } else {
-                    self.skipButtonTitle.value = L10n.Createprofile.linkDevice
-                }
-            }).disposed(by: self.disposeBag)
-        }
-    }
+            return L10n.Createprofile.skipCreateProfile
+        }).startWith(L10n.Createprofile.skipCreateProfile)
+    }()
 
     let disposeBag = DisposeBag()
 
@@ -77,7 +64,7 @@ class CreateProfileViewModel: Stateable, ViewModel {
     }
 
     func proceedWithAccountCreationOrDeviceLink() {
-        self.stateSubject.onNext(WalkthroughState.profileCreated(withType: self.walkthroughType))
+        self.stateSubject.onNext(WalkthroughState.profileCreated)
     }
 
 }
