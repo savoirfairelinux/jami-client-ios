@@ -63,9 +63,11 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtk-w4-zfQ" customClass="ButtonTransparentBackground" customModule="Ring" customModuleProvider="target">
                                                 <rect key="frame" x="117" y="174" width="22" height="22"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="dIk-SQ-ZCf"/>
                                                 </constraints>
+                                                <color key="tintColor" red="0.21176470589999999" green="0.49019607840000001" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3CA-fY-2S2" customClass="DesignableTextField" customModule="Ring" customModuleProvider="target">
                                                 <rect key="frame" x="36" y="208" width="303" height="40"/>

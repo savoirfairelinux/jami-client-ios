@@ -208,16 +208,14 @@ internal enum L10n {
   internal enum Smartlist {
     /// Be sure cellular access is granted in your settings
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess")
-    /// Conversations
-    internal static let conversations = L10n.tr("Localizable", "smartlist.conversations")
     /// No network connectivity
     internal static let noNetworkConnectivity = L10n.tr("Localizable", "smartlist.noNetworkConnectivity")
     /// No results
     internal static let noResults = L10n.tr("Localizable", "smartlist.noResults")
+    /// Search Result
+    internal static let results = L10n.tr("Localizable", "smartlist.results")
     /// Searching...
     internal static let searching = L10n.tr("Localizable", "smartlist.searching")
-    /// User found
-    internal static let userFound = L10n.tr("Localizable", "smartlist.userFound")
     /// Yesterday
     internal static let yesterday = L10n.tr("Localizable", "smartlist.yesterday")
   }

@@ -119,13 +119,10 @@ class SmartlistViewModel: Stateable, ViewModel {
                                                                              resultSelector: { contactFoundConversation, filteredResults in
 
             var sections = [ConversationSection]()
-
-            if contactFoundConversation != nil {
-                sections.append(ConversationSection(header: L10n.Smartlist.userFound, items: [contactFoundConversation!]))
-            }
-
             if !filteredResults.isEmpty {
-                sections.append(ConversationSection(header: L10n.Smartlist.conversations, items: filteredResults))
+                sections.append(ConversationSection(header: L10n.Smartlist.results, items: filteredResults))
+            } else if contactFoundConversation != nil {
+                sections.append(ConversationSection(header: L10n.Smartlist.results, items: [contactFoundConversation!]))
             }
 
             return sections
