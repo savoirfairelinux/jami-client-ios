@@ -75,7 +75,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     private let log = SwiftyBeaver.self
 
     //contain image if transfering file is image type, othewise contain nil
-    typealias ImageTuple = (Bool, UIImage?)
+    typealias ImageTuple = (isImage: Bool, data: UIImage?)
     private var transferedImages = [String: ImageTuple]()
 
     fileprivate let dataTransferAdapter: DataTransferAdapter
@@ -147,7 +147,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     }
     /*
      to avoid creating images multiple time keep images in dictionary
-     images saved in app document folder referenced by name
+     images saved in app document folder referenced by conversationId concatinated with image name
      images from photo librairy referenced by local identifier
     */
 
@@ -155,12 +155,12 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                   accountID: String, conversationID: String) -> UIImage? {
         if let localImageIdentifier = identifier {
             if let image = self.transferedImages[localImageIdentifier] {
-                return image.1
+                return image.data
             }
             return self.getImageFromPhotoLibrairy(identifier: localImageIdentifier, maxSize: maxSize, name: name)
         }
-        if let image = self.transferedImages[name] {
-            return image.1
+        if let image = self.transferedImages[conversationID + name] {
+            return image.data
         }
         return self.getImageFromFile(for: name, maxSize: maxSize, accountID: accountID,
                                      conversationID: conversationID)
@@ -201,11 +201,11 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                 let image = UIImage(contentsOfFile: pathUrl.path)
                 let resizedImage = image?.resizeIntoRectangle(of: CGSize(width: maxSize, height: maxSize))
                 let roundedImage = resizedImage?.setRoundCorner(radius: 20.0, offset: 1)
-                self.transferedImages[name] = (true, roundedImage)
+                self.transferedImages[conversationID + name] = (true, roundedImage)
                 return roundedImage
             }
         } else {
-            self.transferedImages[name] = (false, nil)
+            self.transferedImages[conversationID + name] = (false, nil)
         }
         return nil
     }
