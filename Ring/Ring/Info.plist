@@ -23,11 +23,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Used to take user profile picture and record video</string>
+	<string>Used to create avatar, record video and share photos with contacts</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Used to save selected images</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The microphone will be used for communication during a call.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Used to let the user choose a profile picture</string>
+	<string>Used to select a profile picture and share photos with contacts</string>
 	<key>NSUbiquitousContainers</key>
 	<dict>
 		<key>iCloud.com.savoirfairelinux.ring</key>
