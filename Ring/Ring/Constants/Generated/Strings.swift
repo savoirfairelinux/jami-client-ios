@@ -135,12 +135,10 @@ internal enum L10n {
   }
 
   internal enum Createprofile {
-    /// Skip to Create Account
-    internal static let createAccount = L10n.tr("Localizable", "createProfile.createAccount")
     /// Next
-    internal static let createAccountWithProfile = L10n.tr("Localizable", "createProfile.createAccountWithProfile")
-    /// Skip to Link Device
-    internal static let linkDevice = L10n.tr("Localizable", "createProfile.linkDevice")
+    internal static let profileCreated = L10n.tr("Localizable", "createProfile.profileCreated")
+    /// Skip
+    internal static let skipCreateProfile = L10n.tr("Localizable", "createProfile.skipCreateProfile")
   }
 
   internal enum Datatransfer {

@@ -46,6 +46,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
         UIApplication.shared.statusBarStyle = .default
     }
 }

@@ -38,7 +38,7 @@ public enum WalkthroughType {
 /// - deviceLinked: linking has finished
 public enum WalkthroughState: State {
     case welcomeDone(withType: WalkthroughType)
-    case profileCreated(withType: WalkthroughType)
+    case profileCreated
     case accountCreated
     case deviceLinked
 }
@@ -65,10 +65,10 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
             guard let state = state as? WalkthroughState else { return }
             switch state {
             case .welcomeDone(let walkthroughType):
-                self.showCreateProfile(with: walkthroughType)
-            case .profileCreated(let walkthroughType):
-                self.showFinalStep(with: walkthroughType)
+                self.showAddAccount(with: walkthroughType)
             case .accountCreated, .deviceLinked:
+                self.showCreateProfile()
+            case .profileCreated:
                 self.rootViewController.dismiss(animated: true, completion: nil)
             }
         }).disposed(by: self.disposeBag)
@@ -80,13 +80,12 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         self.present(viewController: welcomeViewController, withStyle: .show, withAnimation: false, withStateable: welcomeViewController.viewModel)
     }
 
-    private func showCreateProfile (with walkthroughType: WalkthroughType) {
+    private func showCreateProfile () {
         let createProfileViewController = CreateProfileViewController.instantiate(with: self.injectionBag)
-        createProfileViewController.viewModel.walkthroughType = walkthroughType
         self.present(viewController: createProfileViewController, withStyle: .show, withAnimation: true, withStateable: createProfileViewController.viewModel)
     }
 
-    private func showFinalStep (with walkthroughType: WalkthroughType) {
+    private func showAddAccount (with walkthroughType: WalkthroughType) {
         if walkthroughType == .createAccount {
             let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
             self.present(viewController: createAccountViewController, withStyle: .show, withAnimation: true, withStateable: createAccountViewController.viewModel)

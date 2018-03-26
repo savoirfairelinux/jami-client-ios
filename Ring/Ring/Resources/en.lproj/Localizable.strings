@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Create a Ring account";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Next";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Next";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";
