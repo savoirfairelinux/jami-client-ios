@@ -24,6 +24,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to take user profile picture and record video</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Used to save selected images</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The microphone will be used for communication during a call.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
