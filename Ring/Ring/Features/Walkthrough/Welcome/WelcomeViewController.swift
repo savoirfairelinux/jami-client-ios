@@ -57,6 +57,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+        self.navigationController?.navigationBar.tintColor = UIColor.ringMain
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true

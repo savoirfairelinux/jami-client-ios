@@ -26,7 +26,6 @@
 
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
-"smartlist.userFound" = "User found";
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
