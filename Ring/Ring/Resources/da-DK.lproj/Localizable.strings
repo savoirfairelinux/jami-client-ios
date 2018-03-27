@@ -20,123 +20,122 @@
 
 // Global
 "global.homeTabBarTitle" = "Hjem";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Invitationer";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "Ok";
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.userFound" = "User found";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Samtaler";
 "smartlist.searching" = "Søger...";
-"smartlist.noResults" = "No results";
+"smartlist.noResults" = "Ingen resultater";
 "smartlist.noNetworkConnectivity" = "Ingen netværksforbindelse";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Kontroller at rettigheder til mobildata er givet i indstillinger";
 
 // Walkthrough
 
 //Welcome Screen
 "welcome.title" = "Velkommen til Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Ring er en gratis og universel kommunikationsplatform som respekterer sine brugeres frihed og privatliv";
 "welcome.linkDevice" = "Tilknyt denne enhed til en konto";
 "welcome.createAccount" = "Opret en Ring-konto";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Næste";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Næste";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Opret din Ring-konto";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
+"createAccount.chooseStrongPassword" = "Vælg stærkt kodeord som du kan huske til at beskytte din Ring-konto.";
 "createAccount.enterNewUsernamePlaceholder" = "brugernavn";
 "createAccount.newPasswordPlaceholder" = "adgangskode";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
+"createAccount.repeatPasswordPlaceholder" = "bekræft kodeord";
 "createAccount.passwordCharactersNumberError" = "Mindst 6 tegn";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.passwordNotMatchingError" = "kodeordene stemmer ikke overens";
+"createAccount.lookingForUsernameAvailability" = "undersøger brugernavnets tilgængelighed";
+"createAccount.invalidUsername" = "ugyldigt brugernavn";
+"createAccount.usernameAlreadyTaken" = "brugernavn er allerede anvendt";
+"createAccount.loading" = "Indlæser";
 "createAccount.waitCreateAccountTitle" = "Tilføjer konto";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.waitLinkToAccountTitle" = "Konto-tilknytning";
+"linkToAccount.linkButtonTitle" = "Tilknyt enhed";
 "linkToAccount.passwordPlaceholder" = "adgangskode";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.passwordLabel" = "Indtast kodeord";
 "linkToAccount.pinLabel" = "Indtast PIN-kode";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "For at generere PIN-koden skal du gå til Kontoadministration på den enhed som indeholder kontoen du ønsker at tilknytte. Under enhedsindstillinger vælg \"Tilknyt en anden enhed til denne konto\". Dette vil generere den nødvendige PIN-kode der skal indtastes i denne formular. PIN-koden er kun gyldig i 10 minutter. ";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan ikke finde konto";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountCannotBeFoundMessage" = "Kontoen kunne ikke findes på Ring-netværket. Sikr dig at den er blevet eksporteret fra en eksisterende enhed og at de angivne login-detaljer er korrekte.";
+"alerts.accountAddedTitle" = "Konto tilføjet";
 "alerts.accountNoNetworkTitle" = "Kan ikke forbinde til netværket";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountNoNetworkMessage" = "Kunne ikke tilføje konto fordi Ring ikke kunne forbinde til det distribuerede netværk. Kontroller din enheds netværksadgang.";
+"alerts.accountDefaultErrorTitle" = "Ukendt fejl";
+"alerts.accountDefaultErrorMessage" = "Kontoen kunne ikke oprettes.";
 "alerts.profileTakePhoto" = "Tag billede";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Upload foto";
 "alerts.profileCancelPhoto" = "Annuller";
-"alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.accountLinkedTitle" = "Tilknytter konto";
+"alerts.dbFailedTitle" = "En fejl opstod under start af Ring";
+"alerts.dbFailedMessage" = "Luk venligst applikationen og prøv at starte den igen";
+"alerts.confirmBlockContact" = "Er du sikker på at du vil blokere denne kontakt? Samtalehistorikken med denne bruger vil også blive permanent slettet.";
+"alerts.confirmBlockContactTitle" = "Bloker kontakt";
+"alerts.confirmDeleteConversation" = "Er du sikker på at du vil slette denne samtale permanent?";
+"alerts.confirmDeleteConversationFromContact" = "Er du sikker på at du vil slette samtalen med denne bruger?";
+"alerts.confirmDeleteConversationTitle" = "Slet samtale";
 
 //Actions
 "actions.blockAction" = "Blokér";
 "actions.deleteAction" = "Slet";
 "actions.cancelAction" = "Annuller";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Indgående opkald fra";
 "alerts.incomingCallButtonAccept" = "Accepter";
 "alerts.incomingCallButtonIgnore" = "Afvis";
 
 //Calls
 "calls.callItemTitle" = "Ring op";
 "calls.unknown" = "Ukendt";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
-"calls.callFinished" = "Call finished";
+"calls.incomingCallInfo" = "vil tale med dig";
+"calls.calling" = "Placerer opkald...";
+"calls.callFinished" = "Opkald afsluttet";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheder";
 "accountPage.settingsHeader" = "Indstillinger";
-"accountPage.username" = "username:";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Push Notifications";
-"accountPage.blockedContacts" = "Block List";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.username" = "brugernavn:";
+"accountPage.usernameNotRegistered" = "brugernavn: ikke registreret";
+"accountPage.credentialsHeader" = "Kontodetaljer";
+"accountPage.enableProxy" = "Aktiver push-notifikationer";
+"accountPage.blockedContacts" = "Blokeringsliste";
+"accountPage.unblockContact" = "UBLOKER";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Tilknyt en ny enhed";
 "linkDevice.passwordError" = "Den adgangskode du har indtastet låser ikke op for denne konto";
 "linkDevice.networkError" = "Der opstod en netværksfejl under eksporteringen";
 "linkDevice.defaultError" = "Der opstod en fejl under eksport";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.explanationMessage" = "For at afslutte processen skal du starte Ring på den nye enhed og vælge \"Tilknyt denne enhed til en konto\". PIN-koden er gyldig i 10 minutter.";
+"linkDevice.hudMessage" = "Verificerer";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
+"contactPage.startAudioCall" = "Start audio-opkald";
+"contactPage.startVideoCall" = "Start video-opkald";
+"contactPage.sendMessage" = "Send besked";
+"contactPage.clearConversation" = "Ryd chat";
+"contactPage.blockContact" = "Bloker kontakt";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Initialiserer...";
 "dataTransfer.readableStatusError" = "Fejl";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "Under oprettelse...";
 "dataTransfer.readableStatusRefuse" = "Afvis";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "Overfører";
+"dataTransfer.readableStatusCanceled" = "Annulleret";
+"dataTransfer.readableStatusSuccess" = "Afsluttet";
 "dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuller";
 

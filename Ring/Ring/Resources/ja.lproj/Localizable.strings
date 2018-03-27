@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨日";
-"smartlist.userFound" = "User found";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "会話";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Ringアカウントを作成";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "次へ";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "次へ";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Ringアカウントを作成";

@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Gisteren";
-"smartlist.userFound" = "Gebruiker gevonden";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Gesprekken";
 "smartlist.searching" = "Zoeken…";
 "smartlist.noResults" = "Geen resultaten";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Een Ring-account aanmaken";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Overslaan om een account aan te maken";
-"createProfile.createAccountWithProfile" = "Volgende";
-"createProfile.linkDevice" = "Overslaan om een apparaat te koppelen";
+"createProfile.skipCreateProfile" = "Overslaan";
+"createProfile.profileCreated" = "Volgende";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Je Ring-account aanmaken";
@@ -130,13 +129,13 @@
 "contactPage.blockContact" = "Contact blokkeren";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Bezig met initialiseren…";
 "dataTransfer.readableStatusError" = "Fout";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "In afwachting…";
 "dataTransfer.readableStatusRefuse" = "Afwijzen";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
 "dataTransfer.readableStatusCanceled" = "Geannuleerd";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusSuccess" = "Voltooid";
 "dataTransfer.readableStatusAccept" = "Aanvaarden";
 "dataTransfer.readableStatusCancel" = "Annuleren";
 

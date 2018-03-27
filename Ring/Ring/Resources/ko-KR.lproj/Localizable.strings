@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
-"smartlist.userFound" = "User found";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "대화";
 "smartlist.searching" = "검색 중...";
 "smartlist.noResults" = "No results";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Create a Ring account";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "다음";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "다음";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";

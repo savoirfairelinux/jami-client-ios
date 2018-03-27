@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "אתמול";
-"smartlist.userFound" = "User found";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "דיונים";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Create a Ring account";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "קדימה";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "קדימה";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";

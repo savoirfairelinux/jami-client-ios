@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Χθες";
-"smartlist.userFound" = "User found";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Συνομιλίες";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Δημιουργία λογαριασμού Ring";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Επόμενο";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Επόμενο";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";

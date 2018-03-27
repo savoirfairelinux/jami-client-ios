@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Hier";
-"smartlist.userFound" = "Utilisateur trouvé";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Recherche de disponibilité...";
 "smartlist.noResults" = "Aucun résultat";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Créer un compte Ring";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Sautez l'étape pour créer un compte";
-"createProfile.createAccountWithProfile" = "Suivant";
-"createProfile.linkDevice" = "Sautez l'étape pour associer un appareil";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Suivant";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Créer votre compte Ring";
@@ -107,9 +106,9 @@
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";
 "accountPage.settingsHeader" = "Paramètres";
-"accountPage.username" = "username:";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
+"accountPage.username" = "nom d'utilisateur :";
+"accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
+"accountPage.credentialsHeader" = "Détails du compte";
 "accountPage.enableProxy" = "Activer les notifications de type pousser";
 "accountPage.blockedContacts" = "Liste des utilisateurs bloqués";
 "accountPage.unblockContact" = "Débloquer";
@@ -130,13 +129,13 @@
 "contactPage.blockContact" = "Bloquer ce contact";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Initialisation ...";
 "dataTransfer.readableStatusError" = "Erreur";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "En attente ...";
 "dataTransfer.readableStatusRefuse" = "Refuser";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "Transfert en cours";
+"dataTransfer.readableStatusCanceled" = "Annulé";
+"dataTransfer.readableStatusSuccess" = "Terminé";
 "dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuler";
 

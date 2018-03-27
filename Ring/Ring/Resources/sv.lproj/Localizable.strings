@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.userFound" = "Användare hittad";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Konversationer";
 "smartlist.searching" = "Söker...";
 "smartlist.noResults" = "Inget resultat";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Skapa ett Ring-konto";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Hoppa till \"Skapa konto\"";
-"createProfile.createAccountWithProfile" = "Nästa";
-"createProfile.linkDevice" = "Hoppa till \"Koppla enhet\"";
+"createProfile.skipCreateProfile" = "Hopa över";
+"createProfile.profileCreated" = "Nästa";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Skapa ditt Ring-konto";
@@ -130,13 +129,13 @@
 "contactPage.blockContact" = "Blockera kontakt";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Startar...";
 "dataTransfer.readableStatusError" = "Fel";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "Väntar...";
 "dataTransfer.readableStatusRefuse" = "Neka";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "Överför";
+"dataTransfer.readableStatusCanceled" = "Avbruten";
+"dataTransfer.readableStatusSuccess" = "Slutförd";
 "dataTransfer.readableStatusAccept" = "Acceptera";
 "dataTransfer.readableStatusCancel" = "Avbryt";
 

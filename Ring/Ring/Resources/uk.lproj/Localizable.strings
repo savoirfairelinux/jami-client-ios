@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Вчора";
-"smartlist.userFound" = "User found";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Групові чати";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Створити обліковий запис Ring";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Далі";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Далі";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";

@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Eilen";
-"smartlist.userFound" = "User found";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Keskustelu";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Luo Ring tunnus";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Seuraava";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Seuraava";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";

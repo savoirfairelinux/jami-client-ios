@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ayer";
-"smartlist.userFound" = "Usuario encontrado";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Conversaciones";
 "smartlist.searching" = "Buscando...";
 "smartlist.noResults" = "Sin resultados";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Crear una cuenta en Ring";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Saltar a Crear Cuenta";
-"createProfile.createAccountWithProfile" = "Siguiente";
-"createProfile.linkDevice" = "Saltar a Vincular Dispositivo";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Siguiente";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Crear tu cuenta Ring";

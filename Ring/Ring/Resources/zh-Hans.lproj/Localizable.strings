@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨天";
-"smartlist.userFound" = "已找到使用者";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "對話";
 "smartlist.searching" = "正在搜尋...";
 "smartlist.noResults" = "沒有結果";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "建立一個 Ring 帳號";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "跳到建立帳號";
-"createProfile.createAccountWithProfile" = "下一個";
-"createProfile.linkDevice" = "跳到連結裝置";
+"createProfile.skipCreateProfile" = "略過";
+"createProfile.profileCreated" = "下一個";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "建立您的 Ring 帳號";
@@ -130,13 +129,13 @@
 "contactPage.blockContact" = "阻擋聯絡人";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "正在初始化……";
 "dataTransfer.readableStatusError" = "錯誤";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "擱置中……";
 "dataTransfer.readableStatusRefuse" = "拒絕";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "正在傳輸";
+"dataTransfer.readableStatusCanceled" = "已取消";
+"dataTransfer.readableStatusSuccess" = "完成";
 "dataTransfer.readableStatusAccept" = "接聽";
 "dataTransfer.readableStatusCancel" = "取消";
 

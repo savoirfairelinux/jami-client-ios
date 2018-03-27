@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Hieraŭ";
-"smartlist.userFound" = "User found";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Konversacioj";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Krei Ring konton";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Skip to Create Account";
-"createProfile.createAccountWithProfile" = "Sekva";
-"createProfile.linkDevice" = "Skip to Link Device";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Sekva";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";

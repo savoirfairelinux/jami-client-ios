@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.userFound" = "Пользователь найден";
+"smartlist.results" = "Search Result";
 "smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Поиск…";
 "smartlist.noResults" = "Результаты отсутствуют";
@@ -42,9 +42,8 @@
 "welcome.createAccount" = "Создать аккаунт Ring";
 
 //Creation Profile Screen
-"createProfile.createAccount" = "Пропустить создание учетной записи";
-"createProfile.createAccountWithProfile" = "Далее";
-"createProfile.linkDevice" = "Пропустить привязку к устройству";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Далее";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Создать свой аккаунт Ring";
