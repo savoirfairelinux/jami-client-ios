@@ -264,6 +264,9 @@
 		621231FB1F8D6FEE009B86F0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231FA1F8D6FEE009B86F0 /* MessageCell.swift */; };
 		623660AA20092081002598C1 /* src in Resources */ = {isa = PBXBuildFile; fileRef = 623660A920092081002598C1 /* src */; };
 		627F11F120348FBF006560B5 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627F11F020348FBF006560B5 /* AvatarView.swift */; };
+		628F4DCB206BE23B0009C44C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCA206BE23B0009C44C /* libssl.a */; };
+		628F4DCD206BF4740009C44C /* libtls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCC206BF4730009C44C /* libtls.a */; };
+		628F4DCF206C0AEE0009C44C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCE206C0AEE0009C44C /* libcrypto.a */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
 		62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */; };
 		62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */; };
@@ -575,6 +578,9 @@
 		621231FA1F8D6FEE009B86F0 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../daemon/src; sourceTree = "<group>"; };
 		627F11F020348FBF006560B5 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		628F4DCA206BE23B0009C44C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../fat/lib/libssl.a; sourceTree = "<group>"; };
+		628F4DCC206BF4730009C44C /* libtls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtls.a; path = ../fat/lib/libtls.a; sourceTree = "<group>"; };
+		628F4DCE206C0AEE0009C44C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../fat/lib/libcrypto.a; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
 		62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PresenceAdapter.mm; sourceTree = "<group>"; };
@@ -651,6 +657,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				628F4DCF206C0AEE0009C44C /* libcrypto.a in Frameworks */,
+				628F4DCD206BF4740009C44C /* libtls.a in Frameworks */,
+				628F4DCB206BE23B0009C44C /* libssl.a in Frameworks */,
 				0E3BD4322044A41D00A50DDF /* GSKStretchyHeaderView.framework in Frameworks */,
 				0E4909611FE97A94005CAA50 /* ActiveLabel.framework in Frameworks */,
 				0E0FF1A71FC38070003898C2 /* SQLite.framework in Frameworks */,
@@ -764,6 +773,9 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				628F4DCE206C0AEE0009C44C /* libcrypto.a */,
+				628F4DCC206BF4730009C44C /* libtls.a */,
+				628F4DCA206BE23B0009C44C /* libssl.a */,
 				0E3BD4312044A41D00A50DDF /* GSKStretchyHeaderView.framework */,
 				0E4909601FE97A94005CAA50 /* ActiveLabel.framework */,
 				0E0FF1A61FC38070003898C2 /* SQLite.framework */,
