@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨天";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "搜尋結果";
 "smartlist.conversations" = "對話";
 "smartlist.searching" = "正在搜尋...";
 "smartlist.noResults" = "沒有結果";
