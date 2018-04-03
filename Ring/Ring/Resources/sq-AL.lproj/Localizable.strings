@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Dje";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Përfundime Kërkimi";
 "smartlist.conversations" = "Biseda";
 "smartlist.searching" = "Po kërkohet…";
 "smartlist.noResults" = "S\’ka përfundime";

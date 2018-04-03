@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Hier";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Résultats de la recherche";
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Recherche de disponibilité...";
 "smartlist.noResults" = "Aucun résultat";
@@ -42,7 +42,7 @@
 "welcome.createAccount" = "Créer un compte Ring";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Passez";
 "createProfile.profileCreated" = "Suivant";
 
 //Create Account form
