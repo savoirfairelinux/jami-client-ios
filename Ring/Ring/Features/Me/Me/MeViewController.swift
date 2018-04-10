@@ -43,6 +43,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.navigationItem.title = L10n.Global.meTabBarTitle
         self.configureBindings()
         self.configureRingNavigationBar()
+        self.adaptTableToKeyboardState(for: self.settingsTable, with: self.disposeBag, topOffset: self.stretchyHeader.minimumContentHeight)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,6 +100,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.settingsTable.register(cellType: LinkNewDeviceCell.self)
         self.settingsTable.register(cellType: ProxyCell.self)
         self.settingsTable.register(cellType: BlockContactsCell.self)
+        self.settingsTable.register(cellType: NotificationCell.self)
 
         self.settingsTable.rx.itemSelected
             //.throttle(RxTimeInterval(2), scheduler: MainScheduler.instance)
@@ -175,18 +177,37 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .proxy:
                     let cell = tableView.dequeueReusableCell(for: indexPath,
                                                              cellType: ProxyCell.self)
+                    cell.proxyAddrsss.placeholder = L10n.Accountpage.proxyPaceholder
                     cell.enableProxyLabel.text = L10n.Accountpage.enableProxy
-                    cell.switchProxy.isOn = self.viewModel.proxyInitialState
-                    self.viewModel.proxyEnabled?
-                        .observeOn(MainScheduler.instance)
-                        .bind(to: cell.switchProxy.rx.isOn)
+                    cell.proxyAddrsss.enablesReturnKeyAutomatically = true
+                    self.viewModel.proxyEnabled.asDriver()
+                        .drive(cell.switchProxy.rx.isOn)
                         .disposed(by: cell.disposeBag)
                     cell.switchProxy.rx.value.skip(1)
                         .observeOn(MainScheduler.instance)
                         .subscribe(onNext: { [weak self] (enable) in
-                            self?.viewModel.enableProxy(enable: enable)
+                            if enable {
+                                self?.askProxyAddressAlert()
+                                return
+                            }
+                            self?.viewModel.changeProxyAvailability(enable: enable, proxyAddress: "")
                         }).disposed(by: cell.disposeBag)
                     cell.selectionStyle = .none
+                    cell.proxyAddrsss.rx.controlEvent(.editingDidEndOnExit)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak self] _ in
+                        if let text = cell.proxyAddrsss.text, !text.isEmpty {
+                            self?.viewModel.changeProxyAddress(address: text)
+                        } else {
+                            cell.proxyAddrsss.text = self?.viewModel.proxyAddress.value
+                        }
+                    }).disposed(by: cell.disposeBag)
+                    self.viewModel.proxyDisplaybele.asDriver(onErrorJustReturn: "")
+                        .drive(cell.proxyAddrsss.rx.text)
+                        .disposed(by: cell.disposeBag)
+                    self.viewModel.proxyEnabled.asDriver()
+                        .drive(cell.proxyAddrsss.rx.isEnabled)
+                        .disposed(by: cell.disposeBag)
                     return cell
 
                 case .blockedList:
@@ -207,6 +228,25 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.text = label
                     cell.selectionStyle = .none
                     return cell
+                case .notifications:
+                    let cell = tableView.dequeueReusableCell(for: indexPath,
+                                                             cellType: NotificationCell.self)
+                    cell.selectionStyle = .none
+                    cell.enableNotificationsLabel.text = L10n.Accountpage.enableNotifications
+                    self.viewModel.notificationsEnabled.asDriver()
+                        .drive(cell.enableNotificationsSwitch.rx.value)
+                        .disposed(by: cell.disposeBag)
+                    cell.enableNotificationsSwitch.rx.value.skip(1)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak self] (enable) in
+                            guard let proxyEnabled = self?.viewModel.proxyEnabled.value else {return}
+                            if enable && !proxyEnabled {
+                                self?.proxyDisabledAlert()
+                                return
+                            }
+                            self?.viewModel.enablePushNotifications(enable: enable)
+                        }).disposed(by: cell.disposeBag)
+                    return cell
                 }
         }
 
@@ -216,9 +256,63 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: disposeBag)
     }
 
+    func proxyDisabledAlert() {
+        let alert = UIAlertController(title: L10n.Accountpage.proxyDisabledAlertTitle,
+                                      message: L10n.Accountpage.proxyDisabledAlertBody,
+                                      preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: L10n.Global.ok, style: .cancel) { [weak self]_ in
+            self?.viewModel.notificationsEnabled.value = false
+            self?.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(actionCancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         resetProfileName()
         self.profileName.resignFirstResponder()
+        if let activeField = self.findActiveTextField(in: settingsTable) {
+            activeField.resignFirstResponder()
+            // now the only possible active text field is proxy address, ensure it is not empty
+            if let text = activeField.text, text.isEmpty {
+                self.viewModel.proxyAddress.value =  self.viewModel.proxyAddress.value
+            }
+        }
+    }
+    
+    func askProxyAddressAlert() {
+        let alert = UIAlertController(title: L10n.Accountpage.proxyAddressAlert,
+                                      message: nil,
+                                      preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+                                         style: .cancel) { [weak self] _ in
+            self?.viewModel.proxyEnabled.value = false
+            alert.dismiss(animated: true, completion: nil)
+        }
+        let actionConfirm = UIAlertAction(title: L10n.Accountpage.saveProxyAddress,
+                                          style: .default) { [weak self] _ in
+            if let textFields = alert.textFields, let text = textFields[0].text, !text.isEmpty {
+                self?.viewModel.changeProxyAvailability(enable: true, proxyAddress: text)
+            }
+            alert.dismiss(animated: false, completion: nil)
+        }
+        alert.addAction(actionCancel)
+        alert.addAction(actionConfirm)
+
+        alert.addTextField { [weak self] (textField) in
+            textField.placeholder = L10n.Accountpage.proxyPaceholder
+            textField.text = self?.viewModel.proxyAddress.value
+        }
+
+        if let textFields = alert.textFields {
+            textFields[0].rx.text.map({text in
+                if let text = text {
+                    return !text.isEmpty
+                }
+                return false
+            }).bind(to: actionConfirm.rx.isEnabled).disposed(by: self.disposeBag)
+        }
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
