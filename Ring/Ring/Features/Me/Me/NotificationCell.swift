@@ -22,16 +22,15 @@ import UIKit
 import Reusable
 import RxSwift
 
-class ProxyCell: UITableViewCell, NibReusable {
+class NotificationCell: UITableViewCell, NibReusable {
 
-    @IBOutlet weak var enableProxyLabel: UILabel!
-    @IBOutlet weak var switchProxy: UISwitch!
-    @IBOutlet weak var proxyAddrsss: UITextField!
-    @IBOutlet  weak var proxyAddressContainer: UIView!
+    @IBOutlet weak var enableNotificationsLabel: UILabel!
+    @IBOutlet weak var enableNotificationsSwitch: UISwitch!
 
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
         self.disposeBag = DisposeBag()
     }
+
 }

@@ -104,6 +104,8 @@
 		0E20E4C82031FF560087C868 /* BlockContactsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E20E4C62031FF560087C868 /* BlockContactsCell.xib */; };
 		0E2D5F531F9145C800D574BF /* LinkNewDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */; };
 		0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */; };
+		0E35C10C2077DFF000BBA5E3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E35C10A2077DFF000BBA5E3 /* NotificationCell.swift */; };
+		0E35C10D2077DFF000BBA5E3 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E35C10B2077DFF000BBA5E3 /* NotificationCell.xib */; };
 		0E36979920322D46009A68CA /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36979720322D46009A68CA /* BlockListViewController.swift */; };
 		0E36979D20322D75009A68CA /* BlockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36979C20322D75009A68CA /* BlockListViewModel.swift */; };
 		0E36979F20322E6F009A68CA /* BlockListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36979E20322E6F009A68CA /* BlockListViewController.storyboard */; };
@@ -405,6 +407,8 @@
 		0E20E4C62031FF560087C868 /* BlockContactsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockContactsCell.xib; sourceTree = "<group>"; };
 		0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceCell.swift; sourceTree = "<group>"; };
 		0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkNewDeviceCell.xib; sourceTree = "<group>"; };
+		0E35C10A2077DFF000BBA5E3 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		0E35C10B2077DFF000BBA5E3 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		0E36979720322D46009A68CA /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
 		0E36979C20322D75009A68CA /* BlockListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewModel.swift; sourceTree = "<group>"; };
 		0E36979E20322E6F009A68CA /* BlockListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BlockListViewController.storyboard; sourceTree = "<group>"; };
@@ -1075,6 +1079,15 @@
 			name = BlockListCell;
 			sourceTree = "<group>";
 		};
+		0E35C1092077CE1400BBA5E3 /* PushNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				0E35C10A2077DFF000BBA5E3 /* NotificationCell.swift */,
+				0E35C10B2077DFF000BBA5E3 /* NotificationCell.xib */,
+			);
+			name = PushNotifications;
+			sourceTree = "<group>";
+		};
 		0E36979B20322D4D009A68CA /* BlockList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1125,6 +1138,7 @@
 		0E5AFE0A1F8EBC040040D539 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0E35C1092077CE1400BBA5E3 /* PushNotifications */,
 				0E20E4C22031FEFF0087C868 /* BlockListCell */,
 				0EAA9DAD2029F054005E245C /* Proxy */,
 				0E5AFE0B1F8EBC1E0040D539 /* DeviceCell */,
@@ -1691,6 +1705,7 @@
 				1A2041841F1EA0FC00C08435 /* CreateAccountViewController.storyboard in Resources */,
 				0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */,
 				1A2D18ED1F2919D800B2C785 /* MeViewController.storyboard in Resources */,
+				0E35C10D2077DFF000BBA5E3 /* NotificationCell.xib in Resources */,
 				1A20417E1F1E8DDA00C08435 /* CreateProfileViewController.storyboard in Resources */,
 				0EAA9DB52029F0AA005E245C /* ProxyCell.xib in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
@@ -1783,7 +1798,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" != \"Release\" ]; then\n    if which swiftlint > /dev/null; then\n        swiftlint\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi";
+			shellScript = "if [ \\\"${CONFIGURATION}\\\" != \\\"Release\\\" ]; then\n  if which swiftlint > /dev/null; then\n    swiftlint\n  else\n    echo \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\n  fi\nfi;";
 		};
 		1ABE07C41F0D779F00D36361 /* ⚙️ SwiftGen Code Generation */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1967,6 +1982,7 @@
 				1A5DC0301F3565AE0075E8EF /* SmartlistViewController.swift in Sources */,
 				1A2D18A21F27A6D600B2C785 /* LinkDeviceViewModel.swift in Sources */,
 				564C44601E943C37000F92B1 /* NameRegistrationAdapter.mm in Sources */,
+				0E35C10C2077DFF000BBA5E3 /* NotificationCell.swift in Sources */,
 				0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
