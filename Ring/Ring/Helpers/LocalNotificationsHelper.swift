@@ -46,6 +46,8 @@ enum CallAcition: String {
     }
 }
 
+let enbleNotificationsKey = "EnableUserNotifications"
+
 class LocalNotificationsHelper {
     let disposeBag = DisposeBag()
     let callCategory = "CALL_CATEGORY"
@@ -197,5 +199,13 @@ class LocalNotificationsHelper {
                     UIApplication.shared.scheduleLocalNotification(notification)
                 }).disposed(by: self.disposeBag)
         }
+    }
+
+    class func isEnabled() -> Bool {
+        return UserDefaults.standard.bool(forKey: enbleNotificationsKey)
+    }
+
+    class func setNotification (enable: Bool) {
+        UserDefaults.standard.setValue(enable, forKey: enbleNotificationsKey)
     }
 }

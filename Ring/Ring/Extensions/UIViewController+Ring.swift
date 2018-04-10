@@ -47,6 +47,22 @@ extension UIViewController {
         return nil
     }
 
+    func findPathWithActiveTextField(in table: UITableView) -> IndexPath? {
+        if table.numberOfSections <= 0 {return nil}
+        for i in 0..<table.numberOfSections {
+            if table.numberOfRows(inSection: i) == 0 {return nil}
+            for k in 0..<table.numberOfRows(inSection: i) {
+                let path = IndexPath(row: k, section: i)
+                if let row = table.cellForRow(at: path) {
+                    if self.findActiveTextField(in: row) != nil {
+                        return path
+                    }
+                }
+            }
+        }
+        return nil
+    }
+
     /// Scroll the UIScrollView to the right position
     /// according to keyboard's height
     ///
@@ -74,6 +90,37 @@ extension UIViewController {
 
         }).disposed(by: disposeBag)
 
+    }
+
+    func adaptTableToKeyboardState (for tableView: UITableView, with disposeBag: DisposeBag, topOffset: CGFloat? = nil, bottomOffset: CGFloat? = nil) {
+
+        NotificationCenter.keyboardHeight.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self, unowned tableView] (height) in
+            let trueHeight = height > 0  ? height + 100 : 0.0
+            // reset insets if they were changed before
+            if tableView.contentInset.bottom > 0  && trueHeight <= 0  {
+                var contentInsets = tableView.contentInset
+                contentInsets.bottom = 0
+                tableView.contentInset = contentInsets
+                if let topOffset = topOffset {
+                    var contentOffset = tableView.contentOffset
+                    contentOffset.y = -topOffset
+                    tableView.setContentOffset(contentOffset, animated: false)
+                }
+            }
+            if let activeFieldRowPath = self.findPathWithActiveTextField(in: tableView), let cell = tableView.cellForRow(at: activeFieldRowPath) {
+                var contentInsets = tableView.contentInset
+                if trueHeight > 0 {
+                    contentInsets.bottom += height
+                    tableView.contentInset = contentInsets
+                }
+                var aRect = self.view.frame
+                aRect.size.height -= trueHeight
+                if !aRect.contains(cell.frame.origin) {
+                    tableView.scrollToRow(at: activeFieldRowPath, at: .top, animated: true)
+                }
+            }
+
+        }).disposed(by: disposeBag)
     }
 
     func configureRingNavigationBar() {

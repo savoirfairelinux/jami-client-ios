@@ -36,6 +36,7 @@ enum ServiceEventType {
     case contactRequestReceived
     case contactRequestDiscarded
     case proxyEnabled
+    case notificationEnabled
     case callEnded
     case dataTransferCreated
     case dataTransferChanged
@@ -60,6 +61,7 @@ enum ServiceEventInput {
     case callTime
     case transferId
     case localPhotolID
+    case proxyAddress
 }
 
 /**

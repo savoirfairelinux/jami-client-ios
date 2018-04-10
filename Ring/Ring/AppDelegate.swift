@@ -144,7 +144,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let accountDetails = self.accountService.getAccountDetails(fromAccountId: currentAccount.id)
             accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.videoEnabled), withValue: "true")
             self.accountService.setAccountDetails(forAccountId: currentAccount.id, withDetails: accountDetails)
-            if self.accountService.getCurrentProxyState(accountID: currentAccount.id) {
+             let notificationsEnabled = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken)).isEmpty ? false : true
+            if notificationsEnabled {
                 self.registerVoipNotifications()
             }
             //in case if application was open when incoming call launched the push notifications
@@ -173,6 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillEnterForeground(_ application: UIApplication) {
         self.log.warning("entering foreground")
         self.daemonService.connectivityChanged()
+        self.updateNotificationAvailability()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -224,6 +226,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
+    func updateNotificationAvailability() {
+        let enabled = LocalNotificationsHelper.isEnabled()
+        if #available(iOS 10.0, *) {
+            let currentSettings = UNUserNotificationCenter.current()
+            currentSettings.getNotificationSettings(completionHandler: { settings in
+                switch settings.authorizationStatus {
+                case .notDetermined:
+                    break
+                case .denied:
+                    if enabled { LocalNotificationsHelper.setNotification(enable: false) }
+                case .authorized:
+                    if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
+                }
+            })
+        } else {
+            if UIApplication.shared.isRegisteredForRemoteNotifications {
+                if !enabled {LocalNotificationsHelper.setNotification(enable: true)}
+            } else {
+                if enabled {LocalNotificationsHelper.setNotification(enable: false)}
+            }
+        }
+    }
+
     @objc private func registerVoipNotifications() {
         self.requestNotificationAuthorization()
         self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
@@ -231,18 +256,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     @objc private func unregisterVoipNotifications() {
        self.voipRegistry.desiredPushTypes = nil
-       self.accountService.setPushNotificationToken(token: "")
+        self.accountService.setPushNotificationToken(token: "")
+        self.accountService.updatePushTokenForCurrentAccount(token: "")
     }
 
     private func requestNotificationAuthorization() {
         let application = UIApplication.shared
         if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = application.delegate as? UNUserNotificationCenterDelegate
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
+            DispatchQueue.main.async {
+                UNUserNotificationCenter.current().delegate = application.delegate as? UNUserNotificationCenterDelegate
+                let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+                UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { (enable, _) in
+                    if enable {
+                        LocalNotificationsHelper.setNotification(enable: true)
+                    } else {
+                        LocalNotificationsHelper.setNotification(enable: false)
+                    }
+                })
+            }
         } else {
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
+        }
+    }
+
+    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
+        let enabled = notificationSettings.types.contains(.alert)
+        if enabled {
+            LocalNotificationsHelper.setNotification(enable: true)
+        } else {
+            LocalNotificationsHelper.setNotification(enable: false)
         }
     }
 
@@ -336,6 +379,7 @@ extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
         self.accountService.setPushNotificationToken(token: "")
+        self.accountService.updatePushTokenForCurrentAccount(token: "")
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
