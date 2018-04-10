@@ -144,9 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let accountDetails = self.accountService.getAccountDetails(fromAccountId: currentAccount.id)
             accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.videoEnabled), withValue: "true")
             self.accountService.setAccountDetails(forAccountId: currentAccount.id, withDetails: accountDetails)
-            if self.accountService.getCurrentProxyState(accountID: currentAccount.id) {
-                self.registerVoipNotifications()
-            }
+            self.registerNotifications()
             //in case if application was open when incoming call launched the push notifications
             // reimit new call signal to show incoming call alert
             self.callService.checkForIncomingCall()
@@ -173,6 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillEnterForeground(_ application: UIApplication) {
         self.log.warning("entering foreground")
         self.daemonService.connectivityChanged()
+        self.updateNotificationAvailability()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -224,25 +223,85 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
+    func updateNotificationAvailability() {
+        let enabled = LocalNotificationsHelper.isEnabled()
+        if #available(iOS 10.0, *) {
+            let currentSettings = UNUserNotificationCenter.current()
+            currentSettings.getNotificationSettings(completionHandler: { settings in
+                switch settings.authorizationStatus {
+                case .notDetermined:
+                    break
+                case .denied:
+                    if enabled { self.unregisterVoipNotifications() }
+                case .authorized:
+                    if !enabled { self.registerVoipNotifications()}
+                }
+            })
+        } else {
+            if UIApplication.shared.isRegisteredForRemoteNotifications {
+                if !enabled {self.registerVoipNotifications()}
+            } else {
+                if enabled {self.unregisterVoipNotifications()}
+            }
+        }
+    }
+
+    func registerNotifications() {
+        if #available(iOS 10.0, *) {
+            let current = UNUserNotificationCenter.current()
+            current.getNotificationSettings(completionHandler: { settings in
+                switch settings.authorizationStatus {
+                case .authorized:
+                    self.registerVoipNotifications()
+                default:
+                    break
+                }
+            })
+        } else {
+            if UIApplication.shared.isRegisteredForRemoteNotifications {
+                self.registerVoipNotifications()
+            }
+        }
+    }
+
     @objc private func registerVoipNotifications() {
         self.requestNotificationAuthorization()
-        self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
     }
 
     @objc private func unregisterVoipNotifications() {
        self.voipRegistry.desiredPushTypes = nil
        self.accountService.setPushNotificationToken(token: "")
+       LocalNotificationsHelper.setNotification(enable: false)
     }
 
     private func requestNotificationAuthorization() {
         let application = UIApplication.shared
         if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = application.delegate as? UNUserNotificationCenterDelegate
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
+            DispatchQueue.main.async {
+                UNUserNotificationCenter.current().delegate = application.delegate as? UNUserNotificationCenterDelegate
+                let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+                UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { (enable, _) in
+                    if enable {
+                        self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
+                        LocalNotificationsHelper.setNotification(enable: true)
+                    } else {
+                        LocalNotificationsHelper.setNotification(enable: false)
+                    }
+                })
+            }
         } else {
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
+        }
+    }
+
+    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
+        let enabled = notificationSettings.types.contains(.alert)
+        if enabled {
+            self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
+            LocalNotificationsHelper.setNotification(enable: true)
+        } else {
+            LocalNotificationsHelper.setNotification(enable: false)
         }
     }
 

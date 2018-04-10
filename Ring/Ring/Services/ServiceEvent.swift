@@ -60,6 +60,7 @@ enum ServiceEventInput {
     case callTime
     case transferId
     case localPhotolID
+    case proxyAddress
 }
 
 /**

@@ -48,6 +48,8 @@ class AccountsService: AccountAdapterDelegate {
      */
     private let log = SwiftyBeaver.self
 
+    private let defaultProxyAddress = "dhtproxy.ring.cx:80"
+
     /**
      Used to register the service to daemon events, injected by constructor.
      */
@@ -486,6 +488,8 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    // MARK: Push Notifications
+
     func setPushNotificationToken(token: String) {
         self.accountAdapter.setPushNotificationToken(token)
     }
@@ -504,15 +508,19 @@ class AccountsService: AccountAdapterDelegate {
 
     // MARK: DHT Proxy
 
-    func enableProxy(accountID: String, enable: Bool) {
+    func enableProxy(accountID: String, enable: Bool, proxyAddress: String) {
         let accountDetails = self.getAccountDetails(fromAccountId: accountID)
         accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled), withValue: enable.toString())
-        let proxy = enable ? "dhtproxy.ring.cx:80" : ""
-        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
+        if enable {
+            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxyAddress)
+        }
         self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
         var event = ServiceEvent(withEventType: .proxyEnabled)
         event.addEventInput(.state, value: enable)
         event.addEventInput(.accountId, value: accountID)
+        if enable {
+            event.addEventInput(.proxyAddress, value: proxyAddress)
+        }
         self.responseStream.onNext(event)
     }
 
@@ -525,38 +533,62 @@ class AccountsService: AccountAdapterDelegate {
         return proxyEnabled
     }
 
-    func proxyEnabled(accountID: String) -> Observable<Bool> {
-        let proxyChanged: Observable<Bool> = self.sharedResponseStream
-            .filter({ event in
+    func proxyAddress(accountID: String) -> Variable<String> {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+        var proxyAddress = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer))
+        if proxyAddress.isEmpty {
+            proxyAddress = defaultProxyAddress
+        }
+        let variable = Variable<String>(proxyAddress)
+        self.sharedResponseStream
+            .filter({ event -> Bool in
                 if let accountId: String = event.getEventInput(.accountId) {
                     return event.eventType == ServiceEventType.proxyEnabled
                         && accountId == accountID
                 }
                 return false
-            }).map({ event in
-                if let state: Bool = event.getEventInput(.state) {
-                    return state
+            }).subscribe(onNext: { (event) in
+                if let address: String = event.getEventInput(.proxyAddress) {
+                    variable.value = address
                 }
-                return false
-            })
-            .asObservable()
-        return proxyChanged
+            }).disposed(by: self.disposeBag)
+        return variable
     }
 
-    func changeProxyAvailability(accountID: String, enable: Bool) {
+    func proxyEnabled(accountID: String) -> Variable<Bool> {
+        let variable = Variable<Bool>(getCurrentProxyState(accountID: accountID))
+        self.sharedResponseStream
+            .filter({ event -> Bool in
+                if let accountId: String = event.getEventInput(.accountId) {
+                    return event.eventType == ServiceEventType.proxyEnabled
+                        && accountId == accountID
+                }
+                return false
+            }).subscribe(onNext: { (event) in
+                if let state: Bool = event.getEventInput(.state) {
+                    variable.value = state
+                }
+            }).disposed(by: self.disposeBag)
+        return variable
+    }
+
+    func changeProxyAvailability(accountID: String, enable: Bool, proxyAddress: String) {
         let proxyState = self.getCurrentProxyState(accountID: accountID)
 
         if proxyState == enable {
             return
         }
-        self.enableProxy(accountID: accountID, enable: enable)
+        self.enableProxy(accountID: accountID, enable: enable, proxyAddress: proxyAddress)
+    }
 
-        //enable push notifications
-        if enable {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
-            return
-        }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.disablePushNotifications.rawValue), object: nil)
+    func updateProxyAddress(address: String, accountID: String) {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: address)
+        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
+        var event = ServiceEvent(withEventType: .proxyEnabled)
+        event.addEventInput(.accountId, value: accountID)
+        event.addEventInput(.proxyAddress, value: address)
+        self.responseStream.onNext(event)
     }
 
     func updatePushTokenForCurrentAccount(token: String) {

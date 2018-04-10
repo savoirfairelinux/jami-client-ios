@@ -39,6 +39,7 @@ enum SettingsSection: SectionModelType {
         case blockedList
         case sectionHeader(title: String)
         case ordinary(label: String)
+        case notifications
     }
 
     var items: [SectionRow] {
@@ -139,7 +140,7 @@ class MeViewModel: ViewModel, Stateable {
     lazy var accountSettings: Observable<SettingsSection> = {
         return Observable
             .just(.accountSettings( items: [.sectionHeader(title: L10n.Accountpage.settingsHeader),
-                                            .blockedList, .proxy]))
+                                            .blockedList, .proxy, .notifications]))
     }()
 
     lazy var linkedDevices: Observable<SettingsSection> = {
@@ -177,20 +178,6 @@ class MeViewModel: ViewModel, Stateable {
         }
     }()
 
-    lazy var proxyEnabled: Observable<Bool>? = {
-        if let account = self.accountService.currentAccount {
-            return self.accountService.proxyEnabled(accountID: account.id)
-        }
-        return nil
-    }()
-
-    lazy var proxyInitialState: Bool = {
-        if let account = self.accountService.currentAccount {
-            return self.accountService.getCurrentProxyState(accountID: account.id)
-        }
-        return false
-    }()
-
     required init (with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
@@ -200,14 +187,113 @@ class MeViewModel: ViewModel, Stateable {
         self.stateSubject.onNext(MeState.linkNewDevice)
     }
 
-    func enableProxy(enable: Bool) {
+    func showBlockedContacts() {
+        self.stateSubject.onNext(MeState.blockedContacts)
+    }
+
+    // MARK: - DHT Proxy
+
+    lazy var proxyEnabled: Variable<Bool> = {
+        if let account = self.accountService.currentAccount {
+            return self.accountService.proxyEnabled(accountID: account.id)
+        }
+        return Variable<Bool>(false)
+    }()
+
+    lazy var proxyAddress: Variable<String> = {
+        if let account = self.accountService.currentAccount {
+            return self.accountService.proxyAddress(accountID: account.id)
+        }
+        return Variable<String>("")
+    }()
+
+    func changeProxyAvailability(enable: Bool, proxyAddress: String) {
         guard let account = self.accountService.currentAccount else {
             return
         }
-        self.accountService.changeProxyAvailability(accountID: account.id, enable: enable)
+        self.accountService.changeProxyAvailability(accountID: account.id, enable: enable, proxyAddress: proxyAddress)
     }
 
-    func showBlockedContacts() {
-       self.stateSubject.onNext(MeState.blockedContacts)
+    func changeProxyAddress(address: String) {
+        guard let account = self.accountService.currentAccount else {
+            return
+        }
+        self.accountService.updateProxyAddress(address: address, accountID: account.id)
+    }
+
+    // MARK: - Local Notifications
+
+    lazy var notificationsEnabled: Variable<Bool> = {
+        let variable = Variable<Bool>(LocalNotificationsHelper.isEnabled())
+        UserDefaults.standard.rx
+            .observe(Bool.self, enbleNotificationsKey)
+            .subscribe(onNext: { enable in
+                if let enable = enable {
+                    variable.value = enable
+                }
+            }).disposed(by: self.disposeBag)
+        return variable
+    }()
+
+    lazy var notificationWarningLabel: Observable<Bool> = {
+        return Observable.combineLatest(self.notificationsEnabled.asObservable(),
+                                        self.proxyEnabled.asObservable()) { (notification, proxy) in
+                                            if notification && !proxy {
+                                                return false
+                                            }
+                                            return true
+
+        }
+    }()
+
+    func changeNotificationsAvailibility(enable: Bool) {
+        let currentNotificationsState = LocalNotificationsHelper.isEnabled()
+        if enable == currentNotificationsState {return}
+        if !enable {
+            DispatchQueue.main.async { [weak self] in
+                self?.notificationsEnabled.value = currentNotificationsState
+                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                    return
+                }
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(settingsUrl, completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(settingsUrl as URL)
+                    }
+                }
+            }
+        } else {
+            self.enableNotifications()
+        }
+    }
+
+    func enableNotifications() {
+        if #available(iOS 10.0, *) {
+            let current = UNUserNotificationCenter.current()
+            current.getNotificationSettings(completionHandler: { [weak self] settings in
+                switch settings.authorizationStatus {
+                case .notDetermined:
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
+                case .denied:
+                    DispatchQueue.main.async {
+                        let enabled = LocalNotificationsHelper.isEnabled()
+                        self?.notificationsEnabled.value = enabled
+                        guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(settingsUrl) {
+                            UIApplication.shared.open(settingsUrl, completionHandler: nil)
+                        }
+                    }
+                case .authorized:
+                    break
+                }
+            })
+        } else {
+            if !UIApplication.shared.isRegisteredForRemoteNotifications {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
+            }
+        }
     }
 }

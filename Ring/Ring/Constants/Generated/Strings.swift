@@ -15,8 +15,18 @@ internal enum L10n {
     internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader")
     /// Devices
     internal static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
-    /// Enable Push Notifications
+    /// Enable Notifications
+    internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications")
+    /// Enable Proxy
     internal static let enableProxy = L10n.tr("Localizable", "accountPage.enableProxy")
+    /// Your device won't receive notifications when proxy is disabled
+    internal static let noProxyExplanationLabel = L10n.tr("Localizable", "accountPage.noProxyExplanationLabel")
+    /// Provide proxy address
+    internal static let proxyAddressAlert = L10n.tr("Localizable", "accountPage.proxyAddressAlert")
+    /// Proxy address
+    internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder")
+    /// Save
+    internal static let saveProxyAddress = L10n.tr("Localizable", "accountPage.saveProxyAddress")
     /// Settings
     internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
     /// UNBLOCK
