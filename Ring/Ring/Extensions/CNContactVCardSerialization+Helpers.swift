@@ -85,4 +85,24 @@ extension CNContactVCardSerialization {
 
         return vCardString.data(using: .utf8)!
     }
+
+    class func parseToVCard(data: Data) -> CNContact? {
+        do {
+            let vCards = try CNContactVCardSerialization.contacts(with: data)
+            guard let vCard = vCards.first else { return nil }
+            if let returnData = String(data: data, encoding: .utf8) {
+                let contentArr = returnData.components(separatedBy: "\n")
+                if let nameRow = contentArr.filter({String($0.prefix(3)) == VCardFields.fullName.rawValue}).first {
+                    let vcard = CNMutableContact()
+                    let name = String(nameRow.suffix(nameRow.count - 3))
+                    vcard.familyName = name
+                    vcard.imageData = vCard.imageData
+                    return vcard
+                }
+            }
+            return vCard
+        } catch {
+            return nil
+        }
+    }
 }
