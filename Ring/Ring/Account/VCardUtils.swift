@@ -58,17 +58,15 @@ class VCardUtils {
                     single(.error(ContactServiceError.loadVCardFailed))
                 }
             } else if let directoryURL = VCardUtils.getFilePath(forFile: name, inFolder: folder, createIfNotExists: false) {
-                do {
-                    if let data = FileManager.default.contents(atPath: directoryURL.path) {
-                        let vCard = try CNContactVCardSerialization.contacts(with: data)
-                        if vCard.isEmpty {
-                            single(.error(ContactServiceError.loadVCardFailed))
-                        } else {
-                            single(.success(vCard.first!))
-                        }
+                if let data = FileManager.default.contents(atPath: directoryURL.path) {
+                    if let returnData = String(data: data, encoding: .utf8) {
+                        print("dataString", returnData)
                     }
-                } catch {
-                    single(.error(ContactServiceError.loadVCardFailed))
+                    if let vCard = CNContactVCardSerialization.parceToVCard(data: data) {
+                        single(.success(vCard))
+                    } else {
+                        single(.error(ContactServiceError.loadVCardFailed))
+                    }
                 }
             } else {
                 single(.error(ContactServiceError.loadVCardFailed))

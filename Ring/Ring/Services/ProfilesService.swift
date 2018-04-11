@@ -129,23 +129,19 @@ class ProfilesService {
         }
 
         //Create the vCard, save and db and emit a new event
-        do {
-            if let vCard = try CNContactVCardSerialization.contacts(with: vCardData).first {
-                let name = VCardUtils.getName(from: vCard)
-                var stringImage: String?
-                if let image = vCard.imageData {
-                    stringImage = image.base64EncodedString()
-                }
-                let uri = ringID.replacingOccurrences(of: "@ring.dht", with: "")
-                _ = self.dbManager
-                    .createOrUpdateRingProfile(profileUri: uri,
-                                               alias: name,
-                                               image: stringImage,
-                                               status: ProfileStatus.untrasted)
-                self.updateProfileFor(ringId: uri, createIfNotexists: false)
+        if let vCard = CNContactVCardSerialization.parceToVCard(data: vCardData) {
+            let name = VCardUtils.getName(from: vCard)
+            var stringImage: String?
+            if let image = vCard.imageData {
+                stringImage = image.base64EncodedString()
             }
-        } catch {
-            self.log.error(error)
+            let uri = ringID.replacingOccurrences(of: "@ring.dht", with: "")
+            _ = self.dbManager
+                .createOrUpdateRingProfile(profileUri: uri,
+                                           alias: name,
+                                           image: stringImage,
+                                           status: ProfileStatus.untrasted)
+            self.updateProfileFor(ringId: uri, createIfNotexists: false)
         }
     }
 
