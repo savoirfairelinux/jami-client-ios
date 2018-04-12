@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_ca949b39",
+        "filename": "Ring/Ring/Coordinators/AppCoordinator.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-04-12T20:09:57Z",
+      "side": 1,
+      "message": "pushConversation",
+      "range": {
+        "startLine": 183,
+        "startChar": 36,
+        "endLine": 183,
+        "endChar": 52
+      },
+      "revId": "2434cc37e75fac7267330b1a57ef7f15b9ce5279",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_ea8fd721",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-04-12T20:09:57Z",
+      "side": 1,
+      "message": "pushConversation",
+      "range": {
+        "startLine": 70,
+        "startChar": 9,
+        "endLine": 70,
+        "endChar": 25
+      },
+      "revId": "2434cc37e75fac7267330b1a57ef7f15b9ce5279",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
