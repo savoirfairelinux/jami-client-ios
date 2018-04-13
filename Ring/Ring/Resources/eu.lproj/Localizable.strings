@@ -19,45 +19,45 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
-"global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Profilo";
+"global.homeTabBarTitle" = "Hasiera";
+"global.contactRequestsTabBarTitle" = "Gonbidapenak";
+"global.meTabBarTitle" = "Kontua";
 "global.ok" = "Ok";
 
 // Smartlist
-"smartlist.yesterday" = "Ieri";
+"smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Search Result";
-"smartlist.conversations" = "Converzazioni";
+"smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "Connessione di rete assente";
+"smartlist.noNetworkConnectivity" = "No network connectivity";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Benvenuto in Ring";
+"welcome.title" = "Ongi etorri Ring-era";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Creare un account Ring";
+"welcome.linkDevice" = "Estekatu gailua kontu batekin";
+"welcome.createAccount" = "Create a Ring account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
-"createProfile.profileCreated" = "Seguente";
+"createProfile.profileCreated" = "Next";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "nome utente";
+"createAccount.enterNewUsernamePlaceholder" = "username";
 "createAccount.newPasswordPlaceholder" = "password";
 "createAccount.repeatPasswordPlaceholder" = "confirm password";
-"createAccount.passwordCharactersNumberError" = "6 caratteri minimo";
+"createAccount.passwordCharactersNumberError" = "6 characters minimum";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for username availability";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Aggiunta account ";
+"createAccount.waitCreateAccountTitle" = "Adding account";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
@@ -76,9 +76,9 @@
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Scattare una foto";
+"alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancella";
+"alerts.profileCancelPhoto" = "Ezeztatu";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -89,23 +89,23 @@
 "alerts.confirmDeleteConversationTitle" = "Delete Conversation";
 
 //Actions
-"actions.blockAction" = "Blocca";
-"actions.deleteAction" = "Cancella";
-"actions.cancelAction" = "Cancella";
+"actions.blockAction" = "Block";
+"actions.deleteAction" = "Ezabatu";
+"actions.cancelAction" = "Ezeztatu";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "Accettare";
+"alerts.incomingCallButtonAccept" = "Accept";
 "alerts.incomingCallButtonIgnore" = "Ignore";
 
 //Calls
-"calls.callItemTitle" = "Chiama";
-"calls.unknown" = "Sconosciuto";
+"calls.callItemTitle" = "Call";
+"calls.unknown" = "Unknown";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.calling" = "Calling...";
 "calls.callFinished" = "Call finished";
 
 //Account Page
-"accountPage.devicesListHeader" = "Dispositivi";
-"accountPage.settingsHeader" = "Impostazioni";
+"accountPage.devicesListHeader" = "Devices";
+"accountPage.settingsHeader" = "Settings";
 "accountPage.username" = "username:";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -115,7 +115,7 @@
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Salvare";
+"accountPage.saveProxyAddress" = "Save";
 "accountPage.proxyPaceholder" = "Proxy address";
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
@@ -138,12 +138,12 @@
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
-"dataTransfer.readableStatusError" = "Errore";
+"dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Rifiuta";
+"dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accettare";
-"dataTransfer.readableStatusCancel" = "Cancella";
+"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusCancel" = "Ezeztatu";
 

@@ -109,9 +109,17 @@
 "accountPage.username" = "nom d'utilisateur :";
 "accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
 "accountPage.credentialsHeader" = "Détails du compte";
-"accountPage.enableProxy" = "Activer les notifications de type pousser";
+"accountPage.enableProxy" = "Enable Proxy";
 "accountPage.blockedContacts" = "Liste des utilisateurs bloqués";
 "accountPage.unblockContact" = "Débloquer";
+"accountPage.proxyAddressAlert" = "Provide proxy address";
+"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.saveProxyAddress" = "Sauvegarder";
+"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.enableNotifications" = "Activer les notifications";
+"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
+"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
 
 //Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";
