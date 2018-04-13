@@ -109,9 +109,17 @@
 "accountPage.username" = "gebruikersnaam:";
 "accountPage.usernameNotRegistered" = "gebruikersnaam: niet geregistreerd";
 "accountPage.credentialsHeader" = "Accountgegevens";
-"accountPage.enableProxy" = "Pushmeldingen inschakelen";
+"accountPage.enableProxy" = "Enable Proxy";
 "accountPage.blockedContacts" = "Blokkeringslijst";
 "accountPage.unblockContact" = "Deblokkeren";
+"accountPage.proxyAddressAlert" = "Provide proxy address";
+"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.saveProxyAddress" = "Opslaan";
+"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.enableNotifications" = "Notificaties inschakelen";
+"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
+"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
 
 //Link New Device
 "linkDevice.title" = "Een nieuw apparaat koppelen";

@@ -109,9 +109,17 @@
 "accountPage.username" = "brugernavn:";
 "accountPage.usernameNotRegistered" = "brugernavn: ikke registreret";
 "accountPage.credentialsHeader" = "Kontodetaljer";
-"accountPage.enableProxy" = "Aktiver push-notifikationer";
+"accountPage.enableProxy" = "Enable Proxy";
 "accountPage.blockedContacts" = "Blokeringsliste";
 "accountPage.unblockContact" = "UBLOKER";
+"accountPage.proxyAddressAlert" = "Provide proxy address";
+"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.saveProxyAddress" = "Gem";
+"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.enableNotifications" = "Aktivér beskeder";
+"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
+"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
 
 //Link New Device
 "linkDevice.title" = "Tilknyt en ny enhed";
