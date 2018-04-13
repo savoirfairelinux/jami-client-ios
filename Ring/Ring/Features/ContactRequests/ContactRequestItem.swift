@@ -27,6 +27,7 @@ class ContactRequestItem {
     let contactRequest: ContactRequestModel
 
     let userName = Variable("")
+    let profileName = Variable("")
     let profileImageData = Variable<Data?>(nil)
     let disposeBag = DisposeBag()
 
@@ -36,11 +37,14 @@ class ContactRequestItem {
         self.userName.value = contactRequest.ringId
         self.profileImageData.value = self.contactRequest.vCard?.imageData
         profileService.getProfile(ringId: contactRequest.ringId, createIfNotexists: false)
-            .subscribe(onNext: { [unowned self] profile in
+            .subscribe(onNext: { [weak self] profile in
                 if let photo = profile.photo,
                     let data = NSData(base64Encoded: photo,
                                       options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self.profileImageData.value = data
+                    self?.profileImageData.value = data
+                    if let name = profile.alias, !name.isEmpty {
+                        self?.profileName.value = name
+                    }
                 }
             }).disposed(by: self.disposeBag)
     }

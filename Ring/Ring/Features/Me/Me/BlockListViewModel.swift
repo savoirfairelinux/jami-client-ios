@@ -64,6 +64,7 @@ class BlockListViewModel: ViewModel {
                 var item = BannedContactItem(withContact: contact)
                 self.contactService.getProfileForUri(uri: contact.ringId)
                     .subscribe(onNext: { (profile) in
+                        item.displayName = profile.alias
                         guard let photo = profile.photo else {
                             return
                         }
@@ -72,7 +73,6 @@ class BlockListViewModel: ViewModel {
                                                     .ignoreUnknownCharacters) as Data? else {
                                                     return
                         }
-                        item.displayName = profile.alias
                         item.image = data
                     }).disposed(by: self.disposeBag)
                 if contact.userName == nil || contact.userName! == "" {

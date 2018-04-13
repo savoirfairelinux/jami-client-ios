@@ -57,8 +57,12 @@ class ConversationCell: UITableViewCell, NibReusable {
     func configureFromItem(_ item: ConversationSection.Item) {
         // avatar
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
-                                                  item.userName.asObservable()) { profileImage, username in
-                                                            return (profileImage, username)
+                                                  item.userName.asObservable(),
+                                                  item.displayName.asObservable()) { profileImage, username, displayName in
+                                                    if let displayName = displayName, !displayName.isEmpty {
+                                                        return (profileImage, displayName)
+                                                    }
+                                                    return (profileImage, username)
             }
             .observeOn(MainScheduler.instance)
             .startWith((item.profileImageData.value, item.userName.value))
