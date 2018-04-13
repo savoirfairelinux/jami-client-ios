@@ -279,7 +279,10 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         profileImageView.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
         profileImageView.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
 
-        if let bestId = username {
+        if let profileName = displayName, !profileName.isEmpty {
+            profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: profileName, size: 36))
+            titleView.addSubview(profileImageView)
+        } else if let bestId = username {
             profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: bestId, size: 36))
             titleView.addSubview(profileImageView)
         }

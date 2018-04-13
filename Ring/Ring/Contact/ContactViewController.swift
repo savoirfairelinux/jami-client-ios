@@ -67,7 +67,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         // avatar
         Observable<(Data?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
-                                                  self.viewModel.userName.asObservable()) { profileImage, username in
+                                                  self.viewModel.displayName.asObservable()) { profileImage, username in
                                                     return (profileImage, username)
             }
             .observeOn(MainScheduler.instance)

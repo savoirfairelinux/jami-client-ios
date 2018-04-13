@@ -316,7 +316,11 @@ class MessageCell: UITableViewCell, NibReusable {
         } else if item.bubblePosition() == .received {
             // received message avatar
             Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
-                                                      conversationViewModel.userName.asObservable()) { profileImage, username in
+                                                      conversationViewModel.userName.asObservable(),
+                                                      conversationViewModel.displayName.asObservable()) { profileImage, username, displayName in
+                                                        if let displayName = displayName, !displayName.isEmpty {
+                                                            return (profileImage, displayName)
+                                                        }
                                                         return (profileImage, username)
                 }
                 .observeOn(MainScheduler.instance)

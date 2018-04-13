@@ -41,7 +41,7 @@ class BannedContactCell: UITableViewCell, NibReusable {
         // avatar
         self.profileImageView.subviews.forEach({ $0.removeFromSuperview() })
         self.profileImageView.addSubview(AvatarView(profileImageData: item.image,
-                                                    username: item.contact.userName ?? item.contact.ringId,
+                                                    username: item.displayName ?? (item.contact.userName ?? item.contact.ringId),
                                                     size: 40))
 
         if let displayName = item.displayName {

@@ -55,7 +55,11 @@ class ContactRequestCell: UITableViewCell, NibReusable {
     func configureFromItem(_ item: ContactRequestItem) {
         // avatar
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
-                                                  item.userName.asObservable()) { profileImage, username in
+                                                  item.userName.asObservable(),
+                                                  item.profileName.asObservable()) { profileImage, username, profileName in
+                                                    if !profileName.isEmpty {
+                                                        return (profileImage, profileName)
+                                                    }
                                                     return (profileImage, username)
             }
             .observeOn(MainScheduler.instance)
