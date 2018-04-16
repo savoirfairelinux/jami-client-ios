@@ -1,6 +1,5 @@
 #! /bin/sh
 
-export BUILDFORIOS=1
 export MIN_IOS_VERSION=9.3
 IOS_TARGET_PLATFORM=iPhoneSimulator
 RELEASE=0
@@ -20,7 +19,10 @@ done
 
 if test -z "$HOST"
 then
-  if [ "$IOS_TARGET_PLATFORM" = "iPhoneSimulator" ]
+  if [ "$IOS_TARGET_PLATFORM" = "all" ]
+  then
+      ARCHS=("arm64" "x86_64")
+  elif [ "$IOS_TARGET_PLATFORM" = "iPhoneSimulator" ]
   then
       ARCHS=("x86_64")
   elif [ "$IOS_TARGET_PLATFORM" = "iPhoneOS" ]
@@ -30,23 +32,19 @@ then
 else
     ARCHS=("${HOST%%-*}")
   case "$HOST" in
-    armv7-*)
-        IOS_TARGET_PLATFORM="iPhoneOS"
-    ;;
     aarch64-*)
         IOS_TARGET_PLATFORM="iPhoneOS"
         ARCHS=("arm64")
     ;;
     x86_64-*)
         IOS_TARGET_PLATFORM="iPhoneSimulator"
+        ARCHS=("x86_64")
     ;;
   esac
 fi
 
 export IOS_TARGET_PLATFORM
 echo "Building for $IOS_TARGET_PLATFORM for $ARCHS"
-
-SDKROOT=`xcode-select -print-path`/Platforms/${IOS_TARGET_PLATFORM}.platform/Developer/SDKs/${IOS_TARGET_PLATFORM}${SDK_VERSION}.sdk
 
 if [ ! `which gas-preprocessor.pl` ]
 then
@@ -56,11 +54,6 @@ then
 		&& chmod +x /usr/local/bin/gas-preprocessor.pl) \
 		|| exit 1
 fi
-
-SDK="`echo "print '${IOS_TARGET_PLATFORM}'.lower()" | python`"
-
-CC="xcrun -sdk $SDK clang"
-CXX="xcrun -sdk $SDK clang++"
 
 IOS_TOP_DIR="$(pwd)"
 
@@ -85,27 +78,36 @@ cd $DAEMON_DIR
 
 for ARCH in "${ARCHS[@]}"
 do
-	mkdir -p contrib/native-$ARCH
-	cd contrib/native-$ARCH
+  if [ "$ARCH" = "arm64" ]
+  then
+      HOST=aarch64-apple-darwin_ios
+      IOS_TARGET_PLATFORM=iPhoneOS
+  elif [ "$ARCH" = "x86_64" ]
+  then
+      HOST=x86_64-apple-darwin_ios
+      IOS_TARGET_PLATFORM=iPhoneSimulator
+  fi
 
-    if test -z "$HOST"
-    then
-        if [ "$ARCH" = "arm64" ]
-        then
-            HOST=aarch64-apple-darwin_ios
-        else
-            HOST=$ARCH-apple-darwin_ios
-        fi
-    fi
+  echo "Now building for $IOS_TARGET_PLATFORM for $ARCH"
 
-	SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --enable-ffmpeg
+  SDKROOT=`xcode-select -print-path`/Platforms/${IOS_TARGET_PLATFORM}.platform/Developer/SDKs/${IOS_TARGET_PLATFORM}${SDK_VERSION}.sdk
 
-	echo "Building contrib"
-        make fetch
-	make -j$NPROC || exit 1
+  SDK="`echo "print '${IOS_TARGET_PLATFORM}'.lower()" | python`"
 
-	cd ../..
-	echo "Building daemon"
+  CC="xcrun -sdk $SDK clang"
+  CXX="xcrun -sdk $SDK clang++"
+
+  mkdir -p contrib/native-$ARCH
+  cd contrib/native-$ARCH
+
+  SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --enable-ffmpeg --enable-restbed
+
+  echo "Building contrib"
+  make fetch
+  make -j$NPROC || exit 1
+
+  cd ../..
+  echo "Building daemon"
 
     CFLAGS="-arch $ARCH -isysroot $SDKROOT"
     if [ "$IOS_TARGET_PLATFORM" = "iPhoneOS" ]
@@ -123,8 +125,8 @@ do
     CXXFLAGS="-stdlib=libc++ -std=c++14 $CFLAGS"
     LDFLAGS="$CFLAGS"
 
-	./autogen.sh || exit 1
-	mkdir -p "build-ios-$ARCH"
+    ./autogen.sh || exit 1
+    mkdir -p "build-ios-$ARCH"
     cd build-ios-$ARCH
 
     RING_CONF="--host=$HOST \
@@ -138,7 +140,7 @@ do
         RING_CONF+=" --enable-debug"
     fi
 
-	$DAEMON_DIR/configure $RING_CONF \
+    $DAEMON_DIR/configure $RING_CONF \
                             CC="$CC $CFLAGS" \
                             CXX="$CXX $CXXFLAGS" \
                             LD="$LD" \
@@ -170,11 +172,12 @@ then
     LIBFILES=$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/*.a
     for f in $LIBFILES
     do
-        echo "Processing $f lib..."
-        #There is only 2 ARCH max... So let's make it simple
-        lipo -create "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/$f"  \
-        						 "$IOS_TOP_DIR/DEPS/${ARCHS[1]}/lib/$f" \
-        						 -output "$FAT_DIR/lib/$f"
+      libFile=${f##*/}
+      echo "Processing $libFile lib..."
+      #There is only 2 ARCH max... So let's make it simple
+      lipo -create  "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/$libFile"  \
+                    "$IOS_TOP_DIR/DEPS/${ARCHS[1]}/lib/$libFile" \
+                    -output "$FAT_DIR/lib/$libFile"
     done
 else
     echo "No need for fat lib"
