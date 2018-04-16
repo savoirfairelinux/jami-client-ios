@@ -8,155 +8,156 @@ RELEASE=0
 while test -n "$1"
 do
   case "$1" in
-  --platform=*)
-  IOS_TARGET_PLATFORM="${1#--platform=}"
-  ;;
-  --host=*)
-  HOST="${1#--host=}"
-  ;;
+    --platform=*)
+      IOS_TARGET_PLATFORM="${1#--platform=}"
+    ;;
+    --host=*)
+      HOST="${1#--host=}"
+    ;;
   esac
   shift
 done
 
 if test -z "$HOST"
 then
-  if [ "$IOS_TARGET_PLATFORM" = "iPhoneSimulator" ]
+  if [ "$IOS_TARGET_PLATFORM" = "all" ]
   then
-      ARCHS=("x86_64")
+    ARCHS=("arm64" "x86_64")
+  elif [ "$IOS_TARGET_PLATFORM" = "iPhoneSimulator" ]
+  then
+    ARCHS=("x86_64")
   elif [ "$IOS_TARGET_PLATFORM" = "iPhoneOS" ]
   then
-      ARCHS=("arm64")
+    ARCHS=("arm64")
   fi
 else
-    ARCHS=("${HOST%%-*}")
+  ARCHS=("${HOST%%-*}")
   case "$HOST" in
-    armv7-*)
-        IOS_TARGET_PLATFORM="iPhoneOS"
-    ;;
     aarch64-*)
-        IOS_TARGET_PLATFORM="iPhoneOS"
-        ARCHS=("arm64")
+      IOS_TARGET_PLATFORM="iPhoneOS"
+      ARCHS=("arm64")
     ;;
     x86_64-*)
-        IOS_TARGET_PLATFORM="iPhoneSimulator"
+      IOS_TARGET_PLATFORM="iPhoneSimulator"
+      ARCHS=("x86_64")
     ;;
   esac
+fi
+
+if [ ! `which gas-preprocessor.pl` ]
+then
+  echo 'gas-preprocessor.pl not found. Trying to install...'
+  (curl -L https://github.com/libav/gas-preprocessor/raw/master/gas-preprocessor.pl \
+    -o /usr/local/bin/gas-preprocessor.pl \
+    && chmod +x /usr/local/bin/gas-preprocessor.pl) \
+    || exit 1
+fi
+
+IOS_TOP_DIR="$(pwd)"
+
+if [ -z "$DAEMON_DIR" ]; then
+  DAEMON_DIR="$(pwd)/../daemon"
+  echo "DAEMON_DIR not provided trying to find it in $DAEMON_DIR"
+fi
+if [ ! -d "$DAEMON_DIR" ]; then
+  echo 'Daemon not found.'
+  echo 'If you cloned the daemon in a custom location override' \
+       'use DAEMON_DIR to point to it'
+  echo "You can also use our meta repo which contains both:
+        https://gerrit-ring.savoirfairelinux.com/#/admin/projects/ring-project"
+  exit 1
+fi
+
+if [ -z "$NPROC"  ]; then
+  NPROC=`sysctl -n hw.ncpu || echo -n 1`
 fi
 
 export IOS_TARGET_PLATFORM
 echo "Building for $IOS_TARGET_PLATFORM for $ARCHS"
 
-SDKROOT=`xcode-select -print-path`/Platforms/${IOS_TARGET_PLATFORM}.platform/Developer/SDKs/${IOS_TARGET_PLATFORM}${SDK_VERSION}.sdk
-
-if [ ! `which gas-preprocessor.pl` ]
-then
-	echo 'gas-preprocessor.pl not found. Trying to install...'
-	(curl -L https://github.com/libav/gas-preprocessor/raw/master/gas-preprocessor.pl \
-		-o /usr/local/bin/gas-preprocessor.pl \
-		&& chmod +x /usr/local/bin/gas-preprocessor.pl) \
-		|| exit 1
-fi
-
-SDK="`echo "print '${IOS_TARGET_PLATFORM}'.lower()" | python`"
-
-CC="xcrun -sdk $SDK clang"
-CXX="xcrun -sdk $SDK clang++"
-
-IOS_TOP_DIR="$(pwd)"
-
-if [ -z "$DAEMON_DIR" ]; then
-    DAEMON_DIR="$(pwd)/../daemon"
-    echo "DAEMON_DIR not provided trying to find it in $DAEMON_DIR"
-fi
-if [ ! -d "$DAEMON_DIR" ]; then
-    echo 'Daemon not found.'
-    echo 'If you cloned the daemon in a custom location override' \
-            'DAEMON_DIR to point to it'
-    echo "You can also use our meta repo which contains both:
-          https://gerrit-ring.savoirfairelinux.com/#/admin/projects/ring-project"
-    exit 1
-fi
-
-if [ -z "$NPROC"  ]; then
-    NPROC=`sysctl -n hw.ncpu || echo -n 1`
-fi
-
 cd $DAEMON_DIR
 
 for ARCH in "${ARCHS[@]}"
 do
-	mkdir -p contrib/native-$ARCH
-	cd contrib/native-$ARCH
+  mkdir -p contrib/native-$ARCH
+  cd contrib/native-$ARCH
 
-    if test -z "$HOST"
-    then
-        if [ "$ARCH" = "arm64" ]
-        then
-            HOST=aarch64-apple-darwin_ios
-        else
-            HOST=$ARCH-apple-darwin_ios
-        fi
-    fi
+  if [ "$ARCH" = "arm64" ]
+  then
+    HOST=aarch64-apple-darwin_ios
+    IOS_TARGET_PLATFORM="iPhoneOS"
+  else
+    HOST=$ARCH-apple-darwin_ios
+    IOS_TARGET_PLATFORM="iPhoneSimulator"
+  fi
+  export IOS_TARGET_PLATFORM
 
-	SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --enable-ffmpeg
+  SDKROOT=`xcode-select -print-path`/Platforms/${IOS_TARGET_PLATFORM}.platform/Developer/SDKs/${IOS_TARGET_PLATFORM}${SDK_VERSION}.sdk
 
-	echo "Building contrib"
-        make fetch
-	make -j$NPROC || exit 1
+  SDK="`echo "print '${IOS_TARGET_PLATFORM}'.lower()" | python`"
 
-	cd ../..
-	echo "Building daemon"
+  CC="xcrun -sdk $SDK clang"
+  CXX="xcrun -sdk $SDK clang++"
 
-    CFLAGS="-arch $ARCH -isysroot $SDKROOT"
-    if [ "$IOS_TARGET_PLATFORM" = "iPhoneOS" ]
-    then
-        CFLAGS+=" -miphoneos-version-min=$MIN_IOS_VERSION -fembed-bitcode"
-    else
-        CFLAGS+=" -mios-simulator-version-min=$MIN_IOS_VERSION"
-    fi
+  SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --enable-ffmpeg
 
-    if [ "$RELEASE" = "1" ]
-    then
-        CFLAGS+=" -O3"
-    fi
+  echo "Building contrib"
+  make fetch
+  make -j$NPROC || exit 1
 
-    CXXFLAGS="-stdlib=libc++ -std=c++14 $CFLAGS"
-    LDFLAGS="$CFLAGS"
+  cd ../..
+  echo "Building daemon"
 
-	./autogen.sh || exit 1
-	mkdir -p "build-ios-$ARCH"
-    cd build-ios-$ARCH
+  CFLAGS="-arch $ARCH -isysroot $SDKROOT"
+  if [ "$IOS_TARGET_PLATFORM" = "iPhoneOS" ]
+  then
+    CFLAGS+=" -miphoneos-version-min=$MIN_IOS_VERSION -fembed-bitcode"
+  else
+    CFLAGS+=" -mios-simulator-version-min=$MIN_IOS_VERSION"
+  fi
 
-    RING_CONF="--host=$HOST \
-              --without-dbus \
-              --enable-static \
-              --disable-shared \
-              --prefix=$IOS_TOP_DIR/DEPS/$ARCH"
+  if [ "$RELEASE" = "1" ]
+  then
+    CFLAGS+=" -O3"
+  fi
 
-    if [ "$RELEASE" = "0" ]
-    then
-        RING_CONF+=" --enable-debug"
-    fi
+  CXXFLAGS="-stdlib=libc++ -std=c++14 $CFLAGS"
+  LDFLAGS="$CFLAGS"
 
-	$DAEMON_DIR/configure $RING_CONF \
-                            CC="$CC $CFLAGS" \
-                            CXX="$CXX $CXXFLAGS" \
-                            LD="$LD" \
-                            CFLAGS="$CFLAGS" \
-                            CXXFLAGS="$CXXFLAGS" \
-                            LDFLAGS="$LDFLAGS" || exit 1
+  ./autogen.sh || exit 1
+  mkdir -p "build-ios-$ARCH"
+  cd build-ios-$ARCH
 
-    # We need to copy this file or else it's just an empty file
-    rsync -a $DAEMON_DIR/src/buildinfo.cpp ./src/buildinfo.cpp
+  RING_CONF="--host=$HOST \
+             --without-dbus \
+             --enable-static \
+             --disable-shared \
+             --prefix=$IOS_TOP_DIR/DEPS/$ARCH"
 
-    make -j$NPROC || exit 1
-    make install || exit 1
+  if [ "$RELEASE" = "0" ]
+  then
+    RING_CONF+=" --enable-debug"
+  fi
 
-    rsync -ar $DAEMON_DIR/contrib/$HOST/lib/*.a $IOS_TOP_DIR/DEPS/$ARCH/lib/
-    cd $IOS_TOP_DIR/DEPS/$ARCH/lib/
-    for i in *.a ; do mv "$i" "${i/-$HOST.a/.a}" ; done
+  $DAEMON_DIR/configure $RING_CONF \
+                        CC="$CC $CFLAGS" \
+                        CXX="$CXX $CXXFLAGS" \
+                        LD="$LD" \
+                        CFLAGS="$CFLAGS" \
+                        CXXFLAGS="$CXXFLAGS" \
+                        LDFLAGS="$LDFLAGS" || exit 1
 
-    cd $DAEMON_DIR
+  # We need to copy this file or else it's just an empty file
+  rsync -a $DAEMON_DIR/src/buildinfo.cpp ./src/buildinfo.cpp
+
+  make -j$NPROC || exit 1
+  make install || exit 1
+
+  rsync -ar $DAEMON_DIR/contrib/$HOST/lib/*.a $IOS_TOP_DIR/DEPS/$ARCH/lib/
+  cd $IOS_TOP_DIR/DEPS/$ARCH/lib/
+  for i in *.a ; do mv "$i" "${i/-$HOST.a/.a}" ; done
+
+  cd $DAEMON_DIR
 done
 
 cd $IOS_TOP_DIR
@@ -164,21 +165,23 @@ cd $IOS_TOP_DIR
 FAT_DIR=$IOS_TOP_DIR/fat
 mkdir -p $FAT_DIR
 
-if ((${#ARCHS[@]} > "1"))
+if ((${#ARCHS[@]} == "2"))
 then
-    echo "Making fat lib for $ARCHS"
-    LIBFILES=$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/*.a
-    for f in $LIBFILES
-    do
-        echo "Processing $f lib..."
-        #There is only 2 ARCH max... So let's make it simple
-        lipo -create "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/$f"  \
-        						 "$IOS_TOP_DIR/DEPS/${ARCHS[1]}/lib/$f" \
-        						 -output "$FAT_DIR/lib/$f"
-    done
+  mkdir -p $FAT_DIR/lib
+  echo "Making fat lib for ${ARCHS[0]} and ${ARCHS[1]}"
+  LIBFILES=$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/*.a
+  for f in $LIBFILES
+  do
+    libFile=${f##*/}
+    echo "Processing $libFile lib..."
+    #There is only 2 ARCH max... So let's make it simple
+    lipo -create  "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/$libFile"  \
+                  "$IOS_TOP_DIR/DEPS/${ARCHS[1]}/lib/$libFile" \
+                  -output "$FAT_DIR/lib/$libFile"
+  done
 else
-    echo "No need for fat lib"
-    rsync -ar --delete $IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/*.a $FAT_DIR/lib
+  echo "No need for fat lib"
+  rsync -ar --delete $IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/*.a $FAT_DIR/lib
 fi
 
 rsync -ar --delete $IOS_TOP_DIR/DEPS/${ARCHS[0]}/include/* $FAT_DIR/include
