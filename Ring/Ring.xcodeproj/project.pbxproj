@@ -76,7 +76,6 @@
 		04399B011D1C341A00E99CD9 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACF1D1C341A00E99CD9 /* libpjsip.a */; };
 		04399B021D1C341A00E99CD9 /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD01D1C341A00E99CD9 /* libpjsua.a */; };
 		04399B031D1C341A00E99CD9 /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD11D1C341A00E99CD9 /* libpjsua2.a */; };
-		04399B041D1C341A00E99CD9 /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD21D1C341A00E99CD9 /* libpostproc.a */; };
 		04399B061D1C341A00E99CD9 /* libring.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD41D1C341A00E99CD9 /* libring.a */; };
 		04399B071D1C341A00E99CD9 /* libsamplerate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD51D1C341A00E99CD9 /* libsamplerate.a */; };
 		04399B081D1C341A00E99CD9 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD61D1C341A00E99CD9 /* libsndfile.a */; };
@@ -713,7 +712,6 @@
 				04399B011D1C341A00E99CD9 /* libpjsip.a in Frameworks */,
 				04399B021D1C341A00E99CD9 /* libpjsua.a in Frameworks */,
 				04399B031D1C341A00E99CD9 /* libpjsua2.a in Frameworks */,
-				04399B041D1C341A00E99CD9 /* libpostproc.a in Frameworks */,
 				04399B061D1C341A00E99CD9 /* libring.a in Frameworks */,
 				04399B071D1C341A00E99CD9 /* libsamplerate.a in Frameworks */,
 				04399B081D1C341A00E99CD9 /* libsndfile.a in Frameworks */,
