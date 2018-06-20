@@ -25,6 +25,8 @@ import Foundation
 import MobileCoreServices
 import Photos
 
+// swiftlint:disable identifier_name
+
 enum DataTransferServiceError: Error {
     case createTransferError
     case updateTransferError

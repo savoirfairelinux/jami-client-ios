@@ -27,6 +27,8 @@ import Chameleon
 import Contacts
 import PushKit
 
+// swiftlint:disable identifier_name
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
