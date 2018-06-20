@@ -109,17 +109,17 @@
 "accountPage.username" = "Användarnamn:";
 "accountPage.usernameNotRegistered" = "Användarnamn: Inte registrerat";
 "accountPage.credentialsHeader" = "Kontoinformation";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Aktivera proxy";
 "accountPage.blockedContacts" = "Blocklista";
 "accountPage.unblockContact" = "AVBLOCKERA";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.proxyAddressAlert" = "Ange proxyadress";
+"accountPage.enableProxy" = "Aktivera proxy";
+"accountPage.noProxyExplanationLabel" = "Din enhet tar inte emot aviseringar när proxy är inaktiverat";
 "accountPage.saveProxyAddress" = "Spara";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "Proxyadress";
 "accountPage.enableNotifications" = "Aktivera aviseringar";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertTitle" = "Proxyserver inaktiverad";
+"accountPage.proxyDisabledAlertBody" = "Aktivera proxy, för att ta emot aviseringar";
 
 //Link New Device
 "linkDevice.title" = "Länka en ny enhet";

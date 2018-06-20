@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Gestern";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Suchergebnis";
 "smartlist.conversations" = "Unterhaltungen";
 "smartlist.searching" = "Suchen...";
 "smartlist.noResults" = "Keine Ergebnisse";
@@ -42,7 +42,7 @@
 "welcome.createAccount" = "Ein Ring-Konto erstellen";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Überspringen";
 "createProfile.profileCreated" = "Weiter";
 
 //Create Account form
@@ -92,7 +92,7 @@
 "actions.blockAction" = "Sperren";
 "actions.deleteAction" = "Löschen";
 "actions.cancelAction" = "Abbrechen";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Eingehender Anruf von ";
 "alerts.incomingCallButtonAccept" = "Akzeptieren";
 "alerts.incomingCallButtonIgnore" = "Ignorieren";
 
@@ -122,7 +122,7 @@
 "accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Verbinde ein neues Gerät";
 "linkDevice.passwordError" = "Das eingegebene Kennwort entsperrt dieses Konto nicht.";
 "linkDevice.networkError" = "Ein Netzwerkfehler ist während des Exports aufgetreten";
 "linkDevice.defaultError" = "Während des Exports ist ein Fehler aufgetreten";
@@ -130,9 +130,9 @@
 "linkDevice.hudMessage" = "Verifiziere";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
+"contactPage.startAudioCall" = "Audioanruf starten";
+"contactPage.startVideoCall" = "Videoanruf starten";
+"contactPage.sendMessage" = "Nachricht senden";
 "contactPage.clearConversation" = "Clear Chat";
 "contactPage.blockContact" = "Kontakt sperren";
 

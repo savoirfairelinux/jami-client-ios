@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ontem";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Resultado da Busca";
 "smartlist.conversations" = "Conversas";
 "smartlist.searching" = "Buscando...";
 "smartlist.noResults" = "Nenhum resultado";
@@ -42,7 +42,7 @@
 "welcome.createAccount" = "Criar uma conta no Ring";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Pular";
 "createProfile.profileCreated" = "Próximo";
 
 //Create Account form
@@ -85,7 +85,7 @@
 "alerts.confirmBlockContact" = "Tem certeza de que deseja bloquear este contato? O histórico de conversas com este contato também será excluído permanentemente.";
 "alerts.confirmBlockContactTitle" = "Bloquear Contato";
 "alerts.confirmDeleteConversation" = "Tem certeza de que deseja excluir esta conversa permanentemente?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
+"alerts.confirmDeleteConversationFromContact" = "Tem certeza de que deseja excluir a conversa com este contato?";
 "alerts.confirmDeleteConversationTitle" = "Excluir Conversa";
 
 //Actions
@@ -106,20 +106,20 @@
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Configurações";
-"accountPage.username" = "username:";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.username" = "nome de usuário:";
+"accountPage.usernameNotRegistered" = "usuário: não registrado";
+"accountPage.credentialsHeader" = "Detalhes da Conta";
+"accountPage.enableProxy" = "Habilitar Proxy";
 "accountPage.blockedContacts" = "Lista de Bloqueados";
 "accountPage.unblockContact" = "DESBLOQUEAR";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.proxyAddressAlert" = "Forneça o endereço do proxy";
+"accountPage.enableProxy" = "Habilitar Proxy";
+"accountPage.noProxyExplanationLabel" = "Seu dispositivo não receberá notificações quando o proxy estiver desativado";
 "accountPage.saveProxyAddress" = "Salvar";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "Endereço do proxy";
 "accountPage.enableNotifications" = "Habilitar Notificações";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertTitle" = "Servidor Proxy Desativado";
+"accountPage.proxyDisabledAlertBody" = "Para receber as notificações, favor ativar o proxy";
 
 //Link New Device
 "linkDevice.title" = "Associar um novo dispositivo";
@@ -130,20 +130,20 @@
 "linkDevice.hudMessage" = "Verificando";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
+"contactPage.startAudioCall" = "Iniciar Chamada de Áudio";
+"contactPage.startVideoCall" = "Iniciar Chmada de Vídeo";
+"contactPage.sendMessage" = "Enviar Mensagem";
+"contactPage.clearConversation" = "Limpar histórico de bate-papo";
 "contactPage.blockContact" = "Bloquear Contato";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Iniciando...";
 "dataTransfer.readableStatusError" = "Erro";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "Pendente...";
 "dataTransfer.readableStatusRefuse" = "Recusar";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "Transferindo";
+"dataTransfer.readableStatusCanceled" = "Cancelada";
+"dataTransfer.readableStatusSuccess" = "Completa";
 "dataTransfer.readableStatusAccept" = "Aceitar";
 "dataTransfer.readableStatusCancel" = "Cancelar";
 

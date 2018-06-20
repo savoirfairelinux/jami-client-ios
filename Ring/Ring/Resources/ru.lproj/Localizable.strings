@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Результаты поиска";
 "smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Поиск…";
 "smartlist.noResults" = "Результаты отсутствуют";
@@ -42,7 +42,7 @@
 "welcome.createAccount" = "Создать аккаунт Ring";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Пропустить";
 "createProfile.profileCreated" = "Далее";
 
 //Create Account form
@@ -53,97 +53,97 @@
 "createAccount.repeatPasswordPlaceholder" = "Подтвердить пароль";
 "createAccount.passwordCharactersNumberError" = "Минимум 6 символов";
 "createAccount.passwordNotMatchingError" = "Пароли не совпадают";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.lookingForUsernameAvailability" = "проверка доступности имени пользователя…";
+"createAccount.invalidUsername" = "недопустимое имя пользователя";
+"createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
+"createAccount.loading" = "Загрузка";
 "createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.waitLinkToAccountTitle" = "Соединение аккаунта";
+"linkToAccount.linkButtonTitle" = "Привязать устройство";
 "linkToAccount.passwordPlaceholder" = "пароль";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.passwordLabel" = "Введите пароль";
 "linkToAccount.pinLabel" = "Введите PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Чтобы получить PIN код, перейдите в настройки управления аккаунтом на устройстве, содержащем необходимый аккаунт. В настройках устройств выберите \"Привязать другое устройство к этому аккаунту\". Вы получите необходимый PIN код для завершения процедуры. PIN код действителен в течение 10 минут.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не удалось найти аккаунт";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountCannotBeFoundMessage" = "Аккаунт не удалось найти в сети Ring. Убедитесь, что он был экспортирован из соответствующего устройства и что предоставленные данные верны.";
+"alerts.accountAddedTitle" = "Аккаунт добавлен";
 "alerts.accountNoNetworkTitle" = "Не удается подключиться к сети";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Сделать фото";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.accountNoNetworkMessage" = "Невозможно добавить аккаунт, так как Ring не смог подключиться к распределённой сети. Проверьте ваше соединение.";
+"alerts.accountDefaultErrorTitle" = "Неизвестная ошибка";
+"alerts.accountDefaultErrorMessage" = "Не удалось создать аккаунт.";
+"alerts.profileTakePhoto" = "Сфотографировать";
+"alerts.profileUploadPhoto" = "Загрузка фотографии";
 "alerts.profileCancelPhoto" = "Отмена";
-"alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.accountLinkedTitle" = "Аккаунт соединяется";
+"alerts.dbFailedTitle" = "Произошла ошибка при запуске Ring";
+"alerts.dbFailedMessage" = "Пожалуйста, закройте приложение и попробуйте открыть его снова";
+"alerts.confirmBlockContact" = "Вы уверены, что хотите заблокировать этот контакт? История разговоров с этим контактом также будет безвозвратно удалена.";
+"alerts.confirmBlockContactTitle" = "Заблокировать контакт";
+"alerts.confirmDeleteConversation" = "Вы уверены, что хотите безвозвратно удалить этот разговор?";
+"alerts.confirmDeleteConversationFromContact" = "Вы уверены, что хотите удалить разговор с этим контактом?";
+"alerts.confirmDeleteConversationTitle" = "Удалить разговор";
 
 //Actions
 "actions.blockAction" = "Заблокировать";
 "actions.deleteAction" = "Удалить";
 "actions.cancelAction" = "Отмена";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Входящий вызов от";
 "alerts.incomingCallButtonAccept" = "Принять";
 "alerts.incomingCallButtonIgnore" = "Игнорировать";
 
 //Calls
 "calls.callItemTitle" = "Звонок";
 "calls.unknown" = "Неизвестно";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
-"calls.callFinished" = "Call finished";
+"calls.incomingCallInfo" = "хочет поговорить с вами";
+"calls.calling" = "Вызываю…";
+"calls.callFinished" = "Вызов завершен";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
-"accountPage.username" = "username:";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Block List";
-"accountPage.unblockContact" = "UNBLOCK";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.username" = "имя пользователя:";
+"accountPage.usernameNotRegistered" = "имя пользователя: не зарегистрировано";
+"accountPage.credentialsHeader" = "Информация об аккаунте";
+"accountPage.enableProxy" = "Включить прокси";
+"accountPage.blockedContacts" = "Заблокированные";
+"accountPage.unblockContact" = "РАЗБЛОКИРОВАТЬ";
+"accountPage.proxyAddressAlert" = "Укажите адрес прокси";
+"accountPage.enableProxy" = "Включить прокси";
+"accountPage.noProxyExplanationLabel" = "Ваше устройство не будет получать уведомлений если прокси выключен";
 "accountPage.saveProxyAddress" = "Сохранить";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "Адрес прокси";
 "accountPage.enableNotifications" = "Включить Уведомления";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertTitle" = "Прокси-сервер выключен";
+"accountPage.proxyDisabledAlertBody" = "Для получения уведомлений, пожалуйста, включите прокси";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Привязать новое устройство";
 "linkDevice.passwordError" = "Введенный пароль не подходит к этому аккаунту";
 "linkDevice.networkError" = "Во время экспорта произошла ошибка сети";
 "linkDevice.defaultError" = "Во время экспорта произошла ошибка";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.explanationMessage" = "Для завершения процесса Вам необходимо запустить Ring на новом устройстве и выбрать пункт \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут";
+"linkDevice.hudMessage" = "Проверка";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
+"contactPage.startAudioCall" = "Сделать аудиозвонок";
+"contactPage.startVideoCall" = "Сделать видеозвонок";
+"contactPage.sendMessage" = "Отправить сообщение";
+"contactPage.clearConversation" = "Очистить чат";
+"contactPage.blockContact" = "Заблокировать контакт";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Инициализация…";
 "dataTransfer.readableStatusError" = "Ошибка";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "Ожидание…";
 "dataTransfer.readableStatusRefuse" = "Отклонить";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "Передача…";
+"dataTransfer.readableStatusCanceled" = "Отменено";
+"dataTransfer.readableStatusSuccess" = "Завершено";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
 
