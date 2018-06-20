@@ -22,6 +22,8 @@ import Foundation
 import UIKit
 import RxSwift
 
+// swiftlint:disable identifier_name
+
 extension UIViewController {
 
     /// Find the active UITextField if it exists

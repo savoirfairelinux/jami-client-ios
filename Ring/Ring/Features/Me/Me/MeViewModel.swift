@@ -143,6 +143,7 @@ class MeViewModel: ViewModel, Stateable {
                                             .blockedList, .proxy, .notifications]))
     }()
 
+    // swiftlint:disable identifier_name
     lazy var linkedDevices: Observable<SettingsSection> = {
         // if account does not exist or devices list empty return empty section
         let empptySection: SettingsSection = .linkedDevices(items: [.ordinary(label: "")])

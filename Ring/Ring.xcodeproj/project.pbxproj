@@ -378,7 +378,6 @@
 		04399ACF1D1C341A00E99CD9 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = ../fat/lib/libpjsip.a; sourceTree = "<group>"; };
 		04399AD01D1C341A00E99CD9 /* libpjsua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsua.a; path = ../fat/lib/libpjsua.a; sourceTree = "<group>"; };
 		04399AD11D1C341A00E99CD9 /* libpjsua2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsua2.a; path = ../fat/lib/libpjsua2.a; sourceTree = "<group>"; };
-		04399AD21D1C341A00E99CD9 /* libpostproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpostproc.a; path = ../fat/lib/libpostproc.a; sourceTree = "<group>"; };
 		04399AD41D1C341A00E99CD9 /* libring.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libring.a; path = ../fat/lib/libring.a; sourceTree = "<group>"; };
 		04399AD51D1C341A00E99CD9 /* libsamplerate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsamplerate.a; path = ../fat/lib/libsamplerate.a; sourceTree = "<group>"; };
 		04399AD61D1C341A00E99CD9 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../fat/lib/libsndfile.a; sourceTree = "<group>"; };
@@ -1014,7 +1013,6 @@
 				04399ACF1D1C341A00E99CD9 /* libpjsip.a */,
 				04399AD01D1C341A00E99CD9 /* libpjsua.a */,
 				04399AD11D1C341A00E99CD9 /* libpjsua2.a */,
-				04399AD21D1C341A00E99CD9 /* libpostproc.a */,
 				04399AD41D1C341A00E99CD9 /* libring.a */,
 				04399AD51D1C341A00E99CD9 /* libsamplerate.a */,
 				04399AD61D1C341A00E99CD9 /* libsndfile.a */,

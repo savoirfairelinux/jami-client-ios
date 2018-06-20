@@ -24,6 +24,8 @@ import RxSwift
 import UIKit
 import AVFoundation
 
+// swiftlint:disable identifier_name
+
 typealias DeviceInfo = [String: String]
 
 enum VideoError: Error {

@@ -21,6 +21,7 @@
 import Foundation
 import UIKit
 
+// swiftlint:disable identifier_name
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat) {
         let red_ = CGFloat(red) / 255.0

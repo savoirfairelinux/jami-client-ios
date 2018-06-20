@@ -23,6 +23,8 @@ import Foundation
 import UIKit
 import CoreImage
 
+// swiftlint:disable identifier_name
+
 extension UIImage {
     var circleMasked: UIImage? {
         let newSize = self.size
