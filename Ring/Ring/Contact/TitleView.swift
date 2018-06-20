@@ -21,6 +21,8 @@
 import UIKit
 import RxSwift
 
+// swiftlint:disable identifier_name
+
 final class TitleView: UIView {
     private let containerView = UIView()
     private let avatarView = UIView()

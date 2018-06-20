@@ -21,6 +21,7 @@
 import Foundation
 import Contacts
 import RxSwift
+// swiftlint:disable identifier_name
 
 enum VCardFolders: String {
     case contacts
