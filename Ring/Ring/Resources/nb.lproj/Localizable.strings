@@ -109,17 +109,17 @@
 "accountPage.username" = "brukernavn:";
 "accountPage.usernameNotRegistered" = "brukernavn: ikke registrert";
 "accountPage.credentialsHeader" = "Kontodetaljer";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Skru på mellomtjener";
 "accountPage.blockedContacts" = "Blokkeringsliste";
 "accountPage.unblockContact" = "Avblokker";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.proxyAddressAlert" = "Angi mellomtjeneradresse";
+"accountPage.enableProxy" = "Skru på mellomtjener";
+"accountPage.noProxyExplanationLabel" = "Din enhet vil ikke motta merknader når mellomtjener er avskrudd";
 "accountPage.saveProxyAddress" = "Lagre";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "Mellomtjeneradresse";
 "accountPage.enableNotifications" = "Aktiver varsler";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertTitle" = "Mellomtjener avskrudd";
+"accountPage.proxyDisabledAlertBody" = "For å kunne motta merknader, skru på mellomtjener";
 
 //Link New Device
 "linkDevice.title" = "Lenk en ny enhet";

@@ -109,17 +109,17 @@
 "accountPage.username" = "emër përdoruesi:";
 "accountPage.usernameNotRegistered" = "emër përdoruesi: jo i regjistruar";
 "accountPage.credentialsHeader" = "Hollësi Llogarie";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Aktivizo Ndërmjetës";
 "accountPage.blockedContacts" = "Bllokoje Listën";
 "accountPage.unblockContact" = "ZHBLLOKOJE";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.proxyAddressAlert" = "Jepni adresë ndërmjetësi";
+"accountPage.enableProxy" = "Aktivizo Ndërmjetës";
+"accountPage.noProxyExplanationLabel" = "Pajisja juaj s’do të marrë njoftime kur ndërmjetësi të jetë çaktivizuar";
 "accountPage.saveProxyAddress" = "Ruaje";
-"accountPage.proxyPaceholder" = "Proxy address";
-"accountPage.enableNotifications" = "Enable Notifications";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
+"accountPage.proxyPaceholder" = "Adresë ndërmjetësi";
+"accountPage.enableNotifications" = "Aktivizoni Njoftime";
+"accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
+"accountPage.proxyDisabledAlertBody" = "Që të mund të merren njoftime, ju lutemi, aktivizoni ndërmjetësin";
 
 //Link New Device
 "linkDevice.title" = "Lidhni një pajisje të re";

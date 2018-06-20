@@ -109,17 +109,17 @@
 "accountPage.username" = "nom d'utilisateur :";
 "accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
 "accountPage.credentialsHeader" = "Détails du compte";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Utiliser un nœud délégataire ";
 "accountPage.blockedContacts" = "Liste des utilisateurs bloqués";
 "accountPage.unblockContact" = "Débloquer";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.proxyAddressAlert" = "Fournir l'adresse du nœud délégataire";
+"accountPage.enableProxy" = "Utiliser un nœud délégataire ";
+"accountPage.noProxyExplanationLabel" = "Votre appareil ne recevra pas de notifications si le nœud délégataire est désactivé";
 "accountPage.saveProxyAddress" = "Sauvegarder";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "Adresse du nœud  DHT délégataire";
 "accountPage.enableNotifications" = "Activer les notifications";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertTitle" = "Nœud délégataire désactivé ";
+"accountPage.proxyDisabledAlertBody" = "Pour recevoir des notifications, veuillez activer le nœud délégataire";
 
 //Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";
