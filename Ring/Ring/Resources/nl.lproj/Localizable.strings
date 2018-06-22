@@ -119,7 +119,7 @@
 "accountPage.proxyPaceholder" = "Proxyadres";
 "accountPage.enableNotifications" = "Meldingen inschakelen";
 "accountPage.proxyDisabledAlertTitle" = "Proxyserver uitgeschakeld";
-"accountPage.proxyDisabledAlertBody" = "Schakel de proxy in om meldingen te kunnen ontvangen";
+"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 
 //Link New Device
 "linkDevice.title" = "Een nieuw apparaat koppelen";

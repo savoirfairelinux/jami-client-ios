@@ -119,7 +119,7 @@
 "accountPage.proxyPaceholder" = "Mellomtjeneradresse";
 "accountPage.enableNotifications" = "Aktiver varsler";
 "accountPage.proxyDisabledAlertTitle" = "Mellomtjener avskrudd";
-"accountPage.proxyDisabledAlertBody" = "For å kunne motta merknader, skru på mellomtjener";
+"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 
 //Link New Device
 "linkDevice.title" = "Lenk en ny enhet";

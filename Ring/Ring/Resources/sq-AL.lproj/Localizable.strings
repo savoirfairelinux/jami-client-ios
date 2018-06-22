@@ -119,7 +119,7 @@
 "accountPage.proxyPaceholder" = "Adresë ndërmjetësi";
 "accountPage.enableNotifications" = "Aktivizoni Njoftime";
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
-"accountPage.proxyDisabledAlertBody" = "Që të mund të merren njoftime, ju lutemi, aktivizoni ndërmjetësin";
+"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 
 //Link New Device
 "linkDevice.title" = "Lidhni një pajisje të re";
