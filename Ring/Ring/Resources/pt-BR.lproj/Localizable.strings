@@ -119,7 +119,7 @@
 "accountPage.proxyPaceholder" = "Endereço do proxy";
 "accountPage.enableNotifications" = "Habilitar Notificações";
 "accountPage.proxyDisabledAlertTitle" = "Servidor Proxy Desativado";
-"accountPage.proxyDisabledAlertBody" = "Para receber as notificações, favor ativar o proxy";
+"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 
 //Link New Device
 "linkDevice.title" = "Associar um novo dispositivo";

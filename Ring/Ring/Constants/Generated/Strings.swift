@@ -23,7 +23,7 @@ internal enum L10n {
     internal static let noProxyExplanationLabel = L10n.tr("Localizable", "accountPage.noProxyExplanationLabel")
     /// Provide proxy address
     internal static let proxyAddressAlert = L10n.tr("Localizable", "accountPage.proxyAddressAlert")
-    /// In oreder to receive notifications, please enable proxy
+    /// In order to receive notifications, please enable proxy
     internal static let proxyDisabledAlertBody = L10n.tr("Localizable", "accountPage.proxyDisabledAlertBody")
     /// Proxy Server Disabled
     internal static let proxyDisabledAlertTitle = L10n.tr("Localizable", "accountPage.proxyDisabledAlertTitle")

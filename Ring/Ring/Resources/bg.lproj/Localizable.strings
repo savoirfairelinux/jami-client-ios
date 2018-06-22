@@ -119,7 +119,7 @@
 "accountPage.proxyPaceholder" = "Proxy address";
 "accountPage.enableNotifications" = "Включване на известията";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In oreder to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
