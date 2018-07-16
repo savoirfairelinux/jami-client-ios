@@ -130,7 +130,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             }
             return dateDefault
         }
-        let alert = UIAlertController(title: "\nRing\nbuild: \(compileDate)\n\"In varietate concordia\"", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "\nRing\nbuild: \(compileDate)\n\"Live free or die\"", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         let image = UIImageView(image: UIImage(asset: Asset.ringIcon))
         alert.view.addSubview(image)
