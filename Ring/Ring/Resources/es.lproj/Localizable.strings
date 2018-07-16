@@ -26,7 +26,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ayer";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Resultado de búsqueda";
 "smartlist.conversations" = "Conversaciones";
 "smartlist.searching" = "Buscando...";
 "smartlist.noResults" = "Sin resultados";
@@ -37,92 +37,92 @@
 
 //Welcome Screen
 "welcome.title" = "Bienvenido a Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Ring es una plataforma de comunicación libre y universal que respeta la privacidad y las libertades de los usuarios.";
 "welcome.linkDevice" = "Conectar este dispositivo a una cuenta";
 "welcome.createAccount" = "Crear una cuenta en Ring";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Saltar";
 "createProfile.profileCreated" = "Siguiente";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Crear tu cuenta Ring";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
+"createAccount.chooseStrongPassword" = "Elige una contraseña robusta que recordaras para proteger tu cuenta de Ring.";
 "createAccount.enterNewUsernamePlaceholder" = "nombre de usuario";
 "createAccount.newPasswordPlaceholder" = "contraseña";
 "createAccount.repeatPasswordPlaceholder" = "Confirme la contraseña";
 "createAccount.passwordCharactersNumberError" = "6 caracteres mínimo";
 "createAccount.passwordNotMatchingError" = "las contraseñas no coinciden";
 "createAccount.lookingForUsernameAvailability" = "analizando la disponibilidad del nombre de usuario";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.invalidUsername" = "nombre de usuario inválido";
+"createAccount.usernameAlreadyTaken" = "nombre de usuario ya está en uso";
+"createAccount.loading" = "Cargando";
 "createAccount.waitCreateAccountTitle" = "Agregando cuenta";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.linkButtonTitle" = "Vincular dispositivo";
 "linkToAccount.passwordPlaceholder" = "contraseña";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.passwordLabel" = "Introducir contraseña";
 "linkToAccount.pinLabel" = "Ingresa tu PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Error al encontrar la cuenta";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountCannotBeFoundMessage" = "La cuenta no se pudo encontrar en la red de Ring. Asegúrese de que se haya exportado en Ring desde un dispositivo existente, y que las credenciales proporcionadas son correctas.";
+"alerts.accountAddedTitle" = "Cuenta agregada";
 "alerts.accountNoNetworkTitle" = "Error al conectarse a la red";
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountDefaultErrorTitle" = "Error desconocido";
+"alerts.accountDefaultErrorMessage" = "La cuenta no pudo ser creada.";
 "alerts.profileTakePhoto" = "Sacar una foto";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Subir foto";
 "alerts.profileCancelPhoto" = "Cancelar";
 "alerts.accountLinkedTitle" = "Vinculando cuenta";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.dbFailedTitle" = "Se ha producido un error al iniciar Ring";
+"alerts.dbFailedMessage" = "Por favor cierre la aplicación e intente abrirla de nuevo";
+"alerts.confirmBlockContact" = "¿Estás seguro de que quieres bloquear este contacto? El historial de la conversación con este contacto también se borrará permanentemente.";
+"alerts.confirmBlockContactTitle" = "Bloquear contacto";
+"alerts.confirmDeleteConversation" = "¿Estás seguro de que quieres borrar esta conversación permanentemente?";
+"alerts.confirmDeleteConversationFromContact" = "¿Estás seguro de que quieres borrar la conversación con este contacto? ";
+"alerts.confirmDeleteConversationTitle" = "Borrar conversación";
 
 //Actions
 "actions.blockAction" = "Bloquear";
 "actions.deleteAction" = "Borrar";
 "actions.cancelAction" = "Cancelar";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Llamada entrante de ";
 "alerts.incomingCallButtonAccept" = "Aceptar";
 "alerts.incomingCallButtonIgnore" = "Ignorar";
 
 //Calls
 "calls.callItemTitle" = "Llamar";
 "calls.unknown" = "Desconocido";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
-"calls.callFinished" = "Call finished";
+"calls.incomingCallInfo" = "quiere hablar contigo";
+"calls.calling" = "Llamando...";
+"calls.callFinished" = "Llamada finalizada";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Configuración";
-"accountPage.username" = "username:";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Block List";
-"accountPage.unblockContact" = "UNBLOCK";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.username" = "nombre de usuario:";
+"accountPage.usernameNotRegistered" = "nombre de usuario: no registrado";
+"accountPage.credentialsHeader" = "Detalles de la cuenta";
+"accountPage.enableProxy" = "Habilitar proxy";
+"accountPage.blockedContacts" = "Lista de bloqueos";
+"accountPage.unblockContact" = "DESBLOQUEAR";
+"accountPage.proxyAddressAlert" = "Proporcione la dirección proxy";
+"accountPage.enableProxy" = "Habilitar proxy";
+"accountPage.noProxyExplanationLabel" = "Su dispositivo no recibirá notificaciones cuando el proxy esté deshabilitado";
 "accountPage.saveProxyAddress" = "Guardar";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "Dirección proxy";
 "accountPage.enableNotifications" = "Habilitar Notificaciones";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
+"accountPage.proxyDisabledAlertTitle" = "Servidor proxy deshabilitado";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Vincular un nuevo dispositivo";
 "linkDevice.passwordError" = "La contraseña ingresada no puede desbloquear esta cuenta";
 "linkDevice.networkError" = "Ocurrió un error durante la exportación";
 "linkDevice.defaultError" = "Ocurrió un error durante la exportación";
@@ -130,19 +130,19 @@
 "linkDevice.hudMessage" = "Verificando";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
+"contactPage.startAudioCall" = "Iniciar llamada de voz";
+"contactPage.startVideoCall" = "Iniciar videollamada";
+"contactPage.sendMessage" = "Enviar mensaje";
+"contactPage.clearConversation" = "Limpiar chat";
+"contactPage.blockContact" = "Bloquear contacto";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Inicializando…";
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "No aceptar";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Cancelado";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Aceptar";
 "dataTransfer.readableStatusCancel" = "Cancelar";

@@ -20,24 +20,24 @@
 
 // Global
 "global.homeTabBarTitle" = "Főoldal";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Meghívás";
 "global.meTabBarTitle" = "Fiók";
 "global.ok" = "OK";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
+"smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Search Result";
 "smartlist.conversations" = "Beszélgetések";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
+"smartlist.searching" = "Keresés…";
+"smartlist.noResults" = "Nincs eredmény";
 "smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "Üdvözöljük a Ring-ben";
+"welcome.text" = "A Ring egy szabad szoftver az univerzális kommunikációhoz, mely tiszteletben tartja a felhasználók szabadságát és magán szféráját.";
 "welcome.linkDevice" = "Ezen eszköz fiókhoz kapcsolása";
 "welcome.createAccount" = "Ring fiók létrehozása";
 
@@ -46,42 +46,42 @@
 "createProfile.profileCreated" = "Tovább";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your Ring account";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "felhasználónév";
-"createAccount.newPasswordPlaceholder" = "jelszó";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.createAccountFormTitle" = "Ring-fiókjának létrehozása";
+"createAccount.chooseStrongPassword" = "Válasszon erős jelszót, amelyre emlékezni fog, hogy megvédje a Ring fiókját.";
+"createAccount.enterNewUsernamePlaceholder" = "Felhasználónév";
+"createAccount.newPasswordPlaceholder" = "Jelszó";
+"createAccount.repeatPasswordPlaceholder" = "Jelszó megerősítése";
+"createAccount.passwordCharactersNumberError" = "Legalább 6 karakter";
+"createAccount.passwordNotMatchingError" = "A jelszavak nem egyeznek";
+"createAccount.lookingForUsernameAvailability" = "Keresni a felhasználónév elérhetőségét";
+"createAccount.invalidUsername" = "Érvénytelen felhasználónév";
+"createAccount.usernameAlreadyTaken" = "A felhasználó név már foglalt";
+"createAccount.loading" = "Betöltés…";
 "createAccount.waitCreateAccountTitle" = "Fiók hozzáadása";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "jelszó";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.waitLinkToAccountTitle" = "Fiók összekapcsolása";
+"linkToAccount.linkButtonTitle" = "Összekapcsoló eszköz";
+"linkToAccount.passwordPlaceholder" = "Jelszó";
+"linkToAccount.pinPlaceholder" = "PIN-kód";
+"linkToAccount.passwordLabel" = "A jelszó megadása";
+"linkToAccount.pinLabel" = "PIN-kód megadása";
+"linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához keresse meg a fiókkezelő beállításait a használni kívánt fiókot tartalmazó eszközön.  Válassza az eszközbeállításoknál a „Másik eszköz összekapcsolása ehhez a fiókhoz” lehetőséget. Meg fogja kapni az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountCannotBeFoundTitle" = "A fiók nem található";
+"alerts.accountCannotBeFoundMessage" = "Nem található a fiók a Ring hálózatában. Győződjön meg róla, hogy a meglévő eszközön a Ring-et exportálták és a hitelesítő adatok helyesek voltak.";
+"alerts.accountAddedTitle" = "Hozzáadott fiók";
+"alerts.accountNoNetworkTitle" = "Nem tud csatlakozni a hálózathoz";
+"alerts.accountNoNetworkMessage" = "Nem sikerült hozzáadni a fiókot mert a Ring nem tudott csatlakozni az elosztott hálózathoz. Ellenőrizze az eszköz csatlakoztatását.";
+"alerts.accountDefaultErrorTitle" = "Ismeretlen hiba";
+"alerts.accountDefaultErrorMessage" = "A fiókot nem lehet létrehozni.";
 "alerts.profileTakePhoto" = "Fotó készítése";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Fénykép feltöltése";
 "alerts.profileCancelPhoto" = "Mégse";
-"alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.accountLinkedTitle" = "Fiók összekapcsolása…";
+"alerts.dbFailedTitle" = "Hiba történt a Ring elindításakor";
+"alerts.dbFailedMessage" = "Kérjük, hogy zárja be az alkalmazást és próbálja meg újra megnyitni";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -123,11 +123,11 @@
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.passwordError" = "A megadott jelszó nem oldja fel ezt a fiókot";
+"linkDevice.networkError" = "Hálózati hiba történt az exportálás során";
+"linkDevice.defaultError" = "Hiba történt az exportálás során";
+"linkDevice.explanationMessage" = "A folyamat befejezéséhez meg kell nyitnia a Ring-et az új eszközön és válassza az „Eszköz összekapcsolása egy fiókhoz” opciót. A PIN-kódod 10 percig érvényes.";
+"linkDevice.hudMessage" = "Ellenőrzése";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
