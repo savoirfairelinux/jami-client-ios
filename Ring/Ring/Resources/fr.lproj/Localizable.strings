@@ -119,7 +119,7 @@
 "accountPage.proxyPaceholder" = "Adresse du nœud  DHT délégataire";
 "accountPage.enableNotifications" = "Activer les notifications";
 "accountPage.proxyDisabledAlertTitle" = "Nœud délégataire désactivé ";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertBody" = "Pour recevoir des notifications, veuillez activer le serveur mandataire ";
 
 //Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";

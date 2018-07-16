@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Pradžia";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Pakvietimai";
 "global.meTabBarTitle" = "Paskyra";
 "global.ok" = "Gerai";
 
@@ -42,7 +42,7 @@
 "welcome.createAccount" = "Sukurti Ring paskyrą";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Praleisti";
 "createProfile.profileCreated" = "Kitas";
 
 //Create Account form
@@ -52,16 +52,16 @@
 "createAccount.newPasswordPlaceholder" = "slaptažodis";
 "createAccount.repeatPasswordPlaceholder" = "confirm password";
 "createAccount.passwordCharactersNumberError" = "Mažiausiai 6 simboliai";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.passwordNotMatchingError" = "slaptažodžiai nesutampa";
+"createAccount.lookingForUsernameAvailability" = "tikrinamas naudotojo vardo prieinamumas";
+"createAccount.invalidUsername" = "neteisingas naudotojo vardas";
+"createAccount.usernameAlreadyTaken" = "naudotojo vardas jau užimtas";
+"createAccount.loading" = "Įkeliama";
 "createAccount.waitCreateAccountTitle" = "Pridedama paskyra";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.linkButtonTitle" = "Susieti įrenginį";
 "linkToAccount.passwordPlaceholder" = "slaptažodis";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
@@ -71,42 +71,42 @@
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nepavyksta rasti paskyros";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountAddedTitle" = "Paskyra pridėta";
 "alerts.accountNoNetworkTitle" = "Nepavyksta prisijungti prie tinklo";
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountDefaultErrorTitle" = "Nežinoma klaida";
+"alerts.accountDefaultErrorMessage" = "Nepavyko sukurti paskyros.";
 "alerts.profileTakePhoto" = "Padaryti nuotrauką";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Įkelti nuotrauką";
 "alerts.profileCancelPhoto" = "Atsisakyti";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.dbFailedMessage" = "Prašome užverti programą ir bandyti ją atverti dar kartą";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmBlockContactTitle" = "Užblokuoti kontaktą";
+"alerts.confirmDeleteConversation" = "Ar tikrai norite visiems laikams ištrinti šį pokalbį?";
+"alerts.confirmDeleteConversationFromContact" = "Ar tikrai norite ištrinti pokalbį su šiuo kontaktu?";
+"alerts.confirmDeleteConversationTitle" = "Ištrinti pokalbį";
 
 //Actions
 "actions.blockAction" = "Užblokuoti";
 "actions.deleteAction" = "Ištrinti";
 "actions.cancelAction" = "Atsisakyti";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Gaunamasis skambutis nuo ";
 "alerts.incomingCallButtonAccept" = "Priimti";
 "alerts.incomingCallButtonIgnore" = "Nepaisyti";
 
 //Calls
 "calls.callItemTitle" = "Skambutis";
 "calls.unknown" = "Nežinomas";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
-"calls.callFinished" = "Call finished";
+"calls.incomingCallInfo" = "nori su jumis pakalbėti";
+"calls.calling" = "Skambinama...";
+"calls.callFinished" = "Skambutis užbaigtas";
 
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";
 "accountPage.settingsHeader" = "Nustatymai";
-"accountPage.username" = "username:";
+"accountPage.username" = "naudotojo vardas:";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -116,13 +116,13 @@
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "Įrašyti";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "Įgaliotojo serverio adresas";
 "accountPage.enableNotifications" = "Įjungti pranešimus";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertTitle" = "Įgaliotasis serveris išjungtas";
+"accountPage.proxyDisabledAlertBody" = "Norėdami gauti pranešimus, įjunkite įgaliotąjį serverį";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Susieti naują įrenginį";
 "linkDevice.passwordError" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
 "linkDevice.networkError" = "Eksportavimo metu, įvyko klaida";
 "linkDevice.defaultError" = "Eksportavimo metu, įvyko klaida";
@@ -130,19 +130,19 @@
 "linkDevice.hudMessage" = "Verifying";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
+"contactPage.startAudioCall" = "Pradėti garso skambutį";
+"contactPage.startVideoCall" = "Pradėti vaizdo skambutį";
+"contactPage.sendMessage" = "Siųsti žinutę";
+"contactPage.clearConversation" = "Išvalyti pokalbį";
+"contactPage.blockContact" = "Užblokuoti kontaktą";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Inicijuojama…";
 "dataTransfer.readableStatusError" = "Klaida";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "Laukiama…";
 "dataTransfer.readableStatusRefuse" = "Atmesti";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Atsisakyta";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Priimti";
 "dataTransfer.readableStatusCancel" = "Atsisakyti";
