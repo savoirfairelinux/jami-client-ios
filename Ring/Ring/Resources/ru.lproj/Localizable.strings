@@ -119,7 +119,7 @@
 "accountPage.proxyPaceholder" = "Адрес прокси";
 "accountPage.enableNotifications" = "Включить Уведомления";
 "accountPage.proxyDisabledAlertTitle" = "Прокси-сервер выключен";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertBody" = "Для получения уведомлений, пожалуйста, включите прокси";
 
 //Link New Device
 "linkDevice.title" = "Привязать новое устройство";
