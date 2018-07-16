@@ -119,7 +119,7 @@
 "accountPage.proxyPaceholder" = "Proxyadress";
 "accountPage.enableNotifications" = "Aktivera aviseringar";
 "accountPage.proxyDisabledAlertTitle" = "Proxyserver inaktiverad";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertBody" = "Aktivera proxy, för att ta emot aviseringar";
 
 //Link New Device
 "linkDevice.title" = "Länka en ny enhet";
