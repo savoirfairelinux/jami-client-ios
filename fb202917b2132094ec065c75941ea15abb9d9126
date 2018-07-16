@@ -22,6 +22,30 @@
       "revId": "fb202917b2132094ec065c75941ea15abb9d9126",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9df720e6_e3dc3955",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-07-16T20:53:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ec6b786_9ab85519",
+      "range": {
+        "startLine": 133,
+        "startChar": 79,
+        "endLine": 133,
+        "endChar": 95
+      },
+      "revId": "fb202917b2132094ec065c75941ea15abb9d9126",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
