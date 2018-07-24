@@ -218,6 +218,11 @@ class AccountsService: AccountAdapterDelegate {
                                            credentials: credentials,
                                            devices: devices)
 
+                // set the ringtone path
+                let ringtonePath = Bundle.main.url(forResource: "default", withExtension:"wav")!
+                details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath), withValue: (ringtonePath.path))
+                setAccountDetails(forAccountId: accountId!, withDetails: details)
+
                 let accountModelHelper = AccountModelHelper(withAccount: account!)
                 var accountAddedEvent = ServiceEvent(withEventType: .accountAdded)
                 accountAddedEvent.addEventInput(.id, value: account?.id)
