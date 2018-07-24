@@ -145,11 +145,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             // make sure video is enabled
             let accountDetails = self.accountService.getAccountDetails(fromAccountId: currentAccount.id)
             accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.videoEnabled), withValue: "true")
-            // set the ringtone path
-            let ringtonePath = Bundle.main.url(forResource: "default", withExtension:"wav")!
-            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath), withValue: (ringtonePath.path))
-            self.accountService.setAccountDetails(forAccountId: currentAccount.id, withDetails: accountDetails)
-             let notificationsEnabled = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken)).isEmpty ? false : true
+            // set ringtone path
+            self.accountService.setRingtonePath(forAccountId: currentAccount.id)
+            // check if push notifications are enabled in the config
+            let notificationsEnabled = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken)).isEmpty ? false : true
             if notificationsEnabled {
                 self.registerVoipNotifications()
             }

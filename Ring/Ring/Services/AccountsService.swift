@@ -218,6 +218,8 @@ class AccountsService: AccountAdapterDelegate {
                                            credentials: credentials,
                                            devices: devices)
 
+                setRingtonePath(forAccountId: accountId!)
+
                 let accountModelHelper = AccountModelHelper(withAccount: account!)
                 var accountAddedEvent = ServiceEvent(withEventType: .accountAdded)
                 accountAddedEvent.addEventInput(.id, value: account?.id)
@@ -229,6 +231,13 @@ class AccountsService: AccountAdapterDelegate {
         } catch {
             self.responseStream.onError(error)
         }
+    }
+
+    func setRingtonePath(forAccountId accountId: String) {
+        let details = self.getAccountDetails(fromAccountId: accountId)
+        let ringtonePath = Bundle.main.url(forResource: "default", withExtension:"wav")!
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath), withValue: (ringtonePath.path))
+        setAccountDetails(forAccountId: accountId, withDetails: details)
     }
 
     func linkToRingAccount(withPin pin: String, password: String) {
