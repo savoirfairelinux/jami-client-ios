@@ -31,13 +31,13 @@
 "smartlist.searching" = "Zoeken…";
 "smartlist.noResults" = "Geen resultaten";
 "smartlist.noNetworkConnectivity" = "Geen netwerkverbinding";
-"smartlist.cellularAccess" = "Zorgd da’ ge toegang tot het mobiel netwerk toegelaten hebd in uw instellingen";
+"smartlist.cellularAccess" = "Zorgt dat ge toegang tot het mobiel netwerk toegelaten hebt in uw instellingen";
 
 // Walkthrough
 
 //Welcome Screen
 "welcome.title" = "Welkom bij Ring";
-"welcome.text" = "Ring is een vrij en universeel communicatieplatform, da’ de privacy en vrijheden van haar gebruikers eerbiedig";
+"welcome.text" = "Ring is een vrij en universeel communicatieplatform, dat de privacy en vrijheden van haar gebruikers eerbiedigt";
 "welcome.linkDevice" = "Dit apparaat aan nen account koppelen";
 "welcome.createAccount" = "Ne Ring-account aanmaken";
 
@@ -47,45 +47,45 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Uwe Ring-account aanmaken";
-"createAccount.chooseStrongPassword" = "Kiesd een sterk paswoord voor uwe Ring-account te beschermen.";
+"createAccount.chooseStrongPassword" = "Kiest een sterk paswoord voor uwe Ring-account te beschermen.";
 "createAccount.enterNewUsernamePlaceholder" = "gebruikersnaam";
 "createAccount.newPasswordPlaceholder" = "paswoord";
 "createAccount.repeatPasswordPlaceholder" = "paswoord bevestigen";
 "createAccount.passwordCharactersNumberError" = "Minimaal 6 tekens";
-"createAccount.passwordNotMatchingError" = "paswoorden komen nie overeen";
-"createAccount.lookingForUsernameAvailability" = "beschikbaarheid van gebruikersnaam word gecontroleerd";
+"createAccount.passwordNotMatchingError" = "paswoorden komen niet overeen";
+"createAccount.lookingForUsernameAvailability" = "beschikbaarheid van gebruikersnaam wordt gecontroleerd";
 "createAccount.invalidUsername" = "ongeldige gebruikersnaam";
 "createAccount.usernameAlreadyTaken" = "gebruikersnaam reeds in gebruik";
 "createAccount.loading" = "Laden";
-"createAccount.waitCreateAccountTitle" = "Account word toegevoegd";
+"createAccount.waitCreateAccountTitle" = "Account wordt toegevoegd";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account koppelen";
 "linkToAccount.linkButtonTitle" = "Apparaat koppelen";
 "linkToAccount.passwordPlaceholder" = "paswoord";
 "linkToAccount.pinPlaceholder" = "Pincode";
-"linkToAccount.passwordLabel" = "Voerd uw paswoord in";
-"linkToAccount.pinLabel" = "Voerd uw pincode in";
-"linkToAccount.explanationPinMessage" = "Ga naar d’accountbeheerinstellingen op het apparaat da’ den account bevat die ge wild gebruiken voor de pincode te genereren. Selecteerd ‘Een ander apparaat aan dezen account koppelen’. Ge ga’ de pincode krijgen die ge nodig hebd voor dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
+"linkToAccount.passwordLabel" = "Voerdt uw paswoord in";
+"linkToAccount.pinLabel" = "Voert uw pincode in";
+"linkToAccount.explanationPinMessage" = "Ga naar de accountbeheerinstellingen op het apparaat dat den account bevat die ge wilt gebruiken voor de pincode te genereren. Selecteert ‘Een ander apparaat aan dezen account koppelen’. Ge gaat de pincode krijgen die ge nodig hebt voor dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Account kan nie worden gevonden";
-"alerts.accountCannotBeFoundMessage" = "Account kon nie worden gevonden op het Ring-netwerk. Controleerd of da’ den account g’exporteerd is van een bestaand apparaat en da’ d’ingevoerde gebruikersreferenties correct zijn.";
+"alerts.accountCannotBeFoundTitle" = "Account kan niet gevonden worden";
+"alerts.accountCannotBeFoundMessage" = "Account kon niet gevonden worden op het Ring-netwerk. Controleert of dat den account geëxporteerd is van een bestaand apparaat en dat de ingevoerde gebruikersreferenties correct zijn.";
 "alerts.accountAddedTitle" = "Account toegevoegd";
 "alerts.accountNoNetworkTitle" = "Kan geen verbinding maken met het netwerk";
-"alerts.accountNoNetworkMessage" = "Kon den account nie toevoegen omdat Ring geen verbinding kon maken met het gedistribueerd netwerk. Controleerd de netwerkverbinding van uw apparaat.";
+"alerts.accountNoNetworkMessage" = "Kon den account niet toevoegen omdat Ring geen verbinding kon maken met het gedistribueerd netwerk. Controleert de netwerkverbinding van uw apparaat.";
 "alerts.accountDefaultErrorTitle" = "Onbekende fout";
-"alerts.accountDefaultErrorMessage" = "Den account kon nie worden aangemaakt.";
+"alerts.accountDefaultErrorMessage" = "Den account kon niet aangemaakt worden";
 "alerts.profileTakePhoto" = "Foto trekken";
 "alerts.profileUploadPhoto" = "Foto uploaden";
 "alerts.profileCancelPhoto" = "Annuleren";
 "alerts.accountLinkedTitle" = "Account koppelen";
 "alerts.dbFailedTitle" = "Der is een fout opgetreden bij het opstarten van Ring";
-"alerts.dbFailedMessage" = "Sluit den app en probeerd het opnieuw";
-"alerts.confirmBlockContact" = "Zij’ ge zeker da’ ge dit contact wild blokkeren? De gespreksgeschiedenis me’ dit contact zal ook voorgoed worden verwijderd.";
+"alerts.dbFailedMessage" = "Sluit den app en probeert het opnieuw";
+"alerts.confirmBlockContact" = "Zijt ge zeker dat ge dit contact wilt blokkeren? De gespreksgeschiedenis met dit contact gaat ook voorgoed verwijderd worden.";
 "alerts.confirmBlockContactTitle" = "Contact blokkeren";
-"alerts.confirmDeleteConversation" = "Zij’ ge zeker da’ ge dit gesprek voorgoed wild verwijderen?";
-"alerts.confirmDeleteConversationFromContact" = "Zij’ ge zeker da’ g’het gesprek me’ dit contact voorgoed wild verwijderen?";
+"alerts.confirmDeleteConversation" = "Zijt ge zeker dat ge dit gesprek voorgoed wilt verwijderen?";
+"alerts.confirmDeleteConversationFromContact" = "Zijt ge zeker dat ge het gesprek met dit contact voorgoed wilt verwijderen?";
 "alerts.confirmDeleteConversationTitle" = "Gesprek verwijderen";
 
 //Actions
@@ -99,34 +99,34 @@
 //Calls
 "calls.callItemTitle" = "Bellen";
 "calls.unknown" = "Onbekend";
-"calls.incomingCallInfo" = "wild met u spreken";
+"calls.incomingCallInfo" = "wilt met u spreken";
 "calls.calling" = "Bellen…";
-"calls.callFinished" = "Oproep b’eindigd";
+"calls.callFinished" = "Oproep beëindigd";
 
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";
 "accountPage.settingsHeader" = "Instellingen";
 "accountPage.username" = "gebruikersnaam:";
-"accountPage.usernameNotRegistered" = "gebruikersnaam: nie’ geregistreerd";
+"accountPage.usernameNotRegistered" = "gebruikersnaam: niet geregistreerd";
 "accountPage.credentialsHeader" = "Accountdetails";
 "accountPage.enableProxy" = "Proxy inschakelen";
 "accountPage.blockedContacts" = "Blokkeringslijst";
 "accountPage.unblockContact" = "DEBLOKKEREN";
-"accountPage.proxyAddressAlert" = "Voerd een proxyadres in";
+"accountPage.proxyAddressAlert" = "Voert een proxyadres in";
 "accountPage.enableProxy" = "Proxy inschakelen";
-"accountPage.noProxyExplanationLabel" = "Uw apparaat ga’ geen meldingen ontvangen wanneer da’ de proxy uitgeschakeld is";
+"accountPage.noProxyExplanationLabel" = "Uw apparaat gaat geen meldingen ontvangen wanneer dat de proxy is uitgeschakeld";
 "accountPage.saveProxyAddress" = "Opslaan";
 "accountPage.proxyPaceholder" = "Proxyadres";
 "accountPage.enableNotifications" = "Meldingen inschakelen";
 "accountPage.proxyDisabledAlertTitle" = "Proxyserver uitgeschakeld";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertBody" = "Schakelt de proxy in voor meldingen te kunnen ontvangen";
 
 //Link New Device
 "linkDevice.title" = "Een nieuw apparaat koppelen";
-"linkDevice.passwordError" = "Het paswoord da’ g’hebt ingevoerd ontgrendeld dezen account nie";
+"linkDevice.passwordError" = "Het paswoord dat ge hebt ingevoerd ontgrendelt dezen account niet";
 "linkDevice.networkError" = "Der is een netwerkfout opgetreden tijdens het exporteren";
 "linkDevice.defaultError" = "Der is een fout opgetreden tijdens het exporteren";
-"linkDevice.explanationMessage" = "Voor het proces te voltooien opend ge Ring op het nieuw apparaat en kiesd ge d’optie ‘Dit apparaat aan nen account koppelen’. Uw pincode is 10 minuten geldig";
+"linkDevice.explanationMessage" = "Voor het proces te voltooien opent ge Ring op het nieuw apparaat en kiest ge de optie ‘Dit apparaat aan nen account koppelen’. Uw pincode is 10 minuten geldig";
 "linkDevice.hudMessage" = "Verifiëren";
 
 //Contact Page
@@ -141,8 +141,8 @@
 "dataTransfer.readableStatusError" = "Fout";
 "dataTransfer.readableStatusAwaiting" = "In afwachting…";
 "dataTransfer.readableStatusRefuse" = "Afwijzen";
-"dataTransfer.readableStatusOngoing" = "Word verstuurd";
-"dataTransfer.readableStatusCanceled" = "G’annuleerd";
+"dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
+"dataTransfer.readableStatusCanceled" = "Geannuleerd";
 "dataTransfer.readableStatusSuccess" = "Voltooid";
 "dataTransfer.readableStatusAccept" = "Aanvaarden";
 "dataTransfer.readableStatusCancel" = "Annuleren";
