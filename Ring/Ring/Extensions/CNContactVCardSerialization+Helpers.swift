@@ -59,7 +59,7 @@ extension CNContactVCardSerialization {
         var scaledImage: UIImage?
         if compressedSize != nil {
             scaledImage =  UIImage(data: image)?
-                .convert(toSize: CGSize(width: 50.0, height: 50.0), scale: 1)
+                .convert(toSize: CGSize(width: 140.0, height: 140.0), scale: 1)
         }
 
         if let scaledImage = scaledImage {
@@ -68,7 +68,7 @@ extension CNContactVCardSerialization {
             }
         }
 
-        if let compressionSize = compressedSize, image.count > compressionSize {
+        if let compressionSize = compressedSize {
             // compress image before sending vCard
             guard let compressedImage = UIImage(data: image)?
                 .convertToData(ofMaxSize: compressionSize) else {

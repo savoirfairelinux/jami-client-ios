@@ -80,7 +80,7 @@ extension UIImage {
     }
 
     func convertToData(ofMaxSize maxSize: Int) -> Data? {
-        guard let imageData = UIImageJPEGRepresentation(self, 1) else {
+        guard let imageData = UIImageJPEGRepresentation(self, 0.9) else {
             return nil
         }
         var fileSize = imageData.count
