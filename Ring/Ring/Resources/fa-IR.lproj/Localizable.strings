@@ -27,17 +27,17 @@
 // Smartlist
 "smartlist.yesterday" = "دیروز";
 "smartlist.results" = "Search Result";
-"smartlist.conversations" = "Conversations";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
+"smartlist.conversations" = " گفتگو";
+"smartlist.searching" = "در حال جستجو...";
+"smartlist.noResults" = "بدون نتیجه";
 "smartlist.noNetworkConnectivity" = "بدون اتصال شبکه";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "اطمینان حاصل کنید که دسترسی به تلفن همراه در تنظیمات شما اعمال شده";
 
 // Walkthrough
 
 //Welcome Screen
 "welcome.title" = "به رینگ خوش آمدید";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "رینگ یک نرم‌افزار ارتباطات جهانی است که به آزادی‌ها و حریم شخصی کاربرانش احترام می‌گذارد.";
 "welcome.linkDevice" = "پیوند این افزاره به یک حساب";
 "welcome.createAccount" = "ساخت یک حساب رینگ";
 
@@ -47,41 +47,41 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "حساب کاربری رینگ خود را بسازید";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
+"createAccount.chooseStrongPassword" = "برای محافظت از حساب رینگ‌، گذرواژه‌ای قوی که به خاطر خواهید سپرد را برگزینید.";
 "createAccount.enterNewUsernamePlaceholder" = "نام کاربری";
 "createAccount.newPasswordPlaceholder" = "گذرواژه";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
+"createAccount.repeatPasswordPlaceholder" = "تأیید گذرواژه";
 "createAccount.passwordCharactersNumberError" = "کمینه ۶ نویسه";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.passwordNotMatchingError" = "گذرواژه‌ها یکسان نیستند";
+"createAccount.lookingForUsernameAvailability" = "در حال جستجو برای در دسترس بودن نام کاربری ...";
+"createAccount.invalidUsername" = "نام کاربری نامعتبر";
+"createAccount.usernameAlreadyTaken" = "نام کاربری قبلاً برداشته شده";
+"createAccount.loading" = "بارگذاری...";
 "createAccount.waitCreateAccountTitle" = "در حال افزودن حساب";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.waitLinkToAccountTitle" = "پیوند دادن حسابها";
+"linkToAccount.linkButtonTitle" = "پیوند این افزاره";
 "linkToAccount.passwordPlaceholder" = "گذرواژه";
 "linkToAccount.pinPlaceholder" = "پین";
-"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.passwordLabel" = "گذرواژه را وارد کنید";
 "linkToAccount.pinLabel" = "پین را وارد کنید";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "برای تولید پین کد (PIN)، به تنظیمات مدیریت حساب در دستگاهی که حاوی حساب کاربری مورد نظر شماست رجوع کنید. در تنظیمات دستگاه، «یک دستگاه دیگر را به این حساب پیوند دهید» را انتخاب کنید. برای تکمیل این فرم پین لازم را دریافت خواهید کرد. پین فقط ده دقیقه معتبر است";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "نمی‌تواند حساب را یافت";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountCannotBeFoundMessage" = "حساب در شبکه رینگ یافت نشد. اطمینان حاصل کنید که حساب را از یک دستگاه  (که دارای حساب رینگ است)  صادر کرده اید و اعتبارنامه‌های ارائه شده صحیح است.";
+"alerts.accountAddedTitle" = "حساب اضافه شد.";
 "alerts.accountNoNetworkTitle" = "نمی‌توان به شبکه وصل شد";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.accountNoNetworkMessage" = "نمیتوان حساب را افزود زیرا رینگ نمیتوانست به شبکه توزیع شده متصل شود. اتصال دستگاه خود را بررسی کنید.";
+"alerts.accountDefaultErrorTitle" = "خطای ناشناخته";
+"alerts.accountDefaultErrorMessage" = "حساب ایجاد نشد.";
+"alerts.profileTakePhoto" = "عکس  بگیرید!";
+"alerts.profileUploadPhoto" = "بارگذاری عکس";
 "alerts.profileCancelPhoto" = "لغو";
-"alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.accountLinkedTitle" = "پیوند دادن حسابها";
+"alerts.dbFailedTitle" = "خطایی در هنگام راه اندازی رینگ رخ داد.";
+"alerts.dbFailedMessage" = "لطفا برنامه را ببندید و دوباره آن را باز کنید.";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -124,10 +124,10 @@
 //Link New Device
 "linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "گذرواژه‌ای که وارد کردید قفل این حساب کاربری را باز نمی‌کند";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.networkError" = "یک خطای شبکه در زمان برون ریزی رخ داد.";
+"linkDevice.defaultError" = "یک خطا  در زمان برون ریزی رخ داد.";
+"linkDevice.explanationMessage" = "برای کامل کردن فرایند، باید رینگ را روی افزارهٔ نو گشوده و حساب جدیدی را با انتخاب «پیوند این افزاره به یک حساب» ایجاد کنید. پینتان برای ۱۰ دقیقه معتبر است.";
+"linkDevice.hudMessage" = " در حال انجام تأیید...";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
