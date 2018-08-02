@@ -50,7 +50,7 @@
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
 "createAccount.enterNewUsernamePlaceholder" = "naudotojo vardas";
 "createAccount.newPasswordPlaceholder" = "slaptažodis";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
+"createAccount.repeatPasswordPlaceholder" = "patvirtinkite slaptažodį";
 "createAccount.passwordCharactersNumberError" = "Mažiausiai 6 simboliai";
 "createAccount.passwordNotMatchingError" = "slaptažodžiai nesutampa";
 "createAccount.lookingForUsernameAvailability" = "tikrinamas naudotojo vardo prieinamumas";
@@ -73,14 +73,14 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Paskyra pridėta";
 "alerts.accountNoNetworkTitle" = "Nepavyksta prisijungti prie tinklo";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Nepavyko pridėti paskyros, nes Ring nepavyko prisijungti prie paskirstytojo tinklo. Patikrinkite savo įrenginio ryšį.";
 "alerts.accountDefaultErrorTitle" = "Nežinoma klaida";
 "alerts.accountDefaultErrorMessage" = "Nepavyko sukurti paskyros.";
 "alerts.profileTakePhoto" = "Padaryti nuotrauką";
 "alerts.profileUploadPhoto" = "Įkelti nuotrauką";
 "alerts.profileCancelPhoto" = "Atsisakyti";
 "alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
+"alerts.dbFailedTitle" = "Paleidžiant Ring, įvyko klaida";
 "alerts.dbFailedMessage" = "Prašome užverti programą ir bandyti ją atverti dar kartą";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Užblokuoti kontaktą";
