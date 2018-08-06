@@ -174,8 +174,9 @@ static id <VideoAdapterDelegate> _delegate;
                                                     image.size.width * 4,
                                                     colorSpace,
                                                     kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
-
-        CGContextDrawImage( bitmap, CGRectMake(0, 0, image.size.width, image.size.height), imageRef);
+        CGContextTranslateCTM(bitmap, image.size.width, 0);
+        CGContextScaleCTM(bitmap, -1.0, 1.0);
+        CGContextDrawImage(bitmap, CGRectMake(0, 0, image.size.width, image.size.height), imageRef);
         CGContextRelease(bitmap);
         CGColorSpaceRelease(colorSpace);
     }
