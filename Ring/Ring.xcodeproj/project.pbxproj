@@ -51,7 +51,6 @@
 		04399AE61D1C341A00E99CD9 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB41D1C341A00E99CD9 /* libavfilter.a */; };
 		04399AE71D1C341A00E99CD9 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB51D1C341A00E99CD9 /* libavformat.a */; };
 		04399AE81D1C341A00E99CD9 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB61D1C341A00E99CD9 /* libavutil.a */; };
-		04399AE91D1C341A00E99CD9 /* libFLAC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB71D1C341A00E99CD9 /* libFLAC.a */; };
 		04399AEA1D1C341A00E99CD9 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB81D1C341A00E99CD9 /* libgmp.a */; };
 		04399AEB1D1C341A00E99CD9 /* libgnutls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB91D1C341A00E99CD9 /* libgnutls.a */; };
 		04399AED1D1C341A00E99CD9 /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABB1D1C341A00E99CD9 /* libhogweed.a */; };
@@ -59,7 +58,6 @@
 		04399AF01D1C341A00E99CD9 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */; };
 		04399AF11D1C341A00E99CD9 /* libmsgpackc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABF1D1C341A00E99CD9 /* libmsgpackc.a */; };
 		04399AF21D1C341A00E99CD9 /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC01D1C341A00E99CD9 /* libnettle.a */; };
-		04399AF31D1C341A00E99CD9 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC11D1C341A00E99CD9 /* libogg.a */; };
 		04399AF41D1C341A00E99CD9 /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC21D1C341A00E99CD9 /* libopendht.a */; };
 		04399AF51D1C341A00E99CD9 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC31D1C341A00E99CD9 /* libopus.a */; };
 		04399AF61D1C341A00E99CD9 /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC41D1C341A00E99CD9 /* libpcre.a */; };
@@ -77,8 +75,6 @@
 		04399B021D1C341A00E99CD9 /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD01D1C341A00E99CD9 /* libpjsua.a */; };
 		04399B031D1C341A00E99CD9 /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD11D1C341A00E99CD9 /* libpjsua2.a */; };
 		04399B061D1C341A00E99CD9 /* libring.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD41D1C341A00E99CD9 /* libring.a */; };
-		04399B071D1C341A00E99CD9 /* libsamplerate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD51D1C341A00E99CD9 /* libsamplerate.a */; };
-		04399B081D1C341A00E99CD9 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD61D1C341A00E99CD9 /* libsndfile.a */; };
 		04399B091D1C341A00E99CD9 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD71D1C341A00E99CD9 /* libspeex.a */; };
 		04399B0A1D1C341A00E99CD9 /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD81D1C341A00E99CD9 /* libspeexdsp.a */; };
 		04399B0B1D1C341A00E99CD9 /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD91D1C341A00E99CD9 /* libsrtp.a */; };
@@ -86,9 +82,6 @@
 		04399B0D1D1C341A00E99CD9 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADB1D1C341A00E99CD9 /* libswscale.a */; };
 		04399B0E1D1C341A00E99CD9 /* libthreadutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADC1D1C341A00E99CD9 /* libthreadutil.a */; };
 		04399B0F1D1C341A00E99CD9 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
-		04399B101D1C341A00E99CD9 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADE1D1C341A00E99CD9 /* libvorbis.a */; };
-		04399B111D1C341A00E99CD9 /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADF1D1C341A00E99CD9 /* libvorbisenc.a */; };
-		04399B121D1C341A00E99CD9 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE01D1C341A00E99CD9 /* libvorbisfile.a */; };
 		04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
@@ -685,7 +678,6 @@
 				04399AE61D1C341A00E99CD9 /* libavfilter.a in Frameworks */,
 				04399AE71D1C341A00E99CD9 /* libavformat.a in Frameworks */,
 				04399AE81D1C341A00E99CD9 /* libavutil.a in Frameworks */,
-				04399AE91D1C341A00E99CD9 /* libFLAC.a in Frameworks */,
 				04399AEA1D1C341A00E99CD9 /* libgmp.a in Frameworks */,
 				04399AEB1D1C341A00E99CD9 /* libgnutls.a in Frameworks */,
 				04399AED1D1C341A00E99CD9 /* libhogweed.a in Frameworks */,
@@ -693,7 +685,6 @@
 				04399AF01D1C341A00E99CD9 /* libjsoncpp.a in Frameworks */,
 				04399AF11D1C341A00E99CD9 /* libmsgpackc.a in Frameworks */,
 				04399AF21D1C341A00E99CD9 /* libnettle.a in Frameworks */,
-				04399AF31D1C341A00E99CD9 /* libogg.a in Frameworks */,
 				04399AF41D1C341A00E99CD9 /* libopendht.a in Frameworks */,
 				04399AF51D1C341A00E99CD9 /* libopus.a in Frameworks */,
 				04399AF61D1C341A00E99CD9 /* libpcre.a in Frameworks */,
@@ -712,8 +703,6 @@
 				04399B021D1C341A00E99CD9 /* libpjsua.a in Frameworks */,
 				04399B031D1C341A00E99CD9 /* libpjsua2.a in Frameworks */,
 				04399B061D1C341A00E99CD9 /* libring.a in Frameworks */,
-				04399B071D1C341A00E99CD9 /* libsamplerate.a in Frameworks */,
-				04399B081D1C341A00E99CD9 /* libsndfile.a in Frameworks */,
 				04399B091D1C341A00E99CD9 /* libspeex.a in Frameworks */,
 				04399B0A1D1C341A00E99CD9 /* libspeexdsp.a in Frameworks */,
 				04399B0B1D1C341A00E99CD9 /* libsrtp.a in Frameworks */,
@@ -721,9 +710,6 @@
 				04399B0D1D1C341A00E99CD9 /* libswscale.a in Frameworks */,
 				04399B0E1D1C341A00E99CD9 /* libthreadutil.a in Frameworks */,
 				04399B0F1D1C341A00E99CD9 /* libupnp.a in Frameworks */,
-				04399B101D1C341A00E99CD9 /* libvorbis.a in Frameworks */,
-				04399B111D1C341A00E99CD9 /* libvorbisenc.a in Frameworks */,
-				04399B121D1C341A00E99CD9 /* libvorbisfile.a in Frameworks */,
 				04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */,
 				04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */,
 				04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */,
