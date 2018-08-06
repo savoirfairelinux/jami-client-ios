@@ -54,6 +54,9 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private let quality = AVCaptureSession.Preset.medium
     private var orientation = AVCaptureVideoOrientation.portrait
+    var getOrientation: AVCaptureVideoOrientation {
+        get { return orientation }
+    }
 
     var permissionGranted = Variable<Bool>(false)
 
@@ -89,7 +92,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 bestRate = frameRates.maxFrameRate
             }
         }
-        if orientation == .portrait || orientation == .portraitUpsideDown {
+        if  orientation == .portrait ||
+            orientation == .portraitUpsideDown {
             let devInfo: DeviceInfo = ["format": "BGRA",
                                        "width": String(dimensions.height),
                                        "height": String(dimensions.width),
@@ -327,11 +331,6 @@ class VideoService: FrameExtractorDelegate {
     }
 
     func setCameraOrientation(orientation: UIDeviceOrientation) {
-        self.blockOutgoingFrame = true
-        let deviceName: String =
-            (orientation == .landscapeLeft || orientation == .landscapeRight) ?
-                self.camera.nameLandscape : self.camera.namePortrait
-        self.switchInput(toDevice: self.camera.nameCamera + deviceName)
         var newOrientation: AVCaptureVideoOrientation
         switch orientation {
         case .portrait:
@@ -345,9 +344,18 @@ class VideoService: FrameExtractorDelegate {
         default:
             newOrientation = AVCaptureVideoOrientation.portrait
         }
+        if newOrientation == camera.getOrientation {
+            self.log.warning("no orientation change required")
+            return
+        }
+        self.blockOutgoingFrame = true
+        let deviceName: String =
+            (orientation == .landscapeLeft || orientation == .landscapeRight) ?
+                self.camera.nameLandscape : self.camera.namePortrait
+        self.switchInput(toDevice: self.camera.nameCamera + deviceName)
         self.camera.rotateCamera(orientation: newOrientation)
             .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("new camera orientation: \(orientation)")
+                self.log.debug("new camera orientation isPortrait: \(orientation.isPortrait)")
             }, onError: { error in
                 self.log.debug("camera re-orientation error: \(error)")
             }).disposed(by: self.disposeBag)

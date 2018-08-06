@@ -95,7 +95,7 @@ class CallViewModel: Stateable, ViewModel {
                 return call.state == .over || call.state == .failure
             }).map({ hide in
                 if hide {
-                    self.videoService.setCameraOrientation(orientation: .portrait)
+                    self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
                 }
                 return hide
             })
@@ -281,6 +281,15 @@ class CallViewModel: Stateable, ViewModel {
         self.videoService = injectionBag.videoService
         self.audioService = injectionBag.audioService
         self.profileService = injectionBag.profileService
+
+        callService.currentCall.filter({ [weak self] call in
+            return call.callId == self?.call?.callId
+        }).map({ call in
+            return call.state == .current
+        }).subscribe(onNext: { _ in
+            self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
+        }).disposed(by: self.disposeBag)
+
     }
 
     static func formattedDurationFrom(interval: Int) -> String {
