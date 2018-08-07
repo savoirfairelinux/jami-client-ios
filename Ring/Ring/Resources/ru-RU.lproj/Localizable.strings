@@ -27,7 +27,7 @@
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Search Result";
-"smartlist.conversations" = "Беседы";
+"smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
 "smartlist.noNetworkConnectivity" = "Отсутствует сетевое подключение";

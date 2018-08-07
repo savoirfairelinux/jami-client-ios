@@ -20,14 +20,14 @@
 
 // Global
 "global.homeTabBarTitle" = "خانه";
-"global.contactRequestsTabBarTitle" = "دعوت نامه‌ها";
+"global.contactRequestsTabBarTitle" = "دعوت ها";
 "global.meTabBarTitle" = "حساب کاربری";
 "global.ok" = "خب";
 
 // Smartlist
 "smartlist.yesterday" = "دیروز";
 "smartlist.results" = "Search Result";
-"smartlist.conversations" = " گفتگو";
+"smartlist.conversations" = "گفتگو";
 "smartlist.searching" = "در حال جستجو...";
 "smartlist.noResults" = "بدون نتیجه";
 "smartlist.noNetworkConnectivity" = "بدون اتصال شبکه";
@@ -37,7 +37,7 @@
 
 //Welcome Screen
 "welcome.title" = "به رینگ خوش آمدید";
-"welcome.text" = "رینگ یک نرم‌افزار ارتباطات جهانی است که به آزادی‌ها و حریم شخصی کاربرانش احترام می‌گذارد.";
+"welcome.text" = "رینگ یک نرم‌افزار ارتباط جهانی است که آزادی‌ها و حریم شخصی کاربرانش را حفظ می کند.";
 "welcome.linkDevice" = "پیوند این افزاره به یک حساب";
 "welcome.createAccount" = "ساخت یک حساب رینگ";
 
@@ -47,7 +47,7 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "حساب کاربری رینگ خود را بسازید";
-"createAccount.chooseStrongPassword" = "برای محافظت از حساب رینگ‌، گذرواژه‌ای قوی که به خاطر خواهید سپرد را برگزینید.";
+"createAccount.chooseStrongPassword" = "برای محافظت از حساب رینگ‌، گذرواژه‌ای قوی که  به خاطر می آورید را برگزینید.";
 "createAccount.enterNewUsernamePlaceholder" = "نام کاربری";
 "createAccount.newPasswordPlaceholder" = "گذرواژه";
 "createAccount.repeatPasswordPlaceholder" = "تأیید گذرواژه";
@@ -66,12 +66,12 @@
 "linkToAccount.pinPlaceholder" = "پین";
 "linkToAccount.passwordLabel" = "گذرواژه را وارد کنید";
 "linkToAccount.pinLabel" = "پین را وارد کنید";
-"linkToAccount.explanationPinMessage" = "برای تولید پین کد (PIN)، به تنظیمات مدیریت حساب در دستگاهی که حاوی حساب کاربری مورد نظر شماست رجوع کنید. در تنظیمات دستگاه، «یک دستگاه دیگر را به این حساب پیوند دهید» را انتخاب کنید. برای تکمیل این فرم پین لازم را دریافت خواهید کرد. پین فقط ده دقیقه معتبر است";
+"linkToAccount.explanationPinMessage" = "برای تولید پین کد ( یا PIN)، به تنظیمات مدیریت حساب در دستگاهی که حاوی حساب کاربری مورد نظر شماست رجوع کنید. در تنظیمات دستگاه، «یک دستگاه دیگر را به این حساب پیوند دهید» را انتخاب کنید. برای تکمیل این فرم پین لازم را دریافت خواهید کرد. پین فقط ده (10) دقیقه معتبر است";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "نمی‌تواند حساب را یافت";
 "alerts.accountCannotBeFoundMessage" = "حساب در شبکه رینگ یافت نشد. اطمینان حاصل کنید که حساب را از یک دستگاه  (که دارای حساب رینگ است)  صادر کرده اید و اعتبارنامه‌های ارائه شده صحیح است.";
-"alerts.accountAddedTitle" = "حساب اضافه شد.";
+"alerts.accountAddedTitle" = "حساب افزوده شد.";
 "alerts.accountNoNetworkTitle" = "نمی‌توان به شبکه وصل شد";
 "alerts.accountNoNetworkMessage" = "نمیتوان حساب را افزود زیرا رینگ نمیتوانست به شبکه توزیع شده متصل شود. اتصال دستگاه خود را بررسی کنید.";
 "alerts.accountDefaultErrorTitle" = "خطای ناشناخته";
@@ -124,7 +124,7 @@
 //Link New Device
 "linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "گذرواژه‌ای که وارد کردید قفل این حساب کاربری را باز نمی‌کند";
-"linkDevice.networkError" = "یک خطای شبکه در زمان برون ریزی رخ داد.";
+"linkDevice.networkError" = "یک خطای در ارتباط با شبکه  در زمان برون ریزی رخ داد.";
 "linkDevice.defaultError" = "یک خطا  در زمان برون ریزی رخ داد.";
 "linkDevice.explanationMessage" = "برای کامل کردن فرایند، باید رینگ را روی افزارهٔ نو گشوده و حساب جدیدی را با انتخاب «پیوند این افزاره به یک حساب» ایجاد کنید. پینتان برای ۱۰ دقیقه معتبر است.";
 "linkDevice.hudMessage" = " در حال انجام تأیید...";

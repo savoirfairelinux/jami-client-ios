@@ -22,7 +22,7 @@
 "global.homeTabBarTitle" = "Домой";
 "global.contactRequestsTabBarTitle" = "Приглашения";
 "global.meTabBarTitle" = "Аккаунт";
-"global.ok" = "Ok";
+"global.ok" = "OK";
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
@@ -140,7 +140,7 @@
 "dataTransfer.readableStatusCreated" = "Инициализация…";
 "dataTransfer.readableStatusError" = "Ошибка";
 "dataTransfer.readableStatusAwaiting" = "Ожидание…";
-"dataTransfer.readableStatusRefuse" = "Отклонить";
+"dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Передача…";
 "dataTransfer.readableStatusCanceled" = "Отменено";
 "dataTransfer.readableStatusSuccess" = "Завершено";

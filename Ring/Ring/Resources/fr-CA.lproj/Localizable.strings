@@ -124,7 +124,7 @@
 //Link New Device
 "linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "Une erreur résaux c'est produite lors de l'exportation";
+"linkDevice.networkError" = "Une erreur réseau s'est produite lors de l'exportation";
 "linkDevice.defaultError" = "Une erreur s'est produite lors de l'exportation";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";
