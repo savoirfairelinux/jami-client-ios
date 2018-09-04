@@ -138,9 +138,12 @@ class CallViewModel: Stateable, ViewModel {
             .filter({ [weak self] call in
                 return call.callId == self?.call?.callId
             }).map({ [weak self] call in
-            if call.state == .connecting || call.state == .ringing &&
+            if call.state == .connecting &&
                 call.callType == .outgoing {
-                return L10n.Calls.calling
+                return L10n.Calls.connecting
+            } else if call.state == .ringing &&
+                call.callType == .outgoing {
+                return L10n.Calls.ringing
             } else if call.state == .over {
                 return L10n.Calls.callFinished
             } else {

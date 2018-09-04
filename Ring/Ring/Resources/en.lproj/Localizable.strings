@@ -100,7 +100,8 @@
 "calls.callItemTitle" = "Call";
 "calls.unknown" = "Unknown";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "Ringing...";
+"calls.connecting" = "Connecting...";
 "calls.callFinished" = "Call finished";
 
 //Account Page
