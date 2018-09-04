@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25d3338e_4b1d703f",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-09-04T18:06:16Z",
+      "side": 1,
+      "message": "maybe put this check in the filter block, then change the call.state check to a switch block?",
+      "range": {
+        "startLine": 142,
+        "startChar": 16,
+        "endLine": 142,
+        "endChar": 42
+      },
+      "revId": "751bf85f82697a402648f5f5959c3e3823ede06c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "317223b3_8d4b01c1",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-09-04T18:06:16Z",
+      "side": 1,
+      "message": "remove the ellipsis (like Android)",
+      "range": {
+        "startLine": 103,
+        "startChar": 19,
+        "endLine": 103,
+        "endChar": 29
+      },
+      "revId": "751bf85f82697a402648f5f5959c3e3823ede06c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4979a0dc_b8ada27d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-09-04T18:06:16Z",
+      "side": 1,
+      "message": "remove the ellipsis (like Android)",
+      "range": {
+        "startLine": 104,
+        "startChar": 22,
+        "endLine": 104,
+        "endChar": 35
+      },
+      "revId": "751bf85f82697a402648f5f5959c3e3823ede06c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
