@@ -18,11 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uxJ-OM-NUP">
-                                <rect key="frame" x="0.0" y="20" width="375" height="121"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfp-Xe-xOH">
                                 <rect key="frame" x="166" y="550" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -35,8 +30,7 @@
                         <viewLayoutGuide key="safeArea" id="fMq-WO-EdK"/>
                     </view>
                     <connections>
-                        <outlet property="infoLbl" destination="xfp-Xe-xOH" id="01t-eC-FmR"/>
-                        <outlet property="topbar" destination="uxJ-OM-NUP" id="MSf-fs-WLh"/>
+                        <outlet property="infoLbl" destination="xfp-Xe-xOH" id="PlC-Vy-J42"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kcY-va-ant" userLabel="First Responder" sceneMemberID="firstResponder"/>
