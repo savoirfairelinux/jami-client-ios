@@ -25,6 +25,7 @@ import RxCocoa
 import Reusable
 import SwiftyBeaver
 
+
 //Constants
 private struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 64.0
@@ -34,8 +35,9 @@ private struct SmartlistConstants {
 }
 
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
-
+    
     private let log = SwiftyBeaver.self
+    
 
     // MARK: outlets
     @IBOutlet weak var tableView: UITableView!
@@ -48,21 +50,29 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var cellularAlertLabel: UILabel!
     @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var qrCodeButton: UIButton!
 
     // MARK: members
     var viewModel: SmartlistViewModel!
     fileprivate let disposeBag = DisposeBag()
 
     // MARK: functions
+    @IBAction func openScan(_ sender: Any) {
+        self.navigationController?.present(ScanViewController.instantiate(), animated: true, completion: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.setupDataSources()
         self.setupTableViews()
         self.setupSearchBar()
         self.setupUI()
         self.configureRingNavigationBar()
-
+        self.qrCodeButton.layer.zPosition = 2
+        self.searchBar.layer.zPosition = 1
+//        let imageQrCodeScan = UIImage(asset: Asset.qrCodeScan) as UIImage?
+//        let qrCodeButton   = UIButton(type: UIButtonType.custom) as UIButton
+//        qrCodeButton.setImage(imageQrCodeScan, for: .normal)
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
          or disappears
@@ -325,3 +335,5 @@ extension SmartlistViewController: UITableViewDelegate {
         }
     }
 }
+
+

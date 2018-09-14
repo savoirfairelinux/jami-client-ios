@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Raw-Ee-7sK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Raw-Ee-7sK">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -119,6 +119,14 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddv-XZ-9eH">
+                                <rect key="frame" x="301" y="32" width="68" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="qr_code_scan"/>
+                                <connections>
+                                    <action selector="openScan:" destination="Raw-Ee-7sK" eventType="touchUpInside" id="Iha-gr-csT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -150,6 +158,7 @@
                         <outlet property="networkAlertLabel" destination="Fu7-Dr-XvA" id="0qV-lk-9mE"/>
                         <outlet property="networkAlertViewTopConstraint" destination="CLm-6J-lYv" id="LEO-Ep-Gpx"/>
                         <outlet property="noConversationsView" destination="EvL-Bu-O1T" id="tVV-6a-4Xg"/>
+                        <outlet property="qrCodeButton" destination="Ddv-XZ-9eH" id="mad-qx-bOg"/>
                         <outlet property="searchBar" destination="xPr-nI-I35" id="Y3U-rV-yfc"/>
                         <outlet property="searchResultsTableView" destination="opE-y7-3Rm" id="F3g-9d-IQt"/>
                         <outlet property="searchTableViewLabel" destination="4Yu-Fe-ixq" id="dq3-QM-bfA"/>
@@ -159,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JSt-CJ-9Vq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-97.5" y="-1177.8169014084508"/>
+            <point key="canvasLocation" x="-108" y="-1208.5457271364319"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="YBM-c2-EWl">
@@ -180,6 +189,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="qr_code_scan" width="32" height="32"/>
         <image name="settings_icon" width="24" height="24"/>
     </resources>
 </document>

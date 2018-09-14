@@ -129,7 +129,7 @@ struct AccountModelHelper {
         return self.account
     }
 
-    var ringId: String? {
+    public var ringId: String? {
 
         let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.accountUsername)
         let accountUsername = self.account.details?.get(withConfigKeyModel: accountUsernameKey)
