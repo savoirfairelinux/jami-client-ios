@@ -22,18 +22,16 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
 
     //Empty Rectangle with green border to outline detected QR or BarCode
-//    lazy var codeFrame:UIView = {
-//        let cFrame = UIView()
-//        cFrame.layer.borderColor = UIColor.red.cgColor
-//        cFrame.layer.borderWidth = 1.5
-//        cFrame.frame = CGRect.zero
-//        cFrame.translatesAutoresizingMaskIntoConstraints = false
-//        return cFrame
-//    }()
+    lazy var codeFrame:UIView = {
+        let cFrame = UIView()
+        cFrame.layer.borderColor = UIColor.red.cgColor
+        cFrame.layer.borderWidth = 1.5
+        cFrame.frame = CGRect.zero
+        cFrame.translatesAutoresizingMaskIntoConstraints = false
+        return cFrame
+    }()
 
-    func test() {
-        print("test")
-    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         captureSession?.stopRunning()
     }
@@ -98,7 +96,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             return
         }
 
-//        view.addSubview(codeFrame)
+        view.addSubview(codeFrame)
         
         //transformedMetaDataObject returns layer coordinates/height/width from visual properties
         guard let metaDataCoordinates = videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
@@ -106,7 +104,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
         }
 
         //Those coordinates are assigned to our codeFrame
-//        codeFrame.frame = metaDataCoordinates.bounds
+        codeFrame.frame = metaDataCoordinates.bounds
         AudioServicesPlayAlertSound(systemSoundId)
         infoLbl.text = stringCodeValue
         //        if let url = URL(string: stringCodeValue) {
