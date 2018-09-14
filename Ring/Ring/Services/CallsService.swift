@@ -277,7 +277,7 @@ class CallsService: CallsAdapterDelegate {
     // swiftlint:enable cyclomatic_complexity
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String) {
-        if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
+if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
 
             if !isCurrentCall() {
                 var call = self.calls[callId]

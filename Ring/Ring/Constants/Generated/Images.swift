@@ -69,6 +69,8 @@ internal enum Asset {
   internal static let icContactPicture = ImageAsset(name: "ic_contact_picture")
   internal static let moreSettings = ImageAsset(name: "more_settings")
   internal static let pauseCall = ImageAsset(name: "pause_call")
+  internal static let qrCode = ImageAsset(name: "qr_code")
+  internal static let qrCodeScan = ImageAsset(name: "qr_code_scan")
   internal static let ringIcon = ImageAsset(name: "ringIcon")
   internal static let ringLogo = ImageAsset(name: "ring_logo")
   internal static let sendButton = ImageAsset(name: "send_button")
@@ -107,6 +109,8 @@ internal enum Asset {
     icContactPicture,
     moreSettings,
     pauseCall,
+    qrCode,
+    qrCodeScan,
     ringIcon,
     ringLogo,
     sendButton,

@@ -41,15 +41,15 @@ class GeneratedInteractionsManager {
         self.contactService
             .sharedResponseStream
             .subscribe(onNext: { [unowned self] contactRequestEvent in
-
+                
                 guard let accountID: String = contactRequestEvent.getEventInput(.accountId) else {
                     return
                 }
-
+                
                 guard let contactRingId: String = contactRequestEvent.getEventInput(.uri) else {
                     return
                 }
-
+                
                 guard let account = self.accountService.getAccount(fromAccountId: accountID) else {
                     return
                 }
@@ -57,7 +57,6 @@ class GeneratedInteractionsManager {
                 guard let ringId = AccountModelHelper(withAccount: account).ringId else {
                     return
                 }
-
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount {
                     if let currentrRingId = AccountModelHelper(withAccount: currentAccount).ringId, currentrRingId == ringId {
@@ -95,9 +94,9 @@ class GeneratedInteractionsManager {
                                                          date: date,
                                                          interactionType: InteractionType.contact,
                                                          shouldUpdateConversation: shouldUpdateConversations)
-
             })
-            .disposed(by: disposeBag)
+            
+                        .disposed(by: disposeBag)
     }
 
     private func removeConversation(accountId: String, accountRingId: String,
