@@ -57,7 +57,6 @@ class GeneratedInteractionsManager {
                 guard let ringId = AccountModelHelper(withAccount: account).ringId else {
                     return
                 }
-
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount {
                     if let currentrRingId = AccountModelHelper(withAccount: currentAccount).ringId, currentrRingId == ringId {
@@ -95,7 +94,6 @@ class GeneratedInteractionsManager {
                                                          date: date,
                                                          interactionType: InteractionType.contact,
                                                          shouldUpdateConversation: shouldUpdateConversations)
-
             })
             .disposed(by: disposeBag)
     }

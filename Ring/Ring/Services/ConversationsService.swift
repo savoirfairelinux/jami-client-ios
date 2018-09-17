@@ -198,7 +198,6 @@ class ConversationsService {
                          date: Date,
                          interactionType: InteractionType,
                          shouldUpdateConversation: Bool) {
-
         let message = MessageModel(withId: "", receivedDate: date, content: messageContent, author: accountRingId, incoming: false)
         message.isGenerated = true
 

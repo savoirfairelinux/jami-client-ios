@@ -221,6 +221,13 @@ internal enum L10n {
     internal static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle")
   }
 
+  internal enum Scan {
+    /// Bad QR code
+    internal static let badQrCode = L10n.tr("Localizable", "scan.badQrCode")
+    /// Searching…
+    internal static let search = L10n.tr("Localizable", "scan.search")
+  }
+
   internal enum Smartlist {
     /// Be sure cellular access is granted in your settings
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess")
