@@ -37,11 +37,28 @@ enum MessageSequencing {
 
 enum GeneratedMessageType: String {
     case receivedContactRequest = "Contact request received"
-    case contactAdded = "Contact added"
+    case contactAdded =  "Contact added"
     case missedIncomingCall = "Missed incoming call"
     case missedOutgoingCall = "Missed outgoing call"
     case incomingCall = "Incoming call"
     case outgoingCall = "Outgoing call"
+    
+    func toString() -> String {
+        switch self {
+        case .receivedContactRequest:
+            return L10n.Events.receivedContactRequest
+        case .contactAdded:
+            return L10n.Events.contactAdded
+        case .missedIncomingCall:
+            return L10n.Events.missedIncomingCall
+        case .missedOutgoingCall:
+            return L10n.Events.missedOutgoingCall
+        case .incomingCall:
+            return L10n.Events.incomingCall
+        case .outgoingCall:
+            return L10n.Events.outgoingCall
+        }
+    }
 }
 
 class MessageViewModel {

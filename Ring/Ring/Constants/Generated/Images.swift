@@ -60,6 +60,7 @@ internal enum Asset {
   internal static let closeIcon = ImageAsset(name: "close_icon")
   internal static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   internal static let conversationIcon = ImageAsset(name: "conversation_icon")
+  internal static let cross = ImageAsset(name: "cross")
   internal static let device = ImageAsset(name: "device")
   internal static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
   internal static let doneIcon = ImageAsset(name: "done_icon")
@@ -69,8 +70,11 @@ internal enum Asset {
   internal static let icContactPicture = ImageAsset(name: "ic_contact_picture")
   internal static let moreSettings = ImageAsset(name: "more_settings")
   internal static let pauseCall = ImageAsset(name: "pause_call")
+  internal static let qrCode = ImageAsset(name: "qr_code")
+  internal static let qrCodeScan = ImageAsset(name: "qr_code_scan")
   internal static let ringIcon = ImageAsset(name: "ringIcon")
   internal static let ringLogo = ImageAsset(name: "ring_logo")
+  internal static let scan = ImageAsset(name: "scan")
   internal static let sendButton = ImageAsset(name: "send_button")
   internal static let settingsIcon = ImageAsset(name: "settings_icon")
   internal static let shareButton = ImageAsset(name: "share_button")
@@ -98,6 +102,7 @@ internal enum Asset {
     closeIcon,
     contactRequestIcon,
     conversationIcon,
+    cross,
     device,
     disableSpeakerphone,
     doneIcon,
@@ -107,8 +112,11 @@ internal enum Asset {
     icContactPicture,
     moreSettings,
     pauseCall,
+    qrCode,
+    qrCodeScan,
     ringIcon,
     ringLogo,
+    scan,
     sendButton,
     settingsIcon,
     shareButton,

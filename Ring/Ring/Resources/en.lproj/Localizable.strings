@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Search...";
+
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Search Result";
@@ -103,6 +107,14 @@
 "calls.ringing" = "Ringing";
 "calls.connecting" = "Connecting";
 "calls.callFinished" = "Call finished";
+
+//events
+"events.receivedContactRequest" = "Contact request received";
+"events.contactAdded" = "Contact added test";
+"events.missedIncomingCall" = "Missed incoming call";
+"events.missedOutgoingCall" = "Missed outgoing call";
+"events.incomingCall" = "Incoming call";
+"events.outgoingCall" = "Outgoing call";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
