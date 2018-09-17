@@ -1,4 +1,4 @@
-﻿ /*
+ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -102,6 +102,10 @@
 "calls.incomingCallInfo" = "veut vous parler";
 "calls.calling" = "Appel ...";
 "calls.callFinished" = "Appel terminé";
+
+//Events
+"events.contactAdded" = "Contact ajouté";
+
 
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";
