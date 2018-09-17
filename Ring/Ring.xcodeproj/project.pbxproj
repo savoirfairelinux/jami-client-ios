@@ -281,6 +281,9 @@
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
 		62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
 		66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */; };
+		6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6613A611214AFF4700B497D1 /* ScanViewController.storyboard */; };
+		66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FBF21557D2F002757A6 /* ScanViewModel.swift */; };
+		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -647,6 +650,9 @@
 		62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsColors.swift; sourceTree = "<group>"; };
 		66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emoji+Helpers.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		6613A611214AFF4700B497D1 /* ScanViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScanViewController.storyboard; sourceTree = "<group>"; };
+		66266FBF21557D2F002757A6 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
+		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -936,7 +942,6 @@
 				1A0C4EBC1F1D48AA00550433 /* Features */,
 				1ABE07C61F0D86B300D36361 /* Resources */,
 				02EFCACF1E0C3DD600FD8ED1 /* Bridging */,
-				02E1A0271DDE4C3900D75B59 /* Account */,
 				043866341D22D04E00E06CE2 /* UI */,
 				043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */,
 				1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */,
@@ -1183,6 +1188,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				6613A610214AF8B100B497D1 /* QRCode */,
 				0E3BD4222044770000A50DDF /* Contact */,
 				5CE66F721FBF765D00EE9291 /* InitialLoading */,
 				0E4909711FEAC822005CAA50 /* Calls */,
@@ -1426,6 +1432,7 @@
 			children = (
 				0EBCAA4D202E60F000E2A545 /* default.wav */,
 				1ABE07DA1F0D915100D36361 /* Localizable.strings */,
+				02E1A0271DDE4C3900D75B59 /* Account */,
 				04399A021D1C2D9D00E99CD9 /* Images.xcassets */,
 			);
 			path = Resources;
@@ -1490,6 +1497,16 @@
 				0E3697A6203243D3009A68CA /* BannedContactCell.swift */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		6613A610214AF8B100B497D1 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				66ACB42F214AE28C00A94162 /* ScanViewController.swift */,
+				66266FBF21557D2F002757A6 /* ScanViewModel.swift */,
+				6613A611214AFF4700B497D1 /* ScanViewController.storyboard */,
+			);
+			path = QRCode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1691,6 +1708,7 @@
 				0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */,
 				1A2D18ED1F2919D800B2C785 /* MeViewController.storyboard in Resources */,
 				0E35C10D2077DFF000BBA5E3 /* NotificationCell.xib in Resources */,
+				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1A20417E1F1E8DDA00C08435 /* CreateProfileViewController.storyboard in Resources */,
 				0EAA9DB52029F0AA005E245C /* ProxyCell.xib in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
@@ -1840,6 +1858,7 @@
 				1A2D18D81F2918EE00B2C785 /* MeDetailViewController.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
+				66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
 				0E438A9A204F47E700402900 /* SettingsTableView.swift in Sources */,
 				0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */,
@@ -1945,6 +1964,7 @@
 				1A5DC02C1F3565250075E8EF /* MeViewController.swift in Sources */,
 				0EF78DE31FD0AE3000FC6966 /* ConversationsManager.swift in Sources */,
 				0EAA9DB42029F0AA005E245C /* ProxyCell.swift in Sources */,
+				66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */,
 				1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */,
 				66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */,
 				0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */,

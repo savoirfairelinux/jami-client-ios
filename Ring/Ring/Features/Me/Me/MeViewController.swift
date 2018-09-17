@@ -80,14 +80,24 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     private func configureBindings() {
         let infoButton = UIButton(type: .infoLight)
+        let imageQrCode = UIImage(asset: Asset.qrCode) as UIImage?
+        let qrCodeButton   = UIButton(type: UIButtonType.custom) as UIButton
+        qrCodeButton.setImage(imageQrCode, for: .normal)
         let infoItem = UIBarButtonItem(customView: infoButton)
+        let qrCodeButtonItem = UIBarButtonItem(customView: qrCodeButton)
         infoButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.infoItemTapped()
             })
             .disposed(by: self.disposeBag)
+        qrCodeButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.qrCodeItemTapped()
+            })
+            .disposed(by: self.disposeBag)
 
         self.navigationItem.rightBarButtonItem = infoItem
+        self.navigationItem.leftBarButtonItem = qrCodeButtonItem
 
         //setup Table
         self.settingsTable.estimatedRowHeight = 50
@@ -140,6 +150,40 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
         alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
         self.present(alert, animated: true, completion: nil)
+    }
+
+    private func qrCodeItemTapped() {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        guard let ringId = viewModel.getRingId() else { return }
+        let imageQRCode = UIImageView(image: generateQRCode(from: ringId))
+        imageQRCode.layer.cornerRadius = 8.0
+        imageQRCode.clipsToBounds = true
+        imageQRCode.translatesAutoresizingMaskIntoConstraints = false
+        alert.view.addSubview(imageQRCode)
+        alert.view.addConstraint(NSLayoutConstraint(item: imageQRCode, attribute: .centerX, relatedBy: .equal, toItem: alert.view, attribute: .centerX, multiplier: 1, constant: 0))
+        alert.view.addConstraint(NSLayoutConstraint(item: imageQRCode, attribute: .centerY, relatedBy: .equal, toItem: alert.view, attribute: .top, multiplier: 1, constant: 0.0))
+        alert.view.addConstraint(NSLayoutConstraint(item: imageQRCode, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 270))
+        alert.view.addConstraint(NSLayoutConstraint(item: imageQRCode, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 270))
+        self.present(alert, animated: true, completion: {
+            alert.view.superview?.isUserInteractionEnabled = true
+            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+        })
+    }
+
+    @objc func alertControllerBackgroundTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func generateQRCode(from string: String) -> UIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+        if let filter = CIFilter(name: "CIQRCodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 100, y: 100)
+            if let output = filter.outputImage?.transformed(by: transform) {
+                return UIImage(ciImage: output)
+            }
+        }
+        return nil
     }
 
     private func setUpDataSource() {
@@ -279,7 +323,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             }
         }
     }
-    
+
     func askProxyAddressAlert() {
         let alert = UIAlertController(title: L10n.Accountpage.proxyAddressAlert,
                                       message: nil,

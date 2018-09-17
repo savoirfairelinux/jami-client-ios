@@ -25,6 +25,7 @@ enum ConversationState: State {
     case startAudioCall(contactRingId: String, userName: String)
     case conversationDetail(conversationViewModel: ConversationViewModel)
     case contactDetail(conversationViewModel: ConversationModel)
+    case qrCode()
 }
 
 protocol ConversationNavigation: class {
@@ -47,8 +48,19 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 self.showConversation(withConversationViewModel: conversationViewModel)
             case .contactDetail(let conversationModel):
                 self.presentContactInfo(conversation: conversationModel)
+            case .qrCode():
+                self.openQRCode()
             }
         }).disposed(by: self.disposeBag)
+    }
+
+    func openQRCode () {
+        let scanViewController = ScanViewController.instantiate(with: self.injectionBag);
+        self.present(viewController: scanViewController,
+                     withStyle: .present,
+                     withAnimation: true,
+                     withStateable: scanViewController.viewModel,
+                     lockWhilePresenting: VCType.conversation.rawValue)
     }
 
     func presentContactInfo(conversation: ConversationModel) {
