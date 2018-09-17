@@ -50,7 +50,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var cellularAlertLabel: UILabel!
     @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var qrCodeButton: UIButton!
 
     // MARK: members
     var viewModel: SmartlistViewModel!
@@ -68,11 +67,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.setupSearchBar()
         self.setupUI()
         self.configureRingNavigationBar()
-        self.qrCodeButton.layer.zPosition = 2
-        self.searchBar.layer.zPosition = 1
-//        let imageQrCodeScan = UIImage(asset: Asset.qrCodeScan) as UIImage?
-//        let qrCodeButton   = UIButton(type: UIButtonType.custom) as UIButton
-//        qrCodeButton.setImage(imageQrCodeScan, for: .normal)
+
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
          or disappears

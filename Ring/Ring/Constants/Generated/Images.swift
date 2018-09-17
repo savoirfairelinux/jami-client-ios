@@ -60,6 +60,7 @@ internal enum Asset {
   internal static let closeIcon = ImageAsset(name: "close_icon")
   internal static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   internal static let conversationIcon = ImageAsset(name: "conversation_icon")
+  internal static let cross = ImageAsset(name: "cross")
   internal static let device = ImageAsset(name: "device")
   internal static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
   internal static let doneIcon = ImageAsset(name: "done_icon")
@@ -100,6 +101,7 @@ internal enum Asset {
     closeIcon,
     contactRequestIcon,
     conversationIcon,
+    cross,
     device,
     disableSpeakerphone,
     doneIcon,
