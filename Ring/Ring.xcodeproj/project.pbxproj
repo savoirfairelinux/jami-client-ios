@@ -280,6 +280,8 @@
 		62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */; };
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
 		62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
+		6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6613A611214AFF4700B497D1 /* ScanViewController.storyboard */; };
+		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -645,6 +647,8 @@
 		62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsColors.swift; sourceTree = "<group>"; };
+		6613A611214AFF4700B497D1 /* ScanViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScanViewController.storyboard; sourceTree = "<group>"; };
+		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1180,6 +1184,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				6613A610214AF8B100B497D1 /* QRCode */,
 				0E3BD4222044770000A50DDF /* Contact */,
 				5CE66F721FBF765D00EE9291 /* InitialLoading */,
 				0E4909711FEAC822005CAA50 /* Calls */,
@@ -1489,6 +1494,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		6613A610214AF8B100B497D1 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				66ACB42F214AE28C00A94162 /* ScanViewController.swift */,
+				6613A611214AFF4700B497D1 /* ScanViewController.storyboard */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1688,6 +1702,7 @@
 				0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */,
 				1A2D18ED1F2919D800B2C785 /* MeViewController.storyboard in Resources */,
 				0E35C10D2077DFF000BBA5E3 /* NotificationCell.xib in Resources */,
+				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1A20417E1F1E8DDA00C08435 /* CreateProfileViewController.storyboard in Resources */,
 				0EAA9DB52029F0AA005E245C /* ProxyCell.xib in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
@@ -1837,6 +1852,7 @@
 				1A2D18D81F2918EE00B2C785 /* MeDetailViewController.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
+				66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
 				0E438A9A204F47E700402900 /* SettingsTableView.swift in Sources */,
 				0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */,
