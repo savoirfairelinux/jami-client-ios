@@ -118,6 +118,14 @@ class MeViewModel: ViewModel, Stateable {
         return Observable.just("")
     }()
 
+    public func getRingId() -> String? {
+        if let uri = self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)) {
+            let ringId = uri.replacingOccurrences(of: "ring:", with: "")
+            return ringId
+        }
+        return nil
+    }
+
     lazy var accountCredentials: Observable<SettingsSection> = {
         return Observable
             .combineLatest(userName.startWith(""), ringId.startWith("")) { (name, ringID) in
