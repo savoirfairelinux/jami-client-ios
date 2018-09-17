@@ -25,6 +25,7 @@ import RxCocoa
 import Reusable
 import SwiftyBeaver
 
+
 //Constants
 private struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 64.0
@@ -34,8 +35,9 @@ private struct SmartlistConstants {
 }
 
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
-
+    
     private let log = SwiftyBeaver.self
+    
 
     // MARK: outlets
     @IBOutlet weak var tableView: UITableView!
@@ -54,9 +56,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     fileprivate let disposeBag = DisposeBag()
 
     // MARK: functions
+    @IBAction func openScan() {
+        self.navigationController?.present(ScanViewController.instantiate(), animated: true, completion: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.setupDataSources()
         self.setupTableViews()
         self.setupSearchBar()
@@ -110,13 +115,21 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             }
         }).disposed(by: self.disposeBag)
 
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        let imageScanSearch = UIImage(asset: Asset.qrCodeScan) as UIImage?
+        let scanButton   = UIButton(type: UIButtonType.custom) as UIButton
+        scanButton.setImage(imageScanSearch, for: .normal)
+        let scanButtonItem = UIBarButtonItem(customView: scanButton)
+        scanButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+            self.openScan()
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.navigationItem.rightBarButtonItem = scanButtonItem
+
     }
 
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        self.conversationsTableView.setEditing(editing, animated: true)
-    }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
         let userInfo: Dictionary = notification.userInfo!
@@ -325,3 +338,5 @@ extension SmartlistViewController: UITableViewDelegate {
         }
     }
 }
+
+

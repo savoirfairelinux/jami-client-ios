@@ -178,6 +178,21 @@ internal enum L10n {
     internal static let readableStatusSuccess = L10n.tr("Localizable", "dataTransfer.readableStatusSuccess")
   }
 
+  internal enum Events {
+    /// Contact added test
+    internal static let contactAdded = L10n.tr("Localizable", "events.contactAdded")
+    /// Incoming call
+    internal static let incomingCall = L10n.tr("Localizable", "events.incomingCall")
+    /// Missed incoming call
+    internal static let missedIncomingCall = L10n.tr("Localizable", "events.missedIncomingCall")
+    /// Missed outgoing call
+    internal static let missedOutgoingCall = L10n.tr("Localizable", "events.missedOutgoingCall")
+    /// Outgoing call
+    internal static let outgoingCall = L10n.tr("Localizable", "events.outgoingCall")
+    /// Contact request received
+    internal static let receivedContactRequest = L10n.tr("Localizable", "events.receivedContactRequest")
+  }
+
   internal enum Global {
     /// Invitations
     internal static let contactRequestsTabBarTitle = L10n.tr("Localizable", "global.contactRequestsTabBarTitle")
