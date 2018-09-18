@@ -57,6 +57,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("Device: " + UIDevice.modelName)
+
         self.setupDataSources()
         self.setupTableViews()
         self.setupSearchBar()
