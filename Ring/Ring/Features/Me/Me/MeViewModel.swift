@@ -306,6 +306,8 @@ class MeViewModel: ViewModel, Stateable {
                     }
                 case .authorized:
                     break
+                case .provisional:
+                    break
                 }
             })
         } else {

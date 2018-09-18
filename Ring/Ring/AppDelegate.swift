@@ -242,6 +242,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     if enabled { LocalNotificationsHelper.setNotification(enable: false) }
                 case .authorized:
                     if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
+                case .provisional:
+                    if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
                 }
             })
         } else {

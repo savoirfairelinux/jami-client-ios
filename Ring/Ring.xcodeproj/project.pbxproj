@@ -280,6 +280,8 @@
 		62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */; };
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
 		62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
+		66266FC2215BFFE7002757A6 /* Device+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FC1215BFFE7002757A6 /* Device+Helpers.swift */; };
+		66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -645,6 +647,8 @@
 		62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsColors.swift; sourceTree = "<group>"; };
+		66266FC1215BFFE7002757A6 /* Device+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+Helpers.swift"; sourceTree = "<group>"; };
+		66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emoji+Helpers.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -877,6 +881,8 @@
 			children = (
 				56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */,
 				62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */,
+				66266FC1215BFFE7002757A6 /* Device+Helpers.swift */,
+				66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */,
 				1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */,
 				1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */,
 				1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */,
@@ -1555,7 +1561,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Savoir-faire Linux";
 				TargetAttributes = {
 					043999F21D1C2D9D00E99CD9 = {
@@ -1846,6 +1852,7 @@
 				1A5DC0241F3564360075E8EF /* ContactRequestModel.swift in Sources */,
 				0E4909701FEAC1C6005CAA50 /* CallModel.swift in Sources */,
 				1A5DC03F1F35678D0075E8EF /* ContactRequestsViewController.swift in Sources */,
+				66266FC2215BFFE7002757A6 /* Device+Helpers.swift in Sources */,
 				0E3BD4282044784000A50DDF /* ContactViewController.swift in Sources */,
 				62006E04203F4DD6003C3197 /* UITextField+Helpers.swift in Sources */,
 				1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */,
@@ -1943,6 +1950,7 @@
 				0EF78DE31FD0AE3000FC6966 /* ConversationsManager.swift in Sources */,
 				0EAA9DB42029F0AA005E245C /* ProxyCell.swift in Sources */,
 				1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */,
+				66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */,
 				0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */,
 				62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */,
 				0EDE34C91F8691BB00FFA15C /* EditProfileViewModel.swift in Sources */,
@@ -2077,12 +2085,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2132,12 +2142,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2322,12 +2334,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
