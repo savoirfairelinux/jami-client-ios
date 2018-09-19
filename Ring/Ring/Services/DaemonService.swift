@@ -92,7 +92,6 @@ class DaemonService {
         if self.dRingAdaptor.initDaemon() {
             log.debug("Daemon initialized.")
             if self.dRingAdaptor.startDaemon() {
-                self.startRingServicePolling()
                 self.daemonStarted = true
                 log.debug("Daemon started.")
             } else {
@@ -125,23 +124,4 @@ class DaemonService {
         self.dRingAdaptor.connectivityChanged()
     }
 
-    // MARK: Private Core
-    /**
-     Initiates the timer scheduling the calls to the daemon poll event method. It then starts it.
-     */
-    fileprivate func startRingServicePolling() {
-        self.pollingTimer = Timer.scheduledTimer(timeInterval: pollingTimeInterval,
-                                                 target: self,
-                                                 selector: #selector(self.pollFunction),
-                                                 userInfo: nil,
-                                                 repeats: true)
-    }
-
-    /**
-     Performs the call to the daemon pollEvents method each time the pollingTimer decides to.
-     This method must be @objc exposed to be called by the timer.
-     */
-    @objc fileprivate func pollFunction() {
-        self.dRingAdaptor.pollEvents()
-    }
 }
