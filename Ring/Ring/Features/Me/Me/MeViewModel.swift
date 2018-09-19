@@ -306,6 +306,8 @@ class MeViewModel: ViewModel, Stateable {
                     }
                 case .authorized:
                     break
+                default:
+                    print("Error")
                 }
             })
         } else {
