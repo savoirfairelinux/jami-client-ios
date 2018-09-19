@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c5ffd5c_74721b77",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-09-19T20:56:19Z",
+      "side": 1,
+      "message": "\"Unexpected authorization status\" ?",
+      "range": {
+        "startLine": 246,
+        "startChar": 27,
+        "endLine": 246,
+        "endChar": 32
+      },
+      "revId": "106a391d9694638f7aa22d1f69d6eb2cf49d010f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9564b73_36a8a008",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-09-19T20:56:19Z",
+      "side": 1,
+      "message": "Remove empty line",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 20
+      },
+      "revId": "106a391d9694638f7aa22d1f69d6eb2cf49d010f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8853f79_45f66cb6",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-09-19T20:56:19Z",
+      "side": 1,
+      "message": "\"Unexpected authorization status\" ?",
+      "range": {
+        "startLine": 310,
+        "startChar": 27,
+        "endLine": 310,
+        "endChar": 32
+      },
+      "revId": "106a391d9694638f7aa22d1f69d6eb2cf49d010f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "537abff2_632645fc",
+        "filename": "Ring/Ring/Services/DaemonService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-09-19T20:56:19Z",
+      "side": 1,
+      "message": "Remove pollingTimer",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 40
+      },
+      "revId": "106a391d9694638f7aa22d1f69d6eb2cf49d010f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
