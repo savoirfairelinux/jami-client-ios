@@ -73,17 +73,6 @@
     }
 }
 
-- (void)pollEvents {
-    if (![[NSThread currentThread] isMainThread]) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            DRing::pollEvents();
-        });
-    }
-    else {
-        DRing::pollEvents();
-    }
-}
-
 - (void)connectivityChanged {
     if (![[NSThread currentThread] isMainThread]) {
         dispatch_sync(dispatch_get_main_queue(), ^{
