@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Compte";
 "global.ok" = "OK";
 
+// Scan
+"scan.badQrCode" = "Mauvais QR code";
+"scan.search" = "Recherche...";
+
 // Smartlist
 "smartlist.yesterday" = "Hier";
 "smartlist.results" = "Résultats de la recherche";

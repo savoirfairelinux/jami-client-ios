@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lq1-ve-3Zo">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lq1-ve-3Zo">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,31 +15,24 @@
             <objects>
                 <viewController id="lq1-ve-3Zo" customClass="ScanViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dqW-Pd-ArU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Research..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfp-Xe-xOH">
-                                <rect key="frame" x="0.0" y="624" width="375" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1GZ-y1-6Ci">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1GZ-y1-6Ci">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Scan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4O-QD-W70">
-                                        <rect key="frame" x="165.5" y="38" width="44" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4O-QD-W70">
+                                        <rect key="frame" x="168.33333333333334" y="45" width="77.333333333333343" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyv-WP-6Gx">
-                                        <rect key="frame" x="15" y="39" width="18" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyv-WP-6Gx">
+                                        <rect key="frame" x="14" y="45" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="8zw-QV-JFH"/>
+                                            <constraint firstAttribute="height" constant="25" id="fj4-rY-8ot"/>
+                                        </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="cross"/>
                                         <connections>
@@ -48,22 +41,47 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="d4O-QD-W70" firstAttribute="centerX" secondItem="1GZ-y1-6Ci" secondAttribute="centerX" id="2Dw-y2-HXJ"/>
+                                    <constraint firstItem="Lyv-WP-6Gx" firstAttribute="top" secondItem="1GZ-y1-6Ci" secondAttribute="top" constant="45" id="5M6-5m-TRD"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lyv-WP-6Gx" secondAttribute="bottom" constant="17" id="heK-5a-D3P"/>
+                                    <constraint firstItem="Lyv-WP-6Gx" firstAttribute="top" secondItem="d4O-QD-W70" secondAttribute="top" id="ts8-j4-SQw"/>
+                                    <constraint firstItem="Lyv-WP-6Gx" firstAttribute="leading" secondItem="1GZ-y1-6Ci" secondAttribute="leading" constant="14" id="v9X-hK-Vwo"/>
+                                </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan" translatesAutoresizingMaskIntoConstraints="NO" id="Tk7-iY-1NY">
+                                <rect key="frame" x="82" y="243" width="250" height="250"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="PpV-of-Dhq"/>
+                                    <constraint firstAttribute="height" constant="250" id="kee-rl-tBu"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Tk7-iY-1NY" firstAttribute="centerY" secondItem="dqW-Pd-ArU" secondAttribute="centerY" id="1QD-mx-fWb"/>
+                            <constraint firstAttribute="trailing" secondItem="1GZ-y1-6Ci" secondAttribute="trailing" id="9ye-dW-6N1"/>
+                            <constraint firstItem="1GZ-y1-6Ci" firstAttribute="leading" secondItem="dqW-Pd-ArU" secondAttribute="leading" id="FvR-D5-Rju"/>
+                            <constraint firstAttribute="centerYWithinMargins" relation="lessThanOrEqual" secondItem="1GZ-y1-6Ci" secondAttribute="bottom" constant="1000" id="JBX-m0-oD5"/>
+                            <constraint firstItem="1GZ-y1-6Ci" firstAttribute="top" secondItem="dqW-Pd-ArU" secondAttribute="top" id="ZcI-6M-S7T"/>
+                            <constraint firstItem="Tk7-iY-1NY" firstAttribute="centerX" secondItem="1GZ-y1-6Ci" secondAttribute="centerX" id="iin-nl-Xf4"/>
+                            <constraint firstItem="1GZ-y1-6Ci" firstAttribute="width" secondItem="dqW-Pd-ArU" secondAttribute="width" id="lKb-mV-hd7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="fMq-WO-EdK"/>
                     </view>
                     <connections>
                         <outlet property="header" destination="1GZ-y1-6Ci" id="sYp-yH-aMG"/>
-                        <outlet property="infoLbl" destination="xfp-Xe-xOH" id="PlC-Vy-J42"/>
+                        <outlet property="scanImage" destination="Tk7-iY-1NY" id="EYE-wA-uoZ"/>
+                        <outlet property="searchTitle" destination="d4O-QD-W70" id="D7n-g4-RkY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kcY-va-ant" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1476" y="-345.87706146926541"/>
+            <point key="canvasLocation" x="-1476.8115942028987" y="-346.46739130434787"/>
         </scene>
     </scenes>
     <resources>
         <image name="cross" width="40" height="40"/>
+        <image name="scan" width="256" height="256"/>
     </resources>
 </document>

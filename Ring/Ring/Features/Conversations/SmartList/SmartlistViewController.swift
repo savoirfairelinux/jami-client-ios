@@ -35,9 +35,8 @@ private struct SmartlistConstants {
 }
 
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
-    
+
     private let log = SwiftyBeaver.self
-    
 
     // MARK: outlets
     @IBOutlet weak var tableView: UITableView!
@@ -57,7 +56,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     // MARK: functions
     @IBAction func openScan() {
-        self.navigationController?.present(ScanViewController.instantiate(), animated: true, completion: nil)
+        self.viewModel.showQRCode()
     }
 
     override func viewDidLoad() {
@@ -115,21 +114,20 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             }
         }).disposed(by: self.disposeBag)
 
-        
+
         let imageScanSearch = UIImage(asset: Asset.qrCodeScan) as UIImage?
         let scanButton   = UIButton(type: UIButtonType.custom) as UIButton
         scanButton.setImage(imageScanSearch, for: .normal)
         let scanButtonItem = UIBarButtonItem(customView: scanButton)
         scanButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
-            self.openScan()
+                self.openScan()
             })
             .disposed(by: self.disposeBag)
-        
+
         self.navigationItem.rightBarButtonItem = scanButtonItem
 
     }
-
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
         let userInfo: Dictionary = notification.userInfo!
@@ -191,7 +189,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func setupTableViews() {
-
         //Set row height
         self.conversationsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
         self.searchResultsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
@@ -338,5 +335,3 @@ extension SmartlistViewController: UITableViewDelegate {
         }
     }
 }
-
-

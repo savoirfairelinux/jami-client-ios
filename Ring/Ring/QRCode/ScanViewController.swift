@@ -10,20 +10,24 @@ import Reusable
 import UIKit
 import AVFoundation
 import AudioToolbox
+import RxSwift
 
-class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOutputObjectsDelegate {
-
-    @IBOutlet weak var infoLbl: UILabel!
+class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOutputObjectsDelegate, ViewModelBased {
+    // MARK: outlets
     @IBOutlet weak var header: UIView!
+    @IBOutlet weak var scanImage: UIImageView!
+    @IBOutlet weak var searchTitle: UILabel!
     
-    let systemSoundId : SystemSoundID = 1016
-
+    // MARK: variables
+    let systemSoundId: SystemSoundID = 1016
+    typealias VMType = ScanViewModel
+    var scannedQrCode: Bool = false
     //captureSession manages capture activity and coordinates between input device and captures outputs
-    var captureSession:AVCaptureSession?
-    var videoPreviewLayer:AVCaptureVideoPreviewLayer?
+    var captureSession: AVCaptureSession?
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    var viewModel: ScanViewModel!
     //Empty Rectangle with border to outline detected QR or BarCode
-    
-    lazy var codeFrame:UIView = {
+    lazy var codeFrame: UIView = {
         let cFrame = UIView()
         cFrame.layer.borderColor = UIColor.cyan.cgColor
         cFrame.layer.borderWidth = 2
@@ -33,6 +37,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
         return cFrame
     }()
 
+    // MARK: functions
     override func viewDidDisappear(_ animated: Bool) {
         captureSession?.stopRunning()
     }
@@ -43,8 +48,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+        UIApplication.shared.statusBarStyle = .lightContent
         //AVCaptureDevice allows us to reference a physical capture device (video in our case)
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
 
@@ -64,7 +68,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
                 //We tell our Output the expected Meta-data type
                 captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-                captureMetadataOutput.metadataObjectTypes = [.code128, .qr,.ean13, .ean8, .code39, .upce, .aztec, .pdf417]
+                captureMetadataOutput.metadataObjectTypes = [.code128, .qr, .ean13, .ean8, .code39, .upce, .aztec, .pdf417]
                 //AVMetadataObject.ObjectType
 
                 captureSession?.startRunning()
@@ -73,45 +77,52 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
                 videoPreviewLayer?.videoGravity = .resizeAspectFill
                 videoPreviewLayer?.frame = view.layer.bounds
+                self.searchTitle.text = L10n.Scan.search
                 view.layer.addSublayer(videoPreviewLayer!)
-                view.bringSubview(toFront: infoLbl)
                 view.bringSubview(toFront: header)
-            }
-
-            catch {
-
-                print("Error")
-
-            }
+                view.bringSubview(toFront: self.scanImage)
+            } catch { print("Error") }
         }
 
     }
 
     // the metadataOutput function informs our delegate (the ScanViewController) that the captureOutput emitted a new metaData Object
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        if metadataObjects.isEmpty {
-            print("no objects returned")
-            return
+
+        if !self.scannedQrCode {
+            if metadataObjects.isEmpty {
+                print("no objects returned")
+                return
+            }
+            let metaDataObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+            guard let stringCodeValue = metaDataObject.stringValue else {
+                return
+            }
+
+            view.addSubview(codeFrame)
+
+            //transformedMetaDataObject returns layer coordinates/height/width from visual properties
+            guard let metaDataCoordinates = videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
+                return
+            }
+
+            //Those coordinates are assigned to our codeFrame
+            codeFrame.frame = metaDataCoordinates.bounds
+
+            let ringId = stringCodeValue.components(separatedBy: "http://").last!
+
+            if ringId.isSHA1() {
+                AudioServicesPlayAlertSound(systemSoundId)
+                print("RingId : " + ringId)
+                self.dismiss(animated: true, completion: nil)
+                self.viewModel.createNewConversation(recipientRingId: ringId)
+                self.scannedQrCode = true
+            } else {
+                let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
-
-        let metaDataObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-        guard let stringCodeValue = metaDataObject.stringValue else {
-            return
-        }
-
-        view.addSubview(codeFrame)
-
-        //transformedMetaDataObject returns layer coordinates/height/width from visual properties
-        guard let metaDataCoordinates = videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
-            return
-        }
-
-        //Those coordinates are assigned to our codeFrame
-        codeFrame.frame = metaDataCoordinates.bounds
-        AudioServicesPlayAlertSound(systemSoundId)
-        let ringId = stringCodeValue.components(separatedBy: "http://").last!
-        infoLbl.text = ringId
-        print(ringId)
     }
 
     @IBAction func closeScan(_ sender: Any) {

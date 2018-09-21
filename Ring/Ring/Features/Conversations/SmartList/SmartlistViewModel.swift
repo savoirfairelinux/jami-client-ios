@@ -245,6 +245,11 @@ class SmartlistViewModel: Stateable, ViewModel {
     }
 
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
-        self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversationViewModel))
+        self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
+        conversationViewModel))
+    }
+    
+    func showQRCode() {
+        self.stateSubject.onNext(ConversationState.qrCode())
     }
 }
