@@ -15,14 +15,13 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
     @IBOutlet weak var infoLbl: UILabel!
     @IBOutlet weak var header: UIView!
-    
     let systemSoundId : SystemSoundID = 1016
 
     //captureSession manages capture activity and coordinates between input device and captures outputs
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     //Empty Rectangle with border to outline detected QR or BarCode
-    
+
     lazy var codeFrame:UIView = {
         let cFrame = UIView()
         cFrame.layer.borderColor = UIColor.cyan.cgColor
@@ -44,7 +43,6 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         //AVCaptureDevice allows us to reference a physical capture device (video in our case)
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
 
@@ -112,6 +110,8 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
         let ringId = stringCodeValue.components(separatedBy: "http://").last!
         infoLbl.text = ringId
         print(ringId)
+        
+        
     }
 
     @IBAction func closeScan(_ sender: Any) {

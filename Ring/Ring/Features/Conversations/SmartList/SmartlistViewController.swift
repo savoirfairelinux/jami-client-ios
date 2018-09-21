@@ -191,7 +191,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func setupTableViews() {
-
         //Set row height
         self.conversationsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
         self.searchResultsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
@@ -338,5 +337,3 @@ extension SmartlistViewController: UITableViewDelegate {
         }
     }
 }
-
-
