@@ -55,8 +55,12 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
     
     func openQRCode () {
-        let scanViewController = ScanViewController.instantiate();
-        self.present(viewController: scanViewController, withStyle: .present, withAnimation: true, disposeBag: (self.disposeBag))
+        let scanViewController = ScanViewController.instantiate(with: self.injectionBag);
+        self.present(viewController: scanViewController,
+                     withStyle: .present,
+                     withAnimation: true,
+                     withStateable: scanViewController.viewModel,
+                     lockWhilePresenting: VCType.conversation.rawValue)
     }
 
     func presentContactInfo(conversation: ConversationModel) {

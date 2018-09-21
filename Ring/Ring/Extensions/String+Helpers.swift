@@ -36,7 +36,7 @@ extension String {
     func isSHA1() -> Bool {
         do {
             let sha1Regex = try NSRegularExpression(pattern: "[0-9a-f]{40}", options: .caseInsensitive)
-            if !sha1Regex.matches(in: self, range: NSRange(location: 0, length: self.count)).isEmpty {
+            if !sha1Regex.matches(in: self, range: NSRange(location: 0, length: self.count)).isEmpty && self.count == 40 {
                 return true
             }
         } catch {
