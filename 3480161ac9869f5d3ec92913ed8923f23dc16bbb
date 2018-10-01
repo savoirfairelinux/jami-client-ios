@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "903aaf4d_ac4ef9a3",
+        "filename": "Ring/Ring/Extensions/Device+Helpers.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-01T18:26:21Z",
+      "side": 1,
+      "message": "Is it necessary ? Why not using https://stackoverflow.com/questions/1100127/how-do-you-get-an-iphones-device-name ?",
+      "revId": "3480161ac9869f5d3ec92913ed8923f23dc16bbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
