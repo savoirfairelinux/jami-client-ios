@@ -22,6 +22,30 @@
       "revId": "7110086045fcf7b16ffbb9e4a8d330e4cf59e2d2",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc241a5c_07268232",
+        "filename": "Ring/Ring/Extensions/Emoji+Helpers.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-01T16:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ced2a23_968af32c",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 20,
+        "endChar": 52
+      },
+      "revId": "7110086045fcf7b16ffbb9e4a8d330e4cf59e2d2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
