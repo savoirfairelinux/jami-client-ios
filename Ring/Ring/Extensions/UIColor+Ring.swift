@@ -37,6 +37,7 @@ extension UIColor {
     static let ringMain = UIColor(red: 54, green: 125, blue: 156, alpha: 1.0)
     static let ringSecondary = UIColor(red: 0, green: 76, blue: 96, alpha: 1.0)
     static let ringMainLight = UIColor(red: 0, green: 76, blue: 96, alpha: 1.0)
+    static let ringMsgCellEmoji = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
     static let ringMsgCellSent = UIColor(red: 58, green: 192, blue: 210, alpha: 1.0)
     static let ringMsgCellSentText = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0)
     static let ringMsgCellReceived = UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
