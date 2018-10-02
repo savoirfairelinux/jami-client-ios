@@ -158,9 +158,17 @@ class MessageCell: UITableViewCell, NibReusable {
         let type = item.bubblePosition()
         var bubbleColor: UIColor
         if item.isTransfer {
-            bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+            if item.content.containsOnlyEmoji {
+                bubbleColor = UIColor.ringMsgCellEmoji
+            } else {
+                bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+            }
         } else {
-            bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+            if item.content.containsOnlyEmoji {
+                bubbleColor = UIColor.ringMsgCellEmoji
+            } else {
+                bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+            }
         }
 
         if item.isTransfer {
@@ -228,6 +236,11 @@ class MessageCell: UITableViewCell, NibReusable {
             self.topCorner.isHidden = item.isTransfer
             self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
         default: break
+        }
+        if item.content.containsOnlyEmoji {
+            self.messageLabel.font = UIFont.systemFont(ofSize: 40.0, weight: UIFont.Weight.medium)
+        } else {
+            self.messageLabel.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.medium)
         }
     }
 
@@ -298,6 +311,12 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         if item.bubblePosition() == .sent {
+            // When the message contains only emoji
+            if item.content.containsOnlyEmoji {
+                self.bubble.backgroundColor = UIColor.ringMsgCellEmoji
+            } else {
+                self.bubble.backgroundColor = UIColor.ringMsgCellSent
+            }
             if item.isTransfer {
                 // outgoing transfer
             } else {
@@ -314,6 +333,12 @@ class MessageCell: UITableViewCell, NibReusable {
                     .disposed(by: self.disposeBag)
             }
         } else if item.bubblePosition() == .received {
+            // When the message contains only emoji
+            if item.content.containsOnlyEmoji {
+                self.bubble.backgroundColor = UIColor.ringMsgCellEmoji
+            } else {
+                self.bubble.backgroundColor = UIColor.ringMsgCellReceived
+            }
             // received message avatar
             Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
                                                       conversationViewModel.userName.asObservable(),
