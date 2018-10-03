@@ -1,0 +1,232 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b1a42d0_cf628a85",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "not part of this patch",
+      "range": {
+        "startLine": 181,
+        "startChar": 2,
+        "endLine": 194,
+        "endChar": 3
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2fe4e6c_a08146cf",
+        "filename": "Ring/Ring/Extensions/String+Helpers.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "There should be a way to encode the 40 character limit into the regex pattern. Otherwise the \"{40}\" should be removed from the pattern.",
+      "range": {
+        "startLine": 38,
+        "startChar": 12,
+        "endLine": 39,
+        "endChar": 120
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4918321f_3a3a9a53",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "not part of this patch",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87c851cf_27b44df6",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f04ef59c_ec4d1b80",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a838ca16_2d4eca5d",
+        "filename": "Ring/Ring/Protocols/ConversationNavigation.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bd8d450_cbb37112",
+        "filename": "Ring/Ring/QRCode/ScanViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "this file needs a license and a little tidying(whitespace + extra lines)",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45d9ea52_2e819899",
+        "filename": "Ring/Ring/QRCode/ScanViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d174712_82584c4a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "\"Searching…\" (nb: U+2026 instead of ...)",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11c8a374_a0910ba6",
+        "filename": "Ring/Ring/Services/CallsService.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "indent problem here",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69b8a3ae_6c463d02",
+        "filename": "Ring/Ring/Services/GeneratedInteractionsManager.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 16
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b33ed53_7f9b307d",
+        "filename": "Ring/Ring/Services/GeneratedInteractionsManager.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-03T19:58:39Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
