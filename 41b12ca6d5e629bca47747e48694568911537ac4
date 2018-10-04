@@ -156,6 +156,52 @@
     },
     {
       "key": {
+        "uuid": "aba9e910_46d70560",
+        "filename": "Ring/Ring/QRCode/ScanViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-10-04T15:55:47Z",
+      "side": 1,
+      "message": "add super.viewDidDisappear",
+      "range": {
+        "startLine": 41,
+        "startChar": 18,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c745589b_602cd020",
+        "filename": "Ring/Ring/QRCode/ScanViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-10-04T15:55:47Z",
+      "side": 1,
+      "message": "add super.viewDidAppear",
+      "range": {
+        "startLine": 45,
+        "startChar": 18,
+        "endLine": 45,
+        "endChar": 31
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d174712_82584c4a",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 4
