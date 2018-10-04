@@ -281,6 +281,7 @@
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
 		62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
 		66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */; };
+		66F295DC216569A00044ED6F /* Device+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DB216569A00044ED6F /* Device+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -297,6 +298,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 043999F21D1C2D9D00E99CD9;
 			remoteInfo = Ring;
+		};
+		66F295D92163E55F0044ED6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62366028200914C1002598C1;
+			remoteInfo = libring;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -647,6 +655,7 @@
 		62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsColors.swift; sourceTree = "<group>"; };
 		66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emoji+Helpers.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		66F295DB216569A00044ED6F /* Device+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -879,6 +888,7 @@
 			children = (
 				56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */,
 				62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */,
+				66F295DB216569A00044ED6F /* Device+Helpers.swift */,
 				66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */,
 				1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */,
 				1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */,
@@ -1509,6 +1519,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				66F295DA2163E55F0044ED6F /* PBXTargetDependency */,
 			);
 			name = Ring;
 			productName = Ring;
@@ -1810,7 +1821,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../daemon/build-ios-arm64\nmake -j4\ncd ../../client-ios\ncp -r ../daemon/src/dring fat/include/\nfind ../daemon/build-ios-arm64/ -name '*.a' -exec cp '{}' fat/lib \\;";
+			shellScript = "cd ../../daemon/build-ios-arm64\nmake -j4\ncd ../../client-ios\ncp -r ../daemon/src/dring fat/include/\nfind ../daemon/build-ios-arm64/ -name '*.a' -exec cp '{}' fat/lib \\;\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1856,6 +1867,7 @@
 				0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */,
 				0E3BD4362044B39F00A50DDF /* ProfileHeaderView.swift in Sources */,
 				1A20418D1F1EABCC00C08435 /* StateableResponsive.swift in Sources */,
+				66F295DC216569A00044ED6F /* Device+Helpers.swift in Sources */,
 				1A0C4EE51F1D67DF00550433 /* WalkthroughCoordinator.swift in Sources */,
 				1A2D18DD1F29192D00B2C785 /* MessableBubble.swift in Sources */,
 				1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */,
@@ -2006,6 +2018,11 @@
 			isa = PBXTargetDependency;
 			target = 043999F21D1C2D9D00E99CD9 /* Ring */;
 			targetProxy = 04399A181D1C2D9D00E99CD9 /* PBXContainerItemProxy */;
+		};
+		66F295DA2163E55F0044ED6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62366028200914C1002598C1 /* libring */;
+			targetProxy = 66F295D92163E55F0044ED6F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
