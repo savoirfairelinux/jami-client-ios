@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3b10defa_5025d661",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b1a42d0_cf628a85",
+      "range": {
+        "startLine": 181,
+        "startChar": 2,
+        "endLine": 194,
+        "endChar": 3
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2fe4e6c_a08146cf",
         "filename": "Ring/Ring/Extensions/String+Helpers.swift",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7c0cb8d_b6c15983",
+        "filename": "Ring/Ring/Extensions/String+Helpers.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2fe4e6c_a08146cf",
+      "range": {
+        "startLine": 38,
+        "startChar": 12,
+        "endLine": 39,
+        "endChar": 120
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d78a0efa_1921d2c1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4918321f_3a3a9a53",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87c851cf_27b44df6",
         "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
         "patchSetId": 4
@@ -85,6 +157,24 @@
       "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63a70879_2a69fa0d",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87c851cf_27b44df6",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "b3180df9_37733dd5",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f04ef59c_ec4d1b80",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a838ca16_2d4eca5d",
         "filename": "Ring/Ring/Protocols/ConversationNavigation.swift",
         "patchSetId": 4
@@ -119,6 +227,24 @@
       "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d58ad8be_494f91bb",
+        "filename": "Ring/Ring/Protocols/ConversationNavigation.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a838ca16_2d4eca5d",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "462072a5_4b4292f5",
+        "filename": "Ring/Ring/QRCode/ScanViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bd8d450_cbb37112",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45d9ea52_2e819899",
         "filename": "Ring/Ring/QRCode/ScanViewController.swift",
         "patchSetId": 4
@@ -153,6 +297,24 @@
       "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "149180c5_ae2286a9",
+        "filename": "Ring/Ring/QRCode/ScanViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45d9ea52_2e819899",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
@@ -179,6 +341,30 @@
     },
     {
       "key": {
+        "uuid": "04ef33d7_71e2579e",
+        "filename": "Ring/Ring/QRCode/ScanViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aba9e910_46d70560",
+      "range": {
+        "startLine": 41,
+        "startChar": 18,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c745589b_602cd020",
         "filename": "Ring/Ring/QRCode/ScanViewController.swift",
         "patchSetId": 4
@@ -202,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "7637845a_5344d440",
+        "filename": "Ring/Ring/QRCode/ScanViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c745589b_602cd020",
+      "range": {
+        "startLine": 45,
+        "startChar": 18,
+        "endLine": 45,
+        "endChar": 31
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d174712_82584c4a",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 4
@@ -219,6 +429,24 @@
     },
     {
       "key": {
+        "uuid": "4b363563_dbc89edd",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d174712_82584c4a",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11c8a374_a0910ba6",
         "filename": "Ring/Ring/Services/CallsService.swift",
         "patchSetId": 4
@@ -233,6 +461,24 @@
       "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8630fc22_7181fd40",
+        "filename": "Ring/Ring/Services/CallsService.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11c8a374_a0910ba6",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
@@ -259,6 +505,30 @@
     },
     {
       "key": {
+        "uuid": "34299f5e_af705cb2",
+        "filename": "Ring/Ring/Services/GeneratedInteractionsManager.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69b8a3ae_6c463d02",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 16
+      },
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b33ed53_7f9b307d",
         "filename": "Ring/Ring/Services/GeneratedInteractionsManager.swift",
         "patchSetId": 4
@@ -273,6 +543,24 @@
       "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5e36ee7_aa956ff9",
+        "filename": "Ring/Ring/Services/GeneratedInteractionsManager.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-04T16:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b33ed53_7f9b307d",
+      "revId": "41b12ca6d5e629bca47747e48694568911537ac4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
