@@ -1831,7 +1831,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../daemon/build-ios-arm64\nmake -j4\ncd ../../client-ios\ncp -r ../daemon/src/dring fat/include/\nfind ../daemon/build-ios-arm64/ -name '*.a' -exec cp '{}' fat/lib \\;";
+			shellScript = "cd ../../daemon/build-ios-arm64\nmake -j4\ncd ../../client-ios\ncp -r ../daemon/src/dring fat/include/\nfind ../daemon/build-ios-arm64/ -name '*.a' -exec cp '{}' fat/lib \\;\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
