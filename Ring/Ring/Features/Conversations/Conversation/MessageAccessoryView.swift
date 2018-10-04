@@ -27,8 +27,9 @@ class MessageAccessoryView: UIView, NibLoadable {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var emojisButton: UIButton!
+    @IBOutlet weak var emojisButtonTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageTextFieldTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cameraButtonTrailingConstraint: NSLayoutConstraint!
 
     override open func didMoveToWindow() {
         super.didMoveToWindow()
@@ -41,5 +42,29 @@ class MessageAccessoryView: UIView, NibLoadable {
                                                                multiplier: 1)
                 .isActive = true
         }
+    }
+
+    @IBAction func editingChanges(_ sender: Any) {
+        if self.messageTextField.text != nil {
+            if self.messageTextField.text!.count >= 1 {
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    setEmojiButtonVisibility(hide: true)
+                }
+            } else {
+                setEmojiButtonVisibility(hide: false)
+            }
+        } else {
+            setEmojiButtonVisibility(hide: false)
+        }
+    }
+    func setEmojiButtonVisibility(hide: Bool) {
+        UIView.animate(withDuration: 0.3, animations: {
+            if hide {
+                self.emojisButtonTrailingConstraint.constant = -27
+            } else {
+                self.emojisButtonTrailingConstraint.constant = 13
+            }
+            self.layoutIfNeeded()
+        })
     }
 }

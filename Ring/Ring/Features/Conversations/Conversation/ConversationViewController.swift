@@ -226,7 +226,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
 
         var heightOffset = CGFloat(0.0)
         if keyboardHeight != self.messageAccessoryView.frame.height {
-            setShareButtonsVisibility(hide: true)
             heightOffset = -24.0
             self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
         }
@@ -239,23 +238,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
     }
 
     @objc func keyboardWillHide(withNotification notification: Notification) {
-        setShareButtonsVisibility(hide: false)
         self.tableView.contentInset.bottom = self.messageAccessoryView.frame.height
         self.tableView.scrollIndicatorInsets.bottom = self.messageAccessoryView.frame.height
         self.updateBottomOffset()
-    }
-
-    func setShareButtonsVisibility(hide: Bool) {
-        UIView.animate(withDuration: 4.0, animations: {
-            if hide {
-                self.messageAccessoryView.cameraButtonTrailingConstraint.priority = UILayoutPriority(rawValue: 250.00)
-                self.messageAccessoryView.messageTextFieldTrailingConstraint.priority = UILayoutPriority(rawValue: 900.00)
-            } else {
-                self.messageAccessoryView.cameraButtonTrailingConstraint.priority = UILayoutPriority(rawValue: 900.00)
-                self.messageAccessoryView.messageTextFieldTrailingConstraint.priority = UILayoutPriority(rawValue: 250.00)
-            }
-            self.messageAccessoryView.layoutIfNeeded()
-        })
     }
 
     func setupNavTitle(profileImageData: Data?, displayName: String? = nil, username: String?) {
@@ -508,12 +493,16 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
     }()
 
     func setupBindings() {
+        self.messageAccessoryView.emojisButton.rx.tap.subscribe(onNext: { [unowned self] _ in
+            self.viewModel.sendMessage(withContent: "👍")
+        }).disposed(by: self.disposeBag)
         self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
             guard let payload = self.messageAccessoryView.messageTextField.text, !payload.isEmpty else {
                 return
             }
             self.viewModel.sendMessage(withContent: payload)
             self.messageAccessoryView.messageTextField.text = ""
+            self.messageAccessoryView.setEmojiButtonVisibility(hide: false)
         }).disposed(by: self.disposeBag)
     }
 
