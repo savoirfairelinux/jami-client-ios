@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5911fc36_2cdccabb",
+        "filename": "Ring/Ring/QRCode/ScanViewModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-04T17:23:37Z",
+      "side": 1,
+      "message": "use the correct license here",
+      "revId": "9d045b3aa265c06c9904bcf8e2a92bd1d6d75605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "454adb84_340e7ec9",
+        "filename": "Ring/Ring/Resources/Account/VCardUtils.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-04T17:23:37Z",
+      "side": 1,
+      "message": "somehow this file has a changed path, it should not be under Resources",
+      "revId": "9d045b3aa265c06c9904bcf8e2a92bd1d6d75605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a19783e7_de43f308",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-04T17:23:37Z",
+      "side": 1,
+      "message": "ellipsis character here",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 29
+      },
+      "revId": "9d045b3aa265c06c9904bcf8e2a92bd1d6d75605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d7d39d3_d0fbbbd2",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-04T17:23:37Z",
+      "side": 1,
+      "message": "these must be removed, then run swiftgen(build) to eliminate the generated strings",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 40
+      },
+      "revId": "9d045b3aa265c06c9904bcf8e2a92bd1d6d75605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9811498f_4fb067ef",
+        "filename": "Ring/Ring/Resources/fr-CA.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-04T17:23:37Z",
+      "side": 1,
+      "message": "ellipsis character here",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 29
+      },
+      "revId": "9d045b3aa265c06c9904bcf8e2a92bd1d6d75605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "414c0cfd_ce146936",
+        "filename": "Ring/Ring/Resources/fr.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-04T17:23:37Z",
+      "side": 1,
+      "message": "ellipsis character here",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 29
+      },
+      "revId": "9d045b3aa265c06c9904bcf8e2a92bd1d6d75605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "102222b4_a0bd844a",
+        "filename": "Ring/Ring/Services/GeneratedInteractionsManager.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-10-04T17:23:37Z",
+      "side": 1,
+      "message": "extra line + tabbing",
+      "revId": "9d045b3aa265c06c9904bcf8e2a92bd1d6d75605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
