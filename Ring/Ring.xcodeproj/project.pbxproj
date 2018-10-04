@@ -298,6 +298,13 @@
 			remoteGlobalIDString = 043999F21D1C2D9D00E99CD9;
 			remoteInfo = Ring;
 		};
+		66F295D92163E55F0044ED6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62366028200914C1002598C1;
+			remoteInfo = libring;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -1509,6 +1516,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				66F295DA2163E55F0044ED6F /* PBXTargetDependency */,
 			);
 			name = Ring;
 			productName = Ring;
@@ -1810,7 +1818,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../daemon/build-ios-arm64\nmake -j4\ncd ../../client-ios\ncp -r ../daemon/src/dring fat/include/\nfind ../daemon/build-ios-arm64/ -name '*.a' -exec cp '{}' fat/lib \\;";
+			shellScript = "cd ../../daemon/build-ios-arm64\nmake -j4\ncd ../../client-ios\ncp -r ../daemon/src/dring fat/include/\nfind ../daemon/build-ios-arm64/ -name '*.a' -exec cp '{}' fat/lib \\;\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2006,6 +2014,11 @@
 			isa = PBXTargetDependency;
 			target = 043999F21D1C2D9D00E99CD9 /* Ring */;
 			targetProxy = 04399A181D1C2D9D00E99CD9 /* PBXContainerItemProxy */;
+		};
+		66F295DA2163E55F0044ED6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62366028200914C1002598C1 /* libring */;
+			targetProxy = 66F295D92163E55F0044ED6F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

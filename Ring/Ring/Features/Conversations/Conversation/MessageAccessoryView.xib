@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,8 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="315" height="58"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type your message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJA-0c-Rp7">
-                    <rect key="frame" x="16" y="12" width="199" height="34"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type your message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJA-0c-Rp7">
+                    <rect key="frame" x="85" y="12" width="177" height="34"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
@@ -31,16 +31,19 @@
                             <real key="value" value="1.2"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="editingChanges:" destination="Fja-dy-lIy" eventType="editingChanged" id="q7X-Ld-xPW"/>
+                    </connections>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yky-Ar-GQt" userLabel="Top Border View">
-                    <rect key="frame" x="-0.5" y="0.0" width="315" height="1"/>
+                    <rect key="frame" x="0.0" y="0.0" width="315" height="1.3333333333333333"/>
                     <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1.2" id="D7A-43-3TV"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZ6-Cr-td2" userLabel="Upload Button">
-                    <rect key="frame" x="223" y="12" width="34" height="34"/>
+                    <rect key="frame" x="6" y="12" width="34" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="efZ-wn-OTj"/>
                         <constraint firstAttribute="width" constant="34" id="i8S-m1-tB0"/>
@@ -48,39 +51,56 @@
                     <state key="normal" image="share_button"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCm-fg-RY1">
-                    <rect key="frame" x="265" y="12" width="34" height="34"/>
+                    <rect key="frame" x="46" y="12" width="34" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="0I0-Zq-DPq"/>
                         <constraint firstAttribute="width" constant="34" id="Cby-RM-6vW"/>
                     </constraints>
                     <state key="normal" image="camera"/>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2N-XG-vU1" userLabel="Emojis Button">
+                    <rect key="frame" x="270" y="12" width="32" height="34"/>
+                    <state key="normal">
+                        <attributedString key="attributedTitle">
+                            <fragment content="👍">
+                                <attributes>
+                                    <font key="NSFont" size="20" name="AppleColorEmoji"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="yky-Ar-GQt" firstAttribute="centerX" secondItem="Fja-dy-lIy" secondAttribute="centerX" id="05e-1q-bdH"/>
-                <constraint firstItem="AJA-0c-Rp7" firstAttribute="trailing" secondItem="eZ6-Cr-td2" secondAttribute="leading" constant="-8" id="73K-N5-liQ"/>
-                <constraint firstAttribute="trailing" secondItem="AJA-0c-Rp7" secondAttribute="trailing" priority="250" constant="16" id="8R6-c7-kjd"/>
+                <constraint firstItem="w2N-XG-vU1" firstAttribute="top" secondItem="AJA-0c-Rp7" secondAttribute="top" id="3Qv-3c-1zt"/>
+                <constraint firstItem="eZ6-Cr-td2" firstAttribute="leading" secondItem="qCm-fg-RY1" secondAttribute="leading" constant="-40" id="73K-N5-liQ"/>
                 <constraint firstItem="yky-Ar-GQt" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" id="9NC-Lo-r3E"/>
                 <constraint firstAttribute="trailing" secondItem="qCm-fg-RY1" secondAttribute="trailing" priority="900" constant="16" id="Ccc-Oe-mui"/>
                 <constraint firstAttribute="bottom" secondItem="AJA-0c-Rp7" secondAttribute="bottom" constant="12" id="Gph-b4-ZJH"/>
+                <constraint firstItem="w2N-XG-vU1" firstAttribute="trailing" secondItem="AJA-0c-Rp7" secondAttribute="trailing" constant="40" id="JSa-7Y-rrJ"/>
                 <constraint firstItem="qCm-fg-RY1" firstAttribute="top" secondItem="eZ6-Cr-td2" secondAttribute="top" id="Maw-jM-1lO"/>
                 <constraint firstItem="eZ6-Cr-td2" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" constant="12" id="N2C-04-PmF"/>
+                <constraint firstItem="w2N-XG-vU1" firstAttribute="leading" secondItem="AJA-0c-Rp7" secondAttribute="trailing" constant="8" symbolic="YES" id="NLO-he-Kd9"/>
                 <constraint firstItem="yky-Ar-GQt" firstAttribute="width" secondItem="Fja-dy-lIy" secondAttribute="width" id="QVZ-1h-6de"/>
+                <constraint firstAttribute="trailing" secondItem="w2N-XG-vU1" secondAttribute="trailing" constant="13" id="Yyb-X2-nbp"/>
+                <constraint firstItem="w2N-XG-vU1" firstAttribute="bottom" secondItem="AJA-0c-Rp7" secondAttribute="bottom" id="aDm-Zh-eak"/>
                 <constraint firstItem="AJA-0c-Rp7" firstAttribute="top" secondItem="Fja-dy-lIy" secondAttribute="top" constant="12" id="mDu-cF-UdO"/>
-                <constraint firstItem="qCm-fg-RY1" firstAttribute="leading" secondItem="eZ6-Cr-td2" secondAttribute="trailing" constant="8" id="nXf-yT-cg0"/>
-                <constraint firstItem="AJA-0c-Rp7" firstAttribute="leading" secondItem="Fja-dy-lIy" secondAttribute="leading" constant="16" id="tvd-4f-jdO"/>
+                <constraint firstAttribute="leading" secondItem="eZ6-Cr-td2" secondAttribute="trailing" constant="-40" id="nXf-yT-cg0"/>
+                <constraint firstItem="AJA-0c-Rp7" firstAttribute="leading" secondItem="qCm-fg-RY1" secondAttribute="trailing" constant="5" id="tiS-eS-5Rr"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cameraButton" destination="qCm-fg-RY1" id="8WG-DR-guy"/>
-                <outlet property="cameraButtonTrailingConstraint" destination="Ccc-Oe-mui" id="Vm8-ow-sIR"/>
+                <outlet property="emojisButton" destination="w2N-XG-vU1" id="7d7-4L-GBI"/>
+                <outlet property="emojisButtonTrailingConstraint" destination="Yyb-X2-nbp" id="0wO-iY-lA3"/>
                 <outlet property="messageTextField" destination="AJA-0c-Rp7" id="ga9-yi-G2h"/>
-                <outlet property="messageTextFieldTrailingConstraint" destination="8R6-c7-kjd" id="EqL-vC-4jS"/>
                 <outlet property="shareButton" destination="eZ6-Cr-td2" id="SSD-59-WS2"/>
             </connections>
-            <point key="canvasLocation" x="-15.5" y="-178"/>
+            <point key="canvasLocation" x="-18.399999999999999" y="-178.81773399014779"/>
         </view>
     </objects>
     <resources>
