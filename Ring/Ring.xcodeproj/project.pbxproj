@@ -284,6 +284,7 @@
 		66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FBF21557D2F002757A6 /* ScanViewModel.swift */; };
 		66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */; };
 		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
+		66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DD2166A5930044ED6F /* Devices+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -653,6 +654,7 @@
 		66266FBF21557D2F002757A6 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
 		66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emoji+Helpers.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -885,6 +887,7 @@
 			children = (
 				56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */,
 				62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */,
+				66F295DD2166A5930044ED6F /* Devices+Helpers.swift */,
 				66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */,
 				1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */,
 				1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */,
@@ -1944,6 +1947,7 @@
 				1A5DC0281F3564AA0075E8EF /* MessageModel.swift in Sources */,
 				0E3697A1203235EA009A68CA /* BannedContactItem.swift in Sources */,
 				56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */,
+				66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */,
 				1A2041911F1FD46300C08435 /* DesignableView.swift in Sources */,
 				0ED2B6FE1F96A16C001572F0 /* LinkNewDeviceViewModel.swift in Sources */,
 				0E438A98204F31BD00402900 /* AccountHeader.swift in Sources */,
