@@ -227,7 +227,13 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         var heightOffset = CGFloat(0.0)
         if keyboardHeight != self.messageAccessoryView.frame.height {
             setShareButtonsVisibility(hide: true)
-            heightOffset = -24.0
+            let device = UIDevice.modelName
+            switch device {
+            case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+                heightOffset = -30
+            default :
+                heightOffset = 2
+            }
             self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
         }
 
