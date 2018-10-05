@@ -19,16 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1GZ-y1-6Ci">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4O-QD-W70">
-                                        <rect key="frame" x="168.33333333333334" y="45" width="77.333333333333343" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4O-QD-W70">
+                                        <rect key="frame" x="155" y="35" width="104" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyv-WP-6Gx">
-                                        <rect key="frame" x="14" y="45" width="25" height="25"/>
+                                        <rect key="frame" x="14" y="35" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="8zw-QV-JFH"/>
                                             <constraint firstAttribute="height" constant="25" id="fj4-rY-8ot"/>
@@ -43,8 +43,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="d4O-QD-W70" firstAttribute="centerX" secondItem="1GZ-y1-6Ci" secondAttribute="centerX" id="2Dw-y2-HXJ"/>
-                                    <constraint firstItem="Lyv-WP-6Gx" firstAttribute="top" secondItem="1GZ-y1-6Ci" secondAttribute="top" constant="45" id="5M6-5m-TRD"/>
-                                    <constraint firstAttribute="bottom" secondItem="Lyv-WP-6Gx" secondAttribute="bottom" constant="17" id="heK-5a-D3P"/>
+                                    <constraint firstItem="Lyv-WP-6Gx" firstAttribute="top" secondItem="1GZ-y1-6Ci" secondAttribute="top" constant="35" id="5M6-5m-TRD"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lyv-WP-6Gx" secondAttribute="bottom" constant="25" id="heK-5a-D3P"/>
                                     <constraint firstItem="Lyv-WP-6Gx" firstAttribute="top" secondItem="d4O-QD-W70" secondAttribute="top" id="ts8-j4-SQw"/>
                                     <constraint firstItem="Lyv-WP-6Gx" firstAttribute="leading" secondItem="1GZ-y1-6Ci" secondAttribute="leading" constant="14" id="v9X-hK-Vwo"/>
                                 </constraints>
@@ -70,6 +70,8 @@
                         <viewLayoutGuide key="safeArea" id="fMq-WO-EdK"/>
                     </view>
                     <connections>
+                        <outlet property="bottomCloseButtonConstraint" destination="heK-5a-D3P" id="39A-vi-i1d"/>
+                        <outlet property="bottomMarginTitleConstraint" destination="5M6-5m-TRD" id="zjz-Ya-9WV"/>
                         <outlet property="header" destination="1GZ-y1-6Ci" id="sYp-yH-aMG"/>
                         <outlet property="scanImage" destination="Tk7-iY-1NY" id="EYE-wA-uoZ"/>
                         <outlet property="searchTitle" destination="d4O-QD-W70" id="D7n-g4-RkY"/>
