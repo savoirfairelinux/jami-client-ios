@@ -29,6 +29,8 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
     @IBOutlet weak var header: UIView!
     @IBOutlet weak var scanImage: UIImageView!
     @IBOutlet weak var searchTitle: UILabel!
+    @IBOutlet weak var bottomMarginTitleConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomCloseButtonConstraint: NSLayoutConstraint!
 
     // MARK: variables
     let systemSoundId: SystemSoundID = 1016
@@ -62,6 +64,15 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let device = UIDevice.modelName
+        switch device {
+        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+            self.bottomMarginTitleConstraint.constant = 45
+            self.bottomCloseButtonConstraint.constant = 17
+        default :
+            self.bottomMarginTitleConstraint.constant = 35
+            self.bottomCloseButtonConstraint.constant = 25
+        }
         UIApplication.shared.statusBarStyle = .lightContent
         //AVCaptureDevice allows us to reference a physical capture device (video in our case)
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
