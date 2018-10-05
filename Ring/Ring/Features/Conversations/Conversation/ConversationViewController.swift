@@ -293,14 +293,24 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             titleView.addSubview(profileImageView)
         }
 
+        var dnlabelYOffset: CGFloat
+        let device = UIDevice.modelName
+        switch device {
+        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+            dnlabelYOffset = 4
+            userNameYOffset = 20
+        default :
+            dnlabelYOffset = -2
+            userNameYOffset = 12
+        }
+
         if let name = displayName, !name.isEmpty {
-            let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: 4, width: maxNameLength, height: 20))
+            let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: dnlabelYOffset, width: maxNameLength, height: 20))
             dnlabel.text = name
             dnlabel.font = UIFont.systemFont(ofSize: nameSize)
             dnlabel.textColor = UIColor.ringMain
             dnlabel.textAlignment = .left
             titleView.addSubview(dnlabel)
-            userNameYOffset = 20.0
             nameSize = 14.0
         }
 
