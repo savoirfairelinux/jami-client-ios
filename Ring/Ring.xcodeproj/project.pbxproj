@@ -283,6 +283,7 @@
 		6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6613A611214AFF4700B497D1 /* ScanViewController.storyboard */; };
 		66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FBF21557D2F002757A6 /* ScanViewModel.swift */; };
 		66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */; };
+		6661C73A216D2EA300E48D94 /* Gif+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6661C739216D2EA300E48D94 /* Gif+Helpers.swift */; };
 		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -652,6 +653,7 @@
 		6613A611214AFF4700B497D1 /* ScanViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScanViewController.storyboard; sourceTree = "<group>"; };
 		66266FBF21557D2F002757A6 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
 		66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emoji+Helpers.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		6661C739216D2EA300E48D94 /* Gif+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gif+Helpers.swift"; sourceTree = "<group>"; };
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -886,6 +888,7 @@
 				56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */,
 				62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */,
 				66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */,
+				6661C739216D2EA300E48D94 /* Gif+Helpers.swift */,
 				1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */,
 				1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */,
 				1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */,
@@ -1853,6 +1856,7 @@
 				1A2D18C71F29180700B2C785 /* DeviceModel.swift in Sources */,
 				1A20418F1F1EAC0E00C08435 /* Coordinator.swift in Sources */,
 				0E49097C1FEACA4B005CAA50 /* CallViewModel.swift in Sources */,
+				6661C73A216D2EA300E48D94 /* Gif+Helpers.swift in Sources */,
 				1A2D18A11F27A6D600B2C785 /* LinkDeviceViewController.swift in Sources */,
 				1A0C4EDC1F1D4B7E00550433 /* WelcomeViewController.swift in Sources */,
 				1A2D18D81F2918EE00B2C785 /* MeDetailViewController.swift in Sources */,

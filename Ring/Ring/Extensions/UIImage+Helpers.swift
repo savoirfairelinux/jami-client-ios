@@ -156,6 +156,34 @@ extension UIImage {
         return self.resizeImageWith(newSize: newSize)
     }
 
+    func getNewSize(of size: CGSize) -> CGSize? {
+
+        if self.size.height == 0 {
+            return nil
+        }
+        var newWidth = size.width
+        var newHeight = size.height
+
+        let ratio = self.size.width / self.size.height
+        if ratio > 1 {
+            newHeight = newWidth / ratio
+        } else if ratio < 1, ratio != 0 {
+            // android image orientation bug?
+            if  self.imageOrientation == UIImageOrientation.right ||
+                self.imageOrientation == UIImageOrientation.left ||
+                self.imageOrientation == UIImageOrientation.rightMirrored ||
+                self.imageOrientation == UIImageOrientation.leftMirrored {
+                newHeight *= ratio
+            } else {
+                newWidth = newHeight * ratio
+            }
+        }
+
+        let newSize = CGSize(width: newWidth, height: newHeight)
+        return newSize
+    }
+
+
     func resizeImageWith(newSize: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
         draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
