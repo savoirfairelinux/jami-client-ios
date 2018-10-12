@@ -340,21 +340,37 @@ class MessageCell: UITableViewCell, NibReusable {
     // swiftlint:enable function_body_length
 
     func displayTransferedImage(message: MessageViewModel, conversationID: String) {
-        let maxDimsion: CGFloat = 250
+        let screenWidth = UIScreen.main.bounds.width
+        var maxDimsion: CGFloat = 250
+        //iPhone 5 width
+        if screenWidth <= 320 {
+            maxDimsion = 200
+        //iPhone 6, iPhone 6 Plus and iPhone XR width
+        } else if screenWidth > 320 && screenWidth <= 414 {
+            maxDimsion = 250
+        //iPad width
+        } else if screenWidth > 414 {
+            maxDimsion = 300
+        }
+        let defaultSize = CGSize(width: maxDimsion, height: maxDimsion)
         if let image = message.getTransferedImage(maxSize: maxDimsion, conversationID: conversationID) {
             self.transferImageView.image = image
-            self.transferImageView.contentMode = .center
+            let newSize = self.transferImageView.image?.getNewSize(of: defaultSize)
+            let xOriginImageSend = self.bubble.bounds.size.width - (newSize?.width)!
+            if message.bubblePosition() == .sent {
+                self.transferImageView.frame = CGRect(x: xOriginImageSend, y: 0, width: ((newSize?.width ?? 200)), height: ((newSize?.height ?? 200)))
+            } else if message.bubblePosition() == .received {
+                self.transferImageView.frame = CGRect(x: 0, y: 0, width: ((newSize?.width ?? 200)), height: ((newSize?.height ?? 200)))
+            }
+            self.transferImageView.layer.cornerRadius = 20
+            self.transferImageView.layer.masksToBounds = true
+            self.transferImageView.contentMode = .scaleAspectFill
             buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 250.0)
             self.bubble.addSubview(self.transferImageView)
             self.bubbleViewMask?.isHidden = false
             self.bottomCorner.isHidden = true
             self.topCorner.isHidden = true
-            self.transferImageView.translatesAutoresizingMaskIntoConstraints = false
-            if message.bubblePosition() == .sent {
-                self.transferImageView.trailingAnchor.constraint(equalTo: self.bubble.trailingAnchor, constant: 0).isActive = true
-            } else if message.bubblePosition() == .received {
-                self.transferImageView.leadingAnchor.constraint(equalTo: self.bubble.leadingAnchor, constant: 0).isActive = true
-            }
+            self.transferImageView.translatesAutoresizingMaskIntoConstraints = true
             self.transferImageView.topAnchor.constraint(equalTo: self.bubble.topAnchor, constant: 0).isActive = true
             self.transferImageView.bottomAnchor.constraint(equalTo: self.bubble.bottomAnchor, constant: 0).isActive = true
         }
