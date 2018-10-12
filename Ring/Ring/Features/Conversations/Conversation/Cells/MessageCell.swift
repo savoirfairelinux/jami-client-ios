@@ -343,13 +343,19 @@ class MessageCell: UITableViewCell, NibReusable {
         let maxDimsion: CGFloat = 250
         if let image = message.getTransferedImage(maxSize: maxDimsion, conversationID: conversationID) {
             self.transferImageView.image = image
-            self.transferImageView.contentMode = .center
+            let heightImage = (Int(self.transferImageView.image?.size.height ?? 1000) * Int(maxDimsion + 50)) / Int(self.transferImageView.image?.size.width ?? 1000)
+            if message.bubblePosition() == .sent {
+                self.transferImageView.frame = CGRect(x: 0, y: 0, width: Int(maxDimsion + 55), height: heightImage)
+            } else if message.bubblePosition() == .received {
+                self.transferImageView.frame = CGRect(x: 0, y: 0, width: Int(maxDimsion + 30), height: heightImage)
+            }
+            self.transferImageView.contentMode = .scaleAspectFill
             buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 250.0)
             self.bubble.addSubview(self.transferImageView)
             self.bubbleViewMask?.isHidden = false
             self.bottomCorner.isHidden = true
             self.topCorner.isHidden = true
-            self.transferImageView.translatesAutoresizingMaskIntoConstraints = false
+            self.transferImageView.translatesAutoresizingMaskIntoConstraints = true
             if message.bubblePosition() == .sent {
                 self.transferImageView.trailingAnchor.constraint(equalTo: self.bubble.trailingAnchor, constant: 0).isActive = true
             } else if message.bubblePosition() == .received {

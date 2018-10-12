@@ -200,11 +200,13 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         if UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage) {
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: pathUrl.path) {
-                let image = UIImage(contentsOfFile: pathUrl.path)
-                let resizedImage = image?.resizeIntoRectangle(of: CGSize(width: maxSize, height: maxSize))
-                let roundedImage = resizedImage?.setRoundCorner(radius: 20.0, offset: 1)
-                self.transferedImages[conversationID + name] = (true, roundedImage)
-                return roundedImage
+                if fileExtension as String == "gif" {
+                    let image = UIImage.gifImageWithUrl(pathUrl)
+                    return image
+                } else {
+                    let image = UIImage(contentsOfFile: pathUrl.path)
+                    return image
+                }
             }
         } else {
             self.transferedImages[conversationID + name] = (false, nil)
