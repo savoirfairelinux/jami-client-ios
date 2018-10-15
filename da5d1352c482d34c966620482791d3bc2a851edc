@@ -22,6 +22,30 @@
       "revId": "da5d1352c482d34c966620482791d3bc2a851edc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98fc1144_c1cb1ead",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-10-15T15:30:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a57e53ae_61c9a8e4",
+      "range": {
+        "startLine": 345,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 9
+      },
+      "revId": "da5d1352c482d34c966620482791d3bc2a851edc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
