@@ -20,19 +20,25 @@
 
 import UIKit
 import Reusable
+import RxSwift
 
-class MessageAccessoryView: UIView, NibLoadable {
+class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
 
-    @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var emojisButton: UIButton!
+    @IBOutlet weak var blurEffect: UIVisualEffectView!
+    @IBOutlet weak var messageTextView: GrowingTextView!
     @IBOutlet weak var emojisButtonTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var messageTextFieldTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButtonLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textViewHeightConstraints: NSLayoutConstraint!
+    var messageTextViewHeight = Variable<CGFloat>(0.00)
+    var messageTextViewContent = Variable<String>("")
 
     override open func didMoveToWindow() {
         super.didMoveToWindow()
+        self.setupMessageTextView()
         if #available(iOS 11.0, *) {
             guard let window = self.window else {
                 return
@@ -44,12 +50,34 @@ class MessageAccessoryView: UIView, NibLoadable {
         }
     }
 
-    @IBAction func editingChanges(_ sender: Any) {
-        if self.messageTextField.text != nil {
-            if self.messageTextField.text!.count >= 1 {
-                if UIDevice.current.userInterfaceIdiom != .pad {
+    func setupMessageTextView() {
+        self.messageTextView.delegate = self
+        self.messageTextView.placeholder = "Type your message..."
+        self.messageTextView.layer.cornerRadius = 18
+        self.messageTextView.tintColor = UIColor.ringMain
+        self.messageTextView.textContainerInset = UIEdgeInsets(top: 8, left: 7, bottom: 8, right: 7)
+        self.messageTextView.layer.borderWidth = 1
+        self.messageTextView.layer.borderColor = UIColor.ringMsgTextFieldBorder.cgColor
+        self.messageTextView.maxHeight = 70
+    }
+
+    func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
+        if height > self.messageTextViewHeight.value {
+            UIView.animate(withDuration: 0.2) {
+                self.layoutIfNeeded()
+            }
+        }
+        self.messageTextViewHeight.value = height
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        self.messageTextViewContent.value = textView.text
+    }
+
+    func editingChanges() {
+        if self.messageTextView.text != nil {
+            if self.messageTextView.text!.count >= 1 {
                     setEmojiButtonVisibility(hide: true)
-                }
             } else {
                 setEmojiButtonVisibility(hide: false)
             }
@@ -58,11 +86,15 @@ class MessageAccessoryView: UIView, NibLoadable {
         }
     }
     func setEmojiButtonVisibility(hide: Bool) {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             if hide {
                 self.emojisButtonTrailingConstraint.constant = -27
+                self.sendButtonLeftConstraint.constant = 13
+                self.sendButton.tintColor = UIColor.ringMain
             } else {
-                self.emojisButtonTrailingConstraint.constant = 13
+                self.emojisButtonTrailingConstraint.constant = 14
+                self.sendButtonLeftConstraint.constant = 35
+                self.sendButton.tintColor = UIColor.ringMsgTextFieldBackground
             }
             self.layoutIfNeeded()
         })

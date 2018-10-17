@@ -27,7 +27,7 @@ import MobileCoreServices
 
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
-class ConversationViewController: UIViewController, UITextFieldDelegate,
+class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
                                   UIDocumentPickerDelegate, StoryboardBased, ViewModelBased {
 
@@ -43,6 +43,7 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
     var textFieldShouldEndEditing = false
     var bottomOffset: CGFloat = 0
     let scrollOffsetThreshold: CGFloat = 600
+    var bottomHeight: CGFloat = 0.00
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
 
@@ -50,7 +51,6 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         super.viewDidLoad()
 
         self.configureRingNavigationBar()
-
         self.setupUI()
         self.setupTableView()
         self.setupBindings()
@@ -229,15 +229,16 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
             let device = UIDevice.modelName
             switch device {
             case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
-                heightOffset = -30
+                heightOffset = -55
             default :
-                heightOffset = 2
+                heightOffset = -20
             }
             self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
         }
 
         self.tableView.contentInset.bottom = keyboardHeight + heightOffset
         self.tableView.scrollIndicatorInsets.bottom = keyboardHeight + heightOffset
+        self.bottomHeight = keyboardHeight + heightOffset
 
         self.scrollToBottom(animated: false)
         self.updateBottomOffset()
@@ -314,9 +315,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
 
         self.messageAccessoryView.shareButton.tintColor = UIColor.ringMain
         self.messageAccessoryView.cameraButton.tintColor = UIColor.ringMain
-
-        self.messageAccessoryView.messageTextField.delegate = self
-        self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
+        self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
+        self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill
         self.tableView.backgroundColor = UIColor.ringMsgBackground
         self.messageAccessoryView.backgroundColor = UIColor.ringMsgTextFieldBackground
         self.view.backgroundColor = UIColor.ringMsgTextFieldBackground
@@ -499,17 +499,29 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
     }()
 
     func setupBindings() {
-        self.messageAccessoryView.emojisButton.rx.tap.subscribe(onNext: { [unowned self] _ in
-            self.viewModel.sendMessage(withContent: "👍")
-        }).disposed(by: self.disposeBag)
-        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
-            guard let payload = self.messageAccessoryView.messageTextField.text, !payload.isEmpty else {
+        self.messageAccessoryView.sendButton.rx.tap.subscribe(onNext: { [unowned self] _ in
+            guard let payload = self.messageAccessoryView.messageTextView.text, !payload.isEmpty else {
                 return
             }
             self.viewModel.sendMessage(withContent: payload)
-            self.messageAccessoryView.messageTextField.text = ""
+            self.messageAccessoryView.messageTextView.text = ""
             self.messageAccessoryView.setEmojiButtonVisibility(hide: false)
         }).disposed(by: self.disposeBag)
+
+        self.messageAccessoryView.emojisButton.rx.tap.subscribe(onNext: { [unowned self] _ in
+            self.viewModel.sendMessage(withContent: "👍")
+        }).disposed(by: self.disposeBag)
+
+        self.messageAccessoryView.messageTextViewHeight.asObservable().subscribe(onNext: { height in
+            self.tableView.contentInset.bottom = self.bottomHeight + height - 35
+            self.tableView.scrollIndicatorInsets.bottom = self.bottomHeight + height - 35
+            self.scrollToBottom(animated: true)
+            self.updateBottomOffset()
+        })
+
+        self.messageAccessoryView.messageTextViewContent.asObservable().subscribe(onNext: { height in
+            self.messageAccessoryView.editingChanges()
+        })
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched
