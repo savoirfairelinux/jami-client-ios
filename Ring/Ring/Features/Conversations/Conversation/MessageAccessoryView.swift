@@ -23,16 +23,24 @@ import Reusable
 
 class MessageAccessoryView: UIView, NibLoadable {
 
-    @IBOutlet weak var messageTextField: UITextField!
+//    @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var emojisButton: UIButton!
     @IBOutlet weak var emojisButtonTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var messageTextFieldTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewHeightConstraints: NSLayoutConstraint!
+    //    @IBOutlet weak var messageTextFieldTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textViewHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var messageTextView: GrowingTextView!
 
     override open func didMoveToWindow() {
         super.didMoveToWindow()
+        self.messageTextView.placeholder = "Type your message..."
+        self.messageTextView.layer.cornerRadius = 10
+        self.messageTextView.layer.borderWidth = 1
+        self.messageTextView.layer.borderColor = UIColor.ringMsgTextFieldBorder.cgColor
+        self.messageTextView.maxHeight = 100
         if #available(iOS 11.0, *) {
             guard let window = self.window else {
                 return
@@ -45,8 +53,8 @@ class MessageAccessoryView: UIView, NibLoadable {
     }
 
     @IBAction func editingChanges(_ sender: Any) {
-        if self.messageTextField.text != nil {
-            if self.messageTextField.text!.count >= 1 {
+        if self.messageTextView.text != nil {
+            if self.messageTextView.text!.count >= 1 {
                 if UIDevice.current.userInterfaceIdiom != .pad {
                     setEmojiButtonVisibility(hide: true)
                 }

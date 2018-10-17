@@ -48,6 +48,9 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.messageAccessoryView.heightViewConstraints.constant = 100
+//        self.messageAccessoryView.layoutIfNeeded()
+//        self.messageAccessoryView.translatesAutoresizingMaskIntoConstraints = true
 
         self.configureRingNavigationBar()
 
@@ -315,8 +318,8 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         self.messageAccessoryView.shareButton.tintColor = UIColor.ringMain
         self.messageAccessoryView.cameraButton.tintColor = UIColor.ringMain
 
-        self.messageAccessoryView.messageTextField.delegate = self
-        self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
+//        self.messageAccessoryView.messageTextField.delegate = self
+//        self.messageAccessoryView.messageTextField.setPadding(8.0, 8.0)
         self.tableView.backgroundColor = UIColor.ringMsgBackground
         self.messageAccessoryView.backgroundColor = UIColor.ringMsgTextFieldBackground
         self.view.backgroundColor = UIColor.ringMsgTextFieldBackground
@@ -502,14 +505,14 @@ class ConversationViewController: UIViewController, UITextFieldDelegate,
         self.messageAccessoryView.emojisButton.rx.tap.subscribe(onNext: { [unowned self] _ in
             self.viewModel.sendMessage(withContent: "👍")
         }).disposed(by: self.disposeBag)
-        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
-            guard let payload = self.messageAccessoryView.messageTextField.text, !payload.isEmpty else {
-                return
-            }
-            self.viewModel.sendMessage(withContent: payload)
-            self.messageAccessoryView.messageTextField.text = ""
-            self.messageAccessoryView.setEmojiButtonVisibility(hide: false)
-        }).disposed(by: self.disposeBag)
+//        self.messageAccessoryView.messageTextField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
+//            guard let payload = self.messageAccessoryView.messageTextField.text, !payload.isEmpty else {
+//                return
+//            }
+//            self.viewModel.sendMessage(withContent: payload)
+//            self.messageAccessoryView.messageTextField.text = ""
+//            self.messageAccessoryView.setEmojiButtonVisibility(hide: false)
+//        }).disposed(by: self.disposeBag)
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched
