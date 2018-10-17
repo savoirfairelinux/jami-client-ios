@@ -284,6 +284,7 @@
 		66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FBF21557D2F002757A6 /* ScanViewModel.swift */; };
 		66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */; };
 		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
+		66E6381221764C2C005EA2B0 /* GrowingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6381121764C2C005EA2B0 /* GrowingTextView.swift */; };
 		66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DD2166A5930044ED6F /* Devices+Helpers.swift */; };
 /* End PBXBuildFile section */
 
@@ -654,6 +655,7 @@
 		66266FBF21557D2F002757A6 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
 		66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emoji+Helpers.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		66E6381121764C2C005EA2B0 /* GrowingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextView.swift; sourceTree = "<group>"; };
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1322,9 +1324,10 @@
 				1A2D18B21F2915C500B2C785 /* ConversationViewController.storyboard */,
 				1A2D18CC1F29182500B2C785 /* ConversationViewController.swift */,
 				1A5DC02D1F3565640075E8EF /* ConversationViewModel.swift */,
-				1A2D18DE1F29197100B2C785 /* MessageAccessoryView.swift */,
 				1A2D18DF1F29197100B2C785 /* MessageAccessoryView.xib */,
+				1A2D18DE1F29197100B2C785 /* MessageAccessoryView.swift */,
 				1A2D18E41F29197100B2C785 /* MessageViewModel.swift */,
+				66E6381121764C2C005EA2B0 /* GrowingTextView.swift */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -1866,6 +1869,7 @@
 				0E438A9A204F47E700402900 /* SettingsTableView.swift in Sources */,
 				0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */,
 				1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */,
+				66E6381221764C2C005EA2B0 /* GrowingTextView.swift in Sources */,
 				0E7CF4DB20164B6700CD967D /* ButtonsContainerView.swift in Sources */,
 				0E49097A1FEAC9E1005CAA50 /* CallViewController.swift in Sources */,
 				1A5DC0241F3564360075E8EF /* ContactRequestModel.swift in Sources */,
