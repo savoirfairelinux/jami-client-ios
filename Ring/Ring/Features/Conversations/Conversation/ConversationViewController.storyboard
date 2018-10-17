@@ -46,17 +46,31 @@
                                     <constraint firstItem="NYW-Ie-8yB" firstAttribute="centerX" secondItem="6Wq-EJ-CAF" secondAttribute="centerX" id="vB4-hR-9sj"/>
                                 </constraints>
                             </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRu-HM-jhQ">
+                                <rect key="frame" x="0.0" y="640" width="375" height="27"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lK5-Aw-CC5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="27"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="b0Q-Xd-v7V"/>
+                                </constraints>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6Wq-EJ-CAF" firstAttribute="leading" secondItem="mrp-Ty-hZO" secondAttribute="leading" id="5VA-aR-jIL"/>
                             <constraint firstItem="mrp-Ty-hZO" firstAttribute="trailing" secondItem="yc2-Jn-6vm" secondAttribute="trailing" id="6Ar-yh-iTT"/>
+                            <constraint firstItem="XRu-HM-jhQ" firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="D1h-vM-lOK"/>
                             <constraint firstAttribute="bottom" secondItem="6Wq-EJ-CAF" secondAttribute="bottom" id="QKw-Wp-ff0"/>
                             <constraint firstItem="yc2-Jn-6vm" firstAttribute="top" secondItem="lhx-ny-Zct" secondAttribute="top" id="Qd0-eb-gyZ"/>
                             <constraint firstItem="mrp-Ty-hZO" firstAttribute="trailing" secondItem="6Wq-EJ-CAF" secondAttribute="trailing" id="W84-gc-kua"/>
                             <constraint firstItem="yc2-Jn-6vm" firstAttribute="leading" secondItem="mrp-Ty-hZO" secondAttribute="leading" id="Wzk-uM-Oge"/>
-                            <constraint firstItem="mrp-Ty-hZO" firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="m6U-Gp-jhl"/>
+                            <constraint firstItem="XRu-HM-jhQ" firstAttribute="centerX" secondItem="yc2-Jn-6vm" secondAttribute="centerX" id="Y16-31-gDX"/>
+                            <constraint firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="m6U-Gp-jhl"/>
                             <constraint firstItem="6Wq-EJ-CAF" firstAttribute="top" secondItem="lhx-ny-Zct" secondAttribute="top" id="v3Q-NK-vb1"/>
+                            <constraint firstItem="XRu-HM-jhQ" firstAttribute="width" secondItem="yc2-Jn-6vm" secondAttribute="width" id="vBi-yc-6H9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mrp-Ty-hZO"/>
                     </view>
@@ -68,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOF-r3-fSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="-1179"/>
+            <point key="canvasLocation" x="844" y="-1179.7601199400301"/>
         </scene>
     </scenes>
 </document>
