@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Llogari";
 "global.ok" = "OK";
 
+// Scan
+"scan.badQrCode" = "Kod QR i gabuar";
+"scan.search" = "Po kërkohet…";
+
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Përfundime Kërkimi";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Thirre";
 "calls.unknown" = "I panjohur";
 "calls.incomingCallInfo" = "dëshiron të flasë me ju";
-"calls.calling" = "Po thirret…";
+"calls.ringing" = "Po i bihet ziles";
+"calls.connecting" = "Po lidhet";
 "calls.callFinished" = "Thirrja përfundoi";
 
 //Account Page

@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "حساب کاربری";
 "global.ok" = "خب";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "دیروز";
 "smartlist.results" = "Search Result";
@@ -38,7 +42,7 @@
 //Welcome Screen
 "welcome.title" = "به رینگ خوش آمدید";
 "welcome.text" = "رینگ یک نرم‌افزار ارتباط جهانی است که آزادی‌ها و حریم شخصی کاربرانش را حفظ می کند.";
-"welcome.linkDevice" = "پیوند این افزاره به یک حساب";
+"welcome.linkDevice" = "پیوند این دستگاه به یک حساب";
 "welcome.createAccount" = "ساخت یک حساب رینگ";
 
 //Creation Profile Screen
@@ -51,7 +55,7 @@
 "createAccount.enterNewUsernamePlaceholder" = "نام کاربری";
 "createAccount.newPasswordPlaceholder" = "گذرواژه";
 "createAccount.repeatPasswordPlaceholder" = "تأیید گذرواژه";
-"createAccount.passwordCharactersNumberError" = "کمینه ۶ نویسه";
+"createAccount.passwordCharactersNumberError" = "حداقل ۶ کاراکتر";
 "createAccount.passwordNotMatchingError" = "گذرواژه‌ها یکسان نیستند";
 "createAccount.lookingForUsernameAvailability" = "در حال جستجو برای در دسترس بودن نام کاربری ...";
 "createAccount.invalidUsername" = "نام کاربری نامعتبر";
@@ -69,7 +73,7 @@
 "linkToAccount.explanationPinMessage" = "برای تولید پین کد ( یا PIN)، به تنظیمات مدیریت حساب در دستگاهی که حاوی حساب کاربری مورد نظر شماست رجوع کنید. در تنظیمات دستگاه، «یک دستگاه دیگر را به این حساب پیوند دهید» را انتخاب کنید. برای تکمیل این فرم پین لازم را دریافت خواهید کرد. پین فقط ده (10) دقیقه معتبر است";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "نمی‌تواند حساب را یافت";
+"alerts.accountCannotBeFoundTitle" = "نمی توان حساب را پیدا کرد";
 "alerts.accountCannotBeFoundMessage" = "حساب در شبکه رینگ یافت نشد. اطمینان حاصل کنید که حساب را از یک دستگاه  (که دارای حساب رینگ است)  صادر کرده اید و اعتبارنامه‌های ارائه شده صحیح است.";
 "alerts.accountAddedTitle" = "حساب افزوده شد.";
 "alerts.accountNoNetworkTitle" = "نمی‌توان به شبکه وصل شد";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "برقراری تماس";
 "calls.unknown" = "ناشناخته";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "در حال زنگ خوردن";
+"calls.connecting" = "در حال برقراری ارتباط";
 "calls.callFinished" = "Call finished";
 
 //Account Page

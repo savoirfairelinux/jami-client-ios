@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Search Result";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Chiamata";
 "calls.unknown" = "Sconosciuto";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "Squilla";
+"calls.connecting" = "Collegamento";
 "calls.callFinished" = "Call finished";
 
 //Account Page

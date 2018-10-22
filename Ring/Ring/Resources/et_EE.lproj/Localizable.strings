@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Início";
+"global.homeTabBarTitle" = "Home";
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
@@ -31,10 +31,10 @@
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Search Result";
-"smartlist.conversations" = "Conversas";
+"smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "Sem conexão de rede";
+"smartlist.noNetworkConnectivity" = "No network connectivity";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
@@ -43,17 +43,17 @@
 "welcome.title" = "Welcome to Ring";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Criar uma conta Ring";
+"welcome.createAccount" = "Create a Ring account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
-"createProfile.profileCreated" = "Próximo";
+"createProfile.profileCreated" = "Next";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "Usuário";
-"createAccount.newPasswordPlaceholder" = "senha";
+"createAccount.enterNewUsernamePlaceholder" = "username";
+"createAccount.newPasswordPlaceholder" = "password";
 "createAccount.repeatPasswordPlaceholder" = "confirm password";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
@@ -66,7 +66,7 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "senha";
+"linkToAccount.passwordPlaceholder" = "password";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Enter PIN";
@@ -94,23 +94,23 @@
 
 //Actions
 "actions.blockAction" = "Block";
-"actions.deleteAction" = "Eliminar";
+"actions.deleteAction" = "Delete";
 "actions.cancelAction" = "Cancel";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accept";
 "alerts.incomingCallButtonIgnore" = "Ignore";
 
 //Calls
-"calls.callItemTitle" = "Chamada";
-"calls.unknown" = "Desconhecido";
+"calls.callItemTitle" = "Call";
+"calls.unknown" = "Unknown";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Ringing";
-"calls.connecting" = "Connecting";
+"calls.ringing" = "Heliseb";
+"calls.connecting" = "Ühendab";
 "calls.callFinished" = "Call finished";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Configurações";
+"accountPage.settingsHeader" = "Settings";
 "accountPage.username" = "username:";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -120,7 +120,7 @@
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Salvar";
+"accountPage.saveProxyAddress" = "Save";
 "accountPage.proxyPaceholder" = "Proxy address";
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
@@ -143,7 +143,7 @@
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
-"dataTransfer.readableStatusError" = "Erro";
+"dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";

@@ -22,11 +22,15 @@
 "global.homeTabBarTitle" = "Főoldal";
 "global.contactRequestsTabBarTitle" = "Meghívás";
 "global.meTabBarTitle" = "Fiók";
-"global.ok" = "OK";
+"global.ok" = "Rendben";
+
+// Scan
+"scan.badQrCode" = "Érvénytelen QR-kód";
+"scan.search" = "Keresés…";
 
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Keresési eredmény";
 "smartlist.conversations" = "Beszélgetések";
 "smartlist.searching" = "Keresés…";
 "smartlist.noResults" = "Nincs eredmény";
@@ -42,7 +46,7 @@
 "welcome.createAccount" = "Ring fiók létrehozása";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Átugrani";
 "createProfile.profileCreated" = "Tovább";
 
 //Create Account form
@@ -82,47 +86,48 @@
 "alerts.accountLinkedTitle" = "Fiók összekapcsolása…";
 "alerts.dbFailedTitle" = "Hiba történt a Ring elindításakor";
 "alerts.dbFailedMessage" = "Kérjük, hogy zárja be az alkalmazást és próbálja meg újra megnyitni";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmBlockContact" = "Biztos, hogy letiltja ezt a partnert? A beszélgetések előzményei ezzel a partnerrel véglegesen törlődni fognak.";
+"alerts.confirmBlockContactTitle" = "Blokkolt partner";
+"alerts.confirmDeleteConversation" = "Biztosan végleg akarja törölni ezt a beszélgetést?";
+"alerts.confirmDeleteConversationFromContact" = "Biztos, hogy törli akarja a beszélgetést ezzel a partnerrel?";
+"alerts.confirmDeleteConversationTitle" = "Beszélgetés törlése";
 
 //Actions
 "actions.blockAction" = "Blokkolás";
 "actions.deleteAction" = "Törlés";
 "actions.cancelAction" = "Mégse";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Bejövő hívás -tól/-től";
 "alerts.incomingCallButtonAccept" = "Elfogadás";
 "alerts.incomingCallButtonIgnore" = "Figyelmen kívül hagy";
 
 //Calls
 "calls.callItemTitle" = "Hívás";
 "calls.unknown" = "Ismeretlen";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
-"calls.callFinished" = "Call finished";
+"calls.incomingCallInfo" = "beszélni akar Önnel";
+"calls.ringing" = "Csörögni";
+"calls.connecting" = "Kapcsolódás";
+"calls.callFinished" = "A hívás befejeződött";
 
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";
 "accountPage.settingsHeader" = "Beállítások";
-"accountPage.username" = "username:";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Block List";
-"accountPage.unblockContact" = "UNBLOCK";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.username" = "felhasználónév:";
+"accountPage.usernameNotRegistered" = "felhasználónév: nem regisztrált";
+"accountPage.credentialsHeader" = "Fiók Adatai";
+"accountPage.enableProxy" = "Proxy engedélyezése";
+"accountPage.blockedContacts" = "Tiltólista";
+"accountPage.unblockContact" = "FELOLD";
+"accountPage.proxyAddressAlert" = "Adja meg a proxy címet";
+"accountPage.enableProxy" = "Proxy engedélyezése";
+"accountPage.noProxyExplanationLabel" = "A készüléke nem kap értesítéseket amikor a proxy le van tiltva";
 "accountPage.saveProxyAddress" = "Mentés";
-"accountPage.proxyPaceholder" = "Proxy address";
-"accountPage.enableNotifications" = "Enable Notifications";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyPaceholder" = "Proxy cím";
+"accountPage.enableNotifications" = "Értesítések engedélyezése";
+"accountPage.proxyDisabledAlertTitle" = "Proxy kiszolgáló letiltva";
+"accountPage.proxyDisabledAlertBody" = "Annak érdekében, hogy értesítéseket kaphasson kérjük, hogy engedélyezze a proxy használatát";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Csatlakoztasson egy új eszközt";
 "linkDevice.passwordError" = "A megadott jelszó nem oldja fel ezt a fiókot";
 "linkDevice.networkError" = "Hálózati hiba történt az exportálás során";
 "linkDevice.defaultError" = "Hiba történt az exportálás során";
@@ -130,20 +135,20 @@
 "linkDevice.hudMessage" = "Ellenőrzése";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
+"contactPage.startAudioCall" = "Hanghívás indítása";
+"contactPage.startVideoCall" = "Videóhívás indítása";
+"contactPage.sendMessage" = "Üzenet küldése";
+"contactPage.clearConversation" = "Csevegések törlése";
+"contactPage.blockContact" = "Blokkolt partner";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Szignál…";
 "dataTransfer.readableStatusError" = "Hiba";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "Hívásátirányítás";
+"dataTransfer.readableStatusCanceled" = "Törölve";
+"dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
 

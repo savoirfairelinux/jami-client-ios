@@ -1,4 +1,4 @@
- /*
+﻿ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -25,8 +25,8 @@
 "global.ok" = "OK";
 
 // Scan
-"scan.badQrCode" = "Mauvais QR code";
-"scan.search" = "Recherche…";
+"scan.badQrCode" = "Code QR incorrect";
+"scan.search" = "Recherche en cours ...";
 
 // Smartlist
 "smartlist.yesterday" = "Hier";
@@ -104,12 +104,9 @@
 "calls.callItemTitle" = "Appelez";
 "calls.unknown" = "Inconnu";
 "calls.incomingCallInfo" = "veut vous parler";
-"calls.calling" = "Appel ...";
+"calls.ringing" = "Sonne";
+"calls.connecting" = "En cours de connexion";
 "calls.callFinished" = "Appel terminé";
-
-//Events
-"events.contactAdded" = "Contact ajouté";
-
 
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";

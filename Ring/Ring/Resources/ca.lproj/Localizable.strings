@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Compte";
 "global.ok" = "Ok";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Search Result";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Trucada";
 "calls.unknown" = "Desconegut";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "Ringing";
+"calls.connecting" = "Connectant";
 "calls.callFinished" = "Call finished";
 
 //Account Page

@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Oké";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Gisteren";
 "smartlist.results" = "Zoekresultaat";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Oproep";
 "calls.unknown" = "Onbekend";
 "calls.incomingCallInfo" = "wil met je praten";
-"calls.calling" = "Bellen…";
+"calls.ringing" = "Gaat over";
+"calls.connecting" = "Verbinden";
 "calls.callFinished" = "Oproep beëindigd";
 
 //Account Page

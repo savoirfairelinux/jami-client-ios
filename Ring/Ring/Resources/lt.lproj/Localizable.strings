@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Paskyra";
 "global.ok" = "Gerai";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Vakar";
 "smartlist.results" = "Search Result";
@@ -100,15 +104,16 @@
 "calls.callItemTitle" = "Skambutis";
 "calls.unknown" = "Nežinomas";
 "calls.incomingCallInfo" = "nori su jumis pakalbėti";
-"calls.calling" = "Skambinama...";
+"calls.ringing" = "Skambina";
+"calls.connecting" = "Sujungiama";
 "calls.callFinished" = "Skambutis užbaigtas";
 
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";
 "accountPage.settingsHeader" = "Nustatymai";
 "accountPage.username" = "naudotojo vardas:";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
+"accountPage.usernameNotRegistered" = "naudotojo vardas: neregistruotas";
+"accountPage.credentialsHeader" = "Išsamesnė paskyros informacija";
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.blockedContacts" = "Block List";
 "accountPage.unblockContact" = "UNBLOCK";

@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "חשבון";
 "global.ok" = "Ok";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "אתמול";
 "smartlist.results" = "Search Result";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "קריאה";
 "calls.unknown" = "לא מוכר";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "מצלצל";
+"calls.connecting" = "מתחבר";
 "calls.callFinished" = "Call finished";
 
 //Account Page

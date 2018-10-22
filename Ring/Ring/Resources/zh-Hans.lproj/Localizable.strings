@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "帳號";
 "global.ok" = "確定";
 
+// Scan
+"scan.badQrCode" = "不正確的 QR code";
+"scan.search" = "正在搜尋……";
+
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "搜尋結果";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "通話";
 "calls.unknown" = "未知";
 "calls.incomingCallInfo" = "想要與您交談";
-"calls.calling" = "正在通話……";
+"calls.ringing" = "響鈴中";
+"calls.connecting" = "連接中";
 "calls.callFinished" = "通話結束";
 
 //Account Page

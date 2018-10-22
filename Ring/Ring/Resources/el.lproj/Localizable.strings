@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Λογαριασμός";
 "global.ok" = "Εντάξει";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Χθες";
 "smartlist.results" = "Search Result";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Κλήση";
 "calls.unknown" = "Άγνωστοι";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "Κουδουνίζει";
+"calls.connecting" = "Συνδέεται";
 "calls.callFinished" = "Call finished";
 
 //Account Page

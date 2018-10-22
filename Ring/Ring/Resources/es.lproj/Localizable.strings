@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Cuenta";
 "global.ok" = "Aceptar";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Ayer";
 "smartlist.results" = "Resultado de búsqueda";
@@ -60,20 +64,20 @@
 "createAccount.waitCreateAccountTitle" = "Agregando cuenta";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
+"linkToAccount.waitLinkToAccountTitle" = "Asociación de la cuenta";
 "linkToAccount.linkButtonTitle" = "Vincular dispositivo";
 "linkToAccount.passwordPlaceholder" = "contraseña";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Introducir contraseña";
 "linkToAccount.pinLabel" = "Ingresa tu PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Para generar el código PIN, vaya a la configuración de la cuenta en el dispositivo que contiene la cuenta que dese utilizar y seleccione \"Conectar otro dispositivo a esta cuenta\". Recibirá el PIN necesario para completar este formulario. Este será válido durante 10 minutos.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Error al encontrar la cuenta";
 "alerts.accountCannotBeFoundMessage" = "La cuenta no se pudo encontrar en la red de Ring. Asegúrese de que se haya exportado en Ring desde un dispositivo existente, y que las credenciales proporcionadas son correctas.";
 "alerts.accountAddedTitle" = "Cuenta agregada";
 "alerts.accountNoNetworkTitle" = "Error al conectarse a la red";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "No se pudo añadir la cuenta porque Ring no puede conectar con la red distribuida. Compruebe la conectividad del dispositivo.";
 "alerts.accountDefaultErrorTitle" = "Error desconocido";
 "alerts.accountDefaultErrorMessage" = "La cuenta no pudo ser creada.";
 "alerts.profileTakePhoto" = "Sacar una foto";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Llamar";
 "calls.unknown" = "Desconocido";
 "calls.incomingCallInfo" = "quiere hablar contigo";
-"calls.calling" = "Llamando...";
+"calls.ringing" = "Sonando";
+"calls.connecting" = "Conectando";
 "calls.callFinished" = "Llamada finalizada";
 
 //Account Page
@@ -119,14 +124,14 @@
 "accountPage.proxyPaceholder" = "Dirección proxy";
 "accountPage.enableNotifications" = "Habilitar Notificaciones";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy deshabilitado";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertBody" = "Habilite la proxy para recibir notificaciones.";
 
 //Link New Device
 "linkDevice.title" = "Vincular un nuevo dispositivo";
 "linkDevice.passwordError" = "La contraseña ingresada no puede desbloquear esta cuenta";
 "linkDevice.networkError" = "Ocurrió un error durante la exportación";
 "linkDevice.defaultError" = "Ocurrió un error durante la exportación";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Para completar el proceso, abra Ring en el nuevo dispositivo y seleccione la opción \"Conectar el dispositivo a una cuenta\". Su PIN será válido durante 10 minutos. ";
 "linkDevice.hudMessage" = "Verificando";
 
 //Contact Page
@@ -139,11 +144,11 @@
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicializando…";
 "dataTransfer.readableStatusError" = "Error";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "En espera...";
 "dataTransfer.readableStatusRefuse" = "No aceptar";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Transfiriendo";
 "dataTransfer.readableStatusCanceled" = "Cancelado";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusSuccess" = "Completado";
 "dataTransfer.readableStatusAccept" = "Aceptar";
 "dataTransfer.readableStatusCancel" = "Cancelar";
 

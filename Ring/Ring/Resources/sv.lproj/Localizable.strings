@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "OK";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Sökresultat";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Samtal";
 "calls.unknown" = "Okänd";
 "calls.incomingCallInfo" = "vill prata med dig";
-"calls.calling" = "Ringer upp...";
+"calls.ringing" = "Ringer";
+"calls.connecting" = "Ansluter";
 "calls.callFinished" = "Samtalet avslutat";
 
 //Account Page

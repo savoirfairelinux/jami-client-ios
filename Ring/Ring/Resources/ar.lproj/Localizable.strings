@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "حساب";
 "global.ok" = "موافق";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "البارحة";
 "smartlist.results" = "Search Result";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "مكالمة";
 "calls.unknown" = "مجهول";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "يرنّ";
+"calls.connecting" = "Connecting";
 "calls.callFinished" = "Call finished";
 
 //Account Page

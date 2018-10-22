@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Kontua";
 "global.ok" = "Ok";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Search Result";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Call";
 "calls.unknown" = "Unknown";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "Deitzen";
+"calls.connecting" = "Konektatzen";
 "calls.callFinished" = "Call finished";
 
 //Account Page

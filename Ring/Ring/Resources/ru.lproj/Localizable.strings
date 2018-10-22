@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Аккаунт";
 "global.ok" = "OK";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Результаты поиска";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Звонок";
 "calls.unknown" = "Неизвестно";
 "calls.incomingCallInfo" = "хочет поговорить с вами";
-"calls.calling" = "Вызываю…";
+"calls.ringing" = "Звонок";
+"calls.connecting" = "Подключение";
 "calls.callFinished" = "Вызов завершен";
 
 //Account Page

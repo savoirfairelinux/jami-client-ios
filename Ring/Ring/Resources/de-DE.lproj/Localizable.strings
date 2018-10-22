@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "Ok";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Gestern";
 "smartlist.results" = "Search Result";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Anrufen";
 "calls.unknown" = "Unbekannt";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "Klingeln";
+"calls.connecting" = "Verbinden";
 "calls.callFinished" = "Call finished";
 
 //Account Page

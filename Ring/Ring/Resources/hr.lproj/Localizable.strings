@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Račun";
 "global.ok" = "U redu";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Jučer";
 "smartlist.results" = "Search Result";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Nazovi";
 "calls.unknown" = "Nepoznato";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "Zvoni";
+"calls.connecting" = "Spajanje";
 "calls.callFinished" = "Call finished";
 
 //Account Page

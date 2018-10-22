@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Conta";
 "global.ok" = "Ok";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Ontem";
 "smartlist.results" = "Resultado da Busca";
@@ -66,7 +70,7 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Digitar Senha";
 "linkToAccount.pinLabel" = "Entre o PIN";
-"linkToAccount.explanationPinMessage" = "Para gerar o código PIN, acesse as configurações de gerenciamento de conta no dispositivo que contém a conta que você deseja usar. Em \"configurações de dispositivos\", selecione \"Associar outro dispositivo a esta conta\". Você receberá o PIN necessário para completar este formulário. O PIN só é válido por 10 minutos.";
+"linkToAccount.explanationPinMessage" = "Para gerar o código PIN, acesse as configurações de gerenciamento de conta no dispositivo que contém a conta que você deseja usar. Em \"configurações de dispositivos\", selecione \"Associar outro dispositivo à esta conta\". Você receberá o PIN necessário para completar este formulário. O PIN só é válido por 10 minutos.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Não foi possível localizar conta";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Chamar";
 "calls.unknown" = "Desconhecido";
 "calls.incomingCallInfo" = "quer conversar com você";
-"calls.calling" = "Chamando...";
+"calls.ringing" = "Tocando";
+"calls.connecting" = "Conectando";
 "calls.callFinished" = "Chamada terminada";
 
 //Account Page
@@ -131,7 +136,7 @@
 
 //Contact Page
 "contactPage.startAudioCall" = "Iniciar Chamada de Áudio";
-"contactPage.startVideoCall" = "Iniciar Chmada de Vídeo";
+"contactPage.startVideoCall" = "Iniciar Chamada de Vídeo";
 "contactPage.sendMessage" = "Enviar Mensagem";
 "contactPage.clearConversation" = "Limpar histórico de bate-papo";
 "contactPage.blockContact" = "Bloquear Contato";

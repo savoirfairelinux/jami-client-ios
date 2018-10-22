@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "OK";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Igår";
 "smartlist.results" = "Søkeresultat";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Ring";
 "calls.unknown" = "Ukjent";
 "calls.incomingCallInfo" = "ønsker å snakke med deg";
-"calls.calling" = "Ringer…";
+"calls.ringing" = "Ringer";
+"calls.connecting" = "Kobler opp";
 "calls.callFinished" = "Samtale fullført";
 
 //Account Page

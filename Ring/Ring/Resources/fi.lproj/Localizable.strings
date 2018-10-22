@@ -24,6 +24,10 @@
 "global.meTabBarTitle" = "Tunnus";
 "global.ok" = "Vahvista";
 
+// Scan
+"scan.badQrCode" = "Bad QR code";
+"scan.search" = "Searching…";
+
 // Smartlist
 "smartlist.yesterday" = "Eilen";
 "smartlist.results" = "Search Result";
@@ -100,7 +104,8 @@
 "calls.callItemTitle" = "Soita";
 "calls.unknown" = "Tuntematon";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.calling" = "Calling...";
+"calls.ringing" = "Soi";
+"calls.connecting" = "Yhdistää";
 "calls.callFinished" = "Call finished";
 
 //Account Page
