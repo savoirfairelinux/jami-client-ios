@@ -39,6 +39,7 @@ class AccountModel: Equatable {
     var volatileDetails: AccountConfigModel?
     var credentialDetails = [AccountCredentialsModel]()
     var devices = [DeviceModel]()
+    var onBoarded = false
 
     // MARK: Init
     convenience init(withAccountId accountId: String) {
