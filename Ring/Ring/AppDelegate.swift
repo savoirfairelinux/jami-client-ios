@@ -130,6 +130,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         nameService: self.nameService,
                                                         dataTransferService: self.dataTransferService)
         self.startDB()
+
+        self.accountService
+            .sharedResponseStream
+            .filter({ (event) in
+                return event.eventType == ServiceEventType.registrationStateChanged &&
+                    event.getEventInput(ServiceEventInput.registrationState) == Registered
+            })
+            .subscribe(onNext: { [unowned self] _ in
+                if let currentAccount = self.accountService.currentAccount, !currentAccount.onBoarded {
+                    currentAccount.onBoarded = true
+                    // make sure video is enabled
+                    let accountDetails = self.accountService.getAccountDetails(fromAccountId: currentAccount.id)
+                    accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.videoEnabled), withValue: "true")
+
+                    // set ringtone path
+                    DispatchQueue.main.async { [unowned self] in
+                        self.accountService.setRingtonePath(forAccountId: currentAccount.id)
+                    }
+
+                    // check if push notifications are enabled in the config
+                    let notificationsEnabled = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken)).isEmpty ? false : true
+                    if notificationsEnabled {
+                        self.registerVoipNotifications()
+                    }
+                    //in case if application was open when incoming call launched the push notifications
+                    // reimit new call signal to show incoming call alert
+                    self.callService.checkForIncomingCall()
+                }
+            })
+            .disposed(by: disposeBag)
+
         self.accountService.loadAccounts().subscribe { [unowned self] (_) in
             guard let currentAccount = self.accountService.currentAccount else {
                 self.log.error("Can't get current account!")
@@ -142,19 +173,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.conversationManager?
                     .prepareConversationsForAccount(accountId: currentAccount.id, accountUri: ringID)
             }
-            // make sure video is enabled
-            let accountDetails = self.accountService.getAccountDetails(fromAccountId: currentAccount.id)
-            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.videoEnabled), withValue: "true")
-            // set ringtone path
-            self.accountService.setRingtonePath(forAccountId: currentAccount.id)
-            // check if push notifications are enabled in the config
-            let notificationsEnabled = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken)).isEmpty ? false : true
-            if notificationsEnabled {
-                self.registerVoipNotifications()
-            }
-            //in case if application was open when incoming call launched the push notifications
-            // reimit new call signal to show incoming call alert
-            self.callService.checkForIncomingCall()
         }.disposed(by: self.disposeBag)
 
         self.window?.rootViewController = self.appCoordinator.rootViewController
