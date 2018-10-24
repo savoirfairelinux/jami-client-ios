@@ -338,10 +338,14 @@ class MessageCell: UITableViewCell, NibReusable {
             // When the message contains only emoji
             if item.content.containsOnlyEmoji {
                 self.bubble.backgroundColor = UIColor.ringMsgCellEmoji
-                self.avatarBotomAlignConstraint.constant = -14
+                if (self.avatarBotomAlignConstraint != nil) {
+                    self.avatarBotomAlignConstraint.constant = -14
+                }
             } else {
                 self.bubble.backgroundColor = UIColor.ringMsgCellReceived
-                self.avatarBotomAlignConstraint.constant = -1
+                if (self.avatarBotomAlignConstraint != nil) {
+                    self.avatarBotomAlignConstraint.constant = -1
+                }
             }
             // received message avatar
             Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
