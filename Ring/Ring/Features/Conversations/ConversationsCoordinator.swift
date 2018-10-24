@@ -51,7 +51,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.callService.newCall.asObservable()
             .map({ call in
             return call
-        }).subscribe(onNext: { (call) in
+        }).observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (call) in
              self.showCallAlert(call: call)
         }).disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
