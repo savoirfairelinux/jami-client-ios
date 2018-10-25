@@ -108,11 +108,18 @@ class ConversationViewController: UIViewController,
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-            imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.front
-            imagePicker.allowsEditing = true
+            imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.rear
             imagePicker.modalPresentationStyle = .overFullScreen
             self.present(imagePicker, animated: false, completion: nil)
         }
+    }
+
+    func fixImageOrientation(image: UIImage)->UIImage {
+        UIGraphicsBeginImageContext(image.size)
+        image.draw(at: .zero)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage ?? image
     }
 
     func importImage() {
@@ -147,7 +154,7 @@ class ConversationViewController: UIViewController,
             if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
                 image = img
             } else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                image = img
+                image = self.fixImageOrientation(image: img)
             }
             // copy image to tmp
             let imageFileName = "IMG.png"
