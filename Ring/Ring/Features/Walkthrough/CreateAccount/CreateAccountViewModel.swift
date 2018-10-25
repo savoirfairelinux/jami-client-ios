@@ -214,6 +214,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     }()
 
     required init (with injectionBag: InjectionBag) {
+        var isPageDisplayed = false
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
 
@@ -260,9 +261,12 @@ class CreateAccountViewModel: Stateable, ViewModel {
             .subscribe(onNext: { [unowned self] event in
                 if event.getEventInput(ServiceEventInput.registrationState) == Unregistered {
                     self.accountCreationState.value = .success
-                    Observable<Int>.timer(Durations.alertFlashDuration.value, period: nil, scheduler: MainScheduler.instance).subscribe(onNext: { [unowned self] (_) in
-                        self.stateSubject.onNext(WalkthroughState.accountCreated)
-                    }).disposed(by: self.disposeBag)
+                    if !isPageDisplayed {
+                        DispatchQueue.main.async {
+                            self.stateSubject.onNext(WalkthroughState.accountCreated)
+                        }
+                        isPageDisplayed = true
+                    }
                 } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
                     self.accountCreationState.value = .error(error: AccountCreationError.generic)
                 } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
