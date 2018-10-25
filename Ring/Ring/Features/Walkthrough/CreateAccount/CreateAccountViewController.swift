@@ -145,7 +145,12 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
         // Bind View Actions to ViewModel
         self.createAccountButton.rx.tap.subscribe(onNext: { [unowned self] in
-            self.viewModel.createAccount()
+            DispatchQueue.main.async {
+                self.showAccountCreationInProgress()
+            }
+            DispatchQueue.global(qos: .background).async {
+                self.viewModel.createAccount()
+            }
         }).disposed(by: self.disposeBag)
     }
 
