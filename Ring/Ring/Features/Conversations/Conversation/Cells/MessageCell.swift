@@ -389,7 +389,7 @@ class MessageCell: UITableViewCell, NibReusable {
         if let image = message.getTransferedImage(maxSize: maxDimsion, conversationID: conversationID) {
             self.transferImageView.image = image
             let newSize = self.transferImageView.image?.getNewSize(of: defaultSize)
-            let xOriginImageSend = self.bubble.bounds.size.width - (newSize?.width)!
+            let xOriginImageSend = screenWidth - 112 - (newSize?.width)!
             if message.bubblePosition() == .sent {
                 self.transferImageView.frame = CGRect(x: xOriginImageSend, y: 0, width: ((newSize?.width ?? 200)), height: ((newSize?.height ?? 200)))
             } else if message.bubblePosition() == .received {
