@@ -178,7 +178,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: PHFetchOptions()).firstObject else {
             return photo
         }
-        imageManager.requestImage(for: asset, targetSize: CGSize(width: maxSize, height: maxSize * 2), contentMode: .aspectFit, options: requestOptions, resultHandler: {(result, _) -> Void in
+        imageManager.requestImage(for: asset, targetSize: CGSize(width: maxSize, height: maxSize), contentMode: .aspectFit, options: requestOptions, resultHandler: {(result, _) -> Void in
+            self.transferedImages[identifier] = (true, result!)
             photo = result!
         })
         return photo
@@ -201,10 +202,10 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                 if fileExtension as String == "gif" {
                     let image = UIImage.gifImageWithUrl(pathUrl)
                     return image
-                } else {
-                    let image = UIImage(contentsOfFile: pathUrl.path)
-                    return image
                 }
+                let image = UIImage(contentsOfFile: pathUrl.path)
+                self.transferedImages[conversationID + name] = (true, image)
+                return image
             }
         } else {
             self.transferedImages[conversationID + name] = (false, nil)
