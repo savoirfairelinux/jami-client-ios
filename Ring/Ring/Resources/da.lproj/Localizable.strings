@@ -25,12 +25,12 @@
 "global.ok" = "Ok";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "Ugyldigt QR-kode";
+"scan.search" = "Søger…";
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Søgeresultat";
 "smartlist.conversations" = "Samtaler";
 "smartlist.searching" = "Søger...";
 "smartlist.noResults" = "Ingen resultater";
@@ -46,7 +46,7 @@
 "welcome.createAccount" = "Opret en Ring-konto";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Spring over";
 "createProfile.profileCreated" = "Næste";
 
 //Create Account form
@@ -114,17 +114,17 @@
 "accountPage.username" = "brugernavn:";
 "accountPage.usernameNotRegistered" = "brugernavn: ikke registreret";
 "accountPage.credentialsHeader" = "Kontodetaljer";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Aktivér proxy";
 "accountPage.blockedContacts" = "Blokeringsliste";
 "accountPage.unblockContact" = "UBLOKER";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.proxyAddressAlert" = "Angiv proxy-adresse";
+"accountPage.enableProxy" = "Aktivér proxy";
+"accountPage.noProxyExplanationLabel" = "Din enhed modtager ikke notifikationer når proxy er deaktiveret";
 "accountPage.saveProxyAddress" = "Gem";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "Proxy-adresse";
 "accountPage.enableNotifications" = "Aktivér beskeder";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertTitle" = "Proxy-server deaktiveret";
+"accountPage.proxyDisabledAlertBody" = "Aktivér venligst proxy, for at modtage notifikationer";
 
 //Link New Device
 "linkDevice.title" = "Tilknyt en ny enhed";
@@ -135,8 +135,8 @@
 "linkDevice.hudMessage" = "Verificerer";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start audio-opkald";
-"contactPage.startVideoCall" = "Start video-opkald";
+"contactPage.startAudioCall" = "Start lydopkald";
+"contactPage.startVideoCall" = "Start videoopkald";
 "contactPage.sendMessage" = "Send besked";
 "contactPage.clearConversation" = "Ryd chat";
 "contactPage.blockContact" = "Bloker kontakt";
