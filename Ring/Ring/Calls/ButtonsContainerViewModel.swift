@@ -31,16 +31,18 @@ class ButtonsContainerViewModel {
     let audioService: AudioService
     let callID: String
     let disposeBag = DisposeBag()
+    var isAudioOnly: Bool
 
     let avalaibleCallOptions = BehaviorSubject<CallOptions>(value: .none)
     lazy var observableCallOptions: Observable<CallOptions> = {
         return self.avalaibleCallOptions.asObservable()
     }()
 
-    init(with callService: CallsService, audioService: AudioService, callID: String) {
+    init(isAudioOnly: Bool, with callService: CallsService, audioService: AudioService, callID: String) {
         self.callService = callService
         self.audioService = audioService
         self.callID = callID
+        self.isAudioOnly = isAudioOnly
         checkCallOptions()
     }
 
