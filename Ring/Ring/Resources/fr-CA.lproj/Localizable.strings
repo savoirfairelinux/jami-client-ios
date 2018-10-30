@@ -1,4 +1,4 @@
-﻿ /*
+ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -104,8 +104,8 @@
 "calls.callItemTitle" = "Appeler";
 "calls.unknown" = "Inconnu";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Sonnerie en cours";
-"calls.connecting" = "Connexion en cours";
+"calls.ringing" = "Sonnerie en cours…";
+"calls.connecting" = "Connexion en cours…";
 "calls.callFinished" = "Call finished";
 
 //Account Page
