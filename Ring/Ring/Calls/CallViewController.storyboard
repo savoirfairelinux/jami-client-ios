@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ngv-XP-7A7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ngv-XP-7A7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,15 +28,15 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj8-CK-PQm" userLabel="Call Pulse">
-                                <rect key="frame" x="113" y="150" width="150" height="150"/>
+                                <rect key="frame" x="112.5" y="150" width="150" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_contact_picture" translatesAutoresizingMaskIntoConstraints="NO" id="fnt-PQ-Q6P">
-                                <rect key="frame" x="113" y="150" width="150" height="150"/>
+                                <rect key="frame" x="112.5" y="150" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="Miw-Nd-4Fa"/>
                                     <constraint firstAttribute="height" constant="150" id="V9c-7W-Frv"/>
@@ -49,19 +48,19 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73Y-N1-Yga">
-                                <rect key="frame" x="188" y="308" width="0.0" height="0.0"/>
+                                <rect key="frame" x="187.5" y="308" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdV-jx-Mla">
-                                <rect key="frame" x="188" y="487" width="0.0" height="0.0"/>
+                                <rect key="frame" x="187.5" y="487" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMN-6z-uXT">
-                                <rect key="frame" x="188" y="324" width="0.0" height="0.0"/>
+                                <rect key="frame" x="187.5" y="324" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -72,13 +71,6 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DMu-Or-dd7">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_muted" translatesAutoresizingMaskIntoConstraints="NO" id="D1t-vZ-Pww" userLabel="Audio Only Icon">
-                                        <rect key="frame" x="149.5" y="295.5" width="75" height="75"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="nSq-h6-OUy"/>
-                                            <constraint firstAttribute="height" constant="75" id="rxl-TN-yKV"/>
-                                        </constraints>
                                     </imageView>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3RN-4M-qR4" userLabel="InformationContainer">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
@@ -158,12 +150,10 @@
                                     <constraint firstItem="3RN-4M-qR4" firstAttribute="top" secondItem="ZVy-nB-bKJ" secondAttribute="top" id="72y-vN-PbI"/>
                                     <constraint firstItem="DMu-Or-dd7" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="9tF-Ne-Pxj"/>
                                     <constraint firstItem="3RN-4M-qR4" firstAttribute="leading" secondItem="ZVy-nB-bKJ" secondAttribute="leading" id="CTU-NV-fjk"/>
-                                    <constraint firstItem="D1t-vZ-Pww" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="Hkm-hT-Sfh"/>
                                     <constraint firstAttribute="trailing" secondItem="3RN-4M-qR4" secondAttribute="trailing" id="IFT-I3-DEM"/>
                                     <constraint firstItem="KFB-xs-EVT" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" multiplier="1:6" id="Tdb-RN-S2F"/>
                                     <constraint firstItem="KFB-xs-EVT" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" multiplier="2:7" id="UZ6-nd-Kwj"/>
                                     <constraint firstItem="DMu-Or-dd7" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" id="Xd0-GB-gSC"/>
-                                    <constraint firstItem="D1t-vZ-Pww" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="ZOF-vM-2OV"/>
                                     <constraint firstAttribute="trailing" secondItem="KFB-xs-EVT" secondAttribute="trailing" constant="10" id="eEm-Ok-tjV"/>
                                     <constraint firstItem="KFB-xs-EVT" firstAttribute="top" secondItem="ZVy-nB-bKJ" secondAttribute="top" constant="50" id="jZm-0x-mBh"/>
                                     <constraint firstItem="DMu-Or-dd7" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="yFh-zq-lXh"/>
@@ -214,7 +204,6 @@
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="audioOnlyImage" destination="D1t-vZ-Pww" id="mE2-hu-x6s"/>
                         <outlet property="buttonsContainer" destination="LK6-u0-eLU" id="rb7-9y-4Eh"/>
                         <outlet property="callButtonsLeftConstraint" destination="0oL-jv-UVj" id="Tvs-hZ-N1z"/>
                         <outlet property="callButtonsRightConstraint" destination="cl9-Fw-bSb" id="dRy-Dq-W2H"/>
@@ -241,7 +230,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_contact_picture" width="128" height="128"/>
-        <image name="video_muted" width="24" height="24"/>
+        <image name="ic_contact_picture" width="256" height="256"/>
     </resources>
 </document>
