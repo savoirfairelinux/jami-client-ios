@@ -100,11 +100,11 @@ internal enum L10n {
     internal static let callFinished = L10n.tr("Localizable", "calls.callFinished")
     /// Call
     internal static let callItemTitle = L10n.tr("Localizable", "calls.callItemTitle")
-    /// Connecting
+    /// Connecting…
     internal static let connecting = L10n.tr("Localizable", "calls.connecting")
     /// wants to talk to you
     internal static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo")
-    /// Ringing
+    /// Ringing…
     internal static let ringing = L10n.tr("Localizable", "calls.ringing")
     /// Unknown
     internal static let unknown = L10n.tr("Localizable", "calls.unknown")
