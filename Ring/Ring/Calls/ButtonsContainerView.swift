@@ -31,8 +31,9 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var switchCameraButton: UIButton!
     @IBOutlet  weak var switchSpeakerButton: UIButton!
     @IBOutlet  weak var cancelButton: UIButton!
+    @IBOutlet weak var blurEffectBackground: UIVisualEffectView!
     @IBOutlet  weak var containerHeightConstraint: NSLayoutConstraint!
-    @IBOutlet  weak var bottomSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomSpaceConstraint: NSLayoutConstraint!
     let disposeBag = DisposeBag()
 
     var viewModel: ButtonsContainerViewModel? {
@@ -81,7 +82,7 @@ class ButtonsContainerView: UIView, NibLoadable {
     func withoutOptions() {
         containerHeightConstraint.priority = UILayoutPriority(rawValue: 250.00)
         bottomSpaceConstraint.priority = UILayoutPriority(rawValue: 999.00)
-        self.container.backgroundColor = UIColor.clear
+        self.blurEffectBackground.isHidden = true
         muteAudioButton.isHidden = true
         muteVideoButton.isHidden = true
         pauseCallButton.isHidden = true
@@ -93,7 +94,7 @@ class ButtonsContainerView: UIView, NibLoadable {
     func optionsWithSpeaker() {
         containerHeightConstraint.priority = UILayoutPriority(rawValue: 999.00)
         bottomSpaceConstraint.priority = UILayoutPriority(rawValue: 250.00)
-        self.container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.blurEffectBackground.isHidden = false
         muteAudioButton.isHidden = false
         muteVideoButton.isHidden = false
         pauseCallButton.isHidden = false
@@ -107,7 +108,7 @@ class ButtonsContainerView: UIView, NibLoadable {
     func optionsWithoutSpeaker() {
         containerHeightConstraint.priority = UILayoutPriority(rawValue: 250.00)
         bottomSpaceConstraint.priority = UILayoutPriority(rawValue: 999.00)
-        self.container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.blurEffectBackground.isHidden = false
         muteAudioButton.isHidden = false
         muteVideoButton.isHidden = false
         pauseCallButton.isHidden = false
