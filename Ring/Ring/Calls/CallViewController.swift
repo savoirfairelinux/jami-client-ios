@@ -32,6 +32,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var durationLabel: UILabel!
     @IBOutlet private weak var infoBottomLabel: UILabel!
+    @IBOutlet weak var avatarView: UIView!
 
     @IBOutlet private weak var mainView: UIView!
 
@@ -41,7 +42,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var capturedVideo: UIImageView!
     @IBOutlet private weak var infoContainer: UIView!
     @IBOutlet private weak var callProfileImage: UIImageView!
-    @IBOutlet private weak var audioOnlyImage: UIImageView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
     @IBOutlet private weak var infoLabelTopConstraint: NSLayoutConstraint!
@@ -254,12 +254,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .bind(to: self.capturedVideo.rx.isHidden)
             .disposed(by: self.disposeBag)
 
-        self.audioOnlyImage.isHidden = !self.viewModel.isAudioOnly
+        if !self.viewModel.isAudioOnly {
+            self.viewModel.callPaused
+                .observeOn(MainScheduler.instance)
+                .map({value in return !value })
+                .bind(to: self.avatarView.rx.isHidden)
+                .disposed(by: self.disposeBag)
+        }
 
-        self.viewModel.callPaused
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.callView.rx.isHidden)
-            .disposed(by: self.disposeBag)
         self.viewModel.callPaused
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] show in
