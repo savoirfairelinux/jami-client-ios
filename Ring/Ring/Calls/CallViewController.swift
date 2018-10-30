@@ -32,6 +32,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var durationLabel: UILabel!
     @IBOutlet private weak var infoBottomLabel: UILabel!
+    @IBOutlet weak var avatarView: UIView!
 
     @IBOutlet private weak var mainView: UIView!
 
@@ -39,9 +40,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var callView: UIView!
     @IBOutlet private weak var incomingVideo: UIImageView!
     @IBOutlet private weak var capturedVideo: UIImageView!
+    @IBOutlet weak var backgroundCapturedVideo: UIImageView!
     @IBOutlet private weak var infoContainer: UIView!
     @IBOutlet private weak var callProfileImage: UIImageView!
-    @IBOutlet private weak var audioOnlyImage: UIImageView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
     @IBOutlet private weak var infoLabelTopConstraint: NSLayoutConstraint!
@@ -71,7 +72,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.setupBindings()
         if self.viewModel.isAudioOnly {
             self.showAllInfo()
+            self.setWhiteAvatarView()
+        } else {
+            UIApplication.shared.statusBarStyle = .lightContent
         }
+
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
 
         initCallAnimation()
@@ -79,7 +84,15 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
+    }
+
+    func setWhiteAvatarView() {
+                UIApplication.shared.statusBarStyle = .default
+                self.callPulse.backgroundColor = UIColor.ringCallPulse
+                self.avatarView.backgroundColor = UIColor.white
+                self.nameLabel.textColor = UIColor.ringCallInfos
+                self.durationLabel.textColor = UIColor.ringCallInfos
+                self.infoBottomLabel.textColor = UIColor.ringCallInfos
     }
 
     func initCallAnimation() {
@@ -225,6 +238,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 if let image = frame {
                     DispatchQueue.main.async {
                         self?.capturedVideo.image = image
+                        self?.backgroundCapturedVideo.image = image
                     }
                 }
             }).disposed(by: self.disposeBag)
@@ -244,8 +258,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self.showCancelButton()
                 } else if !self.viewModel.isAudioOnly {
                     self.hideCancelButton()
-                } else {
-                    self.buttonsContainer.bottomSpaceConstraint.constant = 30
+                }
+            }).disposed(by: self.disposeBag)
+
+        self.viewModel.showCapturedFrame
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { dontShow in
+                if dontShow {
+                    self.backgroundCapturedVideo.isHidden = true
                 }
             }).disposed(by: self.disposeBag)
 
@@ -254,12 +274,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .bind(to: self.capturedVideo.rx.isHidden)
             .disposed(by: self.disposeBag)
 
-        self.audioOnlyImage.isHidden = !self.viewModel.isAudioOnly
+        if !self.viewModel.isAudioOnly {
+            self.viewModel.callPaused
+                .observeOn(MainScheduler.instance)
+                .map({value in return !value })
+                .bind(to: self.avatarView.rx.isHidden)
+                .disposed(by: self.disposeBag)
+        }
 
-        self.viewModel.callPaused
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.callView.rx.isHidden)
-            .disposed(by: self.disposeBag)
         self.viewModel.callPaused
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] show in
@@ -281,13 +303,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func showCancelButton() {
         self.buttonsContainer.isHidden = false
-        self.buttonsContainer.bottomSpaceConstraint.constant = 90
         self.view.layoutIfNeeded()
     }
 
     func hideCancelButton() {
         self.buttonsContainer.isHidden = true
-        self.buttonsContainer.bottomSpaceConstraint.constant = 30
         self.view.layoutIfNeeded()
     }
 

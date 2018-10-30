@@ -25,6 +25,7 @@ class ButtonsContainerView: UIView, NibLoadable {
 
     @IBOutlet var containerView: UIView!
     @IBOutlet  weak var container: UIView!
+    @IBOutlet weak var backgroundBlurEffect: UIVisualEffectView!
     @IBOutlet  weak var muteAudioButton: UIButton!
     @IBOutlet  weak var muteVideoButton: UIButton!
     @IBOutlet  weak var pauseCallButton: UIButton!
@@ -32,7 +33,6 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var switchSpeakerButton: UIButton!
     @IBOutlet  weak var cancelButton: UIButton!
     @IBOutlet  weak var containerHeightConstraint: NSLayoutConstraint!
-    @IBOutlet  weak var bottomSpaceConstraint: NSLayoutConstraint!
     let disposeBag = DisposeBag()
 
     var viewModel: ButtonsContainerViewModel? {
@@ -79,9 +79,8 @@ class ButtonsContainerView: UIView, NibLoadable {
     }
 
     func withoutOptions() {
-        containerHeightConstraint.priority = UILayoutPriority(rawValue: 250.00)
-        bottomSpaceConstraint.priority = UILayoutPriority(rawValue: 999.00)
         self.container.backgroundColor = UIColor.clear
+        self.backgroundBlurEffect.isHidden = true
         muteAudioButton.isHidden = true
         muteVideoButton.isHidden = true
         pauseCallButton.isHidden = true
@@ -91,9 +90,8 @@ class ButtonsContainerView: UIView, NibLoadable {
     }
 
     func optionsWithSpeaker() {
-        containerHeightConstraint.priority = UILayoutPriority(rawValue: 999.00)
-        bottomSpaceConstraint.priority = UILayoutPriority(rawValue: 250.00)
         self.container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.backgroundBlurEffect.isHidden = false
         muteAudioButton.isHidden = false
         muteVideoButton.isHidden = false
         pauseCallButton.isHidden = false
@@ -105,9 +103,8 @@ class ButtonsContainerView: UIView, NibLoadable {
     }
 
     func optionsWithoutSpeaker() {
-        containerHeightConstraint.priority = UILayoutPriority(rawValue: 250.00)
-        bottomSpaceConstraint.priority = UILayoutPriority(rawValue: 999.00)
         self.container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.backgroundBlurEffect.isHidden = false
         muteAudioButton.isHidden = false
         muteVideoButton.isHidden = false
         pauseCallButton.isHidden = false
