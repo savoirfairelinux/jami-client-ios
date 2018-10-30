@@ -387,6 +387,10 @@ extension VideoService: VideoAdapterDelegate {
         self.blockOutgoingFrame = false
     }
 
+    func startVideoCaptureBeforeCall() {
+        self.camera.startCapturing()
+    }
+
     func stopCapture() {
         self.log.debug("Capture stopped...")
         self.camera.stopCapturing()
