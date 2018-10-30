@@ -53,7 +53,7 @@ class CallViewModel: Stateable, ViewModel {
             isHeadsetConnected = self.audioService.isHeadsetConnected.value
             isAudioOnly = call.isAudioOnly
 
-            containerViewModel = ButtonsContainerViewModel(with: self.callService, audioService: self.audioService, callID: call.callId)
+            containerViewModel = ButtonsContainerViewModel(isAudioOnly: self.isAudioOnly, with: self.callService, audioService: self.audioService, callID: call.callId)
         }
     }
 
@@ -82,6 +82,7 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
     lazy var capturedFrame: Observable<UIImage?> = {
+        videoService.startVideoCaptureBeforeCall()
         return videoService.capturedVideoFrame.asObservable().map({ frame in
             return frame
         })
@@ -179,6 +180,16 @@ class CallViewModel: Stateable, ViewModel {
             }).map({ call in
             return call.state == .connecting || call.state == .ringing
         })
+    }()
+
+    lazy var showCapturedFrame: Observable<Bool> = {
+        return self.callService.currentCall
+            .filter({ [weak self] call in
+                return call.callId == self?.call?.callId &&
+                    (call.state == .connecting || call.state == .ringing || call.state == .current)
+            }).map({ call in
+                call.state == .current
+            })
     }()
 
     var screenTapped = BehaviorSubject(value: false)

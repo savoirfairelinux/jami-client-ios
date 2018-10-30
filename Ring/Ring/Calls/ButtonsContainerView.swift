@@ -25,6 +25,8 @@ class ButtonsContainerView: UIView, NibLoadable {
 
     @IBOutlet var containerView: UIView!
     @IBOutlet  weak var container: UIView!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var backgroundBlurEffect: UIVisualEffectView!
     @IBOutlet  weak var muteAudioButton: UIButton!
     @IBOutlet  weak var muteVideoButton: UIButton!
     @IBOutlet  weak var pauseCallButton: UIButton!
@@ -32,7 +34,7 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var switchSpeakerButton: UIButton!
     @IBOutlet  weak var cancelButton: UIButton!
     @IBOutlet  weak var containerHeightConstraint: NSLayoutConstraint!
-    @IBOutlet  weak var bottomSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
     let disposeBag = DisposeBag()
 
     var viewModel: ButtonsContainerViewModel? {
@@ -79,9 +81,8 @@ class ButtonsContainerView: UIView, NibLoadable {
     }
 
     func withoutOptions() {
-        containerHeightConstraint.priority = UILayoutPriority(rawValue: 250.00)
-        bottomSpaceConstraint.priority = UILayoutPriority(rawValue: 999.00)
         self.container.backgroundColor = UIColor.clear
+        self.backgroundBlurEffect.isHidden = true
         muteAudioButton.isHidden = true
         muteVideoButton.isHidden = true
         pauseCallButton.isHidden = true
@@ -91,13 +92,17 @@ class ButtonsContainerView: UIView, NibLoadable {
     }
 
     func optionsWithSpeaker() {
-        containerHeightConstraint.priority = UILayoutPriority(rawValue: 999.00)
-        bottomSpaceConstraint.priority = UILayoutPriority(rawValue: 250.00)
-        self.container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.backgroundBlurEffect.isHidden = false
         muteAudioButton.isHidden = false
-        muteVideoButton.isHidden = false
+        if self.viewModel?.isAudioOnly ?? false {
+            self.stackViewWidthConstraint.constant = 200
+            muteVideoButton.isHidden = true
+            switchCameraButton.isHidden = true
+        } else {
+            muteVideoButton.isHidden = false
+            switchCameraButton.isHidden = false
+        }
         pauseCallButton.isHidden = false
-        switchCameraButton.isHidden = false
         switchSpeakerButton.isHidden = false
         switchSpeakerButton.alpha = 1.00
         switchSpeakerButton.isEnabled = true
@@ -105,16 +110,18 @@ class ButtonsContainerView: UIView, NibLoadable {
     }
 
     func optionsWithoutSpeaker() {
-        containerHeightConstraint.priority = UILayoutPriority(rawValue: 250.00)
-        bottomSpaceConstraint.priority = UILayoutPriority(rawValue: 999.00)
-        self.container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        if self.viewModel?.isAudioOnly ?? false {
+            self.stackViewWidthConstraint.constant = 150
+            muteVideoButton.isHidden = true
+            switchCameraButton.isHidden = true
+        } else {
+            muteVideoButton.isHidden = false
+            switchCameraButton.isHidden = false
+        }
+        self.backgroundBlurEffect.isHidden = false
         muteAudioButton.isHidden = false
-        muteVideoButton.isHidden = false
         pauseCallButton.isHidden = false
-        switchCameraButton.isHidden = false
-        switchSpeakerButton.isHidden = false
-        switchSpeakerButton.alpha = 0.00
-        switchSpeakerButton.isEnabled = false
+        switchSpeakerButton.isHidden = true
         cancelButton.isHidden = false
     }
 }
