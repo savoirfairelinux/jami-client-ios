@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
             <connections>
-                <outlet property="bottomSpaceConstraint" destination="XhM-wC-j2L" id="Kw3-nW-cVH"/>
                 <outlet property="cancelButton" destination="ZxT-mA-1xU" id="68q-sF-gBC"/>
                 <outlet property="container" destination="a9g-pf-bHy" id="6bw-CB-5qN"/>
                 <outlet property="containerHeightConstraint" destination="W6T-0D-HwX" id="Pdz-5B-x5j"/>
@@ -30,10 +29,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9g-pf-bHy">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                    <rect key="frame" x="0.0" y="-30" width="375" height="180"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RHx-cL-CV5">
-                            <rect key="frame" x="12.5" y="70" width="350" height="50"/>
+                            <rect key="frame" x="12.5" y="100" width="350" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXL-FB-O0X">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -143,10 +142,10 @@
                             </constraints>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxT-mA-1xU">
-                            <rect key="frame" x="162" y="10" width="50" height="50"/>
+                            <rect key="frame" x="152.5" y="10" width="70" height="70"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="0vV-4C-odp"/>
-                                <constraint firstAttribute="height" constant="50" id="kls-aA-2zS"/>
+                                <constraint firstAttribute="width" constant="70" id="0vV-4C-odp"/>
+                                <constraint firstAttribute="height" constant="70" id="kls-aA-2zS"/>
                             </constraints>
                             <state key="normal" image="stop_call"/>
                             <userDefinedRuntimeAttributes>
@@ -158,17 +157,16 @@
                                     <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="25"/>
+                                    <real key="value" value="35"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="ZxT-mA-1xU" firstAttribute="top" secondItem="a9g-pf-bHy" secondAttribute="top" constant="10" id="0QU-8q-IjM"/>
                         <constraint firstItem="RHx-cL-CV5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a9g-pf-bHy" secondAttribute="leading" constant="12.5" id="FwG-sE-gpJ"/>
-                        <constraint firstAttribute="height" priority="999" constant="150" id="W6T-0D-HwX"/>
-                        <constraint firstAttribute="bottom" secondItem="ZxT-mA-1xU" secondAttribute="bottom" priority="250" constant="30" id="XhM-wC-j2L"/>
+                        <constraint firstAttribute="height" priority="999" constant="180" id="W6T-0D-HwX"/>
+                        <constraint firstAttribute="bottom" secondItem="ZxT-mA-1xU" secondAttribute="bottom" priority="250" constant="100" id="XhM-wC-j2L"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RHx-cL-CV5" secondAttribute="trailing" constant="12.5" id="aud-x3-DAu"/>
                         <constraint firstItem="RHx-cL-CV5" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="bmE-qo-8aJ"/>
                         <constraint firstAttribute="bottom" secondItem="RHx-cL-CV5" secondAttribute="bottom" constant="30" id="deA-Gc-8FZ"/>
@@ -188,11 +186,11 @@
         </view>
     </objects>
     <resources>
-        <image name="audio_running" width="24" height="24"/>
-        <image name="disable_speakerphone" width="24" height="24"/>
-        <image name="pause_call" width="24" height="24"/>
-        <image name="stop_call" width="24" height="24"/>
-        <image name="switch_camera" width="25" height="25"/>
-        <image name="video_running" width="24" height="24"/>
+        <image name="audio_running" width="48" height="48"/>
+        <image name="disable_speakerphone" width="48" height="48"/>
+        <image name="pause_call" width="48" height="48"/>
+        <image name="stop_call" width="48" height="48"/>
+        <image name="switch_camera" width="50" height="50"/>
+        <image name="video_running" width="48" height="48"/>
     </resources>
 </document>
