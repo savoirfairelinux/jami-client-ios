@@ -25,8 +25,8 @@
 "global.ok" = "OK";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "Código QR inválido";
+"scan.search" = "A pesquisar…";
 
 // Smartlist
 "smartlist.yesterday" = "Ontem";

@@ -26,7 +26,7 @@
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.search" = "Поиск…";
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";

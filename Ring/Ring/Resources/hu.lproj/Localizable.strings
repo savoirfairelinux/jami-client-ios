@@ -40,7 +40,7 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Üdvözöljük a Ring-ben";
+"welcome.title" = "Isten hozott a Ringben";
 "welcome.text" = "A Ring egy szabad szoftver az univerzális kommunikációhoz, mely tiszteletben tartja a felhasználók szabadságát és magán szféráját.";
 "welcome.linkDevice" = "Ezen eszköz fiókhoz kapcsolása";
 "welcome.createAccount" = "Ring fiók létrehozása";

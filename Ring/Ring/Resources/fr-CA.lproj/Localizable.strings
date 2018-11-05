@@ -33,15 +33,15 @@
 "smartlist.results" = "Search Result";
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "En cours de recherche ...";
-"smartlist.noResults" = "No results";
+"smartlist.noResults" = "Pas de résultats";
 "smartlist.noNetworkConnectivity" = "Aucune connectivité réseau";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Valider que l'accès au réseau cellulaire est autorisé dans vos paramètres";
 
 // Walkthrough
 
 //Welcome Screen
 "welcome.title" = "Bienvenue sur Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Ring est une plateforme de communication universelle qui préserve la vie privée et les libertés des utilisateurs";
 "welcome.linkDevice" = "Associer cet appareil à un compte";
 "welcome.createAccount" = "Créer un compte Ring";
 
@@ -51,16 +51,16 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Créer votre compte Ring";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
+"createAccount.chooseStrongPassword" = "Choisir un mot de passe fort que vous allez mémoriser pour protéger votre compte RIng.";
 "createAccount.enterNewUsernamePlaceholder" = "Nom d'utilisateur";
 "createAccount.newPasswordPlaceholder" = "mot de passe";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
+"createAccount.repeatPasswordPlaceholder" = "confirmez le mot de passe";
 "createAccount.passwordCharactersNumberError" = "Minimum de 6 caractères";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.passwordNotMatchingError" = "les mots de passe ne correspondent pas";
+"createAccount.lookingForUsernameAvailability" = "recherche de disponibilité pour le nom d'utilisateur";
+"createAccount.invalidUsername" = "nom d'utilisateur invalide ";
+"createAccount.usernameAlreadyTaken" = "nom d'utilisateur déjà pris";
+"createAccount.loading" = "En chargement";
 "createAccount.waitCreateAccountTitle" = "Ajouter un compte";
 
 //Link To Account form
