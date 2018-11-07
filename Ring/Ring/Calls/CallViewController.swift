@@ -49,6 +49,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var infoContainer: UIView!
     @IBOutlet weak var infoContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var callProfileImage: UIImageView!
+    @IBOutlet weak var callProfileImageLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var callProfileImageTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
@@ -62,6 +63,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var backgroundBlurEffectHeightConstraint: NSLayoutConstraint!
 
     var viewModel: CallViewModel!
+    var portraitOrientationConstraints: [NSLayoutConstraint?: Int]? = nil
 
     fileprivate let disposeBag = DisposeBag()
 
@@ -403,10 +405,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.capturedVideoTopConstraint.constant -= 15
             self.capturedVideoTrailingConstraint.constant += 15
             self.infoContainerHeightConstraint.constant /= 2
-            self.callProfileImageTopConstraint.constant = 12
-            self.callInfoTimerLabelLeadingConstraint.constant += 90
-            self.callInfoTimerLabelBottomConstraint.constant += 10
-            self.nameLabelYConstraint.constant = -15
+            self.callProfileImageTopConstraint.constant = 25
+            self.callProfileImageLeadingConstraint.constant += 30
+            self.callInfoTimerLabelLeadingConstraint.constant += 88
+            self.callInfoTimerLabelBottomConstraint.constant += -5
+            self.nameLabelYConstraint.constant = 0
             self.buttonsContainer.backgroundBlurEffect.isHidden = true
             self.buttonsContainer.stackViewBottomConstraint.constant -= 30
             self.buttonsContainer.cancelButtonHeightConstraint.constant -= 30

@@ -242,6 +242,7 @@
                         <outlet property="callInfoTimerLabelLeadingConstraint" destination="5S2-6O-mBj" id="XGw-tb-JrJ"/>
                         <outlet property="callNameLabel" destination="cgd-Wa-clf" id="oEa-7j-Eac"/>
                         <outlet property="callProfileImage" destination="T4r-6x-bEH" id="Pi5-eB-Eve"/>
+                        <outlet property="callProfileImageLeadingConstraint" destination="uwm-g8-FeG" id="OBP-H2-7Ok"/>
                         <outlet property="callProfileImageTopConstraint" destination="diz-IR-6aJ" id="fhW-FR-i20"/>
                         <outlet property="callPulse" destination="Dj8-CK-PQm" id="9e6-JQ-U6k"/>
                         <outlet property="callView" destination="ZVy-nB-bKJ" id="Sah-TI-SVz"/>
