@@ -133,10 +133,12 @@ struct AccountModelHelper {
 
         let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.accountUsername)
         let accountUsername = self.account.details?.get(withConfigKeyModel: accountUsernameKey)
-
-        if accountUsername!.contains(AccountModelHelper.ringIdPrefix) {
-            let index = accountUsername?.range(of: AccountModelHelper.ringIdPrefix)?.upperBound
-            return accountUsername?.substring(from: index!)
+        guard let userName = accountUsername else {
+            return nil
+        }
+        if userName.contains(AccountModelHelper.ringIdPrefix) {
+            let index = userName.range(of: AccountModelHelper.ringIdPrefix)?.upperBound
+            return userName.substring(from: index!)
         } else {
             return nil
         }
