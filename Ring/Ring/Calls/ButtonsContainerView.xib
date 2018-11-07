@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundBlurEffect" destination="w5l-pw-1ET" id="YYh-qB-WIL"/>
+                <outlet property="backgroundBlurEffectYConstraint" destination="Key-mX-9mY" id="VZf-RI-jLm"/>
                 <outlet property="cancelButton" destination="ZxT-mA-1xU" id="68q-sF-gBC"/>
                 <outlet property="cancelButtonHeightConstraint" destination="XhM-wC-j2L" id="xcg-V6-2BW"/>
                 <outlet property="container" destination="a9g-pf-bHy" id="6bw-CB-5qN"/>
@@ -42,7 +43,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                             <blurEffect style="light"/>
                         </visualEffectView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RHx-cL-CV5">
