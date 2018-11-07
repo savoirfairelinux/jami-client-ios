@@ -30,7 +30,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     //preview screen
     @IBOutlet private weak var profileImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet weak var nameLabelYConstraint: NSLayoutConstraint!
     @IBOutlet private weak var durationLabel: UILabel!
     @IBOutlet private weak var infoBottomLabel: UILabel!
     @IBOutlet weak var avatarView: UIView!
@@ -47,21 +46,21 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var capturedVideoTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var capturedVideoHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var infoContainer: UIView!
-    @IBOutlet weak var infoContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var callProfileImage: UIImageView!
-    @IBOutlet weak var callProfileImageTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
-    @IBOutlet weak var callInfoTimerLabelLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var callInfoTimerLabelBottomConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var infoLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var callPulse: UIView!
 
     @IBOutlet private weak var buttonsContainer: ButtonsContainerView!
-    @IBOutlet weak var buttonsContainerHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var backgroundBlurEffectHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backgroundBlurEffect: UIVisualEffectView!
+
+    //Constraints
+    @IBOutlet weak var infoContainerTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonsContainerBottomConstraint: NSLayoutConstraint!
+
 
     var viewModel: CallViewModel!
+    var isCallStarted: Bool = false
 
     fileprivate let disposeBag = DisposeBag()
 
@@ -73,7 +72,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setColorButtons()
+        // the captured video should take all the screen with blur effect when connecting and ringing state
+        self.capturedVideoWidthConstraint.constant = 0
+        self.capturedVideoHeightConstraint.constant = 0
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
         self.setUpCallButtons()
@@ -85,11 +86,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             if !self.avatarView.isHidden {
                 self.capturedVideoWidthConstraint.constant += 200
                 self.capturedVideoTrailingConstraint.constant = (self.capturedVideoWidthConstraint.constant - UIScreen.main.bounds.width) / 2
-                self.infoLabelHeightConstraint.constant = 90
             }
-        default :
-            //On other devices, we don't have notch, so the infoContainerHeightConstraint should be smaller
-            self.infoContainerHeightConstraint.constant = 204
+        default : break
         }
         if self.viewModel.isAudioOnly {
             // The durationLabel and buttonsContainer alpha is set here to 0, and to 1 (with a duration) when appear on the screen to have a fade in animation
@@ -106,22 +104,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         initCallAnimation()
     }
 
-    func setColorButtons() {
-        if !(self.viewModel.call?.isAudioOnly ?? false) {
-            self.buttonsContainer.cancelButton.backgroundColor = UIColor.white
-            self.buttonsContainer.muteAudioButton.tintColor = UIColor.white
-            self.buttonsContainer.muteAudioButton.borderColor = UIColor.white
-            self.buttonsContainer.muteVideoButton.tintColor = UIColor.white
-            self.buttonsContainer.muteVideoButton.borderColor = UIColor.white
-            self.buttonsContainer.pauseCallButton.tintColor = UIColor.white
-            self.buttonsContainer.pauseCallButton.borderColor = UIColor.white
-            self.buttonsContainer.switchCameraButton.tintColor = UIColor.white
-            self.buttonsContainer.switchCameraButton.borderColor = UIColor.white
-            self.buttonsContainer.switchSpeakerButton.tintColor = UIColor.white
-            self.buttonsContainer.switchSpeakerButton.borderColor = UIColor.white
-        }
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -130,9 +112,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 UIApplication.shared.statusBarStyle = .default
                 self.callPulse.backgroundColor = UIColor.ringCallPulse
                 self.avatarView.backgroundColor = UIColor.white
-                self.nameLabel.textColor = UIColor.ringCallInfos
-                self.durationLabel.textColor = UIColor.ringCallInfos
-                self.infoBottomLabel.textColor = UIColor.ringCallInfos
     }
 
     func initCallAnimation() {
@@ -157,8 +136,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func setUpCallButtons() {
         self.buttonsContainer.viewModel = self.viewModel.containerViewModel
-        self.buttonsContainerHeightConstraint.constant = self.buttonsContainer.containerHeightConstraint.constant
-        //bind actions
         self.buttonsContainer.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.removeFromScreen()
@@ -257,7 +234,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         self.viewModel.callDuration.asObservable().observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                if self?.durationLabel.text == "00:00:00" {
+                if self?.durationLabel.text != "" {
                     UIView.animate(withDuration: 0.3, animations: {
                         self?.durationLabel.alpha = 1
                         self?.buttonsContainer.stackView.alpha = 1
@@ -341,7 +318,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.viewModel.showCapturedFrame
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { dontShow in
-                if dontShow {
+                if dontShow && !self.isCallStarted {
+                    self.isCallStarted = true
                     self.showAllInfo()
                     DispatchQueue.global(qos: .background).async {
                         sleep(3)
@@ -361,7 +339,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                                     self.capturedVideoTrailingConstraint.constant = 10
                                     self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + 120
                                     self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.height + 160
-                                    self.capturedVideo.cornerRadius = 10
+                                    self.capturedVideo.cornerRadius = 15
                                     self.view.layoutIfNeeded()
                         }, completion: nil)
                 }
@@ -392,6 +370,50 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.view.layoutIfNeeded()
     }
 
+    func setupLandscapeConstraints() {
+        self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.height + 160
+        self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.width + 120
+        let device = UIDevice.modelName
+        switch device {
+        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+            self.capturedVideoTopConstraint.constant = 20
+            if UIDevice.current.orientation == .landscapeLeft {
+                self.capturedVideoTrailingConstraint.constant = 20
+            } else {
+                self.capturedVideoTrailingConstraint.constant = 50
+            }
+        default :
+            self.capturedVideoTopConstraint.constant = 17
+            self.capturedVideoTrailingConstraint.constant = 17
+        }
+    }
+
+    func setupPortraitConstraints() {
+        self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.height + 120
+        self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.width + 160
+        let device = UIDevice.modelName
+        switch device {
+        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+            self.capturedVideoTopConstraint.constant = 44
+            self.capturedVideoTrailingConstraint.constant = 18
+        default :
+            self.capturedVideoTopConstraint.constant = 32
+            self.capturedVideoTrailingConstraint.constant = 18
+        }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        let orientation = UIDevice.current.orientation
+//        switch orientation {
+//        case .landscapeRight, .landscapeLeft:
+//            self.setupLandscapeConstraints()
+//        default:
+//            self.setupPortraitConstraints()
+//        }
+        self.viewModel.setCameraOrientation(orientation: UIDevice.current.orientation)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+
     func showContactInfo() {
         if !self.infoContainer.isHidden {
             task?.cancel()
@@ -402,24 +424,20 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.infoContainer.isHidden = false
         self.view.layoutIfNeeded()
 
-        UIView.animate(withDuration: 0.4, delay: 0.0,
-                       options: .curveEaseOut,
-                       animations: { [unowned self] in
-                        self.infoContainer.alpha = 1
-                        self.buttonsContainer.alpha = 1
-                        self.view.layoutIfNeeded()
-            }, completion: nil)
+        UIView.animate(withDuration: 0.2, animations: {
+            self.infoContainerTopConstraint.constant = -10
+            self.buttonsContainerBottomConstraint.constant = 10
+            self.view.layoutIfNeeded()
+        })
 
         task = DispatchWorkItem { self.hideContactInfo() }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7, execute: task!)
     }
 
     func hideContactInfo() {
-            UIView.animate(withDuration: 0.4, delay: 0.00,
-                           options: .curveEaseOut,
-                           animations: { [unowned self] in
-                            self.infoContainer.alpha = 0
-                            self.buttonsContainer.alpha = 0
+            UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+                            self.infoContainerTopConstraint.constant = 150
+                            self.buttonsContainerBottomConstraint.constant = -150
                             self.view.layoutIfNeeded()
                 }, completion: { [weak self] _ in
                     self?.infoContainer.isHidden = true
@@ -430,6 +448,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func showAllInfo() {
         self.buttonsContainer.isHidden = false
         self.infoContainer.isHidden = false
+    }
+
+    @objc func canRotate() {
+        // empty function to support call screen rotation
     }
 
     override func viewWillDisappear(_ animated: Bool) {
