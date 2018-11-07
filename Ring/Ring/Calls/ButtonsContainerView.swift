@@ -27,6 +27,10 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var container: UIView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var backgroundBlurEffect: UIVisualEffectView!
+    @IBOutlet weak var backgroundBlurEffectYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backgroundBlurEffectHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backgroundBlurEffectTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backgroundBlurEffectLeadingConstraint: NSLayoutConstraint!
     @IBOutlet  weak var muteAudioButton: UIButton!
     @IBOutlet  weak var muteVideoButton: UIButton!
     @IBOutlet  weak var pauseCallButton: UIButton!
@@ -39,6 +43,7 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
 
     let disposeBag = DisposeBag()
+    var isCallStarted: Bool = false
 
     var viewModel: ButtonsContainerViewModel? {
         didSet {
@@ -84,47 +89,53 @@ class ButtonsContainerView: UIView, NibLoadable {
     }
 
     func withoutOptions() {
-        self.container.backgroundColor = UIColor.clear
-        self.backgroundBlurEffect.isHidden = true
-        muteAudioButton.isHidden = true
-        muteVideoButton.isHidden = true
-        pauseCallButton.isHidden = true
-        switchCameraButton.isHidden = true
-        switchSpeakerButton.isHidden = true
-        cancelButton.isHidden = false
+            self.container.backgroundColor = UIColor.clear
+            self.backgroundBlurEffect.isHidden = true
+            muteAudioButton.isHidden = true
+            muteVideoButton.isHidden = true
+            pauseCallButton.isHidden = true
+            switchCameraButton.isHidden = true
+            switchSpeakerButton.isHidden = true
+            cancelButton.isHidden = false
     }
 
     func optionsWithSpeaker() {
-        self.backgroundBlurEffect.isHidden = false
-        muteAudioButton.isHidden = false
-        if self.viewModel?.isAudioOnly ?? false {
-            self.stackViewWidthConstraint.constant = 200
-            muteVideoButton.isHidden = true
-            switchCameraButton.isHidden = true
-        } else {
-            muteVideoButton.isHidden = false
-            switchCameraButton.isHidden = false
+        if !self.isCallStarted {
+            self.isCallStarted = true
+            self.backgroundBlurEffect.isHidden = false
+            muteAudioButton.isHidden = false
+            if self.viewModel?.isAudioOnly ?? false {
+                self.stackViewWidthConstraint.constant = 200
+                muteVideoButton.isHidden = true
+                switchCameraButton.isHidden = true
+            } else {
+                muteVideoButton.isHidden = false
+                switchCameraButton.isHidden = false
+            }
+            pauseCallButton.isHidden = false
+            switchSpeakerButton.isHidden = false
+            switchSpeakerButton.alpha = 1.00
+            switchSpeakerButton.isEnabled = true
+            cancelButton.isHidden = false
         }
-        pauseCallButton.isHidden = false
-        switchSpeakerButton.isHidden = false
-        switchSpeakerButton.alpha = 1.00
-        switchSpeakerButton.isEnabled = true
-        cancelButton.isHidden = false
     }
 
     func optionsWithoutSpeaker() {
-        if self.viewModel?.isAudioOnly ?? false {
-            self.stackViewWidthConstraint.constant = 150
-            muteVideoButton.isHidden = true
-            switchCameraButton.isHidden = true
-        } else {
-            muteVideoButton.isHidden = false
-            switchCameraButton.isHidden = false
+        if !self.isCallStarted {
+            self.isCallStarted = true
+            if self.viewModel?.isAudioOnly ?? false {
+                self.stackViewWidthConstraint.constant = 150
+                muteVideoButton.isHidden = true
+                switchCameraButton.isHidden = true
+            } else {
+                muteVideoButton.isHidden = false
+                switchCameraButton.isHidden = false
+            }
+            self.backgroundBlurEffect.isHidden = false
+            muteAudioButton.isHidden = false
+            pauseCallButton.isHidden = false
+            switchSpeakerButton.isHidden = true
+            cancelButton.isHidden = false
         }
-        self.backgroundBlurEffect.isHidden = false
-        muteAudioButton.isHidden = false
-        pauseCallButton.isHidden = false
-        switchSpeakerButton.isHidden = true
-        cancelButton.isHidden = false
     }
 }
