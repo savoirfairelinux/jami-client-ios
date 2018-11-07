@@ -350,7 +350,7 @@ class ConversationViewModel: Stateable, ViewModel {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
-        self.stateSubject.onNext(ConversationState.startCall(contactRingId: self.conversation.value.recipientRingId, userName: self.userName.value))
+        self.stateSubject.onNext(ConversationState.startCall(contactRingId: self.conversation.value.recipientRingId, userName: self.displayName.value ?? self.userName.value))
     }
 
     func startAudioCall() {
