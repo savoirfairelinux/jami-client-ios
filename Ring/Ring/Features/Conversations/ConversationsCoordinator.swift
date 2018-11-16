@@ -125,7 +125,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 return currentCall.callId == call.callId &&
                     (currentCall.state == .over || currentCall.state == .failure)
             }).subscribe(onNext: { _ in
-                alert.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    alert.dismiss(animated: true, completion: nil)
+                }
             }).disposed(by: self.disposeBag)
         }
     }
