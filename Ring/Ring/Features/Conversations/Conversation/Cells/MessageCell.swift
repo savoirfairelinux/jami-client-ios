@@ -267,7 +267,7 @@ class MessageCell: UITableViewCell, NibReusable {
 
         if item.bubblePosition() == .generated {
             self.bubble.backgroundColor = UIColor.ringMsgCellReceived
-            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 10)
             if indexPath.row == 0 {
                 self.messageLabelMarginConstraint.constant = 4
                 self.bubbleTopConstraint.constant = 36
