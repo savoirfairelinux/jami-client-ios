@@ -441,7 +441,6 @@ class AccountsService: AccountAdapterDelegate {
 
     func registrationStateChanged(with response: RegistrationResponse) {
         log.debug("RegistrationStateChanged.")
-        reloadAccounts()
         if let state = response.state, state == Registered {
             if let account = self.currentAccount {
                 if let ringID = AccountModelHelper(withAccount: account).ringId {
