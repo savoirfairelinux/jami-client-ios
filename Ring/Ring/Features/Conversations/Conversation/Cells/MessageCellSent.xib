@@ -72,21 +72,21 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8N-aw-5lV" userLabel="Right Divider">
-                        <rect key="frame" x="348" y="63.333333333333336" width="126" height="1.0000000000000071"/>
+                        <rect key="frame" x="348" y="19.333333333333332" width="126" height="1"/>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="3h1-r8-Nis"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2U4-l3-KET" userLabel="Left Divider">
-                        <rect key="frame" x="36" y="63.333333333333336" width="126" height="1.0000000000000071"/>
+                        <rect key="frame" x="36" y="19.333333333333332" width="126" height="1"/>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="gla-pJ-IsN"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11/14/2016 12:34PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogn-wv-fZy" userLabel="Message Time">
-                        <rect key="frame" x="178" y="53.333333333333336" width="154" height="21.000000000000007"/>
+                        <rect key="frame" x="178" y="9.3333333333333321" width="154" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -135,7 +135,9 @@
                 <outlet property="failedStatusLabel" destination="P5a-HI-uhr" id="6Sq-NU-j0d"/>
                 <outlet property="leftDivider" destination="2U4-l3-KET" id="y4j-CT-gez"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
+                <outlet property="messageLabelLeadingConstraint" destination="8m5-sR-xnh" id="ShD-gb-tcN"/>
                 <outlet property="messageLabelMarginConstraint" destination="Fxg-Wa-Rb9" id="zuW-JC-pWN"/>
+                <outlet property="messageLabelTrailingConstraint" destination="uzV-kG-oGN" id="q3j-c6-l76"/>
                 <outlet property="rightDivider" destination="h8N-aw-5lV" id="9pc-93-BG6"/>
                 <outlet property="sendingIndicator" destination="78h-fZ-7yf" id="GrK-FT-q39"/>
                 <outlet property="timeLabel" destination="ogn-wv-fZy" id="7yt-vi-cSp"/>
