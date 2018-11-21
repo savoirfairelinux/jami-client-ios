@@ -19,30 +19,27 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdz-AQ-xHI" userLabel="Bottom Corner">
-                        <rect key="frame" x="477" y="25.666666666666671" width="17" height="17"/>
+                        <rect key="frame" x="469" y="22.333333333333336" width="25" height="20.333333333333336"/>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="17" id="D0h-cW-9kB"/>
-                            <constraint firstAttribute="width" constant="17" id="wlh-ar-Nsv"/>
+                            <constraint firstAttribute="width" constant="25" id="wlh-ar-Nsv"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="0.0"/>
+                                <real key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMh-bG-ilg" userLabel="Top Corner">
-                        <rect key="frame" x="477" y="8.3333333333333321" width="17" height="17"/>
+                        <rect key="frame" x="469" y="8.3333333333333321" width="25" height="20"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="17" id="zaa-Rn-ziw"/>
-                            <constraint firstAttribute="height" constant="17" id="zuP-4P-1GS"/>
+                            <constraint firstAttribute="width" constant="25" id="zaa-Rn-ziw"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="0.0"/>
+                                <real key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
@@ -111,11 +108,13 @@
                     <constraint firstItem="78h-fZ-7yf" firstAttribute="centerY" secondItem="kZJ-Ay-LTR" secondAttribute="centerY" id="HCm-lG-Bmg"/>
                     <constraint firstItem="2U4-l3-KET" firstAttribute="centerY" secondItem="ogn-wv-fZy" secondAttribute="centerY" id="J6Y-Ti-HDv"/>
                     <constraint firstItem="EMh-bG-ilg" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" id="MY3-Aj-94K"/>
+                    <constraint firstItem="EMh-bG-ilg" firstAttribute="height" secondItem="kZJ-Ay-LTR" secondAttribute="height" multiplier="0.5" constant="3" id="O7u-JI-koA"/>
                     <constraint firstItem="ogn-wv-fZy" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RaG-SO-xFo"/>
                     <constraint firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" constant="16" id="TCY-7X-mFs"/>
                     <constraint firstItem="P5a-HI-uhr" firstAttribute="centerY" secondItem="kZJ-Ay-LTR" secondAttribute="centerY" id="XNX-Nd-gDE"/>
                     <constraint firstItem="h8N-aw-5lV" firstAttribute="centerY" secondItem="ogn-wv-fZy" secondAttribute="centerY" id="Xdu-7c-MbP"/>
                     <constraint firstItem="2U4-l3-KET" firstAttribute="trailing" secondItem="ogn-wv-fZy" secondAttribute="leading" constant="-16" id="Xw6-H2-byY"/>
+                    <constraint firstItem="hdz-AQ-xHI" firstAttribute="height" secondItem="kZJ-Ay-LTR" secondAttribute="height" multiplier="0.5" constant="3" id="f63-Xd-RQB"/>
                     <constraint firstAttribute="trailingMargin" secondItem="h8N-aw-5lV" secondAttribute="trailing" constant="16" id="iwC-fc-F9c"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="jhd-A8-c1o"/>
                     <constraint firstItem="hdz-AQ-xHI" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" id="lSl-vu-Wkl"/>
