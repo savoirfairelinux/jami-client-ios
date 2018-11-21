@@ -233,11 +233,9 @@ class ConversationViewController: UIViewController,
 
         var heightOffset = CGFloat(0.0)
         if keyboardHeight != self.messageAccessoryView.frame.height {
-            let device = UIDevice.modelName
-            switch device {
-            case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+            if UIDevice.current.hasNotch {
                 heightOffset = -55
-            default :
+            } else {
                 heightOffset = -20
             }
             self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
@@ -287,12 +285,10 @@ class ConversationViewController: UIViewController,
         }
 
         var dnlabelYOffset: CGFloat
-        let device = UIDevice.modelName
-        switch device {
-        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+        if UIDevice.current.hasNotch {
             dnlabelYOffset = 4
             userNameYOffset = 20
-        default :
+        } else {
             dnlabelYOffset = -2
             userNameYOffset = 12
         }
