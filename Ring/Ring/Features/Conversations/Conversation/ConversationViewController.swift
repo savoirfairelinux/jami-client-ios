@@ -277,13 +277,21 @@ class ConversationViewController: UIViewController,
             titleView.addSubview(profileImageView)
         }
 
-        var dnlabelYOffset: CGFloat
+        var dnlabelYOffset: CGFloat = 0
         if UIDevice.current.hasNotch {
-            dnlabelYOffset = 4
-            userNameYOffset = 20
+            if displayName == nil {
+                userNameYOffset = 10
+            } else {
+                dnlabelYOffset = 4
+                userNameYOffset = 20
+            }
         } else {
+            if displayName == nil {
+                userNameYOffset = 3
+            } else {
             dnlabelYOffset = -2
             userNameYOffset = 12
+            }
         }
 
         if let name = displayName, !name.isEmpty {
