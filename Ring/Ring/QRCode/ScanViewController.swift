@@ -64,12 +64,10 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let device = UIDevice.modelName
-        switch device {
-        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+        if UIDevice.current.hasNotch {
             self.bottomMarginTitleConstraint.constant = 45
             self.bottomCloseButtonConstraint.constant = 17
-        default :
+        } else {
             self.bottomMarginTitleConstraint.constant = 35
             self.bottomCloseButtonConstraint.constant = 25
         }
