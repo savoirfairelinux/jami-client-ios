@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -121,7 +120,9 @@
                 <outlet property="bubbleTopConstraint" destination="jhd-A8-c1o" id="40k-2d-6rW"/>
                 <outlet property="leftDivider" destination="zuX-zz-1Qq" id="9Jc-cV-VTA"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
+                <outlet property="messageLabelLeadingConstraint" destination="8m5-sR-xnh" id="piI-w5-04J"/>
                 <outlet property="messageLabelMarginConstraint" destination="O3h-2G-pe5" id="bHE-Hw-I9b"/>
+                <outlet property="messageLabelTrailingConstraint" destination="uzV-kG-oGN" id="iIi-6G-TTU"/>
                 <outlet property="rightDivider" destination="eza-Ni-w3g" id="Jfy-s9-5t7"/>
                 <outlet property="timeLabel" destination="mhg-uK-iD9" id="x8D-vK-F6G"/>
                 <outlet property="topCorner" destination="WBd-CS-7Qv" id="GCm-Hv-5Ei"/>

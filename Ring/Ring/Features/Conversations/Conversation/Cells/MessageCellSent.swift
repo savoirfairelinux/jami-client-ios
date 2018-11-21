@@ -22,4 +22,18 @@ import UIKit
 import Reusable
 
 class MessageCellSent: MessageCell {
+    //Constraints
+    @IBOutlet weak var messageLabelTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var messageLabelLeadingConstraint: NSLayoutConstraint!
+
+    override func applyBubbleStyleToCell(_ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
+        super.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
+        if (self.messageLabel.text?.containsOnlyEmoji)! {
+            self.messageLabelTrailingConstraint.constant = 0
+            self.messageLabelLeadingConstraint.constant = 0
+        } else {
+            self.messageLabelTrailingConstraint.constant = 14
+            self.messageLabelLeadingConstraint.constant = 14
+        }
+    }
 }
