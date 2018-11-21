@@ -27,20 +27,28 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBd-CS-7Qv" userLabel="Top Corner">
-                        <rect key="frame" x="64" y="8" width="17" height="17"/>
+                        <rect key="frame" x="64" y="8" width="25" height="20"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="17" id="fjJ-O1-VNm"/>
-                            <constraint firstAttribute="width" constant="17" id="gch-Wg-ytg"/>
+                            <constraint firstAttribute="width" constant="25" id="gch-Wg-ytg"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcL-CH-BiH" userLabel="Bottom Corner">
-                        <rect key="frame" x="64" y="24.5" width="17" height="17"/>
+                        <rect key="frame" x="64" y="22" width="25" height="19.5"/>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="17" id="ocR-DU-zKZ"/>
-                            <constraint firstAttribute="height" constant="17" id="ooc-tv-fiO"/>
+                            <constraint firstAttribute="width" constant="25" id="ocR-DU-zKZ"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kZJ-Ay-LTR" customClass="MessageBubble" customModule="Ring" customModuleProvider="target">
                         <rect key="frame" x="64" y="8" width="198.5" height="33.5"/>
@@ -90,9 +98,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" constant="8" id="1QQ-bu-6Bl"/>
+                    <constraint firstItem="WBd-CS-7Qv" firstAttribute="height" secondItem="kZJ-Ay-LTR" secondAttribute="height" multiplier="0.5" constant="3" id="1qI-8e-UAL"/>
                     <constraint firstItem="XcL-CH-BiH" firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" id="2d4-0F-VWg"/>
                     <constraint firstItem="WBd-CS-7Qv" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" id="4Zp-8q-rFJ"/>
                     <constraint firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" priority="1" constant="16" id="99Y-bR-Ioq"/>
+                    <constraint firstItem="XcL-CH-BiH" firstAttribute="height" secondItem="kZJ-Ay-LTR" secondAttribute="height" multiplier="0.5" constant="3" id="9HY-lQ-3Rh"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" priority="1" constant="64" id="Eso-cy-OYs"/>
                     <constraint firstItem="XcL-CH-BiH" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" id="GaI-yj-QFt"/>
                     <constraint firstItem="mhg-uK-iD9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="O3h-2G-pe5"/>
