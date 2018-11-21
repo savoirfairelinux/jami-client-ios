@@ -352,15 +352,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self.profileImageViewHeightConstraint.constant = 90
                     self.profileImageView.cornerRadius = 45
                 }
-                if self.viewModel.isAudioOnly {
-                    if device == "iPhone 5" || device ==  "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
-                        self.durationLabel.isHidden = true
-                    }
-                    self.buttonsContainer.backgroundBlurEffect.alpha = 0
-                    self.profileImageViewWidthConstraint.constant = 90
-                    self.profileImageViewHeightConstraint.constant = 90
-                    self.profileImageView.cornerRadius = 45
-                }
                 if self.viewModel.call?.state == .ringing || self.viewModel.call?.state == .connecting {
                     self.avatarViewImageTopConstraint.constant = 20
                 } else {
@@ -370,6 +361,16 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self.buttonsContainerBottomConstraint.constant = 0
                 } else {
                     self.buttonsContainerBottomConstraint.constant = 10
+                }
+                if self.viewModel.isAudioOnly {
+                    if device == "iPhone 5" || device ==  "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
+                        self.durationLabel.isHidden = true
+                        self.buttonsContainerBottomConstraint.constant = -10
+                    }
+                    self.buttonsContainer.backgroundBlurEffect.alpha = 0
+                    self.profileImageViewWidthConstraint.constant = 90
+                    self.profileImageViewHeightConstraint.constant = 90
+                    self.profileImageView.cornerRadius = 45
                 }
             } else {
                 if UIDevice.current.hasNotch {
