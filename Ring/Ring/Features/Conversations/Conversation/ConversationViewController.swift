@@ -277,27 +277,27 @@ class ConversationViewController: UIViewController,
         profileImageView.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
 
         if let profileName = displayName, !profileName.isEmpty {
-            profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: profileName, size: 36))
+            profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: profileName, size: 30))
             titleView.addSubview(profileImageView)
         } else if let bestId = username {
-            profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: bestId, size: 36))
+            profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: bestId, size: 30))
             titleView.addSubview(profileImageView)
         }
 
         var dnlabelYOffset: CGFloat = 0
         if UIDevice.current.hasNotch {
             if displayName == nil || displayName == "" {
-                userNameYOffset = 10
+                userNameYOffset = 7
             } else {
-                dnlabelYOffset = 4
-                userNameYOffset = 20
+                dnlabelYOffset = 2
+                userNameYOffset = 18
             }
         } else {
-            if displayName == nil || displayName == "" {
-                userNameYOffset = 3
+            if displayName == nil || displayName == ""  {
+                userNameYOffset = 1
             } else {
-            dnlabelYOffset = -2
-            userNameYOffset = 12
+            dnlabelYOffset = -4
+            userNameYOffset = 10
             }
         }
 
