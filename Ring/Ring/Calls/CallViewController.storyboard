@@ -140,13 +140,23 @@
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.17999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <blurEffect style="light"/>
                                             </visualEffectView>
+                                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="left_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="gWE-IS-b5p">
+                                                <rect key="frame" x="67" y="364" width="240" height="128"/>
+                                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="ATJ-SU-7iG"/>
+                                                    <constraint firstAttribute="height" constant="70" id="iha-aS-TZH"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="gWE-IS-b5p" firstAttribute="centerY" secondItem="rt7-JS-vjg" secondAttribute="centerY" id="1Jq-i7-iGP"/>
                                             <constraint firstItem="CfE-DF-buX" firstAttribute="centerX" secondItem="ZK1-Be-lcD" secondAttribute="centerX" id="51a-aO-iap"/>
                                             <constraint firstItem="CfE-DF-buX" firstAttribute="height" secondItem="ZK1-Be-lcD" secondAttribute="height" id="O6Q-I4-gU3"/>
                                             <constraint firstItem="rt7-JS-vjg" firstAttribute="centerX" secondItem="CfE-DF-buX" secondAttribute="centerX" id="QPi-iO-gGH"/>
                                             <constraint firstItem="rt7-JS-vjg" firstAttribute="width" secondItem="CfE-DF-buX" secondAttribute="width" id="VX9-wH-CfO"/>
                                             <constraint firstItem="rt7-JS-vjg" firstAttribute="height" secondItem="CfE-DF-buX" secondAttribute="height" id="glm-Va-dTY"/>
+                                            <constraint firstItem="gWE-IS-b5p" firstAttribute="leading" secondItem="rt7-JS-vjg" secondAttribute="leading" constant="-17" id="kOS-1k-vY1"/>
                                             <constraint firstItem="CfE-DF-buX" firstAttribute="centerY" secondItem="ZK1-Be-lcD" secondAttribute="centerY" id="pDf-fu-Le6"/>
                                             <constraint firstItem="CfE-DF-buX" firstAttribute="width" secondItem="ZK1-Be-lcD" secondAttribute="width" id="r1F-if-HbN"/>
                                             <constraint firstItem="rt7-JS-vjg" firstAttribute="centerY" secondItem="CfE-DF-buX" secondAttribute="centerY" id="tCB-hE-MJu"/>
@@ -302,6 +312,7 @@
                         <outlet property="infoContainer" destination="3RN-4M-qR4" id="CUO-h6-mFf"/>
                         <outlet property="infoContainerHeightConstraint" destination="b8L-UJ-IKC" id="U6k-oI-MPH"/>
                         <outlet property="infoContainerTopConstraint" destination="G1C-hv-89U" id="MFr-jm-kBk"/>
+                        <outlet property="leftArrow" destination="gWE-IS-b5p" id="Kxj-Fb-zuK"/>
                         <outlet property="mainView" destination="QpJ-Sx-9dG" id="0y9-R4-q5W"/>
                         <outlet property="nameLabel" destination="73Y-N1-Yga" id="XcQ-V6-ZrF"/>
                         <outlet property="profileImageView" destination="fnt-PQ-Q6P" id="MgB-Ev-bTc"/>
@@ -318,5 +329,6 @@
     </scenes>
     <resources>
         <image name="ic_contact_picture" width="256" height="256"/>
+        <image name="left_arrow" width="138.24000549316406" height="138.24000549316406"/>
     </resources>
 </document>
