@@ -25,6 +25,7 @@ import RxSwift
 import Reusable
 import SwiftyBeaver
 
+// swiftlint:disable type_body_length
 class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     //preview screen
@@ -52,6 +53,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
     @IBOutlet private weak var buttonsContainer: ButtonsContainerView!
     @IBOutlet weak var infoBlurEffect: UIVisualEffectView!
+    @IBOutlet weak var leftArrow: UIImageView!
 
     //Constraints
     @IBOutlet weak var capturedVideoWidthConstraint: NSLayoutConstraint!
@@ -69,6 +71,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     var viewModel: CallViewModel!
     var isCallStarted: Bool = false
+    var isMenuShowed = false
+    var isVideoHidden = false
     var orientation = UIDevice.current.orientation
 
     fileprivate let disposeBag = DisposeBag()
@@ -83,6 +87,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         super.viewDidLoad()
         self.setAvatarView(true)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        let tapCapturedVideo = UITapGestureRecognizer(target: self, action: #selector(hideCapturedVideo))
+        let swipeLeftCapturedVideo = UISwipeGestureRecognizer(target: self, action: #selector(capturedVideoSwipped(gesture:)))
+        swipeLeftCapturedVideo.direction = .left
+        let swipeRightCapturedVideo = UISwipeGestureRecognizer(target: self, action: #selector(capturedVideoSwipped(gesture:)))
+        swipeRightCapturedVideo.direction = .right
+        self.viewCapturedVideo.addGestureRecognizer(tapCapturedVideo)
+        self.viewCapturedVideo.addGestureRecognizer(swipeLeftCapturedVideo)
+        self.viewCapturedVideo.addGestureRecognizer(swipeRightCapturedVideo)
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
         self.setUpCallButtons()
         self.setupBindings()
@@ -112,14 +124,32 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         initCallAnimation()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    @objc func capturedVideoSwipped(gesture: UISwipeGestureRecognizer) {
+        if self.avatarView.isHidden == false { return }
+        if gesture.direction == UISwipeGestureRecognizerDirection.left && (self.isVideoHidden == false) { return }
+        if gesture.direction == UISwipeGestureRecognizerDirection.right && (self.isVideoHidden == true) { return }
+        self.hideCapturedVideo()
+    }
+
+    @objc func hideCapturedVideo() {
+        if self.isMenuShowed { return }
+        UIView.animate(withDuration: 0.3, animations: {
+            if self.capturedVideoBlurEffect.alpha == 0 {
+                self.isVideoHidden = true
+                self.capturedVideoBlurEffect.alpha = 1
+            } else {
+                self.isVideoHidden = false
+                self.capturedVideoBlurEffect.alpha = 0
+            }
+            self.resizeCapturedVideo(withInfoContainer: !self.infoContainer.isHidden)
+            self.view.layoutIfNeeded()
+        })
     }
 
     func setWhiteAvatarView() {
-                UIApplication.shared.statusBarStyle = .default
-                self.callPulse.backgroundColor = UIColor.ringCallPulse
-                self.avatarView.backgroundColor = UIColor.white
+        UIApplication.shared.statusBarStyle = .default
+        self.callPulse.backgroundColor = UIColor.ringCallPulse
+        self.avatarView.backgroundColor = UIColor.white
     }
 
     func initCallAnimation() {
@@ -317,6 +347,16 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .bind(to: self.capturedVideo.rx.isHidden)
             .disposed(by: self.disposeBag)
 
+        self.viewModel.videoMuted
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.capturedVideoBlurEffect.rx.isHidden)
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.videoMuted
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.leftArrow.rx.isHidden)
+            .disposed(by: self.disposeBag)
+
         if !self.viewModel.isAudioOnly {
             self.viewModel.callPaused
                 .observeOn(MainScheduler.instance)
@@ -387,26 +427,26 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func resizeCapturedFrame() {
         self.viewModel.showCapturedFrame
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { dontShow in
-                if dontShow && !self.isCallStarted {
-                    self.isCallStarted = true
-                    self.hideCancelButton()
+            .subscribe(onNext: { [weak self] dontShow in
+                if dontShow && (!(self?.isCallStarted)!) {
+                    self?.isCallStarted = true
+                    self?.hideCancelButton()
                     let device = UIDevice.modelName
                     //Reduce the cancel button for small iPhone
                     switch device {
                     case "iPhone 5", "iPhone 5c", "iPhone 5s", "iPhone SE" :
-                        self.buttonsContainer.cancelButtonWidthConstraint.constant = 50
-                        self.buttonsContainer.cancelButtonHeightConstraint.constant = 50
-                        self.buttonsContainer.cancelButton.cornerRadius = 25
-                        self.buttonsContainer.cancelButtonBottomConstraint.constant = 30
+                        self?.buttonsContainer.cancelButtonWidthConstraint.constant = 50
+                        self?.buttonsContainer.cancelButtonHeightConstraint.constant = 50
+                        self?.buttonsContainer.cancelButton.cornerRadius = 25
+                        self?.buttonsContainer.cancelButtonBottomConstraint.constant = 30
                     default : break
                     }
-                    UIView.animate(withDuration: 0.4, animations: { [unowned self] in
-                        self.resizeCapturedVideo(withInfoContainer: false)
-                        self.capturedVideoBlurEffect.alpha = 0
-                        self.view.layoutIfNeeded()
-                        }, completion: nil)
-                    self.avatarViewBlurEffect.alpha = CGFloat(1)
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self?.resizeCapturedVideo(withInfoContainer: false)
+                        self?.capturedVideoBlurEffect.alpha = 0
+                        self?.view.layoutIfNeeded()
+                    }, completion: nil)
+                    self?.avatarViewBlurEffect.alpha = CGFloat(1)
                 }
             }).disposed(by: self.disposeBag)
     }
@@ -455,6 +495,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func resizeCapturedVideo(withInfoContainer: Bool) {
+        self.leftArrow.alpha = 0
         //Don't change anything if the orientation change to portraitUpsideDown, faceUp or faceDown
         if  UIDevice.current.orientation.rawValue != 5  && UIDevice.current.orientation.rawValue != 6 && UIDevice.current.orientation.rawValue != 2  {
             self.orientation = UIDevice.current.orientation
@@ -511,6 +552,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self.viewCapturedVideo.cornerRadius = 25
             }
         }
+        if self.capturedVideoBlurEffect.alpha == 1 && self.isMenuShowed == false
+            && self.avatarView.isHidden == true {
+            self.leftArrow.alpha = 1
+            self.capturedVideoTrailingConstraint.constant = -200
+        }
     }
 
     func showContactInfo() {
@@ -519,11 +565,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.hideContactInfo()
             return
         }
+        self.isMenuShowed = true
         self.buttonsContainer.isHidden = false
         self.infoContainer.isHidden = false
         self.view.layoutIfNeeded()
 
         UIView.animate(withDuration: 0.2, animations: {
+            self.capturedVideoBlurEffect.alpha = 0
             self.resizeCapturedVideo(withInfoContainer: true)
             self.infoContainerTopConstraint.constant = -10
             if UIDevice.current.hasNotch && (self.orientation == .landscapeRight || self.orientation == .landscapeLeft)  {
@@ -541,7 +589,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func hideContactInfo() {
+        self.isMenuShowed = false
         UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+            if self.isVideoHidden { self.capturedVideoBlurEffect.alpha = 1 }
             self.resizeCapturedVideo(withInfoContainer: false)
             self.infoContainerTopConstraint.constant = 150
             self.buttonsContainerBottomConstraint.constant = -150
