@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,26 +34,21 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="ring_logo" translatesAutoresizingMaskIntoConstraints="NO" id="2Pc-uJ-SAI">
-                                <rect key="frame" x="92" y="301.66666666666669" width="191" height="70"/>
+                                <rect key="frame" x="90" y="285.33333333333331" width="195" height="97.333333333333314"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="2Pc-uJ-SAI" secondAttribute="height" multiplier="30:11" id="Qre-jC-ga0"/>
+                                    <constraint firstAttribute="width" secondItem="2Pc-uJ-SAI" secondAttribute="height" multiplier="305:152" id="5fN-uH-uSi"/>
+                                    <constraint firstAttribute="width" constant="195" id="TaY-2a-CCG"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Ring is a free and universal communication platform which preserves the users' privacy and freedoms" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
-                                <rect key="frame" x="62.666666666666657" y="428.33333333333331" width="249.99999999999997" height="46.666666666666686"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to Ring!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
+                                <rect key="frame" x="62.666666666666657" y="422.66666666666669" width="249.99999999999997" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Live Free or Die" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbn-cd-UXk" userLabel="Version Title Label">
-                                <rect key="frame" x="108.33333333333333" y="391.66666666666669" width="159.33333333333337" height="28.666666666666686"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="62.666666666666657" y="575" width="249.99999999999997" height="40"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="62.666666666666657" y="558.66666666666663" width="249.99999999999997" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="YW4-Sc-61P"/>
@@ -66,8 +60,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="62.666666666666657" y="515" width="249.99999999999997" height="40"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="62.666666666666657" y="498.66666666666674" width="249.99999999999997" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.29803921570000003" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="FEf-kf-jCs"/>
@@ -83,26 +77,22 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="40" id="0hJ-6T-D3J"/>
-                            <constraint firstItem="Lbn-cd-UXk" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="20" id="0p4-iF-1bx"/>
+                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" constant="-72" id="2w4-nZ-VwS"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="leading" secondItem="E4b-Zv-unB" secondAttribute="leading" id="4YM-7O-C4z"/>
                             <constraint firstAttribute="bottom" secondItem="8TU-za-C7U" secondAttribute="bottom" id="7MN-tF-bVG"/>
                             <constraint firstItem="8TU-za-C7U" firstAttribute="top" secondItem="Dg0-kS-rT7" secondAttribute="top" id="HvO-Th-xtu"/>
+                            <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="40" id="Q1E-vy-HUz"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="U37-r7-lNe"/>
-                            <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="Lbn-cd-UXk" secondAttribute="bottom" constant="8" symbolic="YES" id="XNv-Kr-c8f"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="YLx-WX-rgL"/>
-                            <constraint firstItem="Lbn-cd-UXk" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" priority="750" id="ax2-Za-jO0"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="cYv-WZ-CCB"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="10" id="dHd-v7-FYo"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="gQM-Bw-BRN"/>
                             <constraint firstAttribute="bottom" secondItem="11r-JK-mPT" secondAttribute="bottom" id="hKL-lg-yh3"/>
                             <constraint firstItem="11r-JK-mPT" firstAttribute="leading" secondItem="Dg0-kS-rT7" secondAttribute="leading" id="iUW-Ed-weL"/>
-                            <constraint firstItem="Lbn-cd-UXk" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="l7f-X1-d82"/>
                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="qaX-bX-RjJ"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="trailing" secondItem="E4b-Zv-unB" secondAttribute="trailing" id="rLA-EI-gkd"/>
                             <constraint firstAttribute="trailing" secondItem="11r-JK-mPT" secondAttribute="trailing" id="shP-7c-cRl"/>
                             <constraint firstItem="11r-JK-mPT" firstAttribute="top" secondItem="Dg0-kS-rT7" secondAttribute="top" id="sq0-Fa-BSF"/>
                             <constraint firstItem="8TU-za-C7U" firstAttribute="leading" secondItem="Dg0-kS-rT7" secondAttribute="leading" id="svU-pm-Bc1"/>
-                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Dg0-kS-rT7" secondAttribute="top" constant="10" id="t1u-DE-jkN"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="uLc-95-Qpb"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="ukg-Rd-bL3"/>
                             <constraint firstAttribute="trailing" secondItem="8TU-za-C7U" secondAttribute="trailing" id="z6w-VC-Pft"/>
@@ -113,16 +103,17 @@
                     <connections>
                         <outlet property="createAccountButton" destination="bu0-90-MB5" id="YNt-Tc-Snc"/>
                         <outlet property="linkDeviceButton" destination="QLK-gs-fOJ" id="AXP-0r-10g"/>
+                        <outlet property="ringLogoBottomConstraint" destination="2w4-nZ-VwS" id="QZo-N3-iCa"/>
                         <outlet property="welcomeTextLabel" destination="E4b-Zv-unB" id="ygV-A3-EZD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yc1-qm-cpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-333.60000000000002" y="30.134932533733135"/>
+            <point key="canvasLocation" x="-333.60000000000002" y="29.55665024630542"/>
         </scene>
     </scenes>
     <resources>
         <image name="background_ring" width="750" height="1334"/>
-        <image name="ring_logo" width="191" height="63"/>
+        <image name="ring_logo" width="458.39999389648438" height="152.80000305175781"/>
     </resources>
 </document>

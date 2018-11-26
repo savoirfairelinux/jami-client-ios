@@ -32,13 +32,18 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var linkDeviceButton: DesignableButton!
     @IBOutlet weak var createAccountButton: DesignableButton!
 
+    // Mark: constraints
+    @IBOutlet weak var ringLogoBottomConstraint: NSLayoutConstraint!
+
+
     // MARK: members
     private let disposeBag = DisposeBag()
 
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.initialAnimation()
+//        self.view.layoutIfNeeded()
         // Bind ViewModel to View
         self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
         self.viewModel.createAccount.bind(to: self.createAccountButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
@@ -52,6 +57,17 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.linkDeviceButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.viewModel.proceedWithLinkDevice()
         }).disposed(by: self.disposeBag)
+    }
+
+    func initialAnimation() {
+            UIView.animate(withDuration: 0.5, delay: 0,
+                           animations: { [unowned self] in
+                            self.ringLogoBottomConstraint.constant = -200
+                            self.view.layoutIfNeeded()
+                            self.createAccountButton.alpha = 1
+                            self.linkDeviceButton.alpha = 1
+                            self.welcomeTextLabel.alpha = 1
+                }, completion: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
