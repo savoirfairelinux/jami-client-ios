@@ -40,21 +40,21 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Ring";
+"welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Ring account";
+"welcome.createAccount" = "Create a jami account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Next";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your Ring account";
+"createAccount.createAccountFormTitle" = "Create your account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "username";
-"createAccount.newPasswordPlaceholder" = "password";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
+"createAccount.enterNewUsernamePlaceholder" = "Username";
+"createAccount.newPasswordPlaceholder" = "Password";
+"createAccount.repeatPasswordPlaceholder" = "Confirm password";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for username availability";
