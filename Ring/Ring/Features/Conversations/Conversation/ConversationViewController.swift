@@ -493,7 +493,7 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    fileprivate func scrollToBottom(animated: Bool) {
+    fileprivate func  scrollToBottom(animated: Bool) {
         let numberOfRows = self.tableView.numberOfRows(inSection: 0)
         if  numberOfRows > 0 {
             let last = IndexPath(row: numberOfRows - 1, section: 0)
