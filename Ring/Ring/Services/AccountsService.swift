@@ -192,13 +192,14 @@ class AccountsService: AccountAdapterDelegate {
      - Parameter password: the password chosen by the user
 
      */
-    func addRingAccount(withUsername username: String?, password: String) {
+    func addRingAccount(withUsername username: String?, password: String, enable: Bool) {
         do {
             var ringDetails = try self.getRingInitialAccountDetails()
             if username != nil {
                 ringDetails.updateValue(username!, forKey: ConfigKey.accountRegisteredName.rawValue)
             }
             ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+            ringDetails.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
             let accountId = self.accountAdapter.addAccount(ringDetails)
             guard accountId != nil else {
                 throw AddAccountError.unknownError

@@ -153,6 +153,11 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let usernameTitle = L10n.Createaccount.enterNewUsernamePlaceholder
     let passwordTitle = L10n.Createaccount.newPasswordPlaceholder
     let confirmPasswordTitle = L10n.Createaccount.repeatPasswordPlaceholder
+    let registerAUserNameTitle = L10n.Createaccount.registerAUsername
+    let chooseAPasswordTitle = L10n.Createaccount.chooseAPassword
+    let passwordInfoTitle = L10n.Createaccount.passwordInformation
+    let enableNotificationsTitle = L10n.Createaccount.enableNotifications
+    let recommendedTitle = L10n.Createaccount.recommended
 
     // MARK: - Low level services
     private let accountService: AccountsService
@@ -167,6 +172,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let password = Variable<String>("")
     let confirmPassword = Variable<String>("")
     let registerUsername = Variable<Bool>(true)
+    let notificationSwitch = Variable<Bool>(true)
     lazy var passwordValidationState: Observable<PasswordValidationState> = {
         return Observable.combineLatest(self.password.asObservable(), self.confirmPassword.asObservable())
         { (password: String, confirmPassword: String) -> PasswordValidationState in
@@ -281,6 +287,15 @@ class CreateAccountViewModel: Stateable, ViewModel {
     func createAccount() {
         self.accountCreationState.value = .started
         self.accountService.addRingAccount(withUsername: self.username.value,
-                                           password: self.password.value)
+                                           password: self.password.value, enable: self.notificationSwitch.value)
+        self.enablePushNotifications(enable: self.notificationSwitch.value)
+    }
+
+    func enablePushNotifications(enable: Bool) {
+        if enable {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
+            return
+        }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.disablePushNotifications.rawValue), object: nil)
     }
 }
