@@ -33,27 +33,49 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             self.registerUsernameHeightConstraintConstant = registerUsernameHeightConstraint.constant
         }
     }
+    @IBOutlet weak var backgroundNavigationBarHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var choosePasswordViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var usernameSwitch: UISwitch!
+    @IBOutlet weak var passwordSwitch: UISwitch!
     @IBOutlet weak var registerUsernameView: UIView!
+    @IBOutlet weak var registerPasswordView: UIView!
     @IBOutlet weak var registerUsernameLabel: UILabel!
+    @IBOutlet weak var recommendedLabel: UILabel!
     @IBOutlet weak var registerUsernameErrorLabel: UILabel!
     @IBOutlet weak var passwordTextField: DesignableTextField!
     @IBOutlet weak var confirmPasswordTextField: DesignableTextField!
     @IBOutlet weak var passwordErrorLabel: UILabel!
     @IBOutlet weak var usernameTextField: DesignableTextField!
     @IBOutlet weak var scrollView: UIScrollView!
-
+    @IBOutlet weak var chooseAPasswordLabel: UILabel!
+    @IBOutlet weak var passwordInfoLabel: UILabel!
+    @IBOutlet weak var enableNotificationsLabel: UILabel!
     // MARK: members
     private let disposeBag = DisposeBag()
     var viewModel: CreateAccountViewModel!
     var registerUsernameHeightConstraintConstant: CGFloat = 0.0
+    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
+    var choosePasswordViewHeightConstraintConstant: CGFloat = 190
+    var keyboardDismissTapRecognizer: UITapGestureRecognizer!
+    var isKeyboardOpened: Bool = false
 
     // MARK: functions
     override func viewDidLoad() {
-        super.viewDidLoad()
-
         // L10n
         self.applyL10n()
+        super.viewDidLoad()
+        self.view.layoutIfNeeded()
+
+        // Style
+        self.scrollView.alwaysBounceHorizontal = false
+        self.scrollView.alwaysBounceVertical = true
+        self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        let device = UIDevice.modelName
+        self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
+        self.usernameTextField.tintColor = UIColor.ringSecondary
+        self.passwordTextField.tintColor = UIColor.ringSecondary
+        self.confirmPasswordTextField.tintColor = UIColor.ringSecondary
 
         // Bind ViewModel to View
         self.bindViewModelToView()
@@ -63,11 +85,54 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
+        keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+
+    func setContentInset() {
+        if !self.isKeyboardOpened {
+            self.containerViewBottomConstraint.constant = 0
+        }
+        let device = UIDevice.modelName
+        switch device {
+        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+            self.containerViewBottomConstraint.constant = 100
+        default :
+            self.containerViewBottomConstraint.constant = 70
+        }
+    }
+
+    @objc func dismissKeyboard() {
+        self.isKeyboardOpened = false
+        self.becomeFirstResponder()
+        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
+    }
+
+    @objc func keyboardWillAppear(withNotification: NSNotification){
+        self.isKeyboardOpened = true
+        self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
+        self.setContentInset()
+
+    }
+
+    @objc func keyboardWillDisappear(withNotification: NSNotification){
+        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
+        self.setContentInset()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    override var canBecomeFirstResponder: Bool {
+        return true
     }
 
     private func applyL10n() {
@@ -76,6 +141,11 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.usernameTextField.placeholder = self.viewModel.usernameTitle
         self.passwordTextField.placeholder = self.viewModel.passwordTitle
         self.confirmPasswordTextField.placeholder = self.viewModel.confirmPasswordTitle
+        self.registerUsernameLabel.text = self.viewModel.registerAUserNameTitle
+        self.chooseAPasswordLabel.text = self.viewModel.chooseAPasswordTitle
+        self.passwordInfoLabel.text = self.viewModel.passwordInfoTitle
+        self.enableNotificationsLabel.text = self.viewModel.enableNotificationsTitle
+        self.recommendedLabel.text = self.viewModel.recommendedTitle
     }
 
     private func bindViewModelToView() {
@@ -86,18 +156,37 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             UIView.animate(withDuration: 0.3, animations: {
                 if isOn {
                     self.registerUsernameHeightConstraint.constant = self.registerUsernameHeightConstraintConstant
-                    self.registerUsernameView.alpha = 1.0
+                    DispatchQueue.global(qos: .background).async {
+                        usleep(300000)
+                        DispatchQueue.main.async {
+                            UIView.animate(withDuration: 0.3, animations: {
+                                self.registerUsernameView.alpha = 1.0
+                            })
+                        }
+                    }
                 } else {
                     self.registerUsernameHeightConstraint.constant = 0
                     self.registerUsernameView.alpha = 0.0
                 }
-
+                self.setContentInset()
                 self.view.layoutIfNeeded()
             })
         }).disposed(by: self.disposeBag)
 
         // handle Create Account Button state
-        self.viewModel.canAskForAccountCreation.bind(to: self.createAccountButton.rx.isEnabled).disposed(by: self.disposeBag)
+        self.viewModel.canAskForAccountCreation.subscribe(onNext: { enable in
+            if enable {
+                DispatchQueue.main.async {
+                    self.createAccountButton.alpha = 1
+                    self.createAccountButton.isEnabled = true
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.createAccountButton.alpha = 0.6
+                    self.createAccountButton.isEnabled = false
+                }
+            }
+        }).disposed(by: self.disposeBag)
 
         // handle password error
         self.viewModel.passwordValidationState.map { $0.isValidated }
@@ -136,9 +225,38 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         }).disposed(by: self.disposeBag)
     }
 
+    private func managePasswordSwitch(isOn: Bool) {
+        UIView.animate(withDuration: 0.3, animations: {
+            if isOn {
+                self.registerPasswordView.isHidden = false
+                self.choosePasswordViewHeightConstraint.constant = 128 + self.passwordInfoLabel.frame.height + self.passwordErrorLabel.frame.height
+                self.view.layoutIfNeeded()
+                DispatchQueue.global(qos: .background).async {
+                    usleep(300000)
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.3, animations: {
+                            self.registerPasswordView.alpha = 1.0
+                        })
+                    }
+                }
+            } else {
+                self.choosePasswordViewHeightConstraint.constant = 0
+                self.registerPasswordView.alpha = 0.0
+                self.passwordTextField.text = ""
+                self.confirmPasswordTextField.text = ""
+                self.passwordErrorLabel.isHidden = true
+            }
+            self.setContentInset()
+            self.view.layoutIfNeeded()
+        })
+    }
+
     private func bindViewToViewModel() {
         // Bind View Outlets to ViewModel
         self.usernameSwitch.rx.isOn.bind(to: self.viewModel.registerUsername).disposed(by: self.disposeBag)
+        self.passwordSwitch.rx.isOn.subscribe(onNext: { isOn in
+            self.managePasswordSwitch(isOn: isOn)
+            }).disposed(by: self.disposeBag)
         self.usernameTextField.rx.text.orEmpty.throttle(3, scheduler: MainScheduler.instance).distinctUntilChanged().bind(to: self.viewModel.username).disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
         self.confirmPasswordTextField.rx.text.orEmpty.bind(to: self.viewModel.confirmPassword).disposed(by: self.disposeBag)
