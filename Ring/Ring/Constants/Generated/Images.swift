@@ -68,6 +68,7 @@ internal enum Asset {
   internal static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   internal static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   internal static let icContactPicture = ImageAsset(name: "ic_contact_picture")
+  internal static let jamiIcon = ImageAsset(name: "jamiIcon")
   internal static let moreSettings = ImageAsset(name: "more_settings")
   internal static let pauseCall = ImageAsset(name: "pause_call")
   internal static let qrCode = ImageAsset(name: "qr_code")
@@ -110,6 +111,7 @@ internal enum Asset {
     enableSpeakerphone,
     fallbackAvatar,
     icContactPicture,
+    jamiIcon,
     moreSettings,
     pauseCall,
     qrCode,
