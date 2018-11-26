@@ -1,4 +1,4 @@
-﻿ /*
+ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -40,21 +40,21 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Bienvenue sur Ring";
+"welcome.title" = "Bienvenue sur Jami !";
 "welcome.text" = "Ring est une plateforme de communication universelle qui préserve la vie privée et les libertés des utilisateurs";
 "welcome.linkDevice" = "Associer cet appareil à un compte";
-"welcome.createAccount" = "Créer un compte Ring";
+"welcome.createAccount" = "Créer un compte Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Suivant";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Créer votre compte Ring";
+"createAccount.createAccountFormTitle" = "Créer votre compte";
 "createAccount.chooseStrongPassword" = "Choisir un mot de passe fort que vous allez mémoriser pour protéger votre compte RIng.";
 "createAccount.enterNewUsernamePlaceholder" = "Nom d'utilisateur";
-"createAccount.newPasswordPlaceholder" = "mot de passe";
-"createAccount.repeatPasswordPlaceholder" = "confirmez le mot de passe";
+"createAccount.newPasswordPlaceholder" = "Mot de passe";
+"createAccount.repeatPasswordPlaceholder" = "Confirmez le mot de passe";
 "createAccount.passwordCharactersNumberError" = "Minimum de 6 caractères";
 "createAccount.passwordNotMatchingError" = "les mots de passe ne correspondent pas";
 "createAccount.lookingForUsernameAvailability" = "recherche de disponibilité pour le nom d'utilisateur";
@@ -62,11 +62,16 @@
 "createAccount.usernameAlreadyTaken" = "nom d'utilisateur déjà pris";
 "createAccount.loading" = "En chargement";
 "createAccount.waitCreateAccountTitle" = "Ajouter un compte";
+"createAccount.RegisterAUsername" = "Enregistrer un nom d'utilisateur";
+"createAccount.ChooseAPassword" = "Choisir un mot de passe";
+"createAccount.PasswordInformation" = "Choisissez un mot de passe pour encrypter votre compte local. Ne l'oubliez pas ou vous perdrez l'accès à votre compte";
+"createAccount.EnableNotifications" = "Autoriser les notifications";
+
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "mot de passe";
+"linkToAccount.passwordPlaceholder" = "Mot de passe";
 "linkToAccount.pinPlaceholder" = "NIP";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Entrer le NIP";

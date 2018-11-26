@@ -1,4 +1,4 @@
-﻿ /*
+ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -62,6 +62,10 @@
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
 "createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.RegisterAUsername" = "Enregistrer un nom d'utilisateur";
+"createAccount.ChooseAPassword" = "Choisir un mot de passe";
+"createAccount.PasswordInformation" = "Choisissez un mot de passe pour encrypter votre compte local. Ne l'oubliez pas ou vous perdrez l'accès à votre compte";
+"createAccount.EnableNotifications" = "Autoriser les notifications";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
