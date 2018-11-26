@@ -1,4 +1,4 @@
-﻿ /*
+ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -40,7 +40,7 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Bienvenue sur ring";
+"welcome.title" = "Bienvenue sur jami";
 "welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
 "welcome.createAccount" = "Créer un compte Ring";

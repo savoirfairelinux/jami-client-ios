@@ -33,8 +33,15 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             self.registerUsernameHeightConstraintConstant = registerUsernameHeightConstraint.constant
         }
     }
+    @IBOutlet weak var registerPasswordHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            self.registerPasswordHeightConstraintConstant = registerPasswordHeightConstraint.constant
+        }
+    }
     @IBOutlet weak var usernameSwitch: UISwitch!
+    @IBOutlet weak var passwordSwitch: UISwitch!
     @IBOutlet weak var registerUsernameView: UIView!
+    @IBOutlet weak var registerPasswordView: UIView!
     @IBOutlet weak var registerUsernameLabel: UILabel!
     @IBOutlet weak var registerUsernameErrorLabel: UILabel!
     @IBOutlet weak var passwordTextField: DesignableTextField!
@@ -47,10 +54,14 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     private let disposeBag = DisposeBag()
     var viewModel: CreateAccountViewModel!
     var registerUsernameHeightConstraintConstant: CGFloat = 0.0
+    var registerPasswordHeightConstraintConstant: CGFloat = 0.0
 
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Style
+        self.createAccountButton.applyGradient(with: [UIColor(hex: 0x1F4971, alpha: 1.0), UIColor(hex: 0x132F50, alpha: 1.0)], gradient: .horizontal)
 
         // L10n
         self.applyL10n()
@@ -136,9 +147,29 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         }).disposed(by: self.disposeBag)
     }
 
+    private func managePasswordSwitch(isOn: Bool) {
+        UIView.animate(withDuration: 0.3, animations: {
+            if isOn {
+                self.registerPasswordHeightConstraint.constant = self.registerPasswordHeightConstraintConstant
+                self.registerPasswordView.alpha = 1.0
+            } else {
+                self.registerPasswordHeightConstraint.constant = 0
+                self.registerPasswordView.alpha = 0.0
+                self.passwordTextField.text = ""
+                self.confirmPasswordTextField.text = ""
+                self.passwordErrorLabel.isHidden = true
+            }
+
+            self.view.layoutIfNeeded()
+        })
+    }
+
     private func bindViewToViewModel() {
         // Bind View Outlets to ViewModel
         self.usernameSwitch.rx.isOn.bind(to: self.viewModel.registerUsername).disposed(by: self.disposeBag)
+        self.passwordSwitch.rx.isOn.subscribe(onNext: { isOn in
+            self.managePasswordSwitch(isOn: isOn)
+            }).disposed(by: self.disposeBag)
         self.usernameTextField.rx.text.orEmpty.throttle(3, scheduler: MainScheduler.instance).distinctUntilChanged().bind(to: self.viewModel.username).disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
         self.confirmPasswordTextField.rx.text.orEmpty.bind(to: self.viewModel.confirmPassword).disposed(by: self.disposeBag)

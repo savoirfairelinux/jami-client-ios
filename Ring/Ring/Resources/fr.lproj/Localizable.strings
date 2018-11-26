@@ -1,4 +1,4 @@
-﻿ /*
+ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -40,7 +40,7 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Bienvenue sur Ring";
+"welcome.title" = "Bienvenue sur jami !";
 "welcome.text" = "Ring est un logiciel libre de communication universelle qui respecte les libertés et la vie privée de ses utilisateurs.";
 "welcome.linkDevice" = "Lier cet appareil à un compte";
 "welcome.createAccount" = "Créer un compte Ring";
@@ -50,10 +50,10 @@
 "createProfile.profileCreated" = "Suivant";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Créer votre compte Ring";
+"createAccount.createAccountFormTitle" = "Créer votre compte jami";
 "createAccount.chooseStrongPassword" = "Pour protéger votre compte Ring, choisissez un mot de passe robuste";
-"createAccount.enterNewUsernamePlaceholder" = "nom d’utilisateur";
-"createAccount.newPasswordPlaceholder" = "mot de passe";
+"createAccount.enterNewUsernamePlaceholder" = "Nom d’utilisateur";
+"createAccount.newPasswordPlaceholder" = "Mot de passe";
 "createAccount.repeatPasswordPlaceholder" = "Confirmer le mot de passe";
 "createAccount.passwordCharactersNumberError" = "Au moins 6 caractères";
 "createAccount.passwordNotMatchingError" = "Les mots de passe ne sont pas identiques";
