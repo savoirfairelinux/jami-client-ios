@@ -52,6 +52,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Style
+        self.createAccountButton.applyGradient(with: [UIColor(hex: 0x1F4971, alpha: 1.0), UIColor(hex: 0x132F50, alpha: 1.0)], gradient: .horizontal)
+
         // L10n
         self.applyL10n()
 
