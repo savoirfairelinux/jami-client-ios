@@ -126,9 +126,9 @@ internal enum L10n {
   internal enum Createaccount {
     /// Choose strong password you will remember to protect your Ring account.
     internal static let chooseStrongPassword = L10n.tr("Localizable", "createAccount.chooseStrongPassword")
-    /// Create your Ring account
+    /// Create your jami account
     internal static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle")
-    /// username
+    /// Username
     internal static let enterNewUsernamePlaceholder = L10n.tr("Localizable", "createAccount.enterNewUsernamePlaceholder")
     /// invalid username
     internal static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername")
@@ -136,13 +136,13 @@ internal enum L10n {
     internal static let loading = L10n.tr("Localizable", "createAccount.loading")
     /// looking for username availability
     internal static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability")
-    /// password
+    /// Password
     internal static let newPasswordPlaceholder = L10n.tr("Localizable", "createAccount.newPasswordPlaceholder")
     /// 6 characters minimum
     internal static let passwordCharactersNumberError = L10n.tr("Localizable", "createAccount.passwordCharactersNumberError")
     /// passwords do not match
     internal static let passwordNotMatchingError = L10n.tr("Localizable", "createAccount.passwordNotMatchingError")
-    /// confirm password
+    /// Confirm password
     internal static let repeatPasswordPlaceholder = L10n.tr("Localizable", "createAccount.repeatPasswordPlaceholder")
     /// username already taken
     internal static let usernameAlreadyTaken = L10n.tr("Localizable", "createAccount.usernameAlreadyTaken")
@@ -246,13 +246,13 @@ internal enum L10n {
   }
 
   internal enum Welcome {
-    /// Create a Ring account
+    /// Create a jami account
     internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount")
     /// Link this device to an account
     internal static let linkDevice = L10n.tr("Localizable", "welcome.linkDevice")
     /// Ring is a free and universal communication platform which preserves the users' privacy and freedoms
     internal static let text = L10n.tr("Localizable", "welcome.text")
-    /// Welcome to Ring
+    /// Welcome to jami !
     internal static let title = L10n.tr("Localizable", "welcome.title")
   }
 }
