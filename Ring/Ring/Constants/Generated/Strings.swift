@@ -252,7 +252,7 @@ internal enum L10n {
     internal static let linkDevice = L10n.tr("Localizable", "welcome.linkDevice")
     /// Ring is a free and universal communication platform which preserves the users' privacy and freedoms
     internal static let text = L10n.tr("Localizable", "welcome.text")
-    /// Welcome to Ring
+    /// Welcome to Ring!
     internal static let title = L10n.tr("Localizable", "welcome.title")
   }
 }
