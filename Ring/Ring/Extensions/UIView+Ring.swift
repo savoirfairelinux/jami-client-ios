@@ -21,11 +21,6 @@
 import Foundation
 import UIKit
 
-private enum GradientAnchor {
-    case start
-    case end
-}
-
 extension UIView {
 
     @IBInspectable
@@ -77,78 +72,58 @@ extension UIView {
         }
     }
 
-    @IBInspectable
-    var gradientStartColor: UIColor {
-
-        get {
-            return self.retrieveGradientColor(for: .start)
-        }
-
-        set {
-            self.applyGradientColor(for: .start, with: newValue)
-        }
-    }
-
-    @IBInspectable
-    var gradientEndColor: UIColor {
-        get {
-            return self.retrieveGradientColor(for: .end)
-        }
-
-        set {
-            self.applyGradientColor(for: .end, with: newValue)
-        }
-    }
-
-    private func applyGradientColor(for anchor: GradientAnchor, with color: UIColor) {
-        if let layer = self.layer.sublayers?[0] as? CAGradientLayer {
-            // reuse the gradient layer that has already been set
-            if anchor == .start {
-                layer.colors = [color.cgColor, self.retrieveGradientColor(for: .end).cgColor]
-            } else {
-                layer.colors = [self.retrieveGradientColor(for: .start).cgColor, color.cgColor]
-            }
-            return
-        }
-
-        let layer = CAGradientLayer()
-        layer.frame = CGRect(origin: .zero, size: self.frame.size)
-        layer.startPoint = CGPoint(x: 0.5, y: 0)
-        layer.endPoint = CGPoint(x: 0.5, y: 1)
-
-        if anchor == .start {
-            layer.colors = [color.cgColor, self.retrieveGradientColor(for: .end).cgColor]
-        } else {
-            layer.colors = [self.retrieveGradientColor(for: .start).cgColor, color.cgColor]
-        }
-        layer.cornerRadius = self.cornerRadius
-
-        self.layer.addSublayer(layer)
-
-    }
-
-    private func retrieveGradientColor(for anchor: GradientAnchor) -> UIColor {
-        if let layer = self.layer.sublayers?[0] as? CAGradientLayer,
-            let colors = layer.colors as? [CGColor] {
-            if anchor == .start && !colors.isEmpty {
-                return UIColor(cgColor: colors[0])
-            }
-
-            if anchor == .end && colors.count >= 1 {
-                return UIColor(cgColor: colors[1])
-            }
-
-            return UIColor.clear
-        }
-
-        return UIColor.clear
-    }
-
     public func convertViewToImage() -> UIImage? {
         UIGraphicsBeginImageContext(self.bounds.size)
         self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
+    }
+
+    func applyGradient(with colours: [UIColor], locations: [NSNumber]? = nil) {
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.locations = locations
+        self.layer.insertSublayer(gradient, at: 0)
+    }
+
+    func applyGradient(with colours: [UIColor], gradient orientation: GradientOrientation) {
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.startPoint = orientation.startPoint
+        gradient.endPoint = orientation.endPoint
+        self.layer.insertSublayer(gradient, at: 0)
+    }
+}
+
+typealias GradientPoints = (startPoint: CGPoint, endPoint: CGPoint)
+
+enum GradientOrientation {
+    case topRightBottomLeft
+    case topLeftBottomRight
+    case horizontal
+    case vertical
+
+    var startPoint: CGPoint {
+        return points.startPoint
+    }
+
+    var endPoint: CGPoint {
+        return points.endPoint
+    }
+
+    var points: GradientPoints {
+        switch self {
+        case .topRightBottomLeft:
+            return (CGPoint(x: 0.0,y: 1.0), CGPoint(x: 1.0,y: 0.0))
+        case .topLeftBottomRight:
+            return (CGPoint(x: 0.0,y: 0.0), CGPoint(x: 1,y: 1))
+        case .horizontal:
+            return (CGPoint(x: 0.0,y: 0.5), CGPoint(x: 1.0,y: 0.5))
+        case .vertical:
+            return (CGPoint(x: 0.0,y: 0.0), CGPoint(x: 0.0,y: 1.0))
+        }
     }
 }

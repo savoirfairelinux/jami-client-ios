@@ -1,7 +1,8 @@
-﻿ /*
+ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Authors: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+            Muret Quentin <quentin.muret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -40,33 +41,38 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Bienvenue sur Ring";
+"welcome.title" = "Bienvenue sur Jami !";
 "welcome.text" = "Ring est un logiciel libre de communication universelle qui respecte les libertés et la vie privée de ses utilisateurs.";
 "welcome.linkDevice" = "Lier cet appareil à un compte";
-"welcome.createAccount" = "Créer un compte Ring";
+"welcome.createAccount" = "Créer un compte Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Passez";
 "createProfile.profileCreated" = "Suivant";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Créer votre compte Ring";
+"createAccount.createAccountFormTitle" = "Créer votre compte";
 "createAccount.chooseStrongPassword" = "Pour protéger votre compte Ring, choisissez un mot de passe robuste";
-"createAccount.enterNewUsernamePlaceholder" = "nom d’utilisateur";
-"createAccount.newPasswordPlaceholder" = "mot de passe";
+"createAccount.enterNewUsernamePlaceholder" = "Nom d’utilisateur";
+"createAccount.newPasswordPlaceholder" = "Mot de passe";
 "createAccount.repeatPasswordPlaceholder" = "Confirmer le mot de passe";
 "createAccount.passwordCharactersNumberError" = "Au moins 6 caractères";
 "createAccount.passwordNotMatchingError" = "Les mots de passe ne sont pas identiques";
-"createAccount.lookingForUsernameAvailability" = "Vérification de la disponibilité du nom d'utilisateur";
+"createAccount.lookingForUsernameAvailability" = "Vérification de la disponibilité…";
 "createAccount.invalidUsername" = "Nom d'utilisateur invalide";
 "createAccount.usernameAlreadyTaken" = "Ce nom d'utilisateur est déjà utilisé";
 "createAccount.loading" = "Chargement";
 "createAccount.waitCreateAccountTitle" = "Ajout du compte";
+"createAccount.RegisterAUsername" = "Enregistrer un nom";
+"createAccount.ChooseAPassword" = "Chiffrer mon compte";
+"createAccount.PasswordInformation" = "Choisissez un mot de passe pour chiffrer votre compte local. Ne l'oubliez pas ou vous ne serez plus en mesure de récupérer votre compte";
+"createAccount.EnableNotifications" = "Notifications";
+"createAccount.Recommended" = "(Recommandé)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Association du compte";
 "linkToAccount.linkButtonTitle" = "Associer l'appareil";
-"linkToAccount.passwordPlaceholder" = "mot de passe";
+"linkToAccount.passwordPlaceholder" = "Mot de passe";
 "linkToAccount.pinPlaceholder" = "NIP";
 "linkToAccount.passwordLabel" = "Entrez le mot de passe";
 "linkToAccount.pinLabel" = "Entrer votre NIP";
