@@ -32,13 +32,18 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var linkDeviceButton: DesignableButton!
     @IBOutlet weak var createAccountButton: DesignableButton!
 
+    // MARK: constraints
+    @IBOutlet weak var ringLogoBottomConstraint: NSLayoutConstraint!
+
     // MARK: members
     private let disposeBag = DisposeBag()
 
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.initialAnimation()
+        self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        self.linkDeviceButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         // Bind ViewModel to View
         self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
         self.viewModel.createAccount.bind(to: self.createAccountButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
@@ -54,10 +59,27 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         }).disposed(by: self.disposeBag)
     }
 
+    func initialAnimation() {
+        DispatchQueue.global(qos: .background).async {
+            sleep(1)
+            DispatchQueue.main.async {
+                self.ringLogoBottomConstraint.constant = -72
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.ringLogoBottomConstraint.constant = -200
+                    self.welcomeTextLabel.alpha = 1
+                    self.createAccountButton.alpha = 1
+                    self.linkDeviceButton.alpha = 1
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
-        self.navigationController?.navigationBar.tintColor = UIColor.ringMain
+        self.navigationController?.navigationBar.tintColor = UIColor.ringSecondary
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
