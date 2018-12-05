@@ -23,6 +23,9 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Style
+        self.skipButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+
         // Bind ViewModel to View
         self.viewModel.skipButtonTitle.asObservable().bind(to: self.skipButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
 
