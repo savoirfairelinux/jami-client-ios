@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af804bb_1d5c711c",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-05T20:28:01Z",
+      "side": 1,
+      "message": "We don\u0027t need this function anymore",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 5
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77e7ace3_d5be4fd1",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-05T20:28:01Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 16
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3cc8dde_6c1e1815",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-05T20:28:01Z",
+      "side": 1,
+      "message": "keep strong reference to self. Consider to use [weak self] in closure",
+      "range": {
+        "startLine": 345,
+        "startChar": 20,
+        "endLine": 345,
+        "endChar": 24
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba256180_612e68e0",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-05T20:28:01Z",
+      "side": 1,
+      "message": "keep strong reference to self. Consider to use [weak self] in closure",
+      "range": {
+        "startLine": 349,
+        "startChar": 28,
+        "endLine": 349,
+        "endChar": 32
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d176e5c_174ce591",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-05T20:28:01Z",
+      "side": 1,
+      "message": "keep strong reference to self. Consider to use [weak self] in closure",
+      "range": {
+        "startLine": 350,
+        "startChar": 28,
+        "endLine": 350,
+        "endChar": 32
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6ba0d24_a93e3fd8",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-05T20:28:01Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 418,
+        "startChar": 8,
+        "endLine": 418,
+        "endChar": 12
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
