@@ -529,16 +529,16 @@ class ConversationViewController: UIViewController,
             self.viewModel.sendMessage(withContent: "👍")
         }).disposed(by: self.disposeBag)
 
-        self.messageAccessoryView.messageTextViewHeight.asObservable().subscribe(onNext: { height in
+        self.messageAccessoryView.messageTextViewHeight.asObservable().subscribe(onNext: { [unowned self] height in
             self.tableView.contentInset.bottom = self.bottomHeight + height - 35
             self.tableView.scrollIndicatorInsets.bottom = self.bottomHeight + height - 35
             self.scrollToBottom(animated: true)
             self.updateBottomOffset()
-        })
+        }).disposed(by: self.disposeBag)
 
-        self.messageAccessoryView.messageTextViewContent.asObservable().subscribe(onNext: { height in
+        self.messageAccessoryView.messageTextViewContent.asObservable().subscribe(onNext: { [unowned self] _ in
             self.messageAccessoryView.editingChanges()
-        })
+        }).disposed(by: self.disposeBag)
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched
