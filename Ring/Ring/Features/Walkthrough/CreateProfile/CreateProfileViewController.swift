@@ -14,6 +14,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
     // MARK: outlets
     @IBOutlet weak var skipButton: DesignableButton!
+    @IBOutlet weak var profileImageViewHeightConstraint: NSLayoutConstraint!
 
     // MARK: members
     private let disposeBag = DisposeBag()
@@ -22,6 +23,25 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.layoutIfNeeded()
+
+        // Style
+        self.skipButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        self.profileImageView.layer.shadowColor = UIColor.gray.cgColor
+        self.profileImageView.layer.shadowOpacity = 0.7
+        self.profileImageView.layer.shadowOffset = CGSize.zero
+        self.profileImageView.layer.shadowRadius = 10
+
+        DispatchQueue.global(qos: .background).async {
+            sleep(1)
+            DispatchQueue.main.async {
+                self.setShadowAnimation()
+            }
+            usleep(400000)
+            DispatchQueue.main.async {
+                self.setShadowAnimation()
+            }
+        }
 
         // Bind ViewModel to View
         self.viewModel.skipButtonTitle.asObservable().bind(to: self.skipButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
@@ -42,6 +62,39 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
             }
             self.viewModel.proceedWithAccountCreationOrDeviceLink()
         }).disposed(by: self.disposeBag)
+    }
+
+    func setShadowAnimation() {
+        let shadow1Animation = CABasicAnimation(keyPath: "shadowOpacity")
+        shadow1Animation.fromValue = 0.7
+        shadow1Animation.toValue = 1
+        shadow1Animation.duration = 0.2
+        let shadow2Animation = CABasicAnimation(keyPath: "shadowOpacity")
+        shadow2Animation.fromValue = 1
+        shadow2Animation.toValue = 0.7
+        shadow2Animation.duration = 0.2
+
+        self.profileImageView.layer.add(shadow1Animation, forKey: shadow1Animation.keyPath)
+
+        DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
+                self.profileImageView.layer.shadowOpacity = 1
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.profileImageViewHeightConstraint.constant = 114
+                    self.view.layoutIfNeeded()
+                })
+            }
+            usleep(200000)
+            DispatchQueue.main.async {
+                self.profileImageView.layer.removeAllAnimations()
+                self.profileImageView.layer.add(shadow2Animation, forKey: shadow2Animation.keyPath)
+                self.profileImageView.layer.shadowOpacity = 0.7
+                UIView.animate(withDuration: 0.2, animations: {
+                self.profileImageViewHeightConstraint.constant = 120
+                self.view.layoutIfNeeded()
+                })
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
