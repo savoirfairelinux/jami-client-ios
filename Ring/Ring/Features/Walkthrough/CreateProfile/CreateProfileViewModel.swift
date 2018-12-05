@@ -30,6 +30,13 @@ class CreateProfileViewModel: Stateable, ViewModel {
     }()
     var profileName = Variable<String>("")
     var profilePhoto = Variable<UIImage?>(nil)
+    fileprivate let videoService: VideoService
+
+    lazy var capturedFrame: Observable<UIImage?> = {
+        return videoService.capturedVideoFrame.asObservable().map({ frame in
+            return frame
+        })
+    }()
 
     lazy var profileExists: Observable<Bool>  = {
 
@@ -60,7 +67,7 @@ class CreateProfileViewModel: Stateable, ViewModel {
     let disposeBag = DisposeBag()
 
     required init (with injectionBag: InjectionBag) {
-
+        self.videoService = injectionBag.videoService
     }
 
     func proceedWithAccountCreationOrDeviceLink() {
