@@ -165,10 +165,20 @@ internal enum L10n {
   }
 
   internal enum CreateProfile {
+    /// Create your avatar
+    internal static let createYourAvatar = L10n.tr("Localizable", "createProfile.createYourAvatar")
+    /// Enter a display name
+    internal static let enterNameLabel = L10n.tr("Localizable", "createProfile.enterNameLabel")
+    /// Enter name
+    internal static let enterNamePlaceholder = L10n.tr("Localizable", "createProfile.enterNamePlaceholder")
     /// Next
     internal static let profileCreated = L10n.tr("Localizable", "createProfile.profileCreated")
     /// Skip
     internal static let skipCreateProfile = L10n.tr("Localizable", "createProfile.skipCreateProfile")
+    /// Your profile will be shared with your contacts. You can change it at any time.
+    internal static let subtitle = L10n.tr("Localizable", "createProfile.subtitle")
+    /// Personalise your profile
+    internal static let title = L10n.tr("Localizable", "createProfile.title")
   }
 
   internal enum DataTransfer {
