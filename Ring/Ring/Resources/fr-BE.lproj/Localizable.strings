@@ -48,6 +48,10 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Next";
+"createProfile.title" = "Créez votre profil";
+"createProfile.enterNameLabel" = "Entrez un nom d'affichage";
+"createProfile.enterNamePlaceholder" = "Entrez un nom";
+"createProfile.enterNameInfoButton" = "Le nom d'affichage correspond au nom qui sera affiché sur les conversations et appels (côté appelant et appelé). Ce dernier pourra être changé à tout moment dans les réglages du compte.";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";

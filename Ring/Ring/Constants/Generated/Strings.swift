@@ -165,10 +165,18 @@ internal enum L10n {
   }
 
   internal enum CreateProfile {
+    /// The display name is what will be displayed in conversations and calls (calling and called side). This can be changed at any time in the account settings.
+    internal static let enterNameInfoButton = L10n.tr("Localizable", "createProfile.enterNameInfoButton")
+    /// Enter a display name
+    internal static let enterNameLabel = L10n.tr("Localizable", "createProfile.enterNameLabel")
+    /// Enter name
+    internal static let enterNamePlaceholder = L10n.tr("Localizable", "createProfile.enterNamePlaceholder")
     /// Next
     internal static let profileCreated = L10n.tr("Localizable", "createProfile.profileCreated")
     /// Skip
     internal static let skipCreateProfile = L10n.tr("Localizable", "createProfile.skipCreateProfile")
+    /// Create your profile
+    internal static let title = L10n.tr("Localizable", "createProfile.title")
   }
 
   internal enum DataTransfer {
