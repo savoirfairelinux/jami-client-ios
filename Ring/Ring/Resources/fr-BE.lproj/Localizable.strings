@@ -48,6 +48,11 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Next";
+"createProfile.title" = "Personnalisez votre profil";
+"createProfile.enterNameLabel" = "Entrez un nom d'affichage";
+"createProfile.enterNamePlaceholder" = "Entrez un nom";
+"createProfile.subtitle" = "Votre profil sera partagé avec vos contacts. Vous pourrez le modifier à tout moment.";
+"createProfile.createYourAvatar" = "Créez votre avatar";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";
