@@ -60,7 +60,6 @@ class CreateProfileViewModel: Stateable, ViewModel {
     let disposeBag = DisposeBag()
 
     required init (with injectionBag: InjectionBag) {
-
     }
 
     func proceedWithAccountCreationOrDeviceLink() {

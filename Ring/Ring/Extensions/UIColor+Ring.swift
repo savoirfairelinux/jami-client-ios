@@ -34,7 +34,7 @@ extension UIColor {
         self.init(red: (hex >> 16) & 0xff, green: (hex >> 8) & 0xff, blue: hex & 0xff, alpha: alpha)
     }
 
-    static let ringMain = UIColor(hex: 0x017CBD, alpha: 1.0) // jami style
+    static let ringMain = UIColor(hex: 0x3F6DA7, alpha: 1.0) // jami style
     static let ringSecondary = UIColor(hex: 0x1F4971, alpha: 1.0) // jami style
     static let ringMainLight = UIColor(red: 0, green: 76, blue: 96, alpha: 1.0)
     static let ringMsgCellEmoji = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
