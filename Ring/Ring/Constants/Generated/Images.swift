@@ -19,6 +19,7 @@
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
   internal static let accountIcon = ImageAsset(name: "account_icon")
+  internal static let addAvatar = ImageAsset(name: "add_avatar")
   internal static let addPerson = ImageAsset(name: "add_person")
   internal static let attachmentIcon = ImageAsset(name: "attachment_icon")
   internal static let audioMuted = ImageAsset(name: "audio_muted")
@@ -40,6 +41,7 @@ internal enum Asset {
   internal static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   internal static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   internal static let icContactPicture = ImageAsset(name: "ic_contact_picture")
+  internal static let infoArrow = ImageAsset(name: "info_arrow")
   internal static let jamiIcon = ImageAsset(name: "jamiIcon")
   internal static let leftArrow = ImageAsset(name: "left_arrow")
   internal static let moreSettings = ImageAsset(name: "more_settings")
