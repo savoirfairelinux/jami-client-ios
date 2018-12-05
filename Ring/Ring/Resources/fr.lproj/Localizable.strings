@@ -48,6 +48,14 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Passez";
 "createProfile.profileCreated" = "Suivant";
+"createProfile.title" = "Personnalisez votre profil";
+"createProfile.enterNameLabel" = "Entrez un nom d'affichage";
+"createProfile.enterNamePlaceholder" = "Entrez un nom";
+"createProfile.subtitle" = "Votre profil sera partagé avec vos contacts. Vous pourrez le modifier à tout moment.";
+"createProfile.createYourAvatar" = "Créez votre avatar";
+
+
+
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Créer votre compte";

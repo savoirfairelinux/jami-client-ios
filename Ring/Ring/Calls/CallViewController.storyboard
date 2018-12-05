@@ -328,7 +328,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_contact_picture" width="256" height="256"/>
+        <image name="ic_contact_picture" width="512" height="512"/>
         <image name="left_arrow" width="138.24000549316406" height="138.24000549316406"/>
     </resources>
 </document>
