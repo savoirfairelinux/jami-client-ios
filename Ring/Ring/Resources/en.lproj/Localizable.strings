@@ -48,6 +48,10 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Next";
+"createProfile.title" = "Create your profile";
+"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNameInfoButton" = "The display name is what will be displayed in conversations and calls (calling and called side). This can be changed at any time in the account settings.";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your account";
