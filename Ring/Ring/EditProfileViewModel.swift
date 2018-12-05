@@ -25,7 +25,7 @@ import Contacts
 class EditProfileViewModel {
 
     let disposeBag = DisposeBag()
-    let defaultImage = Image(named: "ic_contact_picture")
+    let defaultImage = Image(named: "add_avatar")
     var image = Variable<Image?>(nil)
     var profileName = Variable<String>("")
 
