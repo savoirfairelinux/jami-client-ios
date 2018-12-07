@@ -71,7 +71,7 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "password";
+"linkToAccount.passwordPlaceholder" = "Password";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Enter PIN";
