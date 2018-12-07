@@ -70,12 +70,12 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "password";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.linkButtonTitle" = "Associer l'appareil";
+"linkToAccount.passwordPlaceholder" = "Mot de passe";
+"linkToAccount.pinPlaceholder" = "NIP";
+"linkToAccount.passwordLabel" = "Entrez le mot de passe";
+"linkToAccount.pinLabel" = "Entrer le NIP";
+"linkToAccount.explanationPinMessage" = "Pour générer le code PIN, accédez aux paramètres de gestion de compte sur le périphérique contenant le compte que vous souhaitez utiliser. Dans la section \"appareils\", sélectionnez \"Lier un autre appareil à ce compte \". Vous obtiendrez le code PIN nécessaire pour remplir ce formulaire. Le code PIN n'est valide que 10 minutes.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Can't find account";
