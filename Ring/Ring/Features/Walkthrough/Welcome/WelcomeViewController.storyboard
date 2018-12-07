@@ -33,10 +33,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="37.666666666666657" y="566.66666666666663" width="300" height="50"/>
+                                <rect key="frame" x="40" y="566.66666666666663" width="295" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FEf-kf-jCs"/>
-                                    <constraint firstAttribute="width" constant="300" id="epE-7u-SMQ"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="epE-7u-SMQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                 <state key="normal" title="Create a Ring account">
@@ -47,7 +47,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="37.666666666666657" y="636.66666666666663" width="300" height="50"/>
+                                <rect key="frame" x="40" y="636.66666666666663" width="295" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="YW4-Sc-61P"/>
                                 </constraints>
@@ -65,6 +65,7 @@
                             <constraint firstItem="bu0-90-MB5" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="40" id="0hJ-6T-D3J"/>
                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" id="2w4-nZ-VwS"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="30" id="99p-KU-QhW"/>
+                            <constraint firstItem="bu0-90-MB5" firstAttribute="leading" secondItem="hvJ-fJ-PMc" secondAttribute="leading" priority="750" constant="40" id="OTd-qD-as2"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="U37-r7-lNe"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="YLx-WX-rgL"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="cYv-WZ-CCB"/>
@@ -72,6 +73,7 @@
                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="qaX-bX-RjJ"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="uLc-95-Qpb"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="ukg-Rd-bL3"/>
+                            <constraint firstItem="hvJ-fJ-PMc" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" priority="750" constant="40" id="vGg-V2-7OH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hvJ-fJ-PMc"/>
                     </view>
