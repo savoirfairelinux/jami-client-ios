@@ -73,6 +73,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         let device = UIDevice.modelName
         self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
+        self.usernameTextField.becomeFirstResponder()
         self.usernameTextField.tintColor = UIColor.ringSecondary
         self.passwordTextField.tintColor = UIColor.ringSecondary
         self.confirmPasswordTextField.tintColor = UIColor.ringSecondary
@@ -174,20 +175,8 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             })
         }).disposed(by: self.disposeBag)
 
-        // handle Create Account Button state
-        self.viewModel.canAskForAccountCreation.subscribe(onNext: { [weak self] enable in
-            if enable {
-                DispatchQueue.main.async {
-                    self?.createAccountButton.alpha = 1
-                    self?.createAccountButton.isEnabled = true
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.createAccountButton.alpha = 0.6
-                    self?.createAccountButton.isEnabled = false
-                }
-            }
-        }).disposed(by: self.disposeBag)
+        self.viewModel.canAskForAccountCreation.bind(to: self.createAccountButton.rx.isEnabled)
+            .disposed(by: self.disposeBag)
 
         // handle password error
         self.viewModel.passwordValidationState.map { $0.isValidated }

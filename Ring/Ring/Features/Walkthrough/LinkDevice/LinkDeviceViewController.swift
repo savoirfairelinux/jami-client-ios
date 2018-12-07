@@ -16,7 +16,10 @@ import SwiftyBeaver
 class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     // MARK: outlets
+    @IBOutlet weak var linkDeviceTitle: UILabel!
     @IBOutlet weak var linkButton: DesignableButton!
+    @IBOutlet weak var backgroundNavigationBarHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var pinTextField: DesignableTextField!
     @IBOutlet weak var passwordTextField: DesignableTextField!
     @IBOutlet weak var pinInfoButton: UIButton!
@@ -26,6 +29,8 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     // MARK: members
     private let disposeBag = DisposeBag()
     var viewModel: LinkDeviceViewModel!
+    var keyboardDismissTapRecognizer: UITapGestureRecognizer!
+    var isKeyboardOpened: Bool = false
     let popTip = PopTip()
 
     let log = SwiftyBeaver.self
@@ -33,6 +38,14 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Style
+        self.pinTextField.becomeFirstResponder()
+        self.view.layoutIfNeeded()
+        self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
+        self.pinTextField.tintColor = UIColor.ringSecondary
+        self.passwordTextField.tintColor = UIColor.ringSecondary
 
         self.applyL10n()
 
@@ -75,11 +88,53 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         // bind view to view model
         self.pinTextField.rx.text.orEmpty.bind(to: self.viewModel.pin).disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
+
+        // handle keyboard
+        self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
+        keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    }
+
+    func setContentInset() {
+        if !self.isKeyboardOpened {
+            self.containerViewBottomConstraint.constant = -20
+            return
+        }
+        let device = UIDevice.modelName
+        switch device {
+        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+            self.containerViewBottomConstraint.constant = -40
+        default :
+            self.containerViewBottomConstraint.constant = -65
+        }
+    }
+
+    @objc func dismissKeyboard() {
+        self.isKeyboardOpened = false
+        self.becomeFirstResponder()
+        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
+    }
+
+    @objc func keyboardWillAppear(withNotification: NSNotification){
+        self.isKeyboardOpened = true
+        self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
+        self.setContentInset()
+
+    }
+
+    @objc func keyboardWillDisappear(withNotification: NSNotification){
+        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
+        self.setContentInset()
+    }
+
+    override var canBecomeFirstResponder: Bool {
+        return true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     private func applyL10n() {
@@ -88,6 +143,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.passwordLabel.text = L10n.LinkToAccount.passwordLabel
         self.pinTextField.placeholder = L10n.LinkToAccount.pinPlaceholder
         self.passwordTextField.placeholder = L10n.LinkToAccount.passwordPlaceholder
+        self.linkDeviceTitle.text = L10n.LinkToAccount.linkButtonTitle
     }
 
     private func showCreationHUD() {
@@ -118,10 +174,10 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
             popTip.entranceAnimation = .scale
             popTip.bubbleColor = UIColor.ringSecondary
             popTip.textColor = UIColor.white
-            let offset: CGFloat = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) ? 60.0 : 80.0
+            let offset: CGFloat = 20.0
             popTip.offset = offset - scrollView.contentOffset.y
             popTip.show(text: L10n.LinkToAccount.explanationPinMessage, direction: .down,
-                        maxWidth: 250, in: self.view, from: pinInfoButton.frame)
+                        maxWidth: 255, in: self.view, from: pinInfoButton.frame)
         }
     }
 }
