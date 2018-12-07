@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "96b0d259_fd1e637c",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T17:25:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7af804bb_1d5c711c",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 5
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77e7ace3_d5be4fd1",
         "filename": "Ring/Ring/Calls/CallViewController.swift",
         "patchSetId": 29
@@ -45,6 +69,30 @@
       "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6faa2a5_df112f53",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T17:25:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77e7ace3_d5be4fd1",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 16
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1dc0c868_f6537f40",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T17:25:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3cc8dde_6c1e1815",
+      "range": {
+        "startLine": 345,
+        "startChar": 20,
+        "endLine": 345,
+        "endChar": 24
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba256180_612e68e0",
         "filename": "Ring/Ring/Calls/CallViewController.swift",
         "patchSetId": 29
@@ -91,6 +163,30 @@
       "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bffa82a_df28665f",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T17:25:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba256180_612e68e0",
+      "range": {
+        "startLine": 349,
+        "startChar": 28,
+        "endLine": 349,
+        "endChar": 32
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "b92c2a3d_f9f02b1c",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T17:25:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d176e5c_174ce591",
+      "range": {
+        "startLine": 350,
+        "startChar": 28,
+        "endLine": 350,
+        "endChar": 32
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6ba0d24_a93e3fd8",
         "filename": "Ring/Ring/Calls/CallViewController.swift",
         "patchSetId": 29
@@ -137,6 +257,30 @@
       "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e6e8db6_77b6469a",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T17:25:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6ba0d24_a93e3fd8",
+      "range": {
+        "startLine": 418,
+        "startChar": 8,
+        "endLine": 418,
+        "endChar": 12
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
