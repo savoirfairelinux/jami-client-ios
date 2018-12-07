@@ -16,6 +16,7 @@ import SwiftyBeaver
 class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     // MARK: outlets
+    @IBOutlet weak var linkDeviceTitle: UILabel!
     @IBOutlet weak var linkButton: DesignableButton!
     @IBOutlet weak var pinTextField: DesignableTextField!
     @IBOutlet weak var passwordTextField: DesignableTextField!
@@ -33,6 +34,10 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Style
+        self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+
 
         self.applyL10n()
 
@@ -88,6 +93,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.passwordLabel.text = L10n.Linktoaccount.passwordLabel
         self.pinTextField.placeholder = L10n.Linktoaccount.pinPlaceholder
         self.passwordTextField.placeholder = L10n.Linktoaccount.passwordPlaceholder
+        self.linkDeviceTitle.text = L10n.Linktoaccount.linkButtonTitle
     }
 
     private func showCreationHUD() {
