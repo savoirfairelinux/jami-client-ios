@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1faf25ef_b5a3cf40",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T18:55:26Z",
+      "side": 1,
+      "message": "fix in the patch 10490 (call view: call view: add the possibility to hide the video thumbnail by swiped or tapped on it)",
+      "parentUuid": "96b0d259_fd1e637c",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 5
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77e7ace3_d5be4fd1",
         "filename": "Ring/Ring/Calls/CallViewController.swift",
         "patchSetId": 29
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "77e7ace3_d5be4fd1",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 16
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d6ee8c8_cf9f9ec5",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T18:55:26Z",
+      "side": 1,
+      "message": "fix in the patch 10490 (call view: call view: add the possibility to hide the video thumbnail by swiped or tapped on it)",
+      "parentUuid": "e6faa2a5_df112f53",
       "range": {
         "startLine": 130,
         "startChar": 8,
@@ -143,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "647fcc99_abe421bb",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T18:55:26Z",
+      "side": 1,
+      "message": "fix in the patch 10490 (call view: call view: add the possibility to hide the video thumbnail by swiped or tapped on it)",
+      "parentUuid": "1dc0c868_f6537f40",
+      "range": {
+        "startLine": 345,
+        "startChar": 20,
+        "endLine": 345,
+        "endChar": 24
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba256180_612e68e0",
         "filename": "Ring/Ring/Calls/CallViewController.swift",
         "patchSetId": 29
@@ -178,6 +250,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "ba256180_612e68e0",
+      "range": {
+        "startLine": 349,
+        "startChar": 28,
+        "endLine": 349,
+        "endChar": 32
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fa93db7_6d9e2852",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T18:55:26Z",
+      "side": 1,
+      "message": "fix in the patch 10490 (call view: call view: add the possibility to hide the video thumbnail by swiped or tapped on it)",
+      "parentUuid": "1bffa82a_df28665f",
       "range": {
         "startLine": 349,
         "startChar": 28,
@@ -237,6 +333,30 @@
     },
     {
       "key": {
+        "uuid": "8b48b236_54529f7d",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T18:55:26Z",
+      "side": 1,
+      "message": "fix in the patch 10490 (call view: call view: add the possibility to hide the video thumbnail by swiped or tapped on it)",
+      "parentUuid": "b92c2a3d_f9f02b1c",
+      "range": {
+        "startLine": 350,
+        "startChar": 28,
+        "endLine": 350,
+        "endChar": 32
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6ba0d24_a93e3fd8",
         "filename": "Ring/Ring/Calls/CallViewController.swift",
         "patchSetId": 29
@@ -272,6 +392,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "f6ba0d24_a93e3fd8",
+      "range": {
+        "startLine": 418,
+        "startChar": 8,
+        "endLine": 418,
+        "endChar": 12
+      },
+      "revId": "81985892cb28800f962bb824299c253e8f7e5ccf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55c703fd_0edb6988",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 29
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 607
+      },
+      "writtenOn": "2018-12-07T18:55:26Z",
+      "side": 1,
+      "message": "fix in the patch 10490 (call view: call view: add the possibility to hide the video thumbnail by swiped or tapped on it)",
+      "parentUuid": "1e6e8db6_77b6469a",
       "range": {
         "startLine": 418,
         "startChar": 8,
