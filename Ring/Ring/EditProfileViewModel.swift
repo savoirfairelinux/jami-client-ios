@@ -25,8 +25,8 @@ import Contacts
 class EditProfileViewModel {
 
     let disposeBag = DisposeBag()
-    let defaultImage = Image(named: "ic_contact_picture")
-    var image = Variable<Image?>(nil)
+    let defaultImage = UIImage(named: "ic_contact_picture")
+    var image = Variable<UIImage?>(nil)
     var profileName = Variable<String>("")
 
     init() {
@@ -52,7 +52,7 @@ class EditProfileViewModel {
 
     }
 
-    func updateImage(_ image: Image) {
+    func updateImage(_ image: UIImage) {
         self.image.value = image
         self.saveProfile()
     }

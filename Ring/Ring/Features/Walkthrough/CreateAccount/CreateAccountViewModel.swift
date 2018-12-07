@@ -148,11 +148,11 @@ class CreateAccountViewModel: Stateable, ViewModel {
     private let disposeBag = DisposeBag()
 
     // MARK: L10n
-    let createAccountTitle  = L10n.Createaccount.createAccountFormTitle
+    let createAccountTitle  = L10n.CreateAccount.createAccountFormTitle
     let createAccountButton = L10n.Welcome.createAccount
-    let usernameTitle = L10n.Createaccount.enterNewUsernamePlaceholder
-    let passwordTitle = L10n.Createaccount.newPasswordPlaceholder
-    let confirmPasswordTitle = L10n.Createaccount.repeatPasswordPlaceholder
+    let usernameTitle = L10n.CreateAccount.enterNewUsernamePlaceholder
+    let passwordTitle = L10n.CreateAccount.newPasswordPlaceholder
+    let confirmPasswordTitle = L10n.CreateAccount.repeatPasswordPlaceholder
 
     // MARK: - Low level services
     private let accountService: AccountsService
@@ -175,11 +175,11 @@ class CreateAccountViewModel: Stateable, ViewModel {
             }
 
             if password.characters.count < 6 {
-                return .error(message: L10n.Createaccount.passwordCharactersNumberError)
+                return .error(message: L10n.CreateAccount.passwordCharactersNumberError)
             }
 
             if password != confirmPassword {
-                return .error(message: L10n.Createaccount.passwordNotMatchingError)
+                return .error(message: L10n.CreateAccount.passwordNotMatchingError)
             }
 
             return .validated
@@ -226,11 +226,11 @@ class CreateAccountViewModel: Stateable, ViewModel {
         self.nameService.usernameValidationStatus.asObservable().subscribe(onNext: { [weak self] (status) in
             switch status {
             case .lookingUp:
-                self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.Createaccount.lookingForUsernameAvailability)
+                self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability)
             case .invalid:
-                self?.usernameValidationState.value = .invalid(message: L10n.Createaccount.invalidUsername)
+                self?.usernameValidationState.value = .invalid(message: L10n.CreateAccount.invalidUsername)
             case .alreadyTaken:
-                self?.usernameValidationState.value = .unavailable(message: L10n.Createaccount.usernameAlreadyTaken)
+                self?.usernameValidationState.value = .unavailable(message: L10n.CreateAccount.usernameAlreadyTaken)
             default:
                 self?.usernameValidationState.value = .available
             }

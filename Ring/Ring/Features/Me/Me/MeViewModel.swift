@@ -129,12 +129,12 @@ class MeViewModel: ViewModel, Stateable {
     lazy var accountCredentials: Observable<SettingsSection> = {
         return Observable
             .combineLatest(userName.startWith(""), ringId.startWith("")) { (name, ringID) in
-            var items: [SettingsSection.SectionRow] =  [.sectionHeader(title: L10n.Accountpage.credentialsHeader),
+                var items: [SettingsSection.SectionRow] =  [.sectionHeader(title: L10n.AccountPage.credentialsHeader),
                                                         .ordinary(label: "ringID: " + ringID)]
             if !name.isEmpty {
-                items.append(.ordinary(label: L10n.Accountpage.username + " " + name))
+                items.append(.ordinary(label: L10n.AccountPage.username + " " + name))
             } else {
-                items.append(.ordinary(label: L10n.Accountpage.usernameNotRegistered))
+                items.append(.ordinary(label: L10n.AccountPage.usernameNotRegistered))
             }
             return SettingsSection
                 .credentials(items: items)
@@ -147,7 +147,7 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var accountSettings: Observable<SettingsSection> = {
         return Observable
-            .just(.accountSettings( items: [.sectionHeader(title: L10n.Accountpage.settingsHeader),
+            .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.settingsHeader),
                                             .blockedList, .proxy, .notifications]))
     }()
 
@@ -170,7 +170,7 @@ class MeViewModel: ViewModel, Stateable {
                     }
                 }
                 if rows != nil {
-                    rows?.insert(.sectionHeader(title: L10n.Accountpage.devicesListHeader), at: 0)
+                    rows?.insert(.sectionHeader(title: L10n.AccountPage.devicesListHeader), at: 0)
                     let devicesSection: SettingsSection = .linkedDevices(items: rows!)
                     return devicesSection
                 }

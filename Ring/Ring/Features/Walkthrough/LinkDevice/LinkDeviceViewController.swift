@@ -83,15 +83,15 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     }
 
     private func applyL10n() {
-        self.linkButton.setTitle(L10n.Linktoaccount.linkButtonTitle, for: .normal)
-        self.pinLabel.text = L10n.Linktoaccount.pinLabel
-        self.passwordLabel.text = L10n.Linktoaccount.passwordLabel
-        self.pinTextField.placeholder = L10n.Linktoaccount.pinPlaceholder
-        self.passwordTextField.placeholder = L10n.Linktoaccount.passwordPlaceholder
+        self.linkButton.setTitle(L10n.LinkToAccount.linkButtonTitle, for: .normal)
+        self.pinLabel.text = L10n.LinkToAccount.pinLabel
+        self.passwordLabel.text = L10n.LinkToAccount.passwordLabel
+        self.pinTextField.placeholder = L10n.LinkToAccount.pinPlaceholder
+        self.passwordTextField.placeholder = L10n.LinkToAccount.passwordPlaceholder
     }
 
     private func showCreationHUD() {
-        HUD.show(.labeledProgress(title: L10n.Linktoaccount.waitLinkToAccountTitle, subtitle: nil))
+        HUD.show(.labeledProgress(title: L10n.LinkToAccount.waitLinkToAccountTitle, subtitle: nil))
     }
 
     private func showLinkedSuccess() {
@@ -120,7 +120,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
             popTip.textColor = UIColor.white
             let offset: CGFloat = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) ? 60.0 : 80.0
             popTip.offset = offset - scrollView.contentOffset.y
-            popTip.show(text: L10n.Linktoaccount.explanationPinMessage, direction: .down,
+            popTip.show(text: L10n.LinkToAccount.explanationPinMessage, direction: .down,
                         maxWidth: 250, in: self.view, from: pinInfoButton.frame)
         }
     }

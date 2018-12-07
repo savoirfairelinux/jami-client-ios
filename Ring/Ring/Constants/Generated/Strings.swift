@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
@@ -5,10 +6,13 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// MARK: - Strings
+
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
 
-  internal enum Accountpage {
+  internal enum AccountPage {
     /// Block List
     internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
     /// Account Details
@@ -110,7 +114,7 @@ internal enum L10n {
     internal static let unknown = L10n.tr("Localizable", "calls.unknown")
   }
 
-  internal enum Contactpage {
+  internal enum ContactPage {
     /// Block Contact
     internal static let blockContact = L10n.tr("Localizable", "contactPage.blockContact")
     /// Clear Chat
@@ -123,7 +127,7 @@ internal enum L10n {
     internal static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall")
   }
 
-  internal enum Createaccount {
+  internal enum CreateAccount {
     /// Choose strong password you will remember to protect your Ring account.
     internal static let chooseStrongPassword = L10n.tr("Localizable", "createAccount.chooseStrongPassword")
     /// Create your Ring account
@@ -150,14 +154,14 @@ internal enum L10n {
     internal static let waitCreateAccountTitle = L10n.tr("Localizable", "createAccount.waitCreateAccountTitle")
   }
 
-  internal enum Createprofile {
+  internal enum CreateProfile {
     /// Next
     internal static let profileCreated = L10n.tr("Localizable", "createProfile.profileCreated")
     /// Skip
     internal static let skipCreateProfile = L10n.tr("Localizable", "createProfile.skipCreateProfile")
   }
 
-  internal enum Datatransfer {
+  internal enum DataTransfer {
     /// Accept
     internal static let readableStatusAccept = L10n.tr("Localizable", "dataTransfer.readableStatusAccept")
     /// Pending…
@@ -189,7 +193,7 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "global.ok")
   }
 
-  internal enum Linkdevice {
+  internal enum LinkDevice {
     /// An error occured during the export
     internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError")
     /// To complete the process, you need to open Ring on the new device and choose the option "Link this device to an account." Your pin is valid for 10 minutes
@@ -204,7 +208,7 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "linkDevice.title")
   }
 
-  internal enum Linktoaccount {
+  internal enum LinkToAccount {
     /// To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
     internal static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage")
     /// Link device
@@ -256,7 +260,10 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "welcome.title")
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name
+
+// MARK: - Implementation Details
 
 extension L10n {
   fileprivate static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {

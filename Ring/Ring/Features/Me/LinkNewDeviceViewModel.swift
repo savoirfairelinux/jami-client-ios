@@ -36,11 +36,11 @@ enum PinError {
     var description: String {
         switch self {
         case .passwordError:
-            return L10n.Linkdevice.passwordError
+            return L10n.LinkDevice.passwordError
         case .networkError:
-            return L10n.Linkdevice.networkError
+            return L10n.LinkDevice.networkError
         case .defaultError:
-            return L10n.Linkdevice.defaultError
+            return L10n.LinkDevice.defaultError
         }
     }
 }
@@ -89,8 +89,8 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
     let disposeBag = DisposeBag()
 
     // MARK: L10n
-    let linkDeviceTitleTitle  = L10n.Linkdevice.title
-    let explanationMessage = L10n.Linkdevice.explanationMessage
+    let linkDeviceTitleTitle  = L10n.LinkDevice.title
+    let explanationMessage = L10n.LinkDevice.explanationMessage
 
     required init(with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService

@@ -155,7 +155,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     private func showAccountCreationInProgress() {
-        HUD.show(.labeledProgress(title: L10n.Createaccount.waitCreateAccountTitle, subtitle: nil))
+        HUD.show(.labeledProgress(title: L10n.CreateAccount.waitCreateAccountTitle, subtitle: nil))
     }
 
     private func showAccountCreationSuccess() {

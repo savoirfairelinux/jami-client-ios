@@ -44,9 +44,9 @@ class ContactViewModel: ViewModel, Stateable {
     var tableSection = Observable<[SectionModel<String, ContactActions>]>
         .just([SectionModel(model: "ProfileInfoCell",
                             items:
-            [ ContactActions(title: L10n.Contactpage.startAudioCall, image: Asset.callButton),
-              ContactActions(title: L10n.Contactpage.startVideoCall, image: Asset.videoRunning),
-              ContactActions(title: L10n.Contactpage.sendMessage, image: Asset.conversationIcon)])])
+            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
+              ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
+              ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon)])])
     var conversation: ConversationModel! {
         didSet {
             if let profile = conversation.participantProfile, let alias = profile.alias, !alias.isEmpty {
@@ -77,11 +77,11 @@ class ContactViewModel: ViewModel, Stateable {
                 self.tableSection = Observable<[SectionModel<String, ContactActions>]>
                     .just([SectionModel(model: "ProfileInfoCell",
                                         items:
-                        [ ContactActions(title: L10n.Contactpage.startAudioCall, image: Asset.callButton),
-                          ContactActions(title: L10n.Contactpage.startVideoCall, image: Asset.videoRunning),
-                          ContactActions(title: L10n.Contactpage.sendMessage, image: Asset.conversationIcon),
-                          ContactActions(title: L10n.Contactpage.clearConversation, image: Asset.clearConversation),
-                          ContactActions(title: L10n.Contactpage.blockContact, image: Asset.blockIcon)])])
+                        [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
+                          ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
+                          ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon),
+                          ContactActions(title: L10n.ContactPage.clearConversation, image: Asset.clearConversation),
+                          ContactActions(title: L10n.ContactPage.blockContact, image: Asset.blockIcon)])])
             }
             self.contactService
                 .getContactRequestVCard(forContactWithRingId: conversation.recipientRingId)
