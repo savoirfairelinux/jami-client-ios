@@ -221,7 +221,7 @@ internal enum L10n {
     internal static let linkButtonTitle = L10n.tr("Localizable", "linkToAccount.linkButtonTitle")
     /// Enter Password
     internal static let passwordLabel = L10n.tr("Localizable", "linkToAccount.passwordLabel")
-    /// password
+    /// Password
     internal static let passwordPlaceholder = L10n.tr("Localizable", "linkToAccount.passwordPlaceholder")
     /// Enter PIN
     internal static let pinLabel = L10n.tr("Localizable", "linkToAccount.pinLabel")
