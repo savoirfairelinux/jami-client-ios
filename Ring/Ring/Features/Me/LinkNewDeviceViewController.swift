@@ -59,7 +59,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     private func showProgress() {
-        HUD.show(.labeledProgress(title: L10n.Linkdevice.hudMessage, subtitle: nil))
+        HUD.show(.labeledProgress(title: L10n.LinkDevice.hudMessage, subtitle: nil))
     }
     private func hideHud() {
         HUD.hide(animated: false)
@@ -94,7 +94,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
 
         alert.addTextField { (textField) in
             textField.isSecureTextEntry = true
-            textField.placeholder = L10n.Linktoaccount.passwordLabel
+            textField.placeholder = L10n.LinkToAccount.passwordLabel
         }
         self.present(alert, animated: true, completion: nil)
     }

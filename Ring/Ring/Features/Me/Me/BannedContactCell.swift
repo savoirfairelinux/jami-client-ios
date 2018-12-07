@@ -54,6 +54,6 @@ class BannedContactCell: UITableViewCell, NibReusable {
             self.userNameLabel.text = item.contact.ringId
         }
 
-        self.unblockButton.titleLabel?.text = L10n.Accountpage.unblockContact
+        self.unblockButton.titleLabel?.text = L10n.AccountPage.unblockContact
     }
 }

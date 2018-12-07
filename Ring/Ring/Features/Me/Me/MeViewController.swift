@@ -221,8 +221,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .proxy:
                     let cell = tableView.dequeueReusableCell(for: indexPath,
                                                              cellType: ProxyCell.self)
-                    cell.proxyAddrsss.placeholder = L10n.Accountpage.proxyPaceholder
-                    cell.enableProxyLabel.text = L10n.Accountpage.enableProxy
+                    cell.proxyAddrsss.placeholder = L10n.AccountPage.proxyPaceholder
+                    cell.enableProxyLabel.text = L10n.AccountPage.enableProxy
                     cell.proxyAddrsss.enablesReturnKeyAutomatically = true
                     self.viewModel.proxyEnabled.asDriver()
                         .drive(cell.switchProxy.rx.isOn)
@@ -257,7 +257,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .blockedList:
                     let cell = tableView.dequeueReusableCell(for: indexPath,
                     cellType: BlockContactsCell.self)
-                    cell.label.text = L10n.Accountpage.blockedContacts
+                    cell.label.text = L10n.AccountPage.blockedContacts
                     return cell
 
                 case .sectionHeader(let title):
@@ -276,7 +276,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let cell = tableView.dequeueReusableCell(for: indexPath,
                                                              cellType: NotificationCell.self)
                     cell.selectionStyle = .none
-                    cell.enableNotificationsLabel.text = L10n.Accountpage.enableNotifications
+                    cell.enableNotificationsLabel.text = L10n.AccountPage.enableNotifications
                     self.viewModel.notificationsEnabled.asDriver()
                         .drive(cell.enableNotificationsSwitch.rx.value)
                         .disposed(by: cell.disposeBag)
@@ -301,8 +301,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     func proxyDisabledAlert() {
-        let alert = UIAlertController(title: L10n.Accountpage.proxyDisabledAlertTitle,
-                                      message: L10n.Accountpage.proxyDisabledAlertBody,
+        let alert = UIAlertController(title: L10n.AccountPage.proxyDisabledAlertTitle,
+                                      message: L10n.AccountPage.proxyDisabledAlertBody,
                                       preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Global.ok, style: .cancel) { [weak self]_ in
             self?.viewModel.notificationsEnabled.value = false
@@ -325,7 +325,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     func askProxyAddressAlert() {
-        let alert = UIAlertController(title: L10n.Accountpage.proxyAddressAlert,
+        let alert = UIAlertController(title: L10n.AccountPage.proxyAddressAlert,
                                       message: nil,
                                       preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
@@ -333,7 +333,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             self?.viewModel.proxyEnabled.value = false
             alert.dismiss(animated: true, completion: nil)
         }
-        let actionConfirm = UIAlertAction(title: L10n.Accountpage.saveProxyAddress,
+        let actionConfirm = UIAlertAction(title: L10n.AccountPage.saveProxyAddress,
                                           style: .default) { [weak self] _ in
             if let textFields = alert.textFields, let text = textFields[0].text, !text.isEmpty {
                 self?.viewModel.changeProxyAvailability(enable: true, proxyAddress: text)
@@ -344,7 +344,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         alert.addAction(actionConfirm)
 
         alert.addTextField { [weak self] (textField) in
-            textField.placeholder = L10n.Accountpage.proxyPaceholder
+            textField.placeholder = L10n.AccountPage.proxyPaceholder
             textField.text = self?.viewModel.proxyAddress.value
         }
 

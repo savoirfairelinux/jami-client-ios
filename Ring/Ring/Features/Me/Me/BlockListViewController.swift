@@ -35,7 +35,7 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
         super.viewDidLoad()
 
         self.configureRingNavigationBar()
-        self.navigationItem.title = L10n.Accountpage.blockedContacts
+        self.navigationItem.title = L10n.AccountPage.blockedContacts
     }
 
     override func viewWillAppear(_ animated: Bool) {
