@@ -32,7 +32,7 @@
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Search Result";
 "smartlist.conversations" = "Conversations";
-"smartlist.searching" = "Searching...";
+"smartlist.searching" = "Searching…";
 "smartlist.noResults" = "No results";
 "smartlist.noNetworkConnectivity" = "No network connectivity";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
@@ -41,7 +41,7 @@
 
 //Welcome Screen
 "welcome.title" = "Welcome to Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Ring is a free and universal communication platform which preserves user privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
 "welcome.createAccount" = "Create a Ring account";
 
@@ -51,13 +51,13 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your Ring account";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
+"createAccount.chooseStrongPassword" = "Choose a strong password you will remember to protect your Ring account.";
 "createAccount.enterNewUsernamePlaceholder" = "username";
 "createAccount.newPasswordPlaceholder" = "password";
 "createAccount.repeatPasswordPlaceholder" = "confirm password";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
+"createAccount.lookingForUsernameAvailability" = "looking up username availability";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
@@ -74,7 +74,7 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Can't find account";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that the provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
 "alerts.accountNoNetworkTitle" = "Can't connect to the network";
 "alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
@@ -84,9 +84,9 @@
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.profileCancelPhoto" = "Cancel";
 "alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.dbFailedTitle" = "An error occured when launching Ring";
+"alerts.dbFailedMessage" = "Please close the app and try to open it again";
+"alerts.confirmBlockContact" = "Are you sure you want to block this contact? All conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
@@ -131,7 +131,7 @@
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "An error occured during the export";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your PIN is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";
 
 //Contact Page
