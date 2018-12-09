@@ -90,14 +90,14 @@ do
     HOST=$ARCH-apple-darwin_ios
     IOS_TARGET_PLATFORM="iPhoneSimulator"
   fi
-  export IOS_TARGET_PLATFORM
+  #export IOS_TARGET_PLATFORM
 
   SDKROOT=`xcode-select -print-path`/Platforms/${IOS_TARGET_PLATFORM}.platform/Developer/SDKs/${IOS_TARGET_PLATFORM}${SDK_VERSION}.sdk
 
   SDK="`echo "print '${IOS_TARGET_PLATFORM}'.lower()" | python`"
 
-  CC="xcrun -sdk $SDK clang"
-  CXX="xcrun -sdk $SDK clang++"
+  CC="xcrun --sdk $SDK clang"
+  CXX="xcrun --sdk $SDK clang++"
 
   SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --enable-ffmpeg
 
