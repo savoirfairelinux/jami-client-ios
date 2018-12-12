@@ -1,7 +1,8 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -53,6 +54,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         UIApplication.shared.statusBarStyle = .default
         self.setupTableView()
         self.setupBindings()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.jamiMain]
     }
 
     func setupTableView() {

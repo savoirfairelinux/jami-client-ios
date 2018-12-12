@@ -1,7 +1,8 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -126,7 +127,7 @@ extension UIViewController {
     }
 
     func configureRingNavigationBar() {
-        self.navigationController?.navigationBar.barTintColor = UIColor.ringNavigationBar
+        self.navigationController?.navigationBar.barTintColor = UIColor.jamiNavigationBar
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
         self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 2.5)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.2
@@ -134,8 +135,8 @@ extension UIViewController {
         self.navigationController?.navigationBar.layer.masksToBounds = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        let textAttributes = [NSAttributedStringKey.foregroundColor: UIColor.ringMain]
+        let textAttributes = [NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
-        self.navigationController?.navigationBar.tintColor = UIColor.ringMain
+        self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
     }
 }

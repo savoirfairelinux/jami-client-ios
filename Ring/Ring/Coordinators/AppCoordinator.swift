@@ -1,8 +1,9 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -155,7 +156,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         let conversationsCoordinator = ConversationsCoordinator(with: self.injectionBag)
         let contactRequestsCoordinator = ContactRequestsCoordinator(with: self.injectionBag)
         let meCoordinator = MeCoordinator(with: self.injectionBag)
-        self.tabBarViewController.tabBar.tintColor = UIColor.ringMain
+        self.tabBarViewController.tabBar.tintColor = UIColor.jamiMain
 
         self.tabBarViewController.viewControllers = [conversationsCoordinator.rootViewController,
                                                      contactRequestsCoordinator.rootViewController,

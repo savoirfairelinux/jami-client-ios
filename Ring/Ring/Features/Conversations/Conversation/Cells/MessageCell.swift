@@ -1,8 +1,9 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -142,7 +143,7 @@ class MessageCell: UITableViewCell, NibReusable {
 
         // setup the label
         self.timeLabel.text = item.timeStringShown
-        self.timeLabel.textColor = UIColor.ringMsgCellTimeText
+        self.timeLabel.textColor = UIColor.jamiMsgCellTimeText
         self.timeLabel.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.medium)
 
         // show the time
@@ -161,15 +162,15 @@ class MessageCell: UITableViewCell, NibReusable {
         var bubbleColor: UIColor
         if item.isTransfer {
             if item.content.containsOnlyEmoji {
-                bubbleColor = UIColor.ringMsgCellEmoji
+                bubbleColor = UIColor.jamiMsgCellEmoji
             } else {
-                bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+                bubbleColor = type == .received ? UIColor.jamiMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
             }
         } else {
             if item.content.containsOnlyEmoji {
-                bubbleColor = UIColor.ringMsgCellEmoji
+                bubbleColor = UIColor.jamiMsgCellEmoji
             } else {
-                bubbleColor = type == .received ? UIColor.ringMsgCellReceived : UIColor.ringMsgCellSent
+                bubbleColor = type == .received ? UIColor.jamiMsgCellReceived : UIColor.jamiMsgCellSent
             }
         }
 
@@ -252,8 +253,8 @@ class MessageCell: UITableViewCell, NibReusable {
                            cellForRowAt indexPath: IndexPath) {
 
         self.backgroundColor = UIColor.clear
-        self.bubbleViewMask?.backgroundColor = UIColor.ringMsgBackground
-        self.transferImageView.backgroundColor = UIColor.ringMsgBackground
+        self.bubbleViewMask?.backgroundColor = UIColor.jamiMsgBackground
+        self.transferImageView.backgroundColor = UIColor.jamiMsgBackground
         buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 999.0)
         guard let item = items?[indexPath.row] else {
             return
@@ -266,7 +267,7 @@ class MessageCell: UITableViewCell, NibReusable {
         self.formatCellTimeLabel(item)
 
         if item.bubblePosition() == .generated {
-            self.bubble.backgroundColor = UIColor.ringMsgCellReceived
+            self.bubble.backgroundColor = UIColor.jamiMsgCellReceived
             self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 10)
             if indexPath.row == 0 {
                 self.messageLabelMarginConstraint.constant = 4
@@ -279,7 +280,7 @@ class MessageCell: UITableViewCell, NibReusable {
         } else if item.isTransfer {
             self.messageLabel.lineBreakMode = .byTruncatingMiddle
             let type = item.bubblePosition()
-            self.bubble.backgroundColor = type == .received ? UIColor.ringMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+            self.bubble.backgroundColor = type == .received ? UIColor.jamiMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
             if indexPath.row == 0 {
                 self.messageLabelMarginConstraint.constant = 4
                 self.bubbleTopConstraint.constant = 36
@@ -290,10 +291,10 @@ class MessageCell: UITableViewCell, NibReusable {
             if item.bubblePosition() == .received {
                 self.acceptButton?.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
                 self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
-                self.progressBar.tintColor = UIColor.ringMain
+                self.progressBar.tintColor = UIColor.jamiMain
             } else if item.bubblePosition() == .sent {
                 self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
-                self.progressBar.tintColor = UIColor.ringMain.lighten(byPercentage: 0.2)
+                self.progressBar.tintColor = UIColor.jamiMain.lighten(byPercentage: 0.2)
             }
 
             if item.shouldDisplayTransferedImage {
@@ -315,9 +316,9 @@ class MessageCell: UITableViewCell, NibReusable {
         if item.bubblePosition() == .sent {
             // When the message contains only emoji
             if item.content.containsOnlyEmoji {
-                self.bubble.backgroundColor = UIColor.ringMsgCellEmoji
+                self.bubble.backgroundColor = UIColor.jamiMsgCellEmoji
             } else {
-                self.bubble.backgroundColor = UIColor.ringMsgCellSent
+                self.bubble.backgroundColor = UIColor.jamiMsgCellSent
             }
             if item.isTransfer {
                 // outgoing transfer
@@ -337,12 +338,12 @@ class MessageCell: UITableViewCell, NibReusable {
         } else if item.bubblePosition() == .received {
             // When the message contains only emoji
             if item.content.containsOnlyEmoji {
-                self.bubble.backgroundColor = UIColor.ringMsgCellEmoji
+                self.bubble.backgroundColor = UIColor.jamiMsgCellEmoji
                 if (self.avatarBotomAlignConstraint != nil) {
                     self.avatarBotomAlignConstraint.constant = -14
                 }
             } else {
-                self.bubble.backgroundColor = UIColor.ringMsgCellReceived
+                self.bubble.backgroundColor = UIColor.jamiMsgCellReceived
                 if (self.avatarBotomAlignConstraint != nil) {
                     self.avatarBotomAlignConstraint.constant = -1
                 }
