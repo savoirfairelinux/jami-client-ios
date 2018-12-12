@@ -41,7 +41,7 @@
 
 //Welcome Screen
 "welcome.title" = "Bienvenue sur Jami !";
-"welcome.text" = "Ring est une plateforme de communication universelle qui préserve la vie privée et les libertés des utilisateurs";
+"welcome.text" = "Jami est une plateforme de communication universelle qui préserve la vie privée et les libertés des utilisateurs";
 "welcome.linkDevice" = "Associer cet appareil à un compte";
 "welcome.createAccount" = "Créer un compte Jami";
 
@@ -56,7 +56,7 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Créer votre compte";
-"createAccount.chooseStrongPassword" = "Choisir un mot de passe fort que vous allez mémoriser pour protéger votre compte RIng.";
+"createAccount.chooseStrongPassword" = "Choisir un mot de passe fort que vous allez mémoriser pour protéger votre compte Jami.";
 "createAccount.enterNewUsernamePlaceholder" = "Nom d'utilisateur";
 "createAccount.newPasswordPlaceholder" = "Mot de passe";
 "createAccount.repeatPasswordPlaceholder" = "Confirmez le mot de passe";
@@ -85,17 +85,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Impossible de trouver le compte";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
 "alerts.accountNoNetworkTitle" = "Impossibilité de se connecter au réseau.";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.profileCancelPhoto" = "Annuler";
 "alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
+"alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
@@ -142,7 +142,7 @@
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "Une erreur réseau s'est produite lors de l'exportation";
 "linkDevice.defaultError" = "Une erreur s'est produite lors de l'exportation";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";
 
 //Contact Page

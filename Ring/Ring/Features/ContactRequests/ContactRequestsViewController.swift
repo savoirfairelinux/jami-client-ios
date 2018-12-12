@@ -53,6 +53,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         UIApplication.shared.statusBarStyle = .default
         self.setupTableView()
         self.setupBindings()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.ringMain]
     }
 
     func setupTableView() {
