@@ -1,8 +1,9 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -49,6 +50,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.jamiMain]
     }
 
     private func addHeaderView() {
@@ -263,7 +265,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .sectionHeader(let title):
                     let cell = UITableViewCell()
                     cell.textLabel?.text = title
-                    cell.backgroundColor = UIColor.ringNavigationBar.darken(byPercentage: 0.02)
+                    cell.backgroundColor = UIColor.jamiNavigationBar.darken(byPercentage: 0.02)
                     cell.selectionStyle = .none
                     return cell
 

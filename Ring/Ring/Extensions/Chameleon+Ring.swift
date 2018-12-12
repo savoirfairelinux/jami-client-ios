@@ -1,7 +1,8 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -42,12 +43,12 @@ extension Chameleon {
         MessageBubble.appearance().backgroundColor = secondaryColor
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).tintColor = contentColor
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).backgroundColor = UIColor.ringMsgCellSent
-        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellSent.self]).textColor = UIColor.ringMsgCellSentText
+        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).backgroundColor = UIColor.jamiMsgCellSent
+        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellSent.self]).textColor = UIColor.jamiMsgCellSentText
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).tintColor = secondaryContentColor
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).backgroundColor = UIColor.ringMsgCellReceived
-        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellReceived.self]).textColor = UIColor.ringMsgCellReceivedText
+        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).backgroundColor = UIColor.jamiMsgCellReceived
+        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellReceived.self]).textColor = UIColor.jamiMsgCellReceivedText
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).tintColor = UIColor.clear
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).backgroundColor = UIColor.clear

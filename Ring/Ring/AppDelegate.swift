@@ -1,9 +1,10 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -114,7 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             .disposed(by: self.disposeBag)
 
         // themetize the app
-        Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
+        Chameleon.setRingThemeUsingPrimaryColor(UIColor.jamiMain, withSecondaryColor: UIColor.jamiSecondary, andContentStyle: .light)
 
         UIApplication.shared.statusBarStyle = .default
 

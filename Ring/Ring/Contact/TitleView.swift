@@ -2,6 +2,7 @@
  *  Copyright (C) 2018 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -56,7 +57,7 @@ final class TitleView: UIView {
         addSubview(containerView)
         containerView.addSubview(avatarView)
         containerView.addSubview(label)
-        label.textColor = UIColor.ringSecondary
+        label.textColor = UIColor.jamiSecondary
         label.font = UIFont.systemFont(ofSize: 17.0, weight: .regular)
         clipsToBounds = true
         isUserInteractionEnabled = false
