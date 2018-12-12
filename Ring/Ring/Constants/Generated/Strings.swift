@@ -57,7 +57,7 @@ internal enum L10n {
   internal enum Alerts {
     /// Account Added
     internal static let accountAddedTitle = L10n.tr("Localizable", "alerts.accountAddedTitle")
-    /// Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.
+    /// Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.
     internal static let accountCannotBeFoundMessage = L10n.tr("Localizable", "alerts.accountCannotBeFoundMessage")
     /// Can't find account
     internal static let accountCannotBeFoundTitle = L10n.tr("Localizable", "alerts.accountCannotBeFoundTitle")
@@ -67,7 +67,7 @@ internal enum L10n {
     internal static let accountDefaultErrorTitle = L10n.tr("Localizable", "alerts.accountDefaultErrorTitle")
     /// Linking account
     internal static let accountLinkedTitle = L10n.tr("Localizable", "alerts.accountLinkedTitle")
-    /// Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.
+    /// Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.
     internal static let accountNoNetworkMessage = L10n.tr("Localizable", "alerts.accountNoNetworkMessage")
     /// Can't connect to the network
     internal static let accountNoNetworkTitle = L10n.tr("Localizable", "alerts.accountNoNetworkTitle")
@@ -83,7 +83,7 @@ internal enum L10n {
     internal static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle")
     /// Please close application and try to open it again
     internal static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage")
-    /// An error happned when launching Ring
+    /// An error happned when launching Jami
     internal static let dbFailedTitle = L10n.tr("Localizable", "alerts.dbFailedTitle")
     /// Incoming call from 
     internal static let incomingCallAllertTitle = L10n.tr("Localizable", "alerts.incomingCallAllertTitle")
@@ -130,7 +130,7 @@ internal enum L10n {
   internal enum CreateAccount {
     /// Encrypt my account
     internal static let chooseAPassword = L10n.tr("Localizable", "createAccount.ChooseAPassword")
-    /// Choose strong password you will remember to protect your Ring account.
+    /// Choose strong password you will remember to protect your Jami account.
     internal static let chooseStrongPassword = L10n.tr("Localizable", "createAccount.chooseStrongPassword")
     /// Create your account
     internal static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle")
@@ -216,7 +216,7 @@ internal enum L10n {
   internal enum LinkDevice {
     /// An error occured during the export
     internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError")
-    /// To complete the process, you need to open Ring on the new device and choose the option "Link this device to an account." Your pin is valid for 10 minutes
+    /// To complete the process, you need to open Jami on the new device and choose the option "Link this device to an account." Your pin is valid for 10 minutes
     internal static let explanationMessage = L10n.tr("Localizable", "linkDevice.explanationMessage")
     /// Verifying
     internal static let hudMessage = L10n.tr("Localizable", "linkDevice.hudMessage")
@@ -274,7 +274,7 @@ internal enum L10n {
     internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount")
     /// Link this device to an account
     internal static let linkDevice = L10n.tr("Localizable", "welcome.linkDevice")
-    /// Ring is a free and universal communication platform which preserves the users' privacy and freedoms
+    /// Jami is a free and universal communication platform which preserves the users' privacy and freedoms
     internal static let text = L10n.tr("Localizable", "welcome.text")
     /// Welcome to Jami !
     internal static let title = L10n.tr("Localizable", "welcome.title")
