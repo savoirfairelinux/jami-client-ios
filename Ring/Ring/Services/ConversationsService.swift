@@ -109,16 +109,16 @@ class ConversationsService {
             let contentDict = [self.textPlainMIMEType: content]
             let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientRingId))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
-            if accountHelper.ringId! != recipientRingId {
+            if let ringId = accountHelper.ringId, ringId != recipientRingId {
                 let message = self.createMessage(withId: messageId,
                                                  withContent: content,
-                                                 byAuthor: accountHelper.ringId!,
+                                                 byAuthor: ringId,
                                                  generated: false,
                                                  incoming: false)
                 self.saveMessage(message: message,
                                  toConversationWith: recipientRingId,
                                  toAccountId: senderAccount.id,
-                                 toAccountUri: accountHelper.ringId!,
+                                 toAccountUri: ringId,
                                  shouldRefreshConversations: true)
                     .subscribe(onCompleted: { [unowned self] in
                         self.log.debug("Message saved")
