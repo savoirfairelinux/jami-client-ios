@@ -108,7 +108,7 @@ class ConversationsService {
             let contentDict = [self.textPlainMIMEType: content]
             let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientRingId))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
-            if accountHelper.ringId! != recipientRingId {
+            if let ringId = accountHelper.ringId, ringId != recipientRingId {
                 let message = self.createMessage(withId: messageId,
                                                  withContent: content,
                                                  byAuthor: accountHelper.ringId!,
