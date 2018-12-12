@@ -43,7 +43,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         self.profileImageView.layer.shadowOpacity = 0.5
         self.profileImageView.layer.shadowOffset = CGSize.zero
         self.profileImageView.layer.shadowRadius = 4
-        self.profileName.tintColor = UIColor.ringSecondary
+        self.profileName.tintColor = UIColor.jamiSecondary
 
         // Animations
         DispatchQueue.global(qos: .background).async {

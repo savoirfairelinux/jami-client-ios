@@ -99,6 +99,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.setUpCallButtons()
         self.setupBindings()
         let device = UIDevice.modelName
+        self.profileImageView.tintColor = UIColor.jamiDefaultAvatar
         switch device {
         case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
             //keep the 4:3 format of the captured video on iPhone X and later when display it in full screen
@@ -148,7 +149,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func setWhiteAvatarView() {
         UIApplication.shared.statusBarStyle = .default
-        self.callPulse.backgroundColor = UIColor.ringCallPulse
+        self.callPulse.backgroundColor = UIColor.jamiCallPulse
         self.avatarView.backgroundColor = UIColor.white
     }
 

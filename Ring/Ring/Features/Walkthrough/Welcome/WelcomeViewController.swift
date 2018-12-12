@@ -79,7 +79,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
-        self.navigationController?.navigationBar.tintColor = UIColor.ringSecondary
+        self.navigationController?.navigationBar.tintColor = UIColor.jamiSecondary
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()

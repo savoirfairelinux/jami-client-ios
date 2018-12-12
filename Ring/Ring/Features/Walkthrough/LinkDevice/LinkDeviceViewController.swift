@@ -44,8 +44,8 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.view.layoutIfNeeded()
         self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
-        self.pinTextField.tintColor = UIColor.ringSecondary
-        self.passwordTextField.tintColor = UIColor.ringSecondary
+        self.pinTextField.tintColor = UIColor.jamiSecondary
+        self.passwordTextField.tintColor = UIColor.jamiSecondary
 
         self.applyL10n()
 
@@ -172,7 +172,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         } else {
             popTip.shouldDismissOnTap = true
             popTip.entranceAnimation = .scale
-            popTip.bubbleColor = UIColor.ringSecondary
+            popTip.bubbleColor = UIColor.jamiSecondary
             popTip.textColor = UIColor.white
             let offset: CGFloat = 20.0
             popTip.offset = offset - scrollView.contentOffset.y

@@ -74,9 +74,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         let device = UIDevice.modelName
         self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
         self.usernameTextField.becomeFirstResponder()
-        self.usernameTextField.tintColor = UIColor.ringSecondary
-        self.passwordTextField.tintColor = UIColor.ringSecondary
-        self.confirmPasswordTextField.tintColor = UIColor.ringSecondary
+        self.usernameTextField.tintColor = UIColor.jamiSecondary
+        self.passwordTextField.tintColor = UIColor.jamiSecondary
+        self.confirmPasswordTextField.tintColor = UIColor.jamiSecondary
 
         // Bind ViewModel to View
         self.bindViewModelToView()
