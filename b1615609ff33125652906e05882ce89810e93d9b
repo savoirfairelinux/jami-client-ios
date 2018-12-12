@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "943fe768_9bb656a3",
+        "filename": "Ring/Ring/Extensions/UIView+Rx.swift",
+        "patchSetId": 26
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-12T23:30:14Z",
+      "side": 1,
+      "message": "it is not reactive functions. Maybe better to move them to UIView+Ring extension",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 16
+      },
+      "revId": "b1615609ff33125652906e05882ce89810e93d9b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bb87e46_ad4c96cd",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 26
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-12T23:30:14Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 496,
+        "startChar": 21,
+        "endLine": 496,
+        "endChar": 22
+      },
+      "revId": "b1615609ff33125652906e05882ce89810e93d9b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f32b24b9_0e992559",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 26
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-12T23:30:14Z",
+      "side": 1,
+      "message": "[weak self]",
+      "range": {
+        "startLine": 178,
+        "startChar": 67,
+        "endLine": 178,
+        "endChar": 68
+      },
+      "revId": "b1615609ff33125652906e05882ce89810e93d9b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "667a2629_16a163f7",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 26
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-12T23:30:14Z",
+      "side": 1,
+      "message": "weak self",
+      "range": {
+        "startLine": 232,
+        "startChar": 16,
+        "endLine": 232,
+        "endChar": 20
+      },
+      "revId": "b1615609ff33125652906e05882ce89810e93d9b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01f4f90d_3535f0c4",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 26
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-12T23:30:14Z",
+      "side": 1,
+      "message": "[weak self]",
+      "range": {
+        "startLine": 258,
+        "startChar": 55,
+        "endLine": 258,
+        "endChar": 56
+      },
+      "revId": "b1615609ff33125652906e05882ce89810e93d9b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8c39685_e3300d9e",
+        "filename": "Ring/Ring/Features/Walkthrough/Welcome/WelcomeViewController.swift",
+        "patchSetId": 26
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-12T23:30:14Z",
+      "side": 1,
+      "message": "weak self",
+      "range": {
+        "startLine": 66,
+        "startChar": 16,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "b1615609ff33125652906e05882ce89810e93d9b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "598bf6f8_8ae00334",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 26
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-12T23:30:14Z",
+      "side": 1,
+      "message": "no sure about this part",
+      "range": {
+        "startLine": 67,
+        "startChar": 88,
+        "endLine": 67,
+        "endChar": 143
+      },
+      "revId": "b1615609ff33125652906e05882ce89810e93d9b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
