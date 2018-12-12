@@ -49,6 +49,8 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
             .observeOn(MainScheduler.instance)
             .bind(to: self.noBlockedContactLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
+
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.ringMain]
     }
 
     func setupTableView() {

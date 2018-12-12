@@ -34,11 +34,11 @@ extension UIColor {
         self.init(red: (hex >> 16) & 0xff, green: (hex >> 8) & 0xff, blue: hex & 0xff, alpha: alpha)
     }
 
-    static let ringMain = UIColor(hex: 0x3F6DA7, alpha: 1.0) // jami style
-    static let ringSecondary = UIColor(hex: 0x1F4971, alpha: 1.0) // jami style
-    static let ringMainLight = UIColor(red: 0, green: 76, blue: 96, alpha: 1.0)
+    static let ringMain = UIColor(hex: 0x3F6DA7, alpha: 1.0)
+    static let ringSecondary = UIColor(hex: 0x1F4971, alpha: 1.0)
+    static let ringMainLight = UIColor(hex: 0x1F4971, alpha: 1.0)
     static let ringMsgCellEmoji = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-    static let ringMsgCellSent = UIColor(red: 58, green: 192, blue: 210, alpha: 1.0)
+    static let ringMsgCellSent = UIColor(hex: 0x367BC1, alpha: 1.0)
     static let ringMsgCellSentText = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0)
     static let ringMsgCellReceived = UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
     static let ringMsgCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
@@ -48,7 +48,8 @@ extension UIColor {
     static let ringMsgTextFieldBorder = UIColor(red: 220, green: 220, blue: 220, alpha: 1.0)
     static let ringUITableViewCellSelection = UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
     static let ringNavigationBar = UIColor(red: 235, green: 235, blue: 235, alpha: 1.0)
-    static let ringCallPulse = UIColor(red: 99, green: 191, blue: 208, alpha: 1.0)
+    static let ringCallPulse = UIColor(hex: 0x039FDF, alpha: 1.0)
+    static let ringAvatar = UIColor(hex: 0x039FDF, alpha: 1.0)
     static let ringSuccess = UIColor(hex: 0x00b20b, alpha: 1.0)
     static let ringFailure = UIColor(hex: 0xf00000, alpha: 1.0)
     static let ringWarning = UIColor.orange

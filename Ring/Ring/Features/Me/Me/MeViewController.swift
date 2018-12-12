@@ -49,6 +49,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.ringMain]
     }
 
     private func addHeaderView() {

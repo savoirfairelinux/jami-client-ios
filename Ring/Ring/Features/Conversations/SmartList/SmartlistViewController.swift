@@ -80,6 +80,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         UIApplication.shared.statusBarStyle = .default
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.ringMain]
     }
 
     func setupUI() {

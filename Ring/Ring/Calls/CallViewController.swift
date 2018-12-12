@@ -99,6 +99,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.setUpCallButtons()
         self.setupBindings()
         let device = UIDevice.modelName
+        self.profileImageView.tintColor = UIColor.ringAvatar
         switch device {
         case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
             //keep the 4:3 format of the captured video on iPhone X and later when display it in full screen
