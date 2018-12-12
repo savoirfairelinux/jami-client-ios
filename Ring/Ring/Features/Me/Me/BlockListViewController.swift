@@ -2,6 +2,7 @@
  *  Copyright (C) 2018 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -49,6 +50,8 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
             .observeOn(MainScheduler.instance)
             .bind(to: self.noBlockedContactLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
+
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.jamiMain]
     }
 
     func setupTableView() {

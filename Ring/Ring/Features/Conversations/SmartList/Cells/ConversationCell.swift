@@ -1,8 +1,9 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,15 +35,15 @@ class ConversationCell: UITableViewCell, NibReusable {
     @IBOutlet weak var presenceIndicator: UIView!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        self.backgroundColor = UIColor.ringUITableViewCellSelection
+        self.backgroundColor = UIColor.jamiUITableViewCellSelection
         UIView.animate(withDuration: 0.35, animations: {
-            self.backgroundColor = UIColor.ringUITableViewCellSelection.lighten(byPercentage: 5.0)
+            self.backgroundColor = UIColor.jamiUITableViewCellSelection.lighten(byPercentage: 5.0)
         })
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
-            self.backgroundColor = UIColor.ringUITableViewCellSelection
+            self.backgroundColor = UIColor.jamiUITableViewCellSelection
         } else {
             self.backgroundColor = UIColor.clear
         }

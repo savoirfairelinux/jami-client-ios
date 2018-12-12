@@ -1,8 +1,9 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Hadrien De Sousa <hadrien.desousa@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -60,7 +61,7 @@ extension UIImage {
         context?.saveGState()
         path.addClip()
         self.draw(in: bounds)
-        UIColor.ringMsgBackground.setStroke()
+        UIColor.jamiMsgBackground.setStroke()
         path.lineWidth = offset * 2
         path.stroke()
         let roundedImage = UIGraphicsGetImageFromCurrentImageContext()

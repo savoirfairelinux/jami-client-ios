@@ -1,7 +1,8 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -80,6 +81,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         UIApplication.shared.statusBarStyle = .default
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.jamiMain]
     }
 
     func setupUI() {
@@ -225,8 +227,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         self.searchBar.returnKeyType = .done
         self.searchBar.autocapitalizationType = .none
-        self.searchBar.tintColor = UIColor.ringMain
-        self.searchBar.barTintColor =  UIColor.ringNavigationBar
+        self.searchBar.tintColor = UIColor.jamiMain
+        self.searchBar.barTintColor =  UIColor.jamiNavigationBar
 
         self.view.bringSubview(toFront: self.searchBar)
 

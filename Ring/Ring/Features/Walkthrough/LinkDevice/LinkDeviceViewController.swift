@@ -1,10 +1,23 @@
-//
-//  CreateProfileViewController.swift
-//  Ring
-//
-//  Created by Thibault Wittemberg on 2017-07-18.
-//  Copyright © 2017 Savoir-faire Linux. All rights reserved.
-//
+/*
+ *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
+ *
+ *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@gmail.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
 
 import UIKit
 import Reusable
@@ -44,8 +57,8 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.view.layoutIfNeeded()
         self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
-        self.pinTextField.tintColor = UIColor.ringSecondary
-        self.passwordTextField.tintColor = UIColor.ringSecondary
+        self.pinTextField.tintColor = UIColor.jamiSecondary
+        self.passwordTextField.tintColor = UIColor.jamiSecondary
 
         self.applyL10n()
 
@@ -172,7 +185,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         } else {
             popTip.shouldDismissOnTap = true
             popTip.entranceAnimation = .scale
-            popTip.bubbleColor = UIColor.ringSecondary
+            popTip.bubbleColor = UIColor.jamiSecondary
             popTip.textColor = UIColor.white
             let offset: CGFloat = 20.0
             popTip.offset = offset - scrollView.contentOffset.y
