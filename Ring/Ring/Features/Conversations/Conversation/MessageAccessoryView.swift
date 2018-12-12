@@ -57,7 +57,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
         self.messageTextView.tintColor = UIColor.ringMain
         self.messageTextView.textContainerInset = UIEdgeInsets(top: 8, left: 7, bottom: 8, right: 7)
         self.messageTextView.layer.borderWidth = 1
-        self.messageTextView.layer.borderColor = UIColor.ringMsgTextFieldBorder.cgColor
+        self.messageTextView.layer.borderColor = UIColor.jamiMsgTextFieldBorder.cgColor
         self.messageTextView.maxHeight = 70
     }
 
@@ -94,7 +94,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
             } else {
                 self.emojisButtonTrailingConstraint.constant = 14
                 self.sendButtonLeftConstraint.constant = 35
-                self.sendButton.tintColor = UIColor.ringMsgTextFieldBackground
+                self.sendButton.tintColor = UIColor.jamiMsgTextFieldBackground
             }
             self.layoutIfNeeded()
         })

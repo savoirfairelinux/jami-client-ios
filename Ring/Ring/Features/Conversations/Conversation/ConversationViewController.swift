@@ -338,9 +338,9 @@ class ConversationViewController: UIViewController,
         self.messageAccessoryView.cameraButton.tintColor = UIColor.ringMain
         self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
         self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill
-        self.tableView.backgroundColor = UIColor.ringMsgBackground
-        self.messageAccessoryView.backgroundColor = UIColor.ringMsgTextFieldBackground
-        self.view.backgroundColor = UIColor.ringMsgTextFieldBackground
+        self.tableView.backgroundColor = UIColor.jamiMsgBackground
+        self.messageAccessoryView.backgroundColor = UIColor.jamiMsgTextFieldBackground
+        self.view.backgroundColor = UIColor.jamiMsgTextFieldBackground
 
         self.messageAccessoryView.shareButton.rx.tap
             .subscribe(onNext: { [unowned self] in
@@ -665,7 +665,7 @@ class ConversationViewController: UIViewController,
             // show status
             cell.statusLabel.isHidden = false
             cell.statusLabel.text = L10n.DataTransfer.readableStatusError
-            cell.statusLabel.textColor = UIColor.ringFailure
+            cell.statusLabel.textColor = UIColor.jamiFailure
             // hide everything and shrink cell
             cell.progressBar.isHidden = true
             cell.acceptButton?.isHidden = true
@@ -679,7 +679,7 @@ class ConversationViewController: UIViewController,
                 // status
                 cell.statusLabel.isHidden = false
                 cell.statusLabel.text = L10n.DataTransfer.readableStatusAwaiting
-                cell.statusLabel.textColor = UIColor.ringSuccess
+                cell.statusLabel.textColor = UIColor.jamiSuccess
                 cell.cancelButton.setTitle(L10n.DataTransfer.readableStatusCancel, for: .normal)
             } else if item.bubblePosition() == .received {
                 // accept automatically if less than 10MB and is an image
@@ -715,7 +715,7 @@ class ConversationViewController: UIViewController,
             // status
             cell.statusLabel.isHidden = false
             cell.statusLabel.text = L10n.DataTransfer.readableStatusCanceled
-            cell.statusLabel.textColor = UIColor.ringWarning
+            cell.statusLabel.textColor = UIColor.jamiWarning
             // hide everything and shrink cell
             cell.progressBar.isHidden = true
             cell.acceptButton?.isHidden = true
@@ -725,7 +725,7 @@ class ConversationViewController: UIViewController,
             // status
             cell.statusLabel.isHidden = false
             cell.statusLabel.text = L10n.DataTransfer.readableStatusSuccess
-            cell.statusLabel.textColor = UIColor.ringSuccess
+            cell.statusLabel.textColor = UIColor.jamiSuccess
             // hide everything and shrink cell
             cell.progressBar.isHidden = true
             cell.acceptButton?.isHidden = true

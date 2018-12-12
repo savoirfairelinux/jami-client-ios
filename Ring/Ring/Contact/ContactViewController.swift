@@ -113,7 +113,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     let image = UIImage(asset: conversationItem.image)
                     let tintedImage = image?.withRenderingMode(.alwaysTemplate)
                     cell?.imageView?.image = tintedImage
-                    cell?.imageView?.tintColor = UIColor.ringSecondary
+                    cell?.imageView?.tintColor = UIColor.jamiSecondary
                     cell?.textLabel?.text = conversationItem.title
                     return cell!
                 }

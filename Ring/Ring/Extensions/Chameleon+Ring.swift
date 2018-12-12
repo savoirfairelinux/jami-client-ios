@@ -42,12 +42,12 @@ extension Chameleon {
         MessageBubble.appearance().backgroundColor = secondaryColor
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).tintColor = contentColor
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).backgroundColor = UIColor.ringMsgCellSent
-        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellSent.self]).textColor = UIColor.ringMsgCellSentText
+        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).backgroundColor = UIColor.jamiMsgCellSent
+        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellSent.self]).textColor = UIColor.jamiMsgCellSentText
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).tintColor = secondaryContentColor
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).backgroundColor = UIColor.ringMsgCellReceived
-        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellReceived.self]).textColor = UIColor.ringMsgCellReceivedText
+        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).backgroundColor = UIColor.jamiMsgCellReceived
+        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellReceived.self]).textColor = UIColor.jamiMsgCellReceivedText
 
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).tintColor = UIColor.clear
         MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).backgroundColor = UIColor.clear

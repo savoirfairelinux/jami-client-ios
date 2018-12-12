@@ -126,7 +126,7 @@ extension UIViewController {
     }
 
     func configureRingNavigationBar() {
-        self.navigationController?.navigationBar.barTintColor = UIColor.ringNavigationBar
+        self.navigationController?.navigationBar.barTintColor = UIColor.jamiNavigationBar
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
         self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 2.5)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.2

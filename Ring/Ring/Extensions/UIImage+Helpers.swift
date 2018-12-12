@@ -60,7 +60,7 @@ extension UIImage {
         context?.saveGState()
         path.addClip()
         self.draw(in: bounds)
-        UIColor.ringMsgBackground.setStroke()
+        UIColor.jamiMsgBackground.setStroke()
         path.lineWidth = offset * 2
         path.stroke()
         let roundedImage = UIGraphicsGetImageFromCurrentImageContext()

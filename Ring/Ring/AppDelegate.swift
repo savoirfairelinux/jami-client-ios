@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             .disposed(by: self.disposeBag)
 
         // themetize the app
-        Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.ringSecondary, andContentStyle: .light)
+        Chameleon.setRingThemeUsingPrimaryColor(UIColor.ringMain, withSecondaryColor: UIColor.jamiSecondary, andContentStyle: .light)
 
         UIApplication.shared.statusBarStyle = .default
 

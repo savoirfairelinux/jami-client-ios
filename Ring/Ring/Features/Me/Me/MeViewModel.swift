@@ -130,7 +130,7 @@ class MeViewModel: ViewModel, Stateable {
         return Observable
             .combineLatest(userName.startWith(""), ringId.startWith("")) { (name, ringID) in
                 var items: [SettingsSection.SectionRow] =  [.sectionHeader(title: L10n.AccountPage.credentialsHeader),
-                                                        .ordinary(label: "ringID: " + ringID)]
+                                                        .ordinary(label: "ID: " + ringID)]
             if !name.isEmpty {
                 items.append(.ordinary(label: L10n.AccountPage.username + " " + name))
             } else {
