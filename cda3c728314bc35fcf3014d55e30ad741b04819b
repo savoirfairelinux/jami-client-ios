@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f32dad8e_7e1af32c",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateProfile/CreateProfileViewController.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-13T16:54:00Z",
+      "side": 1,
+      "message": "weak self",
+      "range": {
+        "startLine": 52,
+        "startChar": 16,
+        "endLine": 52,
+        "endChar": 20
+      },
+      "revId": "cda3c728314bc35fcf3014d55e30ad741b04819b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6a2ab29_89c69c43",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateProfile/CreateProfileViewController.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-13T16:54:00Z",
+      "side": 1,
+      "message": "[weak self]",
+      "range": {
+        "startLine": 74,
+        "startChar": 42,
+        "endLine": 74,
+        "endChar": 43
+      },
+      "revId": "cda3c728314bc35fcf3014d55e30ad741b04819b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46a1eeaa_f6a424bb",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateProfile/CreateProfileViewController.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-13T16:54:00Z",
+      "side": 1,
+      "message": "[weak self]",
+      "range": {
+        "startLine": 104,
+        "startChar": 12,
+        "endLine": 104,
+        "endChar": 16
+      },
+      "revId": "cda3c728314bc35fcf3014d55e30ad741b04819b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "231dec8f_750cbc41",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateProfile/CreateProfileViewController.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-13T16:54:00Z",
+      "side": 1,
+      "message": "[weak self]",
+      "range": {
+        "startLine": 154,
+        "startChar": 15,
+        "endLine": 154,
+        "endChar": 20
+      },
+      "revId": "cda3c728314bc35fcf3014d55e30ad741b04819b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb9a3564_0928a420",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateProfile/CreateProfileViewModel.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-13T16:54:00Z",
+      "side": 1,
+      "message": "where this code is using?",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 39,
+        "endChar": 7
+      },
+      "revId": "cda3c728314bc35fcf3014d55e30ad741b04819b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74e2ac77_14fc8ee8",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateProfile/CreateProfileViewModel.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-12-13T16:54:00Z",
+      "side": 1,
+      "message": "do we need this?",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 53
+      },
+      "revId": "cda3c728314bc35fcf3014d55e30ad741b04819b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
