@@ -40,28 +40,38 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "欢迎来到Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "Welcome to Jami !";
+"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "将此设备与一个帐户进行连接";
-"welcome.createAccount" = "创建Ring帐户";
+"welcome.createAccount" = "Create a Jami account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "下一步";
+"createProfile.title" = "Personalise your profile";
+"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "创建您的Ring帐户";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
+"createAccount.createAccountFormTitle" = "创建Ring帐户";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "用户名";
 "createAccount.newPasswordPlaceholder" = "密码";
-"createAccount.repeatPasswordPlaceholder" = "confirm password";
+"createAccount.repeatPasswordPlaceholder" = "确认密码";
 "createAccount.passwordCharactersNumberError" = "最少6字符";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for username availability";
+"createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
 "createAccount.waitCreateAccountTitle" = "添加帐户";
+"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.ChooseAPassword" = "Encrypt my account";
+"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.EnableNotifications" = "Notifications";
+"createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
@@ -74,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "无法找到帐户";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
 "alerts.accountNoNetworkTitle" = "无法连接至网络";
-"alerts.accountNoNetworkMessage" = "Could not add account because Ring couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "拍照";
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.profileCancelPhoto" = "取消";
 "alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Ring";
+"alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
@@ -104,8 +114,8 @@
 "calls.callItemTitle" = "通话";
 "calls.unknown" = "未知";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "正在呼叫";
-"calls.connecting" = "正在连接";
+"calls.ringing" = "Ringing…";
+"calls.connecting" = "Connecting…";
 "calls.callFinished" = "Call finished";
 
 //Account Page
@@ -131,7 +141,7 @@
 "linkDevice.passwordError" = "您输入的密码无法解锁该帐户";
 "linkDevice.networkError" = "导出时发生网络错误";
 "linkDevice.defaultError" = "导出时发生错误";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";
 
 //Contact Page
