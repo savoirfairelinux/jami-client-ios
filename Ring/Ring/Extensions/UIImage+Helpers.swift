@@ -3,7 +3,7 @@
  *
  *  Author: Hadrien De Sousa <hadrien.desousa@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
- *  Author: Quentin Muret <quentin.muret@gmail.com>
+ *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
