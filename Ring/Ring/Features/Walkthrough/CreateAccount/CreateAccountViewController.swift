@@ -2,7 +2,7 @@
  *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
  *
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
- *  Author: Quentin Muret <quentin.muret@gmail.com>
+ *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
