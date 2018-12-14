@@ -208,10 +208,12 @@ class CallsService: CallsAdapterDelegate {
         VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
                              inFolder: VCardFolders.profile.rawValue)
             .subscribe(onSuccess: { [unowned self] card in
-                VCardUtils.sendVCard(card: card,
-                                     callID: callID,
-                                     accountID: accountID,
-                                     sender: self)
+                DispatchQueue.main.async {
+                    VCardUtils.sendVCard(card: card,
+                                         callID: callID,
+                                         accountID: accountID,
+                                         sender: self)
+                }
             }).disposed(by: disposeBag)
     }
 
