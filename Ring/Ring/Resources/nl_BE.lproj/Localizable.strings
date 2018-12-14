@@ -40,51 +40,61 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welkom bij Ring";
-"welcome.text" = "Ring is een vrij en universeel communicatieplatform, dat de privacy en vrijheden van haar gebruikers eerbiedigt";
+"welcome.title" = "Welcome to Jami !";
+"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Dit apparaat aan een account koppelen";
-"welcome.createAccount" = "Een Ring-account aanmaken";
+"welcome.createAccount" = "Create a Jami account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Overslaan";
 "createProfile.profileCreated" = "Volgende";
+"createProfile.title" = "Personalise your profile";
+"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNamePlaceholder" = "Voer naam in";
+"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Uw Ring-account aanmaken";
-"createAccount.chooseStrongPassword" = "Kies een sterk paswoord voor uw Ring-account te beschermen.";
-"createAccount.enterNewUsernamePlaceholder" = "gebruikersnaam";
-"createAccount.newPasswordPlaceholder" = "paswoord";
-"createAccount.repeatPasswordPlaceholder" = "paswoord bevestigen";
+"createAccount.createAccountFormTitle" = "Maak uw account aan";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.enterNewUsernamePlaceholder" = "Gebruikersnaam";
+"createAccount.newPasswordPlaceholder" = "Paswoord";
+"createAccount.repeatPasswordPlaceholder" = "Bevestigd paswoord";
 "createAccount.passwordCharactersNumberError" = "Minimaal 6 tekens";
 "createAccount.passwordNotMatchingError" = "paswoorden komen niet overeen";
-"createAccount.lookingForUsernameAvailability" = "beschikbaarheid van gebruikersnaam wordt gecontroleerd";
+"createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "ongeldige gebruikersnaam";
 "createAccount.usernameAlreadyTaken" = "gebruikersnaam reeds in gebruik";
 "createAccount.loading" = "Laden";
 "createAccount.waitCreateAccountTitle" = "Account wordt toegevoegd";
+"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.ChooseAPassword" = "Encrypt my account";
+"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.EnableNotifications" = "Notifications";
+"createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account koppelen";
 "linkToAccount.linkButtonTitle" = "Apparaat koppelen";
-"linkToAccount.passwordPlaceholder" = "paswoord";
+"linkToAccount.passwordPlaceholder" = "Paswoord";
 "linkToAccount.pinPlaceholder" = "Pincode";
 "linkToAccount.passwordLabel" = "Voer uw paswoord in";
 "linkToAccount.pinLabel" = "Voer uw pincode in";
 "linkToAccount.explanationPinMessage" = "Ga naar de accountbeheerinstellingen op het apparaat dat het account bevat die u wil gebruiken voor de pincode te genereren. Selecteer ‘Een ander apparaat aan dit account koppelen’. U gaat de pincode krijgen die u nodig hebt voor dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Account kan niet gevonden worden";
-"alerts.accountCannotBeFoundMessage" = "Account kon niet gevonden worden op het Ring-netwerk. Controleer of het account geëxporteerd is van een bestaand apparaat en dat de ingevoerde gebruikersreferenties correct zijn.";
+"alerts.accountCannotBeFoundTitle" = "Account kan niet worden gevonden";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account toegevoegd";
 "alerts.accountNoNetworkTitle" = "Kan geen verbinding maken met het netwerk";
-"alerts.accountNoNetworkMessage" = "Kon dit account niet toevoegen omdat Ring geen verbinding kon maken met het gedistribueerd netwerk. Controleer de netwerkverbinding van uw apparaat.";
+"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Onbekende fout";
 "alerts.accountDefaultErrorMessage" = "Het account kon niet aangemaakt worden";
 "alerts.profileTakePhoto" = "Foto trekken";
 "alerts.profileUploadPhoto" = "Foto uploaden";
 "alerts.profileCancelPhoto" = "Annuleren";
 "alerts.accountLinkedTitle" = "Account koppelen";
-"alerts.dbFailedTitle" = "Er is een fout opgetreden bij het opstarten van Ring";
+"alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Sluit de app en probeer het opnieuw";
 "alerts.confirmBlockContact" = "Bent u zeker dat u dit contact wilt blokkeren? De gespreksgeschiedenis met dit contact zal ook voorgoed verwijderd worden.";
 "alerts.confirmBlockContactTitle" = "Contact blokkeren";
@@ -104,8 +114,8 @@
 "calls.callItemTitle" = "Bellen";
 "calls.unknown" = "Onbekend";
 "calls.incomingCallInfo" = "wilt met u spreken";
-"calls.ringing" = "Gaat over";
-"calls.connecting" = "Verbinden";
+"calls.ringing" = "Ringing…";
+"calls.connecting" = "Aan het verbinden...";
 "calls.callFinished" = "Oproep beëindigd";
 
 //Account Page
@@ -131,7 +141,7 @@
 "linkDevice.passwordError" = "Het paswoord dat u hebt ingevoerd ontgrendelt dit account niet";
 "linkDevice.networkError" = "Er is een netwerkfout opgetreden tijdens het exporteren";
 "linkDevice.defaultError" = "Er is een fout opgetreden tijdens het exporteren";
-"linkDevice.explanationMessage" = "Voor het proces te voltooien opent u Ring op het nieuw apparaat en kiest u de optie ‘Dit apparaat aan een account koppelen’. Uw pincode is 10 minuten geldig";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifiëren";
 
 //Contact Page

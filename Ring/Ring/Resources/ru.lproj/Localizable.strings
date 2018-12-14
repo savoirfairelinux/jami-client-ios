@@ -25,7 +25,7 @@
 "global.ok" = "OK";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
+"scan.badQrCode" = "Некорректный QR-код";
 "scan.search" = "Поиск…";
 
 // Smartlist
@@ -33,40 +33,50 @@
 "smartlist.results" = "Результаты поиска";
 "smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Поиск…";
-"smartlist.noResults" = "Результаты отсутствуют";
+"smartlist.noResults" = "Нет результатов";
 "smartlist.noNetworkConnectivity" = "Нет подключения к сети";
 "smartlist.cellularAccess" = "Убедитесь что доступ через сеть сотовой связи разрешен";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Добро пожаловать в Ring";
-"welcome.text" = "Ring - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
+"welcome.title" = "Welcome to Jami !";
+"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Привязать это устройство к аккаунту";
-"welcome.createAccount" = "Создать аккаунт Ring";
+"welcome.createAccount" = "Create a Jami account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустить";
 "createProfile.profileCreated" = "Далее";
+"createProfile.title" = "Personalise your profile";
+"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNamePlaceholder" = "Введите имя";
+"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Создать свой аккаунт Ring";
-"createAccount.chooseStrongPassword" = "Используйте сложный пароль, который Вы сможете запомнить, чтобы защитить Вашу учетную запись Ring";
-"createAccount.enterNewUsernamePlaceholder" = "имя пользователя";
-"createAccount.newPasswordPlaceholder" = "пароль";
-"createAccount.repeatPasswordPlaceholder" = "Подтвердить пароль";
+"createAccount.createAccountFormTitle" = "Создайте свой аккаунт";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.enterNewUsernamePlaceholder" = "Имя пользователя";
+"createAccount.newPasswordPlaceholder" = "Пароль";
+"createAccount.repeatPasswordPlaceholder" = "Подтверждение пароля";
 "createAccount.passwordCharactersNumberError" = "Минимум 6 символов";
 "createAccount.passwordNotMatchingError" = "Пароли не совпадают";
-"createAccount.lookingForUsernameAvailability" = "проверка доступности имени пользователя…";
+"createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "недопустимое имя пользователя";
 "createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
 "createAccount.loading" = "Загрузка";
 "createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
+"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.ChooseAPassword" = "Encrypt my account";
+"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.EnableNotifications" = "Notifications";
+"createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Соединение аккаунта";
 "linkToAccount.linkButtonTitle" = "Привязать устройство";
-"linkToAccount.passwordPlaceholder" = "пароль";
+"linkToAccount.passwordPlaceholder" = "Пароль";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Введите пароль";
 "linkToAccount.pinLabel" = "Введите PIN";
@@ -74,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не удалось найти аккаунт";
-"alerts.accountCannotBeFoundMessage" = "Аккаунт не удалось найти в сети Ring. Убедитесь, что он был экспортирован из соответствующего устройства и что предоставленные данные верны.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Аккаунт добавлен";
 "alerts.accountNoNetworkTitle" = "Не удается подключиться к сети";
-"alerts.accountNoNetworkMessage" = "Невозможно добавить аккаунт, так как Ring не смог подключиться к распределённой сети. Проверьте ваше соединение.";
+"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Неизвестная ошибка";
 "alerts.accountDefaultErrorMessage" = "Не удалось создать аккаунт.";
 "alerts.profileTakePhoto" = "Сфотографировать";
 "alerts.profileUploadPhoto" = "Загрузка фотографии";
 "alerts.profileCancelPhoto" = "Отмена";
 "alerts.accountLinkedTitle" = "Аккаунт соединяется";
-"alerts.dbFailedTitle" = "Произошла ошибка при запуске Ring";
+"alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Пожалуйста, закройте приложение и попробуйте открыть его снова";
 "alerts.confirmBlockContact" = "Вы уверены, что хотите заблокировать этот контакт? История разговоров с этим контактом также будет безвозвратно удалена.";
 "alerts.confirmBlockContactTitle" = "Заблокировать контакт";
@@ -104,8 +114,8 @@
 "calls.callItemTitle" = "Звонок";
 "calls.unknown" = "Неизвестно";
 "calls.incomingCallInfo" = "хочет поговорить с вами";
-"calls.ringing" = "Звонок";
-"calls.connecting" = "Подключение";
+"calls.ringing" = "Вызов…";
+"calls.connecting" = "Соединение…";
 "calls.callFinished" = "Вызов завершен";
 
 //Account Page
@@ -131,7 +141,7 @@
 "linkDevice.passwordError" = "Введенный пароль не подходит к этому аккаунту";
 "linkDevice.networkError" = "Во время экспорта произошла ошибка сети";
 "linkDevice.defaultError" = "Во время экспорта произошла ошибка";
-"linkDevice.explanationMessage" = "Для завершения процесса Вам необходимо запустить Ring на новом устройстве и выбрать пункт \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Проверка";
 
 //Contact Page

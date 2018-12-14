@@ -40,33 +40,43 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Velkommen til Ring";
-"welcome.text" = "Ring er fri programvare for universell kommunikasjon som respekterer privatlivets fred for dets brukere.";
+"welcome.title" = "Welcome to Jami !";
+"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Lenk denne enheten til en konto";
-"welcome.createAccount" = "Opprett en Ring-konto";
+"welcome.createAccount" = "Create a Jami account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Hopp over";
 "createProfile.profileCreated" = "Neste";
+"createProfile.title" = "Personalise your profile";
+"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Opprett din Ring-konto";
-"createAccount.chooseStrongPassword" = "Velg et sterkt passord du husker for å beskytte din Ring-konto.";
-"createAccount.enterNewUsernamePlaceholder" = "brukernavn";
-"createAccount.newPasswordPlaceholder" = "passord";
-"createAccount.repeatPasswordPlaceholder" = "bekreft passord";
+"createAccount.createAccountFormTitle" = "Opprett din konto";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.enterNewUsernamePlaceholder" = "Brukernavn";
+"createAccount.newPasswordPlaceholder" = "Passord";
+"createAccount.repeatPasswordPlaceholder" = "Bekreft passord";
 "createAccount.passwordCharactersNumberError" = "minimum 6 tegn";
 "createAccount.passwordNotMatchingError" = "passordene stemmer ikke overens";
-"createAccount.lookingForUsernameAvailability" = "Sjekker hvorvidt brukernavnet er tilgjengelig";
+"createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "ugyldig brukernavn";
 "createAccount.usernameAlreadyTaken" = "brukernavn allerede i bruk";
 "createAccount.loading" = "Laster";
 "createAccount.waitCreateAccountTitle" = "Legger til konto";
+"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.ChooseAPassword" = "Encrypt my account";
+"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.EnableNotifications" = "Notifications";
+"createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontolenking";
 "linkToAccount.linkButtonTitle" = "Lenk enhet";
-"linkToAccount.passwordPlaceholder" = "passord";
+"linkToAccount.passwordPlaceholder" = "Passord";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Skriv inn passord";
 "linkToAccount.pinLabel" = "Skriv inn PIN";
@@ -74,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan ikke finne konto";
-"alerts.accountCannotBeFoundMessage" = "Finner ikke kontoen på Ring-nettverket. Forsikre deg om at den ble eksportert fra Ring på en eksisterende enhet, og at oppgitte identitetsdetaljer er riktige.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Konto lagt til";
 "alerts.accountNoNetworkTitle" = "Kan ikke koble til nettverket";
-"alerts.accountNoNetworkMessage" = "Kunne ikke legge til ny konto fordi Ring ikke kunne koble til det distribuerte nettverket. Sjekk din enhetstilkobling.";
+"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Ukjent feil";
 "alerts.accountDefaultErrorMessage" = "Kontoen kunne ikke opprettes.";
 "alerts.profileTakePhoto" = "Ta bilde";
 "alerts.profileUploadPhoto" = "Last opp bilde";
 "alerts.profileCancelPhoto" = "Avbryt";
 "alerts.accountLinkedTitle" = "Lenker konto";
-"alerts.dbFailedTitle" = "Feil inntraff under oppstart av Ring";
+"alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Lukk programmet og prøv å åpne det igjen";
 "alerts.confirmBlockContact" = "Er du sikker på at du ønsker å blokkere denne kontakten? Samtalehistorikken med vedkommende vil bli slettet for godt.";
 "alerts.confirmBlockContactTitle" = "Blokker kontakt";
@@ -104,8 +114,8 @@
 "calls.callItemTitle" = "Ring";
 "calls.unknown" = "Ukjent";
 "calls.incomingCallInfo" = "ønsker å snakke med deg";
-"calls.ringing" = "Ringer";
-"calls.connecting" = "Kobler opp";
+"calls.ringing" = "Ringing…";
+"calls.connecting" = "Connecting…";
 "calls.callFinished" = "Samtale fullført";
 
 //Account Page
@@ -131,7 +141,7 @@
 "linkDevice.passwordError" = "Passordet du skrev inn låser ikke opp denne kontoen";
 "linkDevice.networkError" = "En nettverksfeil inntraff under eksport";
 "linkDevice.defaultError" = "En feil inntraff under eksport";
-"linkDevice.explanationMessage" = "For å fullføre prosessen, må du åpne Ring på en ny enhet og velge \"Lenk denne enheten til en konto\". Din PIN-kode er gyldig i 10 minutter";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Bekrefter";
 
 //Contact Page

@@ -25,48 +25,58 @@
 "global.ok" = "Gerai";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "Blogas QR kodas";
+"scan.search" = "Ieškoma…";
 
 // Smartlist
 "smartlist.yesterday" = "Vakar";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Paieškos rezultatas";
 "smartlist.conversations" = "Pokalbiai";
 "smartlist.searching" = "Ieškoma...";
-"smartlist.noResults" = "No results";
+"smartlist.noResults" = "Jokių rezultatų";
 "smartlist.noNetworkConnectivity" = "Nėra tinklo ryšio";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Sveiki atvykę į Ring";
-"welcome.text" = "Ring is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "Welcome to Jami !";
+"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Susieti šį įrenginį su paskyra";
-"welcome.createAccount" = "Sukurti Ring paskyrą";
+"welcome.createAccount" = "Create a Jami account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Praleisti";
 "createProfile.profileCreated" = "Kitas";
+"createProfile.title" = "Personalise your profile";
+"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your Ring account";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Ring account.";
-"createAccount.enterNewUsernamePlaceholder" = "naudotojo vardas";
-"createAccount.newPasswordPlaceholder" = "slaptažodis";
-"createAccount.repeatPasswordPlaceholder" = "patvirtinkite slaptažodį";
+"createAccount.createAccountFormTitle" = "Susikurkite savo paskyrą";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.enterNewUsernamePlaceholder" = "Naudotojo vardas";
+"createAccount.newPasswordPlaceholder" = "Slaptažodis";
+"createAccount.repeatPasswordPlaceholder" = "Patvirtinkite slaptažodį";
 "createAccount.passwordCharactersNumberError" = "Mažiausiai 6 simboliai";
 "createAccount.passwordNotMatchingError" = "slaptažodžiai nesutampa";
-"createAccount.lookingForUsernameAvailability" = "tikrinamas naudotojo vardo prieinamumas";
+"createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "neteisingas naudotojo vardas";
 "createAccount.usernameAlreadyTaken" = "naudotojo vardas jau užimtas";
 "createAccount.loading" = "Įkeliama";
 "createAccount.waitCreateAccountTitle" = "Pridedama paskyra";
+"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.ChooseAPassword" = "Encrypt my account";
+"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.EnableNotifications" = "Notifications";
+"createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Susieti įrenginį";
-"linkToAccount.passwordPlaceholder" = "slaptažodis";
+"linkToAccount.passwordPlaceholder" = "Slaptažodis";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Įveskite PIN";
@@ -74,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nepavyksta rasti paskyros";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Ring network. Make sure it was exported on Ring from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Paskyra pridėta";
 "alerts.accountNoNetworkTitle" = "Nepavyksta prisijungti prie tinklo";
-"alerts.accountNoNetworkMessage" = "Nepavyko pridėti paskyros, nes Ring nepavyko prisijungti prie paskirstytojo tinklo. Patikrinkite savo įrenginio ryšį.";
+"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Nežinoma klaida";
 "alerts.accountDefaultErrorMessage" = "Nepavyko sukurti paskyros.";
 "alerts.profileTakePhoto" = "Padaryti nuotrauką";
 "alerts.profileUploadPhoto" = "Įkelti nuotrauką";
 "alerts.profileCancelPhoto" = "Atsisakyti";
 "alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "Paleidžiant Ring, įvyko klaida";
+"alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Prašome užverti programą ir bandyti ją atverti dar kartą";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Užblokuoti kontaktą";
@@ -104,8 +114,8 @@
 "calls.callItemTitle" = "Skambutis";
 "calls.unknown" = "Nežinomas";
 "calls.incomingCallInfo" = "nori su jumis pakalbėti";
-"calls.ringing" = "Skambina";
-"calls.connecting" = "Sujungiama";
+"calls.ringing" = "Ringing…";
+"calls.connecting" = "Jungiamasi…";
 "calls.callFinished" = "Skambutis užbaigtas";
 
 //Account Page
@@ -131,7 +141,7 @@
 "linkDevice.passwordError" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
 "linkDevice.networkError" = "Eksportavimo metu, įvyko klaida";
 "linkDevice.defaultError" = "Eksportavimo metu, įvyko klaida";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Ring on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";
 
 //Contact Page

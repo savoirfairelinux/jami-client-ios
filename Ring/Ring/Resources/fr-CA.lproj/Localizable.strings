@@ -1,4 +1,4 @@
- /*
+﻿ /*
  *  Copyright (C) 2017 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -40,48 +40,47 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Bienvenue sur Jami !";
-"welcome.text" = "Jami est une plateforme de communication universelle qui préserve la vie privée et les libertés des utilisateurs";
+"welcome.title" = "Welcome to Jami !";
+"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Associer cet appareil à un compte";
-"welcome.createAccount" = "Créer un compte Jami";
+"welcome.createAccount" = "Create a Jami account";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Passer";
+"createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Suivant";
-"createProfile.title" = "Personnalisez votre profil";
-"createProfile.enterNameLabel" = "Entrez un nom d'affichage";
-"createProfile.enterNamePlaceholder" = "Entrez un nom";
-"createProfile.subtitle" = "Votre profil sera partagé avec vos contacts. Vous pourrez le modifier à tout moment.";
-"createProfile.createYourAvatar" = "Créez votre avatar";
+"createProfile.title" = "Personalise your profile";
+"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Créer votre compte";
-"createAccount.chooseStrongPassword" = "Choisir un mot de passe fort que vous allez mémoriser pour protéger votre compte Jami.";
+"createAccount.createAccountFormTitle" = "Créez votre compte";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "Nom d'utilisateur";
 "createAccount.newPasswordPlaceholder" = "Mot de passe";
-"createAccount.repeatPasswordPlaceholder" = "Confirmez le mot de passe";
+"createAccount.repeatPasswordPlaceholder" = "Confirmer le mot de passe";
 "createAccount.passwordCharactersNumberError" = "Minimum de 6 caractères";
 "createAccount.passwordNotMatchingError" = "les mots de passe ne correspondent pas";
-"createAccount.lookingForUsernameAvailability" = "recherche de disponibilité…";
+"createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "nom d'utilisateur invalide ";
 "createAccount.usernameAlreadyTaken" = "nom d'utilisateur déjà pris";
 "createAccount.loading" = "En chargement";
 "createAccount.waitCreateAccountTitle" = "Ajouter un compte";
-"createAccount.RegisterAUsername" = "Enregistrer un nom";
-"createAccount.ChooseAPassword" = "Chiffrer mon compte";
-"createAccount.PasswordInformation" = "Choisissez un mot de passe pour chiffrer votre compte local. Ne l'oubliez pas ou vous perdrez l'accès à votre compte";
+"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.ChooseAPassword" = "Encrypt my account";
+"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Notifications";
-"createAccount.Recommended" = "(Recommandé)";
-
+"createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Associer l'appareil";
+"linkToAccount.linkButtonTitle" = "Link device";
 "linkToAccount.passwordPlaceholder" = "Mot de passe";
 "linkToAccount.pinPlaceholder" = "NIP";
-"linkToAccount.passwordLabel" = "Entrez le mot de passe";
+"linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Entrer le NIP";
-"linkToAccount.explanationPinMessage" = "Pour générer le code PIN, accédez aux paramètres de gestion de compte sur le périphérique contenant le compte que vous souhaitez utiliser. Dans la section \"appareils\", sélectionnez \"Lier un autre appareil à ce compte \". Vous obtiendrez le code PIN nécessaire pour remplir ce formulaire. Le code PIN n'est valide que 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Impossible de trouver le compte";
@@ -115,8 +114,8 @@
 "calls.callItemTitle" = "Appeler";
 "calls.unknown" = "Inconnu";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Sonnerie en cours…";
-"calls.connecting" = "Connexion en cours…";
+"calls.ringing" = "Ringing…";
+"calls.connecting" = "Connecting…";
 "calls.callFinished" = "Call finished";
 
 //Account Page
@@ -138,7 +137,7 @@
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 
 //Link New Device
-"linkDevice.title" = "Associer cet appareil";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "Une erreur réseau s'est produite lors de l'exportation";
 "linkDevice.defaultError" = "Une erreur s'est produite lors de l'exportation";
