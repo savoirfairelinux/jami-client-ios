@@ -22,7 +22,7 @@
 "global.homeTabBarTitle" = "خانه";
 "global.contactRequestsTabBarTitle" = "دعوت ها";
 "global.meTabBarTitle" = "حساب کاربری";
-"global.ok" = "خب";
+"global.ok" = "باشه";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
@@ -40,28 +40,38 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "به رینگ خوش آمدید";
-"welcome.text" = "رینگ یک نرم‌افزار ارتباط جهانی است که آزادی‌ها و حریم شخصی کاربرانش را حفظ می کند.";
+"welcome.title" = "Welcome to Jami !";
+"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "پیوند این دستگاه به یک حساب";
-"welcome.createAccount" = "ساخت یک حساب رینگ";
+"welcome.createAccount" = "Create a Jami account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "اسکیپ";
 "createProfile.profileCreated" = "بعدی";
+"createProfile.title" = "Personalise your profile";
+"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNamePlaceholder" = "نام را وارد کنید";
+"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "حساب کاربری رینگ خود را بسازید";
-"createAccount.chooseStrongPassword" = "برای محافظت از حساب رینگ‌، گذرواژه‌ای قوی که  به خاطر می آورید را برگزینید.";
+"createAccount.createAccountFormTitle" = "حساب کاربری خود را بسازید";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "نام کاربری";
 "createAccount.newPasswordPlaceholder" = "گذرواژه";
 "createAccount.repeatPasswordPlaceholder" = "تأیید گذرواژه";
 "createAccount.passwordCharactersNumberError" = "حداقل ۶ کاراکتر";
 "createAccount.passwordNotMatchingError" = "گذرواژه‌ها یکسان نیستند";
-"createAccount.lookingForUsernameAvailability" = "در حال جستجو برای در دسترس بودن نام کاربری ...";
+"createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "نام کاربری نامعتبر";
 "createAccount.usernameAlreadyTaken" = "نام کاربری قبلاً برداشته شده";
 "createAccount.loading" = "بارگذاری...";
 "createAccount.waitCreateAccountTitle" = "در حال افزودن حساب";
+"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.ChooseAPassword" = "Encrypt my account";
+"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.EnableNotifications" = "Notifications";
+"createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "پیوند دادن حسابها";
@@ -74,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "نمی توان حساب را پیدا کرد";
-"alerts.accountCannotBeFoundMessage" = "حساب در شبکه رینگ یافت نشد. اطمینان حاصل کنید که حساب را از یک دستگاه  (که دارای حساب رینگ است)  صادر کرده اید و اعتبارنامه‌های ارائه شده صحیح است.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "حساب افزوده شد.";
 "alerts.accountNoNetworkTitle" = "نمی‌توان به شبکه وصل شد";
-"alerts.accountNoNetworkMessage" = "نمیتوان حساب را افزود زیرا رینگ نمیتوانست به شبکه توزیع شده متصل شود. اتصال دستگاه خود را بررسی کنید.";
+"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "خطای ناشناخته";
 "alerts.accountDefaultErrorMessage" = "حساب ایجاد نشد.";
 "alerts.profileTakePhoto" = "عکس  بگیرید!";
 "alerts.profileUploadPhoto" = "بارگذاری عکس";
 "alerts.profileCancelPhoto" = "لغو";
 "alerts.accountLinkedTitle" = "پیوند دادن حسابها";
-"alerts.dbFailedTitle" = "خطایی در هنگام راه اندازی رینگ رخ داد.";
+"alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "لطفا برنامه را ببندید و دوباره آن را باز کنید.";
 "alerts.confirmBlockContact" = "آیا مطمئن هستید که میخواهید این مخاطب را مسدود کنید؟ تاریخچه مکالمه با این مخاطب برای همیشه پاک خواهد شد.";
 "alerts.confirmBlockContactTitle" = "مسدود سازی مخاطب";
@@ -97,19 +107,19 @@
 "actions.deleteAction" = "حذف";
 "actions.cancelAction" = "لغو";
 "alerts.incomingCallAllertTitle" = "تماس دریافتی از";
-"alerts.incomingCallButtonAccept" = "قبول";
+"alerts.incomingCallButtonAccept" = "پذیرش";
 "alerts.incomingCallButtonIgnore" = "رد";
 
 //Calls
 "calls.callItemTitle" = "برقراری تماس";
 "calls.unknown" = "ناشناخته";
 "calls.incomingCallInfo" = "میخواهد با شما حرف بزند";
-"calls.ringing" = "در حال زنگ خوردن";
-"calls.connecting" = "در حال برقراری ارتباط";
+"calls.ringing" = "Ringing…";
+"calls.connecting" = "در حال اتصال...";
 "calls.callFinished" = "تماس پایان یافت";
 
 //Account Page
-"accountPage.devicesListHeader" = "افزاره‌ها";
+"accountPage.devicesListHeader" = "دستگاه ها";
 "accountPage.settingsHeader" = "تنظیمات";
 "accountPage.username" = "نام کاربری:";
 "accountPage.usernameNotRegistered" = "نام کاربری: ثبت نشده";
@@ -131,7 +141,7 @@
 "linkDevice.passwordError" = "گذرواژه‌ای که وارد کردید قفل این حساب کاربری را باز نمی‌کند";
 "linkDevice.networkError" = "یک خطای در ارتباط با شبکه  در زمان برون ریزی رخ داد.";
 "linkDevice.defaultError" = "یک خطا  در زمان برون ریزی رخ داد.";
-"linkDevice.explanationMessage" = "برای کامل کردن فرایند، باید رینگ را روی افزارهٔ نو گشوده و حساب جدیدی را با انتخاب «پیوند این افزاره به یک حساب» ایجاد کنید. پینتان برای ۱۰ دقیقه معتبر است.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = " در حال انجام تأیید...";
 
 //Contact Page
@@ -149,6 +159,6 @@
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "لغو شده";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "قبول";
+"dataTransfer.readableStatusAccept" = "پذیرش";
 "dataTransfer.readableStatusCancel" = "لغو";
 

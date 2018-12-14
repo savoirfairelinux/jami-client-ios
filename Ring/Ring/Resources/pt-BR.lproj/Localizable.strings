@@ -40,33 +40,43 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Bem-vindo ao Ring";
-"welcome.text" = "Ring é uma plataforma de comunicação gratuita e universal que preserva a privacidade e as liberdades de seus usuários";
+"welcome.title" = "Welcome to Jami !";
+"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Associar este dispositivo a uma conta";
-"welcome.createAccount" = "Criar uma conta no Ring";
+"welcome.createAccount" = "Create a Jami account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Pular";
 "createProfile.profileCreated" = "Próximo";
+"createProfile.title" = "Personalise your profile";
+"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNamePlaceholder" = "Digite o nome";
+"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Criar sua conta Ring";
-"createAccount.chooseStrongPassword" = "Escolha uma senha difícil que você poderá lembrar para proteger a sua conta Ring.";
-"createAccount.enterNewUsernamePlaceholder" = "nome de usuário";
-"createAccount.newPasswordPlaceholder" = "senha";
-"createAccount.repeatPasswordPlaceholder" = "confirmar senha";
+"createAccount.createAccountFormTitle" = "Criar uma conta";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.enterNewUsernamePlaceholder" = "Nome de usuário";
+"createAccount.newPasswordPlaceholder" = "Senha";
+"createAccount.repeatPasswordPlaceholder" = "Confirmar senha";
 "createAccount.passwordCharactersNumberError" = "Pelo menos 6 caracteres";
 "createAccount.passwordNotMatchingError" = "as senhas não coincidem";
-"createAccount.lookingForUsernameAvailability" = "procurando disponibilidade de nome de usuário";
+"createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "nome de usuário inválido";
 "createAccount.usernameAlreadyTaken" = "nome de usuário já existente";
 "createAccount.loading" = "Carregando";
 "createAccount.waitCreateAccountTitle" = "Adicionando conta";
+"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.ChooseAPassword" = "Encrypt my account";
+"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.EnableNotifications" = "Notifications";
+"createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Associar conta";
 "linkToAccount.linkButtonTitle" = "Associar dispositivo";
-"linkToAccount.passwordPlaceholder" = "senha";
+"linkToAccount.passwordPlaceholder" = "Senha";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Digitar Senha";
 "linkToAccount.pinLabel" = "Entre o PIN";
@@ -74,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Não foi possível localizar conta";
-"alerts.accountCannotBeFoundMessage" = "A conta não pôde ser encontrada na rede Ring. Certifique-se de que ela foi exportada do Ring de um dispositivo existente e que as credenciais fornecidas estão corretas.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Conta Adicionada";
 "alerts.accountNoNetworkTitle" = "Não foi possível conectar-se à rede.";
-"alerts.accountNoNetworkMessage" = "Não foi possível adicionar uma conta porque o Ring não pôde se conectar à rede. Verifique a conectividade do seu dispositivo.";
+"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Erro desconhecido";
 "alerts.accountDefaultErrorMessage" = "A conta não pôde ser criada.";
 "alerts.profileTakePhoto" = "Tirar foto";
 "alerts.profileUploadPhoto" = "Importar foto";
 "alerts.profileCancelPhoto" = "Cancelar";
 "alerts.accountLinkedTitle" = "Associar à uma conta";
-"alerts.dbFailedTitle" = "Ocorreu um erro ao iniciar Ring";
+"alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Por favor, feche o programa e tente abri-lo novamente";
 "alerts.confirmBlockContact" = "Tem certeza de que deseja bloquear este contato? O histórico de conversas com este contato também será excluído permanentemente.";
 "alerts.confirmBlockContactTitle" = "Bloquear Contato";
@@ -104,8 +114,8 @@
 "calls.callItemTitle" = "Chamar";
 "calls.unknown" = "Desconhecido";
 "calls.incomingCallInfo" = "quer conversar com você";
-"calls.ringing" = "Tocando";
-"calls.connecting" = "Conectando";
+"calls.ringing" = "Ringing…";
+"calls.connecting" = "Conectando…";
 "calls.callFinished" = "Chamada terminada";
 
 //Account Page
@@ -131,7 +141,7 @@
 "linkDevice.passwordError" = "A senha informada não desbloqueia esta conta";
 "linkDevice.networkError" = "Ocorreu um erro de rede durante a exportação";
 "linkDevice.defaultError" = "  Ocorreu um erro durante a exportação ";
-"linkDevice.explanationMessage" = "Para concluir o processo, você deve iniciar o Ring em no novo dispositivo e escolher a opção \"Vincular este dispositivo a uma conta\". Seu PIN é válido por 10 minutos.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verificando";
 
 //Contact Page

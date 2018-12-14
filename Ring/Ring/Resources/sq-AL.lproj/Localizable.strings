@@ -40,33 +40,43 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Mirë se vini te Ring";
-"welcome.text" = "Ring është platformë komunikimi e lirë dhe universale që respekton privatësinë dhe liritë e përdoruesve të tij.";
+"welcome.title" = "Mirë se vini te Jami !";
+"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Lidheni këtë pajisje me një llogari";
-"welcome.createAccount" = "Krijoni një llogari Ring";
+"welcome.createAccount" = "Krijoni një llogari Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Anashkaloje";
 "createProfile.profileCreated" = "Pasuesi";
+"createProfile.title" = "Personalizoni profilin tuaj";
+"createProfile.enterNameLabel" = "Jepni një emër për në ekran";
+"createProfile.enterNamePlaceholder" = "Jepni emër";
+"createProfile.subtitle" = "Profili juaj do të ndahet me kontaktet tuaja. Mund ta ndryshoni në çfarëdo kohe.";
+"createProfile.createYourAvatar" = "Krijoni avatarin tuaj";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Krijoni llogarinë tuaj Ring";
-"createAccount.chooseStrongPassword" = "Që të mbroni llogarinë tuaj Ring, zgjidhni fjalëkalim të fuqishëm, dhe që e mbani mend. ";
-"createAccount.enterNewUsernamePlaceholder" = "emër përdoruesi";
-"createAccount.newPasswordPlaceholder" = "fjalëkalim";
-"createAccount.repeatPasswordPlaceholder" = "ripohoni fjalëkalimin";
+"createAccount.createAccountFormTitle" = "Krijoni llogarinë tuaj";
+"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.enterNewUsernamePlaceholder" = "Emër përdoruesi";
+"createAccount.newPasswordPlaceholder" = "Fjalëkalim";
+"createAccount.repeatPasswordPlaceholder" = "Ripohoni fjalëkalimin";
 "createAccount.passwordCharactersNumberError" = "Minimumi 6 shenja";
 "createAccount.passwordNotMatchingError" = "fjalëkalimet nuk përputhen";
-"createAccount.lookingForUsernameAvailability" = "po shihet nëse emri i përdoruesit është i pazënë… ";
+"createAccount.lookingForUsernameAvailability" = "po shihet për pasje…";
 "createAccount.invalidUsername" = "emër përdoruesi i pavlefshëm";
 "createAccount.usernameAlreadyTaken" = "emër përdoruesi tashmë i zënë";
 "createAccount.loading" = "Po ngarkohet";
 "createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
+"createAccount.RegisterAUsername" = "Regjistroni një emër përdoruesi";
+"createAccount.ChooseAPassword" = "Fshehtëzoje llogarinë time";
+"createAccount.PasswordInformation" = "Zgjidhni një fjalëkalim për të fshehtëzuar llogarinë tuaj vendore. Mos e harroni, se përndryshe s’do të jeni në gjendje të rimerrni llogarinë tuaj";
+"createAccount.EnableNotifications" = "Njoftime";
+"createAccount.Recommended" = "(E këshilluar)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
 "linkToAccount.linkButtonTitle" = "Lidhni pajisje";
-"linkToAccount.passwordPlaceholder" = "fjalëkalim";
+"linkToAccount.passwordPlaceholder" = "Fjalëkalim";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Jepni Fjalëkalimin";
 "linkToAccount.pinLabel" = "Jepni PIN-in";
@@ -74,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "S\’gjendet dot llogari";
-"alerts.accountCannotBeFoundMessage" = "Llogaria s\’u gjet dot në rrjetin Ring. Sigurohuni që qe eksportuar në Ring nga një pajisje ekzistuese, dhe që kredencialet e dhëna janë të sakta.";
+"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Llogaria u Shtua";
 "alerts.accountNoNetworkTitle" = "S\’lidhet dot te rrjeti";
-"alerts.accountNoNetworkMessage" = "Llogaria s\’u shtua dot, ngaqë Ring-u s\’u lidh dot me rrjetin e shpërndarë. Shihni lidhjen e pajisjes tuaj.";
+"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Gabim i panjohur";
 "alerts.accountDefaultErrorMessage" = "Llogaria s\’u krijua dot.";
 "alerts.profileTakePhoto" = "Bëni një foto";
 "alerts.profileUploadPhoto" = "Ngarkoni foto";
 "alerts.profileCancelPhoto" = "Anuloje";
 "alerts.accountLinkedTitle" = "Po lidhet llogaria";
-"alerts.dbFailedTitle" = "Ndodhi një gabim kur po nisej Ring-u";
+"alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Ju lutemi, mbylleni aplikacionin dhe provoni ta rihapni";
 "alerts.confirmBlockContact" = "Jeni i sigurt se doni të bllokohet ky kontakt? Edhe historiku i bisedave me këtë kontakt do të fshihet përgjithmonë.";
 "alerts.confirmBlockContactTitle" = "Bllokoje Kontaktin";
@@ -104,8 +114,8 @@
 "calls.callItemTitle" = "Thirre";
 "calls.unknown" = "I panjohur";
 "calls.incomingCallInfo" = "dëshiron të flasë me ju";
-"calls.ringing" = "Po i bihet ziles";
-"calls.connecting" = "Po lidhet";
+"calls.ringing" = "Po thirret…";
+"calls.connecting" = "Po lidhet…";
 "calls.callFinished" = "Thirrja përfundoi";
 
 //Account Page
@@ -131,7 +141,7 @@
 "linkDevice.passwordError" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti gjatë eksportimit";
 "linkDevice.defaultError" = "Ndodhi një gabim gjatë eksportimit";
-"linkDevice.explanationMessage" = "Që të plotësohet procesi. lypset ta hapni Ring-un te pajisja e re dhe të zgjidhni mundësinë \"Lidheni këtë pajisje me një llogari.\" PIN-i juaj vlen vetëm për 10 minuta";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Po verifikohet";
 
 //Contact Page
