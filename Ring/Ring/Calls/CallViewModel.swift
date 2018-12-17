@@ -93,11 +93,11 @@ class CallViewModel: Stateable, ViewModel {
         return callService.currentCall.filter({ [weak self] call in
             return call.callId == self?.call?.callId
         })
-            .map({[weak self] call in
+            .map({ call in
                 return call.state == .over || call.state == .failure
-            }).map({ hide in
+            }).map({ [weak self] hide in
                 if hide {
-                    self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
+                    self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
                 }
                 return hide
             })
@@ -154,16 +154,16 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var isActiveVideoCall: Observable<Bool> = {
-        return self.callService.currentCall
-            .filter({ [weak self] call in
-                return call.callId == self?.call?.callId
+    lazy var isActiveVideoCall: Observable<Bool> = { [unowned self] in
+        return (self.callService.currentCall
+            .filter({call in
+                return call.callId == self.call?.callId
             }).map({ call in
                 return call.state == .current && !self.isAudioOnly
-            })
+            }))
     }()
 
-    lazy var showCallOptions: Observable<Bool> = {
+    lazy var showCallOptions: Observable<Bool> = { [unowned self] in
         return Observable.combineLatest(self.screenTapped.asObservable(),
                                         isActiveVideoCall) { (tapped, shouldRespond) in
             if tapped && shouldRespond {
@@ -173,7 +173,7 @@ class CallViewModel: Stateable, ViewModel {
         }
     }()
 
-    lazy var showCancelOption: Observable<Bool> = {
+    lazy var showCancelOption: Observable<Bool> = { [unowned self] in
         return self.callService.currentCall
             .filter({ [weak self] call in
                 return call.callId == self?.call?.callId &&
@@ -183,7 +183,7 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var showCapturedFrame: Observable<Bool> = {
+    lazy var showCapturedFrame: Observable<Bool> = { [unowned self] in
         return self.callService.currentCall
             .filter({ [weak self] call in
                 return call.callId == self?.call?.callId &&
@@ -195,7 +195,7 @@ class CallViewModel: Stateable, ViewModel {
 
     var screenTapped = BehaviorSubject(value: false)
 
-    lazy var videoButtonState: Observable<UIImage?> = {
+    lazy var videoButtonState: Observable<UIImage?> = { [unowned self] in
         let onImage = UIImage(asset: Asset.videoRunning)
         let offImage = UIImage(asset: Asset.videoMuted)
 
@@ -208,7 +208,7 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var videoMuted: Observable<Bool> = {
+    lazy var videoMuted: Observable<Bool> = { [unowned self] in
         return self.callService.currentCall.filter({ [weak self] call in
             call.callId == self?.call?.callId &&
                 call.state == .current
@@ -217,7 +217,7 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var audioButtonState: Observable<UIImage?> = {
+    lazy var audioButtonState: Observable<UIImage?> = { [unowned self] in
         let onImage = UIImage(asset: Asset.audioRunning)
         let offImage = UIImage(asset: Asset.audioMuted)
 
@@ -229,7 +229,7 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var speakerButtonState: Observable<UIImage?> = {
+    lazy var speakerButtonState: Observable<UIImage?> = { [unowned self] in
         let offImage = UIImage(asset: Asset.disableSpeakerphone)
         let onImage = UIImage(asset: Asset.enableSpeakerphone)
 
@@ -242,16 +242,16 @@ class CallViewModel: Stateable, ViewModel {
             })
     }()
 
-    lazy var isOutputToSpeaker: Observable<Bool> = {
+    lazy var isOutputToSpeaker: Observable<Bool> = { [unowned self] in
         return self.audioService.isOutputToSpeaker.asObservable()
     }()
 
-    lazy var speakerSwitchable: Observable<Bool> = {
+    lazy var speakerSwitchable: Observable<Bool> = { [unowned self] in
         return self.audioService.isHeadsetConnected.asObservable()
             .map { value in return !value }
     }()
 
-    lazy var audioMuted: Observable<Bool> = {
+    lazy var audioMuted: Observable<Bool> = { [unowned self] in
         return self.callService.currentCall.filter({ [weak self] call in
             call.callId == self?.call?.callId &&
                 call.state == .current
@@ -260,7 +260,7 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var pauseCallButtonState: Observable<UIImage?> = {
+    lazy var pauseCallButtonState: Observable<UIImage?> = { [unowned self] in
         let unpauseCall = UIImage(asset: Asset.unpauseCall)
         let pauseCall = UIImage(asset: Asset.pauseCall)
 
@@ -272,7 +272,7 @@ class CallViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var callPaused: Observable<Bool> = {
+    lazy var callPaused: Observable<Bool> = { [unowned self] in
         return self.callService.currentCall.filter({ [weak self] call in
             call.callId == self?.call?.callId &&
                 (call.state == .hold ||
@@ -301,10 +301,9 @@ class CallViewModel: Stateable, ViewModel {
             return call.callId == self?.call?.callId
         }).map({ call in
             return call.state == .current
-        }).subscribe(onNext: { _ in
-            self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
+        }).subscribe(onNext: { [weak self] _ in
+            self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
         }).disposed(by: self.disposeBag)
-
     }
 
     static func formattedDurationFrom(interval: Int) -> String {

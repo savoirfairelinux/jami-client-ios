@@ -135,16 +135,17 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     @objc func hideCapturedVideo() {
         if self.isMenuShowed { return }
-        UIView.animate(withDuration: 0.3, animations: {
-            if self.capturedVideoBlurEffect.alpha == 0 {
-                self.isVideoHidden = true
-                self.capturedVideoBlurEffect.alpha = 1
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            if self?.capturedVideoBlurEffect.alpha == 0 {
+                self?.isVideoHidden = true
+                self?.capturedVideoBlurEffect.alpha = 1
             } else {
-                self.isVideoHidden = false
-                self.capturedVideoBlurEffect.alpha = 0
+                self?.isVideoHidden = false
+                self?.capturedVideoBlurEffect.alpha = 0
             }
-            self.resizeCapturedVideo(withInfoContainer: !self.infoContainer.isHidden)
-            self.view.layoutIfNeeded()
+            guard let hidden = self?.infoContainer.isHidden else {return}
+            self?.resizeCapturedVideo(withInfoContainer: !hidden)
+            self?.view.layoutIfNeeded()
         })
     }
 
@@ -163,13 +164,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func animateCallCircle() {
         self.callPulse.alpha = 0.5
         self.callPulse.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        UIView.animate(withDuration: 1.5, animations: {
-            self.callPulse.alpha = 0.0
-            self.callPulse.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
-            self.view.layoutIfNeeded()
-        }, completion: { [unowned self] _ in
-            if self.viewModel.call?.state == .ringing || self.viewModel.call?.state == .connecting {
-                self.animateCallCircle()
+        UIView.animate(withDuration: 1.5, animations: { [weak self] in
+            self?.callPulse.alpha = 0.0
+            self?.callPulse.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+            self?.view.layoutIfNeeded()
+        }, completion: { [weak self] _ in
+            if self?.viewModel.call?.state == .ringing || self?.viewModel.call?.state == .connecting {
+                self?.animateCallCircle()
             }
         })
     }
@@ -178,8 +179,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.buttonsContainer.viewModel = self.viewModel.containerViewModel
         self.buttonsContainer.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.removeFromScreen()
                 self?.viewModel.cancelCall()
+                self?.removeFromScreen()
             }).disposed(by: self.disposeBag)
 
         self.buttonsContainer.muteAudioButton.rx.tap
@@ -326,17 +327,17 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         self.viewModel.showCallOptions
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { show in
+            .subscribe(onNext: { [weak self] show in
                 if show {
-                    self.showContactInfo()
+                    self?.showContactInfo()
                 }
             }).disposed(by: self.disposeBag)
 
         self.viewModel.showCancelOption
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { show in
+            .subscribe(onNext: { [weak self] show in
                 if show {
-                    self.showCancelButton()
+                    self?.showCancelButton()
                 }
             }).disposed(by: self.disposeBag)
 
@@ -362,8 +363,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         if !self.viewModel.isAudioOnly {
             self.viewModel.callPaused
                 .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { show in
-                    self.setAvatarView(show)
+                .subscribe(onNext: { [weak self] show in
+                    self?.setAvatarView(show)
                 }).disposed(by: self.disposeBag)
         }
 
@@ -454,6 +455,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func removeFromScreen() {
+        if !self.infoContainer.isHidden {
+            task?.cancel()
+        }
         UIDevice.current.isProximityMonitoringEnabled = false
         self.dismiss(animated: false)
     }
@@ -485,10 +489,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         // Waiting for screen size change
         DispatchQueue.global(qos: .background).async {
             sleep(UInt32(0.5))
-            DispatchQueue.main.async {
-                self.resizeCapturedVideo(withInfoContainer: !self.infoContainer.isHidden)
-                if UIDevice.current.hasNotch && (UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft) && self.infoContainer.isHidden == false  {
-                    self.buttonsContainerBottomConstraint.constant = 1
+            DispatchQueue.main.async { [weak self] in
+                guard let hidden = self?.infoContainer.isHidden else {return}
+                self?.resizeCapturedVideo(withInfoContainer: !hidden)
+                if UIDevice.current.hasNotch && (UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft) && self?.infoContainer.isHidden == false  {
+                    self?.buttonsContainerBottomConstraint.constant = 1
                 }
             }
         }
@@ -572,21 +577,21 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.infoContainer.isHidden = false
         self.view.layoutIfNeeded()
 
-        UIView.animate(withDuration: 0.2, animations: {
-            self.capturedVideoBlurEffect.alpha = 0
-            self.resizeCapturedVideo(withInfoContainer: true)
-            self.infoContainerTopConstraint.constant = -10
-            if UIDevice.current.hasNotch && (self.orientation == .landscapeRight || self.orientation == .landscapeLeft)  {
-                self.buttonsContainerBottomConstraint.constant = 1
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            self?.capturedVideoBlurEffect.alpha = 0
+            self?.resizeCapturedVideo(withInfoContainer: true)
+            self?.infoContainerTopConstraint.constant = -10
+            if UIDevice.current.hasNotch && (self?.orientation == .landscapeRight || self?.orientation == .landscapeLeft)  {
+                self?.buttonsContainerBottomConstraint.constant = 1
             } else if UIDevice.current.userInterfaceIdiom == .pad {
-                self.buttonsContainerBottomConstraint.constant = 30
+                self?.buttonsContainerBottomConstraint.constant = 30
             } else {
-                self.buttonsContainerBottomConstraint.constant = 10
+                self?.buttonsContainerBottomConstraint.constant = 10
             }
-            self.view.layoutIfNeeded()
+            self?.view.layoutIfNeeded()
         })
 
-        task = DispatchWorkItem { self.hideContactInfo() }
+        task = DispatchWorkItem {[weak self] in self?.hideContactInfo() }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7, execute: task!)
     }
 

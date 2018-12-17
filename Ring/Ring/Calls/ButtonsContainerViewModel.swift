@@ -35,7 +35,7 @@ class ButtonsContainerViewModel {
     var isAudioOnly: Bool
 
     let avalaibleCallOptions = BehaviorSubject<CallOptions>(value: .none)
-    lazy var observableCallOptions: Observable<CallOptions> = {
+    lazy var observableCallOptions: Observable<CallOptions> = { [unowned self] in
         return self.avalaibleCallOptions.asObservable()
     }()
 
@@ -49,38 +49,38 @@ class ButtonsContainerViewModel {
 
     private func checkCallOptions() {
         let callIsActive: Observable<Bool> = {
-            self.callService.currentCall.filter({ [unowned self] call in
-                return call.state == .current && call.callId == self.callID
+            self.callService.currentCall.filter({ [weak self] call in
+                return call.state == .current && call.callId == self?.callID
             }).map({_ in
                 return true
             })
         }()
         callIsActive
-            .subscribe(onNext: { [unowned self] active in
+            .subscribe(onNext: { [weak self] active in
             if !active {
                 return
             }
             if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-                self.avalaibleCallOptions.onNext(.optionsWithoutSpeakerphone)
+                self?.avalaibleCallOptions.onNext(.optionsWithoutSpeakerphone)
                 return
             }
-            self.connectToSpeaker()
+            self?.connectToSpeaker()
         }).disposed(by: self.disposeBag)
     }
 
     private func connectToSpeaker() {
-        let speakerIsAvailable: Observable<Bool> = {
+        let speakerIsAvailable: Observable<Bool> = { [unowned self] in
             return self.audioService.enableSwitchAudio.map({ (hide)  in
                 !hide
             })
         }()
-        speakerIsAvailable.subscribe(onNext: { [unowned self] available in
+        speakerIsAvailable.subscribe(onNext: { [weak self] available in
             if available {
-                self.avalaibleCallOptions.onNext(.optionsWithSpeakerphone)
+                self?.avalaibleCallOptions.onNext(.optionsWithSpeakerphone)
                 return
             }
 
-            self.avalaibleCallOptions.onNext(.optionsWithoutSpeakerphone)
+            self?.avalaibleCallOptions.onNext(.optionsWithoutSpeakerphone)
         }).disposed(by: self.disposeBag)
     }
 }

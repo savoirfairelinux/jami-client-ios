@@ -51,14 +51,14 @@ class ButtonsContainerView: UIView, NibLoadable {
         didSet {
             self.viewModel?.observableCallOptions
                 .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { (callOptions) in
+                .subscribe(onNext: { [weak self] callOptions in
                     switch callOptions {
                     case .none:
-                        self.withoutOptions()
+                        self?.withoutOptions()
                     case .optionsWithoutSpeakerphone:
-                        self.optionsWithoutSpeaker()
+                        self?.optionsWithoutSpeaker()
                     case .optionsWithSpeakerphone:
-                        self.optionsWithSpeaker()
+                        self?.optionsWithSpeaker()
                     }
                 }).disposed(by: self.disposeBag)
         }
@@ -76,11 +76,6 @@ class ButtonsContainerView: UIView, NibLoadable {
     override open func didMoveToWindow() {
         super.didMoveToWindow()
         self.cancelButton.backgroundColor = UIColor.red
-        if #available(iOS 11.0, *) {
-            guard let window = self.window else {
-                return
-            }
-        }
     }
 
     func commonInit() {
