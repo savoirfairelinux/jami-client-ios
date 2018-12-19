@@ -41,7 +41,7 @@
 
 //Welcome Screen
 "welcome.title" = "Mirë se vini te Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Jami është një platformë e lirë dhe universale komunikimi që ruan privatësinë dhe liritë e përdoruesve";
 "welcome.linkDevice" = "Lidheni këtë pajisje me një llogari";
 "welcome.createAccount" = "Krijoni një llogari Jami";
 
@@ -56,7 +56,7 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Krijoni llogarinë tuaj";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.chooseStrongPassword" = "Për të mbrojtur llogarinë tuaj Jami, zgjidhni fjalëkalim të fuqishëm që do ta mbani mend.";
 "createAccount.enterNewUsernamePlaceholder" = "Emër përdoruesi";
 "createAccount.newPasswordPlaceholder" = "Fjalëkalim";
 "createAccount.repeatPasswordPlaceholder" = "Ripohoni fjalëkalimin";
@@ -84,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "S\’gjendet dot llogari";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "S’u gjet dot llogaria në rrjetin Jami. Sigurohuni që qe eksportuar në Jami që prej një pajisjeje ekzistuese, dhe që kredencialet e dhëna për hyrjen janë të sakta.";
 "alerts.accountAddedTitle" = "Llogaria u Shtua";
 "alerts.accountNoNetworkTitle" = "S\’lidhet dot te rrjeti";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "S’u shtua dot llogaria, ngaqë Jami s’u lidh dot me rrjetin e shpërndarë. Kontrolloni lidhjen e pajisjes tuaj.";
 "alerts.accountDefaultErrorTitle" = "Gabim i panjohur";
 "alerts.accountDefaultErrorMessage" = "Llogaria s\’u krijua dot.";
 "alerts.profileTakePhoto" = "Bëni një foto";
 "alerts.profileUploadPhoto" = "Ngarkoni foto";
 "alerts.profileCancelPhoto" = "Anuloje";
 "alerts.accountLinkedTitle" = "Po lidhet llogaria";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "Ndodhi një gabim gjatë nisjes së Jami-t";
 "alerts.dbFailedMessage" = "Ju lutemi, mbylleni aplikacionin dhe provoni ta rihapni";
 "alerts.confirmBlockContact" = "Jeni i sigurt se doni të bllokohet ky kontakt? Edhe historiku i bisedave me këtë kontakt do të fshihet përgjithmonë.";
 "alerts.confirmBlockContactTitle" = "Bllokoje Kontaktin";
@@ -141,7 +141,7 @@
 "linkDevice.passwordError" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti gjatë eksportimit";
 "linkDevice.defaultError" = "Ndodhi një gabim gjatë eksportimit";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Që të plotësohet procesi, lypset ta hapni Jami-n në pajisjen e re dhe të zgjidhni mundësinë \"Lidhe këtë pajisje me një llogari.\" PIN-i juaj është i vlefshëm për 10 minuta";
 "linkDevice.hudMessage" = "Po verifikohet";
 
 //Contact Page

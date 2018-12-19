@@ -35,7 +35,7 @@
 "smartlist.searching" = "Поиск…";
 "smartlist.noResults" = "Нет результатов";
 "smartlist.noNetworkConnectivity" = "Нет подключения к сети";
-"smartlist.cellularAccess" = "Убедитесь что доступ через сеть сотовой связи разрешен";
+"smartlist.cellularAccess" = "Убедитесь, что доступ через сеть сотовой связи разрешен";
 
 // Walkthrough
 

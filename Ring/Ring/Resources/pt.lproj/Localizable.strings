@@ -20,145 +20,145 @@
 
 // Global
 "global.homeTabBarTitle" = "Início";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Convites";
 "global.meTabBarTitle" = "Conta";
-"global.ok" = "Ok";
+"global.ok" = "OK";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "Código QR inválido";
+"scan.search" = "A pesquisar…";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
-"smartlist.results" = "Search Result";
+"smartlist.yesterday" = "Ontem";
+"smartlist.results" = "Resultado da Pesquisa";
 "smartlist.conversations" = "Conversas";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
-"smartlist.noNetworkConnectivity" = "Sem conexão de rede";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.searching" = "A pesquisar...";
+"smartlist.noResults" = "Nenhum resultado";
+"smartlist.noNetworkConnectivity" = "Sem conectividade à rede";
+"smartlist.cellularAccess" = "Verifique se o acesso via telemóvel está autorizado nas suas configurações";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Ligar este dispositivo a uma conta";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.title" = "Bem-vindo ao Jami!";
+"welcome.text" = "O Jami é uma plataforma de comunicação universal que preserva a privacidade e liberdades dos utilizadores";
+"welcome.linkDevice" = "Associar este dispositivo a uma conta";
+"welcome.createAccount" = "Criar uma conta Jami";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Ignorar";
 "createProfile.profileCreated" = "Próximo";
-"createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.title" = "Personalizar o seu perfil";
+"createProfile.enterNameLabel" = "Introduzir um nome a mostrar";
+"createProfile.enterNamePlaceholder" = "Introduza o nome";
+"createProfile.subtitle" = "O seu perfil será partilhado com os seus contactos. Pode alterá-lo em qualquer altura.";
+"createProfile.createYourAvatar" = "Criar o seu avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your account";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.createAccountFormTitle" = "Criar a sua conta";
+"createAccount.chooseStrongPassword" = "Escolha uma palavra-chave forte que se lembre para proteger a sua conta Jami";
 "createAccount.enterNewUsernamePlaceholder" = "Nome de utilizador";
-"createAccount.newPasswordPlaceholder" = "Senha";
-"createAccount.repeatPasswordPlaceholder" = "Confirmar senha";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
-"createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.newPasswordPlaceholder" = "Palavra-chave";
+"createAccount.repeatPasswordPlaceholder" = "Confirmar palavra-chave";
+"createAccount.passwordCharactersNumberError" = "Pelo menos 6 caracteres";
+"createAccount.passwordNotMatchingError" = "as palavras-chave não coincidem";
+"createAccount.lookingForUsernameAvailability" = "a procurar pela disponibilidade…";
+"createAccount.invalidUsername" = "nome de utilizador inválido";
+"createAccount.usernameAlreadyTaken" = "o nome de utilizador já existe";
+"createAccount.loading" = "A carregar";
+"createAccount.waitCreateAccountTitle" = "Adicionar conta";
+"createAccount.RegisterAUsername" = "Registar um nome de utilizador";
+"createAccount.ChooseAPassword" = "Encriptar a minha conta";
+"createAccount.PasswordInformation" = "Escolha uma palavra-chave para encriptar a sua conta local. Não se esqueça dela pois sem ela não poderá recuperar a sua conta";
+"createAccount.EnableNotifications" = "Notificações";
+"createAccount.Recommended" = "(recomendado)";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "Senha";
+"linkToAccount.waitLinkToAccountTitle" = "Associar conta";
+"linkToAccount.linkButtonTitle" = "Associar dispositivo";
+"linkToAccount.passwordPlaceholder" = "Palavra-chave";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordLabel" = "Introduzir Palavra-chave";
+"linkToAccount.pinLabel" = "Introduza o PIN";
+"linkToAccount.explanationPinMessage" = "Para gerar o código PIN, aceda às configurações de gestão da conta no dispositivo que contém a conta que deseja usar. Em \"configurações de dispositivos\", selecione \"Associar outro dispositivo a esta conta\". Irá receberá o PIN necessário para completar este formulário. O PIN só é válido por 10 minutos.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountCannotBeFoundTitle" = "Não foi possível encontrar a conta";
+"alerts.accountCannotBeFoundMessage" = "A conta não foi encontrada na rede Jami. Certifique-se que exportou no Jami de um dispositivo existente e que as credenciais fornecidas estão corretas.";
+"alerts.accountAddedTitle" = "Conta Adicionada";
+"alerts.accountNoNetworkTitle" = "Não foi possível conectar-se à rede";
+"alerts.accountNoNetworkMessage" = "Não foi possível adicionar a conta porque o Jami não conseguiu ligar-se à rede de distribuição. Verifique a ligação do seu dispositivo.";
 "alerts.accountDefaultErrorTitle" = "Erro desconhecido";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountDefaultErrorMessage" = "Não foi possível criar a conta.";
 "alerts.profileTakePhoto" = "Tirar fotografia";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Importar fotografia";
 "alerts.profileCancelPhoto" = "Cancelar";
-"alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.accountLinkedTitle" = "Associar a uma conta";
+"alerts.dbFailedTitle" = "Ocorreu um erro ao abrir o Jami";
+"alerts.dbFailedMessage" = "Por favor feche o programa e tente abri-lo novamente";
+"alerts.confirmBlockContact" = "Tem a certeza de que quer bloquear este contacto? O histórico de conversas com este contacto também será eliminado de forma permanente.";
+"alerts.confirmBlockContactTitle" = "Bloquear Contacto";
+"alerts.confirmDeleteConversation" = "Tem certeza de que quer eliminar esta conversa permanentemente?";
+"alerts.confirmDeleteConversationFromContact" = "Tem certeza de que deseja eliminar a conversa com este contacto?";
+"alerts.confirmDeleteConversationTitle" = "Eliminar Conversa";
 
 //Actions
-"actions.blockAction" = "Block";
+"actions.blockAction" = "Bloquear";
 "actions.deleteAction" = "Eliminar";
 "actions.cancelAction" = "Cancelar";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "A receber chamada de";
 "alerts.incomingCallButtonAccept" = "Aceitar";
-"alerts.incomingCallButtonIgnore" = "Ignore";
+"alerts.incomingCallButtonIgnore" = "Ignorar";
 
 //Calls
-"calls.callItemTitle" = "Chamada";
+"calls.callItemTitle" = "Chamar";
 "calls.unknown" = "Desconhecido";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Ringing…";
+"calls.incomingCallInfo" = "quer conversar consigo";
+"calls.ringing" = "A tocar...";
 "calls.connecting" = "A conectar...";
-"calls.callFinished" = "Call finished";
+"calls.callFinished" = "Chamada terminada";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Configurações";
-"accountPage.username" = "username:";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Block List";
-"accountPage.unblockContact" = "UNBLOCK";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.username" = "nome de utilizador:";
+"accountPage.usernameNotRegistered" = "utilizador: não registado";
+"accountPage.credentialsHeader" = "Detalhes da Conta";
+"accountPage.enableProxy" = "Ativar Proxy";
+"accountPage.blockedContacts" = "Lista de Bloqueados";
+"accountPage.unblockContact" = "DESBLOQUEAR";
+"accountPage.proxyAddressAlert" = "Forneça o endereço do proxy";
+"accountPage.enableProxy" = "Ativar Proxy";
+"accountPage.noProxyExplanationLabel" = "O seu dispositivo não irá receber notificações quando o proxy estiver desativado";
 "accountPage.saveProxyAddress" = "Salvar";
-"accountPage.proxyPaceholder" = "Proxy address";
-"accountPage.enableNotifications" = "Enable Notifications";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyPaceholder" = "Endereço do proxy";
+"accountPage.enableNotifications" = "Ativar Notificações";
+"accountPage.proxyDisabledAlertTitle" = "Servidor Proxy Desativado";
+"accountPage.proxyDisabledAlertBody" = "Para receber as notificações ative o proxy";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.title" = "Associar a um novo dispositivo";
+"linkDevice.passwordError" = "A palavra-chave que introduziu não desbloqueia esta conta";
+"linkDevice.networkError" = "Ocorreu um erro na rede durante a exportação";
+"linkDevice.defaultError" = "Ocorreu um erro durante a exportação";
+"linkDevice.explanationMessage" = "Para terminar o processo, tem de abrir o Jami no dispositivo e escolher a opção \"Associar este dispositivo a uma conta.\" O seu PIN é válido por 10 minutos.";
+"linkDevice.hudMessage" = "A verificar";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
+"contactPage.startAudioCall" = "Iniciar Chamada de Áudio";
+"contactPage.startVideoCall" = "Iniciar Chamada de Vídeo";
+"contactPage.sendMessage" = "Enviar Mensagem";
+"contactPage.clearConversation" = "Limpar Histórico de Conversa";
+"contactPage.blockContact" = "Bloquear Contacto";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "A inicializar...";
 "dataTransfer.readableStatusError" = "Erro";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "Pendente...";
 "dataTransfer.readableStatusRefuse" = "Recusar";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "A transferir";
+"dataTransfer.readableStatusCanceled" = "Cancelada";
+"dataTransfer.readableStatusSuccess" = "Completa";
 "dataTransfer.readableStatusAccept" = "Aceitar";
 "dataTransfer.readableStatusCancel" = "Cancelar";
 

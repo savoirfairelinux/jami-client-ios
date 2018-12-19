@@ -25,8 +25,8 @@
 "global.ok" = "Aceptar";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "Código QR incorrecto";
+"scan.search" = "Buscando";
 
 // Smartlist
 "smartlist.yesterday" = "Ayer";
@@ -40,38 +40,38 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "Bienvenido a Jami !";
+"welcome.text" = "Jami es una plataforma de comunicación libre y universal que respeta la privacidad y las libertades de los usuarios.";
 "welcome.linkDevice" = "Conectar este dispositivo a una cuenta";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Crear una cuenta en Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Saltar";
 "createProfile.profileCreated" = "Siguiente";
-"createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.title" = "Personaliza tu perfil";
+"createProfile.enterNameLabel" = "Introduzca un nombre para mostrar";
 "createProfile.enterNamePlaceholder" = "Introducir nombre";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.subtitle" = "Tu perfil será compartido con tus contactos. Puedes cambiarlo en cualquier momento.";
+"createProfile.createYourAvatar" = "Crea tu avatar";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Crea tu cuenta";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.chooseStrongPassword" = "Elige una contraseña robusta que recordaras para proteger tu cuenta de Jami.";
 "createAccount.enterNewUsernamePlaceholder" = "Nombre de usuario";
 "createAccount.newPasswordPlaceholder" = "Contraseña";
 "createAccount.repeatPasswordPlaceholder" = "Confirmar contraseña";
 "createAccount.passwordCharactersNumberError" = "6 caracteres mínimo";
 "createAccount.passwordNotMatchingError" = "las contraseñas no coinciden";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "Comprobando disponibilidad...";
 "createAccount.invalidUsername" = "nombre de usuario inválido";
 "createAccount.usernameAlreadyTaken" = "nombre de usuario ya está en uso";
 "createAccount.loading" = "Cargando";
 "createAccount.waitCreateAccountTitle" = "Agregando cuenta";
-"createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.RegisterAUsername" = "Registrar nombre de usuario";
+"createAccount.ChooseAPassword" = "Encriptar mi cuenta";
+"createAccount.PasswordInformation" = "Elija una contraseña para cifrar su cuenta local. No lo olvides o no podrás recuperar tu cuenta.";
+"createAccount.EnableNotifications" = "Notificaciones";
+"createAccount.Recommended" = "(Recomendado)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asociación de la cuenta";
@@ -84,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Error al encontrar la cuenta";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "La cuenta no se pudo encontrar en la red de Jami. Asegúrese de que se haya exportado en Jami desde un dispositivo existente, y que las credenciales proporcionadas son correctas.";
 "alerts.accountAddedTitle" = "Cuenta agregada";
 "alerts.accountNoNetworkTitle" = "Error al conectarse a la red";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "No se pudo añadir la cuenta porque Jami no pudo conectarse con la red distribuida. Compruebe la conectividad del dispositivo.";
 "alerts.accountDefaultErrorTitle" = "Error desconocido";
 "alerts.accountDefaultErrorMessage" = "La cuenta no pudo ser creada.";
 "alerts.profileTakePhoto" = "Sacar una foto";
 "alerts.profileUploadPhoto" = "Subir foto";
 "alerts.profileCancelPhoto" = "Cancelar";
 "alerts.accountLinkedTitle" = "Vinculando cuenta";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "Se ha producido un error al iniciar Jami";
 "alerts.dbFailedMessage" = "Por favor cierre la aplicación e intente abrirla de nuevo";
 "alerts.confirmBlockContact" = "¿Estás seguro de que quieres bloquear este contacto? El historial de la conversación con este contacto también se borrará permanentemente.";
 "alerts.confirmBlockContactTitle" = "Bloquear contacto";
@@ -114,8 +114,8 @@
 "calls.callItemTitle" = "Llamar";
 "calls.unknown" = "Desconocido";
 "calls.incomingCallInfo" = "quiere hablar contigo";
-"calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
+"calls.ringing" = "Sonando...";
+"calls.connecting" = "Conectando...";
 "calls.callFinished" = "Llamada finalizada";
 
 //Account Page
@@ -141,7 +141,7 @@
 "linkDevice.passwordError" = "La contraseña ingresada no puede desbloquear esta cuenta";
 "linkDevice.networkError" = "Ocurrió un error durante la exportación";
 "linkDevice.defaultError" = "Ocurrió un error durante la exportación";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Para completar el proceso, necesita abrir Jami en el nuevo dispositivo y seleccione la opción \"Conectar el dispositivo a una cuenta\". Su PIN será válido durante 10 minutos. ";
 "linkDevice.hudMessage" = "Verificando";
 
 //Contact Page

@@ -43,7 +43,7 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Lier cet appareil à un compte";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Créer un compte Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Passez";

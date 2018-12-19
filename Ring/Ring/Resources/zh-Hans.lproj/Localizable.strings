@@ -40,38 +40,38 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "歡迎來到 Jami！";
+"welcome.text" = "Jami 是一個自由且通用的通訊平臺，其尊重使用者的隱私與自由。";
 "welcome.linkDevice" = "連結這個裝置到一個帳號";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "建立 Jami 帳號";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "略過";
 "createProfile.profileCreated" = "下一個";
-"createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.title" = "個人化您的簡介";
+"createProfile.enterNameLabel" = "輸入顯示名稱";
 "createProfile.enterNamePlaceholder" = "輸入名稱";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.subtitle" = "您的簡介將會與您的聯絡人分享。您隨時都可以修改。";
+"createProfile.createYourAvatar" = "建立您的大頭貼";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "建立您的帳號";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.chooseStrongPassword" = "選擇您可以記住用來保護您的 Jami 帳號的強式密碼。";
 "createAccount.enterNewUsernamePlaceholder" = "使用者名稱";
 "createAccount.newPasswordPlaceholder" = "密碼";
 "createAccount.repeatPasswordPlaceholder" = "確認密碼";
 "createAccount.passwordCharactersNumberError" = "最小6個字元";
 "createAccount.passwordNotMatchingError" = "密碼不符合";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "正在確認是否可用……";
 "createAccount.invalidUsername" = "無效的使用者名稱";
 "createAccount.usernameAlreadyTaken" = "使用者名稱已被使用";
 "createAccount.loading" = "正在載入";
 "createAccount.waitCreateAccountTitle" = "正在加入帳號";
-"createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.RegisterAUsername" = "註冊使用者名稱";
+"createAccount.ChooseAPassword" = "加密我的帳號";
+"createAccount.PasswordInformation" = "選擇密碼來加密您的本機帳號。不要忘了它，否則您會無法復原您的帳號";
+"createAccount.EnableNotifications" = "通知";
+"createAccount.Recommended" = "（建議）";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "帳號連結";
@@ -84,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "找不到帳號";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "在 Jami 網路中找不到帳號。請確定其已在 Jami 上從既有的裝置匯出，以及提供的憑證是正確的。";
 "alerts.accountAddedTitle" = "帳號已新增";
 "alerts.accountNoNetworkTitle" = "無法連接到網路";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "因為 Jami 無法連線到分散式網路，所以無法新增帳號。請檢查您裝置的網路連線。";
 "alerts.accountDefaultErrorTitle" = "未知的錯誤";
 "alerts.accountDefaultErrorMessage" = "帳號無法建立。";
 "alerts.profileTakePhoto" = "照相";
 "alerts.profileUploadPhoto" = "上傳照片";
 "alerts.profileCancelPhoto" = "取消";
 "alerts.accountLinkedTitle" = "連結帳號";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "當啟動 Jami 時發生錯誤";
 "alerts.dbFailedMessage" = "請關閉應用程式並再次嘗試開啟它";
 "alerts.confirmBlockContact" = "您確定要阻擋這個聯絡人嗎？這個聯絡人的對話紀錄將會永久刪除。";
 "alerts.confirmBlockContactTitle" = "阻擋聯絡人";
@@ -141,7 +141,7 @@
 "linkDevice.passwordError" = "您輸入的密碼無法解鎖這個帳號";
 "linkDevice.networkError" = "當匯出時遇到網路錯誤";
 "linkDevice.defaultError" = "當匯出時遇到錯誤";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "要完成此程序，您需要在新裝置上開啟 Jami 並選擇選項「連結這個裝置到一個帳號」。您的 PIN 碼在 10 分鐘內有效";
 "linkDevice.hudMessage" = "正在驗證";
 
 //Contact Page
