@@ -111,6 +111,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     func startCapturing() {
         sessionQueue.async { [unowned self] in
+            if self.captureSession.canSetSessionPreset(self.quality) {
+                self.captureSession.beginConfiguration()
+                self.captureSession.sessionPreset = self.quality
+                self.captureSession.commitConfiguration()
+            }
             self.captureSession.startRunning()
         }
     }
