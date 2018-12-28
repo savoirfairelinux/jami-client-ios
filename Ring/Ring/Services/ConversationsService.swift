@@ -221,7 +221,9 @@ class ConversationsService {
                                      transferInfo: NSDataTransferInfo,
                                      accountRingId: String,
                                      accountId: String,
-                                     photoIdentifier: String?) {
+                                     photoIdentifier: String?) -> Completable {
+
+        return Completable.create(subscribe: { [unowned self] completable in
 
         let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: transferInfo.totalSize, countStyle: .file)
         var messageContent = transferInfo.displayName + "\n" + fileSizeWithUnit
@@ -252,12 +254,16 @@ class ConversationsService {
                         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                         serviceEvent.addEventInput(.transferId, value: transferId)
                         self.responseStream.onNext(serviceEvent)
+                        completable(.completed)
                     })
                     .disposed(by: (self.disposeBag))
-                }, onError: { [unowned self] _ in
+                }, onError: { [unowned self] error in
                     self.messagesSemaphore.signal()
+                    completable(.error(error))
             })
             .disposed(by: self.disposeBag)
+            return Disposables.create { }
+        })
     }
 
     func status(forMessageId messageId: String) -> MessageStatus {

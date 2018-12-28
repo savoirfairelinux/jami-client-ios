@@ -86,6 +86,21 @@ class ConversationsManager: MessagesAdapterDelegate {
                                                      accountRingId: accountHelper.ringId!,
                                                      accountId: currentAccount.id,
                                                      photoIdentifier: photoIdentifier)
+                        .subscribe(onCompleted: {
+                            guard let transferInfo = self.dataTransferService
+                                .getTransferInfo(withId: transferId) else {return}
+                            if transferInfo.flags == 1,
+                                transferInfo.totalSize <= 10485760,
+                                (transferInfo.lastEvent == .wait_peer_acceptance ||
+                                    transferInfo.lastEvent == .wait_host_acceptance) {
+                                if let conversation = self.conversationService.findConversation(withRingId: transferInfo.peer, withAccountId: currentAccount.id),
+                                    let message = conversation.getMessage(withDaemonID: String(transferId)) {
+                                    if self.dataTransferService.acceptTransfer(withId: transferId, interactionID: message.messageId, fileName: &message.content, accountID: currentAccount.id, conversationID: conversation.conversationId) != .success {
+                                        self.log.debug("ConversationsManager: accept transfer failed")
+                                    }
+                                }
+                            }
+                        }).disposed(by: self.disposeBag)
 
                 case .dataTransferChanged:
                     self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: transferInfo.lastEvent))")
@@ -97,6 +112,17 @@ class ConversationsManager: MessagesAdapterDelegate {
                         status = DataTransferStatus.error
                     case .wait_peer_acceptance, .wait_host_acceptance:
                         status = DataTransferStatus.awaiting
+                        if transferInfo.flags == 1,
+                            transferInfo.totalSize <= 10485760,
+                            (transferInfo.lastEvent == .wait_peer_acceptance ||
+                                transferInfo.lastEvent == .wait_host_acceptance) {
+                            if let conversation = self.conversationService.findConversation(withRingId: transferInfo.peer, withAccountId: currentAccount.id),
+                                let message = conversation.getMessage(withDaemonID: String(transferId)) {
+                                if self.dataTransferService.acceptTransfer(withId: transferId, interactionID: message.messageId, fileName: &message.content, accountID: currentAccount.id, conversationID: conversation.conversationId) != .success {
+                                    self.log.debug("ConversationsManager: accept transfer failed")
+                                }
+                            }
+                        }
                     case .ongoing:
                         status = DataTransferStatus.ongoing
                     case .finished:
