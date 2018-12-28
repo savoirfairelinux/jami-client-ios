@@ -111,6 +111,8 @@ enum InteractionType: String {
     case oTransfer  = "OUTGOING_DATA_TRANSFER"
 }
 
+typealias savedMessageForConversation = (messageID: Int64, conversationID: Int64)
+
 class DBManager {
 
     let profileHepler: ProfileDataHelper
@@ -133,7 +135,7 @@ class DBManager {
         try interactionHepler.createTable()
     }
 
-    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, incoming: Bool, interactionType: InteractionType) -> Observable<Int64?> {
+    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, incoming: Bool, interactionType: InteractionType) -> Observable<savedMessageForConversation> {
 
         //create completable which will be executed on background thread
         return Observable.create { [weak self] observable in
@@ -181,8 +183,9 @@ class DBManager {
                     default:
                         result = nil
                     }
-                    if let success = result {
-                        observable.onNext(success)
+                    if let messageID = result {
+                        let savedMessage = savedMessageForConversation(messageID, conversationID)
+                        observable.onNext(savedMessage)
                         observable.on(.completed)
                     } else {
                         observable.on(.error(DBBridgingError.saveMessageFailed))

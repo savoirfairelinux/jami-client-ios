@@ -40,7 +40,9 @@ class ConversationsService {
 
     var messagesSemaphore = DispatchSemaphore(value: 1)
 
-    var dataTransferMessageMap = [UInt64: Int64]()
+    typealias savedMessageForConversation = (messageID: Int64, conversationID: Int64)
+
+    var dataTransferMessageMap = [UInt64: savedMessageForConversation]()
 
     lazy var conversationsForCurrentAccount: Observable<[ConversationModel]> = {
         return self.conversations.asObservable()
@@ -221,7 +223,9 @@ class ConversationsService {
                                      transferInfo: NSDataTransferInfo,
                                      accountRingId: String,
                                      accountId: String,
-                                     photoIdentifier: String?) {
+                                     photoIdentifier: String?) -> Completable {
+
+        return Completable.create(subscribe: { [unowned self] completable in
 
         let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: transferInfo.totalSize, countStyle: .file)
         var messageContent = transferInfo.displayName + "\n" + fileSizeWithUnit
@@ -241,8 +245,8 @@ class ConversationsService {
         self.messagesSemaphore.wait()
         self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: isIncoming, interactionType: interactionType)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onNext: { [unowned self] messageId in
-                self.dataTransferMessageMap[transferId] = messageId
+            .subscribe(onNext: { [unowned self] message in
+                self.dataTransferMessageMap[transferId] = message
                 self.dbManager.getConversationsObservable(for: accountId, accountURI: accountRingId)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onNext: { conversationsModels in
@@ -252,12 +256,16 @@ class ConversationsService {
                         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                         serviceEvent.addEventInput(.transferId, value: transferId)
                         self.responseStream.onNext(serviceEvent)
+                        completable(.completed)
                     })
                     .disposed(by: (self.disposeBag))
-                }, onError: { [unowned self] _ in
+                }, onError: { [unowned self] error in
                     self.messagesSemaphore.signal()
+                    completable(.error(error))
             })
             .disposed(by: self.disposeBag)
+            return Disposables.create { }
+        })
     }
 
     func status(forMessageId messageId: String) -> MessageStatus {

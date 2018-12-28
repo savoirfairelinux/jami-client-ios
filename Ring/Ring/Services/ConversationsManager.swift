@@ -33,6 +33,7 @@ class ConversationsManager: MessagesAdapterDelegate {
 
     private let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    fileprivate let maxSizeForAutoaccept = 20 * 1024 * 1024
     private let notificationHandler = LocalNotificationsHelper()
 
     init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService, dataTransferService: DataTransferService) {
@@ -86,6 +87,11 @@ class ConversationsManager: MessagesAdapterDelegate {
                                                      accountRingId: accountHelper.ringId!,
                                                      accountId: currentAccount.id,
                                                      photoIdentifier: photoIdentifier)
+                        .subscribe(onCompleted: {
+                            guard let transferInfo = self.dataTransferService
+                                .getTransferInfo(withId: transferId) else {return}
+                            self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: currentAccount.id)
+                        }).disposed(by: self.disposeBag)
 
                 case .dataTransferChanged:
                     self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: transferInfo.lastEvent))")
@@ -93,14 +99,18 @@ class ConversationsManager: MessagesAdapterDelegate {
                     switch transferInfo.lastEvent {
                     case .closed_by_host, .closed_by_peer:
                         status = DataTransferStatus.canceled
+                        self.conversationService.dataTransferMessageMap.removeValue(forKey: transferId)
                     case .invalid, .unsupported, .invalid_pathname, .unjoinable_peer:
                         status = DataTransferStatus.error
+                        self.conversationService.dataTransferMessageMap.removeValue(forKey: transferId)
                     case .wait_peer_acceptance, .wait_host_acceptance:
                         status = DataTransferStatus.awaiting
+                        self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: currentAccount.id)
                     case .ongoing:
                         status = DataTransferStatus.ongoing
                     case .finished:
                         status = DataTransferStatus.success
+                        self.conversationService.dataTransferMessageMap.removeValue(forKey: transferId)
                     case .created:
                         break
                     }
@@ -192,5 +202,23 @@ class ConversationsManager: MessagesAdapterDelegate {
                                                       for: messageId,
                                                       fromAccount: account,
                                                       to: uri)
+    }
+
+    func autoAcceptTransfer(transferInfo: NSDataTransferInfo, transferId: UInt64, accountId: String) {
+        if transferInfo.flags != 1 || transferInfo.totalSize > maxSizeForAutoaccept ||
+            (transferInfo.lastEvent != .wait_peer_acceptance && transferInfo.lastEvent != .wait_host_acceptance) {
+            return
+        }
+        guard let messageData = self.conversationService.dataTransferMessageMap[transferId] else {return}
+        if !(self.dataTransferService.isTransferImage(withId: transferId, accountID: accountId,
+                                                      conversationID: String(messageData.conversationID)) ?? false) {
+            return
+        }
+        var filename = ""
+        if self.dataTransferService.acceptTransfer(withId: transferId, interactionID: messageData.messageID,
+                                                   fileName: &filename, accountID: accountId,
+                                                   conversationID: String(messageData.conversationID)) != .success {
+            self.log.debug("ConversationsManager: accept transfer failed")
+        }
     }
 }
