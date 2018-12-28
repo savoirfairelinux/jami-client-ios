@@ -33,6 +33,7 @@ class ConversationsManager: MessagesAdapterDelegate {
 
     private let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    fileprivate let maxSizeForAutoaccept = 20 * 1024 * 1024
     private let notificationHandler = LocalNotificationsHelper()
 
     init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService, dataTransferService: DataTransferService) {
@@ -86,6 +87,11 @@ class ConversationsManager: MessagesAdapterDelegate {
                                                      accountRingId: accountHelper.ringId!,
                                                      accountId: currentAccount.id,
                                                      photoIdentifier: photoIdentifier)
+                        .subscribe(onCompleted: {
+                            guard let transferInfo = self.dataTransferService
+                                .getTransferInfo(withId: transferId) else {return}
+                            self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: currentAccount.id)
+                        }).disposed(by: self.disposeBag)
 
                 case .dataTransferChanged:
                     self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: transferInfo.lastEvent))")
@@ -97,6 +103,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                         status = DataTransferStatus.error
                     case .wait_peer_acceptance, .wait_host_acceptance:
                         status = DataTransferStatus.awaiting
+                        self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: currentAccount.id)
                     case .ongoing:
                         status = DataTransferStatus.ongoing
                     case .finished:
@@ -192,5 +199,26 @@ class ConversationsManager: MessagesAdapterDelegate {
                                                       for: messageId,
                                                       fromAccount: account,
                                                       to: uri)
+    }
+
+    func autoAcceptTransfer(transferInfo: NSDataTransferInfo, transferId: UInt64, accountId: String) {
+        if transferInfo.flags != 1 || transferInfo.totalSize > maxSizeForAutoaccept ||
+            (transferInfo.lastEvent != .wait_peer_acceptance && transferInfo.lastEvent != .wait_host_acceptance) {
+            return
+        }
+        guard let conversation = self.conversationService.findConversation(withRingId: transferInfo.peer,
+                                                                           withAccountId: accountId),
+            let message = conversation.getMessage(withDaemonID: String(transferId)) else {
+                return
+        }
+        if !(self.dataTransferService.isTransferImage(withId: transferId, accountID: accountId,
+                                                      conversationID: conversation.conversationId) ?? false) {
+            return
+        }
+        if self.dataTransferService.acceptTransfer(withId: transferId, interactionID: message.messageId,
+                                                   fileName: &message.content, accountID: accountId,
+                                                   conversationID: conversation.conversationId) != .success {
+            self.log.debug("ConversationsManager: accept transfer failed")
+        }
     }
 }

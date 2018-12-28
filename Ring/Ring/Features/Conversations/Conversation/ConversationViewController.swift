@@ -683,14 +683,6 @@ class ConversationViewController: UIViewController,
                 cell.statusLabel.textColor = UIColor.jamiSuccess
                 cell.cancelButton.setTitle(L10n.DataTransfer.readableStatusCancel, for: .normal)
             } else if item.bubblePosition() == .received {
-                // accept automatically if less than 10MB and is an image
-                if let transferId = item.daemonId,
-                    let isImage = viewModel.isTransferImage(transferId: transferId),
-                    let size = viewModel.getTransferSize(transferId: transferId), isImage && size <= 10485760 {
-                    if viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
-                        _ = self.viewModel.cancelTransfer(transferId: transferId)
-                    }
-                }
                 // hide status
                 cell.statusLabel.isHidden = true
                 cell.acceptButton?.isHidden = false
