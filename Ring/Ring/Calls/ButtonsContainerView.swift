@@ -32,9 +32,9 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var muteAudioButton: UIButton!
     @IBOutlet  weak var muteVideoButton: UIButton!
     @IBOutlet  weak var pauseCallButton: UIButton!
-    @IBOutlet  weak var switchCameraButton: UIButton!
     @IBOutlet  weak var switchSpeakerButton: UIButton!
     @IBOutlet  weak var cancelButton: UIButton!
+    @IBOutlet  weak var spaceButton: UIButton!
 
     //Constraints
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
@@ -90,7 +90,6 @@ class ButtonsContainerView: UIView, NibLoadable {
             muteAudioButton.isHidden = true
             muteVideoButton.isHidden = true
             pauseCallButton.isHidden = true
-            switchCameraButton.isHidden = true
             switchSpeakerButton.isHidden = true
             cancelButton.isHidden = false
     }
@@ -102,14 +101,11 @@ class ButtonsContainerView: UIView, NibLoadable {
             muteAudioButton.isHidden = false
             if self.viewModel?.isAudioOnly ?? false {
                 muteVideoButton.isHidden = true
-                switchCameraButton.isHidden = true
+                spaceButton.isHidden = true
             } else {
                 muteVideoButton.isHidden = false
-                switchCameraButton.isHidden = false
             }
             pauseCallButton.isHidden = false
-            switchSpeakerButton.isHidden = false
-            switchSpeakerButton.alpha = 1.00
             switchSpeakerButton.isEnabled = true
             cancelButton.isHidden = false
         }
@@ -120,13 +116,11 @@ class ButtonsContainerView: UIView, NibLoadable {
             self.isCallStarted = true
             if self.viewModel?.isAudioOnly ?? false {
                 muteVideoButton.isHidden = true
-                switchCameraButton.isHidden = true
-                switchSpeakerButton.isHidden = true
+                spaceButton.isHidden = true
             } else {
                 muteVideoButton.isHidden = false
-                switchCameraButton.isHidden = false
-                switchSpeakerButton.isHidden = false
             }
+            switchSpeakerButton.isEnabled = false
             self.muteAudioButton.isHidden = false
             self.backgroundBlurEffect.isHidden = false
             pauseCallButton.isHidden = false

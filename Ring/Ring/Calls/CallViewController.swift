@@ -37,6 +37,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarViewBlurEffect: UIVisualEffectView!
     @IBOutlet private weak var callPulse: UIView!
+    @IBOutlet  weak var switchCameraButton: UIButton!
 
     @IBOutlet private weak var mainView: UIView!
 
@@ -122,6 +123,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }
 
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
+        switchCameraButton.contentVerticalAlignment = .fill
+        switchCameraButton.contentHorizontalAlignment = .fill
 
         initCallAnimation()
         UIApplication.shared.isIdleTimerDisabled = true
@@ -201,7 +204,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.viewModel.togglePauseCall()
             }).disposed(by: self.disposeBag)
 
-        self.buttonsContainer.switchCameraButton.rx.tap
+        self.switchCameraButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.switchCamera()
             }).disposed(by: self.disposeBag)
@@ -241,7 +244,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             }).disposed(by: self.disposeBag)
 
         // disable switch camera button for audio only calls
-        self.buttonsContainer.switchCameraButton.isEnabled = !(self.viewModel.isAudioOnly)
+        self.switchCameraButton.isEnabled = !(self.viewModel.isAudioOnly)
     }
 
     func setupBindings() {
@@ -576,6 +579,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }
         self.isMenuShowed = true
         self.buttonsContainer.isHidden = false
+        if !self.capturedVideo.isHidden {
+            self.switchCameraButton.isHidden = false
+        }
+
         self.infoContainer.isHidden = false
         self.view.layoutIfNeeded()
 
@@ -590,6 +597,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             } else {
                 self?.buttonsContainerBottomConstraint.constant = 10
             }
+            self?.capturedVideoBlurEffect.alpha = 0.7
             self?.view.layoutIfNeeded()
         })
 
@@ -600,7 +608,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func hideContactInfo() {
         self.isMenuShowed = false
         UIView.animate(withDuration: 0.2, animations: { [unowned self] in
-            if self.isVideoHidden { self.capturedVideoBlurEffect.alpha = 1 }
+            self.capturedVideoBlurEffect.alpha = self.isVideoHidden ? 1 : 0
             self.resizeCapturedVideo(withInfoContainer: false)
             self.infoContainerTopConstraint.constant = 150
             self.buttonsContainerBottomConstraint.constant = -150
@@ -608,6 +616,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             }, completion: { [weak self] _ in
                 self?.infoContainer.isHidden = true
                 self?.buttonsContainer.isHidden = true
+                self?.switchCameraButton.isHidden = true
         })
     }
 
