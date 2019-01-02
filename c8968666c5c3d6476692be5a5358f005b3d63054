@@ -22,6 +22,30 @@
       "revId": "c8968666c5c3d6476692be5a5358f005b3d63054",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6acfa76_b9766d43",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2019-01-02T15:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1da9425_904080b6",
+      "range": {
+        "startLine": 93,
+        "startChar": 58,
+        "endLine": 93,
+        "endChar": 66
+      },
+      "revId": "c8968666c5c3d6476692be5a5358f005b3d63054",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
