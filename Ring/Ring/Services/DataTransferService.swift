@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2018-2018 Savoir-faire Linux Inc.
+ *  Copyright (C) 2018-2019 Savoir-faire Linux Inc.
  *
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>

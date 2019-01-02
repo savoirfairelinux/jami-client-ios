@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>

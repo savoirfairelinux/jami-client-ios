@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *

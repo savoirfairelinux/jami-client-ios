@@ -3,7 +3,7 @@
 //  Ring
 //
 //  Created by Quentin on 2018-09-26.
-//  Copyright © 2018 Savoir-faire Linux. All rights reserved.
+//  Copyright © 2019 Savoir-faire Linux. All rights reserved.
 //
 
 import Foundation

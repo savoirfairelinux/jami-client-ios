@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2018 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
