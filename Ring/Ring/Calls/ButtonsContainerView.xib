@@ -23,10 +23,10 @@
                 <outlet property="muteAudioButton" destination="tXL-FB-O0X" id="6Bh-x3-veQ"/>
                 <outlet property="muteVideoButton" destination="W7F-nH-kda" id="MWK-JU-544"/>
                 <outlet property="pauseCallButton" destination="MPk-dB-dhR" id="W4G-AB-WFw"/>
+                <outlet property="spaceButton" destination="L9n-Zc-bLI" id="92r-Og-oN0"/>
                 <outlet property="stackView" destination="RHx-cL-CV5" id="Iz9-B0-2Rd"/>
                 <outlet property="stackViewWidthConstraint" destination="ZuV-LV-CYZ" id="ita-8Y-fAb"/>
                 <outlet property="stackViewYConstraint" destination="z8B-uv-Vcb" id="Gaj-8x-yif"/>
-                <outlet property="switchCameraButton" destination="gfb-nb-FyB" id="FTM-2Z-u3u"/>
                 <outlet property="switchSpeakerButton" destination="0VH-mO-vFE" id="1Gy-a9-FAW"/>
             </connections>
         </placeholder>
@@ -97,19 +97,18 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VH-mO-vFE">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9n-Zc-bLI">
                                     <rect key="frame" x="147.5" y="0.0" width="50" height="50"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="50" id="oso-jU-2U3"/>
-                                        <constraint firstAttribute="height" constant="50" id="qmE-To-ipl"/>
+                                        <constraint firstAttribute="height" constant="50" id="37P-Oz-QCS"/>
+                                        <constraint firstAttribute="width" constant="50" id="wS1-Dk-uHm"/>
                                     </constraints>
                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" image="disable_speakerphone"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="2"/>
+                                            <real key="value" value="0.0"/>
                                         </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="25"/>
                                         </userDefinedRuntimeAttribute>
@@ -139,24 +138,24 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfb-nb-FyB">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VH-mO-vFE">
                                     <rect key="frame" x="295" y="0.0" width="50" height="50"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="DYV-x7-KoO"/>
-                                        <constraint firstAttribute="width" constant="50" id="XYg-b8-pt8"/>
+                                        <constraint firstAttribute="width" constant="50" id="oso-jU-2U3"/>
+                                        <constraint firstAttribute="height" constant="50" id="qmE-To-ipl"/>
                                     </constraints>
                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" image="switch_camera"/>
+                                    <state key="normal" image="disable_speakerphone"/>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                             <real key="value" value="2"/>
                                         </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="25"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
@@ -221,7 +220,6 @@
         <image name="disable_speakerphone" width="48" height="48"/>
         <image name="pause_call" width="48" height="48"/>
         <image name="stop_call" width="48" height="48"/>
-        <image name="switch_camera" width="50" height="37"/>
-        <image name="video_running" width="48" height="48"/>
+        <image name="video_running" width="43.5" height="43.5"/>
     </resources>
 </document>
