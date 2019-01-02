@@ -124,6 +124,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
 
         initCallAnimation()
+        UIApplication.shared.isIdleTimerDisabled = true
     }
 
     @objc func capturedVideoSwipped(gesture: UISwipeGestureRecognizer) {
@@ -459,6 +460,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             task?.cancel()
         }
         UIDevice.current.isProximityMonitoringEnabled = false
+        UIApplication.shared.isIdleTimerDisabled = false
         self.dismiss(animated: false)
     }
 
