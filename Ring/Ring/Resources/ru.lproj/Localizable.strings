@@ -40,38 +40,38 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "Добро пожаловать в Jami !";
+"welcome.text" = "Jami - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
 "welcome.linkDevice" = "Привязать это устройство к аккаунту";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Создать учётную запись Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустить";
 "createProfile.profileCreated" = "Далее";
-"createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.title" = "Персонализируйте свой профиль";
+"createProfile.enterNameLabel" = "Введите отображаемое имя";
 "createProfile.enterNamePlaceholder" = "Введите имя";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.subtitle" = "Ваш профиль будет доступен только вашим контактам. Вы можете изменить это в любое время.";
+"createProfile.createYourAvatar" = "Создайте свой аватар";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Создайте свой аккаунт";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.chooseStrongPassword" = "Выберите надёжный пароль, который вы запомните, чтобы защитить ваш аккаунт Jami.";
 "createAccount.enterNewUsernamePlaceholder" = "Имя пользователя";
 "createAccount.newPasswordPlaceholder" = "Пароль";
 "createAccount.repeatPasswordPlaceholder" = "Подтверждение пароля";
 "createAccount.passwordCharactersNumberError" = "Минимум 6 символов";
 "createAccount.passwordNotMatchingError" = "Пароли не совпадают";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "проверка доступности…";
 "createAccount.invalidUsername" = "недопустимое имя пользователя";
 "createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
 "createAccount.loading" = "Загрузка";
 "createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
-"createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.RegisterAUsername" = "Зарегистрировать имя пользователя";
+"createAccount.ChooseAPassword" = "Зашифровать мой аккаунт";
+"createAccount.PasswordInformation" = "Выберите пароль для шифрования вашего локального аккаунта. Не забывайте его или вы не сможете восстановить свой аккаунт";
+"createAccount.EnableNotifications" = "Уведомления";
+"createAccount.Recommended" = "(Рекомендовано)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Соединение аккаунта";
@@ -84,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не удалось найти аккаунт";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Не удалось найти аккаунт в сети Jami. Удостоверьтесь, что он был экспортирован в сеть Jami с существующего устройства, и что предоставленные идентификационные данные верны.";
 "alerts.accountAddedTitle" = "Аккаунт добавлен";
 "alerts.accountNoNetworkTitle" = "Не удается подключиться к сети";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Невозможно добавить аккаунт, так как Jami не смог подключиться к распределённой сети. Проверьте ваше соединение.";
 "alerts.accountDefaultErrorTitle" = "Неизвестная ошибка";
 "alerts.accountDefaultErrorMessage" = "Не удалось создать аккаунт.";
 "alerts.profileTakePhoto" = "Сфотографировать";
 "alerts.profileUploadPhoto" = "Загрузка фотографии";
 "alerts.profileCancelPhoto" = "Отмена";
 "alerts.accountLinkedTitle" = "Аккаунт соединяется";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "Произошла ошибка при запуске Jami";
 "alerts.dbFailedMessage" = "Пожалуйста, закройте приложение и попробуйте открыть его снова";
 "alerts.confirmBlockContact" = "Вы уверены, что хотите заблокировать этот контакт? История разговоров с этим контактом также будет безвозвратно удалена.";
 "alerts.confirmBlockContactTitle" = "Заблокировать контакт";
@@ -141,7 +141,7 @@
 "linkDevice.passwordError" = "Введенный пароль не подходит к этому аккаунту";
 "linkDevice.networkError" = "Во время экспорта произошла ошибка сети";
 "linkDevice.defaultError" = "Во время экспорта произошла ошибка";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Для завершения процесса Вам необходимо запустить Jami на новом устройстве и выбрать пункт \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут";
 "linkDevice.hudMessage" = "Проверка";
 
 //Contact Page

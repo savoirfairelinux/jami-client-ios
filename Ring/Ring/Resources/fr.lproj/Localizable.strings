@@ -40,38 +40,38 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "Bienvenu sur Jami !";
+"welcome.text" = "Jami est un logiciel libre de communication universel qui protège la vie privée et les libertés de ses utilisateurs.";
 "welcome.linkDevice" = "Lier cet appareil à un compte";
 "welcome.createAccount" = "Créer un compte Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Passez";
 "createProfile.profileCreated" = "Suivant";
-"createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.title" = "Personnaliser votre profile";
+"createProfile.enterNameLabel" = "Entrer le nom d'affichage";
 "createProfile.enterNamePlaceholder" = "Entrer un nom";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.subtitle" = "Votre profile sera partagé avec vos contacts. Vous pouvez le changer en tout temps.";
+"createProfile.createYourAvatar" = "Créer votre avatar ";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Créez votre compte";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.chooseStrongPassword" = "Pour protéger votre compte Jami, choisissez un mot de passe fort dont vous vous souviendrez.";
 "createAccount.enterNewUsernamePlaceholder" = "Nom d'utilisateur";
 "createAccount.newPasswordPlaceholder" = "Mot de passe";
 "createAccount.repeatPasswordPlaceholder" = "Confirmer le mot de passe";
 "createAccount.passwordCharactersNumberError" = "Au moins 6 caractères";
 "createAccount.passwordNotMatchingError" = "Les mots de passe ne sont pas identiques";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "Vérification de la disponibilité...";
 "createAccount.invalidUsername" = "Nom d'utilisateur invalide";
 "createAccount.usernameAlreadyTaken" = "Ce nom d'utilisateur est déjà utilisé";
 "createAccount.loading" = "Chargement";
 "createAccount.waitCreateAccountTitle" = "Ajout du compte";
-"createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.RegisterAUsername" = "Enregistrer un nom";
+"createAccount.ChooseAPassword" = "Encrypter mon compte";
+"createAccount.PasswordInformation" = "Choisissez un mot de passe pour encrypter votre compte localement. Ne l'oubliez pas ! Il sera impossible de récupérer votre compte sans lui";
 "createAccount.EnableNotifications" = "Notifications";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.Recommended" = "(recommandé)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Association du compte";
@@ -84,17 +84,17 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Compte introuvable";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Le compte ne peut être trouvé sur le réseau Jami. Vérifiez qu'il a bien été exporté par un autre appareil et que les identifiants fournis sont corrects.";
 "alerts.accountAddedTitle" = "Compte ajouté";
 "alerts.accountNoNetworkTitle" = "Impossible de se connecter au réseau";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Impossible de rajouter le compte parce que Jami ne peut se connecter sur le réseau. Vérifiez la connectivité de votre appareil.";
 "alerts.accountDefaultErrorTitle" = "Erreur inconnue";
 "alerts.accountDefaultErrorMessage" = "Le compte ne peut pas être créé.";
 "alerts.profileTakePhoto" = "Prendre une photo";
 "alerts.profileUploadPhoto" = "Importer la photo";
 "alerts.profileCancelPhoto" = "Annuler";
 "alerts.accountLinkedTitle" = "Association du compte en cours";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "Une erreur s'est produite au démarrage de Jami";
 "alerts.dbFailedMessage" = "Veuillez fermer l'application et réessayez";
 "alerts.confirmBlockContact" = "Êtes-vous certain de vouloir bloquer contact ? L'historique des conversations avec ce contact sera supprimé définitivement.";
 "alerts.confirmBlockContactTitle" = "Bloquer ce contact";
@@ -114,7 +114,7 @@
 "calls.callItemTitle" = "Appelez";
 "calls.unknown" = "Inconnu";
 "calls.incomingCallInfo" = "veut vous parler";
-"calls.ringing" = "Ringing…";
+"calls.ringing" = "Sonne...";
 "calls.connecting" = "En cours de connexion ...";
 "calls.callFinished" = "Appel terminé";
 
@@ -141,7 +141,7 @@
 "linkDevice.passwordError" = "Le mot de passe fourni ne déverouille pas ce compte";
 "linkDevice.networkError" = "Une erreur réseau est survenue pendant l'exportation";
 "linkDevice.defaultError" = "Une erreur s'est produite lors de l'export";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Pour terminer l'opération, vous devez lancer Jami sur un autre appareil, choisir l'option \"Associer cet appareil à un compte\". Le NIP fourni a une durée de vie de 10 minutes.";
 "linkDevice.hudMessage" = "Vérification";
 
 //Contact Page
