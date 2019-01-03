@@ -525,7 +525,12 @@ class ConversationViewController: UIViewController,
             guard let payload = self.messageAccessoryView.messageTextView.text, !payload.isEmpty else {
                 return
             }
-            self.viewModel.sendMessage(withContent: payload)
+            let trimmed = payload.trimmingCharacters(in: .whitespacesAndNewlines)
+            if trimmed.isEmpty {
+                self.messageAccessoryView.messageTextView.text = ""
+                return
+            }
+            self.viewModel.sendMessage(withContent: trimmed)
             self.messageAccessoryView.messageTextView.text = ""
             self.messageAccessoryView.setEmojiButtonVisibility(hide: false)
         }).disposed(by: self.disposeBag)
