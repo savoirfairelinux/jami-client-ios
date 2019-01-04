@@ -107,6 +107,7 @@ class ButtonsContainerView: UIView, NibLoadable {
             }
             pauseCallButton.isHidden = false
             switchSpeakerButton.isEnabled = true
+            switchSpeakerButton.isHidden = false
             cancelButton.isHidden = false
         }
     }
@@ -122,6 +123,7 @@ class ButtonsContainerView: UIView, NibLoadable {
             }
             switchSpeakerButton.isEnabled = false
             self.muteAudioButton.isHidden = false
+            switchSpeakerButton.isHidden = false
             self.backgroundBlurEffect.isHidden = false
             pauseCallButton.isHidden = false
             cancelButton.isHidden = false
