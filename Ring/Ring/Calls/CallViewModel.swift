@@ -334,9 +334,9 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     func answerCall() -> Completable {
-        // switch to rcv if that's what we were last using
-        if !self.audioService.isHeadsetConnected.value && !self.audioService.isOutputToSpeaker.value {
-            self.audioService.overrideToReceiver()
+        if !self.audioService.isHeadsetConnected.value {
+            isAudioOnly ?
+                self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
         }
         return self.callService.accept(call: call)
     }
@@ -346,9 +346,9 @@ class CallViewModel: Stateable, ViewModel {
         guard let account = self.accountService.currentAccount else {
             return
         }
-        // switch to rcv if audio only and no headset connected
-        if isAudioOnly && !self.audioService.isHeadsetConnected.value {
-            self.audioService.overrideToReceiver()
+        if !self.audioService.isHeadsetConnected.value {
+            isAudioOnly ?
+                self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
         }
         self.callService.placeCall(withAccount: account,
                                    toRingId: uri,
