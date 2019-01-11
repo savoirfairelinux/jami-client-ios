@@ -231,7 +231,7 @@ class CallsService: CallsAdapterDelegate {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
             //Add or update new call
             var call = self.calls[callId]
-            call?.state = CallState(rawValue: state)!
+            call?.state = CallState(rawValue: state) ?? CallState.unknown
             //Remove from the cache if the call is over and save message to history
             if call?.state == .over || call?.state == .failure {
                 var time = 0.00
