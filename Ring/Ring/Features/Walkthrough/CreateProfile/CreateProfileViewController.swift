@@ -37,6 +37,8 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     @IBOutlet weak var createProfilAccountTitle: UILabel!
     @IBOutlet weak var skipButton: DesignableButton!
     @IBOutlet weak var profileImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var infoProfileImage: UIImageView!
 
     // MARK: members
     private let disposeBag = DisposeBag()
@@ -57,6 +59,10 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         self.profileImageView.layer.shadowOffset = CGSize.zero
         self.profileImageView.layer.shadowRadius = 4
         self.profileName.tintColor = UIColor.jamiSecondary
+        self.infoProfileImage.layer.shadowColor = UIColor.gray.cgColor
+        self.infoProfileImage.layer.shadowOpacity = 0.5
+        self.infoProfileImage.layer.shadowOffset = CGSize.zero
+        self.infoProfileImage.layer.shadowRadius = 4
 
         // Animations
         DispatchQueue.global(qos: .background).async {
@@ -68,7 +74,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
                     self?.arrowHeightConstraint.constant = 100
                 })
                 self?.arrow.tintColor = UIColor.white
-                UIView.animate(withDuration: 5, animations: {
+                UIView.animate(withDuration: 1, animations: {
                     self?.arrowYConstraint.constant = 70
                     self?.view.layoutIfNeeded()
                 })
@@ -108,13 +114,19 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
             self.viewModel.proceedWithAccountCreationOrDeviceLink()
         }).disposed(by: self.disposeBag)
 
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        infoProfileImage.isUserInteractionEnabled = true
+        infoProfileImage.addGestureRecognizer(tapGestureRecognizer)
+
         // handle keyboard
+        self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
 
     func dismissInfoView() {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.infoView.alpha = 0
+            self?.infoProfileImage.removeFromSuperview()
         },completion: { _ in self.infoView.isHidden = true })
     }
 
@@ -130,7 +142,6 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
     @objc func keyboardWillAppear(withNotification: NSNotification){
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
-
     }
 
     @objc func keyboardWillDisappear(withNotification: NSNotification){
@@ -160,7 +171,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         shadow2Animation.toValue = 0.5
         shadow2Animation.duration = 0.2
 
-        self.profileImageView.layer.add(shadow1Animation, forKey: shadow1Animation.keyPath)
+        self.infoProfileImage.layer.add(shadow1Animation, forKey: shadow1Animation.keyPath)
 
         DispatchQueue.global(qos: .background).async {
             DispatchQueue.main.async { [weak self] in
@@ -172,9 +183,9 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
             }
             usleep(200000)
             DispatchQueue.main.async {
-                self.profileImageView.layer.removeAllAnimations()
-                self.profileImageView.layer.add(shadow2Animation, forKey: shadow2Animation.keyPath)
-                self.profileImageView.layer.shadowOpacity = 0.5
+                self.infoProfileImage.layer.removeAllAnimations()
+                self.infoProfileImage.layer.add(shadow2Animation, forKey: shadow2Animation.keyPath)
+                self.infoProfileImage.layer.shadowOpacity = 0.5
                 UIView.animate(withDuration: 0.2, animations: {
                 self.profileImageViewHeightConstraint.constant = 120
                 self.view.layoutIfNeeded()
