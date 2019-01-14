@@ -98,6 +98,21 @@ enum AccountCreationState {
             return ""
         }
     }
+
+    static func ==(lhs: AccountCreationState, rhs: AccountCreationState) -> Bool {
+        switch (lhs, rhs) {
+        case (.unknown, .unknown):
+            return true
+        case (.started, .started):
+            return true
+        case (.success, .success):
+            return true
+        case ( .error(_), .error(_)):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 enum AccountCreationError: Error {
@@ -293,10 +308,9 @@ class CreateAccountViewModel: Stateable, ViewModel {
     }
 
     func enablePushNotifications(enable: Bool) {
-        if enable {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
+        if !enable {
             return
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.disablePushNotifications.rawValue), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
     }
 }
