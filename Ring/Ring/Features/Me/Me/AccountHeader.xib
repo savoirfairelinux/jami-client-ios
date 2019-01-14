@@ -26,6 +26,12 @@
                                 <constraint firstAttribute="height" constant="100" id="2mb-uU-dHb"/>
                                 <constraint firstAttribute="width" constant="100" id="WSb-4Z-9t2"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="50"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </imageView>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oQJ-jT-wTv">
                             <rect key="frame" x="20" y="200" width="335" height="27"/>
