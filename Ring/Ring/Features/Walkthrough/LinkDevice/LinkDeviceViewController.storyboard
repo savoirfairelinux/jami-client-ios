@@ -140,13 +140,27 @@
                                             <constraint firstItem="3CA-fY-2S2" firstAttribute="leading" secondItem="BLV-X1-oI7" secondAttribute="leading" id="w87-bV-caL"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYz-Rm-Qsp" userLabel="Enable Notifications Label">
+                                        <rect key="frame" x="114" y="339" width="156" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1UV-Vn-dMF" userLabel="Notifications Switch">
+                                        <rect key="frame" x="565" y="334" width="51" height="31"/>
+                                        <color key="onTintColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </switch>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="HlM-9Z-7gA" secondAttribute="bottom" id="69B-Pe-mL7"/>
                                     <constraint firstItem="HlM-9Z-7gA" firstAttribute="centerX" secondItem="2ZO-zp-5uC" secondAttribute="centerX" id="A0t-uV-C5f"/>
                                     <constraint firstItem="HlM-9Z-7gA" firstAttribute="top" secondItem="2ZO-zp-5uC" secondAttribute="top" constant="18" id="Dig-j9-XSJ"/>
+                                    <constraint firstItem="1UV-Vn-dMF" firstAttribute="top" secondItem="BLV-X1-oI7" secondAttribute="bottom" constant="30" id="Ew8-6y-ogo"/>
                                     <constraint firstAttribute="trailing" secondItem="HlM-9Z-7gA" secondAttribute="trailing" constant="-20" id="LZa-xU-Eh2"/>
                                     <constraint firstItem="HlM-9Z-7gA" firstAttribute="leading" secondItem="2ZO-zp-5uC" secondAttribute="leading" constant="-20" id="NvH-W1-SN5"/>
+                                    <constraint firstItem="xYz-Rm-Qsp" firstAttribute="leading" secondItem="FyJ-Ke-ba3" secondAttribute="leading" id="aRq-7u-k2Z"/>
+                                    <constraint firstItem="xYz-Rm-Qsp" firstAttribute="centerY" secondItem="1UV-Vn-dMF" secondAttribute="centerY" id="bCp-Qm-SeS"/>
+                                    <constraint firstItem="1UV-Vn-dMF" firstAttribute="trailing" secondItem="FyJ-Ke-ba3" secondAttribute="trailing" id="yaA-K4-rfo"/>
                                 </constraints>
                             </scrollView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxF-1Y-H7V" userLabel="Background Navigation Bar">
@@ -176,8 +190,10 @@
                     <connections>
                         <outlet property="backgroundNavigationBarHeightConstraint" destination="tVI-wi-4Lx" id="OyH-sV-V86"/>
                         <outlet property="containerViewBottomConstraint" destination="69B-Pe-mL7" id="6gO-aI-ofm"/>
+                        <outlet property="enableNotificationsLabel" destination="xYz-Rm-Qsp" id="4N5-pW-3J0"/>
                         <outlet property="linkButton" destination="BLV-X1-oI7" id="6kA-dj-aEA"/>
                         <outlet property="linkDeviceTitle" destination="NpV-yY-PPY" id="49f-oC-MTs"/>
+                        <outlet property="notificationsSwitch" destination="1UV-Vn-dMF" id="K0l-sc-v8w"/>
                         <outlet property="passwordLabel" destination="9AD-b5-bun" id="Neh-tt-Ui8"/>
                         <outlet property="passwordTextField" destination="FyJ-Ke-ba3" id="tGg-8m-QWZ"/>
                         <outlet property="pinInfoButton" destination="rtk-w4-zfQ" id="eo1-z8-7RN"/>

@@ -39,6 +39,8 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     @IBOutlet weak var pinLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var notificationsSwitch: UISwitch!
+    @IBOutlet weak var enableNotificationsLabel: UILabel!
     // MARK: members
     private let disposeBag = DisposeBag()
     var viewModel: LinkDeviceViewModel!
@@ -101,6 +103,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         // bind view to view model
         self.pinTextField.rx.text.orEmpty.bind(to: self.viewModel.pin).disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
+        self.notificationsSwitch.rx.isOn.bind(to: self.viewModel.notificationSwitch).disposed(by: self.disposeBag)
 
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
@@ -157,6 +160,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.pinTextField.placeholder = L10n.LinkToAccount.pinPlaceholder
         self.passwordTextField.placeholder = L10n.LinkToAccount.passwordPlaceholder
         self.linkDeviceTitle.text = L10n.LinkToAccount.linkButtonTitle
+        self.enableNotificationsLabel.text = self.viewModel.enableNotificationsTitle
     }
 
     private func showCreationHUD() {

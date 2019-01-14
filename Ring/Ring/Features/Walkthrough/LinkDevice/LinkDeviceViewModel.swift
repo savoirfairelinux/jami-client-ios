@@ -30,6 +30,7 @@ class LinkDeviceViewModel: Stateable, ViewModel {
     }()
     private let accountService: AccountsService
     private let accountCreationState = Variable<AccountCreationState>(.unknown)
+    let enableNotificationsTitle = L10n.CreateAccount.enableNotifications
     lazy var createState: Observable<AccountCreationState> = {
         return self.accountCreationState.asObservable()
     }()
@@ -42,18 +43,25 @@ class LinkDeviceViewModel: Stateable, ViewModel {
 
     let pin = Variable<String>("")
     let password = Variable<String>("")
+    let notificationSwitch = Variable<Bool>(true)
     let disposeBag = DisposeBag()
 
     required init (with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
 
+        let accountCreated = createState.filter { newState in
+             return newState == .success
+        }
+
         //Account creation state observer
         self.accountService
             .sharedResponseStream
+            .takeUntil(accountCreated)
             .subscribe(onNext: { [unowned self] event in
                 if event.getEventInput(ServiceEventInput.registrationState) == Registered {
                     self.accountCreationState.value = .success
                     Observable<Int>.timer(Durations.alertFlashDuration.value, period: nil, scheduler: MainScheduler.instance).subscribe(onNext: { [unowned self] (_) in
+                        self.enablePushNotifications(enable: self.notificationSwitch.value)
                         self.stateSubject.onNext(WalkthroughState.deviceLinked)
                     }).disposed(by: self.disposeBag)
                 } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
@@ -69,6 +77,13 @@ class LinkDeviceViewModel: Stateable, ViewModel {
     func linkDevice () {
         self.accountCreationState.value = .started
         self.accountService.linkToRingAccount(withPin: self.pin.value,
-                                              password: self.password.value)
+                                              password: self.password.value,
+                                              enable: self.notificationSwitch.value)
+    }
+    func enablePushNotifications(enable: Bool) {
+        if !enable {
+            return
+        }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
     }
 }
