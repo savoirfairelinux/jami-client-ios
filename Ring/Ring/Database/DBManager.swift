@@ -111,7 +111,7 @@ enum InteractionType: String {
     case oTransfer  = "OUTGOING_DATA_TRANSFER"
 }
 
-typealias savedMessageForConversation = (messageID: Int64, conversationID: Int64)
+typealias SavedMessageForConversation = (messageID: Int64, conversationID: Int64)
 
 class DBManager {
 
@@ -135,7 +135,7 @@ class DBManager {
         try interactionHepler.createTable()
     }
 
-    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, incoming: Bool, interactionType: InteractionType) -> Observable<savedMessageForConversation> {
+    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, incoming: Bool, interactionType: InteractionType) -> Observable<SavedMessageForConversation> {
 
         //create completable which will be executed on background thread
         return Observable.create { [weak self] observable in
@@ -184,7 +184,7 @@ class DBManager {
                         result = nil
                     }
                     if let messageID = result {
-                        let savedMessage = savedMessageForConversation(messageID, conversationID)
+                        let savedMessage = SavedMessageForConversation(messageID, conversationID)
                         observable.onNext(savedMessage)
                         observable.on(.completed)
                     } else {

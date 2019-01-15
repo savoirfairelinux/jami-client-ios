@@ -57,8 +57,9 @@ class SmartlistViewModel: Stateable, ViewModel {
         return self.networkService.connectionState.value
     }
 
+    // swiftlint:disable function_body_length
+    // swiftlint:disable cyclomatic_complexity
     required init(with injectionBag: InjectionBag) {
-
         self.conversationsService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.accountsService = injectionBag.accountService

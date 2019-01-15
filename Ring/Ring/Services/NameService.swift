@@ -117,7 +117,7 @@ class NameService: NameRegistrationAdapterDelegate {
 
     internal func nameRegistrationEnded(with response: NameRegistrationResponse) {
         if response.state == .success {
-            log.debug("Registred name : \(response.name)")
+            log.debug("Registred name : \(response.name ?? "no name")")
         } else {
             log.debug("Name Registration failed. State = \(response.state.rawValue)")
         }

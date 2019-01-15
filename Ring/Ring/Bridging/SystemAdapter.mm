@@ -48,7 +48,7 @@ using namespace DRing;
             ret->push_back(std::string([documentsDirectory UTF8String]));
         }
     }));
-    registerConfHandlers(confHandlers);
+    registerSignalHandlers(confHandlers);
 }
 #pragma mark -
 

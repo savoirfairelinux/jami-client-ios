@@ -36,6 +36,10 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     fileprivate let cellIdentifier = "ContactRequestCell"
     fileprivate let log = SwiftyBeaver.self
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,10 +55,11 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
         self.setupTableView()
         self.setupBindings()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.jamiMain]
+        self.navigationController?.navigationBar
+            .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
+                                    NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
     }
 
     func setupTableView() {

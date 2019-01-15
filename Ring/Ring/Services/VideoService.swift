@@ -56,7 +56,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let quality = AVCaptureSession.Preset.medium
     private var orientation = AVCaptureVideoOrientation.portrait
     var getOrientation: AVCaptureVideoOrientation {
-        get { return orientation }
+        return orientation
     }
 
     var permissionGranted = Variable<Bool>(false)

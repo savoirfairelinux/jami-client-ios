@@ -60,7 +60,7 @@ static id <PresenceAdapterDelegate> _delegate;
         }
     }));
 
-    registerPresHandlers(presenceHandlers);
+    registerSignalHandlers(presenceHandlers);
 }
 
 #pragma mark -

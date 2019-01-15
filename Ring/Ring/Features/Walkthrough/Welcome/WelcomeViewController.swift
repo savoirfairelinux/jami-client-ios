@@ -39,6 +39,10 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     // MARK: members
     private let disposeBag = DisposeBag()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +83,6 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
         self.navigationController?.navigationBar.tintColor = UIColor.jamiSecondary
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)

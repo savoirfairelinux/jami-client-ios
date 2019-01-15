@@ -13,7 +13,7 @@ import UIKit
     @objc optional func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat)
 }
 
-@IBDesignable @objc
+@IBDesignable
 open class GrowingTextView: UITextView {
     override open var text: String! {
         didSet { setNeedsDisplay() }
@@ -73,11 +73,9 @@ open class GrowingTextView: UITextView {
     private func associateConstraints() {
         // iterate through all text view's constraints and identify
         // height,from: https://github.com/legranddamien/MBAutoGrowingTextView
-        for constraint in constraints {
-            if (constraint.firstAttribute == .height) {
-                if (constraint.relation == .equal) {
-                    heightConstraint = constraint;
-                }
+        for constraint in constraints where constraint.firstAttribute == .height {
+            if constraint.relation == .equal {
+                heightConstraint = constraint
             }
         }
     }
@@ -110,7 +108,7 @@ open class GrowingTextView: UITextView {
         height = maxHeight > 0 ? min(height, maxHeight) : height
 
         // Add height constraint if it is not found
-        if (heightConstraint == nil) {
+        if heightConstraint == nil {
             heightConstraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: height)
             addConstraint(heightConstraint!)
         }
@@ -131,9 +129,9 @@ open class GrowingTextView: UITextView {
 
     private func scrollToCorrectPosition() {
         if self.isFirstResponder {
-            self.scrollRangeToVisible(NSMakeRange(-1, 0)) // Scroll to bottom
+            self.scrollRangeToVisible(NSRange(location: -1, length: 0)) // Scroll to bottom
         } else {
-            self.scrollRangeToVisible(NSMakeRange(0, 0)) // Scroll to top
+            self.scrollRangeToVisible(NSRange(location: 0, length: 0)) // Scroll to top
         }
     }
 
@@ -191,5 +189,3 @@ open class GrowingTextView: UITextView {
         }
     }
 }
-
-

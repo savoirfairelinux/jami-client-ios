@@ -100,7 +100,7 @@ extension UIViewController {
         NotificationCenter.keyboardHeight.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self, unowned tableView] (height) in
             let trueHeight = height > 0  ? height + 100 : 0.0
             // reset insets if they were changed before
-            if tableView.contentInset.bottom > 0  && trueHeight <= 0  {
+            if tableView.contentInset.bottom > 0  && trueHeight <= 0 {
                 var contentInsets = tableView.contentInset
                 contentInsets.bottom = 0
                 tableView.contentInset = contentInsets

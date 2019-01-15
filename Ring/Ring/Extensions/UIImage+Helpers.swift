@@ -184,7 +184,6 @@ extension UIImage {
         return newSize
     }
 
-
     func resizeImageWith(newSize: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
         draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))

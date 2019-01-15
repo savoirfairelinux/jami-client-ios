@@ -175,7 +175,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         requestOptions.resizeMode = PHImageRequestOptionsResizeMode.fast
         requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
         requestOptions.isSynchronous = true
-        var photo: UIImage? = nil
+        var photo: UIImage?
         guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: PHFetchOptions()).firstObject else {
             return photo
         }

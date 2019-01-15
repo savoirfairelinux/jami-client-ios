@@ -38,6 +38,7 @@ class GeneratedInteractionsManager {
         self.subscribeToCallEvents()
     }
 
+    // swiftlint:disable cyclomatic_complexity
     private func subscribeToContactEvents() {
         self.contactService
             .sharedResponseStream
@@ -115,6 +116,7 @@ class GeneratedInteractionsManager {
         self.conversationService.deleteConversation(conversation: conversation, keepContactInteraction: false)
     }
 
+    // swiftlint:disable cyclomatic_complexity
     private func subscribeToCallEvents() {
         self.callService
             .sharedResponseStream

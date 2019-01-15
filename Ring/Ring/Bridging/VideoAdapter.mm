@@ -135,7 +135,7 @@ static id <VideoAdapterDelegate> _delegate;
         }
     }));
 
-    registerVideoHandlers(videoHandlers);
+    registerSignalHandlers(videoHandlers);
 }
 
 #pragma mark -

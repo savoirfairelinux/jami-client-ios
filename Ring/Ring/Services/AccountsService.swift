@@ -41,6 +41,8 @@ enum NotificationName: String {
     case refuseCallFromNotifications
 }
 
+// swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class AccountsService: AccountAdapterDelegate {
     // MARK: Private members
 
@@ -237,7 +239,7 @@ class AccountsService: AccountAdapterDelegate {
 
     func setRingtonePath(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
-        let ringtonePath = Bundle.main.url(forResource: "default", withExtension:"wav")!
+        let ringtonePath = Bundle.main.url(forResource: "default", withExtension: "wav")!
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath), withValue: (ringtonePath.path))
         setAccountDetails(forAccountId: accountId, withDetails: details)
     }

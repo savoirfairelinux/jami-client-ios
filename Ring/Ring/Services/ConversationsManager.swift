@@ -36,6 +36,7 @@ class ConversationsManager: MessagesAdapterDelegate {
     fileprivate let maxSizeForAutoaccept = 20 * 1024 * 1024
     private let notificationHandler = LocalNotificationsHelper()
 
+    // swiftlint:disable cyclomatic_complexity
     init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService, dataTransferService: DataTransferService) {
         self.conversationService = conversationService
         self.accountsService = accountsService

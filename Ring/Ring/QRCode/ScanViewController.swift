@@ -51,6 +51,10 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
         return cFrame
     }()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     // MARK: functions
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -71,7 +75,6 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             self.bottomMarginTitleConstraint.constant = 35
             self.bottomCloseButtonConstraint.constant = 25
         }
-        UIApplication.shared.statusBarStyle = .lightContent
         //AVCaptureDevice allows us to reference a physical capture device (video in our case)
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
 
@@ -117,7 +120,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 print("no objects returned")
                 return
             }
-            let metaDataObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+            guard let metaDataObject = metadataObjects[0] as? AVMetadataMachineReadableCodeObject else {return}
             guard let stringCodeValue = metaDataObject.stringValue else {
                 return
             }

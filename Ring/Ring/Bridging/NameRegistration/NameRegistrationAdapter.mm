@@ -70,8 +70,7 @@ static id <NameRegistrationAdapterDelegate> _delegate;
         }
     }));
 
-
-    registerConfHandlers(confHandlers);
+    registerSignalHandlers(confHandlers);
 }
 #pragma mark -
 

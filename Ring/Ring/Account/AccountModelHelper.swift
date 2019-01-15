@@ -139,7 +139,7 @@ struct AccountModelHelper {
         }
         if userName.contains(AccountModelHelper.ringIdPrefix) {
             let index = userName.range(of: AccountModelHelper.ringIdPrefix)?.upperBound
-            return userName.substring(from: index!)
+            return String(userName[index!...])
         } else {
             return nil
         }

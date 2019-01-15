@@ -57,7 +57,7 @@ class ProfilesService {
                                                object: nil)
     }
 
-    // swiftlint:enable cyclomatic_complexity
+    // swiftlint:disable cyclomatic_complexity
     @objc private func messageReceived(_ notification: NSNotification) {
         guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
             return

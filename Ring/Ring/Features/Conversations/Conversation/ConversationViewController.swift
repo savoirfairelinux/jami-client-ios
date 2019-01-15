@@ -46,6 +46,10 @@ class ConversationViewController: UIViewController,
     let scrollOffsetThreshold: CGFloat = 600
     var bottomHeight: CGFloat = 0.00
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
 
     override func viewDidLoad() {
@@ -115,7 +119,7 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    func fixImageOrientation(image: UIImage)->UIImage {
+    func fixImageOrientation(image: UIImage) -> UIImage {
         UIGraphicsBeginImageContext(image.size)
         image.draw(at: .zero)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -215,11 +219,6 @@ class ConversationViewController: UIViewController,
     }
     // swiftlint:enable cyclomatic_complexity
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
-    }
-
     @objc func dismissKeyboard() {
         self.becomeFirstResponder()
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
@@ -294,7 +293,7 @@ class ConversationViewController: UIViewController,
                 userNameYOffset = 18
             }
         } else {
-            if displayName == nil || displayName == ""  {
+            if displayName == nil || displayName == "" {
                 userNameYOffset = 1
             } else {
             dnlabelYOffset = -4
@@ -651,6 +650,7 @@ class ConversationViewController: UIViewController,
         return dateFormatter.string(from: time).uppercased()
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func changeTransferStatus(_ cell: MessageCell,
                               _ indexPath: IndexPath?,
                               _ status: DataTransferStatus,
@@ -760,6 +760,7 @@ extension ConversationViewController: UITableViewDataSource {
         return self.messageViewModels?.count ?? 0
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let item = self.messageViewModels?[indexPath.row] {
             var type = MessageCell.self

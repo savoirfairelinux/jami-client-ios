@@ -40,7 +40,7 @@ class ConversationModel: Equatable {
         return (lhs.recipientRingId == rhs.recipientRingId && lhs.accountId == rhs.accountId)
     }
 
-    public func getMessage(withDaemonID daemonID: String) -> MessageModel?  {
+    public func getMessage(withDaemonID daemonID: String) -> MessageModel? {
         return self.messages.filter({ message in
            return message.daemonId == daemonID
         }).first

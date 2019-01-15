@@ -228,7 +228,7 @@ extension ContactsService: ContactsAdapterDelegate {
             vCard = nil
             log.error("Unable to parse the vCard :\(error)")
         }
-        
+
         //Update trust request list
         if self.contactRequest(withRingId: senderAccount) == nil {
             let contactRequest = ContactRequestModel(withRingId: senderAccount,

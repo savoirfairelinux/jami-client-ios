@@ -11,7 +11,7 @@ import ImageIO
 
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (varL?, varR?):
         return varL < varR
@@ -61,7 +61,9 @@ extension UIImage {
                                                              Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
         }
 
-        delay = delayObject as! Double
+        guard let delayDouble = delayObject as? Double else {return delay}
+
+        delay = delayDouble
 
         if delay < 0.1 {
             delay = 0.1
@@ -102,7 +104,7 @@ extension UIImage {
         }
     }
 
-    class func gcdForArray(_ array: Array<Int>) -> Int {
+    class func gcdForArray(_ array: [Int]) -> Int {
         if array.isEmpty {
             return 1
         }

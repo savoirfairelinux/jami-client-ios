@@ -47,6 +47,10 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     let tapGesture = UITapGestureRecognizer()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +94,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         self.applyL10n()
 
         //bind view model to view
-        tapGesture.rx.event.bind(onNext: { [weak self] recognizer in
+        tapGesture.rx.event.bind(onNext: { [weak self] _ in
             self?.dismissInfoView()
         }).disposed(by: disposeBag)
 
@@ -127,7 +131,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.infoView.alpha = 0
             self?.infoProfileImage.removeFromSuperview()
-        },completion: { _ in self.infoView.isHidden = true })
+        }, completion: { _ in self.infoView.isHidden = true })
     }
 
     override func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -140,18 +144,17 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillAppear(withNotification: NSNotification){
+    @objc func keyboardWillAppear(withNotification: NSNotification) {
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillDisappear(withNotification: NSNotification){
+    @objc func keyboardWillDisappear(withNotification: NSNotification) {
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
     override var canBecomeFirstResponder: Bool {
         return true
     }
-
 
     func applyL10n() {
         self.createProfilAccountTitle.text = L10n.CreateProfile.title
@@ -197,7 +200,6 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.statusBarStyle = .default
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }

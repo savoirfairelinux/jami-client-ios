@@ -49,14 +49,14 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 self.showConversation(withConversationViewModel: conversationViewModel)
             case .contactDetail(let conversationModel):
                 self.presentContactInfo(conversation: conversationModel)
-            case .qrCode():
+            case .qrCode:
                 self.openQRCode()
             }
         }).disposed(by: self.disposeBag)
     }
 
     func openQRCode () {
-        let scanViewController = ScanViewController.instantiate(with: self.injectionBag);
+        let scanViewController = ScanViewController.instantiate(with: self.injectionBag)
         self.present(viewController: scanViewController,
                      withStyle: .present,
                      withAnimation: true,

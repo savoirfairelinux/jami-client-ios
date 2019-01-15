@@ -99,7 +99,7 @@ enum AccountCreationState {
         }
     }
 
-    static func ==(lhs: AccountCreationState, rhs: AccountCreationState) -> Bool {
+    static func == (lhs: AccountCreationState, rhs: AccountCreationState) -> Bool {
         switch (lhs, rhs) {
         case (.unknown, .unknown):
             return true
@@ -107,7 +107,7 @@ enum AccountCreationState {
             return true
         case (.success, .success):
             return true
-        case ( .error(_), .error(_)):
+        case ( .error, .error):
             return true
         default:
             return false
@@ -196,7 +196,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
                 return .validated
             }
 
-            if password.characters.count < 6 {
+            if password.count < 6 {
                 return .error(message: L10n.CreateAccount.passwordCharactersNumberError)
             }
 

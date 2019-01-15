@@ -61,6 +61,10 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     // MARK: functions
     override func viewDidLoad() {
         // L10n
@@ -72,7 +76,6 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.scrollView.alwaysBounceHorizontal = false
         self.scrollView.alwaysBounceVertical = true
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        let device = UIDevice.modelName
         self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
         self.usernameTextField.becomeFirstResponder()
         self.usernameTextField.tintColor = UIColor.jamiSecondary
@@ -92,7 +95,6 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -117,20 +119,19 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillAppear(withNotification: NSNotification){
+    @objc func keyboardWillAppear(withNotification: NSNotification) {
         self.isKeyboardOpened = true
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
         self.setContentInset()
 
     }
 
-    @objc func keyboardWillDisappear(withNotification: NSNotification){
+    @objc func keyboardWillDisappear(withNotification: NSNotification) {
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
         self.setContentInset()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    deinit {
         NotificationCenter.default.removeObserver(self)
     }
 

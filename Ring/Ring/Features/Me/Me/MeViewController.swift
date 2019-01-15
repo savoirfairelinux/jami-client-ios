@@ -36,6 +36,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     fileprivate let disposeBag = DisposeBag()
     private var stretchyHeader: AccountHeader!
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     // MARK: - functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +53,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.jamiMain]
+        self.navigationController?.navigationBar
+            .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
+                                    NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
     }
 
     private func addHeaderView() {
@@ -188,6 +193,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         return nil
     }
 
+    // swiftlint:disable function_body_length
+    // swiftlint:disable cyclomatic_complexity
     private func setUpDataSource() {
 
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SettingsSection.Item)

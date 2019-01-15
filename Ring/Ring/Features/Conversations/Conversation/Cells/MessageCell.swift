@@ -58,7 +58,6 @@ class MessageCell: UITableViewCell, NibReusable {
 
     var disposeBag = DisposeBag()
 
-
     override func prepareForReuse() {
         super.prepareForReuse()
         self.stopProgressMonitor()
@@ -247,7 +246,7 @@ class MessageCell: UITableViewCell, NibReusable {
         }
     }
 
-    /// swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
                            _ items: [MessageViewModel]?,
                            cellForRowAt indexPath: IndexPath) {
@@ -339,12 +338,12 @@ class MessageCell: UITableViewCell, NibReusable {
             // When the message contains only emoji
             if item.content.containsOnlyEmoji {
                 self.bubble.backgroundColor = UIColor.jamiMsgCellEmoji
-                if (self.avatarBotomAlignConstraint != nil) {
+                if self.avatarBotomAlignConstraint != nil {
                     self.avatarBotomAlignConstraint.constant = -14
                 }
             } else {
                 self.bubble.backgroundColor = UIColor.jamiMsgCellReceived
-                if (self.avatarBotomAlignConstraint != nil) {
+                if self.avatarBotomAlignConstraint != nil {
                     self.avatarBotomAlignConstraint.constant = -1
                 }
             }

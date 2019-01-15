@@ -43,7 +43,7 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet weak var stackViewYConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
-    
+
     let disposeBag = DisposeBag()
     var isCallStarted: Bool = false
 

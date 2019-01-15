@@ -23,7 +23,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension Reactive where Base : UIViewController {
+extension Reactive where Base: UIViewController {
     public var viewDidLoad: ControlEvent<Void> {
         let source = self.sentMessage(#selector(Base.viewDidLoad)).map { _ in }
         return ControlEvent(events: source)

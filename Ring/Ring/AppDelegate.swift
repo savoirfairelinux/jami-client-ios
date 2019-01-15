@@ -117,8 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // themetize the app
         Chameleon.setRingThemeUsingPrimaryColor(UIColor.jamiMain, withSecondaryColor: UIColor.jamiSecondary, andContentStyle: .light)
 
-        UIApplication.shared.statusBarStyle = .default
-
         self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
                                                                 contactService: self.contactsService,
                                                                 conversationService: self.conversationsService,
@@ -249,6 +247,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func updateNotificationAvailability() {
         let enabled = LocalNotificationsHelper.isEnabled()
         if #available(iOS 10.0, *) {
@@ -378,7 +377,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
-            if rootViewController.responds(to: Selector(("canRotate"))) {
+            if rootViewController.responds(to: #selector(CallViewController.canRotate)) {
                 return .all
             }
         }

@@ -25,7 +25,7 @@ class ContactRequestModel {
 
     let ringId: String
     let accountId: String
-    var vCard: CNContact? = nil
+    var vCard: CNContact?
     var receivedDate: Date
 
     enum ContactRequestKey: String {

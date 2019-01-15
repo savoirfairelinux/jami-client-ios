@@ -22,16 +22,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension Reactive where Base : UIView {
+extension Reactive where Base: UIView {
 
     //show view with animation and hide without
     public var isVisible: AnyObserver<Bool> {
-        return UIBindingObserver(UIElement: self.base) { view, hidden in
+        return Binder (self.base) { view, hidden in
             if hidden == true {
                 view.isHidden = true
                 view.alpha = 0
             } else {
-
                 UIView.animate(withDuration: 0.3, delay: 0.5, options: .curveEaseOut,
                                animations: {view.alpha = 1},
                                completion: { _ in view.isHidden = false

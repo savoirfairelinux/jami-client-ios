@@ -80,7 +80,7 @@ static id <AccountAdapterDelegate> _delegate;
             [AccountAdapter.delegate knownDevicesChangedFor:accountId devices:knDev];
         }
     }));
-    registerConfHandlers(confHandlers);
+    registerSignalHandlers(confHandlers);
 }
 #pragma mark -
 

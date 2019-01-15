@@ -27,6 +27,7 @@ import Reusable
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     //preview screen
@@ -70,7 +71,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var profileImageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageViewHeightConstraint: NSLayoutConstraint!
 
-
     var viewModel: CallViewModel!
     var isCallStarted: Bool = false
     var isMenuShowed = false
@@ -84,6 +84,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     private var task: DispatchWorkItem?
 
     private var shouldRotateScreen = false
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.viewModel.isAudioOnly ? .lightContent : .default
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,9 +121,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.buttonsContainer.stackView.alpha = 0
             self.showAllInfo()
             self.setWhiteAvatarView()
-        } else {
-            //The status bar should be white for video calls and black for audio calls
-            UIApplication.shared.statusBarStyle = .lightContent
         }
 
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
@@ -154,7 +155,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func setWhiteAvatarView() {
-        UIApplication.shared.statusBarStyle = .default
         self.callPulse.backgroundColor = UIColor.jamiCallPulse
         self.avatarView.backgroundColor = UIColor.white
     }
@@ -247,6 +247,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.switchCameraButton.isEnabled = !(self.viewModel.isAudioOnly)
     }
 
+    // swiftlint:disable function_body_length
+    // swiftlint:disable cyclomatic_complexity
     func setupBindings() {
 
         self.viewModel.contactImageData?.asObservable()
@@ -468,7 +470,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     @objc func screenTapped() {
-        if self.avatarView.isHidden{
+        if self.avatarView.isHidden {
             self.viewModel.respondOnTap()
         }
     }
@@ -497,7 +499,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             DispatchQueue.main.async { [weak self] in
                 guard let hidden = self?.infoContainer.isHidden else {return}
                 self?.resizeCapturedVideo(withInfoContainer: !hidden)
-                if UIDevice.current.hasNotch && (UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft) && self?.infoContainer.isHidden == false  {
+                if UIDevice.current.hasNotch && (UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft) && self?.infoContainer.isHidden == false {
                     self?.buttonsContainerBottomConstraint.constant = 1
                 }
             }
@@ -509,7 +511,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func resizeCapturedVideo(withInfoContainer: Bool) {
         self.leftArrow.alpha = 0
         //Don't change anything if the orientation change to portraitUpsideDown, faceUp or faceDown
-        if  UIDevice.current.orientation.rawValue != 5  && UIDevice.current.orientation.rawValue != 6 && UIDevice.current.orientation.rawValue != 2  {
+        if  UIDevice.current.orientation.rawValue != 5  && UIDevice.current.orientation.rawValue != 6 && UIDevice.current.orientation.rawValue != 2 {
             self.orientation = UIDevice.current.orientation
         }
         switch self.orientation {
@@ -590,7 +592,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self?.capturedVideoBlurEffect.alpha = 0
             self?.resizeCapturedVideo(withInfoContainer: true)
             self?.infoContainerTopConstraint.constant = -10
-            if UIDevice.current.hasNotch && (self?.orientation == .landscapeRight || self?.orientation == .landscapeLeft)  {
+            if UIDevice.current.hasNotch && (self?.orientation == .landscapeRight || self?.orientation == .landscapeLeft) {
                 self?.buttonsContainerBottomConstraint.constant = 1
             } else if UIDevice.current.userInterfaceIdiom == .pad {
                 self?.buttonsContainerBottomConstraint.constant = 30

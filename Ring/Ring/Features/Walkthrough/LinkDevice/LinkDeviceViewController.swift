@@ -50,6 +50,10 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
     let log = SwiftyBeaver.self
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,14 +134,14 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillAppear(withNotification: NSNotification){
+    @objc func keyboardWillAppear(withNotification: NSNotification) {
         self.isKeyboardOpened = true
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
         self.setContentInset()
 
     }
 
-    @objc func keyboardWillDisappear(withNotification: NSNotification){
+    @objc func keyboardWillDisappear(withNotification: NSNotification) {
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
         self.setContentInset()
     }
@@ -148,7 +152,6 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }

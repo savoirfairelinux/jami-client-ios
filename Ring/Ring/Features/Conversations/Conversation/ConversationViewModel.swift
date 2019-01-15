@@ -103,14 +103,14 @@ class ConversationViewModel: Stateable, ViewModel {
                 .disposed(by: self.disposeBag)
 
             // invite and block buttons
-            if let _ = contact {
+            if contact != nil {
                 self.inviteButtonIsAvailable.onNext(false)
             }
 
             self.contactsService.contactStatus.filter({ cont in
                 return cont.ringId == contactRingId
             })
-                .subscribe(onNext: { [unowned self] contact in
+                .subscribe(onNext: { [unowned self] _ in
                     self.inviteButtonIsAvailable.onNext(false)
                 }).disposed(by: self.disposeBag)
 

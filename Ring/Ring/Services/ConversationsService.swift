@@ -40,9 +40,9 @@ class ConversationsService {
 
     var messagesSemaphore = DispatchSemaphore(value: 1)
 
-    typealias savedMessageForConversation = (messageID: Int64, conversationID: Int64)
+    typealias SavedMessageForConversation = (messageID: Int64, conversationID: Int64)
 
-    var dataTransferMessageMap = [UInt64: savedMessageForConversation]()
+    var dataTransferMessageMap = [UInt64: SavedMessageForConversation]()
 
     lazy var conversationsForCurrentAccount: Observable<[ConversationModel]> = {
         return self.conversations.asObservable()
@@ -194,6 +194,7 @@ class ConversationsService {
             .first
     }
 
+    // swiftlint:disable:next function_parameter_count
     func generateMessage(messageContent: String,
                          contactRingId: String,
                          accountRingId: String,

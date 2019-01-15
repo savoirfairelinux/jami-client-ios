@@ -85,7 +85,7 @@ static id <ContactsAdapterDelegate> _delegate;
         }
     }));
 
-    registerConfHandlers(confHandlers);
+    registerSignalHandlers(confHandlers);
 }
 
 #pragma mark -

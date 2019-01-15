@@ -130,7 +130,7 @@ static id <CallsAdapterDelegate> _delegate;
         }
     }));
 
-    registerCallHandlers(callHandlers);
+    registerSignalHandlers(callHandlers);
 }
 
 #pragma mark -

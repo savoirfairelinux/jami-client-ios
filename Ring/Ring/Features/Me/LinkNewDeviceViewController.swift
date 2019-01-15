@@ -28,6 +28,10 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
     var viewModel: LinkNewDeviceViewModel!
     let disposeBag = DisposeBag()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     override func viewDidLoad() {
 
         self.view.backgroundColor = UIColor.white.withAlphaComponent(0.0)
@@ -51,11 +55,6 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                     break
                 }
             }).disposed(by: self.disposeBag)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
     }
 
     private func showProgress() {

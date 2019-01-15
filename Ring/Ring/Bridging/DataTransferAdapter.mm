@@ -67,7 +67,7 @@ static id <DataTransferAdapterDelegate> _delegate;
         }
     }));
 
-    registerDataXferHandlers(dataTransferHandlers);
+    registerSignalHandlers(dataTransferHandlers);
 }
 
 #pragma mark API calls

@@ -33,6 +33,10 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
     var model: EditProfileViewModel!
     fileprivate let disposeBag = DisposeBag()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     // MARK: - functions
 
     override func viewDidLoad() {
@@ -43,7 +47,6 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupUI()
-        UIApplication.shared.statusBarStyle = .lightContent
     }
 
     func setupUI() {

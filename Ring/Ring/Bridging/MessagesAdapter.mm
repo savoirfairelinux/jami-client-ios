@@ -73,7 +73,7 @@ static id <MessagesAdapterDelegate> _delegate;
         }
     }));
 
-    registerConfHandlers(confHandlers);
+    registerSignalHandlers(confHandlers);
 }
 #pragma mark -
 

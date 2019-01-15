@@ -32,6 +32,10 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noBlockedContactLabel: UILabel!
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,9 +45,6 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        UIApplication.shared.statusBarStyle = .default
-
         self.setupTableView()
 
         self.viewModel.contactListNotEmpty
@@ -51,7 +52,9 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
             .bind(to: self.noBlockedContactLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
 
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.jamiMain]
+        self.navigationController?.navigationBar
+            .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
+                                    NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
     }
 
     func setupTableView() {

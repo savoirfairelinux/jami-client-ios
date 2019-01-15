@@ -26,7 +26,6 @@ import RxCocoa
 import Reusable
 import SwiftyBeaver
 
-
 //Constants
 private struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 64.0
@@ -55,6 +54,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     var viewModel: SmartlistViewModel!
     fileprivate let disposeBag = DisposeBag()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     // MARK: functions
     @IBAction func openScan() {
         self.viewModel.showQRCode()
@@ -78,10 +81,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.jamiMain]
+        self.navigationController?.navigationBar
+            .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
+                                    NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
     }
 
     func setupUI() {
@@ -115,7 +119,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 }
             }
         }).disposed(by: self.disposeBag)
-
 
         let imageScanSearch = UIImage(asset: Asset.qrCodeScan) as UIImage?
         let scanButton   = UIButton(type: UIButtonType.custom) as UIButton

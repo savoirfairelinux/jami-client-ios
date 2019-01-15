@@ -59,6 +59,6 @@ extension String {
     }
 
     func prefixString() -> String {
-        return String(self.characters.prefix(1))
+        return String(self.prefix(1))
     }
 }
