@@ -82,6 +82,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,NSAttributedStringKey.foregroundColor : UIColor.jamiMain]
+        if let text = searchBar.text, !text.isEmpty {
+            self.searchBar.setShowsCancelButton(true, animated: false)
+            if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
+                cancelButton.isEnabled = true
+            }
+        }
     }
 
     func setupUI() {
@@ -266,8 +272,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func cancelSearch() {
-        self.searchBar.resignFirstResponder()
         self.searchBar.text = ""
+        self.searchBar.resignFirstResponder()
         self.searchResultsTableView.isHidden = true
     }
 
@@ -329,7 +335,6 @@ extension SmartlistViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.cancelSearch()
         if self.navigationController?.topViewController == self {
             if let convToShow: ConversationViewModel = try? tableView.rx.model(at: indexPath) {
                 self.viewModel.showConversation(withConversationViewModel: convToShow)
