@@ -25,6 +25,7 @@ import SwiftyBeaver
 
 enum ProfileNotifications: String {
     case messageReceived
+    case contactAdded
 }
 
 enum ProfileNotificationsKeys: String {
@@ -55,6 +56,16 @@ class ProfilesService {
         NotificationCenter.default.addObserver(self, selector: #selector(self.messageReceived(_:)),
                                                name: NSNotification.Name(rawValue: ProfileNotifications.messageReceived.rawValue),
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.contactAdded(_:)),
+                                               name: NSNotification.Name(rawValue: ProfileNotifications.contactAdded.rawValue),
+                                               object: nil)
+    }
+
+    @objc private func contactAdded(_ notification: NSNotification) {
+        guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
+            return
+        }
+        self.updateProfileFor(ringId: ringId, createIfNotexists: false)
     }
 
     // swiftlint:disable cyclomatic_complexity

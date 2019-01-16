@@ -120,6 +120,9 @@ class ContactsService {
                 event.addEventInput(.accountId, value: account.id)
                 event.addEventInput(.uri, value: contactRequest.ringId)
                 self.responseStream.onNext(event)
+                var data = [String: Any]()
+                data[ProfileNotificationsKeys.ringID.rawValue] = contactRequest.ringId
+                NotificationCenter.default.post(name: NSNotification.Name(ProfileNotifications.contactAdded.rawValue), object: nil, userInfo: data)
                 observable.on(.completed)
             } else {
                 observable.on(.error(ContactServiceError.acceptTrustRequestFailed))
