@@ -40,9 +40,6 @@ open class GrowingTextView: UITextView {
     @IBInspectable open var placeholderColor: UIColor = UIColor(white: 0.8, alpha: 1.0) {
         didSet { setNeedsDisplay() }
     }
-    @IBInspectable open var attributedPlaceholder: NSAttributedString? {
-        didSet { setNeedsDisplay() }
-    }
 
     // Initialize
     override public init(frame: CGRect, textContainer: NSTextContainer?) {
@@ -73,10 +70,8 @@ open class GrowingTextView: UITextView {
     private func associateConstraints() {
         // iterate through all text view's constraints and identify
         // height,from: https://github.com/legranddamien/MBAutoGrowingTextView
-        for constraint in constraints where constraint.firstAttribute == .height {
-            if constraint.relation == .equal {
+        for constraint in constraints where (constraint.firstAttribute == .height && constraint.relation == .equal) {
                 heightConstraint = constraint
-            }
         }
     }
 
@@ -146,10 +141,7 @@ open class GrowingTextView: UITextView {
             let height = rect.size.height - yValue - textContainerInset.bottom
             let placeholderRect = CGRect(x: xValue, y: yValue, width: width, height: height)
 
-            if let attributedPlaceholder = attributedPlaceholder {
-                // Prefer to use attributedPlaceholder
-                attributedPlaceholder.draw(in: placeholderRect)
-            } else if let placeholder = placeholder {
+            if let placeholder = placeholder {
                 // Otherwise user placeholder and inherit `text` attributes
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = textAlignment

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,8 +31,8 @@
                     </constraints>
                     <state key="normal" image="share_button"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ifq-LQ-X1n" userLabel="Send Button">
-                    <rect key="frame" x="272" y="35" width="30" height="34"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ifq-LQ-X1n" userLabel="Send Button">
+                    <rect key="frame" x="274" y="35" width="28" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="26" id="9PM-CR-8PT"/>
                         <constraint firstAttribute="width" constant="28" id="cfz-1y-EkK"/>
@@ -110,8 +110,8 @@
         </view>
     </objects>
     <resources>
-        <image name="camera" width="72" height="72"/>
+        <image name="camera" width="64" height="67"/>
         <image name="send_button" width="102.40000152587891" height="102.40000152587891"/>
-        <image name="share_button" width="72" height="72"/>
+        <image name="share_button" width="72" height="68"/>
     </resources>
 </document>

@@ -299,14 +299,14 @@ class ConversationViewModel: Stateable, ViewModel {
                     }, onError: { [unowned self] (error) in
                         self.log.info(error)
                     }).disposed(by: self.disposeBag)
-            }) { [unowned self] error in
+                }, onError: { [unowned self] error in
                 self.contactsService.sendContactRequest(toContactRingId: self.conversation.value.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!)
                     .subscribe(onCompleted: { [unowned self] in
                         self.log.info("contact request sent")
                     }, onError: { [unowned self] (error) in
                         self.log.info(error)
                     }).disposed(by: self.disposeBag)
-            }.disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
     }
 
     func block() {

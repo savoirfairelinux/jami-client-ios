@@ -75,9 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         // ignore sigpipe
+        // swiftlint:disable nesting
         typealias SigHandler = @convention(c) (Int32) -> Void
         let SIG_IGN = unsafeBitCast(OpaquePointer(bitPattern: 1), to: SigHandler.self)
         signal(SIGPIPE, SIG_IGN)
+        // swiftlint:enable nesting
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
@@ -389,9 +391,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             return nil
         }
         if rootViewController.isKind(of: (UITabBarController).self) {
-            return topViewControllerWithRootViewController(rootViewController: (rootViewController as! UITabBarController).selectedViewController)
+            return topViewControllerWithRootViewController(rootViewController: (rootViewController as? UITabBarController)?.selectedViewController)
         } else if rootViewController.isKind(of: (UINavigationController).self) {
-            return topViewControllerWithRootViewController(rootViewController: (rootViewController as! UINavigationController).visibleViewController)
+            return topViewControllerWithRootViewController(rootViewController: (rootViewController as? UINavigationController)?.visibleViewController)
         } else if rootViewController.presentedViewController != nil {
             return topViewControllerWithRootViewController(rootViewController: rootViewController.presentedViewController)
         }

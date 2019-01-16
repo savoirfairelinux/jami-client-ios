@@ -88,7 +88,7 @@ class SmartlistViewModel: Stateable, ViewModel {
                 .filter({ self?.contactsService.contact(withRingId: $0.recipientRingId) != nil
                     || (!$0.messages.isEmpty && (self?.contactsService.contactRequest(withRingId: $0.recipientRingId) == nil))
                 })
-                .flatMap({ conversationModel in
+                .compactMap({ conversationModel in
 
                     var conversationViewModel: ConversationViewModel?
 
