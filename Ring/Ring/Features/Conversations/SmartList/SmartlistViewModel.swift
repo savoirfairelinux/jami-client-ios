@@ -57,6 +57,8 @@ class SmartlistViewModel: Stateable, ViewModel {
         return self.networkService.connectionState.value
     }
 
+    let injectionBag: InjectionBag
+
     // swiftlint:disable function_body_length
     // swiftlint:disable cyclomatic_complexity
     required init(with injectionBag: InjectionBag) {
@@ -65,6 +67,7 @@ class SmartlistViewModel: Stateable, ViewModel {
         self.accountsService = injectionBag.accountService
         self.contactsService = injectionBag.contactsService
         self.networkService = injectionBag.networkService
+        self.injectionBag = injectionBag
 
         // Observe connectivity changes
         self.networkService.connectionStateObservable
@@ -147,8 +150,7 @@ class SmartlistViewModel: Stateable, ViewModel {
 
         //Observe username lookup
         self.nameService.usernameLookupStatus.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self, unowned injectionBag]  usernameLookupStatus in
-            if usernameLookupStatus.state == .found && usernameLookupStatus.name == self.searchBarText.value {
-
+            if usernameLookupStatus.state == .found && (usernameLookupStatus.name == self.searchBarText.value || usernameLookupStatus.address == self.searchBarText.value) {
                 if let conversation = self.conversationViewModels.filter({ conversationViewModel in
                     conversationViewModel.conversation.value.recipientRingId == usernameLookupStatus.address
                 }).first {
@@ -191,26 +193,35 @@ class SmartlistViewModel: Stateable, ViewModel {
         self.filteredResults.value.removeAll()
         self.searchStatus.onNext("")
 
-        if !text.isEmpty {
+        if text.isEmpty {return}
 
-            //Filter conversations by user name or RingId
-            let filteredConversations = self.conversationViewModels.filter({ [unowned self] conversationViewModel in
-
-                let contact = self.contactsService.contact(withRingId: conversationViewModel.conversation.value.recipientRingId)
-
-                if let recipientUserName = contact?.userName {
-                    return recipientUserName.lowercased().hasPrefix(text.lowercased())
-                } else {
-                    return false
-                }
+        //Filter conversations
+        let filteredConversations = self.conversationViewModels
+            .filter({conversationViewModel in
+                conversationViewModel.conversation.value.recipientRingId == text
             })
 
-            if !filteredConversations.isEmpty {
-                self.filteredResults.value = filteredConversations
-            }
+        if !filteredConversations.isEmpty {
+            self.filteredResults.value = filteredConversations
+        }
+
+        let regexId = try? NSRegularExpression(pattern: "[0-9a-f]{40}", options: [])
+        if ((regexId?.firstMatch(in: text, options: NSRegularExpression.MatchingOptions.reportCompletion,
+                                 range: NSRange(location: 0, length: text.count))) == nil) {
 
             self.nameService.lookupName(withAccount: "", nameserver: "", name: text)
             self.searchStatus.onNext(L10n.Smartlist.searching)
+            return
+        }
+
+        if self.contactFoundConversation.value?.conversation.value.recipientRingId != text {
+            let accountId = self.accountsService.currentAccount?.id ?? ""
+            let jamiId = AccountModelHelper(withAccount: self.accountsService.currentAccount?).ringId ?? ""
+            //Create new converation
+            let conversation = ConversationModel(withRecipientRingId: text, accountId: accountId, accountUri: jamiId)
+            let newConversation = ConversationViewModel(with: self.injectionBag)
+            newConversation.conversation = Variable<ConversationModel>(conversation)
+            self.contactFoundConversation.value = newConversation
         }
     }
 
