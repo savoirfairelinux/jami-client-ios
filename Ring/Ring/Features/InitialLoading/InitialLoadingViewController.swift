@@ -11,4 +11,8 @@ import Reusable
 
 final class InitialLoadingViewController: UIViewController, StoryboardBased {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
 }
