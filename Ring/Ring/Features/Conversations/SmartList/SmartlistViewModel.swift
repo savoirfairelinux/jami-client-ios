@@ -188,6 +188,7 @@ class SmartlistViewModel: Stateable, ViewModel {
     }
 
     fileprivate func search(withText text: String) {
+        guard let currentAccount = self.accountsService.currentAccount else { return }
 
         self.contactFoundConversation.value = nil
         self.filteredResults.value.removeAll()
@@ -216,7 +217,7 @@ class SmartlistViewModel: Stateable, ViewModel {
 
         if self.contactFoundConversation.value?.conversation.value.recipientRingId != text {
             let accountId = self.accountsService.currentAccount?.id ?? ""
-            let jamiId = AccountModelHelper(withAccount: self.accountsService.currentAccount?).ringId ?? ""
+            let jamiId = AccountModelHelper(withAccount: currentAccount).ringId ?? ""
             //Create new converation
             let conversation = ConversationModel(withRecipientRingId: text, accountId: accountId, accountUri: jamiId)
             let newConversation = ConversationViewModel(with: self.injectionBag)
