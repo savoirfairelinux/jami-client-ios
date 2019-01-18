@@ -65,6 +65,10 @@
 
 - (NSDictionary *)getKnownRingDevices:(NSString *)accountID;
 
+- (bool)revokeDevice:(NSString *)accountID
+            password:(NSString *)password
+            deviceId:(NSString *)deviceId;
+
 - (Boolean)exportOnRing:(NSString *)accountID
                password: (NSString *)password;
 

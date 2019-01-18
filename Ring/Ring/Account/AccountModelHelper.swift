@@ -145,6 +145,11 @@ struct AccountModelHelper {
         }
     }
 
+    public var havePassword: Bool {
+        let noPassword: String = self.account.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword)) ?? "false"
+        return noPassword == "true" ? true : false
+    }
+
     static func uri(fromRingId ringId: String) -> String {
         return self.ringIdPrefix.appending(ringId)
     }

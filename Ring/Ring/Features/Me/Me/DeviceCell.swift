@@ -25,4 +25,10 @@ import RxSwift
 class DeviceCell: UITableViewCell, NibReusable {
     @IBOutlet weak var deviceIdLabel: UILabel!
     @IBOutlet weak var deviceNameLabel: UILabel!
+    @IBOutlet weak var removeDevice: UIButton!
+    var disposeBag = DisposeBag()
+
+    override func prepareForReuse() {
+        self.disposeBag = DisposeBag()
+    }
 }

@@ -41,6 +41,7 @@ enum ServiceEventType {
     case dataTransferCreated
     case dataTransferChanged
     case dataTransferMessageUpdated
+    case deviceRevocationEnded
 }
 
 /**
@@ -62,6 +63,7 @@ enum ServiceEventInput {
     case transferId
     case localPhotolID
     case proxyAddress
+    case deviceId
 }
 
 /**
