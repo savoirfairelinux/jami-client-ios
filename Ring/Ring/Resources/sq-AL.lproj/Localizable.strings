@@ -33,7 +33,7 @@
 "smartlist.results" = "Përfundime Kërkimi";
 "smartlist.conversations" = "Biseda";
 "smartlist.searching" = "Po kërkohet…";
-"smartlist.noResults" = "S\’ka përfundime";
+"smartlist.noResults" = "S’ka përfundime";
 "smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
 "smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
 
@@ -41,7 +41,7 @@
 
 //Welcome Screen
 "welcome.title" = "Mirë se vini te Jami !";
-"welcome.text" = "Jami është një platformë e lirë dhe universale komunikimi që ruan privatësinë dhe liritë e përdoruesve";
+"welcome.text" = "Jami është një platformë e lirë dhe universale komunikimesh që ruan privatësinë dhe liritë e përdoruesve";
 "welcome.linkDevice" = "Lidheni këtë pajisje me një llogari";
 "welcome.createAccount" = "Krijoni një llogari Jami";
 
@@ -69,7 +69,7 @@
 "createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
 "createAccount.RegisterAUsername" = "Regjistroni një emër përdoruesi";
 "createAccount.ChooseAPassword" = "Fshehtëzoje llogarinë time";
-"createAccount.PasswordInformation" = "Zgjidhni një fjalëkalim për të fshehtëzuar llogarinë tuaj vendore. Mos e harroni, se përndryshe s’do të jeni në gjendje të rimerrni llogarinë tuaj";
+"createAccount.PasswordInformation" = "Zgjidhni një fjalëkalim për të fshehtëzuar llogarinë tuaj vendore. Mos e harroni, përndryshe s’do të jeni në gjendje të rimerrni llogarinë tuaj";
 "createAccount.EnableNotifications" = "Njoftime";
 "createAccount.Recommended" = "(E këshilluar)";
 
@@ -83,13 +83,13 @@
 "linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "S\’gjendet dot llogari";
+"alerts.accountCannotBeFoundTitle" = "S’gjendet dot llogari";
 "alerts.accountCannotBeFoundMessage" = "S’u gjet dot llogaria në rrjetin Jami. Sigurohuni që qe eksportuar në Jami që prej një pajisjeje ekzistuese, dhe që kredencialet e dhëna për hyrjen janë të sakta.";
 "alerts.accountAddedTitle" = "Llogaria u Shtua";
-"alerts.accountNoNetworkTitle" = "S\’lidhet dot te rrjeti";
+"alerts.accountNoNetworkTitle" = "S’lidhet dot te rrjeti";
 "alerts.accountNoNetworkMessage" = "S’u shtua dot llogaria, ngaqë Jami s’u lidh dot me rrjetin e shpërndarë. Kontrolloni lidhjen e pajisjes tuaj.";
 "alerts.accountDefaultErrorTitle" = "Gabim i panjohur";
-"alerts.accountDefaultErrorMessage" = "Llogaria s\’u krijua dot.";
+"alerts.accountDefaultErrorMessage" = "Llogaria s’u krijua dot.";
 "alerts.profileTakePhoto" = "Bëni një foto";
 "alerts.profileUploadPhoto" = "Ngarkoni foto";
 "alerts.profileCancelPhoto" = "Anuloje";
@@ -135,6 +135,17 @@
 "accountPage.enableNotifications" = "Aktivizoni Njoftime";
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
 "accountPage.proxyDisabledAlertBody" = "Që të mund të merrni njoftime, ju lutemi, aktivizoni ndërmjetësin";
+"accountPage.revokeDeviceTitle" = "Shfuqizoje pajisjen";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.deviceRevocationProgress" = "Revoking...";
+"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationWrongPassword" = "Fjalëkalim i pasaktë";
+"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
+"accountPage.deviceRevocationError" = "Device revocation error";
 
 //Link New Device
 "linkDevice.title" = "Lidhni një pajisje të re";

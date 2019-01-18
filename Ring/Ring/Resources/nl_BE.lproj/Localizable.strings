@@ -135,6 +135,17 @@
 "accountPage.enableNotifications" = "Meldingen inschakelen";
 "accountPage.proxyDisabledAlertTitle" = "Proxyserver uitgeschakeld";
 "accountPage.proxyDisabledAlertBody" = "Schakel de proxy in voor meldingen te kunnen ontvangen";
+"accountPage.revokeDeviceTitle" = "Apparaat terugtrekken";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.deviceRevocationProgress" = "Revoking...";
+"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationWrongPassword" = "Onjuist paswoord";
+"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
+"accountPage.deviceRevocationError" = "Device revocation error";
 
 //Link New Device
 "linkDevice.title" = "Een nieuw apparaat koppelen";

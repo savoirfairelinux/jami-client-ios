@@ -135,6 +135,17 @@
 "accountPage.enableNotifications" = "啟用通知";
 "accountPage.proxyDisabledAlertTitle" = "代理伺服器已停用";
 "accountPage.proxyDisabledAlertBody" = "為了收到通知，請啟用代理伺服器";
+"accountPage.revokeDeviceTitle" = "撤銷裝置";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.deviceRevocationProgress" = "Revoking...";
+"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationWrongPassword" = "不正確的密碼";
+"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
+"accountPage.deviceRevocationError" = "Device revocation error";
 
 //Link New Device
 "linkDevice.title" = "連結新裝置";

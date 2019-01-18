@@ -135,6 +135,17 @@
 "accountPage.enableNotifications" = "Ativar Notificações";
 "accountPage.proxyDisabledAlertTitle" = "Servidor Proxy Desativado";
 "accountPage.proxyDisabledAlertBody" = "Para receber as notificações ative o proxy";
+"accountPage.revokeDeviceTitle" = "Revogar dispositivo";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.deviceRevocationProgress" = "Revoking...";
+"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationWrongPassword" = "Palavra-chave incorreta";
+"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
+"accountPage.deviceRevocationError" = "Device revocation error";
 
 //Link New Device
 "linkDevice.title" = "Associar a um novo dispositivo";

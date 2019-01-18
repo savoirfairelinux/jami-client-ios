@@ -135,6 +135,17 @@
 "accountPage.enableNotifications" = "Értesítések engedélyezése";
 "accountPage.proxyDisabledAlertTitle" = "Proxy kiszolgáló letiltva";
 "accountPage.proxyDisabledAlertBody" = "Annak érdekében, hogy értesítéseket kaphasson kérjük, hogy engedélyezze a proxy használatát";
+"accountPage.revokeDeviceTitle" = "Eszköz visszavonása";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.deviceRevocationProgress" = "Revoking...";
+"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationWrongPassword" = "Hibás jelszó";
+"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
+"accountPage.deviceRevocationError" = "Device revocation error";
 
 //Link New Device
 "linkDevice.title" = "Csatlakoztasson egy új eszközt";

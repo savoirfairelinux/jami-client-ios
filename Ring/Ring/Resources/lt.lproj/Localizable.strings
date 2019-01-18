@@ -40,10 +40,10 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "Sveiki atvykę į Jami!";
+"welcome.text" = "Jami yra laisva ir universali bendravimo platforma, kuri išsaugo naudotojo privatumą ir laisves.";
 "welcome.linkDevice" = "Susieti šį įrenginį su paskyra";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Susikurti Jami paskyrą";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Praleisti";
@@ -62,7 +62,7 @@
 "createAccount.repeatPasswordPlaceholder" = "Patvirtinkite slaptažodį";
 "createAccount.passwordCharactersNumberError" = "Mažiausiai 6 simboliai";
 "createAccount.passwordNotMatchingError" = "slaptažodžiai nesutampa";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "tikrinamas prieinamumas…";
 "createAccount.invalidUsername" = "neteisingas naudotojo vardas";
 "createAccount.usernameAlreadyTaken" = "naudotojo vardas jau užimtas";
 "createAccount.loading" = "Įkeliama";
@@ -70,8 +70,8 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.EnableNotifications" = "Pranešimai";
+"createAccount.Recommended" = "(Rekomenduojama)";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
@@ -135,6 +135,17 @@
 "accountPage.enableNotifications" = "Įjungti pranešimus";
 "accountPage.proxyDisabledAlertTitle" = "Įgaliotasis serveris išjungtas";
 "accountPage.proxyDisabledAlertBody" = "Norėdami gauti pranešimus, įjunkite įgaliotąjį serverį";
+"accountPage.revokeDeviceTitle" = "Panaikinti įrenginį";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.deviceRevocationProgress" = "Revoking...";
+"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationWrongPassword" = "Neteisingas slaptažodis";
+"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
+"accountPage.deviceRevocationError" = "Device revocation error";
 
 //Link New Device
 "linkDevice.title" = "Susieti naują įrenginį";

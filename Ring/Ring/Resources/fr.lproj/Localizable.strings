@@ -135,6 +135,17 @@
 "accountPage.enableNotifications" = "Activer les notifications";
 "accountPage.proxyDisabledAlertTitle" = "Nœud délégataire désactivé ";
 "accountPage.proxyDisabledAlertBody" = "Pour recevoir des notifications, veuillez activer le serveur mandataire ";
+"accountPage.revokeDeviceTitle" = "Révoquer l'appareil";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.deviceRevocationProgress" = "Revoking...";
+"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationWrongPassword" = "Mot de passe incorrecte";
+"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
+"accountPage.deviceRevocationError" = "Device revocation error";
 
 //Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";
