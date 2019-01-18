@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,22 +30,48 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNp-cR-95I">
+                        <rect key="frame" x="329" y="25" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="PBa-iQ-J9e"/>
+                            <constraint firstAttribute="width" constant="30" id="tgl-mD-JbM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="tintColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                        <state key="normal" image="revoke_device">
+                            <color key="titleColor" red="0.0" green="0.29964192709999998" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="OQs-TS-z4j" firstAttribute="top" secondItem="Emx-P1-xQc" secondAttribute="bottom" constant="2" id="1u2-sP-E0H"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Emx-P1-xQc" secondAttribute="trailing" constant="20" symbolic="YES" id="3NP-Bl-2xN"/>
+                    <constraint firstItem="xNp-cR-95I" firstAttribute="trailing" secondItem="fvy-0B-phe" secondAttribute="trailingMargin" id="NLH-b0-OeZ"/>
+                    <constraint firstItem="xNp-cR-95I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Emx-P1-xQc" secondAttribute="trailing" constant="30" id="TSU-5H-8DY"/>
                     <constraint firstItem="Emx-P1-xQc" firstAttribute="leading" secondItem="OQs-TS-z4j" secondAttribute="leading" id="VnE-T5-ZB0"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OQs-TS-z4j" secondAttribute="trailing" constant="10" id="c1v-0c-oUl"/>
                     <constraint firstItem="Emx-P1-xQc" firstAttribute="top" secondItem="fvy-0B-phe" secondAttribute="top" constant="10" id="jpW-b6-d6g"/>
                     <constraint firstItem="OQs-TS-z4j" firstAttribute="leading" secondItem="fvy-0B-phe" secondAttribute="leadingMargin" id="m5d-gg-Ugj"/>
                     <constraint firstAttribute="bottomMargin" secondItem="OQs-TS-z4j" secondAttribute="bottom" constant="10" id="mzU-aw-WHP"/>
+                    <constraint firstItem="xNp-cR-95I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OQs-TS-z4j" secondAttribute="trailing" constant="30" id="tY2-vb-6Ga"/>
+                    <constraint firstItem="xNp-cR-95I" firstAttribute="centerY" secondItem="fvy-0B-phe" secondAttribute="centerY" id="uwR-Dv-qrh"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                        <real key="value" value="10"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <connections>
                 <outlet property="deviceIdLabel" destination="OQs-TS-z4j" id="UZg-Z8-A28"/>
                 <outlet property="deviceNameLabel" destination="Emx-P1-xQc" id="Z5C-rX-Jmc"/>
+                <outlet property="removeDevice" destination="xNp-cR-95I" id="z1p-t2-u4P"/>
             </connections>
             <point key="canvasLocation" x="85.5" y="131"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="revoke_device" width="50" height="50"/>
+    </resources>
 </document>

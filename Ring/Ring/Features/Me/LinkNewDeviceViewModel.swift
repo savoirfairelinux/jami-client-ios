@@ -105,12 +105,10 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
         }
         self.accountService.exportOnRing(withPassword: password).subscribe(onCompleted: {
             if let account = self.accountService.currentAccount {
-                let accountHelper = AccountModelHelper(withAccount: account)
-                let uri = accountHelper.ringId
                 self.accountService.sharedResponseStream
                     .filter({ exportComplitedEvent in
                         return exportComplitedEvent.eventType == ServiceEventType.exportOnRingEnded
-                            && exportComplitedEvent.getEventInput(.uri) == uri
+                            && exportComplitedEvent.getEventInput(.id) == account.id
                     })
                     .subscribe(onNext: { [unowned self] exportComplitedEvent in
                         if let state: Int = exportComplitedEvent.getEventInput(.state) {

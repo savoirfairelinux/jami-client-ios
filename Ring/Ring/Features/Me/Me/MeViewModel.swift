@@ -70,6 +70,14 @@ enum SettingsSection: SectionModelType {
     }
 }
 
+enum ActionsState {
+    case deviceRevokedWithSuccess(deviceId: String)
+    case deviceRevokationError(deviceId: String, errorMessage: String)
+    case showLoading
+    case hideLoading
+    case noAction
+}
+
 class MeViewModel: ViewModel, Stateable {
 
     // MARK: - Rx Stateable
@@ -110,6 +118,8 @@ class MeViewModel: ViewModel, Stateable {
                 return lookupNameResponse.name
             })
     }()
+
+    var showActionState = Variable<ActionsState>(.noAction)
 
     lazy var ringId: Observable<String> = {
         if let uri = self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)) {
@@ -152,6 +162,11 @@ class MeViewModel: ViewModel, Stateable {
                                             .blockedList, .proxy, .notifications]))
     }()
 
+    lazy var havePassord: Bool = {
+        guard let currentAccount = self.accountService.currentAccount else {return true}
+        return AccountModelHelper(withAccount: currentAccount).havePassword
+    }()
+
     // swiftlint:disable identifier_name
     lazy var linkedDevices: Observable<SettingsSection> = {
         // if account does not exist or devices list empty return empty section
@@ -191,6 +206,27 @@ class MeViewModel: ViewModel, Stateable {
     required init (with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
+        guard let accountId = self.accountService.currentAccount?.id else {return}
+        self.accountService.sharedResponseStream
+            .filter({ (deviceEvent) -> Bool in
+                return deviceEvent.eventType == ServiceEventType.deviceRevocationEnded
+                    && deviceEvent.getEventInput(.id) == accountId
+            })
+            .subscribe(onNext: { [unowned self] deviceEvent in
+                if let state: Int = deviceEvent.getEventInput(.state),
+                    let deviceID: String = deviceEvent.getEventInput(.deviceId) {
+                    switch state {
+                    case DeviceRevocationState.success.rawValue:
+                        self.showActionState.value = .deviceRevokedWithSuccess(deviceId: deviceID)
+                    case DeviceRevocationState.wrongPassword.rawValue:
+                        self.showActionState.value = .deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationWrongPassword)
+                    case DeviceRevocationState.unknownDevice.rawValue:
+                        self.showActionState.value = .deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationUnknownDevice)
+                    default:
+                        self.showActionState.value = .deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationError)
+                    }
+                }
+            }).disposed(by: self.disposeBag)
     }
 
     func linkDevice() {
@@ -199,6 +235,14 @@ class MeViewModel: ViewModel, Stateable {
 
     func showBlockedContacts() {
         self.stateSubject.onNext(MeState.blockedContacts)
+    }
+
+    func revokeDevice(deviceId: String, accountPassword password: String) {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            self.showActionState.value = .showLoading
+            return
+        }
+        self.accountService.revokeDevice(for: accountId, withPassword: password, deviceId: deviceId)
     }
 
     // MARK: - DHT Proxy
