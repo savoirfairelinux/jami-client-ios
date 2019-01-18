@@ -130,7 +130,6 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     func dismissInfoView() {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.infoView.alpha = 0
-            self?.infoProfileImage.removeFromSuperview()
         }, completion: { _ in self.infoView.isHidden = true })
     }
 
