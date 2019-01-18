@@ -80,6 +80,15 @@ static id <AccountAdapterDelegate> _delegate;
             [AccountAdapter.delegate knownDevicesChangedFor:accountId devices:knDev];
         }
     }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::DeviceRevocationEnded>([&](const std::string& account_id, const std::string& device, int status) {
+        if (AccountAdapter.delegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSInteger state = status;
+            NSString* deviceId = [NSString stringWithUTF8String:device.c_str()];
+            [AccountAdapter.delegate deviceRevocationEndedFor: accountId state: state deviceId: deviceId];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 #pragma mark -
@@ -133,6 +142,14 @@ static id <AccountAdapterDelegate> _delegate;
     auto ringDevices = getKnownRingDevices(std::string([accountID UTF8String]));
     return [Utils mapToDictionnary:ringDevices];
 }
+
+- (bool)revokeDevice:(NSString *)accountID
+            password:(NSString *)password
+            deviceId:(NSString *)deviceId
+{
+    return revokeDevice(std::string([accountID UTF8String]),std::string([password UTF8String]), std::string([deviceId UTF8String]));
+}
+
 #pragma mark -
 
 #pragma mark AccountAdapterDelegate

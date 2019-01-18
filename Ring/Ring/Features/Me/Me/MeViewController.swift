@@ -25,7 +25,9 @@ import Reusable
 import RxSwift
 import RxCocoa
 import RxDataSources
+import PKHUD
 
+// swiftlint:disable type_body_length
 class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBased {
 
     // MARK: - outlets
@@ -102,7 +104,22 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 self.qrCodeItemTapped()
             })
             .disposed(by: self.disposeBag)
-
+        self.viewModel.showActionState.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self](action) in
+                switch action {
+                case .noAction:
+                    break
+                case .hideLoading:
+                    self?.stopLoadingView()
+                case .showLoading:
+                    self?.showLoadingView()
+                case .deviceRevokedWithSuccess(let deviceId):
+                    self?.showDeviceRevokedAlert(deviceId: deviceId)
+                case .deviceRevokationError(let deviceId, let errorMessage):
+                    self?.showDeviceRevocationError(deviceId: deviceId, errorMessage: errorMessage)
+                }
+            }).disposed(by: self.disposeBag)
         self.navigationItem.rightBarButtonItem = infoItem
         self.navigationItem.leftBarButtonItem = qrCodeButtonItem
 
@@ -132,6 +149,43 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     private func openBlockedList() {
         self.viewModel.showBlockedContacts()
+    }
+
+    private func stopLoadingView() {
+        HUD.hide(animated: false)
+    }
+
+    private func showLoadingView() {
+        HUD.show(.labeledProgress(title: L10n.AccountPage.deviceRevocationProgress, subtitle: nil))
+    }
+
+    private func showDeviceRevocationError(deviceId: String, errorMessage: String) {
+        HUD.hide(animated: true) { _ in
+            let alert = UIAlertController(title: errorMessage,
+                                          message: nil,
+                                          preferredStyle: .alert)
+            let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+                                             style: .cancel)
+            let actionAgain = UIAlertAction(title: L10n.AccountPage.deviceRevocationTryAgain,
+                                            style: .default) { [weak self] _ in
+                                                self?.confirmRevokeDeviceAlert(deviceID: deviceId)
+            }
+            alert.addAction(actionCancel)
+            alert.addAction(actionAgain)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    private func showDeviceRevokedAlert(deviceId: String) {
+        HUD.hide(animated: true) { _ in
+            let alert = UIAlertController(title: L10n.AccountPage.deviceRevocationSuccess,
+                                          message: nil,
+                                          preferredStyle: .alert)
+            let actionOk = UIAlertAction(title: L10n.Global.ok,
+                                         style: .default)
+            alert.addAction(actionOk)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     private func infoItemTapped() {
@@ -213,6 +267,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         cell.deviceNameLabel.text = deviceName
                     }
                     cell.selectionStyle = .none
+                    cell.removeDevice.isHidden = device.isCurrent
+                    cell.removeDevice.rx.tap.subscribe(onNext: { [weak self, device] in
+                        self?.confirmRevokeDeviceAlert(deviceID: device.deviceId)
+                    }).disposed(by: cell.disposeBag)
                     return cell
 
                 case .linkNew:
@@ -364,6 +422,46 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 }
                 return false
             }).bind(to: actionConfirm.rx.isEnabled).disposed(by: self.disposeBag)
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func confirmRevokeDeviceAlert(deviceID: String) {
+        let alert = UIAlertController(title: L10n.AccountPage.revokeDeviceTitle,
+                                      message: L10n.AccountPage.revokeDeviceMessage,
+                                      preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+                                         style: .cancel)
+        let actionConfirm = UIAlertAction(title: L10n.AccountPage.revokeDeviceButton,
+                                          style: .default) { [weak self] _ in
+                                            self?.showLoadingView()
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                                if let textFields = alert.textFields,
+                                                    !textFields.isEmpty,
+                                                    let text = textFields[0].text,
+                                                    !text.isEmpty {
+                                                    self?.viewModel.revokeDevice(deviceId: deviceID, accountPassword: text)
+                                                } else {
+                                                    self?.viewModel.revokeDevice(deviceId: deviceID, accountPassword: "")
+                                                    self?.stopLoadingView()
+                                                }
+                                            }
+        }
+        alert.addAction(actionCancel)
+        alert.addAction(actionConfirm)
+
+        if self.viewModel.havePassord {
+            alert.addTextField {(textField) in
+                textField.placeholder = L10n.AccountPage.revokeDevicePlaceholder
+            }
+            if let textFields = alert.textFields {
+                textFields[0].rx.text.map({text in
+                    if let text = text {
+                        return !text.isEmpty
+                    }
+                    return false
+                }).bind(to: actionConfirm.rx.isEnabled).disposed(by: self.disposeBag)
+            }
         }
         self.present(alert, animated: true, completion: nil)
     }

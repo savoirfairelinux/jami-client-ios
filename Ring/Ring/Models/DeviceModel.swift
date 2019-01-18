@@ -25,10 +25,12 @@ class DeviceModel: Object {
 
     @objc dynamic var deviceId = ""
     @objc dynamic var deviceName: String?
+    @objc dynamic var isCurrent = false
 
-    convenience init(withDeviceId deviceId: String, deviceName: String?) {
+    convenience init(withDeviceId deviceId: String, deviceName: String?, isCurrent: Bool) {
         self.init()
         self.deviceId = deviceId
         self.deviceName = deviceName
+        self.isCurrent = isCurrent
     }
 }

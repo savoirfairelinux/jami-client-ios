@@ -17,6 +17,20 @@ internal enum L10n {
     internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
     /// Account Details
     internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader")
+    /// Device revocation error
+    internal static let deviceRevocationError = L10n.tr("Localizable", "accountPage.deviceRevocationError")
+    /// Revoking...
+    internal static let deviceRevocationProgress = L10n.tr("Localizable", "accountPage.deviceRevocationProgress")
+    /// Device was revoked
+    internal static let deviceRevocationSuccess = L10n.tr("Localizable", "accountPage.deviceRevocationSuccess")
+    /// Try again
+    internal static let deviceRevocationTryAgain = L10n.tr("Localizable", "accountPage.deviceRevocationTryAgain")
+    /// Unknown device
+    internal static let deviceRevocationUnknownDevice = L10n.tr("Localizable", "accountPage.deviceRevocationUnknownDevice")
+    /// Incorrect password
+    internal static let deviceRevocationWrongPassword = L10n.tr("Localizable", "accountPage.deviceRevocationWrongPassword")
+    /// Device revocation completed
+    internal static let deviceRevoked = L10n.tr("Localizable", "accountPage.deviceRevoked")
     /// Devices
     internal static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
     /// Enable Notifications
@@ -33,6 +47,14 @@ internal enum L10n {
     internal static let proxyDisabledAlertTitle = L10n.tr("Localizable", "accountPage.proxyDisabledAlertTitle")
     /// Proxy address
     internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder")
+    /// Revoke
+    internal static let revokeDeviceButton = L10n.tr("Localizable", "accountPage.revokeDeviceButton")
+    /// Are you sure you want to revoke this device? This action could not be undone.
+    internal static let revokeDeviceMessage = L10n.tr("Localizable", "accountPage.revokeDeviceMessage")
+    /// Enter your passord
+    internal static let revokeDevicePlaceholder = L10n.tr("Localizable", "accountPage.revokeDevicePlaceholder")
+    /// Revoke device
+    internal static let revokeDeviceTitle = L10n.tr("Localizable", "accountPage.revokeDeviceTitle")
     /// Save
     internal static let saveProxyAddress = L10n.tr("Localizable", "accountPage.saveProxyAddress")
     /// Settings

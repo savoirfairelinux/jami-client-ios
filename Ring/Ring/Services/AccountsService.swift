@@ -29,6 +29,12 @@ enum LinkNewDeviceError: Error {
     case unknownError
 }
 
+enum DeviceRevocationState: Int {
+    case success = 0
+    case wrongPassword = 1
+    case unknownDevice = 2
+}
+
 enum AddAccountError: Error {
     case templateNotConform
     case unknownError
@@ -387,13 +393,24 @@ class AccountsService: AccountAdapterDelegate {
 
         var devices = [DeviceModel]()
 
+        let accountDetails = self.getAccountDetails(fromAccountId: id)
+        let currentDeviceId = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountDeviceId))
+
         for key in knownRingDevices.allKeys {
             if let key = key as? String {
-                devices.append(DeviceModel(withDeviceId: key, deviceName: knownRingDevices.value(forKey: key) as? String))
+                devices.append(DeviceModel(withDeviceId: key,
+                                           deviceName: knownRingDevices.value(forKey: key) as? String,
+                                           isCurrent: key == currentDeviceId))
             }
         }
 
         return devices
+    }
+
+    func revokeDevice(for account: String,
+                      withPassword password: String,
+                      deviceId: String) {
+        accountAdapter.revokeDevice(account, password: password, deviceId: deviceId)
     }
 
     /**
@@ -488,17 +505,19 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func exportOnRingEnded(for account: String, state: Int, pin: String) {
-        let changedAccount = getAccount(fromAccountId: account)
-        if let changedAccount = changedAccount {
-            let accountHelper = AccountModelHelper(withAccount: changedAccount)
-            if let  uri = accountHelper.ringId {
-                var event = ServiceEvent(withEventType: .exportOnRingEnded)
-                event.addEventInput(.uri, value: uri)
-                event.addEventInput(.state, value: state)
-                event.addEventInput(.pin, value: pin)
-                self.responseStream.onNext(event)
-            }
-        }
+        var event = ServiceEvent(withEventType: .exportOnRingEnded)
+        event.addEventInput(.id, value: account)
+        event.addEventInput(.state, value: state)
+        event.addEventInput(.pin, value: pin)
+        self.responseStream.onNext(event)
+    }
+
+    func deviceRevocationEnded(for account: String, state: Int, deviceId: String) {
+        var event = ServiceEvent(withEventType: .deviceRevocationEnded)
+        event.addEventInput(.id, value: account)
+        event.addEventInput(.state, value: state)
+        event.addEventInput(.deviceId, value: deviceId)
+        self.responseStream.onNext(event)
     }
 
     // MARK: Push Notifications

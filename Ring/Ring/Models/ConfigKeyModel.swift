@@ -100,6 +100,7 @@ enum ConfigKey: String {
     case proxyEnabled = "Account.proxyEnabled"
     case proxyServer = "Account.proxyServer"
     case devicePushToken = "Account.proxyPushToken"
+    case archiveHasPassword = "Account.archiveHasPassword"
 }
 
 /**

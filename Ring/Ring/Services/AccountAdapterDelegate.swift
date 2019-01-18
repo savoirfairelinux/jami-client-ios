@@ -24,4 +24,5 @@
     func registrationStateChanged(with response: RegistrationResponse)
     func knownDevicesChanged(for account: String, devices: [String: String])
     func exportOnRingEnded(for account: String, state: Int, pin: String)
+    func deviceRevocationEnded(for account: String, state: Int, deviceId: String)
 }
