@@ -117,6 +117,9 @@ class NameService: NameRegistrationAdapterDelegate {
 
     internal func nameRegistrationEnded(with response: NameRegistrationResponse) {
         if response.state == .success {
+            var data = [String: String]()
+            data[NotificationUserInfoKeys.accountID.rawValue] = response.accountId
+            NotificationCenter.default.post(name: NSNotification.Name(NotificationName.nameRegistered.rawValue), object: nil, userInfo: data)
             log.debug("Registred name : \(response.name ?? "no name")")
         } else {
             log.debug("Name Registration failed. State = \(response.state.rawValue)")
