@@ -141,7 +141,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 AudioServicesPlayAlertSound(systemSoundId)
                 print("RingId : " + ringId)
                 self.dismiss(animated: true, completion: nil)
-                self.viewModel.createNewConversation(recipientRingId: ringId)
+                self.viewModel.createNewConversation(recipientRingId: ringId.replacingOccurrences(of: "ring:", with: ""))
                 self.scannedQrCode = true
             } else {
                 let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)

@@ -206,10 +206,7 @@ class SmartlistViewModel: Stateable, ViewModel {
             self.filteredResults.value = filteredConversations
         }
 
-        let regexId = try? NSRegularExpression(pattern: "[0-9a-f]{40}", options: [])
-        if ((regexId?.firstMatch(in: text, options: NSRegularExpression.MatchingOptions.reportCompletion,
-                                 range: NSRange(location: 0, length: text.count))) == nil) {
-
+        if !text.isSHA1() {
             self.nameService.lookupName(withAccount: "", nameserver: "", name: text)
             self.searchStatus.onNext(L10n.Smartlist.searching)
             return
@@ -219,7 +216,7 @@ class SmartlistViewModel: Stateable, ViewModel {
             let accountId = self.accountsService.currentAccount?.id ?? ""
             let jamiId = AccountModelHelper(withAccount: currentAccount).ringId ?? ""
             //Create new converation
-            let conversation = ConversationModel(withRecipientRingId: text, accountId: accountId, accountUri: jamiId)
+            let conversation = ConversationModel(withRecipientRingId: text.replacingOccurrences(of: "ring:", with: ""), accountId: accountId, accountUri: jamiId)
             let newConversation = ConversationViewModel(with: self.injectionBag)
             newConversation.conversation = Variable<ConversationModel>(conversation)
             self.contactFoundConversation.value = newConversation
