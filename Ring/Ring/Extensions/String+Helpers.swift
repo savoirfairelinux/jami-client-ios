@@ -35,13 +35,11 @@ extension String {
     }
 
     func isSHA1() -> Bool {
-        do {
-            let sha1Regex = try NSRegularExpression(pattern: "[0-9a-f]", options: .caseInsensitive)
-            if !sha1Regex.matches(in: self, range: NSRange(location: 0, length: self.count)).isEmpty && self.count == 40 {
-                return true
-            }
-        } catch {
-            print("Bad regex")
+        let sha1Regex = try? NSRegularExpression(pattern: "(ring:)?([0-9a-f]{40})", options: [])
+        if sha1Regex?.firstMatch(in: self,
+                                 options: NSRegularExpression.MatchingOptions.reportCompletion,
+                                 range: NSRange(location: 0, length: self.count)) != nil {
+            return true
         }
         return false
     }
