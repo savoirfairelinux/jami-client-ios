@@ -206,7 +206,21 @@ class MeViewModel: ViewModel, Stateable {
     required init (with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
-        guard let accountId = self.accountService.currentAccount?.id else {return}
+    }
+
+    func linkDevice() {
+        self.stateSubject.onNext(MeState.linkNewDevice)
+    }
+
+    func showBlockedContacts() {
+        self.stateSubject.onNext(MeState.blockedContacts)
+    }
+
+    func revokeDevice(deviceId: String, accountPassword password: String) {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            self.showActionState.value = .hideLoading
+            return
+        }
         self.accountService.sharedResponseStream
             .filter({ (deviceEvent) -> Bool in
                 return deviceEvent.eventType == ServiceEventType.deviceRevocationEnded
@@ -227,21 +241,6 @@ class MeViewModel: ViewModel, Stateable {
                     }
                 }
             }).disposed(by: self.disposeBag)
-    }
-
-    func linkDevice() {
-        self.stateSubject.onNext(MeState.linkNewDevice)
-    }
-
-    func showBlockedContacts() {
-        self.stateSubject.onNext(MeState.blockedContacts)
-    }
-
-    func revokeDevice(deviceId: String, accountPassword password: String) {
-        guard let accountId = self.accountService.currentAccount?.id else {
-            self.showActionState.value = .hideLoading
-            return
-        }
         self.accountService.revokeDevice(for: accountId, withPassword: password, deviceId: deviceId)
     }
 
