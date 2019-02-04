@@ -453,6 +453,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         if self.viewModel.havePassord {
             alert.addTextField {(textField) in
                 textField.placeholder = L10n.AccountPage.revokeDevicePlaceholder
+                textField.isSecureTextEntry = true
             }
             if let textFields = alert.textFields {
                 textFields[0].rx.text.map({text in
