@@ -110,6 +110,9 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func startCapturing() {
+        guard self.permissionGranted.value else {
+            return
+        }
         sessionQueue.async { [unowned self] in
             if self.captureSession.canSetSessionPreset(self.quality) {
                 self.captureSession.beginConfiguration()
@@ -121,6 +124,9 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func stopCapturing() {
+        guard self.permissionGranted.value else {
+            return
+        }
         sessionQueue.async { [unowned self] in
             self.captureSession.stopRunning()
         }
@@ -190,6 +196,10 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     func switchCamera() -> Completable {
         return Completable.create { [unowned self] completable in
+            guard self.permissionGranted.value else {
+                completable(.error(VideoError.switchCameraFailed))
+                return Disposables.create {}
+            }
             self.captureSession.beginConfiguration()
             guard let currentCameraInput: AVCaptureInput = self.captureSession.inputs.first else {
                 completable(.error(VideoError.switchCameraFailed))
@@ -301,14 +311,39 @@ class VideoService: FrameExtractorDelegate {
 
     func setupInputs() {
         self.camera.permissionGrantedObservable
-            .subscribe(onNext: { granted in
+            .subscribe(onNext: { [unowned self] granted in
                 if granted {
                     self.enumerateVideoInputDevices()
+                } else {
+                    //when permision denyed anyway set default video device
+                    //to setup corresponded audio device
+                    self.setDefaultDevice()
                 }
             })
             .disposed(by: self.disposeBag)
         // Will trigger enumerateVideoInputDevices once permission is granted
         camera.checkPermission()
+    }
+
+    private func setDefaultDevice() {
+        guard let captureDevice = self.camera.selectCaptureDevice(withPosition: AVCaptureDevice.Position.front) else {
+            return
+        }
+        let formatDescription = captureDevice.activeFormat.formatDescription
+        let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
+        var bestRate = 30.0
+        for vFormat in captureDevice.formats {
+            var ranges = vFormat.videoSupportedFrameRateRanges as [AVFrameRateRange]
+            let frameRates = ranges[0]
+            if frameRates.maxFrameRate > bestRate {
+                bestRate = frameRates.maxFrameRate
+            }
+        }
+        let devInfo: DeviceInfo = ["format": "BGRA",
+                                   "width": String(dimensions.height),
+                                   "height": String(dimensions.width),
+                                   "rate": String(bestRate)]
+        videoAdapter.addVideoDevice(withName: camera.namePortrait, withDevInfo: devInfo)
     }
 
     private func enumerateVideoInputDevices() {
