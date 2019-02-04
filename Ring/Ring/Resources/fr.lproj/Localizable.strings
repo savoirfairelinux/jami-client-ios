@@ -136,16 +136,16 @@
 "accountPage.proxyDisabledAlertTitle" = "Nœud délégataire désactivé ";
 "accountPage.proxyDisabledAlertBody" = "Pour recevoir des notifications, veuillez activer le serveur mandataire ";
 "accountPage.revokeDeviceTitle" = "Révoquer l'appareil";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
-"accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.revokeDeviceMessage" = "Êtes-vous certain de vouloir révoquer l'appareil ? Cette opération est irréversible.";
+"accountPage.revokeDeviceButton" = "Révoquer";
+"accountPage.revokeDevicePlaceholder" = "Entrer votre mot de passe";
+"accountPage.deviceRevoked" = "La révocation de l'appareil a été effectuée";
+"accountPage.deviceRevocationProgress" = "En cours de révocation...";
+"accountPage.deviceRevocationSuccess" = "L'appareil est maintenant révoqué !";
+"accountPage.deviceRevocationTryAgain" = "Essayez encore";
 "accountPage.deviceRevocationWrongPassword" = "Mot de passe incorrecte";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationUnknownDevice" = "Appareil inconnu";
+"accountPage.deviceRevocationError" = "Erreur de révocation d'appareil";
 
 //Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";

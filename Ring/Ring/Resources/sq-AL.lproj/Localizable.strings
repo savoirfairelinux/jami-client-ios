@@ -136,16 +136,16 @@
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
 "accountPage.proxyDisabledAlertBody" = "Që të mund të merrni njoftime, ju lutemi, aktivizoni ndërmjetësin";
 "accountPage.revokeDeviceTitle" = "Shfuqizoje pajisjen";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
-"accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.revokeDeviceMessage" = "Jeni i sigurt se doni të shfuqizohet kjo pajisje. Ky veprim s’mund të zhbëhet.";
+"accountPage.revokeDeviceButton" = "Shfuqizoje";
+"accountPage.revokeDevicePlaceholder" = "Jepni fjalëkalimin tuaj";
+"accountPage.deviceRevoked" = "Shfuqizimi i pajisjes u plotësua";
+"accountPage.deviceRevocationProgress" = "Po shfuqizohet…";
+"accountPage.deviceRevocationSuccess" = "Pajisja u shfuqizua";
+"accountPage.deviceRevocationTryAgain" = "Riprovoni";
 "accountPage.deviceRevocationWrongPassword" = "Fjalëkalim i pasaktë";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationUnknownDevice" = "Pajisje e panjohur";
+"accountPage.deviceRevocationError" = "Gabim shfuqizimi pajisjeje";
 
 //Link New Device
 "linkDevice.title" = "Lidhni një pajisje të re";

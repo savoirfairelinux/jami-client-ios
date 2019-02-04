@@ -43,7 +43,7 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "پیوند این دستگاه به یک حساب";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "ایجاد یک حساب جمی";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "اسکیپ";
@@ -70,7 +70,7 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "آگاهی‌ها";
 "createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form

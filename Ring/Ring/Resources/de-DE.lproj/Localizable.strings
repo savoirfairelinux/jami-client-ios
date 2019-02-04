@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Home";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Einladungen";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "Ok";
 
@@ -31,9 +31,9 @@
 // Smartlist
 "smartlist.yesterday" = "Gestern";
 "smartlist.results" = "Search Result";
-"smartlist.conversations" = "Conversations";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
+"smartlist.conversations" = "Gespräche";
+"smartlist.searching" = "Suche...";
+"smartlist.noResults" = "Keine Ergebnisse";
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkkonnektivität";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
@@ -43,10 +43,10 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Dieses Gerät mit einem Ring-Konto verknüpfen";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Jami-Konto erstellen";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Überspringen";
 "createProfile.profileCreated" = "Weiter";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -61,11 +61,11 @@
 "createAccount.newPasswordPlaceholder" = "Passwort";
 "createAccount.repeatPasswordPlaceholder" = "Konto bestätigen";
 "createAccount.passwordCharactersNumberError" = "Mindestens 6 Zeichen";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.passwordNotMatchingError" = "Passwörter stimmen nicht überein";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.invalidUsername" = "Ungültiger Benutzername";
+"createAccount.usernameAlreadyTaken" = "Benutzername bereits vergeben";
+"createAccount.loading" = "Laden...";
 "createAccount.waitCreateAccountTitle" = "Konto wird hinzugefügt";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
@@ -74,28 +74,28 @@
 "createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.waitLinkToAccountTitle" = "Konto wird verknüpft";
+"linkToAccount.linkButtonTitle" = "Gerät verknüpfen";
 "linkToAccount.passwordPlaceholder" = "Passwort";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.passwordLabel" = "Passwort eingeben";
 "linkToAccount.pinLabel" = "PIN eingeben";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "Konto nicht gefunden";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountAddedTitle" = "Konto hinzugefügt";
+"alerts.accountNoNetworkTitle" = "Kann keine Verbindung zum Netzwerk herstellen";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.accountDefaultErrorTitle" = "Unbekannter Fehler";
+"alerts.accountDefaultErrorMessage" = "Das Konto konnte nicht angelegt werden.";
+"alerts.profileTakePhoto" = "Bild aufnehmen";
+"alerts.profileUploadPhoto" = "Bild hochladen";
 "alerts.profileCancelPhoto" = "Abbrechen";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "Konto wird verknüpft";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.dbFailedMessage" = "Bitte schließen Sie die Anwendung und versuchen Sie, diese erneut zu starten.";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -119,7 +119,7 @@
 "calls.callFinished" = "Call finished";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "Geräte";
 "accountPage.settingsHeader" = "Einstellungen";
 "accountPage.username" = "username:";
 "accountPage.usernameNotRegistered" = "username: not registered";
@@ -149,11 +149,11 @@
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
+"linkDevice.passwordError" = "Das eingegebene Passwort passt nicht zu diesem Konto";
 "linkDevice.networkError" = "Ein Fehler trat während des Exports";
 "linkDevice.defaultError" = "Ein Fehler trat während des Exports";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "Überprüfung...";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";

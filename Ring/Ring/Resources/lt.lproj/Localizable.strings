@@ -94,7 +94,7 @@
 "alerts.profileUploadPhoto" = "Įkelti nuotrauką";
 "alerts.profileCancelPhoto" = "Atsisakyti";
 "alerts.accountLinkedTitle" = "Linking account";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "Paleidžiant Jami, įvyko klaida";
 "alerts.dbFailedMessage" = "Prašome užverti programą ir bandyti ją atverti dar kartą";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Užblokuoti kontaktą";
@@ -136,23 +136,23 @@
 "accountPage.proxyDisabledAlertTitle" = "Įgaliotasis serveris išjungtas";
 "accountPage.proxyDisabledAlertBody" = "Norėdami gauti pranešimus, įjunkite įgaliotąjį serverį";
 "accountPage.revokeDeviceTitle" = "Panaikinti įrenginį";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceMessage" = "Ar tikrai norite panaikinti šį įrenginį? Šio veiksmo neįmanoma bus atšaukti.";
+"accountPage.revokeDeviceButton" = "Panaikinti";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
-"accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevoked" = "Įrenginio panaikinimas užbaigtas";
+"accountPage.deviceRevocationProgress" = "Panaikinama...";
+"accountPage.deviceRevocationSuccess" = "Įrenginys buvo panaikintas";
 "accountPage.deviceRevocationTryAgain" = "Try again";
 "accountPage.deviceRevocationWrongPassword" = "Neteisingas slaptažodis";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationUnknownDevice" = "Nežinomas įrenginys";
+"accountPage.deviceRevocationError" = "Įrenginio panaikinimo klaida";
 
 //Link New Device
 "linkDevice.title" = "Susieti naują įrenginį";
 "linkDevice.passwordError" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
 "linkDevice.networkError" = "Eksportavimo metu, įvyko klaida";
 "linkDevice.defaultError" = "Eksportavimo metu, įvyko klaida";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Norėdami užbaigti procesą, jūs turite atverti Jami naujame įrenginyje ir pasirinkti parinktį \"Susieti šį įrenginį su paskyra\". Jūsų pin galioja 10 minučių";
 "linkDevice.hudMessage" = "Verifying";
 
 //Contact Page

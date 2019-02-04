@@ -43,10 +43,10 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "将此设备与一个帐户进行连接";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "创建一个Jami账户";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "跳过";
 "createProfile.profileCreated" = "下一步";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -87,7 +87,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
 "alerts.accountNoNetworkTitle" = "无法连接至网络";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "无法添加帐户，因为Jami无法连接到分布式网络。检查您设备的连接。";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "拍照";

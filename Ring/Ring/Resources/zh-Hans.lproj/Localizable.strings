@@ -136,16 +136,16 @@
 "accountPage.proxyDisabledAlertTitle" = "代理伺服器已停用";
 "accountPage.proxyDisabledAlertBody" = "為了收到通知，請啟用代理伺服器";
 "accountPage.revokeDeviceTitle" = "撤銷裝置";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
-"accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.revokeDeviceMessage" = "你想要撤銷此裝置嗎？這個動作無法復原。";
+"accountPage.revokeDeviceButton" = "撤銷";
+"accountPage.revokeDevicePlaceholder" = "輸入您的密碼";
+"accountPage.deviceRevoked" = "裝置撤銷完成";
+"accountPage.deviceRevocationProgress" = "正在撤銷……";
+"accountPage.deviceRevocationSuccess" = "裝置已撤銷";
+"accountPage.deviceRevocationTryAgain" = "再試一次";
 "accountPage.deviceRevocationWrongPassword" = "不正確的密碼";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationUnknownDevice" = "未知的裝置";
+"accountPage.deviceRevocationError" = "裝置撤銷錯誤";
 
 //Link New Device
 "linkDevice.title" = "連結新裝置";
