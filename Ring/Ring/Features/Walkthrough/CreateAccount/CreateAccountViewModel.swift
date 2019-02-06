@@ -266,7 +266,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
         let password = self.password.value
 
         self.accountService
-            .addRingAccount(username: username, password: password)
+            .addRingAccount(username: username, password: password, enable: self.notificationSwitch.value)
             .subscribe(onNext: { [unowned self] (account) in
                 self.accountCreationState.value = .success
                 DispatchQueue.main.async {
