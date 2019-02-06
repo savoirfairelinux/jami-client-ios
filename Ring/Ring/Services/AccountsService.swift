@@ -155,9 +155,6 @@ class AccountsService: AccountAdapterDelegate {
         //~ Registering to the accountAdatpter with self as delegate in order to receive delegation
         //~ callbacks.
         AccountAdapter.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(self.saveAccountConfiguration(_:)),
-                                               name: NSNotification.Name(rawValue: NotificationName.nameRegistered.rawValue),
-                                               object: nil)
     }
 
     fileprivate func loadAccountsFromDaemon() {
@@ -405,14 +402,6 @@ class AccountsService: AccountAdapterDelegate {
         } else {
             throw AccountModelError.unexpectedError
         }
-    }
-
-    @objc func saveAccountConfiguration(_ notification: NSNotification) {
-        guard let accountID = notification.userInfo?[NotificationUserInfoKeys.accountID.rawValue] as? String else {
-            return
-        }
-        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
     }
 
     /**

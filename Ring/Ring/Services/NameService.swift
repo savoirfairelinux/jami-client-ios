@@ -47,6 +47,8 @@ class NameService: NameRegistrationAdapterDelegate {
 
     fileprivate let lookupNameCallDelay = 0.5
 
+    let registeredNamesKey = "REGISTERED_NAMES_KEY"
+
     /**
      Status of the current username validation request
      */
@@ -117,9 +119,12 @@ class NameService: NameRegistrationAdapterDelegate {
 
     internal func nameRegistrationEnded(with response: NameRegistrationResponse) {
         if response.state == .success {
-            var data = [String: String]()
-            data[NotificationUserInfoKeys.accountID.rawValue] = response.accountId
-            NotificationCenter.default.post(name: NSNotification.Name(NotificationName.nameRegistered.rawValue), object: nil, userInfo: data)
+            var registeredNames = [String: String]()
+            if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey) as? [String: String] {
+                registeredNames = userNameData
+            }
+            registeredNames[response.accountId] = response.name
+            UserDefaults.standard.set(registeredNames, forKey: registeredNamesKey)
             log.debug("Registred name : \(response.name ?? "no name")")
         } else {
             log.debug("Name Registration failed. State = \(response.state.rawValue)")

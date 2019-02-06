@@ -101,6 +101,10 @@ class MeViewModel: ViewModel, Stateable {
         if let accountName = accountName, !accountName.isEmpty {
             return Observable.just(accountName)
         }
+        if let userNameData = UserDefaults.standard.dictionary(forKey: self.nameService.registeredNamesKey),
+            let name = userNameData[account.id] as? String, !name.isEmpty {
+            return Observable.just(name)
+        }
         let accountHelper = AccountModelHelper(withAccount: account)
         guard let uri = accountHelper.ringId else {
             return Observable.just("")
