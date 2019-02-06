@@ -203,7 +203,7 @@ class AccountsService: AccountAdapterDelegate {
     ///   - username: an optional username for the new account
     ///   - password: the required password for the new account
     /// - Returns: an observable of an AccountModel: the created one
-    func addRingAccount(username: String?, password: String) -> Observable<AccountModel> {
+    func addRingAccount(username: String?, password: String, enable: Bool) -> Observable<AccountModel> {
         //~ Single asking the daemon to add a new account with the associated metadata
         let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
             do {
@@ -214,6 +214,7 @@ class AccountsService: AccountAdapterDelegate {
                 if !password.isEmpty {
                     ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
                 }
+                ringDetails.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
                 guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
                     throw AddAccountError.unknownError
                 }
