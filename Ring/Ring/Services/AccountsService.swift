@@ -410,8 +410,18 @@ class AccountsService: AccountAdapterDelegate {
         guard let accountID = notification.userInfo?[NotificationUserInfoKeys.accountID.rawValue] as? String else {
             return
         }
-        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
+        let details = self.getAccountDetails(fromAccountId: accountID)
+        let volatiledetails = self.getVolatileAccountDetails(fromAccountId: accountID)
+        var username = volatiledetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName))
+        if username.isEmpty {
+            guard let name = notification.userInfo?[NotificationUserInfoKeys.name.rawValue] as? String else {
+                return
+            }
+            username = name
+        }
+        if username.isEmpty { return }
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName), withValue: username)
+        self.setAccountDetails(forAccountId: accountID, withDetails: details)
     }
 
     /**

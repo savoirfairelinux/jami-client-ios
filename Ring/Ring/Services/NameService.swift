@@ -119,6 +119,7 @@ class NameService: NameRegistrationAdapterDelegate {
         if response.state == .success {
             var data = [String: String]()
             data[NotificationUserInfoKeys.accountID.rawValue] = response.accountId
+            data[NotificationUserInfoKeys.name.rawValue] = response.name
             NotificationCenter.default.post(name: NSNotification.Name(NotificationName.nameRegistered.rawValue), object: nil, userInfo: data)
             log.debug("Registred name : \(response.name ?? "no name")")
         } else {
