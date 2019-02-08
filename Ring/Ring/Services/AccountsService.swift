@@ -459,8 +459,6 @@ class AccountsService: AccountAdapterDelegate {
     fileprivate func getRingInitialAccountDetails() throws -> [String: String] {
         do {
             var defaultDetails = try getInitialAccountDetails()
-            defaultDetails.updateValue("Ring", forKey: ConfigKey.accountAlias.rawValue)
-            defaultDetails.updateValue("bootstrap.ring.cx", forKey: ConfigKey.accountHostname.rawValue)
             defaultDetails.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
             defaultDetails.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
             return defaultDetails
