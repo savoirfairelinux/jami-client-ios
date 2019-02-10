@@ -68,7 +68,8 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         let alert = UIAlertController(title: pin,
                                       message: self.viewModel.explanationMessage,
                                       preferredStyle: .alert)
-        let action = UIAlertAction(title: L10n.Global.ok, style: .default) { _ in
+        let action = UIAlertAction(title: L10n.Global.ok,
+                                   style: .default) { [unowned self] _ in
             self.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
@@ -79,21 +80,30 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         let alert = UIAlertController(title: self.viewModel.linkDeviceTitleTitle,
                                       message: nil,
                                       preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction, style: .cancel) { _ in
+        let actionCancel =
+            UIAlertAction(title: L10n.Actions.cancelAction,
+                          style: .cancel) { [unowned self] _ in
             self.dismiss(animated: true, completion: nil)
         }
-        let actionLink = UIAlertAction(title: L10n.Global.ok, style: .default) { _ in
-            if let textFields = alert.textFields {
-                self.viewModel.linkDevice(with: textFields[0].text)
-            }
-            alert.dismiss(animated: false, completion: nil)
+        let actionLink =
+            UIAlertAction(title: L10n.Global.ok,
+                          style: .default) {[unowned self] _ in
+                            if !self.viewModel.hasPassord {
+                                self.viewModel.linkDevice(with: "")
+                                return
+                            }
+                            if let textFields = alert.textFields {
+                                self.viewModel.linkDevice(with: textFields[0].text)
+                            }
         }
         alert.addAction(actionCancel)
         alert.addAction(actionLink)
 
-        alert.addTextField { (textField) in
-            textField.isSecureTextEntry = true
-            textField.placeholder = L10n.LinkToAccount.passwordLabel
+        if self.viewModel.hasPassord {
+            alert.addTextField { (textField) in
+                textField.isSecureTextEntry = true
+                textField.placeholder = L10n.LinkToAccount.passwordLabel
+            }
         }
         self.present(alert, animated: true, completion: nil)
     }
@@ -102,7 +112,8 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         let alert = UIAlertController(title: Error,
                                       message: error,
                                       preferredStyle: .alert)
-        let action = UIAlertAction(title: L10n.Global.ok, style: .cancel) { _ in
+        let action = UIAlertAction(title: L10n.Global.ok,
+                                   style: .cancel) {[unowned self] _ in
             self.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
