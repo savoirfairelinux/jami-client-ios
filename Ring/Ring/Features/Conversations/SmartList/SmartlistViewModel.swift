@@ -88,8 +88,7 @@ class SmartlistViewModel: Stateable, ViewModel {
 
                     return lastMessage1.receivedDate > lastMessage2.receivedDate
                 })
-                .filter({ self?.contactsService.contact(withRingId: $0.recipientRingId) != nil
-                    || (!$0.messages.isEmpty && (self?.contactsService.contactRequest(withRingId: $0.recipientRingId) == nil))
+                .filter({ self?.contactsService.contact(withRingId: $0.recipientRingId) != nil  || (!$0.messages.isEmpty && (self?.contactsService.contactRequest(withRingId: $0.recipientRingId) == nil))
                 })
                 .compactMap({ conversationModel in
 
@@ -230,8 +229,21 @@ class SmartlistViewModel: Stateable, ViewModel {
         })) {
 
             self.conversationsService
-                .deleteConversation(conversation: conversationViewModel.conversation.value,
-                                    keepContactInteraction: true)
+                .clearHistory(conversation: conversationViewModel.conversation.value,
+                                    keepConversation: false)
+            self.conversationViewModels.remove(at: index)
+        }
+    }
+
+    func clear(conversationViewModel: ConversationViewModel) {
+
+        if let index = self.conversationViewModels.index(where: ({ cvm in
+            cvm.conversation.value == conversationViewModel.conversation.value
+        })) {
+
+            self.conversationsService
+                .clearHistory(conversation: conversationViewModel.conversation.value,
+                                    keepConversation: true)
             self.conversationViewModels.remove(at: index)
         }
     }
@@ -248,8 +260,8 @@ class SmartlistViewModel: Stateable, ViewModel {
             removeCompleted.asObservable()
                 .subscribe(onCompleted: { [weak self] in
                     self?.conversationsService
-                        .deleteConversation(conversation: conversationViewModel.conversation.value,
-                                            keepContactInteraction: false)
+                        .clearHistory(conversation: conversationViewModel.conversation.value,
+                                            keepConversation: false)
                     self?.conversationViewModels.remove(at: index)
                 }).disposed(by: self.disposeBag)
         }

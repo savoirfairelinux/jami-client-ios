@@ -280,7 +280,20 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchResultsTableView.isHidden = true
     }
 
-    private func showDeleteConversationConfirmation(atIndex: IndexPath) {
+    private func showClearConversationConfirmation(atIndex: IndexPath) {
+        let alert = UIAlertController(title: L10n.Alerts.confirmClearConversationTitle, message: L10n.Alerts.confirmClearConversation, preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: L10n.Actions.clearAction, style: .destructive) { (_: UIAlertAction!) -> Void in
+            if let convToDelete: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
+                self.viewModel.clear(conversationViewModel: convToDelete)
+            }
+        }
+        let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction, style: .default) { (_: UIAlertAction!) -> Void in }
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func showRemoveConversationConfirmation(atIndex: IndexPath) {
         let alert = UIAlertController(title: L10n.Alerts.confirmDeleteConversationTitle, message: L10n.Alerts.confirmDeleteConversation, preferredStyle: .alert)
         let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction, style: .destructive) { (_: UIAlertAction!) -> Void in
             if let convToDelete: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
@@ -323,14 +336,19 @@ extension SmartlistViewController: UITableViewDelegate {
         let block = UITableViewRowAction(style: .normal, title: "Block") { _, index in
             self.showBlockContactConfirmation(atIndex: index)
         }
-        block.backgroundColor = .orange
+        block.backgroundColor = .red
 
-        let delete = UITableViewRowAction(style: .normal, title: "Clear") { _, index in
-            self.showDeleteConversationConfirmation(atIndex: index)
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { _, index in
+            self.showRemoveConversationConfirmation(atIndex: index)
         }
-        delete.backgroundColor = .red
+        delete.backgroundColor = .orange
 
-        return [delete, block]
+        let clear = UITableViewRowAction(style: .normal, title: "Clear") { _, index in
+            self.showClearConversationConfirmation(atIndex: index)
+        }
+        clear.backgroundColor = .magenta
+
+        return [clear, delete, block]
     }
 
     private func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
