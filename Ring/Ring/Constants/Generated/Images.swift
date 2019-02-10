@@ -41,6 +41,7 @@ internal enum Asset {
   internal static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   internal static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   internal static let icContactPicture = ImageAsset(name: "ic_contact_picture")
+  internal static let icConversationRemove = ImageAsset(name: "ic_conversation_remove")
   internal static let infoArrow = ImageAsset(name: "info_arrow")
   internal static let jamiIcon = ImageAsset(name: "jamiIcon")
   internal static let leftArrow = ImageAsset(name: "left_arrow")

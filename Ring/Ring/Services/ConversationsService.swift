@@ -305,8 +305,8 @@ class ConversationsService {
        return self.dbManager.profileObservable(for: uri, createIfNotExists: false)
     }
 
-    func deleteConversation(conversation: ConversationModel, keepContactInteraction: Bool) {
-        self.dbManager.removeConversationBetween(accountUri: conversation.accountUri, and: conversation.recipientRingId, keepAddContactEvent: keepContactInteraction)
+    func clearHistory(conversation: ConversationModel, keepConversation: Bool) {
+        self.dbManager.clearHistoryBetween(accountUri: conversation.accountUri, and: conversation.recipientRingId, keepConversation: keepConversation)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: { [weak self] in
                 self?.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
