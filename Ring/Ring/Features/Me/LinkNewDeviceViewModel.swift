@@ -84,6 +84,11 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
         return self.generatingState.asObservable()
     }()
 
+    lazy var hasPassord: Bool = {
+        guard let currentAccount = self.accountService.currentAccount else {return true}
+        return AccountModelHelper(withAccount: currentAccount).havePassword
+    }()
+
     let accountService: AccountsService
 
     let disposeBag = DisposeBag()
