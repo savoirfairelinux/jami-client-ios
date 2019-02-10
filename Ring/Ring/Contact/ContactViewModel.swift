@@ -81,6 +81,7 @@ class ContactViewModel: ViewModel, Stateable {
                           ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
                           ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon),
                           ContactActions(title: L10n.ContactPage.clearConversation, image: Asset.clearConversation),
+                          ContactActions(title: L10n.ContactPage.removeConversation, image: Asset.icConversationRemove),
                           ContactActions(title: L10n.ContactPage.blockContact, image: Asset.blockIcon)])])
             }
             self.contactService
@@ -140,8 +141,14 @@ class ContactViewModel: ViewModel, Stateable {
 
     func deleteConversation() {
         self.conversationService
-            .deleteConversation(conversation: conversation,
-                                keepContactInteraction: true)
+            .clearHistory(conversation: conversation,
+                                keepConversation: false)
+    }
+
+    func clearConversation() {
+        self.conversationService
+            .clearHistory(conversation: conversation,
+                                keepConversation: true)
     }
 
     func blockContact() {
@@ -153,8 +160,8 @@ class ContactViewModel: ViewModel, Stateable {
         removeCompleted.asObservable()
             .subscribe(onCompleted: { [unowned self] in
                 self.conversationService
-                    .deleteConversation(conversation: self.conversation,
-                                        keepContactInteraction: false)
+                    .clearHistory(conversation: self.conversation,
+                                        keepConversation: false)
             }).disposed(by: self.disposeBag)
     }
 }

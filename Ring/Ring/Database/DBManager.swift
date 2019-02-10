@@ -283,7 +283,9 @@ class DBManager {
             }
     }
 
-    func removeConversationBetween(accountUri: String, and participantUri: String, keepAddContactEvent: Bool) -> Completable {
+    func clearHistoryBetween(accountUri: String,
+                             and participantUri: String,
+                             keepConversation: Bool) -> Completable {
         return Completable.create { [unowned self] completable in
             do {
                 guard let dataBase = RingDB.instance.ringDB else {
@@ -300,37 +302,39 @@ class DBManager {
                     }
 
                     guard let conversationsID = try self.getConversationsIDBetween(accountProfileID: accountProfile.id, contactProfileID: contactProfile.id, createIfNotExists: true),
-                        !conversationsID.isEmpty else {
+                        let conversationID =  conversationsID.first else {
                             throw DBBridgingError.deleteConversationFailed
                     }
 
-                    if keepAddContactEvent {
-                        let successInteraction = self.interactionHepler
-                            .deleteMessageAndCallInteractions(convID: conversationsID.first!)
-                        if successInteraction {
-                            completable(.completed)
+                    guard let interactions = try self.interactionHepler
+                        .selectConversationInteractions(
+                            conversationID: conversationsID.first!,
+                            accountProfileID: accountProfile.id) else {
+                                throw DBBridgingError.deleteConversationFailed
+                    }
+                    if !interactions.isEmpty {
+                        if !self.interactionHepler
+                            .deleteAllIntercations(convID: conversationID) {
+                            completable(.error(DBBridgingError.deleteConversationFailed))
                         }
+                    }
+                    if keepConversation {
+                        completable(.completed)
                     } else {
-                        let successInteraction = self.interactionHepler
-                            .deleteAllIntercations(convID: conversationsID.first!)
-                        if successInteraction {
-                            let successConversations = self.conversationHelper
-                                .deleteConversations(conversationID: conversationsID.first!)
-                            if successConversations {
-                                completable(.completed)
-                            } else {
-                                completable(.error(DBBridgingError.deleteConversationFailed))
-                            }
+                        let successConversations = self.conversationHelper
+                            .deleteConversations(conversationID: conversationsID.first!)
+                        if successConversations {
+                            completable(.completed)
                         } else {
                             completable(.error(DBBridgingError.deleteConversationFailed))
                         }
+                        // }
                     }
                 }
             } catch {
                 completable(.error(DBBridgingError.deleteConversationFailed))
             }
             return Disposables.create { }
-
         }
     }
 
@@ -369,22 +373,22 @@ class DBManager {
             }
             guard let participant =
                 self.filterParticipantsFor(account: accountProfile.id,
-                                          participants: participants) else {
+                                           participants: participants) else {
                                             throw DBBridgingError.getConversationFailed
             }
             guard let participantProfile = try self.profileHepler.selectProfile(profileId: participant) else {
                 continue
             }
             let conversationModel = ConversationModel(withRecipientRingId: participantProfile.uri,
-                                                       accountId: accountID, accountUri: accountUri)
+                                                      accountId: accountID, accountUri: accountUri)
             conversationModel.participantProfile = participantProfile
             conversationModel.conversationId = String(conversationID)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
-                .selectInteractionsForConversationWithAccount(conversationID: conversationID,
-                                                              accountProfileID: accountProfile.id),
-                !interactions.isEmpty else {
-                    continue
+                .selectConversationInteractions(
+                    conversationID: conversationID,
+                    accountProfileID: accountProfile.id) else {
+                        continue
             }
             for interaction in interactions {
                 var author = accountProfile.uri
@@ -394,7 +398,6 @@ class DBManager {
                 if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
                 }
-
             }
             conversationModel.messages = messages
             conversationsToReturn.append(conversationModel)
