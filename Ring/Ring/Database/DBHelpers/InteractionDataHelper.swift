@@ -204,7 +204,7 @@ final class InteractionDataHelper {
         return interactions
     }
 
-    func selectInteractionsForConversationWithAccount (conversationID: Int64,
+    func selectConversationInteractions (conversationID: Int64,
                                                        accountProfileID: Int64) throws -> [Interaction]? {
         guard let dataBase = RingDB.instance.ringDB else {
             throw DataAccessError.datastoreConnectionError

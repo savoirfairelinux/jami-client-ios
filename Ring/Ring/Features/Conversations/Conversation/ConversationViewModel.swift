@@ -329,8 +329,9 @@ class ConversationViewModel: Stateable, ViewModel {
         blockComplete.asObservable()
             .subscribe(onCompleted: { [weak self] in
                 if let conversation = self?.conversation.value {
-                    self?.conversationsService.deleteConversation(conversation: conversation,
-                                                                  keepContactInteraction: false)
+                    self?.conversationsService
+                        .clearHistory(conversation: conversation,
+                                      keepConversation: false)
                 }
             }).disposed(by: self.disposeBag)
     }

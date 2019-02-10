@@ -144,8 +144,10 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     case 2:
                         _ = self?.navigationController?.popViewController(animated: false)
                     case 3:
-                        self?.showDeleteConversationConfirmation()
+                        self?.showClearConversationConfirmation()
                     case 4:
+                        self?.showDeleteConversationConfirmation()
+                    case 5:
                         self?.showBlockContactConfirmation()
                     default:
                         break
@@ -153,6 +155,17 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self?.tableView.deselectRow(at: indexPath, animated: true)
                 }
             }).disposed(by: self.disposeBag)
+    }
+
+    private func showClearConversationConfirmation() {
+        let alert = UIAlertController(title: L10n.Alerts.confirmClearConversationTitle, message: L10n.Alerts.confirmClearConversation, preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: L10n.Actions.clearAction, style: .destructive) { [weak self](_: UIAlertAction!) -> Void in
+            self?.viewModel.clearConversation()
+        }
+        let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction, style: .default) { (_: UIAlertAction!) -> Void in }
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
 
     private func showDeleteConversationConfirmation() {

@@ -113,7 +113,7 @@ class GeneratedInteractionsManager {
         if !messagesNotGenerated.isEmpty {
             return
         }
-        self.conversationService.deleteConversation(conversation: conversation, keepContactInteraction: false)
+        self.conversationService.clearHistory(conversation: conversation, keepConversation: false)
     }
 
     // swiftlint:disable cyclomatic_complexity

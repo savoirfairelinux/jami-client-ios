@@ -72,6 +72,8 @@ internal enum L10n {
     internal static let blockAction = L10n.tr("Localizable", "actions.blockAction")
     /// Cancel
     internal static let cancelAction = L10n.tr("Localizable", "actions.cancelAction")
+    /// Clear
+    internal static let clearAction = L10n.tr("Localizable", "actions.clearAction")
     /// Delete
     internal static let deleteAction = L10n.tr("Localizable", "actions.deleteAction")
   }
@@ -97,6 +99,10 @@ internal enum L10n {
     internal static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact")
     /// Block Contact
     internal static let confirmBlockContactTitle = L10n.tr("Localizable", "alerts.confirmBlockContactTitle")
+    /// Are you sure you want to clear the conversation with this contact?
+    internal static let confirmClearConversation = L10n.tr("Localizable", "alerts.confirmClearConversation")
+    /// Clear Conversation
+    internal static let confirmClearConversationTitle = L10n.tr("Localizable", "alerts.confirmClearConversationTitle")
     /// Are you sure you want to delete this conversation permanently?
     internal static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation")
     /// Are you sure you want to delete the conversation with this contact?
@@ -141,6 +147,8 @@ internal enum L10n {
     internal static let blockContact = L10n.tr("Localizable", "contactPage.blockContact")
     /// Clear Chat
     internal static let clearConversation = L10n.tr("Localizable", "contactPage.clearConversation")
+    /// Remove Conversation
+    internal static let removeConversation = L10n.tr("Localizable", "contactPage.removeConversation")
     /// Send Message
     internal static let sendMessage = L10n.tr("Localizable", "contactPage.sendMessage")
     /// Start Audio Call
