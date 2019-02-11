@@ -129,7 +129,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.conversationManager = ConversationsManager(with: self.conversationsService,
                                                         accountsService: self.accountService,
                                                         nameService: self.nameService,
-                                                        dataTransferService: self.dataTransferService)
+                                                        dataTransferService: self.dataTransferService,
+                                                        contactService: self.contactsService)
         self.startDB()
 
         self.accountService

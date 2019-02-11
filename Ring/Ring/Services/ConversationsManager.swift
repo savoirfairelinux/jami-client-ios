@@ -30,6 +30,7 @@ class ConversationsManager: MessagesAdapterDelegate {
     let accountsService: AccountsService
     let nameService: NameService
     let dataTransferService: DataTransferService
+    let contactService: ContactsService
 
     private let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
@@ -37,11 +38,16 @@ class ConversationsManager: MessagesAdapterDelegate {
     private let notificationHandler = LocalNotificationsHelper()
 
     // swiftlint:disable cyclomatic_complexity
-    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService, dataTransferService: DataTransferService) {
+    init(with conversationService: ConversationsService,
+         accountsService: AccountsService,
+         nameService: NameService,
+         dataTransferService: DataTransferService,
+         contactService: ContactsService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
         self.nameService = nameService
         self.dataTransferService = dataTransferService
+        self.contactService = contactService
         MessagesAdapter.delegate = self
 
         self.accountsService
@@ -80,6 +86,9 @@ class ConversationsManager: MessagesAdapterDelegate {
                 let accountHelper = AccountModelHelper(withAccount: currentAccount)
                 switch event.eventType {
                 case .dataTransferCreated:
+                    if self.contactService.contact(withRingId: transferInfo.peer) == nil {
+                        self.contactService.incomingTrustRequestReceived(from: transferInfo.peer, to: accountHelper.ringId!, withPayload: Data(), receivedDate: Date())
+                    }
                     let photoIdentifier: String? = event.getEventInput(.localPhotolID)
                     self.log.debug("ConversationsManager: dataTransferCreated - id:\(transferId)")
                     self.conversationService
@@ -179,6 +188,10 @@ class ConversationsManager: MessagesAdapterDelegate {
         var shouldUpdateConversationsList = false
         if currentAccountUri == messageAccountUri {
             shouldUpdateConversationsList = true
+        }
+
+        if self.contactService.contact(withRingId: senderAccount) == nil {
+            self.contactService.incomingTrustRequestReceived(from: senderAccount, to: messageAccountUri, withPayload: Data(), receivedDate: Date())
         }
         let message = self.conversationService.createMessage(withId: "",
                                                              withContent: content,

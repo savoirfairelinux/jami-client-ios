@@ -153,6 +153,9 @@ class GeneratedInteractionsManager {
                     }
                 }
                 var message = ""
+                if self.contactService.contact(withRingId: contactRingId) == nil {
+                    self.contactService.incomingTrustRequestReceived(from: contactRingId, to: ringId, withPayload: Data(), receivedDate: Date())
+                }
 
                 if time > 0 {
                     let timeString = self.convertSecondsToString(seconds: time)
