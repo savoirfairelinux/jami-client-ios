@@ -25,5 +25,5 @@
     func stopCapture()
     func writeFrame(withImage image: UIImage?)
     func setDecodingAccelerated(withState state: Bool)
-    func switchInput(toDevice device: String)
+    func switchInput(toDevice device: String, callID: String?)
 }

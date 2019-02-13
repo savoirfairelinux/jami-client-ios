@@ -97,7 +97,7 @@ class CallViewModel: Stateable, ViewModel {
                 return call.state == .over || call.state == .failure
             }).map({ [weak self] hide in
                 if hide {
-                    self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
+                    self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation, callID: nil)
                 }
                 return hide
             })
@@ -301,8 +301,10 @@ class CallViewModel: Stateable, ViewModel {
             return call.callId == self?.call?.callId
         }).map({ call in
             return call.state == .current
-        }).subscribe(onNext: { [weak self] _ in
-            self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
+        }).subscribe(onNext: { [weak self] call in
+            self?.videoService
+                .setCameraOrientation(orientation: UIDevice.current.orientation,
+                                      callID: self?.call?.callId)
         }).disposed(by: self.disposeBag)
     }
 
@@ -411,6 +413,7 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     func setCameraOrientation(orientation: UIDeviceOrientation) {
-        videoService.setCameraOrientation(orientation: orientation)
+        videoService.setCameraOrientation(orientation: orientation,
+                                          callID: self.call?.callId)
     }
 }
