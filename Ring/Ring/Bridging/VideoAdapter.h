@@ -33,5 +33,6 @@
 - (void)writeOutgoingFrameWithImage:(UIImage*)image;
 - (void)setDecodingAccelerated:(BOOL)state;
 - (void)switchInput:(NSString*)deviceName;
+- (void)switchInput:(NSString*)deviceName forCall:(NSString*) callID;
 
 @end

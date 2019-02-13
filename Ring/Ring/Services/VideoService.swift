@@ -336,7 +336,7 @@ class VideoService: FrameExtractorDelegate {
         }).disposed(by: self.disposeBag)
     }
 
-    func setCameraOrientation(orientation: UIDeviceOrientation) {
+    func setCameraOrientation(orientation: UIDeviceOrientation, callID: String?) {
         var newOrientation: AVCaptureVideoOrientation
         switch orientation {
         case .portrait:
@@ -358,7 +358,7 @@ class VideoService: FrameExtractorDelegate {
         let deviceName: String =
             (orientation == .landscapeLeft || orientation == .landscapeRight) ?
                 self.camera.nameLandscape : self.camera.namePortrait
-        self.switchInput(toDevice: self.camera.nameCamera + deviceName)
+        self.switchInput(toDevice: self.camera.nameCamera + deviceName, callID: callID)
         self.camera.rotateCamera(orientation: newOrientation)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("new camera orientation isPortrait: \(orientation.isPortrait)")
@@ -369,7 +369,11 @@ class VideoService: FrameExtractorDelegate {
 }
 
 extension VideoService: VideoAdapterDelegate {
-    func switchInput(toDevice device: String) {
+    func switchInput(toDevice device: String, callID: String?) {
+        if let call = callID {
+            videoAdapter.switchInput(device, forCall: call)
+            return
+        }
         videoAdapter.switchInput(device)
     }
 

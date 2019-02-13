@@ -21,6 +21,7 @@
 #import "VideoAdapter.h"
 #import "Utils.h"
 #import "dring/videomanager_interface.h"
+#import "dring/callmanager_interface.h"
 #import "Ring-Swift.h"
 #include <pthread.h>
 #include <functional>
@@ -197,6 +198,10 @@ static id <VideoAdapterDelegate> _delegate;
 
 - (void)switchInput:(NSString*)deviceName {
     DRing::switchInput(std::string([deviceName UTF8String]));
+}
+
+- (void)switchInput:(NSString*)deviceName forCall:(NSString*) callID {
+    DRing::switchInput(std::string([callID UTF8String]), std::string([deviceName UTF8String]));
 }
 
 #pragma mark PresenceAdapterDelegate
