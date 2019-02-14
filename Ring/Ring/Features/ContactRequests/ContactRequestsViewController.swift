@@ -31,6 +31,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noInvitationsPlaceholder: UIView!
+    @IBOutlet weak var noRequestsLabel: UILabel!
 
     fileprivate let disposeBag = DisposeBag()
     fileprivate let cellIdentifier = "ContactRequestCell"
@@ -50,7 +51,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     self.viewModel.showConversation(forRingId: ringId)
                 }
             }).disposed(by: disposeBag)
-        self.navigationItem.title = L10n.Global.contactRequestsTabBarTitle
+        self.applyL10n()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +61,11 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
                                     NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
+    }
+
+    func applyL10n() {
+        self.navigationItem.title = L10n.Global.contactRequestsTabBarTitle
+        self.noRequestsLabel.text = L10n.Invitations.noInvitations
     }
 
     func setupTableView() {

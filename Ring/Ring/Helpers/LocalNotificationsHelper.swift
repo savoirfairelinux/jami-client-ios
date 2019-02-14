@@ -31,7 +31,17 @@ enum NotificationUserInfoKeys: String {
 enum NotificationCallTitle: String {
     case incomingCall = "Incoming Call"
     case missedCall = "Missed Call"
+    func getString()->String {
+        switch self {
+        case .incomingCall:
+            return L10n.Notifications.incomingCall
+        case .missedCall:
+            return L10n.Notifications.missedCall
+        }
+    }
 }
+
+//L10n.Calls.connecting
 
 enum CallAcition: String {
     case accept = "ACCEPT_ACTION"
@@ -40,9 +50,9 @@ enum CallAcition: String {
     func title() -> String {
         switch self {
         case .accept:
-            return "ACCEPT"
+            return L10n.Notifications.acceptCall
         case .refuse:
-            return "REFUSE"
+            return L10n.Notifications.refuseCall
         }
     }
 }
@@ -141,7 +151,7 @@ class LocalNotificationsHelper {
     }
 
     func presentCallNotification(data: [String: String], callService: CallsService) {
-        let title = NotificationCallTitle.incomingCall.rawValue
+        let title = NotificationCallTitle.incomingCall.getString()
         guard let name = data [NotificationUserInfoKeys.name.rawValue],
             let callID = data [NotificationUserInfoKeys.callID.rawValue] else {
                 return
@@ -169,7 +179,7 @@ class LocalNotificationsHelper {
             }).single()
                 .subscribe(onNext: { _ in
                     let content = UNMutableNotificationContent()
-                    content.title = NotificationCallTitle.missedCall.rawValue
+                    content.title = NotificationCallTitle.missedCall.getString()
                     content.body = name
                     content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
                     let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
@@ -194,7 +204,7 @@ class LocalNotificationsHelper {
                 .subscribe(onNext: { _ in
                     let notification = UILocalNotification()
                     notification.userInfo = data
-                    notification.alertTitle = NotificationCallTitle.missedCall.rawValue
+                    notification.alertTitle = NotificationCallTitle.missedCall.getString()
                     notification.alertBody = name
                     notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
                     UIApplication.shared.scheduleLocalNotification(notification)
