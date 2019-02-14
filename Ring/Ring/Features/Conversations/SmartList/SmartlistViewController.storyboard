@@ -149,6 +149,7 @@
                         <outlet property="conversationsTableView" destination="HFM-G6-hMN" id="M97-IB-NUZ"/>
                         <outlet property="networkAlertLabel" destination="Fu7-Dr-XvA" id="0qV-lk-9mE"/>
                         <outlet property="networkAlertViewTopConstraint" destination="CLm-6J-lYv" id="LEO-Ep-Gpx"/>
+                        <outlet property="noConversationLabel" destination="8bB-XU-6gh" id="n4g-mz-w7z"/>
                         <outlet property="noConversationsView" destination="EvL-Bu-O1T" id="tVV-6a-4Xg"/>
                         <outlet property="searchBar" destination="xPr-nI-I35" id="Y3U-rV-yfc"/>
                         <outlet property="searchResultsTableView" destination="opE-y7-3Rm" id="F3g-9d-IQt"/>
