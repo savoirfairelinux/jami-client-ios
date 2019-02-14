@@ -88,7 +88,7 @@ class ConversationCell: UITableViewCell, NibReusable {
             .disposed(by: self.disposeBag)
 
         // username
-        item.userName.asObservable()
+        item.bestName.asObservable()
             .observeOn(MainScheduler.instance)
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)

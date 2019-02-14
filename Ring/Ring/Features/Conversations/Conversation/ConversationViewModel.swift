@@ -181,6 +181,18 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var userName = Variable<String>("")
 
+    lazy var bestName: Observable<String> = {
+        return Observable
+            .combineLatest(userName.asObservable(),
+                           displayName.asObservable()) {(userName, displayname) in
+                            guard let name = displayname,
+                                !name.isEmpty else {
+                                    return userName
+                            }
+                            return name
+        }
+    }()
+
     var profileImageData = Variable<Data?>(nil)
 
     var inviteButtonIsAvailable = BehaviorSubject(value: true)
