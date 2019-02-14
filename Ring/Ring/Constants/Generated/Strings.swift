@@ -37,6 +37,10 @@ internal enum L10n {
     internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications")
     /// Enable Proxy
     internal static let enableProxy = L10n.tr("Localizable", "accountPage.enableProxy")
+    /// Link another device
+    internal static let linkDeviceTitle = L10n.tr("Localizable", "accountPage.linkDeviceTitle")
+    /// Name
+    internal static let namePlaceholder = L10n.tr("Localizable", "accountPage.namePlaceholder")
     /// Your device won't receive notifications when proxy is disabled
     internal static let noProxyExplanationLabel = L10n.tr("Localizable", "accountPage.noProxyExplanationLabel")
     /// Provide proxy address
@@ -127,6 +131,11 @@ internal enum L10n {
     internal static let profileUploadPhoto = L10n.tr("Localizable", "alerts.profileUploadPhoto")
   }
 
+  internal enum BlockListPage {
+    /// No blocked contacts
+    internal static let noBlockedContacts = L10n.tr("Localizable", "blockListPage.noBlockedContacts")
+  }
+
   internal enum Calls {
     /// Call finished
     internal static let callFinished = L10n.tr("Localizable", "calls.callFinished")
@@ -155,6 +164,11 @@ internal enum L10n {
     internal static let startAudioCall = L10n.tr("Localizable", "contactPage.startAudioCall")
     /// Start Video Call
     internal static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall")
+  }
+
+  internal enum Conversation {
+    /// Type your message...
+    internal static let messagePlaceholder = L10n.tr("Localizable", "conversation.messagePlaceholder")
   }
 
   internal enum CreateAccount {
@@ -243,6 +257,11 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "global.ok")
   }
 
+  internal enum Invitations {
+    /// No invitations
+    internal static let noInvitations = L10n.tr("Localizable", "invitations.noInvitations")
+  }
+
   internal enum LinkDevice {
     /// An error occured during the export
     internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError")
@@ -275,6 +294,17 @@ internal enum L10n {
     internal static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle")
   }
 
+  internal enum Notifications {
+    /// ACCEPT
+    internal static let acceptCall = L10n.tr("Localizable", "notifications.acceptCall")
+    /// Incoming Call
+    internal static let incomingCall = L10n.tr("Localizable", "notifications.incomingCall")
+    /// Missed Call
+    internal static let missedCall = L10n.tr("Localizable", "notifications.missedCall")
+    /// REFUSE
+    internal static let refuseCall = L10n.tr("Localizable", "notifications.refuseCall")
+  }
+
   internal enum Scan {
     /// Bad QR code
     internal static let badQrCode = L10n.tr("Localizable", "scan.badQrCode")
@@ -287,12 +317,16 @@ internal enum L10n {
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess")
     /// Conversations
     internal static let conversations = L10n.tr("Localizable", "smartlist.conversations")
+    /// No conversations
+    internal static let noConversation = L10n.tr("Localizable", "smartlist.noConversation")
     /// No network connectivity
     internal static let noNetworkConnectivity = L10n.tr("Localizable", "smartlist.noNetworkConnectivity")
     /// No results
     internal static let noResults = L10n.tr("Localizable", "smartlist.noResults")
     /// Search Result
     internal static let results = L10n.tr("Localizable", "smartlist.results")
+    /// Enter name...
+    internal static let searchBarPlaceholder = L10n.tr("Localizable", "smartlist.searchBarPlaceholder")
     /// Searching...
     internal static let searching = L10n.tr("Localizable", "smartlist.searching")
     /// Yesterday

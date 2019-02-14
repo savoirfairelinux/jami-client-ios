@@ -46,6 +46,7 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupTableView()
+        noBlockedContactLabel.text = L10n.BlockListPage.noBlockedContacts
 
         self.viewModel.contactListNotEmpty
             .observeOn(MainScheduler.instance)

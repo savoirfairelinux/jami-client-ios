@@ -53,7 +53,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
 
     func setupMessageTextView() {
         self.messageTextView.delegate = self
-        self.messageTextView.placeholder = "Type your message..."
+        self.messageTextView.placeholder = L10n.Conversation.messagePlaceholder
         self.messageTextView.layer.cornerRadius = 18
         self.messageTextView.tintColor = UIColor.jamiMain
         self.messageTextView.textContainerInset = UIEdgeInsets(top: 8, left: 7, bottom: 8, right: 7)
