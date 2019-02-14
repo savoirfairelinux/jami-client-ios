@@ -44,6 +44,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var searchResultsTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var noConversationsView: UIView!
+    @IBOutlet weak var noConversationLabel: UILabel!
     @IBOutlet weak var searchTableViewLabel: UILabel!
     @IBOutlet weak var networkAlertLabel: UILabel!
     @IBOutlet weak var cellularAlertLabel: UILabel!
@@ -69,6 +70,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.setupTableViews()
         self.setupSearchBar()
         self.setupUI()
+        self.applyL10n()
         self.configureRingNavigationBar()
 
         /*
@@ -94,17 +96,21 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         }
     }
 
-    func setupUI() {
+    func applyL10n() {
         self.navigationItem.title = L10n.Global.homeTabBarTitle
+        noConversationLabel.text = L10n.Smartlist.searchBarPlaceholder
+        self.searchBar.placeholder = L10n.Smartlist.noConversation
+        self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
+        self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
+    }
+
+    func setupUI() {
 
         self.viewModel.hideNoConversationsMessage
             .bind(to: self.noConversationsView.rx.isHidden)
             .disposed(by: disposeBag)
 
         self.networkAlertViewTopConstraint.constant = self.viewModel.networkConnectionState() == .none ? 0.0 : -56.0
-        self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
-        self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
-
         self.viewModel.connectionState
             .subscribe(onNext: { connectionState in
                 let newAlertHeight = connectionState == .none ? 0.0 : -56.0

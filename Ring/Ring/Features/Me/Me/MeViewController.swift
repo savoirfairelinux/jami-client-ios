@@ -46,8 +46,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addHeaderView()
-
-        self.navigationItem.title = L10n.Global.meTabBarTitle
+        self.applyL10n()
         self.configureBindings()
         self.configureRingNavigationBar()
         self.adaptTableToKeyboardState(for: self.settingsTable, with: self.disposeBag, topOffset: self.stretchyHeader.minimumContentHeight)
@@ -58,6 +57,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
                                     NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
+    }
+
+    func applyL10n() {
+        self.navigationItem.title = L10n.Global.meTabBarTitle
+        self.profileName.placeholder = L10n.AccountPage.namePlaceholder
     }
 
     private func addHeaderView() {
@@ -282,6 +286,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.addDeviceTitle.rx.tap.subscribe(onNext: { [weak self] in
                         self?.viewModel.linkDevice()
                     }).disposed(by: cell.disposeBag)
+                    cell.addDeviceTitle.setTitle(L10n.AccountPage.linkDeviceTitle, for: .normal)
                     cell.selectionStyle = .none
                     return cell
 
