@@ -98,8 +98,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     func applyL10n() {
         self.navigationItem.title = L10n.Global.homeTabBarTitle
-        noConversationLabel.text = L10n.Smartlist.searchBarPlaceholder
-        self.searchBar.placeholder = L10n.Smartlist.noConversation
+        noConversationLabel.text = L10n.Smartlist.noConversation
+        self.searchBar.placeholder = L10n.Smartlist.searchBarPlaceholder
         self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
         self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
     }
