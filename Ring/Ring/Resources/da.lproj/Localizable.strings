@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Samtaler";
 "smartlist.searching" = "Søger...";
 "smartlist.noResults" = "Ingen resultater";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Ingen netværksforbindelse";
 "smartlist.cellularAccess" = "Kontroller at rettigheder til mobildata er givet i indstillinger";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Er du sikker på at du vil slette denne samtale permanent?";
 "alerts.confirmDeleteConversationFromContact" = "Er du sikker på at du vil slette samtalen med denne bruger?";
 "alerts.confirmDeleteConversationTitle" = "Slet samtale";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Blokér";
 "actions.deleteAction" = "Slet";
 "actions.cancelAction" = "Annuller";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Indgående opkald fra";
 "alerts.incomingCallButtonAccept" = "Accepter";
 "alerts.incomingCallButtonIgnore" = "Afvis";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Forkert adgangskode";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.namePlaceholder" = "Navn";
+"accountPage.linkDeviceTitle" = "Tilknyt en anden enhed";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Tilknyt en ny enhed";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Send besked";
 "contactPage.clearConversation" = "Ryd chat";
 "contactPage.blockContact" = "Bloker kontakt";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initialiserer...";
 "dataTransfer.readableStatusError" = "Fejl";
+"dataTransfer.readableStatusAwaiting" = "Under oprettelse...";
+"dataTransfer.readableStatusRefuse" = "Afvis";
+"dataTransfer.readableStatusOngoing" = "Overfører";
+"dataTransfer.readableStatusCanceled" = "Annulleret";
+"dataTransfer.readableStatusSuccess" = "Afsluttet";
+"dataTransfer.readableStatusAccept" = "Accepter";
+"dataTransfer.readableStatusCancel" = "Annuller";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "Under oprettelse...";
 "dataTransfer.readableStatusRefuse" = "Afvis";
 "dataTransfer.readableStatusOngoing" = "Overfører";

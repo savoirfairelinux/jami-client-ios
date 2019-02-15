@@ -34,8 +34,16 @@
 "smartlist.conversations" = "對話";
 "smartlist.searching" = "正在搜尋...";
 "smartlist.noResults" = "沒有結果";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "沒有網路連接";
 "smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "您確定您想要永久刪除此對話嗎？";
 "alerts.confirmDeleteConversationFromContact" = "您確定您想要刪除與此聯絡人的對話嗎？";
 "alerts.confirmDeleteConversationTitle" = "刪除對話";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "阻擋";
 "actions.deleteAction" = "刪除";
 "actions.cancelAction" = "取消";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "來電從";
 "alerts.incomingCallButtonAccept" = "接聽";
 "alerts.incomingCallButtonIgnore" = "忽略";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "不正確的密碼";
 "accountPage.deviceRevocationUnknownDevice" = "未知的裝置";
 "accountPage.deviceRevocationError" = "裝置撤銷錯誤";
+"accountPage.namePlaceholder" = "名稱";
+"accountPage.linkDeviceTitle" = "連結其他裝置";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "連結新裝置";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "傳送訊息";
 "contactPage.clearConversation" = "清除聊天紀錄";
 "contactPage.blockContact" = "阻擋聯絡人";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "正在初始化……";
 "dataTransfer.readableStatusError" = "錯誤";
+"dataTransfer.readableStatusAwaiting" = "擱置中……";
+"dataTransfer.readableStatusRefuse" = "拒絕";
+"dataTransfer.readableStatusOngoing" = "正在傳輸";
+"dataTransfer.readableStatusCanceled" = "已取消";
+"dataTransfer.readableStatusSuccess" = "完成";
+"dataTransfer.readableStatusAccept" = "接聽";
+"dataTransfer.readableStatusCancel" = "取消";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "擱置中……";
 "dataTransfer.readableStatusRefuse" = "拒絕";
 "dataTransfer.readableStatusOngoing" = "正在傳輸";

@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Conversas";
 "smartlist.searching" = "Buscando...";
 "smartlist.noResults" = "Nenhum resultado";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Sem conectividade";
 "smartlist.cellularAccess" = "Verifique se o acesso via celular está autorizado em suas configurações";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -43,7 +51,7 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Associar este dispositivo a uma conta";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Criar uma conta no Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Pular";
@@ -70,7 +78,7 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "Notificações";
 "createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
@@ -87,7 +95,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Conta Adicionada";
 "alerts.accountNoNetworkTitle" = "Não foi possível conectar-se à rede.";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Não foi possível adicionar a conta porque o Jami não pôde conectar-se à rede distribuída. Verifique a conexão do seu dispositivo.";
 "alerts.accountDefaultErrorTitle" = "Erro desconhecido";
 "alerts.accountDefaultErrorMessage" = "A conta não pôde ser criada.";
 "alerts.profileTakePhoto" = "Tirar foto";
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Tem certeza de que deseja excluir esta conversa permanentemente?";
 "alerts.confirmDeleteConversationFromContact" = "Tem certeza de que deseja excluir a conversa com este contato?";
 "alerts.confirmDeleteConversationTitle" = "Excluir Conversa";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Bloquear";
 "actions.deleteAction" = "Deletar";
 "actions.cancelAction" = "Cancelar";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Recebendo chamada de";
 "alerts.incomingCallButtonAccept" = "Aceitar";
 "alerts.incomingCallButtonIgnore" = "Ignorar";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Senha incorreta";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.namePlaceholder" = "Nome";
+"accountPage.linkDeviceTitle" = "Associar outro dispositivo";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Associar um novo dispositivo";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Enviar Mensagem";
 "contactPage.clearConversation" = "Limpar histórico de bate-papo";
 "contactPage.blockContact" = "Bloquear Contato";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Iniciando...";
 "dataTransfer.readableStatusError" = "Erro";
+"dataTransfer.readableStatusAwaiting" = "Pendente...";
+"dataTransfer.readableStatusRefuse" = "Recusar";
+"dataTransfer.readableStatusOngoing" = "Transferindo";
+"dataTransfer.readableStatusCanceled" = "Cancelada";
+"dataTransfer.readableStatusSuccess" = "Completa";
+"dataTransfer.readableStatusAccept" = "Aceitar";
+"dataTransfer.readableStatusCancel" = "Cancelar";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "Pendente...";
 "dataTransfer.readableStatusRefuse" = "Recusar";
 "dataTransfer.readableStatusOngoing" = "Transferindo";

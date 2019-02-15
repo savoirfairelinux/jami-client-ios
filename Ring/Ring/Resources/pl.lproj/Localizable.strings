@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Rozmowy";
 "smartlist.searching" = "Szukam...";
 "smartlist.noResults" = "Brak rezultatów";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Brak połączenia z siecią";
 "smartlist.cellularAccess" = "Upewnij się, że dostęp do sieci komórkowej jest dozwolony w ustawieniach";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Jesteś pewny(a), że chcesz usunąć tą rozmowę bezpowrotnie?";
 "alerts.confirmDeleteConversationFromContact" = "Czy jesteś pewny(a), że chcesz usunąć rozmowę z tym kontaktem?";
 "alerts.confirmDeleteConversationTitle" = "Usuń rozmowę";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Blokuj";
 "actions.deleteAction" = "Usuń";
 "actions.cancelAction" = "Anuluj";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Połączenie przychodzące od";
 "alerts.incomingCallButtonAccept" = "Akceptuj";
 "alerts.incomingCallButtonIgnore" = "Zignoruj";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Niepoprawne hasło";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.namePlaceholder" = "Imię";
+"accountPage.linkDeviceTitle" = "Połącz nowe urządzenie";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Połącz nowe urządzenie";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Wyślij wiadomość";
 "contactPage.clearConversation" = "Wyczyść chat";
 "contactPage.blockContact" = "Blokuj kontakt";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicjalizacja...";
 "dataTransfer.readableStatusError" = "Błąd";
+"dataTransfer.readableStatusAwaiting" = "W toku...";
+"dataTransfer.readableStatusRefuse" = "Odmów";
+"dataTransfer.readableStatusOngoing" = "Wysyłanie";
+"dataTransfer.readableStatusCanceled" = "Anulowano";
+"dataTransfer.readableStatusSuccess" = "Ukończono";
+"dataTransfer.readableStatusAccept" = "Akceptuj";
+"dataTransfer.readableStatusCancel" = "Anuluj";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "W toku...";
 "dataTransfer.readableStatusRefuse" = "Odmów";
 "dataTransfer.readableStatusOngoing" = "Wysyłanie";

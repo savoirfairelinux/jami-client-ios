@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Recherche de disponibilité...";
 "smartlist.noResults" = "Aucun résultat";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Pas d'accès au réseau";
 "smartlist.cellularAccess" = "Soyez certain que l'accès au mobile est autorisé par vos paramètres";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Êtes-vous certain de vouloir supprimer définitivement cette conversation ? ";
 "alerts.confirmDeleteConversationFromContact" = "Êtes-vous certain de vouloir effacer cette conversation avec ce contact ? ";
 "alerts.confirmDeleteConversationTitle" = "Supprimer cette conversation";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Bloquer";
 "actions.deleteAction" = "Supprimer";
 "actions.cancelAction" = "Annuler";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Appel entrant de";
 "alerts.incomingCallButtonAccept" = "Accepter";
 "alerts.incomingCallButtonIgnore" = "Ignorer";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Mot de passe incorrecte";
 "accountPage.deviceRevocationUnknownDevice" = "Appareil inconnu";
 "accountPage.deviceRevocationError" = "Erreur de révocation d'appareil";
+"accountPage.namePlaceholder" = "Nom";
+"accountPage.linkDeviceTitle" = "Associer un nouvel appareil";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Écrire un message";
 "contactPage.clearConversation" = "Effacer les textos";
 "contactPage.blockContact" = "Bloquer ce contact";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initialisation ...";
 "dataTransfer.readableStatusError" = "Erreur";
+"dataTransfer.readableStatusAwaiting" = "En attente ...";
+"dataTransfer.readableStatusRefuse" = "Refuser";
+"dataTransfer.readableStatusOngoing" = "Transfert en cours";
+"dataTransfer.readableStatusCanceled" = "Annulé";
+"dataTransfer.readableStatusSuccess" = "Terminé";
+"dataTransfer.readableStatusAccept" = "Accepter";
+"dataTransfer.readableStatusCancel" = "Annuler";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "En attente ...";
 "dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transfert en cours";

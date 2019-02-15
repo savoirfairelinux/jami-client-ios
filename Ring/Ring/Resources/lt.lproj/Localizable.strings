@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Pokalbiai";
 "smartlist.searching" = "Ieškoma...";
 "smartlist.noResults" = "Jokių rezultatų";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Nėra tinklo ryšio";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Ar tikrai norite visiems laikams ištrinti šį pokalbį?";
 "alerts.confirmDeleteConversationFromContact" = "Ar tikrai norite ištrinti pokalbį su šiuo kontaktu?";
 "alerts.confirmDeleteConversationTitle" = "Ištrinti pokalbį";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Užblokuoti";
 "actions.deleteAction" = "Ištrinti";
 "actions.cancelAction" = "Atsisakyti";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Gaunamasis skambutis nuo ";
 "alerts.incomingCallButtonAccept" = "Priimti";
 "alerts.incomingCallButtonIgnore" = "Nepaisyti";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Neteisingas slaptažodis";
 "accountPage.deviceRevocationUnknownDevice" = "Nežinomas įrenginys";
 "accountPage.deviceRevocationError" = "Įrenginio panaikinimo klaida";
+"accountPage.namePlaceholder" = "Vardas";
+"accountPage.linkDeviceTitle" = "Susieti kitą įrenginį";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Susieti naują įrenginį";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Siųsti žinutę";
 "contactPage.clearConversation" = "Išvalyti pokalbį";
 "contactPage.blockContact" = "Užblokuoti kontaktą";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicijuojama…";
 "dataTransfer.readableStatusError" = "Klaida";
+"dataTransfer.readableStatusAwaiting" = "Laukiama…";
+"dataTransfer.readableStatusRefuse" = "Atmesti";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Atsisakyta";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "Priimti";
+"dataTransfer.readableStatusCancel" = "Atsisakyti";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "Laukiama…";
 "dataTransfer.readableStatusRefuse" = "Atmesti";
 "dataTransfer.readableStatusOngoing" = "Transferring";

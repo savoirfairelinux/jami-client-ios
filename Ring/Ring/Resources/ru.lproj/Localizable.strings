@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Поиск…";
 "smartlist.noResults" = "Нет результатов";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Нет подключения к сети";
 "smartlist.cellularAccess" = "Убедитесь, что доступ через сеть сотовой связи разрешен";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Вы уверены, что хотите безвозвратно удалить этот разговор?";
 "alerts.confirmDeleteConversationFromContact" = "Вы уверены, что хотите удалить разговор с этим контактом?";
 "alerts.confirmDeleteConversationTitle" = "Удалить разговор";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Заблокировать";
 "actions.deleteAction" = "Удалить";
 "actions.cancelAction" = "Отмена";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Входящий вызов от";
 "alerts.incomingCallButtonAccept" = "Принять";
 "alerts.incomingCallButtonIgnore" = "Игнорировать";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Неверный пароль";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.namePlaceholder" = "Имя";
+"accountPage.linkDeviceTitle" = "Привязать другое устройство";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Привязать новое устройство";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Отправить сообщение";
 "contactPage.clearConversation" = "Очистить чат";
 "contactPage.blockContact" = "Заблокировать контакт";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Инициализация…";
 "dataTransfer.readableStatusError" = "Ошибка";
+"dataTransfer.readableStatusAwaiting" = "Ожидание…";
+"dataTransfer.readableStatusRefuse" = "Отказать";
+"dataTransfer.readableStatusOngoing" = "Передача…";
+"dataTransfer.readableStatusCanceled" = "Отменено";
+"dataTransfer.readableStatusSuccess" = "Завершено";
+"dataTransfer.readableStatusAccept" = "Принять";
+"dataTransfer.readableStatusCancel" = "Отмена";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "Ожидание…";
 "dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Передача…";

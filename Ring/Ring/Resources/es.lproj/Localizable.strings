@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Conversaciones";
 "smartlist.searching" = "Buscando...";
 "smartlist.noResults" = "Sin resultados";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Sin conexión a la red";
 "smartlist.cellularAccess" = "Asegúrese de que el acceso a la red móvil haya sido otorgado en las opciones";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "¿Estás seguro de que quieres borrar esta conversación permanentemente?";
 "alerts.confirmDeleteConversationFromContact" = "¿Estás seguro de que quieres borrar la conversación con este contacto? ";
 "alerts.confirmDeleteConversationTitle" = "Borrar conversación";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Bloquear";
 "actions.deleteAction" = "Borrar";
 "actions.cancelAction" = "Cancelar";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Llamada entrante de ";
 "alerts.incomingCallButtonAccept" = "Aceptar";
 "alerts.incomingCallButtonIgnore" = "Ignorar";
@@ -136,16 +147,21 @@
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy deshabilitado";
 "accountPage.proxyDisabledAlertBody" = "Habilite la proxy para recibir notificaciones.";
 "accountPage.revokeDeviceTitle" = "Anular dispositivo";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
-"accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.revokeDeviceMessage" = "¿Estás seguro de anular este dispositivo? Esta acción no podrá ser deshecha.";
+"accountPage.revokeDeviceButton" = "Anular";
+"accountPage.revokeDevicePlaceholder" = "Ingresa tu contraseña";
+"accountPage.deviceRevoked" = "Anulación del dispositivo completa";
+"accountPage.deviceRevocationProgress" = "Anulando...";
+"accountPage.deviceRevocationSuccess" = "El dispositivo fue anulado";
+"accountPage.deviceRevocationTryAgain" = "Prueba nuevamente";
 "accountPage.deviceRevocationWrongPassword" = "Contraseña incorrecta";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationUnknownDevice" = "Dispositivo desconocido";
+"accountPage.deviceRevocationError" = "Error al anular el dispositivo";
+"accountPage.namePlaceholder" = "Nombre";
+"accountPage.linkDeviceTitle" = "Vincular otro dispositivo";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Vincular un nuevo dispositivo";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Enviar mensaje";
 "contactPage.clearConversation" = "Limpiar chat";
 "contactPage.blockContact" = "Bloquear contacto";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicializando…";
 "dataTransfer.readableStatusError" = "Error";
+"dataTransfer.readableStatusAwaiting" = "En espera...";
+"dataTransfer.readableStatusRefuse" = "No aceptar";
+"dataTransfer.readableStatusOngoing" = "Transfiriendo";
+"dataTransfer.readableStatusCanceled" = "Cancelado";
+"dataTransfer.readableStatusSuccess" = "Completado";
+"dataTransfer.readableStatusAccept" = "Aceptar";
+"dataTransfer.readableStatusCancel" = "Cancelar";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "En espera...";
 "dataTransfer.readableStatusRefuse" = "No aceptar";
 "dataTransfer.readableStatusOngoing" = "Transfiriendo";

@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Samtaler";
 "smartlist.searching" = "Søker…";
 "smartlist.noResults" = "Ingen resultater";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Mangler nettverksforbindelse";
 "smartlist.cellularAccess" = "Forsikre deg om at telefonnettverkstilgang er innvilget i innstillingene";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Er du sikker på at du vil slette denne samtalen for godt?";
 "alerts.confirmDeleteConversationFromContact" = "Er du sikker på at du vil slette samtalen med denne kontakten?";
 "alerts.confirmDeleteConversationTitle" = "Slett samtale";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Blokker";
 "actions.deleteAction" = "Slett";
 "actions.cancelAction" = "Avbryt";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Innkommende anrop fra";
 "alerts.incomingCallButtonAccept" = "Aksepter";
 "alerts.incomingCallButtonIgnore" = "Ignorer";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Feil passord";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.namePlaceholder" = "Navn";
+"accountPage.linkDeviceTitle" = "Link another device";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Lenk en ny enhet";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Send melding";
 "contactPage.clearConversation" = "Tøm sludring";
 "contactPage.blockContact" = "Blokker kontakt";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Starter…";
 "dataTransfer.readableStatusError" = "Feil";
+"dataTransfer.readableStatusAwaiting" = "Venter…";
+"dataTransfer.readableStatusRefuse" = "Avslå";
+"dataTransfer.readableStatusOngoing" = "Overfører";
+"dataTransfer.readableStatusCanceled" = "Avbrutt";
+"dataTransfer.readableStatusSuccess" = "Fullført";
+"dataTransfer.readableStatusAccept" = "Aksepter";
+"dataTransfer.readableStatusCancel" = "Avbryt";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "Venter…";
 "dataTransfer.readableStatusRefuse" = "Avslå";
 "dataTransfer.readableStatusOngoing" = "Overfører";

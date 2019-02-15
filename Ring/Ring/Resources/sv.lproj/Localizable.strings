@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Konversationer";
 "smartlist.searching" = "Söker...";
 "smartlist.noResults" = "Inget resultat";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Ingen nätverksanslutning";
 "smartlist.cellularAccess" = "Tillse att mobilnätsåtkomst tillåts i dina inställningar";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Vill du verkligen ta bort den här konversationen permanent?";
 "alerts.confirmDeleteConversationFromContact" = "Vill du verkligen ta bort konversationen med denna kontakt?";
 "alerts.confirmDeleteConversationTitle" = "Ta bort konversation";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Blockera";
 "actions.deleteAction" = "Ta bort";
 "actions.cancelAction" = "Avbryt";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Inkommande samtal från";
 "alerts.incomingCallButtonAccept" = "Acceptera";
 "alerts.incomingCallButtonIgnore" = "Ignorera";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Felaktigt lösenord";
 "accountPage.deviceRevocationUnknownDevice" = "Okänd enhet";
 "accountPage.deviceRevocationError" = "Kunde inte återkalla enheten";
+"accountPage.namePlaceholder" = "Namn";
+"accountPage.linkDeviceTitle" = "Koppla en annan enhet";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Koppla en ny enhet";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Skicka meddelande";
 "contactPage.clearConversation" = "Rensa chatten";
 "contactPage.blockContact" = "Blockera kontakt";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Startar...";
 "dataTransfer.readableStatusError" = "Fel";
+"dataTransfer.readableStatusAwaiting" = "Väntar...";
+"dataTransfer.readableStatusRefuse" = "Neka";
+"dataTransfer.readableStatusOngoing" = "Överför";
+"dataTransfer.readableStatusCanceled" = "Avbruten";
+"dataTransfer.readableStatusSuccess" = "Slutförd";
+"dataTransfer.readableStatusAccept" = "Acceptera";
+"dataTransfer.readableStatusCancel" = "Avbryt";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "Väntar...";
 "dataTransfer.readableStatusRefuse" = "Neka";
 "dataTransfer.readableStatusOngoing" = "Överför";

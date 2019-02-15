@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Gesprekken";
 "smartlist.searching" = "Zoeken…";
 "smartlist.noResults" = "Geen resultaten";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Geen netwerkverbinding";
 "smartlist.cellularAccess" = "Zorg dat je toegang tot het mobiele netwerk toegestaan hebt in je instellingen";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Weet je zeker dat je dit gesprek voorgoed wil verwijderen?";
 "alerts.confirmDeleteConversationFromContact" = "Weet je zeker dat je het gesprek met dit contact wil verwijderen?";
 "alerts.confirmDeleteConversationTitle" = "Gesprek verwijderen";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Blokkeren";
 "actions.deleteAction" = "Verwijderen";
 "actions.cancelAction" = "Annuleren";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Inkomende oproep van";
 "alerts.incomingCallButtonAccept" = "Aanvaarden";
 "alerts.incomingCallButtonIgnore" = "Negeren";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Onjuist wachtwoord";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.namePlaceholder" = "Naam";
+"accountPage.linkDeviceTitle" = "Link another device";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Een nieuw apparaat koppelen";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Bericht versturen";
 "contactPage.clearConversation" = "Gesprek wissen";
 "contactPage.blockContact" = "Contact blokkeren";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Bezig met initialiseren…";
 "dataTransfer.readableStatusError" = "Fout";
+"dataTransfer.readableStatusAwaiting" = "In afwachting…";
+"dataTransfer.readableStatusRefuse" = "Afwijzen";
+"dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
+"dataTransfer.readableStatusCanceled" = "Geannuleerd";
+"dataTransfer.readableStatusSuccess" = "Voltooid";
+"dataTransfer.readableStatusAccept" = "Aanvaarden";
+"dataTransfer.readableStatusCancel" = "Annuleren";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "In afwachting…";
 "dataTransfer.readableStatusRefuse" = "Afwijzen";
 "dataTransfer.readableStatusOngoing" = "Wordt verstuurd";

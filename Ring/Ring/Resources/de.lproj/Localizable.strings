@@ -34,8 +34,16 @@
 "smartlist.conversations" = "Unterhaltungen";
 "smartlist.searching" = "Suchen...";
 "smartlist.noResults" = "Keine Ergebnisse";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkverbindung";
 "smartlist.cellularAccess" = "Vergewissern Sie sich, dass der Mobilfunkzugang in Ihren Einstellungen erlaubt ist.";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
 
 // Walkthrough
 
@@ -43,7 +51,7 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Dieses Gerät mit einem Konto verknüpfen";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Ein Jami-Konto erstellen";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Überspringen";
@@ -101,11 +109,14 @@
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Unterhaltung löschen";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
 "actions.blockAction" = "Sperren";
 "actions.deleteAction" = "Löschen";
 "actions.cancelAction" = "Abbrechen";
+"actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Eingehender Anruf von ";
 "alerts.incomingCallButtonAccept" = "Akzeptieren";
 "alerts.incomingCallButtonIgnore" = "Ignorieren";
@@ -146,6 +157,11 @@
 "accountPage.deviceRevocationWrongPassword" = "Falsches Passwort";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.namePlaceholder" = "Name";
+"accountPage.linkDeviceTitle" = "Link another device";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
 "linkDevice.title" = "Verbinde ein neues Gerät";
@@ -161,10 +177,24 @@
 "contactPage.sendMessage" = "Nachricht senden";
 "contactPage.clearConversation" = "Clear Chat";
 "contactPage.blockContact" = "Kontakt sperren";
+"contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "Fehler";
+"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusRefuse" = "Verweigern";
+"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusAccept" = "Akzeptieren";
+"dataTransfer.readableStatusCancel" = "Abbrechen";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Verweigern";
 "dataTransfer.readableStatusOngoing" = "Transferring";
