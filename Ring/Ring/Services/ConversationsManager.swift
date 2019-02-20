@@ -30,6 +30,7 @@ class ConversationsManager: MessagesAdapterDelegate {
     let accountsService: AccountsService
     let nameService: NameService
     let dataTransferService: DataTransferService
+    let callService: CallsService
 
     private let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
@@ -37,11 +38,12 @@ class ConversationsManager: MessagesAdapterDelegate {
     private let notificationHandler = LocalNotificationsHelper()
 
     // swiftlint:disable cyclomatic_complexity
-    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService, dataTransferService: DataTransferService) {
+    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService, dataTransferService: DataTransferService, callService: CallsService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
         self.nameService = nameService
         self.dataTransferService = dataTransferService
+        self.callService = callService
         MessagesAdapter.delegate = self
 
         self.accountsService
@@ -121,6 +123,20 @@ class ConversationsManager: MessagesAdapterDelegate {
                 }
             })
             .disposed(by: disposeBag)
+        self.callService.newMessage.filter({ (event) in
+            return  event.eventType == ServiceEventType.newIncomingMessage
+        })
+            .subscribe(onNext: { [unowned self] event in
+                guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
+                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
+                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
+                    else {return}
+                self.handleNewMessage(from: peerUri,
+                                      to: accountId,
+                                      message: messageContent,
+                                      peerName: event.getEventInput(ServiceEventInput.name))
+            })
+            .disposed(by: disposeBag)
     }
 
     func prepareConversationsForAccount(accountId: String, accountUri: String) {
@@ -137,27 +153,38 @@ class ConversationsManager: MessagesAdapterDelegate {
         guard let content = message[textPlainMIMEType] else {
             return
         }
+        self.handleNewMessage(from: senderAccount,
+                              to: receiverAccountId,
+                              message: content,
+                              peerName: nil)
+    }
 
+    func handleNewMessage(from peerUri: String, to accountId: String, message content: String, peerName: String?) {
         if UIApplication.shared.applicationState != .active {
             var data = [String: String]()
             data [NotificationUserInfoKeys.messageContent.rawValue] = content
-            data [NotificationUserInfoKeys.participantID.rawValue] = senderAccount
-            self.nameService.usernameLookupStatus.single()
-                .filter({ lookupNameResponse in
-                    return lookupNameResponse.address != nil &&
-                        lookupNameResponse.address == senderAccount
-                })
-                .subscribe(onNext: { [weak self] lookupNameResponse in
-                    if let name = lookupNameResponse.name, !name.isEmpty {
-                        data [NotificationUserInfoKeys.name.rawValue] = name
-                        self?.notificationHandler.presentMessageNotification(data: data)
-                    } else if let address = lookupNameResponse.address {
-                       data [NotificationUserInfoKeys.name.rawValue] = address
-                       self?.notificationHandler.presentMessageNotification(data: data)
-                    }
-                }).disposed(by: self.disposeBag)
+            data [NotificationUserInfoKeys.participantID.rawValue] = peerUri
+            if let name = peerName {
+                data [NotificationUserInfoKeys.name.rawValue] = name
+                self.notificationHandler.presentMessageNotification(data: data)
+            } else {
+                self.nameService.usernameLookupStatus.single()
+                    .filter({ lookupNameResponse in
+                        return lookupNameResponse.address != nil &&
+                            lookupNameResponse.address == peerUri
+                    })
+                    .subscribe(onNext: { [weak self] lookupNameResponse in
+                        if let name = lookupNameResponse.name, !name.isEmpty {
+                            data [NotificationUserInfoKeys.name.rawValue] = name
+                            self?.notificationHandler.presentMessageNotification(data: data)
+                        } else if let address = lookupNameResponse.address {
+                            data [NotificationUserInfoKeys.name.rawValue] = address
+                            self?.notificationHandler.presentMessageNotification(data: data)
+                        }
+                    }).disposed(by: self.disposeBag)
 
-            self.nameService.lookupAddress(withAccount: "", nameserver: "", address: senderAccount)
+                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: peerUri)
+            }
         }
 
         guard let currentAccount = self.accountsService.currentAccount else {
@@ -168,7 +195,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             return
         }
 
-        guard let accountForMessage = self.accountsService.getAccount(fromAccountId: receiverAccountId) else {
+        guard let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else {
             return
         }
 
@@ -182,12 +209,12 @@ class ConversationsManager: MessagesAdapterDelegate {
         }
         let message = self.conversationService.createMessage(withId: "",
                                                              withContent: content,
-                                                             byAuthor: senderAccount,
+                                                             byAuthor: peerUri,
                                                              generated: false,
                                                              incoming: true)
         self.conversationService.saveMessage(message: message,
-                                             toConversationWith: senderAccount,
-                                             toAccountId: receiverAccountId,
+                                             toConversationWith: peerUri,
+                                             toAccountId: accountId,
                                              toAccountUri: messageAccountUri,
                                              shouldRefreshConversations: shouldUpdateConversationsList)
             .subscribe()

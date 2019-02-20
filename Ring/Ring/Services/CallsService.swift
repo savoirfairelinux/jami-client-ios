@@ -55,11 +55,14 @@ class CallsService: CallsAdapterDelegate {
     let newCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
+    fileprivate let newMessagesStream = PublishSubject<ServiceEvent>()
+    var newMessage: Observable<ServiceEvent>
 
     init(withCallsAdapter callsAdapter: CallsAdapter) {
         self.callsAdapter = callsAdapter
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
+        newMessage = newMessagesStream.share()
         CallsAdapter.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.refuseUnansweredCall(_:)),
                                                name: NSNotification.Name(rawValue: NotificationName.refuseCallFromNotifications.rawValue),
@@ -274,6 +277,17 @@ class CallsService: CallsAdapterDelegate {
             data[ProfileNotificationsKeys.ringID.rawValue] = uri
             data[ProfileNotificationsKeys.message.rawValue] = message
             NotificationCenter.default.post(name: NSNotification.Name(ProfileNotifications.messageReceived.rawValue), object: nil, userInfo: data)
+        } else if let call = self.call(callID: callId) {
+            let accountId = call.accountId
+            let displayName = call.displayName
+            let registeredName = call.registeredName
+            let name = !displayName.isEmpty ? displayName : registeredName
+            var event = ServiceEvent(withEventType: .newIncomingMessage)
+            event.addEventInput(.content, value: message.values.first)
+            event.addEventInput(.peerUri, value: uri.replacingOccurrences(of: "@ring.dht", with: ""))
+            event.addEventInput(.name, value: name)
+            event.addEventInput(.accountId, value: accountId)
+            self.newMessagesStream.onNext(event)
         }
     }
     // swiftlint:enable cyclomatic_complexity
