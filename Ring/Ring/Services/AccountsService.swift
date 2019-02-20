@@ -87,7 +87,8 @@ class AccountsService: AccountAdapterDelegate {
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     let dbManager = DBManager(profileHepler: ProfileDataHelper(),
                               conversationHelper: ConversationDataHelper(),
-                              interactionHepler: InteractionDataHelper())
+                              interactionHepler: InteractionDataHelper(),
+                              accountProfileHelper: AccountProfileHelper())
 
     // MARK: - Public members
     /**

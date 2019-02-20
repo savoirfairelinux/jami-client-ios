@@ -43,7 +43,7 @@ class ContactsService {
 
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
+    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper(), accountProfileHelper: AccountProfileHelper())
 
     init(withContactsAdapter contactsAdapter: ContactsAdapter) {
         self.contactsAdapter = contactsAdapter

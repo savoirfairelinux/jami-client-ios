@@ -48,7 +48,8 @@ class ProfilesService {
 
     let dbManager = DBManager(profileHepler: ProfileDataHelper(),
                               conversationHelper: ConversationDataHelper(),
-                              interactionHepler: InteractionDataHelper())
+                              interactionHepler: InteractionDataHelper(),
+                              accountProfileHelper: AccountProfileHelper())
 
     let disposeBag = DisposeBag()
 
@@ -158,25 +159,25 @@ class ProfilesService {
         }
     }
 
-    private func updateProfileFor(ringId: String, createIfNotexists: Bool) {
+    private func updateProfileFor(ringId: String, accountId: String, isAccount: Bool, createIfNotexists: Bool) {
         guard let profileObservable = self.profiles[ringId] else {
             return
         }
         self.dbManager
-            .profileObservable(for: ringId, createIfNotExists: createIfNotexists)
+            .profileObservable(for: ringId, accountId: accountId, isAccount: isAccount, createIfNotExists: createIfNotexists)
             .subscribe(onNext: {profile in
                 profileObservable.onNext(profile)
             }).disposed(by: self.disposeBag)
     }
 
-    func getProfile(ringId: String, createIfNotexists: Bool) -> Observable<Profile> {
+    func getProfile(ringId: String, accountId: String, isAccount: Bool, createIfNotexists: Bool) -> Observable<Profile> {
         if let profile = self.profiles[ringId] {
             return profile.asObservable().share()
         }
         let profileObservable = ReplaySubject<Profile>.create(bufferSize: 1)
         self.profiles[ringId] = profileObservable
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.updateProfileFor(ringId: ringId, createIfNotexists: createIfNotexists)
+            self.updateProfileFor(ringId: ringId, accountId: accountId, isAccount: isAccount, createIfNotexists: createIfNotexists)
         }
         return profileObservable.share()
     }

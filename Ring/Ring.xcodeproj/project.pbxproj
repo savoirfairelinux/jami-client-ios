@@ -124,6 +124,7 @@
 		0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E4909741FEAC943005CAA50 /* CallViewController.storyboard */; };
 		0E49097A1FEAC9E1005CAA50 /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4909791FEAC9E1005CAA50 /* CallViewController.swift */; };
 		0E49097C1FEACA4B005CAA50 /* CallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */; };
+		0E67B5D62218E0FB001790D9 /* AccountProfileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E67B5D52218E0FB001790D9 /* AccountProfileHelper.swift */; };
 		0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E68571020238546008B0717 /* ConversationNavigation.swift */; };
 		0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6949781FA7E71C0029B60A /* BaseViewController.swift */; };
 		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
@@ -435,6 +436,7 @@
 		0E4909791FEAC9E1005CAA50 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
 		0E63F1F3202907090001F248 /* Ring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ring.entitlements; sourceTree = "<group>"; };
+		0E67B5D52218E0FB001790D9 /* AccountProfileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileHelper.swift; sourceTree = "<group>"; };
 		0E68571020238546008B0717 /* ConversationNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNavigation.swift; sourceTree = "<group>"; };
 		0E6949781FA7E71C0029B60A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0E72374920460320006B0C7D /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
@@ -1065,6 +1067,7 @@
 				0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */,
 				0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */,
 				0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */,
+				0E67B5D52218E0FB001790D9 /* AccountProfileHelper.swift */,
 			);
 			path = DBHelpers;
 			sourceTree = "<group>";
@@ -1987,6 +1990,7 @@
 				0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */,
 				0E49096E1FEAC0DE005CAA50 /* CallsService.swift in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
+				0E67B5D62218E0FB001790D9 /* AccountProfileHelper.swift in Sources */,
 				1A2D19011F29353A00B2C785 /* MeDetailViewModel.swift in Sources */,
 				1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */,
 				1A2D18C31F29180700B2C785 /* AccountModel.swift in Sources */,

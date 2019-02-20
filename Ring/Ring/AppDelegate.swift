@@ -47,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let profileService = ProfilesService()
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
+    private let dbManager: DBManager = DBManager(profileHepler: ProfileDataHelper(),
+                                                 conversationHelper: ConversationDataHelper(),
+                                                 interactionHepler: InteractionDataHelper(),
+                                                 accountProfileHelper: AccountProfileHelper())
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
@@ -174,6 +178,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.conversationManager?
                     .prepareConversationsForAccount(accountId: currentAccount.id, accountUri: ringID)
             }
+            do {
+                try self.dbManager.performMigrationIfNeeded()
+            } catch {
+                let time = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: time) {
+                    self.appCoordinator.showDatabaseError()
+                }
+            }
         }.disposed(by: self.disposeBag)
 
         self.window?.rootViewController = self.appCoordinator.rootViewController
@@ -237,9 +249,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private func startDB() {
         do {
-            let dbManager = DBManager(profileHepler: ProfileDataHelper(),
-                                       conversationHelper: ConversationDataHelper(),
-                                       interactionHepler: InteractionDataHelper())
             try dbManager.start()
         } catch {
             let time = DispatchTime.now() + 1
