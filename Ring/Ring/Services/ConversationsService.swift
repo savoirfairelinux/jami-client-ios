@@ -48,7 +48,7 @@ class ConversationsService {
         return self.conversations.asObservable()
     }()
 
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
+    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper(), accountProfileHelper: AccountProfileHelper())
 
     init(withMessageAdapter adapter: MessagesAdapter) {
         self.responseStream.disposed(by: disposeBag)
@@ -155,6 +155,7 @@ class ConversationsService {
         return Completable.create(subscribe: { [unowned self] completable in
             self.messagesSemaphore.wait()
             self.dbManager.saveMessage(for: toAccountUri,
+                                       accountId: toAccountId,
                                        with: recipientRingId,
                                        message: message,
                                        incoming: message.incoming,
@@ -205,7 +206,7 @@ class ConversationsService {
         let message = MessageModel(withId: "", receivedDate: date, content: messageContent, author: accountRingId, incoming: false)
         message.isGenerated = true
 
-        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: false, interactionType: interactionType)
+        self.dbManager.saveMessage(for: accountRingId, accountId: accountId, with: contactRingId, message: message, incoming: false, interactionType: interactionType)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [unowned self] _ in
                 if shouldUpdateConversation {
@@ -244,7 +245,7 @@ class ConversationsService {
         message.isTransfer = true
 
         self.messagesSemaphore.wait()
-        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: isIncoming, interactionType: interactionType)
+            self.dbManager.saveMessage(for: accountRingId, accountId: accountId, with: contactRingId, message: message, incoming: isIncoming, interactionType: interactionType)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [unowned self] message in
                 self.dataTransferMessageMap[transferId] = message
@@ -302,7 +303,7 @@ class ConversationsService {
     }
 
     func getProfile(uri: String) -> Observable<Profile> {
-       return self.dbManager.profileObservable(for: uri, createIfNotExists: false)
+       return self.dbManager.getProfileObservable(for: uri)
     }
 
     func clearHistory(conversation: ConversationModel, keepConversation: Bool) {

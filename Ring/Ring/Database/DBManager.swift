@@ -19,6 +19,7 @@
  */
 
 import Foundation
+import SQLite
 import RxSwift
 
 enum ProfileType: String {
@@ -112,30 +113,93 @@ enum InteractionType: String {
 }
 
 typealias SavedMessageForConversation = (messageID: Int64, conversationID: Int64)
-
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 class DBManager {
 
     let profileHepler: ProfileDataHelper
     let conversationHelper: ConversationDataHelper
     let interactionHepler: InteractionDataHelper
+    let accountProfileHelper: AccountProfileHelper
 
     // used to create object to save to db. When inserting in table defaultID will be replaced by autoincrementedID
     let defaultID: Int64 = 1
 
     init(profileHepler: ProfileDataHelper, conversationHelper: ConversationDataHelper,
-         interactionHepler: InteractionDataHelper) {
+         interactionHepler: InteractionDataHelper, accountProfileHelper: AccountProfileHelper) {
         self.profileHepler = profileHepler
         self.conversationHelper = conversationHelper
         self.interactionHepler = interactionHepler
+        self.accountProfileHelper = accountProfileHelper
     }
 
     func start() throws {
-        try profileHepler.createTable()
-        try conversationHelper.createTable()
-        try interactionHepler.createTable()
+        guard let dataBase = RingDB.instance.ringDB else {
+            throw DataAccessError.datastoreConnectionError
+        }
+        // if db is empty - create tables. Migrations will be performed later if need
+        do {
+            try _ = dataBase.scalar(RingDB.instance.tableProfiles.exists)
+            try _ = dataBase.scalar(RingDB.instance.tableConversations.exists)
+            try _ = dataBase.scalar(RingDB.instance.tableInteractionss.exists)
+        } catch {
+            try dataBase.transaction {
+                try profileHepler.createTable()
+                try conversationHelper.createTable()
+                try interactionHepler.createTable()
+                try accountProfileHelper.createTable()
+                dataBase.userVersion = RingDB.instance.dbVersion
+            }
+        }
     }
 
-    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, incoming: Bool, interactionType: InteractionType) -> Observable<SavedMessageForConversation> {
+    func performMigrationIfNeeded() throws {
+        guard let dataBase = RingDB.instance.ringDB else {
+            throw DataAccessError.datastoreConnectionError
+        }
+        let dataBaseVersion = dataBase.userVersion
+        try dataBase.transaction {
+            switch dataBaseVersion {
+            case 0:
+                if !migrateDBVersionFromZeroToOne(dataBase: dataBase) {
+                    throw DataAccessError.databaseError
+                }
+            default:
+                break
+            }
+        }
+    }
+
+    func migrateDBVersionFromZeroToOne(dataBase: Connection) -> Bool {
+        do {
+            try accountProfileHelper.createTable()
+            dataBase.userVersion = RingDB.instance.dbVersion
+            guard let delegate = UIApplication.shared.delegate as? AppDelegate else {return false}
+            guard let account = delegate.injectionBag.accountService.currentAccount else {return false}
+            guard let jamiId = AccountModelHelper(withAccount: account).ringId else {
+                    return false
+            }
+            guard let profile = try self.getRingProfile(for: jamiId) else {return false}
+            _ = accountProfileHelper.insert(item: ProfileAccount(profile.id, account.id, true))
+            let contacts = delegate.injectionBag.contactsService.contacts.value
+            for contact in contacts {
+                if let profile = try self.getRingProfile(for: contact.ringId) {
+                    _ = accountProfileHelper.insert(item: ProfileAccount(profile.id, account.id, false))
+                }
+            }
+            return true
+        } catch {
+            return false
+        }
+    }
+
+    // swiftlint:disable:next function_parameter_count
+    func saveMessage(for accountUri: String,
+                     accountId: String,
+                     with contactUri: String,
+                     message: MessageModel,
+                     incoming: Bool,
+                     interactionType: InteractionType) -> Observable<SavedMessageForConversation> {
 
         //create completable which will be executed on background thread
         return Observable.create { [weak self] observable in
@@ -147,11 +211,11 @@ class DBManager {
                 //use transaction to lock access to db from other threads while the following queries are executed
                 try dataBase.transaction {
 
-                    guard let accountProfile = try self?.getProfile(for: accountUri, createIfNotExists: true) else {
+                    guard let accountProfile = try self?.addAndGetRingProfile(accountId: accountId, isAccount: true, profileUri: accountUri) else {
                         throw DBBridgingError.saveMessageFailed
                     }
 
-                    guard let contactProfile = try self?.getProfile(for: contactUri, createIfNotExists: true) else {
+                    guard let contactProfile = try self?.addAndGetRingProfile(accountId: accountId, isAccount: false, profileUri: contactUri) else {
                         throw DBBridgingError.saveMessageFailed
                     }
 
@@ -293,11 +357,11 @@ class DBManager {
                 }
                 try dataBase.transaction {
 
-                    guard let accountProfile = try self.getProfile(for: accountUri, createIfNotExists: false) else {
+                    guard let accountProfile = try self.getRingProfile(for: accountUri) else {
                         throw DBBridgingError.deleteConversationFailed
                     }
 
-                    guard let contactProfile = try self.getProfile(for: participantUri, createIfNotExists: false) else {
+                    guard let contactProfile = try self.getRingProfile(for: participantUri) else {
                         throw DBBridgingError.deleteConversationFailed
                     }
 
@@ -338,10 +402,24 @@ class DBManager {
         }
     }
 
-    func profileObservable(for profileUri: String, createIfNotExists: Bool) -> Observable<Profile> {
+    func getProfileObservable(for profileUri: String) -> Observable<Profile> {
         return Observable.create { observable in
             do {
-                if let profile = try self.getProfile(for: profileUri, createIfNotExists: createIfNotExists) {
+                if let profile = try self.getRingProfile(for: profileUri) {
+                    observable.onNext(profile)
+                    observable.on(.completed)
+                }
+            } catch {
+                observable.on(.error(DBBridgingError.getProfileFailed))
+            }
+            return Disposables.create { }
+        }
+    }
+
+    func addAndGetProfileObservable(for profileUri: String, accountId: String, isAccount: Bool) -> Observable<Profile> {
+        return Observable.create { observable in
+            do {
+                if let profile = try self.addAndGetRingProfile(accountId: accountId, isAccount: isAccount, profileUri: profileUri) {
                     observable.onNext(profile)
                     observable.on(.completed)
                 }
@@ -358,7 +436,7 @@ class DBManager {
 
         var conversationsToReturn = [ConversationModel]()
 
-        guard let accountProfile = try self.getProfile(for: accountUri, createIfNotExists: false) else {
+        guard let accountProfile = try self.getRingProfile(for: accountUri) else {
             throw DBBridgingError.getConversationFailed
         }
         guard let conversationsID = try self.selectConversationsForAccount(accountProfile: accountProfile.id),
@@ -493,28 +571,43 @@ class DBManager {
         return self.interactionHepler.insertIfNotExist(item: interaction)
     }
 
-    func createOrUpdateRingProfile(profileUri: String, alias: String?, image: String?, status: ProfileStatus) -> Bool {
+    // swiftlint:disable:next function_parameter_count
+    func createOrUpdateRingProfile(profileUri: String,
+                                   alias: String?,
+                                   image: String?,
+                                   status: ProfileStatus,
+                                   accountId: String,
+                                   isAccount: Bool) -> Bool {
         let profile = Profile(defaultID, profileUri, alias, image, ProfileType.ring.rawValue,
                               status.rawValue)
         do {
             try self.profileHepler.insertOrUpdateProfile(item: profile)
+            if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
+                accountProfileHelper.insert(item: ProfileAccount(profile.id, accountId, isAccount))
+            }
         } catch {
             return  false
         }
         return true
     }
 
-    private func getProfile(for profileUri: String, createIfNotExists: Bool) throws -> Profile? {
+    private func addAndGetRingProfile(accountId: String, isAccount: Bool, profileUri: String) throws -> Profile? {
         if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
             return profile
         }
-        if !createIfNotExists {
-            return nil
-        }
-        // for now we use template profile
         let profile = self.createTemplateRingProfile(account: profileUri)
         if self.profileHepler.insert(item: profile) {
-            return try self.profileHepler.selectProfile(accountURI: profileUri)
+            if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
+                accountProfileHelper.insert(item: ProfileAccount(profile.id, accountId, isAccount))
+                return profile
+            }
+        }
+        return nil
+    }
+
+    private func getRingProfile(for profileUri: String) throws -> Profile? {
+        if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
+            return profile
         }
         return nil
     }

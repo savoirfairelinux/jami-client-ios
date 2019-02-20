@@ -30,6 +30,7 @@ enum ProfileNotifications: String {
 
 enum ProfileNotificationsKeys: String {
     case ringID
+    case accountId
     case message
 }
 
@@ -48,7 +49,8 @@ class ProfilesService {
 
     let dbManager = DBManager(profileHepler: ProfileDataHelper(),
                               conversationHelper: ConversationDataHelper(),
-                              interactionHepler: InteractionDataHelper())
+                              interactionHepler: InteractionDataHelper(),
+                              accountProfileHelper: AccountProfileHelper())
 
     let disposeBag = DisposeBag()
 
@@ -65,7 +67,7 @@ class ProfilesService {
         guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
             return
         }
-        self.updateProfileFor(ringId: ringId, createIfNotexists: false)
+        self.updateProfileFor(ringId: ringId)
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -75,6 +77,10 @@ class ProfilesService {
         }
 
         guard let message = notification.userInfo?[ProfileNotificationsKeys.message.rawValue] as? [String: String] else {
+            return
+        }
+
+        guard let accountId = notification.userInfo?[ProfileNotificationsKeys.accountId.rawValue] as? String else {
             return
         }
 
@@ -121,12 +127,12 @@ class ProfilesService {
 
             //Build the vCard when all data are appended
             if of == numberOfReceivedChunk {
-                self.buildVCardFromChunks(cardID: id, ringID: ringId)
+                self.buildVCardFromChunks(cardID: id, ringID: ringId, accountId: accountId)
             }
         }
     }
 
-    private func buildVCardFromChunks(cardID: Int, ringID: String) {
+    private func buildVCardFromChunks(cardID: Int, ringID: String, accountId: String) {
         guard let vcard = self.base64VCards[cardID] else {
             return
         }
@@ -153,30 +159,57 @@ class ProfilesService {
                 .createOrUpdateRingProfile(profileUri: uri,
                                            alias: name,
                                            image: stringImage,
-                                           status: ProfileStatus.untrasted)
-            self.updateProfileFor(ringId: uri, createIfNotexists: false)
+                                           status: ProfileStatus.untrasted,
+                                           accountId: accountId,
+                                           isAccount: false)
+            self.updateProfileFor(ringId: uri)
         }
     }
 
-    private func updateProfileFor(ringId: String, createIfNotexists: Bool) {
+    private func addOrUpdatePrifileFor(ringId: String, accountId: String, isAccount: Bool) {
         guard let profileObservable = self.profiles[ringId] else {
             return
         }
         self.dbManager
-            .profileObservable(for: ringId, createIfNotExists: createIfNotexists)
+            .addAndGetProfileObservable(for: ringId, accountId: accountId, isAccount: isAccount)
             .subscribe(onNext: {profile in
                 profileObservable.onNext(profile)
             }).disposed(by: self.disposeBag)
     }
 
-    func getProfile(ringId: String, createIfNotexists: Bool) -> Observable<Profile> {
+    private func updateProfileFor(ringId: String) {
+        guard let profileObservable = self.profiles[ringId] else {
+            return
+        }
+        self.dbManager
+            .getProfileObservable(for: ringId)
+            .subscribe(onNext: {profile in
+                profileObservable.onNext(profile)
+            }).disposed(by: self.disposeBag)
+    }
+
+    func addAndGetProfile(ringId: String,
+                          accountId: String,
+                          isAccount: Bool) -> Observable<Profile> {
         if let profile = self.profiles[ringId] {
             return profile.asObservable().share()
         }
         let profileObservable = ReplaySubject<Profile>.create(bufferSize: 1)
         self.profiles[ringId] = profileObservable
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.updateProfileFor(ringId: ringId, createIfNotexists: createIfNotexists)
+            self.addOrUpdatePrifileFor(ringId: ringId, accountId: accountId, isAccount: isAccount)
+        }
+        return profileObservable.share()
+    }
+
+    func getProfile(ringId: String) -> Observable<Profile> {
+        if let profile = self.profiles[ringId] {
+            return profile.asObservable().share()
+        }
+        let profileObservable = ReplaySubject<Profile>.create(bufferSize: 1)
+        self.profiles[ringId] = profileObservable
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.updateProfileFor(ringId: ringId)
         }
         return profileObservable.share()
     }

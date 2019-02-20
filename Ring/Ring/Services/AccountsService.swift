@@ -87,7 +87,8 @@ class AccountsService: AccountAdapterDelegate {
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     let dbManager = DBManager(profileHepler: ProfileDataHelper(),
                               conversationHelper: ConversationDataHelper(),
-                              interactionHepler: InteractionDataHelper())
+                              interactionHepler: InteractionDataHelper(),
+                              accountProfileHelper: AccountProfileHelper())
 
     // MARK: - Public members
     /**
@@ -484,8 +485,13 @@ class AccountsService: AccountAdapterDelegate {
 
     func registrationStateChanged(with response: RegistrationResponse) {
         log.debug("RegistrationStateChanged.")
-        if let state = response.state, state == Registered {
-            dbManager.profileObservable(for: response.accountId, createIfNotExists: true)
+        if let state = response.state,
+            state == Registered,
+            let account = self.getAccount(fromAccountId: response.accountId),
+            let jamiId = AccountModelHelper.init(withAccount: account).ringId {
+            dbManager.addAndGetProfileObservable(for: jamiId,
+                                                 accountId: response.accountId,
+                                                 isAccount: true)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe()
                 .disposed(by: self.disposeBag)
