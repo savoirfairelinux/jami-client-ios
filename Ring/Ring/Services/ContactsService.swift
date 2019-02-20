@@ -43,7 +43,7 @@ class ContactsService {
 
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
+    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper(), accountProfileHelper: AccountProfileHelper())
 
     init(withContactsAdapter contactsAdapter: ContactsAdapter) {
         self.contactsAdapter = contactsAdapter
@@ -115,7 +115,9 @@ class ContactsService {
                     .createOrUpdateRingProfile(profileUri: contactRequest.ringId,
                                                alias: name,
                                                image: stringImage,
-                                               status: ProfileStatus.trusted)
+                                               status: ProfileStatus.trusted,
+                                               accountId: account.id,
+                                               isAccount: false)
                 var event = ServiceEvent(withEventType: .contactAdded)
                 event.addEventInput(.accountId, value: account.id)
                 event.addEventInput(.uri, value: contactRequest.ringId)
@@ -324,7 +326,7 @@ extension ContactsService: ContactsAdapterDelegate {
     }
 
     func getProfileForUri(uri: String) ->Observable<Profile> {
-        return self.dbManager.profileObservable(for: uri, createIfNotExists: false)
+        return self.dbManager.getProfileObservable(for: uri)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
     }
 }

@@ -64,8 +64,9 @@ class CallViewModel: Stateable, ViewModel {
         guard let call = self.call else {
             return nil
         }
-        return self.profileService.getProfile(ringId: call.participantRingId,
-                                                        createIfNotexists: true)
+        return self.profileService.addAndGetProfile(ringId: call.participantRingId,
+                                                    accountId: call.accountId,
+                                                    isAccount: false)
             .filter({ profile in
                 guard let photo = profile.photo else {
                     return false
