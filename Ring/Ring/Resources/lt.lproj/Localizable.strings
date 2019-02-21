@@ -34,16 +34,16 @@
 "smartlist.conversations" = "Pokalbiai";
 "smartlist.searching" = "Ieškoma...";
 "smartlist.noResults" = "Jokių rezultatų";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.noConversation" = "Pokalbių nėra";
+"smartlist.searchBarPlaceholder" = "Įveskite vardą...";
 "smartlist.noNetworkConnectivity" = "Nėra tinklo ryšio";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 
 //Conversation
-"conversation.messagePlaceholder" = "Type your message...";
+"conversation.messagePlaceholder" = "Rašykite žinutę...";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "Pakvietimų nėra";
 
 // Walkthrough
 
@@ -57,14 +57,14 @@
 "createProfile.skipCreateProfile" = "Praleisti";
 "createProfile.profileCreated" = "Kitas";
 "createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNameLabel" = "Įveskite rodomą vardą";
+"createProfile.enterNamePlaceholder" = "Įveskite vardą";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.createYourAvatar" = "Susikurkite avatarą";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Susikurkite savo paskyrą";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.createAccountFormTitle" = "Susikurkite paskyrą";
+"createAccount.chooseStrongPassword" = "Pasirinkite stiprų slaptažodį, kurį prisiminsite, kad apsaugotumėte savo Jami paskyrą.";
 "createAccount.enterNewUsernamePlaceholder" = "Naudotojo vardas";
 "createAccount.newPasswordPlaceholder" = "Slaptažodis";
 "createAccount.repeatPasswordPlaceholder" = "Patvirtinkite slaptažodį";
@@ -76,8 +76,8 @@
 "createAccount.loading" = "Įkeliama";
 "createAccount.waitCreateAccountTitle" = "Pridedama paskyra";
 "createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.ChooseAPassword" = "Šifruoti mano paskyrą";
+"createAccount.PasswordInformation" = "Pasirinkite slaptažodį, skirtą šifruoti jūsų vietinę paskyrą. Nepamirškite jo arba kitaip nebegalėsite atkurti savo paskyros";
 "createAccount.EnableNotifications" = "Pranešimai";
 "createAccount.Recommended" = "(Rekomenduojama)";
 
@@ -95,7 +95,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Paskyra pridėta";
 "alerts.accountNoNetworkTitle" = "Nepavyksta prisijungti prie tinklo";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Nepavyko pridėti paskyros, nes Jami nepavyko prisijungti prie paskirstytojo tinklo. Patikrinkite savo įrenginio ryšį.";
 "alerts.accountDefaultErrorTitle" = "Nežinoma klaida";
 "alerts.accountDefaultErrorMessage" = "Nepavyko sukurti paskyros.";
 "alerts.profileTakePhoto" = "Padaryti nuotrauką";
@@ -109,14 +109,14 @@
 "alerts.confirmDeleteConversation" = "Ar tikrai norite visiems laikams ištrinti šį pokalbį?";
 "alerts.confirmDeleteConversationFromContact" = "Ar tikrai norite ištrinti pokalbį su šiuo kontaktu?";
 "alerts.confirmDeleteConversationTitle" = "Ištrinti pokalbį";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
+"alerts.confirmClearConversation" = "Ar tikrai norite išvalyti pokalbį su šiuo kontaktu?";
+"alerts.confirmClearConversationTitle" = "Išvalyti pokalbį";
 
 //Actions
 "actions.blockAction" = "Užblokuoti";
 "actions.deleteAction" = "Ištrinti";
 "actions.cancelAction" = "Atsisakyti";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Išvalyti";
 "alerts.incomingCallAllertTitle" = "Gaunamasis skambutis nuo ";
 "alerts.incomingCallButtonAccept" = "Priimti";
 "alerts.incomingCallButtonIgnore" = "Nepaisyti";
@@ -135,11 +135,11 @@
 "accountPage.username" = "naudotojo vardas:";
 "accountPage.usernameNotRegistered" = "naudotojo vardas: neregistruotas";
 "accountPage.credentialsHeader" = "Išsamesnė paskyros informacija";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Įjungti įgaliotąjį serverį";
 "accountPage.blockedContacts" = "Block List";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.unblockContact" = "ATBLOKUOTI";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Įjungti įgaliotąjį serverį";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "Įrašyti";
 "accountPage.proxyPaceholder" = "Įgaliotojo serverio adresas";
@@ -161,7 +161,7 @@
 "accountPage.linkDeviceTitle" = "Susieti kitą įrenginį";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Užblokuotų kontaktų nėra";
 
 //Link New Device
 "linkDevice.title" = "Susieti naują įrenginį";
@@ -177,7 +177,7 @@
 "contactPage.sendMessage" = "Siųsti žinutę";
 "contactPage.clearConversation" = "Išvalyti pokalbį";
 "contactPage.blockContact" = "Užblokuoti kontaktą";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.removeConversation" = "Šalinti pokalbį";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicijuojama…";
@@ -191,10 +191,10 @@
 "dataTransfer.readableStatusCancel" = "Atsisakyti";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
+"notifications.incomingCall" = "Gaunamasis skambutis";
+"notifications.missedCall" = "Praleistas skambutis";
+"notifications.acceptCall" = "ATSILIEPTI";
+"notifications.refuseCall" = "ATMESTI";
 "dataTransfer.readableStatusAwaiting" = "Laukiama…";
 "dataTransfer.readableStatusRefuse" = "Atmesti";
 "dataTransfer.readableStatusOngoing" = "Transferring";

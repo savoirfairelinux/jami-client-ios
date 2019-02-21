@@ -31,19 +31,19 @@
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Keresési eredmény";
-"smartlist.conversations" = "Beszélgetések";
+"smartlist.conversations" = "Társalgások";
 "smartlist.searching" = "Keresés…";
 "smartlist.noResults" = "Nincs eredmény";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.noConversation" = "Nincs társalgás";
+"smartlist.searchBarPlaceholder" = "Név megadása…";
 "smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
 "smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
 
 //Conversation
-"conversation.messagePlaceholder" = "Type your message...";
+"conversation.messagePlaceholder" = "Üzenet írása…";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "Nincs meghívás";
 
 // Walkthrough
 
@@ -104,19 +104,19 @@
 "alerts.accountLinkedTitle" = "Fiók összekapcsolása…";
 "alerts.dbFailedTitle" = "Hiba történt a Jami elindításakor";
 "alerts.dbFailedMessage" = "Kérjük, hogy zárja be az alkalmazást és próbálja meg újra megnyitni";
-"alerts.confirmBlockContact" = "Biztos, hogy letiltja ezt a kapcsolatot? A beszélgetések előzményei ezzel a kapcsolattal véglegesen törlődni fognak.";
+"alerts.confirmBlockContact" = "Biztos, hogy letiltja ezt a kapcsolatot? A társalgás előzményei ezzel a kapcsolattal véglegesen törlődni fognak.";
 "alerts.confirmBlockContactTitle" = "Kapcsolat letiltása";
-"alerts.confirmDeleteConversation" = "Biztosan végleg akarja törölni ezt a beszélgetést?";
-"alerts.confirmDeleteConversationFromContact" = "Biztos, hogy törli akarja a beszélgetést ezzel a kapcsolattal?";
-"alerts.confirmDeleteConversationTitle" = "Beszélgetés törlése";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
+"alerts.confirmDeleteConversation" = "Biztosan végleg akarja törölni ezt a társalgást?";
+"alerts.confirmDeleteConversationFromContact" = "Biztos, hogy törli akarja a társalgást ezzel a kapcsolattal?";
+"alerts.confirmDeleteConversationTitle" = "Társalgás törlése";
+"alerts.confirmClearConversation" = "Biztos, hogy törli akarja a társalgást ezzel a kapcsolattal?";
+"alerts.confirmClearConversationTitle" = "Társalgás törlése";
 
 //Actions
 "actions.blockAction" = "Letiltás";
 "actions.deleteAction" = "Törlés";
 "actions.cancelAction" = "Mégse";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Törlés";
 "alerts.incomingCallAllertTitle" = "Bejövő hívás -tól/-től";
 "alerts.incomingCallButtonAccept" = "Elfogadás";
 "alerts.incomingCallButtonIgnore" = "Figyelmen kívül hagy";
@@ -161,7 +161,7 @@
 "accountPage.linkDeviceTitle" = "Csatlakoztasson másik eszközt";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Nincsenek letiltott kapcsolatok";
 
 //Link New Device
 "linkDevice.title" = "Csatlakoztasson egy új eszközt";
@@ -177,7 +177,7 @@
 "contactPage.sendMessage" = "Üzenet küldése";
 "contactPage.clearConversation" = "Csevegések törlése";
 "contactPage.blockContact" = "Kapcsolat letiltása";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.removeConversation" = "Társalgás törlése";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Szignál…";
@@ -191,10 +191,10 @@
 "dataTransfer.readableStatusCancel" = "Mégse";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
+"notifications.incomingCall" = "Bejövő hívás";
+"notifications.missedCall" = "Nem fogadott hívás";
+"notifications.acceptCall" = "ELFOGADÁS";
+"notifications.refuseCall" = "ELUTASÍTÁS";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
 "dataTransfer.readableStatusOngoing" = "Hívásátirányítás";

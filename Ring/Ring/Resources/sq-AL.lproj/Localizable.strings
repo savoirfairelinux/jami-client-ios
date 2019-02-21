@@ -34,16 +34,16 @@
 "smartlist.conversations" = "Biseda";
 "smartlist.searching" = "Po kërkohet…";
 "smartlist.noResults" = "S’ka përfundime";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.noConversation" = "S’ka biseda";
+"smartlist.searchBarPlaceholder" = "Jepni emrin…";
 "smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
 "smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
 
 //Conversation
-"conversation.messagePlaceholder" = "Type your message...";
+"conversation.messagePlaceholder" = "Shkruani mesazhin tuaj…";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "S’ka ftesa";
 
 // Walkthrough
 
@@ -109,14 +109,14 @@
 "alerts.confirmDeleteConversation" = "Jeni i sigurt se doni të fshihet përgjithmonë kjo bisedë?";
 "alerts.confirmDeleteConversationFromContact" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
 "alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
+"alerts.confirmClearConversation" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
+"alerts.confirmClearConversationTitle" = "Pastroje Bisedën";
 
 //Actions
 "actions.blockAction" = "Bllokoje";
 "actions.deleteAction" = "Fshije";
 "actions.cancelAction" = "Anuloje";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Pastroje";
 "alerts.incomingCallAllertTitle" = "Thirrje nga";
 "alerts.incomingCallButtonAccept" = "Pranoje";
 "alerts.incomingCallButtonIgnore" = "Shpërfille";
@@ -161,7 +161,7 @@
 "accountPage.linkDeviceTitle" = "Lidhni një pajisje tjetër";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "S’ka kontakte të bllokuar";
 
 //Link New Device
 "linkDevice.title" = "Lidhni një pajisje të re";
@@ -177,7 +177,7 @@
 "contactPage.sendMessage" = "Dërgoni Mesazh";
 "contactPage.clearConversation" = "Pastroje Bisedën";
 "contactPage.blockContact" = "Bllokoje Kontaktin";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.removeConversation" = "Hiqe Bisedën";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Po gatitet…";
@@ -191,10 +191,10 @@
 "dataTransfer.readableStatusCancel" = "Anuloje";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
+"notifications.incomingCall" = "Thirrje Ardhëse";
+"notifications.missedCall" = "Thirrje të Humbura";
+"notifications.acceptCall" = "PRANOJE";
+"notifications.refuseCall" = "HIDHE POSHTË";
 "dataTransfer.readableStatusAwaiting" = "Pezull…";
 "dataTransfer.readableStatusRefuse" = "Hidhe tej";
 "dataTransfer.readableStatusOngoing" = "Po shpërngulet";

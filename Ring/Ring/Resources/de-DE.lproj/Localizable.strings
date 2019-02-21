@@ -50,7 +50,7 @@
 //Welcome Screen
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Dieses Gerät mit einem Ring-Konto verknüpfen";
+"welcome.linkDevice" = "Dieses Gerät mit einem bestehenden Konto verknüpfen";
 "welcome.createAccount" = "Jami-Konto erstellen";
 
 //Creation Profile Screen
@@ -66,7 +66,7 @@
 "createAccount.createAccountFormTitle" = "Create your account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "Benutzername";
-"createAccount.newPasswordPlaceholder" = "Passwort";
+"createAccount.newPasswordPlaceholder" = "Kennwort";
 "createAccount.repeatPasswordPlaceholder" = "Konto bestätigen";
 "createAccount.passwordCharactersNumberError" = "Mindestens 6 Zeichen";
 "createAccount.passwordNotMatchingError" = "Passwörter stimmen nicht überein";
@@ -84,7 +84,7 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Konto wird verknüpft";
 "linkToAccount.linkButtonTitle" = "Gerät verknüpfen";
-"linkToAccount.passwordPlaceholder" = "Passwort";
+"linkToAccount.passwordPlaceholder" = "Kennwort";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Passwort eingeben";
 "linkToAccount.pinLabel" = "PIN eingeben";
@@ -166,8 +166,8 @@
 //Link New Device
 "linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "Das eingegebene Passwort passt nicht zu diesem Konto";
-"linkDevice.networkError" = "Ein Fehler trat während des Exports";
-"linkDevice.defaultError" = "Ein Fehler trat während des Exports";
+"linkDevice.networkError" = "Ein Netzwerk-Fehler trat während des Exports auf";
+"linkDevice.defaultError" = "Ein Fehler trat während des Exports auf";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Überprüfung...";
 

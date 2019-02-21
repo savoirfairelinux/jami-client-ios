@@ -65,7 +65,7 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Stwórz konto";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "nazwa użytkownika";
+"createAccount.enterNewUsernamePlaceholder" = "Nazwa użytkownika";
 "createAccount.newPasswordPlaceholder" = "Hasło";
 "createAccount.repeatPasswordPlaceholder" = "Potwierdź hasło";
 "createAccount.passwordCharactersNumberError" = "minimum 6 znaków";
@@ -114,7 +114,7 @@
 
 //Actions
 "actions.blockAction" = "Blokuj";
-"actions.deleteAction" = "Usun";
+"actions.deleteAction" = "Usuń";
 "actions.cancelAction" = "Anuluj";
 "actions.clearAction" = "Clear";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
