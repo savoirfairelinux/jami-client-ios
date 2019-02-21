@@ -1,197 +1,205 @@
-﻿
-"A network error occured during the export" = "A network error occured during the export";
+﻿ /*
+ *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+// Global
+"global.homeTabBarTitle" = "首頁";
+"global.contactRequestsTabBarTitle" = "邀請";
+"global.meTabBarTitle" = "帳號";
+"global.ok" = "確定";
+
+// Scan
+"scan.badQrCode" = "不正確的 QR code";
+"scan.search" = "正在搜尋……";
+
+// Smartlist
+"smartlist.yesterday" = "昨天";
+"smartlist.results" = "搜尋結果";
+"smartlist.conversations" = "對話";
+"smartlist.searching" = "正在搜尋...";
+"smartlist.noResults" = "沒有結果";
+"smartlist.noConversation" = "No conversations";
+"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.noNetworkConnectivity" = "沒有網路連接";
+"smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
+
+//Conversation
+"conversation.messagePlaceholder" = "Type your message...";
+
+//Invitations
+"invitations.noInvitations" = "No invitations";
+
+// Walkthrough
+
+//Welcome Screen
+"welcome.title" = "歡迎來到 Jami！";
+"welcome.text" = "Jami 是一個自由且通用的通訊平臺，其尊重使用者的隱私與自由。";
+"welcome.linkDevice" = "連結這個裝置到一個帳號";
+"welcome.createAccount" = "建立 Jami 帳號";
+
+//Creation Profile Screen
+"createProfile.skipCreateProfile" = "略過";
+"createProfile.profileCreated" = "下一個";
+"createProfile.title" = "個人化您的簡介";
+"createProfile.enterNameLabel" = "輸入顯示名稱";
+"createProfile.enterNamePlaceholder" = "輸入名稱";
+"createProfile.subtitle" = "您的簡介將會與您的聯絡人分享。您隨時都可以修改。";
+"createProfile.createYourAvatar" = "建立您的大頭貼";
+
+//Create Account form
+"createAccount.createAccountFormTitle" = "建立您的帳號";
+"createAccount.chooseStrongPassword" = "選擇您可以記住用來保護您的 Jami 帳號的強式密碼。";
+"createAccount.enterNewUsernamePlaceholder" = "使用者名稱";
+"createAccount.newPasswordPlaceholder" = "密碼";
+"createAccount.repeatPasswordPlaceholder" = "確認密碼";
+"createAccount.passwordCharactersNumberError" = "最小6個字元";
+"createAccount.passwordNotMatchingError" = "密碼不符合";
+"createAccount.lookingForUsernameAvailability" = "正在確認是否可用……";
+"createAccount.invalidUsername" = "無效的使用者名稱";
+"createAccount.usernameAlreadyTaken" = "使用者名稱已被使用";
+"createAccount.loading" = "正在載入";
+"createAccount.waitCreateAccountTitle" = "正在加入帳號";
+"createAccount.RegisterAUsername" = "註冊使用者名稱";
+"createAccount.ChooseAPassword" = "加密我的帳號";
+"createAccount.PasswordInformation" = "選擇密碼來加密您的本機帳號。不要忘了它，否則您會無法復原您的帳號";
+"createAccount.EnableNotifications" = "通知";
+"createAccount.Recommended" = "（建議）";
+
+//Link To Account form
+"linkToAccount.waitLinkToAccountTitle" = "帳號連結";
+"linkToAccount.linkButtonTitle" = "連結裝置";
+"linkToAccount.passwordPlaceholder" = "密碼";
+"linkToAccount.pinPlaceholder" = "PIN 碼";
+"linkToAccount.passwordLabel" = "輸入密碼";
+"linkToAccount.pinLabel" = "輸入 PIN 碼";
+"linkToAccount.explanationPinMessage" = "要生成 PIN 碼，請到包含您所使用的帳號的裝置上的帳號管理設定。在裝置設定中選取「連結其他裝置到這個帳號」。您將會收到所需的 PIN 碼來完成這份表單。PIN 碼只在 10 分鐘內有效。";
+
+//Alerts
+"alerts.accountCannotBeFoundTitle" = "找不到帳號";
+"alerts.accountCannotBeFoundMessage" = "在 Jami 網路中找不到帳號。請確定其已在 Jami 上從既有的裝置匯出，以及提供的憑證是正確的。";
+"alerts.accountAddedTitle" = "帳號已新增";
+"alerts.accountNoNetworkTitle" = "無法連接到網路";
+"alerts.accountNoNetworkMessage" = "因為 Jami 無法連線到分散式網路，所以無法新增帳號。請檢查您裝置的網路連線。";
+"alerts.accountDefaultErrorTitle" = "未知的錯誤";
+"alerts.accountDefaultErrorMessage" = "帳號無法建立。";
+"alerts.profileTakePhoto" = "照相";
+"alerts.profileUploadPhoto" = "上傳照片";
+"alerts.profileCancelPhoto" = "取消";
+"alerts.accountLinkedTitle" = "連結帳號";
+"alerts.dbFailedTitle" = "當啟動 Jami 時發生錯誤";
+"alerts.dbFailedMessage" = "請關閉應用程式並再次嘗試開啟它";
+"alerts.confirmBlockContact" = "您確定要阻擋這個聯絡人嗎？這個聯絡人的對話紀錄將會永久刪除。";
+"alerts.confirmBlockContactTitle" = "阻擋聯絡人";
+"alerts.confirmDeleteConversation" = "您確定您想要永久刪除此對話嗎？";
+"alerts.confirmDeleteConversationFromContact" = "您確定您想要刪除與此聯絡人的對話嗎？";
+"alerts.confirmDeleteConversationTitle" = "刪除對話";
+"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversationTitle" = "Clear Conversation";
+
+//Actions
+"actions.blockAction" = "阻擋";
+"actions.deleteAction" = "刪除";
+"actions.cancelAction" = "取消";
+"actions.clearAction" = "Clear";
+"alerts.incomingCallAllertTitle" = "來電從";
+"alerts.incomingCallButtonAccept" = "接聽";
+"alerts.incomingCallButtonIgnore" = "忽略";
+
+//Calls
+"calls.callItemTitle" = "通話";
+"calls.unknown" = "未知";
+"calls.incomingCallInfo" = "想要與您交談";
+"calls.ringing" = "響鈴中……";
+"calls.connecting" = "正在連線……";
+"calls.callFinished" = "通話結束";
+
+//Account Page
+"accountPage.devicesListHeader" = "裝置";
+"accountPage.settingsHeader" = "設定";
+"accountPage.username" = "使用者名稱：";
+"accountPage.usernameNotRegistered" = "使用者名稱：未註冊";
+"accountPage.credentialsHeader" = "帳號詳細資訊";
+"accountPage.enableProxy" = "啟用代理伺服器";
+"accountPage.blockedContacts" = "黑名單";
+"accountPage.unblockContact" = "取消阻擋";
+"accountPage.proxyAddressAlert" = "提供代理伺服器附加元件";
+"accountPage.enableProxy" = "啟用代理伺服器";
+"accountPage.noProxyExplanationLabel" = "您的裝置不會在代理伺服器停用時收到通知";
+"accountPage.saveProxyAddress" = "儲存";
+"accountPage.proxyPaceholder" = "代理伺服器地址";
+"accountPage.enableNotifications" = "啟用通知";
+"accountPage.proxyDisabledAlertTitle" = "代理伺服器已停用";
+"accountPage.proxyDisabledAlertBody" = "為了收到通知，請啟用代理伺服器";
+"accountPage.revokeDeviceTitle" = "撤銷裝置";
+"accountPage.revokeDeviceMessage" = "你想要撤銷此裝置嗎？這個動作無法復原。";
+"accountPage.revokeDeviceButton" = "撤銷";
+"accountPage.revokeDevicePlaceholder" = "輸入您的密碼";
+"accountPage.deviceRevoked" = "裝置撤銷完成";
+"accountPage.deviceRevocationProgress" = "正在撤銷……";
+"accountPage.deviceRevocationSuccess" = "裝置已撤銷";
+"accountPage.deviceRevocationTryAgain" = "再試一次";
+"accountPage.deviceRevocationWrongPassword" = "不正確的密碼";
+"accountPage.deviceRevocationUnknownDevice" = "未知的裝置";
+"accountPage.deviceRevocationError" = "裝置撤銷錯誤";
+"accountPage.namePlaceholder" = "名稱";
+"accountPage.linkDeviceTitle" = "連結其他裝置";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "No blocked contacts";
+
+//Link New Device
+"linkDevice.title" = "連結新裝置";
+"linkDevice.passwordError" = "您輸入的密碼無法解鎖這個帳號";
+"linkDevice.networkError" = "當匯出時遇到網路錯誤";
+"linkDevice.defaultError" = "當匯出時遇到錯誤";
+"linkDevice.explanationMessage" = "要完成此程序，您需要在新裝置上開啟 Jami 並選擇選項「連結這個裝置到一個帳號」。您的 PIN 碼在 10 分鐘內有效";
+"linkDevice.hudMessage" = "正在驗證";
+
+//Contact Page
+"contactPage.startAudioCall" = "開始語音通話";
+"contactPage.startVideoCall" = "開始視訊通話";
+"contactPage.sendMessage" = "傳送訊息";
+"contactPage.clearConversation" = "清除聊天紀錄";
+"contactPage.blockContact" = "阻擋聯絡人";
+"contactPage.removeConversation" = "Remove Conversation";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "正在初始化……";
+"dataTransfer.readableStatusError" = "錯誤";
+"dataTransfer.readableStatusAwaiting" = "擱置中……";
+"dataTransfer.readableStatusRefuse" = "拒絕";
+"dataTransfer.readableStatusOngoing" = "正在傳輸";
+"dataTransfer.readableStatusCanceled" = "已取消";
+"dataTransfer.readableStatusSuccess" = "完成";
+"dataTransfer.readableStatusAccept" = "接聽";
+"dataTransfer.readableStatusCancel" = "取消";
+
+//Notifications
+"notifications.incomingCall" = "Incoming Call";
+"notifications.missedCall" = "Missed Call";
+"notifications.acceptCall" = "ACCEPT";
+"notifications.refuseCall" = "REFUSE";
+"dataTransfer.readableStatusAwaiting" = "擱置中……";
+"dataTransfer.readableStatusRefuse" = "拒絕";
+"dataTransfer.readableStatusOngoing" = "正在傳輸";
+"dataTransfer.readableStatusCanceled" = "已取消";
+"dataTransfer.readableStatusSuccess" = "完成";
+"dataTransfer.readableStatusAccept" = "接聽";
+"dataTransfer.readableStatusCancel" = "取消";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
-
-/* Contextual menu action */
-"Add to contacts" = "Add to contacts";
-
-/* Contextual menu action */
-"Place video call" = "Place video call";
-
-/* Contextual menu action */
-"Place audio call" = "Place audio call";
-
-/* Contextual menu action */
-"Clear conversation" = "Clear conversation";
-
-/* Contextual menu action */
-"Block contact" = "Block contact";
-
-/* Text shown to the user */
-"Alias : " = "Alias : ";
-
-/* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
-
-/* Contextual menu entry */
-"Backup account" = "Backup account";
-
-/* Contextual menu action */
-"Call number" = "Call number";
-
-/* File transfer canceled label */
-"Canceled" = "Canceled";
-
-/* Open panel title */
-"Choose a CA list" = "Choose a CA list";
-
-/* Open panel title */
-"Choose a certificate" = "Choose a certificate";
-
-/* Open panel title */
-"Choose a directory" = "Choose a directory";
-
-/* Open panel title */
-"Choose a private key file" = "Choose a private key file";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
-
-/* Contextual menu entry */
-"Choose file" = "Choose file";
-
-/* Contextual menu entry */
-"Share screen" = "Share screen";
-
-/* No comment provided by engineer. */
-"Copy" = "Copy";
-
-/* Contextual menu action */
-"Copy name" = "Copy name";
-
-/* Contextual menu action */
-"Copy number" = "Copy number";
-
-/* Contextual menu entry */
-"Create Jami Account" = "Create Jami Account";
-
-/* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
-
-/* File transfer failed label */
-"Failed" = "Failed";
-
-/* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
-
-/* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
-
-/* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
-
-/* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
-
-/* Message from {Name} */
-"Message from %@" = "Message from %@";
-
-/* User label */
-"New SIP account" = "New SIP account";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
-
-/* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
-
-/* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
-
-/* Indication for user */
-"Password is too short" = "Password is too short";
-
-/* Indication for user */
-"Passwords don't match" = "Passwords don't match";
-
-/* Button label */
-"Pause" = "Pause";
-
-/* Button label */
-"Play" = "Play";
-
-/* Button Action */
-"Refuse" = "Refuse";
-"Accept" = "Accept";
-
-/* Contextual menu entry */
-"Remove value" = "Remove value";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
-
-/* Contextual menu entry */
-"Restore account" = "Restore account";
-
-/* Button title */
-"Revise Input" = "Revise Input";
-
-/* Text shown to the user */
-"ID : " = "ID : ";
-
-/* No comment provided by engineer. */
-"Share" = "Share";
-
-/* File transfer successful label */
-"Success" = "Success";
-
-/* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
-
-/* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
-
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
-
-/* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
-
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
-
-/* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
-
-/* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
-
-/* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
-
-/* Name used when user leave field empty */
-"Unknown" = "Unknown";
-
-/* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
-
-/* Remove account alert title */
-"Remove account" = "Remove account";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-
-/* export account button title */
-"Select archive" = "Select archive";
-
-/* link account title */
-"Link to an account" = "Link to an account";
-
-/* Welcome title */
-"Welcome to Ring" = "Welcome to Jami";
-"Create a new account" = "Create a new account";
-"Add a SIP account" = "Add a SIP account";
-
-/* Notification message */
-"Send you a contact request" = "Send you a contact request";
-
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
