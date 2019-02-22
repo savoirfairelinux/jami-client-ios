@@ -125,6 +125,8 @@ class DBManager {
     // used to create object to save to db. When inserting in table defaultID will be replaced by autoincrementedID
     let defaultID: Int64 = 1
 
+    let disposeBag = DisposeBag()
+
     init(profileHepler: ProfileDataHelper, conversationHelper: ConversationDataHelper,
          interactionHepler: InteractionDataHelper, accountProfileHelper: AccountProfileHelper) {
         self.profileHepler = profileHepler
@@ -179,8 +181,41 @@ class DBManager {
             guard let jamiId = AccountModelHelper(withAccount: account).ringId else {
                     return false
             }
-            guard let profile = try self.getRingProfile(for: jamiId) else {return false}
+            var accountProfile: Profile?
+            if let profile = try self.getRingProfile(for: jamiId) {
+                accountProfile = profile
+            } else if let profile = try self.getRingProfile(for: account.id) {
+                accountProfile = profile
+                // if profile was saved with account id update row
+                try profileHepler.updateURI(newURI: jamiId, for: profile.id)
+            }
+            guard let profile = accountProfile else {return false}
             _ = accountProfileHelper.insert(item: ProfileAccount(profile.id, account.id, true))
+            //update profile image and alias
+            VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
+                                 inFolder: VCardFolders.profile.rawValue)
+                .subscribe(onSuccess: { [unowned self] card in
+                    let name = card.familyName
+                    do {
+                        if let data = card.imageData {
+                            let dataString = data.base64EncodedString()
+                            if !name.isEmpty {
+                                try self.profileHepler
+                                    .updateImageAndName(newName: name,
+                                                        newImage: dataString,
+                                                        for: profile.id)
+                            } else {
+                                try self.profileHepler
+                                    .updateImage(newImage: dataString,
+                                                 for: profile.id)
+                            }
+                        } else if !name.isEmpty {
+                            try self.profileHepler
+                                .updateName(newName: name,
+                                            for: profile.id)
+                        }
+                    } catch {}
+                }).disposed(by: self.disposeBag)
             let contacts = delegate.injectionBag.contactsService.contacts.value
             for contact in contacts {
                 if let profile = try self.getRingProfile(for: contact.ringId) {
@@ -595,7 +630,10 @@ class DBManager {
         if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
             return profile
         }
-        let profile = self.createTemplateRingProfile(account: profileUri)
+        var profile = self.createTemplateRingProfile(account: profileUri)
+        if isAccount {
+            profile.status = ProfileStatus.trusted.rawValue
+        }
         if self.profileHepler.insert(item: profile) {
             if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
                 accountProfileHelper.insert(item: ProfileAccount(profile.id, accountId, isAccount))
