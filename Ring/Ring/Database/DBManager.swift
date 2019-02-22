@@ -125,6 +125,8 @@ class DBManager {
     // used to create object to save to db. When inserting in table defaultID will be replaced by autoincrementedID
     let defaultID: Int64 = 1
 
+    let disposeBag = DisposeBag()
+
     init(profileHepler: ProfileDataHelper, conversationHelper: ConversationDataHelper,
          interactionHepler: InteractionDataHelper, accountProfileHelper: AccountProfileHelper) {
         self.profileHepler = profileHepler
@@ -181,6 +183,20 @@ class DBManager {
             }
             guard let profile = try self.getRingProfile(for: jamiId) else {return false}
             _ = accountProfileHelper.insert(item: ProfileAccount(profile.id, account.id, true))
+            //update profile image and alias
+            VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
+                                 inFolder: VCardFolders.profile.rawValue)
+                .subscribe(onSuccess: { [unowned self] card in
+                    let name = card.familyName
+                    if let data = card.imageData {
+                        _ = self.createOrUpdateRingProfile(profileUri: jamiId,
+                                                           alias: name,
+                                                           image: String(data: data, encoding: .utf8),
+                                                           status: .trusted,
+                                                           accountId: account.id,
+                                                           isAccount: true)
+                    }
+                }).disposed(by: self.disposeBag)
             let contacts = delegate.injectionBag.contactsService.contacts.value
             for contact in contacts {
                 if let profile = try self.getRingProfile(for: contact.ringId) {
@@ -595,7 +611,10 @@ class DBManager {
         if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
             return profile
         }
-        let profile = self.createTemplateRingProfile(account: profileUri)
+        var profile = self.createTemplateRingProfile(account: profileUri)
+        if isAccount {
+            profile.status = ProfileStatus.trusted.rawValue
+        }
         if self.profileHepler.insert(item: profile) {
             if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
                 accountProfileHelper.insert(item: ProfileAccount(profile.id, accountId, isAccount))
