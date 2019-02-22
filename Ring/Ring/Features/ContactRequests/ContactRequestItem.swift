@@ -29,6 +29,17 @@ class ContactRequestItem {
     let userName = Variable("")
     let profileName = Variable("")
     let profileImageData = Variable<Data?>(nil)
+    lazy var bestName: Observable<String> = {
+        return Observable
+            .combineLatest(userName.asObservable(),
+                           profileName.asObservable()) {(userName, displayname) in
+                            if displayname.isEmpty {
+                                return userName
+                            }
+                            return displayname
+        }
+    }()
+
     let disposeBag = DisposeBag()
 
     init(withContactRequest contactRequest: ContactRequestModel, profileService: ProfilesService,
@@ -36,15 +47,16 @@ class ContactRequestItem {
         self.contactRequest = contactRequest
         self.userName.value = contactRequest.ringId
         self.profileImageData.value = self.contactRequest.vCard?.imageData
+        self.profileName.value = VCardUtils.getName(from: self.contactRequest.vCard)
         profileService.getProfile(ringId: contactRequest.ringId)
             .subscribe(onNext: { [weak self] profile in
                 if let photo = profile.photo,
                     let data = NSData(base64Encoded: photo,
                                       options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                     self?.profileImageData.value = data
-                    if let name = profile.alias, !name.isEmpty {
-                        self?.profileName.value = name
-                    }
+                }
+                if let name = profile.alias, !name.isEmpty {
+                    self?.profileName.value = name
                 }
             }).disposed(by: self.disposeBag)
     }

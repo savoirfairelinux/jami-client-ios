@@ -75,7 +75,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
             .disposed(by: self.disposeBag)
 
         // name
-        item.userName
+        item.bestName
             .asObservable()
             .observeOn(MainScheduler.instance)
             .bind(to: self.nameLabel.rx.text)

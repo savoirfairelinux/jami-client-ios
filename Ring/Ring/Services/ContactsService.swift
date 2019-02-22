@@ -226,12 +226,8 @@ extension ContactsService: ContactsAdapterDelegate {
     func incomingTrustRequestReceived(from senderAccount: String, to accountId: String, withPayload payload: Data, receivedDate: Date) {
 
         var vCard: CNContact?
-        do {
-            let vCards = try CNContactVCardSerialization.contacts(with: payload)
-            vCard = vCards.first
-        } catch {
-            vCard = nil
-            log.error("Unable to parse the vCard :\(error)")
+        if let contactVCard = CNContactVCardSerialization.parseToVCard(data: payload) {
+            vCard = contactVCard
         }
 
         //Update trust request list

@@ -51,18 +51,12 @@ class ContactRequestModel {
             self.ringId = ""
         }
 
-        if let vCardString = dictionary[ContactRequestKey.payload.rawValue] {
-            if let data = vCardString.data(using: String.Encoding.utf8), !data.isEmpty {
-                do {
-                    let vCards = try CNContactVCardSerialization.contacts(with: data)
-                    if let contactVCard = vCards.first {
-                        self.vCard = contactVCard
-                    }
-                } catch {
-                    log.error("Unable to serialize the vCard : \(error)")
-                    self.vCard = CNContact()
-                }
-            }
+        self.vCard = CNContact()
+
+        if let vCardString = dictionary[ContactRequestKey.payload.rawValue],
+            let data = vCardString.data(using: String.Encoding.utf8), !data.isEmpty,
+            let contactVCard = CNContactVCardSerialization.parseToVCard(data: data) {
+            self.vCard = contactVCard
         }
 
         if let receivedDateString = dictionary[ContactRequestKey.received.rawValue] {
