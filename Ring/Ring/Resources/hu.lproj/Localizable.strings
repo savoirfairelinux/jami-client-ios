@@ -1,205 +1,197 @@
-﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- */
+﻿
+"A network error occured during the export" = "A network error occured during the export";
 
-// Global
-"global.homeTabBarTitle" = "Főoldal";
-"global.contactRequestsTabBarTitle" = "Meghívás";
-"global.meTabBarTitle" = "Fiók";
-"global.ok" = "Rendben";
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
 
-// Scan
-"scan.badQrCode" = "Érvénytelen QR-kód";
-"scan.search" = "Keresés…";
+/* Contextual menu action */
+"Add to contacts" = "Add to contacts";
 
-// Smartlist
-"smartlist.yesterday" = "Tegnap";
-"smartlist.results" = "Keresési eredmény";
-"smartlist.conversations" = "Társalgások";
-"smartlist.searching" = "Keresés…";
-"smartlist.noResults" = "Nincs eredmény";
-"smartlist.noConversation" = "Nincs társalgás";
-"smartlist.searchBarPlaceholder" = "Név megadása…";
-"smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
-"smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
+/* Contextual menu action */
+"Place video call" = "Place video call";
 
-//Conversation
-"conversation.messagePlaceholder" = "Üzenet írása…";
+/* Contextual menu action */
+"Place audio call" = "Place audio call";
 
-//Invitations
-"invitations.noInvitations" = "Nincs meghívás";
+/* Contextual menu action */
+"Clear conversation" = "Clear conversation";
 
-// Walkthrough
+/* Contextual menu action */
+"Block contact" = "Block contact";
 
-//Welcome Screen
-"welcome.title" = "Isten hozott!";
-"welcome.text" = "A Jami egy szabad szoftver az egyetemes közlés emelvény, mely tiszteletben tartja a felhasználók szabadságát és magán szféráját";
-"welcome.linkDevice" = "Ezen eszköz fiókhoz kapcsolása";
-"welcome.createAccount" = "Jami fiók létrehozása";
+/* Text shown to the user */
+"Alias : " = "Alias : ";
 
-//Creation Profile Screen
-"createProfile.skipCreateProfile" = "Átugrani";
-"createProfile.profileCreated" = "Tovább";
-"createProfile.title" = "Profil testreszabása";
-"createProfile.enterNameLabel" = "Adja meg a megjelenítési nevet";
-"createProfile.enterNamePlaceholder" = "Név megadása";
-"createProfile.subtitle" = "A profilja a kapcsolataival kerül megosztásra. Bármikor megváltoztathatja.";
-"createProfile.createYourAvatar" = "Megtestesülés létrehozása";
+/* Error shown to the user */
+"An error occured during the export" = "An error occured during the export";
 
-//Create Account form
-"createAccount.createAccountFormTitle" = "Fiók létrehozása";
-"createAccount.chooseStrongPassword" = "Válasszon erős jelszót, amelyre emlékezni fog, hogy megvédje a Jami fiókját.";
-"createAccount.enterNewUsernamePlaceholder" = "Felhasználónév";
-"createAccount.newPasswordPlaceholder" = "Jelszó";
-"createAccount.repeatPasswordPlaceholder" = "Jelszó megerősítése";
-"createAccount.passwordCharactersNumberError" = "Legalább 6 karakter";
-"createAccount.passwordNotMatchingError" = "A jelszavak nem egyeznek";
-"createAccount.lookingForUsernameAvailability" = "a rendelkezésre állás keresése…";
-"createAccount.invalidUsername" = "Érvénytelen felhasználónév";
-"createAccount.usernameAlreadyTaken" = "A felhasználó név már foglalt";
-"createAccount.loading" = "Betöltés…";
-"createAccount.waitCreateAccountTitle" = "Fiók hozzáadása";
-"createAccount.RegisterAUsername" = "Felhasználónév regisztrálása";
-"createAccount.ChooseAPassword" = "Fiók titkosítása";
-"createAccount.PasswordInformation" = "Válasszon jelszót a helyi fiók titkosításához. Ha elfelejtette a jelszavát, nem tudja visszaszerezni fiókját.";
-"createAccount.EnableNotifications" = "Értesítések";
-"createAccount.Recommended" = "(Ajánlott)";
+/* Contextual menu entry */
+"Backup account" = "Backup account";
 
-//Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Fiók összekapcsolása";
-"linkToAccount.linkButtonTitle" = "Összekapcsoló eszköz";
-"linkToAccount.passwordPlaceholder" = "Jelszó";
-"linkToAccount.pinPlaceholder" = "PIN-kód";
-"linkToAccount.passwordLabel" = "A jelszó megadása";
-"linkToAccount.pinLabel" = "PIN-kód megadása";
-"linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához keresse meg a fiókkezelő beállításait a használni kívánt fiókot tartalmazó eszközön.  Válassza az eszközbeállításoknál a „Másik eszköz összekapcsolása ehhez a fiókhoz” lehetőséget. Meg fogja kapni az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
+/* Contextual menu action */
+"Call number" = "Call number";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "A fiók nem található";
-"alerts.accountCannotBeFoundMessage" = "Nem található a fiók a Jami hálózatában. Győződjön meg róla, hogy a meglévő eszközön a Jami-t exportálták és a hitelesítő adatok helyesek voltak.";
-"alerts.accountAddedTitle" = "Hozzáadott fiók";
-"alerts.accountNoNetworkTitle" = "Nem tud csatlakozni a hálózathoz";
-"alerts.accountNoNetworkMessage" = "Nem sikerült hozzáadni a fiókot mert a Jami nem tudott csatlakozni az elosztott hálózathoz. Ellenőrizze az eszköz csatlakoztatását.";
-"alerts.accountDefaultErrorTitle" = "Ismeretlen hiba";
-"alerts.accountDefaultErrorMessage" = "A fiókot nem lehet létrehozni.";
-"alerts.profileTakePhoto" = "Fotó készítése";
-"alerts.profileUploadPhoto" = "Fénykép feltöltése";
-"alerts.profileCancelPhoto" = "Mégse";
-"alerts.accountLinkedTitle" = "Fiók összekapcsolása…";
-"alerts.dbFailedTitle" = "Hiba történt a Jami elindításakor";
-"alerts.dbFailedMessage" = "Kérjük, hogy zárja be az alkalmazást és próbálja meg újra megnyitni";
-"alerts.confirmBlockContact" = "Biztos, hogy letiltja ezt a kapcsolatot? A társalgás előzményei ezzel a kapcsolattal véglegesen törlődni fognak.";
-"alerts.confirmBlockContactTitle" = "Kapcsolat letiltása";
-"alerts.confirmDeleteConversation" = "Biztosan végleg akarja törölni ezt a társalgást?";
-"alerts.confirmDeleteConversationFromContact" = "Biztos, hogy törli akarja a társalgást ezzel a kapcsolattal?";
-"alerts.confirmDeleteConversationTitle" = "Társalgás törlése";
-"alerts.confirmClearConversation" = "Biztos, hogy törli akarja a társalgást ezzel a kapcsolattal?";
-"alerts.confirmClearConversationTitle" = "Társalgás törlése";
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
-//Actions
-"actions.blockAction" = "Letiltás";
-"actions.deleteAction" = "Törlés";
-"actions.cancelAction" = "Mégse";
-"actions.clearAction" = "Törlés";
-"alerts.incomingCallAllertTitle" = "Bejövő hívás -tól/-től";
-"alerts.incomingCallButtonAccept" = "Elfogadás";
-"alerts.incomingCallButtonIgnore" = "Figyelmen kívül hagy";
+/* Open panel title */
+"Choose a CA list" = "Choose a CA list";
 
-//Calls
-"calls.callItemTitle" = "Hívás";
-"calls.unknown" = "Ismeretlen";
-"calls.incomingCallInfo" = "beszélni akar Önnel";
-"calls.ringing" = "Csörögni…";
-"calls.connecting" = "Kapcsolódás…";
-"calls.callFinished" = "A hívás befejeződött";
+/* Open panel title */
+"Choose a certificate" = "Choose a certificate";
 
-//Account Page
-"accountPage.devicesListHeader" = "Eszközök";
-"accountPage.settingsHeader" = "Beállítások";
-"accountPage.username" = "felhasználónév:";
-"accountPage.usernameNotRegistered" = "felhasználónév: nem regisztrált";
-"accountPage.credentialsHeader" = "Fiók Adatai";
-"accountPage.enableProxy" = "Proxy engedélyezése";
-"accountPage.blockedContacts" = "Tiltólista";
-"accountPage.unblockContact" = "Letiltás feloldása";
-"accountPage.proxyAddressAlert" = "Adja meg a proxy címet";
-"accountPage.enableProxy" = "Proxy engedélyezése";
-"accountPage.noProxyExplanationLabel" = "A készüléke nem kap értesítéseket amikor a proxy le van tiltva";
-"accountPage.saveProxyAddress" = "Mentés";
-"accountPage.proxyPaceholder" = "Proxy cím";
-"accountPage.enableNotifications" = "Értesítések engedélyezése";
-"accountPage.proxyDisabledAlertTitle" = "Proxy kiszolgáló letiltva";
-"accountPage.proxyDisabledAlertBody" = "Annak érdekében, hogy értesítéseket kaphasson kérjük, hogy engedélyezze a proxy használatát";
-"accountPage.revokeDeviceTitle" = "Eszköz visszavonása";
-"accountPage.revokeDeviceMessage" = "Biztosan visszavonja ezt az eszközt? Ez a művelet nem vonható vissza.";
-"accountPage.revokeDeviceButton" = "Visszavon";
-"accountPage.revokeDevicePlaceholder" = "Adja meg a jelszót";
-"accountPage.deviceRevoked" = "Az eszköz visszavonása befejeződött";
-"accountPage.deviceRevocationProgress" = "Visszavonása…";
-"accountPage.deviceRevocationSuccess" = "Az eszközt visszavonták";
-"accountPage.deviceRevocationTryAgain" = "Próbálja újra";
-"accountPage.deviceRevocationWrongPassword" = "Hibás jelszó";
-"accountPage.deviceRevocationUnknownDevice" = "Ismeretlen eszköz";
-"accountPage.deviceRevocationError" = "Eszköz visszavonási hiba";
-"accountPage.namePlaceholder" = "Név";
-"accountPage.linkDeviceTitle" = "Csatlakoztasson másik eszközt";
+/* Open panel title */
+"Choose a directory" = "Choose a directory";
 
-//Block List Page
-"blockListPage.noBlockedContacts" = "Nincsenek letiltott kapcsolatok";
+/* Open panel title */
+"Choose a private key file" = "Choose a private key file";
 
-//Link New Device
-"linkDevice.title" = "Csatlakoztasson egy új eszközt";
-"linkDevice.passwordError" = "A megadott jelszó nem oldja fel ezt a fiókot";
-"linkDevice.networkError" = "Hálózati hiba történt az exportálás során";
-"linkDevice.defaultError" = "Hiba történt az exportálás során";
-"linkDevice.explanationMessage" = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön és válassza az „Eszköz összekapcsolása egy fiókhoz” opciót. A PIN-kódod 10 percig érvényes.";
-"linkDevice.hudMessage" = "Ellenőrzése";
+/* Open panel prompt for 'Choose a file' */
+"Choose CA" = "Choose CA";
 
-//Contact Page
-"contactPage.startAudioCall" = "Hanghívás indítása";
-"contactPage.startVideoCall" = "Videóhívás indítása";
-"contactPage.sendMessage" = "Üzenet küldése";
-"contactPage.clearConversation" = "Csevegések törlése";
-"contactPage.blockContact" = "Kapcsolat letiltása";
-"contactPage.removeConversation" = "Társalgás törlése";
+/* Open panel prompt for 'Choose a directory' */
+"Choose directory" = "Choose directory";
 
-//DataTransfer
-"dataTransfer.readableStatusCreated" = "Szignál…";
-"dataTransfer.readableStatusError" = "Hiba";
-"dataTransfer.readableStatusAwaiting" = "Függőben levő…";
-"dataTransfer.readableStatusRefuse" = "Elutasítás";
-"dataTransfer.readableStatusOngoing" = "Hívásátirányítás";
-"dataTransfer.readableStatusCanceled" = "Törölve";
-"dataTransfer.readableStatusSuccess" = "Kész";
-"dataTransfer.readableStatusAccept" = "Elfogadás";
-"dataTransfer.readableStatusCancel" = "Mégse";
+/* Contextual menu entry */
+"Choose file" = "Choose file";
 
-//Notifications
-"notifications.incomingCall" = "Bejövő hívás";
-"notifications.missedCall" = "Nem fogadott hívás";
-"notifications.acceptCall" = "ELFOGADÁS";
-"notifications.refuseCall" = "ELUTASÍTÁS";
-"dataTransfer.readableStatusAwaiting" = "Függőben levő…";
-"dataTransfer.readableStatusRefuse" = "Elutasítás";
-"dataTransfer.readableStatusOngoing" = "Hívásátirányítás";
-"dataTransfer.readableStatusCanceled" = "Törölve";
-"dataTransfer.readableStatusSuccess" = "Kész";
-"dataTransfer.readableStatusAccept" = "Elfogadás";
-"dataTransfer.readableStatusCancel" = "Mégse";
+/* Contextual menu entry */
+"Share screen" = "Share screen";
 
+/* No comment provided by engineer. */
+"Copy" = "Copy";
+
+/* Contextual menu action */
+"Copy name" = "Copy name";
+
+/* Contextual menu action */
+"Copy number" = "Copy number";
+
+/* Contextual menu entry */
+"Create Jami Account" = "Create Jami Account";
+
+/* Contextual menu entry */
+"Create SIP Account" = "Create SIP Account";
+
+/* File transfer failed label */
+"Failed" = "Failed";
+
+/* Error message shown to user when it is impossible to migrate account */
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+
+/* Text shown to user when an error occur at registration */
+"Failed to perform lookup" = "Failed to perform lookup";
+
+/* Incoming call from {Name} */
+"Incoming call from %@" = "Incoming call from %@";
+
+/* Incoming message from {Name} */
+"Incoming message from %@" = "Incoming message from %@";
+
+/* Message from {Name} */
+"Message from %@" = "Message from %@";
+
+/* User label */
+"New SIP account" = "New SIP account";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
+
+/* Allert message when no accounts are available */
+"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+
+/* Text show to the user when password didn't match */
+"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+
+/* Indication for user */
+"Password is too short" = "Password is too short";
+
+/* Indication for user */
+"Passwords don't match" = "Passwords don't match";
+
+/* Button label */
+"Pause" = "Pause";
+
+/* Button label */
+"Play" = "Play";
+
+/* Button Action */
+"Refuse" = "Refuse";
+"Accept" = "Accept";
+
+/* Contextual menu entry */
+"Remove value" = "Remove value";
+
+/* Show advice to user */
+"Reopen account to see your hash" = "Reopen account to see your hash";
+
+/* Contextual menu entry */
+"Restore account" = "Restore account";
+
+/* Button title */
+"Revise Input" = "Revise Input";
+
+/* Text shown to the user */
+"ID : " = "ID : ";
+
+/* No comment provided by engineer. */
+"Share" = "Share";
+
+/* File transfer successful label */
+"Success" = "Success";
+
+/* No comment provided by engineer. */
+"Text Actions" = "Text Actions";
+
+/* Text shown to user when his username is available to be registered */
+"The entered username is available" = "The entered username is available";
+
+/* Text shown to user when his username is invalid to be registered */
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+
+/* Text shown to user when his username is already registered */
+"The entered username is not available" = "The entered username is not available";
+
+/* Text shown to the user */
+"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+
+/* Error shown to the user */
+"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+
+/* Title shown to user to concat with Pin */
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+
+/* Text shown to the user */
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+
+/* Name used when user leave field empty */
+"Unknown" = "Unknown";
+
+/* Error shown to user */
+"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Remove account alert title */
+"Remove account" = "Remove account";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+
+/* export account button title */
+"Select archive" = "Select archive";
+
+/* link account title */
+"Link to an account" = "Link to an account";
+
+/* Welcome title */
+"Welcome to Ring" = "Welcome to Jami";
+"Create a new account" = "Create a new account";
+"Add a SIP account" = "Add a SIP account";
+
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
