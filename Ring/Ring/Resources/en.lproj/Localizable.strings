@@ -38,6 +38,8 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "No network connectivity";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.accountsTitle" = "Accounts";
+"smartlist.addAccountButton" = "+ Add Account";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -159,6 +161,10 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Name";
 "accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.other" = "Other";
+"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Remove";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";

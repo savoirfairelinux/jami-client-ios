@@ -56,5 +56,6 @@ class BaseViewController: UINavigationController {
         self.init()
         self.navigationBar.isTranslucent = false
         self.tabBarItem = type.tabBarItem
+        self.view.backgroundColor = UIColor.white
     }
 }
