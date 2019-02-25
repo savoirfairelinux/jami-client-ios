@@ -30,6 +30,7 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive, Conversation
     }
 
     var childCoordinators = [Coordinator]()
+    var parentCoordinator: Coordinator?
 
     private let navigationViewController = BaseViewController(with: TabBarItemType.contactRequest)
     let injectionBag: InjectionBag
@@ -41,9 +42,16 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive, Conversation
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         self.contactService = injectionBag.contactsService
-        self.navigationViewController.viewModel = ContactRequestTabBarItem(with: self.injectionBag)
+        self.navigationViewController.viewModel =
+            ContactRequestTabBarItem(with: self.injectionBag)
         self.addLockFlags()
         self.callbackPlaceCall()
+        self.injectionBag.accountService
+            .currentAccountChanged
+            .subscribe(onNext: {[unowned self] _ in
+                self.navigationViewController.viewModel =
+                    ContactRequestTabBarItem(with: self.injectionBag)
+            }).disposed(by: self.disposeBag)
     }
     func addLockFlags() {
         presentingVC[VCType.contact.rawValue] = false

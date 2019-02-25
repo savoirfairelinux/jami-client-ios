@@ -36,11 +36,30 @@ class AccountModel: Equatable {
     // MARK: Public members
     var id: String = ""
     var registeringUsername = false
-    var details: AccountConfigModel?
-    var volatileDetails: AccountConfigModel?
+    var details: AccountConfigModel? {
+        willSet {
+            if let newDetails = newValue,
+                !newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)).isEmpty {
+                uri = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+            }
+        }
+    }
+    var volatileDetails: AccountConfigModel? {
+        willSet {
+            if let newDetails = newValue,
+                !newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName)).isEmpty {
+                registeredName = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+            }
+        }
+    }
     var credentialDetails = [AccountCredentialsModel]()
     var devices = [DeviceModel]()
     var onBoarded = false
+    var registeredName = ""
+    var uri = ""
+    var jamiId: String {
+        return self.uri.replacingOccurrences(of: "ring:", with: "")
+    }
 
     // MARK: Init
     convenience init(withAccountId accountId: String) {
