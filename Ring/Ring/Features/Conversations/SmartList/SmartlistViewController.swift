@@ -51,6 +51,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
 
+    // account selection
+    var accounPicker = UIPickerView()
+    let accountPickerTextView = UITextField(frame: CGRect.zero)
+    var accountTitles = [Int: String]()
+    let adapter = AccountPickerAdapter()
+
+    var accountsDismissTapRecognizer: UITapGestureRecognizer!
+
     // MARK: members
     var viewModel: SmartlistViewModel!
     fileprivate let disposeBag = DisposeBag()
@@ -72,6 +80,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.setupUI()
         self.applyL10n()
         self.configureRingNavigationBar()
+        self.confugureAccountPicker()
+        accountsDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
 
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
@@ -79,6 +89,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
          */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+
+    @objc func dismissKeyboard() {
+        accountPickerTextView.resignFirstResponder()
+        view.removeGestureRecognizer(accountsDismissTapRecognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +109,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 cancelButton.isEnabled = true
             }
         }
+       // dummy.resignFirstResponder()
     }
 
     func applyL10n() {
@@ -132,7 +148,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             }
         }).disposed(by: self.disposeBag)
 
-        let imageScanSearch = UIImage(asset: Asset.qrCodeScan) as UIImage?
+       let imageScanSearch = UIImage(asset: Asset.qrCodeScan) as UIImage?
         let scanButton   = UIButton(type: UIButtonType.custom) as UIButton
         scanButton.setImage(imageScanSearch, for: .normal)
         let scanButtonItem = UIBarButtonItem(customView: scanButton)
@@ -144,6 +160,122 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         self.navigationItem.rightBarButtonItem = scanButtonItem
 
+        //create accounts button
+        let expendAccountButton = UIButton(type: .custom)
+        expendAccountButton.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
+        expendAccountButton.setTitle("....", for: .normal)
+        expendAccountButton.setTitleColor(.jamiSecondary, for: .normal)
+        let accountButton = UIButton(type: .custom)
+        self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
+            .disposed(by: disposeBag)
+        accountButton.roundedCorners = true
+        accountButton.cornerRadius = 20
+        accountButton.clipsToBounds = true
+        accountButton.contentMode = .scaleAspectFill
+        accountButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        accountButton.imageEdgeInsets = UIEdgeInsetsMake(-4,-4,-4,-4)
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+        containerView.addSubview(expendAccountButton)
+        containerView.addSubview(accountButton)
+        let accountButtonItem = UIBarButtonItem(customView: containerView)
+        accountButtonItem.customView?.translatesAutoresizingMaskIntoConstraints = false
+        accountButtonItem.customView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        accountButtonItem.customView?.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        accountButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.openAccountsList()
+            })
+            .disposed(by: self.disposeBag)
+        expendAccountButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.openAccountsList()
+            })
+            .disposed(by: self.disposeBag)
+
+        self.navigationItem.leftBarButtonItem = accountButtonItem
+    }
+
+    func confugureAccountPicker() {
+        view.addSubview(accountPickerTextView)
+        accountPickerTextView.inputView = accounPicker
+        accounPicker.backgroundColor = .jamiNavigationBar
+
+        //Configure cells closure for the datasources
+//        let configureCell: (UIPickerViewDataSource, UIPickerViewDelegate, RxPickerViewDataSourceType, IndexPath, ConversationSection.Item)
+//            -> UIPickerV = {
+//                ( dataSource: UIPickerViewDataSource,
+//                delegate: UIPickerViewDelegate
+//                rxDataSource: RxPickerViewDataSourceType<AccountModel>,
+//                indexPath: IndexPath,
+//                conversationItem: ConversationSection.Item) in
+//
+//                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConversationCell.self)
+//                cell.configureFromItem(conversationItem)
+//                return cell
+//        }
+
+
+        self.viewModel.accounts
+            .observeOn(MainScheduler.instance)
+            .bind(to: accounPicker.rx.items(adapter: adapter))
+//            { [weak self] row, item in
+//                self?.accountTitles[row] = item.id
+//                return item.id
+//            }
+            .disposed(by: disposeBag)
+        if let account = self.viewModel.accountsService.currentAccount,
+            let row = adapter.rowForAccountId(account: account) {
+
+        accounPicker.selectRow(row, inComponent: 0, animated: true)
+        }
+
+//        self.viewModel.accounts
+//            .observeOn(MainScheduler.instance)
+//            .bind(to: accounPicker.rx.itemTitles) { [weak self] row, item in
+//                self?.accountTitles[row] = item.id
+//                return item.id
+//            }.disposed(by: disposeBag)
+        accounPicker.rx.modelSelected(AccountItem.self)
+            //.su
+            .subscribe(onNext: { model in
+                let account = model[0].account
+                self.viewModel.changeCurrentAccount(accountId: account.id)
+            })
+            .disposed(by: disposeBag)
+//        accounPicker.rx.itemSelected
+//            .asObservable()
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] item in
+//                if let accountId = self?.accountTitles[item.row] {
+//                    self?.viewModel.changeCurrentAccount(accountId: accountId)
+//                }
+//            }).disposed(by: disposeBag)
+
+        let accountsLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.view.frame.width, height: 40))
+        accountsLabel.text = L10n.Smartlist.accountsTitle
+        accountsLabel.font = UIFont.systemFont(ofSize: 25, weight: .light)
+        accountsLabel.textColor = .jamiSecondary
+        accountsLabel.textAlignment = .center
+        let addAccountButton = UIButton(type: .custom)
+        addAccountButton.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+        addAccountButton.setTitle(L10n.Smartlist.addAccountButton, for: .normal)
+        addAccountButton.setTitleColor(.jamiMain, for: .normal)
+        addAccountButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 25)
+        let flexibleBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let addBarButton = UIBarButtonItem(customView: addAccountButton)
+        let toolbar = UIToolbar()
+        toolbar.barTintColor = .jamiNavigationBar
+        toolbar.isTranslucent = false
+        toolbar.sizeToFit()
+        toolbar.center = CGPoint(x: self.view.frame.width * 0.5, y: 200)
+        toolbar.items = [flexibleBarButton, addBarButton]
+        accountPickerTextView.inputAccessoryView = toolbar
+        addAccountButton.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.startAccountCreation()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
@@ -284,6 +416,27 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchBar.text = ""
         self.searchBar.resignFirstResponder()
         self.searchResultsTableView.isHidden = true
+    }
+
+    func startAccountCreation() {
+        accountPickerTextView.resignFirstResponder()
+        self.viewModel.createAccount()
+    }
+
+    func openAccountsList() {
+        if searchBar.isFirstResponder {
+            return
+        }
+        if accountPickerTextView.isFirstResponder {
+            accountPickerTextView.resignFirstResponder()
+            return
+        }
+        accountPickerTextView.becomeFirstResponder()
+        let accountId = self.viewModel.accountsService.currentAccount!.id
+//        accounPicker.selectRow(accountTitles
+//            .filter { $0.value == accountId }
+//            .first!.key, inComponent: 0, animated: true)
+        self.view.addGestureRecognizer(accountsDismissTapRecognizer)
     }
 
     private func showClearConversationConfirmation(atIndex: IndexPath) {

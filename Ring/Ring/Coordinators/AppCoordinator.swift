@@ -30,7 +30,8 @@ import RxSwift
 /// - allSet: everything is set, the app should display its main interface
 public enum AppState: State {
     case initialLoading
-    case needToOnboard
+    case needToOnboard(animated: Bool)
+    case addAccount
     case allSet
 }
 
@@ -49,6 +50,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     var rootViewController: UIViewController {
         return self.navigationController
     }
+    var parentCoordinator: Coordinator?
 
     var childCoordinators = [Coordinator]()
     // MARK: -
@@ -79,10 +81,12 @@ final class AppCoordinator: Coordinator, StateableResponsive {
             switch state {
             case .initialLoading:
                 self.showInitialLoading()
-            case .needToOnboard:
-                self.showWalkthrough()
+            case .needToOnboard(let animated):
+                self.showWalkthrough(animated: animated)
             case .allSet:
                 self.showMainInterface()
+            case .addAccount:
+                self.addAccount()
             }
         }).disposed(by: self.disposeBag)
     }
@@ -98,7 +102,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     /// Handles the switch between the three supported screens.
     private func dispatchApplication() {
         if self.injectionBag.accountService.accounts.isEmpty {
-             self.stateSubject.onNext(AppState.needToOnboard)
+            self.stateSubject.onNext(AppState.needToOnboard(animated: true))
         } else {
              self.stateSubject.onNext(AppState.allSet)
         }
@@ -118,9 +122,10 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         self.present(viewController: alertController, withStyle: .present, withAnimation: false, disposeBag: self.disposeBag)
     }
 
-    /// Presents the walkthrough as a popup with a fade effect
-    private func showWalkthrough () {
+    private func addAccount() {
         let walkthroughCoordinator = WalkthroughCoordinator(with: self.injectionBag)
+        walkthroughCoordinator.isAccountFirst = false
+        walkthroughCoordinator.withAnimations = false
         walkthroughCoordinator.start()
 
         self.addChildCoordinator(childCoordinator: walkthroughCoordinator)
@@ -137,6 +142,27 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         }).disposed(by: self.disposeBag)
     }
 
+    /// Presents the walkthrough as a popup with a fade effect
+    private func showWalkthrough (animated: Bool) {
+        let walkthroughCoordinator = WalkthroughCoordinator(with: self.injectionBag)
+        walkthroughCoordinator.withAnimations = animated
+        walkthroughCoordinator.start()
+
+        self.addChildCoordinator(childCoordinator: walkthroughCoordinator)
+        let walkthroughViewController = walkthroughCoordinator.rootViewController
+        self.present(viewController: walkthroughViewController,
+                     withStyle: .appear,
+                     withAnimation: true,
+                     disposeBag: self.disposeBag)
+
+        walkthroughViewController.rx.controllerWasDismissed.subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
+            walkthroughCoordinator?.stateSubject.dispose()
+            self?.removeChildCoordinator(childCoordinator: walkthroughCoordinator)
+            self?.dispatchApplication()
+        }).disposed(by: self.disposeBag)
+        self.tabBarViewController.selectedIndex = 0
+    }
+
     /// Prepares the main interface, should only be executed once
     private func prepareMainInterface() {
         guard self.mainInterfaceReady == false else {
@@ -144,9 +170,13 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         }
 
         let conversationsCoordinator = ConversationsCoordinator(with: self.injectionBag)
+        conversationsCoordinator.parentCoordinator = self
         let contactRequestsCoordinator = ContactRequestsCoordinator(with: self.injectionBag)
+        contactRequestsCoordinator.parentCoordinator = self
         let meCoordinator = MeCoordinator(with: self.injectionBag)
+        meCoordinator.parentCoordinator = self
         self.tabBarViewController.tabBar.tintColor = UIColor.jamiMain
+        self.tabBarViewController.view.backgroundColor = UIColor.white
 
         self.tabBarViewController.viewControllers = [conversationsCoordinator.rootViewController,
                                                      contactRequestsCoordinator.rootViewController,

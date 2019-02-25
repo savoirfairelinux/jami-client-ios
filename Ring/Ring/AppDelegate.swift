@@ -149,42 +149,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         nameService: self.nameService,
                                                         dataTransferService: self.dataTransferService,
                                                         callService: self.callService)
-
-        self.accountService
-            .sharedResponseStream
-            .filter({ (event) in
-                return event.eventType == ServiceEventType.registrationStateChanged &&
-                    event.getEventInput(ServiceEventInput.registrationState) == Registered
-            })
-            .subscribe(onNext: { [unowned self] _ in
-                if let currentAccount = self.accountService.currentAccount, !currentAccount.onBoarded {
-                    currentAccount.onBoarded = true
-                    // make sure video is enabled
-                    let accountDetails = self.accountService.getAccountDetails(fromAccountId: currentAccount.id)
-                    accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.videoEnabled), withValue: "true")
-
-                    // set ringtone path
-                    DispatchQueue.main.async { [unowned self] in
-                        self.accountService.setRingtonePath(forAccountId: currentAccount.id)
-                    }
-
-                    // check if push notifications are enabled in the config
-                    let notificationsEnabled = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken)).isEmpty ? false : true
-                    if notificationsEnabled {
-                        self.registerVoipNotifications()
-                    }
-                    //in case if application was open when incoming call launched the push notifications
-                    // reimit new call signal to show incoming call alert
-                    self.callService.checkForIncomingCall()
-                }
-            })
-            .disposed(by: disposeBag)
-
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()
 
         self.accountService.initialAccountsLoading().subscribe(onCompleted: {
+            //set selected account if exists
             self.appCoordinator.start()
+            if let selectedAccountId = UserDefaults.standard.string(forKey: self.accountService.selectedAccountID),
+                let account = self.accountService.getAccount(fromAccountId: selectedAccountId) {
+                self.accountService.currentAccount = account
+            }
             guard let currentAccount = self.accountService.currentAccount else {
                 self.log.error("Can't get current account!")
                 return
@@ -197,6 +171,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.conversationManager?
                     .prepareConversationsForAccount(accountId: currentAccount.id, accountUri: ringID)
             }
+            self.reloadDataFor(account: currentAccount)
+            if self.accountService.proxyEnabled() {
+                self.registerVoipNotifications()
+            } else {
+                self.unregisterVoipNotifications()
+            }
+            // reimit new call signal to show incoming call alert
+            self.callService.checkForIncomingCall()
         }, onError: { _ in
             self.appCoordinator.start()
             let time = DispatchTime.now() + 1
@@ -204,15 +186,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.appCoordinator.showDatabaseError()
             }
         }).disposed(by: self.disposeBag)
+
+        self.accountService.currentAccountChanged
+            .subscribe(onNext: { account in
+                guard let currentAccount = account else {return}
+                self.reloadDataFor(account: currentAccount)
+            }).disposed(by: self.disposeBag)
         self.voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerVoipNotifications),
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
                                                object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(unregisterVoipNotifications),
-                                               name: NSNotification.Name(rawValue: NotificationName.disablePushNotifications.rawValue),
-                                               object: nil)
         self.clearBadgeNumber()
         return true
+    }
+
+    func reloadDataFor(account: AccountModel) {
+        self.contactsService.loadContacts(withAccount: account)
+        self.contactsService.loadContactRequests(withAccount: account)
+        self.presenceService.subscribeBuddies(withAccount: account, withContacts: self.contactsService.contacts.value)
+        if let ringID = AccountModelHelper(withAccount: account).ringId {
+            self.conversationManager?
+                .prepareConversationsForAccount(accountId: account.id, accountUri: ringID)
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -288,13 +283,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     @objc private func registerVoipNotifications() {
         self.requestNotificationAuthorization()
-        self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
+        if self.voipRegistry.desiredPushTypes == nil {
+            self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
+        }
     }
 
-    @objc private func unregisterVoipNotifications() {
-       self.voipRegistry.desiredPushTypes = nil
+    private func unregisterVoipNotifications() {
+        self.voipRegistry.desiredPushTypes = nil
+        self.accountService.savePushToken(token: "")
         self.accountService.setPushNotificationToken(token: "")
-        self.accountService.updatePushTokenForCurrentAccount(token: "")
     }
 
     private func requestNotificationAuthorization() {
@@ -415,8 +412,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
+        self.accountService.savePushToken(token: "")
         self.accountService.setPushNotificationToken(token: "")
-        self.accountService.updatePushTokenForCurrentAccount(token: "")
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
@@ -426,7 +423,7 @@ extension AppDelegate: PKPushRegistryDelegate {
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
         if type == PKPushType.voIP {
             let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
-            self.accountService.updatePushTokenForCurrentAccount(token: deviceTokenString)
+            self.accountService.savePushToken(token: deviceTokenString)
             self.accountService.setPushNotificationToken(token: deviceTokenString)
         }
     }

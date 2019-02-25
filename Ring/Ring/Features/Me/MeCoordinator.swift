@@ -29,6 +29,7 @@ public enum MeState: State {
     case meDetail
     case linkNewDevice
     case blockedContacts
+    case needToOnboard
 }
 
 /// This Coordinator drives the me/settings navigation
@@ -38,6 +39,8 @@ class MeCoordinator: Coordinator, StateableResponsive {
     var rootViewController: UIViewController {
         return self.navigationViewController
     }
+
+    var parentCoordinator: Coordinator?
 
     var childCoordinators = [Coordinator]()
 
@@ -56,13 +59,21 @@ class MeCoordinator: Coordinator, StateableResponsive {
             switch state {
             case .meDetail:
                 self.showMeDetail()
-
             case .linkNewDevice:
                  self.showLinkDeviceWindow()
             case .blockedContacts:
                 self.showBlockedContacts()
+            case .needToOnboard:
+                self.needToOnboard()
+
             }
         }).disposed(by: self.disposeBag)
+    }
+
+    func needToOnboard() {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.needToOnboard(animated: false))
+        }
     }
 
     func start () {

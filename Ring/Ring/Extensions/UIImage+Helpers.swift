@@ -191,4 +191,62 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage
     }
+
+    func drawText(text: String, backgroundColor: UIColor, textColor: UIColor, size: CGSize) -> UIImage? {
+        //Setups up the font attributes that will be later used to dictate how the text should be drawn
+        let textFont = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: textColor,
+            ]
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        backgroundColor.setFill()
+        UIRectFill(rect)
+        //Put the image into a rectangle as large as the original image.
+        self.draw(in: rect)
+        // Our drawing bounds
+        let textSize = text.size(withAttributes: [NSAttributedStringKey.font:textFont])
+        let textRect = CGRect(x: rect.size.width/2 - textSize.width/2, y: rect.size.height/2 - textSize.height/2,
+                              width: textSize.width, height: textSize.height)
+        text.draw(in: textRect, withAttributes: textFontAttributes)
+        let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+
+    func drawBackground(color: UIColor, size: CGSize) -> UIImage? {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+
+    class func defaultJamiAvatarFor(profileName: String?, account: AccountModel)-> UIImage {
+        let image = UIImage(asset: Asset.icContactPicture)!
+            .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        var name: String? = (profileName != nil) ? profileName :
+            !account.registeredName.isEmpty ?
+                account.registeredName : nil
+        if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+            let accountName = userNameData[account.id] as? String,
+            !accountName.isEmpty {
+            name = accountName
+        }
+        guard let username = name else {return image}
+        let scanner = Scanner(string: username.toMD5HexString().prefixString())
+        var index: UInt64 = 0
+        if scanner.scanHexInt64(&index) {
+            let fbaBGColor = avatarColors[Int(index)]
+            if !username.isSHA1() && !username.isEmpty {
+                if let avatar = image.drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: CGSize(width: 40, height: 40)) {
+                    return avatar
+                }
+            }
+        }
+        return image
+    }
 }
