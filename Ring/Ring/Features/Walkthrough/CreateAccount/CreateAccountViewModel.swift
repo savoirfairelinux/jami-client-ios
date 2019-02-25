@@ -163,6 +163,8 @@ class CreateAccountViewModel: Stateable, ViewModel {
 
     private let disposeBag = DisposeBag()
 
+    var notCancelable = true
+
     // MARK: L10n
     let createAccountTitle  = L10n.CreateAccount.createAccountFormTitle
     let createAccountButton = L10n.Welcome.createAccount

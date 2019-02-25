@@ -36,8 +36,8 @@ enum SettingsSection: SectionModelType {
     enum SectionRow {
         case device(device: DeviceModel)
         case linkNew
-        case proxy
         case blockedList
+        case removeAccount
         case sectionHeader(title: String)
         case ordinary(label: String)
         case notifications
@@ -86,52 +86,14 @@ class MeViewModel: ViewModel, Stateable {
         return self.stateSubject.asObservable()
     }()
     let disposeBag = DisposeBag()
+    var tempBag = DisposeBag()
 
     let accountService: AccountsService
     let nameService: NameService
 
      // MARK: - configure table sections
 
-    lazy var userName: Observable<String> = {
-        // return username if exists, is no start name lookup
-        guard let account = self.accountService.currentAccount else {
-            return Observable.just("")
-        }
-        let accountName = account.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName))
-        if let accountName = accountName, !accountName.isEmpty {
-            return Observable.just(accountName)
-        }
-        if let userNameData = UserDefaults.standard.dictionary(forKey: self.nameService.registeredNamesKey),
-            let name = userNameData[account.id] as? String, !name.isEmpty {
-            return Observable.just(name)
-        }
-        let accountHelper = AccountModelHelper(withAccount: account)
-        guard let uri = accountHelper.ringId else {
-            return Observable.just("")
-        }
-        let time = DispatchTime.now() + 2
-        DispatchQueue.main.asyncAfter(deadline: time) {
-            self.nameService.lookupAddress(withAccount: "", nameserver: "", address: uri)
-        }
-        return self.nameService.usernameLookupStatus
-            .filter({ lookupNameResponse in
-                return lookupNameResponse.address != nil &&
-                    lookupNameResponse.address == uri && lookupNameResponse.state == .found
-            })
-            .map({ lookupNameResponse in
-                return lookupNameResponse.name
-            })
-    }()
-
     var showActionState = Variable<ActionsState>(.noAction)
-
-    lazy var ringId: Observable<String> = {
-        if let uri = self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)) {
-            let ringId = uri.replacingOccurrences(of: "ring:", with: "")
-            return Observable.just(ringId)
-        }
-        return Observable.just("")
-    }()
 
     public func getRingId() -> String? {
         if let uri = self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)) {
@@ -160,10 +122,22 @@ class MeViewModel: ViewModel, Stateable {
         return Observable.just(.linkNewDevice(items: [.linkNew]))
     }()
 
+    lazy var removeAccount: Observable<SettingsSection> = {
+        return Observable
+            .just(.accountSettings( items: [.sectionHeader(title: ""),
+                                            .ordinary(label: L10n.AccountPage.removeAccountTitle)]))
+    }()
+
     lazy var accountSettings: Observable<SettingsSection> = {
         return Observable
             .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.settingsHeader),
-                                            .blockedList, .proxy, .notifications]))
+                                            .notifications]))
+    }()
+
+    lazy var otherSettings: Observable<SettingsSection> = {
+        return Observable
+            .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.other),
+                                            .blockedList, .removeAccount]))
     }()
 
     lazy var havePassord: Bool = {
@@ -171,45 +145,53 @@ class MeViewModel: ViewModel, Stateable {
         return AccountModelHelper(withAccount: currentAccount).havePassword
     }()
 
-    // swiftlint:disable identifier_name
-    lazy var linkedDevices: Observable<SettingsSection> = {
-        // if account does not exist or devices list empty return empty section
-        let empptySection: SettingsSection = .linkedDevices(items: [.ordinary(label: "")])
-        guard let account = self.accountService.currentAccount else {
-            return Observable.just(empptySection)
-        }
-        return self.accountService.devicesObservable(account: account)
-            .map { devices -> SettingsSection in
-                var rows: [SettingsSection.SectionRow]?
-
-                if !devices.isEmpty {
-                    rows = [.device(device: devices[0])]
-                    for i in 1 ..< devices.count {
-                        let device = devices[i]
-                        rows!.append (.device(device: device))
-                    }
-                }
-                if rows != nil {
-                    rows?.insert(.sectionHeader(title: L10n.AccountPage.devicesListHeader), at: 0)
-                    let devicesSection: SettingsSection = .linkedDevices(items: rows!)
-                    return devicesSection
-                }
-                return empptySection
-        }
-    }()
-
     lazy var settings: Observable<[SettingsSection]> = {
         Observable.combineLatest(accountCredentials,
                                  linkNewDevice,
                                  linkedDevices,
-                                 accountSettings) { (credentials, linkNew, devices, settings) in
-            return [credentials, devices, linkNew, settings]
+                                 accountSettings,
+                                 otherSettings) { (credentials, linkNew, devices, settings, other) in
+            return [credentials, devices, linkNew, settings, other]
         }
     }()
 
     required init (with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
+        self.accountService.currentAccountChanged
+            .subscribe(onNext: { [unowned self] account in
+                if let currentAccount = account {
+                    self.updateDataFor(account: currentAccount)
+                }
+            }).disposed(by: self.disposeBag)
+    }
+
+    func updateDataFor(account: AccountModel) {
+        tempBag = DisposeBag()
+        if let accountName = account.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)),
+            !accountName.isEmpty {
+            currentAccountUserName.onNext(accountName)
+        } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+            let accountName = userNameData[account.id] as? String,
+            !accountName.isEmpty {
+            currentAccountUserName.onNext(accountName)
+        } else {
+            currentAccountUserName.onNext("")
+        }
+        if let jamiId =  AccountModelHelper.init(withAccount: account).ringId {
+            currentAccountJamiId.onNext(jamiId)
+        } else {
+            currentAccountJamiId.onNext("")
+        }
+        self.accountService.devicesObservable(account: account)
+            .subscribe(onNext: { [unowned self] devices in
+                self.currentAccountDevices.onNext(devices)
+            }).disposed(by: self.tempBag)
+        self.accountService.proxyEnabled(accountID: account.id)
+            .asObservable()
+            .subscribe(onNext: { [unowned self] enable in
+                self.currentAccountProxy.onNext(enable)
+            }).disposed(by: self.tempBag)
     }
 
     func linkDevice() {
@@ -248,67 +230,91 @@ class MeViewModel: ViewModel, Stateable {
         self.accountService.revokeDevice(for: accountId, withPassword: password, deviceId: deviceId)
     }
 
-    // MARK: - DHT Proxy
+    // MARK: update for celected account
+    let currentAccountUserName = PublishSubject<String>()
+    let currentAccountJamiId = PublishSubject<String>()
+    let currentAccountDevices = PublishSubject<[DeviceModel]>()
+    let currentAccountProxy = PublishSubject<Bool>()
 
-    lazy var proxyEnabled: Variable<Bool> = {
+    lazy var userName: Observable<String> = { [unowned self] in
+        var initialValue: String = ""
         if let account = self.accountService.currentAccount {
-            return self.accountService.proxyEnabled(accountID: account.id)
+            if !account.registeredName.isEmpty {
+                initialValue = account.registeredName
+            } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+                let accountName = userNameData[account.id] as? String,
+                !accountName.isEmpty {
+                initialValue = accountName
+            }
         }
-        return Variable<Bool>(false)
+        return currentAccountUserName.share().startWith(initialValue)
     }()
 
-    lazy var proxyAddress: Variable<String> = {
+    lazy var ringId: Observable<String> = { [unowned self] in
+        var initialValue: String = ""
         if let account = self.accountService.currentAccount {
-            return self.accountService.proxyAddress(accountID: account.id)
+            let jamiId = account.jamiId
+            initialValue = jamiId
         }
-        return Variable<String>("")
+        return currentAccountJamiId.share().startWith(initialValue)
     }()
 
-    lazy var proxyDisplaybele: Observable<String> = {
-        return Observable.combineLatest(self.proxyAddress.asObservable(),
-                                        self.proxyEnabled.asObservable()) { (address, proxy) in
-                                            if !proxy {
-                                                return ""
-                                            }
-                                            return address
+    lazy var linkedDevices: Observable<SettingsSection> = { [unowned self] in
+        let empptySection: SettingsSection =
+            .linkedDevices(items: [.ordinary(label: "")])
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
+            if let account = self.accountService.currentAccount {
+                self.accountService.devicesObservable(account: account)
+                    .take(1)
+                    .subscribe(onNext: { [unowned self] profile in
+                        self.currentAccountDevices.onNext(profile)
+                    }).disposed(by: self.disposeBag)
+            }
+        })
+        return self.currentAccountDevices.share()
+            .map { devices -> SettingsSection in
+                var rows: [SettingsSection.SectionRow]?
 
+                if !devices.isEmpty {
+                    rows = [.device(device: devices[0])]
+                    for deviceIndex in 1 ..< devices.count {
+                        let device = devices[deviceIndex]
+                        rows!.append (.device(device: device))
+                    }
+                }
+                if rows != nil {
+                    rows?.insert(.sectionHeader(title: L10n.AccountPage.devicesListHeader), at: 0)
+                    let devicesSection: SettingsSection = .linkedDevices(items: rows!)
+                    return devicesSection
+                }
+                return empptySection
         }
-    }()
+        }()
 
-    func changeProxyAvailability(enable: Bool, proxyAddress: String) {
-        guard let account = self.accountService.currentAccount else {
-            return
-        }
-        self.accountService.changeProxyAvailability(accountID: account.id, enable: enable, proxyAddress: proxyAddress)
-    }
-
-    func changeProxyAddress(address: String) {
-        guard let account = self.accountService.currentAccount else {
-            return
-        }
-        self.accountService.updateProxyAddress(address: address, accountID: account.id)
-    }
-
-    // MARK: - Push Notifications
-
-    lazy var notificationsEnabled: Variable<Bool> = {
+    lazy var proxyEnabled: Observable<Bool> = { [unowned self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
         if let account = self.accountService.currentAccount {
-            return self.accountService.pushNotificationsEnabled(accountID: account.id)
+            self.accountService.proxyEnabled(accountID: account.id)
+                .asObservable()
+                .take(1)
+                .subscribe(onNext: { [unowned self] enable in
+                    self.currentAccountProxy.onNext(enable)
+                }).disposed(by: self.disposeBag)
         }
-        return Variable<Bool>(false)
+        })
+        return currentAccountProxy.share()
     }()
 
-    func enablePushNotifications(enable: Bool) {
-        if enable {
-             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
-            return
+    // MARK: Notifications
+
+    lazy var notificationsEnabled: Observable<Bool> = {
+        return Observable.combineLatest(self.notificationsPermitted.asObservable(),
+                                        self.proxyEnabled.asObservable()) { (notifications, proxy) in
+                                            return  proxy && notifications
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.disablePushNotifications.rawValue), object: nil)
-    }
+    }()
 
-    // MARK: - Local Notifications
-
-    lazy var localNotificationsEnabled: Variable<Bool> = {
+    lazy var notificationsPermitted: Variable<Bool> = {
         let variable = Variable<Bool>(LocalNotificationsHelper.isEnabled())
         UserDefaults.standard.rx
             .observe(Bool.self, enbleNotificationsKey)
@@ -320,56 +326,42 @@ class MeViewModel: ViewModel, Stateable {
         return variable
     }()
 
-    func localNotifications(enable: Bool) {
-        let currentNotificationsState = LocalNotificationsHelper.isEnabled()
-        if enable == currentNotificationsState {return}
-        if !enable {
-            DispatchQueue.main.async { [weak self] in
-                self?.notificationsEnabled.value = currentNotificationsState
-                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
-                    return
-                }
-                if UIApplication.shared.canOpenURL(settingsUrl) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(settingsUrl, completionHandler: nil)
-                    } else {
-                        UIApplication.shared.openURL(settingsUrl as URL)
-                    }
+    func enableNotifications(enable: Bool) {
+        guard let account = self.accountService.currentAccount else {return}
+        if !self.accountService.proxyEnabled() && enable == true {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
+        }
+        self.accountService.changeProxyStatus(accountID: account.id, enable: enable)
+        // if notiications not allowed open application settings
+        if enable == true && enable != notificationsPermitted.value {
+            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
                 }
             }
-        } else {
-            self.enableLocalNotifications()
         }
     }
 
-    func enableLocalNotifications() {
-        if #available(iOS 10.0, *) {
-            let current = UNUserNotificationCenter.current()
-            current.getNotificationSettings(completionHandler: { [weak self] settings in
-                switch settings.authorizationStatus {
-                case .notDetermined:
-                    break
-                case .denied:
-                    DispatchQueue.main.async {
-                        let enabled = LocalNotificationsHelper.isEnabled()
-                        self?.notificationsEnabled.value = enabled
-                        guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
-                            return
-                        }
-                        if UIApplication.shared.canOpenURL(settingsUrl) {
-                            UIApplication.shared.open(settingsUrl, completionHandler: nil)
-                        }
-                    }
-                case .authorized:
-                    break
-                case .provisional:
-                    break
-                }
-            })
-        } else {
-            if !UIApplication.shared.isRegisteredForRemoteNotifications {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
-            }
+    func isSingleAccount() -> Bool {
+        return self.accountService.accounts.count > 1
+    }
+
+    func startAccountRemoving() {
+        guard let account = self.accountService.currentAccount else {
+            return
         }
+        let allAccounts = self.accountService.accounts
+        if allAccounts.count < 1 {return}
+        if allAccounts.count == 1 {
+            UserDefaults.standard.set("", forKey: self.accountService.selectedAccountID)
+            self.stateSubject.onNext(MeState.needToOnboard)
+            self.accountService.removeAccount(id: account.id)
+            return
+        }
+        UserDefaults.standard.set(allAccounts[1].id, forKey: self.accountService.selectedAccountID)
+        self.accountService.currentAccount = allAccounts[1]
+        self.accountService.removeAccount(id: account.id)
     }
 }
