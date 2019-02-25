@@ -38,6 +38,8 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "No network connectivity";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.accountsTitle" = "Accounts";
+"smartlist.addAccountButton" = "+ Add Account";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -159,6 +161,7 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Name";
 "accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.contactManagementTitle" = "Contacts management";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";

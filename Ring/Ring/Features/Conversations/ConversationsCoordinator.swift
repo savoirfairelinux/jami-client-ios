@@ -31,6 +31,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     var childCoordinators = [Coordinator]()
+    var parentCoordinator: Coordinator?
 
     private let navigationViewController = BaseViewController(with: TabBarItemType.chat)
     let injectionBag: InjectionBag
@@ -49,6 +50,16 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.conversationService = injectionBag.conversationsService
         self.addLockFlags()
 
+        self.stateSubject.subscribe(onNext: { [unowned self] (state) in
+            guard let state = state as? ConversationState else { return }
+            switch state {
+            case .createNewAccount:
+                self.createNewAccount()
+            default:
+                break
+            }
+        }).disposed(by: self.disposeBag)
+
         self.callService.newCall.asObservable()
             .map({ call in
             return call
@@ -59,6 +70,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
         NotificationCenter.default.addObserver(self, selector: #selector(self.incomingCall(_:)), name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue), object: nil)
+
+        self.accountService.currentAccountChanged
+            .subscribe(onNext: { value in
+                self.navigationViewController.viewModel =
+                    ChatTabBarItemViewModel(with: self.injectionBag)
+            }).disposed(by: self.disposeBag)
     }
 
     @objc func incomingCall(_ notification: NSNotification) {
@@ -67,6 +84,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 return
         }
         self.answerIncomingCall(call: call)
+    }
+
+    func createNewAccount() {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.addAccount)
+        }
     }
 
     func puchConversation(participantId: String) {

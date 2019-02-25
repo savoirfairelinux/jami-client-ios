@@ -32,6 +32,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var welcomeTextLabel: UILabel!
     @IBOutlet weak var linkDeviceButton: DesignableButton!
     @IBOutlet weak var createAccountButton: DesignableButton!
+    @IBOutlet weak var cancellButton: UIButton!
 
     // MARK: constraints
     @IBOutlet weak var ringLogoBottomConstraint: NSLayoutConstraint!
@@ -47,13 +48,21 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
-        self.initialAnimation()
+        if self.viewModel.isAnimatable {
+           self.initialAnimation()
+        } else {
+            self.ringLogoBottomConstraint.constant = -200
+            self.welcomeTextLabel.alpha = 1
+            self.createAccountButton.alpha = 1
+            self.linkDeviceButton.alpha = 1
+        }
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.linkDeviceButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         // Bind ViewModel to View
         self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
         self.viewModel.createAccount.bind(to: self.createAccountButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
         self.viewModel.linkDevice.bind(to: self.linkDeviceButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
+        Observable.just(self.viewModel.notCancelable).bind(to: self.cancellButton.rx.isHidden).disposed(by: self.disposeBag)
 
         // Bind View Actions to ViewModel
         self.createAccountButton.rx.tap.subscribe(onNext: { [unowned self] in
@@ -62,6 +71,10 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         self.linkDeviceButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.viewModel.proceedWithLinkDevice()
+        }).disposed(by: self.disposeBag)
+
+        self.cancellButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.viewModel.cancelWalkthrough()
         }).disposed(by: self.disposeBag)
     }
 

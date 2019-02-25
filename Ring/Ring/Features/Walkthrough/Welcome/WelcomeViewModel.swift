@@ -37,6 +37,10 @@ class WelcomeViewModel: Stateable, ViewModel {
 
     static var count = 0
 
+    var notCancelable = true
+
+    var isAnimatable = true
+
     required init (with injectionBag: InjectionBag) {
     }
 
@@ -46,5 +50,9 @@ class WelcomeViewModel: Stateable, ViewModel {
 
     func proceedWithLinkDevice() {
         self.stateSubject.onNext(WalkthroughState.welcomeDone(withType: .linkDevice))
+    }
+
+    func cancelWalkthrough() {
+        self.stateSubject.onNext(WalkthroughState.profileCreated)
     }
 }

@@ -41,7 +41,18 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.model = EditProfileViewModel()
+        self.model.profileImage
+            .bind(to: self.profileImageView.rx.image)
+            .disposed(by: disposeBag)
+
+        self.model.profileName
+            .bind(to: self.profileName.rx.text)
+            .disposed(by: disposeBag)
+
+        //Binds the keyboard Send button action to the ViewModel
+        self.profileName.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
+            self.model.updateName(self.profileName.text!)
+        }).disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,22 +65,9 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         profileName.returnKeyType = .done
         profileName.autocorrectionType = .no
 
-        self.model.profileImage
-            .bind(to: self.profileImageView.rx.image)
-            .disposed(by: disposeBag)
-
-        self.model.profileName
-            .bind(to: self.profileName.rx.text)
-            .disposed(by: disposeBag)
-
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(tapGestureRecognizer)
-
-        //Binds the keyboard Send button action to the ViewModel
-        self.profileName.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
-           self.model.updateName(self.profileName.text!)
-        }).disposed(by: disposeBag)
     }
 
     func resetProfileName() {

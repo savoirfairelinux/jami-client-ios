@@ -39,6 +39,8 @@ class MeCoordinator: Coordinator, StateableResponsive {
         return self.navigationViewController
     }
 
+    var parentCoordinator: Coordinator?
+
     var childCoordinators = [Coordinator]()
 
     private let navigationViewController = BaseViewController(with: TabBarItemType.account)

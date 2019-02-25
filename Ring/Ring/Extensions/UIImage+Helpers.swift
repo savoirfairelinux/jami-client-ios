@@ -191,4 +191,37 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage
     }
+
+    func drawText(text: String, backgroundColor: UIColor, textColor: UIColor, size: CGSize) -> UIImage? {
+        //Setups up the font attributes that will be later used to dictate how the text should be drawn
+        let textFont = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: textColor,
+            ]
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        backgroundColor.setFill()
+        UIRectFill(rect)
+        //Put the image into a rectangle as large as the original image.
+        self.draw(in: rect)
+        // Our drawing bounds
+        let textSize = text.size(withAttributes: [NSAttributedStringKey.font:textFont])
+        let textRect = CGRect(x: rect.size.width/2 - textSize.width/2, y: rect.size.height/2 - textSize.height/2,
+                              width: textSize.width, height: textSize.height)
+        text.draw(in: textRect, withAttributes: textFontAttributes)
+        let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+
+    func drawBackground(color: UIColor, size: CGSize) -> UIImage? {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 }
