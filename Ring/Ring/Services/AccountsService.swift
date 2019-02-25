@@ -59,7 +59,7 @@ class AccountsService: AccountAdapterDelegate {
      */
     private let log = SwiftyBeaver.self
 
-    private let defaultProxyAddress = "dhtproxy.ring.cx:80"
+    let selectedAccountID = "SELECTED_ACCOUNT_ID"
 
     /**
      Used to register the service to daemon events, injected by constructor.
@@ -102,6 +102,10 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    var accountsObservable = Variable<[AccountModel]>([AccountModel]())
+
+    let currentAccountChanged = PublishSubject<AccountModel?>()
+
     /**
      Public shared stream forwarding the events of the responseStream.
      External observers must subscribe to this stream to get results.
@@ -138,6 +142,7 @@ class AccountsService: AccountAdapterDelegate {
             } else {
                 self.accountList.append(newValue!)
             }
+            currentAccountChanged.onNext(currentAccount)
         }
     }
 
@@ -157,12 +162,25 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     fileprivate func loadAccountsFromDaemon() {
+        let selectedAccount = self.currentAccount
+        self.accountList.removeAll()
         for accountId in accountAdapter.getAccountList() {
             if  let id = accountId as? String {
                 self.accountList.append(AccountModel(withAccountId: id))
             }
         }
         reloadAccounts()
+        accountsObservable.value = self.accountList
+        if selectedAccount != nil {
+            let currentAccount = self.accountList.filter({ account in
+                return account == selectedAccount
+            }).first
+            if let currentAccount = currentAccount {
+                let index = self.accountList.index(of: currentAccount)
+                self.accountList.remove(at: index!)
+                self.accountList.insert(currentAccount, at: 0)
+            }
+        }
     }
 
     fileprivate func loadDatabases() -> Bool {
@@ -237,6 +255,7 @@ class AccountsService: AccountAdapterDelegate {
     /// - Returns: an observable of an AccountModel: the created one
     func addRingAccount(username: String?, password: String, enable: Bool) -> Observable<AccountModel> {
         //~ Single asking the daemon to add a new account with the associated metadata
+        var newAccountId = ""
         let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
             do {
                 var ringDetails = try self.getRingInitialAccountDetails()
@@ -250,6 +269,7 @@ class AccountsService: AccountAdapterDelegate {
                 guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
                     throw AddAccountError.unknownError
                 }
+                newAccountId = accountId
                 let account = try self.buildAccountFromDaemon(accountId: accountId)
                 single(.success(account))
             } catch {
@@ -262,15 +282,16 @@ class AccountsService: AccountAdapterDelegate {
         //~ Filter the daemon signals to isolate the "account created" one.
         let filteredDaemonSignals = self.sharedResponseStream
             .filter { (serviceEvent) -> Bool in
-            if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
-                throw AccountCreationError.generic
-            } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                throw AccountCreationError.network
-            }
-            let isRegistrationStateChanged = serviceEvent.eventType == ServiceEventType.registrationStateChanged
-            let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
-            let notRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Unregistered
-            return isRegistrationStateChanged && (isRegistered || notRegistered)
+                if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId {return false}
+                if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
+                    throw AccountCreationError.generic
+                } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
+                    throw AccountCreationError.network
+                }
+                let isRegistrationStateChanged = serviceEvent.eventType == ServiceEventType.registrationStateChanged
+                let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
+                let notRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Unregistered
+                return isRegistrationStateChanged && (isRegistered || notRegistered)
         }
 
         //~ Make sure that we have the correct account added in the daemon, and return it.
@@ -284,14 +305,18 @@ class AccountsService: AccountAdapterDelegate {
                     throw AddAccountError.unknownError
                 }
                 _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id)
+                self.loadAccountsFromDaemon()
                 return accountModel
             }.take(1)
             .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
+                self.currentAccount = accountModel
+                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
                 return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
             })
     }
 
     func linkToRingAccount(withPin pin: String, password: String, enable: Bool) -> Observable<AccountModel> {
+        var newAccountId = ""
         //~ Single asking the daemon to add a new account with the associated metadata
         let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
             do {
@@ -302,6 +327,7 @@ class AccountsService: AccountAdapterDelegate {
                 guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
                     throw AddAccountError.unknownError
                 }
+                newAccountId = accountId
                 let account = try self.buildAccountFromDaemon(accountId: accountId)
                 single(.success(account))
             } catch {
@@ -312,6 +338,7 @@ class AccountsService: AccountAdapterDelegate {
         })
         //~ Filter the daemon signals to isolate the "account created" one.
         let filteredDaemonSignals = self.sharedResponseStream.filter { (serviceEvent) -> Bool in
+            if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId {return false}
             if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
                 throw AccountCreationError.linkError
             } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
@@ -332,9 +359,12 @@ class AccountsService: AccountAdapterDelegate {
                     throw AddAccountError.unknownError
                 }
                 _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id)
+                self.loadAccountsFromDaemon()
                 return accountModel
             }.take(1)
             .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
+                self.currentAccount = accountModel
+                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
                 return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
             })
     }
@@ -499,6 +529,9 @@ class AccountsService: AccountAdapterDelegate {
             throw AddAccountError.templateNotConform
         }
         accountDetails!.updateValue("sipinfo", forKey: ConfigKey.accountDTMFType.rawValue)
+        accountDetails!.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
+        let ringtonePath = Bundle.main.url(forResource: "default", withExtension: "wav")!
+        accountDetails!.updateValue(ringtonePath.path, forKey: ConfigKey.ringtonePath.rawValue)
         return accountDetails!
     }
 
@@ -511,7 +544,6 @@ class AccountsService: AccountAdapterDelegate {
         do {
             var defaultDetails = try getInitialAccountDetails()
             defaultDetails.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
-            defaultDetails.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
             return defaultDetails
         } catch {
             throw error
@@ -521,6 +553,15 @@ class AccountsService: AccountAdapterDelegate {
     func removeAccount(_ row: Int) {
         if row < accountList.count {
             self.accountAdapter.removeAccount(accountList[row].id)
+        }
+    }
+
+    func removeAccount(id: String) {
+        if self.getAccount(fromAccountId: id) == nil {return}
+        self.accountAdapter.removeAccount(id)
+        self.loadAccountsFromDaemon()
+        if self.getAccount(fromAccountId: id) == nil {
+            self.dbManager.removeDBForAccount(accountId: id)
         }
     }
 
@@ -600,24 +641,6 @@ class AccountsService: AccountAdapterDelegate {
         self.accountAdapter.pushNotificationReceived("", message: notificationData)
     }
 
-    // MARK: DHT Proxy
-
-    func enableProxy(accountID: String, enable: Bool, proxyAddress: String) {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled), withValue: enable.toString())
-        if enable {
-            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxyAddress)
-        }
-        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
-        var event = ServiceEvent(withEventType: .proxyEnabled)
-        event.addEventInput(.state, value: enable)
-        event.addEventInput(.accountId, value: accountID)
-        if enable {
-            event.addEventInput(.proxyAddress, value: proxyAddress)
-        }
-        self.responseStream.onNext(event)
-    }
-
     func getCurrentProxyState(accountID: String) -> Bool {
         var proxyEnabled = false
         let accountDetails = self.getAccountDetails(fromAccountId: accountID)
@@ -627,45 +650,12 @@ class AccountsService: AccountAdapterDelegate {
         return proxyEnabled
     }
 
-    func proxyAddress(accountID: String) -> Variable<String> {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-        var proxyAddress = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer))
-        if proxyAddress.isEmpty {
-            proxyAddress = defaultProxyAddress
+    func savePushToken(token: String) {
+        for account in accounts {
+            let accountDetails = self.getAccountDetails(fromAccountId: account.id)
+            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken), withValue: token)
+            self.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
         }
-        let variable = Variable<String>(proxyAddress)
-        self.sharedResponseStream
-            .filter({ event -> Bool in
-                if let accountId: String = event.getEventInput(.accountId) {
-                    return event.eventType == ServiceEventType.proxyEnabled
-                        && accountId == accountID
-                }
-                return false
-            }).subscribe(onNext: { (event) in
-                if let address: String = event.getEventInput(.proxyAddress) {
-                    variable.value = address
-                }
-            }).disposed(by: self.disposeBag)
-        return variable
-    }
-
-    func pushNotificationsEnabled(accountID: String) -> Variable<Bool> {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-        let notificationsEnabled = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken)).isEmpty ? false : true
-        let variable = Variable<Bool>(notificationsEnabled)
-        self.sharedResponseStream
-            .filter({ event -> Bool in
-                if let accountId: String = event.getEventInput(.accountId) {
-                    return event.eventType == ServiceEventType.notificationEnabled
-                        && accountId == accountID
-                }
-                return false
-            }).subscribe(onNext: { (event) in
-                if let state: Bool = event.getEventInput(.state) {
-                    variable.value = state
-                }
-            }).disposed(by: self.disposeBag)
-        return variable
     }
 
     func proxyEnabled(accountID: String) -> Variable<Bool> {
@@ -685,42 +675,26 @@ class AccountsService: AccountAdapterDelegate {
         return variable
     }
 
-    func changeProxyAvailability(accountID: String, enable: Bool, proxyAddress: String) {
-        let proxyState = self.getCurrentProxyState(accountID: accountID)
-
-        if proxyState == enable {
-            return
-        }
-        self.enableProxy(accountID: accountID, enable: enable, proxyAddress: proxyAddress)
-
-        //disable push notifications
-        if !enable {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.disablePushNotifications.rawValue), object: nil)
-        }
-    }
-
-    func updateProxyAddress(address: String, accountID: String) {
+    func changeProxyStatus(accountID: String, enable: Bool) {
         let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: address)
-        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
-        var event = ServiceEvent(withEventType: .proxyEnabled)
-        event.addEventInput(.accountId, value: accountID)
-        event.addEventInput(.proxyAddress, value: address)
-        self.responseStream.onNext(event)
+        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) != enable.toString() {
+            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled), withValue: enable.toString())
+            self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
+            var event = ServiceEvent(withEventType: .proxyEnabled)
+            event.addEventInput(.state, value: enable)
+            event.addEventInput(.accountId, value: accountID)
+            self.responseStream.onNext(event)
+        }
     }
 
-    func updatePushTokenForCurrentAccount(token: String) {
-        guard let account = self.currentAccount else {
-            return
+    func proxyEnabled() -> Bool {
+        for account in self.accounts {
+            let accountDetails = self.getAccountDetails(fromAccountId: account.id)
+            if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) == "true" {
+                return true
+            }
         }
-        let accountDetails = self.getAccountDetails(fromAccountId: account.id)
-        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken), withValue: token)
-        self.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
-        var event = ServiceEvent(withEventType: .notificationEnabled)
-        let notificationsEnabled = token.isEmpty ? false : true
-        event.addEventInput(.accountId, value: account.id)
-        event.addEventInput(.state, value: notificationsEnabled)
-        self.responseStream.onNext(event)
+        return false
     }
 
     // MARK: - observable account data
