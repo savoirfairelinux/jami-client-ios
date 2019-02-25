@@ -77,6 +77,7 @@ class ContactsService {
         if let contacts = contactsDictionaries?.map({ contactDict in
             return ContactModel(withDictionary: contactDict)
         }) {
+            self.contacts.value.removeAll()
             for contact in contacts {
                 if self.contacts.value.index(of: contact) == nil {
                     self.contacts.value.append(contact)
@@ -87,6 +88,7 @@ class ContactsService {
     }
 
     func loadContactRequests(withAccount account: AccountModel) {
+        self.contactRequests.value.removeAll()
         //Load trust requests from daemon
         let trustRequestsDictionaries = self.contactsAdapter.trustRequests(withAccountId: account.id)
 

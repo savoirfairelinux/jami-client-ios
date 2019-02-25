@@ -231,6 +231,10 @@ class DBManager {
         }
     }
 
+    func removeDBForAccount(accountId: String) {
+        self.dbConnections.removeDBForAccount(account: accountId)
+    }
+
     // swiftlint:disable:next function_parameter_count
     func saveMessage(for accountId: String, with contactUri: String,
                      message: MessageModel, incoming: Bool,
