@@ -32,6 +32,8 @@ enum UsernameValidationStatus {
     case valid
 }
 
+let registeredNamesKey = "REGISTERED_NAMES_KEY"
+
 class NameService: NameRegistrationAdapterDelegate {
     /**
      logguer
@@ -46,8 +48,6 @@ class NameService: NameRegistrationAdapterDelegate {
     fileprivate var delayedLookupNameCall: DispatchWorkItem?
 
     fileprivate let lookupNameCallDelay = 0.5
-
-    let registeredNamesKey = "REGISTERED_NAMES_KEY"
 
     /**
      Status of the current username validation request

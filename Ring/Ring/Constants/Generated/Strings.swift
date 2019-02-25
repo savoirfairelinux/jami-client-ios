@@ -43,6 +43,8 @@ internal enum L10n {
     internal static let namePlaceholder = L10n.tr("Localizable", "accountPage.namePlaceholder")
     /// Your device won't receive notifications when proxy is disabled
     internal static let noProxyExplanationLabel = L10n.tr("Localizable", "accountPage.noProxyExplanationLabel")
+    /// Other
+    internal static let other = L10n.tr("Localizable", "accountPage.other")
     /// Provide proxy address
     internal static let proxyAddressAlert = L10n.tr("Localizable", "accountPage.proxyAddressAlert")
     /// In order to receive notifications, please enable proxy
@@ -51,6 +53,12 @@ internal enum L10n {
     internal static let proxyDisabledAlertTitle = L10n.tr("Localizable", "accountPage.proxyDisabledAlertTitle")
     /// Proxy address
     internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder")
+    /// Remove
+    internal static let removeAccountButton = L10n.tr("Localizable", "accountPage.removeAccountButton")
+    /// By clicking "Remove" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.
+    internal static let removeAccountMessage = L10n.tr("Localizable", "accountPage.removeAccountMessage")
+    /// Remove account
+    internal static let removeAccountTitle = L10n.tr("Localizable", "accountPage.removeAccountTitle")
     /// Revoke
     internal static let revokeDeviceButton = L10n.tr("Localizable", "accountPage.revokeDeviceButton")
     /// Are you sure you want to revoke this device? This action could not be undone.
@@ -330,6 +338,10 @@ internal enum L10n {
   }
 
   internal enum Smartlist {
+    /// Accounts
+    internal static let accountsTitle = L10n.tr("Localizable", "smartlist.accountsTitle")
+    /// + Add Account
+    internal static let addAccountButton = L10n.tr("Localizable", "smartlist.addAccountButton")
     /// Be sure cellular access is granted in your settings
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess")
     /// Conversations
