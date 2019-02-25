@@ -32,31 +32,36 @@ class EditProfileViewModel {
     let accountService: AccountsService
 
     lazy var profileImage: Observable<UIImage?> = { [unowned self] in
-        guard let account = self.accountService.currentAccount else {
-                    return Observable.just(defaultImage)
-        }
-        return self.profileService.getAccountProfile(accountId: account.id)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
+            if let account = self.accountService.currentAccount {
+                self.profileService.getAccountProfile(accountId: account.id)
+                    .take(1)
+                    .subscribe(onNext: { profile in
+                        self.profileForCurrentAccount.onNext(profile)
+                    }).disposed(by: self.disposeBag)
+            }
+        })
+        return profileForCurrentAccount.share()
             .map({ profile in
                 if let photo = profile.photo,
                     let data = NSData(base64Encoded: photo,
-                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                                      options: NSData.Base64DecodingOptions
+                                        .ignoreUnknownCharacters) as Data? {
                     self.image = UIImage(data: data)
-                    return  UIImage(data: data)
+                    return UIImage(data: data)!
                 }
-                return self.defaultImage
+                return UIImage(named: "add_avatar")!
             })
         }()
 
+    var profileForCurrentAccount = PublishSubject<AccountProfile>()
+
     lazy var profileName: Observable<String?> = { [unowned self] in
-        guard let account = self.accountService.currentAccount
-            else {
-                    return Observable.just("")
-        }
-        return self.profileService.getAccountProfile(accountId: account.id)
+        return profileForCurrentAccount.share()
             .map({ profile in
-                if let alias = profile.alias, !alias.isEmpty {
-                    self.name = alias
-                    return alias
+                if let name = profile.alias {
+                    self.name = name
+                    return name
                 }
                 return ""
             })
@@ -65,6 +70,19 @@ class EditProfileViewModel {
     init(profileService: ProfilesService, accountService: AccountsService) {
         self.profileService = profileService
         self.accountService = accountService
+        self.accountService.currentAccountChanged
+            .subscribe(onNext: { [unowned self] account in
+                if let selectedAccount = account {
+                    self.updateProfileInfoFor(accountId: selectedAccount.id)
+                }
+            }).disposed(by: self.disposeBag)
+      }
+
+    func updateProfileInfoFor(accountId: String) {
+        self.profileService.getAccountProfile(accountId: accountId)
+            .subscribe(onNext: { [unowned self] profile in
+                self.profileForCurrentAccount.onNext(profile)
+            }).disposed(by: self.disposeBag)
     }
 
     func saveProfile() {
