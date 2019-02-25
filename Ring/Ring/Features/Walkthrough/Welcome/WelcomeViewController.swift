@@ -47,14 +47,33 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
-        self.initialAnimation()
+        if self.viewModel.isAnimatable {
+           self.initialAnimation()
+        } else {
+            self.ringLogoBottomConstraint.constant = -200
+            self.welcomeTextLabel.alpha = 1
+            self.createAccountButton.alpha = 1
+            self.linkDeviceButton.alpha = 1
+        }
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.linkDeviceButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         // Bind ViewModel to View
         self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
         self.viewModel.createAccount.bind(to: self.createAccountButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
         self.viewModel.linkDevice.bind(to: self.linkDeviceButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
-
+        if !self.viewModel.notCancelable {
+            let cancelButton = UIButton(type: .custom)
+            cancelButton.setTitleColor(.jamiMain, for: .normal)
+            cancelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 25)
+            cancelButton.setTitle(L10n.Actions.cancelAction, for: .normal)
+            let buttonItem = UIBarButtonItem(customView: cancelButton)
+            cancelButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+                .subscribe(onNext: { [unowned self] in
+                    self.viewModel.cancelWalkthrough()
+                })
+                .disposed(by: self.disposeBag)
+            self.navigationItem.leftBarButtonItem = buttonItem
+        }
         // Bind View Actions to ViewModel
         self.createAccountButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.viewModel.proceedWithAccountCreation()
