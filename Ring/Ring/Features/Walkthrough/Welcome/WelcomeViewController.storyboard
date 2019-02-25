@@ -59,13 +59,22 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xei-Sg-bpq">
+                                <rect key="frame" x="20" y="44" width="75" height="42"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.21176470589999999" green="0.49019607840000001" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="40" id="0hJ-6T-D3J"/>
                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" id="2w4-nZ-VwS"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="30" id="99p-KU-QhW"/>
+                            <constraint firstItem="Xei-Sg-bpq" firstAttribute="top" secondItem="hvJ-fJ-PMc" secondAttribute="top" id="OLY-p0-XQg"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="leading" secondItem="hvJ-fJ-PMc" secondAttribute="leading" priority="750" constant="40" id="OTd-qD-as2"/>
+                            <constraint firstItem="hvJ-fJ-PMc" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xei-Sg-bpq" secondAttribute="trailing" constant="20" id="PAu-OI-Qg3"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="U37-r7-lNe"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="YLx-WX-rgL"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="cYv-WZ-CCB"/>
@@ -74,11 +83,13 @@
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="uLc-95-Qpb"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="ukg-Rd-bL3"/>
                             <constraint firstItem="hvJ-fJ-PMc" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" priority="750" constant="40" id="vGg-V2-7OH"/>
+                            <constraint firstItem="Xei-Sg-bpq" firstAttribute="leading" secondItem="hvJ-fJ-PMc" secondAttribute="leading" constant="20" id="xZC-vL-8nE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hvJ-fJ-PMc"/>
                     </view>
                     <navigationItem key="navigationItem" id="SVR-Ry-7d7"/>
                     <connections>
+                        <outlet property="cancellButton" destination="Xei-Sg-bpq" id="Aea-Ot-0L5"/>
                         <outlet property="createAccountButton" destination="bu0-90-MB5" id="YNt-Tc-Snc"/>
                         <outlet property="linkDeviceButton" destination="QLK-gs-fOJ" id="AXP-0r-10g"/>
                         <outlet property="ringLogoBottomConstraint" destination="2w4-nZ-VwS" id="QZo-N3-iCa"/>

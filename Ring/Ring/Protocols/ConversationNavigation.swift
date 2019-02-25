@@ -27,6 +27,7 @@ enum ConversationState: State {
     case conversationDetail(conversationViewModel: ConversationViewModel)
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode()
+    case createNewAccount()
 }
 
 protocol ConversationNavigation: class {
@@ -51,6 +52,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 self.presentContactInfo(conversation: conversationModel)
             case .qrCode:
                 self.openQRCode()
+            default:
+                break
             }
         }).disposed(by: self.disposeBag)
     }

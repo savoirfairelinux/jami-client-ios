@@ -51,6 +51,8 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
     }
 
     var childCoordinators = [Coordinator]()
+    var parentCoordinator: Coordinator?
+    var isAccountFirst: Bool = true
 
     private let navigationViewController = UINavigationController()
     private let injectionBag: InjectionBag
@@ -77,6 +79,8 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
 
     func start () {
         let welcomeViewController = WelcomeViewController.instantiate(with: self.injectionBag)
+        welcomeViewController.viewModel.notCancelable = isAccountFirst
+        welcomeViewController.viewModel.isAnimatable = isAccountFirst
         self.present(viewController: welcomeViewController, withStyle: .show, withAnimation: false, withStateable: welcomeViewController.viewModel)
     }
 

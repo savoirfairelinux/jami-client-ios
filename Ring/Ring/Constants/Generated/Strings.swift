@@ -15,6 +15,8 @@ internal enum L10n {
   internal enum AccountPage {
     /// Block List
     internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
+    /// Contacts management
+    internal static let contactManagementTitle = L10n.tr("Localizable", "accountPage.contactManagementTitle")
     /// Account Details
     internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader")
     /// Device revocation error
@@ -330,6 +332,10 @@ internal enum L10n {
   }
 
   internal enum Smartlist {
+    /// Accounts
+    internal static let accountsTitle = L10n.tr("Localizable", "smartlist.accountsTitle")
+    /// + Add Account
+    internal static let addAccountButton = L10n.tr("Localizable", "smartlist.addAccountButton")
     /// Be sure cellular access is granted in your settings
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess")
     /// Conversations
