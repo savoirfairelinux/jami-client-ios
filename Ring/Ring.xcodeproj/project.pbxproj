@@ -124,6 +124,10 @@
 		0E49097C1FEACA4B005CAA50 /* CallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */; };
 		0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E68571020238546008B0717 /* ConversationNavigation.swift */; };
 		0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6949781FA7E71C0029B60A /* BaseViewController.swift */; };
+		0E6F544D223BFE3E00ECC3CE /* DisposableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F544C223BFE3E00ECC3CE /* DisposableCell.swift */; };
+		0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F544E223C0ED600ECC3CE /* AccountPickerAdapter.swift */; };
+		0E6F5451223C3C4F00ECC3CE /* AccountItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6F5450223C3C4F00ECC3CE /* AccountItemView.xib */; };
+		0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F5452223C3C7500ECC3CE /* AccountItemView.swift */; };
 		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
 		0E7CF4DB20164B6700CD967D /* ButtonsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DA20164B6700CD967D /* ButtonsContainerView.swift */; };
 		0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */; };
@@ -435,6 +439,10 @@
 		0E63F1F3202907090001F248 /* Ring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ring.entitlements; sourceTree = "<group>"; };
 		0E68571020238546008B0717 /* ConversationNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNavigation.swift; sourceTree = "<group>"; };
 		0E6949781FA7E71C0029B60A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		0E6F544C223BFE3E00ECC3CE /* DisposableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposableCell.swift; sourceTree = "<group>"; };
+		0E6F544E223C0ED600ECC3CE /* AccountPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountPickerAdapter.swift; path = Ring/Features/Conversations/SmartList/Cells/AccountPickerAdapter.swift; sourceTree = SOURCE_ROOT; };
+		0E6F5450223C3C4F00ECC3CE /* AccountItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountItemView.xib; sourceTree = "<group>"; };
+		0E6F5452223C3C7500ECC3CE /* AccountItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountItemView.swift; sourceTree = "<group>"; };
 		0E72374920460320006B0C7D /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		0E7CF4DA20164B6700CD967D /* ButtonsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsContainerView.swift; sourceTree = "<group>"; };
 		0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsContainerViewModel.swift; sourceTree = "<group>"; };
@@ -1137,6 +1145,7 @@
 				0E20E4C22031FEFF0087C868 /* BlockListCell */,
 				0EAA9DAD2029F054005E245C /* Proxy */,
 				0E5AFE0B1F8EBC1E0040D539 /* DeviceCell */,
+				0E6F544C223BFE3E00ECC3CE /* DisposableCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1393,8 +1402,11 @@
 		1A2D18F91F292DA000B2C785 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0E6F544E223C0ED600ECC3CE /* AccountPickerAdapter.swift */,
 				1A2D18FA1F292DAD00B2C785 /* ConversationCell.swift */,
 				1A2D18FB1F292DAD00B2C785 /* ConversationCell.xib */,
+				0E6F5450223C3C4F00ECC3CE /* AccountItemView.xib */,
+				0E6F5452223C3C7500ECC3CE /* AccountItemView.swift */,
 			);
 			name = Cells;
 			path = ../SmartList/Cells;
@@ -1704,6 +1716,7 @@
 				623660AA20092081002598C1 /* src in Resources */,
 				1A2D18B11F2915B600B2C785 /* SmartlistViewController.storyboard in Resources */,
 				0E403F831F7D79B000C80BC2 /* MessageCellGenerated.xib in Resources */,
+				0E6F5451223C3C4F00ECC3CE /* AccountItemView.xib in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
 				0E438A96204F318200402900 /* AccountHeader.xib in Resources */,
 				62AD58462056D8EC00AF0701 /* MessageCellDataTransferSent.xib in Resources */,
@@ -1853,6 +1866,7 @@
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
 				0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */,
+				0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */,
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
 				1A2D18C71F29180700B2C785 /* DeviceModel.swift in Sources */,
@@ -1906,6 +1920,7 @@
 				1A3CA32D1F13DA7200283748 /* Chameleon+Ring.swift in Sources */,
 				0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */,
 				1ABE07E21F0D924700D36361 /* Strings.swift in Sources */,
+				0E6F544D223BFE3E00ECC3CE /* DisposableCell.swift in Sources */,
 				0E9D84491FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift in Sources */,
 				621231FB1F8D6FEE009B86F0 /* MessageCell.swift in Sources */,
 				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
@@ -1997,6 +2012,7 @@
 				1A2D18A21F27A6D600B2C785 /* LinkDeviceViewModel.swift in Sources */,
 				564C44601E943C37000F92B1 /* NameRegistrationAdapter.mm in Sources */,
 				0E35C10C2077DFF000BBA5E3 /* NotificationCell.swift in Sources */,
+				0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */,
 				0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
