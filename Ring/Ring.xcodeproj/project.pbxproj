@@ -60,7 +60,6 @@
 		04399AF21D1C341A00E99CD9 /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC01D1C341A00E99CD9 /* libnettle.a */; };
 		04399AF41D1C341A00E99CD9 /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC21D1C341A00E99CD9 /* libopendht.a */; };
 		04399AF51D1C341A00E99CD9 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC31D1C341A00E99CD9 /* libopus.a */; };
-		04399AF61D1C341A00E99CD9 /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC41D1C341A00E99CD9 /* libpcre.a */; };
 		04399AF71D1C341A00E99CD9 /* libpcreposix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC51D1C341A00E99CD9 /* libpcreposix.a */; };
 		04399AF81D1C341A00E99CD9 /* libpj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC61D1C341A00E99CD9 /* libpj.a */; };
 		04399AF91D1C341A00E99CD9 /* libpjlib-util.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC71D1C341A00E99CD9 /* libpjlib-util.a */; };
@@ -703,7 +702,6 @@
 				04399AF21D1C341A00E99CD9 /* libnettle.a in Frameworks */,
 				04399AF41D1C341A00E99CD9 /* libopendht.a in Frameworks */,
 				04399AF51D1C341A00E99CD9 /* libopus.a in Frameworks */,
-				04399AF61D1C341A00E99CD9 /* libpcre.a in Frameworks */,
 				04399AF71D1C341A00E99CD9 /* libpcreposix.a in Frameworks */,
 				04399AF81D1C341A00E99CD9 /* libpj.a in Frameworks */,
 				04399AF91D1C341A00E99CD9 /* libpjlib-util.a in Frameworks */,
