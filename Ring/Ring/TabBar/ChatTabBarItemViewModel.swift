@@ -26,20 +26,15 @@ class ChatTabBarItemViewModel: ViewModel, TabBarItemViewModel {
     var itemBadgeValue: Observable<String?>
 
     required init(with injectionBag: InjectionBag) {
-        let accountService = injectionBag.accountService
         let conversationService = injectionBag.conversationsService
         let contactsService = injectionBag.contactsService
         self.itemBadgeValue = {
             return conversationService.conversationsForCurrentAccount.map({ conversations in
                 return conversations.map({ conversation in
                     let unreadMsg = conversation.messages.filter({ message in
-                        if let account = accountService.currentAccount {
-                            let accountHelper = AccountModelHelper(withAccount: account)
-                            //filtre out read messages, outgoing messages and messages that are displayed in contactrequest conversation
-                            return message.status != .read  && !message.isTransfer && message.author != accountHelper.ringId
-                                && (contactsService.contactRequest(withRingId: message.author) == nil)
-                        }
-                        return false
+                        //filtre out read messages, outgoing messages and messages that are displayed in contactrequest conversation
+                        return message.status != .read  && !message.isTransfer && message.author != ""
+                            && (contactsService.contactRequest(withRingId: message.author) == nil)
                     })
                     return unreadMsg.count
                 }).reduce(0, +)

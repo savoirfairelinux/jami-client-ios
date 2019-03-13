@@ -26,39 +26,66 @@ class EditProfileViewModel {
 
     let disposeBag = DisposeBag()
     let defaultImage = UIImage(named: "add_avatar")
-    var image = Variable<UIImage?>(nil)
-    var profileName = Variable<String>("")
+    var image: UIImage?
+    var name: String = ""
+    let profileService: ProfilesService
+    let accountService: AccountsService
 
-    init() {
+    lazy var profileImage: Observable<UIImage?> = { [unowned self] in
+        guard let account = self.accountService.currentAccount else {
+                    return Observable.just(defaultImage)
+        }
+        return self.profileService.getAccountProfile(accountId: account.id)
+            .map({ profile in
+                if let photo = profile.photo,
+                    let data = NSData(base64Encoded: photo,
+                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    self.image = UIImage(data: data)
+                    return  UIImage(data: data)
+                }
+                return self.defaultImage
+            })
+        }()
 
-        self.image.value = defaultImage
+    lazy var profileName: Observable<String?> = { [unowned self] in
+        guard let account = self.accountService.currentAccount
+            else {
+                    return Observable.just("")
+        }
+        return self.profileService.getAccountProfile(accountId: account.id)
+            .map({ profile in
+                if let alias = profile.alias, !alias.isEmpty {
+                    self.name = alias
+                    return alias
+                }
+                return ""
+            })
+        }()
 
-        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue) .subscribe(onSuccess: { [unowned self]card in
-                             self.profileName.value = card.familyName
-                            if let data = card.imageData {
-                                self.image.value = UIImage(data: data)?.convert(toSize: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale).circleMasked
-                            }
-                        }).disposed(by: disposeBag)
-      }
+    init(profileService: ProfilesService, accountService: AccountsService) {
+        self.profileService = profileService
+        self.accountService = accountService
+    }
 
     func saveProfile() {
-
-        let vcard = CNMutableContact()
-        if let image = self.image.value, !image.isEqual(defaultImage) {
-            vcard.imageData = UIImagePNGRepresentation(image)
+        guard let account = self.accountService.currentAccount else {return}
+        var photo: String?
+        if let image = self.image, !image.isEqual(defaultImage),
+            let imageData = UIImagePNGRepresentation(image) {
+            photo = imageData.base64EncodedString()
         }
-            vcard.familyName = self.profileName.value
-        _ = VCardUtils.saveVCard(vCard: vcard, withName: VCardFiles.myProfile.rawValue, inFolder: VCardFolders.profile.rawValue).subscribe()
-
+        self.profileService.updateAccountProfile(accountId: account.id,
+                                           alias: self.name,
+                                           photo: photo)
     }
 
     func updateImage(_ image: UIImage) {
-        self.image.value = image
+        self.image = image
         self.saveProfile()
     }
 
     func updateName(_ name: String) {
-        self.profileName.value = name
+        self.name = name
         self.saveProfile()
     }
 }

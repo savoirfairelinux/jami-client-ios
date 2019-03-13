@@ -22,37 +22,50 @@ import SQLite
 
 typealias Conversation = (
     id: Int64,
-    participantID: Int64
+    participant: String
 )
 
 final class ConversationDataHelper {
-    let table = RingDB.instance.tableConversations
+    let table = Table("conversations")
     let id = Expression<Int64>("id")
+    let participant = Expression<String>("participant")
+
+    // reference foreign key
+    let tableProfiles = Table("profiles")
+    let uri = Expression<String>("uri")
+
+    // to migrate from legacy db
     let participantId = Expression<Int64>("participant_id")
-
-    func createTable() throws {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
+    func migrateToDBForAccount(from oldDB: Connection,
+                               to newDB: Connection,
+                               accountProfileId: Int64,
+                               contactsMap: [Int64: String]) throws {
+        let query = table.filter(accountProfileId != participantId)
+        let items = try oldDB.prepare(query)
+        for item in  items {
+            if let uri = contactsMap[item[participantId]] {
+                let query = table.insert(id <- item[id],
+                                         participant <- "ring:" + uri)
+                try newDB.run(query)
+            }
         }
-        do {
-            try dataBase.run(table.create(ifNotExists: true) { table in
-                table.column(id)
-                table.column(participantId)
-                table.foreignKey(participantId, references: RingDB.instance.tableProfiles, id, delete: .noAction)
-            })
+    }
 
+    func createTable(accountDb: Connection) {
+        do {
+            try accountDb.run(table.create(ifNotExists: true) { table in
+                table.column(id)
+                table.column(participant)
+                table.foreignKey(participant, references: tableProfiles, uri, delete: .noAction)
+            })
         } catch _ {
             print("Table already exists")
         }
-
     }
 
-    func insert(item: Conversation) -> Bool {
-        guard let dataBase = RingDB.instance.ringDB else {
-            return false
-        }
+    func insert(item: Conversation, dataBase: Connection) -> Bool {
         let query = table.insert(id <- item.id,
-                                  participantId <- item.participantID)
+                                  participant <- item.participant)
         do {
             let rowId = try dataBase.run(query)
             guard rowId > 0 else {
@@ -64,10 +77,7 @@ final class ConversationDataHelper {
         }
     }
 
-    func delete (item: Conversation) -> Bool {
-        guard let dataBase = RingDB.instance.ringDB  else {
-            return false
-        }
+    func delete (item: Conversation, dataBase: Connection) -> Bool {
         let conversationId = item.id
         let query = table.filter(id == conversationId)
         do {
@@ -81,48 +91,36 @@ final class ConversationDataHelper {
         }
     }
 
-    func selectConversations (conversationId: Int64) throws -> [Conversation]? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
+    func selectConversations (conversationId: Int64, dataBase: Connection) throws -> [Conversation]? {
         let query = table.filter(id == conversationId)
         var conversations = [Conversation]()
         let items = try dataBase.prepare(query)
         for item in  items {
-            conversations.append(Conversation(id: item[id], participantID: item[participantId]))
+            conversations.append(Conversation(id: item[id], participant: item[participant]))
         }
         return conversations
     }
 
-    func selectAll() throws -> [Conversation]? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
+    func selectAll(dataBase: Connection) throws -> [Conversation]? {
         var conversations = [Conversation]()
         let items = try dataBase.prepare(table)
         for item in items {
-            conversations.append(Conversation(id: item[id], participantID: item[participantId]))
+            conversations.append(Conversation(id: item[id], participant: item[participant]))
         }
         return conversations
     }
 
-    func selectConversationsForProfile(profileId: Int64) throws -> [Conversation]? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
+    func selectConversationsForProfile(profileUri: String, dataBase: Connection) throws -> [Conversation]? {
         var conversations = [Conversation]()
-        let query = table.filter(participantId == profileId)
+        let query = table.filter(participant == profileUri)
         let items = try dataBase.prepare(query)
         for item in  items {
-            conversations.append(Conversation(id: item[id], participantID: item[participantId]))
+            conversations.append(Conversation(id: item[id], participant: item[participant]))
         }
         return conversations
     }
 
-    func deleteConversations(conversationID: Int64) -> Bool {
-        guard let dataBase = RingDB.instance.ringDB else {
-            return false
-        }
+    func deleteConversations(conversationID: Int64, dataBase: Connection) -> Bool {
         let query = table.filter(id == conversationID)
         do {
             if try dataBase.run(query.delete()) > 0 {

@@ -28,6 +28,10 @@ class BlockListViewModel: ViewModel {
     let nameService: NameService
     let disposeBag = DisposeBag()
 
+    lazy var currentAccountId: String? = {
+        return self.accountService.currentAccount?.id
+    }()
+
     lazy var blockedContactsItems: Observable<[BannedContactItem]> = {
         return self.contacts.asObservable().map({ [weak self] contacts in
             var bannedItems = [BannedContactItem]()
@@ -58,11 +62,13 @@ class BlockListViewModel: ViewModel {
 
     // create list of banned items with photo and name
     lazy var initialItems: [BannedContactItem] = {
+        guard let accountId = currentAccountId else {return [BannedContactItem]()}
         return self.contactService.contacts.value
             .filter({ contact in contact.banned})
             .map { contact in
                 var item = BannedContactItem(withContact: contact)
-                self.contactService.getProfileForUri(uri: contact.ringId)
+                self.contactService.getProfileForUri(uri: contact.ringId,
+                                                     accountId: accountId)
                     .subscribe(onNext: { (profile) in
                         item.displayName = profile.alias
                         guard let photo = profile.photo else {

@@ -97,21 +97,11 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     /// Handles the switch between the three supported screens.
     private func dispatchApplication() {
-        self.injectionBag.accountService
-            .loadAccounts()
-            .map({ (accounts) -> Bool in
-                return !accounts.isEmpty
-            })
-            .subscribe(onSuccess: { [unowned self] (hasAccounts) in
-                if hasAccounts {
-                    self.stateSubject.onNext(AppState.allSet)
-                } else {
-                    self.stateSubject.onNext(AppState.needToOnboard)
-                }
-            }, onError: { (error) in
-                    print(error)
-            })
-            .disposed(by: self.disposeBag)
+        if self.injectionBag.accountService.accounts.isEmpty {
+             self.stateSubject.onNext(AppState.needToOnboard)
+        } else {
+             self.stateSubject.onNext(AppState.allSet)
+        }
     }
 
     // MARK: - Private methods

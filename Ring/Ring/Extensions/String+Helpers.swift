@@ -59,4 +59,22 @@ extension String {
     func prefixString() -> String {
         return String(self.prefix(1))
     }
+
+    func convertToSeconds() -> Int64 {
+        let hourMinSec: [String] = self.components(separatedBy: ":")
+        switch hourMinSec.count {
+        case 1:
+            return Int64(Int(hourMinSec[0]) ?? 0)
+        case 2:
+            return (Int64(hourMinSec[0]) ?? 0) * 60
+                + (Int64(hourMinSec[1]) ?? 0)
+        case 3:
+            let sec: Int64 = Int64(hourMinSec[2]) ?? 0
+            let min: Int64 = (Int64(hourMinSec[1]) ?? 0) * 60
+            let hours: Int64 = (Int64(hourMinSec[0]) ?? 0) * 60 * 60
+            return hours + min + sec
+        default:
+            return 0
+        }
+    }
 }
