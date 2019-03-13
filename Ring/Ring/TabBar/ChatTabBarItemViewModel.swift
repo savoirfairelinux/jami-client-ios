@@ -36,7 +36,7 @@ class ChatTabBarItemViewModel: ViewModel, TabBarItemViewModel {
                         if let account = accountService.currentAccount {
                             let accountHelper = AccountModelHelper(withAccount: account)
                             //filtre out read messages, outgoing messages and messages that are displayed in contactrequest conversation
-                            return message.status != .read  && !message.isTransfer && message.author != accountHelper.ringId
+                            return message.status != .read  && !message.isTransfer && message.author != ""
                                 && (contactsService.contactRequest(withRingId: message.author) == nil)
                         }
                         return false

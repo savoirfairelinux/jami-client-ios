@@ -30,6 +30,7 @@ enum ProfileNotifications: String {
 
 enum ProfileNotificationsKeys: String {
     case ringID
+    case accountId
     case message
 }
 
@@ -45,14 +46,14 @@ class ProfilesService {
     fileprivate let log = SwiftyBeaver.self
 
     var profiles = [String: ReplaySubject<Profile>]()
+    var accountProfiles = [String: ReplaySubject<AccountProfile>]()
 
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(),
-                              conversationHelper: ConversationDataHelper(),
-                              interactionHepler: InteractionDataHelper())
+    let dbManager: DBManager
 
     let disposeBag = DisposeBag()
 
-    init() {
+    init(dbManager: DBManager) {
+        self.dbManager = dbManager
         NotificationCenter.default.addObserver(self, selector: #selector(self.messageReceived(_:)),
                                                name: NSNotification.Name(rawValue: ProfileNotifications.messageReceived.rawValue),
                                                object: nil)
@@ -65,7 +66,10 @@ class ProfilesService {
         guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
             return
         }
-        self.updateProfileFor(ringId: ringId, createIfNotexists: false)
+        guard let accountId = notification.userInfo?[ProfileNotificationsKeys.accountId.rawValue] as? String else {
+            return
+        }
+        self.triggerProfileSignal(ringId: ringId, createIfNotexists: false, accountId: accountId)
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -75,6 +79,10 @@ class ProfilesService {
         }
 
         guard let message = notification.userInfo?[ProfileNotificationsKeys.message.rawValue] as? [String: String] else {
+            return
+        }
+
+        guard let accountId = notification.userInfo?[ProfileNotificationsKeys.accountId.rawValue] as? String else {
             return
         }
 
@@ -121,12 +129,12 @@ class ProfilesService {
 
             //Build the vCard when all data are appended
             if of == numberOfReceivedChunk {
-                self.buildVCardFromChunks(cardID: id, ringID: ringId)
+                self.buildVCardFromChunks(cardID: id, ringID: ringId, accountId: accountId)
             }
         }
     }
 
-    private func buildVCardFromChunks(cardID: Int, ringID: String) {
+    private func buildVCardFromChunks(cardID: Int, ringID: String, accountId: String) {
         guard let vcard = self.base64VCards[cardID] else {
             return
         }
@@ -153,31 +161,69 @@ class ProfilesService {
                 .createOrUpdateRingProfile(profileUri: uri,
                                            alias: name,
                                            image: stringImage,
-                                           status: ProfileStatus.untrasted)
-            self.updateProfileFor(ringId: uri, createIfNotexists: false)
+                                           accountId: accountId)
+            self.triggerProfileSignal(ringId: uri, createIfNotexists: false, accountId: accountId)
         }
     }
 
-    private func updateProfileFor(ringId: String, createIfNotexists: Bool) {
+    private func triggerProfileSignal(ringId: String, createIfNotexists: Bool, accountId: String) {
         guard let profileObservable = self.profiles[ringId] else {
             return
         }
         self.dbManager
-            .profileObservable(for: ringId, createIfNotExists: createIfNotexists)
+            .profileObservable(for: ringId, createIfNotExists: createIfNotexists, accountId: accountId)
             .subscribe(onNext: {profile in
                 profileObservable.onNext(profile)
             }).disposed(by: self.disposeBag)
     }
 
-    func getProfile(ringId: String, createIfNotexists: Bool) -> Observable<Profile> {
+    func getProfile(ringId: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
         if let profile = self.profiles[ringId] {
             return profile.asObservable().share()
         }
         let profileObservable = ReplaySubject<Profile>.create(bufferSize: 1)
         self.profiles[ringId] = profileObservable
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.updateProfileFor(ringId: ringId, createIfNotexists: createIfNotexists)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.triggerProfileSignal(ringId: ringId,
+                                       createIfNotexists: createIfNotexists,
+                                       accountId: accountId)
         }
         return profileObservable.share()
     }
 }
+
+//MARK - account profile
+typealias AccountProfile = (alias: String?, photo: String?)
+extension ProfilesService {
+    func getAccountProfile(accountId: String) -> Observable<AccountProfile> {
+        if let profile = self.accountProfiles[accountId] {
+            return profile.asObservable().share()
+        }
+        let profileObservable = ReplaySubject<AccountProfile>.create(bufferSize: 1)
+        self.accountProfiles[accountId] = profileObservable
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.triggerAccountProfileSignal(accountId: accountId)
+        }
+        return profileObservable.share()
+    }
+
+    private func triggerAccountProfileSignal(accountId: String) {
+        guard let profileObservable = self.accountProfiles[accountId] else {
+            return
+        }
+        self.dbManager
+            .accountProfileObservable(for: accountId)
+            .subscribe(onNext: {profile in
+                profileObservable.onNext(profile)
+            }).disposed(by: self.disposeBag)
+    }
+
+    func updateAccountProfile(accountId: String, alias: String?, photo: String?) {
+        if self.dbManager
+            .saveAccountProfile(alias: alias, photo: photo,
+                                accountId: accountId) {
+            self.triggerAccountProfileSignal(accountId: accountId)
+        }
+    }
+}
+

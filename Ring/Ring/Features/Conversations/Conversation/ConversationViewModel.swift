@@ -134,8 +134,10 @@ class ConversationViewModel: Stateable, ViewModel {
                 })
                 .disposed(by: disposeBag)
 
-            self.profileService.getProfile(ringId: contactRingId,
-                                                     createIfNotexists: false)
+            self.profileService
+                .getProfile(ringId: contactRingId,
+                                           createIfNotexists: false,
+                                           accountId: self.conversation.value.accountId)
                 .subscribe(onNext: { [unowned self] profile in
                     self.displayName.value = profile.alias
                     if let photo = profile.photo,
@@ -288,10 +290,9 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     fileprivate var unreadMessagesCount: Int {
-        let accountHelper = AccountModelHelper(withAccount: self.accountService.currentAccount!)
         let unreadMessages =  self.conversation.value.messages
             .filter({ message in
-            return message.status != .read  && !message.isTransfer && message.author != accountHelper.ringId!
+            return message.status != .read  && !message.isTransfer && message.author != ""
         })
         return unreadMessages.count
     }
@@ -302,22 +303,14 @@ class ConversationViewModel: Stateable, ViewModel {
             contact.banned {
             return
         }
-        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
-                             inFolder: VCardFolders.profile.rawValue)
-            .subscribe(onSuccess: { [unowned self] (card) in
-                self.contactsService.sendContactRequest(toContactRingId: self.conversation.value.recipientRingId, vCard: card, withAccount: self.accountService.currentAccount!)
-                    .subscribe(onCompleted: { [unowned self] in
-                        self.log.info("contact request sent")
-                    }, onError: { [unowned self] (error) in
-                        self.log.info(error)
-                    }).disposed(by: self.disposeBag)
-                }, onError: { [unowned self] error in
-                self.contactsService.sendContactRequest(toContactRingId: self.conversation.value.recipientRingId, vCard: nil, withAccount: self.accountService.currentAccount!)
-                    .subscribe(onCompleted: { [unowned self] in
-                        self.log.info("contact request sent")
-                    }, onError: { [unowned self] (error) in
-                        self.log.info(error)
-                    }).disposed(by: self.disposeBag)
+
+        self.contactsService
+            .sendContactRequest(toContactRingId: self.conversation.value.recipientRingId,
+                                withAccount: self.accountService.currentAccount!)
+            .subscribe(onCompleted: { [unowned self] in
+                self.log.info("contact request sent")
+                }, onError: { [unowned self] (error) in
+                    self.log.info(error)
             }).disposed(by: self.disposeBag)
     }
 

@@ -22,10 +22,10 @@ import SQLite
 
 typealias Interaction = (
     id: Int64,
-    accountID: Int64,
-    authorID: Int64,
-    conversationID: Int64,
+    author: String?,
+    conversation: Int64,
     timestamp: Int64,
+    duration: Int64,
     body: String,
     type: String,
     status: String,
@@ -35,11 +35,11 @@ typealias Interaction = (
 
 final class InteractionDataHelper {
 
-    let table = RingDB.instance.tableInteractionss
+    let table = Table("interactions")
     let id = Expression<Int64>("id")
-    let accountId = Expression<Int64>("account_id")
-    let authorId = Expression<Int64>("author_id")
-    let conversationId = Expression<Int64>("conversation_id")
+    let author = Expression<String?>("author")
+    let duration = Expression<Int64>("duration")
+    let conversation = Expression<Int64>("conversation")
     let timestamp = Expression<Int64>("timestamp")
     let body = Expression<String>("body")
     let type = Expression<String>("type")
@@ -47,43 +47,93 @@ final class InteractionDataHelper {
     let daemonId = Expression<String>("daemon_id")
     let incoming = Expression<Bool>("incoming")
 
-    func createTable() throws {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
+    //foreign keys references
+    let tableProfiles = Table("profiles")
+    let tableConversations = Table("conversations")
+    let uri = Expression<String>("uri")
+
+    //migrations from legacy db
+    let authorId = Expression<Int64>("author_id")
+    let conversationId = Expression<Int64>("conversation_id")
+    func migrateToDBForAccount (from oldDB: Connection,
+                                to newDB: Connection,
+                                accountProfileId: Int64,
+                                contactsMap: [Int64: String]) throws {
+        let items = try oldDB.prepare(table)
+        for item in items {
+            let uri: String? = (contactsMap[item[authorId]] != nil) ? "ring:" + contactsMap[item[authorId]]! : nil
+            let migrationData = self.migrateMessageBody(body: item[body], type: item[type])
+            let query = table.insert(id <- item[id],
+                                     author <- uri,
+                                     conversation <- item[conversation],
+                                     timestamp <- item[timestamp],
+                                     duration <- migrationData.duration,
+                                     body <- migrationData.body,
+                                     type <- item[type],
+                                     status <- item[status],
+                                     daemonId <- item[daemonId],
+                                     incoming <- item[incoming])
+            try newDB.run(query)
         }
+    }
+
+    func migrateMessageBody(body: String, type: String) -> (body: String, duration: Int64) {
+        switch type {
+        case InteractionType.call.rawValue:
+            //check if have call duration
+            if let index = body.firstIndex(of: "-") {
+                let timeIndex = body.index(index, offsetBy: 2)
+                let durationString = body.suffix(from: timeIndex)
+                let time = String(durationString).convertToSeconds()
+                let messageBody = String(body.prefix(upTo: index))
+                if messageBody.contains(GeneratedMessageType.incomingCall.rawValue) {
+                    return(GeneratedMessage.incomingCall.toString(), time)
+                } else {
+                    return(GeneratedMessage.outgoingCall.toString(), time)
+                }
+            } else if body == GeneratedMessageType.missedIncomingCall.rawValue {
+                return(GeneratedMessage.missedIncomingCall.toString(), 0)
+            } else {
+                return(GeneratedMessage.missedOutgoingCall.toString(), 0)
+            }
+        case InteractionType.contact.rawValue:
+            if body == GeneratedMessageType.contactAdded.rawValue {
+                return(GeneratedMessage.contactAdded.toString(), 0)
+            } else {
+                return(GeneratedMessage.invitationReceived.toString(), 0)
+            }
+        default:
+            return (body, 0)
+        }
+    }
+
+    func createTable(accountDb: Connection) {
         do {
-            try dataBase.run(table.create(ifNotExists: true) { table in
+            try accountDb.run(table.create(ifNotExists: true) { table in
                 table.column(id, primaryKey: .autoincrement)
-                table.column(accountId)
-                table.column(authorId)
-                table.column(conversationId)
+                table.column(author)
+                table.column(conversation)
                 table.column(timestamp)
+                table.column(duration)
                 table.column(body)
                 table.column(type)
                 table.column(status)
                 table.column(daemonId)
                 table.column(incoming)
-                table.foreignKey(accountId,
-                                 references: RingDB.instance.tableProfiles, id, delete: .noAction)
-                table.foreignKey(authorId,
-                                 references: RingDB.instance.tableProfiles, id, delete: .noAction)
-                table.foreignKey(conversationId,
-                                 references: RingDB.instance.tableConversations, id, delete: .noAction)
+                table.foreignKey(author,
+                                 references: tableProfiles, uri, delete: .noAction)
+                table.foreignKey(conversation,
+                                 references: tableConversations, id, delete: .noAction)
             })
-
         } catch _ {
             print("Table already exists")
         }
     }
 
-    func insert(item: Interaction) -> Int64? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            return nil
-        }
-
-        let query = table.insert(accountId <- item.accountID,
-                                  authorId <- item.authorID,
-                                  conversationId <- item.conversationID,
+    func insert(item: Interaction, dataBase: Connection) -> Int64? {
+        let query = table.insert(duration <- item.duration,
+                                  author <- item.author,
+                                  conversation <- item.conversation,
                                   timestamp <- item.timestamp,
                                   body <- item.body,
                                   type <- item.type,
@@ -101,12 +151,9 @@ final class InteractionDataHelper {
         }
     }
 
-    func delete (item: Interaction) -> Bool {
-        guard let dataBase = RingDB.instance.ringDB  else {
-            return false
-        }
-        let profileId = item.id
-        let query = table.filter(id == profileId)
+    func delete (item: Interaction, dataBase: Connection) -> Bool {
+        let interactionId = item.id
+        let query = table.filter(id == interactionId)
         do {
             let deletedRows = try dataBase.run(query.delete())
             guard deletedRows == 1 else {
@@ -118,18 +165,15 @@ final class InteractionDataHelper {
         }
     }
 
-    func selectInteraction (interactionId: Int64) throws -> Interaction? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
+    func selectInteraction (interactionId: Int64, dataBase: Connection) throws -> Interaction? {
         let query = table.filter(id == interactionId)
         let items = try dataBase.prepare(query)
         for item in  items {
             return Interaction(id: item[id],
-                               accountID: item[accountId],
-                               authorID: item[authorId],
-                               conversationID: item[conversationId],
+                               author: item[author],
+                               conversation: item[conversation],
                                timestamp: item[timestamp],
+                               duration: item[duration],
                                body: item[body],
                                type: item[type],
                                status: item[status],
@@ -139,18 +183,15 @@ final class InteractionDataHelper {
         return nil
     }
 
-    func selectAll() throws -> [Interaction]? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
+    func selectAll(dataBase: Connection) throws -> [Interaction]? {
         var interactions = [Interaction]()
         let items = try dataBase.prepare(table)
         for item in items {
             interactions.append(Interaction(id: item[id],
-                                            accountID: item[accountId],
-                                            authorID: item[authorId],
-                                            conversationID: item[conversationId],
+                                            author: item[author],
+                                            conversation: item[conversation],
                                             timestamp: item[timestamp],
+                                            duration: item[duration],
                                             body: item[body],
                                             type: item[type],
                                             status: item[status],
@@ -160,19 +201,16 @@ final class InteractionDataHelper {
         return interactions
     }
 
-    func selectInteractionsForAccount (accountID: Int64) throws -> [Interaction]? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
-        let query = table.filter(accountId == accountID)
+    func selectInteractionsForConversation (conv: Int64, dataBase: Connection) throws -> [Interaction]? {
+        let query = table.filter(conversation == conv)
         var interactions = [Interaction]()
         let items = try dataBase.prepare(query)
         for item in  items {
             interactions.append(Interaction(id: item[id],
-                                            accountID: item[accountId],
-                                            authorID: item[authorId],
-                                            conversationID: item[conversationId],
+                                            author: item[author],
+                                            conversation: item[conversation],
                                             timestamp: item[timestamp],
+                                            duration: item[duration],
                                             body: item[body],
                                             type: item[type],
                                             status: item[status],
@@ -182,64 +220,16 @@ final class InteractionDataHelper {
         return interactions
     }
 
-    func selectInteractionsForConversation (conversationID: Int64) throws -> [Interaction]? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
-        let query = table.filter(conversationId == conversationID)
-        var interactions = [Interaction]()
-        let items = try dataBase.prepare(query)
-        for item in  items {
-            interactions.append(Interaction(id: item[id],
-                                            accountID: item[accountId],
-                                            authorID: item[authorId],
-                                            conversationID: item[conversationId],
-                                            timestamp: item[timestamp],
-                                            body: item[body],
-                                            type: item[type],
-                                            status: item[status],
-                                            daemonID: item[daemonId],
-                                            incoming: item[incoming]))
-        }
-        return interactions
-    }
-
-    func selectConversationInteractions (conversationID: Int64,
-                                                       accountProfileID: Int64) throws -> [Interaction]? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
-        let query = table.filter(conversationId == conversationID && (accountId == accountProfileID))
-        var interactions = [Interaction]()
-        let items = try dataBase.prepare(query)
-        for item in  items {
-            interactions.append(Interaction(id: item[id],
-                                            accountID: item[accountId],
-                                            authorID: item[authorId],
-                                            conversationID: item[conversationId],
-                                            timestamp: item[timestamp],
-                                            body: item[body],
-                                            type: item[type],
-                                            status: item[status],
-                                            daemonID: item[daemonId],
-                                            incoming: item[incoming]))
-        }
-        return interactions
-    }
-
-    func selectInteractionWithDaemonId(interactionDaemonID: String) throws -> Interaction? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
+    func selectInteractionWithDaemonId(interactionDaemonID: String, dataBase: Connection) throws -> Interaction? {
         let query = table.filter(daemonId == interactionDaemonID)
         var interactions = [Interaction]()
         let items = try dataBase.prepare(query)
         for item in  items {
             interactions.append(Interaction(id: item[id],
-                                            accountID: item[accountId],
-                                            authorID: item[authorId],
-                                            conversationID: item[conversationId],
+                                            author: item[author],
+                                            conversation: item[conversation],
                                             timestamp: item[timestamp],
+                                            duration: item[duration],
                                             body: item[body],
                                             type: item[type],
                                             status: item[status],
@@ -257,10 +247,7 @@ final class InteractionDataHelper {
         return interactions.first
     }
 
-    func updateInteractionWithDaemonID(interactionDaemonID: String, interactionStatus: String) -> Bool {
-        guard let dataBase = RingDB.instance.ringDB else {
-            return false
-        }
+    func updateInteractionWithDaemonID(interactionDaemonID: String, interactionStatus: String, dataBase: Connection) -> Bool {
         let query = table.filter(daemonId == interactionDaemonID)
         do {
             if try dataBase.run(query.update(status <- interactionStatus)) > 0 {
@@ -273,10 +260,7 @@ final class InteractionDataHelper {
         }
     }
 
-    func updateInteractionWithID(interactionID: Int64, interactionStatus: String) -> Bool {
-        guard let dataBase = RingDB.instance.ringDB else {
-            return false
-        }
+    func updateInteractionStatusWithID(interactionID: Int64, interactionStatus: String, dataBase: Connection) -> Bool {
         let query = table.filter(id == interactionID)
         do {
             if try dataBase.run(query.update(status <- interactionStatus)) > 0 {
@@ -289,10 +273,7 @@ final class InteractionDataHelper {
         }
     }
 
-    func updateInteractionWithID(interactionID: Int64, content: String) -> Bool {
-        guard let dataBase = RingDB.instance.ringDB else {
-            return false
-        }
+    func updateInteractionContentWithID(interactionID: Int64, content: String, dataBase: Connection) -> Bool {
         let query = table.filter(id == interactionID)
         do {
             if try dataBase.run(query.update(body <- content)) > 0 {
@@ -305,11 +286,8 @@ final class InteractionDataHelper {
         }
     }
 
-    func deleteAllIntercations(convID: Int64) -> Bool {
-        guard let dataBase = RingDB.instance.ringDB else {
-            return false
-        }
-        let query = table.filter(conversationId == convID)
+    func deleteAllIntercations(conv: Int64, dataBase: Connection) -> Bool {
+        let query = table.filter(conversation == conv)
         do {
             if try dataBase.run(query.delete()) > 0 {
                 return true
@@ -321,35 +299,14 @@ final class InteractionDataHelper {
         }
     }
 
-    func deleteMessageAndCallInteractions(convID: Int64) -> Bool {
-        guard let dataBase = RingDB.instance.ringDB else {
-            return false
-        }
-        let query = table.filter(conversationId == convID && (body != GeneratedMessageType.contactAdded.rawValue))
-        do {
-            if try dataBase.run(query.delete()) > 0 {
-                return true
-            } else {
-                return false
-            }
-        } catch {
-            return false
-        }
-    }
-
-    func insertIfNotExist(item: Interaction) -> Int64? {
-        guard let dataBase = RingDB.instance.ringDB else {
-            return nil
-        }
-
-        let querySelect = table.filter(accountId == item.accountID &&
-            conversationId == item.conversationID &&
+    func insertIfNotExist(item: Interaction, dataBase: Connection) -> Int64? {
+        let querySelect = table.filter(conversation == item.conversation &&
             body == item.body &&
             type == item.type)
-        let queryInsert = table.insert(accountId <- item.accountID,
-                                       authorId <- item.authorID,
-                                       conversationId <- item.conversationID,
+        let queryInsert = table.insert(author <- item.author,
+                                       conversation <- item.conversation,
                                        timestamp <- item.timestamp,
+                                       duration <- item.duration,
                                        body <- item.body,
                                        type <- item.type,
                                        status <- item.status,

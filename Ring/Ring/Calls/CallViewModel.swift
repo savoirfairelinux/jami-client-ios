@@ -61,11 +61,11 @@ class CallViewModel: Stateable, ViewModel {
     // data for ViewController binding
 
     lazy var contactImageData: Observable<Data?>? = {
-        guard let call = self.call else {
+        guard let call = self.call, let account = self.accountService.currentAccount else {
             return nil
         }
         return self.profileService.getProfile(ringId: call.participantRingId,
-                                                        createIfNotexists: true)
+                                              createIfNotexists: true, accountId: account.id)
             .filter({ profile in
                 guard let photo = profile.photo else {
                     return false

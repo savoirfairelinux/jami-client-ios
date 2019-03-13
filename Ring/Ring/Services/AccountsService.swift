@@ -85,9 +85,7 @@ class AccountsService: AccountAdapterDelegate {
      - SeeAlso: `sharedResponseStream`
      */
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(),
-                              conversationHelper: ConversationDataHelper(),
-                              interactionHepler: InteractionDataHelper())
+    let dbManager: DBManager
 
     // MARK: - Public members
     /**
@@ -143,7 +141,7 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    init(withAccountAdapter accountAdapter: AccountAdapter) {
+    init(withAccountAdapter accountAdapter: AccountAdapter, dbManager: DBManager) {
         self.accountList = []
 
         self.responseStream.disposed(by: disposeBag)
@@ -152,6 +150,7 @@ class AccountsService: AccountAdapterDelegate {
         self.sharedResponseStream = responseStream.share()
 
         self.accountAdapter = accountAdapter
+        self.dbManager = dbManager
         //~ Registering to the accountAdatpter with self as delegate in order to receive delegation
         //~ callbacks.
         AccountAdapter.delegate = self
@@ -166,11 +165,44 @@ class AccountsService: AccountAdapterDelegate {
         reloadAccounts()
     }
 
+    fileprivate func loadDatabases() -> Bool {
+        for account in accountList {
+            if dbManager.isNeedMigrationToAccountDB(accountId: account.id) {
+                do {
+                    try dbManager.migrateToAccountDB(accountId: account.id,
+                                                     jamiId: AccountModelHelper
+                                                        .init(withAccount: account).ringId!)
+                } catch { return false}
+            } else {
+                do {
+                    // return false if could not open database connection
+                    if try !dbManager.createDatabaseForAccount(accountId: account.id) {
+                        return false
+                    }
+                    //if tables already exist an exeption will be thrown
+                } catch { }
+            }
+        }
+        return true
+    }
+
+    func initialAccountsLoading() -> Completable {
+        return Completable.create { [unowned self] completable in
+            self.loadAccountsFromDaemon()
+            if self.loadDatabases() {
+                completable(.completed)
+            } else {
+                completable(.error(DataAccessError.databaseError))
+            }
+            return Disposables.create {}
+        }
+    }
+
     func loadAccounts() -> Single<[AccountModel]> {
         return Single<[AccountModel]>.just({
             loadAccountsFromDaemon()
             return accountList
-        }())
+            }())
     }
 
     // MARK: - Methods
@@ -216,6 +248,11 @@ class AccountsService: AccountAdapterDelegate {
                     throw AddAccountError.unknownError
                 }
                 let account = try self.buildAccountFromDaemon(accountId: accountId)
+                // create database for account and save account profile
+                if try !self.dbManager.createDatabaseForAccount(accountId: accountId) {
+                    single(.error(AccountCreationError.unknown))
+                }
+                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountId)
                 single(.success(account))
             } catch {
                 single(.error(error))
@@ -251,48 +288,59 @@ class AccountsService: AccountAdapterDelegate {
             })
     }
 
+    func linkToRingAccount(withPin pin: String, password: String, enable: Bool) -> Observable<AccountModel> {
+        //~ Single asking the daemon to add a new account with the associated metadata
+        let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
+            do {
+                var ringDetails = try self.getRingInitialAccountDetails()
+                ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+                ringDetails.updateValue(pin, forKey: ConfigKey.archivePIN.rawValue)
+                ringDetails.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
+                guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
+                    throw AddAccountError.unknownError
+                }
+                let account = try self.buildAccountFromDaemon(accountId: accountId)
+                // create database for account and save account profile
+                if try !self.dbManager.createDatabaseForAccount(accountId: accountId) {
+                    single(.error(AccountCreationError.unknown))
+                }
+                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountId)
+                single(.success(account))
+            } catch {
+                single(.error(error))
+            }
+            return Disposables.create {
+            }
+        })
+        //~ Filter the daemon signals to isolate the "account created" one.
+        let filteredDaemonSignals = self.sharedResponseStream.filter { (serviceEvent) -> Bool in
+            if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
+                throw AccountCreationError.linkError
+            } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
+                throw AccountCreationError.network
+            }
+            let isRegistrationStateChanged = serviceEvent.eventType == ServiceEventType.registrationStateChanged
+            let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
+            return isRegistrationStateChanged && isRegistered
+        }
+        //~ Make sure that we have the correct account added in the daemon, and return it.
+        return Observable
+            .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
+                guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
+                    throw AddAccountError.unknownError
+                }
+                return accountModel
+            }.take(1)
+            .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
+                return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
+            })
+    }
+
     func setRingtonePath(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
         let ringtonePath = Bundle.main.url(forResource: "default", withExtension: "wav")!
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath), withValue: (ringtonePath.path))
         setAccountDetails(forAccountId: accountId, withDetails: details)
-    }
-
-    func linkToRingAccount(withPin pin: String, password: String, enable: Bool) {
-        do {
-            var ringDetails = try self.getRingInitialAccountDetails()
-            ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
-            ringDetails.updateValue(pin, forKey: ConfigKey.archivePIN.rawValue)
-            ringDetails.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
-            let accountId = self.accountAdapter.addAccount(ringDetails)
-            guard accountId != nil else {
-                throw AddAccountError.unknownError
-            }
-
-            var account = self.getAccount(fromAccountId: accountId!)
-
-            if account == nil {
-                let details = self.getAccountDetails(fromAccountId: accountId!)
-                let volatileDetails = self.getVolatileAccountDetails(fromAccountId: accountId!)
-                let credentials = try self.getAccountCredentials(fromAccountId: accountId!)
-                let devices = getKnownRingDevices(fromAccountId: accountId!)
-
-                account = try AccountModel(withAccountId: accountId!,
-                                           details: details,
-                                           volatileDetails: volatileDetails,
-                                           credentials: credentials,
-                                           devices: devices)
-
-                let accountModelHelper = AccountModelHelper(withAccount: account!)
-                var accountAddedEvent = ServiceEvent(withEventType: .accountAdded)
-                accountAddedEvent.addEventInput(.id, value: account?.id)
-                accountAddedEvent.addEventInput(.state, value: accountModelHelper.getRegistrationState())
-                self.responseStream.onNext(accountAddedEvent)
-            }
-            self.currentAccount = account
-        } catch {
-            self.responseStream.onError(error)
-        }
     }
 
     /**
@@ -483,13 +531,6 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func registrationStateChanged(with response: RegistrationResponse) {
-        log.debug("RegistrationStateChanged.")
-        if let state = response.state, state == Registered {
-            dbManager.profileObservable(for: response.accountId, createIfNotExists: true)
-                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe()
-                .disposed(by: self.disposeBag)
-        }
         var event = ServiceEvent(withEventType: .registrationStateChanged)
         event.addEventInput(.registrationState, value: response.state)
         event.addEventInput(.accountId, value: response.accountId)
