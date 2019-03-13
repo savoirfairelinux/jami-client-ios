@@ -20,6 +20,8 @@
 
 import Foundation
 import RxSwift
+import SQLite
+//import Reusable
 
 enum ProfileType: String {
     case ring = "RING"
@@ -29,6 +31,49 @@ enum ProfileType: String {
 enum ProfileStatus: String {
     case trusted = "TRUSTED"
     case untrasted = "UNTRUSTED"
+}
+
+enum GeneratedMessage: Int {
+    case outgoingCall
+    case incomingCall
+    case missedOutgoingCall
+    case missedIncomingCall
+    case contactAdded
+    case invitationReceived
+    case invitationAccepted
+    case unknown
+
+    func toString() -> String {
+        return String(self.rawValue)
+    }
+    init(from: String) {
+        if let intValue = Int(from) {
+            self = GeneratedMessage(rawValue: intValue) ?? .unknown
+        } else {
+            self =  .unknown
+        }
+    }
+    func toMessage(with duration: Int) -> String {
+        let time = Date.convertSecondsToTimeString(seconds: Double(duration))
+        switch self {
+        case .contactAdded:
+            return L10n.GeneratedMessage.contactAdded
+        case .invitationReceived:
+            return L10n.GeneratedMessage.invitationReceived
+        case .invitationAccepted:
+            return L10n.GeneratedMessage.invitationAccepted
+        case .missedOutgoingCall:
+            return L10n.GeneratedMessage.missedOutgoingCall
+        case .missedIncomingCall:
+            return L10n.GeneratedMessage.missedIncomingCall
+        case .outgoingCall:
+            return L10n.GeneratedMessage.outgoingCall + " - " + time
+        case .incomingCall:
+            return L10n.GeneratedMessage.incomingCall + " - " + time
+        default:
+            return ""
+        }
+    }
 }
 
 enum InteractionStatus: String {
@@ -97,7 +142,7 @@ enum InteractionStatus: String {
 enum DBBridgingError: Error {
     case saveMessageFailed
     case getConversationFailed
-    case updateMessageStatusFailed
+    case updateIntercationFailed
     case deleteConversationFailed
     case getProfileFailed
 }
@@ -118,71 +163,85 @@ class DBManager {
     let profileHepler: ProfileDataHelper
     let conversationHelper: ConversationDataHelper
     let interactionHepler: InteractionDataHelper
+    let dbConnections: RingDB
 
     // used to create object to save to db. When inserting in table defaultID will be replaced by autoincrementedID
     let defaultID: Int64 = 1
 
     init(profileHepler: ProfileDataHelper, conversationHelper: ConversationDataHelper,
-         interactionHepler: InteractionDataHelper) {
+         interactionHepler: InteractionDataHelper, dbConnections: RingDB) {
         self.profileHepler = profileHepler
         self.conversationHelper = conversationHelper
         self.interactionHepler = interactionHepler
+        self.dbConnections = dbConnections
     }
 
-    func start() throws {
-        try profileHepler.createTable()
-        try conversationHelper.createTable()
-        try interactionHepler.createTable()
+    func isNeedMigrationToAccountDB(accountId: String) -> Bool {
+        return self.dbConnections.isDBExistsFor(account: accountId)
     }
 
-    func saveMessage(for accountUri: String, with contactUri: String, message: MessageModel, incoming: Bool, interactionType: InteractionType) -> Observable<SavedMessageForConversation> {
+    func createDatabaseForAccount(accountId: String) throws -> Bool {
+        guard let newDB = self.dbConnections.forAccount(account: accountId) else {
+            return false
+        }
+        do {
+            try newDB.transaction {
+                profileHepler.createAccountTable(accountDb: newDB)
+                profileHepler.createContactsTable(accountDb: newDB)
+                conversationHelper.createTable(accountDb: newDB)
+                interactionHepler.createTable(accountDb: newDB)
+            }
+        } catch {
+            throw DataAccessError.databaseError
+        }
+        return true
+    }
+
+    func migrateToAccountDB(accountId: String, jamiId: String) throws {
+        do {
+            guard let newDB = self.dbConnections.forAccount(account: accountId) else {
+                throw DataAccessError.datastoreConnectionError
+            }
+            try newDB.transaction {
+                profileHepler.createAccountTable(accountDb: newDB)
+                profileHepler.createContactsTable(accountDb: newDB)
+                conversationHelper.createTable(accountDb: newDB)
+                interactionHepler.createTable(accountDb: newDB)
+                guard let oldDb = self.dbConnections.getJamiDB() else {throw DataAccessError.datastoreConnectionError}
+                let profileFromJamiId = try self.profileHepler.getLegacyProfileID(profileURI: jamiId, dataBase: oldDb)
+                let profileFromAccountId = try self.profileHepler.getLegacyProfileID(profileURI: accountId, dataBase: oldDb)
+                let profile = profileFromJamiId != nil ? profileFromJamiId : profileFromAccountId
+                guard let accountProfile = profile else {throw DataAccessError.datastoreConnectionError}
+                let allProfiles = try self.profileHepler.getLegacyProfiles(accountURI: jamiId, accountId: accountId, database: oldDb)
+                try profileHepler.migrateToDBForAccount(from: oldDb, to: newDB, jamiId: jamiId, accountId: accountId)
+                try conversationHelper.migrateToDBForAccount(from: oldDb, to: newDB, accountProfileId: accountProfile, contactsMap: allProfiles)
+                try interactionHepler.migrateToDBForAccount(from: oldDb, to: newDB, accountProfileId: accountProfile, contactsMap: allProfiles)
+            }
+        } catch {
+            throw DataAccessError.databaseMigrationError
+        }
+    }
+
+    func saveMessage(for accountId: String, with contactUri: String,
+                     message: MessageModel, incoming: Bool,
+                     interactionType: InteractionType, duration: Int) -> Observable<SavedMessageForConversation> {
 
         //create completable which will be executed on background thread
         return Observable.create { [weak self] observable in
             do {
-                guard let dataBase = RingDB.instance.ringDB else {
+                guard let dataBase = self?.dbConnections.forAccount(account: accountId) else {
                     throw DataAccessError.datastoreConnectionError
                 }
-
-                //use transaction to lock access to db from other threads while the following queries are executed
                 try dataBase.transaction {
-
-                    guard let accountProfile = try self?.getProfile(for: accountUri, createIfNotExists: true) else {
-                        throw DBBridgingError.saveMessageFailed
-                    }
-
-                    guard let contactProfile = try self?.getProfile(for: contactUri, createIfNotExists: true) else {
-                        throw DBBridgingError.saveMessageFailed
-                    }
-
-                    var author: Int64
-
-                    if incoming {
-                       author = contactProfile.id
-                    } else {
-                       author = accountProfile.id
-                    }
-
-                    guard let conversationsID = try self?.getConversationsIDBetween(accountProfileID: accountProfile.id,
-                                                                                    contactProfileID: contactProfile.id,
-                                                                                    createIfNotExists: true),
-                        !conversationsID.isEmpty else {
+                    let author: String? = incoming ? self!.ringUri(from: contactUri) : nil
+                    guard let conversationID = try self?.getConversationsFor(contactUri: contactUri,
+                                                                             createIfNotExists: true,
+                                                                             dataBase: dataBase) else {
                             throw DBBridgingError.saveMessageFailed
                     }
-
-                    guard let conversationID = conversationsID.first else {
-                            throw DBBridgingError.saveMessageFailed
-                    }
-                    var result: Int64?
-                    switch interactionType {
-                    case .contact:
-                        result = self?.addInteractionContactTo(conversation: conversationID, account: accountProfile.id, author: author, message: message)
-                    case .text, .call, .iTransfer, .oTransfer:
-                        // for now we have only one conversation between two persons(with group chat could be many)
-                        result = self?.addMessageTo(conversation: conversationID, account: accountProfile.id, author: author, interactionType: interactionType, message: message)
-                    default:
-                        result = nil
-                    }
+                    let result = self?.addMessageTo(conversation: conversationID, author: author,
+                                                    interactionType: interactionType, message: message,
+                                                    duration: duration, dataBase: dataBase)
                     if let messageID = result {
                         let savedMessage = SavedMessageForConversation(messageID, conversationID)
                         observable.onNext(savedMessage)
@@ -198,16 +257,14 @@ class DBManager {
             }
     }
 
-    func getConversationsObservable(for accountID: String, accountURI: String) -> Observable<[ConversationModel]> {
-
+    func getConversationsObservable(for accountId: String) -> Observable<[ConversationModel]> {
         return Observable.create { observable in
-
             do {
-                guard let dataBase = RingDB.instance.ringDB else {
+                guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
                     throw DBBridgingError.getConversationFailed
                 }
                 try dataBase.transaction {
-                    let conversations = try self.buildConversationsForAccount(accountUri: accountURI, accountID: accountID)
+                    let conversations = try self.buildConversationsForAccount(accountId: accountId)
                     observable.onNext(conversations)
                     observable.on(.completed)
                 }
@@ -218,103 +275,111 @@ class DBManager {
             }
     }
 
-    func updateMessageStatus(daemonID: String, withStatus status: MessageStatus) -> Completable {
+    func updateMessageStatus(daemonID: String, withStatus status: MessageStatus, accountId: String) -> Completable {
         return Completable.create { [unowned self] completable in
-            let success = self.interactionHepler
-                .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
-                                         interactionStatus: InteractionStatus(status: status).rawValue)
-            if success {
-                completable(.completed)
-            } else {
-                completable(.error(DBBridgingError.updateMessageStatusFailed))
-            }
-
-            return Disposables.create { }
-            }
-    }
-
-    func updateFileName(interactionID: Int64, name: String) -> Completable {
-        return Completable.create { [unowned self] completable in
-            let success = self.interactionHepler
-                .updateInteractionWithID(interactionID: interactionID, content: name)
-            if success {
-                completable(.completed)
-            } else {
-                completable(.error(DBBridgingError.updateMessageStatusFailed))
-            }
-
-            return Disposables.create { }
-        }
-    }
-
-    func updateTransferStatus(daemonID: String, withStatus transferStatus: DataTransferStatus) -> Completable {
-        return Completable.create { [unowned self] completable in
-            let success = self.interactionHepler
-                .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
-                                               interactionStatus: InteractionStatus(status: transferStatus).rawValue)
-            if success {
-                completable(.completed)
-            } else {
-                completable(.error(DBBridgingError.updateMessageStatusFailed))
-            }
-
-            return Disposables.create { }
-        }
-    }
-
-    func setMessagesAsRead(messagesIDs: [Int64], withStatus status: MessageStatus) -> Completable {
-        return Completable.create { [unowned self] completable in
-            var success = true
-            for messageId in messagesIDs {
-                if !self.interactionHepler
-                    .updateInteractionWithID(interactionID: messageId,
-                                             interactionStatus: InteractionStatus(status: status).rawValue) {
-                    success = false
+            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+                let success = self.interactionHepler
+                    .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
+                                                   interactionStatus: InteractionStatus(status: status).rawValue,
+                                                   dataBase: dataBase)
+                if success {
+                    completable(.completed)
+                } else {
+                    completable(.error(DBBridgingError.updateIntercationFailed))
                 }
-
+            } else {
+                completable(.error(DBBridgingError.updateIntercationFailed))
             }
-            if success {
-                completable(.completed)
+            return Disposables.create { }
+        }
+    }
+
+    func updateFileName(interactionID: Int64, name: String, accountId: String) -> Completable {
+        return Completable.create { [unowned self] completable in
+            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+                let success = self.interactionHepler
+                    .updateInteractionContentWithID(interactionID: interactionID, content: name, dataBase: dataBase)
+                if success {
+                    completable(.completed)
+                } else {
+                    completable(.error(DBBridgingError.updateIntercationFailed))
+                }
+            } else {
+                completable(.error(DBBridgingError.updateIntercationFailed))
+            }
+            return Disposables.create { }
+        }
+    }
+
+    func updateTransferStatus(daemonID: String, withStatus transferStatus: DataTransferStatus, accountId: String) -> Completable {
+        return Completable.create { [unowned self] completable in
+            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+                let success = self.interactionHepler
+                    .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
+                                                   interactionStatus: InteractionStatus(status: transferStatus).rawValue,
+                                                   dataBase: dataBase)
+                if success {
+                    completable(.completed)
+                } else {
+                    completable(.error(DBBridgingError.updateIntercationFailed))
+                }
+            } else {
+                completable(.error(DBBridgingError.updateIntercationFailed))
+            }
+            return Disposables.create { }
+        }
+    }
+
+    func setMessagesAsRead(messagesIDs: [Int64], withStatus status: MessageStatus, accountId: String) -> Completable {
+        return Completable.create { [unowned self] completable in
+            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+                var success = true
+                for messageId in messagesIDs {
+                    if !self.interactionHepler
+                        .updateInteractionStatusWithID(interactionID: messageId,
+                                                 interactionStatus: InteractionStatus(status: status).rawValue,
+                                                 dataBase: dataBase) {
+                        success = false
+                    }
+                }
+                if success {
+                    completable(.completed)
+                } else {
+                    completable(.error(DBBridgingError.saveMessageFailed))
+                }
             } else {
                 completable(.error(DBBridgingError.saveMessageFailed))
             }
-
             return Disposables.create { }
-            }
+        }
     }
 
-    func clearHistoryBetween(accountUri: String,
-                             and participantUri: String,
-                             keepConversation: Bool) -> Completable {
+    func clearHistoryFor(accountId: String,
+                         and participantUri: String,
+                         keepConversation: Bool) -> Completable {
         return Completable.create { [unowned self] completable in
             do {
-                guard let dataBase = RingDB.instance.ringDB else {
+                guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
                     throw DBBridgingError.deleteConversationFailed
                 }
                 try dataBase.transaction {
-
-                    guard let accountProfile = try self.getProfile(for: accountUri, createIfNotExists: false) else {
+                    guard (try self.getProfile(for: participantUri, createIfNotExists: false, accounId: accountId)) != nil else {
                         throw DBBridgingError.deleteConversationFailed
                     }
-
-                    guard let contactProfile = try self.getProfile(for: participantUri, createIfNotExists: false) else {
-                        throw DBBridgingError.deleteConversationFailed
-                    }
-
-                    guard let conversationsID = try self.getConversationsIDBetween(accountProfileID: accountProfile.id, contactProfileID: contactProfile.id, createIfNotExists: true),
-                        let conversationID =  conversationsID.first else {
+                    guard let conversationsId = try self.getConversationsFor(contactUri: participantUri,
+                                                                             createIfNotExists: true,
+                                                                             dataBase: dataBase) else {
                             throw DBBridgingError.deleteConversationFailed
                     }
-
                     guard let interactions = try self.interactionHepler
-                        .selectConversationInteractions(
-                            conversationID: conversationsID.first!,
-                            accountProfileID: accountProfile.id) else {
+                        .selectInteractionsForConversation(
+                            conv: conversationsId,
+                            dataBase: dataBase) else {
                                 throw DBBridgingError.deleteConversationFailed
                     }
                     if !interactions.isEmpty {
                         if !self.interactionHepler
-                            .deleteAllIntercations(convID: conversationID) {
+                            .deleteAllIntercations(conv: conversationsId, dataBase: dataBase) {
                             completable(.error(DBBridgingError.deleteConversationFailed))
                         }
                     }
@@ -322,13 +387,12 @@ class DBManager {
                         completable(.completed)
                     } else {
                         let successConversations = self.conversationHelper
-                            .deleteConversations(conversationID: conversationsID.first!)
+                            .deleteConversations(conversationID: conversationsId, dataBase: dataBase)
                         if successConversations {
                             completable(.completed)
                         } else {
                             completable(.error(DBBridgingError.deleteConversationFailed))
                         }
-                        // }
                     }
                 }
             } catch {
@@ -338,10 +402,12 @@ class DBManager {
         }
     }
 
-    func profileObservable(for profileUri: String, createIfNotExists: Bool) -> Observable<Profile> {
+    func profileObservable(for profileUri: String, createIfNotExists: Bool, accountId: String) -> Observable<Profile> {
         return Observable.create { observable in
             do {
-                if let profile = try self.getProfile(for: profileUri, createIfNotExists: createIfNotExists) {
+                if let profile = try self.getProfile(for: self.ringUri(from: profileUri),
+                                                     createIfNotExists: createIfNotExists,
+                                                     accounId: accountId) {
                     observable.onNext(profile)
                     observable.on(.completed)
                 }
@@ -352,49 +418,95 @@ class DBManager {
         }
     }
 
+    func accountProfileObservable(for accountId: String) -> Observable<AccountProfile> {
+        return Observable.create { observable in
+            guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+                observable.on(.error(DBBridgingError.getProfileFailed))
+                return Disposables.create { }
+            }
+            guard let profile = self.profileHepler.getAccountProfile(dataBase: dataBase) else {
+                observable.on(.error(DBBridgingError.getProfileFailed))
+                return Disposables.create { }
+            }
+            observable.onNext(profile)
+            observable.on(.completed)
+            return Disposables.create { }
+        }
+    }
+
+    func accountProfile(for accountId: String) -> AccountProfile? {
+        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+            return nil
+        }
+        return self.profileHepler.getAccountProfile(dataBase: dataBase)
+    }
+
+    func createOrUpdateRingProfile(profileUri: String, alias: String?, image: String?, status: ProfileStatus, accounId: String) -> Bool {
+        guard let dataBase = self.dbConnections.forAccount(account: accounId) else {
+            return false
+        }
+        let profile = Profile(ringUri(from: profileUri), alias, image, ProfileType.ring.rawValue)
+        do {
+            try self.profileHepler.insertOrUpdateProfile(item: profile, dataBase: dataBase)
+        } catch {
+            return  false
+        }
+        return true
+    }
+
+    func saveAccountProfile(alias: String?, photo: String?, accountId: String) -> Bool {
+        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+            return false
+        }
+        return self.profileHepler.updateAccountProfile(accountAlias: alias,
+                                                       accountPhoto: photo,
+                                                       dataBase: dataBase)
+    }
+
+    func jamiId(from uri: String) -> String {
+        return uri.replacingOccurrences(of: "ring:", with: "")
+    }
+
+    func ringUri(from jamiId: String) -> String {
+        return jamiId.contains("ring:") ? jamiId : "ring:" + jamiId
+    }
+
     // MARK: Private functions
-
-    private func buildConversationsForAccount(accountUri: String, accountID: String) throws -> [ConversationModel] {
-
-        var conversationsToReturn = [ConversationModel]()
-
-        guard let accountProfile = try self.getProfile(for: accountUri, createIfNotExists: false) else {
+    private func buildConversationsForAccount(accountId: String) throws -> [ConversationModel] {
+        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
             throw DBBridgingError.getConversationFailed
         }
-        guard let conversationsID = try self.selectConversationsForAccount(accountProfile: accountProfile.id),
-            !conversationsID.isEmpty else {
+        var conversationsToReturn = [ConversationModel]()
+
+        guard let conversations = try self.conversationHelper.selectAll(dataBase: dataBase),
+            !conversations.isEmpty else {
                 // if there is no conversation for account return empty list
                 return conversationsToReturn
         }
-        for conversationID in conversationsID {
-            guard let participants = try self.getParticipantsForConversation(conversationID: conversationID),
-                !participants.isEmpty else {
+        for conversationID in conversations.map({$0.id}) {
+            guard let participants = try self.getParticipantsForConversation(conversationID: conversationID,
+                dataBase: dataBase),
+                let partisipant = participants.first else {
                     continue
             }
-            guard let participant =
-                self.filterParticipantsFor(account: accountProfile.id,
-                                           participants: participants) else {
-                                            throw DBBridgingError.getConversationFailed
-            }
-            guard let participantProfile = try self.profileHepler.selectProfile(profileId: participant) else {
+            guard let participantProfile = try self.profileHepler.selectProfile(profileURI: partisipant,
+                                                                                dataBase: dataBase) else {
                 continue
             }
-            let conversationModel = ConversationModel(withRecipientRingId: participantProfile.uri,
-                                                      accountId: accountID, accountUri: accountUri)
+            let conversationModel = ConversationModel(withRecipientRingId: jamiId(from: participantProfile.uri),
+                                                      accountId: accountId, accountUri: "")
             conversationModel.participantProfile = participantProfile
             conversationModel.conversationId = String(conversationID)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
-                .selectConversationInteractions(
-                    conversationID: conversationID,
-                    accountProfileID: accountProfile.id) else {
+                .selectInteractionsForConversation(
+                    conv: conversationID,
+                    dataBase: dataBase) else {
                         continue
             }
             for interaction in interactions {
-                var author = accountProfile.uri
-                if interaction.authorID == participantProfile.id {
-                    author = participantProfile.uri
-                }
+                let author = interaction.author == participantProfile.uri
+                    ? jamiId(from: participantProfile.uri) : ""
                 if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
                 }
@@ -405,31 +517,13 @@ class DBManager {
         return conversationsToReturn
     }
 
-    private func selectConversationsForAccount(accountProfile: Int64)throws -> [Int64]? {
-        guard let accountConversations = try self.conversationHelper.selectConversationsForProfile(profileId: accountProfile) else {
+    private func getParticipantsForConversation(conversationID: Int64, dataBase: Connection) throws -> [String]? {
+        guard let conversations = try self.conversationHelper
+            .selectConversations(conversationId: conversationID,
+                                 dataBase: dataBase) else {
             return nil
         }
-        return accountConversations.map({$0.id})
-    }
-
-    private func getParticipantsForConversation(conversationID: Int64) throws -> [Int64]? {
-        guard let conversations = try self.conversationHelper.selectConversations(conversationId: conversationID) else {
-            return nil
-        }
-        return conversations.map({$0.participantID})
-    }
-
-    private func filterParticipantsFor(account profileID: Int64, participants: [Int64]) -> Int64? {
-        var participants = participants
-        guard let accountProfileIndex = participants.index(of: profileID) else {
-            return nil
-        }
-        participants.remove(at: accountProfileIndex)
-        if participants.isEmpty {
-            return nil
-        }
-        // for now we does not support group chat, so we have only two participant for each conversation
-        return participants.first
+        return conversations.map({$0.participant})
     }
 
     private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
@@ -440,10 +534,14 @@ class DBManager {
             interaction.type != InteractionType.oTransfer.rawValue {
             return nil
         }
+        let content = (interaction.type == InteractionType.call.rawValue
+        || interaction.type == InteractionType.contact.rawValue) ?
+            GeneratedMessage.init(from: interaction.body).toMessage(with: Int(interaction.duration))
+            : interaction.body
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
         let message = MessageModel(withId: interaction.daemonID,
                                    receivedDate: date,
-                                   content: interaction.body,
+                                   content: content,
                                    author: author,
                                    incoming: interaction.incoming)
         let isTransfer =    interaction.type == InteractionType.iTransfer.rawValue ||
@@ -467,101 +565,60 @@ class DBManager {
     }
 
     private func addMessageTo(conversation conversationID: Int64,
-                              account accountProfileID: Int64,
-                              author authorProfileID: Int64,
+                              author: String?,
                               interactionType: InteractionType,
-                              message: MessageModel) -> Int64? {
+                              message: MessageModel,
+                              duration: Int,
+                              dataBase: Connection) -> Int64? {
         let timeInterval = message.receivedDate.timeIntervalSince1970
-        let interaction = Interaction(defaultID, accountProfileID, authorProfileID,
-                                      conversationID, Int64(timeInterval),
+        let interaction = Interaction(defaultID, author,
+                                      conversationID, Int64(timeInterval), Int64(duration),
                                       message.content, interactionType.rawValue,
                                       InteractionStatus.unknown.rawValue, message.daemonId,
                                       message.incoming)
-        return self.interactionHepler.insert(item: interaction)
+        return self.interactionHepler.insert(item: interaction, dataBase: dataBase)
     }
 
-    private func addInteractionContactTo(conversation conversationID: Int64,
-                                         account accountProfileID: Int64,
-                                         author authorProfileID: Int64,
-                                         message: MessageModel) -> Int64? {
-        let timeInterval = message.receivedDate.timeIntervalSince1970
-        let interaction = Interaction(defaultID, accountProfileID, authorProfileID,
-                                      conversationID, Int64(timeInterval),
-                                      message.content, InteractionType.contact.rawValue,
-                                      InteractionStatus.read.rawValue, message.daemonId,
-                                      message.incoming)
-        return self.interactionHepler.insertIfNotExist(item: interaction)
-    }
-
-    func createOrUpdateRingProfile(profileUri: String, alias: String?, image: String?, status: ProfileStatus) -> Bool {
-        let profile = Profile(defaultID, profileUri, alias, image, ProfileType.ring.rawValue,
-                              status.rawValue)
-        do {
-            try self.profileHepler.insertOrUpdateProfile(item: profile)
-        } catch {
-            return  false
+    private func getProfile(for profileUri: String, createIfNotExists: Bool, accounId: String) throws -> Profile? {
+        guard let dataBase = self.dbConnections.forAccount(account: accounId) else {
+            throw DataAccessError.datastoreConnectionError
         }
-        return true
-    }
-
-    private func getProfile(for profileUri: String, createIfNotExists: Bool) throws -> Profile? {
-        if let profile = try self.profileHepler.selectProfile(accountURI: profileUri) {
+        if let profile = try self.profileHepler.selectProfile(profileURI: ringUri(from: profileUri), dataBase: dataBase) {
             return profile
         }
         if !createIfNotExists {
             return nil
         }
         // for now we use template profile
-        let profile = self.createTemplateRingProfile(account: profileUri)
-        if self.profileHepler.insert(item: profile) {
-            return try self.profileHepler.selectProfile(accountURI: profileUri)
+        let profile = self.createTemplateRingProfile(uri: ringUri(from: profileUri))
+        if self.profileHepler.insert(item: profile, dataBase: dataBase) {
+            return try self.profileHepler.selectProfile(profileURI: ringUri(from: profileUri), dataBase: dataBase)
         }
         return nil
     }
 
-    private func createTemplateRingProfile(account uri: String) -> Profile {
-        return Profile(defaultID, uri, nil, nil, ProfileType.ring.rawValue,
-                       ProfileStatus.untrasted.rawValue)
+    private func createTemplateRingProfile(uri: String) -> Profile {
+        return Profile(uri, nil, nil, ProfileType.ring.rawValue)
     }
 
-    private func getConversationsIDBetween(accountProfileID: Int64,
-                                           contactProfileID: Int64,
-                                           createIfNotExists: Bool) throws -> [Int64]? {
-        if let accountConversations = try self.conversationHelper
-            .selectConversationsForProfile(profileId: accountProfileID) {
-            if let contactConversations = try self.conversationHelper
-                .selectConversationsForProfile(profileId: contactProfileID) {
-
-                let result = Array(Set(accountConversations.map({$0.id}))
-                    .intersection(Set(contactConversations.map({$0.id}))))
-                if !result.isEmpty {
-                    return result
-                }
+    private func getConversationsFor(contactUri: String,
+                                     createIfNotExists: Bool, dataBase: Connection) throws -> Int64? {
+        if let contactConversations = try self.conversationHelper
+            .selectConversationsForProfile(profileUri: ringUri(from: contactUri), dataBase: dataBase) {
+            if !contactConversations.isEmpty {
+                return contactConversations.first!.id
             }
         }
         if !createIfNotExists {
             return nil
         }
         let conversationID = Int64(arc4random_uniform(10000000))
-        let conversationForAccount = Conversation(conversationID, accountProfileID)
-        let conversationForContact = Conversation(conversationID, contactProfileID)
-
-        if !self.conversationHelper.insert(item: conversationForAccount) {
+        _ = self.profileHepler.insert(item: self.createTemplateRingProfile(uri: ringUri(from: contactUri)), dataBase: dataBase)
+        let conversationForContact = Conversation(conversationID, ringUri(from: contactUri))
+        if !self.conversationHelper.insert(item: conversationForContact, dataBase: dataBase) {
             return nil
         }
-        if !self.conversationHelper.insert(item: conversationForContact) {
-            return nil
-        }
-
-        guard let accountConversations = try self.conversationHelper
-            .selectConversationsForProfile(profileId: accountProfileID) else {
-                return nil
-        }
-        guard let contactConversations = try self.conversationHelper
-            .selectConversationsForProfile(profileId: contactProfileID) else {
-                return nil
-        }
-        return Array(Set(accountConversations.map({$0.id}))
-            .intersection(Set(contactConversations.map({$0.id}))))
+        return try self.conversationHelper
+            .selectConversationsForProfile(profileUri: ringUri(from: contactUri), dataBase: dataBase)?.first?.id
     }
 }

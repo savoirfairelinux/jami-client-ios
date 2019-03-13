@@ -107,7 +107,6 @@ class SmartlistViewModel: Stateable, ViewModel {
                         conversationViewModel?.conversation = Variable<ConversationModel>(conversationModel)
                         self?.conversationViewModels.append(conversationViewModel!)
                     }
-
                     return conversationViewModel
                 })
         })

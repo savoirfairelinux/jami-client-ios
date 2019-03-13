@@ -23,30 +23,62 @@ import SwiftyBeaver
 
 enum DataAccessError: Error {
     case datastoreConnectionError
+    case databaseMigrationError
     case databaseError
 }
 
 final class RingDB {
-    static let instance = RingDB()
-    let ringDB: Connection?
+    var jamiDB: Connection?
+    private var connections = [String: Connection?]()
     private let log = SwiftyBeaver.self
-    private let dbName = "ring.db"
+    private let jamiDBName = "ring.db"
+    private let path: String
 
-    //tables
-    var tableProfiles = Table("profiles")
-    var tableConversations = Table("conversations")
-    var tableInteractionss = Table("interactions")
-
-    private init() {
-        let path = NSSearchPathForDirectoriesInDomains(
+    init() {
+        path = NSSearchPathForDirectoriesInDomains(
             .documentDirectory, .userDomainMask, true
             ).first!
+    }
 
+    func getJamiDB() -> Connection? {
+        if jamiDB != nil {
+            return jamiDB
+        }
         do {
-            ringDB = try Connection("\(path)/" + dbName)
+            jamiDB = try Connection("\(path)/" + jamiDBName)
         } catch {
-            ringDB = nil
+            jamiDB = nil
             log.error("Unable to open database")
+        }
+        return jamiDB
+    }
+
+    func forAccount(account: String) -> Connection? {
+        if connections[account] != nil {
+            return connections[account] ?? nil
+        }
+        do {
+            let accountDb = try Connection("\(path)/\(account)/" + "\(account).db")
+            connections[account] = accountDb
+            return accountDb
+        } catch {
+            log.error("Unable to open database")
+            return nil
+        }
+    }
+
+    func isDBExistsFor(account: String) -> Bool {
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("\(account)/" + "\(account).db") {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return true
         }
     }
 }

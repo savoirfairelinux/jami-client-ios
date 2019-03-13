@@ -48,12 +48,13 @@ class ConversationsService {
         return self.conversations.asObservable()
     }()
 
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
+    let dbManager: DBManager
 
-    init(withMessageAdapter adapter: MessagesAdapter) {
+    init(withMessageAdapter adapter: MessagesAdapter, dbManager: DBManager) {
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
         messageAdapter = adapter
+        self.dbManager = dbManager
     }
 
     func getConversationsForAccount(accountId: String, accountUri: String) -> Observable<[ConversationModel]> {
@@ -64,19 +65,19 @@ class ConversationsService {
         if self.conversations.value.first != nil {
             shouldUpdateMessagesStatus = false
         }
-        dbManager.getConversationsObservable(for: accountId, accountURI: accountUri)
+        dbManager.getConversationsObservable(for: accountId)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [weak self] conversationsModels in
                 self?.conversations.value = conversationsModels
                 if shouldUpdateMessagesStatus {
-                    self?.updateMessagesStatus()
+                    self?.updateMessagesStatus(accountId: accountId)
                 }
             })
             .disposed(by: self.disposeBag)
         return self.conversations.asObservable()
     }
 
-    func updateMessagesStatus() {
+    func updateMessagesStatus(accountId: String) {
         /**
          If the app was closed prior to messages receiving a "stable"
          status, incorrect status values will remain in the database.
@@ -91,7 +92,9 @@ class ConversationsService {
                     let updatedMessageStatus = self.status(forMessageId: message.daemonId)
                     if (updatedMessageStatus.rawValue > message.status.rawValue && updatedMessageStatus != .failure) ||
                         (updatedMessageStatus == .failure && message.status == .sending) {
-                        self.dbManager.updateMessageStatus(daemonID: message.daemonId, withStatus: updatedMessageStatus)
+                        self.dbManager.updateMessageStatus(daemonID: message.daemonId,
+                                                           withStatus: updatedMessageStatus,
+                                                           accountId: accountId)
                             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                             .subscribe(onCompleted: { [] in
                                 print("Message status updated - load")
@@ -154,11 +157,11 @@ class ConversationsService {
 
         return Completable.create(subscribe: { [unowned self] completable in
             self.messagesSemaphore.wait()
-            self.dbManager.saveMessage(for: toAccountUri,
+            self.dbManager.saveMessage(for: toAccountId,
                                        with: recipientRingId,
                                        message: message,
                                        incoming: message.incoming,
-                                       interactionType: InteractionType.text)
+                                       interactionType: InteractionType.text, duration: 0)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [weak self] _ in
                     // append new message so it can be found if a status update is received before the DB finishes reload
@@ -168,7 +171,7 @@ class ConversationsService {
                     }).first?.messages.append(message)
                     self?.messagesSemaphore.signal()
                     if shouldRefreshConversations {
-                        self?.dbManager.getConversationsObservable(for: toAccountId, accountURI: toAccountUri)
+                        self?.dbManager.getConversationsObservable(for: toAccountId)
                             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                             .subscribe(onNext: { [weak self] conversationsModels in
                                 self?.conversations.value = conversationsModels
@@ -202,14 +205,30 @@ class ConversationsService {
                          date: Date,
                          interactionType: InteractionType,
                          shouldUpdateConversation: Bool) {
+        self.generateMessage(messageContent: messageContent,
+                             duration: 0, contactRingId: contactRingId,
+                             accountRingId: accountRingId, accountId: accountId,
+                             date: date, interactionType: interactionType,
+                             shouldUpdateConversation: shouldUpdateConversation)
+    }
+
+    // swiftlint:disable:next function_parameter_count
+    func generateMessage(messageContent: String,
+                         duration: Int64,
+                         contactRingId: String,
+                         accountRingId: String,
+                         accountId: String,
+                         date: Date,
+                         interactionType: InteractionType,
+                         shouldUpdateConversation: Bool) {
         let message = MessageModel(withId: "", receivedDate: date, content: messageContent, author: accountRingId, incoming: false)
         message.isGenerated = true
 
-        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: false, interactionType: interactionType)
+        self.dbManager.saveMessage(for: accountId, with: contactRingId, message: message, incoming: false, interactionType: interactionType, duration: Int(duration))
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [unowned self] _ in
                 if shouldUpdateConversation {
-                    self.dbManager.getConversationsObservable(for: accountId, accountURI: accountRingId)
+                    self.dbManager.getConversationsObservable(for: accountId)
                         .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe(onNext: { conversationsModels in
                             self.conversations.value = conversationsModels
@@ -244,11 +263,11 @@ class ConversationsService {
         message.isTransfer = true
 
         self.messagesSemaphore.wait()
-        self.dbManager.saveMessage(for: accountRingId, with: contactRingId, message: message, incoming: isIncoming, interactionType: interactionType)
+            self.dbManager.saveMessage(for: accountId, with: contactRingId, message: message, incoming: isIncoming, interactionType: interactionType, duration: 0)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [unowned self] message in
                 self.dataTransferMessageMap[transferId] = message
-                self.dbManager.getConversationsObservable(for: accountId, accountURI: accountRingId)
+                self.dbManager.getConversationsObservable(for: accountId)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onNext: { conversationsModels in
                         self.conversations.value = conversationsModels
@@ -284,10 +303,12 @@ class ConversationsService {
 
             let messagesIds = unreadMessages.map({$0.messageId}).filter({$0 >= 0})
             self.dbManager
-                .setMessagesAsRead(messagesIDs: messagesIds, withStatus: .read)
+                .setMessagesAsRead(messagesIDs: messagesIds,
+                                   withStatus: .read,
+                                   accountId: accountId)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onCompleted: { [weak self] in
-                        self?.dbManager.getConversationsObservable(for: accountId, accountURI: accountURI)
+                        self?.dbManager.getConversationsObservable(for: accountId)
                             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                             .subscribe(onNext: { [weak self] conversationsModels in
                                 self?.conversations.value = conversationsModels
@@ -301,18 +322,17 @@ class ConversationsService {
         })
     }
 
-    func getProfile(uri: String) -> Observable<Profile> {
-       return self.dbManager.profileObservable(for: uri, createIfNotExists: false)
+    func getProfile(uri: String, accountId: String) -> Observable<Profile> {
+        return self.dbManager.profileObservable(for: uri, createIfNotExists: false, accountId: accountId)
     }
 
     func clearHistory(conversation: ConversationModel, keepConversation: Bool) {
-        self.dbManager.clearHistoryBetween(accountUri: conversation.accountUri, and: conversation.recipientRingId, keepConversation: keepConversation)
+        self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: conversation.recipientRingId, keepConversation: keepConversation)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: { [weak self] in
                 self?.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
                 self?.dbManager
-                    .getConversationsObservable(for: conversation.accountId,
-                                                accountURI: conversation.accountUri)
+                    .getConversationsObservable(for: conversation.accountId)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onNext: { [weak self] conversationsModels in
                         self?.conversations.value = conversationsModels
@@ -352,7 +372,9 @@ class ConversationsService {
         }) {
             if let message = messages.first {
                 self.dbManager
-                    .updateMessageStatus(daemonID: message.daemonId, withStatus: status)
+                    .updateMessageStatus(daemonID: message.daemonId,
+                                         withStatus: status,
+                                         accountId: account.id)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onCompleted: { [unowned self] in
                         self.messagesSemaphore.signal()
@@ -395,7 +417,9 @@ class ConversationsService {
         }) {
             if let message = messages.first {
                 self.dbManager
-                    .updateTransferStatus(daemonID: message.daemonId, withStatus: transferStatus)
+                    .updateTransferStatus(daemonID: message.daemonId,
+                                          withStatus: transferStatus,
+                                          accountId: account.id)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onCompleted: { [unowned self] in
                         self.messagesSemaphore.signal()
