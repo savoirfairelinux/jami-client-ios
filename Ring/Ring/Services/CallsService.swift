@@ -57,11 +57,13 @@ class CallsService: CallsAdapterDelegate {
     var sharedResponseStream: Observable<ServiceEvent>
     fileprivate let newMessagesStream = PublishSubject<ServiceEvent>()
     var newMessage: Observable<ServiceEvent>
+    let dbManager: DBManager
 
-    init(withCallsAdapter callsAdapter: CallsAdapter) {
+    init(withCallsAdapter callsAdapter: CallsAdapter, dbManager: DBManager) {
         self.callsAdapter = callsAdapter
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
+        self.dbManager = dbManager
         newMessage = newMessagesStream.share()
         CallsAdapter.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.refuseUnansweredCall(_:)),
@@ -208,16 +210,24 @@ class CallsService: CallsAdapterDelegate {
         if accountID.isEmpty || callID.isEmpty {
             return
         }
-        VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
-                             inFolder: VCardFolders.profile.rawValue)
-            .subscribe(onSuccess: { [unowned self] card in
-                DispatchQueue.main.async {
-                    VCardUtils.sendVCard(card: card,
-                                         callID: callID,
-                                         accountID: accountID,
-                                         sender: self)
-                }
-            }).disposed(by: disposeBag)
+        guard let accountProfile = self.dbManager.accountProfile(for: accountID) else {return}
+        let vCard = CNMutableContact()
+        var cardChanged = false
+        if let name = accountProfile.alias {
+            vCard.familyName = name
+            cardChanged = true
+        }
+        if let photo = accountProfile.photo {
+            vCard.imageData = NSData(base64Encoded: photo,
+                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+            cardChanged = true
+        }
+        if cardChanged {
+            VCardUtils.sendVCard(card: vCard,
+                                 callID: callID,
+                                 accountID: accountID,
+                                 sender: self)
+        }
     }
 
     func sendChunk(callID: String, message: [String: String], accountId: String) {
@@ -237,9 +247,9 @@ class CallsService: CallsAdapterDelegate {
             call?.state = CallState(rawValue: state) ?? CallState.unknown
             //Remove from the cache if the call is over and save message to history
             if call?.state == .over || call?.state == .failure {
-                var time = 0.00
+                var time = 0
                 if let startTime = call?.dateReceived {
-                    time = Date().timeIntervalSince1970 - startTime.timeIntervalSince1970
+                    time = Int(Date().timeIntervalSince1970 - startTime.timeIntervalSince1970)
                 }
                 var event = ServiceEvent(withEventType: .callEnded)
                 event.addEventInput(.uri, value: call?.participantRingId)
@@ -261,8 +271,7 @@ class CallsService: CallsAdapterDelegate {
             //send vCard
             if (call?.state == .ringing && call?.callType == .outgoing) ||
                 (call?.state == .current && call?.callType == .incoming) {
-                let accountID = call?.accountId
-                self.sendVCard(callID: callId, accountID: accountID!)
+                self.sendVCard(callID: callId, accountID: (call?.accountId)!)
             }
 
             //Emit the call to the observers
@@ -271,24 +280,25 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String]) {
-
+        guard let call = self.call(callID: callId) else {return}
         if  message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first != nil {
             var data = [String: Any]()
             data[ProfileNotificationsKeys.ringID.rawValue] = uri
+            data[ProfileNotificationsKeys.accountId.rawValue] = call.accountId
             data[ProfileNotificationsKeys.message.rawValue] = message
             NotificationCenter.default.post(name: NSNotification.Name(ProfileNotifications.messageReceived.rawValue), object: nil, userInfo: data)
-        } else if let call = self.call(callID: callId) {
-            let accountId = call.accountId
-            let displayName = call.displayName
-            let registeredName = call.registeredName
-            let name = !displayName.isEmpty ? displayName : registeredName
-            var event = ServiceEvent(withEventType: .newIncomingMessage)
-            event.addEventInput(.content, value: message.values.first)
-            event.addEventInput(.peerUri, value: uri.replacingOccurrences(of: "@ring.dht", with: ""))
-            event.addEventInput(.name, value: name)
-            event.addEventInput(.accountId, value: accountId)
-            self.newMessagesStream.onNext(event)
+            return
         }
+        let accountId = call.accountId
+        let displayName = call.displayName
+        let registeredName = call.registeredName
+        let name = !displayName.isEmpty ? displayName : registeredName
+        var event = ServiceEvent(withEventType: .newIncomingMessage)
+        event.addEventInput(.content, value: message.values.first)
+        event.addEventInput(.peerUri, value: uri.replacingOccurrences(of: "@ring.dht", with: ""))
+        event.addEventInput(.name, value: name)
+        event.addEventInput(.accountId, value: accountId)
+        self.newMessagesStream.onNext(event)
     }
     // swiftlint:enable cyclomatic_complexity
 

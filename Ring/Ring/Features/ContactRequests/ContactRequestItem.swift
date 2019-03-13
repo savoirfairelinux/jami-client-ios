@@ -48,7 +48,9 @@ class ContactRequestItem {
         self.userName.value = contactRequest.ringId
         self.profileImageData.value = self.contactRequest.vCard?.imageData
         self.profileName.value = VCardUtils.getName(from: self.contactRequest.vCard)
-        profileService.getProfile(ringId: contactRequest.ringId, createIfNotexists: false)
+        profileService.getProfile(ringId: contactRequest.ringId,
+                                  createIfNotexists: false,
+                                  accountId: contactRequest.accountId)
             .subscribe(onNext: { [weak self] profile in
                 if let photo = profile.photo,
                     let data = NSData(base64Encoded: photo,

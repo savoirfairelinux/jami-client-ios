@@ -88,7 +88,9 @@ class SmartlistViewModel: Stateable, ViewModel {
 
                     return lastMessage1.receivedDate > lastMessage2.receivedDate
                 })
-                .filter({ self?.contactsService.contact(withRingId: $0.recipientRingId) != nil  || (!$0.messages.isEmpty && (self?.contactsService.contactRequest(withRingId: $0.recipientRingId) == nil))
+                .filter({ self?.contactsService.contact(withRingId: $0.recipientRingId) != nil
+                    || (!$0.messages.isEmpty &&
+                        (self?.contactsService.contactRequest(withRingId: $0.recipientRingId) == nil))
                 })
                 .compactMap({ conversationModel in
 
@@ -107,7 +109,6 @@ class SmartlistViewModel: Stateable, ViewModel {
                         conversationViewModel?.conversation = Variable<ConversationModel>(conversationModel)
                         self?.conversationViewModels.append(conversationViewModel!)
                     }
-
                     return conversationViewModel
                 })
         })
