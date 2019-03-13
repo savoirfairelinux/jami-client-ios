@@ -203,3 +203,12 @@
 "dataTransfer.readableStatusAccept" = "Accept";
 "dataTransfer.readableStatusCancel" = "Cancel";
 
+//Generated Message
+"generatedMessage.contactAdded" = "Contact added";
+"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.outgoingCall" = "Outgoing call";
+"generatedMessage.incomingCall" = "Incoming call";
+"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
+"generatedMessage.missedIncomingCall" = "Missed incoming call";
+

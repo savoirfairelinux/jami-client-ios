@@ -46,24 +46,6 @@ class ConversationsManager: MessagesAdapterDelegate {
         self.callService = callService
         MessagesAdapter.delegate = self
 
-        self.accountsService
-            .sharedResponseStream
-            .filter({ (event) in
-                return event.eventType == ServiceEventType.registrationStateChanged &&
-                    event.getEventInput(ServiceEventInput.registrationState) == Registered
-            })
-            .subscribe(onNext: { [unowned self] _ in
-                if let currentAccount = self.accountsService.currentAccount {
-                    if let ringID = AccountModelHelper(withAccount: currentAccount).ringId {
-                        self.conversationService
-                            .getConversationsForAccount(accountId: currentAccount.id, accountUri: ringID)
-                            .subscribe()
-                            .disposed(by: self.disposeBag)
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
-
         self.dataTransferService
             .sharedResponseStream
             .filter({ (event) in

@@ -38,7 +38,6 @@ class GeneratedInteractionsManager {
         self.subscribeToCallEvents()
     }
 
-    // swiftlint:disable cyclomatic_complexity
     private func subscribeToContactEvents() {
         self.contactService
             .sharedResponseStream
@@ -47,38 +46,31 @@ class GeneratedInteractionsManager {
                 guard let accountID: String = contactRequestEvent.getEventInput(.accountId) else {
                     return
                 }
-
                 guard let contactRingId: String = contactRequestEvent.getEventInput(.uri) else {
                     return
                 }
-
                 guard let account = self.accountService.getAccount(fromAccountId: accountID) else {
                     return
                 }
-
                 guard let ringId = AccountModelHelper(withAccount: account).ringId else {
                     return
                 }
                 var shouldUpdateConversations = false
-                if let currentAccount = self.accountService.currentAccount {
-                    if let currentrRingId = AccountModelHelper(withAccount: currentAccount).ringId, currentrRingId == ringId {
-                        shouldUpdateConversations = true
-                    }
+                if let currentAccount = self.accountService.currentAccount,
+                    let currentrRingId = AccountModelHelper(withAccount: currentAccount).ringId,
+                    currentrRingId == ringId {
+                    shouldUpdateConversations = true
                 }
-
-                var type: GeneratedMessageType
-
                 var date = Date()
                 if let receivedDate: Date = contactRequestEvent.getEventInput(.date) {
                     date = receivedDate
                 }
-
+                var message = ""
                 switch contactRequestEvent.eventType {
-
                 case ServiceEventType.contactAdded:
-                    type = GeneratedMessageType.contactAdded
+                    message = GeneratedMessage.contactAdded.toString()
                 case ServiceEventType.contactRequestReceived:
-                    type = GeneratedMessageType.receivedContactRequest
+                    message = GeneratedMessage.invitationReceived.toString()
                 case ServiceEventType.contactRequestDiscarded:
                     self.removeConversation(accountId: account.id,
                                             accountRingId: ringId,
@@ -88,10 +80,8 @@ class GeneratedInteractionsManager {
                 default:
                     return
                 }
-
-                self.conversationService.generateMessage(messageContent: type.rawValue,
+                self.conversationService.generateMessage(messageContent: message,
                                                          contactRingId: contactRingId,
-                                                         accountRingId: ringId,
                                                          accountId: account.id,
                                                          date: date,
                                                          interactionType: InteractionType.contact,
@@ -116,12 +106,10 @@ class GeneratedInteractionsManager {
         self.conversationService.clearHistory(conversation: conversation, keepConversation: false)
     }
 
-    // swiftlint:disable cyclomatic_complexity
     private func subscribeToCallEvents() {
         self.callService
             .sharedResponseStream
             .subscribe(onNext: { [unowned self] callEvent in
-
                 guard let accountID: String = callEvent.getEventInput(.accountId) else {
                     return
                 }
@@ -130,7 +118,7 @@ class GeneratedInteractionsManager {
                     return
                 }
 
-                guard let time: Double = callEvent.getEventInput(.callTime) else {
+                guard let time: Int = callEvent.getEventInput(.callTime) else {
                     return
                 }
 
@@ -145,54 +133,25 @@ class GeneratedInteractionsManager {
                 guard let ringId = AccountModelHelper(withAccount: account).ringId else {
                     return
                 }
-
                 var shouldUpdateConversations = false
-                if let currentAccount = self.accountService.currentAccount {
-                    if let currentrRingId = AccountModelHelper(withAccount: currentAccount).ringId, currentrRingId == ringId {
-                        shouldUpdateConversations = true
-                    }
+                if let currentAccount = self.accountService.currentAccount,
+                    let currentrRingId = AccountModelHelper(withAccount: currentAccount).ringId,
+                    currentrRingId == ringId {
+                    shouldUpdateConversations = true
                 }
-                var message = ""
-
-                if time > 0 {
-                    let timeString = self.convertSecondsToString(seconds: time)
-                    if callType == CallType.incoming.rawValue {
-                        message = GeneratedMessageType.incomingCall.rawValue + " - " + timeString
-                    } else if callType == CallType.outgoing.rawValue {
-                        message = GeneratedMessageType.outgoingCall.rawValue + " - " + timeString
-                    }
-                } else {
-                    if callType == CallType.incoming.rawValue {
-                        message = GeneratedMessageType.missedIncomingCall.rawValue
-                    } else if callType == CallType.outgoing.rawValue {
-                        message = GeneratedMessageType.missedOutgoingCall.rawValue
-                    }
-                }
-                self.conversationService.generateMessage(messageContent: message,
-                                                         contactRingId: contactRingId,
-                                                         accountRingId: ringId,
-                                                         accountId: account.id,
-                                                         date: Date(),
-                                                         interactionType: InteractionType.call,
-                                                         shouldUpdateConversation: shouldUpdateConversations)
+                let message = callType == CallType.incoming.rawValue
+                ? (time > 0) ?  GeneratedMessage.incomingCall.toString() : GeneratedMessage.missedIncomingCall.toString() :
+                (time > 0) ?  GeneratedMessage.outgoingCall.toString() : GeneratedMessage.missedOutgoingCall.toString()
+                self.conversationService
+                    .generateMessage(messageContent: message,
+                                     duration: Int64(time),
+                                     contactRingId: contactRingId,
+                                     accountId: account.id,
+                                     date: Date(),
+                                     interactionType: InteractionType.call,
+                                     shouldUpdateConversation: shouldUpdateConversations)
 
             })
             .disposed(by: disposeBag)
-    }
-
-    func convertSecondsToString(seconds: Double) -> String {
-        var string = ""
-        var reminderSeconds = seconds
-        let hours = Int(seconds / 3600)
-        if hours > 0 {
-            reminderSeconds = seconds.truncatingRemainder(dividingBy: 3600)
-            string += String(format: "%02d", hours) + ":"
-
-        }
-        let min = Int(reminderSeconds / 60)
-        let sec = reminderSeconds.truncatingRemainder(dividingBy: 60)
-        string += String(format: "%02d:%02d", min, Int(sec))
-        print("string", string)
-        return string
     }
 }

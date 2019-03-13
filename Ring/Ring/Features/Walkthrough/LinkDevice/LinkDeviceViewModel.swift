@@ -48,37 +48,31 @@ class LinkDeviceViewModel: Stateable, ViewModel {
 
     required init (with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
-
-        let accountCreated = createState.filter { newState in
-             return newState == .success
-        }
-
-        //Account creation state observer
-        self.accountService
-            .sharedResponseStream
-            .takeUntil(accountCreated)
-            .subscribe(onNext: { [unowned self] event in
-                if event.getEventInput(ServiceEventInput.registrationState) == Registered {
-                    self.accountCreationState.value = .success
-                    Observable<Int>.timer(Durations.alertFlashDuration.value, period: nil, scheduler: MainScheduler.instance).subscribe(onNext: { [unowned self] (_) in
-                        self.enablePushNotifications(enable: self.notificationSwitch.value)
-                        self.stateSubject.onNext(WalkthroughState.deviceLinked)
-                    }).disposed(by: self.disposeBag)
-                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
-                    self.accountCreationState.value = .error(error: AccountCreationError.linkError)
-                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                    self.accountCreationState.value = .error(error: AccountCreationError.network)
-                }
-            }, onError: { [unowned self] _ in
-                self.accountCreationState.value = .error(error: AccountCreationError.unknown)
-            }).disposed(by: disposeBag)
     }
 
     func linkDevice () {
         self.accountCreationState.value = .started
-        self.accountService.linkToRingAccount(withPin: self.pin.value,
-                                              password: self.password.value,
-                                              enable: self.notificationSwitch.value)
+        self.accountService
+            .linkToRingAccount(withPin: self.pin.value,
+                               password: self.password.value,
+                               enable: self.notificationSwitch.value)
+            .subscribe(onNext: { [unowned self] (_) in
+                self.accountCreationState.value = .success
+                Observable<Int>.timer(Durations.alertFlashDuration.value,
+                                      period: nil,
+                                      scheduler: MainScheduler.instance)
+                    .subscribe(onNext: { (_) in
+                        self.enablePushNotifications(enable: self.notificationSwitch.value)
+                        self.stateSubject.onNext(WalkthroughState.deviceLinked)
+                    }).disposed(by: self.disposeBag)
+                }, onError: { [weak self] (error) in
+                    if let error = error as? AccountCreationError {
+                        self?.accountCreationState.value = .error(error: error)
+                    } else {
+                        self?.accountCreationState.value = .error(error: AccountCreationError.unknown)
+                    }
+            })
+            .disposed(by: self.disposeBag)
     }
     func enablePushNotifications(enable: Bool) {
         if !enable {

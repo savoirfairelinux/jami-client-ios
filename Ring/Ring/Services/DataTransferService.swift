@@ -86,16 +86,15 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
+    let dbManager: DBManager
 
-    init(withDataTransferAdapter dataTransferAdapter: DataTransferAdapter) {
+    init(withDataTransferAdapter dataTransferAdapter: DataTransferAdapter, dbManager: DBManager) {
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
         self.dataTransferAdapter = dataTransferAdapter
+        self.dbManager = dbManager
         DataTransferAdapter.delegate = self
     }
-
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
-
     // MARK: public
 
     func getTransferInfo(withId transferId: UInt64) -> NSDataTransferInfo? {
@@ -125,7 +124,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                 let name = pathUrl.lastPathComponent + "\n" + fileSizeWithUnit
                 fileName = name
                 //update db
-                self.dbManager.updateFileName(interactionID: interactionID, name: name).subscribe(onCompleted: { [weak self] in
+                self.dbManager.updateFileName(interactionID: interactionID, name: name, accountId: accountID).subscribe(onCompleted: { [weak self] in
                       self?.log.debug("file name updated")
                 }, onError: { [weak self] _ in
                      self?.log.error("update name failed")

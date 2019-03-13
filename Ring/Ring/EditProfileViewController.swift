@@ -41,7 +41,6 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.model = EditProfileViewModel()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,11 +53,11 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         profileName.returnKeyType = .done
         profileName.autocorrectionType = .no
 
-        self.model.image.asObservable()
+        self.model.profileImage
             .bind(to: self.profileImageView.rx.image)
             .disposed(by: disposeBag)
 
-        self.model.profileName.asObservable()
+        self.model.profileName
             .bind(to: self.profileName.rx.text)
             .disposed(by: disposeBag)
 
@@ -73,7 +72,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
     }
 
     func resetProfileName() {
-        self.profileName.text = self.model.profileName.value
+        self.profileName.text = self.model.name
     }
 
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {

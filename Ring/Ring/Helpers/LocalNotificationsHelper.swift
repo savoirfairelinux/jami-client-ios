@@ -31,7 +31,7 @@ enum NotificationUserInfoKeys: String {
 enum NotificationCallTitle: String {
     case incomingCall = "Incoming Call"
     case missedCall = "Missed Call"
-    func getString()->String {
+    func getString() -> String {
         switch self {
         case .incomingCall:
             return L10n.Notifications.incomingCall

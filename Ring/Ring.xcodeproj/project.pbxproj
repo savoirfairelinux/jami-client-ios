@@ -85,7 +85,7 @@
 		04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586C94A1F684DF600613517 /* UIImage+Helpers.swift */; };
 		0E0FF1A71FC38070003898C2 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0FF1A61FC38070003898C2 /* SQLite.framework */; };
-		0E0FF1AA1FC3843E003898C2 /* RingDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1A91FC3843E003898C2 /* RingDB.swift */; };
+		0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1A91FC3843E003898C2 /* DBContainer.swift */; };
 		0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */; };
 		0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B41FC3947B003898C2 /* DBManager.swift */; };
 		0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */; };
@@ -394,7 +394,7 @@
 		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		0586C94A1F684DF600613517 /* UIImage+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Helpers.swift"; sourceTree = "<group>"; };
 		0E0FF1A61FC38070003898C2 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
-		0E0FF1A91FC3843E003898C2 /* RingDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingDB.swift; sourceTree = "<group>"; };
+		0E0FF1A91FC3843E003898C2 /* DBContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBContainer.swift; sourceTree = "<group>"; };
 		0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataHelper.swift; sourceTree = "<group>"; };
 		0E0FF1B41FC3947B003898C2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDataHepler.swift; sourceTree = "<group>"; };
@@ -1049,7 +1049,7 @@
 			isa = PBXGroup;
 			children = (
 				0E0FF1AB1FC38BD1003898C2 /* DBHelpers */,
-				0E0FF1A91FC3843E003898C2 /* RingDB.swift */,
+				0E0FF1A91FC3843E003898C2 /* DBContainer.swift */,
 				0E0FF1B41FC3947B003898C2 /* DBManager.swift */,
 			);
 			path = Database;
@@ -1901,7 +1901,7 @@
 				1A2D18E51F29197100B2C785 /* MessageAccessoryView.swift in Sources */,
 				0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */,
 				0EE1B54E1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift in Sources */,
-				0E0FF1AA1FC3843E003898C2 /* RingDB.swift in Sources */,
+				0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
 				1A3CA32D1F13DA7200283748 /* Chameleon+Ring.swift in Sources */,
 				0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */,

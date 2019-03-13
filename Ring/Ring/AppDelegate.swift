@@ -33,20 +33,37 @@ import PushKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
+    let dBManager = DBManager(profileHepler: ProfileDataHelper(),
+                              conversationHelper: ConversationDataHelper(),
+                              interactionHepler: InteractionDataHelper(),
+                              dbConnections: DBContainer())
     private let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
-    private let accountService = AccountsService(withAccountAdapter: AccountAdapter())
     private let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
-    private let conversationsService = ConversationsService(withMessageAdapter: MessagesAdapter())
-    private let contactsService = ContactsService(withContactsAdapter: ContactsAdapter())
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
-    private let callService = CallsService(withCallsAdapter: CallsAdapter())
     private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
-    private let dataTransferService = DataTransferService(withDataTransferAdapter: DataTransferAdapter())
     private let networkService = NetworkService()
-    private let profileService = ProfilesService()
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
+    private lazy var callService: CallsService = {
+        CallsService(withCallsAdapter: CallsAdapter(), dbManager: self.dBManager)
+    }()
+    private lazy var accountService: AccountsService = {
+        AccountsService(withAccountAdapter: AccountAdapter(), dbManager: self.dBManager)
+    }()
+    private lazy var contactsService: ContactsService = {
+        ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: self.dBManager)
+    }()
+    private lazy var profileService: ProfilesService = {
+        ProfilesService(dbManager: self.dBManager)
+    }()
+    private lazy var dataTransferService: DataTransferService = {
+        DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
+                            dbManager: self.dBManager)
+    }()
+    private lazy var conversationsService: ConversationsService = {
+        ConversationsService(withMessageAdapter: MessagesAdapter(), dbManager: self.dBManager)
+    }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
@@ -72,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     fileprivate let disposeBag = DisposeBag()
 
+    // swiftlint:disable function_body_length
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         // ignore sigpipe
@@ -131,7 +149,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         nameService: self.nameService,
                                                         dataTransferService: self.dataTransferService,
                                                         callService: self.callService)
-        self.startDB()
 
         self.accountService
             .sharedResponseStream
@@ -163,23 +180,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             })
             .disposed(by: disposeBag)
 
-        self.accountService.loadAccounts().subscribe { [unowned self] (_) in
+        self.window?.rootViewController = self.appCoordinator.rootViewController
+        self.window?.makeKeyAndVisible()
+
+        self.accountService.initialAccountsLoading().subscribe(onCompleted: {
+            self.appCoordinator.start()
             guard let currentAccount = self.accountService.currentAccount else {
                 self.log.error("Can't get current account!")
                 return
             }
             self.contactsService.loadContacts(withAccount: currentAccount)
             self.contactsService.loadContactRequests(withAccount: currentAccount)
-            self.presenceService.subscribeBuddies(withAccount: currentAccount, withContacts: self.contactsService.contacts.value)
+            self.presenceService.subscribeBuddies(withAccount: currentAccount,
+                                                  withContacts: self.contactsService.contacts.value)
             if let ringID = AccountModelHelper(withAccount: currentAccount).ringId {
                 self.conversationManager?
                     .prepareConversationsForAccount(accountId: currentAccount.id, accountUri: ringID)
             }
-        }.disposed(by: self.disposeBag)
-
-        self.window?.rootViewController = self.appCoordinator.rootViewController
-        self.window?.makeKeyAndVisible()
-        self.appCoordinator.start()
+        }, onError: { _ in
+            self.appCoordinator.start()
+            let time = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: time) {
+                self.appCoordinator.showDatabaseError()
+            }
+        }).disposed(by: self.disposeBag)
         self.voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerVoipNotifications),
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
@@ -233,20 +257,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             log.error("Daemon failed to stop because it was not already running.")
         } catch {
             log.error("Unknown error in Daemon stop.")
-        }
-    }
-
-    private func startDB() {
-        do {
-            let dbManager = DBManager(profileHepler: ProfileDataHelper(),
-                                       conversationHelper: ConversationDataHelper(),
-                                       interactionHepler: InteractionDataHelper())
-            try dbManager.start()
-        } catch {
-            let time = DispatchTime.now() + 1
-            DispatchQueue.main.asyncAfter(deadline: time) {
-                self.appCoordinator.showDatabaseError()
-            }
         }
     }
 
