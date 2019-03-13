@@ -43,12 +43,13 @@ class ContactsService {
 
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
+    let dbManager: DBManager
 
-    init(withContactsAdapter contactsAdapter: ContactsAdapter) {
+    init(withContactsAdapter contactsAdapter: ContactsAdapter, dbManager: DBManager) {
         self.contactsAdapter = contactsAdapter
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
+        self.dbManager = dbManager
         ContactsAdapter.delegate = self
     }
 
@@ -115,13 +116,14 @@ class ContactsService {
                     .createOrUpdateRingProfile(profileUri: contactRequest.ringId,
                                                alias: name,
                                                image: stringImage,
-                                               status: ProfileStatus.trusted)
+                                               accountId: account.id)
                 var event = ServiceEvent(withEventType: .contactAdded)
                 event.addEventInput(.accountId, value: account.id)
                 event.addEventInput(.uri, value: contactRequest.ringId)
                 self.responseStream.onNext(event)
                 var data = [String: Any]()
                 data[ProfileNotificationsKeys.ringID.rawValue] = contactRequest.ringId
+                data[ProfileNotificationsKeys.accountId.rawValue] = account.id
                 NotificationCenter.default.post(name: NSNotification.Name(ProfileNotifications.contactAdded.rawValue), object: nil, userInfo: data)
                 observable.on(.completed)
             } else {
@@ -153,13 +155,25 @@ class ContactsService {
         }
     }
 
-    func sendContactRequest(toContactRingId ringId: String, vCard: CNContact?, withAccount account: AccountModel) -> Completable {
+    func sendContactRequest(toContactRingId ringId: String, withAccount account: AccountModel) -> Completable {
         return Completable.create { [unowned self] completable in
             do {
-
                 var payload: Data?
-                if let vCard = vCard {
-                  payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000)
+                if let accountProfile = self.dbManager.accountProfile(for: account.id) {
+                    let vCard = CNMutableContact()
+                    var cardChanged = false
+                    if let name = accountProfile.alias {
+                        vCard.familyName = name
+                        cardChanged = true
+                    }
+                    if let photo = accountProfile.photo {
+                        vCard.imageData = NSData(base64Encoded: photo,
+                                                options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+                        cardChanged = true
+                    }
+                    if cardChanged {
+                        payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000)
+                    }
                 }
                 self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: account.id)
                 var event = ServiceEvent(withEventType: .contactAdded)
@@ -319,8 +333,8 @@ extension ContactsService: ContactsAdapterDelegate {
         })
     }
 
-    func getProfileForUri(uri: String) ->Observable<Profile> {
-        return self.dbManager.profileObservable(for: uri, createIfNotExists: false)
+    func getProfileForUri(uri: String, accountId: String) ->Observable<Profile> {
+        return self.dbManager.profileObservable(for: uri, createIfNotExists: false, accountId: accountId)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
     }
 }
