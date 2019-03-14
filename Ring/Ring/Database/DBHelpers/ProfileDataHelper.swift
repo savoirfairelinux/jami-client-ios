@@ -97,38 +97,6 @@ final class ProfileDataHelper {
         }
     }
 
-    func updateURI(newURI: String, for profileId: Int64) throws {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
-        let selectQuery = table.filter(id == profileId)
-        try dataBase.run(selectQuery.update(uri <- newURI))
-    }
-
-    func updateImageAndName(newName: String, newImage: String, for profileId: Int64) throws {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
-        let selectQuery = table.filter(id == profileId)
-        try dataBase.run(selectQuery.update(alias <- newName, photo <- newImage))
-    }
-
-    func updateName(newName: String, for profileId: Int64) throws {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
-        let selectQuery = table.filter(id == profileId)
-        try dataBase.run(selectQuery.update(alias <- newName))
-    }
-
-    func updateImage(newImage: String, for profileId: Int64) throws {
-        guard let dataBase = RingDB.instance.ringDB else {
-            throw DataAccessError.datastoreConnectionError
-        }
-        let selectQuery = table.filter(id == profileId)
-        try dataBase.run(selectQuery.update(photo <- newImage))
-    }
-
     func selectProfile(profileId: Int64) throws -> Profile? {
         guard let dataBase = RingDB.instance.ringDB else {
             throw DataAccessError.datastoreConnectionError

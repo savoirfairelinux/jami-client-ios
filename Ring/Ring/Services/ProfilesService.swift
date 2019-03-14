@@ -146,36 +146,27 @@ class ProfilesService {
                 vCardData.append(currentData)
             }
         }
+
         //Create the vCard, save and db and emit a new event
         if let vCard = CNContactVCardSerialization.parseToVCard(data: vCardData) {
+            let name = VCardUtils.getName(from: vCard)
+            var stringImage: String?
+            if let image = vCard.imageData {
+                stringImage = image.base64EncodedString()
+            }
             let uri = ringID.replacingOccurrences(of: "@ring.dht", with: "")
-            self.updateProfile(accountId: accountId,
-                               profileUri: uri,
-                               isAccount: false,
-                               vCard: vCard)
+            _ = self.dbManager
+                .createOrUpdateRingProfile(profileUri: uri,
+                                           alias: name,
+                                           image: stringImage,
+                                           status: ProfileStatus.untrasted,
+                                           accountId: accountId,
+                                           isAccount: false)
+            self.updateProfileFor(ringId: uri)
         }
     }
 
-    func updateProfile(accountId: String,
-                       profileUri: String,
-                       isAccount: Bool,
-                       vCard: CNContact) {
-        let name = VCardUtils.getName(from: vCard)
-        var stringImage: String?
-        if let image = vCard.imageData {
-            stringImage = image.base64EncodedString()
-        }
-        _ = self.dbManager
-            .createOrUpdateRingProfile(profileUri: profileUri,
-                                       alias: name,
-                                       image: stringImage,
-                                       status: ProfileStatus.untrasted,
-                                       accountId: accountId,
-                                       isAccount: isAccount)
-        self.updateProfileFor(ringId: profileUri)
-    }
-
-    private func addAndGetPrifileFor(ringId: String, accountId: String, isAccount: Bool) {
+    private func addOrUpdatePrifileFor(ringId: String, accountId: String, isAccount: Bool) {
         guard let profileObservable = self.profiles[ringId] else {
             return
         }
@@ -206,7 +197,7 @@ class ProfilesService {
         let profileObservable = ReplaySubject<Profile>.create(bufferSize: 1)
         self.profiles[ringId] = profileObservable
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.addAndGetPrifileFor(ringId: ringId, accountId: accountId, isAccount: isAccount)
+            self.addOrUpdatePrifileFor(ringId: ringId, accountId: accountId, isAccount: isAccount)
         }
         return profileObservable.share()
     }
