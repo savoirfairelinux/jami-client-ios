@@ -82,8 +82,6 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
 
     private func showCreateProfile () {
         let createProfileViewController = CreateProfileViewController.instantiate(with: self.injectionBag)
-        createProfileViewController.model = EditProfileViewModel(profileService: self.injectionBag.profileService,
-                                                                 accountService: self.injectionBag.accountService)
         self.present(viewController: createProfileViewController, withStyle: .show, withAnimation: true, withStateable: createProfileViewController.viewModel)
     }
 

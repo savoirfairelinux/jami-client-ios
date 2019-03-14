@@ -67,8 +67,6 @@ class MeCoordinator: Coordinator, StateableResponsive {
 
     func start () {
         let meViewController = MeViewController.instantiate(with: self.injectionBag)
-        meViewController.model = EditProfileViewModel(profileService: self.injectionBag.profileService,
-                                                      accountService: self.injectionBag.accountService)
         self.present(viewController: meViewController, withStyle: .show, withAnimation: true, withStateable: meViewController.viewModel)
     }
 
