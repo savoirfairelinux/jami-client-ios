@@ -271,25 +271,24 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String]) {
-        guard let call = self.call(callID: callId) else {return}
+
         if  message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first != nil {
             var data = [String: Any]()
             data[ProfileNotificationsKeys.ringID.rawValue] = uri
-            data[ProfileNotificationsKeys.accountId.rawValue] = call.accountId
             data[ProfileNotificationsKeys.message.rawValue] = message
             NotificationCenter.default.post(name: NSNotification.Name(ProfileNotifications.messageReceived.rawValue), object: nil, userInfo: data)
-            return
+        } else if let call = self.call(callID: callId) {
+            let accountId = call.accountId
+            let displayName = call.displayName
+            let registeredName = call.registeredName
+            let name = !displayName.isEmpty ? displayName : registeredName
+            var event = ServiceEvent(withEventType: .newIncomingMessage)
+            event.addEventInput(.content, value: message.values.first)
+            event.addEventInput(.peerUri, value: uri.replacingOccurrences(of: "@ring.dht", with: ""))
+            event.addEventInput(.name, value: name)
+            event.addEventInput(.accountId, value: accountId)
+            self.newMessagesStream.onNext(event)
         }
-        let accountId = call.accountId
-        let displayName = call.displayName
-        let registeredName = call.registeredName
-        let name = !displayName.isEmpty ? displayName : registeredName
-        var event = ServiceEvent(withEventType: .newIncomingMessage)
-        event.addEventInput(.content, value: message.values.first)
-        event.addEventInput(.peerUri, value: uri.replacingOccurrences(of: "@ring.dht", with: ""))
-        event.addEventInput(.name, value: name)
-        event.addEventInput(.accountId, value: accountId)
-        self.newMessagesStream.onNext(event)
     }
     // swiftlint:enable cyclomatic_complexity
 
