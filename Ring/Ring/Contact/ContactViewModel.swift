@@ -96,7 +96,8 @@ class ContactViewModel: ViewModel, Stateable {
                     self.profileImageData.value = imageData
                 })
                 .disposed(by: self.disposeBag)
-            self.profileService.getProfile(ringId: conversation.recipientRingId)
+            self.profileService.getProfile(ringId: conversation.recipientRingId,
+                                           createIfNotexists: false)
                 .subscribe(onNext: { [unowned self] profile in
                     if let alias = profile.alias, !alias.isEmpty {
                         self.displayName.value = alias

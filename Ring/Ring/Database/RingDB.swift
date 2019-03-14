@@ -31,13 +31,11 @@ final class RingDB {
     let ringDB: Connection?
     private let log = SwiftyBeaver.self
     private let dbName = "ring.db"
-    let dbVersion = 1
 
     //tables
     var tableProfiles = Table("profiles")
     var tableConversations = Table("conversations")
     var tableInteractionss = Table("interactions")
-    var tableAccountProfiles = Table("profiles_accounts")
 
     private init() {
         let path = NSSearchPathForDirectoriesInDomains(
@@ -49,19 +47,6 @@ final class RingDB {
         } catch {
             ringDB = nil
             log.error("Unable to open database")
-        }
-    }
-}
-
-extension Connection {
-    public var userVersion: Int? {
-        get {
-            if let version = try? scalar("PRAGMA user_version"),
-                let intVersion =  version as? Int64 {return Int(intVersion)}
-            return nil
-        }
-        set {
-            if let version = newValue {_ = try? run("PRAGMA user_version = \(version)")}
         }
     }
 }

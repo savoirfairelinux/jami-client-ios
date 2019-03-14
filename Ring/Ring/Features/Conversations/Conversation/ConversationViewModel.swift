@@ -134,7 +134,8 @@ class ConversationViewModel: Stateable, ViewModel {
                 })
                 .disposed(by: disposeBag)
 
-            self.profileService.getProfile(ringId: contactRingId)
+            self.profileService.getProfile(ringId: contactRingId,
+                                                     createIfNotexists: false)
                 .subscribe(onNext: { [unowned self] profile in
                     self.displayName.value = profile.alias
                     if let photo = profile.photo,

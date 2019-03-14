@@ -94,7 +94,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         DataTransferAdapter.delegate = self
     }
 
-    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper(), accountProfileHelper: AccountProfileHelper())
+    let dbManager = DBManager(profileHepler: ProfileDataHelper(), conversationHelper: ConversationDataHelper(), interactionHepler: InteractionDataHelper())
 
     // MARK: public
 
