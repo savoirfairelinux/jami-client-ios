@@ -145,6 +145,36 @@ struct AccountModelHelper {
         }
     }
 
+    public var uri: String? {
+        let accountType = self.account.details?
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType))
+        if accountType == AccountType.sip.rawValue {
+            let name = self.account.details!
+                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountUsername))
+            let server = self.account.details!
+                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
+            let port = self.account.details!
+                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .localPort))
+            var uri: String
+            if !name.isEmpty {
+                uri = "sip:" + name
+                if !server.isEmpty {
+                    uri += "@" + server
+                    if !port.isEmpty {
+                        uri += ":" + port
+                    }
+                    return uri
+                } else {
+                    return uri
+                }
+            }
+            return nil
+        } else {
+            guard let ringId = self.ringId else {return nil}
+            return "ring:".appending(ringId)
+        }
+    }
+
     public var havePassword: Bool {
         let noPassword: String = self.account.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword)) ?? "false"
         return noPassword == "true" ? true : false

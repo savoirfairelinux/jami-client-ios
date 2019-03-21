@@ -247,7 +247,7 @@ class DBManager {
                     throw DataAccessError.datastoreConnectionError
                 }
                 try dataBase.transaction {
-                    let author: String? = incoming ? self!.ringUri(from: contactUri) : nil
+                    let author: String? = incoming ? contactUri : nil
                     guard let conversationID = try self?.getConversationsFor(contactUri: contactUri,
                                                                              createIfNotExists: true,
                                                                              dataBase: dataBase) else {
@@ -305,6 +305,17 @@ class DBManager {
                 completable(.error(DBBridgingError.updateIntercationFailed))
             }
             return Disposables.create { }
+        }
+    }
+
+    func getProfilesForAccount(accountID: String) -> [Profile]? {
+        guard let database = self.dbConnections.forAccount(account: accountID) else {
+            return nil
+        }
+        do {
+            return try self.profileHepler.selectAll(dataBase: database)
+        } catch {
+            return nil
         }
     }
 
@@ -507,8 +518,10 @@ class DBManager {
                                                                                 dataBase: dataBase) else {
                 continue
             }
-            let conversationModel = ConversationModel(withRecipientRingId: jamiId(from: participantProfile.uri),
-                                                      accountId: accountId, accountUri: "")
+            let type = participantProfile.uri.contains("sip:") ? URIType.sip : URIType.ring
+            let uri = JamiURI.init(schema: type, infoHach: participantProfile.uri)
+            let conversationModel = ConversationModel(withParticipantUri: uri,
+                                                      accountId: accountId)
             conversationModel.participantProfile = participantProfile
             conversationModel.conversationId = String(conversationID)
             var messages = [MessageModel]()
@@ -520,7 +533,7 @@ class DBManager {
             }
             for interaction in interactions {
                 let author = interaction.author == participantProfile.uri
-                    ? jamiId(from: participantProfile.uri) : ""
+                    ? participantProfile.uri : ""
                 if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
                 }
@@ -556,7 +569,7 @@ class DBManager {
         let message = MessageModel(withId: interaction.daemonID,
                                    receivedDate: date,
                                    content: content,
-                                   author: author,
+                                   authorURI: author,
                                    incoming: interaction.incoming)
         let isTransfer =    interaction.type == InteractionType.iTransfer.rawValue ||
                             interaction.type == InteractionType.oTransfer.rawValue
@@ -605,21 +618,22 @@ class DBManager {
             return nil
         }
         // for now we use template profile
-        let profile = self.createTemplateRingProfile(uri: ringUri(from: profileUri))
+        let profile = self.createTemplateProfile(uri: ringUri(from: profileUri))
         if self.profileHepler.insert(item: profile, dataBase: dataBase) {
             return try self.profileHepler.selectProfile(profileURI: ringUri(from: profileUri), dataBase: dataBase)
         }
         return nil
     }
 
-    private func createTemplateRingProfile(uri: String) -> Profile {
-        return Profile(uri, nil, nil, ProfileType.ring.rawValue)
+    private func createTemplateProfile(uri: String) -> Profile {
+        let type = uri.contains("ring") ? ProfileType.ring : ProfileType.sip
+        return Profile(uri, nil, nil, type.rawValue)
     }
 
     private func getConversationsFor(contactUri: String,
                                      createIfNotExists: Bool, dataBase: Connection) throws -> Int64? {
         if let contactConversations = try self.conversationHelper
-            .selectConversationsForProfile(profileUri: ringUri(from: contactUri), dataBase: dataBase) {
+            .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase) {
             if !contactConversations.isEmpty {
                 return contactConversations.first!.id
             }
@@ -628,12 +642,12 @@ class DBManager {
             return nil
         }
         let conversationID = Int64(arc4random_uniform(10000000))
-        _ = self.profileHepler.insert(item: self.createTemplateRingProfile(uri: ringUri(from: contactUri)), dataBase: dataBase)
-        let conversationForContact = Conversation(conversationID, ringUri(from: contactUri))
+        _ = self.profileHepler.insert(item: self.createTemplateProfile(uri: contactUri), dataBase: dataBase)
+        let conversationForContact = Conversation(conversationID, contactUri)
         if !self.conversationHelper.insert(item: conversationForContact, dataBase: dataBase) {
             return nil
         }
         return try self.conversationHelper
-            .selectConversationsForProfile(profileUri: ringUri(from: contactUri), dataBase: dataBase)?.first?.id
+            .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase)?.first?.id
     }
 }

@@ -57,7 +57,7 @@ class ConversationsService {
         self.dbManager = dbManager
     }
 
-    func getConversationsForAccount(accountId: String, accountUri: String) -> Observable<[ConversationModel]> {
+    func getConversationsForAccount(accountId: String) -> Observable<[ConversationModel]> {
         /* if we don't have conversation that could mean the app
         just launched and we need symchronize messages status
         */
@@ -108,31 +108,34 @@ class ConversationsService {
 
     func sendMessage(withContent content: String,
                      from senderAccount: AccountModel,
-                     to recipientRingId: String) -> Completable {
+                     recipientUri: String) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
             let contentDict = [self.textPlainMIMEType: content]
-            let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientRingId))
+            let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
-            if let ringId = accountHelper.ringId, ringId != recipientRingId {
+            let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
+            let contactUri = JamiURI.init(schema: type, infoHach: recipientUri, account: senderAccount)
+            guard let stringUri = contactUri.uriString else {
+                completable(.completed)
+                return Disposables.create {}
+            }
+            if let uri = accountHelper.uri, uri != recipientUri {
                 let message = self.createMessage(withId: messageId,
                                                  withContent: content,
-                                                 byAuthor: ringId,
+                                                 byAuthor: uri,
                                                  generated: false,
                                                  incoming: false)
                 self.saveMessage(message: message,
-                                 toConversationWith: recipientRingId,
+                                 toConversationWith: stringUri,
                                  toAccountId: senderAccount.id,
-                                 toAccountUri: ringId,
                                  shouldRefreshConversations: true)
                     .subscribe(onCompleted: { [unowned self] in
                         self.log.debug("Message saved")
                     })
                     .disposed(by: self.disposeBag)
             }
-
             completable(.completed)
-
             return Disposables.create {}
         })
     }
@@ -142,7 +145,7 @@ class ConversationsService {
                        byAuthor author: String,
                        generated: Bool?,
                        incoming: Bool) -> MessageModel {
-        let message = MessageModel(withId: messageId, receivedDate: Date(), content: content, author: author, incoming: incoming)
+        let message = MessageModel(withId: messageId, receivedDate: Date(), content: content, authorURI: author, incoming: incoming)
         if let generated = generated {
             message.isGenerated = generated
         }
@@ -152,7 +155,6 @@ class ConversationsService {
     func saveMessage(message: MessageModel,
                      toConversationWith recipientRingId: String,
                      toAccountId: String,
-                     toAccountUri: String,
                      shouldRefreshConversations: Bool) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
@@ -166,7 +168,7 @@ class ConversationsService {
                 .subscribe(onNext: { [weak self] _ in
                     // append new message so it can be found if a status update is received before the DB finishes reload
                     self?.conversations.value.filter({ conversation in
-                        return conversation.recipientRingId == recipientRingId &&
+                        return conversation.participantUri == recipientRingId &&
                             conversation.accountId == toAccountId
                     }).first?.messages.append(message)
                     self?.messagesSemaphore.signal()
@@ -192,20 +194,20 @@ class ConversationsService {
                           withAccountId accountId: String) -> ConversationModel? {
         return self.conversations.value
             .filter({ conversation in
-                return conversation.recipientRingId == ringId && conversation.accountId == accountId
+                return conversation.participantUri == ringId && conversation.accountId == accountId
             })
             .first
     }
 
     // swiftlint:disable:next function_parameter_count
     func generateMessage(messageContent: String,
-                         contactRingId: String,
+                         contactUri: String,
                          accountId: String,
                          date: Date,
                          interactionType: InteractionType,
                          shouldUpdateConversation: Bool) {
         self.generateMessage(messageContent: messageContent,
-                             duration: 0, contactRingId: contactRingId,
+                             duration: 0, contactUri: contactUri,
                              accountId: accountId,
                              date: date, interactionType: interactionType,
                              shouldUpdateConversation: shouldUpdateConversation)
@@ -214,15 +216,15 @@ class ConversationsService {
     // swiftlint:disable:next function_parameter_count
     func generateMessage(messageContent: String,
                          duration: Int64,
-                         contactRingId: String,
+                         contactUri: String,
                          accountId: String,
                          date: Date,
                          interactionType: InteractionType,
                          shouldUpdateConversation: Bool) {
-        let message = MessageModel(withId: "", receivedDate: date, content: messageContent, author: "", incoming: false)
+        let message = MessageModel(withId: "", receivedDate: date, content: messageContent, authorURI: "", incoming: false)
         message.isGenerated = true
 
-        self.dbManager.saveMessage(for: accountId, with: contactRingId, message: message, incoming: false, interactionType: interactionType, duration: Int(duration))
+        self.dbManager.saveMessage(for: accountId, with: contactUri, message: message, incoming: false, interactionType: interactionType, duration: Int(duration))
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [unowned self] _ in
                 if shouldUpdateConversation {
@@ -239,7 +241,6 @@ class ConversationsService {
 
     func generateDataTransferMessage(transferId: UInt64,
                                      transferInfo: NSDataTransferInfo,
-                                     accountRingId: String,
                                      accountId: String,
                                      photoIdentifier: String?) -> Completable {
 
@@ -252,16 +253,19 @@ class ConversationsService {
         }
         let isIncoming = transferInfo.flags == 1
         let interactionType: InteractionType = isIncoming ? .iTransfer : .oTransfer
+        guard let contactUri = JamiURI.init(schema: URIType.ring,
+                                            infoHach: transferInfo.peer!).uriString else {
+            completable(.completed)
+            return Disposables.create { }
+            }
         let date = Date()
-        let contactRingId = transferInfo.peer!
-
-        let message = MessageModel(withId: String(transferId), receivedDate: date, content: messageContent, author: accountRingId, incoming: isIncoming)
+        let message = MessageModel(withId: String(transferId), receivedDate: date, content: messageContent, authorURI: "", incoming: isIncoming)
         message.transferStatus = isIncoming ? .awaiting : .created
         message.isGenerated = false
         message.isTransfer = true
 
         self.messagesSemaphore.wait()
-            self.dbManager.saveMessage(for: accountId, with: contactRingId, message: message, incoming: isIncoming, interactionType: interactionType, duration: 0)
+            self.dbManager.saveMessage(for: accountId, with: contactUri, message: message, incoming: isIncoming, interactionType: interactionType, duration: 0)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [unowned self] message in
                 self.dataTransferMessageMap[transferId] = message
@@ -325,7 +329,7 @@ class ConversationsService {
     }
 
     func clearHistory(conversation: ConversationModel, keepConversation: Bool) {
-        self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: conversation.recipientRingId, keepConversation: keepConversation)
+        self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: conversation.participantUri, keepConversation: keepConversation)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: { [weak self] in
                 self?.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
@@ -358,7 +362,7 @@ class ConversationsService {
         self.messagesSemaphore.wait()
         //Get conversations for this sender
         let conversation = self.conversations.value.filter({ conversation in
-            return  conversation.recipientRingId == uri &&
+            return  conversation.participantUri == uri &&
                     conversation.accountId == account.id
         }).first
 
@@ -400,13 +404,14 @@ class ConversationsService {
 
     func transferStatusChanged(_ transferStatus: DataTransferStatus,
                                for transferId: UInt64,
-                               fromAccount account: AccountModel,
+                               accountId: String,
                                to uri: String) {
+        guard let contactUri = JamiURI.init(schema: URIType.ring, infoHach: uri).uriString else {return}
         self.messagesSemaphore.wait()
         //Get conversations for this sender
         let conversation = self.conversations.value.filter({ conversation in
-            return  conversation.recipientRingId == uri &&
-                conversation.accountId == account.id
+            return  conversation.participantUri == contactUri &&
+                conversation.accountId == accountId
         }).first
 
         //Find message
@@ -417,7 +422,7 @@ class ConversationsService {
                 self.dbManager
                     .updateTransferStatus(daemonID: message.daemonId,
                                           withStatus: transferStatus,
-                                          accountId: account.id)
+                                          accountId: accountId)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onCompleted: { [unowned self] in
                         self.messagesSemaphore.signal()
@@ -437,7 +442,5 @@ class ConversationsService {
         } else {
             self.messagesSemaphore.signal()
         }
-
-        log.debug("ConversationService: transferStatusChanged - \(transferStatus.description) for id: \(transferId) from: \(account.id) to: \(uri)")
     }
 }

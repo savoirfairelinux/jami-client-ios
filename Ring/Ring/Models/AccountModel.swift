@@ -35,12 +35,11 @@ enum AccountModelError: Error {
 class AccountModel: Equatable {
     // MARK: Public members
     var id: String = ""
-    var registeringUsername = false
     var details: AccountConfigModel? {
         willSet {
             if let newDetails = newValue,
                 !newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)).isEmpty {
-                uri = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+                username = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
             }
         }
     }
@@ -48,17 +47,16 @@ class AccountModel: Equatable {
         willSet {
             if let newDetails = newValue,
                 !newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName)).isEmpty {
-                registeredName = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+                registeredName = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName))
             }
         }
     }
     var credentialDetails = [AccountCredentialsModel]()
     var devices = [DeviceModel]()
-    var onBoarded = false
     var registeredName = ""
-    var uri = ""
+    var username = ""
     var jamiId: String {
-        return self.uri.replacingOccurrences(of: "ring:", with: "")
+        return self.username.replacingOccurrences(of: "ring:", with: "")
     }
 
     // MARK: Init

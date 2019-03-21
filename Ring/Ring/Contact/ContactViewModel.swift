@@ -52,15 +52,15 @@ class ContactViewModel: ViewModel, Stateable {
             if let profile = conversation.participantProfile, let alias = profile.alias, !alias.isEmpty {
                 self.displayName.value = alias
             }
-            if let contact = self.contactService.contact(withRingId: conversation.recipientRingId),
+            if let contact = self.contactService.contact(withUri: conversation.participantUri),
                 let name = contact.userName {
                 self.userName.value = name
             } else {
-                self.userName.value = conversation.recipientRingId
+                self.userName.value = conversation.participantUri
                 self.nameService.usernameLookupStatus
                     .filter({ [unowned self] lookupNameResponse in
                         return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == self.conversation.recipientRingId
+                            lookupNameResponse.address == self.conversation.participantUri
                     }).subscribe(onNext: { [unowned self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
                             self.userName.value = name
@@ -69,11 +69,11 @@ class ContactViewModel: ViewModel, Stateable {
                         }
                     }).disposed(by: disposeBag)
 
-                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: conversation.recipientRingId)
+                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: conversation.participantUri)
             }
 
             // add option block contact and clear conversation if contact exists
-            if self.contactService.contact(withRingId: conversation.recipientRingId) != nil {
+            if self.contactService.contact(withUri: conversation.participantUri) != nil {
                 self.tableSection = Observable<[SectionModel<String, ContactActions>]>
                     .just([SectionModel(model: "ProfileInfoCell",
                                         items:
@@ -85,7 +85,7 @@ class ContactViewModel: ViewModel, Stateable {
                           ContactActions(title: L10n.ContactPage.blockContact, image: Asset.blockIcon)])])
             }
             self.contactService
-                .getContactRequestVCard(forContactWithRingId: conversation.recipientRingId)
+                .getContactRequestVCard(forContactWithRingId: conversation.participantUri)
                 .subscribe(onSuccess: { [unowned self] vCard in
                     if !VCardUtils.getName(from: vCard).isEmpty {
                         self.displayName.value = VCardUtils.getName(from: vCard)
@@ -96,7 +96,7 @@ class ContactViewModel: ViewModel, Stateable {
                     self.profileImageData.value = imageData
                 })
                 .disposed(by: self.disposeBag)
-            self.profileService.getProfile(ringId: conversation.recipientRingId,
+            self.profileService.getProfile(ringId: conversation.participantUri,
                                            createIfNotexists: false,
                                            accountId: conversation.accountId)
                 .subscribe(onNext: { [unowned self] profile in
@@ -131,12 +131,12 @@ class ContactViewModel: ViewModel, Stateable {
     }
     func startCall() {
         self.stateSubject.onNext(ConversationState
-            .startCall(contactRingId: conversation.recipientRingId,
+            .startCall(contactRingId: conversation.participantUri,
                        userName: self.userName.value))
     }
     func startAudioCall() {
         self.stateSubject.onNext(ConversationState
-            .startAudioCall(contactRingId: conversation.recipientRingId,
+            .startAudioCall(contactRingId: conversation.participantUri,
                             userName: self.userName.value))
     }
 
@@ -153,7 +153,7 @@ class ContactViewModel: ViewModel, Stateable {
     }
 
     func blockContact() {
-        let contactRingId = conversation.recipientRingId
+        let contactRingId = conversation.participantUri
         let accountId = conversation.accountId
         let removeCompleted = self.contactService.removeContact(withRingId: contactRingId,
                                                                 ban: true,

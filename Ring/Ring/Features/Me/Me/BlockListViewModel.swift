@@ -38,7 +38,7 @@ class BlockListViewModel: ViewModel {
             _ = contacts.filter {contact in contact.banned}
                 .map ({ contact in
                     let items = self?.initialItems.filter({ item in
-                        return item.contact.ringId == contact.ringId
+                        return item.contact.hash == contact.hash
                     })
                     if let first = items?.first {
                         bannedItems.append(first)
@@ -67,7 +67,7 @@ class BlockListViewModel: ViewModel {
             .filter({ contact in contact.banned})
             .map { contact in
                 var item = BannedContactItem(withContact: contact)
-                self.contactService.getProfileForUri(uri: contact.ringId,
+                self.contactService.getProfileForUri(uri: contact.hash,
                                                      accountId: accountId)
                     .subscribe(onNext: { (profile) in
                         item.displayName = profile.alias
@@ -85,7 +85,7 @@ class BlockListViewModel: ViewModel {
                     self.nameService.usernameLookupStatus.single()
                         .filter({ lookupNameResponse in
                             return lookupNameResponse.address != nil &&
-                                lookupNameResponse.address == contact.ringId
+                                lookupNameResponse.address == contact.hash
                         })
                         .subscribe(onNext: { [weak self] lookupNameResponse in
                             if let name = lookupNameResponse.name, !name.isEmpty {
@@ -93,7 +93,7 @@ class BlockListViewModel: ViewModel {
                             }
                         }).disposed(by: self.disposeBag)
 
-                    self.nameService.lookupAddress(withAccount: "", nameserver: "", address: contact.ringId)
+                    self.nameService.lookupAddress(withAccount: "", nameserver: "", address: contact.hash)
                 }
                 return item
         }

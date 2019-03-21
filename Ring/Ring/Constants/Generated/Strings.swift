@@ -12,6 +12,29 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
 
+  internal enum Account {
+    /// Account Status
+    internal static let accountStatus = L10n.tr("Localizable", "account.accountStatus")
+    /// Create Sip Account
+    internal static let createSipAccount = L10n.tr("Localizable", "account.createSipAccount")
+    /// Enter Password
+    internal static let passwordLabel = L10n.tr("Localizable", "account.passwordLabel")
+    /// Port
+    internal static let port = L10n.tr("Localizable", "account.port")
+    /// Enter Port Number
+    internal static let portLabel = L10n.tr("Localizable", "account.portLabel")
+    /// Enter Address
+    internal static let serverLabel = L10n.tr("Localizable", "account.serverLabel")
+    /// Password
+    internal static let sipPassword = L10n.tr("Localizable", "account.sipPassword")
+    /// SIP Server
+    internal static let sipServer = L10n.tr("Localizable", "account.sipServer")
+    /// User Name
+    internal static let sipUsername = L10n.tr("Localizable", "account.sipUsername")
+    /// Enter Username
+    internal static let usernameLabel = L10n.tr("Localizable", "account.usernameLabel")
+  }
+
   internal enum AccountPage {
     /// Block List
     internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")

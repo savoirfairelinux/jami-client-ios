@@ -1,0 +1,116 @@
+//
+//  CreateSipAccountViewController.swift
+//  Ring
+//
+//  Created by Kateryna Kostiuk on 2019-03-18.
+//  Copyright © 2019 Savoir-faire Linux. All rights reserved.
+//
+
+import UIKit
+import Reusable
+import RxSwift
+import PKHUD
+
+class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewModelBased {
+    var viewModel: CreateSipAccountViewModel!
+
+    @IBOutlet weak var createAccountButton: DesignableButton!
+    @IBOutlet weak var passwordTextField: DesignableTextField!
+    @IBOutlet weak var userNameTextField: DesignableTextField!
+    @IBOutlet weak var serverTextField: DesignableTextField!
+    @IBOutlet weak var portTextField: DesignableTextField!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var createAccountLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var serverLabel: UILabel!
+    @IBOutlet weak var portLabel: UILabel!
+
+    var keyboardDismissTapRecognizer: UITapGestureRecognizer!
+    var isKeyboardOpened: Bool = false
+    var disposeBag = DisposeBag()
+
+    override func viewDidLoad() {
+        self.applyL10n()
+        super.viewDidLoad()
+        self.buindViewToViewModel()
+        self.userNameTextField.becomeFirstResponder()
+        self.configurePasswordField()
+        self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        // handle keyboard
+        self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
+        keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    }
+
+    @objc func dismissKeyboard() {
+        self.isKeyboardOpened = false
+        self.becomeFirstResponder()
+        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
+    }
+
+    func configurePasswordField() {
+        let isSecureTextEntry = PublishSubject<Bool>()
+        let rightButton  = UIButton(type: .custom)
+        rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        rightButton.setImage(UIImage(asset: Asset.icHideInput), for: .normal)
+        passwordTextField.rx.text.orEmpty.distinctUntilChanged().bind { text in
+            rightButton.isHidden = text.isEmpty
+            rightButton.isEnabled = !text.isEmpty
+        }.disposed(by: self.disposeBag)
+        passwordTextField.rightViewMode = .always
+        let rightView = UIView(frame: CGRect(
+            x: 0, y: 0,
+            width: 50,
+            height: 30))
+        rightView.addSubview(rightButton)
+        passwordTextField.rightView = rightView
+        passwordTextField.leftViewMode = .always
+        let leftView = UIView(frame: CGRect(
+            x: 0, y: 0,
+            width: 50,
+            height: 30))
+        rightButton.tintColor = UIColor.darkGray
+        passwordTextField.leftView = leftView
+        rightButton.rx.tap
+            .subscribe(onNext: { [unowned self, isSecureTextEntry] _ in
+                self.passwordTextField.isSecureTextEntry.toggle()
+                isSecureTextEntry
+                    .onNext(self.passwordTextField.isSecureTextEntry)
+            }).disposed(by: self.disposeBag)
+        isSecureTextEntry.asObservable()
+            .subscribe(onNext: { [weak rightButton] secure in
+                let image = secure ?
+                    UIImage(asset: Asset.icHideInput) :
+                    UIImage(asset: Asset.icShowInput)
+                rightButton?.setImage(image, for: .normal)
+            }).disposed(by: self.disposeBag)
+    }
+
+    func buindViewToViewModel() {
+        self.userNameTextField.rx.text.orEmpty.throttle(3, scheduler: MainScheduler.instance).distinctUntilChanged().bind(to: self.viewModel.userName).disposed(by: self.disposeBag)
+        self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
+        self.serverTextField.rx.text.orEmpty.bind(to: self.viewModel.sipServer).disposed(by: self.disposeBag)
+        self.portTextField.rx.text.orEmpty
+            .bind(to: self.viewModel.port)
+            .disposed(by: self.disposeBag)
+        self.createAccountButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+            DispatchQueue.global(qos: .background).async {
+                self.viewModel.createSipaccount()
+            }
+        }).disposed(by: self.disposeBag)
+    }
+
+    func applyL10n() {
+        self.createAccountButton.setTitle(L10n.Welcome.createAccount, for: .normal)
+        self.createAccountLabel.text = L10n.Account.createSipAccount
+        self.userNameLabel.text = L10n.Account.usernameLabel
+        self.passwordLabel.text = L10n.Account.passwordLabel
+        self.serverLabel.text = L10n.Account.serverLabel
+        self.portLabel.text = L10n.Account.portLabel
+        self.passwordTextField.placeholder = L10n.Account.sipPassword
+        self.userNameTextField.placeholder = L10n.Account.sipUsername
+        self.serverTextField.placeholder = L10n.Account.sipServer
+        self.portTextField.placeholder = L10n.Account.port
+    }
+}

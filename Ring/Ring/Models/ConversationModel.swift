@@ -24,20 +24,28 @@ import Foundation
 class ConversationModel: Equatable {
 
     var messages = [MessageModel]()
-    var recipientRingId: String = ""
+    var participantUri: String = ""
+    var hash = ""
     var accountId: String = ""
-    var accountUri: String = ""
     var participantProfile: Profile?
     var conversationId: String = ""
 
-    convenience init(withRecipientRingId recipientRingId: String, accountId: String, accountUri: String) {
+    convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
         self.init()
-        self.recipientRingId = recipientRingId
+        self.participantUri = participantUri.uriString ?? ""
+        self.hash = participantUri.hash ?? ""
         self.accountId = accountId
-        self.accountUri = accountUri
     }
+
+    convenience init (withParticipantUri participantUri: JamiURI, accountId: String, hash: String) {
+    self.init()
+    self.participantUri = participantUri.uriString ?? ""
+    self.hash = hash
+    self.accountId = accountId
+    }
+
     public static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
-        return (lhs.recipientRingId == rhs.recipientRingId && lhs.accountId == rhs.accountId)
+        return (lhs.participantUri == rhs.participantUri && lhs.accountId == rhs.accountId)
     }
 
     public func getMessage(withDaemonID daemonID: String) -> MessageModel? {

@@ -128,12 +128,16 @@
 		0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F544E223C0ED600ECC3CE /* AccountPickerAdapter.swift */; };
 		0E6F5451223C3C4F00ECC3CE /* AccountItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6F5450223C3C4F00ECC3CE /* AccountItemView.xib */; };
 		0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F5452223C3C7500ECC3CE /* AccountItemView.swift */; };
+		0E6F545622403ADE00ECC3CE /* CreateSipAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6F545522403ADE00ECC3CE /* CreateSipAccountViewController.storyboard */; };
+		0E6F545822403B0300ECC3CE /* CreateSipAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F545722403B0300ECC3CE /* CreateSipAccountViewController.swift */; };
+		0E6F545A22403B1D00ECC3CE /* CreateSipAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F545922403B1D00ECC3CE /* CreateSipAccountViewModel.swift */; };
 		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
 		0E7CF4DB20164B6700CD967D /* ButtonsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DA20164B6700CD967D /* ButtonsContainerView.swift */; };
 		0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */; };
 		0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DE2017918300CD967D /* ButtonsContainerView.xib */; };
 		0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E9A0420483E1200DA8E8B /* TitleView.swift */; };
 		0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E983E6D1FC77C3E0082103E /* ConversationModel.swift */; };
+		0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E99F19F22417A0400CF8BD6 /* JamiURI.swift */; };
 		0E9D84491FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */; };
 		0E9D844B1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D844A1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift */; };
 		0EAA9DB42029F0AA005E245C /* ProxyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA9DB22029F0AA005E245C /* ProxyCell.swift */; };
@@ -443,12 +447,16 @@
 		0E6F544E223C0ED600ECC3CE /* AccountPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountPickerAdapter.swift; path = Ring/Features/Conversations/SmartList/Cells/AccountPickerAdapter.swift; sourceTree = SOURCE_ROOT; };
 		0E6F5450223C3C4F00ECC3CE /* AccountItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountItemView.xib; sourceTree = "<group>"; };
 		0E6F5452223C3C7500ECC3CE /* AccountItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountItemView.swift; sourceTree = "<group>"; };
+		0E6F545522403ADE00ECC3CE /* CreateSipAccountViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateSipAccountViewController.storyboard; sourceTree = "<group>"; };
+		0E6F545722403B0300ECC3CE /* CreateSipAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSipAccountViewController.swift; sourceTree = "<group>"; };
+		0E6F545922403B1D00ECC3CE /* CreateSipAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSipAccountViewModel.swift; sourceTree = "<group>"; };
 		0E72374920460320006B0C7D /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		0E7CF4DA20164B6700CD967D /* ButtonsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsContainerView.swift; sourceTree = "<group>"; };
 		0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsContainerViewModel.swift; sourceTree = "<group>"; };
 		0E7CF4DE2017918300CD967D /* ButtonsContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonsContainerView.xib; sourceTree = "<group>"; };
 		0E8E9A0420483E1200DA8E8B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		0E983E6D1FC77C3E0082103E /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		0E99F19F22417A0400CF8BD6 /* JamiURI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiURI.swift; sourceTree = "<group>"; };
 		0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabBarItemViewModel.swift; sourceTree = "<group>"; };
 		0E9D844A1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestTabBarItem.swift; sourceTree = "<group>"; };
 		0EAA9DB22029F0AA005E245C /* ProxyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyCell.swift; sourceTree = "<group>"; };
@@ -1121,6 +1129,7 @@
 			children = (
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
 				0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */,
+				0E99F19F22417A0400CF8BD6 /* JamiURI.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1159,6 +1168,16 @@
 				0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */,
 			);
 			name = DeviceCell;
+			sourceTree = "<group>";
+		};
+		0E6F545422403ABC00ECC3CE /* CreateSipAccount */ = {
+			isa = PBXGroup;
+			children = (
+				0E6F545522403ADE00ECC3CE /* CreateSipAccountViewController.storyboard */,
+				0E6F545722403B0300ECC3CE /* CreateSipAccountViewController.swift */,
+				0E6F545922403B1D00ECC3CE /* CreateSipAccountViewModel.swift */,
+			);
+			path = CreateSipAccount;
 			sourceTree = "<group>";
 		};
 		0E9D84471FA7D9EC00C561EB /* TabBar */ = {
@@ -1219,6 +1238,7 @@
 		1A0C4EBD1F1D48DD00550433 /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				0E6F545422403ABC00ECC3CE /* CreateSipAccount */,
 				1A0C4ED51F1D49D800550433 /* Welcome */,
 				1A0C4ED71F1D4AC300550433 /* CreateProfile */,
 				1A0C4ED61F1D4AB300550433 /* CreateAccount */,
@@ -1704,6 +1724,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E6F545622403ADE00ECC3CE /* CreateSipAccountViewController.storyboard in Resources */,
 				1A2D18FD1F292DAD00B2C785 /* ConversationCell.xib in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
 				0EBCAA4E202E60F000E2A545 /* default.wav in Resources */,
@@ -1898,6 +1919,7 @@
 				1A20418D1F1EABCC00C08435 /* StateableResponsive.swift in Sources */,
 				1A0C4EE51F1D67DF00550433 /* WalkthroughCoordinator.swift in Sources */,
 				1A2D18DD1F29192D00B2C785 /* MessableBubble.swift in Sources */,
+				0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */,
 				1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */,
 				0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
@@ -1914,6 +1936,7 @@
 				0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */,
 				1A2D18E51F29197100B2C785 /* MessageAccessoryView.swift in Sources */,
 				0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */,
+				0E6F545822403B0300ECC3CE /* CreateSipAccountViewController.swift in Sources */,
 				0EE1B54E1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift in Sources */,
 				0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
@@ -1926,6 +1949,7 @@
 				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
 				1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */,
 				0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */,
+				0E6F545A22403B1D00ECC3CE /* CreateSipAccountViewModel.swift in Sources */,
 				1A2D18FC1F292DAD00B2C785 /* ConversationCell.swift in Sources */,
 				0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */,
 				0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */,

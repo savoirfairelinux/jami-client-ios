@@ -27,6 +27,8 @@ import RxCocoa
 import RxDataSources
 import PKHUD
 
+// swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBased {
     // MARK: - outlets
     @IBOutlet private weak var settingsTable: SettingsTableView!
@@ -35,6 +37,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     var viewModel: MeViewModel!
     fileprivate let disposeBag = DisposeBag()
     private var stretchyHeader: AccountHeader!
+
+    var sipCredentialsMargin: CGFloat = 0
+    let sipCredentialsTAG: Int = 100
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -47,6 +52,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.applyL10n()
         self.configureBindings()
         self.configureRingNavigationBar()
+        self.calculateSipCredentialsMargin()
         self.adaptTableToKeyboardState(for: self.settingsTable, with: self.disposeBag, topOffset: self.stretchyHeader.minimumContentHeight)
     }
 
@@ -94,6 +100,17 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         let imageQrCode = UIImage(asset: Asset.qrCode) as UIImage?
         let qrCodeButton   = UIButton(type: UIButtonType.custom) as UIButton
         qrCodeButton.setImage(imageQrCode, for: .normal)
+        self.viewModel.isAccountSip
+            .asObservable()
+            .bind(to: qrCodeButton.rx.isVisible)
+            .disposed(by: self.disposeBag)
+        self.viewModel.isAccountSip
+            .asObservable()
+            .map({ isSip in
+                return !isSip
+            })
+            .bind(to: qrCodeButton.rx.isEnabled)
+            .disposed(by: self.disposeBag)
         let infoItem = UIBarButtonItem(customView: infoButton)
         let qrCodeButtonItem = UIBarButtonItem(customView: qrCodeButton)
         infoButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
@@ -126,7 +143,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.navigationItem.leftBarButtonItem = qrCodeButtonItem
 
         //setup Table
-        self.settingsTable.estimatedRowHeight = 50
+        self.settingsTable.estimatedRowHeight = 20
         self.settingsTable.rowHeight = UITableViewAutomaticDimension
         self.settingsTable.tableFooterView = UIView()
 
@@ -249,6 +266,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         return nil
     }
 
+    // swiftlint:disable function_body_length
+    // swiftlint:disable cyclomatic_complexity
     private func setUpDataSource() {
 
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SettingsSection.Item)
@@ -295,13 +314,17 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .sectionHeader(let title):
                     let cell = UITableViewCell()
                     cell.textLabel?.text = title
-                    cell.backgroundColor = UIColor.jamiNavigationBar.darken(byPercentage: 0.02)
+                    cell.backgroundColor = UIColor.jamiNavigationBar
                     cell.selectionStyle = .none
+                    cell.heightAnchor.constraint(equalToConstant: 35).isActive = true
                     return cell
 
                 case .removeAccount:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.removeAccountTitle
+                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textAlignment = .center
+                    cell.selectionStyle = .none
                     let button = UIButton.init(frame: cell.frame)
                     cell.addSubview(button)
                     button.rx.tap.subscribe(onNext: { [weak self] in
@@ -327,6 +350,145 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                             self?.viewModel.enableNotifications(enable: enable)
                         }).disposed(by: cell.disposeBag)
                     return cell
+                case .sipUserName(let value):
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.Account.sipUsername
+                    cell.textLabel?.sizeToFit()
+                    let text = UITextField()
+                    text.returnKeyType = .done
+                    text.tag = self.sipCredentialsTAG
+                    text.font = UIFont.systemFont(ofSize: 18, weight: .light)
+                    text.frame = CGRect(x: self.sipCredentialsMargin, y: 0, width: cell.frame.width - self.sipCredentialsMargin, height: cell.frame.height)
+                    text.text = value
+                    cell.contentView.addSubview(text)
+                    cell.selectionStyle = .none
+                   text.rx.text.orEmpty.distinctUntilChanged().bind(to: self.viewModel.sipUsername).disposed(by: cell.disposeBag)
+                    text.rx.controlEvent(.editingDidEndOnExit)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak self] _ in
+                            self?.viewModel.updateSipSettings()
+                        }).disposed(by: cell.disposeBag)
+                    return cell
+                case .sipPassword(let value):
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.Account.sipPassword
+                    cell.textLabel?.sizeToFit()
+                    let text = UITextField()
+                    var rightButton  = UIButton(type: .custom)
+                    rightButton.frame = CGRect(x: 0, y: 0, width: 55, height: 30)
+                    rightButton.setImage(UIImage(asset: Asset.icHideInput), for: .normal)
+                    text.rightViewMode = .always
+                    text.rightView = rightButton
+                    rightButton.tintColor = UIColor.darkGray
+                    text.tag = self.sipCredentialsTAG
+                    cell.selectionStyle = .none
+                    text.returnKeyType = .done
+                    text.font = UIFont.systemFont(ofSize: 18, weight: .light)
+                    text.frame = CGRect(x: self.sipCredentialsMargin, y: 0, width: self.view.frame.width - self.sipCredentialsMargin, height: cell.frame.height)
+                    text.text = value
+                    let isSecureTextEntry = PublishSubject<Bool>()
+                    isSecureTextEntry
+                        .asObservable()
+                        .subscribe(onNext: { (secure) in
+                            if secure {
+                                rightButton.setImage(UIImage(asset: Asset.icHideInput), for: .normal)
+                            } else {
+                                rightButton.setImage(UIImage(asset: Asset.icShowInput), for: .normal)
+                            }
+                        }).disposed(by: cell.disposeBag)
+                    cell.contentView.addSubview(text)
+                    rightButton.rx.tap.subscribe(onNext: { _ in
+                        text.isSecureTextEntry.toggle()
+                        isSecureTextEntry.onNext(text.isSecureTextEntry)
+                    }).disposed(by: cell.disposeBag)
+                    text.rx.text.orEmpty.distinctUntilChanged().bind(to: self.viewModel.sipPassword).disposed(by: cell.disposeBag)
+                    text.rx.text.orEmpty.distinctUntilChanged().bind { text in
+                        rightButton.isHidden = text.isEmpty
+                        rightButton.isEnabled = !text.isEmpty
+                        }.disposed(by: cell.disposeBag)
+                    text.rx.controlEvent(.editingDidEndOnExit)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak self] _ in
+                            self?.viewModel.updateSipSettings()
+                            }).disposed(by: cell.disposeBag)
+                    text.isSecureTextEntry = true
+                    return cell
+
+                case .sipServer(let value):
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.Account.sipServer
+                    cell.textLabel?.sizeToFit()
+                    let text = UITextField()
+                    text.tag = self.sipCredentialsTAG
+                    cell.selectionStyle = .none
+                    text.font = UIFont.systemFont(ofSize: 18, weight: .light)
+                    text.frame = CGRect(x: self.sipCredentialsMargin, y: 0, width: cell.frame.width - self.sipCredentialsMargin, height: cell.frame.height)
+                    text.text = value
+                    text.returnKeyType = .done
+                    cell.contentView.addSubview(text)
+                    text.rx.text.orEmpty.distinctUntilChanged().bind(to: self.viewModel.sipServer).disposed(by: cell.disposeBag)
+                    text.rx.controlEvent(.editingDidEndOnExit)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak self] _ in
+                            self?.viewModel.updateSipSettings()
+                        }).disposed(by: cell.disposeBag)
+                    return cell
+                case .port(let value):
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.Account.port
+                    cell.textLabel?.sizeToFit()
+                    let text = UITextField()
+                    text.tag = self.sipCredentialsTAG
+                    cell.selectionStyle = .none
+                    text.font = UIFont.systemFont(ofSize: 18, weight: .light)
+                    text.frame = CGRect(x: self.sipCredentialsMargin, y: 0, width: cell.frame.width - self.sipCredentialsMargin, height: cell.frame.height)
+                    text.text = value
+                    text.returnKeyType = .done
+                    cell.contentView.addSubview(text)
+                    text.rx.text.orEmpty.distinctUntilChanged().bind(to: self.viewModel.sipServer).disposed(by: cell.disposeBag)
+                    text.rx.controlEvent(.editingDidEndOnExit)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak self] _ in
+                            self?.viewModel.updateSipSettings()
+                        }).disposed(by: cell.disposeBag)
+                    return cell
+                case .accountState(let state):
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.Account.accountStatus
+                    cell.textLabel?.sizeToFit()
+                    let text = UITextField()
+                    text.tag = self.sipCredentialsTAG
+                    cell.selectionStyle = .none
+                    text.font = UIFont.systemFont(ofSize: 18, weight: .light)
+                    text.frame = CGRect(x: self.sipCredentialsMargin, y: 0, width: cell.frame.width - self.sipCredentialsMargin, height: cell.frame.height)
+                    text.text = state.value
+                    state.asObservable()
+                        .bind(to: text.rx.text).disposed(by: cell.disposeBag)
+                    text.returnKeyType = .done
+                    cell.contentView.addSubview(text)
+                    text.rx.text.orEmpty.distinctUntilChanged().bind(to: self.viewModel.sipServer).disposed(by: cell.disposeBag)
+                    text.rx.controlEvent(.editingDidEndOnExit)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak self] _ in
+                            self?.viewModel.updateSipSettings()
+                        }).disposed(by: cell.disposeBag)
+                    return cell
+                case .enableAccount:
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = "Enable Account"
+                    let switchView = UISwitch()
+                    cell.selectionStyle = .none
+                    switchView.frame = CGRect(x: self.view.frame.size.width - 63, y: cell.frame.size.height * 0.5 - 15, width: 49, height: 30)
+                    cell.contentView.addSubview(switchView)
+                    switchView.setOn(self.viewModel.accountEnabled.value, animated: false)
+                    self.viewModel.accountEnabled.asObservable().bind(to: switchView.rx.value)
+                        .disposed(by: cell.disposeBag)
+                    switchView.rx.value.skip(1)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak self] (enable) in
+                            self?.viewModel.enableAccount(enable: enable)
+                        }).disposed(by: cell.disposeBag)
+                    return cell
                 }
         }
 
@@ -336,9 +498,47 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: disposeBag)
     }
 
+    func calculateSipCredentialsMargin() {
+        let margin: CGFloat = 30
+        var usernameLength, passwordLength,
+        sipServerLength, portLength, statusLength: CGFloat
+        let username = L10n.Account.sipUsername
+        let password = L10n.Account.sipPassword
+        let sipServer = L10n.Account.port
+        let port = L10n.Account.sipServer
+        let status = L10n.Account.accountStatus
+        let label = UITextView()
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.text = status
+        label.sizeToFit()
+        statusLength = label.frame.size.width
+        label.text = username
+        label.sizeToFit()
+        usernameLength = label.frame.size.width
+        label.text = password
+        label.sizeToFit()
+        passwordLength = label.frame.size.width
+        label.text = sipServer
+        label.sizeToFit()
+        sipServerLength = label.frame.size.width
+        label.text = port
+        label.sizeToFit()
+        portLength = label.frame.size.width
+        sipCredentialsMargin = max(max(max(max(usernameLength, passwordLength), sipServerLength), portLength), statusLength) + margin
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        resetProfileName()
-        self.profileName.resignFirstResponder()
+        if self.profileName.isFirstResponder {
+            resetProfileName()
+            self.viewModel.updateSipSettings()
+            self.profileName.resignFirstResponder()
+            return
+        }
+        guard let activeField = self
+            .findActiveTextField(in: settingsTable) else {return}
+        activeField.resignFirstResponder()
+        if activeField.tag != sipCredentialsTAG {return}
+        self.viewModel.updateSipSettings()
     }
 
     func confirmRevokeDeviceAlert(deviceID: String) {

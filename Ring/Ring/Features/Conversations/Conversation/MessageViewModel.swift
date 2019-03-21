@@ -124,7 +124,7 @@ class MessageViewModel {
                     let accountHelper = AccountModelHelper(withAccount: account!)
                     return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
                         messageUpdateEvent.getEventInput(.messageId) == self.message.daemonId &&
-                        accountHelper.ringId == self.message.author
+                        accountHelper.uri == self.message.authorURI
                 })
                 .subscribe(onNext: { [unowned self] messageUpdateEvent in
                     if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
@@ -182,7 +182,6 @@ class MessageViewModel {
         if self.message.isGenerated {
             return .generated
         }
-
         if self.message.incoming {
             return .received
         } else {
@@ -223,8 +222,11 @@ class MessageViewModel {
                         conversationID: conversationID)
     }
 
-    func getTransferedImage(maxSize: CGFloat, conversationID: String) -> UIImage? {
-        guard let account = self.accountService.currentAccount else {return nil}
+    func getTransferedImage(maxSize: CGFloat,
+                            conversationID: String,
+                            accountId: String) -> UIImage? {
+        guard let account = self.accountService
+            .getAccount(fromAccountId: accountId) else {return nil}
         if self.message.incoming &&
             self.lastTransferStatus != .success &&
             self.message.transferStatus != .success {

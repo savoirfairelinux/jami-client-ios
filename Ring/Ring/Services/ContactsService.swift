@@ -53,8 +53,8 @@ class ContactsService {
         ContactsAdapter.delegate = self
     }
 
-    func contact(withRingId ringId: String) -> ContactModel? {
-        guard let contact = self.contacts.value.filter({ $0.ringId == ringId }).first else {
+    func contact(withUri uri: String) -> ContactModel? {
+        guard let contact = self.contacts.value.filter({ $0.uriString == uri }).first else {
             return nil
         }
 
@@ -65,11 +65,33 @@ class ContactsService {
         guard let contactRequest = self.contactRequests.value.filter({ $0.ringId == ringId }).first else {
             return nil
         }
-
         return contactRequest
     }
 
     func loadContacts(withAccount account: AccountModel) {
+        if AccountModelHelper.init(withAccount: account).isAccountSip() {
+            self.loadSipContacts(withAccount: account)
+            return
+        }
+        loadJamiContacts(withAccount: account)
+    }
+
+    func loadSipContacts(withAccount account: AccountModel) {
+        guard let profiles = self.dbManager
+            .getProfilesForAccount(accountID: account.id) else {return}
+        let contacts = profiles.map({ profile in
+            return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHach: profile.uri))
+        })
+        self.contacts.value.removeAll()
+        for contact in contacts {
+            if self.contacts.value.index(of: contact) == nil {
+                self.contacts.value.append(contact)
+                self.log.debug("contact: \(String(describing: contact.userName))")
+            }
+        }
+    }
+
+    func loadJamiContacts(withAccount account: AccountModel) {
         //Load contacts from daemon
         let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: account.id)
 
@@ -192,8 +214,8 @@ class ContactsService {
 
     func addContact(contact: ContactModel, withAccount account: AccountModel) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
-            self.contactsAdapter.addContact(withURI: contact.ringId, accountId: account.id)
-            if self.contact(withRingId: contact.ringId) == nil {
+            self.contactsAdapter.addContact(withURI: contact.hash, accountId: account.id)
+            if self.contact(withUri: contact.uriString ?? "") == nil {
                 self.contacts.value.append(contact)
             }
             observable.on(.completed)
@@ -227,7 +249,7 @@ class ContactsService {
             .subscribe( onCompleted: {
                 var event = ServiceEvent(withEventType: .contactAdded)
                 event.addEventInput(.accountId, value: account.id)
-                event.addEventInput(.uri, value: contact.ringId)
+                event.addEventInput(.uri, value: contact.hash)
                 self.responseStream.onNext(event)
                 self.contactStatus.onNext(contact)
                 self.contacts.value = self.contacts.value
@@ -271,7 +293,7 @@ extension ContactsService: ContactsAdapterDelegate {
         //Update trust request list
         self.removeContactRequest(withRingId: uri)
         // update contact status
-        if let contact = self.contact(withRingId: uri) {
+        if let contact = self.contact(withUri: uri) {
             self.contactStatus.onNext(contact)
             if contact.confirmed != confirmed {
                 contact.confirmed = confirmed
@@ -300,7 +322,7 @@ extension ContactsService: ContactsAdapterDelegate {
     }
 
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool) {
-        guard let contactToRemove = self.contacts.value.filter({ $0.ringId == uri}).first else {
+        guard let contactToRemove = self.contacts.value.filter({ $0.hash == uri}).first else {
             return
         }
         contactToRemove.banned = banned

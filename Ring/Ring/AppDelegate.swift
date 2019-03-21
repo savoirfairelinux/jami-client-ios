@@ -162,14 +162,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.log.error("Can't get current account!")
                 return
             }
-            self.contactsService.loadContacts(withAccount: currentAccount)
-            self.contactsService.loadContactRequests(withAccount: currentAccount)
-            self.presenceService.subscribeBuddies(withAccount: currentAccount,
-                                                  withContacts: self.contactsService.contacts.value)
-            if let ringID = AccountModelHelper(withAccount: currentAccount).ringId {
-                self.conversationManager?
-                    .prepareConversationsForAccount(accountId: currentAccount.id, accountUri: ringID)
-            }
             self.reloadDataFor(account: currentAccount)
             if self.accountService.proxyEnabled() {
                 self.registerVoipNotifications()
@@ -203,10 +195,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.contactsService.loadContacts(withAccount: account)
         self.contactsService.loadContactRequests(withAccount: account)
         self.presenceService.subscribeBuddies(withAccount: account, withContacts: self.contactsService.contacts.value)
-        if let ringID = AccountModelHelper(withAccount: account).ringId {
-            self.conversationManager?
-                .prepareConversationsForAccount(accountId: account.id, accountUri: ringID)
-        }
+        self.conversationManager?
+                .prepareConversationsForAccount(accountId: account.id)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

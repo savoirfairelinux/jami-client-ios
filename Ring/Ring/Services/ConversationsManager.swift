@@ -58,10 +58,6 @@ class ConversationsManager: MessagesAdapterDelegate {
                     self.log.error("ConversationsManager: can't find transferInfo")
                     return
                 }
-                guard let currentAccount = self.accountsService.currentAccount else {
-                    return
-                }
-                let accountHelper = AccountModelHelper(withAccount: currentAccount)
                 switch event.eventType {
                 case .dataTransferCreated:
                     let photoIdentifier: String? = event.getEventInput(.localPhotolID)
@@ -69,13 +65,12 @@ class ConversationsManager: MessagesAdapterDelegate {
                     self.conversationService
                         .generateDataTransferMessage(transferId: transferId,
                                                      transferInfo: transferInfo,
-                                                     accountRingId: accountHelper.ringId!,
-                                                     accountId: currentAccount.id,
+                                                     accountId: transferInfo.accountId,
                                                      photoIdentifier: photoIdentifier)
                         .subscribe(onCompleted: {
                             guard let transferInfo = self.dataTransferService
                                 .getTransferInfo(withId: transferId) else {return}
-                            self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: currentAccount.id)
+                            self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: transferInfo.accountId)
                         }).disposed(by: self.disposeBag)
 
                 case .dataTransferChanged:
@@ -90,7 +85,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                         self.conversationService.dataTransferMessageMap.removeValue(forKey: transferId)
                     case .wait_peer_acceptance, .wait_host_acceptance:
                         status = DataTransferStatus.awaiting
-                        self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: currentAccount.id)
+                        self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: transferInfo.accountId)
                     case .ongoing:
                         status = DataTransferStatus.ongoing
                     case .finished:
@@ -99,7 +94,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                     case .created:
                         break
                     }
-                    self.conversationService.transferStatusChanged(status, for: transferId, fromAccount: currentAccount, to: transferInfo.peer)
+                    self.conversationService.transferStatusChanged(status, for: transferId, accountId: transferInfo.accountId, to: transferInfo.peer)
                 default:
                     break
                 }
@@ -121,9 +116,9 @@ class ConversationsManager: MessagesAdapterDelegate {
             .disposed(by: disposeBag)
     }
 
-    func prepareConversationsForAccount(accountId: String, accountUri: String) {
+    func prepareConversationsForAccount(accountId: String) {
       self.conversationService
-        .getConversationsForAccount(accountId: accountId, accountUri: accountUri)
+        .getConversationsForAccount(accountId: accountId)
         .subscribe()
         .disposed(by: self.disposeBag)
     }
@@ -142,6 +137,12 @@ class ConversationsManager: MessagesAdapterDelegate {
     }
 
     func handleNewMessage(from peerUri: String, to accountId: String, message content: String, peerName: String?) {
+        guard let currentAccount = self.accountsService.currentAccount else {
+            return
+        }
+        guard let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else {
+            return
+        }
         if UIApplication.shared.applicationState != .active {
             var data = [String: String]()
             data [NotificationUserInfoKeys.messageContent.rawValue] = content
@@ -149,7 +150,11 @@ class ConversationsManager: MessagesAdapterDelegate {
             if let name = peerName {
                 data [NotificationUserInfoKeys.name.rawValue] = name
                 self.notificationHandler.presentMessageNotification(data: data)
+            } else if AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() {
+                data [NotificationUserInfoKeys.name.rawValue] = peerUri
+                self.notificationHandler.presentMessageNotification(data: data)
             } else {
+                // only for jami accounts
                 self.nameService.usernameLookupStatus.single()
                     .filter({ lookupNameResponse in
                         return lookupNameResponse.address != nil &&
@@ -168,36 +173,24 @@ class ConversationsManager: MessagesAdapterDelegate {
                 self.nameService.lookupAddress(withAccount: "", nameserver: "", address: peerUri)
             }
         }
-
-        guard let currentAccount = self.accountsService.currentAccount else {
-            return
-        }
-
-        guard let currentAccountUri = AccountModelHelper(withAccount: currentAccount).ringId else {
-            return
-        }
-
-        guard let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else {
-            return
-        }
-
-        guard let messageAccountUri = AccountModelHelper(withAccount: accountForMessage).ringId else {
-            return
-        }
-
         var shouldUpdateConversationsList = false
-        if currentAccountUri == messageAccountUri {
+        if currentAccount.id == accountForMessage.id {
             shouldUpdateConversationsList = true
         }
+
+        let type = AccountModelHelper.init(withAccount: accountForMessage)
+            .isAccountSip() ? URIType.sip : URIType.ring
+        guard let uriString = JamiURI.init(schema: type,
+                                           infoHach: peerUri,
+                                           account: accountForMessage).uriString else {return}
         let message = self.conversationService.createMessage(withId: "",
                                                              withContent: content,
-                                                             byAuthor: peerUri,
+                                                             byAuthor: uriString,
                                                              generated: false,
                                                              incoming: true)
         self.conversationService.saveMessage(message: message,
-                                             toConversationWith: peerUri,
+                                             toConversationWith: uriString,
                                              toAccountId: accountId,
-                                             toAccountUri: messageAccountUri,
                                              shouldRefreshConversations: shouldUpdateConversationsList)
             .subscribe()
             .disposed(by: self.disposeBag)
@@ -208,10 +201,15 @@ class ConversationsManager: MessagesAdapterDelegate {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else {
             return
         }
+        let type = AccountModelHelper
+            .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
+        guard let stringUri = JamiURI.init(schema: type,
+                                           infoHach: uri,
+                                           account: account).uriString else {return}
         self.conversationService.messageStatusChanged(status,
                                                       for: messageId,
                                                       fromAccount: account,
-                                                      to: uri)
+                                                      to: stringUri)
     }
 
     func autoAcceptTransfer(transferInfo: NSDataTransferInfo, transferId: UInt64, accountId: String) {

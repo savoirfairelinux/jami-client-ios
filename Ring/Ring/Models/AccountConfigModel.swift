@@ -45,6 +45,21 @@ enum AccountState: String {
     case errorRequestTimeout = "Request Timeout"
     case errorNeedMigration = "ERROR_NEED_MIGRATION"
     case initializing = "INITIALIZING"
+
+    func statusShownToUser() -> String {
+        switch self {
+        case .registered:
+            return "Registered"
+        case .ready:
+            return "Ready"
+        case .trying:
+            return "Trying"
+        case .initializing:
+            return "Initializing"
+        default:
+            return "Unregistered"
+        }
+    }
 }
 
 /**

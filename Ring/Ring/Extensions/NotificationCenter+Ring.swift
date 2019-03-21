@@ -36,4 +36,21 @@ extension NotificationCenter {
                 ])
             .merge()
     }
+
+    static var isKeyboardPresent: Observable<Bool> {
+        return Observable
+            .from([
+                NotificationCenter.default.rx
+                    .notification(NSNotification.Name.UIKeyboardDidShow)
+                    .map { _ -> Bool in
+                        return true
+                },
+                NotificationCenter.default.rx
+                    .notification(NSNotification.Name.UIKeyboardWillHide)
+                    .map { _ -> Bool in
+                        return false
+                }
+                ])
+            .merge()
+    }
 }
