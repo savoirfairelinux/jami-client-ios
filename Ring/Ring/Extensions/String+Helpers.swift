@@ -77,4 +77,8 @@ extension String {
             return 0
         }
     }
+
+    var boolValue: Bool {
+        return (self as NSString).boolValue
+    }
 }

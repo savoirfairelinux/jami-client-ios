@@ -94,6 +94,9 @@
 		0E20E4C82031FF560087C868 /* BlockContactsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E20E4C62031FF560087C868 /* BlockContactsCell.xib */; };
 		0E2D5F531F9145C800D574BF /* LinkNewDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */; };
 		0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */; };
+		0E320D50224ADF840070B515 /* DialpadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E320D4F224ADF840070B515 /* DialpadViewController.storyboard */; };
+		0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E320D51224ADF930070B515 /* DialpadViewController.swift */; };
+		0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E320D53224ADFD00070B515 /* DialpadViewModel.swift */; };
 		0E35C10C2077DFF000BBA5E3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E35C10A2077DFF000BBA5E3 /* NotificationCell.swift */; };
 		0E35C10D2077DFF000BBA5E3 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E35C10B2077DFF000BBA5E3 /* NotificationCell.xib */; };
 		0E36979920322D46009A68CA /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36979720322D46009A68CA /* BlockListViewController.swift */; };
@@ -128,12 +131,16 @@
 		0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F544E223C0ED600ECC3CE /* AccountPickerAdapter.swift */; };
 		0E6F5451223C3C4F00ECC3CE /* AccountItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6F5450223C3C4F00ECC3CE /* AccountItemView.xib */; };
 		0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F5452223C3C7500ECC3CE /* AccountItemView.swift */; };
+		0E6F545622403ADE00ECC3CE /* CreateSipAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6F545522403ADE00ECC3CE /* CreateSipAccountViewController.storyboard */; };
+		0E6F545822403B0300ECC3CE /* CreateSipAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F545722403B0300ECC3CE /* CreateSipAccountViewController.swift */; };
+		0E6F545A22403B1D00ECC3CE /* CreateSipAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F545922403B1D00ECC3CE /* CreateSipAccountViewModel.swift */; };
 		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
 		0E7CF4DB20164B6700CD967D /* ButtonsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DA20164B6700CD967D /* ButtonsContainerView.swift */; };
 		0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */; };
 		0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DE2017918300CD967D /* ButtonsContainerView.xib */; };
 		0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E9A0420483E1200DA8E8B /* TitleView.swift */; };
 		0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E983E6D1FC77C3E0082103E /* ConversationModel.swift */; };
+		0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E99F19F22417A0400CF8BD6 /* JamiURI.swift */; };
 		0E9D84491FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */; };
 		0E9D844B1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D844A1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift */; };
 		0EAA9DB42029F0AA005E245C /* ProxyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA9DB22029F0AA005E245C /* ProxyCell.swift */; };
@@ -407,6 +414,9 @@
 		0E20E4C62031FF560087C868 /* BlockContactsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockContactsCell.xib; sourceTree = "<group>"; };
 		0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceCell.swift; sourceTree = "<group>"; };
 		0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkNewDeviceCell.xib; sourceTree = "<group>"; };
+		0E320D4F224ADF840070B515 /* DialpadViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DialpadViewController.storyboard; sourceTree = "<group>"; };
+		0E320D51224ADF930070B515 /* DialpadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialpadViewController.swift; sourceTree = "<group>"; };
+		0E320D53224ADFD00070B515 /* DialpadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialpadViewModel.swift; sourceTree = "<group>"; };
 		0E35C10A2077DFF000BBA5E3 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		0E35C10B2077DFF000BBA5E3 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		0E36979720322D46009A68CA /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
@@ -436,6 +446,7 @@
 		0E4909741FEAC943005CAA50 /* CallViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CallViewController.storyboard; sourceTree = "<group>"; };
 		0E4909791FEAC9E1005CAA50 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
+		0E639459224AB32200C0890A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		0E63F1F3202907090001F248 /* Ring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ring.entitlements; sourceTree = "<group>"; };
 		0E68571020238546008B0717 /* ConversationNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNavigation.swift; sourceTree = "<group>"; };
 		0E6949781FA7E71C0029B60A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -443,16 +454,21 @@
 		0E6F544E223C0ED600ECC3CE /* AccountPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountPickerAdapter.swift; path = Ring/Features/Conversations/SmartList/Cells/AccountPickerAdapter.swift; sourceTree = SOURCE_ROOT; };
 		0E6F5450223C3C4F00ECC3CE /* AccountItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountItemView.xib; sourceTree = "<group>"; };
 		0E6F5452223C3C7500ECC3CE /* AccountItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountItemView.swift; sourceTree = "<group>"; };
+		0E6F545522403ADE00ECC3CE /* CreateSipAccountViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateSipAccountViewController.storyboard; sourceTree = "<group>"; };
+		0E6F545722403B0300ECC3CE /* CreateSipAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSipAccountViewController.swift; sourceTree = "<group>"; };
+		0E6F545922403B1D00ECC3CE /* CreateSipAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSipAccountViewModel.swift; sourceTree = "<group>"; };
 		0E72374920460320006B0C7D /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		0E7CF4DA20164B6700CD967D /* ButtonsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsContainerView.swift; sourceTree = "<group>"; };
 		0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsContainerViewModel.swift; sourceTree = "<group>"; };
 		0E7CF4DE2017918300CD967D /* ButtonsContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonsContainerView.xib; sourceTree = "<group>"; };
 		0E8E9A0420483E1200DA8E8B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		0E983E6D1FC77C3E0082103E /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		0E99F19F22417A0400CF8BD6 /* JamiURI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiURI.swift; sourceTree = "<group>"; };
 		0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabBarItemViewModel.swift; sourceTree = "<group>"; };
 		0E9D844A1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestTabBarItem.swift; sourceTree = "<group>"; };
 		0EAA9DB22029F0AA005E245C /* ProxyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyCell.swift; sourceTree = "<group>"; };
 		0EAA9DB32029F0AA005E245C /* ProxyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProxyCell.xib; sourceTree = "<group>"; };
+		0EB12451224AB1030025F8CA /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceCell.xib; sourceTree = "<group>"; };
 		0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
 		0EB479941FA28A7300106AFD /* ButtonTransparentBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTransparentBackground.swift; sourceTree = "<group>"; };
@@ -778,6 +794,8 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E639459224AB32200C0890A /* Contacts.framework */,
+				0EB12451224AB1030025F8CA /* ContactsUI.framework */,
 				628F4DCE206C0AEE0009C44C /* libcrypto.a */,
 				628F4DCC206BF4730009C44C /* libtls.a */,
 				628F4DCA206BE23B0009C44C /* libssl.a */,
@@ -1082,6 +1100,16 @@
 			name = BlockListCell;
 			sourceTree = "<group>";
 		};
+		0E320D4E224ADF570070B515 /* Dialpad */ = {
+			isa = PBXGroup;
+			children = (
+				0E320D4F224ADF840070B515 /* DialpadViewController.storyboard */,
+				0E320D51224ADF930070B515 /* DialpadViewController.swift */,
+				0E320D53224ADFD00070B515 /* DialpadViewModel.swift */,
+			);
+			path = Dialpad;
+			sourceTree = "<group>";
+		};
 		0E35C1092077CE1400BBA5E3 /* PushNotifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -1121,6 +1149,7 @@
 			children = (
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
 				0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */,
+				0E99F19F22417A0400CF8BD6 /* JamiURI.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1159,6 +1188,16 @@
 				0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */,
 			);
 			name = DeviceCell;
+			sourceTree = "<group>";
+		};
+		0E6F545422403ABC00ECC3CE /* CreateSipAccount */ = {
+			isa = PBXGroup;
+			children = (
+				0E6F545522403ADE00ECC3CE /* CreateSipAccountViewController.storyboard */,
+				0E6F545722403B0300ECC3CE /* CreateSipAccountViewController.swift */,
+				0E6F545922403B1D00ECC3CE /* CreateSipAccountViewModel.swift */,
+			);
+			path = CreateSipAccount;
 			sourceTree = "<group>";
 		};
 		0E9D84471FA7D9EC00C561EB /* TabBar */ = {
@@ -1202,6 +1241,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				0E320D4E224ADF570070B515 /* Dialpad */,
 				6613A610214AF8B100B497D1 /* QRCode */,
 				0E3BD4222044770000A50DDF /* Contact */,
 				5CE66F721FBF765D00EE9291 /* InitialLoading */,
@@ -1219,6 +1259,7 @@
 		1A0C4EBD1F1D48DD00550433 /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				0E6F545422403ABC00ECC3CE /* CreateSipAccount */,
 				1A0C4ED51F1D49D800550433 /* Welcome */,
 				1A0C4ED71F1D4AC300550433 /* CreateProfile */,
 				1A0C4ED61F1D4AB300550433 /* CreateAccount */,
@@ -1638,6 +1679,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				"ru-RU",
 				"sq-AL",
@@ -1704,7 +1746,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E6F545622403ADE00ECC3CE /* CreateSipAccountViewController.storyboard in Resources */,
 				1A2D18FD1F292DAD00B2C785 /* ConversationCell.xib in Resources */,
+				0E320D50224ADF840070B515 /* DialpadViewController.storyboard in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
 				0EBCAA4E202E60F000E2A545 /* default.wav in Resources */,
 				1A2D18E61F29197100B2C785 /* MessageAccessoryView.xib in Resources */,
@@ -1805,7 +1849,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		1ABE07C31F0C28E000D36361 /* ⚠️ Swiftlint Analysis */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1898,6 +1942,7 @@
 				1A20418D1F1EABCC00C08435 /* StateableResponsive.swift in Sources */,
 				1A0C4EE51F1D67DF00550433 /* WalkthroughCoordinator.swift in Sources */,
 				1A2D18DD1F29192D00B2C785 /* MessableBubble.swift in Sources */,
+				0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */,
 				1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */,
 				0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
@@ -1914,6 +1959,7 @@
 				0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */,
 				1A2D18E51F29197100B2C785 /* MessageAccessoryView.swift in Sources */,
 				0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */,
+				0E6F545822403B0300ECC3CE /* CreateSipAccountViewController.swift in Sources */,
 				0EE1B54E1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift in Sources */,
 				0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
@@ -1926,6 +1972,7 @@
 				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
 				1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */,
 				0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */,
+				0E6F545A22403B1D00ECC3CE /* CreateSipAccountViewModel.swift in Sources */,
 				1A2D18FC1F292DAD00B2C785 /* ConversationCell.swift in Sources */,
 				0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */,
 				0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */,
@@ -1960,6 +2007,7 @@
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
 				0EB479951FA28A7300106AFD /* ButtonTransparentBackground.swift in Sources */,
+				0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */,
 				0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */,
 				0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */,
 				56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */,
@@ -1996,6 +2044,7 @@
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				1A2D18D11F29182500B2C785 /* ConversationViewController.swift in Sources */,
 				0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */,
+				0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */,
 				0E49096E1FEAC0DE005CAA50 /* CallsService.swift in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
 				1A2D19011F29353A00B2C785 /* MeDetailViewModel.swift in Sources */,

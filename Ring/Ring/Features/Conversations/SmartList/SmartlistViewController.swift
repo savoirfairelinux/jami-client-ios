@@ -26,6 +26,7 @@ import RxDataSources
 import RxCocoa
 import Reusable
 import SwiftyBeaver
+import ContactsUI
 
 //Constants
 private struct SmartlistConstants {
@@ -51,6 +52,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var cellularAlertLabel: UILabel!
     @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var dialpadButton: UIButton!
+    @IBOutlet weak var dialpadButtonShadow: UIView!
+
 
     // account selection
     var accounPicker = UIPickerView()
@@ -61,6 +65,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     // MARK: members
     var viewModel: SmartlistViewModel!
     fileprivate let disposeBag = DisposeBag()
+
+    private let contactPicker = CNContactPickerViewController()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -119,6 +125,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func setupUI() {
+        dialpadButtonShadow.layer.shadowColor = UIColor.black.cgColor
+        dialpadButtonShadow.layer.shadowOffset =  CGSize.zero
+        dialpadButtonShadow.layer.shadowRadius = 0.5
+        dialpadButtonShadow.layer.shadowOpacity = 0.3
+        dialpadButtonShadow.layer.masksToBounds = false
         self.viewModel.hideNoConversationsMessage
             .bind(to: self.noConversationsView.rx.isHidden)
             .disposed(by: disposeBag)
@@ -155,7 +166,33 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             })
             .disposed(by: self.disposeBag)
 
+        let imageOpenPhoneContacts = UIImage(asset: Asset.phoneBook) as UIImage?
+        let phoneBookButton   = UIButton(type: UIButtonType.custom) as UIButton
+        phoneBookButton.setImage(imageOpenPhoneContacts, for: .normal)
+        phoneBookButton.contentMode = .scaleAspectFill
+        let contactsButtonItem = UIBarButtonItem(customView: phoneBookButton)
+        phoneBookButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.contactPicker.delegate = self
+                self.present(self.contactPicker, animated: true, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
+        self.viewModel.currentAccountChanged
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] currentAccount in
+                if let account = currentAccount {
+                    let accountSip = account.type == AccountType.sip
+                    self.navigationItem
+                        .rightBarButtonItem = accountSip ? contactsButtonItem : scanButtonItem
+                    self.dialpadButtonShadow.isHidden = !accountSip
+                }
+            }).disposed(by: disposeBag)
+
         self.navigationItem.rightBarButtonItem = scanButtonItem
+        if let account = self.viewModel.currentAccount,
+            account.type == AccountType.sip {
+            self.navigationItem.rightBarButtonItem = contactsButtonItem
+        }
 
         //create accounts button
         let expendAccountButton = UIButton(type: .custom)
@@ -486,5 +523,65 @@ extension SmartlistViewController: UITableViewDelegate {
                 self.viewModel.showConversation(withConversationViewModel: convToShow)
             }
         }
+    }
+}
+
+extension SmartlistViewController: CNContactPickerDelegate {
+
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        let phoneNumberCount = contact.phoneNumbers.count
+        guard phoneNumberCount > 0 else {
+            dismiss(animated: true)
+            let alert = UIAlertController(title: L10n.Smartlist.noNumber,
+                                          message: nil,
+                                          preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: L10n.Global.ok,
+                                             style: .default) { (_: UIAlertAction!) -> Void in }
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        if phoneNumberCount == 1 {
+            setNumberFromContact(contactNumber: contact.phoneNumbers[0].value.stringValue)
+        } else {
+            let alert = UIAlertController(title: L10n.Smartlist.selectOneNumber, message: nil, preferredStyle: .alert)
+            for contact in contact.phoneNumbers {
+                let contactAction = UIAlertAction(title: contact.value.stringValue,
+                                                  style: .default) { [weak self](_: UIAlertAction!) -> Void in
+                    self?.setNumberFromContact(contactNumber: contact.value.stringValue)
+                }
+                alert.addAction(contactAction)
+            }
+            let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction,
+                                             style: .default) { (_: UIAlertAction!) -> Void in }
+            alert.addAction(cancelAction)
+            dismiss(animated: true)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func setNumberFromContact(contactNumber: String) {
+
+        //UPDATE YOUR NUMBER SELECTION LOGIC AND PERFORM ACTION WITH THE SELECTED NUMBER
+
+        var contactNumber = contactNumber.replacingOccurrences(of: "-", with: "")
+        contactNumber = contactNumber.replacingOccurrences(of: "(", with: "")
+        contactNumber = contactNumber.replacingOccurrences(of: ")", with: "")
+        self.viewModel.showSipConversation(withNumber: contactNumber)
+       // self.viewModel.searchBarText.value = contactNumber
+        //contactNumber = contactNumber.removeWhitespacesInBetween()
+//        guard contactNumber.count >= 10 else {
+//            dismiss(animated: true) {
+//              //  self.popUpMessageError(value: 10, message: "Selected contact does not have a valid number")
+//            }
+//            return
+//        }
+        //textFieldNumber.text = String(contactNumber.suffix(10))
+
+    }
+
+    func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
+
     }
 }

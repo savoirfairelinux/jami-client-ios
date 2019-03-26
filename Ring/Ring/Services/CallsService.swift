@@ -177,7 +177,7 @@ class CallsService: CallsAdapterDelegate {
         call.callType = .outgoing
         return Single<CallModel>.create(subscribe: { [unowned self] single in
             if let callId = self.callsAdapter.placeCall(withAccountId: account.id,
-                                                        toRingId: "ring:\(ringId)",
+                                                        toRingId: ringId,
                                                         details: callDetails),
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
                 call.update(withDictionary: callDictionary)
@@ -223,10 +223,12 @@ class CallsService: CallsAdapterDelegate {
             cardChanged = true
         }
         if cardChanged {
-            VCardUtils.sendVCard(card: vCard,
-                                 callID: callID,
-                                 accountID: accountID,
-                                 sender: self)
+            DispatchQueue.main.async { [unowned self] in
+                VCardUtils.sendVCard(card: vCard,
+                                     callID: callID,
+                                     accountID: accountID,
+                                     sender: self)
+            }
         }
     }
 
@@ -252,7 +254,7 @@ class CallsService: CallsAdapterDelegate {
                     time = Int(Date().timeIntervalSince1970 - startTime.timeIntervalSince1970)
                 }
                 var event = ServiceEvent(withEventType: .callEnded)
-                event.addEventInput(.uri, value: call?.participantRingId)
+                event.addEventInput(.uri, value: call?.participantUri)
                 event.addEventInput(.accountId, value: call?.accountId)
                 event.addEventInput(.callType, value: call?.callType.rawValue)
                 event.addEventInput(.callTime, value: time)

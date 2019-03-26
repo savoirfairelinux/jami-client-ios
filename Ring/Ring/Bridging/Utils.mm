@@ -52,8 +52,22 @@
     resMap.insert(std::pair<std::string, std::string>(
         std::string([key UTF8String]),
         std::string([[dict objectForKey:key] UTF8String])));
-
   return resMap;
+}
+
++ (std::vector<std::map<std::string, std::string>>)arrayOfDictionnarisToVectorOfMap:(NSArray*)dictionaries {
+    std::vector<std::map<std::string, std::string>> resVector;
+    for (NSDictionary* dictionary in dictionaries) {
+        std::map<std::string, std::string> resMap;
+        for (id key in dictionary) {
+            resMap.insert(std::pair<std::string,
+                          std::string>(
+                                       std::string([key UTF8String]),
+                                       std::string([[dictionary objectForKey:key] UTF8String])));
+        }
+        resVector.push_back(resMap);
+    }
+    return resVector;
 }
 
 + (NSArray*)vectorOfMapsToArray:
@@ -88,7 +102,6 @@
     for ( int i = 0; i < data.length; i++ ) {
         vector.push_back(bytes[i]);
     }
-
     return vector;
 }
 

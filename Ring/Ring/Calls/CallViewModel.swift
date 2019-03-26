@@ -61,10 +61,15 @@ class CallViewModel: Stateable, ViewModel {
     // data for ViewController binding
 
     lazy var contactImageData: Observable<Data?>? = {
-        guard let call = self.call, let account = self.accountService.currentAccount else {
+        guard let call = self.call,
+            let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
             return nil
         }
-        return self.profileService.getProfile(ringId: call.participantRingId,
+        let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
+        guard let uriString = JamiURI.init(schema: type,
+                  infoHach: call.participantUri,
+                  account: account).uriString else {return nil}
+        return self.profileService.getProfile(uri: uriString,
                                               createIfNotexists: true, accountId: account.id)
             .filter({ profile in
                 guard let photo = profile.photo else {

@@ -38,7 +38,7 @@ class BlockListViewModel: ViewModel {
             _ = contacts.filter {contact in contact.banned}
                 .map ({ contact in
                     let items = self?.initialItems.filter({ item in
-                        return item.contact.ringId == contact.ringId
+                        return item.contact.hash == contact.hash
                     })
                     if let first = items?.first {
                         bannedItems.append(first)
@@ -67,33 +67,34 @@ class BlockListViewModel: ViewModel {
             .filter({ contact in contact.banned})
             .map { contact in
                 var item = BannedContactItem(withContact: contact)
-                self.contactService.getProfileForUri(uri: contact.ringId,
-                                                     accountId: accountId)
-                    .subscribe(onNext: { (profile) in
-                        item.displayName = profile.alias
-                        guard let photo = profile.photo else {
-                            return
-                        }
-                        guard let data = NSData(base64Encoded: photo,
-                                                options: NSData.Base64DecodingOptions
-                                                    .ignoreUnknownCharacters) as Data? else {
-                                                    return
-                        }
-                        item.image = data
-                    }).disposed(by: self.disposeBag)
+                if let uri = contact.uriString {
+                    self.contactService.getProfileForUri(uri: uri,
+                                                         accountId: accountId)
+                        .subscribe(onNext: { (profile) in
+                            item.displayName = profile.alias
+                            guard let photo = profile.photo else {
+                                return
+                            }
+                            guard let data = NSData(base64Encoded: photo,
+                                                    options: NSData.Base64DecodingOptions
+                                                        .ignoreUnknownCharacters) as Data? else {
+                                                            return
+                            }
+                            item.image = data
+                        }).disposed(by: self.disposeBag)
+                }
                 if contact.userName == nil || contact.userName! == "" {
                     self.nameService.usernameLookupStatus.single()
                         .filter({ lookupNameResponse in
                             return lookupNameResponse.address != nil &&
-                                lookupNameResponse.address == contact.ringId
+                                lookupNameResponse.address == contact.hash
                         })
                         .subscribe(onNext: { [weak self] lookupNameResponse in
                             if let name = lookupNameResponse.name, !name.isEmpty {
                                 contact.userName = name
                             }
                         }).disposed(by: self.disposeBag)
-
-                    self.nameService.lookupAddress(withAccount: "", nameserver: "", address: contact.ringId)
+                    self.nameService.lookupAddress(withAccount: "", nameserver: "", address: contact.hash)
                 }
                 return item
         }

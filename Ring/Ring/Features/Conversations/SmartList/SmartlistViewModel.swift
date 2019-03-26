@@ -149,9 +149,9 @@ class SmartlistViewModel: Stateable, ViewModel {
                     }
                     return lastMessage1.receivedDate > lastMessage2.receivedDate
                 })
-                .filter({ self.contactsService.contact(withRingId: $0.recipientRingId) != nil
+                .filter({ self.contactsService.contact(withUri: $0.participantUri) != nil
                     || (!$0.messages.isEmpty &&
-                        (self.contactsService.contactRequest(withRingId: $0.recipientRingId) == nil))
+                        (self.contactsService.contactRequest(withRingId: $0.hash) == nil))
                 })
                 .compactMap({ conversationModel in
 
@@ -234,29 +234,25 @@ class SmartlistViewModel: Stateable, ViewModel {
         self.nameService.usernameLookupStatus
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self, unowned injectionBag] usernameLookupStatus in
-                if usernameLookupStatus.state == .found && (usernameLookupStatus.name == self.searchBarText.value || usernameLookupStatus.address == self.searchBarText.value) {
+                if usernameLookupStatus.state == .found &&
+                    (usernameLookupStatus.name == self.searchBarText.value
+                        || usernameLookupStatus.address == self.searchBarText.value) {
                     if let conversation = self.conversationViewModels.filter({ conversationViewModel in
-                        conversationViewModel.conversation.value.recipientRingId == usernameLookupStatus.address
+                        conversationViewModel.conversation.value.participantUri == usernameLookupStatus.address || conversationViewModel.conversation.value.hash == usernameLookupStatus.address
                     }).first {
                         self.contactFoundConversation.value = conversation
                     } else {
                         if self.contactFoundConversation.value?.conversation.value
-                            .recipientRingId != usernameLookupStatus.address {
-
-                            var ringId = ""
-                            var accountId = ""
+                            .participantUri != usernameLookupStatus.address && self.contactFoundConversation.value?.conversation.value
+                                .hash != usernameLookupStatus.address {
                             if let account = self.accountsService.currentAccount {
-                                accountId = account.id
-                                if let uri = AccountModelHelper(withAccount: account).ringId {
-                                    ringId = uri
-                                }
+                                let uri = JamiURI.init(schema: URIType.ring, infoHach: usernameLookupStatus.address)
+                                //Create new converation
+                                let conversation = ConversationModel(withParticipantUri: uri, accountId: account.id)
+                                let newConversation = ConversationViewModel(with: injectionBag)
+                                newConversation.conversation = Variable<ConversationModel>(conversation)
+                                self.contactFoundConversation.value = newConversation
                             }
-
-                            //Create new converation
-                            let conversation = ConversationModel(withRecipientRingId: usernameLookupStatus.address, accountId: accountId, accountUri: ringId)
-                            let newConversation = ConversationViewModel(with: injectionBag)
-                            newConversation.conversation = Variable<ConversationModel>(conversation)
-                            self.contactFoundConversation.value = newConversation
                         }
                     }
                     self.searchStatus.onNext("")
@@ -283,11 +279,23 @@ class SmartlistViewModel: Stateable, ViewModel {
         //Filter conversations
         let filteredConversations = self.conversationViewModels
             .filter({conversationViewModel in
-                conversationViewModel.conversation.value.recipientRingId == text
+                conversationViewModel.conversation.value.participantUri == text
+                || conversationViewModel.conversation.value.hash == text
             })
 
         if !filteredConversations.isEmpty {
             self.filteredResults.value = filteredConversations
+        }
+
+        if currentAccount.type == AccountType.sip {
+            let uri = JamiURI.init(schema: URIType.sip, infoHach: text, account: currentAccount)
+            let conversation = ConversationModel(withParticipantUri: uri,
+                                                 accountId: currentAccount.id,
+                                                 hash: text)
+            let newConversation = ConversationViewModel(with: self.injectionBag)
+            newConversation.conversation = Variable<ConversationModel>(conversation)
+            self.contactFoundConversation.value = newConversation
+            return
         }
 
         if !text.isSHA1() {
@@ -296,11 +304,10 @@ class SmartlistViewModel: Stateable, ViewModel {
             return
         }
 
-        if self.contactFoundConversation.value?.conversation.value.recipientRingId != text {
-            let accountId = self.accountsService.currentAccount?.id ?? ""
-            let jamiId = AccountModelHelper(withAccount: currentAccount).ringId ?? ""
-            //Create new converation
-            let conversation = ConversationModel(withRecipientRingId: text.replacingOccurrences(of: "ring:", with: ""), accountId: accountId, accountUri: jamiId)
+        if self.contactFoundConversation.value?.conversation.value.participantUri != text && self.contactFoundConversation.value?.conversation.value.hash != text {
+            let uri = JamiURI.init(schema: URIType.ring, infoHach: text)
+            let conversation = ConversationModel(withParticipantUri: uri,
+                                                 accountId: currentAccount.id)
             let newConversation = ConversationViewModel(with: self.injectionBag)
             newConversation.conversation = Variable<ConversationModel>(conversation)
             self.contactFoundConversation.value = newConversation
@@ -337,9 +344,9 @@ class SmartlistViewModel: Stateable, ViewModel {
         if let index = self.conversationViewModels.index(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
-            let contactRingId = conversationViewModel.conversation.value.recipientRingId
+            let contactUri = conversationViewModel.conversation.value.participantUri
             let accountId = conversationViewModel.conversation.value.accountId
-            let removeCompleted = self.contactsService.removeContact(withRingId: contactRingId,
+            let removeCompleted = self.contactsService.removeContact(withUri: contactUri,
                                                                      ban: true,
                                                                      withAccountId: accountId)
             removeCompleted.asObservable()
@@ -355,6 +362,25 @@ class SmartlistViewModel: Stateable, ViewModel {
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
         conversationViewModel))
+    }
+
+    func showSipConversation(withNumber number: String) {
+        guard let account = self.accountsService
+            .currentAccount else {
+                return
+        }
+        let uri = JamiURI.init(schema: URIType.sip,
+                               infoHach: number,
+                               account: account)
+        let conversation = ConversationModel(withParticipantUri: uri,
+                                             accountId: account.id,
+                                             hash: number)
+        let newConversation = ConversationViewModel(with: self.injectionBag)
+        newConversation.conversation = Variable<ConversationModel>(conversation)
+        self.stateSubject
+            .onNext(ConversationState
+                .conversationDetail(conversationViewModel:
+                    newConversation))
     }
 
     func showQRCode() {
