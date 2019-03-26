@@ -38,8 +38,8 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
     var messageTextViewContent = Variable<String>("")
 
     override open func didMoveToWindow() {
-        super.didMoveToWindow()
         self.setupMessageTextView()
+        super.didMoveToWindow()
         if #available(iOS 11.0, *) {
             guard let window = self.window else {
                 return
@@ -60,6 +60,8 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
         self.messageTextView.layer.borderWidth = 1
         self.messageTextView.layer.borderColor = UIColor.jamiMsgTextFieldBorder.cgColor
         self.messageTextView.maxHeight = 70
+        self.shareButton.tintColor = UIColor.jamiMain
+        self.cameraButton.tintColor = UIColor.jamiMain
     }
 
     func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {

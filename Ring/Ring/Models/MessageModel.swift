@@ -24,18 +24,18 @@ class MessageModel {
     var daemonId: String = ""
     var receivedDate: Date = Date()
     var content: String = ""
-    var author: String = ""
+    var authorURI: String = ""
     var status: MessageStatus = .unknown
     var transferStatus: DataTransferStatus = .unknown
     var isGenerated: Bool = false
     var isTransfer: Bool = false
     var incoming: Bool
 
-    init(withId id: String, receivedDate: Date, content: String, author: String, incoming: Bool) {
+    init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
         self.receivedDate = receivedDate
         self.content = content
-        self.author = author
+        self.authorURI = authorURI
         self.incoming = incoming
     }
 }

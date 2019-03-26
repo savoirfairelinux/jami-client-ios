@@ -69,7 +69,7 @@ class ProfilesService {
         guard let accountId = notification.userInfo?[ProfileNotificationsKeys.accountId.rawValue] as? String else {
             return
         }
-        self.triggerProfileSignal(ringId: ringId, createIfNotexists: false, accountId: accountId)
+        self.triggerProfileSignal(uri: ringId, createIfNotexists: false, accountId: accountId)
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -156,35 +156,38 @@ class ProfilesService {
             if let image = vCard.imageData {
                 stringImage = image.base64EncodedString()
             }
-            let uri = ringID.replacingOccurrences(of: "@ring.dht", with: "")
+            guard let uri = JamiURI.init(schema: URIType.ring,
+                                         infoHach: ringID).uriString else {
+                return
+            }
             _ = self.dbManager
                 .createOrUpdateRingProfile(profileUri: uri,
                                            alias: name,
                                            image: stringImage,
                                            accountId: accountId)
-            self.triggerProfileSignal(ringId: uri, createIfNotexists: false, accountId: accountId)
+            self.triggerProfileSignal(uri: uri, createIfNotexists: false, accountId: accountId)
         }
     }
 
-    private func triggerProfileSignal(ringId: String, createIfNotexists: Bool, accountId: String) {
-        guard let profileObservable = self.profiles[ringId] else {
+    private func triggerProfileSignal(uri: String, createIfNotexists: Bool, accountId: String) {
+        guard let profileObservable = self.profiles[uri] else {
             return
         }
         self.dbManager
-            .profileObservable(for: ringId, createIfNotExists: createIfNotexists, accountId: accountId)
+            .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
             .subscribe(onNext: {profile in
                 profileObservable.onNext(profile)
             }).disposed(by: self.disposeBag)
     }
 
-    func getProfile(ringId: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
-        if let profile = self.profiles[ringId] {
+    func getProfile(uri: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
+        if let profile = self.profiles[uri] {
             return profile.asObservable().share()
         }
         let profileObservable = ReplaySubject<Profile>.create(bufferSize: 1)
-        self.profiles[ringId] = profileObservable
+        self.profiles[uri] = profileObservable
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.triggerProfileSignal(ringId: ringId,
+            self?.triggerProfileSignal(uri: uri,
                                        createIfNotexists: createIfNotexists,
                                        accountId: accountId)
         }
