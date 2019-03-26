@@ -63,14 +63,14 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var conversation: Variable<ConversationModel>! {
         didSet {
-            let contactRingId = self.conversation.value.recipientRingId
+            let contactUri = self.conversation.value.participantUri
 
             self.conversationsService
                 .conversationsForCurrentAccount
                 .map({ [unowned self] conversations in
                     return conversations.filter({ conv in
-                        let recipient1 = conv.recipientRingId
-                        let recipient2 = contactRingId
+                        let recipient1 = conv.participantUri
+                        let recipient2 = contactUri
                         if recipient1 == recipient2 {
                             return true
                         }
@@ -90,11 +90,11 @@ class ConversationViewModel: Stateable, ViewModel {
                     self.messages.value = messageViewModel
                 }).disposed(by: self.disposeBag)
 
-            let contact = self.contactsService.contact(withRingId: contactRingId)
-            self.contactsService.getContactRequestVCard(forContactWithRingId: contactRingId)
+            self.contactsService
+                .getContactRequestVCard(forContactWithRingId: self.conversation.value.hash)
                 .subscribe(onSuccess: { vCard in
                     guard let imageData = vCard.imageData else {
-                        self.log.warning("vCard for ringId: \(contactRingId) has no image")
+                        self.log.warning("vCard for ringId: \(contactUri) has no image")
                         return
                     }
                     self.profileImageData.value = imageData
@@ -102,42 +102,10 @@ class ConversationViewModel: Stateable, ViewModel {
                 })
                 .disposed(by: self.disposeBag)
 
-            // invite and block buttons
-            if contact != nil {
-                self.inviteButtonIsAvailable.onNext(false)
-            }
-
-            self.contactsService.contactStatus.filter({ cont in
-                return cont.ringId == contactRingId
-            })
-                .subscribe(onNext: { [unowned self] _ in
-                    self.inviteButtonIsAvailable.onNext(false)
-                }).disposed(by: self.disposeBag)
-
-            // subscribe to presence updates for the conversation's associated contact
-            if let contactPresence = self.presenceService.contactPresence[contactRingId] {
-                self.contactPresence.value = contactPresence
-            } else {
-                self.log.warning("Contact presence unknown for: \(contactRingId)")
-                self.contactPresence.value = false
-            }
-            self.presenceService
-                .sharedResponseStream
-                .filter({ presenceUpdateEvent in
-                    return presenceUpdateEvent.eventType == ServiceEventType.presenceUpdated
-                        && presenceUpdateEvent.getEventInput(.uri) == contact?.ringId
-                })
-                .subscribe(onNext: { [unowned self] presenceUpdateEvent in
-                    if let uri: String = presenceUpdateEvent.getEventInput(.uri) {
-                        self.contactPresence.value = self.presenceService.contactPresence[uri]!
-                    }
-                })
-                .disposed(by: disposeBag)
-
             self.profileService
-                .getProfile(ringId: contactRingId,
-                                           createIfNotexists: false,
-                                           accountId: self.conversation.value.accountId)
+                .getProfile(uri: contactUri,
+                            createIfNotexists: false,
+                            accountId: self.conversation.value.accountId)
                 .subscribe(onNext: { [unowned self] profile in
                     self.displayName.value = profile.alias
                     if let photo = profile.photo,
@@ -146,15 +114,57 @@ class ConversationViewModel: Stateable, ViewModel {
                     }
                 }).disposed(by: disposeBag)
 
+            if let account = self.accountService
+                .getAccount(fromAccountId: self.conversation.value.accountId),
+                account.type == AccountType.sip {
+                    self.inviteButtonIsAvailable.onNext(false)
+                    self.userName.value = self.conversation.value.hash
+                    return
+            }
+            // invite and block buttons
+            let contact = self.contactsService.contact(withUri: contactUri)
+            if contact != nil {
+                self.inviteButtonIsAvailable.onNext(false)
+            }
+
+            self.contactsService.contactStatus.filter({ cont in
+                return cont.uriString == contactUri
+            })
+                .subscribe(onNext: { [unowned self] _ in
+                    self.inviteButtonIsAvailable.onNext(false)
+                }).disposed(by: self.disposeBag)
+
+            // subscribe to presence updates for the conversation's associated contact
+            if let contactPresence = self.presenceService
+                .contactPresence[self.conversation.value.hash] {
+                self.contactPresence.value = contactPresence
+            } else {
+                self.log.warning("Contact presence unknown for: \(contactUri)")
+                self.contactPresence.value = false
+            }
+            self.presenceService
+                .sharedResponseStream
+                .filter({ presenceUpdateEvent in
+                    return presenceUpdateEvent.eventType == ServiceEventType.presenceUpdated
+                        && presenceUpdateEvent.getEventInput(.uri) == contact?.hash
+                })
+                .subscribe(onNext: { [unowned self] presenceUpdateEvent in
+                    if let uri: String = presenceUpdateEvent.getEventInput(.uri) {
+                        self.contactPresence.value = self.presenceService.contactPresence[uri]!
+                    }
+                })
+                .disposed(by: disposeBag)
+
             if let contactUserName = contact?.userName {
                 self.userName.value = contactUserName
             } else {
-                self.userName.value = contactRingId
+                self.userName.value = self.conversation.value.hash
                 // Return an observer for the username lookup
                 self.nameService.usernameLookupStatus
                     .filter({ lookupNameResponse in
                         return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == contactRingId
+                            (lookupNameResponse.address == contactUri ||
+                        lookupNameResponse.address == self.conversation.value.hash)
                     }).subscribe(onNext: { [unowned self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
                             self.userName.value = name
@@ -164,7 +174,7 @@ class ConversationViewModel: Stateable, ViewModel {
                         }
                     }).disposed(by: disposeBag)
 
-                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: contactRingId)
+                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: self.conversation.value.hash)
             }
         }
     }
@@ -266,7 +276,7 @@ class ConversationViewModel: Stateable, ViewModel {
         self.conversationsService
             .sendMessage(withContent: content,
                          from: accountService.currentAccount!,
-                         to: self.conversation.value.recipientRingId)
+                         recipientUri: self.conversation.value.participantUri)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message sent")
             }).disposed(by: self.disposeBag)
@@ -292,20 +302,20 @@ class ConversationViewModel: Stateable, ViewModel {
     fileprivate var unreadMessagesCount: Int {
         let unreadMessages =  self.conversation.value.messages
             .filter({ message in
-            return message.status != .read  && !message.isTransfer && message.author != ""
+                return message.status != .read && !message.isTransfer && message.authorURI != ""
         })
         return unreadMessages.count
     }
 
     func sendContactRequest() {
         if let contact = self.contactsService
-            .contact(withRingId: self.conversation.value.recipientRingId),
+            .contact(withUri: self.conversation.value.participantUri),
             contact.banned {
             return
         }
 
         self.contactsService
-            .sendContactRequest(toContactRingId: self.conversation.value.recipientRingId,
+            .sendContactRequest(toContactRingId: self.conversation.value.hash,
                                 withAccount: self.accountService.currentAccount!)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.info("contact request sent")
@@ -315,10 +325,10 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func block() {
-        let contactRingId = self.conversation.value.recipientRingId
+        let contactRingId = self.conversation.value.hash
         let accountId = self.conversation.value.accountId
         var blockComplete: Observable<Void>
-        let removeCompleted = self.contactsService.removeContact(withRingId: contactRingId,
+        let removeCompleted = self.contactsService.removeContact(withUri: contactRingId,
                                                                  ban: true,
                                                                  withAccountId: accountId)
         if let contactRequest = self.contactsService.contactRequest(withRingId: contactRingId) {
@@ -345,7 +355,7 @@ class ConversationViewModel: Stateable, ViewModel {
         let accountId = item.contactRequest.accountId
         let discardCompleted = self.contactsService.discard(contactRequest: item.contactRequest,
                                                             withAccountId: accountId)
-        let removeCompleted = self.contactsService.removeContact(withRingId: item.contactRequest.ringId,
+        let removeCompleted = self.contactsService.removeContact(withUri: item.contactRequest.ringId,
                                                                  ban: true,
                                                                  withAccountId: accountId)
         return Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
@@ -357,14 +367,14 @@ class ConversationViewModel: Stateable, ViewModel {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
-        self.stateSubject.onNext(ConversationState.startCall(contactRingId: self.conversation.value.recipientRingId, userName: self.displayName.value ?? self.userName.value))
+        self.stateSubject.onNext(ConversationState.startCall(contactRingId: self.conversation.value.hash, userName: self.displayName.value ?? self.userName.value))
     }
 
     func startAudioCall() {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
-        self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: self.conversation.value.recipientRingId, userName: self.displayName.value ?? self.userName.value))
+        self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: self.conversation.value.hash, userName: self.displayName.value ?? self.userName.value))
     }
 
     func showContactInfo() {
@@ -376,7 +386,7 @@ class ConversationViewModel: Stateable, ViewModel {
         self.dataTransferService.sendFile(filePath: filePath,
                                           displayName: displayName,
                                           accountId: accountId,
-                                          peerInfoHash: self.conversation.value.recipientRingId,
+                                          peerInfoHash: self.conversation.value.hash,
                                           localIdentifier: localIdentifier)
     }
 
@@ -384,7 +394,7 @@ class ConversationViewModel: Stateable, ViewModel {
         guard let accountId = accountService.currentAccount?.id else {return}
         self.dataTransferService.sendAndSaveFile(displayName: displayName,
                                                  accountId: accountId,
-                                                 peerInfoHash: self.conversation.value.recipientRingId,
+                                                 peerInfoHash: self.conversation.value.participantUri,
                                                  imageData: imageData,
                                                  conversationId: self.conversation.value.conversationId)
     }
@@ -402,8 +412,8 @@ class ConversationViewModel: Stateable, ViewModel {
             guard let currentAccount = self.accountService.currentAccount else {
                 return err
             }
-            let peerInfoHash = conversation.value.recipientRingId
-            self.conversationsService.transferStatusChanged(DataTransferStatus.error, for: transferId, fromAccount: currentAccount, to: peerInfoHash)
+            let peerInfoHash = conversation.value.participantUri
+            self.conversationsService.transferStatusChanged(DataTransferStatus.error, for: transferId, accountId: currentAccount.id, to: peerInfoHash)
         }
         return err
     }

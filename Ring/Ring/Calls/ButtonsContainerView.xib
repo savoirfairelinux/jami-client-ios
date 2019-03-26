@@ -20,6 +20,7 @@
                 <outlet property="container" destination="a9g-pf-bHy" id="6bw-CB-5qN"/>
                 <outlet property="containerHeightConstraint" destination="Gjk-7U-rEe" id="G5G-Uh-zRV"/>
                 <outlet property="containerView" destination="iN0-l3-epB" id="mcP-kY-dVO"/>
+                <outlet property="dialpadButton" destination="izN-w3-Pc8" id="JWv-ys-ugD"/>
                 <outlet property="muteAudioButton" destination="tXL-FB-O0X" id="6Bh-x3-veQ"/>
                 <outlet property="muteVideoButton" destination="W7F-nH-kda" id="MWK-JU-544"/>
                 <outlet property="pauseCallButton" destination="MPk-dB-dhR" id="W4G-AB-WFw"/>
@@ -159,10 +160,31 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izN-w3-Pc8">
+                                    <rect key="frame" x="345" y="0.0" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="PII-PT-xhP"/>
+                                        <constraint firstAttribute="width" constant="50" id="wje-Ic-6hu"/>
+                                    </constraints>
+                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" image="dialpad"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="25"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" priority="250" constant="200" id="ZuV-LV-CYZ"/>
+                                <constraint firstAttribute="width" priority="250" constant="230" id="ZuV-LV-CYZ"/>
                                 <constraint firstAttribute="height" constant="50" id="gaC-GZ-ftw"/>
                             </constraints>
                         </stackView>
@@ -217,6 +239,7 @@
     </objects>
     <resources>
         <image name="audio_running" width="48" height="48"/>
+        <image name="dialpad" width="75" height="75"/>
         <image name="disable_speakerphone" width="48" height="48"/>
         <image name="pause_call" width="48" height="48"/>
         <image name="stop_call" width="48" height="48"/>

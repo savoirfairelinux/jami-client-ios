@@ -119,6 +119,47 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79Q-fh-vhV">
+                                <rect key="frame" x="285" y="577" width="60" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8G-Me-4BI">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="Dq9-B0-nTC"/>
+                                            <constraint firstAttribute="height" constant="60" id="LCB-X4-TOf"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <size key="titleShadowOffset" width="-3" height="-3"/>
+                                        <state key="normal" image="dialpad"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="30"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.3690336044520548" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="GEI-dw-9ar"/>
+                                    <constraint firstAttribute="trailing" secondItem="k8G-Me-4BI" secondAttribute="trailing" id="a7d-Q1-Fvz"/>
+                                    <constraint firstAttribute="bottom" secondItem="k8G-Me-4BI" secondAttribute="bottom" id="bnM-1C-SSP"/>
+                                    <constraint firstItem="k8G-Me-4BI" firstAttribute="top" secondItem="79Q-fh-vhV" secondAttribute="top" id="g5a-Yt-05m"/>
+                                    <constraint firstAttribute="width" constant="60" id="hKy-2O-rN9"/>
+                                    <constraint firstItem="k8G-Me-4BI" firstAttribute="leading" secondItem="79Q-fh-vhV" secondAttribute="leading" id="pqh-Ky-LOJ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -126,6 +167,7 @@
                             <constraint firstItem="EvL-Bu-O1T" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="2Cw-xT-xCg"/>
                             <constraint firstItem="xPr-nI-I35" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="4NO-53-KBh"/>
                             <constraint firstAttribute="trailing" secondItem="HFM-G6-hMN" secondAttribute="trailing" id="7H1-ka-2Ti"/>
+                            <constraint firstItem="cfq-zl-uux" firstAttribute="top" secondItem="79Q-fh-vhV" secondAttribute="bottom" constant="30" id="8G6-0D-3ma"/>
                             <constraint firstItem="HFM-G6-hMN" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="8tr-Rd-1kr"/>
                             <constraint firstItem="e5o-cY-djH" firstAttribute="top" secondItem="xPr-nI-I35" secondAttribute="bottom" id="CLm-6J-lYv"/>
                             <constraint firstAttribute="trailing" secondItem="opE-y7-3Rm" secondAttribute="trailing" id="D0f-nM-KEs"/>
@@ -136,6 +178,7 @@
                             <constraint firstItem="cfq-zl-uux" firstAttribute="top" secondItem="HFM-G6-hMN" secondAttribute="bottom" id="VfB-5H-uHq"/>
                             <constraint firstItem="EvL-Bu-O1T" firstAttribute="top" secondItem="e5o-cY-djH" secondAttribute="bottom" id="aH0-7e-i4a"/>
                             <constraint firstAttribute="trailing" secondItem="xPr-nI-I35" secondAttribute="trailing" id="dtX-d4-r9P"/>
+                            <constraint firstAttribute="trailing" secondItem="79Q-fh-vhV" secondAttribute="trailing" constant="30" id="elh-uT-3vG"/>
                             <constraint firstAttribute="trailing" secondItem="e5o-cY-djH" secondAttribute="trailing" id="k9v-18-oxL"/>
                             <constraint firstAttribute="trailing" secondItem="EvL-Bu-O1T" secondAttribute="trailing" id="nSK-QH-snj"/>
                             <constraint firstItem="e5o-cY-djH" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="rXu-fF-ESz"/>
@@ -147,6 +190,8 @@
                     <connections>
                         <outlet property="cellularAlertLabel" destination="dHy-gp-i6K" id="W9w-Mi-GTY"/>
                         <outlet property="conversationsTableView" destination="HFM-G6-hMN" id="M97-IB-NUZ"/>
+                        <outlet property="dialpadButton" destination="k8G-Me-4BI" id="Ij7-SF-nvZ"/>
+                        <outlet property="dialpadButtonShadow" destination="79Q-fh-vhV" id="VcA-wc-j6h"/>
                         <outlet property="networkAlertLabel" destination="Fu7-Dr-XvA" id="0qV-lk-9mE"/>
                         <outlet property="networkAlertViewTopConstraint" destination="CLm-6J-lYv" id="LEO-Ep-Gpx"/>
                         <outlet property="noConversationLabel" destination="8bB-XU-6gh" id="n4g-mz-w7z"/>
@@ -164,6 +209,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="dialpad" width="75" height="75"/>
         <image name="settings_icon" width="48" height="48"/>
     </resources>
 </document>

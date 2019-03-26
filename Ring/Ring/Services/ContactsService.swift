@@ -53,8 +53,8 @@ class ContactsService {
         ContactsAdapter.delegate = self
     }
 
-    func contact(withRingId ringId: String) -> ContactModel? {
-        guard let contact = self.contacts.value.filter({ $0.ringId == ringId }).first else {
+    func contact(withUri uri: String) -> ContactModel? {
+        guard let contact = self.contacts.value.filter({ $0.uriString == uri }).first else {
             return nil
         }
 
@@ -65,11 +65,33 @@ class ContactsService {
         guard let contactRequest = self.contactRequests.value.filter({ $0.ringId == ringId }).first else {
             return nil
         }
-
         return contactRequest
     }
 
     func loadContacts(withAccount account: AccountModel) {
+        if AccountModelHelper.init(withAccount: account).isAccountSip() {
+            self.loadSipContacts(withAccount: account)
+            return
+        }
+        loadJamiContacts(withAccount: account)
+    }
+
+    func loadSipContacts(withAccount account: AccountModel) {
+        guard let profiles = self.dbManager
+            .getProfilesForAccount(accountID: account.id) else {return}
+        let contacts = profiles.map({ profile in
+            return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHach: profile.uri))
+        })
+        self.contacts.value.removeAll()
+        for contact in contacts {
+            if self.contacts.value.index(of: contact) == nil {
+                self.contacts.value.append(contact)
+                self.log.debug("contact: \(String(describing: contact.userName))")
+            }
+        }
+    }
+
+    func loadJamiContacts(withAccount account: AccountModel) {
         //Load contacts from daemon
         let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: account.id)
 
@@ -192,8 +214,8 @@ class ContactsService {
 
     func addContact(contact: ContactModel, withAccount account: AccountModel) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
-            self.contactsAdapter.addContact(withURI: contact.ringId, accountId: account.id)
-            if self.contact(withRingId: contact.ringId) == nil {
+            self.contactsAdapter.addContact(withURI: contact.hash, accountId: account.id)
+            if self.contact(withUri: contact.uriString ?? "") == nil {
                 self.contacts.value.append(contact)
             }
             observable.on(.completed)
@@ -201,10 +223,12 @@ class ContactsService {
         }
     }
 
-    func removeContact(withRingId ringId: String, ban: Bool, withAccountId accountId: String) -> Observable<Void> {
+    func removeContact(withUri uri: String, ban: Bool, withAccountId accountId: String) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
-            self.contactsAdapter.removeContact(withURI: ringId, accountId: accountId, ban: ban)
-            self.removeContactRequest(withRingId: ringId)
+            self.contactsAdapter.removeContact(withURI: uri, accountId: accountId, ban: ban)
+            if let hash = JamiURI.init(schema: URIType.ring, infoHach: uri).hash {
+                self.removeContactRequest(withRingId: hash)
+            }
             observable.on(.completed)
             return Disposables.create { }
         }
@@ -227,7 +251,7 @@ class ContactsService {
             .subscribe( onCompleted: {
                 var event = ServiceEvent(withEventType: .contactAdded)
                 event.addEventInput(.accountId, value: account.id)
-                event.addEventInput(.uri, value: contact.ringId)
+                event.addEventInput(.uri, value: contact.hash)
                 self.responseStream.onNext(event)
                 self.contactStatus.onNext(contact)
                 self.contacts.value = self.contacts.value
@@ -269,9 +293,11 @@ extension ContactsService: ContactsAdapterDelegate {
 
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool) {
         //Update trust request list
-        self.removeContactRequest(withRingId: uri)
+        if let hash = JamiURI.init(schema: URIType.ring, infoHach: uri).hash {
+            self.removeContactRequest(withRingId: hash)
+        }
         // update contact status
-        if let contact = self.contact(withRingId: uri) {
+        if let contact = self.contact(withUri: uri) {
             self.contactStatus.onNext(contact)
             if contact.confirmed != confirmed {
                 contact.confirmed = confirmed
@@ -300,24 +326,12 @@ extension ContactsService: ContactsAdapterDelegate {
     }
 
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool) {
-        guard let contactToRemove = self.contacts.value.filter({ $0.ringId == uri}).first else {
+        guard let contactToRemove = self.contacts.value.filter({ $0.hash == uri}).first else {
             return
         }
         contactToRemove.banned = banned
         self.contactStatus.onNext(contactToRemove)
         log.debug("Contact removed :\(uri)")
-    }
-
-    // MARK: - profile
-
-    func saveVCard(vCard: CNContact, forContactWithRingId ringID: String) -> Observable<Void> {
-        let vCardSaved = VCardUtils.saveVCard(vCard: vCard, withName: ringID, inFolder: VCardFolders.contacts.rawValue)
-        return vCardSaved
-    }
-
-    func loadVCard(forContactWithRingId ringID: String) -> Single<CNContact> {
-        let vCard = VCardUtils.loadVCard(named: ringID, inFolder: VCardFolders.contacts.rawValue, contactService: self)
-        return vCard
     }
 
     func getContactRequestVCard(forContactWithRingId ringID: String) -> Single<CNContact> {

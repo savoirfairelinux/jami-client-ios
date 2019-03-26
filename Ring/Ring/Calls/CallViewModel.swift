@@ -51,20 +51,32 @@ class CallViewModel: Stateable, ViewModel {
             guard let call = self.call else {
                 return
             }
+            guard let account = self.accountService.currentAccount else {return}
             isHeadsetConnected = self.audioService.isHeadsetConnected.value
             isAudioOnly = call.isAudioOnly
+            let type = account.type == AccountType.sip
 
-            containerViewModel = ButtonsContainerViewModel(isAudioOnly: self.isAudioOnly, with: self.callService, audioService: self.audioService, callID: call.callId)
+            containerViewModel =
+                ButtonsContainerViewModel(isAudioOnly: self.isAudioOnly,
+                                                           with: self.callService,
+                                                           audioService: self.audioService,
+                                                           callID: call.callId,
+                                                           isSipCall: type)
         }
     }
 
     // data for ViewController binding
 
     lazy var contactImageData: Observable<Data?>? = {
-        guard let call = self.call, let account = self.accountService.currentAccount else {
+        guard let call = self.call,
+            let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
             return nil
         }
-        return self.profileService.getProfile(ringId: call.participantRingId,
+        let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
+        guard let uriString = JamiURI.init(schema: type,
+                  infoHach: call.participantUri,
+                  account: account).uriString else {return nil}
+        return self.profileService.getProfile(uri: uriString,
                                               createIfNotexists: true, accountId: account.id)
             .filter({ profile in
                 guard let photo = profile.photo else {
@@ -288,6 +300,7 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     var containerViewModel: ButtonsContainerViewModel?
+    let injectionBag: InjectionBag
 
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
@@ -296,6 +309,7 @@ class CallViewModel: Stateable, ViewModel {
         self.videoService = injectionBag.videoService
         self.audioService = injectionBag.audioService
         self.profileService = injectionBag.profileService
+        self.injectionBag = injectionBag
 
         callService.currentCall.filter({ [weak self] call in
             return call.callId == self?.call?.callId
@@ -415,5 +429,9 @@ class CallViewModel: Stateable, ViewModel {
     func setCameraOrientation(orientation: UIDeviceOrientation) {
         videoService.setCameraOrientation(orientation: orientation,
                                           callID: self.call?.callId)
+    }
+
+    func showDialpad() {
+        self.stateSubject.onNext(ConversationState.showDialpad(inCall: true))
     }
 }
