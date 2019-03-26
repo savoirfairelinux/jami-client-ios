@@ -32,6 +32,7 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var muteAudioButton: UIButton!
     @IBOutlet  weak var muteVideoButton: UIButton!
     @IBOutlet  weak var pauseCallButton: UIButton!
+    @IBOutlet  weak var dialpadButton: UIButton!
     @IBOutlet  weak var switchSpeakerButton: UIButton!
     @IBOutlet  weak var cancelButton: UIButton!
     @IBOutlet  weak var spaceButton: UIButton!
@@ -90,6 +91,7 @@ class ButtonsContainerView: UIView, NibLoadable {
             muteAudioButton.isHidden = true
             muteVideoButton.isHidden = true
             pauseCallButton.isHidden = true
+            dialpadButton.isHidden = true
             switchSpeakerButton.isHidden = true
             cancelButton.isHidden = false
     }
@@ -102,6 +104,9 @@ class ButtonsContainerView: UIView, NibLoadable {
             if self.viewModel?.isAudioOnly ?? false {
                 muteVideoButton.isHidden = true
                 spaceButton.isHidden = true
+                if self.viewModel?.isSipCall ?? false {
+                    dialpadButton.isHidden = false
+                }
             } else {
                 muteVideoButton.isHidden = false
             }
@@ -118,6 +123,9 @@ class ButtonsContainerView: UIView, NibLoadable {
             if self.viewModel?.isAudioOnly ?? false {
                 muteVideoButton.isHidden = true
                 spaceButton.isHidden = true
+                if self.viewModel?.isSipCall ?? false {
+                    dialpadButton.isHidden = false
+                }
             } else {
                 muteVideoButton.isHidden = false
             }

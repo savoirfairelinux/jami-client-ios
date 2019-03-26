@@ -59,18 +59,35 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHN-iS-Mdb" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="40" y="706.66666666666663" width="295" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="o1x-x5-0z2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
+                                <state key="normal" title="create Sip account">
+                                    <color key="titleColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="40" id="0hJ-6T-D3J"/>
+                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="1lb-s9-YvQ"/>
                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" id="2w4-nZ-VwS"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="30" id="99p-KU-QhW"/>
+                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="B1I-cA-15P"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="leading" secondItem="hvJ-fJ-PMc" secondAttribute="leading" priority="750" constant="40" id="OTd-qD-as2"/>
+                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="top" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="20" id="R2I-SG-Wp2"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="U37-r7-lNe"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="YLx-WX-rgL"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="cYv-WZ-CCB"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="gQM-Bw-BRN"/>
                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="qaX-bX-RjJ"/>
+                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="r8E-fx-VRu"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="uLc-95-Qpb"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="ukg-Rd-bL3"/>
                             <constraint firstItem="hvJ-fJ-PMc" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" priority="750" constant="40" id="vGg-V2-7OH"/>
@@ -80,6 +97,7 @@
                     <navigationItem key="navigationItem" id="SVR-Ry-7d7"/>
                     <connections>
                         <outlet property="createAccountButton" destination="bu0-90-MB5" id="YNt-Tc-Snc"/>
+                        <outlet property="createSipAccountButton" destination="kHN-iS-Mdb" id="eJ4-Qz-agr"/>
                         <outlet property="linkDeviceButton" destination="QLK-gs-fOJ" id="AXP-0r-10g"/>
                         <outlet property="ringLogoBottomConstraint" destination="2w4-nZ-VwS" id="QZo-N3-iCa"/>
                         <outlet property="welcomeTextLabel" destination="E4b-Zv-unB" id="ygV-A3-EZD"/>

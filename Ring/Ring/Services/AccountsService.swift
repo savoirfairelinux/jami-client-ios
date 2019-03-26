@@ -315,6 +315,31 @@ class AccountsService: AccountAdapterDelegate {
             })
     }
 
+    func addSipAccount(userName: String,
+                       password: String,
+                       sipServer: String,
+                       port: String) -> Bool {
+        do {
+            var accountDetails = try self.getInitialAccountDetails(accountType: AccountType.sip.rawValue)
+            accountDetails.updateValue(userName, forKey: ConfigKey.accountUsername.rawValue)
+            accountDetails.updateValue(sipServer, forKey: ConfigKey.accountHostname.rawValue)
+            accountDetails.updateValue(password, forKey: ConfigKey.accountPassword.rawValue)
+            if !port.isEmpty {
+                accountDetails.updateValue(password, forKey: ConfigKey.localPort.rawValue)
+            }
+            guard let account = self.accountAdapter.addAccount(accountDetails) else {return false}
+            _ = try self.dbManager.createDatabaseForAccount(accountId: account)
+            _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: account)
+            self.loadAccountsFromDaemon()
+            let newAccount = self.getAccount(fromAccountId: account)
+            self.currentAccount = newAccount
+            UserDefaults.standard.set(account, forKey: self.selectedAccountID)
+            return true
+        } catch {
+            return false
+        }
+    }
+
     func linkToRingAccount(withPin pin: String, password: String, enable: Bool) -> Observable<AccountModel> {
         var newAccountId = ""
         //~ Single asking the daemon to add a new account with the associated metadata
@@ -377,15 +402,6 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     /**
-     Entry point to create a brand-new SIP account.
-
-     Not supported yet.
-     */
-    fileprivate func addSipAccount() {
-        log.info("Not supported yet")
-    }
-
-    /**
      Gets an account from the list of accounts handled by the application.
 
      - Parameter id: the id of the account to get.
@@ -438,6 +454,15 @@ class AccountsService: AccountAdapterDelegate {
     func setAccountDetails(forAccountId id: String, withDetails newDetails: AccountConfigModel) {
         let details = newDetails.toDetails()
         accountAdapter.setAccountDetails(id, details: details)
+    }
+    /**
+     Sets credentials of an account in the daemon.
+     - Parameter id: the id of the account.
+     - Parameter crdentials: the new credentials to set for the account.
+     */
+    func setAccountCrdentials(forAccountId id: String,
+                              crdentials: [[String: String]]) {
+        accountAdapter.setAccountCredentials(id, credentials: crdentials)
     }
 
     /**
@@ -522,16 +547,18 @@ class AccountsService: AccountAdapterDelegate {
 
      - Returns the details.
      */
-    fileprivate func getInitialAccountDetails() throws -> [String: String] {
-        let details: NSMutableDictionary = accountAdapter.getAccountTemplate(AccountType.ring.rawValue)
+    fileprivate func getInitialAccountDetails(accountType: String) throws -> [String: String] {
+        let details: NSMutableDictionary = accountAdapter.getAccountTemplate(accountType)
         var accountDetails = details as NSDictionary? as? [String: String] ?? nil
         if accountDetails == nil {
             throw AddAccountError.templateNotConform
         }
-        accountDetails!.updateValue("sipinfo", forKey: ConfigKey.accountDTMFType.rawValue)
+        accountDetails!.updateValue("oversip", forKey: ConfigKey.accountDTMFType.rawValue)
         accountDetails!.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
         let ringtonePath = Bundle.main.url(forResource: "default", withExtension: "wav")!
         accountDetails!.updateValue(ringtonePath.path, forKey: ConfigKey.ringtonePath.rawValue)
+        accountDetails!.updateValue(accountType, forKey: ConfigKey.accountType.rawValue)
+        accountDetails!.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
         return accountDetails!
     }
 
@@ -542,8 +569,7 @@ class AccountsService: AccountAdapterDelegate {
      */
     fileprivate func getRingInitialAccountDetails() throws -> [String: String] {
         do {
-            var defaultDetails = try getInitialAccountDetails()
-            defaultDetails.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
+            let defaultDetails = try getInitialAccountDetails(accountType: AccountType.ring.rawValue)
             return defaultDetails
         } catch {
             throw error
@@ -579,6 +605,9 @@ class AccountsService: AccountAdapterDelegate {
         event.addEventInput(.registrationState, value: response.state)
         event.addEventInput(.accountId, value: response.accountId)
         self.responseStream.onNext(event)
+        if let account = self.getAccount(fromAccountId: response.accountId) {
+            account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: response.accountId)
+        }
     }
 
     func knownDevicesChanged(for account: String, devices: [String: String]) {
@@ -695,6 +724,14 @@ class AccountsService: AccountAdapterDelegate {
             }
         }
         return false
+    }
+
+    func enableAccount(enable: Bool, accountId: String) {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
+        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountEnable)) != enable.toString() {
+            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountEnable), withValue: enable.toString())
+            self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
+        }
     }
 
     // MARK: - observable account data

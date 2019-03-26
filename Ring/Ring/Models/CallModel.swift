@@ -58,7 +58,7 @@ class CallModel {
 
     var callId: String = ""
     var dateReceived: Date?
-    var participantRingId: String = ""
+    var participantUri: String = ""
     var displayName: String = ""
     var registeredName: String = ""
     var accountId: String = ""
@@ -98,8 +98,8 @@ class CallModel {
     init(withCallId callId: String, callDetails dictionary: [String: String]) {
         self.callId = callId
 
-        if let fromRingId = dictionary[CallDetailKey.peerNumberKey.rawValue]?.components(separatedBy: "@").first {
-            self.participantRingId = fromRingId
+        if let fromRingId = dictionary[CallDetailKey.peerNumberKey.rawValue] {
+            self.participantUri = fromRingId
         }
 
         if let accountId = dictionary[CallDetailKey.accountIdKey.rawValue] {
@@ -139,8 +139,8 @@ class CallModel {
             self.audioMuted = audioMuted
         }
 
-        if let participantRingId = dictionary[CallDetailKey.peerNumberKey.rawValue]?.components(separatedBy: "@").first {
-            self.participantRingId = participantRingId
+        if let participantRingId = dictionary[CallDetailKey.peerNumberKey.rawValue] {
+            self.participantUri = participantRingId
         }
 
         if let accountId = dictionary[CallDetailKey.accountIdKey.rawValue] {

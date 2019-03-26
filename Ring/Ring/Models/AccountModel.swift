@@ -35,31 +35,52 @@ enum AccountModelError: Error {
 class AccountModel: Equatable {
     // MARK: Public members
     var id: String = ""
-    var registeringUsername = false
     var details: AccountConfigModel? {
         willSet {
-            if let newDetails = newValue,
-                !newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)).isEmpty {
-                uri = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+            if let newDetails = newValue {
+                if !newDetails
+                    .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+                    .isEmpty {
+                    self.username = newDetails
+                        .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+                }
+                let accountType = newDetails
+                    .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType))
+                if let type = AccountType(rawValue: accountType) {
+                    self.type = type
+                }
+                self.enabled = newDetails
+                    .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable))
+                    .boolValue
             }
         }
     }
     var volatileDetails: AccountConfigModel? {
         willSet {
-            if let newDetails = newValue,
-                !newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName)).isEmpty {
-                registeredName = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+            if let newDetails = newValue {
+                if !newDetails
+                    .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName))
+                    .isEmpty {
+                    self.registeredName = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName))
+                }
+                if let status = AccountState(rawValue:
+                    newDetails.get(withConfigKeyModel:
+                        ConfigKeyModel(withKey: .accountRegistrationStatus))) {
+                    self.status = status
+                }
             }
         }
     }
     var credentialDetails = [AccountCredentialsModel]()
     var devices = [DeviceModel]()
-    var onBoarded = false
     var registeredName = ""
-    var uri = ""
+    var username = ""
     var jamiId: String {
-        return self.uri.replacingOccurrences(of: "ring:", with: "")
+        return self.username.replacingOccurrences(of: "ring:", with: "")
     }
+    var type = AccountType.ring
+    var status = AccountState.unregistered
+    var enabled = true
 
     // MARK: Init
     convenience init(withAccountId accountId: String) {
