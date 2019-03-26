@@ -27,6 +27,7 @@ import SwiftyBeaver
 struct AccountModelHelper {
 
     fileprivate static let ringIdPrefix = "ring:"
+    fileprivate static let sipIdPrefix = "sip:"
 
     fileprivate var account: AccountModel
 
@@ -142,6 +143,34 @@ struct AccountModelHelper {
             return String(userName[index!...])
         } else {
             return nil
+        }
+    }
+
+    public var uri: String? {
+        if self.account.type == AccountType.sip {
+            let name = self.account.details!
+                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountUsername))
+            let server = self.account.details!
+                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
+            let port = self.account.details!
+                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .localPort))
+            var uri: String
+            if !name.isEmpty {
+                uri = AccountModelHelper.sipIdPrefix + name
+                if !server.isEmpty {
+                    uri += "@" + server
+                    if !port.isEmpty {
+                        uri += ":" + port
+                    }
+                    return uri
+                } else {
+                    return uri
+                }
+            }
+            return nil
+        } else {
+            guard let ringId = self.ringId else {return nil}
+            return AccountModelHelper.ringIdPrefix.appending(ringId)
         }
     }
 

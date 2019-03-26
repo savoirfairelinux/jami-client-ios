@@ -20,20 +20,32 @@
 
 class ContactModel: Equatable {
 
-    var ringId: String = ""
+    var hash: String = ""
     var userName: String?
+    var uriString: String?
     var confirmed: Bool = false
     var added: Date = Date()
     var banned: Bool = false
+    var type = URIType.ring
 
-    init(withRingId ringId: String) {
-        self.ringId = ringId
+    public static func == (lhs: ContactModel, rhs: ContactModel) -> Bool {
+        return lhs.uriString == rhs.uriString
     }
 
-    init(withDictionary dictionary: [String: String]) {
+    init(withUri contactUri: JamiURI) {
+        self.uriString = contactUri.uriString
+        type = contactUri.schema
+        self.hash = contactUri.hash ?? ""
+    }
 
-        if let ringId = dictionary["id"] {
-            self.ringId = ringId
+    //only jami contacts
+    init(withDictionary dictionary: [String: String]) {
+        if let hash = dictionary["id"] {
+            self.hash = hash
+            if let uriString = JamiURI.init(schema: URIType.ring,
+                                            infoHach: hash).uriString {
+                self.uriString = uriString
+            }
         }
 
         if let confirmed = dictionary["confirmed"] {
@@ -44,14 +56,9 @@ class ContactModel: Equatable {
             let addedDate = Date(timeIntervalSince1970: Double(added)!)
             self.added = addedDate
         }
-        if let banned = dictionary["banned"] {
-            if let banned  = banned.toBool() {
-                self.banned = banned
-            }
+        if let banned = dictionary["banned"],
+            let isBanned  = banned.toBool() {
+            self.banned = isBanned
         }
-    }
-
-    public static func == (lhs: ContactModel, rhs: ContactModel) -> Bool {
-        return lhs.ringId == rhs.ringId
     }
 }

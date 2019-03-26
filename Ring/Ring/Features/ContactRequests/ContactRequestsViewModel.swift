@@ -94,7 +94,12 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     func ban(withItem item: ContactRequestItem) -> Observable<Void> {
         let discardCompleted = self.contactsService.discard(contactRequest: item.contactRequest,
                                                             withAccountId: item.contactRequest.accountId)
-        let removeCompleted = self.contactsService.removeContact(withRingId: item.contactRequest.ringId,
+        guard let uri = JamiURI.init(schema: URIType.ring,
+                                     infoHach: item.contactRequest.ringId)
+            .uriString else {
+                return discardCompleted
+        }
+        let removeCompleted = self.contactsService.removeContact(withUri: uri,
                                                                  ban: true,
                                                                  withAccountId: item.contactRequest.accountId)
 
