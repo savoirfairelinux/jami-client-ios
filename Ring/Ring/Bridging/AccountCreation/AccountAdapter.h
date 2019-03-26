@@ -50,6 +50,9 @@
 - (void)setAccountDetails:(NSString *)accountID
                   details:(NSDictionary *)details;
 
+- (void)setAccountCredentials:(NSString *)accountID
+                  credentials:(NSArray *)credentials;
+
 - (void)setAccountActive:(NSString *)accountID
                   active:(bool)active;
 

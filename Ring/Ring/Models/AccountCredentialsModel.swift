@@ -77,4 +77,12 @@ class AccountCredentialsModel: Object {
         self.password = password!
         self.accountRealm = accountRealm!
     }
+
+    func toDictionary() -> [String: String] {
+        var dictionary = [String: String]()
+        dictionary[ConfigKey.accountUsername.rawValue] =  self.username
+        dictionary[ConfigKey.accountPassword.rawValue] =  self.password
+        dictionary[ConfigKey.accountRealm.rawValue] =  self.accountRealm
+        return dictionary
+    }
 }

@@ -90,39 +90,36 @@ extension UIViewController {
                     scrollView.scrollRectToVisible(activeField.frame, animated: true)
                 }
             }
-
         }).disposed(by: disposeBag)
-
     }
 
     func adaptTableToKeyboardState (for tableView: UITableView, with disposeBag: DisposeBag, topOffset: CGFloat? = nil, bottomOffset: CGFloat? = nil) {
-
-        NotificationCenter.keyboardHeight.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self, unowned tableView] (height) in
+        NotificationCenter.keyboardHeight
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self, unowned tableView] (height) in
             let trueHeight = height > 0  ? height + 100 : 0.0
             // reset insets if they were changed before
             if tableView.contentInset.bottom > 0  && trueHeight <= 0 {
                 var contentInsets = tableView.contentInset
                 contentInsets.bottom = 0
                 tableView.contentInset = contentInsets
-                if let topOffset = topOffset {
-                    var contentOffset = tableView.contentOffset
-                    contentOffset.y = -topOffset
-                    tableView.setContentOffset(contentOffset, animated: false)
-                }
+                return
             }
-            if let activeFieldRowPath = self.findPathWithActiveTextField(in: tableView), let cell = tableView.cellForRow(at: activeFieldRowPath) {
-                var contentInsets = tableView.contentInset
-                if trueHeight > 0 {
-                    contentInsets.bottom += height
-                    tableView.contentInset = contentInsets
-                }
+            if let activeFieldRowPath = self.findPathWithActiveTextField(in: tableView) {
+                let rectOfCell = tableView.rectForRow(at: activeFieldRowPath)
+                let rectOfCellInSuperview = tableView.convert(rectOfCell, to: self.view)
                 var aRect = self.view.frame
-                aRect.size.height -= trueHeight
-                if !aRect.contains(cell.frame.origin) {
+                aRect.origin = CGPoint(x: 0, y: 0)
+                aRect.size.height -= (height + 50)
+                if !aRect.contains(rectOfCellInSuperview.origin) {
+                    var contentInsets = tableView.contentInset
+                    if trueHeight > 0 {
+                        contentInsets.bottom += trueHeight
+                        tableView.contentInset = contentInsets
+                    }
                     tableView.scrollToRow(at: activeFieldRowPath, at: .top, animated: true)
                 }
             }
-
         }).disposed(by: disposeBag)
     }
 

@@ -55,4 +55,10 @@ class WelcomeViewModel: Stateable, ViewModel {
     func cancelWalkthrough() {
         self.stateSubject.onNext(WalkthroughState.profileCreated)
     }
+
+    func createSipAccount() {
+        self.stateSubject
+            .onNext(WalkthroughState
+                .welcomeDone(withType: .createSipAccount))
+    }
 }

@@ -41,7 +41,7 @@ class BannedContactCell: UITableViewCell, NibReusable {
         // avatar
         self.profileImageView.subviews.forEach({ $0.removeFromSuperview() })
         self.profileImageView.addSubview(AvatarView(profileImageData: item.image,
-                                                    username: item.displayName ?? (item.contact.userName ?? item.contact.ringId),
+                                                    username: item.displayName ?? (item.contact.userName ?? item.contact.hash),
                                                     size: 40))
 
         if let displayName = item.displayName {
@@ -51,7 +51,7 @@ class BannedContactCell: UITableViewCell, NibReusable {
         if let name = item.contact.userName {
             self.userNameLabel.text = name
         } else {
-            self.userNameLabel.text = item.contact.ringId
+            self.userNameLabel.text = item.contact.hash
         }
 
         self.unblockButton.titleLabel?.text = L10n.AccountPage.unblockContact
