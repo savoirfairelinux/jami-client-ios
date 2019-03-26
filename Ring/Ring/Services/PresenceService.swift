@@ -42,7 +42,7 @@ class PresenceService {
     func subscribeBuddies(withAccount account: AccountModel, withContacts contacts: [ContactModel]) {
         for contact in contacts where !contact.banned {
             subscribeBuddy(withAccountId: account.id,
-                           withUri: contact.ringId,
+                           withUri: contact.hash,
                            withFlag: true)
         }
     }

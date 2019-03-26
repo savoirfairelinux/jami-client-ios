@@ -39,9 +39,10 @@ class ScanViewModel: ViewModel, Stateable {
         guard let currentAccount = self.injectionBag.accountService.currentAccount else {
             return
         }
-        let accountHelper = AccountModelHelper(withAccount: currentAccount)
         //Create new converation
-        let conversation = ConversationModel(withRecipientRingId: recipientRingId, accountId: currentAccount.id, accountUri: accountHelper.ringId!)
+        let conversation = ConversationModel(withParticipantUri: JamiURI.init(schema: URIType.ring,
+                                                                              infoHach: recipientRingId),
+                                             accountId: currentAccount.id)
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.conversation = Variable<ConversationModel>(conversation)
         self.showConversation(withConversationViewModel: newConversation)

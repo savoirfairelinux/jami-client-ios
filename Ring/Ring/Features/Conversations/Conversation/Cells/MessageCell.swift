@@ -297,7 +297,7 @@ class MessageCell: UITableViewCell, NibReusable {
             }
 
             if item.shouldDisplayTransferedImage {
-                self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.conversationId)
+                self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.conversationId, accountId: conversationViewModel.conversation.value.accountId)
             }
         }
 
@@ -372,7 +372,7 @@ class MessageCell: UITableViewCell, NibReusable {
 
     // swiftlint:enable function_body_length
 
-    func displayTransferedImage(message: MessageViewModel, conversationID: String) {
+    func displayTransferedImage(message: MessageViewModel, conversationID: String, accountId: String) {
         let screenWidth = UIScreen.main.bounds.width
         var maxDimsion: CGFloat = 250
         //iPhone 5 width
@@ -386,7 +386,9 @@ class MessageCell: UITableViewCell, NibReusable {
             maxDimsion = 300
         }
         let defaultSize = CGSize(width: maxDimsion, height: maxDimsion)
-        if let image = message.getTransferedImage(maxSize: maxDimsion, conversationID: conversationID) {
+        if let image = message.getTransferedImage(maxSize: maxDimsion,
+                                                  conversationID: conversationID,
+                                                  accountId: accountId) {
             self.transferImageView.image = image
             let newSize = self.transferImageView.image?.getNewSize(of: defaultSize)
             let xOriginImageSend = screenWidth - 112 - (newSize?.width)!

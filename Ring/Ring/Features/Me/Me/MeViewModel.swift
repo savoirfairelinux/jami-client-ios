@@ -41,6 +41,12 @@ enum SettingsSection: SectionModelType {
         case sectionHeader(title: String)
         case ordinary(label: String)
         case notifications
+        case sipUserName(value: String)
+        case sipPassword(value: String)
+        case sipServer(value: String)
+        case port(value: String)
+        case accountState(state: Variable<String>)
+        case enableAccount
     }
 
     var items: [SectionRow] {
@@ -78,6 +84,7 @@ enum ActionsState {
     case noAction
 }
 
+// swiftlint:disable type_body_length
 class MeViewModel: ViewModel, Stateable {
 
     // MARK: - Rx Stateable
@@ -128,16 +135,46 @@ class MeViewModel: ViewModel, Stateable {
                                             .ordinary(label: L10n.AccountPage.removeAccountTitle)]))
     }()
 
-    lazy var accountSettings: Observable<SettingsSection> = {
+    lazy var accountStatus: Variable<String> = {
+        let accStatus = Variable<String>("")
+        Observable
+            .combineLatest(accountState,
+                           accountEnabled.asObservable()) { (state, enabled) -> String in
+                            if !enabled {
+                                return L10n.Account.statusOffline
+                            }
+                            switch state {
+                            case .registered:
+                                return L10n.Account.statusOnline
+                            case .trying:
+                                return L10n.Account.statusConnecting
+                            case .errorRequestTimeout, .errorNotAcceptable,
+                                 .errorServiceUnavailable, .errorExistStun,
+                                 .errorConfStun, .errorHost,
+                                 .errorNetwork, .errorAuth, .error:
+                                return L10n.Account.statusConnectionerror
+                            default:
+                                return L10n.Account.statusUnknown
+                            }
+            }.subscribe(onNext: { status in
+                accStatus.value = status
+            }).disposed(by: self.disposeBag)
+        return accStatus
+    }()
+
+    lazy var accountJamiSettings: Observable<SettingsSection> = {
         return Observable
             .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.settingsHeader),
                                             .notifications]))
     }()
 
-    lazy var otherSettings: Observable<SettingsSection> = {
+    lazy var otherJamiSettings: Observable<SettingsSection> = {
         return Observable
-            .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.other),
-                                            .blockedList, .removeAccount]))
+            .just(SettingsSection.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.other),
+                                                           .blockedList,
+                                                           .accountState(state: self.accountStatus),
+                                                           .enableAccount,
+                                                           .removeAccount]))
     }()
 
     lazy var havePassord: Bool = {
@@ -145,29 +182,109 @@ class MeViewModel: ViewModel, Stateable {
         return AccountModelHelper(withAccount: currentAccount).havePassword
     }()
 
-    lazy var settings: Observable<[SettingsSection]> = {
+    lazy var jamiSettings: Observable<[SettingsSection]> = {
         Observable.combineLatest(accountCredentials,
                                  linkNewDevice,
                                  linkedDevices,
-                                 accountSettings,
-                                 otherSettings) { (credentials, linkNew, devices, settings, other) in
+                                 accountJamiSettings,
+                                 otherJamiSettings) { (credentials, linkNew, devices, settings, other) in
             return [credentials, devices, linkNew, settings, other]
         }
     }()
 
-    required init (with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
-        self.nameService = injectionBag.nameService
+    let isAccountSip = Variable<Bool>(false)
+    var sipInfoUpdated = BehaviorSubject<Bool>(value: true)
+
+    lazy var otherSipSettings: Observable<SettingsSection> = {
+        return Observable
+            .just(SettingsSection.accountSettings( items: [.sectionHeader(title: ""),
+                                            .accountState(state: self.accountStatus),
+                                            .enableAccount,
+                                            .removeAccount]))
+    }()
+
+    lazy var sipCredentials: Observable<SettingsSection> = {
+        return sipInfoUpdated.map {_ in
+            var username = ""
+            var password = ""
+            var server = ""
+            var port = ""
+            if let account = self.accountService.currentAccount,
+                let details = account.details,
+                let credentials = account.credentialDetails.first {
+                username = credentials.username
+                password = credentials.password
+                server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
+                port = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .localPort))
+                self.sipUsername.value = username
+                self.sipPassword.value = password
+                self.sipServer.value = server
+                self.port.value = port
+            }
+            return .accountSettings( items: [.sectionHeader(title: ""),
+                                             .sipUserName(value: username),
+                                             .sipPassword(value: password),
+                                             .sipServer(value: server),
+                                             .port(value: port)])
+
+        }
+    }()
+
+    lazy var sipSettings: Observable<[SettingsSection]> = {
+        Observable.combineLatest(sipCredentials,
+                                 otherSipSettings) { (credentials, other) in
+                                    return [credentials, other]
+        }
+    }()
+
+    lazy var settings: Observable<[SettingsSection]> = {
         self.accountService.currentAccountChanged
             .subscribe(onNext: { [unowned self] account in
                 if let currentAccount = account {
                     self.updateDataFor(account: currentAccount)
                 }
             }).disposed(by: self.disposeBag)
+        if let account = self.accountService.currentAccount {
+            self.isAccountSip.value = account.type == AccountType.sip
+        }
+        return Observable.combineLatest(jamiSettings, sipSettings,
+                                 isAccountSip.asObservable()) {(jami, sip, isSip) in
+            if isSip == true {
+                return sip
+            }
+            return jami
+        }
+    }()
+
+    required init (with injectionBag: InjectionBag) {
+        self.accountService = injectionBag.accountService
+        self.nameService = injectionBag.nameService
     }
 
     func updateDataFor(account: AccountModel) {
         tempBag = DisposeBag()
+        self.currentAccountState.onNext(account.status)
+        self.accountEnabled.value = account.enabled
+        // subscribe for updating status for current account
+        self.accountService.sharedResponseStream
+            .filter({ serviceEvent in
+                guard let _: String = serviceEvent
+                    .getEventInput(ServiceEventInput.registrationState) else {return false}
+                guard let accountId: String = serviceEvent
+                    .getEventInput(ServiceEventInput.accountId),
+                    accountId == account.id else {return false}
+                return true
+            }).subscribe(onNext: { serviceEvent in
+                guard let state: String = serviceEvent
+                    .getEventInput(ServiceEventInput.registrationState),
+                    let accountState = AccountState(rawValue: state) else {return}
+                self.currentAccountState.onNext(accountState)
+            }).disposed(by: self.tempBag)
+        self.isAccountSip.value = account.type == AccountType.sip
+        if account.type == AccountType.sip {
+            sipInfoUpdated.onNext(true)
+            return
+        }
         if let accountName = account.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)),
             !accountName.isEmpty {
             currentAccountUserName.onNext(accountName)
@@ -230,11 +347,34 @@ class MeViewModel: ViewModel, Stateable {
         self.accountService.revokeDevice(for: accountId, withPassword: password, deviceId: deviceId)
     }
 
-    // MARK: update for celected account
+    // MARK: update for selected account
     let currentAccountUserName = PublishSubject<String>()
     let currentAccountJamiId = PublishSubject<String>()
     let currentAccountDevices = PublishSubject<[DeviceModel]>()
     let currentAccountProxy = PublishSubject<Bool>()
+    let currentAccountState = PublishSubject<AccountState>()
+
+    lazy var accountState: Observable<AccountState> = {
+        var state = AccountState.registered
+        if let account = self.accountService.currentAccount {
+            state = account.status
+            self.accountService.sharedResponseStream
+                .filter({ serviceEvent in
+                    guard let _: String = serviceEvent
+                        .getEventInput(ServiceEventInput.registrationState) else {return false}
+                    guard let accountId: String = serviceEvent
+                        .getEventInput(ServiceEventInput.accountId),
+                        accountId == account.id else {return false}
+                    return true
+                }).subscribe(onNext: { serviceEvent in
+                    guard let state: String = serviceEvent
+                        .getEventInput(ServiceEventInput.registrationState),
+                        let accountState = AccountState(rawValue: state) else {return}
+                    self.currentAccountState.onNext(accountState)
+                }).disposed(by: self.tempBag)
+        }
+        return currentAccountState.share().startWith(state)
+    }()
 
     lazy var userName: Observable<String> = { [unowned self] in
         var initialValue: String = ""
@@ -344,10 +484,7 @@ class MeViewModel: ViewModel, Stateable {
         }
     }
 
-    func isSingleAccount() -> Bool {
-        return self.accountService.accounts.count > 1
-    }
-
+    // MARK: Account State
     func startAccountRemoving() {
         guard let account = self.accountService.currentAccount else {
             return
@@ -363,5 +500,58 @@ class MeViewModel: ViewModel, Stateable {
         UserDefaults.standard.set(allAccounts[1].id, forKey: self.accountService.selectedAccountID)
         self.accountService.currentAccount = allAccounts[1]
         self.accountService.removeAccount(id: account.id)
+    }
+
+    lazy var accountEnabled: Variable<Bool> = {
+        if let account = self.accountService.currentAccount,
+            let details = account.details {
+            let enable = details.get(withConfigKeyModel:
+                ConfigKeyModel.init(withKey: .accountEnable)).boolValue
+            return Variable<Bool>(enable)
+        }
+        return Variable<Bool>(true)
+    }()
+
+    func enableAccount(enable: Bool) {
+        if self.accountEnabled.value == enable {return}
+        guard let account = self.accountService.currentAccount else {return}
+        self.accountService.enableAccount(enable: enable, accountId: account.id)
+        accountEnabled.value = enable
+    }
+
+    // MARK: Sip Credentials
+    let sipUsername = Variable<String>("")
+    let sipPassword = Variable<String>("")
+    let sipServer = Variable<String>("")
+    let port = Variable<String>("")
+
+    func updateSipSettings() {
+        guard let account = self.accountService.currentAccount, let details = account.details, let credentials = account.credentialDetails.first else {return}
+        if AccountModelHelper.init(withAccount: account).isAccountRing() {
+            return
+        }
+        let username = credentials.username
+        let password = credentials.password
+        let server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
+        let port = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .localPort))
+        if username == sipUsername.value
+            && password == sipPassword.value
+            && server == sipServer.value && port == self.port.value {
+            return
+        }
+        if username != sipUsername.value || password != sipPassword.value {
+            credentials.username = sipUsername.value
+            credentials.password = sipPassword.value
+            account.credentialDetails = [credentials]
+            let dict = credentials.toDictionary()
+            self.accountService.setAccountCrdentials(forAccountId: account.id, crdentials: [dict])
+        }
+        if server != sipServer.value || port != self.port.value {
+            details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountHostname), withValue: sipServer.value)
+            details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.localPort), withValue: self.port.value)
+            account.details = details
+            self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
+        }
+        sipInfoUpdated.onNext(true)
     }
 }

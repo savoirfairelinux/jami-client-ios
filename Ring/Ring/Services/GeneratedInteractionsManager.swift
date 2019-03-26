@@ -42,23 +42,22 @@ class GeneratedInteractionsManager {
         self.contactService
             .sharedResponseStream
             .subscribe(onNext: { [unowned self] contactRequestEvent in
-
                 guard let accountID: String = contactRequestEvent.getEventInput(.accountId) else {
                     return
                 }
-                guard let contactRingId: String = contactRequestEvent.getEventInput(.uri) else {
+                guard let contactUri: String = contactRequestEvent.getEventInput(.uri) else {
                     return
                 }
                 guard let account = self.accountService.getAccount(fromAccountId: accountID) else {
                     return
                 }
-                guard let ringId = AccountModelHelper(withAccount: account).ringId else {
-                    return
-                }
+                let type = AccountModelHelper.init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
+                guard let uriString = JamiURI.init(schema: type,
+                                                   infoHach: contactUri,
+                                                   account: account).uriString else {return}
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
-                    let currentrRingId = AccountModelHelper(withAccount: currentAccount).ringId,
-                    currentrRingId == ringId {
+                    currentAccount.id == account.id {
                     shouldUpdateConversations = true
                 }
                 var date = Date()
@@ -73,15 +72,14 @@ class GeneratedInteractionsManager {
                     message = GeneratedMessage.invitationReceived.toString()
                 case ServiceEventType.contactRequestDiscarded:
                     self.removeConversation(accountId: account.id,
-                                            accountRingId: ringId,
-                                            contactRingId: contactRingId,
+                                            contactRingId: uriString,
                                             shouldUpdateConversation: shouldUpdateConversations)
                     return
                 default:
                     return
                 }
                 self.conversationService.generateMessage(messageContent: message,
-                                                         contactRingId: contactRingId,
+                                                         contactUri: uriString,
                                                          accountId: account.id,
                                                          date: date,
                                                          interactionType: InteractionType.contact,
@@ -90,7 +88,7 @@ class GeneratedInteractionsManager {
             .disposed(by: disposeBag)
     }
 
-    private func removeConversation(accountId: String, accountRingId: String,
+    private func removeConversation(accountId: String,
                                     contactRingId: String,
                                     shouldUpdateConversation: Bool) {
 
@@ -114,7 +112,7 @@ class GeneratedInteractionsManager {
                     return
                 }
 
-                guard let contactRingId: String = callEvent.getEventInput(.uri) else {
+                guard let contactUri: String = callEvent.getEventInput(.uri) else {
                     return
                 }
 
@@ -129,23 +127,24 @@ class GeneratedInteractionsManager {
                 guard let account = self.accountService.getAccount(fromAccountId: accountID) else {
                     return
                 }
-
-                guard let ringId = AccountModelHelper(withAccount: account).ringId else {
-                    return
-                }
+                let type = AccountModelHelper
+                    .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
+                guard let stringUri = JamiURI.init(schema: type,
+                                                   infoHach: contactUri,
+                                                   account: account).uriString else {return}
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
-                    let currentrRingId = AccountModelHelper(withAccount: currentAccount).ringId,
-                    currentrRingId == ringId {
+                    currentAccount.id == account.id {
                     shouldUpdateConversations = true
                 }
                 let message = callType == CallType.incoming.rawValue
                 ? (time > 0) ?  GeneratedMessage.incomingCall.toString() : GeneratedMessage.missedIncomingCall.toString() :
-                (time > 0) ?  GeneratedMessage.outgoingCall.toString() : GeneratedMessage.missedOutgoingCall.toString()
+                (time > 0) ?  GeneratedMessage.outgoingCall.toString() :
+                    GeneratedMessage.missedOutgoingCall.toString()
                 self.conversationService
                     .generateMessage(messageContent: message,
                                      duration: Int64(time),
-                                     contactRingId: contactRingId,
+                                     contactUri: stringUri,
                                      accountId: account.id,
                                      date: Date(),
                                      interactionType: InteractionType.call,

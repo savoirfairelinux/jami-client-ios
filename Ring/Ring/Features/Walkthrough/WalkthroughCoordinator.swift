@@ -28,6 +28,7 @@ import RxSwift
 public enum WalkthroughType {
     case createAccount
     case linkDevice
+    case createSipAccount
 }
 
 /// Represents walkthrough navigation state
@@ -96,6 +97,9 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         if walkthroughType == .createAccount {
             let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
             self.present(viewController: createAccountViewController, withStyle: .show, withAnimation: true, withStateable: createAccountViewController.viewModel)
+        } else if walkthroughType == .createSipAccount {
+            let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
+            self.present(viewController: sipAccountViewController, withStyle: .show, withAnimation: true, withStateable: sipAccountViewController.viewModel)
         } else {
             let linkDeviceViewController = LinkDeviceViewController.instantiate(with: self.injectionBag)
             self.present(viewController: linkDeviceViewController, withStyle: .show, withAnimation: true, withStateable: linkDeviceViewController.viewModel)

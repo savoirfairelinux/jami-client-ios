@@ -155,6 +155,10 @@ static id <CallsAdapterDelegate> _delegate;
     return unhold(std::string([callId UTF8String]));
 }
 
+- (void) playDTMF:(NSString*)code {
+    playDTMF(std::string([code UTF8String]));
+}
+
 - (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId details:(NSDictionary*)details {
     std::string callId;
     callId = placeCall(std::string([accountId UTF8String]), std::string([ringId UTF8String]), [Utils dictionnaryToMap:details]);

@@ -48,7 +48,10 @@ class ContactRequestItem {
         self.userName.value = contactRequest.ringId
         self.profileImageData.value = self.contactRequest.vCard?.imageData
         self.profileName.value = VCardUtils.getName(from: self.contactRequest.vCard)
-        profileService.getProfile(ringId: contactRequest.ringId,
+        guard let uri = JamiURI(schema: URIType.ring,
+                                infoHach: contactRequest.ringId)
+            .uriString else {return}
+        profileService.getProfile(uri: uri,
                                   createIfNotexists: false,
                                   accountId: contactRequest.accountId)
             .subscribe(onNext: { [weak self] profile in

@@ -38,5 +38,6 @@
 - (NSArray<NSString*>*)calls;
 - (void) sendTextMessageWithCallID:(NSString*)callId message:(NSDictionary*)message accountId:(NSString*)accountId sMixed:(bool)isMixed;
 - (BOOL) muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted;
+- (void) playDTMF:(NSString*)code;
 
 @end
