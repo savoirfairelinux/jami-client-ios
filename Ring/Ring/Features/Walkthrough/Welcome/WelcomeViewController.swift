@@ -32,6 +32,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var welcomeTextLabel: UILabel!
     @IBOutlet weak var linkDeviceButton: DesignableButton!
     @IBOutlet weak var createAccountButton: DesignableButton!
+    @IBOutlet weak var createSipAccountButton: DesignableButton!
 
     // MARK: constraints
     @IBOutlet weak var ringLogoBottomConstraint: NSLayoutConstraint!
@@ -54,6 +55,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.welcomeTextLabel.alpha = 1
             self.createAccountButton.alpha = 1
             self.linkDeviceButton.alpha = 1
+            self.createSipAccountButton.alpha = 1
         }
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.linkDeviceButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
@@ -61,6 +63,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
         self.viewModel.createAccount.bind(to: self.createAccountButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
         self.viewModel.linkDevice.bind(to: self.linkDeviceButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
+        createSipAccountButton.setTitle(L10n.Account.createSipAccount, for: .normal)
         if !self.viewModel.notCancelable {
             let cancelButton = UIButton(type: .custom)
             cancelButton.setTitleColor(.jamiMain, for: .normal)
@@ -75,6 +78,8 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
                 .disposed(by: self.disposeBag)
             self.navigationItem.leftBarButtonItem = buttonItem
         }
+        Observable.just(self.viewModel.notCancelable).bind(to: self.createSipAccountButton.rx.isHidden).disposed(by: self.disposeBag)
+        Observable.just(!self.viewModel.notCancelable).bind(to: self.createSipAccountButton.rx.isEnabled).disposed(by: self.disposeBag)
         // Bind View Actions to ViewModel
         self.createAccountButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.viewModel.proceedWithAccountCreation()
@@ -82,6 +87,10 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         self.linkDeviceButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.viewModel.proceedWithLinkDevice()
+        }).disposed(by: self.disposeBag)
+
+        self.createSipAccountButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.viewModel.createSipAccount()
         }).disposed(by: self.disposeBag)
     }
 

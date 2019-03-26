@@ -187,6 +187,15 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.removeFromScreen()
             }).disposed(by: self.disposeBag)
 
+        self.buttonsContainer.dialpadButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+//                guard let bag = self?.viewModel.injectionBag else {return}
+//                let dialpadViewController = DialpadViewController.instantiate(with: bag)
+//                dialpadViewController.viewModel.inCallDialpad = true
+//                self?.present(dialpadViewController, animated: true, completion: nil)
+                self?.viewModel.showDialpad()
+            }).disposed(by: self.disposeBag)
+
         self.buttonsContainer.muteAudioButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.toggleMuteAudio()

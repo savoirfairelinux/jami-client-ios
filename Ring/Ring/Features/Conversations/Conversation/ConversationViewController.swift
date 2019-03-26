@@ -333,14 +333,16 @@ class ConversationViewController: UIViewController,
     }
 
     func setupUI() {
-
-        self.messageAccessoryView.shareButton.tintColor = UIColor.jamiMain
-        self.messageAccessoryView.cameraButton.tintColor = UIColor.jamiMain
         self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
         self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill
         self.tableView.backgroundColor = UIColor.jamiMsgBackground
         self.messageAccessoryView.backgroundColor = UIColor.jamiMsgTextFieldBackground
         self.view.backgroundColor = UIColor.jamiMsgTextFieldBackground
+
+        if self.viewModel.isAccountSip {
+            self.messageAccessoryView.frame.size.height = 0
+            self.messageAccessoryView.isHidden = true
+        }
 
         self.messageAccessoryView.shareButton.rx.tap
             .subscribe(onNext: { [unowned self] in
@@ -403,22 +405,25 @@ class ConversationViewController: UIViewController,
             }).disposed(by: self.disposeBag)
 
         // Items are from right to left
-        self.navigationItem.rightBarButtonItems = [videoCallItem, audioCallItem, inviteItem]
-
-        self.viewModel.inviteButtonIsAvailable
-            .asObservable().map({ inviteButton in
-                var buttons = [UIBarButtonItem]()
-                buttons.append(videoCallItem)
-                buttons.append(audioCallItem)
-                if inviteButton {
-                    buttons.append(inviteItem)
-                }
-                return buttons
-            })
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] buttons in
-                self?.navigationItem.rightBarButtonItems = buttons
-            }).disposed(by: self.disposeBag)
+        if self.viewModel.isAccountSip {
+            self.navigationItem.rightBarButtonItem = audioCallItem
+        } else {
+            self.navigationItem.rightBarButtonItems = [videoCallItem, audioCallItem, inviteItem]
+            self.viewModel.inviteButtonIsAvailable
+                .asObservable().map({ inviteButton in
+                    var buttons = [UIBarButtonItem]()
+                    buttons.append(videoCallItem)
+                    buttons.append(audioCallItem)
+                    if inviteButton {
+                        buttons.append(inviteItem)
+                    }
+                    return buttons
+                })
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { [weak self] buttons in
+                    self?.navigationItem.rightBarButtonItems = buttons
+                }).disposed(by: self.disposeBag)
+        }
     }
 
     func inviteItemTapped() {
@@ -789,7 +794,7 @@ extension ConversationViewController: UITableViewDataSource {
                         guard let model = self?.viewModel else { return }
                         self?.log.info("Transfer status change from: \(item.lastTransferStatus.description) to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
                         if item.bubblePosition() == .sent && item.shouldDisplayTransferedImage {
-                            cell.displayTransferedImage(message: item, conversationID: model.conversation.value.conversationId)
+                            cell.displayTransferedImage(message: item, conversationID: model.conversation.value.conversationId, accountId: model.conversation.value.accountId)
                         } else {
                             self?.changeTransferStatus(cell, currentIndexPath, status, item, model)
                             cell.stopProgressMonitor()

@@ -41,26 +41,43 @@ class ContactViewModel: ViewModel, Stateable {
     private let accountService: AccountsService
     private let conversationService: ConversationsService
     private let nameService: NameService
-    var tableSection = Observable<[SectionModel<String, ContactActions>]>
-        .just([SectionModel(model: "ProfileInfoCell",
-                            items:
-            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-              ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
-              ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon)])])
+    lazy var tableSection : Observable<[SectionModel<String, ContactActions>]>  = {
+        let jamiSettings =
+            [SectionModel(model: "ProfileInfoCell",
+                          items:
+                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
+                  ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
+                  ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon)])]
+        let sipSettings =
+            [SectionModel(model: "ProfileInfoCell",
+                          items:
+                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton)])]
+        guard let account = self.accountService.currentAccount,
+            account.type == AccountType.ring else {
+                return Observable<[SectionModel<String, ContactActions>]>
+                    .just(sipSettings)
+        }
+        return Observable<[SectionModel<String, ContactActions>]>
+            .just(jamiSettings)
+    }()
     var conversation: ConversationModel! {
         didSet {
             if let profile = conversation.participantProfile, let alias = profile.alias, !alias.isEmpty {
                 self.displayName.value = alias
             }
-            if let contact = self.contactService.contact(withRingId: conversation.recipientRingId),
+            guard let account = self.accountService
+                .getAccount(fromAccountId: conversation.accountId) else {return}
+            if let contact = self.contactService.contact(withUri: conversation.participantUri),
                 let name = contact.userName {
                 self.userName.value = name
             } else {
-                self.userName.value = conversation.recipientRingId
+                self.userName.value = conversation.hash
+            }
+            if account.type == AccountType.ring {
                 self.nameService.usernameLookupStatus
                     .filter({ [unowned self] lookupNameResponse in
                         return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == self.conversation.recipientRingId
+                            lookupNameResponse.address == self.conversation.participantUri
                     }).subscribe(onNext: { [unowned self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
                             self.userName.value = name
@@ -68,24 +85,31 @@ class ContactViewModel: ViewModel, Stateable {
                             self.userName.value = address
                         }
                     }).disposed(by: disposeBag)
-
-                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: conversation.recipientRingId)
+                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: conversation.hash)
             }
-
             // add option block contact and clear conversation if contact exists
-            if self.contactService.contact(withRingId: conversation.recipientRingId) != nil {
-                self.tableSection = Observable<[SectionModel<String, ContactActions>]>
-                    .just([SectionModel(model: "ProfileInfoCell",
-                                        items:
-                        [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-                          ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
-                          ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon),
-                          ContactActions(title: L10n.ContactPage.clearConversation, image: Asset.clearConversation),
-                          ContactActions(title: L10n.ContactPage.removeConversation, image: Asset.icConversationRemove),
-                          ContactActions(title: L10n.ContactPage.blockContact, image: Asset.blockIcon)])])
+            if self.contactService.contact(withUri: conversation.participantUri) != nil {
+                if account.type == AccountType.ring {
+                    self.tableSection = Observable<[SectionModel<String, ContactActions>]>
+                        .just([SectionModel(model: "ProfileInfoCell",
+                                            items:
+                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
+                              ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
+                              ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon),
+                              ContactActions(title: L10n.ContactPage.clearConversation, image: Asset.clearConversation),
+                              ContactActions(title: L10n.ContactPage.removeConversation, image: Asset.icConversationRemove),
+                              ContactActions(title: L10n.ContactPage.blockContact, image: Asset.blockIcon)])])
+                } else {
+                    self.tableSection = Observable<[SectionModel<String, ContactActions>]>
+                        .just([SectionModel(model: "ProfileInfoCell",
+                                            items:
+                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
+                              ContactActions(title: L10n.ContactPage.clearConversation, image: Asset.clearConversation),
+                              ContactActions(title: L10n.ContactPage.removeConversation, image: Asset.icConversationRemove)])])
+                }
             }
             self.contactService
-                .getContactRequestVCard(forContactWithRingId: conversation.recipientRingId)
+                .getContactRequestVCard(forContactWithRingId: conversation.participantUri)
                 .subscribe(onSuccess: { [unowned self] vCard in
                     if !VCardUtils.getName(from: vCard).isEmpty {
                         self.displayName.value = VCardUtils.getName(from: vCard)
@@ -96,7 +120,7 @@ class ContactViewModel: ViewModel, Stateable {
                     self.profileImageData.value = imageData
                 })
                 .disposed(by: self.disposeBag)
-            self.profileService.getProfile(ringId: conversation.recipientRingId,
+            self.profileService.getProfile(uri: conversation.participantUri,
                                            createIfNotexists: false,
                                            accountId: conversation.accountId)
                 .subscribe(onNext: { [unowned self] profile in
@@ -131,38 +155,38 @@ class ContactViewModel: ViewModel, Stateable {
     }
     func startCall() {
         self.stateSubject.onNext(ConversationState
-            .startCall(contactRingId: conversation.recipientRingId,
+            .startCall(contactRingId: conversation.participantUri,
                        userName: self.userName.value))
     }
     func startAudioCall() {
         self.stateSubject.onNext(ConversationState
-            .startAudioCall(contactRingId: conversation.recipientRingId,
+            .startAudioCall(contactRingId: conversation.participantUri,
                             userName: self.userName.value))
     }
 
     func deleteConversation() {
         self.conversationService
             .clearHistory(conversation: conversation,
-                                keepConversation: false)
+                          keepConversation: false)
     }
 
     func clearConversation() {
         self.conversationService
             .clearHistory(conversation: conversation,
-                                keepConversation: true)
+                          keepConversation: true)
     }
 
     func blockContact() {
-        let contactRingId = conversation.recipientRingId
+        let contactRingId = conversation.participantUri
         let accountId = conversation.accountId
-        let removeCompleted = self.contactService.removeContact(withRingId: contactRingId,
+        let removeCompleted = self.contactService.removeContact(withUri: contactRingId,
                                                                 ban: true,
                                                                 withAccountId: accountId)
         removeCompleted.asObservable()
             .subscribe(onCompleted: { [unowned self] in
                 self.conversationService
                     .clearHistory(conversation: self.conversation,
-                                        keepConversation: false)
+                                  keepConversation: false)
             }).disposed(by: self.disposeBag)
     }
 }

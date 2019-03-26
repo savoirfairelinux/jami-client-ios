@@ -55,6 +55,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             switch state {
             case .createNewAccount:
                 self.createNewAccount()
+            case .showDialpad(let inCall):
+                self.showDialpad(inCall: inCall)
             default:
                 break
             }
@@ -92,6 +94,21 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
     }
 
+    func showDialpad(inCall: Bool) {
+        let dialpadViewController = DialpadViewController.instantiate(with: self.injectionBag)
+        dialpadViewController.viewModel.inCallDialpad = inCall
+        if !inCall {
+            self.present(viewController: dialpadViewController,
+                         withStyle: .present,
+                         withAnimation: true,
+                         withStateable: dialpadViewController.viewModel)
+            return
+        }
+        if let controller = self.navigationViewController.visibleViewController as? CallViewController {
+            controller.present(dialpadViewController, animated: true, completion: nil)
+        }
+    }
+
     func puchConversation(participantId: String) {
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
         guard let account = accountService.currentAccount else {
@@ -119,14 +136,17 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         callViewController.viewModel.call = call
         callViewController.viewModel.answerCall()
             .subscribe(onCompleted: { [weak self] in
-                self?.present(viewController: callViewController, withStyle: .present, withAnimation: false, disposeBag: (self?.disposeBag)!)
+                self?.present(viewController: callViewController,
+                             withStyle: .present,
+                             withAnimation: false,
+                             withStateable: callViewController.viewModel)
             }).disposed(by: self.disposeBag)
     }
 
     private func showCallAlert(call: CallModel) {
         if UIApplication.shared.applicationState != .active && !call.callId.isEmpty {
             var data = [String: String]()
-            data [NotificationUserInfoKeys.name.rawValue] = call.participantRingId
+            data [NotificationUserInfoKeys.name.rawValue] = call.participantUri
             data [NotificationUserInfoKeys.callID.rawValue] = call.callId
             let helper = LocalNotificationsHelper()
             helper.presentCallNotification(data: data, callService: self.callService)
