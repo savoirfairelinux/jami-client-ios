@@ -789,7 +789,7 @@ extension ConversationViewController: UITableViewDataSource {
                         guard let model = self?.viewModel else { return }
                         self?.log.info("Transfer status change from: \(item.lastTransferStatus.description) to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
                         if item.bubblePosition() == .sent && item.shouldDisplayTransferedImage {
-                            cell.displayTransferedImage(message: item, conversationID: model.conversation.value.conversationId)
+                            cell.displayTransferedImage(message: item, conversationID: model.conversation.value.conversationId, accountId: model.conversation.value.accountId)
                         } else {
                             self?.changeTransferStatus(cell, currentIndexPath, status, item, model)
                             cell.stopProgressMonitor()

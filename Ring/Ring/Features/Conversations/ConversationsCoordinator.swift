@@ -126,7 +126,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     private func showCallAlert(call: CallModel) {
         if UIApplication.shared.applicationState != .active && !call.callId.isEmpty {
             var data = [String: String]()
-            data [NotificationUserInfoKeys.name.rawValue] = call.participantRingId
+            data [NotificationUserInfoKeys.name.rawValue] = call.participantUri
             data [NotificationUserInfoKeys.callID.rawValue] = call.callId
             let helper = LocalNotificationsHelper()
             helper.presentCallNotification(data: data, callService: self.callService)
