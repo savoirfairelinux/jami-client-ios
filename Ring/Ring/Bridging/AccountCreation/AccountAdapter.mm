@@ -109,6 +109,11 @@ static id <AccountAdapterDelegate> _delegate;
     setAccountDetails(std::string([accountID UTF8String]),[Utils dictionnaryToMap:details]);
 }
 
+- (void)setAccountCredentials:(NSString *)accountID
+                      credentials:(NSArray*) credentials {
+    setCredentials(std::string([accountID UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap:credentials]);
+}
+
 - (void)setAccountActive:(NSString *)accountID
                   active:(bool)active {
     setAccountActive(std::string([accountID UTF8String]), active);
