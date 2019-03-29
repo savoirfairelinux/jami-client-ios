@@ -150,6 +150,7 @@
 		0EB479951FA28A7300106AFD /* ButtonTransparentBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB479941FA28A7300106AFD /* ButtonTransparentBackground.swift */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
 		0EBCAA4E202E60F000E2A545 /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EBCAA4D202E60F000E2A545 /* default.wav */; };
+		0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
 		0ED2B6FA1F96A075001572F0 /* LinkNewDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED2B6F91F96A075001572F0 /* LinkNewDeviceViewController.storyboard */; };
 		0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B6FB1F96A158001572F0 /* LinkNewDeviceViewController.swift */; };
 		0ED2B6FE1F96A16C001572F0 /* LinkNewDeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B6FD1F96A16C001572F0 /* LinkNewDeviceViewModel.swift */; };
@@ -474,6 +475,7 @@
 		0EB479941FA28A7300106AFD /* ButtonTransparentBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTransparentBackground.swift; sourceTree = "<group>"; };
 		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
 		0EBCAA4D202E60F000E2A545 /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
+		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		0ED2B6F91F96A075001572F0 /* LinkNewDeviceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LinkNewDeviceViewController.storyboard; sourceTree = "<group>"; };
 		0ED2B6FB1F96A158001572F0 /* LinkNewDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceViewController.swift; sourceTree = "<group>"; };
 		0ED2B6FD1F96A16C001572F0 /* LinkNewDeviceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceViewModel.swift; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */,
 				628F4DCF206C0AEE0009C44C /* libcrypto.a in Frameworks */,
 				628F4DCD206BF4740009C44C /* libtls.a in Frameworks */,
 				628F4DCB206BE23B0009C44C /* libssl.a in Frameworks */,
@@ -796,6 +799,7 @@
 			children = (
 				0E639459224AB32200C0890A /* Contacts.framework */,
 				0EB12451224AB1030025F8CA /* ContactsUI.framework */,
+				0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */,
 				628F4DCE206C0AEE0009C44C /* libcrypto.a */,
 				628F4DCC206BF4730009C44C /* libtls.a */,
 				628F4DCA206BE23B0009C44C /* libssl.a */,
@@ -2289,7 +2293,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2326,7 +2333,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2488,7 +2498,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

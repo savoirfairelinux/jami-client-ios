@@ -378,7 +378,8 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func setDecodingAccelerated(withState state: Bool) {
-        videoAdapter.setDecodingAccelerated(false)
+        videoAdapter.setDecodingAccelerated(state)
+        videoAdapter.setEncodingAccelerated(state)
     }
 
     func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int) {

@@ -27,6 +27,7 @@
 #include <functional>
 #include <AVFoundation/AVFoundation.h>
 #include <mutex>
+#import "Utils.h"
 
 using namespace DRing;
 
@@ -36,47 +37,51 @@ struct Renderer
     std::condition_variable frameCv;
     bool isRendering;
     std::mutex renderMutex;
-    SinkTarget target;
-    SinkTarget::FrameBufferPtr daemonFramePtr_;
+    AVSinkTarget target;
+    //SinkTarget target;
+   // SinkTarget::FrameBufferPtr daemonFramePtr_;
     int width;
     int height;
 
     void bindSinkFunctions() {
-        target.pull = [this](std::size_t bytes) {
-            std::lock_guard<std::mutex> lk(renderMutex);
-            if (!daemonFramePtr_)
-                daemonFramePtr_.reset(new DRing::FrameBuffer);
-            daemonFramePtr_->storage.resize(bytes);
-            daemonFramePtr_->ptr = daemonFramePtr_->storage.data();
-            daemonFramePtr_->ptrSize = bytes;
-            return std::move(daemonFramePtr_);
+        target.push = [this](std::unique_ptr<DRing::VideoFrame> frame) {
+            [VideoAdapter.delegate writeFrameWithImage: [Utils convertFrameToImage: frame->pointer()]];
         };
-
-        target.push = [this](DRing::SinkTarget::FrameBufferPtr buf) {
-            std::lock_guard<std::mutex> lk(renderMutex);
-            daemonFramePtr_ = std::move(buf);
-            if(VideoAdapter.delegate) {
-                @autoreleasepool {
-                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                    CGContextRef bitmapContext = CGBitmapContextCreate((void *)daemonFramePtr_->ptr,
-                                                                       daemonFramePtr_->width,
-                                                                       daemonFramePtr_->height,
-                                                                       8,
-                                                                       4 * width,
-                                                                       colorSpace,
-                                                                       kCGBitmapByteOrder32Host | kCGImageAlphaPremultipliedFirst);
-                    CFRelease(colorSpace);
-                    CGImageRef cgImage=CGBitmapContextCreateImage(bitmapContext);
-                    CGContextRelease(bitmapContext);
-                    UIImage* image = [UIImage imageWithCGImage:cgImage];
-                    CGImageRelease(cgImage);
-                    isRendering = true;
-                    [VideoAdapter.delegate writeFrameWithImage: image];
-                    isRendering = false;
-                }
-            }
-
-        };
+//        target.pull = [this](std::size_t bytes) {
+//            std::lock_guard<std::mutex> lk(renderMutex);
+//            if (!daemonFramePtr_)
+//                daemonFramePtr_.reset(new DRing::FrameBuffer);
+//            daemonFramePtr_->storage.resize(bytes);
+//            daemonFramePtr_->ptr = daemonFramePtr_->storage.data();
+//            daemonFramePtr_->ptrSize = bytes;
+//            return std::move(daemonFramePtr_);
+//        };
+//
+//        target.push = [this](DRing::SinkTarget::FrameBufferPtr buf) {
+//            std::lock_guard<std::mutex> lk(renderMutex);
+//            daemonFramePtr_ = std::move(buf);
+//            if(VideoAdapter.delegate) {
+//                @autoreleasepool {
+//                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+//                    CGContextRef bitmapContext = CGBitmapContextCreate((void *)daemonFramePtr_->ptr,
+//                                                                       daemonFramePtr_->width,
+//                                                                       daemonFramePtr_->height,
+//                                                                       8,
+//                                                                       4 * width,
+//                                                                       colorSpace,
+//                                                                       kCGBitmapByteOrder32Host | kCGImageAlphaPremultipliedFirst);
+//                    CFRelease(colorSpace);
+//                    CGImageRef cgImage=CGBitmapContextCreateImage(bitmapContext);
+//                    CGContextRelease(bitmapContext);
+//                    UIImage* image = [UIImage imageWithCGImage:cgImage];
+//                    CGImageRelease(cgImage);
+//                    isRendering = true;
+//                    [VideoAdapter.delegate writeFrameWithImage: image];
+//                    isRendering = false;
+//                }
+//            }
+//
+//        };
     }
 };
 
@@ -147,7 +152,8 @@ static id <VideoAdapterDelegate> _delegate;
     renderer->width = static_cast<int>(w);
     renderer->height = static_cast<int>(h);
     renderer->bindSinkFunctions();
-    DRing::registerSinkTarget(_sinkId, renderer->target);
+    DRing::registerAVSinkTarget(_sinkId, renderer->target);
+    //DRing::registerSinkTarget(_sinkId, renderer->target);
     renderers.insert(std::make_pair(_sinkId, renderer));
 }
 
@@ -194,6 +200,10 @@ static id <VideoAdapterDelegate> _delegate;
 
 - (void)setDecodingAccelerated:(BOOL)state {
     DRing::setDecodingAccelerated(state);
+}
+
+- (void)setEncodingAccelerated:(BOOL)state {
+    DRing::setEncodingAccelerated(state);
 }
 
 - (void)switchInput:(NSString*)deviceName {

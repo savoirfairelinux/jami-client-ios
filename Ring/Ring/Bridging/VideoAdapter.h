@@ -34,5 +34,6 @@
 - (void)setDecodingAccelerated:(BOOL)state;
 - (void)switchInput:(NSString*)deviceName;
 - (void)switchInput:(NSString*)deviceName forCall:(NSString*) callID;
+- (void)setEncodingAccelerated:(BOOL)state;
 
 @end

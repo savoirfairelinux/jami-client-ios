@@ -20,6 +20,8 @@
  */
 
 #import "Utils.h"
+#include <libavutil/frame.h>
+#include <libavcodec/videotoolbox.h>
 
 @implementation Utils
 
@@ -103,6 +105,11 @@
         vector.push_back(bytes[i]);
     }
     return vector;
+}
+
++ (UIImage*)convertFrameToImage:(const AVFrame*)frame {
+    CIImage *image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
+    return [UIImage imageWithCIImage:image];
 }
 
 @end
