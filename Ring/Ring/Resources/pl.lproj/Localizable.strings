@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Brak połączenia z siecią";
 "smartlist.cellularAccess" = "Upewnij się, że dostęp do sieci komórkowej jest dozwolony w ustawieniach";
+"smartlist.accountsTitle" = "Konta";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "Usuń";
 "actions.cancelAction" = "Anuluj";
 "actions.clearAction" = "Clear";
+"actions.backAction" = "Wstecz";
 "alerts.incomingCallAllertTitle" = "Połączenie przychodzące od";
 "alerts.incomingCallButtonAccept" = "Akceptuj";
 "alerts.incomingCallButtonIgnore" = "Zignoruj";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Imię";
 "accountPage.linkDeviceTitle" = "Połącz nowe urządzenie";
+"accountPage.other" = "Inne";
+"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Usuń";
+//Account
+"account.sipUsername" = "User Name";
+"account.sipPassword" = "Hasło";
+"account.sipServer" = "SIP Server";
+"account.port" = "Port";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "Wpisz hasło";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "Online";
+"account.statusOffline" = "Offline";
+"account.statusConnecting" = "Łączenie";
+"account.statusUnknown" = "Nieznane";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Ukończono";
 "dataTransfer.readableStatusAccept" = "Akceptuj";
 "dataTransfer.readableStatusCancel" = "Anuluj";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Kontakt dodany";
+"generatedMessage.invitationReceived" = "Otrzymano zaproszenie";
+"generatedMessage.invitationAccepted" = "Zaakceptowano zaproszenie";
+"generatedMessage.outgoingCall" = "Połączenie wychodzące";
+"generatedMessage.incomingCall" = "Połączenie przychodzące";
+"generatedMessage.missedOutgoingCall" = "Nieodebrane połączenie wychodzące";
+"generatedMessage.missedIncomingCall" = "Nieodebrane połączenie przychodzące";
 

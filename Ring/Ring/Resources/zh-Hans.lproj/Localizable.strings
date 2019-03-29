@@ -34,16 +34,20 @@
 "smartlist.conversations" = "對話";
 "smartlist.searching" = "正在搜尋...";
 "smartlist.noResults" = "沒有結果";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.noConversation" = "沒有對話";
+"smartlist.searchBarPlaceholder" = "輸入名字……";
 "smartlist.noNetworkConnectivity" = "沒有網路連接";
 "smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
+"smartlist.accountsTitle" = "帳號";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
-"conversation.messagePlaceholder" = "Type your message...";
+"conversation.messagePlaceholder" = "輸入您的訊息……";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "沒有邀請";
 
 // Walkthrough
 
@@ -109,14 +113,15 @@
 "alerts.confirmDeleteConversation" = "您確定您想要永久刪除此對話嗎？";
 "alerts.confirmDeleteConversationFromContact" = "您確定您想要刪除與此聯絡人的對話嗎？";
 "alerts.confirmDeleteConversationTitle" = "刪除對話";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
+"alerts.confirmClearConversation" = "您確定您想要清除與這個聯絡人的對話嗎？";
+"alerts.confirmClearConversationTitle" = "清除對話";
 
 //Actions
 "actions.blockAction" = "阻擋";
 "actions.deleteAction" = "刪除";
 "actions.cancelAction" = "取消";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "清除";
+"actions.backAction" = "前一個";
 "alerts.incomingCallAllertTitle" = "來電從";
 "alerts.incomingCallButtonAccept" = "接聽";
 "alerts.incomingCallButtonIgnore" = "忽略";
@@ -159,9 +164,30 @@
 "accountPage.deviceRevocationError" = "裝置撤銷錯誤";
 "accountPage.namePlaceholder" = "名稱";
 "accountPage.linkDeviceTitle" = "連結其他裝置";
+"accountPage.other" = "其他";
+"accountPage.removeAccountTitle" = "移除帳號";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "移除";
+//Account
+"account.sipUsername" = "使用者名稱";
+"account.sipPassword" = "密碼";
+"account.sipServer" = "SIP 伺服器";
+"account.port" = "連接埠";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "輸入密碼";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "線上";
+"account.statusOffline" = "離線";
+"account.statusConnecting" = "連接中";
+"account.statusUnknown" = "未知";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "沒有已封鎖的聯絡人";
 
 //Link New Device
 "linkDevice.title" = "連結新裝置";
@@ -177,7 +203,7 @@
 "contactPage.sendMessage" = "傳送訊息";
 "contactPage.clearConversation" = "清除聊天紀錄";
 "contactPage.blockContact" = "阻擋聯絡人";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.removeConversation" = "移除對話";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "正在初始化……";
@@ -191,10 +217,10 @@
 "dataTransfer.readableStatusCancel" = "取消";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
+"notifications.incomingCall" = "來電";
+"notifications.missedCall" = "漏接的通話";
+"notifications.acceptCall" = "接聽";
+"notifications.refuseCall" = "拒接";
 "dataTransfer.readableStatusAwaiting" = "擱置中……";
 "dataTransfer.readableStatusRefuse" = "拒絕";
 "dataTransfer.readableStatusOngoing" = "正在傳輸";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "完成";
 "dataTransfer.readableStatusAccept" = "接聽";
 "dataTransfer.readableStatusCancel" = "取消";
+
+//Generated Message
+"generatedMessage.contactAdded" = "已新增聯絡人";
+"generatedMessage.invitationReceived" = "已收到邀請";
+"generatedMessage.invitationAccepted" = "已接受邀請";
+"generatedMessage.outgoingCall" = "撥出電話";
+"generatedMessage.incomingCall" = "來電";
+"generatedMessage.missedOutgoingCall" = "未接去電";
+"generatedMessage.missedIncomingCall" = "未接來電";
 

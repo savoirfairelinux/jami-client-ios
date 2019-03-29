@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Нет подключения к сети";
 "smartlist.cellularAccess" = "Убедитесь, что доступ через сеть сотовой связи разрешен";
+"smartlist.accountsTitle" = "Аккаунты";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "Удалить";
 "actions.cancelAction" = "Отмена";
 "actions.clearAction" = "Clear";
+"actions.backAction" = "Назад";
 "alerts.incomingCallAllertTitle" = "Входящий вызов от";
 "alerts.incomingCallButtonAccept" = "Принять";
 "alerts.incomingCallButtonIgnore" = "Игнорировать";
@@ -148,7 +153,7 @@
 "accountPage.proxyDisabledAlertBody" = "Для получения уведомлений, пожалуйста, включите прокси";
 "accountPage.revokeDeviceTitle" = "Отозвать устройство";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "Отвязать";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Имя";
 "accountPage.linkDeviceTitle" = "Привязать другое устройство";
+"accountPage.other" = "Другой";
+"accountPage.removeAccountTitle" = "Удаление учетной записи";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Удалить";
+//Account
+"account.sipUsername" = "Имя";
+"account.sipPassword" = "Пароль";
+"account.sipServer" = "Сервер SIP";
+"account.port" = "Порт";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "Введите пароль";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "В сети";
+"account.statusOffline" = "Не в сети";
+"account.statusConnecting" = "Подключение";
+"account.statusUnknown" = "Неизвестно";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Завершено";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Контакт добавлен";
+"generatedMessage.invitationReceived" = "Получено приглашение";
+"generatedMessage.invitationAccepted" = "Приглашение принято";
+"generatedMessage.outgoingCall" = "Исходящий вызов";
+"generatedMessage.incomingCall" = "Входящий вызов";
+"generatedMessage.missedOutgoingCall" = "Непринятый исходящий вызов";
+"generatedMessage.missedIncomingCall" = "Пропущенный входящий вызов";
 

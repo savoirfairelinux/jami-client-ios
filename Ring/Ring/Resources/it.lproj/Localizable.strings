@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Connessione di rete assente";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.accountsTitle" = "Accounts";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -50,8 +54,8 @@
 //Welcome Screen
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.linkDevice" = "Collega questo dispositivo a un account";
+"welcome.createAccount" = "Crea un account Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
@@ -78,7 +82,7 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "Notifiche";
 "createAccount.Recommended" = "(Recommended)";
 
 //Link To Account form
@@ -96,7 +100,7 @@
 "alerts.accountAddedTitle" = "Account Added";
 "alerts.accountNoNetworkTitle" = "Can't connect to the network";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
+"alerts.accountDefaultErrorTitle" = "Errore sconosciuto";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Scattare una foto";
 "alerts.profileUploadPhoto" = "Upload photo";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "Cancella";
 "actions.cancelAction" = "Cancella";
 "actions.clearAction" = "Clear";
+"actions.backAction" = "Indietro";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accettare";
 "alerts.incomingCallButtonIgnore" = "Ignore";
@@ -126,7 +131,7 @@
 "calls.unknown" = "Sconosciuto";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
+"calls.connecting" = "Connessione in corso ...";
 "calls.callFinished" = "Call finished";
 
 //Account Page
@@ -158,7 +163,28 @@
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nome";
-"accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.linkDeviceTitle" = "Collega un altro dispositivo";
+"accountPage.other" = "Altro";
+"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Rimuovi";
+//Account
+"account.sipUsername" = "User Name";
+"account.sipPassword" = "Password";
+"account.sipServer" = "SIP Server";
+"account.port" = "Porta";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "Enter Password";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "Online";
+"account.statusOffline" = "Offline";
+"account.statusConnecting" = "Connessione in corso ";
+"account.statusUnknown" = "Sconosciuto";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -180,7 +206,7 @@
 "contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Inizializzazione...";
 "dataTransfer.readableStatusError" = "Errore";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Rifiuta";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accettare";
 "dataTransfer.readableStatusCancel" = "Cancella";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Contatto aggiunto";
+"generatedMessage.invitationReceived" = "Invito ricevuto";
+"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.outgoingCall" = "Chiamata in uscita";
+"generatedMessage.incomingCall" = "Chiamata in arrivo";
+"generatedMessage.missedOutgoingCall" = "Chiamata in uscita persa";
+"generatedMessage.missedIncomingCall" = "Chiamata in entrata persa";
 

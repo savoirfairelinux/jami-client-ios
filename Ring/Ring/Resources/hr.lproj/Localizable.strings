@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Veza nedostupna";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.accountsTitle" = "Računi";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "Izbriši";
 "actions.cancelAction" = "Poništi";
 "actions.clearAction" = "Clear";
+"actions.backAction" = "Natrag";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Prihvati";
 "alerts.incomingCallButtonIgnore" = "Ignoriraj";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Ime";
 "accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.other" = "Ostalo";
+"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Ukloni";
+//Account
+"account.sipUsername" = "User Name";
+"account.sipPassword" = "Lozinka";
+"account.sipServer" = "SIP Server";
+"account.port" = "Port";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "Enter Password";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "Online";
+"account.statusOffline" = "Offline";
+"account.statusConnecting" = "Spajanje";
+"account.statusUnknown" = "Nepoznato";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Prihvati";
 "dataTransfer.readableStatusCancel" = "Poništi";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Contact added";
+"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.outgoingCall" = "Odlazni poziv";
+"generatedMessage.incomingCall" = "Dolazni poziv";
+"generatedMessage.missedOutgoingCall" = "Propušteni odlazni poziv";
+"generatedMessage.missedIncomingCall" = "Propušteni dolazni poziv";
 

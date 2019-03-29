@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Főoldal";
-"global.contactRequestsTabBarTitle" = "Meghívás";
+"global.contactRequestsTabBarTitle" = "Meghívások";
 "global.meTabBarTitle" = "Fiók";
 "global.ok" = "Rendben";
 
@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Név megadása…";
 "smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
 "smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
+"smartlist.accountsTitle" = "Fiókok";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Üzenet írása…";
@@ -50,7 +54,7 @@
 //Welcome Screen
 "welcome.title" = "Isten hozott!";
 "welcome.text" = "A Jami egy szabad szoftver az egyetemes közlés emelvény, mely tiszteletben tartja a felhasználók szabadságát és magán szféráját";
-"welcome.linkDevice" = "Ezen eszköz fiókhoz kapcsolása";
+"welcome.linkDevice" = "Ezen eszköz összekapcsolása egy fiókhoz";
 "welcome.createAccount" = "Jami fiók létrehozása";
 
 //Creation Profile Screen
@@ -60,7 +64,7 @@
 "createProfile.enterNameLabel" = "Adja meg a megjelenítési nevet";
 "createProfile.enterNamePlaceholder" = "Név megadása";
 "createProfile.subtitle" = "A profilja a kapcsolataival kerül megosztásra. Bármikor megváltoztathatja.";
-"createProfile.createYourAvatar" = "Megtestesülés létrehozása";
+"createProfile.createYourAvatar" = "Megtestesülés kép létrehozása";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Fiók létrehozása";
@@ -75,7 +79,7 @@
 "createAccount.usernameAlreadyTaken" = "A felhasználó név már foglalt";
 "createAccount.loading" = "Betöltés…";
 "createAccount.waitCreateAccountTitle" = "Fiók hozzáadása";
-"createAccount.RegisterAUsername" = "Felhasználónév regisztrálása";
+"createAccount.RegisterAUsername" = "Felhasználónév bejegyeztetése";
 "createAccount.ChooseAPassword" = "Fiók titkosítása";
 "createAccount.PasswordInformation" = "Válasszon jelszót a helyi fiók titkosításához. Ha elfelejtette a jelszavát, nem tudja visszaszerezni fiókját.";
 "createAccount.EnableNotifications" = "Értesítések";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "Törlés";
 "actions.cancelAction" = "Mégse";
 "actions.clearAction" = "Törlés";
+"actions.backAction" = "Vissza";
 "alerts.incomingCallAllertTitle" = "Bejövő hívás -tól/-től";
 "alerts.incomingCallButtonAccept" = "Elfogadás";
 "alerts.incomingCallButtonIgnore" = "Figyelmen kívül hagy";
@@ -133,19 +138,19 @@
 "accountPage.devicesListHeader" = "Eszközök";
 "accountPage.settingsHeader" = "Beállítások";
 "accountPage.username" = "felhasználónév:";
-"accountPage.usernameNotRegistered" = "felhasználónév: nem regisztrált";
+"accountPage.usernameNotRegistered" = "felhasználónév: nincs bejegyzett";
 "accountPage.credentialsHeader" = "Fiók Adatai";
-"accountPage.enableProxy" = "Proxy engedélyezése";
+"accountPage.enableProxy" = "Meghatalmazott engedélyezése";
 "accountPage.blockedContacts" = "Tiltólista";
 "accountPage.unblockContact" = "Letiltás feloldása";
-"accountPage.proxyAddressAlert" = "Adja meg a proxy címet";
-"accountPage.enableProxy" = "Proxy engedélyezése";
-"accountPage.noProxyExplanationLabel" = "A készüléke nem kap értesítéseket amikor a proxy le van tiltva";
+"accountPage.proxyAddressAlert" = "Adja meg a meghatalmazott címet";
+"accountPage.enableProxy" = "Meghatalmazott engedélyezése";
+"accountPage.noProxyExplanationLabel" = "A készüléke nem kap értesítéseket amikor a meghatalmazott le van tiltva";
 "accountPage.saveProxyAddress" = "Mentés";
-"accountPage.proxyPaceholder" = "Proxy cím";
+"accountPage.proxyPaceholder" = "Meghatalmazott cím";
 "accountPage.enableNotifications" = "Értesítések engedélyezése";
-"accountPage.proxyDisabledAlertTitle" = "Proxy kiszolgáló letiltva";
-"accountPage.proxyDisabledAlertBody" = "Annak érdekében, hogy értesítéseket kaphasson kérjük, hogy engedélyezze a proxy használatát";
+"accountPage.proxyDisabledAlertTitle" = "Meghatalmazott-kiszolgáló letiltva";
+"accountPage.proxyDisabledAlertBody" = "Annak érdekében, hogy értesítéseket kaphasson kérjük, hogy engedélyezze a meghatalmazott használatát";
 "accountPage.revokeDeviceTitle" = "Eszköz visszavonása";
 "accountPage.revokeDeviceMessage" = "Biztosan visszavonja ezt az eszközt? Ez a művelet nem vonható vissza.";
 "accountPage.revokeDeviceButton" = "Visszavon";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Eszköz visszavonási hiba";
 "accountPage.namePlaceholder" = "Név";
 "accountPage.linkDeviceTitle" = "Csatlakoztasson másik eszközt";
+"accountPage.other" = "Másik";
+"accountPage.removeAccountTitle" = "Fiók eltávolítása";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Eltávolítás";
+//Account
+"account.sipUsername" = "Felhasználónév";
+"account.sipPassword" = "Jelszó";
+"account.sipServer" = "SIP-kiszolgáló";
+"account.port" = "Port";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "A jelszó megadása";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "Elérhető";
+"account.statusOffline" = "Nem elérhető";
+"account.statusConnecting" = "Kapcsolódás";
+"account.statusUnknown" = "Ismeretlen";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Nincsenek letiltott kapcsolatok";
@@ -168,7 +194,7 @@
 "linkDevice.passwordError" = "A megadott jelszó nem oldja fel ezt a fiókot";
 "linkDevice.networkError" = "Hálózati hiba történt az exportálás során";
 "linkDevice.defaultError" = "Hiba történt az exportálás során";
-"linkDevice.explanationMessage" = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön és válassza az „Eszköz összekapcsolása egy fiókhoz” opciót. A PIN-kódod 10 percig érvényes.";
+"linkDevice.explanationMessage" = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön és válassza az „Ezen eszköz összekapcsolása egy fiókhoz” opciót. A PIN-kódod 10 percig érvényes.";
 "linkDevice.hudMessage" = "Ellenőrzése";
 
 //Contact Page
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Kapcsolat hozzáadva";
+"generatedMessage.invitationReceived" = "Meghívás megérkezett";
+"generatedMessage.invitationAccepted" = "Meghívás elfogadott";
+"generatedMessage.outgoingCall" = "Kimenő hívás";
+"generatedMessage.incomingCall" = "Bejövő hívás";
+"generatedMessage.missedOutgoingCall" = "Nem fogadott kimenő hívás";
+"generatedMessage.missedIncomingCall" = "Nem fogadott bejövő hívás";
 

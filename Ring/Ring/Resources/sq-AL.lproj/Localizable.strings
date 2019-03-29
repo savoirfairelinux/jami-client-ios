@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Jepni emrin…";
 "smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
 "smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
+"smartlist.accountsTitle" = "Llogari";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Shkruani mesazhin tuaj…";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "Fshije";
 "actions.cancelAction" = "Anuloje";
 "actions.clearAction" = "Pastroje";
+"actions.backAction" = "Mbrapsht";
 "alerts.incomingCallAllertTitle" = "Thirrje nga";
 "alerts.incomingCallButtonAccept" = "Pranoje";
 "alerts.incomingCallButtonIgnore" = "Shpërfille";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Gabim shfuqizimi pajisjeje";
 "accountPage.namePlaceholder" = "Emër";
 "accountPage.linkDeviceTitle" = "Lidhni një pajisje tjetër";
+"accountPage.other" = "Tjetër";
+"accountPage.removeAccountTitle" = "Hiqe llogarinë";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Hiqe";
+//Account
+"account.sipUsername" = "Emër Përdoruesi";
+"account.sipPassword" = "Fjalëkalim";
+"account.sipServer" = "Shërbyes SIP";
+"account.port" = "Portë";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "Jepni Fjalëkalimin";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "Në linjë";
+"account.statusOffline" = "Jo në linjë";
+"account.statusConnecting" = "Po lidhet";
+"account.statusUnknown" = "I panjohur";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "S’ka kontakte të bllokuar";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "E plotë";
 "dataTransfer.readableStatusAccept" = "Pranoje";
 "dataTransfer.readableStatusCancel" = "Anuloje";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Kontakti u shtua";
+"generatedMessage.invitationReceived" = "Ftesa u mor";
+"generatedMessage.invitationAccepted" = "Ftesa u pranua";
+"generatedMessage.outgoingCall" = "Thirrje për";
+"generatedMessage.incomingCall" = "Thirrje ardhëse";
+"generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
+"generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 

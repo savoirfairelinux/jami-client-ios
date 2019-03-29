@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Mangler nettverksforbindelse";
 "smartlist.cellularAccess" = "Forsikre deg om at telefonnettverkstilgang er innvilget i innstillingene";
+"smartlist.accountsTitle" = "Kontoer";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "Slett";
 "actions.cancelAction" = "Avbryt";
 "actions.clearAction" = "Clear";
+"actions.backAction" = "Tilbake";
 "alerts.incomingCallAllertTitle" = "Innkommende anrop fra";
 "alerts.incomingCallButtonAccept" = "Aksepter";
 "alerts.incomingCallButtonIgnore" = "Ignorer";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Navn";
 "accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.other" = "Andre";
+"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Fjern";
+//Account
+"account.sipUsername" = "User Name";
+"account.sipPassword" = "Passord";
+"account.sipServer" = "SIP Server";
+"account.port" = "Port";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "Skriv inn passord";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "Tilkoblet";
+"account.statusOffline" = "Frakoblet";
+"account.statusConnecting" = "Kobler opp";
+"account.statusUnknown" = "Ukjent";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Fullført";
 "dataTransfer.readableStatusAccept" = "Aksepter";
 "dataTransfer.readableStatusCancel" = "Avbryt";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Kontakt lagt til";
+"generatedMessage.invitationReceived" = "Invitasjon mottatt";
+"generatedMessage.invitationAccepted" = "Invitasjon godtatt";
+"generatedMessage.outgoingCall" = "Utgående samtale";
+"generatedMessage.incomingCall" = "Innkommende samtale";
+"generatedMessage.missedOutgoingCall" = "Tapt utgående anrop";
+"generatedMessage.missedIncomingCall" = "Tapt innkommende anrop";
 

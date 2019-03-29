@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Ingen netværksforbindelse";
 "smartlist.cellularAccess" = "Kontroller at rettigheder til mobildata er givet i indstillinger";
+"smartlist.accountsTitle" = "Konti";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "Slet";
 "actions.cancelAction" = "Annuller";
 "actions.clearAction" = "Clear";
+"actions.backAction" = "Tilbage";
 "alerts.incomingCallAllertTitle" = "Indgående opkald fra";
 "alerts.incomingCallButtonAccept" = "Accepter";
 "alerts.incomingCallButtonIgnore" = "Afvis";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Navn";
 "accountPage.linkDeviceTitle" = "Tilknyt en anden enhed";
+"accountPage.other" = "Andre";
+"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Fjern";
+//Account
+"account.sipUsername" = "User Name";
+"account.sipPassword" = "Adgangskode";
+"account.sipServer" = "SIP Server";
+"account.port" = "Port";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "Indtast kodeord";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "Forbundet";
+"account.statusOffline" = "Ingen forbindelse";
+"account.statusConnecting" = "Forbinder";
+"account.statusUnknown" = "Ukendt";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Afsluttet";
 "dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuller";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Kontakt tilføjet";
+"generatedMessage.invitationReceived" = "Invitation modtaget";
+"generatedMessage.invitationAccepted" = "Invitation accepteret";
+"generatedMessage.outgoingCall" = "Udgående opkald";
+"generatedMessage.incomingCall" = "Indgående opkald";
+"generatedMessage.missedOutgoingCall" = "Ubesvarede udgående opkald";
+"generatedMessage.missedIncomingCall" = "Ubesvarede indgående opkald";
 

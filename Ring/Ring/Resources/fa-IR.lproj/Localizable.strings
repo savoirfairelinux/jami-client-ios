@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "بدون اتصال شبکه";
 "smartlist.cellularAccess" = "اطمینان حاصل کنید که دسترسی به تلفن همراه در تنظیمات شما اعمال شده";
+"smartlist.accountsTitle" = "حساب‌ها";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -95,7 +99,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "حساب افزوده شد.";
 "alerts.accountNoNetworkTitle" = "نمی‌توان به شبکه وصل شد";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "نمی‌توان حساب را افزود، زیرا جمی نتوانست به شبکهٔ توزیع شده وصل شود. اتّصال دستگاهتان را بررسی کنید.";
 "alerts.accountDefaultErrorTitle" = "خطای ناشناخته";
 "alerts.accountDefaultErrorMessage" = "حساب ایجاد نشد.";
 "alerts.profileTakePhoto" = "عکس  بگیرید!";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "حذف";
 "actions.cancelAction" = "لغو";
 "actions.clearAction" = "Clear";
+"actions.backAction" = "بازگشت";
 "alerts.incomingCallAllertTitle" = "تماس دریافتی از";
 "alerts.incomingCallButtonAccept" = "پذیرش";
 "alerts.incomingCallButtonIgnore" = "رد";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "نام";
 "accountPage.linkDeviceTitle" = "پیوند یک دستگاه دیگر";
+"accountPage.other" = "دیگر";
+"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "حذف کن";
+//Account
+"account.sipUsername" = "User Name";
+"account.sipPassword" = "گذرواژه";
+"account.sipServer" = "SIP Server";
+"account.port" = "پرت";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "گذرواژه را وارد کنید";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "آنلاین";
+"account.statusOffline" = "آفلاین";
+"account.statusConnecting" = "در حال برقراری ارتباط";
+"account.statusUnknown" = "ناشناخته";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "پذیرش";
 "dataTransfer.readableStatusCancel" = "لغو";
+
+//Generated Message
+"generatedMessage.contactAdded" = "مخاطب افزوده شد";
+"generatedMessage.invitationReceived" = "دعوت نامه دریافت شد";
+"generatedMessage.invitationAccepted" = "دعوت پذیرفته شد";
+"generatedMessage.outgoingCall" = "تماس خروجی";
+"generatedMessage.incomingCall" = "تماس ورودی";
+"generatedMessage.missedOutgoingCall" = "تماس خروجی از دست رفته";
+"generatedMessage.missedIncomingCall" = "تماس ورودی از دست رفته";
 

@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "无网络连接";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.accountsTitle" = "帐户";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "删除";
 "actions.cancelAction" = "取消";
 "actions.clearAction" = "Clear";
+"actions.backAction" = "上一步";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "接听";
 "alerts.incomingCallButtonIgnore" = "忽略";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "姓名";
 "accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.other" = "其他";
+"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "删除";
+//Account
+"account.sipUsername" = "User Name";
+"account.sipPassword" = "密码";
+"account.sipServer" = "SIP Server";
+"account.port" = "端口";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "Enter Password";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "在线";
+"account.statusOffline" = "离线";
+"account.statusConnecting" = "正在连接";
+"account.statusUnknown" = "未知";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "接听";
 "dataTransfer.readableStatusCancel" = "取消";
+
+//Generated Message
+"generatedMessage.contactAdded" = "已加入通讯录";
+"generatedMessage.invitationReceived" = "已接受邀请";
+"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.outgoingCall" = "去电";
+"generatedMessage.incomingCall" = "来电";
+"generatedMessage.missedOutgoingCall" = "去电未接";
+"generatedMessage.missedIncomingCall" = "未接来电";
 

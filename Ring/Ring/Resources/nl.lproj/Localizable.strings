@@ -38,6 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Geen netwerkverbinding";
 "smartlist.cellularAccess" = "Zorg dat je toegang tot het mobiele netwerk toegestaan hebt in je instellingen";
+"smartlist.accountsTitle" = "Accounts";
+"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
 "conversation.messagePlaceholder" = "Type your message...";
@@ -117,6 +121,7 @@
 "actions.deleteAction" = "Verwijderen";
 "actions.cancelAction" = "Annuleren";
 "actions.clearAction" = "Clear";
+"actions.backAction" = "Terug";
 "alerts.incomingCallAllertTitle" = "Inkomende oproep van";
 "alerts.incomingCallButtonAccept" = "Aanvaarden";
 "alerts.incomingCallButtonIgnore" = "Negeren";
@@ -159,6 +164,27 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Naam";
 "accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.other" = "Anders";
+"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountButton" = "Verwijderen";
+//Account
+"account.sipUsername" = "User Name";
+"account.sipPassword" = "Wachtwoord";
+"account.sipServer" = "SIP Server";
+"account.port" = "Poort";
+"account.createSipAccount" = "Create Sip Account";
+"account.usernameLabel" = "Enter Username";
+"account.passwordLabel" = "Voer wachtwoord in";
+"account.serverLabel" = "Enter Address";
+"account.portLabel" = "Enter Port Number";
+"account.accountStatus" = "Account Status";
+"account.enableAccount" = "Enable Account";
+"account.statusOnline" = "Online";
+"account.statusOffline" = "Offline";
+"account.statusConnecting" = "Verbinden";
+"account.statusUnknown" = "Onbekend";
+"account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -202,4 +228,13 @@
 "dataTransfer.readableStatusSuccess" = "Voltooid";
 "dataTransfer.readableStatusAccept" = "Aanvaarden";
 "dataTransfer.readableStatusCancel" = "Annuleren";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Contact toegevoegd";
+"generatedMessage.invitationReceived" = "Uitnodiging ontvangen";
+"generatedMessage.invitationAccepted" = "Uitnodiging aanvaard";
+"generatedMessage.outgoingCall" = "Uitgaande oproep";
+"generatedMessage.incomingCall" = "Inkomende oproep";
+"generatedMessage.missedOutgoingCall" = "Gemiste uitgaande oproep";
+"generatedMessage.missedIncomingCall" = "Gemiste inkomende oproep";
 
