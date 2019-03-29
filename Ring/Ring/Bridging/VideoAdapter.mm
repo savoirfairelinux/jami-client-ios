@@ -27,6 +27,7 @@
 #include <functional>
 #include <AVFoundation/AVFoundation.h>
 #include <mutex>
+#import "Utils.h"
 
 using namespace DRing;
 
@@ -36,11 +37,26 @@ struct Renderer
     std::condition_variable frameCv;
     bool isRendering;
     std::mutex renderMutex;
+    AVSinkTarget avtarget;
     SinkTarget target;
     SinkTarget::FrameBufferPtr daemonFramePtr_;
     int width;
     int height;
 
+    void bindAVSinkFunctions() {
+        avtarget.push = [this](std::unique_ptr<DRing::VideoFrame> frame) {
+            if(!VideoAdapter.delegate) {
+                return;
+            }
+            @autoreleasepool {
+                UIImage *image = [Utils
+                                  convertHardwareDecodedFrameToImage: std::move(frame->pointer())];
+                isRendering = true;
+                [VideoAdapter.delegate writeFrameWithImage: image];
+                isRendering = false;
+            }
+        };
+    }
     void bindSinkFunctions() {
         target.pull = [this](std::size_t bytes) {
             std::lock_guard<std::mutex> lk(renderMutex);
@@ -146,8 +162,13 @@ static id <VideoAdapterDelegate> _delegate;
     auto renderer = std::make_shared<Renderer>();
     renderer->width = static_cast<int>(w);
     renderer->height = static_cast<int>(h);
-    renderer->bindSinkFunctions();
-    DRing::registerSinkTarget(_sinkId, renderer->target);
+    if(self.getDecodingAccelerated) {
+        renderer->bindAVSinkFunctions();
+        DRing::registerAVSinkTarget(_sinkId, renderer->avtarget);
+    } else {
+        renderer->bindSinkFunctions();
+        DRing::registerSinkTarget(_sinkId, renderer->target);
+    }
     renderers.insert(std::make_pair(_sinkId, renderer));
 }
 
@@ -162,7 +183,17 @@ static id <VideoAdapterDelegate> _delegate;
     }
 }
 
-- (void)writeOutgoingFrameWithImage:(UIImage*)image {
+- (void)writeOutgoingHardwareDecodedFrameWithBuffer:(CVImageBufferRef)image {
+    auto frame = DRing::getNewFrame();
+    if(!frame) {
+        return;
+    }
+    auto avframe = frame->pointer();
+    [Utils configureHardwareDecodedFrame:(AVFrame*)avframe fromImageBuffer: image];
+    DRing::publishFrame();
+}
+
+- (void)writeOutgoingFrameWithImage:(UIImage *)image {
     unsigned capacity = 4 * image.size.width * image.size.height;
     uint8_t* buf = (uint8_t*)DRing::obtainFrame(capacity);
     if (buf){
@@ -194,6 +225,18 @@ static id <VideoAdapterDelegate> _delegate;
 
 - (void)setDecodingAccelerated:(BOOL)state {
     DRing::setDecodingAccelerated(state);
+}
+
+- (BOOL)getDecodingAccelerated {
+    return DRing::getDecodingAccelerated();
+}
+
+- (void)setEncodingAccelerated:(BOOL)state {
+    DRing::setEncodingAccelerated(state);
+}
+
+- (BOOL)getEncodingAccelerated {
+    return DRing::getEncodingAccelerated();
 }
 
 - (void)switchInput:(NSString*)deviceName {

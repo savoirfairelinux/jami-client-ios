@@ -118,7 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.audioService.startAVAudioSession()
 
         // disables hardware decoding
-        self.videoService.setDecodingAccelerated(withState: false)
+        self.videoService.setDecodingAccelerated(withState: true)
+        self.videoService.setEncodingAccelerated(withState: true)
 
         // requests permission to use the camera
         // will enumerate and add devices once permission has been granted

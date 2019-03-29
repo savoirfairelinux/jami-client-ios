@@ -24,6 +24,7 @@
 #import <map>
 #import <string>
 #import <vector>
+struct AVFrame;
 
 @interface Utils : NSObject
 
@@ -35,4 +36,6 @@
 + (NSData*)dataFromVectorOfUInt8:(std::vector<uint8_t>)vectorOfUInt8;
 + (std::vector<uint8_t>)vectorOfUInt8FromData:(NSData*)data;
 + (std::vector<std::map<std::string, std::string>>)arrayOfDictionnarisToVectorOfMap:(NSArray*)dictionaries;
++ (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame;
++ (AVFrame*)configureHardwareDecodedFrame:(AVFrame*)frame fromImageBuffer: (CVImageBufferRef) image;
 @end

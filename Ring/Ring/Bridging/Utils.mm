@@ -20,6 +20,9 @@
  */
 
 #import "Utils.h"
+extern "C" {
+    #include <libavutil/frame.h>
+}
 
 @implementation Utils
 
@@ -103,6 +106,28 @@
         vector.push_back(bytes[i]);
     }
     return vector;
+}
+
++ (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame {
+    if ((CVPixelBufferRef)frame->data[3]) {
+        CIImage *image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
+        UIImage * imageUI = [UIImage imageWithCIImage:image];
+        return imageUI;
+    }
+    return [[UIImage alloc] init];
+}
+
++ (AVFrame*)configureHardwareDecodedFrame:(AVFrame*)frame fromImageBuffer:(CVImageBufferRef) image {
+    //get dimensions
+    CVPixelBufferLockBaseAddress(image,0);
+    size_t width = CVPixelBufferGetWidth(image);
+    size_t height = CVPixelBufferGetHeight(image);
+    CVPixelBufferUnlockBaseAddress(image,0);
+    frame->data[3] = (uint8_t *)image;
+    frame->format = AV_PIX_FMT_VIDEOTOOLBOX;
+    frame->width = static_cast<int>(width);
+    frame->height = static_cast<int>(height);
+    return frame;
 }
 
 @end
