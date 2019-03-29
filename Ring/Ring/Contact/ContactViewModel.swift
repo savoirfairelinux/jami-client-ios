@@ -41,7 +41,7 @@ class ContactViewModel: ViewModel, Stateable {
     private let accountService: AccountsService
     private let conversationService: ConversationsService
     private let nameService: NameService
-    lazy var tableSection : Observable<[SectionModel<String, ContactActions>]>  = {
+    lazy var tableSection: Observable<[SectionModel<String, ContactActions>]>  = {
         let jamiSettings =
             [SectionModel(model: "ProfileInfoCell",
                           items:

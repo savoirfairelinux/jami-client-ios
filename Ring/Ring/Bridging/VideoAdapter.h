@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVCaptureOutput.h>
+#import <AVFoundation/AVFoundation.h>
 
 @protocol VideoAdapterDelegate;
 
@@ -30,9 +31,13 @@
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict;
 - (void)registerSinkTargetWithSinkId:sinkId withWidth:(NSInteger)w withHeight:(NSInteger)h;
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId;
+- (void)writeOutgoingHardwareDecodedFrameWithBuffer:(CVImageBufferRef)image;
 - (void)writeOutgoingFrameWithImage:(UIImage*)image;
 - (void)setDecodingAccelerated:(BOOL)state;
+- (BOOL)getDecodingAccelerated;
 - (void)switchInput:(NSString*)deviceName;
 - (void)switchInput:(NSString*)deviceName forCall:(NSString*) callID;
+- (void)setEncodingAccelerated:(BOOL)state;
+- (BOOL)getEncodingAccelerated;
 
 @end

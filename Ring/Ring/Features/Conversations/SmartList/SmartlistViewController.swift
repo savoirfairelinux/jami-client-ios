@@ -55,6 +55,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var dialpadButton: UIButton!
     @IBOutlet weak var dialpadButtonShadow: UIView!
+    @IBOutlet weak var searchBarShadow: UIView!
+    @IBOutlet weak var qrScanButton: UIButton!
+    @IBOutlet weak var phoneBookButton: UIButton!
+    @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
 
     // account selection
     var accounPicker = UIPickerView()
@@ -151,21 +155,22 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             }
         }).disposed(by: self.disposeBag)
 
-        let imageScanSearch = UIImage(asset: Asset.qrCodeScan) as UIImage?
-        let scanButton   = UIButton(type: UIButtonType.custom) as UIButton
-        scanButton.setImage(imageScanSearch, for: .normal)
-        let scanButtonItem = UIBarButtonItem(customView: scanButton)
-        scanButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        let imageSettings = UIImage(asset: Asset.settings) as UIImage?
+        let generalSettingsButton   = UIButton(type: UIButtonType.system) as UIButton
+        generalSettingsButton.setImage(imageSettings, for: .normal)
+        generalSettingsButton.contentMode = .scaleAspectFill
+        let settingsButtonItem = UIBarButtonItem(customView: generalSettingsButton)
+        generalSettingsButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.showGeneralSettings()
+            })
+            .disposed(by: self.disposeBag)
+        qrScanButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.openScan()
             })
             .disposed(by: self.disposeBag)
 
-        let imageOpenPhoneContacts = UIImage(asset: Asset.phoneBook) as UIImage?
-        let phoneBookButton   = UIButton(type: UIButtonType.custom) as UIButton
-        phoneBookButton.setImage(imageOpenPhoneContacts, for: .normal)
-        phoneBookButton.contentMode = .scaleAspectFill
-        let contactsButtonItem = UIBarButtonItem(customView: phoneBookButton)
         phoneBookButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.contactPicker.delegate = self
@@ -178,15 +183,23 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 if let account = currentAccount {
                     let accountSip = account.type == AccountType.sip
                     self.navigationItem
-                        .rightBarButtonItem = accountSip ? contactsButtonItem : scanButtonItem
+                        .rightBarButtonItem =  accountSip ? nil : settingsButtonItem
                     self.dialpadButtonShadow.isHidden = !accountSip
+                    self.phoneBookButton.isHidden = !accountSip
+                    self.qrScanButton.isHidden = accountSip
                 }
             }).disposed(by: disposeBag)
 
-        self.navigationItem.rightBarButtonItem = scanButtonItem
-        if let account = self.viewModel.currentAccount,
-            account.type == AccountType.sip {
-            self.navigationItem.rightBarButtonItem = contactsButtonItem
+        self.navigationItem.rightBarButtonItem = settingsButtonItem
+        if let account = self.viewModel.currentAccount {
+            if account.type == AccountType.sip {
+                self.navigationItem.rightBarButtonItem = nil
+                self.qrScanButton.isHidden = true
+                self.phoneBookButton.isHidden = false
+            } else {
+                self.qrScanButton.isHidden = false
+                self.phoneBookButton.isHidden = true
+            }
         }
 
         //create accounts button
@@ -388,13 +401,13 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchBar.tintColor = UIColor.jamiMain
         self.searchBar.barTintColor =  UIColor.jamiNavigationBar
 
-        self.view.bringSubview(toFront: self.searchBar)
+        self.view.bringSubview(toFront: self.searchBarShadow)
 
-        self.searchBar.layer.shadowColor = UIColor.black.cgColor
-        self.searchBar.layer.shadowOffset = CGSize(width: 0.0, height: 2.5)
-        self.searchBar.layer.shadowOpacity = 0.2
-        self.searchBar.layer.shadowRadius = 3
-        self.searchBar.layer.masksToBounds = false
+        self.searchBarShadow.layer.shadowColor = UIColor.black.cgColor
+        self.searchBarShadow.layer.shadowOffset = CGSize(width: 0.0, height: 2.5)
+        self.searchBarShadow.layer.shadowOpacity = 0.2
+        self.searchBarShadow.layer.shadowRadius = 3
+        self.searchBarShadow.layer.masksToBounds = false
 
         //Bind the SearchBar to the ViewModel
         self.searchBar.rx.text.orEmpty
@@ -404,12 +417,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         //Show Cancel button
         self.searchBar.rx.textDidBeginEditing.subscribe(onNext: { [unowned self] in
-            self.searchBar.setShowsCancelButton(true, animated: true)
+            self.scanButtonLeadingConstraint.constant = -40
+            self.searchBar.setShowsCancelButton(true, animated: false)
         }).disposed(by: disposeBag)
 
         //Hide Cancel button
         self.searchBar.rx.textDidEndEditing.subscribe(onNext: { [unowned self] in
-            self.searchBar.setShowsCancelButton(false, animated: true)
+            self.scanButtonLeadingConstraint.constant = 10
+            self.searchBar.setShowsCancelButton(false, animated: false)
         }).disposed(by: disposeBag)
 
         //Cancel button event
@@ -566,23 +581,10 @@ extension SmartlistViewController: CNContactPickerDelegate {
     }
 
     func setNumberFromContact(contactNumber: String) {
-
-        //UPDATE YOUR NUMBER SELECTION LOGIC AND PERFORM ACTION WITH THE SELECTED NUMBER
-
         var contactNumber = contactNumber.replacingOccurrences(of: "-", with: "")
         contactNumber = contactNumber.replacingOccurrences(of: "(", with: "")
         contactNumber = contactNumber.replacingOccurrences(of: ")", with: "")
         self.viewModel.showSipConversation(withNumber: contactNumber)
-       // self.viewModel.searchBarText.value = contactNumber
-        //contactNumber = contactNumber.removeWhitespacesInBetween()
-//        guard contactNumber.count >= 10 else {
-//            dismiss(animated: true) {
-//              //  self.popUpMessageError(value: 10, message: "Selected contact does not have a valid number")
-//            }
-//            return
-//        }
-        //textFieldNumber.text = String(contactNumber.suffix(10))
-
     }
 
     func contactPickerDidCancel(_ picker: CNContactPickerViewController) {

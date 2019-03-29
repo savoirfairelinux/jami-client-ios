@@ -57,6 +57,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self.createNewAccount()
             case .showDialpad(let inCall):
                 self.showDialpad(inCall: inCall)
+            case .showGeneralSettings:
+                self.showGeneralSettings()
             default:
                 break
             }
@@ -107,6 +109,11 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         if let controller = self.navigationViewController.visibleViewController as? CallViewController {
             controller.present(dialpadViewController, animated: true, completion: nil)
         }
+    }
+
+    func showGeneralSettings() {
+        let settingsViewController = GeneralSettingsViewController.instantiate(with: self.injectionBag)
+        self.present(viewController: settingsViewController, withStyle: .present, withAnimation: true, disposeBag: self.disposeBag)
     }
 
     func puchConversation(participantId: String) {

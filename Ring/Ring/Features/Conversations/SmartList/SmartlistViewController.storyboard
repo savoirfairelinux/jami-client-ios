@@ -72,21 +72,56 @@
                                     <constraint firstItem="HKv-H1-GYI" firstAttribute="centerX" secondItem="e5o-cY-djH" secondAttribute="centerX" priority="750" id="yI5-9z-dUv"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" placeholder="Enter name..." translatesAutoresizingMaskIntoConstraints="NO" id="xPr-nI-I35">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKd-eF-L6f">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </searchBar>
+                                <subviews>
+                                    <searchBar contentMode="redraw" placeholder="Enter name..." translatesAutoresizingMaskIntoConstraints="NO" id="xPr-nI-I35">
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="56"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="4yw-AN-guZ"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </searchBar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-bY-flb">
+                                        <rect key="frame" x="325" y="8" width="40" height="40"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.42745098040000001" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="phone_book"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eta-uf-Ija">
+                                        <rect key="frame" x="325" y="8" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="eb8-7R-X3e"/>
+                                            <constraint firstAttribute="height" constant="40" id="j8h-fg-qMp"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.2470588235" green="0.42745098040000001" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="qr_code_scan"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Eta-uf-Ija" firstAttribute="top" secondItem="RSG-bY-flb" secondAttribute="top" id="C2I-Kv-faQ"/>
+                                    <constraint firstItem="Eta-uf-Ija" firstAttribute="centerY" secondItem="xPr-nI-I35" secondAttribute="centerY" id="Epv-9a-Rkg"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eta-uf-Ija" secondAttribute="trailing" constant="10" id="O7M-He-7UH"/>
+                                    <constraint firstItem="Eta-uf-Ija" firstAttribute="leading" secondItem="xPr-nI-I35" secondAttribute="trailing" id="SnW-M7-wRB"/>
+                                    <constraint firstItem="Eta-uf-Ija" firstAttribute="trailing" secondItem="RSG-bY-flb" secondAttribute="trailing" id="fK5-6j-fKX"/>
+                                    <constraint firstItem="Eta-uf-Ija" firstAttribute="leading" secondItem="RSG-bY-flb" secondAttribute="leading" id="ggB-jL-tbn"/>
+                                    <constraint firstItem="xPr-nI-I35" firstAttribute="leading" secondItem="DKd-eF-L6f" secondAttribute="leading" id="m1O-ZV-Pkx"/>
+                                    <constraint firstItem="xPr-nI-I35" firstAttribute="top" secondItem="DKd-eF-L6f" secondAttribute="top" id="nlW-pc-ggm"/>
+                                    <constraint firstItem="Eta-uf-Ija" firstAttribute="bottom" secondItem="RSG-bY-flb" secondAttribute="bottom" id="wOa-Ne-n5e"/>
+                                    <constraint firstAttribute="bottom" secondItem="xPr-nI-I35" secondAttribute="bottom" id="xcp-FC-G0l"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HFM-G6-hMN">
                                 <rect key="frame" x="0.0" y="132" width="375" height="535"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -165,21 +200,21 @@
                         <constraints>
                             <constraint firstItem="opE-y7-3Rm" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="0cn-0y-g9L"/>
                             <constraint firstItem="EvL-Bu-O1T" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="2Cw-xT-xCg"/>
-                            <constraint firstItem="xPr-nI-I35" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="4NO-53-KBh"/>
                             <constraint firstAttribute="trailing" secondItem="HFM-G6-hMN" secondAttribute="trailing" id="7H1-ka-2Ti"/>
                             <constraint firstItem="cfq-zl-uux" firstAttribute="top" secondItem="79Q-fh-vhV" secondAttribute="bottom" constant="30" id="8G6-0D-3ma"/>
                             <constraint firstItem="HFM-G6-hMN" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="8tr-Rd-1kr"/>
-                            <constraint firstItem="e5o-cY-djH" firstAttribute="top" secondItem="xPr-nI-I35" secondAttribute="bottom" id="CLm-6J-lYv"/>
+                            <constraint firstItem="DKd-eF-L6f" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="9fi-2r-wE8"/>
+                            <constraint firstAttribute="trailing" secondItem="DKd-eF-L6f" secondAttribute="trailing" id="AhH-s9-pfe"/>
                             <constraint firstAttribute="trailing" secondItem="opE-y7-3Rm" secondAttribute="trailing" id="D0f-nM-KEs"/>
                             <constraint firstItem="HFM-G6-hMN" firstAttribute="top" secondItem="e5o-cY-djH" secondAttribute="bottom" id="KK7-rp-AZz"/>
                             <constraint firstItem="opE-y7-3Rm" firstAttribute="top" secondItem="e5o-cY-djH" secondAttribute="bottom" id="NKz-A0-hLf"/>
-                            <constraint firstItem="xPr-nI-I35" firstAttribute="top" secondItem="sbJ-yn-t3e" secondAttribute="bottom" id="OX7-et-d3F"/>
                             <constraint firstItem="cfq-zl-uux" firstAttribute="top" secondItem="EvL-Bu-O1T" secondAttribute="bottom" id="TsM-9H-eI1"/>
                             <constraint firstItem="cfq-zl-uux" firstAttribute="top" secondItem="HFM-G6-hMN" secondAttribute="bottom" id="VfB-5H-uHq"/>
                             <constraint firstItem="EvL-Bu-O1T" firstAttribute="top" secondItem="e5o-cY-djH" secondAttribute="bottom" id="aH0-7e-i4a"/>
-                            <constraint firstAttribute="trailing" secondItem="xPr-nI-I35" secondAttribute="trailing" id="dtX-d4-r9P"/>
                             <constraint firstAttribute="trailing" secondItem="79Q-fh-vhV" secondAttribute="trailing" constant="30" id="elh-uT-3vG"/>
+                            <constraint firstItem="DKd-eF-L6f" firstAttribute="top" secondItem="sbJ-yn-t3e" secondAttribute="bottom" id="gbl-PR-kL4"/>
                             <constraint firstAttribute="trailing" secondItem="e5o-cY-djH" secondAttribute="trailing" id="k9v-18-oxL"/>
+                            <constraint firstItem="e5o-cY-djH" firstAttribute="top" secondItem="xPr-nI-I35" secondAttribute="bottom" id="mKv-lK-yDx"/>
                             <constraint firstAttribute="trailing" secondItem="EvL-Bu-O1T" secondAttribute="trailing" id="nSK-QH-snj"/>
                             <constraint firstItem="e5o-cY-djH" firstAttribute="leading" secondItem="2dZ-8A-4nq" secondAttribute="leading" id="rXu-fF-ESz"/>
                             <constraint firstItem="cfq-zl-uux" firstAttribute="top" secondItem="opE-y7-3Rm" secondAttribute="bottom" id="wun-hC-1JP"/>
@@ -193,10 +228,14 @@
                         <outlet property="dialpadButton" destination="k8G-Me-4BI" id="Ij7-SF-nvZ"/>
                         <outlet property="dialpadButtonShadow" destination="79Q-fh-vhV" id="VcA-wc-j6h"/>
                         <outlet property="networkAlertLabel" destination="Fu7-Dr-XvA" id="0qV-lk-9mE"/>
-                        <outlet property="networkAlertViewTopConstraint" destination="CLm-6J-lYv" id="LEO-Ep-Gpx"/>
+                        <outlet property="networkAlertViewTopConstraint" destination="mKv-lK-yDx" id="bJk-Ie-hf6"/>
                         <outlet property="noConversationLabel" destination="8bB-XU-6gh" id="n4g-mz-w7z"/>
                         <outlet property="noConversationsView" destination="EvL-Bu-O1T" id="tVV-6a-4Xg"/>
+                        <outlet property="phoneBookButton" destination="RSG-bY-flb" id="Yjw-Va-7c1"/>
+                        <outlet property="qrScanButton" destination="Eta-uf-Ija" id="Hh0-vy-8EK"/>
+                        <outlet property="scanButtonLeadingConstraint" destination="O7M-He-7UH" id="cvF-Wd-TJT"/>
                         <outlet property="searchBar" destination="xPr-nI-I35" id="Y3U-rV-yfc"/>
+                        <outlet property="searchBarShadow" destination="DKd-eF-L6f" id="CKZ-ws-ag1"/>
                         <outlet property="searchResultsTableView" destination="opE-y7-3Rm" id="F3g-9d-IQt"/>
                         <outlet property="searchTableViewLabel" destination="4Yu-Fe-ixq" id="dq3-QM-bfA"/>
                         <outlet property="settingsButton" destination="iaz-fd-fEz" id="R2O-R8-BDk"/>
@@ -210,6 +249,8 @@
     </scenes>
     <resources>
         <image name="dialpad" width="75" height="75"/>
+        <image name="phone_book" width="75" height="75"/>
+        <image name="qr_code_scan" width="48" height="48"/>
         <image name="settings_icon" width="48" height="48"/>
     </resources>
 </document>

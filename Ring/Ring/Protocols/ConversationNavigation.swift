@@ -29,6 +29,7 @@ enum ConversationState: State {
     case qrCode()
     case createNewAccount()
     case showDialpad(inCall: Bool)
+    case showGeneralSettings()
 }
 
 protocol ConversationNavigation: class {

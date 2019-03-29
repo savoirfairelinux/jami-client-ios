@@ -117,8 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // sets output device to whatever is currently available (either spk / headset)
         self.audioService.startAVAudioSession()
 
-        // disables hardware decoding
-        self.videoService.setDecodingAccelerated(withState: false)
+        prepareVideoAcceleration()
 
         // requests permission to use the camera
         // will enumerate and add devices once permission has been granted
@@ -161,6 +160,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
             guard let currentAccount = self.accountService.currentAccount else {
                 self.log.error("Can't get current account!")
+                //if we don't have any account means it is first run, so enable hardware acceleration
+                self.videoService.setDecodingAccelerated(withState: true)
+                self.videoService.setEncodingAccelerated(withState: true)
+                UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
                 return
             }
             self.reloadDataFor(account: currentAccount)
@@ -217,6 +220,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidBecomeActive(_ application: UIApplication) {
         self.callService.checkForIncomingCall()
         self.clearBadgeNumber()
+    }
+
+    func prepareVideoAcceleration() {
+        // we want enable hardware acceleration by default so if key does not exists,
+        // means it was not disabled by user 
+        let keyExists = UserDefaults.standard.object(forKey: hardareAccelerationKey) != nil
+        let enable = keyExists ? UserDefaults.standard.bool(forKey: hardareAccelerationKey) : false
+        self.videoService.setDecodingAccelerated(withState: enable)
+        self.videoService.setEncodingAccelerated(withState: enable)
+        guard let codecInfoPath = Bundle.main.path(forResource: "encoder",
+                                                   ofType: ".json") else {return}
+        guard let destPath =
+            NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                .userDomainMask,
+                                                true).first else {return}
+        let fileManager = FileManager.default
+        guard let fullDestPath = NSURL(fileURLWithPath: destPath)
+            .appendingPathComponent("encoder.json") else {return}
+        let fullDestPathString = fullDestPath.path
+        do {
+            try fileManager.copyItem(atPath: codecInfoPath,
+                                     toPath: fullDestPathString)
+        } catch { }
     }
 
     // MARK: - Ring Daemon
