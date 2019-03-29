@@ -226,14 +226,14 @@ class CallsService: CallsAdapterDelegate {
                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
             cardChanged = true
         }
-        if cardChanged {
-            DispatchQueue.main.async { [unowned self] in
-                VCardUtils.sendVCard(card: vCard,
-                                     callID: callID,
-                                     accountID: accountID,
-                                     sender: self)
-            }
-        }
+//        if cardChanged {
+//            DispatchQueue.main.async { [unowned self] in
+//                VCardUtils.sendVCard(card: vCard,
+//                                     callID: callID,
+//                                     accountID: accountID,
+//                                     sender: self)
+//            }
+//        }
     }
 
     func sendChunk(callID: String, message: [String: String], accountId: String) {

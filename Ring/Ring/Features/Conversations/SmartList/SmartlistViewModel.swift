@@ -401,4 +401,8 @@ class SmartlistViewModel: Stateable, ViewModel {
     func showDialpad() {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: false))
     }
+
+    func showGeneralSettings() {
+        self.stateSubject.onNext(ConversationState.showGeneralSettings())
+    }
 }

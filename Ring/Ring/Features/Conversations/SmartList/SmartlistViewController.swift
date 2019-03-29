@@ -151,6 +151,17 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             }
         }).disposed(by: self.disposeBag)
 
+        let imageSettings = UIImage(asset: Asset.settingsIcon) as UIImage?
+        let generalSettingsButton   = UIButton(type: UIButtonType.system) as UIButton
+        generalSettingsButton.setImage(imageSettings, for: .normal)
+        generalSettingsButton.contentMode = .scaleAspectFill
+        let settingsButtonItem = UIBarButtonItem(customView: generalSettingsButton)
+        generalSettingsButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.showGeneralSettings()
+            })
+            .disposed(by: self.disposeBag)
+
         let imageScanSearch = UIImage(asset: Asset.qrCodeScan) as UIImage?
         let scanButton   = UIButton(type: UIButtonType.custom) as UIButton
         scanButton.setImage(imageScanSearch, for: .normal)
@@ -178,12 +189,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 if let account = currentAccount {
                     let accountSip = account.type == AccountType.sip
                     self.navigationItem
-                        .rightBarButtonItem = accountSip ? contactsButtonItem : scanButtonItem
+                        .rightBarButtonItems =  accountSip ? [contactsButtonItem] : [scanButtonItem, settingsButtonItem]
                     self.dialpadButtonShadow.isHidden = !accountSip
                 }
             }).disposed(by: disposeBag)
 
-        self.navigationItem.rightBarButtonItem = scanButtonItem
+        self.navigationItem.rightBarButtonItems = [scanButtonItem, settingsButtonItem]
         if let account = self.viewModel.currentAccount,
             account.type == AccountType.sip {
             self.navigationItem.rightBarButtonItem = contactsButtonItem

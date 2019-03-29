@@ -291,6 +291,13 @@ internal enum L10n {
     internal static let readableStatusSuccess = L10n.tr("Localizable", "dataTransfer.readableStatusSuccess")
   }
 
+  internal enum GeneralSettings {
+    /// General settings
+    internal static let title = L10n.tr("Localizable", "generalSettings.title")
+    /// Enable video acceleration
+    internal static let videoAcceleration = L10n.tr("Localizable", "generalSettings.videoAcceleration")
+  }
+
   internal enum GeneratedMessage {
     /// Contact added
     internal static let contactAdded = L10n.tr("Localizable", "generatedMessage.contactAdded")

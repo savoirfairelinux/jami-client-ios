@@ -42,7 +42,7 @@ enum VideoError: Error {
 }
 
 protocol FrameExtractorDelegate: class {
-    func captured(image: UIImage)
+    func captured(imageBuffer: CVImageBuffer?, image: UIImage)
 }
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -272,9 +272,10 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
         DispatchQueue.main.async { [unowned self] in
-            self.delegate?.captured(image: uiImage)
+            self.delegate?.captured(imageBuffer: imageBuffer, image: uiImage)
         }
     }
 }
@@ -290,6 +291,7 @@ class VideoService: FrameExtractorDelegate {
 
     private let log = SwiftyBeaver.self
     private var blockOutgoingFrame = true
+    private var hardwareAccelerated = true
 
     fileprivate let disposeBag = DisposeBag()
 
@@ -378,7 +380,18 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func setDecodingAccelerated(withState state: Bool) {
-        videoAdapter.setDecodingAccelerated(false)
+        videoAdapter.setDecodingAccelerated(state)
+    }
+
+    func setEncodingAccelerated(withState state: Bool) {
+        videoAdapter.setEncodingAccelerated(state)
+    }
+
+    func getDecodingAccelerated() -> Bool {
+        return videoAdapter.getDecodingAccelerated()
+    }
+    func getEncodingAccelerated() -> Bool {
+        return videoAdapter.getEncodingAccelerated()
     }
 
     func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int) {
@@ -393,6 +406,7 @@ extension VideoService: VideoAdapterDelegate {
 
     func startCapture(withDevice device: String) {
         self.log.debug("Capture started...")
+        self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
         self.camera.startCapturing()
         self.blockOutgoingFrame = false
     }
@@ -410,9 +424,13 @@ extension VideoService: VideoAdapterDelegate {
         self.incomingVideoFrame.onNext(image)
     }
 
-    func captured(image: UIImage) {
+    func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
         self.capturedVideoFrame.onNext(image)
         if self.blockOutgoingFrame {
+            return
+        }
+        if self.hardwareAccelerated {
+            videoAdapter.writeOutgoingHardwareDecodedFrame(with: imageBuffer)
             return
         }
         videoAdapter.writeOutgoingFrame(with: image)
