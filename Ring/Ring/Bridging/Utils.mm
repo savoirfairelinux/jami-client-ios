@@ -108,8 +108,14 @@
 }
 
 + (UIImage*)convertFrameToImage:(const AVFrame*)frame {
+    //@autoreleasepool {
     CIImage *image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
-    return [UIImage imageWithCIImage:image];
+    UIImage * imageUI = [UIImage imageWithCIImage:image];
+        return imageUI;
+   // }
+
+    //return [UIImage imageWithCIImage:image];
+    //return [[UIImage alloc] init];
 }
 
 @end

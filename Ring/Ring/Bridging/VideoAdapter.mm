@@ -39,13 +39,20 @@ struct Renderer
     std::mutex renderMutex;
     AVSinkTarget target;
     //SinkTarget target;
-   // SinkTarget::FrameBufferPtr daemonFramePtr_;
+    SinkTarget::FrameBufferPtr daemonFramePtr_;
     int width;
     int height;
 
     void bindSinkFunctions() {
         target.push = [this](std::unique_ptr<DRing::VideoFrame> frame) {
-            [VideoAdapter.delegate writeFrameWithImage: [Utils convertFrameToImage: frame->pointer()]];
+            @autoreleasepool {
+                [VideoAdapter.delegate writeFrameWithImage: [Utils convertFrameToImage: std::move(frame->pointer())]];
+//            AVFrame *fr = std::move(frame->pointer());
+//            Utils *utils = [[Utils alloc] init];
+//            [VideoAdapter.delegate writeFrameWithImage:  [utils convertFrameToImage:fr]];
+            }
+           // [utils convertFrameToImage: fr];
+           // [VideoAdapter.delegate writeFrameWithImage: [Utils convertFrameToImage: std::move(frame->pointer())]];
         };
 //        target.pull = [this](std::size_t bytes) {
 //            std::lock_guard<std::mutex> lk(renderMutex);
@@ -80,8 +87,8 @@ struct Renderer
 //                    isRendering = false;
 //                }
 //            }
-//
-//        };
+
+     //   };
     }
 };
 
