@@ -22,6 +22,7 @@
 #import "Utils.h"
 extern "C" {
     #include <libavutil/frame.h>
+    #include <libavutil/display.h>
 }
 
 @implementation Utils
@@ -117,8 +118,9 @@ extern "C" {
     return [[UIImage alloc] init];
 }
 
-+ (AVFrame*)configureHardwareDecodedFrame:(AVFrame*)frame fromImageBuffer:(CVImageBufferRef) image {
-    //get dimensions
++ (AVFrame*)configureHardwareDecodedFrame:(AVFrame*)frame
+                          fromImageBuffer:(CVImageBufferRef)image
+                                    angle:(int)angle {
     CVPixelBufferLockBaseAddress(image,0);
     size_t width = CVPixelBufferGetWidth(image);
     size_t height = CVPixelBufferGetHeight(image);
@@ -127,6 +129,41 @@ extern "C" {
     frame->format = AV_PIX_FMT_VIDEOTOOLBOX;
     frame->width = static_cast<int>(width);
     frame->height = static_cast<int>(height);
+    AVBufferRef* localFrameDataBuffer = angle == 0 ? nullptr : av_buffer_alloc(sizeof(int32_t) * 9);
+    if (!localFrameDataBuffer) {
+        return frame;
+    }
+    av_display_rotation_set(reinterpret_cast<int32_t*>(localFrameDataBuffer->data), angle);
+    av_frame_new_side_data_from_buf(frame, AV_FRAME_DATA_DISPLAYMATRIX, localFrameDataBuffer);
+    return frame;
+}
+
++ (AVFrame*)configureFrame:(AVFrame*)frame
+           fromImageBuffer: (CVImageBufferRef)image
+                     angle:(int) angle {
+    CVPixelBufferLockBaseAddress(image, 0);
+    int width = static_cast<int>(CVPixelBufferGetWidth(image));
+    int height = static_cast<int>(CVPixelBufferGetHeight(image));
+    frame->width = width;
+    frame->height = height;
+    frame->format = AV_PIX_FMT_NV12;
+    if (CVPixelBufferIsPlanar(image)) {
+        int planes = static_cast<int>(CVPixelBufferGetPlaneCount(image));
+        for (int i = 0; i < planes; i++) {
+            frame->data[i]     = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(image, i);
+            frame->linesize[i] = static_cast<int>(CVPixelBufferGetBytesPerRowOfPlane(image, i));
+        }
+    } else {
+        frame->data[0] = (uint8_t *)CVPixelBufferGetBaseAddress(image);
+        frame->linesize[0] =static_cast<int>(CVPixelBufferGetBytesPerRow(image));
+    }
+    CVPixelBufferUnlockBaseAddress(image, 0);
+    AVBufferRef* localFrameDataBuffer = angle == 0 ? nullptr : av_buffer_alloc(sizeof(int32_t) * 9);
+    if (!localFrameDataBuffer) {
+        return frame;
+    }
+    av_display_rotation_set(reinterpret_cast<int32_t*>(localFrameDataBuffer->data), angle);
+    av_frame_new_side_data_from_buf(frame, AV_FRAME_DATA_DISPLAYMATRIX, localFrameDataBuffer);
     return frame;
 }
 

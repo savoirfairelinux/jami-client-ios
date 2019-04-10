@@ -183,13 +183,24 @@ static id <VideoAdapterDelegate> _delegate;
     }
 }
 
-- (void)writeOutgoingHardwareDecodedFrameWithBuffer:(CVImageBufferRef)image {
+- (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
+                               angle:(int)angle
+             useHardwareAcceleration:(BOOL)hardwareAccelerated {
     auto frame = DRing::getNewFrame();
     if(!frame) {
         return;
     }
     auto avframe = frame->pointer();
-    [Utils configureHardwareDecodedFrame:(AVFrame*)avframe fromImageBuffer: image];
+    if(hardwareAccelerated) {
+        [Utils configureHardwareDecodedFrame:(AVFrame*)avframe
+                             fromImageBuffer:image
+                                       angle:(int) angle];
+    } else {
+        [Utils configureFrame:(AVFrame*)avframe
+              fromImageBuffer:image
+                        angle:(int) angle];
+
+    }
     DRing::publishFrame();
 }
 
