@@ -43,6 +43,7 @@ enum VideoError: Error {
 
 protocol FrameExtractorDelegate: class {
     func captured(imageBuffer: CVImageBuffer?, image: UIImage)
+    func supportAVPixelFormat(support: Bool)
 }
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -55,6 +56,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private let quality = AVCaptureSession.Preset.medium
     private var orientation = AVCaptureVideoOrientation.portrait
+
     var getOrientation: AVCaptureVideoOrientation {
         return orientation
     }
@@ -161,6 +163,12 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         captureSession.addInput(captureDeviceInput)
         let videoOutput = AVCaptureVideoDataOutput()
+        let types = videoOutput.availableVideoPixelFormatTypes
+        if types.contains(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
+            let settings = [kCVPixelBufferPixelFormatTypeKey as NSString: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange]
+            videoOutput.videoSettings = settings as [String: Any]
+            self.delegate?.supportAVPixelFormat(support: true)
+        }
         videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
         guard captureSession.canAddOutput(videoOutput) else {
             throw VideoError.setupOutputDeviceFailed
@@ -197,9 +205,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             }
             self.captureSession.removeInput(currentCameraInput)
             var newCamera: AVCaptureDevice! = nil
+            var shouldMirrowVideoOutput = false
             if let input = currentCameraInput as? AVCaptureDeviceInput {
                 if input.device.position == .back {
                     newCamera = self.selectCaptureDevice(withPosition: .front)
+                    shouldMirrowVideoOutput = true
                 } else {
                     newCamera = self.selectCaptureDevice(withPosition: .back)
                 }
@@ -230,6 +240,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     return Disposables.create {}
                 }
                 connection.videoOrientation = self.orientation
+                connection.isVideoMirrored = shouldMirrowVideoOutput
                 self.captureSession.commitConfiguration()
                 completable(.completed)
             } else {
@@ -288,15 +299,19 @@ class VideoService: FrameExtractorDelegate {
     var cameraPosition = AVCaptureDevice.Position.front
     let incomingVideoFrame = PublishSubject<UIImage?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
+    var currentOrientation: AVCaptureVideoOrientation
 
     private let log = SwiftyBeaver.self
     private var blockOutgoingFrame = true
     private var hardwareAccelerated = true
+    var angle: Int = 0
+    var supportAVPixelFormat = false
 
     fileprivate let disposeBag = DisposeBag()
 
     init(withVideoAdapter videoAdapter: VideoAdapter) {
         self.videoAdapter = videoAdapter
+        currentOrientation = camera.getOrientation
         VideoAdapter.delegate = self
         camera.delegate = self
     }
@@ -346,14 +361,20 @@ class VideoService: FrameExtractorDelegate {
         case .portraitUpsideDown:
             newOrientation = AVCaptureVideoOrientation.portraitUpsideDown
         case .landscapeLeft:
-            newOrientation = AVCaptureVideoOrientation.landscapeRight
-        case .landscapeRight:
             newOrientation = AVCaptureVideoOrientation.landscapeLeft
+        case .landscapeRight:
+            newOrientation = AVCaptureVideoOrientation.landscapeRight
         default:
             newOrientation = AVCaptureVideoOrientation.portrait
         }
-        if newOrientation == camera.getOrientation {
+        if newOrientation == self.currentOrientation {
             self.log.warning("no orientation change required")
+            return
+        }
+        self.angle = self.mapDeviceOrientation(orientation: newOrientation)
+        self.currentOrientation = newOrientation
+        // in this case rotation will be performed when configure AVFrame
+        if hardwareAccelerated || supportAVPixelFormat {
             return
         }
         self.blockOutgoingFrame = true
@@ -367,6 +388,17 @@ class VideoService: FrameExtractorDelegate {
             }, onError: { error in
                 self.log.debug("camera re-orientation error: \(error)")
             }).disposed(by: self.disposeBag)
+    }
+
+    func mapDeviceOrientation(orientation: AVCaptureVideoOrientation) -> Int {
+        switch orientation {
+        case AVCaptureVideoOrientation.landscapeRight:
+            return 270
+        case AVCaptureVideoOrientation.landscapeLeft:
+            return 90
+        default:
+            return 0
+        }
     }
 }
 
@@ -424,15 +456,40 @@ extension VideoService: VideoAdapterDelegate {
         self.incomingVideoFrame.onNext(image)
     }
 
+    func getImageOrienation() -> UIImageOrientation {
+        switch self.currentOrientation {
+        case AVCaptureVideoOrientation.portrait:
+            return UIImageOrientation.up
+        case AVCaptureVideoOrientation.portraitUpsideDown:
+            return UIImageOrientation.down
+        case AVCaptureVideoOrientation.landscapeRight:
+            return UIImageOrientation.right
+        case AVCaptureVideoOrientation.landscapeLeft:
+            return UIImageOrientation.left
+        }
+    }
+
     func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
-        self.capturedVideoFrame.onNext(image)
         if self.blockOutgoingFrame {
             return
         }
-        if self.hardwareAccelerated {
-            videoAdapter.writeOutgoingHardwareDecodedFrame(with: imageBuffer)
-            return
+        if self.hardwareAccelerated || self.supportAVPixelFormat {
+            if let cgImage = image.cgImage {
+                self.capturedVideoFrame
+                    .onNext(UIImage(cgImage: cgImage,
+                                    scale: 1.0 ,
+                                    orientation: self.getImageOrienation()))
+            }
+            videoAdapter.writeOutgoingFrame(with: imageBuffer,
+                                            angle: Int32(self.angle),
+                                            useHardwareAcceleration: self.hardwareAccelerated)
+        } else {
+            self.capturedVideoFrame.onNext(image)
+            videoAdapter.writeOutgoingFrame(with: image)
         }
-        videoAdapter.writeOutgoingFrame(with: image)
+    }
+
+    func supportAVPixelFormat(support: Bool) {
+        supportAVPixelFormat = support
     }
 }
