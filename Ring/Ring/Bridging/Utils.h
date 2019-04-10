@@ -37,5 +37,10 @@ struct AVFrame;
 + (std::vector<uint8_t>)vectorOfUInt8FromData:(NSData*)data;
 + (std::vector<std::map<std::string, std::string>>)arrayOfDictionnarisToVectorOfMap:(NSArray*)dictionaries;
 + (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame;
-+ (AVFrame*)configureHardwareDecodedFrame:(AVFrame*)frame fromImageBuffer: (CVImageBufferRef) image;
++ (AVFrame*)configureHardwareDecodedFrame:(AVFrame*)frame
+                          fromImageBuffer: (CVImageBufferRef)image
+                                    angle:(int) angle;
++ (AVFrame*)configureFrame:(AVFrame*)frame
+           fromImageBuffer: (CVImageBufferRef)image
+                     angle:(int)angle;
 @end
