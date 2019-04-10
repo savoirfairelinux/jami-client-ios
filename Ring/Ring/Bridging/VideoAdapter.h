@@ -31,7 +31,9 @@
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict;
 - (void)registerSinkTargetWithSinkId:sinkId withWidth:(NSInteger)w withHeight:(NSInteger)h;
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId;
-- (void)writeOutgoingHardwareDecodedFrameWithBuffer:(CVImageBufferRef)image;
+- (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
+                               angle:(int)angle
+             useHardwareAcceleration:(BOOL)hardwareAccelerated;
 - (void)writeOutgoingFrameWithImage:(UIImage*)image;
 - (void)setDecodingAccelerated:(BOOL)state;
 - (BOOL)getDecodingAccelerated;
