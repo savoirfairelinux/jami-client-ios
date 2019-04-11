@@ -173,6 +173,7 @@
 "account.sipPassword" = "Password";
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
+"account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Enter Password";

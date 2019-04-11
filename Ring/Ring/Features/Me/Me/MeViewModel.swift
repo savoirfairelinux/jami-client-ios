@@ -45,6 +45,7 @@ enum SettingsSection: SectionModelType {
         case sipPassword(value: String)
         case sipServer(value: String)
         case port(value: String)
+        case proxyServer(value: String)
         case accountState(state: Variable<String>)
         case enableAccount
     }
@@ -209,6 +210,7 @@ class MeViewModel: ViewModel, Stateable {
             var password = ""
             var server = ""
             var port = ""
+            var proxyServer = ""
             if let account = self.accountService.currentAccount,
                 let details = account.details,
                 let credentials = account.credentialDetails.first {
@@ -216,16 +218,27 @@ class MeViewModel: ViewModel, Stateable {
                 password = credentials.password
                 server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
                 port = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .localPort))
+                proxyServer = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountRouteSet))
                 self.sipUsername.value = username
                 self.sipPassword.value = password
                 self.sipServer.value = server
                 self.port.value = port
+                self.proxyServer.value = proxyServer
+            }
+            //isIP2IP
+            if server.isEmpty {
+                return .accountSettings( items: [.sectionHeader(title: ""),
+                                                 .sipUserName(value: username),
+                                                 .sipPassword(value: password),
+                                                 .sipServer(value: server)])
+
             }
             return .accountSettings( items: [.sectionHeader(title: ""),
                                              .sipUserName(value: username),
                                              .sipPassword(value: password),
                                              .sipServer(value: server),
-                                             .port(value: port)])
+                                             .port(value: port),
+                                             .proxyServer(value: proxyServer)])
 
         }
     }()
@@ -527,6 +540,7 @@ class MeViewModel: ViewModel, Stateable {
     let sipPassword = Variable<String>("")
     let sipServer = Variable<String>("")
     let port = Variable<String>("")
+    let proxyServer = Variable<String>("")
 
     func updateSipSettings() {
         guard let account = self.accountService.currentAccount, let details = account.details, let credentials = account.credentialDetails.first else {return}
@@ -538,9 +552,12 @@ class MeViewModel: ViewModel, Stateable {
         let server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
         let port = details.get(withConfigKeyModel:
             ConfigKeyModel.init(withKey: .localPort))
+        let proxy = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountRouteSet))
         if username == sipUsername.value
             && password == sipPassword.value
-            && server == sipServer.value && port == self.port.value {
+            && server == sipServer.value
+            && port == self.port.value
+            && proxy == self.proxyServer.value {
             return
         }
         if username != sipUsername.value || password != sipPassword.value {
@@ -552,10 +569,12 @@ class MeViewModel: ViewModel, Stateable {
         }
         if server != sipServer.value ||
             port != self.port.value ||
-            username != sipUsername.value {
+            username != sipUsername.value ||
+            proxy != self.proxyServer.value {
             details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountHostname), withValue: sipServer.value)
             details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.localPort), withValue: self.port.value)
             details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountUsername), withValue: self.sipUsername.value)
+            details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRouteSet), withValue: self.proxyServer.value)
             account.details = details
             self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
         }

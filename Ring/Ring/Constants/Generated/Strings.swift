@@ -25,6 +25,8 @@ internal enum L10n {
     internal static let port = L10n.tr("Localizable", "account.port")
     /// Enter Port Number
     internal static let portLabel = L10n.tr("Localizable", "account.portLabel")
+    /// Proxy
+    internal static let proxyServer = L10n.tr("Localizable", "account.proxyServer")
     /// Enter Address
     internal static let serverLabel = L10n.tr("Localizable", "account.serverLabel")
     /// Password

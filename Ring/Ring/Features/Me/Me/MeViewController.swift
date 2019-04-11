@@ -361,6 +361,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .configureSipCredentialsCell(cellType: .sipServer(value: value),
                                                      value: value)
                     return cell
+                case .proxyServer(let value):
+                let cell = self
+                    .configureSipCredentialsCell(cellType: .proxyServer(value: value),
+                                                 value: value)
+                return cell
                 case .port(let value):
                     let cell = self
                         .configureSipCredentialsCell(cellType: .port(value: value),
@@ -441,6 +446,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 .bind(to: self.viewModel.port)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.port
+        case .proxyServer:
+            text.rx.text.orEmpty.distinctUntilChanged()
+                .bind(to: self.viewModel.proxyServer)
+                .disposed(by: cell.disposeBag)
+            cell.textLabel?.text = L10n.Account.proxyServer
         case .sipServer:
             text.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.sipServer)
@@ -493,12 +503,14 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     func calculateSipCredentialsMargin() {
         let margin: CGFloat = 30
         var usernameLength, passwordLength,
-        sipServerLength, portLength, statusLength: CGFloat
+        sipServerLength, portLength,
+        statusLength, proxyLength: CGFloat
         let username = L10n.Account.sipUsername
         let password = L10n.Account.sipPassword
         let sipServer = L10n.Account.port
         let port = L10n.Account.sipServer
         let status = L10n.Account.accountStatus
+        let proxy = L10n.Account.proxyServer
         let label = UITextView()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.text = status
@@ -516,7 +528,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         label.text = port
         label.sizeToFit()
         portLength = label.frame.size.width
-        sipCredentialsMargin = max(max(max(max(usernameLength, passwordLength), sipServerLength), portLength), statusLength) + margin
+        label.text = proxy
+        label.sizeToFit()
+        proxyLength = label.frame.size.width
+        sipCredentialsMargin = max(max(max(max(max(usernameLength, passwordLength), sipServerLength), portLength), statusLength), proxyLength) + margin
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
