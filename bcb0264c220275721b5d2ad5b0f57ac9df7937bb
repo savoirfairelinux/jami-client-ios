@@ -22,6 +22,30 @@
       "revId": "bcb0264c220275721b5d2ad5b0f57ac9df7937bb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c39f02b3_58d445b8",
+        "filename": "Ring/Ring/Services/VideoService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2019-04-11T13:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "345ad582_1bac7fef",
+      "range": {
+        "startLine": 305,
+        "startChar": 8,
+        "endLine": 305,
+        "endChar": 28
+      },
+      "revId": "bcb0264c220275721b5d2ad5b0f57ac9df7937bb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
