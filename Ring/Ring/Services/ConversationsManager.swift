@@ -142,34 +142,36 @@ class ConversationsManager: MessagesAdapterDelegate {
         guard let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else {
             return
         }
-        if UIApplication.shared.applicationState != .active {
+        if UIApplication.shared.applicationState != .active && AccountModelHelper
+            .init(withAccount: accountForMessage).isAccountRing() &&
+            accountsService.getCurrentProxyState(accountID: accountId) {
             var data = [String: String]()
             data [NotificationUserInfoKeys.messageContent.rawValue] = content
             data [NotificationUserInfoKeys.participantID.rawValue] = peerUri
             if let name = peerName {
                 data [NotificationUserInfoKeys.name.rawValue] = name
                 self.notificationHandler.presentMessageNotification(data: data)
-            } else if AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() {
-                data [NotificationUserInfoKeys.name.rawValue] = peerUri
-                self.notificationHandler.presentMessageNotification(data: data)
-            } else {
+            }  else {
                 // only for jami accounts
-                self.nameService.usernameLookupStatus.single()
-                    .filter({ lookupNameResponse in
-                        return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == peerUri
-                    })
-                    .subscribe(onNext: { [weak self] lookupNameResponse in
-                        if let name = lookupNameResponse.name, !name.isEmpty {
-                            data [NotificationUserInfoKeys.name.rawValue] = name
-                            self?.notificationHandler.presentMessageNotification(data: data)
-                        } else if let address = lookupNameResponse.address {
-                            data [NotificationUserInfoKeys.name.rawValue] = address
-                            self?.notificationHandler.presentMessageNotification(data: data)
-                        }
-                    }).disposed(by: self.disposeBag)
+                if let hash = JamiURI(schema: URIType.ring,
+                                      infoHach: peerUri).hash {
+                    self.nameService.usernameLookupStatus.single()
+                        .filter({ lookupNameResponse in
+                            return lookupNameResponse.address != nil &&
+                                lookupNameResponse.address == hash
+                        })
+                        .subscribe(onNext: { [weak self] lookupNameResponse in
+                            if let name = lookupNameResponse.name, !name.isEmpty {
+                                data [NotificationUserInfoKeys.name.rawValue] = name
+                                self?.notificationHandler.presentMessageNotification(data: data)
+                            } else if let address = lookupNameResponse.address {
+                                data [NotificationUserInfoKeys.name.rawValue] = address
+                                self?.notificationHandler.presentMessageNotification(data: data)
+                            }
+                        }).disposed(by: self.disposeBag)
 
-                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: peerUri)
+                    self.nameService.lookupAddress(withAccount: "", nameserver: "", address: hash)
+                }
             }
         }
         var shouldUpdateConversationsList = false
