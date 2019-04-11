@@ -128,7 +128,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-Be-lcD" userLabel="ViewCapturedVideo">
                                         <rect key="frame" x="0.0" y="-1" width="375" height="857"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CfE-DF-buX" userLabel="CapturedVideo">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CfE-DF-buX" userLabel="CapturedVideo">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="857"/>
                                             </imageView>
                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rt7-JS-vjg" userLabel="Blur Effect">

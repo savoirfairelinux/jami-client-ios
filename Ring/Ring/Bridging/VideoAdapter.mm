@@ -234,6 +234,10 @@ static id <VideoAdapterDelegate> _delegate;
     DRing::setDefaultDevice(std::string([deviceName UTF8String]));
 }
 
+- (void)setDefaultDevice:(NSString*)deviceName {
+    DRing::setDefaultDevice(std::string([deviceName UTF8String]));
+}
+
 - (void)setDecodingAccelerated:(BOOL)state {
     DRing::setDecodingAccelerated(state);
 }

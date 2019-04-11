@@ -44,18 +44,25 @@ enum VideoError: Error {
 protocol FrameExtractorDelegate: class {
     func captured(imageBuffer: CVImageBuffer?, image: UIImage)
     func supportAVPixelFormat(support: Bool)
+    //func useHardwareAcceleration()-> Bool
+    //func updateVideoInputDevices()
 }
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     let nameLandscape = "frontCameraLanscape"
     let namePortrait = "frontCameraPortrait"
+    let nameDevice1280_720 = "frontCameraPortrait1280_720"
     let nameCamera = "camera://"
 
     private let log = SwiftyBeaver.self
 
-    private let quality = AVCaptureSession.Preset.medium
+    private var quality = AVCaptureSession.Preset.hd1280x720
     private var orientation = AVCaptureVideoOrientation.portrait
+
+    func setQuality(quality: AVCaptureSession.Preset) {
+        self.quality = quality
+    }
 
     var getOrientation: AVCaptureVideoOrientation {
         return orientation
@@ -77,11 +84,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         super.init()
     }
 
-    func getDeviceInfo(forPosition position: AVCaptureDevice.Position, orientation: UIDeviceOrientation) throws -> DeviceInfo {
+    func getDeviceInfo(forPosition position: AVCaptureDevice.Position, orientation: UIDeviceOrientation, quality: AVCaptureSession.Preset) throws -> DeviceInfo {
         guard self.permissionGranted.value else {
             throw VideoError.needPermission
         }
-        self.captureSession.sessionPreset = self.quality
+        self.captureSession.sessionPreset = quality
         guard let captureDevice = self.selectCaptureDevice(withPosition: position) else {
             throw VideoError.selectDeviceFailed
         }
@@ -114,6 +121,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     func startCapturing() {
         sessionQueue.async { [unowned self] in
             if self.captureSession.canSetSessionPreset(self.quality) {
+                self.captureSession.beginConfiguration()
+                self.captureSession.sessionPreset = self.quality
+                self.captureSession.commitConfiguration()
+            } else if self.captureSession.canSetSessionPreset(AVCaptureSession.Preset.medium) {
+                self.quality = AVCaptureSession.Preset.medium
                 self.captureSession.beginConfiguration()
                 self.captureSession.sessionPreset = self.quality
                 self.captureSession.commitConfiguration()
@@ -313,6 +325,7 @@ class VideoService: FrameExtractorDelegate {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
         VideoAdapter.delegate = self
+        self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
         camera.delegate = self
     }
 
@@ -328,13 +341,28 @@ class VideoService: FrameExtractorDelegate {
         camera.checkPermission()
     }
 
-    private func enumerateVideoInputDevices() {
+    func enumerateVideoInputDevices() {
         do {
             try camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: AVCaptureVideoOrientation.portrait)
             self.log.debug("Camera successfully configured")
-            let frontLandscapeCameraDevInfo: [String: String] = try camera.getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .landscapeLeft)
-            let frontPortraitCameraDevInfo: [String: String] = try camera.getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .portrait)
-            videoAdapter.addVideoDevice(withName: camera.nameLandscape, withDevInfo: frontLandscapeCameraDevInfo)
+            let hd1280x720Device: [String: String] = try camera.getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .portrait, quality: AVCaptureSession.Preset.hd1280x720)
+            let frontLandscapeCameraDevInfo: [String: String] =
+                try camera
+                    .getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .landscapeLeft,
+                                   quality: AVCaptureSession.Preset.medium)
+            let frontPortraitCameraDevInfo: [String: String] =
+                try camera.getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .portrait,
+                                         quality: AVCaptureSession.Preset.medium)
+            videoAdapter.addVideoDevice(withName: camera.nameLandscape,
+                                        withDevInfo: frontLandscapeCameraDevInfo)
+            if self.hardwareAccelerated {
+                self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
+                videoAdapter.addVideoDevice(withName: camera.namePortrait, withDevInfo: frontPortraitCameraDevInfo)
+                videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720, withDevInfo: hd1280x720Device)
+                return
+            }
+            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+            videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720, withDevInfo: hd1280x720Device)
             videoAdapter.addVideoDevice(withName: camera.namePortrait, withDevInfo: frontPortraitCameraDevInfo)
 
         } catch let e as VideoError {
@@ -417,6 +445,13 @@ extension VideoService: VideoAdapterDelegate {
 
     func setEncodingAccelerated(withState state: Bool) {
         videoAdapter.setEncodingAccelerated(state)
+        if state {
+            self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
+            self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
+        } else {
+            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+            self.videoAdapter.setDefaultDevice(camera.namePortrait)
+        }
     }
 
     func getDecodingAccelerated() -> Bool {
@@ -444,6 +479,7 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startVideoCaptureBeforeCall() {
+        self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
         self.camera.startCapturing()
     }
 

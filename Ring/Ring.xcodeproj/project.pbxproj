@@ -139,7 +139,6 @@
 		0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */; };
 		0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E7CF4DE2017918300CD967D /* ButtonsContainerView.xib */; };
 		0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E9A0420483E1200DA8E8B /* TitleView.swift */; };
-		0E96ED72225CFDB50016C07D /* encoder.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E96ED71225CFDB50016C07D /* encoder.json */; };
 		0E96ED75225D06250016C07D /* GeneralSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E96ED74225D06250016C07D /* GeneralSettingsViewController.storyboard */; };
 		0E96ED77225D06380016C07D /* GeneralSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96ED76225D06380016C07D /* GeneralSettingsViewController.swift */; };
 		0E96ED79225D06480016C07D /* GeneralSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96ED78225D06480016C07D /* GeneralSettingsViewModel.swift */; };
@@ -467,7 +466,6 @@
 		0E7CF4DC20165BFB00CD967D /* ButtonsContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsContainerViewModel.swift; sourceTree = "<group>"; };
 		0E7CF4DE2017918300CD967D /* ButtonsContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonsContainerView.xib; sourceTree = "<group>"; };
 		0E8E9A0420483E1200DA8E8B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		0E96ED71225CFDB50016C07D /* encoder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = encoder.json; sourceTree = "<group>"; };
 		0E96ED74225D06250016C07D /* GeneralSettingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralSettingsViewController.storyboard; sourceTree = "<group>"; };
 		0E96ED76225D06380016C07D /* GeneralSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewController.swift; sourceTree = "<group>"; };
 		0E96ED78225D06480016C07D /* GeneralSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewModel.swift; sourceTree = "<group>"; };
@@ -1512,7 +1510,6 @@
 		1ABE07C61F0D86B300D36361 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0E96ED71225CFDB50016C07D /* encoder.json */,
 				0EBCAA4D202E60F000E2A545 /* default.wav */,
 				1ABE07DA1F0D915100D36361 /* Localizable.strings */,
 				04399A021D1C2D9D00E99CD9 /* Images.xcassets */,
@@ -1773,7 +1770,6 @@
 				0E6F545622403ADE00ECC3CE /* CreateSipAccountViewController.storyboard in Resources */,
 				1A2D18FD1F292DAD00B2C785 /* ConversationCell.xib in Resources */,
 				0E320D50224ADF840070B515 /* DialpadViewController.storyboard in Resources */,
-				0E96ED72225CFDB50016C07D /* encoder.json in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
 				0EBCAA4E202E60F000E2A545 /* default.wav in Resources */,
 				1A2D18E61F29197100B2C785 /* MessageAccessoryView.xib in Resources */,

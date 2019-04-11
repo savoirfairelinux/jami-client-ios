@@ -117,8 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // sets output device to whatever is currently available (either spk / headset)
         self.audioService.startAVAudioSession()
 
-        prepareVideoAcceleration()
-
         // requests permission to use the camera
         // will enumerate and add devices once permission has been granted
         self.videoService.setupInputs()
@@ -150,6 +148,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         callService: self.callService)
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()
+
+        prepareVideoAcceleration()
 
         self.accountService.initialAccountsLoading().subscribe(onCompleted: {
             //set selected account if exists
@@ -231,20 +231,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let enable = keyExists ? UserDefaults.standard.bool(forKey: hardareAccelerationKey) : false
         self.videoService.setDecodingAccelerated(withState: enable)
         self.videoService.setEncodingAccelerated(withState: enable)
-        guard let codecInfoPath = Bundle.main.path(forResource: "encoder",
-                                                   ofType: ".json") else {return}
-        guard let destPath =
-            NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                .userDomainMask,
-                                                true).first else {return}
-        let fileManager = FileManager.default
-        guard let fullDestPath = NSURL(fileURLWithPath: destPath)
-            .appendingPathComponent("encoder.json") else {return}
-        let fullDestPathString = fullDestPath.path
-        do {
-            try fileManager.copyItem(atPath: codecInfoPath,
-                                     toPath: fullDestPathString)
-        } catch { }
     }
 
     // MARK: - Ring Daemon
