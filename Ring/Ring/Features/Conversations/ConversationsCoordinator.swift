@@ -151,35 +151,53 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     private func showCallAlert(call: CallModel) {
-        if UIApplication.shared.applicationState != .active && !call.callId.isEmpty {
+        guard let account = self.accountService
+            .getAccount(fromAccountId: call.accountId) else {return}
+        if call.callId.isEmpty {
+            return
+        }
+        if UIApplication.shared.applicationState != .active {
+            if AccountModelHelper
+                .init(withAccount: account).isAccountSip() ||
+                !self.accountService.getCurrentProxyState(accountID: account.id) {
+                return
+            }
             var data = [String: String]()
-            data [NotificationUserInfoKeys.name.rawValue] = call.participantUri
+            data [NotificationUserInfoKeys.name.rawValue] = call.displayName
             data [NotificationUserInfoKeys.callID.rawValue] = call.callId
             let helper = LocalNotificationsHelper()
             helper.presentCallNotification(data: data, callService: self.callService)
-        } else {
-            let alertStyle = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) ? UIAlertControllerStyle.alert : UIAlertControllerStyle.actionSheet
-            let alert = UIAlertController(title: L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)", message: nil, preferredStyle: alertStyle)
-            alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonAccept, style: UIAlertActionStyle.default, handler: { (_) in
-                self.answerIncomingCall(call: call)
-                alert.dismiss(animated: true, completion: nil)}))
-            alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonIgnore, style: UIAlertActionStyle.default, handler: { (_) in
-                self.injectionBag.callService.refuse(callId: call.callId)
-                    .subscribe({_ in
-                        print("Call ignored")
-                    }).disposed(by: self.disposeBag)
-                alert.dismiss(animated: true, completion: nil)
-            }))
-            self.present(viewController: alert, withStyle: .present, withAnimation: true, disposeBag: self.disposeBag)
-
-            self.callService.currentCall.takeUntil(alert.rx.controllerWasDismissed).filter({ currentCall in
-                return currentCall.callId == call.callId &&
-                    (currentCall.state == .over || currentCall.state == .failure)
-            }).subscribe(onNext: { _ in
-                DispatchQueue.main.async {
-                    alert.dismiss(animated: true, completion: nil)
-                }
-            }).disposed(by: self.disposeBag)
+            return
         }
+        var accountName = !account.registeredName.isEmpty ?
+            account.registeredName : account.type == AccountType.sip ?
+                account.username : account.jamiId
+        if let accountProfie = self.accountService.getAccountProfile(accountId: account.id), let name = accountProfie.alias,
+            !name.isEmpty {
+            accountName = name
+        }
+        let message = accountName.isEmpty ? nil : "To: " + accountName
+        let alertStyle = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) ? UIAlertControllerStyle.alert : UIAlertControllerStyle.actionSheet
+        let alert = UIAlertController(title: L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)", message: message, preferredStyle: alertStyle)
+        alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonAccept, style: UIAlertActionStyle.default, handler: { (_) in
+            self.answerIncomingCall(call: call)
+            alert.dismiss(animated: true, completion: nil)}))
+        alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonIgnore, style: UIAlertActionStyle.default, handler: { (_) in
+            self.injectionBag.callService.refuse(callId: call.callId)
+                .subscribe({_ in
+                    print("Call ignored")
+                }).disposed(by: self.disposeBag)
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(viewController: alert, withStyle: .present, withAnimation: true, disposeBag: self.disposeBag)
+
+        self.callService.currentCall.takeUntil(alert.rx.controllerWasDismissed).filter({ currentCall in
+            return currentCall.callId == call.callId &&
+                (currentCall.state == .over || currentCall.state == .failure)
+        }).subscribe(onNext: { _ in
+            DispatchQueue.main.async {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }).disposed(by: self.disposeBag)
     }
 }

@@ -247,6 +247,10 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func getAccountProfile(accountId: String) -> AccountProfile? {
+        return self.dbManager.accountProfile(for: accountId)
+    }
+
     /// Adds a new Ring account.
     ///
     /// - Parameters:
