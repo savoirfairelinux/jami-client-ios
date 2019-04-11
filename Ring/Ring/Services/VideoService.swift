@@ -54,7 +54,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private let log = SwiftyBeaver.self
 
-    private let quality = AVCaptureSession.Preset.medium
+    private var quality = AVCaptureSession.Preset.vga640x480
     private var orientation = AVCaptureVideoOrientation.portrait
 
     var getOrientation: AVCaptureVideoOrientation {
@@ -114,6 +114,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     func startCapturing() {
         sessionQueue.async { [unowned self] in
             if self.captureSession.canSetSessionPreset(self.quality) {
+                self.captureSession.beginConfiguration()
+                self.captureSession.sessionPreset = self.quality
+                self.captureSession.commitConfiguration()
+            } else if self.captureSession.canSetSessionPreset(AVCaptureSession.Preset.medium) {
+                self.quality = AVCaptureSession.Preset.medium
                 self.captureSession.beginConfiguration()
                 self.captureSession.sessionPreset = self.quality
                 self.captureSession.commitConfiguration()
