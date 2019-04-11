@@ -33,6 +33,7 @@ public enum AppState: State {
     case needToOnboard(animated: Bool, isFirstAccount: Bool)
     case addAccount
     case allSet
+    case accountRemoved
 }
 
 public enum VCType: String {
@@ -87,6 +88,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                 self.showMainInterface()
             case .addAccount:
                 self.showWalkthrough(animated: false, isAccountFirst: false)
+            case .accountRemoved:
+                self.accountRemoved()
             }
         }).disposed(by: self.disposeBag)
     }
@@ -97,6 +100,10 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         self.stateSubject.onNext(AppState.initialLoading)
         //~ Dispatch to the proper screen
         self.dispatchApplication()
+    }
+
+    func accountRemoved() {
+        self.tabBarViewController.selectedIndex = 0
     }
 
     /// Handles the switch between the three supported screens.

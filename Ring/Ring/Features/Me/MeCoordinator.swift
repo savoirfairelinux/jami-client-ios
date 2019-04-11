@@ -30,6 +30,7 @@ public enum MeState: State {
     case linkNewDevice
     case blockedContacts
     case needToOnboard
+    case accountRemoved
 }
 
 /// This Coordinator drives the me/settings navigation
@@ -65,7 +66,8 @@ class MeCoordinator: Coordinator, StateableResponsive {
                 self.showBlockedContacts()
             case .needToOnboard:
                 self.needToOnboard()
-
+            case .accountRemoved:
+                self.accountRemoved()
             }
         }).disposed(by: self.disposeBag)
     }
@@ -73,6 +75,12 @@ class MeCoordinator: Coordinator, StateableResponsive {
     func needToOnboard() {
         if let parent = self.parentCoordinator as? AppCoordinator {
             parent.stateSubject.onNext(AppState.needToOnboard(animated: false, isFirstAccount: true))
+        }
+    }
+
+    func accountRemoved() {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.accountRemoved)
         }
     }
 

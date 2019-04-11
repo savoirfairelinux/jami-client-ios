@@ -502,6 +502,7 @@ class MeViewModel: ViewModel, Stateable {
         UserDefaults.standard.set(allAccounts[1].id, forKey: self.accountService.selectedAccountID)
         self.accountService.currentAccount = allAccounts[1]
         self.accountService.removeAccount(id: account.id)
+        self.stateSubject.onNext(MeState.accountRemoved)
     }
 
     lazy var accountEnabled: Variable<Bool> = {
