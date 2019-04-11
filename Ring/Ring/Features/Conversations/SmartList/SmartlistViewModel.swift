@@ -107,10 +107,9 @@ class SmartlistViewModel: Stateable, ViewModel {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
             if let account = self.accountsService.currentAccount {
                 self.profileService.getAccountProfile(accountId: account.id)
-                    .take(1)
                     .subscribe(onNext: { profile in
                         self.profileImageForCurrentAccount.onNext(profile)
-                    }).disposed(by: self.disposeBag)
+                    }).disposed(by: self.tempBag)
             }
         })
         return profileImageForCurrentAccount.share()
@@ -134,10 +133,9 @@ class SmartlistViewModel: Stateable, ViewModel {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
             self.conversationsService.conversationsForCurrentAccount
                 .observeOn(MainScheduler.instance)
-                .take(1)
                 .subscribe(onNext: { (conversations) in
                     self.conversationsForCurrentAccount.onNext(conversations)
-                }).disposed(by: self.disposeBag)
+                }).disposed(by: self.tempBag)
         })
 
         return self.conversationsForCurrentAccount.share().map({ (conversations) in
