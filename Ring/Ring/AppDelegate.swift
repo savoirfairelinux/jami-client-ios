@@ -205,12 +205,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         self.log.warning("entering background")
+        self.callService.muteCurrentCallVideoVideo( mute: true)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         self.log.warning("entering foreground")
         self.daemonService.connectivityChanged()
         self.updateNotificationAvailability()
+        self.callService.muteCurrentCallVideoVideo( mute: false)
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
