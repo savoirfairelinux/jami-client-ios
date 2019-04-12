@@ -206,6 +206,16 @@ class CallsService: CallsAdapterDelegate {
                        muted: mute)
     }
 
+    func muteCurrentCallVideoVideo(mute: Bool) {
+        for call in self.calls.values where call.state == .current {
+                self.callsAdapter
+                    .muteMedia(call.callId,
+                               mediaType: String(describing: MediaType.video),
+                               muted: mute)
+                return
+        }
+    }
+
     func playDTMF(code: String) {
         self.callsAdapter.playDTMF(code)
     }
