@@ -58,7 +58,7 @@
 "welcome.createAccount" = "Crea un account Jami";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Salta";
 "createProfile.profileCreated" = "Prossimo";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -121,7 +121,7 @@
 "actions.deleteAction" = "Elimina";
 "actions.cancelAction" = "Annulla";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.backAction" = "Indietro";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accetta";
 "alerts.incomingCallButtonIgnore" = "Ignora";
@@ -164,26 +164,27 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nome";
 "accountPage.linkDeviceTitle" = "Collega un altro dispositivo";
-"accountPage.other" = "Other";
+"accountPage.other" = "Altro";
 "accountPage.removeAccountTitle" = "Remove account";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-"accountPage.removeAccountButton" = "Remove";
+"accountPage.removeAccountButton" = "Rimuovi";
 //Account
 "account.sipUsername" = "User Name";
 "account.sipPassword" = "Password";
 "account.sipServer" = "SIP Server";
-"account.port" = "Port";
+"account.port" = "Porta";
+"account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Enter Password";
+"account.passwordLabel" = "Inserire la password";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
-"account.statusUnknown" = "Unknown";
+"account.statusOnline" = "In linea";
+"account.statusOffline" = "Disconnesso";
+"account.statusConnecting" = "Collegamento";
+"account.statusUnknown" = "Sconosciuto";
 "account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
@@ -230,11 +231,15 @@
 "dataTransfer.readableStatusCancel" = "Annulla";
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
-"generatedMessage.invitationReceived" = "Invitation received";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.contactAdded" = "Contatto aggiunto";
+"generatedMessage.invitationReceived" = "Invito ricevuto";
+"generatedMessage.invitationAccepted" = "Invito accettato";
 "generatedMessage.outgoingCall" = "Chiamata in uscita";
 "generatedMessage.incomingCall" = "Chiamata in arrivo";
 "generatedMessage.missedOutgoingCall" = "Chiamata persa in uscita";
 "generatedMessage.missedIncomingCall" = "Chiamata persa in arrivo";
+
+//General Settings
+"generalSettings.title" = "Impostazioni generali";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 

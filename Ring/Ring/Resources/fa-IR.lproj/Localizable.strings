@@ -173,6 +173,7 @@
 "account.sipPassword" = "گذرواژه";
 "account.sipServer" = "SIP Server";
 "account.port" = "پرت";
+"account.proxyServer" = "پیشکار یا پروکسی";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "گذرواژه را وارد کنید";
@@ -237,4 +238,8 @@
 "generatedMessage.incomingCall" = "تماس ورودی";
 "generatedMessage.missedOutgoingCall" = "تماس خروجی از دست رفته";
 "generatedMessage.missedIncomingCall" = "تماس ورودی از دست رفته";
+
+//General Settings
+"generalSettings.title" = "تنظیمات کلی";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 

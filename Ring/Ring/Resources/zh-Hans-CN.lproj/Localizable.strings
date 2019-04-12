@@ -173,6 +173,7 @@
 "account.sipPassword" = "密码";
 "account.sipServer" = "SIP Server";
 "account.port" = "端口";
+"account.proxyServer" = "代理";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Enter Password";
@@ -237,4 +238,8 @@
 "generatedMessage.incomingCall" = "来电";
 "generatedMessage.missedOutgoingCall" = "去电未接";
 "generatedMessage.missedIncomingCall" = "未接来电";
+
+//General Settings
+"generalSettings.title" = "General settings";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 

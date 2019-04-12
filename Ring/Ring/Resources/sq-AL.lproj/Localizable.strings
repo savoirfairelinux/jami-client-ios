@@ -39,9 +39,9 @@
 "smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
 "smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
 "smartlist.accountsTitle" = "Llogari";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.addAccountButton" = "+ Shtoni Llogari";
+"smartlist.noNumber" = "Kontakti i përzgjedhur s’ka ndonjë numër";
+"smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
 
 //Conversation
 "conversation.messagePlaceholder" = "Shkruani mesazhin tuaj…";
@@ -166,25 +166,26 @@
 "accountPage.linkDeviceTitle" = "Lidhni një pajisje tjetër";
 "accountPage.other" = "Tjetër";
 "accountPage.removeAccountTitle" = "Hiqe llogarinë";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "Duke klikuar \"Hiqe\", do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Po ashtu, emri juaj i regjistruar mund të humbë.";
 "accountPage.removeAccountButton" = "Hiqe";
 //Account
 "account.sipUsername" = "Emër Përdoruesi";
 "account.sipPassword" = "Fjalëkalim";
 "account.sipServer" = "Shërbyes SIP";
 "account.port" = "Portë";
-"account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
+"account.proxyServer" = "Ndërmjetës";
+"account.createSipAccount" = "Krijoni Llogari Sip";
+"account.usernameLabel" = "Jepni Emër Përdoruesi";
 "account.passwordLabel" = "Jepni Fjalëkalimin";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "Jepni Adresë";
+"account.portLabel" = "Jepni Numër Porte";
+"account.accountStatus" = "Gjendje Llogarie";
+"account.enableAccount" = "Akitvizo Llogari";
 "account.statusOnline" = "Në linjë";
 "account.statusOffline" = "Jo në linjë";
 "account.statusConnecting" = "Po lidhet";
 "account.statusUnknown" = "I panjohur";
-"account.statusConnectionerror" = "Connection Error";
+"account.statusConnectionerror" = "Gabim Lidhjeje";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "S’ka kontakte të bllokuar";
@@ -237,4 +238,8 @@
 "generatedMessage.incomingCall" = "Thirrje ardhëse";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
+
+//General Settings
+"generalSettings.title" = "Rregullime të përgjithshme";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 

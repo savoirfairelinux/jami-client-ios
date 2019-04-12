@@ -173,6 +173,7 @@
 "account.sipPassword" = "Kennwort";
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
+"account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Passwort eingeben";
@@ -237,4 +238,8 @@
 "generatedMessage.incomingCall" = "Eingehender Anruf";
 "generatedMessage.missedOutgoingCall" = "Verpasster ausgehender Anruf";
 "generatedMessage.missedIncomingCall" = "Verpasster eingehender Anruf";
+
+//General Settings
+"generalSettings.title" = "Allgemeine Einstellungen";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 

@@ -38,10 +38,10 @@
 "smartlist.searchBarPlaceholder" = "Introduza o nome...";
 "smartlist.noNetworkConnectivity" = "Sem conectividade à rede";
 "smartlist.cellularAccess" = "Verifique se o acesso via telemóvel está autorizado nas suas configurações";
-"smartlist.accountsTitle" = "Accounts";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.accountsTitle" = "Contas";
+"smartlist.addAccountButton" = "+ Adicionar conta";
+"smartlist.noNumber" = "O contacto selecionado não tem um número";
+"smartlist.selectOneNumber" = "Selecione um dos números";
 
 //Conversation
 "conversation.messagePlaceholder" = "Escreva a sua mensagem...";
@@ -121,7 +121,7 @@
 "actions.deleteAction" = "Eliminar";
 "actions.cancelAction" = "Cancelar";
 "actions.clearAction" = "Limpar";
-"actions.backAction" = "Back";
+"actions.backAction" = "Voltar";
 "alerts.incomingCallAllertTitle" = "A receber chamada de";
 "alerts.incomingCallButtonAccept" = "Aceitar";
 "alerts.incomingCallButtonIgnore" = "Ignorar";
@@ -164,27 +164,28 @@
 "accountPage.deviceRevocationError" = "Erro ao desvincular o dispositivo";
 "accountPage.namePlaceholder" = "Nome";
 "accountPage.linkDeviceTitle" = "Associar outro dispositivo";
-"accountPage.other" = "Other";
-"accountPage.removeAccountTitle" = "Remove account";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-"accountPage.removeAccountButton" = "Remove";
+"accountPage.other" = "Outro";
+"accountPage.removeAccountTitle" = "Remover conta";
+"accountPage.removeAccountMessage" = "Ao clicar em \"Remover\" irá remover esta conta neste dispositivo! Esta ação não pode ser desfeita. O seu nome de utilizador também será perdido.";
+"accountPage.removeAccountButton" = "Remover";
 //Account
-"account.sipUsername" = "User Name";
-"account.sipPassword" = "Password";
-"account.sipServer" = "SIP Server";
-"account.port" = "Port";
-"account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Enter Password";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
-"account.statusUnknown" = "Unknown";
-"account.statusConnectionerror" = "Connection Error";
+"account.sipUsername" = "Nome do utilizador";
+"account.sipPassword" = "Palavra-chave";
+"account.sipServer" = "Servidor SIP";
+"account.port" = "Porta";
+"account.proxyServer" = "Proxy";
+"account.createSipAccount" = "Criar conta SIP";
+"account.usernameLabel" = "Introduzir nome de utilizador";
+"account.passwordLabel" = "Introduzir Palavra-Chave";
+"account.serverLabel" = "Introduzir endereço";
+"account.portLabel" = "Introduzir número da porta";
+"account.accountStatus" = "Estado da conta";
+"account.enableAccount" = "Ativar conta";
+"account.statusOnline" = "Ligado";
+"account.statusOffline" = "Desligado";
+"account.statusConnecting" = "A conectar";
+"account.statusUnknown" = "Desconhecido";
+"account.statusConnectionerror" = "Erro de conexão";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Sem contactos bloqueados";
@@ -237,4 +238,8 @@
 "generatedMessage.incomingCall" = "Chamada recebida";
 "generatedMessage.missedOutgoingCall" = "Chamadas efetuadas perdidas";
 "generatedMessage.missedIncomingCall" = "Chamadas recebidas perdidas";
+
+//General Settings
+"generalSettings.title" = "Configurações gerais";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 

@@ -39,9 +39,9 @@
 "smartlist.noNetworkConnectivity" = "沒有網路連接";
 "smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
 "smartlist.accountsTitle" = "帳號";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.addAccountButton" = "+ 新增帳號";
+"smartlist.noNumber" = "選定的連絡人沒有任何號碼";
+"smartlist.selectOneNumber" = "選取其中一個號碼";
 
 //Conversation
 "conversation.messagePlaceholder" = "輸入您的訊息……";
@@ -166,25 +166,26 @@
 "accountPage.linkDeviceTitle" = "連結其他裝置";
 "accountPage.other" = "其他";
 "accountPage.removeAccountTitle" = "移除帳號";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "點選「移除」後，您將會在此裝置上移除此帳號！此動作不可復原。同時，您已註冊的名稱也將會遺失。";
 "accountPage.removeAccountButton" = "移除";
 //Account
 "account.sipUsername" = "使用者名稱";
 "account.sipPassword" = "密碼";
 "account.sipServer" = "SIP 伺服器";
 "account.port" = "連接埠";
-"account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
+"account.proxyServer" = "代理服務器";
+"account.createSipAccount" = "建立 SIP 帳號";
+"account.usernameLabel" = "輸入使用者名稱";
 "account.passwordLabel" = "輸入密碼";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "輸入地址";
+"account.portLabel" = "輸入連接埠號";
+"account.accountStatus" = "帳號狀態";
+"account.enableAccount" = "啟用帳號";
 "account.statusOnline" = "線上";
 "account.statusOffline" = "離線";
 "account.statusConnecting" = "連接中";
 "account.statusUnknown" = "未知";
-"account.statusConnectionerror" = "Connection Error";
+"account.statusConnectionerror" = "連線錯誤";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "沒有已封鎖的聯絡人";
@@ -237,4 +238,8 @@
 "generatedMessage.incomingCall" = "來電";
 "generatedMessage.missedOutgoingCall" = "未接去電";
 "generatedMessage.missedIncomingCall" = "未接來電";
+
+//General Settings
+"generalSettings.title" = "一般設定";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 

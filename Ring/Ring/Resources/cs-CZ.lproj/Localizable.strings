@@ -173,6 +173,7 @@
 "account.sipPassword" = "Heslo";
 "account.sipServer" = "Server SIP";
 "account.port" = "Port";
+"account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Zadejte heslo";
@@ -237,4 +238,8 @@
 "generatedMessage.incomingCall" = "Příchozí hovor";
 "generatedMessage.missedOutgoingCall" = "Zmeškaný odchozí hovor";
 "generatedMessage.missedIncomingCall" = "Zmeškaný příchozí hovor";
+
+//General Settings
+"generalSettings.title" = "Obecná nastavení";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 

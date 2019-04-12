@@ -39,9 +39,9 @@
 "smartlist.noNetworkConnectivity" = "Sin conexión a la red";
 "smartlist.cellularAccess" = "Asegúrese de que el acceso a la red móvil haya sido otorgado en las opciones";
 "smartlist.accountsTitle" = "Cuentas";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.addAccountButton" = "+ Añadir cuenta";
+"smartlist.noNumber" = "El contacto seleccionado no tiene ningún número";
+"smartlist.selectOneNumber" = "Seleccione uno de los números";
 
 //Conversation
 "conversation.messagePlaceholder" = "Escribe tu mensaje...";
@@ -166,25 +166,26 @@
 "accountPage.linkDeviceTitle" = "Vincular otro dispositivo";
 "accountPage.other" = "Otro";
 "accountPage.removeAccountTitle" = "Eliminar cuenta";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "Al hacer click en \"Eliminar\" se eliminará esta cuenta de su dispositivo. Esta acción no podrá ser deshecha. Igualmente, su nombre registrado puede perderse.";
 "accountPage.removeAccountButton" = "Eliminar";
 //Account
 "account.sipUsername" = "Nombre de usuario";
 "account.sipPassword" = "Contraseña";
 "account.sipServer" = "Servidor SIP";
 "account.port" = "Puerto";
-"account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
+"account.proxyServer" = "Proxy";
+"account.createSipAccount" = "Crear cuenta SIP";
+"account.usernameLabel" = "Introduzca nombre de usuario";
 "account.passwordLabel" = "Introducir contraseña";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "Introduzca dirección postal";
+"account.portLabel" = "Introduzca Número de Puerto";
+"account.accountStatus" = "Estado de la cuenta";
+"account.enableAccount" = "Activar cuenta";
 "account.statusOnline" = "En línea";
 "account.statusOffline" = "Desconectado";
 "account.statusConnecting" = "Conectando";
 "account.statusUnknown" = "Desconocido";
-"account.statusConnectionerror" = "Connection Error";
+"account.statusConnectionerror" = "Error de conexión";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No hay contactos bloqueados";
@@ -237,4 +238,8 @@
 "generatedMessage.incomingCall" = "Llamada entrante";
 "generatedMessage.missedOutgoingCall" = "Llamada saliente perdida";
 "generatedMessage.missedIncomingCall" = "Llamada entrante perdida";
+
+//General Settings
+"generalSettings.title" = "Ajustes generales";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 

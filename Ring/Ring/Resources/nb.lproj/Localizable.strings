@@ -173,6 +173,7 @@
 "account.sipPassword" = "Passord";
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
+"account.proxyServer" = "Mellomtjener";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Skriv inn passord";
@@ -237,4 +238,8 @@
 "generatedMessage.incomingCall" = "Innkommende samtale";
 "generatedMessage.missedOutgoingCall" = "Tapt utgående anrop";
 "generatedMessage.missedIncomingCall" = "Tapt innkommende anrop";
+
+//General Settings
+"generalSettings.title" = "General settings";
+"generalSettings.videoAcceleration" = "Enable video acceleration";
 
