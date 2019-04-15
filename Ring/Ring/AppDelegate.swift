@@ -228,7 +228,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // we want enable hardware acceleration by default so if key does not exists,
         // means it was not disabled by user 
         let keyExists = UserDefaults.standard.object(forKey: hardareAccelerationKey) != nil
-        let enable = keyExists ? UserDefaults.standard.bool(forKey: hardareAccelerationKey) : false
+        let enable = keyExists ? UserDefaults.standard.bool(forKey: hardareAccelerationKey) : true
         self.videoService.setDecodingAccelerated(withState: enable)
         self.videoService.setEncodingAccelerated(withState: enable)
     }
