@@ -71,8 +71,8 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
                 cell.configureFromItem(item)
                 cell.unblockButton.rx.tap
                     .subscribe(onNext: { [weak self, weak item] in
-                        if item == nil {return}
-                        self?.unbanContactTapped(withItem: item!)
+                        guard let contact = item else { return }
+                        self?.unbanContactTapped(withItem: contact)
                     }).disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)

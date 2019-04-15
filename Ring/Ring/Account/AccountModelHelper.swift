@@ -52,9 +52,11 @@ struct AccountModelHelper {
      */
     func isAccountSip() -> Bool {
         let sipString = AccountType.sip.rawValue
-        let accountType = self.account.details?
-            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType))
-        return sipString.compare(accountType!) == ComparisonResult.orderedSame
+        guard let accountType = self.account.details?
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType)) else {
+                return false
+        }
+        return sipString.compare(accountType) == ComparisonResult.orderedSame
     }
 
     /**
@@ -64,9 +66,11 @@ struct AccountModelHelper {
      */
     func isAccountRing() -> Bool {
         let ringString = AccountType.ring.rawValue
-        let accountType = self.account.details?
-            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType))
-        return ringString.compare(accountType!) == ComparisonResult.orderedSame
+        guard let accountType = self.account.details?
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType)) else {
+                return false
+        }
+        return ringString.compare(accountType) == ComparisonResult.orderedSame
     }
 
     /**
@@ -75,7 +79,8 @@ struct AccountModelHelper {
      - Returns: true if the account is enabled, false otherwise.
      */
     func isEnabled() -> Bool {
-        return (self.account.details!
+        guard let details = self.account.details else {return false}
+        return (details
             .getBool(forConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable)))
     }
 
@@ -85,7 +90,8 @@ struct AccountModelHelper {
      - Returns: the registration state of the account as a String.
      */
     func getRegistrationState() -> String {
-        return (self.account.volatileDetails!
+        guard let details = self.account.volatileDetails else {return ""}
+        return (details
             .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountRegistrationStatus)))
     }
 
@@ -147,12 +153,13 @@ struct AccountModelHelper {
     }
 
     public var uri: String? {
+        guard let details = self.account.details else {return nil}
         if self.account.type == AccountType.sip {
-            let name = self.account.details!
+            let name = details
                 .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountUsername))
-            let server = self.account.details!
+            let server = details
                 .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
-            let port = self.account.details!
+            let port = details
                 .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .localPort))
             var uri: String
             if !name.isEmpty {

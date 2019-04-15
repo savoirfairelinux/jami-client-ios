@@ -117,7 +117,10 @@ class SmartlistViewModel: Stateable, ViewModel {
                 if let photo = profile.photo,
                     let data = NSData(base64Encoded: photo,
                                       options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    return UIImage(data: data)!
+                    guard let image = UIImage(data: data) else {
+                        return UIImage(asset: Asset.icContactPicture)
+                    }
+                    return image
                 }
                 guard let account = self.accountsService.currentAccount else {
                     return UIImage(asset: Asset.icContactPicture)

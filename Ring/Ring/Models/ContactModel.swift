@@ -49,7 +49,7 @@ class ContactModel: Equatable {
         }
 
         if let confirmed = dictionary["confirmed"] {
-            self.confirmed = confirmed.toBool()!
+            self.confirmed = confirmed.toBool() ?? false
         }
 
         if let added = dictionary["added"] {

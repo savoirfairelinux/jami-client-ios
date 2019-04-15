@@ -263,17 +263,18 @@ class CallsService: CallsAdapterDelegate {
             call?.state = CallState(rawValue: state) ?? CallState.unknown
             //Remove from the cache if the call is over and save message to history
             if call?.state == .over || call?.state == .failure {
+                guard let finichedCall = call else { return }
                 var time = 0
-                if let startTime = call?.dateReceived {
+                if let startTime = finichedCall.dateReceived {
                     time = Int(Date().timeIntervalSince1970 - startTime.timeIntervalSince1970)
                 }
                 var event = ServiceEvent(withEventType: .callEnded)
-                event.addEventInput(.uri, value: call?.participantUri)
-                event.addEventInput(.accountId, value: call?.accountId)
-                event.addEventInput(.callType, value: call?.callType.rawValue)
+                event.addEventInput(.uri, value: finichedCall.participantUri)
+                event.addEventInput(.accountId, value: finichedCall.accountId)
+                event.addEventInput(.callType, value: finichedCall.callType.rawValue)
                 event.addEventInput(.callTime, value: time)
                 self.responseStream.onNext(event)
-                self.currentCall.onNext(call!)
+                self.currentCall.onNext(finichedCall)
                 self.calls[callId] = nil
                 return
             }
@@ -283,15 +284,15 @@ class CallsService: CallsAdapterDelegate {
             } else {
                 call?.update(withDictionary: callDictionary)
             }
-
+            guard let newCall = call else { return }
             //send vCard
-            if (call?.state == .ringing && call?.callType == .outgoing) ||
-                (call?.state == .current && call?.callType == .incoming) {
-                self.sendVCard(callID: callId, accountID: (call?.accountId)!)
+            if (newCall.state == .ringing && newCall.callType == .outgoing) ||
+                (newCall.state == .current && newCall.callType == .incoming) {
+                self.sendVCard(callID: callId, accountID: newCall.accountId)
             }
 
             //Emit the call to the observers
-            self.currentCall.onNext(call!)
+            self.currentCall.onNext(newCall)
         }
     }
 
@@ -329,7 +330,8 @@ class CallsService: CallsAdapterDelegate {
                     call?.update(withDictionary: callDictionary)
                 }
                 //Emit the call to the observers
-                self.newCall.value = call!
+                guard let newCall = call else { return }
+                self.newCall.value = newCall
             } else {
                 self.refuse(callId: callId).subscribe(onCompleted: { [weak self] in
                     self?.log.debug("call refused")

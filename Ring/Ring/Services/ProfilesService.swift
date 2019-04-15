@@ -121,10 +121,11 @@ class ProfilesService {
                 numberOfReceivedChunk = chunk.partsReceived
                 self.base64VCards[id] = chunk
             } else {
-                let partMessage = message[vCardKey]
-                let data: [Int: String] = [part: partMessage!]
-                let chunk = Base64VCard(data: data, partsReceived: numberOfReceivedChunk)
-                self.base64VCards[id] = chunk
+                if let partMessage = message[vCardKey] {
+                    let data: [Int: String] = [part: partMessage]
+                    let chunk = Base64VCard(data: data, partsReceived: numberOfReceivedChunk)
+                    self.base64VCards[id] = chunk
+                }
             }
 
             //Build the vCard when all data are appended

@@ -151,7 +151,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             if let name = peerName {
                 data [NotificationUserInfoKeys.name.rawValue] = name
                 self.notificationHandler.presentMessageNotification(data: data)
-            }  else {
+            } else {
                 // only for jami accounts
                 if let hash = JamiURI(schema: URIType.ring,
                                       infoHach: peerUri).hash {

@@ -225,7 +225,9 @@ class ConversationViewController: UIViewController,
     }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
-        let userInfo: Dictionary = notification.userInfo!
+        guard let userInfo: Dictionary = notification.userInfo else {
+            return
+        }
         guard let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
 
         let keyboardRectangle = keyboardFrame.cgRectValue

@@ -275,9 +275,11 @@ class ConversationViewModel: Stateable, ViewModel {
             self.sendContactRequest()
         }
 
+        guard let account = self.accountService.currentAccount else {return}
+
         self.conversationsService
             .sendMessage(withContent: content,
-                         from: accountService.currentAccount!,
+                         from: account,
                          recipientUri: self.conversation.value.participantUri)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.debug("Message sent")
@@ -316,9 +318,13 @@ class ConversationViewModel: Stateable, ViewModel {
             return
         }
 
+        guard let currentAccount = self.accountService.currentAccount else {
+            return
+        }
+
         self.contactsService
             .sendContactRequest(toContactRingId: self.conversation.value.hash,
-                                withAccount: self.accountService.currentAccount!)
+                                withAccount: currentAccount)
             .subscribe(onCompleted: { [unowned self] in
                 self.log.info("contact request sent")
                 }, onError: { [unowned self] (error) in
