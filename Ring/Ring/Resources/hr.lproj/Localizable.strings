@@ -54,8 +54,8 @@
 //Welcome Screen
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.linkDevice" = "Povežite ovaj uređaj s računom";
+"welcome.createAccount" = "Napravite Jami račun";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";

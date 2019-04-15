@@ -241,5 +241,5 @@
 
 //General Settings
 "generalSettings.title" = "一般設定";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "啟用視訊加速";
 

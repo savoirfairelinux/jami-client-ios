@@ -241,5 +241,5 @@
 
 //General Settings
 "generalSettings.title" = "Algemene instellingen";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "Videoversnelling inschakelen";
 

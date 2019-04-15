@@ -166,7 +166,7 @@
 "accountPage.linkDeviceTitle" = "Susieti kitą įrenginį";
 "accountPage.other" = "Kita";
 "accountPage.removeAccountTitle" = "Šalinti paskyrą";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "Spustelėję \"Šalinti\", pašalinsite šią paskyrą šiame įrenginyje! Šio veiksmo negalima bus atšaukti. Be to, galite prarasti savo registruotą vardą.";
 "accountPage.removeAccountButton" = "Šalinti";
 //Account
 "account.sipUsername" = "Naudotojo vardas";
@@ -179,8 +179,8 @@
 "account.passwordLabel" = "Enter Password";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.accountStatus" = "Paskyros būsena";
+"account.enableAccount" = "Įjungti paskyrą";
 "account.statusOnline" = "Prisijungęs";
 "account.statusOffline" = "Atsijungęs";
 "account.statusConnecting" = "Sujungiama";
