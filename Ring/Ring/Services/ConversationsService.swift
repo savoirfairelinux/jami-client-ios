@@ -166,20 +166,20 @@ class ConversationsService {
                                        incoming: message.incoming,
                                        interactionType: InteractionType.text, duration: 0)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onNext: { [weak self] _ in
+                .subscribe(onNext: { [unowned self] _ in
                     // append new message so it can be found if a status update is received before the DB finishes reload
-                    self?.conversations.value.filter({ conversation in
+                    self.conversations.value.filter({ conversation in
                         return conversation.participantUri == recipientRingId &&
                             conversation.accountId == toAccountId
                     }).first?.messages.append(message)
-                    self?.messagesSemaphore.signal()
+                    self.messagesSemaphore.signal()
                     if shouldRefreshConversations {
-                        self?.dbManager.getConversationsObservable(for: toAccountId)
+                        self.dbManager.getConversationsObservable(for: toAccountId)
                             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                            .subscribe(onNext: { [weak self] conversationsModels in
-                                self?.conversations.value = conversationsModels
+                            .subscribe(onNext: { [unowned self] conversationsModels in
+                                self.conversations.value = conversationsModels
                             })
-                            .disposed(by: (self?.disposeBag)!)
+                            .disposed(by: (self.disposeBag))
                     }
                     completable(.completed)
                     }, onError: { error in
@@ -255,7 +255,7 @@ class ConversationsService {
             let isIncoming = transferInfo.flags == 1
             let interactionType: InteractionType = isIncoming ? .iTransfer : .oTransfer
             guard let contactUri = JamiURI.init(schema: URIType.ring,
-                                                infoHach: transferInfo.peer!).uriString else {
+                                                infoHach: transferInfo.peer).uriString else {
                                                     completable(.completed)
                                                     return Disposables.create { }
             }
@@ -297,7 +297,8 @@ class ConversationsService {
     }
 
     func status(forMessageId messageId: String) -> MessageStatus {
-        return self.messageAdapter.status(forMessageId: UInt64(messageId)!)
+        guard let status = UInt64(messageId) else { return .unknown}
+        return self.messageAdapter.status(forMessageId: status)
     }
 
     func setMessagesAsRead(forConversation conversation: ConversationModel, accountId: String, accountURI: String) -> Completable {
@@ -315,13 +316,13 @@ class ConversationsService {
                                    withStatus: .read,
                                    accountId: accountId)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onCompleted: { [weak self] in
-                        self?.dbManager.getConversationsObservable(for: accountId)
+                .subscribe(onCompleted: { [unowned self] in
+                        self.dbManager.getConversationsObservable(for: accountId)
                             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                            .subscribe(onNext: { [weak self] conversationsModels in
-                                self?.conversations.value = conversationsModels
+                            .subscribe(onNext: { [unowned self] conversationsModels in
+                                self.conversations.value = conversationsModels
                             })
-                            .disposed(by: (self?.disposeBag)!)
+                            .disposed(by: (self.disposeBag))
                     completable(.completed)
                 }, onError: { error in
                     completable(.error(error))
@@ -337,15 +338,15 @@ class ConversationsService {
     func clearHistory(conversation: ConversationModel, keepConversation: Bool) {
         self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: conversation.participantUri, keepConversation: keepConversation)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onCompleted: { [weak self] in
-                self?.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
-                self?.dbManager
+            .subscribe(onCompleted: { [unowned self] in
+                self.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
+                self.dbManager
                     .getConversationsObservable(for: conversation.accountId)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                    .subscribe(onNext: { [weak self] conversationsModels in
-                        self?.conversations.value = conversationsModels
+                    .subscribe(onNext: { [unowned self] conversationsModels in
+                        self.conversations.value = conversationsModels
                     })
-                    .disposed(by: (self?.disposeBag)!)
+                    .disposed(by: (self.disposeBag))
                 }, onError: { error in
                     self.log.error(error)
             }).disposed(by: self.disposeBag)

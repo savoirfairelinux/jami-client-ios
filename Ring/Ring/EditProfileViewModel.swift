@@ -48,7 +48,10 @@ class EditProfileViewModel {
                                       options: NSData.Base64DecodingOptions
                                         .ignoreUnknownCharacters) as Data? {
                     self.image = UIImage(data: data)
-                    return UIImage(data: data)!
+                    guard let image = UIImage(data: data) else {
+                        return UIImage(named: "add_avatar")!
+                    }
+                    return image
                 }
                 return UIImage(named: "add_avatar")!
             })

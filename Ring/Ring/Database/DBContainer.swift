@@ -32,21 +32,22 @@ final class DBContainer {
     private var connections = [String: Connection?]()
     private let log = SwiftyBeaver.self
     private let jamiDBName = "ring.db"
-    private let path: String
+    private let path: String?
     private let dbVersion = 1
 
     init() {
         path = NSSearchPathForDirectoriesInDomains(
             .documentDirectory, .userDomainMask, true
-            ).first!
+            ).first
     }
 
     func getJamiDB() -> Connection? {
         if jamiDB != nil {
             return jamiDB
         }
+        guard let dbPath = path else { return nil }
         do {
-            jamiDB = try Connection("\(path)/" + jamiDBName)
+            jamiDB = try Connection("\(dbPath)/" + jamiDBName)
         } catch {
             jamiDB = nil
             log.error("Unable to open database")
@@ -66,8 +67,9 @@ final class DBContainer {
         if connections[account] != nil {
             return connections[account] ?? nil
         }
+        guard let dbPath = path else { return nil }
         do {
-            let accountDb = try Connection("\(path)/" + "\(account).db")
+            let accountDb = try Connection("\(dbPath)/" + "\(account).db")
             accountDb.userVersion = dbVersion
             connections[account] = accountDb
             return accountDb
@@ -78,7 +80,8 @@ final class DBContainer {
     }
 
     func isDBExistsFor(account: String) -> Bool {
-        let url = NSURL(fileURLWithPath: path)
+        guard let dbPath = path else { return false }
+        let url = NSURL(fileURLWithPath: dbPath)
         if let pathComponent = url.appendingPathComponent("/" + "\(account).db") {
             let filePath = pathComponent.path
             let fileManager = FileManager.default
@@ -93,7 +96,8 @@ final class DBContainer {
     }
 
     private func removeDBNamed(dbName: String) {
-        let url = NSURL(fileURLWithPath: path)
+        guard let dbPath = path else { return }
+        let url = NSURL(fileURLWithPath: dbPath)
         guard let pathComponent = url
             .appendingPathComponent("/" + dbName) else {
                 return

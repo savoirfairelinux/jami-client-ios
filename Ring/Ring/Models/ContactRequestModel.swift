@@ -59,9 +59,9 @@ class ContactRequestModel {
             self.vCard = contactVCard
         }
 
-        if let receivedDateString = dictionary[ContactRequestKey.received.rawValue] {
-            let timestamp = Double(receivedDateString)
-            self.receivedDate = Date(timeIntervalSince1970: timestamp!)
+        if let receivedDateString = dictionary[ContactRequestKey.received.rawValue],
+            let timestamp = Double(receivedDateString) {
+            self.receivedDate = Date(timeIntervalSince1970: timestamp)
         } else {
             self.receivedDate = Date()
         }

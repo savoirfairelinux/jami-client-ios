@@ -77,14 +77,21 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
             .observeOn(MainScheduler.instance)
             .startWith((self.viewModel.profileImageData.value, self.viewModel.userName.value))
             .subscribe({ [weak self] profileData -> Void in
-                self?.stretchyHeader.avatarView?.subviews.forEach({ $0.removeFromSuperview() })
-                self?.stretchyHeader.avatarView?.addSubview(AvatarView(profileImageData: profileData.element?.0,
-                                                                       username: (profileData.element?.1)!,
-                                                                       size: 100,
-                                                                       labelFontSize: 44))
-                self?.titleView.avatarImage = AvatarView(profileImageData: profileData.element?.0,
-                                                         username: (profileData.element?.1)!,
-                                                         size: 36)
+                guard let data = profileData.element?.1 else { return }
+                self?.stretchyHeader
+                    .avatarView?.subviews
+                    .forEach({ $0.removeFromSuperview() })
+                self?.stretchyHeader
+                    .avatarView?.addSubview(
+                        AvatarView(profileImageData:
+                            profileData.element?.0,
+                                   username: data,
+                                   size: 100,
+                                   labelFontSize: 44))
+                self?.titleView.avatarImage =
+                    AvatarView(profileImageData: profileData.element?.0,
+                               username: data,
+                               size: 36)
                 return
             })
             .disposed(by: self.disposeBag)
@@ -98,8 +105,8 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.viewModel.titleName
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
-            self?.titleView.text = name
-        }).disposed(by: self.disposeBag)
+                self?.titleView.text = name
+            }).disposed(by: self.disposeBag)
     }
 
     private func setUpTableView() {

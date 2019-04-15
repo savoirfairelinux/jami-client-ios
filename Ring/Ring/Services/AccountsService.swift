@@ -134,13 +134,15 @@ class AccountsService: AccountAdapterDelegate {
                 return account == newValue
             }).first
 
+            guard let newAccount = newValue else { return }
+
             //If current account already exists in the list, move it to the first index
-            if let currentAccount = currentAccount {
-                let index = self.accountList.index(of: currentAccount)
-                self.accountList.remove(at: index!)
+            if let currentAccount = currentAccount,
+                let index = self.accountList.index(of: currentAccount) {
+                self.accountList.remove(at: index)
                 self.accountList.insert(currentAccount, at: 0)
             } else {
-                self.accountList.append(newValue!)
+                self.accountList.append(newAccount)
             }
             currentAccountChanged.onNext(currentAccount)
         }
@@ -175,9 +177,9 @@ class AccountsService: AccountAdapterDelegate {
             let currentAccount = self.accountList.filter({ account in
                 return account == selectedAccount
             }).first
-            if let currentAccount = currentAccount {
-                let index = self.accountList.index(of: currentAccount)
-                self.accountList.remove(at: index!)
+            if let currentAccount = currentAccount,
+                let index = self.accountList.index(of: currentAccount) {
+                self.accountList.remove(at: index)
                 self.accountList.insert(currentAccount, at: 0)
             }
         }
@@ -187,9 +189,11 @@ class AccountsService: AccountAdapterDelegate {
         for account in accountList {
             if dbManager.isNeedMigrationToAccountDB(accountId: account.id) {
                 do {
-                    try dbManager.migrateToAccountDB(accountId: account.id,
-                                                     jamiId: AccountModelHelper
-                                                        .init(withAccount: account).ringId!)
+                    if let jamiId = AccountModelHelper
+                        .init(withAccount: account).ringId {
+                        try dbManager.migrateToAccountDB(accountId: account.id,
+                                                         jamiId: jamiId)
+                    }
                 } catch { return false}
             } else {
                 do {
@@ -400,7 +404,9 @@ class AccountsService: AccountAdapterDelegate {
 
     func setRingtonePath(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
-        let ringtonePath = Bundle.main.url(forResource: "default", withExtension: "wav")!
+        guard let ringtonePath = Bundle
+            .main.url(forResource: "default",
+                      withExtension: "wav") else { return }
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath), withValue: (ringtonePath.path))
         setAccountDetails(forAccountId: accountId, withDetails: details)
     }
@@ -522,7 +528,7 @@ class AccountsService: AccountAdapterDelegate {
      - Returns: the known Ring devices.
      */
     func getKnownRingDevices(fromAccountId id: String) -> [DeviceModel] {
-        let knownRingDevices = accountAdapter.getKnownRingDevices(id)! as NSDictionary
+        let knownRingDevices = accountAdapter.getKnownRingDevices(id) as NSDictionary
 
         var devices = [DeviceModel]()
 
@@ -559,8 +565,11 @@ class AccountsService: AccountAdapterDelegate {
         }
         accountDetails!.updateValue("oversip", forKey: ConfigKey.accountDTMFType.rawValue)
         accountDetails!.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
-        let ringtonePath = Bundle.main.url(forResource: "default", withExtension: "wav")!
-        accountDetails!.updateValue(ringtonePath.path, forKey: ConfigKey.ringtonePath.rawValue)
+        if let ringtonePath = Bundle
+            .main.url(forResource: "default",
+                      withExtension: "wav") {
+            accountDetails!.updateValue(ringtonePath.path, forKey: ConfigKey.ringtonePath.rawValue)
+        }
         accountDetails!.updateValue(accountType, forKey: ConfigKey.accountType.rawValue)
         accountDetails!.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
         return accountDetails!

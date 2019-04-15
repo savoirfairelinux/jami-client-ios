@@ -153,10 +153,10 @@ class MessageCell: UITableViewCell, NibReusable {
 
     // swiftlint:disable cyclomatic_complexity
     func applyBubbleStyleToCell(_ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
-        guard let item = items?[indexPath.row] else {
+        guard let items = items else {
             return
         }
-
+        let item = items[indexPath.row]
         let type = item.bubblePosition()
         var bubbleColor: UIColor
         if item.isTransfer {
@@ -205,13 +205,13 @@ class MessageCell: UITableViewCell, NibReusable {
 
         if item.timeStringShown != nil {
             self.bubbleTopConstraint.constant = 32
-            adjustedSequencing = indexPath.row == (items?.count)! - 1 ?
+            adjustedSequencing = indexPath.row == items.count - 1 ?
                 .singleMessage : adjustedSequencing != .singleMessage && adjustedSequencing != .lastOfSequence ?
                     .firstOfSequence : .singleMessage
         }
 
-        if indexPath.row + 1 < (items?.count)! {
-            if items?[indexPath.row + 1].timeStringShown != nil {
+        if indexPath.row + 1 < items.count {
+            if items[indexPath.row + 1].timeStringShown != nil {
                 switch adjustedSequencing {
                 case .firstOfSequence:
                     adjustedSequencing = .singleMessage
@@ -359,10 +359,14 @@ class MessageCell: UITableViewCell, NibReusable {
                 .observeOn(MainScheduler.instance)
                 .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value))
                 .subscribe({ [weak self] profileData -> Void in
-                    self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
-                    self?.avatarView.addSubview(AvatarView(profileImageData: profileData.element?.0,
-                                                           username: (profileData.element?.1)!,
-                                                           size: 32))
+                    guard let data = profileData.element?.1 else { return }
+                    self?.avatarView
+                        .subviews.forEach({ $0.removeFromSuperview() })
+                    self?.avatarView
+                        .addSubview(
+                            AvatarView(profileImageData: profileData.element?.0,
+                                               username: data,
+                                               size: 32))
                     self?.avatarView.isHidden = !(item.sequencing == .lastOfSequence || item.sequencing == .singleMessage)
                     return
                 })
@@ -391,7 +395,7 @@ class MessageCell: UITableViewCell, NibReusable {
                                                   accountId: accountId) {
             self.transferImageView.image = image
             let newSize = self.transferImageView.image?.getNewSize(of: defaultSize)
-            let xOriginImageSend = screenWidth - 112 - (newSize?.width)!
+            let xOriginImageSend = screenWidth - 112 - (newSize?.width ?? 200)
             if message.bubblePosition() == .sent {
                 self.transferImageView.frame = CGRect(x: xOriginImageSend, y: 0, width: ((newSize?.width ?? 200)), height: ((newSize?.height ?? 200)))
             } else if message.bubblePosition() == .received {

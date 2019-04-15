@@ -108,7 +108,7 @@ class CallModel {
 
         if let callType = dictionary[CallDetailKey.callTypeKey.rawValue] {
             if let callTypeInt = Int(callType) {
-                self.callType = CallType(rawValue: callTypeInt)!
+                self.callType = CallType(rawValue: callTypeInt) ?? .missed
             } else {
                 self.callType = .missed
             }

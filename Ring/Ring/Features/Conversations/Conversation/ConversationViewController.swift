@@ -182,7 +182,9 @@ class ConversationViewController: UIViewController,
                 imageFileName = (imageFileName as NSString).deletingPathExtension + ".png"
             }
 
-            let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName)
+            guard let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName) else {
+                return
+            }
             self.log.debug("localCachePath: \(String(describing: localCachePath))")
 
             guard let phAsset = result.firstObject else { return }
@@ -194,8 +196,8 @@ class ConversationViewController: UIViewController,
                     image = img
                 }
                 // copy image to tmp
-                copyImageToCache(image: image, imagePath: localCachePath!.path)
-                self.viewModel.sendFile(filePath: localCachePath!.path,
+                copyImageToCache(image: image, imagePath: localCachePath.path)
+                self.viewModel.sendFile(filePath: localCachePath.path,
                                         displayName: imageFileName,
                                         localIdentifier: result.firstObject?.localIdentifier)
             } else if phAsset.mediaType == .video {
@@ -211,8 +213,8 @@ class ConversationViewController: UIViewController,
                         return
                     }
                     self.log.debug("copying movie to: \(String(describing: localCachePath))")
-                    videoData.write(toFile: (localCachePath?.path)!, atomically: true)
-                    self.viewModel.sendFile(filePath: localCachePath!.path, displayName: imageFileName)
+                    videoData.write(toFile: localCachePath.path, atomically: true)
+                    self.viewModel.sendFile(filePath: localCachePath.path, displayName: imageFileName)
                 })
             }
         }
@@ -225,7 +227,9 @@ class ConversationViewController: UIViewController,
     }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
-        let userInfo: Dictionary = notification.userInfo!
+        guard let userInfo: Dictionary = notification.userInfo else {
+            return
+        }
         guard let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
 
         let keyboardRectangle = keyboardFrame.cgRectValue
@@ -588,30 +592,31 @@ class ConversationViewController: UIViewController,
     }
 
     func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
-        if let messageItem = self.messageViewModels?[index] {
+        if let models = self.messageViewModels {
+            let messageItem = models[index]
             let msgOwner = messageItem.bubblePosition()
-            if self.messageViewModels?.count == 1 || index == 0 {
-                if self.messageViewModels?.count == index + 1 {
+            if models.count == 1 || index == 0 {
+                if models.count == index + 1 {
                     return MessageSequencing.singleMessage
                 }
-                let nextMessageItem = index + 1 <= (self.messageViewModels?.count)!
-                    ? self.messageViewModels?[index + 1] : nil
+                let nextMessageItem = index + 1 <= models.count
+                    ? models[index + 1] : nil
                 if nextMessageItem != nil {
                     return msgOwner != nextMessageItem?.bubblePosition()
                         ? MessageSequencing.singleMessage : MessageSequencing.firstOfSequence
                 }
-            } else if self.messageViewModels?.count == index + 1 {
-                let lastMessageItem = index - 1 >= 0 && index - 1 < (self.messageViewModels?.count)!
-                    ? self.messageViewModels?[index - 1] : nil
+            } else if models.count == index + 1 {
+                let lastMessageItem = index - 1 >= 0 && index - 1 < models.count
+                    ? models[index - 1] : nil
                 if lastMessageItem != nil {
                     return msgOwner != lastMessageItem?.bubblePosition()
                         ? MessageSequencing.singleMessage : MessageSequencing.lastOfSequence
                 }
             }
-            let lastMessageItem = index - 1 >= 0 && index - 1 < (self.messageViewModels?.count)!
-                ? self.messageViewModels?[index - 1] : nil
-            let nextMessageItem = index + 1 <= (self.messageViewModels?.count)!
-                ? self.messageViewModels?[index + 1] : nil
+            let lastMessageItem = index - 1 >= 0 && index - 1 < models.count
+                ? models[index - 1] : nil
+            let nextMessageItem = index + 1 <= models.count
+                ? models[index + 1] : nil
             var sequencing = MessageSequencing.singleMessage
             if (lastMessageItem != nil) && (nextMessageItem != nil) {
                 if msgOwner != lastMessageItem?.bubblePosition() && msgOwner == nextMessageItem?.bubblePosition() {

@@ -288,10 +288,12 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.viewModel.callDuration.drive(self.durationLabel.rx.text)
             .disposed(by: self.disposeBag)
 
-        self.viewModel.callDuration.asObservable().observeOn(MainScheduler.instance)
+        self.viewModel.callDuration
+            .asObservable()
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 if self?.durationLabel.text != "" {
-                    if (self?.viewModel.isAudioOnly)! {
+                    if (self?.viewModel.isAudioOnly ?? true) {
                         self?.buttonContainerHeightConstraint.constant = 200
                         self?.buttonsContainer.containerHeightConstraint.constant = 200
                         self?.buttonsContainer.stackViewYConstraint.constant = 110
@@ -446,7 +448,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.viewModel.showCapturedFrame
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] dontShow in
-                if dontShow && (!(self?.isCallStarted)!) {
+                if dontShow && (!(self?.isCallStarted ?? false)) {
                     self?.isCallStarted = true
                     self?.hideCancelButton()
                     let device = UIDevice.modelName
@@ -544,7 +546,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20)/3)*4
                 self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo
-                let leftPointInfoContainer = self.infoBlurEffect?.convert((self.infoBlurEffect?.frame.origin)!, to: nil).x ?? 0
+                let leftPointInfoContainer = self.infoBlurEffect?
+                    .convert((self.infoBlurEffect?.frame.origin)!, to: nil).x ?? 0
                 self.capturedVideoTrailingConstraint.constant = leftPointInfoContainer + 10
                 self.capturedVideoTopConstraint.constant = -20
                 self.viewCapturedVideo.cornerRadius = 25
@@ -569,7 +572,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20)/4)*3
                 self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo
-                let leftPointInfoContainer = self.infoBlurEffect?.convert((self.infoBlurEffect?.frame.origin)!, to: nil).x ?? 0
+                let leftPointInfoContainer = self.infoBlurEffect?.convert((self.infoBlurEffect?
+                    .frame.origin)!, to: nil).x ?? 0
                 self.capturedVideoTrailingConstraint.constant = leftPointInfoContainer + 10
                 self.capturedVideoTopConstraint.constant = -20
                 self.viewCapturedVideo.cornerRadius = 25

@@ -74,10 +74,12 @@ extension UIImage {
         let imgRect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: size)
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         self.draw(in: imgRect)
-        let copied = UIGraphicsGetImageFromCurrentImageContext()
+        guard let copied = UIGraphicsGetImageFromCurrentImageContext() else {
+            return self
+        }
         UIGraphicsEndImageContext()
 
-        return copied!
+        return copied
     }
 
     func convertToData(ofMaxSize maxSize: Int) -> Data? {

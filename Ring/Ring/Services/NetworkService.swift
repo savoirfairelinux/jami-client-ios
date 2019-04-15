@@ -33,7 +33,7 @@ class NetworkService {
 
     private let log = SwiftyBeaver.self
 
-    let reachability: Reachability!
+    let reachability: Reachability?
 
     var connectionState = Variable<ConnectionType>(.none)
 
@@ -42,12 +42,12 @@ class NetworkService {
     }()
 
     init() {
-        reachability = Reachability()!
+        reachability = Reachability()
     }
 
     func monitorNetworkType() {
 
-        reachability.whenReachable = { reachability in
+        reachability?.whenReachable = { reachability in
             if reachability.connection == .wifi {
                 self.connectionState.value = .wifi
             } else {
@@ -55,12 +55,12 @@ class NetworkService {
             }
         }
 
-        reachability.whenUnreachable = { _ in
+        reachability?.whenUnreachable = { _ in
             self.connectionState.value = .none
         }
 
         do {
-            try reachability.startNotifier()
+            try reachability?.startNotifier()
             self.log.debug("network notifier started")
         } catch {
             self.log.debug("unable to start network notifier")

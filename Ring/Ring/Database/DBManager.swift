@@ -625,10 +625,9 @@ class DBManager {
     private func getConversationsFor(contactUri: String,
                                      createIfNotExists: Bool, dataBase: Connection) throws -> Int64? {
         if let contactConversations = try self.conversationHelper
-            .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase) {
-            if !contactConversations.isEmpty {
-                return contactConversations.first!.id
-            }
+            .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase),
+            let conv = contactConversations.first {
+            return conv.id
         }
         if !createIfNotExists {
             return nil

@@ -49,11 +49,11 @@ class ContactModel: Equatable {
         }
 
         if let confirmed = dictionary["confirmed"] {
-            self.confirmed = confirmed.toBool()!
+            self.confirmed = confirmed.toBool() ?? false
         }
 
-        if let added = dictionary["added"] {
-            let addedDate = Date(timeIntervalSince1970: Double(added)!)
+        if let added = dictionary["added"], let dateAdded = Double(added) {
+            let addedDate = Date(timeIntervalSince1970: dateAdded)
             self.added = addedDate
         }
         if let banned = dictionary["banned"],

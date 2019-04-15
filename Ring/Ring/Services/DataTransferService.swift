@@ -179,8 +179,9 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             return photo
         }
         imageManager.requestImage(for: asset, targetSize: CGSize(width: maxSize, height: maxSize), contentMode: .aspectFit, options: requestOptions, resultHandler: {(result, _) -> Void in
-            self.transferedImages[identifier] = (true, result!)
-            photo = result!
+            guard let image = result else { return }
+            self.transferedImages[identifier] = (true, image)
+            photo = image
         })
         return photo
     }

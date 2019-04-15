@@ -68,10 +68,15 @@ class ConversationCell: UITableViewCell, NibReusable {
             .observeOn(MainScheduler.instance)
             .startWith((item.profileImageData.value, item.userName.value))
             .subscribe({ [weak self] profileData -> Void in
+                guard let data = profileData.element?.1 else {
+                    return
+                }
                 self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
-                self?.avatarView.addSubview(AvatarView(profileImageData: profileData.element?.0,
-                                                       username: (profileData.element?.1)!,
-                                                       size: 40))
+                self?.avatarView
+                    .addSubview(
+                        AvatarView(profileImageData: profileData.element?.0,
+                                   username: data,
+                                   size: 40))
                 return
             })
             .disposed(by: self.disposeBag)

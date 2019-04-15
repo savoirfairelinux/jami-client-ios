@@ -135,7 +135,12 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             //Those coordinates are assigned to our codeFrame
             codeFrame.frame = metaDataCoordinates.bounds
 
-            let ringId = stringCodeValue.components(separatedBy: "http://").last!
+            guard let ringId = stringCodeValue.components(separatedBy: "http://").last else {
+                let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
 
             if ringId.isSHA1() {
                 AudioServicesPlayAlertSound(systemSoundId)

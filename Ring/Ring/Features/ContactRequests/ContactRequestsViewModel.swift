@@ -122,8 +122,9 @@ class ContactRequestsViewModel: Stateable, ViewModel {
                 }
             })
             .disposed(by: self.disposeBag)
+        guard let currentAccount = accountsService.currentAccount else { return }
 
-        self.nameService.lookupAddress(withAccount: (accountsService.currentAccount?.id)!,
+        self.nameService.lookupAddress(withAccount: currentAccount.id,
                                               nameserver: "",
                                               address: item.contactRequest.ringId)
     }

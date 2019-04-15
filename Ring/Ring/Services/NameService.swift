@@ -82,7 +82,10 @@ class NameService: NameRegistrationAdapterDelegate {
                 self.nameRegistrationAdapter.lookupName(withAccount: account, nameserver: nameserver, name: name)
             }
 
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + lookupNameCallDelay, execute: delayedLookupNameCall!)
+            if let lookup = delayedLookupNameCall {
+
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + lookupNameCallDelay, execute: lookup)
+            }
         }
     }
 

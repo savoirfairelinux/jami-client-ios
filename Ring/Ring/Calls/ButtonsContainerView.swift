@@ -69,8 +69,8 @@ class ButtonsContainerView: UIView, NibLoadable {
         self.commonInit()
     }
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         self.commonInit()
     }
 

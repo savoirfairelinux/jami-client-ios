@@ -111,7 +111,9 @@ class LocalNotificationsHelper {
                                                       intentIdentifiers: [], options: [])
             UNUserNotificationCenter.current().setNotificationCategories([callCategory])
         } else {
-            let notificationTypes: UIUserNotificationType = (UIApplication.shared.currentUserNotificationSettings?.types)!
+            guard let notificationTypes: UIUserNotificationType = (UIApplication.shared.currentUserNotificationSettings?.types) else {
+                return
+            }
             let acceptAction = UIMutableUserNotificationAction()
             acceptAction.identifier = CallAcition.accept.rawValue
             acceptAction.title = CallAcition.accept.title()
@@ -136,7 +138,7 @@ class LocalNotificationsHelper {
         }
     }
 
-    @objc func cancelCall(timer: Timer!) {
+    @objc func cancelCall(timer: Timer) {
         guard let info = timer.userInfo as? [String: String],
             let callID = info[NotificationUserInfoKeys.callID.rawValue] else {
                 self.timer?.invalidate()
