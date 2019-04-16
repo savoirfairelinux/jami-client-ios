@@ -176,13 +176,7 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var showCallOptions: Observable<Bool> = { [unowned self] in
-        return Observable.combineLatest(self.screenTapped.asObservable(),
-                                        isActiveVideoCall) { (tapped, shouldRespond) in
-            if tapped && shouldRespond {
-                return true
-            }
-            return false
-        }
+        return self.screenTapped.asObservable()
     }()
 
     lazy var showCancelOption: Observable<Bool> = { [unowned self] in

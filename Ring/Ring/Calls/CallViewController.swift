@@ -38,7 +38,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarViewBlurEffect: UIVisualEffectView!
     @IBOutlet private weak var callPulse: UIView!
-    @IBOutlet  weak var switchCameraButton: UIButton!
 
     @IBOutlet private weak var mainView: UIView!
 
@@ -80,9 +79,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     fileprivate let disposeBag = DisposeBag()
 
     private let log = SwiftyBeaver.self
-
-    private var task: DispatchWorkItem?
-
     private var shouldRotateScreen = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -124,8 +120,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }
 
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
-        switchCameraButton.contentVerticalAlignment = .fill
-        switchCameraButton.contentHorizontalAlignment = .fill
 
         initCallAnimation()
         UIApplication.shared.isIdleTimerDisabled = true
@@ -180,6 +174,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func setUpCallButtons() {
+        self.mainView.bringSubview(toFront: self.buttonsContainer)
         self.buttonsContainer.viewModel = self.viewModel.containerViewModel
         self.buttonsContainer.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -189,10 +184,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         self.buttonsContainer.dialpadButton.rx.tap
             .subscribe(onNext: { [weak self] in
-//                guard let bag = self?.viewModel.injectionBag else {return}
-//                let dialpadViewController = DialpadViewController.instantiate(with: bag)
-//                dialpadViewController.viewModel.inCallDialpad = true
-//                self?.present(dialpadViewController, animated: true, completion: nil)
                 self?.viewModel.showDialpad()
             }).disposed(by: self.disposeBag)
 
@@ -213,7 +204,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.viewModel.togglePauseCall()
             }).disposed(by: self.disposeBag)
 
-        self.switchCameraButton.rx.tap
+        self.buttonsContainer.switchCameraButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.switchCamera()
             }).disposed(by: self.disposeBag)
@@ -251,9 +242,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .subscribe(onNext: { [weak self] rotate in
                 self?.shouldRotateScreen = rotate
             }).disposed(by: self.disposeBag)
-
-        // disable switch camera button for audio only calls
-        self.switchCameraButton.isEnabled = !(self.viewModel.isAudioOnly)
     }
 
     // swiftlint:disable function_body_length
@@ -293,7 +281,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 if self?.durationLabel.text != "" {
-                    if (self?.viewModel.isAudioOnly ?? true) {
+                    if self?.viewModel.isAudioOnly ?? true {
                         self?.buttonContainerHeightConstraint.constant = 200
                         self?.buttonsContainer.containerHeightConstraint.constant = 200
                         self?.buttonsContainer.stackViewYConstraint.constant = 110
@@ -389,7 +377,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] show in
                 if show {
-                    self.task?.cancel()
                     self.showCallOptions()
                 }
             }).disposed(by: self.disposeBag)
@@ -450,7 +437,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .subscribe(onNext: { [weak self] dontShow in
                 if dontShow && (!(self?.isCallStarted ?? false)) {
                     self?.isCallStarted = true
-                    self?.hideCancelButton()
                     let device = UIDevice.modelName
                     //Reduce the cancel button for small iPhone
                     switch device {
@@ -458,7 +444,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                         self?.buttonsContainer.cancelButtonWidthConstraint.constant = 50
                         self?.buttonsContainer.cancelButtonHeightConstraint.constant = 50
                         self?.buttonsContainer.cancelButton.cornerRadius = 25
-                        self?.buttonsContainer.cancelButtonBottomConstraint.constant = 30
                     default : break
                     }
                     UIView.animate(withDuration: 0.4, animations: {
@@ -472,9 +457,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func removeFromScreen() {
-        if !self.infoContainer.isHidden {
-            task?.cancel()
-        }
         UIDevice.current.isProximityMonitoringEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
         self.dismiss(animated: false)
@@ -587,22 +569,17 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func showContactInfo() {
-        if !self.infoContainer.isHidden {
-            task?.cancel()
+        if !self.buttonsContainer.isHidden {
             self.hideContactInfo()
             return
         }
         self.isMenuShowed = true
         self.buttonsContainer.isHidden = false
-        if !self.capturedVideo.isHidden {
-            self.switchCameraButton.isHidden = false
-        }
 
         self.infoContainer.isHidden = false
         self.view.layoutIfNeeded()
 
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            self?.capturedVideoBlurEffect.alpha = 0
             self?.resizeCapturedVideo(withInfoContainer: true)
             self?.infoContainerTopConstraint.constant = -10
             if UIDevice.current.hasNotch && (self?.orientation == .landscapeRight || self?.orientation == .landscapeLeft) {
@@ -612,18 +589,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             } else {
                 self?.buttonsContainerBottomConstraint.constant = 10
             }
-            self?.capturedVideoBlurEffect.alpha = 0.7
             self?.view.layoutIfNeeded()
         })
-
-        task = DispatchWorkItem {[weak self] in self?.hideContactInfo() }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7, execute: task!)
     }
 
     func hideContactInfo() {
         self.isMenuShowed = false
         UIView.animate(withDuration: 0.2, animations: { [unowned self] in
-            self.capturedVideoBlurEffect.alpha = self.isVideoHidden ? 1 : 0
             self.resizeCapturedVideo(withInfoContainer: false)
             self.infoContainerTopConstraint.constant = 150
             self.buttonsContainerBottomConstraint.constant = -150
@@ -631,7 +603,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             }, completion: { [weak self] _ in
                 self?.infoContainer.isHidden = true
                 self?.buttonsContainer.isHidden = true
-                self?.switchCameraButton.isHidden = true
         })
     }
 
