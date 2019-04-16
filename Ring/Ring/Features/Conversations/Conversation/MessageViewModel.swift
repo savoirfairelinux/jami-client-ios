@@ -119,12 +119,9 @@ class MessageViewModel {
             self.conversationsService
                 .sharedResponseStream
                 .filter({ messageUpdateEvent in
-                    guard let accountId: String = messageUpdateEvent.getEventInput(.id) else { return false }
-                    let account = self.accountService.getAccount(fromAccountId: accountId)
-                    let accountHelper = AccountModelHelper(withAccount: account!)
                     return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
                         messageUpdateEvent.getEventInput(.messageId) == self.message.daemonId &&
-                        accountHelper.uri == self.message.authorURI
+                        !self.message.incoming
                 })
                 .subscribe(onNext: { [unowned self] messageUpdateEvent in
                     if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {

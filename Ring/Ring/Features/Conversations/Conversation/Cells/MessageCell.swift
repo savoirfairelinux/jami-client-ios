@@ -59,6 +59,9 @@ class MessageCell: UITableViewCell, NibReusable {
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
+        if self.sendingIndicator != nil {
+            self.sendingIndicator.stopAnimating()
+        }
         super.prepareForReuse()
         self.stopProgressMonitor()
         self.disposeBag = DisposeBag()

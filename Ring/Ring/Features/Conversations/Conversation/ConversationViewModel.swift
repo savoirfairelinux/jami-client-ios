@@ -306,7 +306,8 @@ class ConversationViewModel: Stateable, ViewModel {
     fileprivate var unreadMessagesCount: Int {
         let unreadMessages =  self.conversation.value.messages
             .filter({ message in
-                return message.status != .read && !message.isTransfer && message.authorURI != ""
+                return message.status != .read &&
+                    !message.isTransfer && message.incoming
         })
         return unreadMessages.count
     }

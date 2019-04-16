@@ -448,6 +448,7 @@ class ConversationViewController: UIViewController,
         self.scrollToBottom(animated: false)
         self.textFieldShouldEndEditing = false
         self.messagesLoadingFinished()
+        self.viewModel.setMessagesAsRead()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
