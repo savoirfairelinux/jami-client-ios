@@ -129,10 +129,12 @@ class ConversationsManager: MessagesAdapterDelegate {
         guard let content = message[textPlainMIMEType] else {
             return
         }
-        self.handleNewMessage(from: senderAccount,
-                              to: receiverAccountId,
-                              message: content,
-                              peerName: nil)
+        DispatchQueue.main.async { [unowned self] in
+            self.handleNewMessage(from: senderAccount,
+                                  to: receiverAccountId,
+                                  message: content,
+                                  peerName: nil)
+        }
     }
 
     func handleNewMessage(from peerUri: String, to accountId: String, message content: String, peerName: String?) {
