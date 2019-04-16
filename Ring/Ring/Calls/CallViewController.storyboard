@@ -148,36 +148,13 @@
                                                     <constraint firstAttribute="height" constant="70" id="iha-aS-TZH"/>
                                                 </constraints>
                                             </imageView>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="223-1E-riv">
-                                                <rect key="frame" x="162.66666666666666" y="403.66666666666669" width="50" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="MN0-Eh-bIu"/>
-                                                    <constraint firstAttribute="height" constant="50" id="xms-0h-ZuM"/>
-                                                </constraints>
-                                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="switch_camera"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="0.0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="0.0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="gWE-IS-b5p" firstAttribute="centerY" secondItem="rt7-JS-vjg" secondAttribute="centerY" id="1Jq-i7-iGP"/>
                                             <constraint firstItem="CfE-DF-buX" firstAttribute="centerX" secondItem="ZK1-Be-lcD" secondAttribute="centerX" id="51a-aO-iap"/>
-                                            <constraint firstItem="223-1E-riv" firstAttribute="centerX" secondItem="ZK1-Be-lcD" secondAttribute="centerX" id="KH5-fw-hla"/>
                                             <constraint firstItem="CfE-DF-buX" firstAttribute="height" secondItem="ZK1-Be-lcD" secondAttribute="height" id="O6Q-I4-gU3"/>
                                             <constraint firstItem="rt7-JS-vjg" firstAttribute="centerX" secondItem="CfE-DF-buX" secondAttribute="centerX" id="QPi-iO-gGH"/>
                                             <constraint firstItem="rt7-JS-vjg" firstAttribute="width" secondItem="CfE-DF-buX" secondAttribute="width" id="VX9-wH-CfO"/>
-                                            <constraint firstItem="223-1E-riv" firstAttribute="centerY" secondItem="ZK1-Be-lcD" secondAttribute="centerY" id="cb4-Jh-zso"/>
                                             <constraint firstItem="rt7-JS-vjg" firstAttribute="height" secondItem="CfE-DF-buX" secondAttribute="height" id="glm-Va-dTY"/>
                                             <constraint firstItem="gWE-IS-b5p" firstAttribute="leading" secondItem="rt7-JS-vjg" secondAttribute="leading" constant="-17" id="kOS-1k-vY1"/>
                                             <constraint firstItem="CfE-DF-buX" firstAttribute="centerY" secondItem="ZK1-Be-lcD" secondAttribute="centerY" id="pDf-fu-Le6"/>
@@ -263,7 +240,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdV-jx-Mla">
-                                        <rect key="frame" x="187.66666666666666" y="658" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="187.66666666666666" y="648" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -293,10 +270,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LK6-u0-eLU" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="10" y="658" width="355" height="110"/>
+                                <rect key="frame" x="10" y="568" width="355" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="r58-OO-QqE"/>
+                                    <constraint firstAttribute="height" constant="200" id="r58-OO-QqE"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -313,7 +290,7 @@
                             <constraint firstItem="5E0-lB-SkS" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" id="KFS-O1-Acs"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="top" secondItem="QpJ-Sx-9dG" secondAttribute="top" id="NrK-DR-BPG"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="top" secondItem="ZK1-Be-lcD" secondAttribute="top" constant="45" id="Uew-ao-q8k"/>
-                            <constraint firstItem="SdV-jx-Mla" firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="top" id="YIc-Oj-lc8"/>
+                            <constraint firstItem="SdV-jx-Mla" firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="top" constant="80" id="YIc-Oj-lc8"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerY" secondItem="QpJ-Sx-9dG" secondAttribute="centerY" id="bAN-gX-nPE"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="trailing" secondItem="LK6-u0-eLU" secondAttribute="trailing" constant="10" id="cl9-Fw-bSb"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerX" secondItem="lZI-X0-bkP" secondAttribute="centerX" id="ff0-Nw-f2Y"/>
@@ -357,7 +334,6 @@
                         <outlet property="profileImageViewHeightConstraint" destination="V9c-7W-Frv" id="0iC-TD-RuH"/>
                         <outlet property="profileImageViewWidthConstraint" destination="Miw-Nd-4Fa" id="OSp-7J-TGC"/>
                         <outlet property="spinner" destination="nwA-ao-thv" id="bJo-Wq-QmV"/>
-                        <outlet property="switchCameraButton" destination="223-1E-riv" id="0Pd-fI-JIR"/>
                         <outlet property="viewCapturedVideo" destination="ZK1-Be-lcD" id="Go0-ab-yLg"/>
                     </connections>
                 </viewController>
@@ -369,6 +345,5 @@
     <resources>
         <image name="ic_contact_picture" width="512" height="512"/>
         <image name="left_arrow" width="138.24000549316406" height="138.24000549316406"/>
-        <image name="switch_camera" width="75" height="75"/>
     </resources>
 </document>
