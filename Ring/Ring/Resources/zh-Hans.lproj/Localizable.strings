@@ -84,6 +84,8 @@
 "createAccount.PasswordInformation" = "選擇密碼來加密您的本機帳號。不要忘了它，否則您會無法復原您的帳號";
 "createAccount.EnableNotifications" = "通知";
 "createAccount.Recommended" = "（建議）";
+"createAccount.UsernameNotRegisteredTitle" = "網路錯誤";
+"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "帳號連結";

@@ -84,6 +84,8 @@
 "createAccount.PasswordInformation" = "Escolha uma senha para criptografar sua conta local. Não se esqueça dessa senha. Sem ela você não poderá recuperar sua conta.";
 "createAccount.EnableNotifications" = "Notificações";
 "createAccount.Recommended" = "(Recomendado)";
+"createAccount.UsernameNotRegisteredTitle" = "Erro de rede";
+"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Associar conta";

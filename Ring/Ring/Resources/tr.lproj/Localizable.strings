@@ -84,6 +84,8 @@
 "createAccount.PasswordInformation" = "Yerel hesabınızı şifrelemek için bir parola seçin. Parolayı unutmayın yoksa hesabınızı kurtaramazsınız";
 "createAccount.EnableNotifications" = "Bildirimler";
 "createAccount.Recommended" = "(Önerilen)";
+"createAccount.UsernameNotRegisteredTitle" = "Ağ hatası";
+"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Hesap bağlantısı";

@@ -84,6 +84,8 @@
 "createAccount.PasswordInformation" = "Vyberte heslo k zašifrování dat vašeho místního účtu. Nezapomeňte, že svůj účet nebudete moci obnovit.";
 "createAccount.EnableNotifications" = "Oznámení";
 "createAccount.Recommended" = "(doporučeno)";
+"createAccount.UsernameNotRegisteredTitle" = "Chyba sítě";
+"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Připojení účtu";

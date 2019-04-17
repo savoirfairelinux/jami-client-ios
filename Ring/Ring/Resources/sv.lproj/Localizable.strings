@@ -84,6 +84,8 @@
 "createAccount.PasswordInformation" = "Välj ett lösenord för att kryptera ditt lokala konto. Glöm inte bort det, för då kommer du inte att kunna återställa ditt konto.";
 "createAccount.EnableNotifications" = "Aviseringar";
 "createAccount.Recommended" = "(Rekommenderas)";
+"createAccount.UsernameNotRegisteredTitle" = "Nätverksfel";
+"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontokoppling";

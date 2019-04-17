@@ -84,6 +84,8 @@
 "createAccount.PasswordInformation" = "Kies een wachtwoord om uw lokale account mee te versleutelen. Vergeet het niet, u zult uw account anders niet kunnen herstellen";
 "createAccount.EnableNotifications" = "Meldingen";
 "createAccount.Recommended" = "(Aanbevolen)";
+"createAccount.UsernameNotRegisteredTitle" = "Netwerkfout";
+"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account koppelen";

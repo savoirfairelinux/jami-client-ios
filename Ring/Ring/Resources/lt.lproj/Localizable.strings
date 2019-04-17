@@ -84,6 +84,8 @@
 "createAccount.PasswordInformation" = "Pasirinkite slaptažodį, skirtą šifruoti jūsų vietinę paskyrą. Nepamirškite jo arba kitaip nebegalėsite atkurti savo paskyros";
 "createAccount.EnableNotifications" = "Pranešimai";
 "createAccount.Recommended" = "(Rekomenduojama)";
+"createAccount.UsernameNotRegisteredTitle" = "Tinklo klaida";
+"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Paskyros susiejimas";

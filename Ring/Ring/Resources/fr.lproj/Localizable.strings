@@ -34,14 +34,14 @@
 "smartlist.conversations" = "Conversations";
 "smartlist.searching" = "Recherche de disponibilité...";
 "smartlist.noResults" = "Aucun résultat";
-"smartlist.noConversation" = "Aucun conversation";
+"smartlist.noConversation" = "Aucune conversation";
 "smartlist.searchBarPlaceholder" = "Entrer un nom...";
 "smartlist.noNetworkConnectivity" = "Pas d'accès au réseau";
 "smartlist.cellularAccess" = "Soyez certain que l'accès au mobile est autorisé par vos paramètres";
 "smartlist.accountsTitle" = "Comptes";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.addAccountButton" = "+ Ajouter un compte";
+"smartlist.noNumber" = "Le contact sélectionné n'a pas de numéro";
+"smartlist.selectOneNumber" = "Choisir un des numéros";
 
 //Conversation
 "conversation.messagePlaceholder" = "Saisissez votre message...";
@@ -58,12 +58,12 @@
 "welcome.createAccount" = "Créer un compte Jami";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Passez";
+"createProfile.skipCreateProfile" = "Passer";
 "createProfile.profileCreated" = "Suivant";
-"createProfile.title" = "Personnaliser votre profile";
+"createProfile.title" = "Personnaliser votre profil";
 "createProfile.enterNameLabel" = "Entrer le nom d'affichage";
 "createProfile.enterNamePlaceholder" = "Entrer un nom";
-"createProfile.subtitle" = "Votre profile sera partagé avec vos contacts. Vous pouvez le changer en tout temps.";
+"createProfile.subtitle" = "Votre profil sera partagé avec vos contacts. Vous pouvez le changer en tout temps.";
 "createProfile.createYourAvatar" = "Créer votre avatar ";
 
 //Create Account form
@@ -79,11 +79,13 @@
 "createAccount.usernameAlreadyTaken" = "Ce nom d'utilisateur est déjà utilisé";
 "createAccount.loading" = "Chargement";
 "createAccount.waitCreateAccountTitle" = "Ajout du compte";
-"createAccount.RegisterAUsername" = "Enregistrer un nom";
+"createAccount.RegisterAUsername" = "Enregistrer un nom d'utilisateur";
 "createAccount.ChooseAPassword" = "Encrypter mon compte";
 "createAccount.PasswordInformation" = "Choisissez un mot de passe pour encrypter votre compte localement. Ne l'oubliez pas ! Il sera impossible de récupérer votre compte sans lui";
 "createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(recommandé)";
+"createAccount.UsernameNotRegisteredTitle" = "Erreur de réseau";
+"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Association du compte";
@@ -99,7 +101,7 @@
 "alerts.accountCannotBeFoundMessage" = "Le compte ne peut être trouvé sur le réseau Jami. Vérifiez qu'il a bien été exporté par un autre appareil et que les identifiants fournis sont corrects.";
 "alerts.accountAddedTitle" = "Compte ajouté";
 "alerts.accountNoNetworkTitle" = "Impossible de se connecter au réseau";
-"alerts.accountNoNetworkMessage" = "Impossible de rajouter le compte parce que Jami ne peut se connecter sur le réseau. Vérifiez la connectivité de votre appareil.";
+"alerts.accountNoNetworkMessage" = "Impossible d'ajouter le compte parce que Jami ne peut se connecter sur le réseau. Vérifiez la connectivité de votre appareil.";
 "alerts.accountDefaultErrorTitle" = "Erreur inconnue";
 "alerts.accountDefaultErrorMessage" = "Le compte ne peut pas être créé.";
 "alerts.profileTakePhoto" = "Prendre une photo";
@@ -108,7 +110,7 @@
 "alerts.accountLinkedTitle" = "Association du compte en cours";
 "alerts.dbFailedTitle" = "Une erreur s'est produite au démarrage de Jami";
 "alerts.dbFailedMessage" = "Veuillez fermer l'application et réessayez";
-"alerts.confirmBlockContact" = "Êtes-vous certain de vouloir bloquer contact ? L'historique des conversations avec ce contact sera supprimé définitivement.";
+"alerts.confirmBlockContact" = "Êtes-vous certain de vouloir bloquer ce contact ? L'historique des conversations avec ce contact sera supprimé définitivement.";
 "alerts.confirmBlockContactTitle" = "Bloquer ce contact";
 "alerts.confirmDeleteConversation" = "Êtes-vous certain de vouloir supprimer définitivement cette conversation ? ";
 "alerts.confirmDeleteConversationFromContact" = "Êtes-vous certain de vouloir effacer cette conversation avec ce contact ? ";
@@ -127,7 +129,7 @@
 "alerts.incomingCallButtonIgnore" = "Ignorer";
 
 //Calls
-"calls.callItemTitle" = "Appelez";
+"calls.callItemTitle" = "Appeler";
 "calls.unknown" = "Inconnu";
 "calls.incomingCallInfo" = "veut vous parler";
 "calls.ringing" = "Sonne...";
@@ -140,11 +142,11 @@
 "accountPage.username" = "nom d'utilisateur :";
 "accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
 "accountPage.credentialsHeader" = "Détails du compte";
-"accountPage.enableProxy" = "Utiliser un nœud délégataire ";
+"accountPage.enableProxy" = "Utiliser un nœud délégataire";
 "accountPage.blockedContacts" = "Liste des utilisateurs bloqués";
 "accountPage.unblockContact" = "Débloquer";
 "accountPage.proxyAddressAlert" = "Fournir l'adresse du nœud délégataire";
-"accountPage.enableProxy" = "Utiliser un nœud délégataire ";
+"accountPage.enableProxy" = "Utiliser un nœud délégataire";
 "accountPage.noProxyExplanationLabel" = "Votre appareil ne recevra pas de notifications si le nœud délégataire est désactivé";
 "accountPage.saveProxyAddress" = "Sauvegarder";
 "accountPage.proxyPaceholder" = "Adresse du nœud  DHT délégataire";
@@ -166,7 +168,7 @@
 "accountPage.linkDeviceTitle" = "Associer un nouvel appareil";
 "accountPage.other" = "Autre";
 "accountPage.removeAccountTitle" = "Supprimer le compte";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "En cliquant \"Remove\" vous supprimerez ce compte de cet appareil! Cette action ne peut être annulée. Aussi, votre nom enregistré pourrait être perdu.";
 "accountPage.removeAccountButton" = "Enlever";
 //Account
 "account.sipUsername" = "Nom d'utilisateur";
@@ -174,18 +176,18 @@
 "account.sipServer" = "Adresse du serveur SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Serveur mandataire";
-"account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
+"account.createSipAccount" = "Créer un compte SIP";
+"account.usernameLabel" = "Entrer l'identifiant";
 "account.passwordLabel" = "Entrez le mot de passe";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "Entrer l'adresse";
+"account.portLabel" = "Entrer le numéro de port";
+"account.accountStatus" = "État du compte";
+"account.enableAccount" = "Activer le compte";
 "account.statusOnline" = "En ligne";
 "account.statusOffline" = "Déconnecté";
 "account.statusConnecting" = "En cours de connexion";
 "account.statusUnknown" = "Inconnu";
-"account.statusConnectionerror" = "Connection Error";
+"account.statusConnectionerror" = "Erreur de connexion";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Aucun contact bloqué";
@@ -241,5 +243,5 @@
 
 //General Settings
 "generalSettings.title" = "Paramètres généraux";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "Activer l'accélération vidéo";
 

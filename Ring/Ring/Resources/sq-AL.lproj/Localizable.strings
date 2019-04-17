@@ -84,6 +84,8 @@
 "createAccount.PasswordInformation" = "Zgjidhni një fjalëkalim për të fshehtëzuar llogarinë tuaj vendore. Mos e harroni, përndryshe s’do të jeni në gjendje të rimerrni llogarinë tuaj";
 "createAccount.EnableNotifications" = "Njoftime";
 "createAccount.Recommended" = "(E këshilluar)";
+"createAccount.UsernameNotRegisteredTitle" = "Gabim rrjeti";
+"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
