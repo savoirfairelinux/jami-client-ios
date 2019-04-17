@@ -205,6 +205,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
                 self?.showAccountCreationInProgress()
             case .success:
                 self?.hideAccountCreationHud()
+            case .nameNotRegistered:
+                self?.hideAccountCreationHud()
+                self?.showNameNotRegistered()
             default:
                 self?.hideAccountCreationHud()
             }
@@ -283,6 +286,20 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
                                            message: error.message,
                                            preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: L10n.Global.ok, style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func showNameNotRegistered() {
+        let alert = UIAlertController
+            .init(title: L10n.CreateAccount.usernameNotRegisteredTitle,
+                  message: L10n.CreateAccount.usernameNotRegisteredMessage,
+                  preferredStyle: .alert)
+        let okAction =
+            UIAlertAction(title: L10n.Global.ok,
+                          style: .default) { [weak self](_: UIAlertAction!) -> Void in
+                            self?.viewModel.finish()
+        }
+        alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
 }

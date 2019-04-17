@@ -79,6 +79,7 @@ enum AccountCreationState {
     case unknown
     case started
     case success
+    case nameNotRegistered
     case error(error: AccountCreationError)
 
     var isInProgress: Bool {
@@ -268,15 +269,33 @@ class CreateAccountViewModel: Stateable, ViewModel {
         let password = self.password.value
 
         self.accountService
-            .addRingAccount(username: username, password: password, enable: self.notificationSwitch.value)
+            .addRingAccount(username: username,
+                            password: password,
+                            enable: self.notificationSwitch.value)
             .subscribe(onNext: { [unowned self] (account) in
-                self.accountCreationState.value = .success
-                DispatchQueue.main.async {
-                    self.stateSubject.onNext(WalkthroughState.accountCreated)
+                if username.isEmpty {
+                    self.accountCreationState.value = .success
+                    DispatchQueue.main.async {
+                        self.stateSubject.onNext(WalkthroughState.accountCreated)
+                    }
+                    return
                 }
-                self.nameService.registerName(withAccount: account.id,
-                                              password: password,
-                                              name: username)
+                self.nameService.registerNameObservable(withAccount: account.id,
+                                                        password: password,
+                                                        name: username)
+                    .subscribe(onNext: { registered in
+                        if registered {
+                            self.accountCreationState.value = .success
+                            DispatchQueue.main.async {
+                                self.stateSubject
+                                    .onNext(WalkthroughState.accountCreated)
+                            }
+                        } else {
+                            self.accountCreationState.value = .nameNotRegistered
+                        }
+                    }, onError: { _ in
+                        self.accountCreationState.value = .nameNotRegistered
+                    }).disposed(by: self.disposeBag)
                 }, onError: { [unowned self] (error) in
                     if let error = error as? AccountCreationError {
                         self.accountCreationState.value = .error(error: error)
@@ -286,6 +305,10 @@ class CreateAccountViewModel: Stateable, ViewModel {
             })
             .disposed(by: self.disposeBag)
         self.enablePushNotifications(enable: self.notificationSwitch.value)
+    }
+
+    func finish() {
+        self.stateSubject.onNext(WalkthroughState.accountCreated)
     }
 
     func enablePushNotifications(enable: Bool) {

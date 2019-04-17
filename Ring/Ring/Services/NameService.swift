@@ -53,9 +53,12 @@ class NameService: NameRegistrationAdapterDelegate {
      Status of the current username validation request
      */
     var usernameValidationStatus = PublishSubject<UsernameValidationStatus>()
+    fileprivate let registrationStatus = PublishSubject<ServiceEvent>()
+    var sharedRegistrationStatus: Observable<ServiceEvent>
 
     init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter) {
         self.nameRegistrationAdapter = nameRegistrationAdapter
+        self.sharedRegistrationStatus = registrationStatus.share()
         NameRegistrationAdapter.delegate = self
     }
 
@@ -103,6 +106,39 @@ class NameService: NameRegistrationAdapterDelegate {
         self.nameRegistrationAdapter.registerName(withAccount: account, password: password, name: name)
     }
 
+    func registerNameObservable(withAccount account: String, password: String, name: String)-> Observable<Bool> {
+        let registerName: Single<Bool> =
+            Single.create(subscribe: { (single) -> Disposable in
+        self.nameRegistrationAdapter
+            .registerName(withAccount: account,
+                          password: password,
+                          name: name)
+            single(.success(true))
+            return Disposables.create {
+            }
+        })
+
+        let filteredDaemonSignals = self.sharedRegistrationStatus
+            .filter { (serviceEvent) -> Bool in
+                if serviceEvent.getEventInput(ServiceEventInput.accountId) != account {return false}
+                if serviceEvent.eventType != .nameRegistrationEnded {
+                    return false
+                }
+                return true
+        }
+        return Observable
+            .combineLatest(registerName.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in
+                guard let status: NameRegistrationState = serviceEvent.getEventInput(ServiceEventInput.state)
+                    else {return false}
+                switch status {
+                case .success:
+                    return true
+                default:
+                    return false
+                }
+            }
+    }
+
     // MARK: NameService delegate
 
     internal func registeredNameFound(with response: LookupNameResponse) {
@@ -132,5 +168,9 @@ class NameService: NameRegistrationAdapterDelegate {
         } else {
             log.debug("Name Registration failed. State = \(response.state.rawValue)")
         }
+        var event = ServiceEvent(withEventType: .nameRegistrationEnded)
+        event.addEventInput(.state, value: response.state)
+        event.addEventInput(.accountId, value: response.accountId)
+        self.registrationStatus.onNext(event)
     }
 }

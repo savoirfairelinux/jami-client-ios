@@ -43,6 +43,7 @@ enum ServiceEventType {
     case dataTransferMessageUpdated
     case deviceRevocationEnded
     case newIncomingMessage
+    case nameRegistrationEnded
 }
 
 /**
