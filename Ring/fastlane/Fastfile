@@ -54,15 +54,6 @@ platform :ios do
     pilot(
       skip_waiting_for_build_processing: true
     )
-    new_build_number = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
-    current_version = get_version_number
-    message = "project: bump to version #{current_version}.#{new_build_number} for release"
-    clean_build_artifacts
-    commit_version_bump(
-      xcodeproj: "Ring.xcodeproj",
-      message: message,
-      force: true
-    )
   end
 
   after_all do |lane|
