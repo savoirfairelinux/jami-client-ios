@@ -30,6 +30,7 @@ enum DataAccessError: Error {
 final class DBContainer {
     var jamiDB: Connection?
     private var connections = [String: Connection?]()
+    var connectionsSemaphore = DispatchSemaphore(value: 1)
     private let log = SwiftyBeaver.self
     private let jamiDBName = "ring.db"
     private let path: String?
@@ -69,11 +70,13 @@ final class DBContainer {
         }
         guard let dbPath = path else { return nil }
         do {
-            let accountDb = try Connection("\(dbPath)/" + "\(account).db")
-            accountDb.userVersion = dbVersion
-            connections[account] = accountDb
-            return accountDb
+            self.connectionsSemaphore.wait()
+            connections[account] = try Connection("\(dbPath)/" + "\(account).db")
+            connections[account]??.userVersion = dbVersion
+            self.connectionsSemaphore.signal()
+            return connections[account] ?? nil
         } catch {
+            self.connectionsSemaphore.signal()
             log.error("Unable to open database")
             return nil
         }
