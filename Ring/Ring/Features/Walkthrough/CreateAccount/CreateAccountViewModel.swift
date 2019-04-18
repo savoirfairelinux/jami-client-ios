@@ -80,6 +80,7 @@ enum AccountCreationState {
     case started
     case success
     case nameNotRegistered
+    case timeOut
     case error(error: AccountCreationError)
 
     var isInProgress: Bool {
@@ -88,6 +89,15 @@ enum AccountCreationState {
             return true
         default:
             return false
+        }
+    }
+
+    var isCompleted: Bool {
+        switch self {
+        case .unknown, .started:
+            return false
+        default:
+            return true
         }
     }
 
@@ -280,9 +290,9 @@ class CreateAccountViewModel: Stateable, ViewModel {
                     }
                     return
                 }
-                self.nameService.registerNameObservable(withAccount: account.id,
-                                                        password: password,
-                                                        name: username)
+                let disposable = self.nameService.registerNameObservable(withAccount: account.id,
+                                                                         password: password,
+                                                                         name: username)
                     .subscribe(onNext: { registered in
                         if registered {
                             self.accountCreationState.value = .success
@@ -295,7 +305,15 @@ class CreateAccountViewModel: Stateable, ViewModel {
                         }
                     }, onError: { _ in
                         self.accountCreationState.value = .nameNotRegistered
-                    }).disposed(by: self.disposeBag)
+                    })
+                DispatchQueue.main
+                    .asyncAfter(deadline: .now() + 6) {
+                        disposable.dispose()
+                        if self.accountCreationState.value.isCompleted {
+                            return
+                        }
+                        self.accountCreationState.value = .timeOut
+                }
                 }, onError: { [unowned self] (error) in
                     if let error = error as? AccountCreationError {
                         self.accountCreationState.value = .error(error: error)

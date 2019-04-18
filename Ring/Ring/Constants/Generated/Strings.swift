@@ -249,6 +249,10 @@ internal enum L10n {
     internal static let registerAUsername = L10n.tr("Localizable", "createAccount.RegisterAUsername")
     /// Confirm password
     internal static let repeatPasswordPlaceholder = L10n.tr("Localizable", "createAccount.repeatPasswordPlaceholder")
+    /// Username registration in progress... It could take a few moments.
+    internal static let timeoutMessage = L10n.tr("Localizable", "createAccount.timeoutMessage")
+    /// Account Created
+    internal static let timeoutTitle = L10n.tr("Localizable", "createAccount.timeoutTitle")
     /// username already taken
     internal static let usernameAlreadyTaken = L10n.tr("Localizable", "createAccount.usernameAlreadyTaken")
     /// Account was created but username was not registered

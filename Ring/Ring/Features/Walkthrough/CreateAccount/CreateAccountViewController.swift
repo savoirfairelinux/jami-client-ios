@@ -208,6 +208,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             case .nameNotRegistered:
                 self?.hideAccountCreationHud()
                 self?.showNameNotRegistered()
+            case .timeOut:
+                self?.hideAccountCreationHud()
+                self?.showTimeOutAlert()
             default:
                 self?.hideAccountCreationHud()
             }
@@ -293,6 +296,20 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         let alert = UIAlertController
             .init(title: L10n.CreateAccount.usernameNotRegisteredTitle,
                   message: L10n.CreateAccount.usernameNotRegisteredMessage,
+                  preferredStyle: .alert)
+        let okAction =
+            UIAlertAction(title: L10n.Global.ok,
+                          style: .default) { [weak self](_: UIAlertAction!) -> Void in
+                            self?.viewModel.finish()
+        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func showTimeOutAlert() {
+        let alert = UIAlertController
+            .init(title: L10n.CreateAccount.timeoutTitle,
+                  message: L10n.CreateAccount.timeoutMessage,
                   preferredStyle: .alert)
         let okAction =
             UIAlertAction(title: L10n.Global.ok,

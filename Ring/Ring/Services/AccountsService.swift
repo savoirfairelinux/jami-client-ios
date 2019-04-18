@@ -625,15 +625,9 @@ class AccountsService: AccountAdapterDelegate {
 
     func knownDevicesChanged(for account: String, devices: [String: String]) {
         reloadAccounts()
-        let changedAccount = getAccount(fromAccountId: account)
-        if let changedAccount = changedAccount {
-            let accountHelper = AccountModelHelper(withAccount: changedAccount)
-            if let  uri = accountHelper.ringId {
-                var event = ServiceEvent(withEventType: .knownDevicesChanged)
-                event.addEventInput(.uri, value: uri)
-                self.responseStream.onNext(event)
-            }
-        }
+        var event = ServiceEvent(withEventType: .knownDevicesChanged)
+        event.addEventInput(.accountId, value: account)
+        self.responseStream.onNext(event)
     }
 
     func exportOnRing(withPassword password: String)
@@ -750,18 +744,15 @@ class AccountsService: AccountAdapterDelegate {
     // MARK: - observable account data
 
     func devicesObservable(account: AccountModel) -> Observable<[DeviceModel]> {
-        let accountHelper = AccountModelHelper(withAccount: account)
-        let uri = accountHelper.ringId
-        let accountDevices = Observable.from(optional: account.devices)
+        let accountDevices: Observable<[DeviceModel]> = Observable.just(account.devices)
         let newDevice: Observable<[DeviceModel]> = self
             .sharedResponseStream
             .filter({ (event) in
                 return event.eventType == ServiceEventType.knownDevicesChanged &&
-                    event.getEventInput(ServiceEventInput.uri) == uri
+                    event.getEventInput(ServiceEventInput.accountId) == account.id
             }).map({ _ in
                 return account.devices
             })
-
         return accountDevices.concat(newDevice)
     }
 }
