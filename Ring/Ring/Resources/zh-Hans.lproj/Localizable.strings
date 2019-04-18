@@ -85,7 +85,9 @@
 "createAccount.EnableNotifications" = "通知";
 "createAccount.Recommended" = "（建議）";
 "createAccount.UsernameNotRegisteredTitle" = "網路錯誤";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
+"createAccount.UsernameNotRegisteredMessage" = "帳號已建立，但未註冊使用者名稱";
+"createAccount.timeoutTitle" = "Account Created";
+"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "帳號連結";

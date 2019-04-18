@@ -85,7 +85,9 @@
 "createAccount.EnableNotifications" = "Njoftime";
 "createAccount.Recommended" = "(E këshilluar)";
 "createAccount.UsernameNotRegisteredTitle" = "Gabim rrjeti";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
+"createAccount.UsernameNotRegisteredMessage" = "Llogaria u krijua, por emri i përdoruesit s’u regjistrua";
+"createAccount.timeoutTitle" = "Account Created";
+"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";

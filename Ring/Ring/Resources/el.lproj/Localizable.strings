@@ -86,6 +86,8 @@
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Σφάλμα δικτύου";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
+"createAccount.timeoutTitle" = "Account Created";
+"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";

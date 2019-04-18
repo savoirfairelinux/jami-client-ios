@@ -86,6 +86,8 @@
 "createAccount.Recommended" = "(Рекомендовано)";
 "createAccount.UsernameNotRegisteredTitle" = "Ошибка сети";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
+"createAccount.timeoutTitle" = "Account Created";
+"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Соединение аккаунта";
