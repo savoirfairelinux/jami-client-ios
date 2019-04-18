@@ -277,11 +277,11 @@ class DBManager {
                 guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
                     throw DBBridgingError.getConversationFailed
                 }
-                try dataBase.transaction {
+                try dataBase.transaction(Connection.TransactionMode.immediate, block: {
                     let conversations = try self.buildConversationsForAccount(accountId: accountId)
                     observable.onNext(conversations)
                     observable.on(.completed)
-                }
+                })
             } catch {
                 observable.on(.error(DBBridgingError.getConversationFailed))
             }
