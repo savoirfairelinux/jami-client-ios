@@ -261,11 +261,11 @@ class MeViewModel: ViewModel, Stateable {
             self.isAccountSip.value = account.type == AccountType.sip
         }
         return Observable.combineLatest(jamiSettings, sipSettings,
-                                 isAccountSip.asObservable()) {(jami, sip, isSip) in
-            if isSip == true {
-                return sip
-            }
-            return jami
+                                        isAccountSip.asObservable()) {(jami, sip, isSip) in
+                                            if isSip == true {
+                                                return sip
+                                            }
+                                            return jami
         }
     }()
 
@@ -300,16 +300,22 @@ class MeViewModel: ViewModel, Stateable {
             sipInfoUpdated.onNext(true)
             return
         }
-        if let accountName = account.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)),
-            !accountName.isEmpty {
-            currentAccountUserName.onNext(accountName)
-        } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-            let accountName = userNameData[account.id] as? String,
-            !accountName.isEmpty {
-            currentAccountUserName.onNext(accountName)
-        } else {
-            currentAccountUserName.onNext("")
-        }
+        self.nameService.sharedRegistrationStatus
+            .filter { (serviceEvent) -> Bool in
+                if serviceEvent.getEventInput(ServiceEventInput.accountId) != account.id {return false}
+                if serviceEvent.eventType != .nameRegistrationEnded {
+                    return false
+                }
+                return true
+            }.subscribe(onNext: { [unowned self] _ in
+                if  !self.userNameForAccount(account: account).isEmpty {
+                    self.currentAccountUserName
+                        .onNext(self.userNameForAccount(account: account))
+                }
+                }, onError: { _ in
+            }).disposed(by: self.tempBag)
+        self.currentAccountUserName
+            .onNext(self.userNameForAccount(account: account))
         if let jamiId =  AccountModelHelper.init(withAccount: account).ringId {
             currentAccountJamiId.onNext(jamiId)
         } else {
@@ -324,6 +330,18 @@ class MeViewModel: ViewModel, Stateable {
             .subscribe(onNext: { [unowned self] enable in
                 self.currentAccountProxy.onNext(enable)
             }).disposed(by: self.tempBag)
+    }
+
+    func userNameForAccount(account: AccountModel) -> String {
+        if let accountName = account.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)),
+            !accountName.isEmpty {
+            return accountName
+        } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+            let accountName = userNameData[account.id] as? String,
+            !accountName.isEmpty {
+            return accountName
+        }
+        return ""
     }
 
     func linkDevice() {
