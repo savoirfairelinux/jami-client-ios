@@ -27,10 +27,18 @@ class ContactRequestTabBarItem: ViewModel, TabBarItemViewModel {
 
     required init(with injectionBag: InjectionBag) {
         let contactService = injectionBag.contactsService
-        self.itemBadgeValue = contactService.contactRequests.asObservable().map({items in
-            if items.isEmpty {
-                return nil
-            }
-            return "\(items.count)"})
+        let accountService = injectionBag.accountService
+        self.itemBadgeValue = contactService.contactRequests
+            .asObservable()
+            .map({ contactRequests in
+                return contactRequests
+                    .filter { $0.accountId == accountService
+                        .currentAccount?.id }
+            })
+            .map({items in
+                if items.isEmpty {
+                    return nil
+                }
+                return "\(items.count)"})
     }
 }

@@ -73,6 +73,10 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     lazy var hasInvitations: Observable<Bool> = {
         return self.contactsService.contactRequests
             .asObservable()
+            .map({ [unowned self] contactRequests in
+                return contactRequests
+                    .filter { $0.accountId == self.accountsService.currentAccount?.id }
+            })
             .map({ items in
                 return !items.isEmpty
             })
