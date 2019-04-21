@@ -35,13 +35,10 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var dialpadButton: UIButton!
     @IBOutlet  weak var switchSpeakerButton: UIButton!
     @IBOutlet  weak var cancelButton: UIButton!
-    //@IBOutlet  weak var spaceButton: UIButton!
     @IBOutlet  weak var switchCameraButton: UIButton!
 
     //Constraints
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cancelButtonCenterConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cancelButtonRightAlligmentConstraint: NSLayoutConstraint!
     @IBOutlet weak var cancelButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var cancelButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackViewYConstraint: NSLayoutConstraint!
@@ -100,8 +97,6 @@ class ButtonsContainerView: UIView, NibLoadable {
             switchSpeakerButton.isHidden = true
             cancelButton.isHidden = false
             cancelButtonBottomConstraint.constant = 20
-            cancelButtonRightAlligmentConstraint.priority = UILayoutPriority(rawValue: 250.0)
-            cancelButtonCenterConstraint.priority = UILayoutPriority(rawValue: 999.0)
     }
 
     func optionsWithSpeaker() {
@@ -116,14 +111,10 @@ class ButtonsContainerView: UIView, NibLoadable {
                     dialpadButton.isHidden = false
                 }
                 cancelButtonBottomConstraint.constant = 20
-                cancelButtonRightAlligmentConstraint.priority = UILayoutPriority(rawValue: 250.0)
-                cancelButtonCenterConstraint.priority = UILayoutPriority(rawValue: 999.0)
             } else {
                 muteVideoButton.isHidden = false
                 switchCameraButton.isHidden = false
                 cancelButtonBottomConstraint.constant = 120
-                cancelButtonCenterConstraint.priority = UILayoutPriority(rawValue: 250.0)
-                cancelButtonRightAlligmentConstraint.priority = UILayoutPriority(rawValue: 999.0)
             }
             pauseCallButton.isHidden = false
             switchSpeakerButton.isEnabled = true
@@ -142,14 +133,10 @@ class ButtonsContainerView: UIView, NibLoadable {
                     dialpadButton.isHidden = false
                 }
                 cancelButtonBottomConstraint.constant = 20
-                cancelButtonRightAlligmentConstraint.priority = UILayoutPriority(rawValue: 250.0)
-                cancelButtonCenterConstraint.priority = UILayoutPriority(rawValue: 999.0)
             } else {
                 switchCameraButton.isHidden = false
                 muteVideoButton.isHidden = false
                 cancelButtonBottomConstraint.constant = 120
-                cancelButtonCenterConstraint.priority = UILayoutPriority(rawValue: 250.0)
-                cancelButtonRightAlligmentConstraint.priority = UILayoutPriority(rawValue: 999.0)
             }
             switchSpeakerButton.isEnabled = false
             self.muteAudioButton.isHidden = false

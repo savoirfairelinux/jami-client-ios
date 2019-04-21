@@ -15,9 +15,7 @@
                 <outlet property="backgroundBlurEffect" destination="w5l-pw-1ET" id="YYh-qB-WIL"/>
                 <outlet property="cancelButton" destination="ZxT-mA-1xU" id="4nk-iI-vPV"/>
                 <outlet property="cancelButtonBottomConstraint" destination="Ilu-Zu-JqW" id="Yeg-Ca-8pf"/>
-                <outlet property="cancelButtonCenterConstraint" destination="ls1-Ze-LXF" id="C7A-Xr-QqX"/>
                 <outlet property="cancelButtonHeightConstraint" destination="kls-aA-2zS" id="CzE-vC-V5Z"/>
-                <outlet property="cancelButtonRightAlligmentConstraint" destination="E6D-cY-KlH" id="6nx-eq-uuw"/>
                 <outlet property="cancelButtonWidthConstraint" destination="0vV-4C-odp" id="beL-yR-ehA"/>
                 <outlet property="container" destination="a9g-pf-bHy" id="6bw-CB-5qN"/>
                 <outlet property="containerHeightConstraint" destination="Gjk-7U-rEe" id="G5G-Uh-zRV"/>
@@ -195,7 +193,7 @@
                             </constraints>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxT-mA-1xU">
-                            <rect key="frame" x="290" y="10" width="70" height="70"/>
+                            <rect key="frame" x="152.5" y="10" width="70" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="0vV-4C-odp"/>
                                 <constraint firstAttribute="height" constant="70" id="kls-aA-2zS"/>
@@ -218,7 +216,6 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="w5l-pw-1ET" secondAttribute="bottom" id="6qu-Nn-b1Y"/>
-                        <constraint firstItem="ZxT-mA-1xU" firstAttribute="trailing" secondItem="RHx-cL-CV5" secondAttribute="trailing" priority="999" id="E6D-cY-KlH"/>
                         <constraint firstAttribute="height" constant="200" id="Gjk-7U-rEe"/>
                         <constraint firstAttribute="bottom" secondItem="ZxT-mA-1xU" secondAttribute="bottom" constant="120" id="Ilu-Zu-JqW"/>
                         <constraint firstAttribute="trailing" secondItem="w5l-pw-1ET" secondAttribute="trailing" id="TnQ-lp-9B9"/>
@@ -226,7 +223,7 @@
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="ZfR-cx-MUB"/>
                         <constraint firstItem="w5l-pw-1ET" firstAttribute="leading" secondItem="a9g-pf-bHy" secondAttribute="leading" id="bbd-5D-5So"/>
                         <constraint firstItem="RHx-cL-CV5" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="bmE-qo-8aJ"/>
-                        <constraint firstItem="ZxT-mA-1xU" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" priority="250" id="ls1-Ze-LXF"/>
+                        <constraint firstItem="ZxT-mA-1xU" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="ls1-Ze-LXF"/>
                         <constraint firstAttribute="trailing" secondItem="RHx-cL-CV5" secondAttribute="trailing" constant="15" id="pgj-7m-5gr"/>
                         <constraint firstAttribute="bottom" secondItem="RHx-cL-CV5" secondAttribute="bottom" constant="30" id="z8B-uv-Vcb"/>
                     </constraints>

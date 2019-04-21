@@ -598,7 +598,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         UIView.animate(withDuration: 0.2, animations: { [unowned self] in
             self.resizeCapturedVideo(withInfoContainer: false)
             self.infoContainerTopConstraint.constant = 150
-            self.buttonsContainerBottomConstraint.constant = -150
+            self.buttonsContainerBottomConstraint.constant = -200
             self.view.layoutIfNeeded()
             }, completion: { [weak self] _ in
                 self?.infoContainer.isHidden = true
