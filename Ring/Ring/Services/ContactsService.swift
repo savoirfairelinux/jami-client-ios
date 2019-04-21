@@ -28,6 +28,7 @@ enum ContactServiceError: Error {
     case vCardSerializationFailed
     case loadVCardFailed
     case saveVCardFailed
+    case removeContactFailed
 }
 
 class ContactsService {
@@ -225,10 +226,14 @@ class ContactsService {
 
     func removeContact(withUri uri: String, ban: Bool, withAccountId accountId: String) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
-            self.contactsAdapter.removeContact(withURI: uri, accountId: accountId, ban: ban)
-            if let hash = JamiURI.init(schema: URIType.ring, infoHach: uri).hash {
-                self.removeContactRequest(withRingId: hash)
+            guard let hash = JamiURI
+                .init(schema: URIType.ring,
+                      infoHach: uri).hash else {
+                observable.on(.error(ContactServiceError.removeContactFailed))
+                return Disposables.create { }
             }
+            self.contactsAdapter.removeContact(withURI: hash, accountId: accountId, ban: ban)
+            self.removeContactRequest(withRingId: hash)
             observable.on(.completed)
             return Disposables.create { }
         }
