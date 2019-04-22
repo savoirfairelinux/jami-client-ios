@@ -85,9 +85,9 @@
 "createAccount.EnableNotifications" = "Aviseringar";
 "createAccount.Recommended" = "(Rekommenderas)";
 "createAccount.UsernameNotRegisteredTitle" = "Nätverksfel";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.UsernameNotRegisteredMessage" = "Konto har skapats men användarnamn har inte registrerats";
+"createAccount.timeoutTitle" = "Konto skapat";
+"createAccount.timeoutMessage" = "Registrering av användarnamn pågår... det kan ta en stund.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontokoppling";

@@ -86,8 +86,8 @@
 "createAccount.Recommended" = "(recomendado)";
 "createAccount.UsernameNotRegisteredTitle" = "Erro de rede";
 "createAccount.UsernameNotRegisteredMessage" = "A conta foi criada mas o nome de utilizador não foi registado";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.timeoutTitle" = "Conta criada";
+"createAccount.timeoutMessage" = "A registar o nome de utilizador... Pode demorar um pouco.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Associar conta";

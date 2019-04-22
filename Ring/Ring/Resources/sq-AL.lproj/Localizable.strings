@@ -86,8 +86,8 @@
 "createAccount.Recommended" = "(E këshilluar)";
 "createAccount.UsernameNotRegisteredTitle" = "Gabim rrjeti";
 "createAccount.UsernameNotRegisteredMessage" = "Llogaria u krijua, por emri i përdoruesit s’u regjistrua";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.timeoutTitle" = "Llogaria u Krijua";
+"createAccount.timeoutMessage" = "Regjistrim përdoruesi në kryerje e sipër… Mund të dojë pak çaste.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
