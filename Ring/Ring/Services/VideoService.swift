@@ -314,7 +314,6 @@ class VideoService: FrameExtractorDelegate {
     var currentOrientation: AVCaptureVideoOrientation
 
     private let log = SwiftyBeaver.self
-    private var blockOutgoingFrame = true
     private var hardwareAccelerated = true
     var angle: Int = 0
     var supportAVPixelFormat = false
@@ -405,7 +404,6 @@ class VideoService: FrameExtractorDelegate {
         if hardwareAccelerated || supportAVPixelFormat {
             return
         }
-        self.blockOutgoingFrame = true
         let deviceName: String =
             (orientation == .landscapeLeft || orientation == .landscapeRight) ?
                 self.camera.nameLandscape : self.camera.namePortrait
@@ -475,7 +473,6 @@ extension VideoService: VideoAdapterDelegate {
         self.log.debug("Capture started...")
         self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
         self.camera.startCapturing()
-        self.blockOutgoingFrame = false
     }
 
     func startVideoCaptureBeforeCall() {
@@ -506,9 +503,6 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
-        if self.blockOutgoingFrame {
-            return
-        }
         if self.hardwareAccelerated || self.supportAVPixelFormat {
             if let cgImage = image.cgImage {
                 self.capturedVideoFrame

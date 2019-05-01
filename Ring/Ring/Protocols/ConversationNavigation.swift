@@ -30,6 +30,7 @@ enum ConversationState: State {
     case createNewAccount()
     case showDialpad(inCall: Bool)
     case showGeneralSettings()
+    case navigateToCall(call: CallModel)
 }
 
 protocol ConversationNavigation: class {

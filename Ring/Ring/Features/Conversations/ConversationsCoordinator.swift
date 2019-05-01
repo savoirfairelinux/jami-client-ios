@@ -59,18 +59,19 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self.showDialpad(inCall: inCall)
             case .showGeneralSettings:
                 self.showGeneralSettings()
+            case .navigateToCall(let call):
+                self.openCall(call: call)
             default:
                 break
             }
         }).disposed(by: self.disposeBag)
 
-        self.callService.newCall.asObservable()
-            .map({ call in
-            return call
-        }).observeOn(MainScheduler.instance)
+        self.callService.newCall
+            .asObservable()
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (call) in
-             self.showCallAlert(call: call)
-        }).disposed(by: self.disposeBag)
+                self.showCallController(call: call)
+            }).disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
         NotificationCenter.default.addObserver(self, selector: #selector(self.incomingCall(_:)), name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue), object: nil)
@@ -150,7 +151,17 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             }).disposed(by: self.disposeBag)
     }
 
-    private func showCallAlert(call: CallModel) {
+    func showCallController (call: CallModel) {
+        guard var topController = UIApplication.shared
+            .keyWindow?.rootViewController else {
+                return
+        }
+        while let presentedViewController = topController.presentedViewController {
+            topController = presentedViewController
+        }
+        if topController.isKind(of: (CallViewController).self) {
+            return
+        }
         guard let account = self.accountService
             .getAccount(fromAccountId: call.accountId) else {return}
         if call.callId.isEmpty {
@@ -169,35 +180,24 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             helper.presentCallNotification(data: data, callService: self.callService)
             return
         }
-        var accountName = !account.registeredName.isEmpty ?
-            account.registeredName : account.type == AccountType.sip ?
-                account.username : account.jamiId
-        if let accountProfie = self.accountService.getAccountProfile(accountId: account.id), let name = accountProfie.alias,
-            !name.isEmpty {
-            accountName = name
-        }
-        let message = accountName.isEmpty ? nil : "To: " + accountName
-        let alertStyle = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) ? UIAlertControllerStyle.alert : UIAlertControllerStyle.actionSheet
-        let alert = UIAlertController(title: L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)", message: message, preferredStyle: alertStyle)
-        alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonAccept, style: UIAlertActionStyle.default, handler: { (_) in
-            self.answerIncomingCall(call: call)
-            alert.dismiss(animated: true, completion: nil)}))
-        alert.addAction(UIAlertAction(title: L10n.Alerts.incomingCallButtonIgnore, style: UIAlertActionStyle.default, handler: { (_) in
-            self.injectionBag.callService.refuse(callId: call.callId)
-                .subscribe({_ in
-                    print("Call ignored")
-                }).disposed(by: self.disposeBag)
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        self.present(viewController: alert, withStyle: .present, withAnimation: true, disposeBag: self.disposeBag)
+        let callViewController = CallViewController
+            .instantiate(with: self.injectionBag)
+        callViewController.viewModel.call = call
+        topController.present(callViewController, animated: true, completion: nil)
+    }
 
-        self.callService.currentCall.takeUntil(alert.rx.controllerWasDismissed).filter({ currentCall in
-            return currentCall.callId == call.callId &&
-                (currentCall.state == .over || currentCall.state == .failure)
-        }).subscribe(onNext: { _ in
-            DispatchQueue.main.async {
-                alert.dismiss(animated: true, completion: nil)
-            }
-        }).disposed(by: self.disposeBag)
+    func openCall (call: CallModel) {
+        let controlles = self.navigationViewController.viewControllers
+        for controller in controlles
+            where controller.isKind(of: (CallViewController).self) {
+                if let callcontroller = controller as? CallViewController, callcontroller.viewModel.call?.callId == call.callId {
+                    self.navigationViewController
+                        .present(callcontroller,
+                                 animated: true,
+                                 completion: nil)
+                    return
+                }
+        }
+        self.showCallController(call: call)
     }
 }
