@@ -61,7 +61,7 @@ class CallViewModel: Stateable, ViewModel {
                                                            with: self.callService,
                                                            audioService: self.audioService,
                                                            callID: call.callId,
-                                                           isSipCall: type)
+                                                           isSipCall: type, isIncoming: call.callType == .incoming)
         }
     }
 
