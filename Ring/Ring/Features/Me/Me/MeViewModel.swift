@@ -24,6 +24,7 @@ import Foundation
 import RxSwift
 import RxDataSources
 
+// swiftlint:disable file_length
 enum SettingsSection: SectionModelType {
 
     typealias Item = SectionRow

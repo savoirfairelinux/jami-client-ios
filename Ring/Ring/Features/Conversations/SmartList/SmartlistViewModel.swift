@@ -23,6 +23,7 @@
 import RxSwift
 import SwiftyBeaver
 
+// swiftlint:disable type_body_length
 class SmartlistViewModel: Stateable, ViewModel {
 
     private let log = SwiftyBeaver.self
@@ -43,6 +44,7 @@ class SmartlistViewModel: Stateable, ViewModel {
     fileprivate let contactsService: ContactsService
     fileprivate let networkService: NetworkService
     fileprivate let profileService: ProfilesService
+    fileprivate let callService: CallsService
 
     let searchBarText = Variable<String>("")
     var isSearching: Observable<Bool>!
@@ -77,6 +79,7 @@ class SmartlistViewModel: Stateable, ViewModel {
                             return false
             }).observeOn(MainScheduler.instance)
     }()
+
     var searchStatus = PublishSubject<String>()
     var connectionState = PublishSubject<ConnectionType>()
     lazy var accounts: Observable<[AccountItem]> = { [unowned self] in
@@ -205,6 +208,7 @@ class SmartlistViewModel: Stateable, ViewModel {
         self.contactsService = injectionBag.contactsService
         self.networkService = injectionBag.networkService
         self.profileService = injectionBag.profileService
+        self.callService = injectionBag.callService
         self.injectionBag = injectionBag
 
         self.accountsService.currentAccountChanged
@@ -408,5 +412,51 @@ class SmartlistViewModel: Stateable, ViewModel {
 
     func showGeneralSettings() {
         self.stateSubject.onNext(ConversationState.showGeneralSettings())
+    }
+
+    lazy var callButtonTitle: Observable<String> = { [unowned self] in
+        return self.callService
+            .currentCall
+            .share()
+            .asObservable()
+            .map({ call in
+                let callIsValid = self.callIsValid(call: call)
+                let title =  callIsValid ?
+                    call.stateValue == CallState.incoming.rawValue ?
+                        L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)" :
+                        L10n.Calls.currentCallWith + "\(call.displayName)" : ""
+                return title
+            })
+        }()
+
+    lazy var showCallButton: Observable<Bool> = { [unowned self] in
+        return self.callService
+            .currentCall
+            .share()
+            .asObservable()
+            .map({ call in
+                let callIsValid = self.callIsValid(call: call)
+                self.currentCallId.value = callIsValid ? call.callId : ""
+                return callIsValid
+            })
+        }()
+
+    let currentCallId = Variable<String>("")
+
+    func callIsValid (call: CallModel) -> Bool {
+        return call.stateValue == CallState.hold.rawValue ||
+            call.stateValue == CallState.unhold.rawValue ||
+            call.stateValue == CallState.incoming.rawValue ||
+            call.stateValue == CallState.connecting.rawValue ||
+            call.stateValue == CallState.ringing.rawValue ||
+            call.stateValue == CallState.current.rawValue
+    }
+    func openCall() {
+        guard let call = self.callService
+            .call(callID: self.currentCallId.value) else {
+                return
+        }
+
+        self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
     }
 }

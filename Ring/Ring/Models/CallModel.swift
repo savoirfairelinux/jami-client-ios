@@ -54,7 +54,7 @@ enum CallDetailKey: String {
     case audioOnlyKey = "AUDIO_ONLY"
 }
 
-class CallModel {
+public class CallModel {
 
     var callId: String = ""
     var dateReceived: Date?

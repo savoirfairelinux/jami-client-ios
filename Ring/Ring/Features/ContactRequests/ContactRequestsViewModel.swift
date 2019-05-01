@@ -139,7 +139,11 @@ class ContactRequestsViewModel: Stateable, ViewModel {
             return
         }
 
-        guard let conversation = self.conversationService.findConversation(withRingId: ringId, withAccountId: account.id) else {
+        guard let uri = JamiURI(schema: URIType.ring, infoHach: ringId).uriString else {
+            return
+        }
+
+        guard let conversation = self.conversationService.findConversation(withRingId: uri, withAccountId: account.id) else {
             return
         }
         conversationViewModel.conversation = Variable<ConversationModel>(conversation)

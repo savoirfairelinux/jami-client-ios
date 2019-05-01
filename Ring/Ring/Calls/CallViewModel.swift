@@ -61,7 +61,8 @@ class CallViewModel: Stateable, ViewModel {
                                                            with: self.callService,
                                                            audioService: self.audioService,
                                                            callID: call.callId,
-                                                           isSipCall: type)
+                                                           isSipCall: type,
+                                                           isIncoming: call.callType == .incoming)
         }
     }
 
@@ -149,20 +150,23 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var bottomInfo: Observable<String> = {
-        return callService.currentCall
+        return callService
+            .currentCall
             .filter({ [weak self] call in
                 return call.callId == self?.call?.callId &&
                     call.callType == .outgoing
             }).map({ [weak self] call in
                 switch call.state {
                 case .connecting :
-                        return L10n.Calls.connecting
+                    return L10n.Calls.connecting
                 case .ringing :
-                        return L10n.Calls.ringing
+                    return L10n.Calls.ringing
                 case .over :
-                        return L10n.Calls.callFinished
+                    return L10n.Calls.callFinished
+                case .unknown :
+                    return L10n.Calls.searching
                 default :
-                        return ""
+                    return ""
                 }
         })
     }()

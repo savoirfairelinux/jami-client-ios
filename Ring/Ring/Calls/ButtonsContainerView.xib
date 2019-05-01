@@ -12,9 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
             <connections>
+                <outlet property="acceptCallButton" destination="rfz-9h-HoH" id="V6j-8E-g68"/>
                 <outlet property="backgroundBlurEffect" destination="w5l-pw-1ET" id="YYh-qB-WIL"/>
                 <outlet property="cancelButton" destination="ZxT-mA-1xU" id="4nk-iI-vPV"/>
                 <outlet property="cancelButtonBottomConstraint" destination="Ilu-Zu-JqW" id="Yeg-Ca-8pf"/>
+                <outlet property="cancelButtonCenterConstraint" destination="ls1-Ze-LXF" id="QlC-QB-oPz"/>
                 <outlet property="cancelButtonHeightConstraint" destination="kls-aA-2zS" id="CzE-vC-V5Z"/>
                 <outlet property="cancelButtonWidthConstraint" destination="0vV-4C-odp" id="beL-yR-ehA"/>
                 <outlet property="container" destination="a9g-pf-bHy" id="6bw-CB-5qN"/>
@@ -202,10 +204,29 @@
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
+                                    <real key="value" value="0.0"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                     <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="35"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfz-9h-HoH" userLabel="Accept">
+                            <rect key="frame" x="42.5" y="10" width="70" height="70"/>
+                            <color key="backgroundColor" red="0.45098039215686275" green="0.98039215686274506" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="cRi-F4-pPw"/>
+                                <constraint firstAttribute="height" constant="70" id="vhg-1N-VIL"/>
+                            </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="call_button"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.0"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                     <real key="value" value="35"/>
@@ -217,7 +238,9 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="w5l-pw-1ET" secondAttribute="bottom" id="6qu-Nn-b1Y"/>
                         <constraint firstAttribute="height" constant="200" id="Gjk-7U-rEe"/>
+                        <constraint firstItem="ZxT-mA-1xU" firstAttribute="leading" secondItem="rfz-9h-HoH" secondAttribute="trailing" constant="40" id="Hwg-PM-KNI"/>
                         <constraint firstAttribute="bottom" secondItem="ZxT-mA-1xU" secondAttribute="bottom" constant="120" id="Ilu-Zu-JqW"/>
+                        <constraint firstItem="rfz-9h-HoH" firstAttribute="centerY" secondItem="ZxT-mA-1xU" secondAttribute="centerY" id="NZg-SL-A31"/>
                         <constraint firstAttribute="trailing" secondItem="w5l-pw-1ET" secondAttribute="trailing" id="TnQ-lp-9B9"/>
                         <constraint firstItem="RHx-cL-CV5" firstAttribute="leading" secondItem="a9g-pf-bHy" secondAttribute="leading" constant="15" id="Y9c-4n-eid"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="ZfR-cx-MUB"/>
@@ -242,6 +265,7 @@
     </objects>
     <resources>
         <image name="audio_running" width="48" height="48"/>
+        <image name="call_button" width="43.5" height="43.5"/>
         <image name="dialpad" width="75" height="75"/>
         <image name="disable_speakerphone" width="48" height="48"/>
         <image name="pause_call" width="48" height="48"/>
