@@ -36,9 +36,11 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var switchSpeakerButton: UIButton!
     @IBOutlet  weak var cancelButton: UIButton!
     @IBOutlet  weak var switchCameraButton: UIButton!
+    @IBOutlet  weak var acceptCallButton: UIButton!
 
     //Constraints
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cancelButtonCenterConstraint: NSLayoutConstraint!
     @IBOutlet weak var cancelButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var cancelButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackViewYConstraint: NSLayoutConstraint!
@@ -87,19 +89,28 @@ class ButtonsContainerView: UIView, NibLoadable {
     }
 
     func withoutOptions() {
-            self.container.backgroundColor = UIColor.clear
-            self.backgroundBlurEffect.isHidden = true
-            switchCameraButton.isHidden = true
-            muteAudioButton.isHidden = true
-            muteVideoButton.isHidden = true
-            pauseCallButton.isHidden = true
-            dialpadButton.isHidden = true
-            switchSpeakerButton.isHidden = true
-            cancelButton.isHidden = false
-            cancelButtonBottomConstraint.constant = 20
+        self.container.backgroundColor = UIColor.clear
+        self.backgroundBlurEffect.isHidden = true
+        switchCameraButton.isHidden = true
+        muteAudioButton.isHidden = true
+        muteVideoButton.isHidden = true
+        pauseCallButton.isHidden = true
+        dialpadButton.isHidden = true
+        switchSpeakerButton.isHidden = true
+        cancelButton.isHidden = false
+        if self.viewModel?.isIncoming ?? false {
+            acceptCallButton.isHidden = false
+            cancelButtonBottomConstraint.constant = 60
+            cancelButtonCenterConstraint.constant = 55
+            return
+        }
+        cancelButtonCenterConstraint.constant = -0
+        cancelButtonBottomConstraint.constant = 20
     }
 
     func optionsWithSpeaker() {
+        acceptCallButton.isHidden = true
+        cancelButtonCenterConstraint.constant = -0
         if !self.isCallStarted {
             self.isCallStarted = true
             self.backgroundBlurEffect.isHidden = false
@@ -124,6 +135,8 @@ class ButtonsContainerView: UIView, NibLoadable {
     }
 
     func optionsWithoutSpeaker() {
+        acceptCallButton.isHidden = true
+        cancelButtonCenterConstraint.constant = -0
         if !self.isCallStarted {
             self.isCallStarted = true
             if self.viewModel?.isAudioOnly ?? false {

@@ -34,6 +34,7 @@ public enum AppState: State {
     case addAccount
     case allSet
     case accountRemoved
+    case incomingCall(call: CallModel)
 }
 
 public enum VCType: String {
@@ -90,6 +91,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                 self.showWalkthrough(animated: false, isAccountFirst: false)
             case .accountRemoved:
                 self.accountRemoved()
+            case .incomingCall(let call):
+                self.showIncomingCall(call: call)
             }
         }).disposed(by: self.disposeBag)
     }
@@ -100,6 +103,23 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         self.stateSubject.onNext(AppState.initialLoading)
         //~ Dispatch to the proper screen
         self.dispatchApplication()
+    }
+
+    func showIncomingCall(call: CallModel) {
+    let callViewController = CallViewController
+        .instantiate(with: self.injectionBag)
+    callViewController.viewModel.call = call
+        self.tabBarViewController.present(callViewController, animated: true) {
+
+        }
+//        self.tabBarViewController.setViewControllers([callViewController], animated: true)
+//        self.navigationController.pushViewController(callViewController, animated: true)
+
+//    self.navigationController.setViewControllers([callViewController], animated: true)
+//    self.present(viewController: callViewController,
+//    withStyle: .present,
+//    withAnimation: false,
+//    withStateable: callViewController.viewModel)
     }
 
     func accountRemoved() {

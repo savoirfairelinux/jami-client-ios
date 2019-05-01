@@ -182,6 +182,12 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.removeFromScreen()
             }).disposed(by: self.disposeBag)
 
+        self.buttonsContainer.acceptCallButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.answerCall()
+                    .subscribe()
+            }).disposed(by: self.disposeBag)
+
         self.buttonsContainer.dialpadButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showDialpad()
