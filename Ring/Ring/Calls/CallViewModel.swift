@@ -110,6 +110,7 @@ class CallViewModel: Stateable, ViewModel {
             }).map({ [weak self] hide in
                 if hide {
                     self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation, callID: nil)
+                    self?.videoService.stopAudioDevice()
                 }
                 return hide
             })
@@ -337,6 +338,7 @@ class CallViewModel: Stateable, ViewModel {
                 // switch to either spk or headset (if connected) for loud ringtone
                 // incase we were using rcv during the call
                 self?.audioService.setToRing()
+                self?.videoService.stopAudioDevice()
                 self?.log.info("Call canceled")
                 }, onError: { [weak self] error in
                     self?.log.error("Failed to cancel the call")

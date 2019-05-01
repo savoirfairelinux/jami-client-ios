@@ -42,5 +42,6 @@
 - (void)switchInput:(NSString*)deviceName forCall:(NSString*) callID;
 - (void)setEncodingAccelerated:(BOOL)state;
 - (BOOL)getEncodingAccelerated;
+- (void)stopAudioDevice;
 
 @end
