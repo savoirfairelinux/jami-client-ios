@@ -528,4 +528,8 @@ extension VideoService: VideoAdapterDelegate {
     func supportAVPixelFormat(support: Bool) {
         supportAVPixelFormat = support
     }
+
+    func stopAudioDevice() {
+        videoAdapter.stopAudioDevice()
+    }
 }

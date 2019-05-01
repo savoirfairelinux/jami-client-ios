@@ -262,6 +262,10 @@ static id <VideoAdapterDelegate> _delegate;
     DRing::switchInput(std::string([callID UTF8String]), std::string([deviceName UTF8String]));
 }
 
+- (void)stopAudioDevice {
+    DRing::stopAudioDevice();
+}
+
 #pragma mark PresenceAdapterDelegate
 
 + (id <VideoAdapterDelegate>)delegate {
