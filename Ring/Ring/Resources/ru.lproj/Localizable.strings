@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "хочет поговорить с вами";
 "calls.ringing" = "Вызов…";
 "calls.connecting" = "Соединение…";
+"calls.searching" = "Поиск…";
 "calls.callFinished" = "Вызов завершен";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";

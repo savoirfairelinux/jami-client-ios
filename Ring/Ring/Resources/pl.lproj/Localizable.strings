@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "chce z tobą rozmawiać";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Łączenie...";
+"calls.searching" = "Searching…";
 "calls.callFinished" = "Rozmowa zakończona";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Urządzenia";

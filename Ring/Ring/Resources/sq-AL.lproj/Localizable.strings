@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "dëshiron të flasë me ju";
 "calls.ringing" = "Po thirret…";
 "calls.connecting" = "Po lidhet…";
+"calls.searching" = "Po kërkohet…";
 "calls.callFinished" = "Thirrja përfundoi";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";

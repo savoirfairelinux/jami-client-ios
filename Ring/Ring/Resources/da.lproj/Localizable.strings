@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "vil tale med dig";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Opretter forbindelse…";
+"calls.searching" = "Søger…";
 "calls.callFinished" = "Opkald afsluttet";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheder";

@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "想要與您交談";
 "calls.ringing" = "響鈴中……";
 "calls.connecting" = "正在連線……";
+"calls.searching" = "正在搜尋……";
 "calls.callFinished" = "通話結束";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";

@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "chce s vámi mluvit";
 "calls.ringing" = "Vyzvání…";
 "calls.connecting" = "Spojuje se…";
+"calls.searching" = "Hledá se…";
 "calls.callFinished" = "Hovor ukončen";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Zařízení";

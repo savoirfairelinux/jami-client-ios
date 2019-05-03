@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "میخواهد با شما حرف بزند";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "در حال اتصال...";
+"calls.searching" = "در حال جستجو...";
 "calls.callFinished" = "تماس پایان یافت";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";

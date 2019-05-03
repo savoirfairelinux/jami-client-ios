@@ -85,9 +85,9 @@
 "createAccount.EnableNotifications" = "Értesítések";
 "createAccount.Recommended" = "(Ajánlott)";
 "createAccount.UsernameNotRegisteredTitle" = "Hálózati hiba";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.UsernameNotRegisteredMessage" = "A fiók létrehozva de a felhasználónevét nincs bejegyzett";
+"createAccount.timeoutTitle" = "Fiók létrehozva";
+"createAccount.timeoutMessage" = "Felhasználónév bejegyeztetése folyamatban van, kis türelmet…";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Fiók összekapcsolása";
@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "beszélni akar Önnel";
 "calls.ringing" = "Csörögni…";
 "calls.connecting" = "Kapcsolódás…";
+"calls.searching" = "Keresés…";
 "calls.callFinished" = "A hívás befejeződött";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";

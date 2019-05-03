@@ -39,9 +39,9 @@
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkverbindung";
 "smartlist.cellularAccess" = "Vergewissern Sie sich, dass der Mobilfunkzugang in Ihren Einstellungen erlaubt ist.";
 "smartlist.accountsTitle" = "Konten";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.addAccountButton" = "+ Konto hinzufügen";
+"smartlist.noNumber" = "Der ausgewählte Kontakt hat keine Nummer";
+"smartlist.selectOneNumber" = "Eine der Nummern auswählen";
 
 //Conversation
 "conversation.messagePlaceholder" = "Schreibe deine Nachricht";
@@ -85,9 +85,9 @@
 "createAccount.EnableNotifications" = "Benachrichtigungen";
 "createAccount.Recommended" = "(Empfohlen)";
 "createAccount.UsernameNotRegisteredTitle" = "Netzwerkfehler";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.UsernameNotRegisteredMessage" = "Konto wurde erstellt, aber der Benutzername wurde nicht registriert";
+"createAccount.timeoutTitle" = "Konto erstellt";
+"createAccount.timeoutMessage" = "Registrierung des Benutzernamens läuft..... Es könnte einige Augenblicke dauern.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontenverknüpfung";
@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "möchte mit Dir sprechen.";
 "calls.ringing" = "Klingelt …";
 "calls.connecting" = "Verbinde...";
+"calls.searching" = "Suchen…";
 "calls.callFinished" = "Anruf beendet";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";
@@ -169,8 +171,8 @@
 "accountPage.namePlaceholder" = "Name";
 "accountPage.linkDeviceTitle" = "Weiteres Gerät verknüpfen";
 "accountPage.other" = "Anderes";
-"accountPage.removeAccountTitle" = "Remove account";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountTitle" = "Konto entfernen";
+"accountPage.removeAccountMessage" = "Durch Anklicken von \"Entfernen\" wird dieses Konto auf diesem Gerät gelöscht! Diese Aktion kann nicht rückgängig gemacht werden. Außerdem kann Ihr registrierter Name verloren gehen.";
 "accountPage.removeAccountButton" = "Entfernen";
 //Account
 "account.sipUsername" = "Benutzername";
@@ -178,18 +180,18 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
+"account.createSipAccount" = "SIP-Konto erstellen";
+"account.usernameLabel" = "Benutzername eingeben";
 "account.passwordLabel" = "Passwort eingeben";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "Adresse eingeben";
+"account.portLabel" = "Port-Nummer eingeben";
+"account.accountStatus" = "Kontostatus";
+"account.enableAccount" = "Konto aktivieren";
 "account.statusOnline" = "Online";
 "account.statusOffline" = "Offline";
 "account.statusConnecting" = "Verbindet";
 "account.statusUnknown" = "Unbekannt";
-"account.statusConnectionerror" = "Connection Error";
+"account.statusConnectionerror" = "Verbindungsfehler";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Keine gesperrten Kontakte";
@@ -245,5 +247,5 @@
 
 //General Settings
 "generalSettings.title" = "Allgemeine Einstellungen";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "Videobeschleunigung aktivieren";
 

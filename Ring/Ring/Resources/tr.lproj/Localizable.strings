@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "seninle konuşmak istiyor";
 "calls.ringing" = "Çalıyor...";
 "calls.connecting" = "Bağlanıyor...";
+"calls.searching" = "Arıyor...";
 "calls.callFinished" = "Arama sonlandırıldı";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";

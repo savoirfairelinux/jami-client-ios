@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "ønsker å snakke med deg";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
+"calls.searching" = "Searching…";
 "calls.callFinished" = "Samtale fullført";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";

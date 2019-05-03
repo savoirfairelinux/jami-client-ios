@@ -136,7 +136,9 @@
 "calls.incomingCallInfo" = "nori su jumis pakalbėti";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Jungiamasi…";
+"calls.searching" = "Ieškoma…";
 "calls.callFinished" = "Skambutis užbaigtas";
+"calls.currentCallWith" = "Call with ";
 
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";
