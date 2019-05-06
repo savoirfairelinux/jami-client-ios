@@ -86,15 +86,15 @@
 "createAccount.Recommended" = "(Rekomenduojama)";
 "createAccount.UsernameNotRegisteredTitle" = "Tinklo klaida";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.timeoutTitle" = "Paskyra sukurta";
+"createAccount.timeoutMessage" = "Vyksta naudotojo vardo registracija... Tai gali užtrukti kelias akimirkas.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Paskyros susiejimas";
 "linkToAccount.linkButtonTitle" = "Susieti įrenginį";
 "linkToAccount.passwordPlaceholder" = "Slaptažodis";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.passwordLabel" = "Įveskite slaptažodį";
 "linkToAccount.pinLabel" = "Įveskite PIN";
 "linkToAccount.explanationPinMessage" = "Norėdami generuoti PIN kodą, pereikite į paskyros tvarkymo nustatymus įrenginyje, kuriame yra paskyra, kurią norite naudoti. Įrenginių nustatymuose pasirinkite \"Susieti kitą įrenginį su šia paskyra\". Taip gausite šiai formai reikalingą PIN. PIN galios tik 10 minučių.";
 
@@ -182,7 +182,7 @@
 "account.proxyServer" = "Įgaliotasis serveris";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Enter Password";
+"account.passwordLabel" = "Įveskite slaptažodį";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Paskyros būsena";

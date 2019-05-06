@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Glavni meni";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Pozivi";
 "global.meTabBarTitle" = "Račun";
 "global.ok" = "U redu";
 
@@ -32,8 +32,8 @@
 "smartlist.yesterday" = "Jučer";
 "smartlist.results" = "Search Result";
 "smartlist.conversations" = "Razgovori";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
+"smartlist.searching" = "Tražim...";
+"smartlist.noResults" = "Nema rezultata";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Veza nedostupna";
@@ -58,7 +58,7 @@
 "welcome.createAccount" = "Napravite Jami račun";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Preskoči";
 "createProfile.profileCreated" = "Slijedeće";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -73,11 +73,11 @@
 "createAccount.newPasswordPlaceholder" = "Lozinka";
 "createAccount.repeatPasswordPlaceholder" = "Potvrdi lozinku";
 "createAccount.passwordCharactersNumberError" = "6 znakova minimum";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.passwordNotMatchingError" = "lozinke se ne podudaraju";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.invalidUsername" = "neispravno korisničko ime";
+"createAccount.usernameAlreadyTaken" = "korisničko ime je već zauzeto";
+"createAccount.loading" = "Učitavam";
 "createAccount.waitCreateAccountTitle" = "Dodajem račun";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
@@ -94,20 +94,20 @@
 "linkToAccount.linkButtonTitle" = "Link device";
 "linkToAccount.passwordPlaceholder" = "Lozinka";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
+"linkToAccount.passwordLabel" = "Unesite lozinku";
+"linkToAccount.pinLabel" = "Unesite PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "ne mogu naći račun";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountAddedTitle" = "Račun dodan";
+"alerts.accountNoNetworkTitle" = "Ne mogu se spojiti na mrežu";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
+"alerts.accountDefaultErrorTitle" = "Nepoznata greška";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Pošalji fotografiju";
 "alerts.profileCancelPhoto" = "Poništi";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
@@ -141,7 +141,7 @@
 "calls.currentCallWith" = "Call with ";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "Uređaji";
 "accountPage.settingsHeader" = "Postavke";
 "accountPage.username" = "username:";
 "accountPage.usernameNotRegistered" = "username: not registered";
@@ -182,7 +182,7 @@
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Enter Password";
+"account.passwordLabel" = "Unesite lozinku";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
@@ -198,7 +198,7 @@
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
+"linkDevice.passwordError" = "Lozinka koju ste unijeli ne otvara ovaj račun";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "An error occured during the export";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
@@ -237,8 +237,8 @@
 "dataTransfer.readableStatusCancel" = "Poništi";
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
-"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.contactAdded" = "Kontakt dodan";
+"generatedMessage.invitationReceived" = "Poziv primljen";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Odlazni poziv";
 "generatedMessage.incomingCall" = "Dolazni poziv";

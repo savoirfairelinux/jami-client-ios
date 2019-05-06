@@ -136,9 +136,9 @@
 "calls.incomingCallInfo" = "wilt met u praten";
 "calls.ringing" = "Gaat over…";
 "calls.connecting" = "Bezig met verbinden…";
-"calls.searching" = "Beizg met zoeken…";
+"calls.searching" = "Bezig met zoeken…";
 "calls.callFinished" = "Oproep beëindigd";
-"calls.currentCallWith" = "Call with ";
+"calls.currentCallWith" = "Bellen met";
 
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";

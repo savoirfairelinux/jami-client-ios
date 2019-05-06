@@ -138,7 +138,7 @@
 "calls.connecting" = "Po lidhet…";
 "calls.searching" = "Po kërkohet…";
 "calls.callFinished" = "Thirrja përfundoi";
-"calls.currentCallWith" = "Call with ";
+"calls.currentCallWith" = "Thirre me";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";

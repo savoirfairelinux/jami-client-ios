@@ -138,7 +138,7 @@
 "calls.connecting" = "正在連線……";
 "calls.searching" = "正在搜尋……";
 "calls.callFinished" = "通話結束";
-"calls.currentCallWith" = "Call with ";
+"calls.currentCallWith" = "通話以";
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";

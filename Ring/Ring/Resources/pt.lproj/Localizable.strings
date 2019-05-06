@@ -138,7 +138,7 @@
 "calls.connecting" = "A conectar...";
 "calls.searching" = "A pesquisar…";
 "calls.callFinished" = "Chamada terminada";
-"calls.currentCallWith" = "Call with ";
+"calls.currentCallWith" = "Chamar com";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";

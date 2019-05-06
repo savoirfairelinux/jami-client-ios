@@ -138,7 +138,7 @@
 "calls.connecting" = "Ansluter...";
 "calls.searching" = "Söker...";
 "calls.callFinished" = "Samtalet avslutat";
-"calls.currentCallWith" = "Call with ";
+"calls.currentCallWith" = "Ring upp med";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";

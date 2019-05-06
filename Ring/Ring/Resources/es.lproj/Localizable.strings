@@ -85,8 +85,8 @@
 "createAccount.EnableNotifications" = "Notificaciones";
 "createAccount.Recommended" = "(Recomendado)";
 "createAccount.UsernameNotRegisteredTitle" = "Error en la red";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
+"createAccount.UsernameNotRegisteredMessage" = "Registrado";
+"createAccount.timeoutTitle" = "Cuenta creada";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
@@ -138,7 +138,7 @@
 "calls.connecting" = "Conectando...";
 "calls.searching" = "Buscando";
 "calls.callFinished" = "Llamada finalizada";
-"calls.currentCallWith" = "Call with ";
+"calls.currentCallWith" = "Llamar con";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
@@ -247,5 +247,5 @@
 
 //General Settings
 "generalSettings.title" = "Ajustes generales";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "Habilitar aceleración de video";
 
