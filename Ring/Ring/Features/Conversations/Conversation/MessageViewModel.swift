@@ -90,26 +90,10 @@ class MessageViewModel {
                 })
                 .subscribe(onNext: { [unowned self] transferEvent in
                     guard   let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId),
-                            let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId) else {
-                        self.log.error("MessageViewModel: can't find transferInfo")
+                        let transferStatus: DataTransferStatus = transferEvent.getEventInput(ServiceEventInput.state) else {
                         return
                     }
-                    self.log.debug("MessageViewModel: dataTransferMessageUpdated - id:\(transferId) status:\(stringFromEventCode(with: transferInfo.lastEvent))")
-                    var transferStatus: DataTransferStatus = .unknown
-                    switch transferInfo.lastEvent {
-                    case .closed_by_host, .closed_by_peer:
-                        transferStatus = DataTransferStatus.canceled
-                    case .invalid, .unsupported, .invalid_pathname, .unjoinable_peer:
-                        transferStatus = DataTransferStatus.error
-                    case .wait_peer_acceptance, .wait_host_acceptance:
-                        transferStatus = DataTransferStatus.awaiting
-                    case .ongoing:
-                        transferStatus = DataTransferStatus.ongoing
-                    case .finished:
-                        transferStatus = DataTransferStatus.success
-                    case .created:
-                        transferStatus = DataTransferStatus.created
-                    }
+                    self.log.debug("MessageViewModel: dataTransferMessageUpdated - id:\(transferId) status:\(transferStatus)")
                     self.message.transferStatus = transferStatus
                     self.transferStatus.onNext(transferStatus)
                 })

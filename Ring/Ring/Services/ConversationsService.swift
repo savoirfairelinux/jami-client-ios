@@ -437,6 +437,7 @@ class ConversationsService {
                         let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
                         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                         serviceEvent.addEventInput(.transferId, value: transferId)
+                        serviceEvent.addEventInput(.state, value: transferStatus)
                         self.responseStream.onNext(serviceEvent)
                     }, onError: { _ in
                         self.messagesSemaphore.signal()
