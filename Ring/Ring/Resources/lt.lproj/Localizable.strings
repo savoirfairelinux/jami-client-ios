@@ -63,7 +63,7 @@
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Įveskite rodomą vardą";
 "createProfile.enterNamePlaceholder" = "Įveskite vardą";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.subtitle" = "Jūsų profilis bus bendrinamas tik su jūsų kontaktais. Tai galėsite bet kuriuo metu pakeisti.";
 "createProfile.createYourAvatar" = "Susikurkite avatarą";
 
 //Create Account form
