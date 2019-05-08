@@ -78,6 +78,7 @@ class LocalNotificationsHelper {
             content.title = title
             content.body = body
             content.userInfo = data
+            content.sound = UNNotificationSound.default()
             content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
             let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
             let identifier = Int64(arc4random_uniform(10000000))
@@ -92,6 +93,7 @@ class LocalNotificationsHelper {
             notification.alertTitle = title
             notification.alertBody = body
             notification.userInfo = data
+            notification.soundName = UILocalNotificationDefaultSoundName
             notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
             UIApplication.shared.scheduleLocalNotification(notification)
         }
@@ -179,10 +181,12 @@ class LocalNotificationsHelper {
             callService.currentCall.filter({ call in
                 return call.callId == callID && (call.state == .over || call.state == .failure)
             }).single()
+                .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { _ in
                     let content = UNMutableNotificationContent()
                     content.title = NotificationCallTitle.missedCall.getString()
                     content.body = name
+                    content.sound = UNNotificationSound.default()
                     content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
                     let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
                     let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
@@ -208,6 +212,7 @@ class LocalNotificationsHelper {
                     notification.userInfo = data
                     notification.alertTitle = NotificationCallTitle.missedCall.getString()
                     notification.alertBody = name
+                    notification.soundName = UILocalNotificationDefaultSoundName
                     notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
                     UIApplication.shared.scheduleLocalNotification(notification)
                 }).disposed(by: self.disposeBag)
