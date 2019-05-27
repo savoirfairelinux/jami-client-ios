@@ -1,251 +1,200 @@
-﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- */
+﻿
+"A network error occured during the export" = "A network error occured during the export";
 
-// Global
-"global.homeTabBarTitle" = "Kreu";
-"global.contactRequestsTabBarTitle" = "Ftesa";
-"global.meTabBarTitle" = "Llogari";
-"global.ok" = "OK";
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
 
-// Scan
-"scan.badQrCode" = "Kod QR i gabuar";
-"scan.search" = "Po kërkohet…";
+/* Contextual menu action */
+"Add to contacts" = "Add to contacts";
 
-// Smartlist
-"smartlist.yesterday" = "Dje";
-"smartlist.results" = "Përfundime Kërkimi";
-"smartlist.conversations" = "Biseda";
-"smartlist.searching" = "Po kërkohet…";
-"smartlist.noResults" = "S’ka përfundime";
-"smartlist.noConversation" = "S’ka biseda";
-"smartlist.searchBarPlaceholder" = "Jepni emrin…";
-"smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
-"smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
-"smartlist.accountsTitle" = "Llogari";
-"smartlist.addAccountButton" = "+ Shtoni Llogari";
-"smartlist.noNumber" = "Kontakti i përzgjedhur s’ka ndonjë numër";
-"smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
+/* Contextual menu action */
+"Place video call" = "Place video call";
 
-//Conversation
-"conversation.messagePlaceholder" = "Shkruani mesazhin tuaj…";
+/* Contextual menu action */
+"Place audio call" = "Place audio call";
 
-//Invitations
-"invitations.noInvitations" = "S’ka ftesa";
+/* Contextual menu action */
+"Clear conversation" = "Clear conversation";
 
-// Walkthrough
+/* Contextual menu action */
+"Block contact" = "Block contact";
 
-//Welcome Screen
-"welcome.title" = "Mirë se vini te Jami !";
-"welcome.text" = "Jami është një platformë e lirë dhe universale komunikimesh që ruan privatësinë dhe liritë e përdoruesve";
-"welcome.linkDevice" = "Lidheni këtë pajisje me një llogari";
-"welcome.createAccount" = "Krijoni një llogari Jami";
+/* Text shown to the user */
+"Alias : " = "Alias : ";
 
-//Creation Profile Screen
-"createProfile.skipCreateProfile" = "Anashkaloje";
-"createProfile.profileCreated" = "Pasuesi";
-"createProfile.title" = "Personalizoni profilin tuaj";
-"createProfile.enterNameLabel" = "Jepni një emër për në ekran";
-"createProfile.enterNamePlaceholder" = "Jepni emër";
-"createProfile.subtitle" = "Profili juaj do të ndahet me kontaktet tuaja. Mund ta ndryshoni në çfarëdo kohe.";
-"createProfile.createYourAvatar" = "Krijoni avatarin tuaj";
+/* Error shown to the user */
+"An error occured during the export" = "An error occured during the export";
 
-//Create Account form
-"createAccount.createAccountFormTitle" = "Krijoni llogarinë tuaj";
-"createAccount.chooseStrongPassword" = "Për të mbrojtur llogarinë tuaj Jami, zgjidhni fjalëkalim të fuqishëm që do ta mbani mend.";
-"createAccount.enterNewUsernamePlaceholder" = "Emër përdoruesi";
-"createAccount.newPasswordPlaceholder" = "Fjalëkalim";
-"createAccount.repeatPasswordPlaceholder" = "Ripohoni fjalëkalimin";
-"createAccount.passwordCharactersNumberError" = "Minimumi 6 shenja";
-"createAccount.passwordNotMatchingError" = "fjalëkalimet nuk përputhen";
-"createAccount.lookingForUsernameAvailability" = "po shihet për pasje…";
-"createAccount.invalidUsername" = "emër përdoruesi i pavlefshëm";
-"createAccount.usernameAlreadyTaken" = "emër përdoruesi tashmë i zënë";
-"createAccount.loading" = "Po ngarkohet";
-"createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
-"createAccount.RegisterAUsername" = "Regjistroni një emër përdoruesi";
-"createAccount.ChooseAPassword" = "Fshehtëzoje llogarinë time";
-"createAccount.PasswordInformation" = "Zgjidhni një fjalëkalim për të fshehtëzuar llogarinë tuaj vendore. Mos e harroni, përndryshe s’do të jeni në gjendje të rimerrni llogarinë tuaj";
-"createAccount.EnableNotifications" = "Njoftime";
-"createAccount.Recommended" = "(E këshilluar)";
-"createAccount.UsernameNotRegisteredTitle" = "Gabim rrjeti";
-"createAccount.UsernameNotRegisteredMessage" = "Llogaria u krijua, por emri i përdoruesit s’u regjistrua";
-"createAccount.timeoutTitle" = "Llogaria u Krijua";
-"createAccount.timeoutMessage" = "Regjistrim përdoruesi në kryerje e sipër… Mund të dojë pak çaste.";
+/* Contextual menu entry */
+"Backup account" = "Backup account";
 
-//Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
-"linkToAccount.linkButtonTitle" = "Lidhni pajisje";
-"linkToAccount.passwordPlaceholder" = "Fjalëkalim";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Jepni Fjalëkalimin";
-"linkToAccount.pinLabel" = "Jepni PIN-in";
-"linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
+/* Contextual menu action */
+"Call number" = "Call number";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "S’gjendet dot llogari";
-"alerts.accountCannotBeFoundMessage" = "S’u gjet dot llogaria në rrjetin Jami. Sigurohuni që qe eksportuar në Jami që prej një pajisjeje ekzistuese, dhe që kredencialet e dhëna për hyrjen janë të sakta.";
-"alerts.accountAddedTitle" = "Llogaria u Shtua";
-"alerts.accountNoNetworkTitle" = "S’lidhet dot te rrjeti";
-"alerts.accountNoNetworkMessage" = "S’u shtua dot llogaria, ngaqë Jami s’u lidh dot me rrjetin e shpërndarë. Kontrolloni lidhjen e pajisjes tuaj.";
-"alerts.accountDefaultErrorTitle" = "Gabim i panjohur";
-"alerts.accountDefaultErrorMessage" = "Llogaria s’u krijua dot.";
-"alerts.profileTakePhoto" = "Bëni një foto";
-"alerts.profileUploadPhoto" = "Ngarkoni foto";
-"alerts.profileCancelPhoto" = "Anuloje";
-"alerts.accountLinkedTitle" = "Po lidhet llogaria";
-"alerts.dbFailedTitle" = "Ndodhi një gabim gjatë nisjes së Jami-t";
-"alerts.dbFailedMessage" = "Ju lutemi, mbylleni aplikacionin dhe provoni ta rihapni";
-"alerts.confirmBlockContact" = "Jeni i sigurt se doni të bllokohet ky kontakt? Edhe historiku i bisedave me këtë kontakt do të fshihet përgjithmonë.";
-"alerts.confirmBlockContactTitle" = "Bllokoje Kontaktin";
-"alerts.confirmDeleteConversation" = "Jeni i sigurt se doni të fshihet përgjithmonë kjo bisedë?";
-"alerts.confirmDeleteConversationFromContact" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
-"alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
-"alerts.confirmClearConversation" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
-"alerts.confirmClearConversationTitle" = "Pastroje Bisedën";
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
-//Actions
-"actions.blockAction" = "Bllokoje";
-"actions.deleteAction" = "Fshije";
-"actions.cancelAction" = "Anuloje";
-"actions.clearAction" = "Pastroje";
-"actions.backAction" = "Mbrapsht";
-"alerts.incomingCallAllertTitle" = "Thirrje nga";
-"alerts.incomingCallButtonAccept" = "Pranoje";
-"alerts.incomingCallButtonIgnore" = "Shpërfille";
+/* Open panel title */
+"Choose a CA list" = "Choose a CA list";
 
-//Calls
-"calls.callItemTitle" = "Thirre";
-"calls.unknown" = "I panjohur";
-"calls.incomingCallInfo" = "dëshiron të flasë me ju";
-"calls.ringing" = "Po thirret…";
-"calls.connecting" = "Po lidhet…";
-"calls.searching" = "Po kërkohet…";
-"calls.callFinished" = "Thirrja përfundoi";
-"calls.currentCallWith" = "Thirre me";
+/* Open panel title */
+"Choose a certificate" = "Choose a certificate";
 
-//Account Page
-"accountPage.devicesListHeader" = "Pajisje";
-"accountPage.settingsHeader" = "Rregullime";
-"accountPage.username" = "emër përdoruesi:";
-"accountPage.usernameNotRegistered" = "emër përdoruesi: jo i regjistruar";
-"accountPage.credentialsHeader" = "Hollësi Llogarie";
-"accountPage.enableProxy" = "Aktivizo Ndërmjetës";
-"accountPage.blockedContacts" = "Bllokoje Listën";
-"accountPage.unblockContact" = "ZHBLLOKOJE";
-"accountPage.proxyAddressAlert" = "Jepni adresë ndërmjetësi";
-"accountPage.enableProxy" = "Aktivizo Ndërmjetës";
-"accountPage.noProxyExplanationLabel" = "Pajisja juaj s’do të marrë njoftime kur ndërmjetësi të jetë çaktivizuar";
-"accountPage.saveProxyAddress" = "Ruaje";
-"accountPage.proxyPaceholder" = "Adresë ndërmjetësi";
-"accountPage.enableNotifications" = "Aktivizoni Njoftime";
-"accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
-"accountPage.proxyDisabledAlertBody" = "Që të mund të merrni njoftime, ju lutemi, aktivizoni ndërmjetësin";
-"accountPage.revokeDeviceTitle" = "Shfuqizoje pajisjen";
-"accountPage.revokeDeviceMessage" = "Jeni i sigurt se doni të shfuqizohet kjo pajisje. Ky veprim s’mund të zhbëhet.";
-"accountPage.revokeDeviceButton" = "Shfuqizoje";
-"accountPage.revokeDevicePlaceholder" = "Jepni fjalëkalimin tuaj";
-"accountPage.deviceRevoked" = "Shfuqizimi i pajisjes u plotësua";
-"accountPage.deviceRevocationProgress" = "Po shfuqizohet…";
-"accountPage.deviceRevocationSuccess" = "Pajisja u shfuqizua";
-"accountPage.deviceRevocationTryAgain" = "Riprovoni";
-"accountPage.deviceRevocationWrongPassword" = "Fjalëkalim i pasaktë";
-"accountPage.deviceRevocationUnknownDevice" = "Pajisje e panjohur";
-"accountPage.deviceRevocationError" = "Gabim shfuqizimi pajisjeje";
-"accountPage.namePlaceholder" = "Emër";
-"accountPage.linkDeviceTitle" = "Lidhni një pajisje tjetër";
-"accountPage.other" = "Tjetër";
-"accountPage.removeAccountTitle" = "Hiqe llogarinë";
-"accountPage.removeAccountMessage" = "Duke klikuar \"Hiqe\", do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Po ashtu, emri juaj i regjistruar mund të humbë.";
-"accountPage.removeAccountButton" = "Hiqe";
-//Account
-"account.sipUsername" = "Emër Përdoruesi";
-"account.sipPassword" = "Fjalëkalim";
-"account.sipServer" = "Shërbyes SIP";
-"account.port" = "Portë";
-"account.proxyServer" = "Ndërmjetës";
-"account.createSipAccount" = "Krijoni Llogari Sip";
-"account.usernameLabel" = "Jepni Emër Përdoruesi";
-"account.passwordLabel" = "Jepni Fjalëkalimin";
-"account.serverLabel" = "Jepni Adresë";
-"account.portLabel" = "Jepni Numër Porte";
-"account.accountStatus" = "Gjendje Llogarie";
-"account.enableAccount" = "Akitvizo Llogari";
-"account.statusOnline" = "Në linjë";
-"account.statusOffline" = "Jo në linjë";
-"account.statusConnecting" = "Po lidhet";
-"account.statusUnknown" = "I panjohur";
-"account.statusConnectionerror" = "Gabim Lidhjeje";
+/* Open panel title */
+"Choose a directory" = "Choose a directory";
 
-//Block List Page
-"blockListPage.noBlockedContacts" = "S’ka kontakte të bllokuar";
+/* Open panel title */
+"Choose a private key file" = "Choose a private key file";
 
-//Link New Device
-"linkDevice.title" = "Lidhni një pajisje të re";
-"linkDevice.passwordError" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
-"linkDevice.networkError" = "Ndodhi një gabim rrjeti gjatë eksportimit";
-"linkDevice.defaultError" = "Ndodhi një gabim gjatë eksportimit";
-"linkDevice.explanationMessage" = "Që të plotësohet procesi, lypset ta hapni Jami-n në pajisjen e re dhe të zgjidhni mundësinë \"Lidhe këtë pajisje me një llogari.\" PIN-i juaj është i vlefshëm për 10 minuta";
-"linkDevice.hudMessage" = "Po verifikohet";
+/* Open panel prompt for 'Choose a file' */
+"Choose CA" = "Choose CA";
 
-//Contact Page
-"contactPage.startAudioCall" = "Filloni Thirrje Audio";
-"contactPage.startVideoCall" = "Filloni Thirrje Video";
-"contactPage.sendMessage" = "Dërgoni Mesazh";
-"contactPage.clearConversation" = "Pastroje Bisedën";
-"contactPage.blockContact" = "Bllokoje Kontaktin";
-"contactPage.removeConversation" = "Hiqe Bisedën";
+/* Open panel prompt for 'Choose a directory' */
+"Choose directory" = "Choose directory";
 
-//DataTransfer
-"dataTransfer.readableStatusCreated" = "Po gatitet…";
-"dataTransfer.readableStatusError" = "Gabim";
-"dataTransfer.readableStatusAwaiting" = "Pezull…";
-"dataTransfer.readableStatusRefuse" = "Hidhe tej";
-"dataTransfer.readableStatusOngoing" = "Po shpërngulet";
-"dataTransfer.readableStatusCanceled" = "U anulua";
-"dataTransfer.readableStatusSuccess" = "E plotë";
-"dataTransfer.readableStatusAccept" = "Pranoje";
-"dataTransfer.readableStatusCancel" = "Anuloje";
+/* Contextual menu entry */
+"Choose file" = "Choose file";
 
-//Notifications
-"notifications.incomingCall" = "Thirrje Ardhëse";
-"notifications.missedCall" = "Thirrje të Humbura";
-"notifications.acceptCall" = "PRANOJE";
-"notifications.refuseCall" = "HIDHE POSHTË";
-"dataTransfer.readableStatusAwaiting" = "Pezull…";
-"dataTransfer.readableStatusRefuse" = "Hidhe tej";
-"dataTransfer.readableStatusOngoing" = "Po shpërngulet";
-"dataTransfer.readableStatusCanceled" = "U anulua";
-"dataTransfer.readableStatusSuccess" = "E plotë";
-"dataTransfer.readableStatusAccept" = "Pranoje";
-"dataTransfer.readableStatusCancel" = "Anuloje";
+/* Contextual menu entry */
+"Share screen" = "Share screen";
 
-//Generated Message
-"generatedMessage.contactAdded" = "Kontakti u shtua";
-"generatedMessage.invitationReceived" = "Ftesa u mor";
-"generatedMessage.invitationAccepted" = "Ftesa u pranua";
-"generatedMessage.outgoingCall" = "Thirrje për";
-"generatedMessage.incomingCall" = "Thirrje ardhëse";
-"generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
-"generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
+/* No comment provided by engineer. */
+"Copy" = "Copy";
 
-//General Settings
-"generalSettings.title" = "Rregullime të përgjithshme";
-"generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
+/* Contextual menu action */
+"Copy name" = "Copy name";
 
+/* Contextual menu action */
+"Copy number" = "Copy number";
+
+/* Contextual menu entry */
+"Create Jami Account" = "Create Jami Account";
+
+/* Contextual menu entry */
+"Create SIP Account" = "Create SIP Account";
+
+/* File transfer failed label */
+"Failed" = "Failed";
+
+/* Error message shown to user when it is impossible to migrate account */
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+
+/* Text shown to user when an error occur at registration */
+"Failed to perform lookup" = "Failed to perform lookup";
+
+/* Incoming call from {Name} */
+"Incoming call from %@" = "Incoming call from %@";
+
+/* Incoming message from {Name} */
+"Incoming message from %@" = "Incoming message from %@";
+
+/* Message from {Name} */
+"Message from %@" = "Message from %@";
+
+/* User label */
+"New SIP account" = "New SIP account";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
+
+/* Allert message when no accounts are available */
+"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+
+/* Text show to the user when password didn't match */
+"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+
+/* Indication for user */
+"Password is too short" = "Password is too short";
+
+/* Indication for user */
+"Passwords don't match" = "Passwords don't match";
+
+/* Button label */
+"Pause" = "Pause";
+
+/* Button label */
+"Play" = "Play";
+
+/* Button Action */
+"Refuse" = "Refuse";
+"Accept" = "Accept";
+
+/* Contextual menu entry */
+"Remove value" = "Remove value";
+
+/* Show advice to user */
+"Reopen account to see your hash" = "Reopen account to see your hash";
+
+/* Contextual menu entry */
+"Restore account" = "Restore account";
+
+/* Button title */
+"Revise Input" = "Revise Input";
+
+/* Text shown to the user */
+"ID : " = "ID : ";
+
+/* No comment provided by engineer. */
+"Share" = "Share";
+
+/* File transfer successful label */
+"Success" = "Success";
+
+/* No comment provided by engineer. */
+"Text Actions" = "Text Actions";
+
+/* Text shown to user when his username is available to be registered */
+"The entered username is available" = "The entered username is available";
+
+/* Text shown to user when his username is invalid to be registered */
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+
+/* Text shown to user when his username is already registered */
+"The entered username is not available" = "The entered username is not available";
+
+/* Text shown to the user */
+"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+
+/* Error shown to the user */
+"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+
+/* Title shown to user to concat with Pin */
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+
+/* Text shown to the user */
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+
+/* Name used when user leave field empty */
+"Unknown" = "Unknown";
+
+/* Error shown to user */
+"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Remove account alert title */
+"Remove account" = "Remove account";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+
+/* export account button title */
+"Select archive" = "Select archive";
+
+/* link account title */
+"Link to an account" = "Link to an account";
+
+/* Welcome title */
+"Welcome to Ring" = "Welcome to Jami";
+"Create a new account" = "Create a new account";
+"Add a SIP account" = "Add a SIP account";
+
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+
+/* Backup error */
+"An error occured during the backup" = "An error occured during the backup";

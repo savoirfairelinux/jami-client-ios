@@ -1,251 +1,200 @@
-﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- */
+﻿
+"A network error occured during the export" = "A network error occured during the export";
 
-// Global
-"global.homeTabBarTitle" = "Thuis";
-"global.contactRequestsTabBarTitle" = "Uitnodigingen";
-"global.meTabBarTitle" = "Account";
-"global.ok" = "Oké";
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
 
-// Scan
-"scan.badQrCode" = "Verkeerde QR-code";
-"scan.search" = "Beizg met zoeken…";
+/* Contextual menu action */
+"Add to contacts" = "Add to contacts";
 
-// Smartlist
-"smartlist.yesterday" = "Gisteren";
-"smartlist.results" = "Zoekresultaat";
-"smartlist.conversations" = "Gesprekken";
-"smartlist.searching" = "Zoeken…";
-"smartlist.noResults" = "Geen resultaten";
-"smartlist.noConversation" = "Geen gesprekken";
-"smartlist.searchBarPlaceholder" = "Voer naam in…";
-"smartlist.noNetworkConnectivity" = "Geen netwerkverbinding";
-"smartlist.cellularAccess" = "Zorg dat u toegang tot het mobiele netwerk toegestaan heeft in uw instellingen";
-"smartlist.accountsTitle" = "Accounts";
-"smartlist.addAccountButton" = "+ Account toevoegen";
-"smartlist.noNumber" = "Het geselecteerde contact heeft geen nummer";
-"smartlist.selectOneNumber" = "Kies één van de nummers";
+/* Contextual menu action */
+"Place video call" = "Place video call";
 
-//Conversation
-"conversation.messagePlaceholder" = "Typ uw bericht…";
+/* Contextual menu action */
+"Place audio call" = "Place audio call";
 
-//Invitations
-"invitations.noInvitations" = "Geen uitnodigingen";
+/* Contextual menu action */
+"Clear conversation" = "Clear conversation";
 
-// Walkthrough
+/* Contextual menu action */
+"Block contact" = "Block contact";
 
-//Welcome Screen
-"welcome.title" = "Welkom bij Jami!";
-"welcome.text" = "Jami is een vrij en universeel communicatieplatform, dat de privacy en vrijheden van haar gebruikers eerbiedigt";
-"welcome.linkDevice" = "Dit apparaat aan een account koppelen";
-"welcome.createAccount" = "Een Jami-account aanmaken";
+/* Text shown to the user */
+"Alias : " = "Alias : ";
 
-//Creation Profile Screen
-"createProfile.skipCreateProfile" = "Overslaan";
-"createProfile.profileCreated" = "Volgende";
-"createProfile.title" = "Personaliseer uw profiel";
-"createProfile.enterNameLabel" = "Voer een weergavenaam in";
-"createProfile.enterNamePlaceholder" = "Voer naam in";
-"createProfile.subtitle" = "Uw profiel wordt gedeeld met uw contacten. U kunt het op elk moment wijzigen.";
-"createProfile.createYourAvatar" = "Maak uw avatar aan";
+/* Error shown to the user */
+"An error occured during the export" = "An error occured during the export";
 
-//Create Account form
-"createAccount.createAccountFormTitle" = "Maak uw account aan";
-"createAccount.chooseStrongPassword" = "Kies een sterk wachtwoord om uw Jami-account te beschermen.";
-"createAccount.enterNewUsernamePlaceholder" = "Gebruikersnaam";
-"createAccount.newPasswordPlaceholder" = "Wachtwoord";
-"createAccount.repeatPasswordPlaceholder" = "Bevestig wachtwoord";
-"createAccount.passwordCharactersNumberError" = "Minimaal 6 tekens";
-"createAccount.passwordNotMatchingError" = "wachtwoorden komen niet overeen";
-"createAccount.lookingForUsernameAvailability" = "beschikbaarheid wordt gecontroleerd…";
-"createAccount.invalidUsername" = "ongeldige gebruikersnaam";
-"createAccount.usernameAlreadyTaken" = "gebruikersnaam reeds in gebruik";
-"createAccount.loading" = "Laden";
-"createAccount.waitCreateAccountTitle" = "Account wordt toegevoegd";
-"createAccount.RegisterAUsername" = "Een gebruikersnaam registreren";
-"createAccount.ChooseAPassword" = "Mijn account versleutelen";
-"createAccount.PasswordInformation" = "Kies een wachtwoord om uw lokale account mee te versleutelen. Vergeet het niet, u zult uw account anders niet kunnen herstellen";
-"createAccount.EnableNotifications" = "Meldingen";
-"createAccount.Recommended" = "(Aanbevolen)";
-"createAccount.UsernameNotRegisteredTitle" = "Netwerkfout";
-"createAccount.UsernameNotRegisteredMessage" = "Het account is aangemaakt, maar de gebruikersnaam is niet geregistreerd";
-"createAccount.timeoutTitle" = "Account aangemaakt";
-"createAccount.timeoutMessage" = "Gebruikersnaam wordt geregistreerd… Dit kan even duren.";
+/* Contextual menu entry */
+"Backup account" = "Backup account";
 
-//Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account koppelen";
-"linkToAccount.linkButtonTitle" = "Apparaat koppelen";
-"linkToAccount.passwordPlaceholder" = "Wachtwoord";
-"linkToAccount.pinPlaceholder" = "Pincode";
-"linkToAccount.passwordLabel" = "Voer wachtwoord in";
-"linkToAccount.pinLabel" = "Voer pincode in";
-"linkToAccount.explanationPinMessage" = "Om de pincode te genereren, gaat u naar de accountbeheerinstellingen op het apparaat dat het account bevat dat u wilt gebruiken. Selecteer ‘Een ander apparaat aan dit account koppelen’. U zult de pincode krijgen die u nodig heeft om dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
+/* Contextual menu action */
+"Call number" = "Call number";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Account kan niet gevonden worden";
-"alerts.accountCannotBeFoundMessage" = "Account kon niet gevonden worden op het Jami-netwerk. Controleer of het account geëxporteerd is van een bestaand apparaat en dat de ingevoerde gebruikersreferenties correct zijn.";
-"alerts.accountAddedTitle" = "Account toegevoegd";
-"alerts.accountNoNetworkTitle" = "Kan geen verbinding maken met het netwerk";
-"alerts.accountNoNetworkMessage" = "Kon het account niet toevoegen omdat Jami geen verbinding kon maken met het gedistribueerde netwerk. Controleer de netwerkverbinding van uw apparaat.";
-"alerts.accountDefaultErrorTitle" = "Onbekende fout";
-"alerts.accountDefaultErrorMessage" = "Het account kon niet aangemaakt worden.";
-"alerts.profileTakePhoto" = "Foto nemen";
-"alerts.profileUploadPhoto" = "Foto uploaden";
-"alerts.profileCancelPhoto" = "Annuleren";
-"alerts.accountLinkedTitle" = "Account koppelen";
-"alerts.dbFailedTitle" = "Er trad een fout op bij het starten van Jami";
-"alerts.dbFailedMessage" = "Sluit de toepassing en probeer het opnieuw";
-"alerts.confirmBlockContact" = "Weet u zeker dat u dit contact wilt blokkeren? De gespreksgeschiedenis met dit contact zal ook voorgoed verwijderd worden.";
-"alerts.confirmBlockContactTitle" = "Contact blokkeren";
-"alerts.confirmDeleteConversation" = "Weet u zeker dat u dit gesprek voorgoed wilt verwijderen?";
-"alerts.confirmDeleteConversationFromContact" = "Weet u zeker dat u het gesprek met dit contact wilt verwijderen?";
-"alerts.confirmDeleteConversationTitle" = "Gesprek verwijderen";
-"alerts.confirmClearConversation" = "Weet u zeker dat u het gesprek met dit contact wilt verwijderen?";
-"alerts.confirmClearConversationTitle" = "Gesprek wissen";
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
-//Actions
-"actions.blockAction" = "Blokkeren";
-"actions.deleteAction" = "Verwijderen";
-"actions.cancelAction" = "Annuleren";
-"actions.clearAction" = "Wissen";
-"actions.backAction" = "Terug";
-"alerts.incomingCallAllertTitle" = "Inkomende oproep van";
-"alerts.incomingCallButtonAccept" = "Accepteren";
-"alerts.incomingCallButtonIgnore" = "Negeren";
+/* Open panel title */
+"Choose a CA list" = "Choose a CA list";
 
-//Calls
-"calls.callItemTitle" = "Oproep";
-"calls.unknown" = "Onbekend";
-"calls.incomingCallInfo" = "wil met u praten";
-"calls.ringing" = "Gaat over…";
-"calls.connecting" = "Bezig met verbinden…";
-"calls.searching" = "Bezig met zoeken…";
-"calls.callFinished" = "Oproep beëindigd";
-"calls.currentCallWith" = "Bellen met";
+/* Open panel title */
+"Choose a certificate" = "Choose a certificate";
 
-//Account Page
-"accountPage.devicesListHeader" = "Apparaten";
-"accountPage.settingsHeader" = "Instellingen";
-"accountPage.username" = "gebruikersnaam:";
-"accountPage.usernameNotRegistered" = "gebruikersnaam: niet geregistreerd";
-"accountPage.credentialsHeader" = "Accountgegevens";
-"accountPage.enableProxy" = "Proxy inschakelen";
-"accountPage.blockedContacts" = "Blokkeringslijst";
-"accountPage.unblockContact" = "Deblokkeren";
-"accountPage.proxyAddressAlert" = "Voer proxyadres in";
-"accountPage.enableProxy" = "Proxy inschakelen";
-"accountPage.noProxyExplanationLabel" = "Uw apparaat zal geen meldingen ontvangen wanneer de proxy uitgeschakeld is";
-"accountPage.saveProxyAddress" = "Opslaan";
-"accountPage.proxyPaceholder" = "Proxyadres";
-"accountPage.enableNotifications" = "Meldingen inschakelen";
-"accountPage.proxyDisabledAlertTitle" = "Proxyserver uitgeschakeld";
-"accountPage.proxyDisabledAlertBody" = "Schakel de proxy in om meldingen te kunnen ontvangen";
-"accountPage.revokeDeviceTitle" = "Apparaat intrekken";
-"accountPage.revokeDeviceMessage" = "Weet u zeker dat u dit apparaat wilt intrekken? Deze handeling kan niet ongedaan gemaakt worden.";
-"accountPage.revokeDeviceButton" = "Intrekken";
-"accountPage.revokeDevicePlaceholder" = "Voer uw wachtwoord in";
-"accountPage.deviceRevoked" = "Intrekken van apparaat voltooid";
-"accountPage.deviceRevocationProgress" = "Bezig met intrekken…";
-"accountPage.deviceRevocationSuccess" = "Apparaat is ingetrokken";
-"accountPage.deviceRevocationTryAgain" = "Opnieuw proberen";
-"accountPage.deviceRevocationWrongPassword" = "Verkeerd wachtwoord";
-"accountPage.deviceRevocationUnknownDevice" = "Onbekend apparaat";
-"accountPage.deviceRevocationError" = "Fout bij intrekken van apparaat";
-"accountPage.namePlaceholder" = "Naam";
-"accountPage.linkDeviceTitle" = "Een ander apparaat koppelen";
-"accountPage.other" = "Anders";
-"accountPage.removeAccountTitle" = "Account verwijderen";
-"accountPage.removeAccountMessage" = "Door op ‘Verwijderen’ te klikken, zult u dit account van dit apparaat verwijderen! Deze handeling kan niet ongedaan gemaakt worden. Uw geregistreerde naam zal ook verloren gaan.";
-"accountPage.removeAccountButton" = "Verwijderen";
-//Account
-"account.sipUsername" = "Gebruikersnaam";
-"account.sipPassword" = "Wachtwoord";
-"account.sipServer" = "SIP-server";
-"account.port" = "Poort";
-"account.proxyServer" = "Proxy";
-"account.createSipAccount" = "SIP-account aanmaken";
-"account.usernameLabel" = "Voer gebruikersnaam in";
-"account.passwordLabel" = "Voer wachtwoord in";
-"account.serverLabel" = "Voer adres in";
-"account.portLabel" = "Voer poortnummer in";
-"account.accountStatus" = "Accountstatus";
-"account.enableAccount" = "Account inschakelen";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
-"account.statusConnecting" = "Verbinden";
-"account.statusUnknown" = "Onbekend";
-"account.statusConnectionerror" = "Verbindingsfout";
+/* Open panel title */
+"Choose a directory" = "Choose a directory";
 
-//Block List Page
-"blockListPage.noBlockedContacts" = "Geen geblokkeerde contacten";
+/* Open panel title */
+"Choose a private key file" = "Choose a private key file";
 
-//Link New Device
-"linkDevice.title" = "Een nieuw apparaat koppelen";
-"linkDevice.passwordError" = "Het wachtwoord dat u heeft ingevoerd ontgrendelt dit account niet";
-"linkDevice.networkError" = "Er trad een netwerkfout op tijdens het exporteren";
-"linkDevice.defaultError" = "Er trad een fout op tijdens het exporteren";
-"linkDevice.explanationMessage" = "Om het proces te voltooien opent u Jami op het nieuwe apparaat en kiest u de optie ‘Dit apparaat aan een account koppelen’. Uw pincode is 10 minuten geldig";
-"linkDevice.hudMessage" = "Verifiëren";
+/* Open panel prompt for 'Choose a file' */
+"Choose CA" = "Choose CA";
 
-//Contact Page
-"contactPage.startAudioCall" = "Audio-oproep starten";
-"contactPage.startVideoCall" = "Video-oproep starten";
-"contactPage.sendMessage" = "Bericht versturen";
-"contactPage.clearConversation" = "Gesprek wissen";
-"contactPage.blockContact" = "Contact blokkeren";
-"contactPage.removeConversation" = "Gesprek verwijderen";
+/* Open panel prompt for 'Choose a directory' */
+"Choose directory" = "Choose directory";
 
-//DataTransfer
-"dataTransfer.readableStatusCreated" = "Bezig met initialiseren…";
-"dataTransfer.readableStatusError" = "Fout";
-"dataTransfer.readableStatusAwaiting" = "In afwachting…";
-"dataTransfer.readableStatusRefuse" = "Afwijzen";
-"dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
-"dataTransfer.readableStatusCanceled" = "Geannuleerd";
-"dataTransfer.readableStatusSuccess" = "Voltooid";
-"dataTransfer.readableStatusAccept" = "Accepteren";
-"dataTransfer.readableStatusCancel" = "Annuleren";
+/* Contextual menu entry */
+"Choose file" = "Choose file";
 
-//Notifications
-"notifications.incomingCall" = "Inkomende oproep";
-"notifications.missedCall" = "Gemiste oproep";
-"notifications.acceptCall" = "ACCEPTEREN";
-"notifications.refuseCall" = "AFWIJZEN";
-"dataTransfer.readableStatusAwaiting" = "In afwachting…";
-"dataTransfer.readableStatusRefuse" = "Afwijzen";
-"dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
-"dataTransfer.readableStatusCanceled" = "Geannuleerd";
-"dataTransfer.readableStatusSuccess" = "Voltooid";
-"dataTransfer.readableStatusAccept" = "Accepteren";
-"dataTransfer.readableStatusCancel" = "Annuleren";
+/* Contextual menu entry */
+"Share screen" = "Share screen";
 
-//Generated Message
-"generatedMessage.contactAdded" = "Contact toegevoegd";
-"generatedMessage.invitationReceived" = "Uitnodiging ontvangen";
-"generatedMessage.invitationAccepted" = "Uitnodiging geaccepteerd";
-"generatedMessage.outgoingCall" = "Uitgaande oproep";
-"generatedMessage.incomingCall" = "Inkomende oproep";
-"generatedMessage.missedOutgoingCall" = "Gemiste uitgaande oproep";
-"generatedMessage.missedIncomingCall" = "Gemiste inkomende oproep";
+/* No comment provided by engineer. */
+"Copy" = "Copy";
 
-//General Settings
-"generalSettings.title" = "Algemene instellingen";
-"generalSettings.videoAcceleration" = "Videoversnelling inschakelen";
+/* Contextual menu action */
+"Copy name" = "Copy name";
 
+/* Contextual menu action */
+"Copy number" = "Copy number";
+
+/* Contextual menu entry */
+"Create Jami Account" = "Create Jami Account";
+
+/* Contextual menu entry */
+"Create SIP Account" = "Create SIP Account";
+
+/* File transfer failed label */
+"Failed" = "Failed";
+
+/* Error message shown to user when it is impossible to migrate account */
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+
+/* Text shown to user when an error occur at registration */
+"Failed to perform lookup" = "Failed to perform lookup";
+
+/* Incoming call from {Name} */
+"Incoming call from %@" = "Incoming call from %@";
+
+/* Incoming message from {Name} */
+"Incoming message from %@" = "Incoming message from %@";
+
+/* Message from {Name} */
+"Message from %@" = "Message from %@";
+
+/* User label */
+"New SIP account" = "New SIP account";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
+
+/* Allert message when no accounts are available */
+"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+
+/* Text show to the user when password didn't match */
+"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+
+/* Indication for user */
+"Password is too short" = "Password is too short";
+
+/* Indication for user */
+"Passwords don't match" = "Passwords don't match";
+
+/* Button label */
+"Pause" = "Pause";
+
+/* Button label */
+"Play" = "Play";
+
+/* Button Action */
+"Refuse" = "Refuse";
+"Accept" = "Accept";
+
+/* Contextual menu entry */
+"Remove value" = "Remove value";
+
+/* Show advice to user */
+"Reopen account to see your hash" = "Reopen account to see your hash";
+
+/* Contextual menu entry */
+"Restore account" = "Restore account";
+
+/* Button title */
+"Revise Input" = "Revise Input";
+
+/* Text shown to the user */
+"ID : " = "ID : ";
+
+/* No comment provided by engineer. */
+"Share" = "Share";
+
+/* File transfer successful label */
+"Success" = "Success";
+
+/* No comment provided by engineer. */
+"Text Actions" = "Text Actions";
+
+/* Text shown to user when his username is available to be registered */
+"The entered username is available" = "The entered username is available";
+
+/* Text shown to user when his username is invalid to be registered */
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+
+/* Text shown to user when his username is already registered */
+"The entered username is not available" = "The entered username is not available";
+
+/* Text shown to the user */
+"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+
+/* Error shown to the user */
+"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+
+/* Title shown to user to concat with Pin */
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+
+/* Text shown to the user */
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+
+/* Name used when user leave field empty */
+"Unknown" = "Unknown";
+
+/* Error shown to user */
+"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Remove account alert title */
+"Remove account" = "Remove account";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+
+/* export account button title */
+"Select archive" = "Select archive";
+
+/* link account title */
+"Link to an account" = "Link to an account";
+
+/* Welcome title */
+"Welcome to Ring" = "Welcome to Jami";
+"Create a new account" = "Create a new account";
+"Add a SIP account" = "Add a SIP account";
+
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+
+/* Backup error */
+"An error occured during the backup" = "An error occured during the backup";
