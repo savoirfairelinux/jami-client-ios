@@ -1,200 +1,251 @@
-﻿
-"A network error occured during the export" = "A network error occured during the export";
+﻿ /*
+ *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+// Global
+"global.homeTabBarTitle" = "Start";
+"global.contactRequestsTabBarTitle" = "Einladungen";
+"global.meTabBarTitle" = "Konto";
+"global.ok" = "Ok";
+
+// Scan
+"scan.badQrCode" = "QR-Code ungültig";
+"scan.search" = "Suchen…";
+
+// Smartlist
+"smartlist.yesterday" = "Gestern";
+"smartlist.results" = "Suchergebnis";
+"smartlist.conversations" = "Unterhaltungen";
+"smartlist.searching" = "Suchen...";
+"smartlist.noResults" = "Keine Ergebnisse";
+"smartlist.noConversation" = "Keine Unterhaltungen";
+"smartlist.searchBarPlaceholder" = "Namen eingeben…";
+"smartlist.noNetworkConnectivity" = "Keine Netzwerkverbindung";
+"smartlist.cellularAccess" = "Vergewissern Sie sich, dass der Mobilfunkzugang in Ihren Einstellungen erlaubt ist.";
+"smartlist.accountsTitle" = "Konten";
+"smartlist.addAccountButton" = "+ Konto hinzufügen";
+"smartlist.noNumber" = "Der ausgewählte Kontakt hat keine Nummer";
+"smartlist.selectOneNumber" = "Eine der Nummern auswählen";
+
+//Conversation
+"conversation.messagePlaceholder" = "Schreibe deine Nachricht";
+
+//Invitations
+"invitations.noInvitations" = "Keine Einladungen";
+
+// Walkthrough
+
+//Welcome Screen
+"welcome.title" = "Willkommen bei Jami !";
+"welcome.text" = "Jami ist eine freie und universelle Kommunikationsplattform und respektiert die Freiheiten und Privatsphäre der Benutzer. ";
+"welcome.linkDevice" = "Dieses Gerät mit einem Konto verknüpfen";
+"welcome.createAccount" = "Ein Jami-Konto erstellen";
+
+//Creation Profile Screen
+"createProfile.skipCreateProfile" = "Überspringen";
+"createProfile.profileCreated" = "Weiter";
+"createProfile.title" = "Personalisiere dein Profil";
+"createProfile.enterNameLabel" = "Anzeigenamen eingeben";
+"createProfile.enterNamePlaceholder" = "Namen eingeben";
+"createProfile.subtitle" = "Ihr Profil wird nur mit Ihren Kontakten geteilt. Sie können es jederzeit ändern.";
+"createProfile.createYourAvatar" = "Ihren Avatar erstellen";
+
+//Create Account form
+"createAccount.createAccountFormTitle" = "Legen Sie ein Benutzerkonto an";
+"createAccount.chooseStrongPassword" = "Wählen Sie ein sicheres Passwort, an das Sie sich erinnern können, um ihr Jami-Konto zu schützen.";
+"createAccount.enterNewUsernamePlaceholder" = "Benutzername";
+"createAccount.newPasswordPlaceholder" = "Passwort";
+"createAccount.repeatPasswordPlaceholder" = "Passwort bestätigen";
+"createAccount.passwordCharactersNumberError" = "Mindestens 6 Zeichen";
+"createAccount.passwordNotMatchingError" = "Passwörter stimmen nicht überein";
+"createAccount.lookingForUsernameAvailability" = "Verfügbarkeit des Benutzernamens wird geprüft …";
+"createAccount.invalidUsername" = "Ungültiger Benutzername";
+"createAccount.usernameAlreadyTaken" = "Dieser Benutzername ist bereits vergeben";
+"createAccount.loading" = "Lade";
+"createAccount.waitCreateAccountTitle" = "Konto hinzufügen";
+"createAccount.RegisterAUsername" = "Benutzername registrieren";
+"createAccount.ChooseAPassword" = "Mein Konto verschlüsseln";
+"createAccount.PasswordInformation" = "Wählen Sie ein Passwort um Ihr lokales Konto zu verschlüsseln. Nicht vergessen, sonst können Sie nicht mehr auf das Konto zugreifen.";
+"createAccount.EnableNotifications" = "Benachrichtigungen";
+"createAccount.Recommended" = "(Empfohlen)";
+"createAccount.UsernameNotRegisteredTitle" = "Netzwerkfehler";
+"createAccount.UsernameNotRegisteredMessage" = "Konto wurde erstellt, aber der Benutzername wurde nicht registriert";
+"createAccount.timeoutTitle" = "Konto erstellt";
+"createAccount.timeoutMessage" = "Registrierung des Benutzernamens läuft..... Es könnte einige Augenblicke dauern.";
+
+//Link To Account form
+"linkToAccount.waitLinkToAccountTitle" = "Kontenverknüpfung";
+"linkToAccount.linkButtonTitle" = "Verbinde Gerät";
+"linkToAccount.passwordPlaceholder" = "Passwort";
+"linkToAccount.pinPlaceholder" = "PIN";
+"linkToAccount.passwordLabel" = "Passwort eingeben";
+"linkToAccount.pinLabel" = "PIN eingeben";
+"linkToAccount.explanationPinMessage" = "Um den PIN-Code zu generieren, gehen Sie zu den Einstellungen für die Kontoverwaltung auf dem Gerät, das das gewünschte Konto enthält. Wählen Sie \"Ein anderes Gerät mit diesem Konto verknüpfen\". Sie erhalten die erforderliche PIN, um dieses Formular auszufüllen. Die PIN ist nur für 10 Minuten gültig.";
+
+//Alerts
+"alerts.accountCannotBeFoundTitle" = "Kann Konto nicht finden";
+"alerts.accountCannotBeFoundMessage" = "Konto kann im Jami-Netzwerk nicht gefunden werden. Stellen Sie sicher, dass es von einem bereits konfigurierten Gerät exportiert wurde und dass die angegebenen Zugangsdaten korrekt sind.";
+"alerts.accountAddedTitle" = "Konto hinzugefügt";
+"alerts.accountNoNetworkTitle" = "Verbindung mit dem Netzwerk nicht möglich";
+"alerts.accountNoNetworkMessage" = "Konto konnte nicht hinzugefügt werden, da Jami sich nicht mit dem verteilten Netzwerk verbinden konnte. Überprüfen sie die Verbindung ihres Gerätes.";
+"alerts.accountDefaultErrorTitle" = "Unbekannter Fehler";
+"alerts.accountDefaultErrorMessage" = "Das Konto konnte nicht erstellt werden.";
+"alerts.profileTakePhoto" = "Ein Foto aufnehmen";
+"alerts.profileUploadPhoto" = "Foto hochladen";
+"alerts.profileCancelPhoto" = "Abbrechen";
+"alerts.accountLinkedTitle" = "Verknüpfe Konto";
+"alerts.dbFailedTitle" = "Beim Start von Jami ist ein Fehler aufgetreten";
+"alerts.dbFailedMessage" = "Bitte schließen Sie die Anwendung und versuchen Sie, sie erneut zu öffnen";
+"alerts.confirmBlockContact" = "Sicher, dass sie diesen Kontakt sperren wollen? Auch der Gesprächsverlauf mit diesem Kontakt wird unwiderruflich gelöscht.";
+"alerts.confirmBlockContactTitle" = "Kontakt sperren";
+"alerts.confirmDeleteConversation" = "Sicher, dass Sie diese Unterhaltung unwiderruflich löschen wollen?";
+"alerts.confirmDeleteConversationFromContact" = "Sicher, dass sie die Unterhaltung mit diesem Kontakt löschen wollen?";
+"alerts.confirmDeleteConversationTitle" = "Unterhaltung löschen";
+"alerts.confirmClearConversation" = "Sicher, dass sie den Gesprächsverlauf mit diesem Kontakt löschen wollen?";
+"alerts.confirmClearConversationTitle" = "Gesprächsverlauf löschen";
+
+//Actions
+"actions.blockAction" = "Sperren";
+"actions.deleteAction" = "Löschen";
+"actions.cancelAction" = "Abbrechen";
+"actions.clearAction" = "Löschen";
+"actions.backAction" = "Zurück";
+"alerts.incomingCallAllertTitle" = "Eingehender Anruf von ";
+"alerts.incomingCallButtonAccept" = "Akzeptieren";
+"alerts.incomingCallButtonIgnore" = "Ignorieren";
+
+//Calls
+"calls.callItemTitle" = "Anruf";
+"calls.unknown" = "Unbekannt";
+"calls.incomingCallInfo" = "möchte mit Dir sprechen.";
+"calls.ringing" = "Klingelt …";
+"calls.connecting" = "Verbinde...";
+"calls.searching" = "Suchen…";
+"calls.callFinished" = "Anruf beendet";
+"calls.currentCallWith" = "Call with ";
+
+//Account Page
+"accountPage.devicesListHeader" = "Geräte";
+"accountPage.settingsHeader" = "Einstellungen";
+"accountPage.username" = "Benutzername:";
+"accountPage.usernameNotRegistered" = "Benutzername: Nicht registriert";
+"accountPage.credentialsHeader" = "Kontodetails";
+"accountPage.enableProxy" = "Proxy aktivieren";
+"accountPage.blockedContacts" = "Liste gesperrter Kontakte";
+"accountPage.unblockContact" = "ENTSPERREN";
+"accountPage.proxyAddressAlert" = "Proxy Adresse angeben";
+"accountPage.enableProxy" = "Proxy aktivieren";
+"accountPage.noProxyExplanationLabel" = "Ihr Gerät wird keine Benachrichtigungen erhalten, wenn Proxy deaktiviert ist";
+"accountPage.saveProxyAddress" = "Speichern";
+"accountPage.proxyPaceholder" = "Proxy Adresse";
+"accountPage.enableNotifications" = "Benachrichtigungen aktivieren";
+"accountPage.proxyDisabledAlertTitle" = "Proxy Server Deaktiviert";
+"accountPage.proxyDisabledAlertBody" = "Um Benachrichtigungen zu erhalten, bitte Proxy aktivieren";
+"accountPage.revokeDeviceTitle" = "Gerät trennen";
+"accountPage.revokeDeviceMessage" = "Sicher, dass Sie das Gerät trennen wollen? Diese Aktion kann nicht rückgängig gemacht werden.";
+"accountPage.revokeDeviceButton" = "Trennen";
+"accountPage.revokeDevicePlaceholder" = "Geben Sie Ihr Passwort ein";
+"accountPage.deviceRevoked" = "Trennung des Gerätes abgeschlossen";
+"accountPage.deviceRevocationProgress" = "Trennen…";
+"accountPage.deviceRevocationSuccess" = "Gerät wurde getrennt";
+"accountPage.deviceRevocationTryAgain" = "Nochmal versuchen";
+"accountPage.deviceRevocationWrongPassword" = "Falsches Passwort";
+"accountPage.deviceRevocationUnknownDevice" = "Unbekanntes Gerät";
+"accountPage.deviceRevocationError" = "Fehler beim Trennen des Gerätes";
+"accountPage.namePlaceholder" = "Name";
+"accountPage.linkDeviceTitle" = "Weiteres Gerät verknüpfen";
+"accountPage.other" = "Anderes";
+"accountPage.removeAccountTitle" = "Konto entfernen";
+"accountPage.removeAccountMessage" = "Durch Anklicken von \"Entfernen\" wird dieses Konto auf diesem Gerät gelöscht! Diese Aktion kann nicht rückgängig gemacht werden. Außerdem kann Ihr registrierter Name verloren gehen.";
+"accountPage.removeAccountButton" = "Entfernen";
+//Account
+"account.sipUsername" = "Benutzername";
+"account.sipPassword" = "Passwort";
+"account.sipServer" = "SIP Server";
+"account.port" = "Port";
+"account.proxyServer" = "Proxy";
+"account.createSipAccount" = "SIP-Konto erstellen";
+"account.usernameLabel" = "Benutzername eingeben";
+"account.passwordLabel" = "Passwort eingeben";
+"account.serverLabel" = "Adresse eingeben";
+"account.portLabel" = "Port-Nummer eingeben";
+"account.accountStatus" = "Kontostatus";
+"account.enableAccount" = "Konto aktivieren";
+"account.statusOnline" = "Online";
+"account.statusOffline" = "Offline";
+"account.statusConnecting" = "Verbindet";
+"account.statusUnknown" = "Unbekannt";
+"account.statusConnectionerror" = "Verbindungsfehler";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "Keine gesperrten Kontakte";
+
+//Link New Device
+"linkDevice.title" = "Verbinde ein neues Gerät";
+"linkDevice.passwordError" = "Das eingegebene Kennwort entsperrt dieses Konto nicht.";
+"linkDevice.networkError" = "Ein Netzwerkfehler ist während des Exports aufgetreten";
+"linkDevice.defaultError" = "Während des Exports ist ein Fehler aufgetreten";
+"linkDevice.explanationMessage" = "Um den Prozess abzuschließen, öffnen Sie Jami auf dem neuen Gerät und wählen Sie die Option \"Dieses Gerät mit einem Konto verknüpfen\". Ihre PIN ist 10 Minuten gültig";
+"linkDevice.hudMessage" = "Verifiziere";
+
+//Contact Page
+"contactPage.startAudioCall" = "Audioanruf starten";
+"contactPage.startVideoCall" = "Videoanruf starten";
+"contactPage.sendMessage" = "Nachricht senden";
+"contactPage.clearConversation" = "Chat löschen";
+"contactPage.blockContact" = "Kontakt sperren";
+"contactPage.removeConversation" = "Unterhaltung entfernen";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "Initialisiere...";
+"dataTransfer.readableStatusError" = "Fehler";
+"dataTransfer.readableStatusAwaiting" = "Ausstehend …";
+"dataTransfer.readableStatusRefuse" = "Verweigern";
+"dataTransfer.readableStatusOngoing" = "Übertrage";
+"dataTransfer.readableStatusCanceled" = "Abgebrochen";
+"dataTransfer.readableStatusSuccess" = "Abgeschlossen";
+"dataTransfer.readableStatusAccept" = "Akzeptieren";
+"dataTransfer.readableStatusCancel" = "Abbrechen";
+
+//Notifications
+"notifications.incomingCall" = "Eingehender Anruf";
+"notifications.missedCall" = "Verpasster Anruf";
+"notifications.acceptCall" = "ANNEHMEN";
+"notifications.refuseCall" = "ABLEHNEN";
+"dataTransfer.readableStatusAwaiting" = "Ausstehend …";
+"dataTransfer.readableStatusRefuse" = "Verweigern";
+"dataTransfer.readableStatusOngoing" = "Übertrage";
+"dataTransfer.readableStatusCanceled" = "Abgebrochen";
+"dataTransfer.readableStatusSuccess" = "Abgeschlossen";
+"dataTransfer.readableStatusAccept" = "Akzeptieren";
+"dataTransfer.readableStatusCancel" = "Abbrechen";
+
+//Generated Message
+"generatedMessage.contactAdded" = "Kontakt hinzugefügt";
+"generatedMessage.invitationReceived" = "Einladung erhalten";
+"generatedMessage.invitationAccepted" = "Einladung angenommen";
+"generatedMessage.outgoingCall" = "Ausgehender Anruf";
+"generatedMessage.incomingCall" = "Eingehender Anruf";
+"generatedMessage.missedOutgoingCall" = "Verpasster ausgehender Anruf";
+"generatedMessage.missedIncomingCall" = "Verpasster eingehender Anruf";
+
+//General Settings
+"generalSettings.title" = "Allgemeine Einstellungen";
+"generalSettings.videoAcceleration" = "Videobeschleunigung aktivieren";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
-
-/* Contextual menu action */
-"Add to contacts" = "Add to contacts";
-
-/* Contextual menu action */
-"Place video call" = "Place video call";
-
-/* Contextual menu action */
-"Place audio call" = "Place audio call";
-
-/* Contextual menu action */
-"Clear conversation" = "Clear conversation";
-
-/* Contextual menu action */
-"Block contact" = "Block contact";
-
-/* Text shown to the user */
-"Alias : " = "Alias : ";
-
-/* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
-
-/* Contextual menu entry */
-"Backup account" = "Backup account";
-
-/* Contextual menu action */
-"Call number" = "Call number";
-
-/* File transfer canceled label */
-"Canceled" = "Canceled";
-
-/* Open panel title */
-"Choose a CA list" = "Choose a CA list";
-
-/* Open panel title */
-"Choose a certificate" = "Choose a certificate";
-
-/* Open panel title */
-"Choose a directory" = "Choose a directory";
-
-/* Open panel title */
-"Choose a private key file" = "Choose a private key file";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
-
-/* Contextual menu entry */
-"Choose file" = "Choose file";
-
-/* Contextual menu entry */
-"Share screen" = "Share screen";
-
-/* No comment provided by engineer. */
-"Copy" = "Copy";
-
-/* Contextual menu action */
-"Copy name" = "Copy name";
-
-/* Contextual menu action */
-"Copy number" = "Copy number";
-
-/* Contextual menu entry */
-"Create Jami Account" = "Create Jami Account";
-
-/* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
-
-/* File transfer failed label */
-"Failed" = "Failed";
-
-/* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
-
-/* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
-
-/* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
-
-/* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
-
-/* Message from {Name} */
-"Message from %@" = "Message from %@";
-
-/* User label */
-"New SIP account" = "New SIP account";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
-
-/* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
-
-/* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
-
-/* Indication for user */
-"Password is too short" = "Password is too short";
-
-/* Indication for user */
-"Passwords don't match" = "Passwords don't match";
-
-/* Button label */
-"Pause" = "Pause";
-
-/* Button label */
-"Play" = "Play";
-
-/* Button Action */
-"Refuse" = "Refuse";
-"Accept" = "Accept";
-
-/* Contextual menu entry */
-"Remove value" = "Remove value";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
-
-/* Contextual menu entry */
-"Restore account" = "Restore account";
-
-/* Button title */
-"Revise Input" = "Revise Input";
-
-/* Text shown to the user */
-"ID : " = "ID : ";
-
-/* No comment provided by engineer. */
-"Share" = "Share";
-
-/* File transfer successful label */
-"Success" = "Success";
-
-/* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
-
-/* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
-
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
-
-/* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
-
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
-
-/* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
-
-/* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
-
-/* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
-
-/* Name used when user leave field empty */
-"Unknown" = "Unknown";
-
-/* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
-
-/* Remove account alert title */
-"Remove account" = "Remove account";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-
-/* export account button title */
-"Select archive" = "Select archive";
-
-/* link account title */
-"Link to an account" = "Link to an account";
-
-/* Welcome title */
-"Welcome to Ring" = "Welcome to Jami";
-"Create a new account" = "Create a new account";
-"Add a SIP account" = "Add a SIP account";
-
-/* Notification message */
-"Send you a contact request" = "Send you a contact request";
-
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
-
-/* Backup error */
-"An error occured during the backup" = "An error occured during the backup";

@@ -26,7 +26,7 @@
 
 // Scan
 "scan.badQrCode" = "Verkeerde QR-code";
-"scan.search" = "Beizg met zoeken…";
+"scan.search" = "Bezig met zoeken…";
 
 // Smartlist
 "smartlist.yesterday" = "Gisteren";
