@@ -322,6 +322,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.textAlignment = .center
                     cell.selectionStyle = .none
                     let button = UIButton.init(frame: cell.frame)
+                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    button.frame.size = size
                     cell.addSubview(button)
                     button.rx.tap.subscribe(onNext: { [weak self] in
                         self?.confirmRemoveAccountAlert()
