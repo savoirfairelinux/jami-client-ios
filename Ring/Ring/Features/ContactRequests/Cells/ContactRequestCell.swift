@@ -35,7 +35,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
     override func setSelected(_ selected: Bool, animated: Bool) {
         self.backgroundColor = UIColor.jamiUITableViewCellSelection
         UIView.animate(withDuration: 0.35, animations: {
-            self.backgroundColor = UIColor.jamiUITableViewCellSelection.lighten(byPercentage: 5.0)
+            self.backgroundColor = UIColor.jamiUITableViewCellSelection.lighten(by: 5.0)
         })
     }
 

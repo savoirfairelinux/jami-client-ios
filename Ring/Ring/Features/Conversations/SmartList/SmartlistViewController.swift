@@ -101,8 +101,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
          or disappears
          */
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     @objc func dismissKeyboard() {
@@ -118,8 +118,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
-                                    NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
+            .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
+                                    NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
     }
 
     func applyL10n() {
@@ -154,7 +154,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         self.settingsButton.backgroundColor = nil
         self.settingsButton.rx.tap.subscribe(onNext: { _ in
-            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url, completionHandler: nil)
                 } else {
@@ -164,7 +164,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         }).disposed(by: self.disposeBag)
 
         let imageSettings = UIImage(asset: Asset.settings) as UIImage?
-        let generalSettingsButton   = UIButton(type: UIButtonType.system) as UIButton
+        let generalSettingsButton   = UIButton(type: UIButton.ButtonType.system) as UIButton
         generalSettingsButton.setImage(imageSettings, for: .normal)
         generalSettingsButton.contentMode = .scaleAspectFill
         let settingsButtonItem = UIBarButtonItem(customView: generalSettingsButton)
@@ -323,7 +323,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         addAccountButton.setTitle(L10n.Smartlist.addAccountButton, for: .normal)
         addAccountButton.setTitleColor(.jamiMain, for: .normal)
         addAccountButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 25)
-        let flexibleBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let flexibleBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
         let addBarButton = UIBarButtonItem(customView: addAccountButton)
         let toolbar = UIToolbar()
         toolbar.barTintColor = .jamiNavigationBar
@@ -342,7 +342,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
         guard let userInfo: Dictionary = notification.userInfo else {return}
-        guard let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
+        guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         guard let tabBarHeight = (self.tabBarController?.tabBar.frame.size.height) else {
@@ -441,7 +441,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchBar.tintColor = UIColor.jamiMain
         self.searchBar.barTintColor =  UIColor.jamiNavigationBar
 
-        self.view.bringSubview(toFront: self.searchBarShadow)
+        self.view.bringSubviewToFront(self.searchBarShadow)
 
         self.searchBarShadow.layer.shadowColor = UIColor.black.cgColor
         self.searchBarShadow.layer.shadowOffset = CGSize(width: 0.0, height: 2.5)

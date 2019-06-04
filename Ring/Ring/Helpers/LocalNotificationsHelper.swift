@@ -78,7 +78,7 @@ class LocalNotificationsHelper {
             content.title = title
             content.body = body
             content.userInfo = data
-            content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default
             content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
             let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
             let identifier = Int64(arc4random_uniform(10000000))
@@ -186,7 +186,7 @@ class LocalNotificationsHelper {
                     let content = UNMutableNotificationContent()
                     content.title = NotificationCallTitle.missedCall.getString()
                     content.body = name
-                    content.sound = UNNotificationSound.default()
+                    content.sound = UNNotificationSound.default
                     content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
                     let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
                     let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)

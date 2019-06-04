@@ -26,10 +26,10 @@ enum ConversationState: State {
     case startAudioCall(contactRingId: String, userName: String)
     case conversationDetail(conversationViewModel: ConversationViewModel)
     case contactDetail(conversationViewModel: ConversationModel)
-    case qrCode()
-    case createNewAccount()
+    case qrCode
+    case createNewAccount
     case showDialpad(inCall: Bool)
-    case showGeneralSettings()
+    case showGeneralSettings
     case navigateToCall(call: CallModel)
 }
 

@@ -392,11 +392,11 @@ class SmartlistViewModel: Stateable, ViewModel {
     }
 
     func showQRCode() {
-        self.stateSubject.onNext(ConversationState.qrCode())
+        self.stateSubject.onNext(ConversationState.qrCode)
     }
 
     func createAccount() {
-        self.stateSubject.onNext(ConversationState.createNewAccount())
+        self.stateSubject.onNext(ConversationState.createNewAccount)
     }
 
     func changeCurrentAccount(accountId: String) {
@@ -411,7 +411,7 @@ class SmartlistViewModel: Stateable, ViewModel {
     }
 
     func showGeneralSettings() {
-        self.stateSubject.onNext(ConversationState.showGeneralSettings())
+        self.stateSubject.onNext(ConversationState.showGeneralSettings)
     }
 
     lazy var callButtonTitle: Observable<String> = { [unowned self] in

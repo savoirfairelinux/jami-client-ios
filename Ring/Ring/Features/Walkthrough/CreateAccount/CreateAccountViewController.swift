@@ -95,8 +95,8 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     func setContentInset() {
@@ -182,18 +182,18 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
         // handle password error
         self.viewModel.passwordValidationState.map { $0.isValidated }
-            .skipUntil(self.passwordTextField.rx.controlEvent(UIControlEvents.editingDidEnd))
+            .skipUntil(self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
             .bind(to: self.passwordErrorLabel.rx.isHidden).disposed(by: self.disposeBag)
         self.viewModel.passwordValidationState.map { $0.message }
-            .skipUntil(self.passwordTextField.rx.controlEvent(UIControlEvents.editingDidEnd))
+            .skipUntil(self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
             .bind(to: self.passwordErrorLabel.rx.text).disposed(by: self.disposeBag)
 
         // handle registration error
         self.viewModel.usernameValidationState.asObservable().map { $0.isAvailable }
-            .skipUntil(self.usernameTextField.rx.controlEvent(UIControlEvents.editingDidBegin))
+            .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
             .bind(to: self.registerUsernameErrorLabel.rx.isHidden).disposed(by: self.disposeBag)
         self.viewModel.usernameValidationState.asObservable().map { $0.message }
-            .skipUntil(self.usernameTextField.rx.controlEvent(UIControlEvents.editingDidBegin))
+            .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
             .bind(to: self.registerUsernameErrorLabel.rx.text).disposed(by: self.disposeBag)
 
         // handle creation state

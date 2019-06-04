@@ -30,7 +30,7 @@
 #import "RegistrationResponse.h"
 #import "NameRegistrationResponse.h"
 #import "MessagesAdapter.h"
-#import "Chameleon/Chameleon.h"
+//#import "Chameleon/Chameleon.h"
 #import "ContactsAdapter.h"
 #import "PresenceAdapter.h"
 #import "VideoAdapter.h"

@@ -20,37 +20,37 @@
  */
 
 import Foundation
-import Chameleon
+//import Chameleon
 
-extension Chameleon {
-    static func setRingThemeUsingPrimaryColor (_ primaryColor: UIColor, withSecondaryColor secondaryColor: UIColor, andContentStyle contentStyle: UIContentStyle) {
-        var contentColor: UIColor
-        var secondaryContentColor: UIColor
-
-        switch contentStyle {
-        case .contrast:
-            contentColor = ContrastColorOf(primaryColor, returnFlat: false)
-            secondaryContentColor = ContrastColorOf(secondaryColor, returnFlat: false)
-        case .light:
-            contentColor = UIColor.white
-            secondaryContentColor = UIColor.white
-        case .dark:
-            contentColor = UIColor.flatBlackColorDark()
-            secondaryContentColor = UIColor.flatBlackColorDark()
-        }
-
-        MessageBubble.appearance().tintColor = secondaryContentColor
-        MessageBubble.appearance().backgroundColor = secondaryColor
-
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).tintColor = contentColor
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).backgroundColor = UIColor.jamiMsgCellSent
-        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellSent.self]).textColor = UIColor.jamiMsgCellSentText
-
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).tintColor = secondaryContentColor
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).backgroundColor = UIColor.jamiMsgCellReceived
-        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellReceived.self]).textColor = UIColor.jamiMsgCellReceivedText
-
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).tintColor = UIColor.clear
-        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).backgroundColor = UIColor.clear
-    }
-}
+//extension Chameleon {
+//    static func setRingThemeUsingPrimaryColor (_ primaryColor: UIColor, withSecondaryColor secondaryColor: UIColor, andContentStyle contentStyle: UIContentStyle) {
+//        var contentColor: UIColor
+//        var secondaryContentColor: UIColor
+//
+//        switch contentStyle {
+//        case .contrast:
+//            contentColor = ContrastColorOf(primaryColor, returnFlat: false)
+//            secondaryContentColor = ContrastColorOf(secondaryColor, returnFlat: false)
+//        case .light:
+//            contentColor = UIColor.white
+//            secondaryContentColor = UIColor.white
+//        case .dark:
+//            contentColor = UIColor.flatBlackColorDark()
+//            secondaryContentColor = UIColor.flatBlackColorDark()
+//        }
+//
+//        MessageBubble.appearance().tintColor = secondaryContentColor
+//        MessageBubble.appearance().backgroundColor = secondaryColor
+//
+//        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).tintColor = contentColor
+//        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellSent.self]).backgroundColor = UIColor.jamiMsgCellSent
+//        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellSent.self]).textColor = UIColor.jamiMsgCellSentText
+//
+//        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).tintColor = secondaryContentColor
+//        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellReceived.self]).backgroundColor = UIColor.jamiMsgCellReceived
+//        UILabel.appearance(whenContainedInInstancesOf: [MessageBubble.self, MessageCellReceived.self]).textColor = UIColor.jamiMsgCellReceivedText
+//
+//        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).tintColor = UIColor.clear
+//        MessageBubble.appearance(whenContainedInInstancesOf: [MessageCellGenerated.self]).backgroundColor = UIColor.clear
+//    }
+//}

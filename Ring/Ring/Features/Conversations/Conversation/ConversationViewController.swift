@@ -64,8 +64,8 @@ class ConversationViewController: UIViewController,
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
          or disappears
          */
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
@@ -90,15 +90,15 @@ class ConversationViewController: UIViewController,
                                            message: nil,
                                            preferredStyle: .alert)
 
-        let pictureAction = UIAlertAction(title: "Upload photo or movie", style: UIAlertActionStyle.default) { _ in
+        let pictureAction = UIAlertAction(title: "Upload photo or movie", style: UIAlertAction.Style.default) { _ in
             self.importImage()
         }
 
-        let documentsAction = UIAlertAction(title: "Upload file", style: UIAlertActionStyle.default) { _ in
+        let documentsAction = UIAlertAction(title: "Upload file", style: UIAlertAction.Style.default) { _ in
             self.importDocument()
         }
 
-        let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertActionStyle.cancel)
+        let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertAction.Style.cancel)
         alert.addAction(pictureAction)
         alert.addAction(documentsAction)
         alert.addAction(cancelAction)
@@ -109,11 +109,11 @@ class ConversationViewController: UIViewController,
     }
 
     func takePicture() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-            imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.rear
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.cameraDevice = UIImagePickerController.CameraDevice.rear
             imagePicker.modalPresentationStyle = .overFullScreen
             self.present(imagePicker, animated: false, completion: nil)
         }
@@ -131,14 +131,14 @@ class ConversationViewController: UIViewController,
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
         imagePicker.modalPresentationStyle = .overFullScreen
         self.present(imagePicker, animated: true, completion: nil)
     }
 
     func copyImageToCache(image: UIImage, imagePath: String) {
-        guard let imageData =  UIImagePNGRepresentation(image) else { return }
+        guard let imageData =  image.pngData() else { return }
         do {
             self.log.debug("copying image to: \(String(describing: imagePath))")
             try imageData.write(to: URL(fileURLWithPath: imagePath), options: .atomic)
@@ -148,26 +148,27 @@ class ConversationViewController: UIViewController,
     }
 
     // swiftlint:disable cyclomatic_complexity
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+    internal func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
         picker.dismiss(animated: true, completion: nil)
 
         var image: UIImage!
 
-        if picker.sourceType == UIImagePickerControllerSourceType.camera {
+        if picker.sourceType == UIImagePickerController.SourceType.camera {
             // image from camera
-            if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
+            if let img = info[.editedImage] as? UIImage {
                 image = img
-            } else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            } else if let img = info[.originalImage] as? UIImage {
                 image = self.fixImageOrientation(image: img)
             }
             // copy image to tmp
             let imageFileName = "IMG.png"
-            guard let imageData =  UIImagePNGRepresentation(image) else { return }
+            guard let imageData =  image.pngData() else { return }
             self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
-        } else if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
+        } else if picker.sourceType == UIImagePickerController.SourceType.photoLibrary {
             // image from library
-            guard let imageURL = info[UIImagePickerControllerReferenceURL] as? URL else { return }
+            guard let imageURL = info[UIImagePickerController.InfoKey.referenceURL] as? URL else { return }
             self.log.debug("imageURL: \(String(describing: imageURL))")
 
             let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
@@ -190,9 +191,9 @@ class ConversationViewController: UIViewController,
             guard let phAsset = result.firstObject else { return }
 
             if phAsset.mediaType == .image {
-                if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
+                if let img = info[.editedImage] as? UIImage {
                     image = img
-                } else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                } else if let img = info[.originalImage] as? UIImage {
                     image = img
                 }
                 // copy image to tmp
@@ -230,7 +231,7 @@ class ConversationViewController: UIViewController,
         guard let userInfo: Dictionary = notification.userInfo else {
             return
         }
-        guard let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
+        guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
@@ -272,7 +273,7 @@ class ConversationViewController: UIViewController,
         // Replace "< Home" with a back arrow while we are crunching everything to the left side of the bar for now.
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_button")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back_button")
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
 
         let titleView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: totalHeight))
 
@@ -462,7 +463,7 @@ class ConversationViewController: UIViewController,
         self.tableView.dataSource = self
 
         self.tableView.estimatedRowHeight = 50
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.separatorStyle = .none
 
         //Register cell
@@ -761,7 +762,7 @@ class ConversationViewController: UIViewController,
         activityViewController.popoverPresentationController?.sourceView = self.view
         activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
         activityViewController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
-        activityViewController.excludedActivityTypes = [UIActivityType.airDrop]
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
         self.present(activityViewController, animated: true, completion: nil)
     }
 }
