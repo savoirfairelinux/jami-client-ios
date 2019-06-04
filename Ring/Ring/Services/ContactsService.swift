@@ -85,7 +85,7 @@ class ContactsService {
         })
         self.contacts.value.removeAll()
         for contact in contacts {
-            if self.contacts.value.index(of: contact) == nil {
+            if self.contacts.value.firstIndex(of: contact) == nil {
                 self.contacts.value.append(contact)
                 self.log.debug("contact: \(String(describing: contact.userName))")
             }
@@ -102,7 +102,7 @@ class ContactsService {
         }) {
             self.contacts.value.removeAll()
             for contact in contacts {
-                if self.contacts.value.index(of: contact) == nil {
+                if self.contacts.value.firstIndex(of: contact) == nil {
                     self.contacts.value.append(contact)
                     self.log.debug("contact: \(String(describing: contact.userName))")
                 }
@@ -243,7 +243,7 @@ class ContactsService {
         guard let contactRequestToRemove = self.contactRequests.value.filter({ $0.ringId == ringId}).first else {
             return
         }
-        guard let index = self.contactRequests.value.index(where: { $0 === contactRequestToRemove }) else {
+        guard let index = self.contactRequests.value.firstIndex(where: { $0 === contactRequestToRemove }) else {
             return
         }
         self.contactRequests.value.remove(at: index)
@@ -319,7 +319,7 @@ extension ContactsService: ContactsAdapterDelegate {
                 return ContactModel(withDictionary: contactDict)
             }) {
                 for contact in contacts {
-                    if self.contacts.value.index(of: contact) == nil {
+                    if self.contacts.value.firstIndex(of: contact) == nil {
                         self.contacts.value.append(contact)
                         contactStatus.onNext(contact)
                     }

@@ -489,16 +489,18 @@ extension VideoService: VideoAdapterDelegate {
         self.incomingVideoFrame.onNext(image)
     }
 
-    func getImageOrienation() -> UIImageOrientation {
+    func getImageOrienation() -> UIImage.Orientation {
         switch self.currentOrientation {
         case AVCaptureVideoOrientation.portrait:
-            return UIImageOrientation.up
+            return UIImage.Orientation.up
         case AVCaptureVideoOrientation.portraitUpsideDown:
-            return UIImageOrientation.down
+            return UIImage.Orientation.down
         case AVCaptureVideoOrientation.landscapeRight:
-            return UIImageOrientation.right
+            return UIImage.Orientation.right
         case AVCaptureVideoOrientation.landscapeLeft:
-            return UIImageOrientation.left
+            return UIImage.Orientation.left
+        @unknown default:
+            return UIImage.Orientation.up
         }
     }
 

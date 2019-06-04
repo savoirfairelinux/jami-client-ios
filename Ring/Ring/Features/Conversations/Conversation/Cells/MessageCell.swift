@@ -296,7 +296,7 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.progressBar.tintColor = UIColor.jamiMain
             } else if item.bubblePosition() == .sent {
                 self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
-                self.progressBar.tintColor = UIColor.jamiMain.lighten(byPercentage: 0.2)
+                self.progressBar.tintColor = UIColor.jamiMain.lighten(by: 0.2)
             }
 
             if item.shouldDisplayTransferedImage {

@@ -69,6 +69,8 @@ func stringFromEventCode(with code: NSDataTransferEventCode) -> String {
     case .closed_by_peer: return "closed by peer"
     case .invalid_pathname: return "invalid pathname"
     case .unjoinable_peer: return "unjoinable peer"
+    @unknown default:
+       return "Invalid"
     }
 }
 // swiftlint:enable cyclomatic_complexity

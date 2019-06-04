@@ -83,13 +83,13 @@ extension UIImage {
     }
 
     func convertToData(ofMaxSize maxSize: Int) -> Data? {
-        guard let imageData = UIImageJPEGRepresentation(self, 0.9) else {
+        guard let imageData = self.jpegData(compressionQuality: 0.9) else {
             return nil
         }
         var fileSize = imageData.count
         var i = 10
         while fileSize > maxSize && i >= 0 {
-            guard let imageData = UIImageJPEGRepresentation(self, CGFloat(0.1 * Double(i))) else {
+            guard let imageData = self.jpegData(compressionQuality: CGFloat(0.1 * Double(i))) else {
                 return nil
             }
             fileSize = imageData.count
@@ -125,10 +125,10 @@ extension UIImage {
             newHeight = newWidth / ratio
         } else if ratio < 1, ratio != 0 {
             // android image orientation bug?
-            if  self.imageOrientation == UIImageOrientation.right ||
-                self.imageOrientation == UIImageOrientation.left ||
-                self.imageOrientation == UIImageOrientation.rightMirrored ||
-                self.imageOrientation == UIImageOrientation.leftMirrored {
+            if  self.imageOrientation == UIImage.Orientation.right ||
+                self.imageOrientation == UIImage.Orientation.left ||
+                self.imageOrientation == UIImage.Orientation.rightMirrored ||
+                self.imageOrientation == UIImage.Orientation.leftMirrored {
                 newHeight *= ratio
             } else {
                 newWidth = newHeight * ratio
@@ -172,10 +172,10 @@ extension UIImage {
             newHeight = newWidth / ratio
         } else if ratio < 1, ratio != 0 {
             // android image orientation bug?
-            if  self.imageOrientation == UIImageOrientation.right ||
-                self.imageOrientation == UIImageOrientation.left ||
-                self.imageOrientation == UIImageOrientation.rightMirrored ||
-                self.imageOrientation == UIImageOrientation.leftMirrored {
+            if  self.imageOrientation == UIImage.Orientation.right ||
+                self.imageOrientation == UIImage.Orientation.left ||
+                self.imageOrientation == UIImage.Orientation.rightMirrored ||
+                self.imageOrientation == UIImage.Orientation.leftMirrored {
                 newHeight *= ratio
             } else {
                 newWidth = newHeight * ratio
@@ -198,8 +198,8 @@ extension UIImage {
         //Setups up the font attributes that will be later used to dictate how the text should be drawn
         let textFont = UIFont.systemFont(ofSize: 20, weight: .semibold)
         let textFontAttributes = [
-            NSAttributedStringKey.font: textFont,
-            NSAttributedStringKey.foregroundColor: textColor]
+            NSAttributedString.Key.font: textFont,
+            NSAttributedString.Key.foregroundColor: textColor]
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         backgroundColor.setFill()
@@ -207,7 +207,7 @@ extension UIImage {
         //Put the image into a rectangle as large as the original image.
         self.draw(in: rect)
         // Our drawing bounds
-        let textSize = text.size(withAttributes: [NSAttributedStringKey.font: textFont])
+        let textSize = text.size(withAttributes: [NSAttributedString.Key.font: textFont])
         let textRect = CGRect(x: rect.size.width/2 - textSize.width/2, y: rect.size.height/2 - textSize.height/2,
                               width: textSize.width, height: textSize.height)
         text.draw(in: textRect, withAttributes: textFontAttributes)

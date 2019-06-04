@@ -59,8 +59,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
-                                    NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
+            .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
+                                    NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
     }
 
     func applyL10n() {
@@ -98,7 +98,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     private func configureBindings() {
         let infoButton = UIButton(type: .infoLight)
         let imageQrCode = UIImage(asset: Asset.qrCode) as UIImage?
-        let qrCodeButton   = UIButton(type: UIButtonType.custom) as UIButton
+        let qrCodeButton   = UIButton(type: UIButton.ButtonType.custom) as UIButton
         qrCodeButton.setImage(imageQrCode, for: .normal)
         self.viewModel.isAccountSip
             .asObservable()
@@ -140,7 +140,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
         //setup Table
         self.settingsTable.estimatedRowHeight = 35
-        self.settingsTable.rowHeight = UITableViewAutomaticDimension
+        self.settingsTable.rowHeight = UITableView.automaticDimension
         self.settingsTable.tableFooterView = UIView()
 
         //Register cell

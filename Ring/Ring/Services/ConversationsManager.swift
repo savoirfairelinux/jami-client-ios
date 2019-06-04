@@ -92,6 +92,8 @@ class ConversationsManager: MessagesAdapterDelegate {
                         self.conversationService.dataTransferMessageMap.removeValue(forKey: transferId)
                     case .created:
                         break
+                    @unknown default:
+                        break
                     }
                     self.conversationService.transferStatusChanged(status, for: transferId, accountId: transferInfo.accountId, to: transferInfo.peer)
                 default:

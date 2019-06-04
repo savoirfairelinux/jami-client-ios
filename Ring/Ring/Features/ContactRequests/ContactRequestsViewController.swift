@@ -59,8 +59,8 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         self.setupTableView()
         self.setupBindings()
         self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
-                                    NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
+            .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
+                                    NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
     }
 
     func applyL10n() {
@@ -70,7 +70,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     func setupTableView() {
         self.tableView.estimatedRowHeight = 100.0
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.allowsSelection = true
 
         //Register cell

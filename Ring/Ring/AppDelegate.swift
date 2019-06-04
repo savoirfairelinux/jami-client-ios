@@ -24,8 +24,6 @@
 import UIKit
 import SwiftyBeaver
 import RxSwift
-import Chameleon
-//import Contacts
 import PushKit
 import ContactsUI
 
@@ -90,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     fileprivate let disposeBag = DisposeBag()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // ignore sigpipe
         // swiftlint:disable nesting
@@ -130,9 +128,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.daemonService.connectivityChanged()
             })
             .disposed(by: self.disposeBag)
-
-        // themetize the app
-        Chameleon.setRingThemeUsingPrimaryColor(UIColor.jamiMain, withSecondaryColor: UIColor.jamiSecondary, andContentStyle: .light)
 
         self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
                                                                 contactService: self.contactsService,
@@ -278,6 +273,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
                 case .provisional:
                     if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
+                @unknown default:
+                    break
                 }
             })
         } else {
