@@ -46,7 +46,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
 
     func setUpTable() {
         self.settingsTable.estimatedRowHeight = 35
-        self.settingsTable.rowHeight = UITableViewAutomaticDimension
+        self.settingsTable.rowHeight = UITableView.automaticDimension
         self.settingsTable.tableFooterView = UIView()
         self.setUpDataSource()
     }

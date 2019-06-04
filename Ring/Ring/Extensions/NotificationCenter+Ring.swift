@@ -25,11 +25,11 @@ extension NotificationCenter {
     static var keyboardHeight: Observable<CGFloat> {
         return Observable
             .from([
-                NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillShow)
+                NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
                     .map { notification -> CGFloat in
-                        return (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                        return (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
                 },
-                NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide)
+                NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
                     .map { _ -> CGFloat in
                         0
                 }

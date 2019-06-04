@@ -150,7 +150,6 @@
 		0EAA9DB52029F0AA005E245C /* ProxyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA9DB32029F0AA005E245C /* ProxyCell.xib */; };
 		0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */; };
 		0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */; };
-		0EB479951FA28A7300106AFD /* ButtonTransparentBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB479941FA28A7300106AFD /* ButtonTransparentBackground.swift */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
 		0EBCAA4E202E60F000E2A545 /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EBCAA4D202E60F000E2A545 /* default.wav */; };
 		0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
@@ -217,8 +216,6 @@
 		1A2D18FD1F292DAD00B2C785 /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A2D18FB1F292DAD00B2C785 /* ConversationCell.xib */; };
 		1A2D18FF1F29352D00B2C785 /* MeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18FE1F29352D00B2C785 /* MeViewModel.swift */; };
 		1A2D19011F29353A00B2C785 /* MeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D19001F29353A00B2C785 /* MeDetailViewModel.swift */; };
-		1A3CA32B1F102BB700283748 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3CA32A1F102BB700283748 /* Chameleon.framework */; };
-		1A3CA32D1F13DA7200283748 /* Chameleon+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CA32C1F13DA7200283748 /* Chameleon+Ring.swift */; };
 		1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */; };
 		1A3D28A91F0EBF0200B524EE /* UIView+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */; };
 		1A5DC01E1F355DA70075E8EF /* ContactsAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC01D1F355DA70075E8EF /* ContactsAdapterDelegate.swift */; };
@@ -478,7 +475,6 @@
 		0EB12451224AB1030025F8CA /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceCell.xib; sourceTree = "<group>"; };
 		0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
-		0EB479941FA28A7300106AFD /* ButtonTransparentBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTransparentBackground.swift; sourceTree = "<group>"; };
 		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
 		0EBCAA4D202E60F000E2A545 /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
@@ -546,7 +542,6 @@
 		1A2D18FE1F29352D00B2C785 /* MeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewModel.swift; sourceTree = "<group>"; };
 		1A2D19001F29353A00B2C785 /* MeDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeDetailViewModel.swift; sourceTree = "<group>"; };
 		1A3CA32A1F102BB700283748 /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
-		1A3CA32C1F13DA7200283748 /* Chameleon+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chameleon+Ring.swift"; sourceTree = "<group>"; };
 		1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bool+String.swift"; sourceTree = "<group>"; };
 		1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ring.swift"; sourceTree = "<group>"; };
 		1A5DC00A1F3558980075E8EF /* ContactsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsAdapter.h; sourceTree = "<group>"; };
@@ -706,7 +701,6 @@
 				5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */,
 				0ED666101F9FED1C00743D42 /* AMPopTip.framework in Frameworks */,
 				0EEFBA3C1F83DA21000EDBAD /* libsecp256k1.a in Frameworks */,
-				1A3CA32B1F102BB700283748 /* Chameleon.framework in Frameworks */,
 				1A1E476F1F0E894600EA9A36 /* SwiftyBeaver.framework in Frameworks */,
 				1A1E476D1F0E808500EA9A36 /* Reusable.framework in Frameworks */,
 				56559B0E1EE8777600BF20E1 /* RxRealm.framework in Frameworks */,
@@ -912,7 +906,6 @@
 				0273C3071E0C68BF00CF00BA /* DesignableButton.swift */,
 				56AC650D1E85694D00EA1AA9 /* DesignableTextField.swift */,
 				1A2041901F1FD46200C08435 /* DesignableView.swift */,
-				0EB479941FA28A7300106AFD /* ButtonTransparentBackground.swift */,
 				0E438A99204F47E700402900 /* SettingsTableView.swift */,
 			);
 			path = UI;
@@ -929,7 +922,6 @@
 				1A3D28A61F0EB9DB00B524EE /* Bool+String.swift */,
 				1A3D28A81F0EBF0200B524EE /* UIView+Ring.swift */,
 				1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */,
-				1A3CA32C1F13DA7200283748 /* Chameleon+Ring.swift */,
 				1A2D18991F2642C000B2C785 /* NotificationCenter+Ring.swift */,
 				1A2D189B1F264AD900B2C785 /* UIViewController+Ring.swift */,
 				1A2D18A51F27F7A400B2C785 /* UIViewController+Rx.swift */,
@@ -1843,7 +1835,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxRealm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
 				"$(SRCROOT)/Carthage/build/iOS/AMPopTip.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
@@ -1862,7 +1853,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRealm.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reusable.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyBeaver.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Chameleon.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AMPopTip.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SQLite.framework",
@@ -1899,7 +1889,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PROJECT_DIR}/swiftgen/swiftgen.sh";
+			shellScript = "${PROJECT_DIR}/swiftgen/swiftgen.sh\n";
 		};
 		6236602D200914C9002598C1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1986,7 +1976,6 @@
 				0EE1B54E1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift in Sources */,
 				0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
-				1A3CA32D1F13DA7200283748 /* Chameleon+Ring.swift in Sources */,
 				0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */,
 				1ABE07E21F0D924700D36361 /* Strings.swift in Sources */,
 				0E6F544D223BFE3E00ECC3CE /* DisposableCell.swift in Sources */,
@@ -2029,7 +2018,6 @@
 				0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */,
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
-				0EB479951FA28A7300106AFD /* ButtonTransparentBackground.swift in Sources */,
 				0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */,
 				0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */,
 				0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */,
@@ -2237,7 +2225,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2288,7 +2276,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2328,7 +2316,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "";
 			};
@@ -2367,7 +2355,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "";
 			};
@@ -2494,7 +2482,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Development;
@@ -2533,7 +2521,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "";
 			};

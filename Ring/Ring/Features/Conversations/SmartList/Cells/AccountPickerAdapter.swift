@@ -48,7 +48,7 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
     }
 
     public func rowForAccountId(account: AccountModel) -> Int? {
-        return self.items.index { $0.account === account }
+        return self.items.firstIndex { $0.account === account }
     }
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {

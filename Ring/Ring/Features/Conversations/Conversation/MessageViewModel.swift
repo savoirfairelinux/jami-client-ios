@@ -57,7 +57,6 @@ class MessageViewModel {
 
     private let disposeBag = DisposeBag()
 
-    // swiftlint:disable cyclomatic_complexity
     init(withInjectionBag injectionBag: InjectionBag,
          withMessage message: MessageModel) {
         self.accountService = injectionBag.accountService

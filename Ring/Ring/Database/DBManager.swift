@@ -105,6 +105,8 @@ enum InteractionStatus: String {
         case .sent: self = .succeed
         case .read: self = .read
         case .failure: self = .failed
+        @unknown default:
+            self = .unknown
         }
     }
 

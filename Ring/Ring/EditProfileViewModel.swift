@@ -92,7 +92,7 @@ class EditProfileViewModel {
         guard let account = self.accountService.currentAccount else {return}
         var photo: String?
         if let image = self.image, !image.isEqual(defaultImage),
-            let imageData = UIImagePNGRepresentation(image) {
+            let imageData = image.pngData() {
             photo = imageData.base64EncodedString()
         }
         self.profileService.updateAccountProfile(accountId: account.id,

@@ -132,7 +132,7 @@ extension UIViewController {
         self.navigationController?.navigationBar.layer.masksToBounds = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        let textAttributes = [NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
+        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
     }

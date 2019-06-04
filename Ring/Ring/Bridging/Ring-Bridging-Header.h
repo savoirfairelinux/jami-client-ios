@@ -30,13 +30,11 @@
 #import "RegistrationResponse.h"
 #import "NameRegistrationResponse.h"
 #import "MessagesAdapter.h"
-#import "Chameleon/Chameleon.h"
 #import "ContactsAdapter.h"
 #import "PresenceAdapter.h"
 #import "VideoAdapter.h"
 #import "AudioAdapter.h"
 #import <CommonCrypto/CommonCrypto.h>
-//#import <Contacts/Contacts.h>
 #import <ContactsUI/ContactsUI.h>
 #import <UserNotifications/UserNotifications.h>
 #import "CallsAdapter.h"

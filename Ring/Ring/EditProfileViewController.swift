@@ -80,15 +80,15 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
                                            message: nil,
                                            preferredStyle: .actionSheet)
 
-        let cameraAction = UIAlertAction(title: L10n.Alerts.profileTakePhoto, style: UIAlertActionStyle.default) { _ in
+        let cameraAction = UIAlertAction(title: L10n.Alerts.profileTakePhoto, style: UIAlertAction.Style.default) { _ in
             self.takePicture()
         }
 
-        let pictureAction = UIAlertAction(title: L10n.Alerts.profileUploadPhoto, style: UIAlertActionStyle.default) { _ in
+        let pictureAction = UIAlertAction(title: L10n.Alerts.profileUploadPhoto, style: UIAlertAction.Style.default) { _ in
             self.importPicture()
         }
 
-        let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertActionStyle.cancel)
+        let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertAction.Style.cancel)
 
         alert.addAction(cameraAction)
         alert.addAction(pictureAction)
@@ -100,11 +100,11 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
     }
 
     func takePicture() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-            imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.front
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.cameraDevice = UIImagePickerController.CameraDevice.front
             imagePicker.allowsEditing = true
             imagePicker.modalPresentationStyle = .overFullScreen
             self.present(imagePicker, animated: true, completion: nil)
@@ -115,19 +115,20 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.modalPresentationStyle = .overFullScreen
         self.present(imagePicker, animated: true, completion: nil)
     }
 
     // MARK: - Delegates
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+    internal func imagePickerController(_ picker: UIImagePickerController,
+                                        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         var image: UIImage!
 
-        if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
+        if let img = info[.editedImage] as? UIImage {
             image = img
 
-        } else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        } else if let img = info[.originalImage] as? UIImage {
             image = img
         }
 
