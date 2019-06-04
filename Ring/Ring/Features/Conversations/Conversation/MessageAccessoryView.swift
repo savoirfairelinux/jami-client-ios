@@ -45,7 +45,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
                 return
             }
             self.bottomAnchor
-                .constraintLessThanOrEqualToSystemSpacingBelow(window.safeAreaLayoutGuide.bottomAnchor,
+                .constraint(lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor,
                                                                multiplier: 1)
                 .isActive = true
         }

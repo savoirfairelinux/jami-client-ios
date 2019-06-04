@@ -21,7 +21,6 @@
  */
 
 import UIKit
-import Chameleon
 import RxSwift
 import Reusable
 import SwiftyBeaver
@@ -127,8 +126,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     @objc func capturedVideoSwipped(gesture: UISwipeGestureRecognizer) {
         if self.avatarView.isHidden == false { return }
-        if gesture.direction == UISwipeGestureRecognizerDirection.left && (self.isVideoHidden == false) { return }
-        if gesture.direction == UISwipeGestureRecognizerDirection.right && (self.isVideoHidden == true) { return }
+        if gesture.direction == UISwipeGestureRecognizer.Direction.left && (self.isVideoHidden == false) { return }
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right && (self.isVideoHidden == true) { return }
         self.hideCapturedVideo()
     }
 
@@ -174,7 +173,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func setUpCallButtons() {
-        self.mainView.bringSubview(toFront: self.buttonsContainer)
+        self.mainView.bringSubviewToFront(self.buttonsContainer)
         self.buttonsContainer.viewModel = self.viewModel.containerViewModel
         self.buttonsContainer.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -183,9 +182,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             }).disposed(by: self.disposeBag)
 
         self.buttonsContainer.acceptCallButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.answerCall()
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.answerCall()
                     .subscribe()
+                    .disposed(by: self.disposeBag)
             }).disposed(by: self.disposeBag)
 
         self.buttonsContainer.dialpadButton.rx.tap

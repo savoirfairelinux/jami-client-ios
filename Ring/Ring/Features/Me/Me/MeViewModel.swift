@@ -518,7 +518,7 @@ class MeViewModel: ViewModel, Stateable {
         self.accountService.changeProxyStatus(accountID: account.id, enable: enable)
         // if notiications not allowed open application settings
         if enable == true && enable != notificationsPermitted.value {
-            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url, completionHandler: nil)
                 } else {

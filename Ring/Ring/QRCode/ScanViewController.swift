@@ -105,8 +105,8 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 videoPreviewLayer?.frame = view.layer.bounds
                 self.searchTitle.text = L10n.Scan.search
                 view.layer.addSublayer(videoPreviewLayer!)
-                view.bringSubview(toFront: header)
-                view.bringSubview(toFront: self.scanImage)
+                view.bringSubviewToFront(header)
+                view.bringSubviewToFront(self.scanImage)
             } catch { print("Error") }
         }
 

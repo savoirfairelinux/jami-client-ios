@@ -54,8 +54,8 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
 
         self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
-                                    NSAttributedStringKey.foregroundColor: UIColor.jamiMain]
+            .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
+                                    NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
     }
 
     func setupTableView() {

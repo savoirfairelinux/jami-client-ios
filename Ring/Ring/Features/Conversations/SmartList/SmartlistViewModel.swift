@@ -324,7 +324,7 @@ class SmartlistViewModel: Stateable, ViewModel {
 
     func delete(conversationViewModel: ConversationViewModel) {
 
-        if let index = self.conversationViewModels.index(where: ({ cvm in
+        if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
 
@@ -337,7 +337,7 @@ class SmartlistViewModel: Stateable, ViewModel {
 
     func clear(conversationViewModel: ConversationViewModel) {
 
-        if let index = self.conversationViewModels.index(where: ({ cvm in
+        if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
 
@@ -349,7 +349,7 @@ class SmartlistViewModel: Stateable, ViewModel {
     }
 
     func blockConversationsContact(conversationViewModel: ConversationViewModel) {
-        if let index = self.conversationViewModels.index(where: ({ cvm in
+        if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
             let contactUri = conversationViewModel.conversation.value.participantUri
@@ -392,11 +392,11 @@ class SmartlistViewModel: Stateable, ViewModel {
     }
 
     func showQRCode() {
-        self.stateSubject.onNext(ConversationState.qrCode())
+        self.stateSubject.onNext(ConversationState.qrCode)
     }
 
     func createAccount() {
-        self.stateSubject.onNext(ConversationState.createNewAccount())
+        self.stateSubject.onNext(ConversationState.createNewAccount)
     }
 
     func changeCurrentAccount(accountId: String) {
@@ -411,7 +411,7 @@ class SmartlistViewModel: Stateable, ViewModel {
     }
 
     func showGeneralSettings() {
-        self.stateSubject.onNext(ConversationState.showGeneralSettings())
+        self.stateSubject.onNext(ConversationState.showGeneralSettings)
     }
 
     lazy var callButtonTitle: Observable<String> = { [unowned self] in

@@ -49,14 +49,17 @@ class AudioService {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(audioRouteChangeListener(_:)),
-            name: NSNotification.Name.AVAudioSessionRouteChange,
+            name: AVAudioSession.routeChangeNotification,
             object: nil)
     }
 
     func startAVAudioSession() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord,
-                                                            with: AVAudioSessionCategoryOptions.allowBluetooth)
+            if #available(iOS 10.0, *) {
+                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [AVAudioSession.CategoryOptions.allowBluetooth])
+            } else {
+                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [AVAudioSession.CategoryOptions.allowBluetooth])
+            }
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             log.error("\(error)")
@@ -68,14 +71,14 @@ class AudioService {
     @objc private func audioRouteChangeListener(_ notification: Notification) {
         let reasonRaw = notification.userInfo![AVAudioSessionRouteChangeReasonKey] as! UInt
         self.log.debug("Audio route change: \(reasonRaw)")
-        guard let reason = AVAudioSessionRouteChangeReason(rawValue: reasonRaw) else {
+        guard let reason = AVAudioSession.RouteChangeReason(rawValue: reasonRaw) else {
             return
         }
         overrideAudioRoute(reason)
     }
     // swiftlint:enable force_cast
 
-    func overrideAudioRoute(_ reason: AVAudioSessionRouteChangeReason) {
+    func overrideAudioRoute(_ reason: AVAudioSession.RouteChangeReason) {
         let wasHeadsetConnected = isHeadsetConnected.value
         let bluetoothConnected = bluetoothAudioConnected()
         let headphonesConnected = headphoneAudioConnected()
@@ -125,9 +128,9 @@ class AudioService {
     func bluetoothAudioConnected() -> Bool {
         let outputs = AVAudioSession.sharedInstance().currentRoute.outputs
         for output in outputs {
-            if  output.portType == AVAudioSessionPortBluetoothA2DP ||
-                output.portType == AVAudioSessionPortBluetoothHFP ||
-                output.portType == AVAudioSessionPortBluetoothLE {
+            if  output.portType == AVAudioSession.Port.bluetoothA2DP ||
+                output.portType == AVAudioSession.Port.bluetoothHFP ||
+                output.portType == AVAudioSession.Port.bluetoothLE {
                 return true
             }
         }
@@ -136,7 +139,7 @@ class AudioService {
 
     func headphoneAudioConnected() -> Bool {
         let outputs = AVAudioSession.sharedInstance().currentRoute.outputs
-        for output in outputs where output.portType == AVAudioSessionPortHeadphones {
+        for output in outputs where output.portType == AVAudioSession.Port.headphones {
             return true
         }
         return false
@@ -144,7 +147,7 @@ class AudioService {
 
     func speakerIsActive() -> Bool? {
         if let output = AVAudioSession.sharedInstance().currentRoute.outputs.first {
-            return output.uid == AVAudioSessionPortBuiltInSpeaker
+            return output.uid == AVAudioSession.Port.builtInSpeaker.rawValue
         }
         return nil
     }

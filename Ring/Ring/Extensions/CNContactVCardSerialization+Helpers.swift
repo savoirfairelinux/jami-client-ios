@@ -63,8 +63,8 @@ extension CNContactVCardSerialization {
         }
 
         if let scaledImage = scaledImage {
-            if UIImagePNGRepresentation(scaledImage) != nil {
-                image = UIImagePNGRepresentation(scaledImage)!
+            if scaledImage.pngData() != nil {
+                image = scaledImage.pngData()!
             }
         }
 
