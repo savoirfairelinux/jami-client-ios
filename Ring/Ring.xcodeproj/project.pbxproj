@@ -78,7 +78,6 @@
 		04399B0B1D1C341A00E99CD9 /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD91D1C341A00E99CD9 /* libsrtp.a */; };
 		04399B0C1D1C341A00E99CD9 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADA1D1C341A00E99CD9 /* libswresample.a */; };
 		04399B0D1D1C341A00E99CD9 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADB1D1C341A00E99CD9 /* libswscale.a */; };
-		04399B0E1D1C341A00E99CD9 /* libthreadutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADC1D1C341A00E99CD9 /* libthreadutil.a */; };
 		04399B0F1D1C341A00E99CD9 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
 		04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
@@ -751,7 +750,6 @@
 				04399B0B1D1C341A00E99CD9 /* libsrtp.a in Frameworks */,
 				04399B0C1D1C341A00E99CD9 /* libswresample.a in Frameworks */,
 				04399B0D1D1C341A00E99CD9 /* libswscale.a in Frameworks */,
-				04399B0E1D1C341A00E99CD9 /* libthreadutil.a in Frameworks */,
 				04399B0F1D1C341A00E99CD9 /* libupnp.a in Frameworks */,
 				04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */,
 				04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */,
