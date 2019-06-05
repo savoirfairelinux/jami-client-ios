@@ -54,7 +54,8 @@ class ConversationsManager: MessagesAdapterDelegate {
             })
             .subscribe(onNext: { [unowned self] event in
                 guard   let transferId: UInt64 = event.getEventInput(ServiceEventInput.transferId),
-                        let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId) else {
+                        let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId),
+                let currentAccount = self.accountsService.currentAccount else {
                     self.log.error("ConversationsManager: can't find transferInfo")
                     return
                 }
@@ -65,7 +66,8 @@ class ConversationsManager: MessagesAdapterDelegate {
                         .generateDataTransferMessage(transferId: transferId,
                                                      transferInfo: transferInfo,
                                                      accountId: transferInfo.accountId,
-                                                     photoIdentifier: photoIdentifier)
+                                                     photoIdentifier: photoIdentifier,
+                                                     updateConversation: currentAccount.id == transferInfo.accountId )
                         .subscribe(onCompleted: {
                             guard let transferInfo = self.dataTransferService
                                 .getTransferInfo(withId: transferId) else {return}

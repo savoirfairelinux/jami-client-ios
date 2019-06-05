@@ -137,7 +137,8 @@ class SmartlistViewModel: Stateable, ViewModel {
     lazy var conversations: Observable<[ConversationSection]> = { [unowned self] in
         //get initial value
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
-            self.conversationsService.conversationsForCurrentAccount
+            self.conversationsService
+                .conversationsForCurrentAccount
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { (conversations) in
                     self.conversationsForCurrentAccount.onNext(conversations)

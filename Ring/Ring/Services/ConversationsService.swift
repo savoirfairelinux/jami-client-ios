@@ -243,7 +243,8 @@ class ConversationsService {
     func generateDataTransferMessage(transferId: UInt64,
                                      transferInfo: NSDataTransferInfo,
                                      accountId: String,
-                                     photoIdentifier: String?) -> Completable {
+                                     photoIdentifier: String?,
+                                     updateConversation: Bool) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
 
@@ -278,12 +279,15 @@ class ConversationsService {
                     self.dbManager.getConversationsObservable(for: accountId)
                         .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe(onNext: { conversationsModels in
-                            self.conversations.value = conversationsModels
-                            self.messagesSemaphore.signal()
+                            if updateConversation {
+                                self.conversations.value = conversationsModels
+                            }
                             let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
                             var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                             serviceEvent.addEventInput(.transferId, value: transferId)
                             self.responseStream.onNext(serviceEvent)
+
+                            self.messagesSemaphore.signal()
                             completable(.completed)
                         })
                         .disposed(by: (self.disposeBag))
@@ -413,42 +417,23 @@ class ConversationsService {
                                for transferId: UInt64,
                                accountId: String,
                                to uri: String) {
-        guard let contactUri = JamiURI.init(schema: URIType.ring, infoHach: uri).uriString else {return}
         self.messagesSemaphore.wait()
-        //Get conversations for this sender
-        let conversation = self.conversations.value.filter({ conversation in
-            return  conversation.participantUri == contactUri &&
-                conversation.accountId == accountId
-        }).first
-
-        //Find message
-        if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
-            return  message.daemonId == String(transferId)
-        }) {
-            if let message = messages.first {
-                self.dbManager
-                    .updateTransferStatus(daemonID: message.daemonId,
-                                          withStatus: transferStatus,
-                                          accountId: accountId)
-                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                    .subscribe(onCompleted: { [unowned self] in
-                        self.messagesSemaphore.signal()
-                        self.log.info("ConversationService: transferStatusChanged - transfer status updated")
-                        let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
-                        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-                        serviceEvent.addEventInput(.transferId, value: transferId)
-                        serviceEvent.addEventInput(.state, value: transferStatus)
-                        self.responseStream.onNext(serviceEvent)
-                    }, onError: { _ in
-                        self.messagesSemaphore.signal()
-                    })
-                    .disposed(by: self.disposeBag)
-            } else {
-                self.log.error("ConversationService: transferStatusChanged - transfer not found")
+        self.dbManager
+            .updateTransferStatus(daemonID: String(transferId),
+                                  withStatus: transferStatus,
+                                  accountId: accountId)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(onCompleted: { [unowned self] in
                 self.messagesSemaphore.signal()
-            }
-        } else {
-            self.messagesSemaphore.signal()
-        }
+                self.log.info("ConversationService: transferStatusChanged - transfer status updated")
+                let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
+                var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+                serviceEvent.addEventInput(.transferId, value: transferId)
+                serviceEvent.addEventInput(.state, value: transferStatus)
+                self.responseStream.onNext(serviceEvent)
+                }, onError: { _ in
+                    self.messagesSemaphore.signal()
+            })
+            .disposed(by: self.disposeBag)
     }
 }
