@@ -404,10 +404,13 @@ class AccountsService: AccountAdapterDelegate {
 
     func setRingtonePath(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
-        guard let ringtonePath = Bundle
-            .main.url(forResource: "default",
-                      withExtension: "wav") else { return }
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath), withValue: (ringtonePath.path))
+        if details
+            .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == "default.wav" {
+            return
+        }
+        details
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath),
+                 withValue: "default.wav")
         setAccountDetails(forAccountId: accountId, withDetails: details)
     }
 
@@ -565,11 +568,7 @@ class AccountsService: AccountAdapterDelegate {
         }
         accountDetails!.updateValue("oversip", forKey: ConfigKey.accountDTMFType.rawValue)
         accountDetails!.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
-        if let ringtonePath = Bundle
-            .main.url(forResource: "default",
-                      withExtension: "wav") {
-            accountDetails!.updateValue(ringtonePath.path, forKey: ConfigKey.ringtonePath.rawValue)
-        }
+        accountDetails!.updateValue("default.wav", forKey: ConfigKey.ringtonePath.rawValue)
         accountDetails!.updateValue(accountType, forKey: ConfigKey.accountType.rawValue)
         accountDetails!.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
         return accountDetails!
