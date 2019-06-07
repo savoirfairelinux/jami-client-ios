@@ -87,7 +87,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Error en la red";
 "createAccount.UsernameNotRegisteredMessage" = "Registrado";
 "createAccount.timeoutTitle" = "Cuenta creada";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.timeoutMessage" = "Registro de nombre de usuario en proceso... Puede tomar unos instantes.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asociación de la cuenta";
