@@ -135,7 +135,7 @@
 "calls.unknown" = "Desconhecido";
 "calls.incomingCallInfo" = "quer conversar consigo";
 "calls.ringing" = "A tocar...";
-"calls.connecting" = "A conectar...";
+"calls.connecting" = "A conectar…";
 "calls.searching" = "A pesquisar…";
 "calls.callFinished" = "Chamada terminada";
 "calls.currentCallWith" = "Chamar com";
@@ -157,7 +157,7 @@
 "accountPage.enableNotifications" = "Ativar Notificações";
 "accountPage.proxyDisabledAlertTitle" = "Servidor Proxy Desativado";
 "accountPage.proxyDisabledAlertBody" = "Para receber as notificações ative o proxy";
-"accountPage.revokeDeviceTitle" = "Desvincular dispositivo";
+"accountPage.revokeDeviceTitle" = "Revogar dispositivo";
 "accountPage.revokeDeviceMessage" = "Tem a certeza que quer desvincular este dispositivo? Esta ação não pode ser desfeita.";
 "accountPage.revokeDeviceButton" = "Desvincular";
 "accountPage.revokeDevicePlaceholder" = "Introduza a sua palavra-chave";
@@ -169,7 +169,7 @@
 "accountPage.deviceRevocationUnknownDevice" = "Dispositivo desconhecido";
 "accountPage.deviceRevocationError" = "Erro ao desvincular o dispositivo";
 "accountPage.namePlaceholder" = "Nome";
-"accountPage.linkDeviceTitle" = "Ligar outro dispositivo";
+"accountPage.linkDeviceTitle" = "Associar outro dispositivo";
 "accountPage.other" = "Outro";
 "accountPage.removeAccountTitle" = "Remover conta";
 "accountPage.removeAccountMessage" = "Ao clicar em \"Remover\" irá remover esta conta neste dispositivo! Esta ação não pode ser desfeita. O seu nome de utilizador também será perdido.";
@@ -246,6 +246,6 @@
 "generatedMessage.missedIncomingCall" = "Chamadas recebidas perdidas";
 
 //General Settings
-"generalSettings.title" = "Configurações gerias";
+"generalSettings.title" = "Configurações gerais";
 "generalSettings.videoAcceleration" = "Ativar aceleração de vídeo";
 

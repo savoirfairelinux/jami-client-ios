@@ -58,7 +58,7 @@
 "welcome.createAccount" = "Створити обліковий запис Джамі";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Пропустити";
 "createProfile.profileCreated" = "Далі";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -238,7 +238,7 @@
 
 //Generated Message
 "generatedMessage.contactAdded" = "Контакт додано";
-"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.invitationReceived" = "Отримано запрошення";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
 "generatedMessage.incomingCall" = "Вхідний виклик";
