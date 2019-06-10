@@ -422,6 +422,9 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+        if UIApplication.shared.applicationState != .active {
+            self.audioService.startAVAudioSession()
+        }
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
     }
 
