@@ -112,6 +112,9 @@ class CallViewModel: Stateable, ViewModel {
                 if hide {
                     self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation, callID: nil)
                     self?.videoService.stopAudioDevice()
+                    if #available(iOS 10.0, *), let call = self?.call {
+                        self?.callsProvider.stopCall(callUUID: call.callUUID)
+                    }
                 }
                 return hide
             })
@@ -300,6 +303,7 @@ class CallViewModel: Stateable, ViewModel {
 
     var containerViewModel: ButtonsContainerViewModel?
     let injectionBag: InjectionBag
+    let callsProvider: CallsProviderDelegate
 
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
@@ -308,6 +312,7 @@ class CallViewModel: Stateable, ViewModel {
         self.videoService = injectionBag.videoService
         self.audioService = injectionBag.audioService
         self.profileService = injectionBag.profileService
+        self.callsProvider = injectionBag.callsProvider
         self.injectionBag = injectionBag
 
         callService.currentCall.filter({ [weak self] call in
@@ -319,6 +324,20 @@ class CallViewModel: Stateable, ViewModel {
                 .setCameraOrientation(orientation: UIDevice.current.orientation,
                                       callID: self?.call?.callId)
         }).disposed(by: self.disposeBag)
+        callsProvider.sharedResponseStream
+            .filter({ serviceEvent in
+                guard let callUUID: String = serviceEvent
+                    .getEventInput(ServiceEventInput.callUUID) else {return false}
+                return callUUID == self.call?.callUUID.uuidString
+            }).subscribe(onNext: { serviceEvent in
+                if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
+                    self.answerCall()
+                        .subscribe()
+                        .disposed(by: self.disposeBag)
+                } else if serviceEvent.eventType == ServiceEventType.callProviderCancellCall {
+                    self.cancelCall()
+                }
+            }).disposed(by: self.disposeBag)
     }
 
     static func formattedDurationFrom(interval: Int) -> String {

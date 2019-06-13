@@ -404,13 +404,17 @@ class AccountsService: AccountAdapterDelegate {
 
     func setRingtonePath(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
+        var filename = "default.wav"
+        if #available(iOS 10.0, *) {
+            filename = ""
+        }
         if details
-            .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == "default.wav" {
+            .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == filename {
             return
         }
         details
             .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath),
-                 withValue: "default.wav")
+                 withValue: filename)
         setAccountDetails(forAccountId: accountId, withDetails: details)
     }
 
