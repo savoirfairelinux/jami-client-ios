@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
     private let networkService = NetworkService()
+    private let callsProvider: CallsProviderDelegate = CallsProviderDelegate()
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
     private lazy var callService: CallsService = {
@@ -78,7 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withVideoService: self.videoService,
                             withAudioService: self.audioService,
                             withDataTransferService: self.dataTransferService,
-                            withProfileService: self.profileService)
+                            withProfileService: self.profileService,
+                            withCallsProvider: self.callsProvider)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -171,6 +173,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             } else {
                 self.unregisterVoipNotifications()
             }
+            if #available(iOS 10.0, *) {
+                return
+            }
             // reimit new call signal to show incoming call alert
             self.callService.checkForIncomingCall()
         }, onError: { _ in
@@ -219,8 +224,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        self.callService.checkForIncomingCall()
         self.clearBadgeNumber()
+        if #available(iOS 10.0, *) {
+            return
+        }
+        self.callService.checkForIncomingCall()
     }
 
     func prepareVideoAcceleration() {
@@ -234,7 +242,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: - Ring Daemon
     fileprivate func startDaemon() {
-
         do {
             try self.daemonService.startDaemon()
         } catch StartDaemonError.initializationFailure {
@@ -412,6 +419,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         return rootViewController
     }
+
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if #available(iOS 10.0, *) {
+            guard let handle = userActivity.startCallHandle else {
+                return false
+            }
+            guard let currentAccount = self.accountService
+                .currentAccount else { return false}
+            self.contactsService.loadContacts(withAccount: currentAccount)
+            if self.contactsService.contact(withHash: handle.uri) != nil {
+                self.appCoordinator.startCall(participant: handle.uri,
+                                              name: handle.name,
+                                              isVideo: handle.isVideo)
+                return true
+            }
+            for account in self.accountService.accounts {
+                self.contactsService.loadContacts(withAccount: account)
+                if self.contactsService.contact(withHash: handle.uri) != nil {
+                    self.accountService.currentAccount = account
+                    self.appCoordinator.startCall(participant: handle.uri,
+                                                  name: handle.name,
+                                                  isVideo: handle.isVideo)
+                    return true
+                }
+            }
+            self.contactsService.loadContacts(withAccount: currentAccount)
+        }
+        return false
+    }
 }
 
 extension AppDelegate: PKPushRegistryDelegate {
@@ -422,10 +460,13 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
+        if #available(iOS 10.0, *) {
+            return
+        }
         if UIApplication.shared.applicationState != .active {
             self.audioService.startAVAudioSession()
         }
-        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
