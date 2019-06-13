@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
     private let networkService = NetworkService()
+    private let callsProvider: CallsProviderDelegate = CallsProviderDelegate()
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
     private lazy var callService: CallsService = {
@@ -78,7 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withVideoService: self.videoService,
                             withAudioService: self.audioService,
                             withDataTransferService: self.dataTransferService,
-                            withProfileService: self.profileService)
+                            withProfileService: self.profileService,
+                            withCallsProvider: self.callsProvider)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
