@@ -90,6 +90,7 @@
 		0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B41FC3947B003898C2 /* DBManager.swift */; };
 		0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */; };
 		0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */; };
+		0E13A91C22B844B100A12A54 /* NSUserActivity+Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13A91B22B844B100A12A54 /* NSUserActivity+Call.swift */; };
 		0E20E4C72031FF560087C868 /* BlockContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20E4C52031FF560087C868 /* BlockContactsCell.swift */; };
 		0E20E4C82031FF560087C868 /* BlockContactsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E20E4C62031FF560087C868 /* BlockContactsCell.xib */; };
 		0E2D5F531F9145C800D574BF /* LinkNewDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */; };
@@ -152,6 +153,8 @@
 		0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
 		0EBCAA4E202E60F000E2A545 /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EBCAA4D202E60F000E2A545 /* default.wav */; };
+		0ECB4E2822B2D4840097CD7B /* CallsProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */; };
+		0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */; };
 		0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
 		0ED2B6FA1F96A075001572F0 /* LinkNewDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED2B6F91F96A075001572F0 /* LinkNewDeviceViewController.storyboard */; };
 		0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B6FB1F96A158001572F0 /* LinkNewDeviceViewController.swift */; };
@@ -411,6 +414,7 @@
 		0E0FF1B41FC3947B003898C2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDataHepler.swift; sourceTree = "<group>"; };
 		0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionDataHelper.swift; sourceTree = "<group>"; };
+		0E13A91B22B844B100A12A54 /* NSUserActivity+Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserActivity+Call.swift"; sourceTree = "<group>"; };
 		0E20E4C52031FF560087C868 /* BlockContactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockContactsCell.swift; sourceTree = "<group>"; };
 		0E20E4C62031FF560087C868 /* BlockContactsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockContactsCell.xib; sourceTree = "<group>"; };
 		0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceCell.swift; sourceTree = "<group>"; };
@@ -477,6 +481,8 @@
 		0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
 		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
 		0EBCAA4D202E60F000E2A545 /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
+		0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsProviderDelegate.swift; sourceTree = "<group>"; };
+		0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		0ED2B6F91F96A075001572F0 /* LinkNewDeviceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LinkNewDeviceViewController.storyboard; sourceTree = "<group>"; };
 		0ED2B6FB1F96A158001572F0 /* LinkNewDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceViewController.swift; sourceTree = "<group>"; };
@@ -691,6 +697,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */,
 				0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */,
 				628F4DCF206C0AEE0009C44C /* libcrypto.a in Frameworks */,
 				628F4DCD206BF4740009C44C /* libtls.a in Frameworks */,
@@ -797,6 +804,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */,
 				0E639459224AB32200C0890A /* Contacts.framework */,
 				0EB12451224AB1030025F8CA /* ContactsUI.framework */,
 				0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */,
@@ -854,6 +862,7 @@
 				0EBB72A82034F44200D88F46 /* ProfilesService.swift */,
 				62B60AF320489E7C001BEACF /* DataTransferService.swift */,
 				62B60AFA2048A437001BEACF /* DataTransferAdapterDelegate.swift */,
+				0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -930,6 +939,7 @@
 				621231F81F880EDF009B86F0 /* UILabel+Ring.swift */,
 				0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */,
 				62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */,
+				0E13A91B22B844B100A12A54 /* NSUserActivity+Call.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1925,6 +1935,7 @@
 				0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */,
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
+				0ECB4E2822B2D4840097CD7B /* CallsProviderDelegate.swift in Sources */,
 				1A2D18C71F29180700B2C785 /* DeviceModel.swift in Sources */,
 				1A20418F1F1EAC0E00C08435 /* Coordinator.swift in Sources */,
 				0E49097C1FEACA4B005CAA50 /* CallViewModel.swift in Sources */,
@@ -1958,6 +1969,7 @@
 				0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */,
 				1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */,
 				0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */,
+				0E13A91C22B844B100A12A54 /* NSUserActivity+Call.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
 				62B60AF420489E7C001BEACF /* DataTransferService.swift in Sources */,
