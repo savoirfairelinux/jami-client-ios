@@ -70,7 +70,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (call) in
-                self.showCallController(call: call)
+                self.showIncomingCall(call: call)
             }).disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
@@ -89,6 +89,38 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 return
         }
         self.answerIncomingCall(call: call)
+    }
+
+    func showIncomingCall(call: CallModel) {
+        guard let _ = self.accountService
+            .getAccount(fromAccountId: call.accountId) else {return}
+        if call.callId.isEmpty {
+            return
+        }
+        let callViewController = CallViewController
+            .instantiate(with: self.injectionBag)
+        callViewController.viewModel.call = call
+        if #available(iOS 10.0, *) {
+            call.callUUID = UUID()
+            self.injectionBag.callsProvider
+                .reportIncomingCall(uuid: call.callUUID,
+                                    name: call.displayName,
+                                    hasVideo: !call.isAudioOnly) { error in
+            }
+            self.injectionBag.callsProvider.sharedResponseStream
+                .filter({ serviceEvent in
+                    if serviceEvent.eventType != ServiceEventType.callProviderAnswerCall {
+                        return false
+                    }
+                    guard let callUUID: String = serviceEvent
+                        .getEventInput(ServiceEventInput.callUUID) else {return false}
+                    return callUUID == call.callUUID.uuidString
+                }).subscribe(onNext: { serviceEvent in
+                    self.showCallController(callController: callViewController)
+                }).disposed(by: self.disposeBag)
+        } else {
+            self.showCallController(callController: callViewController)
+        }
     }
 
     func createNewAccount() {
@@ -151,7 +183,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             }).disposed(by: self.disposeBag)
     }
 
-    func showCallController (call: CallModel) {
+    func showCallController (callController: CallViewController) {
         guard var topController = UIApplication.shared
             .keyWindow?.rootViewController else {
                 return
@@ -162,28 +194,28 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         if topController.isKind(of: (CallViewController).self) {
             return
         }
-        guard let account = self.accountService
-            .getAccount(fromAccountId: call.accountId) else {return}
-        if call.callId.isEmpty {
-            return
-        }
-        if UIApplication.shared.applicationState != .active {
-            if AccountModelHelper
-                .init(withAccount: account).isAccountSip() ||
-                !self.accountService.getCurrentProxyState(accountID: account.id) {
-                return
-            }
-            var data = [String: String]()
-            data [NotificationUserInfoKeys.name.rawValue] = call.displayName
-            data [NotificationUserInfoKeys.callID.rawValue] = call.callId
-            let helper = LocalNotificationsHelper()
-            helper.presentCallNotification(data: data, callService: self.callService)
-            return
-        }
-        let callViewController = CallViewController
-            .instantiate(with: self.injectionBag)
-        callViewController.viewModel.call = call
-        topController.present(callViewController, animated: true, completion: nil)
+//        guard let account = self.accountService
+//            .getAccount(fromAccountId: call.accountId) else {return}
+//        if call.callId.isEmpty {
+//            return
+//        }
+//        if UIApplication.shared.applicationState != .active {
+//            if AccountModelHelper
+//                .init(withAccount: account).isAccountSip() ||
+//                !self.accountService.getCurrentProxyState(accountID: account.id) {
+//                return
+//            }
+//            var data = [String: String]()
+//            data [NotificationUserInfoKeys.name.rawValue] = call.displayName
+//            data [NotificationUserInfoKeys.callID.rawValue] = call.callId
+//            let helper = LocalNotificationsHelper()
+//            helper.presentCallNotification(data: data, callService: self.callService)
+//            return
+//        }
+//        let callViewController = CallViewController
+//            .instantiate(with: self.injectionBag)
+//        callViewController.viewModel.call = call
+        topController.present(callController, animated: true, completion: nil)
     }
 
     func openCall (call: CallModel) {
@@ -198,6 +230,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     return
                 }
         }
-        self.showCallController(call: call)
+        let callViewController = CallViewController
+            .instantiate(with: self.injectionBag)
+        callViewController.viewModel.call = call
+        self.showCallController(callController: callViewController)
     }
 }
