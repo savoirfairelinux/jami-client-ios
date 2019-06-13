@@ -22,7 +22,6 @@
 import RxSwift
 import SwiftyBeaver
 
-// swiftlint:disable type_body_length
 class ConversationsService {
 
     /**
