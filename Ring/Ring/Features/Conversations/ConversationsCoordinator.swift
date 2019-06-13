@@ -41,6 +41,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     let callService: CallsService
     let accountService: AccountsService
     let conversationService: ConversationsService
+    let callsProvider: CallsProviderDelegate
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -48,6 +49,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.callService = injectionBag.callService
         self.accountService = injectionBag.accountService
         self.conversationService = injectionBag.conversationsService
+        self.callsProvider = injectionBag.callsProvider
         self.addLockFlags()
 
         self.stateSubject.subscribe(onNext: { [unowned self] (state) in
@@ -60,7 +62,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             case .showGeneralSettings:
                 self.showGeneralSettings()
             case .navigateToCall(let call):
-                self.openCall(call: call)
+                self.presentCallController(call: call)
             default:
                 break
             }
@@ -70,11 +72,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (call) in
-                self.showCallController(call: call)
+                self.showIncomingCall(call: call)
             }).disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.incomingCall(_:)), name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue), object: nil)
+        //for iOS version less than 10 support open call from notification
+        NotificationCenter.default.addObserver(self, selector: #selector(self.answerIncomingCall(_:)), name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue), object: nil)
 
         self.accountService.currentAccountChanged
             .subscribe(onNext: {[unowned self] _ in
@@ -83,12 +86,75 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             }).disposed(by: self.disposeBag)
     }
 
-    @objc func incomingCall(_ notification: NSNotification) {
-        guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String,
-            let call = self.callService.call(callID: callid) else {
+    /*
+    * when receive a new call trigger CallKit for iOS 10 and than navigate to
+    * call controller when call accepted. For iOS less than 10 present
+    * call controller or trigger notifications, depending of current app state
+    */
+    func showIncomingCall(call: CallModel) {
+        guard let account = self.accountService
+            .getAccount(fromAccountId: call.accountId),
+            !call.callId.isEmpty else {return}
+        guard let topController = getTopController(),
+            !topController.isKind(of: (CallViewController).self) else {
                 return
         }
-        self.answerIncomingCall(call: call)
+        let callViewController = CallViewController
+            .instantiate(with: self.injectionBag)
+        callViewController.viewModel.call = call
+
+        var tempBag = DisposeBag()
+        if #available(iOS 10.0, *) {
+            call.callUUID = UUID()
+            callsProvider
+                .reportIncomingCall(account: account, call: call) { _ in
+                                        // if starting CallKit failed fallback to jami call screen
+                                        if UIApplication.shared.applicationState != .active {
+                                            if AccountModelHelper
+                                                .init(withAccount: account).isAccountSip() ||
+                                                !self.accountService.getCurrentProxyState(accountID: account.id) {
+                                                return
+                                            }
+                                            self.triggerCallNotifications(call: call)
+                                            return
+                                        }
+                                        topController
+                                            .present(callViewController,
+                                                     animated: true,
+                                                     completion: nil)
+            }
+            callsProvider.sharedResponseStream
+                .filter({ serviceEvent in
+                    if serviceEvent.eventType != ServiceEventType.callProviderAnswerCall {
+                        return false
+                    }
+                    guard let callUUID: String = serviceEvent
+                        .getEventInput(ServiceEventInput.callUUID) else {return false}
+                    return callUUID == call.callUUID.uuidString
+                }).subscribe(onNext: { _ in
+                    topController.present(callViewController, animated: true, completion: nil)
+                    tempBag = DisposeBag()
+                }).disposed(by: tempBag)
+            callViewController.viewModel.dismisVC
+                .share()
+                .subscribe(onNext: { hide in
+                    if hide {
+                tempBag = DisposeBag()
+                    }
+            }).disposed(by: tempBag)
+
+        } else {
+            if UIApplication.shared.applicationState != .active {
+                if AccountModelHelper
+                    .init(withAccount: account).isAccountSip() ||
+                    !self.accountService.getCurrentProxyState(accountID: account.id) {
+                    return
+                }
+                triggerCallNotifications(call: call)
+                return
+            }
+            topController.present(callViewController, animated: true, completion: nil)
+        }
     }
 
     func createNewAccount() {
@@ -139,54 +205,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         presentingVC[VCType.conversation.rawValue] = false
     }
 
-     func answerIncomingCall(call: CallModel) {
-        let callViewController = CallViewController.instantiate(with: self.injectionBag)
-        callViewController.viewModel.call = call
-        callViewController.viewModel.answerCall()
-            .subscribe(onCompleted: { [weak self] in
-                self?.present(viewController: callViewController,
-                             withStyle: .present,
-                             withAnimation: false,
-                             withStateable: callViewController.viewModel)
-            }).disposed(by: self.disposeBag)
-    }
-
-    func showCallController (call: CallModel) {
-        guard var topController = UIApplication.shared
-            .keyWindow?.rootViewController else {
-                return
-        }
-        while let presentedViewController = topController.presentedViewController {
-            topController = presentedViewController
-        }
-        if topController.isKind(of: (CallViewController).self) {
-            return
-        }
-        guard let account = self.accountService
-            .getAccount(fromAccountId: call.accountId) else {return}
-        if call.callId.isEmpty {
-            return
-        }
-        if UIApplication.shared.applicationState != .active {
-            if AccountModelHelper
-                .init(withAccount: account).isAccountSip() ||
-                !self.accountService.getCurrentProxyState(accountID: account.id) {
-                return
-            }
-            var data = [String: String]()
-            data [NotificationUserInfoKeys.name.rawValue] = call.displayName
-            data [NotificationUserInfoKeys.callID.rawValue] = call.callId
-            let helper = LocalNotificationsHelper()
-            helper.presentCallNotification(data: data, callService: self.callService)
-            return
-        }
-        let callViewController = CallViewController
-            .instantiate(with: self.injectionBag)
-        callViewController.viewModel.call = call
-        topController.present(callViewController, animated: true, completion: nil)
-    }
-
-    func openCall (call: CallModel) {
+    //open call controller when button navigate to call pressed
+    func presentCallController (call: CallModel) {
         let controlles = self.navigationViewController.viewControllers
         for controller in controlles
             where controller.isKind(of: (CallViewController).self) {
@@ -198,6 +218,50 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     return
                 }
         }
-        self.showCallController(call: call)
+        guard let topController = getTopController(),
+            !topController.isKind(of: (CallViewController).self) else {
+                return
+        }
+        let callViewController = CallViewController
+            .instantiate(with: self.injectionBag)
+        callViewController.viewModel.call = call
+        topController.present(callViewController, animated: true, completion: nil)
+    }
+
+    func getTopController() -> UIViewController? {
+        guard var topController = UIApplication.shared
+            .keyWindow?.rootViewController else {
+                return nil
+        }
+        while let presentedViewController = topController.presentedViewController {
+            topController = presentedViewController
+        }
+        return topController
+    }
+
+    func triggerCallNotifications(call: CallModel) {
+        var data = [String: String]()
+        data [NotificationUserInfoKeys.name.rawValue] = call.displayName
+        data [NotificationUserInfoKeys.callID.rawValue] = call.callId
+        let helper = LocalNotificationsHelper()
+        helper.presentCallNotification(data: data, callService: self.callService)
+    }
+
+// MARK: - iOS 9.3 - 10
+
+    @objc func answerIncomingCall(_ notification: NSNotification) {
+        guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String,
+            let call = self.callService.call(callID: callid) else {
+                return
+        }
+        let callViewController = CallViewController.instantiate(with: self.injectionBag)
+        callViewController.viewModel.call = call
+        callViewController.viewModel.answerCall()
+            .subscribe(onCompleted: { [weak self] in
+                self?.present(viewController: callViewController,
+                              withStyle: .present,
+                              withAnimation: false,
+                              withStateable: callViewController.viewModel)
+            }).disposed(by: self.disposeBag)
     }
 }

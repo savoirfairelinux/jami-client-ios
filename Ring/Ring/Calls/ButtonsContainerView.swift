@@ -101,7 +101,7 @@ class ButtonsContainerView: UIView, NibLoadable {
         if self.viewModel?.isIncoming ?? false {
             acceptCallButton.isHidden = false
             cancelButtonBottomConstraint.constant = 60
-            cancelButtonCenterConstraint.constant = 55
+            cancelButtonCenterConstraint.constant = -80
             return
         }
         cancelButtonCenterConstraint.constant = 0

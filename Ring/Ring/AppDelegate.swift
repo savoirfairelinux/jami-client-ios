@@ -28,7 +28,7 @@ import PushKit
 import ContactsUI
 
 // swiftlint:disable identifier_name
-
+// swiftlint:disable type_body_length
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
     private let networkService = NetworkService()
+    private let callsProvider: CallsProviderDelegate = CallsProviderDelegate()
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
     private lazy var callService: CallsService = {
@@ -78,7 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withVideoService: self.videoService,
                             withAudioService: self.audioService,
                             withDataTransferService: self.dataTransferService,
-                            withProfileService: self.profileService)
+                            withProfileService: self.profileService,
+                            withCallsProvider: self.callsProvider)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -171,6 +173,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             } else {
                 self.unregisterVoipNotifications()
             }
+            if #available(iOS 10.0, *) {
+                return
+            }
             // reimit new call signal to show incoming call alert
             self.callService.checkForIncomingCall()
         }, onError: { _ in
@@ -219,8 +224,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        self.callService.checkForIncomingCall()
         self.clearBadgeNumber()
+        if #available(iOS 10.0, *) {
+            return
+        }
+        self.callService.checkForIncomingCall()
     }
 
     func prepareVideoAcceleration() {
@@ -234,7 +242,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: - Ring Daemon
     fileprivate func startDaemon() {
-
         do {
             try self.daemonService.startDaemon()
         } catch StartDaemonError.initializationFailure {
@@ -412,6 +419,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         return rootViewController
     }
+
+    func findContactAndStartCall(hash: String, isVideo: Bool) {
+        //if saved jami hash
+        if hash.isSHA1() {
+            let contactUri = JamiURI(schema: URIType.ring, infoHach: hash)
+            self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
+            return
+        }
+        //if saved jami registered name
+        self.nameService.usernameLookupStatus
+            .observeOn(MainScheduler.instance)
+            .filter({ usernameLookupStatus in
+                usernameLookupStatus.name == hash
+            })
+            .take(1)
+            .subscribe(onNext: { usernameLookupStatus in
+                if usernameLookupStatus.state == .found {
+                    guard let address = usernameLookupStatus.address else {return}
+                    let contactUri = JamiURI(schema: URIType.ring, infoHach: address)
+                    self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
+                } else {
+                    //if saved sip contact
+                    let contactUri = JamiURI(schema: URIType.sip, infoHach: hash)
+                    self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.sip)
+                }
+            }).disposed(by: self.disposeBag)
+        self.nameService.lookupName(withAccount: "", nameserver: "", name: hash)
+    }
+
+    func findAccountAndStartCall(uri: JamiURI, isVideo: Bool, type: AccountType) {
+        guard let currentAccount = self.accountService
+            .currentAccount else { return }
+        var hash = uri.hash ?? ""
+        var uriString = uri.uriString ?? ""
+        for account in self.accountService.accounts where account.type == type {
+            if type == AccountType.sip {
+                let conatactUri = JamiURI(schema: URIType.sip,
+                                          infoHach: hash,
+                                          account: account)
+                hash = conatactUri.hash ?? ""
+                uriString = conatactUri.uriString ?? ""
+            }
+            if hash.isEmpty || uriString.isEmpty {return}
+            self.contactsService
+                .getProfileForUri(uri: uriString,
+                                  accountId: account.id)
+                .subscribe(onNext: { (profile) in
+                    if currentAccount != account {
+                        self.accountService.currentAccount = account
+                    }
+                    self.appCoordinator
+                        .startCall(participant: hash,
+                                   name: profile.alias ?? "",
+                                   isVideo: isVideo)
+                }).disposed(by: self.disposeBag)
+        }
+    }
+
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if #available(iOS 10.0, *) {
+            guard let handle = userActivity.startCallHandle else {
+                return false
+            }
+            self.findContactAndStartCall(hash: handle.hash, isVideo: handle.isVideo)
+            return true
+        }
+        return false
+    }
 }
 
 extension AppDelegate: PKPushRegistryDelegate {
@@ -422,10 +499,13 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
+        if #available(iOS 10.0, *) {
+            return
+        }
         if UIApplication.shared.applicationState != .active {
             self.audioService.startAVAudioSession()
         }
-        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {

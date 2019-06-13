@@ -112,11 +112,13 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
-        let callViewController = CallViewController.instantiate(with: self.injectionBag)
-        callViewController.viewModel.placeCall(with: contactRingId, userName: userName, isAudioOnly: isAudioOnly)
-        self.present(viewController: callViewController,
-                     withStyle: .present,
-                     withAnimation: false,
-                     withStateable: callViewController.viewModel)
+        DispatchQueue.main.async {
+            let callViewController = CallViewController.instantiate(with: self.injectionBag)
+            callViewController.viewModel.placeCall(with: contactRingId, userName: userName, isAudioOnly: isAudioOnly)
+            self.present(viewController: callViewController,
+                         withStyle: .present,
+                         withAnimation: false,
+                         withStateable: callViewController.viewModel)
+        }
     }
 }
