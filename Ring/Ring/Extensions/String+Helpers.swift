@@ -44,6 +44,19 @@ extension String {
         return false
     }
 
+    var isPhoneNumber: Bool {
+        do {
+            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.phoneNumber.rawValue)
+            let matches = detector.matches(in: self, options: [], range: NSRange(location: 0, length: self.count))
+            guard let res = matches.first else { return false }
+            return res.resultType == .phoneNumber &&
+                res.range.location == 0 &&
+                res.range.length == self.count
+        } catch {
+            return false
+        }
+    }
+
     func toMD5HexString() -> String {
         guard let messageData = self.data(using: .utf8) else {return ""}
         var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))

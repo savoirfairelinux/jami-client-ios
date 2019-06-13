@@ -183,7 +183,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         self.buttonsContainer.acceptCallButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.viewModel.answerCall()
+                self.viewModel.answerCall(startCallProvider: true)
                     .subscribe()
                     .disposed(by: self.disposeBag)
             }).disposed(by: self.disposeBag)

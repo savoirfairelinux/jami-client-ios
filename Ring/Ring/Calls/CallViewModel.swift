@@ -24,7 +24,7 @@ import RxSwift
 import SwiftyBeaver
 import Contacts
 import RxCocoa
-
+// swiftlint:disable type_body_length
 class CallViewModel: Stateable, ViewModel {
 
     //stateable
@@ -112,6 +112,9 @@ class CallViewModel: Stateable, ViewModel {
                 if hide {
                     self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation, callID: nil)
                     self?.videoService.stopAudioDevice()
+                    if #available(iOS 10.0, *), let call = self?.call {
+                        self?.callsProvider.stopCall(callUUID: call.callUUID)
+                    }
                 }
                 return hide
             })
@@ -300,6 +303,7 @@ class CallViewModel: Stateable, ViewModel {
 
     var containerViewModel: ButtonsContainerViewModel?
     let injectionBag: InjectionBag
+    let callsProvider: CallsProviderDelegate
 
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
@@ -308,6 +312,7 @@ class CallViewModel: Stateable, ViewModel {
         self.videoService = injectionBag.videoService
         self.audioService = injectionBag.audioService
         self.profileService = injectionBag.profileService
+        self.callsProvider = injectionBag.callsProvider
         self.injectionBag = injectionBag
 
         callService.currentCall.filter({ [weak self] call in
@@ -319,6 +324,20 @@ class CallViewModel: Stateable, ViewModel {
                 .setCameraOrientation(orientation: UIDevice.current.orientation,
                                       callID: self?.call?.callId)
         }).disposed(by: self.disposeBag)
+        callsProvider.sharedResponseStream
+            .filter({ [unowned self] serviceEvent in
+                guard let callUUID: String = serviceEvent
+                    .getEventInput(ServiceEventInput.callUUID) else {return false}
+                return callUUID == self.call?.callUUID.uuidString
+            }).subscribe(onNext: { [unowned self] serviceEvent in
+                if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
+                    self.answerCall(startCallProvider: false)
+                        .subscribe()
+                        .disposed(by: self.disposeBag)
+                } else if serviceEvent.eventType == ServiceEventType.callProviderCancellCall {
+                    self.cancelCall()
+                }
+            }).disposed(by: self.disposeBag)
     }
 
     static func formattedDurationFrom(interval: Int) -> String {
@@ -349,16 +368,21 @@ class CallViewModel: Stateable, ViewModel {
             }).disposed(by: self.disposeBag)
     }
 
-    func answerCall() -> Completable {
+    func answerCall(startCallProvider: Bool) -> Completable {
         if !self.audioService.isHeadsetConnected.value {
             isAudioOnly ?
                 self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
+        }
+        if let account = self.accountService.currentAccount, startCallProvider {
+            if #available(iOS 10.0, *) {
+                self.callsProvider
+                    .startCall(account: account, call: call!)
+            }
         }
         return self.callService.accept(call: call)
     }
 
     func placeCall(with uri: String, userName: String, isAudioOnly: Bool = false) {
-
         guard let account = self.accountService.currentAccount else {
             return
         }
@@ -371,7 +395,12 @@ class CallViewModel: Stateable, ViewModel {
                                    userName: userName,
                                    isAudioOnly: isAudioOnly)
             .subscribe(onSuccess: { [weak self] callModel in
+                callModel.callUUID = UUID()
                 self?.call = callModel
+                if #available(iOS 10.0, *) {
+                    self?.callsProvider
+                        .startCall(account: account, call: callModel)
+                }
             }).disposed(by: self.disposeBag)
     }
 

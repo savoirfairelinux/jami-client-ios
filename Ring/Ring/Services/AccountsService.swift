@@ -404,8 +404,9 @@ class AccountsService: AccountAdapterDelegate {
 
     func setDetails(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
+        let filename = "default.wav"
         if details
-            .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == "default.wav" &&
+            .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == filename &&
             details
                 .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery)) == "false" &&
             details
@@ -416,7 +417,7 @@ class AccountsService: AccountAdapterDelegate {
         }
         details
             .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath),
-                 withValue: "default.wav")
+                 withValue: filename)
         details
             .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery),
                  withValue: "false")

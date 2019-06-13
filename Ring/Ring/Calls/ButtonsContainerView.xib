@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -215,7 +215,7 @@
                             </userDefinedRuntimeAttributes>
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfz-9h-HoH" userLabel="Accept">
-                            <rect key="frame" x="42.5" y="10" width="70" height="70"/>
+                            <rect key="frame" x="312.5" y="10" width="70" height="70"/>
                             <color key="backgroundColor" red="0.45098039215686275" green="0.98039215686274506" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="cRi-F4-pPw"/>
@@ -236,9 +236,9 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="rfz-9h-HoH" firstAttribute="leading" secondItem="ZxT-mA-1xU" secondAttribute="trailing" constant="90" id="48d-Rh-4pI"/>
                         <constraint firstAttribute="bottom" secondItem="w5l-pw-1ET" secondAttribute="bottom" id="6qu-Nn-b1Y"/>
                         <constraint firstAttribute="height" constant="200" id="Gjk-7U-rEe"/>
-                        <constraint firstItem="ZxT-mA-1xU" firstAttribute="leading" secondItem="rfz-9h-HoH" secondAttribute="trailing" constant="40" id="Hwg-PM-KNI"/>
                         <constraint firstAttribute="bottom" secondItem="ZxT-mA-1xU" secondAttribute="bottom" constant="120" id="Ilu-Zu-JqW"/>
                         <constraint firstItem="rfz-9h-HoH" firstAttribute="centerY" secondItem="ZxT-mA-1xU" secondAttribute="centerY" id="NZg-SL-A31"/>
                         <constraint firstAttribute="trailing" secondItem="w5l-pw-1ET" secondAttribute="trailing" id="TnQ-lp-9B9"/>
@@ -264,13 +264,13 @@
         </view>
     </objects>
     <resources>
-        <image name="audio_running" width="48" height="48"/>
-        <image name="call_button" width="43.5" height="43.5"/>
-        <image name="dialpad" width="75" height="75"/>
-        <image name="disable_speakerphone" width="48" height="48"/>
-        <image name="pause_call" width="48" height="48"/>
-        <image name="stop_call" width="48" height="48"/>
-        <image name="switch_camera" width="50" height="50"/>
-        <image name="video_running" width="43.5" height="43.5"/>
+        <image name="audio_running" width="24" height="24"/>
+        <image name="call_button" width="29" height="29"/>
+        <image name="dialpad" width="37.5" height="37.5"/>
+        <image name="disable_speakerphone" width="24" height="24"/>
+        <image name="pause_call" width="24" height="24"/>
+        <image name="stop_call" width="24" height="24"/>
+        <image name="switch_camera" width="25" height="25"/>
+        <image name="video_running" width="29" height="29"/>
     </resources>
 </document>
