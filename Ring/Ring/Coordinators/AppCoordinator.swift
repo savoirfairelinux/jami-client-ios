@@ -192,4 +192,21 @@ final class AppCoordinator: Coordinator, StateableResponsive {
             conversationCoordinator.puchConversation(participantId: participantID)
         }
     }
+
+    func startCall(participant: String, name: String, isVideo: Bool) {
+        for child in self.childCoordinators {
+            if let childCoordinattor = child as? ConversationsCoordinator {
+                if isVideo {
+                    childCoordinattor.stateSubject
+                        .onNext(ConversationState
+                            .startCall(contactRingId: participant, userName: name))
+                    return
+                }
+                childCoordinattor.stateSubject
+                    .onNext(ConversationState
+                        .startAudioCall(contactRingId: participant, userName: name))
+            }
+            return
+        }
+    }
 }

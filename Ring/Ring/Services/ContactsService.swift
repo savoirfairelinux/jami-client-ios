@@ -58,7 +58,13 @@ class ContactsService {
         guard let contact = self.contacts.value.filter({ $0.uriString == uri }).first else {
             return nil
         }
+        return contact
+    }
 
+    func contact(withHash hash: String) -> ContactModel? {
+        guard let contact = self.contacts.value.filter({ $0.hash == hash }).first else {
+            return nil
+        }
         return contact
     }
 

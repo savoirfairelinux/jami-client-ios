@@ -261,17 +261,22 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] show in
                 if show {
-                    self.currentCallButton.isHidden = false
-                    self.currentCallLabel.isHidden = false
-                    self.currentCallLabel.blink()
-                    self.callButtonHeightConstraint.constant = 60
+                    let deadlineTime = DispatchTime.now() + .seconds(3)
+                    DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                        if self.viewModel.currentCallId.value.isEmpty {
+                            return
+                        }
+                        self.currentCallButton.isHidden = false
+                        self.currentCallLabel.isHidden = false
+                        self.currentCallLabel.blink()
+                        self.callButtonHeightConstraint.constant = 60
+                    }
                     return
                 }
                 self.currentCallButton.isHidden = true
                 self.currentCallLabel.isHidden = true
                 self.callButtonHeightConstraint.constant = 0
                 self.currentCallLabel.layer.removeAllAnimations()
-
             }).disposed(by: disposeBag)
         self.viewModel.callButtonTitle
             .observeOn(MainScheduler.instance)
