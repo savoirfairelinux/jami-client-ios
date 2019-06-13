@@ -44,6 +44,8 @@ enum ServiceEventType {
     case deviceRevocationEnded
     case newIncomingMessage
     case nameRegistrationEnded
+    case callProviderAnswerCall
+    case callProviderCancellCall
 }
 
 /**
@@ -70,6 +72,7 @@ enum ServiceEventInput {
     case peerUri
     case accountUri
     case name
+    case callUUID
 }
 
 /**
