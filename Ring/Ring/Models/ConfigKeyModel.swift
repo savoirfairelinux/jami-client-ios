@@ -101,6 +101,9 @@ enum ConfigKey: String {
     case proxyServer = "Account.proxyServer"
     case devicePushToken = "Account.proxyPushToken"
     case archiveHasPassword = "Account.archiveHasPassword"
+    case dhtPeerDiscovery = "Account.peerDiscovery";
+    case accountPeerDiscovery = "Account.accountDiscovery";
+    case accountPublish = "Account.accountPublish";
 }
 
 /**

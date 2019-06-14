@@ -163,7 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
 
             for account in self.accountService.accounts {
-                self.accountService.setRingtonePath(forAccountId: account.id)
+                self.accountService.setDetails(forAccountId: account.id)
             }
             self.reloadDataFor(account: currentAccount)
             if self.accountService.proxyEnabled() {

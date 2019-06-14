@@ -402,15 +402,30 @@ class AccountsService: AccountAdapterDelegate {
             })
     }
 
-    func setRingtonePath(forAccountId accountId: String) {
+    func setDetails(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
         if details
-            .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == "default.wav" {
+            .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == "default.wav" &&
+            details
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery)) == "false" &&
+            details
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPeerDiscovery)) == "false" &&
+            details
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPublish)) == "false" {
             return
         }
         details
             .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath),
                  withValue: "default.wav")
+        details
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery),
+                 withValue: "false")
+        details
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPeerDiscovery),
+                 withValue: "false")
+        details
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPublish),
+                 withValue: "false")
         setAccountDetails(forAccountId: accountId, withDetails: details)
     }
 
@@ -571,6 +586,11 @@ class AccountsService: AccountAdapterDelegate {
         accountDetails!.updateValue("default.wav", forKey: ConfigKey.ringtonePath.rawValue)
         accountDetails!.updateValue(accountType, forKey: ConfigKey.accountType.rawValue)
         accountDetails!.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
+        if accountType == AccountType.ring.rawValue {
+            accountDetails!.updateValue("false", forKey: ConfigKey.dhtPeerDiscovery.rawValue)
+            accountDetails!.updateValue("false", forKey: ConfigKey.accountPeerDiscovery.rawValue)
+            accountDetails!.updateValue("false", forKey: ConfigKey.accountPublish.rawValue)
+        }
         return accountDetails!
     }
 
