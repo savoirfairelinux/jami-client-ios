@@ -403,7 +403,7 @@ class ConversationViewModel: Stateable, ViewModel {
         guard let accountId = accountService.currentAccount?.id else {return}
         self.dataTransferService.sendAndSaveFile(displayName: displayName,
                                                  accountId: accountId,
-                                                 peerInfoHash: self.conversation.value.participantUri,
+                                                 peerInfoHash: self.conversation.value.hash,
                                                  imageData: imageData,
                                                  conversationId: self.conversation.value.conversationId)
     }
