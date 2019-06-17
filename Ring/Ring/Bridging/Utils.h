@@ -43,4 +43,6 @@ struct AVFrame;
 + (AVFrame*)configureFrame:(AVFrame*)frame
            fromImageBuffer: (CVImageBufferRef)image
                      angle:(int)angle;
++(UIImageOrientation)uimageOrientationFromRotation:(double)rotation;
++(CGImagePropertyOrientation)ciimageOrientationFromRotation:(double)rotation;
 @end

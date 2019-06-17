@@ -109,9 +109,59 @@ extern "C" {
     return vector;
 }
 
++(UIImageOrientation)uimageOrientationFromRotation:(double)rotation {
+    UIImageOrientation orientation = UIImageOrientationUp;
+    switch ((int)rotation) {
+        case 0:
+            orientation = UIImageOrientationUp;
+            break;
+        case 90:
+            orientation = UIImageOrientationLeft;
+            break;
+        case -90:
+            orientation = UIImageOrientationRight;
+            break;
+        case -180:
+            orientation = UIImageOrientationDown;
+            break;
+    }
+    return orientation;
+}
++(CGImagePropertyOrientation)ciimageOrientationFromRotation:(double)rotation {
+    CGImagePropertyOrientation orientation = kCGImagePropertyOrientationUp;
+    switch ((int)rotation) {
+        case 0:
+            orientation = kCGImagePropertyOrientationUp;
+            break;
+        case 90:
+            orientation = kCGImagePropertyOrientationLeft;
+            break;
+        case -90:
+            orientation = kCGImagePropertyOrientationRight;
+            break;
+        case -180:
+            orientation = kCGImagePropertyOrientationDown;
+            break;
+    }
+    return orientation;
+}
+
 + (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame {
     if ((CVPixelBufferRef)frame->data[3]) {
         CIImage *image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
+        if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
+            const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
+            auto rotation = av_display_rotation_get(data);
+            auto uiImageOrientation = [Utils uimageOrientationFromRotation:rotation];
+            auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
+            if (@available(iOS 11.0, *)) {
+                image = [image imageByApplyingCGOrientation: ciImageOrientation];
+            } else if (@available(iOS 10.0, *)) {
+                image = [image imageByApplyingOrientation:static_cast<int>(ciImageOrientation)];
+            }
+            UIImage * imageUI = [UIImage imageWithCIImage:image scale:1 orientation: uiImageOrientation];
+            return imageUI;
+        }
         UIImage * imageUI = [UIImage imageWithCIImage:image];
         return imageUI;
     }
