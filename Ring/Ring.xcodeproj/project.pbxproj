@@ -78,7 +78,6 @@
 		04399B0B1D1C341A00E99CD9 /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD91D1C341A00E99CD9 /* libsrtp.a */; };
 		04399B0C1D1C341A00E99CD9 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADA1D1C341A00E99CD9 /* libswresample.a */; };
 		04399B0D1D1C341A00E99CD9 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADB1D1C341A00E99CD9 /* libswscale.a */; };
-		04399B0E1D1C341A00E99CD9 /* libthreadutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADC1D1C341A00E99CD9 /* libthreadutil.a */; };
 		04399B0F1D1C341A00E99CD9 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
 		04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
@@ -399,7 +398,6 @@
 		04399AD91D1C341A00E99CD9 /* libsrtp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsrtp.a; path = ../fat/lib/libsrtp.a; sourceTree = "<group>"; };
 		04399ADA1D1C341A00E99CD9 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = ../fat/lib/libswresample.a; sourceTree = "<group>"; };
 		04399ADB1D1C341A00E99CD9 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../fat/lib/libswscale.a; sourceTree = "<group>"; };
-		04399ADC1D1C341A00E99CD9 /* libthreadutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libthreadutil.a; path = ../fat/lib/libthreadutil.a; sourceTree = "<group>"; };
 		04399ADD1D1C341A00E99CD9 /* libupnp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libupnp.a; path = ../fat/lib/libupnp.a; sourceTree = "<group>"; };
 		04399ADE1D1C341A00E99CD9 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = ../fat/lib/libvorbis.a; sourceTree = "<group>"; };
 		04399ADF1D1C341A00E99CD9 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = ../fat/lib/libvorbisenc.a; sourceTree = "<group>"; };
@@ -752,7 +750,6 @@
 				04399B0B1D1C341A00E99CD9 /* libsrtp.a in Frameworks */,
 				04399B0C1D1C341A00E99CD9 /* libswresample.a in Frameworks */,
 				04399B0D1D1C341A00E99CD9 /* libswscale.a in Frameworks */,
-				04399B0E1D1C341A00E99CD9 /* libthreadutil.a in Frameworks */,
 				04399B0F1D1C341A00E99CD9 /* libupnp.a in Frameworks */,
 				04399B131D1C341A00E99CD9 /* libvpx.a in Frameworks */,
 				04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */,
@@ -1058,7 +1055,6 @@
 				04399AD91D1C341A00E99CD9 /* libsrtp.a */,
 				04399ADA1D1C341A00E99CD9 /* libswresample.a */,
 				04399ADB1D1C341A00E99CD9 /* libswscale.a */,
-				04399ADC1D1C341A00E99CD9 /* libthreadutil.a */,
 				04399ADD1D1C341A00E99CD9 /* libupnp.a */,
 				04399ADE1D1C341A00E99CD9 /* libvorbis.a */,
 				04399ADF1D1C341A00E99CD9 /* libvorbisenc.a */,
