@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "主页";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "邀请";
 "global.meTabBarTitle" = "帐户";
 "global.ok" = "确定";
 
@@ -33,7 +33,7 @@
 "smartlist.results" = "Search Result";
 "smartlist.conversations" = "会话";
 "smartlist.searching" = "正在搜索…";
-"smartlist.noResults" = "No results";
+"smartlist.noResults" = "无结果";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "无网络连接";

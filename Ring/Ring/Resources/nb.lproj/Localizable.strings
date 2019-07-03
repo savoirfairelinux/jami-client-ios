@@ -55,7 +55,7 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Lenk denne enheten til en konto";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Opprett en Jami-konto";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Hopp over";
@@ -82,7 +82,7 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "Varsler";
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Nettverksfeil";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
@@ -135,7 +135,7 @@
 "calls.unknown" = "Ukjent";
 "calls.incomingCallInfo" = "ønsker å snakke med deg";
 "calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
+"calls.connecting" = "Kobler opp...";
 "calls.searching" = "Searching…";
 "calls.callFinished" = "Samtale fullført";
 "calls.currentCallWith" = "Call with ";
@@ -169,7 +169,7 @@
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Navn";
-"accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.linkDeviceTitle" = "Koble til ny enhet";
 "accountPage.other" = "Andre";
 "accountPage.removeAccountTitle" = "Remove account";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
@@ -246,6 +246,6 @@
 "generatedMessage.missedIncomingCall" = "Tapt innkommende anrop";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "Generelt oppsett";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
