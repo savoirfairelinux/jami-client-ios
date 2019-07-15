@@ -20,24 +20,24 @@
 
 // Global
 "global.homeTabBarTitle" = "Inici";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "Invitacions";
 "global.meTabBarTitle" = "Compte";
-"global.ok" = "Ok";
+"global.ok" = "D'acord";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Searching…";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
+"smartlist.yesterday" = "Ahir";
 "smartlist.results" = "Search Result";
 "smartlist.conversations" = "Converses";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
+"smartlist.searching" = "Cercant...";
+"smartlist.noResults" = "Sense resultats";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "No hi ha connexió a la xarxa";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Assegureu-vos que l’accés al mòbil s’atorga a la vostra configuració";
 "smartlist.accountsTitle" = "Comptes";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
@@ -73,7 +73,7 @@
 "createAccount.newPasswordPlaceholder" = "Contrasenya";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
 "createAccount.passwordCharactersNumberError" = "Mínim 6 caràcters";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.passwordNotMatchingError" = "Les contrasenyes no coincideixen";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
