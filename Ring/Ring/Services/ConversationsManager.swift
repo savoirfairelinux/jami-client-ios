@@ -225,10 +225,6 @@ class ConversationsManager: MessagesAdapterDelegate {
             return
         }
         guard let messageData = self.conversationService.dataTransferMessageMap[transferId] else {return}
-        if !(self.dataTransferService.isTransferImage(withId: transferId, accountID: accountId,
-                                                      conversationID: String(messageData.conversationID)) ?? false) {
-            return
-        }
         var filename = ""
         if self.dataTransferService.acceptTransfer(withId: transferId, interactionID: messageData.messageID,
                                                    fileName: &filename, accountID: accountId,
