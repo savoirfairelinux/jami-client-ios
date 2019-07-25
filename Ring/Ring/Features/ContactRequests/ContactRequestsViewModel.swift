@@ -143,7 +143,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
             return
         }
 
-        guard let conversation = self.conversationService.findConversation(withRingId: uri, withAccountId: account.id) else {
+        guard let conversation = self.conversationService.findConversation(withUri: uri, withAccountId: account.id) else {
             return
         }
         conversationViewModel.conversation = Variable<ConversationModel>(conversation)

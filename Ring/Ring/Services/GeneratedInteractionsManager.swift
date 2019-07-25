@@ -92,7 +92,7 @@ class GeneratedInteractionsManager {
                                     contactRingId: String,
                                     shouldUpdateConversation: Bool) {
 
-        guard let conversation = self.conversationService.findConversation(withRingId: contactRingId, withAccountId: accountId) else {
+        guard let conversation = self.conversationService.findConversation(withUri: contactRingId, withAccountId: accountId) else {
             return
         }
         // remove conversation if it contain only generated messages

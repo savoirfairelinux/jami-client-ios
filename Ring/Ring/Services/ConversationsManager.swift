@@ -154,6 +154,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             var data = [String: String]()
             data [NotificationUserInfoKeys.messageContent.rawValue] = content
             data [NotificationUserInfoKeys.participantID.rawValue] = peerUri
+            data [NotificationUserInfoKeys.accountID.rawValue] = accountId
             if let name = peerName {
                 data [NotificationUserInfoKeys.name.rawValue] = name
                 self.notificationHandler.presentMessageNotification(data: data)

@@ -190,11 +190,11 @@ class ConversationsService {
         })
     }
 
-    func findConversation(withRingId ringId: String,
+    func findConversation(withUri uri: String,
                           withAccountId accountId: String) -> ConversationModel? {
         return self.conversations.value
             .filter({ conversation in
-                return conversation.participantUri == ringId && conversation.accountId == accountId
+                return conversation.participantUri == uri && conversation.accountId == accountId
             })
             .first
     }

@@ -354,6 +354,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func handleNotificationActions(data: [AnyHashable: Any], responseIdentifier: String) {
+        guard let currentAccount = self.accountService
+            .currentAccount,
+            let accountId = data[NotificationUserInfoKeys.accountID.rawValue] as? String,
+            let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
+        if currentAccount.id != accountId && responseIdentifier != CallAcition.refuse.rawValue {
+            self.accountService.currentAccount = account
+        }
         // if notification contains messageContent this is message notification
         if let participantID = data[NotificationUserInfoKeys.participantID.rawValue] as? String {
             self.appCoordinator.openConversation(participantID: participantID)

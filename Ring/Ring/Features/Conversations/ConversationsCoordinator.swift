@@ -188,7 +188,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         guard let account = accountService.currentAccount else {
             return
         }
-        guard let conversation = self.conversationService.findConversation(withRingId: participantId, withAccountId: account.id) else {
+        guard let uriString = JamiURI(schema: URIType.ring, infoHach: participantId).uriString else {
+            return
+        }
+        guard let conversation = self.conversationService.findConversation(withUri: uriString, withAccountId: account.id) else {
             return
         }
         conversationViewModel.conversation = Variable<ConversationModel>(conversation)
@@ -243,6 +246,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         var data = [String: String]()
         data [NotificationUserInfoKeys.name.rawValue] = call.displayName
         data [NotificationUserInfoKeys.callID.rawValue] = call.callId
+        data [NotificationUserInfoKeys.accountID.rawValue] = call.accountId
         let helper = LocalNotificationsHelper()
         helper.presentCallNotification(data: data, callService: self.callService)
     }
