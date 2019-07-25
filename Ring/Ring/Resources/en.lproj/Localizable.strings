@@ -228,6 +228,7 @@
 "notifications.missedCall" = "Missed Call";
 "notifications.acceptCall" = "ACCEPT";
 "notifications.refuseCall" = "REFUSE";
+"notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
@@ -235,6 +236,7 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
 "dataTransfer.readableStatusCancel" = "Cancel";
+
 
 //Generated Message
 "generatedMessage.contactAdded" = "Contact added";

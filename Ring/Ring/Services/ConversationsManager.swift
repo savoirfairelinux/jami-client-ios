@@ -86,6 +86,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                         self.conversationService.dataTransferMessageMap.removeValue(forKey: transferId)
                     case .wait_peer_acceptance, .wait_host_acceptance:
                         status = DataTransferStatus.awaiting
+                        self.createTransferNotification(info: transferInfo)
                         self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: transferInfo.accountId)
                     case .ongoing:
                         status = DataTransferStatus.ongoing
@@ -162,22 +163,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                 // only for jami accounts
                 if let hash = JamiURI(schema: URIType.ring,
                                       infoHach: peerUri).hash {
-                    self.nameService.usernameLookupStatus.single()
-                        .filter({ lookupNameResponse in
-                            return lookupNameResponse.address != nil &&
-                                lookupNameResponse.address == hash
-                        })
-                        .subscribe(onNext: { [weak self] lookupNameResponse in
-                            if let name = lookupNameResponse.name, !name.isEmpty {
-                                data [NotificationUserInfoKeys.name.rawValue] = name
-                                self?.notificationHandler.presentMessageNotification(data: data)
-                            } else if let address = lookupNameResponse.address {
-                                data [NotificationUserInfoKeys.name.rawValue] = address
-                                self?.notificationHandler.presentMessageNotification(data: data)
-                            }
-                        }).disposed(by: self.disposeBag)
-
-                    self.nameService.lookupAddress(withAccount: "", nameserver: "", address: hash)
+                    searchNameAndPresentNotification(data: data, hash: hash)
                 }
             }
         }
@@ -202,6 +188,55 @@ class ConversationsManager: MessagesAdapterDelegate {
                                              shouldRefreshConversations: shouldUpdateConversationsList)
             .subscribe()
             .disposed(by: self.disposeBag)
+    }
+
+    func createTransferNotification(info: NSDataTransferInfo) {
+        if UIApplication.shared.applicationState == .active {
+            return
+        }
+        guard let account = self.accountsService.getAccount(fromAccountId: info.accountId), AccountModelHelper
+            .init(withAccount: account).isAccountRing() &&
+            accountsService.getCurrentProxyState(accountID: info.accountId) else {
+                return
+        }
+        var data = [String: String]()
+        var message = L10n.Notifications.newFile + " "
+        if let name = info.path.split(separator: "/").last {
+            message += name
+        } else {
+            message += info.path
+        }
+        data [NotificationUserInfoKeys.messageContent.rawValue] = message
+        data [NotificationUserInfoKeys.participantID.rawValue] = info.peer
+        data [NotificationUserInfoKeys.accountID.rawValue] = info.accountId
+        if let name = info.displayName {
+            data [NotificationUserInfoKeys.name.rawValue] = name
+            self.notificationHandler.presentMessageNotification(data: data)
+        } else {
+            guard let hash = JamiURI(schema: URIType.ring,
+                                     infoHach: info.peer).hash else {return}
+
+            searchNameAndPresentNotification(data: data, hash: hash)
+        }
+    }
+
+    func searchNameAndPresentNotification(data: [String: String], hash: String) {
+        var data = data
+        self.nameService.usernameLookupStatus.single()
+            .filter({ lookupNameResponse in
+                return lookupNameResponse.address != nil &&
+                    lookupNameResponse.address == hash
+            })
+            .subscribe(onNext: { [weak self] lookupNameResponse in
+                if let name = lookupNameResponse.name, !name.isEmpty {
+                    data [NotificationUserInfoKeys.name.rawValue] = name
+                    self?.notificationHandler.presentMessageNotification(data: data)
+                } else if let address = lookupNameResponse.address {
+                    data [NotificationUserInfoKeys.name.rawValue] = address
+                    self?.notificationHandler.presentMessageNotification(data: data)
+                }
+            }).disposed(by: self.disposeBag)
+        self.nameService.lookupAddress(withAccount: "", nameserver: "", address: hash)
     }
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64, from accountId: String,

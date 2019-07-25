@@ -384,6 +384,8 @@ internal enum L10n {
     internal static let incomingCall = L10n.tr("Localizable", "notifications.incomingCall")
     /// Missed Call
     internal static let missedCall = L10n.tr("Localizable", "notifications.missedCall")
+    /// New file
+    internal static let newFile = L10n.tr("Localizable", "notifications.newFile")
     /// REFUSE
     internal static let refuseCall = L10n.tr("Localizable", "notifications.refuseCall")
   }
