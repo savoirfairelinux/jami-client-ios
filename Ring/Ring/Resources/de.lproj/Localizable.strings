@@ -174,6 +174,10 @@
 "accountPage.removeAccountTitle" = "Konto entfernen";
 "accountPage.removeAccountMessage" = "Durch Anklicken von \"Entfernen\" wird dieses Konto auf diesem Gerät gelöscht! Diese Aktion kann nicht rückgängig gemacht werden. Außerdem kann Ihr registrierter Name verloren gehen.";
 "accountPage.removeAccountButton" = "Entfernen";
+"accountPage.shareAccountDetails" = "Share Account Details";
+"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+
 //Account
 "account.sipUsername" = "Benutzername";
 "account.sipPassword" = "Passwort";
@@ -228,6 +232,7 @@
 "notifications.missedCall" = "Verpasster Anruf";
 "notifications.acceptCall" = "ANNEHMEN";
 "notifications.refuseCall" = "ABLEHNEN";
+"notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Ausstehend …";
 "dataTransfer.readableStatusRefuse" = "Verweigern";
 "dataTransfer.readableStatusOngoing" = "Übertrage";
@@ -235,6 +240,7 @@
 "dataTransfer.readableStatusSuccess" = "Abgeschlossen";
 "dataTransfer.readableStatusAccept" = "Akzeptieren";
 "dataTransfer.readableStatusCancel" = "Abbrechen";
+
 
 //Generated Message
 "generatedMessage.contactAdded" = "Kontakt hinzugefügt";

@@ -25,7 +25,7 @@
 "global.ok" = "Rendben";
 
 // Scan
-"scan.badQrCode" = "Érvénytelen QR-kód";
+"scan.badQrCode" = "Rossz QR-kód";
 "scan.search" = "Keresés…";
 
 // Smartlist
@@ -174,6 +174,10 @@
 "accountPage.removeAccountTitle" = "Fiók eltávolítása";
 "accountPage.removeAccountMessage" = "Szeretné eltávolítani ezt a fiókot ezen az eszközön? Óvatosan, ez eltávolítja a fiókot és a regisztrált neve elveszhet. Ez nem vonható vissza.";
 "accountPage.removeAccountButton" = "Eltávolítás";
+"accountPage.shareAccountDetails" = "Share Account Details";
+"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+
 //Account
 "account.sipUsername" = "Felhasználónév";
 "account.sipPassword" = "Jelszó";
@@ -228,6 +232,7 @@
 "notifications.missedCall" = "Nem fogadott hívás";
 "notifications.acceptCall" = "ELFOGADÁS";
 "notifications.refuseCall" = "ELUTASÍTÁS";
+"notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
 "dataTransfer.readableStatusOngoing" = "Hívásátirányítás";
@@ -235,6 +240,7 @@
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
+
 
 //Generated Message
 "generatedMessage.contactAdded" = "Kapcsolat hozzáadva";

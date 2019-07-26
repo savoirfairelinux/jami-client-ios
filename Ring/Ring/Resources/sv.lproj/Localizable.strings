@@ -174,6 +174,10 @@
 "accountPage.removeAccountTitle" = "Ta bort konto";
 "accountPage.removeAccountMessage" = "Genom att klicka \"Ta bort\" kommer du att ta bort detta konto från denna enhet. Denna åtgärd kan inte ångras. Ditt registrerade namn kan också förloras.";
 "accountPage.removeAccountButton" = "Ta bort";
+"accountPage.shareAccountDetails" = "Share Account Details";
+"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+
 //Account
 "account.sipUsername" = "Användarnamn";
 "account.sipPassword" = "Lösenord";
@@ -228,6 +232,7 @@
 "notifications.missedCall" = "Missat samtal";
 "notifications.acceptCall" = "ACCEPTERA";
 "notifications.refuseCall" = "NEKA";
+"notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Väntar...";
 "dataTransfer.readableStatusRefuse" = "Neka";
 "dataTransfer.readableStatusOngoing" = "Överför";
@@ -235,6 +240,7 @@
 "dataTransfer.readableStatusSuccess" = "Slutförd";
 "dataTransfer.readableStatusAccept" = "Acceptera";
 "dataTransfer.readableStatusCancel" = "Avbryt";
+
 
 //Generated Message
 "generatedMessage.contactAdded" = "Kontakt tillagt";

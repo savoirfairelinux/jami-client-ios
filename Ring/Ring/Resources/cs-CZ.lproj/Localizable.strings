@@ -174,6 +174,10 @@
 "accountPage.removeAccountTitle" = "Remove account";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Odstranit";
+"accountPage.shareAccountDetails" = "Share Account Details";
+"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+
 //Account
 "account.sipUsername" = "Uživatelské jméno";
 "account.sipPassword" = "Heslo";
@@ -228,6 +232,7 @@
 "notifications.missedCall" = "Zmeškaný hovor";
 "notifications.acceptCall" = "PŘIJMOUT";
 "notifications.refuseCall" = "ODMÍTNOUT";
+"notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Čeká na vyřízení…";
 "dataTransfer.readableStatusRefuse" = "Odmítnout";
 "dataTransfer.readableStatusOngoing" = "Přenáší se";
@@ -235,6 +240,7 @@
 "dataTransfer.readableStatusSuccess" = "Dokončeno";
 "dataTransfer.readableStatusAccept" = "Přijmout";
 "dataTransfer.readableStatusCancel" = "Zrušit";
+
 
 //Generated Message
 "generatedMessage.contactAdded" = "Spojení přidáno";

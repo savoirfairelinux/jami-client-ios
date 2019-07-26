@@ -174,6 +174,10 @@
 "accountPage.removeAccountTitle" = "Премахване на профил";
 "accountPage.removeAccountMessage" = "Ако изберете „Премахване“, ще премахнете този профил на това устройство! Това действие не може да бъде отменено. Също така, регистрираното ви име може да бъде загубено.";
 "accountPage.removeAccountButton" = "Премахване";
+"accountPage.shareAccountDetails" = "Share Account Details";
+"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+
 //Account
 "account.sipUsername" = "User Name";
 "account.sipPassword" = "Парола";
@@ -228,6 +232,7 @@
 "notifications.missedCall" = "Missed Call";
 "notifications.acceptCall" = "ACCEPT";
 "notifications.refuseCall" = "REFUSE";
+"notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Отказ";
 "dataTransfer.readableStatusOngoing" = "Transferring";
@@ -235,6 +240,7 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Приемане";
 "dataTransfer.readableStatusCancel" = "Отказ";
+
 
 //Generated Message
 "generatedMessage.contactAdded" = "Контактът е добавен";

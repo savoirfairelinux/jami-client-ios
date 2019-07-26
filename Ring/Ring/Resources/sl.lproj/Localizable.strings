@@ -174,6 +174,10 @@
 "accountPage.removeAccountTitle" = "Remove account";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Odstrani";
+"accountPage.shareAccountDetails" = "Share Account Details";
+"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+
 //Account
 "account.sipUsername" = "User Name";
 "account.sipPassword" = "Geslo";
@@ -228,6 +232,7 @@
 "notifications.missedCall" = "Missed Call";
 "notifications.acceptCall" = "ACCEPT";
 "notifications.refuseCall" = "REFUSE";
+"notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Zavrni";
 "dataTransfer.readableStatusOngoing" = "Transferring";
@@ -235,6 +240,7 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Sprejmi";
 "dataTransfer.readableStatusCancel" = "Prekliči";
+
 
 //Generated Message
 "generatedMessage.contactAdded" = "Contact added";
