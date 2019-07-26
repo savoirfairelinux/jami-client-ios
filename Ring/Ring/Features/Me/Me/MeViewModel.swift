@@ -39,6 +39,7 @@ enum SettingsSection: SectionModelType {
         case linkNew
         case blockedList
         case removeAccount
+        case shareAccountDetails
         case sectionHeader(title: String)
         case ordinary(label: String)
         case notifications
@@ -122,10 +123,43 @@ class MeViewModel: ViewModel, Stateable {
             } else {
                 items.append(.ordinary(label: L10n.AccountPage.usernameNotRegistered))
             }
+                items.append(.shareAccountDetails)
             return SettingsSection
                 .credentials(items: items)
         }
     }()
+
+    var accountInfoToShare: [Any]? {
+        var info = [String]()
+        guard let account = self.accountService.currentAccount else {return nil}
+        var nameToContact = ""
+        if self.isAccountSip.value {
+            guard let accountDetails = account.details,
+                let credentials = account.credentialDetails.first else {return nil}
+            if AccountModelHelper.init(withAccount: account).isAccountRing() {
+                return nil
+            }
+            let username = credentials.username
+            let server = accountDetails.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
+            if username.isEmpty || server.isEmpty {
+                return nil
+            }
+            nameToContact = username + "@" + server
+        }
+        if !account.registeredName.isEmpty {
+            nameToContact = account.registeredName
+        } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+            let accountName = userNameData[account.id] as? String,
+            !accountName.isEmpty {
+            nameToContact = accountName
+        }
+        if nameToContact.isEmpty {
+            nameToContact = account.jamiId
+        }
+        let title = L10n.AccountPage.contactMeOnJamiContant(nameToContact)
+        info.append(title)
+        return info
+    }
 
     lazy var linkNewDevice: Observable<SettingsSection> = {
         return Observable.just(.linkNewDevice(items: [.linkNew]))
@@ -231,16 +265,16 @@ class MeViewModel: ViewModel, Stateable {
                 return .accountSettings( items: [.sectionHeader(title: ""),
                                                  .sipUserName(value: username),
                                                  .sipPassword(value: password),
-                                                 .sipServer(value: server)])
-
+                                                 .sipServer(value: server),
+                                                 .shareAccountDetails])
             }
             return .accountSettings( items: [.sectionHeader(title: ""),
                                              .sipUserName(value: username),
                                              .sipPassword(value: password),
                                              .sipServer(value: server),
                                              .port(value: port),
-                                             .proxyServer(value: proxyServer)])
-
+                                             .proxyServer(value: proxyServer),
+                                             .shareAccountDetails])
         }
     }()
 

@@ -335,6 +335,21 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.text = label
                     cell.selectionStyle = .none
                     return cell
+                case .shareAccountDetails:
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.AccountPage.shareAccountDetails
+                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textAlignment = .center
+                    cell.selectionStyle = .none
+                    let button = UIButton.init(frame: cell.frame)
+                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    button.frame.size = size
+                    cell.addSubview(button)
+                    button.rx.tap.subscribe(onNext: { [weak self] in
+                        self?.shareAccountInfo()
+                    }).disposed(by: cell.disposeBag)
+                    return cell
+
                 case .notifications:
                     let cell = tableView.dequeueReusableCell(for: indexPath,
                                                              cellType: NotificationCell.self)
@@ -643,6 +658,16 @@ extension MeViewController: UITableViewDelegate {
         if !decelerate {
             self.scrollViewDidStopScrolling()
         }
+    }
+
+    func shareAccountInfo() {
+        guard let content = self.viewModel.accountInfoToShare else {return}
+        let title = L10n.AccountPage.contactMeOnJamiTitle
+        let activityViewController = UIActivityViewController(activityItems: content,
+                                                              applicationActivities: nil)
+        activityViewController.setValue(title, forKey: "Subject")
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
     }
 
     private func scrollViewDidStopScrolling() {

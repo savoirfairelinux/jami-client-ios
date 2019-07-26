@@ -52,6 +52,12 @@ internal enum L10n {
   internal enum AccountPage {
     /// Block List
     internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
+    /// Contact me using "%s" on the Jami distributet communication platform: https://jami.net
+    internal static func contactMeOnJamiContant(_ p1: UnsafePointer<CChar>) -> String {
+      return L10n.tr("Localizable", "accountPage.contactMeOnJamiContant", p1)
+    }
+    /// Contact me on Jami!
+    internal static let contactMeOnJamiTitle = L10n.tr("Localizable", "accountPage.contactMeOnJamiTitle")
     /// Account Details
     internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader")
     /// Device revocation error
@@ -108,6 +114,8 @@ internal enum L10n {
     internal static let saveProxyAddress = L10n.tr("Localizable", "accountPage.saveProxyAddress")
     /// Settings
     internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
+    /// Share Account Details
+    internal static let shareAccountDetails = L10n.tr("Localizable", "accountPage.shareAccountDetails")
     /// UNBLOCK
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact")
     /// username:
