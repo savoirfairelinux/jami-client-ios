@@ -145,7 +145,7 @@
 "accountPage.settingsHeader" = "Beállítások";
 "accountPage.username" = "felhasználónév:";
 "accountPage.usernameNotRegistered" = "felhasználónév: nincs bejegyzett";
-"accountPage.credentialsHeader" = "Fiók Adatai";
+"accountPage.credentialsHeader" = "Fiók részletek";
 "accountPage.enableProxy" = "Meghatalmazott engedélyezése";
 "accountPage.blockedContacts" = "Tiltólista";
 "accountPage.unblockContact" = "Letiltás feloldása";
@@ -174,9 +174,9 @@
 "accountPage.removeAccountTitle" = "Fiók eltávolítása";
 "accountPage.removeAccountMessage" = "Szeretné eltávolítani ezt a fiókot ezen az eszközön? Óvatosan, ez eltávolítja a fiókot és a regisztrált neve elveszhet. Ez nem vonható vissza.";
 "accountPage.removeAccountButton" = "Eltávolítás";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Fiók részletek megosztása";
+"accountPage.contactMeOnJamiTitle" = "Lépjen kapcsolatba velem a Jami-n!";
+"accountPage.contactMeOnJamiContant" = "Lépjen kapcsolatba velem „%s” a Jami elosztott közlés emelvény használatával: https://jami.net";
 
 //Account
 "account.sipUsername" = "Felhasználónév";
@@ -232,7 +232,7 @@
 "notifications.missedCall" = "Nem fogadott hívás";
 "notifications.acceptCall" = "ELFOGADÁS";
 "notifications.refuseCall" = "ELUTASÍTÁS";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Új fájl";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
 "dataTransfer.readableStatusOngoing" = "Hívásátirányítás";

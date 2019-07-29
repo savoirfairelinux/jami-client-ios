@@ -22,23 +22,23 @@
 "global.homeTabBarTitle" = "Hasiera";
 "global.contactRequestsTabBarTitle" = "Gonbidapenak";
 "global.meTabBarTitle" = "Kontua";
-"global.ok" = "Ok";
+"global.ok" = "Ados";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Searching…";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
+"smartlist.yesterday" = "Atzo";
 "smartlist.results" = "Search Result";
-"smartlist.conversations" = "Conversations";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
+"smartlist.conversations" = "Elkarrizketak";
+"smartlist.searching" = "Bilatzen...";
+"smartlist.noResults" = "Emaitzarik ez";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
-"smartlist.accountsTitle" = "Accounts";
+"smartlist.noNetworkConnectivity" = "Ez dago sare-konexiorik";
+"smartlist.cellularAccess" = "Egiaztatu sare mugikorrera sarbidea eman dela ezarpenetan";
+"smartlist.accountsTitle" = "Kontuak";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
@@ -55,11 +55,11 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Estekatu gailua kontu batekin";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Sortu Jami kontua";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
-"createProfile.profileCreated" = "Next";
+"createProfile.skipCreateProfile" = "Jauzi";
+"createProfile.profileCreated" = "Hurengoa";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
 "createProfile.enterNamePlaceholder" = "Enter name";
@@ -69,49 +69,49 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "Username";
-"createAccount.newPasswordPlaceholder" = "Password";
+"createAccount.enterNewUsernamePlaceholder" = "Erabiltzaile-izena";
+"createAccount.newPasswordPlaceholder" = "Pasahitza";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.passwordCharactersNumberError" = "6 karaktere gutxienez";
+"createAccount.passwordNotMatchingError" = "pasahitzak ez datoz bat";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.invalidUsername" = "erabiltzaile-izen baliogabea";
+"createAccount.usernameAlreadyTaken" = "erabiltzaile-izena hartuta dago";
+"createAccount.loading" = "Kargatzen";
+"createAccount.waitCreateAccountTitle" = "Kontua gehitzen";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(Recommended)";
-"createAccount.UsernameNotRegisteredTitle" = "Network error";
+"createAccount.UsernameNotRegisteredTitle" = "Sare errorea";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "Password";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
+"linkToAccount.waitLinkToAccountTitle" = "Kontua estekatzen";
+"linkToAccount.linkButtonTitle" = "Estekatu gailua";
+"linkToAccount.passwordPlaceholder" = "Pasahitza";
+"linkToAccount.pinPlaceholder" = "PIN-a";
+"linkToAccount.passwordLabel" = "Sartu pasahitza";
+"linkToAccount.pinLabel" = "Sartu PIN-a";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "Ezin da kontua aurkitu";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountAddedTitle" = "Kontua gehituta";
+"alerts.accountNoNetworkTitle" = "Ezin da sarera konektatu";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.accountDefaultErrorTitle" = "Errore ezezaguna";
+"alerts.accountDefaultErrorMessage" = "Ezin izan da kontua gehitu";
+"alerts.profileTakePhoto" = "Atera argazkia";
+"alerts.profileUploadPhoto" = "Igo argazkia";
 "alerts.profileCancelPhoto" = "Ezeztatu";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "Kontua estekatzen";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.dbFailedMessage" = "Itxi aplikazioa eta saiatu berriro";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -121,18 +121,18 @@
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
-"actions.blockAction" = "Block";
+"actions.blockAction" = "Bloketu";
 "actions.deleteAction" = "Ezabatu";
 "actions.cancelAction" = "Ezeztatu";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.backAction" = "Atzera";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "Accept";
+"alerts.incomingCallButtonAccept" = "Onartu";
 "alerts.incomingCallButtonIgnore" = "Ignore";
 
 //Calls
 "calls.callItemTitle" = "Call";
-"calls.unknown" = "Unknown";
+"calls.unknown" = "Ezezaguna";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
@@ -141,8 +141,8 @@
 "calls.currentCallWith" = "Call with ";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
+"accountPage.devicesListHeader" = "Gailuak";
+"accountPage.settingsHeader" = "Ezarpenak";
 "accountPage.username" = "username:";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -168,7 +168,7 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Name";
+"accountPage.namePlaceholder" = "Izena";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Remove account";
@@ -180,21 +180,21 @@
 
 //Account
 "account.sipUsername" = "User Name";
-"account.sipPassword" = "Password";
+"account.sipPassword" = "Pasahitza";
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
-"account.proxyServer" = "Proxy";
+"account.proxyServer" = "Proxya";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Enter Password";
+"account.passwordLabel" = "Sartu pasahitza";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
+"account.statusOnline" = "Konektatuta";
+"account.statusOffline" = "Deskonektatuta";
 "account.statusConnecting" = "Konektatzen";
-"account.statusUnknown" = "Unknown";
+"account.statusUnknown" = "Ezezaguna";
 "account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
@@ -202,11 +202,11 @@
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
+"linkDevice.passwordError" = "Sartu duzun pasahitzak ez du kontu hau desblokeatzen";
+"linkDevice.networkError" = "Sare errore bat gertatu da esportazioan";
+"linkDevice.defaultError" = "Errore bat gertatu da esportazioan";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "Egiaztatzen";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
@@ -218,13 +218,13 @@
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
-"dataTransfer.readableStatusError" = "Error";
+"dataTransfer.readableStatusError" = "Errorea";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "Ukatu";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "Onartu";
 "dataTransfer.readableStatusCancel" = "Ezeztatu";
 
 //Notifications
@@ -234,22 +234,22 @@
 "notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "Ukatu";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "Onartu";
 "dataTransfer.readableStatusCancel" = "Ezeztatu";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
-"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.contactAdded" = "Kontaktua gehituta";
+"generatedMessage.invitationReceived" = "Gonbidapena jasota";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
-"generatedMessage.outgoingCall" = "Outgoing call";
-"generatedMessage.incomingCall" = "Incoming call";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.outgoingCall" = "Irteera-deia";
+"generatedMessage.incomingCall" = "Sarrera-deia";
+"generatedMessage.missedOutgoingCall" = "Galdutako irteera-deia";
+"generatedMessage.missedIncomingCall" = "Galdutako sarrera-deia";
 
 //General Settings
 "generalSettings.title" = "General settings";

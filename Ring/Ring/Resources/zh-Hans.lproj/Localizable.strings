@@ -174,9 +174,9 @@
 "accountPage.removeAccountTitle" = "移除帳號";
 "accountPage.removeAccountMessage" = "點選「移除」後，您將會在此裝置上移除此帳號！此動作不可復原。同時，您已註冊的名稱也將會遺失。";
 "accountPage.removeAccountButton" = "移除";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "分享帳號詳細資料";
+"accountPage.contactMeOnJamiTitle" = "在 Jami 上聯絡我";
+"accountPage.contactMeOnJamiContant" = "在 Jami 分散式通訊平臺：https://jami.net 上使用「%s」聯絡我";
 
 //Account
 "account.sipUsername" = "使用者名稱";
@@ -232,7 +232,7 @@
 "notifications.missedCall" = "漏接的通話";
 "notifications.acceptCall" = "接聽";
 "notifications.refuseCall" = "拒接";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "新檔案";
 "dataTransfer.readableStatusAwaiting" = "擱置中……";
 "dataTransfer.readableStatusRefuse" = "拒絕";
 "dataTransfer.readableStatusOngoing" = "正在傳輸";
