@@ -405,7 +405,7 @@ class AccountsService: AccountAdapterDelegate {
     func setDetails(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
         var filename = "default.wav"
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, *), UIDevice.useCallKit() {
             filename = ""
         }
         if details

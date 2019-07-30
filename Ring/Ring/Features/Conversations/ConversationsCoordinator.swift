@@ -104,7 +104,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         callViewController.viewModel.call = call
 
         var tempBag = DisposeBag()
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, *), UIDevice.useCallKit() {
             call.callUUID = UUID()
             callsProvider
                 .reportIncomingCall(account: account, call: call) { _ in
