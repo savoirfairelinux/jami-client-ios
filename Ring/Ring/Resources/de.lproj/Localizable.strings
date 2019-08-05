@@ -176,7 +176,7 @@
 "accountPage.removeAccountButton" = "Entfernen";
 "accountPage.shareAccountDetails" = "Kontodetails teilen";
 "accountPage.contactMeOnJamiTitle" = "Kontaktieren Sie mich über Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Kontaktieren sie mich über \"%s\" auf der verteilten Kommunikationsplattform Jami: https://jami.net";
 
 //Account
 "account.sipUsername" = "Benutzername";

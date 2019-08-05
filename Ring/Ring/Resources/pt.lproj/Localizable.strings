@@ -174,9 +174,9 @@
 "accountPage.removeAccountTitle" = "Remover conta";
 "accountPage.removeAccountMessage" = "Ao clicar em \"Remover\" irá remover esta conta neste dispositivo! Esta ação não pode ser desfeita. O seu nome de utilizador também será perdido.";
 "accountPage.removeAccountButton" = "Remover";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Partilhar detalhes da conta";
+"accountPage.contactMeOnJamiTitle" = "Contacte-me no Jami!";
+"accountPage.contactMeOnJamiContant" = "Contacte-me usando \"%s\" na plataforma de comunicação distribuída Jami: https://jami.net";
 
 //Account
 "account.sipUsername" = "Nome do utilizador";
@@ -232,7 +232,7 @@
 "notifications.missedCall" = "Chamada perdida";
 "notifications.acceptCall" = "ACEITAR";
 "notifications.refuseCall" = "RECUSAR";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Novo ficheiro";
 "dataTransfer.readableStatusAwaiting" = "Pendente...";
 "dataTransfer.readableStatusRefuse" = "Recusar";
 "dataTransfer.readableStatusOngoing" = "A transferir";
