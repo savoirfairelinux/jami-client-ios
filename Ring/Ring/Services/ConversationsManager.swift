@@ -191,32 +191,36 @@ class ConversationsManager: MessagesAdapterDelegate {
     }
 
     func createTransferNotification(info: NSDataTransferInfo) {
-        if UIApplication.shared.applicationState == .active {
-            return
-        }
-        guard let account = self.accountsService.getAccount(fromAccountId: info.accountId), AccountModelHelper
-            .init(withAccount: account).isAccountRing() &&
-            accountsService.getCurrentProxyState(accountID: info.accountId) else {
+        DispatchQueue.main.async { [weak self] in
+            if UIApplication.shared.applicationState == .active {
                 return
-        }
-        var data = [String: String]()
-        var message = L10n.Notifications.newFile + " "
-        if let name = info.path.split(separator: "/").last {
-            message += name
-        } else {
-            message += info.path
-        }
-        data [NotificationUserInfoKeys.messageContent.rawValue] = message
-        data [NotificationUserInfoKeys.participantID.rawValue] = info.peer
-        data [NotificationUserInfoKeys.accountID.rawValue] = info.accountId
-        if let name = info.displayName {
-            data [NotificationUserInfoKeys.name.rawValue] = name
-            self.notificationHandler.presentMessageNotification(data: data)
-        } else {
-            guard let hash = JamiURI(schema: URIType.ring,
-                                     infoHach: info.peer).hash else {return}
+            }
+            DispatchQueue.global(qos: .background).async {
+                guard let account = self?.accountsService.getAccount(fromAccountId: info.accountId), AccountModelHelper
+                    .init(withAccount: account).isAccountRing(),
+                    let state = self?.accountsService.getCurrentProxyState(accountID: info.accountId), state  else {
+                        return
+                }
+                var data = [String: String]()
+                var message = L10n.Notifications.newFile + " "
+                if let name = info.path.split(separator: "/").last {
+                    message += name
+                } else {
+                    message += info.path
+                }
+                data [NotificationUserInfoKeys.messageContent.rawValue] = message
+                data [NotificationUserInfoKeys.participantID.rawValue] = info.peer
+                data [NotificationUserInfoKeys.accountID.rawValue] = info.accountId
+                if let name = info.displayName {
+                    data [NotificationUserInfoKeys.name.rawValue] = name
+                    self?.notificationHandler.presentMessageNotification(data: data)
+                } else {
+                    guard let hash = JamiURI(schema: URIType.ring,
+                                             infoHach: info.peer).hash else {return}
 
-            searchNameAndPresentNotification(data: data, hash: hash)
+                    self?.searchNameAndPresentNotification(data: data, hash: hash)
+                }
+            }
         }
     }
 
