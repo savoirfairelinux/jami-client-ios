@@ -93,4 +93,5 @@ extension UIColor {
     static let jamiSuccess = UIColor(hex: 0x00b20b, alpha: 1.0)
     static let jamiFailure = UIColor(hex: 0xf00000, alpha: 1.0)
     static let jamiWarning = UIColor.orange
+    static let jamiTransferProgress = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
 }

@@ -715,7 +715,7 @@ class ConversationViewController: UIViewController,
             let progress = viewModel.getTransferProgress(transferId: transferId) ?? 0.0
             cell.progressBar.progress = progress
             cell.progressBar.isHidden = false
-            cell.startProgressMonitor(item, viewModel)
+            cell.startProgressMonitor(item, viewModel, isOutgoing: true)
             // hide accept button only
             cell.acceptButton?.isHidden = true
             cell.cancelButton.isHidden = false
