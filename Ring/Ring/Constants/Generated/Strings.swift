@@ -311,6 +311,8 @@ internal enum L10n {
     internal static let readableStatusRefuse = L10n.tr("Localizable", "dataTransfer.readableStatusRefuse")
     /// Complete
     internal static let readableStatusSuccess = L10n.tr("Localizable", "dataTransfer.readableStatusSuccess")
+    /// Failed to send
+    internal static let sendingFailed = L10n.tr("Localizable", "dataTransfer.sendingFailed")
   }
 
   internal enum GeneralSettings {

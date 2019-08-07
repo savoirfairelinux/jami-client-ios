@@ -26,6 +26,7 @@ import RxSwift
 import ActiveLabel
 import SwiftyBeaver
 
+// swiftlint:disable type_body_length
 class MessageCell: UITableViewCell, NibReusable {
 
     let log = SwiftyBeaver.self
@@ -53,8 +54,10 @@ class MessageCell: UITableViewCell, NibReusable {
     @IBOutlet weak var bubbleViewMask: UIView?
 
     private var transferImageView = UIImageView()
+    private var transferProgressView = ProgressView()
 
     var dataTransferProgressUpdater: Timer?
+    var outgoingImageProgressUpdater: Timer?
 
     var disposeBag = DisposeBag()
 
@@ -62,30 +65,51 @@ class MessageCell: UITableViewCell, NibReusable {
         if self.sendingIndicator != nil {
             self.sendingIndicator.stopAnimating()
         }
-        super.prepareForReuse()
         self.stopProgressMonitor()
+        self.stopOutgoingImageMonitor()
+        self.transferProgressView.removeFromSuperview()
         self.disposeBag = DisposeBag()
+        super.prepareForReuse()
     }
 
     func startProgressMonitor(_ item: MessageViewModel,
                               _ conversationViewModel: ConversationViewModel) {
+        if self.outgoingImageProgressUpdater != nil {
+            self.stopOutgoingImageMonitor()
+            return
+        }
         if self.dataTransferProgressUpdater != nil {
             self.stopProgressMonitor()
             return
         }
         guard let transferId = item.daemonId else { return }
-        self.dataTransferProgressUpdater = Timer.scheduledTimer(timeInterval: 0.5,
-                                                                target: self,
-                                                                selector: #selector(self.updateProgressBar),
-                                                                userInfo: ["transferId": transferId,
-                                                                           "conversationViewModel": conversationViewModel],
-                                                                repeats: true)
+        self.dataTransferProgressUpdater = Timer
+            .scheduledTimer(timeInterval: 0.5,
+                            target: self,
+                            selector: #selector(self.updateProgressBar),
+                            userInfo: ["transferId": transferId,
+                                       "conversationViewModel": conversationViewModel],
+                            repeats: true)
+        self.outgoingImageProgressUpdater = Timer
+            .scheduledTimer(timeInterval: 0.01,
+                            target: self,
+                            selector: #selector(self.updateOutgoigTransfer),
+                            userInfo: ["transferId": transferId,
+                                       "conversationViewModel": conversationViewModel],
+                            repeats: true)
     }
 
     func stopProgressMonitor() {
         guard let updater = self.dataTransferProgressUpdater else { return }
         updater.invalidate()
         self.dataTransferProgressUpdater = nil
+    }
+
+    func stopOutgoingImageMonitor() {
+        if let outgoingImageUpdater = self.outgoingImageProgressUpdater {
+            outgoingImageUpdater.invalidate()
+            self.outgoingImageProgressUpdater = nil
+        }
     }
 
     @objc func updateProgressBar(timer: Timer) {
@@ -96,6 +120,17 @@ class MessageCell: UITableViewCell, NibReusable {
             DispatchQueue.main.async {
                 self.progressBar.progress = progress
             }
+        }
+    }
+
+    @objc func updateOutgoigTransfer(timer: Timer) {
+        guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
+        guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
+        guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
+        if let progress = viewModel.getTransferProgress(transferId: transferId) {
+           DispatchQueue.main.async {
+                self.transferProgressView.progress = CGFloat(progress * 100)
+           }
         }
     }
 
@@ -253,7 +288,6 @@ class MessageCell: UITableViewCell, NibReusable {
     func configureFromItem(_ conversationViewModel: ConversationViewModel,
                            _ items: [MessageViewModel]?,
                            cellForRowAt indexPath: IndexPath) {
-
         self.backgroundColor = UIColor.clear
         self.bubbleViewMask?.backgroundColor = UIColor.jamiMsgBackground
         self.transferImageView.backgroundColor = UIColor.jamiMsgBackground
@@ -415,8 +449,16 @@ class MessageCell: UITableViewCell, NibReusable {
             self.transferImageView.translatesAutoresizingMaskIntoConstraints = true
             self.transferImageView.topAnchor.constraint(equalTo: self.bubble.topAnchor, constant: 0).isActive = true
             self.transferImageView.bottomAnchor.constraint(equalTo: self.bubble.bottomAnchor, constant: 0).isActive = true
+            if !message.message.incoming && message.initialTransferStatus != .success {
+                self.transferProgressView.frame = self.transferImageView.frame
+                self.transferProgressView.image = image
+                self.transferProgressView.status.value = message.initialTransferStatus
+                self.transferProgressView.progress = 0
+                self.transferProgressView.target = 100
+                self.transferProgressView.currentProgress = 0
+                self.bubble.addSubview(self.transferProgressView)
+            }
         }
     }
     // swiftlint:enable cyclomatic_complexity
-
 }
