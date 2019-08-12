@@ -173,7 +173,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             } else {
                 self.unregisterVoipNotifications()
             }
-            if #available(iOS 10.0, *), UIDevice.useCallKit() {
+            if #available(iOS 10.0, *) {
                 return
             }
             // reimit new call signal to show incoming call alert
@@ -225,7 +225,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         self.clearBadgeNumber()
-        if #available(iOS 10.0, *), UIDevice.useCallKit() {
+        if #available(iOS 10.0, *) {
             return
         }
         self.callService.checkForIncomingCall()
@@ -487,7 +487,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        if #available(iOS 10.0, *), UIDevice.useCallKit() {
+        if #available(iOS 10.0, *) {
             guard let handle = userActivity.startCallHandle else {
                 return false
             }
@@ -507,7 +507,7 @@ extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
-        if #available(iOS 10.0, *), UIDevice.useCallKit() {
+        if #available(iOS 10.0, *) {
             return
         }
         if UIApplication.shared.applicationState != .active {

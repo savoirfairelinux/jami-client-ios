@@ -97,11 +97,4 @@ public extension UIDevice {
         return mapToDevice(identifier: identifier)
     }()
 
-    static func useCallKit() -> Bool {
-        guard let regionCode = Locale.current.regionCode else {return false}
-        if regionCode.contains("CN") || regionCode.contains("CHN") || regionCode.contains("MO") || regionCode.contains("HK") {
-            return false
-        }
-        return true
-    }
 }

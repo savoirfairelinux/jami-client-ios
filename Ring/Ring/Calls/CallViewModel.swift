@@ -112,7 +112,7 @@ class CallViewModel: Stateable, ViewModel {
                 if hide {
                     self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation, callID: nil)
                     self?.videoService.stopAudioDevice()
-                    if #available(iOS 10.0, *), UIDevice.useCallKit(), let call = self?.call {
+                    if #available(iOS 10.0, *), let call = self?.call {
                         self?.callsProvider.stopCall(callUUID: call.callUUID)
                     }
                 }
@@ -356,7 +356,7 @@ class CallViewModel: Stateable, ViewModel {
         guard let call = self.call else {
             return
         }
-        if #available(iOS 10.0, *), UIDevice.useCallKit(), stopProvider {
+        if #available(iOS 10.0, *), stopProvider {
             self.callsProvider.stopCall(callUUID: call.callUUID)
         }
         self.callService.hangUp(callId: call.callId)
@@ -394,7 +394,7 @@ class CallViewModel: Stateable, ViewModel {
             .subscribe(onSuccess: { [weak self] callModel in
                 callModel.callUUID = UUID()
                 self?.call = callModel
-                if #available(iOS 10.0, *), UIDevice.useCallKit() {
+                if #available(iOS 10.0, *) {
                     self?.callsProvider
                         .startCall(account: account, call: callModel)
                 }
