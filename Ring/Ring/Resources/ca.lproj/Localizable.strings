@@ -243,8 +243,8 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
-"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.contactAdded" = "Contacte afegit";
+"generatedMessage.invitationReceived" = "S'ha rebut una invitació";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Trucada sortint";
 "generatedMessage.incomingCall" = "Trucada entrant";
