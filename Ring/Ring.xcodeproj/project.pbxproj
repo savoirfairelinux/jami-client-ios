@@ -148,10 +148,10 @@
 		0E9D844B1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D844A1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift */; };
 		0EAA9DB42029F0AA005E245C /* ProxyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA9DB22029F0AA005E245C /* ProxyCell.swift */; };
 		0EAA9DB52029F0AA005E245C /* ProxyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA9DB32029F0AA005E245C /* ProxyCell.xib */; };
+		0EABD3852303600B00DE7ACF /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EABD3842303600B00DE7ACF /* default.wav */; };
 		0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */; };
 		0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
-		0EBCAA4E202E60F000E2A545 /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EBCAA4D202E60F000E2A545 /* default.wav */; };
 		0ECB4E2822B2D4840097CD7B /* CallsProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */; };
 		0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */; };
 		0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
@@ -474,11 +474,11 @@
 		0E9D844A1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestTabBarItem.swift; sourceTree = "<group>"; };
 		0EAA9DB22029F0AA005E245C /* ProxyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyCell.swift; sourceTree = "<group>"; };
 		0EAA9DB32029F0AA005E245C /* ProxyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProxyCell.xib; sourceTree = "<group>"; };
+		0EABD3842303600B00DE7ACF /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		0EB12451224AB1030025F8CA /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceCell.xib; sourceTree = "<group>"; };
 		0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
 		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
-		0EBCAA4D202E60F000E2A545 /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsProviderDelegate.swift; sourceTree = "<group>"; };
 		0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
@@ -1508,7 +1508,7 @@
 		1ABE07C61F0D86B300D36361 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0EBCAA4D202E60F000E2A545 /* default.wav */,
+				0EABD3842303600B00DE7ACF /* default.wav */,
 				1ABE07DA1F0D915100D36361 /* Localizable.strings */,
 				04399A021D1C2D9D00E99CD9 /* Images.xcassets */,
 			);
@@ -1769,7 +1769,6 @@
 				1A2D18FD1F292DAD00B2C785 /* ConversationCell.xib in Resources */,
 				0E320D50224ADF840070B515 /* DialpadViewController.storyboard in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
-				0EBCAA4E202E60F000E2A545 /* default.wav in Resources */,
 				1A2D18E61F29197100B2C785 /* MessageAccessoryView.xib in Resources */,
 				1A2D18F81F292D7200B2C785 /* MessageCellSent.xib in Resources */,
 				0E3BD4242044776300A50DDF /* ContactViewController.storyboard in Resources */,
@@ -1784,6 +1783,7 @@
 				0E438A96204F318200402900 /* AccountHeader.xib in Resources */,
 				62AD58462056D8EC00AF0701 /* MessageCellDataTransferSent.xib in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
+				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
 				62AD58482056DA6800AF0701 /* MessageCellDataTransferReceived.xib in Resources */,
 				1A2041841F1EA0FC00C08435 /* CreateAccountViewController.storyboard in Resources */,
 				0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */,
