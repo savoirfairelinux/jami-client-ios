@@ -40,6 +40,9 @@ class CallsProviderDelegate: NSObject {
             providerConfiguration.supportsVideo = true
             providerConfiguration.supportedHandleTypes = [.generic, .phoneNumber]
             providerConfiguration.ringtoneSound = "default.wav"
+            providerConfiguration.iconTemplateImageData = UIImage(asset: Asset.jamiLogo)?.pngData()
+            providerConfiguration.maximumCallGroups = 1
+            providerConfiguration.maximumCallsPerCallGroup = 1
 
             provider = CXProvider(configuration: providerConfiguration)
             provider?.setDelegate(self, queue: nil)
@@ -74,12 +77,15 @@ extension CallsProviderDelegate {
         update.localizedCallerName = handleInfo.displayName
         update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
         update.hasVideo = !call.isAudioOnly
-        provider?.reportNewIncomingCall(with: call.callUUID,
-                                        update: update) { error in
-                                            if error == nil {
-                                                return
-                                            }
-                                            completion?(error)
+        update.supportsGrouping = false
+        update.supportsUngrouping = false
+        update.supportsHolding = false
+        self.provider?.reportNewIncomingCall(with: call.callUUID,
+                                             update: update) { error in
+                                                if error == nil {
+                                                    return
+                                                }
+                                                completion?(error)
         }
     }
 
@@ -157,4 +163,21 @@ extension CallsProviderDelegate: CXProviderDelegate {
         self.provider?.reportCall(with: action.callUUID, updated: update)
         action.fulfill()
     }
+
+    func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
+        let serviceEventType: ServiceEventType = .audioActivated
+        let serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        self.responseStream.onNext(serviceEvent)
+        print("didActivate")
+        // Start call audio media, now that the audio session has been activated after having its priority boosted.
+    }
+
+    func provider(_ provider: CXProvider, didDeactivate audioSession: AVAudioSession) {
+        print("didActivate")
+        /*
+         Restart any non-call related audio now that the app's audio session has been
+         de-activated after having its priority restored to normal.
+         */
+    }
+
 }

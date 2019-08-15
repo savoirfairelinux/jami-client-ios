@@ -507,9 +507,6 @@ extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
-        if #available(iOS 10.0, *) {
-            return
-        }
         if UIApplication.shared.applicationState != .active {
             self.audioService.startAVAudioSession()
         }

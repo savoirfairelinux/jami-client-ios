@@ -111,7 +111,22 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      lockWhilePresenting: VCType.conversation.rawValue)
     }
 
+    func getTopController() -> UIViewController? {
+        guard var topController = UIApplication.shared
+            .keyWindow?.rootViewController else {
+                return nil
+        }
+        while let presentedViewController = topController.presentedViewController {
+            topController = presentedViewController
+        }
+        return topController
+    }
+
     func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
+        guard let topController = getTopController(),
+            !topController.isKind(of: (CallViewController).self) else {
+                return
+        }
         DispatchQueue.main.async {
             let callViewController = CallViewController.instantiate(with: self.injectionBag)
             callViewController.viewModel.placeCall(with: contactRingId, userName: userName, isAudioOnly: isAudioOnly)
