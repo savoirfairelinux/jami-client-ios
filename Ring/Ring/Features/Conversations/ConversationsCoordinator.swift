@@ -231,17 +231,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         topController.present(callViewController, animated: true, completion: nil)
     }
 
-    func getTopController() -> UIViewController? {
-        guard var topController = UIApplication.shared
-            .keyWindow?.rootViewController else {
-                return nil
-        }
-        while let presentedViewController = topController.presentedViewController {
-            topController = presentedViewController
-        }
-        return topController
-    }
-
     func triggerCallNotifications(call: CallModel) {
         var data = [String: String]()
         data [NotificationUserInfoKeys.name.rawValue] = call.displayName

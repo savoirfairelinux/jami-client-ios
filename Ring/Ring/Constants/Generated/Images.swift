@@ -47,6 +47,7 @@ internal enum Asset {
   internal static let icShowInput = ImageAsset(name: "ic_show_input")
   internal static let infoArrow = ImageAsset(name: "info_arrow")
   internal static let jamiIcon = ImageAsset(name: "jamiIcon")
+  internal static let jamiLogo = ImageAsset(name: "jamiLogo")
   internal static let leftArrow = ImageAsset(name: "left_arrow")
   internal static let moreSettings = ImageAsset(name: "more_settings")
   internal static let pauseCall = ImageAsset(name: "pause_call")

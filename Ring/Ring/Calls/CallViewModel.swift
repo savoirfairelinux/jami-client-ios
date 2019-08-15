@@ -331,11 +331,24 @@ class CallViewModel: Stateable, ViewModel {
                 return callUUID == self.call?.callUUID.uuidString
             }).subscribe(onNext: { [unowned self] serviceEvent in
                 if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
+                    if !self.audioService.isHeadsetConnected.value {
+                        self.switchSpeaker()
+                    }
                     self.answerCall()
                         .subscribe()
                         .disposed(by: self.disposeBag)
                 } else if serviceEvent.eventType == ServiceEventType.callProviderCancellCall {
                     self.cancelCall(stopProvider: false)
+                }
+            }).disposed(by: self.disposeBag)
+
+        callsProvider.sharedResponseStream
+            .filter({ serviceEvent in
+                serviceEvent.eventType == .audioActivated
+            }).subscribe(onNext: { [unowned self] _ in
+                if !self.audioService.isHeadsetConnected.value {
+                    self.isAudioOnly ?
+                        self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
                 }
             }).disposed(by: self.disposeBag)
     }
@@ -372,9 +385,12 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     func answerCall() -> Completable {
-        if !self.audioService.isHeadsetConnected.value {
-            isAudioOnly ?
-                self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
+        guard #available(iOS 10.0, *) else {
+            if !self.audioService.isHeadsetConnected.value {
+                isAudioOnly ?
+                    self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
+            }
+            return self.callService.accept(call: call)
         }
         return self.callService.accept(call: call)
     }

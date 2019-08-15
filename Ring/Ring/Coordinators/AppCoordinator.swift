@@ -205,8 +205,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                 childCoordinattor.stateSubject
                     .onNext(ConversationState
                         .startAudioCall(contactRingId: participant, userName: name))
+                return
             }
-            return
         }
     }
 }
