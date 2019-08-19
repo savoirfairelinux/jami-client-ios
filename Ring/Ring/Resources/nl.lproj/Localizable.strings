@@ -174,9 +174,9 @@
 "accountPage.removeAccountTitle" = "Account verwijderen";
 "accountPage.removeAccountMessage" = "Door op ‘Verwijderen’ te klikken, zult u dit account van dit apparaat verwijderen! Deze handeling kan niet ongedaan gemaakt worden. Uw geregistreerde naam zal ook verloren gaan.";
 "accountPage.removeAccountButton" = "Verwijderen";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Accountdetails delen";
+"accountPage.contactMeOnJamiTitle" = "Contacteer me op Jami!";
+"accountPage.contactMeOnJamiContant" = "Contacteer mij met %s op Jami, het gedistribueerde communicatieplatform: https://jami.net";
 
 //Account
 "account.sipUsername" = "Gebruikersnaam";
@@ -232,7 +232,7 @@
 "notifications.missedCall" = "Gemiste oproep";
 "notifications.acceptCall" = "ACCEPTEREN";
 "notifications.refuseCall" = "AFWIJZEN";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Nieuw bestand";
 "dataTransfer.readableStatusAwaiting" = "In afwachting…";
 "dataTransfer.readableStatusRefuse" = "Afwijzen";
 "dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
