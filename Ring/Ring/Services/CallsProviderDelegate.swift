@@ -168,16 +168,5 @@ extension CallsProviderDelegate: CXProviderDelegate {
         let serviceEventType: ServiceEventType = .audioActivated
         let serviceEvent = ServiceEvent(withEventType: serviceEventType)
         self.responseStream.onNext(serviceEvent)
-        print("didActivate")
-        // Start call audio media, now that the audio session has been activated after having its priority boosted.
     }
-
-    func provider(_ provider: CXProvider, didDeactivate audioSession: AVAudioSession) {
-        print("didActivate")
-        /*
-         Restart any non-call related audio now that the app's audio session has been
-         de-activated after having its priority restored to normal.
-         */
-    }
-
 }

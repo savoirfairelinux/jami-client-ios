@@ -331,9 +331,6 @@ class CallViewModel: Stateable, ViewModel {
                 return callUUID == self.call?.callUUID.uuidString
             }).subscribe(onNext: { [unowned self] serviceEvent in
                 if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
-                    if !self.audioService.isHeadsetConnected.value {
-                        self.switchSpeaker()
-                    }
                     self.answerCall()
                         .subscribe()
                         .disposed(by: self.disposeBag)
@@ -347,6 +344,7 @@ class CallViewModel: Stateable, ViewModel {
                 serviceEvent.eventType == .audioActivated
             }).subscribe(onNext: { [unowned self] _ in
                 if !self.audioService.isHeadsetConnected.value {
+                    self.switchSpeaker()
                     self.isAudioOnly ?
                         self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
                 }
