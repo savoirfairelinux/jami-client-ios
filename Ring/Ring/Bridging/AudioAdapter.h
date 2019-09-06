@@ -25,6 +25,7 @@
 - (void)setAudioOutputDevice:(NSInteger)index;
 - (void)setAudioInputDevice:(NSInteger)index;
 - (void)setAudioRingtoneDevice:(NSInteger)index;
+- (void)startAudio;
 
 @end
 

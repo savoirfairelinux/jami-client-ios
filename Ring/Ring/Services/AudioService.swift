@@ -64,6 +64,9 @@ class AudioService {
         } catch {
             log.error("\(error)")
         }
+        if #available(iOS 10.0, *) {
+            return
+        }
         setToRing()
     }
 
@@ -158,5 +161,9 @@ class AudioService {
 
     func setAudioRingtoneDevice(port: OutputPortType) {
         self.audioAdapter.setAudioRingtoneDevice(port.rawValue)
+    }
+
+    func startAudio() {
+        self.audioAdapter.startAudio()
     }
 }

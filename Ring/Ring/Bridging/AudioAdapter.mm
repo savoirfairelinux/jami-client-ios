@@ -35,5 +35,8 @@
 - (void)setAudioRingtoneDevice:(NSInteger)index {
     DRing::setAudioRingtoneDevice((int32_t)index);
 }
+- (void)startAudio {
+    DRing::startAudio();
+}
 
 @end
