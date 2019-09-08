@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Home";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "inviti";
 "global.meTabBarTitle" = "Profilo";
 "global.ok" = "Ok";
 
@@ -37,7 +37,7 @@
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Connessione di rete assente";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Assicurati che l'accesso cellulare sia garantito nelle tue impostazioni";
 "smartlist.accountsTitle" = "Account";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
@@ -73,10 +73,10 @@
 "createAccount.newPasswordPlaceholder" = "Password";
 "createAccount.repeatPasswordPlaceholder" = "Confermare password";
 "createAccount.passwordCharactersNumberError" = "6 caratteri minimo";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.passwordNotMatchingError" = "le passwords non corrispondono";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "nome utente non valido";
-"createAccount.usernameAlreadyTaken" = "username already taken";
+"createAccount.usernameAlreadyTaken" = "nome utente già utilizzato";
 "createAccount.loading" = "Caricamento";
 "createAccount.waitCreateAccountTitle" = "Aggiunta account ";
 "createAccount.RegisterAUsername" = "Register a username";
@@ -90,28 +90,28 @@
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.waitLinkToAccountTitle" = "Collegamento dell'account";
+"linkToAccount.linkButtonTitle" = "Dispositivo di collegamento";
 "linkToAccount.passwordPlaceholder" = "Password";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Inserisci Password";
 "linkToAccount.pinLabel" = "Inserisci PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Per generare il codice PIN, vai alle impostazioni di gestione dell'account sul dispositivo che contengono l'account che desideri utilizzare. Nelle impostazioni dei dispositivi Seleziona \"Collega un altro dispositivo a questo account\". Riceverai il PIN necessario per completare questo modulo. Il PIN è valido solo per 10 minuti.";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "Impossibile trovare l'account";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Aggiunto";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountNoNetworkTitle" = "Impossibile connettersi alla rete";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Errore sconosciuto";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountDefaultErrorMessage" = "Non è stato possibile creare l'account.";
 "alerts.profileTakePhoto" = "Scattare una foto";
 "alerts.profileUploadPhoto" = "Carica foto";
 "alerts.profileCancelPhoto" = "Annulla";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "Collegamento dell'account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.dbFailedMessage" = "Chiudi l'applicazione e prova ad aprirla di nuovo";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -202,11 +202,11 @@
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
+"linkDevice.passwordError" = "La password inserita non sblocca questo account";
+"linkDevice.networkError" = "Si è verificato un errore di rete durante l'esportazione";
+"linkDevice.defaultError" = "Si è verificato un errore durante l'esportazione";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "verifica";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";

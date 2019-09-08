@@ -68,12 +68,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Maak uw account aan";
-"createAccount.chooseStrongPassword" = "Kies een sterk wachtwoord om uw Jami-account te beschermen.";
+"createAccount.chooseStrongPassword" = "Kies een sterk paswoord om uw Jami-account te beschermen.";
 "createAccount.enterNewUsernamePlaceholder" = "Gebruikersnaam";
-"createAccount.newPasswordPlaceholder" = "Wachtwoord";
-"createAccount.repeatPasswordPlaceholder" = "Bevestig wachtwoord";
+"createAccount.newPasswordPlaceholder" = "Paswoord";
+"createAccount.repeatPasswordPlaceholder" = "Bevestig paswoord";
 "createAccount.passwordCharactersNumberError" = "Minimaal 6 tekens";
-"createAccount.passwordNotMatchingError" = "wachtwoorden komen niet overeen";
+"createAccount.passwordNotMatchingError" = "paswoorden komen niet overeen";
 "createAccount.lookingForUsernameAvailability" = "beschikbaarheid wordt gecontroleerd…";
 "createAccount.invalidUsername" = "ongeldige gebruikersnaam";
 "createAccount.usernameAlreadyTaken" = "gebruikersnaam reeds in gebruik";
@@ -81,7 +81,7 @@
 "createAccount.waitCreateAccountTitle" = "Account wordt toegevoegd";
 "createAccount.RegisterAUsername" = "Een gebruikersnaam registreren";
 "createAccount.ChooseAPassword" = "Mijn account versleutelen";
-"createAccount.PasswordInformation" = "Kies een wachtwoord om uw lokale account mee te versleutelen. Vergeet het niet, u zult uw account anders niet kunnen herstellen";
+"createAccount.PasswordInformation" = "Kies een paswoord om uw lokale account mee te versleutelen. Vergeet het niet, u zult uw account anders niet kunnen herstellen";
 "createAccount.EnableNotifications" = "Meldingen";
 "createAccount.Recommended" = "(Aanbevolen)";
 "createAccount.UsernameNotRegisteredTitle" = "Netwerkfout";
@@ -92,9 +92,9 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account koppelen";
 "linkToAccount.linkButtonTitle" = "Apparaat koppelen";
-"linkToAccount.passwordPlaceholder" = "Wachtwoord";
+"linkToAccount.passwordPlaceholder" = "Paswoord";
 "linkToAccount.pinPlaceholder" = "Pincode";
-"linkToAccount.passwordLabel" = "Geef wachtwoord in";
+"linkToAccount.passwordLabel" = "Geef paswoord in";
 "linkToAccount.pinLabel" = "Geef pincode in";
 "linkToAccount.explanationPinMessage" = "Ga naar de accountbeheerinstellingen op het apparaat dat de account bevat die u wilt gebruiken om de pincode te genereren. Selecteer ‘Een ander apparaat aan deze account koppelen’. U zult de pincode krijgen die u nodig heeft om dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
 
@@ -160,12 +160,12 @@
 "accountPage.revokeDeviceTitle" = "Apparaat intrekken";
 "accountPage.revokeDeviceMessage" = "Weet u zeker dat u dit apparaat wilt intrekken? Deze handeling kan niet ongedaan gemaakt worden.";
 "accountPage.revokeDeviceButton" = "Intrekken";
-"accountPage.revokeDevicePlaceholder" = "Geef uw wachtwoord in";
+"accountPage.revokeDevicePlaceholder" = "Geef uw paswoord in";
 "accountPage.deviceRevoked" = "Intrekken van apparaat voltooid";
 "accountPage.deviceRevocationProgress" = "Bezig met intrekken…";
 "accountPage.deviceRevocationSuccess" = "Apparaat is ingetrokken";
 "accountPage.deviceRevocationTryAgain" = "Herproberen";
-"accountPage.deviceRevocationWrongPassword" = "Verkeerd wachtwoord";
+"accountPage.deviceRevocationWrongPassword" = "Verkeerd paswoord";
 "accountPage.deviceRevocationUnknownDevice" = "Onbekend apparaat";
 "accountPage.deviceRevocationError" = "Fout bij intrekken van apparaat";
 "accountPage.namePlaceholder" = "Naam";
@@ -174,19 +174,19 @@
 "accountPage.removeAccountTitle" = "Account verwijderen";
 "accountPage.removeAccountMessage" = "Door op ‘Verwijderen’ te klikken, zult u deze account van dit apparaat verwijderen! Deze handeling kan niet ongedaan gemaakt worden. Uw geregistreerde naam zal ook verloren gaan.";
 "accountPage.removeAccountButton" = "Verwijderen";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Accountdetails delen";
+"accountPage.contactMeOnJamiTitle" = "Contacteer mij op Jami!";
+"accountPage.contactMeOnJamiContant" = "Contacteer mij met ‘%s’ op Jami, het gedistribueerde communicatieplatform: https://jami.net";
 
 //Account
 "account.sipUsername" = "Gebruikersnaam";
-"account.sipPassword" = "Wachtwoord";
+"account.sipPassword" = "Paswoord";
 "account.sipServer" = "SIP-server";
 "account.port" = "Poort";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "SIP-account aanmaken";
 "account.usernameLabel" = "Geef gebruikersnaam in";
-"account.passwordLabel" = "Geef wachtwoord in";
+"account.passwordLabel" = "Geef paswoord in";
 "account.serverLabel" = "Geef adres in";
 "account.portLabel" = "Geef poortnummer in";
 "account.accountStatus" = "Accountstatus";
@@ -202,7 +202,7 @@
 
 //Link New Device
 "linkDevice.title" = "Een nieuw apparaat koppelen";
-"linkDevice.passwordError" = "Het wachtwoord dat u heeft ingegeven ontgrendelt deze account niet";
+"linkDevice.passwordError" = "Het paswoord dat u heeft ingegeven ontgrendelt deze account niet";
 "linkDevice.networkError" = "Er is een netwerkfout opgetreden tijdens het exporteren";
 "linkDevice.defaultError" = "Er is een fout opgetreden tijdens het exporteren";
 "linkDevice.explanationMessage" = "Om het proces te voltooien opent u Jami op het nieuwe apparaat en kiest u de optie ‘Dit apparaat aan een account koppelen’. Uw pincode is 10 minuten geldig";
@@ -232,7 +232,7 @@
 "notifications.missedCall" = "Gemiste oproep";
 "notifications.acceptCall" = "AANVAARDEN";
 "notifications.refuseCall" = "AFWIJZEN";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Nieuw bestand";
 "dataTransfer.readableStatusAwaiting" = "In afwachting…";
 "dataTransfer.readableStatusRefuse" = "Afwijzen";
 "dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
