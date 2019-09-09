@@ -29,7 +29,6 @@
 		0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C2FE1E0C438F00CF00BA /* AccountAdapterDelegate.swift */; };
 		0273C3081E0C68BF00CF00BA /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273C3071E0C68BF00CF00BA /* DesignableButton.swift */; };
 		029CE9D71E1D8C860000C8E1 /* ServiceEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CE9D61E1D8C860000C8E1 /* ServiceEventTests.swift */; };
-		02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AED8181DD4C4B100F740BA /* librestbed.a */; };
 		02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22DFE1DF755DB000358C9 /* AccountsService.swift */; };
 		02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B22E081DF7585F000358C9 /* DaemonService.swift */; };
 		02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9B63E1E1D4E8C00F82F0C /* ServiceEvent.swift */; };
@@ -718,7 +717,6 @@
 				02674C851E0C757B0065EDF9 /* RxCocoa.framework in Frameworks */,
 				02674C861E0C757B0065EDF9 /* RxSwift.framework in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
-				02AED8191DD4C4B100F740BA /* librestbed.a in Frameworks */,
 				04399AE41D1C341A00E99CD9 /* libavcodec.a in Frameworks */,
 				04399AE51D1C341A00E99CD9 /* libavdevice.a in Frameworks */,
 				04399AE61D1C341A00E99CD9 /* libavfilter.a in Frameworks */,
