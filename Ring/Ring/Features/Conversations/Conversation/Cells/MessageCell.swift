@@ -452,10 +452,10 @@ class MessageCell: UITableViewCell, NibReusable {
             if !message.message.incoming && message.initialTransferStatus != .success {
                 self.transferProgressView.frame = self.transferImageView.frame
                 self.transferProgressView.image = image
-                self.transferProgressView.status.value = message.initialTransferStatus
                 self.transferProgressView.progress = 0
                 self.transferProgressView.target = 100
                 self.transferProgressView.currentProgress = 0
+                self.transferProgressView.status.value = message.initialTransferStatus
                 self.bubble.addSubview(self.transferProgressView)
             }
         }
