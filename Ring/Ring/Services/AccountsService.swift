@@ -237,10 +237,10 @@ class AccountsService: AccountAdapterDelegate {
 
     fileprivate func reloadAccounts() {
         for account in accountList {
-            account.details = self.getAccountDetails(fromAccountId: account.id)
+            let accountDetails = self.getAccountDetails(fromAccountId: account.id)
+            account.details = accountDetails
             account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: account.id)
-            account.devices = getKnownRingDevices(fromAccountId: account.id)
-
+            account.devices = getKnownRingDevices(fromAccountId: account.id, accountDetails: accountDetails)
             do {
                 let credentialDetails = try self.getAccountCredentials(fromAccountId: account.id)
                 account.credentialDetails.removeAll()
@@ -550,11 +550,15 @@ class AccountsService: AccountAdapterDelegate {
      - Returns: the known Ring devices.
      */
     func getKnownRingDevices(fromAccountId id: String) -> [DeviceModel] {
+        let accountDetails = self.getAccountDetails(fromAccountId: id)
+        return getKnownRingDevices(fromAccountId: id, accountDetails: accountDetails)
+    }
+
+    func getKnownRingDevices(fromAccountId id: String, accountDetails: AccountConfigModel) -> [DeviceModel] {
         let knownRingDevices = accountAdapter.getKnownRingDevices(id) as NSDictionary
 
         var devices = [DeviceModel]()
 
-        let accountDetails = self.getAccountDetails(fromAccountId: id)
         let currentDeviceId = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountDeviceId))
 
         for key in knownRingDevices.allKeys {
@@ -647,7 +651,28 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func knownDevicesChanged(for account: String, devices: [String: String]) {
-        reloadAccounts()
+        guard let account = self.getAccount(fromAccountId: account) else {return}
+        let oldDevices = account.devices
+        if oldDevices.isEmpty {
+            account.devices = getKnownRingDevices(fromAccountId: account.id)
+            var event = ServiceEvent(withEventType: .knownDevicesChanged)
+            event.addEventInput(.accountId, value: account)
+            self.responseStream.onNext(event)
+            return
+        }
+        var currentDeviceId: String?
+        oldDevices.forEach { (deviceModal) in
+            if deviceModal.isCurrent {
+                currentDeviceId = deviceModal.deviceId
+            }
+        }
+        var newDevices = [DeviceModel]()
+        for key in devices.keys {
+            newDevices.append(DeviceModel(withDeviceId: key,
+                                          deviceName: devices[key],
+                                          isCurrent: key == currentDeviceId))
+        }
+        account.devices = newDevices
         var event = ServiceEvent(withEventType: .knownDevicesChanged)
         event.addEventInput(.accountId, value: account)
         self.responseStream.onNext(event)
