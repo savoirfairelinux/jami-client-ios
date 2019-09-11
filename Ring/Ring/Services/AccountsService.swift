@@ -251,6 +251,21 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    fileprivate func reloadAccount(accountId: String) {
+        guard let account = self.getAccount(fromAccountId: accountId) else {return}
+        account.details = self.getAccountDetails(fromAccountId: account.id)
+        account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: account.id)
+        account.devices = getKnownRingDevices(fromAccountId: account.id)
+
+        do {
+            let credentialDetails = try self.getAccountCredentials(fromAccountId: account.id)
+            account.credentialDetails.removeAll()
+            account.credentialDetails.append(contentsOf: credentialDetails)
+        } catch {
+            log.error("\(error)")
+        }
+    }
+
     func getAccountProfile(accountId: String) -> AccountProfile? {
         return self.dbManager.accountProfile(for: accountId)
     }
@@ -647,7 +662,8 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func knownDevicesChanged(for account: String, devices: [String: String]) {
-        reloadAccounts()
+        reloadAccount(accountId: account)
+        //reloadAccounts()
         var event = ServiceEvent(withEventType: .knownDevicesChanged)
         event.addEventInput(.accountId, value: account)
         self.responseStream.onNext(event)
