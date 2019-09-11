@@ -308,7 +308,7 @@ extension ContactsService: ContactsAdapterDelegate {
             self.removeContactRequest(withRingId: hash)
         }
         // update contact status
-        if let contact = self.contact(withUri: uri) {
+        if let contact = self.contact(withHash: uri) {
             self.contactStatus.onNext(contact)
             if contact.confirmed != confirmed {
                 contact.confirmed = confirmed
@@ -331,7 +331,6 @@ extension ContactsService: ContactsAdapterDelegate {
                     }
                 }
             }
-
         }
         log.debug("Contact added :\(uri)")
     }

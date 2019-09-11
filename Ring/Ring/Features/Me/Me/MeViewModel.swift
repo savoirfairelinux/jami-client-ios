@@ -395,11 +395,11 @@ class MeViewModel: ViewModel, Stateable {
         self.accountService.sharedResponseStream
             .filter({ (deviceEvent) -> Bool in
                 return deviceEvent.eventType == ServiceEventType.deviceRevocationEnded
-                    && deviceEvent.getEventInput(.id) == accountId
+                    && deviceEvent.getEventInput(.accountId) == accountId
             })
             .subscribe(onNext: { [unowned self] deviceEvent in
                 if let state: Int = deviceEvent.getEventInput(.state),
-                    let deviceID: String = deviceEvent.getEventInput(.deviceId) {
+                    let deviceID: String = deviceEvent.getEventInput(.deviceId)  {
                     switch state {
                     case DeviceRevocationState.success.rawValue:
                         self.showActionState.value = .deviceRevokedWithSuccess(deviceId: deviceID)
