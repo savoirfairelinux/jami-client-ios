@@ -451,7 +451,7 @@
 		0E4909791FEAC9E1005CAA50 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
 		0E4A51CB23282BCC00357AFC /* libhttp_parser.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhttp_parser.a; path = ../fat/lib/libhttp_parser.a; sourceTree = "<group>"; };
-		0E5A668222F0B1F100AA6820 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProgressView.swift; path = "../../../../../../../../../System/Volumes/Data/Users/kkostiuk/Desktop/iphone/ring-project/client-ios/Ring/Ring/UI/ProgressView.swift"; sourceTree = "<group>"; };
+		0E5A668222F0B1F100AA6820 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProgressView.swift; path = "../../../../iphone/ring-project/client-ios/Ring/Ring/UI/ProgressView.swift"; sourceTree = SOURCE_ROOT; };
 		0E639459224AB32200C0890A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		0E63F1F3202907090001F248 /* Ring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ring.entitlements; sourceTree = "<group>"; };
 		0E68571020238546008B0717 /* ConversationNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNavigation.swift; sourceTree = "<group>"; };
