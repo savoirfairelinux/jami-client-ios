@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Afwijzen";
 "dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
 "dataTransfer.readableStatusCanceled" = "Geannuleerd";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Voltooid";
 "dataTransfer.readableStatusAccept" = "Aanvaarden";
 "dataTransfer.readableStatusCancel" = "Annuleren";

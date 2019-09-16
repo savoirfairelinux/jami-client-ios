@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Neka";
 "dataTransfer.readableStatusOngoing" = "Överför";
 "dataTransfer.readableStatusCanceled" = "Avbruten";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Slutförd";
 "dataTransfer.readableStatusAccept" = "Acceptera";
 "dataTransfer.readableStatusCancel" = "Avbryt";

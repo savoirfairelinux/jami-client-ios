@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Передача…";
 "dataTransfer.readableStatusCanceled" = "Отменено";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Завершено";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";

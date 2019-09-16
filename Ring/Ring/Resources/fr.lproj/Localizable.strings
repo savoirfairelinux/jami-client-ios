@@ -174,9 +174,9 @@
 "accountPage.removeAccountTitle" = "Supprimer le compte";
 "accountPage.removeAccountMessage" = "En cliquant \"Remove\" vous supprimerez ce compte de cet appareil! Cette action ne peut être annulée. Aussi, votre nom enregistré pourrait être perdu.";
 "accountPage.removeAccountButton" = "Enlever";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Partager les détails du compte ";
+"accountPage.contactMeOnJamiTitle" = "Contactez moi sur Jami !";
+"accountPage.contactMeOnJamiContant" = "Contactez-moi par l'identifiant : %s sur la plateforme distribuée de communication Jami. https://jami.net ";
 
 //Account
 "account.sipUsername" = "Nom d'utilisateur";
@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transfert en cours";
 "dataTransfer.readableStatusCanceled" = "Annulé";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Terminé";
 "dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuler";
@@ -232,7 +233,7 @@
 "notifications.missedCall" = "Appel manqué";
 "notifications.acceptCall" = "ACCEPTER";
 "notifications.refuseCall" = "REFUSER";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Nouveau fichier";
 "dataTransfer.readableStatusAwaiting" = "En attente ...";
 "dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transfert en cours";

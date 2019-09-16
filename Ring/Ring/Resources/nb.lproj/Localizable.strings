@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Avslå";
 "dataTransfer.readableStatusOngoing" = "Overfører";
 "dataTransfer.readableStatusCanceled" = "Avbrutt";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Fullført";
 "dataTransfer.readableStatusAccept" = "Aksepter";
 "dataTransfer.readableStatusCancel" = "Avbryt";

@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
 "dataTransfer.readableStatusOngoing" = "Hívásátirányítás";
 "dataTransfer.readableStatusCanceled" = "Törölve";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
