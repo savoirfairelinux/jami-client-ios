@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuler";

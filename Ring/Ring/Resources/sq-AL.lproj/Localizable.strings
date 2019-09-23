@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Hidhe tej";
 "dataTransfer.readableStatusOngoing" = "Po shpërngulet";
 "dataTransfer.readableStatusCanceled" = "U anulua";
+"dataTransfer.sendingFailed" = "S’u arrit të dërgohej";
 "dataTransfer.readableStatusSuccess" = "E plotë";
 "dataTransfer.readableStatusAccept" = "Pranoje";
 "dataTransfer.readableStatusCancel" = "Anuloje";

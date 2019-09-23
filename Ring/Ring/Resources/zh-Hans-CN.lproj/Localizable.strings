@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "拒接";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "接听";
 "dataTransfer.readableStatusCancel" = "取消";

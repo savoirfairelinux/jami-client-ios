@@ -174,9 +174,9 @@
 "accountPage.removeAccountTitle" = "Удаление учетной записи";
 "accountPage.removeAccountMessage" = "Нажав кнопку \"Удалить\", вы удалите эту учетную запись на этом устройстве! Это действие не может быть отменено. Кроме того, ваше зарегистрированное имя может быть утеряно.";
 "accountPage.removeAccountButton" = "Удалить";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Поделиться информацией об учетной записи";
+"accountPage.contactMeOnJamiTitle" = "Свяжитесь со мной в Jami!";
+"accountPage.contactMeOnJamiContant" = "Свяжитесь со мной, используя \"%s\" в распределенной коммуникационной платформе Jami: https://jami.net";
 
 //Account
 "account.sipUsername" = "Имя";
@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Передача…";
 "dataTransfer.readableStatusCanceled" = "Отменено";
+"dataTransfer.sendingFailed" = "Не удалось отправить";
 "dataTransfer.readableStatusSuccess" = "Завершено";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
@@ -232,7 +233,7 @@
 "notifications.missedCall" = "Пропущенный вызов";
 "notifications.acceptCall" = "ПРИНЯТЬ";
 "notifications.refuseCall" = "ОТКАЗАТЬ";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Новый файл";
 "dataTransfer.readableStatusAwaiting" = "Ожидание…";
 "dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Передача…";

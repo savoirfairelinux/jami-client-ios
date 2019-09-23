@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Odmítnout";
 "dataTransfer.readableStatusOngoing" = "Přenáší se";
 "dataTransfer.readableStatusCanceled" = "Zrušeno";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Dokončeno";
 "dataTransfer.readableStatusAccept" = "Přijmout";
 "dataTransfer.readableStatusCancel" = "Zrušit";

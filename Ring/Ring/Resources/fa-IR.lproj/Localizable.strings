@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "رد";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "لغو شده";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "پذیرش";
 "dataTransfer.readableStatusCancel" = "لغو";

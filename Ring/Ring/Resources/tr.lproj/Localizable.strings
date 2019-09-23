@@ -223,6 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Geri Çevir";
 "dataTransfer.readableStatusOngoing" = "Aktarıyor";
 "dataTransfer.readableStatusCanceled" = "İptal edildi";
+"dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Tam";
 "dataTransfer.readableStatusAccept" = "Kabul et";
 "dataTransfer.readableStatusCancel" = "İptal";
