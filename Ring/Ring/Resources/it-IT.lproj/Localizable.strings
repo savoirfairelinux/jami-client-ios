@@ -171,7 +171,7 @@
 "accountPage.namePlaceholder" = "Nome";
 "accountPage.linkDeviceTitle" = "Collega un altro dispositivo";
 "accountPage.other" = "Altro";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Rimuovi l'account";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Rimuovi";
 "accountPage.shareAccountDetails" = "Share Account Details";
