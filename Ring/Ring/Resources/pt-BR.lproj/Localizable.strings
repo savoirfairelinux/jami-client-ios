@@ -179,7 +179,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "Nome do Usuário";
 "account.sipPassword" = "Senha";
 "account.sipServer" = "Servidor SIP";
 "account.port" = "Porta";
