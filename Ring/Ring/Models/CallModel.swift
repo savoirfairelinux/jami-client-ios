@@ -57,6 +57,7 @@ enum CallDetailKey: String {
 public class CallModel {
 
     var callId: String = ""
+    var conferenceId: String = ""
     var callUUID: UUID = UUID()
     var dateReceived: Date?
     var participantUri: String = ""

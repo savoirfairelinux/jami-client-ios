@@ -47,7 +47,9 @@ class CallsService: CallsAdapterDelegate {
     fileprivate let callsAdapter: CallsAdapter
     fileprivate let log = SwiftyBeaver.self
 
-    fileprivate var calls = [String: CallModel]()
+    var calls = Variable<[String: CallModel]>([String: CallModel]())
+    
+    var conferences = Variable<[String]>([String]())
 
     fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
 
@@ -93,7 +95,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func call(callID: String) -> CallModel? {
-        return self.calls[callID]
+        return self.calls.value[callID]
     }
 
     func accept(call: CallModel?) -> Completable {
@@ -183,7 +185,8 @@ class CallsService: CallsAdapterDelegate {
                 call.update(withDictionary: callDictionary)
                 call.callId = callId
                 self.currentCall.onNext(call)
-                self.calls[callId] = call
+                self.calls.value[callId] = call
+                self.calls.value = self.calls.value
                 single(.success(call))
             } else {
                 single(.error(CallServiceError.placeCallFailed))
@@ -207,7 +210,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func muteCurrentCallVideoVideo(mute: Bool) {
-        for call in self.calls.values where call.state == .current {
+        for call in self.calls.value.values where call.state == .current {
                 self.callsAdapter
                     .muteMedia(call.callId,
                                mediaType: String(describing: MediaType.video),
@@ -259,7 +262,7 @@ class CallsService: CallsAdapterDelegate {
 
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
             //Add or update new call
-            var call = self.calls[callId]
+            var call = self.calls.value[callId]
             call?.state = CallState(rawValue: state) ?? CallState.unknown
             //Remove from the cache if the call is over and save message to history
             if call?.state == .over || call?.state == .failure {
@@ -275,12 +278,14 @@ class CallsService: CallsAdapterDelegate {
                 event.addEventInput(.callTime, value: time)
                 self.responseStream.onNext(event)
                 self.currentCall.onNext(finichedCall)
-                self.calls[callId] = nil
+                self.calls.value[callId] = nil
+                self.calls.value = self.calls.value
                 return
             }
             if call == nil {
                 call = CallModel(withCallId: callId, callDetails: callDictionary)
-                self.calls[callId] = call
+                self.calls.value[callId] = call
+                self.calls.value = self.calls.value
             } else {
                 call?.update(withDictionary: callDictionary)
             }
@@ -323,7 +328,7 @@ class CallsService: CallsAdapterDelegate {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
 
             if !isCurrentCall() {
-                var call = self.calls[callId]
+                var call = self.calls.value[callId]
                 if call == nil {
                     call = CallModel(withCallId: callId, callDetails: callDictionary)
                 } else {
@@ -343,7 +348,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func isCurrentCall() -> Bool {
-        for call in self.calls.values {
+        for call in self.calls.value.values {
             if call.state == .current || call.state == .hold ||
                 call.state == .unhold || call.state == .ringing {
                 return true
@@ -356,7 +361,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func callPlacedOnHold(withCallId callId: String, holding: Bool) {
-        guard let call = self.calls[callId] else {
+        guard let call = self.calls.value[callId] else {
             return
         }
         call.peerHolding = holding
@@ -364,7 +369,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func audioMuted(call callId: String, mute: Bool) {
-        guard let call = self.calls[callId] else {
+        guard let call = self.calls.value[callId] else {
             return
         }
         call.audioMuted = mute
@@ -372,7 +377,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func videoMuted(call callId: String, mute: Bool) {
-        guard let call = self.calls[callId] else {
+        guard let call = self.calls.value[callId] else {
             return
         }
         call.videoMuted = mute

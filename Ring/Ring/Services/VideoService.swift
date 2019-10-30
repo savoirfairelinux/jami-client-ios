@@ -196,7 +196,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             throw VideoError.unsupportedParameter
         }
         connection.videoOrientation = orientation
-        connection.isVideoMirrored = position == .front
+        connection.isVideoMirrored = false//position == .front
         captureSession.commitConfiguration()
     }
 
@@ -221,7 +221,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             if let input = currentCameraInput as? AVCaptureDeviceInput {
                 if input.device.position == .back {
                     newCamera = self.selectCaptureDevice(withPosition: .front)
-                    shouldMirrowVideoOutput = true
+                    shouldMirrowVideoOutput = false//true
                 } else {
                     newCamera = self.selectCaptureDevice(withPosition: .back)
                 }
@@ -252,7 +252,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     return Disposables.create {}
                 }
                 connection.videoOrientation = self.orientation
-                connection.isVideoMirrored = shouldMirrowVideoOutput
+                connection.isVideoMirrored = false
                 self.captureSession.commitConfiguration()
                 completable(.completed)
             } else {
@@ -419,9 +419,9 @@ class VideoService: FrameExtractorDelegate {
     func mapDeviceOrientation(orientation: AVCaptureVideoOrientation) -> Int {
         switch orientation {
         case AVCaptureVideoOrientation.landscapeRight:
-            return 270
-        case AVCaptureVideoOrientation.landscapeLeft:
             return 90
+        case AVCaptureVideoOrientation.landscapeLeft:
+            return 270
         default:
             return 0
         }
