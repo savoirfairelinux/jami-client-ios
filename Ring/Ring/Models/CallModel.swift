@@ -52,11 +52,13 @@ enum CallDetailKey: String {
     case videoMutedKey = "VIDEO_MUTED"
     case videoSourceKey = "VIDEO_SOURCE"
     case audioOnlyKey = "AUDIO_ONLY"
+    case confID = "CONF_ID"
 }
 
 public class CallModel {
 
     var callId: String = ""
+    var conferenceId: String = ""
     var callUUID: UUID = UUID()
     var dateReceived: Date?
     var participantUri: String = ""
@@ -154,6 +156,10 @@ public class CallModel {
 
         if let isAudioOnly = dictionary[CallDetailKey.audioOnlyKey.rawValue]?.toBool() {
             self.isAudioOnly = isAudioOnly
+        }
+
+        if let confID = dictionary[CallDetailKey.confID.rawValue] {
+            self.conferenceId = confID
         }
     }
 }

@@ -183,6 +183,14 @@ static id <CallsAdapterDelegate> _delegate;
     return muteLocalMedia(std::string([callId UTF8String]), std::string([media UTF8String]), muted);
 }
 
+- (BOOL)joinConference:(NSString*)confID call:(NSString*)callID {
+    return joinConference(std::string([confID UTF8String]), std::string([callID UTF8String]));
+}
+
+- (BOOL)joinCall:(NSString*)firstCall second:(NSString*)secondCall {
+    return joinParticipant(std::string([firstCall UTF8String]), std::string([secondCall UTF8String]));
+}
+
 #pragma mark AccountAdapterDelegate
 
 + (id <CallsAdapterDelegate>)delegate {

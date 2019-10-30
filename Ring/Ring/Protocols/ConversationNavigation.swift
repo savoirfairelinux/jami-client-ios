@@ -31,6 +31,7 @@ enum ConversationState: State {
     case showDialpad(inCall: Bool)
     case showGeneralSettings
     case navigateToCall(call: CallModel)
+    case showContactPicker(callID: String)
 }
 
 protocol ConversationNavigation: class {
