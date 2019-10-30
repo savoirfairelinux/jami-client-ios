@@ -25,21 +25,18 @@ class PresenceService {
 
     fileprivate let presenceAdapter: PresenceAdapter
     fileprivate let log = SwiftyBeaver.self
-    var contactPresence: [String: Bool]
+    var contactPresence: [String: Variable<Bool>]
 
     fileprivate let disposeBag = DisposeBag()
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
-    var sharedResponseStream: Observable<ServiceEvent>
 
     init(withPresenceAdapter presenceAdapter: PresenceAdapter) {
-        self.responseStream.disposed(by: disposeBag)
-        self.sharedResponseStream = responseStream.share()
-        self.contactPresence = [String: Bool]()
+        self.contactPresence = [String: Variable<Bool>]()
         self.presenceAdapter = presenceAdapter
         PresenceAdapter.delegate = self
     }
 
-    func subscribeBuddies(withAccount account: AccountModel, withContacts contacts: [ContactModel]) {
+    func subscribeBuddies(withAccount account: AccountModel,
+                          withContacts contacts: [ContactModel]) {
         for contact in contacts where !contact.banned {
             subscribeBuddy(withAccountId: account.id,
                            withUri: contact.hash,
@@ -51,7 +48,12 @@ class PresenceService {
                         withUri uri: String,
                         withFlag flag: Bool) {
         presenceAdapter.subscribeBuddy(withURI: uri, withAccountId: accountId, withFlag: flag)
-        contactPresence[uri] = false
+        if let presenceForContact = contactPresence[uri] {
+            presenceForContact.value = false
+            return
+        }
+        let observableValue = Variable<Bool>(false)
+        contactPresence[uri] = observableValue
     }
 }
 
@@ -60,16 +62,13 @@ extension PresenceService: PresenceAdapterDelegate {
                               withUri uri: String,
                               withStatus status: Int,
                               withLineStatus lineStatus: String) {
-        contactPresence[uri] = status > 0 ? true : false
-
-        /*
-         The subscriber is intended to query the contactPresence dictionary
-         with the contact's ringId
-         */
-        var event = ServiceEvent(withEventType: .presenceUpdated)
-        event.addEventInput(.uri, value: uri)
-        self.responseStream.onNext(event)
-
+        let value = status > 0 ? true : false
+        if let presenceForContact = contactPresence[uri] {
+            presenceForContact.value = value
+            return
+        }
+        let observableValue = Variable<Bool>(value)
+        contactPresence[uri] = observableValue
         log.debug("newBuddyNotification: uri=\(uri), status=\(status)")
     }
 }

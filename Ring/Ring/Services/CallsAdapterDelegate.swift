@@ -26,4 +26,7 @@
     func callPlacedOnHold(withCallId callId: String, holding: Bool)
     func audioMuted(call callId: String, mute: Bool)
     func videoMuted(call callId: String, mute: Bool)
+    func conferenceCreated(conference conferenceID: String)
+    func conferenceChanged(conference conferenceID: String, state: String)
+    func conferenceRemoved(conference conferenceID: String)
 }

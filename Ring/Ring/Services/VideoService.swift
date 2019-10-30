@@ -292,7 +292,8 @@ class VideoService: FrameExtractorDelegate {
     fileprivate let camera = FrameExtractor()
 
     var cameraPosition = AVCaptureDevice.Position.front
-    let incomingVideoFrame = PublishSubject<UIImage?>()
+    typealias RendererTuple = (rendererId: String, data: UIImage?)
+    let incomingVideoFrame = PublishSubject<RendererTuple?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
     var currentOrientation: AVCaptureVideoOrientation
 
@@ -467,8 +468,8 @@ extension VideoService: VideoAdapterDelegate {
         self.camera.stopCapturing()
     }
 
-    func writeFrame(withImage image: UIImage?) {
-        self.incomingVideoFrame.onNext(image)
+    func writeFrame(withImage image: UIImage?, forCallId: String) {
+        self.incomingVideoFrame.onNext(RendererTuple(forCallId, image))
     }
 
     func getImageOrienation() -> UIImage.Orientation {

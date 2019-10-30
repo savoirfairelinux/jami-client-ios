@@ -52,11 +52,13 @@ enum CallDetailKey: String {
     case videoMutedKey = "VIDEO_MUTED"
     case videoSourceKey = "VIDEO_SOURCE"
     case audioOnlyKey = "AUDIO_ONLY"
+    case confID = "CONF_ID"
 }
 
 public class CallModel {
 
     var callId: String = ""
+    var participantsCallId: Set<String> = Set<String>()
     var callUUID: UUID = UUID()
     var dateReceived: Date?
     var participantUri: String = ""
@@ -68,6 +70,9 @@ public class CallModel {
     var peerHolding: Bool = false
     var speakerActive: Bool = false
     var isAudioOnly: Bool = false
+    lazy var paricipantHash = {
+        self.participantUri.replacingOccurrences(of: "@ring.dht", with: "")
+    }
 
     var stateValue = CallState.unknown.rawValue
     var callTypeValue = CallType.missed.rawValue
@@ -96,6 +101,9 @@ public class CallModel {
         }
     }
 
+    init() {
+    }
+
     init(withCallId callId: String, callDetails dictionary: [String: String]) {
         self.callId = callId
 
@@ -116,6 +124,7 @@ public class CallModel {
         }
 
         self.update(withDictionary: dictionary)
+        self.participantsCallId.insert(callId)
     }
 
     func update(withDictionary dictionary: [String: String]) {

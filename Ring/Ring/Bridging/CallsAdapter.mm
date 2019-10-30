@@ -115,6 +115,28 @@ static id <CallsAdapterDelegate> _delegate;
         }
     }));
 
+    callHandlers.insert(exportable_callback<CallSignal::ConferenceCreated>([&](const std::string& confId) {
+        if (CallsAdapter.delegate) {
+            NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
+            [CallsAdapter.delegate conferenceCreatedWithConference: confIdString];
+        }
+    }));
+
+    callHandlers.insert(exportable_callback<CallSignal::ConferenceChanged>([&](const std::string& confId, const std::string& state) {
+        if (CallsAdapter.delegate) {
+            NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
+            NSString* stateString = [NSString stringWithUTF8String:state.c_str()];
+            [CallsAdapter.delegate conferenceChangedWithConference: confIdString state: stateString];
+        }
+    }));
+
+    callHandlers.insert(exportable_callback<CallSignal::ConferenceRemoved>([&](const std::string& confId) {
+           if (CallsAdapter.delegate) {
+               NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
+               [CallsAdapter.delegate conferenceRemovedWithConference: confIdString];
+           }
+       }));
+
     registerSignalHandlers(callHandlers);
 }
 
@@ -166,6 +188,28 @@ static id <CallsAdapterDelegate> _delegate;
 
 - (BOOL)muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted {
     return muteLocalMedia(std::string([callId UTF8String]), std::string([media UTF8String]), muted);
+}
+
+- (BOOL)joinConference:(NSString*)confID call:(NSString*)callID {
+    return addParticipant(std::string([callID UTF8String]), std::string([confID UTF8String]));
+}
+
+- (BOOL)joinCall:(NSString*)firstCall second:(NSString*)secondCall {
+    return joinParticipant(std::string([firstCall UTF8String]), std::string([secondCall UTF8String]));
+}
+
+- (BOOL)joinConferences:(NSString*)firstConf secondConference:(NSString*)secondConf {
+    return joinConference(std::string([firstConf UTF8String]), std::string([secondConf UTF8String]));
+}
+
+- (NSDictionary<NSString*,NSString*>*)getConferenceDetails:(NSString*)conferenceId {
+    std::map<std::string, std::string> confDetails = getConferenceDetails(std::string([conferenceId UTF8String]));
+    return [Utils mapToDictionnary:confDetails];
+}
+
+- (NSArray<NSString*>*)getConferenceCalls:(NSString*)conferenceId {
+    std::vector<std::string> calls = getParticipantList(std::string([conferenceId UTF8String]));
+    return [Utils vectorToArray:calls];
 }
 
 #pragma mark AccountAdapterDelegate
