@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O1m-sW-gim">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O1m-sW-gim">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,15 +16,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cj-ge-3dv">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <color key="backgroundColor" red="0.88391119240000005" green="0.82437592739999999" blue="0.76125866170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <color key="textColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehB-ol-cdx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="e7R-TC-NQ2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                <color key="tintColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Navigate to call"/>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yc2-Jn-6vm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" id="Cd7-Fm-IM5">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cd7-Fm-IM5" id="TOb-Hu-RG9">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -63,12 +77,19 @@
                             <constraint firstItem="6Wq-EJ-CAF" firstAttribute="leading" secondItem="mrp-Ty-hZO" secondAttribute="leading" id="5VA-aR-jIL"/>
                             <constraint firstItem="mrp-Ty-hZO" firstAttribute="trailing" secondItem="yc2-Jn-6vm" secondAttribute="trailing" id="6Ar-yh-iTT"/>
                             <constraint firstItem="XRu-HM-jhQ" firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="D1h-vM-lOK"/>
+                            <constraint firstItem="ehB-ol-cdx" firstAttribute="trailing" secondItem="mrp-Ty-hZO" secondAttribute="trailing" id="DpS-RL-o7j"/>
                             <constraint firstAttribute="bottom" secondItem="6Wq-EJ-CAF" secondAttribute="bottom" id="QKw-Wp-ff0"/>
-                            <constraint firstItem="yc2-Jn-6vm" firstAttribute="top" secondItem="lhx-ny-Zct" secondAttribute="top" id="Qd0-eb-gyZ"/>
+                            <constraint firstItem="ehB-ol-cdx" firstAttribute="top" secondItem="mrp-Ty-hZO" secondAttribute="top" id="R8w-E8-UAR"/>
                             <constraint firstItem="mrp-Ty-hZO" firstAttribute="trailing" secondItem="6Wq-EJ-CAF" secondAttribute="trailing" id="W84-gc-kua"/>
                             <constraint firstItem="yc2-Jn-6vm" firstAttribute="leading" secondItem="mrp-Ty-hZO" secondAttribute="leading" id="Wzk-uM-Oge"/>
                             <constraint firstItem="XRu-HM-jhQ" firstAttribute="centerX" secondItem="yc2-Jn-6vm" secondAttribute="centerX" id="Y16-31-gDX"/>
+                            <constraint firstItem="5cj-ge-3dv" firstAttribute="leading" secondItem="ehB-ol-cdx" secondAttribute="leading" id="ZMK-xT-VM8"/>
+                            <constraint firstItem="5cj-ge-3dv" firstAttribute="trailing" secondItem="ehB-ol-cdx" secondAttribute="trailing" id="adg-fs-d5i"/>
+                            <constraint firstItem="5cj-ge-3dv" firstAttribute="top" secondItem="ehB-ol-cdx" secondAttribute="top" id="bMn-Xz-w1J"/>
+                            <constraint firstItem="5cj-ge-3dv" firstAttribute="bottom" secondItem="ehB-ol-cdx" secondAttribute="bottom" id="bi2-5t-Ueh"/>
+                            <constraint firstItem="yc2-Jn-6vm" firstAttribute="top" secondItem="ehB-ol-cdx" secondAttribute="bottom" id="iIZ-h0-wyd"/>
                             <constraint firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="m6U-Gp-jhl"/>
+                            <constraint firstItem="ehB-ol-cdx" firstAttribute="leading" secondItem="mrp-Ty-hZO" secondAttribute="leading" id="qab-nT-JEL"/>
                             <constraint firstItem="6Wq-EJ-CAF" firstAttribute="top" secondItem="lhx-ny-Zct" secondAttribute="top" id="v3Q-NK-vb1"/>
                             <constraint firstItem="XRu-HM-jhQ" firstAttribute="width" secondItem="yc2-Jn-6vm" secondAttribute="width" id="vBi-yc-6H9"/>
                         </constraints>
@@ -76,6 +97,9 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
+                        <outlet property="callButtonHeightConstraint" destination="e7R-TC-NQ2" id="5uM-Sy-1EZ"/>
+                        <outlet property="currentCallButton" destination="ehB-ol-cdx" id="hXv-aJ-8DN"/>
+                        <outlet property="currentCallLabel" destination="5cj-ge-3dv" id="HaN-nP-GKW"/>
                         <outlet property="spinnerView" destination="6Wq-EJ-CAF" id="XKK-Rh-rmd"/>
                         <outlet property="tableView" destination="yc2-Jn-6vm" id="neM-4t-MpC"/>
                     </connections>

@@ -60,10 +60,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var searchBarShadow: UIView!
     @IBOutlet weak var qrScanButton: UIButton!
     @IBOutlet weak var phoneBookButton: UIButton!
-    @IBOutlet weak var currentCallButton: UIButton!
-    @IBOutlet weak var currentCallLabel: UILabel!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
 
     // account selection
     var accounPicker = UIPickerView()
@@ -112,9 +109,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !currentCallLabel.isHidden {
-            self.currentCallLabel.blink()
-        }
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar
@@ -253,41 +247,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
         self.conversationsTableView.tableFooterView = UIView()
         self.searchResultsTableView.tableFooterView = UIView()
-
-        self.currentCallButton.isHidden = true
-        self.currentCallLabel.isHidden = true
-        self.callButtonHeightConstraint.constant = 0
-        self.viewModel.showCallButton
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] show in
-                if show {
-                    let deadlineTime = DispatchTime.now() + .seconds(3)
-                    DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                        if self.viewModel.currentCallId.value.isEmpty {
-                            return
-                        }
-                        self.currentCallButton.isHidden = false
-                        self.currentCallLabel.isHidden = false
-                        self.currentCallLabel.blink()
-                        self.callButtonHeightConstraint.constant = 60
-                    }
-                    return
-                }
-                self.currentCallButton.isHidden = true
-                self.currentCallLabel.isHidden = true
-                self.callButtonHeightConstraint.constant = 0
-                self.currentCallLabel.layer.removeAllAnimations()
-            }).disposed(by: disposeBag)
-        self.viewModel.callButtonTitle
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.currentCallButton.rx.title(for: .normal))
-            .disposed(by: disposeBag)
-        currentCallButton.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.openCall()
-            })
-            .disposed(by: self.disposeBag)
     }
 
     func confugureAccountPicker() {

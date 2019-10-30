@@ -49,7 +49,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var capturedVideoBlurEffect: UIVisualEffectView!
     @IBOutlet weak var viewCapturedVideo: UIView!
     @IBOutlet private weak var infoContainer: UIView!
-    @IBOutlet private weak var callProfileImage: UIImageView!
+    //@IBOutlet private weak var callProfileImage: UIImageView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
     @IBOutlet private weak var buttonsContainer: ButtonsContainerView!
@@ -68,6 +68,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var avatarViewImageTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pendingCalls: UIStackView!
 
     var viewModel: CallViewModel!
     var isCallStarted: Bool = false
@@ -84,10 +85,15 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         return self.viewModel.isAudioOnly ? .lightContent : .default
     }
 
+    var tapGestureRecognizer: UITapGestureRecognizer!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setAvatarView(true)
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        self.beforeIncomingVideo.backgroundColor = UIColor.white
+        let callCurrent = self.viewModel.call?.state == .current
+        self.setAvatarView(!callCurrent)
+        self.capturedVideoBlurEffect.isHidden = callCurrent
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         let tapCapturedVideo = UITapGestureRecognizer(target: self, action: #selector(hideCapturedVideo))
         let swipeLeftCapturedVideo = UISwipeGestureRecognizer(target: self, action: #selector(capturedVideoSwipped(gesture:)))
         swipeLeftCapturedVideo.direction = .left
@@ -119,9 +125,18 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }
 
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
-
-        initCallAnimation()
         UIApplication.shared.isIdleTimerDisabled = true
+        if callCurrent {
+            self.capturedVideoBlurEffect.alpha = 1
+            hideCapturedVideo()
+             self.shouldRotateScreen = true
+            return
+        }
+        initCallAnimation()
+    }
+
+    func addTapGesture() {
+        self.mainView.addGestureRecognizer(tapGestureRecognizer)
     }
 
     @objc func capturedVideoSwipped(gesture: UISwipeGestureRecognizer) {
@@ -132,7 +147,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     @objc func hideCapturedVideo() {
-        if self.isMenuShowed { return }
+        //if self.isMenuShowed { return }
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             if self?.capturedVideoBlurEffect.alpha == 0 {
                 self?.isVideoHidden = true
@@ -141,8 +156,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.isVideoHidden = false
                 self?.capturedVideoBlurEffect.alpha = 0
             }
-            guard let hidden = self?.infoContainer.isHidden else {return}
-            self?.resizeCapturedVideo(withInfoContainer: !hidden)
+            //guard let hidden = self?.infoContainer.isHidden else {return}
+            self?.resizeCapturedVideo(withInfoContainer: false)
             self?.view.layoutIfNeeded()
         })
     }
@@ -179,6 +194,16 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.cancelCall(stopProvider: true)
                 self?.removeFromScreen()
+            }).disposed(by: self.disposeBag)
+        self.buttonsContainer.sendMessageButton.rx.tap
+        .subscribe(onNext: { [weak self] in
+            self?.viewModel.showConversations()
+            self?.dismiss(animated: false, completion: nil)
+        }).disposed(by: self.disposeBag)
+
+        self.buttonsContainer.addContactButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.showContactPickerVC()
             }).disposed(by: self.disposeBag)
 
         self.buttonsContainer.acceptCallButton.rx.tap
@@ -260,7 +285,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 if let imageData = dataOrNil {
                     if let image = UIImage(data: imageData) {
                         self?.profileImageView.image = image
-                        self?.callProfileImage.image = image
+                       // self?.callProfileImage.image = image
                     }
                 }
             }).disposed(by: self.disposeBag)
@@ -313,6 +338,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .subscribe(onNext: { [weak self] frame in
                 if let image = frame {
                     self?.spinner.stopAnimating()
+                    self?.isCallStarted = true
                     if self?.beforeIncomingVideo.alpha != 0 {
                         UIView.animate(withDuration: 0.4, animations: {
                             self?.beforeIncomingVideo.alpha = 0
@@ -355,7 +381,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         if !self.viewModel.isAudioOnly {
             self.resizeCapturedFrame()
         }
-
         self.viewModel.videoMuted
             .observeOn(MainScheduler.instance)
             .bind(to: self.capturedVideo.rx.isHidden)
@@ -378,6 +403,29 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self?.setAvatarView(show)
                 }).disposed(by: self.disposeBag)
         }
+
+        self.viewModel.conferenceMode
+        .asObservable()
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] _ in
+            self?.buttonsContainer.updateView()
+        }).disposed(by: self.disposeBag)
+
+        self.viewModel.callForConference
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] call in
+                let callView =
+                    ConferencePendingCallView(frame:
+                        CGRect(x: 0, y: 0,
+                               width: self?.pendingCalls.frame.size.width ?? 200,
+                            height: 50))
+                guard let callService = self?.viewModel.callService else {return}
+                let pendingCallViewModel =
+                    ConferencePendingCallViewModel(with: call,
+                                                   callsService: callService)
+                callView.viewModel = pendingCallViewModel
+                self?.pendingCalls.addArrangedSubview(callView)
+            }).disposed(by: self.disposeBag)
 
         self.viewModel.callPaused
             .observeOn(MainScheduler.instance)
@@ -453,6 +501,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     default : break
                     }
                     UIView.animate(withDuration: 0.4, animations: {
+                        self?.beforeIncomingVideo.backgroundColor = UIColor.darkGray
                         self?.resizeCapturedVideo(withInfoContainer: false)
                         self?.capturedVideoBlurEffect.alpha = 0
                         self?.view.layoutIfNeeded()
@@ -496,8 +545,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         DispatchQueue.global(qos: .background).async {
             sleep(UInt32(0.5))
             DispatchQueue.main.async { [weak self] in
-                guard let hidden = self?.infoContainer.isHidden else {return}
-                self?.resizeCapturedVideo(withInfoContainer: !hidden)
+                //guard let hidden = self?.infoContainer.isHidden else {return}
+                self?.resizeCapturedVideo(withInfoContainer: false)
                 if UIDevice.current.hasNotch && (UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft) && self?.infoContainer.isHidden == false {
                     self?.buttonsContainerBottomConstraint.constant = 1
                 }
@@ -567,7 +616,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self.viewCapturedVideo.cornerRadius = 25
             }
         }
-        if self.capturedVideoBlurEffect.alpha == 1 && self.isMenuShowed == false
+        if self.capturedVideoBlurEffect.alpha == 1
             && self.avatarView.isHidden == true {
             self.leftArrow.alpha = 1
             self.capturedVideoTrailingConstraint.constant = -200
@@ -586,7 +635,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.view.layoutIfNeeded()
 
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            self?.resizeCapturedVideo(withInfoContainer: true)
             self?.infoContainerTopConstraint.constant = -10
             if UIDevice.current.hasNotch && (self?.orientation == .landscapeRight || self?.orientation == .landscapeLeft) {
                 self?.buttonsContainerBottomConstraint.constant = 1
@@ -602,8 +650,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func hideContactInfo() {
         self.isMenuShowed = false
         UIView.animate(withDuration: 0.2, animations: { [unowned self] in
-            self.resizeCapturedVideo(withInfoContainer: false)
-            self.infoContainerTopConstraint.constant = 150
+           // self.resizeCapturedVideo(withInfoContainer: false)
+            self.infoContainerTopConstraint.constant = 250
             self.buttonsContainerBottomConstraint.constant = -200
             self.view.layoutIfNeeded()
             }, completion: { [weak self] _ in
@@ -628,5 +676,20 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override var shouldAutorotate: Bool {
       return self.shouldRotateScreen
+    }
+
+    func presentContactPicker(contactPickerVC: ContactPickerViewController) {
+        self.addChild(contactPickerVC)
+        let newFrame = CGRect(x: 0, y: self.view.frame.size.height * 0.3, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
+        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
+        contactPickerVC.view.frame = initialFrame
+        self.view.addSubview(contactPickerVC.view)
+        contactPickerVC.didMove(toParent: self)
+        UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+            contactPickerVC.view.frame = newFrame
+            self.mainView.removeGestureRecognizer(self.tapGestureRecognizer)
+            self.view.layoutIfNeeded()
+            }, completion: {  _ in
+        })
     }
 }
