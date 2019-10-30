@@ -32,6 +32,8 @@ enum ConversationState: State {
     case showGeneralSettings
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
+    case showContactPicker(callID: String)
+    case pushConversation(conversation: ConversationViewModel)
 }
 
 protocol ConversationNavigation: class {
@@ -58,6 +60,10 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 self.openQRCode()
             case .recordFile(let conversation, let audioOnly):
                 self.openRecordFile(conversation: conversation, audioOnly: audioOnly)
+            case .pushConversation(let conversation):
+                self.pushConversation(withConversationViewModel: conversation)
+                case .navigateToCall(let call):
+                     self.presentCallController(call: call)
             default:
                 break
             }
@@ -111,18 +117,57 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func pushConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
-        if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
-            return
-        }
-        self.presentingVC[VCType.conversation.rawValue] = true
-        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
-        conversationViewController.viewModel = conversationViewModel
-        self.present(viewController: conversationViewController,
-                     withStyle: .push,
-                     withAnimation: false,
-                     withStateable: conversationViewController.viewModel,
-                     lockWhilePresenting: VCType.conversation.rawValue)
+        guard let navController = self.rootViewController as? UINavigationController else {return}
+        let controllers = navController.children
+        for controller in controllers
+                  where controller.isKind(of: (ConversationViewController).self) {
+                    if let callcontroller = controller as? ConversationViewController, callcontroller.viewModel.conversation.value == conversationViewModel.conversation.value {
+                        navController.popToViewController(callcontroller, animated: true)
+                          return
+                      }
+              }
+        navController.popToRootViewController(animated: false)
+        self.showConversation(withConversationViewModel: conversationViewModel)
+//        if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
+//            return
+//        }
+//        self.presentingVC[VCType.conversation.rawValue] = true
+//        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
+//        conversationViewController.viewModel = conversationViewModel
+//        self.present(viewController: conversationViewController,
+//                     withStyle: .push,
+//                     withAnimation: false,
+//                     withStateable: conversationViewController.viewModel,
+//                     lockWhilePresenting: VCType.conversation.rawValue)
     }
+
+     func presentCallController (call: CallModel) {
+             guard let navController = self.rootViewController as? UINavigationController else {return}
+                   let controllers = navController.children
+        for controller in controllers
+                where controller.isKind(of: (CallViewController).self) {
+                    if let callcontroller = controller as? CallViewController, callcontroller.viewModel.call?.callId == call.callId {
+                        navController.popToViewController(callcontroller, animated: true)
+    //                    self.navigationViewController
+    //                        .present(callcontroller,
+    //                                 animated: true,
+    //                                 completion: nil)
+                        return
+                    }
+            }
+            guard let topController = getTopController(),
+                !topController.isKind(of: (CallViewController).self) else {
+                    return
+            }
+            let callViewController = CallViewController
+                .instantiate(with: self.injectionBag)
+            callViewController.viewModel.call = call
+        self.present(viewController: callViewController,
+                                withStyle: .appear,
+                                withAnimation: false,
+                                withStateable: callViewController.viewModel)
+            //topController.present(callViewController, animated: true, completion: nil)
+        }
 
     func getTopController() -> UIViewController? {
         guard var topController = UIApplication.shared
@@ -141,10 +186,11 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 return
         }
         DispatchQueue.main.async {
+            topController.dismiss(animated: false, completion: nil)
             let callViewController = CallViewController.instantiate(with: self.injectionBag)
             callViewController.viewModel.placeCall(with: contactRingId, userName: userName, isAudioOnly: isAudioOnly)
             self.present(viewController: callViewController,
-                         withStyle: .present,
+                         withStyle: .appear,
                          withAnimation: false,
                          withStateable: callViewController.viewModel)
         }

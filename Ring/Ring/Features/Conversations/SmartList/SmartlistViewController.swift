@@ -257,37 +257,37 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.currentCallButton.isHidden = true
         self.currentCallLabel.isHidden = true
         self.callButtonHeightConstraint.constant = 0
-        self.viewModel.showCallButton
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] show in
-                if show {
-                    let deadlineTime = DispatchTime.now() + .seconds(3)
-                    DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                        if self.viewModel.currentCallId.value.isEmpty {
-                            return
-                        }
-                        self.currentCallButton.isHidden = false
-                        self.currentCallLabel.isHidden = false
-                        self.currentCallLabel.blink()
-                        self.callButtonHeightConstraint.constant = 60
-                    }
-                    return
-                }
-                self.currentCallButton.isHidden = true
-                self.currentCallLabel.isHidden = true
-                self.callButtonHeightConstraint.constant = 0
-                self.currentCallLabel.layer.removeAllAnimations()
-            }).disposed(by: disposeBag)
-        self.viewModel.callButtonTitle
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.currentCallButton.rx.title(for: .normal))
-            .disposed(by: disposeBag)
-        currentCallButton.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.openCall()
-            })
-            .disposed(by: self.disposeBag)
+//        self.viewModel.showCallButton
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [unowned self] show in
+//                if show {
+//                    let deadlineTime = DispatchTime.now() + .seconds(3)
+//                    DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+//                        if self.viewModel.currentCallId.value.isEmpty {
+//                            return
+//                        }
+//                        self.currentCallButton.isHidden = false
+//                        self.currentCallLabel.isHidden = false
+//                        self.currentCallLabel.blink()
+//                        self.callButtonHeightConstraint.constant = 60
+//                    }
+//                    return
+//                }
+//                self.currentCallButton.isHidden = true
+//                self.currentCallLabel.isHidden = true
+//                self.callButtonHeightConstraint.constant = 0
+//                self.currentCallLabel.layer.removeAllAnimations()
+//            }).disposed(by: disposeBag)
+//        self.viewModel.callButtonTitle
+//            .observeOn(MainScheduler.instance)
+//            .bind(to: self.currentCallButton.rx.title(for: .normal))
+//            .disposed(by: disposeBag)
+//        currentCallButton.rx.tap
+//            .throttle(0.5, scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { [unowned self] in
+//                self.viewModel.openCall()
+//            })
+//            .disposed(by: self.disposeBag)
     }
 
     func confugureAccountPicker() {

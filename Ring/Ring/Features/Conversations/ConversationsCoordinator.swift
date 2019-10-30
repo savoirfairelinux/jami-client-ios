@@ -63,6 +63,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self.showGeneralSettings()
             case .navigateToCall(let call):
                 self.presentCallController(call: call)
+            case .showContactPicker(let callID):
+                self.showConferenseableList(callId: callID)
             default:
                 break
             }
@@ -132,7 +134,20 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                         .getEventInput(ServiceEventInput.callUUID) else {return false}
                     return callUUID == call.callUUID.uuidString
                 }).subscribe(onNext: { _ in
-                    topController.present(callViewController, animated: true, completion: nil)
+                    self.navigationViewController.popToRootViewController(animated: false)
+                    guard let account = self.accountService.currentAccount else {return}
+                           if account.id != call.accountId {
+                            self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
+                           }
+                    topController.dismiss(animated: false, completion: nil)
+                    guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+                    parent.openConversation(participantID: call.participantUri)
+
+                    self.present(viewController: callViewController,
+                                 withStyle: .appear,
+                                 withAnimation: false,
+                                 withStateable: callViewController.viewModel)
+                    //topController.present(callViewController, animated: true, completion: nil)
                     tempBag = DisposeBag()
                 }).disposed(by: tempBag)
             callViewController.viewModel.dismisVC
@@ -153,7 +168,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 triggerCallNotifications(call: call)
                 return
             }
-            topController.present(callViewController, animated: true, completion: nil)
+self.navigationViewController.popToRootViewController(animated: false)
+            self.present(viewController: callViewController,
+                         withStyle: .show,
+                         withAnimation: false,
+                         withStateable: callViewController.viewModel)
+           // topController.present(callViewController, animated: true, completion: nil)
         }
     }
 
@@ -175,6 +195,14 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
         if let controller = self.navigationViewController.visibleViewController as? CallViewController {
             controller.present(dialpadViewController, animated: true, completion: nil)
+        }
+    }
+
+    func showConferenseableList(callId: String) {
+        let contactPickerViewController = ContactPickerViewController.instantiate(with: self.injectionBag)
+        contactPickerViewController.viewModel.currentCallId = callId
+        if let controller = self.navigationViewController.visibleViewController as? CallViewController {
+            controller.presentContactPicker(contactPickerVC: contactPickerViewController)
         }
     }
 
@@ -209,27 +237,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     //open call controller when button navigate to call pressed
-    func presentCallController (call: CallModel) {
-        let controlles = self.navigationViewController.viewControllers
-        for controller in controlles
-            where controller.isKind(of: (CallViewController).self) {
-                if let callcontroller = controller as? CallViewController, callcontroller.viewModel.call?.callId == call.callId {
-                    self.navigationViewController
-                        .present(callcontroller,
-                                 animated: true,
-                                 completion: nil)
-                    return
-                }
-        }
-        guard let topController = getTopController(),
-            !topController.isKind(of: (CallViewController).self) else {
-                return
-        }
-        let callViewController = CallViewController
-            .instantiate(with: self.injectionBag)
-        callViewController.viewModel.call = call
-        topController.present(callViewController, animated: true, completion: nil)
-    }
 
     func triggerCallNotifications(call: CallModel) {
         var data = [String: String]()

@@ -37,6 +37,8 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var cancelButton: UIButton!
     @IBOutlet  weak var switchCameraButton: UIButton!
     @IBOutlet  weak var acceptCallButton: UIButton!
+    @IBOutlet  weak var addContactButton: UIButton!
+    @IBOutlet  weak var sendMessageButton: UIButton!
 
     //Constraints
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
@@ -98,6 +100,8 @@ class ButtonsContainerView: UIView, NibLoadable {
         dialpadButton.isHidden = true
         switchSpeakerButton.isHidden = true
         cancelButton.isHidden = false
+        addContactButton.isHidden = true
+        sendMessageButton.isHidden = true
         if self.viewModel?.isIncoming ?? false {
             acceptCallButton.isHidden = false
             cancelButtonBottomConstraint.constant = 60
@@ -125,12 +129,14 @@ class ButtonsContainerView: UIView, NibLoadable {
             } else {
                 muteVideoButton.isHidden = false
                 switchCameraButton.isHidden = false
-                cancelButtonBottomConstraint.constant = 120
+                cancelButtonBottomConstraint.constant = 80
             }
             pauseCallButton.isHidden = false
             switchSpeakerButton.isEnabled = true
             switchSpeakerButton.isHidden = false
             cancelButton.isHidden = false
+            addContactButton.isHidden = false
+            sendMessageButton.isHidden = false
         }
     }
 
@@ -149,7 +155,7 @@ class ButtonsContainerView: UIView, NibLoadable {
             } else {
                 switchCameraButton.isHidden = false
                 muteVideoButton.isHidden = false
-                cancelButtonBottomConstraint.constant = 120
+                cancelButtonBottomConstraint.constant = 80
             }
             switchSpeakerButton.isEnabled = false
             self.muteAudioButton.isHidden = false
@@ -157,6 +163,8 @@ class ButtonsContainerView: UIView, NibLoadable {
             self.backgroundBlurEffect.isHidden = false
             pauseCallButton.isHidden = false
             cancelButton.isHidden = false
+            addContactButton.isHidden = false
+            sendMessageButton.isHidden = false
         }
     }
 }

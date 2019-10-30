@@ -51,14 +51,20 @@ class ButtonsContainerViewModel {
         checkCallOptions()
     }
 
+    lazy var currentCall: Observable<CallModel> = {
+        self.callService
+            .currentCall(callId: self.callID)
+            .share().asObservable()
+    }()
+
     private func checkCallOptions() {
-        let callIsActive: Observable<Bool> = {
-            self.callService.currentCall.filter({ [weak self] call in
-                return call.state == .current && call.callId == self?.callID
+        let callIsActive: Observable<Bool> = self.currentCall
+            .filter({ call in
+                return call.state == .current
             }).map({_ in
                 return true
             })
-        }()
+
         callIsActive
             .subscribe(onNext: { [weak self] active in
             if !active {

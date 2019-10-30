@@ -42,6 +42,7 @@ struct Renderer
     SinkTarget::FrameBufferPtr daemonFramePtr_;
     int width;
     int height;
+    NSString* renderId;
 
     void bindAVSinkFunctions() {
         avtarget.push = [this](std::unique_ptr<DRing::VideoFrame> frame) {
@@ -52,7 +53,7 @@ struct Renderer
                 UIImage *image = [Utils
                                   convertHardwareDecodedFrameToImage: std::move(frame->pointer())];
                 isRendering = true;
-                [VideoAdapter.delegate writeFrameWithImage: image];
+                [VideoAdapter.delegate writeFrameWithImage: image forCallId: renderId];
                 isRendering = false;
             }
         };
@@ -87,7 +88,7 @@ struct Renderer
                     UIImage* image = [UIImage imageWithCGImage:cgImage];
                     CGImageRelease(cgImage);
                     isRendering = true;
-                    [VideoAdapter.delegate writeFrameWithImage: image];
+                    [VideoAdapter.delegate writeFrameWithImage: image forCallId: renderId];
                     isRendering = false;
                 }
             }
@@ -162,6 +163,7 @@ static id <VideoAdapterDelegate> _delegate;
     auto renderer = std::make_shared<Renderer>();
     renderer->width = static_cast<int>(w);
     renderer->height = static_cast<int>(h);
+    renderer->renderId = sinkId;
     if(self.getDecodingAccelerated) {
         renderer->bindAVSinkFunctions();
         DRing::registerAVSinkTarget(_sinkId, renderer->avtarget);
