@@ -63,6 +63,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self.showGeneralSettings()
             case .navigateToCall(let call):
                 self.presentCallController(call: call)
+            case .showContactPicker(let callID):
+                self.showConferenseableList(callId: callID)
             default:
                 break
             }
@@ -175,6 +177,14 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
         if let controller = self.navigationViewController.visibleViewController as? CallViewController {
             controller.present(dialpadViewController, animated: true, completion: nil)
+        }
+    }
+
+    func showConferenseableList(callId: String) {
+        let contactPickerViewController = ContactPickerViewController.instantiate(with: self.injectionBag)
+        contactPickerViewController.viewModel.currentCallId = callId
+        if let controller = self.navigationViewController.visibleViewController as? CallViewController {
+            controller.presentContactPicker(contactPickerVC: contactPickerViewController)
         }
     }
 

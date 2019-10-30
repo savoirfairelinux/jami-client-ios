@@ -178,8 +178,8 @@ class LocalNotificationsHelper {
                     print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
                 }
             }
-            callService.currentCall.filter({ call in
-                return call.callId == callID && (call.state == .over || call.state == .failure)
+            callService.currentCall(callId: callID).filter({ call in
+                return (call.state == .over || call.state == .failure)
             }).single()
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { _ in
@@ -204,8 +204,8 @@ class LocalNotificationsHelper {
             notification.category = self.callCategory
             notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
             UIApplication.shared.scheduleLocalNotification(notification)
-            callService.currentCall.filter({ call in
-                return call.callId == callID && (call.state == .over || call.state == .failure)
+            callService.currentCall(callId: callID).filter({ call in
+                return (call.state == .over || call.state == .failure)
             }).single()
                 .subscribe(onNext: { _ in
                     let notification = UILocalNotification()

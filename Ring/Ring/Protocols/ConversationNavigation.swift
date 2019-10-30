@@ -32,6 +32,7 @@ enum ConversationState: State {
     case showGeneralSettings
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
+    case showContactPicker(callID: String)
 }
 
 protocol ConversationNavigation: class {
@@ -144,7 +145,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             let callViewController = CallViewController.instantiate(with: self.injectionBag)
             callViewController.viewModel.placeCall(with: contactRingId, userName: userName, isAudioOnly: isAudioOnly)
             self.present(viewController: callViewController,
-                         withStyle: .present,
+                         withStyle: .popup,
                          withAnimation: false,
                          withStateable: callViewController.viewModel)
         }
