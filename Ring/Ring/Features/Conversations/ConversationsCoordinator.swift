@@ -63,6 +63,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self.showGeneralSettings()
             case .navigateToCall(let call):
                 self.presentCallController(call: call)
+            case .showContactPicker(let callID):
+                self.showConferenseableList(callId: callID)
             default:
                 break
             }
@@ -108,20 +110,26 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             call.callUUID = UUID()
             callsProvider
                 .reportIncomingCall(account: account, call: call) { _ in
-                                        // if starting CallKit failed fallback to jami call screen
-                                        if UIApplication.shared.applicationState != .active {
-                                            if AccountModelHelper
-                                                .init(withAccount: account).isAccountSip() ||
-                                                !self.accountService.getCurrentProxyState(accountID: account.id) {
-                                                return
-                                            }
-                                            self.triggerCallNotifications(call: call)
-                                            return
-                                        }
-                                        topController
-                                            .present(callViewController,
-                                                     animated: true,
-                                                     completion: nil)
+                    // if starting CallKit failed fallback to jami call screen
+                    if UIApplication.shared.applicationState != .active {
+                        if AccountModelHelper
+                            .init(withAccount: account).isAccountSip() ||
+                            !self.accountService.getCurrentProxyState(accountID: account.id) {
+                            return
+                        }
+                        self.triggerCallNotifications(call: call)
+                        return
+                    }
+                    if account.id != call.accountId {
+                        self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
+                    }
+                    topController.dismiss(animated: false, completion: nil)
+                    guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+                    parent.openConversation(participantID: call.participantUri)
+                    self.present(viewController: callViewController,
+                                 withStyle: .appear,
+                                 withAnimation: false,
+                                 withStateable: callViewController.viewModel)
             }
             callsProvider.sharedResponseStream
                 .filter({ serviceEvent in
@@ -132,7 +140,17 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                         .getEventInput(ServiceEventInput.callUUID) else {return false}
                     return callUUID == call.callUUID.uuidString
                 }).subscribe(onNext: { _ in
-                    topController.present(callViewController, animated: true, completion: nil)
+                    self.navigationViewController.popToRootViewController(animated: false)
+                    if account.id != call.accountId {
+                        self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
+                    }
+                    topController.dismiss(animated: false, completion: nil)
+                    guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+                    parent.openConversation(participantID: call.participantUri)
+                    self.present(viewController: callViewController,
+                                 withStyle: .appear,
+                                 withAnimation: false,
+                                 withStateable: callViewController.viewModel)
                     tempBag = DisposeBag()
                 }).disposed(by: tempBag)
             callViewController.viewModel.dismisVC
@@ -153,7 +171,16 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 triggerCallNotifications(call: call)
                 return
             }
-            topController.present(callViewController, animated: true, completion: nil)
+            if account.id != call.accountId {
+                self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
+            }
+            topController.dismiss(animated: false, completion: nil)
+            guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+            parent.openConversation(participantID: call.participantUri)
+            self.present(viewController: callViewController,
+                         withStyle: .appear,
+                         withAnimation: false,
+                         withStateable: callViewController.viewModel)
         }
     }
 
@@ -175,6 +202,14 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
         if let controller = self.navigationViewController.visibleViewController as? CallViewController {
             controller.present(dialpadViewController, animated: true, completion: nil)
+        }
+    }
+
+    func showConferenseableList(callId: String) {
+        let contactPickerViewController = ContactPickerViewController.instantiate(with: self.injectionBag)
+        contactPickerViewController.viewModel.currentCallId = callId
+        if let controller = self.navigationViewController.visibleViewController as? CallViewController {
+            controller.presentContactPicker(contactPickerVC: contactPickerViewController)
         }
     }
 
@@ -209,27 +244,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     //open call controller when button navigate to call pressed
-    func presentCallController (call: CallModel) {
-        let controlles = self.navigationViewController.viewControllers
-        for controller in controlles
-            where controller.isKind(of: (CallViewController).self) {
-                if let callcontroller = controller as? CallViewController, callcontroller.viewModel.call?.callId == call.callId {
-                    self.navigationViewController
-                        .present(callcontroller,
-                                 animated: true,
-                                 completion: nil)
-                    return
-                }
-        }
-        guard let topController = getTopController(),
-            !topController.isKind(of: (CallViewController).self) else {
-                return
-        }
-        let callViewController = CallViewController
-            .instantiate(with: self.injectionBag)
-        callViewController.viewModel.call = call
-        topController.present(callViewController, animated: true, completion: nil)
-    }
 
     func triggerCallNotifications(call: CallModel) {
         var data = [String: String]()

@@ -605,7 +605,7 @@ class DBManager {
         return self.interactionHepler.insert(item: interaction, dataBase: dataBase)
     }
 
-    private func getProfile(for profileUri: String, createIfNotExists: Bool, accounId: String) throws -> Profile? {
+    func getProfile(for profileUri: String, createIfNotExists: Bool, accounId: String) throws -> Profile? {
         guard let dataBase = self.dbConnections.forAccount(account: accounId) else {
             throw DataAccessError.datastoreConnectionError
         }
