@@ -35,6 +35,7 @@ class ButtonsContainerViewModel {
     var isAudioOnly: Bool
     var isSipCall: Bool
     var isIncoming: Bool
+    var isConference = false
 
     let avalaibleCallOptions = BehaviorSubject<CallOptions>(value: .none)
     lazy var observableCallOptions: Observable<CallOptions> = { [unowned self] in
@@ -51,14 +52,21 @@ class ButtonsContainerViewModel {
         checkCallOptions()
     }
 
+    lazy var currentCall: Observable<CallModel> = {
+        self.callService
+            .currentCall(callId: self.callID)
+            .share().asObservable()
+    }()
+
     private func checkCallOptions() {
-        let callIsActive: Observable<Bool> = {
-            self.callService.currentCall.filter({ [weak self] call in
-                return call.state == .current && call.callId == self?.callID
+        let callIsActive: Observable<Bool> = self.currentCall
+            .startWith(self.callService.call(callID: self.callID) ?? CallModel())
+            .filter({ call in
+                return call.state == .current
             }).map({_ in
                 return true
             })
-        }()
+
         callIsActive
             .subscribe(onNext: { [weak self] active in
             if !active {

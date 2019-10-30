@@ -360,8 +360,16 @@ extension ContactsService: ContactsAdapterDelegate {
         })
     }
 
-    func getProfileForUri(uri: String, accountId: String) ->Observable<Profile> {
+    func getProfileForUri(uri: String, accountId: String) -> Observable<Profile> {
         return self.dbManager.profileObservable(for: uri, createIfNotExists: false, accountId: accountId)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+    }
+
+    func getProfile(uri: String, accountId: String) -> Profile? {
+        do {
+            return try self.dbManager.getProfile(for: uri, createIfNotExists: false, accounId: accountId)
+        } catch {
+            return nil
+        }
     }
 }

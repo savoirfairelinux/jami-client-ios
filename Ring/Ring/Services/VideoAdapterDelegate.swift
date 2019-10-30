@@ -23,7 +23,7 @@
     func decodingStopped(withRendererId rendererId: String)
     func startCapture(withDevice device: String)
     func stopCapture()
-    func writeFrame(withImage image: UIImage?)
+    func writeFrame(withImage image: UIImage?, forCallId: String)
     func setDecodingAccelerated(withState state: Bool)
     func switchInput(toDevice device: String, callID: String?)
 }
