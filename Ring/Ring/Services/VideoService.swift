@@ -292,12 +292,14 @@ class VideoService: FrameExtractorDelegate {
     fileprivate let camera = FrameExtractor()
 
     var cameraPosition = AVCaptureDevice.Position.front
-    let incomingVideoFrame = PublishSubject<UIImage?>()
+    typealias RendererTuple = (rendererId: String, data: UIImage?)
+    let incomingVideoFrame = PublishSubject<RendererTuple?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
     var currentOrientation: AVCaptureVideoOrientation
 
     private let log = SwiftyBeaver.self
     private var hardwareAccelerated = true
+    private var hardwareAccelerationEnabled = true
     var angle: Int = 0
 
     fileprivate let disposeBag = DisposeBag()
@@ -309,6 +311,7 @@ class VideoService: FrameExtractorDelegate {
         currentOrientation = camera.getOrientation
         VideoAdapter.delegate = self
         self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
+        self.hardwareAccelerationEnabled = videoAdapter.getEncodingAccelerated()
         camera.delegate = self
     }
 
@@ -396,6 +399,27 @@ class VideoService: FrameExtractorDelegate {
             return 0
         }
     }
+
+    func disableHardwareForConference() {
+        videoAdapter.setEncodingAccelerated(false)
+        videoAdapter.setDecodingAccelerated(false)
+        self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+        self.videoAdapter.setDefaultDevice(camera.namePortrait)
+        self.hardwareAccelerated = false
+    }
+
+    func restoreStateAfterconference() {
+        videoAdapter.setEncodingAccelerated(hardwareAccelerationEnabled)
+        videoAdapter.setDecodingAccelerated(hardwareAccelerationEnabled)
+        self.hardwareAccelerated = hardwareAccelerationEnabled
+        if hardwareAccelerationEnabled {
+            self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
+            self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
+        } else {
+            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+            self.videoAdapter.setDefaultDevice(camera.namePortrait)
+        }
+    }
 }
 
 extension VideoService: VideoAdapterDelegate {
@@ -409,6 +433,7 @@ extension VideoService: VideoAdapterDelegate {
 
     func setDecodingAccelerated(withState state: Bool) {
         videoAdapter.setDecodingAccelerated(state)
+        hardwareAccelerationEnabled = state
     }
 
     func setEncodingAccelerated(withState state: Bool) {
@@ -467,8 +492,8 @@ extension VideoService: VideoAdapterDelegate {
         self.camera.stopCapturing()
     }
 
-    func writeFrame(withImage image: UIImage?) {
-        self.incomingVideoFrame.onNext(image)
+    func writeFrame(withImage image: UIImage?, forCallId: String) {
+        self.incomingVideoFrame.onNext(RendererTuple(forCallId, image))
     }
 
     func getImageOrienation() -> UIImage.Orientation {

@@ -37,6 +37,8 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var cancelButton: UIButton!
     @IBOutlet  weak var switchCameraButton: UIButton!
     @IBOutlet  weak var acceptCallButton: UIButton!
+    @IBOutlet  weak var addContactButton: UIButton!
+    @IBOutlet  weak var sendMessageButton: UIButton!
 
     //Constraints
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
@@ -98,6 +100,8 @@ class ButtonsContainerView: UIView, NibLoadable {
         dialpadButton.isHidden = true
         switchSpeakerButton.isHidden = true
         cancelButton.isHidden = false
+        addContactButton.isHidden = true
+        sendMessageButton.isHidden = true
         if self.viewModel?.isIncoming ?? false {
             acceptCallButton.isHidden = false
             cancelButtonBottomConstraint.constant = 60
@@ -111,52 +115,71 @@ class ButtonsContainerView: UIView, NibLoadable {
     func optionsWithSpeaker() {
         acceptCallButton.isHidden = true
         cancelButtonCenterConstraint.constant = 0
-        if !self.isCallStarted {
-            self.isCallStarted = true
-            self.backgroundBlurEffect.isHidden = false
-            muteAudioButton.isHidden = false
-            if self.viewModel?.isAudioOnly ?? false {
-                muteVideoButton.isHidden = true
-                switchCameraButton.isHidden = true
-                if self.viewModel?.isSipCall ?? false {
-                    dialpadButton.isHidden = false
-                }
-                cancelButtonBottomConstraint.constant = 20
-            } else {
-                muteVideoButton.isHidden = false
-                switchCameraButton.isHidden = false
-                cancelButtonBottomConstraint.constant = 120
+        self.backgroundBlurEffect.isHidden = false
+        muteAudioButton.isHidden = false
+        if self.viewModel?.isAudioOnly ?? false {
+            muteVideoButton.isHidden = true
+            switchCameraButton.isHidden = true
+            if self.viewModel?.isSipCall ?? false {
+                dialpadButton.isHidden = false
             }
-            pauseCallButton.isHidden = false
-            switchSpeakerButton.isEnabled = true
-            switchSpeakerButton.isHidden = false
-            cancelButton.isHidden = false
+            cancelButtonBottomConstraint.constant = 20
+        } else {
+            muteVideoButton.isHidden = false
+            switchCameraButton.isHidden = false
+            cancelButtonBottomConstraint.constant = 80
         }
+        pauseCallButton.isHidden = false
+        switchSpeakerButton.isEnabled = true
+        switchSpeakerButton.isHidden = false
+        cancelButton.isHidden = false
+        addContactButton.isHidden = false
+        sendMessageButton.isHidden = false
+        setUpConference()
     }
 
     func optionsWithoutSpeaker() {
         acceptCallButton.isHidden = true
         cancelButtonCenterConstraint.constant = 0
-        if !self.isCallStarted {
-            self.isCallStarted = true
-            if self.viewModel?.isAudioOnly ?? false {
-                muteVideoButton.isHidden = true
-                switchCameraButton.isHidden = true
-                if self.viewModel?.isSipCall ?? false {
-                    dialpadButton.isHidden = false
-                }
-                cancelButtonBottomConstraint.constant = 20
-            } else {
-                switchCameraButton.isHidden = false
-                muteVideoButton.isHidden = false
-                cancelButtonBottomConstraint.constant = 120
+        if self.viewModel?.isAudioOnly ?? false {
+            muteVideoButton.isHidden = true
+            switchCameraButton.isHidden = true
+            if self.viewModel?.isSipCall ?? false {
+                dialpadButton.isHidden = false
             }
-            switchSpeakerButton.isEnabled = false
-            self.muteAudioButton.isHidden = false
-            switchSpeakerButton.isHidden = false
-            self.backgroundBlurEffect.isHidden = false
-            pauseCallButton.isHidden = false
-            cancelButton.isHidden = false
+            cancelButtonBottomConstraint.constant = 20
+        } else {
+            switchCameraButton.isHidden = false
+            muteVideoButton.isHidden = false
+            cancelButtonBottomConstraint.constant = 80
+        }
+        switchSpeakerButton.isEnabled = false
+        self.muteAudioButton.isHidden = false
+        switchSpeakerButton.isHidden = false
+        self.backgroundBlurEffect.isHidden = false
+        pauseCallButton.isHidden = false
+        cancelButton.isHidden = false
+        addContactButton.isHidden = false
+        sendMessageButton.isHidden = false
+        setUpConference()
+    }
+
+    func setUpConference() {
+        if !(self.viewModel?.isConference ?? false) {
+            return
+        }
+        sendMessageButton.isHidden = true
+        pauseCallButton.isHidden = true
+        muteAudioButton.isHidden = true
+        muteVideoButton.isHidden = true
+        cancelButtonBottomConstraint.constant = 0
+    }
+
+    func updateView() {
+        if switchSpeakerButton.isEnabled && !switchSpeakerButton.isHidden {
+            self.optionsWithSpeaker()
+        } else if !switchSpeakerButton.isHidden {
+            self.optionsWithSpeaker()
         }
     }
 }
