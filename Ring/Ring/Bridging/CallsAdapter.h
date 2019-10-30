@@ -40,4 +40,6 @@
 - (BOOL) muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted;
 - (void) playDTMF:(NSString*)code;
 
+- (BOOL)joinConference:(NSString*)confID call:(NSString*)callID;
+- (BOOL)joinCall:(NSString*)firstCall second:(NSString*)secondCall;
 @end

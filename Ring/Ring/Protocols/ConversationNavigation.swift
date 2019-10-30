@@ -32,6 +32,7 @@ enum ConversationState: State {
     case showGeneralSettings
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
+    case showContactPicker(callID: String)
 }
 
 protocol ConversationNavigation: class {

@@ -236,6 +236,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     return Disposables.create {}
                 }
                 connection.videoOrientation = self.orientation
+
                 self.captureSession.commitConfiguration()
                 completable(.completed)
             } else {
