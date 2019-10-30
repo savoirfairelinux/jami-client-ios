@@ -194,6 +194,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     }
 
     func startCall(participant: String, name: String, isVideo: Bool) {
+        DispatchQueue.main.async {
+        self.tabBarViewController.selectedIndex = 0
         for child in self.childCoordinators {
             if let childCoordinattor = child as? ConversationsCoordinator {
                 if isVideo {
@@ -207,6 +209,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                         .startAudioCall(contactRingId: participant, userName: name))
                 return
             }
+        }
         }
     }
 }
