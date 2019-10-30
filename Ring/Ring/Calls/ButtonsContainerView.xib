@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
             <connections>
                 <outlet property="acceptCallButton" destination="rfz-9h-HoH" id="V6j-8E-g68"/>
+                <outlet property="addContactButton" destination="XPt-Qw-ege" id="hcj-H8-UyK"/>
                 <outlet property="backgroundBlurEffect" destination="w5l-pw-1ET" id="YYh-qB-WIL"/>
                 <outlet property="cancelButton" destination="ZxT-mA-1xU" id="4nk-iI-vPV"/>
                 <outlet property="cancelButtonBottomConstraint" destination="Ilu-Zu-JqW" id="Yeg-Ca-8pf"/>
@@ -26,6 +25,7 @@
                 <outlet property="muteAudioButton" destination="tXL-FB-O0X" id="6Bh-x3-veQ"/>
                 <outlet property="muteVideoButton" destination="W7F-nH-kda" id="MWK-JU-544"/>
                 <outlet property="pauseCallButton" destination="MPk-dB-dhR" id="W4G-AB-WFw"/>
+                <outlet property="sendMessageButton" destination="Clm-qc-fSa" id="ahZ-I9-gRG"/>
                 <outlet property="stackView" destination="RHx-cL-CV5" id="Iz9-B0-2Rd"/>
                 <outlet property="stackViewWidthConstraint" destination="ZuV-LV-CYZ" id="ita-8Y-fAb"/>
                 <outlet property="stackViewYConstraint" destination="z8B-uv-Vcb" id="Gaj-8x-yif"/>
@@ -39,18 +39,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9g-pf-bHy">
-                    <rect key="frame" x="0.0" y="-92" width="375" height="200"/>
+                    <rect key="frame" x="0.0" y="-122" width="375" height="200"/>
                     <subviews>
                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w5l-pw-1ET" userLabel="Background Blur Effect">
-                            <rect key="frame" x="0.0" y="90" width="375" height="110"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JSn-50-Cd9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="110" id="Y2W-3d-8DC"/>
-                            </constraints>
-                            <blurEffect style="light"/>
+                            <vibrancyEffect>
+                                <blurEffect style="dark"/>
+                            </vibrancyEffect>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -59,7 +58,7 @@
                             </userDefinedRuntimeAttributes>
                         </visualEffectView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RHx-cL-CV5">
-                            <rect key="frame" x="15" y="120" width="345" height="50"/>
+                            <rect key="frame" x="15" y="150" width="345" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXL-FB-O0X">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -67,7 +66,7 @@
                                         <constraint firstAttribute="width" constant="50" id="sDn-Gs-HlM"/>
                                         <constraint firstAttribute="height" constant="50" id="zo6-Fk-IRh"/>
                                     </constraints>
-                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" image="audio_running"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
@@ -78,7 +77,7 @@
                                             <real key="value" value="2"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
@@ -88,7 +87,7 @@
                                         <constraint firstAttribute="height" constant="50" id="Pn1-SS-vPN"/>
                                         <constraint firstAttribute="width" constant="50" id="jCp-ib-ySo"/>
                                     </constraints>
-                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" image="video_running"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
@@ -96,7 +95,7 @@
                                             <real key="value" value="2"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="25"/>
@@ -109,7 +108,7 @@
                                         <constraint firstAttribute="height" constant="50" id="DRc-Jz-wSo"/>
                                         <constraint firstAttribute="width" constant="50" id="R9j-nN-Ez6"/>
                                     </constraints>
-                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" image="switch_camera"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
@@ -120,7 +119,7 @@
                                             <real key="value" value="2"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
@@ -130,7 +129,7 @@
                                         <constraint firstAttribute="width" constant="50" id="984-Na-56G"/>
                                         <constraint firstAttribute="height" constant="50" id="kIF-vP-ZJP"/>
                                     </constraints>
-                                    <color key="tintColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" image="pause_call"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
@@ -138,7 +137,7 @@
                                             <real key="value" value="2"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="25"/>
@@ -151,7 +150,7 @@
                                         <constraint firstAttribute="width" constant="50" id="oso-jU-2U3"/>
                                         <constraint firstAttribute="height" constant="50" id="qmE-To-ipl"/>
                                     </constraints>
-                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" image="disable_speakerphone"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -162,7 +161,7 @@
                                             <real key="value" value="25"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
@@ -233,11 +232,62 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="avx-hr-7CF">
+                            <rect key="frame" x="15" y="10" width="50" height="120"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Clm-qc-fSa">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="0i2-PP-0nV"/>
+                                        <constraint firstAttribute="width" constant="50" id="254-56-HSy"/>
+                                    </constraints>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="conversation_icon"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="25"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPt-Qw-ege">
+                                    <rect key="frame" x="0.0" y="70" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="GM7-dt-aWh"/>
+                                        <constraint firstAttribute="height" constant="50" id="jT2-0U-rR3"/>
+                                    </constraints>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="add_person"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="25"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="AKF-a1-POe"/>
+                            </constraints>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="rfz-9h-HoH" firstAttribute="leading" secondItem="ZxT-mA-1xU" secondAttribute="trailing" constant="90" id="48d-Rh-4pI"/>
-                        <constraint firstAttribute="bottom" secondItem="w5l-pw-1ET" secondAttribute="bottom" id="6qu-Nn-b1Y"/>
+                        <constraint firstAttribute="bottom" secondItem="w5l-pw-1ET" secondAttribute="bottom" constant="-20" id="6qu-Nn-b1Y"/>
+                        <constraint firstItem="w5l-pw-1ET" firstAttribute="top" secondItem="a9g-pf-bHy" secondAttribute="top" id="7OO-QU-y0u"/>
                         <constraint firstAttribute="height" constant="200" id="Gjk-7U-rEe"/>
                         <constraint firstAttribute="bottom" secondItem="ZxT-mA-1xU" secondAttribute="bottom" constant="120" id="Ilu-Zu-JqW"/>
                         <constraint firstItem="rfz-9h-HoH" firstAttribute="centerY" secondItem="ZxT-mA-1xU" secondAttribute="centerY" id="NZg-SL-A31"/>
@@ -246,15 +296,17 @@
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="ZfR-cx-MUB"/>
                         <constraint firstItem="w5l-pw-1ET" firstAttribute="leading" secondItem="a9g-pf-bHy" secondAttribute="leading" id="bbd-5D-5So"/>
                         <constraint firstItem="RHx-cL-CV5" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="bmE-qo-8aJ"/>
+                        <constraint firstItem="RHx-cL-CV5" firstAttribute="top" secondItem="avx-hr-7CF" secondAttribute="bottom" constant="20" id="eJB-M0-m2x"/>
                         <constraint firstItem="ZxT-mA-1xU" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="ls1-Ze-LXF"/>
                         <constraint firstAttribute="trailing" secondItem="RHx-cL-CV5" secondAttribute="trailing" constant="15" id="pgj-7m-5gr"/>
-                        <constraint firstAttribute="bottom" secondItem="RHx-cL-CV5" secondAttribute="bottom" constant="30" id="z8B-uv-Vcb"/>
+                        <constraint firstAttribute="bottom" secondItem="RHx-cL-CV5" secondAttribute="bottom" id="z8B-uv-Vcb"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="a9g-pf-bHy" secondAttribute="bottom" id="YHm-ET-yjX"/>
+                <constraint firstItem="avx-hr-7CF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="9J5-UI-CPG"/>
+                <constraint firstAttribute="bottom" secondItem="a9g-pf-bHy" secondAttribute="bottom" constant="30" id="YHm-ET-yjX"/>
                 <constraint firstItem="a9g-pf-bHy" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" priority="750" id="ZI5-4F-WCS"/>
                 <constraint firstItem="a9g-pf-bHy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uv2-qL-KQX"/>
             </constraints>
@@ -264,8 +316,10 @@
         </view>
     </objects>
     <resources>
+        <image name="add_person" width="24" height="24"/>
         <image name="audio_running" width="24" height="24"/>
         <image name="call_button" width="29" height="29"/>
+        <image name="conversation_icon" width="24" height="24"/>
         <image name="dialpad" width="37.5" height="37.5"/>
         <image name="disable_speakerphone" width="24" height="24"/>
         <image name="pause_call" width="24" height="24"/>

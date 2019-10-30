@@ -415,49 +415,49 @@ class SmartlistViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.showGeneralSettings)
     }
 
-    lazy var callButtonTitle: Observable<String> = { [unowned self] in
-        return self.callService
-            .currentCall
-            .share()
-            .asObservable()
-            .map({ call in
-                let callIsValid = self.callIsValid(call: call)
-                let title =  callIsValid ?
-                    call.stateValue == CallState.incoming.rawValue ?
-                        L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)" :
-                        L10n.Calls.currentCallWith + "\(call.displayName)" : ""
-                return title
-            })
-        }()
+//    lazy var callButtonTitle: Observable<String> = { [unowned self] in
+//        return self.callService
+//            .currentCall
+//            .share()
+//            .asObservable()
+//            .map({ call in
+//                let callIsValid = self.callIsValid(call: call)
+//                let title =  callIsValid ?
+//                    call.stateValue == CallState.incoming.rawValue ?
+//                        L10n.Alerts.incomingCallAllertTitle + "\(call.displayName)" :
+//                        L10n.Calls.currentCallWith + "\(call.displayName)" : ""
+//                return title
+//            })
+//        }()
+//
+//    lazy var showCallButton: Observable<Bool> = { [unowned self] in
+//        return self.callService
+//            .currentCall
+//            .share()
+//            .asObservable()
+//            .map({ call in
+//                let callIsValid = self.callIsValid(call: call)
+//                self.currentCallId.value = callIsValid ? call.callId : ""
+//                return callIsValid
+//            })
+//        }()
+//
+//    let currentCallId = Variable<String>("")
 
-    lazy var showCallButton: Observable<Bool> = { [unowned self] in
-        return self.callService
-            .currentCall
-            .share()
-            .asObservable()
-            .map({ call in
-                let callIsValid = self.callIsValid(call: call)
-                self.currentCallId.value = callIsValid ? call.callId : ""
-                return callIsValid
-            })
-        }()
-
-    let currentCallId = Variable<String>("")
-
-    func callIsValid (call: CallModel) -> Bool {
-        return call.stateValue == CallState.hold.rawValue ||
-            call.stateValue == CallState.unhold.rawValue ||
-            call.stateValue == CallState.incoming.rawValue ||
-            call.stateValue == CallState.connecting.rawValue ||
-            call.stateValue == CallState.ringing.rawValue ||
-            call.stateValue == CallState.current.rawValue
-    }
-    func openCall() {
-        guard let call = self.callService
-            .call(callID: self.currentCallId.value) else {
-                return
-        }
-
-        self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
-    }
+//    func callIsValid (call: CallModel) -> Bool {
+//        return call.stateValue == CallState.hold.rawValue ||
+//            call.stateValue == CallState.unhold.rawValue ||
+//            call.stateValue == CallState.incoming.rawValue ||
+//            call.stateValue == CallState.connecting.rawValue ||
+//            call.stateValue == CallState.ringing.rawValue ||
+//            call.stateValue == CallState.current.rawValue
+//    }
+//    func openCall() {
+//        guard let call = self.callService
+//            .call(callID: self.currentCallId.value) else {
+//                return
+//        }
+//
+//        self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
+//    }
 }

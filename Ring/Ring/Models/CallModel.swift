@@ -52,11 +52,13 @@ enum CallDetailKey: String {
     case videoMutedKey = "VIDEO_MUTED"
     case videoSourceKey = "VIDEO_SOURCE"
     case audioOnlyKey = "AUDIO_ONLY"
+    case confID = "CONF_ID"
 }
 
 public class CallModel {
 
     var callId: String = ""
+    var participantsCallId: Set<String> = Set<String>()
     var callUUID: UUID = UUID()
     var dateReceived: Date?
     var participantUri: String = ""
@@ -96,6 +98,9 @@ public class CallModel {
         }
     }
 
+    init() {
+    }
+
     init(withCallId callId: String, callDetails dictionary: [String: String]) {
         self.callId = callId
 
@@ -116,6 +121,7 @@ public class CallModel {
         }
 
         self.update(withDictionary: dictionary)
+        self.participantsCallId.insert(callId)
     }
 
     func update(withDictionary dictionary: [String: String]) {
@@ -155,5 +161,9 @@ public class CallModel {
         if let isAudioOnly = dictionary[CallDetailKey.audioOnlyKey.rawValue]?.toBool() {
             self.isAudioOnly = isAudioOnly
         }
+//
+//        if let confID = dictionary[CallDetailKey.confID.rawValue] {
+//            self.conferenceId = confID
+//        }
     }
 }

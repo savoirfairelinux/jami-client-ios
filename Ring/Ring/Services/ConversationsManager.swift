@@ -118,6 +118,30 @@ class ConversationsManager: MessagesAdapterDelegate {
                                       peerName: event.getEventInput(ServiceEventInput.name))
             })
             .disposed(by: disposeBag)
+
+        self.callService.newMessage.filter({ (event) in
+            return  event.eventType == ServiceEventType.newOutgoingMessage
+        })
+            .subscribe(onNext: { [unowned self] event in
+                guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
+                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
+                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
+                    let accountURi: String = event.getEventInput(ServiceEventInput.accountUri)
+
+                    else {return}
+                let message = self.conversationService.createMessage(withId: "",
+                                                                     withContent: messageContent,
+                                                                     byAuthor: accountURi,
+                                                                     generated: false,
+                                                                     incoming: false)
+                self.conversationService.saveMessage(message: message,
+                                                     toConversationWith: peerUri,
+                                                     toAccountId: accountId,
+                                                     shouldRefreshConversations: true)
+                .subscribe()
+                .disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
 
     func prepareConversationsForAccount(accountId: String) {
