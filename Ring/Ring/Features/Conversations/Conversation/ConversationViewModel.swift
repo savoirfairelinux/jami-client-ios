@@ -39,6 +39,7 @@ class ConversationViewModel: Stateable, ViewModel {
     private let presenceService: PresenceService
     private let profileService: ProfilesService
     private let dataTransferService: DataTransferService
+    private let callService: CallsService
 
     private let injectionBag: InjectionBag
 
@@ -56,6 +57,7 @@ class ConversationViewModel: Stateable, ViewModel {
         self.presenceService = injectionBag.presenceService
         self.profileService = injectionBag.profileService
         self.dataTransferService = injectionBag.dataTransferService
+        self.callService = injectionBag.callService
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
@@ -137,23 +139,11 @@ class ConversationViewModel: Stateable, ViewModel {
             // subscribe to presence updates for the conversation's associated contact
             if let contactPresence = self.presenceService
                 .contactPresence[self.conversation.value.hash] {
-                self.contactPresence.value = contactPresence
+                self.contactPresence = contactPresence
             } else {
                 self.log.warning("Contact presence unknown for: \(contactUri)")
                 self.contactPresence.value = false
             }
-            self.presenceService
-                .sharedResponseStream
-                .filter({ presenceUpdateEvent in
-                    return presenceUpdateEvent.eventType == ServiceEventType.presenceUpdated
-                        && presenceUpdateEvent.getEventInput(.uri) == contact?.hash
-                })
-                .subscribe(onNext: { [unowned self] presenceUpdateEvent in
-                    if let uri: String = presenceUpdateEvent.getEventInput(.uri) {
-                        self.contactPresence.value = self.presenceService.contactPresence[uri]!
-                    }
-                })
-                .disposed(by: disposeBag)
 
             if let contactUserName = contact?.userName {
                 self.userName.value = contactUserName
@@ -276,7 +266,11 @@ class ConversationViewModel: Stateable, ViewModel {
         }
 
         guard let account = self.accountService.currentAccount else {return}
-
+        //if in call send sip msg
+        if let call = self.callService.call(participantHash: self.conversation.value.hash, accountID: self.conversation.value.accountId) {
+            self.callService.sendTextMessage(callID: call.callId, message: content, accountId: account)
+            return
+        }
         self.conversationsService
             .sendMessage(withContent: content,
                          from: account,
@@ -449,5 +443,44 @@ class ConversationViewModel: Stateable, ViewModel {
     func getTransferSize(transferId: UInt64) -> Int64? {
         guard let info = self.dataTransferService.getTransferInfo(withId: transferId) else { return nil }
         return info.totalSize
+    }
+
+    func haveCurrentCall() -> Bool {
+        return self.callService.call(participantHash: self.conversation.value.hash, accountID: self.conversation.value.accountId) != nil
+    }
+
+    lazy var showCallButton: Observable<Bool> = { [unowned self] in
+        return self.callService
+            .currentCallsEvents
+            .share()
+            .asObservable()
+            .filter({ (call) -> Bool in
+                call.paricipantHash() == self.conversation.value.hash
+                    && call.accountId == self.conversation.value.accountId
+            })
+            .map({ call in
+                let callIsValid = self.callIsValid(call: call)
+                self.currentCallId.value = callIsValid ? call.callId : ""
+                return callIsValid
+            })
+        }()
+
+    let currentCallId = Variable<String>("")
+
+    func callIsValid (call: CallModel) -> Bool {
+        return call.stateValue == CallState.hold.rawValue ||
+            call.stateValue == CallState.unhold.rawValue ||
+            call.stateValue == CallState.incoming.rawValue ||
+            call.stateValue == CallState.connecting.rawValue ||
+            call.stateValue == CallState.ringing.rawValue ||
+            call.stateValue == CallState.current.rawValue
+    }
+
+    func openCall() {
+        guard let call = self.callService
+            .call(participantHash: self.conversation.value.hash,
+                  accountID: self.conversation.value.accountId) else { return }
+
+        self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
     }
 }

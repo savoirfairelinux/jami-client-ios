@@ -46,6 +46,11 @@ class ConversationViewController: UIViewController,
     let scrollOffsetThreshold: CGFloat = 600
     var bottomHeight: CGFloat = 0.00
 
+    @IBOutlet weak var currentCallButton: UIButton!
+    @IBOutlet weak var currentCallLabel: UILabel!
+    @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -511,6 +516,34 @@ class ConversationViewController: UIViewController,
                     self?.navigationItem.rightBarButtonItems = buttons
                 }).disposed(by: self.disposeBag)
         }
+        self.viewModel.showCallButton
+            .observeOn(MainScheduler.instance)
+            .startWith(self.viewModel.haveCurrentCall())
+            .subscribe(onNext: { [unowned self] show in
+                if show {
+                    // let deadlineTime = DispatchTime.now() + .seconds(3)
+                    DispatchQueue.main.async {
+                        if self.viewModel.currentCallId.value.isEmpty {
+                            return
+                        }
+                        self.currentCallButton.isHidden = false
+                        self.currentCallLabel.isHidden = false
+                        self.currentCallLabel.blink()
+                        self.callButtonHeightConstraint.constant = 60
+                    }
+                    return
+                }
+                self.currentCallButton.isHidden = true
+                self.currentCallLabel.isHidden = true
+                self.callButtonHeightConstraint.constant = 0
+                self.currentCallLabel.layer.removeAllAnimations()
+            }).disposed(by: disposeBag)
+        currentCallButton.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.openCall()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func inviteItemTapped() {
