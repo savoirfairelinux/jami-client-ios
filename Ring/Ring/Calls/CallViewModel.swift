@@ -465,4 +465,11 @@ class CallViewModel: Stateable, ViewModel {
     func showDialpad() {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: true))
     }
+
+    func showContactPickerVC() {
+        guard let call = self.call else {
+            return
+        }
+        self.stateSubject.onNext(ConversationState.showContactPicker(callID: call.callId))
+    }
 }

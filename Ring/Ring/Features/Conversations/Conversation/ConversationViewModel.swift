@@ -137,23 +137,23 @@ class ConversationViewModel: Stateable, ViewModel {
             // subscribe to presence updates for the conversation's associated contact
             if let contactPresence = self.presenceService
                 .contactPresence[self.conversation.value.hash] {
-                self.contactPresence.value = contactPresence
+                self.contactPresence = contactPresence
             } else {
                 self.log.warning("Contact presence unknown for: \(contactUri)")
                 self.contactPresence.value = false
             }
-            self.presenceService
-                .sharedResponseStream
-                .filter({ presenceUpdateEvent in
-                    return presenceUpdateEvent.eventType == ServiceEventType.presenceUpdated
-                        && presenceUpdateEvent.getEventInput(.uri) == contact?.hash
-                })
-                .subscribe(onNext: { [unowned self] presenceUpdateEvent in
-                    if let uri: String = presenceUpdateEvent.getEventInput(.uri) {
-                        self.contactPresence.value = self.presenceService.contactPresence[uri]!
-                    }
-                })
-                .disposed(by: disposeBag)
+//            self.presenceService
+//                .sharedResponseStream
+//                .filter({ presenceUpdateEvent in
+//                    return presenceUpdateEvent.eventType == ServiceEventType.presenceUpdated
+//                        && presenceUpdateEvent.getEventInput(.uri) == contact?.hash
+//                })
+//                .subscribe(onNext: { [unowned self] presenceUpdateEvent in
+//                    if let uri: String = presenceUpdateEvent.getEventInput(.uri) {
+//                        self.contactPresence.value = self.presenceService.contactPresence[uri]!
+//                    }
+//                })
+//                .disposed(by: disposeBag)
 
             if let contactUserName = contact?.userName {
                 self.userName.value = contactUserName
