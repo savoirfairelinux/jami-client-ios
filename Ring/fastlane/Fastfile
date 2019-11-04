@@ -33,6 +33,7 @@ platform :ios do
       clean: true,
       configuration: "Development",
       export_method: 'development',
+      skip_codesign: true,
       skip_package_ipa: true
     )
   end
