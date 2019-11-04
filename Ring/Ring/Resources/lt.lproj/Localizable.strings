@@ -185,10 +185,10 @@
 "account.port" = "Prievadas";
 "account.proxyServer" = "Įgaliotasis serveris";
 "account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
+"account.usernameLabel" = "Įveskite naudotojo adresą";
 "account.passwordLabel" = "Įveskite slaptažodį";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
+"account.serverLabel" = "Įveskite adresą";
+"account.portLabel" = "Įveskite prievado numerį";
 "account.accountStatus" = "Paskyros būsena";
 "account.enableAccount" = "Įjungti paskyrą";
 "account.statusOnline" = "Prisijungęs";
@@ -223,7 +223,7 @@
 "dataTransfer.readableStatusRefuse" = "Atmesti";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Atsisakyta";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "Nepavyko išsiųsti";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Priimti";
 "dataTransfer.readableStatusCancel" = "Atsisakyti";
@@ -233,7 +233,7 @@
 "notifications.missedCall" = "Praleistas skambutis";
 "notifications.acceptCall" = "ATSILIEPTI";
 "notifications.refuseCall" = "ATMESTI";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Naujas failas";
 "dataTransfer.readableStatusAwaiting" = "Laukiama…";
 "dataTransfer.readableStatusRefuse" = "Atmesti";
 "dataTransfer.readableStatusOngoing" = "Transferring";
