@@ -188,15 +188,51 @@ extern "C" {
     return frame;
 }
 
++ (int)getForrmatFromAppleFormat:(OSType)format {
+    switch (format) {
+        case kCVPixelFormatType_420YpCbCr8Planar:
+            return AV_PIX_FMT_YUV420P;
+        case kCVPixelFormatType_422YpCbCr8_yuvs:
+            return AV_PIX_FMT_YUYV422;
+        case kCVPixelFormatType_422YpCbCr8:
+            return AV_PIX_FMT_UYVY422;
+        case kCVPixelFormatType_32BGRA:
+            return AV_PIX_FMT_BGR0;
+        case kCVPixelFormatType_24RGB:
+            return AV_PIX_FMT_RGB24;
+        case kCVPixelFormatType_24BGR:
+            return AV_PIX_FMT_BGR24;
+        case kCVPixelFormatType_32ARGB:
+            return AV_PIX_FMT_0RGB;
+        case kCVPixelFormatType_32ABGR:
+            return AV_PIX_FMT_0BGR;
+        case kCVPixelFormatType_32RGBA:
+            return AV_PIX_FMT_RGB0;
+        case kCVPixelFormatType_48RGB:
+            return AV_PIX_FMT_BGR48BE;
+        case kCVPixelFormatType_444YpCbCr8:
+            return AV_PIX_FMT_YUV444P;
+        case kCVPixelFormatType_4444AYpCbCr16:
+            return AV_PIX_FMT_YUVA444P16LE;
+        case kCVPixelFormatType_4444YpCbCrA8R:
+            return AV_PIX_FMT_YUVA444P;
+        case kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange:
+        case kCVPixelFormatType_420YpCbCr8BiPlanarFullRange:
+        default:
+            return AV_PIX_FMT_NV12;
+    }
+}
+
 + (AVFrame*)configureFrame:(AVFrame*)frame
            fromImageBuffer: (CVImageBufferRef)image
                      angle:(int) angle {
     CVPixelBufferLockBaseAddress(image, 0);
     int width = static_cast<int>(CVPixelBufferGetWidth(image));
     int height = static_cast<int>(CVPixelBufferGetHeight(image));
+    const OSType pixelFormat = CVPixelBufferGetPixelFormatType(image);
     frame->width = width;
     frame->height = height;
-    frame->format = AV_PIX_FMT_NV12;
+    frame->format = [Utils getForrmatFromAppleFormat: pixelFormat];
     if (CVPixelBufferIsPlanar(image)) {
         int planes = static_cast<int>(CVPixelBufferGetPlaneCount(image));
         for (int i = 0; i < planes; i++) {

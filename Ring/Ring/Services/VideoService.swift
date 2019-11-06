@@ -43,9 +43,6 @@ enum VideoError: Error {
 
 protocol FrameExtractorDelegate: class {
     func captured(imageBuffer: CVImageBuffer?, image: UIImage)
-    func supportAVPixelFormat(support: Bool)
-    //func useHardwareAcceleration()-> Bool
-    //func updateVideoInputDevices()
 }
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -179,7 +176,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         if types.contains(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
             let settings = [kCVPixelBufferPixelFormatTypeKey as NSString: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange]
             videoOutput.videoSettings = settings as [String: Any]
-            self.delegate?.supportAVPixelFormat(support: true)
         }
         videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
         guard captureSession.canAddOutput(videoOutput) else {
@@ -316,7 +312,6 @@ class VideoService: FrameExtractorDelegate {
     private let log = SwiftyBeaver.self
     private var hardwareAccelerated = true
     var angle: Int = 0
-    var supportAVPixelFormat = false
 
     fileprivate let disposeBag = DisposeBag()
 
@@ -374,7 +369,7 @@ class VideoService: FrameExtractorDelegate {
     func switchCamera() {
         self.camera.switchCamera()
             .subscribe(onCompleted: {
-            print ("camera switched")
+            print("camera switched")
         }, onError: { error in
             print(error)
         }).disposed(by: self.disposeBag)
@@ -400,20 +395,6 @@ class VideoService: FrameExtractorDelegate {
         }
         self.angle = self.mapDeviceOrientation(orientation: newOrientation)
         self.currentOrientation = newOrientation
-        // in this case rotation will be performed when configure AVFrame
-        if hardwareAccelerated || supportAVPixelFormat {
-            return
-        }
-        let deviceName: String =
-            (orientation == .landscapeLeft || orientation == .landscapeRight) ?
-                self.camera.nameLandscape : self.camera.namePortrait
-        self.switchInput(toDevice: self.camera.nameCamera + deviceName, callID: callID)
-        self.camera.rotateCamera(orientation: newOrientation)
-            .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("new camera orientation isPortrait: \(orientation.isPortrait)")
-            }, onError: { error in
-                self.log.debug("camera re-orientation error: \(error)")
-            }).disposed(by: self.disposeBag)
     }
 
     func mapDeviceOrientation(orientation: AVCaptureVideoOrientation) -> Int {
@@ -505,24 +486,15 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
-        if self.hardwareAccelerated || self.supportAVPixelFormat {
-            if let cgImage = image.cgImage {
-                self.capturedVideoFrame
-                    .onNext(UIImage(cgImage: cgImage,
-                                    scale: 1.0 ,
-                                    orientation: self.getImageOrienation()))
-            }
-            videoAdapter.writeOutgoingFrame(with: imageBuffer,
-                                            angle: Int32(self.angle),
-                                            useHardwareAcceleration: self.hardwareAccelerated)
-        } else {
-            self.capturedVideoFrame.onNext(image)
-            videoAdapter.writeOutgoingFrame(with: image)
+        if let cgImage = image.cgImage {
+            self.capturedVideoFrame
+                .onNext(UIImage(cgImage: cgImage,
+                                scale: 1.0 ,
+                                orientation: self.getImageOrienation()))
         }
-    }
-
-    func supportAVPixelFormat(support: Bool) {
-        supportAVPixelFormat = support
+        videoAdapter.writeOutgoingFrame(with: imageBuffer,
+                                        angle: Int32(self.angle),
+                                        useHardwareAcceleration: self.hardwareAccelerated)
     }
 
     func stopAudioDevice() {
