@@ -204,28 +204,6 @@ static id <VideoAdapterDelegate> _delegate;
     DRing::publishFrame();
 }
 
-- (void)writeOutgoingFrameWithImage:(UIImage *)image {
-    unsigned capacity = 4 * image.size.width * image.size.height;
-    uint8_t* buf = (uint8_t*)DRing::obtainFrame(capacity);
-    if (buf){
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        CGImageRef imageRef = [image CGImage];
-        CGContextRef bitmap = CGBitmapContextCreate(buf,
-                                                    image.size.width,
-                                                    image.size.height,
-                                                    8,
-                                                    image.size.width * 4,
-                                                    colorSpace,
-                                                    kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
-        CGContextTranslateCTM(bitmap, image.size.width, 0);
-        CGContextScaleCTM(bitmap, -1.0, 1.0);
-        CGContextDrawImage(bitmap, CGRectMake(0, 0, image.size.width, image.size.height), imageRef);
-        CGContextRelease(bitmap);
-        CGColorSpaceRelease(colorSpace);
-    }
-    DRing::releaseFrame((void*)buf);
-}
-
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict {
     std::vector<std::map<std::string, std::string>> devInfo;
     auto setting = [Utils dictionnaryToMap:deviceInfoDict];

@@ -43,17 +43,12 @@ enum VideoError: Error {
 
 protocol FrameExtractorDelegate: class {
     func captured(imageBuffer: CVImageBuffer?, image: UIImage)
-    func supportAVPixelFormat(support: Bool)
-    //func useHardwareAcceleration()-> Bool
-    //func updateVideoInputDevices()
 }
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
-    let nameLandscape = "frontCameraLanscape"
     let namePortrait = "frontCameraPortrait"
     let nameDevice1280_720 = "frontCameraPortrait1280_720"
-    let nameCamera = "camera://"
 
     private let log = SwiftyBeaver.self
 
@@ -84,7 +79,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         super.init()
     }
 
-    func getDeviceInfo(forPosition position: AVCaptureDevice.Position, orientation: UIDeviceOrientation, quality: AVCaptureSession.Preset) throws -> DeviceInfo {
+    func getDeviceInfo(forPosition position: AVCaptureDevice.Position, quality: AVCaptureSession.Preset) throws -> DeviceInfo {
         guard self.permissionGranted.value else {
             throw VideoError.needPermission
         }
@@ -102,20 +97,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 bestRate = frameRates.maxFrameRate
             }
         }
-        if  orientation == .portrait ||
-            orientation == .portraitUpsideDown {
-            let devInfo: DeviceInfo = ["format": "BGRA",
-                                       "width": String(dimensions.height),
-                                       "height": String(dimensions.width),
-                                       "rate": String(bestRate)]
-            return devInfo
-        } else {
-            let devInfo: DeviceInfo = ["format": "BGRA",
-                                       "width": String(dimensions.width),
-                                       "height": String(dimensions.height),
-                                       "rate": String(bestRate)]
-            return devInfo
-        }
+        let devInfo: DeviceInfo = ["format": "BGRA",
+                                   "width": String(dimensions.height),
+                                   "height": String(dimensions.width),
+                                   "rate": String(bestRate)]
+        return devInfo
     }
 
     func startCapturing() {
@@ -179,7 +165,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         if types.contains(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
             let settings = [kCVPixelBufferPixelFormatTypeKey as NSString: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange]
             videoOutput.videoSettings = settings as [String: Any]
-            self.delegate?.supportAVPixelFormat(support: true)
         }
         videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
         guard captureSession.canAddOutput(videoOutput) else {
@@ -316,7 +301,6 @@ class VideoService: FrameExtractorDelegate {
     private let log = SwiftyBeaver.self
     private var hardwareAccelerated = true
     var angle: Int = 0
-    var supportAVPixelFormat = false
 
     fileprivate let disposeBag = DisposeBag()
 
@@ -344,25 +328,25 @@ class VideoService: FrameExtractorDelegate {
         do {
             try camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: AVCaptureVideoOrientation.portrait)
             self.log.debug("Camera successfully configured")
-            let hd1280x720Device: [String: String] = try camera.getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .portrait, quality: AVCaptureSession.Preset.hd1280x720)
-            let frontLandscapeCameraDevInfo: [String: String] =
-                try camera
-                    .getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .landscapeLeft,
+            let hd1280x720Device: [String: String] = try camera
+                .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
+                               quality: AVCaptureSession.Preset.hd1280x720)
+            let frontPortraitCameraDevInfo: [String: String] = try camera
+                    .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
                                    quality: AVCaptureSession.Preset.medium)
-            let frontPortraitCameraDevInfo: [String: String] =
-                try camera.getDeviceInfo(forPosition: AVCaptureDevice.Position.front, orientation: .portrait,
-                                         quality: AVCaptureSession.Preset.medium)
-            videoAdapter.addVideoDevice(withName: camera.nameLandscape,
-                                        withDevInfo: frontLandscapeCameraDevInfo)
             if self.hardwareAccelerated {
                 self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
-                videoAdapter.addVideoDevice(withName: camera.namePortrait, withDevInfo: frontPortraitCameraDevInfo)
-                videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720, withDevInfo: hd1280x720Device)
+                videoAdapter.addVideoDevice(withName: camera.namePortrait,
+                                            withDevInfo: frontPortraitCameraDevInfo)
+                videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
+                                            withDevInfo: hd1280x720Device)
                 return
             }
             self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-            videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720, withDevInfo: hd1280x720Device)
-            videoAdapter.addVideoDevice(withName: camera.namePortrait, withDevInfo: frontPortraitCameraDevInfo)
+            videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
+                                        withDevInfo: hd1280x720Device)
+            videoAdapter.addVideoDevice(withName: camera.namePortrait,
+                                        withDevInfo: frontPortraitCameraDevInfo)
 
         } catch let e as VideoError {
             self.log.error("Error during capture device enumeration: \(e)")
@@ -374,7 +358,7 @@ class VideoService: FrameExtractorDelegate {
     func switchCamera() {
         self.camera.switchCamera()
             .subscribe(onCompleted: {
-            print ("camera switched")
+            print("camera switched")
         }, onError: { error in
             print(error)
         }).disposed(by: self.disposeBag)
@@ -400,20 +384,6 @@ class VideoService: FrameExtractorDelegate {
         }
         self.angle = self.mapDeviceOrientation(orientation: newOrientation)
         self.currentOrientation = newOrientation
-        // in this case rotation will be performed when configure AVFrame
-        if hardwareAccelerated || supportAVPixelFormat {
-            return
-        }
-        let deviceName: String =
-            (orientation == .landscapeLeft || orientation == .landscapeRight) ?
-                self.camera.nameLandscape : self.camera.namePortrait
-        self.switchInput(toDevice: self.camera.nameCamera + deviceName, callID: callID)
-        self.camera.rotateCamera(orientation: newOrientation)
-            .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("new camera orientation isPortrait: \(orientation.isPortrait)")
-            }, onError: { error in
-                self.log.debug("camera re-orientation error: \(error)")
-            }).disposed(by: self.disposeBag)
     }
 
     func mapDeviceOrientation(orientation: AVCaptureVideoOrientation) -> Int {
@@ -505,24 +475,15 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
-        if self.hardwareAccelerated || self.supportAVPixelFormat {
-            if let cgImage = image.cgImage {
-                self.capturedVideoFrame
-                    .onNext(UIImage(cgImage: cgImage,
-                                    scale: 1.0 ,
-                                    orientation: self.getImageOrienation()))
-            }
-            videoAdapter.writeOutgoingFrame(with: imageBuffer,
-                                            angle: Int32(self.angle),
-                                            useHardwareAcceleration: self.hardwareAccelerated)
-        } else {
-            self.capturedVideoFrame.onNext(image)
-            videoAdapter.writeOutgoingFrame(with: image)
+        if let cgImage = image.cgImage {
+            self.capturedVideoFrame
+                .onNext(UIImage(cgImage: cgImage,
+                                scale: 1.0 ,
+                                orientation: self.getImageOrienation()))
         }
-    }
-
-    func supportAVPixelFormat(support: Bool) {
-        supportAVPixelFormat = support
+        videoAdapter.writeOutgoingFrame(with: imageBuffer,
+                                        angle: Int32(self.angle),
+                                        useHardwareAcceleration: self.hardwareAccelerated)
     }
 
     func stopAudioDevice() {

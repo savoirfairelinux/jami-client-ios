@@ -35,7 +35,6 @@
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
                                angle:(int)angle
              useHardwareAcceleration:(BOOL)hardwareAccelerated;
-- (void)writeOutgoingFrameWithImage:(UIImage*)image;
 - (void)setDecodingAccelerated:(BOOL)state;
 - (BOOL)getDecodingAccelerated;
 - (void)switchInput:(NSString*)deviceName;
