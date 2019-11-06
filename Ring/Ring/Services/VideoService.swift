@@ -43,6 +43,7 @@ enum VideoError: Error {
 
 protocol FrameExtractorDelegate: class {
     func captured(imageBuffer: CVImageBuffer?, image: UIImage)
+    func updateDevicePisition(position: AVCaptureDevice.Position)
 }
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -181,7 +182,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             throw VideoError.unsupportedParameter
         }
         connection.videoOrientation = orientation
-        connection.isVideoMirrored = position == .front
         captureSession.commitConfiguration()
     }
 
@@ -202,14 +202,13 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             }
             self.captureSession.removeInput(currentCameraInput)
             var newCamera: AVCaptureDevice! = nil
-            var shouldMirrowVideoOutput = false
             if let input = currentCameraInput as? AVCaptureDeviceInput {
                 if input.device.position == .back {
                     newCamera = self.selectCaptureDevice(withPosition: .front)
-                    shouldMirrowVideoOutput = true
                 } else {
                     newCamera = self.selectCaptureDevice(withPosition: .back)
                 }
+                self.delegate!.updateDevicePisition(position: newCamera.position)
             }
             var newVideoInput: AVCaptureDeviceInput!
             do {
@@ -237,7 +236,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     return Disposables.create {}
                 }
                 connection.videoOrientation = self.orientation
-                connection.isVideoMirrored = shouldMirrowVideoOutput
                 self.captureSession.commitConfiguration()
                 completable(.completed)
             } else {
@@ -389,9 +387,9 @@ class VideoService: FrameExtractorDelegate {
     func mapDeviceOrientation(orientation: AVCaptureVideoOrientation) -> Int {
         switch orientation {
         case AVCaptureVideoOrientation.landscapeRight:
-            return 270
+            return cameraPosition == AVCaptureDevice.Position.front ? 90 : 270
         case AVCaptureVideoOrientation.landscapeLeft:
-            return 90
+            return cameraPosition == AVCaptureDevice.Position.front ? 270 : 90
         default:
             return 0
         }
@@ -466,9 +464,9 @@ extension VideoService: VideoAdapterDelegate {
         case AVCaptureVideoOrientation.portraitUpsideDown:
             return UIImage.Orientation.down
         case AVCaptureVideoOrientation.landscapeRight:
-            return UIImage.Orientation.right
+            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.left : UIImage.Orientation.right
         case AVCaptureVideoOrientation.landscapeLeft:
-            return UIImage.Orientation.left
+            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.right : UIImage.Orientation.left
         @unknown default:
             return UIImage.Orientation.up
         }
@@ -484,6 +482,10 @@ extension VideoService: VideoAdapterDelegate {
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
                                         angle: Int32(self.angle),
                                         useHardwareAcceleration: self.hardwareAccelerated)
+    }
+
+    func updateDevicePisition(position: AVCaptureDevice.Position) {
+        self.cameraPosition = position
     }
 
     func stopAudioDevice() {
