@@ -94,12 +94,22 @@ class ConversationViewController: UIViewController,
             self.importImage()
         }
 
+        let recordVideoAction = UIAlertAction(title: "Record a video message", style: UIAlertAction.Style.default) { _ in
+            self.viewModel.recordVideoFile()
+        }
+
+        let recordAudioAction = UIAlertAction(title: "Record an audio message", style: UIAlertAction.Style.default) { _ in
+            self.viewModel.recordAudioFile()
+        }
+
         let documentsAction = UIAlertAction(title: "Upload file", style: UIAlertAction.Style.default) { _ in
             self.importDocument()
         }
 
         let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertAction.Style.cancel)
         alert.addAction(pictureAction)
+        alert.addAction(recordVideoAction)
+        alert.addAction(recordAudioAction)
         alert.addAction(documentsAction)
         alert.addAction(cancelAction)
         alert.popoverPresentationController?.sourceView = self.view

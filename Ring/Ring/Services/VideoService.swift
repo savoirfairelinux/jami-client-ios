@@ -304,6 +304,8 @@ class VideoService: FrameExtractorDelegate {
 
     fileprivate let disposeBag = DisposeBag()
 
+    var recording = false
+
     init(withVideoAdapter videoAdapter: VideoAdapter) {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
@@ -450,6 +452,15 @@ extension VideoService: VideoAdapterDelegate {
         self.camera.startCapturing()
     }
 
+    func prepareVideoRecording() {
+        self.videoAdapter.startCamera()
+    }
+
+    func videRecordingFinished() {
+        self.videoAdapter.stopCamera()
+        self.stopAudioDevice()
+    }
+
     func stopCapture() {
         self.log.debug("Capture stopped...")
         self.camera.stopCapturing()
@@ -483,10 +494,43 @@ extension VideoService: VideoAdapterDelegate {
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
                                         angle: Int32(self.angle),
-                                        useHardwareAcceleration: self.hardwareAccelerated)
+                                        useHardwareAcceleration: self.hardwareAccelerated,
+                                        recording: self.recording)
     }
 
     func stopAudioDevice() {
         videoAdapter.stopAudioDevice()
+    }
+
+    func startLocalRecorder(audioOnly: Bool) -> String? {
+        //configure path
+        let recordingsFolderName = "recorded"
+        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        let directoryURL = documentsURL.appendingPathComponent(recordingsFolderName)
+        var isDirectory = ObjCBool(false)
+        let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
+        if !directoryExists || !isDirectory.boolValue {
+            do {
+                try FileManager.default.createDirectory(atPath: directoryURL.path, withIntermediateDirectories: true, attributes: nil)
+            } catch _ as NSError {
+                return nil
+            }
+        }
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        let random = String(arc4random_uniform(9999))
+        let fileName = dateString + "_" + random
+        let videoURL = directoryURL.appendingPathComponent(fileName, isDirectory: false)
+        self.recording = true
+        return self.videoAdapter.startLocalRecording(videoURL.path, audioOnly: audioOnly)
+    }
+
+    func stopLocalRecorder(path: String) {
+        self.videoAdapter.stopLocalRecording(path)
+        self.recording = false
     }
 }

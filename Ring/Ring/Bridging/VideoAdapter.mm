@@ -185,13 +185,14 @@ static id <VideoAdapterDelegate> _delegate;
 
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
                                angle:(int)angle
-             useHardwareAcceleration:(BOOL)hardwareAccelerated {
+             useHardwareAcceleration:(BOOL)hardwareAccelerated
+                           recording:(BOOL)recording {
     auto frame = DRing::getNewFrame();
     if(!frame) {
         return;
     }
     auto avframe = frame->pointer();
-    if(hardwareAccelerated) {
+    if(hardwareAccelerated && !recording) {
         [Utils configureHardwareDecodedFrame:(AVFrame*)avframe
                              fromImageBuffer:image
                                        angle:(int) angle];
@@ -242,6 +243,22 @@ static id <VideoAdapterDelegate> _delegate;
 
 - (void)stopAudioDevice {
     DRing::stopAudioDevice();
+}
+
+- (NSString* )startLocalRecording:(NSString*) path audioOnly:(BOOL)audioOnly {
+    return @(DRing::startLocalRecorder(audioOnly, std::string([path UTF8String])).c_str());
+}
+
+- (void)stopLocalRecording:(NSString*) path {
+    DRing::stopLocalRecorder(std::string([path UTF8String]));
+}
+
+- (void)startCamera {
+    DRing::startCamera();
+}
+
+- (void)stopCamera {
+    DRing::stopCamera();
 }
 
 #pragma mark PresenceAdapterDelegate

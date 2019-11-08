@@ -23,6 +23,7 @@
 extern "C" {
     #include <libavutil/frame.h>
     #include <libavutil/display.h>
+    #include <libavutil/time.h>
 }
 
 @implementation Utils
