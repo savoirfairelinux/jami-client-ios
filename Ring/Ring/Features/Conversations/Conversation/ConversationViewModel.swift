@@ -390,6 +390,14 @@ class ConversationViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
     }
 
+    func recordVideoFile() {
+        self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: false))
+    }
+
+    func recordAudioFile() {
+        self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: true))
+    }
+
     func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil) {
         guard let accountId = accountService.currentAccount?.id else {return}
         self.dataTransferService.sendFile(filePath: filePath,

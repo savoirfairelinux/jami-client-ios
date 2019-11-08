@@ -34,7 +34,8 @@
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId;
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
                                angle:(int)angle
-             useHardwareAcceleration:(BOOL)hardwareAccelerated;
+             useHardwareAcceleration:(BOOL)hardwareAccelerated
+                           recording:(BOOL)recording;
 - (void)setDecodingAccelerated:(BOOL)state;
 - (BOOL)getDecodingAccelerated;
 - (void)switchInput:(NSString*)deviceName;
@@ -42,5 +43,9 @@
 - (void)setEncodingAccelerated:(BOOL)state;
 - (BOOL)getEncodingAccelerated;
 - (void)stopAudioDevice;
+- (NSString*)startLocalRecording:(NSString*) path audioOnly:(BOOL)audioOnly;
+- (void)stopLocalRecording:(NSString*) path;
+- (void)startCamera;
+- (void)stopCamera;
 
 @end

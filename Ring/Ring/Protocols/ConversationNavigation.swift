@@ -30,6 +30,7 @@ enum ConversationState: State {
     case createNewAccount
     case showDialpad(inCall: Bool)
     case showGeneralSettings
+    case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
 }
 
@@ -55,10 +56,22 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 self.presentContactInfo(conversation: conversationModel)
             case .qrCode:
                 self.openQRCode()
+            case .recordFile(let conversation, let audioOnly):
+                self.openRecordFile(conversation: conversation, audioOnly: audioOnly)
             default:
                 break
             }
         }).disposed(by: self.disposeBag)
+    }
+
+    func openRecordFile(conversation: ConversationModel, audioOnly: Bool) {
+        let recordFileViewController = SendFileViewController.instantiate(with: self.injectionBag)
+        recordFileViewController.viewModel.conversation = conversation
+        recordFileViewController.viewModel.audioOnly = audioOnly
+        self.present(viewController: recordFileViewController,
+                     withStyle: .popup,
+                     withAnimation: true,
+                     withStateable: recordFileViewController.viewModel)
     }
 
     func openQRCode () {
