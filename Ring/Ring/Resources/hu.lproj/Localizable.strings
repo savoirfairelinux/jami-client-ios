@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Elküld";
 
 
 //Generated Message

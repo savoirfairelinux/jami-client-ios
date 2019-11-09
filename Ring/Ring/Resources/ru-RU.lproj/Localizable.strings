@@ -55,10 +55,10 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Привязать это устройство к аккаунту";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Создать учётную запись Jami";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Пропустить";
 "createProfile.profileCreated" = "Далее";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -121,11 +121,11 @@
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 
 //Actions
-"actions.blockAction" = "Block";
+"actions.blockAction" = "Заблокировать";
 "actions.deleteAction" = "Удалить";
 "actions.cancelAction" = "Отмена";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.backAction" = "Назад";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Принять";
 "alerts.incomingCallButtonIgnore" = "Игнорировать";
@@ -241,16 +241,18 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Отправть";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
-"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.contactAdded" = "Контакт добавлен";
+"generatedMessage.invitationReceived" = "Получено приглашение";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Исходящий вызов";
 "generatedMessage.incomingCall" = "Входящий вызов";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.missedOutgoingCall" = "Пропущенный исходящий";
+"generatedMessage.missedIncomingCall" = "Пропущенный входящий";
 
 //General Settings
 "generalSettings.title" = "Основные настройки";

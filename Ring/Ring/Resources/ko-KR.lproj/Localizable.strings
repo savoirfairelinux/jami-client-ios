@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "수락";
 "dataTransfer.readableStatusCancel" = "취소";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Send";
 
 
 //Generated Message

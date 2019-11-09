@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Voltooid";
 "dataTransfer.readableStatusAccept" = "Aanvaarden";
 "dataTransfer.readableStatusCancel" = "Annuleren";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Versturen";
 
 
 //Generated Message

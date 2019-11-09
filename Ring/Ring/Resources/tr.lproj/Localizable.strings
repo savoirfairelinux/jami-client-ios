@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Tam";
 "dataTransfer.readableStatusAccept" = "Kabul et";
 "dataTransfer.readableStatusCancel" = "İptal";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Gönder";
 
 
 //Generated Message

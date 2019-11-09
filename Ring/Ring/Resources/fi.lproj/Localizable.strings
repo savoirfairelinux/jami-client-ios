@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Hyväksy";
 "dataTransfer.readableStatusCancel" = "Peruuta";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Lähetä";
 
 
 //Generated Message

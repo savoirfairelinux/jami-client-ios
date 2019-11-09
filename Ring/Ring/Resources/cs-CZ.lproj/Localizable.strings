@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Dokončeno";
 "dataTransfer.readableStatusAccept" = "Přijmout";
 "dataTransfer.readableStatusCancel" = "Zrušit";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Odeslat";
 
 
 //Generated Message

@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "ਮਨਜ਼ੂਰ ਕਰੋ";
 "dataTransfer.readableStatusCancel" = "ਰੱਦ ਕਰੋ";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "ਭੇਜੋ";
 
 
 //Generated Message

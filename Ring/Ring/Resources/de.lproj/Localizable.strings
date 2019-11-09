@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Abgeschlossen";
 "dataTransfer.readableStatusAccept" = "Akzeptieren";
 "dataTransfer.readableStatusCancel" = "Abbrechen";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Senden";
 
 
 //Generated Message

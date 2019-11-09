@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Slutförd";
 "dataTransfer.readableStatusAccept" = "Acceptera";
 "dataTransfer.readableStatusCancel" = "Avbryt";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Skicka";
 
 
 //Generated Message

@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "קבל";
 "dataTransfer.readableStatusCancel" = "ביטול";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "שלח";
 
 
 //Generated Message

@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Завершено";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Отправить";
 
 
 //Generated Message

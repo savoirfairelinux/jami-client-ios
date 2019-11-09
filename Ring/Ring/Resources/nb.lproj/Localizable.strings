@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Fullført";
 "dataTransfer.readableStatusAccept" = "Aksepter";
 "dataTransfer.readableStatusCancel" = "Avbryt";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Send";
 
 
 //Generated Message

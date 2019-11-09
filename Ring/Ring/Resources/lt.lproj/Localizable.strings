@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Priimti";
 "dataTransfer.readableStatusCancel" = "Atsisakyti";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Siųsti";
 
 
 //Generated Message

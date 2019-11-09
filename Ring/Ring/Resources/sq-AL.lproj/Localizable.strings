@@ -118,13 +118,13 @@
 "alerts.confirmDeleteConversationFromContact" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
 "alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
 "alerts.confirmClearConversation" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
-"alerts.confirmClearConversationTitle" = "Pastroje Bisedën";
+"alerts.confirmClearConversationTitle" = "Spastroje Bisedën";
 
 //Actions
 "actions.blockAction" = "Bllokoje";
 "actions.deleteAction" = "Fshije";
 "actions.cancelAction" = "Anuloje";
-"actions.clearAction" = "Pastroje";
+"actions.clearAction" = "Spastroje";
 "actions.backAction" = "Mbrapsht";
 "alerts.incomingCallAllertTitle" = "Thirrje nga";
 "alerts.incomingCallButtonAccept" = "Pranoje";
@@ -212,7 +212,7 @@
 "contactPage.startAudioCall" = "Filloni Thirrje Audio";
 "contactPage.startVideoCall" = "Filloni Thirrje Video";
 "contactPage.sendMessage" = "Dërgoni Mesazh";
-"contactPage.clearConversation" = "Pastroje Bisedën";
+"contactPage.clearConversation" = "Spastroje Bisedën";
 "contactPage.blockContact" = "Bllokoje Kontaktin";
 "contactPage.removeConversation" = "Hiqe Bisedën";
 
@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "E plotë";
 "dataTransfer.readableStatusAccept" = "Pranoje";
 "dataTransfer.readableStatusCancel" = "Anuloje";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "Dërgoje";
 
 
 //Generated Message

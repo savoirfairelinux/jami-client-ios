@@ -241,6 +241,8 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "پذیرش";
 "dataTransfer.readableStatusCancel" = "لغو";
+"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.sendMessage" = "ارسال";
 
 
 //Generated Message
