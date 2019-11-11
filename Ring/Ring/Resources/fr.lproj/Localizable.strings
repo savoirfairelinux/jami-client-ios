@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Supprimer cette conversation";
 "alerts.confirmClearConversation" = "Êtes-vous certains de vouloir effacer cette conversation avec ce contact ?";
 "alerts.confirmClearConversationTitle" = "Effacer la conversation";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Bloquer";
@@ -241,7 +243,7 @@
 "dataTransfer.readableStatusSuccess" = "Terminé";
 "dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuler";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Appuyer pour démarrer l'enregistrement";
 "dataTransfer.sendMessage" = "Envoyer";
 
 

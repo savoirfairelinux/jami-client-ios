@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
 "alerts.confirmClearConversation" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
 "alerts.confirmClearConversationTitle" = "Spastroje Bisedën";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Bllokoje";
@@ -241,7 +243,7 @@
 "dataTransfer.readableStatusSuccess" = "E plotë";
 "dataTransfer.readableStatusAccept" = "Pranoje";
 "dataTransfer.readableStatusCancel" = "Anuloje";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Shtypeni që të fillojë regjistrimi";
 "dataTransfer.sendMessage" = "Dërgoje";
 
 

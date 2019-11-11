@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Usuń rozmowę";
 "alerts.confirmClearConversation" = "Czy jesteś pewny(-a), że chcesz usunąć rozmowę z tym kontaktem?";
 "alerts.confirmClearConversationTitle" = "Wyczyść Rozmowę";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Blokuj";

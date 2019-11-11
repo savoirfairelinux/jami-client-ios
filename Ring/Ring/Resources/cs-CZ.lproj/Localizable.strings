@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Odstranit konverzaci";
 "alerts.confirmClearConversation" = "Jste si jistý, že chcete vyprázdnit konverzaci s tímto kontaktem?";
 "alerts.confirmClearConversationTitle" = "Vyprázdnit konverzaci";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Blokovat";

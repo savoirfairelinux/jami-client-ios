@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Konuşmayı Sil";
 "alerts.confirmClearConversation" = "Bu kişi ile konuşmayı kalıcı olarak temizlemek istediğinizden emin misiniz?";
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Engelleme";

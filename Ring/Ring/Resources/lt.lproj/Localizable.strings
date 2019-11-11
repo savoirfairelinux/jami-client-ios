@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Ištrinti pokalbį";
 "alerts.confirmClearConversation" = "Ar tikrai norite išvalyti pokalbį su šiuo adresatu?";
 "alerts.confirmClearConversationTitle" = "Išvalyti pokalbį";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Užblokuoti";

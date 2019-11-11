@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Unterhaltung löschen";
 "alerts.confirmClearConversation" = "Sicher, dass sie den Gesprächsverlauf mit diesem Kontakt löschen wollen?";
 "alerts.confirmClearConversationTitle" = "Gesprächsverlauf löschen";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Sperren";
