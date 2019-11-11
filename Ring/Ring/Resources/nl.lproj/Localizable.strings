@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Gesprek verwijderen";
 "alerts.confirmClearConversation" = "Weet u zeker dat u het gesprek met dit contact wilt verwijderen?";
 "alerts.confirmClearConversationTitle" = "Gesprek wissen";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Blokkeren";

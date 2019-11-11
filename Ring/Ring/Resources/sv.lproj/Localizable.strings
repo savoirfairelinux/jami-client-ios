@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Ta bort konversation";
 "alerts.confirmClearConversation" = "Vill du verkligen ta bort konversationen med den här kontakten?";
 "alerts.confirmClearConversationTitle" = "Ta bort konversation";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Blockera";

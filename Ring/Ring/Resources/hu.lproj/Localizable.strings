@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Társalgás törlése";
 "alerts.confirmClearConversation" = "Biztos, hogy törli akarja a társalgást ezzel a kapcsolattal?";
 "alerts.confirmClearConversationTitle" = "Társalgás törlése";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Letiltás";
@@ -241,7 +243,7 @@
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Nyomja meg ezt a gombot a felvétel elindításához";
 "dataTransfer.sendMessage" = "Elküld";
 
 

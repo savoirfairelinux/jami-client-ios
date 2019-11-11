@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Изтриване на разговор";
 "alerts.confirmClearConversation" = "Наистина ли искате да изчистите разговора с този контакт?";
 "alerts.confirmClearConversationTitle" = "Изчистване на разговор";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Блокиране";

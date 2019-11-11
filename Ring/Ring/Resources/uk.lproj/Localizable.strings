@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Delete Conversation";
 "alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Заблокувати";

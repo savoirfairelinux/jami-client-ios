@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "Excluir Conversa";
 "alerts.confirmClearConversation" = "Tem certeza de que deseja limpar a conversa com esse contato?";
 "alerts.confirmClearConversationTitle" = "Limpar Conversa";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "Bloquear";

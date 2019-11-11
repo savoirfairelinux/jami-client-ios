@@ -119,6 +119,8 @@
 "alerts.confirmDeleteConversationTitle" = "刪除對話";
 "alerts.confirmClearConversation" = "您確定您想要清除與這個聯絡人的對話嗎？";
 "alerts.confirmClearConversationTitle" = "清除對話";
+"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
 "actions.blockAction" = "阻擋";
@@ -241,7 +243,7 @@
 "dataTransfer.readableStatusSuccess" = "完成";
 "dataTransfer.readableStatusAccept" = "接聽";
 "dataTransfer.readableStatusCancel" = "取消";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "按下以開始錄製";
 "dataTransfer.sendMessage" = "傳送";
 
 
