@@ -451,7 +451,7 @@ class MessageCell: UITableViewCell, NibReusable {
             self.transferImageView.bottomAnchor.constraint(equalTo: self.bubble.bottomAnchor, constant: 0).isActive = true
             if !message.message.incoming && message.initialTransferStatus != .success {
                 self.transferProgressView.frame = self.transferImageView.frame
-                self.transferProgressView.image = image
+                self.transferProgressView.configureViews()
                 self.transferProgressView.progress = 0
                 self.transferProgressView.target = 100
                 self.transferProgressView.currentProgress = 0

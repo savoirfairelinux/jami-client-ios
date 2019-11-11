@@ -24,7 +24,7 @@ import RxSwift
 class ProgressView: UIView {
     var maximumValue: CGFloat = 100
 
-    var imageView: UIImageView = UIImageView()
+    var imageView: UIVisualEffectView = UIVisualEffectView()
     var statusLabel = UILabel()
 
     var disposeBug = DisposeBag()
@@ -43,7 +43,7 @@ class ProgressView: UIView {
                 default:
                     return ""
                 }
-            }),progressVariable
+            }), progressVariable
                 .asObservable()
                 .map({ progressValue in
                 return floor(progressValue)
@@ -62,28 +62,12 @@ class ProgressView: UIView {
             currentProgress += (target - currentProgress) * 0.1
             innerProgress = currentProgress * toAngleScaler
             self.progressVariable.value = newProgress
-            if self.bluredImage == nil {return}
             setImage()
         }
         get {
             return innerProgress / toAngleScaler
         }
     }
-
-    var image: UIImage? {
-        didSet {
-            guard let image = image else {return}
-            if bluredImage != nil {return}
-
-            guard let blureImage = self.blureImage(image: image) else {
-                return
-            }
-            self.bluredImage = blureImage
-            self.configureViews()
-        }
-    }
-
-    var bluredImage: UIImage?
 
     // MARK: configure path
 
@@ -156,7 +140,6 @@ class ProgressView: UIView {
     let maskLayer = CAShapeLayer.init()
 
     override func removeFromSuperview() {
-        self.bluredImage = nil
         self.disposeBug = DisposeBag()
         self.progress = 0.00
         self.target = 100
@@ -166,34 +149,14 @@ class ProgressView: UIView {
         super.removeFromSuperview()
     }
 
-    func blureImage(image: UIImage) -> UIImage? {
-        let context = CIContext(options: nil)
-        let inputImage = CIImage(image: image)
-        let originalOrientation = image.imageOrientation
-        let originalScale = image.scale
-        let filterColor = CIFilter(name: "CIExposureAdjust")
-        filterColor?.setValue(-2, forKey: "inputEV")
-        filterColor?.setValue(inputImage, forKey: kCIInputImageKey)
-        let filterClamp = CIFilter(name: "CIAffineClamp")
-        let transform = CGAffineTransform.identity
-        filterClamp?.setValue(transform, forKey: "inputTransform")
-        filterClamp?.setValue(filterColor?.outputImage, forKey: kCIInputImageKey)
-        let filterGausse = CIFilter(name: "CIGaussianBlur")
-        filterGausse?.setValue(4.0, forKey: kCIInputRadiusKey)
-        filterGausse?.setValue(filterClamp?.outputImage, forKey: kCIInputImageKey)
-        let outputImage = filterGausse?.outputImage
-        var cgImage: CGImage?
-        guard let blurImage = outputImage else { return nil}
-        cgImage = context.createCGImage(blurImage, from: (inputImage?.extent)!)
-        guard let finaleImage = cgImage else { return nil }
-        return UIImage(cgImage: finaleImage, scale: originalScale, orientation: originalOrientation)
-    }
-
     func configureViews() {
+        self.backgroundColor = UIColor.clear
         self.layer.cornerRadius = 20
         self.layer.masksToBounds = true
+        let darkBlur = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        self.imageView = UIVisualEffectView(effect: darkBlur)
+        self.imageView.alpha = 0.9
         self.imageView.frame = self.bounds
-        self.imageView.image = bluredImage
         maskLayer.frame = self.bounds
         self.imageView.layer.mask = maskLayer
         self.addSubview(self.imageView)
