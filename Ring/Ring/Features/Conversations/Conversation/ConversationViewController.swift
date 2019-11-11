@@ -84,22 +84,94 @@ class ConversationViewController: UIViewController,
         self.viewModel.sendFile(filePath: filePath, displayName: fileName)
     }
 
+    func showNoPermissionsAlert(title: String) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_: UIAlertAction!) -> Void in }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func checkPhotoLibraryPermission() {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized:
+            self.importImage()
+        case .denied, .restricted :
+            self.showNoPermissionsAlert(title: L10n.Alerts.noLibraryPermissionsTitle)
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { status in
+                switch status {
+                case .authorized:
+                    self.importImage()
+                case .denied, .restricted:
+                    self.showNoPermissionsAlert(title: L10n.Alerts.noLibraryPermissionsTitle)
+                case .notDetermined:
+                    break
+                @unknown default:
+                    break
+                }
+            }
+        @unknown default:
+            break
+        }
+    }
+
     @objc func imageTapped() {
 
         let alert = UIAlertController.init(title: nil,
                                            message: nil,
                                            preferredStyle: .alert)
 
-        let pictureAction = UIAlertAction(title: "Upload photo or movie", style: UIAlertAction.Style.default) { _ in
-            self.importImage()
+        let pictureAction = UIAlertAction(title: "Upload photo or movie", style: UIAlertAction.Style.default) {[weak self] _ in
+            self?.checkPhotoLibraryPermission()
         }
 
-        let recordVideoAction = UIAlertAction(title: "Record a video message", style: UIAlertAction.Style.default) { _ in
-            self.viewModel.recordVideoFile()
+        let recordVideoAction = UIAlertAction(title: "Record a video message", style: UIAlertAction.Style.default) {[weak self] _ in
+            if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) ==  AVAuthorizationStatus.authorized {
+                if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) ==  AVAuthorizationStatus.authorized {
+                    self?.viewModel.recordVideoFile()
+                } else {
+                    AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
+                        if granted == true {
+                            self?.viewModel.recordVideoFile()
+                        } else {
+                            self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+                        }
+                    })
+                }
+            } else {
+                AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { (granted: Bool) -> Void in
+                    if granted == true {
+                        if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) ==  AVAuthorizationStatus.authorized {
+                            self?.viewModel.recordVideoFile()
+                        } else {
+                            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
+                                if granted == true {
+                                    self?.viewModel.recordVideoFile()
+                                } else {
+                                    self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+                                }
+                            })
+                        }
+                    } else {
+                        self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+                    }
+                })
+            }
         }
 
-        let recordAudioAction = UIAlertAction(title: "Record an audio message", style: UIAlertAction.Style.default) { _ in
-            self.viewModel.recordAudioFile()
+        let recordAudioAction = UIAlertAction(title: "Record an audio message", style: UIAlertAction.Style.default) { [weak self] _ in
+            if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) ==  AVAuthorizationStatus.authorized {
+                self?.viewModel.recordAudioFile()
+            } else {
+                AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { (granted: Bool) -> Void in
+                    if granted == true {
+                        self?.viewModel.recordAudioFile()
+                    } else {
+                        self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+                    }
+                })
+            }
         }
 
         let documentsAction = UIAlertAction(title: "Upload file", style: UIAlertAction.Style.default) { _ in
