@@ -178,6 +178,10 @@ internal enum L10n {
     internal static let incomingCallButtonAccept = L10n.tr("Localizable", "alerts.incomingCallButtonAccept")
     /// Ignore
     internal static let incomingCallButtonIgnore = L10n.tr("Localizable", "alerts.incomingCallButtonIgnore")
+    /// Access to photo library not granted
+    internal static let noLibraryPermissionsTitle = L10n.tr("Localizable", "alerts.noLibraryPermissionsTitle")
+    /// Media permission not granted
+    internal static let noMediaPermissionsTitle = L10n.tr("Localizable", "alerts.noMediaPermissionsTitle")
     /// Cancel
     internal static let profileCancelPhoto = L10n.tr("Localizable", "alerts.profileCancelPhoto")
     /// Take photo
