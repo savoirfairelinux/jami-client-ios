@@ -352,9 +352,6 @@ class CallsService: CallsAdapterDelegate {
         return false
     }
 
-    func newCallStarted(withAccountId accountId: String, callId: String, toURI uri: String) {
-    }
-
     func callPlacedOnHold(withCallId callId: String, holding: Bool) {
         guard let call = self.calls[callId] else {
             return
