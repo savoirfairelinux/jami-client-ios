@@ -48,8 +48,8 @@ protocol FrameExtractorDelegate: class {
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
-    let namePortrait = "frontCameraPortrait"
-    let nameDevice1280_720 = "frontCameraPortrait1280_720"
+    let namePortrait = "mediumCamera"
+    let nameDevice1280_720 = "1280_720Camera"
 
     private let log = SwiftyBeaver.self
 
