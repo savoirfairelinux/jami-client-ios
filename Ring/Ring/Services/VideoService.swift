@@ -53,7 +53,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private let log = SwiftyBeaver.self
 
-    private var quality = AVCaptureSession.Preset.hd1280x720
+    private var quality = AVCaptureSession.Preset.high
     private var orientation = AVCaptureVideoOrientation.portrait
 
     func setQuality(quality: AVCaptureSession.Preset) {
@@ -330,12 +330,12 @@ class VideoService: FrameExtractorDelegate {
             self.log.debug("Camera successfully configured")
             let hd1280x720Device: [String: String] = try camera
                 .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
-                               quality: AVCaptureSession.Preset.hd1280x720)
+                               quality: AVCaptureSession.Preset.high)
             let frontPortraitCameraDevInfo: [String: String] = try camera
                     .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
                                    quality: AVCaptureSession.Preset.medium)
             if self.hardwareAccelerated {
-                self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
+                self.camera.setQuality(quality: AVCaptureSession.Preset.high)
                 videoAdapter.addVideoDevice(withName: camera.namePortrait,
                                             withDevInfo: frontPortraitCameraDevInfo)
                 videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
@@ -414,7 +414,7 @@ extension VideoService: VideoAdapterDelegate {
     func setEncodingAccelerated(withState state: Bool) {
         videoAdapter.setEncodingAccelerated(state)
         if state {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
+            self.camera.setQuality(quality: AVCaptureSession.Preset.high)
             self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
         } else {
             self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
@@ -451,12 +451,20 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func prepareVideoRecording() {
+        //set default resolution(high) to avoid crash on encoding
+        //TODO fix on daemon
+        self.camera.setQuality(quality: AVCaptureSession.Preset.high)
+        self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
         self.videoAdapter.startCamera()
     }
 
     func videRecordingFinished() {
         self.videoAdapter.stopCamera()
         self.stopAudioDevice()
+        if !self.hardwareAccelerated {
+            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+            self.videoAdapter.setDefaultDevice(camera.namePortrait)
+        }
     }
 
     func stopCapture() {
