@@ -23,7 +23,6 @@
     func didChangeCallState(withCallId callId: String, state: String, stateCode: NSInteger)
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String])
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String)
-    func newCallStarted(withAccountId accountId: String, callId: String, toURI uri: String)
     func callPlacedOnHold(withCallId callId: String, holding: Bool)
     func audioMuted(call callId: String, mute: Bool)
     func videoMuted(call callId: String, mute: Bool)
