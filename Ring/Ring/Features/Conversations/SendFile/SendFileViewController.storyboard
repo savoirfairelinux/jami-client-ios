@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aV0-zI-lAB">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aV0-zI-lAB">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,37 +39,83 @@
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpy-M8-dcl">
                                 <rect key="frame" x="0.0" y="-40" width="414" height="936"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VY5-pJ-9ym">
                                 <rect key="frame" x="0.0" y="20" width="414" height="876"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CmC-YP-hvn">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="CmC-YP-hvn">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sYA-1M-QNG">
+                                                <rect key="frame" x="0.0" y="50" width="10" height="10"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="10" id="JoO-WS-OVI"/>
+                                                    <constraint firstAttribute="width" constant="10" id="JzA-iw-1H8"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDT-uh-SDA">
+                                                <rect key="frame" x="10" y="25" width="35" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="aDR-jh-Zan"/>
+                                                    <constraint firstAttribute="width" constant="35" id="lp7-nl-rOx"/>
+                                                </constraints>
+                                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
+                                                <state key="normal" backgroundImage="switch_camera">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5U-yl-lIY">
-                                                <rect key="frame" x="0.0" y="15" width="414" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="45" y="10" width="324" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TW1-rZ-V7t">
+                                                <rect key="frame" x="369" y="26" width="35" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="35" id="eep-lO-kRx"/>
+                                                    <constraint firstAttribute="width" constant="35" id="i1Q-qM-bjD"/>
+                                                </constraints>
+                                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJA-MR-8rQ">
+                                                <rect key="frame" x="404" y="50" width="10" height="10"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="10" id="KKM-a1-aTT"/>
+                                                    <constraint firstAttribute="width" constant="10" id="PuR-eq-7zM"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="X5d-Sz-cEW"/>
+                                            <constraint firstItem="y5U-yl-lIY" firstAttribute="bottom" secondItem="VDT-uh-SDA" secondAttribute="bottom" id="G26-yc-f3u"/>
+                                            <constraint firstAttribute="height" constant="60" id="X5d-Sz-cEW"/>
                                         </constraints>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Uq-7I-l00">
+                                        <rect key="frame" x="0.0" y="60" width="414" height="10"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="yN2-Hm-8rP"/>
+                                        </constraints>
+                                    </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5cM-go-ABS">
-                                        <rect key="frame" x="0.0" y="80" width="414" height="686"/>
+                                        <rect key="frame" x="0.0" y="70" width="414" height="696"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WLV-u3-Kwu">
                                         <rect key="frame" x="0.0" y="766" width="414" height="110"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mp-t8-oLW">
-                                                <rect key="frame" x="0.0" y="37" width="103.5" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <rect key="frame" x="0.0" y="35.5" width="103.5" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <state key="normal" title="Cancel">
-                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAJ-AB-n9z">
@@ -125,10 +169,10 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTf-Ik-eJC">
-                                                <rect key="frame" x="207" y="37" width="103.5" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <rect key="frame" x="207" y="35.5" width="103.5" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <state key="normal" title="Send">
-                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llD-W9-Bdb">
@@ -150,8 +194,8 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press to start recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="472-E9-M3O">
-                                <rect key="frame" x="107" y="732" width="200" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="97.5" y="729.5" width="219" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -168,7 +212,7 @@
                             <constraint firstItem="ORV-Mq-8UM" firstAttribute="trailing" secondItem="I2W-SJ-cNf" secondAttribute="trailing" id="Kh8-ty-AAw"/>
                             <constraint firstAttribute="bottom" secondItem="ORV-Mq-8UM" secondAttribute="bottom" id="MKA-nc-EmJ"/>
                             <constraint firstItem="ORV-Mq-8UM" firstAttribute="leading" secondItem="I2W-SJ-cNf" secondAttribute="leading" id="QJP-Zh-ac4"/>
-                            <constraint firstItem="5cM-go-ABS" firstAttribute="height" secondItem="vyN-fe-XeL" secondAttribute="height" constant="-210" id="ZA7-rz-ccX"/>
+                            <constraint firstItem="5cM-go-ABS" firstAttribute="height" secondItem="vyN-fe-XeL" secondAttribute="height" constant="-200" id="ZA7-rz-ccX"/>
                             <constraint firstItem="wpy-M8-dcl" firstAttribute="leading" secondItem="VY5-pJ-9ym" secondAttribute="leading" id="bBw-S1-KmO"/>
                             <constraint firstItem="wpy-M8-dcl" firstAttribute="trailing" secondItem="VY5-pJ-9ym" secondAttribute="trailing" id="dv8-9w-D2k"/>
                             <constraint firstAttribute="bottom" secondItem="VY5-pJ-9ym" secondAttribute="bottom" id="gEb-Oq-lki"/>
@@ -184,6 +228,7 @@
                         <outlet property="preview" destination="5cM-go-ABS" id="7Ib-on-2qN"/>
                         <outlet property="recordButton" destination="ms2-a3-HQy" id="MDq-AY-eP9"/>
                         <outlet property="sendButton" destination="CTf-Ik-eJC" id="lmm-LK-hkD"/>
+                        <outlet property="switchButton" destination="VDT-uh-SDA" id="mXx-lG-nxl"/>
                         <outlet property="timerLabel" destination="y5U-yl-lIY" id="9x4-tm-use"/>
                     </connections>
                 </viewController>
@@ -192,4 +237,7 @@
             <point key="canvasLocation" x="76.811594202898561" y="47.544642857142854"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="switch_camera" width="25" height="25"/>
+    </resources>
 </document>
