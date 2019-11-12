@@ -33,6 +33,7 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var switchButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var placeholderLabel: UILabel!
@@ -61,10 +62,18 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.sendFile()
             }).disposed(by: self.disposeBag)
+        self.switchButton.rx.tap
+        .subscribe(onNext: { [unowned self] in
+            self.viewModel.switchCamera()
+        }).disposed(by: self.disposeBag)
 
         self.viewModel.hidePreview
             .observeOn(MainScheduler.instance)
             .bind(to: self.preview.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        self.viewModel.hidePreview
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.switchButton.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.readyToSend
             .map {!$0}
@@ -114,4 +123,5 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         self.cancelButton.setTitle(L10n.Actions.cancelAction, for: .normal)
         self.infoLabel.text = L10n.DataTransfer.infoMessage
     }
+
 }
