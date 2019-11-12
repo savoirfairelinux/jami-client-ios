@@ -406,7 +406,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
-            if rootViewController.responds(to: #selector(CallViewController.canRotate)) {
+            if rootViewController.responds(to: #selector(CallViewController.canRotate)) {//|| //rootViewController.responds(to: #selector(SendFileViewController.canRotate)) {
                 return .all
             }
         }

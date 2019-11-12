@@ -171,4 +171,9 @@ class SendFileViewModel: Stateable, ViewModel {
         self.videoService.videRecordingFinished()
         recordingState.value = .sent
     }
+
+    func switchCamera() {
+        self.videoService.switchCamera()
+    }
+
 }
