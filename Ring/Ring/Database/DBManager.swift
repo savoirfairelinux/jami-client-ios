@@ -592,11 +592,15 @@ class DBManager {
                               message: MessageModel,
                               duration: Int,
                               dataBase: Connection) -> Int64? {
+        var status = InteractionStatus.unknown.rawValue
+        if interactionType == .oTransfer {
+            status = InteractionStatus(status: message.transferStatus).rawValue
+        }
         let timeInterval = message.receivedDate.timeIntervalSince1970
         let interaction = Interaction(defaultID, author,
                                       conversationID, Int64(timeInterval), Int64(duration),
                                       message.content, interactionType.rawValue,
-                                      InteractionStatus.unknown.rawValue, message.daemonId,
+                                     status, message.daemonId,
                                       message.incoming)
         return self.interactionHepler.insert(item: interaction, dataBase: dataBase)
     }
