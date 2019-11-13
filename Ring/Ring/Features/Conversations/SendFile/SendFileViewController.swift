@@ -33,13 +33,32 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var switchButton: UIButton!
+    @IBOutlet weak var placeholderButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var placeholderLabel: UILabel!
+    @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewRightConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.applyL10()
+        let isAudio = self.viewModel.audioOnly
+        viewBottomConstraint.constant = isAudio ? 120 : 0
+        viewLeftConstraint.constant = isAudio ? 20 : 0
+        viewRightConstraint.constant = isAudio ? 20 : 0
+        self.bindViewsToViewModel()
+    }
+
+    func applyL10() {
+        self.sendButton.setTitle(L10n.DataTransfer.sendMessage, for: .normal)
+        self.cancelButton.setTitle(L10n.Actions.cancelAction, for: .normal)
+        self.infoLabel.text = L10n.DataTransfer.infoMessage
+    }
+
+    func bindViewsToViewModel() {
         self.viewModel.capturedFrame
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
@@ -50,25 +69,40 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                 }
             }).disposed(by: self.disposeBag)
         self.cancelButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.cancel()
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.cancel()
             }).disposed(by: self.disposeBag)
         self.recordButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.triggerRecording()
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.triggerRecording()
             }).disposed(by: self.disposeBag)
         self.sendButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.sendFile()
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.sendFile()
+            }).disposed(by: self.disposeBag)
+        self.switchButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.switchCamera()
             }).disposed(by: self.disposeBag)
 
-        self.viewModel.hidePreview
+        self.viewModel.hideVideoControls
             .observeOn(MainScheduler.instance)
             .bind(to: self.preview.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        self.viewModel.hideVideoControls
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.placeholderButton.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        self.viewModel.hideVideoControls
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.switchButton.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.readyToSend
             .map {!$0}
             .drive(self.sendButton.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        self.viewModel.readyToSend
+            .drive(self.placeholderLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.duration
             .drive(self.timerLabel.rx.text)
@@ -77,12 +111,11 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] finished in
                 if finished {
-                    self?.dismiss(animated: true, completion: nil)
+                    self?
+                        .dismiss(animated: !(self?.viewModel.audioOnly ?? false),
+                                 completion: nil)
                 }
             }).disposed(by: self.disposeBag)
-        self.viewModel.readyToSend
-            .drive(self.placeholderLabel.rx.isHidden)
-            .disposed(by: self.disposeBag)
         self.viewModel.recording
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] recording in
@@ -107,11 +140,5 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         self.viewModel.hideInfo
             .drive(self.infoLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
-    }
-
-    func applyL10() {
-        self.sendButton.setTitle(L10n.DataTransfer.sendMessage, for: .normal)
-        self.cancelButton.setTitle(L10n.Actions.cancelAction, for: .normal)
-        self.infoLabel.text = L10n.DataTransfer.infoMessage
     }
 }

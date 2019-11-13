@@ -47,7 +47,7 @@ class SendFileViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var hidePreview: Observable<Bool> = {
+    lazy var hideVideoControls: Observable<Bool> = {
         Observable.just(audioOnly)
     }()
 
@@ -63,7 +63,7 @@ class SendFileViewModel: Stateable, ViewModel {
         recordingState
             .asObservable()
             .map({ state in
-                state != .initial
+                state != .initial || !self.audioOnly
             }).share()
             .asDriver(onErrorJustReturn: false)
     }()
@@ -170,5 +170,9 @@ class SendFileViewModel: Stateable, ViewModel {
         }
         self.videoService.videRecordingFinished()
         recordingState.value = .sent
+    }
+
+    func switchCamera() {
+        self.videoService.switchCamera()
     }
 }
