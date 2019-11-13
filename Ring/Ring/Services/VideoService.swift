@@ -364,7 +364,7 @@ class VideoService: FrameExtractorDelegate {
         }).disposed(by: self.disposeBag)
     }
 
-    func setCameraOrientation(orientation: UIDeviceOrientation, callID: String?) {
+    func setCameraOrientation(orientation: UIDeviceOrientation) {
         var newOrientation: AVCaptureVideoOrientation
         switch orientation {
         case .portrait:
@@ -455,6 +455,9 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func videRecordingFinished() {
+        if self.cameraPosition == .back {
+            self.switchCamera()
+        }
         self.videoAdapter.stopCamera()
         self.stopAudioDevice()
     }
@@ -469,15 +472,20 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func getImageOrienation() -> UIImage.Orientation {
+        let shouldMirror = cameraPosition == AVCaptureDevice.Position.front
         switch self.currentOrientation {
         case AVCaptureVideoOrientation.portrait:
-            return UIImage.Orientation.up
+            return shouldMirror ? UIImage.Orientation.upMirrored :
+                UIImage.Orientation.up
         case AVCaptureVideoOrientation.portraitUpsideDown:
-            return UIImage.Orientation.down
+            return shouldMirror ? UIImage.Orientation.downMirrored :
+                UIImage.Orientation.down
         case AVCaptureVideoOrientation.landscapeRight:
-            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.left : UIImage.Orientation.right
+            return shouldMirror ? UIImage.Orientation.rightMirrored :
+                UIImage.Orientation.right
         case AVCaptureVideoOrientation.landscapeLeft:
-            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.right : UIImage.Orientation.left
+            return shouldMirror ? UIImage.Orientation.leftMirrored :
+                UIImage.Orientation.left
         @unknown default:
             return UIImage.Orientation.up
         }
@@ -504,31 +512,9 @@ extension VideoService: VideoAdapterDelegate {
         videoAdapter.stopAudioDevice()
     }
 
-    func startLocalRecorder(audioOnly: Bool) -> String? {
-        //configure path
-        let recordingsFolderName = "recorded"
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return nil
-        }
-        let directoryURL = documentsURL.appendingPathComponent(recordingsFolderName)
-        var isDirectory = ObjCBool(false)
-        let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
-        if !directoryExists || !isDirectory.boolValue {
-            do {
-                try FileManager.default.createDirectory(atPath: directoryURL.path, withIntermediateDirectories: true, attributes: nil)
-            } catch _ as NSError {
-                return nil
-            }
-        }
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-        let random = String(arc4random_uniform(9999))
-        let fileName = dateString + "_" + random
-        let videoURL = directoryURL.appendingPathComponent(fileName, isDirectory: false)
+    func startLocalRecorder(audioOnly: Bool, path: String) -> String? {
         self.recording = true
-        return self.videoAdapter.startLocalRecording(videoURL.path, audioOnly: audioOnly)
+        return self.videoAdapter.startLocalRecording(path, audioOnly: audioOnly)
     }
 
     func stopLocalRecorder(path: String) {

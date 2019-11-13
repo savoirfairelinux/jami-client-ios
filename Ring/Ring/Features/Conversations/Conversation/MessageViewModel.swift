@@ -191,14 +191,16 @@ class MessageViewModel {
 
     func transferedFile(conversationID: String) -> URL? {
         guard let account = self.accountService.currentAccount else {return nil}
-        if !self.message.incoming {return nil}
         if self.lastTransferStatus != .success &&
             self.message.transferStatus != .success {
             return nil
         }
         let transferInfo = transferFileData
+        let folderName = self.message.incoming ? Directories.downloads.rawValue : Directories.recorded.rawValue
         return self.dataTransferService
-            .getFileUrl(fileName: transferInfo.fileName, accountID: account.id,
+            .getFileUrl(fileName: transferInfo.fileName,
+                        inFolder: folderName,
+                        accountID: account.id,
                         conversationID: conversationID)
     }
 

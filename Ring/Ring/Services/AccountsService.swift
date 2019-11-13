@@ -624,6 +624,15 @@ class AccountsService: AccountAdapterDelegate {
         self.loadAccountsFromDaemon()
         if self.getAccount(fromAccountId: id) == nil {
             self.dbManager.removeDBForAccount(accountId: id)
+            guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+                return
+            }
+            let downloadsURL = documentsURL.appendingPathComponent(Directories.downloads.rawValue)
+                .appendingPathComponent(id)
+            try? FileManager.default.removeItem(atPath: downloadsURL.path)
+            let recordingsURL = documentsURL.appendingPathComponent(Directories.recorded.rawValue)
+                .appendingPathComponent(id)
+            try? FileManager.default.removeItem(atPath: recordingsURL.path)
         }
     }
 
