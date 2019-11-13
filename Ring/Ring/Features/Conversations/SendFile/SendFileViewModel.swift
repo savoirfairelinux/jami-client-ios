@@ -63,7 +63,7 @@ class SendFileViewModel: Stateable, ViewModel {
         recordingState
             .asObservable()
             .map({ state in
-                state != .initial
+                state != .initial || !self.audioOnly
             }).share()
             .asDriver(onErrorJustReturn: false)
     }()
@@ -171,4 +171,9 @@ class SendFileViewModel: Stateable, ViewModel {
         self.videoService.videRecordingFinished()
         recordingState.value = .sent
     }
+
+    func switchCamera() {
+        self.videoService.switchCamera()
+    }
+
 }

@@ -110,7 +110,7 @@ class CallViewModel: Stateable, ViewModel {
                 return call.state == .over || call.state == .failure
             }).map({ [weak self] hide in
                 if hide {
-                    self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation, callID: nil)
+                    self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
                     self?.videoService.stopAudioDevice()
                     if #available(iOS 10.0, *), let call = self?.call {
                         self?.callsProvider.stopCall(callUUID: call.callUUID)
@@ -319,10 +319,9 @@ class CallViewModel: Stateable, ViewModel {
             return call.callId == self?.call?.callId
         }).map({ call in
             return call.state == .current
-        }).subscribe(onNext: { [weak self] call in
+        }).subscribe(onNext: { [weak self] _ in
             self?.videoService
-                .setCameraOrientation(orientation: UIDevice.current.orientation,
-                                      callID: self?.call?.callId)
+                .setCameraOrientation(orientation: UIDevice.current.orientation)
         }).disposed(by: self.disposeBag)
         callsProvider.sharedResponseStream
             .filter({ [unowned self] serviceEvent in
@@ -460,8 +459,7 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     func setCameraOrientation(orientation: UIDeviceOrientation) {
-        videoService.setCameraOrientation(orientation: orientation,
-                                          callID: self.call?.callId)
+        videoService.setCameraOrientation(orientation: orientation)
     }
 
     func showDialpad() {

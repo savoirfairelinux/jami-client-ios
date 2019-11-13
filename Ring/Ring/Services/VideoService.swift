@@ -364,7 +364,7 @@ class VideoService: FrameExtractorDelegate {
         }).disposed(by: self.disposeBag)
     }
 
-    func setCameraOrientation(orientation: UIDeviceOrientation, callID: String?) {
+    func setCameraOrientation(orientation: UIDeviceOrientation) {
         var newOrientation: AVCaptureVideoOrientation
         switch orientation {
         case .portrait:
@@ -455,6 +455,9 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func videRecordingFinished() {
+        if self.cameraPosition == .back {
+            self.switchCamera()
+        }
         self.videoAdapter.stopCamera()
         self.stopAudioDevice()
     }
@@ -471,13 +474,13 @@ extension VideoService: VideoAdapterDelegate {
     func getImageOrienation() -> UIImage.Orientation {
         switch self.currentOrientation {
         case AVCaptureVideoOrientation.portrait:
-            return UIImage.Orientation.up
+            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.upMirrored : UIImage.Orientation.up
         case AVCaptureVideoOrientation.portraitUpsideDown:
-            return UIImage.Orientation.down
+            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.downMirrored : UIImage.Orientation.down
         case AVCaptureVideoOrientation.landscapeRight:
-            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.left : UIImage.Orientation.right
+            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.rightMirrored : UIImage.Orientation.right
         case AVCaptureVideoOrientation.landscapeLeft:
-            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.right : UIImage.Orientation.left
+            return cameraPosition == AVCaptureDevice.Position.front ? UIImage.Orientation.leftMirrored : UIImage.Orientation.left
         @unknown default:
             return UIImage.Orientation.up
         }
