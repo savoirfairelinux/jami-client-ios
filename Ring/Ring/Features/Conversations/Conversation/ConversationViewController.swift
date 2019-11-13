@@ -920,10 +920,9 @@ extension ConversationViewController: UITableViewDataSource {
                             }
                         })
                         .disposed(by: cell.disposeBag)
-
-                    if item.message.transferStatus == .success {
-                        self.addShareAction(cell: cell, item: item)
-                    }
+                }
+                if item.message.transferStatus == .success {
+                    self.addShareAction(cell: cell, item: item)
                 }
             }
 

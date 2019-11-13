@@ -47,7 +47,7 @@ class SendFileViewModel: Stateable, ViewModel {
         })
     }()
 
-    lazy var hidePreview: Observable<Bool> = {
+    lazy var hideVideoControls: Observable<Bool> = {
         Observable.just(audioOnly)
     }()
 
@@ -62,8 +62,8 @@ class SendFileViewModel: Stateable, ViewModel {
     lazy var hideInfo: Driver<Bool> = {
         recordingState
             .asObservable()
-            .map({ state in
-                state != .initial
+            .map({ [weak self] state in
+                state != .initial || !(self?.audioOnly ?? true)
             }).share()
             .asDriver(onErrorJustReturn: false)
     }()
@@ -136,8 +136,15 @@ class SendFileViewModel: Stateable, ViewModel {
     }
 
     func startRecording() {
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        let random = String(arc4random_uniform(9999))
+        let nameForRecordingFile = dateString + "_" + random
+        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile, accountID: conversation.accountId, conversationID: conversation.conversationId) else {return}
         guard let name = self.videoService
-            .startLocalRecorder(audioOnly: audioOnly) else {
+            .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
                 return
         }
         recordingState.value = .recording
@@ -170,5 +177,10 @@ class SendFileViewModel: Stateable, ViewModel {
         }
         self.videoService.videRecordingFinished()
         recordingState.value = .sent
+        try? FileManager.default.removeItem(atPath: fileName)
+    }
+
+    func switchCamera() {
+        self.videoService.switchCamera()
     }
 }

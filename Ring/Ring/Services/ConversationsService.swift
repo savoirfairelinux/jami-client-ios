@@ -356,13 +356,17 @@ class ConversationsService {
     }
 
     func removeSavedFiles(accountId: String, conversationId: String) {
-        let downloadsFolderName = "downloads"
+        let downloadsFolderName = Directories.downloads.rawValue
         guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return
         }
-        let directoryURL = documentsURL.appendingPathComponent(downloadsFolderName)
+        let downloadsURL = documentsURL.appendingPathComponent(downloadsFolderName)
             .appendingPathComponent(accountId).appendingPathComponent(conversationId)
-        try? FileManager.default.removeItem(atPath: directoryURL.path)
+        try? FileManager.default.removeItem(atPath: downloadsURL.path)
+        let recordedFolderName = Directories.recorded.rawValue
+        let recordedURL = documentsURL.appendingPathComponent(recordedFolderName)
+            .appendingPathComponent(accountId).appendingPathComponent(conversationId)
+        try? FileManager.default.removeItem(atPath: recordedURL.path)
     }
 
     func messageStatusChanged(_ status: MessageStatus,

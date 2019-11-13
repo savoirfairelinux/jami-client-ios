@@ -33,6 +33,11 @@ enum DataTransferServiceError: Error {
     case updateTransferError
 }
 
+enum Directories: String {
+    case recorded
+    case downloads
+}
+
 enum DataTransferStatus: CustomStringConvertible {
     var description: String {
         switch self {
@@ -140,8 +145,14 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         }
     }
 
-    func getFileUrl(fileName: String, accountID: String, conversationID: String) -> URL? {
-        guard let pathUrl = getFilePath(fileName: fileName, accountID: accountID, conversationID: conversationID) else {return nil}
+    func getFileUrl(fileName: String,
+                    inFolder: String,
+                    accountID: String,
+                    conversationID: String) -> URL? {
+        guard let pathUrl = getFilePath(fileName: fileName,
+                                        inFolder: inFolder,
+                                        accountID: accountID,
+                                        conversationID: conversationID) else {return nil}
         let fileManager = FileManager.default
         var file: URL?
         if fileManager.fileExists(atPath: pathUrl.path) {
@@ -149,6 +160,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         }
         return file
     }
+
     /*
      to avoid creating images multiple time keep images in dictionary
      images saved in app document folder referenced by conversationId concatinated with image name
@@ -192,7 +204,9 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                           maxSize: CGFloat,
                           accountID: String,
                           conversationID: String) -> UIImage? {
-        guard let pathUrl = getFilePath(fileName: name, accountID: accountID,
+        guard let pathUrl = getFilePath(fileName: name,
+                                        inFolder: Directories.downloads.rawValue,
+                                        accountID: accountID,
                                         conversationID: conversationID) else {return nil}
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(
@@ -219,7 +233,9 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     func isTransferImage(withId transferId: UInt64, accountID: String, conversationID: String) -> Bool? {
         guard let info = getTransferInfo(withId: transferId) else { return nil }
         guard let pathUrl = getFilePath(fileName: info.displayName,
-                                        accountID: accountID, conversationID: conversationID) else { return nil }
+                                        inFolder: Directories.downloads.rawValue,
+                                        accountID: accountID,
+                                        conversationID: conversationID) else { return nil }
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
                                                               fileExtension,
@@ -286,37 +302,40 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     // MARK: private
 
-    fileprivate func getFilePath(fileName: String, accountID: String, conversationID: String) -> URL? {
-        let downloadsFolderName = "downloads"
+    fileprivate func getFilePath(fileName: String, inFolder: String, accountID: String, conversationID: String) -> URL? {
+        let folderName = inFolder
         guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }
-        let directoryURL = documentsURL.appendingPathComponent(downloadsFolderName)
+        let directoryURL = documentsURL.appendingPathComponent(folderName)
             .appendingPathComponent(accountID).appendingPathComponent(conversationID)
         return directoryURL.appendingPathComponent(fileName)
     }
 
-    fileprivate func getFilePathForTransfer(forFile fileName: String, accountID: String, conversationID: String) -> URL? {
-        let downloadsFolderName = "downloads"
+    fileprivate func getFilePathForDirectory(directory: String, fileName: String, accountID: String, conversationID: String) -> URL? {
+        let folderName = directory
         let fileNameOnly = (fileName as NSString).deletingPathExtension
         let fileExtensionOnly = (fileName as NSString).pathExtension
         var filePathUrl: URL?
         guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }
-        let directoryURL = documentsURL.appendingPathComponent(downloadsFolderName)
+        let directoryURL = documentsURL.appendingPathComponent(folderName)
             .appendingPathComponent(accountID).appendingPathComponent(conversationID)
         var isDirectory = ObjCBool(false)
         let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
         if directoryExists && isDirectory.boolValue {
+            if directory == Directories.recorded.rawValue {
+                return directoryURL.appendingPathComponent(fileName, isDirectory: false)
+            }
             // check if file exists, if so add " (<duplicates+1>)" or "_<duplicates+1>"
-            // first check /.../AppData/Documents/downloads/<fileNameOnly>.<fileExtensionOnly>
+            // first check /.../AppData/Documents/directory/<fileNameOnly>.<fileExtensionOnly>
             var finalFileName = fileNameOnly + "." + fileExtensionOnly
             var filePathCheck = directoryURL.appendingPathComponent(finalFileName)
             var fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
             var duplicates = 2
             while fileExists {
-                // check /.../AppData/Documents/downloads/<fileNameOnly>_<duplicates>.<fileExtensionOnly>
+                // check /.../AppData/Documents/directory/<fileNameOnly>_<duplicates>.<fileExtensionOnly>
                 finalFileName = fileNameOnly + "_" + String(duplicates) + "." + fileExtensionOnly
                 filePathCheck = directoryURL.appendingPathComponent(finalFileName)
                 fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
@@ -327,12 +346,26 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         // need to create dir
         do {
             try FileManager.default.createDirectory(atPath: directoryURL.path, withIntermediateDirectories: true, attributes: nil)
-            filePathUrl = directoryURL.appendingPathComponent(fileName)
+            filePathUrl = directoryURL.appendingPathComponent(fileName, isDirectory: false)
             return filePathUrl
         } catch _ as NSError {
             self.log.error("DataTransferService: error creating dir")
             return nil
         }
+    }
+
+    fileprivate func getFilePathForTransfer(forFile fileName: String, accountID: String, conversationID: String) -> URL? {
+        return self.getFilePathForDirectory(directory: Directories.downloads.rawValue,
+                                            fileName: fileName,
+                                            accountID: accountID,
+                                            conversationID: conversationID)
+    }
+
+    func getFilePathForRecordings(forFile fileName: String, accountID: String, conversationID: String) -> URL? {
+        return self.getFilePathForDirectory(directory: Directories.recorded.rawValue,
+                                            fileName: fileName,
+                                            accountID: accountID,
+                                            conversationID: conversationID)
     }
 
     // MARK: DataTransferAdapter

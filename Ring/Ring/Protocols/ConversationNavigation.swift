@@ -70,7 +70,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         recordFileViewController.viewModel.audioOnly = audioOnly
         self.present(viewController: recordFileViewController,
                      withStyle: .popup,
-                     withAnimation: true,
+                     withAnimation: !audioOnly,
                      withStateable: recordFileViewController.viewModel)
     }
 
