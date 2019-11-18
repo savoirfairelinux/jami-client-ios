@@ -571,6 +571,15 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func conferenceChanged(conference conferenceID: String, state: String) {
+        guard let conference = self.call(callID: conferenceID) else {return}
+        let conferenceCalls = Set(self.callsAdapter
+            .getConferenceCalls(conferenceID))
+        conference.participantsCallId = conferenceCalls
+        conferenceCalls.forEach { (callId) in
+            guard let call = self.call(callID: callId) else { return }
+            call.participantsCallId = conferenceCalls
+            self.calls.value[callId] = call
+        }
     }
 
     func conferenceRemoved(conference conferenceID: String) {
