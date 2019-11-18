@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Ftesa";
 "global.meTabBarTitle" = "Llogari";
 "global.ok" = "OK";
+"global.versionName" = "I lirë si në Liri ";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -119,8 +120,8 @@
 "alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
 "alerts.confirmClearConversation" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
 "alerts.confirmClearConversationTitle" = "Spastroje Bisedën";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
+"alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
 
 //Actions
 "actions.blockAction" = "Bllokoje";

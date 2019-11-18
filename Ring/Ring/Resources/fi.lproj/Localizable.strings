@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Kutsut";
 "global.meTabBarTitle" = "Tunnus";
 "global.ok" = "Vahvista";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

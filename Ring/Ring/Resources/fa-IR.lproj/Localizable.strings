@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "دعوت ها";
 "global.meTabBarTitle" = "حساب کاربری";
 "global.ok" = "باشه";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";

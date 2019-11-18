@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Inbjudningar";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "OK";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";

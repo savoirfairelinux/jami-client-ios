@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Pakvietimai";
 "global.meTabBarTitle" = "Paskyra";
 "global.ok" = "Gerai";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";

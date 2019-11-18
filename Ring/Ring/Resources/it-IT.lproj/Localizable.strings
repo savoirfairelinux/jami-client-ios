@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Inviti";
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -167,7 +168,7 @@
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
 "accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
+"accountPage.deviceRevocationWrongPassword" = "password errata";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nome";
@@ -181,9 +182,9 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "Nome Utente";
 "account.sipPassword" = "Password";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "Server SIP";
 "account.port" = "Porta";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Create Sip Account";

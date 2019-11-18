@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "inviti";
 "global.meTabBarTitle" = "Profilo";
 "global.ok" = "Ok";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
