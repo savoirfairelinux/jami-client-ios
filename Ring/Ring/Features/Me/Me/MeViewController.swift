@@ -216,7 +216,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             }
             return dateDefault
         }
-        let alert = UIAlertController(title: "\nJami\nbuild: \(compileDate)\n\"Free as in Freedom\"", message: "", preferredStyle: .alert)
+        let versionName = L10n.Global.versionName
+        let alert = UIAlertController(title: "\nJami\nbuild: \(compileDate)\n\(versionName)", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         let image = UIImageView(image: UIImage(asset: Asset.jamiIcon))
         alert.view.addSubview(image)
