@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Gonbidapenak";
 "global.meTabBarTitle" = "Kontua";
 "global.ok" = "Ados";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

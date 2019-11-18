@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "ਸੱਦੇ";
 "global.meTabBarTitle" = "ਖਾਤਾ";
 "global.ok" = "ਠੀਕ ਹੈ";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

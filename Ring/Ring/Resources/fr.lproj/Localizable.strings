@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Compte";
 "global.ok" = "OK";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Code QR incorrect";
@@ -119,8 +120,8 @@
 "alerts.confirmDeleteConversationTitle" = "Supprimer cette conversation";
 "alerts.confirmClearConversation" = "Êtes-vous certains de vouloir effacer cette conversation avec ce contact ?";
 "alerts.confirmClearConversationTitle" = "Effacer la conversation";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.noMediaPermissionsTitle" = "L'accès au média non autorisé";
+"alerts.noLibraryPermissionsTitle" = "L'accès à la bibliothèque de photos non autorisé";
 
 //Actions
 "actions.blockAction" = "Bloquer";

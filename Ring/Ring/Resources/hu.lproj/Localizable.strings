@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Meghívások";
 "global.meTabBarTitle" = "Fiók";
 "global.ok" = "Rendben";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -119,8 +120,8 @@
 "alerts.confirmDeleteConversationTitle" = "Társalgás törlése";
 "alerts.confirmClearConversation" = "Biztos, hogy törli akarja a társalgást ezzel a kapcsolattal?";
 "alerts.confirmClearConversationTitle" = "Társalgás törlése";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
+"alerts.noLibraryPermissionsTitle" = "A fotókönyvtárhoz való hozzáférést nem adták meg";
 
 //Actions
 "actions.blockAction" = "Letiltás";

@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "邀請";
 "global.meTabBarTitle" = "帳號";
 "global.ok" = "確定";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "不正確的 QR code";
@@ -119,8 +120,8 @@
 "alerts.confirmDeleteConversationTitle" = "刪除對話";
 "alerts.confirmClearConversation" = "您確定您想要清除與這個聯絡人的對話嗎？";
 "alerts.confirmClearConversationTitle" = "清除對話";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.noMediaPermissionsTitle" = "未給予媒體權限";
+"alerts.noLibraryPermissionsTitle" = "無法存取相簿";
 
 //Actions
 "actions.blockAction" = "阻擋";

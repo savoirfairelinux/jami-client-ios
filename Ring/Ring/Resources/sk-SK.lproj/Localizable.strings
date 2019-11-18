@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Pozvánky";
 "global.meTabBarTitle" = "Účet";
 "global.ok" = "OK";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Zlý QR kód";

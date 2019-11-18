@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Davetiyeler";
 "global.meTabBarTitle" = "Hesap";
 "global.ok" = "Tamam";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";

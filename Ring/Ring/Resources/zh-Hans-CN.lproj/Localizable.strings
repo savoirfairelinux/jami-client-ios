@@ -23,6 +23,7 @@
 "global.contactRequestsTabBarTitle" = "邀请";
 "global.meTabBarTitle" = "帐户";
 "global.ok" = "确定";
+"global.versionName" = "Free as in Freedom";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
