@@ -177,6 +177,9 @@ class SendFileViewModel: Stateable, ViewModel {
         }
         self.videoService.videRecordingFinished()
         recordingState.value = .sent
+        if fileName.isEmpty {
+            return
+        }
         try? FileManager.default.removeItem(atPath: fileName)
     }
 
