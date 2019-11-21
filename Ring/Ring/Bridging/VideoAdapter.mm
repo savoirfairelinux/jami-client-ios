@@ -153,6 +153,12 @@ static id <VideoAdapterDelegate> _delegate;
         }
     }));
 
+//    videoHandlers.insert(exportable_callback<VideoSignal::UseSoftwareEncoding>([&]() {
+//        if(VideoAdapter.delegate) {
+//            [VideoAdapter.delegate useSoftwareEncoding];
+//        }
+//    }));
+
     registerSignalHandlers(videoHandlers);
 }
 

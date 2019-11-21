@@ -519,24 +519,24 @@ class ConversationViewController: UIViewController,
         self.viewModel.showCallButton
             .observeOn(MainScheduler.instance)
             .startWith(self.viewModel.haveCurrentCall())
-            .subscribe(onNext: { [unowned self] show in
+            .subscribe(onNext: { [weak self] show in
                 if show {
                     // let deadlineTime = DispatchTime.now() + .seconds(3)
                     DispatchQueue.main.async {
-                        if self.viewModel.currentCallId.value.isEmpty {
+                        if self?.viewModel.currentCallId.value.isEmpty ?? true {
                             return
                         }
-                        self.currentCallButton.isHidden = false
-                        self.currentCallLabel.isHidden = false
-                        self.currentCallLabel.blink()
-                        self.callButtonHeightConstraint.constant = 60
+                        self?.currentCallButton.isHidden = false
+                        self?.currentCallLabel.isHidden = false
+                        self?.currentCallLabel.blink()
+                        self?.callButtonHeightConstraint.constant = 60
                     }
                     return
                 }
-                self.currentCallButton.isHidden = true
-                self.currentCallLabel.isHidden = true
-                self.callButtonHeightConstraint.constant = 0
-                self.currentCallLabel.layer.removeAllAnimations()
+                self?.currentCallButton.isHidden = true
+                self?.currentCallLabel.isHidden = true
+                self?.callButtonHeightConstraint.constant = 0
+                self?.currentCallLabel.layer.removeAllAnimations()
             }).disposed(by: disposeBag)
         currentCallButton.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)
