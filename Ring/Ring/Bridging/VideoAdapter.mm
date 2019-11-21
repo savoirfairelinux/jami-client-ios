@@ -126,8 +126,10 @@ static id <VideoAdapterDelegate> _delegate;
                                                                                int h,
                                                                                bool is_mixer) {
         if(VideoAdapter.delegate) {
-            NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];;
-            [VideoAdapter.delegate decodingStartedWithRendererId:rendererId withWidth:(NSInteger)w withHeight:(NSInteger)h];
+            NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];
+            std::map<std::string, std::string> callDetails = getCallDetails(renderer_id);
+            NSDictionary<NSString*,NSString*> *dictionaryDetails = [Utils mapToDictionnary:callDetails];
+            [VideoAdapter.delegate decodingStartedWithRendererId:rendererId withWidth:(NSInteger)w withHeight:(NSInteger)h withCodec: dictionaryDetails[@"VIDEO_CODEC"]];
         }
     }));
 
@@ -158,13 +160,16 @@ static id <VideoAdapterDelegate> _delegate;
 
 #pragma mark -
 
-- (void)registerSinkTargetWithSinkId:sinkId withWidth:(NSInteger)w withHeight:(NSInteger)h {
+- (void)registerSinkTargetWithSinkId:sinkId
+          withWidth:(NSInteger)w
+         withHeight:(NSInteger)h
+withHardwareSupport:(BOOL) hardwareSupport {
     auto _sinkId = std::string([sinkId UTF8String]);
     auto renderer = std::make_shared<Renderer>();
     renderer->width = static_cast<int>(w);
     renderer->height = static_cast<int>(h);
     renderer->rendererId = sinkId;
-    if(self.getDecodingAccelerated) {
+    if(self.getDecodingAccelerated && hardwareSupport) {
         renderer->bindAVSinkFunctions();
         DRing::registerAVSinkTarget(_sinkId, renderer->avtarget);
     } else {

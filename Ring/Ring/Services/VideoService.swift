@@ -41,6 +41,11 @@ enum VideoError: Error {
     case switchCameraFailed
 }
 
+enum VideoCodecs: String {
+    case H264
+    case VP8
+}
+
 protocol FrameExtractorDelegate: class {
     func captured(imageBuffer: CVImageBuffer?, image: UIImage)
     func updateDevicePisition(position: AVCaptureDevice.Position)
@@ -306,6 +311,8 @@ class VideoService: FrameExtractorDelegate {
 
     var recording = false
 
+    var codec = VideoCodecs.H264
+
     init(withVideoAdapter videoAdapter: VideoAdapter) {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
@@ -454,14 +461,22 @@ extension VideoService: VideoAdapterDelegate {
         return videoAdapter.getEncodingAccelerated()
     }
 
-    func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int) {
+    func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?) {
+        if let codecName = codec {
+            self.codec = VideoCodecs(rawValue: codecName) ?? VideoCodecs.H264
+        }
         self.log.debug("Decoding started...")
-        videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height)
+        videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height, withHardwareSupport: supportHardware())
+    }
+
+    func supportHardware() -> Bool {
+        return self.codec == VideoCodecs.H264
     }
 
     func decodingStopped(withRendererId rendererId: String) {
         self.log.debug("Decoding stopped...")
         videoAdapter.removeSinkTarget(withSinkId: rendererId)
+         self.codec = VideoCodecs.H264
     }
 
     func startCapture(withDevice device: String) {
@@ -525,7 +540,7 @@ extension VideoService: VideoAdapterDelegate {
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
                                         angle: Int32(self.angle),
-                                        useHardwareAcceleration: self.hardwareAccelerated,
+                                        useHardwareAcceleration: (self.hardwareAccelerated && supportHardware()),
                                         recording: self.recording)
     }
 
