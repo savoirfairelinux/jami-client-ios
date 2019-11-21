@@ -306,6 +306,8 @@ class VideoService: FrameExtractorDelegate {
 
     var recording = false
 
+    var hardwareInitializingFailed = false
+
     init(withVideoAdapter videoAdapter: VideoAdapter) {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
@@ -462,6 +464,7 @@ extension VideoService: VideoAdapterDelegate {
     func decodingStopped(withRendererId rendererId: String) {
         self.log.debug("Decoding stopped...")
         videoAdapter.removeSinkTarget(withSinkId: rendererId)
+        hardwareInitializingFailed = false
     }
 
     func startCapture(withDevice device: String) {
@@ -525,7 +528,7 @@ extension VideoService: VideoAdapterDelegate {
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
                                         angle: Int32(self.angle),
-                                        useHardwareAcceleration: self.hardwareAccelerated,
+                                        useHardwareAcceleration: (self.hardwareAccelerated && !hardwareInitializingFailed),
                                         recording: self.recording)
     }
 
@@ -545,5 +548,9 @@ extension VideoService: VideoAdapterDelegate {
     func stopLocalRecorder(path: String) {
         self.videoAdapter.stopLocalRecording(path)
         self.recording = false
+    }
+
+    func useSoftwareEncoding() {
+        hardwareInitializingFailed = true
     }
 }

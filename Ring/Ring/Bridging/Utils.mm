@@ -148,25 +148,102 @@ extern "C" {
 }
 
 + (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame {
+    CIImage *image;
     if ((CVPixelBufferRef)frame->data[3]) {
-        CIImage *image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
-        if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
-            const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
-            auto rotation = av_display_rotation_get(data);
-            auto uiImageOrientation = [Utils uimageOrientationFromRotation:rotation];
-            auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
-            if (@available(iOS 11.0, *)) {
-                image = [image imageByApplyingCGOrientation: ciImageOrientation];
-            } else if (@available(iOS 10.0, *)) {
-                image = [image imageByApplyingOrientation:static_cast<int>(ciImageOrientation)];
-            }
-            UIImage * imageUI = [UIImage imageWithCIImage:image scale:1 orientation: uiImageOrientation];
-            return imageUI;
+        image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
+    } else {
+        auto buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
+        image = [CIImage imageWithCVPixelBuffer: buffer];
+        CFRelease(buffer);
+    }
+    if (!image) {
+        return [[UIImage alloc] init];
+    }
+    if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
+        const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
+        auto rotation = av_display_rotation_get(data);
+        auto uiImageOrientation = [Utils uimageOrientationFromRotation:rotation];
+        auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
+        if (@available(iOS 11.0, *)) {
+            image = [image imageByApplyingCGOrientation: ciImageOrientation];
+        } else if (@available(iOS 10.0, *)) {
+            image = [image imageByApplyingOrientation:static_cast<int>(ciImageOrientation)];
         }
-        UIImage * imageUI = [UIImage imageWithCIImage:image];
+        UIImage * imageUI = [UIImage imageWithCIImage:image scale:1 orientation: uiImageOrientation];
         return imageUI;
     }
-    return [[UIImage alloc] init];
+    UIImage * imageUI = [UIImage imageWithCIImage:image];
+    return imageUI;
+}
+
++(CVPixelBufferRef)converCVPixelBufferRefFromAVFrame:(const AVFrame *)frame {
+    if (!frame || !frame->data[0]) {
+        return NULL;
+    }
+
+    CVPixelBufferRef pixelBuffer = NULL;
+
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             @(frame->linesize[0]), kCVPixelBufferBytesPerRowAlignmentKey,
+                             [NSDictionary dictionary], kCVPixelBufferIOSurfacePropertiesKey,
+                             nil];
+    int ret = CVPixelBufferCreate(kCFAllocatorDefault,
+                                  frame->width,
+                                  frame->height,
+                                  kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange,
+                                  (__bridge CFDictionaryRef)(options),
+                                  &pixelBuffer);
+
+    if (ret < 0) {
+        return nil;
+    }
+
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    size_t bytePerRowY = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
+    size_t bytesPerRowUV = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+    uint8_t*  base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0));
+    if (bytePerRowY == frame->linesize[0]) {
+        memcpy(base, frame->data[0], bytePerRowY * frame->height);
+    } else {
+        [Utils copyLineByLineSrc: frame->data[0]
+                          toDest: base
+                     srcLinesize: frame->linesize[0]
+                    destLinesize: bytePerRowY
+                          height: frame->height];
+    }
+    if ((AVPixelFormat)frame->format == AV_PIX_FMT_NV12) {
+        base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1));
+        if (bytesPerRowUV == frame->linesize[0]) {
+            memcpy(base, frame->data[1], bytesPerRowUV * frame->height/2);
+        } else {
+            [Utils copyLineByLineSrc: frame->data[1]
+                              toDest: base
+                         srcLinesize: frame->linesize[0]
+                        destLinesize: bytesPerRowUV
+                              height: frame->height/2];
+        }
+        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+        return pixelBuffer;
+    }
+    base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1));
+    for(size_t i = 0; i < frame->height / 2 * bytesPerRowUV / 2; i++ ){
+        *base++ = frame->data[1][i];
+        *base++ = frame->data[2][i];
+    }
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    return pixelBuffer;
+}
+
++ (void)copyLineByLineSrc:(uint8_t*)src
+                   toDest:(uint8_t*)dest
+              srcLinesize:(size_t)srcLinesize
+             destLinesize:(size_t)destLinesize
+                   height:(size_t)height {
+    for (size_t i = 0; i < height ; i++) {
+        memcpy(dest, src, srcLinesize);
+        dest = dest + destLinesize;
+        src = src + srcLinesize;
+    }
 }
 
 + (AVFrame*)configureHardwareDecodedFrame:(AVFrame*)frame
