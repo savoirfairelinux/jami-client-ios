@@ -19,7 +19,10 @@
  */
 
 @objc protocol VideoAdapterDelegate {
-    func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int)
+    func decodingStarted(withRendererId rendererId: String,
+                         withWidth width: Int,
+                         withHeight height: Int,
+                         withCodec codec: String?)
     func decodingStopped(withRendererId rendererId: String)
     func startCapture(withDevice device: String)
     func stopCapture()

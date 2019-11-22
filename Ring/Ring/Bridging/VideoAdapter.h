@@ -30,7 +30,10 @@
 
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict;
 - (void)setDefaultDevice:(NSString*)deviceName;
-- (void)registerSinkTargetWithSinkId:sinkId withWidth:(NSInteger)w withHeight:(NSInteger)h;
+- (void)registerSinkTargetWithSinkId:sinkId
+                           withWidth:(NSInteger)w
+                          withHeight:(NSInteger)h
+                 withHardwareSupport:(BOOL)hardwareSupport;
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId;
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
                                angle:(int)angle
