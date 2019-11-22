@@ -470,9 +470,6 @@ class ConversationViewModel: Stateable, ViewModel {
     func callIsValid (call: CallModel) -> Bool {
         return call.stateValue == CallState.hold.rawValue ||
             call.stateValue == CallState.unhold.rawValue ||
-            call.stateValue == CallState.incoming.rawValue ||
-            call.stateValue == CallState.connecting.rawValue ||
-            call.stateValue == CallState.ringing.rawValue ||
             call.stateValue == CallState.current.rawValue
     }
 
