@@ -63,7 +63,7 @@
 "createProfile.profileCreated" = "下一步";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "输入名称";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
@@ -182,9 +182,9 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "用户名";
 "account.sipPassword" = "密码";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "SIP 服务器";
 "account.port" = "端口";
 "account.proxyServer" = "代理";
 "account.createSipAccount" = "Create Sip Account";
