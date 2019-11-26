@@ -25,8 +25,8 @@ import RxSwift
 class ConferencePendingCallView: UIView {
     @IBOutlet var containerView: UIView!
     @IBOutlet var backgroundView: UIView!
-    @IBOutlet var nameLabel: UILabel!
     @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var avatarView: UIView!
     let disposeBag = DisposeBag()
 
     override init(frame: CGRect) {
@@ -59,19 +59,30 @@ class ConferencePendingCallView: UIView {
                     self?.viewModel?.cancelCall()
                     self?.removeFromSuperview()
                 }).disposed(by: self.disposeBag)
-            self.viewModel?.displayName.drive(self.nameLabel.rx.text)
-                .disposed(by: self.disposeBag)
-            UIView.animate(withDuration: 1,
-                       delay: 0.0,
-                       options: [.curveEaseInOut,
-                                 .autoreverse,
-                                 .repeat],
-                       animations: { [weak self] in
-                        self?.backgroundView.alpha = 0.1
-                       },
-                       completion: { [weak self] _ in
-                        self?.backgroundView.alpha = 0.7
-                   })
+            Observable<(Profile?, String?)>
+                .combineLatest(self.viewModel!
+                    .contactImageData!,
+                               self.viewModel!
+                                .displayName
+                                .asObservable()) { profile, username in
+                                    return (profile, username)
+            }
+            .observeOn(MainScheduler.instance)
+            .subscribe({ [weak self] profileData -> Void in
+                let photoData = NSData(base64Encoded: profileData.element?.0?.photo ?? "", options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+                let alias = profileData.element?.0?.alias
+                let nameData = profileData.element?.1
+                let name = alias != nil ? alias : nameData
+                guard let displayName = name else {return}
+                self?.avatarView.subviews.forEach({ view in
+                    view.removeFromSuperview()
+                })
+                self?.avatarView.addSubview(
+                    AvatarView(profileImageData: photoData,
+                               username: displayName,
+                               size: 60))
+            })
+            .disposed(by: self.disposeBag)
         }
     }
 
