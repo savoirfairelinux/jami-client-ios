@@ -51,6 +51,9 @@ class ContactPickerViewModel: Stateable, ViewModel {
                                     call.callId == self.currentCallId {
                                     return
                                 }
+                                if call.state != .current || call.state != .hold || call.state != .unhold {
+                                    return
+                                }
                                 let profile = self.contactsService.getProfile(uri: uriString, accountId: call.accountId)
                                 var contact = Contact(contactUri: uriString,
                                                       accountId: call.accountId,
@@ -88,8 +91,8 @@ class ContactPickerViewModel: Stateable, ViewModel {
                                 if callURIs.contains(contactUri) {
                                     return
                                 }
-                                 let profile = self.contactsService.getProfile(uri: contactUri, accountId: currentAccount.id)
-                                 var contactToAdd = Contact(contactUri: contactUri,
+                                let profile = self.contactsService.getProfile(uri: contactUri, accountId: currentAccount.id)
+                                var contactToAdd = Contact(contactUri: contactUri,
                                                             accountId: currentAccount.id,
                                                             registrName: contact.userName ?? "",
                                                             presService: self.presenceService,
