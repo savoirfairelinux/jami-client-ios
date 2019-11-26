@@ -204,6 +204,8 @@ internal enum L10n {
     internal static let connecting = L10n.tr("Localizable", "calls.connecting")
     /// Call with 
     internal static let currentCallWith = L10n.tr("Localizable", "calls.currentCallWith")
+    /// hang up
+    internal static let haghUp = L10n.tr("Localizable", "calls.haghUp")
     /// wants to talk to you
     internal static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo")
     /// Ringing…
