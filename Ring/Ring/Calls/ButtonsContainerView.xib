@@ -11,7 +11,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
             <connections>
                 <outlet property="acceptCallButton" destination="rfz-9h-HoH" id="V6j-8E-g68"/>
-                <outlet property="addContactButton" destination="XPt-Qw-ege" id="hcj-H8-UyK"/>
                 <outlet property="backgroundBlurEffect" destination="w5l-pw-1ET" id="YYh-qB-WIL"/>
                 <outlet property="cancelButton" destination="ZxT-mA-1xU" id="4nk-iI-vPV"/>
                 <outlet property="cancelButtonBottomConstraint" destination="Ilu-Zu-JqW" id="Yeg-Ca-8pf"/>
@@ -25,7 +24,6 @@
                 <outlet property="muteAudioButton" destination="tXL-FB-O0X" id="6Bh-x3-veQ"/>
                 <outlet property="muteVideoButton" destination="W7F-nH-kda" id="MWK-JU-544"/>
                 <outlet property="pauseCallButton" destination="MPk-dB-dhR" id="W4G-AB-WFw"/>
-                <outlet property="sendMessageButton" destination="Clm-qc-fSa" id="ahZ-I9-gRG"/>
                 <outlet property="stackView" destination="RHx-cL-CV5" id="Iz9-B0-2Rd"/>
                 <outlet property="stackViewWidthConstraint" destination="ZuV-LV-CYZ" id="ita-8Y-fAb"/>
                 <outlet property="stackViewYConstraint" destination="z8B-uv-Vcb" id="Gaj-8x-yif"/>
@@ -199,6 +197,7 @@
                                 <constraint firstAttribute="width" constant="70" id="0vV-4C-odp"/>
                                 <constraint firstAttribute="height" constant="70" id="kls-aA-2zS"/>
                             </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" image="stop_call"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
@@ -232,56 +231,6 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="avx-hr-7CF">
-                            <rect key="frame" x="15" y="10" width="50" height="120"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Clm-qc-fSa">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="0i2-PP-0nV"/>
-                                        <constraint firstAttribute="width" constant="50" id="254-56-HSy"/>
-                                    </constraints>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" image="conversation_icon"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="25"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="2"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPt-Qw-ege">
-                                    <rect key="frame" x="0.0" y="70" width="50" height="50"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="50" id="GM7-dt-aWh"/>
-                                        <constraint firstAttribute="height" constant="50" id="jT2-0U-rR3"/>
-                                    </constraints>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" image="add_person"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="25"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="2"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </button>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="50" id="AKF-a1-POe"/>
-                            </constraints>
-                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -296,7 +245,6 @@
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="ZfR-cx-MUB"/>
                         <constraint firstItem="w5l-pw-1ET" firstAttribute="leading" secondItem="a9g-pf-bHy" secondAttribute="leading" id="bbd-5D-5So"/>
                         <constraint firstItem="RHx-cL-CV5" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="bmE-qo-8aJ"/>
-                        <constraint firstItem="RHx-cL-CV5" firstAttribute="top" secondItem="avx-hr-7CF" secondAttribute="bottom" constant="20" id="eJB-M0-m2x"/>
                         <constraint firstItem="ZxT-mA-1xU" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="ls1-Ze-LXF"/>
                         <constraint firstAttribute="trailing" secondItem="RHx-cL-CV5" secondAttribute="trailing" constant="15" id="pgj-7m-5gr"/>
                         <constraint firstAttribute="bottom" secondItem="RHx-cL-CV5" secondAttribute="bottom" id="z8B-uv-Vcb"/>
@@ -305,7 +253,6 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="avx-hr-7CF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="9J5-UI-CPG"/>
                 <constraint firstAttribute="bottom" secondItem="a9g-pf-bHy" secondAttribute="bottom" constant="30" id="YHm-ET-yjX"/>
                 <constraint firstItem="a9g-pf-bHy" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" priority="750" id="ZI5-4F-WCS"/>
                 <constraint firstItem="a9g-pf-bHy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uv2-qL-KQX"/>
@@ -316,10 +263,8 @@
         </view>
     </objects>
     <resources>
-        <image name="add_person" width="24" height="24"/>
         <image name="audio_running" width="24" height="24"/>
         <image name="call_button" width="29" height="29"/>
-        <image name="conversation_icon" width="24" height="24"/>
         <image name="dialpad" width="37.5" height="37.5"/>
         <image name="disable_speakerphone" width="24" height="24"/>
         <image name="pause_call" width="24" height="24"/>
