@@ -37,8 +37,6 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var cancelButton: UIButton!
     @IBOutlet  weak var switchCameraButton: UIButton!
     @IBOutlet  weak var acceptCallButton: UIButton!
-    @IBOutlet  weak var addContactButton: UIButton!
-    @IBOutlet  weak var sendMessageButton: UIButton!
 
     //Constraints
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
@@ -100,8 +98,6 @@ class ButtonsContainerView: UIView, NibLoadable {
         dialpadButton.isHidden = true
         switchSpeakerButton.isHidden = true
         cancelButton.isHidden = false
-        addContactButton.isHidden = true
-        sendMessageButton.isHidden = true
         if self.viewModel?.isIncoming ?? false {
             acceptCallButton.isHidden = false
             cancelButtonBottomConstraint.constant = 60
@@ -133,9 +129,8 @@ class ButtonsContainerView: UIView, NibLoadable {
         switchSpeakerButton.isEnabled = true
         switchSpeakerButton.isHidden = false
         cancelButton.isHidden = false
-        addContactButton.isHidden = false
-        sendMessageButton.isHidden = false
         setUpConference()
+        setButtonsColor()
     }
 
     func optionsWithoutSpeaker() {
@@ -159,16 +154,14 @@ class ButtonsContainerView: UIView, NibLoadable {
         self.backgroundBlurEffect.isHidden = false
         pauseCallButton.isHidden = false
         cancelButton.isHidden = false
-        addContactButton.isHidden = false
-        sendMessageButton.isHidden = false
         setUpConference()
+        setButtonsColor()
     }
 
     func setUpConference() {
         if !(self.viewModel?.isConference ?? false) {
             return
         }
-        sendMessageButton.isHidden = true
         pauseCallButton.isHidden = true
         muteAudioButton.isHidden = true
         muteVideoButton.isHidden = true
@@ -181,5 +174,30 @@ class ButtonsContainerView: UIView, NibLoadable {
         } else if !switchSpeakerButton.isHidden {
             self.optionsWithSpeaker()
         }
+    }
+
+    func setButtonsColor() {
+        if self.viewModel?.isAudioOnly ?? false {
+            pauseCallButton.tintColor = UIColor.gray
+            pauseCallButton.borderColor = UIColor.gray
+            muteAudioButton.tintColor = UIColor.gray
+            muteAudioButton.borderColor = UIColor.gray
+            dialpadButton.tintColor = UIColor.gray
+            dialpadButton.borderColor = UIColor.gray
+            switchSpeakerButton.tintColor = UIColor.gray
+            switchSpeakerButton.borderColor = UIColor.gray
+            return
+        }
+        pauseCallButton.tintColor = UIColor.white
+        pauseCallButton.borderColor = UIColor.white
+        muteAudioButton.tintColor = UIColor.white
+        muteAudioButton.borderColor = UIColor.white
+        dialpadButton.tintColor = UIColor.white
+        dialpadButton.borderColor = UIColor.white
+        switchSpeakerButton.tintColor = UIColor.white
+        switchSpeakerButton.borderColor = UIColor.white
+        muteVideoButton.tintColor = UIColor.white
+        muteVideoButton.borderColor = UIColor.white
+        switchCameraButton.tintColor = UIColor.white
     }
 }

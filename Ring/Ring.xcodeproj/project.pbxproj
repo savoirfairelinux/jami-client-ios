@@ -166,9 +166,9 @@
 		0EE1B54E1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54D1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift */; };
 		0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		0EEFBA3C1F83DA21000EDBAD /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */; };
-		0EF49A9F23828C960064CD98 /* ConferencePendingCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF49A9E23828C960064CD98 /* ConferencePendingCallView.swift */; };
-		0EF49AA123828CBC0064CD98 /* ConferencePendingCallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF49AA023828CBC0064CD98 /* ConferencePendingCallViewModel.swift */; };
-		0EF49AA323828CD00064CD98 /* ConferencePendingCallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF49AA223828CD00064CD98 /* ConferencePendingCallView.xib */; };
+		0EF49A9F23828C960064CD98 /* ConferenceParticipantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF49A9E23828C960064CD98 /* ConferenceParticipantView.swift */; };
+		0EF49AA123828CBC0064CD98 /* ConferenceParticipantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF49AA023828CBC0064CD98 /* ConferenceParticipantViewModel.swift */; };
+		0EF49AA323828CD00064CD98 /* ConferenceParticipantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF49AA223828CD00064CD98 /* ConferenceParticipantView.xib */; };
 		0EF78DE31FD0AE3000FC6966 /* ConversationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF78DE21FD0AE3000FC6966 /* ConversationsManager.swift */; };
 		1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0C4ED91F1D4B1B00550433 /* WelcomeViewController.storyboard */; };
 		1A0C4EDC1F1D4B7E00550433 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EDB1F1D4B7E00550433 /* WelcomeViewController.swift */; };
@@ -505,9 +505,9 @@
 		0EE1B54D1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CNContactVCardSerialization+Helpers.swift"; sourceTree = "<group>"; };
 		0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCardUtils.swift; sourceTree = "<group>"; };
 		0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecp256k1.a; path = ../DEPS/arm64/lib/libsecp256k1.a; sourceTree = "<group>"; };
-		0EF49A9E23828C960064CD98 /* ConferencePendingCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferencePendingCallView.swift; sourceTree = "<group>"; };
-		0EF49AA023828CBC0064CD98 /* ConferencePendingCallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferencePendingCallViewModel.swift; sourceTree = "<group>"; };
-		0EF49AA223828CD00064CD98 /* ConferencePendingCallView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConferencePendingCallView.xib; sourceTree = "<group>"; };
+		0EF49A9E23828C960064CD98 /* ConferenceParticipantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipantView.swift; sourceTree = "<group>"; };
+		0EF49AA023828CBC0064CD98 /* ConferenceParticipantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipantViewModel.swift; sourceTree = "<group>"; };
+		0EF49AA223828CD00064CD98 /* ConferenceParticipantView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConferenceParticipantView.xib; sourceTree = "<group>"; };
 		0EF78DE21FD0AE3000FC6966 /* ConversationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsManager.swift; sourceTree = "<group>"; };
 		1A0C4ED91F1D4B1B00550433 /* WelcomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WelcomeViewController.storyboard; path = Welcome/WelcomeViewController.storyboard; sourceTree = "<group>"; };
 		1A0C4EDB1F1D4B7E00550433 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeViewController.swift; path = Welcome/WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -1286,9 +1286,9 @@
 		0EF49A9D23828C520064CD98 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				0EF49A9E23828C960064CD98 /* ConferencePendingCallView.swift */,
-				0EF49AA023828CBC0064CD98 /* ConferencePendingCallViewModel.swift */,
-				0EF49AA223828CD00064CD98 /* ConferencePendingCallView.xib */,
+				0EF49A9E23828C960064CD98 /* ConferenceParticipantView.swift */,
+				0EF49AA023828CBC0064CD98 /* ConferenceParticipantViewModel.swift */,
+				0EF49AA223828CD00064CD98 /* ConferenceParticipantView.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1858,7 +1858,7 @@
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
 				446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */,
-				0EF49AA323828CD00064CD98 /* ConferencePendingCallView.xib in Resources */,
+				0EF49AA323828CD00064CD98 /* ConferenceParticipantView.xib in Resources */,
 				0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */,
 				4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */,
 				0E96ED75225D06250016C07D /* GeneralSettingsViewController.storyboard in Resources */,
@@ -2071,7 +2071,7 @@
 				1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
 				0E3BD4262044778100A50DDF /* ContactViewModel.swift in Sources */,
-				0EF49A9F23828C960064CD98 /* ConferencePendingCallView.swift in Sources */,
+				0EF49A9F23828C960064CD98 /* ConferenceParticipantView.swift in Sources */,
 				564C44641E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift in Sources */,
 				0E36979920322D46009A68CA /* BlockListViewController.swift in Sources */,
 				1A2D18AA1F29131900B2C785 /* ConversationsCoordinator.swift in Sources */,
@@ -2151,7 +2151,7 @@
 				564C44601E943C37000F92B1 /* NameRegistrationAdapter.mm in Sources */,
 				0E35C10C2077DFF000BBA5E3 /* NotificationCell.swift in Sources */,
 				0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */,
-				0EF49AA123828CBC0064CD98 /* ConferencePendingCallViewModel.swift in Sources */,
+				0EF49AA123828CBC0064CD98 /* ConferenceParticipantViewModel.swift in Sources */,
 				0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

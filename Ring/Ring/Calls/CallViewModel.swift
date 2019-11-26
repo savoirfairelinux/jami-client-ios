@@ -47,7 +47,9 @@ class CallViewModel: Stateable, ViewModel {
     var isHeadsetConnected = false
     var isAudioOnly = false
 
-    var currentCallVariable: Variable<CallModel> = Variable<CallModel>(CallModel())
+    lazy var currentCallVariable: Variable<CallModel> = {
+        Variable<CallModel>(self.call ?? CallModel())
+    }()
     lazy var currentCall: Observable<CallModel> = {
         currentCallVariable.asObservable()
     }()
@@ -68,6 +70,7 @@ class CallViewModel: Stateable, ViewModel {
             self.callService
                 .currentCall(callId: call.callId)
                 .share()
+            .startWith(call)
             .subscribe(onNext: { [weak self] call in
                 self?.currentCallVariable.value = call
             }).disposed(by: self.callDisposeBag)
@@ -77,8 +80,8 @@ class CallViewModel: Stateable, ViewModel {
             }
             self.callService.currentConferenceEvent
                 .asObservable().filter { conference-> Bool in
-                    return conference.calls.contains(call.callId) ||
-                    conference.conferenceID == call.callId
+                    return conference.calls.contains(self.call?.callId ?? "") ||
+                        conference.conferenceID == self.rendererId
             }
             .subscribe(onNext: { [weak self] conf in
                 if conf.conferenceID.isEmpty {
@@ -202,13 +205,17 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var callDuration: Driver<String> = {
-        let timer = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+        let timer = Observable<Int>.interval(1.0, scheduler: MainScheduler.instance)
             .takeUntil(currentCall
                 .filter { call in
                     call.state == .over
             })
-            .map({ elapsed in
-                return CallViewModel.formattedDurationFrom(interval: elapsed)
+            .map({ (elapsed) -> String in
+                var time = elapsed
+                if let startTime = self.call?.dateReceived {
+                    time = Int(Date().timeIntervalSince1970 - startTime.timeIntervalSince1970)
+                }
+                return CallViewModel.formattedDurationFrom(interval: time)
             }).share()
         return currentCall.filter({ call in
             return call.state == .current
@@ -427,7 +434,7 @@ class CallViewModel: Stateable, ViewModel {
                 }
             }
         }
-        self.callService.hangUp(callId: rendererId)
+        self.callService.hangUpCallOrConference(callId: rendererId)
             .subscribe(onCompleted: { [weak self] in
                 // switch to either spk or headset (if connected) for loud ringtone
                 // incase we were using rcv during the call
