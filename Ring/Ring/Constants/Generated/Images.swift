@@ -41,6 +41,7 @@ internal enum Asset {
   internal static let downloadIcon = ImageAsset(name: "download_icon")
   internal static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   internal static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
+  internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icContactPicture = ImageAsset(name: "ic_contact_picture")
   internal static let icConversationRemove = ImageAsset(name: "ic_conversation_remove")
   internal static let icHideInput = ImageAsset(name: "ic_hide_input")
