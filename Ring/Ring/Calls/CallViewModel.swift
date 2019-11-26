@@ -77,8 +77,8 @@ class CallViewModel: Stateable, ViewModel {
             }
             self.callService.currentConferenceEvent
                 .asObservable().filter { conference-> Bool in
-                    return conference.calls.contains(call.callId) ||
-                    conference.conferenceID == call.callId
+                    return conference.calls.contains(self.call!.callId) ||
+                        conference.conferenceID == self.rendererId
             }
             .subscribe(onNext: { [weak self] conf in
                 if conf.conferenceID.isEmpty {
@@ -427,7 +427,7 @@ class CallViewModel: Stateable, ViewModel {
                 }
             }
         }
-        self.callService.hangUp(callId: rendererId)
+        self.callService.hangUpCallOrConference(callId: rendererId)
             .subscribe(onCompleted: { [weak self] in
                 // switch to either spk or headset (if connected) for loud ringtone
                 // incase we were using rcv during the call

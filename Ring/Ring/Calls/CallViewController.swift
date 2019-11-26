@@ -27,7 +27,7 @@ import SwiftyBeaver
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
+class CallViewController: UIViewController, StoryboardBased, ViewModelBased{
 
     //preview screen
     @IBOutlet private weak var profileImageView: UIImageView!
@@ -69,12 +69,17 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var profileImageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var pendingCalls: UIStackView!
+    @IBOutlet weak var buttonsStackView: UIStackView!
+
+    @IBOutlet  weak var addContactButton: UIButton!
+    @IBOutlet  weak var sendMessageButton: UIButton!
 
     var viewModel: CallViewModel!
     var isCallStarted: Bool = false
     var isMenuShowed = false
     var isVideoHidden = false
     var orientation = UIDevice.current.orientation
+    var conferenceParticipantMenu: UIView?
 
     fileprivate let disposeBag = DisposeBag()
 
@@ -195,14 +200,19 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.viewModel.cancelCall(stopProvider: true)
                 self?.removeFromScreen()
             }).disposed(by: self.disposeBag)
-        self.buttonsContainer.sendMessageButton.rx.tap
+        self.sendMessageButton.rx.tap
         .subscribe(onNext: { [weak self] in
             self?.viewModel.showConversations()
             self?.dismiss(animated: false, completion: nil)
         }).disposed(by: self.disposeBag)
 
-        self.buttonsContainer.addContactButton.rx.tap
+        self.addContactButton.rx.tap
             .subscribe(onNext: { [weak self] in
+                if let children = self?.children {
+                    for child in children where child.isKind(of: (ContactPickerViewController).self) {
+                        return
+                    }
+                }
                 self?.viewModel.showContactPickerVC()
             }).disposed(by: self.disposeBag)
 
@@ -407,8 +417,37 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.viewModel.conferenceMode
         .asObservable()
         .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { [weak self] _ in
+        .subscribe(onNext: { [weak self] enteredConference in
+            guard let call = self?.viewModel.call else {return}
+            if call.state != .current {return}
             self?.buttonsContainer.updateView()
+            self?.infoContainer.isHidden = enteredConference ? true : false
+            self?.resizeCapturedVideo(withInfoContainer: false)
+            if enteredConference {
+                let callView =
+                    ConferencePendingCallView(frame:
+                        CGRect(x: 0, y: 0,
+                               width: inConfViewWidth, height: inConfViewHeight))
+                guard let injectionBag = self?.viewModel.injectionBag
+                    else {return}
+                let pendingCallViewModel =
+                    ConferencePendingCallViewModel(with: call,
+                                                   injectionBag: injectionBag)
+                callView.viewModel = pendingCallViewModel
+                callView.delegate = self
+                self?.pendingCalls.insertArrangedSubview(callView, at: 0)
+                let spaceView = UIView(frame: CGRect(x: 0, y: 0,
+                                                     width: inConfViewWidth, height: inConfViewWidth))
+                spaceView.backgroundColor = UIColor.red
+                self?.pendingCalls.insertArrangedSubview(spaceView, at: 0)
+                self?.pendingCalls.insertArrangedSubview(self!.addContactButton, at: 0)
+
+            } else {
+                self?.pendingCalls.arrangedSubviews.forEach({ (view) in
+                    view.removeFromSuperview()
+                })
+                self?.buttonsStackView.addArrangedSubview(self!.addContactButton)
+            }
         }).disposed(by: self.disposeBag)
 
         self.viewModel.callForConference
@@ -417,13 +456,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 let callView =
                     ConferencePendingCallView(frame:
                         CGRect(x: 0, y: 0,
-                               width: self?.pendingCalls.frame.size.width ?? 200,
-                            height: 50))
-                guard let callService = self?.viewModel.callService else {return}
+                               width: inConfViewWidth, height: inConfViewHeight))
+                guard let injectionBag = self?.viewModel.injectionBag else {return}
                 let pendingCallViewModel =
                     ConferencePendingCallViewModel(with: call,
-                                                   callsService: callService)
+                                                   injectionBag: injectionBag)
                 callView.viewModel = pendingCallViewModel
+                callView.delegate = self
                 self?.pendingCalls.addArrangedSubview(callView)
             }).disposed(by: self.disposeBag)
 
@@ -562,11 +601,12 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         if  UIDevice.current.orientation.rawValue != 5  && UIDevice.current.orientation.rawValue != 6 && UIDevice.current.orientation.rawValue != 2 {
             self.orientation = UIDevice.current.orientation
         }
+        let conference = self.viewModel.conferenceMode.value
         switch self.orientation {
         case .landscapeRight, .landscapeLeft:
             if !withInfoContainer {
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + 160
-                self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.height + 120
+                self.capturedVideoHeightConstraint.constant = conference ? -UIScreen.main.bounds.height : -UIScreen.main.bounds.height + 120
                 self.viewCapturedVideo.cornerRadius = 15
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     self.capturedVideoTrailingConstraint.constant = 35
@@ -581,7 +621,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             } else {
                 //Keep the 4:3 format of the video
                 let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20)/3)*4
-                self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
+                self.capturedVideoHeightConstraint.constant = conference ? -UIScreen.main.bounds.height : -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo
                 let leftPointInfoContainer = self.infoBlurEffect?
                     .convert((self.infoBlurEffect?.frame.origin)!, to: nil).x ?? 0
@@ -592,7 +632,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         default:
             if !withInfoContainer {
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + 120
-                self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.height + 160
+                self.capturedVideoHeightConstraint.constant = conference ? -UIScreen.main.bounds.height : -UIScreen.main.bounds.height + 160
                 self.viewCapturedVideo.cornerRadius = 15
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     self.capturedVideoTrailingConstraint.constant = 35
@@ -607,7 +647,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             } else {
                 //Keep the 4:3 format of the video
                 let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20)/4)*3
-                self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
+                self.capturedVideoHeightConstraint.constant = conference ? -UIScreen.main.bounds.height : -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo
                 let leftPointInfoContainer = self.infoBlurEffect?.convert((self.infoBlurEffect?
                     .frame.origin)!, to: nil).x ?? 0
@@ -630,8 +670,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }
         self.isMenuShowed = true
         self.buttonsContainer.isHidden = false
-
+ if (!self.viewModel.conferenceMode.value) {
         self.infoContainer.isHidden = false
+        }
         self.view.layoutIfNeeded()
 
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
@@ -650,12 +691,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func hideContactInfo() {
         self.isMenuShowed = false
         UIView.animate(withDuration: 0.2, animations: { [unowned self] in
-           // self.resizeCapturedVideo(withInfoContainer: false)
             self.infoContainerTopConstraint.constant = 250
             self.buttonsContainerBottomConstraint.constant = -200
             self.view.layoutIfNeeded()
             }, completion: { [weak self] _ in
-                self?.infoContainer.isHidden = true
+                if !(self?.viewModel.conferenceMode.value ?? false) {
+                    self?.infoContainer.isHidden = true
+                }
                 self?.buttonsContainer.isHidden = true
         })
     }
@@ -691,5 +733,28 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.view.layoutIfNeeded()
             }, completion: {  _ in
         })
+    }
+}
+
+extension CallViewController: ConferencePendingCallViewDelegate {
+    func setConferenceParticipantMenu(menu: UIView?) {
+        guard let menuView = menu else {
+            self.conferenceParticipantMenu?.removeFromSuperview()
+            self.conferenceParticipantMenu = nil
+            return
+        }
+        if self.conferenceParticipantMenu == nil {
+            self.conferenceParticipantMenu = menuView
+            self.view.addSubview(self.conferenceParticipantMenu!)
+            return
+        }
+        if self.conferenceParticipantMenu?.frame == menuView.frame {
+            self.conferenceParticipantMenu?.removeFromSuperview()
+            self.conferenceParticipantMenu = nil
+            return
+        }
+        self.conferenceParticipantMenu?.removeFromSuperview()
+        self.conferenceParticipantMenu = menuView
+        self.view.addSubview(self.conferenceParticipantMenu!)
     }
 }

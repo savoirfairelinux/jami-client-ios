@@ -22,12 +22,20 @@ import UIKit
 import Reusable
 import RxSwift
 
+protocol ConferencePendingCallViewDelegate: class {
+    func setConferenceParticipantMenu(menu: UIView?)
+}
+
+var inConfViewWidth: CGFloat = 60
+var inConfViewHeight: CGfloat = 60
+
 class ConferencePendingCallView: UIView {
     @IBOutlet var containerView: UIView!
-    @IBOutlet var backgroundView: UIView!
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var avatarView: UIView!
     let disposeBag = DisposeBag()
+    weak var delegate: ConferencePendingCallViewDelegate?
+    let menuWidth = 80
+    let menuHight = 40
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,6 +51,49 @@ class ConferencePendingCallView: UIView {
         Bundle.main.loadNibNamed("ConferencePendingCallView", owner: self, options: nil)
         addSubview(containerView)
         containerView.frame = self.bounds
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showMenu))
+        self.avatarView.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    @objc func showMenu() {
+        let menu = UIView(frame: CGRect(x: 40, y: 50, width: menuWidth, height: menuHight))
+        let blurView = UIBlurEffect(style: .light)
+        let background = UIVisualEffectView(effect: blurView)
+        background.frame = CGRect(x: 0, y: 0, width: menuWidth, height: menuHight)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: menuWidth, height: menuHight))
+        label.text = "Hang up"
+        label.textAlignment = .center
+        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: menuWidth, height: menuHight))
+        if #available(iOS 10.0, *) {
+            label.adjustsFontSizeToFitWidth = true
+        } else {
+            label.font = UIFont.systemFont(ofSize: 10)
+        }
+        menu.cornerRadius = 10
+        menu.addSubview(background)
+        menu.addSubview(label)
+        menu.addSubview(menuButton)
+        menuButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel?.cancelCall()
+                self?.removeFromSuperview()
+                self?.delegate?.setConferenceParticipantMenu(menu: nil)
+            }).disposed(by: self.disposeBag)
+        let viewFrame = self.frame.origin
+        let superview = self.superview
+        let superviewframe = superview?.frame.origin
+        let supersuperview = superview?.superview
+        let supersuperviewframe = supersuperview?.frame.origin
+        var origin = frame.origin
+        origin.x += viewFrame.x + (superviewframe?.x ?? 0) + (supersuperviewframe?.x ?? 0)
+        origin.y += viewFrame.y + (superviewframe?.y ?? 0) + (supersuperviewframe?.y ?? 0)
+        menu.frame.origin = origin
+        self.delegate?.setConferenceParticipantMenu(menu: menu)
+    }
+
+    @objc func cancellCall() {
+        self.viewModel?.cancelCall()
+        self.removeFromSuperview()
     }
 
     var viewModel: ConferencePendingCallViewModel? {
@@ -54,25 +105,30 @@ class ConferencePendingCallView: UIView {
                         self?.removeFromSuperview()
                     }
                 }).disposed(by: self.disposeBag)
-            self.cancelButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    self?.viewModel?.cancelCall()
-                    self?.removeFromSuperview()
-                }).disposed(by: self.disposeBag)
-            self.viewModel?.displayName.drive(self.nameLabel.rx.text)
-                .disposed(by: self.disposeBag)
-            UIView.animate(withDuration: 1,
-                       delay: 0.0,
-                       options: [.curveEaseInOut,
-                                 .autoreverse,
-                                 .repeat],
-                       animations: { [weak self] in
-                        self?.backgroundView.alpha = 0.1
-                       },
-                       completion: { [weak self] _ in
-                        self?.backgroundView.alpha = 0.7
-                   })
+            Observable<(Profile?, String?)>
+                .combineLatest(self.viewModel!
+                    .contactImageData!,
+                               self.viewModel!
+                                .displayName
+                                .asObservable()) { profile, username in
+                                    return (profile, username)
+            }
+            .observeOn(MainScheduler.instance)
+            .subscribe({ [weak self] profileData -> Void in
+                let photoData = NSData(base64Encoded: profileData.element?.0?.photo ?? "", options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+                let alias = profileData.element?.0?.alias
+                let nameData = profileData.element?.1
+                let name = alias != nil ? alias : nameData
+                guard let displayName = name else {return}
+                self?.avatarView.subviews.forEach({ view in
+                    view.removeFromSuperview()
+                })
+                self?.avatarView.addSubview(
+                    AvatarView(profileImageData: photoData,
+                               username: displayName,
+                               size: 60))
+            })
+            .disposed(by: self.disposeBag)
         }
     }
-
 }

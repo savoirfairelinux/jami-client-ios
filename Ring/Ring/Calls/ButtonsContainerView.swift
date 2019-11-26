@@ -37,8 +37,6 @@ class ButtonsContainerView: UIView, NibLoadable {
     @IBOutlet  weak var cancelButton: UIButton!
     @IBOutlet  weak var switchCameraButton: UIButton!
     @IBOutlet  weak var acceptCallButton: UIButton!
-    @IBOutlet  weak var addContactButton: UIButton!
-    @IBOutlet  weak var sendMessageButton: UIButton!
 
     //Constraints
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
@@ -100,8 +98,6 @@ class ButtonsContainerView: UIView, NibLoadable {
         dialpadButton.isHidden = true
         switchSpeakerButton.isHidden = true
         cancelButton.isHidden = false
-        addContactButton.isHidden = true
-        sendMessageButton.isHidden = true
         if self.viewModel?.isIncoming ?? false {
             acceptCallButton.isHidden = false
             cancelButtonBottomConstraint.constant = 60
@@ -133,8 +129,6 @@ class ButtonsContainerView: UIView, NibLoadable {
         switchSpeakerButton.isEnabled = true
         switchSpeakerButton.isHidden = false
         cancelButton.isHidden = false
-        addContactButton.isHidden = false
-        sendMessageButton.isHidden = false
         setUpConference()
     }
 
@@ -159,8 +153,6 @@ class ButtonsContainerView: UIView, NibLoadable {
         self.backgroundBlurEffect.isHidden = false
         pauseCallButton.isHidden = false
         cancelButton.isHidden = false
-        addContactButton.isHidden = false
-        sendMessageButton.isHidden = false
         setUpConference()
     }
 
@@ -168,7 +160,6 @@ class ButtonsContainerView: UIView, NibLoadable {
         if !(self.viewModel?.isConference ?? false) {
             return
         }
-        sendMessageButton.isHidden = true
         pauseCallButton.isHidden = true
         muteAudioButton.isHidden = true
         muteVideoButton.isHidden = true
