@@ -21,18 +21,34 @@
 import RxSwift
 import RxCocoa
 
-class ConferencePendingCallViewModel {
+class ConferenceParticipantViewModel {
     let call: CallModel
     let callsSercive: CallsService
+    let profileService: ProfilesService
+    let accountService: AccountsService
     lazy var observableCall = {
         self.callsSercive.currentCall(callId: call.callId)
     }()
     let disposeBag = DisposeBag()
 
-    init(with call: CallModel, callsService: CallsService) {
+    init(with call: CallModel, injectionBag: InjectionBag) {
         self.call = call
-        self.callsSercive = callsService
+        self.callsSercive = injectionBag.callService
+        self.profileService = injectionBag.profileService
+        self.accountService = injectionBag.accountService
     }
+
+    lazy var contactImageData: Observable<Profile>? = {
+        guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
+            return nil
+        }
+        let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
+        guard let uriString = JamiURI.init(schema: type,
+                  infoHach: call.participantUri,
+                  account: account).uriString else {return nil}
+        return self.profileService.getProfile(uri: uriString,
+                                              createIfNotexists: true, accountId: account.id)
+    }()
 
     lazy var displayName: Driver<String> = {
         var name = self.call.displayName.isEmpty ? self.call.registeredName : self.call.displayName
@@ -42,9 +58,9 @@ class ConferencePendingCallViewModel {
 
     lazy var removeView: Observable<Bool> = {
         return self.observableCall
+        .startWith(call)
             .map({ callModel in
                 return (callModel.state == .over ||
-                    callModel.state == .current ||
                     callModel.state == .failure ||
                     callModel.state == .hungup ||
                     callModel.state == .busy)
