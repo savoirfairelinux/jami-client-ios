@@ -45,7 +45,8 @@ enum MediaType: String, CustomStringConvertible {
         return self.rawValue
     }
 }
-
+// swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class CallsService: CallsAdapterDelegate {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let callsAdapter: CallsAdapter
@@ -204,16 +205,8 @@ class CallsService: CallsAdapterDelegate {
 
     func hangUp(callId: String) -> Completable {
         return Completable.create(subscribe: { completable in
-            guard let call = self.call(callID: callId) else {
-                completable(.error(CallServiceError.hangUpCallFailed))
-                return Disposables.create { }
-            }
             var success: Bool
-            if call.participantsCallId.count < 2 {
                 success = self.callsAdapter.hangUpCall(withId: callId)
-            } else {
-                success =  self.callsAdapter.hangUpConference(callId)
-            }
             if success {
                 completable(.completed)
             } else {
@@ -222,6 +215,27 @@ class CallsService: CallsAdapterDelegate {
             return Disposables.create { }
         })
     }
+
+    func hangUpCallOrConference(callId: String) -> Completable {
+            return Completable.create(subscribe: { completable in
+                guard let call = self.call(callID: callId) else {
+                    completable(.error(CallServiceError.hangUpCallFailed))
+                    return Disposables.create { }
+                }
+                var success: Bool
+                if call.participantsCallId.count < 2 {
+                    success = self.callsAdapter.hangUpCall(withId: callId)
+                } else {
+                    success =  self.callsAdapter.hangUpConference(callId)
+                }
+                if success {
+                    completable(.completed)
+                } else {
+                    completable(.error(CallServiceError.hangUpCallFailed))
+                }
+                return Disposables.create { }
+            })
+        }
 
     func hold(callId: String) -> Completable {
         return Completable.create(subscribe: { completable in
@@ -559,7 +573,6 @@ class CallsService: CallsAdapterDelegate {
                 self.call(callID: call)?.participantsCallId = conferenceCalls
             }
             guard var callDetails = self.callsAdapter.getConferenceDetails(conferenceID) else {return}
-           // var callDetails = [String: String]()
             callDetails[CallDetailKey.accountIdKey.rawValue] = self.call(callID: callId)?.accountId
             callDetails[CallDetailKey.audioOnlyKey.rawValue] = self.call(callID: callId)?.isAudioOnly.toString()
             let conf = CallModel(withCallId: conferenceID, callDetails: callDetails)
