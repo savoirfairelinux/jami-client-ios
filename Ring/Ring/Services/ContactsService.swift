@@ -138,13 +138,17 @@ class ContactsService {
             let success = self.contactsAdapter.acceptTrustRequest(fromContact: contactRequest.ringId,
                                                                   withAccountId: account.id)
             if success {
+                guard let jamiURI = JamiURI(schema: URIType.ring, infoHach: contactRequest.ringId, account: account).uriString else {
+                    observable.on(.completed)
+                    return Disposables.create { }
+                }
                 var stringImage: String?
                 if let vCard = contactRequest.vCard, let image = vCard.imageData {
                     stringImage = image.base64EncodedString()
                 }
                 let name = VCardUtils.getName(from: contactRequest.vCard)
                 _ = self.dbManager
-                    .createOrUpdateRingProfile(profileUri: contactRequest.ringId,
+                    .createOrUpdateRingProfile(profileUri: jamiURI,
                                                alias: name,
                                                image: stringImage,
                                                accountId: account.id)
