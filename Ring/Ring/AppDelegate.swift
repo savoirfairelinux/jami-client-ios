@@ -94,10 +94,89 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private let disposeBag = DisposeBag()
 
+    func copyData() {
+        clearDocumentFolder()
+        copyDocuments()
+    }
+
+    func clearDocumentFolder() {
+        let fileManager = FileManager.default
+        let dirPaths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+        let docsURL = dirPaths[0]
+
+        do {
+            let directoryContents = try fileManager.contentsOfDirectory(at: docsURL, includingPropertiesForKeys: nil, options: [])
+            let files = directoryContents.filter {!$0.hasDirectoryPath}
+            for filename in files {
+                try fileManager.removeItem(atPath: filename.path)
+            }
+            let subdirs = directoryContents.filter {$0.hasDirectoryPath}
+            for subdirectory in subdirs {
+                clearFolder(path: subdirectory)
+            }
+        } catch let error as NSError {
+            print("Could not clear temp folder: \(error.debugDescription)")
+        }
+    }
+
+    func clearFolder(path: URL) {
+        let fileManager = FileManager.default
+        do {
+            let directoryContents = try fileManager.contentsOfDirectory(at: path, includingPropertiesForKeys: nil, options: [])
+
+            let files = directoryContents.filter {!$0.hasDirectoryPath}
+            for filename in files {
+                try fileManager.removeItem(atPath: filename.path)
+            }
+            let subdirs = directoryContents.filter {$0.hasDirectoryPath}
+            if subdirs.isEmpty {
+                try fileManager.removeItem(atPath: path.path)
+                return
+            }
+            for subdirectory in subdirs {
+                clearFolder(path: subdirectory)
+            }
+        } catch let error as NSError {
+            print("Could not clear temp folder: \(error.debugDescription)")
+        }
+    }
+
+    func copyDocuments() {
+        let filemgr = FileManager.default
+        let dirPaths = filemgr.urls(for: .documentDirectory, in: .userDomainMask)
+        let docsURL = dirPaths[0]
+
+        let folderPath = Bundle.main.bundleURL.appendingPathComponent("Documents", isDirectory: true)
+        copyFiles(pathFromBundle: folderPath, pathDestDocs: docsURL)
+    }
+
+    func copyFiles(pathFromBundle: URL, pathDestDocs: URL) {
+        let fileManagerIs = FileManager.default
+        do {
+            let directoryContents = try fileManagerIs.contentsOfDirectory(at: pathFromBundle, includingPropertiesForKeys: nil, options: [])
+
+            let files = directoryContents.filter {!$0.hasDirectoryPath}
+            for filename in files {
+                try? fileManagerIs.copyItem(atPath: filename.path, toPath: pathDestDocs.appendingPathComponent(filename.lastPathComponent).path)
+            }
+
+            let subdirs = directoryContents.filter {$0.hasDirectoryPath}
+            for subdirectory in subdirs {
+                let subdirNamesStr = subdirectory.lastPathComponent
+                let docsFolder = pathDestDocs.appendingPathComponent(subdirNamesStr)
+                try? fileManagerIs.copyItem(atPath: subdirectory.path, toPath: docsFolder.path)
+                copyFiles(pathFromBundle: subdirectory, pathDestDocs: docsFolder)
+            }
+        } catch let error as NSError {
+             print("Could not copy folder: \(error.debugDescription)")
+        }
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // ignore sigpipe
         // swiftlint:disable nesting
+        copyData()
         typealias SigHandler = @convention(c) (Int32) -> Void
         let SIG_IGN = unsafeBitCast(OpaquePointer(bitPattern: 1), to: SigHandler.self)
         signal(SIGPIPE, SIG_IGN)

@@ -121,6 +121,9 @@
 		0E5806F323BE42EC007D1F5D /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5806F223BE42EC007D1F5D /* PlayerView.swift */; };
 		0E5806F523BE4307007D1F5D /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5806F423BE4307007D1F5D /* PlayerViewModel.swift */; };
 		0E5806F723BE4325007D1F5D /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5806F623BE4325007D1F5D /* PlayerView.xib */; };
+		0E53E7BC238EDE5C00432E6D /* unknown-celebrity-taking-selfie-2092709.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E53E7BB238EDE5B00432E6D /* unknown-celebrity-taking-selfie-2092709.jpg */; };
+		0E53E7BE238EDFD100432E6D /* woman-wearing-black-framed-eyeglasses-2118708.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E53E7BD238EDFD100432E6D /* woman-wearing-black-framed-eyeglasses-2118708.jpg */; };
+		0E53E879238F04A000432E6D /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = 0E53E878238F049F00432E6D /* Documents */; };
 		0E5A668322F0B1F100AA6820 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5A668222F0B1F100AA6820 /* ProgressView.swift */; };
 		0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E68571020238546008B0717 /* ConversationNavigation.swift */; };
 		0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6949781FA7E71C0029B60A /* BaseViewController.swift */; };
@@ -527,6 +530,9 @@
 		0E5806F223BE42EC007D1F5D /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		0E5806F423BE4307007D1F5D /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		0E5806F623BE4325007D1F5D /* PlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerView.xib; sourceTree = "<group>"; };
+		0E53E7BB238EDE5B00432E6D /* unknown-celebrity-taking-selfie-2092709.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "unknown-celebrity-taking-selfie-2092709.jpg"; sourceTree = "<group>"; };
+		0E53E7BD238EDFD100432E6D /* woman-wearing-black-framed-eyeglasses-2118708.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "woman-wearing-black-framed-eyeglasses-2118708.jpg"; sourceTree = "<group>"; };
+		0E53E878238F049F00432E6D /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documents; sourceTree = "<group>"; };
 		0E5A668222F0B1F100AA6820 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		0E639459224AB32200C0890A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		0E63F1F3202907090001F248 /* Ring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ring.entitlements; sourceTree = "<group>"; };
@@ -1697,6 +1703,9 @@
 			isa = PBXGroup;
 			children = (
 				26929FD125659E5F0052A601 /* cacert.pem */,
+				0E53E878238F049F00432E6D /* Documents */,
+				0E53E7BD238EDFD100432E6D /* woman-wearing-black-framed-eyeglasses-2118708.jpg */,
+				0E53E7BB238EDE5B00432E6D /* unknown-celebrity-taking-selfie-2092709.jpg */,
 				0EABD3842303600B00DE7ACF /* default.wav */,
 				1ABE07DA1F0D915100D36361 /* Localizable.strings */,
 				04399A021D1C2D9D00E99CD9 /* Images.xcassets */,
@@ -2049,6 +2058,7 @@
 				0E6F5451223C3C4F00ECC3CE /* AccountItemView.xib in Resources */,
 				26929FD425659E5F0052A601 /* cacert.pem in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
+				0E53E7BC238EDE5C00432E6D /* unknown-celebrity-taking-selfie-2092709.jpg in Resources */,
 				0E438A96204F318200402900 /* AccountHeader.xib in Resources */,
 				0E5806F723BE4325007D1F5D /* PlayerView.xib in Resources */,
 				26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */,
@@ -2058,6 +2068,8 @@
 				62AD58482056DA6800AF0701 /* MessageCellDataTransferReceived.xib in Resources */,
 				1A2041841F1EA0FC00C08435 /* CreateAccountViewController.storyboard in Resources */,
 				1A2D18ED1F2919D800B2C785 /* MeViewController.storyboard in Resources */,
+				0E35C10D2077DFF000BBA5E3 /* NotificationCell.xib in Resources */,
+				0E53E879238F04A000432E6D /* Documents in Resources */,
 				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1A20417E1F1E8DDA00C08435 /* CreateProfileViewController.storyboard in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
@@ -2077,6 +2089,7 @@
 				0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */,
 				1A2D18B31F2915C500B2C785 /* ConversationViewController.storyboard in Resources */,
 				0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */,
+				0E53E7BE238EDFD100432E6D /* woman-wearing-black-framed-eyeglasses-2118708.jpg in Resources */,
 				1A2D18A01F27A6D600B2C785 /* LinkDeviceViewController.storyboard in Resources */,
 				0E3697A9203243D3009A68CA /* BannedContactCell.xib in Resources */,
 				0E6D95982407113900996A28 /* LinkToAccountManagerViewController.storyboard in Resources */,
