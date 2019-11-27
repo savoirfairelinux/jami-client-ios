@@ -131,9 +131,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func stopCapturing() {
-        sessionQueue.async { [weak self] in
-            self?.captureSession.stopRunning()
-        }
     }
 
     func checkPermission() {
@@ -448,19 +445,19 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startCapture(withDevice device: String) {
-        self.log.debug("Capture started...")
-        if device == camera.nameDevice1280_720 && self.camera.quality == AVCaptureSession.Preset.medium {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
-        } else if device == camera.namePortrait && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-        }
-        self.angle = self.mapDeviceOrientation(orientation: self.currentOrientation)
-        self.camera.startCapturing()
+//        self.log.debug("Capture started...")
+//        if device == camera.nameDevice1280_720 && self.camera.quality == AVCaptureSession.Preset.medium {
+//            self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
+//        } else if device == camera.namePortrait && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
+//            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+//        }
+//        self.angle = self.mapDeviceOrientation(orientation: self.currentOrientation)
+//        self.camera.startCapturing()
     }
 
     func startVideoCaptureBeforeCall() {
-        self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
-        self.camera.startCapturing()
+//        self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
+//        self.camera.startCapturing()
     }
 
     func startCamera() {
@@ -477,7 +474,7 @@ extension VideoService: VideoAdapterDelegate {
 
     func stopCapture() {
         self.log.debug("Capture stopped...")
-        self.camera.stopCapturing()
+       // self.camera.stopCapturing()
     }
 
     func writeFrame(withImage image: UIImage?, forCallId: String) {

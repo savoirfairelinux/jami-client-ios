@@ -46,16 +46,16 @@ struct Renderer
 
     void bindAVSinkFunctions() {
         avtarget.push = [this](std::unique_ptr<DRing::VideoFrame> frame) {
-            if(!VideoAdapter.delegate) {
-                return;
-            }
-            @autoreleasepool {
-                UIImage *image = [Utils
-                                  convertHardwareDecodedFrameToImage: std::move(frame->pointer())];
-                isRendering = true;
-                [VideoAdapter.delegate writeFrameWithImage: image forCallId: rendererId];
-                isRendering = false;
-            }
+//            if(!VideoAdapter.delegate) {
+//                return;
+//            }
+//            @autoreleasepool {
+//                UIImage *image = [Utils
+//                                  convertHardwareDecodedFrameToImage: std::move(frame->pointer())];
+//                isRendering = true;
+//                [VideoAdapter.delegate writeFrameWithImage: image forCallId: rendererId];
+//                isRendering = false;
+//            }
         };
     }
     void bindSinkFunctions() {
@@ -211,10 +211,9 @@ static id <VideoAdapterDelegate> _delegate;
         return;
     }
     auto avframe = frame->pointer();
-        [Utils configureFrame:(AVFrame*)avframe
-              fromImageBuffer:image
-                        angle:(int) angle];
-
+//        [Utils configureFrame:(AVFrame*)avframe
+//              fromImageBuffer:image
+//                        angle:(int) angle];
     DRing::publishFrame();
 }
 
