@@ -127,9 +127,10 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func stopCapturing() {
-        sessionQueue.async { [unowned self] in
-            self.captureSession.stopRunning()
-        }
+      //  return
+//        sessionQueue.async { [unowned self] in
+//            self.captureSession.stopRunning()
+//        }
     }
 
     func checkPermission() {
@@ -484,14 +485,14 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startCapture(withDevice device: String) {
-        self.log.debug("Capture started...")
-        self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
-        self.camera.startCapturing()
+      //  self.log.debug("Capture started...")
+      //  self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
+      //  self.camera.startCapturing()
     }
 
     func startVideoCaptureBeforeCall() {
-        self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
-        self.camera.startCapturing()
+        //self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
+      //  self.camera.startCapturing()
     }
 
     func prepareVideoRecording() {
@@ -508,7 +509,7 @@ extension VideoService: VideoAdapterDelegate {
 
     func stopCapture() {
         self.log.debug("Capture stopped...")
-        self.camera.stopCapturing()
+       // self.camera.stopCapturing()
     }
 
     func writeFrame(withImage image: UIImage?, forCallId: String) {
