@@ -133,8 +133,8 @@ class ButtonsContainerView: UIView, NibLoadable {
         switchSpeakerButton.isEnabled = true
         switchSpeakerButton.isHidden = false
         cancelButton.isHidden = false
-        addContactButton.isHidden = false
-        sendMessageButton.isHidden = false
+       // addContactButton.isHidden = false
+       // sendMessageButton.isHidden = false
         setUpConference()
     }
 
@@ -159,8 +159,8 @@ class ButtonsContainerView: UIView, NibLoadable {
         self.backgroundBlurEffect.isHidden = false
         pauseCallButton.isHidden = false
         cancelButton.isHidden = false
-        addContactButton.isHidden = false
-        sendMessageButton.isHidden = false
+       // addContactButton.isHidden = false
+       // sendMessageButton.isHidden = false
         setUpConference()
     }
 

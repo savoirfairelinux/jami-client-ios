@@ -133,6 +133,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             return
         }
         initCallAnimation()
+        let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20)/3)*4
+        self.capturedVideoHeightConstraint.constant = -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
+        self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo
+        let leftPointInfoContainer = self.infoBlurEffect?
+            .convert((self.infoBlurEffect?.frame.origin)!, to: nil).x ?? 0
+        self.capturedVideoTrailingConstraint.constant = leftPointInfoContainer + 10
+        self.capturedVideoTopConstraint.constant = -20
+        self.viewCapturedVideo.cornerRadius = 25
     }
 
     func addTapGesture() {
