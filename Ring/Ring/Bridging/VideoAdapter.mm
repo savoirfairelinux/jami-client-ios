@@ -46,16 +46,16 @@ struct Renderer
 
     void bindAVSinkFunctions() {
         avtarget.push = [this](std::unique_ptr<DRing::VideoFrame> frame) {
-            if(!VideoAdapter.delegate) {
-                return;
-            }
-            @autoreleasepool {
-                UIImage *image = [Utils
-                                  convertHardwareDecodedFrameToImage: std::move(frame->pointer())];
-                isRendering = true;
-                [VideoAdapter.delegate writeFrameWithImage: image forCallId: rendererId];
-                isRendering = false;
-            }
+//            if(!VideoAdapter.delegate) {
+//                return;
+//            }
+//            @autoreleasepool {
+//                UIImage *image = [Utils
+//                                  convertHardwareDecodedFrameToImage: std::move(frame->pointer())];
+//                isRendering = true;
+//                [VideoAdapter.delegate writeFrameWithImage: image forCallId: rendererId];
+//                isRendering = false;
+//            }
         };
     }
     void bindSinkFunctions() {
@@ -199,16 +199,16 @@ withHardwareSupport:(BOOL)hardwareSupport {
         return;
     }
     auto avframe = frame->pointer();
-    if(hardwareAccelerated && !recording) {
-        [Utils configureHardwareDecodedFrame:(AVFrame*)avframe
-                             fromImageBuffer:image
-                                       angle:(int) angle];
-    } else {
-        [Utils configureFrame:(AVFrame*)avframe
-              fromImageBuffer:image
-                        angle:(int) angle];
+//    if(hardwareAccelerated && !recording) {
+//        [Utils configureHardwareDecodedFrame:(AVFrame*)avframe
+//                             fromImageBuffer:image
+//                                       angle:(int) angle];
+//    } else {
+//        [Utils configureFrame:(AVFrame*)avframe
+//              fromImageBuffer:image
+//                        angle:(int) angle];
 
-    }
+   // }
     DRing::publishFrame();
 }
 

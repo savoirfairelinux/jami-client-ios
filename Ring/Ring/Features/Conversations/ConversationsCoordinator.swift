@@ -106,82 +106,82 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         callViewController.viewModel.call = call
 
         var tempBag = DisposeBag()
-        if #available(iOS 10.0, *) {
-            call.callUUID = UUID()
-            callsProvider
-                .reportIncomingCall(account: account, call: call) { _ in
-                    // if starting CallKit failed fallback to jami call screen
-                    if UIApplication.shared.applicationState != .active {
-                        if AccountModelHelper
-                            .init(withAccount: account).isAccountSip() ||
-                            !self.accountService.getCurrentProxyState(accountID: account.id) {
-                            return
-                        }
-                        self.triggerCallNotifications(call: call)
-                        return
-                    }
-                    if account.id != call.accountId {
-                        self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
-                    }
-                    topController.dismiss(animated: false, completion: nil)
-                    guard let parent = self.parentCoordinator as? AppCoordinator else {return}
-                    parent.openConversation(participantID: call.participantUri)
-                    self.present(viewController: callViewController,
-                                 withStyle: .appear,
-                                 withAnimation: false,
-                                 withStateable: callViewController.viewModel)
-            }
-            callsProvider.sharedResponseStream
-                .filter({ serviceEvent in
-                    if serviceEvent.eventType != ServiceEventType.callProviderAnswerCall {
-                        return false
-                    }
-                    guard let callUUID: String = serviceEvent
-                        .getEventInput(ServiceEventInput.callUUID) else {return false}
-                    return callUUID == call.callUUID.uuidString
-                }).subscribe(onNext: { _ in
-                    self.navigationViewController.popToRootViewController(animated: false)
-                    if account.id != call.accountId {
-                        self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
-                    }
-                    topController.dismiss(animated: false, completion: nil)
-                    guard let parent = self.parentCoordinator as? AppCoordinator else {return}
-                    parent.openConversation(participantID: call.participantUri)
-                    self.present(viewController: callViewController,
-                                 withStyle: .appear,
-                                 withAnimation: false,
-                                 withStateable: callViewController.viewModel)
-                    tempBag = DisposeBag()
-                }).disposed(by: tempBag)
-            callViewController.viewModel.dismisVC
-                .share()
-                .subscribe(onNext: { hide in
-                    if hide {
-                tempBag = DisposeBag()
-                    }
-            }).disposed(by: tempBag)
-
-        } else {
-            if UIApplication.shared.applicationState != .active {
-                if AccountModelHelper
-                    .init(withAccount: account).isAccountSip() ||
-                    !self.accountService.getCurrentProxyState(accountID: account.id) {
-                    return
-                }
-                triggerCallNotifications(call: call)
-                return
-            }
+//        if #available(iOS 10.0, *) {
+//            call.callUUID = UUID()
+//            callsProvider
+//                .reportIncomingCall(account: account, call: call) { _ in
+//                    // if starting CallKit failed fallback to jami call screen
+//                    if UIApplication.shared.applicationState != .active {
+//                        if AccountModelHelper
+//                            .init(withAccount: account).isAccountSip() ||
+//                            !self.accountService.getCurrentProxyState(accountID: account.id) {
+//                            return
+//                        }
+//                        self.triggerCallNotifications(call: call)
+//                        return
+//                    }
+//                    if account.id != call.accountId {
+//                        self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
+//                    }
+//                    topController.dismiss(animated: false, completion: nil)
+//                    guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+//                    parent.openConversation(participantID: call.participantUri)
+//                    self.present(viewController: callViewController,
+//                                 withStyle: .appear,
+//                                 withAnimation: false,
+//                                 withStateable: callViewController.viewModel)
+//            }
+//            callsProvider.sharedResponseStream
+//                .filter({ serviceEvent in
+//                    if serviceEvent.eventType != ServiceEventType.callProviderAnswerCall {
+//                        return false
+//                    }
+//                    guard let callUUID: String = serviceEvent
+//                        .getEventInput(ServiceEventInput.callUUID) else {return false}
+//                    return callUUID == call.callUUID.uuidString
+//                }).subscribe(onNext: { _ in
+//                    self.navigationViewController.popToRootViewController(animated: false)
+//                    if account.id != call.accountId {
+//                        self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
+//                    }
+//                    topController.dismiss(animated: false, completion: nil)
+//                    guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+//                    parent.openConversation(participantID: call.participantUri)
+//                    self.present(viewController: callViewController,
+//                                 withStyle: .appear,
+//                                 withAnimation: false,
+//                                 withStateable: callViewController.viewModel)
+//                    tempBag = DisposeBag()
+//                }).disposed(by: tempBag)
+//            callViewController.viewModel.dismisVC
+//                .share()
+//                .subscribe(onNext: { hide in
+//                    if hide {
+//                tempBag = DisposeBag()
+//                    }
+//            }).disposed(by: tempBag)
+//
+//        } else {
+//            if UIApplication.shared.applicationState != .active {
+//                if AccountModelHelper
+//                    .init(withAccount: account).isAccountSip() ||
+//                    !self.accountService.getCurrentProxyState(accountID: account.id) {
+//                    return
+//                }
+//                triggerCallNotifications(call: call)
+//                return
+//            }
             if account.id != call.accountId {
                 self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
             }
             topController.dismiss(animated: false, completion: nil)
-            guard let parent = self.parentCoordinator as? AppCoordinator else {return}
-            parent.openConversation(participantID: call.participantUri)
+            //guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+           // parent.openConversation(participantID: call.participantUri)
             self.present(viewController: callViewController,
                          withStyle: .appear,
                          withAnimation: false,
                          withStateable: callViewController.viewModel)
-        }
+        //}
     }
 
     func createNewAccount() {
