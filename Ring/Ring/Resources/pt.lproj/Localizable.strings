@@ -142,6 +142,7 @@
 "calls.searching" = "A pesquisar…";
 "calls.callFinished" = "Chamada terminada";
 "calls.currentCallWith" = "Chamar com";
+"calls.haghUp" = "hang up";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";

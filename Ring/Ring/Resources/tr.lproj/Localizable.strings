@@ -142,6 +142,7 @@
 "calls.searching" = "Arıyor...";
 "calls.callFinished" = "Arama sonlandırıldı";
 "calls.currentCallWith" = "Call with ";
+"calls.haghUp" = "hang up";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";

@@ -142,6 +142,7 @@
 "calls.searching" = "Söker...";
 "calls.callFinished" = "Samtalet avslutat";
 "calls.currentCallWith" = "Ring upp med";
+"calls.haghUp" = "hang up";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";

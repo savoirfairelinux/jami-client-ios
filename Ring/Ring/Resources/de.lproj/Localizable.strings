@@ -142,6 +142,7 @@
 "calls.searching" = "Suchen…";
 "calls.callFinished" = "Anruf beendet";
 "calls.currentCallWith" = "Anrufen mit";
+"calls.haghUp" = "hang up";
 
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";

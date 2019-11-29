@@ -142,6 +142,7 @@
 "calls.searching" = "正在搜尋……";
 "calls.callFinished" = "通話結束";
 "calls.currentCallWith" = "通話以";
+"calls.haghUp" = "hang up";
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";
