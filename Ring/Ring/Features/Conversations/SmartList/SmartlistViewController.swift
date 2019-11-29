@@ -205,10 +205,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         }
 
         //create accounts button
-        let expendAccountButton = UIButton(type: .custom)
-        expendAccountButton.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
-        expendAccountButton.setTitle("....", for: .normal)
-        expendAccountButton.setTitleColor(.jamiSecondary, for: .normal)
         let accountButton = UIButton(type: .custom)
         self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
             .disposed(by: disposeBag)
@@ -219,7 +215,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         accountButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         accountButton.imageEdgeInsets = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4)
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
-        containerView.addSubview(expendAccountButton)
         containerView.addSubview(accountButton)
         let accountButtonItem = UIBarButtonItem(customView: containerView)
         accountButtonItem.customView?.translatesAutoresizingMaskIntoConstraints = false
@@ -232,12 +227,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 self.openAccountsList()
             })
             .disposed(by: self.disposeBag)
-        expendAccountButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.openAccountsList()
-            })
-            .disposed(by: self.disposeBag)
-
         self.navigationItem.leftBarButtonItem = accountButtonItem
 
         dialpadButton.rx.tap
