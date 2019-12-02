@@ -142,7 +142,7 @@
 "calls.searching" = "Keresés…";
 "calls.callFinished" = "A hívás befejeződött";
 "calls.currentCallWith" = "Hívás:";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "Hívás befejezése";
 
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";

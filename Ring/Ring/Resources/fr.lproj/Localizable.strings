@@ -142,7 +142,7 @@
 "calls.searching" = "Recherche en cours ...";
 "calls.callFinished" = "Appel terminé";
 "calls.currentCallWith" = "Appel  avec";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "Raccrocher";
 
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";

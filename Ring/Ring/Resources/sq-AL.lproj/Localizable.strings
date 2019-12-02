@@ -142,7 +142,7 @@
 "calls.searching" = "Po kërkohet…";
 "calls.callFinished" = "Thirrja përfundoi";
 "calls.currentCallWith" = "Thirre me";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "mbylleni";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";

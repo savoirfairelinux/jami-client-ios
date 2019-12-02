@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Приглашения";
 "global.meTabBarTitle" = "Учётная запись";
 "global.ok" = "Да";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Свобода";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

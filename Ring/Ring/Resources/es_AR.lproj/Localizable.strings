@@ -85,7 +85,7 @@
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(Recommended)";
-"createAccount.UsernameNotRegisteredTitle" = "Network error";
+"createAccount.UsernameNotRegisteredTitle" = "Error de red";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
@@ -104,7 +104,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Cuenta Añadida";
 "alerts.accountNoNetworkTitle" = "No se puede conectar a la red";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "No se pudo añadir la cuenta debido a que Jami no ha podido conectarse a la red. Revisa la conectividad de tu dispositivo.";
 "alerts.accountDefaultErrorTitle" = "Error desconocido";
 "alerts.accountDefaultErrorMessage" = "No se pudo crear la cuenta.";
 "alerts.profileTakePhoto" = "Tomar foto";
