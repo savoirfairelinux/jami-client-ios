@@ -545,6 +545,10 @@ class MeViewModel: ViewModel, Stateable {
     }()
 
     func enableNotifications(enable: Bool) {
+        if enable == notificationsPermitted.value &&
+            enable == self.accountService.proxyEnabled() {
+            return
+        }
         guard let account = self.accountService.currentAccount else {return}
         if !self.accountService.proxyEnabled() && enable == true {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
