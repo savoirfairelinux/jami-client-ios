@@ -89,15 +89,9 @@
 		0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */; };
 		0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */; };
 		0E13A91C22B844B100A12A54 /* NSUserActivity+Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13A91B22B844B100A12A54 /* NSUserActivity+Call.swift */; };
-		0E20E4C72031FF560087C868 /* BlockContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20E4C52031FF560087C868 /* BlockContactsCell.swift */; };
-		0E20E4C82031FF560087C868 /* BlockContactsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E20E4C62031FF560087C868 /* BlockContactsCell.xib */; };
-		0E2D5F531F9145C800D574BF /* LinkNewDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */; };
-		0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */; };
 		0E320D50224ADF840070B515 /* DialpadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E320D4F224ADF840070B515 /* DialpadViewController.storyboard */; };
 		0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E320D51224ADF930070B515 /* DialpadViewController.swift */; };
 		0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E320D53224ADFD00070B515 /* DialpadViewModel.swift */; };
-		0E35C10C2077DFF000BBA5E3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E35C10A2077DFF000BBA5E3 /* NotificationCell.swift */; };
-		0E35C10D2077DFF000BBA5E3 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E35C10B2077DFF000BBA5E3 /* NotificationCell.xib */; };
 		0E36979920322D46009A68CA /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36979720322D46009A68CA /* BlockListViewController.swift */; };
 		0E36979D20322D75009A68CA /* BlockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36979C20322D75009A68CA /* BlockListViewModel.swift */; };
 		0E36979F20322E6F009A68CA /* BlockListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36979E20322E6F009A68CA /* BlockListViewController.storyboard */; };
@@ -147,8 +141,6 @@
 		0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E99F19F22417A0400CF8BD6 /* JamiURI.swift */; };
 		0E9D84491FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */; };
 		0E9D844B1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D844A1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift */; };
-		0EAA9DB42029F0AA005E245C /* ProxyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA9DB22029F0AA005E245C /* ProxyCell.swift */; };
-		0EAA9DB52029F0AA005E245C /* ProxyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA9DB32029F0AA005E245C /* ProxyCell.xib */; };
 		0EABD3852303600B00DE7ACF /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EABD3842303600B00DE7ACF /* default.wav */; };
 		0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */; };
 		0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */; };
@@ -424,15 +416,9 @@
 		0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDataHepler.swift; sourceTree = "<group>"; };
 		0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionDataHelper.swift; sourceTree = "<group>"; };
 		0E13A91B22B844B100A12A54 /* NSUserActivity+Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserActivity+Call.swift"; sourceTree = "<group>"; };
-		0E20E4C52031FF560087C868 /* BlockContactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockContactsCell.swift; sourceTree = "<group>"; };
-		0E20E4C62031FF560087C868 /* BlockContactsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockContactsCell.xib; sourceTree = "<group>"; };
-		0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkNewDeviceCell.swift; sourceTree = "<group>"; };
-		0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkNewDeviceCell.xib; sourceTree = "<group>"; };
 		0E320D4F224ADF840070B515 /* DialpadViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DialpadViewController.storyboard; sourceTree = "<group>"; };
 		0E320D51224ADF930070B515 /* DialpadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialpadViewController.swift; sourceTree = "<group>"; };
 		0E320D53224ADFD00070B515 /* DialpadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialpadViewModel.swift; sourceTree = "<group>"; };
-		0E35C10A2077DFF000BBA5E3 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
-		0E35C10B2077DFF000BBA5E3 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		0E36979720322D46009A68CA /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
 		0E36979C20322D75009A68CA /* BlockListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewModel.swift; sourceTree = "<group>"; };
 		0E36979E20322E6F009A68CA /* BlockListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BlockListViewController.storyboard; sourceTree = "<group>"; };
@@ -485,8 +471,6 @@
 		0E99F19F22417A0400CF8BD6 /* JamiURI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiURI.swift; sourceTree = "<group>"; };
 		0E9D84481FA7DA6A00C561EB /* ChatTabBarItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabBarItemViewModel.swift; sourceTree = "<group>"; };
 		0E9D844A1FA7DBAA00C561EB /* ContactRequestTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestTabBarItem.swift; sourceTree = "<group>"; };
-		0EAA9DB22029F0AA005E245C /* ProxyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyCell.swift; sourceTree = "<group>"; };
-		0EAA9DB32029F0AA005E245C /* ProxyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProxyCell.xib; sourceTree = "<group>"; };
 		0EABD3842303600B00DE7ACF /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		0EB12451224AB1030025F8CA /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceCell.xib; sourceTree = "<group>"; };
@@ -1124,15 +1108,6 @@
 			path = DBHelpers;
 			sourceTree = "<group>";
 		};
-		0E20E4C22031FEFF0087C868 /* BlockListCell */ = {
-			isa = PBXGroup;
-			children = (
-				0E20E4C52031FF560087C868 /* BlockContactsCell.swift */,
-				0E20E4C62031FF560087C868 /* BlockContactsCell.xib */,
-			);
-			name = BlockListCell;
-			sourceTree = "<group>";
-		};
 		0E320D4E224ADF570070B515 /* Dialpad */ = {
 			isa = PBXGroup;
 			children = (
@@ -1141,15 +1116,6 @@
 				0E320D53224ADFD00070B515 /* DialpadViewModel.swift */,
 			);
 			path = Dialpad;
-			sourceTree = "<group>";
-		};
-		0E35C1092077CE1400BBA5E3 /* PushNotifications */ = {
-			isa = PBXGroup;
-			children = (
-				0E35C10A2077DFF000BBA5E3 /* NotificationCell.swift */,
-				0E35C10B2077DFF000BBA5E3 /* NotificationCell.xib */,
-			);
-			name = PushNotifications;
 			sourceTree = "<group>";
 		};
 		0E36979B20322D4D009A68CA /* BlockList */ = {
@@ -1205,9 +1171,6 @@
 		0E5AFE0A1F8EBC040040D539 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0E35C1092077CE1400BBA5E3 /* PushNotifications */,
-				0E20E4C22031FEFF0087C868 /* BlockListCell */,
-				0EAA9DAD2029F054005E245C /* Proxy */,
 				0E5AFE0B1F8EBC1E0040D539 /* DeviceCell */,
 				0E6F544C223BFE3E00ECC3CE /* DisposableCell.swift */,
 			);
@@ -1219,8 +1182,6 @@
 			children = (
 				0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */,
 				0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */,
-				0E2D5F521F9145C800D574BF /* LinkNewDeviceCell.swift */,
-				0E2D5F541F9145F200D574BF /* LinkNewDeviceCell.xib */,
 			);
 			name = DeviceCell;
 			sourceTree = "<group>";
@@ -1253,15 +1214,6 @@
 				0E6949781FA7E71C0029B60A /* BaseViewController.swift */,
 			);
 			path = TabBar;
-			sourceTree = "<group>";
-		};
-		0EAA9DAD2029F054005E245C /* Proxy */ = {
-			isa = PBXGroup;
-			children = (
-				0EAA9DB22029F0AA005E245C /* ProxyCell.swift */,
-				0EAA9DB32029F0AA005E245C /* ProxyCell.xib */,
-			);
-			name = Proxy;
 			sourceTree = "<group>";
 		};
 		0ED2B6F81F96A048001572F0 /* LinknewDevice */ = {
@@ -1845,15 +1797,11 @@
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
 				62AD58482056DA6800AF0701 /* MessageCellDataTransferReceived.xib in Resources */,
 				1A2041841F1EA0FC00C08435 /* CreateAccountViewController.storyboard in Resources */,
-				0E2D5F551F9145F200D574BF /* LinkNewDeviceCell.xib in Resources */,
 				1A2D18ED1F2919D800B2C785 /* MeViewController.storyboard in Resources */,
-				0E35C10D2077DFF000BBA5E3 /* NotificationCell.xib in Resources */,
 				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1A20417E1F1E8DDA00C08435 /* CreateProfileViewController.storyboard in Resources */,
-				0EAA9DB52029F0AA005E245C /* ProxyCell.xib in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
 				1A5DC0381F35675E0075E8EF /* ContactRequestCell.xib in Resources */,
-				0E20E4C82031FF560087C868 /* BlockContactsCell.xib in Resources */,
 				1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
@@ -1980,7 +1928,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
-				0E2D5F531F9145C800D574BF /* LinkNewDeviceCell.swift in Sources */,
 				0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */,
 				4430A671236CBC7A00747177 /* ContactPickerViewModel.swift in Sources */,
 				621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */,
@@ -2061,7 +2008,6 @@
 				1A2D18FC1F292DAD00B2C785 /* ConversationCell.swift in Sources */,
 				0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */,
 				0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */,
-				0E20E4C72031FF560087C868 /* BlockContactsCell.swift in Sources */,
 				62B60AF92048A40D001BEACF /* DataTransferAdapter.mm in Sources */,
 				1A5DC0371F35675E0075E8EF /* ContactRequestCell.swift in Sources */,
 				1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */,
@@ -2121,7 +2067,6 @@
 				564C44621E943DE6000F92B1 /* NameService.swift in Sources */,
 				1A5DC02C1F3565250075E8EF /* MeViewController.swift in Sources */,
 				0EF78DE31FD0AE3000FC6966 /* ConversationsManager.swift in Sources */,
-				0EAA9DB42029F0AA005E245C /* ProxyCell.swift in Sources */,
 				66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */,
 				0E5A668322F0B1F100AA6820 /* ProgressView.swift in Sources */,
 				0E96ED79225D06480016C07D /* GeneralSettingsViewModel.swift in Sources */,
@@ -2149,7 +2094,6 @@
 				1A5DC0301F3565AE0075E8EF /* SmartlistViewController.swift in Sources */,
 				1A2D18A21F27A6D600B2C785 /* LinkDeviceViewModel.swift in Sources */,
 				564C44601E943C37000F92B1 /* NameRegistrationAdapter.mm in Sources */,
-				0E35C10C2077DFF000BBA5E3 /* NotificationCell.swift in Sources */,
 				0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */,
 				0EF49AA123828CBC0064CD98 /* ConferenceParticipantViewModel.swift in Sources */,
 				0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */,
