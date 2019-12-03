@@ -53,7 +53,16 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.configureBindings()
         self.configureRingNavigationBar()
         self.calculateSipCredentialsMargin()
-        self.adaptTableToKeyboardState(for: self.settingsTable, with: self.disposeBag, topOffset: self.stretchyHeader.minimumContentHeight)
+        self.adaptTableToKeyboardState(for: self.settingsTable, with: self.disposeBag,
+                                       topOffset: self.stretchyHeader.minimumContentHeight)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(preferredContentSizeChanged(_:)),
+                                               name: UIContentSizeCategory.didChangeNotification,
+                                               object: nil)
+    }
+
+    @objc private func preferredContentSizeChanged(_ notification: NSNotification) {
+        self.calculateSipCredentialsMargin()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -146,13 +155,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         //Register cell
         self.setUpDataSource()
         self.settingsTable.register(cellType: DeviceCell.self)
-        self.settingsTable.register(cellType: LinkNewDeviceCell.self)
-        self.settingsTable.register(cellType: ProxyCell.self)
         self.settingsTable.register(cellType: BlockContactsCell.self)
-        self.settingsTable.register(cellType: NotificationCell.self)
 
         self.settingsTable.rx.itemSelected
-            //.throttle(RxTimeInterval(2), scheduler: MainScheduler.instance)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] indexPath in
                 if (self?.settingsTable.cellForRow(at: indexPath) as? BlockContactsCell) != nil {
@@ -287,25 +292,30 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.removeDevice.rx.tap.subscribe(onNext: { [weak self, device] in
                         self?.confirmRevokeDeviceAlert(deviceID: device.deviceId)
                     }).disposed(by: cell.disposeBag)
+                    cell.sizeToFit()
                     return cell
 
                 case .linkNew:
-                    let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LinkNewDeviceCell.self)
-
-                    cell.addDeviceButton.rx.tap.subscribe(onNext: { [weak self] in
-                        self?.viewModel.linkDevice()
-                    }).disposed(by: cell.disposeBag)
-                    cell.addDeviceTitle.rx.tap.subscribe(onNext: { [weak self] in
-                        self?.viewModel.linkDevice()
-                    }).disposed(by: cell.disposeBag)
-                    cell.addDeviceTitle.setTitle(L10n.AccountPage.linkDeviceTitle, for: .normal)
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.AccountPage.linkDeviceTitle
+                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textAlignment = .center
                     cell.selectionStyle = .none
+                    cell.sizeToFit()
+                    let button = UIButton.init(frame: cell.frame)
+                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    button.frame.size = size
+                    cell.addSubview(button)
+                    button.rx.tap.subscribe(onNext: { [weak self] in
+                        self?.viewModel.linkDevice()
+                    }).disposed(by: cell.disposeBag)
                     return cell
 
                 case .blockedList:
                     let cell = tableView.dequeueReusableCell(for: indexPath,
                     cellType: BlockContactsCell.self)
                     cell.label.text = L10n.AccountPage.blockedContacts
+                    cell.label.font = UIFont.preferredFont(forTextStyle: .body)
                     return cell
 
                 case .sectionHeader(let title):
@@ -313,7 +323,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.text = title
                     cell.backgroundColor = UIColor.jamiNavigationBar
                     cell.selectionStyle = .none
-                    cell.heightAnchor.constraint(equalToConstant: 35).isActive = true
                     return cell
 
                 case .removeAccount:
@@ -322,6 +331,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.textColor = UIColor.jamiMain
                     cell.textLabel?.textAlignment = .center
                     cell.selectionStyle = .none
+                    cell.sizeToFit()
                     let button = UIButton.init(frame: cell.frame)
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
                     button.frame.size = size
@@ -341,6 +351,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.text = L10n.AccountPage.shareAccountDetails
                     cell.textLabel?.textColor = UIColor.jamiMain
                     cell.textLabel?.textAlignment = .center
+                    cell.sizeToFit()
                     cell.selectionStyle = .none
                     let button = UIButton.init(frame: cell.frame)
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
@@ -352,16 +363,23 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
 
                 case .notifications:
-                    let cell = tableView.dequeueReusableCell(for: indexPath,
-                                                             cellType: NotificationCell.self)
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.AccountPage.enableNotifications
+                    let switchView = UISwitch()
                     cell.selectionStyle = .none
-                    cell.enableNotificationsLabel.text = L10n.AccountPage.enableNotifications
-                    self.viewModel.notificationsEnabled.bind(to: cell.enableNotificationsSwitch.rx.value)
-                        .disposed(by: cell.disposeBag)
-                    cell.enableNotificationsSwitch.rx.value.skip(1)
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
+                    self.viewModel.notificationsEnabledObservable
                         .observeOn(MainScheduler.instance)
-                        .subscribe(onNext: { [weak self] (enable) in
-                            self?.viewModel.enableNotifications(enable: enable)
+                        .bind(to: switchView.rx.value)
+                        .disposed(by: cell.disposeBag)
+                    switchView.setOn(self.viewModel.notificationsEnabled, animated: false)
+                    switchView.rx
+                        .isOn.changed
+                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .distinctUntilChanged().asObservable()
+                        .subscribe(onNext: {[weak self] value in
+                            self?.viewModel.enableNotifications(enable: value)
                         }).disposed(by: cell.disposeBag)
                     return cell
                 case .sipUserName(let value):
@@ -390,31 +408,27 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                                      value: value)
                     return cell
                 case .accountState(let state):
-                    let cell = DisposableCell()
+                    let cell = DisposableCell(style: .value1, reuseIdentifier: "AccountStateCell")
+
                     cell.textLabel?.text = L10n.Account.accountStatus
                     cell.selectionStyle = .none
                     cell.textLabel?.sizeToFit()
-                    let text = UILabel()
-                    text.font = self.getSettingsFont()
-                    text.frame = CGRect(x: self.sipCredentialsMargin, y: 0,
-                                        width: cell.frame.width - self.sipCredentialsMargin,
-                                        height: cell.frame.height)
-                    text.text = state.value
+                    cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+                    cell.detailTextLabel?.text = state.value
                     state.asObservable()
                         .observeOn(MainScheduler.instance)
-                        .bind(to: text.rx.text)
-                        .disposed(by: cell.disposeBag)
-                    cell.contentView.addSubview(text)
+                        .subscribe(onNext: { (status) in
+                                                   cell.detailTextLabel?.text = status
+                                               }).disposed(by: cell.disposeBag)
+                    cell.layoutIfNeeded()
                     return cell
                 case .enableAccount:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.Account.enableAccount
                     let switchView = UISwitch()
                     cell.selectionStyle = .none
-                    switchView.frame = CGRect(x: self.view.frame.size.width - 63,
-                                              y: cell.frame.size.height * 0.5 - 15,
-                                              width: 49, height: 30)
-                    cell.contentView.addSubview(switchView)
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
                     switchView.setOn(self.viewModel.accountEnabled.value,
                                      animated: false)
                     self.viewModel.accountEnabled
@@ -422,9 +436,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .observeOn(MainScheduler.instance)
                         .bind(to: switchView.rx.value)
                         .disposed(by: cell.disposeBag)
-                    switchView.rx.value
-                        .observeOn(MainScheduler.instance)
-                        .subscribe(onNext: { [weak self] (enable) in
+                    switchView.rx
+                        .isOn.changed
+                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .distinctUntilChanged().asObservable()
+                        .subscribe(onNext: {[weak self] enable in
                             self?.viewModel.enableAccount(enable: enable)
                         }).disposed(by: cell.disposeBag)
                     return cell
@@ -443,16 +459,14 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     func configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
                                      value: String) -> UITableViewCell {
-        let cell = DisposableCell()
+        let cell = DisposableCell(style: .value1, reuseIdentifier: "AccountSIPCredentialsCell")
         cell.selectionStyle = .none
         let text = UITextField()
         text.tag = self.sipCredentialsTAG
-        text.font = self.getSettingsFont()
-        text.frame = CGRect(x: self.sipCredentialsMargin, y: 0,
-                            width: self.view.frame.width - self.sipCredentialsMargin,
-                            height: cell.frame.height)
-        text.text = value
+        text.font = UIFont.preferredFont(forTextStyle: .caption2)
         text.returnKeyType = .done
+        text.text = value
+        text.sizeToFit()
         text.rx.controlEvent(.editingDidEndOnExit)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
@@ -477,7 +491,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         case .sipPassword:
             cell.textLabel?.text = L10n.Account.sipPassword
             //show password button
-            var rightButton  = UIButton(type: .custom)
+            let rightButton  = UIButton(type: .custom)
             rightButton.frame = CGRect(x: 0, y: 0, width: 55, height: 30)
             self.viewModel.secureTextEntry
                 .asObservable()
@@ -514,26 +528,42 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         default:
             break
         }
+        cell.textLabel?.sizeToFit()
+        cell.sizeToFit()
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        cell.detailTextLabel?.textColor = UIColor.clear
+        var frame = CGRect(x: self.sipCredentialsMargin, y: 0,
+                                  width: self.view.frame.width - self.sipCredentialsMargin,
+                                  height: cell.frame.height)
+        if self.view.frame.width - self.sipCredentialsMargin < text.frame.size.width {
+            let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
+            let size = text.frame.size
+            frame.origin = origin
+            frame.size = size
+            cell.detailTextLabel?.text = value
+        } else {
+            cell.detailTextLabel?.text = ""
+        }
+        cell.detailTextLabel?.sizeToFit()
+        text.frame = frame
         cell.contentView.addSubview(text)
+        cell.sizeToFit()
+        cell.setNeedsLayout()
+        cell.setNeedsDisplay()
         return cell
     }
 
     func calculateSipCredentialsMargin() {
         let margin: CGFloat = 30
         var usernameLength, passwordLength,
-        sipServerLength, portLength,
-        statusLength, proxyLength: CGFloat
+        sipServerLength, portLength, proxyLength: CGFloat
         let username = L10n.Account.sipUsername
         let password = L10n.Account.sipPassword
         let sipServer = L10n.Account.port
         let port = L10n.Account.sipServer
-        let status = L10n.Account.accountStatus
         let proxy = L10n.Account.proxyServer
         let label = UITextView()
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.text = status
-        label.sizeToFit()
-        statusLength = label.frame.size.width
+        label.font = UIFont.preferredFont(forTextStyle: .body)
         label.text = username
         label.sizeToFit()
         usernameLength = label.frame.size.width
@@ -549,7 +579,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         label.text = proxy
         label.sizeToFit()
         proxyLength = label.frame.size.width
-        sipCredentialsMargin = max(max(max(max(max(usernameLength, passwordLength), sipServerLength), portLength), statusLength), proxyLength) + margin
+        sipCredentialsMargin = max(max(max(max(usernameLength, passwordLength), sipServerLength), portLength), proxyLength) + margin
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

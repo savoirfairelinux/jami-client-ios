@@ -66,17 +66,11 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
 
                 case .hardwareAcceleration:
                     let cell = DisposableCell()
-                    //L10n.CreateProfile.title
-                    //"generalSettings.title" = "General settings";
-                    //"generalSettings.videoAcceleration" = "Enable video acceleration";
                     cell.textLabel?.text = L10n.GeneralSettings.videoAcceleration
                     let switchView = UISwitch()
                     cell.selectionStyle = .none
-                    switchView.frame = CGRect(x: self.view.frame.size.width - 63,
-                                              y: cell.frame.size.height * 0.5 - 15,
-                                              width: 49, height: 30)
-                    cell.contentView
-                        .addSubview(switchView)
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
                     switchView.setOn(self.viewModel.hardwareAccelerationEnabled.value,
                                      animated: false)
                     self.viewModel.hardwareAccelerationEnabled
