@@ -58,7 +58,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private let log = SwiftyBeaver.self
 
-    private var quality = AVCaptureSession.Preset.hd1280x720
+    var quality = AVCaptureSession.Preset.hd1280x720
     private var orientation = AVCaptureVideoOrientation.portrait
 
     func setQuality(quality: AVCaptureSession.Preset) {
@@ -464,6 +464,10 @@ extension VideoService: VideoAdapterDelegate {
     func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?) {
         if let codecName = codec {
             self.codec = VideoCodecs(rawValue: codecName) ?? VideoCodecs.H264
+        }
+        if !supportHardware() && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
+            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+            self.videoAdapter.switchInput("camera://" + camera.namePortrait, forCall: rendererId)
         }
         self.log.debug("Decoding started...")
         videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height, withHardwareSupport: supportHardware())
