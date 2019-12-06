@@ -113,17 +113,17 @@ extern "C" {
 +(UIImageOrientation)uimageOrientationFromRotation:(double)rotation {
     UIImageOrientation orientation = UIImageOrientationUp;
     switch ((int)rotation) {
-        case 0:
-            orientation = UIImageOrientationUp;
-            break;
         case 90:
-            orientation = UIImageOrientationLeft;
-            break;
-        case -90:
             orientation = UIImageOrientationRight;
+            break;
+        case 270:
+        case -90:
+            orientation = UIImageOrientationLeft;
             break;
         case -180:
             orientation = UIImageOrientationDown;
+        default:
+            orientation = UIImageOrientationUp;
             break;
     }
     return orientation;
@@ -131,17 +131,18 @@ extern "C" {
 +(CGImagePropertyOrientation)ciimageOrientationFromRotation:(double)rotation {
     CGImagePropertyOrientation orientation = kCGImagePropertyOrientationUp;
     switch ((int)rotation) {
-        case 0:
-            orientation = kCGImagePropertyOrientationUp;
-            break;
         case 90:
-            orientation = kCGImagePropertyOrientationLeft;
-            break;
-        case -90:
             orientation = kCGImagePropertyOrientationRight;
+            break;
+        case 270:
+        case -90:
+            orientation = kCGImagePropertyOrientationLeft;
             break;
         case -180:
             orientation = kCGImagePropertyOrientationDown;
+            break;
+        default:
+            orientation = kCGImagePropertyOrientationUp;
             break;
     }
     return orientation;
