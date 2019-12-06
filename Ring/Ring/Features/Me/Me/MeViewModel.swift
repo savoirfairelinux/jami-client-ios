@@ -363,6 +363,7 @@ class MeViewModel: ViewModel, Stateable {
         self.accountService.proxyEnabled(accountID: account.id)
             .asObservable()
             .subscribe(onNext: { [unowned self] enable in
+                self.notificationsEnabled = enable
                 self.currentAccountProxy.onNext(enable)
             }).disposed(by: self.tempBag)
     }
@@ -517,6 +518,7 @@ class MeViewModel: ViewModel, Stateable {
                 .take(1)
                 .subscribe(onNext: { [unowned self] enable in
                     self.currentAccountProxy.onNext(enable)
+                    self.notificationsEnabled = enable
                 }).disposed(by: self.disposeBag)
         }
         })
@@ -525,12 +527,23 @@ class MeViewModel: ViewModel, Stateable {
 
     // MARK: Notifications
 
-    lazy var notificationsEnabled: Observable<Bool> = {
+    lazy var notificationsEnabledObservable: Observable<Bool> = {
         return Observable.combineLatest(self.notificationsPermitted.asObservable(),
                                         self.proxyEnabled.asObservable()) { (notifications, proxy) in
                                             return  proxy && notifications
         }
     }()
+
+    var notificationsEnabled: Bool {
+        get {
+            return _notificationsEnabled && self.notificationsPermitted.value
+        }
+        set {
+            _notificationsEnabled = newValue
+        }
+    }
+
+    private var _notificationsEnabled: Bool = true
 
     lazy var notificationsPermitted: Variable<Bool> = {
         let variable = Variable<Bool>(LocalNotificationsHelper.isEnabled())
@@ -545,6 +558,11 @@ class MeViewModel: ViewModel, Stateable {
     }()
 
     func enableNotifications(enable: Bool) {
+        if enable == notificationsPermitted.value &&
+            enable == self.accountService.proxyEnabled() {
+            return
+        }
+        notificationsEnabled = enable
         guard let account = self.accountService.currentAccount else {return}
         if !self.accountService.proxyEnabled() && enable == true {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
