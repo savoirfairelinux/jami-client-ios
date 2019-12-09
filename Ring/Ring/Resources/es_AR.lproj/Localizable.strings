@@ -56,7 +56,7 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Vincular este dispositivo a una cuenta";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Crear una cuenta de Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Saltar";
@@ -195,8 +195,8 @@
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
+"account.statusOnline" = "En línea";
+"account.statusOffline" = "Desconectado";
 "account.statusConnecting" = "Conectando";
 "account.statusUnknown" = "Desconocido";
 "account.statusConnectionerror" = "Connection Error";
