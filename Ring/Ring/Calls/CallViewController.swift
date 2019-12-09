@@ -134,14 +134,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
         UIApplication.shared.isIdleTimerDisabled = true
+        initCallAnimation()
+        self.inConferenceAddContactButton.isHidden = !self.viewModel.conferenceMode.value
         if callCurrent {
             self.capturedVideoBlurEffect.alpha = 1
             hideCapturedVideo()
-             self.shouldRotateScreen = true
-            return
+            self.shouldRotateScreen = true
         }
-        initCallAnimation()
-        self.inConferenceAddContactButton.isHidden = !self.viewModel.conferenceMode.value
     }
 
     @IBAction func addParticipant(_ sender: Any) {
@@ -185,20 +184,20 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func initCallAnimation() {
-        self.callPulse.alpha = 0.5
+        self.callPulse.alpha = 0.6
         self.callPulse.layer.cornerRadius = self.callPulse.frame.size.width / 2
         animateCallCircle()
     }
 
     func animateCallCircle() {
-        self.callPulse.alpha = 0.5
+        self.callPulse.alpha = 0.6
         self.callPulse.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         UIView.animate(withDuration: 1.5, animations: { [weak self] in
             self?.callPulse.alpha = 0.0
             self?.callPulse.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
             self?.view.layoutIfNeeded()
         }, completion: { [weak self] _ in
-            if self?.viewModel.call?.state == .ringing || self?.viewModel.call?.state == .connecting {
+            if self?.viewModel.call?.state == .ringing || self?.viewModel.call?.state == .connecting || self?.viewModel.call?.state == .unknown {
                 self?.animateCallCircle()
             }
         })
@@ -426,7 +425,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self?.infoContainer.isHidden = enteredConference ? true : false
             self?.resizeCapturedVideo(withInfoContainer: false)
             self?.inConferenceAddContactButton.isHidden = !enteredConference
-            self?.conferenceCallsLeading.constant = enteredConference ? -80 : 0
+            self?.conferenceCallsLeading.constant = enteredConference ? 0 : -80
             // if entered conference add first participant to conference list
             if enteredConference {
                 let callView =

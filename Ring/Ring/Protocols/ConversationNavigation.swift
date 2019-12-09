@@ -121,8 +121,9 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         let controllers = navigationController.children
         for controller in controllers
             where controller.isKind(of: (ConversationViewController).self) {
-                if let callcontroller = controller as? ConversationViewController, callcontroller.viewModel.conversation.value == conversationViewModel.conversation.value {
-                    navigationController.popToViewController(callcontroller, animated: true)
+                if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation.value == conversationViewModel.conversation.value {
+                    navigationController.popToViewController(conversationController, animated: true)
+                    conversationController.becomeFirstResponder()
                     return
                 }
         }

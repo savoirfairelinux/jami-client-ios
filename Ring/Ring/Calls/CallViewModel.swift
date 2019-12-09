@@ -199,7 +199,7 @@ class CallViewModel: Stateable, ViewModel {
             } else if !call.registeredName.isEmpty {
                 return call.registeredName
             } else {
-                return L10n.Calls.unknown
+                return call.paricipantHash()
             }
         }).asDriver(onErrorJustReturn: "")
     }()
