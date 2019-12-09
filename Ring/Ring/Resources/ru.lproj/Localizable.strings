@@ -120,8 +120,8 @@
 "alerts.confirmDeleteConversationTitle" = "Удалить разговор";
 "alerts.confirmClearConversation" = "Вы уверены, что хотите удалить разговор с этим контактом?";
 "alerts.confirmClearConversationTitle" = "Очистить разговор";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.noMediaPermissionsTitle" = "Не предоставлено разрешение на СМИ ";
+"alerts.noLibraryPermissionsTitle" = "Не предоставлен доступ к библиотеке фотографий";
 
 //Actions
 "actions.blockAction" = "Заблокировать";
@@ -142,7 +142,7 @@
 "calls.searching" = "Поиск…";
 "calls.callFinished" = "Вызов завершен";
 "calls.currentCallWith" = "Вызов с";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "повесить трубку";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
@@ -245,7 +245,7 @@
 "dataTransfer.readableStatusSuccess" = "Завершено";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Нажмите, чтобы начать запись";
 "dataTransfer.sendMessage" = "Отправить";
 
 
