@@ -114,6 +114,28 @@ static id <AccountAdapterDelegate> _delegate;
     setCredentials(std::string([accountID UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap:credentials]);
 }
 
+- (void)setActiveCodecsList:(NSString *)accountID codecs:(NSArray *)codecs {
+    std::vector<unsigned int> resVector;
+    for(NSNumber* element in codecs) {
+        resVector.push_back(element.unsignedIntValue);
+    }
+    setActiveCodecList(std::string([accountID UTF8String]),resVector);
+}
+
+- (NSArray *)getActiveCodecsList:(NSString *)accountID {
+    auto codecs = getActiveCodecList(std::string([accountID UTF8String]));
+    NSMutableArray* resArray = [NSMutableArray new];
+    std::for_each(codecs.begin(), codecs.end(), ^(unsigned codec) {
+        [resArray addObject:[NSNumber numberWithUnsignedInt:codec]];
+    });
+    return resArray;
+}
+
+- (NSDictionary *)getCodecDetails:(NSString *)accountID codecID:(NSNumber*)codecID {
+    auto details = getCodecDetails(std::string([accountID UTF8String]), codecID.unsignedIntValue);
+    return [Utils mapToDictionnary:details];
+}
+
 - (void)setAccountActive:(NSString *)accountID
                   active:(bool)active {
     setAccountActive(std::string([accountID UTF8String]), active);

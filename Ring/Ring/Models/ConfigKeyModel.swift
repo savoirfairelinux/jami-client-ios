@@ -104,6 +104,10 @@ enum ConfigKey: String {
     case dhtPeerDiscovery = "Account.peerDiscovery"
     case accountPeerDiscovery = "Account.accountDiscovery"
     case accountPublish = "Account.accountPublish"
+    case codecQuality = "CodecInfo.quality"
+    case codecType = "CodecInfo.type"
+    case codecName = "CodecInfo.name"
+    case codecMinQuality = "CodecInfo.min_quality"
 }
 
 /**

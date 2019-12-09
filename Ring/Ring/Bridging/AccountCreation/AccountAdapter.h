@@ -78,4 +78,8 @@
 - (void)pushNotificationReceived:(NSString *) from message:(NSDictionary*) data;
 - (void)setPushNotificationToken: (NSString *) token;
 
+- (void)setActiveCodecsList:(NSString *)accountID codecs:(NSArray *)codecs;
+- (NSArray *)getActiveCodecsList:(NSString *)accountID;
+- (NSDictionary *)getCodecDetails:(NSString *)accountID codecID:(NSNumber*)codecID;
+
 @end

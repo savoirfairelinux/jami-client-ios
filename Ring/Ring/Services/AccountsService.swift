@@ -403,6 +403,18 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func setDetails(forAccountId accountId: String) {
+//        if let codecs = self.accountAdapter.getActiveCodecsList(accountId) as? [Int] {
+//                   for codec in codecs {
+//                    if let codecDetails = self.accountAdapter.getCodecDetails(accountId, codecID: codec as NSNumber) as? [String: String] {
+//                        if let codecName = codecDetails[ConfigKey.codecName.rawValue], codecName == "H264" {
+//                           self.accountAdapter.setActiveCodecsList(accountId, codecs: [codec])
+//                       }
+//                     //  case codecType = "CodecInfo.type"
+//                      //   case codecName = "CodecInfo.name"
+//                       print(codecDetails)
+//                   }
+//            }
+//               }
         let details = self.getAccountDetails(fromAccountId: accountId)
         var filename = "default.wav"
         if #available(iOS 10.0, *) {
