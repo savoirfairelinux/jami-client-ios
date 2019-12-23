@@ -93,6 +93,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     * call controller when call accepted. For iOS less than 10 present
     * call controller or trigger notifications, depending of current app state
     */
+    // swiftlint:enable cyclomatic_complexity
     func showIncomingCall(call: CallModel) {
         guard let account = self.accountService
             .getAccount(fromAccountId: call.accountId),
