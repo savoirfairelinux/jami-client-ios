@@ -42,6 +42,28 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var viewLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewRightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var playerControls: UIView!
+    @IBOutlet weak var togglePause: UIButton!
+    @IBOutlet weak var muteAudio: UIButton!
+    @IBOutlet weak var progressSlider: UISlider!
+
+    var sliderDisposeBag = DisposeBag()
+    
+
+    @IBAction func startSeekFrame(_ sender: Any) {
+        sliderDisposeBag = DisposeBag()
+        self.viewModel.userStartProgress()
+        progressSlider.rx.value
+        .subscribe(onNext: { (value) in
+            self.viewModel.seekTimeVariable.value = Float(value)
+        })
+        .disposed(by: self.sliderDisposeBag)
+    }
+
+    @IBAction func stopSeekFrame(_ sender: UISlider) {
+        sliderDisposeBag = DisposeBag()
+        self.viewModel.userStopProgress()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.applyL10()
@@ -59,7 +81,7 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
     }
 
     func bindViewsToViewModel() {
-        self.viewModel.capturedFrame
+        self.viewModel.playBackFrame
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
                 if let image = frame {
@@ -72,13 +94,21 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.cancel()
             }).disposed(by: self.disposeBag)
+        self.muteAudio.rx.tap
+        .subscribe(onNext: { [weak self] in
+            self?.viewModel.muteAudio()
+        }).disposed(by: self.disposeBag)
+        self.togglePause.rx.tap
+        .subscribe(onNext: { [weak self] in
+            self?.viewModel.toglePause()
+        }).disposed(by: self.disposeBag)
         self.recordButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.triggerRecording()
             }).disposed(by: self.disposeBag)
         self.sendButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.sendFile()
+            .subscribe(onNext: { _ in
+                self.viewModel.sendFile()
             }).disposed(by: self.disposeBag)
         self.switchButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -100,6 +130,13 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         self.viewModel.readyToSend
             .map {!$0}
             .drive(self.sendButton.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        self.viewModel.readyToSend
+            .map {!$0}
+            .drive(self.playerControls.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        self.viewModel.readyToSend
+            .drive(self.switchButton.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.readyToSend
             .drive(self.placeholderLabel.rx.isHidden)
@@ -140,5 +177,21 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         self.viewModel.hideInfo
             .drive(self.infoLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
+
+        self.viewModel.playerPosition
+                 .observeOn(MainScheduler.instance)
+                 .subscribe(onNext: { position in
+                    self.progressSlider.value = position
+
+                 }).disposed(by: self.disposeBag)
+    }
+
+    func configurePlayerView() {
+        
+    }
+
+    func configureRecordingView() {
+        //togglePause.
+
     }
 }
