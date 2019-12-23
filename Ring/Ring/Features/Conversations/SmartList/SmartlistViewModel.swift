@@ -328,10 +328,11 @@ class SmartlistViewModel: Stateable, ViewModel {
         if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
+            conversationViewModel.closeAllPlayers()
 
             self.conversationsService
                 .clearHistory(conversation: conversationViewModel.conversation.value,
-                                    keepConversation: false)
+                              keepConversation: false)
             self.conversationViewModels.remove(at: index)
         }
     }
@@ -341,6 +342,7 @@ class SmartlistViewModel: Stateable, ViewModel {
         if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
+            conversationViewModel.closeAllPlayers()
 
             self.conversationsService
                 .clearHistory(conversation: conversationViewModel.conversation.value,
@@ -353,6 +355,7 @@ class SmartlistViewModel: Stateable, ViewModel {
         if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
+            conversationViewModel.closeAllPlayers()
             let contactUri = conversationViewModel.conversation.value.participantUri
             let accountId = conversationViewModel.conversation.value.accountId
             let removeCompleted = self.contactsService.removeContact(withUri: contactUri,
@@ -369,6 +372,10 @@ class SmartlistViewModel: Stateable, ViewModel {
     }
 
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+        //close players for other conversations
+        self.conversationViewModels.forEach { (conversationModel) in
+            conversationModel.closeAllPlayers()
+        }
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
         conversationViewModel))
     }

@@ -43,6 +43,23 @@ class ConversationViewModel: Stateable, ViewModel {
 
     private let injectionBag: InjectionBag
 
+    private var players = [String: PlayerViewModel]()
+
+    func getPlayer(messageID: String) -> PlayerViewModel? {
+        return players[messageID]
+    }
+
+    func setPlayer(messageID: String, player: PlayerViewModel) {
+        players[messageID] = player
+    }
+
+    func closeAllPlayers() {
+        self.players.values.forEach { (player) in
+            player.closePlayer()
+        }
+        self.players.removeAll()
+    }
+
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
@@ -88,8 +105,8 @@ class ConversationViewModel: Stateable, ViewModel {
                         })
                 })
                 .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { messageViewModel in
-                    self.messages.value = messageViewModel
+                .subscribe(onNext: { [weak self] messageViewModel in
+                    self?.messages.value = messageViewModel
                 }).disposed(by: self.disposeBag)
 
             self.contactsService
@@ -479,5 +496,9 @@ class ConversationViewModel: Stateable, ViewModel {
                   accountID: self.conversation.value.accountId) else { return }
 
         self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
+    }
+
+    deinit {
+        self.closeAllPlayers()
     }
 }

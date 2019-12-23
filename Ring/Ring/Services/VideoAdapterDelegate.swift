@@ -29,4 +29,5 @@
     func writeFrame(withImage image: UIImage?, forCallId: String)
     func setDecodingAccelerated(withState state: Bool)
     func switchInput(toDevice device: String, callID: String?)
+    func fileOpened(for playerId: String, fileInfo: [String: String])
 }

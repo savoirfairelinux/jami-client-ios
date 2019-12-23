@@ -27,7 +27,7 @@ import ActiveLabel
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
-class MessageCell: UITableViewCell, NibReusable {
+class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     let log = SwiftyBeaver.self
 
@@ -59,7 +59,11 @@ class MessageCell: UITableViewCell, NibReusable {
     var dataTransferProgressUpdater: Timer?
     var outgoingImageProgressUpdater: Timer?
 
+    var playerView: PlayerView?
+
     var disposeBag = DisposeBag()
+
+    var playerHeight = Variable<CGFloat>(0)
 
     override func prepareForReuse() {
         if self.sendingIndicator != nil {
@@ -68,6 +72,8 @@ class MessageCell: UITableViewCell, NibReusable {
         self.stopProgressMonitor()
         self.stopOutgoingImageMonitor()
         self.transferProgressView.removeFromSuperview()
+        self.playerView?.removeFromSuperview()
+        playerHeight.value = 0
         self.disposeBag = DisposeBag()
         super.prepareForReuse()
     }
@@ -117,7 +123,7 @@ class MessageCell: UITableViewCell, NibReusable {
         guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
         if let progress = viewModel.getTransferProgress(transferId: transferId) {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [unowned self] in
                 self.progressBar.progress = progress
             }
         }
@@ -128,7 +134,7 @@ class MessageCell: UITableViewCell, NibReusable {
         guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
         if let progress = viewModel.getTransferProgress(transferId: transferId) {
-           DispatchQueue.main.async {
+           DispatchQueue.main.async { [unowned self] in
                 self.transferProgressView.progress = CGFloat(progress * 100)
            }
         }
@@ -297,6 +303,7 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         self.transferImageView.removeFromSuperview()
+        self.playerView?.removeFromSuperview()
         self.bubbleViewMask?.isHidden = true
 
         // hide/show time label
@@ -335,6 +342,30 @@ class MessageCell: UITableViewCell, NibReusable {
 
             if item.shouldDisplayTransferedImage {
                 self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.conversationId, accountId: conversationViewModel.conversation.value.accountId)
+            }
+
+            if let player = item.getPlayer(conversationViewModel: conversationViewModel) {
+                let screenWidth = UIScreen.main.bounds.width
+                var defaultSize = CGSize(width: 250, height: 100)
+                var origin = CGPoint(x: 0, y: 0)
+                if let firstImage = player.firstFrame {
+                    defaultSize = firstImage.getNewSize(of: CGSize(width: 350, height: 350))!
+                    let xOriginImageSend = screenWidth - 112 - (defaultSize.width)
+                    if item.bubblePosition() == .sent {
+                        origin = CGPoint(x: xOriginImageSend, y: 0)
+                    }
+                }
+                let frame = CGRect(origin: origin, size: defaultSize)
+                let plView = PlayerView(frame: frame)
+                plView.viewModel = player
+                player.delegate = self
+                self.playerView = plView
+                self.bubbleViewMask?.isHidden = false
+                self.playerView!.layer.cornerRadius = 20
+                self.playerView!.layer.masksToBounds = true
+                buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 250.0)
+                self.bubble.addSubview(self.playerView!)
+                self.bubble.heightAnchor.constraint(equalTo: self.playerView!.heightAnchor, constant: 1).isActive = true
             }
         }
 
@@ -411,6 +442,13 @@ class MessageCell: UITableViewCell, NibReusable {
         }
     }
 
+    func receivedImageOf(image: UIImage) {
+        guard let parent = self.playerView?.superview else {
+            return
+        }
+        playerHeight.value = image.size.height
+    }
+
     // swiftlint:enable function_body_length
 
     func displayTransferedImage(message: MessageViewModel, conversationID: String, accountId: String) {
@@ -458,6 +496,7 @@ class MessageCell: UITableViewCell, NibReusable {
                 self.transferProgressView.status.value = message.initialTransferStatus
                 self.bubble.addSubview(self.transferProgressView)
             }
+            return
         }
     }
     // swiftlint:enable cyclomatic_complexity
