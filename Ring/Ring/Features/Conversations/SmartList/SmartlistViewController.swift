@@ -38,7 +38,6 @@ private struct SmartlistConstants {
 }
 
 // swiftlint:disable type_body_length
-// swiftlint:disable file_length
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     private let log = SwiftyBeaver.self
@@ -114,6 +113,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
                                     NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
+        self.viewModel.closeAllPlayers()
     }
 
     func applyL10n() {
