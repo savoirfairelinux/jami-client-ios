@@ -3,6 +3,7 @@
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -24,6 +25,7 @@ import UIKit
 import RxSwift
 import SwiftyBeaver
 
+// swiftlint:disable type_body_length
 class ConversationViewModel: Stateable, ViewModel {
 
     /**
@@ -42,6 +44,26 @@ class ConversationViewModel: Stateable, ViewModel {
     private let callService: CallsService
 
     private let injectionBag: InjectionBag
+
+    private var players = [String: PlayerViewModel]()
+
+    func getPlayer(messageID: String) -> PlayerViewModel? {
+        return players[messageID]
+    }
+
+    func setPlayer(messageID: String, player: PlayerViewModel) {
+        players[messageID] = player
+    }
+
+    func closeAllPlayers() {
+        let queue = DispatchQueue.global(qos: .default)
+        queue.sync {
+            self.players.values.forEach { (player) in
+                player.closePlayer()
+            }
+            self.players.removeAll()
+        }
+    }
 
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
@@ -69,8 +91,8 @@ class ConversationViewModel: Stateable, ViewModel {
 
             self.conversationsService
                 .conversationsForCurrentAccount
-                .map({ [unowned self] conversations in
-                    return conversations.filter({ conv in
+                .map({ [weak self] conversations in
+                    return conversations.filter({ conv -> Bool in
                         let recipient1 = conv.participantUri
                         let recipient2 = contactUri
                         if recipient1 == recipient2 {
@@ -82,14 +104,21 @@ class ConversationViewModel: Stateable, ViewModel {
                         return conversation
                     })
                         .flatMap({ conversation in
-                            conversation.messages.map({ [unowned self] message in
-                                return MessageViewModel(withInjectionBag: self.injectionBag, withMessage: message)
+                            conversation.messages.map({ message -> MessageViewModel? in
+                                if let injBag = self?.injectionBag {
+                                    return MessageViewModel(withInjectionBag: injBag, withMessage: message)
+                                }
+                                return nil
                             })
-                        })
+                        }).filter { (message) -> Bool in
+                            message != nil
+                    }.map { (message) -> MessageViewModel in
+                         return message!
+                    }
                 })
                 .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { messageViewModel in
-                    self.messages.value = messageViewModel
+                .subscribe(onNext: { [weak self] messageViewModels in
+                    self?.messages.value = messageViewModels
                 }).disposed(by: self.disposeBag)
 
             self.contactsService
@@ -108,11 +137,11 @@ class ConversationViewModel: Stateable, ViewModel {
                 .getProfile(uri: contactUri,
                             createIfNotexists: false,
                             accountId: self.conversation.value.accountId)
-                .subscribe(onNext: { [unowned self] profile in
-                    self.displayName.value = profile.alias
+                .subscribe(onNext: { [weak self] profile in
+                    self?.displayName.value = profile.alias
                     if let photo = profile.photo,
                         let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                        self.profileImageData.value = data
+                        self?.profileImageData.value = data
                     }
                 }).disposed(by: disposeBag)
 
@@ -132,8 +161,8 @@ class ConversationViewModel: Stateable, ViewModel {
             self.contactsService.contactStatus.filter({ cont in
                 return cont.uriString == contactUri
             })
-                .subscribe(onNext: { [unowned self] _ in
-                    self.inviteButtonIsAvailable.onNext(false)
+                .subscribe(onNext: { [weak self] _ in
+                    self?.inviteButtonIsAvailable.onNext(false)
                 }).disposed(by: self.disposeBag)
 
             // subscribe to presence updates for the conversation's associated contact
@@ -155,12 +184,12 @@ class ConversationViewModel: Stateable, ViewModel {
                         return lookupNameResponse.address != nil &&
                             (lookupNameResponse.address == contactUri ||
                         lookupNameResponse.address == self.conversation.value.hash)
-                    }).subscribe(onNext: { [unowned self] lookupNameResponse in
+                    }).subscribe(onNext: { [weak self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
-                            self.userName.value = name
+                            self?.userName.value = name
                             contact?.userName = name
                         } else if let address = lookupNameResponse.address {
-                            self.userName.value = address
+                            self?.userName.value = address
                         }
                     }).disposed(by: disposeBag)
 
@@ -275,8 +304,8 @@ class ConversationViewModel: Stateable, ViewModel {
             .sendMessage(withContent: content,
                          from: account,
                          recipientUri: self.conversation.value.participantUri)
-            .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("Message sent")
+            .subscribe(onCompleted: { [weak self] in
+                self?.log.debug("Message sent")
             }).disposed(by: self.disposeBag)
     }
 
@@ -292,8 +321,8 @@ class ConversationViewModel: Stateable, ViewModel {
             .setMessagesAsRead(forConversation: self.conversation.value,
                                accountId: account.id,
                                accountURI: ringId)
-            .subscribe(onCompleted: { [unowned self] in
-                self.log.debug("Messages set as read")
+            .subscribe(onCompleted: { [weak self] in
+                self?.log.debug("Messages set as read")
             }).disposed(by: disposeBag)
     }
 
@@ -320,10 +349,10 @@ class ConversationViewModel: Stateable, ViewModel {
         self.contactsService
             .sendContactRequest(toContactRingId: self.conversation.value.hash,
                                 withAccount: currentAccount)
-            .subscribe(onCompleted: { [unowned self] in
-                self.log.info("contact request sent")
-                }, onError: { [unowned self] (error) in
-                    self.log.info(error)
+            .subscribe(onCompleted: { [weak self] in
+                self?.log.info("contact request sent")
+                }, onError: { [weak self] (error) in
+                    self?.log.info(error)
             }).disposed(by: self.disposeBag)
     }
 
@@ -370,6 +399,7 @@ class ConversationViewModel: Stateable, ViewModel {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
+        self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: self.conversation.value.hash, userName: self.displayName.value ?? self.userName.value))
     }
 
@@ -377,18 +407,22 @@ class ConversationViewModel: Stateable, ViewModel {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
+        self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: self.conversation.value.hash, userName: self.displayName.value ?? self.userName.value))
     }
 
     func showContactInfo() {
+        self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
     }
 
     func recordVideoFile() {
+        closeAllPlayers()
         self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: false))
     }
 
     func recordAudioFile() {
+        closeAllPlayers()
         self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: true))
     }
 
@@ -449,7 +483,7 @@ class ConversationViewModel: Stateable, ViewModel {
         return self.callService.call(participantHash: self.conversation.value.hash, accountID: self.conversation.value.accountId) != nil
     }
 
-    lazy var showCallButton: Observable<Bool> = { [unowned self] in
+    lazy var showCallButton: Observable<Bool> = {
         return self.callService
             .currentCallsEvents
             .share()
@@ -480,4 +514,9 @@ class ConversationViewModel: Stateable, ViewModel {
 
         self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
     }
+
+    deinit {
+        self.closeAllPlayers()
+    }
+
 }
