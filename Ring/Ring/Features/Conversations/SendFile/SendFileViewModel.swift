@@ -38,15 +38,6 @@ class SendFileViewModel: Stateable, ViewModel {
     }()
     private let recordingState = Variable<RecordingState>(.initial)
 
-    lazy var capturedFrame: Observable<UIImage?> = {
-        if !audioOnly {
-            videoService.prepareVideoRecording()
-        }
-        return videoService.capturedVideoFrame.asObservable().map({ frame in
-            return frame
-        })
-    }()
-
     lazy var hideVideoControls: Observable<Bool> = {
         Observable.just(audioOnly)
     }()
@@ -85,7 +76,8 @@ class SendFileViewModel: Stateable, ViewModel {
             }).share()
     }()
 
-    lazy var duration: Driver<String> = {
+    lazy var recordDuration: Driver<String> = {
+        let emptyString = Observable.just("")
         let durationTimer = Observable<Int>
             .interval(1.0, scheduler: MainScheduler.instance)
             .takeUntil(self.recordingState
@@ -107,9 +99,13 @@ class SendFileViewModel: Stateable, ViewModel {
         return self.recordingState
             .asObservable()
             .filter({ state in
-            return state == .recording
-        }).flatMap({ _ in
-            return durationTimer
+            return (state == .recording || state == .recorded)
+        }).flatMap({ (state) -> Observable<String>  in
+            if state == .recording {
+                return durationTimer
+            } else {
+                return emptyString
+            }
         }).asDriver(onErrorJustReturn: "")
     }()
 
@@ -125,6 +121,14 @@ class SendFileViewModel: Stateable, ViewModel {
         self.videoService = injectionBag.videoService
         self.accountService = injectionBag.accountService
         self.fileTransferService = injectionBag.dataTransferService
+        if !audioOnly {
+            videoService.updateEncodongPreferences()
+            videoService.startCamera()
+        }
+        videoService.capturedVideoFrame.asObservable()
+       .subscribe(onNext: { [weak self] frame in
+            self?.playBackFrame.onNext(frame)
+        }).disposed(by: playBackDisposeBag)
     }
 
     func triggerRecording() {
@@ -136,6 +140,15 @@ class SendFileViewModel: Stateable, ViewModel {
     }
 
     func startRecording() {
+        videoService.closePlayer(playerId: playerId)
+        self.playerDuration.value = 0
+        invalidateTimer()
+        videoService.updateEncodongPreferences()
+        playBackDisposeBag = DisposeBag()
+        videoService.capturedVideoFrame.asObservable()
+            .subscribe(onNext: { [weak self] frame in
+                self?.playBackFrame.onNext(frame)
+            }).disposed(by: playBackDisposeBag)
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
         let date = Date()
@@ -151,10 +164,124 @@ class SendFileViewModel: Stateable, ViewModel {
         fileName = name
     }
 
+    //player
+    var playBackDisposeBag = DisposeBag()
+
+    var playerDuration = Variable<Float>(0)
+    var playerPosition = PublishSubject<Float>()
+
+    var progressTimer: Timer?
+    var seekTimeVariable = Variable<Float>(0) //player position set by user
+    let playBackFrame = PublishSubject<UIImage?>()
+
+    var playerId = ""
+    var pause = Variable<Bool>(true)
+    var audioMuted = Variable<Bool>(true)
+    var playerReady = Variable<Bool>(false)
+
+    lazy var showPlayerControls: Observable<Bool> = {
+        return Observable
+            .combineLatest(playerReady.asObservable(),
+                           readyToSend.asObservable()) {(playerReady, fileReady) in
+                            return (playerReady && fileReady)
+        }
+    }()
+
     func stopRecording() {
         self.videoService.stopLocalRecorder(path: fileName)
         recordingState.value = .recorded
+        //create player after delay so recording could be finiched
+        DispatchQueue.main.asyncAfter(deadline: (.now() + 0.3)) { [weak self] in
+            self?.createPlayer()
+        }
     }
+
+    @objc func updateTimer(timer: Timer) {
+        let time = self.videoService.getPlayerPosition(playerId: self.playerId)
+        if time < 0 {
+            return
+        }
+        let progress = Float(time) / self.playerDuration.value
+        self.playerPosition.onNext(progress)
+    }
+
+    func createPlayer() {
+        self.playerReady.value = false
+        invalidateTimer()
+        let fname = "file://" + fileName
+        self.playerId = self.videoService.createPlayer(path: fname)
+        self.pause.value = true
+        self.audioMuted.value = true
+        self.playerPosition.onNext(0)
+        // subscribe for frame playback
+        //get first frame, pause player and seek back to first frame
+        self.playBackDisposeBag = DisposeBag()
+        self.incomingFrame.filter {  [weak self] (render) -> Bool in
+            render?.rendererId == self?.playerId
+        }
+        .take(1)
+        .map({(renderer) -> Observable<RendererTuple?>  in
+            self.toglePause()
+            self.muteAudio()
+            self.seekToTime(time: 0)
+            self.playBackFrame.onNext(renderer?.data)
+            self.playerPosition.onNext(0)
+            self.startTimer()
+            self.playerReady.value = true
+            return self.incomingFrame.filter {  [weak self] (render) -> Bool in
+                render?.rendererId == self?.playerId
+            }
+        })
+            .merge()
+            .subscribe(onNext: {  [weak self] (renderer) in
+                self?.playBackFrame.onNext(renderer?.data)
+            }).disposed(by: self.playBackDisposeBag)
+
+        // subscribe for fileInfo
+        self.videoService.playerInfo
+            .asObservable()
+            .filter {  [weak self] (player) -> Bool in
+                player.playerId == self?.playerId
+        }
+        .take(1)
+        .subscribe(onNext: {  [unowned self] player in
+            guard let duration = Float(player.duration) else {
+                self.videoService.closePlayer(playerId: self.playerId)
+                return
+            }
+            if duration <= 0 {
+                self.videoService.closePlayer(playerId: self.playerId)
+                return
+            }
+            self.playerDuration.value = duration
+            if !player.hasVideo {
+                self.seekToTime(time: 0)
+                self.muteAudio()
+                self.startTimer()
+                self.playerReady.value = true
+                return
+            }
+            self.toglePause()
+        }).disposed(by: self.playBackDisposeBag)
+    }
+
+    func toglePause() {
+        pause.value = !pause.value
+        videoService.pausePlayer(playerId: playerId, pause: pause.value)
+    }
+
+    func muteAudio() {
+        audioMuted.value = !audioMuted.value
+        videoService.mutePlayerAudio(playerId: playerId, mute: audioMuted.value)
+    }
+
+    func seekToTime(time: Int) {
+        videoService.seekToTime(time: time, playerId: playerId)
+    }
+
+    lazy var incomingFrame: Observable<RendererTuple?> = {
+        return videoService.incomingVideoFrame.asObservable()
+    }()
 
     func sendFile() {
         guard let fileUrl = URL(string: fileName) else {
@@ -167,6 +294,8 @@ class SendFileViewModel: Stateable, ViewModel {
                                           accountId: accountId,
                                           peerInfoHash: self.conversation.hash,
                                           localIdentifier: nil)
+        videoService.closePlayer(playerId: playerId)
+        invalidateTimer()
         self.videoService.videRecordingFinished()
         recordingState.value = .sent
     }
@@ -175,6 +304,8 @@ class SendFileViewModel: Stateable, ViewModel {
         if recordingState.value == .recording {
             self.stopRecording()
         }
+        invalidateTimer()
+        videoService.closePlayer(playerId: playerId)
         self.videoService.videRecordingFinished()
         recordingState.value = .sent
         if fileName.isEmpty {
@@ -185,5 +316,40 @@ class SendFileViewModel: Stateable, ViewModel {
 
     func switchCamera() {
         self.videoService.switchCamera()
+    }
+
+    func userStartSeeking() {
+        invalidateTimer()
+        if pause.value {
+            return
+        }
+        pause.value = true
+        videoService.pausePlayer(playerId: playerId, pause: pause.value)
+    }
+
+    func userStopSeeking() {
+        pause.value = false
+        videoService.pausePlayer(playerId: playerId, pause: pause.value)
+        startTimer()
+        let time = Int(self.playerDuration.value * seekTimeVariable.value)
+        self.videoService.seekToTime(time: time, playerId: playerId)
+    }
+
+    func invalidateTimer() {
+        if self.progressTimer != nil {
+            self.progressTimer?.invalidate()
+        }
+        self.progressTimer = nil
+    }
+
+    func startTimer() {
+        DispatchQueue.main.async {
+            self.progressTimer =
+                Timer.scheduledTimer(timeInterval: 0.1,
+                                     target: self,
+                                     selector: #selector(self.updateTimer),
+                                     userInfo: nil,
+                                     repeats: true)
+        }
     }
 }

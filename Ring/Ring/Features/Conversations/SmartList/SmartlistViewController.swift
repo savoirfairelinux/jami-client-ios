@@ -38,7 +38,6 @@ private struct SmartlistConstants {
 }
 
 // swiftlint:disable type_body_length
-// swiftlint:disable file_length
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     private let log = SwiftyBeaver.self

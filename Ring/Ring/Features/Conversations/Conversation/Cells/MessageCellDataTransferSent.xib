@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,11 +13,11 @@
             <rect key="frame" x="0.0" y="0.0" width="510" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7L4-RG-GYf" id="0um-8F-IM0">
-                <rect key="frame" x="0.0" y="0.0" width="510" height="109.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="510" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4iL-LZ-edH" userLabel="Bottom Corner">
-                        <rect key="frame" x="477" y="84.5" width="17" height="17"/>
+                        <rect key="frame" x="477" y="85" width="17" height="17"/>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="TBl-sp-vJP"/>
@@ -48,7 +45,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wHo-uZ-hv9" customClass="MessageBubble" customModule="Ring" customModuleProvider="target">
-                        <rect key="frame" x="96" y="8" width="398" height="93.5"/>
+                        <rect key="frame" x="96" y="8" width="398" height="94"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attachment_icon" translatesAutoresizingMaskIntoConstraints="NO" id="3Of-rh-aYr" userLabel="File Icon">
                                 <rect key="frame" x="14" y="7" width="24" height="24"/>
@@ -59,7 +56,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5a-t4-mNC" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="46" y="7" width="338" height="24.5"/>
+                                <rect key="frame" x="46" y="7" width="338" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="fJp-aO-y0d"/>
                                 </constraints>
@@ -67,22 +64,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="42KB" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6M-Dk-fEj" userLabel="Size Label" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="14" y="35.5" width="37" height="13"/>
+                                <rect key="frame" x="14" y="35" width="37" height="14"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="50%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxX-ha-WVD" userLabel="Status Label" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="352" y="35.5" width="30" height="18"/>
+                                <rect key="frame" x="351.5" y="35" width="30.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="753" verticalCompressionResistancePriority="751" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1u5-hh-5O1">
-                                <rect key="frame" x="16" y="52.5" width="366" height="2"/>
+                                <rect key="frame" x="16" y="53" width="366" height="2"/>
                             </progressView>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tp6-HD-XvQ" userLabel="Cancel Button">
-                                <rect key="frame" x="14" y="62.5" width="80" height="24"/>
+                                <rect key="frame" x="14" y="63" width="80" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="ca7-7J-yhQ"/>
                                 </constraints>
@@ -128,21 +125,21 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEB-1f-axr" userLabel="Right Divider">
-                        <rect key="frame" x="347.5" y="19" width="126.5" height="1"/>
+                        <rect key="frame" x="348" y="19" width="131" height="1"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="BL3-xb-35m"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ka8-KH-Tw8" userLabel="Left Divider">
-                        <rect key="frame" x="36" y="19" width="125.5" height="1"/>
+                        <rect key="frame" x="31" y="19" width="131" height="1"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="7U6-Xk-18a"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11/14/2016 12:34PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2N-A0-Nyl" userLabel="Message Time">
-                        <rect key="frame" x="177.5" y="9" width="154" height="21"/>
+                        <rect key="frame" x="178" y="9" width="154" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
