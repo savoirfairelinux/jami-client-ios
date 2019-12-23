@@ -46,6 +46,12 @@ enum VideoCodecs: String {
     case VP8
 }
 
+enum PlayerInfo: String {
+    case duration
+    case audio_stream
+    case video_stream
+}
+
 protocol FrameExtractorDelegate: class {
     func captured(imageBuffer: CVImageBuffer?, image: UIImage)
     func updateDevicePisition(position: AVCaptureDevice.Position)
@@ -291,15 +297,24 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
+typealias RendererTuple = (rendererId: String, data: UIImage?)
+
+struct Player {
+    var playerId: String
+    var duration: String
+    var hasAudio: Bool
+    var hasVideo: Bool
+}
+
 class VideoService: FrameExtractorDelegate {
 
     fileprivate let videoAdapter: VideoAdapter
     fileprivate let camera = FrameExtractor()
 
     var cameraPosition = AVCaptureDevice.Position.front
-    typealias RendererTuple = (rendererId: String, data: UIImage?)
     let incomingVideoFrame = PublishSubject<RendererTuple?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
+    let playerInfo = PublishSubject<Player>()
     var currentOrientation: AVCaptureVideoOrientation
 
     private let log = SwiftyBeaver.self
@@ -495,7 +510,12 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func prepareVideoRecording() {
+        self.setEncodingAccelerated(withState: hardwareAccelerationEnabled)
         self.videoAdapter.startCamera()
+    }
+
+    func restartSettings() {
+        self.setEncodingAccelerated(withState: hardwareAccelerationEnabled)
     }
 
     func videRecordingFinished() {
@@ -564,5 +584,43 @@ extension VideoService: VideoAdapterDelegate {
     func stopLocalRecorder(path: String) {
         self.videoAdapter.stopLocalRecording(path)
         self.recording = false
+    }
+
+    func createPlayer(path: String) -> String {
+        let player = self.videoAdapter.createMediaPlayer(path)
+        return player ?? ""
+    }
+
+    func pausePlayer(playerId: String, pause: Bool) {
+        self.videoAdapter.pausePlayer(playerId, pause: pause)
+    }
+
+    func mutePlayerAudio(playerId: String, mute: Bool) {
+        self.videoAdapter.mutePlayerAudio(playerId, mute: mute)
+    }
+
+    func seekToTime(time: Int, playerId: String) {
+        self.videoAdapter.playerSeek(toTime: Int32(time), playerId: playerId)
+    }
+
+    func closePlayer(playerId: String) {
+        self.videoAdapter.closePlayer(playerId)
+    }
+
+    func fileOpened(for playerId: String, fileInfo: [String: String]) {
+        let duration: String = fileInfo[PlayerInfo.duration.rawValue] ?? "0"
+        let audioStream: Int = Int(fileInfo[PlayerInfo.audio_stream.rawValue] ?? "-1") ?? -1
+        let videoStream: Int = Int(fileInfo[PlayerInfo.video_stream.rawValue] ?? "-1") ?? -1
+        let hasAudio = audioStream >= 0
+        let hasVideo = videoStream >= 0
+        let player = Player(playerId: playerId,
+                            duration: duration,
+                            hasAudio: hasAudio,
+                            hasVideo: hasVideo)
+        playerInfo.onNext(player)
+    }
+
+    func getPlayerPosition(playerId: String) -> Int64 {
+        self.videoAdapter.getPlayerPosition(playerId)
     }
 }
