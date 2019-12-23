@@ -56,12 +56,14 @@ class MessageViewModel {
     var sequencing: MessageSequencing = .unknown
 
     private let disposeBag = DisposeBag()
+    let injectBug: InjectionBag
 
     init(withInjectionBag injectionBag: InjectionBag,
          withMessage message: MessageModel) {
         self.accountService = injectionBag.accountService
         self.conversationsService = injectionBag.conversationsService
         self.dataTransferService = injectionBag.dataTransferService
+        self.injectBug = injectionBag
         self.message = message
         self.initialTransferStatus = message.transferStatus
         self.timeStringShown = nil
@@ -82,7 +84,7 @@ class MessageViewModel {
             }
             self.conversationsService
                 .sharedResponseStream
-                .filter({ (transferEvent) in
+                .filter({ [unowned self] (transferEvent) in
                     guard let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId) else { return false }
                     return  transferEvent.eventType == ServiceEventType.dataTransferMessageUpdated &&
                             transferId == self.daemonId
@@ -101,14 +103,14 @@ class MessageViewModel {
             // subscribe to message status updates for outgoing messages
             self.conversationsService
                 .sharedResponseStream
-                .filter({ messageUpdateEvent in
+                .filter({ [weak self] messageUpdateEvent in
                     return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
-                        messageUpdateEvent.getEventInput(.messageId) == self.message.daemonId &&
-                        !self.message.incoming
+                        messageUpdateEvent.getEventInput(.messageId) == self?.message.daemonId &&
+                        !(self?.message.incoming ?? false)
                 })
-                .subscribe(onNext: { [unowned self] messageUpdateEvent in
+                .subscribe(onNext: { [weak self] messageUpdateEvent in
                     if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
-                        self.status.onNext(status)
+                        self?.status.onNext(status)
                     }
                 })
                 .disposed(by: self.disposeBag)
@@ -204,6 +206,36 @@ class MessageViewModel {
                         conversationID: conversationID)
     }
 
+    func getPlayer(conversationViewModel: ConversationViewModel) -> PlayerViewModel? {
+       if
+            self.lastTransferStatus != .success &&
+            self.message.transferStatus != .success {
+            return nil
+        }
+
+        if let playerModel = conversationViewModel.getPlayer(messageID: String(self.messageId)) {
+            return playerModel
+        }
+        let transferInfo = transferFileData
+        let name = transferInfo.fileName
+        if name.contains(".webm") || name.contains(".ogg") {
+            var folderName = self.message.incoming ? Directories.downloads.rawValue : Directories.recorded.rawValue
+            let path = self.dataTransferService
+            .getFileUrl(fileName: name,
+                        inFolder: folderName,
+                        accountID: conversationViewModel.conversation.value.accountId,
+                        conversationID: conversationViewModel.conversation.value.conversationId)
+            let pathString =  path?.path ?? ""
+            if pathString.isEmpty {
+                return nil
+            }
+            let model = PlayerViewModel(injectionBag: injectBug, path: pathString)
+            conversationViewModel.setPlayer(messageID: String(self.messageId), player: model)
+            return model
+        }
+        return nil
+    }
+
     func getTransferedImage(maxSize: CGFloat,
                             conversationID: String,
                             accountId: String) -> UIImage? {
@@ -222,4 +254,8 @@ class MessageViewModel {
                       accountID: account.id,
                       conversationID: conversationID)
     }
+
+//    deinit {
+//         print("*** deinit message model")
+//    }
 }

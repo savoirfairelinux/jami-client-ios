@@ -57,6 +57,14 @@ class ConversationViewController: UIViewController,
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
 
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        print ("###conversation controller init")
+    }
+    deinit {
+        print ("###conversation controller deinit")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -576,7 +584,7 @@ class ConversationViewController: UIViewController,
     func setupTableView() {
         self.tableView.dataSource = self
 
-        self.tableView.estimatedRowHeight = 50
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.separatorStyle = .none
 
@@ -909,7 +917,8 @@ extension ConversationViewController: UITableViewDataSource {
                     .observeOn(MainScheduler.instance)
                     .filter {
                         return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
-                    .subscribe(onNext: { [weak self, weak tableView] status in
+                    .subscribe(onNext: { [weak self, weak tableView, weak cell] status in
+                        guard let cell = cell else {return}
                         guard let currentIndexPath = tableView?.indexPath(for: cell) else { return }
                         guard let transferId = item.daemonId else { return }
                         guard let model = self?.viewModel else { return }
@@ -927,7 +936,8 @@ extension ConversationViewController: UITableViewDataSource {
                     .disposed(by: cell.disposeBag)
 
                 cell.cancelButton.rx.tap
-                    .subscribe(onNext: { [weak self, weak tableView] _ in
+                    .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
+                        guard let cell = cell else {return}
                         guard let transferId = item.daemonId else { return }
                         self?.log.info("canceling transferId \(transferId)")
                         _ = self?.viewModel.cancelTransfer(transferId: transferId)
@@ -937,10 +947,24 @@ extension ConversationViewController: UITableViewDataSource {
                         tableView?.reloadData()
                     })
                     .disposed(by: cell.disposeBag)
+                cell.heightUpdated
+                .asObservable()
+                .share()
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { [weak tableView] updated in
+                     if updated {
+                       // self?.tableView.beginUpdates()
+                       // self?.tableView.endUpdates()
+                        let row = indexPath.row
+                        print("reload cell")
+                        tableView?.reloadRows(at: [indexPath], with: .fade)
+                    }
+                }).disposed(by: cell.disposeBag)
 
                 if item.bubblePosition() == .received {
                     cell.acceptButton?.rx.tap
-                        .subscribe(onNext: { [weak self, weak tableView] _ in
+                        .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
+                            guard let cell = cell else {return}
                             guard let transferId = item.daemonId else { return }
                             self?.log.info("accepting transferId \(transferId)")
                             if self?.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
@@ -957,7 +981,6 @@ extension ConversationViewController: UITableViewDataSource {
                     self.addShareAction(cell: cell, item: item)
                 }
             }
-
             return cell
         }
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
