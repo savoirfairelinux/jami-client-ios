@@ -93,6 +93,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     * call controller when call accepted. For iOS less than 10 present
     * call controller or trigger notifications, depending of current app state
     */
+    // swiftlint:enable cyclomatic_complexity
     func showIncomingCall(call: CallModel) {
         guard let account = self.accountService
             .getAccount(fromAccountId: call.accountId),
@@ -219,16 +220,20 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func puchConversation(participantId: String) {
-        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
         guard let account = accountService.currentAccount else {
             return
         }
         guard let uriString = JamiURI(schema: URIType.ring, infoHach: participantId).uriString else {
             return
         }
+        if let model = getConversationViewModel(participantUri: uriString) {
+            self.pushConversation(withConversationViewModel: model)
+            return
+        }
         guard let conversation = self.conversationService.findConversation(withUri: uriString, withAccountId: account.id) else {
             return
         }
+        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
         conversationViewModel.conversation = Variable<ConversationModel>(conversation)
         self.pushConversation(withConversationViewModel: conversationViewModel)
     }
@@ -236,6 +241,18 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     func start () {
         let smartListViewController = SmartlistViewController.instantiate(with: self.injectionBag)
         self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
+    }
+
+    func getConversationViewModel(participantUri: String) -> ConversationViewModel? {
+        let viewControllers = self.navigationViewController.children
+        for controller in viewControllers {
+            if let smartController = controller as? SmartlistViewController {
+                for model in smartController.viewModel.conversationViewModels where model.conversation.value.participantUri == participantUri {
+                    return model
+                }
+            }
+        }
+        return nil
     }
 
     func addLockFlags() {
