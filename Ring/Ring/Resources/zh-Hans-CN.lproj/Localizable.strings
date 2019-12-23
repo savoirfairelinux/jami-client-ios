@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "邀请";
 "global.meTabBarTitle" = "帐户";
 "global.ok" = "确定";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "\"Free as in Freedom\"";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -150,11 +150,11 @@
 "accountPage.username" = "username:";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "启用代理";
 "accountPage.blockedContacts" = "Block List";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "启用代理";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "保存";
 "accountPage.proxyPaceholder" = "Proxy address";
@@ -169,7 +169,7 @@
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
 "accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
+"accountPage.deviceRevocationWrongPassword" = "密码错误";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "姓名";

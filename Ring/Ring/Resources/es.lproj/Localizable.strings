@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Invitaciones";
 "global.meTabBarTitle" = "Cuenta";
 "global.ok" = "Aceptar";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Libre en el sentido de libertad";
 
 // Scan
 "scan.badQrCode" = "Código QR incorrecto";
@@ -120,8 +120,8 @@
 "alerts.confirmDeleteConversationTitle" = "Borrar conversación";
 "alerts.confirmClearConversation" = "¿Estás seguro de que quieres vaciar la conversación con este contacto?";
 "alerts.confirmClearConversationTitle" = "Vaciar conversación";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.noMediaPermissionsTitle" = "Permiso de acceso al almacenamiento no otorgado";
+"alerts.noLibraryPermissionsTitle" = "Acceso a la galería de fotos no otorgado";
 
 //Actions
 "actions.blockAction" = "Bloquear";
@@ -142,7 +142,7 @@
 "calls.searching" = "Buscando";
 "calls.callFinished" = "Llamada finalizada";
 "calls.currentCallWith" = "Llamar con";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "Finalizar llamada";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
@@ -178,9 +178,9 @@
 "accountPage.removeAccountTitle" = "Eliminar cuenta";
 "accountPage.removeAccountMessage" = "Al hacer click en \"Eliminar\" se eliminará esta cuenta de su dispositivo. Esta acción no podrá ser deshecha. Igualmente, su nombre registrado puede perderse.";
 "accountPage.removeAccountButton" = "Eliminar";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Compartir detalles de la cuenta";
+"accountPage.contactMeOnJamiTitle" = "¡Contáctame en Jami!";
+"accountPage.contactMeOnJamiContant" = "Contáctame usando \"%s\" en Jami, plataforma de comunicación distribuida: https://jami.net";
 
 //Account
 "account.sipUsername" = "Nombre de usuario";
@@ -227,7 +227,7 @@
 "dataTransfer.readableStatusRefuse" = "No aceptar";
 "dataTransfer.readableStatusOngoing" = "Transfiriendo";
 "dataTransfer.readableStatusCanceled" = "Cancelado";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "Fallo al enviar";
 "dataTransfer.readableStatusSuccess" = "Completado";
 "dataTransfer.readableStatusAccept" = "Aceptar";
 "dataTransfer.readableStatusCancel" = "Cancelar";
@@ -237,7 +237,7 @@
 "notifications.missedCall" = "Llamada perdida";
 "notifications.acceptCall" = "ACEPTAR";
 "notifications.refuseCall" = "RECHAZAR";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Nuevo archivo";
 "dataTransfer.readableStatusAwaiting" = "En espera...";
 "dataTransfer.readableStatusRefuse" = "No aceptar";
 "dataTransfer.readableStatusOngoing" = "Transfiriendo";
@@ -245,7 +245,7 @@
 "dataTransfer.readableStatusSuccess" = "Completado";
 "dataTransfer.readableStatusAccept" = "Aceptar";
 "dataTransfer.readableStatusCancel" = "Cancelar";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Presiona para comenzar a grabar";
 "dataTransfer.sendMessage" = "Enviar";
 
 
