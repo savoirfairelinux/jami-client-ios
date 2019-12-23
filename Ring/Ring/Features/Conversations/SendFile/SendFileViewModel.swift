@@ -42,10 +42,31 @@ class SendFileViewModel: Stateable, ViewModel {
         if !audioOnly {
             videoService.prepareVideoRecording()
         }
-        return videoService.capturedVideoFrame.asObservable().map({ frame in
-            return frame
+        return videoService.capturedVideoFrame.asObservable()
+            .filter({ (image) -> Bool in
+                return !self.displayMode
+            })
+            .map({ frame in
+                return !self.displayMode ? frame : nil
         })
     }()
+
+    lazy var incomingFrame: Observable<UIImage?> = {
+        return videoService.incomingVideoFrame.asObservable()
+            .filter({ (render) -> Bool in
+                render?.rendererId == self.sink
+            })
+            .map({ renderer in
+//                if self.firstFrame {
+//                    self.firstFrame = false
+//                    self.paused = true
+//                    self.videoService.togglePause(sink: self.sink, paused: self.paused)
+//                }
+                return renderer?.data
+        })
+    }()
+
+    var firstFrame: Bool = true
 
     lazy var hideVideoControls: Observable<Bool> = {
         Observable.just(audioOnly)
@@ -117,6 +138,7 @@ class SendFileViewModel: Stateable, ViewModel {
     fileprivate let videoService: VideoService
     fileprivate let accountService: AccountsService
     fileprivate let fileTransferService: DataTransferService
+    fileprivate let audioService: AudioService
     var fileName = ""
 
     var conversation: ConversationModel!
@@ -125,6 +147,7 @@ class SendFileViewModel: Stateable, ViewModel {
         self.videoService = injectionBag.videoService
         self.accountService = injectionBag.accountService
         self.fileTransferService = injectionBag.dataTransferService
+        self.audioService = injectionBag.audioService
     }
 
     func triggerRecording() {
@@ -156,11 +179,23 @@ class SendFileViewModel: Stateable, ViewModel {
         recordingState.value = .recorded
     }
 
+    var sink = ""
+
+    var paused = true
+
     func sendFile() {
         guard let fileUrl = URL(string: fileName) else {
             return
         }
+        displayMode = true
+        self.videoService.stopCapture()
+        let fname = "file://" + fileName
+        audioService.overrideToSpeaker()
+        sink = videoService.openFile(path: fname)
+//        paused = false
+//        videoService.togglePause(sink: sink, paused: paused)
         let name = fileUrl.lastPathComponent
+        return
         guard let accountId = accountService.currentAccount?.id else {return}
         self.fileTransferService.sendFile(filePath: fileName,
                                           displayName: name,
@@ -171,17 +206,25 @@ class SendFileViewModel: Stateable, ViewModel {
         recordingState.value = .sent
     }
 
-    func cancel() {
-        if recordingState.value == .recording {
-            self.stopRecording()
-        }
-        self.videoService.videRecordingFinished()
-        recordingState.value = .sent
-        if fileName.isEmpty {
-            return
-        }
-        try? FileManager.default.removeItem(atPath: fileName)
+    func toglePause() {
+        paused = !paused
+        videoService.togglePause(sink: sink, paused: paused)
     }
+
+    func cancel() {
+        videoService.stopPlayer(sink: sink)
+//        if recordingState.value == .recording {
+//            self.stopRecording()
+//        }
+//        self.videoService.videRecordingFinished()
+//        recordingState.value = .sent
+//        if fileName.isEmpty {
+//            return
+//        }
+//        try? FileManager.default.removeItem(atPath: fileName)
+    }
+
+    var displayMode = false
 
     func switchCamera() {
         self.videoService.switchCamera()

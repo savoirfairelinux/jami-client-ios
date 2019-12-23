@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -205,6 +205,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ae9-I4-XCl">
+                                <rect key="frame" x="161" y="433" width="92" height="30"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Toggle pause"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -213,6 +218,7 @@
                             <constraint firstItem="wpy-M8-dcl" firstAttribute="top" secondItem="VY5-pJ-9ym" secondAttribute="top" constant="-20" id="4oA-nI-YKd"/>
                             <constraint firstItem="472-E9-M3O" firstAttribute="centerX" secondItem="vyN-fe-XeL" secondAttribute="centerX" id="7S5-Om-xYo"/>
                             <constraint firstItem="5cM-go-ABS" firstAttribute="width" secondItem="vyN-fe-XeL" secondAttribute="width" priority="750" id="A6U-GK-uFL"/>
+                            <constraint firstItem="Ae9-I4-XCl" firstAttribute="centerY" secondItem="vyN-fe-XeL" secondAttribute="centerY" id="BVo-R6-A4n"/>
                             <constraint firstItem="WLV-u3-Kwu" firstAttribute="top" secondItem="472-E9-M3O" secondAttribute="bottom" constant="20" id="G0k-1p-puP"/>
                             <constraint firstAttribute="trailing" secondItem="VY5-pJ-9ym" secondAttribute="trailing" constant="20" id="KCg-Qm-Hm4"/>
                             <constraint firstItem="ORV-Mq-8UM" firstAttribute="trailing" secondItem="I2W-SJ-cNf" secondAttribute="trailing" id="Kh8-ty-AAw"/>
@@ -223,6 +229,7 @@
                             <constraint firstItem="wpy-M8-dcl" firstAttribute="trailing" secondItem="VY5-pJ-9ym" secondAttribute="trailing" id="dv8-9w-D2k"/>
                             <constraint firstAttribute="bottom" secondItem="VY5-pJ-9ym" secondAttribute="bottom" constant="120" id="gEb-Oq-lki"/>
                             <constraint firstItem="wpy-M8-dcl" firstAttribute="bottom" secondItem="VY5-pJ-9ym" secondAttribute="bottom" id="wxE-F2-Q8i"/>
+                            <constraint firstItem="Ae9-I4-XCl" firstAttribute="centerX" secondItem="vyN-fe-XeL" secondAttribute="centerX" id="xB6-yG-Fyu"/>
                             <constraint firstItem="ORV-Mq-8UM" firstAttribute="top" secondItem="vyN-fe-XeL" secondAttribute="top" id="zbY-4h-8Bv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I2W-SJ-cNf"/>
@@ -237,6 +244,7 @@
                         <outlet property="sendButton" destination="CTf-Ik-eJC" id="lmm-LK-hkD"/>
                         <outlet property="switchButton" destination="VDT-uh-SDA" id="mXx-lG-nxl"/>
                         <outlet property="timerLabel" destination="y5U-yl-lIY" id="9x4-tm-use"/>
+                        <outlet property="togglePause" destination="Ae9-I4-XCl" id="eSA-h3-XiR"/>
                         <outlet property="viewBottomConstraint" destination="gEb-Oq-lki" id="trf-k7-xvE"/>
                         <outlet property="viewLeftConstraint" destination="33U-8m-Bta" id="R4U-cg-WHt"/>
                         <outlet property="viewRightConstraint" destination="KCg-Qm-Hm4" id="ZYE-BQ-4pV"/>

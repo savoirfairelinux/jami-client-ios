@@ -50,5 +50,8 @@
 - (void)stopLocalRecording:(NSString*) path;
 - (void)startCamera;
 - (void)stopCamera;
+- (NSString*)openFile:(NSString*)path;
+- (bool)toglePause:(NSString*)sinkId paused:(BOOL)paused;
+- (bool)stopPlayer:(NSString*)sinkId;
 
 @end

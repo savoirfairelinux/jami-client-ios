@@ -26,14 +26,15 @@ import SwiftyBeaver
 class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     var viewModel: SendFileViewModel!
-    fileprivate let disposeBag = DisposeBag()
-    private let log = SwiftyBeaver.self
+    fileprivate var disposeBag = DisposeBag()
+    private var log = SwiftyBeaver.self
 
     @IBOutlet weak var preview: UIImageView!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var switchButton: UIButton!
+    @IBOutlet weak var togglePause: UIButton!
     @IBOutlet weak var placeholderButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
@@ -41,6 +42,8 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewRightConstraint: NSLayoutConstraint!
+
+    var displyPreview = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +65,9 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         self.viewModel.capturedFrame
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
+                if !(self?.displyPreview ?? false) {
+                    return
+                }
                 if let image = frame {
                     DispatchQueue.main.async {
                         self?.preview.image = image
@@ -72,13 +78,29 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.cancel()
             }).disposed(by: self.disposeBag)
+        self.togglePause.rx.tap
+        .subscribe(onNext: { [weak self] in
+            self?.viewModel.toglePause()
+        }).disposed(by: self.disposeBag)
         self.recordButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.triggerRecording()
             }).disposed(by: self.disposeBag)
         self.sendButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.sendFile()
+            .subscribe(onNext: { _ in
+                self.displyPreview = false
+              //  self.disposeBag = DisposeBag()
+                self.preview.image = nil
+                 self.viewModel.incomingFrame
+                           .observeOn(MainScheduler.instance)
+                           .subscribe(onNext: { [weak self] frame in
+                               if let image = frame {
+                                   DispatchQueue.main.async {
+                                       self?.preview.image = image
+                                   }
+                               }
+                           }).disposed(by: self.disposeBag)
+                self.viewModel.sendFile()
             }).disposed(by: self.disposeBag)
         self.switchButton.rx.tap
             .subscribe(onNext: { [weak self] in

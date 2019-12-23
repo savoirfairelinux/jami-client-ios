@@ -427,6 +427,7 @@ class VideoService: FrameExtractorDelegate {
             self.videoAdapter.setDefaultDevice(camera.namePortrait)
         }
     }
+    var sinkId = ""
 }
 
 extension VideoService: VideoAdapterDelegate {
@@ -462,6 +463,10 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?) {
+        if sinkId == rendererId {
+            return
+        }
+        sinkId = rendererId
         if let codecName = codec {
             self.codec = VideoCodecs(rawValue: codecName) ?? VideoCodecs.H264
         }
@@ -564,5 +569,19 @@ extension VideoService: VideoAdapterDelegate {
     func stopLocalRecorder(path: String) {
         self.videoAdapter.stopLocalRecording(path)
         self.recording = false
+    }
+
+    func openFile(path: String) -> String {
+        let sink = self.videoAdapter.openFile(path)
+       // videoAdapter.registerSinkTarget(withSinkId: sink, withWidth: 360, withHeight: 480, withHardwareSupport: false)
+        return sink ?? ""
+    }
+
+    func togglePause(sink: String, paused: Bool) {
+        self.videoAdapter.toglePause(sink, paused: paused)
+    }
+
+    func stopPlayer(sink: String) {
+           self.videoAdapter.stopPlayer(sink)
     }
 }

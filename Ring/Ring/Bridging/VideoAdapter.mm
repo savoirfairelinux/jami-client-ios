@@ -126,9 +126,11 @@ static id <VideoAdapterDelegate> _delegate;
                                                                                int h,
                                                                                bool is_mixer) {
         if(VideoAdapter.delegate) {
+           // return;
             NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];
-            std::map<std::string, std::string> callDetails = getCallDetails(renderer_id);
-            NSString* codecName = [NSString stringWithUTF8String: callDetails["VIDEO_CODEC"].c_str()];
+            NSString* codecName = @"VP8";
+           // std::map<std::string, std::string> callDetails = getCallDetails(renderer_id);
+           // NSString* codecName = [NSString stringWithUTF8String: callDetails["VIDEO_CODEC"].c_str()];
             [VideoAdapter.delegate decodingStartedWithRendererId:rendererId withWidth:(NSInteger)w withHeight:(NSInteger)h withCodec: codecName];
         }
     }));
@@ -154,6 +156,11 @@ static id <VideoAdapterDelegate> _delegate;
             [VideoAdapter.delegate stopCapture];
         }
     }));
+
+//    videoHandlers.insert(exportable_callback<MediaPlayerSignal::FileOpened>([&](const std::string& playerId, double duration) {
+//        if(VideoAdapter.delegate) {
+//        }
+//    }));
 
     registerSignalHandlers(videoHandlers);
 }
@@ -258,6 +265,17 @@ withHardwareSupport:(BOOL)hardwareSupport {
 
 - (void)stopLocalRecording:(NSString*) path {
     DRing::stopLocalRecorder(std::string([path UTF8String]));
+}
+- (NSString*)openFile:(NSString*)path {
+    return @(DRing::createMediaPlayer(std::string([path UTF8String])).c_str());
+}
+
+-(bool)toglePause:(NSString*)sinkId paused:(BOOL)paused {
+    return DRing::pausePlayer(std::string([sinkId UTF8String]), paused);
+}
+
+- (bool)stopPlayer:(NSString*)sinkId {
+    return DRing::closePlayer(std::string([sinkId UTF8String]));
 }
 
 - (void)startCamera {
