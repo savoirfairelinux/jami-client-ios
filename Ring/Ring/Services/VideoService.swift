@@ -291,15 +291,24 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
+typealias RendererTuple = (rendererId: String, data: UIImage?)
+
+struct Player {
+    var playerId: String
+    var duration: String
+    var hasAudio: Bool
+    var hasVideo: Bool
+}
+
 class VideoService: FrameExtractorDelegate {
 
     fileprivate let videoAdapter: VideoAdapter
     fileprivate let camera = FrameExtractor()
 
     var cameraPosition = AVCaptureDevice.Position.front
-    typealias RendererTuple = (rendererId: String, data: UIImage?)
     let incomingVideoFrame = PublishSubject<RendererTuple?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
+    let playerInfo = PublishSubject<Player>()
     var currentOrientation: AVCaptureVideoOrientation
 
     private let log = SwiftyBeaver.self
@@ -495,6 +504,8 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func prepareVideoRecording() {
+        let accelerated = self.getDecodingAccelerated()
+        self.setEncodingAccelerated(withState: accelerated)
         self.videoAdapter.startCamera()
     }
 
@@ -564,5 +575,39 @@ extension VideoService: VideoAdapterDelegate {
     func stopLocalRecorder(path: String) {
         self.videoAdapter.stopLocalRecording(path)
         self.recording = false
+    }
+
+    func createPlayer(path: String) -> String {
+        let player = self.videoAdapter.createMediaPlayer(path)
+        return player ?? ""
+    }
+
+    func pausePlayer(playerId: String, pause: Bool) {
+        self.videoAdapter.pausePlayer(playerId, pause: pause)
+    }
+
+    func mutePlayerAudio(playerId: String, mute: Bool) {
+        self.videoAdapter.mutePlayerAudio(playerId, mute: mute)
+    }
+
+    func seekToFrame(playerId: String, time: Int) {
+        self.videoAdapter.seek(toPlayerTime: playerId, time: Int32(time))
+    }
+
+    func closePlayer(playerId: String) {
+        self.videoAdapter.closePlayer(playerId)
+    }
+
+    func fileOpened(for playerId: String, fileInfo: [String: String]) {
+        let audio = fileInfo["audio_stream"]
+        let video = fileInfo["video_stream"]
+        let audioStream = Int(audio ?? "-1") ?? -1
+        let videoStream = Int(video ?? "-1") ?? -1
+        let player = Player(playerId: playerId, duration: fileInfo["duration"]!, hasAudio: audioStream >= 0, hasVideo: videoStream >= 0)
+        playerInfo.onNext(player)
+    }
+
+    func getPlayerPosition(playerId: String) -> Int32 {
+        self.videoAdapter.getPlayerPosition(playerId)
     }
 }
