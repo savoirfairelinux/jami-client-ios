@@ -50,5 +50,11 @@
 - (void)stopLocalRecording:(NSString*) path;
 - (void)startCamera;
 - (void)stopCamera;
+- (NSString*)createMediaPlayer:(NSString*)path;
+- (bool)pausePlayer:(NSString*)playerId pause:(BOOL)pause;
+- (bool)closePlayer:(NSString*)playerId;
+- (bool)mutePlayerAudio:(NSString*)playerId mute:(BOOL)mute;
+- (bool)playerSeekToTime:(int)time playerId:(NSString*)playerId;
+- (int64_t)getPlayerPosition:(NSString*)playerId;
 
 @end
