@@ -3,6 +3,7 @@
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -24,6 +25,7 @@ import UIKit
 import RxSwift
 import SwiftyBeaver
 
+// swiftlint:disable type_body_length
 class ConversationViewModel: Stateable, ViewModel {
 
     /**
@@ -42,6 +44,23 @@ class ConversationViewModel: Stateable, ViewModel {
     private let callService: CallsService
 
     private let injectionBag: InjectionBag
+
+    private var players = [String: PlayerViewModel]()
+
+    func getPlayer(messageID: String) -> PlayerViewModel? {
+        return players[messageID]
+    }
+
+    func setPlayer(messageID: String, player: PlayerViewModel) {
+        players[messageID] = player
+    }
+
+    func closeAllPlayers() {
+        self.players.values.forEach { (player) in
+            player.closePlayer()
+        }
+        self.players.removeAll()
+    }
 
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
@@ -88,8 +107,8 @@ class ConversationViewModel: Stateable, ViewModel {
                         })
                 })
                 .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { messageViewModel in
-                    self.messages.value = messageViewModel
+                .subscribe(onNext: { [weak self] messageViewModel in
+                    self?.messages.value = messageViewModel
                 }).disposed(by: self.disposeBag)
 
             self.contactsService
@@ -480,4 +499,5 @@ class ConversationViewModel: Stateable, ViewModel {
 
         self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
     }
+
 }

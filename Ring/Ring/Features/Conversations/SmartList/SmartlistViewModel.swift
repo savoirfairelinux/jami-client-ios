@@ -4,6 +4,7 @@
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -212,6 +213,13 @@ class SmartlistViewModel: Stateable, ViewModel {
         self.callService = injectionBag.callService
         self.injectionBag = injectionBag
 
+        self.callService.newCall
+        .asObservable()
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] _ in
+            self?.closeAllPlayers()
+        }).disposed(by: self.disposeBag)
+
         self.accountsService.currentAccountChanged
             .subscribe(onNext: { [unowned self] account in
                 if let currentAccount = account {
@@ -328,10 +336,11 @@ class SmartlistViewModel: Stateable, ViewModel {
         if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
+            conversationViewModel.closeAllPlayers()
 
             self.conversationsService
                 .clearHistory(conversation: conversationViewModel.conversation.value,
-                                    keepConversation: false)
+                              keepConversation: false)
             self.conversationViewModels.remove(at: index)
         }
     }
@@ -341,6 +350,7 @@ class SmartlistViewModel: Stateable, ViewModel {
         if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
+            conversationViewModel.closeAllPlayers()
 
             self.conversationsService
                 .clearHistory(conversation: conversationViewModel.conversation.value,
@@ -353,6 +363,7 @@ class SmartlistViewModel: Stateable, ViewModel {
         if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
+            conversationViewModel.closeAllPlayers()
             let contactUri = conversationViewModel.conversation.value.participantUri
             let accountId = conversationViewModel.conversation.value.accountId
             let removeCompleted = self.contactsService.removeContact(withUri: contactUri,
@@ -369,8 +380,16 @@ class SmartlistViewModel: Stateable, ViewModel {
     }
 
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+        //close players for other conversations
+        closeAllPlayers()
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
         conversationViewModel))
+    }
+
+    func closeAllPlayers() {
+        self.conversationViewModels.forEach { (conversationModel) in
+            conversationModel.closeAllPlayers()
+        }
     }
 
     func showSipConversation(withNumber number: String) {
