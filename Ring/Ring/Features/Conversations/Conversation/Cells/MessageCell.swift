@@ -4,6 +4,7 @@
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +28,7 @@ import ActiveLabel
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
-class MessageCell: UITableViewCell, NibReusable {
+class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     let log = SwiftyBeaver.self
 
@@ -59,7 +60,11 @@ class MessageCell: UITableViewCell, NibReusable {
     var dataTransferProgressUpdater: Timer?
     var outgoingImageProgressUpdater: Timer?
 
+    var playerView: PlayerView?
+
     var disposeBag = DisposeBag()
+
+    var playerHeight = Variable<CGFloat>(0)
 
     override func prepareForReuse() {
         if self.sendingIndicator != nil {
@@ -68,6 +73,8 @@ class MessageCell: UITableViewCell, NibReusable {
         self.stopProgressMonitor()
         self.stopOutgoingImageMonitor()
         self.transferProgressView.removeFromSuperview()
+        self.playerView?.removeFromSuperview()
+        playerHeight.value = 0
         self.disposeBag = DisposeBag()
         super.prepareForReuse()
     }
@@ -117,8 +124,8 @@ class MessageCell: UITableViewCell, NibReusable {
         guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
         if let progress = viewModel.getTransferProgress(transferId: transferId) {
-            DispatchQueue.main.async {
-                self.progressBar.progress = progress
+            DispatchQueue.main.async { [weak self] in
+                self?.progressBar.progress = progress
             }
         }
     }
@@ -128,8 +135,8 @@ class MessageCell: UITableViewCell, NibReusable {
         guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
         if let progress = viewModel.getTransferProgress(transferId: transferId) {
-           DispatchQueue.main.async {
-                self.transferProgressView.progress = CGFloat(progress * 100)
+           DispatchQueue.main.async { [weak self] in
+                self?.transferProgressView.progress = CGFloat(progress * 100)
            }
         }
     }
@@ -297,6 +304,8 @@ class MessageCell: UITableViewCell, NibReusable {
         }
 
         self.transferImageView.removeFromSuperview()
+        self.playerView?.removeFromSuperview()
+        playerHeight.value = 0
         self.bubbleViewMask?.isHidden = true
 
         // hide/show time label
@@ -335,6 +344,33 @@ class MessageCell: UITableViewCell, NibReusable {
 
             if item.shouldDisplayTransferedImage {
                 self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.conversationId, accountId: conversationViewModel.conversation.value.accountId)
+            }
+
+            if let player = item.getPlayer(conversationViewModel: conversationViewModel) {
+                let screenWidth = UIScreen.main.bounds.width
+                // size for audio file transfer
+                var defaultSize = CGSize(width: 250, height: 100)
+                var origin = CGPoint(x: 0, y: 0)
+                // if have video update size to keep video ratio
+                if let firstImage = player.firstFrame,
+                    let frameSize = firstImage.getNewSize(of: CGSize(width: getMaxDimensionForTransfer(), height: getMaxDimensionForTransfer())) {
+                    defaultSize = frameSize
+                    let xOriginImageSend = screenWidth - 112 - (defaultSize.width)
+                    if item.bubblePosition() == .sent {
+                        origin = CGPoint(x: xOriginImageSend, y: 0)
+                    }
+                }
+                let frame = CGRect(origin: origin, size: defaultSize)
+                let pView = PlayerView(frame: frame)
+                pView.viewModel = player
+                player.delegate = self
+                self.playerView = pView
+                self.bubbleViewMask?.isHidden = false
+                self.playerView!.layer.cornerRadius = 20
+                self.playerView!.layer.masksToBounds = true
+                buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 250.0)
+                self.bubble.addSubview(self.playerView!)
+                self.bubble.heightAnchor.constraint(equalTo: self.playerView!.heightAnchor, constant: 1).isActive = true
             }
         }
 
@@ -411,21 +447,33 @@ class MessageCell: UITableViewCell, NibReusable {
         }
     }
 
+    func extractedVideoFrame(with height: CGFloat) {
+        guard (self.playerView?.superview) != nil else {
+            return
+        }
+        playerHeight.value = height
+    }
+
+    func getMaxDimensionForTransfer() -> CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        //iPhone 5 width
+        if screenWidth <= 320 {
+            return 200
+            //iPhone 6, iPhone 6 Plus and iPhone XR width
+        } else if screenWidth > 320 && screenWidth <= 414 {
+            return 250
+            //iPad width
+        } else if screenWidth > 414 {
+            return 300
+        }
+        return 250
+    }
+
     // swiftlint:enable function_body_length
 
     func displayTransferedImage(message: MessageViewModel, conversationID: String, accountId: String) {
         let screenWidth = UIScreen.main.bounds.width
-        var maxDimsion: CGFloat = 250
-        //iPhone 5 width
-        if screenWidth <= 320 {
-            maxDimsion = 200
-        //iPhone 6, iPhone 6 Plus and iPhone XR width
-        } else if screenWidth > 320 && screenWidth <= 414 {
-            maxDimsion = 250
-        //iPad width
-        } else if screenWidth > 414 {
-            maxDimsion = 300
-        }
+        let maxDimsion: CGFloat = getMaxDimensionForTransfer()
         let defaultSize = CGSize(width: maxDimsion, height: maxDimsion)
         if let image = message.getTransferedImage(maxSize: maxDimsion,
                                                   conversationID: conversationID,

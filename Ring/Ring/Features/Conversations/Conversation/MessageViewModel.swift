@@ -2,6 +2,8 @@
  *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,6 +22,7 @@
 
 import RxSwift
 import SwiftyBeaver
+import MobileCoreServices
 
 enum BubblePosition {
     case received
@@ -56,12 +59,14 @@ class MessageViewModel {
     var sequencing: MessageSequencing = .unknown
 
     private let disposeBag = DisposeBag()
+    let injectBug: InjectionBag
 
     init(withInjectionBag injectionBag: InjectionBag,
          withMessage message: MessageModel) {
         self.accountService = injectionBag.accountService
         self.conversationsService = injectionBag.conversationsService
         self.dataTransferService = injectionBag.dataTransferService
+        self.injectBug = injectionBag
         self.message = message
         self.initialTransferStatus = message.transferStatus
         self.timeStringShown = nil
@@ -82,33 +87,33 @@ class MessageViewModel {
             }
             self.conversationsService
                 .sharedResponseStream
-                .filter({ (transferEvent) in
+                .filter({ [weak self] (transferEvent) in
                     guard let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId) else { return false }
                     return  transferEvent.eventType == ServiceEventType.dataTransferMessageUpdated &&
-                            transferId == self.daemonId
+                        transferId == self?.daemonId
                 })
-                .subscribe(onNext: { [unowned self] transferEvent in
+                .subscribe(onNext: { [weak self] transferEvent in
                     guard   let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId),
                         let transferStatus: DataTransferStatus = transferEvent.getEventInput(ServiceEventInput.state) else {
                         return
                     }
-                    self.log.debug("MessageViewModel: dataTransferMessageUpdated - id:\(transferId) status:\(transferStatus)")
-                    self.message.transferStatus = transferStatus
-                    self.transferStatus.onNext(transferStatus)
+                    self?.log.debug("MessageViewModel: dataTransferMessageUpdated - id:\(transferId) status:\(transferStatus)")
+                    self?.message.transferStatus = transferStatus
+                    self?.transferStatus.onNext(transferStatus)
                 })
                 .disposed(by: disposeBag)
         } else {
             // subscribe to message status updates for outgoing messages
             self.conversationsService
                 .sharedResponseStream
-                .filter({ messageUpdateEvent in
+                .filter({ [weak self] messageUpdateEvent in
                     return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
-                        messageUpdateEvent.getEventInput(.messageId) == self.message.daemonId &&
-                        !self.message.incoming
+                        messageUpdateEvent.getEventInput(.messageId) == self?.message.daemonId &&
+                        !(self?.message.incoming ?? false)
                 })
-                .subscribe(onNext: { [unowned self] messageUpdateEvent in
+                .subscribe(onNext: { [weak self] messageUpdateEvent in
                     if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
-                        self.status.onNext(status)
+                        self?.status.onNext(status)
                     }
                 })
                 .disposed(by: self.disposeBag)
@@ -202,6 +207,65 @@ class MessageViewModel {
                         inFolder: folderName,
                         accountID: account.id,
                         conversationID: conversationID)
+    }
+
+    func getPlayer(conversationViewModel: ConversationViewModel) -> PlayerViewModel? {
+        if self.lastTransferStatus != .success &&
+            self.message.transferStatus != .success {
+            return nil
+        }
+
+        if let playerModel = conversationViewModel.getPlayer(messageID: String(self.messageId)) {
+            return playerModel
+        }
+        let transferInfo = transferFileData
+        let name = transferInfo.fileName
+        guard let fileExtension = NSURL(fileURLWithPath: name).pathExtension else {
+            return nil
+        }
+        let uti = UTTypeCreatePreferredIdentifierForTag(
+            kUTTagClassFilenameExtension,
+            fileExtension as CFString,
+            nil)
+
+        var fileIsMedia = false
+        if let value = uti?.takeRetainedValue(),
+            UTTypeConformsTo(value, kUTTypeMovie) || UTTypeConformsTo(value, kUTTypeVideo)
+                || UTTypeConformsTo(value, kUTTypeAudio) {
+            fileIsMedia = true
+                   }
+        let mediaExtension = ["ogg", "webm"]
+        if mediaExtension.contains(where: {$0.compare(fileExtension, options: .caseInsensitive) == .orderedSame}) {
+            fileIsMedia = true
+        }
+        if fileIsMedia {
+            // first search for incoming video in downloads folder and for outgoing in recorded
+            let folderName = self.message.incoming ? Directories.downloads.rawValue : Directories.recorded.rawValue
+            var path = self.dataTransferService
+                .getFileUrl(fileName: name,
+                            inFolder: folderName,
+                            accountID: conversationViewModel.conversation.value.accountId,
+                            conversationID: conversationViewModel.conversation.value.conversationId)
+            var pathString =  path?.path ?? ""
+            if pathString.isEmpty && self.message.incoming {
+                return nil
+            } else if pathString.isEmpty {
+                // try to search outgoing video in downloads folder
+                path = self.dataTransferService
+                    .getFileUrl(fileName: name,
+                                inFolder: Directories.downloads.rawValue,
+                                accountID: conversationViewModel.conversation.value.accountId,
+                                conversationID: conversationViewModel.conversation.value.conversationId)
+                pathString =  path?.path ?? ""
+                if pathString.isEmpty {
+                    return nil
+                }
+            }
+            let model = PlayerViewModel(injectionBag: injectBug, path: pathString)
+            conversationViewModel.setPlayer(messageID: String(self.messageId), player: model)
+            return model
+        }
+        return nil
     }
 
     func getTransferedImage(maxSize: CGFloat,
