@@ -3,6 +3,8 @@
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -86,7 +88,37 @@ class ConversationViewController: UIViewController,
         let filePath = urls[0].absoluteURL.path
         self.log.debug("Successfully imported \(filePath)")
         let fileName = urls[0].absoluteURL.lastPathComponent
-        self.viewModel.sendFile(filePath: filePath, displayName: fileName)
+
+        let result = PHAsset.fetchAssets(withALAssetURLs: urls, options: nil)
+
+        guard let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName) else {
+            return
+        }
+        self.log.debug("localCachePath: \(String(describing: localCachePath))")
+
+        guard let phAsset = result.firstObject else { return }
+
+        if phAsset.mediaType == .video {
+            PHImageManager.default()
+                .requestAVAsset(forVideo: phAsset,
+                                options: PHVideoRequestOptions(),
+                                resultHandler: { (asset, _, _) -> Void in
+                                    guard let asset = asset as? AVURLAsset else {
+                                        self.log.error("couldn't get asset")
+                                        return
+                                    }
+                                    guard let videoData = NSData(contentsOf: asset.url) else {
+                                        self.log.error("couldn't get movie data")
+                                        return
+                                    }
+                                    self.log.debug("copying movie to: \(String(describing: localCachePath))")
+                                    videoData.write(toFile: localCachePath.path, atomically: true)
+                                    self.viewModel.sendAndSaveFile(displayName: fileName,
+                                                                   imageData: videoData as Data)
+                })
+        } else {
+            self.viewModel.sendFile(filePath: filePath, displayName: fileName)
+        }
     }
 
     func showNoPermissionsAlert(title: String) {
@@ -302,7 +334,8 @@ class ConversationViewController: UIViewController,
                     }
                     self.log.debug("copying movie to: \(String(describing: localCachePath))")
                     videoData.write(toFile: localCachePath.path, atomically: true)
-                    self.viewModel.sendFile(filePath: localCachePath.path, displayName: imageFileName)
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName,
+                                                   imageData: videoData as Data)
                 })
             }
         }
@@ -424,6 +457,7 @@ class ConversationViewController: UIViewController,
         self.viewModel.showContactInfo()
     }
 
+    // swiftlint:disable function_body_length
     func setupUI() {
         self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
         self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill
@@ -437,13 +471,13 @@ class ConversationViewController: UIViewController,
         }
 
         self.messageAccessoryView.shareButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.imageTapped()
+            .subscribe(onNext: { [weak self] in
+                self?.imageTapped()
             }).disposed(by: self.disposeBag)
 
         self.messageAccessoryView.cameraButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.takePicture()
+            .subscribe(onNext: { [weak self] in
+                self?.takePicture()
             }).disposed(by: self.disposeBag)
 
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
@@ -471,8 +505,8 @@ class ConversationViewController: UIViewController,
         let inviteItem = UIBarButtonItem()
         inviteItem.image = UIImage(named: "add_person")
         inviteItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.inviteItemTapped()
+            .subscribe(onNext: { [weak self] in
+                self?.inviteItemTapped()
             })
             .disposed(by: self.disposeBag)
 
@@ -484,16 +518,16 @@ class ConversationViewController: UIViewController,
         let audioCallItem = UIBarButtonItem()
         audioCallItem.image = UIImage(asset: Asset.callButton)
         audioCallItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.placeAudioOnlyCall()
+            .subscribe(onNext: { [weak self] in
+                self?.placeAudioOnlyCall()
             })
             .disposed(by: self.disposeBag)
 
         let videoCallItem = UIBarButtonItem()
         videoCallItem.image = UIImage(asset: Asset.videoRunning)
         videoCallItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.placeCall()
+            .subscribe(onNext: { [weak self] in
+                self?.placeCall()
             }).disposed(by: self.disposeBag)
 
         // Items are from right to left
@@ -570,13 +604,12 @@ class ConversationViewController: UIViewController,
         super.viewWillDisappear(animated)
 
         self.textFieldShouldEndEditing = true
-        self.viewModel.setMessagesAsRead()
     }
 
     func setupTableView() {
         self.tableView.dataSource = self
 
-        self.tableView.estimatedRowHeight = 50
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.separatorStyle = .none
 
@@ -595,9 +628,9 @@ class ConversationViewController: UIViewController,
         }).disposed(by: self.disposeBag)
 
         //Scroll to bottom when reloaded
-        self.tableView.rx.methodInvoked(#selector(UITableView.reloadData)).subscribe(onNext: { [unowned self] _ in
-            self.scrollToBottomIfNeed()
-            self.updateBottomOffset()
+        self.tableView.rx.methodInvoked(#selector(UITableView.reloadData)).subscribe(onNext: { [weak self] _ in
+            self?.scrollToBottomIfNeed()
+            self?.updateBottomOffset()
         }).disposed(by: disposeBag)
     }
 
@@ -645,33 +678,33 @@ class ConversationViewController: UIViewController,
     }()
 
     func setupBindings() {
-        self.messageAccessoryView.sendButton.rx.tap.subscribe(onNext: { [unowned self] _ in
-            guard let payload = self.messageAccessoryView.messageTextView.text, !payload.isEmpty else {
+        self.messageAccessoryView.sendButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            guard let payload = self?.messageAccessoryView.messageTextView.text, !payload.isEmpty else {
                 return
             }
             let trimmed = payload.trimmingCharacters(in: .whitespacesAndNewlines)
             if trimmed.isEmpty {
-                self.messageAccessoryView.messageTextView.text = ""
+                self?.messageAccessoryView.messageTextView.text = ""
                 return
             }
-            self.viewModel.sendMessage(withContent: trimmed)
-            self.messageAccessoryView.messageTextView.text = ""
-            self.messageAccessoryView.setEmojiButtonVisibility(hide: false)
+            self?.viewModel.sendMessage(withContent: trimmed)
+            self?.messageAccessoryView.messageTextView.text = ""
+            self?.messageAccessoryView.setEmojiButtonVisibility(hide: false)
         }).disposed(by: self.disposeBag)
 
-        self.messageAccessoryView.emojisButton.rx.tap.subscribe(onNext: { [unowned self] _ in
-            self.viewModel.sendMessage(withContent: "👍")
+        self.messageAccessoryView.emojisButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            self?.viewModel.sendMessage(withContent: "👍")
         }).disposed(by: self.disposeBag)
 
-        self.messageAccessoryView.messageTextViewHeight.asObservable().subscribe(onNext: { [unowned self] height in
-            self.tableView.contentInset.bottom = self.bottomHeight + height - 35
-            self.tableView.scrollIndicatorInsets.bottom = self.bottomHeight + height - 35
-            self.scrollToBottom(animated: true)
-            self.updateBottomOffset()
+        self.messageAccessoryView.messageTextViewHeight.asObservable().subscribe(onNext: { [weak self] height in
+            self?.tableView.contentInset.bottom = (self?.bottomHeight ?? 0) + height - 35
+            self?.tableView.scrollIndicatorInsets.bottom = (self?.bottomHeight ?? 0) + height - 35
+            self?.scrollToBottom(animated: true)
+            self?.updateBottomOffset()
         }).disposed(by: self.disposeBag)
 
-        self.messageAccessoryView.messageTextViewContent.asObservable().subscribe(onNext: { [unowned self] _ in
-            self.messageAccessoryView.editingChanges()
+        self.messageAccessoryView.messageTextViewContent.asObservable().subscribe(onNext: { [weak self] _ in
+            self?.messageAccessoryView.editingChanges()
         }).disposed(by: self.disposeBag)
     }
 
@@ -909,7 +942,8 @@ extension ConversationViewController: UITableViewDataSource {
                     .observeOn(MainScheduler.instance)
                     .filter {
                         return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
-                    .subscribe(onNext: { [weak self, weak tableView] status in
+                    .subscribe(onNext: { [weak self, weak tableView, weak cell] status in
+                        guard let cell = cell else {return}
                         guard let currentIndexPath = tableView?.indexPath(for: cell) else { return }
                         guard let transferId = item.daemonId else { return }
                         guard let model = self?.viewModel else { return }
@@ -927,7 +961,8 @@ extension ConversationViewController: UITableViewDataSource {
                     .disposed(by: cell.disposeBag)
 
                 cell.cancelButton.rx.tap
-                    .subscribe(onNext: { [weak self, weak tableView] _ in
+                    .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
+                        guard let cell = cell else {return}
                         guard let transferId = item.daemonId else { return }
                         self?.log.info("canceling transferId \(transferId)")
                         _ = self?.viewModel.cancelTransfer(transferId: transferId)
@@ -937,10 +972,30 @@ extension ConversationViewController: UITableViewDataSource {
                         tableView?.reloadData()
                     })
                     .disposed(by: cell.disposeBag)
+                cell.playerHeight
+                    .asObservable()
+                    .share()
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: {[weak tableView] height in
+                        if height > 0 {
+                            UIView.performWithoutAnimation {
+                                guard let sectionNumber = tableView?.numberOfSections,
+                                let rowNumber =  tableView?.numberOfRows(inSection: indexPath.section) else {return}
+                                if indexPath.section < sectionNumber && indexPath.section >= 0 {
+                                    if indexPath.row < rowNumber && indexPath.row >= 0 {
+                                        tableView?
+                                            .reloadItemsAtIndexPaths([indexPath],
+                                                                     animationStyle: .top)
+                                    }
+                                }
+                            }
+                        }
+                    }).disposed(by: cell.disposeBag)
 
                 if item.bubblePosition() == .received {
                     cell.acceptButton?.rx.tap
-                        .subscribe(onNext: { [weak self, weak tableView] _ in
+                        .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
+                            guard let cell = cell else {return}
                             guard let transferId = item.daemonId else { return }
                             self?.log.info("accepting transferId \(transferId)")
                             if self?.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
@@ -957,7 +1012,6 @@ extension ConversationViewController: UITableViewDataSource {
                     self.addShareAction(cell: cell, item: item)
                 }
             }
-
             return cell
         }
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)

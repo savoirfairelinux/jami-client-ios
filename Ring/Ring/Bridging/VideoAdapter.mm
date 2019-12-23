@@ -127,8 +127,13 @@ static id <VideoAdapterDelegate> _delegate;
                                                                                bool is_mixer) {
         if(VideoAdapter.delegate) {
             NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];
+            // if we do not have call info it is mean we decoding file for media player
+            // for file we using VP8 format
+            NSString* codecName = @"VP8";
             std::map<std::string, std::string> callDetails = getCallDetails(renderer_id);
-            NSString* codecName = [NSString stringWithUTF8String: callDetails["VIDEO_CODEC"].c_str()];
+            if (callDetails.find("VIDEO_CODEC") != callDetails.end()) {
+                codecName = [NSString stringWithUTF8String: callDetails["VIDEO_CODEC"].c_str()];
+            }
             [VideoAdapter.delegate decodingStartedWithRendererId:rendererId withWidth:(NSInteger)w withHeight:(NSInteger)h withCodec: codecName];
         }
     }));
@@ -152,6 +157,14 @@ static id <VideoAdapterDelegate> _delegate;
     videoHandlers.insert(exportable_callback<VideoSignal::StopCapture>([&]() {
         if(VideoAdapter.delegate) {
             [VideoAdapter.delegate stopCapture];
+        }
+    }));
+
+    videoHandlers.insert(exportable_callback<MediaPlayerSignal::FileOpened>([&](const std::string& playerId, std::map<std::string, std::string> playerInfo) {
+        if(VideoAdapter.delegate) {
+            NSString* player = @(playerId.c_str());
+            NSMutableDictionary* info = [Utils mapToDictionnary:playerInfo];
+            [VideoAdapter.delegate fileOpenedFor:player fileInfo:info];
         }
     }));
 
@@ -258,6 +271,29 @@ withHardwareSupport:(BOOL)hardwareSupport {
 
 - (void)stopLocalRecording:(NSString*) path {
     DRing::stopLocalRecorder(std::string([path UTF8String]));
+}
+- (NSString*)createMediaPlayer:(NSString*)path {
+    return @(DRing::createMediaPlayer(std::string([path UTF8String])).c_str());
+}
+
+-(bool)pausePlayer:(NSString*)playerId pause:(BOOL)pause {
+    return DRing::pausePlayer(std::string([playerId UTF8String]), pause);
+}
+
+- (bool)closePlayer:(NSString*)playerId {
+    return DRing::closePlayer(std::string([playerId UTF8String]));
+}
+
+- (bool)mutePlayerAudio:(NSString*)playerId mute:(BOOL)mute {
+    return DRing::mutePlayerAudio(std::string([playerId UTF8String]), mute);
+
+}
+- (bool)playerSeekToTime:(int)time playerId:(NSString*)playerId {
+    return DRing::playerSeekToTime(std::string([playerId UTF8String]), time);
+}
+
+-(int64_t)getPlayerPosition:(NSString*)playerId {
+    return DRing::getPlayerPosition(std::string([playerId UTF8String]));
 }
 
 - (void)startCamera {
