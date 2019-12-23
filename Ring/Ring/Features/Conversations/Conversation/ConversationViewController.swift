@@ -3,6 +3,8 @@
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -86,7 +88,37 @@ class ConversationViewController: UIViewController,
         let filePath = urls[0].absoluteURL.path
         self.log.debug("Successfully imported \(filePath)")
         let fileName = urls[0].absoluteURL.lastPathComponent
-        self.viewModel.sendFile(filePath: filePath, displayName: fileName)
+
+        let result = PHAsset.fetchAssets(withALAssetURLs: urls, options: nil)
+
+        guard let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName) else {
+            return
+        }
+        self.log.debug("localCachePath: \(String(describing: localCachePath))")
+
+        guard let phAsset = result.firstObject else { return }
+
+        if phAsset.mediaType == .video {
+            PHImageManager.default()
+                .requestAVAsset(forVideo: phAsset,
+                                options: PHVideoRequestOptions(),
+                                resultHandler: { (asset, _, _) -> Void in
+                                    guard let asset = asset as? AVURLAsset else {
+                                        self.log.error("couldn't get asset")
+                                        return
+                                    }
+                                    guard let videoData = NSData(contentsOf: asset.url) else {
+                                        self.log.error("couldn't get movie data")
+                                        return
+                                    }
+                                    self.log.debug("copying movie to: \(String(describing: localCachePath))")
+                                    videoData.write(toFile: localCachePath.path, atomically: true)
+                                    self.viewModel.sendAndSaveFile(displayName: fileName,
+                                                                   imageData: videoData as Data)
+                })
+        } else {
+            self.viewModel.sendFile(filePath: filePath, displayName: fileName)
+        }
     }
 
     func showNoPermissionsAlert(title: String) {
@@ -302,7 +334,8 @@ class ConversationViewController: UIViewController,
                     }
                     self.log.debug("copying movie to: \(String(describing: localCachePath))")
                     videoData.write(toFile: localCachePath.path, atomically: true)
-                    self.viewModel.sendFile(filePath: localCachePath.path, displayName: imageFileName)
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName,
+                                                   imageData: videoData as Data)
                 })
             }
         }
@@ -424,6 +457,7 @@ class ConversationViewController: UIViewController,
         self.viewModel.showContactInfo()
     }
 
+    // swiftlint:disable function_body_length
     func setupUI() {
         self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
         self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill
@@ -570,13 +604,12 @@ class ConversationViewController: UIViewController,
         super.viewWillDisappear(animated)
 
         self.textFieldShouldEndEditing = true
-        self.viewModel.setMessagesAsRead()
     }
 
     func setupTableView() {
         self.tableView.dataSource = self
 
-        self.tableView.estimatedRowHeight = 50
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.separatorStyle = .none
 
@@ -909,7 +942,8 @@ extension ConversationViewController: UITableViewDataSource {
                     .observeOn(MainScheduler.instance)
                     .filter {
                         return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
-                    .subscribe(onNext: { [weak self, weak tableView] status in
+                    .subscribe(onNext: { [weak self, weak tableView, weak cell] status in
+                        guard let cell = cell else {return}
                         guard let currentIndexPath = tableView?.indexPath(for: cell) else { return }
                         guard let transferId = item.daemonId else { return }
                         guard let model = self?.viewModel else { return }
@@ -927,7 +961,8 @@ extension ConversationViewController: UITableViewDataSource {
                     .disposed(by: cell.disposeBag)
 
                 cell.cancelButton.rx.tap
-                    .subscribe(onNext: { [weak self, weak tableView] _ in
+                    .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
+                        guard let cell = cell else {return}
                         guard let transferId = item.daemonId else { return }
                         self?.log.info("canceling transferId \(transferId)")
                         _ = self?.viewModel.cancelTransfer(transferId: transferId)
@@ -937,10 +972,24 @@ extension ConversationViewController: UITableViewDataSource {
                         tableView?.reloadData()
                     })
                     .disposed(by: cell.disposeBag)
+                cell.playerHeight
+                    .asObservable()
+                    .share()
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: {[weak tableView] height in
+                        if height > 0 {
+                            UIView.performWithoutAnimation {
+                                tableView?
+                                    .reloadItemsAtIndexPaths([indexPath],
+                                                             animationStyle: .top)
+                            }
+                        }
+                    }).disposed(by: cell.disposeBag)
 
                 if item.bubblePosition() == .received {
                     cell.acceptButton?.rx.tap
-                        .subscribe(onNext: { [weak self, weak tableView] _ in
+                        .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
+                            guard let cell = cell else {return}
                             guard let transferId = item.daemonId else { return }
                             self?.log.info("accepting transferId \(transferId)")
                             if self?.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
@@ -957,7 +1006,6 @@ extension ConversationViewController: UITableViewDataSource {
                     self.addShareAction(cell: cell, item: item)
                 }
             }
-
             return cell
         }
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)

@@ -23,6 +23,8 @@ internal enum Asset {
   internal static let addPerson = ImageAsset(name: "add_person")
   internal static let attachmentIcon = ImageAsset(name: "attachment_icon")
   internal static let audioMuted = ImageAsset(name: "audio_muted")
+  internal static let audioOff = ImageAsset(name: "audio_off")
+  internal static let audioOn = ImageAsset(name: "audio_on")
   internal static let audioRunning = ImageAsset(name: "audio_running")
   internal static let backButton = ImageAsset(name: "back_button")
   internal static let backgroundRing = ImageAsset(name: "background_ring")

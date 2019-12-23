@@ -181,7 +181,6 @@ class CallViewModel: Stateable, ViewModel {
                 if hide {
                     self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
                     self.videoService.restoreStateAfterconference()
-                    self.videoService.stopAudioDevice()
                     if #available(iOS 10.0, *) {
                         self.callsProvider.stopCall(callUUID: call.callUUID)
                     }

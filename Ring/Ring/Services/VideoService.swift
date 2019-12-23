@@ -97,7 +97,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
         var bestRate = 30.0
         for vFormat in captureDevice.formats {
-            var ranges = vFormat.videoSupportedFrameRateRanges as [AVFrameRateRange]
+            let ranges = vFormat.videoSupportedFrameRateRanges as [AVFrameRateRange]
             let frameRates = ranges[0]
             if frameRates.maxFrameRate > bestRate {
                 bestRate = frameRates.maxFrameRate
@@ -291,15 +291,18 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
+typealias RendererTuple = (rendererId: String, data: UIImage?)
+
+// swiftlint:disable file_length
 class VideoService: FrameExtractorDelegate {
 
     fileprivate let videoAdapter: VideoAdapter
     fileprivate let camera = FrameExtractor()
 
     var cameraPosition = AVCaptureDevice.Position.front
-    typealias RendererTuple = (rendererId: String, data: UIImage?)
     let incomingVideoFrame = PublishSubject<RendererTuple?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
+    let playerInfo = PublishSubject<Player>()
     var currentOrientation: AVCaptureVideoOrientation
 
     private let log = SwiftyBeaver.self
@@ -486,6 +489,14 @@ extension VideoService: VideoAdapterDelegate {
     func startCapture(withDevice device: String) {
         self.log.debug("Capture started...")
         self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
+        self.codec = self.hardwareAccelerated ? VideoCodecs.H264 : VideoCodecs.VP8
+        if hardwareAccelerationEnabled {
+            self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
+            self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
+        } else {
+            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+            self.videoAdapter.setDefaultDevice(camera.namePortrait)
+        }
         self.camera.startCapturing()
     }
 
@@ -494,8 +505,12 @@ extension VideoService: VideoAdapterDelegate {
         self.camera.startCapturing()
     }
 
-    func prepareVideoRecording() {
+    func startCamera() {
         self.videoAdapter.startCamera()
+    }
+
+    func updateEncodongPreferences() {
+        self.setEncodingAccelerated(withState: hardwareAccelerationEnabled)
     }
 
     func videRecordingFinished() {
@@ -565,4 +580,59 @@ extension VideoService: VideoAdapterDelegate {
         self.videoAdapter.stopLocalRecording(path)
         self.recording = false
     }
+}
+
+// MARK: media player
+
+struct Player {
+    var playerId: String
+    var duration: String
+    var hasAudio: Bool
+    var hasVideo: Bool
+}
+
+enum PlayerInfo: String {
+    case duration
+    case audio_stream
+    case video_stream
+}
+
+extension VideoService {
+    func createPlayer(path: String) -> String {
+           let player = self.videoAdapter.createMediaPlayer(path)
+           return player ?? ""
+       }
+
+       func pausePlayer(playerId: String, pause: Bool) {
+           self.videoAdapter.pausePlayer(playerId, pause: pause)
+       }
+
+       func mutePlayerAudio(playerId: String, mute: Bool) {
+           self.videoAdapter.mutePlayerAudio(playerId, mute: mute)
+       }
+
+       func seekToTime(time: Int, playerId: String) {
+           self.videoAdapter.playerSeek(toTime: Int32(time), playerId: playerId)
+       }
+
+       func closePlayer(playerId: String) {
+           self.videoAdapter.closePlayer(playerId)
+       }
+
+       func fileOpened(for playerId: String, fileInfo: [String: String]) {
+           let duration: String = fileInfo[PlayerInfo.duration.rawValue] ?? "0"
+           let audioStream: Int = Int(fileInfo[PlayerInfo.audio_stream.rawValue] ?? "-1") ?? -1
+           let videoStream: Int = Int(fileInfo[PlayerInfo.video_stream.rawValue] ?? "-1") ?? -1
+           let hasAudio = audioStream >= 0
+           let hasVideo = videoStream >= 0
+           let player = Player(playerId: playerId,
+                               duration: duration,
+                               hasAudio: hasAudio,
+                               hasVideo: hasVideo)
+           playerInfo.onNext(player)
+       }
+
+       func getPlayerPosition(playerId: String) -> Int64 {
+           self.videoAdapter.getPlayerPosition(playerId)
+       }
 }
