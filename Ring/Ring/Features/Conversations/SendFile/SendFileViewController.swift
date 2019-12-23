@@ -42,6 +42,28 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var viewLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewRightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var playerControls: UIView!
+    @IBOutlet weak var togglePause: UIButton!
+    @IBOutlet weak var muteAudio: UIButton!
+    @IBOutlet weak var progressSlider: UISlider!
+    @IBOutlet weak var durationLabel: UILabel!
+
+    var sliderDisposeBag = DisposeBag()
+
+    @IBAction func startSeekFrame(_ sender: Any) {
+        sliderDisposeBag = DisposeBag()
+        self.viewModel.userStartSeeking()
+        progressSlider.rx.value
+        .subscribe(onNext: { [weak self] (value) in
+            self?.viewModel.seekTimeVariable.value = Float(value)
+        })
+        .disposed(by: self.sliderDisposeBag)
+    }
+
+    @IBAction func stopSeekFrame(_ sender: UISlider) {
+        sliderDisposeBag = DisposeBag()
+        self.viewModel.userStopSeeking()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.applyL10()
@@ -58,8 +80,9 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         self.infoLabel.text = L10n.DataTransfer.infoMessage
     }
 
+    // swiftlint:disable function_body_length
     func bindViewsToViewModel() {
-        self.viewModel.capturedFrame
+        self.viewModel.playBackFrame
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
                 if let image = frame {
@@ -72,13 +95,21 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.cancel()
             }).disposed(by: self.disposeBag)
+        self.muteAudio.rx.tap
+        .subscribe(onNext: { [weak self] in
+            self?.viewModel.muteAudio()
+        }).disposed(by: self.disposeBag)
+        self.togglePause.rx.tap
+        .subscribe(onNext: { [weak self] in
+            self?.viewModel.toglePause()
+        }).disposed(by: self.disposeBag)
         self.recordButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.triggerRecording()
             }).disposed(by: self.disposeBag)
         self.sendButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.sendFile()
+            .subscribe(onNext: { _ in
+                self.viewModel.sendFile()
             }).disposed(by: self.disposeBag)
         self.switchButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -93,18 +124,29 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .observeOn(MainScheduler.instance)
             .bind(to: self.placeholderButton.rx.isHidden)
             .disposed(by: self.disposeBag)
-        self.viewModel.hideVideoControls
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.switchButton.rx.isHidden)
-            .disposed(by: self.disposeBag)
         self.viewModel.readyToSend
             .map {!$0}
             .drive(self.sendButton.rx.isHidden)
             .disposed(by: self.disposeBag)
+        self.viewModel.showPlayerControls
+            .map {!$0}
+            .bind(to: self.playerControls.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        self.viewModel.recording
+            .map {!$0}
+            .bind(to: self.timerLabel.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        self.viewModel.readyToSend
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] ready in
+                let audioOnly: Bool = self?.viewModel.audioOnly ?? false
+                self?.switchButton.isHidden = ready || audioOnly
+            }).disposed(by: self.disposeBag)
         self.viewModel.readyToSend
             .drive(self.placeholderLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
-        self.viewModel.duration
+        self.viewModel.recordDuration
             .drive(self.timerLabel.rx.text)
             .disposed(by: self.disposeBag)
         self.viewModel.finished
@@ -140,5 +182,54 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         self.viewModel.hideInfo
             .drive(self.infoLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
+
+        self.viewModel.playerPosition
+                 .observeOn(MainScheduler.instance)
+                 .subscribe(onNext: { position in
+                    self.progressSlider.value = position
+                 }).disposed(by: self.disposeBag)
+        self.viewModel.playerDuration
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { duration in
+                let durationString = self.durationString(microcec: duration)
+                self.durationLabel.text = durationString
+            }).disposed(by: self.disposeBag)
+        self.viewModel.pause
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { pause in
+                var image = UIImage(asset: Asset.pauseCall)
+                if pause {
+                    image = UIImage(asset: Asset.unpauseCall)
+                }
+                self.togglePause.setBackgroundImage(image, for: .normal)
+            }).disposed(by: self.disposeBag)
+        self.viewModel.audioMuted
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { muted in
+                var image = UIImage(asset: Asset.audioOn)
+                if muted {
+                    image = UIImage(asset: Asset.audioOff)
+                }
+                self.muteAudio.setBackgroundImage(image, for: .normal)
+            }).disposed(by: self.disposeBag)
+    }
+
+    func durationString(microcec: Float) -> String {
+        if microcec == 0 {
+            return ""
+        }
+        let durationInSec = Int(microcec / 1000000)
+        let seconds = durationInSec % 60
+        let minutes = (durationInSec / 60) % 60
+        let hours = (durationInSec / 3600)
+        switch hours {
+        case 0:
+            return String(format: "%02d:%02d", minutes, seconds)
+        default:
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        }
     }
 }
