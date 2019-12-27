@@ -280,7 +280,7 @@ class MessageCell: UITableViewCell, NibReusable {
         if item.content.containsOnlyEmoji {
             self.messageLabel.font = UIFont.systemFont(ofSize: 40.0, weight: UIFont.Weight.medium)
         } else {
-            self.messageLabel.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.medium)
+            self.messageLabel.font = UIFont(name: "HelveticaNeue", size: 18.0)
         }
     }
 
