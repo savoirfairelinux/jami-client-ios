@@ -27,7 +27,7 @@
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.search" = "Buscando...";
 
 // Smartlist
 "smartlist.yesterday" = "Ayer";
@@ -139,7 +139,7 @@
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
-"calls.searching" = "Searching…";
+"calls.searching" = "Buscando...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";

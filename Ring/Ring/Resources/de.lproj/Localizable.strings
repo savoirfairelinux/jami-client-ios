@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Einladungen";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "Ok";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Frei wie in der Freiheit";
 
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
@@ -120,8 +120,8 @@
 "alerts.confirmDeleteConversationTitle" = "Unterhaltung löschen";
 "alerts.confirmClearConversation" = "Sicher, dass sie den Gesprächsverlauf mit diesem Kontakt löschen wollen?";
 "alerts.confirmClearConversationTitle" = "Gesprächsverlauf löschen";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.noMediaPermissionsTitle" = "Medienzugriff nicht gewährt";
+"alerts.noLibraryPermissionsTitle" = "Zugriff auf die Bildergalerie nicht gewährt";
 
 //Actions
 "actions.blockAction" = "Sperren";
@@ -142,7 +142,7 @@
 "calls.searching" = "Suchen…";
 "calls.callFinished" = "Anruf beendet";
 "calls.currentCallWith" = "Anrufen mit";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "auflegen";
 
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";
@@ -245,7 +245,7 @@
 "dataTransfer.readableStatusSuccess" = "Abgeschlossen";
 "dataTransfer.readableStatusAccept" = "Akzeptieren";
 "dataTransfer.readableStatusCancel" = "Abbrechen";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Zum Starten der Aufnahme drücken";
 "dataTransfer.sendMessage" = "Senden";
 
 
