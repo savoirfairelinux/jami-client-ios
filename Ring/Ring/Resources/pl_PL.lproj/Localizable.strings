@@ -27,7 +27,7 @@
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.search" = "Szukanie";
 
 // Smartlist
 "smartlist.yesterday" = "Wczoraj";
@@ -56,14 +56,14 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Połącz to urządzenie z kontem";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Utwórz konto Jami";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Pomiń";
 "createProfile.profileCreated" = "Następne";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "Wprowadź nazwę";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
@@ -83,7 +83,7 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "Powiadominia";
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Błąd sieci";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
@@ -121,7 +121,7 @@
 "alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.noLibraryPermissionsTitle" = "Dostęp do galerii zdjęć nie został nadany";
 
 //Actions
 "actions.blockAction" = "Blokuj";
@@ -139,10 +139,10 @@
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Łączenie...";
-"calls.searching" = "Searching…";
+"calls.searching" = "Szukanie";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "Rozłącz";
 
 //Account Page
 "accountPage.devicesListHeader" = "Urządzenia";
@@ -158,7 +158,7 @@
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "Save";
 "accountPage.proxyPaceholder" = "Proxy address";
-"accountPage.enableNotifications" = "Enable Notifications";
+"accountPage.enableNotifications" = "Włącz powiadomienia";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.revokeDeviceTitle" = "Odwołaj urządzenie";
@@ -169,13 +169,13 @@
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
 "accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
+"accountPage.deviceRevocationWrongPassword" = "Nieprawidłowe hasło";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Imię";
 "accountPage.linkDeviceTitle" = "Połącz nowe urządzenie";
 "accountPage.other" = "Inne";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Usuń konto";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Usuń";
 "accountPage.shareAccountDetails" = "Share Account Details";
@@ -227,7 +227,7 @@
 "dataTransfer.readableStatusRefuse" = "Odmów";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "Wysyłanie nie powiodło się";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Akceptuj";
 "dataTransfer.readableStatusCancel" = "Anuluj";
@@ -245,7 +245,7 @@
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Akceptuj";
 "dataTransfer.readableStatusCancel" = "Anuluj";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Naciśnij aby rozpocząć nagrywanie";
 "dataTransfer.sendMessage" = "Wyślij";
 
 

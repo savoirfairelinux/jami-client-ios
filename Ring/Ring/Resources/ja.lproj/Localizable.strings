@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "ホーム";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "招待状";
 "global.meTabBarTitle" = "アカウント";
 "global.ok" = "OK";
 "global.versionName" = "Free as in Freedom";
