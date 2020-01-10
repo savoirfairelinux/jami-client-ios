@@ -99,7 +99,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         super.viewDidLoad()
         self.beforeIncomingVideo.backgroundColor = UIColor.white
         let callCurrent = self.viewModel.call?.state == .current
-        self.setAvatarView(!callCurrent)
+        self.setAvatarView(!callCurrent || self.viewModel.isAudioOnly)
         self.capturedVideoBlurEffect.isHidden = callCurrent
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         let tapCapturedVideo = UITapGestureRecognizer(target: self, action: #selector(hideCapturedVideo))

@@ -147,7 +147,9 @@ class CallViewModel: Stateable, ViewModel {
 
     var rendererId = ""
     lazy var capturedFrame: Observable<UIImage?> = {
-        videoService.startVideoCaptureBeforeCall()
+        if !(self.call?.isAudioOnly ?? true) {
+            videoService.startVideoCaptureBeforeCall()
+        }
         return videoService.capturedVideoFrame.asObservable().map({ frame in
             return frame
         })
