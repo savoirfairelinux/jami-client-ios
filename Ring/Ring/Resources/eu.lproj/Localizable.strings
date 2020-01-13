@@ -63,7 +63,7 @@
 "createProfile.profileCreated" = "Hurengoa";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "Sartu izena";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
@@ -131,14 +131,14 @@
 "actions.backAction" = "Atzera";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Onartu";
-"alerts.incomingCallButtonIgnore" = "Ignore";
+"alerts.incomingCallButtonIgnore" = "Ezikusi";
 
 //Calls
 "calls.callItemTitle" = "Call";
 "calls.unknown" = "Ezezaguna";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
+"calls.connecting" = "Konektatzen...";
 "calls.searching" = "Searching…";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
@@ -186,7 +186,7 @@
 "account.sipUsername" = "User Name";
 "account.sipPassword" = "Pasahitza";
 "account.sipServer" = "SIP Server";
-"account.port" = "Port";
+"account.port" = "Ataka";
 "account.proxyServer" = "Proxya";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
@@ -221,7 +221,7 @@
 "contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Hasieratzen...";
 "dataTransfer.readableStatusError" = "Errorea";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Ukatu";
