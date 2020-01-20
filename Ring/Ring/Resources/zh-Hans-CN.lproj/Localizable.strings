@@ -26,35 +26,35 @@
 "global.versionName" = "\"Free as in Freedom\"";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "无效的二维码";
+"scan.search" = "正在搜索…";
 
 // Smartlist
 "smartlist.yesterday" = "昨天";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "搜索结果";
 "smartlist.conversations" = "会话";
 "smartlist.searching" = "正在搜索…";
 "smartlist.noResults" = "无结果";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.noConversation" = "没有会话";
+"smartlist.searchBarPlaceholder" = "输入名字";
 "smartlist.noNetworkConnectivity" = "无网络连接";
 "smartlist.cellularAccess" = "请确保蜂窝移动网络权限已开启";
 "smartlist.accountsTitle" = "帐户";
-"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.addAccountButton" = "+添加帐户";
 "smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.selectOneNumber" = "选择这些数字中的一个";
 
 //Conversation
-"conversation.messagePlaceholder" = "Type your message...";
+"conversation.messagePlaceholder" = "输入你的消息...";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "没有邀请";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "欢迎来到Jami！";
+"welcome.text" = "Ring 是一个保护用户的隐私和自由的通用自由软件。";
 "welcome.linkDevice" = "将此设备与一个帐户进行连接";
 "welcome.createAccount" = "创建一个Jami账户";
 
@@ -139,7 +139,7 @@
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "正在连接…";
-"calls.searching" = "Searching…";
+"calls.searching" = "正在搜索…";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";

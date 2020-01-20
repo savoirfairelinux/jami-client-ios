@@ -56,10 +56,10 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "كوّن حساب جامي";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "تخطي";
 "createProfile.profileCreated" = "التالي";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -124,11 +124,11 @@
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
-"actions.blockAction" = "Block";
+"actions.blockAction" = "حظر";
 "actions.deleteAction" = "إحذف";
 "actions.cancelAction" = "ألغِ";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.backAction" = "السابق";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "اقبل";
 "alerts.incomingCallButtonIgnore" = "تجاهل";
@@ -145,7 +145,7 @@
 "calls.haghUp" = "hang up";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "الأجهزة";
 "accountPage.settingsHeader" = "إعدادات";
 "accountPage.username" = "username:";
 "accountPage.usernameNotRegistered" = "username: not registered";
@@ -197,7 +197,7 @@
 "account.enableAccount" = "Enable Account";
 "account.statusOnline" = "Online";
 "account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
+"account.statusConnecting" = "يتم الإتصال";
 "account.statusUnknown" = "مجهول";
 "account.statusConnectionerror" = "Connection Error";
 
@@ -250,13 +250,13 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
-"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.contactAdded" = "تم إضافة جهة إتصال";
+"generatedMessage.invitationReceived" = "تم تلقي دعوة";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
-"generatedMessage.outgoingCall" = "Outgoing call";
+"generatedMessage.outgoingCall" = "مكالمة خارجة";
 "generatedMessage.incomingCall" = "مكالمة واردة";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.missedOutgoingCall" = "مكالمة خارجة فائتة";
+"generatedMessage.missedIncomingCall" = "مكالمة داخلة فائتة";
 
 //General Settings
 "generalSettings.title" = "General settings";

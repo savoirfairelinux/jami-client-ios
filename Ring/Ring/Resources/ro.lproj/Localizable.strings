@@ -56,11 +56,11 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Creați un cont Jami";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
-"createProfile.profileCreated" = "Next";
+"createProfile.skipCreateProfile" = "Sari";
+"createProfile.profileCreated" = "Înainte";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
 "createProfile.enterNamePlaceholder" = "Enter name";
@@ -124,13 +124,13 @@
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 
 //Actions
-"actions.blockAction" = "Block";
+"actions.blockAction" = "Blochează";
 "actions.deleteAction" = "Șterge";
 "actions.cancelAction" = "Cancel";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.backAction" = "Înapoi";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "Accept";
+"alerts.incomingCallButtonAccept" = "Acceptă";
 "alerts.incomingCallButtonIgnore" = "Ignore";
 
 //Calls
@@ -197,7 +197,7 @@
 "account.enableAccount" = "Enable Account";
 "account.statusOnline" = "Online";
 "account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
+"account.statusConnecting" = "Se conectează";
 "account.statusUnknown" = "Necunoscut";
 "account.statusConnectionerror" = "Connection Error";
 
@@ -224,12 +224,12 @@
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "Eroare";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "Refuzați";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "Acceptă";
 "dataTransfer.readableStatusCancel" = "Cancel";
 
 //Notifications
@@ -239,18 +239,18 @@
 "notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "Refuzați";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "Acceptă";
 "dataTransfer.readableStatusCancel" = "Cancel";
 "dataTransfer.infoMessage" = "Press to start recording";
-"dataTransfer.sendMessage" = "Send";
+"dataTransfer.sendMessage" = "Trimite";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
+"generatedMessage.contactAdded" = "Contact adăugat";
 "generatedMessage.invitationReceived" = "Invitation received";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Outgoing call";

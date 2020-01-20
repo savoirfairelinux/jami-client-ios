@@ -33,12 +33,12 @@
 "smartlist.yesterday" = "昨日";
 "smartlist.results" = "Search Result";
 "smartlist.conversations" = "会話";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
+"smartlist.searching" = "検索中...";
+"smartlist.noResults" = "検索結果はありません";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "ネットワーク接続がありません";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "設定から写真へのアクセスが許可されていることを確認してください";
 "smartlist.accountsTitle" = "アカウント";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
@@ -74,11 +74,11 @@
 "createAccount.newPasswordPlaceholder" = "パスワード";
 "createAccount.repeatPasswordPlaceholder" = "パスワードの再入力";
 "createAccount.passwordCharactersNumberError" = "6文字以上";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.passwordNotMatchingError" = "パスワードが一致しません";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.loading" = "Loading";
+"createAccount.usernameAlreadyTaken" = "このユーザー名は既に取得されています。";
+"createAccount.loading" = "読み込み中";
 "createAccount.waitCreateAccountTitle" = "アカウントを追加";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
@@ -91,26 +91,26 @@
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
+"linkToAccount.waitLinkToAccountTitle" = "アカウントを連結しています";
 "linkToAccount.linkButtonTitle" = "Link device";
 "linkToAccount.passwordPlaceholder" = "パスワード";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "PINを入力してください";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "PINコードを生成するには、使用するアカウントにログインした端末のアカウント管理設定に移動します。端末の設定で「このアカウントに別の端末を紐づける」を選択します。このフォームを完了するために必要なPINを取得します。 PINは10分間のみ有効です。";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "アカウントが見つかりません";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountAddedTitle" = "アカウントを追加しました";
 "alerts.accountNoNetworkTitle" = "ネットワークに接続できません";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
+"alerts.accountDefaultErrorTitle" = "不明なエラー";
+"alerts.accountDefaultErrorMessage" = "アカウントを作成できませんでした。";
+"alerts.profileTakePhoto" = "撮影";
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.profileCancelPhoto" = "キャンセル";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "アカウントを連結しています";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
@@ -206,11 +206,11 @@
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
+"linkDevice.passwordError" = "入力したパスワードではこのアカウントのロックを解除できません";
 "linkDevice.networkError" = "エクスポート中にネットワークエラーが発生しました";
 "linkDevice.defaultError" = "エクスポート中にエラーが発生しました";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "検証中";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
