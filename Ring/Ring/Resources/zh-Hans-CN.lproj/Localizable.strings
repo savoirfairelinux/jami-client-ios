@@ -61,34 +61,34 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "跳过";
 "createProfile.profileCreated" = "下一步";
-"createProfile.title" = "Personalise your profile";
+"createProfile.title" = "个性化你的个人信息";
 "createProfile.enterNameLabel" = "Enter a display name";
 "createProfile.enterNamePlaceholder" = "输入名称";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.createYourAvatar" = "建立你的头像";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "创建Ring帐户";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.chooseStrongPassword" = "选择一个强密码并记住它来保护你的 Jami 帐号";
 "createAccount.enterNewUsernamePlaceholder" = "用户名";
 "createAccount.newPasswordPlaceholder" = "密码";
 "createAccount.repeatPasswordPlaceholder" = "确认密码";
 "createAccount.passwordCharactersNumberError" = "最少6字符";
 "createAccount.passwordNotMatchingError" = "两次输入的密码不匹配";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "正在验证可用性";
 "createAccount.invalidUsername" = "无效的用户名";
 "createAccount.usernameAlreadyTaken" = "用户名已被他人使用";
 "createAccount.loading" = "载入中";
 "createAccount.waitCreateAccountTitle" = "添加帐户";
-"createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.RegisterAUsername" = "注册一个用户名";
+"createAccount.ChooseAPassword" = "加密我的账户";
+"createAccount.PasswordInformation" = "选择一个密码来加密你的账户。请记下它，否则你将无法恢复你的账户。";
 "createAccount.EnableNotifications" = "通知";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.Recommended" = "（推荐）";
 "createAccount.UsernameNotRegisteredTitle" = "网络错误";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.UsernameNotRegisteredMessage" = "账户已被创建但是用户名未被注册";
+"createAccount.timeoutTitle" = "已创建账户";
+"createAccount.timeoutMessage" = "正在注册用户名... 这可能需要一小会儿";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "链接账号";
@@ -101,7 +101,7 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "无法找到帐户";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "无法在Jami网络中找到账户。 请确保它是从现有设备的Jami上导出的，并且提供的凭证是有效的。";
 "alerts.accountAddedTitle" = "用户已添加";
 "alerts.accountNoNetworkTitle" = "无法连接至网络";
 "alerts.accountNoNetworkMessage" = "无法添加帐户，因为Jami无法连接到分布式网络。检查您设备的连接。";
@@ -111,38 +111,38 @@
 "alerts.profileUploadPhoto" = "上传照片";
 "alerts.profileCancelPhoto" = "取消";
 "alerts.accountLinkedTitle" = "链接账户中";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "启动Jami时出现了一个问题";
 "alerts.dbFailedMessage" = "请关闭应用，并试试重新启动它。";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.confirmBlockContact" = "你确定想要封锁这个联系人？与这个联系人的对话历史也将被永久删除。";
+"alerts.confirmBlockContactTitle" = "封锁联系人";
+"alerts.confirmDeleteConversation" = "你确定要永久删除这个对话？";
+"alerts.confirmDeleteConversationFromContact" = "你确定要删除与该联系人的对话？";
+"alerts.confirmDeleteConversationTitle" = "删除对话";
+"alerts.confirmClearConversation" = "你确定要清空与该联系人的对话？";
+"alerts.confirmClearConversationTitle" = "清空对话";
+"alerts.noMediaPermissionsTitle" = "未授予媒体权限";
+"alerts.noLibraryPermissionsTitle" = "未授予照片库访问权限";
 
 //Actions
 "actions.blockAction" = "屏蔽";
 "actions.deleteAction" = "删除";
 "actions.cancelAction" = "取消";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "清除";
 "actions.backAction" = "上一步";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "通话来自";
 "alerts.incomingCallButtonAccept" = "接听";
 "alerts.incomingCallButtonIgnore" = "忽略";
 
 //Calls
 "calls.callItemTitle" = "通话";
 "calls.unknown" = "未知";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Ringing…";
+"calls.incomingCallInfo" = "想要与你对话";
+"calls.ringing" = "正在呼叫...";
 "calls.connecting" = "正在连接…";
 "calls.searching" = "正在搜索…";
-"calls.callFinished" = "Call finished";
+"calls.callFinished" = "通话已结束";
 "calls.currentCallWith" = "Call with ";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "挂断";
 
 //Account Page
 "accountPage.devicesListHeader" = "设备";
@@ -217,7 +217,7 @@
 "contactPage.startVideoCall" = "Start Video Call";
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
+"contactPage.blockContact" = "封锁联系人";
 "contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
