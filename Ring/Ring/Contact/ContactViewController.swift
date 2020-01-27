@@ -43,13 +43,19 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         super.viewDidLoad()
         self.addHeaderView()
         self.setUpTableView()
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        tableView.backgroundColor = UIColor.jamiBackgroundColor
         navigationItem.titleView = titleView
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?
+            .navigationBar.layer.shadowColor = UIColor.clear.cgColor
+//        navigationController?
+//                   .navigationBar
+//                   .setBackgroundImage(UIImage(),
+//                                       for: UIBarMetrics.default)
     }
 
     private func addHeaderView() {

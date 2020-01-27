@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="byn-Xz-pFs">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="byn-Xz-pFs">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,7 +29,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egE-LH-3eV">
-                                                <rect key="frame" x="20" y="17" width="126.5" height="25"/>
+                                                <rect key="frame" x="20" y="17" width="125" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="9vc-0c-G5e"/>
                                                 </constraints>
@@ -45,7 +43,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="u9v-7k-LVp"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                 <userDefinedRuntimeAttributes>
@@ -62,7 +59,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1h-xB-2Im">
-                                                <rect key="frame" x="20" y="120" width="124" height="25"/>
+                                                <rect key="frame" x="20" y="120" width="122" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="oaL-if-aDl"/>
                                                 </constraints>
@@ -76,7 +73,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="cE3-Nh-dtO"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
@@ -93,7 +89,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvE-N1-hV5">
-                                                <rect key="frame" x="20" y="223" width="111" height="25"/>
+                                                <rect key="frame" x="20" y="223" width="109" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="l8j-PP-hGk"/>
                                                 </constraints>
@@ -107,7 +103,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="RY0-bS-AlD"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                 <userDefinedRuntimeAttributes>
@@ -124,7 +119,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter port number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ty-fL-k78">
-                                                <rect key="frame" x="20" y="326" width="146.5" height="25"/>
+                                                <rect key="frame" x="20" y="326" width="143.5" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="xic-Xq-kDh"/>
                                                 </constraints>
@@ -138,7 +133,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="3Rx-v3-noT"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                 <userDefinedRuntimeAttributes>
@@ -218,6 +212,7 @@
                         <viewLayoutGuide key="safeArea" id="asY-zx-uYD"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="daQ-3e-VKq" id="RtR-Mp-68e"/>
                         <outlet property="createAccountButton" destination="31a-Gd-rzz" id="emU-Tv-WdU"/>
                         <outlet property="createAccountLabel" destination="q4D-AI-cLY" id="Vhm-W9-YVC"/>
                         <outlet property="passwordLabel" destination="h1h-xB-2Im" id="gNl-Yq-JdG"/>

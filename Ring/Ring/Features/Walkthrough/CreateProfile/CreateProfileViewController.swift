@@ -39,6 +39,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     @IBOutlet weak var profileImageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var infoProfileImage: UIImageView!
+    @IBOutlet weak var backgroundView: UIView!
 
     // MARK: members
     private let disposeBag = DisposeBag()
@@ -62,11 +63,11 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         self.profileImageView.layer.shadowOpacity = 0.5
         self.profileImageView.layer.shadowOffset = CGSize.zero
         self.profileImageView.layer.shadowRadius = 4
-        self.profileName.tintColor = UIColor.jamiSecondary
         self.infoProfileImage.layer.shadowColor = UIColor.gray.cgColor
         self.infoProfileImage.layer.shadowOpacity = 0.5
         self.infoProfileImage.layer.shadowOffset = CGSize.zero
         self.infoProfileImage.layer.shadowRadius = 4
+        adaptToSystemColor()
 
         // Animations
         DispatchQueue.global(qos: .background).async {
@@ -125,6 +126,19 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    }
+
+    func adaptToSystemColor() {
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        backgroundView.backgroundColor = UIColor.jamiBackgroundColor
+        self.profileName.tintColor = UIColor.jamiSecondary
+        scrollView.backgroundColor = UIColor.jamiBackgroundColor
+        createProfilAccountTitle.textColor = UIColor.jamiTextSecondary
+        subtitle.textColor = UIColor.jamiTextSecondary
+        enterNameLabel.textColor = UIColor.jamiTextSecondary
+        profileName.backgroundColor = UIColor.jamiBackgroundColor
+        profileName.borderColor = UIColor.jamiTextBlue
+        skipButton.setTitleColor(UIColor.jamiLabelColor, for: .normal)
     }
 
     func dismissInfoView() {

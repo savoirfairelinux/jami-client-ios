@@ -31,7 +31,6 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     // MARK: outlets
     @IBOutlet weak var linkDeviceTitle: UILabel!
     @IBOutlet weak var linkButton: DesignableButton!
-    @IBOutlet weak var backgroundNavigationBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var pinTextField: DesignableTextField!
     @IBOutlet weak var passwordTextField: DesignableTextField!
@@ -62,9 +61,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.pinTextField.becomeFirstResponder()
         self.view.layoutIfNeeded()
         self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
-        self.pinTextField.tintColor = UIColor.jamiSecondary
-        self.passwordTextField.tintColor = UIColor.jamiSecondary
+        adaptToSystemColor()
 
         self.applyL10n()
 
@@ -112,6 +109,22 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    }
+
+    func adaptToSystemColor() {
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        scrollView.backgroundColor = UIColor.jamiBackgroundColor
+        linkDeviceTitle.textColor = UIColor.jamiTextSecondary
+        pinLabel.textColor = UIColor.jamiTextSecondary
+        passwordLabel.textColor = UIColor.jamiTextSecondary
+        enableNotificationsLabel.textColor = UIColor.jamiTextSecondary
+        self.pinTextField.backgroundColor = UIColor.jamiBackgroundColor
+        self.passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
+        self.pinTextField.borderColor = UIColor.jamiTextBlue
+        self.passwordTextField.borderColor = UIColor.jamiTextBlue
+        notificationsSwitch.tintColor = UIColor.jamiTextBlue
+        pinInfoButton.tintColor = UIColor.jamiTextBlue
+        linkButton.setTitleColor(UIColor.jamiLabelColor, for: .normal)
     }
 
     func setContentInset() {
