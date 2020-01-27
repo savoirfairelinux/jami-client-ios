@@ -34,7 +34,6 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             self.registerUsernameHeightConstraintConstant = registerUsernameHeightConstraint.constant
         }
     }
-    @IBOutlet weak var backgroundNavigationBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var choosePasswordViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var usernameSwitch: UISwitch!
@@ -76,7 +75,6 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.scrollView.alwaysBounceHorizontal = false
         self.scrollView.alwaysBounceVertical = true
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
         self.usernameTextField.becomeFirstResponder()
         self.usernameTextField.tintColor = UIColor.jamiSecondary
         self.passwordTextField.tintColor = UIColor.jamiSecondary
@@ -91,12 +89,36 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        adaptToSystemColor()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    func adaptToSystemColor() {
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        scrollView.backgroundColor = UIColor.jamiBackgroundColor
+        createAccountTitle.textColor = UIColor.jamiTextSecondary
+        registerUsernameLabel.textColor = UIColor.jamiTextSecondary
+        recommendedLabel.textColor = UIColor.jamiTextSecondary
+        chooseAPasswordLabel.textColor = UIColor.jamiTextSecondary
+        enableNotificationsLabel.textColor = UIColor.jamiTextSecondary
+        passwordInfoLabel.textColor = UIColor.jamiTextBlue
+        registerPasswordView.backgroundColor = UIColor.jamiBackgroundColor
+        registerUsernameView.backgroundColor = UIColor.jamiBackgroundColor
+        usernameTextField.backgroundColor = UIColor.jamiBackgroundColor
+        passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
+        confirmPasswordTextField.backgroundColor = UIColor.jamiBackgroundColor
+        usernameTextField.borderColor = UIColor.jamiTextBlue
+        passwordTextField.borderColor = UIColor.jamiTextBlue
+        confirmPasswordTextField.borderColor = UIColor.jamiTextBlue
+        usernameSwitch.tintColor = UIColor.jamiTextBlue
+        passwordSwitch.tintColor = UIColor.jamiTextBlue
+        notificationsSwitch.tintColor = UIColor.jamiTextBlue
+        createAccountButton.setTitleColor(UIColor.jamiLabelColor, for: .normal)
     }
 
     func setContentInset() {

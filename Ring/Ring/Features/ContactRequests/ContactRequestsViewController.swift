@@ -43,6 +43,11 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.jamiBackgroundColor
+        self.tableView.backgroundColor = UIColor.jamiBackgroundColor
+        noInvitationsPlaceholder.backgroundColor = UIColor.jamiBackgroundColor
+        noRequestsLabel.backgroundColor = UIColor.jamiBackgroundColor
+        noRequestsLabel.textColor = UIColor.jamiLabelColor
 
         self.configureRingNavigationBar()
         self.tableView.rx.modelSelected(ContactRequestItem.self)

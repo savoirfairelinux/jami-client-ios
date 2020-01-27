@@ -38,6 +38,9 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor.jamiBackgroundColor
+        noBlockedContactLabel.backgroundColor = UIColor.jamiBackgroundColor
+        noBlockedContactLabel.textColor = UIColor.jamiLabelColor
 
         self.configureRingNavigationBar()
         self.navigationItem.title = L10n.AccountPage.blockedContacts
