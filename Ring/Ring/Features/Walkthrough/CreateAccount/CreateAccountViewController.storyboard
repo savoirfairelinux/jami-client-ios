@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jUh-Lp-ulu">
-    <device id="ipad10_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jUh-Lp-ulu">
+    <device id="ipad10_5" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -63,7 +61,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="BAO-oa-Ecp"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                         <userDefinedRuntimeAttributes>
@@ -122,7 +119,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="eGy-0v-Pm0"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                                         <userDefinedRuntimeAttributes>
@@ -141,7 +137,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="iUA-8a-sP7"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                                         <userDefinedRuntimeAttributes>
@@ -184,7 +179,7 @@
                                                 <color key="onTintColor" red="0.12156862745098039" green="0.28627450980392155" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2K-7x-35g" userLabel="Enable Notifications Label">
-                                                <rect key="frame" x="177" y="245.5" width="156" height="21"/>
+                                                <rect key="frame" x="177" y="245.5" width="151.5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -196,7 +191,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <state key="normal" title="Create account"/>
+                                                <state key="normal" title="Create account">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
@@ -245,17 +242,6 @@
                                     <constraint firstItem="g3i-8d-O4a" firstAttribute="bottom" secondItem="UZB-Gb-Dp2" secondAttribute="bottom" priority="250" id="MAL-nV-nsP"/>
                                 </constraints>
                             </scrollView>
-                            <visualEffectView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJI-3e-kSG" userLabel="Background Navigation Bar">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="0.0"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4Wd-7Y-TbC">
-                                    <rect key="frame" x="0.0" y="0.0" width="834" height="0.0"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="WfS-B2-NZI"/>
-                                </constraints>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -265,14 +251,10 @@
                             <constraint firstItem="IVi-pM-qbp" firstAttribute="trailing" secondItem="05l-0O-Ql0" secondAttribute="trailing" id="bBa-32-pvE"/>
                             <constraint firstItem="UZB-Gb-Dp2" firstAttribute="top" secondItem="7Ub-Rk-fjK" secondAttribute="top" id="l58-kW-bAF"/>
                             <constraint firstAttribute="leadingMargin" secondItem="UZB-Gb-Dp2" secondAttribute="leading" id="n4K-YN-Ab0"/>
-                            <constraint firstItem="xJI-3e-kSG" firstAttribute="top" secondItem="7Ub-Rk-fjK" secondAttribute="top" id="q3t-DK-hJs"/>
-                            <constraint firstItem="xJI-3e-kSG" firstAttribute="width" secondItem="7Ub-Rk-fjK" secondAttribute="width" id="vh6-d3-sOd"/>
                             <constraint firstItem="g3i-8d-O4a" firstAttribute="width" secondItem="7Ub-Rk-fjK" secondAttribute="width" id="wcZ-tz-DCM"/>
-                            <constraint firstItem="xJI-3e-kSG" firstAttribute="centerX" secondItem="7Ub-Rk-fjK" secondAttribute="centerX" id="z4S-tQ-3IZ"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backgroundNavigationBarHeightConstraint" destination="WfS-B2-NZI" id="sM3-uq-CGF"/>
                         <outlet property="chooseAPasswordLabel" destination="BLe-wx-zKe" id="pN5-s7-AEm"/>
                         <outlet property="choosePasswordViewHeightConstraint" destination="gCv-h4-eLK" id="d0K-zb-sSB"/>
                         <outlet property="confirmPasswordTextField" destination="ODL-4B-fCm" id="CNa-S1-DmO"/>

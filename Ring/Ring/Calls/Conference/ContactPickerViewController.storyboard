@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZwP-Qn-oLY">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZwP-Qn-oLY">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,27 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VI3-Wm-odB">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fBg-Me-pPw">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVM-qL-OUe">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="hit-jZ-Pl5">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </view>
-                                            <vibrancyEffect>
-                                                <blurEffect style="light"/>
-                                            </vibrancyEffect>
-                                        </visualEffectView>
-                                    </subviews>
-                                </view>
-                                <blurEffect style="extraLight"/>
-                            </visualEffectView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ht5-JP-L4t">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <constraints>
@@ -58,11 +35,7 @@
                             <constraint firstItem="ht5-JP-L4t" firstAttribute="top" secondItem="HLr-8o-AJK" secondAttribute="top" id="2g9-Dm-zDQ"/>
                             <constraint firstItem="i1P-Li-H82" firstAttribute="trailing" secondItem="HLr-8o-AJK" secondAttribute="trailing" id="44P-xu-w8R"/>
                             <constraint firstItem="i1P-Li-H82" firstAttribute="top" secondItem="ht5-JP-L4t" secondAttribute="bottom" id="5Hu-hl-ywR"/>
-                            <constraint firstItem="VI3-Wm-odB" firstAttribute="leading" secondItem="HLr-8o-AJK" secondAttribute="leading" id="GkO-uY-mmD"/>
-                            <constraint firstItem="VI3-Wm-odB" firstAttribute="top" secondItem="ht5-JP-L4t" secondAttribute="bottom" id="MYo-pX-Fn0"/>
-                            <constraint firstItem="HLr-8o-AJK" firstAttribute="trailing" secondItem="VI3-Wm-odB" secondAttribute="trailing" id="aO0-4s-CoA"/>
                             <constraint firstItem="ht5-JP-L4t" firstAttribute="leading" secondItem="HLr-8o-AJK" secondAttribute="leading" id="cBL-Q8-eUL"/>
-                            <constraint firstItem="HLr-8o-AJK" firstAttribute="bottom" secondItem="VI3-Wm-odB" secondAttribute="bottom" id="l3e-iB-s2n"/>
                             <constraint firstItem="i1P-Li-H82" firstAttribute="leading" secondItem="HLr-8o-AJK" secondAttribute="leading" id="mk9-0g-iwg"/>
                             <constraint firstAttribute="bottom" secondItem="i1P-Li-H82" secondAttribute="bottom" id="pIJ-1T-FIT"/>
                             <constraint firstItem="ht5-JP-L4t" firstAttribute="trailing" secondItem="HLr-8o-AJK" secondAttribute="trailing" id="pz4-KI-DV9"/>

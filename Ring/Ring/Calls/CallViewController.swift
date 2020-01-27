@@ -97,7 +97,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.beforeIncomingVideo.backgroundColor = UIColor.white
+        self.beforeIncomingVideo.backgroundColor = UIColor.jamiBackgroundColor
         let callCurrent = self.viewModel.call?.state == .current
         self.setAvatarView(!callCurrent || self.viewModel.isAudioOnly)
         self.capturedVideoBlurEffect.isHidden = callCurrent
@@ -128,6 +128,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             // The durationLabel and buttonsContainer alpha is set here to 0, and to 1 (with a duration) when appear on the screen to have a fade in animation
             self.durationLabel.alpha = 0
             self.buttonsContainer.stackView.alpha = 0
+            nameLabel.textColor = UIColor.jamiLabelColor
+            durationLabel.textColor = UIColor.jamiLabelColor
+            infoBottomLabel.textColor = UIColor.jamiLabelColor
             self.showAllInfo()
             self.setWhiteAvatarView()
         }
@@ -180,7 +183,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func setWhiteAvatarView() {
         self.callPulse.backgroundColor = UIColor.jamiCallPulse
-        self.avatarView.backgroundColor = UIColor.white
+        self.avatarView.backgroundColor = UIColor.jamiBackgroundColor
     }
 
     func initCallAnimation() {

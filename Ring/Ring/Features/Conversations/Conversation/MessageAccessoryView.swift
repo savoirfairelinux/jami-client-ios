@@ -29,13 +29,14 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var emojisButton: UIButton!
-    @IBOutlet weak var blurEffect: UIVisualEffectView!
     @IBOutlet weak var messageTextView: GrowingTextView!
     @IBOutlet weak var emojisButtonTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var textViewHeightConstraints: NSLayoutConstraint!
     var messageTextViewHeight = Variable<CGFloat>(0.00)
     var messageTextViewContent = Variable<String>("")
+
+    var blurEffect: UIVisualEffectView?
 
     override open func didMoveToWindow() {
         self.setupMessageTextView()
@@ -48,6 +49,20 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
                 .constraint(lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor,
                                                                multiplier: 1)
                 .isActive = true
+        }
+        if #available(iOS 13.0, *) {
+            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+        } else {
+            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        }
+        if blurEffect != nil {
+            blurEffect!.frame = self.bounds
+            self.insertSubview(blurEffect!, at: 0)
+            blurEffect!.topAnchor.constraint(equalTo: messageTextView.topAnchor, constant: -12.0).isActive = true
+            blurEffect!.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 40).isActive = true
+            blurEffect!.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
+            blurEffect!.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
+            blurEffect!.translatesAutoresizingMaskIntoConstraints = false
         }
     }
 
@@ -62,6 +77,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
         self.messageTextView.maxHeight = 70
         self.shareButton.tintColor = UIColor.jamiMain
         self.cameraButton.tintColor = UIColor.jamiMain
+        self.messageTextView.backgroundColor = UIColor.jamiInputTextBackground
     }
 
     func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {

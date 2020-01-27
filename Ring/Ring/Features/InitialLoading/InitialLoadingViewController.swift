@@ -15,4 +15,9 @@ final class InitialLoadingViewController: UIViewController, StoryboardBased {
         return .lightContent
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.jamiBackgroundColor
+    }
+
 }
