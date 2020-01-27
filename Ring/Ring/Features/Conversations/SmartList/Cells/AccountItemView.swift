@@ -40,5 +40,6 @@ class AccountItemView: UIView {
         Bundle.main.loadNibNamed("AccountItemView", owner: self, options: nil)
         addSubview(containerView)
         containerView.frame = self.bounds
+        nameLabel.textColor = UIColor.jamiLabelColor
     }
 }

@@ -23,6 +23,13 @@ class ProfileHeaderView: GSKStretchyHeaderView {
     @IBOutlet var avatarView: UIView!
     @IBOutlet var displayName: UILabel!
     @IBOutlet var userName: UILabel!
+    @IBOutlet weak var background: UIView!
+
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        self.backgroundColor = UIColor.jamiBackgroundColor
+        background.backgroundColor = UIColor.jamiBackgroundColor
+    }
 
     override func didChangeStretchFactor(_ stretchFactor: CGFloat) {
         var alpha = CGFloatTranslateRange(stretchFactor, 0.2, 0.7, 0, 1)

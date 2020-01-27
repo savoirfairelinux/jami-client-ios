@@ -37,6 +37,7 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var serverLabel: UILabel!
     @IBOutlet weak var portLabel: UILabel!
+    @IBOutlet weak var backgroundView: UIView!
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
@@ -52,6 +53,26 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        adaptToSystemColor()
+    }
+
+    func adaptToSystemColor() {
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        backgroundView.backgroundColor = UIColor.jamiBackgroundColor
+        scrollView.backgroundColor = UIColor.jamiBackgroundColor
+        createAccountLabel.textColor = UIColor.jamiTextSecondary
+        userNameLabel.textColor = UIColor.jamiTextSecondary
+        passwordLabel.textColor = UIColor.jamiTextSecondary
+        serverLabel.textColor = UIColor.jamiTextSecondary
+        portLabel.textColor = UIColor.jamiTextSecondary
+        userNameTextField.backgroundColor = UIColor.jamiBackgroundColor
+        passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
+        serverTextField.backgroundColor = UIColor.jamiBackgroundColor
+        portTextField.backgroundColor = UIColor.jamiBackgroundColor
+        userNameTextField.borderColor = UIColor.jamiTextBlue
+        passwordTextField.borderColor = UIColor.jamiTextBlue
+        serverTextField.borderColor = UIColor.jamiTextBlue
+        portTextField.borderColor = UIColor.jamiTextBlue
     }
 
     @objc func dismissKeyboard() {
