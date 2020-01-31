@@ -64,7 +64,7 @@ class AudioService {
         } catch {
             log.error("\(error)")
         }
-        if #available(iOS 10.0, *) {
+        if useCallKit, #available(iOS 10.0, *) {
             return
         }
         setToRing()

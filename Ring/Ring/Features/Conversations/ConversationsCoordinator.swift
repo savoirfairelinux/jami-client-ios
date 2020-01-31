@@ -106,7 +106,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         callViewController.viewModel.call = call
 
         var tempBag = DisposeBag()
-        if #available(iOS 10.0, *) {
+        if useCallKit, #available(iOS 10.0, *) {
             call.callUUID = UUID()
             callsProvider
                 .reportIncomingCall(account: account, call: call) { _ in
@@ -261,12 +261,19 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             let call = self.callService.call(callID: callid) else {
                 return
         }
+        guard let topController = getTopController(),
+            !topController.isKind(of: (CallViewController).self) else {
+                return
+        }
+        topController.dismiss(animated: false, completion: nil)
+        guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+        parent.openConversation(participantID: call.participantUri)
         let callViewController = CallViewController.instantiate(with: self.injectionBag)
         callViewController.viewModel.call = call
         callViewController.viewModel.answerCall()
             .subscribe(onCompleted: { [weak self] in
                 self?.present(viewController: callViewController,
-                              withStyle: .present,
+                              withStyle: .appear,
                               withAnimation: false,
                               withStateable: callViewController.viewModel)
             }).disposed(by: self.disposeBag)

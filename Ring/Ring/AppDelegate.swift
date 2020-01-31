@@ -27,6 +27,8 @@ import RxSwift
 import PushKit
 import ContactsUI
 
+let useCallKit = false
+
 // swiftlint:disable identifier_name
 // swiftlint:disable type_body_length
 @UIApplicationMain
@@ -173,7 +175,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             } else {
                 self.unregisterVoipNotifications()
             }
-            if #available(iOS 10.0, *) {
+            if useCallKit, #available(iOS 10.0, *) {
                 return
             }
             // reimit new call signal to show incoming call alert
@@ -225,7 +227,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         self.clearBadgeNumber()
-        if #available(iOS 10.0, *) {
+        if useCallKit, #available(iOS 10.0, *) {
             return
         }
         self.callService.checkForIncomingCall()
