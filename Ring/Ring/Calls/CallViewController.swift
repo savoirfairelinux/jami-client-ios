@@ -551,6 +551,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func removeFromScreen() {
         UIDevice.current.isProximityMonitoringEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
+        self.viewModel.showConversations()
         self.dismiss(animated: false)
     }
 
