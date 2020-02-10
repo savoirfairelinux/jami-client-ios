@@ -171,8 +171,7 @@ class LocalNotificationsHelper {
             content.body = name
             content.userInfo = data
             content.categoryIdentifier = self.callCategory
-            let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-            let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
+            let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: nil)
             UNUserNotificationCenter.current().add(notificationRequest) { (error) in
                 if let error = error {
                     print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")

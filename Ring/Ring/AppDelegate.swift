@@ -508,10 +508,10 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
-        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
         if UIApplication.shared.applicationState != .active {
             self.audioService.startAVAudioSession()
         }
+        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
