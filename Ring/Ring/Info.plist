@@ -53,9 +53,10 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>voip</string>
+		<string>audio</string>
 		<string>fetch</string>
 		<string>remote-notification</string>
+		<string>voip</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>

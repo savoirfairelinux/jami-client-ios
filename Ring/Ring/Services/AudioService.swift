@@ -56,7 +56,7 @@ class AudioService {
     func startAVAudioSession() {
         do {
             if #available(iOS 10.0, *) {
-                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [AVAudioSession.CategoryOptions.allowBluetooth, AVAudioSession.CategoryOptions.mixWithOthers])
+                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .videoChat, options: [AVAudioSession.CategoryOptions.allowBluetooth, AVAudioSession.CategoryOptions.mixWithOthers])
             } else {
                 try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [AVAudioSession.CategoryOptions.allowBluetooth, AVAudioSession.CategoryOptions.mixWithOthers])
             }
