@@ -34,7 +34,7 @@ class CallsProviderDelegate: NSObject {
     override init() {
         self.sharedResponseStream = responseStream.share()
         super.init()
-        if useCallKit, #available(iOS 10.0, *) {
+        if #available(iOS 10.0, *) {
             let providerConfiguration = CXProviderConfiguration(localizedName: "Jami")
 
             providerConfiguration.supportsVideo = true

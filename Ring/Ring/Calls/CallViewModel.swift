@@ -172,7 +172,7 @@ class CallViewModel: Stateable, ViewModel {
                         if anotherCall.participantsCallId.count == 1 {
                             self.rendererId = anotherCallid
                         }
-                        if useCallKit, #available(iOS 10.0, *) {
+                        if #available(iOS 10.0, *) {
                             self.callsProvider.stopCall(callUUID: call.callUUID)
                         }
                         return !hide
@@ -182,7 +182,7 @@ class CallViewModel: Stateable, ViewModel {
                     self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
                     self.videoService.restoreStateAfterconference()
                     self.videoService.stopAudioDevice()
-                    if useCallKit, #available(iOS 10.0, *) {
+                    if #available(iOS 10.0, *) {
                         self.callsProvider.stopCall(callUUID: call.callUUID)
                     }
                 }
@@ -428,7 +428,7 @@ class CallViewModel: Stateable, ViewModel {
         guard let call = self.call else {
             return
         }
-        if useCallKit, #available(iOS 10.0, *), stopProvider {
+        if #available(iOS 10.0, *), stopProvider {
             self.callsProvider.stopCall(callUUID: call.callUUID)
             call.participantsCallId.forEach { (callId) in
                 if let participantCall = self.callService.call(callID: callId) {
@@ -471,7 +471,7 @@ class CallViewModel: Stateable, ViewModel {
             .subscribe(onSuccess: { [weak self] callModel in
                 callModel.callUUID = UUID()
                 self?.call = callModel
-                if useCallKit, #available(iOS 10.0, *) {
+                if #available(iOS 10.0, *) {
                     self?.callsProvider
                         .startCall(account: account, call: callModel)
                 }
