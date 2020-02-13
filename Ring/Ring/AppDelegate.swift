@@ -512,6 +512,17 @@ extension AppDelegate: PKPushRegistryDelegate {
         }
     }
 
+    @available(iOS 11.0, *)
+    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
+        if UIApplication.shared.applicationState != .active {
+            self.audioService.startAVAudioSession()
+        }
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
+
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
         if type == PKPushType.voIP {
             let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
