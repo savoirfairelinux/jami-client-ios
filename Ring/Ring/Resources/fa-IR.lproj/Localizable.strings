@@ -64,7 +64,7 @@
 "createProfile.title" = "نمایه خود را شخصی‌سازی کنید";
 "createProfile.enterNameLabel" = "نامی برای نمایش وارد کنید";
 "createProfile.enterNamePlaceholder" = "نام را وارد کنید";
-"createProfile.subtitle" = "نمایه شما با مخاطبین شما به اشتراک گذاشته می‌شود. شما می‌توانید، آن را در هر زمان تغییر دهید.";
+"createProfile.subtitle" = "نمایه شما با مخاطبانتان به اشتراک گذاشته می‌شود. شما می‌توانید، آن را در هر زمان تغییر دهید.";
 "createProfile.createYourAvatar" = "آواتار خود را بسازید";
 
 //Create Account form
@@ -142,7 +142,7 @@
 "calls.searching" = "در حال جستجو...";
 "calls.callFinished" = "تماس پایان یافت";
 "calls.currentCallWith" = "تماس با";
-"calls.haghUp" = "قطع تماس";
+"calls.haghUp" = "قطع‌کردن";
 
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
