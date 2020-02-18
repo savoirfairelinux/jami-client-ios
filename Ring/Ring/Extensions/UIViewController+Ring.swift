@@ -136,4 +136,15 @@ extension UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
     }
+    
+    func configureWalkrhroughNavigationBar() {
+        let attrPortrait = [NSAttributedString.Key.foregroundColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.5),
+                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: .thin)]
+        let attrLandscape = [NSAttributedString.Key.foregroundColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.5),
+                             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .regular)]
+        let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
+        self.navigationController?
+            .navigationBar.titleTextAttributes = isPortrait ?
+                attrPortrait : attrLandscape
+    }
 }
