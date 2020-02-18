@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4oO-a5-k5Y">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4oO-a5-k5Y">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,10 +47,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Cjc-Dl-AsW" secondAttribute="trailing" id="4gc-KZ-hMj"/>
                             <constraint firstItem="Cjc-Dl-AsW" firstAttribute="top" secondItem="l1v-RV-Jo2" secondAttribute="top" id="FCK-2Z-zav"/>
-                            <constraint firstItem="Cjc-Dl-AsW" firstAttribute="leading" secondItem="cTQ-BN-ANe" secondAttribute="leading" id="JuN-WT-uvv"/>
-                            <constraint firstItem="cTQ-BN-ANe" firstAttribute="trailing" secondItem="Cjc-Dl-AsW" secondAttribute="trailing" id="PIn-ZO-UAi"/>
                             <constraint firstItem="Cjc-Dl-AsW" firstAttribute="bottom" secondItem="cTQ-BN-ANe" secondAttribute="bottom" id="YSy-1B-Cde"/>
+                            <constraint firstItem="Cjc-Dl-AsW" firstAttribute="leading" secondItem="l1v-RV-Jo2" secondAttribute="leading" id="cmD-7d-ghB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cTQ-BN-ANe"/>
                     </view>

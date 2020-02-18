@@ -87,7 +87,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     fileprivate let disposeBag = DisposeBag()
 
     private let log = SwiftyBeaver.self
-    private var shouldRotateScreen = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.viewModel.isAudioOnly ? .lightContent : .default
@@ -113,17 +112,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
         self.setUpCallButtons()
         self.setupBindings()
-        let device = UIDevice.modelName
         self.profileImageView.tintColor = UIColor.jamiDefaultAvatar
-        switch device {
-        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
-            //keep the 4:3 format of the captured video on iPhone X and later when display it in full screen
-            if !self.avatarView.isHidden {
-                self.capturedVideoWidthConstraint.constant += 200
-                self.capturedVideoTrailingConstraint.constant = (self.capturedVideoWidthConstraint.constant - UIScreen.main.bounds.width) / 2
-            }
-        default : break
-        }
         if self.viewModel.isAudioOnly {
             // The durationLabel and buttonsContainer alpha is set here to 0, and to 1 (with a duration) when appear on the screen to have a fade in animation
             self.durationLabel.alpha = 0
@@ -131,7 +120,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.showAllInfo()
             self.setWhiteAvatarView()
         }
-
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
         UIApplication.shared.isIdleTimerDisabled = true
         initCallAnimation()
@@ -139,8 +127,17 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         if callCurrent {
             self.capturedVideoBlurEffect.alpha = 1
             hideCapturedVideo()
-            self.shouldRotateScreen = true
         }
+        NotificationCenter.default.rx
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {[weak self] (_) in
+                guard let self = self else {
+                    return
+                }
+                self.setAvatarView(!self.avatarView.isHidden)
+                self.callPulse.layer.cornerRadius = (self.profileImageViewWidthConstraint.constant - 20) * 0.5
+            }).disposed(by: self.disposeBag)
     }
 
     @IBAction func addParticipant(_ sender: Any) {
@@ -185,7 +182,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func initCallAnimation() {
         self.callPulse.alpha = 0.6
-        self.callPulse.layer.cornerRadius = self.callPulse.frame.size.width / 2
+        self.callPulse.layer
+            .cornerRadius = (self.profileImageViewWidthConstraint.constant - 20) * 0.5
         animateCallCircle()
     }
 
@@ -279,12 +277,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .observeOn(MainScheduler.instance)
             .bind(to: self.buttonsContainer.pauseCallButton.rx.image())
             .disposed(by: self.disposeBag)
-
-        self.viewModel.isActiveVideoCall
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] rotate in
-                self?.shouldRotateScreen = rotate
-            }).disposed(by: self.disposeBag)
     }
 
     // swiftlint:disable function_body_length
@@ -297,7 +289,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 if let imageData = dataOrNil {
                     if let image = UIImage(data: imageData) {
                         self?.profileImageView.image = image
-                       // self?.callProfileImage.image = image
                     }
                 }
             }).disposed(by: self.disposeBag)
@@ -483,14 +474,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self.avatarView.isHidden = false
                 return
             }
-            if self.orientation == .landscapeRight
-                || self.orientation == .landscapeLeft {
-                let device = UIDevice.modelName
-                if device == "iPhone 5" || device ==  "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
-                    self.profileImageViewWidthConstraint.constant = 90
-                    self.profileImageViewHeightConstraint.constant = 90
-                    self.profileImageView.cornerRadius = 45
-                }
+            let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
+            if !isPortrait {
+                self.profileImageViewWidthConstraint.constant = 90
+                self.profileImageViewHeightConstraint.constant = 90
+                self.profileImageView.cornerRadius = 45
                 if self.viewModel.call?.state == .ringing || self.viewModel.call?.state == .connecting {
                     self.avatarViewImageTopConstraint.constant = 20
                 } else {
@@ -502,20 +490,23 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self.buttonsContainerBottomConstraint.constant = 10
                 }
                 if self.viewModel.isAudioOnly {
+                    let device = UIDevice.modelName
                     if device == "iPhone 5" || device ==  "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
                         self.durationLabel.isHidden = true
                         self.buttonsContainerBottomConstraint.constant = -10
                     }
                     self.buttonsContainer.backgroundBlurEffect.alpha = 0
-                    self.profileImageViewWidthConstraint.constant = 90
-                    self.profileImageViewHeightConstraint.constant = 90
-                    self.profileImageView.cornerRadius = 45
                 }
             } else {
                 if UIDevice.current.hasNotch {
                     self.avatarViewImageTopConstraint.constant = 120
                 } else {
                     self.avatarViewImageTopConstraint.constant = 85
+                }
+                if self.viewModel.isAudioOnly || self.viewModel.call?.state != .current {
+                    self.profileImageViewWidthConstraint.constant = 160
+                    self.profileImageViewHeightConstraint.constant = 160
+                    self.profileImageView.cornerRadius = 80
                 }
                 self.buttonsContainerBottomConstraint.constant = 10
             }
@@ -599,6 +590,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func resizeCapturedVideo(withInfoContainer: Bool) {
         self.leftArrow.alpha = 0
+        if self.viewModel.call?.state != .current {
+            return
+        }
         //Don't change anything if the orientation change to portraitUpsideDown, faceUp or faceDown
         if  UIDevice.current.orientation.rawValue != 5  && UIDevice.current.orientation.rawValue != 6 && UIDevice.current.orientation.rawValue != 2 {
             self.orientation = UIDevice.current.orientation
@@ -715,19 +709,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func showAllInfo() {
         self.buttonsContainer.isHidden = false
         self.infoContainer.isHidden = false
-    }
-
-    @objc func canRotate() {
-        // empty function to support call screen rotation
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
-        super.viewWillDisappear(animated)
-    }
-
-    override var shouldAutorotate: Bool {
-      return self.shouldRotateScreen
     }
 
     func presentContactPicker(contactPickerVC: ContactPickerViewController) {

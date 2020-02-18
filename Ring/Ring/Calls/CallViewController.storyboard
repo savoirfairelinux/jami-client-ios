@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngv-XP-7A7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngv-XP-7A7">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -309,11 +309,11 @@
                                         <blurEffect style="light"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj8-CK-PQm" userLabel="Call Pulse">
-                                        <rect key="frame" x="122.66666666666669" y="135" width="130" height="130"/>
+                                        <rect key="frame" x="117.66666666666669" y="130" width="140" height="140"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNx-tt-eZo" userLabel="Background Image View">
-                                        <rect key="frame" x="137.66666666666666" y="150" width="100" height="100"/>
+                                        <rect key="frame" x="133.66666666666666" y="146" width="107.66666666666666" height="108"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="qNx-tt-eZo" secondAttribute="height" id="uMJ-Cg-b1r"/>
@@ -360,11 +360,11 @@
                                     <constraint firstItem="uC8-vY-dHO" firstAttribute="centerY" secondItem="5E0-lB-SkS" secondAttribute="centerY" id="4Mf-hA-tZO"/>
                                     <constraint firstItem="Dj8-CK-PQm" firstAttribute="centerY" secondItem="qNx-tt-eZo" secondAttribute="centerY" id="6Aj-So-yZp"/>
                                     <constraint firstItem="fnt-PQ-Q6P" firstAttribute="top" secondItem="5E0-lB-SkS" secondAttribute="top" constant="120" id="82d-fj-m0F"/>
-                                    <constraint firstItem="Dj8-CK-PQm" firstAttribute="width" secondItem="fnt-PQ-Q6P" secondAttribute="width" constant="-30" id="CUd-sE-c9g"/>
+                                    <constraint firstItem="Dj8-CK-PQm" firstAttribute="width" secondItem="fnt-PQ-Q6P" secondAttribute="width" constant="-20" id="CUd-sE-c9g"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="73Y-N1-Yga" secondAttribute="trailing" constant="20" id="E64-Eo-ffn"/>
                                     <constraint firstItem="73Y-N1-Yga" firstAttribute="bottom" secondItem="fnt-PQ-Q6P" secondAttribute="bottom" constant="45" id="ExS-S7-RrD"/>
                                     <constraint firstItem="73Y-N1-Yga" firstAttribute="centerX" secondItem="fnt-PQ-Q6P" secondAttribute="centerX" id="HBR-dG-PgV"/>
-                                    <constraint firstItem="Dj8-CK-PQm" firstAttribute="height" secondItem="fnt-PQ-Q6P" secondAttribute="height" constant="-30" id="JQ8-d6-nUa"/>
+                                    <constraint firstItem="Dj8-CK-PQm" firstAttribute="height" secondItem="fnt-PQ-Q6P" secondAttribute="height" constant="-20" id="JQ8-d6-nUa"/>
                                     <constraint firstItem="qNx-tt-eZo" firstAttribute="centerX" secondItem="fnt-PQ-Q6P" secondAttribute="centerX" id="MJR-K4-qEg"/>
                                     <constraint firstItem="fnt-PQ-Q6P" firstAttribute="centerX" secondItem="5E0-lB-SkS" secondAttribute="centerX" id="Me2-uR-EQh"/>
                                     <constraint firstItem="uC8-vY-dHO" firstAttribute="centerX" secondItem="5E0-lB-SkS" secondAttribute="centerX" id="TJC-Hb-JIm"/>

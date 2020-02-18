@@ -84,8 +84,8 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.placeCallButton.isHidden = self.viewModel.inCallDialpad
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.collectionView
             .register(UICollectionViewCell.self,
                       forCellWithReuseIdentifier: "DialpadCellIdentifier")
@@ -108,11 +108,22 @@ extension DialpadViewController: UICollectionViewDelegate, UICollectionViewDataS
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DialpadCellIdentifier", for: indexPath)
-        let label: UILabel = cell.viewWithTag(200) as! UILabel
-        label.text = self.items[indexPath.item]
-        if label.text == String("﹡") {
-            label.font = UIFont.systemFont(ofSize: 35, weight: .light)
+        cell.contentView.subviews.forEach { (view) in
+            view.removeFromSuperview()
         }
+        let label = UILabel.init(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
+        label.cornerRadius = 35
+        label.backgroundColor = UIColor.gray
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 25, weight: .light)
+        label.textColor = UIColor.jamiSecondary
+        label.text = self.items[indexPath.item]
+               if label.text == String("﹡") {
+                   label.font = UIFont.systemFont(ofSize: 35, weight: .light)
+               }
+        cell.contentView.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
         return cell
     }
 

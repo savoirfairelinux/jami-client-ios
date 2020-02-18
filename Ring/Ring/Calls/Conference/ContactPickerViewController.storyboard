@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZwP-Qn-oLY">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZwP-Qn-oLY">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,16 +54,16 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="ht5-JP-L4t" firstAttribute="top" secondItem="HLr-8o-AJK" secondAttribute="top" id="2g9-Dm-zDQ"/>
-                            <constraint firstItem="i1P-Li-H82" firstAttribute="trailing" secondItem="HLr-8o-AJK" secondAttribute="trailing" id="44P-xu-w8R"/>
                             <constraint firstItem="i1P-Li-H82" firstAttribute="top" secondItem="ht5-JP-L4t" secondAttribute="bottom" id="5Hu-hl-ywR"/>
-                            <constraint firstItem="VI3-Wm-odB" firstAttribute="leading" secondItem="HLr-8o-AJK" secondAttribute="leading" id="GkO-uY-mmD"/>
+                            <constraint firstItem="VI3-Wm-odB" firstAttribute="leading" secondItem="TtT-WG-OAE" secondAttribute="leading" id="6eR-vO-Ngc"/>
                             <constraint firstItem="VI3-Wm-odB" firstAttribute="top" secondItem="ht5-JP-L4t" secondAttribute="bottom" id="MYo-pX-Fn0"/>
-                            <constraint firstItem="HLr-8o-AJK" firstAttribute="trailing" secondItem="VI3-Wm-odB" secondAttribute="trailing" id="aO0-4s-CoA"/>
-                            <constraint firstItem="ht5-JP-L4t" firstAttribute="leading" secondItem="HLr-8o-AJK" secondAttribute="leading" id="cBL-Q8-eUL"/>
+                            <constraint firstAttribute="trailing" secondItem="ht5-JP-L4t" secondAttribute="trailing" id="OBT-xJ-bBC"/>
+                            <constraint firstAttribute="trailing" secondItem="i1P-Li-H82" secondAttribute="trailing" id="Ud3-HQ-g57"/>
+                            <constraint firstItem="ht5-JP-L4t" firstAttribute="leading" secondItem="TtT-WG-OAE" secondAttribute="leading" id="ZGi-aQ-f3K"/>
+                            <constraint firstAttribute="trailing" secondItem="VI3-Wm-odB" secondAttribute="trailing" id="hug-jW-soe"/>
                             <constraint firstItem="HLr-8o-AJK" firstAttribute="bottom" secondItem="VI3-Wm-odB" secondAttribute="bottom" id="l3e-iB-s2n"/>
-                            <constraint firstItem="i1P-Li-H82" firstAttribute="leading" secondItem="HLr-8o-AJK" secondAttribute="leading" id="mk9-0g-iwg"/>
                             <constraint firstAttribute="bottom" secondItem="i1P-Li-H82" secondAttribute="bottom" id="pIJ-1T-FIT"/>
-                            <constraint firstItem="ht5-JP-L4t" firstAttribute="trailing" secondItem="HLr-8o-AJK" secondAttribute="trailing" id="pz4-KI-DV9"/>
+                            <constraint firstItem="i1P-Li-H82" firstAttribute="leading" secondItem="TtT-WG-OAE" secondAttribute="leading" id="zog-OH-0bd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HLr-8o-AJK"/>
                     </view>

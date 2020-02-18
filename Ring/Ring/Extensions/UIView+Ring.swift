@@ -170,6 +170,13 @@ extension UIView {
         self.layer.insertSublayer(gradient, at: 0)
     }
 
+    func updateGradientFrame() {
+        let layers = self.layer.sublayers
+        if let layer: CAGradientLayer = layers?[0] as? CAGradientLayer {
+            layer.frame = self.bounds
+        }
+    }
+
     func blink() {
         UIView.animate(withDuration: 1,
             delay: 0.0,
