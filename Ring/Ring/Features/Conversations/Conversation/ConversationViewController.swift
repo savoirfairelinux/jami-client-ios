@@ -377,6 +377,8 @@ class ConversationViewController: UIViewController,
         }
 
         var dnlabelYOffset: CGFloat = 0
+        let device = UIDevice.modelName
+        let smallerInset = (device == "iPhone 5s" || device == "iPhone SE" || device == "iPhone 6") && UIDevice.current.orientation.isLandscape
         if UIDevice.current.hasNotch {
             if displayName == nil || displayName == "" {
                 userNameYOffset = 7
@@ -388,8 +390,8 @@ class ConversationViewController: UIViewController,
             if displayName == nil || displayName == "" {
                 userNameYOffset = 1
             } else {
-            dnlabelYOffset = -4
-            userNameYOffset = 10
+                dnlabelYOffset = smallerInset ? -8 : -4
+                userNameYOffset = smallerInset ? 6 : 10
             }
         }
 
@@ -422,6 +424,11 @@ class ConversationViewController: UIViewController,
 
     func contactTapped() {
         self.viewModel.showContactInfo()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        view.layoutSubviews()
+        super.viewWillTransition(to: size, with: coordinator)
     }
 
     func setupUI() {
