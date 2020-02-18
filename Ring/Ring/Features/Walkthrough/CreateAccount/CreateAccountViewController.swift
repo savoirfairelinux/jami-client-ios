@@ -28,13 +28,11 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
     // MARK: outlets
     @IBOutlet weak var createAccountButton: DesignableButton!
-    @IBOutlet weak var createAccountTitle: UILabel!
     @IBOutlet weak var registerUsernameHeightConstraint: NSLayoutConstraint! {
         didSet {
             self.registerUsernameHeightConstraintConstant = registerUsernameHeightConstraint.constant
         }
     }
-    @IBOutlet weak var backgroundNavigationBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var choosePasswordViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var usernameSwitch: UISwitch!
@@ -71,12 +69,12 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.applyL10n()
         super.viewDidLoad()
         self.view.layoutIfNeeded()
+        configureWalkrhroughNavigationBar()
 
         // Style
         self.scrollView.alwaysBounceHorizontal = false
         self.scrollView.alwaysBounceVertical = true
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
         self.usernameTextField.becomeFirstResponder()
         self.usernameTextField.tintColor = UIColor.jamiSecondary
         self.passwordTextField.tintColor = UIColor.jamiSecondary
@@ -91,6 +89,18 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (_) in
+            self?.createAccountButton.updateGradientFrame()
+            self?.configureWalkrhroughNavigationBar()
+            if self?.registerPasswordView.isHidden ?? true {
+                return
+            }
+            guard let height = self?.passwordInfoLabel.frame.height else {return}
+            self?.choosePasswordViewHeightConstraint.constant = 133 + height
+            self?.view.layoutIfNeeded()
+        }).disposed(by: self.disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -140,8 +150,8 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     private func applyL10n() {
-        self.createAccountTitle.text = self.viewModel.createAccountTitle
-        self.createAccountButton.setTitle(self.viewModel.createAccountButton, for: .normal)
+        self.createAccountButton
+        .setTitle(self.viewModel.createAccountButton, for: .normal)
         self.usernameTextField.placeholder = self.viewModel.usernameTitle
         self.passwordTextField.placeholder = self.viewModel.passwordTitle
         self.confirmPasswordTextField.placeholder = self.viewModel.confirmPasswordTitle
@@ -150,6 +160,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.passwordInfoLabel.text = self.viewModel.passwordInfoTitle
         self.enableNotificationsLabel.text = self.viewModel.enableNotificationsTitle
         self.recommendedLabel.text = self.viewModel.recommendedTitle
+        self.navigationItem.title = self.viewModel.createAccountTitle
     }
 
     private func bindViewModelToView() {
@@ -244,6 +255,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
                 self?.passwordTextField.text = ""
                 self?.confirmPasswordTextField.text = ""
                 self?.passwordErrorLabel.isHidden = true
+                self?.registerPasswordView.isHidden = true
             }
             self?.setContentInset()
             self?.view.layoutIfNeeded()

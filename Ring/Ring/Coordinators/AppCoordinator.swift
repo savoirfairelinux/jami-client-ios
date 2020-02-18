@@ -112,7 +112,9 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     func migrateAccount(accountId: String) {
         let migratonController = MigrateAccountViewController.instantiate(with: self.injectionBag)
         migratonController.viewModel.accountToMigrate = accountId
-        self.present(viewController: migratonController, withStyle: .present, withAnimation: true, withStateable: migratonController.viewModel)
+        self.present(viewController: migratonController, withStyle: .show,
+                     withAnimation: true,
+                     withStateable: migratonController.viewModel)
     }
 
     /// Handles the switch between the three supported screens.

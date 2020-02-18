@@ -44,13 +44,18 @@ var viewModel: LinkToAccountManagerViewModel!
         super.viewDidLoad()
         self.bindViewToViewModel()
         self.applyL10()
+        self.view.layoutIfNeeded()
         self.userNameTextField.becomeFirstResponder()
         self.signInButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        let attr = [NSAttributedString.Key.foregroundColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.5),
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: .thin)]
-        self.navigationController?.navigationBar.titleTextAttributes = attr
+        configureWalkrhroughNavigationBar()
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (_) in
+            self?.signInButton.updateGradientFrame()
+            self?.configureWalkrhroughNavigationBar()
+        }).disposed(by: self.disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {

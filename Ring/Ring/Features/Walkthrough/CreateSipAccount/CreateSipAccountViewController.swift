@@ -32,7 +32,6 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
     @IBOutlet weak var serverTextField: DesignableTextField!
     @IBOutlet weak var portTextField: DesignableTextField!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var createAccountLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var serverLabel: UILabel!
@@ -46,18 +45,40 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         self.applyL10n()
         super.viewDidLoad()
         self.buindViewToViewModel()
+        self.configureWalkrhroughNavigationBar()
         self.userNameTextField.becomeFirstResponder()
         self.configurePasswordField()
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (_) in
+            self?.createAccountButton.updateGradientFrame()
+            self?.configureWalkrhroughNavigationBar()
+        }).disposed(by: self.disposeBag)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
     @objc func dismissKeyboard() {
         self.isKeyboardOpened = false
-        self.becomeFirstResponder()
+        view.endEditing(true)
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
+    }
+
+    @objc func keyboardWillAppear(withNotification: NSNotification) {
+        self.isKeyboardOpened = true
+        self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
     func configurePasswordField() {
@@ -108,8 +129,9 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
     }
 
     func applyL10n() {
-        self.createAccountButton.setTitle(L10n.Account.createSipAccount, for: .normal)
-        self.createAccountLabel.text = L10n.Account.createSipAccount
+        self.createAccountButton
+        .setTitle(L10n.Account.createSipAccount, for: .normal)
+        self.navigationItem.title = L10n.Account.createSipAccount
         self.userNameLabel.text = L10n.Account.usernameLabel
         self.passwordLabel.text = L10n.Account.passwordLabel
         self.serverLabel.text = L10n.Account.serverLabel
