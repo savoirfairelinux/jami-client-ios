@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="475-LA-El7">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="475-LA-El7">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,20 +13,20 @@
             <objects>
                 <viewController id="475-LA-El7" customClass="LinkToAccountManagerViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kln-mF-Ufp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tb6-0m-FPR">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tb6-0m-FPR">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQW-jH-EMh">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="830"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cZa-pp-ILv">
-                                                <rect key="frame" x="20" y="0.0" width="374" height="476"/>
+                                                <rect key="frame" x="20" y="0.0" width="280" height="476"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdV-rr-P8t">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="25"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="SBF-JX-Jpe"/>
                                                         </constraints>
@@ -35,7 +35,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ek6-hD-jH1" customClass="DesignableTextField" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="45" width="374" height="50"/>
+                                                        <rect key="frame" x="0.0" y="45" width="280" height="50"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="gO1-Zq-rUG"/>
@@ -56,7 +56,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KU1-cn-Bdu" userLabel="Enter Password">
-                                                        <rect key="frame" x="0.0" y="115" width="374" height="25"/>
+                                                        <rect key="frame" x="0.0" y="115" width="280" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="Fy2-AY-s4A"/>
                                                         </constraints>
@@ -65,7 +65,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VrN-QN-7DO" userLabel="Password" customClass="DesignableTextField" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="160" width="374" height="50"/>
+                                                        <rect key="frame" x="0.0" y="160" width="280" height="50"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="6YJ-GL-6XI"/>
@@ -86,7 +86,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter manager URI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B54-is-2Bf" userLabel="Enter Manager URI">
-                                                        <rect key="frame" x="0.0" y="230" width="374" height="25"/>
+                                                        <rect key="frame" x="0.0" y="230" width="280" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="KfB-wx-b5e"/>
                                                         </constraints>
@@ -95,7 +95,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Manager URI" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wbQ-hE-Hr6" userLabel="Manager URI" customClass="DesignableTextField" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="275" width="374" height="50"/>
+                                                        <rect key="frame" x="0.0" y="275" width="280" height="50"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="7hP-rE-zTa"/>
@@ -116,28 +116,28 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Anq-6W-oa8">
-                                                        <rect key="frame" x="0.0" y="345" width="374" height="31"/>
+                                                        <rect key="frame" x="0.0" y="345" width="280" height="31"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsq-Pz-NtT" userLabel="Enable Notifications Label">
-                                                                <rect key="frame" x="0.0" y="0.0" width="325" height="31"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="231" height="31"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MSp-53-0zY" userLabel="Notifications Switch">
-                                                                <rect key="frame" x="325" y="0.0" width="51" height="31"/>
+                                                                <rect key="frame" x="231" y="0.0" width="51" height="31"/>
                                                                 <color key="onTintColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </switch>
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8t8-Fo-Eog">
-                                                        <rect key="frame" x="0.0" y="396" width="374" height="10"/>
+                                                        <rect key="frame" x="0.0" y="396" width="280" height="10"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="10" id="njD-ob-x69"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIH-8R-fSe" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="426" width="374" height="50"/>
+                                                        <rect key="frame" x="0.0" y="426" width="280" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="9PT-1M-HRn"/>
                                                         </constraints>
@@ -149,10 +149,15 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="UIH-8R-fSe" firstAttribute="leading" secondItem="wbQ-hE-Hr6" secondAttribute="leading" id="TXm-BD-uyV"/>
+                                                    <constraint firstItem="UIH-8R-fSe" firstAttribute="trailing" secondItem="wbQ-hE-Hr6" secondAttribute="trailing" id="gLK-Q7-hhI"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="830" id="BuH-dc-4uY"/>
                                             <constraint firstItem="cZa-pp-ILv" firstAttribute="top" secondItem="kQW-jH-EMh" secondAttribute="top" id="Vg5-Be-bil"/>
                                             <constraint firstItem="cZa-pp-ILv" firstAttribute="leading" secondItem="kQW-jH-EMh" secondAttribute="leading" constant="20" id="mBs-Fq-N0u"/>
                                             <constraint firstAttribute="trailing" secondItem="cZa-pp-ILv" secondAttribute="trailing" constant="20" id="v3a-QY-a5x"/>
@@ -172,9 +177,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Tb6-0m-FPR" firstAttribute="trailing" secondItem="hsz-cI-2Eb" secondAttribute="trailing" id="5vR-sQ-ksF"/>
-                            <constraint firstItem="kQW-jH-EMh" firstAttribute="width" secondItem="kln-mF-Ufp" secondAttribute="width" id="K5V-1T-z9W"/>
+                            <constraint firstItem="kQW-jH-EMh" firstAttribute="leading" secondItem="hsz-cI-2Eb" secondAttribute="leading" id="J8u-vO-F2q"/>
+                            <constraint firstItem="hsz-cI-2Eb" firstAttribute="trailing" secondItem="kQW-jH-EMh" secondAttribute="trailing" id="fqW-W2-7XZ"/>
                             <constraint firstAttribute="bottom" secondItem="Tb6-0m-FPR" secondAttribute="bottom" id="g3l-Vj-YbD"/>
-                            <constraint firstItem="kQW-jH-EMh" firstAttribute="height" secondItem="kln-mF-Ufp" secondAttribute="height" id="gHi-jV-47A"/>
                             <constraint firstItem="Tb6-0m-FPR" firstAttribute="leading" secondItem="hsz-cI-2Eb" secondAttribute="leading" id="pRG-Bm-el3"/>
                             <constraint firstItem="Tb6-0m-FPR" firstAttribute="top" secondItem="hsz-cI-2Eb" secondAttribute="top" id="uSf-0R-JGk"/>
                         </constraints>
@@ -195,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wIX-ef-x98" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="83.705357142857139"/>
+            <point key="canvasLocation" x="36" y="70"/>
         </scene>
     </scenes>
 </document>

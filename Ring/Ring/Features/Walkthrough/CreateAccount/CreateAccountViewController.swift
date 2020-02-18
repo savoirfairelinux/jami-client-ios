@@ -91,6 +91,11 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (_) in
+            self?.createAccountButton.updateGradientFrame()
+        }).disposed(by: self.disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {

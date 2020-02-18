@@ -31,7 +31,6 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     // MARK: outlets
     @IBOutlet weak var linkDeviceTitle: UILabel!
     @IBOutlet weak var linkButton: DesignableButton!
-    @IBOutlet weak var backgroundNavigationBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var pinTextField: DesignableTextField!
     @IBOutlet weak var passwordTextField: DesignableTextField!
@@ -62,7 +61,6 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.pinTextField.becomeFirstResponder()
         self.view.layoutIfNeeded()
         self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
         self.pinTextField.tintColor = UIColor.jamiSecondary
         self.passwordTextField.tintColor = UIColor.jamiSecondary
 
@@ -112,6 +110,11 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (_) in
+            self?.linkButton.updateGradientFrame()
+        }).disposed(by: self.disposeBag)
     }
 
     func setContentInset() {

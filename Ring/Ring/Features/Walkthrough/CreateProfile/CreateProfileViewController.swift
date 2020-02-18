@@ -125,6 +125,11 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (_) in
+            self?.skipButton.updateGradientFrame()
+        }).disposed(by: self.disposeBag)
     }
 
     func dismissInfoView() {
