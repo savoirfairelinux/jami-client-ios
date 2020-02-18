@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,79 +16,106 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jamiIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2Pc-uJ-SAI">
-                                <rect key="frame" x="137.66666666666666" y="358.66666666666669" width="100" height="95"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8i-r8-BbF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djg-zh-qNA">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jamiIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2Pc-uJ-SAI">
+                                                <rect key="frame" x="137.66666666666666" y="207" width="100" height="95"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="2Pc-uJ-SAI" secondAttribute="height" multiplier="20:19" id="5fN-uH-uSi"/>
+                                                    <constraint firstAttribute="width" constant="100" id="TaY-2a-CCG"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to jami !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
+                                                <rect key="frame" x="59" y="332" width="257.33333333333331" height="43"/>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="36"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                                <rect key="frame" x="73" y="415" width="229" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="FEf-kf-jCs"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="epE-7u-SMQ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                                                <state key="normal" title="Create a Ring account">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                                <rect key="frame" x="73" y="485" width="229" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="YW4-Sc-61P"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                                                <state key="normal" title="Link this device to an account">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHN-iS-Mdb" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                                <rect key="frame" x="73" y="555" width="229" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="o1x-x5-0z2"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
+                                                <state key="normal" title="create Sip account">
+                                                    <color key="titleColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="djg-zh-qNA" secondAttribute="centerX" id="2I1-0R-aRl"/>
+                                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="7r4-TP-Df9"/>
+                                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="Edo-KX-6sz"/>
+                                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerY" secondItem="djg-zh-qNA" secondAttribute="centerY" constant="-151.49999999999997" id="OH8-EL-DdN"/>
+                                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="top" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="20" id="fpS-ef-m4V"/>
+                                            <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="djg-zh-qNA" secondAttribute="centerX" id="fuH-3p-ssn"/>
+                                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="centerX" secondItem="djg-zh-qNA" secondAttribute="centerX" id="lwf-Rd-3hc"/>
+                                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="lzM-cm-1nj"/>
+                                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="mt4-7Z-eR3"/>
+                                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="djg-zh-qNA" secondAttribute="centerX" id="oJD-7p-Zee"/>
+                                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="r8u-YI-WpC"/>
+                                            <constraint firstItem="bu0-90-MB5" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="40" id="rNa-Lz-fF2"/>
+                                            <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="30" id="uqF-tz-TA3"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kHN-iS-Mdb" secondAttribute="bottom" constant="20" id="wAX-eY-8Cc"/>
+                                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="centerX" secondItem="djg-zh-qNA" secondAttribute="centerX" id="xCk-wd-xlo"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="2Pc-uJ-SAI" secondAttribute="height" multiplier="20:19" id="5fN-uH-uSi"/>
-                                    <constraint firstAttribute="width" constant="100" id="TaY-2a-CCG"/>
+                                    <constraint firstItem="djg-zh-qNA" firstAttribute="leading" secondItem="WOA-YS-hhU" secondAttribute="leading" id="NVB-Mh-6Mh"/>
+                                    <constraint firstItem="djg-zh-qNA" firstAttribute="trailing" secondItem="WOA-YS-hhU" secondAttribute="trailing" id="a3A-d3-Q1D"/>
+                                    <constraint firstItem="djg-zh-qNA" firstAttribute="bottom" secondItem="WOA-YS-hhU" secondAttribute="bottom" id="iPL-YC-e44"/>
+                                    <constraint firstItem="djg-zh-qNA" firstAttribute="centerX" secondItem="X8i-r8-BbF" secondAttribute="centerX" id="qJX-a9-Ihb"/>
+                                    <constraint firstItem="djg-zh-qNA" firstAttribute="top" secondItem="WOA-YS-hhU" secondAttribute="top" id="zes-gc-CwJ"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to jami !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
-                                <rect key="frame" x="59" y="483.66666666666669" width="257.33333333333331" height="43.000000000000057"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="40" y="566.66666666666663" width="295" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="FEf-kf-jCs"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="epE-7u-SMQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
-                                <state key="normal" title="Create a Ring account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="40" y="636.66666666666663" width="295" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="YW4-Sc-61P"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
-                                <state key="normal" title="Link this device to an account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHN-iS-Mdb" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="40" y="706.66666666666663" width="295" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="o1x-x5-0z2"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
-                                <state key="normal" title="create Sip account">
-                                    <color key="titleColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
+                                <viewLayoutGuide key="contentLayoutGuide" id="WOA-YS-hhU"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="ahR-LE-Or6"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="bu0-90-MB5" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="40" id="0hJ-6T-D3J"/>
-                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="1lb-s9-YvQ"/>
-                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" id="2w4-nZ-VwS"/>
-                            <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="30" id="99p-KU-QhW"/>
-                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="B1I-cA-15P"/>
-                            <constraint firstItem="bu0-90-MB5" firstAttribute="leading" secondItem="hvJ-fJ-PMc" secondAttribute="leading" priority="750" constant="40" id="OTd-qD-as2"/>
-                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="top" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="20" id="R2I-SG-Wp2"/>
-                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="U37-r7-lNe"/>
-                            <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="YLx-WX-rgL"/>
-                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="cYv-WZ-CCB"/>
-                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="gQM-Bw-BRN"/>
-                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="qaX-bX-RjJ"/>
-                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="r8E-fx-VRu"/>
-                            <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="uLc-95-Qpb"/>
-                            <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="ukg-Rd-bL3"/>
-                            <constraint firstItem="hvJ-fJ-PMc" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" priority="750" constant="40" id="vGg-V2-7OH"/>
+                            <constraint firstItem="X8i-r8-BbF" firstAttribute="top" secondItem="Dg0-kS-rT7" secondAttribute="top" id="4Eh-OM-QvP"/>
+                            <constraint firstItem="djg-zh-qNA" firstAttribute="height" secondItem="Dg0-kS-rT7" secondAttribute="height" id="7sc-i2-kyq"/>
+                            <constraint firstItem="X8i-r8-BbF" firstAttribute="trailing" secondItem="hvJ-fJ-PMc" secondAttribute="trailing" id="InM-7Y-w4b"/>
+                            <constraint firstItem="X8i-r8-BbF" firstAttribute="leading" secondItem="hvJ-fJ-PMc" secondAttribute="leading" id="Mxh-zn-bSX"/>
+                            <constraint firstItem="X8i-r8-BbF" firstAttribute="bottom" secondItem="hvJ-fJ-PMc" secondAttribute="bottom" id="bnM-Bf-Zwh"/>
+                            <constraint firstItem="djg-zh-qNA" firstAttribute="width" secondItem="Dg0-kS-rT7" secondAttribute="width" id="lsk-ch-Uf6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hvJ-fJ-PMc"/>
                     </view>
@@ -99,7 +124,7 @@
                         <outlet property="createAccountButton" destination="bu0-90-MB5" id="YNt-Tc-Snc"/>
                         <outlet property="createSipAccountButton" destination="kHN-iS-Mdb" id="eJ4-Qz-agr"/>
                         <outlet property="linkDeviceButton" destination="QLK-gs-fOJ" id="AXP-0r-10g"/>
-                        <outlet property="ringLogoBottomConstraint" destination="2w4-nZ-VwS" id="QZo-N3-iCa"/>
+                        <outlet property="ringLogoBottomConstraint" destination="OH8-EL-DdN" id="CIb-Qh-H7u"/>
                         <outlet property="welcomeTextLabel" destination="E4b-Zv-unB" id="ygV-A3-EZD"/>
                     </connections>
                 </viewController>
@@ -109,6 +134,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="jamiIcon" width="200" height="190"/>
+        <image name="jamiIcon" width="66.666664123535156" height="63.333332061767578"/>
     </resources>
 </document>

@@ -716,17 +716,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.infoContainer.isHidden = false
     }
 
-    @objc func canRotate() {
-        // empty function to support call screen rotation
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         super.viewWillDisappear(animated)
-    }
-
-    override var shouldAutorotate: Bool {
-      return self.shouldRotateScreen
     }
 
     func presentContactPicker(contactPickerVC: ContactPickerViewController) {
