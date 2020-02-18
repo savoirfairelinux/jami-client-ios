@@ -34,7 +34,6 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     @IBOutlet weak var arrowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var enterNameLabel: UILabel!
     @IBOutlet weak var arrowYConstraint: NSLayoutConstraint!
-    @IBOutlet weak var createProfilAccountTitle: UILabel!
     @IBOutlet weak var skipButton: DesignableButton!
     @IBOutlet weak var profileImageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -55,6 +54,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
+        self.configureWalkrhroughNavigationBar()
 
         // Style
         self.skipButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
@@ -125,6 +125,12 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (_) in
+            self?.skipButton.updateGradientFrame()
+            self?.self.configureWalkrhroughNavigationBar()
+        }).disposed(by: self.disposeBag)
     }
 
     func dismissInfoView() {
@@ -156,7 +162,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     }
 
     func applyL10n() {
-        self.createProfilAccountTitle.text = L10n.CreateProfile.title
+        self.navigationItem.title = L10n.CreateProfile.title
         self.enterNameLabel.text = L10n.CreateProfile.enterNameLabel
         self.profileName.placeholder = L10n.CreateProfile.enterNamePlaceholder
         self.subtitle.text = L10n.CreateProfile.subtitle
@@ -198,7 +204,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationItem.setHidesBackButton(true, animated: true);
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
