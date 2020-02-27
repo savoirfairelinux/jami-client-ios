@@ -122,6 +122,9 @@
 		0E5A668322F0B1F100AA6820 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5A668222F0B1F100AA6820 /* ProgressView.swift */; };
 		0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E68571020238546008B0717 /* ConversationNavigation.swift */; };
 		0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6949781FA7E71C0029B60A /* BaseViewController.swift */; };
+		0E6D95982407113900996A28 /* LinkToAccountManagerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6D95972407113900996A28 /* LinkToAccountManagerViewController.storyboard */; };
+		0E6D959A2407115800996A28 /* LinkToAccountManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D95992407115800996A28 /* LinkToAccountManagerViewController.swift */; };
+		0E6D959C2407116E00996A28 /* LinkToAccountManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D959B2407116E00996A28 /* LinkToAccountManagerViewModel.swift */; };
 		0E6F544D223BFE3E00ECC3CE /* DisposableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F544C223BFE3E00ECC3CE /* DisposableCell.swift */; };
 		0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F544E223C0ED600ECC3CE /* AccountPickerAdapter.swift */; };
 		0E6F5451223C3C4F00ECC3CE /* AccountItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6F5450223C3C4F00ECC3CE /* AccountItemView.xib */; };
@@ -452,6 +455,9 @@
 		0E63F1F3202907090001F248 /* Ring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ring.entitlements; sourceTree = "<group>"; };
 		0E68571020238546008B0717 /* ConversationNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNavigation.swift; sourceTree = "<group>"; };
 		0E6949781FA7E71C0029B60A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		0E6D95972407113900996A28 /* LinkToAccountManagerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LinkToAccountManagerViewController.storyboard; sourceTree = "<group>"; };
+		0E6D95992407115800996A28 /* LinkToAccountManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkToAccountManagerViewController.swift; sourceTree = "<group>"; };
+		0E6D959B2407116E00996A28 /* LinkToAccountManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkToAccountManagerViewModel.swift; sourceTree = "<group>"; };
 		0E6F544C223BFE3E00ECC3CE /* DisposableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposableCell.swift; sourceTree = "<group>"; };
 		0E6F544E223C0ED600ECC3CE /* AccountPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountPickerAdapter.swift; path = Ring/Features/Conversations/SmartList/Cells/AccountPickerAdapter.swift; sourceTree = SOURCE_ROOT; };
 		0E6F5450223C3C4F00ECC3CE /* AccountItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountItemView.xib; sourceTree = "<group>"; };
@@ -1186,6 +1192,16 @@
 			name = DeviceCell;
 			sourceTree = "<group>";
 		};
+		0E6D9596240710CA00996A28 /* LinkToAccountManager */ = {
+			isa = PBXGroup;
+			children = (
+				0E6D95972407113900996A28 /* LinkToAccountManagerViewController.storyboard */,
+				0E6D95992407115800996A28 /* LinkToAccountManagerViewController.swift */,
+				0E6D959B2407116E00996A28 /* LinkToAccountManagerViewModel.swift */,
+			);
+			path = LinkToAccountManager;
+			sourceTree = "<group>";
+		};
 		0E6F545422403ABC00ECC3CE /* CreateSipAccount */ = {
 			isa = PBXGroup;
 			children = (
@@ -1267,6 +1283,7 @@
 		1A0C4EBD1F1D48DD00550433 /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				0E6D9596240710CA00996A28 /* LinkToAccountManager */,
 				0E6F545422403ABC00ECC3CE /* CreateSipAccount */,
 				1A0C4ED51F1D49D800550433 /* Welcome */,
 				1A0C4ED71F1D4AC300550433 /* CreateProfile */,
@@ -1815,6 +1832,7 @@
 				0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */,
 				1A2D18A01F27A6D600B2C785 /* LinkDeviceViewController.storyboard in Resources */,
 				0E3697A9203243D3009A68CA /* BannedContactCell.xib in Resources */,
+				0E6D95982407113900996A28 /* LinkToAccountManagerViewController.storyboard in Resources */,
 				0E36979F20322E6F009A68CA /* BlockListViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1953,6 +1971,7 @@
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
 				66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */,
+				0E6D959A2407115800996A28 /* LinkToAccountManagerViewController.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* MessagesAdapter.mm in Sources */,
 				0E438A9A204F47E700402900 /* SettingsTableView.swift in Sources */,
 				0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */,
@@ -2013,6 +2032,7 @@
 				1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */,
 				1A5DC03D1F35678D0075E8EF /* ContactRequestItem.swift in Sources */,
 				0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */,
+				0E6D959C2407116E00996A28 /* LinkToAccountManagerViewModel.swift in Sources */,
 				62AD584C2056DB2700AF0701 /* MessageCellDataTransferSent.swift in Sources */,
 				1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -59,8 +57,22 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHN-iS-Mdb" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJY-jT-cMC" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                 <rect key="frame" x="40" y="706.66666666666663" width="295" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="AjX-nt-0Kt"/>
+                                    <constraint firstAttribute="height" constant="50" id="CFH-W9-jIs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                                <state key="normal" title="Connect to account manager">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHN-iS-Mdb" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                <rect key="frame" x="40" y="776.66666666666663" width="295" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="o1x-x5-0z2"/>
                                 </constraints>
@@ -78,24 +90,28 @@
                             <constraint firstItem="bu0-90-MB5" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="40" id="0hJ-6T-D3J"/>
                             <constraint firstItem="kHN-iS-Mdb" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="1lb-s9-YvQ"/>
                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerY" secondItem="Dg0-kS-rT7" secondAttribute="centerY" id="2w4-nZ-VwS"/>
+                            <constraint firstItem="NJY-jT-cMC" firstAttribute="leading" secondItem="QLK-gs-fOJ" secondAttribute="leading" id="7CE-5S-iVD"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="30" id="99p-KU-QhW"/>
                             <constraint firstItem="kHN-iS-Mdb" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="B1I-cA-15P"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="leading" secondItem="hvJ-fJ-PMc" secondAttribute="leading" priority="750" constant="40" id="OTd-qD-as2"/>
-                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="top" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="20" id="R2I-SG-Wp2"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="U37-r7-lNe"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="YLx-WX-rgL"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="cYv-WZ-CCB"/>
+                            <constraint firstItem="NJY-jT-cMC" firstAttribute="trailing" secondItem="QLK-gs-fOJ" secondAttribute="trailing" id="gOO-EN-J5g"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="gQM-Bw-BRN"/>
+                            <constraint firstItem="NJY-jT-cMC" firstAttribute="top" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="20" id="iNt-ej-M8W"/>
                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="qaX-bX-RjJ"/>
                             <constraint firstItem="kHN-iS-Mdb" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="r8E-fx-VRu"/>
                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="uLc-95-Qpb"/>
                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="Dg0-kS-rT7" secondAttribute="centerX" id="ukg-Rd-bL3"/>
                             <constraint firstItem="hvJ-fJ-PMc" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" priority="750" constant="40" id="vGg-V2-7OH"/>
+                            <constraint firstItem="kHN-iS-Mdb" firstAttribute="top" secondItem="NJY-jT-cMC" secondAttribute="bottom" constant="20" id="ydt-Yr-QCi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hvJ-fJ-PMc"/>
                     </view>
                     <navigationItem key="navigationItem" id="SVR-Ry-7d7"/>
                     <connections>
+                        <outlet property="connectToAccountManagerButton" destination="NJY-jT-cMC" id="I3n-qu-t6f"/>
                         <outlet property="createAccountButton" destination="bu0-90-MB5" id="YNt-Tc-Snc"/>
                         <outlet property="createSipAccountButton" destination="kHN-iS-Mdb" id="eJ4-Qz-agr"/>
                         <outlet property="linkDeviceButton" destination="QLK-gs-fOJ" id="AXP-0r-10g"/>
@@ -109,6 +125,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="jamiIcon" width="200" height="190"/>
+        <image name="jamiIcon" width="66.666664123535156" height="63.333332061767578"/>
     </resources>
 </document>

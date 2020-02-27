@@ -104,6 +104,8 @@ enum ConfigKey: String {
     case dhtPeerDiscovery = "Account.peerDiscovery"
     case accountPeerDiscovery = "Account.accountDiscovery"
     case accountPublish = "Account.accountPublish"
+    case managerUri = "Account.managerUri"
+    case managerUsername = "Account.managerUsername"
 }
 
 /**
