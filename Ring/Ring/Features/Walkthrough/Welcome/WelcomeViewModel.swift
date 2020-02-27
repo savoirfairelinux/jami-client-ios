@@ -56,6 +56,12 @@ class WelcomeViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(WalkthroughState.profileCreated)
     }
 
+    func linkToAccountManager() {
+        self.stateSubject
+            .onNext(WalkthroughState
+                .welcomeDone(withType: .linkToAccountManager))
+    }
+
     func createSipAccount() {
         self.stateSubject
             .onNext(WalkthroughState

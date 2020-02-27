@@ -172,6 +172,8 @@ internal enum L10n {
     internal static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage")
     /// An error happned when launching Jami
     internal static let dbFailedTitle = L10n.tr("Localizable", "alerts.dbFailedTitle")
+    /// Cannot connect to provided account manager. Please check your credentials
+    internal static let errorWrongCredentials = L10n.tr("Localizable", "alerts.errorWrongCredentials")
     /// Incoming call from 
     internal static let incomingCallAllertTitle = L10n.tr("Localizable", "alerts.incomingCallAllertTitle")
     /// Accept
@@ -397,6 +399,23 @@ internal enum L10n {
     internal static let pinPlaceholder = L10n.tr("Localizable", "linkToAccount.pinPlaceholder")
     /// Account linking
     internal static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle")
+  }
+
+  internal enum LinkToAccountManager {
+    /// Enter account manager URI
+    internal static let accountManagerLabel = L10n.tr("Localizable", "linkToAccountManager.accountManagerLabel")
+    /// Account manager
+    internal static let accountManagerPlaceholder = L10n.tr("Localizable", "linkToAccountManager.accountManagerPlaceholder")
+    /// Enter Password
+    internal static let passwordLabel = L10n.tr("Localizable", "linkToAccountManager.passwordLabel")
+    /// Password
+    internal static let passwordPlaceholder = L10n.tr("Localizable", "linkToAccountManager.passwordPlaceholder")
+    /// Sign In
+    internal static let signIn = L10n.tr("Localizable", "linkToAccountManager.signIn")
+    /// Enter Username
+    internal static let usernameLabel = L10n.tr("Localizable", "linkToAccountManager.usernameLabel")
+    /// Username
+    internal static let usernamePlaceholder = L10n.tr("Localizable", "linkToAccountManager.usernamePlaceholder")
   }
 
   internal enum Notifications {

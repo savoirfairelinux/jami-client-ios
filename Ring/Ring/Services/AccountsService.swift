@@ -402,6 +402,78 @@ class AccountsService: AccountAdapterDelegate {
             })
     }
 
+    enum ConnectAccountState: String {
+        case initializinzg
+        case created
+        case error
+        case networkError
+    }
+
+    func connectToAccountManager(username: String, password: String, serverUri: String, emableNotifications: Bool) -> Observable<AccountModel> {
+        let accountState = Variable<ConnectAccountState>(ConnectAccountState.initializinzg)
+        let newAccountId = Variable<String>("")
+        self.sharedResponseStream.subscribe(onNext: { (event) in
+            if event.getEventInput(ServiceEventInput.registrationState) == Initializing {
+                return
+            }
+            if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
+                accountState.value = ConnectAccountState.networkError
+                newAccountId.value = ""
+            } else if event.eventType == ServiceEventType.registrationStateChanged,
+                event.getEventInput(ServiceEventInput.registrationState) == Registered {
+                accountState.value = ConnectAccountState.created
+            } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||  event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth {
+                accountState.value = ConnectAccountState.error
+                newAccountId.value = ""
+            }
+        }, onError: { (_) in
+        }).disposed(by: self.disposeBag)
+
+        let result = Observable
+            .combineLatest(accountState.asObservable()
+                .filter({ (state) -> Bool in
+                    state != ConnectAccountState.initializinzg
+                }),
+                           newAccountId.asObservable()) {(accountState, accountId) -> AccountModel in
+                            if accountState == ConnectAccountState.networkError {
+                                throw AccountCreationError.network
+                            } else if accountState == ConnectAccountState.error {
+                                throw AccountCreationError.wrongCredentials
+                            } else if !accountId.isEmpty && accountState == ConnectAccountState.created {
+                                if try !self.dbManager.createDatabaseForAccount(accountId: accountId) {
+                                    throw AddAccountError.unknownError
+                                }
+                                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountId)
+                                self.loadAccountsFromDaemon()
+                                let account = try self.buildAccountFromDaemon(accountId: accountId)
+                                return account
+                            } else {
+                                throw AddAccountError.unknownError
+                            }
+        }.take(1)
+            .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
+                self.currentAccount = accountModel
+                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
+                return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
+            })
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+           do {
+                var ringDetails = try self.getRingInitialAccountDetails()
+                ringDetails.updateValue(username, forKey: ConfigKey.managerUsername.rawValue)
+                ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+                ringDetails.updateValue(emableNotifications.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
+                ringDetails.updateValue(serverUri, forKey: ConfigKey.managerUri.rawValue)
+                guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
+                    throw AccountCreationError.wrongCredentials
+                }
+                newAccountId.value = accountId
+            } catch {
+            }
+        }
+        return result
+    }
+
     func setDetails(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
         var filename = "default.wav"
