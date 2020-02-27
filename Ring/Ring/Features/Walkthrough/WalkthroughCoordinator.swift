@@ -29,6 +29,7 @@ public enum WalkthroughType {
     case createAccount
     case linkDevice
     case createSipAccount
+    case linkToAccountManager
 }
 
 /// Represents walkthrough navigation state
@@ -94,15 +95,19 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
     }
 
     private func showAddAccount (with walkthroughType: WalkthroughType) {
-        if walkthroughType == .createAccount {
+        switch walkthroughType {
+        case .createAccount:
             let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
             self.present(viewController: createAccountViewController, withStyle: .show, withAnimation: true, withStateable: createAccountViewController.viewModel)
-        } else if walkthroughType == .createSipAccount {
+        case .createSipAccount:
             let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
             self.present(viewController: sipAccountViewController, withStyle: .show, withAnimation: true, withStateable: sipAccountViewController.viewModel)
-        } else {
+        case .linkDevice:
             let linkDeviceViewController = LinkDeviceViewController.instantiate(with: self.injectionBag)
             self.present(viewController: linkDeviceViewController, withStyle: .show, withAnimation: true, withStateable: linkDeviceViewController.viewModel)
+        case .linkToAccountManager:
+            let linkToManagerViewController = LinkToAccountManagerViewController.instantiate(with: self.injectionBag)
+            self.present(viewController: linkToManagerViewController, withStyle: .show, withAnimation: true, withStateable: linkToManagerViewController.viewModel)
         }
     }
 }

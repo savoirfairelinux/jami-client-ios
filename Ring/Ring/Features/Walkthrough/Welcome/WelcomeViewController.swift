@@ -33,6 +33,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var linkDeviceButton: DesignableButton!
     @IBOutlet weak var createAccountButton: DesignableButton!
     @IBOutlet weak var createSipAccountButton: DesignableButton!
+    @IBOutlet weak var connectToAccountManagerButton: DesignableButton!
 
     // MARK: constraints
     @IBOutlet weak var ringLogoBottomConstraint: NSLayoutConstraint!
@@ -56,9 +57,11 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.createAccountButton.alpha = 1
             self.linkDeviceButton.alpha = 1
             self.createSipAccountButton.alpha = 1
+            self.connectToAccountManagerButton.alpha = 1
         }
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.linkDeviceButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        self.connectToAccountManagerButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         // Bind ViewModel to View
         self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
         self.viewModel.createAccount.bind(to: self.createAccountButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
@@ -92,6 +95,10 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.createSipAccountButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.viewModel.createSipAccount()
         }).disposed(by: self.disposeBag)
+
+        self.connectToAccountManagerButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.viewModel.linkToAccountManager()
+        }).disposed(by: self.disposeBag)
     }
 
     func initialAnimation() {
@@ -104,6 +111,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self?.welcomeTextLabel.alpha = 1
                     self?.createAccountButton.alpha = 1
                     self?.linkDeviceButton.alpha = 1
+                    self?.connectToAccountManagerButton.alpha = 1
                     self?.view.layoutIfNeeded()
                 })
             }

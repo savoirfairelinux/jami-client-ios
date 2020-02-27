@@ -402,6 +402,64 @@ class AccountsService: AccountAdapterDelegate {
             })
     }
 
+    func connectToAccountManager(username: String, password: String, serverUri: String) -> Observable<AccountModel> {
+        var newAccountId = ""
+        let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
+            do {
+                var ringDetails = try self.getRingInitialAccountDetails()
+                ringDetails.updateValue(username, forKey: ConfigKey.managerUsername.rawValue)
+                if !password.isEmpty {
+                    ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+                }
+                ringDetails.updateValue(serverUri, forKey: ConfigKey.managerUri.rawValue)
+                guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
+                    throw AccountCreationError.wrongCredentials
+                }
+                newAccountId = accountId
+                let account = try self.buildAccountFromDaemon(accountId: accountId)
+                single(.success(account))
+            } catch {
+                single(.error(error))
+            }
+            return Disposables.create {
+            }
+        })
+
+        let filteredDaemonSignals = self.sharedResponseStream
+            .filter { (serviceEvent) -> Bool in
+                if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId {return false}
+                if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
+                    throw AccountCreationError.wrongCredentials
+                } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
+                    throw AccountCreationError.network
+                } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
+                    throw AccountCreationError.wrongCredentials
+                }
+                let isRegistrationStateChanged = serviceEvent.eventType == ServiceEventType.registrationStateChanged
+                let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
+                let notRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Unregistered
+                return isRegistrationStateChanged && (isRegistered || notRegistered)
+        }
+
+        return Observable
+            .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
+                guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
+                    throw AddAccountError.unknownError
+                }
+                if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
+                    throw AddAccountError.unknownError
+                }
+                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id)
+                self.loadAccountsFromDaemon()
+                return accountModel
+            }.take(1)
+            .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
+                self.currentAccount = accountModel
+                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
+                return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
+            })
+    }
+
     func setDetails(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
         var filename = "default.wav"
