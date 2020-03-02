@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "PINを入力してください";
 "linkToAccount.explanationPinMessage" = "PINコードを生成するには、使用するアカウントにログインした端末のアカウント管理設定に移動します。端末の設定で「このアカウントに別の端末を紐づける」を選択します。このフォームを完了するために必要なPINを取得します。 PINは10分間のみ有効です。";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "パスワード";
+"linkToAccountManager.passwordLabel" = "パスワードを入力してください";
+"linkToAccountManager.usernamePlaceholder" = "ユーザー名";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "アカウントが見つかりません";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "ブロック";

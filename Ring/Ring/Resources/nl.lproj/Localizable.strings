@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Voer pincode in";
 "linkToAccount.explanationPinMessage" = "Om de pincode te genereren, gaat u naar de accountbeheerinstellingen op het apparaat dat het account bevat dat u wilt gebruiken. Selecteer ‘Een ander apparaat aan dit account koppelen’. U zult de pincode krijgen die u nodig heeft om dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Password";
+"linkToAccountManager.passwordLabel" = "Enter Password";
+"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Account kan niet gevonden worden";
 "alerts.accountCannotBeFoundMessage" = "Account kon niet gevonden worden op het Jami-netwerk. Controleer of het account geëxporteerd is van een bestaand apparaat en dat de ingevoerde gebruikersreferenties correct zijn.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Gesprek wissen";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Blokkeren";

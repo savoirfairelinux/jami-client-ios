@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "輸入 PIN 碼";
 "linkToAccount.explanationPinMessage" = "要生成 PIN 碼，請到包含您所使用的帳號的裝置上的帳號管理設定。在裝置設定中選取「連結其他裝置到這個帳號」。您將會收到所需的 PIN 碼來完成這份表單。PIN 碼只在 10 分鐘內有效。";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "密碼";
+"linkToAccountManager.passwordLabel" = "輸入密碼";
+"linkToAccountManager.usernamePlaceholder" = "使用者名稱";
+"linkToAccountManager.usernameLabel" = "輸入使用者名稱";
+"linkToAccountManager.accountManagerPlaceholder" = "帳號管理員";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "找不到帳號";
 "alerts.accountCannotBeFoundMessage" = "在 Jami 網路中找不到帳號。請確定其已在 Jami 上從既有的裝置匯出，以及提供的憑證是正確的。";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "清除對話";
 "alerts.noMediaPermissionsTitle" = "未給予媒體權限";
 "alerts.noLibraryPermissionsTitle" = "無法存取相簿";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "阻擋";

@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "PIN-kód megadása";
 "linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához keresse meg a fiókkezelő beállításait a használni kívánt fiókot tartalmazó eszközön.  Válassza az eszközbeállításoknál a „Másik eszköz összekapcsolása ehhez a fiókhoz” lehetőséget. Meg fogja kapni az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Jelszó";
+"linkToAccountManager.passwordLabel" = "A jelszó megadása";
+"linkToAccountManager.usernamePlaceholder" = "Felhasználónév";
+"linkToAccountManager.usernameLabel" = "Felhasználónév megadása";
+"linkToAccountManager.accountManagerPlaceholder" = "Fiókkezelő";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "A fiók nem található";
 "alerts.accountCannotBeFoundMessage" = "Nem található a fiók a Jami hálózatában. Győződjön meg róla, hogy a meglévő eszközön a Jami-t exportálták és a hitelesítő adatok helyesek voltak.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Társalgás törlése";
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "A fotókönyvtárhoz való hozzáférést nem adták meg";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Letiltás";

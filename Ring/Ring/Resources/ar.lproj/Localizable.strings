@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "أدخِل رمز الأمان";
 "linkToAccount.explanationPinMessage" = "لتوليد رمز الأمان اذهب إلى إعدادات إدارة الحساب في الجهاز الذي يحتوي على الحساب الذي تريد استخدامه. في إعدادات الجهاز اختر \"ربط جهاز آخر مع هذا الحساب\". ستحصل عل رمز الأمان اللازم لإكمال العملية. تنتهي صلاحية رمز الأمان بعد 10 دقائق فقط.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Password";
+"linkToAccountManager.passwordLabel" = "Enter Password";
+"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "لم يعثر على الحساب";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "حظر";

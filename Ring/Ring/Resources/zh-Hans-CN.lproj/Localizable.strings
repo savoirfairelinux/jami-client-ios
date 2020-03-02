@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "输入PIN";
 "linkToAccount.explanationPinMessage" = "要获取一个PIN，请进入你已登陆的设备中的用户管理界面，选择“链接另一台设备到这个用户”。输入你的用户密码后，你会得到在此处所需的PIN，它在10分钟内有效。";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "密码";
+"linkToAccountManager.passwordLabel" = "输入密码";
+"linkToAccountManager.usernamePlaceholder" = "用户名";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "账户管理器";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "无法找到帐户";
 "alerts.accountCannotBeFoundMessage" = "无法在Jami网络中找到账户。 请确保它是从现有设备的Jami上导出的，并且提供的凭证是有效的。";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "清空对话";
 "alerts.noMediaPermissionsTitle" = "未授予媒体权限";
 "alerts.noLibraryPermissionsTitle" = "未授予照片库访问权限";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "屏蔽";

@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Entrer le NIP";
 "linkToAccount.explanationPinMessage" = "Afin de générer le code PIN, aller dans les paramètres du compte sur l'appareil qui contient le compte dont vous souhaitez utiliser. Dans les paramètres de l'appareil, sélectionner \"Lier un nouvel appareil à ce compte\".  Vous devriez recevoir le code PIN permettant de compléter le formulaire. Ce code PIN est seulement valide pendant 10 minutes.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Mot de passe";
+"linkToAccountManager.passwordLabel" = "Entrer le mot-de-passe";
+"linkToAccountManager.usernamePlaceholder" = "Nom d'utilisateur";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Impossible de trouver le compte";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Bloquer";

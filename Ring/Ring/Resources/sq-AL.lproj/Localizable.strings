@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Jepni PIN-in";
 "linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Fjalëkalim";
+"linkToAccountManager.passwordLabel" = "Jepni Fjalëkalimin";
+"linkToAccountManager.usernamePlaceholder" = "Emër përdoruesi";
+"linkToAccountManager.usernameLabel" = "Jepni Emër Përdoruesi";
+"linkToAccountManager.accountManagerPlaceholder" = "Përgjegjës llogarish";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "S’gjendet dot llogari";
 "alerts.accountCannotBeFoundMessage" = "S’u gjet dot llogaria në rrjetin Jami. Sigurohuni që qe eksportuar në Jami që prej një pajisjeje ekzistuese, dhe që kredencialet e dhëna për hyrjen janë të sakta.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Spastroje Bisedën";
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Bllokoje";

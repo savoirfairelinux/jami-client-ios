@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Въведете ПИН";
 "linkToAccount.explanationPinMessage" = "За да генерирате ПИН кода, отидете в настройките за управление на профила на устройството, което съдържа профила, който искате да използвате. Изберете „Свързване на друго устройство с този профил“. Ще получите необходимия ПИН. ПИН кодът е валиден само за 10 минути.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Парола";
+"linkToAccountManager.passwordLabel" = "Въведете парола";
+"linkToAccountManager.usernamePlaceholder" = "Потребителско име";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Профилът не бе открит";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Изчистване на разговор";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Блокиране";

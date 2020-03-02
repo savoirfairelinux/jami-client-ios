@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "ਪਿੰਨ ਦਾਖਲ ਕਰੋ";
 "linkToAccount.explanationPinMessage" = "ਪਿੰਨ ਕੋਡ ਸਿਰਜਣ ਲਈ, ਉਸ ਖਾਤੇ ਵਾਲੇ ਡੀਵਾਈਸ 'ਤੇ ਖਾਤਾ ਪ੍ਰਬੰਧਨ ਸੈਟਿੰਗਾਂ 'ਤੇ ਜਾਓ, ਜਿਸਨੂੰ ਤੁਸੀਂ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ। ਡੀਵਾਈਸ ਸੈਟਿੰਗਾਂ ਵਿੱਚ \"ਕਿਸੇ ਹੋਰ ਡੀਵਾਈਸ ਨੂੰ ਇਸ ਖਾਤੇ ਨਾਲ ਲਿੰਕ ਕਰੋ\" ਨੂੰ ਚੁਣੋ। ਤੁਹਾਨੂੰ ਇਹ ਫਾਰਮ ਪੂਰਾ ਕਰਨ ਲਈ ਜ਼ਰੂਰੀ ਪਿੰਨ ਦੀ ਲੋੜ ਪਵੇਗੀ। ਪਿੰਨ ਸਿਰਫ਼ 10 ਮਿੰਟਾਂ ਲਈ ਵੈਧ ਰਹਿੰਦਾ ਹੈ।";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Password";
+"linkToAccountManager.passwordLabel" = "Enter Password";
+"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "ਖਾਤਾ ਲੱਭਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "ਬਲਾਕ ਕਰੋ";

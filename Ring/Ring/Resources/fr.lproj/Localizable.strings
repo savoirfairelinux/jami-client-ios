@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Entrer votre NIP";
 "linkToAccount.explanationPinMessage" = "Pour générer votre NIP, allez dans les paramètres de gestion de compte de l'appareil qui contient le compte que vous souhaitez utiliser. Sélectionnez \"Connecter un autre appareil à ce compte\". Vous obtiendrez le code NIP nécessaire pour terminer la procédure d'association.  Le NIP est seulement valide pour une période de 10 minutes.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Mot de passe";
+"linkToAccountManager.passwordLabel" = "Entrez le mot de passe";
+"linkToAccountManager.usernamePlaceholder" = "Nom d'utilisateur";
+"linkToAccountManager.usernameLabel" = "Entrer l'identifiant";
+"linkToAccountManager.accountManagerPlaceholder" = "Gestionnaire de compte";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Compte introuvable";
 "alerts.accountCannotBeFoundMessage" = "Le compte ne peut être trouvé sur le réseau Jami. Vérifiez qu'il a bien été exporté par un autre appareil et que les identifiants fournis sont corrects.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Effacer la conversation";
 "alerts.noMediaPermissionsTitle" = "L'accès au média non autorisé";
 "alerts.noLibraryPermissionsTitle" = "L'accès à la bibliothèque de photos non autorisé";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Bloquer";

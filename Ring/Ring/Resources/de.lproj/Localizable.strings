@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "PIN eingeben";
 "linkToAccount.explanationPinMessage" = "Um den PIN-Code zu generieren, gehen Sie zu den Einstellungen für die Kontoverwaltung auf dem Gerät, das das gewünschte Konto enthält. Wählen Sie \"Ein anderes Gerät mit diesem Konto verknüpfen\". Sie erhalten die erforderliche PIN, um dieses Formular auszufüllen. Die PIN ist nur für 10 Minuten gültig.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Passwort";
+"linkToAccountManager.passwordLabel" = "Passwort eingeben";
+"linkToAccountManager.usernamePlaceholder" = "Benutzername";
+"linkToAccountManager.usernameLabel" = "Benutzername eingeben";
+"linkToAccountManager.accountManagerPlaceholder" = "Kontoverwalter";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kann Konto nicht finden";
 "alerts.accountCannotBeFoundMessage" = "Konto kann im Jami-Netzwerk nicht gefunden werden. Stellen Sie sicher, dass es von einem bereits konfigurierten Gerät exportiert wurde und dass die angegebenen Zugangsdaten korrekt sind.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Gesprächsverlauf löschen";
 "alerts.noMediaPermissionsTitle" = "Medienzugriff nicht gewährt";
 "alerts.noLibraryPermissionsTitle" = "Zugriff auf die Bildergalerie nicht gewährt";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Sperren";

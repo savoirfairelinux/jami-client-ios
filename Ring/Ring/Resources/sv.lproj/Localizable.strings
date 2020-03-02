@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Ange PIN-kod";
 "linkToAccount.explanationPinMessage" = "För att generera PIN-koden, går du till kontohanteringen på den enhet som innehåller det konto du vill använda. I enhetsinställningarna väljer du \"Länka en annan enhet till detta konto\". Du får då den nödvändiga PIN-koden för att slutföra detta formulär. Pin-koden är endast giltig i 10 minuter.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Lösenord";
+"linkToAccountManager.passwordLabel" = "Ange lösenord";
+"linkToAccountManager.usernamePlaceholder" = "Användarnamn";
+"linkToAccountManager.usernameLabel" = "Ange användarnamn";
+"linkToAccountManager.accountManagerPlaceholder" = "Kontohanterare";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan inte hitta kontot";
 "alerts.accountCannotBeFoundMessage" = "Kontot kunde inte hittas i Jami-nätverket. Tillse att det har exporterats från en befintlig enhet och att angivna kontouppgifter är korrekt.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Ta bort konversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Blockera";

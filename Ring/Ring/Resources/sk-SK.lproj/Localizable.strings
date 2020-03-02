@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Zadajte PIN";
 "linkToAccount.explanationPinMessage" = "Pre vygenerovanie PIN kódu musíte ísť do nastavení účtu na zariadení, ktoré už obsahuje účet, ktorý chcete použiť. Zvoľte \"Prepojiť ďalšie zariadenie s týmto účtom\". Potom obdržíte PIN potrebný na vyplnenie tohto formulára. PIN je platný 10 minút.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Heslo";
+"linkToAccountManager.passwordLabel" = "Zadajte heslo";
+"linkToAccountManager.usernamePlaceholder" = "Používateľské meno";
+"linkToAccountManager.usernameLabel" = "Zadajte používateľské meno";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Účet sa nedá nájsť";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Blokovať";

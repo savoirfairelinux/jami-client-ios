@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "پین را وارد کنید";
 "linkToAccount.explanationPinMessage" = "برای تولید پین کد ( یا PIN)، به تنظیمات مدیریت حساب در دستگاهی که حاوی حساب کاربری مورد نظر شماست رجوع کنید. در تنظیمات دستگاه، «یک دستگاه دیگر را به این حساب پیوند دهید» را انتخاب کنید. برای تکمیل این فرم پین لازم را دریافت خواهید کرد. پین فقط ده (10) دقیقه معتبر است";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "گذرواژه";
+"linkToAccountManager.passwordLabel" = "گذرواژه را وارد کنید";
+"linkToAccountManager.usernamePlaceholder" = "نام کاربری";
+"linkToAccountManager.usernameLabel" = "نام‌کاربری را وارد کنید";
+"linkToAccountManager.accountManagerPlaceholder" = "مدیر حساب کاربری";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "نمی توان حساب را پیدا کرد";
 "alerts.accountCannotBeFoundMessage" = "حساب در شبکه جمی یافت نشد. اطمینان حاصل کنید که آن در جمی و از یک دستگاه موجود، برون‌برد شده، و مدارک ارائه‌شده صحیح است.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "پاک کردن مکالمه";
 "alerts.noMediaPermissionsTitle" = "مجوز رسانه داده نشده است";
 "alerts.noLibraryPermissionsTitle" = "دسترسی به کتابخانه تصاویر داده نشده است";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "مسدود";

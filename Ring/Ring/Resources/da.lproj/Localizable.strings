@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Indtast PIN-kode";
 "linkToAccount.explanationPinMessage" = "For at generere PIN-koden skal du gå til Kontoadministration på den enhed som indeholder kontoen du ønsker at tilknytte. Under enhedsindstillinger vælg \"Tilknyt en anden enhed til denne konto\". Dette vil generere den nødvendige PIN-kode der skal indtastes i denne formular. PIN-koden er kun gyldig i 10 minutter. ";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Adgangskode";
+"linkToAccountManager.passwordLabel" = "Indtast kodeord";
+"linkToAccountManager.usernamePlaceholder" = "Brugernavn";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan ikke finde konto";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Blokér";

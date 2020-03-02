@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Digite o PIN";
 "linkToAccount.explanationPinMessage" = "Para gerar o código PIN, acesse as configurações de gerenciamento de conta no dispositivo que contém a conta que você deseja usar. Em \"configurações de dispositivos\", selecione \"Associar outro dispositivo à esta conta\". Você receberá o PIN necessário para completar este formulário. O PIN só é válido por 10 minutos.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Senha";
+"linkToAccountManager.passwordLabel" = "Digite a Senha";
+"linkToAccountManager.usernamePlaceholder" = "Nome de usuário";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Não foi possível localizar conta";
 "alerts.accountCannotBeFoundMessage" = "Não foi possível encontrar a conta na rede Jami. Verifique se a conta foi exportado no Jami a partir de um dispositivo existente e se as credenciais fornecidas estão corretas.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Limpar Conversa";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Bloquear";

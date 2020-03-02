@@ -99,6 +99,15 @@
 "linkToAccount.pinLabel" = "Įveskite PIN";
 "linkToAccount.explanationPinMessage" = "Norėdami generuoti PIN kodą, pereikite į paskyros tvarkymo nustatymus įrenginyje, kuriame yra paskyra, kurią norite naudoti. Įrenginių nustatymuose pasirinkite \"Susieti kitą įrenginį su šia paskyra\". Taip gausite šiai formai reikalingą PIN. PIN galios tik 10 minučių.";
 
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.passwordPlaceholder" = "Password";
+"linkToAccountManager.passwordLabel" = "Enter Password";
+"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nepavyksta rasti paskyros";
 "alerts.accountCannotBeFoundMessage" = "Nepavyko rasti paskyros Jami tinkle. Įsitikinkite, kad ji buvo eksportuota Jami iš esamo įrenginio ir, kad pateikti duomenys yra teisingi.";
@@ -122,6 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Išvalyti pokalbį";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 
 //Actions
 "actions.blockAction" = "Užblokuoti";
