@@ -45,6 +45,7 @@ static id <MessagesAdapterDelegate> _delegate;
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 
     confHandlers.insert(exportable_callback<ConfigurationSignal::IncomingAccountMessage>([&](const std::string& account_id,
+                                                                                             const std::string& message_id,
                                                                                              const std::string& from,
                                                                                              const std::map<std::string,
                                                                                              std::string>& payloads) {
@@ -52,7 +53,8 @@ static id <MessagesAdapterDelegate> _delegate;
             NSDictionary* message = [Utils mapToDictionnary:payloads];
             NSString* fromAccount = [NSString stringWithUTF8String:from.c_str()];
             NSString* toAccountId = [NSString stringWithUTF8String:account_id.c_str()];
-            [MessagesAdapter.delegate didReceiveMessage:message from:fromAccount to:toAccountId];
+            NSString* messageId = [NSString stringWithUTF8String:message_id.c_str()];
+            [MessagesAdapter.delegate didReceiveMessage:message from:fromAccount messageId: messageId to:toAccountId];
         }
     }));
 

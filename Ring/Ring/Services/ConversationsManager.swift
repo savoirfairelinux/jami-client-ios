@@ -114,6 +114,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                     else {return}
                 self.handleNewMessage(from: peerUri,
                                       to: accountId,
+                                      messageId: "",
                                       message: messageContent,
                                       peerName: event.getEventInput(ServiceEventInput.name))
             })
@@ -154,6 +155,7 @@ class ConversationsManager: MessagesAdapterDelegate {
     // MARK: Message Adapter delegate
 
     func didReceiveMessage(_ message: [String: String], from senderAccount: String,
+                           messageId: String,
                            to receiverAccountId: String) {
         guard let content = message[textPlainMIMEType] else {
             return
@@ -161,12 +163,13 @@ class ConversationsManager: MessagesAdapterDelegate {
         DispatchQueue.main.async { [unowned self] in
             self.handleNewMessage(from: senderAccount,
                                   to: receiverAccountId,
+                                  messageId: messageId,
                                   message: content,
                                   peerName: nil)
         }
     }
 
-    func handleNewMessage(from peerUri: String, to accountId: String, message content: String, peerName: String?) {
+    func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {
         guard let currentAccount = self.accountsService.currentAccount else {
             return
         }
@@ -201,7 +204,7 @@ class ConversationsManager: MessagesAdapterDelegate {
         guard let uriString = JamiURI.init(schema: type,
                                            infoHach: peerUri,
                                            account: accountForMessage).uriString else {return}
-        let message = self.conversationService.createMessage(withId: "",
+        let message = self.conversationService.createMessage(withId: messageId,
                                                              withContent: content,
                                                              byAuthor: uriString,
                                                              generated: false,
