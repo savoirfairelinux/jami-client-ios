@@ -23,6 +23,10 @@ import UIKit
 import Reusable
 import RxSwift
 
+protocol MessageAccessoryViewDelegate: class {
+    func setIsComposing(isComposing: Bool)
+}
+
 class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
 
     @IBOutlet weak var sendButton: UIButton!
@@ -36,6 +40,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
     @IBOutlet weak var textViewHeightConstraints: NSLayoutConstraint!
     var messageTextViewHeight = Variable<CGFloat>(0.00)
     var messageTextViewContent = Variable<String>("")
+    weak var delegate: MessageAccessoryViewDelegate?
 
     override open func didMoveToWindow() {
         self.setupMessageTextView()
@@ -78,14 +83,20 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
     }
 
     func editingChanges() {
+        var isComposing = false
         if self.messageTextView.text != nil {
             if self.messageTextView.text!.count >= 1 {
-                    setEmojiButtonVisibility(hide: true)
+                isComposing = true
+                setEmojiButtonVisibility(hide: true)
             } else {
                 setEmojiButtonVisibility(hide: false)
             }
         } else {
             setEmojiButtonVisibility(hide: false)
+        }
+
+        if let delegate = self.delegate {
+            delegate.setIsComposing(isComposing: isComposing)
         }
     }
     func setEmojiButtonVisibility(hide: Bool) {

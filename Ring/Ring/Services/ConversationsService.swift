@@ -439,4 +439,17 @@ class ConversationsService {
             })
             .disposed(by: self.disposeBag)
     }
+
+    func setIsComposingMsg(to peer: String, from account: String, isComposing: Bool) {
+        messageAdapter.setComposingMessageTo(peer, fromAccount: account, isComposing: isComposing)
+    }
+
+    func detectingMessageTyping(_ from: String, for accountId: String, status: Int) {
+        let serviceEventType: ServiceEventType = .messageTypingIndicator
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.peerUri, value: from)
+        serviceEvent.addEventInput(.accountId, value: accountId)
+        serviceEvent.addEventInput(.state, value: status)
+        self.responseStream.onNext(serviceEvent)
+    }
 }

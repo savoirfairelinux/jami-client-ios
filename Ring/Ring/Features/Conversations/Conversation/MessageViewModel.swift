@@ -57,6 +57,7 @@ class MessageViewModel {
     var message: MessageModel
     var timeStringShown: String?
     var sequencing: MessageSequencing = .unknown
+    var isTypingIndicator: Bool = false
 
     private let disposeBag = DisposeBag()
     let injectBug: InjectionBag

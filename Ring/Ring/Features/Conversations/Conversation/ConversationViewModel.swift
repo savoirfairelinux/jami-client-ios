@@ -70,6 +70,21 @@ class ConversationViewModel: Stateable, ViewModel {
         return self.stateSubject.asObservable()
     }()
 
+    lazy var typingIndicator: Observable<Bool> = {
+        return self.conversationsService
+            .sharedResponseStream
+            .filter { [weak self] (event) -> Bool in
+                return event.eventType == ServiceEventType.messageTypingIndicator &&
+                    event.getEventInput(ServiceEventInput.accountId) == self?.conversation.value.accountId &&
+                    event.getEventInput(ServiceEventInput.peerUri) == self?.conversation.value.hash
+        }.map { (event) -> Bool in
+            if let status: Int = event.getEventInput(ServiceEventInput.state), status == 1 {
+                return true
+            }
+            return false
+        }
+    }()
+
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         self.accountService = injectionBag.accountService
@@ -195,6 +210,15 @@ class ConversationViewModel: Stateable, ViewModel {
 
                 self.nameService.lookupAddress(withAccount: "", nameserver: "", address: self.conversation.value.hash)
             }
+            self.typingIndicator.subscribe(onNext: { [weak self] (typing) in
+                if typing {
+                    self?.addTypingIndicatorMsg()
+                } else {
+                    self?.removeTypingIndicatorMsg()
+                }
+            }, onError: { (_) in
+
+            }).disposed(by: self.disposeBag)
         }
     }
 
@@ -519,4 +543,47 @@ class ConversationViewModel: Stateable, ViewModel {
         self.closeAllPlayers()
     }
 
+    func setIsComposingMsg(isComposing: Bool) {
+        if composingMessage == isComposing {
+            return
+        }
+        composingMessage = isComposing
+        guard let account = self.accountService.currentAccount else {return}
+        conversationsService
+            .setIsComposingMsg(to: self.conversation.value.participantUri,
+                               from: account.id,
+                               isComposing: isComposing)
+    }
+
+    func addTypingIndicatorMsg() {
+        if showingTypingIndicator {
+            return
+        }
+        showingTypingIndicator = true
+        var messagesValue = self.messages.value
+        let msgModel = MessageModel(withId: "",
+                                    receivedDate: Date(),
+                                    content: "...",
+                                    authorURI: self.conversation.value.participantUri,
+                                    incoming: true)
+        let typingIndicator = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel)
+        typingIndicator.isTypingIndicator = true
+        messagesValue.append(typingIndicator)
+        self.messages.value = messagesValue
+    }
+
+    var composingMessage: Bool = false
+    var showingTypingIndicator: Bool = false
+
+    func removeTypingIndicatorMsg() {
+        if !showingTypingIndicator {
+            return
+        }
+        showingTypingIndicator = false
+        let messagesValue = self.messages.value
+        let conversationsMsg = messagesValue.filter { (messageModel) -> Bool in
+            !messageModel.isTypingIndicator
+        }
+        self.messages.value = conversationsMsg
+    }
 }
