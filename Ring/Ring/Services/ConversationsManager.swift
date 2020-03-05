@@ -303,4 +303,8 @@ class ConversationsManager: MessagesAdapterDelegate {
             self.log.debug("ConversationsManager: accept transfer failed")
         }
     }
+
+    func detectingMessageTyping(_ from: String, for accountId: String, status: Int) {
+        conversationService.detectingMessageTyping(from, for: accountId, status: status)
+    }
 }

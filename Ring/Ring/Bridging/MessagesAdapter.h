@@ -38,5 +38,8 @@ typedef NS_ENUM(int, MessageStatus)  {
                        to:(NSString*)toAccountId;
 
 - (MessageStatus)statusForMessageId:(uint64_t)messageId;
+- (void)setComposingMessageTo:(NSString*)peer
+                   fromAccount:(NSString*)accountID
+                   isComposing:(BOOL)isComposing;
 
 @end

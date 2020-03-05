@@ -56,6 +56,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     private var transferImageView = UIImageView()
     private var transferProgressView = ProgressView()
+    private var composingMsg = UIView()
 
     var dataTransferProgressUpdater: Timer?
     var outgoingImageProgressUpdater: Timer?
@@ -74,6 +75,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.stopOutgoingImageMonitor()
         self.transferProgressView.removeFromSuperview()
         self.playerView?.removeFromSuperview()
+        self.composingMsg.removeFromSuperview()
         playerHeight.value = 0
         self.disposeBag = DisposeBag()
         super.prepareForReuse()
@@ -305,6 +307,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
         self.transferImageView.removeFromSuperview()
         self.playerView?.removeFromSuperview()
+        self.composingMsg.removeFromSuperview()
         playerHeight.value = 0
         self.bubbleViewMask?.isHidden = true
 
@@ -419,6 +422,9 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
                 if self.avatarBotomAlignConstraint != nil {
                     self.avatarBotomAlignConstraint.constant = -1
                 }
+                if item.isComposingIndicator {
+                    addComposingMsgView()
+                }
             }
             // received message avatar
             Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
@@ -444,6 +450,33 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
                     return
                 })
                 .disposed(by: self.disposeBag)
+        }
+    }
+
+    func addComposingMsgView() {
+        self.composingMsg = UIView(frame: self.messageLabel.frame)
+        let size: CGFloat = 10
+        let margin: CGFloat = 2
+        let originY: CGFloat = self.messageLabel.frame.size.height * 0.5 - (size * 0.5)
+        let point1 = UIView(frame: CGRect(x: 0, y: originY, width: size, height: size))
+        let point2 = UIView(frame: CGRect(x: margin + size, y: originY, width: size, height: size))
+        let point3 = UIView(frame: CGRect(x: point2.frame.origin.x + margin + size, y: originY, width: size, height: size))
+        point1.cornerRadius = 5
+        point2.cornerRadius = 5
+        point3.cornerRadius = 5
+        point1.backgroundColor = UIColor.jamiMain
+        point2.backgroundColor = UIColor.jamiMain
+        point3.backgroundColor = UIColor.jamiMain
+        self.composingMsg.addSubview(point1)
+        self.composingMsg.addSubview(point2)
+        self.composingMsg.addSubview(point3)
+        self.bubble.addSubview(composingMsg)
+        point1.blink()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { [weak point2] in
+            point2?.blink()
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [weak point3] in
+            point3?.blink()
         }
     }
 
