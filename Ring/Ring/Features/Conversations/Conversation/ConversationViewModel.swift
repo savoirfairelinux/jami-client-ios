@@ -193,7 +193,7 @@ class ConversationViewModel: Stateable, ViewModel {
                         }
                     }).disposed(by: disposeBag)
 
-                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: self.conversation.value.hash)
+                self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: self.conversation.value.hash)
             }
         }
     }

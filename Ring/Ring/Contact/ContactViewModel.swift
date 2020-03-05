@@ -85,7 +85,7 @@ class ContactViewModel: ViewModel, Stateable {
                             self.userName.value = address
                         }
                     }).disposed(by: disposeBag)
-                self.nameService.lookupAddress(withAccount: "", nameserver: "", address: conversation.hash)
+                self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: conversation.hash)
             }
             // add option block contact and clear conversation if contact exists
             if self.contactService.contact(withUri: conversation.participantUri) != nil {

@@ -253,6 +253,10 @@ class ConversationsManager: MessagesAdapterDelegate {
 
     func searchNameAndPresentNotification(data: [String: String], hash: String) {
         var data = data
+        var accountId = ""
+        if let getAccountFromDictionary = data[NotificationUserInfoKeys.accountID.rawValue] {
+            accountId = getAccountFromDictionary
+        }
         self.nameService.usernameLookupStatus.single()
             .filter({ lookupNameResponse in
                 return lookupNameResponse.address != nil &&
@@ -267,7 +271,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                     self?.notificationHandler.presentMessageNotification(data: data)
                 }
             }).disposed(by: self.disposeBag)
-        self.nameService.lookupAddress(withAccount: "", nameserver: "", address: hash)
+        self.nameService.lookupAddress(withAccount: accountId, nameserver: "", address: hash)
     }
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64, from accountId: String,

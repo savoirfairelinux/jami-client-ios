@@ -316,7 +316,7 @@ class SmartlistViewModel: Stateable, ViewModel {
         }
 
         if !text.isSHA1() {
-            self.nameService.lookupName(withAccount: "", nameserver: "", name: text)
+            self.nameService.lookupName(withAccount: currentAccount.id, nameserver: "", name: text)
             self.searchStatus.onNext(L10n.Smartlist.searching)
             return
         }

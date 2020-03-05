@@ -94,7 +94,7 @@ class BlockListViewModel: ViewModel {
                                 contact.userName = name
                             }
                         }).disposed(by: self.disposeBag)
-                    self.nameService.lookupAddress(withAccount: "", nameserver: "", address: contact.hash)
+                    self.nameService.lookupAddress(withAccount: accountId, nameserver: "", address: contact.hash)
                 }
                 return item
         }
