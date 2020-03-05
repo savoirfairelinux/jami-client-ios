@@ -75,6 +75,14 @@ static id <MessagesAdapterDelegate> _delegate;
         }
     }));
 
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ComposingStatusChanged>([&](const std::string& account_id, const std::string& from, int status) {
+        if (MessagesAdapter.delegate) {
+            NSString* fromPeer =  [NSString stringWithUTF8String:from.c_str()];
+            NSString* toAccount =  [NSString stringWithUTF8String:account_id.c_str()];
+            [MessagesAdapter.delegate detectingMessageTyping:fromPeer for:toAccount status:status];
+        }
+    }));
+
     registerSignalHandlers(confHandlers);
 }
 #pragma mark -
@@ -89,6 +97,14 @@ static id <MessagesAdapterDelegate> _delegate;
 
 - (MessageStatus)statusForMessageId:(uint64_t)messageId {
     return (MessageStatus)getMessageStatus(messageId);
+}
+
+- (void)setComposingMessageTo:(NSString*)peer
+                   fromAccount:(NSString*)accountID
+                   isComposing:(BOOL)isComposing {
+    setIsComposing(std::string([accountID UTF8String]),
+                   std::string([peer UTF8String]),
+                   isComposing);
 }
 
 #pragma mark AccountAdapterDelegate

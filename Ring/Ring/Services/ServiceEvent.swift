@@ -48,6 +48,7 @@ enum ServiceEventType {
     case callProviderCancellCall
     case audioActivated
     case newOutgoingMessage
+    case messageTypingIndicator
 }
 
 /**

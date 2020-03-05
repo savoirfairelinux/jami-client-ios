@@ -27,4 +27,5 @@
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64, from accountId: String,
                               to uri: String)
+    func detectingMessageTyping(_ from: String, for accountId: String, status: Int)
 }

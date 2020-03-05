@@ -70,6 +70,21 @@ class ConversationViewModel: Stateable, ViewModel {
         return self.stateSubject.asObservable()
     }()
 
+    lazy var typingIndicator: Observable<Bool> = {
+        return self.conversationsService
+            .sharedResponseStream
+            .filter { [weak self] (event) -> Bool in
+                return event.eventType == ServiceEventType.messageTypingIndicator &&
+                    event.getEventInput(ServiceEventInput.accountId) == self?.conversation.value.accountId &&
+                    event.getEventInput(ServiceEventInput.peerUri) == self?.conversation.value.hash
+        }.map { (event) -> Bool in
+            if let status: Int = event.getEventInput(ServiceEventInput.state), status == 1 {
+                return true
+            }
+            return false
+        }
+    }()
+
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         self.accountService = injectionBag.accountService
@@ -118,7 +133,22 @@ class ConversationViewModel: Stateable, ViewModel {
                 })
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] messageViewModels in
-                    self?.messages.value = messageViewModels
+                    guard let self = self else {
+                        return
+                    }
+                    var msg = messageViewModels
+                    if self
+                        .peerComposingMessage {
+                        let msgModel = MessageModel(withId: "",
+                                                    receivedDate: Date(),
+                                                    content: "       ",
+                                                    authorURI: self.conversation.value.participantUri,
+                                                    incoming: true)
+                        let composingIndicator = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel)
+                        composingIndicator.isComposingIndicator = true
+                        msg.append(composingIndicator)
+                    }
+                    self.messages.value = msg
                 }).disposed(by: self.disposeBag)
 
             self.contactsService
@@ -195,6 +225,14 @@ class ConversationViewModel: Stateable, ViewModel {
 
                 self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: self.conversation.value.hash)
             }
+            self.typingIndicator
+                .subscribe(onNext: { [weak self] (typing) in
+                if typing {
+                    self?.addComposingIndicatorMsg()
+                } else {
+                    self?.removeComposingIndicatorMsg()
+                }
+            }).disposed(by: self.disposeBag)
         }
     }
 
@@ -519,4 +557,47 @@ class ConversationViewModel: Stateable, ViewModel {
         self.closeAllPlayers()
     }
 
+    func setIsComposingMsg(isComposing: Bool) {
+        if composingMessage == isComposing {
+            return
+        }
+        composingMessage = isComposing
+        guard let account = self.accountService.currentAccount else {return}
+        conversationsService
+            .setIsComposingMsg(to: self.conversation.value.participantUri,
+                               from: account.id,
+                               isComposing: isComposing)
+    }
+
+    func addComposingIndicatorMsg() {
+        if peerComposingMessage {
+            return
+        }
+        peerComposingMessage = true
+        var messagesValue = self.messages.value
+        let msgModel = MessageModel(withId: "",
+                                    receivedDate: Date(),
+                                    content: "       ",
+                                    authorURI: self.conversation.value.participantUri,
+                                    incoming: true)
+        let composingIndicator = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel)
+        composingIndicator.isComposingIndicator = true
+        messagesValue.append(composingIndicator)
+        self.messages.value = messagesValue
+    }
+
+    var composingMessage: Bool = false
+    var peerComposingMessage: Bool = false
+
+    func removeComposingIndicatorMsg() {
+        if !peerComposingMessage {
+            return
+        }
+        peerComposingMessage = false
+        let messagesValue = self.messages.value
+        let conversationsMsg = messagesValue.filter { (messageModel) -> Bool in
+            !messageModel.isComposingIndicator
+        }
+        self.messages.value = conversationsMsg
+    }
 }

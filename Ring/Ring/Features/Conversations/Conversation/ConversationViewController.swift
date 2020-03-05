@@ -32,7 +32,7 @@ import MobileCoreServices
 // swiftlint:disable type_body_length
 class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased {
+                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate {
 
     let log = SwiftyBeaver.self
 
@@ -59,8 +59,13 @@ class ConversationViewController: UIViewController,
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
 
+    func setIsComposing(isComposing: Bool) {
+        self.viewModel.setIsComposingMsg(isComposing: isComposing)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        messageAccessoryView.delegate = self
 
         self.configureRingNavigationBar()
         self.setupUI()
@@ -73,8 +78,16 @@ class ConversationViewController: UIViewController,
          */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWillResignActive),
+                                               name: UIApplication.willResignActiveNotification,
+                                               object: nil)
 
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    }
+
+    @objc private func applicationWillResignActive() {
+        self.viewModel.setIsComposingMsg(isComposing: false)
     }
 
     func importDocument() {
@@ -370,7 +383,7 @@ class ConversationViewController: UIViewController,
         self.tableView.scrollIndicatorInsets.bottom = keyboardHeight + heightOffset
         self.bottomHeight = keyboardHeight + heightOffset
 
-        if keyboardHeight != self.messageAccessoryView.frame.height {
+        if keyboardHeight > self.messageAccessoryView.frame.height {
             self.scrollToBottom(animated: false)
         }
         self.updateBottomOffset()
@@ -586,10 +599,16 @@ class ConversationViewController: UIViewController,
     }
 
     func placeCall() {
+        self.textFieldShouldEndEditing = true
+        self.messageAccessoryView.messageTextView.resignFirstResponder()
+        self.resignFirstResponder()
         self.viewModel.startCall()
     }
 
     func placeAudioOnlyCall() {
+        self.textFieldShouldEndEditing = true
+        self.messageAccessoryView.messageTextView.resignFirstResponder()
+        self.resignFirstResponder()
         self.viewModel.startAudioCall()
     }
 
@@ -604,7 +623,7 @@ class ConversationViewController: UIViewController,
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        self.viewModel.setIsComposingMsg(isComposing: false)
         self.textFieldShouldEndEditing = true
     }
 
@@ -623,7 +642,9 @@ class ConversationViewController: UIViewController,
         self.tableView.register(cellType: MessageCellGenerated.self)
 
         //Bind the TableView to the ViewModel
-        self.viewModel.messages.asObservable().subscribe(onNext: { [weak self] (messageViewModels) in
+        self.viewModel.messages.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (messageViewModels) in
             self?.messageViewModels = messageViewModels
             self?.computeSequencing()
             self?.tableView.reloadData()
@@ -689,6 +710,7 @@ class ConversationViewController: UIViewController,
                 self?.messageAccessoryView.messageTextView.text = ""
                 return
             }
+            self?.viewModel.setIsComposingMsg(isComposing: false)
             self?.viewModel.sendMessage(withContent: trimmed)
             self?.messageAccessoryView.messageTextView.text = ""
             self?.messageAccessoryView.setEmojiButtonVisibility(hide: false)
@@ -730,7 +752,7 @@ class ConversationViewController: UIViewController,
                 // from the previously shown time
                 let hourComp = Calendar.current.compare(lastShownTime!, to: time, toGranularity: .hour)
                 let minuteComp = Calendar.current.compare(lastShownTime!, to: time, toGranularity: .minute)
-                if hourComp == .orderedSame && minuteComp == .orderedSame {
+                if (hourComp == .orderedSame && minuteComp == .orderedSame) || messageViewModel.isComposingIndicator {
                     messageViewModel.timeStringShown = nil
                 } else {
                     messageViewModel.timeStringShown = getTimeLabelString(forTime: time)
