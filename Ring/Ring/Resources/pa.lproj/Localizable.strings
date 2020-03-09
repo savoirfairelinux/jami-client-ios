@@ -101,9 +101,9 @@
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Password";
-"linkToAccountManager.passwordLabel" = "Enter Password";
-"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.passwordPlaceholder" = "ਪਾਸਵਰਡ";
+"linkToAccountManager.passwordLabel" = "ਪਾਸਵਰਡ ਦਾਖਲ ਕਰੋ";
+"linkToAccountManager.usernamePlaceholder" = "ਵਰਤੋਂਕਾਰ ਨਾਂ";
 "linkToAccountManager.usernameLabel" = "Enter Username";
 "linkToAccountManager.accountManagerPlaceholder" = "Account manager";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";

@@ -101,9 +101,9 @@
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Password";
+"linkToAccountManager.passwordPlaceholder" = "密码";
 "linkToAccountManager.passwordLabel" = "Enter Password";
-"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.usernamePlaceholder" = "使用者名";
 "linkToAccountManager.usernameLabel" = "Enter Username";
 "linkToAccountManager.accountManagerPlaceholder" = "Account manager";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";

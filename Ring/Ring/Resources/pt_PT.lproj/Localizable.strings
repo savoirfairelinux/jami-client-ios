@@ -101,10 +101,10 @@
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Password";
-"linkToAccountManager.passwordLabel" = "Enter Password";
-"linkToAccountManager.usernamePlaceholder" = "Username";
-"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.passwordPlaceholder" = "Palavra-chave";
+"linkToAccountManager.passwordLabel" = "Introduzir Palavra-Chave";
+"linkToAccountManager.usernamePlaceholder" = "Nome de utilizador";
+"linkToAccountManager.usernameLabel" = "Introduzir nome de utilizador";
 "linkToAccountManager.accountManagerPlaceholder" = "Account manager";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 

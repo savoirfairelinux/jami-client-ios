@@ -41,8 +41,8 @@
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "Paskyros";
 "smartlist.addAccountButton" = "+ Pridėti paskyrą";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.noNumber" = "Pasirinktas adresatas neturi numerio";
+"smartlist.selectOneNumber" = "Pasirinkite vieną iš numerių";
 
 //Conversation
 "conversation.messagePlaceholder" = "Rašykite žinutę...";
@@ -86,7 +86,7 @@
 "createAccount.EnableNotifications" = "Pranešimai";
 "createAccount.Recommended" = "(Rekomenduojama)";
 "createAccount.UsernameNotRegisteredTitle" = "Tinklo klaida";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
+"createAccount.UsernameNotRegisteredMessage" = "Paskyra buvo sukurta, bet naudotojo vardas nebuvo užregistruotas";
 "createAccount.timeoutTitle" = "Paskyra sukurta";
 "createAccount.timeoutMessage" = "Vyksta naudotojo vardo registracija... Tai gali užtrukti kelias akimirkas.";
 
@@ -100,12 +100,12 @@
 "linkToAccount.explanationPinMessage" = "Norėdami generuoti PIN kodą, pereikite į paskyros tvarkymo nustatymus įrenginyje, kuriame yra paskyra, kurią norite naudoti. Įrenginių nustatymuose pasirinkite \"Susieti kitą įrenginį su šia paskyra\". Taip gausite šiai formai reikalingą PIN. PIN galios tik 10 minučių.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Password";
-"linkToAccountManager.passwordLabel" = "Enter Password";
-"linkToAccountManager.usernamePlaceholder" = "Username";
-"linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.signIn" = "Prisijungti";
+"linkToAccountManager.passwordPlaceholder" = "Slaptažodis";
+"linkToAccountManager.passwordLabel" = "Įveskite slaptažodį";
+"linkToAccountManager.usernamePlaceholder" = "Naudotojo vardas";
+"linkToAccountManager.usernameLabel" = "Įveskite naudotojo adresą";
+"linkToAccountManager.accountManagerPlaceholder" = "Paskyros tvarkytuvė";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts

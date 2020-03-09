@@ -100,13 +100,13 @@
 "linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Hyni";
 "linkToAccountManager.passwordPlaceholder" = "Fjalëkalim";
 "linkToAccountManager.passwordLabel" = "Jepni Fjalëkalimin";
 "linkToAccountManager.usernamePlaceholder" = "Emër përdoruesi";
 "linkToAccountManager.usernameLabel" = "Jepni Emër Përdoruesi";
 "linkToAccountManager.accountManagerPlaceholder" = "Përgjegjës llogarish";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerLabel" = "Jepni URI përgjegjësi llogarish";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "S’gjendet dot llogari";
@@ -131,7 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Spastroje Bisedën";
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.errorWrongCredentials" = "S’lidhet dot te përgjegjësi i dhënë i llogarive. Ju lutemi, kontrolloni kredencialet tuaja";
 
 //Actions
 "actions.blockAction" = "Bllokoje";
