@@ -168,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.accountService.setDetails(forAccountId: account.id)
             }
             self.reloadDataFor(account: currentAccount)
-            if self.accountService.proxyEnabled() {
+            if self.accountService.hasAccountWithProxyEnabled() {
                 self.registerVoipNotifications()
             } else {
                 self.unregisterVoipNotifications()

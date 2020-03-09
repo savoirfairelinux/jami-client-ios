@@ -827,12 +827,20 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    func proxyEnabled() -> Bool {
+    func hasAccountWithProxyEnabled() -> Bool {
         for account in self.accounts {
             let accountDetails = self.getAccountDetails(fromAccountId: account.id)
             if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) == "true" {
                 return true
             }
+        }
+        return false
+    }
+
+    func proxyEnabled(for accountId: String) -> Bool {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
+        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) == "true" {
+            return true
         }
         return false
     }

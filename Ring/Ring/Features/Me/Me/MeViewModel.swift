@@ -558,13 +558,14 @@ class MeViewModel: ViewModel, Stateable {
     }()
 
     func enableNotifications(enable: Bool) {
+        guard let account = self.accountService.currentAccount else {return}
+        let proxyEnabled = self.accountService.proxyEnabled(for: account.id)
         if enable == notificationsPermitted.value &&
-            enable == self.accountService.proxyEnabled() {
+            enable == proxyEnabled {
             return
         }
         notificationsEnabled = enable
-        guard let account = self.accountService.currentAccount else {return}
-        if !self.accountService.proxyEnabled() && enable == true {
+        if !self.accountService.hasAccountWithProxyEnabled() && enable == true {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
         }
         self.accountService.changeProxyStatus(accountID: account.id, enable: enable)
