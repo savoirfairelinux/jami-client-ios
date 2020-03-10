@@ -439,7 +439,6 @@ class CallViewModel: Stateable, ViewModel {
             .subscribe(onCompleted: { [weak self] in
                 // switch to either spk or headset (if connected) for loud ringtone
                 // incase we were using rcv during the call
-                self?.audioService.setToRing()
                 self?.videoService.stopAudioDevice()
                 self?.log.info("Call canceled")
                 }, onError: { [weak self] error in

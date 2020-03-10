@@ -53,23 +53,6 @@ class AudioService {
             object: nil)
     }
 
-    func startAVAudioSession() {
-        do {
-            if #available(iOS 10.0, *) {
-                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [AVAudioSession.CategoryOptions.allowBluetooth, AVAudioSession.CategoryOptions.mixWithOthers])
-            } else {
-                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [AVAudioSession.CategoryOptions.allowBluetooth, AVAudioSession.CategoryOptions.mixWithOthers])
-            }
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            log.error("\(error)")
-        }
-        if #available(iOS 10.0, *) {
-            return
-        }
-        setToRing()
-    }
-
     // swiftlint:disable force_cast
     @objc private func audioRouteChangeListener(_ notification: Notification) {
         let reasonRaw = notification.userInfo![AVAudioSessionRouteChangeReasonKey] as! UInt
