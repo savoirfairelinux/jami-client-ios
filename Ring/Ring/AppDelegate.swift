@@ -114,9 +114,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
 
-        // sets output device to whatever is currently available (either spk / headset)
-        self.audioService.startAVAudioSession()
-
         // requests permission to use the camera
         // will enumerate and add devices once permission has been granted
         self.videoService.setupInputs()
@@ -507,17 +504,11 @@ extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
-        if UIApplication.shared.applicationState != .active {
-            self.audioService.startAVAudioSession()
-        }
     }
 
     @available(iOS 11.0, *)
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
-        if UIApplication.shared.applicationState != .active {
-            self.audioService.startAVAudioSession()
-        }
         DispatchQueue.main.async {
             completion()
         }

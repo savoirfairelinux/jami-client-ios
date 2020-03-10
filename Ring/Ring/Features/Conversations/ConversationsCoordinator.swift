@@ -175,6 +175,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             if account.id != call.accountId {
                 self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
             }
+
+            self.injectionBag.audioService.setToRing()
             topController.dismiss(animated: false, completion: nil)
             guard let parent = self.parentCoordinator as? AppCoordinator else {return}
             parent.openConversation(participantID: call.participantUri)
