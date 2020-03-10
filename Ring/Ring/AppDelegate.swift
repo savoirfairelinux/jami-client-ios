@@ -179,7 +179,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             // reimit new call signal to show incoming call alert
             self.callService.checkForIncomingCall()
         }, onError: { _ in
-            self.appCoordinator.start()
+            self.appCoordinator.showInitialLoading()
             let time = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: time) {
                 self.appCoordinator.showDatabaseError()

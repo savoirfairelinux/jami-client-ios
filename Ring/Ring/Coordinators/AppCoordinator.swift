@@ -115,9 +115,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         }
     }
 
-    // MARK: - Private methods
     /// Presents the initial loading interface as the root of the navigation
-    private func showInitialLoading () {
+    func showInitialLoading () {
         let initialLoading = InitialLoadingViewController.instantiate()
         self.navigationController.setViewControllers([initialLoading], animated: true)
     }
@@ -128,6 +127,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                                                 preferredStyle: .alert)
         self.present(viewController: alertController, withStyle: .present, withAnimation: false, disposeBag: self.disposeBag)
     }
+
+    // MARK: - Private methods
 
     /// Presents the walkthrough as a popup with a fade effect
     private func showWalkthrough (animated: Bool, isAccountFirst: Bool) {

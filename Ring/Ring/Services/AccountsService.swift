@@ -139,8 +139,10 @@ class AccountsService: AccountAdapterDelegate {
             //If current account already exists in the list, move it to the first index
             if let currentAccount = currentAccount,
                 let index = self.accountList.firstIndex(of: currentAccount) {
-                self.accountList.remove(at: index)
-                self.accountList.insert(currentAccount, at: 0)
+                if index != 0 {
+                    self.accountList.remove(at: index)
+                    self.accountList.insert(currentAccount, at: 0)
+                }
             } else {
                 self.accountList.append(newAccount)
             }
