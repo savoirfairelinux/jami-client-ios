@@ -456,9 +456,6 @@ extension AppDelegate: PKPushRegistryDelegate {
     @available(iOS 11.0, *)
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
-        DispatchQueue.main.async {
-            completion()
-        }
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
