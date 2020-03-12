@@ -142,6 +142,7 @@ do
   $DAEMON_DIR/configure $RING_CONF \
                         CC="$CC $CFLAGS" \
                         CXX="$CXX $CXXFLAGS" \
+                        OBJCXX="$CXX $CXXFLAGS" \
                         LD="$LD" \
                         CFLAGS="$CFLAGS" \
                         CXXFLAGS="$CXXFLAGS" \
