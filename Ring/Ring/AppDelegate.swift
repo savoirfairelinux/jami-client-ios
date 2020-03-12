@@ -508,10 +508,12 @@ extension AppDelegate: PKPushRegistryDelegate {
 
     @available(iOS 11.0, *)
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        let content = UNMutableNotificationContent()
+        content.title = "received notification"
+        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
+        let notificationRequest = UNNotificationRequest(identifier: "", content: content, trigger: notificationTrigger)
+        UNUserNotificationCenter.current().add(notificationRequest) { (_) in}
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
-        DispatchQueue.main.async {
-            completion()
-        }
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
