@@ -180,6 +180,8 @@ class PlayerViewModel {
         return videoService.incomingVideoFrame.asObservable()
     }()
 
+    var currentTime: Int64 = 0
+
     @objc func updateTimer(timer: Timer) {
         let time = self.videoService.getPlayerPosition(playerId: self.playerId)
         if time < 0 {
@@ -187,6 +189,14 @@ class PlayerViewModel {
         }
         let progress = Float(time) / self.playerDuration.value
         self.playerPosition.onNext(progress)
+        // if new time less than previous file is finished
+        if time < currentTime {
+            pause.value = true
+            if let image = self.firstFrame {
+                self.playBackFrame.onNext(image)
+            }
+        }
+        currentTime = time
     }
 
     deinit {
