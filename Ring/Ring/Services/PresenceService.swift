@@ -35,12 +35,13 @@ class PresenceService {
         PresenceAdapter.delegate = self
     }
 
-    func subscribeBuddies(withAccount account: AccountModel,
-                          withContacts contacts: [ContactModel]) {
+    func subscribeBuddies(withAccount accountId: String,
+                          withContacts contacts: [ContactModel],
+                          subscribe: Bool) {
         for contact in contacts where !contact.banned {
-            subscribeBuddy(withAccountId: account.id,
+            subscribeBuddy(withAccountId: accountId,
                            withUri: contact.hash,
-                           withFlag: true)
+                           withFlag: subscribe)
         }
     }
 

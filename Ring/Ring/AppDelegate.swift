@@ -183,6 +183,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }).disposed(by: self.disposeBag)
 
+        self.accountService.currentWillChange
+            .subscribe(onNext: { account in
+                guard let currentAccount = account else {return}
+                self.presenceService.subscribeBuddies(withAccount: currentAccount.id, withContacts: self.contactsService.contacts.value, subscribe: false)
+            }).disposed(by: self.disposeBag)
+
         self.accountService.currentAccountChanged
             .subscribe(onNext: { account in
                 guard let currentAccount = account else {return}
@@ -199,7 +205,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func reloadDataFor(account: AccountModel) {
         self.contactsService.loadContacts(withAccount: account)
         self.contactsService.loadContactRequests(withAccount: account)
-        self.presenceService.subscribeBuddies(withAccount: account, withContacts: self.contactsService.contacts.value)
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
         self.conversationManager?
                 .prepareConversationsForAccount(accountId: account.id)
     }
