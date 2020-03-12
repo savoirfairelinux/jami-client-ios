@@ -105,6 +105,7 @@ class AccountsService: AccountAdapterDelegate {
     var accountsObservable = Variable<[AccountModel]>([AccountModel]())
 
     let currentAccountChanged = PublishSubject<AccountModel?>()
+    let currentWillChange = PublishSubject<AccountModel?>()
 
     /**
      Public shared stream forwarding the events of the responseStream.
@@ -129,6 +130,7 @@ class AccountsService: AccountAdapterDelegate {
         }
 
         set {
+            currentWillChange.onNext(currentAccount)
             //Get the current account from account list if already exists
             let currentAccount = self.accountList.filter({ account in
                 return account == newValue
