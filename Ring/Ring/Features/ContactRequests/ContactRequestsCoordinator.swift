@@ -48,6 +48,7 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive, Conversation
         self.callbackPlaceCall()
         self.injectionBag.accountService
             .currentAccountChanged
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[unowned self] _ in
                 self.navigationViewController.viewModel =
                     ContactRequestTabBarItem(with: self.injectionBag)

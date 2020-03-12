@@ -424,7 +424,9 @@ class AccountsService: AccountAdapterDelegate {
             } else if event.eventType == ServiceEventType.registrationStateChanged,
                 event.getEventInput(ServiceEventInput.registrationState) == Registered {
                 accountState.value = ConnectAccountState.created
-            } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||  event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth {
+            } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||
+                event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth ||
+                event.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
                 accountState.value = ConnectAccountState.error
                 newAccountId.value = ""
             }
@@ -442,10 +444,6 @@ class AccountsService: AccountAdapterDelegate {
                             } else if accountState == ConnectAccountState.error {
                                 throw AccountCreationError.wrongCredentials
                             } else if !accountId.isEmpty && accountState == ConnectAccountState.created {
-                                if try !self.dbManager.createDatabaseForAccount(accountId: accountId) {
-                                    throw AddAccountError.unknownError
-                                }
-                                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountId)
                                 self.loadAccountsFromDaemon()
                                 let account = try self.buildAccountFromDaemon(accountId: accountId)
                                 return account
@@ -763,6 +761,19 @@ class AccountsService: AccountAdapterDelegate {
         event.addEventInput(.state, value: state)
         event.addEventInput(.deviceId, value: deviceId)
         self.responseStream.onNext(event)
+    }
+
+    func receivedAccountPhoto(for account: String, photo: String) {
+        do {
+            if try !self.dbManager.createDatabaseForAccount(accountId: account) {
+                return
+            }
+        } catch {
+            return
+        }
+        let accountDetails = getAccountDetails(fromAccountId: account)
+        let displayName: String? =  accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName))
+        _ = self.dbManager.saveAccountProfile(alias: displayName, photo: photo, accountId: account)
     }
 
     // MARK: Push Notifications

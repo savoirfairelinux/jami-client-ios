@@ -55,7 +55,9 @@ class MeCoordinator: Coordinator, StateableResponsive {
         self.injectionBag = injectionBag
         self.presentingVC[VCType.blockList.rawValue] = false
 
-        self.stateSubject.subscribe(onNext: { [unowned self] (state) in
+        self.stateSubject
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] (state) in
             guard let state = state as? MeState else { return }
             switch state {
             case .meDetail:

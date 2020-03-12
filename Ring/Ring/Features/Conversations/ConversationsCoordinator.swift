@@ -52,7 +52,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.callsProvider = injectionBag.callsProvider
         self.addLockFlags()
 
-        self.stateSubject.subscribe(onNext: { [unowned self] (state) in
+        self.stateSubject
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] (state) in
             guard let state = state as? ConversationState else { return }
             switch state {
             case .createNewAccount:
@@ -82,6 +84,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         NotificationCenter.default.addObserver(self, selector: #selector(self.answerIncomingCall(_:)), name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue), object: nil)
 
         self.accountService.currentAccountChanged
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[unowned self] _ in
                 self.navigationViewController.viewModel =
                     ChatTabBarItemViewModel(with: self.injectionBag)

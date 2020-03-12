@@ -62,9 +62,17 @@ class EditProfileViewModel {
     lazy var profileName: Observable<String?> = { [unowned self] in
         return profileForCurrentAccount.share()
             .map({ profile in
-                if let name = profile.alias {
+                if let name = profile.alias, !name.isEmpty {
                     self.name = name
                     return name
+                }
+                if let account = self.accountService.currentAccount {
+                    let details = self.accountService.getAccountDetails(fromAccountId: account.id)
+                    let name = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .displayName))
+                    if !name.isEmpty {
+                        self.name = name
+                        return name
+                    }
                 }
                 return ""
             })
@@ -95,6 +103,10 @@ class EditProfileViewModel {
             let imageData = image.pngData() {
             photo = imageData.base64EncodedString()
         }
+        let details = self.accountService.getAccountDetails(fromAccountId: account.id)
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName), withValue: self.name)
+        account.details = details
+        self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
         self.profileService.updateAccountProfile(accountId: account.id,
                                            alias: self.name,
                                            photo: photo)
