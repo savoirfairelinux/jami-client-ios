@@ -442,10 +442,6 @@ class AccountsService: AccountAdapterDelegate {
                             } else if accountState == ConnectAccountState.error {
                                 throw AccountCreationError.wrongCredentials
                             } else if !accountId.isEmpty && accountState == ConnectAccountState.created {
-                                if try !self.dbManager.createDatabaseForAccount(accountId: accountId) {
-                                    throw AddAccountError.unknownError
-                                }
-                                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountId)
                                 self.loadAccountsFromDaemon()
                                 let account = try self.buildAccountFromDaemon(accountId: accountId)
                                 return account
@@ -763,6 +759,17 @@ class AccountsService: AccountAdapterDelegate {
         event.addEventInput(.state, value: state)
         event.addEventInput(.deviceId, value: deviceId)
         self.responseStream.onNext(event)
+    }
+
+    func receivedAccountPhoto(for account: String, photo: String) {
+        do {
+            if try !self.dbManager.createDatabaseForAccount(accountId: account) {
+                return
+            }
+        } catch {
+            return
+        }
+        _ = self.dbManager.saveAccountProfile(alias: nil, photo: photo, accountId: account)
     }
 
     // MARK: Push Notifications

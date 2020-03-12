@@ -89,6 +89,15 @@ static id <AccountAdapterDelegate> _delegate;
             [AccountAdapter.delegate deviceRevocationEndedFor: accountId state: state deviceId: deviceId];
         }
     }));
+
+    confHandlers
+    .insert(exportable_callback<ConfigurationSignal::AccountAvatarReceived>([&](const std::string& account_id, const std::string& photo) {
+        if (AccountAdapter.delegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSString* avatarPhoto = [NSString stringWithUTF8String:photo.c_str()];
+            [AccountAdapter.delegate receivedAccountPhotoFor:accountId photo:avatarPhoto];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 #pragma mark -
