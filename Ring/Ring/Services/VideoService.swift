@@ -465,7 +465,7 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?) {
-        if let codecName = codec {
+        if let codecName = codec, !codecName.isEmpty {
             self.codec = VideoCodecs(rawValue: codecName) ?? VideoCodecs.H264
         }
         if !supportHardware() && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
