@@ -127,9 +127,7 @@ static id <VideoAdapterDelegate> _delegate;
                                                                                bool is_mixer) {
         if(VideoAdapter.delegate) {
             NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];
-            // if we do not have call info it is mean we decoding file for media player
-            // for file we using VP8 format
-            NSString* codecName = @"VP8";
+            NSString* codecName = @"";
             std::map<std::string, std::string> callDetails = getCallDetails(renderer_id);
             if (callDetails.find("VIDEO_CODEC") != callDetails.end()) {
                 codecName = [NSString stringWithUTF8String: callDetails["VIDEO_CODEC"].c_str()];
