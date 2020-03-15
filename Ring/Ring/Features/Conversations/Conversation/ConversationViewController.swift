@@ -625,6 +625,7 @@ class ConversationViewController: UIViewController,
         super.viewWillDisappear(animated)
         self.viewModel.setIsComposingMsg(isComposing: false)
         self.textFieldShouldEndEditing = true
+        self.viewModel.setMessagesAsRead()
     }
 
     func setupTableView() {
