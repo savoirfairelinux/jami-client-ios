@@ -464,16 +464,17 @@ extension VideoService: VideoAdapterDelegate {
         return videoAdapter.getEncodingAccelerated()
     }
 
-    func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?) {
-        if let codecName = codec, !codecName.isEmpty {
-            self.codec = VideoCodecs(rawValue: codecName) ?? VideoCodecs.H264
+    func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codecId: String) {
+        if !codecId.isEmpty {
+            self.codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.H264
         }
         if !supportHardware() && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
             self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
             self.videoAdapter.switchInput("camera://" + camera.namePortrait, forCall: rendererId)
         }
         self.log.debug("Decoding started...")
-        videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height, withHardwareSupport: supportHardware())
+        let withHardware = !codecId.isEmpty ? supportHardware() : false
+        videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height, withHardwareSupport: withHardware)
     }
 
     func supportHardware() -> Bool {
