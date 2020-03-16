@@ -100,13 +100,13 @@
 "linkToAccount.explanationPinMessage" = "Per generare il codice PIN, accedere alle impostazioni di gestione dell'account sul dispositivo che contiene l'account che si desidera utilizzare. Nelle impostazioni del dispositivo seleziona \"Collega un altro dispositivo a questo account\". Otterrai il PIN necessario per completare questo modulo. Il PIN è valido solo per 10 minuti.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Registrati";
 "linkToAccountManager.passwordPlaceholder" = "Password";
 "linkToAccountManager.passwordLabel" = "Inserire la password";
 "linkToAccountManager.usernamePlaceholder" = "Utente";
 "linkToAccountManager.usernameLabel" = "Inserire il nome utente";
 "linkToAccountManager.accountManagerPlaceholder" = "Gestore dell'account";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerLabel" = "Inserisci l'URI dell'account manager";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Impossibile trovare l'account";
@@ -131,7 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Cancella conversazione";
 "alerts.noMediaPermissionsTitle" = "Non è stata concessa l'autorizzazione ai media";
 "alerts.noLibraryPermissionsTitle" = "Accesso alle foto non concesso";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.errorWrongCredentials" = "Impossibile connettersi al gestore account fornito. Controlla le tue credenziali";
 
 //Actions
 "actions.blockAction" = "Blocca";
