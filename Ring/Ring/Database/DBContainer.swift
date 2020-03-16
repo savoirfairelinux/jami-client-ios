@@ -61,6 +61,7 @@ final class DBContainer {
     }
 
     func removeDBForAccount(account: String) {
+        connections[account] = nil
         self.removeDBNamed(dbName: "\(account).db")
     }
 
