@@ -309,6 +309,7 @@ class VideoService: FrameExtractorDelegate {
     private var hardwareAccelerated = true
     private var hardwareAccelerationEnabled = true
     var angle: Int = 0
+    var switchInputRequested: Bool = false
 
     fileprivate let disposeBag = DisposeBag()
 
@@ -471,6 +472,7 @@ extension VideoService: VideoAdapterDelegate {
         if !supportHardware() && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
             self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
             self.videoAdapter.switchInput("camera://" + camera.namePortrait, forCall: rendererId)
+            switchInputRequested = true
         }
         self.log.debug("Decoding started...")
         let withHardware = !codecId.isEmpty ? supportHardware() : false
@@ -489,6 +491,11 @@ extension VideoService: VideoAdapterDelegate {
 
     func startCapture(withDevice device: String) {
         self.log.debug("Capture started...")
+        if switchInputRequested {
+            switchInputRequested = false
+            self.camera.startCapturing()
+            return
+        }
         self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
         self.codec = self.hardwareAccelerated ? VideoCodecs.H264 : VideoCodecs.VP8
         if hardwareAccelerationEnabled {
