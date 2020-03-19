@@ -203,6 +203,15 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         })
     }
 
+    deinit {
+        print("***callviewcontroller deinit")
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        print("***callviewcontroller init")
+    }
+
     func setUpCallButtons() {
         self.mainView.bringSubviewToFront(self.buttonsContainer)
         self.buttonsContainer.viewModel = self.viewModel.containerViewModel
