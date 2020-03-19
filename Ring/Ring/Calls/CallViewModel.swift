@@ -79,9 +79,9 @@ class CallViewModel: Stateable, ViewModel {
                 return
             }
             self.callService.currentConferenceEvent
-                .asObservable().filter { conference-> Bool in
-                    return conference.calls.contains(self.call?.callId ?? "") ||
-                        conference.conferenceID == self.rendererId
+                .asObservable().filter { [weak self] conference-> Bool in
+                    return conference.calls.contains(self?.call?.callId ?? "") ||
+                        conference.conferenceID == self?.rendererId
             }
             .subscribe(onNext: { [weak self] conf in
                 if conf.conferenceID.isEmpty {
@@ -137,8 +137,9 @@ class CallViewModel: Stateable, ViewModel {
 
     lazy var incomingFrame: Observable<UIImage?> = {
         return videoService.incomingVideoFrame.asObservable()
-            .filter({ renderer -> Bool in
-                (renderer?.rendererId == self.rendererId)
+            .filter({[weak self] renderer -> Bool in
+                (renderer?.rendererId == self?
+                    .rendererId)
             })
             .map({ renderer in
                 return renderer?.data
@@ -211,9 +212,9 @@ class CallViewModel: Stateable, ViewModel {
                 .filter { call in
                     call.state == .over
             })
-            .map({ (elapsed) -> String in
+            .map({ [weak self] (elapsed) -> String in
                 var time = elapsed
-                if let startTime = self.call?.dateReceived {
+                if let startTime = self?.call?.dateReceived {
                     time = Int(Date().timeIntervalSince1970 - startTime.timeIntervalSince1970)
                 }
                 return CallViewModel.formattedDurationFrom(interval: time)
