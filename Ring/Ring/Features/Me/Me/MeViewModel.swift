@@ -42,6 +42,8 @@ enum SettingsSection: SectionModelType {
         case shareAccountDetails
         case sectionHeader(title: String)
         case ordinary(label: String)
+        case jamiID(label: String)
+        case jamiUserName(label: String)
         case notifications
         case sipUserName(value: String)
         case sipPassword(value: String)
@@ -117,9 +119,9 @@ class MeViewModel: ViewModel, Stateable {
         return Observable
             .combineLatest(userName.startWith(""), ringId.startWith("")) { (name, ringID) in
                 var items: [SettingsSection.SectionRow] =  [.sectionHeader(title: L10n.AccountPage.credentialsHeader),
-                                                        .ordinary(label: "ID: " + ringID)]
+                                                        .jamiID(label: ringID)]
             if !name.isEmpty {
-                items.append(.ordinary(label: L10n.AccountPage.username + " " + name))
+                items.append(.jamiUserName(label: name))
             } else {
                 items.append(.ordinary(label: L10n.AccountPage.usernameNotRegistered))
             }

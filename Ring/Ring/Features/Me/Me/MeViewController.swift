@@ -45,6 +45,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         return .default
     }
     private let sipAccountCredentialsCell = "sipAccountCredentialsCell"
+    private let jamiIDCell = "jamiIDCell"
+    private let jamiUserNameCell = "jamiUserNameCell"
     private let accountStateCell = "accountStateCell"
 
     // MARK: - functions
@@ -344,7 +346,14 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         self?.confirmRemoveAccountAlert()
                     }).disposed(by: cell.disposeBag)
                     return cell
-
+                case .jamiUserName(let label):
+                    return self.configureCellWithEnableTextCopy(text: L10n.AccountPage.username,
+                                                                secondaryText: label,
+                                                                style: .callout)
+                case .jamiID(let label):
+                    return self.configureCellWithEnableTextCopy(text: "Jami ID",
+                                                                secondaryText: label,
+                                                                style: .footnote)
                 case .ordinary(let label):
                     let cell = UITableViewCell()
                     cell.textLabel?.text = label
@@ -456,12 +465,47 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: disposeBag)
     }
 
+    func configureCellWithEnableTextCopy(text: String, secondaryText: String, style: UIFont.TextStyle) -> UITableViewCell {
+        let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
+        cell.selectionStyle = .none
+        cell.textLabel?.text = text
+        cell.textLabel?.sizeToFit()
+        cell.detailTextLabel?.text = secondaryText
+        cell.detailTextLabel?.lineBreakMode = .byCharWrapping
+        cell.detailTextLabel?.numberOfLines = 0
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: style)
+        cell.detailTextLabel?.sizeToFit()
+        cell.detailTextLabel?.textColor = UIColor.clear
+        cell.sizeToFit()
+        cell.layoutIfNeeded()
+        let textView = CustomActionTextView()
+        textView.text = secondaryText
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.textContainer.lineBreakMode = .byCharWrapping
+        textView.tintColor = .clear
+        textView.textColor = UIColor(red: 85, green: 85, blue: 85, alpha: 1.0)
+        textView.isScrollEnabled = true
+        textView.font = UIFont.preferredFont(forTextStyle: style)
+        textView.sizeToFit()
+        textView.actionsToRemove = [.paste, .cut, .lookUp, .delete]
+        textView.inputView = UIView(frame: CGRect.zero)
+        cell.contentView.addSubview(textView)
+        textView.topAnchor.constraint(equalTo: cell.detailTextLabel!.topAnchor, constant: 0).isActive = true
+        textView.leadingAnchor.constraint(equalTo: cell.detailTextLabel!.leadingAnchor, constant: 0).isActive = true
+        textView.bottomAnchor.constraint(equalTo: cell.detailTextLabel!.bottomAnchor, constant: 0).isActive = true
+        textView.trailingAnchor.constraint(equalTo: cell.detailTextLabel!.trailingAnchor, constant: 0).isActive = true
+        textView.actionsToRemove = [.paste, .cut, .lookUp, .delete]
+        textView.inputView = UIView(frame: CGRect.zero)
+        cell.sizeToFit()
+        return cell
+    }
+
     func getSettingsFont() -> UIFont {
         return UIFont.systemFont(ofSize: 18, weight: .light)
     }
 
-    func configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
-                                     value: String) -> UITableViewCell {
+    func  configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
+                                      value: String) -> UITableViewCell {
         let cell = DisposableCell(style: .value1, reuseIdentifier: sipAccountCredentialsCell)
         cell.selectionStyle = .none
         let text = UITextField()

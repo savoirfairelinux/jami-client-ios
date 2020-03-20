@@ -118,7 +118,7 @@ internal enum L10n {
     internal static let shareAccountDetails = L10n.tr("Localizable", "accountPage.shareAccountDetails")
     /// UNBLOCK
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact")
-    /// username:
+    /// Username
     internal static let username = L10n.tr("Localizable", "accountPage.username")
     /// username: not registered
     internal static let usernameNotRegistered = L10n.tr("Localizable", "accountPage.usernameNotRegistered")
