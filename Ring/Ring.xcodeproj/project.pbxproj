@@ -151,6 +151,7 @@
 		0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */; };
 		0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
+		0EC7808F2424FDAE000A04C5 /* CustomActionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */; };
 		0ECB4E2822B2D4840097CD7B /* CallsProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */; };
 		0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */; };
 		0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
@@ -488,6 +489,7 @@
 		0EB1A5CE1F8EBE03009923E2 /* DeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceCell.xib; sourceTree = "<group>"; };
 		0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
 		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
+		0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionTextView.swift; sourceTree = "<group>"; };
 		0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsProviderDelegate.swift; sourceTree = "<group>"; };
 		0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
@@ -934,6 +936,7 @@
 				1A2041901F1FD46200C08435 /* DesignableView.swift */,
 				0E438A99204F47E700402900 /* SettingsTableView.swift */,
 				0E5A668222F0B1F100AA6820 /* ProgressView.swift */,
+				0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2082,6 +2085,7 @@
 				0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */,
 				4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */,
 				0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */,
+				0EC7808F2424FDAE000A04C5 /* CustomActionTextView.swift in Sources */,
 				56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */,
 				1A5DC0281F3564AA0075E8EF /* MessageModel.swift in Sources */,
 				0E3697A1203235EA009A68CA /* BannedContactItem.swift in Sources */,

@@ -45,6 +45,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         return .default
     }
     private let sipAccountCredentialsCell = "sipAccountCredentialsCell"
+    private let jamiIDCell = "jamiIDCell"
+    private let jamiUserNameCell = "jamiUserNameCell"
     private let accountStateCell = "accountStateCell"
 
     // MARK: - functions
@@ -344,7 +346,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         self?.confirmRemoveAccountAlert()
                     }).disposed(by: cell.disposeBag)
                     return cell
-
+                case .jamiUserName(let label):
+                    return self.configureCellWithEnableTextCopy(text: L10n.AccountPage.username, secondaryText: label)
+                case .jamiID(let label):
+                    return self.configureCellWithEnableTextCopy(text: "ID:", secondaryText: label)
                 case .ordinary(let label):
                     let cell = UITableViewCell()
                     cell.textLabel?.text = label
@@ -456,12 +461,49 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: disposeBag)
     }
 
+    func configureCellWithEnableTextCopy(text: String, secondaryText: String) -> UITableViewCell {
+        let cell = DisposableCell(style: .value1, reuseIdentifier: self.jamiIDCell)
+        cell.selectionStyle = .none
+        cell.textLabel?.text = text
+        cell.textLabel?.sizeToFit()
+        cell.detailTextLabel?.text = secondaryText
+        cell.detailTextLabel?.lineBreakMode = .byCharWrapping
+        cell.detailTextLabel?.numberOfLines = 0
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        cell.detailTextLabel?.sizeToFit()
+        cell.detailTextLabel?.textColor = UIColor.clear
+        cell.sizeToFit()
+        cell.layoutIfNeeded()
+        let secondaryFrame = cell.detailTextLabel?.frame
+        let secondaryOrigin = secondaryFrame?.origin.x ?? 0
+        let origin = 20 + (cell.textLabel?.frame.width ?? 0)
+        let originX = min(secondaryOrigin, origin)
+        let originY: CGFloat = secondaryFrame?.origin.y ?? 0
+        let height: CGFloat = secondaryFrame?.height ?? cell.frame.height
+        let frame = CGRect(x: originX, y: originY,
+                           width: self.view.frame.width - originX,
+                           height: height)
+        let textView = CustomActionTextView()
+        textView.frame = frame
+        textView.textContainer.lineBreakMode = .byCharWrapping
+        textView.tintColor = .clear
+        textView.text = secondaryText
+        textView.isScrollEnabled = false
+        textView.font = UIFont.preferredFont(forTextStyle: .callout)
+        textView.sizeToFit()
+        textView.actionsToRemove = [.paste, .cut, .lookUp, .delete]
+        textView.inputView = UIView(frame: CGRect.zero)
+        cell.contentView.addSubview(textView)
+        cell.sizeToFit()
+        return cell
+    }
+
     func getSettingsFont() -> UIFont {
         return UIFont.systemFont(ofSize: 18, weight: .light)
     }
 
-    func configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
-                                     value: String) -> UITableViewCell {
+    func  configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
+                                      value: String) -> UITableViewCell {
         let cell = DisposableCell(style: .value1, reuseIdentifier: sipAccountCredentialsCell)
         cell.selectionStyle = .none
         let text = UITextField()
