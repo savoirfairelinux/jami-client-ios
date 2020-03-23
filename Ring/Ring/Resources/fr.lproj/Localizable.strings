@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";
 "accountPage.settingsHeader" = "Paramètres";
-"accountPage.username" = "nom d'utilisateur :";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
 "accountPage.credentialsHeader" = "Détails du compte";
 "accountPage.enableProxy" = "Utiliser un nœud délégataire";

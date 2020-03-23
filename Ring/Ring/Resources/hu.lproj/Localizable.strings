@@ -32,10 +32,10 @@
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Keresési eredmény";
-"smartlist.conversations" = "Társalgások";
+"smartlist.conversations" = "Beszélgetések";
 "smartlist.searching" = "Keresés…";
 "smartlist.noResults" = "Nincs eredmény";
-"smartlist.noConversation" = "Nincs társalgás";
+"smartlist.noConversation" = "Beszélgetés nem található";
 "smartlist.searchBarPlaceholder" = "Név megadása…";
 "smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
 "smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
@@ -122,13 +122,13 @@
 "alerts.accountLinkedTitle" = "Fiók összekapcsolása…";
 "alerts.dbFailedTitle" = "Hiba történt a Jami elindításakor";
 "alerts.dbFailedMessage" = "Kérjük, hogy zárja be az alkalmazást és próbálja meg újra megnyitni";
-"alerts.confirmBlockContact" = "Biztos, hogy letiltja ezt a kapcsolatot? A társalgás előzményei ezzel a kapcsolattal véglegesen törlődni fognak.";
+"alerts.confirmBlockContact" = "Biztos, hogy letiltja ezt a kapcsolatot? A beszélgetés előzményei a kapcsolattal együtt véglegesen törlődni fognak.";
 "alerts.confirmBlockContactTitle" = "Kapcsolat letiltása";
-"alerts.confirmDeleteConversation" = "Biztosan végleg akarja törölni ezt a társalgást?";
-"alerts.confirmDeleteConversationFromContact" = "Biztos, hogy törli akarja a társalgást ezzel a kapcsolattal?";
-"alerts.confirmDeleteConversationTitle" = "Társalgás törlése";
-"alerts.confirmClearConversation" = "Biztos, hogy törli akarja a társalgást ezzel a kapcsolattal?";
-"alerts.confirmClearConversationTitle" = "Társalgás törlése";
+"alerts.confirmDeleteConversation" = "Biztosan végleg törölni szeretné ezt a beszélgetést?";
+"alerts.confirmDeleteConversationFromContact" = "Biztos, hogy törli akarja a beszélgetést ezzel a kapcsolattal?";
+"alerts.confirmDeleteConversationTitle" = "Beszélgetés törlése";
+"alerts.confirmClearConversation" = "Biztos, hogy törli akarja a beszélgetést ezzel a kapcsolattal?";
+"alerts.confirmClearConversationTitle" = "Beszélgetés törlése";
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "A fotókönyvtárhoz való hozzáférést nem adták meg";
 "alerts.errorWrongCredentials" = "Nem lehet csatlakozni a megadott fiókkezelőhöz. Kérjük, ellenőrizze hitelesítő adatait.";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";
 "accountPage.settingsHeader" = "Beállítások";
-"accountPage.username" = "felhasználónév:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "felhasználónév: nincs bejegyzett";
 "accountPage.credentialsHeader" = "Fiók részletek";
 "accountPage.enableProxy" = "Meghatalmazott engedélyezése";
@@ -190,7 +190,7 @@
 "accountPage.removeAccountButton" = "Eltávolítás";
 "accountPage.shareAccountDetails" = "Fiók részletek megosztása";
 "accountPage.contactMeOnJamiTitle" = "Lépjen kapcsolatba velem a Jami-n!";
-"accountPage.contactMeOnJamiContant" = "Lépjen kapcsolatba velem „%s” a Jami elosztott közlés emelvény használatával: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Adj hozzá a Jami decentrális messenger-en az alábbi kóddal:  \n%s\nhttps://jami.net";
 
 //Account
 "account.sipUsername" = "Felhasználónév";
@@ -228,7 +228,7 @@
 "contactPage.sendMessage" = "Üzenet küldése";
 "contactPage.clearConversation" = "Csevegések törlése";
 "contactPage.blockContact" = "Kapcsolat letiltása";
-"contactPage.removeConversation" = "Társalgás törlése";
+"contactPage.removeConversation" = "Beszélgetés törlése";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Szignál…";

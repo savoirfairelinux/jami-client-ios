@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Zariadenia";
 "accountPage.settingsHeader" = "Nastavenia";
-"accountPage.username" = "používateľské meno:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "používateľské meno: nezaregistrované";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Povoliť proxy";

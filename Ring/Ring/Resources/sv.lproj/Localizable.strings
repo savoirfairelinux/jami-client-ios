@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
 "accountPage.settingsHeader" = "Inställningar";
-"accountPage.username" = "Användarnamn:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "Användarnamn: Inte registrerat";
 "accountPage.credentialsHeader" = "Kontoinformation";
 "accountPage.enableProxy" = "Aktivera proxy";

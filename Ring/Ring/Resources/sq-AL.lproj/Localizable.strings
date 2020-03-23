@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";
 "accountPage.settingsHeader" = "Rregullime";
-"accountPage.username" = "emër përdoruesi:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "emër përdoruesi: jo i regjistruar";
 "accountPage.credentialsHeader" = "Hollësi Llogarie";
 "accountPage.enableProxy" = "Aktivizo Ndërmjetës";

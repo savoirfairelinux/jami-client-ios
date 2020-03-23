@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "ਡੀਵਾਈਸ";
 "accountPage.settingsHeader" = "ਸੈਟਿੰਗਾਂ";
-"accountPage.username" = "username:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";

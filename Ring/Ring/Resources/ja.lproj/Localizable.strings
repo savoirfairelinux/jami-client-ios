@@ -26,8 +26,8 @@
 "global.versionName" = "Free as in Freedom";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "誤ったQRコード";
+"scan.search" = "検索中…";
 
 // Smartlist
 "smartlist.yesterday" = "昨日";
@@ -36,7 +36,7 @@
 "smartlist.searching" = "検索中...";
 "smartlist.noResults" = "検索結果はありません";
 "smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.searchBarPlaceholder" = "名前を入力...";
 "smartlist.noNetworkConnectivity" = "ネットワーク接続がありません";
 "smartlist.cellularAccess" = "設定から写真へのアクセスが許可されていることを確認してください";
 "smartlist.accountsTitle" = "アカウント";
@@ -45,7 +45,7 @@
 "smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
-"conversation.messagePlaceholder" = "Type your message...";
+"conversation.messagePlaceholder" = "メッセージを入力...";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
@@ -53,7 +53,7 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
+"welcome.title" = "Jamiへようこそ！";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "このデバイスをアカウントへリンク";
 "welcome.createAccount" = "Jamiアカウントを作成";
@@ -62,14 +62,14 @@
 "createProfile.skipCreateProfile" = "スキップ";
 "createProfile.profileCreated" = "次へ";
 "createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNameLabel" = "表示名を入力";
+"createProfile.enterNamePlaceholder" = "名前を入力";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your account";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.chooseStrongPassword" = "あなたのJamiアカウントを守るために強固なパスワードを設定してください。また、このパスワードを忘れないでください。";
 "createAccount.enterNewUsernamePlaceholder" = "ユーザー名";
 "createAccount.newPasswordPlaceholder" = "パスワード";
 "createAccount.repeatPasswordPlaceholder" = "パスワードの再入力";
@@ -83,8 +83,8 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.EnableNotifications" = "通知";
+"createAccount.Recommended" = "(推奨)";
 "createAccount.UsernameNotRegisteredTitle" = "ネットワークエラー";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
@@ -97,14 +97,14 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "パスワードを入力してください";
 "linkToAccount.pinLabel" = "PINを入力してください";
-"linkToAccount.explanationPinMessage" = "PINコードを生成するには、使用するアカウントにログインした端末のアカウント管理設定に移動します。端末の設定で「このアカウントに別の端末を紐づける」を選択します。このフォームを完了するために必要なPINを取得します。 PINは10分間のみ有効です。";
+"linkToAccount.explanationPinMessage" = "PINコードを生成するには、使用するアカウントにログインしたデバイスのアカウント管理設定に移動します。デバイスの設定で「このアカウントに別のデバイスを紐づける」を選択します。このフォームを完了するために必要なPINを取得します。 PINは10分間のみ有効です。";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "サインイン";
 "linkToAccountManager.passwordPlaceholder" = "パスワード";
 "linkToAccountManager.passwordLabel" = "パスワードを入力してください";
 "linkToAccountManager.usernamePlaceholder" = "ユーザー名";
-"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.usernameLabel" = "ユーザー名を入力してください";
 "linkToAccountManager.accountManagerPlaceholder" = "Account manager";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
@@ -123,7 +123,7 @@
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "アプリケーションを終了し、起動し直してください";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmBlockContactTitle" = "ブロックした連絡先";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete Conversation";
@@ -148,42 +148,42 @@
 "calls.unknown" = "不明";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
-"calls.searching" = "Searching…";
+"calls.connecting" = "接続中…";
+"calls.searching" = "検索中…";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "通話終了";
 
 //Account Page
-"accountPage.devicesListHeader" = "端末";
+"accountPage.devicesListHeader" = "デバイス";
 "accountPage.settingsHeader" = "設定";
-"accountPage.username" = "username:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "プロクシを有効";
+"accountPage.enableProxy" = "プロキシを有効にする";
 "accountPage.blockedContacts" = "Block List";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "プロクシを有効";
+"accountPage.enableProxy" = "プロキシを有効にする";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "Save";
-"accountPage.proxyPaceholder" = "Proxy address";
-"accountPage.enableNotifications" = "Enable Notifications";
+"accountPage.proxyPaceholder" = "プロキシアドレス";
+"accountPage.enableNotifications" = "通知を有効化";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.revokeDeviceTitle" = "デバイスを取り消し";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.revokeDevicePlaceholder" = "パスワードを入力";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationTryAgain" = "もう一度やり直す";
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "名前";
-"accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.linkDeviceTitle" = "別のデバイスをリンク";
 "accountPage.other" = "その他";
 "accountPage.removeAccountTitle" = "Remove account";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
@@ -193,18 +193,18 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "ユーザー名";
 "account.sipPassword" = "パスワード";
 "account.sipServer" = "SIP Server";
 "account.port" = "ポート番号";
 "account.proxyServer" = "プロキシ";
 "account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
+"account.usernameLabel" = "ユーザー名を入力してください";
 "account.passwordLabel" = "パスワードを入力してください";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.enableAccount" = "アカウントを有効化";
 "account.statusOnline" = "オンライン";
 "account.statusOffline" = "オフライン";
 "account.statusConnecting" = "接続中";
@@ -212,10 +212,10 @@
 "account.statusConnectionerror" = "Connection Error";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "ブロックした連絡先はありません";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "新しいデバイスをリンク";
 "linkDevice.passwordError" = "入力したパスワードではこのアカウントのロックを解除できません";
 "linkDevice.networkError" = "エクスポート中にネットワークエラーが発生しました";
 "linkDevice.defaultError" = "エクスポート中にエラーが発生しました";
@@ -224,34 +224,34 @@
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.startVideoCall" = "ビデオ通話を開始";
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.blockContact" = "ブロックした連絡先";
+"contactPage.removeConversation" = "会話を削除";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "初期化中…";
 "dataTransfer.readableStatusError" = "エラー";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "拒否";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "キャンセルしました";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "受け入れ";
 "dataTransfer.readableStatusCancel" = "キャンセル";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
+"notifications.incomingCall" = "着信";
 "notifications.missedCall" = "Missed Call";
 "notifications.acceptCall" = "ACCEPT";
 "notifications.refuseCall" = "REFUSE";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "新しいファイル";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "拒否";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "キャンセルしました";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "受け入れ";
 "dataTransfer.readableStatusCancel" = "キャンセル";
@@ -262,7 +262,7 @@
 //Generated Message
 "generatedMessage.contactAdded" = "連絡先を追加しました";
 "generatedMessage.invitationReceived" = "招待を受信しました";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.invitationAccepted" = "招待を受け入れました";
 "generatedMessage.outgoingCall" = "発信";
 "generatedMessage.incomingCall" = "着信";
 "generatedMessage.missedOutgoingCall" = "不在発信";

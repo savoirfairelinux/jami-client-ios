@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";
 "accountPage.settingsHeader" = "Einstellungen";
-"accountPage.username" = "Benutzername:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "Benutzername: Nicht registriert";
 "accountPage.credentialsHeader" = "Kontodetails";
 "accountPage.enableProxy" = "Proxy aktivieren";

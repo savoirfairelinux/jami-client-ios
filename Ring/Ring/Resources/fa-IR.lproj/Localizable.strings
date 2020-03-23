@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
 "accountPage.settingsHeader" = "تنظیمات";
-"accountPage.username" = "نام کاربری:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "نام کاربری: ثبت نشده";
 "accountPage.credentialsHeader" = "جزییات حساب کاربری";
 "accountPage.enableProxy" = "فعال سازی پروکسی";

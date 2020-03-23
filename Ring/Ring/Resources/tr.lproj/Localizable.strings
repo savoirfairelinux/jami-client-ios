@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";
 "accountPage.settingsHeader" = "Ayarlar";
-"accountPage.username" = "kullanıcı adı:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "kullanıcı adı: kayıtlı değil";
 "accountPage.credentialsHeader" = "Hesap ayrıntıları";
 "accountPage.enableProxy" = "Vekil sunucuyu etkinleştir";

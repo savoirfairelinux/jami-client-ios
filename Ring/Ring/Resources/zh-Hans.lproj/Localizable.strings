@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "裝置";
 "accountPage.settingsHeader" = "設定";
-"accountPage.username" = "使用者名稱：";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "使用者名稱：未註冊";
 "accountPage.credentialsHeader" = "帳號詳細資訊";
 "accountPage.enableProxy" = "啟用代理伺服器";

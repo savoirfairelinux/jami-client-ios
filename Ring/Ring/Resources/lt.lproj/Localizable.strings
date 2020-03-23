@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";
 "accountPage.settingsHeader" = "Nustatymai";
-"accountPage.username" = "naudotojo vardas:";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "naudotojo vardas: neregistruotas";
 "accountPage.credentialsHeader" = "Išsamesnė paskyros informacija";
 "accountPage.enableProxy" = "Įjungti įgaliotąjį serverį";
