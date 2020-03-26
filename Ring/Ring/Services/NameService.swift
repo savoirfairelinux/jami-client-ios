@@ -109,14 +109,17 @@ class NameService: NameRegistrationAdapterDelegate {
     func registerNameObservable(withAccount account: String, password: String, name: String)-> Observable<Bool> {
         let registerName: Single<Bool> =
             Single.create(subscribe: { (single) -> Disposable in
-        self.nameRegistrationAdapter
-            .registerName(withAccount: account,
-                          password: password,
-                          name: name)
-            single(.success(true))
-            return Disposables.create {
-            }
-        })
+                let dispatchQueue = DispatchQueue(label: "nameRegistration", qos: .background)
+                dispatchQueue.async {[unowned self] in
+                    self.nameRegistrationAdapter
+                        .registerName(withAccount: account,
+                                      password: password,
+                                      name: name)
+                    single(.success(true))
+                }
+                return Disposables.create {
+                }
+            })
 
         let filteredDaemonSignals = self.sharedRegistrationStatus
             .filter { (serviceEvent) -> Bool in

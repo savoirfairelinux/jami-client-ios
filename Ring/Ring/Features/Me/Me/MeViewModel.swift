@@ -22,6 +22,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import RxDataSources
 
 // swiftlint:disable file_length
@@ -86,6 +87,8 @@ enum ActionsState {
     case deviceRevokationError(deviceId: String, errorMessage: String)
     case showLoading
     case hideLoading
+    case usernameRegistered
+    case usernameRegistrationFailed(errorMessage: String)
     case noAction
 }
 
@@ -120,11 +123,7 @@ class MeViewModel: ViewModel, Stateable {
             .combineLatest(userName.startWith(""), ringId.startWith("")) { (name, ringID) in
                 var items: [SettingsSection.SectionRow] =  [.sectionHeader(title: L10n.AccountPage.credentialsHeader),
                                                         .jamiID(label: ringID)]
-            if !name.isEmpty {
                 items.append(.jamiUserName(label: name))
-            } else {
-                items.append(.ordinary(label: L10n.AccountPage.usernameNotRegistered))
-            }
                 items.append(.shareAccountDetails)
             return SettingsSection
                 .credentials(items: items)
@@ -215,10 +214,10 @@ class MeViewModel: ViewModel, Stateable {
                                                            .removeAccount]))
     }()
 
-    lazy var havePassord: Bool = {
+    func havePassord() -> Bool {
         guard let currentAccount = self.accountService.currentAccount else {return true}
         return AccountModelHelper(withAccount: currentAccount).havePassword
-    }()
+    }
 
     lazy var jamiSettings: Observable<[SettingsSection]> = {
         Observable.combineLatest(accountCredentials,
@@ -388,6 +387,53 @@ class MeViewModel: ViewModel, Stateable {
 
     func showBlockedContacts() {
         self.stateSubject.onNext(MeState.blockedContacts)
+    }
+    //rigistering username
+    let newUsername = BehaviorRelay<String>(value: "")
+    let usernameValidationState = BehaviorRelay<UsernameValidationState>(value: .unknown)
+
+    func subscribeForNameLokup(disposeBug: DisposeBag) {
+        newUsername.asObservable().subscribe(onNext: { [unowned self] username in
+            self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+        }).disposed(by: disposeBug)
+
+        nameService.usernameValidationStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+            switch status {
+            case .lookingUp:
+                self?.usernameValidationState.accept(.lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability))
+            case .invalid:
+                self?.usernameValidationState.accept(.invalid(message: L10n.CreateAccount.invalidUsername))
+            case .alreadyTaken:
+                self?.usernameValidationState.accept(.unavailable(message: L10n.CreateAccount.usernameAlreadyTaken))
+            default:
+                self?.usernameValidationState.accept(.available)
+            }
+        }).disposed(by: disposeBug)
+    }
+
+    func registerUsername(username: String, password: String) {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            self.showActionState.value = .hideLoading
+            return
+        }
+
+        self.nameService
+            .registerNameObservable(withAccount: accountId,
+                                    password: password,
+                                    name: username)
+            .subscribe(onNext: { registered in
+                if registered {
+                    if let account = self.accountService.getAccount(fromAccountId: accountId) {
+                        self.currentAccountUserName
+                            .onNext(self.userNameForAccount(account: account))
+                    }
+                    self.showActionState.value = .usernameRegistered
+                } else {
+                    self.showActionState.value = .usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed)
+                }
+            }, onError: { _ in
+                self.showActionState.value = .usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed)
+            }).disposed(by: self.disposeBag)
     }
 
     func revokeDevice(deviceId: String, accountPassword password: String) {

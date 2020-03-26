@@ -146,6 +146,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     self?.showDeviceRevokedAlert(deviceId: deviceId)
                 case .deviceRevokationError(let deviceId, let errorMessage):
                     self?.showDeviceRevocationError(deviceId: deviceId, errorMessage: errorMessage)
+                case .usernameRegistered:
+                    self?.stopLoadingView()
+                case .usernameRegistrationFailed(let errorMessage):
+                    self?.showNameRegisterationFailed(error: errorMessage)
                 }
             }).disposed(by: self.disposeBag)
         self.navigationItem.rightBarButtonItem = infoItem
@@ -173,6 +177,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         HUD.show(.labeledProgress(title: L10n.AccountPage.deviceRevocationProgress, subtitle: nil))
     }
 
+    private func showNameRegistration() {
+        HUD.show(.labeledProgress(title: L10n.AccountPage.usernameRegistering, subtitle: nil))
+    }
+
     private func showDeviceRevocationError(deviceId: String, errorMessage: String) {
         HUD.hide(animated: true) { _ in
             let alert = UIAlertController(title: errorMessage,
@@ -193,6 +201,18 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     private func showDeviceRevokedAlert(deviceId: String) {
         HUD.hide(animated: true) { _ in
             let alert = UIAlertController(title: L10n.AccountPage.deviceRevocationSuccess,
+                                          message: nil,
+                                          preferredStyle: .alert)
+            let actionOk = UIAlertAction(title: L10n.Global.ok,
+                                         style: .default)
+            alert.addAction(actionOk)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    private func showNameRegisterationFailed(error: String) {
+        HUD.hide(animated: true) { _ in
+            let alert = UIAlertController(title: error,
                                           message: nil,
                                           preferredStyle: .alert)
             let actionOk = UIAlertAction(title: L10n.Global.ok,
@@ -347,9 +367,25 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     }).disposed(by: cell.disposeBag)
                     return cell
                 case .jamiUserName(let label):
-                    return self.configureCellWithEnableTextCopy(text: L10n.AccountPage.username,
-                                                                secondaryText: label,
-                                                                style: .callout)
+                    if !label.isEmpty {
+                        return self.configureCellWithEnableTextCopy(text: L10n.AccountPage.username,
+                        secondaryText: label,
+                        style: .callout)
+                    }
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.AccountPage.registerNameTitle
+                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textAlignment = .center
+                    cell.sizeToFit()
+                    cell.selectionStyle = .none
+                    let button = UIButton.init(frame: cell.frame)
+                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    button.frame.size = size
+                    cell.addSubview(button)
+                    button.rx.tap.subscribe(onNext: { [weak self] in
+                        self?.registerUsername()
+                    }).disposed(by: cell.disposeBag)
+                    return cell
                 case .jamiID(let label):
                     return self.configureCellWithEnableTextCopy(text: "Jami ID",
                                                                 secondaryText: label,
@@ -465,7 +501,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: disposeBag)
     }
 
-    func configureCellWithEnableTextCopy(text: String, secondaryText: String, style: UIFont.TextStyle) -> UITableViewCell {
+    func configureCellWithEnableTextCopy(text: String, secondaryText: String, style: UIFont.TextStyle) -> DisposableCell {
         let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
         cell.selectionStyle = .none
         cell.textLabel?.text = text
@@ -641,6 +677,122 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.viewModel.updateSipSettings()
     }
 
+    var nameRegistrationBag = DisposeBag()
+
+    func registerUsername() {
+        nameRegistrationBag = DisposeBag()
+        let controller = UIAlertController(title: L10n.AccountPage.registerNameTitle,
+                                           message: nil,
+                                           preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+                                         style: .cancel) { [weak self] _ in
+                                            self?.nameRegistrationBag = DisposeBag()
+        }
+        let actionRegister = UIAlertAction(title: L10n.AccountPage.usernameRegisterAction,
+                                           style: .default) { [weak self, weak controller] _ in
+                                            self?.nameRegistrationBag = DisposeBag()
+                                            self?.showNameRegistration()
+                                            guard let textFields = controller?.textFields else {
+                                                self?.stopLoadingView()
+                                                return
+                                            }
+                                            if textFields.count == 2, let name = textFields[0].text,
+                                                !name.isEmpty {
+                                                self?.viewModel.registerUsername(username: name, password: "")
+                                            } else if textFields.count == 3, let name = textFields[0].text,
+                                                !name.isEmpty, let password = textFields[2].text,
+                                                !password.isEmpty {
+                                                self?.viewModel.registerUsername(username: name, password: password)
+                                            }
+        }
+        controller.addAction(actionCancel)
+        controller.addAction(actionRegister)
+        //username textfield
+        controller.addTextField {(textField) in
+            textField.placeholder = L10n.AccountPage.usernamePlaceholder
+        }
+        //error rext field
+        controller.addTextField {(textField) in
+            textField.text = ""
+            textField.isUserInteractionEnabled = false
+            textField.textColor = UIColor.red
+            textField.textAlignment = .center
+            textField.borderStyle = .none
+            textField.backgroundColor = UIColor.clear
+            textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
+        }
+        //password text field
+        if self.viewModel.havePassord() {
+            controller.addTextField {(textField) in
+                textField.placeholder = L10n.AccountPage.passwordPlaceholder
+                textField.isSecureTextEntry = true
+            }
+        }
+        self.present(controller, animated: true, completion: nil)
+        self.viewModel.subscribeForNameLokup(disposeBug: nameRegistrationBag)
+        self.viewModel.usernameValidationState.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak controller] (state) in
+                //update name lookup message
+                guard let textFields = controller?.textFields,
+                    textFields.count >= 2 else { return }
+                if state.isAvailable {
+                    textFields[1].text = ""
+                } else {
+                    textFields[1].text = state.message
+                }
+                }, onError: { (_) in
+            }).disposed(by: nameRegistrationBag)
+        guard let textFields = controller.textFields else {
+            return
+        }
+        if textFields.count < 2 {
+            return
+        }
+        textFields[0].rx.text.orEmpty.distinctUntilChanged().bind(to: self.viewModel.newUsername).disposed(by: nameRegistrationBag)
+        let userNameEmptyObservable = textFields[0]
+            .rx.text.map({text -> Bool in
+                if let text = text {
+                    return text.isEmpty
+                }
+                return true
+            })
+        // do not have a password could register when username not empty and valid
+        if textFields.count == 2 {
+            Observable
+                .combineLatest(self.viewModel
+                    .usernameValidationState.asObservable(),
+                               userNameEmptyObservable) {(state, usernameEmpty) -> Bool in
+                                if state.isAvailable && !usernameEmpty {
+                                    return true
+                                }
+                                return false }
+                .bind(to: actionRegister.rx.isEnabled).disposed(by: nameRegistrationBag)
+        } else if textFields.count == 3 {
+            // have a password. Could register when username not empty and valid and password not empty
+            let passwordEmptyObservable = textFields[2]
+                .rx.text.map({text -> Bool in
+                    if let text = text {
+                        return text.isEmpty
+                    }
+                    return true
+                })
+            Observable
+                .combineLatest(self.viewModel
+                    .usernameValidationState.asObservable(),
+                               userNameEmptyObservable,
+                               passwordEmptyObservable) {(state, nameEmpty, passwordEmpty) -> Bool in
+                                if state.isAvailable && !nameEmpty && !passwordEmpty {
+                                    return true
+                                }
+                                return false}
+                .bind(to: actionRegister.rx.isEnabled).disposed(by: nameRegistrationBag)
+        }
+        //remove border around text view
+        controller.textFields?[1].superview?.backgroundColor = .clear
+        controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
+    }
+
     func confirmRevokeDeviceAlert(deviceID: String) {
         let alert = UIAlertController(title: L10n.AccountPage.revokeDeviceTitle,
                                       message: L10n.AccountPage.revokeDeviceMessage,
@@ -665,7 +817,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         alert.addAction(actionCancel)
         alert.addAction(actionConfirm)
 
-        if self.viewModel.havePassord {
+        if self.viewModel.havePassord() {
             alert.addTextField {(textField) in
                 textField.placeholder = L10n.AccountPage.revokeDevicePlaceholder
                 textField.isSecureTextEntry = true
