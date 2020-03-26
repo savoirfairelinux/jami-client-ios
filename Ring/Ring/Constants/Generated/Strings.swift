@@ -88,6 +88,8 @@ internal enum L10n {
     internal static let noProxyExplanationLabel = L10n.tr("Localizable", "accountPage.noProxyExplanationLabel")
     /// Other
     internal static let other = L10n.tr("Localizable", "accountPage.other")
+    /// Enter account password
+    internal static let passwordPlaceholder = L10n.tr("Localizable", "accountPage.passwordPlaceholder")
     /// Provide proxy address
     internal static let proxyAddressAlert = L10n.tr("Localizable", "accountPage.proxyAddressAlert")
     /// In order to receive notifications, please enable proxy
@@ -96,6 +98,10 @@ internal enum L10n {
     internal static let proxyDisabledAlertTitle = L10n.tr("Localizable", "accountPage.proxyDisabledAlertTitle")
     /// Proxy address
     internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder")
+    /// Choosen username is not available
+    internal static let registerNameErrorMessage = L10n.tr("Localizable", "accountPage.registerNameErrorMessage")
+    /// Register a username
+    internal static let registerNameTitle = L10n.tr("Localizable", "accountPage.registerNameTitle")
     /// Remove
     internal static let removeAccountButton = L10n.tr("Localizable", "accountPage.removeAccountButton")
     /// By clicking "Remove" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.
@@ -122,6 +128,14 @@ internal enum L10n {
     internal static let username = L10n.tr("Localizable", "accountPage.username")
     /// username: not registered
     internal static let usernameNotRegistered = L10n.tr("Localizable", "accountPage.usernameNotRegistered")
+    /// Enter desired username
+    internal static let usernamePlaceholder = L10n.tr("Localizable", "accountPage.usernamePlaceholder")
+    /// Register
+    internal static let usernameRegisterAction = L10n.tr("Localizable", "accountPage.usernameRegisterAction")
+    /// Registering
+    internal static let usernameRegistering = L10n.tr("Localizable", "accountPage.usernameRegistering")
+    /// Registration failed. Please check password.
+    internal static let usernameRegistrationFailed = L10n.tr("Localizable", "accountPage.usernameRegistrationFailed")
   }
 
   internal enum Actions {
