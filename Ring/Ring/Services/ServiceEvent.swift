@@ -49,6 +49,7 @@ enum ServiceEventType {
     case audioActivated
     case newOutgoingMessage
     case messageTypingIndicator
+    case migrationEnded
 }
 
 /**

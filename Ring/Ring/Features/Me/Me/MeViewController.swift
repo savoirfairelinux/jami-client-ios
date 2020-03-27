@@ -506,6 +506,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.selectionStyle = .none
         cell.textLabel?.text = text
         cell.textLabel?.sizeToFit()
+        if secondaryText.isEmpty {
+            return cell
+        }
         cell.detailTextLabel?.text = secondaryText
         cell.detailTextLabel?.lineBreakMode = .byCharWrapping
         cell.detailTextLabel?.numberOfLines = 0
