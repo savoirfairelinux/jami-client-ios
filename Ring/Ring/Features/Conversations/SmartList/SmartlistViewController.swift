@@ -223,8 +223,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             accountButtonItem.customView?.widthAnchor.constraint(equalToConstant: 80).isActive = true
         }
         accountButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.openAccountsList()
+            .subscribe(onNext: { [weak self] in
+                self?.openAccountsList()
             })
             .disposed(by: self.disposeBag)
         self.navigationItem.leftBarButtonItem = accountButtonItem
