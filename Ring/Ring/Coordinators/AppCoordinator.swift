@@ -34,6 +34,7 @@ public enum AppState: State {
     case addAccount
     case allSet
     case accountRemoved
+    case needAccountMigration(accountId: String)
 }
 
 public enum VCType: String {
@@ -90,6 +91,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                 self.showWalkthrough(animated: false, isAccountFirst: false)
             case .accountRemoved:
                 self.accountRemoved()
+            case .needAccountMigration(let accountId):
+                self.migrateAccount(accountId: accountId)
             }
         }).disposed(by: self.disposeBag)
     }
@@ -104,6 +107,12 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     func accountRemoved() {
         self.tabBarViewController.selectedIndex = 0
+    }
+
+    func migrateAccount(accountId: String) {
+        let migratonController = MigrateAccountViewController.instantiate(with: self.injectionBag)
+        migratonController.viewModel.accountToMigrate = accountId
+        self.present(viewController: migratonController, withStyle: .present, withAnimation: true, withStateable: migratonController.viewModel)
     }
 
     /// Handles the switch between the three supported screens.
