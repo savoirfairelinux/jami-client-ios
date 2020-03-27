@@ -98,6 +98,14 @@ static id <AccountAdapterDelegate> _delegate;
             [AccountAdapter.delegate receivedAccountPhotoFor:accountId photo:avatarPhoto];
         }
     }));
+    confHandlers
+       .insert(exportable_callback<ConfigurationSignal::MigrationEnded>([&](const std::string& account_id, const std::string& status) {
+           if (AccountAdapter.delegate) {
+               NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+               NSString* migaretionStatus = [NSString stringWithUTF8String:status.c_str()];
+               [AccountAdapter.delegate migrationEndedFor:accountId status:migaretionStatus];
+           }
+       }));
     registerSignalHandlers(confHandlers);
 }
 #pragma mark -

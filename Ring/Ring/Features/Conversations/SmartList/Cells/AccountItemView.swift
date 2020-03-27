@@ -25,6 +25,7 @@ class AccountItemView: UIView {
     @IBOutlet var containerView: UIView!
     @IBOutlet weak var avatarView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var needMigrateLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,5 +41,6 @@ class AccountItemView: UIView {
         Bundle.main.loadNibNamed("AccountItemView", owner: self, options: nil)
         addSubview(containerView)
         containerView.frame = self.bounds
+        needMigrateLabel.text = L10n.Account.needMigration
     }
 }

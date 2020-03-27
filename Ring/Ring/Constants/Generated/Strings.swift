@@ -52,7 +52,7 @@ internal enum L10n {
   internal enum AccountPage {
     /// Block List
     internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
-    /// Contact me using "%s" on the Jami distributet communication platform: https://jami.net
+    /// Contact me using "%s" on the Jami distributed communication platform: https://jami.net
     internal static func contactMeOnJamiContant(_ p1: UnsafePointer<CChar>) -> String {
       return L10n.tr("Localizable", "accountPage.contactMeOnJamiContant", p1)
     }
@@ -430,6 +430,29 @@ internal enum L10n {
     internal static let usernameLabel = L10n.tr("Localizable", "linkToAccountManager.usernameLabel")
     /// Username
     internal static let usernamePlaceholder = L10n.tr("Localizable", "linkToAccountManager.usernamePlaceholder")
+  }
+
+  internal enum MigrateAccount {
+    /// Cancel
+    internal static let cancel = L10n.tr("Localizable", "migrateAccount.cancel")
+    /// Failed to migrate your account. You can retry or delete your account.
+    internal static let error = L10n.tr("Localizable", "migrateAccount.error")
+    /// This account needs to be migrated
+    internal static let explanation = L10n.tr("Localizable", "migrateAccount.explanation")
+    /// Migrate Another Account
+    internal static let migrateAnother = L10n.tr("Localizable", "migrateAccount.migrateAnother")
+    /// Migrate Account
+    internal static let migrateButton = L10n.tr("Localizable", "migrateAccount.migrateButton")
+    /// Migrating...
+    internal static let migrating = L10n.tr("Localizable", "migrateAccount.migrating")
+    /// To proceed with the migration, you need to enter a password that was used for this account
+    internal static let passwordExplanation = L10n.tr("Localizable", "migrateAccount.passwordExplanation")
+    /// Enter password
+    internal static let passwordPlaceholder = L10n.tr("Localizable", "migrateAccount.passwordPlaceholder")
+    /// Remove account
+    internal static let removeAccount = L10n.tr("Localizable", "migrateAccount.removeAccount")
+    /// Account migration
+    internal static let title = L10n.tr("Localizable", "migrateAccount.title")
   }
 
   internal enum Notifications {

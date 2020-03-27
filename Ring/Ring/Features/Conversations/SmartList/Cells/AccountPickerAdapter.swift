@@ -58,15 +58,17 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
         } else {
             accountView = AccountItemView()
         }
+        let hideMigrationLabel = items[row].account.status != .errorNeedMigration
+        accountView.needMigrateLabel.isHidden = hideMigrationLabel
         let profile = items[row].profileObservable
         profile.map { [weak self] accountProfile in
             if let photo = accountProfile.photo,
                 let data = NSData(base64Encoded: photo,
                                   options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                return UIImage(data: data) ?? UIImage (asset: Asset.fallbackAvatar)
+                return UIImage(data: data) ?? UIImage(asset: Asset.fallbackAvatar)
             }
             guard let account = self?.items[row].account else {
-                return UIImage (asset: Asset.fallbackAvatar)
+                return UIImage(asset: Asset.fallbackAvatar)
             }
             guard let name = accountProfile.alias else {
                 return UIImage.defaultJamiAvatarFor(profileName: nil,
