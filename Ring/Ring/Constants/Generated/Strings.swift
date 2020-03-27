@@ -432,6 +432,25 @@ internal enum L10n {
     internal static let usernamePlaceholder = L10n.tr("Localizable", "linkToAccountManager.usernamePlaceholder")
   }
 
+  internal enum MigrateAccount {
+    /// Failed to migrate your account. You can retry by pressing Ok or delete your account.
+    internal static let error = L10n.tr("Localizable", "migrateAccount.error")
+    /// This account needs to be migrated
+    internal static let explanation = L10n.tr("Localizable", "migrateAccount.explanation")
+    /// Migrate Account
+    internal static let migrateButton = L10n.tr("Localizable", "migrateAccount.migrateButton")
+    /// Migrating...
+    internal static let migrating = L10n.tr("Localizable", "migrateAccount.migrating")
+    /// To proceed with the migration, you need to enter a password that was used for this account
+    internal static let passwordExplanation = L10n.tr("Localizable", "migrateAccount.passwordExplanation")
+    /// Enter password
+    internal static let passwordPlaceholder = L10n.tr("Localizable", "migrateAccount.passwordPlaceholder")
+    /// Remove account
+    internal static let removeAccount = L10n.tr("Localizable", "migrateAccount.removeAccount")
+    /// Account migration
+    internal static let title = L10n.tr("Localizable", "migrateAccount.title")
+  }
+
   internal enum Notifications {
     /// ACCEPT
     internal static let acceptCall = L10n.tr("Localizable", "notifications.acceptCall")

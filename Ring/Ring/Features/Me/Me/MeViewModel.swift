@@ -642,10 +642,20 @@ class MeViewModel: ViewModel, Stateable {
             self.accountService.removeAccount(id: account.id)
             return
         }
+
+        for nextAccount in allAccounts where nextAccount != account {
+            if !accountService.needAccountMigration(accountId: nextAccount.id) {
+                UserDefaults.standard.set(nextAccount.id, forKey: self.accountService.selectedAccountID)
+                self.accountService.currentAccount = nextAccount
+                self.accountService.removeAccount(id: account.id)
+                self.stateSubject.onNext(MeState.accountRemoved)
+                return
+            }
+        }
         UserDefaults.standard.set(allAccounts[1].id, forKey: self.accountService.selectedAccountID)
         self.accountService.currentAccount = allAccounts[1]
         self.accountService.removeAccount(id: account.id)
-        self.stateSubject.onNext(MeState.accountRemoved)
+        self.stateSubject.onNext(MeState.needAccountMigration(accountId: allAccounts[1].id))
     }
 
     lazy var accountEnabled: Variable<Bool> = {
