@@ -149,12 +149,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         prepareVideoAcceleration()
 
-        self.accountService.initialAccountsLoading().subscribe(onCompleted: {
+        self.accountService.initialAccountsLoading()
+            .subscribe(onCompleted: {
             //set selected account if exists
             self.appCoordinator.start()
+            for account in self.accountService.accounts {
+                self.accountService.setDetails(forAccountId: account.id)
+            }
+            if self.accountService.hasAccountWithProxyEnabled() {
+                self.registerVoipNotifications()
+            } else {
+                self.unregisterVoipNotifications()
+            }
             if let selectedAccountId = UserDefaults.standard.string(forKey: self.accountService.selectedAccountID),
                 let account = self.accountService.getAccount(fromAccountId: selectedAccountId) {
-                self.accountService.currentAccount = account
+                    if self.accountService.needAccountMigration(accountId: account.id) {
+                        self.appCoordinator.migrateAccount(accountId: account.id)
+                        return
+                    }
+                    self.accountService.currentAccount = account
             }
             guard let currentAccount = self.accountService.currentAccount else {
                 self.log.error("Can't get current account!")
@@ -163,16 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
                 return
             }
-
-            for account in self.accountService.accounts {
-                self.accountService.setDetails(forAccountId: account.id)
-            }
             self.reloadDataFor(account: currentAccount)
-            if self.accountService.hasAccountWithProxyEnabled() {
-                self.registerVoipNotifications()
-            } else {
-                self.unregisterVoipNotifications()
-            }
             if #available(iOS 10.0, *) {
                 return
             }

@@ -26,4 +26,5 @@
     func exportOnRingEnded(for account: String, state: Int, pin: String)
     func deviceRevocationEnded(for account: String, state: Int, deviceId: String)
     func receivedAccountPhoto(for account: String, photo: String)
+    func migrationEnded(for account: String, status: String)
 }
