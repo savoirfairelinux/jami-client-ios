@@ -419,6 +419,10 @@ class SmartlistViewModel: Stateable, ViewModel {
 
     func changeCurrentAccount(accountId: String) {
         if let account = self.accountsService.getAccount(fromAccountId: accountId) {
+            if (accountsService.needAccountMigration(accountId: accountId)) {
+                self.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
+                return
+            }
             self.accountsService.currentAccount = account
             UserDefaults.standard.set(accountId, forKey: self.accountsService.selectedAccountID)
         }

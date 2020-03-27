@@ -49,6 +49,12 @@ enum NotificationName: String {
     case nameRegistered
 }
 
+enum MigrationState: String {
+    case INVALID
+    case SUCCESS
+    case UNKOWN
+}
+
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class AccountsService: AccountAdapterDelegate {
@@ -695,6 +701,53 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func needAccountMigration(accountId: String) -> Bool {
+        guard let account = getAccount(fromAccountId: accountId) else {return false}
+        return account.status == .errorNeedMigration
+    }
+
+    func hasValidAccount() -> Bool {
+        for account in accountList where account.status != .errorNeedMigration {
+            return true
+        }
+        return false
+    }
+
+    func migrateAccount(account accountId: String, password: String) -> Observable<Bool> {
+        let saveAccount: Single<Bool> =
+            Single.create(subscribe: { (single) -> Disposable in
+                let dispatchQueue = DispatchQueue(label: "accountMigration", qos: .background)
+                dispatchQueue.async {
+                    let details = self.getAccountDetails(fromAccountId: accountId)
+                    details
+                        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archivePassword),
+                             withValue: password)
+                    self.setAccountDetails(forAccountId: accountId, withDetails: details)
+                    single(.success(true))
+                }
+                return Disposables.create {
+                }
+            })
+
+        let filteredDaemonSignals = self.sharedResponseStream
+            .filter { (serviceEvent) -> Bool in
+                return serviceEvent.getEventInput(ServiceEventInput.accountId) == accountId &&
+                    serviceEvent.eventType == .migrationEnded
+        }
+        return Observable
+            .combineLatest(saveAccount.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in
+                guard let status: String = serviceEvent.getEventInput(ServiceEventInput.state)
+                    else {return false}
+                let migrationStatus = MigrationState(rawValue: status)
+                switch migrationStatus {
+                case .SUCCESS:
+                    return true
+                default:
+                    return false
+                }
+        }
+    }
+
     func removeAccount(id: String) {
         if self.getAccount(fromAccountId: id) == nil {return}
         self.accountAdapter.removeAccount(id)
@@ -719,6 +772,13 @@ class AccountsService: AccountAdapterDelegate {
         reloadAccounts()
 
         let event = ServiceEvent(withEventType: .accountsChanged)
+        self.responseStream.onNext(event)
+    }
+
+    func migrationEnded(for account: String, status: String) {
+        var event = ServiceEvent(withEventType: .migrationEnded)
+        event.addEventInput(.state, value: status)
+        event.addEventInput(.accountId, value: account)
         self.responseStream.onNext(event)
     }
 

@@ -34,6 +34,7 @@ enum ConversationState: State {
     case navigateToCall(call: CallModel)
     case showContactPicker(callID: String)
     case fromCallToConversation(conversation: ConversationViewModel)
+    case needAccountMigration(accountId: String)
 }
 
 protocol ConversationNavigation: class {
@@ -64,10 +65,18 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 self.fromCallToConversation(withConversationViewModel: conversation)
             case .navigateToCall(let call):
                 self.presentCallController(call: call)
+            case .needAccountMigration(let accountId):
+                self.migrateAccount(accountId: accountId)
             default:
                 break
             }
         }).disposed(by: self.disposeBag)
+    }
+
+    func migrateAccount(accountId: String) {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.needAccountMigration(accountId: accountId))
+        }
     }
 
     func openRecordFile(conversation: ConversationModel, audioOnly: Bool) {

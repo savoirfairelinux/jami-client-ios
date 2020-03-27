@@ -152,6 +152,9 @@
 		0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
 		0EC7808F2424FDAE000A04C5 /* CustomActionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */; };
+		0ECA56812433948E0055D31E /* MigrateAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECA56802433948E0055D31E /* MigrateAccountViewController.storyboard */; };
+		0ECA5683243394960055D31E /* MigrateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA5682243394960055D31E /* MigrateAccountViewController.swift */; };
+		0ECA56852433949C0055D31E /* MigrateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA56842433949C0055D31E /* MigrateAccountViewModel.swift */; };
 		0ECB4E2822B2D4840097CD7B /* CallsProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */; };
 		0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */; };
 		0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
@@ -490,6 +493,9 @@
 		0EB1A5D01F8EBE23009923E2 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
 		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
 		0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionTextView.swift; sourceTree = "<group>"; };
+		0ECA56802433948E0055D31E /* MigrateAccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MigrateAccountViewController.storyboard; sourceTree = "<group>"; };
+		0ECA5682243394960055D31E /* MigrateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrateAccountViewController.swift; sourceTree = "<group>"; };
+		0ECA56842433949C0055D31E /* MigrateAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrateAccountViewModel.swift; sourceTree = "<group>"; };
 		0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsProviderDelegate.swift; sourceTree = "<group>"; };
 		0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
@@ -1251,6 +1257,16 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		0ECA567F243394660055D31E /* MigrateAccount */ = {
+			isa = PBXGroup;
+			children = (
+				0ECA56842433949C0055D31E /* MigrateAccountViewModel.swift */,
+				0ECA5682243394960055D31E /* MigrateAccountViewController.swift */,
+				0ECA56802433948E0055D31E /* MigrateAccountViewController.storyboard */,
+			);
+			path = MigrateAccount;
+			sourceTree = "<group>";
+		};
 		0ED2B6F81F96A048001572F0 /* LinknewDevice */ = {
 			isa = PBXGroup;
 			children = (
@@ -1283,6 +1299,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				0ECA567F243394660055D31E /* MigrateAccount */,
 				0E96ED73225D05F70016C07D /* GeneralSettings */,
 				0E320D4E224ADF570070B515 /* Dialpad */,
 				6613A610214AF8B100B497D1 /* QRCode */,
@@ -1840,6 +1857,7 @@
 				1A20417E1F1E8DDA00C08435 /* CreateProfileViewController.storyboard in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
 				1A5DC0381F35675E0075E8EF /* ContactRequestCell.xib in Resources */,
+				0ECA56812433948E0055D31E /* MigrateAccountViewController.storyboard in Resources */,
 				1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
@@ -2020,6 +2038,7 @@
 				0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */,
 				0E13A91C22B844B100A12A54 /* NSUserActivity+Call.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
+				0ECA56852433949C0055D31E /* MigrateAccountViewModel.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
 				62B60AF420489E7C001BEACF /* DataTransferService.swift in Sources */,
 				62AA15BF1FFC36840064A063 /* VideoAdapter.mm in Sources */,
@@ -2056,6 +2075,7 @@
 				0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */,
 				0E6D959C2407116E00996A28 /* LinkToAccountManagerViewModel.swift in Sources */,
 				62AD584C2056DB2700AF0701 /* MessageCellDataTransferSent.swift in Sources */,
+				0ECA5683243394960055D31E /* MigrateAccountViewController.swift in Sources */,
 				1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
 				0E3BD4262044778100A50DDF /* ContactViewModel.swift in Sources */,

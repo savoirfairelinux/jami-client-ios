@@ -63,7 +63,8 @@ class AvatarView: UIView {
                 } else {
                     // ringId only, so fallback fallback avatar
                     if let image = UIImage(asset: Asset.fallbackAvatar) {
-                        (avatarImageView as UIImageView).image = image.circleMasked
+                        (avatarImageView as UIImageView).image = image
+                         avatarImageView.tintColor = UIColor.white
                         self.addSubview(avatarImageView)
                     }
                 }
