@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "Conversations";
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";

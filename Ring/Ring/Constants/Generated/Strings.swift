@@ -368,7 +368,7 @@ internal enum L10n {
   internal enum Global {
     /// Invitations
     internal static let contactRequestsTabBarTitle = L10n.tr("Localizable", "global.contactRequestsTabBarTitle")
-    /// Home
+    /// Conversations
     internal static let homeTabBarTitle = L10n.tr("Localizable", "global.homeTabBarTitle")
     /// Account
     internal static let meTabBarTitle = L10n.tr("Localizable", "global.meTabBarTitle")
