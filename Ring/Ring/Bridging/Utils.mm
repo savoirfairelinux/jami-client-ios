@@ -154,6 +154,9 @@ extern "C" {
         image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
     } else {
         auto buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
+        if (buffer == NULL) {
+            return [[UIImage alloc] init];
+        }
         image = [CIImage imageWithCVPixelBuffer: buffer];
         CFRelease(buffer);
     }
@@ -225,6 +228,10 @@ extern "C" {
         }
         CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
         return pixelBuffer;
+    }
+
+    if ((AVPixelFormat)frame->format != AV_PIX_FMT_YUV420P) {
+        return NULL;
     }
     base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1));
     for(size_t i = 0; i < frame->height / 2 * bytesPerRowUV / 2; i++ ){

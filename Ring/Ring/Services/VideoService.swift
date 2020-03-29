@@ -43,7 +43,9 @@ enum VideoError: Error {
 
 enum VideoCodecs: String {
     case H264
+    case H265
     case VP8
+    case unknown
 }
 
 protocol FrameExtractorDelegate: class {
@@ -306,8 +308,11 @@ class VideoService: FrameExtractorDelegate {
     var currentOrientation: AVCaptureVideoOrientation
 
     private let log = SwiftyBeaver.self
-    private var hardwareAccelerated = true
-    private var hardwareAccelerationEnabled = true
+    // acceleration for current session(may be different from setted by user
+    // for conference or when not supported by codec)
+    private var hardwareAcceleratedForCurrentSession = true
+    // taken from settings set by user
+    private var hardwareAccelerationEnabledByUser = true
     var angle: Int = 0
     var switchInputRequested: Bool = false
 
@@ -315,14 +320,14 @@ class VideoService: FrameExtractorDelegate {
 
     var recording = false
 
-    var codec = VideoCodecs.H264
+    var codec = VideoCodecs.unknown
 
     init(withVideoAdapter videoAdapter: VideoAdapter) {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
         VideoAdapter.delegate = self
-        self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
-        self.hardwareAccelerationEnabled = videoAdapter.getEncodingAccelerated()
+        self.hardwareAcceleratedForCurrentSession = videoAdapter.getEncodingAccelerated()
+        self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
         camera.delegate = self
     }
 
@@ -348,7 +353,7 @@ class VideoService: FrameExtractorDelegate {
             let frontPortraitCameraDevInfo: [String: String] = try camera
                     .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
                                    quality: AVCaptureSession.Preset.medium)
-            if self.hardwareAccelerated {
+            if self.hardwareAccelerationEnabledByUser {
                 self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
                 videoAdapter.addVideoDevice(withName: camera.namePortrait,
                                             withDevInfo: frontPortraitCameraDevInfo)
@@ -412,18 +417,21 @@ class VideoService: FrameExtractorDelegate {
     }
 
     func disableHardwareForConference() {
+        if !hardwareAccelerationEnabledByUser {
+            return
+        }
         videoAdapter.setEncodingAccelerated(false)
         videoAdapter.setDecodingAccelerated(false)
         self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
         self.videoAdapter.setDefaultDevice(camera.namePortrait)
-        self.hardwareAccelerated = false
+        self.hardwareAcceleratedForCurrentSession = false
     }
 
     func restoreStateAfterconference() {
-        videoAdapter.setEncodingAccelerated(hardwareAccelerationEnabled)
-        videoAdapter.setDecodingAccelerated(hardwareAccelerationEnabled)
-        self.hardwareAccelerated = hardwareAccelerationEnabled
-        if hardwareAccelerationEnabled {
+        videoAdapter.setEncodingAccelerated(hardwareAccelerationEnabledByUser)
+        videoAdapter.setDecodingAccelerated(hardwareAccelerationEnabledByUser)
+        self.hardwareAcceleratedForCurrentSession = hardwareAccelerationEnabledByUser
+        if hardwareAccelerationEnabledByUser {
             self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
             self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
         } else {
@@ -444,11 +452,25 @@ extension VideoService: VideoAdapterDelegate {
 
     func setDecodingAccelerated(withState state: Bool) {
         videoAdapter.setDecodingAccelerated(state)
-        hardwareAccelerationEnabled = state
     }
 
     func setEncodingAccelerated(withState state: Bool) {
         videoAdapter.setEncodingAccelerated(state)
+    }
+
+    func getDecodingAccelerated() -> Bool {
+        return videoAdapter.getDecodingAccelerated()
+    }
+
+    func getEncodingAccelerated() -> Bool {
+        return videoAdapter.getEncodingAccelerated()
+    }
+
+    func setHardwareAccelerated(withState state: Bool) {
+        videoAdapter.setDecodingAccelerated(state)
+        videoAdapter.setEncodingAccelerated(state)
+        hardwareAccelerationEnabledByUser = state
+        hardwareAcceleratedForCurrentSession = state
         if state {
             self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
             self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
@@ -458,16 +480,9 @@ extension VideoService: VideoAdapterDelegate {
         }
     }
 
-    func getDecodingAccelerated() -> Bool {
-        return videoAdapter.getDecodingAccelerated()
-    }
-    func getEncodingAccelerated() -> Bool {
-        return videoAdapter.getEncodingAccelerated()
-    }
-
     func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codecId: String) {
         if !codecId.isEmpty {
-            self.codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.H264
+            self.codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.unknown
         }
         if !supportHardware() && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
             self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
@@ -475,18 +490,18 @@ extension VideoService: VideoAdapterDelegate {
             switchInputRequested = true
         }
         self.log.debug("Decoding started...")
-        let withHardware = !codecId.isEmpty ? supportHardware() : false
+        let withHardware = !codecId.isEmpty ? (supportHardware() && self.hardwareAcceleratedForCurrentSession) : false
         videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height, withHardwareSupport: withHardware)
     }
 
     func supportHardware() -> Bool {
-        return self.codec == VideoCodecs.H264
+        return self.codec == VideoCodecs.H264 || self.codec == VideoCodecs.H265
     }
 
     func decodingStopped(withRendererId rendererId: String) {
         self.log.debug("Decoding stopped...")
         videoAdapter.removeSinkTarget(withSinkId: rendererId)
-        self.codec = VideoCodecs.H264
+        self.codec = VideoCodecs.unknown
     }
 
     func startCapture(withDevice device: String) {
@@ -496,9 +511,9 @@ extension VideoService: VideoAdapterDelegate {
             self.camera.startCapturing()
             return
         }
-        self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
-        self.codec = self.hardwareAccelerated ? VideoCodecs.H264 : VideoCodecs.VP8
-        if hardwareAccelerationEnabled {
+        self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
+        self.hardwareAcceleratedForCurrentSession = hardwareAccelerationEnabledByUser
+        if hardwareAccelerationEnabledByUser {
             self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
             self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
         } else {
@@ -509,7 +524,7 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startVideoCaptureBeforeCall() {
-        self.hardwareAccelerated = videoAdapter.getEncodingAccelerated()
+        self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
         self.camera.startCapturing()
     }
 
@@ -518,7 +533,7 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func updateEncodongPreferences() {
-        self.setEncodingAccelerated(withState: hardwareAccelerationEnabled)
+        self.setEncodingAccelerated(withState: hardwareAccelerationEnabledByUser)
     }
 
     func videRecordingFinished() {
@@ -567,7 +582,7 @@ extension VideoService: VideoAdapterDelegate {
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
                                         angle: Int32(self.angle),
-                                        useHardwareAcceleration: (self.hardwareAccelerated && supportHardware()),
+                                        useHardwareAcceleration: (self.hardwareAcceleratedForCurrentSession && self.codec != .VP8),
                                         recording: self.recording)
     }
 
