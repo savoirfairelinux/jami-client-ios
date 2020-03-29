@@ -64,8 +64,7 @@ class GeneralSettingsViewModel: ViewModel {
             .standard.bool(forKey: hardareAccelerationKey)
         let accelerationEnabledSettings = injectionBag.videoService.getDecodingAccelerated() && injectionBag.videoService.getEncodingAccelerated()
         if accelerationEnabled != accelerationEnabledSettings {
-            injectionBag.videoService.setDecodingAccelerated(withState: accelerationEnabled)
-            injectionBag.videoService.setEncodingAccelerated(withState: accelerationEnabled)
+            injectionBag.videoService.setHardwareAccelerated(withState: accelerationEnabled)
         }
         hardwareAccelerationEnabled = Variable<Bool>(accelerationEnabled)
     }
@@ -74,8 +73,7 @@ class GeneralSettingsViewModel: ViewModel {
         if hardwareAccelerationEnabled.value == enable {
             return
         }
-        self.videoService.setDecodingAccelerated(withState: enable)
-        self.videoService.setEncodingAccelerated(withState: enable)
+        self.videoService.setHardwareAccelerated(withState: enable)
         UserDefaults.standard.set(enable, forKey: hardareAccelerationKey)
         hardwareAccelerationEnabled.value = enable
     }

@@ -155,8 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             guard let currentAccount = self.accountService.currentAccount else {
                 self.log.error("Can't get current account!")
                 //if we don't have any account means it is first run, so enable hardware acceleration
-                self.videoService.setDecodingAccelerated(withState: true)
-                self.videoService.setEncodingAccelerated(withState: true)
+                self.videoService.setHardwareAccelerated(withState: true)
                 UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
                 return
             }
@@ -239,8 +238,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // means it was not disabled by user 
         let keyExists = UserDefaults.standard.object(forKey: hardareAccelerationKey) != nil
         let enable = keyExists ? UserDefaults.standard.bool(forKey: hardareAccelerationKey) : true
-        self.videoService.setDecodingAccelerated(withState: enable)
-        self.videoService.setEncodingAccelerated(withState: enable)
+        self.videoService.setHardwareAccelerated(withState: enable)
     }
 
     // MARK: - Ring Daemon
