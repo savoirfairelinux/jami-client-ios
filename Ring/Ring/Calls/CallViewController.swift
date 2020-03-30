@@ -218,7 +218,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         }).disposed(by: self.disposeBag)
 
         self.buttonsContainer.acceptCallButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else {return}
                 self.viewModel.answerCall()
                     .subscribe()
                     .disposed(by: self.disposeBag)
@@ -466,9 +467,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         self.viewModel.callPaused
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] show in
+            .subscribe(onNext: { [weak self] show in
                 if show {
-                    self.showCallOptions()
+                    self?.showCallOptions()
                 }
             }).disposed(by: self.disposeBag)
     }
@@ -695,11 +696,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func hideContactInfo() {
         self.isMenuShowed = false
-        UIView.animate(withDuration: 0.2, animations: { [unowned self] in
-            self.infoContainerTopConstraint.constant = 250
-            self.buttonsContainerBottomConstraint.constant = -200
-            self.conferenceCallsTop.constant = -400
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            self?.infoContainerTopConstraint.constant = 250
+            self?.buttonsContainerBottomConstraint.constant = -200
+            self?.conferenceCallsTop.constant = -400
+            self?.view.layoutIfNeeded()
             }, completion: { [weak self] _ in
                 if !(self?.viewModel.conferenceMode.value ?? false) {
                     self?.infoContainer.isHidden = true
@@ -736,12 +737,22 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         contactPickerVC.view.frame = initialFrame
         self.view.addSubview(contactPickerVC.view)
         contactPickerVC.didMove(toParent: self)
-        UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            guard let self = self else {return}
             contactPickerVC.view.frame = newFrame
             self.mainView.removeGestureRecognizer(self.tapGestureRecognizer)
             self.view.layoutIfNeeded()
             }, completion: {  _ in
         })
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        print ("!!!!!! init call view")
+    }
+
+    deinit {
+        print ("!!!!!! deinit call view")
     }
 }
 
