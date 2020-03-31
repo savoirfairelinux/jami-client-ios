@@ -108,7 +108,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // initialize log format
         let console = ConsoleDestination()
         console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
+    #if DEBUG
         log.addDestination(console)
+    #else
+        log.removeAllDestinations()
+    #endif
 
         // starts the daemon
         SystemAdapter().registerConfigurationHandler()
