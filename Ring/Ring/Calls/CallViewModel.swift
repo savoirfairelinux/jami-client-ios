@@ -411,11 +411,6 @@ class CallViewModel: Stateable, ViewModel {
             }).subscribe(onNext: { [weak self] _ in
                 self?.audioService.startAudio()
             }).disposed(by: self.disposeBag)
-        print ("*** init call model")
-    }
-
-    deinit {
-        print ("*** deinit call model")
     }
 
     static func formattedDurationFrom(interval: Int) -> String {

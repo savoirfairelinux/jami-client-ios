@@ -745,15 +745,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             }, completion: {  _ in
         })
     }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        print ("!!!!!! init call view")
-    }
-
-    deinit {
-        print ("!!!!!! deinit call view")
-    }
 }
 
 extension CallViewController: ConferenceParticipantViewDelegate {
