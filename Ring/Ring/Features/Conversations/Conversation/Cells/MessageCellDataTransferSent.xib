@@ -81,7 +81,7 @@
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tp6-HD-XvQ" userLabel="Cancel Button">
                                 <rect key="frame" x="14" y="63" width="80" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="ca7-7J-yhQ"/>
+                                    <constraint firstAttribute="height" priority="999" constant="24" id="ca7-7J-yhQ"/>
                                 </constraints>
                                 <state key="normal" title="Cancel" image="close_icon">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

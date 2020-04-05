@@ -53,7 +53,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="1Kj-UZ-gu7"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="31" id="1Kj-UZ-gu7"/>
                             <constraint firstItem="lyR-7c-S2k" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="14" id="8m5-sR-xnh"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="BZE-kP-hPK"/>
                             <constraint firstAttribute="bottom" secondItem="lyR-7c-S2k" secondAttribute="bottom" constant="7" id="gwN-uX-PWd"/>
