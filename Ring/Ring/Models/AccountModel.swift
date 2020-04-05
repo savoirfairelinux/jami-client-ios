@@ -35,7 +35,7 @@ enum AccountModelError: Error {
 class AccountModel: Equatable {
     // MARK: Public members
     var id: String = ""
-    var details: AccountConfigModel? {
+    var protectedDetails: AccountConfigModel? {
         willSet {
             if let newDetails = newValue {
                 if !newDetails
@@ -55,7 +55,40 @@ class AccountModel: Equatable {
             }
         }
     }
+
+    let detailsQueue = DispatchQueue(label: "com.accountDetailsAccess", qos: .background, attributes: .concurrent)
+
+    var details: AccountConfigModel? {
+        get {
+            detailsQueue.sync {
+                return protectedDetails
+            }
+        }
+
+        set(newValue) {
+            detailsQueue.sync(flags: .barrier) {[weak self] in
+                self?.protectedDetails = newValue
+            }
+        }
+    }
+
     var volatileDetails: AccountConfigModel? {
+        get {
+            volatileDetailsQueue.sync {
+                return protectedVolatileDetails
+            }
+        }
+
+        set(newValue) {
+            volatileDetailsQueue.sync(flags: .barrier) { [weak self] in
+                self?.protectedVolatileDetails = newValue
+            }
+        }
+    }
+
+    let volatileDetailsQueue = DispatchQueue(label: "com.accountVolatileDetailsAccess", qos: .background, attributes: .concurrent)
+
+    var protectedVolatileDetails: AccountConfigModel? {
         willSet {
             if let newDetails = newValue {
                 if !newDetails
