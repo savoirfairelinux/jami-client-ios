@@ -80,7 +80,7 @@ class ContactsService {
             self.loadSipContacts(withAccount: account)
             return
         }
-        loadJamiContacts(withAccount: account)
+        loadJamiContacts(withAccount: account.id)
     }
 
     func loadSipContacts(withAccount account: AccountModel) {
@@ -98,9 +98,17 @@ class ContactsService {
         }
     }
 
-    func loadJamiContacts(withAccount account: AccountModel) {
+    func saveContactsForLinkedAccount(accountId: String) {
+        loadJamiContacts(withAccount: accountId)
+        self.contacts.value.forEach { (contact) in
+            guard let uriString = contact.uriString else { return }
+            dbManager.createConversationsFor(contactUri: uriString, accountId: accountId)
+        }
+    }
+
+    func loadJamiContacts(withAccount account: String) {
         //Load contacts from daemon
-        let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: account.id)
+        let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: account)
 
         //Serialize them
         if let contacts = contactsDictionaries?.map({ contactDict in

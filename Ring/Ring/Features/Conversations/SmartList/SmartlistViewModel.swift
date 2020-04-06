@@ -151,7 +151,7 @@ class SmartlistViewModel: Stateable, ViewModel {
                 .sorted(by: { conversation1, conversations2 in
                     guard let lastMessage1 = conversation1.messages.last,
                         let lastMessage2 = conversations2.messages.last else {
-                            return true
+                            return conversation1.messages.count > conversations2.messages.count
                     }
                     return lastMessage1.receivedDate > lastMessage2.receivedDate
                 })
