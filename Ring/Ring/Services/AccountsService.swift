@@ -403,8 +403,6 @@ class AccountsService: AccountAdapterDelegate {
                 return accountModel
             }.take(1)
             .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
-                self.currentAccount = accountModel
-                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
                 return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
             })
     }

@@ -237,6 +237,17 @@ class DBManager {
         self.dbConnections.removeDBForAccount(account: accountId)
     }
 
+    func createConversationsFor(contactUri: String, accountId: String) {
+        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+            return
+        }
+        do {
+            try _ = self.getConversationsFor(contactUri: contactUri,
+                                         createIfNotExists: true,
+                                         dataBase: dataBase)
+        } catch {}
+    }
+
     // swiftlint:disable:next function_parameter_count
     func saveMessage(for accountId: String, with contactUri: String,
                      message: MessageModel, incoming: Bool,
