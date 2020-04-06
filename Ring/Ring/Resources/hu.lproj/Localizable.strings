@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Főoldal";
+"global.homeTabBarTitle" = "Beszélgetések";
 "global.contactRequestsTabBarTitle" = "Meghívások";
 "global.meTabBarTitle" = "Fiók";
 "global.ok" = "Rendben";
@@ -56,7 +56,7 @@
 "welcome.title" = "Isten hozott!";
 "welcome.text" = "A Jami egy szabad szoftver az egyetemes közlés emelvény, mely tiszteletben tartja a felhasználók szabadságát és magán szféráját";
 "welcome.linkDevice" = "Ezen eszköz összekapcsolása egy fiókhoz";
-"welcome.createAccount" = "Jami fiók létrehozása";
+"welcome.createAccount" = "Jami-fiók létrehozása";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Átugrani";
@@ -112,8 +112,8 @@
 "alerts.accountCannotBeFoundTitle" = "A fiók nem található";
 "alerts.accountCannotBeFoundMessage" = "Nem található a fiók a Jami hálózatában. Győződjön meg róla, hogy a meglévő eszközön a Jami-t exportálták és a hitelesítő adatok helyesek voltak.";
 "alerts.accountAddedTitle" = "Hozzáadott fiók";
-"alerts.accountNoNetworkTitle" = "Nem tud csatlakozni a hálózathoz";
-"alerts.accountNoNetworkMessage" = "Nem sikerült hozzáadni a fiókot mert a Jami nem tudott csatlakozni az elosztott hálózathoz. Ellenőrizze az eszköz csatlakoztatását.";
+"alerts.accountNoNetworkTitle" = "Nem lehet csatlakozni a hálózathoz";
+"alerts.accountNoNetworkMessage" = "Nem sikerült hozzáadni a fiókot, mert a Jami nem tudott csatlakozni az elosztott hálózathoz. Ellenőrizze az eszköz kapcsolatát.";
 "alerts.accountDefaultErrorTitle" = "Ismeretlen hiba";
 "alerts.accountDefaultErrorMessage" = "A fiókot nem lehet létrehozni.";
 "alerts.profileTakePhoto" = "Fotó készítése";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";
 "accountPage.settingsHeader" = "Beállítások";
-"accountPage.username" = "Username";
+"accountPage.username" = "Felhasználónév";
 "accountPage.usernameNotRegistered" = "felhasználónév: nincs bejegyzett";
 "accountPage.credentialsHeader" = "Fiók részletek";
 "accountPage.enableProxy" = "Meghatalmazott engedélyezése";
@@ -190,14 +190,21 @@
 "accountPage.removeAccountButton" = "Eltávolítás";
 "accountPage.shareAccountDetails" = "Fiók részletek megosztása";
 "accountPage.contactMeOnJamiTitle" = "Lépjen kapcsolatba velem a Jami-n!";
-"accountPage.contactMeOnJamiContant" = "Adj hozzá a Jami decentrális messenger-en az alábbi kóddal:  \n%s\nhttps://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Felhasználónév bejegyeztetése";
+"accountPage.passwordPlaceholder" = "Adja meg a fiók jelszavát";
+"accountPage.usernamePlaceholder" = "Írja be a kívánt felhasználónevet";
+"accountPage.registerNameErrorMessage" = "A kért felhasználónév nem érhető.";
+"accountPage.usernameRegistering" = "Regisztráció…";
+"accountPage.usernameRegisterAction" = "Regisztráció";
+"accountPage.usernameRegistrationFailed" = "Regisztráció sikertelen. Kérjük, ellenőrizze a jelszót.";
 
 //Account
 "account.sipUsername" = "Felhasználónév";
 "account.sipPassword" = "Jelszó";
 "account.sipServer" = "SIP-kiszolgáló";
-"account.port" = "Kikötő";
-"account.proxyServer" = "Meghatalmazott";
+"account.port" = "Port";
+"account.proxyServer" = "Proxy";
 "account.createSipAccount" = "SIP fiók létrehozása";
 "account.usernameLabel" = "Felhasználónév megadása";
 "account.passwordLabel" = "A jelszó megadása";
@@ -206,7 +213,7 @@
 "account.accountStatus" = "Fiók állapota";
 "account.enableAccount" = "Fiók engedélyezése";
 "account.statusOnline" = "Elérhető";
-"account.statusOffline" = "Nem elérhető";
+"account.statusOffline" = "Nem érhető el";
 "account.statusConnecting" = "Kapcsolódás";
 "account.statusUnknown" = "Ismeretlen";
 "account.statusConnectionerror" = "Csatlakozási hiba";

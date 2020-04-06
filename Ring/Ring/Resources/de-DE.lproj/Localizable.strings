@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "Gespräche";
 "global.contactRequestsTabBarTitle" = "Einladungen";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "Ok";
@@ -38,7 +38,7 @@
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkkonnektivität";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Bitte stellen Sie sicher, dass in den Einstellungen Mobilfunkzugriff gewährt wurde.";
 "smartlist.accountsTitle" = "Konten";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
@@ -97,7 +97,7 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Passwort eingeben";
 "linkToAccount.pinLabel" = "PIN eingeben";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Um eine PIN zu generieren, wechseln Sie zu den Kontoeinstellungen auf dem Gerät dessen Konto Sie benutzen möchten. Wählen Sie in den Geräteeinstellungen \"Weiteres Gerät mit diesem Konto verknüpfen\". Sie erhalten dann die PIN um dieses Formular auszufüllen. Die PIN ist nur für 10 Minuten gültig.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";
 "accountPage.settingsHeader" = "Einstellungen";
-"accountPage.username" = "Username";
+"accountPage.username" = "Benutzername";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Entfernen";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Registrieren";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "User Name";

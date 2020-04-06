@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Accueil";
+"global.homeTabBarTitle" = "Conversations";
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Compte";
 "global.ok" = "Ok";
@@ -59,7 +59,7 @@
 "welcome.createAccount" = "Créer un compte Jami";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Passer";
 "createProfile.profileCreated" = "Suivant";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";
 "accountPage.settingsHeader" = "Réglages";
-"accountPage.username" = "Username";
+"accountPage.username" = "Nom d'utilisateur";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Activer le Proxy";
@@ -185,12 +185,19 @@
 "accountPage.namePlaceholder" = "Nom";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Autre";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Supprimer le compte";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Remove";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Entrer le mot de passe de votre compte";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Inscription";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "User Name";
@@ -236,7 +243,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Annulé";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accepter";
@@ -251,11 +258,11 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Annulé";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuler";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Appuyer pour démarrer l'enregistrement";
 "dataTransfer.sendMessage" = "Envoyer";
 
 

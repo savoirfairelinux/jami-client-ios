@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Inicio";
+"global.homeTabBarTitle" = "Conversaciones";
 "global.contactRequestsTabBarTitle" = "Invitaciones";
 "global.meTabBarTitle" = "Cuenta";
 "global.ok" = "Okay";
@@ -37,7 +37,7 @@
 "smartlist.noResults" = "Sin resultados";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.noNetworkConnectivity" = "Sin conexión a red";
+"smartlist.noNetworkConnectivity" = "Sin conexión a la red";
 "smartlist.cellularAccess" = "Asegúrate de que el acceso a la red móvil esté activado en tu configuración";
 "smartlist.accountsTitle" = "Cuentas";
 "smartlist.addAccountButton" = "+ Add Account";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Ajustes";
-"accountPage.username" = "Username";
+"accountPage.username" = "Nombre de usuario";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Eliminar";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Registrar";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "User Name";

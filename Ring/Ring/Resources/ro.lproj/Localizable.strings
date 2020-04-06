@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Acasă";
+"global.homeTabBarTitle" = "Conversations";
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
@@ -59,7 +59,7 @@
 "welcome.createAccount" = "Creați un cont Jami";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Sari";
+"createProfile.skipCreateProfile" = "Omite";
 "createProfile.profileCreated" = "Înainte";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -156,8 +156,8 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Setari";
-"accountPage.username" = "Username";
+"accountPage.settingsHeader" = "Setări";
+"accountPage.username" = "Nume de utilizator";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Remove";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Registrare";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "User Name";

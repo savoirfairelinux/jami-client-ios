@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Hasiera";
+"global.homeTabBarTitle" = "Elkarrizketak";
 "global.contactRequestsTabBarTitle" = "Gonbidapenak";
 "global.meTabBarTitle" = "Kontua";
 "global.ok" = "Ados";
@@ -60,7 +60,7 @@
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Jauzi";
-"createProfile.profileCreated" = "Hurengoa";
+"createProfile.profileCreated" = "Hurrengoa";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
 "createProfile.enterNamePlaceholder" = "Sartu izena";
@@ -121,7 +121,7 @@
 "alerts.profileCancelPhoto" = "Ezeztatu";
 "alerts.accountLinkedTitle" = "Kontua estekatzen";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
-"alerts.dbFailedMessage" = "Itxi aplikazioa eta saiatu berriro";
+"alerts.dbFailedMessage" = "Itxi aplikazioa eta saiatu berriro irekitzen";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Gailuak";
 "accountPage.settingsHeader" = "Ezarpenak";
-"accountPage.username" = "Username";
+"accountPage.username" = "Erabiltzaile-izena";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Remove";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Erregistratu";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "User Name";

@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "الصفحة الرئيسية";
+"global.homeTabBarTitle" = "محادثات";
 "global.contactRequestsTabBarTitle" = "الدعوات";
 "global.meTabBarTitle" = "حساب";
 "global.ok" = "موافق";
@@ -74,7 +74,7 @@
 "createAccount.newPasswordPlaceholder" = "كلمة السر";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
 "createAccount.passwordCharactersNumberError" = "6 محارف على الأقل";
-"createAccount.passwordNotMatchingError" = "كلمة المرور غير متطابقة";
+"createAccount.passwordNotMatchingError" = "كلمات المرور غير متطابقة";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "اسم المستخدم غير صالح";
 "createAccount.usernameAlreadyTaken" = "هذا الاسم غير متوفر";
@@ -109,7 +109,7 @@
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "لم يعثر على الحساب";
+"alerts.accountCannotBeFoundTitle" = "لا يستطيع  العثور على الحساب";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "تمت إضافة الحساب";
 "alerts.accountNoNetworkTitle" = "لا يستطيع الاتصال بالشبكة";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "الأجهزة";
 "accountPage.settingsHeader" = "إعدادات";
-"accountPage.username" = "Username";
+"accountPage.username" = "اسم المستخدم";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "احذف";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "سجل";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "اسم المستخدم";
@@ -266,7 +273,7 @@
 "generatedMessage.outgoingCall" = "مكالمة خارجة";
 "generatedMessage.incomingCall" = "مكالمة واردة";
 "generatedMessage.missedOutgoingCall" = "مكالمة خارجة فائتة";
-"generatedMessage.missedIncomingCall" = "مكالمة داخلة فائتة";
+"generatedMessage.missedIncomingCall" = "مكالمة واردة فائتة";
 
 //General Settings
 "generalSettings.title" = "General settings";

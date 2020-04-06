@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Hem";
+"global.homeTabBarTitle" = "Konversationer";
 "global.contactRequestsTabBarTitle" = "Inbjudningar";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "OK";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
 "accountPage.settingsHeader" = "Inställningar";
-"accountPage.username" = "Username";
+"accountPage.username" = "Användarnamn";
 "accountPage.usernameNotRegistered" = "Användarnamn: Inte registrerat";
 "accountPage.credentialsHeader" = "Kontoinformation";
 "accountPage.enableProxy" = "Aktivera proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Ta bort";
 "accountPage.shareAccountDetails" = "Dela kontoinformation";
 "accountPage.contactMeOnJamiTitle" = "Kontakta mig på Jami!";
-"accountPage.contactMeOnJamiContant" = "Kontakta mig via \"%s\" på den distribuerade kommunikationsplattformen Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Registrera ett användarnamn";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Registrera";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "Användarnamn";
@@ -205,7 +212,7 @@
 "account.portLabel" = "Ange portnummer";
 "account.accountStatus" = "Kontostatus";
 "account.enableAccount" = "Aktivera konto";
-"account.statusOnline" = "Uppkopplad";
+"account.statusOnline" = "Ansluten";
 "account.statusOffline" = "Nerkopplad";
 "account.statusConnecting" = "Ansluter";
 "account.statusUnknown" = "Okänd";

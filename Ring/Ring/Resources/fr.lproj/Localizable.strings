@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Accueil";
+"global.homeTabBarTitle" = "Conversations";
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Compte";
 "global.ok" = "OK";
@@ -100,13 +100,13 @@
 "linkToAccount.explanationPinMessage" = "Pour générer votre NIP, allez dans les paramètres de gestion de compte de l'appareil qui contient le compte que vous souhaitez utiliser. Sélectionnez \"Connecter un autre appareil à ce compte\". Vous obtiendrez le code NIP nécessaire pour terminer la procédure d'association.  Le NIP est seulement valide pour une période de 10 minutes.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Connexion";
 "linkToAccountManager.passwordPlaceholder" = "Mot de passe";
 "linkToAccountManager.passwordLabel" = "Entrez le mot de passe";
 "linkToAccountManager.usernamePlaceholder" = "Nom d'utilisateur";
 "linkToAccountManager.usernameLabel" = "Entrer l'identifiant";
 "linkToAccountManager.accountManagerPlaceholder" = "Gestionnaire de compte";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerLabel" = "Entrez l'URI du gestionnaire de compte";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Compte introuvable";
@@ -131,7 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Effacer la conversation";
 "alerts.noMediaPermissionsTitle" = "L'accès au média non autorisé";
 "alerts.noLibraryPermissionsTitle" = "L'accès à la bibliothèque de photos non autorisé";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.errorWrongCredentials" = "Je n'arrive pas à me connecter à votre gestionnaire de compte. Vérifiez vos éléments d'authentification.";
 
 //Actions
 "actions.blockAction" = "Bloquer";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";
 "accountPage.settingsHeader" = "Paramètres";
-"accountPage.username" = "Username";
+"accountPage.username" = "Nom d'utilisateur";
 "accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
 "accountPage.credentialsHeader" = "Détails du compte";
 "accountPage.enableProxy" = "Utiliser un nœud délégataire";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Enlever";
 "accountPage.shareAccountDetails" = "Partager les détails du compte ";
 "accountPage.contactMeOnJamiTitle" = "Contactez moi sur Jami !";
-"accountPage.contactMeOnJamiContant" = "Contactez-moi par l'identifiant : %s sur la plateforme distribuée de communication Jami. https://jami.net ";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Enregistrer un nom d'utilisateur";
+"accountPage.passwordPlaceholder" = "Entrer le mot de passe de votre compte";
+"accountPage.usernamePlaceholder" = "Entrez le nom d'utilisateur souhaité";
+"accountPage.registerNameErrorMessage" = "Le nom d'utilisateur choisi n'est pas disponible";
+"accountPage.usernameRegistering" = "Inscription";
+"accountPage.usernameRegisterAction" = "Enregistrer";
+"accountPage.usernameRegistrationFailed" = "L'enregistrement a échoué. Veuillez vérifier le mot de passe.";
 
 //Account
 "account.sipUsername" = "Nom d'utilisateur";

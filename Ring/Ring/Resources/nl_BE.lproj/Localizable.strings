@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Thuis";
+"global.homeTabBarTitle" = "Gesprekken";
 "global.contactRequestsTabBarTitle" = "Uitnodigingen";
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Oké";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";
 "accountPage.settingsHeader" = "Instellingen";
-"accountPage.username" = "Username";
+"accountPage.username" = "Gebruikersnaam";
 "accountPage.usernameNotRegistered" = "gebruikersnaam: niet geregistreerd";
 "accountPage.credentialsHeader" = "Accountgegevens";
 "accountPage.enableProxy" = "Proxy inschakelen";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Verwijderen";
 "accountPage.shareAccountDetails" = "Accountdetails delen";
 "accountPage.contactMeOnJamiTitle" = "Contacteer mij op Jami!";
-"accountPage.contactMeOnJamiContant" = "Contacteer mij met ‘%s’ op Jami, het gedistribueerde communicatieplatform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Een gebruikersnaam registreren";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Registreren";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "Gebruikersnaam";

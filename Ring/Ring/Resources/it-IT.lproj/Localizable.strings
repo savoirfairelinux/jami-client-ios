@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "Conversazioni";
 "global.contactRequestsTabBarTitle" = "Inviti";
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
@@ -149,7 +149,7 @@
 "calls.incomingCallInfo" = "vuole parlare con te";
 "calls.ringing" = "Squilla...";
 "calls.connecting" = "Connessione in corso ...";
-"calls.searching" = "Ricerca...";
+"calls.searching" = "Ricerca in corso ...";
 "calls.callFinished" = "Chiamata terminata";
 "calls.currentCallWith" = "Chiamata con";
 "calls.haghUp" = "riaggancia";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivi";
 "accountPage.settingsHeader" = "Opzioni";
-"accountPage.username" = "Username";
+"accountPage.username" = "Utente";
 "accountPage.usernameNotRegistered" = "utente: non registrato";
 "accountPage.credentialsHeader" = "Dettagli account";
 "accountPage.enableProxy" = "Abilita proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Rimuovi";
 "accountPage.shareAccountDetails" = "Condividi dettagli account";
 "accountPage.contactMeOnJamiTitle" = "Contattami su Jami!";
-"accountPage.contactMeOnJamiContant" = "Contattami usando \"%s\" sulla piattaforma di comunicazione distribuita Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Registra un nome utente";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Salva";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "Nome Utente";

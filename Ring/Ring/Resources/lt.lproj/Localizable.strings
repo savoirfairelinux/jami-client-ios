@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Pradžia";
+"global.homeTabBarTitle" = "Pokalbiai";
 "global.contactRequestsTabBarTitle" = "Pakvietimai";
 "global.meTabBarTitle" = "Paskyra";
 "global.ok" = "Gerai";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";
 "accountPage.settingsHeader" = "Nustatymai";
-"accountPage.username" = "Username";
+"accountPage.username" = "Naudotojo vardas";
 "accountPage.usernameNotRegistered" = "naudotojo vardas: neregistruotas";
 "accountPage.credentialsHeader" = "Išsamesnė paskyros informacija";
 "accountPage.enableProxy" = "Įjungti įgaliotąjį serverį";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Šalinti";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Registruoti";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "Naudotojo vardas";

@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Домой";
+"global.homeTabBarTitle" = "Разговоры";
 "global.contactRequestsTabBarTitle" = "Приглашения";
 "global.meTabBarTitle" = "Аккаунт";
 "global.ok" = "OK";
@@ -100,13 +100,13 @@
 "linkToAccount.explanationPinMessage" = "Чтобы получить PIN код, перейдите в настройки управления аккаунтом на устройстве, содержащем необходимый аккаунт. В настройках устройств выберите \"Привязать другое устройство к этому аккаунту\". Вы получите необходимый PIN код для завершения процедуры. PIN код действителен в течение 10 минут.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Войти";
 "linkToAccountManager.passwordPlaceholder" = "Пароль";
 "linkToAccountManager.passwordLabel" = "Введите пароль";
 "linkToAccountManager.usernamePlaceholder" = "Имя пользователя";
 "linkToAccountManager.usernameLabel" = "Введите имя пользователя";
 "linkToAccountManager.accountManagerPlaceholder" = "Менеджер учетной записи";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerLabel" = "Введите URI-адрес менеджера учетных записей";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не удалось найти аккаунт";
@@ -129,9 +129,9 @@
 "alerts.confirmDeleteConversationTitle" = "Удалить разговор";
 "alerts.confirmClearConversation" = "Вы уверены, что хотите удалить разговор с этим контактом?";
 "alerts.confirmClearConversationTitle" = "Очистить разговор";
-"alerts.noMediaPermissionsTitle" = "Не предоставлено разрешение на СМИ ";
+"alerts.noMediaPermissionsTitle" = "Не прав доступа к медиа";
 "alerts.noLibraryPermissionsTitle" = "Не предоставлен доступ к библиотеке фотографий";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.errorWrongCredentials" = "Не удалось подключиться к предоставленному менеджеру учетных записей. Пожалуйста, проверьте Ваши учетные данные.";
 
 //Actions
 "actions.blockAction" = "Заблокировать";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
-"accountPage.username" = "Username";
+"accountPage.username" = "Имя пользователя";
 "accountPage.usernameNotRegistered" = "имя пользователя: не зарегистрировано";
 "accountPage.credentialsHeader" = "Информация об аккаунте";
 "accountPage.enableProxy" = "Включить прокси";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Удалить";
 "accountPage.shareAccountDetails" = "Поделиться информацией об учетной записи";
 "accountPage.contactMeOnJamiTitle" = "Свяжитесь со мной в Jami!";
-"accountPage.contactMeOnJamiContant" = "Свяжитесь со мной, используя \"%s\" в распределенной коммуникационной платформе Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Зарегистрировать имя пользователя";
+"accountPage.passwordPlaceholder" = "Введите пароль вашего аккаунта";
+"accountPage.usernamePlaceholder" = "Введите желаемое имя пользователя";
+"accountPage.registerNameErrorMessage" = "Выбранное имя пользователя недоступно";
+"accountPage.usernameRegistering" = "Регистрация";
+"accountPage.usernameRegisterAction" = "Зарегистрировать";
+"accountPage.usernameRegistrationFailed" = "Ошибка регистрации. Пожалуйста, проверьте пароль.";
 
 //Account
 "account.sipUsername" = "Имя";
@@ -264,9 +271,9 @@
 "generatedMessage.invitationReceived" = "Получено приглашение";
 "generatedMessage.invitationAccepted" = "Приглашение принято";
 "generatedMessage.outgoingCall" = "Исходящий вызов";
-"generatedMessage.incomingCall" = "Входящий вызов";
-"generatedMessage.missedOutgoingCall" = "Непринятый исходящий вызов";
-"generatedMessage.missedIncomingCall" = "Пропущенный входящий вызов";
+"generatedMessage.incomingCall" = "Входящий звонок";
+"generatedMessage.missedOutgoingCall" = "Непринятый исходящий звонок";
+"generatedMessage.missedIncomingCall" = "Пропущенный входящий звонок";
 
 //General Settings
 "generalSettings.title" = "Основные настройки";

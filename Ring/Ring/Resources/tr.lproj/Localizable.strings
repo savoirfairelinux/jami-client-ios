@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Ev";
+"global.homeTabBarTitle" = "Konuşmalar";
 "global.contactRequestsTabBarTitle" = "Davetiyeler";
 "global.meTabBarTitle" = "Hesap";
 "global.ok" = "Tamam";
@@ -100,7 +100,7 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Oturum Aç";
 "linkToAccountManager.passwordPlaceholder" = "Parola";
 "linkToAccountManager.passwordLabel" = "Parola Girin";
 "linkToAccountManager.usernamePlaceholder" = "Kullanıcı adı";
@@ -137,7 +137,7 @@
 "actions.blockAction" = "Engelleme";
 "actions.deleteAction" = "Sil";
 "actions.cancelAction" = "İptal";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Temizle";
 "actions.backAction" = "Geri";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Kabul et";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";
 "accountPage.settingsHeader" = "Ayarlar";
-"accountPage.username" = "Username";
+"accountPage.username" = "Kullanıcı adı";
 "accountPage.usernameNotRegistered" = "kullanıcı adı: kayıtlı değil";
 "accountPage.credentialsHeader" = "Hesap ayrıntıları";
 "accountPage.enableProxy" = "Vekil sunucuyu etkinleştir";
@@ -186,11 +186,18 @@
 "accountPage.linkDeviceTitle" = "Diğer aygıtı bağla";
 "accountPage.other" = "Diğer";
 "accountPage.removeAccountTitle" = "Hesabı Kaldır";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "\"Kaldır\"'a tıklayarak bu cihazdaki tüm hesapları kaldıracaksınız! Bu eylem geri alınamaz. Ayrıca, kayıtlı adınız kaybolabilir.";
 "accountPage.removeAccountButton" = "Kaldır";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Hesap Detaylarını Paylaş";
+"accountPage.contactMeOnJamiTitle" = "Benimle Jami'de iletişime geç!";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Bir kullanıcı adı kaydedin";
+"accountPage.passwordPlaceholder" = "Hesap parolanızı girin";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Seçilen kullanıcı adı uygun değil";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Kaydol";
+"accountPage.usernameRegistrationFailed" = "Kayıt başarısız. Lütfen parolanızı kontrol edin.";
 
 //Account
 "account.sipUsername" = "Kullanıcı Adı";
@@ -202,7 +209,7 @@
 "account.usernameLabel" = "Kullanıcı Adını Girin";
 "account.passwordLabel" = "Parola Girin";
 "account.serverLabel" = "Adres Girin";
-"account.portLabel" = "Enter Port Number";
+"account.portLabel" = "Port numarası girin";
 "account.accountStatus" = "Hesap Durumu";
 "account.enableAccount" = "Hesabı etkinleştir";
 "account.statusOnline" = "Çevrimiçi";
@@ -237,7 +244,7 @@
 "dataTransfer.readableStatusRefuse" = "Geri Çevir";
 "dataTransfer.readableStatusOngoing" = "Aktarıyor";
 "dataTransfer.readableStatusCanceled" = "İptal edildi";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "Gönderme başarısız";
 "dataTransfer.readableStatusSuccess" = "Tam";
 "dataTransfer.readableStatusAccept" = "Kabul et";
 "dataTransfer.readableStatusCancel" = "İptal";
@@ -247,7 +254,7 @@
 "notifications.missedCall" = "Yanıtsız Arama";
 "notifications.acceptCall" = "KABUL ET";
 "notifications.refuseCall" = "REDDET";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Yeni dosya";
 "dataTransfer.readableStatusAwaiting" = "Bekliyor...";
 "dataTransfer.readableStatusRefuse" = "Geri Çevir";
 "dataTransfer.readableStatusOngoing" = "Aktarıyor";
@@ -255,7 +262,7 @@
 "dataTransfer.readableStatusSuccess" = "Tam";
 "dataTransfer.readableStatusAccept" = "Kabul et";
 "dataTransfer.readableStatusCancel" = "İptal";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Kaydı başlatmak için basın";
 "dataTransfer.sendMessage" = "Gönder";
 
 

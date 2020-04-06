@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "首頁";
+"global.homeTabBarTitle" = "對話";
 "global.contactRequestsTabBarTitle" = "邀請";
 "global.meTabBarTitle" = "帳號";
 "global.ok" = "確定";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "裝置";
 "accountPage.settingsHeader" = "設定";
-"accountPage.username" = "Username";
+"accountPage.username" = "使用者名稱";
 "accountPage.usernameNotRegistered" = "使用者名稱：未註冊";
 "accountPage.credentialsHeader" = "帳號詳細資訊";
 "accountPage.enableProxy" = "啟用代理伺服器";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "移除";
 "accountPage.shareAccountDetails" = "分享帳號詳細資料";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上聯絡我";
-"accountPage.contactMeOnJamiContant" = "在 Jami 分散式通訊平臺：https://jami.net 上使用「%s」聯絡我";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "註冊使用者名稱";
+"accountPage.passwordPlaceholder" = "輸入帳號密碼";
+"accountPage.usernamePlaceholder" = "輸入所需的使用者名稱";
+"accountPage.registerNameErrorMessage" = "選定的使用者名稱不可用";
+"accountPage.usernameRegistering" = "正在註冊";
+"accountPage.usernameRegisterAction" = "註冊";
+"accountPage.usernameRegistrationFailed" = "註冊失敗。請檢查密碼。";
 
 //Account
 "account.sipUsername" = "使用者名稱";

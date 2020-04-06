@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Start";
+"global.homeTabBarTitle" = "Unterhaltungen";
 "global.contactRequestsTabBarTitle" = "Einladungen";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "Ok";
@@ -100,13 +100,13 @@
 "linkToAccount.explanationPinMessage" = "Um den PIN-Code zu generieren, gehen Sie zu den Einstellungen für die Kontoverwaltung auf dem Gerät, das das gewünschte Konto enthält. Wählen Sie \"Ein anderes Gerät mit diesem Konto verknüpfen\". Sie erhalten die erforderliche PIN, um dieses Formular auszufüllen. Die PIN ist nur für 10 Minuten gültig.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Einloggen";
 "linkToAccountManager.passwordPlaceholder" = "Passwort";
 "linkToAccountManager.passwordLabel" = "Passwort eingeben";
 "linkToAccountManager.usernamePlaceholder" = "Benutzername";
 "linkToAccountManager.usernameLabel" = "Benutzername eingeben";
 "linkToAccountManager.accountManagerPlaceholder" = "Kontoverwalter";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerLabel" = "Kontoverwalter URI angeben";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kann Konto nicht finden";
@@ -131,7 +131,7 @@
 "alerts.confirmClearConversationTitle" = "Gesprächsverlauf löschen";
 "alerts.noMediaPermissionsTitle" = "Medienzugriff nicht gewährt";
 "alerts.noLibraryPermissionsTitle" = "Zugriff auf die Bildergalerie nicht gewährt";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.errorWrongCredentials" = "Es kann keine Verbindung mit dem angegebenen Kontoverwalter hergestellt werden. Bitte prüfe deine Zugangsdaten.";
 
 //Actions
 "actions.blockAction" = "Sperren";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";
 "accountPage.settingsHeader" = "Einstellungen";
-"accountPage.username" = "Username";
+"accountPage.username" = "Benutzername";
 "accountPage.usernameNotRegistered" = "Benutzername: Nicht registriert";
 "accountPage.credentialsHeader" = "Kontodetails";
 "accountPage.enableProxy" = "Proxy aktivieren";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Entfernen";
 "accountPage.shareAccountDetails" = "Kontodetails teilen";
 "accountPage.contactMeOnJamiTitle" = "Kontaktieren Sie mich über Jami!";
-"accountPage.contactMeOnJamiContant" = "Kontaktieren sie mich über \"%s\" auf der verteilten Kommunikationsplattform Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Benutzername registrieren";
+"accountPage.passwordPlaceholder" = "Geben Sie ihr Kontopasswort ein";
+"accountPage.usernamePlaceholder" = "Gewünschten Benutzername eingeben";
+"accountPage.registerNameErrorMessage" = "Der angegebene Benutzername ist nicht verfügbar";
+"accountPage.usernameRegistering" = "Benutzername wird registriert...";
+"accountPage.usernameRegisterAction" = "Registrieren";
+"accountPage.usernameRegistrationFailed" = "Registrierung fehlgeschlagen. Bitte Passwort überprüfen.";
 
 //Account
 "account.sipUsername" = "Benutzername";

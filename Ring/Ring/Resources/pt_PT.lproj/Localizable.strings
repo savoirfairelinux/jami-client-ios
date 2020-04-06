@@ -19,11 +19,11 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Início";
+"global.homeTabBarTitle" = "Conversas";
 "global.contactRequestsTabBarTitle" = "Convites";
 "global.meTabBarTitle" = "Conta";
 "global.ok" = "OK";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Livre como em Liberdade";
 
 // Scan
 "scan.badQrCode" = "Código QR inválido";
@@ -100,13 +100,13 @@
 "linkToAccount.explanationPinMessage" = "Para gerar o código PIN, aceda às configurações de gestão da conta no dispositivo que contém a conta que deseja usar. Em \"configurações de dispositivos\", selecione \"Associar outro dispositivo a esta conta\". Irá receberá o PIN necessário para completar este formulário. O PIN só é válido por 10 minutos.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Iniciar sessão";
 "linkToAccountManager.passwordPlaceholder" = "Palavra-chave";
 "linkToAccountManager.passwordLabel" = "Introduzir Palavra-Chave";
 "linkToAccountManager.usernamePlaceholder" = "Nome de utilizador";
 "linkToAccountManager.usernameLabel" = "Introduzir nome de utilizador";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "Gestor de conta";
+"linkToAccountManager.accountManagerLabel" = "Introduza o URL do gestor de conta";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Não foi possível encontrar a conta";
@@ -129,9 +129,9 @@
 "alerts.confirmDeleteConversationTitle" = "Eliminar Conversa";
 "alerts.confirmClearConversation" = "Tem a certeza que quer limpar a conversação com este contacto?";
 "alerts.confirmClearConversationTitle" = "Limpar conversação";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.noMediaPermissionsTitle" = "Permissão de media não autorizada";
+"alerts.noLibraryPermissionsTitle" = "Acesso à biblioteca de fotos não autorizado";
+"alerts.errorWrongCredentials" = "Não foi possível ligar ao gestor de conta especificado.\nPor favor verifique as suas credenciais";
 
 //Actions
 "actions.blockAction" = "Bloquear";
@@ -152,12 +152,12 @@
 "calls.searching" = "A pesquisar…";
 "calls.callFinished" = "Chamada terminada";
 "calls.currentCallWith" = "Chamar com";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "terminar chamada";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Configurações";
-"accountPage.username" = "Username";
+"accountPage.username" = "Nome de utilizador";
 "accountPage.usernameNotRegistered" = "utilizador: não registado";
 "accountPage.credentialsHeader" = "Detalhes da Conta";
 "accountPage.enableProxy" = "Ativar Proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Remover";
 "accountPage.shareAccountDetails" = "Partilhar detalhes da conta";
 "accountPage.contactMeOnJamiTitle" = "Contacte-me no Jami!";
-"accountPage.contactMeOnJamiContant" = "Contacte-me usando \"%s\" na plataforma de comunicação distribuída Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Registar um nome de utilizador";
+"accountPage.passwordPlaceholder" = "Introduza a palavra-chave da conta";
+"accountPage.usernamePlaceholder" = "Introduza o nome de utilizador que deseja";
+"accountPage.registerNameErrorMessage" = "O nome de utilizador escolhido não está disponível";
+"accountPage.usernameRegistering" = "A registar";
+"accountPage.usernameRegisterAction" = "Registar";
+"accountPage.usernameRegistrationFailed" = "Falha ao registar. Por favor verifique a palavra-chave.";
 
 //Account
 "account.sipUsername" = "Nome do utilizador";
@@ -237,7 +244,7 @@
 "dataTransfer.readableStatusRefuse" = "Recusar";
 "dataTransfer.readableStatusOngoing" = "A transferir";
 "dataTransfer.readableStatusCanceled" = "Cancelada";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "Falha ao enviar";
 "dataTransfer.readableStatusSuccess" = "Completa";
 "dataTransfer.readableStatusAccept" = "Aceitar";
 "dataTransfer.readableStatusCancel" = "Cancelar";
@@ -255,7 +262,7 @@
 "dataTransfer.readableStatusSuccess" = "Completa";
 "dataTransfer.readableStatusAccept" = "Aceitar";
 "dataTransfer.readableStatusCancel" = "Cancelar";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Clique para iniciar a gravação";
 "dataTransfer.sendMessage" = "Enviar";
 
 

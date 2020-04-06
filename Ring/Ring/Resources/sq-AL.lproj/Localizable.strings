@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Kreu";
+"global.homeTabBarTitle" = "Biseda";
 "global.contactRequestsTabBarTitle" = "Ftesa";
 "global.meTabBarTitle" = "Llogari";
 "global.ok" = "OK";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";
 "accountPage.settingsHeader" = "Rregullime";
-"accountPage.username" = "Username";
+"accountPage.username" = "Emër përdoruesi";
 "accountPage.usernameNotRegistered" = "emër përdoruesi: jo i regjistruar";
 "accountPage.credentialsHeader" = "Hollësi Llogarie";
 "accountPage.enableProxy" = "Aktivizo Ndërmjetës";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Hiqe";
 "accountPage.shareAccountDetails" = "Nda Hollësi Llogarie";
 "accountPage.contactMeOnJamiTitle" = "Lidhuni me mua në Jami!";
-"accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur \"%s\" në platformën e komunikimeve të shpërndara Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Regjistroni një emër përdoruesi";
+"accountPage.passwordPlaceholder" = "Jepni fjalëkalim llogarie";
+"accountPage.usernamePlaceholder" = "Jepni emrin e dëshiruar të përdoruesit";
+"accountPage.registerNameErrorMessage" = "Emri i përdoruesit i zgjedhur s’është i lirë";
+"accountPage.usernameRegistering" = "Regjistrim";
+"accountPage.usernameRegisterAction" = "Regjistrohuni";
+"accountPage.usernameRegistrationFailed" = "Regjistrimi dështoi. Ju lutemi, kontrolloni fjalëkalimin.";
 
 //Account
 "account.sipUsername" = "Emër Përdoruesi";

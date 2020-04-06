@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Home";
+"global.homeTabBarTitle" = "Conversazioni";
 "global.contactRequestsTabBarTitle" = "inviti";
 "global.meTabBarTitle" = "Profilo";
 "global.ok" = "Ok";
@@ -105,7 +105,7 @@
 "linkToAccountManager.passwordLabel" = "Inserisci Password";
 "linkToAccountManager.usernamePlaceholder" = "Nome utente";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerPlaceholder" = "Gestore account";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivi";
 "accountPage.settingsHeader" = "Impostazioni";
-"accountPage.username" = "Username";
+"accountPage.username" = "Nome utente";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Rimuovi";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Registra";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "User Name";

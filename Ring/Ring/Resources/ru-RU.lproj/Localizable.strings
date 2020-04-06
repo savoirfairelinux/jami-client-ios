@@ -19,33 +19,33 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Домой";
+"global.homeTabBarTitle" = "Разговоры";
 "global.contactRequestsTabBarTitle" = "Приглашения";
 "global.meTabBarTitle" = "Учётная запись";
 "global.ok" = "Да";
 "global.versionName" = "Свобода";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "Плохой QR-code";
+"scan.search" = "Поиск...";
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Результаты поиска";
 "smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Поиск...";
 "smartlist.noResults" = "Нет результатов";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.noConversation" = "Нет разговоров";
+"smartlist.searchBarPlaceholder" = "Введите имя...";
 "smartlist.noNetworkConnectivity" = "Отсутствует сетевое подключение";
 "smartlist.cellularAccess" = "Убедитесь, что сотовый доступ предоставляется в настройках";
 "smartlist.accountsTitle" = "Учетные записи";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.addAccountButton" = "+ Добавить аккаунт";
+"smartlist.noNumber" = "Выбранный контакт не имеет номера";
+"smartlist.selectOneNumber" = "Выберите один из номеров";
 
 //Conversation
-"conversation.messagePlaceholder" = "Type your message...";
+"conversation.messagePlaceholder" = "Введите ваше сообщение...";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
@@ -149,7 +149,7 @@
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Соединение…";
-"calls.searching" = "Searching…";
+"calls.searching" = "Поиск...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
-"accountPage.username" = "Username";
+"accountPage.username" = "Имя пользователя";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Включить Прокси";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Убрать";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Зарегистрировать";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "User Name";

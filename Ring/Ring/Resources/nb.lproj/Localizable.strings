@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Hjem";
+"global.homeTabBarTitle" = "Samtaler";
 "global.contactRequestsTabBarTitle" = "Invitasjoner";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "OK";
@@ -27,7 +27,7 @@
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.search" = "Søker...";
 
 // Smartlist
 "smartlist.yesterday" = "Igår";
@@ -63,7 +63,7 @@
 "createProfile.profileCreated" = "Neste";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "Skriv inn navn";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
@@ -149,7 +149,7 @@
 "calls.incomingCallInfo" = "ønsker å snakke med deg";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Kobler opp...";
-"calls.searching" = "Searching…";
+"calls.searching" = "Søker...";
 "calls.callFinished" = "Samtale fullført";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
 "accountPage.settingsHeader" = "Innstillinger";
-"accountPage.username" = "Username";
+"accountPage.username" = "Brukernavn";
 "accountPage.usernameNotRegistered" = "brukernavn: ikke registrert";
 "accountPage.credentialsHeader" = "Kontodetaljer";
 "accountPage.enableProxy" = "Skru på mellomtjener";
@@ -173,7 +173,7 @@
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.revokeDeviceTitle" = "Tilbakekall enhet";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "Tilbakekall";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
@@ -190,12 +190,19 @@
 "accountPage.removeAccountButton" = "Fjern";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Registrer";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "Brukernavn";
 "account.sipPassword" = "Passord";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "SIP-server";
 "account.port" = "Port";
 "account.proxyServer" = "Mellomtjener";
 "account.createSipAccount" = "Create Sip Account";

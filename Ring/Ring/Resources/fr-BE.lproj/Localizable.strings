@@ -19,9 +19,9 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Accueil";
+"global.homeTabBarTitle" = "Conversations";
 "global.contactRequestsTabBarTitle" = "Invitations";
-"global.meTabBarTitle" = "Account";
+"global.meTabBarTitle" = "Compte";
 "global.ok" = "OK";
 "global.versionName" = "Free as in Freedom";
 
@@ -59,7 +59,7 @@
 "welcome.createAccount" = "Créer un compte Jami";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Passer";
 "createProfile.profileCreated" = "Next";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -140,7 +140,7 @@
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Back";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "Accept";
+"alerts.incomingCallButtonAccept" = "Accepter";
 "alerts.incomingCallButtonIgnore" = "Ignore";
 
 //Calls
@@ -185,12 +185,19 @@
 "accountPage.namePlaceholder" = "Nom";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Other";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Supprimer le compte";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Remove";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Entrer le mot de passe de votre compte";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Enregistrer";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "User Name";
@@ -216,9 +223,9 @@
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
+"linkDevice.passwordError" = "Le mot-de-passe entré ne déverrouille pas ce compte.";
+"linkDevice.networkError" = "Une erreur réseau est survenue pendant l'exportation";
+"linkDevice.defaultError" = "Une erreur s'est produite lors de l'export";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifying";
 
@@ -234,12 +241,12 @@
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Annulé";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuler";
 
 //Notifications
@@ -249,14 +256,14 @@
 "notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Annulé";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuler";
-"dataTransfer.infoMessage" = "Press to start recording";
-"dataTransfer.sendMessage" = "Send";
+"dataTransfer.infoMessage" = "Appuyer pour démarrer l'enregistrement";
+"dataTransfer.sendMessage" = "Envoyer";
 
 
 //Generated Message

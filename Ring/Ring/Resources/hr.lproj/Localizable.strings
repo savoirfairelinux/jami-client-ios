@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Glavni meni";
+"global.homeTabBarTitle" = "Razgovori";
 "global.contactRequestsTabBarTitle" = "Pozivi";
 "global.meTabBarTitle" = "Račun";
 "global.ok" = "U redu";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Uređaji";
 "accountPage.settingsHeader" = "Postavke";
-"accountPage.username" = "Username";
+"accountPage.username" = "Korisničko ime";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "Ukloni";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Registriraj";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "User Name";

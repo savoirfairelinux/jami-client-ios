@@ -19,10 +19,10 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "خانه";
+"global.homeTabBarTitle" = "گفتگو‌ها";
 "global.contactRequestsTabBarTitle" = "دعوت ها";
-"global.meTabBarTitle" = "حساب کاربری";
-"global.ok" = "باشه";
+"global.meTabBarTitle" = "حساب";
+"global.ok" = "قبول";
 "global.versionName" = "آزاد مانند آزادی";
 
 // Scan
@@ -32,7 +32,7 @@
 // Smartlist
 "smartlist.yesterday" = "دیروز";
 "smartlist.results" = "نتیجه جستجو";
-"smartlist.conversations" = "گفتگو";
+"smartlist.conversations" = "گفتگو‌ها";
 "smartlist.searching" = "در حال جستجو...";
 "smartlist.noResults" = "بدون نتیجه";
 "smartlist.noConversation" = "بدون مکالمه";
@@ -59,7 +59,7 @@
 "welcome.createAccount" = "ایجاد یک حساب جمی";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "اسکیپ";
+"createProfile.skipCreateProfile" = "پرش";
 "createProfile.profileCreated" = "بعدی";
 "createProfile.title" = "نمایه خود را شخصی‌سازی کنید";
 "createProfile.enterNameLabel" = "نامی برای نمایش وارد کنید";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
 "accountPage.settingsHeader" = "تنظیمات";
-"accountPage.username" = "Username";
+"accountPage.username" = "نام کاربری";
 "accountPage.usernameNotRegistered" = "نام کاربری: ثبت نشده";
 "accountPage.credentialsHeader" = "جزییات حساب کاربری";
 "accountPage.enableProxy" = "فعال سازی پروکسی";
@@ -190,14 +190,21 @@
 "accountPage.removeAccountButton" = "حذف کن";
 "accountPage.shareAccountDetails" = "اشتراک جزییات حساب";
 "accountPage.contactMeOnJamiTitle" = "با من روی جمی در تماس باشید!";
-"accountPage.contactMeOnJamiContant" = "با استفاده از \"%s\" روی بستر ارتباط توزیع‌شده جمی، با من در تماس باشید: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "ثبت یک نام‌کاربری";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "ثبت‌نام";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "نام کاربر";
 "account.sipPassword" = "گذرواژه";
 "account.sipServer" = "سرور SIP";
 "account.port" = "پرت";
-"account.proxyServer" = "پیشکار یا پروکسی";
+"account.proxyServer" = "پراکسی";
 "account.createSipAccount" = "ساخت حساب SIP";
 "account.usernameLabel" = "نام‌کاربری را وارد کنید";
 "account.passwordLabel" = "گذرواژه را وارد کنید";
@@ -207,7 +214,7 @@
 "account.enableAccount" = "فعال‌سازی حساب";
 "account.statusOnline" = "آنلاین";
 "account.statusOffline" = "آفلاین";
-"account.statusConnecting" = "در حال برقراری ارتباط";
+"account.statusConnecting" = "در حال اتصال";
 "account.statusUnknown" = "ناشناخته";
 "account.statusConnectionerror" = "خطای ارتباط";
 
@@ -234,7 +241,7 @@
 "dataTransfer.readableStatusCreated" = "آغازِ فرایند...";
 "dataTransfer.readableStatusError" = "خطا";
 "dataTransfer.readableStatusAwaiting" = "در انتظار...";
-"dataTransfer.readableStatusRefuse" = "رد";
+"dataTransfer.readableStatusRefuse" = "رد کردن";
 "dataTransfer.readableStatusOngoing" = "در حال انتقال";
 "dataTransfer.readableStatusCanceled" = "لغو شده";
 "dataTransfer.sendingFailed" = "ارسال موفق نبود";
@@ -249,7 +256,7 @@
 "notifications.refuseCall" = "رد کردن";
 "notifications.newFile" = "فایل جدید";
 "dataTransfer.readableStatusAwaiting" = "در انتظار...";
-"dataTransfer.readableStatusRefuse" = "رد";
+"dataTransfer.readableStatusRefuse" = "رد کردن";
 "dataTransfer.readableStatusOngoing" = "در حال انتقال";
 "dataTransfer.readableStatusCanceled" = "لغو شده";
 "dataTransfer.readableStatusSuccess" = "کامل شد";
@@ -261,12 +268,12 @@
 
 //Generated Message
 "generatedMessage.contactAdded" = "مخاطب افزوده شد";
-"generatedMessage.invitationReceived" = "دعوت نامه دریافت شد";
+"generatedMessage.invitationReceived" = "دعوت‌نامه دریافت شد";
 "generatedMessage.invitationAccepted" = "دعوت پذیرفته شد";
 "generatedMessage.outgoingCall" = "تماس خروجی";
 "generatedMessage.incomingCall" = "تماس ورودی";
-"generatedMessage.missedOutgoingCall" = "تماس خروجی از دست رفته";
-"generatedMessage.missedIncomingCall" = "تماس ورودی از دست رفته";
+"generatedMessage.missedOutgoingCall" = "تماس خروجی از‌دست‌رفته";
+"generatedMessage.missedIncomingCall" = "تماس ورودی از‌دست‌رفته";
 
 //General Settings
 "generalSettings.title" = "تنظیمات کلی";

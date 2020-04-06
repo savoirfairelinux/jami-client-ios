@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "主页";
+"global.homeTabBarTitle" = "会话";
 "global.contactRequestsTabBarTitle" = "邀请";
 "global.meTabBarTitle" = "帐户";
 "global.ok" = "确定";
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "设备";
 "accountPage.settingsHeader" = "设置";
-"accountPage.username" = "Username";
+"accountPage.username" = "用户名";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "启用代理";
@@ -190,7 +190,14 @@
 "accountPage.removeAccountButton" = "删除";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "注册一个用户名";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "注册";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
 "account.sipUsername" = "用户名";

@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Начало";
+"global.homeTabBarTitle" = "Разговори";
 "global.contactRequestsTabBarTitle" = "Покани";
 "global.meTabBarTitle" = "Профил";
 "global.ok" = "Добре";
@@ -63,7 +63,7 @@
 "createProfile.profileCreated" = "Напред";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "Въведете име";
 "createProfile.subtitle" = "Потребителският ви профил ще бъде споделен с контактите ви. Можете да го промените по всяко време.";
 "createProfile.createYourAvatar" = "Създаване на аватар";
 
@@ -157,7 +157,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
-"accountPage.username" = "Username";
+"accountPage.username" = "Потребителско име";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Подробности за профила";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -190,14 +190,21 @@
 "accountPage.removeAccountButton" = "Премахване";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Регистриране на потребителско име";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Регистриране";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "Потребителско име";
 "account.sipPassword" = "Парола";
 "account.sipServer" = "SIP Server";
 "account.port" = "Порт";
-"account.proxyServer" = "Прокси";
+"account.proxyServer" = "Посредник";
 "account.createSipAccount" = "Създаване на SIP профил";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Въведете парола";
