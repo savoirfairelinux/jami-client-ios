@@ -236,7 +236,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             return dateDefault
         }
         let versionName = L10n.Global.versionName
-        let alert = UIAlertController(title: "\nJami\nbuild: \(compileDate)\n\(versionName)", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "\nCAMC Unified Communication System\n", message: "Powered by Jami, a GNU package\nhttps://jami.net\n(C) Savoir-faire Linux inc.\nbuild:\(compileDate)\n\(versionName)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         let image = UIImageView(image: UIImage(asset: Asset.jamiIcon))
         alert.view.addSubview(image)
@@ -387,7 +387,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     }).disposed(by: cell.disposeBag)
                     return cell
                 case .jamiID(let label):
-                    return self.configureCellWithEnableTextCopy(text: "Jami ID",
+                    return self.configureCellWithEnableTextCopy(text: "ID",
                                                                 secondaryText: label,
                                                                 style: .footnote)
                 case .ordinary(let label):
