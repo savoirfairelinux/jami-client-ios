@@ -173,7 +173,7 @@
 "accountPage.proxyDisabledAlertBody" = "Aktivér venligst proxy, for at modtage notifikationer";
 "accountPage.revokeDeviceTitle" = "Tilbagetræk enheden";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "Tilbagekald";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
@@ -192,7 +192,7 @@
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
 "accountPage.registerNameTitle" = "Register a username";
-"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.passwordPlaceholder" = "Indtast password til kontoen";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
@@ -217,6 +217,7 @@
 "account.statusConnecting" = "Forbinder";
 "account.statusUnknown" = "Ukendt";
 "account.statusConnectionerror" = "Connection Error";
+"account.needMigration" = "account need to be migrated";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -278,4 +279,17 @@
 //General Settings
 "generalSettings.title" = "Generelle indstillinger";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
+
+//Migrate Account
+"migrateAccount.title" = "Account migration";
+"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
+"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.cancel" = "Cancel";
+"migrateAccount.migrateAnother" = "Migrate Another Account";
+
 

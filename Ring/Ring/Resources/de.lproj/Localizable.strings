@@ -217,6 +217,7 @@
 "account.statusConnecting" = "Verbindet";
 "account.statusUnknown" = "Unbekannt";
 "account.statusConnectionerror" = "Verbindungsfehler";
+"account.needMigration" = "account need to be migrated";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Keine gesperrten Kontakte";
@@ -272,10 +273,23 @@
 "generatedMessage.invitationAccepted" = "Einladung angenommen";
 "generatedMessage.outgoingCall" = "Ausgehender Anruf";
 "generatedMessage.incomingCall" = "Eingehender Anruf";
-"generatedMessage.missedOutgoingCall" = "Verpasster ausgehender Anruf";
+"generatedMessage.missedOutgoingCall" = "Ausgehender Anruf fehlgeschlagen";
 "generatedMessage.missedIncomingCall" = "Verpasster eingehender Anruf";
 
 //General Settings
 "generalSettings.title" = "Allgemeine Einstellungen";
 "generalSettings.videoAcceleration" = "Videobeschleunigung aktivieren";
+
+//Migrate Account
+"migrateAccount.title" = "Account migration";
+"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
+"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.cancel" = "Cancel";
+"migrateAccount.migrateAnother" = "Migrate Another Account";
+
 

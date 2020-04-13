@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Davetiyeler";
 "global.meTabBarTitle" = "Hesap";
 "global.ok" = "Tamam";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Özgürlükteki gibi ücretsiz";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";
@@ -86,7 +86,7 @@
 "createAccount.EnableNotifications" = "Bildirimler";
 "createAccount.Recommended" = "(Önerilen)";
 "createAccount.UsernameNotRegisteredTitle" = "Ağ hatası";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
+"createAccount.UsernameNotRegisteredMessage" = "Hesap oluşturuldu fakat kullanıcı adı kaydedilmedi";
 "createAccount.timeoutTitle" = "Hesap Oluşturuldu";
 "createAccount.timeoutMessage" = "Kullanıcı adı kaydı sürüyor... Birkaç dakika alabilir.";
 
@@ -97,7 +97,7 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Parola Girin";
 "linkToAccount.pinLabel" = "PIN'i gir";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "PIN kodunu oluşturmak için, kullanmak istediğiniz hesabı içeren cihazdaki hesap yönetimi ayarlarına gidin. Cihaz ayarlarında \"Bu hesaba başka bir cihaz bağla\" yı seçin. Bu formu doldurmak için gerekli PIN kodunu alacaksınız. PIN sadece 10 dakika geçerlidir.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Oturum Aç";
@@ -105,7 +105,7 @@
 "linkToAccountManager.passwordLabel" = "Parola Girin";
 "linkToAccountManager.usernamePlaceholder" = "Kullanıcı adı";
 "linkToAccountManager.usernameLabel" = "Kullanıcı Adını Girin";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerPlaceholder" = "Hesap yöneticisi";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
@@ -217,6 +217,7 @@
 "account.statusConnecting" = "Bağlanılıyor";
 "account.statusUnknown" = "Bilinmeyen";
 "account.statusConnectionerror" = "Bağlantı hatası";
+"account.needMigration" = "account need to be migrated";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Engellenmiş kişi yok";
@@ -278,4 +279,17 @@
 //General Settings
 "generalSettings.title" = "Genel ayarlar";
 "generalSettings.videoAcceleration" = "Görüntü hızlandırmayı etkinleştir";
+
+//Migrate Account
+"migrateAccount.title" = "Account migration";
+"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
+"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.cancel" = "Cancel";
+"migrateAccount.migrateAnother" = "Migrate Another Account";
+
 

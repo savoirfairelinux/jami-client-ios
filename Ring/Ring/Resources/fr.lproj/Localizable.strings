@@ -190,7 +190,7 @@
 "accountPage.removeAccountButton" = "Enlever";
 "accountPage.shareAccountDetails" = "Partager les détails du compte ";
 "accountPage.contactMeOnJamiTitle" = "Contactez moi sur Jami !";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contactez-moi par l'identifiant : %s sur la plateforme distribuée de communication Jami. https://jami.net ";
 "accountPage.registerNameTitle" = "Enregistrer un nom d'utilisateur";
 "accountPage.passwordPlaceholder" = "Entrer le mot de passe de votre compte";
 "accountPage.usernamePlaceholder" = "Entrez le nom d'utilisateur souhaité";
@@ -217,6 +217,7 @@
 "account.statusConnecting" = "En cours de connexion";
 "account.statusUnknown" = "Inconnu";
 "account.statusConnectionerror" = "Erreur de connexion";
+"account.needMigration" = "account need to be migrated";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Aucun contact bloqué";
@@ -278,4 +279,17 @@
 //General Settings
 "generalSettings.title" = "Paramètres généraux";
 "generalSettings.videoAcceleration" = "Activer l'accélération vidéo";
+
+//Migrate Account
+"migrateAccount.title" = "Account migration";
+"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
+"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.cancel" = "Cancel";
+"migrateAccount.migrateAnother" = "Migrate Another Account";
+
 

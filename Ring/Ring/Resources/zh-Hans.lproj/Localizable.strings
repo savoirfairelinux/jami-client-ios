@@ -190,7 +190,7 @@
 "accountPage.removeAccountButton" = "移除";
 "accountPage.shareAccountDetails" = "分享帳號詳細資料";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上聯絡我";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "在 Jami 分散式通訊平臺 (https://jami.net) 上使用「%s」聯絡我";
 "accountPage.registerNameTitle" = "註冊使用者名稱";
 "accountPage.passwordPlaceholder" = "輸入帳號密碼";
 "accountPage.usernamePlaceholder" = "輸入所需的使用者名稱";
@@ -217,6 +217,7 @@
 "account.statusConnecting" = "連接中";
 "account.statusUnknown" = "未知";
 "account.statusConnectionerror" = "連線錯誤";
+"account.needMigration" = "account need to be migrated";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "沒有已封鎖的聯絡人";
@@ -278,4 +279,17 @@
 //General Settings
 "generalSettings.title" = "一般設定";
 "generalSettings.videoAcceleration" = "啟用視訊加速";
+
+//Migrate Account
+"migrateAccount.title" = "Account migration";
+"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
+"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.cancel" = "Cancel";
+"migrateAccount.migrateAnother" = "Migrate Another Account";
+
 

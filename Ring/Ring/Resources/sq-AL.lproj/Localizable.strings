@@ -190,7 +190,7 @@
 "accountPage.removeAccountButton" = "Hiqe";
 "accountPage.shareAccountDetails" = "Nda Hollësi Llogarie";
 "accountPage.contactMeOnJamiTitle" = "Lidhuni me mua në Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur \"%s\" në platformën e komunikimeve të shpërndara Jami: https://jami.net";
 "accountPage.registerNameTitle" = "Regjistroni një emër përdoruesi";
 "accountPage.passwordPlaceholder" = "Jepni fjalëkalim llogarie";
 "accountPage.usernamePlaceholder" = "Jepni emrin e dëshiruar të përdoruesit";
@@ -217,6 +217,7 @@
 "account.statusConnecting" = "Po lidhet";
 "account.statusUnknown" = "I panjohur";
 "account.statusConnectionerror" = "Gabim Lidhjeje";
+"account.needMigration" = "account need to be migrated";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "S’ka kontakte të bllokuar";
@@ -278,4 +279,17 @@
 //General Settings
 "generalSettings.title" = "Rregullime të përgjithshme";
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
+
+//Migrate Account
+"migrateAccount.title" = "Account migration";
+"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
+"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.cancel" = "Cancel";
+"migrateAccount.migrateAnother" = "Migrate Another Account";
+
 
