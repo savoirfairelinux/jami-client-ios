@@ -303,6 +303,22 @@ class ConversationsService {
         guard let status = UInt64(messageId) else { return .unknown}
         return self.messageAdapter.status(forMessageId: status)
     }
+    
+    func setMessageAsRead(daemonId: String, messageID: Int64,
+                          from: String, accountId: String, accountURI: String) {
+        self.messageAdapter
+            .setMessageDisplayedFrom(from,
+                                     byAccount: accountId,
+                                     messageId: daemonId,
+                                     status: .displayed)
+        self.dbManager
+            .setMessagesAsRead(messagesIDs: [messageID],
+                               withStatus: .displayed,
+                               accountId: accountId)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe()
+            .disposed(by: self.disposeBag)
+    }
 
     func setMessagesAsRead(forConversation conversation: ConversationModel, accountId: String, accountURI: String) -> Completable {
 
@@ -310,13 +326,21 @@ class ConversationsService {
 
             //Filter out read, outgoing, and transfer messages
             let unreadMessages = conversation.messages.filter({ messages in
-                return messages.status != .read && messages.incoming && !messages.isTransfer
+                return messages.status != .displayed && messages.incoming && !messages.isTransfer
             })
 
             let messagesIds = unreadMessages.map({$0.messageId}).filter({$0 >= 0})
+            let messagesDaemonIds = unreadMessages.map({$0.daemonId}).filter({!$0.isEmpty})
+            messagesDaemonIds.forEach { (msgId) in
+                self.messageAdapter
+                    .setMessageDisplayedFrom(conversation.hash,
+                                             byAccount: accountId,
+                                             messageId: msgId,
+                                             status: .displayed)
+            }
             self.dbManager
                 .setMessagesAsRead(messagesIDs: messagesIds,
-                                   withStatus: .read,
+                                   withStatus: .displayed,
                                    accountId: accountId)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onCompleted: { [unowned self] in
@@ -387,6 +411,16 @@ class ConversationsService {
                     (status == .failure && message.status == .sending))
         }) {
             if let message = messages.first {
+                let displayedMessage = status == .displayed && !message.incoming
+                let oldDisplayedMessage = conversation?.lastDisplayedMessage.id
+                let isLater = (conversation?.lastDisplayedMessage.id ?? 0) < Int64(0) || conversation?.lastDisplayedMessage.timestamp ?? Date() < message.receivedDate
+                if  displayedMessage && isLater {
+                    conversation?.lastDisplayedMessage = (message.messageId, message.receivedDate)
+                    var event = ServiceEvent(withEventType: .lastDisplayedMessageUpdated)
+                    event.addEventInput(.oldDisplayedMessage, value: oldDisplayedMessage)
+                    event.addEventInput(.newDisplayedMessage, value: message.messageId)
+                    self.responseStream.onNext(event)
+                }
                 self.dbManager
                     .updateMessageStatus(daemonID: message.daemonId,
                                          withStatus: status,

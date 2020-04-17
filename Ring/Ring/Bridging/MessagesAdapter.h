@@ -24,7 +24,7 @@ typedef NS_ENUM(int, MessageStatus)  {
     MessageStatusUnknown = 0,
     MessageStatusSending,
     MessageStatusSent,
-    MessageStatusRead,
+    MessageStatusDisplayed,
     MessageStatusFailure
 };
 
@@ -41,5 +41,10 @@ typedef NS_ENUM(int, MessageStatus)  {
 - (void)setComposingMessageTo:(NSString*)peer
                    fromAccount:(NSString*)accountID
                    isComposing:(BOOL)isComposing;
+
+- (void)setMessageDisplayedFrom:(NSString*)peer
+                      byAccount:(NSString*)accountID
+                      messageId:(NSString*)messageId
+                         status:(MessageStatus)status;
 
 @end

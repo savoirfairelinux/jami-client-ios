@@ -53,6 +53,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     @IBOutlet weak var sendingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var failedStatusLabel: UILabel!
     @IBOutlet weak var bubbleViewMask: UIView?
+    @IBOutlet weak var messageReadIndicator: UIView?
 
     private var transferImageView = UIImageView()
     private var transferProgressView = ProgressView()
@@ -409,6 +410,13 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
                     .map { value in value == MessageStatus.failure ? false : true }
                     .bind(to: self.failedStatusLabel.rx.isHidden)
                     .disposed(by: self.disposeBag)
+                if self.messageReadIndicator != nil {
+                    item.displayReadIndicator.asObservable()
+                    .observeOn(MainScheduler.instance)
+                    .map {value in return !value}
+                        .bind(to: self.messageReadIndicator!.rx.isHidden)
+                    .disposed(by: self.disposeBag)
+                }
             }
         } else if item.bubblePosition() == .received {
             // When the message contains only emoji

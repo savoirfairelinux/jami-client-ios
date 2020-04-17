@@ -33,7 +33,7 @@ class ChatTabBarItemViewModel: ViewModel, TabBarItemViewModel {
                 return conversations.map({ conversation in
                     let unreadMsg = conversation.messages.filter({ message in
                         //filtre out read messages, outgoing messages and messages that are displayed in contactrequest conversation
-                        return message.status != .read  && !message.isTransfer && message.incoming
+                        return message.status != .displayed  && !message.isTransfer && message.incoming
                             && (contactsService.contactRequest(withRingId: JamiURI.init(schema: URIType.ring, infoHach: message.authorURI).hash ?? "") == nil)
                     })
                     return unreadMsg.count

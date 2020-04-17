@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -95,12 +95,29 @@
                         <color key="textColor" red="0.94117647058823528" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nk1-r0-5jJ">
+                        <rect key="frame" x="498" y="31" width="8" height="8"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="8" id="IKx-gD-ktV"/>
+                            <constraint firstAttribute="height" constant="8" id="Kmy-bf-VRp"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" constant="8" id="1QQ-bu-6Bl" userLabel="Bubble Bottom Constraint"/>
+                    <constraint firstAttribute="trailing" secondItem="nk1-r0-5jJ" secondAttribute="trailing" constant="4" id="1g3-Kl-0eG"/>
                     <constraint firstItem="h8N-aw-5lV" firstAttribute="leading" secondItem="ogn-wv-fZy" secondAttribute="trailing" constant="16" id="1jW-JR-t5r"/>
                     <constraint firstItem="78h-fZ-7yf" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="-8" id="4ME-jl-Uol"/>
+                    <constraint firstItem="nk1-r0-5jJ" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" constant="4" id="4ht-GX-AOD"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" priority="1" constant="64" id="99Y-bR-Ioq"/>
+                    <constraint firstItem="kZJ-Ay-LTR" firstAttribute="bottom" secondItem="nk1-r0-5jJ" secondAttribute="bottom" id="AHa-wE-zfg"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" priority="1" constant="16" id="Eso-cy-OYs"/>
                     <constraint firstItem="ogn-wv-fZy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="Fxg-Wa-Rb9"/>
                     <constraint firstItem="78h-fZ-7yf" firstAttribute="centerY" secondItem="kZJ-Ay-LTR" secondAttribute="centerY" id="HCm-lG-Bmg"/>
@@ -135,6 +152,7 @@
                 <outlet property="messageLabelLeadingConstraint" destination="8m5-sR-xnh" id="ShD-gb-tcN"/>
                 <outlet property="messageLabelMarginConstraint" destination="Fxg-Wa-Rb9" id="zuW-JC-pWN"/>
                 <outlet property="messageLabelTrailingConstraint" destination="uzV-kG-oGN" id="q3j-c6-l76"/>
+                <outlet property="messageReadIndicator" destination="nk1-r0-5jJ" id="ODJ-u6-wPb"/>
                 <outlet property="rightDivider" destination="h8N-aw-5lV" id="9pc-93-BG6"/>
                 <outlet property="sendingIndicator" destination="78h-fZ-7yf" id="GrK-FT-q39"/>
                 <outlet property="timeLabel" destination="ogn-wv-fZy" id="7yt-vi-cSp"/>
