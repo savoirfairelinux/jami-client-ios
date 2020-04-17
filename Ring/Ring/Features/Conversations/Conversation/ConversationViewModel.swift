@@ -364,10 +364,28 @@ class ConversationViewModel: Stateable, ViewModel {
             }).disposed(by: disposeBag)
     }
 
+    func setMessageAsRead (daemonId: String, messageId: Int64) {
+        guard let account = self.accountService.currentAccount else {
+            return
+        }
+        guard let accountURI = AccountModelHelper(withAccount: account).ringId  else {
+            return
+        }
+        self.conversationsService
+            .setMessageAsRead(daemonId: daemonId,
+                              messageID: messageId,
+                              from: self.conversation.value.hash,
+                              accountId: account.id,
+                              accountURI: accountURI)
+        self.conversation.value.messages.filter { (message) -> Bool in
+            return message.daemonId == daemonId && message.messageId == messageId
+            }.first?.status = .displayed
+    }
+
     fileprivate var unreadMessagesCount: Int {
         let unreadMessages =  self.conversation.value.messages
             .filter({ message in
-                return message.status != .read &&
+                return message.status != .displayed &&
                     !message.isTransfer && message.incoming
         })
         return unreadMessages.count

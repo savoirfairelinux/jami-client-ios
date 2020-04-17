@@ -76,7 +76,7 @@ enum InteractionStatus: String {
     case sending = "SENDING"
     case failed = "FAILED"
     case succeed = "SUCCEED"
-    case read = "READ"
+    case displayed = "DISPLAYED"
     case unread = "UNREAD"
     case transferCreated = "TRANSFER_CREATED"
     case transferAwaiting = "TRANSFER_AWAITING"
@@ -92,7 +92,7 @@ enum InteractionStatus: String {
         case .sending: return MessageStatus.sending
         case .failed: return MessageStatus.failure
         case .succeed: return MessageStatus.sent
-        case .read: return MessageStatus.read
+        case .displayed: return MessageStatus.displayed
         case .unread: return MessageStatus.unknown
         default: return MessageStatus.unknown
         }
@@ -103,7 +103,7 @@ enum InteractionStatus: String {
         case .unknown: self = .unknown
         case .sending: self = .sending
         case .sent: self = .succeed
-        case .read: self = .read
+        case .displayed: self = .displayed
         case .failure: self = .failed
         @unknown default:
             self = .unknown
