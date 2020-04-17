@@ -76,7 +76,7 @@ enum InteractionStatus: String {
     case sending = "SENDING"
     case failed = "FAILED"
     case succeed = "SUCCEED"
-    case read = "READ"
+    case displayed = "DISPLAYED"
     case unread = "UNREAD"
     case transferCreated = "TRANSFER_CREATED"
     case transferAwaiting = "TRANSFER_AWAITING"
@@ -92,7 +92,7 @@ enum InteractionStatus: String {
         case .sending: return MessageStatus.sending
         case .failed: return MessageStatus.failure
         case .succeed: return MessageStatus.sent
-        case .read: return MessageStatus.read
+        case .displayed: return MessageStatus.displayed
         case .unread: return MessageStatus.unknown
         default: return MessageStatus.unknown
         }
@@ -103,7 +103,7 @@ enum InteractionStatus: String {
         case .unknown: self = .unknown
         case .sending: self = .sending
         case .sent: self = .succeed
-        case .read: self = .read
+        case .displayed: self = .displayed
         case .failure: self = .failed
         @unknown default:
             self = .unknown
@@ -541,6 +541,16 @@ class DBManager {
                     ? participantProfile.uri : ""
                 if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
+                    let displayedMessage = author.isEmpty && message.status == .displayed
+                    let isLater = conversationModel
+                        .lastDisplayedMessage.id == -1 ||
+                        conversationModel
+                            .lastDisplayedMessage.timestamp < message.receivedDate
+                    if displayedMessage && isLater {
+                        conversationModel
+                            .lastDisplayedMessage = (message.messageId,
+                                                     message.receivedDate)
+                    }
                 }
             }
             conversationModel.messages = messages

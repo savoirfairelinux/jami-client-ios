@@ -63,7 +63,7 @@ class MessageViewModel {
     let injectBug: InjectionBag
 
     init(withInjectionBag injectionBag: InjectionBag,
-         withMessage message: MessageModel) {
+         withMessage message: MessageModel, isLastDisplayed: Bool) {
         self.accountService = injectionBag.accountService
         self.conversationsService = injectionBag.conversationsService
         self.dataTransferService = injectionBag.dataTransferService
@@ -72,6 +72,7 @@ class MessageViewModel {
         self.initialTransferStatus = message.transferStatus
         self.timeStringShown = nil
         self.status.onNext(message.status)
+        self.displayReadIndicator.onNext(isLastDisplayed)
 
         if isTransfer {
             if let transferId = daemonId,
@@ -118,6 +119,26 @@ class MessageViewModel {
                     }
                 })
                 .disposed(by: self.disposeBag)
+            self.conversationsService
+                .sharedResponseStream
+                .filter({ [weak self] messageUpdateEvent in
+                    let event = messageUpdateEvent.eventType == ServiceEventType.lastDisplayedMessageUpdated
+                    let message = messageUpdateEvent
+                        .getEventInput(.oldDisplayedMessage) == self?.message.messageId ||
+                    messageUpdateEvent
+                        .getEventInput(.newDisplayedMessage) == self?.message.messageId
+                    return event && message
+                })
+                .subscribe(onNext: { [weak self] messageUpdateEvent in
+                    if let oldMessage: Int64 = messageUpdateEvent.getEventInput(.oldDisplayedMessage),
+                        oldMessage == self?.message.messageId {
+                        self?.displayReadIndicator.onNext(false)
+                    } else if let newMessage: Int64 = messageUpdateEvent.getEventInput(.newDisplayedMessage),
+                        newMessage == self?.message.messageId {
+                        self?.displayReadIndicator.onNext(true)
+                    }
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 
@@ -159,6 +180,7 @@ class MessageViewModel {
     }
 
     var status = BehaviorSubject<MessageStatus>(value: .unknown)
+    var displayReadIndicator = BehaviorSubject<Bool>(value: false)
 
     var transferStatus = BehaviorSubject<DataTransferStatus>(value: .unknown)
     var lastTransferStatus: DataTransferStatus = .unknown

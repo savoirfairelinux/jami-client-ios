@@ -29,6 +29,7 @@ class ConversationModel: Equatable {
     var accountId: String = ""
     var participantProfile: Profile?
     var conversationId: String = ""
+    var lastDisplayedMessage: (id: Int64, timestamp: Date) = (-1, Date())
 
     convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
         self.init()

@@ -50,6 +50,7 @@ enum ServiceEventType {
     case newOutgoingMessage
     case messageTypingIndicator
     case migrationEnded
+    case lastDisplayedMessageUpdated
 }
 
 /**
@@ -77,6 +78,8 @@ enum ServiceEventInput {
     case accountUri
     case name
     case callUUID
+    case oldDisplayedMessage
+    case newDisplayedMessage
 }
 
 /**

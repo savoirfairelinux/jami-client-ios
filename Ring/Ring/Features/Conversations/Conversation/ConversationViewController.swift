@@ -956,6 +956,11 @@ extension ConversationViewController: UITableViewDataSource {
                     item.bubblePosition() == .generated ? MessageCellGenerated.self :
                     MessageCellGenerated.self
             }
+            if item.message.incoming && item.message.status != .displayed {
+                self.viewModel
+                    .setMessageAsRead(daemonId: item.message.daemonId,
+                                      messageId: item.message.messageId)
+            }
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: type)
             cell.configureFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
 

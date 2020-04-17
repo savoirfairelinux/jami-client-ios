@@ -107,6 +107,16 @@ static id <MessagesAdapterDelegate> _delegate;
                    isComposing);
 }
 
+- (void)setMessageDisplayedFrom:(NSString*)peer
+                      byAccount:(NSString*)accountID
+                      messageId:(NSString*)messageId
+                         status:(MessageStatus)status {
+    setMessageDisplayed(std::string([accountID UTF8String]),
+                        std::string([peer UTF8String]),
+                        std::string([messageId UTF8String]),
+                        status);
+}
+
 #pragma mark AccountAdapterDelegate
 + (id <MessagesAdapterDelegate>)delegate {
     return _delegate;
