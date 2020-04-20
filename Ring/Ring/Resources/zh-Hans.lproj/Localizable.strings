@@ -217,7 +217,7 @@
 "account.statusConnecting" = "連接中";
 "account.statusUnknown" = "未知";
 "account.statusConnectionerror" = "連線錯誤";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "需要遷移帳號";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "沒有已封鎖的聯絡人";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "啟用視訊加速";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.title" = "帳號遷移";
+"migrateAccount.migrateButton" = "遷移帳號";
+"migrateAccount.explanation" = "此帳號需要遷移";
+"migrateAccount.passwordPlaceholder" = "輸入密碼";
+"migrateAccount.passwordExplanation" = "要繼續遷移，您必須輸入用於此帳號的密碼";
+"migrateAccount.removeAccount" = "移除帳號";
+"migrateAccount.error" = "遷移您的帳號失敗。您可以重試或刪除您的帳號。";
+"migrateAccount.migrating" = "正在遷移……";
+"migrateAccount.cancel" = "取消";
+"migrateAccount.migrateAnother" = "遷移其他帳號";
 
 

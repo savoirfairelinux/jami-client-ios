@@ -41,7 +41,7 @@
 "smartlist.cellularAccess" = "请确保蜂窝移动网络权限已开启";
 "smartlist.accountsTitle" = "帐户";
 "smartlist.addAccountButton" = "+添加帐户";
-"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.noNumber" = "选定的连接没有任何数字";
 "smartlist.selectOneNumber" = "选择这些数字中的一个";
 
 //Conversation
@@ -62,9 +62,9 @@
 "createProfile.skipCreateProfile" = "跳过";
 "createProfile.profileCreated" = "下一步";
 "createProfile.title" = "个性化你的个人信息";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNameLabel" = "选择一个显示名";
 "createProfile.enterNamePlaceholder" = "输入名称";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.subtitle" = "您的资料会分享给您的联系人。您可随时修改。";
 "createProfile.createYourAvatar" = "建立你的头像";
 
 //Create Account form
@@ -100,13 +100,13 @@
 "linkToAccount.explanationPinMessage" = "要获取一个PIN，请进入你已登陆的设备中的用户管理界面，选择“链接另一台设备到这个用户”。输入你的用户密码后，你会得到在此处所需的PIN，它在10分钟内有效。";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "注册";
 "linkToAccountManager.passwordPlaceholder" = "密码";
 "linkToAccountManager.passwordLabel" = "输入密码";
 "linkToAccountManager.usernamePlaceholder" = "用户名";
-"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.usernameLabel" = "输入用户名";
 "linkToAccountManager.accountManagerPlaceholder" = "账户管理器";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerLabel" = "输入账户管理器的 URI";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "无法找到帐户";
@@ -123,7 +123,7 @@
 "alerts.dbFailedTitle" = "启动Jami时出现了一个问题";
 "alerts.dbFailedMessage" = "请关闭应用，并试试重新启动它。";
 "alerts.confirmBlockContact" = "你确定想要封锁这个联系人？与这个联系人的对话历史也将被永久删除。";
-"alerts.confirmBlockContactTitle" = "封锁联系人";
+"alerts.confirmBlockContactTitle" = "屏蔽联系人";
 "alerts.confirmDeleteConversation" = "你确定要永久删除这个对话？";
 "alerts.confirmDeleteConversationFromContact" = "你确定要删除与该联系人的对话？";
 "alerts.confirmDeleteConversationTitle" = "删除对话";
@@ -131,7 +131,7 @@
 "alerts.confirmClearConversationTitle" = "清空对话";
 "alerts.noMediaPermissionsTitle" = "未授予媒体权限";
 "alerts.noLibraryPermissionsTitle" = "未授予照片库访问权限";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.errorWrongCredentials" = "无法连接到提供的账户管理器。请检查您的凭据。";
 
 //Actions
 "actions.blockAction" = "屏蔽";
@@ -151,53 +151,53 @@
 "calls.connecting" = "正在连接…";
 "calls.searching" = "正在搜索…";
 "calls.callFinished" = "通话已结束";
-"calls.currentCallWith" = "Call with ";
+"calls.currentCallWith" = "通话到";
 "calls.haghUp" = "挂断";
 
 //Account Page
 "accountPage.devicesListHeader" = "设备";
 "accountPage.settingsHeader" = "设置";
 "accountPage.username" = "用户名";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
+"accountPage.usernameNotRegistered" = "用户名：未被注册";
+"accountPage.credentialsHeader" = "账户详情";
 "accountPage.enableProxy" = "启用代理";
-"accountPage.blockedContacts" = "Block List";
-"accountPage.unblockContact" = "UNBLOCK";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
+"accountPage.blockedContacts" = "屏蔽列表";
+"accountPage.unblockContact" = "取消屏蔽";
+"accountPage.proxyAddressAlert" = "提供代理地址";
 "accountPage.enableProxy" = "启用代理";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.noProxyExplanationLabel" = "代理禁用后您将无法收到通知";
 "accountPage.saveProxyAddress" = "保存";
-"accountPage.proxyPaceholder" = "Proxy address";
-"accountPage.enableNotifications" = "Enable Notifications";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyPaceholder" = "代理地址";
+"accountPage.enableNotifications" = "启用通知";
+"accountPage.proxyDisabledAlertTitle" = "代理服务器已禁用";
+"accountPage.proxyDisabledAlertBody" = "为了接受通知，请开启代理";
 "accountPage.revokeDeviceTitle" = "吊销设备";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceMessage" = "您确定要吊销此设备吗？此操作不能撤销。";
 "accountPage.revokeDeviceButton" = "吊销";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
-"accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.revokeDevicePlaceholder" = "输入你的密码";
+"accountPage.deviceRevoked" = "设备吊销完成";
+"accountPage.deviceRevocationProgress" = "吊销中...";
+"accountPage.deviceRevocationSuccess" = "设备已被吊销";
+"accountPage.deviceRevocationTryAgain" = "重试";
 "accountPage.deviceRevocationWrongPassword" = "密码错误";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationUnknownDevice" = "未知设备";
+"accountPage.deviceRevocationError" = "设备吊销出错";
 "accountPage.namePlaceholder" = "姓名";
 "accountPage.linkDeviceTitle" = "链接另一台设备";
 "accountPage.other" = "其他";
 "accountPage.removeAccountTitle" = "移除账户";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "点击“删除”将从此设备上删除该帐号！此操作无法撤销。同时，您也会失去已注册的用户名。";
 "accountPage.removeAccountButton" = "删除";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "分享账户详情";
+"accountPage.contactMeOnJamiTitle" = "在 Jami 上联系我！";
+"accountPage.contactMeOnJamiContant" = "在Jami分布式通信平台：https://jami.net 上使用“%s”与我联系";
 "accountPage.registerNameTitle" = "注册一个用户名";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.passwordPlaceholder" = "输入账户密码";
+"accountPage.usernamePlaceholder" = "输入想使用的用户名";
+"accountPage.registerNameErrorMessage" = "选择的用户名不可用";
+"accountPage.usernameRegistering" = "注册中";
 "accountPage.usernameRegisterAction" = "注册";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
+"accountPage.usernameRegistrationFailed" = "注册失败。请检查密码。";
 
 //Account
 "account.sipUsername" = "用户名";
@@ -205,65 +205,65 @@
 "account.sipServer" = "SIP 服务器";
 "account.port" = "端口";
 "account.proxyServer" = "代理";
-"account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
+"account.createSipAccount" = "创建 Sip 账户";
+"account.usernameLabel" = "输入用户名";
 "account.passwordLabel" = "输入密码";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "输入地址";
+"account.portLabel" = "输入端口号";
+"account.accountStatus" = "账户状态";
+"account.enableAccount" = "启用账户";
 "account.statusOnline" = "在线";
 "account.statusOffline" = "离线";
 "account.statusConnecting" = "正在连接";
 "account.statusUnknown" = "未知";
-"account.statusConnectionerror" = "Connection Error";
-"account.needMigration" = "account need to be migrated";
+"account.statusConnectionerror" = "连接错误";
+"account.needMigration" = "该账户需迁移";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "没有被屏蔽的联系人";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "关联新设备";
 "linkDevice.passwordError" = "您输入的密码无法解锁该帐户";
 "linkDevice.networkError" = "导出时发生网络错误";
 "linkDevice.defaultError" = "导出时发生错误";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "要完成关联过程，请在您的新设备上打开 Jami 并选择“将这台设备关联到到账户”。PIN 码有效期为 10分钟。";
 "linkDevice.hudMessage" = "认证中";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "封锁联系人";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.startAudioCall" = "发起语音通话";
+"contactPage.startVideoCall" = "发起视频通话";
+"contactPage.sendMessage" = "发送信息";
+"contactPage.clearConversation" = "清除聊天";
+"contactPage.blockContact" = "屏蔽联系人";
+"contactPage.removeConversation" = "删除会话";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "正在初始化…";
 "dataTransfer.readableStatusError" = "错误";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "验证中";
 "dataTransfer.readableStatusRefuse" = "拒接";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.sendingFailed" = "Failed to send";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "传递中";
+"dataTransfer.readableStatusCanceled" = "已取消";
+"dataTransfer.sendingFailed" = "发送失败";
+"dataTransfer.readableStatusSuccess" = "完成";
 "dataTransfer.readableStatusAccept" = "接听";
 "dataTransfer.readableStatusCancel" = "取消";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
-"notifications.newFile" = "New file";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"notifications.incomingCall" = "来电";
+"notifications.missedCall" = "未接来电";
+"notifications.acceptCall" = "接受";
+"notifications.refuseCall" = "拒绝";
+"notifications.newFile" = "新文件";
+"dataTransfer.readableStatusAwaiting" = "验证中";
 "dataTransfer.readableStatusRefuse" = "拒接";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusOngoing" = "传递中";
+"dataTransfer.readableStatusCanceled" = "已取消";
+"dataTransfer.readableStatusSuccess" = "完成";
 "dataTransfer.readableStatusAccept" = "接听";
 "dataTransfer.readableStatusCancel" = "取消";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "按下开始录音";
 "dataTransfer.sendMessage" = "发送";
 
 
@@ -278,18 +278,18 @@
 
 //General Settings
 "generalSettings.title" = "常规设置";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "启用视频加速";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.title" = "帐户迁移";
+"migrateAccount.migrateButton" = "迁移账户";
+"migrateAccount.explanation" = "该账户需迁移";
+"migrateAccount.passwordPlaceholder" = "输入密码";
+"migrateAccount.passwordExplanation" = "若要进行迁移，您需要输入此账户的密码。";
+"migrateAccount.removeAccount" = "移除账户";
+"migrateAccount.error" = "帐户迁移失败。您可重试或删除您的帐户。";
+"migrateAccount.migrating" = "迁移中...";
+"migrateAccount.cancel" = "取消";
+"migrateAccount.migrateAnother" = "迁移另一个账户";
 
 

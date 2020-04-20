@@ -289,7 +289,7 @@
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "Otkaži";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

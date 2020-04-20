@@ -72,7 +72,7 @@
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "Nome de usuaria";
 "createAccount.newPasswordPlaceholder" = "Contrasinal";
-"createAccount.repeatPasswordPlaceholder" = "Confirm password";
+"createAccount.repeatPasswordPlaceholder" = "Confirmar contrasinal";
 "createAccount.passwordCharactersNumberError" = "mínimo 6 caracteres";
 "createAccount.passwordNotMatchingError" = "os contrasinais non coinciden";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
@@ -144,7 +144,7 @@
 "alerts.incomingCallButtonIgnore" = "Ignore";
 
 //Calls
-"calls.callItemTitle" = "Call";
+"calls.callItemTitle" = "Chamar";
 "calls.unknown" = "Descoñecido";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
+"migrateAccount.title" = "Migración de conta";
 "migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.explanation" = "Esta conta precisa ser migrada";
+"migrateAccount.passwordPlaceholder" = "Escribir contrasinal";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Eliminar conta";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "Cancelar";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

@@ -190,14 +190,14 @@
 "accountPage.removeAccountButton" = "Rimuovi";
 "accountPage.shareAccountDetails" = "Condividi dettagli account";
 "accountPage.contactMeOnJamiTitle" = "Contattami su Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contattami usando \"%s\" su Jami, una piattaforma distribuita di comunicazione: https://jami.net";
 "accountPage.registerNameTitle" = "Registra un nome utente";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.passwordPlaceholder" = "Inserisci la password dell'account";
+"accountPage.usernamePlaceholder" = "Inserisci il nome utente desiderato";
+"accountPage.registerNameErrorMessage" = "Il nome utente scelto non è disponibile";
+"accountPage.usernameRegistering" = "Registrazione";
 "accountPage.usernameRegisterAction" = "Salva";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
+"accountPage.usernameRegistrationFailed" = "Registrazione fallita. Si prega di controllare la password.";
 
 //Account
 "account.sipUsername" = "Nome Utente";
@@ -217,7 +217,7 @@
 "account.statusConnecting" = "Collegamento";
 "account.statusUnknown" = "Sconosciuto";
 "account.statusConnectionerror" = "Errore di connessione";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "l'account deve essere migrato";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Nessun contatto bloccato";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Attiva l'accelerazione video";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.title" = "Migrazione account";
+"migrateAccount.migrateButton" = "Migra account";
+"migrateAccount.explanation" = "Questo account deve essere migrato";
+"migrateAccount.passwordPlaceholder" = "Inserire password";
+"migrateAccount.passwordExplanation" = "Per procedere con la migrazione, è necessario inserire una password utilizzata per questo account";
+"migrateAccount.removeAccount" = "Rimuovi l'account";
+"migrateAccount.error" = "Migrazione account fallita. Puoi riprovare o cancellare l'account.";
+"migrateAccount.migrating" = "Migrazione...";
+"migrateAccount.cancel" = "Annulla";
+"migrateAccount.migrateAnother" = "Migra un altro Account";
 
 

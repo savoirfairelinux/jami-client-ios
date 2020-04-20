@@ -283,13 +283,13 @@
 //Migrate Account
 "migrateAccount.title" = "Account migration";
 "migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.explanation" = "Votre compte doit être migré. ";
+"migrateAccount.passwordPlaceholder" = "Entrez votre mot de passe";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Supprimer le compte";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "Annuler";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

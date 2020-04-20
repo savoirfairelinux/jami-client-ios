@@ -31,16 +31,16 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨日";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "検索結果";
 "smartlist.conversations" = "会話";
 "smartlist.searching" = "検索中...";
 "smartlist.noResults" = "検索結果はありません";
-"smartlist.noConversation" = "No conversations";
+"smartlist.noConversation" = "会話はありません";
 "smartlist.searchBarPlaceholder" = "名前を入力...";
 "smartlist.noNetworkConnectivity" = "ネットワーク接続がありません";
 "smartlist.cellularAccess" = "設定から写真へのアクセスが許可されていることを確認してください";
 "smartlist.accountsTitle" = "アカウント";
-"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.addAccountButton" = "+ アカウントを追加";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
 
@@ -48,13 +48,13 @@
 "conversation.messagePlaceholder" = "メッセージを入力...";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "招待はありません";
 
 // Walkthrough
 
 //Welcome Screen
 "welcome.title" = "Jamiへようこそ！";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Jamiは、世界中のユーザーと繋がることができる、ユーザーの自由とプライバシーを尊重したフリーソフトウェアです。";
 "welcome.linkDevice" = "このデバイスをアカウントへリンク";
 "welcome.createAccount" = "Jamiアカウントを作成";
 
@@ -75,7 +75,7 @@
 "createAccount.repeatPasswordPlaceholder" = "パスワードの再入力";
 "createAccount.passwordCharactersNumberError" = "6文字以上";
 "createAccount.passwordNotMatchingError" = "パスワードが一致しません";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "利用可能か確認しています…";
 "createAccount.invalidUsername" = "不正なユーザー名";
 "createAccount.usernameAlreadyTaken" = "このユーザー名は既に取得されています。";
 "createAccount.loading" = "読み込み中";
@@ -119,14 +119,14 @@
 "alerts.profileTakePhoto" = "撮影";
 "alerts.profileUploadPhoto" = "写真のアップロード";
 "alerts.profileCancelPhoto" = "キャンセル";
-"alerts.accountLinkedTitle" = "アカウントを連結しています";
+"alerts.accountLinkedTitle" = "アカウントをリンクしています";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "アプリケーションを終了し、起動し直してください";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "ブロックした連絡先";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "この会話を完全に削除してもよろしいですか？";
 "alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmDeleteConversationTitle" = "会話を消去";
 "alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
@@ -166,7 +166,7 @@
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "プロキシを有効にする";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Save";
+"accountPage.saveProxyAddress" = "保存";
 "accountPage.proxyPaceholder" = "プロキシアドレス";
 "accountPage.enableNotifications" = "通知を有効化";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
+"migrateAccount.title" = "アカウントの移行";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordPlaceholder" = "パスワードを入力してください";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "キャンセル";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

@@ -190,7 +190,7 @@
 "accountPage.removeAccountButton" = "Eliminar";
 "accountPage.shareAccountDetails" = "Compartir detalles de la cuenta";
 "accountPage.contactMeOnJamiTitle" = "¡Contáctame en Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contáctame buscándome como \"%s\" en Jami, plataforma de comunicación distribuida: https://jami.net";
 "accountPage.registerNameTitle" = "Registrar nombre de usuario";
 "accountPage.passwordPlaceholder" = "Introduce la contraseña de la cuenta";
 "accountPage.usernamePlaceholder" = "Introduzca el nombre de usuario deseado";
@@ -217,7 +217,7 @@
 "account.statusConnecting" = "Conectando";
 "account.statusUnknown" = "Desconocido";
 "account.statusConnectionerror" = "Error de conexión";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "Es necesario migrar su cuenta";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No hay contactos bloqueados";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Habilitar aceleración de video";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.title" = "Migración de la cuenta";
+"migrateAccount.migrateButton" = "Migrar Cuenta";
+"migrateAccount.explanation" = "Es necesario migrar esta cuenta";
+"migrateAccount.passwordPlaceholder" = "Ingresa la contraseña";
+"migrateAccount.passwordExplanation" = "Para realizar la migración, es necesario que ingreses la contraseña de esta cuenta.";
+"migrateAccount.removeAccount" = "Eliminar cuenta";
+"migrateAccount.error" = "Se produjo un error al migrar tu cuenta. Puedes reintentarlo o eliminar tu cuenta.";
+"migrateAccount.migrating" = "Migrando...";
+"migrateAccount.cancel" = "Cancelar";
+"migrateAccount.migrateAnother" = "Migrar otra cuenta";
 
 

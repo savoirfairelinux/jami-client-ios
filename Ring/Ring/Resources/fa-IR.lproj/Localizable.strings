@@ -35,7 +35,7 @@
 "smartlist.conversations" = "گفتگو‌ها";
 "smartlist.searching" = "در حال جستجو...";
 "smartlist.noResults" = "بدون نتیجه";
-"smartlist.noConversation" = "بدون مکالمه";
+"smartlist.noConversation" = "بدون گفتگو";
 "smartlist.searchBarPlaceholder" = "نام را وارد کنید...";
 "smartlist.noNetworkConnectivity" = "بدون اتصال شبکه";
 "smartlist.cellularAccess" = "اطمینان حاصل کنید که دسترسی به تلفن همراه در تنظیمات شما اعمال شده";
@@ -100,13 +100,13 @@
 "linkToAccount.explanationPinMessage" = "برای تولید پین کد ( یا PIN)، به تنظیمات مدیریت حساب در دستگاهی که حاوی حساب کاربری مورد نظر شماست رجوع کنید. در تنظیمات دستگاه، «یک دستگاه دیگر را به این حساب پیوند دهید» را انتخاب کنید. برای تکمیل این فرم پین لازم را دریافت خواهید کرد. پین فقط ده (10) دقیقه معتبر است";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "ورود";
 "linkToAccountManager.passwordPlaceholder" = "گذرواژه";
 "linkToAccountManager.passwordLabel" = "گذرواژه را وارد کنید";
 "linkToAccountManager.usernamePlaceholder" = "نام کاربری";
 "linkToAccountManager.usernameLabel" = "نام‌کاربری را وارد کنید";
 "linkToAccountManager.accountManagerPlaceholder" = "مدیر حساب کاربری";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerLabel" = "ورود URI مدیریت حساب";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "نمی توان حساب را پیدا کرد";
@@ -122,16 +122,16 @@
 "alerts.accountLinkedTitle" = "پیوند دادن حسابها";
 "alerts.dbFailedTitle" = "خطایی هنگام راه‌اندازی جامی رخ داد";
 "alerts.dbFailedMessage" = "لطفا برنامه را ببندید و دوباره آن را باز کنید.";
-"alerts.confirmBlockContact" = "آیا مطمئن هستید که میخواهید این مخاطب را مسدود کنید؟ تاریخچه مکالمه با این مخاطب برای همیشه پاک خواهد شد.";
+"alerts.confirmBlockContact" = "آیا مطمئن هستید که میخواهید این مخاطب را مسدود کنید؟ تاریخچه گفتگو با این مخاطب برای همیشه پاک خواهد شد.";
 "alerts.confirmBlockContactTitle" = "مسدود سازی مخاطب";
-"alerts.confirmDeleteConversation" = "آیا اطمینان دارید که میخواهید این مکالمه را برای همیشه پاک کنید؟";
-"alerts.confirmDeleteConversationFromContact" = "آیا مطمئن هستید که میخواهید این مکالمه با این مخاطب را پاک کنید؟";
-"alerts.confirmDeleteConversationTitle" = "پاک کردن مکالمه";
-"alerts.confirmClearConversation" = "اطمینان دارید که می‌خواهید مکالمه با این مخاطب را پاک کنید؟";
-"alerts.confirmClearConversationTitle" = "پاک کردن مکالمه";
+"alerts.confirmDeleteConversation" = "آیا اطمینان دارید که می‌خواهید این گفتگو را برای همیشه پاک کنید؟";
+"alerts.confirmDeleteConversationFromContact" = "آیا مطمئن هستید که میخواهید این گفتگو با این مخاطب را پاک کنید؟";
+"alerts.confirmDeleteConversationTitle" = "پاک کردن گفتگو";
+"alerts.confirmClearConversation" = "اطمینان دارید که می‌خواهید گفتگو با این مخاطب را پاک کنید؟";
+"alerts.confirmClearConversationTitle" = "پاک کردن گفتگو";
 "alerts.noMediaPermissionsTitle" = "مجوز رسانه داده نشده است";
 "alerts.noLibraryPermissionsTitle" = "دسترسی به کتابخانه تصاویر داده نشده است";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.errorWrongCredentials" = "توانایی اتصال به مدیریت حساب ارائه‌شده را نداریم. لطفا اعتبارنامه‌های خود را بررسی کنید.";
 
 //Actions
 "actions.blockAction" = "مسدود";
@@ -190,14 +190,14 @@
 "accountPage.removeAccountButton" = "حذف کن";
 "accountPage.shareAccountDetails" = "اشتراک جزییات حساب";
 "accountPage.contactMeOnJamiTitle" = "با من روی جمی در تماس باشید!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "با استفاده از \"%s\" روی بستر ارتباط توزیع‌شده جمی، با من در تماس باشید: https://jami.net";
 "accountPage.registerNameTitle" = "ثبت یک نام‌کاربری";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.passwordPlaceholder" = "گذرواژه حساب را وارد کنید";
+"accountPage.usernamePlaceholder" = "نام کاربری دلخواه را وارد کنید";
+"accountPage.registerNameErrorMessage" = "نام کاربری انتخاب‌شده در دسترس نیست";
+"accountPage.usernameRegistering" = "ثبت‌نام";
 "accountPage.usernameRegisterAction" = "ثبت‌نام";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
+"accountPage.usernameRegistrationFailed" = "انتقال ناموفق بود، لطفا گذرواژه را بررسی کنید.";
 
 //Account
 "account.sipUsername" = "نام کاربر";
@@ -217,7 +217,7 @@
 "account.statusConnecting" = "در حال اتصال";
 "account.statusUnknown" = "ناشناخته";
 "account.statusConnectionerror" = "خطای ارتباط";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "نیاز است که حساب شما انتقال یابد.";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "مخاطب مسدودی وجود ندارد";
@@ -236,7 +236,7 @@
 "contactPage.sendMessage" = "ارسال پیام";
 "contactPage.clearConversation" = "پاکسازی چت";
 "contactPage.blockContact" = "مسدود سازی مخاطب";
-"contactPage.removeConversation" = "حذف مکالمه";
+"contactPage.removeConversation" = "حذف گفتگو";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "آغازِ فرایند...";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "فعال‌سازی شتاب‌دهی ویدیو";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.title" = "مهاجرت حساب";
+"migrateAccount.migrateButton" = "انتقال حساب";
+"migrateAccount.explanation" = "نیاز است که این حساب انتقال یابد.";
+"migrateAccount.passwordPlaceholder" = "گذرواژه را وارد کنید";
+"migrateAccount.passwordExplanation" = "برای پیشبرد انتقال، باید گذرواژه‌ای را که برای این حساب استفاده شده، وارد کنید.";
+"migrateAccount.removeAccount" = "حذف حساب";
+"migrateAccount.error" = "انتقال حساب ناموفق بود. می‌توانید دوباره سعی کرده و یا حساب خود را حذف کنید.";
+"migrateAccount.migrating" = "در حال انتقال...";
+"migrateAccount.cancel" = "لغو";
+"migrateAccount.migrateAnother" = "انتقال حساب دیگر";
 
 

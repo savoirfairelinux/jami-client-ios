@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Ativar aceleração de vídeo";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
+"migrateAccount.title" = "Migração de conta";
 "migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.explanation" = "Esta conta precisa de ser migrada";
+"migrateAccount.passwordPlaceholder" = "Introduza a palavra-chave";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Remover conta";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "Cancelar";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

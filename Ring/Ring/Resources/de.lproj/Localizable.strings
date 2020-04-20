@@ -146,7 +146,7 @@
 //Calls
 "calls.callItemTitle" = "Anruf";
 "calls.unknown" = "Unbekannt";
-"calls.incomingCallInfo" = "möchte mit Dir sprechen.";
+"calls.incomingCallInfo" = "möchte mit Ihnen sprechen.";
 "calls.ringing" = "Klingelt …";
 "calls.connecting" = "Verbinde...";
 "calls.searching" = "Suchen…";
@@ -190,7 +190,7 @@
 "accountPage.removeAccountButton" = "Entfernen";
 "accountPage.shareAccountDetails" = "Kontodetails teilen";
 "accountPage.contactMeOnJamiTitle" = "Kontaktieren Sie mich über Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Kontaktieren Sie mich über \"%s\" auf der verteilten Kommunikationsplattform Jami: https://jami.net";
 "accountPage.registerNameTitle" = "Benutzername registrieren";
 "accountPage.passwordPlaceholder" = "Geben Sie ihr Kontopasswort ein";
 "accountPage.usernamePlaceholder" = "Gewünschten Benutzername eingeben";
@@ -217,7 +217,7 @@
 "account.statusConnecting" = "Verbindet";
 "account.statusUnknown" = "Unbekannt";
 "account.statusConnectionerror" = "Verbindungsfehler";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "Konto muss migriert werden";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Keine gesperrten Kontakte";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Videobeschleunigung aktivieren";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.title" = "Kontomigration";
+"migrateAccount.migrateButton" = "Konto migrieren";
+"migrateAccount.explanation" = "Ihr Konto muss migriert werden";
+"migrateAccount.passwordPlaceholder" = "Passwort eingeben";
+"migrateAccount.passwordExplanation" = "Um mit der Migration fortzufahren, muss das für das Konto verwendete Passwort eingegeben werden";
+"migrateAccount.removeAccount" = "Konto entfernen";
+"migrateAccount.error" = "Ihr Konto konnte nicht migriert werden. Sie können es erneut versuchen oder Ihr Konto löschen.";
+"migrateAccount.migrating" = "Migriere...";
+"migrateAccount.cancel" = "Abbrechen";
+"migrateAccount.migrateAnother" = "Anderes Konto migrieren";
 
 

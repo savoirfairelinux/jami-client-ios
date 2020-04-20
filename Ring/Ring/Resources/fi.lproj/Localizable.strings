@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Kutsut";
 "global.meTabBarTitle" = "Tunnus";
 "global.ok" = "Vahvista";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Ilmainen kuin vapaus";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -59,7 +59,7 @@
 "welcome.createAccount" = "Tee Jami-tili";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Ohita";
 "createProfile.profileCreated" = "Seuraava";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -85,19 +85,19 @@
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Ilmoitukset";
 "createAccount.Recommended" = "(Recommended)";
-"createAccount.UsernameNotRegisteredTitle" = "Network error";
+"createAccount.UsernameNotRegisteredTitle" = "Verkkovirhe";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.waitLinkToAccountTitle" = "Tilin linkittäminen";
+"linkToAccount.linkButtonTitle" = "Linkitä laite";
 "linkToAccount.passwordPlaceholder" = "Salasana";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Syötä salasana";
 "linkToAccount.pinLabel" = "Syötä PIN-koodi";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Voit luoda PIN-koodin siirtymällä asetuksiin laitteessa, joka sisältää haluamasi tilin. Valitse laiteasetuksissa \"Linkitä toinen laite tähän tiliin\". Saat tarvittavan PIN-koodin tämän lomakkeen lopusta. PIN-koodi on voimassa vain 10 minuuttia.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
@@ -105,21 +105,21 @@
 "linkToAccountManager.passwordLabel" = "Syötä salasana";
 "linkToAccountManager.usernamePlaceholder" = "Käyttäjänimi";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerPlaceholder" = "Tilin hallinta";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "Tiliä ei löydy";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountAddedTitle" = "Tili lisätty";
 "alerts.accountNoNetworkTitle" = "Verkkoon ei saada yhteyttä";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Tiliä ei voitu lisätä, koska Jami ei voinut muodostaa yhteyttä hajautettuun verkkoon. Tarkista laitteen yhteydet.";
 "alerts.accountDefaultErrorTitle" = "Tuntematon virhe";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountDefaultErrorMessage" = "Tiliä ei voitu luoda.";
 "alerts.profileTakePhoto" = "Ota valokuva";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Lähetä kuva";
 "alerts.profileCancelPhoto" = "Peruuta";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "Tilin linkittäminen";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Sulje sovellus ja yritä avata se uudelleen";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
@@ -138,7 +138,7 @@
 "actions.deleteAction" = "Poista";
 "actions.cancelAction" = "Peruuta";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.backAction" = "Takaisin";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Hyväksy";
 "alerts.incomingCallButtonIgnore" = "Sivuuta";
@@ -148,7 +148,7 @@
 "calls.unknown" = "Tuntematon";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
+"calls.connecting" = "Yhdistää...";
 "calls.searching" = "Searching…";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
@@ -160,18 +160,18 @@
 "accountPage.username" = "Käyttäjänimi";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Proxy käyttöön";
 "accountPage.blockedContacts" = "Block List";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Proxy käyttöön";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "Tallenna";
 "accountPage.proxyPaceholder" = "Proxy address";
 "accountPage.enableNotifications" = "Ilmoitukset päälle";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Revoke device";
+"accountPage.revokeDeviceTitle" = "Peruuta laite";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
@@ -179,13 +179,13 @@
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
 "accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
+"accountPage.deviceRevocationWrongPassword" = "Väärä salasana";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nimi";
-"accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.linkDeviceTitle" = "Linkitä toinen laite";
 "accountPage.other" = "Muu";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Poista tili";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Poista";
 "accountPage.shareAccountDetails" = "Share Account Details";
@@ -212,8 +212,8 @@
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
+"account.statusOnline" = "Verkossa";
+"account.statusOffline" = "Poissa";
 "account.statusConnecting" = "Yhdistää";
 "account.statusUnknown" = "Tuntematon";
 "account.statusConnectionerror" = "Connection Error";
@@ -228,7 +228,7 @@
 "linkDevice.networkError" = "Tiedonviennissä tapahtui verkkoyhteysvirhe";
 "linkDevice.defaultError" = "Tiedonviennissä tapahtui virhe";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "Tarkistetaan";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
@@ -239,7 +239,7 @@
 "contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Valmistellaan...";
 "dataTransfer.readableStatusError" = "Virhe";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Kieltäydy";
@@ -270,26 +270,26 @@
 //Generated Message
 "generatedMessage.contactAdded" = "Yhteystieto lisätty";
 "generatedMessage.invitationReceived" = "Kutsu vastaanotettu";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.invitationAccepted" = "Kutsu hyväksytty";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
 "generatedMessage.incomingCall" = "Saapuva puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "Yleiset asetukset";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
+"migrateAccount.title" = "Tilin siirto";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordPlaceholder" = "Syötä salasana";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Poista tili";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "Peruuta";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

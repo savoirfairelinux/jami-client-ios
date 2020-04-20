@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Görüntü hızlandırmayı etkinleştir";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
+"migrateAccount.title" = "Hesap taşıma";
 "migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.explanation" = "Bu hesabın taşınması gerekli";
+"migrateAccount.passwordPlaceholder" = "Parolayı gir";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Hesabı Kaldır";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "İptal";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

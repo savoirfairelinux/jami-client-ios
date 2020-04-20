@@ -217,7 +217,7 @@
 "account.statusConnecting" = "Po lidhet";
 "account.statusUnknown" = "I panjohur";
 "account.statusConnectionerror" = "Gabim Lidhjeje";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "llogari që duhet migruar";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "S’ka kontakte të bllokuar";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.title" = "Migrim llogarie";
+"migrateAccount.migrateButton" = "Migroni Llogari";
+"migrateAccount.explanation" = "Kjo llogari lypset të migrohet";
+"migrateAccount.passwordPlaceholder" = "Jepni fjalëkalimin";
+"migrateAccount.passwordExplanation" = "Që të vazhdohet me migrimin, lypset të jepni një fjalëkalim që qe përdorur për këtë llogari";
+"migrateAccount.removeAccount" = "Hiqe llogarinë";
+"migrateAccount.error" = "S’u arrit të migrohej llogaria juaj. Mund të riprovoni ose të fshini llogarinë tuaj.";
+"migrateAccount.migrating" = "Po migrohet…";
+"migrateAccount.cancel" = "Anuloje";
+"migrateAccount.migrateAnother" = "Migroni Llogari Tjetër";
 
 

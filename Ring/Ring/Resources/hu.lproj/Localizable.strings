@@ -217,7 +217,7 @@
 "account.statusConnecting" = "Kapcsolódás";
 "account.statusUnknown" = "Ismeretlen";
 "account.statusConnectionerror" = "Csatlakozási hiba";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "Fiók áttelepítés szükséges";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Nincsenek letiltott kapcsolatok";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Videó gyorsítás engedélyezése";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.title" = "Fiók áttelepítése";
+"migrateAccount.migrateButton" = "Fiók áttelepítés";
+"migrateAccount.explanation" = "Fiók áttelepítés szükséges";
+"migrateAccount.passwordPlaceholder" = "Adja meg a jelszót";
+"migrateAccount.passwordExplanation" = "Adja meg a fiók jelszavát az áttelepítés folytatásához";
+"migrateAccount.removeAccount" = "Fiók eltávolítása";
+"migrateAccount.error" = "Nem sikerült a fiók áttelepítése. Megpróbálhatja újra vagy törölheti fiókját.";
+"migrateAccount.migrating" = "Áttelepítése…";
+"migrateAccount.cancel" = "Mégse";
+"migrateAccount.migrateAnother" = "Másik fiók áttelepítése";
 
 

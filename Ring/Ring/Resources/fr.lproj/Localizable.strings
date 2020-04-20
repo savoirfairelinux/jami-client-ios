@@ -217,7 +217,7 @@
 "account.statusConnecting" = "En cours de connexion";
 "account.statusUnknown" = "Inconnu";
 "account.statusConnectionerror" = "Erreur de connexion";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "Votre compte doit être migré";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Aucun contact bloqué";
@@ -281,15 +281,15 @@
 "generalSettings.videoAcceleration" = "Activer l'accélération vidéo";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.title" = "Migration du compte";
+"migrateAccount.migrateButton" = "Migrer le compte";
+"migrateAccount.explanation" = "Votre compte doit être migré. ";
+"migrateAccount.passwordPlaceholder" = "Entrez votre mot de passe";
+"migrateAccount.passwordExplanation" = "Pour effectuer la migration, vous devez entrer le mot de passe que vous avez utilisé pour ce compte";
+"migrateAccount.removeAccount" = "Supprimer le compte";
+"migrateAccount.error" = "Échec de la migration. Réessayer en pressant Ok ou supprimer ce compte.";
+"migrateAccount.migrating" = "Migration du compte…";
+"migrateAccount.cancel" = "Annuler";
+"migrateAccount.migrateAnother" = "Migrer d'une autre compte";
 
 
