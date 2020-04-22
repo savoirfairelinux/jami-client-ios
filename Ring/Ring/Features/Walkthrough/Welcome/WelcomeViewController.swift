@@ -49,10 +49,11 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
+        self.applyL10n()
         if self.viewModel.isAnimatable {
            self.initialAnimation()
         } else {
-            self.ringLogoBottomConstraint.constant = -200
+            self.ringLogoBottomConstraint.constant = -220
             self.welcomeTextLabel.alpha = 1
             self.createAccountButton.alpha = 1
             self.linkDeviceButton.alpha = 1
@@ -101,13 +102,22 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         }).disposed(by: self.disposeBag)
     }
 
+    func applyL10n() {
+        createSipAccountButton.setTitle(L10n.Account.createSipAccount, for: .normal)
+        linkDeviceButton.setTitle(L10n.Welcome.linkDevice, for: .normal)
+        connectToAccountManagerButton
+            .setTitle(L10n.Welcome.connectToManager, for: .normal)
+        createAccountButton.setTitle(L10n.Welcome.createAccount, for: .normal)
+        welcomeTextLabel.text = L10n.Welcome.title
+    }
+
     func initialAnimation() {
         DispatchQueue.global(qos: .background).async {
             sleep(1)
             DispatchQueue.main.async { [weak self] in
                 self?.ringLogoBottomConstraint.constant = -72
                 UIView.animate(withDuration: 0.5, animations: {
-                    self?.ringLogoBottomConstraint.constant = -200
+                    self?.ringLogoBottomConstraint.constant = -220
                     self?.welcomeTextLabel.alpha = 1
                     self?.createAccountButton.alpha = 1
                     self?.linkDeviceButton.alpha = 1

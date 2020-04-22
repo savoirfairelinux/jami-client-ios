@@ -29,9 +29,7 @@ import SwiftyBeaver
 class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     // MARK: outlets
-    @IBOutlet weak var linkDeviceTitle: UILabel!
     @IBOutlet weak var linkButton: DesignableButton!
-    @IBOutlet weak var backgroundNavigationBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var pinTextField: DesignableTextField!
     @IBOutlet weak var passwordTextField: DesignableTextField!
@@ -60,9 +58,9 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
         // Style
         self.pinTextField.becomeFirstResponder()
+        self.configureWalkrhroughNavigationBar()
         self.view.layoutIfNeeded()
         self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        self.backgroundNavigationBarHeightConstraint.constant = UIApplication.shared.statusBarFrame.height
         self.pinTextField.tintColor = UIColor.jamiSecondary
         self.passwordTextField.tintColor = UIColor.jamiSecondary
 
@@ -112,6 +110,12 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (_) in
+            self?.linkButton.updateGradientFrame()
+            self?.configureWalkrhroughNavigationBar()
+        }).disposed(by: self.disposeBag)
     }
 
     func setContentInset() {
@@ -162,7 +166,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.passwordLabel.text = L10n.LinkToAccount.passwordLabel
         self.pinTextField.placeholder = L10n.LinkToAccount.pinPlaceholder
         self.passwordTextField.placeholder = L10n.LinkToAccount.passwordPlaceholder
-        self.linkDeviceTitle.text = L10n.LinkToAccount.linkButtonTitle
+        self.navigationItem.title = L10n.LinkToAccount.linkButtonTitle
         self.enableNotificationsLabel.text = self.viewModel.enableNotificationsTitle
     }
 

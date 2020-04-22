@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bZy-pS-GTS">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bZy-pS-GTS">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +17,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbX-tY-YMe">
-                                <rect key="frame" x="20" y="40" width="92" height="41"/>
+                                <rect key="frame" x="20" y="20" width="78.5" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="JkF-kD-hSG"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78.5" id="sgE-x1-cIL"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                 <color key="tintColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Back" image="back_button">
@@ -27,7 +29,7 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qyz-fr-4Un">
-                                <rect key="frame" x="20" y="111" width="335" height="36"/>
+                                <rect key="frame" x="20" y="79" width="335" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="byG-U0-D3g"/>
                                 </constraints>
@@ -36,7 +38,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjA-FJ-Fbj">
-                                <rect key="frame" x="152.5" y="547" width="70" height="70"/>
+                                <rect key="frame" x="152.5" y="515" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.45009386540000001" green="0.98132258650000004" blue="0.4743030667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="dUr-YZ-GPL"/>
@@ -57,11 +59,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Go3-KI-bHY">
-                                <rect key="frame" x="40" y="187" width="295" height="340"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Go3-KI-bHY">
+                                <rect key="frame" x="40" y="155" width="295" height="340"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="340" id="Tbw-2k-lN2"/>
+                                    <constraint firstAttribute="width" constant="295" id="idn-rv-xSn"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gKb-0C-Srj">
                                     <size key="itemSize" width="50" height="50"/>
@@ -76,30 +79,7 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="200" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMA-LK-otF">
-                                                    <rect key="frame" x="-10" y="-10" width="70" height="70"/>
-                                                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="70" id="EbX-Cv-0VX"/>
-                                                        <constraint firstAttribute="width" constant="70" id="aed-bP-jQd"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
-                                                    <color key="textColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="35"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                            </subviews>
                                         </view>
-                                        <constraints>
-                                            <constraint firstItem="ZMA-LK-otF" firstAttribute="centerY" secondItem="khF-aQ-hc0" secondAttribute="centerY" id="br4-ve-7WF"/>
-                                            <constraint firstItem="ZMA-LK-otF" firstAttribute="centerX" secondItem="khF-aQ-hc0" secondAttribute="centerX" id="hnP-4Y-NE3"/>
-                                        </constraints>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -108,7 +88,7 @@
                                 </connections>
                             </collectionView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ob5-yu-nTy">
-                                <rect key="frame" x="281" y="576" width="54" height="41"/>
+                                <rect key="frame" x="281" y="544" width="54" height="41"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                 <state key="normal" title="Clear">
                                     <color key="titleColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -117,7 +97,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Go3-KI-bHY" firstAttribute="trailing" secondItem="Xd2-41-axz" secondAttribute="trailing" constant="-40" id="AeA-rl-D6l"/>
                             <constraint firstItem="Xd2-41-axz" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zjA-FJ-Fbj" secondAttribute="bottom" constant="20" id="Aot-h4-qsL"/>
                             <constraint firstItem="Qyz-fr-4Un" firstAttribute="top" secondItem="nbX-tY-YMe" secondAttribute="bottom" constant="30" id="EnZ-3p-oDQ"/>
                             <constraint firstItem="nbX-tY-YMe" firstAttribute="leading" secondItem="Xd2-41-axz" secondAttribute="leading" constant="20" id="FV4-ge-sVI"/>
@@ -127,8 +106,8 @@
                             <constraint firstItem="ob5-yu-nTy" firstAttribute="trailing" secondItem="Go3-KI-bHY" secondAttribute="trailing" id="Ru7-PX-F6U"/>
                             <constraint firstItem="zjA-FJ-Fbj" firstAttribute="centerX" secondItem="AF4-Fv-in2" secondAttribute="centerX" id="VxG-a9-bB9"/>
                             <constraint firstItem="Xd2-41-axz" firstAttribute="trailing" secondItem="Qyz-fr-4Un" secondAttribute="trailing" constant="20" id="ZNV-Cj-Drq"/>
+                            <constraint firstItem="Go3-KI-bHY" firstAttribute="centerX" secondItem="AF4-Fv-in2" secondAttribute="centerX" id="ZkO-Q8-tpf"/>
                             <constraint firstItem="Go3-KI-bHY" firstAttribute="top" secondItem="Qyz-fr-4Un" secondAttribute="bottom" constant="40" id="dLr-Ex-KLr"/>
-                            <constraint firstItem="Go3-KI-bHY" firstAttribute="leading" secondItem="Xd2-41-axz" secondAttribute="leading" constant="40" id="eSp-2Y-q4f"/>
                             <constraint firstItem="zjA-FJ-Fbj" firstAttribute="top" secondItem="Go3-KI-bHY" secondAttribute="bottom" constant="20" id="uf9-fH-ysV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xd2-41-axz"/>
@@ -149,7 +128,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back_button" width="41.25" height="41.25"/>
-        <image name="call_button" width="43.5" height="43.5"/>
+        <image name="back_button" width="27.5" height="27.5"/>
+        <image name="call_button" width="29" height="29"/>
     </resources>
 </document>

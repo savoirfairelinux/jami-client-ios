@@ -72,6 +72,20 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         viewLeftConstraint.constant = isAudio ? 20 : 0
         viewRightConstraint.constant = isAudio ? 20 : 0
         self.bindViewsToViewModel()
+        NotificationCenter.default.rx
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (_) in
+                //filter out upside orientation
+                if  UIDevice.current.orientation.rawValue == 5 ||   UIDevice.current.orientation.rawValue == 6 {
+                    return
+                }
+                guard let self = self else {
+                    return
+                }
+                self.viewModel
+                    .setCameraOrientation(orientation: UIDevice.current.orientation)
+            }).disposed(by: self.disposeBag)
     }
 
     func applyL10() {

@@ -124,6 +124,7 @@ class SendFileViewModel: Stateable, ViewModel {
         self.injectionBag = injectionBag
         if !audioOnly {
             videoService.updateEncodongPreferences()
+            videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
             videoService.startCamera()
         }
         videoService.capturedVideoFrame.asObservable()
@@ -305,5 +306,9 @@ extension SendFileViewModel {
             .subscribe(onNext: { [weak self](position) in
                 self?.player?.seekTimeVariable.value = position
             }).disposed(by: playBackDisposeBag)
+    }
+
+    func setCameraOrientation(orientation: UIDeviceOrientation) {
+        videoService.setCameraOrientation(orientation: orientation)
     }
 }

@@ -31,6 +31,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
     @IBOutlet weak var searchTitle: UILabel!
     @IBOutlet weak var bottomMarginTitleConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomCloseButtonConstraint: NSLayoutConstraint!
+    let disposeBag = DisposeBag()
 
     // MARK: variables
     let systemSoundId: SystemSoundID = 1016
@@ -101,15 +102,47 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
                 //The videoPreviewLayer displays video in conjunction with the captureSession
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
+                if videoPreviewLayer?.connection?.isVideoMirroringSupported ?? false {
+                    videoPreviewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
+                    videoPreviewLayer?.connection?.isVideoMirrored = false
+                }
                 videoPreviewLayer?.videoGravity = .resizeAspectFill
-                videoPreviewLayer?.frame = view.layer.bounds
+                videoPreviewLayer?.frame = view.bounds
                 self.searchTitle.text = L10n.Scan.search
                 view.layer.addSublayer(videoPreviewLayer!)
                 view.bringSubviewToFront(header)
                 view.bringSubviewToFront(self.scanImage)
             } catch { print("Error") }
         }
+        self.updateOrientation()
+        NotificationCenter.default.rx
+        .notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: {[weak self] (_) in
+            guard let self = self else {return}
+            self.videoPreviewLayer?.frame = self.view.bounds
+            self.updateOrientation()
+            self.view.layoutSubviews()
+            self.view.layer.layoutSublayers()
+        }).disposed(by: self.disposeBag)
+    }
 
+    func updateOrientation() {
+        if self.videoPreviewLayer?.connection!.isVideoOrientationSupported ?? false {
+            let orientation: UIDeviceOrientation = UIDevice.current.orientation
+            var cameraOrientation = AVCaptureVideoOrientation.portrait
+            switch orientation {
+            case .landscapeRight:
+                cameraOrientation = AVCaptureVideoOrientation.landscapeLeft
+            case .landscapeLeft:
+                cameraOrientation = AVCaptureVideoOrientation.landscapeRight
+            case .portraitUpsideDown:
+                cameraOrientation = AVCaptureVideoOrientation.portraitUpsideDown
+            default:
+                cameraOrientation = AVCaptureVideoOrientation.portrait
+            }
+            self.videoPreviewLayer?.connection?.videoOrientation = cameraOrientation
+        }
     }
 
     // the metadataOutput function informs our delegate (the ScanViewController) that the captureOutput emitted a new metaData Object
