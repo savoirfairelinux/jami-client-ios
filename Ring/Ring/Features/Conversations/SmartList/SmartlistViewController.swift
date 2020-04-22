@@ -209,24 +209,31 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
             .disposed(by: disposeBag)
         accountButton.roundedCorners = true
-        accountButton.cornerRadius = 20
         accountButton.clipsToBounds = true
         accountButton.contentMode = .scaleAspectFill
-        accountButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        let size: CGFloat = 32
+        accountButton.cornerRadius = size * 0.5
+        accountButton.frame = CGRect(x: 0, y: 0, width: size, height: size)
         accountButton.imageEdgeInsets = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4)
-        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: size))
         containerView.addSubview(accountButton)
         let accountButtonItem = UIBarButtonItem(customView: containerView)
-        accountButtonItem.customView?.translatesAutoresizingMaskIntoConstraints = false
+        accountButtonItem
+            .customView?
+            .translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 10.0, *) {
-            accountButtonItem.customView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            accountButtonItem.customView?.widthAnchor.constraint(equalToConstant: 80).isActive = true
+            accountButtonItem.customView?
+                .heightAnchor
+                .constraint(equalToConstant: size).isActive = true
+            accountButtonItem.customView?
+                .widthAnchor
+                .constraint(equalToConstant: 80).isActive = true
         }
-        accountButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        accountButton.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.openAccountsList()
-            })
-            .disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
         self.navigationItem.leftBarButtonItem = accountButtonItem
 
         dialpadButton.rx.tap

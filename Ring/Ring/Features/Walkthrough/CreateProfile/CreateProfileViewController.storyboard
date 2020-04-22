@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1yn-Mj-8Ek">
-    <device id="retina6_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1yn-Mj-8Ek">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,51 +15,32 @@
                         <viewControllerLayoutGuide type="top" id="zoc-y0-mpa"/>
                         <viewControllerLayoutGuide type="bottom" id="fB8-X7-N5u"/>
                     </layoutGuides>
-                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="N1T-Xh-FH1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1T-Xh-FH1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="onC-vk-VGN">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="onC-vk-VGN">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Yq-n7-91P">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="547"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personalise your profile !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awD-Hy-m7O" userLabel="Create Profil Account Title">
-                                                <rect key="frame" x="41" y="20" width="332" height="37"/>
-                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="31"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
-                                                        <color key="value" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
-                                                        <color key="value" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your profile will be shared with your contacts. You can change it at any time." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lL-e0-PFL" userLabel="Subtitle">
-                                                <rect key="frame" x="43" y="62" width="328" height="38.333333333333343"/>
+                                                <rect key="frame" x="20" y="20" width="280" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a display name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1N-hn-LTy" userLabel="Enter Name Label">
-                                                <rect key="frame" x="124" y="255" width="166" height="22"/>
+                                                <rect key="frame" x="79.5" y="220" width="161" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ebb-h3-1X3" userLabel="Profile Name Edit Text">
-                                                <rect key="frame" x="92" y="287" width="230" height="50"/>
+                                                <rect key="frame" x="35" y="252" width="250" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="V3Q-1d-nI7"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done"/>
                                                 <userDefinedRuntimeAttributes>
@@ -75,10 +54,11 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Po-6e-k14" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                <rect key="frame" x="92" y="352" width="230" height="50"/>
+                                                <rect key="frame" x="35" y="317" width="250" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="2ir-B7-kVX"/>
-                                                    <constraint firstAttribute="width" constant="230" id="DZF-Ea-XUf"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="DZF-Ea-XUf"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="jL1-sS-ZJS"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <state key="normal" title="Skip">
@@ -89,7 +69,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="Wss-Rm-aKz">
-                                                <rect key="frame" x="-49" y="116.33333333333331" width="512" height="120"/>
+                                                <rect key="frame" x="96" y="74.5" width="128" height="120"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="Edd-cj-Zhl"/>
@@ -99,22 +79,22 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Ebb-h3-1X3" firstAttribute="centerX" secondItem="0Yq-n7-91P" secondAttribute="centerX" id="3Do-Tm-CjF"/>
-                                            <constraint firstItem="8lL-e0-PFL" firstAttribute="top" secondItem="awD-Hy-m7O" secondAttribute="bottom" constant="5" id="3F6-Ff-39y"/>
                                             <constraint firstItem="Wss-Rm-aKz" firstAttribute="centerY" secondItem="8lL-e0-PFL" secondAttribute="centerY" constant="95" id="8Qr-wz-HY8"/>
-                                            <constraint firstItem="8lL-e0-PFL" firstAttribute="leading" secondItem="awD-Hy-m7O" secondAttribute="leading" constant="2" id="9JW-wG-hwj"/>
-                                            <constraint firstItem="awD-Hy-m7O" firstAttribute="centerX" secondItem="0Yq-n7-91P" secondAttribute="centerX" id="Aga-Wd-ufN"/>
                                             <constraint firstItem="Ebb-h3-1X3" firstAttribute="trailing" secondItem="5Po-6e-k14" secondAttribute="trailing" id="Bpd-sp-mVf"/>
-                                            <constraint firstItem="8lL-e0-PFL" firstAttribute="centerX" secondItem="awD-Hy-m7O" secondAttribute="centerX" id="DsF-5E-I7H"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5Po-6e-k14" secondAttribute="bottom" constant="20" id="C0I-Z6-nEd"/>
                                             <constraint firstItem="5Po-6e-k14" firstAttribute="top" secondItem="Ebb-h3-1X3" secondAttribute="bottom" constant="15" id="GKk-BK-UGw"/>
                                             <constraint firstItem="N1N-hn-LTy" firstAttribute="centerX" secondItem="0Yq-n7-91P" secondAttribute="centerX" id="Jec-k5-B5z"/>
                                             <constraint firstItem="N1N-hn-LTy" firstAttribute="bottom" secondItem="Ebb-h3-1X3" secondAttribute="top" constant="-10" id="K28-vG-Lqa"/>
-                                            <constraint firstItem="awD-Hy-m7O" firstAttribute="trailing" secondItem="8lL-e0-PFL" secondAttribute="trailing" constant="2" id="MbE-QI-d41"/>
-                                            <constraint firstItem="awD-Hy-m7O" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Yq-n7-91P" secondAttribute="leading" constant="30" id="PLT-r4-IJi"/>
-                                            <constraint firstItem="awD-Hy-m7O" firstAttribute="top" secondItem="0Yq-n7-91P" secondAttribute="top" constant="20" id="RH8-9b-Zoa"/>
+                                            <constraint firstItem="N1N-hn-LTy" firstAttribute="top" secondItem="0Yq-n7-91P" secondAttribute="top" constant="220" id="WgC-Wh-cmt"/>
+                                            <constraint firstAttribute="trailing" secondItem="5Po-6e-k14" secondAttribute="trailing" priority="750" constant="40" id="YJG-QC-xff"/>
                                             <constraint firstItem="Wss-Rm-aKz" firstAttribute="centerX" secondItem="0Yq-n7-91P" secondAttribute="centerX" id="cwW-zq-rDS"/>
-                                            <constraint firstItem="Ebb-h3-1X3" firstAttribute="top" secondItem="awD-Hy-m7O" secondAttribute="bottom" constant="230" id="pUg-Md-sif"/>
+                                            <constraint firstItem="8lL-e0-PFL" firstAttribute="leading" secondItem="0Yq-n7-91P" secondAttribute="leading" constant="20" id="diu-8a-jY8"/>
+                                            <constraint firstAttribute="trailing" secondItem="8lL-e0-PFL" secondAttribute="trailing" constant="20" id="dwF-Md-Tf0"/>
+                                            <constraint firstItem="8lL-e0-PFL" firstAttribute="top" secondItem="0Yq-n7-91P" secondAttribute="top" constant="20" id="mOP-8U-7x4"/>
+                                            <constraint firstItem="5Po-6e-k14" firstAttribute="leading" secondItem="0Yq-n7-91P" secondAttribute="leading" priority="750" constant="40" id="rE9-rc-bIL"/>
                                             <constraint firstItem="Ebb-h3-1X3" firstAttribute="leading" secondItem="5Po-6e-k14" secondAttribute="leading" id="vDa-Un-6um"/>
                                             <constraint firstItem="5Po-6e-k14" firstAttribute="centerX" secondItem="0Yq-n7-91P" secondAttribute="centerX" id="y3z-G3-Ew5"/>
+                                            <constraint firstAttribute="height" constant="547" id="yRv-3a-fTC"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -124,20 +104,21 @@
                                     <constraint firstItem="0Yq-n7-91P" firstAttribute="centerX" secondItem="onC-vk-VGN" secondAttribute="centerX" id="Slz-Um-pcQ"/>
                                     <constraint firstItem="0Yq-n7-91P" firstAttribute="leading" secondItem="onC-vk-VGN" secondAttribute="leading" id="bVK-Hs-dbe"/>
                                     <constraint firstItem="0Yq-n7-91P" firstAttribute="top" secondItem="onC-vk-VGN" secondAttribute="top" id="fPr-Fq-DBB"/>
+                                    <constraint firstItem="0Yq-n7-91P" firstAttribute="width" secondItem="onC-vk-VGN" secondAttribute="width" id="rrj-uK-8A3"/>
                                 </constraints>
                             </scrollView>
                             <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRA-lP-OD3" userLabel="Info View">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="z2z-6h-lsY">
-                                        <rect key="frame" x="-49" y="116.33333333333331" width="512" height="120"/>
+                                        <rect key="frame" x="96" y="74.5" width="128" height="120"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="6Y2-EN-n8A"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="RuJ-k9-6d2" userLabel="Arrow">
-                                        <rect key="frame" x="91" y="231.33333333333337" width="72" height="80"/>
+                                        <rect key="frame" x="44" y="189.5" width="72" height="80"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="RIv-ZQ-8Uw"/>
@@ -145,7 +126,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your avatar" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwE-6U-bqU">
-                                        <rect key="frame" x="27" y="316.33333333333331" width="160" height="55.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="274.5" width="160" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="160" id="emA-LP-rz8"/>
                                         </constraints>
@@ -176,8 +157,6 @@
                             <constraint firstItem="z2z-6h-lsY" firstAttribute="top" secondItem="Wss-Rm-aKz" secondAttribute="top" id="h8q-jk-Q0P"/>
                             <constraint firstItem="z2z-6h-lsY" firstAttribute="leading" secondItem="Wss-Rm-aKz" secondAttribute="leading" id="ilh-ac-a6m"/>
                             <constraint firstAttribute="bottom" secondItem="onC-vk-VGN" secondAttribute="bottom" id="kIf-ew-JtO"/>
-                            <constraint firstItem="0Yq-n7-91P" firstAttribute="height" secondItem="N1T-Xh-FH1" secondAttribute="height" id="lMB-G4-4Tm"/>
-                            <constraint firstItem="0Yq-n7-91P" firstAttribute="width" secondItem="N1T-Xh-FH1" secondAttribute="width" id="pW7-2U-vWL"/>
                             <constraint firstItem="onC-vk-VGN" firstAttribute="top" secondItem="N1T-Xh-FH1" secondAttribute="top" id="zTu-Eg-J4X"/>
                             <constraint firstItem="SRA-lP-OD3" firstAttribute="height" secondItem="N1T-Xh-FH1" secondAttribute="height" id="zvp-kO-3Dx"/>
                         </constraints>
@@ -186,7 +165,6 @@
                         <outlet property="arrow" destination="RuJ-k9-6d2" id="sfC-3H-hGp"/>
                         <outlet property="arrowHeightConstraint" destination="RIv-ZQ-8Uw" id="wPN-ra-uLi"/>
                         <outlet property="arrowYConstraint" destination="SXy-dy-AW4" id="tL4-Ml-YxQ"/>
-                        <outlet property="createProfilAccountTitle" destination="awD-Hy-m7O" id="0tW-KX-h7q"/>
                         <outlet property="createYourAvatarLabel" destination="dwE-6U-bqU" id="eNT-V7-RAm"/>
                         <outlet property="enterNameLabel" destination="N1N-hn-LTy" id="4gq-l5-bHn"/>
                         <outlet property="infoProfileImage" destination="z2z-6h-lsY" id="XkJ-uW-3b9"/>
@@ -201,11 +179,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ma-i4-SuK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104.8" y="366.50246305418722"/>
+            <point key="canvasLocation" x="1104.3478260869565" y="366.29464285714283"/>
         </scene>
     </scenes>
     <resources>
-        <image name="add_avatar" width="512" height="512"/>
-        <image name="info_arrow" width="122.87999725341797" height="122.87999725341797"/>
+        <image name="add_avatar" width="128" height="128"/>
+        <image name="info_arrow" width="128" height="128"/>
     </resources>
 </document>

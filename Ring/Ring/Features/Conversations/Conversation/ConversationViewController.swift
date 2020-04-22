@@ -71,6 +71,17 @@ class ConversationViewController: UIViewController,
         self.setupUI()
         self.setupTableView()
         self.setupBindings()
+        NotificationCenter.default.rx
+        .notification(UIDevice.orientationDidChangeNotification)
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: {[weak self](_) in
+            guard let self = self else {
+                return
+            }
+            self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
+            displayName: self.viewModel.displayName.value,
+            username: self.viewModel.userName.value)
+        }).disposed(by: self.disposeBag)
 
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
@@ -396,7 +407,8 @@ class ConversationViewController: UIViewController,
     }
 
     func setupNavTitle(profileImageData: Data?, displayName: String? = nil, username: String?) {
-        let imageSize       = CGFloat(36.0)
+        let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
+        let imageSize       = isPortrait ? CGFloat(36.0) : CGFloat(32.0)
         let imageOffsetY    = CGFloat(5.0)
         let infoPadding     = CGFloat(8.0)
         let maxNameLength   = CGFloat(128.0)
@@ -425,7 +437,9 @@ class ConversationViewController: UIViewController,
         }
 
         var dnlabelYOffset: CGFloat = 0
-        if UIDevice.current.hasNotch {
+        if !isPortrait {
+            userNameYOffset = 0
+        } else if UIDevice.current.hasNotch {
             if displayName == nil || displayName == "" {
                 userNameYOffset = 7
             } else {
@@ -436,8 +450,8 @@ class ConversationViewController: UIViewController,
             if displayName == nil || displayName == "" {
                 userNameYOffset = 1
             } else {
-            dnlabelYOffset = -4
-            userNameYOffset = 10
+                dnlabelYOffset = -4
+                userNameYOffset = 10
             }
         }
 
@@ -451,12 +465,19 @@ class ConversationViewController: UIViewController,
             nameSize = 14.0
         }
 
-        let unlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: userNameYOffset, width: maxNameLength, height: 24))
-        unlabel.text = username
-        unlabel.font = UIFont.systemFont(ofSize: nameSize)
-        unlabel.textColor = UIColor.jamiMain
-        unlabel.textAlignment = .left
-        titleView.addSubview(unlabel)
+        if isPortrait || displayName == nil || displayName == "" {
+            let frame = CGRect.init(x: imageSize + infoPadding,
+                                    y: userNameYOffset,
+                                    width: maxNameLength,
+                                    height: 24)
+
+            let unlabel: UILabel = UILabel.init(frame: frame)
+            unlabel.text = username
+            unlabel.font = UIFont.systemFont(ofSize: nameSize)
+            unlabel.textColor = UIColor.jamiMain
+            unlabel.textAlignment = .left
+            titleView.addSubview(unlabel)
+        }
         let tapGesture = UITapGestureRecognizer()
         titleView.addGestureRecognizer(tapGesture)
         tapGesture.rx.event
@@ -472,7 +493,7 @@ class ConversationViewController: UIViewController,
         self.viewModel.showContactInfo()
     }
 
-    // swiftlint:disable function_body_length
+   // swiftlint:disable function_body_length
     func setupUI() {
         self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
         self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill
