@@ -2393,7 +2393,7 @@
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
 				);
 				INFOPLIST_FILE = Ring/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MARKETING_VERSION = 2.47;
@@ -2434,7 +2434,7 @@
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
 				);
 				INFOPLIST_FILE = Ring/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MARKETING_VERSION = 2.47;
@@ -2601,7 +2601,7 @@
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
 				);
 				INFOPLIST_FILE = Ring/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MARKETING_VERSION = 2.47;

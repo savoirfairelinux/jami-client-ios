@@ -26,6 +26,7 @@ import RxSwift
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class ConversationViewModel: Stateable, ViewModel {
 
     /**

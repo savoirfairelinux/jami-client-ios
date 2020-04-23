@@ -237,7 +237,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             self.messageLabel.handleURLTap { url in
                 let urlString = url.absoluteString
                 if let prefixedUrl = URL(string: urlString.contains("http") ? urlString : "http://\(urlString)") {
-                    UIApplication.shared.openURL(prefixedUrl)
+                    UIApplication.shared.open(prefixedUrl, completionHandler: nil)
                 }
             }
         }

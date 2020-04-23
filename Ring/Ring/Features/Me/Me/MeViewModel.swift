@@ -534,7 +534,7 @@ class MeViewModel: ViewModel, Stateable {
                     rows = [.device(device: devices[0])]
                     for deviceIndex in 1 ..< devices.count {
                         let device = devices[deviceIndex]
-                        rows!.append (.device(device: device))
+                        rows!.append(.device(device: device))
                     }
                 } else if let account = self.accountService.currentAccount,
                     let details = account.details {
@@ -620,11 +620,7 @@ class MeViewModel: ViewModel, Stateable {
         // if notiications not allowed open application settings
         if enable == true && enable != notificationsPermitted.value {
             if let url = URL(string: UIApplication.openSettingsURLString) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, completionHandler: nil)
-                } else {
-                    UIApplication.shared.openURL(url)
-                }
+                UIApplication.shared.open(url, completionHandler: nil)
             }
         }
     }
