@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Unknown constraint types" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,11 +13,11 @@
             <rect key="frame" x="0.0" y="0.0" width="510" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="52M-1g-koJ" id="a8Q-63-e84">
-                <rect key="frame" x="0.0" y="0.0" width="510" height="109.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="510" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUF-dd-SHE" userLabel="Avatar View">
-                        <rect key="frame" x="16" y="67" width="32" height="32"/>
+                        <rect key="frame" x="16" y="68" width="32" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="2Sx-kt-bxB"/>
@@ -29,7 +25,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mcd-XM-6nW" userLabel="Top Corner">
-                        <rect key="frame" x="64" y="8.5" width="17" height="17"/>
+                        <rect key="frame" x="64" y="8" width="17" height="17"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="ByW-4A-Bl3"/>
@@ -45,7 +41,7 @@
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k7r-gv-wn2" customClass="MessageBubble" customModule="Ring" customModuleProvider="target">
-                        <rect key="frame" x="64" y="8.5" width="382" height="93"/>
+                        <rect key="frame" x="64" y="8" width="382" height="94"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attachment_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Vif-9c-Vza" userLabel="File Icon">
                                 <rect key="frame" x="14" y="7" width="24" height="24"/>
@@ -64,7 +60,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="42KB" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGC-d7-MmV" userLabel="Size Label" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="14" y="35" width="37" height="17.5"/>
+                                <rect key="frame" x="14" y="35" width="37" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="13y-MF-2dV"/>
                                 </constraints>
@@ -73,7 +69,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="50%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMh-zf-aOl" userLabel="Status Label" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="336" y="34.5" width="30" height="18"/>
+                                <rect key="frame" x="335.5" y="35" width="30.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="rfB-KZ-aJN"/>
                                 </constraints>
@@ -82,22 +78,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="753" verticalCompressionResistancePriority="751" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tc3-3o-eIM">
-                                <rect key="frame" x="16" y="56.5" width="350" height="2"/>
+                                <rect key="frame" x="16" y="57" width="350" height="2"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="9an-z7-YYj"/>
                                 </constraints>
                             </progressView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="dFz-uY-Lik" userLabel="Buttons">
-                                <rect key="frame" x="14" y="62.5" width="177" height="24"/>
+                                <rect key="frame" x="14" y="63" width="174.5" height="24"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufs-kC-RwY" userLabel="Accept Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="81" height="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="78.5" height="24"/>
                                         <state key="normal" title="Accept" image="download_icon">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIE-mj-gUg" userLabel="Cancel Button">
-                                        <rect key="frame" x="97" y="0.0" width="80" height="24"/>
+                                        <rect key="frame" x="94.5" y="0.0" width="80" height="24"/>
                                         <state key="normal" title="Refuse" image="close_icon">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -108,7 +104,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LoC-UA-VKl">
-                                <rect key="frame" x="0.0" y="0.0" width="382" height="93"/>
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="94"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
@@ -134,7 +130,6 @@
                             <constraint firstAttribute="bottom" secondItem="dFz-uY-Lik" secondAttribute="bottom" constant="7" id="uMF-UH-lRt"/>
                             <constraint firstAttribute="bottom" secondItem="LoC-UA-VKl" secondAttribute="bottom" id="xqJ-Kf-sFD"/>
                             <constraint firstItem="Vif-9c-Vza" firstAttribute="leading" secondItem="k7r-gv-wn2" secondAttribute="leading" constant="14" id="ziG-Bm-awa"/>
-                            <constraint firstAttribute="top" secondItem="k7r-gv-wn2" secondAttribute="top" id="zsT-GC-e5W"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -143,21 +138,21 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WB7-Io-YuE" userLabel="Left Divider">
-                        <rect key="frame" x="36" y="19.5" width="126.5" height="1"/>
+                        <rect key="frame" x="31" y="19" width="131" height="1"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="AlE-Y2-o9R"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tI0-XY-IEm" userLabel="Right Divider">
-                        <rect key="frame" x="348.5" y="19.5" width="125.5" height="1"/>
+                        <rect key="frame" x="348" y="19" width="131" height="1"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="vAB-5v-8HU"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11/14/2016 12:34PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lC1-z1-ZwQ" userLabel="Message Time">
-                        <rect key="frame" x="178.5" y="9" width="154" height="20.5"/>
+                        <rect key="frame" x="178" y="9" width="154" height="20.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -213,6 +208,6 @@
     <resources>
         <image name="attachment_icon" width="24" height="24"/>
         <image name="close_icon" width="24" height="24"/>
-        <image name="download_icon" width="24" height="24"/>
+        <image name="download_icon" width="21.5" height="21.5"/>
     </resources>
 </document>

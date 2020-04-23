@@ -73,71 +73,34 @@ class LocalNotificationsHelper {
             let body = data [NotificationUserInfoKeys.messageContent.rawValue] else {
                 return
         }
-        if #available(iOS 10.0, *) {
-            let content = UNMutableNotificationContent()
-            content.title = title
-            content.body = body
-            content.userInfo = data
-            content.sound = UNNotificationSound.default
-            content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
-            let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-            let identifier = Int64(arc4random_uniform(10000000))
-            let notificationRequest = UNNotificationRequest(identifier: "\(identifier)", content: content, trigger: notificationTrigger)
-            UNUserNotificationCenter.current().add(notificationRequest) { (error) in
-                if let error = error {
-                    print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-                }
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.userInfo = data
+        content.sound = UNNotificationSound.default
+        content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
+        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
+        let identifier = Int64(arc4random_uniform(10000000))
+        let notificationRequest = UNNotificationRequest(identifier: "\(identifier)", content: content, trigger: notificationTrigger)
+        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+            if let error = error {
+                print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
             }
-        } else {
-            let notification = UILocalNotification()
-            notification.alertTitle = title
-            notification.alertBody = body
-            notification.userInfo = data
-            notification.soundName = UILocalNotificationDefaultSoundName
-            notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
-            UIApplication.shared.scheduleLocalNotification(notification)
         }
     }
 
     func createCallCategory() {
-        if #available(iOS 10.0, *) {
-            let acceptAction = UNNotificationAction(identifier: CallAcition.accept.rawValue,
-                                                    title: CallAcition.accept.title(),
-                                                    options: [.foreground])
-            let refuseAction = UNNotificationAction(identifier: CallAcition.refuse.rawValue,
-                                                    title: CallAcition.refuse.title(),
-                                                    options: [])
+        let acceptAction = UNNotificationAction(identifier: CallAcition.accept.rawValue,
+                                                title: CallAcition.accept.title(),
+                                                options: [.foreground])
+        let refuseAction = UNNotificationAction(identifier: CallAcition.refuse.rawValue,
+                                                title: CallAcition.refuse.title(),
+                                                options: [])
 
-            let callCategory = UNNotificationCategory(identifier: self.callCategory,
-                                                      actions: [acceptAction, refuseAction],
-                                                      intentIdentifiers: [], options: [])
-            UNUserNotificationCenter.current().setNotificationCategories([callCategory])
-        } else {
-            guard let notificationTypes: UIUserNotificationType = (UIApplication.shared.currentUserNotificationSettings?.types) else {
-                return
-            }
-            let acceptAction = UIMutableUserNotificationAction()
-            acceptAction.identifier = CallAcition.accept.rawValue
-            acceptAction.title = CallAcition.accept.title()
-            acceptAction.activationMode = UIUserNotificationActivationMode.foreground
-            let refuseAction = UIMutableUserNotificationAction()
-            refuseAction.identifier = CallAcition.refuse.rawValue
-            refuseAction.title = CallAcition.refuse.title()
-            refuseAction.activationMode = UIUserNotificationActivationMode.background
-            let callCategory = UIMutableUserNotificationCategory()
-            callCategory.identifier = self.callCategory
-            // A. Set actions for the default context
-            callCategory.setActions([acceptAction, refuseAction],
-                                    for: UIUserNotificationActionContext.default)
-            // B. Set actions for the minimal context
-            callCategory.setActions([acceptAction, refuseAction],
-                                    for: UIUserNotificationActionContext.minimal)
-            guard let categoriesForSettings: Set<UIUserNotificationCategory> = NSSet(objects: callCategory) as? Set<UIUserNotificationCategory> else {
-                return
-            }
-            let newNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: categoriesForSettings)
-            UIApplication.shared.registerUserNotificationSettings(newNotificationSettings)
-        }
+        let callCategory = UNNotificationCategory(identifier: self.callCategory,
+                                                  actions: [acceptAction, refuseAction],
+                                                  intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([callCategory])
     }
 
     @objc func cancelCall(timer: Timer) {
@@ -165,58 +128,36 @@ class LocalNotificationsHelper {
                                      selector: #selector(cancelCall),
                                      userInfo: [NotificationUserInfoKeys.callID.rawValue: callID],
                                      repeats: false)
-        if #available(iOS 10.0, *) {
-            let content = UNMutableNotificationContent()
-            content.title = title
-            content.body = name
-            content.userInfo = data
-            content.categoryIdentifier = self.callCategory
-            let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-            let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
-            UNUserNotificationCenter.current().add(notificationRequest) { (error) in
-                if let error = error {
-                    print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-                }
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = name
+        content.userInfo = data
+        content.categoryIdentifier = self.callCategory
+        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
+        let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
+        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+            if let error = error {
+                print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
             }
-            callService.currentCall(callId: callID).filter({ call in
-                return (call.state == .over || call.state == .failure)
-            }).single()
-                .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { _ in
-                    let content = UNMutableNotificationContent()
-                    content.title = NotificationCallTitle.missedCall.getString()
-                    content.body = name
-                    content.sound = UNNotificationSound.default
-                    content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
-                    let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-                    let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
-                    UNUserNotificationCenter.current().add(notificationRequest) { (error) in
-                        if let error = error {
-                            print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-                        }
-                    }
-                }).disposed(by: self.disposeBag)
-        } else {
-            let notification = UILocalNotification()
-            notification.userInfo = data
-            notification.alertTitle = title
-            notification.alertBody = name
-            notification.category = self.callCategory
-            notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
-            UIApplication.shared.scheduleLocalNotification(notification)
-            callService.currentCall(callId: callID).filter({ call in
-                return (call.state == .over || call.state == .failure)
-            }).single()
-                .subscribe(onNext: { _ in
-                    let notification = UILocalNotification()
-                    notification.userInfo = data
-                    notification.alertTitle = NotificationCallTitle.missedCall.getString()
-                    notification.alertBody = name
-                    notification.soundName = UILocalNotificationDefaultSoundName
-                    notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
-                    UIApplication.shared.scheduleLocalNotification(notification)
-                }).disposed(by: self.disposeBag)
         }
+        callService.currentCall(callId: callID).filter({ call in
+            return (call.state == .over || call.state == .failure)
+        }).single()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                let content = UNMutableNotificationContent()
+                content.title = NotificationCallTitle.missedCall.getString()
+                content.body = name
+                content.sound = UNNotificationSound.default
+                content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
+                let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
+                let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
+                UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+                    if let error = error {
+                        print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
+                    }
+                }
+            }).disposed(by: self.disposeBag)
     }
 
     class func isEnabled() -> Bool {

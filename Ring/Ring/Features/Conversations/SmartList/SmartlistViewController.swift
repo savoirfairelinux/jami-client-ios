@@ -149,11 +149,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.settingsButton.backgroundColor = nil
         self.settingsButton.rx.tap.subscribe(onNext: { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, completionHandler: nil)
-                } else {
-                    UIApplication.shared.openURL(url)
-                }
+                UIApplication.shared.open(url, completionHandler: nil)
             }
         }).disposed(by: self.disposeBag)
 
@@ -221,14 +217,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         accountButtonItem
             .customView?
             .translatesAutoresizingMaskIntoConstraints = false
-        if #available(iOS 10.0, *) {
-            accountButtonItem.customView?
+        accountButtonItem.customView?
                 .heightAnchor
                 .constraint(equalToConstant: size).isActive = true
-            accountButtonItem.customView?
+        accountButtonItem.customView?
                 .widthAnchor
                 .constraint(equalToConstant: 80).isActive = true
-        }
         accountButton.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in

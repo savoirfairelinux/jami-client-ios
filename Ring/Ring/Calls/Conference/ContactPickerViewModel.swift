@@ -126,7 +126,11 @@ class ContactPickerViewModel: Stateable, ViewModel {
                         let newContacts = item.contacts.filter { contact in
                             var mutableContact = contact
                             let searchLowercased = search.lowercased()
-                            return mutableContact.firstLine.lowercased().contains(searchLowercased) || mutableContact.secondLine.lowercased().contains(searchLowercased) || mutableContact.hash.lowercased().contains(searchLowercased)
+                            return mutableContact.firstLine.lowercased().contains(searchLowercased) ||
+                                mutableContact.secondLine.lowercased()
+                                    .contains(searchLowercased) ||
+                                mutableContact.hash.lowercased()
+                                    .contains(searchLowercased)
                         }
                         mutabeItem.contacts = newContacts
                         return mutabeItem

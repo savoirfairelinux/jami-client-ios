@@ -28,7 +28,6 @@ import PushKit
 import ContactsUI
 
 // swiftlint:disable identifier_name
-// swiftlint:disable type_body_length
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
@@ -102,9 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        }
+        UNUserNotificationCenter.current().delegate = self
         // initialize log format
         let console = ConsoleDestination()
         console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
@@ -148,6 +145,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.window?.makeKeyAndVisible()
 
         prepareVideoAcceleration()
+        prepareAccounts()
+        self.voipRegistry.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(registerVoipNotifications),
+                                               name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
+                                               object: nil)
+        self.clearBadgeNumber()
+        return true
+    }
+
+    func prepareAccounts() {
         self.accountService
             .needMigrateCurrentAccount
             .subscribe(onNext: { account in
@@ -155,43 +162,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     self.appCoordinator.migrateAccount(accountId: account)
                 }
             }).disposed(by: self.disposeBag)
-
         self.accountService.initialAccountsLoading()
             .subscribe(onCompleted: {
-            //set selected account if exists
-            self.appCoordinator.start()
-            for account in self.accountService.accounts {
-                self.accountService.setDetails(forAccountId: account.id)
-            }
-            if self.accountService.hasAccountWithProxyEnabled() {
-                self.registerVoipNotifications()
-            } else {
-                self.unregisterVoipNotifications()
-            }
-            if let selectedAccountId = UserDefaults.standard.string(forKey: self.accountService.selectedAccountID),
-                let account = self.accountService.getAccount(fromAccountId: selectedAccountId) {
+                //set selected account if exists
+                self.appCoordinator.start()
+                for account in self.accountService.accounts {
+                    self.accountService.setDetails(forAccountId: account.id)
+                }
+                if self.accountService.hasAccountWithProxyEnabled() {
+                    self.registerVoipNotifications()
+                } else {
+                    self.unregisterVoipNotifications()
+                }
+                if let selectedAccountId = UserDefaults.standard.string(forKey: self.accountService.selectedAccountID),
+                    let account = self.accountService.getAccount(fromAccountId: selectedAccountId) {
                     self.accountService.currentAccount = account
-            }
-            guard let currentAccount = self.accountService.currentAccount else {
-                self.log.error("Can't get current account!")
-                //if we don't have any account means it is first run, so enable hardware acceleration
-                self.videoService.setHardwareAccelerated(withState: true)
-                UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
-                return
-            }
-            self.reloadDataFor(account: currentAccount)
-            if #available(iOS 10.0, *) {
-                return
-            }
-            // reimit new call signal to show incoming call alert
-            self.callService.checkForIncomingCall()
-        }, onError: { _ in
-            self.appCoordinator.showInitialLoading()
-            let time = DispatchTime.now() + 1
-            DispatchQueue.main.asyncAfter(deadline: time) {
-                self.appCoordinator.showDatabaseError()
-            }
-        }).disposed(by: self.disposeBag)
+                }
+                guard let currentAccount = self.accountService.currentAccount else {
+                    self.log.error("Can't get current account!")
+                    //if we don't have any account means it is first run, so enable hardware acceleration
+                    self.videoService.setHardwareAccelerated(withState: true)
+                    UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
+                    return
+                }
+                self.reloadDataFor(account: currentAccount)
+            }, onError: { _ in
+                self.appCoordinator.showInitialLoading()
+                let time = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: time) {
+                    self.appCoordinator.showDatabaseError()
+                }
+            }).disposed(by: self.disposeBag)
 
         self.accountService.currentWillChange
             .subscribe(onNext: { account in
@@ -204,12 +205,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 guard let currentAccount = account else {return}
                 self.reloadDataFor(account: currentAccount)
             }).disposed(by: self.disposeBag)
-        self.voipRegistry.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(registerVoipNotifications),
-                                               name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
-                                               object: nil)
-        self.clearBadgeNumber()
-        return true
     }
 
     func reloadDataFor(account: AccountModel) {
@@ -238,10 +233,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         self.clearBadgeNumber()
-        if #available(iOS 10.0, *) {
-            return
-        }
-        self.callService.checkForIncomingCall()
     }
 
     func prepareVideoAcceleration() {
@@ -277,32 +268,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
-    // swiftlint:disable cyclomatic_complexity
     func updateNotificationAvailability() {
         let enabled = LocalNotificationsHelper.isEnabled()
-        if #available(iOS 10.0, *) {
-            let currentSettings = UNUserNotificationCenter.current()
-            currentSettings.getNotificationSettings(completionHandler: { settings in
-                switch settings.authorizationStatus {
-                case .notDetermined:
-                    break
-                case .denied:
-                    if enabled { LocalNotificationsHelper.setNotification(enable: false) }
-                case .authorized:
-                    if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
-                case .provisional:
-                    if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
-                @unknown default:
-                    break
-                }
-            })
-        } else {
-            if UIApplication.shared.isRegisteredForRemoteNotifications {
-                if !enabled {LocalNotificationsHelper.setNotification(enable: true)}
-            } else {
-                if enabled {LocalNotificationsHelper.setNotification(enable: false)}
+        let currentSettings = UNUserNotificationCenter.current()
+        currentSettings.getNotificationSettings(completionHandler: { settings in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                break
+            case .denied:
+                if enabled { LocalNotificationsHelper.setNotification(enable: false) }
+            case .authorized:
+                if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
+            case .provisional:
+                if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
+            @unknown default:
+                break
             }
-        }
+        })
     }
 
     @objc private func registerVoipNotifications() {
@@ -320,45 +302,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private func requestNotificationAuthorization() {
         let application = UIApplication.shared
-        if #available(iOS 10.0, *) {
-            DispatchQueue.main.async {
-                UNUserNotificationCenter.current().delegate = application.delegate as? UNUserNotificationCenterDelegate
-                let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-                UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { (enable, _) in
-                    if enable {
-                        LocalNotificationsHelper.setNotification(enable: true)
-                    } else {
-                        LocalNotificationsHelper.setNotification(enable: false)
-                    }
-                })
-            }
-        } else {
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
-    }
-
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        let enabled = notificationSettings.types.contains(.alert)
-        if enabled {
-            LocalNotificationsHelper.setNotification(enable: true)
-        } else {
-            LocalNotificationsHelper.setNotification(enable: false)
+        DispatchQueue.main.async {
+            UNUserNotificationCenter.current().delegate = application.delegate as? UNUserNotificationCenterDelegate
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { (enable, _) in
+                if enable {
+                    LocalNotificationsHelper.setNotification(enable: true)
+                } else {
+                    LocalNotificationsHelper.setNotification(enable: false)
+                }
+            })
         }
     }
 
     private func clearBadgeNumber() {
         UIApplication.shared.applicationIconBadgeNumber = 0
-        if #available(iOS 10.0, *) {
-            let center = UNUserNotificationCenter.current()
-            center.removeAllDeliveredNotifications()
-            center.removeAllPendingNotificationRequests()
-        } else {
-            UIApplication.shared.cancelAllLocalNotifications()
-        }
+        let center = UNUserNotificationCenter.current()
+        center.removeAllDeliveredNotifications()
+        center.removeAllPendingNotificationRequests()
     }
 
-    @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let data = response.notification.request.content.userInfo
         self.handleNotificationActions(data: data, responseIdentifier: response.actionIdentifier)
@@ -396,23 +359,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             NotificationCenter.default.post(name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue),
                                             object: nil,
                                             userInfo: data)
-        }
-    }
-
-    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
-        if let identifier = identifier, let data = notification.userInfo {
-            self.handleNotificationActions(data: data, responseIdentifier: identifier)
-        }
-        completionHandler()
-    }
-
-    // handle notifications click before iOS 10.0
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        guard let info = notification.userInfo else {return}
-        if (info[NotificationUserInfoKeys.callID.rawValue] as? String) != nil {
-             handleNotificationActions(data: info, responseIdentifier: CallAcition.accept.rawValue)
-        } else if (info[NotificationUserInfoKeys.messageContent.rawValue] as? String) != nil {
-            handleNotificationActions(data: info, responseIdentifier: "messageReceived")
         }
     }
 
@@ -476,14 +422,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        if #available(iOS 10.0, *) {
-            guard let handle = userActivity.startCallHandle else {
-                return false
-            }
-            self.findContactAndStartCall(hash: handle.hash, isVideo: handle.isVideo)
-            return true
+        guard let handle = userActivity.startCallHandle else {
+            return false
         }
-        return false
+        self.findContactAndStartCall(hash: handle.hash, isVideo: handle.isVideo)
+        return true
     }
 }
 

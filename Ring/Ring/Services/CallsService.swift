@@ -382,7 +382,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     // MARK: CallsAdapterDelegate
-
+    // swiftlint:disable cyclomatic_complexity
     func didChangeCallState(withCallId callId: String, state: String, stateCode: NSInteger) {
 
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
