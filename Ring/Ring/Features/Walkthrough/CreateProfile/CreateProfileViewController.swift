@@ -204,7 +204,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.setHidesBackButton(true, animated: true);
+        self.navigationItem.setHidesBackButton(true, animated: true)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }

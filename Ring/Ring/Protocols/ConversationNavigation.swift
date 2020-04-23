@@ -45,6 +45,7 @@ protocol ConversationNavigation: class {
 
 extension ConversationNavigation where Self: Coordinator, Self: StateableResponsive {
 
+    // swiftlint:disable cyclomatic_complexity
     func callbackPlaceCall() {
         self.stateSubject.subscribe(onNext: { [unowned self] (state) in
             guard let state = state as? ConversationState else { return }

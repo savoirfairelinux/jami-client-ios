@@ -486,10 +486,7 @@ class AccountsService: AccountAdapterDelegate {
 
     func setDetails(forAccountId accountId: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
-        var filename = "default.wav"
-        if #available(iOS 10.0, *) {
-            filename = ""
-        }
+        let filename = ""
         if details
             .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == filename &&
             details

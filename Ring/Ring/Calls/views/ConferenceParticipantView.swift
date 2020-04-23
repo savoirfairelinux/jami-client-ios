@@ -64,11 +64,7 @@ class ConferenceParticipantView: UIView {
         label.text = L10n.Calls.haghUp
         label.textAlignment = .center
         let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: menuWidth, height: menuHight))
-        if #available(iOS 10.0, *) {
-            label.adjustsFontSizeToFitWidth = true
-        } else {
-            label.font = UIFont.systemFont(ofSize: 10)
-        }
+        label.adjustsFontSizeToFitWidth = true
         menu.cornerRadius = 10
         menu.addSubview(background)
         menu.addSubview(label)
