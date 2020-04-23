@@ -42,7 +42,7 @@ class NetworkService {
     }()
 
     init() {
-        reachability = Reachability()
+        reachability = try? Reachability()
     }
 
     func monitorNetworkType() {
