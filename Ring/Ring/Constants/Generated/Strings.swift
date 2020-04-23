@@ -1,5 +1,5 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
 
@@ -19,6 +19,8 @@ internal enum L10n {
     internal static let createSipAccount = L10n.tr("Localizable", "account.createSipAccount")
     /// Enable Account
     internal static let enableAccount = L10n.tr("Localizable", "account.enableAccount")
+    /// account need to be migrated
+    internal static let needMigration = L10n.tr("Localizable", "account.needMigration")
     /// Enter Password
     internal static let passwordLabel = L10n.tr("Localizable", "account.passwordLabel")
     /// Port
@@ -505,6 +507,8 @@ internal enum L10n {
   }
 
   internal enum Welcome {
+    /// Connect to account manager
+    internal static let connectToManager = L10n.tr("Localizable", "welcome.connectToManager")
     /// Create a Jami account
     internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount")
     /// Link this device to an account
@@ -522,6 +526,7 @@ internal enum L10n {
 
 extension L10n {
   fileprivate static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
+    // swiftlint:disable:next nslocalizedstring_key
     let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
     return String(format: format, locale: Locale.current, arguments: args)
   }

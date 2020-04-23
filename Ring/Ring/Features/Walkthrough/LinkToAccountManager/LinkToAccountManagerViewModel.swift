@@ -40,10 +40,11 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
     }()
 
     lazy var canLink: Observable<Bool> = {
-        return Observable.combineLatest(self.userName.asObservable(),
-                                        self.password.asObservable(),
-                                        self.manager.asObservable(),
-                                        self.createState) {( name: String,password: String, manager: String, state: AccountCreationState) -> Bool in
+        return Observable
+            .combineLatest(self.userName.asObservable(),
+                           self.password.asObservable(),
+                           self.manager.asObservable(),
+                           self.createState) {( name: String, password: String, manager: String, state: AccountCreationState) -> Bool in
             return !name.isEmpty && !password.isEmpty && !manager.isEmpty && !state.isInProgress
         }
     }()

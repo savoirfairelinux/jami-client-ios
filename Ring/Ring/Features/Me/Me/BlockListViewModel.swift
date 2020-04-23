@@ -36,7 +36,7 @@ class BlockListViewModel: ViewModel {
         return self.contacts.asObservable().map({ [weak self] contacts in
             var bannedItems = [BannedContactItem]()
             _ = contacts.filter {contact in contact.banned}
-                .map ({ contact in
+                .map({ contact in
                     let items = self?.initialItems.filter({ item in
                         return item.contact.hash == contact.hash
                     })
@@ -89,7 +89,7 @@ class BlockListViewModel: ViewModel {
                             return lookupNameResponse.address != nil &&
                                 lookupNameResponse.address == contact.hash
                         })
-                        .subscribe(onNext: { [weak self] lookupNameResponse in
+                        .subscribe(onNext: {lookupNameResponse in
                             if let name = lookupNameResponse.name, !name.isEmpty {
                                 contact.userName = name
                             }

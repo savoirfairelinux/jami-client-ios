@@ -311,11 +311,8 @@ class ConversationViewController: UIViewController,
             self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
         } else if picker.sourceType == UIImagePickerController.SourceType.photoLibrary {
             // image from library
-            guard let imageURL = info[UIImagePickerController.InfoKey.referenceURL] as? URL else { return }
-            self.log.debug("imageURL: \(String(describing: imageURL))")
-
-            let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
-            var imageFileName = result.firstObject?.value(forKey: "filename") as? String ?? "Unknown"
+            guard let phAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
+            var imageFileName = phAsset.value(forKey: "filename") as? String ?? "Unknown"
 
             // seems that HEIC, HEIF, and JPG files in the iOS photo library start with 0x89 0x50 (png)
             // so funky cold medina
@@ -331,8 +328,6 @@ class ConversationViewController: UIViewController,
             }
             self.log.debug("localCachePath: \(String(describing: localCachePath))")
 
-            guard let phAsset = result.firstObject else { return }
-
             if phAsset.mediaType == .image {
                 if let img = info[.editedImage] as? UIImage {
                     image = img
@@ -343,7 +338,7 @@ class ConversationViewController: UIViewController,
                 copyImageToCache(image: image, imagePath: localCachePath.path)
                 self.viewModel.sendFile(filePath: localCachePath.path,
                                         displayName: imageFileName,
-                                        localIdentifier: result.firstObject?.localIdentifier)
+                                        localIdentifier: phAsset.localIdentifier)
             } else if phAsset.mediaType == .video {
                 PHImageManager.default().requestAVAsset(forVideo: phAsset,
                                                         options: PHVideoRequestOptions(),

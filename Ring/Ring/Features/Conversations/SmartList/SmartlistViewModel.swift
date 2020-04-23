@@ -24,7 +24,6 @@
 import RxSwift
 import SwiftyBeaver
 
-// swiftlint:disable type_body_length
 class SmartlistViewModel: Stateable, ViewModel {
 
     private let log = SwiftyBeaver.self
@@ -419,7 +418,7 @@ class SmartlistViewModel: Stateable, ViewModel {
 
     func changeCurrentAccount(accountId: String) {
         if let account = self.accountsService.getAccount(fromAccountId: accountId) {
-            if (accountsService.needAccountMigration(accountId: accountId)) {
+            if accountsService.needAccountMigration(accountId: accountId) {
                 self.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
                 return
             }

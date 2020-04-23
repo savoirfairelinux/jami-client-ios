@@ -173,18 +173,14 @@ class CallViewModel: Stateable, ViewModel {
                         if anotherCall.participantsCallId.count == 1 {
                             self?.rendererId = anotherCallid
                         }
-                        if #available(iOS 10.0, *) {
-                            self?.callsProvider.stopCall(callUUID: call.callUUID)
-                        }
+                        self?.callsProvider.stopCall(callUUID: call.callUUID)
                         return !hide
                     }
                 }
                 if hide {
                     self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
                     self?.videoService.restoreStateAfterconference()
-                    if #available(iOS 10.0, *) {
-                        self?.callsProvider.stopCall(callUUID: call.callUUID)
-                    }
+                    self?.callsProvider.stopCall(callUUID: call.callUUID)
                 }
                 return hide
             })
@@ -229,9 +225,9 @@ class CallViewModel: Stateable, ViewModel {
     lazy var bottomInfo: Observable<String> = {
         return currentCall
             .startWith(self.call ?? CallModel())
-            .filter({ [weak self] call in
+            .filter({call in
                 return call.callType == .outgoing
-            }).map({ [weak self] call in
+            }).map({call in
                 switch call.state {
                 case .connecting :
                     return L10n.Calls.connecting
@@ -429,7 +425,7 @@ class CallViewModel: Stateable, ViewModel {
         guard let call = self.call else {
             return
         }
-        if #available(iOS 10.0, *), stopProvider {
+        if stopProvider {
             self.callsProvider.stopCall(callUUID: call.callUUID)
             call.participantsCallId.forEach { (callId) in
                 if let participantCall = self.callService.call(callID: callId) {
@@ -471,10 +467,8 @@ class CallViewModel: Stateable, ViewModel {
             .subscribe(onSuccess: { [weak self] callModel in
                 callModel.callUUID = UUID()
                 self?.call = callModel
-                if #available(iOS 10.0, *) {
-                    self?.callsProvider
-                        .startCall(account: account, call: callModel)
-                }
+                self?.callsProvider
+                    .startCall(account: account, call: callModel)
             }).disposed(by: self.disposeBag)
     }
 

@@ -23,9 +23,7 @@ import CallKit
 import RxSwift
 
 class CallsProviderDelegate: NSObject {
-    @available(iOS 10.0, *)
     private lazy var provider: CXProvider? = nil
-    @available(iOS 10.0, *)
     private lazy var callController = CXCallController()
     let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
@@ -34,25 +32,21 @@ class CallsProviderDelegate: NSObject {
     override init() {
         self.sharedResponseStream = responseStream.share()
         super.init()
-        if #available(iOS 10.0, *) {
-            let providerConfiguration = CXProviderConfiguration(localizedName: "Jami")
+        let providerConfiguration = CXProviderConfiguration(localizedName: "Jami")
 
-            providerConfiguration.supportsVideo = true
-            providerConfiguration.supportedHandleTypes = [.generic, .phoneNumber]
-            providerConfiguration.ringtoneSound = "default.wav"
-            providerConfiguration.iconTemplateImageData = UIImage(asset: Asset.jamiLogo)?.pngData()
-            providerConfiguration.maximumCallGroups = 1
-            providerConfiguration.maximumCallsPerCallGroup = 1
+        providerConfiguration.supportsVideo = true
+        providerConfiguration.supportedHandleTypes = [.generic, .phoneNumber]
+        providerConfiguration.ringtoneSound = "default.wav"
+        providerConfiguration.iconTemplateImageData = UIImage(asset: Asset.jamiLogo)?.pngData()
+        providerConfiguration.maximumCallGroups = 1
+        providerConfiguration.maximumCallsPerCallGroup = 1
 
-            provider = CXProvider(configuration: providerConfiguration)
-            provider?.setDelegate(self, queue: nil)
-        }
+        provider = CXProvider(configuration: providerConfiguration)
+        provider?.setDelegate(self, queue: nil)
         self.responseStream.disposed(by: disposeBag)
     }
 }
 
-// MARK: - iOS 10
-@available(iOS 10.0, *)
 extension CallsProviderDelegate {
     func stopCall(callUUID: UUID) {
         let callController = CXCallController()
@@ -134,7 +128,6 @@ extension CallsProviderDelegate {
     }
 }
 // MARK: - CXProviderDelegate
-@available(iOS 10.0, *)
 extension CallsProviderDelegate: CXProviderDelegate {
     func providerDidReset(_ provider: CXProvider) {
     }

@@ -45,19 +45,63 @@ class ConversationsManager: MessagesAdapterDelegate {
         self.dataTransferService = dataTransferService
         self.callService = callService
         MessagesAdapter.delegate = self
+        subscribeFileTransferEvents()
+        subscribeCallsEvents()
+    }
 
+    func subscribeCallsEvents() {
+        self.callService.newMessage.filter({ (event) in
+            return  event.eventType == ServiceEventType.newIncomingMessage
+        })
+            .subscribe(onNext: { [unowned self] event in
+                guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
+                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
+                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
+                    else {return}
+                self.handleNewMessage(from: peerUri,
+                                      to: accountId,
+                                      messageId: "",
+                                      message: messageContent,
+                                      peerName: event.getEventInput(ServiceEventInput.name))
+            })
+            .disposed(by: disposeBag)
+
+        self.callService.newMessage.filter({ (event) in
+            return  event.eventType == ServiceEventType.newOutgoingMessage
+        })
+            .subscribe(onNext: { [unowned self] event in
+                guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
+                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
+                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
+                    let accountURi: String = event.getEventInput(ServiceEventInput.accountUri)
+                    else {return}
+                let message = self.conversationService.createMessage(withId: "",
+                                                                     withContent: messageContent,
+                                                                     byAuthor: accountURi,
+                                                                     generated: false,
+                                                                     incoming: false)
+                self.conversationService.saveMessage(message: message,
+                                                     toConversationWith: peerUri,
+                                                     toAccountId: accountId,
+                                                     shouldRefreshConversations: true)
+                    .subscribe()
+                    .disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
+    }
+    func subscribeFileTransferEvents() {
         self.dataTransferService
             .sharedResponseStream
             .filter({ (event) in
                 return  event.eventType == ServiceEventType.dataTransferCreated ||
-                        event.eventType == ServiceEventType.dataTransferChanged
+                    event.eventType == ServiceEventType.dataTransferChanged
             })
             .subscribe(onNext: { [unowned self] event in
                 guard   let transferId: UInt64 = event.getEventInput(ServiceEventInput.transferId),
-                        let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId),
-                let currentAccount = self.accountsService.currentAccount else {
-                    self.log.error("ConversationsManager: can't find transferInfo")
-                    return
+                    let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId),
+                    let currentAccount = self.accountsService.currentAccount else {
+                        self.log.error("ConversationsManager: can't find transferInfo")
+                        return
                 }
                 switch event.eventType {
                 case .dataTransferCreated:
@@ -73,7 +117,6 @@ class ConversationsManager: MessagesAdapterDelegate {
                                 .getTransferInfo(withId: transferId) else {return}
                             self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: transferInfo.accountId)
                         }).disposed(by: self.disposeBag)
-
                 case .dataTransferChanged:
                     self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: transferInfo.lastEvent))")
                     var status: DataTransferStatus = .unknown
@@ -102,45 +145,6 @@ class ConversationsManager: MessagesAdapterDelegate {
                 default:
                     break
                 }
-            })
-            .disposed(by: disposeBag)
-        self.callService.newMessage.filter({ (event) in
-            return  event.eventType == ServiceEventType.newIncomingMessage
-        })
-            .subscribe(onNext: { [unowned self] event in
-                guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
-                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
-                    else {return}
-                self.handleNewMessage(from: peerUri,
-                                      to: accountId,
-                                      messageId: "",
-                                      message: messageContent,
-                                      peerName: event.getEventInput(ServiceEventInput.name))
-            })
-            .disposed(by: disposeBag)
-
-        self.callService.newMessage.filter({ (event) in
-            return  event.eventType == ServiceEventType.newOutgoingMessage
-        })
-            .subscribe(onNext: { [unowned self] event in
-                guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
-                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
-                    let accountURi: String = event.getEventInput(ServiceEventInput.accountUri)
-
-                    else {return}
-                let message = self.conversationService.createMessage(withId: "",
-                                                                     withContent: messageContent,
-                                                                     byAuthor: accountURi,
-                                                                     generated: false,
-                                                                     incoming: false)
-                self.conversationService.saveMessage(message: message,
-                                                     toConversationWith: peerUri,
-                                                     toAccountId: accountId,
-                                                     shouldRefreshConversations: true)
-                    .subscribe()
-                    .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
     }

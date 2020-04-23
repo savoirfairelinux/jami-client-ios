@@ -193,11 +193,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func selectCaptureDevice(withPosition position: AVCaptureDevice.Position) -> AVCaptureDevice? {
-        let devices = AVCaptureDevice.devices(for: AVMediaType.video)
-        for device in devices where device.position == position {
-            return device
-        }
-        return nil
+        let devices = AVCaptureDevice.DiscoverySession.init(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: position).devices
+        return devices.first
     }
 
     func switchCamera() -> Completable {

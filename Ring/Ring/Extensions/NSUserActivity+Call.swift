@@ -20,7 +20,6 @@
 
 import Foundation
 import Intents
-@available(iOS 10.0, *)
 extension NSUserActivity {
     var startCallHandle: (hash: String, isVideo: Bool)? {
         guard let interaction = interaction else { return nil }

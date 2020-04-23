@@ -26,7 +26,7 @@ extension Reactive where Base: UIView {
 
     //show view with animation and hide without
     public var isVisible: AnyObserver<Bool> {
-        return Binder (self.base) { view, hidden in
+        return Binder(self.base) { view, hidden in
             if hidden == true {
                 view.isHidden = true
                 view.alpha = 0
