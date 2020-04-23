@@ -118,6 +118,7 @@ enum InteractionStatus: String {
         case .transferOngoing: return DataTransferStatus.ongoing
         case .transferSuccess: return DataTransferStatus.success
         case .transferError: return DataTransferStatus.error
+        case .displayed: return DataTransferStatus.success
         default: return DataTransferStatus.unknown
         }
     }

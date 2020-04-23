@@ -366,7 +366,7 @@ class ConversationViewModel: Stateable, ViewModel {
             }).disposed(by: disposeBag)
     }
 
-    func setMessageAsRead (daemonId: String, messageId: Int64) {
+    func setMessageAsRead(daemonId: String, messageId: Int64) {
         guard let account = self.accountService.currentAccount else {
             return
         }

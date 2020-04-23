@@ -972,7 +972,7 @@ extension ConversationViewController: UITableViewDataSource {
                     item.bubblePosition() == .generated ? MessageCellGenerated.self :
                     MessageCellGenerated.self
             }
-            if item.message.incoming && item.message.status != .displayed {
+            if item.message.incoming && item.message.status != .displayed && !item.message.isTransfer {
                 self.viewModel
                     .setMessageAsRead(daemonId: item.message.daemonId,
                                       messageId: item.message.messageId)
@@ -1028,7 +1028,9 @@ extension ConversationViewController: UITableViewDataSource {
                                 guard let sectionNumber = tableView?.numberOfSections,
                                 let rowNumber =  tableView?.numberOfRows(inSection: indexPath.section) else {return}
                                 if indexPath.section < sectionNumber && indexPath.section >= 0 {
-                                    if indexPath.row < rowNumber && indexPath.row >= 0 {
+                                    if indexPath.row < rowNumber &&
+                                        indexPath.row >= 0 &&
+                                        indexPath.row != tableView?.numberOfRows(inSection: indexPath.section) {
                                         tableView?
                                             .reloadItemsAtIndexPaths([indexPath],
                                                                      animationStyle: .top)
