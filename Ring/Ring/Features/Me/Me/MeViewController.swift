@@ -51,18 +51,23 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     // MARK: - functions
     override func viewDidLoad() {
+        self.view.backgroundColor = UIColor.jamiBackgroundColor
+        self.settingsTable.backgroundColor = UIColor.jamiBackgroundColor
         self.addHeaderView()
         super.viewDidLoad()
         self.applyL10n()
         self.configureBindings()
         self.configureRingNavigationBar()
         self.calculateSipCredentialsMargin()
-        self.adaptTableToKeyboardState(for: self.settingsTable, with: self.disposeBag,
+        self.adaptTableToKeyboardState(for: self.settingsTable,
+                                       with: self.disposeBag,
                                        topOffset: self.stretchyHeader.minimumContentHeight)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(preferredContentSizeChanged(_:)),
-                                               name: UIContentSizeCategory.didChangeNotification,
-                                               object: nil)
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: #selector(preferredContentSizeChanged(_:)),
+                         name: UIContentSizeCategory.didChangeNotification,
+                         object: nil)
     }
 
     @objc private func preferredContentSizeChanged(_ notification: NSNotification) {
@@ -91,7 +96,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             supportEditProfile()
             return
         }
+        headerView.backgroundColor = UIColor.jamiBackgroundColor
         self.stretchyHeader = headerView
+        let point = CGPoint(x: 0, y: 100)
+        self.stretchyHeader.frame.origin = point
         self.settingsTable.addSubview(self.stretchyHeader)
         self.settingsTable.delegate = self
         self.profileImageView = stretchyHeader.profileImageView
@@ -296,6 +304,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
                 case .device(let device):
                     let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeviceCell.self)
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.deviceIdLabel.text = device.deviceId
                     cell.deviceIdLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
                     cell.deviceIdLabel.sizeToFit()
@@ -314,6 +323,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
                 case .linkNew:
                     let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.linkDeviceTitle
                     cell.textLabel?.textColor = UIColor.jamiMain
                     cell.textLabel?.textAlignment = .center
@@ -336,6 +346,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.selectionStyle = .none
                     cell.sizeToFit()
                     let button = UIButton.init(frame: cell.frame)
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
@@ -347,12 +358,13 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .sectionHeader(let title):
                     let cell = UITableViewCell()
                     cell.textLabel?.text = title
-                    cell.backgroundColor = UIColor.jamiNavigationBar
+                    cell.backgroundColor = UIColor.jamiBackgroundSecondaryColor
                     cell.selectionStyle = .none
                     return cell
 
                 case .removeAccount:
                     let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.removeAccountTitle
                     cell.textLabel?.textColor = UIColor.jamiMain
                     cell.textLabel?.textAlignment = .center
@@ -392,11 +404,13 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                                                 style: .footnote)
                 case .ordinary(let label):
                     let cell = UITableViewCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = label
                     cell.selectionStyle = .none
                     return cell
                 case .shareAccountDetails:
                     let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.shareAccountDetails
                     cell.textLabel?.textColor = UIColor.jamiMain
                     cell.textLabel?.textAlignment = .center
@@ -413,6 +427,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
                 case .notifications:
                     let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.enableNotifications
                     let switchView = UISwitch()
                     cell.selectionStyle = .none
@@ -458,6 +473,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .accountState(let state):
                     let cell = DisposableCell(style: .value1, reuseIdentifier: self.accountStateCell)
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
 
                     cell.textLabel?.text = L10n.Account.accountStatus
                     cell.selectionStyle = .none
@@ -472,6 +488,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .enableAccount:
                     let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.Account.enableAccount
                     let switchView = UISwitch()
                     cell.selectionStyle = .none
@@ -546,6 +563,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     func  configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
                                       value: String) -> UITableViewCell {
         let cell = DisposableCell(style: .value1, reuseIdentifier: sipAccountCredentialsCell)
+        cell.backgroundColor = UIColor.jamiBackgroundColor
         cell.selectionStyle = .none
         let text = UITextField()
         text.tag = self.sipCredentialsTAG

@@ -99,6 +99,12 @@ class ConversationViewController: UIViewController,
 
     @objc private func applicationWillResignActive() {
         self.viewModel.setIsComposingMsg(isComposing: false)
+        }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
     }
 
     func importDocument() {
@@ -480,6 +486,7 @@ class ConversationViewController: UIViewController,
         .bind(onNext: { [weak self] _ in
             self?.contactTapped()
         }).disposed(by: disposeBag)
+        titleView.backgroundColor = UIColor.clear
 
         self.navigationItem.titleView = titleView
     }
@@ -492,8 +499,9 @@ class ConversationViewController: UIViewController,
     func setupUI() {
         self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
         self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill
+        spinnerView.backgroundColor = UIColor.jamiMsgBackground
         self.tableView.backgroundColor = UIColor.jamiMsgBackground
-        self.messageAccessoryView.backgroundColor = UIColor.jamiMsgTextFieldBackground
+        self.messageAccessoryView.backgroundColor = UIColor.jamiBackgroundColor
         self.view.backgroundColor = UIColor.jamiMsgTextFieldBackground
 
         if self.viewModel.isAccountSip {
@@ -592,7 +600,6 @@ class ConversationViewController: UIViewController,
                         }
                         self?.currentCallButton.isHidden = false
                         self?.currentCallLabel.isHidden = false
-                        self?.currentCallLabel.blink()
                         self?.callButtonHeightConstraint.constant = 60
                     }
                     return
@@ -600,7 +607,6 @@ class ConversationViewController: UIViewController,
                 self?.currentCallButton.isHidden = true
                 self?.currentCallLabel.isHidden = true
                 self?.callButtonHeightConstraint.constant = 0
-                self?.currentCallLabel.layer.removeAllAnimations()
             }).disposed(by: disposeBag)
         currentCallButton.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)

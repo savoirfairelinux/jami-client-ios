@@ -124,13 +124,13 @@ extension UIViewController {
     }
 
     func configureRingNavigationBar() {
-        self.navigationController?.navigationBar.barTintColor = UIColor.jamiNavigationBar
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 2.5)
+        self.navigationController?.navigationBar.barStyle = .default
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 1.5)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.2
         self.navigationController?.navigationBar.layer.shadowRadius = 3
         self.navigationController?.navigationBar.layer.masksToBounds = false
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes

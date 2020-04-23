@@ -61,8 +61,10 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.configureWalkrhroughNavigationBar()
         self.view.layoutIfNeeded()
         self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+
         self.pinTextField.tintColor = UIColor.jamiSecondary
         self.passwordTextField.tintColor = UIColor.jamiSecondary
+        adaptToSystemColor()
 
         self.applyL10n()
 
@@ -116,6 +118,20 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
             self?.linkButton.updateGradientFrame()
             self?.configureWalkrhroughNavigationBar()
         }).disposed(by: self.disposeBag)
+    }
+
+    func adaptToSystemColor() {
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        scrollView.backgroundColor = UIColor.jamiBackgroundColor
+        pinLabel.textColor = UIColor.jamiTextSecondary
+        passwordLabel.textColor = UIColor.jamiTextSecondary
+        enableNotificationsLabel.textColor = UIColor.jamiTextSecondary
+        self.pinTextField.backgroundColor = UIColor.jamiBackgroundColor
+        self.passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
+        self.pinTextField.borderColor = UIColor.jamiTextBlue
+        self.passwordTextField.borderColor = UIColor.jamiTextBlue
+        notificationsSwitch.tintColor = UIColor.jamiTextBlue
+        pinInfoButton.tintColor = UIColor.jamiTextBlue
     }
 
     func setContentInset() {

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,14 +13,6 @@
             <rect key="frame" x="0.0" y="0.0" width="315" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEs-8c-9hC">
-                    <rect key="frame" x="0.0" y="23.666666666666668" width="315" height="56.333333333333329"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="H5g-m6-my5">
-                        <rect key="frame" x="0.0" y="0.0" width="315" height="56.333333333333329"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <blurEffect style="extraLight"/>
-                </visualEffectView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZ6-Cr-td2" userLabel="Upload Button">
                     <rect key="frame" x="6" y="35" width="34" height="34"/>
                     <constraints>
@@ -76,7 +66,6 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="UEs-8c-9hC" secondAttribute="bottom" id="5zL-s3-P0H"/>
                 <constraint firstItem="eZ6-Cr-td2" firstAttribute="leading" secondItem="qCm-fg-RY1" secondAttribute="leading" constant="-40" id="73K-N5-liQ"/>
                 <constraint firstItem="w2N-XG-vU1" firstAttribute="top" secondItem="qCm-fg-RY1" secondAttribute="top" id="73b-aO-sT5"/>
                 <constraint firstAttribute="trailing" secondItem="pNY-Qf-lFT" secondAttribute="trailing" constant="53" id="7c1-TB-XnJ"/>
@@ -87,16 +76,12 @@
                 <constraint firstItem="w2N-XG-vU1" firstAttribute="bottom" secondItem="pNY-Qf-lFT" secondAttribute="bottom" id="WH1-PP-VfU"/>
                 <constraint firstAttribute="trailing" secondItem="w2N-XG-vU1" secondAttribute="trailing" constant="14" id="Yyb-X2-nbp"/>
                 <constraint firstAttribute="trailing" secondItem="Ifq-LQ-X1n" secondAttribute="trailing" constant="13" id="a3L-Tj-DTf"/>
-                <constraint firstItem="UEs-8c-9hC" firstAttribute="width" secondItem="Fja-dy-lIy" secondAttribute="width" id="d3l-7B-cW5"/>
                 <constraint firstItem="w2N-XG-vU1" firstAttribute="bottom" secondItem="qCm-fg-RY1" secondAttribute="bottom" id="gxN-rs-CSX"/>
-                <constraint firstItem="UEs-8c-9hC" firstAttribute="leading" secondItem="Fja-dy-lIy" secondAttribute="leading" id="n3x-GA-Jbz"/>
                 <constraint firstAttribute="leading" secondItem="eZ6-Cr-td2" secondAttribute="trailing" constant="-40" id="nXf-yT-cg0"/>
-                <constraint firstItem="UEs-8c-9hC" firstAttribute="top" secondItem="pNY-Qf-lFT" secondAttribute="top" constant="-11.5" id="vDE-3k-XJo"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="blurEffect" destination="UEs-8c-9hC" id="gdz-mH-WtC"/>
                 <outlet property="cameraButton" destination="qCm-fg-RY1" id="8WG-DR-guy"/>
                 <outlet property="emojisButton" destination="w2N-XG-vU1" id="7d7-4L-GBI"/>
                 <outlet property="emojisButtonTrailingConstraint" destination="Yyb-X2-nbp" id="0wO-iY-lA3"/>
@@ -110,8 +95,8 @@
         </view>
     </objects>
     <resources>
-        <image name="camera" width="64" height="67"/>
-        <image name="send_button" width="102.40000152587891" height="102.40000152587891"/>
-        <image name="share_button" width="72" height="68"/>
+        <image name="camera" width="21.333333969116211" height="22.333333969116211"/>
+        <image name="send_button" width="64" height="64"/>
+        <image name="share_button" width="24" height="22.666666030883789"/>
     </resources>
 </document>

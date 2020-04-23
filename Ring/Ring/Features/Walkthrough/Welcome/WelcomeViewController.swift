@@ -100,6 +100,9 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.connectToAccountManagerButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.viewModel.linkToAccountManager()
         }).disposed(by: self.disposeBag)
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        self.welcomeTextLabel.textColor = UIColor.jamiLabelColor
+        self.createSipAccountButton.setTitleColor(UIColor.jamiTextBlue, for: .normal)
     }
 
     func applyL10n() {
