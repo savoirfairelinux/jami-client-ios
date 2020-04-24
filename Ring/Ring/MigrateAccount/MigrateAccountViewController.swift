@@ -46,10 +46,6 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
@@ -72,6 +68,12 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
             self?.cancelButton.updateGradientFrame()
             self?.migrateOtherAccountButton.updateGradientFrame()
         }).disposed(by: self.disposeBag)
+        explanationLabel.textColor = UIColor.jamiLabelColor
+        titleLabel.textColor = UIColor.jamiTextSecondary
+        passwordExplanationLabel.textColor = UIColor.jamiLabelColor
+        registeredNameLabel.textColor = UIColor.jamiLabelColor
+        jamiIdLabel.textColor = UIColor.jamiTextSecondary
+        displayNameLabel.textColor = UIColor.jamiLabelColor
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -52,10 +52,6 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
         return cFrame
     }()
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
     // MARK: functions
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

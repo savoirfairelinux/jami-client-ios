@@ -41,10 +41,6 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     // MARK: members
     private let disposeBag = DisposeBag()
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +96,9 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.connectToAccountManagerButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.viewModel.linkToAccountManager()
         }).disposed(by: self.disposeBag)
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        self.welcomeTextLabel.textColor = UIColor.jamiLabelColor
+        self.createSipAccountButton.setTitleColor(UIColor.jamiTextBlue, for: .normal)
     }
 
     func applyL10n() {

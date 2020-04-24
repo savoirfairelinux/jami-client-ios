@@ -11,8 +11,8 @@ import Reusable
 
 final class InitialLoadingViewController: UIViewController, StoryboardBased {
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.jamiBackgroundColor
     }
-
 }

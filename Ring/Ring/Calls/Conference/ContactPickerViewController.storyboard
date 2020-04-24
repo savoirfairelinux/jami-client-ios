@@ -35,7 +35,7 @@
                                         </visualEffectView>
                                     </subviews>
                                 </view>
-                                <blurEffect style="extraLight"/>
+                                <blurEffect style="regular"/>
                             </visualEffectView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ht5-JP-L4t">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>

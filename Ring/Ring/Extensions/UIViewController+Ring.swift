@@ -124,13 +124,13 @@ extension UIViewController {
     }
 
     func configureRingNavigationBar() {
-        self.navigationController?.navigationBar.barTintColor = UIColor.jamiNavigationBar
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 2.5)
+        self.navigationController?.navigationBar.barStyle = .default
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 1.5)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.2
         self.navigationController?.navigationBar.layer.shadowRadius = 3
         self.navigationController?.navigationBar.layer.masksToBounds = false
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
@@ -138,9 +138,9 @@ extension UIViewController {
     }
 
     func configureWalkrhroughNavigationBar() {
-        let attrPortrait = [NSAttributedString.Key.foregroundColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.5),
+        let attrPortrait = [NSAttributedString.Key.foregroundColor: UIColor.jamiTextSecondary,
                             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: .thin)]
-        let attrLandscape = [NSAttributedString.Key.foregroundColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.5),
+        let attrLandscape = [NSAttributedString.Key.foregroundColor: UIColor.jamiTextSecondary,
                              NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .regular)]
         let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
         self.navigationController?

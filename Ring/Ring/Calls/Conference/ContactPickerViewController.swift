@@ -34,6 +34,8 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     var viewModel: ContactPickerViewModel!
     fileprivate let disposeBag = DisposeBag()
 
+    var blurEffect: UIVisualEffectView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupDataSources()
@@ -43,6 +45,24 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         dismissGR.direction = UISwipeGestureRecognizer.Direction.down
         dismissGR.delegate = self
         self.searchBar.addGestureRecognizer(dismissGR)
+        self.setUPBlurBackground()
+    }
+
+    func setUPBlurBackground() {
+        if #available(iOS 13.0, *) {
+            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+        } else {
+            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        }
+        if blurEffect != nil {
+            blurEffect!.frame = self.view.bounds
+            self.view.insertSubview(blurEffect!, at: 0)
+            blurEffect!.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 0).isActive = true
+            blurEffect!.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+            blurEffect!.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+            blurEffect!.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+            blurEffect!.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
 
     @objc func remove(gesture: UISwipeGestureRecognizer) {
@@ -148,7 +168,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         self.searchBar.returnKeyType = .done
         self.searchBar.autocapitalizationType = .none
         self.searchBar.tintColor = UIColor.jamiMain
-        self.searchBar.barTintColor =  UIColor.jamiNavigationBar
+        self.searchBar.barTintColor = UIColor.jamiBackgroundSecondaryColor
         self.searchBar.rx.text.orEmpty
             .throttle(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()

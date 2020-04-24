@@ -40,6 +40,8 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        collectionView.backgroundColor = UIColor.jamiBackgroundColor
         self.applyL10n()
         let device = UIDevice.modelName
         if device == "iPhone 5" || device ==  "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
@@ -111,7 +113,9 @@ extension DialpadViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.contentView.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
-        let label = UILabel.init(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
+        let originX = (cell.bounds.size.width - 70) * 0.5
+        let label = UILabel.init(frame: CGRect(x: originX, y: 0,
+                                               width: 70, height: 70))
         label.cornerRadius = 35
         label.backgroundColor = UIColor(red: 204, green: 204, blue: 204, alpha: 1)
         label.textAlignment = .center
