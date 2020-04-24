@@ -80,14 +80,95 @@ extension UIColor {
     static let jamiMsgCellEmoji = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
     static let jamiMsgCellSent = UIColor(hex: 0x367BC1, alpha: 1.0)
     static let jamiMsgCellSentText = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0)
-    static let jamiMsgCellReceived = UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
+    static var jamiMsgCellReceived: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "background_msg_received") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
+        } else {
+            return UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
+        }
+    }
+
+    static var jamiTextBlue: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "text_blue_color") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
+        } else {
+            return UIColor(red: 31, green: 73, blue: 113, alpha: 1.0)
+        }
+    }
+
+    static var jamiTextSecondary: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "text_secondary_color") ?? UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        } else {
+            return UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        }
+    }
+
+    static var jamiInputTextBackground: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "background_input_text") ?? UIColor(red: 255, green: 255, blue: 255, alpha: 0.57)
+        } else {
+            return UIColor(red: 255, green: 255, blue: 255, alpha: 0.57)
+        }
+    }
+
     static let jamiMsgCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
     static let jamiMsgCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
-    static let jamiMsgBackground = UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
-    static let jamiMsgTextFieldBackground = UIColor(red: 252, green: 252, blue: 252, alpha: 0)
+
+    static var jamiMsgBackground: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "message_background_color") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
+        } else {
+            return UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
+        }
+    }
+
+    static var jamiMsgTextFieldBackground: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "text_field_background_color") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 0)
+        } else {
+            return UIColor(red: 252, green: 252, blue: 252, alpha: 0)
+        }
+    }
     static let jamiMsgTextFieldBorder = UIColor(red: 220, green: 220, blue: 220, alpha: 1.0)
-    static let jamiUITableViewCellSelection = UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
-    static let jamiNavigationBar = UIColor(red: 235, green: 235, blue: 235, alpha: 1.0)
+    static var jamiUITableViewCellSelection: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "row_selected") ?? UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
+        } else {
+            return UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
+        }
+    }
+    static var jamiNavigationBarShadow: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "shadow_color") ?? UIColor.black
+        } else {
+            return UIColor.black
+        }
+    }
+
+    static var jamiBackgroundColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.systemBackground
+        } else {
+            return UIColor.white
+        }
+    }
+
+    static var jamiBackgroundSecondaryColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.secondarySystemBackground
+        } else {
+            return UIColor(red: 235, green: 235, blue: 235, alpha: 1.0)
+        }
+    }
+
+    static var jamiLabelColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.label
+        } else {
+            return UIColor.black
+        }
+    }
     static let jamiCallPulse = UIColor(hex: 0x039FDF, alpha: 1.0)
     static let jamiDefaultAvatar = UIColor(hex: 0x039FDF, alpha: 1.0)
     static let jamiSuccess = UIColor(hex: 0x00b20b, alpha: 1.0)

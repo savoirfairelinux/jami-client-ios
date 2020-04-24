@@ -28,10 +28,6 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
     var viewModel: LinkNewDeviceViewModel!
     let disposeBag = DisposeBag()
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-
     override func viewDidLoad() {
 
         self.view.backgroundColor = UIColor.white.withAlphaComponent(0.0)

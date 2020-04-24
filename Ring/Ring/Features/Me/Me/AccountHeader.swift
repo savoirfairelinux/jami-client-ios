@@ -22,6 +22,12 @@ class AccountHeader: GSKStretchyHeaderView {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileName: UITextField!
+    @IBOutlet weak var background: UIView!
+
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        background.backgroundColor = UIColor.jamiBackgroundColor
+    }
 
     override func didChangeStretchFactor(_ stretchFactor: CGFloat) {
         var alpha = CGFloatTranslateRange(stretchFactor, 0.2, 0.7, 0, 1)

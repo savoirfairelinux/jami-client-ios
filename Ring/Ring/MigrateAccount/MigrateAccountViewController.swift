@@ -46,10 +46,6 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()

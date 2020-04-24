@@ -37,12 +37,13 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     fileprivate let cellIdentifier = "ContactRequestCell"
     fileprivate let log = SwiftyBeaver.self
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.jamiBackgroundColor
+        self.tableView.backgroundColor = UIColor.jamiBackgroundColor
+        noInvitationsPlaceholder.backgroundColor = UIColor.jamiBackgroundColor
+        noRequestsLabel.backgroundColor = UIColor.jamiBackgroundColor
+        noRequestsLabel.textColor = UIColor.jamiLabelColor
 
         self.configureRingNavigationBar()
         self.tableView.rx.modelSelected(ContactRequestItem.self)

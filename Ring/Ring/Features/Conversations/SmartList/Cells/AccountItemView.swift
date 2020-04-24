@@ -42,5 +42,6 @@ class AccountItemView: UIView {
         addSubview(containerView)
         containerView.frame = self.bounds
         needMigrateLabel.text = L10n.Account.needMigration
+        nameLabel.textColor = UIColor.jamiLabelColor
     }
 }

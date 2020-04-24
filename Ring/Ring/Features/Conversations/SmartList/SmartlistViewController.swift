@@ -32,12 +32,15 @@ import QuartzCore
 //Constants
 private struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 64.0
-    static let tableHeaderViewHeight: CGFloat = 24.0
-    static let firstSectionHeightForHeader: CGFloat = 31.0 //Compensate the offset due to the label on the top of the tableView
-    static let defaultSectionHeightForHeader: CGFloat = 55.0
+    static let tableHeaderViewHeight: CGFloat = 142.0
+    static let firstSectionHeightForHeader: CGFloat = 51.0
+    static let networkAllerHeight: CGFloat = 56.0
+    static let tableViewOffset: CGFloat = 80.0
+
 }
 
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     private let log = SwiftyBeaver.self
@@ -53,6 +56,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var networkAlertLabel: UILabel!
     @IBOutlet weak var cellularAlertLabel: UILabel!
     @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var dialpadButton: UIButton!
     @IBOutlet weak var dialpadButtonShadow: UIView!
@@ -60,6 +64,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var qrScanButton: UIButton!
     @IBOutlet weak var phoneBookButton: UIButton!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var networkAlertView: UIView!
 
     // account selection
     var accounPicker = UIPickerView()
@@ -72,10 +77,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     fileprivate let disposeBag = DisposeBag()
 
     private let contactPicker = CNContactPickerViewController()
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
 
     // MARK: functions
     @IBAction func openScan() {
@@ -108,8 +109,13 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?
+            .navigationBar
+            .layer.shadowColor = UIColor.clear.cgColor
+        navigationController?
+            .navigationBar
+            .setBackgroundImage(UIImage(),
+                                for: UIBarMetrics.default)
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
                                     NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
@@ -126,7 +132,15 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     // swiftlint:disable function_body_length
     func setupUI() {
-        dialpadButtonShadow.layer.shadowColor = UIColor.black.cgColor
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        conversationsTableView.backgroundColor = UIColor.jamiBackgroundColor
+        searchResultsTableView.backgroundColor = UIColor.jamiBackgroundColor
+        noConversationsView.backgroundColor = UIColor.jamiBackgroundColor
+        noConversationLabel.backgroundColor = UIColor.jamiBackgroundColor
+        noConversationLabel.textColor = UIColor.jamiLabelColor
+        searchTableViewLabel.textColor = UIColor.jamiLabelColor
+        dialpadButtonShadow.backgroundColor = UIColor.jamiBackgroundSecondaryColor
+        dialpadButtonShadow.layer.shadowColor = UIColor.jamiLabelColor.cgColor
         dialpadButtonShadow.layer.shadowOffset =  CGSize.zero
         dialpadButtonShadow.layer.shadowRadius = 1
         dialpadButtonShadow.layer.shadowOpacity = 0.6
@@ -134,15 +148,21 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.viewModel.hideNoConversationsMessage
             .bind(to: self.noConversationsView.rx.isHidden)
             .disposed(by: disposeBag)
-
-        self.networkAlertViewTopConstraint.constant = self.viewModel.networkConnectionState() == .none ? 0.0 : -56.0
+        let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
+        self.networkAlertViewTopConstraint.constant = !isHidden ? 0.0 : -SmartlistConstants.networkAllerHeight
+        tableTopConstraint.constant = !isHidden ?  -(SmartlistConstants.tableViewOffset - SmartlistConstants.networkAllerHeight) : -SmartlistConstants.tableViewOffset
+        self.networkAlertView.isHidden = isHidden
         self.viewModel.connectionState
             .subscribe(onNext: { connectionState in
-                let newAlertHeight = connectionState == .none ? 0.0 : -56.0
+                let newAlertHeight = connectionState == .none ? 0.0 : -SmartlistConstants.networkAllerHeight
+                let newTableViewTop = connectionState == .none ? -(SmartlistConstants.tableViewOffset - SmartlistConstants.networkAllerHeight) : -SmartlistConstants.tableViewOffset
+                let isHidden = connectionState == .none ? false : true
                 UIView.animate(withDuration: 0.25) {
                     self.networkAlertViewTopConstraint.constant = CGFloat(newAlertHeight)
+                    self.tableTopConstraint.constant = CGFloat(newTableViewTop)
                     self.view.layoutIfNeeded()
                 }
+                self.networkAlertView.isHidden = isHidden
             })
             .disposed(by: self.disposeBag)
 
@@ -242,7 +262,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     func confugureAccountPicker() {
         view.addSubview(accountPickerTextView)
         accountPickerTextView.inputView = accounPicker
-        accounPicker.backgroundColor = .jamiNavigationBar
+        accounPicker.backgroundColor = .jamiBackgroundSecondaryColor
         self.viewModel.accounts
             .observeOn(MainScheduler.instance)
             .bind(to: accounPicker.rx.items(adapter: accountsAdapter))
@@ -280,7 +300,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let flexibleBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
         let addBarButton = UIBarButtonItem(customView: addAccountButton)
         let toolbar = UIToolbar()
-        toolbar.barTintColor = .jamiNavigationBar
+        toolbar.barTintColor = .jamiBackgroundSecondaryColor
         toolbar.isTranslucent = false
         toolbar.sizeToFit()
         toolbar.center = CGPoint(x: self.view.frame.width * 0.5, y: 200)
@@ -367,6 +387,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         //Bind to ViewModel to show or hide the filtered results
         self.viewModel.isSearching.subscribe(onNext: { [unowned self] (isSearching) in
             self.searchResultsTableView.isHidden = !isSearching
+            self.searchTableViewLabel.isHidden = !isSearching
         }).disposed(by: disposeBag)
 
         //Deselect the rows
@@ -389,19 +410,53 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func setupSearchBar() {
-
         self.searchBar.returnKeyType = .done
         self.searchBar.autocapitalizationType = .none
         self.searchBar.tintColor = UIColor.jamiMain
-        self.searchBar.barTintColor =  UIColor.jamiNavigationBar
-
-        self.view.bringSubviewToFront(self.searchBarShadow)
-
-        self.searchBarShadow.layer.shadowColor = UIColor.black.cgColor
-        self.searchBarShadow.layer.shadowOffset = CGSize(width: 0.0, height: 2.5)
+        searchBar.backgroundImage = UIImage()
+        searchBarShadow.backgroundColor = UIColor.clear
+        searchBar.backgroundColor = UIColor.clear
+        self.searchBarShadow.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        self.searchBarShadow.layer.shadowOffset = CGSize(width: 0.0, height: 1.5)
         self.searchBarShadow.layer.shadowOpacity = 0.2
         self.searchBarShadow.layer.shadowRadius = 3
         self.searchBarShadow.layer.masksToBounds = false
+
+        if #available(iOS 13.0, *) {
+            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            visualEffectView.frame = searchBarShadow.bounds
+            visualEffectView.isUserInteractionEnabled = false
+            searchBarShadow.insertSubview(visualEffectView, at: 0)
+            visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+            visualEffectView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
+            visualEffectView.trailingAnchor.constraint(equalTo: self.searchBarShadow.trailingAnchor, constant: 0).isActive = true
+            visualEffectView.leadingAnchor.constraint(equalTo: self.searchBarShadow.leadingAnchor, constant: 0).isActive = true
+            visualEffectView.topAnchor.constraint(equalTo: self.searchBarShadow.topAnchor, constant: 0).isActive = true
+            visualEffectView.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
+
+        } else {
+            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            visualEffectView.frame = searchBarShadow.bounds
+            visualEffectView.isUserInteractionEnabled = false
+            let background = UIView()
+            background.frame = searchBarShadow.bounds
+            background.backgroundColor = UIColor(red: 245, green: 245, blue: 245, alpha: 1.0)
+            background.alpha = 0.7
+            searchBarShadow.insertSubview(background, at: 0)
+            searchBarShadow.insertSubview(visualEffectView, at: 0)
+            background.translatesAutoresizingMaskIntoConstraints = false
+            visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+            visualEffectView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
+            background.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
+            visualEffectView.trailingAnchor.constraint(equalTo: self.searchBarShadow.trailingAnchor, constant: 0).isActive = true
+            background.trailingAnchor.constraint(equalTo: self.searchBarShadow.trailingAnchor, constant: 0).isActive = true
+            visualEffectView.leadingAnchor.constraint(equalTo: self.searchBarShadow.leadingAnchor, constant: 0).isActive = true
+            background.leadingAnchor.constraint(equalTo: self.searchBarShadow.leadingAnchor, constant: 0).isActive = true
+            visualEffectView.topAnchor.constraint(equalTo: self.searchBarShadow.topAnchor, constant: 0).isActive = true
+            background.topAnchor.constraint(equalTo: self.searchBarShadow.topAnchor, constant: 0).isActive = true
+            visualEffectView.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
+            background.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
+        }
 
         //Bind the SearchBar to the ViewModel
         self.searchBar.rx.text.orEmpty
@@ -496,14 +551,20 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 }
 
 extension SmartlistViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        headerView.tintColor = .clear
+    }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             if tableView == self.conversationsTableView {
-                return 0
+                return SmartlistConstants.tableHeaderViewHeight
             }
-            return SmartlistConstants.firstSectionHeightForHeader
+            return SmartlistConstants.tableHeaderViewHeight + SmartlistConstants.firstSectionHeightForHeader
         } else {
-            return SmartlistConstants.defaultSectionHeightForHeader
+            return SmartlistConstants.tableHeaderViewHeight
         }
     }
 

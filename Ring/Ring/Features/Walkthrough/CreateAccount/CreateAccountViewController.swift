@@ -59,10 +59,6 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-
     // MARK: functions
     override func viewDidLoad() {
         // L10n
@@ -101,12 +97,34 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             self?.choosePasswordViewHeightConstraint.constant = 133 + height
             self?.view.layoutIfNeeded()
         }).disposed(by: self.disposeBag)
+        adaptToSystemColor()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    func adaptToSystemColor() {
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        scrollView.backgroundColor = UIColor.jamiBackgroundColor
+        registerUsernameLabel.textColor = UIColor.jamiTextSecondary
+        recommendedLabel.textColor = UIColor.jamiTextSecondary
+        chooseAPasswordLabel.textColor = UIColor.jamiTextSecondary
+        enableNotificationsLabel.textColor = UIColor.jamiTextSecondary
+        passwordInfoLabel.textColor = UIColor.jamiTextBlue
+        registerPasswordView.backgroundColor = UIColor.jamiBackgroundColor
+        registerUsernameView.backgroundColor = UIColor.jamiBackgroundColor
+        usernameTextField.backgroundColor = UIColor.jamiBackgroundColor
+        passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
+        confirmPasswordTextField.backgroundColor = UIColor.jamiBackgroundColor
+        usernameTextField.borderColor = UIColor.jamiTextBlue
+        passwordTextField.borderColor = UIColor.jamiTextBlue
+        confirmPasswordTextField.borderColor = UIColor.jamiTextBlue
+        usernameSwitch.tintColor = UIColor.jamiTextBlue
+        passwordSwitch.tintColor = UIColor.jamiTextBlue
+        notificationsSwitch.tintColor = UIColor.jamiTextBlue
     }
 
     func setContentInset() {

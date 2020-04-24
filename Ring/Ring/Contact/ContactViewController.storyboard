@@ -11,7 +11,7 @@
         <!--Contact View Controller-->
         <scene sceneID="ufa-hq-gXE">
             <objects>
-                <viewController id="4oO-a5-k5Y" customClass="ContactViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="4oO-a5-k5Y" customClass="ContactViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l1v-RV-Jo2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,6 +54,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cTQ-BN-ANe"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="tableView" destination="Cjc-Dl-AsW" id="NB3-A4-6sy"/>
                     </connections>

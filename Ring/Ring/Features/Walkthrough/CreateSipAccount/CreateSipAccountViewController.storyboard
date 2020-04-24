@@ -233,6 +233,7 @@
                         <viewLayoutGuide key="safeArea" id="asY-zx-uYD"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="daQ-3e-VKq" id="RtR-Mp-68e"/>
                         <outlet property="createAccountButton" destination="31a-Gd-rzz" id="emU-Tv-WdU"/>
                         <outlet property="passwordLabel" destination="h1h-xB-2Im" id="gNl-Yq-JdG"/>
                         <outlet property="passwordTextField" destination="N2t-MA-mli" id="A0W-4E-Lmu"/>

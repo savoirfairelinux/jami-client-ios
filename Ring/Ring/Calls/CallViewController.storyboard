@@ -171,7 +171,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.17999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <blurEffect style="light"/>
+                                                <blurEffect style="regular"/>
                                             </visualEffectView>
                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="gWE-IS-b5p">
                                                 <rect key="frame" x="-17" y="393.66666666666669" width="60" height="70"/>
@@ -306,7 +306,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.17661065924657535" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <blurEffect style="light"/>
+                                        <blurEffect style="regular"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj8-CK-PQm" userLabel="Call Pulse">
                                         <rect key="frame" x="117.66666666666669" y="130" width="140" height="140"/>
