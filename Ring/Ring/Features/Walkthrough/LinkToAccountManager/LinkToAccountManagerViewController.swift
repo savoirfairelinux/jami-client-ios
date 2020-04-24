@@ -56,6 +56,7 @@ var viewModel: LinkToAccountManagerViewModel!
             self?.signInButton.updateGradientFrame()
             self?.configureWalkrhroughNavigationBar()
         }).disposed(by: self.disposeBag)
+        adaptToSystemColor()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -147,5 +148,21 @@ var viewModel: LinkToAccountManagerViewModel!
         passwordLabel.text = L10n.LinkToAccountManager.passwordLabel
         accountManagerLabel.text = L10n.LinkToAccountManager.accountManagerLabel
         self.enableNotificationsLabel.text = L10n.CreateAccount.enableNotifications
+    }
+
+    func adaptToSystemColor() {
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        scrollView.backgroundColor = UIColor.jamiBackgroundColor
+        userNameLabel.textColor = UIColor.jamiTextSecondary
+        passwordLabel.textColor = UIColor.jamiTextSecondary
+        accountManagerLabel.textColor = UIColor.jamiTextSecondary
+        enableNotificationsLabel.textColor = UIColor.jamiTextSecondary
+        userNameTextField.backgroundColor = UIColor.jamiBackgroundColor
+        passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
+        accountManagerTextField.backgroundColor = UIColor.jamiBackgroundColor
+        userNameTextField.borderColor = UIColor.jamiTextBlue
+        passwordTextField.borderColor = UIColor.jamiTextBlue
+        accountManagerTextField.borderColor = UIColor.jamiTextBlue
+        notificationsSwitch.tintColor = UIColor.jamiTextBlue
     }
 }

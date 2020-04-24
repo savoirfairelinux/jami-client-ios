@@ -254,7 +254,6 @@ class CreateAccountViewModel: Stateable, ViewModel {
     }()
 
     required init (with injectionBag: InjectionBag) {
-       // var isPageDisplayed = false
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
 

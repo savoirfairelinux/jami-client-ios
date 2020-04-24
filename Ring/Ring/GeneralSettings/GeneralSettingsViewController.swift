@@ -35,6 +35,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        settingsTable.backgroundColor = UIColor.jamiBackgroundColor
         self.applyL10n()
         self.setUpTable()
         doneButton.rx.tap
@@ -88,7 +90,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                 case .sectionHeader(let title):
                     let cell = UITableViewCell()
                     cell.textLabel?.text = title
-                    cell.backgroundColor = UIColor.jamiNavigationBar
+                    cell.backgroundColor = UIColor.jamiBackgroundSecondaryColor
                     cell.selectionStyle = .none
                     cell.heightAnchor.constraint(equalToConstant: 35).isActive = true
                     return cell

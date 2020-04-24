@@ -76,7 +76,6 @@
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Ebb-h3-1X3" firstAttribute="centerX" secondItem="0Yq-n7-91P" secondAttribute="centerX" id="3Do-Tm-CjF"/>
                                             <constraint firstItem="Wss-Rm-aKz" firstAttribute="centerY" secondItem="8lL-e0-PFL" secondAttribute="centerY" constant="95" id="8Qr-wz-HY8"/>
@@ -165,6 +164,7 @@
                         <outlet property="arrow" destination="RuJ-k9-6d2" id="sfC-3H-hGp"/>
                         <outlet property="arrowHeightConstraint" destination="RIv-ZQ-8Uw" id="wPN-ra-uLi"/>
                         <outlet property="arrowYConstraint" destination="SXy-dy-AW4" id="tL4-Ml-YxQ"/>
+                        <outlet property="backgroundView" destination="0Yq-n7-91P" id="sEk-A5-g23"/>
                         <outlet property="createYourAvatarLabel" destination="dwE-6U-bqU" id="eNT-V7-RAm"/>
                         <outlet property="enterNameLabel" destination="N1N-hn-LTy" id="4gq-l5-bHn"/>
                         <outlet property="infoProfileImage" destination="z2z-6h-lsY" id="XkJ-uW-3b9"/>
