@@ -1,0 +1,7 @@
+Code-Review+2: Adrien Béraud <adrien.beraud@savoirfairelinux.com>
+Verified+1: Jenkins CI <jenkins@ring-packaging.cx>
+Submitted-by: Adrien Béraud <adrien.beraud@savoirfairelinux.com>
+Submitted-at: Mon, 27 Apr 2020 16:32:14 -0400
+Reviewed-on: https://review.jami.net/c/ring-client-ios/+/14177
+Project: ring-client-ios
+Branch: refs/heads/master
