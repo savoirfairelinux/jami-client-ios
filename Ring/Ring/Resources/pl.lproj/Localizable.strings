@@ -57,6 +57,7 @@
 "welcome.text" = "Ring jest wolnym oprogramowaniem do uniwersalnej komunikacji, respektującym wolności i prywatność swoich użytkowników";
 "welcome.linkDevice" = "Połącz to urządzenie z kontem";
 "welcome.createAccount" = "Stwórz konto Jami";
+"welcome.connectToManager" = "Connect to account manager";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Pomiń";

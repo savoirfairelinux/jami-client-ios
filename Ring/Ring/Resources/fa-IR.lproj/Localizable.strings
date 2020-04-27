@@ -57,6 +57,7 @@
 "welcome.text" = "جمی یک بستر ارتباطی رایگان و جهانی است، که حریم خصوصی و آزادی کاربران را حفظ می‌کند";
 "welcome.linkDevice" = "پیوند این دستگاه به یک حساب";
 "welcome.createAccount" = "ایجاد یک حساب جمی";
+"welcome.connectToManager" = "اتصال به مدیریت حساب";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "پرش";

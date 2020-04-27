@@ -57,6 +57,7 @@
 "welcome.text" = "Jami är en obunden och universell kommunikationsplattform, som bevarar användarens integritet och frihet.";
 "welcome.linkDevice" = "Koppla denna enhet till ett konto";
 "welcome.createAccount" = "Skapa ett Jami-konto";
+"welcome.connectToManager" = "Anslut till kontohanteraren";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Hopa över";

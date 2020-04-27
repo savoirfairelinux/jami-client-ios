@@ -57,6 +57,7 @@
 "welcome.text" = "Jami 是一個自由且通用的通訊平臺，其尊重使用者的隱私與自由。";
 "welcome.linkDevice" = "連結這個裝置到一個帳號";
 "welcome.createAccount" = "建立 Jami 帳號";
+"welcome.connectToManager" = "連線到帳號管理員";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "略過";
