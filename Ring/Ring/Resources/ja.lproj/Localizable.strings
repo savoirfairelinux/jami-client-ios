@@ -57,6 +57,7 @@
 "welcome.text" = "Jamiは、世界中のユーザーと繋がることができる、ユーザーの自由とプライバシーを尊重したフリーソフトウェアです。";
 "welcome.linkDevice" = "このデバイスをアカウントへリンク";
 "welcome.createAccount" = "Jamiアカウントを作成";
+"welcome.connectToManager" = "Connect to account manager";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "スキップ";

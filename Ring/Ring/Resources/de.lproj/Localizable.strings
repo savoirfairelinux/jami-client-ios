@@ -57,6 +57,7 @@
 "welcome.text" = "Jami ist eine freie und universelle Kommunikationsplattform und respektiert die Freiheiten und Privatsphäre der Benutzer. ";
 "welcome.linkDevice" = "Dieses Gerät mit einem Konto verknüpfen";
 "welcome.createAccount" = "Ein Jami-Konto erstellen";
+"welcome.connectToManager" = "Mit Kontoverwalter verbinden";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Überspringen";

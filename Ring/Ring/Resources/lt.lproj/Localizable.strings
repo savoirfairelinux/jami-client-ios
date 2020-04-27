@@ -57,6 +57,7 @@
 "welcome.text" = "Jami yra laisva ir universali bendravimo platforma, kuri išsaugo naudotojo privatumą ir laisves.";
 "welcome.linkDevice" = "Susieti šį įrenginį su paskyra";
 "welcome.createAccount" = "Susikurti Jami paskyrą";
+"welcome.connectToManager" = "Connect to account manager";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Praleisti";

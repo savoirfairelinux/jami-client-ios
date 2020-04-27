@@ -57,6 +57,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Ligar este dispositivo a unha conta";
 "welcome.createAccount" = "Crear conta Jami";
+"welcome.connectToManager" = "Conectar ao xestor da conta";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Saltar";
@@ -277,7 +278,7 @@
 "generatedMessage.missedIncomingCall" = "Chamada entrante perdida";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "Axustes xerais";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

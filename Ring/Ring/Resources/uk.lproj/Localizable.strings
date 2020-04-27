@@ -57,6 +57,7 @@
 "welcome.text" = "Джамі — це вільна та універсальна платформа для зв'язку, яка оберігає приватність і свободи користувачів";
 "welcome.linkDevice" = "Прив'язати цей пристрій до облікового запису";
 "welcome.createAccount" = "Створити обліковий запис Джамі";
+"welcome.connectToManager" = "Connect to account manager";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустити";

@@ -57,6 +57,7 @@
 "welcome.text" = "A Jami egy szabad szoftver az egyetemes közlés emelvény, mely tiszteletben tartja a felhasználók szabadságát és magán szféráját";
 "welcome.linkDevice" = "Ezen eszköz összekapcsolása egy fiókhoz";
 "welcome.createAccount" = "Jami-fiók létrehozása";
+"welcome.connectToManager" = "Csatlakozás a fiókkezelőhöz";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Átugrani";

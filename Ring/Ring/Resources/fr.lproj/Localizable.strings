@@ -57,6 +57,7 @@
 "welcome.text" = "Jami est un logiciel libre de communication universel qui protège la vie privée et les libertés de ses utilisateurs.";
 "welcome.linkDevice" = "Lier cet appareil à un compte";
 "welcome.createAccount" = "Créer un compte Jami";
+"welcome.connectToManager" = "Se connecter à partir d'un serveur d'entreprise";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Passer";

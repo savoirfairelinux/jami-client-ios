@@ -57,6 +57,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Collega questo dispositivo a un account";
 "welcome.createAccount" = "Crea un account Jami";
+"welcome.connectToManager" = "Connetti al gestore account";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Salta";

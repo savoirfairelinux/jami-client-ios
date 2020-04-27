@@ -57,6 +57,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Свързване на това устройство с профил";
 "welcome.createAccount" = "Създаване на профил в Jami";
+"welcome.connectToManager" = "Connect to account manager";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропускане";

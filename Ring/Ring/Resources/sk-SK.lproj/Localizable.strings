@@ -57,6 +57,7 @@
 "welcome.text" = "Jami je slobodná a univerzálna komunikačná platforma, ktorá zachováva súkromie a slobody používateľov.";
 "welcome.linkDevice" = "Prepojiť toto zariadenie s účtom";
 "welcome.createAccount" = "Vytvoriť Jami účet";
+"welcome.connectToManager" = "Connect to account manager";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskočiť";
