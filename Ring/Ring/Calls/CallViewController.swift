@@ -109,13 +109,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.setUpCallButtons()
         self.setupBindings()
         self.profileImageView.tintColor = UIColor.jamiDefaultAvatar
+        nameLabel.textColor = UIColor.jamiLabelColor
+        durationLabel.textColor = UIColor.jamiLabelColor
+        infoBottomLabel.textColor = UIColor.jamiLabelColor
         if self.viewModel.isAudioOnly {
             // The durationLabel and buttonsContainer alpha is set here to 0, and to 1 (with a duration) when appear on the screen to have a fade in animation
             self.durationLabel.alpha = 0
             self.buttonsContainer.stackView.alpha = 0
-            nameLabel.textColor = UIColor.jamiLabelColor
-            durationLabel.textColor = UIColor.jamiLabelColor
-            infoBottomLabel.textColor = UIColor.jamiLabelColor
             self.showAllInfo()
             self.setWhiteAvatarView()
         }

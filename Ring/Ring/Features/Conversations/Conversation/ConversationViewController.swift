@@ -77,6 +77,7 @@ class ConversationViewController: UIViewController,
             self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
             displayName: self.viewModel.displayName.value,
             username: self.viewModel.userName.value)
+            self.tableView.reloadData()
         }).disposed(by: self.disposeBag)
 
         /*
