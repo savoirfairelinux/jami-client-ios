@@ -484,7 +484,7 @@ extension VideoService: VideoAdapterDelegate {
         if !supportHardware() && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
             self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
             self.videoAdapter.switchInput("camera://" + camera.namePortrait, forCall: rendererId)
-            switchInputRequested = true
+            switchInputRequested = !codecId.isEmpty
         }
         self.log.debug("Decoding started...")
         let withHardware = !codecId.isEmpty ? (supportHardware() && self.hardwareAcceleratedForCurrentSession) : false
