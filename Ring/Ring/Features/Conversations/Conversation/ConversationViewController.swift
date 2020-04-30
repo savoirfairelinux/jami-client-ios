@@ -115,35 +115,15 @@ class ConversationViewController: UIViewController,
         let filePath = urls[0].absoluteURL.path
         self.log.debug("Successfully imported \(filePath)")
         let fileName = urls[0].absoluteURL.lastPathComponent
-
-        let result = PHAsset.fetchAssets(withALAssetURLs: urls, options: nil)
-
-        guard let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName) else {
+        let fileExtension = urls[0].pathExtension
+        if !fileExtension.isMediaExtension() && !fileExtension.isImageExtension() {
+            self.viewModel.sendFile(filePath: filePath, displayName: fileName)
             return
         }
-        self.log.debug("localCachePath: \(String(describing: localCachePath))")
-
-        guard let phAsset = result.firstObject else { return }
-
-        if phAsset.mediaType == .video {
-            PHImageManager.default()
-                .requestAVAsset(forVideo: phAsset,
-                                options: PHVideoRequestOptions(),
-                                resultHandler: { (asset, _, _) -> Void in
-                                    guard let asset = asset as? AVURLAsset else {
-                                        self.log.error("couldn't get asset")
-                                        return
-                                    }
-                                    guard let videoData = NSData(contentsOf: asset.url) else {
-                                        self.log.error("couldn't get movie data")
-                                        return
-                                    }
-                                    self.log.debug("copying movie to: \(String(describing: localCachePath))")
-                                    videoData.write(toFile: localCachePath.path, atomically: true)
-                                    self.viewModel.sendAndSaveFile(displayName: fileName,
-                                                                   imageData: videoData as Data)
-                })
-        } else {
+        do {
+            let data = try Data(contentsOf: urls[0])
+            self.viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
+        } catch {
             self.viewModel.sendFile(filePath: filePath, displayName: fileName)
         }
     }

@@ -246,22 +246,7 @@ class MessageViewModel {
         guard let fileExtension = NSURL(fileURLWithPath: name).pathExtension else {
             return nil
         }
-        let uti = UTTypeCreatePreferredIdentifierForTag(
-            kUTTagClassFilenameExtension,
-            fileExtension as CFString,
-            nil)
-
-        var fileIsMedia = false
-        if let value = uti?.takeRetainedValue(),
-            UTTypeConformsTo(value, kUTTypeMovie) || UTTypeConformsTo(value, kUTTypeVideo)
-                || UTTypeConformsTo(value, kUTTypeAudio) {
-            fileIsMedia = true
-                   }
-        let mediaExtension = ["ogg", "webm"]
-        if mediaExtension.contains(where: {$0.compare(fileExtension, options: .caseInsensitive) == .orderedSame}) {
-            fileIsMedia = true
-        }
-        if fileIsMedia {
+        if fileExtension.isMediaExtension() {
             // first search for incoming video in downloads folder and for outgoing in recorded
             let folderName = self.message.incoming ? Directories.downloads.rawValue : Directories.recorded.rawValue
             var path = self.dataTransferService

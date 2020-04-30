@@ -21,6 +21,7 @@
  */
 
 import Foundation
+import MobileCoreServices
 
 extension String {
     func toBool() -> Bool? {
@@ -96,5 +97,38 @@ extension String {
 
     var boolValue: Bool {
         return (self as NSString).boolValue
+    }
+
+    func isMediaExtension() -> Bool {
+        let uti = UTTypeCreatePreferredIdentifierForTag(
+            kUTTagClassFilenameExtension,
+            self as CFString,
+            nil)
+
+        var fileIsMedia = false
+        if let value = uti?.takeRetainedValue(),
+            UTTypeConformsTo(value, kUTTypeMovie) || UTTypeConformsTo(value, kUTTypeVideo)
+                || UTTypeConformsTo(value, kUTTypeAudio) {
+            fileIsMedia = true
+        }
+        let mediaExtension = ["ogg", "webm"]
+        if mediaExtension.contains(where: {$0.compare(self, options: .caseInsensitive) == .orderedSame}) {
+            fileIsMedia = true
+        }
+        return fileIsMedia
+    }
+
+    func isImageExtension() -> Bool {
+        let uti = UTTypeCreatePreferredIdentifierForTag(
+            kUTTagClassFilenameExtension,
+            self as CFString,
+            nil)
+
+        var fileIsImage = false
+        if let value = uti?.takeRetainedValue(),
+            UTTypeConformsTo(value, kUTTypeImage) {
+            fileIsImage = true
+        }
+        return fileIsImage
     }
 }
