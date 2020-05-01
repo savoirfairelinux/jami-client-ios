@@ -44,6 +44,9 @@ class AudioService {
 
     init(withAudioAdapter audioAdapter: AudioAdapter) {
         self.audioAdapter = audioAdapter
+        let bluetoothConnected = bluetoothAudioConnected()
+        let headphonesConnected = headphoneAudioConnected()
+        isHeadsetConnected.value = bluetoothConnected || headphonesConnected
 
         // Listen for audio route changes
         NotificationCenter.default.addObserver(
@@ -53,35 +56,31 @@ class AudioService {
             object: nil)
     }
 
-    // swiftlint:disable force_cast
     @objc private func audioRouteChangeListener(_ notification: Notification) {
-        let reasonRaw = notification.userInfo![AVAudioSessionRouteChangeReasonKey] as! UInt
-        self.log.debug("Audio route change: \(reasonRaw)")
-        guard let reason = AVAudioSession.RouteChangeReason(rawValue: reasonRaw) else {
-            return
+        guard let userInfo = notification.userInfo,
+            let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt else {
+                return
         }
-        overrideAudioRoute(reason)
+        guard let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue),
+            (reason == .newDeviceAvailable || reason == .oldDeviceUnavailable || reason == .categoryChange) else {
+                return
+        }
+        overrideAudioRoute()
     }
-    // swiftlint:enable force_cast
 
-    func overrideAudioRoute(_ reason: AVAudioSession.RouteChangeReason) {
-        let wasHeadsetConnected = isHeadsetConnected.value
+    func overrideAudioRoute() {
         let bluetoothConnected = bluetoothAudioConnected()
         let headphonesConnected = headphoneAudioConnected()
-        self.log.debug("Audio route override - reason: \(reason.rawValue), status: bluetooth: \(bluetoothConnected), headphones: \(headphonesConnected)")
         isHeadsetConnected.value = bluetoothConnected || headphonesConnected
-        if reason == .override && !isHeadsetConnected.value {
-            setAudioOutputDevice(port: OutputPortType.builtinspk)
-        } else if wasHeadsetConnected != isHeadsetConnected.value {
-            if bluetoothConnected {
-                setAudioOutputDevice(port: OutputPortType.bluetooth)
-            } else if headphonesConnected {
-                setAudioOutputDevice(port: OutputPortType.headphones)
-            } else if wasHeadsetConnected {
-                let outputPort = isOutputToSpeaker.value ? OutputPortType.builtinspk : OutputPortType.receiver
-                setAudioOutputDevice(port: outputPort)
-            }
+        if bluetoothConnected {
+            setAudioOutputDevice(port: OutputPortType.bluetooth)
+            return
+        } else if headphonesConnected {
+            setAudioOutputDevice(port: OutputPortType.headphones)
+            return
         }
+        let outputPort = isOutputToSpeaker.value ? OutputPortType.builtinspk : OutputPortType.receiver
+        setAudioOutputDevice(port: outputPort)
     }
 
     func switchSpeaker() {
@@ -109,6 +108,13 @@ class AudioService {
     func overrideToReceiver() {
         isOutputToSpeaker.value = false
         setAudioOutputDevice(port: OutputPortType.receiver)
+    }
+
+    func setDefaultOutput(toSpeaker: Bool, override: Bool = false) {
+        isOutputToSpeaker.value = toSpeaker
+        if override {
+            overrideAudioRoute()
+        }
     }
 
     func bluetoothAudioConnected() -> Bool {

@@ -172,7 +172,7 @@ class ButtonsContainerView: UIView, NibLoadable {
         if switchSpeakerButton.isEnabled && !switchSpeakerButton.isHidden {
             self.optionsWithSpeaker()
         } else if !switchSpeakerButton.isHidden {
-            self.optionsWithSpeaker()
+            self.optionsWithoutSpeaker()
         }
     }
 

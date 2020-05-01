@@ -405,7 +405,13 @@ class CallViewModel: Stateable, ViewModel {
             .filter({ serviceEvent in
                 serviceEvent.eventType == .audioActivated
             }).subscribe(onNext: { [weak self] _ in
-                self?.audioService.startAudio()
+                guard let self = self else {return}
+                self.audioService.startAudio()
+                //for outgoing calls ve create audio sesion with default parameters.
+                //for incoming call audio session is created, ve need to override it
+                let overrideOutput = self.call?.callTypeValue == CallType.incoming.rawValue
+                self.audioService.setDefaultOutput(toSpeaker: !self.isAudioOnly,
+                                                   override: overrideOutput)
             }).disposed(by: self.disposeBag)
     }
 
@@ -433,32 +439,18 @@ class CallViewModel: Stateable, ViewModel {
                 }
             }
         }
-        self.callService.hangUpCallOrConference(callId: rendererId)
-            .subscribe(onCompleted: { [weak self] in
-                // switch to either spk or headset (if connected) for loud ringtone
-                // incase we were using rcv during the call
-                self?.videoService.stopAudioDevice()
-                self?.log.info("Call canceled")
-                }, onError: { [weak self] error in
-                    self?.log.error("Failed to cancel the call")
-            }).disposed(by: self.disposeBag)
+        self.callService
+            .hangUpCallOrConference(callId: rendererId)
+            .subscribe().disposed(by: self.disposeBag)
     }
 
     func answerCall() -> Completable {
-        if !self.audioService.isHeadsetConnected.value {
-            isAudioOnly ?
-                self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
-        }
         return self.callService.accept(call: call)
     }
 
     func placeCall(with uri: String, userName: String, isAudioOnly: Bool = false) {
         guard let account = self.accountService.currentAccount else {
             return
-        }
-        if !self.audioService.isHeadsetConnected.value {
-            isAudioOnly ?
-                self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
         }
         self.callService.placeCall(withAccount: account,
                                    toRingId: uri,
