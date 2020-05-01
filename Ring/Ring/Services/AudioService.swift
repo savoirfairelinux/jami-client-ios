@@ -70,9 +70,7 @@ class AudioService {
         let headphonesConnected = headphoneAudioConnected()
         self.log.debug("Audio route override - reason: \(reason.rawValue), status: bluetooth: \(bluetoothConnected), headphones: \(headphonesConnected)")
         isHeadsetConnected.value = bluetoothConnected || headphonesConnected
-        if reason == .override && !isHeadsetConnected.value {
-            setAudioOutputDevice(port: OutputPortType.builtinspk)
-        } else if wasHeadsetConnected != isHeadsetConnected.value {
+        if wasHeadsetConnected != isHeadsetConnected.value {
             if bluetoothConnected {
                 setAudioOutputDevice(port: OutputPortType.bluetooth)
             } else if headphonesConnected {

@@ -405,7 +405,12 @@ class CallViewModel: Stateable, ViewModel {
             .filter({ serviceEvent in
                 serviceEvent.eventType == .audioActivated
             }).subscribe(onNext: { [weak self] _ in
-                self?.audioService.startAudio()
+                guard let self = self else {return}
+                self.audioService.startAudio()
+                if self.audioService.isHeadsetConnected.value {
+                    return
+                }
+                self.isAudioOnly ? self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
             }).disposed(by: self.disposeBag)
     }
 
@@ -445,20 +450,12 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     func answerCall() -> Completable {
-        if !self.audioService.isHeadsetConnected.value {
-            isAudioOnly ?
-                self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
-        }
         return self.callService.accept(call: call)
     }
 
     func placeCall(with uri: String, userName: String, isAudioOnly: Bool = false) {
         guard let account = self.accountService.currentAccount else {
             return
-        }
-        if !self.audioService.isHeadsetConnected.value {
-            isAudioOnly ?
-                self.audioService.overrideToReceiver() : self.audioService.overrideToSpeaker()
         }
         self.callService.placeCall(withAccount: account,
                                    toRingId: uri,
