@@ -509,6 +509,7 @@ class CallViewModel: Stateable, ViewModel {
 
     func switchCamera() {
         self.videoService.switchCamera()
+        videoService.setCameraOrientation(orientation: UIDevice.current.orientation, forceUpdate: true)
     }
 
     func switchSpeaker() {
