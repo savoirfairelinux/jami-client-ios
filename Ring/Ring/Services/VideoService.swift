@@ -380,7 +380,7 @@ class VideoService: FrameExtractorDelegate {
         }).disposed(by: self.disposeBag)
     }
 
-    func setCameraOrientation(orientation: UIDeviceOrientation) {
+    func setCameraOrientation(orientation: UIDeviceOrientation, forceUpdate: Bool = false) {
         var newOrientation: AVCaptureVideoOrientation
         switch orientation {
         case .portrait:
@@ -394,7 +394,7 @@ class VideoService: FrameExtractorDelegate {
         default:
             newOrientation = AVCaptureVideoOrientation.portrait
         }
-        if newOrientation == self.currentOrientation {
+        if newOrientation == self.currentOrientation && !forceUpdate {
             self.log.warning("no orientation change required")
             return
         }
