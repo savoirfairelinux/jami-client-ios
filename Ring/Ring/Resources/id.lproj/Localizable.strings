@@ -37,7 +37,7 @@
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "Tidak ada jaringan internet";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "Accounts";
 "smartlist.addAccountButton" = "+ Add Account";
@@ -157,7 +157,7 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
+"accountPage.settingsHeader" = "Setelan";
 "accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -272,10 +272,10 @@
 "generatedMessage.contactAdded" = "Contact added";
 "generatedMessage.invitationReceived" = "Invitation received";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
-"generatedMessage.outgoingCall" = "Outgoing call";
-"generatedMessage.incomingCall" = "Incoming call";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.outgoingCall" = "Panggilan keluar";
+"generatedMessage.incomingCall" = "Panggilan masuk";
+"generatedMessage.missedOutgoingCall" = "Panggilan keluar tidak terjawab";
+"generatedMessage.missedIncomingCall" = "Panggilan masuk tidak terjawab";
 
 //General Settings
 "generalSettings.title" = "General settings";

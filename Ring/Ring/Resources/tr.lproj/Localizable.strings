@@ -57,7 +57,7 @@
 "welcome.text" = "Jami kullanıcılarının gizlilik ve özgürlüklerini sağlayan evrensel ve ücretsiz bir platformdur.";
 "welcome.linkDevice" = "Bu aygıtı bir hesaba bağla";
 "welcome.createAccount" = "Bir Jami hesabı oluştur";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "Hesap yöneticisine bağlan";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Atla";
@@ -107,7 +107,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Kullanıcı adı";
 "linkToAccountManager.usernameLabel" = "Kullanıcı Adını Girin";
 "linkToAccountManager.accountManagerPlaceholder" = "Hesap yöneticisi";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerLabel" = "Hesap yöneticisi URI'sini girin";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Hesap bulunamadı";
@@ -129,10 +129,10 @@
 "alerts.confirmDeleteConversationFromContact" = "Bu kişi ile konuşmayı kalıcı olarak silmek istediğinizden emin misiniz?";
 "alerts.confirmDeleteConversationTitle" = "Konuşmayı Sil";
 "alerts.confirmClearConversation" = "Bu kişi ile konuşmayı kalıcı olarak temizlemek istediğinizden emin misiniz?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.confirmClearConversationTitle" = "Görüşmeyi temizle";
+"alerts.noMediaPermissionsTitle" = "Medya izni verilmedi";
+"alerts.noLibraryPermissionsTitle" = "Fotoğraf kitaplığına erişim izni verilmedi";
+"alerts.errorWrongCredentials" = "Sağlanan hesap yöneticisine bağlanılamıyor. Lütfen kimlik bilgilerinizi kontrol edin";
 
 //Actions
 "actions.blockAction" = "Engelleme";
@@ -140,7 +140,7 @@
 "actions.cancelAction" = "İptal";
 "actions.clearAction" = "Temizle";
 "actions.backAction" = "Geri";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Adlı kişiden gelen çağrı";
 "alerts.incomingCallButtonAccept" = "Kabul et";
 "alerts.incomingCallButtonIgnore" = "Göz ardı et";
 
@@ -152,8 +152,8 @@
 "calls.connecting" = "Bağlanıyor...";
 "calls.searching" = "Arıyor...";
 "calls.callFinished" = "Arama sonlandırıldı";
-"calls.currentCallWith" = "Call with ";
-"calls.haghUp" = "hang up";
+"calls.currentCallWith" = "İle ara";
+"calls.haghUp" = "Aramayı sonlandır";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";
@@ -191,12 +191,12 @@
 "accountPage.removeAccountButton" = "Kaldır";
 "accountPage.shareAccountDetails" = "Hesap Detaylarını Paylaş";
 "accountPage.contactMeOnJamiTitle" = "Benimle Jami'de iletişime geç!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Jami dağıtılmış iletişim platformunda \"%s\" kullanarak bana ulaşın: https://jami.net";
 "accountPage.registerNameTitle" = "Bir kullanıcı adı kaydedin";
 "accountPage.passwordPlaceholder" = "Hesap parolanızı girin";
-"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.usernamePlaceholder" = "İstenen kullanıcı adını girin";
 "accountPage.registerNameErrorMessage" = "Seçilen kullanıcı adı uygun değil";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegistering" = "Kayıt ediliyor";
 "accountPage.usernameRegisterAction" = "Kaydol";
 "accountPage.usernameRegistrationFailed" = "Kayıt başarısız. Lütfen parolanızı kontrol edin.";
 
@@ -218,7 +218,7 @@
 "account.statusConnecting" = "Bağlanılıyor";
 "account.statusUnknown" = "Bilinmeyen";
 "account.statusConnectionerror" = "Bağlantı hatası";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "Hesabın taşınması gerekiyor";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Engellenmiş kişi yok";
@@ -228,14 +228,14 @@
 "linkDevice.passwordError" = "Girdiğiniz parola bu hesabı açmaz";
 "linkDevice.networkError" = "Dışa aktarma esnasında bir ağ hatası oluştu";
 "linkDevice.defaultError" = "Dışa aktarma esnasında bir hata oluştu";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "İşlemi tamamlamak için yeni cihazda Jami'yi açmanız ve \"Bu cihazı bir hesaba bağla\" seçeneğini belirtmeniz gerekir. PIN kodunuz 10 dakika geçerlidir";
 "linkDevice.hudMessage" = "Doğrulama";
 
 //Contact Page
 "contactPage.startAudioCall" = "Sesli Arama Başlat";
 "contactPage.startVideoCall" = "Görüntülü Arama Başlat";
 "contactPage.sendMessage" = "İleti Gönder";
-"contactPage.clearConversation" = "Clear Chat";
+"contactPage.clearConversation" = "Görüşmeyi temizle";
 "contactPage.blockContact" = "Kişiyi Engelle";
 "contactPage.removeConversation" = "Konuşmayı Kaldır";
 
@@ -283,14 +283,14 @@
 
 //Migrate Account
 "migrateAccount.title" = "Hesap taşıma";
-"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.migrateButton" = "Hesap Taşıma";
 "migrateAccount.explanation" = "Bu hesabın taşınması gerekli";
 "migrateAccount.passwordPlaceholder" = "Parolayı gir";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.passwordExplanation" = "Taşıma işlemine devam etmek için bu hesapla kullanılan bir şifre girmeniz gerekiyor";
 "migrateAccount.removeAccount" = "Hesabı Kaldır";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.error" = "Hesabınız taşınamadı. Hesabınızı tekrar deneyebilir veya silebilirsiniz.";
+"migrateAccount.migrating" = "Taşınıyor...";
 "migrateAccount.cancel" = "İptal";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "Başka Bir Hesap Taşı";
 
 

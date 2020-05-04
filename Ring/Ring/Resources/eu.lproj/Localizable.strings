@@ -57,7 +57,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Estekatu gailua kontu batekin";
 "welcome.createAccount" = "Sortu Jami kontua";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "Konektatu kontu kudeatzailera";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Jauzi";
@@ -73,7 +73,7 @@
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "Erabiltzaile-izena";
 "createAccount.newPasswordPlaceholder" = "Pasahitza";
-"createAccount.repeatPasswordPlaceholder" = "Confirm password";
+"createAccount.repeatPasswordPlaceholder" = "Berretsi pasahitza";
 "createAccount.passwordCharactersNumberError" = "6 karaktere gutxienez";
 "createAccount.passwordNotMatchingError" = "pasahitzak ez datoz bat";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
@@ -106,7 +106,7 @@
 "linkToAccountManager.passwordLabel" = "Sartu pasahitza";
 "linkToAccountManager.usernamePlaceholder" = "Erabiltzaile-izena";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerPlaceholder" = "Kontu kudeatzaile";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts

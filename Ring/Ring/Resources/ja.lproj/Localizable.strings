@@ -93,7 +93,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "アカウントを連結しています";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.linkButtonTitle" = "デバイスをリンク";
 "linkToAccount.passwordPlaceholder" = "パスワード";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "パスワードを入力してください";
@@ -114,7 +114,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "アカウントを追加しました";
 "alerts.accountNoNetworkTitle" = "ネットワークに接続できません";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Jamiが分散ネットワークに接続できなかったためアカウントを追加できませんでした。デバイスのネットワーク接続を確認してください。";
 "alerts.accountDefaultErrorTitle" = "不明なエラー";
 "alerts.accountDefaultErrorMessage" = "アカウントを作成できませんでした。";
 "alerts.profileTakePhoto" = "撮影";
@@ -174,7 +174,7 @@
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.revokeDeviceTitle" = "デバイスを取り消し";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "破棄";
 "accountPage.revokeDevicePlaceholder" = "パスワードを入力";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
@@ -203,7 +203,7 @@
 //Account
 "account.sipUsername" = "ユーザー名";
 "account.sipPassword" = "パスワード";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "SIPサーバー";
 "account.port" = "ポート番号";
 "account.proxyServer" = "プロキシ";
 "account.createSipAccount" = "Create Sip Account";

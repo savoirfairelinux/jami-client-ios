@@ -218,7 +218,7 @@
 "account.statusConnecting" = "Подключение";
 "account.statusUnknown" = "Неизвестно";
 "account.statusConnectionerror" = "Ошибка подключения";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "аккаунт нуждается в переносе";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Нет заблокированных контактов";
@@ -283,14 +283,14 @@
 
 //Migrate Account
 "migrateAccount.title" = "Перенос аккаунта";
-"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.migrateButton" = "Перенос аккаунта";
 "migrateAccount.explanation" = "Этот аккаунт должен быть перенесен";
 "migrateAccount.passwordPlaceholder" = "Введите пароль";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.passwordExplanation" = "Чтобы завершить перенос, необходимо ввести пароль, используемый для этого аккаунта";
 "migrateAccount.removeAccount" = "Удаление учетной записи";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.error" = "Ошибка при переносе Вашего аккаунта. Вы можете попробовать повторно или удалить Ваш аккаунт.";
+"migrateAccount.migrating" = "Перенос...";
 "migrateAccount.cancel" = "Отмена";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "Перенос другого аккаунта";
 
 
