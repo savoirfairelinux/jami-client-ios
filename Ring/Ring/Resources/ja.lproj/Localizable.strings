@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "会話";
-"global.contactRequestsTabBarTitle" = "招待状";
+"global.contactRequestsTabBarTitle" = "招待";
 "global.meTabBarTitle" = "アカウント";
 "global.ok" = "OK";
 "global.versionName" = "Free as in Freedom";
@@ -57,7 +57,7 @@
 "welcome.text" = "Jamiは、世界中のユーザーと繋がることができる、ユーザーの自由とプライバシーを尊重したフリーソフトウェアです。";
 "welcome.linkDevice" = "このデバイスをアカウントへリンク";
 "welcome.createAccount" = "Jamiアカウントを作成";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "アカウントマネージャーに接続";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "スキップ";
@@ -81,7 +81,7 @@
 "createAccount.usernameAlreadyTaken" = "このユーザー名は既に取得されています。";
 "createAccount.loading" = "読み込み中";
 "createAccount.waitCreateAccountTitle" = "アカウントを追加";
-"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.RegisterAUsername" = "ユーザー名を登録";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "通知";
@@ -106,8 +106,8 @@
 "linkToAccountManager.passwordLabel" = "パスワードを入力してください";
 "linkToAccountManager.usernamePlaceholder" = "ユーザー名";
 "linkToAccountManager.usernameLabel" = "ユーザー名を入力してください";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "アカウントマネージャー";
+"linkToAccountManager.accountManagerLabel" = "アカウントマネージャーURIを入力";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "アカウントが見つかりません";
@@ -124,12 +124,12 @@
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "アプリケーションを終了し、起動し直してください";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "ブロックした連絡先";
+"alerts.confirmBlockContactTitle" = "連絡先をブロック";
 "alerts.confirmDeleteConversation" = "この会話を完全に削除してもよろしいですか？";
 "alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "会話を消去";
 "alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
+"alerts.confirmClearConversationTitle" = "会話履歴を削除";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
@@ -162,7 +162,7 @@
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "プロキシを有効にする";
-"accountPage.blockedContacts" = "Block List";
+"accountPage.blockedContacts" = "ブロックリスト";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "プロキシを有効にする";
@@ -177,23 +177,23 @@
 "accountPage.revokeDeviceButton" = "破棄";
 "accountPage.revokeDevicePlaceholder" = "パスワードを入力";
 "accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
+"accountPage.deviceRevocationProgress" = "取り消し中...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
 "accountPage.deviceRevocationTryAgain" = "もう一度やり直す";
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
+"accountPage.deviceRevocationUnknownDevice" = "未知のデバイス";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "名前";
 "accountPage.linkDeviceTitle" = "別のデバイスをリンク";
 "accountPage.other" = "その他";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "アカウントを削除";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "削除";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Register a username";
-"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.registerNameTitle" = "ユーザー名を登録";
+"accountPage.passwordPlaceholder" = "アカウントのパスワードを入力";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
@@ -206,7 +206,7 @@
 "account.sipServer" = "SIPサーバー";
 "account.port" = "ポート番号";
 "account.proxyServer" = "プロキシ";
-"account.createSipAccount" = "Create Sip Account";
+"account.createSipAccount" = "SIPアカウントを作成";
 "account.usernameLabel" = "ユーザー名を入力してください";
 "account.passwordLabel" = "パスワードを入力してください";
 "account.serverLabel" = "Enter Address";
@@ -232,11 +232,11 @@
 "linkDevice.hudMessage" = "検証中";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
+"contactPage.startAudioCall" = "音声通話を開始";
 "contactPage.startVideoCall" = "ビデオ通話を開始";
-"contactPage.sendMessage" = "Send Message";
+"contactPage.sendMessage" = "メッセージを送信";
 "contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "ブロックした連絡先";
+"contactPage.blockContact" = "連絡先をブロック";
 "contactPage.removeConversation" = "会話を削除";
 
 //DataTransfer
@@ -278,19 +278,19 @@
 "generatedMessage.missedIncomingCall" = "不在着信";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "一般設定";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
 "migrateAccount.title" = "アカウントの移行";
-"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.migrateButton" = "アカウントを移行";
 "migrateAccount.explanation" = "This account needs to be migrated";
 "migrateAccount.passwordPlaceholder" = "パスワードを入力してください";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "アカウントを削除";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
 "migrateAccount.cancel" = "キャンセル";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "別のアカウントに移行";
 
 

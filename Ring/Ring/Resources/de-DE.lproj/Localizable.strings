@@ -186,7 +186,7 @@
 "accountPage.namePlaceholder" = "Name";
 "accountPage.linkDeviceTitle" = "Neues Gerät verbinden";
 "accountPage.other" = "Andere";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Account entfernen";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Entfernen";
 "accountPage.shareAccountDetails" = "Share Account Details";
@@ -287,7 +287,7 @@
 "migrateAccount.explanation" = "This account needs to be migrated";
 "migrateAccount.passwordPlaceholder" = "Passwort eingeben";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Account entfernen";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
 "migrateAccount.cancel" = "Abbrechen";

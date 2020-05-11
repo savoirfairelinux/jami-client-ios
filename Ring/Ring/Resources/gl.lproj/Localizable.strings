@@ -23,11 +23,11 @@
 "global.contactRequestsTabBarTitle" = "Convites";
 "global.meTabBarTitle" = "Conta";
 "global.ok" = "Ok";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Libre como en liberdade";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.search" = "Buscando...";
 
 // Smartlist
 "smartlist.yesterday" = "Onte";
@@ -78,7 +78,7 @@
 "createAccount.passwordNotMatchingError" = "os contrasinais non coinciden";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "nome de usuaria non válido";
-"createAccount.usernameAlreadyTaken" = "o nome de usuaria xa está pillado";
+"createAccount.usernameAlreadyTaken" = "o nome de usuaria xa está collido";
 "createAccount.loading" = "Cargando";
 "createAccount.waitCreateAccountTitle" = "Engadindo conta";
 "createAccount.RegisterAUsername" = "Register a username";
@@ -150,7 +150,7 @@
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Conectando...";
-"calls.searching" = "Searching…";
+"calls.searching" = "Buscando...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -201,7 +201,7 @@
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 
 //Account
-"account.sipUsername" = "Nome de Usuaria";
+"account.sipUsername" = "Nome de usuaria";
 "account.sipPassword" = "Contrasinal";
 "account.sipServer" = "Servidor SIP";
 "account.port" = "Porto";
@@ -271,7 +271,7 @@
 //Generated Message
 "generatedMessage.contactAdded" = "Contacto engadido";
 "generatedMessage.invitationReceived" = "Convite recibido";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.invitationAccepted" = "Convite aceptado";
 "generatedMessage.outgoingCall" = "Chamada saínte";
 "generatedMessage.incomingCall" = "Chamada entrante";
 "generatedMessage.missedOutgoingCall" = "Chamada sen resposta";

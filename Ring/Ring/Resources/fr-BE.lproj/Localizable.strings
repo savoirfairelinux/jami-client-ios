@@ -174,7 +174,7 @@
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.revokeDeviceTitle" = "Revoke device";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "Révoquer";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
@@ -184,7 +184,7 @@
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nom";
-"accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.linkDeviceTitle" = "Lier autre appareil";
 "accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Supprimer le compte";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
