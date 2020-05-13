@@ -422,7 +422,7 @@ class ConversationViewModel: Stateable, ViewModel {
                                                                  ban: true,
                                                                  withAccountId: accountId)
         if let contactRequest = self.contactsService.contactRequest(withRingId: contactRingId) {
-            let discardCompleted = self.contactsService.discard(contactRequest: contactRequest,
+            let discardCompleted = self.contactsService.discard(from: contactRequest.ringId,
                                                                 withAccountId: accountId)
             blockComplete = Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
                 return
@@ -443,7 +443,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
     func ban(withItem item: ContactRequestItem) -> Observable<Void> {
         let accountId = item.contactRequest.accountId
-        let discardCompleted = self.contactsService.discard(contactRequest: item.contactRequest,
+        let discardCompleted = self.contactsService.discard(from: item.contactRequest.ringId,
                                                             withAccountId: accountId)
         let removeCompleted = self.contactsService.removeContact(withUri: item.contactRequest.ringId,
                                                                  ban: true,
