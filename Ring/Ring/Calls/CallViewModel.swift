@@ -543,4 +543,8 @@ class CallViewModel: Stateable, ViewModel {
         conversationViewModel.conversation = Variable<ConversationModel>(conversation)
         self.stateSubject.onNext(ConversationState.fromCallToConversation(conversation: conversationViewModel))
     }
+
+    func isBoothMode() -> Bool {
+        return self.accountService.boothMode()
+    }
 }

@@ -54,6 +54,9 @@ class ConversationsManager: MessagesAdapterDelegate {
             return  event.eventType == ServiceEventType.newIncomingMessage
         })
             .subscribe(onNext: { [unowned self] event in
+                if self.accountsService.boothMode() {
+                    return
+                }
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                     let messageContent: String = event.getEventInput(ServiceEventInput.content),
                     let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
@@ -70,6 +73,9 @@ class ConversationsManager: MessagesAdapterDelegate {
             return  event.eventType == ServiceEventType.newOutgoingMessage
         })
             .subscribe(onNext: { [unowned self] event in
+                if self.accountsService.boothMode() {
+                    return
+                }
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                     let messageContent: String = event.getEventInput(ServiceEventInput.content),
                     let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
@@ -102,6 +108,9 @@ class ConversationsManager: MessagesAdapterDelegate {
                     let currentAccount = self.accountsService.currentAccount else {
                         self.log.error("ConversationsManager: can't find transferInfo")
                         return
+                }
+                if self.accountsService.boothMode() {
+                    return
                 }
                 switch event.eventType {
                 case .dataTransferCreated:
@@ -162,6 +171,9 @@ class ConversationsManager: MessagesAdapterDelegate {
                            messageId: String,
                            to receiverAccountId: String) {
         guard let content = message[textPlainMIMEType] else {
+            return
+        }
+        if self.accountsService.boothMode() {
             return
         }
         DispatchQueue.main.async { [unowned self] in

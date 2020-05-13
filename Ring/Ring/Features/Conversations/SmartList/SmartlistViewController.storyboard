@@ -233,16 +233,21 @@
                         <outlet property="phoneBookButton" destination="RSG-bY-flb" id="Yjw-Va-7c1"/>
                         <outlet property="qrScanButton" destination="Eta-uf-Ija" id="Hh0-vy-8EK"/>
                         <outlet property="scanButtonLeadingConstraint" destination="O7M-He-7UH" id="cvF-Wd-TJT"/>
-                        <outlet property="searchBar" destination="xPr-nI-I35" id="Y3U-rV-yfc"/>
                         <outlet property="searchBarShadow" destination="DKd-eF-L6f" id="CKZ-ws-ag1"/>
-                        <outlet property="searchResultsTableView" destination="opE-y7-3Rm" id="F3g-9d-IQt"/>
-                        <outlet property="searchTableViewLabel" destination="HGv-QU-VSD" id="cVs-pr-n1f"/>
+                        <outlet property="searchView" destination="Y4B-5f-ij4" id="FtS-9R-atZ"/>
                         <outlet property="settingsButton" destination="iaz-fd-fEz" id="R2O-R8-BDk"/>
                         <outlet property="tableTopConstraint" destination="TVk-tz-qtF" id="lIj-Yu-ZL7"/>
                         <outlet property="tableView" destination="HFM-G6-hMN" id="Gci-vk-ijr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JSt-CJ-9Vq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Y4B-5f-ij4" customClass="JamiSearchView" customModule="Ring" customModuleProvider="target">
+                    <connections>
+                        <outlet property="searchBar" destination="xPr-nI-I35" id="M1f-Qz-kHV"/>
+                        <outlet property="searchResultsTableView" destination="opE-y7-3Rm" id="cMo-3b-5FA"/>
+                        <outlet property="searchingLabel" destination="HGv-QU-VSD" id="WnL-0s-Szs"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="-108" y="-1208.5457271364319"/>
         </scene>

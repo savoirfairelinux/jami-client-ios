@@ -299,6 +299,19 @@ final class InteractionDataHelper {
         }
     }
 
+    func deleteAll(dataBase: Connection) -> Bool {
+           //let query = table
+           do {
+               if try dataBase.run(table.delete()) > 0 {
+                   return true
+               } else {
+                   return false
+               }
+           } catch {
+               return false
+           }
+       }
+
     func insertIfNotExist(item: Interaction, dataBase: Connection) -> Int64? {
         let querySelect = table.filter(conversation == item.conversation &&
             body == item.body &&

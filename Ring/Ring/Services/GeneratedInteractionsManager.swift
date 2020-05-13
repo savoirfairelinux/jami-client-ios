@@ -42,6 +42,9 @@ class GeneratedInteractionsManager {
         self.contactService
             .sharedResponseStream
             .subscribe(onNext: { [unowned self] contactRequestEvent in
+                if self.accountService.boothMode() {
+                    return
+                }
                 guard let accountID: String = contactRequestEvent.getEventInput(.accountId) else {
                     return
                 }
@@ -108,6 +111,9 @@ class GeneratedInteractionsManager {
         self.callService
             .sharedResponseStream
             .subscribe(onNext: { [unowned self] callEvent in
+                if self.accountService.boothMode() {
+                    return
+                }
                 guard let accountID: String = callEvent.getEventInput(.accountId) else {
                     return
                 }
