@@ -393,6 +393,34 @@ class DBManager {
         }
     }
 
+    func clearAllHistoryFor(accountId: String) -> Completable {
+        return Completable.create { [unowned self] completable in
+            do {
+                guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+                    throw DBBridgingError.deleteConversationFailed
+                }
+                try dataBase.transaction {
+                    if !self.interactionHepler
+                        .deleteAll(dataBase: dataBase) {
+                        completable(.error(DBBridgingError.deleteConversationFailed))
+                    }
+                    if !self.conversationHelper
+                        .deleteAll(dataBase: dataBase) {
+                        completable(.error(DBBridgingError.deleteConversationFailed))
+                    }
+                    if !self.profileHepler
+                        .deleteAll(dataBase: dataBase) {
+                        completable(.error(DBBridgingError.deleteConversationFailed))
+                    }
+                    completable(.completed)
+                }
+            } catch {
+                completable(.error(DBBridgingError.deleteConversationFailed))
+            }
+            return Disposables.create { }
+        }
+   }
+
     func clearHistoryFor(accountId: String,
                          and participantUri: String,
                          keepConversation: Bool) -> Completable {
