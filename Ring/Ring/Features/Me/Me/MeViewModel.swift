@@ -53,6 +53,8 @@ enum SettingsSection: SectionModelType {
         case proxyServer(value: String)
         case accountState(state: Variable<String>)
         case enableAccount
+        case changePassword
+        case boostMode
     }
 
     var items: [SectionRow] {
@@ -124,6 +126,7 @@ class MeViewModel: ViewModel, Stateable {
                 var items: [SettingsSection.SectionRow] =  [.sectionHeader(title: L10n.AccountPage.credentialsHeader),
                                                         .jamiID(label: ringID)]
                 items.append(.jamiUserName(label: name))
+                items.append(.changePassword)
                 items.append(.shareAccountDetails)
             return SettingsSection
                 .credentials(items: items)
@@ -211,12 +214,13 @@ class MeViewModel: ViewModel, Stateable {
                                                            .blockedList,
                                                            .accountState(state: self.accountStatus),
                                                            .enableAccount,
+                                                           .boostMode,
                                                            .removeAccount]))
     }()
 
-    func havePassord() -> Bool {
+    func hasPassword() -> Bool {
         guard let currentAccount = self.accountService.currentAccount else {return true}
-        return AccountModelHelper(withAccount: currentAccount).havePassword
+        return AccountModelHelper(withAccount: currentAccount).hasPassword
     }
 
     lazy var jamiSettings: Observable<[SettingsSection]> = {
@@ -434,6 +438,26 @@ class MeViewModel: ViewModel, Stateable {
             }, onError: { _ in
                 self.showActionState.value = .usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed)
             }).disposed(by: self.disposeBag)
+    }
+
+    func changePassword(oldPassword: String, newPassword: String) -> Bool {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            return false
+        }
+        return self.accountService
+            .changePassword(forAccount: accountId, password: oldPassword, newPassword: newPassword)
+    }
+
+    func enableBoostMode(enable: Bool, password: String) -> Bool {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            return false
+        }
+        let result = self.accountService.setBootMode(forAccount: accountId, enable: enable, password: password)
+        if !result {
+            return false
+        }
+        self.stateSubject.onNext(MeState.accountModeChanged)
+        return true
     }
 
     func revokeDevice(deviceId: String, accountPassword password: String) {

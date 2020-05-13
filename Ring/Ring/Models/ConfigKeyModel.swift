@@ -106,6 +106,7 @@ enum ConfigKey: String {
     case accountPublish = "Account.accountPublish"
     case managerUri = "Account.managerUri"
     case managerUsername = "Account.managerUsername"
+    case boostMode = "Account.boostMode"
 }
 
 /**

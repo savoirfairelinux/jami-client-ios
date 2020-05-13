@@ -177,6 +177,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     private func stopLoadingView() {
         HUD.hide(animated: false)
     }
+    
+    private func showLoadingViewWithoutText() {
+        HUD.show(.labeledProgress(title: "", subtitle: nil))
+    }
 
     private func showLoadingView() {
         HUD.show(.labeledProgress(title: L10n.AccountPage.deviceRevocationProgress, subtitle: nil))
@@ -421,7 +425,24 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         self?.shareAccountInfo()
                     }).disposed(by: cell.disposeBag)
                     return cell
-
+                case .changePassword:
+                    let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    let title =  self.viewModel.hasPassword() ?
+                        L10n.AccountPage.changePassword : L10n.AccountPage.createPassword
+                    cell.textLabel?.text = title
+                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textAlignment = .center
+                    cell.sizeToFit()
+                    cell.selectionStyle = .none
+                    let button = UIButton.init(frame: cell.frame)
+                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    button.frame.size = size
+                    cell.addSubview(button)
+                    button.rx.tap.subscribe(onNext: { [weak self] in
+                        self?.changePassword(title: title)
+                    }).disposed(by: cell.disposeBag)
+                    return cell
                 case .notifications:
                     let cell = DisposableCell()
                     cell.backgroundColor = UIColor.jamiBackgroundColor
@@ -482,6 +503,37 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .subscribe(onNext: { (status) in
                                                    cell.detailTextLabel?.text = status
                                                }).disposed(by: cell.disposeBag)
+                    return cell
+                case .boostMode:
+                    let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    cell.textLabel?.text = L10n.AccountPage.enableBoostMode
+                    cell.textLabel?.sizeToFit()
+                    let switchView = UISwitch()
+                    cell.selectionStyle = .none
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
+                    cell.detailTextLabel?.text = self.viewModel.hasPassword() ?
+                        L10n.AccountPage.boostModeExplanation : L10n.AccountPage.noBoostMode
+                    cell.detailTextLabel?.lineBreakMode = .byWordWrapping
+                    cell.detailTextLabel?.numberOfLines = 0
+                    cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+                    cell.sizeToFit()
+                    cell.layoutIfNeeded()
+                    switchView.setOn(false, animated: false)
+                    switchView.rx
+                        .isOn.changed
+                        .subscribe(onNext: {[weak self] enable in
+                            if !enable {
+                                return
+                            }
+                            self?.confirmBoostModeAlert()
+                            switchView.setOn(false, animated: false)
+                        }).disposed(by: cell.disposeBag)
+                    cell.isUserInteractionEnabled = self.viewModel.hasPassword()
+                    cell.textLabel?.isEnabled = self.viewModel.hasPassword()
+                    cell.detailTextLabel?.isEnabled = self.viewModel.hasPassword()
+                    switchView.isEnabled = self.viewModel.hasPassword()
                     return cell
                 case .enableAccount:
                     let cell = DisposableCell()
@@ -695,6 +747,149 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.viewModel.updateSipSettings()
     }
 
+    func confirmBoostModeAlert() {
+        let alert = UIAlertController(title: L10n.AccountPage.enableBoostMode,
+                                      message: L10n.AccountPage.boostModeAlertMessage,
+                                      preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+                                         style: .cancel)
+        let actionConfirm = UIAlertAction(title: L10n.Actions.doneAction,
+                                          style: .default) { [weak self] _ in
+                                            self?.showLoadingViewWithoutText()
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                                if let textFields = alert.textFields,
+                                                    !textFields.isEmpty,
+                                                    let text = textFields[0].text,
+                                                    !text.isEmpty {
+                                                    let result = self?.viewModel.enableBoostMode(enable: true, password: text)
+                                                    if result ?? true {
+                                                        self?.stopLoadingView()
+                                                        return
+                                                    }
+                                                    self?.present(alert, animated: true, completion: nil)
+                                                    textFields[1].text = L10n.AccountPage.changePasswordError
+                                                    textFields[0].text = ""
+                                                    self?.stopLoadingView()
+                                                } else {
+                                                    self?.stopLoadingView()
+                                                }
+                                            }
+        }
+        alert.addAction(actionCancel)
+        alert.addAction(actionConfirm)
+        alert.addTextField {(textField) in
+            textField.placeholder = L10n.Account.passwordLabel
+            textField.isSecureTextEntry = true
+        }
+        alert.addTextField {(textField) in
+            textField.text = ""
+            textField.isUserInteractionEnabled = false
+            textField.textColor = UIColor.red
+            textField.textAlignment = .center
+            textField.borderStyle = .none
+            textField.backgroundColor = UIColor.clear
+            textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
+        }
+
+        if let textFields = alert.textFields {
+            textFields[0].rx.text.map({text in
+                if let text = text {
+                    return !text.isEmpty
+                }
+                return false
+            }).bind(to: actionConfirm.rx.isEnabled).disposed(by: self.disposeBag)
+        }
+        self.present(alert, animated: true, completion: nil)
+        alert.textFields?[1].superview?.backgroundColor = .clear
+        alert.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
+    }
+
+    func changePassword(title: String) {
+        let controller = UIAlertController(title: title,
+                                           message: nil,
+                                           preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+                                         style: .cancel)
+        let actionChange = UIAlertAction(title: L10n.Actions.doneAction,
+                                         style: .default) { [weak self] _ in
+                                            guard let textFields = controller.textFields else {
+                                                return
+                                            }
+                                            self?.showLoadingViewWithoutText()
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                                if textFields.count == 2, let password = textFields[1].text {
+                                                    _ = self?.viewModel
+                                                        .changePassword(oldPassword: "",
+                                                                        newPassword: password)
+                                                    self?.stopLoadingView()
+                                                } else if textFields.count == 4,
+                                                    let oldPassword = textFields[0].text, !oldPassword.isEmpty,
+                                                    let password = textFields[2].text {
+                                                    let result = self?.viewModel.changePassword(oldPassword: oldPassword, newPassword: password)
+                                                    if result ?? true {
+                                                        self?.stopLoadingView()
+                                                        return
+                                                    }
+                                                    self?.present(controller, animated: true, completion: nil)
+                                                    textFields[1].text = L10n.AccountPage.changePasswordError
+                                                    textFields[0].text = ""
+                                                    self?.stopLoadingView()
+                                                }
+                                            }
+        }
+        controller.addAction(actionCancel)
+        controller.addAction(actionChange)
+        if self.viewModel.hasPassword() {
+            controller.addTextField {(textField) in
+                textField.placeholder = L10n.AccountPage.oldPasswordPlaceholder
+                textField.isSecureTextEntry = true
+            }
+            controller.addTextField {(textField) in
+                textField.text = ""
+                textField.isUserInteractionEnabled = false
+                textField.textColor = UIColor.red
+                textField.textAlignment = .center
+                textField.borderStyle = .none
+                textField.backgroundColor = UIColor.clear
+                textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
+            }
+        }
+
+        controller.addTextField {(textField) in
+            textField.placeholder = L10n.AccountPage.newPasswordPlaceholder
+            textField.isSecureTextEntry = true
+        }
+
+        controller.addTextField {(textField) in
+            textField.placeholder = L10n.AccountPage.newPasswordConfirmPlaceholder
+            textField.isSecureTextEntry = true
+        }
+
+        if let textFields = controller.textFields {
+            if textFields.count == 4 {
+                Observable
+                    .combineLatest(textFields[3].rx.text,
+                                   textFields[2].rx.text) {(text1, text2) -> Bool in
+                                    return text1 == text2 }
+                    .bind(to: actionChange.rx.isEnabled)
+                    .disposed(by: self.disposeBag)
+            } else {
+                Observable
+                    .combineLatest(textFields[0].rx.text,
+                                   textFields[1].rx.text) {(text1, text2) -> Bool in
+                                    return text1 == text2 }
+                    .bind(to: actionChange.rx.isEnabled)
+                    .disposed(by: self.disposeBag)
+            }
+        }
+        self.present(controller, animated: true, completion: nil)
+        if self.viewModel.hasPassword() {
+            //remove border around text view
+            controller.textFields?[1].superview?.backgroundColor = .clear
+            controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
+        }
+    }
+
     var nameRegistrationBag = DisposeBag()
 
     func registerUsername() {
@@ -740,7 +935,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
         }
         //password text field
-        if self.viewModel.havePassord() {
+        if self.viewModel.hasPassword() {
             controller.addTextField {(textField) in
                 textField.placeholder = L10n.AccountPage.passwordPlaceholder
                 textField.isSecureTextEntry = true
@@ -835,7 +1030,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         alert.addAction(actionCancel)
         alert.addAction(actionConfirm)
 
-        if self.viewModel.havePassord() {
+        if self.viewModel.hasPassword() {
             alert.addTextField {(textField) in
                 textField.placeholder = L10n.AccountPage.revokeDevicePlaceholder
                 textField.isSecureTextEntry = true

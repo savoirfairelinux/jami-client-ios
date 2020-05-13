@@ -54,12 +54,22 @@ internal enum L10n {
   internal enum AccountPage {
     /// Block List
     internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
+    /// You could use boost mode when you do not want you history be saved. In boost mode you could only place calls. No messages, no file transfer no oncomming call will be passed. When you enable boost mode all hisory of your conversation will be removed.
+    internal static let boostModeAlertMessage = L10n.tr("Localizable", "accountPage.boostModeAlertMessage")
+    /// You could use boost mode when you do not want you history be saved. In boost mode you could only place calls. No messages, no file transfer no oncomming call will be passed. When you enable boost mode all hisory of your conversation will be removed.
+    internal static let boostModeExplanation = L10n.tr("Localizable", "accountPage.boostModeExplanation")
+    /// Change password
+    internal static let changePassword = L10n.tr("Localizable", "accountPage.changePassword")
+    /// Password incorrect
+    internal static let changePasswordError = L10n.tr("Localizable", "accountPage.changePasswordError")
     /// Contact me using "%s" on the Jami distributed communication platform: https://jami.net
     internal static func contactMeOnJamiContant(_ p1: UnsafePointer<CChar>) -> String {
       return L10n.tr("Localizable", "accountPage.contactMeOnJamiContant", p1)
     }
     /// Contact me on Jami!
     internal static let contactMeOnJamiTitle = L10n.tr("Localizable", "accountPage.contactMeOnJamiTitle")
+    /// Create password
+    internal static let createPassword = L10n.tr("Localizable", "accountPage.createPassword")
     /// Account Details
     internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader")
     /// Device revocation error
@@ -78,6 +88,8 @@ internal enum L10n {
     internal static let deviceRevoked = L10n.tr("Localizable", "accountPage.deviceRevoked")
     /// Devices
     internal static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
+    /// Enable Boost Mode
+    internal static let enableBoostMode = L10n.tr("Localizable", "accountPage.enableBoostMode")
     /// Enable Notifications
     internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications")
     /// Enable Proxy
@@ -86,8 +98,16 @@ internal enum L10n {
     internal static let linkDeviceTitle = L10n.tr("Localizable", "accountPage.linkDeviceTitle")
     /// Name
     internal static let namePlaceholder = L10n.tr("Localizable", "accountPage.namePlaceholder")
+    /// Confirm new password
+    internal static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "accountPage.newPasswordConfirmPlaceholder")
+    /// Enter new password
+    internal static let newPasswordPlaceholder = L10n.tr("Localizable", "accountPage.newPasswordPlaceholder")
+    /// To enable Boost mode you need to create account password first.
+    internal static let noBoostMode = L10n.tr("Localizable", "accountPage.noBoostMode")
     /// Your device won't receive notifications when proxy is disabled
     internal static let noProxyExplanationLabel = L10n.tr("Localizable", "accountPage.noProxyExplanationLabel")
+    /// Enter old password
+    internal static let oldPasswordPlaceholder = L10n.tr("Localizable", "accountPage.oldPasswordPlaceholder")
     /// Other
     internal static let other = L10n.tr("Localizable", "accountPage.other")
     /// Enter account password
@@ -151,6 +171,8 @@ internal enum L10n {
     internal static let clearAction = L10n.tr("Localizable", "actions.clearAction")
     /// Delete
     internal static let deleteAction = L10n.tr("Localizable", "actions.deleteAction")
+    /// Done
+    internal static let doneAction = L10n.tr("Localizable", "actions.doneAction")
   }
 
   internal enum Alerts {
