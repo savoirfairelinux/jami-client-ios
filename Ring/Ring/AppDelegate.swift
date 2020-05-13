@@ -119,6 +119,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // will enumerate and add devices once permission has been granted
         self.videoService.setupInputs()
 
+        self.audioService.connectAudioSignal()
+
         // start monitoring for network changes
         self.networkService.monitorNetworkType()
 

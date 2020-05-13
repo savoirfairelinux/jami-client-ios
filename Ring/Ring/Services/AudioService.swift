@@ -44,16 +44,6 @@ class AudioService {
 
     init(withAudioAdapter audioAdapter: AudioAdapter) {
         self.audioAdapter = audioAdapter
-        let bluetoothConnected = bluetoothAudioConnected()
-        let headphonesConnected = headphoneAudioConnected()
-        isHeadsetConnected.value = bluetoothConnected || headphonesConnected
-
-        // Listen for audio route changes
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(audioRouteChangeListener(_:)),
-            name: AVAudioSession.routeChangeNotification,
-            object: nil)
     }
 
     @objc private func audioRouteChangeListener(_ notification: Notification) {
@@ -66,6 +56,19 @@ class AudioService {
                 return
         }
         overrideAudioRoute()
+    }
+
+    func connectAudioSignal() {
+        let bluetoothConnected = bluetoothAudioConnected()
+        let headphonesConnected = headphoneAudioConnected()
+        isHeadsetConnected.value = bluetoothConnected || headphonesConnected
+
+        // Listen for audio route changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(audioRouteChangeListener(_:)),
+            name: AVAudioSession.routeChangeNotification,
+            object: nil)
     }
 
     func overrideAudioRoute() {
