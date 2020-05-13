@@ -216,6 +216,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     func start () {
         let smartListViewController = SmartlistViewController.instantiate(with: self.injectionBag)
         self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
+//        let smartListViewController = IncognitoSmartListViewController.instantiate(with: self.injectionBag)
+//               self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
     }
 
     func getConversationViewModel(participantUri: String) -> ConversationViewModel? {

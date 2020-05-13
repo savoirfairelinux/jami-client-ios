@@ -30,7 +30,7 @@ import ContactsUI
 import QuartzCore
 
 //Constants
-private struct SmartlistConstants {
+struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 64.0
     static let tableHeaderViewHeight: CGFloat = 142.0
     static let firstSectionHeightForHeader: CGFloat = 51.0
@@ -40,7 +40,6 @@ private struct SmartlistConstants {
 }
 
 // swiftlint:disable type_body_length
-// swiftlint:disable file_length
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     private let log = SwiftyBeaver.self
@@ -48,11 +47,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     // MARK: outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var conversationsTableView: UITableView!
-    @IBOutlet weak var searchResultsTableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var noConversationsView: UIView!
     @IBOutlet weak var noConversationLabel: UILabel!
-    @IBOutlet weak var searchTableViewLabel: UILabel!
     @IBOutlet weak var networkAlertLabel: UILabel!
     @IBOutlet weak var cellularAlertLabel: UILabel!
     @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
@@ -65,6 +61,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var phoneBookButton: UIButton!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var networkAlertView: UIView!
+    @IBOutlet weak var searchView: JamiSearchView!
 
     // account selection
     var accounPicker = UIPickerView()
@@ -85,8 +82,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false)
         self.setupDataSources()
-        self.setupTableViews()
+        self.setupTableView()
         self.setupSearchBar()
         self.setupUI()
         self.applyL10n()
@@ -125,7 +123,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     func applyL10n() {
         self.navigationItem.title = L10n.Global.homeTabBarTitle
         noConversationLabel.text = L10n.Smartlist.noConversation
-        self.searchBar.placeholder = L10n.Smartlist.searchBarPlaceholder
         self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
         self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
     }
@@ -134,11 +131,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     func setupUI() {
         view.backgroundColor = UIColor.jamiBackgroundColor
         conversationsTableView.backgroundColor = UIColor.jamiBackgroundColor
-        searchResultsTableView.backgroundColor = UIColor.jamiBackgroundColor
         noConversationsView.backgroundColor = UIColor.jamiBackgroundColor
         noConversationLabel.backgroundColor = UIColor.jamiBackgroundColor
         noConversationLabel.textColor = UIColor.jamiLabelColor
-        searchTableViewLabel.textColor = UIColor.jamiLabelColor
         dialpadButtonShadow.backgroundColor = UIColor.jamiBackgroundSecondaryColor
         dialpadButtonShadow.layer.shadowColor = UIColor.jamiLabelColor.cgColor
         dialpadButtonShadow.layer.shadowOffset =  CGSize.zero
@@ -257,7 +252,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             })
             .disposed(by: self.disposeBag)
         self.conversationsTableView.tableFooterView = UIView()
-        self.searchResultsTableView.tableFooterView = UIView()
     }
 
     func confugureAccountPicker() {
@@ -325,17 +319,17 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         }
 
         self.conversationsTableView.contentInset.bottom = keyboardHeight - tabBarHeight
-        self.searchResultsTableView.contentInset.bottom = keyboardHeight - tabBarHeight
+        self.searchView.searchResultsTableView.contentInset.bottom = keyboardHeight - tabBarHeight
         self.conversationsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
-        self.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
+        self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
     }
 
     @objc func keyboardWillHide(withNotification notification: Notification) {
         self.conversationsTableView.contentInset.bottom = 0
-        self.searchResultsTableView.contentInset.bottom = 0
+        self.searchView.searchResultsTableView.contentInset.bottom = 0
 
         self.conversationsTableView.scrollIndicatorInsets.bottom = 0
-        self.searchResultsTableView.scrollIndicatorInsets.bottom = 0
+        self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = 0
     }
 
     func setupDataSources() {
@@ -347,15 +341,13 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     indexPath: IndexPath,
                     conversationItem: ConversationSection.Item) in
 
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConversationCell.self)
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
                 cell.configureFromItem(conversationItem)
                 return cell
         }
 
         //Create DataSources for conversations and filtered conversations
         let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
-        let searchResultsDatasource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
-
         //Allows to delete
         conversationsDataSource.canEditRowAtIndexPath = { _, _  in
             return true
@@ -365,58 +357,24 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.viewModel.conversations
             .bind(to: self.conversationsTableView.rx.items(dataSource: conversationsDataSource))
             .disposed(by: disposeBag)
-
-        self.viewModel.searchResults
-            .bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
-            .disposed(by: disposeBag)
-
-        //Set header titles
-        searchResultsDatasource.titleForHeaderInSection = { dataSource, index in
-            return dataSource.sectionModels[index].header
-        }
     }
 
-    func setupTableViews() {
+    func setupTableView() {
         //Set row height
         self.conversationsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
-        self.searchResultsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
 
         //Register Cell
-        self.conversationsTableView.register(cellType: ConversationCell.self)
-        self.searchResultsTableView.register(cellType: ConversationCell.self)
-
-        //Bind to ViewModel to show or hide the filtered results
-        self.viewModel.isSearching.subscribe(onNext: { [unowned self] (isSearching) in
-            self.searchResultsTableView.isHidden = !isSearching
-            self.searchTableViewLabel.isHidden = !isSearching
-        }).disposed(by: disposeBag)
-
+        self.conversationsTableView.register(cellType: SmartListCell.self)
         //Deselect the rows
         self.conversationsTableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.conversationsTableView.deselectRow(at: indexPath, animated: true)
         }).disposed(by: disposeBag)
 
-        self.searchResultsTableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
-            self.searchResultsTableView.deselectRow(at: indexPath, animated: true)
-        }).disposed(by: disposeBag)
-
-        //Bind the search status label
-        self.viewModel.searchStatus
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.searchTableViewLabel.rx.text)
-            .disposed(by: disposeBag)
-
-        self.searchResultsTableView.rx.setDelegate(self).disposed(by: disposeBag)
         self.conversationsTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
 
     func setupSearchBar() {
-        self.searchBar.returnKeyType = .done
-        self.searchBar.autocapitalizationType = .none
-        self.searchBar.tintColor = UIColor.jamiMain
-        searchBar.backgroundImage = UIImage()
         searchBarShadow.backgroundColor = UIColor.clear
-        searchBar.backgroundColor = UIColor.clear
         self.searchBarShadow.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
         self.searchBarShadow.layer.shadowOffset = CGSize(width: 0.0, height: 1.5)
         self.searchBarShadow.layer.shadowOpacity = 0.2
@@ -458,40 +416,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             visualEffectView.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
             background.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
         }
-
-        //Bind the SearchBar to the ViewModel
-        self.searchBar.rx.text.orEmpty
-            .debounce(Durations.textFieldThrottlingDuration.value, scheduler: MainScheduler.instance)
-            .bind(to: self.viewModel.searchBarText)
-            .disposed(by: disposeBag)
-
-        //Show Cancel button
-        self.searchBar.rx.textDidBeginEditing.subscribe(onNext: { [unowned self] in
-            self.scanButtonLeadingConstraint.constant = -40
-            self.searchBar.setShowsCancelButton(true, animated: false)
+        self.searchView.editSearch
+            .subscribe(onNext: {[weak self] (editing) in
+            self?.scanButtonLeadingConstraint.constant = editing ? -40 : 10
+            self?.viewModel.searching.onNext(editing)
         }).disposed(by: disposeBag)
-
-        //Hide Cancel button
-        self.searchBar.rx.textDidEndEditing.subscribe(onNext: { [unowned self] in
-            self.scanButtonLeadingConstraint.constant = 10
-            self.searchBar.setShowsCancelButton(false, animated: false)
-        }).disposed(by: disposeBag)
-
-        //Cancel button event
-        self.searchBar.rx.cancelButtonClicked.subscribe(onNext: { [unowned self] in
-            self.cancelSearch()
-        }).disposed(by: disposeBag)
-
-        //Search button event
-        self.searchBar.rx.searchButtonClicked.subscribe(onNext: { [unowned self] in
-            self.searchBar.resignFirstResponder()
-        }).disposed(by: disposeBag)
-    }
-
-    func cancelSearch() {
-        self.searchBar.text = ""
-        self.searchBar.resignFirstResponder()
-        self.searchResultsTableView.isHidden = true
     }
 
     func startAccountCreation() {
@@ -500,7 +429,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func openAccountsList() {
-        if searchBar.isFirstResponder {
+        if searchView.searchBar.isFirstResponder {
             return
         }
         if accountPickerTextView.isFirstResponder {
