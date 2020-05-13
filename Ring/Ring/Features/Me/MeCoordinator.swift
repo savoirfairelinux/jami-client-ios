@@ -31,6 +31,7 @@ public enum MeState: State {
     case blockedContacts
     case needToOnboard
     case accountRemoved
+    case accountModeChanged
     case needAccountMigration(accountId: String)
 }
 
@@ -71,6 +72,8 @@ class MeCoordinator: Coordinator, StateableResponsive {
                 self.needToOnboard()
             case .accountRemoved:
                 self.accountRemoved()
+            case .accountModeChanged:
+                self.accountModeChanged()
             case .needAccountMigration(let accountId):
                 self.migrateAccount(accountId: accountId)
             }
@@ -80,6 +83,12 @@ class MeCoordinator: Coordinator, StateableResponsive {
     func needToOnboard() {
         if let parent = self.parentCoordinator as? AppCoordinator {
             parent.stateSubject.onNext(AppState.needToOnboard(animated: false, isFirstAccount: true))
+        }
+    }
+
+    func accountModeChanged() {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.accountModeSwitched)
         }
     }
 

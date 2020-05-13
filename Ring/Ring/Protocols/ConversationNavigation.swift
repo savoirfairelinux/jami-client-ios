@@ -35,6 +35,7 @@ enum ConversationState: State {
     case showContactPicker(callID: String)
     case fromCallToConversation(conversation: ConversationViewModel)
     case needAccountMigration(accountId: String)
+    case accountModeChanged
 }
 
 protocol ConversationNavigation: class {
@@ -68,6 +69,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 self.presentCallController(call: call)
             case .needAccountMigration(let accountId):
                 self.migrateAccount(accountId: accountId)
+            case .accountModeChanged:
+                self.accountModeChanged()
             default:
                 break
             }
@@ -77,6 +80,11 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     func migrateAccount(accountId: String) {
         if let parent = self.parentCoordinator as? AppCoordinator {
             parent.stateSubject.onNext(AppState.needAccountMigration(accountId: accountId))
+        }
+    }
+    func accountModeChanged() {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.accountModeSwitched)
         }
     }
 

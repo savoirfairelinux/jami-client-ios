@@ -91,12 +91,12 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     }
 
     func discard(withItem item: ContactRequestItem) -> Observable<Void> {
-        return self.contactsService.discard(contactRequest: item.contactRequest,
+        return self.contactsService.discard(from: item.contactRequest.ringId,
                                             withAccountId: item.contactRequest.accountId)
     }
 
     func ban(withItem item: ContactRequestItem) -> Observable<Void> {
-        let discardCompleted = self.contactsService.discard(contactRequest: item.contactRequest,
+        let discardCompleted = self.contactsService.discard(from: item.contactRequest.ringId,
                                                             withAccountId: item.contactRequest.accountId)
         guard let uri = JamiURI.init(schema: URIType.ring,
                                      infoHach: item.contactRequest.ringId)
