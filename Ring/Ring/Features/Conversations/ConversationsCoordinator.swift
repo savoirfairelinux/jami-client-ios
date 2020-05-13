@@ -96,6 +96,11 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         guard let account = self.accountService
             .getAccount(fromAccountId: call.accountId),
             !call.callId.isEmpty else {return}
+        if self.accountService.boothMode() {
+            self.callService.refuse(callId: call.callId)
+                .subscribe().disposed(by: self.disposeBag)
+            return
+        }
         guard let topController = getTopController(),
             !topController.isKind(of: (CallViewController).self) else {
                 return
@@ -213,7 +218,14 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.pushConversation(withConversationViewModel: conversationViewModel)
     }
 
-    func start () {
+    func start() {
+        self.navigationViewController.viewControllers.removeAll()
+        let boothMode = self.accountService.boothMode()
+        if boothMode {
+            let smartListViewController = IncognitoSmartListViewController.instantiate(with: self.injectionBag)
+            self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
+            return
+        }
         let smartListViewController = SmartlistViewController.instantiate(with: self.injectionBag)
         self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
     }

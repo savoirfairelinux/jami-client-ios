@@ -459,6 +459,9 @@ class CallViewModel: Stateable, ViewModel {
             .subscribe(onSuccess: { [weak self] callModel in
                 callModel.callUUID = UUID()
                 self?.call = callModel
+                if self?.isBoothMode() ?? false {
+                    return
+                }
                 self?.callsProvider
                     .startCall(account: account, call: callModel)
             }).disposed(by: self.disposeBag)
@@ -542,5 +545,20 @@ class CallViewModel: Stateable, ViewModel {
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
         conversationViewModel.conversation = Variable<ConversationModel>(conversation)
         self.stateSubject.onNext(ConversationState.fromCallToConversation(conversation: conversationViewModel))
+    }
+
+    func isBoothMode() -> Bool {
+        return self.accountService.boothMode()
+    }
+
+    func callFinished() {
+        guard let accountId = self.call?.accountId else {
+            return
+        }
+        if self.isBoothMode() {
+            self.contactsService.removeAllContacts(for: accountId)
+            return
+        }
+        self.showConversations()
     }
 }
