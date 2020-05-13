@@ -202,4 +202,16 @@ final class ProfileDataHelper {
             }
         }
     }
+
+    func deleteAll(dataBase: Connection) -> Bool {
+        do {
+            if try dataBase.run(contactsProfileTable.delete()) > 0 {
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
+    }
 }

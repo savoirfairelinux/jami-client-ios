@@ -211,7 +211,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func reloadDataFor(account: AccountModel) {
         self.contactsService.loadContacts(withAccount: account)
-        self.contactsService.loadContactRequests(withAccount: account)
+        self.contactsService.loadContactRequests(withAccount: account.id)
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
         self.conversationManager?
                 .prepareConversationsForAccount(accountId: account.id)
@@ -424,6 +424,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if self.accountService.boothMode() {
+            return false
+        }
         guard let handle = userActivity.startCallHandle else {
             return false
         }
