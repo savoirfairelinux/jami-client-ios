@@ -155,13 +155,13 @@ class ConversationViewModel: Stateable, ViewModel {
 
             self.contactsService
                 .getContactRequestVCard(forContactWithRingId: self.conversation.value.hash)
-                .subscribe(onSuccess: { vCard in
+                .subscribe(onSuccess: { [weak self] vCard in
                     guard let imageData = vCard.imageData else {
-                        self.log.warning("vCard for ringId: \(contactUri) has no image")
+                        self?.log.warning("vCard for ringId: \(contactUri) has no image")
                         return
                     }
-                    self.profileImageData.value = imageData
-                    self.displayName.value = VCardUtils.getName(from: vCard)
+                    self?.profileImageData.value = imageData
+                    self?.displayName.value = VCardUtils.getName(from: vCard)
                 })
                 .disposed(by: self.disposeBag)
 
@@ -202,8 +202,18 @@ class ConversationViewModel: Stateable, ViewModel {
                 .contactPresence[self.conversation.value.hash] {
                 self.contactPresence = contactPresence
             } else {
-                self.log.warning("Contact presence unknown for: \(contactUri)")
                 self.contactPresence.value = false
+                presenceService.sharedResponseStream
+                    .filter({ [weak self] serviceEvent in
+                        guard let uri: String = serviceEvent
+                            .getEventInput(ServiceEventInput.uri),
+                            let accountID: String = serviceEvent
+                                .getEventInput(ServiceEventInput.accountId) else {return false}
+                        return uri == self?.conversation.value.hash &&
+                            accountID == self?.conversation.value.accountId
+                    }).subscribe(onNext: { [weak self] _ in
+                        self?.subscribePresence()
+                    }).disposed(by: self.disposeBag)
             }
 
             if let contactUserName = contact?.userName {
@@ -212,10 +222,10 @@ class ConversationViewModel: Stateable, ViewModel {
                 self.userName.value = self.conversation.value.hash
                 // Return an observer for the username lookup
                 self.nameService.usernameLookupStatus
-                    .filter({ lookupNameResponse in
+                    .filter({ [weak self] lookupNameResponse in
                         return lookupNameResponse.address != nil &&
                             (lookupNameResponse.address == contactUri ||
-                        lookupNameResponse.address == self.conversation.value.hash)
+                        lookupNameResponse.address == self?.conversation.value.hash)
                     }).subscribe(onNext: { [weak self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
                             self?.userName.value = name
@@ -235,6 +245,15 @@ class ConversationViewModel: Stateable, ViewModel {
                     self?.removeComposingIndicatorMsg()
                 }
             }).disposed(by: self.disposeBag)
+        }
+    }
+
+    func subscribePresence() {
+        if let contactPresence = self.presenceService
+            .contactPresence[self.conversation.value.hash] {
+            self.contactPresence = contactPresence
+        } else {
+            self.contactPresence.value = false
         }
     }
 
@@ -412,6 +431,9 @@ class ConversationViewModel: Stateable, ViewModel {
                 }, onError: { [weak self] (error) in
                     self?.log.info(error)
             }).disposed(by: self.disposeBag)
+        self.presenceService.subscribeBuddy(withAccountId: currentAccount.id,
+                                            withUri: self.conversation.value.hash,
+                                            withFlag: true)
     }
 
     func block() {
@@ -422,7 +444,7 @@ class ConversationViewModel: Stateable, ViewModel {
                                                                  ban: true,
                                                                  withAccountId: accountId)
         if let contactRequest = self.contactsService.contactRequest(withRingId: contactRingId) {
-            let discardCompleted = self.contactsService.discard(contactRequest: contactRequest,
+            let discardCompleted = self.contactsService.discard(from: contactRequest.ringId,
                                                                 withAccountId: accountId)
             blockComplete = Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
                 return
@@ -443,7 +465,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
     func ban(withItem item: ContactRequestItem) -> Observable<Void> {
         let accountId = item.contactRequest.accountId
-        let discardCompleted = self.contactsService.discard(contactRequest: item.contactRequest,
+        let discardCompleted = self.contactsService.discard(from: item.contactRequest.ringId,
                                                             withAccountId: accountId)
         let removeCompleted = self.contactsService.removeContact(withUri: item.contactRequest.ringId,
                                                                  ban: true,

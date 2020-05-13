@@ -27,11 +27,16 @@ class PresenceService {
     fileprivate let log = SwiftyBeaver.self
     var contactPresence: [String: Variable<Bool>]
 
+    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    var sharedResponseStream: Observable<ServiceEvent>
+
     fileprivate let disposeBag = DisposeBag()
 
     init(withPresenceAdapter presenceAdapter: PresenceAdapter) {
         self.contactPresence = [String: Variable<Bool>]()
         self.presenceAdapter = presenceAdapter
+        self.responseStream.disposed(by: disposeBag)
+        self.sharedResponseStream = responseStream.share()
         PresenceAdapter.delegate = self
     }
 
@@ -49,12 +54,20 @@ class PresenceService {
                         withUri uri: String,
                         withFlag flag: Bool) {
         presenceAdapter.subscribeBuddy(withURI: uri, withAccountId: accountId, withFlag: flag)
+        if !flag {
+            contactPresence[uri] = nil
+            return
+        }
         if let presenceForContact = contactPresence[uri] {
             presenceForContact.value = false
             return
         }
         let observableValue = Variable<Bool>(false)
         contactPresence[uri] = observableValue
+        var event = ServiceEvent(withEventType: .presenseSubscribed)
+        event.addEventInput(.accountId, value: accountId)
+        event.addEventInput(.uri, value: uri)
+        self.responseStream.onNext(event)
     }
 }
 
