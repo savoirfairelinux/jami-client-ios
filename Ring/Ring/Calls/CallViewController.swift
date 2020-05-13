@@ -137,6 +137,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self.setAvatarView(!self.avatarView.isHidden)
                 self.callPulse.layer.cornerRadius = (self.profileImageViewWidthConstraint.constant - 20) * 0.5
             }).disposed(by: self.disposeBag)
+        sendMessageButton.isHidden = self.viewModel.isBoothMode()
+        sendMessageButton.isEnabled = !self.viewModel.isBoothMode()
+        buttonsStackView.isHidden = self.viewModel.isBoothMode()
     }
 
     @IBAction func addParticipant(_ sender: Any) {
@@ -542,7 +545,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func removeFromScreen() {
         UIDevice.current.isProximityMonitoringEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
-        self.viewModel.showConversations()
+        self.viewModel.callFinished()
         self.dismiss(animated: false)
     }
 

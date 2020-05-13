@@ -94,14 +94,14 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 indexPath: IndexPath,
                 contactItem: ContactPickerSection.Item) in
 
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConversationCell.self)
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
                 if contactItem.contacts.count < 1 {
                     return cell
                 }
-                cell.newMessagesIndicator.isHidden = true
-                cell.newMessagesLabel.isHidden = true
-                cell.lastMessageDateLabel.isHidden = true
-                cell.presenceIndicator.isHidden = true
+                cell.newMessagesIndicator?.isHidden = true
+                cell.newMessagesLabel?.isHidden = true
+                cell.lastMessageDateLabel?.isHidden = true
+                cell.presenceIndicator?.isHidden = true
                 if contactItem.contacts.count > 1 {
                     cell.avatarView.isHidden = true
                     var name = ""
@@ -119,7 +119,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
                 var contact = contactItem.contacts.first!
                 cell.nameLabel.text = contact.firstLine
-                cell.lastMessagePreviewLabel.text = contact.secondLine
+                cell.lastMessagePreviewLabel?.text = contact.secondLine
 
                 var imageData: Data?
                 if let contactProfile = contact.profile, let photo = contactProfile.photo,
@@ -138,7 +138,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                     .observeOn(MainScheduler.instance)
                     .startWith(status.value)
                     .subscribe(onNext: { precence in
-                        cell.presenceIndicator.isHidden = !precence
+                        cell.presenceIndicator?.isHidden = !precence
                     })
                     .disposed(by: cell.disposeBag)
                 return cell
@@ -155,7 +155,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     func setupTableViews() {
         self.tableView.rowHeight = 64.0
         self.tableView.delegate = self
-        self.tableView.register(cellType: ConversationCell.self)
+        self.tableView.register(cellType: SmartListCell.self)
         self.tableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: indexPath) {
                 self.viewModel.addContactToConference(contact: contactToAdd)
