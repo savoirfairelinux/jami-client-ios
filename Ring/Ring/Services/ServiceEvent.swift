@@ -51,6 +51,7 @@ enum ServiceEventType {
     case messageTypingIndicator
     case migrationEnded
     case lastDisplayedMessageUpdated
+    case presenseSubscribed
 }
 
 /**
