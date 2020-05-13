@@ -424,6 +424,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if self.accountService.boothMode() {
+            return false
+        }
         guard let handle = userActivity.startCallHandle else {
             return false
         }
