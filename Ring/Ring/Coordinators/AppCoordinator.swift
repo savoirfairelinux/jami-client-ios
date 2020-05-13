@@ -35,6 +35,7 @@ public enum AppState: State {
     case allSet
     case accountRemoved
     case needAccountMigration(accountId: String)
+    case accountModeSwitched
 }
 
 public enum VCType: String {
@@ -93,6 +94,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                 self.accountRemoved()
             case .needAccountMigration(let accountId):
                 self.migrateAccount(accountId: accountId)
+            case .accountModeSwitched:
+                self.switchAccountMode()
             }
         }).disposed(by: self.disposeBag)
     }
@@ -106,6 +109,10 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     }
 
     func accountRemoved() {
+        self.tabBarViewController.selectedIndex = 0
+    }
+    func switchAccountMode() {
+        self.childCoordinators[0].start()
         self.tabBarViewController.selectedIndex = 0
     }
 

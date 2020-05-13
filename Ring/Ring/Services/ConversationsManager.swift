@@ -54,6 +54,9 @@ class ConversationsManager: MessagesAdapterDelegate {
             return  event.eventType == ServiceEventType.newIncomingMessage
         })
             .subscribe(onNext: { [unowned self] event in
+                if self.accountsService.boothMode() {
+                    return
+                }
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                     let messageContent: String = event.getEventInput(ServiceEventInput.content),
                     let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
@@ -70,6 +73,9 @@ class ConversationsManager: MessagesAdapterDelegate {
             return  event.eventType == ServiceEventType.newOutgoingMessage
         })
             .subscribe(onNext: { [unowned self] event in
+                if self.accountsService.boothMode() {
+                    return
+                }
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                     let messageContent: String = event.getEventInput(ServiceEventInput.content),
                     let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
@@ -97,6 +103,9 @@ class ConversationsManager: MessagesAdapterDelegate {
                     event.eventType == ServiceEventType.dataTransferChanged
             })
             .subscribe(onNext: { [unowned self] event in
+                if self.accountsService.boothMode() {
+                    return
+                }
                 guard   let transferId: UInt64 = event.getEventInput(ServiceEventInput.transferId),
                     let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId),
                     let currentAccount = self.accountsService.currentAccount else {
@@ -161,6 +170,9 @@ class ConversationsManager: MessagesAdapterDelegate {
     func didReceiveMessage(_ message: [String: String], from senderAccount: String,
                            messageId: String,
                            to receiverAccountId: String) {
+        if self.accountsService.boothMode() {
+            return
+        }
         guard let content = message[textPlainMIMEType] else {
             return
         }
