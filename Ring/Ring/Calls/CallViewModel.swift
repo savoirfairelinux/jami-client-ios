@@ -543,4 +543,17 @@ class CallViewModel: Stateable, ViewModel {
         conversationViewModel.conversation = Variable<ConversationModel>(conversation)
         self.stateSubject.onNext(ConversationState.fromCallToConversation(conversation: conversationViewModel))
     }
+
+    func isBoothMode() -> Bool {
+        return self.accountService.boothMode()
+    }
+
+    func callFiniched() {
+        guard let call = self.call else {
+            return
+        }
+        if self.isBoothMode() {
+            self.contactsService.removeAllContacts(for: call.accountId)
+        }
+    }
 }

@@ -54,12 +54,22 @@ internal enum L10n {
   internal enum AccountPage {
     /// Block List
     internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
+    /// After enabling booth mode all your conversations will be removed.
+    internal static let boothModeAlertMessage = L10n.tr("Localizable", "accountPage.boothModeAlertMessage")
+    /// You could use booth mode when you do not want you conversation history to be saved. In booth mode you could only place calls. No messages, no file transfer no incomming call will be received. When you enable booth mode all your conversations will be removed.
+    internal static let boothModeExplanation = L10n.tr("Localizable", "accountPage.boothModeExplanation")
+    /// Change password
+    internal static let changePassword = L10n.tr("Localizable", "accountPage.changePassword")
+    /// Password incorrect
+    internal static let changePasswordError = L10n.tr("Localizable", "accountPage.changePasswordError")
     /// Contact me using "%s" on the Jami distributed communication platform: https://jami.net
     internal static func contactMeOnJamiContant(_ p1: UnsafePointer<CChar>) -> String {
       return L10n.tr("Localizable", "accountPage.contactMeOnJamiContant", p1)
     }
     /// Contact me on Jami!
     internal static let contactMeOnJamiTitle = L10n.tr("Localizable", "accountPage.contactMeOnJamiTitle")
+    /// Create password
+    internal static let createPassword = L10n.tr("Localizable", "accountPage.createPassword")
     /// Account Details
     internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader")
     /// Device revocation error
@@ -78,6 +88,12 @@ internal enum L10n {
     internal static let deviceRevoked = L10n.tr("Localizable", "accountPage.deviceRevoked")
     /// Devices
     internal static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader")
+    /// Disable Booth Mode
+    internal static let disableBoothMode = L10n.tr("Localizable", "accountPage.disableBoothMode")
+    /// Pleace provide your account password
+    internal static let disableBoothModeExplanation = L10n.tr("Localizable", "accountPage.disableBoothModeExplanation")
+    /// Enable Booth Mode
+    internal static let enableBoothMode = L10n.tr("Localizable", "accountPage.enableBoothMode")
     /// Enable Notifications
     internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications")
     /// Enable Proxy
@@ -86,8 +102,16 @@ internal enum L10n {
     internal static let linkDeviceTitle = L10n.tr("Localizable", "accountPage.linkDeviceTitle")
     /// Name
     internal static let namePlaceholder = L10n.tr("Localizable", "accountPage.namePlaceholder")
+    /// Confirm new password
+    internal static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "accountPage.newPasswordConfirmPlaceholder")
+    /// Enter new password
+    internal static let newPasswordPlaceholder = L10n.tr("Localizable", "accountPage.newPasswordPlaceholder")
+    /// To enable Booth mode you need to create account password first.
+    internal static let noBoothMode = L10n.tr("Localizable", "accountPage.noBoothMode")
     /// Your device won't receive notifications when proxy is disabled
     internal static let noProxyExplanationLabel = L10n.tr("Localizable", "accountPage.noProxyExplanationLabel")
+    /// Enter old password
+    internal static let oldPasswordPlaceholder = L10n.tr("Localizable", "accountPage.oldPasswordPlaceholder")
     /// Other
     internal static let other = L10n.tr("Localizable", "accountPage.other")
     /// Enter account password
@@ -151,6 +175,8 @@ internal enum L10n {
     internal static let clearAction = L10n.tr("Localizable", "actions.clearAction")
     /// Delete
     internal static let deleteAction = L10n.tr("Localizable", "actions.deleteAction")
+    /// Done
+    internal static let doneAction = L10n.tr("Localizable", "actions.doneAction")
   }
 
   internal enum Alerts {

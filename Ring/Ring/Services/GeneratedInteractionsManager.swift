@@ -38,6 +38,7 @@ class GeneratedInteractionsManager {
         self.subscribeToCallEvents()
     }
 
+    // swiftlint:disable cyclomatic_complexity
     private func subscribeToContactEvents() {
         self.contactService
             .sharedResponseStream
@@ -63,6 +64,15 @@ class GeneratedInteractionsManager {
                 var date = Date()
                 if let receivedDate: Date = contactRequestEvent.getEventInput(.date) {
                     date = receivedDate
+                }
+                if self.accountService.boothMode() {
+                    if contactRequestEvent.eventType == ServiceEventType.contactRequestReceived {
+                        self.contactService
+                            .discard(from: contactUri, withAccountId: accountID)
+                            .subscribe()
+                            .disposed(by: self.disposeBag)
+                    }
+                    return
                 }
                 var message = ""
                 switch contactRequestEvent.eventType {
@@ -108,6 +118,9 @@ class GeneratedInteractionsManager {
         self.callService
             .sharedResponseStream
             .subscribe(onNext: { [unowned self] callEvent in
+                if self.accountService.boothMode() {
+                    return
+                }
                 guard let accountID: String = callEvent.getEventInput(.accountId) else {
                     return
                 }

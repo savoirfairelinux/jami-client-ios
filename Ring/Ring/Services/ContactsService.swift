@@ -173,18 +173,18 @@ class ContactsService {
         }
     }
 
-    func discard(contactRequest: ContactRequestModel, withAccountId accountId: String) -> Observable<Void> {
+    func discard(from jamiId: String, withAccountId accountId: String) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
-            let success = self.contactsAdapter.discardTrustRequest(fromContact: contactRequest.ringId,
+            let success = self.contactsAdapter.discardTrustRequest(fromContact: jamiId,
                                                                    withAccountId: accountId)
 
             //Update the Contact request list
-            self.removeContactRequest(withRingId: contactRequest.ringId)
+            self.removeContactRequest(withRingId: jamiId)
 
             if success {
                 var event = ServiceEvent(withEventType: .contactRequestDiscarded)
                 event.addEventInput(.accountId, value: accountId)
-                event.addEventInput(.uri, value: contactRequest.ringId)
+                event.addEventInput(.uri, value: jamiId)
                 self.responseStream.onNext(event)
                 observable.on(.completed)
             } else {
@@ -379,5 +379,17 @@ extension ContactsService: ContactsAdapterDelegate {
         } catch {
             return nil
         }
+    }
+
+    func removeAllContacts(for accountId: String) {
+        self.dbManager
+            .clearAllHistoryFor(accountId: accountId)
+            .subscribe(onCompleted: { [weak self] in
+                guard let self = self else { return }
+                for contact in self.contacts.value {
+                    self.contactsAdapter.removeContact(withURI: contact.hash, accountId: accountId, ban: false)
+                    self.removeContactRequest(withRingId: contact.hash)
+                }
+            }).disposed(by: disposeBag)
     }
 }

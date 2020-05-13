@@ -73,6 +73,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var buttonsStackView: UIStackView!
 
     @IBOutlet weak var sendMessageButton: UIButton!
+    @IBOutlet weak var addParticipantButton: UIButton!
     @IBOutlet weak var inConferenceAddContactButton: UIView!
     @IBOutlet weak var conferenceCallsLeading: NSLayoutConstraint!
     @IBOutlet weak var conferenceCallsTop: NSLayoutConstraint!
@@ -137,6 +138,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self.setAvatarView(!self.avatarView.isHidden)
                 self.callPulse.layer.cornerRadius = (self.profileImageViewWidthConstraint.constant - 20) * 0.5
             }).disposed(by: self.disposeBag)
+        sendMessageButton.isHidden = self.viewModel.isBoothMode()
+        sendMessageButton.isEnabled = !self.viewModel.isBoothMode()
+        addParticipantButton.isHidden = self.viewModel.isBoothMode()
+        addParticipantButton.isEnabled = !self.viewModel.isBoothMode()
+        inConferenceAddContactButton.isHidden = self.viewModel.isBoothMode()
+        conferenceCalls.isHidden = self.viewModel.isBoothMode()
+        buttonsStackView.isHidden = self.viewModel.isBoothMode()
     }
 
     @IBAction func addParticipant(_ sender: Any) {
@@ -542,7 +550,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     func removeFromScreen() {
         UIDevice.current.isProximityMonitoringEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
-        self.viewModel.showConversations()
+        if !self.viewModel.isBoothMode() {
+             self.viewModel.showConversations()
+        }
+        self.viewModel.callFiniched()
         self.dismiss(animated: false)
     }
 

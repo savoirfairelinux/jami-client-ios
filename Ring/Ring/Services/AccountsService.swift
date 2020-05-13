@@ -265,6 +265,54 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func boothMode() -> Bool {
+        guard let selectedAccountId = UserDefaults.standard.string(forKey: selectedAccountID) else { return false }
+        let details = self.getAccountDetails(fromAccountId: selectedAccountId)
+        return details.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.boothMode)) == "true"
+    }
+
+    func setBoothMode(forAccount accountId: String, enable: Bool, password: String) -> Bool {
+        let details = self.getAccountDetails(fromAccountId: accountId)
+        let bootModeEnabled = details.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.boothMode)) == "true"
+        if bootModeEnabled == enable {
+            return true
+        }
+        let result = accountAdapter.passwordIsValid(accountId, password: password)
+        if !result {
+            return false
+        }
+        let bootMode = enable ? "true" : "false"
+        let allowCalls = enable ? "false" : "true"
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.boothMode),
+             withValue: bootMode)
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountAllowCertFromHistory),
+             withValue: allowCalls)
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountAllowCertFromTrusted),
+             withValue: allowCalls)
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountAllowCertFromContact),
+             withValue: allowCalls)
+        setAccountDetails(forAccountId: accountId, withDetails: details)
+        return true
+    }
+
+    func changePassword(forAccount accountId: String, password: String, newPassword: String) -> Bool {
+        let result = accountAdapter.changeAccountPassword(accountId, oldPassword: password, newPassword: newPassword)
+        if !result {
+            return false
+        }
+        let details = self.getAccountDetails(fromAccountId: accountId)
+        let hasPassword = newPassword.isEmpty ? "false" : "true"
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword),
+             withValue: hasPassword)
+        setAccountDetails(forAccountId: accountId, withDetails: details)
+        return true
+    }
+
     func getAccountProfile(accountId: String) -> AccountProfile? {
         return self.dbManager.accountProfile(for: accountId)
     }
@@ -490,6 +538,8 @@ class AccountsService: AccountAdapterDelegate {
         if details
             .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == filename &&
             details
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtoneEnabled)) == "false" &&
+            details
                 .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery)) == "false" &&
             details
                 .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPeerDiscovery)) == "false" &&
@@ -501,8 +551,11 @@ class AccountsService: AccountAdapterDelegate {
             .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath),
                  withValue: filename)
         details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery),
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtoneEnabled),
                  withValue: "false")
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery),
+             withValue: "false")
         details
             .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPeerDiscovery),
                  withValue: "false")
