@@ -86,7 +86,7 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
 
     lazy var hasPassord: Bool = {
         guard let currentAccount = self.accountService.currentAccount else {return true}
-        return AccountModelHelper(withAccount: currentAccount).havePassword
+        return AccountModelHelper(withAccount: currentAccount).hasPassword
     }()
 
     let accountService: AccountsService

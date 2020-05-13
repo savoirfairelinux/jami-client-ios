@@ -124,14 +124,14 @@ class ContactsService {
         }
     }
 
-    func loadContactRequests(withAccount account: AccountModel) {
+    func loadContactRequests(withAccount accountId: String) {
         self.contactRequests.value.removeAll()
         //Load trust requests from daemon
-        let trustRequestsDictionaries = self.contactsAdapter.trustRequests(withAccountId: account.id)
+        let trustRequestsDictionaries = self.contactsAdapter.trustRequests(withAccountId: accountId)
 
         //Create contact requests from daemon trust requests
         if let contactRequests = trustRequestsDictionaries?.map({ dictionary in
-            return ContactRequestModel(withDictionary: dictionary, accountId: account.id)
+            return ContactRequestModel(withDictionary: dictionary, accountId: accountId)
         }) {
             for contactRequest in contactRequests {
                 if self.contactRequest(withRingId: contactRequest.ringId) == nil {
@@ -173,18 +173,18 @@ class ContactsService {
         }
     }
 
-    func discard(contactRequest: ContactRequestModel, withAccountId accountId: String) -> Observable<Void> {
+    func discard(from jamiId: String, withAccountId accountId: String) -> Observable<Void> {
         return Observable.create { [unowned self] observable in
-            let success = self.contactsAdapter.discardTrustRequest(fromContact: contactRequest.ringId,
+            let success = self.contactsAdapter.discardTrustRequest(fromContact: jamiId,
                                                                    withAccountId: accountId)
 
             //Update the Contact request list
-            self.removeContactRequest(withRingId: contactRequest.ringId)
+            self.removeContactRequest(withRingId: jamiId)
 
             if success {
                 var event = ServiceEvent(withEventType: .contactRequestDiscarded)
                 event.addEventInput(.accountId, value: accountId)
-                event.addEventInput(.uri, value: contactRequest.ringId)
+                event.addEventInput(.uri, value: jamiId)
                 self.responseStream.onNext(event)
                 observable.on(.completed)
             } else {
@@ -378,6 +378,22 @@ extension ContactsService: ContactsAdapterDelegate {
             return try self.dbManager.getProfile(for: uri, createIfNotExists: false, accounId: accountId)
         } catch {
             return nil
+        }
+    }
+
+    func removeAllContacts(for accountId: String) {
+        DispatchQueue.global(qos: .background).async {
+            for contact in self.contacts.value {
+                self.contactsAdapter.removeContact(withURI: contact.hash, accountId: accountId, ban: false)
+            }
+            self.contacts.value.removeAll()
+            self.contactRequests.value.forEach { (request) in
+                self.contactsAdapter.discardTrustRequest(fromContact: request.ringId, withAccountId: accountId)
+            }
+            self.contactRequests.value.removeAll()
+            self.dbManager
+                .clearAllHistoryFor(accountId: accountId)
+                .subscribe().disposed(by: self.disposeBag)
         }
     }
 }
