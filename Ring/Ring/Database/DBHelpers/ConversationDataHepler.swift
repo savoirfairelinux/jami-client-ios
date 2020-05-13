@@ -132,4 +132,16 @@ final class ConversationDataHelper {
             return false
         }
     }
+
+    func deleteAll(dataBase: Connection) -> Bool {
+        do {
+            if try dataBase.run(table.delete()) > 0 {
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
+    }
 }

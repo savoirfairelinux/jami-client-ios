@@ -53,6 +53,8 @@ enum SettingsSection: SectionModelType {
         case proxyServer(value: String)
         case accountState(state: Variable<String>)
         case enableAccount
+        case changePassword
+        case boothMode
     }
 
     var items: [SectionRow] {
@@ -105,6 +107,7 @@ class MeViewModel: ViewModel, Stateable {
 
     let accountService: AccountsService
     let nameService: NameService
+    let contactService: ContactsService
 
      // MARK: - configure table sections
 
@@ -211,12 +214,14 @@ class MeViewModel: ViewModel, Stateable {
                                                            .blockedList,
                                                            .accountState(state: self.accountStatus),
                                                            .enableAccount,
+                                                           .changePassword,
+                                                           .boothMode,
                                                            .removeAccount]))
     }()
 
-    func havePassord() -> Bool {
+    func hasPassword() -> Bool {
         guard let currentAccount = self.accountService.currentAccount else {return true}
-        return AccountModelHelper(withAccount: currentAccount).havePassword
+        return AccountModelHelper(withAccount: currentAccount).hasPassword
     }
 
     lazy var jamiSettings: Observable<[SettingsSection]> = {
@@ -308,6 +313,7 @@ class MeViewModel: ViewModel, Stateable {
     required init (with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
+        self.contactService = injectionBag.contactsService
         self.secureTextEntry.onNext(true)
     }
 
@@ -434,6 +440,29 @@ class MeViewModel: ViewModel, Stateable {
             }, onError: { _ in
                 self.showActionState.value = .usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed)
             }).disposed(by: self.disposeBag)
+    }
+
+    func changePassword(oldPassword: String, newPassword: String) -> Bool {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            return false
+        }
+        return self.accountService
+            .changePassword(forAccount: accountId, password: oldPassword, newPassword: newPassword)
+    }
+
+    var switchBoothModeState = PublishSubject<Bool>()
+
+    func enableBoothMode(enable: Bool, password: String) -> Bool {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            return false
+        }
+        let result = self.accountService.setBoothMode(forAccount: accountId, enable: enable, password: password)
+        if !result {
+            return false
+        }
+        self.stateSubject.onNext(MeState.accountModeChanged)
+        self.contactService.removeAllContacts(for: accountId)
+        return true
     }
 
     func revokeDevice(deviceId: String, accountPassword password: String) {

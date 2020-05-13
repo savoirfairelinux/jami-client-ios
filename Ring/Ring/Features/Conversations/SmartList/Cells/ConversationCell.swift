@@ -28,11 +28,13 @@ class ConversationCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var newMessagesIndicator: UIView!
-    @IBOutlet weak var newMessagesLabel: UILabel!
-    @IBOutlet weak var lastMessageDateLabel: UILabel!
-    @IBOutlet weak var lastMessagePreviewLabel: UILabel!
-    @IBOutlet weak var presenceIndicator: UIView!
+    @IBOutlet weak var newMessagesIndicator: UIView?
+    @IBOutlet weak var newMessagesLabel: UILabel?
+    @IBOutlet weak var lastMessageDateLabel: UILabel?
+    @IBOutlet weak var lastMessagePreviewLabel: UILabel?
+    @IBOutlet weak var presenceIndicator: UIView?
+
+    var avatarSize: CGFloat { return 40 }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         self.backgroundColor = UIColor.jamiUITableViewCellSelection
@@ -76,21 +78,23 @@ class ConversationCell: UITableViewCell, NibReusable {
                     .addSubview(
                         AvatarView(profileImageData: profileData.element?.0,
                                    username: data,
-                                   size: 40))
+                                   size: self?.avatarSize ?? 40))
                 return
             })
             .disposed(by: self.disposeBag)
 
         // unread messages
-        self.newMessagesLabel.text = item.unreadMessages
-        self.newMessagesIndicator.isHidden = item.hideNewMessagesLabel
+        self.newMessagesLabel?.text = item.unreadMessages
+        self.newMessagesIndicator?.isHidden = item.hideNewMessagesLabel
 
         // presence
+        if self.presenceIndicator != nil {
         item.contactPresence.asObservable()
             .observeOn(MainScheduler.instance)
             .map { value in !value }
-            .bind(to: self.presenceIndicator.rx.isHidden)
+            .bind(to: self.presenceIndicator!.rx.isHidden)
             .disposed(by: self.disposeBag)
+            }
 
         // username
         item.bestName.asObservable()
@@ -100,11 +104,11 @@ class ConversationCell: UITableViewCell, NibReusable {
         self.nameLabel.lineBreakMode = .byTruncatingTail
 
         // last message date
-        self.lastMessageDateLabel.text = item.lastMessageReceivedDate
+        self.lastMessageDateLabel?.text = item.lastMessageReceivedDate
 
         // last message preview
-        self.lastMessagePreviewLabel.text = item.lastMessage
-        self.lastMessagePreviewLabel.lineBreakMode = .byTruncatingTail
+        self.lastMessagePreviewLabel?.text = item.lastMessage
+        self.lastMessagePreviewLabel?.lineBreakMode = .byTruncatingTail
 
         self.selectionStyle = .none
     }
