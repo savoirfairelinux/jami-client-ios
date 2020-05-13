@@ -428,6 +428,7 @@
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addParticipantButton" destination="sMt-dh-EHe" id="lds-Dt-KKf"/>
                         <outlet property="avatarView" destination="5E0-lB-SkS" id="zDj-oM-twh"/>
                         <outlet property="avatarViewBlurEffect" destination="uC8-vY-dHO" id="lJD-lK-7CI"/>
                         <outlet property="avatarViewImageTopConstraint" destination="82d-fj-m0F" id="z3A-J5-tFD"/>

@@ -77,5 +77,9 @@
 
 - (void)pushNotificationReceived:(NSString *) from message:(NSDictionary*) data;
 - (void)setPushNotificationToken: (NSString *) token;
+- (BOOL)enableBoothMode:(NSString *)accountId password:(NSString *)password enable:(BOOL)enable;
+- (BOOL)changeAccountPassword:(NSString *)accountId
+                  oldPassword:(NSString *)oldpassword
+                  newPassword:(NSString *)newPassword;
 
 @end

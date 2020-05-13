@@ -265,6 +265,44 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func boothMode() -> Bool {
+        guard let selectedAccountId = UserDefaults.standard.string(forKey: selectedAccountID) else { return false }
+        let details = self.getAccountDetails(fromAccountId: selectedAccountId)
+        return details.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.boothMode)) == "true"
+    }
+
+    func setBoothMode(forAccount accountId: String, enable: Bool, password: String) -> Bool {
+        let details = self.getAccountDetails(fromAccountId: accountId)
+        let bootModeEnabled = details.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.boothMode)) == "true"
+        if bootModeEnabled == enable {
+            return true
+        }
+        let result = accountAdapter.enableBoothMode(accountId, password: password, enable: enable)
+        if !result {
+            return false
+        }
+        let bootMode = enable ? "true" : "false"
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.boothMode),
+             withValue: bootMode)
+        setAccountDetails(forAccountId: accountId, withDetails: details)
+        return true
+    }
+
+    func changePassword(forAccount accountId: String, password: String, newPassword: String) -> Bool {
+        let result = accountAdapter.changeAccountPassword(accountId, oldPassword: password, newPassword: newPassword)
+        if !result {
+            return false
+        }
+        let details = self.getAccountDetails(fromAccountId: accountId)
+        let hasPassword = newPassword.isEmpty ? "false" : "true"
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword),
+             withValue: hasPassword)
+        setAccountDetails(forAccountId: accountId, withDetails: details)
+        return true
+    }
+
     func getAccountProfile(accountId: String) -> AccountProfile? {
         return self.dbManager.accountProfile(for: accountId)
     }

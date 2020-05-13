@@ -380,4 +380,15 @@ extension ContactsService: ContactsAdapterDelegate {
             return nil
         }
     }
+
+    func removeAllContacts(for accountId: String) {
+        self.dbManager
+            .clearAllHistoryFor(accountId: accountId).subscribe(onCompleted: {
+                for contact in self.contacts.value {
+                    self.contactsAdapter.removeContact(withURI: contact.hash, accountId: accountId, ban: false)
+                    self.removeContactRequest(withRingId: contact.hash)
+                }
+            }) {(_) in
+        }.disposed(by: disposeBag)
+    }
 }
