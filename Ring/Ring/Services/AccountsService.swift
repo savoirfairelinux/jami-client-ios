@@ -66,6 +66,7 @@ class AccountsService: AccountAdapterDelegate {
     private let log = SwiftyBeaver.self
 
     let selectedAccountID = "SELECTED_ACCOUNT_ID"
+    let boothModeEnabled = "BOOTH_MODE_ENABLED"
 
     /**
      Used to register the service to daemon events, injected by constructor.
@@ -263,6 +264,36 @@ class AccountsService: AccountAdapterDelegate {
                 log.error("\(error)")
             }
         }
+    }
+
+    func boothMode() -> Bool {
+        return UserDefaults.standard.bool(forKey: boothModeEnabled)
+    }
+
+    func setBoothMode(forAccount accountId: String, enable: Bool, password: String) -> Bool {
+        let enabled = UserDefaults.standard.bool(forKey: boothModeEnabled)
+        if enabled == enable {
+            return true
+        }
+        if !accountAdapter.passwordIsValid(accountId, password: password) {
+            return false
+        }
+        UserDefaults.standard.set(enable, forKey: boothModeEnabled)
+        return true
+    }
+
+    func changePassword(forAccount accountId: String, password: String, newPassword: String) -> Bool {
+        let result = accountAdapter.changeAccountPassword(accountId, oldPassword: password, newPassword: newPassword)
+        if !result {
+            return false
+        }
+        let details = self.getAccountDetails(fromAccountId: accountId)
+        let hasPassword = newPassword.isEmpty ? "false" : "true"
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword),
+             withValue: hasPassword)
+        setAccountDetails(forAccountId: accountId, withDetails: details)
+        return true
     }
 
     func getAccountProfile(accountId: String) -> AccountProfile? {
@@ -490,6 +521,8 @@ class AccountsService: AccountAdapterDelegate {
         if details
             .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == filename &&
             details
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtoneEnabled)) == "false" &&
+            details
                 .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery)) == "false" &&
             details
                 .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPeerDiscovery)) == "false" &&
@@ -501,8 +534,11 @@ class AccountsService: AccountAdapterDelegate {
             .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath),
                  withValue: filename)
         details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery),
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtoneEnabled),
                  withValue: "false")
+        details
+        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery),
+             withValue: "false")
         details
             .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPeerDiscovery),
                  withValue: "false")
