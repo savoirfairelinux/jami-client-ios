@@ -56,11 +56,11 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Enllaça aquest dispositiu a un compte";
-"welcome.createAccount" = "Create a Jami account";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.createAccount" = "Crear un compte Jami";
+"welcome.connectToManager" = "Connecta al gestor de comptes";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Salta";
 "createProfile.profileCreated" = "Endavant";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -73,7 +73,7 @@
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "Nom d'usuari";
 "createAccount.newPasswordPlaceholder" = "Contrasenya";
-"createAccount.repeatPasswordPlaceholder" = "Confirm password";
+"createAccount.repeatPasswordPlaceholder" = "Confirmi contrasenya";
 "createAccount.passwordCharactersNumberError" = "Mínim 6 caràcters";
 "createAccount.passwordNotMatchingError" = "Les contrasenyes no coincideixen";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
@@ -84,7 +84,7 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "Notificacions";
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Error de xarxa";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
@@ -106,7 +106,7 @@
 "linkToAccountManager.passwordLabel" = "Enter Password";
 "linkToAccountManager.usernamePlaceholder" = "Nom d'usuari";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerPlaceholder" = "Gestor del compte";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
@@ -114,8 +114,8 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
 "alerts.accountNoNetworkTitle" = "No es pot connectar a la xarxa";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
+"alerts.accountNoNetworkMessage" = "No s'ha pogut afegir compte perquè Jami no ha pogut connectar a la xarxa distribuïda. Comprovi la connectivitat del seu dispositiu.";
+"alerts.accountDefaultErrorTitle" = "Error desconegut";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Fer foto";
 "alerts.profileUploadPhoto" = "Upload photo";
@@ -142,14 +142,14 @@
 "actions.backAction" = "Enrere";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accepta";
-"alerts.incomingCallButtonIgnore" = "Ignore";
+"alerts.incomingCallButtonIgnore" = "Ignora";
 
 //Calls
 "calls.callItemTitle" = "Trucada";
 "calls.unknown" = "Desconegut";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
+"calls.connecting" = "Connectant…";
 "calls.searching" = "Searching…";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
@@ -161,11 +161,11 @@
 "accountPage.username" = "Nom d'usuari";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Habilita servidor intermediari";
 "accountPage.blockedContacts" = "Block List";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Habilita servidor intermediari";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "Desa";
 "accountPage.proxyPaceholder" = "Proxy address";
@@ -180,13 +180,13 @@
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
 "accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
+"accountPage.deviceRevocationWrongPassword" = "Contrasenya incorrecta";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nom";
-"accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.linkDeviceTitle" = "Vincula un altre dispositiu";
 "accountPage.other" = "Other";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Elimina el compte";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Remove";
 "accountPage.shareAccountDetails" = "Share Account Details";
@@ -213,8 +213,8 @@
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
+"account.statusOnline" = "En línia";
+"account.statusOffline" = "Fora de línia";
 "account.statusConnecting" = "Connectant";
 "account.statusUnknown" = "Desconegut";
 "account.statusConnectionerror" = "Connection Error";
@@ -240,7 +240,7 @@
 "contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Inicialitzant…";
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Rebutja";
@@ -278,7 +278,7 @@
 "generatedMessage.missedIncomingCall" = "Trucada entrant perduda";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "Preferències generals";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
@@ -287,7 +287,7 @@
 "migrateAccount.explanation" = "This account needs to be migrated";
 "migrateAccount.passwordPlaceholder" = "Introduïu la contrasenya";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Elimina el compte";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
 "migrateAccount.cancel" = "Cancel·la";
