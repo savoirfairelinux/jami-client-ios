@@ -6,6 +6,8 @@
 	<string>production</string>
     <key>com.apple.developer.pushkit.unrestricted-voip</key>
     <true/>
+    <key>com.apple.developer.usernotifications.filtering</key>
+    <true/>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
 		<string>iCloud.$(CFBundleIdentifier)</string>
