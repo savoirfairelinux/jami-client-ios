@@ -23,11 +23,7 @@
 #import "dring/videomanager_interface.h"
 #import "dring/callmanager_interface.h"
 #import "Ring-Swift.h"
-#include <pthread.h>
-#include <functional>
-#include <AVFoundation/AVFoundation.h>
 #include <mutex>
-#import "Utils.h"
 
 using namespace DRing;
 
