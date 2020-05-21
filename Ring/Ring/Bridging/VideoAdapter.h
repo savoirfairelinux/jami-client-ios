@@ -18,9 +18,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Foundation/Foundation.h>
 #import <AVFoundation/AVCaptureOutput.h>
-#import <AVFoundation/AVFoundation.h>
 
 @protocol VideoAdapterDelegate;
 
