@@ -161,16 +161,14 @@ class ConversationViewController: UIViewController,
     }
 
     @objc func imageTapped() {
-
         let alert = UIAlertController.init(title: nil,
                                            message: nil,
                                            preferredStyle: .alert)
-
-        let pictureAction = UIAlertAction(title: "Upload photo or movie", style: UIAlertAction.Style.default) {[weak self] _ in
+        let pictureAction = UIAlertAction(title: L10n.Alerts.uploadPhoto, style: UIAlertAction.Style.default) {[weak self] _ in
             self?.checkPhotoLibraryPermission()
         }
 
-        let recordVideoAction = UIAlertAction(title: "Record a video message", style: UIAlertAction.Style.default) {[weak self] _ in
+        let recordVideoAction = UIAlertAction(title: L10n.Alerts.recordVideoMessage, style: UIAlertAction.Style.default) {[weak self] _ in
             if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) ==  AVAuthorizationStatus.authorized {
                 if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) ==  AVAuthorizationStatus.authorized {
                     self?.viewModel.recordVideoFile()
@@ -204,7 +202,7 @@ class ConversationViewController: UIViewController,
             }
         }
 
-        let recordAudioAction = UIAlertAction(title: "Record an audio message", style: UIAlertAction.Style.default) { [weak self] _ in
+        let recordAudioAction = UIAlertAction(title: L10n.Alerts.recordAudioMessage, style: UIAlertAction.Style.default) { [weak self] _ in
             if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) ==  AVAuthorizationStatus.authorized {
                 self?.viewModel.recordAudioFile()
             } else {
@@ -218,7 +216,7 @@ class ConversationViewController: UIViewController,
             }
         }
 
-        let documentsAction = UIAlertAction(title: "Upload file", style: UIAlertAction.Style.default) { _ in
+        let documentsAction = UIAlertAction(title: L10n.Alerts.uploadFile, style: UIAlertAction.Style.default) { _ in
             self.importDocument()
         }
 
