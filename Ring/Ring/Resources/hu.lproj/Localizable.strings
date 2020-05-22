@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "A fotókönyvtárhoz való hozzáférést nem adták meg";
 "alerts.errorWrongCredentials" = "Nem lehet csatlakozni a megadott fiókkezelőhöz. Kérjük, ellenőrizze hitelesítő adatait.";
+"alerts.recordVideoMessage" = "Videoüzenet felvétele";
+"alerts.recordAudioMessage" = "Hangüzenet felvétele";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Letiltás";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "felhasználónév: nincs bejegyzett";
 "accountPage.credentialsHeader" = "Fiók részletek";
 "accountPage.enableProxy" = "Meghatalmazott engedélyezése";
-"accountPage.blockedContacts" = "Tiltólista";
+"accountPage.blockedContacts" = "Letiltott kapcsolatok";
 "accountPage.unblockContact" = "Letiltás feloldása";
 "accountPage.proxyAddressAlert" = "Adja meg a meghatalmazott címet";
 "accountPage.enableProxy" = "Meghatalmazott engedélyezése";

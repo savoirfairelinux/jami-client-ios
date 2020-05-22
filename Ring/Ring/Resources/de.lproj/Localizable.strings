@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "Medienzugriff nicht gewährt";
 "alerts.noLibraryPermissionsTitle" = "Zugriff auf die Bildergalerie nicht gewährt";
 "alerts.errorWrongCredentials" = "Es kann keine Verbindung mit dem angegebenen Kontoverwalter hergestellt werden. Bitte prüfe deine Zugangsdaten.";
+"alerts.recordVideoMessage" = "Videonachricht aufzeichnen";
+"alerts.recordAudioMessage" = "Sprachmitteilung aufzeichnen";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Sperren";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "Benutzername: Nicht registriert";
 "accountPage.credentialsHeader" = "Kontodetails";
 "accountPage.enableProxy" = "Proxy aktivieren";
-"accountPage.blockedContacts" = "Liste gesperrter Kontakte";
+"accountPage.blockedContacts" = "Blockierte Kontakte";
 "accountPage.unblockContact" = "ENTSPERREN";
 "accountPage.proxyAddressAlert" = "Proxy Adresse angeben";
 "accountPage.enableProxy" = "Proxy aktivieren";

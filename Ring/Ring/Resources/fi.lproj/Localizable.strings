@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "Medialupaa ei ole myönnetty";
 "alerts.noLibraryPermissionsTitle" = "Pääsyä valokuvakirjastoon ei ole myönnetty";
 "alerts.errorWrongCredentials" = "Ei voi muodostaa yhteyttä tilin hallintaan. Tarkista käyttäjätiedot";
+"alerts.recordVideoMessage" = "Tallenna videoviesti";
+"alerts.recordAudioMessage" = "Tallenna ääniviesti";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Estä";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "käyttäjätunnus: ei rekisteröity";
 "accountPage.credentialsHeader" = "Tilin tiedot";
 "accountPage.enableProxy" = "Proxy käyttöön";
-"accountPage.blockedContacts" = "Estolista";
+"accountPage.blockedContacts" = "Estetyt yhteystiedot";
 "accountPage.unblockContact" = "SALLI";
 "accountPage.proxyAddressAlert" = "Anna välityspalvelimen osoite";
 "accountPage.enableProxy" = "Proxy käyttöön";

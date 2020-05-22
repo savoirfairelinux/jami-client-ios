@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.recordVideoMessage" = "Optag en video meddelelse";
+"alerts.recordAudioMessage" = "Optag en audio samtale";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Blokér";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "brugernavn: ikke registreret";
 "accountPage.credentialsHeader" = "Kontodetaljer";
 "accountPage.enableProxy" = "Aktivér proxy";
-"accountPage.blockedContacts" = "Blokeringsliste";
+"accountPage.blockedContacts" = "Blokerede kontakter";
 "accountPage.unblockContact" = "UBLOKER";
 "accountPage.proxyAddressAlert" = "Angiv proxy-adresse";
 "accountPage.enableProxy" = "Aktivér proxy";

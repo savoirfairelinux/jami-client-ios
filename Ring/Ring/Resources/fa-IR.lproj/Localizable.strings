@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "مجوز رسانه داده نشده است";
 "alerts.noLibraryPermissionsTitle" = "دسترسی به کتابخانه تصاویر داده نشده است";
 "alerts.errorWrongCredentials" = "توانایی اتصال به مدیریت حساب ارائه‌شده را نداریم. لطفا اعتبارنامه‌های خود را بررسی کنید.";
+"alerts.recordVideoMessage" = "ضبط یک پیام تصویری";
+"alerts.recordAudioMessage" = "ضبط یک پیام صوتی";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "مسدود";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "نام کاربری: ثبت نشده";
 "accountPage.credentialsHeader" = "جزییات حساب کاربری";
 "accountPage.enableProxy" = "فعال سازی پروکسی";
-"accountPage.blockedContacts" = "لیست مسدودی";
+"accountPage.blockedContacts" = "مخاطبین مسدود‌شده";
 "accountPage.unblockContact" = "رفع مسدودی";
 "accountPage.proxyAddressAlert" = "تامین آدرس پروکسی";
 "accountPage.enableProxy" = "فعال سازی پروکسی";

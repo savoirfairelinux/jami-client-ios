@@ -71,9 +71,9 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "Username";
+"createAccount.enterNewUsernamePlaceholder" = "Nom d’utilizaire";
 "createAccount.newPasswordPlaceholder" = "Senha";
-"createAccount.repeatPasswordPlaceholder" = "Confirm password";
+"createAccount.repeatPasswordPlaceholder" = "Confirmar lo senhal";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
@@ -84,7 +84,7 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "Notificacions";
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Network error";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
@@ -104,9 +104,9 @@
 "linkToAccountManager.signIn" = "Sign In";
 "linkToAccountManager.passwordPlaceholder" = "Senha";
 "linkToAccountManager.passwordLabel" = "Enter Password";
-"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.usernamePlaceholder" = "Nom d’utilizaire";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerPlaceholder" = "Gestionari de compte";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
@@ -119,7 +119,7 @@
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Prendre fòto";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "anullar";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -133,11 +133,15 @@
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.recordVideoMessage" = "Record a video message";
+"alerts.recordAudioMessage" = "Record an audio message";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Block";
 "actions.deleteAction" = "Delete";
-"actions.cancelAction" = "Cancel";
+"actions.cancelAction" = "anullar";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Back";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
@@ -158,11 +162,11 @@
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
 "accountPage.settingsHeader" = "Paramètres";
-"accountPage.username" = "Username";
+"accountPage.username" = "Nom d’utilizaire";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Block List";
+"accountPage.blockedContacts" = "Blocked contacts";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -186,7 +190,7 @@
 "accountPage.namePlaceholder" = "Name";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Other";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Suprimir compte";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Remove";
 "accountPage.shareAccountDetails" = "Share Account Details";
@@ -205,7 +209,7 @@
 "account.sipPassword" = "Senha";
 "account.sipServer" = "SIP Server";
 "account.port" = "Pòrt";
-"account.proxyServer" = "Proxy";
+"account.proxyServer" = "Servidor mandatari";
 "account.createSipAccount" = "Create Sip Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Enter Password";
@@ -249,7 +253,7 @@
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Acceptar";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "anullar";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -263,7 +267,7 @@
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Acceptar";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "anullar";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Enviar";
 
@@ -278,7 +282,7 @@
 "generatedMessage.missedIncomingCall" = "Missed incoming call";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "Paramètres generals";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
@@ -287,10 +291,10 @@
 "migrateAccount.explanation" = "This account needs to be migrated";
 "migrateAccount.passwordPlaceholder" = "Enter password";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Suprimir compte";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "anullar";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.recordVideoMessage" = "Record a video message";
+"alerts.recordAudioMessage" = "Record an audio message";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Bloquear";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "utilizador: não registado";
 "accountPage.credentialsHeader" = "Detalhes da Conta";
 "accountPage.enableProxy" = "Ativar Proxy";
-"accountPage.blockedContacts" = "Lista de Bloqueados";
+"accountPage.blockedContacts" = "Blocked contacts";
 "accountPage.unblockContact" = "DESBLOQUEAR";
 "accountPage.proxyAddressAlert" = "Forneça o endereço do proxy";
 "accountPage.enableProxy" = "Ativar Proxy";

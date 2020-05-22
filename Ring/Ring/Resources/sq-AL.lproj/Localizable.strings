@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
 "alerts.errorWrongCredentials" = "S’lidhet dot te përgjegjësi i dhënë i llogarive. Ju lutemi, kontrolloni kredencialet tuaja";
+"alerts.recordVideoMessage" = "Regjistroni një mesazh video";
+"alerts.recordAudioMessage" = "Incizoni një mesazh audio";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Bllokoje";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "emër përdoruesi: jo i regjistruar";
 "accountPage.credentialsHeader" = "Hollësi Llogarie";
 "accountPage.enableProxy" = "Aktivizo Ndërmjetës";
-"accountPage.blockedContacts" = "Bllokoje Listën";
+"accountPage.blockedContacts" = "Kontakte të bllokuar";
 "accountPage.unblockContact" = "ZHBLLOKOJE";
 "accountPage.proxyAddressAlert" = "Jepni adresë ndërmjetësi";
 "accountPage.enableProxy" = "Aktivizo Ndërmjetës";

@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "未給予媒體權限";
 "alerts.noLibraryPermissionsTitle" = "無法存取相簿";
 "alerts.errorWrongCredentials" = "無法連線至提供的帳號管理員。請檢查您的憑證";
+"alerts.recordVideoMessage" = "錄製影片訊息";
+"alerts.recordAudioMessage" = "錄製音訊訊息";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "阻擋";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "使用者名稱：未註冊";
 "accountPage.credentialsHeader" = "帳號詳細資訊";
 "accountPage.enableProxy" = "啟用代理伺服器";
-"accountPage.blockedContacts" = "黑名單";
+"accountPage.blockedContacts" = "已阻擋的聯絡人";
 "accountPage.unblockContact" = "取消阻擋";
 "accountPage.proxyAddressAlert" = "提供代理伺服器附加元件";
 "accountPage.enableProxy" = "啟用代理伺服器";

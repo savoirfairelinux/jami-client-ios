@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "L'accès au média non autorisé";
 "alerts.noLibraryPermissionsTitle" = "L'accès à la bibliothèque de photos non autorisé";
 "alerts.errorWrongCredentials" = "Je n'arrive pas à me connecter à votre gestionnaire de compte. Vérifiez vos éléments d'authentification.";
+"alerts.recordVideoMessage" = "Envoyer un message vidéo";
+"alerts.recordAudioMessage" = "Envoyer un message vocal";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Bloquer";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
 "accountPage.credentialsHeader" = "Détails du compte";
 "accountPage.enableProxy" = "Utiliser un nœud délégataire";
-"accountPage.blockedContacts" = "Liste des utilisateurs bloqués";
+"accountPage.blockedContacts" = "Contacts bloqués";
 "accountPage.unblockContact" = "Débloquer";
 "accountPage.proxyAddressAlert" = "Fournir l'adresse du nœud délégataire";
 "accountPage.enableProxy" = "Utiliser un nœud délégataire";
@@ -190,7 +194,7 @@
 "accountPage.removeAccountMessage" = "En cliquant \"Remove\" vous supprimerez ce compte de cet appareil! Cette action ne peut être annulée. Aussi, votre nom enregistré pourrait être perdu.";
 "accountPage.removeAccountButton" = "Enlever";
 "accountPage.shareAccountDetails" = "Partager les détails du compte ";
-"accountPage.contactMeOnJamiTitle" = "Contactez moi sur Jami !";
+"accountPage.contactMeOnJamiTitle" = "Contactez moi sur Jami!";
 "accountPage.contactMeOnJamiContant" = "Contactez-moi par l'identifiant : %s sur la plateforme distribuée de communication Jami. https://jami.net ";
 "accountPage.registerNameTitle" = "Enregistrer un nom d'utilisateur";
 "accountPage.passwordPlaceholder" = "Entrer le mot de passe de votre compte";

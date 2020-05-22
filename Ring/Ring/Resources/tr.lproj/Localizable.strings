@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "Medya izni verilmedi";
 "alerts.noLibraryPermissionsTitle" = "Fotoğraf kitaplığına erişim izni verilmedi";
 "alerts.errorWrongCredentials" = "Sağlanan hesap yöneticisine bağlanılamıyor. Lütfen kimlik bilgilerinizi kontrol edin";
+"alerts.recordVideoMessage" = "Record a video message";
+"alerts.recordAudioMessage" = "Record an audio message";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Engelleme";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "kullanıcı adı: kayıtlı değil";
 "accountPage.credentialsHeader" = "Hesap ayrıntıları";
 "accountPage.enableProxy" = "Vekil sunucuyu etkinleştir";
-"accountPage.blockedContacts" = "Engelleme listesi";
+"accountPage.blockedContacts" = "Blocked contacts";
 "accountPage.unblockContact" = "ENGELİ KALDIR";
 "accountPage.proxyAddressAlert" = "Vekil sunucu adresi sağlayın";
 "accountPage.enableProxy" = "Vekil sunucuyu etkinleştir";

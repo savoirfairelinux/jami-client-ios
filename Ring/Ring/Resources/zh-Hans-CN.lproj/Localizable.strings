@@ -133,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "未授予媒体权限";
 "alerts.noLibraryPermissionsTitle" = "未授予照片库访问权限";
 "alerts.errorWrongCredentials" = "无法连接到提供的账户管理器。请检查您的凭据。";
+"alerts.recordVideoMessage" = "录制视频信息";
+"alerts.recordAudioMessage" = "录制语音信息";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "屏蔽";
@@ -162,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "用户名：未被注册";
 "accountPage.credentialsHeader" = "账户详情";
 "accountPage.enableProxy" = "启用代理";
-"accountPage.blockedContacts" = "屏蔽列表";
+"accountPage.blockedContacts" = "已屏蔽的联系人";
 "accountPage.unblockContact" = "取消屏蔽";
 "accountPage.proxyAddressAlert" = "提供代理地址";
 "accountPage.enableProxy" = "启用代理";
