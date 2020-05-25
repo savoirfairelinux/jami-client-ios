@@ -166,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "gebruikersnaam: niet geregistreerd";
 "accountPage.credentialsHeader" = "Accountgegevens";
 "accountPage.enableProxy" = "Proxy inschakelen";
-"accountPage.blockedContacts" = "Blocked contacts";
+"accountPage.blockedContacts" = "Geblokkeerde contacten";
 "accountPage.unblockContact" = "Deblokkeren";
 "accountPage.proxyAddressAlert" = "Voer proxyadres in";
 "accountPage.enableProxy" = "Proxy inschakelen";

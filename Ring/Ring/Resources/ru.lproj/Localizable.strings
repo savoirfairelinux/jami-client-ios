@@ -133,8 +133,8 @@
 "alerts.noMediaPermissionsTitle" = "Не прав доступа к медиа";
 "alerts.noLibraryPermissionsTitle" = "Не предоставлен доступ к библиотеке фотографий";
 "alerts.errorWrongCredentials" = "Не удалось подключиться к предоставленному менеджеру учетных записей. Пожалуйста, проверьте Ваши учетные данные.";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
+"alerts.recordVideoMessage" = "Записать видео-сообщение";
+"alerts.recordAudioMessage" = "Записать голосовое сообщение";
 "alerts.uploadFile" = "Upload file";
 "alerts.uploadPhoto" = "Upload photo or movie";
 
@@ -166,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "имя пользователя: не зарегистрировано";
 "accountPage.credentialsHeader" = "Информация об аккаунте";
 "accountPage.enableProxy" = "Включить прокси";
-"accountPage.blockedContacts" = "Blocked contacts";
+"accountPage.blockedContacts" = "Заблокированные контакты";
 "accountPage.unblockContact" = "РАЗБЛОКИРОВАТЬ";
 "accountPage.proxyAddressAlert" = "Укажите адрес прокси";
 "accountPage.enableProxy" = "Включить прокси";

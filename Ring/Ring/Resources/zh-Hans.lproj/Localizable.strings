@@ -135,8 +135,8 @@
 "alerts.errorWrongCredentials" = "無法連線至提供的帳號管理員。請檢查您的憑證";
 "alerts.recordVideoMessage" = "錄製影片訊息";
 "alerts.recordAudioMessage" = "錄製音訊訊息";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.uploadFile" = "上傳檔案";
+"alerts.uploadPhoto" = "上傳照片或電影";
 
 //Actions
 "actions.blockAction" = "阻擋";

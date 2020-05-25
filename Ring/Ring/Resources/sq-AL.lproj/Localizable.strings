@@ -135,8 +135,8 @@
 "alerts.errorWrongCredentials" = "S’lidhet dot te përgjegjësi i dhënë i llogarive. Ju lutemi, kontrolloni kredencialet tuaja";
 "alerts.recordVideoMessage" = "Regjistroni një mesazh video";
 "alerts.recordAudioMessage" = "Incizoni një mesazh audio";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.uploadFile" = "Ngarkoni kartelë";
+"alerts.uploadPhoto" = "Ngarkoni foto ose film";
 
 //Actions
 "actions.blockAction" = "Bllokoje";

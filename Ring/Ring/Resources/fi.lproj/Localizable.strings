@@ -135,8 +135,8 @@
 "alerts.errorWrongCredentials" = "Ei voi muodostaa yhteyttä tilin hallintaan. Tarkista käyttäjätiedot";
 "alerts.recordVideoMessage" = "Tallenna videoviesti";
 "alerts.recordAudioMessage" = "Tallenna ääniviesti";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.uploadFile" = "Lähetä tiedosto";
+"alerts.uploadPhoto" = "Lähetä kuva tai video";
 
 //Actions
 "actions.blockAction" = "Estä";

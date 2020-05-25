@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Invitaciones";
 "global.meTabBarTitle" = "Cuenta";
 "global.ok" = "Okay";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Libre en el sentido de libertad";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -165,11 +165,11 @@
 "accountPage.username" = "Nombre de usuario";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Habilitar Proxy";
 "accountPage.blockedContacts" = "Contactos bloqueados";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Habilitar Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "Save";
 "accountPage.proxyPaceholder" = "Proxy address";
@@ -184,7 +184,7 @@
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
 "accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
+"accountPage.deviceRevocationWrongPassword" = "Contraseña incorrecta";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nombre";
