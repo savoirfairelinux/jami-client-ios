@@ -57,7 +57,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Lier cet appareil à un compte";
 "welcome.createAccount" = "Créer un compte Jami";
-"welcome.connectToManager" = "Se connecter à la gestion des comptes";
+"welcome.connectToManager" = "Se connecter à partir d'un serveur d'entreprise";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Passer";
@@ -115,7 +115,7 @@
 "alerts.accountAddedTitle" = "Account Added";
 "alerts.accountNoNetworkTitle" = "Can't connect to the network";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
+"alerts.accountDefaultErrorTitle" = "Erreur inconnue";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
@@ -124,19 +124,19 @@
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmBlockContactTitle" = "Bloquer ce contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
+"alerts.confirmDeleteConversationTitle" = "Supprimer cette conversation";
 "alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.recordVideoMessage" = "Enregistrer un message vidéo";
+"alerts.recordAudioMessage" = "Enregistrer un message audio";
+"alerts.uploadFile" = "Télécharger un fichier";
+"alerts.uploadPhoto" = "Télécharger une photo ou un film";
 
 //Actions
 "actions.blockAction" = "Block";
@@ -150,7 +150,7 @@
 
 //Calls
 "calls.callItemTitle" = "Call";
-"calls.unknown" = "Unknown";
+"calls.unknown" = "Inconnu";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Sonne...";
 "calls.connecting" = "En cours de connexion ...";
@@ -166,7 +166,7 @@
 "accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
 "accountPage.credentialsHeader" = "Détails du compte";
 "accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Blocked contacts";
+"accountPage.blockedContacts" = "Contacts bloqués";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -181,18 +181,18 @@
 "accountPage.revokeDeviceButton" = "Révoquer";
 "accountPage.revokeDevicePlaceholder" = "Entrer votre mot de passe";
 "accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
+"accountPage.deviceRevocationProgress" = "En cours de révocation...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationTryAgain" = "Essayez encore";
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
+"accountPage.deviceRevocationUnknownDevice" = "Appareil inconnu";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nom";
 "accountPage.linkDeviceTitle" = "Lier autre appareil";
 "accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Supprimer le compte";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-"accountPage.removeAccountButton" = "Remove";
+"accountPage.removeAccountButton" = "Supprimer";
 "accountPage.shareAccountDetails" = "Partager les détails du compte";
 "accountPage.contactMeOnJamiTitle" = "Contactez moi sur Jami !";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
@@ -220,12 +220,12 @@
 "account.statusOnline" = "Online";
 "account.statusOffline" = "Offline";
 "account.statusConnecting" = "Connecting";
-"account.statusUnknown" = "Unknown";
+"account.statusUnknown" = "Inconnu";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Aucun contact bloqué";
 
 //Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";
@@ -240,8 +240,8 @@
 "contactPage.startVideoCall" = "Démarrer un appel vidéo";
 "contactPage.sendMessage" = "Envoyer un message";
 "contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.blockContact" = "Bloquer ce contact";
+"contactPage.removeConversation" = "Supprimer la conversation";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
