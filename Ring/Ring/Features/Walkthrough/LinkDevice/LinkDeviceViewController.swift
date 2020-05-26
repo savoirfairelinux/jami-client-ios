@@ -57,6 +57,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.configureWalkrhroughNavigationBar()
         self.view.layoutIfNeeded()
         self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        linkButton.titleLabel?.ajustToTextSize()
 
         self.pinTextField.tintColor = UIColor.jamiSecondary
         self.passwordTextField.tintColor = UIColor.jamiSecondary

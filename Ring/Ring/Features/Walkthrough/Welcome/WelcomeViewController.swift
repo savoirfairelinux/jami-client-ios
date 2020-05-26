@@ -56,6 +56,10 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.createSipAccountButton.alpha = 1
             self.connectToAccountManagerButton.alpha = 1
         }
+        createAccountButton.titleLabel?.ajustToTextSize()
+        linkDeviceButton.titleLabel?.ajustToTextSize()
+        connectToAccountManagerButton.titleLabel?.ajustToTextSize()
+        createSipAccountButton.titleLabel?.ajustToTextSize()
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.linkDeviceButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.connectToAccountManagerButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
@@ -99,6 +103,13 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         view.backgroundColor = UIColor.jamiBackgroundColor
         self.welcomeTextLabel.textColor = UIColor.jamiLabelColor
         self.createSipAccountButton.setTitleColor(UIColor.jamiTextBlue, for: .normal)
+        NotificationCenter.default.rx
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (_) in
+                self?.configureWalkrhroughNavigationBar()
+                self?.updateButtonsSize()
+            }).disposed(by: self.disposeBag)
     }
 
     func applyL10n() {
@@ -127,6 +138,12 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         }
     }
 
+    func updateButtonsSize() {
+        self.createAccountButton.updateGradientFrame()
+        self.linkDeviceButton.updateGradientFrame()
+        self.connectToAccountManagerButton.updateGradientFrame()
+        self.view.layoutIfNeeded()
+   }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.tintColor = UIColor.jamiSecondary
@@ -134,6 +151,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
+        self.view.layoutIfNeeded()
+        updateButtonsSize()
     }
-
 }

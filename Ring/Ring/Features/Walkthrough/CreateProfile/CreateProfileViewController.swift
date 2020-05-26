@@ -55,6 +55,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
         // Style
         self.skipButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        skipButton.titleLabel?.ajustToTextSize()
         self.profileImageView.layer.shadowColor = UIColor.gray.cgColor
         self.profileImageView.layer.shadowOpacity = 0.5
         self.profileImageView.layer.shadowOffset = CGSize.zero

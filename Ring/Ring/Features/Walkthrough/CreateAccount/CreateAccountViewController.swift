@@ -71,6 +71,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.scrollView.alwaysBounceHorizontal = false
         self.scrollView.alwaysBounceVertical = true
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        createAccountButton.titleLabel?.ajustToTextSize()
         self.usernameTextField.becomeFirstResponder()
         self.usernameTextField.tintColor = UIColor.jamiSecondary
         self.passwordTextField.tintColor = UIColor.jamiSecondary
@@ -85,7 +86,8 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+        NotificationCenter.default.rx
+        .notification(UIDevice.orientationDidChangeNotification)
         .observeOn(MainScheduler.instance)
         .subscribe(onNext: { [weak self] (_) in
             self?.createAccountButton.updateGradientFrame()

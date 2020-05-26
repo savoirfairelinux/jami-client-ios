@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1yn-Mj-8Ek">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1yn-Mj-8Ek">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="343"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fat-TI-8jn">
-                                                <rect key="frame" x="40" y="20" width="295" height="323"/>
+                                                <rect key="frame" x="20" y="20" width="335" height="323"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="edM-LD-fKX">
                                                         <rect key="frame" x="0.0" y="0.0" width="102" height="22"/>
@@ -47,7 +47,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3CA-fY-2S2" customClass="DesignableTextField" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="32" width="295" height="50"/>
+                                                        <rect key="frame" x="0.0" y="32" width="335" height="50"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="qQ4-hd-6jc"/>
@@ -81,7 +81,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FyJ-Ke-ba3" customClass="DesignableTextField" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="142" width="295" height="50"/>
+                                                        <rect key="frame" x="0.0" y="142" width="335" height="50"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="IYK-P5-8Up"/>
@@ -106,16 +106,16 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLR-na-fmE">
-                                                        <rect key="frame" x="0.0" y="217" width="295" height="31"/>
+                                                        <rect key="frame" x="0.0" y="217" width="335" height="31"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYz-Rm-Qsp" userLabel="Enable Notifications Label">
-                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="31"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="286" height="31"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1UV-Vn-dMF" userLabel="Notifications Switch">
-                                                                <rect key="frame" x="246" y="0.0" width="51" height="31"/>
+                                                                <rect key="frame" x="286" y="0.0" width="51" height="31"/>
                                                                 <color key="onTintColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </switch>
                                                         </subviews>
@@ -131,7 +131,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLV-X1-oI7" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="273" width="295" height="50"/>
+                                                        <rect key="frame" x="0.0" y="273" width="335" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="3lO-u5-XKW"/>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="U4p-lk-qhz"/>
@@ -160,8 +160,8 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="fat-TI-8jn" firstAttribute="top" secondItem="HlM-9Z-7gA" secondAttribute="top" constant="20" id="26U-te-Y7U"/>
-                                            <constraint firstItem="fat-TI-8jn" firstAttribute="leading" secondItem="HlM-9Z-7gA" secondAttribute="leading" priority="750" constant="40" id="3uM-7j-awQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="fat-TI-8jn" secondAttribute="trailing" priority="750" constant="40" id="GPw-na-Z5B"/>
+                                            <constraint firstItem="fat-TI-8jn" firstAttribute="leading" secondItem="HlM-9Z-7gA" secondAttribute="leading" priority="750" constant="20" id="3uM-7j-awQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="fat-TI-8jn" secondAttribute="trailing" priority="750" constant="20" id="GPw-na-Z5B"/>
                                             <constraint firstItem="fat-TI-8jn" firstAttribute="centerX" secondItem="HlM-9Z-7gA" secondAttribute="centerX" id="Stt-gY-7Vh"/>
                                             <constraint firstAttribute="bottom" secondItem="fat-TI-8jn" secondAttribute="bottom" id="jvT-T4-Tex"/>
                                         </constraints>

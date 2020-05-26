@@ -116,6 +116,7 @@
                                                                     <rect key="frame" x="15" y="0.0" width="184.5" height="44"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                                     <state key="normal" title="   Video Call" image="video_running">
                                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </state>
@@ -132,6 +133,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="184.5" height="44"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                                     <state key="normal" title="   Audio Call" image="call_button">
                                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </state>

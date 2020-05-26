@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="475-LA-El7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="475-LA-El7">
     <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -179,8 +179,8 @@
                                             <constraint firstAttribute="height" constant="800" id="BuH-dc-4uY"/>
                                             <constraint firstItem="cZa-pp-ILv" firstAttribute="centerX" secondItem="kQW-jH-EMh" secondAttribute="centerX" id="J9V-hd-HTu"/>
                                             <constraint firstItem="cZa-pp-ILv" firstAttribute="top" secondItem="kQW-jH-EMh" secondAttribute="top" id="Vg5-Be-bil"/>
-                                            <constraint firstItem="cZa-pp-ILv" firstAttribute="leading" secondItem="kQW-jH-EMh" secondAttribute="leading" priority="750" constant="40" id="mBs-Fq-N0u"/>
-                                            <constraint firstAttribute="trailing" secondItem="cZa-pp-ILv" secondAttribute="trailing" priority="750" constant="40" id="v3a-QY-a5x"/>
+                                            <constraint firstItem="cZa-pp-ILv" firstAttribute="leading" secondItem="kQW-jH-EMh" secondAttribute="leading" priority="750" constant="20" id="mBs-Fq-N0u"/>
+                                            <constraint firstAttribute="trailing" secondItem="cZa-pp-ILv" secondAttribute="trailing" priority="750" constant="20" id="v3a-QY-a5x"/>
                                         </constraints>
                                     </view>
                                 </subviews>

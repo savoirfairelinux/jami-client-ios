@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="byn-Xz-pFs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="byn-Xz-pFs">
     <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -205,10 +205,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="hXV-Wg-kt6" secondAttribute="bottom" id="Bm9-i4-cTi"/>
-                                            <constraint firstAttribute="trailing" secondItem="hXV-Wg-kt6" secondAttribute="trailing" priority="750" constant="40" id="JJO-KH-cOP"/>
+                                            <constraint firstAttribute="trailing" secondItem="hXV-Wg-kt6" secondAttribute="trailing" priority="750" constant="20" id="JJO-KH-cOP"/>
                                             <constraint firstItem="hXV-Wg-kt6" firstAttribute="centerX" secondItem="daQ-3e-VKq" secondAttribute="centerX" id="RFU-L5-BJo"/>
                                             <constraint firstItem="hXV-Wg-kt6" firstAttribute="top" secondItem="daQ-3e-VKq" secondAttribute="top" constant="20" id="VAG-cb-TWE"/>
-                                            <constraint firstItem="hXV-Wg-kt6" firstAttribute="leading" secondItem="daQ-3e-VKq" secondAttribute="leading" priority="750" constant="40" id="tdh-cX-abZ"/>
+                                            <constraint firstItem="hXV-Wg-kt6" firstAttribute="leading" secondItem="daQ-3e-VKq" secondAttribute="leading" priority="750" constant="20" id="tdh-cX-abZ"/>
                                         </constraints>
                                     </view>
                                 </subviews>

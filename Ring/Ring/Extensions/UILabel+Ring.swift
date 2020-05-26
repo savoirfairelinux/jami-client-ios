@@ -30,4 +30,12 @@ extension UILabel {
                                 range: NSRange(location: 0, length: withText.utf16.count))
         self.attributedText = attrString
     }
+
+    func ajustToTextSize() {
+        self.minimumScaleFactor = 0.5
+        self.numberOfLines = 0
+        self.adjustsFontSizeToFitWidth = true
+        self.textAlignment = .center
+        self.lineBreakMode = .byWordWrapping
+    }
 }

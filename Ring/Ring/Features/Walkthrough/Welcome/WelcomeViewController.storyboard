@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
     <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,7 +30,7 @@
                                                     <constraint firstAttribute="width" constant="100" id="TaY-2a-CCG"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to jami !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to jami !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
                                                 <rect key="frame" x="383.5" y="221" width="257.5" height="43"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="36"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -39,7 +39,7 @@
                                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                                 <rect key="frame" x="362" y="304" width="300" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="FEf-kf-jCs"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="FEf-kf-jCs"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
@@ -53,7 +53,7 @@
                                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                                 <rect key="frame" x="362" y="374" width="300" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="YW4-Sc-61P"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="YW4-Sc-61P"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
@@ -68,8 +68,7 @@
                                                 <rect key="frame" x="362" y="444" width="300" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="dWY-2h-Jo8"/>
-                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="xe5-20-YOQ"/>
-                                                    <constraint firstAttribute="height" constant="50" id="xto-yX-yFM"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="xto-yX-yFM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
@@ -83,7 +82,7 @@
                                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHN-iS-Mdb" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                                 <rect key="frame" x="362" y="514" width="300" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="o1x-x5-0z2"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="o1x-x5-0z2"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
                                                 <state key="normal" title="create Sip account">
@@ -97,6 +96,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="djg-zh-qNA" secondAttribute="centerX" id="2I1-0R-aRl"/>
+                                            <constraint firstItem="E4b-Zv-unB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="djg-zh-qNA" secondAttribute="leading" constant="20" id="5VL-fW-ruk"/>
                                             <constraint firstItem="kHN-iS-Mdb" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="7r4-TP-Df9"/>
                                             <constraint firstItem="Wd6-vQ-gaH" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="9XM-f1-twm"/>
                                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="top" secondItem="bu0-90-MB5" secondAttribute="bottom" constant="20" id="Edo-KX-6sz"/>
@@ -104,6 +104,7 @@
                                             <constraint firstItem="Wd6-vQ-gaH" firstAttribute="top" secondItem="QLK-gs-fOJ" secondAttribute="bottom" constant="20" id="Rpw-PU-14b"/>
                                             <constraint firstItem="kHN-iS-Mdb" firstAttribute="top" secondItem="Wd6-vQ-gaH" secondAttribute="bottom" constant="20" id="eKk-yN-Id4"/>
                                             <constraint firstItem="bu0-90-MB5" firstAttribute="centerX" secondItem="djg-zh-qNA" secondAttribute="centerX" id="fuH-3p-ssn"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E4b-Zv-unB" secondAttribute="trailing" constant="20" id="kyK-k1-xsg"/>
                                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="centerX" secondItem="djg-zh-qNA" secondAttribute="centerX" id="lwf-Rd-3hc"/>
                                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="trailing" secondItem="bu0-90-MB5" secondAttribute="trailing" id="lzM-cm-1nj"/>
                                             <constraint firstItem="QLK-gs-fOJ" firstAttribute="leading" secondItem="bu0-90-MB5" secondAttribute="leading" id="mt4-7Z-eR3"/>
@@ -135,8 +136,8 @@
                             <constraint firstItem="X8i-r8-BbF" firstAttribute="trailing" secondItem="hvJ-fJ-PMc" secondAttribute="trailing" id="InM-7Y-w4b"/>
                             <constraint firstItem="X8i-r8-BbF" firstAttribute="leading" secondItem="hvJ-fJ-PMc" secondAttribute="leading" id="Mxh-zn-bSX"/>
                             <constraint firstItem="X8i-r8-BbF" firstAttribute="bottom" secondItem="hvJ-fJ-PMc" secondAttribute="bottom" id="bnM-Bf-Zwh"/>
-                            <constraint firstItem="hvJ-fJ-PMc" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bu0-90-MB5" secondAttribute="trailing" constant="10" id="h6u-zb-Bvk"/>
-                            <constraint firstItem="bu0-90-MB5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hvJ-fJ-PMc" secondAttribute="leading" constant="10" id="pf3-7r-uP4"/>
+                            <constraint firstItem="hvJ-fJ-PMc" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bu0-90-MB5" secondAttribute="trailing" constant="20" id="h6u-zb-Bvk"/>
+                            <constraint firstItem="bu0-90-MB5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hvJ-fJ-PMc" secondAttribute="leading" constant="20" id="pf3-7r-uP4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hvJ-fJ-PMc"/>
                     </view>

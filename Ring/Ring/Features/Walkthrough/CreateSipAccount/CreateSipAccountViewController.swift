@@ -50,6 +50,7 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         self.userNameTextField.becomeFirstResponder()
         self.configurePasswordField()
         self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        createAccountButton.titleLabel?.ajustToTextSize()
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

@@ -83,6 +83,8 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
         view.backgroundColor = UIColor.jamiBackgroundSecondaryColor
         self.placeVideoCall.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.placeAudioCall.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        placeVideoCall.titleLabel?.ajustToTextSize()
+        placeAudioCall.titleLabel?.ajustToTextSize()
         self.boothSwitch.setTitleColor(.jamiTextSecondary, for: .normal)
         self.searchView.editSearch
             .subscribe(onNext: {[weak self] (editing) in

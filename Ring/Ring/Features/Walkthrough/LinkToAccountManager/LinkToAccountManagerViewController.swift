@@ -47,6 +47,7 @@ var viewModel: LinkToAccountManagerViewModel!
         self.view.layoutIfNeeded()
         self.userNameTextField.becomeFirstResponder()
         self.signInButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        signInButton.titleLabel?.ajustToTextSize()
         configureWalkrhroughNavigationBar()
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
