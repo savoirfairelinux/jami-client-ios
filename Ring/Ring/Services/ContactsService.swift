@@ -391,9 +391,6 @@ extension ContactsService: ContactsAdapterDelegate {
                 self.contactsAdapter.discardTrustRequest(fromContact: request.ringId, withAccountId: accountId)
             }
             self.contactRequests.value.removeAll()
-            self.dbManager
-                .clearAllHistoryFor(accountId: accountId)
-                .subscribe().disposed(by: self.disposeBag)
         }
     }
 }
