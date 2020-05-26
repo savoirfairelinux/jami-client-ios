@@ -144,9 +144,12 @@
 "actions.cancelAction" = "Zrušiť";
 "actions.clearAction" = "Vyčistiť";
 "actions.backAction" = "Späť";
+"actions.doneAction" = "Hotovo";
 "alerts.incomingCallAllertTitle" = "Prichádzajúci hovor od";
 "alerts.incomingCallButtonAccept" = "Prijať";
 "alerts.incomingCallButtonIgnore" = "Ignorovať";
+"actions.startAudioCall" = "  Audio Call";
+"actions.startVideoCall" = "  Video Call";
 
 //Calls
 "calls.callItemTitle" = "Volať";
@@ -203,6 +206,18 @@
 "accountPage.usernameRegistering" = "Registruje sa";
 "accountPage.usernameRegisterAction" = "Registrovať";
 "accountPage.usernameRegistrationFailed" = "Registrácia zlyhala. Skontrolujte prosím heslo.";
+"accountPage.createPassword" = "Vytvoriť heslo";
+"accountPage.changePassword" = "Zmeniť heslo";
+"accountPage.oldPasswordPlaceholder" = "Enter old password";
+"accountPage.newPasswordPlaceholder" = "Enter new password";
+"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.changePasswordError" = "Password incorrect";
+"accountPage.enableBoothMode" = "Enable Booth Mode";
+"accountPage.disableBoothMode" = "Disable Booth Mode";
+"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
+"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
+"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 
 //Account
 "account.sipUsername" = "Používateľské meno";
