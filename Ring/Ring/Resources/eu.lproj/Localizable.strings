@@ -207,7 +207,7 @@
 "accountPage.usernameRegisterAction" = "Erregistratu";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Change password";
+"accountPage.changePassword" = "Aldatu pasahitza";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";

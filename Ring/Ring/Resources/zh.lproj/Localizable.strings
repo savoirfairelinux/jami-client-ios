@@ -144,7 +144,7 @@
 "actions.cancelAction" = "取消";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Back";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "完成";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accept";
 "alerts.incomingCallButtonIgnore" = "忽略";

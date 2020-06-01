@@ -148,8 +148,8 @@
 "alerts.incomingCallAllertTitle" = "Gaunamasis skambutis nuo ";
 "alerts.incomingCallButtonAccept" = "Priimti";
 "alerts.incomingCallButtonIgnore" = "Nepaisyti";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "Garso skambutis";
+"actions.startVideoCall" = "Vaizdo skambutis";
 
 //Calls
 "calls.callItemTitle" = "Skambutis";
@@ -202,7 +202,7 @@
 "accountPage.registerNameTitle" = "Register a username";
 "accountPage.passwordPlaceholder" = "Enter account password";
 "accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.registerNameErrorMessage" = "Pasirinktas naudotojo vardas yra neprieinamas";
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Registruoti";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
@@ -211,10 +211,10 @@
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
+"accountPage.changePasswordError" = "Slaptažodis yra neteisingas";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
+"accountPage.disableBoothModeExplanation" = "Pateikite savo paskyros slaptažodį";
 "accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
 "accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
@@ -308,8 +308,8 @@
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Šalinti paskyrą";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.migrating" = "Perkeliama...";
 "migrateAccount.cancel" = "Atsisakyti";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "Perkelti kitą paskyrą";
 
 

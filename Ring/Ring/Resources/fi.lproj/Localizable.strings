@@ -148,8 +148,8 @@
 "alerts.incomingCallAllertTitle" = "Saapuva puhelu";
 "alerts.incomingCallButtonAccept" = "Hyväksy";
 "alerts.incomingCallButtonIgnore" = "Sivuuta";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "Äänipuhelu";
+"actions.startVideoCall" = "Videopuhelu";
 
 //Calls
 "calls.callItemTitle" = "Soita";
@@ -208,16 +208,16 @@
 "accountPage.usernameRegistrationFailed" = "Rekisteröinti epäonnistui. Tarkista salasana.";
 "accountPage.createPassword" = "Luo salasana";
 "accountPage.changePassword" = "Vaihda salasana";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.oldPasswordPlaceholder" = "Anna vanha salasana";
+"accountPage.newPasswordPlaceholder" = "Anna uusi salasana";
+"accountPage.newPasswordConfirmPlaceholder" = "Vahvista uusi salasana";
+"accountPage.changePasswordError" = "Väärä salasana";
+"accountPage.enableBoothMode" = "Kioskitila käyttöön";
+"accountPage.disableBoothMode" = "Poista kioskitila";
+"accountPage.disableBoothModeExplanation" = "Anna tilisi salasana";
+"accountPage.boothModeExplanation" = "Kioskitilassa keskusteluhistoriaa ei tallenneta ja jamin toimintoja rajoitettu lähtevien puheluiden osalta. Kun otat kioskitilan käyttöön, kaikki keskustelusi poistetaan.";
+"accountPage.noBoothMode" = "Voit ottaa kioskitilan käyttöön luomalla ensin tilin salasanan.";
+"accountPage.boothModeAlertMessage" = "Kun kioskitila on otettu käyttöön, kaikki keskustelut poistetaan.";
 
 //Account
 "account.sipUsername" = "Käyttäjänimi";

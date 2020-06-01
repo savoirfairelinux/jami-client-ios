@@ -144,7 +144,7 @@
 "actions.cancelAction" = "Cancelar";
 "actions.clearAction" = "Limpar";
 "actions.backAction" = "Voltar";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "Feito";
 "alerts.incomingCallAllertTitle" = "A receber chamada de";
 "alerts.incomingCallButtonAccept" = "Aceitar";
 "alerts.incomingCallButtonIgnore" = "Ignorar";
@@ -207,7 +207,7 @@
 "accountPage.usernameRegisterAction" = "Registar";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Change password";
+"accountPage.changePassword" = "Alterar palavra-chave";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";

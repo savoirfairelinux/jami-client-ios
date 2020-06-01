@@ -144,7 +144,7 @@
 "actions.cancelAction" = "Rezigni";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Back";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "Finita";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Akcepti";
 "alerts.incomingCallButtonIgnore" = "Malatenti";

@@ -135,8 +135,8 @@
 "alerts.errorWrongCredentials" = "Не удалось подключиться к предоставленному менеджеру учетных записей. Пожалуйста, проверьте Ваши учетные данные.";
 "alerts.recordVideoMessage" = "Записать видео-сообщение";
 "alerts.recordAudioMessage" = "Записать голосовое сообщение";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.uploadFile" = "Загрузить файл";
+"alerts.uploadPhoto" = "Загрузить фото или видео";
 
 //Actions
 "actions.blockAction" = "Заблокировать";
@@ -144,12 +144,12 @@
 "actions.cancelAction" = "Отмена";
 "actions.clearAction" = "Очистить";
 "actions.backAction" = "Назад";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "Готово";
 "alerts.incomingCallAllertTitle" = "Входящий вызов от";
 "alerts.incomingCallButtonAccept" = "Принять";
 "alerts.incomingCallButtonIgnore" = "Игнорировать";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "Голосовой звонок";
+"actions.startVideoCall" = "Видео звонок";
 
 //Calls
 "calls.callItemTitle" = "Звонок";
@@ -206,18 +206,18 @@
 "accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Зарегистрировать";
 "accountPage.usernameRegistrationFailed" = "Ошибка регистрации. Пожалуйста, проверьте пароль.";
-"accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Change password";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.createPassword" = "Создать пароль";
+"accountPage.changePassword" = "Изменить пароль";
+"accountPage.oldPasswordPlaceholder" = "Введите старый пароль";
+"accountPage.newPasswordPlaceholder" = "Введите новый пароль";
+"accountPage.newPasswordConfirmPlaceholder" = "Подтвердите новый пароль";
+"accountPage.changePasswordError" = "Пароль неверный ";
+"accountPage.enableBoothMode" = "Включить режим кабинки";
+"accountPage.disableBoothMode" = "Выключить режим кабинки";
+"accountPage.disableBoothModeExplanation" = "Пожалуйста, укажите пароль вашей учетной записи";
+"accountPage.boothModeExplanation" = "В режиме кабинки история разговоров не сохраняется, а функциональность Jami ограничена исходящими звонками. Когда вы включите режим кабинки, все ваши разговоры будут удалены.";
+"accountPage.noBoothMode" = "Для включения режима кабинки необходимо сначала создать пароль учетной записи.";
+"accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
 
 //Account
 "account.sipUsername" = "Имя";

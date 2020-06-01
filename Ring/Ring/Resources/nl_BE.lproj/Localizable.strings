@@ -144,7 +144,7 @@
 "actions.cancelAction" = "Annuleren";
 "actions.clearAction" = "Wissen";
 "actions.backAction" = "Terug";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "Klaar";
 "alerts.incomingCallAllertTitle" = "Inkomende oproep van";
 "alerts.incomingCallButtonAccept" = "Aanvaarden";
 "alerts.incomingCallButtonIgnore" = "Negeren";
@@ -207,7 +207,7 @@
 "accountPage.usernameRegisterAction" = "Registreren";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Change password";
+"accountPage.changePassword" = "Paswoord wijzigen";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";

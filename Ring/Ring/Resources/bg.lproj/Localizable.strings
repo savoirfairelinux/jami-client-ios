@@ -101,12 +101,12 @@
 "linkToAccount.explanationPinMessage" = "За да генерирате ПИН кода, отидете в настройките за управление на профила на устройството, което съдържа профила, който искате да използвате. Изберете „Свързване на друго устройство с този профил“. Ще получите необходимия ПИН. ПИН кодът е валиден само за 10 минути.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Вписване";
 "linkToAccountManager.passwordPlaceholder" = "Парола";
 "linkToAccountManager.passwordLabel" = "Въведете парола";
 "linkToAccountManager.usernamePlaceholder" = "Потребителско име";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerPlaceholder" = "Управление на профила";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
@@ -200,7 +200,7 @@
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
 "accountPage.registerNameTitle" = "Регистриране на потребителско име";
-"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.passwordPlaceholder" = "Въведете паролата на профила";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
@@ -264,7 +264,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Отказ";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Отменено";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Приемане";
@@ -279,11 +279,11 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Отказ";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Отменено";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Приемане";
 "dataTransfer.readableStatusCancel" = "Отказ";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Натиснете за започване на запис";
 "dataTransfer.sendMessage" = "Изпращане";
 
 
@@ -303,7 +303,7 @@
 //Migrate Account
 "migrateAccount.title" = "Пренасяне на профил";
 "migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.explanation" = "Този профил трябва да бъде преместен";
 "migrateAccount.passwordPlaceholder" = "Въведете парола";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Премахване на профил";

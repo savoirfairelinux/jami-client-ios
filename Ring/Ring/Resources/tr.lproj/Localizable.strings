@@ -144,7 +144,7 @@
 "actions.cancelAction" = "İptal";
 "actions.clearAction" = "Temizle";
 "actions.backAction" = "Geri";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "Tamam";
 "alerts.incomingCallAllertTitle" = "Adlı kişiden gelen çağrı";
 "alerts.incomingCallButtonAccept" = "Kabul et";
 "alerts.incomingCallButtonIgnore" = "Göz ardı et";
@@ -206,8 +206,8 @@
 "accountPage.usernameRegistering" = "Kayıt ediliyor";
 "accountPage.usernameRegisterAction" = "Kaydol";
 "accountPage.usernameRegistrationFailed" = "Kayıt başarısız. Lütfen parolanızı kontrol edin.";
-"accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Change password";
+"accountPage.createPassword" = "Parola oluştur";
+"accountPage.changePassword" = "Parolayı değiştir";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";

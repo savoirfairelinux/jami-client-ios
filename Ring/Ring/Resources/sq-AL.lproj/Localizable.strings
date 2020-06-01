@@ -148,8 +148,8 @@
 "alerts.incomingCallAllertTitle" = "Thirrje nga";
 "alerts.incomingCallButtonAccept" = "Pranoje";
 "alerts.incomingCallButtonIgnore" = "Shpërfille";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "Thirrje Audio";
+"actions.startVideoCall" = "Thirrje Video";
 
 //Calls
 "calls.callItemTitle" = "Thirre";
@@ -208,16 +208,16 @@
 "accountPage.usernameRegistrationFailed" = "Regjistrimi dështoi. Ju lutemi, kontrolloni fjalëkalimin.";
 "accountPage.createPassword" = "Krijoje fjalëkalimin";
 "accountPage.changePassword" = "Ndryshoni fjalëkalimin";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.oldPasswordPlaceholder" = "Jepni fjalëkalimin e vjetër";
+"accountPage.newPasswordPlaceholder" = "Jepni fjalëkalimin e ri";
+"accountPage.newPasswordConfirmPlaceholder" = "Ripohoni fjalëkalimin e ri";
+"accountPage.changePasswordError" = "Fjalëkalim i pasaktë";
+"accountPage.enableBoothMode" = "Aktivizo Mënyrën Kabinë";
+"accountPage.disableBoothMode" = "Çaktivizo Mënyrën Kabinë";
+"accountPage.disableBoothModeExplanation" = "Ju lutemi, jepni fjalëkalimin e llogarisë tuaj";
+"accountPage.boothModeExplanation" = "Në mënyrën kabinë, historiku i bisedës s’ruhet dhe funksionet e Jami-t kufizohen në bërje thirrjesh. Kur aktivizoni mënyrën kabinë, krejt bisedat tuaja do të hiqen.";
+"accountPage.noBoothMode" = "Që të aktivizohet mënyra Kabinë, lypset të krijoni një fjalëkalim llogarie së pari.";
+"accountPage.boothModeAlertMessage" = "Pas aktivizimit të mënyrës Kabinë, krej bisedat tuaja do të hiqen.";
 
 //Account
 "account.sipUsername" = "Emër Përdoruesi";

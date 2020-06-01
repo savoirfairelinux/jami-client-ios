@@ -106,7 +106,7 @@
 "linkToAccountManager.passwordLabel" = "Digite a Senha";
 "linkToAccountManager.usernamePlaceholder" = "Nome de usuário";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerPlaceholder" = "Gerente de contas";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts

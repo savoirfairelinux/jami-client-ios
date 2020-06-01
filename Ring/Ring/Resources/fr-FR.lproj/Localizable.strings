@@ -206,8 +206,8 @@
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Enregistrer";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Change password";
+"accountPage.createPassword" = "Créer mot de passe";
+"accountPage.changePassword" = "Changer le mot de passe";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";

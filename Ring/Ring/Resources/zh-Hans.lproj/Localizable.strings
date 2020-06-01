@@ -148,8 +148,8 @@
 "alerts.incomingCallAllertTitle" = "來電從";
 "alerts.incomingCallButtonAccept" = "接聽";
 "alerts.incomingCallButtonIgnore" = "忽略";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "音訊通話";
+"actions.startVideoCall" = "視訊通話";
 
 //Calls
 "calls.callItemTitle" = "通話";
@@ -208,16 +208,16 @@
 "accountPage.usernameRegistrationFailed" = "註冊失敗。請檢查密碼。";
 "accountPage.createPassword" = "建立密碼";
 "accountPage.changePassword" = "變更密碼";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.oldPasswordPlaceholder" = "輸入舊密碼";
+"accountPage.newPasswordPlaceholder" = "輸入新密碼";
+"accountPage.newPasswordConfirmPlaceholder" = "確認新密碼";
+"accountPage.changePasswordError" = "密碼不正確";
+"accountPage.enableBoothMode" = "啟用展示模式";
+"accountPage.disableBoothMode" = "停用展示模式";
+"accountPage.disableBoothModeExplanation" = "請提供您的帳號密碼";
+"accountPage.boothModeExplanation" = "在展示模式下，不會儲存對話歷史，Jami 的功能也僅限撥出通話。當您啟用展示模式時，您所有的對話都會被移除。";
+"accountPage.noBoothMode" = "要啟用展示模式，您必須先建立帳號密碼。";
+"accountPage.boothModeAlertMessage" = "在啟用展示模式後，所有的對話都會被移除。";
 
 //Account
 "account.sipUsername" = "使用者名稱";

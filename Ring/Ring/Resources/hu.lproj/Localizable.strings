@@ -135,8 +135,8 @@
 "alerts.errorWrongCredentials" = "Nem lehet csatlakozni a megadott fiókkezelőhöz. Kérjük, ellenőrizze hitelesítő adatait.";
 "alerts.recordVideoMessage" = "Videoüzenet felvétele";
 "alerts.recordAudioMessage" = "Hangüzenet felvétele";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.uploadFile" = "Fájl feltöltése";
+"alerts.uploadPhoto" = "Fénykép vagy film feltöltése";
 
 //Actions
 "actions.blockAction" = "Letiltás";
@@ -148,8 +148,8 @@
 "alerts.incomingCallAllertTitle" = "Bejövő hívás -tól/-től";
 "alerts.incomingCallButtonAccept" = "Elfogadás";
 "alerts.incomingCallButtonIgnore" = "Figyelmen kívül hagy";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "Hanghívás";
+"actions.startVideoCall" = "Videóhívás";
 
 //Calls
 "calls.callItemTitle" = "Hívás";
@@ -208,16 +208,16 @@
 "accountPage.usernameRegistrationFailed" = "Regisztráció sikertelen. Kérjük, ellenőrizze a jelszót.";
 "accountPage.createPassword" = "Jelszó létrehozása";
 "accountPage.changePassword" = "Jelszó megváltoztatása";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.oldPasswordPlaceholder" = "Adja meg a régi jelszót";
+"accountPage.newPasswordPlaceholder" = "Adja meg az új jelszót";
+"accountPage.newPasswordConfirmPlaceholder" = "Új jelszó megerősítése";
+"accountPage.changePasswordError" = "Helytelen jelszó";
+"accountPage.enableBoothMode" = "Fülke üzemmód engedélyezése";
+"accountPage.disableBoothMode" = "Fülke üzemmód letiltása";
+"accountPage.disableBoothModeExplanation" = "Adja meg fiókjának jelszavát";
+"accountPage.boothModeExplanation" = "A fülke üzemmódban a beszélgetési előzmények nem kerülnek mentésre, és a Jami funkcionalitása korlátozott a kimenő hívások kezdeményezésekor. Ha a fülke üzemmód engedélyezve van, az összes beszélgetés törlődik.";
+"accountPage.noBoothMode" = "A fülke üzemmód engedélyezéséhez először létre kell hoznia egy fiók jelszavát.";
+"accountPage.boothModeAlertMessage" = "A fülke üzemmód engedélyezése után az összes beszélgetés eltávolításra kerül.";
 
 //Account
 "account.sipUsername" = "Felhasználónév";

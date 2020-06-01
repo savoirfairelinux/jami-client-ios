@@ -144,7 +144,7 @@
 "actions.cancelAction" = "ألغِ";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "السابق";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "منجز";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "اقبل";
 "alerts.incomingCallButtonIgnore" = "تجاهل";

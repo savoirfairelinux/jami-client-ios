@@ -144,7 +144,7 @@
 "actions.cancelAction" = "Avbryt";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Tilbake";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "Ferdig";
 "alerts.incomingCallAllertTitle" = "Innkommende anrop fra";
 "alerts.incomingCallButtonAccept" = "Aksepter";
 "alerts.incomingCallButtonIgnore" = "Ignorer";
@@ -207,7 +207,7 @@
 "accountPage.usernameRegisterAction" = "Registrer";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Change password";
+"accountPage.changePassword" = "Endre passord";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
