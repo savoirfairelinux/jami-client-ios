@@ -139,7 +139,7 @@
 "alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
-"actions.blockAction" = "Block";
+"actions.blockAction" = "חסום";
 "actions.deleteAction" = "מחק";
 "actions.cancelAction" = "ביטול";
 "actions.clearAction" = "Clear";
@@ -262,7 +262,7 @@
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "שגיאה";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "סרב";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "Failed to send";
@@ -277,7 +277,7 @@
 "notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "New file";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "סרב";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
