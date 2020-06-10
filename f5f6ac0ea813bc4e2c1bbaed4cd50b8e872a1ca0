@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c96ddd3d_900b3c8d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-10T20:41:27Z",
+      "side": 1,
+      "message": "Yes, it is better to remove. But we do not need to add avatar if view is hidden.",
+      "parentUuid": "190fbad9_a78f9588",
+      "revId": "f5f6ac0ea813bc4e2c1bbaed4cd50b8e872a1ca0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3bac2c80_07dbe4aa",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 1
