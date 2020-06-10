@@ -359,9 +359,7 @@ class ConversationViewController: UIViewController,
         var heightOffset = CGFloat(0.0)
         if keyboardHeight != self.messageAccessoryView.frame.height {
             if UIDevice.current.hasNotch {
-                heightOffset = -55
-            } else {
-                heightOffset = -20
+                heightOffset = -35
             }
             self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
         }
