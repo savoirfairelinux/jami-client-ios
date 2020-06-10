@@ -4,6 +4,7 @@
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,6 +22,7 @@
  */
 
 import RxSwift
+import RxCocoa
 import SwiftyBeaver
 import MobileCoreServices
 
@@ -72,7 +74,7 @@ class MessageViewModel {
         self.initialTransferStatus = message.transferStatus
         self.timeStringShown = nil
         self.status.onNext(message.status)
-        self.displayReadIndicator.onNext(isLastDisplayed)
+        self.displayReadIndicator.accept(isLastDisplayed)
 
         if isTransfer {
             if let transferId = daemonId,
@@ -132,10 +134,10 @@ class MessageViewModel {
                 .subscribe(onNext: { [weak self] messageUpdateEvent in
                     if let oldMessage: Int64 = messageUpdateEvent.getEventInput(.oldDisplayedMessage),
                         oldMessage == self?.message.messageId {
-                        self?.displayReadIndicator.onNext(false)
+                        self?.displayReadIndicator.accept(false)
                     } else if let newMessage: Int64 = messageUpdateEvent.getEventInput(.newDisplayedMessage),
                         newMessage == self?.message.messageId {
-                        self?.displayReadIndicator.onNext(true)
+                        self?.displayReadIndicator.accept(true)
                     }
                 })
                 .disposed(by: self.disposeBag)
@@ -180,7 +182,7 @@ class MessageViewModel {
     }
 
     var status = BehaviorSubject<MessageStatus>(value: .unknown)
-    var displayReadIndicator = BehaviorSubject<Bool>(value: false)
+    var displayReadIndicator = BehaviorRelay<Bool>(value: false)
 
     var transferStatus = BehaviorSubject<DataTransferStatus>(value: .unknown)
     var lastTransferStatus: DataTransferStatus = .unknown
