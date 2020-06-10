@@ -5,6 +5,7 @@
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -411,11 +412,22 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
                     .bind(to: self.failedStatusLabel.rx.isHidden)
                     .disposed(by: self.disposeBag)
                 if self.messageReadIndicator != nil {
-                    item.displayReadIndicator.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .map {value in return !value}
-                        .bind(to: self.messageReadIndicator!.rx.isHidden)
-                    .disposed(by: self.disposeBag)
+                    Observable<(Data?, String, Bool)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
+                                                                      conversationViewModel.bestName.asObservable(),
+                                                                      item.displayReadIndicator.asObservable()) { ($0, $1, $2) }
+                        .observeOn(MainScheduler.instance)
+                        .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value, false))
+                        .subscribe({ [weak self] profileData -> Void in
+                            if let displayReadIndicator = profileData.element?.2 {
+                                self?.messageReadIndicator?.isHidden = !displayReadIndicator
+                            }
+                            guard let bestName = profileData.element?.1 else { return }
+                            self?.messageReadIndicator?.subviews.forEach({ $0.removeFromSuperview() })
+                            self?.messageReadIndicator?.addSubview(
+                                AvatarView(profileImageData: profileData.element?.0, username: bestName, size: 12))
+                            return
+                        })
+                        .disposed(by: self.disposeBag)
                 }
             }
         } else if item.bubblePosition() == .received {
