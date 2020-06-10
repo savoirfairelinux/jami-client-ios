@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8ce51dca_e79832da",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-10T21:17:07Z",
+      "side": 1,
+      "message": "Yes indeed, and we might as well not play with the hidden property altogether.",
+      "parentUuid": "c96ddd3d_900b3c8d",
+      "revId": "f5f6ac0ea813bc4e2c1bbaed4cd50b8e872a1ca0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3bac2c80_07dbe4aa",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 1
