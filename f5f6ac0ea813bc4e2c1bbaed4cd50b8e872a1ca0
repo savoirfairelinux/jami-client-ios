@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "190fbad9_a78f9588",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-10T20:24:05Z",
+      "side": 1,
+      "message": "Even if the avatar is hidden, shouldn\u0027t we remove it? If many messages are sent, many messages will have a hidden Avatar object for no reason, since it won\u0027t be toggled to visible again after new messages arrived.",
+      "parentUuid": "90ae427b_63880e4a",
+      "revId": "f5f6ac0ea813bc4e2c1bbaed4cd50b8e872a1ca0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3bac2c80_07dbe4aa",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "f5f6ac0ea813bc4e2c1bbaed4cd50b8e872a1ca0",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1962d3e9_d3b0badf",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-10T20:24:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3bac2c80_07dbe4aa",
+      "revId": "f5f6ac0ea813bc4e2c1bbaed4cd50b8e872a1ca0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
