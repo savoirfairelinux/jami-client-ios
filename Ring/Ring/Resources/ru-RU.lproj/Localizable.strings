@@ -64,7 +64,7 @@
 "createProfile.profileCreated" = "Далее";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "Введите имя";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
@@ -181,7 +181,7 @@
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.revokeDeviceTitle" = "Отозвать устройство";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "Отозвать";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
@@ -220,9 +220,9 @@
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "Имя пользователя";
 "account.sipPassword" = "Пароль";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "SIP-сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
 "account.createSipAccount" = "Create Sip Account";
@@ -290,7 +290,7 @@
 //Generated Message
 "generatedMessage.contactAdded" = "Контакт добавлен";
 "generatedMessage.invitationReceived" = "Получено приглашение";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.invitationAccepted" = "Приглашение принято";
 "generatedMessage.outgoingCall" = "Исходящий вызов";
 "generatedMessage.incomingCall" = "Входящий вызов";
 "generatedMessage.missedOutgoingCall" = "Пропущенный исходящий";
