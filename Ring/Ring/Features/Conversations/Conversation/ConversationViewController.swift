@@ -5,6 +5,7 @@
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -47,6 +48,7 @@ class ConversationViewController: UIViewController,
     var bottomOffset: CGFloat = 0
     let scrollOffsetThreshold: CGFloat = 600
     var bottomHeight: CGFloat = 0.00
+    var isExecutingDeleteMessage: Bool = false
 
     @IBOutlet weak var currentCallButton: UIButton!
     @IBOutlet weak var currentCallLabel: UILabel!
@@ -104,7 +106,7 @@ class ConversationViewController: UIViewController,
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
     }
 
-    func importDocument() {
+    private func importDocument() {
         let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
@@ -128,7 +130,7 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    func showNoPermissionsAlert(title: String) {
+    private func showNoPermissionsAlert(title: String) {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (_: UIAlertAction!) -> Void in }
         alert.addAction(okAction)
@@ -664,8 +666,11 @@ class ConversationViewController: UIViewController,
     }
 
     fileprivate func scrollToBottomIfNeed() {
-        if self.isBottomContentOffset {
+        if self.isBottomContentOffset && !self.isExecutingDeleteMessage {
             self.scrollToBottom(animated: false)
+        }
+        if self.isExecutingDeleteMessage {
+            self.isExecutingDeleteMessage = false
         }
     }
 
@@ -733,7 +738,7 @@ class ConversationViewController: UIViewController,
     }
 
     // MARK: - message formatting
-    func computeSequencing() {
+    private func computeSequencing() {
         var lastShownTime: Date?
         for (index, messageViewModel) in self.messageViewModels!.enumerated() {
             // time labels
@@ -759,7 +764,7 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
+    private func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
         if let models = self.messageViewModels {
             let messageItem = models[index]
             let msgOwner = messageItem.bubblePosition()
@@ -800,25 +805,22 @@ class ConversationViewController: UIViewController,
         return MessageSequencing.unknown
     }
 
-    func getTimeLabelString(forTime time: Date) -> String {
+    private func getTimeLabelString(forTime time: Date) -> String {
         // get the current time
         let currentDateTime = Date()
 
         // prepare formatter
         let dateFormatter = DateFormatter()
-        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
-            if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
-                if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
-                    // age: [0, received the previous day[
-                    dateFormatter.dateFormat = "h:mma"
-                } else {
-                    // age: [received the previous day, received 7 days ago[
-                    dateFormatter.dateFormat = "E h:mma"
-                }
-            } else {
-                // age: [received 7 days ago, received the previous year[
-                dateFormatter.dateFormat = "MMM d, h:mma"
-            }
+
+        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
+            // age: [0, received the previous day[
+            dateFormatter.dateFormat = "h:mma"
+        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
+            // age: [received the previous day, received 7 days ago[
+            dateFormatter.dateFormat = "E h:mma"
+        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
+            // age: [received 7 days ago, received the previous year[
+            dateFormatter.dateFormat = "MMM d, h:mma"
         } else {
             // age: [received the previous year, inf[
             dateFormatter.dateFormat = "MMM d, yyyy h:mma"
@@ -938,109 +940,128 @@ extension ConversationViewController: UITableViewDataSource {
         return self.messageViewModels?.count ?? 0
     }
 
-    // swiftlint:disable cyclomatic_complexity
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let item = self.messageViewModels?[indexPath.row] {
-            var type = MessageCell.self
-            if item.isTransfer {
-                type = item.bubblePosition() == .received ? MessageCellDataTransferReceived.self : MessageCellDataTransferSent.self
-            } else {
-                type =  item.bubblePosition() == .received ? MessageCellReceived.self :
-                    item.bubblePosition() == .sent ? MessageCellSent.self :
-                    item.bubblePosition() == .generated ? MessageCellGenerated.self :
-                    MessageCellGenerated.self
+
+            if item.message.incoming &&
+                item.message.status != .displayed &&
+                !item.message.isTransfer {
+                self.viewModel.setMessageAsRead(daemonId: item.message.daemonId,
+                                                messageId: item.message.messageId)
             }
-            if item.message.incoming && item.message.status != .displayed && !item.message.isTransfer {
-                self.viewModel
-                    .setMessageAsRead(daemonId: item.message.daemonId,
-                                      messageId: item.message.messageId)
-            }
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: type)
+
+            let cellType = { (bubblePosition: BubblePosition, isTransfer: Bool) -> MessageCell.Type in
+                switch bubblePosition {
+                case .received: return isTransfer ? MessageCellDataTransferReceived.self : MessageCellReceived.self
+                case .sent: return isTransfer ? MessageCellDataTransferSent.self : MessageCellSent.self
+                case .generated: return MessageCellGenerated.self
+                }
+            }(item.bubblePosition(), item.isTransfer)
+
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: cellType)
             cell.configureFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
 
-            if item.isTransfer {
-                cell.acceptButton?.setTitle(L10n.DataTransfer.readableStatusAccept, for: .normal)
-                item.lastTransferStatus = .unknown
-                changeTransferStatus(cell, nil, item.message.transferStatus, item, viewModel)
-                item.transferStatus.asObservable()
-                    .observeOn(MainScheduler.instance)
-                    .filter {
-                        return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
-                    .subscribe(onNext: { [weak self, weak tableView, weak cell] status in
-                        guard let cell = cell else {return}
-                        guard let currentIndexPath = tableView?.indexPath(for: cell) else { return }
-                        guard let transferId = item.daemonId else { return }
-                        guard let model = self?.viewModel else { return }
-                        self?.log.info("Transfer status change from: \(item.lastTransferStatus.description) to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
-                        if item.bubblePosition() == .sent && item.shouldDisplayTransferedImage {
-                            cell.displayTransferedImage(message: item, conversationID: model.conversation.value.conversationId, accountId: model.conversation.value.accountId)
-                        } else {
-                            self?.changeTransferStatus(cell, currentIndexPath, status, item, model)
-                            cell.stopProgressMonitor()
-                        }
-                        item.lastTransferStatus = status
-                        item.initialTransferStatus = status
-                        tableView?.reloadData()
-                    })
-                    .disposed(by: cell.disposeBag)
+            transferCellSetup(item, cell, tableView, indexPath)
+            deleteCellSetup(cell)
 
-                cell.cancelButton.rx.tap
-                    .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
-                        guard let cell = cell else {return}
-                        guard let transferId = item.daemonId else { return }
-                        self?.log.info("canceling transferId \(transferId)")
-                        _ = self?.viewModel.cancelTransfer(transferId: transferId)
-                        item.initialTransferStatus = .canceled
-                        item.message.transferStatus = .canceled
-                        cell.stopProgressMonitor()
-                        tableView?.reloadData()
-                    })
-                    .disposed(by: cell.disposeBag)
-                cell.playerHeight
-                    .asObservable()
-                    .share()
-                    .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: {[weak tableView] height in
-                        if height > 0 {
-                            UIView.performWithoutAnimation {
-                                guard let sectionNumber = tableView?.numberOfSections,
-                                let rowNumber =  tableView?.numberOfRows(inSection: indexPath.section) else {return}
-                                if indexPath.section < sectionNumber && indexPath.section >= 0 {
-                                    if indexPath.row < rowNumber &&
-                                        indexPath.row >= 0 &&
-                                        indexPath.row != tableView?.numberOfRows(inSection: indexPath.section) {
-                                        tableView?
-                                            .reloadItemsAtIndexPaths([indexPath],
-                                                                     animationStyle: .top)
-                                    }
-                                }
-                            }
-                        }
-                    }).disposed(by: cell.disposeBag)
-
-                if item.bubblePosition() == .received {
-                    cell.acceptButton?.rx.tap
-                        .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
-                            guard let cell = cell else {return}
-                            guard let transferId = item.daemonId else { return }
-                            self?.log.info("accepting transferId \(transferId)")
-                            if self?.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
-                                _ = self?.viewModel.cancelTransfer(transferId: transferId)
-                                item.initialTransferStatus = .canceled
-                                item.message.transferStatus = .canceled
-                                cell.stopProgressMonitor()
-                                tableView?.reloadData()
-                            }
-                        })
-                        .disposed(by: cell.disposeBag)
-                }
-                if item.message.transferStatus == .success {
-                    self.addShareAction(cell: cell, item: item)
-                }
-            }
             return cell
         }
         return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
+    }
+
+    private func deleteCellSetup(_ cell: MessageCell) {
+        cell.deleteMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak cell] (shouldDelete) in
+                guard shouldDelete, let self = self, let cell = cell, let messageId = cell.messageId else { return }
+                self.isExecutingDeleteMessage = true
+                self.viewModel.deleteMessage(messageId: messageId)
+            })
+            .disposed(by: cell.disposeBag)
+    }
+
+    // swiftlint:disable cyclomatic_complexity
+    private func transferCellSetup(_ item: MessageViewModel, _ cell: MessageCell, _ tableView: UITableView, _ indexPath: IndexPath) {
+        if item.isTransfer {
+            cell.acceptButton?.setTitle(L10n.DataTransfer.readableStatusAccept, for: .normal)
+            item.lastTransferStatus = .unknown
+            changeTransferStatus(cell, nil, item.message.transferStatus, item, viewModel)
+            item.transferStatus.asObservable()
+                .observeOn(MainScheduler.instance)
+                .filter {
+                    return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus }
+                .subscribe(onNext: { [weak self, weak tableView, weak cell] status in
+                    guard let cell = cell else {return}
+                    guard let currentIndexPath = tableView?.indexPath(for: cell) else { return }
+                    guard let transferId = item.daemonId else { return }
+                    guard let model = self?.viewModel else { return }
+                    self?.log.info("Transfer status change from: \(item.lastTransferStatus.description) to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
+                    if item.bubblePosition() == .sent && item.shouldDisplayTransferedImage {
+                        cell.displayTransferedImage(message: item, conversationID: model.conversation.value.conversationId, accountId: model.conversation.value.accountId)
+                    } else {
+                        self?.changeTransferStatus(cell, currentIndexPath, status, item, model)
+                        cell.stopProgressMonitor()
+                    }
+                    item.lastTransferStatus = status
+                    item.initialTransferStatus = status
+                    tableView?.reloadData()
+                })
+                .disposed(by: cell.disposeBag)
+
+            cell.cancelButton.rx.tap
+                .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
+                    guard let cell = cell else {return}
+                    guard let transferId = item.daemonId else { return }
+                    self?.log.info("canceling transferId \(transferId)")
+                    _ = self?.viewModel.cancelTransfer(transferId: transferId)
+                    item.initialTransferStatus = .canceled
+                    item.message.transferStatus = .canceled
+                    cell.stopProgressMonitor()
+                    tableView?.reloadData()
+                })
+                .disposed(by: cell.disposeBag)
+            cell.playerHeight
+                .asObservable()
+                .share()
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: {[weak tableView] height in
+                    if height > 0 {
+                        UIView.performWithoutAnimation {
+                            guard let sectionNumber = tableView?.numberOfSections,
+                                let rowNumber =  tableView?.numberOfRows(inSection: indexPath.section) else {return}
+                            if indexPath.section < sectionNumber && indexPath.section >= 0 {
+                                if indexPath.row < rowNumber &&
+                                    indexPath.row >= 0 &&
+                                    indexPath.row != tableView?.numberOfRows(inSection: indexPath.section) {
+                                    tableView?
+                                        .reloadItemsAtIndexPaths([indexPath],
+                                                                 animationStyle: .top)
+                                }
+                            }
+                        }
+                    }
+                }).disposed(by: cell.disposeBag)
+
+            if item.bubblePosition() == .received {
+                cell.acceptButton?.rx.tap
+                    .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
+                        guard let cell = cell else {return}
+                        guard let transferId = item.daemonId else { return }
+                        self?.log.info("accepting transferId \(transferId)")
+                        if self?.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
+                            _ = self?.viewModel.cancelTransfer(transferId: transferId)
+                            item.initialTransferStatus = .canceled
+                            item.message.transferStatus = .canceled
+                            cell.stopProgressMonitor()
+                            tableView?.reloadData()
+                        }
+                    })
+                    .disposed(by: cell.disposeBag)
+            }
+            if item.message.transferStatus == .success {
+                self.addShareAction(cell: cell, item: item)
+            }
+        }
     }
 }
 // swiftlint:enable type_body_length
