@@ -328,25 +328,12 @@ class CallsService: CallsAdapterDelegate {
         if accountID.isEmpty || callID.isEmpty {
             return
         }
-        guard let accountProfile = self.dbManager.accountProfile(for: accountID) else {return}
-        let vCard = CNMutableContact()
-        var cardChanged = false
-        if let name = accountProfile.alias {
-            vCard.familyName = name
-            cardChanged = true
-        }
-        if let photo = accountProfile.photo {
-            vCard.imageData = NSData(base64Encoded: photo,
-                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
-            cardChanged = true
-        }
-        if cardChanged {
-            DispatchQueue.main.async { [unowned self] in
-                VCardUtils.sendVCard(card: vCard,
-                                     callID: callID,
-                                     accountID: accountID,
-                                     sender: self)
-            }
+        guard let vCard = self.dbManager.accountVCard(for: accountID) else {return}
+        DispatchQueue.main.async { [unowned self] in
+            VCardUtils.sendVCard(card: vCard,
+                                 callID: callID,
+                                 accountID: accountID,
+                                 sender: self)
         }
     }
 

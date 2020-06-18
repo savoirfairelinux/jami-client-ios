@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -32,33 +32,13 @@ final class DBContainer {
     private var connections = [String: Connection?]()
     var connectionsSemaphore = DispatchSemaphore(value: 1)
     private let log = SwiftyBeaver.self
-    private let jamiDBName = "ring.db"
-    private let path: String?
-    private let dbVersion = 1
+    private let dbVersions = [1, 2]
 
-    init() {
-        path = NSSearchPathForDirectoriesInDomains(
+    let documentsPath = {
+        return NSSearchPathForDirectoriesInDomains(
             .documentDirectory, .userDomainMask, true
             ).first
-    }
-
-    func getJamiDB() -> Connection? {
-        if jamiDB != nil {
-            return jamiDB
-        }
-        guard let dbPath = path else { return nil }
-        do {
-            jamiDB = try Connection("\(dbPath)/" + jamiDBName)
-        } catch {
-            jamiDB = nil
-            log.error("Unable to open database")
-        }
-        return jamiDB
-    }
-
-    func removeJamiDB() {
-        self.removeDBNamed(dbName: jamiDBName)
-    }
+    }()
 
     func removeDBForAccount(account: String) {
         connections[account] = nil
@@ -69,11 +49,11 @@ final class DBContainer {
         if connections[account] != nil {
             return connections[account] ?? nil
         }
-        guard let dbPath = path else { return nil }
+        guard let dbPath = accountDbPath(accountId: account) else { return nil }
         do {
             self.connectionsSemaphore.wait()
-            connections[account] = try Connection("\(dbPath)/" + "\(account).db")
-            connections[account]??.userVersion = dbVersion
+            connections[account] = try Connection(dbPath)
+            connections[account]??.userVersion = dbVersions.last
             self.connectionsSemaphore.signal()
             return connections[account] ?? nil
         } catch {
@@ -83,24 +63,95 @@ final class DBContainer {
         }
     }
 
-    func isDBExistsFor(account: String) -> Bool {
-        guard let dbPath = path else { return false }
-        let url = NSURL(fileURLWithPath: dbPath)
-        if let pathComponent = url.appendingPathComponent("/" + "\(account).db") {
-            let filePath = pathComponent.path
-            let fileManager = FileManager.default
-            if fileManager.fileExists(atPath: filePath) {
-                return false
-            } else {
-                return true
-            }
-        } else {
+    // MARK: paths
+
+    private func accountFolderPath(accountId: String) -> String {
+        guard let documents = documentsPath else { return "" }
+        return documents + "/" + "\(accountId)" + "/"
+    }
+
+    private func accountDbPath(accountId: String) -> String? {
+        let accountFolder = accountFolderPath(accountId: accountId)
+        return accountFolder.isEmpty ? nil : accountFolder + "\(accountId).db"
+    }
+
+    private func profilesFolderPath(accountId: String) -> String {
+        let accountFolder = accountFolderPath(accountId: accountId)
+        return accountFolder.isEmpty ? "" : accountFolder + "profiles/"
+    }
+
+    func getPathForAccountContacts(accountId: String, createIfNotExists: Bool) -> String {
+        let profilesFolder = profilesFolderPath(accountId: accountId)
+        if profilesFolder.isEmpty {
+            return ""
+        }
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: profilesFolder) {
+            return profilesFolder
+        }
+        if !createIfNotExists {
+            return ""
+        }
+
+        do {
+            try fileManager.createDirectory(atPath: profilesFolder,
+                                            withIntermediateDirectories: true,
+                                            attributes: nil)
+        } catch {
+            return ""
+        }
+        return fileManager.fileExists(atPath: profilesFolder) ? profilesFolder : ""
+    }
+
+    private func isDBExistsInAccountFolder(accountId: String) -> Bool {
+        guard let path = accountDbPath(accountId: accountId) else { return false }
+        return fileExist(path: path)
+    }
+
+    private func fileExist(path: String) -> Bool {
+        if path.isEmpty {
+            return false
+        }
+        let fileManager = FileManager.default
+        return fileManager.fileExists(atPath: path)
+    }
+
+    func contactProfilePath(accountId: String, profileURI: String, createifNotExists: Bool) -> String? {
+        let profilesFolder = getPathForAccountContacts(accountId: accountId, createIfNotExists: createifNotExists)
+        return profilesFolder.isEmpty ? nil : profilesFolder + "\(profileURI.toBase64()).vcf"
+    }
+
+    func accountProfilePath(accountId: String) -> String? {
+        let accountFolder = accountFolderPath(accountId: accountId)
+        return accountFolder.isEmpty ? nil : accountFolder + "profile.vcf"
+    }
+
+    func accountProfileExists(accountId: String) -> Bool {
+        guard let path = accountProfilePath(accountId: accountId) else { return false }
+        return fileExist(path: path)
+    }
+
+    func contactProfileExists(accountId: String, profileURI: String) -> Bool {
+        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return false }
+        return fileExist(path: path)
+    }
+
+    func needMigrateToDbVersion2(for accountId: String) -> Bool {
+        if !isDBExistsInAccountFolder(accountId: accountId) { return true }
+        guard let dbase = self.forAccount(account: accountId) else {
             return true
+        }
+        let table = Table("profiles")
+        do {
+            try _ = dbase.scalar(table.exists)
+            return true
+        } catch {
+            return false
         }
     }
 
     private func removeDBNamed(dbName: String) {
-        guard let dbPath = path else { return }
+        guard let dbPath = documentsPath else { return }
         let url = NSURL(fileURLWithPath: dbPath)
         guard let pathComponent = url
             .appendingPathComponent("/" + dbName) else {
@@ -115,6 +166,29 @@ final class DBContainer {
         } catch {
             print("Error on delete old database!!!")
         }
+    }
+
+    func copyDbToAccountFolder(for accountId: String) -> Bool {
+        if isDBExistsInAccountFolder(accountId: accountId) { return true }
+        guard let dbPath = documentsPath else { return false }
+        let url = NSURL(fileURLWithPath: dbPath)
+        guard let oldPath = url.appendingPathComponent("/" + "\(accountId).db") else { return false}
+        guard let newPath = accountDbPath(accountId: accountId) else { return false }
+        let fileManager = FileManager.default
+        do {
+            try fileManager.copyItem(atPath: oldPath.path, toPath: newPath)
+            return fileManager.fileExists(atPath: newPath)
+        } catch _ as NSError {
+            return false
+        }
+    }
+
+    func removeAllContects(accountId: String) {
+        let contacts = self.profilesFolderPath(accountId: accountId)
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(atPath: contacts)
+        } catch _ as NSError {}
     }
 }
 
