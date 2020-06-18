@@ -2,6 +2,7 @@
  *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -153,6 +154,19 @@ final class InteractionDataHelper {
 
     func delete (item: Interaction, dataBase: Connection) -> Bool {
         let interactionId = item.id
+        let query = table.filter(id == interactionId)
+        do {
+            let deletedRows = try dataBase.run(query.delete())
+            guard deletedRows == 1 else {
+                return false
+            }
+            return true
+        } catch _ {
+            return false
+        }
+    }
+
+    func delete (interactionId: Int64, dataBase: Connection) -> Bool {
         let query = table.filter(id == interactionId)
         do {
             let deletedRows = try dataBase.run(query.delete())

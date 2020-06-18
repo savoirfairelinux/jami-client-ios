@@ -3,6 +3,7 @@
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -355,6 +356,17 @@ class ConversationsService {
                 }, onError: { error in
                     completable(.error(error))
                 }).disposed(by: self.disposeBag)
+            return Disposables.create { }
+        })
+    }
+
+    func deleteMessage(messagesId: Int64, accountId: String) -> Completable {
+        return Completable.create(subscribe: { [unowned self] completable in
+            self.dbManager
+                .deleteMessage(messagesId: messagesId, accountId: accountId)
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .subscribe(onCompleted: { completable(.completed) }, onError: { error in completable(.error(error))})
+                .disposed(by: self.disposeBag)
             return Disposables.create { }
         })
     }
