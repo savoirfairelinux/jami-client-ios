@@ -38,130 +38,146 @@ final class ProfileDataHelper {
     private let log = SwiftyBeaver.self
 
     //migrate from legacy db
-    let id = Expression<Int64>("id")
-    func getLegacyProfileID(profileURI: String, dataBase: Connection) throws -> Int64? {
-        let query = contactsProfileTable.filter(uri == profileURI)
-        let items = try dataBase.prepare(query)
-        for item in  items {
-            return item[id]
-        }
-        return nil
-    }
-    func getLegacyProfiles(accountURI: String,
-                           accountId: String,
-                           database: Connection) throws -> [Int64: String] {
-        let query = contactsProfileTable.filter(accountId != uri && accountURI != uri)
-        let items = try database.prepare(query)
-        var profiles = [Int64: String]()
-        for item in  items {
-            profiles[item[id]] = item[uri]
-        }
-        return profiles
-    }
-    func migrateToDBForAccount (from oldDB: Connection,
-                                to newDB: Connection,
-                                jamiId: String,
-                                accountId: String) throws {
-        // migrate account profile
-        // get account profile, it should be only one
-        let accountQuery = contactsProfileTable.filter(uri == jamiId)
-        let items = try oldDB.prepare(accountQuery)
-        for item in  items {
-            let query = accountProfileTable.insert(alias <- item[alias],
-                                                   photo <- item[photo])
-            try newDB.run(query)
-        }
+//    let id = Expression<Int64>("id")
+//    func getLegacyProfileID(profileURI: String, dataBase: Connection) throws -> Int64? {
+//        let query = contactsProfileTable.filter(uri == profileURI)
+//        let items = try dataBase.prepare(query)
+//        for item in  items {
+//            return item[id]
+//        }
+//        return nil
+//    }
+//    func getLegacyProfiles(accountURI: String,
+//                           accountId: String,
+//                           database: Connection) throws -> [Int64: String] {
+//        let query = contactsProfileTable.filter(accountId != uri && accountURI != uri)
+//        let items = try database.prepare(query)
+//        var profiles = [Int64: String]()
+//        for item in  items {
+//            profiles[item[id]] = item[uri]
+//        }
+//        return profiles
+//    }
+//    func migrateToDBForAccount (from oldDB: Connection,
+//                                to newDB: Connection,
+//                                jamiId: String,
+//                                accountId: String) throws {
+//        // migrate account profile
+//        // get account profile, it should be only one
+//        let accountQuery = contactsProfileTable.filter(uri == jamiId)
+//        let items = try oldDB.prepare(accountQuery)
+//        for item in  items {
+//            let query = accountProfileTable.insert(alias <- item[alias],
+//                                                   photo <- item[photo])
+//            try newDB.run(query)
+//        }
+//
+//        //migrate contacts rofiles
+//        let contactQuery = contactsProfileTable.filter((uri != jamiId) && (uri != accountId))
+//        let rows = try oldDB.prepare(contactQuery)
+//        for row in  rows {
+//            let query = contactsProfileTable.insert(uri <- "ring:" + row[uri],
+//                                                    alias <- row[alias],
+//                                                    photo <- row[photo],
+//                                                    type <- row[type])
+//            try newDB.run(query)
+//        }
+//    }
 
-        //migrate contacts rofiles
-        let contactQuery = contactsProfileTable.filter((uri != jamiId) && (uri != accountId))
-        let rows = try oldDB.prepare(contactQuery)
-        for row in  rows {
-            let query = contactsProfileTable.insert(uri <- "ring:" + row[uri],
-                                                    alias <- row[alias],
-                                                    photo <- row[photo],
-                                                    type <- row[type])
-            try newDB.run(query)
-        }
-    }
+//    func createAccountTable(accountDb: Connection) {
+//        do {
+//            try accountDb.run(accountProfileTable.create(ifNotExists: true) { table in
+//                table.column(alias)
+//                table.column(photo)
+//            })
+//        } catch _ {
+//            print("Table already exists")
+//        }
+//    }
 
-    func createAccountTable(accountDb: Connection) {
+    func dropAccountTable(accountDb: Connection) {
         do {
-            try accountDb.run(accountProfileTable.create(ifNotExists: true) { table in
-                table.column(alias)
-                table.column(photo)
-            })
-        } catch _ {
-            print("Table already exists")
-        }
-    }
-
-    func updateAccountProfile(accountAlias: String?, accountPhoto: String?, dataBase: Connection) -> Bool {
-        do {
-            if try dataBase.pluck(accountProfileTable) != nil {
-                try dataBase.run(accountProfileTable.update(alias <- accountAlias,
-                                                            photo <- accountPhoto))
-            } else {
-                try dataBase.run(accountProfileTable.insert(alias <- accountAlias,
-                                                            photo <- accountPhoto))
-            }
-            return true
+            try accountDb.run(accountProfileTable.drop(ifExists: true))
         } catch {
-            return false
+            debugPrint(error)
         }
     }
 
-    func getAccountProfile(dataBase: Connection) -> AccountProfile? {
+    func dropProfileTable(accountDb: Connection) {
+        do {
+            try accountDb.run(contactsProfileTable.drop(ifExists: true))
+        } catch {
+            debugPrint(error)
+        }
+    }
+
+//    func updateAccountProfile(accountAlias: String?, accountPhoto: String?, dataBase: Connection) -> Bool {
+//        do {
+//            if try dataBase.pluck(accountProfileTable) != nil {
+//                try dataBase.run(accountProfileTable.update(alias <- accountAlias,
+//                                                            photo <- accountPhoto))
+//            } else {
+//                try dataBase.run(accountProfileTable.insert(alias <- accountAlias,
+//                                                            photo <- accountPhoto))
+//            }
+//            return true
+//        } catch {
+//            return false
+//        }
+//    }
+
+    func getAccountProfile(dataBase: Connection) -> Profile? {
         do {
             guard let row = try dataBase.pluck(accountProfileTable) else { return nil}
-            return (row[alias], row[photo])
+            return Profile("", row[alias], row[photo], ProfileType.ring.rawValue)
         } catch {
             return nil
         }
     }
+//
+//    func createContactsTable(accountDb: Connection) {
+//        do {
+//            try accountDb.run(contactsProfileTable.create(ifNotExists: true) { table in
+//                table.column(uri, unique: true)
+//                table.column(alias)
+//                table.column(photo)
+//                table.column(type)
+//            })
+//            try accountDb.run(contactsProfileTable.createIndex(uri))
+//        } catch _ {
+//            print("Table already exists")
+//        }
+//    }
 
-    func createContactsTable(accountDb: Connection) {
-        do {
-            try accountDb.run(contactsProfileTable.create(ifNotExists: true) { table in
-                table.column(uri, unique: true)
-                table.column(alias)
-                table.column(photo)
-                table.column(type)
-            })
-            try accountDb.run(contactsProfileTable.createIndex(uri))
-        } catch _ {
-            print("Table already exists")
-        }
-    }
+//    func insert(item: Profile, dataBase: Connection) -> Bool {
+//        let query = contactsProfileTable.insert(uri <- item.uri,
+//                                  alias <- item.alias,
+//                                  photo <- item.photo,
+//                                  type <- item.type)
+//        do {
+//            let rowId = try dataBase.run(query)
+//            guard rowId > 0 else {
+//                return false
+//            }
+//            return true
+//        } catch _ {
+//            return false
+//        }
+//    }
 
-    func insert(item: Profile, dataBase: Connection) -> Bool {
-        let query = contactsProfileTable.insert(uri <- item.uri,
-                                  alias <- item.alias,
-                                  photo <- item.photo,
-                                  type <- item.type)
-        do {
-            let rowId = try dataBase.run(query)
-            guard rowId > 0 else {
-                return false
-            }
-            return true
-        } catch _ {
-            return false
-        }
-    }
-
-    func delete(item: Profile, dataBase: Connection) -> Bool {
-        let profileUri = item.uri
-        let query = contactsProfileTable.filter(uri == profileUri)
-        do {
-            let deletedRows = try dataBase.run(query.delete())
-            guard deletedRows == 1 else {
-                return false
-            }
-            return true
-        } catch _ {
-            return false
-        }
-    }
+//    func delete(item: Profile, dataBase: Connection) -> Bool {
+//        let profileUri = item.uri
+//        let query = contactsProfileTable.filter(uri == profileUri)
+//        do {
+//            let deletedRows = try dataBase.run(query.delete())
+//            guard deletedRows == 1 else {
+//                return false
+//            }
+//            return true
+//        } catch _ {
+//            return false
+//        }
+//    }
 
     func selectAll(dataBase: Connection) throws -> [Profile]? {
         var profiles = [Profile]()
@@ -173,45 +189,45 @@ final class ProfileDataHelper {
         return profiles
     }
 
-    func selectProfile(profileURI: String, dataBase: Connection) throws -> Profile? {
-        let query = contactsProfileTable.filter(uri == profileURI)
-        let items = try dataBase.prepare(query)
-        // for one URI we should have only one profile
-        for item in  items {
-            return Profile(uri: item[uri], alias: item[alias],
-                           photo: item[photo], type: item[type])
-        }
-        return nil
-    }
+//    func selectProfile(profileURI: String, dataBase: Connection) throws -> Profile? {
+//        let query = contactsProfileTable.filter(uri == profileURI)
+//        let items = try dataBase.prepare(query)
+//        // for one URI we should have only one profile
+//        for item in  items {
+//            return Profile(uri: item[uri], alias: item[alias],
+//                           photo: item[photo], type: item[type])
+//        }
+//        return nil
+//    }
 
-    func insertOrUpdateProfile(item: Profile, dataBase: Connection) throws {
-        try dataBase.transaction {
-            let selectQuery = contactsProfileTable.filter(uri == item.uri)
-            let rows = try dataBase.run(selectQuery.update(alias <- item.alias,
-                                                           photo <- item.photo))
-            if rows > 0 {
-                return
-            }
-            let insertQuery = contactsProfileTable.insert(uri <- item.uri,
-                                           alias <- item.alias,
-                                           photo <- item.photo,
-                                           type <- item.type)
-            let rowId = try dataBase.run(insertQuery)
-            guard rowId > 0 else {
-                throw DataAccessError.databaseError
-            }
-        }
-    }
-
-    func deleteAll(dataBase: Connection) -> Bool {
-        do {
-            if try dataBase.run(contactsProfileTable.delete()) > 0 {
-                return true
-            } else {
-                return false
-            }
-        } catch {
-            return false
-        }
-    }
+//    func insertOrUpdateProfile(item: Profile, dataBase: Connection) throws {
+//        try dataBase.transaction {
+//            let selectQuery = contactsProfileTable.filter(uri == item.uri)
+//            let rows = try dataBase.run(selectQuery.update(alias <- item.alias,
+//                                                           photo <- item.photo))
+//            if rows > 0 {
+//                return
+//            }
+//            let insertQuery = contactsProfileTable.insert(uri <- item.uri,
+//                                           alias <- item.alias,
+//                                           photo <- item.photo,
+//                                           type <- item.type)
+//            let rowId = try dataBase.run(insertQuery)
+//            guard rowId > 0 else {
+//                throw DataAccessError.databaseError
+//            }
+//        }
+//    }
+//
+//    func deleteAll(dataBase: Connection) -> Bool {
+//        do {
+//            if try dataBase.run(contactsProfileTable.delete()) > 0 {
+//                return true
+//            } else {
+//                return false
+//            }
+//        } catch {
+//            return false
+//        }
+//    }
 }

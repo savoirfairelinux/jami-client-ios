@@ -202,14 +202,16 @@ class AccountsService: AccountAdapterDelegate {
 
     fileprivate func loadDatabases() -> Bool {
         for account in accountList {
-            if dbManager.isNeedMigrationToAccountDB(accountId: account.id) {
-                do {
-                    if let jamiId = AccountModelHelper
-                        .init(withAccount: account).ringId {
-                        try dbManager.migrateToAccountDB(accountId: account.id,
-                                                         jamiId: jamiId)
-                    }
-                } catch { return false}
+            if dbManager.needMigrateToDbVarsion2(accountId: account.id) {
+                if let jamiId = AccountModelHelper
+                    .init(withAccount: account).ringId {
+                    let type = AccountModelHelper
+                        .init(withAccount: account).isAccountSip() ? AccountType.sip : AccountType.ring
+                    return dbManager.migrateToDbVersion2(accountId: account.id,
+                                               jamiId: jamiId, accountType: type)
+                } else {
+                    return false
+                }
             } else {
                 do {
                     // return false if could not open database connection
@@ -300,7 +302,7 @@ class AccountsService: AccountAdapterDelegate {
         return true
     }
 
-    func getAccountProfile(accountId: String) -> AccountProfile? {
+    func getAccountProfile(accountId: String) -> Profile? {
         return self.dbManager.accountProfile(for: accountId)
     }
 
@@ -361,7 +363,9 @@ class AccountsService: AccountAdapterDelegate {
                 if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
                     throw AddAccountError.unknownError
                 }
-                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id)
+                let uri = JamiURI(schema: URIType.ring, infoHach: accountModel.jamiId)
+                let uriString = uri.uriString
+                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString ?? "")
                 self.loadAccountsFromDaemon()
                 return accountModel
             }.take(1)
@@ -386,7 +390,10 @@ class AccountsService: AccountAdapterDelegate {
             }
             guard let account = self.accountAdapter.addAccount(accountDetails) else {return false}
             _ = try self.dbManager.createDatabaseForAccount(accountId: account)
-            _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: account)
+            let hash = userName + "@" + sipServer + ":" + port
+            let uri = JamiURI(schema: URIType.sip, infoHach: hash)
+            let uriString = uri.uriString
+            _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: account, accountURI: uriString ?? "")
             self.loadAccountsFromDaemon()
             let newAccount = self.getAccount(fromAccountId: account)
             self.currentAccount = newAccount
@@ -440,7 +447,9 @@ class AccountsService: AccountAdapterDelegate {
                 if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
                     throw AddAccountError.unknownError
                 }
-                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id)
+                let uri = JamiURI(schema: URIType.ring, infoHach: accountModel.jamiId)
+                let uriString = uri.uriString
+                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString ?? "")
                 self.loadAccountsFromDaemon()
                 return accountModel
             }.take(1)
@@ -875,7 +884,15 @@ class AccountsService: AccountAdapterDelegate {
         }
         let accountDetails = getAccountDetails(fromAccountId: account)
         let displayName: String? =  accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName))
-        _ = self.dbManager.saveAccountProfile(alias: displayName, photo: photo, accountId: account)
+
+        guard let accountToUpdate = self.getAccount(fromAccountId: account) else {return}
+        let type = accountToUpdate.type == .ring ? URIType.ring : URIType.sip
+
+        let hash = accountToUpdate.type == .ring ? accountToUpdate.jamiId : accountToUpdate.username
+
+        let uri = JamiURI(schema: type, infoHach: hash)
+        let uriString = uri.uriString
+        _ = self.dbManager.saveAccountProfile(alias: displayName, photo: photo, accountId: account, accountURI: uriString ?? "")
     }
 
     // MARK: Push Notifications
