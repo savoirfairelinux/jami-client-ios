@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f2dd1f5_46457ea6",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-18T21:31:58Z",
+      "side": 1,
+      "message": "could it be one property copyable?",
+      "revId": "adc731a232f0993f75d5a1f01e641ea298a37107",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f622c7b_ffcf8d34",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-18T21:31:58Z",
+      "side": 1,
+      "message": "does it necessary? view model messages binded to table.",
+      "revId": "adc731a232f0993f75d5a1f01e641ea298a37107",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37fa7d22_4b0d0239",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-18T21:31:58Z",
+      "side": 1,
+      "message": "return if account nil, to have less nested code",
+      "revId": "adc731a232f0993f75d5a1f01e641ea298a37107",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
