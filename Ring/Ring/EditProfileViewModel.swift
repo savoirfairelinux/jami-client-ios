@@ -57,7 +57,7 @@ class EditProfileViewModel {
             })
         }()
 
-    var profileForCurrentAccount = PublishSubject<AccountProfile>()
+    var profileForCurrentAccount = PublishSubject<Profile>()
 
     lazy var profileName: Observable<String?> = { [unowned self] in
         return profileForCurrentAccount.share()
@@ -107,9 +107,14 @@ class EditProfileViewModel {
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName), withValue: self.name)
         account.details = details
         self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
+        if let accountUri = AccountModelHelper.init(withAccount: account).uri {
+            self.profileService.updateAccountProfile(accountId: account.id,
+            alias: self.name,
+            photo: photo, accountURI: accountUri)
+            return}
         self.profileService.updateAccountProfile(accountId: account.id,
                                            alias: self.name,
-                                           photo: photo)
+                                           photo: photo, accountURI: "")
     }
 
     func updateImage(_ image: UIImage) {

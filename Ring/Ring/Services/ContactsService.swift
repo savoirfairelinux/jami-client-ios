@@ -85,7 +85,7 @@ class ContactsService {
 
     func loadSipContacts(withAccount account: AccountModel) {
         guard let profiles = self.dbManager
-            .getProfilesForAccount(accountID: account.id) else {return}
+            .getProfilesForAccount(accountId: account.id) else {return}
         let contacts = profiles.map({ profile in
             return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHach: profile.uri))
         })
@@ -375,7 +375,7 @@ extension ContactsService: ContactsAdapterDelegate {
 
     func getProfile(uri: String, accountId: String) -> Profile? {
         do {
-            return try self.dbManager.getProfile(for: uri, createIfNotExists: false, accounId: accountId)
+            return try self.dbManager.getProfile(for: uri, createIfNotExists: false, accountId: accountId)
         } catch {
             return nil
         }
