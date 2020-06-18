@@ -107,9 +107,15 @@ class EditProfileViewModel {
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName), withValue: self.name)
         account.details = details
         self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
+        let type = account.type == .ring ? URIType.ring : URIType.sip
+
+        let hash = account.type == .ring ? account.jamiId : account.username
+
+        let uri = JamiURI(schema: type, infoHach: hash)
+        let uriString = uri.uriString ?? ""
         self.profileService.updateAccountProfile(accountId: account.id,
                                            alias: self.name,
-                                           photo: photo)
+                                           photo: photo, accountURI: uriString)
     }
 
     func updateImage(_ image: UIImage) {
