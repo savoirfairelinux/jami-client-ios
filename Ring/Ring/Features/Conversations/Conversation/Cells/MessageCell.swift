@@ -25,11 +25,14 @@
 import UIKit
 import Reusable
 import RxSwift
+import RxCocoa
 import ActiveLabel
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
 class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
+
+    // MARK: Properties
 
     let log = SwiftyBeaver.self
 
@@ -69,7 +72,20 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     var playerHeight = Variable<CGFloat>(0)
 
+    private(set) var messageId: Int64?
+    private(set) var bubblePosition: BubblePosition?
+    private(set) var isTransfer: Bool = false
+    private let _deleteMessage = BehaviorRelay<Bool>(value: false)
+    var deleteMessage: Observable<Bool> { _deleteMessage.asObservable() }
+
+    private var longGestureRecognizer: UILongPressGestureRecognizer?
+
+    // MARK: prepareForReuse
+
     override func prepareForReuse() {
+        self.prepareForReuseLongGesture()
+        self.setCellTimeLabelVisibility(hide: true)
+
         if self.sendingIndicator != nil {
             self.sendingIndicator.stopAnimating()
         }
@@ -78,9 +94,20 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.transferProgressView.removeFromSuperview()
         self.playerView?.removeFromSuperview()
         self.composingMsg.removeFromSuperview()
-        playerHeight.value = 0
+        self.playerHeight.value = 0
         self.disposeBag = DisposeBag()
         super.prepareForReuse()
+    }
+
+    private func prepareForReuseLongGesture() {
+        self.messageId = nil
+        self.bubblePosition = nil
+        self.isTransfer = false
+        self._deleteMessage.accept(false)
+        if let longGestureRecognizer = longGestureRecognizer {
+            self.bubble.removeGestureRecognizer(longGestureRecognizer)
+            self.longGestureRecognizer = nil
+        }
     }
 
     func startProgressMonitor(_ item: MessageViewModel,
@@ -145,7 +172,18 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
 
-    func showCopyMenu() {
+    private func configureLongGesture(_ messageId: Int64, _ bubblePosition: BubblePosition, _ isTransfer: Bool) {
+        self.messageId = messageId
+        self.bubblePosition = bubblePosition
+        self.isTransfer = isTransfer
+
+        self.bubble.isUserInteractionEnabled = true
+        longGestureRecognizer = UILongPressGestureRecognizer()
+        longGestureRecognizer!.rx.event.bind(onNext: { [weak self] _ in self?.showCopyMenu() }).disposed(by: self.disposeBag)
+        self.bubble.addGestureRecognizer(longGestureRecognizer!)
+    }
+
+    private func showCopyMenu() {
         becomeFirstResponder()
         let menu = UIMenuController.shared
         if !menu.isMenuVisible {
@@ -154,18 +192,13 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
 
-    func setup() {
-        let longGestureRecognizer = UILongPressGestureRecognizer()
-        self.messageLabel.isUserInteractionEnabled = true
-        self.messageLabel.addGestureRecognizer(longGestureRecognizer)
-        longGestureRecognizer.rx.event.bind(onNext: { [weak self] _ in
-            self?.showCopyMenu()
-        }).disposed(by: self.disposeBag)
-    }
-
     override func copy(_ sender: Any?) {
         UIPasteboard.general.string = self.messageLabel.text
         UIMenuController.shared.setMenuVisible(false, animated: true)
+    }
+
+    override func delete(_ sender: Any?) {
+        _deleteMessage.accept(true)
     }
 
     override var canBecomeFirstResponder: Bool {
@@ -173,21 +206,21 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     }
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if action == #selector(UIResponderStandardEditActions.copy) {
-            return true
-        }
-        return false
+        return action == #selector(UIResponderStandardEditActions.copy) && self.bubblePosition != .generated && !self.isTransfer ||
+            action == #selector(UIResponderStandardEditActions.delete)
     }
 
-    func formatCellTimeLabel(_ item: MessageViewModel) {
-        // hide for potentially reused cell
-        self.timeLabel.isHidden = true
-        self.leftDivider.isHidden = true
-        self.rightDivider.isHidden = true
+    private func setCellTimeLabelVisibility(hide: Bool) {
+        self.timeLabel.isHidden = hide
+        self.leftDivider.isHidden = hide
+        self.rightDivider.isHidden = hide
+    }
 
-        if item.timeStringShown == nil {
-            return
-        }
+    private func formatCellTimeLabel(_ item: MessageViewModel) {
+        // hide for potentially reused cell
+        self.setCellTimeLabelVisibility(hide: true)
+
+        if item.timeStringShown == nil { return }
 
         // setup the label
         self.timeLabel.text = item.timeStringShown
@@ -195,32 +228,26 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.timeLabel.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.medium)
 
         // show the time
-        self.timeLabel.isHidden = false
-        self.leftDivider.isHidden = false
-        self.rightDivider.isHidden = false
+        self.setCellTimeLabelVisibility(hide: false)
     }
 
     // swiftlint:disable cyclomatic_complexity
     func applyBubbleStyleToCell(_ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
-        guard let items = items else {
-            return
-        }
+
+        guard let items = items else { return }
         let item = items[indexPath.row]
-        let type = item.bubblePosition()
-        var bubbleColor: UIColor
-        if item.isTransfer {
+
+        let bubbleColor: UIColor = { (bubblePosition: BubblePosition) -> UIColor in
             if item.content.containsOnlyEmoji {
-                bubbleColor = UIColor.jamiMsgCellEmoji
+                return UIColor.jamiMsgCellEmoji
+            } else if bubblePosition == .received {
+                return UIColor.jamiMsgCellReceived
+            } else if item.isTransfer {
+                return UIColor(hex: 0xcfebf5, alpha: 1.0)
             } else {
-                bubbleColor = type == .received ? UIColor.jamiMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
+                return UIColor.jamiMsgCellSent
             }
-        } else {
-            if item.content.containsOnlyEmoji {
-                bubbleColor = UIColor.jamiMsgCellEmoji
-            } else {
-                bubbleColor = type == .received ? UIColor.jamiMsgCellReceived : UIColor.jamiMsgCellSent
-            }
-        }
+        }(item.bubblePosition())
 
         if item.isTransfer {
             self.messageLabel.enabledTypes = []
@@ -233,7 +260,6 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             }
         } else {
             self.messageLabel.enabledTypes = [.url]
-            self.setup()
             self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
             self.messageLabel.handleURLTap { url in
                 let urlString = url.absoluteString
@@ -303,18 +329,17 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.bubbleViewMask?.backgroundColor = UIColor.jamiMsgBackground
         self.transferImageView.backgroundColor = UIColor.jamiMsgBackground
         buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 999.0)
-        guard let item = items?[indexPath.row] else {
-            return
-        }
+        guard let item = items?[indexPath.row] else { return }
 
         self.transferImageView.removeFromSuperview()
         self.playerView?.removeFromSuperview()
         self.composingMsg.removeFromSuperview()
-        playerHeight.value = 0
+        self.playerHeight.value = 0
         self.bubbleViewMask?.isHidden = true
 
         // hide/show time label
         self.formatCellTimeLabel(item)
+        self.configureLongGesture(item.message.messageId, item.bubblePosition(), item.isTransfer)
 
         if item.bubblePosition() == .generated {
             self.bubble.backgroundColor = UIColor.jamiMsgCellReceived
@@ -412,19 +437,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
                     .bind(to: self.failedStatusLabel.rx.isHidden)
                     .disposed(by: self.disposeBag)
                 if self.messageReadIndicator != nil {
-                    Observable<(Data?, String, Bool)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
-                                                                      conversationViewModel.bestName.asObservable(),
-                                                                      item.displayReadIndicator.asObservable()) { ($0, $1, $2) }
-                        .observeOn(MainScheduler.instance)
-                        .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value, item.displayReadIndicator.value))
-                        .subscribe({ [weak self] profileData -> Void in
-                            guard let bestName = profileData.element?.1 else { return }
-                            self?.messageReadIndicator?.subviews.forEach({ $0.removeFromSuperview() })
-                            if let displayReadIndicator = profileData.element?.2, displayReadIndicator {
-                                self?.messageReadIndicator?.addSubview(AvatarView(profileImageData: profileData.element?.0, username: bestName, size: 12))
-                            }
-                        })
-                        .disposed(by: self.disposeBag)
+                    configureMessageReadAvatar(item, conversationViewModel)
                 }
             }
         } else if item.bubblePosition() == .received {
@@ -443,31 +456,42 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
                     addComposingMsgView()
                 }
             }
-            // received message avatar
-            Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
-                                                      conversationViewModel.userName.asObservable(),
-                                                      conversationViewModel.displayName.asObservable()) { profileImage, username, displayName in
-                                                        if let displayName = displayName, !displayName.isEmpty {
-                                                            return (profileImage, displayName)
-                                                        }
-                                                        return (profileImage, username)
-                }
-                .observeOn(MainScheduler.instance)
-                .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value))
-                .subscribe({ [weak self] profileData -> Void in
-                    guard let data = profileData.element?.1 else { return }
-                    self?.avatarView
-                        .subviews.forEach({ $0.removeFromSuperview() })
-                    self?.avatarView
-                        .addSubview(
-                            AvatarView(profileImageData: profileData.element?.0,
-                                               username: data,
-                                               size: 32))
-                    self?.avatarView.isHidden = !(item.sequencing == .lastOfSequence || item.sequencing == .singleMessage)
-                    return
-                })
-                .disposed(by: self.disposeBag)
+
+            configureReceivedMessageAvatar(item.sequencing, conversationViewModel)
         }
+    }
+
+    private func configureReceivedMessageAvatar(_ itemSequencing: MessageSequencing, _ conversationViewModel: ConversationViewModel) {
+
+        Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
+                                                  conversationViewModel.bestName.asObservable()) { ($0, $1) }
+            .observeOn(MainScheduler.instance)
+            .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value))
+            .subscribe({ [weak self] profileData in
+                guard let data = profileData.element?.1 else { return }
+                self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
+                if itemSequencing == .lastOfSequence || itemSequencing == .singleMessage {
+                    self?.avatarView.addSubview(AvatarView(profileImageData: profileData.element?.0, username: data, size: 32))
+                }
+            })
+            .disposed(by: self.disposeBag)
+     }
+
+    fileprivate func configureMessageReadAvatar(_ item: MessageViewModel, _ conversationViewModel: ConversationViewModel) {
+
+        Observable<(Data?, String, Bool)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
+                                                        conversationViewModel.bestName.asObservable(),
+                                                        item.displayReadIndicator.asObservable()) { ($0, $1, $2) }
+            .observeOn(MainScheduler.instance)
+            .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value, item.displayReadIndicator.value))
+            .subscribe({ [weak self] profileData in
+                guard let bestName = profileData.element?.1 else { return }
+                self?.messageReadIndicator?.subviews.forEach({ $0.removeFromSuperview() })
+                if let displayReadIndicator = profileData.element?.2, displayReadIndicator {
+                    self?.messageReadIndicator?.addSubview(AvatarView(profileImageData: profileData.element?.0, username: bestName, size: 12))
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func addComposingMsgView() {
