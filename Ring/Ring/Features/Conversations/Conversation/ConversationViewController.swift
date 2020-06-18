@@ -46,7 +46,7 @@ class ConversationViewController: UIViewController,
     var messageViewModels: [MessageViewModel]?
     var textFieldShouldEndEditing = false
     var bottomOffset: CGFloat = 0
-    let scrollOffsetThreshold: CGFloat = 600
+    let scrollOffsetThreshold: CGFloat = 0.25 * 600 // ~= 25% of view height
     var bottomHeight: CGFloat = 0.00
     var isExecutingDeleteMessage: Bool = false
 
@@ -683,7 +683,6 @@ class ConversationViewController: UIViewController,
     }
 
     fileprivate var isBottomContentOffset: Bool {
-        updateBottomOffset()
         let offset = abs((self.tableView.contentOffset.y + self.tableView.contentInset.top) - bottomOffset)
         return offset <= scrollOffsetThreshold
     }
@@ -974,7 +973,11 @@ extension ConversationViewController: UITableViewDataSource {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak cell] (shouldDelete) in
                 guard shouldDelete, let self = self, let cell = cell, let messageId = cell.messageId else { return }
+<<<<<<< HEAD   (eb1790 UI: Delete option on message long press)
                 self.isExecutingDeleteMessage = true
+=======
+                self.updateBottomOffset()
+>>>>>>> CHANGE (fd647a UI: Delete option on message long press)
                 self.viewModel.deleteMessage(messageId: messageId)
             })
             .disposed(by: cell.disposeBag)
