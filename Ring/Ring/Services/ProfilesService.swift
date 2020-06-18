@@ -46,7 +46,7 @@ class ProfilesService {
     fileprivate let log = SwiftyBeaver.self
 
     var profiles = [String: ReplaySubject<Profile>]()
-    var accountProfiles = [String: ReplaySubject<AccountProfile>]()
+    var accountProfiles = [String: ReplaySubject<Profile>]()
 
     let dbManager: DBManager
 
@@ -69,7 +69,10 @@ class ProfilesService {
         guard let accountId = notification.userInfo?[ProfileNotificationsKeys.accountId.rawValue] as? String else {
             return
         }
-        self.triggerProfileSignal(uri: ringId, createIfNotexists: false, accountId: accountId)
+
+        let uri = JamiURI(schema: URIType.ring, infoHach: ringId)
+        let uriString = uri.uriString ?? ringId
+        self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -197,13 +200,12 @@ class ProfilesService {
 }
 
 // MARK: account profile
-typealias AccountProfile = (alias: String?, photo: String?)
 extension ProfilesService {
-    func getAccountProfile(accountId: String) -> Observable<AccountProfile> {
+    func getAccountProfile(accountId: String) -> Observable<Profile> {
         if let profile = self.accountProfiles[accountId] {
             return profile.asObservable().share()
         }
-        let profileObservable = ReplaySubject<AccountProfile>.create(bufferSize: 1)
+        let profileObservable = ReplaySubject<Profile>.create(bufferSize: 1)
         self.accountProfiles[accountId] = profileObservable
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.triggerAccountProfileSignal(accountId: accountId)
@@ -222,10 +224,10 @@ extension ProfilesService {
             }).disposed(by: self.disposeBag)
     }
 
-    func updateAccountProfile(accountId: String, alias: String?, photo: String?) {
+    func updateAccountProfile(accountId: String, alias: String?, photo: String?, accountURI: String) {
         if self.dbManager
             .saveAccountProfile(alias: alias, photo: photo,
-                                accountId: accountId) {
+                                accountId: accountId, accountURI: accountURI) {
             self.triggerAccountProfileSignal(accountId: accountId)
         }
     }
