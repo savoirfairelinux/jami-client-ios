@@ -24,7 +24,7 @@ import RxCocoa
 
 struct AccountItem {
     let account: AccountModel
-    let profileObservable: Observable<AccountProfile>
+    let profileObservable: Observable<Profile>
 }
 
 final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerViewDelegate, RxPickerViewDataSourceType, SectionedViewDataSourceType {
