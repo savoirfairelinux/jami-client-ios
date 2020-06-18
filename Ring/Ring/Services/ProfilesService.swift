@@ -222,10 +222,10 @@ extension ProfilesService {
             }).disposed(by: self.disposeBag)
     }
 
-    func updateAccountProfile(accountId: String, alias: String?, photo: String?) {
+    func updateAccountProfile(accountId: String, alias: String?, photo: String?, accountURI: String) {
         if self.dbManager
             .saveAccountProfile(alias: alias, photo: photo,
-                                accountId: accountId) {
+                                accountId: accountId, accountURI: accountURI) {
             self.triggerAccountProfileSignal(accountId: accountId)
         }
     }

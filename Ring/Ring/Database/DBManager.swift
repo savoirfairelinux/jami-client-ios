@@ -180,14 +180,47 @@ class DBManager {
         return self.dbConnections.isDBExistsFor(account: accountId)
     }
 
+    func isNeedMigrationToDb2(accountId: String) -> Bool {
+        // check if db was moved inside account folder and check db version
+        if !self.dbConnections.dbMovedToAccountFolder(for: accountId)  {return true}
+        return self.dbConnections.needMigrateToDB2(for: accountId)
+    }
+
+    func migrateToDb2(accountId: String, jamiId: String) -> Bool {
+        // move db to account folder.
+        // check if db already moved in case migration was running multiple times
+        if !self.dbConnections.dbMovedToAccountFolder(for: accountId) {
+            if !self.dbConnections.moveDbToAccountFolder(for: accountId) {
+                return false
+            }
+        }
+        guard let newDB = self.dbConnections.forAccount(account: accountId) else {
+            return false
+        }
+        // move profiles to vcards
+        do {
+            try newDB.transaction {
+                var result = try self.migrateAccountToVCard(for: accountId, jamiId: jamiId, dataBase: newDB)
+                if !result {
+                    throw DataAccessError.databaseError
+                }
+                result = try self.migrateProfilesToVCards(for: accountId, dataBase: newDB)
+                if !result {
+                    throw DataAccessError.databaseError
+                }
+            }
+        } catch _ as NSError {
+            return false
+        }
+        return true
+    }
+
     func createDatabaseForAccount(accountId: String) throws -> Bool {
         guard let newDB = self.dbConnections.forAccount(account: accountId) else {
             return false
         }
         do {
             try newDB.transaction {
-                profileHepler.createAccountTable(accountDb: newDB)
-                profileHepler.createContactsTable(accountDb: newDB)
                 conversationHelper.createTable(accountDb: newDB)
                 interactionHepler.createTable(accountDb: newDB)
             }
@@ -197,41 +230,84 @@ class DBManager {
         return true
     }
 
-    func migrateToAccountDB(accountId: String, jamiId: String) throws {
-        do {
-            guard let newDB = self.dbConnections.forAccount(account: accountId) else {
-                throw DataAccessError.datastoreConnectionError
-            }
-            try newDB.transaction {
-                profileHepler.createAccountTable(accountDb: newDB)
-                profileHepler.createContactsTable(accountDb: newDB)
-                conversationHelper.createTable(accountDb: newDB)
-                interactionHepler.createTable(accountDb: newDB)
-                guard let oldDb = self.dbConnections.getJamiDB() else {throw DataAccessError.datastoreConnectionError}
-                let profileFromJamiId = try self.profileHepler.getLegacyProfileID(profileURI: jamiId, dataBase: oldDb)
-                let profileFromAccountId = try self.profileHepler.getLegacyProfileID(profileURI: accountId, dataBase: oldDb)
-                let profile = profileFromJamiId != nil ? profileFromJamiId : profileFromAccountId
-                guard let accountProfile = profile else {throw DataAccessError.datastoreConnectionError}
-                let allProfiles = try self.profileHepler.getLegacyProfiles(accountURI: jamiId, accountId: accountId, database: oldDb)
-                try profileHepler.migrateToDBForAccount(from: oldDb, to: newDB, jamiId: jamiId, accountId: accountId)
-                VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
-                                     inFolder: VCardFolders.profile.rawValue)
-                    .subscribe(onSuccess: { [unowned self] card in
-                        let name = card.familyName
-                        let imageData: String? = card.imageData?.base64EncodedString()
-                        _ = self.saveAccountProfile(alias: name, photo: imageData,
-                                                    accountId: accountId)
-                    }).disposed(by: self.disposeBag)
-                try conversationHelper.migrateToDBForAccount(from: oldDb, to: newDB,
-                                                             accountProfileId: accountProfile,
-                                                             contactsMap: allProfiles)
-                try interactionHepler.migrateToDBForAccount(from: oldDb, to: newDB,
-                                                            accountProfileId: accountProfile,
-                                                            contactsMap: allProfiles)
-            }
-        } catch {
-            throw DataAccessError.databaseMigrationError
+//    func migrateToAccountDB(accountId: String, jamiId: String) throws {
+//        do {
+//            guard let newDB = self.dbConnections.forAccount(account: accountId) else {
+//                throw DataAccessError.datastoreConnectionError
+//            }
+//            try newDB.transaction {
+//                profileHepler.createAccountTable(accountDb: newDB)
+//                profileHepler.createContactsTable(accountDb: newDB)
+//                conversationHelper.createTable(accountDb: newDB)
+//                interactionHepler.createTable(accountDb: newDB)
+//                guard let oldDb = self.dbConnections.getJamiDB() else {throw DataAccessError.datastoreConnectionError}
+//                let profileFromJamiId = try self.profileHepler.getLegacyProfileID(profileURI: jamiId, dataBase: oldDb)
+//                let profileFromAccountId = try self.profileHepler.getLegacyProfileID(profileURI: accountId, dataBase: oldDb)
+//                let profile = profileFromJamiId != nil ? profileFromJamiId : profileFromAccountId
+//                guard let accountProfile = profile else {throw DataAccessError.datastoreConnectionError}
+//                let allProfiles = try self.profileHepler.getLegacyProfiles(accountURI: jamiId, accountId: accountId, database: oldDb)
+//                try profileHepler.migrateToDBForAccount(from: oldDb, to: newDB, jamiId: jamiId, accountId: accountId)
+//                VCardUtils.loadVCard(named: VCardFiles.myProfile.rawValue,
+//                                     inFolder: VCardFolders.profile.rawValue)
+//                    .subscribe(onSuccess: { [unowned self] card in
+//                        let name = card.familyName
+//                        let imageData: String? = card.imageData?.base64EncodedString()
+//                        _ = self.saveAccountProfile(alias: name, photo: imageData,
+//                                                    accountId: accountId, jamiId: jamiId)
+//                    }).disposed(by: self.disposeBag)
+//                try conversationHelper.migrateToDBForAccount(from: oldDb, to: newDB,
+//                                                             accountProfileId: accountProfile,
+//                                                             contactsMap: allProfiles)
+//                try interactionHepler.migrateToDBForAccount(from: oldDb, to: newDB,
+//                                                            accountProfileId: accountProfile,
+//                                                            contactsMap: allProfiles)
+//            }
+//        } catch {
+//            throw DataAccessError.databaseMigrationError
+//        }
+//    }
+
+    func migrateProfilesToVCards(for accountID: String, dataBase: Connection) throws -> Bool {
+        guard let profiles = try? self.profileHepler.selectAll(dataBase: dataBase) else {
+            return false
         }
+
+        let path = self.dbConnections.getPathForAccountContacts(accountID: accountID, createIfNotExists: true)
+        if path.isEmpty {
+            return false
+        }
+
+        for profile in profiles {
+            let profilePath = self.dbConnections.contactProfilePath(account: accountID, profileURI: profile.uri)
+
+            if self.dbConnections.contactProfileExists(account: accountID, profileURI: profile.uri) {
+                continue
+            }
+            try self.saveProfile(profile: profile, path: profilePath)
+            if !self.dbConnections.contactProfileExists(account: accountID, profileURI: profile.uri) {
+                return false
+            }
+        }
+        self.profileHepler.dropProfileTable(accountDb: dataBase)
+        return true
+    }
+
+    func migrateAccountToVCard(for accountID: String, jamiId: String, dataBase: Connection) throws -> Bool {
+        guard let accountProfile = self.profileHepler.getAccountProfile(dataBase: dataBase) else {
+            return self.dbConnections.accountProfileExists(account: accountID)
+        }
+
+        let path = self.dbConnections.accountProfilePath(account: accountID)
+        if path.isEmpty {
+            return false
+        }
+        let profile = Profile(jamiId, accountProfile.alias, accountProfile.photo, ProfileType.ring.rawValue)
+        try self.saveProfile(profile: profile, path: path)
+        if !self.dbConnections.accountProfileExists(account: accountID) {
+            return false
+        }
+        self.profileHepler.dropAccountTable(accountDb: dataBase)
+        return true
     }
 
     func removeDBForAccount(accountId: String) {
@@ -245,7 +321,7 @@ class DBManager {
         do {
             try _ = self.getConversationsFor(contactUri: contactUri,
                                          createIfNotExists: true,
-                                         dataBase: dataBase)
+                                         dataBase: dataBase, accountId: accountId)
         } catch {}
     }
 
@@ -264,7 +340,7 @@ class DBManager {
                     let author: String? = incoming ? contactUri : nil
                     guard let conversationID = try self?.getConversationsFor(contactUri: contactUri,
                                                                              createIfNotExists: true,
-                                                                             dataBase: dataBase) else {
+                                                                             dataBase: dataBase, accountId: accountId) else {
                             throw DBBridgingError.saveMessageFailed
                     }
                     let result = self?.addMessageTo(conversation: conversationID, author: author,
@@ -323,14 +399,28 @@ class DBManager {
     }
 
     func getProfilesForAccount(accountID: String) -> [Profile]? {
-        guard let database = self.dbConnections.forAccount(account: accountID) else {
-            return nil
-        }
+        var profiles = [Profile]()
         do {
-            return try self.profileHepler.selectAll(dataBase: database)
-        } catch {
-            return nil
+            let path = self.dbConnections.getPathForAccountContacts(accountID: accountID, createIfNotExists: true)
+            guard let documentURL = URL(string: path) else { return nil }
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentURL, includingPropertiesForKeys: nil, options: [])
+            for url in directoryContents {
+                if let data = FileManager.default.contents(atPath: url.path) {
+                    if let vCard = CNContactVCardSerialization.parseToVCard(data: data) {
+                        let imageString = String(data: vCard.imageData!, encoding: .utf8)
+                        let profile = Profile(vCard.phoneNumbers[0].value.stringValue, vCard.familyName, imageString, ProfileType.sip.rawValue)
+                        profiles.append(profile)
+                    } else {
+                        return nil
+                    }
+                }
+
+            }
         }
+        catch {
+            print(error.localizedDescription)
+        }
+        return profiles
     }
 
     func updateFileName(interactionID: Int64, name: String, accountId: String) -> Completable {
@@ -408,10 +498,10 @@ class DBManager {
                         .deleteAll(dataBase: dataBase) {
                         completable(.error(DBBridgingError.deleteConversationFailed))
                     }
-                    if !self.profileHepler
-                        .deleteAll(dataBase: dataBase) {
-                        completable(.error(DBBridgingError.deleteConversationFailed))
-                    }
+//                    if !self.profileHepler
+//                        .deleteAll(dataBase: dataBase) {
+//                        completable(.error(DBBridgingError.deleteConversationFailed))
+//                    }
                     completable(.completed)
                 }
             } catch {
@@ -435,7 +525,7 @@ class DBManager {
                     }
                     guard let conversationsId = try self.getConversationsFor(contactUri: participantUri,
                                                                              createIfNotExists: true,
-                                                                             dataBase: dataBase) else {
+                                                                             dataBase: dataBase, accountId: accountId) else {
                             throw DBBridgingError.deleteConversationFailed
                     }
                     guard let interactions = try self.interactionHepler
@@ -487,11 +577,7 @@ class DBManager {
 
     func accountProfileObservable(for accountId: String) -> Observable<AccountProfile> {
         return Observable.create { observable in
-            guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
-                observable.on(.error(DBBridgingError.getProfileFailed))
-                return Disposables.create { }
-            }
-            guard let profile = self.profileHepler.getAccountProfile(dataBase: dataBase) else {
+            guard let profile = self.accountProfile(for: accountId) else {
                 observable.on(.error(DBBridgingError.getProfileFailed))
                 return Disposables.create { }
             }
@@ -502,32 +588,37 @@ class DBManager {
     }
 
     func accountProfile(for accountId: String) -> AccountProfile? {
-        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
-            return nil
-        }
-        return self.profileHepler.getAccountProfile(dataBase: dataBase)
+        let path = self.dbConnections.accountProfilePath(account: accountId)
+        guard let profile = self.getProfileFromPath(path: path) else { return nil }
+        return AccountProfile(profile.alias, profile.photo)
     }
 
     func createOrUpdateRingProfile(profileUri: String, alias: String?, image: String?, accountId: String) -> Bool {
-        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+        guard let path = self.dbConnections.contactProfilePath(account: accountId, profileURI: profileUri, createifNotExists: true) else {return false}
+
+        let profile = Profile(profileUri, alias, image, ProfileType.ring.rawValue)
+
+        do {
+            try self.saveProfile(profile: profile, path: path)
+        } catch {
             return false
         }
-        let profile = Profile(profileUri, alias, image, ProfileType.ring.rawValue)
-        do {
-            try self.profileHepler.insertOrUpdateProfile(item: profile, dataBase: dataBase)
-        } catch {
-            return  false
-        }
-        return true
+        return self.dbConnections.contactProfileExists(account: accountId, profileURI: profileUri)
     }
 
-    func saveAccountProfile(alias: String?, photo: String?, accountId: String) -> Bool {
-        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+    func saveAccountProfile(alias: String?, photo: String?, accountId: String, accountURI: String) -> Bool {
+        let path = self.dbConnections.accountDbPath(account: accountId)
+        if path.isEmpty {
             return false
         }
-        return self.profileHepler.updateAccountProfile(accountAlias: alias,
-                                                       accountPhoto: photo,
-                                                       dataBase: dataBase)
+        let type = accountURI.contains("ring") ? ProfileType.ring : ProfileType.sip
+        let profile = Profile(accountURI, alias, photo, type.rawValue)
+        do {
+            try self.saveProfile(profile: profile, path: path)
+            return self.dbConnections.accountProfileExists(account: accountId)
+        } catch {
+            return false
+        }
     }
 
     // MARK: Private functions
@@ -548,8 +639,7 @@ class DBManager {
                 let partisipant = participants.first else {
                     continue
             }
-            guard let participantProfile = try self.profileHepler.selectProfile(profileURI: partisipant,
-                                                                                dataBase: dataBase) else {
+            guard let participantProfile = try self.getProfile(for: partisipant, createIfNotExists: false, accounId: accountId) else {
                 continue
             }
             let type = participantProfile.uri.contains("sip:") ? URIType.sip : URIType.ring
@@ -656,30 +746,52 @@ class DBManager {
     }
 
     func getProfile(for profileUri: String, createIfNotExists: Bool, accounId: String) throws -> Profile? {
-        guard let dataBase = self.dbConnections.forAccount(account: accounId) else {
-            throw DataAccessError.datastoreConnectionError
+        guard let profilePath = self.dbConnections
+            .contactProfilePath(account: accounId,
+                                profileURI: profileUri,
+                                createifNotExists: createIfNotExists) else {return nil}
+        if self.dbConnections
+            .contactProfileExists(account: accounId,
+                                  profileURI: profileUri) || !createIfNotExists {
+            return getProfileFromPath(path: profilePath)
         }
-        if let profile = try self.profileHepler.selectProfile(profileURI: profileUri, dataBase: dataBase) {
-            return profile
-        }
-        if !createIfNotExists {
-            return nil
-        }
-        // for now we use template profile
-        let profile = self.createTemplateProfile(uri: profileUri)
-        if self.profileHepler.insert(item: profile, dataBase: dataBase) {
-            return try self.profileHepler.selectProfile(profileURI: profileUri, dataBase: dataBase)
-        }
-        return nil
+        let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
+        let profile = Profile(profileUri, nil, nil, type.rawValue)
+        try self.saveProfile(profile: profile, path: profilePath)
+        return getProfileFromPath(path: profilePath)
     }
 
-    private func createTemplateProfile(uri: String) -> Profile {
-        let type = uri.contains("ring") ? ProfileType.ring : ProfileType.sip
-        return Profile(uri, nil, nil, type.rawValue)
+    private func getProfileFromPath(path: String) -> Profile? {
+        guard let data = FileManager.default.contents(atPath: path),
+            let vCard = CNContactVCardSerialization.parseToVCard(data: data) else {
+                return nil
+        }
+        let profileURI = vCard.phoneNumbers[0].value.stringValue
+        let type = profileURI.contains("ring") ? ProfileType.ring : ProfileType.sip
+        var imageString = ""
+        if let data = vCard.imageData {
+            imageString = String(data: data, encoding: .utf8) ?? ""
+        }
+        let profile = Profile(profileURI, vCard.familyName, imageString, type.rawValue)
+        return profile
+    }
+
+    private func saveProfile(profile: Profile, path: String) throws {
+        let url = URL(fileURLWithPath: path)
+        let contactCard = CNMutableContact()
+        if let name = profile.alias {
+            contactCard.familyName = name
+        }
+        contactCard.phoneNumbers = [CNLabeledValue(label: CNLabelPhoneNumberiPhone, value: CNPhoneNumber(stringValue: profile.uri))]
+        if let photo = profile.photo {
+            contactCard.imageData = photo.data(using: .utf8)
+        }
+        let data = try CNContactVCardSerialization.dataWithImageAndUUID(from: contactCard, andImageCompression: nil)
+        try data.write(to: url)
     }
 
     private func getConversationsFor(contactUri: String,
-                                     createIfNotExists: Bool, dataBase: Connection) throws -> Int64? {
+                                     createIfNotExists: Bool, dataBase: Connection, accountId: String) throws -> Int64? {
         if let contactConversations = try self.conversationHelper
             .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase),
             let conv = contactConversations.first {
@@ -689,7 +801,7 @@ class DBManager {
             return nil
         }
         let conversationID = Int64(arc4random_uniform(10000000))
-        _ = self.profileHepler.insert(item: self.createTemplateProfile(uri: contactUri), dataBase: dataBase)
+        _ = try self.getProfile(for: contactUri, createIfNotExists: true, accounId: accountId)
         let conversationForContact = Conversation(conversationID, contactUri)
         if !self.conversationHelper.insert(item: conversationForContact, dataBase: dataBase) {
             return nil

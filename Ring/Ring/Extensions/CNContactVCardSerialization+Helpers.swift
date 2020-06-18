@@ -27,11 +27,12 @@ import Contacts
 enum VCardFields: String {
     case begin     = "BEGIN:VCARD"
     case uid       = "UID:"
-    case photoJPEG = "PHOTO;ENCODING=BASE64;TYPE=JPEG:"
-    case photoPNG  = "PHOTO;ENCODING=BASE64;TYPE=PNG:"
+    case photoJPEG = "PHOTO;TYPE=JPEG:"
+    case photoPNG  = "PHOTO;TYPE=PNG:"
     case end       = "END:VCARD"
     case name      = "N:"
     case fullName  = "FN:"
+    case telephone  = "TEL;other:"
 }
 
 extension CNContactVCardSerialization {
@@ -42,11 +43,11 @@ extension CNContactVCardSerialization {
         let beginString = VCardFields.begin.rawValue + "\n"
         let entryUIDString = VCardFields.uid.rawValue + contact.identifier + "\n"
         let name = contact.familyName.trimmingCharacters(in: .whitespacesAndNewlines)
-        let firstnameString = VCardFields.name.rawValue + name + "\n"
+        let telephoneString = VCardFields.telephone.rawValue + contact.phoneNumbers[0].value.stringValue + "\n"
         let fullNameString = VCardFields.fullName.rawValue + name + "\n"
         let endString = VCardFields.end.rawValue
 
-        var vCardString = beginString + entryUIDString + firstnameString + fullNameString + endString
+        var vCardString = beginString + entryUIDString + fullNameString + telephoneString + endString
 
         // if contact have an image add it to vCard data
         guard var image = contact.imageData  else {
@@ -96,6 +97,7 @@ extension CNContactVCardSerialization {
                     let vcard = CNMutableContact()
                     let name = String(nameRow.suffix(nameRow.count - 3))
                     vcard.familyName = name
+                    vcard.phoneNumbers = vCard.phoneNumbers
                     vcard.imageData = vCard.imageData
                     return vcard
                 }
