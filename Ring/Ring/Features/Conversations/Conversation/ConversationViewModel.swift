@@ -5,6 +5,7 @@
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -277,11 +278,8 @@ class ConversationViewModel: Stateable, ViewModel {
         return Observable
             .combineLatest(userName.asObservable(),
                            displayName.asObservable()) {(userName, displayname) in
-                            guard let name = displayname,
-                                !name.isEmpty else {
-                                    return userName
-                            }
-                            return name
+                            guard let displayname = displayname, !displayname.isEmpty else { return userName }
+                            return displayname
         }
     }()
 
@@ -401,6 +399,19 @@ class ConversationViewModel: Stateable, ViewModel {
         self.conversation.value.messages.filter { (message) -> Bool in
             return message.daemonId == daemonId && message.messageId == messageId
             }.first?.status = .displayed
+    }
+
+    func deleteMessage(messageId: Int64) {
+        if let account = self.accountService.currentAccount {
+            self.conversationsService
+                .deleteMessage(messagesId: messageId, accountId: account.id)
+                .subscribe(onCompleted: { [weak self] in
+                    self?.log.debug("Messages was deleted")
+                })
+                .disposed(by: disposeBag)
+            //self.conversation.value.messages.removeAll(where: { $0.messageId == messageId })
+            self.messages.value.removeAll(where: { $0.messageId == messageId })
+        }
     }
 
     fileprivate var unreadMessagesCount: Int {
