@@ -90,7 +90,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
     let injectionBag: InjectionBag
     //Values need to be updated when selected account changed
-    var profileImageForCurrentAccount = PublishSubject<AccountProfile>()
+    var profileImageForCurrentAccount = PublishSubject<Profile>()
 
     lazy var profileImage: Observable<UIImage> = { [unowned self] in
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {

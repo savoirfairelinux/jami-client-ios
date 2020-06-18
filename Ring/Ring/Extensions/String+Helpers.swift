@@ -131,4 +131,8 @@ extension String {
         }
         return fileIsImage
     }
+
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
+    }
 }
