@@ -55,7 +55,7 @@ class ContactRequestItem {
                                   createIfNotexists: false,
                                   accountId: contactRequest.accountId)
             .subscribe(onNext: { [weak self] profile in
-                if let photo = profile.photo,
+                if let photo = profile.photo, !photo.isEmpty,
                     let data = NSData(base64Encoded: photo,
                                       options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                     self?.profileImageData.value = data
