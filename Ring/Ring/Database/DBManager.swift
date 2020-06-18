@@ -2,6 +2,7 @@
  *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -142,6 +143,7 @@ enum DBBridgingError: Error {
     case updateIntercationFailed
     case deleteConversationFailed
     case getProfileFailed
+    case deleteMessageFailed
 }
 
 enum InteractionType: String {
@@ -388,6 +390,21 @@ class DBManager {
                 }
             } else {
                 completable(.error(DBBridgingError.saveMessageFailed))
+            }
+            return Disposables.create { }
+        }
+    }
+
+    func deleteMessage(messagesId: Int64, accountId: String) -> Completable {
+        return Completable.create { [unowned self] completable in
+            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+                if self.interactionHepler.delete(interactionId: messagesId, dataBase: dataBase) {
+                    completable(.completed)
+                } else {
+                    completable(.error(DBBridgingError.deleteMessageFailed))
+                }
+            } else {
+                completable(.error(DBBridgingError.deleteMessageFailed))
             }
             return Disposables.create { }
         }
