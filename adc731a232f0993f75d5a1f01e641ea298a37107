@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a5edd1af_6b538ae3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-19T15:14:54Z",
+      "side": 1,
+      "message": "What do you mean?",
+      "parentUuid": "0f2dd1f5_46457ea6",
+      "revId": "adc731a232f0993f75d5a1f01e641ea298a37107",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7f622c7b_ffcf8d34",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "c9d3a89a_a4fa1197",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-19T15:14:54Z",
+      "side": 1,
+      "message": "Indeed it does seem fine to remove it, and it makes sense. Nice",
+      "parentUuid": "7f622c7b_ffcf8d34",
+      "revId": "adc731a232f0993f75d5a1f01e641ea298a37107",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37fa7d22_4b0d0239",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "adc731a232f0993f75d5a1f01e641ea298a37107",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b13e2a0c_7d984420",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-19T15:14:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37fa7d22_4b0d0239",
+      "revId": "adc731a232f0993f75d5a1f01e641ea298a37107",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
