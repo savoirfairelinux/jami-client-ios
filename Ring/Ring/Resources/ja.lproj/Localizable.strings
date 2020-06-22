@@ -69,7 +69,7 @@
 "createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your account";
+"createAccount.createAccountFormTitle" = "アカウントを作成";
 "createAccount.chooseStrongPassword" = "あなたのJamiアカウントを守るために強固なパスワードを設定してください。また、このパスワードを忘れないでください。";
 "createAccount.enterNewUsernamePlaceholder" = "ユーザー名";
 "createAccount.newPasswordPlaceholder" = "パスワード";
@@ -135,7 +135,7 @@
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "ビデオメッセージを録画";
 "alerts.recordAudioMessage" = "音声メッセージを録音";
-"alerts.uploadFile" = "Upload file";
+"alerts.uploadFile" = "ファイルをアップロード";
 "alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
@@ -148,8 +148,8 @@
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "受け入れ";
 "alerts.incomingCallButtonIgnore" = "無視";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "  音声通話";
+"actions.startVideoCall" = "  ビデオ通話";
 
 //Calls
 "calls.callItemTitle" = "通話";
@@ -208,8 +208,8 @@
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Create password";
 "accountPage.changePassword" = "パスワードを変更";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
+"accountPage.oldPasswordPlaceholder" = "現在のパスワードを入力";
+"accountPage.newPasswordPlaceholder" = "新しいパスワードを入力";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
 "accountPage.changePasswordError" = "Password incorrect";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
@@ -263,10 +263,10 @@
 "dataTransfer.readableStatusError" = "エラー";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "拒否";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "転送中";
 "dataTransfer.readableStatusCanceled" = "キャンセルしました";
 "dataTransfer.sendingFailed" = "Failed to send";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusSuccess" = "完了";
 "dataTransfer.readableStatusAccept" = "受け入れ";
 "dataTransfer.readableStatusCancel" = "キャンセル";
 
@@ -278,9 +278,9 @@
 "notifications.newFile" = "新しいファイル";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "拒否";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "転送中";
 "dataTransfer.readableStatusCanceled" = "キャンセルしました";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusSuccess" = "完了";
 "dataTransfer.readableStatusAccept" = "受け入れ";
 "dataTransfer.readableStatusCancel" = "キャンセル";
 "dataTransfer.infoMessage" = "Press to start recording";

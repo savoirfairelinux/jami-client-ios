@@ -57,14 +57,14 @@
 "welcome.text" = "Jami este o platformă de comunicare liberă și universală care păstrează libertățile și intimitatea.";
 "welcome.linkDevice" = "Conectează acest dispozitiv la un cont";
 "welcome.createAccount" = "Creează un cont Jami";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "Conectează-te la Administrare cont";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Omite";
-"createProfile.profileCreated" = "Următorul";
+"createProfile.profileCreated" = "Înainte";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Introdu nume";
+"createProfile.enterNamePlaceholder" = "Introdu numele";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
@@ -73,7 +73,7 @@
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "Nume de Utilizator";
 "createAccount.newPasswordPlaceholder" = "Parolă";
-"createAccount.repeatPasswordPlaceholder" = "Confirm password";
+"createAccount.repeatPasswordPlaceholder" = "Confirmă parola";
 "createAccount.passwordCharactersNumberError" = "6 caractere minim";
 "createAccount.passwordNotMatchingError" = "parolele nu se potrivesc";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
@@ -84,7 +84,7 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "Notificări";
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Eroare de rețea";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
@@ -101,12 +101,12 @@
 "linkToAccount.explanationPinMessage" = "Pentru crearea codului PIN, du-te la reglările contului în dispozitivul care conține contul pe care vrei să-l folosești. În Reglări alege \"Conectează alt dispozitiv la acest cont\" și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Autentificare";
 "linkToAccountManager.passwordPlaceholder" = "Parolă";
 "linkToAccountManager.passwordLabel" = "Introdu Parola";
 "linkToAccountManager.usernamePlaceholder" = "Nume de Utilizator";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Administrator cont";
+"linkToAccountManager.accountManagerPlaceholder" = "Administrare cont";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
@@ -133,8 +133,8 @@
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
+"alerts.recordVideoMessage" = "Înregistreză un mesaj video";
+"alerts.recordAudioMessage" = "Înregistreză un mesaj audio";
 "alerts.uploadFile" = "Upload file";
 "alerts.uploadPhoto" = "Upload photo or movie";
 
@@ -152,7 +152,7 @@
 "actions.startVideoCall" = "  Video Call";
 
 //Calls
-"calls.callItemTitle" = "Call";
+"calls.callItemTitle" = "Apel";
 "calls.unknown" = "Necunoscut";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
@@ -206,7 +206,7 @@
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Înscrie-te";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.createPassword" = "Creează parola";
 "accountPage.changePassword" = "Schimbă parola";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
@@ -254,7 +254,7 @@
 "contactPage.startAudioCall" = "Start Audio Call";
 "contactPage.startVideoCall" = "Start Video Call";
 "contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
+"contactPage.clearConversation" = "Șterge Discuția";
 "contactPage.blockContact" = "Block Contact";
 "contactPage.removeConversation" = "Remove Conversation";
 
@@ -301,9 +301,9 @@
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
-"migrateAccount.title" = "Migrarea contului";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.title" = "Transferul contului";
+"migrateAccount.migrateButton" = "Transferă Contul";
+"migrateAccount.explanation" = "Acest cont trebuie transferat";
 "migrateAccount.passwordPlaceholder" = "Introdu parola";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Elimină contul";

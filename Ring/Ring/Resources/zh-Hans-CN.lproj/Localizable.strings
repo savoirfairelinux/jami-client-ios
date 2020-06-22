@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "会话";
 "global.contactRequestsTabBarTitle" = "邀请";
-"global.meTabBarTitle" = "帐户";
+"global.meTabBarTitle" = "账户";
 "global.ok" = "确定";
 "global.versionName" = "\"Free as in Freedom\"";
 
@@ -39,8 +39,8 @@
 "smartlist.searchBarPlaceholder" = "输入名字";
 "smartlist.noNetworkConnectivity" = "无网络连接";
 "smartlist.cellularAccess" = "请确保蜂窝移动网络权限已开启";
-"smartlist.accountsTitle" = "帐户";
-"smartlist.addAccountButton" = "+添加帐户";
+"smartlist.accountsTitle" = "账户";
+"smartlist.addAccountButton" = "+ 添加账户";
 "smartlist.noNumber" = "选定的连接没有任何数字";
 "smartlist.selectOneNumber" = "选择这些数字中的一个";
 
@@ -55,7 +55,7 @@
 //Welcome Screen
 "welcome.title" = "欢迎来到Jami！";
 "welcome.text" = "Ring 是一个保护用户的隐私和自由的通用自由软件。";
-"welcome.linkDevice" = "将此设备与一个帐户进行连接";
+"welcome.linkDevice" = "将此设备与一个账户进行关联";
 "welcome.createAccount" = "创建一个Jami账户";
 "welcome.connectToManager" = "连接到账户管理器";
 
@@ -69,7 +69,7 @@
 "createProfile.createYourAvatar" = "建立你的头像";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "创建Ring帐户";
+"createAccount.createAccountFormTitle" = "创建您的账户";
 "createAccount.chooseStrongPassword" = "选择一个强密码并记住它来保护你的 Jami 帐号";
 "createAccount.enterNewUsernamePlaceholder" = "用户名";
 "createAccount.newPasswordPlaceholder" = "密码";
@@ -80,7 +80,7 @@
 "createAccount.invalidUsername" = "无效的用户名";
 "createAccount.usernameAlreadyTaken" = "用户名已被他人使用";
 "createAccount.loading" = "载入中";
-"createAccount.waitCreateAccountTitle" = "添加帐户";
+"createAccount.waitCreateAccountTitle" = "添加账户";
 "createAccount.RegisterAUsername" = "注册一个用户名";
 "createAccount.ChooseAPassword" = "加密我的账户";
 "createAccount.PasswordInformation" = "选择一个密码来加密你的账户。请记下它，否则你将无法恢复你的账户。";
@@ -98,7 +98,7 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "输入密码";
 "linkToAccount.pinLabel" = "输入PIN";
-"linkToAccount.explanationPinMessage" = "要获取一个PIN，请进入你已登陆的设备中的用户管理界面，选择“链接另一台设备到这个用户”。输入你的用户密码后，你会得到在此处所需的PIN，它在10分钟内有效。";
+"linkToAccount.explanationPinMessage" = "要生成 PIN 码，请在包含您想使用的账户的设备上打开本应用的账户管理设置，在设备设置中选择“将另一台设备关联至此账户”。您会获得完成本项内容所需的 PIN 码，该 PIN 码有效期为 10 分钟。";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "注册";
@@ -110,11 +110,11 @@
 "linkToAccountManager.accountManagerLabel" = "输入账户管理器的 URI";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "无法找到帐户";
+"alerts.accountCannotBeFoundTitle" = "无法找到账户";
 "alerts.accountCannotBeFoundMessage" = "无法在Jami网络中找到账户。 请确保它是从现有设备的Jami上导出的，并且提供的凭证是有效的。";
 "alerts.accountAddedTitle" = "用户已添加";
 "alerts.accountNoNetworkTitle" = "无法连接至网络";
-"alerts.accountNoNetworkMessage" = "无法添加帐户，因为Jami无法连接到分布式网络。检查您设备的连接。";
+"alerts.accountNoNetworkMessage" = "因 Jami 无法连接到分布式网络而无法添加账户。检查您设备的网络连接。";
 "alerts.accountDefaultErrorTitle" = "未知错误";
 "alerts.accountDefaultErrorMessage" = "用户不能被创建";
 "alerts.profileTakePhoto" = "拍照";
@@ -135,8 +135,8 @@
 "alerts.errorWrongCredentials" = "无法连接到提供的账户管理器。请检查您的凭据。";
 "alerts.recordVideoMessage" = "录制视频信息";
 "alerts.recordAudioMessage" = "录制语音信息";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.uploadFile" = "上传文件";
+"alerts.uploadPhoto" = "上传照片或视频";
 
 //Actions
 "actions.blockAction" = "屏蔽";
@@ -144,12 +144,12 @@
 "actions.cancelAction" = "取消";
 "actions.clearAction" = "清除";
 "actions.backAction" = "上一步";
-"actions.doneAction" = "已完成";
+"actions.doneAction" = "完成";
 "alerts.incomingCallAllertTitle" = "通话来自";
 "alerts.incomingCallButtonAccept" = "接听";
 "alerts.incomingCallButtonIgnore" = "忽略";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "语音通话";
+"actions.startVideoCall" = "视频通话";
 
 //Calls
 "calls.callItemTitle" = "通话";
@@ -191,7 +191,7 @@
 "accountPage.deviceRevocationUnknownDevice" = "未知设备";
 "accountPage.deviceRevocationError" = "设备吊销出错";
 "accountPage.namePlaceholder" = "姓名";
-"accountPage.linkDeviceTitle" = "链接另一台设备";
+"accountPage.linkDeviceTitle" = "关联另一台设备";
 "accountPage.other" = "其他";
 "accountPage.removeAccountTitle" = "移除账户";
 "accountPage.removeAccountMessage" = "点击“删除”将从此设备上删除该帐号！此操作无法撤销。同时，您也会失去已注册的用户名。";
@@ -206,18 +206,18 @@
 "accountPage.usernameRegistering" = "注册中";
 "accountPage.usernameRegisterAction" = "注册";
 "accountPage.usernameRegistrationFailed" = "注册失败。请检查密码。";
-"accountPage.createPassword" = "Create password";
+"accountPage.createPassword" = "创建密码";
 "accountPage.changePassword" = "更改密码";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.oldPasswordPlaceholder" = "输入旧密码";
+"accountPage.newPasswordPlaceholder" = "输入新密码";
+"accountPage.newPasswordConfirmPlaceholder" = "确认新密码";
+"accountPage.changePasswordError" = "密码错误";
+"accountPage.enableBoothMode" = "启用话亭模式";
+"accountPage.disableBoothMode" = "禁用话亭模式";
+"accountPage.disableBoothModeExplanation" = "请输入您的账户密码";
+"accountPage.boothModeExplanation" = "话亭模式中，不会保存会话历史，且 jami 的功能会受限为外拨电话。启用话亭模式后，现有会话将全部被删除。";
+"accountPage.noBoothMode" = "要使用话亭模式，您需要先设置账户密码。";
+"accountPage.boothModeAlertMessage" = "启用话亭模式后您的现有会话都将被删除。";
 
 //Account
 "account.sipUsername" = "用户名";
@@ -244,10 +244,10 @@
 
 //Link New Device
 "linkDevice.title" = "关联新设备";
-"linkDevice.passwordError" = "您输入的密码无法解锁该帐户";
+"linkDevice.passwordError" = "您输入的密码无法解锁该账户";
 "linkDevice.networkError" = "导出时发生网络错误";
 "linkDevice.defaultError" = "导出时发生错误";
-"linkDevice.explanationMessage" = "要完成关联过程，请在您的新设备上打开 Jami 并选择“将这台设备关联到到账户”。PIN 码有效期为 10分钟。";
+"linkDevice.explanationMessage" = "要完成关联过程，请在您的新设备上打开 Jami 并选择“将这台设备关联到账户”。PIN 码有效期为 10 分钟。";
 "linkDevice.hudMessage" = "认证中";
 
 //Contact Page
@@ -301,13 +301,13 @@
 "generalSettings.videoAcceleration" = "启用视频加速";
 
 //Migrate Account
-"migrateAccount.title" = "帐户迁移";
+"migrateAccount.title" = "账户迁移";
 "migrateAccount.migrateButton" = "迁移账户";
 "migrateAccount.explanation" = "该账户需迁移";
 "migrateAccount.passwordPlaceholder" = "输入密码";
 "migrateAccount.passwordExplanation" = "若要进行迁移，您需要输入此账户的密码。";
 "migrateAccount.removeAccount" = "移除账户";
-"migrateAccount.error" = "帐户迁移失败。您可重试或删除您的帐户。";
+"migrateAccount.error" = "账户迁移失败。您可重试或删除您的账户。";
 "migrateAccount.migrating" = "迁移中...";
 "migrateAccount.cancel" = "取消";
 "migrateAccount.migrateAnother" = "迁移另一个账户";

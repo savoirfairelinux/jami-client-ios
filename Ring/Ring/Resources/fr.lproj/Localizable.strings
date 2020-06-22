@@ -135,8 +135,8 @@
 "alerts.errorWrongCredentials" = "Je n'arrive pas à me connecter à votre gestionnaire de compte. Vérifiez vos éléments d'authentification.";
 "alerts.recordVideoMessage" = "Envoyer un message vidéo";
 "alerts.recordAudioMessage" = "Envoyer un message vocal";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.uploadFile" = "Téléverser un fichier";
+"alerts.uploadPhoto" = "Téléverser une photo ou une vidéo";
 
 //Actions
 "actions.blockAction" = "Bloquer";
@@ -148,8 +148,8 @@
 "alerts.incomingCallAllertTitle" = "Appel entrant de";
 "alerts.incomingCallButtonAccept" = "Accepter";
 "alerts.incomingCallButtonIgnore" = "Ignorer";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "Appel audio";
+"actions.startVideoCall" = "Appel vidéo";
 
 //Calls
 "calls.callItemTitle" = "Appeler";
@@ -208,16 +208,16 @@
 "accountPage.usernameRegistrationFailed" = "L'enregistrement a échoué. Veuillez vérifier le mot de passe.";
 "accountPage.createPassword" = "Créer mot de passe";
 "accountPage.changePassword" = "Changer le mot de passe";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.oldPasswordPlaceholder" = "Entrer votre ancien mot de passe";
+"accountPage.newPasswordPlaceholder" = "Entrer le nouveau mot de passe";
+"accountPage.newPasswordConfirmPlaceholder" = "Confirmer le nouveau mot de passe";
+"accountPage.changePasswordError" = "Mot de passe incorrect";
+"accountPage.enableBoothMode" = "Activer le mode Kiosque";
+"accountPage.disableBoothMode" = "Désactiver le mode Kiosque";
+"accountPage.disableBoothModeExplanation" = "Entrer le mot de passe de votre compte";
+"accountPage.boothModeExplanation" = "Dans le mode Kiosque, l'historique n'est pas sauvegardé et les fonctions de Jami sont limités à faire des appels. Si vous activez le mode Kiosque, toutes vos conversations seront supprimées.";
+"accountPage.noBoothMode" = "Pour activer le mode Kiosque, vous devez d'abord créer un mot de passe.";
+"accountPage.boothModeAlertMessage" = "Après avoir activé le mode Kiosque, toutes vos conversations seront supprimées.";
 
 //Account
 "account.sipUsername" = "Nom d'utilisateur";
