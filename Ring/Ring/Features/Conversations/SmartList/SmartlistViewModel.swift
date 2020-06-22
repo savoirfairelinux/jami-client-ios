@@ -107,12 +107,12 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                     let data = NSData(base64Encoded: photo,
                                       options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                     guard let image = UIImage(data: data) else {
-                        return UIImage(asset: Asset.icContactPicture)
+                        return UIImage(asset: Asset.icContactPicture)!
                     }
                     return image
                 }
                 guard let account = self.accountsService.currentAccount else {
-                    return UIImage(asset: Asset.icContactPicture)
+                    return UIImage(asset: Asset.icContactPicture)!
                 }
                 guard let name = profile.alias else {return UIImage.defaultJamiAvatarFor(profileName: nil, account: account)}
                 let profileName = name.isEmpty ? nil : name
