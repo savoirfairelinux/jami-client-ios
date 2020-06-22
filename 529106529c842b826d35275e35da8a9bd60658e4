@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0832012_711b1541",
+        "filename": "Ring/Ring/Database/DBContainer.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-22T19:22:09Z",
+      "side": 1,
+      "message": "On my device I have archive.gz but no export.gz, is it normal?",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 16
+      },
+      "revId": "529106529c842b826d35275e35da8a9bd60658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f05df6be_0c3130a2",
+        "filename": "Ring/Ring/Database/DBContainer.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-22T19:22:09Z",
+      "side": 1,
+      "message": "It could be interesting to have accountFolderPath() return nil instead of \"\", since it would be less error prone (language will force us to verify the value after getting the result). This would also prevent a lot of .isEmpty checking related to calling this function. Comments also applicable to contactsPath().",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 62
+      },
+      "revId": "529106529c842b826d35275e35da8a9bd60658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09a70823_6bd3408a",
+        "filename": "Ring/Ring/Database/DBContainer.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-22T19:22:09Z",
+      "side": 1,
+      "message": "Name suggestion: isMigrationToDBv2Needed\nSince it\u0027s a predicate, starting with \"is\" is nice.",
+      "range": {
+        "startLine": 153,
+        "startChar": 9,
+        "endLine": 153,
+        "endChar": 32
+      },
+      "revId": "529106529c842b826d35275e35da8a9bd60658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
