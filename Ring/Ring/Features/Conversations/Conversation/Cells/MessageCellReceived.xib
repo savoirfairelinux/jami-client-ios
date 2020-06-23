@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -95,7 +95,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" constant="8" id="1QQ-bu-6Bl"/>
+                    <constraint firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" priority="999" constant="8" id="1QQ-bu-6Bl"/>
                     <constraint firstItem="WBd-CS-7Qv" firstAttribute="height" secondItem="kZJ-Ay-LTR" secondAttribute="height" multiplier="0.5" constant="3" id="1qI-8e-UAL"/>
                     <constraint firstItem="XcL-CH-BiH" firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" id="2d4-0F-VWg"/>
                     <constraint firstItem="WBd-CS-7Qv" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" id="4Zp-8q-rFJ"/>
@@ -110,7 +110,7 @@
                     <constraint firstItem="zuX-zz-1Qq" firstAttribute="trailing" secondItem="mhg-uK-iD9" secondAttribute="leading" constant="-16" id="aUU-d6-Dse"/>
                     <constraint firstItem="mhg-uK-iD9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gD0-yo-bga"/>
                     <constraint firstItem="Nc6-du-YKs" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="-16" id="gzL-Pd-yaK"/>
-                    <constraint firstItem="kZJ-Ay-LTR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="jhd-A8-c1o"/>
+                    <constraint firstItem="kZJ-Ay-LTR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" priority="999" constant="8" id="jhd-A8-c1o"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="64" id="nWe-5k-Qpn"/>
                     <constraint firstItem="eza-Ni-w3g" firstAttribute="centerY" secondItem="mhg-uK-iD9" secondAttribute="centerY" id="vhB-Uv-04a"/>
                     <constraint firstItem="zuX-zz-1Qq" firstAttribute="centerY" secondItem="mhg-uK-iD9" secondAttribute="centerY" id="xFW-jt-00h"/>
@@ -125,6 +125,7 @@
                 <outlet property="bottomCorner" destination="XcL-CH-BiH" id="4gw-IC-EAM"/>
                 <outlet property="bubble" destination="kZJ-Ay-LTR" id="hdG-fG-L69"/>
                 <outlet property="bubbleBottomConstraint" destination="1QQ-bu-6Bl" id="a4F-pf-cXL"/>
+                <outlet property="bubbleHeightConstraint" destination="1Kj-UZ-gu7" id="oAb-CU-Qui"/>
                 <outlet property="bubbleTopConstraint" destination="jhd-A8-c1o" id="40k-2d-6rW"/>
                 <outlet property="leftDivider" destination="zuX-zz-1Qq" id="9Jc-cV-VTA"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
