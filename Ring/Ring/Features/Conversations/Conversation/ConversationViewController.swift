@@ -652,6 +652,9 @@ class ConversationViewController: UIViewController,
             self?.scrollToBottomIfNeed()
             self?.updateBottomOffset()
         }).disposed(by: disposeBag)
+
+        // For selecting cells, see UITableViewDelegate extension implementation
+        self.tableView.delegate = self
     }
 
     fileprivate func updateBottomOffset() {
@@ -739,23 +742,24 @@ class ConversationViewController: UIViewController,
 
     // MARK: - message formatting
     private func computeSequencing() {
+        //let sequenceInterval = 1 * 60 // 1 minutes
         var lastShownTime: Date?
         for (index, messageViewModel) in self.messageViewModels!.enumerated() {
             // time labels
             let time = messageViewModel.receivedDate
-            if index == 0 ||  messageViewModel.bubblePosition() == .generated || messageViewModel.isTransfer {
+            if index == 0 ||  messageViewModel.bubblePosition() == .generated /*|| messageViewModel.isTransfer*/ {
                 // always show first message's time
-                messageViewModel.timeStringShown = getTimeLabelString(forTime: time)
+                messageViewModel.shouldShowTimeString = true
                 lastShownTime = time
             } else {
-                // only show time for new messages if beyond an arbitrary time frame (1 minute)
-                // from the previously shown time
+                // only show time for new messages if beyond an arbitrary time frame from the previously shown time
                 let hourComp = Calendar.current.compare(lastShownTime!, to: time, toGranularity: .hour)
                 let minuteComp = Calendar.current.compare(lastShownTime!, to: time, toGranularity: .minute)
-                if (hourComp == .orderedSame && minuteComp == .orderedSame) || messageViewModel.isComposingIndicator {
-                    messageViewModel.timeStringShown = nil
+                //let timeDifference = time.timeIntervalSinceReferenceDate - lastShownTime!.timeIntervalSinceReferenceDate
+                if /*Int(timeDifference) < sequenceInterval*/ (hourComp == .orderedSame && minuteComp == .orderedSame) || messageViewModel.isComposingIndicator {
+                    messageViewModel.shouldShowTimeString = false
                 } else {
-                    messageViewModel.timeStringShown = getTimeLabelString(forTime: time)
+                    messageViewModel.shouldShowTimeString = true
                     lastShownTime = time
                 }
             }
@@ -803,31 +807,6 @@ class ConversationViewController: UIViewController,
             return sequencing
         }
         return MessageSequencing.unknown
-    }
-
-    private func getTimeLabelString(forTime time: Date) -> String {
-        // get the current time
-        let currentDateTime = Date()
-
-        // prepare formatter
-        let dateFormatter = DateFormatter()
-
-        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
-            // age: [0, received the previous day[
-            dateFormatter.dateFormat = "h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
-            // age: [received the previous day, received 7 days ago[
-            dateFormatter.dateFormat = "E h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
-            // age: [received 7 days ago, received the previous year[
-            dateFormatter.dateFormat = "MMM d, h:mma"
-        } else {
-            // age: [received the previous year, inf[
-            dateFormatter.dateFormat = "MMM d, yyyy h:mma"
-        }
-
-        // generate the string containing the message time
-        return dateFormatter.string(from: time).uppercased()
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -1064,5 +1043,41 @@ extension ConversationViewController: UITableViewDataSource {
         }
     }
 }
+
+extension ConversationViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let item = self.messageViewModels?[indexPath.row] {
+            log.debug("sequencing: \(item.sequencing)")
+        }
+//        if let msgCell = tableView.cellForRow(at: indexPath) as? MessageCell {
+//            //msgCell.timeLabel.isHidden = !msgCell.timeLabel.isHidden
+//            log.debug("count: \(String(describing: msgCell.bubble.gestureRecognizers?.count))")
+//           msgCell.setCellTimeLabelVisibility(hide: false)
+//        }
+//        if let item = self.messageViewModels?[indexPath.row] {
+//            self.viewModel.deleteMessage(messageId: item.message.messageId)
+//            //tableView.reloadRows(at: [indexPath], with: .fade)
+//            tableView.reloadData()
+//        }
+    }
+
+//    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+//        log.debug("tableView: shouldHighlightRowAt")
+//        return true
+//    }
+//    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+//        log.warning("tableView: didHighlightRowAt")
+//        if let cell = tableView.cellForRow(at: indexPath) as? MessageCell {
+//            cell.backgroundColor = UIColor.green
+//        }
+//    }
+//    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+//        log.warning("tableView: didUnhighlightRowAt")
+//        if let cell = tableView.cellForRow(at: indexPath) as? MessageCell {
+//            cell.backgroundColor = UIColor.black
+//        }
+//    }
+}
+
 // swiftlint:enable type_body_length
 // swiftlint:enable file_length
