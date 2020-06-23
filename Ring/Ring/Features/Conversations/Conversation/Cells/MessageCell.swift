@@ -30,6 +30,7 @@ import ActiveLabel
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     // MARK: Properties
@@ -49,6 +50,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     @IBOutlet weak var acceptButton: UIButton?
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var buttonsHeightConstraint: NSLayoutConstraint?
+    @IBOutlet weak var bubbleHeightConstraint: NSLayoutConstraint?
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -77,12 +79,16 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private let _deleteMessage = BehaviorRelay<Bool>(value: false)
     var deleteMessage: Observable<Bool> { _deleteMessage.asObservable() }
 
-    private var longGestureRecognizer: UILongPressGestureRecognizer?
+    private let _tappedToShowTime = BehaviorRelay<Bool>(value: false)
+    var tappedToShowTime: Observable<Bool> { _tappedToShowTime.asObservable() }
+    private var previousBubbleConstraint: CGFloat?
 
-    // MARK: prepareForReuse
+    private var longGestureRecognizer: UILongPressGestureRecognizer?
+    private var tapGestureRecognizer: UITapGestureRecognizer?
+
+    // MARK: PrepareForReuse
 
     override func prepareForReuse() {
-        self.prepareForReuseLongGesture()
         self.setCellTimeLabelVisibility(hide: true)
 
         if self.sendingIndicator != nil {
@@ -98,6 +104,20 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         super.prepareForReuse()
     }
 
+    private func prepareForReuseTapGesture() {
+        self._tappedToShowTime.accept(false)
+        self.previousBubbleConstraint = nil
+        if let tapGestureRecognizer = tapGestureRecognizer {
+            self.bubble.removeGestureRecognizer(tapGestureRecognizer)
+            self.tapGestureRecognizer = nil
+        }
+
+        if self.bubbleHeightConstraint != nil && self.bubbleHeightConstraint!.relation == .equal {
+            self.bubbleHeightConstraint?.constant = 31
+            changeRelation(constraint: self.bubbleHeightConstraint!, relation: .greaterThanOrEqual)
+        }
+    }
+
     private func prepareForReuseLongGesture() {
         self.messageId = nil
         self.isCopyable = false
@@ -107,6 +127,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             self.longGestureRecognizer = nil
         }
     }
+
+    // MARK: Progress
 
     func startProgressMonitor(_ item: MessageViewModel,
                               _ conversationViewModel: ConversationViewModel) {
@@ -170,17 +192,58 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
 
+    // MARK: Configure
+
+    private func configureTapGesture() {
+        let shownByDefault = !self.timeLabel.isHidden && !_tappedToShowTime.value
+        if !shownByDefault {
+            self.bubble.isUserInteractionEnabled = true
+            self.tapGestureRecognizer = UITapGestureRecognizer()
+            self.tapGestureRecognizer!.rx.event.bind(onNext: { [weak self] _ in self?.onTapGesture() }).disposed(by: self.disposeBag)
+            self.bubble.addGestureRecognizer(tapGestureRecognizer!)
+        }
+    }
+
+    private func changeRelation(constraint: NSLayoutConstraint, relation: NSLayoutConstraint.Relation) {
+        let new = NSLayoutConstraint(item: constraint.firstItem!, attribute: constraint.firstAttribute, relatedBy: relation,
+                                     toItem: constraint.secondItem, attribute: constraint.secondAttribute, multiplier: constraint.multiplier, constant: constraint.constant)
+        self.removeConstraint(self.bubbleHeightConstraint!)
+        self.addConstraint(new)
+        self.layoutIfNeeded()
+        self.bubbleHeightConstraint = new
+    }
+
+    private func prepareForTapGesture() {
+        if self.bubbleHeightConstraint != nil && self.bubbleHeightConstraint!.relation != .equal {
+            self.bubbleHeightConstraint?.constant = self.bubble.frame.height
+            changeRelation(constraint: self.bubbleHeightConstraint!, relation: .equal)
+        }
+    }
+
+    private func onTapGesture() {
+        self.prepareForTapGesture()
+
+        if self.timeLabel.isHidden {
+            self.previousBubbleConstraint = self.bubbleTopConstraint.constant
+            self.bubbleTopConstraint.constant = 32
+        } else {
+            self.bubbleTopConstraint.constant = self.previousBubbleConstraint ?? 1
+        }
+        // trigger animation
+        self._tappedToShowTime.accept(true)
+    }
+
     private func configureLongGesture(_ messageId: Int64, _ bubblePosition: BubblePosition, _ isTransfer: Bool) {
         self.messageId = messageId
         self.isCopyable = bubblePosition != .generated && !isTransfer
 
         self.bubble.isUserInteractionEnabled = true
         longGestureRecognizer = UILongPressGestureRecognizer()
-        longGestureRecognizer!.rx.event.bind(onNext: { [weak self] _ in self?.showCopyMenu() }).disposed(by: self.disposeBag)
+        longGestureRecognizer!.rx.event.bind(onNext: { [weak self] _ in self?.onLongGesture() }).disposed(by: self.disposeBag)
         self.bubble.addGestureRecognizer(longGestureRecognizer!)
     }
 
-    private func showCopyMenu() {
+    private func onLongGesture() {
         becomeFirstResponder()
         let menu = UIMenuController.shared
         if !menu.isMenuVisible {
@@ -207,44 +270,42 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             action == #selector(UIResponderStandardEditActions.delete)
     }
 
+    func toggleCellTimeLabelVisibility() {
+        self.setCellTimeLabelVisibility(hide: !self.timeLabel.isHidden)
+    }
+
     private func setCellTimeLabelVisibility(hide: Bool) {
         self.timeLabel.isHidden = hide
         self.leftDivider.isHidden = hide
         self.rightDivider.isHidden = hide
     }
 
-    private func formatCellTimeLabel(_ item: MessageViewModel) {
+    private func configureCellTimeLabel(_ item: MessageViewModel) {
         // hide for potentially reused cell
         self.setCellTimeLabelVisibility(hide: true)
-
-        if item.timeStringShown == nil { return }
 
         // setup the label
         self.timeLabel.text = item.timeStringShown
         self.timeLabel.textColor = UIColor.jamiMsgCellTimeText
         self.timeLabel.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.medium)
 
-        // show the time
-        self.setCellTimeLabelVisibility(hide: false)
+        if item.shouldShowTimeString {
+            // show the time
+            self.setCellTimeLabelVisibility(hide: false)
+        }
     }
 
+    // bubble grouping for cell
     // swiftlint:disable cyclomatic_complexity
     func applyBubbleStyleToCell(_ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
 
         guard let items = items else { return }
         let item = items[indexPath.row]
 
-        let bubbleColor: UIColor = { (bubblePosition: BubblePosition) -> UIColor in
-            if item.content.containsOnlyEmoji {
-                return UIColor.jamiMsgCellEmoji
-            } else if bubblePosition == .received {
-                return UIColor.jamiMsgCellReceived
-            } else if item.isTransfer {
-                return UIColor(hex: 0xcfebf5, alpha: 1.0)
-            } else {
-                return UIColor.jamiMsgCellSent
-            }
-        }(item.bubblePosition())
+        self.topCorner.isHidden = true
+        self.bottomCorner.isHidden = true
+        self.bubbleBottomConstraint.constant = 8
+        self.bubbleTopConstraint.constant = 8
 
         if item.isTransfer {
             self.messageLabel.enabledTypes = []
@@ -266,49 +327,44 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             }
         }
 
-        self.topCorner.isHidden = true
-        self.topCorner.backgroundColor = bubbleColor
-        self.bottomCorner.isHidden = true
-        self.bottomCorner.backgroundColor = bubbleColor
-        self.bubbleBottomConstraint.constant = 8
-        self.bubbleTopConstraint.constant = 8
+        item.sequencing = { (item: MessageViewModel) -> MessageSequencing in
+            var adjustedSequencing = item.sequencing
 
-        var adjustedSequencing = item.sequencing
+            if item.shouldShowTimeString {
+                self.bubbleTopConstraint.constant = 32
 
-        if item.timeStringShown != nil {
-            self.bubbleTopConstraint.constant = 32
-            adjustedSequencing = indexPath.row == items.count - 1 ?
-                .singleMessage : adjustedSequencing != .singleMessage && adjustedSequencing != .lastOfSequence ?
-                    .firstOfSequence : .singleMessage
-        }
-
-        if indexPath.row + 1 < items.count {
-            if items[indexPath.row + 1].timeStringShown != nil {
-                switch adjustedSequencing {
-                case .firstOfSequence:
+                if indexPath.row == items.count - 1 {
+                    adjustedSequencing =  .singleMessage
+                } else if adjustedSequencing != .singleMessage && adjustedSequencing != .lastOfSequence {
+                    adjustedSequencing = .firstOfSequence
+                } else {
                     adjustedSequencing = .singleMessage
-                case .middleOfSequence:
-                    adjustedSequencing = .lastOfSequence
+                }
+            }
+
+            if indexPath.row + 1 < items.count && items[indexPath.row + 1].shouldShowTimeString {
+                switch adjustedSequencing {
+                case .firstOfSequence: adjustedSequencing = .singleMessage
+                case .middleOfSequence: adjustedSequencing = .lastOfSequence
                 default: break
                 }
             }
-        }
-
-        item.sequencing = adjustedSequencing
+            return adjustedSequencing
+        }(item)
 
         switch item.sequencing {
+        case .firstOfSequence:
+            self.bottomCorner.isHidden = item.isTransfer
+            self.bubbleBottomConstraint.constant = 1
+            self.bubbleTopConstraint.constant = item.shouldShowTimeString ? 32 : 8
         case .middleOfSequence:
             self.topCorner.isHidden = item.isTransfer
             self.bottomCorner.isHidden = item.isTransfer
             self.bubbleBottomConstraint.constant = 1
-            self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
-        case .firstOfSequence:
-            self.bottomCorner.isHidden = item.isTransfer
-            self.bubbleBottomConstraint.constant = 1
-            self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 8
+            self.bubbleTopConstraint.constant = item.shouldShowTimeString ? 32 : 1
         case .lastOfSequence:
             self.topCorner.isHidden = item.isTransfer
-            self.bubbleTopConstraint.constant = item.timeStringShown != nil ? 32 : 1
+            self.bubbleTopConstraint.constant = item.shouldShowTimeString ? 32 : 1
         default: break
         }
         if item.content.containsOnlyEmoji {
@@ -318,28 +374,53 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
 
-    // swiftlint:disable function_body_length
-    func configureFromItem(_ conversationViewModel: ConversationViewModel,
-                           _ items: [MessageViewModel]?,
-                           cellForRowAt indexPath: IndexPath) {
+    private func configureBackgroundColor(_ containsOnlyEmoji: Bool, _ bubblePosition: BubblePosition) {
         self.backgroundColor = UIColor.clear
         self.bubbleViewMask?.backgroundColor = UIColor.jamiMsgBackground
         self.transferImageView.backgroundColor = UIColor.jamiMsgBackground
-        buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 999.0)
-        guard let item = items?[indexPath.row] else { return }
 
+        let cellBgColor: UIColor = { (containsOnlyEmoji: Bool, bubblePosition: BubblePosition) -> UIColor in
+            switch bubblePosition {
+            case .generated: return UIColor.jamiMsgCellReceived
+            case .sent: return containsOnlyEmoji ? UIColor.jamiMsgCellEmoji : UIColor.jamiMsgCellSent
+            case .received: return containsOnlyEmoji ? UIColor.jamiMsgCellEmoji : UIColor.jamiMsgCellReceived
+            }
+            // use this if is a sent transfer?
+            // return UIColor(hex: 0xcfebf5, alpha: 1.0)
+            // was previously set in that case but was overridden afterwards so useless
+        }(containsOnlyEmoji, bubblePosition)
+
+        self.topCorner?.backgroundColor = cellBgColor
+        self.bottomCorner?.backgroundColor = cellBgColor
+        self.bubble.backgroundColor = cellBgColor
+    }
+
+    func configureFromItem(_ conversationViewModel: ConversationViewModel,
+                           _ items: [MessageViewModel]?,
+                           cellForRowAt indexPath: IndexPath) {
+
+        self.buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 999.0)
         self.transferImageView.removeFromSuperview()
         self.playerView?.removeFromSuperview()
         self.composingMsg.removeFromSuperview()
         self.playerHeight.value = 0
         self.bubbleViewMask?.isHidden = true
 
+        guard let item = items?[indexPath.row] else { return }
+
         // hide/show time label
-        self.formatCellTimeLabel(item)
+        self.configureCellTimeLabel(item)
+
+        self.prepareForReuseLongGesture()
         self.configureLongGesture(item.message.messageId, item.bubblePosition(), item.isTransfer)
 
-        if item.bubblePosition() == .generated {
-            self.bubble.backgroundColor = UIColor.jamiMsgCellReceived
+        self.prepareForReuseTapGesture()
+        self.configureTapGesture()
+
+        self.configureBackgroundColor(item.content.containsOnlyEmoji, item.bubblePosition())
+
+        switch item.bubblePosition() {
+        case .generated:
             self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 10)
             if indexPath.row == 0 {
                 self.messageLabelMarginConstraint.constant = 4
@@ -349,76 +430,12 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
                 self.bubbleTopConstraint.constant = 32
             }
             return
-        } else if item.isTransfer {
-            self.messageLabel.lineBreakMode = .byTruncatingMiddle
-            let type = item.bubblePosition()
-            self.bubble.backgroundColor = type == .received ? UIColor.jamiMsgCellReceived : UIColor(hex: 0xcfebf5, alpha: 1.0)
-            if indexPath.row == 0 {
-                self.messageLabelMarginConstraint.constant = 4
-                self.bubbleTopConstraint.constant = 36
-            } else {
-                self.messageLabelMarginConstraint.constant = -2
-                self.bubbleTopConstraint.constant = 32
-            }
-            if item.bubblePosition() == .received {
-                self.acceptButton?.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
-                self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
-                self.progressBar.tintColor = UIColor.jamiMain
-            } else if item.bubblePosition() == .sent {
-                self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
-                self.progressBar.tintColor = UIColor.jamiMain.lighten(by: 0.2)
-            }
 
-            if item.shouldDisplayTransferedImage {
-                self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.conversationId, accountId: conversationViewModel.conversation.value.accountId)
-            }
+        case .sent:
+            self.configureTransferCell(item, conversationViewModel)
 
-            if let player = item.getPlayer(conversationViewModel: conversationViewModel) {
-                let screenWidth = UIScreen.main.bounds.width
-                // size for audio file transfer
-                var defaultSize = CGSize(width: 250, height: 100)
-                var origin = CGPoint(x: 0, y: 0)
-                // if have video update size to keep video ratio
-                if let firstImage = player.firstFrame,
-                    let frameSize = firstImage.getNewSize(of: CGSize(width: getMaxDimensionForTransfer(), height: getMaxDimensionForTransfer())) {
-                    defaultSize = frameSize
-                    let xOriginImageSend = screenWidth - 112 - (defaultSize.width)
-                    if item.bubblePosition() == .sent {
-                        origin = CGPoint(x: xOriginImageSend, y: 0)
-                    }
-                }
-                let frame = CGRect(origin: origin, size: defaultSize)
-                let pView = PlayerView(frame: frame)
-                pView.viewModel = player
-                player.delegate = self
-                self.playerView = pView
-                self.bubbleViewMask?.isHidden = false
-                self.playerView!.layer.cornerRadius = 20
-                self.playerView!.layer.masksToBounds = true
-                buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 250.0)
-                self.bubble.addSubview(self.playerView!)
-                self.bubble.heightAnchor.constraint(equalTo: self.playerView!.heightAnchor, constant: 1).isActive = true
-            }
-        }
+            self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
 
-        // bubble grouping for cell
-        self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
-
-        // special cases where top/bottom margins should be larger
-        if indexPath.row == 0 {
-            self.messageLabelMarginConstraint.constant = 4
-            self.bubbleTopConstraint.constant = 36
-        } else if items?.count == indexPath.row + 1 {
-            self.bubbleBottomConstraint.constant = 16
-        }
-
-        if item.bubblePosition() == .sent {
-            // When the message contains only emoji
-            if item.content.containsOnlyEmoji {
-                self.bubble.backgroundColor = UIColor.jamiMsgCellEmoji
-            } else {
-                self.bubble.backgroundColor = UIColor.jamiMsgCellSent
-            }
             if item.isTransfer {
                 // outgoing transfer
             } else {
@@ -433,28 +450,80 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
                     .map { value in value == MessageStatus.failure ? false : true }
                     .bind(to: self.failedStatusLabel.rx.isHidden)
                     .disposed(by: self.disposeBag)
-                if self.messageReadIndicator != nil {
-                    configureMessageReadAvatar(item, conversationViewModel)
-                }
-            }
-        } else if item.bubblePosition() == .received {
-            // When the message contains only emoji
-            if item.content.containsOnlyEmoji {
-                self.bubble.backgroundColor = UIColor.jamiMsgCellEmoji
-                if self.avatarBotomAlignConstraint != nil {
-                    self.avatarBotomAlignConstraint.constant = -14
-                }
-            } else {
-                self.bubble.backgroundColor = UIColor.jamiMsgCellReceived
-                if self.avatarBotomAlignConstraint != nil {
-                    self.avatarBotomAlignConstraint.constant = -1
-                }
-                if item.isComposingIndicator {
-                    addComposingMsgView()
-                }
+
+                self.configureMessageReadAvatar(item, conversationViewModel)
             }
 
-            configureReceivedMessageAvatar(item.sequencing, conversationViewModel)
+        case .received:
+            self.configureTransferCell(item, conversationViewModel)
+
+            self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
+
+            if self.avatarBotomAlignConstraint != nil {
+                self.avatarBotomAlignConstraint.constant = item.content.containsOnlyEmoji ? -14 : -1
+            }
+
+            if item.isComposingIndicator {
+                self.addComposingMsgView()
+            }
+
+            self.configureReceivedMessageAvatar(item.sequencing, conversationViewModel)
+        }
+
+        // special cases where top/bottom margins should be larger
+        if indexPath.row == 0 {
+            self.messageLabelMarginConstraint.constant = 4
+            self.bubbleTopConstraint.constant = 36
+        } else if items?.count == indexPath.row + 1 {
+            self.bubbleBottomConstraint.constant = 16
+        } else if item.isTransfer {
+            self.messageLabelMarginConstraint.constant = -2
+        }
+    }
+
+    private func configureTransferCell(_ item: MessageViewModel, _ conversationViewModel: ConversationViewModel) {
+        guard item.isTransfer else { return }
+
+        self.messageLabel.lineBreakMode = .byTruncatingMiddle
+
+        if item.bubblePosition() == .received {
+            self.acceptButton?.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
+            self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
+            self.progressBar.tintColor = UIColor.jamiMain
+        } else if item.bubblePosition() == .sent {
+            self.cancelButton.tintColor = UIColor(hex: 0xf00000, alpha: 1.0)
+            self.progressBar.tintColor = UIColor.jamiMain.lighten(by: 0.2)
+        }
+
+        if item.shouldDisplayTransferedImage {
+            self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.conversationId, accountId: conversationViewModel.conversation.value.accountId)
+        }
+
+        if let player = item.getPlayer(conversationViewModel: conversationViewModel) {
+            let screenWidth = UIScreen.main.bounds.width
+            // size for audio file transfer
+            var defaultSize = CGSize(width: 250, height: 100)
+            var origin = CGPoint(x: 0, y: 0)
+            // if have video update size to keep video ratio
+            if let firstImage = player.firstFrame,
+                let frameSize = firstImage.getNewSize(of: CGSize(width: getMaxDimensionForTransfer(), height: getMaxDimensionForTransfer())) {
+                defaultSize = frameSize
+                let xOriginImageSend = screenWidth - 112 - (defaultSize.width)
+                if item.bubblePosition() == .sent {
+                    origin = CGPoint(x: xOriginImageSend, y: 0)
+                }
+            }
+            let frame = CGRect(origin: origin, size: defaultSize)
+            let pView = PlayerView(frame: frame)
+            pView.viewModel = player
+            player.delegate = self
+            self.playerView = pView
+            self.bubbleViewMask?.isHidden = false
+            self.playerView!.layer.cornerRadius = 20
+            self.playerView!.layer.masksToBounds = true
+            self.buttonsHeightConstraint?.priority = UILayoutPriority(rawValue: 250.0)
+            self.bubble.addSubview(self.playerView!)
+            self.bubble.heightAnchor.constraint(equalTo: self.playerView!.heightAnchor, constant: 1).isActive = true
         }
     }
 
@@ -474,7 +543,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             .disposed(by: self.disposeBag)
      }
 
-    fileprivate func configureMessageReadAvatar(_ item: MessageViewModel, _ conversationViewModel: ConversationViewModel) {
+    private func configureMessageReadAvatar(_ item: MessageViewModel, _ conversationViewModel: ConversationViewModel) {
+        guard self.messageReadIndicator != nil else { return }
 
         Observable<(Data?, String, Bool)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
                                                         conversationViewModel.bestName.asObservable(),

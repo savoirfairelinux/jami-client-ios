@@ -53,7 +53,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="31" id="1Kj-UZ-gu7"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="1Kj-UZ-gu7"/>
                             <constraint firstItem="lyR-7c-S2k" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="14" id="8m5-sR-xnh"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="BZE-kP-hPK"/>
                             <constraint firstAttribute="bottom" secondItem="lyR-7c-S2k" secondAttribute="bottom" constant="7" id="gwN-uX-PWd"/>
@@ -90,7 +90,7 @@
                         <rect key="frame" x="244.66666666666666" y="13.666666666666664" width="19.999999999999972" height="20"/>
                     </activityIndicatorView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Failed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5a-HI-uhr" userLabel="Failed Status Label">
-                        <rect key="frame" x="222.33333333333334" y="13.999999999999998" width="42.333333333333343" height="19.333333333333329"/>
+                        <rect key="frame" x="222.33333333333334" y="14" width="42.333333333333343" height="19"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.94117647058823528" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -110,7 +110,7 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" constant="8" id="1QQ-bu-6Bl" userLabel="Bubble Bottom Constraint"/>
+                    <constraint firstAttribute="bottom" secondItem="kZJ-Ay-LTR" secondAttribute="bottom" priority="999" constant="8" id="1QQ-bu-6Bl" userLabel="Bubble Bottom Constraint"/>
                     <constraint firstAttribute="trailing" secondItem="nk1-r0-5jJ" secondAttribute="trailing" constant="4" id="1g3-Kl-0eG"/>
                     <constraint firstItem="h8N-aw-5lV" firstAttribute="leading" secondItem="ogn-wv-fZy" secondAttribute="trailing" constant="16" id="1jW-JR-t5r"/>
                     <constraint firstItem="78h-fZ-7yf" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="-8" id="4ME-jl-Uol"/>
@@ -130,7 +130,7 @@
                     <constraint firstItem="2U4-l3-KET" firstAttribute="trailing" secondItem="ogn-wv-fZy" secondAttribute="leading" constant="-16" id="Xw6-H2-byY"/>
                     <constraint firstItem="hdz-AQ-xHI" firstAttribute="height" secondItem="kZJ-Ay-LTR" secondAttribute="height" multiplier="0.5" constant="3" id="f63-Xd-RQB"/>
                     <constraint firstAttribute="trailingMargin" secondItem="h8N-aw-5lV" secondAttribute="trailing" constant="16" id="iwC-fc-F9c"/>
-                    <constraint firstItem="kZJ-Ay-LTR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="jhd-A8-c1o"/>
+                    <constraint firstItem="kZJ-Ay-LTR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" priority="999" constant="8" id="jhd-A8-c1o"/>
                     <constraint firstItem="hdz-AQ-xHI" firstAttribute="trailing" secondItem="kZJ-Ay-LTR" secondAttribute="trailing" id="lSl-vu-Wkl"/>
                     <constraint firstItem="kZJ-Ay-LTR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="102" id="nWe-5k-Qpn"/>
                     <constraint firstItem="2U4-l3-KET" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="uoy-US-ksI"/>
@@ -143,8 +143,8 @@
                 <outlet property="bottomCorner" destination="hdz-AQ-xHI" id="ChE-BT-0LS"/>
                 <outlet property="bubble" destination="kZJ-Ay-LTR" id="hdG-fG-L69"/>
                 <outlet property="bubbleBottomConstraint" destination="1QQ-bu-6Bl" id="woo-UQ-wXK"/>
+                <outlet property="bubbleHeightConstraint" destination="1Kj-UZ-gu7" id="VMV-Ea-Je4"/>
                 <outlet property="bubbleTopConstraint" destination="jhd-A8-c1o" id="cll-eA-OC5"/>
-                <outlet property="buttonsHeightConstraint" destination="1Kj-UZ-gu7" id="5XS-t5-9Mb"/>
                 <outlet property="failedStatusLabel" destination="P5a-HI-uhr" id="6Sq-NU-j0d"/>
                 <outlet property="leftDivider" destination="2U4-l3-KET" id="y4j-CT-gez"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
