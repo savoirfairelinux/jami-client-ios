@@ -57,7 +57,12 @@ class MessageViewModel {
     fileprivate let conversationsService: ConversationsService
     fileprivate let dataTransferService: DataTransferService
     var message: MessageModel
-    var timeStringShown: String?
+
+    var shouldShowTimeString: Bool = false
+    lazy var timeStringShown: String = { [unowned self] in
+        return MessageViewModel.getTimeLabelString(forTime: self.receivedDate)
+    }()
+
     var sequencing: MessageSequencing = .unknown
     var isComposingIndicator: Bool = false
 
@@ -72,7 +77,6 @@ class MessageViewModel {
         self.injectBug = injectionBag
         self.message = message
         self.initialTransferStatus = message.transferStatus
-        self.timeStringShown = nil
         self.status.onNext(message.status)
         self.displayReadIndicator.accept(isLastDisplayed)
 
@@ -296,4 +300,29 @@ class MessageViewModel {
                       accountID: account.id,
                       conversationID: conversationID)
     }
+
+    private static func getTimeLabelString(forTime time: Date) -> String {
+         // get the current time
+         let currentDateTime = Date()
+
+         // prepare formatter
+         let dateFormatter = DateFormatter()
+
+         if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
+             // age: [0, received the previous day[
+             dateFormatter.dateFormat = "h:mma"
+         } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
+             // age: [received the previous day, received 7 days ago[
+             dateFormatter.dateFormat = "E h:mma"
+         } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
+             // age: [received 7 days ago, received the previous year[
+             dateFormatter.dateFormat = "MMM d, h:mma"
+         } else {
+             // age: [received the previous year, inf[
+             dateFormatter.dateFormat = "MMM d, yyyy h:mma"
+         }
+
+         // generate the string containing the message time
+         return dateFormatter.string(from: time).uppercased()
+     }
 }
