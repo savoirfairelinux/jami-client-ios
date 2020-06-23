@@ -46,7 +46,8 @@ class ConversationViewController: UIViewController,
     var messageViewModels: [MessageViewModel]?
     var textFieldShouldEndEditing = false
     var bottomOffset: CGFloat = 0
-    let scrollOffsetThreshold: CGFloat = 600
+    private let scrollOffsetThreshold: CGFloat = 600
+    private let messageGroupingInterval = 10 * 60 // 10 minutes
     var bottomHeight: CGFloat = 0.00
     var isExecutingDeleteMessage: Bool = false
 
@@ -743,19 +744,17 @@ class ConversationViewController: UIViewController,
         for (index, messageViewModel) in self.messageViewModels!.enumerated() {
             // time labels
             let time = messageViewModel.receivedDate
-            if index == 0 ||  messageViewModel.bubblePosition() == .generated || messageViewModel.isTransfer {
+            if index == 0 ||  messageViewModel.bubblePosition() == .generated /*|| messageViewModel.isTransfer*/ {
                 // always show first message's time
-                messageViewModel.timeStringShown = getTimeLabelString(forTime: time)
+                messageViewModel.shouldShowTimeString = true
                 lastShownTime = time
             } else {
-                // only show time for new messages if beyond an arbitrary time frame (1 minute)
-                // from the previously shown time
-                let hourComp = Calendar.current.compare(lastShownTime!, to: time, toGranularity: .hour)
-                let minuteComp = Calendar.current.compare(lastShownTime!, to: time, toGranularity: .minute)
-                if (hourComp == .orderedSame && minuteComp == .orderedSame) || messageViewModel.isComposingIndicator {
-                    messageViewModel.timeStringShown = nil
+                // only show time for new messages if beyond an arbitrary time frame from the previously shown time
+                let timeDifference = time.timeIntervalSinceReferenceDate - lastShownTime!.timeIntervalSinceReferenceDate
+                if Int(timeDifference) < messageGroupingInterval || messageViewModel.isComposingIndicator {
+                    messageViewModel.shouldShowTimeString = false
                 } else {
-                    messageViewModel.timeStringShown = getTimeLabelString(forTime: time)
+                    messageViewModel.shouldShowTimeString = true
                     lastShownTime = time
                 }
             }
@@ -803,31 +802,6 @@ class ConversationViewController: UIViewController,
             return sequencing
         }
         return MessageSequencing.unknown
-    }
-
-    private func getTimeLabelString(forTime time: Date) -> String {
-        // get the current time
-        let currentDateTime = Date()
-
-        // prepare formatter
-        let dateFormatter = DateFormatter()
-
-        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
-            // age: [0, received the previous day[
-            dateFormatter.dateFormat = "h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
-            // age: [received the previous day, received 7 days ago[
-            dateFormatter.dateFormat = "E h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
-            // age: [received 7 days ago, received the previous year[
-            dateFormatter.dateFormat = "MMM d, h:mma"
-        } else {
-            // age: [received the previous year, inf[
-            dateFormatter.dateFormat = "MMM d, yyyy h:mma"
-        }
-
-        // generate the string containing the message time
-        return dateFormatter.string(from: time).uppercased()
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -963,6 +937,7 @@ extension ConversationViewController: UITableViewDataSource {
 
             transferCellSetup(item, cell, tableView, indexPath)
             deleteCellSetup(cell)
+            tapToShowTimeCellSetup(cell)
 
             return cell
         }
@@ -976,6 +951,17 @@ extension ConversationViewController: UITableViewDataSource {
                 guard shouldDelete, let self = self, let cell = cell, let messageId = cell.messageId else { return }
                 self.isExecutingDeleteMessage = true
                 self.viewModel.deleteMessage(messageId: messageId)
+            })
+            .disposed(by: cell.disposeBag)
+    }
+
+    private func tapToShowTimeCellSetup(_ cell: MessageCell) {
+        cell.tappedToShowTime
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (tappedToShowTime) in
+                guard tappedToShowTime, let self = self else { return }
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
             })
             .disposed(by: cell.disposeBag)
     }
