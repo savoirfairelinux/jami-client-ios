@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "992381ef_844caa75",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-26T20:00:39Z",
+      "side": 1,
+      "message": "usually _ is not using in swift variables names",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ba5187a_7f440361",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-26T20:00:39Z",
+      "side": 1,
+      "message": "could cause wrong bubble height when constraint relation is greaterThanOrEqual and previous size is bigger than new. when reusing cell constraint need to be updated.",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4bf4698_24b505a2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-26T20:00:39Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "121d507b_528eaa7d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-26T20:00:39Z",
+      "side": 1,
+      "message": "could return if item is not transfer",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10afe1b3_c9234bf6",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-26T20:00:39Z",
+      "side": 1,
+      "message": "could return at this point to avoid nesting",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe22ae8_400554e7",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellReceived.xib",
+        "patchSetId": 11
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-26T20:00:39Z",
+      "side": 1,
+      "message": "Maybe it is better to add a new variable, bubbleHeight, because buttonsHeightConstraint used for data transfers and could be confused because there is no buttons in message. MessageCellSent.xib was using buttonsHeightConstraint, before, and also could use bubbleHeight instead",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f5d4a39_84785891",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-26T20:00:39Z",
+      "side": 1,
+      "message": "time could overlap message for a few moments, because it could be executed faster than table updated. maybe you could \nuse tableView.performBatchUpdates({\n}, completion: { finished in\n    cell.toggleCellTimeLabelVisibility()\n}) to display cell after size changed",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
