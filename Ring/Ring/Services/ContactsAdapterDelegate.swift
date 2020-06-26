@@ -25,4 +25,5 @@
                                       receivedDate: Date)
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool)
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool)
+    func profileReceived(contact uri: String, withAccountId accountId: String, vCard: String)
 }

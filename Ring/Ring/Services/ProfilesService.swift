@@ -26,6 +26,7 @@ import SwiftyBeaver
 enum ProfileNotifications: String {
     case messageReceived
     case contactAdded
+    case vCardReceived
 }
 
 enum ProfileNotificationsKeys: String {
@@ -60,6 +61,40 @@ class ProfilesService {
         NotificationCenter.default.addObserver(self, selector: #selector(self.contactAdded(_:)),
                                                name: NSNotification.Name(rawValue: ProfileNotifications.contactAdded.rawValue),
                                                object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.vCardReceived),
+                                               name: NSNotification.Name(rawValue: ProfileNotifications.vCardReceived.rawValue),
+                                               object: nil)
+    }
+
+    @objc private func vCardReceived(_ notification: NSNotification) {
+
+        guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
+            return
+        }
+        guard let accountId = notification.userInfo?[ProfileNotificationsKeys.accountId.rawValue] as? String else {
+            return
+        }
+        guard let message = notification.userInfo?[ProfileNotificationsKeys.message.rawValue] as? String else {
+            return
+        }
+
+        let uri = JamiURI(schema: URIType.ring, infoHach: ringId)
+        guard let  uriString = uri.uriString else { return }
+
+        //Create the vCard, save and db and emit a new event
+        if let vCard = CNContactVCardSerialization.parseToVCard(data: message.data(using: .utf8)!) {
+            let name = VCardUtils.getName(from: vCard)
+            var stringImage: String?
+            if let image = vCard.imageData {
+                stringImage = image.base64EncodedString()
+            }
+            _ = self.dbManager
+                .createOrUpdateRingProfile(profileUri: uriString,
+                                           alias: name,
+                                           image: stringImage,
+                                           accountId: accountId)
+            self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
+        }
     }
 
     @objc private func contactAdded(_ notification: NSNotification) {

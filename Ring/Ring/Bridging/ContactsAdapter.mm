@@ -85,6 +85,19 @@ static id <ContactsAdapterDelegate> _delegate;
         }
     }));
 
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ProfileReceived>([&](const std::string& account_id,
+                                                                                        const std::string& uri,
+                                                                                        const std::string& profile) {
+           if(ContactsAdapter.delegate) {
+               NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+               NSString* uriString = [NSString stringWithUTF8String:uri.c_str()];
+               NSString* message = [NSString stringWithUTF8String:profile.c_str()];
+               [ContactsAdapter.delegate profileReceivedWithContact:uriString withAccountId:accountId vCard:message];
+//               [ContactsAdapter.delegate contactRemovedWithContact:uriString withAccountId:accountId banned:(BOOL)banned];
+           }
+       }));
+
+
     registerSignalHandlers(confHandlers);
 }
 
