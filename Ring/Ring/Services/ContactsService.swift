@@ -355,6 +355,14 @@ extension ContactsService: ContactsAdapterDelegate {
         log.debug("Contact removed :\(uri)")
     }
 
+    func profileReceived(contact uri: String, withAccountId accountId: String, vCard: String) {
+        var data = [String: Any]()
+        data[ProfileNotificationsKeys.ringID.rawValue] = uri
+        data[ProfileNotificationsKeys.accountId.rawValue] = accountId
+        data[ProfileNotificationsKeys.message.rawValue] = vCard
+        NotificationCenter.default.post(name: NSNotification.Name(ProfileNotifications.vCardReceived.rawValue), object: nil, userInfo: data)
+    }
+
     func getContactRequestVCard(forContactWithRingId ringID: String) -> Single<CNContact> {
         return Single.create(subscribe: { single in
             if let contactRequest = self.contactRequest(withRingId: ringID) {
