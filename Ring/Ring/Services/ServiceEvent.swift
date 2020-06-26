@@ -52,6 +52,7 @@ enum ServiceEventType {
     case migrationEnded
     case lastDisplayedMessageUpdated
     case presenseSubscribed
+    case vCardReceived
 }
 
 /**

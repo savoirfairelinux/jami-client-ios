@@ -23,6 +23,10 @@
 import RxSwift
 import SwiftyBeaver
 
+@objc protocol ProfilesAdapterDelegate {
+    func profileReceived(contact uri: String, withAccountId accountId: String, vCard: String)
+}
+
 enum ProfileNotifications: String {
     case messageReceived
     case contactAdded
@@ -39,11 +43,12 @@ struct Base64VCard {
     var partsReceived: Int
 }
 
-class ProfilesService {
+class ProfilesService: ProfilesAdapterDelegate {
 
     fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
     fileprivate var base64VCards = [Int: Base64VCard]()
     fileprivate let log = SwiftyBeaver.self
+    fileprivate let profilesAdapter: ProfilesAdapter
 
     var profiles = [String: ReplaySubject<Profile>]()
     var accountProfiles = [String: ReplaySubject<Profile>]()
@@ -52,7 +57,8 @@ class ProfilesService {
 
     let disposeBag = DisposeBag()
 
-    init(dbManager: DBManager) {
+    init(withProfilesAdapter adapter: ProfilesAdapter, dbManager: DBManager) {
+        profilesAdapter = adapter
         self.dbManager = dbManager
         NotificationCenter.default.addObserver(self, selector: #selector(self.messageReceived(_:)),
                                                name: NSNotification.Name(rawValue: ProfileNotifications.messageReceived.rawValue),
@@ -60,6 +66,27 @@ class ProfilesService {
         NotificationCenter.default.addObserver(self, selector: #selector(self.contactAdded(_:)),
                                                name: NSNotification.Name(rawValue: ProfileNotifications.contactAdded.rawValue),
                                                object: nil)
+        ProfilesAdapter.delegate = self
+    }
+
+    func profileReceived(contact uri: String, withAccountId accountId: String, vCard: String) {
+        let uri = JamiURI(schema: URIType.ring, infoHach: uri)
+        guard let  uriString = uri.uriString else { return }
+
+        //Create the vCard, save and db and emit a new event
+        guard let data = vCard.data(using: .utf8),
+            let vCard = CNContactVCardSerialization.parseToVCard(data: data) else { return }
+        let name = VCardUtils.getName(from: vCard)
+        var stringImage: String?
+        if let image = vCard.imageData {
+            stringImage = image.base64EncodedString()
+        }
+        _ = self.dbManager
+            .createOrUpdateRingProfile(profileUri: uriString,
+                                       alias: name,
+                                       image: stringImage,
+                                       accountId: accountId)
+        self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
     }
 
     @objc private func contactAdded(_ notification: NSNotification) {

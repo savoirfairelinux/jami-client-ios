@@ -564,7 +564,7 @@ class DBManager {
         }
         guard let path = self.dbConnections.contactProfilePath(accountId: accountId, profileURI: profileUri, createifNotExists: true) else {return false}
 
-        let profile = Profile(profileUri, alias, image, ProfileType.ring.rawValue)
+        let profile = Profile(profileUri, alias, image, type.rawValue)
 
         do {
             try self.saveProfile(profile: profile, path: path)

@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: self.dBManager)
     }()
     private lazy var profileService: ProfilesService = {
-        ProfilesService(dbManager: self.dBManager)
+        ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: self.dBManager)
     }()
     private lazy var dataTransferService: DataTransferService = {
         DataTransferService(withDataTransferAdapter: DataTransferAdapter(),

@@ -31,6 +31,7 @@
 #import "NameRegistrationResponse.h"
 #import "MessagesAdapter.h"
 #import "ContactsAdapter.h"
+#import "ProfilesAdapter.h"
 #import "PresenceAdapter.h"
 #import "VideoAdapter.h"
 #import "AudioAdapter.h"
