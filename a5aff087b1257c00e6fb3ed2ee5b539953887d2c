@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bf26524c_f88dc167",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-29T15:21:48Z",
+      "side": 1,
+      "message": "Ok I see. How should I distinguish the private and public variable?",
+      "parentUuid": "992381ef_844caa75",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ba5187a_7f440361",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 11
@@ -33,6 +51,24 @@
       "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb1ae91b_c098580e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-29T15:21:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9ba5187a_7f440361",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "25c21bc0_a845f4e3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-29T15:21:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f4bf4698_24b505a2",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "121d507b_528eaa7d",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 11
@@ -67,6 +121,24 @@
       "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9450c0ea_b45aac03",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-29T15:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "121d507b_528eaa7d",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "d37fe2e3_86dd369f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-29T15:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10afe1b3_c9234bf6",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ebe22ae8_400554e7",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellReceived.xib",
         "patchSetId": 11
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "32a7dd83_29a092d2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellReceived.xib",
+        "patchSetId": 11
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-29T15:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebe22ae8_400554e7",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f5d4a39_84785891",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
         "patchSetId": 11
@@ -118,6 +226,24 @@
       "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d226645_82d18227",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-29T15:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f5d4a39_84785891",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
