@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "117ee899_20f75d50",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-29T18:26:46Z",
+      "side": 1,
+      "message": "just create a new name. Maybe showTime",
+      "parentUuid": "9cf179f8_d8e0528d",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ba5187a_7f440361",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 11

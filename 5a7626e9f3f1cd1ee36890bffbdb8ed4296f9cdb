@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9098d0e_7e3ecc8c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-29T18:26:46Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "5a7626e9f3f1cd1ee36890bffbdb8ed4296f9cdb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "197de398_c0e0a789",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-29T18:26:46Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "5a7626e9f3f1cd1ee36890bffbdb8ed4296f9cdb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
