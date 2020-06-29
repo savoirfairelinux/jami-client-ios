@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f7b11ba_691f7e9f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-06-29T16:16:43Z",
+      "side": 1,
+      "message": "empty space",
+      "revId": "fe94b5516e897bac23201251ea26aa1d2f99f91c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
