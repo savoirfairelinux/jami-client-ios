@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "9cf179f8_d8e0528d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-29T17:28:34Z",
+      "side": 1,
+      "message": "If I remove the underscore, I get \"Invalid redeclaration of \u0027tappedToShowTime\u0027\". So since we can\u0027t use the private setter and public getter and we need different names for the two varibles, could the underscore be acceptable or there is a better way?",
+      "parentUuid": "e838e2c9_a2499c6c",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ba5187a_7f440361",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 11
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Open conversation. Tap a few messages to see time. Scroll to top, you will see new messages has bigger bubble, because constraint was not updated.",
       "parentUuid": "cb1ae91b_c098580e",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b19ea028_98396e97",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-06-29T17:28:34Z",
+      "side": 1,
+      "message": "Fixed. Cause: override func prepareForReuse() is not called consistently on reuse.",
+      "parentUuid": "17796baa_a63dce0f",
       "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
