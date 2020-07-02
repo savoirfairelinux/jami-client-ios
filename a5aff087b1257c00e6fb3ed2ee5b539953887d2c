@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "3f2c12d7_35a0541c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-07-02T14:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "117ee899_20f75d50",
+      "revId": "a5aff087b1257c00e6fb3ed2ee5b539953887d2c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ba5187a_7f440361",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 11

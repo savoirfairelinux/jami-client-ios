@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d74521f4_2ba35b85",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-07-02T14:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9098d0e_7e3ecc8c",
+      "revId": "5a7626e9f3f1cd1ee36890bffbdb8ed4296f9cdb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "197de398_c0e0a789",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
         "patchSetId": 14
@@ -33,6 +51,24 @@
       "revId": "5a7626e9f3f1cd1ee36890bffbdb8ed4296f9cdb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80b34573_170ab885",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-07-02T14:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "197de398_c0e0a789",
+      "revId": "5a7626e9f3f1cd1ee36890bffbdb8ed4296f9cdb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
