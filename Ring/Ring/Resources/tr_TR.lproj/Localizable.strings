@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Başlangıç";
+"global.homeTabBarTitle" = "Conversations";
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
@@ -37,7 +37,7 @@
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "İnternet bağlantısı yok";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "Accounts";
 "smartlist.addAccountButton" = "+ Add Account";
@@ -57,6 +57,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
 "welcome.createAccount" = "Create a Jami account";
+"welcome.connectToManager" = "Connect to account manager";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
@@ -132,6 +133,10 @@
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.recordVideoMessage" = "Record a video message";
+"alerts.recordAudioMessage" = "Record an audio message";
+"alerts.uploadFile" = "Upload file";
+"alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
 "actions.blockAction" = "Block";
@@ -139,9 +144,12 @@
 "actions.cancelAction" = "Cancel";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Back";
+"actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accept";
 "alerts.incomingCallButtonIgnore" = "Ignore";
+"actions.startAudioCall" = "  Audio Call";
+"actions.startVideoCall" = "  Video Call";
 
 //Calls
 "calls.callItemTitle" = "Call";
@@ -156,12 +164,12 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Ayarlar";
+"accountPage.settingsHeader" = "Settings";
 "accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Block List";
+"accountPage.blockedContacts" = "Blocked contacts";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -190,7 +198,26 @@
 "accountPage.removeAccountButton" = "Remove";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributet communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.registerNameTitle" = "Register a username";
+"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegisterAction" = "Register";
+"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
+"accountPage.createPassword" = "Create password";
+"accountPage.changePassword" = "Change password";
+"accountPage.oldPasswordPlaceholder" = "Enter old password";
+"accountPage.newPasswordPlaceholder" = "Enter new password";
+"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.changePasswordError" = "Password incorrect";
+"accountPage.enableBoothMode" = "Enable Booth Mode";
+"accountPage.disableBoothMode" = "Disable Booth Mode";
+"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
+"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
+"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 
 //Account
 "account.sipUsername" = "User Name";
@@ -210,6 +237,7 @@
 "account.statusConnecting" = "Connecting";
 "account.statusUnknown" = "Unknown";
 "account.statusConnectionerror" = "Connection Error";
+"account.needMigration" = "account need to be migrated";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -265,10 +293,23 @@
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Giden arama";
 "generatedMessage.incomingCall" = "Gelen arama";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.missedOutgoingCall" = "Giden cevapsız çağrı";
+"generatedMessage.missedIncomingCall" = "Gelen cevapsız çağrı";
 
 //General Settings
 "generalSettings.title" = "General settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
+
+//Migrate Account
+"migrateAccount.title" = "Account migration";
+"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
+"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.cancel" = "Cancel";
+"migrateAccount.migrateAnother" = "Migrate Another Account";
+
 
