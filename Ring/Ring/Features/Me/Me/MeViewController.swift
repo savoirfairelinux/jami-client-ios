@@ -456,6 +456,28 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                             self?.viewModel.enableNotifications(enable: value)
                         }).disposed(by: cell.disposeBag)
                     return cell
+                case .peerDiscovery:
+                    let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    cell.textLabel?.text = L10n.AccountPage.peerDiscovery
+                    let switchView = UISwitch()
+                    cell.selectionStyle = .none
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
+                    self.viewModel.peerDiscoveryEnabled
+                        .asObservable()
+                        .startWith(self.viewModel.peerDiscoveryEnabled.value)
+                        .observeOn(MainScheduler.instance)
+                        .bind(to: switchView.rx.value)
+                        .disposed(by: cell.disposeBag)
+                    switchView.rx
+                        .isOn.changed
+                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .distinctUntilChanged().asObservable()
+                        .subscribe(onNext: {[weak self] enable in
+                            self?.viewModel.enablePeerDiscovery(enable: enable)
+                        }).disposed(by: cell.disposeBag)
+                    return cell
                 case .sipUserName(let value):
                     let cell = self
                         .configureSipCredentialsCell(cellType: .sipUserName(value: value),
@@ -493,8 +515,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     state.asObservable()
                         .observeOn(MainScheduler.instance)
                         .subscribe(onNext: { (status) in
-                                                   cell.detailTextLabel?.text = status
-                                               }).disposed(by: cell.disposeBag)
+                            cell.detailTextLabel?.text = status
+                        }).disposed(by: cell.disposeBag)
                     return cell
                 case .boothMode:
                     let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
