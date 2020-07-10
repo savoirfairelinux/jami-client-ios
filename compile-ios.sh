@@ -1,7 +1,7 @@
 #! /bin/sh
 
 export BUILDFORIOS=1
-export MIN_IOS_VERSION=9.3
+export MIN_IOS_VERSION=11
 IOS_TARGET_PLATFORM=iPhoneSimulator
 RELEASE=0
 
@@ -121,7 +121,7 @@ do
     CFLAGS+=" -O3"
   fi
 
-  CXXFLAGS="-stdlib=libc++ -std=c++14 $CFLAGS"
+  CXXFLAGS="-stdlib=libc++ -std=c++17 $CFLAGS"
   LDFLAGS="$CFLAGS"
 
   ./autogen.sh || exit 1
