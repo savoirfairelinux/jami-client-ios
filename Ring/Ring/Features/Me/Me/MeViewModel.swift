@@ -55,6 +55,7 @@ enum SettingsSection: SectionModelType {
         case enableAccount
         case changePassword
         case boothMode
+        case peerDiscovery
     }
 
     var items: [SectionRow] {
@@ -212,6 +213,7 @@ class MeViewModel: ViewModel, Stateable {
     lazy var otherJamiSettings: Observable<SettingsSection> = {
         return Observable
             .just(SettingsSection.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.other),
+                                                           .peerDiscovery,
                                                            .blockedList,
                                                            .accountState(state: self.accountStatus),
                                                            .enableAccount,
@@ -693,11 +695,28 @@ class MeViewModel: ViewModel, Stateable {
         return Variable<Bool>(true)
     }()
 
+    lazy var peerDiscoveryEnabled: Variable<Bool> = {
+        if let account = self.accountService.currentAccount,
+            let details = account.details {
+            let enable = details.get(withConfigKeyModel:
+                ConfigKeyModel.init(withKey: .dhtPeerDiscovery)).boolValue
+            return Variable<Bool>(enable)
+        }
+        return Variable<Bool>(true)
+    }()
+
     func enableAccount(enable: Bool) {
         if self.accountEnabled.value == enable {return}
         guard let account = self.accountService.currentAccount else {return}
         self.accountService.enableAccount(enable: enable, accountId: account.id)
         accountEnabled.value = enable
+    }
+
+    func enablePeerDiscovery(enable: Bool) {
+        if self.peerDiscoveryEnabled.value == enable {return}
+        guard let account = self.accountService.currentAccount else {return}
+        self.accountService.enablePeerDiscovery(enable: enable, accountId: account.id)
+        peerDiscoveryEnabled.value = enable
     }
 
     // MARK: Sip Credentials
