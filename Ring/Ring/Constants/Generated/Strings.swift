@@ -115,6 +115,8 @@ internal enum L10n {
     internal static let other = L10n.tr("Localizable", "accountPage.other")
     /// Enter account password
     internal static let passwordPlaceholder = L10n.tr("Localizable", "accountPage.passwordPlaceholder")
+    /// Auto connect on local network
+    internal static let peerDiscovery = L10n.tr("Localizable", "accountPage.peerDiscovery")
     /// Provide proxy address
     internal static let proxyAddressAlert = L10n.tr("Localizable", "accountPage.proxyAddressAlert")
     /// In order to receive notifications, please enable proxy

@@ -528,13 +528,7 @@ class AccountsService: AccountAdapterDelegate {
         if details
             .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == filename &&
             details
-                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtoneEnabled)) == "false" &&
-            details
-                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery)) == "false" &&
-            details
-                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPeerDiscovery)) == "false" &&
-            details
-                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPublish)) == "false" {
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtoneEnabled)) == "false" {
             return
         }
         details
@@ -542,15 +536,6 @@ class AccountsService: AccountAdapterDelegate {
                  withValue: filename)
         details
             .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtoneEnabled),
-                 withValue: "false")
-        details
-        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery),
-             withValue: "false")
-        details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPeerDiscovery),
-                 withValue: "false")
-        details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountPublish),
                  withValue: "false")
         setAccountDetails(forAccountId: accountId, withDetails: details)
     }
@@ -709,14 +694,8 @@ class AccountsService: AccountAdapterDelegate {
         }
         accountDetails!.updateValue("oversip", forKey: ConfigKey.accountDTMFType.rawValue)
         accountDetails!.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
-        accountDetails!.updateValue("default.wav", forKey: ConfigKey.ringtonePath.rawValue)
         accountDetails!.updateValue(accountType, forKey: ConfigKey.accountType.rawValue)
         accountDetails!.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
-        if accountType == AccountType.ring.rawValue {
-            accountDetails!.updateValue("false", forKey: ConfigKey.dhtPeerDiscovery.rawValue)
-            accountDetails!.updateValue("false", forKey: ConfigKey.accountPeerDiscovery.rawValue)
-            accountDetails!.updateValue("false", forKey: ConfigKey.accountPublish.rawValue)
-        }
         return accountDetails!
     }
 
@@ -969,11 +948,18 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func enableAccount(enable: Bool, accountId: String) {
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.accountEnable));
+    }
+
+    func enablePeerDiscovery(enable: Bool, accountId: String) {
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery));
+    }
+
+    func switchAccountPropertyTo(state: Bool, accountId: String, property: ConfigKeyModel) {
         let accountDetails = self.getAccountDetails(fromAccountId: accountId)
-        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountEnable)) != enable.toString() {
-            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountEnable), withValue: enable.toString())
-            self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
-        }
+        guard accountDetails.get(withConfigKeyModel: property) != state.toString() else { return }
+        accountDetails.set(withConfigKeyModel: property, withValue: state.toString())
+        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
     }
 
     // MARK: - observable account data
