@@ -30,6 +30,7 @@ class MessageModel {
     var isGenerated: Bool = false
     var isTransfer: Bool = false
     var incoming: Bool
+    var isLocationSharing: Bool = false
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
