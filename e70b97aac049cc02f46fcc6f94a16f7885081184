@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c9903c1_b8b6385a",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-07-13T20:30:02Z",
+      "side": 1,
+      "message": "[Idea] Could be combined like this:\nguard self.peerDiscoveryEnabled.value !\u003d enable, let account \u003d self.accountService.currentAccount else { return }",
+      "range": {
+        "startLine": 716,
+        "startChar": 8,
+        "endLine": 717,
+        "endChar": 76
+      },
+      "revId": "e70b97aac049cc02f46fcc6f94a16f7885081184",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
