@@ -52,6 +52,9 @@ enum ServiceEventType {
     case migrationEnded
     case lastDisplayedMessageUpdated
     case presenseSubscribed
+    case sendLocation
+    case deleteLocation
+    case stopLocationSharing
 }
 
 /**
