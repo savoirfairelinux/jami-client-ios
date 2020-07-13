@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
@@ -153,6 +153,7 @@ enum InteractionType: String {
     case contact    = "CONTACT"
     case iTransfer  = "INCOMING_DATA_TRANSFER"
     case oTransfer  = "OUTGOING_DATA_TRANSFER"
+    case location   = "LOCATION"
 }
 
 typealias SavedMessageForConversation = (messageID: Int64, conversationID: Int64)
@@ -312,7 +313,7 @@ class DBManager {
                 observable.on(.error(DBBridgingError.saveMessageFailed))
             }
             return Disposables.create { }
-            }
+        }
     }
 
     func getConversationsObservable(for accountId: String) -> Observable<[ConversationModel]> {
@@ -495,7 +496,7 @@ class DBManager {
                     }
                     if !interactions.isEmpty {
                         if !self.interactionHepler
-                            .deleteAllIntercations(conv: conversationsId, dataBase: dataBase) {
+                            .deleteAllInteractions(conv: conversationsId, dataBase: dataBase) {
                             completable(.error(DBBridgingError.deleteConversationFailed))
                         }
                     }
@@ -660,7 +661,8 @@ class DBManager {
             interaction.type != InteractionType.contact.rawValue &&
             interaction.type != InteractionType.call.rawValue &&
             interaction.type != InteractionType.iTransfer.rawValue &&
-            interaction.type != InteractionType.oTransfer.rawValue {
+            interaction.type != InteractionType.oTransfer.rawValue &&
+            interaction.type != InteractionType.location.rawValue {
             return nil
         }
         let content = (interaction.type == InteractionType.call.rawValue
@@ -689,6 +691,9 @@ class DBManager {
                 message.status = status.toMessageStatus()
             }
         }
+        if interaction.type == InteractionType.location.rawValue {
+            message.isLocationSharing = true
+        }
         message.messageId = interaction.id
         return message
     }
@@ -708,7 +713,7 @@ class DBManager {
         let interaction = Interaction(defaultID, author,
                                       conversationID, Int64(timeInterval), Int64(duration),
                                       message.content, interactionType.rawValue,
-                                     status, message.daemonId,
+                                      status, message.daemonId,
                                       message.incoming)
         return self.interactionHepler.insert(item: interaction, dataBase: dataBase)
     }
@@ -780,5 +785,59 @@ class DBManager {
         }
         return try self.conversationHelper
             .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase)?.first?.id
+    }
+
+    // MARK: Location sharing
+    func isFirstLocationIncomingUpdate(incoming: Bool, peerUri: String, accountId: String) -> Bool? {
+        do {
+            guard let dataBase = self.dbConnections.forAccount(account: accountId) else { return nil }
+
+            let conversationId = try self.getConversationsFor(contactUri: peerUri, createIfNotExists: true, dataBase: dataBase, accountId: accountId)
+            let interactions = try self.interactionHepler.selectInteractionsForConversation(conv: conversationId!, dataBase: dataBase)
+
+            var isFirst = true
+            for (interaction) in interactions! where interaction.type == InteractionType.location.rawValue && interaction.incoming == incoming {
+                isFirst = false
+                break
+            }
+            return isFirst
+        } catch {
+            return nil
+        }
+    }
+
+    func deleteLocationUpdates(incoming: Bool, peerUri: String, accountId: String) -> Completable {
+        return Completable.create(subscribe: { [weak self] completable in
+            do {
+                guard let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) else { throw DataAccessError.datastoreConnectionError }
+                let conversationId = try self.getConversationsFor(contactUri: peerUri, createIfNotExists: true, dataBase: dataBase, accountId: accountId)
+
+                let predicat: Expression<Bool> = (self.interactionHepler.conversation == conversationId! &&
+                                                  self.interactionHepler.type == InteractionType.location.rawValue &&
+                                                  self.interactionHepler.incoming == incoming)
+
+                _ = try self.interactionHepler.deleteInteractions(where: predicat, dataBase: dataBase)
+                completable(.completed)
+            } catch {
+                completable(.error(DBBridgingError.deleteMessageFailed))
+            }
+            return Disposables.create { }
+        })
+    }
+
+    func deleteAllLocationUpdates(accountId: String) -> Completable {
+        return Completable.create(subscribe: { [weak self] completable in
+            do {
+                guard let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) else { throw DataAccessError.datastoreConnectionError }
+
+                let predicat: Expression<Bool> = (self.interactionHepler.type == InteractionType.location.rawValue)
+
+                _ = try self.interactionHepler.deleteInteractions(where: predicat, dataBase: dataBase)
+                completable(.completed)
+            } catch {
+                completable(.error(DBBridgingError.deleteMessageFailed))
+            }
+            return Disposables.create { }
+        })
     }
 }
