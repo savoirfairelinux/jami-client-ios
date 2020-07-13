@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
@@ -432,6 +432,10 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             return
 
         case .sent:
+            guard !item.isLocationSharingBubble else {
+                self.setCellTimeLabelVisibility(hide: true)
+                return }
+
             self.configureTransferCell(item, conversationViewModel)
 
             self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
@@ -455,6 +459,10 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             }
 
         case .received:
+            guard !item.isLocationSharingBubble else {
+                self.setCellTimeLabelVisibility(hide: true)
+                return }
+
             self.configureTransferCell(item, conversationViewModel)
 
             self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)

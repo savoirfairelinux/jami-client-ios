@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
@@ -44,6 +44,7 @@ class ConversationViewModel: Stateable, ViewModel {
     private let profileService: ProfilesService
     private let dataTransferService: DataTransferService
     private let callService: CallsService
+    private let locationSharingService: LocationSharingService
 
     private let injectionBag: InjectionBag
 
@@ -97,9 +98,26 @@ class ConversationViewModel: Stateable, ViewModel {
         self.profileService = injectionBag.profileService
         self.dataTransferService = injectionBag.dataTransferService
         self.callService = injectionBag.callService
+        self.locationSharingService = injectionBag.locationSharingService
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
+
+        self.initializeLocationReceivedEvent()
+    }
+
+    private func initializeLocationReceivedEvent() {
+        self.locationSharingService
+            .locationReceivedFromRecipientUri
+            .subscribe(onNext: { [weak self] tuple in
+                guard let self = self, let peerUri = tuple.0, let coordinates = tuple.1, let conversation = self.conversation else { return }
+                //self.log.debug("[locationReceivedFromRecipientUri] peerUri: \(peerUri), self.conversation.value.participantUri: \(self.conversation.value.participantUri)")
+                if peerUri == conversation.value.participantUri {
+                    self.myContactsLocation.onNext(coordinates)
+                    self.startReceivingLocaiton()
+                }
+            })
+           .disposed(by: self.disposeBag)
     }
 
     var conversation: Variable<ConversationModel>! {
@@ -654,5 +672,74 @@ class ConversationViewModel: Stateable, ViewModel {
 
     func isLastDisplayed(messageId: Int64) -> Bool {
         return messageId == self.conversation.value.lastDisplayedMessage.id
+    }
+
+    private var isSendingLocation: Bool = false
+    var myLocation: Observable<CLLocationCoordinate2D?> { return self.locationSharingService.currentLocation }
+
+    private var isReceivingLocaiton: Bool = false
+    var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
+}
+
+// MARK: Sharing my location
+extension ConversationViewModel {
+
+    func startSendingLocation() {
+        guard !self.isSendingLocation, let account = self.accountService.currentAccount else { return }
+
+        // Set the boolean
+        self.isSendingLocation = true
+
+        // Tell the service
+        self.locationSharingService.startSharingLocation(from: account, to: self.conversation.value.participantUri)
+
+        // Create the bubble
+        let msgModel = MessageModel(withId: "", receivedDate: Date(), content: "", authorURI: account.id, incoming: false)
+        let msgViewModel = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel, isLastDisplayed: false)
+        msgViewModel.isLocationSharingBubble = true
+
+        self.messages.value.append(msgViewModel)
+    }
+
+    func stopSendingLocation() {
+        guard self.isSendingLocation else { return }
+
+        // Set the boolean
+        self.isSendingLocation = false
+
+        // Tell the service
+        self.locationSharingService.stopSharingLocation(to: self.conversation.value.participantUri)
+
+        // Delete the bubble
+        if let index = self.messages.value.firstIndex(where: { $0.isLocationSharingBubble }) {
+            self.messages.value.remove(at: index)
+            self.log.debug("[ConversationViewModel] bubbleDeleted")
+        }
+        self.log.debug("[ConversationViewModel] stopSendingLocation")
+    }
+}
+
+// MARK: Receiving my contact's location
+extension ConversationViewModel {
+
+    private func startReceivingLocaiton() {
+        guard !self.isReceivingLocaiton, let account = self.accountService.currentAccount else { return }
+
+        // Set the boolean
+        self.isReceivingLocaiton = true
+
+        // Service already knows, he told us
+
+        // Create the bubble
+        let msgModel = MessageModel(withId: "", receivedDate: Date(), content: "", authorURI: account.id, incoming: true)
+        let msgViewModel = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel, isLastDisplayed: false)
+        msgViewModel.isLocationSharingBubble = true
+
+        self.messages.value.append(msgViewModel)
+        self.log.debug("[ConversationViewModel] startReceivingLocaiton")
+    }
+
+    private func stopReceivingLocation() {
+
     }
 }
