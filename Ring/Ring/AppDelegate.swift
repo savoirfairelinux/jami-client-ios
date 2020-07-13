@@ -1,10 +1,11 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -63,6 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private lazy var conversationsService: ConversationsService = {
         ConversationsService(withMessageAdapter: MessagesAdapter(), dbManager: self.dBManager)
     }()
+    private lazy var locationSharingService: LocationSharingService = {
+        LocationSharingService(dbManager: self.dBManager)
+    }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
@@ -79,7 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withAudioService: self.audioService,
                             withDataTransferService: self.dataTransferService,
                             withProfileService: self.profileService,
-                            withCallsProvider: self.callsProvider)
+                            withCallsProvider: self.callsProvider,
+                            withLocationSharingService: self.locationSharingService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -142,7 +147,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         accountsService: self.accountService,
                                                         nameService: self.nameService,
                                                         dataTransferService: self.dataTransferService,
-                                                        callService: self.callService)
+                                                        callService: self.callService,
+                                                        locationSharingService: self.locationSharingService)
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()
 

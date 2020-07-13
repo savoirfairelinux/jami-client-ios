@@ -314,6 +314,18 @@
 		62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */; };
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
 		62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
+		6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144324B4ACA7007203D5 /* CoreLocation.framework */; };
+		645BDD6224B5FEFE009129B1 /* WhirlyGlobeMaplyComponent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */; };
+		645BDD6324B5FEFF009129B1 /* WhirlyGlobeMaplyComponent.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		645BDD7724B7415A009129B1 /* MessageCellLocationSharingSent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 645BDD6C24B7415A009129B1 /* MessageCellLocationSharingSent.xib */; };
+		645BDD7B24B7415A009129B1 /* MessageCellLocationSharingSent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BDD7024B7415A009129B1 /* MessageCellLocationSharingSent.swift */; };
+		645BDD8124B74BCB009129B1 /* LocationSharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BDD8024B74BCB009129B1 /* LocationSharingService.swift */; };
+		649AD3C324B4CFC700A0236D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144724B4ACDE007203D5 /* libsqlite3.tbd */; };
+		649AD3C624B4CFD500A0236D /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144524B4ACC8007203D5 /* libxml2.tbd */; };
+		649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144124B4AC9F007203D5 /* libc++.tbd */; };
+		64F8127724B8AA5200A7DE6A /* MessageCellLocationSharingReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F8127324B8AA5200A7DE6A /* MessageCellLocationSharingReceived.swift */; };
+		64F8127824B8AA5200A7DE6A /* MessageCellLocationSharingReceived.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64F8127624B8AA5200A7DE6A /* MessageCellLocationSharingReceived.xib */; };
+		64F8127A24BBC19C00A7DE6A /* MessageCellLocationSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F8127924BBC19C00A7DE6A /* MessageCellLocationSharing.swift */; };
 		6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6613A611214AFF4700B497D1 /* ScanViewController.storyboard */; };
 		66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FBF21557D2F002757A6 /* ScanViewModel.swift */; };
 		66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */; };
@@ -338,7 +350,35 @@
 			remoteGlobalIDString = 043999F21D1C2D9D00E99CD9;
 			remoteInfo = Ring;
 		};
+		6452143C24B4AB44007203D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6452143724B4AB43007203D5 /* WhirlyGlobeMaplyComponent.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2BE536FF1D2499E500B60FAD;
+			remoteInfo = WhirlyGlobeMaplyComponent;
+		};
+		6452143E24B4AB44007203D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6452143724B4AB43007203D5 /* WhirlyGlobeMaplyComponent.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2BE537091D2499E500B60FAD;
+			remoteInfo = WhirlyGlobeMaplyComponentTests;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		645BDD6424B5FEFF009129B1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				645BDD6324B5FEFF009129B1 /* WhirlyGlobeMaplyComponent.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonServiceTests.swift; sourceTree = "<group>"; };
@@ -727,6 +767,17 @@
 		62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsColors.swift; sourceTree = "<group>"; };
+		6452143724B4AB43007203D5 /* WhirlyGlobeMaplyComponent.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WhirlyGlobeMaplyComponent.xcodeproj; path = "WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/WhirlyGlobeMaplyComponent.xcodeproj"; sourceTree = "<group>"; };
+		6452144124B4AC9F007203D5 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		6452144324B4ACA7007203D5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6452144524B4ACC8007203D5 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		6452144724B4ACDE007203D5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		645BDD6C24B7415A009129B1 /* MessageCellLocationSharingSent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellLocationSharingSent.xib; sourceTree = "<group>"; };
+		645BDD7024B7415A009129B1 /* MessageCellLocationSharingSent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellLocationSharingSent.swift; sourceTree = "<group>"; };
+		645BDD8024B74BCB009129B1 /* LocationSharingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingService.swift; sourceTree = "<group>"; };
+		64F8127324B8AA5200A7DE6A /* MessageCellLocationSharingReceived.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellLocationSharingReceived.swift; sourceTree = "<group>"; };
+		64F8127624B8AA5200A7DE6A /* MessageCellLocationSharingReceived.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellLocationSharingReceived.xib; sourceTree = "<group>"; };
+		64F8127924BBC19C00A7DE6A /* MessageCellLocationSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellLocationSharing.swift; sourceTree = "<group>"; };
 		6613A611214AFF4700B497D1 /* ScanViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScanViewController.storyboard; sourceTree = "<group>"; };
 		66266FBF21557D2F002757A6 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
 		66266FC3215C18F8002757A6 /* Emoji+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emoji+Helpers.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -741,6 +792,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				649AD3C324B4CFC700A0236D /* libsqlite3.tbd in Frameworks */,
+				649AD3C624B4CFD500A0236D /* libxml2.tbd in Frameworks */,
+				04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */,
+				649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */,
+				6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */,
 				0E4A51CC23282BCC00357AFC /* libhttp_parser.a in Frameworks */,
 				0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */,
 				0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */,
@@ -801,7 +857,7 @@
 				04399B141D1C341A00E99CD9 /* libx264.a in Frameworks */,
 				04399B151D1C341A00E99CD9 /* libyaml-cpp.a in Frameworks */,
 				04399A971D1C2F6100E99CD9 /* libbz2.tbd in Frameworks */,
-				04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */,
+				645BDD6224B5FEFE009129B1 /* WhirlyGlobeMaplyComponent.framework in Frameworks */,
 				04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */,
 				04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */,
 				04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */,
@@ -847,6 +903,11 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6452144724B4ACDE007203D5 /* libsqlite3.tbd */,
+				6452144524B4ACC8007203D5 /* libxml2.tbd */,
+				6452144324B4ACA7007203D5 /* CoreLocation.framework */,
+				6452144124B4AC9F007203D5 /* libc++.tbd */,
+				6452143724B4AB43007203D5 /* WhirlyGlobeMaplyComponent.xcodeproj */,
 				0E4A51CB23282BCC00357AFC /* libhttp_parser.a */,
 				0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */,
 				0E639459224AB32200C0890A /* Contacts.framework */,
@@ -907,6 +968,7 @@
 				62B60AF320489E7C001BEACF /* DataTransferService.swift */,
 				62B60AFA2048A437001BEACF /* DataTransferAdapterDelegate.swift */,
 				0ECB4E2722B2D4840097CD7B /* CallsProviderDelegate.swift */,
+				645BDD8024B74BCB009129B1 /* LocationSharingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1524,6 +1586,11 @@
 				62AD58472056DA6800AF0701 /* MessageCellDataTransferReceived.xib */,
 				62AD58492056DADF00AF0701 /* MessageCellDataTransferReceived.swift */,
 				62AD584B2056DB2700AF0701 /* MessageCellDataTransferSent.swift */,
+				64F8127924BBC19C00A7DE6A /* MessageCellLocationSharing.swift */,
+				645BDD7024B7415A009129B1 /* MessageCellLocationSharingSent.swift */,
+				645BDD6C24B7415A009129B1 /* MessageCellLocationSharingSent.xib */,
+				64F8127324B8AA5200A7DE6A /* MessageCellLocationSharingReceived.swift */,
+				64F8127624B8AA5200A7DE6A /* MessageCellLocationSharingReceived.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1678,6 +1745,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		6452143824B4AB43007203D5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */,
+				6452143F24B4AB44007203D5 /* WhirlyGlobeMaplyComponentTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6613A610214AF8B100B497D1 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -1701,6 +1777,7 @@
 				043999EF1D1C2D9D00E99CD9 /* Sources */,
 				043999F01D1C2D9D00E99CD9 /* Frameworks */,
 				043999F11D1C2D9D00E99CD9 /* Resources */,
+				645BDD6424B5FEFF009129B1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1852,6 +1929,12 @@
 			mainGroup = 043999EA1D1C2D9D00E99CD9;
 			productRefGroup = 043999F41D1C2D9D00E99CD9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6452143824B4AB43007203D5 /* Products */;
+					ProjectRef = 6452143724B4AB43007203D5 /* WhirlyGlobeMaplyComponent.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				043999F21D1C2D9D00E99CD9 /* Ring */,
@@ -1861,6 +1944,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WhirlyGlobeMaplyComponent.framework;
+			remoteRef = 6452143C24B4AB44007203D5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6452143F24B4AB44007203D5 /* WhirlyGlobeMaplyComponentTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WhirlyGlobeMaplyComponentTests.xctest;
+			remoteRef = 6452143E24B4AB44007203D5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		043999F11D1C2D9D00E99CD9 /* Resources */ = {
@@ -1902,7 +2002,9 @@
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
 				446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */,
 				0EF49AA323828CD00064CD98 /* ConferenceParticipantView.xib in Resources */,
+				645BDD7724B7415A009129B1 /* MessageCellLocationSharingSent.xib in Resources */,
 				0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */,
+				64F8127824B8AA5200A7DE6A /* MessageCellLocationSharingReceived.xib in Resources */,
 				4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */,
 				0E96ED75225D06250016C07D /* GeneralSettingsViewController.storyboard in Resources */,
 				0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */,
@@ -2056,6 +2158,7 @@
 				0E438A9A204F47E700402900 /* SettingsTableView.swift in Sources */,
 				0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */,
 				1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */,
+				64F8127724B8AA5200A7DE6A /* MessageCellLocationSharingReceived.swift in Sources */,
 				66E6381221764C2C005EA2B0 /* GrowingTextView.swift in Sources */,
 				0E7CF4DB20164B6700CD967D /* ButtonsContainerView.swift in Sources */,
 				0E49097A1FEAC9E1005CAA50 /* CallViewController.swift in Sources */,
@@ -2116,6 +2219,7 @@
 				1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */,
 				1A5DC03D1F35678D0075E8EF /* ContactRequestItem.swift in Sources */,
 				0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */,
+				64F8127A24BBC19C00A7DE6A /* MessageCellLocationSharing.swift in Sources */,
 				0E6D959C2407116E00996A28 /* LinkToAccountManagerViewModel.swift in Sources */,
 				62AD584C2056DB2700AF0701 /* MessageCellDataTransferSent.swift in Sources */,
 				0ECA5683243394960055D31E /* MigrateAccountViewController.swift in Sources */,
@@ -2155,6 +2259,7 @@
 				1A5DC0281F3564AA0075E8EF /* MessageModel.swift in Sources */,
 				0E3697A1203235EA009A68CA /* BannedContactItem.swift in Sources */,
 				56BBC9DF1EDDC9D300CDAF8B /* LookupNameResponse.m in Sources */,
+				645BDD7B24B7415A009129B1 /* MessageCellLocationSharingSent.swift in Sources */,
 				66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */,
 				1A2041911F1FD46300C08435 /* DesignableView.swift in Sources */,
 				0ED2B6FE1F96A16C001572F0 /* LinkNewDeviceViewModel.swift in Sources */,
@@ -2199,6 +2304,7 @@
 				02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */,
 				1A5DC0421F3567DF0075E8EF /* ContactRequestsCoordinator.swift in Sources */,
 				62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */,
+				645BDD8124B74BCB009129B1 /* LocationSharingService.swift in Sources */,
 				1A5DC0401F35678D0075E8EF /* ContactRequestsViewModel.swift in Sources */,
 				56BBC9A21ED714DF00CDAF8B /* MessagesAdapterDelegate.swift in Sources */,
 				1A5DC0301F3565AE0075E8EF /* SmartlistViewController.swift in Sources */,
@@ -2437,6 +2543,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../fat/include",
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+					"$(SRCROOT)/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/**",
 				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2447,7 +2554,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
@@ -2478,6 +2585,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../fat/include",
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+					"$(SRCROOT)/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/**",
 				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2488,7 +2596,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = arm64;
@@ -2645,6 +2753,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../fat/include",
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+					"$(SRCROOT)/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/**",
 				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2655,7 +2764,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Ring/Bridging/Ring-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Ring/Bridging/Ring-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
