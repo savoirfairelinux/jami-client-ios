@@ -176,10 +176,14 @@ internal enum L10n {
     internal static let deleteAction = L10n.tr("Localizable", "actions.deleteAction")
     /// Done
     internal static let doneAction = L10n.tr("Localizable", "actions.doneAction")
+    /// Go to Settings
+    internal static let goToSettings = L10n.tr("Localizable", "actions.goToSettings")
     ///   Audio Call
     internal static let startAudioCall = L10n.tr("Localizable", "actions.startAudioCall")
     ///   Video Call
     internal static let startVideoCall = L10n.tr("Localizable", "actions.startVideoCall")
+    /// Stop sharing
+    internal static let stopLocationSharing = L10n.tr("Localizable", "actions.stopLocationSharing")
   }
 
   internal enum Alerts {
@@ -225,8 +229,14 @@ internal enum L10n {
     internal static let incomingCallButtonAccept = L10n.tr("Localizable", "alerts.incomingCallButtonAccept")
     /// Ignore
     internal static let incomingCallButtonIgnore = L10n.tr("Localizable", "alerts.incomingCallButtonIgnore")
+    /// Turn on "Location Services" to allow "Jami" to determine your location.
+    internal static let locationServiceIsDisabled = L10n.tr("Localizable", "alerts.locationServiceIsDisabled")
+    /// Share my location
+    internal static let locationSharing = L10n.tr("Localizable", "alerts.locationSharing")
     /// Access to photo library not granted
     internal static let noLibraryPermissionsTitle = L10n.tr("Localizable", "alerts.noLibraryPermissionsTitle")
+    /// Access to location not granted
+    internal static let noLocationPermissionsTitle = L10n.tr("Localizable", "alerts.noLocationPermissionsTitle")
     /// Media permission not granted
     internal static let noMediaPermissionsTitle = L10n.tr("Localizable", "alerts.noMediaPermissionsTitle")
     /// Cancel

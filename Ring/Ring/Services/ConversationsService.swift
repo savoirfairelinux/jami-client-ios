@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
@@ -34,6 +34,7 @@ class ConversationsService {
     fileprivate let messageAdapter: MessagesAdapter
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    private let geoLocationMIMEType = "application/geo"
 
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
@@ -137,6 +138,19 @@ class ConversationsService {
                     })
                     .disposed(by: self.disposeBag)
             }
+            completable(.completed)
+            return Disposables.create {}
+        })
+    }
+
+    func sendLocation(withContent content: String,
+                      from senderAccount: AccountModel,
+                      recipientUri: String) -> Completable {
+
+        return Completable.create(subscribe: { [unowned self] completable in
+            let contentDict = [self.geoLocationMIMEType: content]
+            let _ = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri))
+
             completable(.completed)
             return Disposables.create {}
         })
