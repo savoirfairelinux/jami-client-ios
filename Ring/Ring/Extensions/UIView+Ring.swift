@@ -145,12 +145,11 @@ extension UIView {
         return UIColor.clear
     }
 
-    public func convertViewToImage() -> UIImage? {
-        UIGraphicsBeginImageContext(self.bounds.size)
-        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
+    func convertToImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
     }
 
     func applyGradient(with colours: [UIColor], locations: [NSNumber]? = nil) {

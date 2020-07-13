@@ -1,8 +1,9 @@
 /*
- *  Copyright (C) 2016-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016-2020 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,3 +44,4 @@
 #import <UserNotifications/UserNotifications.h>
 #import <GSKStretchyHeaderView/GSKStretchyHeaderView.h>
 #import "DataTransferAdapter.h"
+#import "../../WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/MaplyBridge.h"

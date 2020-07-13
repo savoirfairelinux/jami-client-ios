@@ -1,7 +1,8 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,6 +37,7 @@ class InjectionBag {
     let dataTransferService: DataTransferService
     let profileService: ProfilesService
     let callsProvider: CallsProviderDelegate
+    let locationSharingService: LocationSharingService
 
     init (withDaemonService daemonService: DaemonService,
           withAccountService accountService: AccountsService,
@@ -49,7 +51,8 @@ class InjectionBag {
           withAudioService audioService: AudioService,
           withDataTransferService dataTransferService: DataTransferService,
           withProfileService profileService: ProfilesService,
-          withCallsProvider callsProvider: CallsProviderDelegate) {
+          withCallsProvider callsProvider: CallsProviderDelegate,
+          withLocationSharingService locationSharingService: LocationSharingService) {
         self.daemonService = daemonService
         self.accountService = accountService
         self.nameService = nameService
@@ -63,5 +66,6 @@ class InjectionBag {
         self.dataTransferService = dataTransferService
         self.profileService = profileService
         self.callsProvider = callsProvider
+        self.locationSharingService = locationSharingService
     }
 }
