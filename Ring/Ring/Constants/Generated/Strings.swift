@@ -178,10 +178,14 @@ internal enum L10n {
     internal static let deleteAction = L10n.tr("Localizable", "actions.deleteAction")
     /// Done
     internal static let doneAction = L10n.tr("Localizable", "actions.doneAction")
+    /// Go to Settings
+    internal static let goToSettings = L10n.tr("Localizable", "actions.goToSettings")
     ///   Audio Call
     internal static let startAudioCall = L10n.tr("Localizable", "actions.startAudioCall")
     ///   Video Call
     internal static let startVideoCall = L10n.tr("Localizable", "actions.startVideoCall")
+    /// Stop sharing
+    internal static let stopLocationSharing = L10n.tr("Localizable", "actions.stopLocationSharing")
   }
 
   internal enum Alerts {
@@ -227,10 +231,28 @@ internal enum L10n {
     internal static let incomingCallButtonAccept = L10n.tr("Localizable", "alerts.incomingCallButtonAccept")
     /// Ignore
     internal static let incomingCallButtonIgnore = L10n.tr("Localizable", "alerts.incomingCallButtonIgnore")
+    /// Turn on "Location Services" to allow "Jami" to determine your location.
+    internal static let locationServiceIsDisabled = L10n.tr("Localizable", "alerts.locationServiceIsDisabled")
+    /// Share my location
+    internal static let locationSharing = L10n.tr("Localizable", "alerts.locationSharing")
+    /// 10 min
+    internal static let locationSharingDuration10min = L10n.tr("Localizable", "alerts.locationSharingDuration10min")
+    /// 1 hour
+    internal static let locationSharingDuration1hour = L10n.tr("Localizable", "alerts.locationSharingDuration1hour")
+    /// How long should the location sharing be?
+    internal static let locationSharingDurationTitle = L10n.tr("Localizable", "alerts.locationSharingDurationTitle")
+    /// Map information
+    internal static let mapInformation = L10n.tr("Localizable", "alerts.mapInformation")
     /// Access to photo library not granted
     internal static let noLibraryPermissionsTitle = L10n.tr("Localizable", "alerts.noLibraryPermissionsTitle")
+    /// Access to location not granted
+    internal static let noLocationPermissionsTitle = L10n.tr("Localizable", "alerts.noLocationPermissionsTitle")
     /// Media permission not granted
     internal static let noMediaPermissionsTitle = L10n.tr("Localizable", "alerts.noMediaPermissionsTitle")
+    /// © OpenStreetMap contributors
+    internal static let openStreetMapCopyright = L10n.tr("Localizable", "alerts.openStreetMapCopyright")
+    /// Learn more
+    internal static let openStreetMapCopyrightMoreInfo = L10n.tr("Localizable", "alerts.openStreetMapCopyrightMoreInfo")
     /// Cancel
     internal static let profileCancelPhoto = L10n.tr("Localizable", "alerts.profileCancelPhoto")
     /// Take photo
@@ -398,6 +420,8 @@ internal enum L10n {
     internal static let invitationAccepted = L10n.tr("Localizable", "generatedMessage.invitationAccepted")
     /// Invitation received
     internal static let invitationReceived = L10n.tr("Localizable", "generatedMessage.invitationReceived")
+    /// Live location sharing
+    internal static let liveLocationSharing = L10n.tr("Localizable", "generatedMessage.liveLocationSharing")
     /// Missed incoming call
     internal static let missedIncomingCall = L10n.tr("Localizable", "generatedMessage.missedIncomingCall")
     /// Missed outgoing call
@@ -501,6 +525,10 @@ internal enum L10n {
     internal static let acceptCall = L10n.tr("Localizable", "notifications.acceptCall")
     /// Incoming Call
     internal static let incomingCall = L10n.tr("Localizable", "notifications.incomingCall")
+    /// Incoming location sharing started
+    internal static let locationSharingStarted = L10n.tr("Localizable", "notifications.locationSharingStarted")
+    /// Incoming location sharing stopped
+    internal static let locationSharingStopped = L10n.tr("Localizable", "notifications.locationSharingStopped")
     /// Missed Call
     internal static let missedCall = L10n.tr("Localizable", "notifications.missedCall")
     /// New file
