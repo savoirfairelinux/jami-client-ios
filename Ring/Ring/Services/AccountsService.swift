@@ -221,13 +221,18 @@ class AccountsService: AccountAdapterDelegate {
         return true
     }
 
+    /// This function clears the temporary database entries
+    private func sanitizeDatabases() -> Bool {
+        let accountIds = self.accountList.map({ $0.id })
+        return self.dbManager.deleteAllLocationUpdates(accountIds: accountIds)
+    }
+
     func initialAccountsLoading() -> Completable {
         return Completable.create { [unowned self] completable in
             self.loadAccountsFromDaemon()
             if self.accountList.isEmpty {
                 completable(.completed)
-            }
-            if self.loadDatabases() {
+            } else if self.loadDatabases() && self.sanitizeDatabases() {
                 completable(.completed)
             } else {
                 completable(.error(DataAccessError.databaseError))

@@ -58,6 +58,7 @@ internal enum Asset {
   internal static let leftArrow = ImageAsset(name: "left_arrow")
   internal static let messageBackgroundColor = ColorAsset(name: "message_background_color")
   internal static let moreSettings = ImageAsset(name: "more_settings")
+  internal static let myLocation = ImageAsset(name: "my_location")
   internal static let pauseCall = ImageAsset(name: "pause_call")
   internal static let phoneBook = ImageAsset(name: "phone_book")
   internal static let qrCode = ImageAsset(name: "qr_code")
@@ -134,7 +135,8 @@ internal struct ImageAsset {
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
-    let image = bundle.image(forResource: NSImage.Name(name))
+    let name = NSImage.Name(self.name)
+    let image = (bundle == .main) ? NSImage(named: name) : bundle.image(forResource: name)
     #elseif os(watchOS)
     let image = Image(named: name)
     #endif
