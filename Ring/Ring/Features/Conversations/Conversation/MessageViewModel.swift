@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
@@ -65,6 +65,8 @@ class MessageViewModel {
 
     var sequencing: MessageSequencing = .unknown
     var isComposingIndicator: Bool = false
+
+    var isLocationSharingBubble: Bool = false
 
     private let disposeBag = DisposeBag()
     let injectBug: InjectionBag
