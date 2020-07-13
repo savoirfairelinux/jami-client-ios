@@ -432,6 +432,10 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             return
 
         case .sent:
+            guard !item.isLocationSharingBubble else {
+                self.setCellTimeLabelVisibility(hide: true)
+                return }
+
             self.configureTransferCell(item, conversationViewModel)
 
             self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
@@ -455,6 +459,10 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             }
 
         case .received:
+            guard !item.isLocationSharingBubble else {
+                self.setCellTimeLabelVisibility(hide: true)
+                return }
+
             self.configureTransferCell(item, conversationViewModel)
 
             self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)

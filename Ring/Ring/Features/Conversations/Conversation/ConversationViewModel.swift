@@ -44,6 +44,7 @@ class ConversationViewModel: Stateable, ViewModel {
     private let profileService: ProfilesService
     private let dataTransferService: DataTransferService
     private let callService: CallsService
+    private let locationSharingService: LocationSharingService
 
     private let injectionBag: InjectionBag
 
@@ -97,6 +98,7 @@ class ConversationViewModel: Stateable, ViewModel {
         self.profileService = injectionBag.profileService
         self.dataTransferService = injectionBag.dataTransferService
         self.callService = injectionBag.callService
+        self.locationSharingService = injectionBag.locationSharingService
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
@@ -655,4 +657,40 @@ class ConversationViewModel: Stateable, ViewModel {
     func isLastDisplayed(messageId: Int64) -> Bool {
         return messageId == self.conversation.value.lastDisplayedMessage.id
     }
+
+    var isSendingLocation: Bool = false
+}
+
+// MARK: Sharing my location
+extension ConversationViewModel {
+    var myLocation: Observable<CLLocationCoordinate2D?> { return self.locationSharingService.currentLocation }
+
+    func startSendingLocation() {
+        self.stopSendingLocation()
+
+        guard !isSendingLocation, let account = self.accountService.currentAccount else { return }
+
+        isSendingLocation = true
+
+        self.locationSharingService.startSharingLocation(from: account, to: self.conversation.value.participantUri)
+
+        // TODO: try without var messagesValue = ...
+        var messagesValue = self.messages.value
+        let msgModel = MessageModel(withId: "", receivedDate: Date(), content: "", authorURI: account.id, incoming: false)
+        let magViewModel = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel, isLastDisplayed: false)
+        magViewModel.isLocationSharingBubble = true
+
+        messagesValue.append(magViewModel)
+        self.messages.value = messagesValue
+        log.debug("[ConversationViewModel] value appended")
+    }
+
+    func stopSendingLocation() {
+        isSendingLocation = false
+    }
+}
+
+// MARK: Receiving my contact's location
+extension ConversationViewModel {
+
 }

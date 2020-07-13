@@ -34,6 +34,7 @@ class ConversationsService {
     fileprivate let messageAdapter: MessagesAdapter
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    private let geoLocationMIMEType = "application/geo"
 
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
@@ -141,6 +142,19 @@ class ConversationsService {
             return Disposables.create {}
         })
     }
+
+    func sendLocation(withContent content: String,
+                      from senderAccount: AccountModel,
+                      recipientUri: String) -> Completable {
+
+          return Completable.create(subscribe: { [unowned self] completable in
+              let contentDict = [self.geoLocationMIMEType: content]
+              let _ = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri))
+
+              completable(.completed)
+              return Disposables.create {}
+          })
+      }
 
     func createMessage(withId messageId: String,
                        withContent content: String,

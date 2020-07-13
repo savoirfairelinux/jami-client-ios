@@ -66,6 +66,8 @@ class MessageViewModel {
     var sequencing: MessageSequencing = .unknown
     var isComposingIndicator: Bool = false
 
+    var isLocationSharingBubble: Bool = false
+
     private let disposeBag = DisposeBag()
     let injectBug: InjectionBag
 

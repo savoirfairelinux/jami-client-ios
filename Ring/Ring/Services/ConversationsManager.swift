@@ -34,6 +34,7 @@ class ConversationsManager: MessagesAdapterDelegate {
 
     private let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    private let geoLocationMIMEType = "application/geo"
     fileprivate let maxSizeForAutoaccept = 20 * 1024 * 1024
     private let notificationHandler = LocalNotificationsHelper()
 
@@ -173,16 +174,28 @@ class ConversationsManager: MessagesAdapterDelegate {
         if self.accountsService.boothMode() {
             return
         }
-        guard let content = message[textPlainMIMEType] else {
-            return
+        if let content = message[textPlainMIMEType] {
+            DispatchQueue.main.async { [unowned self] in
+                self.handleNewMessage(from: senderAccount,
+                                      to: receiverAccountId,
+                                      messageId: messageId,
+                                      message: content,
+                                      peerName: nil)
+            }
+        } /*else*/
+        if let content = message[geoLocationMIMEType] {
+            DispatchQueue.main.async { [unowned self] in
+                self.handleReceivedLocationUpdate(from: senderAccount,
+                                                  to: receiverAccountId,
+                                                  messageId: messageId,
+                                                  locationJSON: content)
+            }
         }
-        DispatchQueue.main.async { [unowned self] in
-            self.handleNewMessage(from: senderAccount,
-                                  to: receiverAccountId,
-                                  messageId: messageId,
-                                  message: content,
-                                  peerName: nil)
-        }
+    }
+
+    private func handleReceivedLocationUpdate(from peerUri: String, to accountId: String, messageId: String, locationJSON content: String) {
+        self.log.debug("didReceiveMessage: \(content)")
+
     }
 
     func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {

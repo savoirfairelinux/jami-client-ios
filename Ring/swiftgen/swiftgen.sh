@@ -8,9 +8,9 @@ run_swiftgen() {
 	TPLDIR=$(dirname $0)
 
 	echo "SwiftGen: Generating files..."
-	swiftgen storyboards "$SRCDIR" -t swift5 --output "$OUTDIR/Storyboards.swift"
-	swiftgen xcassets "$SRCDIR/Resources/Images.xcassets" -t swift5 --output "$OUTDIR/Images.swift"
-	swiftgen strings -t structured-swift5 "$SRCDIR/Resources/en.lproj/Localizable.strings" --output "$OUTDIR/Strings.swift"
+	swiftgen run storyboards "$SRCDIR" -t swift5 --output "$OUTDIR/Storyboards.swift"
+	swiftgen run xcassets "$SRCDIR/Resources/Images.xcassets" -t swift5 --output "$OUTDIR/Images.swift"
+	swiftgen run strings -t structured-swift5 "$SRCDIR/Resources/en.lproj/Localizable.strings" --output "$OUTDIR/Strings.swift"
 }
 
 # Main script to check if SwiftGen is installed, check the version, and run it only if version matches

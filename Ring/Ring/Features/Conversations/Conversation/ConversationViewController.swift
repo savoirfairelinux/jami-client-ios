@@ -58,6 +58,8 @@ class ConversationViewController: UIViewController,
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
 
+    private var locationManager: CLLocationManager?
+
     func setIsComposing(isComposing: Bool) {
         self.viewModel.setIsComposingMsg(isComposing: isComposing)
     }
@@ -224,6 +226,7 @@ class ConversationViewController: UIViewController,
         }
 
         let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertAction.Style.cancel)
+        alert.addAction(locationSharingAction())
         alert.addAction(pictureAction)
         alert.addAction(recordVideoAction)
         alert.addAction(recordAudioAction)
@@ -639,6 +642,8 @@ class ConversationViewController: UIViewController,
         self.tableView.register(cellType: MessageCellDataTransferReceived.self)
         self.tableView.register(cellType: MessageCellGenerated.self)
 
+        self.tableView.register(cellType: MessageCellLocationSharingSent.self)
+
         //Bind the TableView to the ViewModel
         self.viewModel.messages.asObservable()
             .observeOn(MainScheduler.instance)
@@ -908,6 +913,7 @@ class ConversationViewController: UIViewController,
     }
 }
 
+// MARK: TableDataSource
 extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.messageViewModels?.count ?? 0
@@ -923,13 +929,27 @@ extension ConversationViewController: UITableViewDataSource {
                                                 messageId: item.message.messageId)
             }
 
-            let cellType = { (bubblePosition: BubblePosition, isTransfer: Bool) -> MessageCell.Type in
+            let cellType = { (bubblePosition: BubblePosition, isTransfer: Bool, isLocationSharing: Bool) -> MessageCell.Type in
                 switch bubblePosition {
-                case .received: return isTransfer ? MessageCellDataTransferReceived.self : MessageCellReceived.self
-                case .sent: return isTransfer ? MessageCellDataTransferSent.self : MessageCellSent.self
+                case .received:
+                    if isLocationSharing {
+                        return MessageCellLocationSharingReceived.self
+                    } else if isTransfer {
+                        return MessageCellDataTransferReceived.self
+                    } else {
+                        return MessageCellReceived.self
+                    }
+                case .sent:
+                    if isLocationSharing {
+                        return MessageCellLocationSharingSent.self
+                    } else if isTransfer {
+                        return MessageCellDataTransferSent.self
+                    } else {
+                        return MessageCellSent.self
+                    }
                 case .generated: return MessageCellGenerated.self
                 }
-            }(item.bubblePosition(), item.isTransfer)
+            }(item.bubblePosition(), item.isTransfer, item.isLocationSharingBubble)
 
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: cellType)
             cell.configureFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
@@ -1056,5 +1076,72 @@ extension ConversationViewController: UITableViewDataSource {
         }
     }
 }
+
+// MARK: Location sharing
+extension ConversationViewController {
+    private func locationSharingAction() -> UIAlertAction {
+        return UIAlertAction(title: L10n.Alerts.locationSharing, style: UIAlertAction.Style.default) { [weak self] _ in
+            guard let self = self else { return }
+
+            if self.canShareLocation() {
+                self.viewModel.startSendingLocation()
+            }
+        }
+    }
+
+    private func canShareLocation() -> Bool {
+        if CLLocationManager.locationServicesEnabled() {
+            return checkLocationAuthorization()
+        } else {
+            self.showGoToSettingsAlert(title: L10n.Alerts.locationServiceIsDisabled)
+            return false
+        }
+    }
+
+    private func showGoToSettingsAlert(title: String) {
+        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+
+           alertController.addAction(UIAlertAction(title: L10n.Actions.goToSettings, style: .default, handler: { (_) in
+               if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                   UIApplication.shared.open(url, completionHandler: nil)
+               }
+           }))
+
+           alertController.addAction(UIAlertAction(title: L10n.Actions.cancelAction, style: .default, handler: nil))
+
+           self.present(alertController, animated: true, completion: nil)
+    }
+
+    private func checkLocationAuthorization() -> Bool {
+        // TODO: requestAlways?
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            if locationManager == nil { locationManager = CLLocationManager() }
+            locationManager!.requestWhenInUseAuthorization()
+        case .restricted, .denied: self.showGoToSettingsAlert(title: L10n.Alerts.noLocationPermissionsTitle)
+        case .authorizedAlways, .authorizedWhenInUse: return true
+        @unknown default: break
+        }
+
+        return false
+    }
+}
+
+//extension ConversationViewController: CLLocationManagerDelegate {
+//    func setupLocationManager() {
+//        locationManager.delegate = self
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//    }
+//    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//         //guard let location = locations.last else { return }
+//         // TODO: Update shown location
+//     }
+//     
+//     
+//     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//         checkLocationAuthorization()
+//     }
+//}
 // swiftlint:enable type_body_length
 // swiftlint:enable file_length

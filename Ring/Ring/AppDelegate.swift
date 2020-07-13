@@ -63,6 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private lazy var conversationsService: ConversationsService = {
         ConversationsService(withMessageAdapter: MessagesAdapter(), dbManager: self.dBManager)
     }()
+    private lazy var locationSharingService: LocationSharingService = {
+        LocationSharingService(withConversationService: self.conversationsService)
+    }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
@@ -79,7 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withAudioService: self.audioService,
                             withDataTransferService: self.dataTransferService,
                             withProfileService: self.profileService,
-                            withCallsProvider: self.callsProvider)
+                            withCallsProvider: self.callsProvider,
+                            withLocationSharingService: self.locationSharingService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
