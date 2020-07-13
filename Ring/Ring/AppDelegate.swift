@@ -63,6 +63,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private lazy var conversationsService: ConversationsService = {
         ConversationsService(withMessageAdapter: MessagesAdapter(), dbManager: self.dBManager)
     }()
+    private lazy var locationSharingService: LocationSharingService = {
+        LocationSharingService(withAccountService: self.accountService,
+                               withConversationService: self.conversationsService,
+                               dbManager: self.dBManager)
+    }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
@@ -79,7 +84,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withAudioService: self.audioService,
                             withDataTransferService: self.dataTransferService,
                             withProfileService: self.profileService,
-                            withCallsProvider: self.callsProvider)
+                            withCallsProvider: self.callsProvider,
+                            withLocationSharingService: self.locationSharingService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -142,7 +148,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         accountsService: self.accountService,
                                                         nameService: self.nameService,
                                                         dataTransferService: self.dataTransferService,
-                                                        callService: self.callService)
+                                                        callService: self.callService,
+                                                        locationSharingService: self.locationSharingService)
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()
 
@@ -210,6 +217,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func reloadDataFor(account: AccountModel) {
+        self.locationSharingService.clearLocationUpdatesFromDB(accountId: account.id)
         self.contactsService.loadContacts(withAccount: account)
         self.contactsService.loadContactRequests(withAccount: account.id)
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
