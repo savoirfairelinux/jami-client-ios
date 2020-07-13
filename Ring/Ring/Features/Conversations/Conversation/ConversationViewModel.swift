@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
@@ -44,6 +44,7 @@ class ConversationViewModel: Stateable, ViewModel {
     private let profileService: ProfilesService
     private let dataTransferService: DataTransferService
     private let callService: CallsService
+    private let locationSharingService: LocationSharingService
 
     private let injectionBag: InjectionBag
 
@@ -97,9 +98,24 @@ class ConversationViewModel: Stateable, ViewModel {
         self.profileService = injectionBag.profileService
         self.dataTransferService = injectionBag.dataTransferService
         self.callService = injectionBag.callService
+        self.locationSharingService = injectionBag.locationSharingService
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
+
+        self.initializeLocationReceivedEvent()
+    }
+
+    private func initializeLocationReceivedEvent() {
+        self.locationSharingService
+            .locationReceivedFromRecipientUri
+            .subscribe(onNext: { [weak self] tuple in
+                guard let self = self, let peerUri = tuple.0, let coordinates = tuple.1, let conversation = self.conversation else { return }
+                if peerUri == conversation.value.participantUri {
+                    self.myContactsLocation.onNext(coordinates)
+                }
+            })
+           .disposed(by: self.disposeBag)
     }
 
     var conversation: Variable<ConversationModel>! {
@@ -136,12 +152,9 @@ class ConversationViewModel: Stateable, ViewModel {
                 })
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] messageViewModels in
-                    guard let self = self else {
-                        return
-                    }
+                    guard let self = self else { return }
                     var msg = messageViewModels
-                    if self
-                        .peerComposingMessage {
+                    if self.peerComposingMessage {
                         let msgModel = MessageModel(withId: "",
                                                     receivedDate: Date(),
                                                     content: "       ",
@@ -654,5 +667,21 @@ class ConversationViewModel: Stateable, ViewModel {
 
     func isLastDisplayed(messageId: Int64) -> Bool {
         return messageId == self.conversation.value.lastDisplayedMessage.id
+    }
+
+    var myLocation: Observable<CLLocation?> { return self.locationSharingService.currentLocation.asObservable() }
+
+    var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
+}
+
+// MARK: Sharing my location
+extension ConversationViewModel {
+
+    func startSendingLocation(duration: TimeInterval) {
+        self.locationSharingService.startSharingLocation(to: self.conversation.value.participantUri, duration: duration)
+    }
+
+    func stopSendingLocation() {
+        self.locationSharingService.stopSharingLocation(to: self.conversation.value.participantUri)
     }
 }
