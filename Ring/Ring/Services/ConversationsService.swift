@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
@@ -34,6 +34,7 @@ class ConversationsService {
     fileprivate let messageAdapter: MessagesAdapter
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    private let geoLocationMIMEType = "application/geo"
 
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
@@ -142,6 +143,39 @@ class ConversationsService {
         })
     }
 
+    func sendLocation(withContent content: String,
+                      from senderAccount: AccountModel,
+                      recipientUri: String) -> Completable {
+
+        return Completable.create(subscribe: { [unowned self] completable in
+            let contentDict = [self.geoLocationMIMEType: content]
+            let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri))
+            let accountHelper = AccountModelHelper(withAccount: senderAccount)
+            let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
+            let contactUri = JamiURI.init(schema: type, infoHach: recipientUri, account: senderAccount)
+            guard let stringUri = contactUri.uriString else {
+                completable(.completed)
+                return Disposables.create {}
+            }
+            if let uri = accountHelper.uri, uri != recipientUri {
+                let message = self.createLocation(withId: messageId,
+                                                  byAuthor: uri,
+                                                  incoming: false)
+                self.saveLocation(message: message,
+                                  toConversationWith: stringUri,
+                                  toAccountId: senderAccount.id,
+                                  shouldRefreshConversations: true,
+                                  contactUri: recipientUri)
+                    .subscribe(onCompleted: { [unowned self] in
+                        self.log.debug("Location saved")
+                    })
+                    .disposed(by: self.disposeBag)
+            }
+            completable(.completed)
+            return Disposables.create {}
+        })
+    }
+
     func createMessage(withId messageId: String,
                        withContent content: String,
                        byAuthor author: String,
@@ -154,10 +188,44 @@ class ConversationsService {
         return message
     }
 
+    func createLocation(withId messageId: String,
+                        byAuthor author: String,
+                        incoming: Bool) -> MessageModel {
+        return MessageModel(withId: messageId, receivedDate: Date(), content: "", authorURI: author, incoming: incoming)
+    }
+
     func saveMessage(message: MessageModel,
                      toConversationWith recipientRingId: String,
                      toAccountId: String,
                      shouldRefreshConversations: Bool) -> Completable {
+        return self.saveMessageModel(message: message, toConversationWith: recipientRingId,
+                                     toAccountId: toAccountId, shouldRefreshConversations: shouldRefreshConversations,
+                                     interactionType: InteractionType.text)
+    }
+
+    // Save location only if it's the first one, location doesn't actually contain the location
+    func saveLocation(message: MessageModel,
+                      toConversationWith recipientRingId: String,
+                      toAccountId: String,
+                      shouldRefreshConversations: Bool,
+                      contactUri: String) -> Completable {
+        let isFirstLocationIncomingUpdate = self.dbManager.isFirstLocationIncomingUpdate(incoming: message.incoming, peerUri: contactUri, accountId: toAccountId)
+        if isFirstLocationIncomingUpdate != nil && isFirstLocationIncomingUpdate! {
+            return self.saveMessageModel(message: message, toConversationWith: recipientRingId,
+                                         toAccountId: toAccountId, shouldRefreshConversations: shouldRefreshConversations,
+                                         interactionType: InteractionType.location)
+        }
+        return Completable.create(subscribe: { completable in
+            completable(.completed)
+            return Disposables.create { }
+        })
+     }
+
+    func saveMessageModel(message: MessageModel,
+                          toConversationWith recipientRingId: String,
+                          toAccountId: String,
+                          shouldRefreshConversations: Bool,
+                          interactionType: InteractionType = InteractionType.text) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
             self.messagesSemaphore.wait()
@@ -165,7 +233,7 @@ class ConversationsService {
                                        with: recipientRingId,
                                        message: message,
                                        incoming: message.incoming,
-                                       interactionType: InteractionType.text, duration: 0)
+                                       interactionType: interactionType, duration: 0)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [unowned self] _ in
                     // append new message so it can be found if a status update is received before the DB finishes reload
