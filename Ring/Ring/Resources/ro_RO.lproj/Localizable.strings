@@ -62,10 +62,10 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Omite";
 "createProfile.profileCreated" = "Înainte";
-"createProfile.title" = "Personalise your profile";
+"createProfile.title" = "Personalizează-ți profilul";
 "createProfile.enterNameLabel" = "Enter a display name";
 "createProfile.enterNamePlaceholder" = "Introdu numele";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.subtitle" = "Profilul tău va fi distribuit contactelor tale. Poți schimba asta cînd vrei.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
@@ -135,7 +135,7 @@
 "alerts.errorWrongCredentials" = "Nu mă pot conecta la Administrare cont. Verifică datele de autentificare.";
 "alerts.recordVideoMessage" = "Înregistreză un mesaj video";
 "alerts.recordAudioMessage" = "Înregistreză un mesaj audio";
-"alerts.uploadFile" = "Upload file";
+"alerts.uploadFile" = "Încarcă fișierul";
 "alerts.uploadPhoto" = "Upload photo or movie";
 
 //Actions
@@ -147,7 +147,7 @@
 "actions.doneAction" = "Făcut";
 "alerts.incomingCallAllertTitle" = "Apel primit de la";
 "alerts.incomingCallButtonAccept" = "Acceptă";
-"alerts.incomingCallButtonIgnore" = "Ignore";
+"alerts.incomingCallButtonIgnore" = "Ignoră";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 
@@ -155,7 +155,7 @@
 "calls.callItemTitle" = "Apel";
 "calls.unknown" = "Necunoscut";
 "calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Ringing…";
+"calls.ringing" = "Sună...";
 "calls.connecting" = "Se conectează...";
 "calls.searching" = "Căutare...";
 "calls.callFinished" = "Call finished";
@@ -251,8 +251,8 @@
 "linkDevice.hudMessage" = "Se verifică";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.startAudioCall" = "Începe un Apel Audio";
+"contactPage.startVideoCall" = "Începe un Apel Video";
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Șterge Discuția";
 "contactPage.blockContact" = "Block Contact";
@@ -263,7 +263,7 @@
 "dataTransfer.readableStatusError" = "Eroare";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuză";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Se transferă";
 "dataTransfer.readableStatusCanceled" = "Anulat";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
@@ -275,10 +275,10 @@
 "notifications.missedCall" = "Missed Call";
 "notifications.acceptCall" = "ACCEPT";
 "notifications.refuseCall" = "REFUSE";
-"notifications.newFile" = "New file";
+"notifications.newFile" = "Fișier nou";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuză";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Se transferă";
 "dataTransfer.readableStatusCanceled" = "Anulat";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Acceptă";
