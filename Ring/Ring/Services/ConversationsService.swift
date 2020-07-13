@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
@@ -34,6 +34,7 @@ class ConversationsService {
     fileprivate let messageAdapter: MessagesAdapter
     fileprivate let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    private let geoLocationMIMEType = "application/geo"
 
     fileprivate let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
@@ -158,6 +159,16 @@ class ConversationsService {
                      toConversationWith recipientRingId: String,
                      toAccountId: String,
                      shouldRefreshConversations: Bool) -> Completable {
+        return self.saveMessageModel(message: message, toConversationWith: recipientRingId,
+                                     toAccountId: toAccountId, shouldRefreshConversations: shouldRefreshConversations,
+                                     interactionType: InteractionType.text)
+    }
+
+    func saveMessageModel(message: MessageModel,
+                          toConversationWith recipientRingId: String,
+                          toAccountId: String,
+                          shouldRefreshConversations: Bool,
+                          interactionType: InteractionType = InteractionType.text) -> Completable {
 
         return Completable.create(subscribe: { [unowned self] completable in
             self.messagesSemaphore.wait()
@@ -165,7 +176,7 @@ class ConversationsService {
                                        with: recipientRingId,
                                        message: message,
                                        incoming: message.incoming,
-                                       interactionType: InteractionType.text, duration: 0)
+                                       interactionType: interactionType, duration: 0)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [unowned self] _ in
                     // append new message so it can be found if a status update is received before the DB finishes reload
@@ -498,5 +509,92 @@ class ConversationsService {
         serviceEvent.addEventInput(.accountId, value: accountId)
         serviceEvent.addEventInput(.state, value: status)
         self.responseStream.onNext(serviceEvent)
+    }
+}
+
+// MARK: Location
+extension ConversationsService {
+
+    func createLocation(withId messageId: String, byAuthor author: String, incoming: Bool) -> MessageModel {
+        return MessageModel(withId: messageId, receivedDate: Date(), content: L10n.GeneratedMessage.liveLocationSharing, authorURI: author, incoming: incoming)
+    }
+
+    // TODO: Possible extraction with sendMessage
+    func sendLocation(withContent content: String,
+                      from senderAccount: AccountModel,
+                      recipientUri: String) -> Completable {
+
+        return Completable.create(subscribe: { [unowned self] completable in
+            let contentDict = [self.geoLocationMIMEType: content]
+            let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri))
+            let accountHelper = AccountModelHelper(withAccount: senderAccount)
+            let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
+            let contactUri = JamiURI.init(schema: type, infoHach: recipientUri, account: senderAccount)
+            guard let stringUri = contactUri.uriString else {
+                completable(.completed)
+                return Disposables.create {}
+            }
+            if let uri = accountHelper.uri, uri != recipientUri {
+                let message = self.createLocation(withId: messageId,
+                                                  byAuthor: uri,
+                                                  incoming: false)
+                self.saveLocation(message: message,
+                                  toConversationWith: stringUri,
+                                  toAccountId: senderAccount.id,
+                                  shouldRefreshConversations: true,
+                                  contactUri: recipientUri)
+                    .subscribe(onCompleted: { [unowned self] in
+                        self.log.debug("Location saved")
+                    })
+                    .disposed(by: self.disposeBag)
+            }
+            completable(.completed)
+            return Disposables.create {}
+        })
+    }
+
+    // Save location only if it's the first one
+    func isBeginningOfLocationSharing(incoming: Bool, contactUri: String, accountId: String) -> Bool {
+        let isFirstLocationIncomingUpdate = self.dbManager.isFirstLocationIncomingUpdate(incoming: incoming, peerUri: contactUri, accountId: accountId)
+        return isFirstLocationIncomingUpdate != nil && isFirstLocationIncomingUpdate!
+    }
+
+    // Location saved doesn't actually contain the geolocation data
+    func saveLocation(message: MessageModel,
+                      toConversationWith recipientRingId: String,
+                      toAccountId: String,
+                      shouldRefreshConversations: Bool,
+                      contactUri: String) -> Completable {
+        if self.isBeginningOfLocationSharing(incoming: message.incoming, contactUri: contactUri, accountId: toAccountId) {
+            return self.saveMessageModel(message: message, toConversationWith: recipientRingId,
+                                         toAccountId: toAccountId, shouldRefreshConversations: shouldRefreshConversations,
+                                         interactionType: InteractionType.location)
+        }
+        return Completable.create(subscribe: { completable in
+            completable(.completed)
+            return Disposables.create { }
+        })
+    }
+
+    func deleteLocationUpdate(incoming: Bool, peerUri: String, accountId: String, shouldRefreshConversations: Bool) -> Completable {
+        return Completable.create(subscribe: { [unowned self] completable in
+            self.dbManager.deleteLocationUpdates(incoming: incoming, peerUri: peerUri, accountId: accountId)
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .subscribe(onCompleted: {
+                    if shouldRefreshConversations {
+                        self.dbManager.getConversationsObservable(for: accountId)
+                            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                            .subscribe(onNext: { [unowned self] conversationsModels in
+                                self.conversations.value = conversationsModels
+                            })
+                            .disposed(by: (self.disposeBag))
+                    }
+                    completable(.completed)
+                }, onError: { (error) in
+                    completable(.error(error))
+                })
+                .disposed(by: self.disposeBag)
+            return Disposables.create { }
+        })
     }
 }

@@ -1,7 +1,8 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,30 +27,91 @@ class ConversationsManager: MessagesAdapterDelegate {
 
     let log = SwiftyBeaver.self
 
-    let conversationService: ConversationsService
-    let accountsService: AccountsService
-    let nameService: NameService
-    let dataTransferService: DataTransferService
-    let callService: CallsService
+    private let conversationService: ConversationsService
+    private let accountsService: AccountsService
+    private let nameService: NameService
+    private let dataTransferService: DataTransferService
+    private let callService: CallsService
+    private let locationSharingService: LocationSharingService
 
     private let disposeBag = DisposeBag()
     fileprivate let textPlainMIMEType = "text/plain"
+    private let geoLocationMIMEType = "application/geo"
     fileprivate let maxSizeForAutoaccept = 20 * 1024 * 1024
     private let notificationHandler = LocalNotificationsHelper()
 
     // swiftlint:disable cyclomatic_complexity
-    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService, dataTransferService: DataTransferService, callService: CallsService) {
+    init(with conversationService: ConversationsService, accountsService: AccountsService, nameService: NameService,
+         dataTransferService: DataTransferService, callService: CallsService, locationSharingService: LocationSharingService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
         self.nameService = nameService
         self.dataTransferService = dataTransferService
         self.callService = callService
+        self.locationSharingService = locationSharingService
+
         MessagesAdapter.delegate = self
-        subscribeFileTransferEvents()
-        subscribeCallsEvents()
+        self.subscribeFileTransferEvents()
+        self.subscribeCallsEvents()
+        self.subscribeLocationSharingEvent()
     }
 
-    func subscribeCallsEvents() {
+    private func subscribeLocationSharingEvent() {
+        self.locationSharingService
+            .stopSharingNotification
+            .subscribe({ [weak self] data in
+                guard let self = self, let data = data.element,
+                      let contactUri = data[NotificationUserInfoKeys.participantID.rawValue],
+                      let hash = JamiURI(schema: URIType.ring, infoHach: contactUri).hash else { return }
+                self.searchNameAndPresentNotification(data: data, hash: hash) //main thread?
+            })
+            .disposed(by: self.disposeBag)
+
+        self.locationSharingService
+            .sendLocationShared
+            .filter({ $0.eventType == ServiceEventType.sendLocation })
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let content: String = event.getEventInput(ServiceEventInput.content),
+                      let accountId: String = event.getEventInput(ServiceEventInput.accountId),
+                      let account = self.accountsService.getAccount(fromAccountId: accountId),
+                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
+                      else { return }
+                self.log.debug("[ConversationsManager] sendLocationShared")
+
+                self.conversationService
+                    .sendLocation(withContent: content,
+                                  from: account,
+                                  recipientUri: peerUri)
+                    .subscribe(onCompleted: { [weak self] in
+                        self?.log.debug("[LocationSharingService] Location sent")
+                    }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
+
+        self.locationSharingService
+            .deleteLocationShared
+            .filter({ $0.eventType == ServiceEventType.deleteLocation })
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                    let (incoming, shouldRefreshConversation): (Bool, Bool) = event.getEventInput(ServiceEventInput.content),
+                    let accountId: String = event.getEventInput(ServiceEventInput.accountId),
+                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
+                    else { return }
+                self.log.debug("[ConversationsManager] deleteLocationShared")
+
+                self.conversationService.deleteLocationUpdate(incoming: incoming,
+                                                              peerUri: peerUri,
+                                                              accountId: accountId,
+                                                              shouldRefreshConversations: shouldRefreshConversation)
+                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                    .subscribe()
+                    .disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeCallsEvents() {
         self.callService.newMessage.filter({ (event) in
             return  event.eventType == ServiceEventType.newIncomingMessage
         })
@@ -95,7 +157,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             })
             .disposed(by: disposeBag)
     }
-    func subscribeFileTransferEvents() {
+    private func subscribeFileTransferEvents() {
         self.dataTransferService
             .sharedResponseStream
             .filter({ (event) in
@@ -173,25 +235,70 @@ class ConversationsManager: MessagesAdapterDelegate {
         if self.accountsService.boothMode() {
             return
         }
-        guard let content = message[textPlainMIMEType] else {
-            return
-        }
-        DispatchQueue.main.async { [unowned self] in
-            self.handleNewMessage(from: senderAccount,
-                                  to: receiverAccountId,
-                                  messageId: messageId,
-                                  message: content,
-                                  peerName: nil)
+        if let content = message[textPlainMIMEType] {
+            DispatchQueue.main.async { [unowned self] in
+                self.handleNewMessage(from: senderAccount,
+                                      to: receiverAccountId,
+                                      messageId: messageId,
+                                      message: content,
+                                      peerName: nil)
+            }
+        } else if let content = message[geoLocationMIMEType] {
+            DispatchQueue.main.async { [unowned self] in
+                self.handleReceivedLocationUpdate(from: senderAccount,
+                                                  to: receiverAccountId,
+                                                  messageId: messageId,
+                                                  locationJSON: content)
+            }
         }
     }
 
+    private func handleReceivedLocationUpdate(from peerUri: String, to accountId: String, messageId: String, locationJSON content: String) {
+        guard let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+
+        let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
+        guard let peerUri = JamiURI.init(schema: type, infoHach: peerUri, account: accountForMessage).uriString else {return}
+
+        if self.conversationService.isBeginningOfLocationSharing(incoming: true, contactUri: peerUri, accountId: accountId) {
+            // Handle notification
+            if UIApplication.shared.applicationState != .active && AccountModelHelper
+                .init(withAccount: accountForMessage).isAccountRing() &&
+                accountsService.getCurrentProxyState(accountID: accountId) {
+                var data = [String: String]()
+                data [NotificationUserInfoKeys.messageContent.rawValue] = L10n.Notifications.locationSharingStarted
+                data [NotificationUserInfoKeys.participantID.rawValue] = peerUri
+                data [NotificationUserInfoKeys.accountID.rawValue] = accountId
+
+                // only for jami accounts
+                if let hash = JamiURI(schema: URIType.ring, infoHach: peerUri).hash {
+                    self.searchNameAndPresentNotification(data: data, hash: hash)
+                }
+            }
+
+            // Save (if first)
+            guard let uriString = JamiURI.init(schema: type,
+                                               infoHach: peerUri,
+                                               account: accountForMessage).uriString else { return }
+            let message = self.conversationService.createLocation(withId: messageId,
+                                                                  byAuthor: uriString,
+                                                                  incoming: true)
+            self.conversationService.saveLocation(message: message,
+                                                  toConversationWith: uriString,
+                                                  toAccountId: accountId,
+                                                  shouldRefreshConversations: true,
+                                                  contactUri: peerUri)
+                .subscribe()
+                .disposed(by: self.disposeBag)
+        }
+
+        // Tell the location sharing service
+        self.locationSharingService.handleReceivedLocationUpdate(from: peerUri, to: accountId, messageId: messageId, locationJSON: content)
+    }
+
     func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {
-        guard let currentAccount = self.accountsService.currentAccount else {
-            return
-        }
-        guard let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else {
-            return
-        }
+        guard let currentAccount = self.accountsService.currentAccount,
+              let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+
         if UIApplication.shared.applicationState != .active && AccountModelHelper
             .init(withAccount: accountForMessage).isAccountRing() &&
             accountsService.getCurrentProxyState(accountID: accountId) {

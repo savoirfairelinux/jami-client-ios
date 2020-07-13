@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
@@ -44,6 +44,7 @@ class ConversationViewModel: Stateable, ViewModel {
     private let profileService: ProfilesService
     private let dataTransferService: DataTransferService
     private let callService: CallsService
+    private let locationSharingService: LocationSharingService
 
     private let injectionBag: InjectionBag
 
@@ -97,9 +98,39 @@ class ConversationViewModel: Stateable, ViewModel {
         self.profileService = injectionBag.profileService
         self.dataTransferService = injectionBag.dataTransferService
         self.callService = injectionBag.callService
+        self.locationSharingService = injectionBag.locationSharingService
 
         dateFormatter.dateStyle = .medium
         hourFormatter.dateFormat = "HH:mm"
+
+        self.subscribeLocationReceivedEvent()
+        self.subscribeProfileServiceEvent()
+    }
+
+    private func subscribeLocationReceivedEvent() {
+        self.locationSharingService
+            .locationReceivedFromRecipientUri
+            .subscribe(onNext: { [weak self] tuple in
+                guard let self = self, let peerUri = tuple.0, let coordinates = tuple.1, let conversation = self.conversation else { return }
+                if peerUri == conversation.value.participantUri {
+                    self.myContactsLocation.onNext(coordinates)
+                }
+            })
+           .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeProfileServiceEvent() {
+        guard let account = self.accountService.currentAccount else { return }
+        self.profileService
+            .getAccountProfile(accountId: account.id)
+            .subscribe(onNext: { [weak self] profile in
+                guard let self = self else { return }
+                if let photo = profile.photo,
+                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    self.myOwnProfileImageData = data
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     var conversation: Variable<ConversationModel>! {
@@ -136,12 +167,9 @@ class ConversationViewModel: Stateable, ViewModel {
                 })
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] messageViewModels in
-                    guard let self = self else {
-                        return
-                    }
+                    guard let self = self else { return }
                     var msg = messageViewModels
-                    if self
-                        .peerComposingMessage {
+                    if self.peerComposingMessage {
                         let msgModel = MessageModel(withId: "",
                                                     receivedDate: Date(),
                                                     content: "       ",
@@ -283,7 +311,11 @@ class ConversationViewModel: Stateable, ViewModel {
         }
     }()
 
+    // My contact's
     var profileImageData = Variable<Data?>(nil)
+
+    // Mine
+    var myOwnProfileImageData: Data?
 
     var inviteButtonIsAvailable = BehaviorSubject(value: true)
 
@@ -654,5 +686,32 @@ class ConversationViewModel: Stateable, ViewModel {
 
     func isLastDisplayed(messageId: Int64) -> Bool {
         return messageId == self.conversation.value.lastDisplayedMessage.id
+    }
+
+    var myLocation: Observable<CLLocation?> { return self.locationSharingService.currentLocation.asObservable() }
+
+    var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
+}
+
+// MARK: Sharing my location
+extension ConversationViewModel {
+
+    func isAlreadySharingLocation() -> Bool {
+        guard let account = self.accountService.currentAccount else { return true }
+        return self.locationSharingService.isAlreadySharing(accountId: account.id,
+                                                            contactUri: self.conversation.value.participantUri)
+    }
+
+    func startSendingLocation(duration: TimeInterval) {
+        guard let account = self.accountService.currentAccount else { return }
+        self.locationSharingService.startSharingLocation(from: account.id,
+                                                         to: self.conversation.value.participantUri,
+                                                         duration: duration)
+    }
+
+    func stopSendingLocation() {
+        guard let account = self.accountService.currentAccount else { return }
+        self.locationSharingService.stopSharingLocation(accountId: account.id,
+                                                        contactUri: self.conversation.value.participantUri)
     }
 }
