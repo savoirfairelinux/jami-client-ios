@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
@@ -84,7 +84,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private var previousBubbleConstraint: CGFloat?
 
     private var longGestureRecognizer: UILongPressGestureRecognizer?
-    private var tapGestureRecognizer: UITapGestureRecognizer?
+    var tapGestureRecognizer: UITapGestureRecognizer?
 
     // MARK: PrepareForReuse
 
@@ -194,7 +194,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     // MARK: Configure
 
-    private func configureTapGesture() {
+    func configureTapGesture() {
         let shownByDefault = !self.timeLabel.isHidden && !showTimeTap.value
         if !shownByDefault {
             self.bubble.isUserInteractionEnabled = true
@@ -220,7 +220,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
 
-    private func onTapGesture() {
+    func onTapGesture() {
         self.prepareForTapGesture()
 
         if self.timeLabel.isHidden {
@@ -233,9 +233,9 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.showTimeTap.accept(true)
     }
 
-    private func configureLongGesture(_ messageId: Int64, _ bubblePosition: BubblePosition, _ isTransfer: Bool) {
+    private func configureLongGesture(_ messageId: Int64, _ bubblePosition: BubblePosition, _ isTransfer: Bool, _ isLocationSharingBubble: Bool) {
         self.messageId = messageId
-        self.isCopyable = bubblePosition != .generated && !isTransfer
+        self.isCopyable = bubblePosition != .generated && !isTransfer && !isLocationSharingBubble
 
         self.bubble.isUserInteractionEnabled = true
         longGestureRecognizer = UILongPressGestureRecognizer()
@@ -412,7 +412,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.configureCellTimeLabel(item)
 
         self.prepareForReuseLongGesture()
-        self.configureLongGesture(item.message.messageId, item.bubblePosition(), item.isTransfer)
+        self.configureLongGesture(item.message.messageId, item.bubblePosition(), item.isTransfer, item.isLocationSharingBubble)
 
         self.prepareForReuseTapGesture()
         self.configureTapGesture()
@@ -432,6 +432,13 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             return
 
         case .sent:
+            guard !item.isLocationSharingBubble else {
+                self.setCellTimeLabelVisibility(hide: false)
+                self.bubbleTopConstraint.constant = 32
+                self.bubbleBottomConstraint.constant = 1
+                break
+            }
+
             self.configureTransferCell(item, conversationViewModel)
 
             self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
@@ -455,6 +462,14 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             }
 
         case .received:
+            guard !item.isLocationSharingBubble else {
+                self.setCellTimeLabelVisibility(hide: false)
+                self.bubbleTopConstraint.constant = 32
+                self.bubbleBottomConstraint.constant = 1
+                self.configureReceivedMessageAvatar(item.sequencing, conversationViewModel)
+                break
+            }
+
             self.configureTransferCell(item, conversationViewModel)
 
             self.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
