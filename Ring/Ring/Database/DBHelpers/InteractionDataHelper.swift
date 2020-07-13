@@ -152,37 +152,10 @@ final class InteractionDataHelper {
         }
     }
 
-    func delete (item: Interaction, dataBase: Connection) -> Bool {
-        let interactionId = item.id
-        let query = table.filter(id == interactionId)
-        do {
-            let deletedRows = try dataBase.run(query.delete())
-            guard deletedRows == 1 else {
-                return false
-            }
-            return true
-        } catch _ {
-            return false
-        }
-    }
-
-    func delete (interactionId: Int64, dataBase: Connection) -> Bool {
-        let query = table.filter(id == interactionId)
-        do {
-            let deletedRows = try dataBase.run(query.delete())
-            guard deletedRows == 1 else {
-                return false
-            }
-            return true
-        } catch _ {
-            return false
-        }
-    }
-
     func selectInteraction (interactionId: Int64, dataBase: Connection) throws -> Interaction? {
         let query = table.filter(id == interactionId)
         let items = try dataBase.prepare(query)
-        for item in  items {
+        for item in items {
             return Interaction(id: item[id],
                                author: item[author],
                                conversation: item[conversation],
@@ -215,11 +188,11 @@ final class InteractionDataHelper {
         return interactions
     }
 
-    func selectInteractionsForConversation (conv: Int64, dataBase: Connection) throws -> [Interaction]? {
-        let query = table.filter(conversation == conv)
+    func selectInteractions(where predicat: Expression<Bool>, dataBase: Connection) throws -> [Interaction] {
+        let query = table.filter(predicat)
         var interactions = [Interaction]()
         let items = try dataBase.prepare(query)
-        for item in  items {
+        for item in items {
             interactions.append(Interaction(id: item[id],
                                             author: item[author],
                                             conversation: item[conversation],
@@ -234,27 +207,14 @@ final class InteractionDataHelper {
         return interactions
     }
 
-    func selectInteractionWithDaemonId(interactionDaemonID: String, dataBase: Connection) throws -> Interaction? {
-        let query = table.filter(daemonId == interactionDaemonID)
-        var interactions = [Interaction]()
-        let items = try dataBase.prepare(query)
-        for item in  items {
-            interactions.append(Interaction(id: item[id],
-                                            author: item[author],
-                                            conversation: item[conversation],
-                                            timestamp: item[timestamp],
-                                            duration: item[duration],
-                                            body: item[body],
-                                            type: item[type],
-                                            status: item[status],
-                                            daemonID: item[daemonId],
-                                            incoming: item[incoming]))
-        }
-        if interactions.isEmpty {
-            return nil
-        }
+    func selectInteractionsForConversation(conv: Int64, dataBase: Connection) throws -> [Interaction]? {
+        return try self.selectInteractions(where: conversation == conv, dataBase: dataBase)
+    }
 
-        if interactions.count > 1 {
+    func selectInteractionWithDaemonId(interactionDaemonID: String, dataBase: Connection) throws -> Interaction? {
+        let interactions = try self.selectInteractions(where: daemonId == interactionDaemonID, dataBase: dataBase)
+
+        if interactions.isEmpty || interactions.count > 1 {
             return nil
         }
 
@@ -300,14 +260,23 @@ final class InteractionDataHelper {
         }
     }
 
-    func deleteAllIntercations(conv: Int64, dataBase: Connection) -> Bool {
-        let query = table.filter(conversation == conv)
+    func deleteInteractions(where predicat: Expression<Bool>, dataBase: Connection) throws -> Bool {
+        let query = table.filter(predicat)
+        let deletedRows = try dataBase.run(query.delete())
+        return deletedRows > 0
+    }
+
+    func deleteAllInteractions(conv: Int64, dataBase: Connection) -> Bool {
         do {
-            if try dataBase.run(query.delete()) > 0 {
-                return true
-            } else {
-                return false
-            }
+            return try self.deleteInteractions(where: conversation == conv, dataBase: dataBase)
+        } catch {
+            return false
+        }
+    }
+
+    func delete(interactionId: Int64, dataBase: Connection) -> Bool {
+        do {
+            return try self.deleteInteractions(where: id == interactionId, dataBase: dataBase)
         } catch {
             return false
         }
