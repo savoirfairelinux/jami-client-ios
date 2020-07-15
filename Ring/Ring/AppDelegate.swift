@@ -291,6 +291,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     @objc private func registerVoipNotifications() {
         self.requestNotificationAuthorization()
+        self.voipRegistry.desiredPushTypes = nil
         self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
     }
 
