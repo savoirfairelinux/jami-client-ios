@@ -107,14 +107,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         UNUserNotificationCenter.current().delegate = self
-        // initialize log format
+#if DEBUG
         let console = ConsoleDestination()
         console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
-    #if DEBUG
         log.addDestination(console)
-    #else
-        log.removeAllDestinations()
-    #endif
+#endif
+        let file = FileDestination()
+        log.addDestination(file)
+
+        let osLogDestination = OSLogDestination(level: .debug)
+        log.addDestination(osLogDestination)
 
         // starts the daemon
         SystemAdapter().registerConfigurationHandler()

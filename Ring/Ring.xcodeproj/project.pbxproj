@@ -267,6 +267,7 @@
 		26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B708FD253610B0003974F2 /* OpenURLLabel.swift */; };
 		26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */; };
 		26DA813224B641A5006C6E23 /* ProfilesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */; };
+		26C4984A24BFACF400E3C5F1 /* OSLogDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C4984924BFACF400E3C5F1 /* OSLogDestination.swift */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
 		4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66E236CBC6900747177 /* ContactPickerViewController.swift */; };
@@ -675,6 +676,7 @@
 		26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsMenu.swift; sourceTree = "<group>"; };
 		26DA813024B641A5006C6E23 /* ProfilesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilesAdapter.h; sourceTree = "<group>"; };
 		26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ProfilesAdapter.mm; sourceTree = "<group>"; };
+		26C4984924BFACF400E3C5F1 /* OSLogDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogDestination.swift; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
 		4430A66E236CBC6900747177 /* ContactPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewController.swift; sourceTree = "<group>"; };
@@ -1289,6 +1291,7 @@
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
 				0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */,
 				0E99F19F22417A0400CF8BD6 /* JamiURI.swift */,
+				26C4984924BFACF400E3C5F1 /* OSLogDestination.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2246,6 +2249,7 @@
 				2662FC7D246B78E800FA7782 /* IncognitoSmartListViewController.swift in Sources */,
 				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
 				1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */,
+				26C4984A24BFACF400E3C5F1 /* OSLogDestination.swift in Sources */,
 				2662FC79246B1E1700FA7782 /* JamiSearchView.swift in Sources */,
 				0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */,
 				2673D630252657B0000C56CB /* ConferenceLayout.swift in Sources */,
