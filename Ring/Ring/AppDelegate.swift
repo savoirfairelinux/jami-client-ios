@@ -432,15 +432,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
+        self.log.debug("push tocken invalidated")
         self.accountService.setPushNotificationToken(token: "")
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+        self.log.debug("push notifications received")
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
     }
 
     @available(iOS 11.0, *)
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        self.log.debug("push notifications received")
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
         DispatchQueue.main.async {
             completion()
@@ -449,6 +452,7 @@ extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
         if type == PKPushType.voIP {
+            self.log.debug("push token received")
             let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
             self.accountService.setPushNotificationToken(token: deviceTokenString)
         }
