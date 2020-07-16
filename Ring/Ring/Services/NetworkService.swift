@@ -56,6 +56,7 @@ class NetworkService {
         }
 
         reachability?.whenUnreachable = { _ in
+            self.log.debug("*** lost network connection")
             self.connectionState.value = .none
         }
 
