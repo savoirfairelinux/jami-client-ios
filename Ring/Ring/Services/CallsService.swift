@@ -371,6 +371,7 @@ class CallsService: CallsAdapterDelegate {
     // MARK: CallsAdapterDelegate
     // swiftlint:disable cyclomatic_complexity
     func didChangeCallState(withCallId callId: String, state: String, stateCode: NSInteger) {
+        self.log.debug("call state changed: \(callId)")
 
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
             //Add or update new call
@@ -481,6 +482,7 @@ class CallsService: CallsAdapterDelegate {
     // swiftlint:enable cyclomatic_complexity
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String) {
+        self.log.debug("call received from: \(uri) to accout: \(accountId)")
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
 
             if !isCurrentCall() {
