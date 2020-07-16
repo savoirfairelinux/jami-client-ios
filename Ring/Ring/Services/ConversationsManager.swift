@@ -170,6 +170,7 @@ class ConversationsManager: MessagesAdapterDelegate {
     func didReceiveMessage(_ message: [String: String], from senderAccount: String,
                            messageId: String,
                            to receiverAccountId: String) {
+        self.log.debug("received message from: \(senderAccount) to: \(receiverAccountId)")
         if self.accountsService.boothMode() {
             return
         }
