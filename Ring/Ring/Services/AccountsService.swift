@@ -855,6 +855,7 @@ class AccountsService: AccountAdapterDelegate {
 
     func setPushNotificationToken(token: String) {
         self.accountAdapter.setPushNotificationToken(token)
+        self.log.debug("notification tocken updated")
     }
 
     func pushNotificationReceived(data: [AnyHashable: Any]) {
@@ -867,6 +868,7 @@ class AccountsService: AccountAdapterDelegate {
             }
         }
         self.accountAdapter.pushNotificationReceived("", message: notificationData)
+        self.log.debug("daemon notified of push notification")
     }
 
     func getCurrentProxyState(accountID: String) -> Bool {
