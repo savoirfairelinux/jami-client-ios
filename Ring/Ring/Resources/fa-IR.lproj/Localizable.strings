@@ -218,6 +218,7 @@
 "accountPage.boothModeExplanation" = "در حالت غرفه سابقه گفتگو ذخیره نمی‌شود و عملکرد جمی به برقراری تماس‌های خروجی محدود می‌شود. وقتی حالت غرفه را فعال کنید، تمامی گفتگو‌های شما حذف می‌شوند.";
 "accountPage.noBoothMode" = "برای فعال‌سازی حالت غرفه ابتدا باید گذرواژه حساب ایجاد کنید.";
 "accountPage.boothModeAlertMessage" = "بعد از فعال‌سازی حالت غرفه، تمامی گفتگوهای شما حذف می‌شوند.";
+"accountPage.peerDiscovery" = "اتصال خودکار در شبکه محلی";
 
 //Account
 "account.sipUsername" = "نام کاربر";

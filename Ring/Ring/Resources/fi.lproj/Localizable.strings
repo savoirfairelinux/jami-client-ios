@@ -218,6 +218,7 @@
 "accountPage.boothModeExplanation" = "Kioskitilassa keskusteluhistoriaa ei tallenneta ja jamin toimintoja rajoitettu lähtevien puheluiden osalta. Kun otat kioskitilan käyttöön, kaikki keskustelusi poistetaan.";
 "accountPage.noBoothMode" = "Voit ottaa kioskitilan käyttöön luomalla ensin tilin salasanan.";
 "accountPage.boothModeAlertMessage" = "Kun kioskitila on otettu käyttöön, kaikki keskustelut poistetaan.";
+"accountPage.peerDiscovery" = "Automaattinen yhteys paikallisessa verkossa";
 
 //Account
 "account.sipUsername" = "Käyttäjänimi";

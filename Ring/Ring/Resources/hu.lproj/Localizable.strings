@@ -218,6 +218,7 @@
 "accountPage.boothModeExplanation" = "A fülke üzemmódban a beszélgetési előzmények nem kerülnek mentésre, és a Jami funkcionalitása korlátozott a kimenő hívások kezdeményezésekor. Ha a fülke üzemmód engedélyezve van, az összes beszélgetés törlődik.";
 "accountPage.noBoothMode" = "A fülke üzemmód engedélyezéséhez először létre kell hoznia egy fiók jelszavát.";
 "accountPage.boothModeAlertMessage" = "A fülke üzemmód engedélyezése után az összes beszélgetés eltávolításra kerül.";
+"accountPage.peerDiscovery" = "Ónműködő csatlakozás helyi hálózaton";
 
 //Account
 "account.sipUsername" = "Felhasználónév";

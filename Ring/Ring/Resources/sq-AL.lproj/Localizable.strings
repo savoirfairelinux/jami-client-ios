@@ -218,6 +218,7 @@
 "accountPage.boothModeExplanation" = "Në mënyrën kabinë, historiku i bisedës s’ruhet dhe funksionet e Jami-t kufizohen në bërje thirrjesh. Kur aktivizoni mënyrën kabinë, krejt bisedat tuaja do të hiqen.";
 "accountPage.noBoothMode" = "Që të aktivizohet mënyra Kabinë, lypset të krijoni një fjalëkalim llogarie së pari.";
 "accountPage.boothModeAlertMessage" = "Pas aktivizimit të mënyrës Kabinë, krej bisedat tuaja do të hiqen.";
+"accountPage.peerDiscovery" = "Vetëlidhu në rrjet vendor";
 
 //Account
 "account.sipUsername" = "Emër Përdoruesi";

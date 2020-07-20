@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Invitații";
 "global.meTabBarTitle" = "Cont";
 "global.ok" = "Ok";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Liber ca în Libertate";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -81,13 +81,13 @@
 "createAccount.usernameAlreadyTaken" = "nume de utilizator deja ales";
 "createAccount.loading" = "Se încarcă";
 "createAccount.waitCreateAccountTitle" = "Se adaugă contul";
-"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.RegisterAUsername" = "Înscrie un nume de utilizator";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Notificări";
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Eroare de rețea";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
+"createAccount.UsernameNotRegisteredMessage" = "Contul a fost creat, dar numele de utilizator nu a fost înscris";
 "createAccount.timeoutTitle" = "Account Created";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
@@ -136,7 +136,7 @@
 "alerts.recordVideoMessage" = "Înregistreză un mesaj video";
 "alerts.recordAudioMessage" = "Înregistreză un mesaj audio";
 "alerts.uploadFile" = "Încarcă fișierul";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.uploadPhoto" = "Încarcă o poză sau un video";
 
 //Actions
 "actions.blockAction" = "Blochează";
@@ -166,44 +166,44 @@
 "accountPage.devicesListHeader" = "Dispozitive";
 "accountPage.settingsHeader" = "Reglări";
 "accountPage.username" = "Nume de Utilizator";
-"accountPage.usernameNotRegistered" = "username: not registered";
+"accountPage.usernameNotRegistered" = "nume de utilizator: neînscris";
 "accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Activează Proxy";
 "accountPage.blockedContacts" = "Contacte blocate";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Activează Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "Save";
 "accountPage.proxyPaceholder" = "Proxy address";
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Deconectează dispozitivul";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Deconectează";
+"accountPage.revokeDeviceTitle" = "Elimină dispozitivul";
+"accountPage.revokeDeviceMessage" = "Sigur vrei să elimini acest dispozitiv? Această acțiune este ireversibilă!";
+"accountPage.revokeDeviceButton" = "Elimină";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
 "accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationProgress" = "Se elimină...";
+"accountPage.deviceRevocationSuccess" = "Dispozitivul a fost eliminat";
 "accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
+"accountPage.deviceRevocationWrongPassword" = "Parolă greșită";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nume";
 "accountPage.linkDeviceTitle" = "Asociază alt dispozitiv";
 "accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Elimină contul";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-"accountPage.removeAccountButton" = "Remove";
+"accountPage.removeAccountMessage" = "Făcînd clic pe \"Elimină\" vei elimina acest cont de pe acest dispozitiv! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
+"accountPage.removeAccountButton" = "Elimină";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Register a username";
+"accountPage.registerNameTitle" = "Înscrie un nume de utilizator";
 "accountPage.passwordPlaceholder" = "Introdu parola contului";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegistering" = "Se înscrie";
 "accountPage.usernameRegisterAction" = "Înscrie-te";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Creează parola";
@@ -212,12 +212,13 @@
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
 "accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
+"accountPage.enableBoothMode" = "Activează Modul Cabină";
+"accountPage.disableBoothMode" = "Dezactivează Modul Cabină";
 "accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
 "accountPage.boothModeExplanation" = "În modul Cabină cronologia conversațiilor nu e salvată și Jami este limitat la efectuarea de apeluri. Dacă activezi modul Cabină, toate conversațiile tale vor fi șterse.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.noBoothMode" = "Pentru a activa Modul Cabină, trebuie mai întîi să creezi parola contului.";
+"accountPage.boothModeAlertMessage" = "După activarea modului cabină, toate conversațiile tale vor fi șterse.";
+"accountPage.peerDiscovery" = "Conectare automată la rețeaua locală";
 
 //Account
 "account.sipUsername" = "Nume de Utilizator";
@@ -256,7 +257,7 @@
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Șterge Discuția";
 "contactPage.blockContact" = "Block Contact";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.removeConversation" = "Șterge Conversația";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inițializare...";

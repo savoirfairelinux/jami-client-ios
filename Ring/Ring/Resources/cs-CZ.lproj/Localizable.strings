@@ -218,6 +218,7 @@
 "accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
 "accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.peerDiscovery" = "Auto connect on local network";
 
 //Account
 "account.sipUsername" = "Uživatelské jméno";
