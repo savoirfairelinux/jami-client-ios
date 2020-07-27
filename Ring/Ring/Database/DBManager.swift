@@ -605,17 +605,16 @@ class DBManager {
         for conversationID in conversations.map({ $0.id }) {
             guard let participants = try self.getParticipantsForConversation(conversationID: conversationID,
                 dataBase: dataBase),
-                let partisipant = participants.first else {
+                let participant = participants.first else {
                     continue
             }
-            guard let participantProfile = try self.getProfile(for: partisipant, createIfNotExists: false, accountId: accountId) else {
-                continue
-            }
-            let type = participantProfile.uri.contains("ring:") ? URIType.ring : URIType.sip
-            let uri = JamiURI.init(schema: type, infoHach: participantProfile.uri)
+            let type = participant.contains("ring:") ? URIType.ring : URIType.sip
+            let uri = JamiURI.init(schema: type, infoHach: participant)
             let conversationModel = ConversationModel(withParticipantUri: uri,
                                                       accountId: accountId)
-            conversationModel.participantProfile = participantProfile
+            if let participantProfile = try self.getProfile(for: participant, createIfNotExists: false, accountId: accountId) {
+                conversationModel.participantProfile = participantProfile
+            }
             conversationModel.conversationId = String(conversationID)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
@@ -625,8 +624,8 @@ class DBManager {
                         continue
             }
             for interaction in interactions {
-                let author = interaction.author == participantProfile.uri
-                    ? participantProfile.uri : ""
+                let author = interaction.author == participant
+                    ? participant : ""
                 if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
                     let displayedMessage = author.isEmpty && message.status == .displayed
@@ -778,7 +777,9 @@ class DBManager {
             return nil
         }
         let conversationID = Int64(arc4random_uniform(10000000))
+        do {
         _ = try self.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId)
+        } catch {}
         let conversationForContact = Conversation(conversationID, contactUri)
         if !self.conversationHelper.insert(item: conversationForContact, dataBase: dataBase) {
             return nil
