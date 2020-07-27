@@ -247,6 +247,7 @@
 		1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DA1F0D915100D36361 /* Localizable.strings */; };
 		1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */; };
 		1ABE07E21F0D924700D36361 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
+		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
 		263B7158246D9390007044C4 /* SmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7157246D9390007044C4 /* SmartListCell.swift */; };
 		263B715A246D9556007044C4 /* IncognitoSmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */; };
 		263B715C246D96E5007044C4 /* IncognitoSmartListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263B715B246D96E5007044C4 /* IncognitoSmartListCell.xib */; };
@@ -640,6 +641,8 @@
 		1ABE07DB1F0D915100D36361 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ABE07E11F0D924700D36361 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		26069B6524C9FCE8002361A3 /* ObjCHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCHandler.h; sourceTree = "<group>"; };
+		26069B6624C9FCE8002361A3 /* ObjCHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCHandler.m; sourceTree = "<group>"; };
 		26376721245315E600CDC51F /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		263B7157246D9390007044C4 /* SmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListCell.swift; sourceTree = "<group>"; };
 		263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncognitoSmartListCell.swift; sourceTree = "<group>"; };
@@ -1010,6 +1013,8 @@
 				62AF6863201A66F0003AA9E8 /* AudioAdapter.h */,
 				62B60AF72048A35B001BEACF /* DataTransferAdapter.h */,
 				62B60AF82048A40D001BEACF /* DataTransferAdapter.mm */,
+				26069B6524C9FCE8002361A3 /* ObjCHandler.h */,
+				26069B6624C9FCE8002361A3 /* ObjCHandler.m */,
 			);
 			path = Bridging;
 			sourceTree = "<group>";
@@ -2134,6 +2139,7 @@
 				1A2D18C51F29180700B2C785 /* ContactModel.swift in Sources */,
 				0E3697A8203243D3009A68CA /* BannedContactCell.swift in Sources */,
 				1A2D18F71F292D7200B2C785 /* MessageCellSent.swift in Sources */,
+				26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */,
 				446FAF1B2373425E00519C4F /* SendFileViewController.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,

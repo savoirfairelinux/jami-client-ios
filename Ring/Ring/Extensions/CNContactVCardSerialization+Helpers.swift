@@ -88,23 +88,24 @@ extension CNContactVCardSerialization {
     }
 
     class func parseToVCard(data: Data) -> CNContact? {
+        var contact: CNContact?
         do {
-            let vCards = try CNContactVCardSerialization.contacts(with: data)
-            guard let vCard = vCards.first else { return nil }
-            if let returnData = String(data: data, encoding: .utf8) {
+            try ObjCHandler.try {
+                guard let vCards = try? CNContactVCardSerialization.contacts(with: data),
+                    let vCard = vCards.first,
+                    let returnData = String(data: data, encoding: .utf8) else { return }
                 let contentArr = returnData.components(separatedBy: "\n")
-                if let nameRow = contentArr.filter({ String($0.prefix(3)) == VCardFields.fullName.rawValue }).first {
-                    let vcard = CNMutableContact()
-                    let name = String(nameRow.suffix(nameRow.count - 3))
-                    vcard.familyName = name
-                    vcard.phoneNumbers = vCard.phoneNumbers
-                    vcard.imageData = vCard.imageData
-                    return vcard
-                }
+                guard let nameRow = contentArr.filter({ String($0.prefix(3)) == VCardFields.fullName.rawValue }).first else { return }
+                let vcard = CNMutableContact()
+                let name = String(nameRow.suffix(nameRow.count - 3))
+                vcard.familyName = name
+                vcard.phoneNumbers = vCard.phoneNumbers
+                vcard.imageData = vCard.imageData
+                contact = vcard
             }
-            return vCard
         } catch {
-            return nil
+            print("An error ocurred during CNContactVCardSerialization: \(error)")
         }
+        return contact
     }
 }

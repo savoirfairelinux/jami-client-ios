@@ -45,3 +45,4 @@
 #import <GSKStretchyHeaderView/GSKStretchyHeaderView.h>
 #import "DataTransferAdapter.h"
 #import "../../WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/MaplyBridge.h"
+#import "ObjCHandler.h"
