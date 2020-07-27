@@ -117,7 +117,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 guard let name = profile.alias else {return UIImage.defaultJamiAvatarFor(profileName: nil, account: account)}
                 let profileName = name.isEmpty ? nil : name
                 return UIImage.defaultJamiAvatarFor(profileName: profileName, account: account)
-            })
+            }).startWith(UIImage(asset: Asset.icContactPicture)!)
         }()
 
     lazy var conversations: Observable<[ConversationSection]> = { [unowned self] in
@@ -174,13 +174,13 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     func reloadDataFor(accountId: String) {
         tempBag = DisposeBag()
         self.profileService.getAccountProfile(accountId: accountId)
-            .subscribe(onNext: { [unowned self] profile in
-                self.profileImageForCurrentAccount.onNext(profile)
+            .subscribe(onNext: { [weak self] profile in
+                self?.profileImageForCurrentAccount.onNext(profile)
             }).disposed(by: self.tempBag)
         self.conversationsService.conversationsForCurrentAccount
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] conversations in
-                self.conversationsForCurrentAccount.onNext(conversations)
+            .subscribe(onNext: { [weak self] conversations in
+                self?.conversationsForCurrentAccount.onNext(conversations)
             }).disposed(by: self.tempBag)
     }
 
