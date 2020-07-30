@@ -522,24 +522,6 @@ class AccountsService: AccountAdapterDelegate {
         return result
     }
 
-    func setDetails(forAccountId accountId: String) {
-        let details = self.getAccountDetails(fromAccountId: accountId)
-        let filename = ""
-        if details
-            .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath)) == filename &&
-            details
-                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtoneEnabled)) == "false" {
-            return
-        }
-        details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtonePath),
-                 withValue: filename)
-        details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.ringtoneEnabled),
-                 withValue: "false")
-        setAccountDetails(forAccountId: accountId, withDetails: details)
-    }
-
     /**
      Gets an account from the list of accounts handled by the application.
 
@@ -696,6 +678,7 @@ class AccountsService: AccountAdapterDelegate {
         accountDetails!.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
         accountDetails!.updateValue(accountType, forKey: ConfigKey.accountType.rawValue)
         accountDetails!.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
+        accountDetails!.updateValue("false", forKey: ConfigKey.ringtoneEnabled.rawValue)
         return accountDetails!
     }
 
@@ -890,14 +873,6 @@ class AccountsService: AccountAdapterDelegate {
             proxyEnabled = true
         }
         return proxyEnabled
-    }
-
-    func savePushToken(token: String) {
-        for account in accounts {
-            let accountDetails = self.getAccountDetails(fromAccountId: account.id)
-            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.devicePushToken), withValue: token)
-            self.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
-        }
     }
 
     func proxyEnabled(accountID: String) -> Variable<Bool> {
