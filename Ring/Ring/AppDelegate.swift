@@ -168,9 +168,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             .subscribe(onCompleted: {
                 //set selected account if exists
                 self.appCoordinator.start()
-                for account in self.accountService.accounts {
-                    self.accountService.setDetails(forAccountId: account.id)
-                }
+//                for account in self.accountService.accounts {
+//                    self.accountService.setDetails(forAccountId: account.id)
+//                }
                 if self.accountService.hasAccountWithProxyEnabled() {
                     self.registerVoipNotifications()
                 } else {
@@ -296,7 +296,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private func unregisterVoipNotifications() {
         self.voipRegistry.desiredPushTypes = nil
-        self.accountService.savePushToken(token: "")
+        //self.accountService.savePushToken(token: "")
         self.accountService.setPushNotificationToken(token: "")
     }
 
@@ -436,7 +436,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
-        self.accountService.savePushToken(token: "")
+        //self.accountService.savePushToken(token: "")
         self.accountService.setPushNotificationToken(token: "")
     }
 
@@ -455,7 +455,7 @@ extension AppDelegate: PKPushRegistryDelegate {
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
         if type == PKPushType.voIP {
             let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
-            self.accountService.savePushToken(token: deviceTokenString)
+           // self.accountService.savePushToken(token: deviceTokenString)
             self.accountService.setPushNotificationToken(token: deviceTokenString)
         }
     }
