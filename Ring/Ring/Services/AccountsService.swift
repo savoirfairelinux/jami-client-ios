@@ -277,11 +277,11 @@ class AccountsService: AccountAdapterDelegate {
             return false
         }
         UserDefaults.standard.set(enable, forKey: boothModeEnabled)
-        let details = self.getAccountDetails(fromAccountId: accountId)
-        details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPublicIn),
-                 withValue: (!enable).toString())
-        setAccountDetails(forAccountId: accountId, withDetails: details)
+//        let details = self.getAccountDetails(fromAccountId: accountId)
+//        details
+//            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPublicIn),
+//                 withValue: (!enable).toString())
+        //setAccountDetails(forAccountId: accountId, withDetails: details)
         return true
     }
 

@@ -133,6 +133,7 @@ static id <AccountAdapterDelegate> _delegate;
 
 - (void)setAccountActive:(NSString *)accountID
                   active:(bool)active {
+    NSLog(@"set account details");
     setAccountActive(std::string([accountID UTF8String]), active);
 }
 
