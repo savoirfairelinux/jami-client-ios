@@ -38,7 +38,7 @@
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "الاتصال بالشبكة غير متوفر";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "تأكد من السماح للوصول النقال الخلوي في إعدادتك";
 "smartlist.accountsTitle" = "حسابات";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
@@ -156,7 +156,7 @@
 "calls.unknown" = "مجهول";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
+"calls.connecting" = "اتصال جاري...";
 "calls.searching" = "Searching…";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
@@ -169,7 +169,7 @@
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Blocked contacts";
+"accountPage.blockedContacts" = "جهات إتصال محظورة";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -179,7 +179,7 @@
 "accountPage.enableNotifications" = "فعل الإخطارات";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Revoke device";
+"accountPage.revokeDeviceTitle" = "إبطال جهاز";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
@@ -207,7 +207,7 @@
 "accountPage.usernameRegisterAction" = "سجل";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Change password";
+"accountPage.changePassword" = "تغيير كلمة المرور";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
@@ -241,7 +241,7 @@
 "account.needMigration" = "account need to be migrated";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "لا توجد جهات إتصال محظورة";
 
 //Link New Device
 "linkDevice.title" = "Link a new device";
