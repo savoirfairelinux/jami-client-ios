@@ -99,7 +99,7 @@ do
   CC="xcrun -sdk $SDK clang"
   CXX="xcrun -sdk $SDK clang++"
 
-  SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --enable-ffmpeg
+  SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --disable-plugin --disable-libarchive --enable-ffmpeg
 
   echo "Building contrib"
   make fetch
@@ -130,6 +130,8 @@ do
 
   RING_CONF="--host=$HOST \
              --without-dbus \
+             --disable-plugin \
+             --disable-libarchive \
              --enable-static \
              --disable-shared \
              --prefix=$IOS_TOP_DIR/DEPS/$ARCH"
