@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ee750760_173643fc",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-03T13:09:41Z",
+      "side": 1,
+      "message": "maybe filter location messages during database query?",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ddb249da_cef3a42d",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharing.swift",
         "patchSetId": 20
