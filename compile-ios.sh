@@ -130,6 +130,8 @@ do
 
   RING_CONF="--host=$HOST \
              --without-dbus \
+             --disable-plugin \
+             --disable-libarchive \
              --enable-static \
              --disable-shared \
              --prefix=$IOS_TOP_DIR/DEPS/$ARCH"
