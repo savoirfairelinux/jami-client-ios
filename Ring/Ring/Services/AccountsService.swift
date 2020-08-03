@@ -831,7 +831,7 @@ class AccountsService: AccountAdapterDelegate {
         self.responseStream.onNext(event)
     }
 
-    func receivedAccountPhoto(for account: String, photo: String) {
+    func receivedAccountProfile(for account: String, displayName: String, photo: String) {
         do {
             if try !self.dbManager.createDatabaseForAccount(accountId: account) {
                 return
@@ -839,13 +839,16 @@ class AccountsService: AccountAdapterDelegate {
         } catch {
             return
         }
-        let accountDetails = getAccountDetails(fromAccountId: account)
-        let displayName: String? =  accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName))
+        var name = displayName
+        if name.isEmpty {
+            let accountDetails = getAccountDetails(fromAccountId: account)
+            name =  accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName))
+        }
 
         guard let accountToUpdate = self.getAccount(fromAccountId: account),
             let accountURI = AccountModelHelper
                 .init(withAccount: accountToUpdate).uri else {return}
-        _ = self.dbManager.saveAccountProfile(alias: displayName, photo: photo, accountId: account, accountURI: accountURI)
+        _ = self.dbManager.saveAccountProfile(alias: name, photo: photo, accountId: account, accountURI: accountURI)
     }
 
     // MARK: Push Notifications
