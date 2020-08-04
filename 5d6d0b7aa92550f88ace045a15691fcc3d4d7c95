@@ -299,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "c348ebc5_b36c57eb",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-04T19:20:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e64b003_885e266a",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7ddaf5c_3a34c007",
         "filename": "Ring/Ring/Services/LocationSharingService.swift",
         "patchSetId": 20
@@ -316,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "0eb5ee6f_b135d5dc",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-04T19:20:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e7ddaf5c_3a34c007",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a073563_61647ce3",
         "filename": "Ring/Ring/Services/LocationSharingService.swift",
         "patchSetId": 20
@@ -327,6 +363,24 @@
       "writtenOn": "2020-08-03T13:06:06Z",
       "side": 1,
       "message": "let location \u003d location.element",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba05b382_ec10fcea",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-04T19:20:49Z",
+      "side": 1,
+      "message": "Compiler will not allow. Could do \"let location \u003d location.element ?? nil\", but might be more confusing.",
+      "parentUuid": "8a073563_61647ce3",
       "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
@@ -350,6 +404,24 @@
     },
     {
       "key": {
+        "uuid": "5e2ea291_bf890b59",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-04T19:20:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8116adcb_1d76b199",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16a4ebb1_e4dcaf6d",
         "filename": "Ring/Ring/Services/LocationSharingService.swift",
         "patchSetId": 20
@@ -364,6 +436,24 @@
       "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16fc7379_83eaa76a",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-04T19:20:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16a4ebb1_e4dcaf6d",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
