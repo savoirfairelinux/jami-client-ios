@@ -471,6 +471,24 @@
       "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "345c46cc_8ce8e8c0",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-05T14:04:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7e1c4b8_d1c4dd1d",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
