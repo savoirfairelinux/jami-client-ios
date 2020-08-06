@@ -352,6 +352,24 @@
     },
     {
       "key": {
+        "uuid": "aa91c2f5_19bec333",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-06T18:12:08Z",
+      "side": 1,
+      "message": "it is just a little bit confusing name locationReceivedFromRecipientUri, because if it is locations we receive from a contact why it is RecipientUri?",
+      "parentUuid": "0eb5ee6f_b135d5dc",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a073563_61647ce3",
         "filename": "Ring/Ring/Services/LocationSharingService.swift",
         "patchSetId": 20
@@ -381,6 +399,24 @@
       "side": 1,
       "message": "Compiler will not allow. Could do \"let location \u003d location.element ?? nil\", but might be more confusing.",
       "parentUuid": "8a073563_61647ce3",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d81038d7_6441ad53",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-06T18:12:08Z",
+      "side": 1,
+      "message": "in case when you want to get next element from subscription and not other events like error, it is better to use .subscribe(onNext:), this case you do not need to check for location.event",
+      "parentUuid": "ba05b382_ec10fcea",
       "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
