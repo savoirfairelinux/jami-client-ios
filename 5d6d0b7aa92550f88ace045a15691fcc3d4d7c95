@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "47ef7a74_a6795dc4",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharingReceived.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-06T20:13:54Z",
+      "side": 1,
+      "message": "Nevermind, now fixed with the .subscribe(onNext:).",
+      "parentUuid": "199d3801_ecbbf7d5",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e587a358_9820c51f",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharingReceived.swift",
         "patchSetId": 20
@@ -370,6 +388,24 @@
     },
     {
       "key": {
+        "uuid": "63c641ce_2ee5ceae",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-06T20:13:54Z",
+      "side": 1,
+      "message": "Yes indeed. I thought I renamed it in a previous patch, but apparently not. Now it is done.",
+      "parentUuid": "aa91c2f5_19bec333",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a073563_61647ce3",
         "filename": "Ring/Ring/Services/LocationSharingService.swift",
         "patchSetId": 20
@@ -420,6 +456,24 @@
       "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "114e32a9_e64eaf0d",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 20
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-06T20:13:54Z",
+      "side": 1,
+      "message": "Very nice, done.",
+      "parentUuid": "d81038d7_6441ad53",
+      "revId": "5d6d0b7aa92550f88ace045a15691fcc3d4d7c95",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     },
     {
       "key": {
