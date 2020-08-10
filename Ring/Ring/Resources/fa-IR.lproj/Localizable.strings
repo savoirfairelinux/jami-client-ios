@@ -132,11 +132,21 @@
 "alerts.confirmClearConversationTitle" = "پاک کردن گفتگو";
 "alerts.noMediaPermissionsTitle" = "مجوز رسانه داده نشده است";
 "alerts.noLibraryPermissionsTitle" = "دسترسی به کتابخانه تصاویر داده نشده است";
+"alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "توانایی اتصال به مدیریت حساب ارائه‌شده را نداریم. لطفا اعتبارنامه‌های خود را بررسی کنید.";
 "alerts.recordVideoMessage" = "ضبط یک پیام تصویری";
 "alerts.recordAudioMessage" = "ضبط یک پیام صوتی";
 "alerts.uploadFile" = "بارگذاری فایل";
 "alerts.uploadPhoto" = "بارگذاری عکس یا فیلم";
+"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationSharing" = "Share my location";
+"alerts.alreadylocationSharing" = "Already sharing location with this user";
+"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationSharingDuration10min" = "10 min";
+"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.mapInformation" = "Map information";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyrightMoreInfo" = "اطلاعات بیشتر";
 
 //Actions
 "actions.blockAction" = "مسدود";
@@ -150,6 +160,8 @@
 "alerts.incomingCallButtonIgnore" = "رد";
 "actions.startAudioCall" = "تماس صوتی";
 "actions.startVideoCall" = "تماس تصویری";
+"actions.goToSettings" = "Go to Settings";
+"actions.stopLocationSharing" = "توقف اشتراک‌گذاری";
 
 //Calls
 "calls.callItemTitle" = "برقراری تماس";
@@ -277,6 +289,8 @@
 "notifications.acceptCall" = "پذیرفتن";
 "notifications.refuseCall" = "رد کردن";
 "notifications.newFile" = "فایل جدید";
+"notifications.locationSharingStarted" = "Incoming location sharing started";
+"notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "در انتظار...";
 "dataTransfer.readableStatusRefuse" = "رد کردن";
 "dataTransfer.readableStatusOngoing" = "در حال انتقال";
@@ -296,6 +310,7 @@
 "generatedMessage.incomingCall" = "تماس ورودی";
 "generatedMessage.missedOutgoingCall" = "تماس خروجی از‌دست‌رفته";
 "generatedMessage.missedIncomingCall" = "تماس ورودی از‌دست‌رفته";
+"generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
 "generalSettings.title" = "تنظیمات کلی";

@@ -132,11 +132,21 @@
 "alerts.confirmClearConversationTitle" = "Tyhjennä keskustelu";
 "alerts.noMediaPermissionsTitle" = "Medialupaa ei ole myönnetty";
 "alerts.noLibraryPermissionsTitle" = "Pääsyä valokuvakirjastoon ei ole myönnetty";
+"alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Ei voi muodostaa yhteyttä tilin hallintaan. Tarkista käyttäjätiedot";
 "alerts.recordVideoMessage" = "Tallenna videoviesti";
 "alerts.recordAudioMessage" = "Tallenna ääniviesti";
 "alerts.uploadFile" = "Lähetä tiedosto";
 "alerts.uploadPhoto" = "Lähetä kuva tai video";
+"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationSharing" = "Share my location";
+"alerts.alreadylocationSharing" = "Already sharing location with this user";
+"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationSharingDuration10min" = "10 min";
+"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.mapInformation" = "Karttatiedot";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyrightMoreInfo" = "Lue lisää";
 
 //Actions
 "actions.blockAction" = "Estä";
@@ -150,6 +160,8 @@
 "alerts.incomingCallButtonIgnore" = "Sivuuta";
 "actions.startAudioCall" = "Äänipuhelu";
 "actions.startVideoCall" = "Videopuhelu";
+"actions.goToSettings" = "Go to Settings";
+"actions.stopLocationSharing" = "Lopeta jakaminen";
 
 //Calls
 "calls.callItemTitle" = "Soita";
@@ -277,6 +289,8 @@
 "notifications.acceptCall" = "HYVÄKSY";
 "notifications.refuseCall" = "KIELTÄYDY";
 "notifications.newFile" = "Uusi tiedosto";
+"notifications.locationSharingStarted" = "Incoming location sharing started";
+"notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Odottaa...";
 "dataTransfer.readableStatusRefuse" = "Kieltäydy";
 "dataTransfer.readableStatusOngoing" = "Lähettää";
@@ -296,6 +310,7 @@
 "generatedMessage.incomingCall" = "Saapuva puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
+"generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
 "generalSettings.title" = "Yleiset asetukset";

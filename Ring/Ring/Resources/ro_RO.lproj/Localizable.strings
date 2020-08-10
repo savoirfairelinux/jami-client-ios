@@ -132,11 +132,21 @@
 "alerts.confirmClearConversationTitle" = "Șterge conversația";
 "alerts.noMediaPermissionsTitle" = "Nu ai permis accesul la Media";
 "alerts.noLibraryPermissionsTitle" = "Nu ai permis accesul la poze";
+"alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Nu mă pot conecta la Administrare cont. Verifică datele de autentificare.";
 "alerts.recordVideoMessage" = "Înregistreză un mesaj video";
 "alerts.recordAudioMessage" = "Înregistreză un mesaj audio";
 "alerts.uploadFile" = "Încarcă fișierul";
 "alerts.uploadPhoto" = "Încarcă o poză sau un video";
+"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationSharing" = "Share my location";
+"alerts.alreadylocationSharing" = "Already sharing location with this user";
+"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationSharingDuration10min" = "10 min";
+"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.mapInformation" = "Detalii pe Hartă";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyrightMoreInfo" = "Află mai multe";
 
 //Actions
 "actions.blockAction" = "Blochează";
@@ -150,6 +160,8 @@
 "alerts.incomingCallButtonIgnore" = "Ignoră";
 "actions.startAudioCall" = "Apel Audio";
 "actions.startVideoCall" = "Apel Video";
+"actions.goToSettings" = "Go to Settings";
+"actions.stopLocationSharing" = "Oprește distribuirea";
 
 //Calls
 "calls.callItemTitle" = "Apel";
@@ -277,6 +289,8 @@
 "notifications.acceptCall" = "ACCEPTĂ";
 "notifications.refuseCall" = "REFUZĂ";
 "notifications.newFile" = "Fișier nou";
+"notifications.locationSharingStarted" = "Incoming location sharing started";
+"notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Așteaptă...";
 "dataTransfer.readableStatusRefuse" = "Refuză";
 "dataTransfer.readableStatusOngoing" = "Se transferă";
@@ -296,6 +310,7 @@
 "generatedMessage.incomingCall" = "Apel primit";
 "generatedMessage.missedOutgoingCall" = "Apelul efectuat a fost pierdut";
 "generatedMessage.missedIncomingCall" = "Apel pierdut";
+"generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
 "generalSettings.title" = "Reglări generale";

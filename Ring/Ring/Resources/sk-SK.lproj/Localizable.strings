@@ -132,11 +132,21 @@
 "alerts.confirmClearConversationTitle" = "Vymazať konverzáciu";
 "alerts.noMediaPermissionsTitle" = "Nie sú udelené práva pre médiá";
 "alerts.noLibraryPermissionsTitle" = "Nie je povolený prístup ku knižnici fotografií";
+"alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Nedá sa pripojiť k danému správcovi účtov. Skontrolujte prosím vaše prístupové údaje.";
 "alerts.recordVideoMessage" = "Zaznamenať video správu";
 "alerts.recordAudioMessage" = "Zaznamenať audio správu";
 "alerts.uploadFile" = "Nahrať súbor";
 "alerts.uploadPhoto" = "Nahrať fotografiu alebo film";
+"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationSharing" = "Share my location";
+"alerts.alreadylocationSharing" = "Already sharing location with this user";
+"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationSharingDuration10min" = "10 min";
+"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.mapInformation" = "Map information";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyrightMoreInfo" = "Zistiť viac";
 
 //Actions
 "actions.blockAction" = "Blokovať";
@@ -150,6 +160,8 @@
 "alerts.incomingCallButtonIgnore" = "Ignorovať";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
+"actions.goToSettings" = "Go to Settings";
+"actions.stopLocationSharing" = "Ukončiť zdieľanie";
 
 //Calls
 "calls.callItemTitle" = "Volať";
@@ -277,6 +289,8 @@
 "notifications.acceptCall" = "PRIJAŤ";
 "notifications.refuseCall" = "ODMIETNUŤ";
 "notifications.newFile" = "Nový súbor";
+"notifications.locationSharingStarted" = "Incoming location sharing started";
+"notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Čaká sa...";
 "dataTransfer.readableStatusRefuse" = "Odmietnuť";
 "dataTransfer.readableStatusOngoing" = "Prenáša sa";
@@ -296,6 +310,7 @@
 "generatedMessage.incomingCall" = "Prichádzajúci hovor";
 "generatedMessage.missedOutgoingCall" = "Zmeškaný odchádzajúci hovory";
 "generatedMessage.missedIncomingCall" = "Zmeškaný príchodzí hovor";
+"generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
 "generalSettings.title" = "Všeobecné nastavenia";

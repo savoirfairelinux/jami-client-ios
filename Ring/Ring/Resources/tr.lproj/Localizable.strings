@@ -132,11 +132,21 @@
 "alerts.confirmClearConversationTitle" = "Görüşmeyi temizle";
 "alerts.noMediaPermissionsTitle" = "Medya izni verilmedi";
 "alerts.noLibraryPermissionsTitle" = "Fotoğraf kitaplığına erişim izni verilmedi";
+"alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Sağlanan hesap yöneticisine bağlanılamıyor. Lütfen kimlik bilgilerinizi kontrol edin";
 "alerts.recordVideoMessage" = "Video mesajı kaydet ";
 "alerts.recordAudioMessage" = "Sesli mesaj kaydet ";
 "alerts.uploadFile" = "Upload file";
 "alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationSharing" = "Share my location";
+"alerts.alreadylocationSharing" = "Already sharing location with this user";
+"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationSharingDuration10min" = "10 min";
+"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.mapInformation" = "Map information";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyrightMoreInfo" = "Daha çok  öğren";
 
 //Actions
 "actions.blockAction" = "Engelleme";
@@ -150,6 +160,8 @@
 "alerts.incomingCallButtonIgnore" = "Göz ardı et";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
+"actions.goToSettings" = "Go to Settings";
+"actions.stopLocationSharing" = "Paylaşmayı durdur";
 
 //Calls
 "calls.callItemTitle" = "Ara";
@@ -277,6 +289,8 @@
 "notifications.acceptCall" = "KABUL ET";
 "notifications.refuseCall" = "REDDET";
 "notifications.newFile" = "Yeni dosya";
+"notifications.locationSharingStarted" = "Incoming location sharing started";
+"notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Bekliyor...";
 "dataTransfer.readableStatusRefuse" = "Geri Çevir";
 "dataTransfer.readableStatusOngoing" = "Aktarıyor";
@@ -296,6 +310,7 @@
 "generatedMessage.incomingCall" = "Gelen arama";
 "generatedMessage.missedOutgoingCall" = "Yanıtsız giden arama";
 "generatedMessage.missedIncomingCall" = "Yanıtsız gelen arama";
+"generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
 "generalSettings.title" = "Genel ayarlar";

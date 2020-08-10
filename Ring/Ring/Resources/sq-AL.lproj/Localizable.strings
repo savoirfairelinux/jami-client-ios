@@ -132,11 +132,21 @@
 "alerts.confirmClearConversationTitle" = "Spastroje Bisedën";
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
+"alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "S’lidhet dot te përgjegjësi i dhënë i llogarive. Ju lutemi, kontrolloni kredencialet tuaja";
 "alerts.recordVideoMessage" = "Regjistroni një mesazh video";
 "alerts.recordAudioMessage" = "Incizoni një mesazh audio";
 "alerts.uploadFile" = "Ngarkoni kartelë";
 "alerts.uploadPhoto" = "Ngarkoni foto ose film";
+"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationSharing" = "Share my location";
+"alerts.alreadylocationSharing" = "Already sharing location with this user";
+"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationSharingDuration10min" = "10 min";
+"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.mapInformation" = "Të dhëna harte";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyrightMoreInfo" = "Mësoni më tepër";
 
 //Actions
 "actions.blockAction" = "Bllokoje";
@@ -150,6 +160,8 @@
 "alerts.incomingCallButtonIgnore" = "Shpërfille";
 "actions.startAudioCall" = "Thirrje Audio";
 "actions.startVideoCall" = "Thirrje Video";
+"actions.goToSettings" = "Go to Settings";
+"actions.stopLocationSharing" = "Resht së dhëni";
 
 //Calls
 "calls.callItemTitle" = "Thirre";
@@ -277,6 +289,8 @@
 "notifications.acceptCall" = "PRANOJE";
 "notifications.refuseCall" = "HIDHE POSHTË";
 "notifications.newFile" = "Kartelë e re";
+"notifications.locationSharingStarted" = "Incoming location sharing started";
+"notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pezull…";
 "dataTransfer.readableStatusRefuse" = "Hidhe tej";
 "dataTransfer.readableStatusOngoing" = "Po shpërngulet";
@@ -296,6 +310,7 @@
 "generatedMessage.incomingCall" = "Thirrje ardhëse";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
+"generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
 "generalSettings.title" = "Rregullime të përgjithshme";

@@ -132,11 +132,21 @@
 "alerts.confirmClearConversationTitle" = "Cancella conversazione";
 "alerts.noMediaPermissionsTitle" = "Non è stata concessa l'autorizzazione ai media";
 "alerts.noLibraryPermissionsTitle" = "Accesso alle foto non concesso";
+"alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Impossibile connettersi al gestore account fornito. Controlla le tue credenziali";
 "alerts.recordVideoMessage" = "Registra un video messaggio";
 "alerts.recordAudioMessage" = "Registra un messaggio audio";
 "alerts.uploadFile" = "Carica file";
 "alerts.uploadPhoto" = "Carica foto o film";
+"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationSharing" = "Share my location";
+"alerts.alreadylocationSharing" = "Already sharing location with this user";
+"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationSharingDuration10min" = "10 min";
+"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.mapInformation" = "Map information";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyrightMoreInfo" = "Scopri di più";
 
 //Actions
 "actions.blockAction" = "Blocca";
@@ -150,6 +160,8 @@
 "alerts.incomingCallButtonIgnore" = "Ignora";
 "actions.startAudioCall" = "Chiamata audio";
 "actions.startVideoCall" = "Video chiamata";
+"actions.goToSettings" = "Go to Settings";
+"actions.stopLocationSharing" = "Ferma condivisione";
 
 //Calls
 "calls.callItemTitle" = "Chiamata";
@@ -277,6 +289,8 @@
 "notifications.acceptCall" = "Accetta";
 "notifications.refuseCall" = "Rifiuta";
 "notifications.newFile" = "Nuovo file";
+"notifications.locationSharingStarted" = "Incoming location sharing started";
+"notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "In attesa...";
 "dataTransfer.readableStatusRefuse" = "Rifiuto";
 "dataTransfer.readableStatusOngoing" = "In trasferimento";
@@ -296,6 +310,7 @@
 "generatedMessage.incomingCall" = "Chiamata in arrivo";
 "generatedMessage.missedOutgoingCall" = "Chiamata persa in uscita";
 "generatedMessage.missedIncomingCall" = "Chiamata persa in arrivo";
+"generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
 "generalSettings.title" = "Impostazioni generali";

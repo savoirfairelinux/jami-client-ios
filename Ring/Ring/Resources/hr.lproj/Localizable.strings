@@ -132,11 +132,21 @@
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
+"alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Record a video message";
 "alerts.recordAudioMessage" = "Record an audio message";
 "alerts.uploadFile" = "Upload file";
 "alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationSharing" = "Share my location";
+"alerts.alreadylocationSharing" = "Already sharing location with this user";
+"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationSharingDuration10min" = "10 min";
+"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.mapInformation" = "Map information";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
 "actions.blockAction" = "Blokiraj";
@@ -150,6 +160,8 @@
 "alerts.incomingCallButtonIgnore" = "Ignoriraj";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
+"actions.goToSettings" = "Go to Settings";
+"actions.stopLocationSharing" = "Stop sharing";
 
 //Calls
 "calls.callItemTitle" = "Nazovi";
@@ -277,6 +289,8 @@
 "notifications.acceptCall" = "ACCEPT";
 "notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "New file";
+"notifications.locationSharingStarted" = "Incoming location sharing started";
+"notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Odbij";
 "dataTransfer.readableStatusOngoing" = "Transferring";
@@ -296,6 +310,7 @@
 "generatedMessage.incomingCall" = "Dolazni poziv";
 "generatedMessage.missedOutgoingCall" = "Propušteni odlazni poziv";
 "generatedMessage.missedIncomingCall" = "Propušteni dolazni poziv";
+"generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
 "generalSettings.title" = "General settings";
