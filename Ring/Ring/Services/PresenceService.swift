@@ -23,14 +23,14 @@ import RxSwift
 
 class PresenceService {
 
-    fileprivate let presenceAdapter: PresenceAdapter
-    fileprivate let log = SwiftyBeaver.self
+    private let presenceAdapter: PresenceAdapter
+    private let log = SwiftyBeaver.self
     var contactPresence: [String: Variable<Bool>]
 
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     init(withPresenceAdapter presenceAdapter: PresenceAdapter) {
         self.contactPresence = [String: Variable<Bool>]()

@@ -56,10 +56,11 @@ final class InteractionDataHelper {
     //migrations from legacy db
     let authorId = Expression<Int64>("author_id")
     let conversationId = Expression<Int64>("conversation_id")
-    func migrateToDBForAccount (from oldDB: Connection,
-                                to newDB: Connection,
-                                accountProfileId: Int64,
-                                contactsMap: [Int64: String]) throws {
+
+    func migrateToDBForAccount(from oldDB: Connection,
+                               to newDB: Connection,
+                               accountProfileId: Int64,
+                               contactsMap: [Int64: String]) throws {
         let items = try oldDB.prepare(table)
         for item in items {
             let uri: String? = (contactsMap[item[authorId]] != nil) ? "ring:" + contactsMap[item[authorId]]! : nil
@@ -133,14 +134,14 @@ final class InteractionDataHelper {
 
     func insert(item: Interaction, dataBase: Connection) -> Int64? {
         let query = table.insert(duration <- item.duration,
-                                  author <- item.author,
-                                  conversation <- item.conversation,
-                                  timestamp <- item.timestamp,
-                                  body <- item.body,
-                                  type <- item.type,
-                                  status <- item.status,
-                                  daemonId <- item.daemonID,
-                                  incoming <- item.incoming)
+                                 author <- item.author,
+                                 conversation <- item.conversation,
+                                 timestamp <- item.timestamp,
+                                 body <- item.body,
+                                 type <- item.type,
+                                 status <- item.status,
+                                 daemonId <- item.daemonID,
+                                 incoming <- item.incoming)
         do {
             let rowId = try dataBase.run(query)
             guard rowId > 0 else {

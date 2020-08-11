@@ -27,9 +27,10 @@ import XCTest
 class ServiceEventTests: XCTestCase {
 
     /// The ServiceEvent that will be used during the tests.
-    fileprivate var event: ServiceEvent?
+    private var event: ServiceEvent?
 
     override func setUp() {
+        super.setUp()
         self.event = ServiceEvent(withEventType: .accountsChanged)
     }
 

@@ -129,7 +129,7 @@ class AccountModel: Equatable {
         self.devices = devices
     }
 
-    public static func == (lhs: AccountModel, rhs: AccountModel) -> Bool {
+    static func == (lhs: AccountModel, rhs: AccountModel) -> Bool {
         return lhs.id == rhs.id
     }
 

@@ -42,23 +42,18 @@ class GeneratedInteractionsManager {
     private func subscribeToContactEvents() {
         self.contactService
             .sharedResponseStream
-            .subscribe(onNext: { [unowned self] contactRequestEvent in
+            .subscribe(onNext: { [weak self] contactRequestEvent in
+                guard let self = self else { return }
                 if self.accountService.boothMode() {
                     return
                 }
-                guard let accountID: String = contactRequestEvent.getEventInput(.accountId) else {
-                    return
-                }
-                guard let contactUri: String = contactRequestEvent.getEventInput(.uri) else {
-                    return
-                }
-                guard let account = self.accountService.getAccount(fromAccountId: accountID) else {
-                    return
-                }
+                guard let accountID: String = contactRequestEvent.getEventInput(.accountId) else { return }
+                guard let contactUri: String = contactRequestEvent.getEventInput(.uri) else { return }
+                guard let account = self.accountService.getAccount(fromAccountId: accountID) else { return }
                 let type = AccountModelHelper.init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
                 guard let uriString = JamiURI.init(schema: type,
                                                    infoHach: contactUri,
-                                                   account: account).uriString else {return}
+                                                   account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
                     currentAccount.id == account.id {
@@ -100,7 +95,7 @@ class GeneratedInteractionsManager {
             return
         }
         // remove conversation if it contain only generated messages
-        let messagesNotGenerated = conversation.messages.filter({!$0.isGenerated})
+        let messagesNotGenerated = conversation.messages.filter({ !$0.isGenerated })
 
         if !messagesNotGenerated.isEmpty {
             return
@@ -111,34 +106,23 @@ class GeneratedInteractionsManager {
     private func subscribeToCallEvents() {
         self.callService
             .sharedResponseStream
-            .subscribe(onNext: { [unowned self] callEvent in
+            .subscribe(onNext: { [weak self] callEvent in
+                guard let self = self else { return }
+
                 if self.accountService.boothMode() {
                     return
                 }
-                guard let accountID: String = callEvent.getEventInput(.accountId) else {
-                    return
-                }
+                guard let accountID: String = callEvent.getEventInput(.accountId) else { return }
+                guard let contactUri: String = callEvent.getEventInput(.uri) else { return }
+                guard let time: Int = callEvent.getEventInput(.callTime) else { return }
+                guard let callType: Int = callEvent.getEventInput(.callType) else { return }
+                guard let account = self.accountService.getAccount(fromAccountId: accountID) else { return }
 
-                guard let contactUri: String = callEvent.getEventInput(.uri) else {
-                    return
-                }
-
-                guard let time: Int = callEvent.getEventInput(.callTime) else {
-                    return
-                }
-
-                guard let callType: Int = callEvent.getEventInput(.callType) else {
-                    return
-                }
-
-                guard let account = self.accountService.getAccount(fromAccountId: accountID) else {
-                    return
-                }
                 let type = AccountModelHelper
                     .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
                 guard let stringUri = JamiURI.init(schema: type,
                                                    infoHach: contactUri,
-                                                   account: account).uriString else {return}
+                                                   account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
                     currentAccount.id == account.id {

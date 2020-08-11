@@ -218,7 +218,8 @@ extension MessageCellLocationSharing {
         infoButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }
 
-    @objc func buttonAction(sender: UIButton!) {
+    @objc
+    func buttonAction(sender: UIButton!) {
         let alert = UIAlertController.init(title: L10n.Alerts.mapInformation,
                                            message: L10n.Alerts.openStreetMapCopyright,
                                            preferredStyle: .alert)
@@ -268,7 +269,8 @@ extension MessageCellLocationSharing {
         }
     }
 
-    @objc func updateWidth(_ shouldExpand: Bool) {
+    @objc
+    func updateWidth(_ shouldExpand: Bool) {
         fatalError("Must override this function")
     }
 
@@ -283,7 +285,7 @@ extension MessageCellLocationSharing {
 
     func hasTopNotch() -> Bool {
         if #available(iOS 13.0, *) {
-            return UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.top ?? 0 > 20
+            return UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.safeAreaInsets.top ?? 0 > 20
         } else {
             return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
         }
@@ -338,7 +340,8 @@ extension MessageCellLocationSharing {
         self.xButton = nil
     }
 
-    @objc func XButtonAction(sender: UIButton!) {
+    @objc
+    func XButtonAction(sender: UIButton!) {
         self.expandOrShrink()
     }
 }
@@ -392,7 +395,8 @@ extension MessageCellLocationSharing {
         self.myPositionButton = nil
     }
 
-    @objc func myPositionButtonAction(sender: UIButton!) {
+    @objc
+    func myPositionButtonAction(sender: UIButton!) {
         fatalError("Must override this function")
     }
 }

@@ -76,16 +76,17 @@ class ConversationViewModel: Stateable, ViewModel {
     lazy var typingIndicator: Observable<Bool> = {
         return self.conversationsService
             .sharedResponseStream
-            .filter { [weak self] (event) -> Bool in
+            .filter({ [weak self] (event) -> Bool in
                 return event.eventType == ServiceEventType.messageTypingIndicator &&
                     event.getEventInput(ServiceEventInput.accountId) == self?.conversation.value.accountId &&
                     event.getEventInput(ServiceEventInput.peerUri) == self?.conversation.value.hash
-        }.map { (event) -> Bool in
-            if let status: Int = event.getEventInput(ServiceEventInput.state), status == 1 {
-                return true
-            }
-            return false
-        }
+            })
+            .map({ (event) -> Bool in
+                if let status: Int = event.getEventInput(ServiceEventInput.state), status == 1 {
+                    return true
+                }
+                return false
+            })
     }()
 
     required init(with injectionBag: InjectionBag) {
@@ -140,17 +141,19 @@ class ConversationViewModel: Stateable, ViewModel {
             self.conversationsService
                 .conversationsForCurrentAccount
                 .map({ [weak self] conversations in
-                    return conversations.filter({ conv -> Bool in
-                        let recipient1 = conv.participantUri
-                        let recipient2 = contactUri
-                        if recipient1 == recipient2 {
-                            return true
-                        }
-                        return false
-                    }).map({ [weak self] conversation -> (ConversationModel) in
-                        self?.conversation.value = conversation
-                        return conversation
-                    })
+                    return conversations
+                        .filter({ conv -> Bool in
+                            let recipient1 = conv.participantUri
+                            let recipient2 = contactUri
+                            if recipient1 == recipient2 {
+                                return true
+                            }
+                            return false
+                        })
+                        .map({ [weak self] conversation -> (ConversationModel) in
+                            self?.conversation.value = conversation
+                            return conversation
+                        })
                         .flatMap({ conversation in
                             conversation.messages.map({ message -> MessageViewModel? in
                                 if let injBag = self?.injectionBag {
@@ -159,11 +162,13 @@ class ConversationViewModel: Stateable, ViewModel {
                                 }
                                 return nil
                             })
-                        }).filter { (message) -> Bool in
+                        })
+                        .filter({ (message) -> Bool in
                             message != nil
-                    }.map { (message) -> MessageViewModel in
-                         return message!
-                    }
+                        })
+                        .map({ (message) -> MessageViewModel in
+                            return message!
+                        })
                 })
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] messageViewModels in
@@ -180,7 +185,8 @@ class ConversationViewModel: Stateable, ViewModel {
                         msg.append(composingIndicator)
                     }
                     self.messages.value = msg
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
 
             self.contactsService
                 .getContactRequestVCard(forContactWithRingId: self.conversation.value.hash)
@@ -204,7 +210,8 @@ class ConversationViewModel: Stateable, ViewModel {
                         let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                         self?.profileImageData.value = data
                     }
-                }).disposed(by: disposeBag)
+                })
+                .disposed(by: disposeBag)
 
             if let account = self.accountService
                 .getAccount(fromAccountId: self.conversation.value.accountId),
@@ -224,7 +231,8 @@ class ConversationViewModel: Stateable, ViewModel {
             })
                 .subscribe(onNext: { [weak self] _ in
                     self?.inviteButtonIsAvailable.onNext(false)
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
 
             // subscribe to presence updates for the conversation's associated contact
             if let contactPresence = self.presenceService
@@ -237,12 +245,14 @@ class ConversationViewModel: Stateable, ViewModel {
                         guard let uri: String = serviceEvent
                             .getEventInput(ServiceEventInput.uri),
                             let accountID: String = serviceEvent
-                                .getEventInput(ServiceEventInput.accountId) else {return false}
+                                .getEventInput(ServiceEventInput.accountId) else { return false }
                         return uri == self?.conversation.value.hash &&
                             accountID == self?.conversation.value.accountId
-                    }).subscribe(onNext: { [weak self] _ in
+                    })
+                    .subscribe(onNext: { [weak self] _ in
                         self?.subscribePresence()
-                    }).disposed(by: self.disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
             }
 
             if let contactUserName = contact?.userName {
@@ -254,26 +264,29 @@ class ConversationViewModel: Stateable, ViewModel {
                     .filter({ [weak self] lookupNameResponse in
                         return lookupNameResponse.address != nil &&
                             (lookupNameResponse.address == contactUri ||
-                        lookupNameResponse.address == self?.conversation.value.hash)
-                    }).subscribe(onNext: { [weak self] lookupNameResponse in
+                                lookupNameResponse.address == self?.conversation.value.hash)
+                    })
+                    .subscribe(onNext: { [weak self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
                             self?.userName.value = name
                             contact?.userName = name
                         } else if let address = lookupNameResponse.address {
                             self?.userName.value = address
                         }
-                    }).disposed(by: disposeBag)
+                    })
+                    .disposed(by: disposeBag)
 
                 self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: self.conversation.value.hash)
             }
             self.typingIndicator
                 .subscribe(onNext: { [weak self] (typing) in
-                if typing {
-                    self?.addComposingIndicatorMsg()
-                } else {
-                    self?.removeComposingIndicatorMsg()
-                }
-            }).disposed(by: self.disposeBag)
+                    if typing {
+                        self?.addComposingIndicatorMsg()
+                    } else {
+                        self?.removeComposingIndicatorMsg()
+                    }
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 
@@ -308,7 +321,7 @@ class ConversationViewModel: Stateable, ViewModel {
                            displayName.asObservable()) {(userName, displayname) in
                             guard let displayname = displayname, !displayname.isEmpty else { return userName }
                             return displayname
-        }
+            }
     }()
 
     // My contact's
@@ -383,7 +396,7 @@ class ConversationViewModel: Stateable, ViewModel {
             self.sendContactRequest()
         }
 
-        guard let account = self.accountService.currentAccount else {return}
+        guard let account = self.accountService.currentAccount else { return }
         //if in call send sip msg
         if let call = self.callService.call(participantHash: self.conversation.value.hash, accountID: self.conversation.value.accountId) {
             self.callService.sendTextMessage(callID: call.callId, message: content, accountId: account)
@@ -395,7 +408,8 @@ class ConversationViewModel: Stateable, ViewModel {
                          recipientUri: self.conversation.value.participantUri)
             .subscribe(onCompleted: { [weak self] in
                 self?.log.debug("Message sent")
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func setMessagesAsRead() {
@@ -412,7 +426,8 @@ class ConversationViewModel: Stateable, ViewModel {
                                accountURI: ringId)
             .subscribe(onCompleted: { [weak self] in
                 self?.log.debug("Messages set as read")
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
 
     func setMessageAsRead(daemonId: String, messageId: Int64) {
@@ -430,7 +445,7 @@ class ConversationViewModel: Stateable, ViewModel {
                               accountURI: accountURI)
         self.conversation.value.messages.filter { (message) -> Bool in
             return message.daemonId == daemonId && message.messageId == messageId
-            }.first?.status = .displayed
+        }.first?.status = .displayed
     }
 
     func deleteMessage(messageId: Int64) {
@@ -444,8 +459,8 @@ class ConversationViewModel: Stateable, ViewModel {
         self.messages.value.removeAll(where: { $0.messageId == messageId })
     }
 
-    fileprivate var unreadMessagesCount: Int {
-        let unreadMessages =  self.conversation.value.messages
+    private var unreadMessagesCount: Int {
+        let unreadMessages = self.conversation.value.messages
             .filter({ message in
                 return message.status != .displayed &&
                     !message.isTransfer && message.incoming
@@ -471,7 +486,8 @@ class ConversationViewModel: Stateable, ViewModel {
                 self?.log.info("contact request sent")
                 }, onError: { [weak self] (error) in
                     self?.log.info(error)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.presenceService.subscribeBuddy(withAccountId: currentAccount.id,
                                             withUri: self.conversation.value.hash,
                                             withFlag: true)
@@ -501,7 +517,8 @@ class ConversationViewModel: Stateable, ViewModel {
                         .clearHistory(conversation: conversation,
                                       keepConversation: false)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func ban(withItem item: ContactRequestItem) -> Observable<Void> {
@@ -548,7 +565,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil) {
-        guard let accountId = accountService.currentAccount?.id else {return}
+        guard let accountId = accountService.currentAccount?.id else { return }
         self.dataTransferService.sendFile(filePath: filePath,
                                           displayName: displayName,
                                           accountId: accountId,
@@ -557,7 +574,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func sendAndSaveFile(displayName: String, imageData: Data) {
-        guard let accountId = accountService.currentAccount?.id else {return}
+        guard let accountId = accountService.currentAccount?.id else { return }
         self.dataTransferService.sendAndSaveFile(displayName: displayName,
                                                  accountId: accountId,
                                                  peerInfoHash: self.conversation.value.hash,
@@ -566,7 +583,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func acceptTransfer(transferId: UInt64, interactionID: Int64, messageContent: inout String) -> NSDataTransferError {
-        guard let accountId = accountService.currentAccount?.id else {return .unknown}
+        guard let accountId = accountService.currentAccount?.id else { return .unknown }
         return self.dataTransferService.acceptTransfer(withId: transferId, interactionID: interactionID,
                                                        fileName: &messageContent, accountID: accountId,
                                                        conversationID: self.conversation.value.conversationId)
@@ -589,7 +606,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func isTransferImage(transferId: UInt64) -> Bool? {
-        guard let account = self.accountService.currentAccount else {return nil}
+        guard let account = self.accountService.currentAccount else { return nil }
         return self.dataTransferService.isTransferImage(withId: transferId,
                                                         accountID: account.id,
                                                         conversationID: self.conversation.value.conversationId)
@@ -645,7 +662,7 @@ class ConversationViewModel: Stateable, ViewModel {
             return
         }
         composingMessage = isComposing
-        guard let account = self.accountService.currentAccount else {return}
+        guard let account = self.accountService.currentAccount else { return }
         conversationsService
             .setIsComposingMsg(to: self.conversation.value.participantUri,
                                from: account.id,

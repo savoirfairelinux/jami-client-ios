@@ -91,7 +91,7 @@ extension String {
         return scalars.map { $0.map { String($0) } .reduce("", +) }
     }
 
-    fileprivate var emojiScalars: [UnicodeScalar] {
+    private var emojiScalars: [UnicodeScalar] {
 
         var chars: [UnicodeScalar] = []
         var previous: UnicodeScalar?

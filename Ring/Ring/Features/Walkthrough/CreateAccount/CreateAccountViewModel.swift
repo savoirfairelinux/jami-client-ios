@@ -182,7 +182,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     var notCancelable = true
 
     // MARK: L10n
-    let createAccountTitle  = L10n.CreateAccount.createAccountFormTitle
+    let createAccountTitle = L10n.CreateAccount.createAccountFormTitle
     let createAccountButton = L10n.Welcome.createAccount
     let usernameTitle = L10n.CreateAccount.enterNewUsernamePlaceholder
     let passwordTitle = L10n.CreateAccount.newPasswordPlaceholder
@@ -253,27 +253,32 @@ class CreateAccountViewModel: Stateable, ViewModel {
         })
     }()
 
-    required init (with injectionBag: InjectionBag) {
+    required init(with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
 
         //Loookup name request observer
-        self.username.asObservable().subscribe(onNext: { [unowned self] username in
-            self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
-        }).disposed(by: disposeBag)
+        self.username.asObservable()
+            .subscribe(onNext: { [weak self] username in
+                self?.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+            })
+            .disposed(by: disposeBag)
 
-        self.nameService.usernameValidationStatus.asObservable().subscribe(onNext: { [weak self] (status) in
-            switch status {
-            case .lookingUp:
-                self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability)
-            case .invalid:
-                self?.usernameValidationState.value = .invalid(message: L10n.CreateAccount.invalidUsername)
-            case .alreadyTaken:
-                self?.usernameValidationState.value = .unavailable(message: L10n.CreateAccount.usernameAlreadyTaken)
-            default:
-                self?.usernameValidationState.value = .available
-            }
-        }).disposed(by: self.disposeBag)
+        self.nameService.usernameValidationStatus
+            .asObservable()
+            .subscribe(onNext: { [weak self] (status) in
+                switch status {
+                case .lookingUp:
+                    self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability)
+                case .invalid:
+                    self?.usernameValidationState.value = .invalid(message: L10n.CreateAccount.invalidUsername)
+                case .alreadyTaken:
+                    self?.usernameValidationState.value = .unavailable(message: L10n.CreateAccount.usernameAlreadyTaken)
+                default:
+                    self?.usernameValidationState.value = .available
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func createAccount() {
@@ -286,7 +291,9 @@ class CreateAccountViewModel: Stateable, ViewModel {
             .addRingAccount(username: username,
                             password: password,
                             enable: self.notificationSwitch.value)
-            .subscribe(onNext: { [unowned self] (account) in
+            .subscribe(onNext: { [weak self] (account) in
+                guard let self = self else { return }
+
                 if username.isEmpty {
                     self.accountCreationState.value = .success
                     DispatchQueue.main.async {
@@ -317,8 +324,9 @@ class CreateAccountViewModel: Stateable, ViewModel {
                             return
                         }
                         self.accountCreationState.value = .timeOut
-                }
-                }, onError: { [unowned self] (error) in
+                    }
+                }, onError: { [weak self] (error) in
+                    guard let self = self else { return }
                     if let error = error as? AccountCreationError {
                         self.accountCreationState.value = .error(error: error)
                     } else {

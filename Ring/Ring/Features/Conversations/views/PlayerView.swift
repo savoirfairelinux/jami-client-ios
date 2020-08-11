@@ -72,7 +72,7 @@ class PlayerView: UIView {
         progressSlider.setThumbImage(circleImage, for: .highlighted)
     }
 
-    fileprivate func makeCircleWith(size: CGSize, backgroundColor: UIColor) -> UIImage? {
+    private func makeCircleWith(size: CGSize, backgroundColor: UIColor) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(backgroundColor.cgColor)
@@ -100,19 +100,22 @@ class PlayerView: UIView {
                         self?.incomingImage.image = image
                     }
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.playerPosition
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] position in
                 self?.progressSlider.value = position
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.playerDuration
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] duration in
                 let durationString = self?.durationString(microcec: duration) ?? ""
                 self?.durationLabel.text = durationString
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.pause
             .asObservable()
             .observeOn(MainScheduler.instance)
@@ -122,7 +125,8 @@ class PlayerView: UIView {
                     image = UIImage(asset: Asset.unpauseCall)
                 }
                 self?.togglePause.setBackgroundImage(image, for: .normal)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.audioMuted
             .asObservable()
             .observeOn(MainScheduler.instance)
@@ -132,22 +136,26 @@ class PlayerView: UIView {
                     image = UIImage(asset: Asset.audioOff)
                 }
                 self?.muteAudio.setBackgroundImage(image, for: .normal)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.hasVideo
-                   .asObservable()
-                   .observeOn(MainScheduler.instance)
-                   .subscribe(onNext: { [weak self] hasVideo in
-                    self?.muteAudio.isHidden = !hasVideo
-                   }).disposed(by: self.disposeBag)
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] hasVideo in
+                self?.muteAudio.isHidden = !hasVideo
+            })
+            .disposed(by: self.disposeBag)
         self.muteAudio.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.muteAudio()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.togglePause.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.toglePause()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func durationString(microcec: Float) -> String {

@@ -68,7 +68,7 @@ class AccountConfigModel: Object {
     /**
      The collection of configuration elements.
      */
-    fileprivate var configValues = [ConfigKeyModel: String]()
+    private var configValues = [ConfigKeyModel: String]()
 
     /**
      logguer

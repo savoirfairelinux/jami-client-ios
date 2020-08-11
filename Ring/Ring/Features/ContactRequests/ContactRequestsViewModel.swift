@@ -37,10 +37,10 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     let presenceService: PresenceService
     let profileService: ProfilesService
 
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let log = SwiftyBeaver.self
+    private let disposeBag = DisposeBag()
+    private let log = SwiftyBeaver.self
 
-    fileprivate let injectionBag: InjectionBag
+    private let injectionBag: InjectionBag
 
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService
@@ -56,7 +56,9 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     lazy var contactRequestItems: Observable<[ContactRequestItem]> = {
         return self.contactsService.contactRequests
             .asObservable()
-            .map({ [unowned self] contactRequests in
+            .map({ [weak self] contactRequests in
+                guard let self = self else { return [] }
+
                 return contactRequests
                     .filter { $0.accountId == self.accountsService.currentAccount?.id }
                     .sorted { $0.receivedDate > $1.receivedDate }
@@ -73,9 +75,8 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     lazy var hasInvitations: Observable<Bool> = {
         return self.contactsService.contactRequests
             .asObservable()
-            .map({ [unowned self] contactRequests in
-                return contactRequests
-                    .filter { $0.accountId == self.accountsService.currentAccount?.id }
+            .map({ [weak self] contactRequests in
+                return contactRequests.filter { $0.accountId == self?.accountsService.currentAccount?.id }
             })
             .map({ items in
                 return !items.isEmpty
@@ -112,7 +113,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         }
     }
 
-    fileprivate func lookupUserName(withItem item: ContactRequestItem) {
+    private func lookupUserName(withItem item: ContactRequestItem) {
 
         self.nameService.usernameLookupStatus.asObservable()
             .filter({ lookupNameResponse in
@@ -129,8 +130,8 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         guard let currentAccount = accountsService.currentAccount else { return }
 
         self.nameService.lookupAddress(withAccount: currentAccount.id,
-                                              nameserver: "",
-                                              address: item.contactRequest.ringId)
+                                       nameserver: "",
+                                       address: item.contactRequest.ringId)
     }
 
     func showConversation (forRingId ringId: String) {

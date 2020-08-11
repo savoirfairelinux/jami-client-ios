@@ -23,7 +23,12 @@
 import RxSwift
 import SwiftyBeaver
 
+enum ConversationServiceError: Error {
+    case selfIsNil
+}
+
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class ConversationsService {
 
     /**
@@ -31,12 +36,12 @@ class ConversationsService {
      */
     private let log = SwiftyBeaver.self
 
-    fileprivate let messageAdapter: MessagesAdapter
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let textPlainMIMEType = "text/plain"
+    private let messageAdapter: MessagesAdapter
+    private let disposeBag = DisposeBag()
+    private let textPlainMIMEType = "text/plain"
     private let geoLocationMIMEType = "application/geo"
 
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
 
     var conversations = Variable([ConversationModel]())
@@ -113,7 +118,11 @@ class ConversationsService {
                      from senderAccount: AccountModel,
                      recipientUri: String) -> Completable {
 
-        return Completable.create(subscribe: { [unowned self] completable in
+        return Completable.create(subscribe: { [weak self] completable in
+            guard let self = self else {
+                completable(.error(ConversationServiceError.selfIsNil))
+                return Disposables.create()
+            }
             let contentDict = [self.textPlainMIMEType: content]
             let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
@@ -133,8 +142,8 @@ class ConversationsService {
                                  toConversationWith: stringUri,
                                  toAccountId: senderAccount.id,
                                  shouldRefreshConversations: true)
-                    .subscribe(onCompleted: { [unowned self] in
-                        self.log.debug("Message saved")
+                    .subscribe(onCompleted: { [weak self] in
+                        self?.log.debug("Message saved")
                     })
                     .disposed(by: self.disposeBag)
             }
@@ -170,7 +179,11 @@ class ConversationsService {
                           shouldRefreshConversations: Bool,
                           interactionType: InteractionType = InteractionType.text) -> Completable {
 
-        return Completable.create(subscribe: { [unowned self] completable in
+        return Completable.create(subscribe: { [weak self] completable in
+            guard let self = self else {
+                completable(.error(ConversationServiceError.selfIsNil))
+                return Disposables.create()
+            }
             self.messagesSemaphore.wait()
             self.dbManager.saveMessage(for: toAccountId,
                                        with: recipientRingId,
@@ -178,18 +191,21 @@ class ConversationsService {
                                        incoming: message.incoming,
                                        interactionType: interactionType, duration: 0)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onNext: { [unowned self] _ in
+                .subscribe(onNext: { [weak self] _ in
+                    guard let self = self else { return }
                     // append new message so it can be found if a status update is received before the DB finishes reload
-                    self.conversations.value.filter({ conversation in
-                        return conversation.participantUri == recipientRingId &&
-                            conversation.accountId == toAccountId
-                    }).first?.messages.append(message)
+                    self.conversations.value
+                        .filter({ conversation in
+                            return conversation.participantUri == recipientRingId &&
+                                conversation.accountId == toAccountId
+                        })
+                        .first?.messages.append(message)
                     self.messagesSemaphore.signal()
                     if shouldRefreshConversations {
                         self.dbManager.getConversationsObservable(for: toAccountId)
                             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                            .subscribe(onNext: { [unowned self] conversationsModels in
-                                self.conversations.value = conversationsModels
+                            .subscribe(onNext: { [weak self] conversationsModels in
+                                self?.conversations.value = conversationsModels
                             })
                             .disposed(by: (self.disposeBag))
                     }
@@ -197,7 +213,8 @@ class ConversationsService {
                     }, onError: { error in
                         self.messagesSemaphore.signal()
                         completable(.error(error))
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
 
             return Disposables.create { }
         })
@@ -239,7 +256,8 @@ class ConversationsService {
 
         self.dbManager.saveMessage(for: accountId, with: contactUri, message: message, incoming: false, interactionType: interactionType, duration: Int(duration))
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onNext: { [unowned self] _ in
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 if shouldUpdateConversation {
                     self.dbManager.getConversationsObservable(for: accountId)
                         .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
@@ -249,7 +267,8 @@ class ConversationsService {
                         .disposed(by: (self.disposeBag))
                 }
                 }, onError: { _ in
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func generateDataTransferMessage(transferId: UInt64,
@@ -258,7 +277,11 @@ class ConversationsService {
                                      photoIdentifier: String?,
                                      updateConversation: Bool) -> Completable {
 
-        return Completable.create(subscribe: { [unowned self] completable in
+        return Completable.create(subscribe: { [weak self] completable in
+            guard let self = self else {
+                completable(.error(ConversationServiceError.selfIsNil))
+                return Disposables.create()
+            }
 
             let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: transferInfo.totalSize, countStyle: .file)
             var messageContent = transferInfo.displayName + "\n" + fileSizeWithUnit
@@ -286,7 +309,8 @@ class ConversationsService {
                                        message: message, incoming: isIncoming,
                                        interactionType: interactionType, duration: 0)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onNext: { [unowned self] message in
+                .subscribe(onNext: { [weak self] message in
+                    guard let self = self else { return }
                     self.dataTransferMessageMap[transferId] = message
                     self.dbManager.getConversationsObservable(for: accountId)
                         .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
@@ -303,8 +327,8 @@ class ConversationsService {
                             completable(.completed)
                         })
                         .disposed(by: (self.disposeBag))
-                    }, onError: { [unowned self] error in
-                        self.messagesSemaphore.signal()
+                    }, onError: { [weak self] error in
+                        self?.messagesSemaphore.signal()
                         completable(.error(error))
                 })
                 .disposed(by: self.disposeBag)
@@ -313,7 +337,7 @@ class ConversationsService {
     }
 
     func status(forMessageId messageId: String) -> MessageStatus {
-        guard let status = UInt64(messageId) else { return .unknown}
+        guard let status = UInt64(messageId) else { return .unknown }
         return self.messageAdapter.status(forMessageId: status)
     }
 
@@ -335,15 +359,19 @@ class ConversationsService {
 
     func setMessagesAsRead(forConversation conversation: ConversationModel, accountId: String, accountURI: String) -> Completable {
 
-        return Completable.create(subscribe: { [unowned self] completable in
+        return Completable.create(subscribe: { [weak self] completable in
+            guard let self = self else {
+                completable(.error(ConversationServiceError.selfIsNil))
+                return Disposables.create()
+            }
 
             //Filter out read, outgoing, and transfer messages
             let unreadMessages = conversation.messages.filter({ messages in
                 return messages.status != .displayed && messages.incoming && !messages.isTransfer
             })
 
-            let messagesIds = unreadMessages.map({$0.messageId}).filter({$0 >= 0})
-            let messagesDaemonIds = unreadMessages.map({$0.daemonId}).filter({!$0.isEmpty})
+            let messagesIds = unreadMessages.map({ $0.messageId }).filter({ $0 >= 0 })
+            let messagesDaemonIds = unreadMessages.map({ $0.daemonId }).filter({ !$0.isEmpty })
             messagesDaemonIds.forEach { (msgId) in
                 self.messageAdapter
                     .setMessageDisplayedFrom(conversation.hash,
@@ -356,27 +384,30 @@ class ConversationsService {
                                    withStatus: .displayed,
                                    accountId: accountId)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onCompleted: { [unowned self] in
-                        self.dbManager.getConversationsObservable(for: accountId)
-                            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                            .subscribe(onNext: { [unowned self] conversationsModels in
-                                self.conversations.value = conversationsModels
-                            })
-                            .disposed(by: (self.disposeBag))
+                .subscribe(onCompleted: { [weak self] in
+                    guard let self = self else { return }
+                    self.dbManager.getConversationsObservable(for: accountId)
+                        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                        .subscribe(onNext: { [weak self] conversationsModels in
+                            self?.conversations.value = conversationsModels
+                        })
+                        .disposed(by: (self.disposeBag))
                     completable(.completed)
                 }, onError: { error in
                     completable(.error(error))
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
             return Disposables.create { }
         })
     }
 
     func deleteMessage(messagesId: Int64, accountId: String) -> Completable {
-        return Completable.create(subscribe: { [unowned self] completable in
+        return Completable.create(subscribe: { [weak self] completable in
+            guard let self = self else { return Disposables.create { } }
             self.dbManager
                 .deleteMessage(messagesId: messagesId, accountId: accountId)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onCompleted: { completable(.completed) }, onError: { error in completable(.error(error))})
+                .subscribe(onCompleted: { completable(.completed) }, onError: { error in completable(.error(error)) })
                 .disposed(by: self.disposeBag)
             return Disposables.create { }
         })
@@ -389,18 +420,20 @@ class ConversationsService {
     func clearHistory(conversation: ConversationModel, keepConversation: Bool) {
         self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: conversation.participantUri, keepConversation: keepConversation)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onCompleted: { [unowned self] in
+            .subscribe(onCompleted: { [weak self] in
+                guard let self = self else { return }
                 self.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
                 self.dbManager
                     .getConversationsObservable(for: conversation.accountId)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                    .subscribe(onNext: { [unowned self] conversationsModels in
-                        self.conversations.value = conversationsModels
+                    .subscribe(onNext: { [weak self] conversationsModels in
+                        self?.conversations.value = conversationsModels
                     })
                     .disposed(by: (self.disposeBag))
                 }, onError: { error in
                     self.log.error(error)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func removeSavedFiles(accountId: String, conversationId: String) {
@@ -409,11 +442,13 @@ class ConversationsService {
             return
         }
         let downloadsURL = documentsURL.appendingPathComponent(downloadsFolderName)
-            .appendingPathComponent(accountId).appendingPathComponent(conversationId)
+            .appendingPathComponent(accountId)
+            .appendingPathComponent(conversationId)
         try? FileManager.default.removeItem(atPath: downloadsURL.path)
         let recordedFolderName = Directories.recorded.rawValue
         let recordedURL = documentsURL.appendingPathComponent(recordedFolderName)
-            .appendingPathComponent(accountId).appendingPathComponent(conversationId)
+            .appendingPathComponent(accountId)
+            .appendingPathComponent(conversationId)
         try? FileManager.default.removeItem(atPath: recordedURL.path)
     }
 
@@ -450,7 +485,8 @@ class ConversationsService {
                                          withStatus: status,
                                          accountId: account.id)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                    .subscribe(onCompleted: { [unowned self] in
+                    .subscribe(onCompleted: { [weak self] in
+                        guard let self = self else { return }
                         self.messagesSemaphore.signal()
                         self.log.info("messageStatusChanged: Message status updated")
                         var event = ServiceEvent(withEventType: .messageStateChanged)
@@ -484,7 +520,8 @@ class ConversationsService {
                                   withStatus: transferStatus,
                                   accountId: accountId)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onCompleted: { [unowned self] in
+            .subscribe(onCompleted: { [weak self] in
+                guard let self = self else { return }
                 self.messagesSemaphore.signal()
                 self.log.info("ConversationService: transferStatusChanged - transfer status updated")
                 let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
@@ -524,7 +561,12 @@ extension ConversationsService {
                       recipientUri: String, shouldRefreshConversations: Bool,
                       shouldTryToSave: Bool) -> Completable {
 
-        return Completable.create(subscribe: { [unowned self] completable in
+        return Completable.create(subscribe: { [weak self] completable in
+            guard let self = self else {
+                completable(.error(ConversationServiceError.selfIsNil))
+                return Disposables.create()
+            }
+
             let contentDict = [self.geoLocationMIMEType: content]
             let messageId = String(self.messageAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
@@ -543,8 +585,8 @@ extension ConversationsService {
                                   toAccountId: senderAccount.id,
                                   shouldRefreshConversations: shouldRefreshConversations,
                                   contactUri: recipientUri)
-                    .subscribe(onCompleted: { [unowned self] in
-                        self.log.debug("Location saved")
+                    .subscribe(onCompleted: { [weak self] in
+                        self?.log.debug("Location saved")
                     })
                     .disposed(by: self.disposeBag)
             }
@@ -577,15 +619,20 @@ extension ConversationsService {
     }
 
     func deleteLocationUpdate(incoming: Bool, peerUri: String, accountId: String, shouldRefreshConversations: Bool) -> Completable {
-        return Completable.create(subscribe: { [unowned self] completable in
+        return Completable.create(subscribe: { [weak self] completable in
+            guard let self = self else {
+                completable(.error(ConversationServiceError.selfIsNil))
+                return Disposables.create()
+            }
+
             self.dbManager.deleteLocationUpdates(incoming: incoming, peerUri: peerUri, accountId: accountId)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onCompleted: {
                     if shouldRefreshConversations {
                         self.dbManager.getConversationsObservable(for: accountId)
                             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                            .subscribe(onNext: { [unowned self] conversationsModels in
-                                self.conversations.value = conversationsModels
+                            .subscribe(onNext: { [weak self] conversationsModels in
+                                self?.conversations.value = conversationsModels
                             })
                             .disposed(by: (self.disposeBag))
                     }

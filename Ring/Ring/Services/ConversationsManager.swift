@@ -36,9 +36,9 @@ class ConversationsManager: MessagesAdapterDelegate {
     private let locationSharingService: LocationSharingService
 
     private let disposeBag = DisposeBag()
-    fileprivate let textPlainMIMEType = "text/plain"
+    private let textPlainMIMEType = "text/plain"
     private let geoLocationMIMEType = "application/geo"
-    fileprivate let maxSizeForAutoaccept = 20 * 1024 * 1024
+    private let maxSizeForAutoaccept = 20 * 1024 * 1024
     private let notificationHandler = LocalNotificationsHelper()
 
     // swiftlint:disable cyclomatic_complexity
@@ -71,8 +71,8 @@ class ConversationsManager: MessagesAdapterDelegate {
                 guard let contactUri = data[NotificationUserInfoKeys.participantID.rawValue],
                       let hash = JamiURI(schema: URIType.ring, infoHach: contactUri).hash else { return }
 
-                DispatchQueue.main.async { [unowned self] in
-                    self.searchNameAndPresentNotification(data: data, hash: hash)
+                DispatchQueue.main.async { [weak self] in
+                    self?.searchNameAndPresentNotification(data: data, hash: hash)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -99,7 +99,8 @@ class ConversationsManager: MessagesAdapterDelegate {
                                   shouldTryToSave: shouldTryToSave)
                     .subscribe(onCompleted: { [weak self] in
                         self?.log.debug("[LocationSharingService] Location sent")
-                    }).disposed(by: self.disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
 
@@ -131,14 +132,13 @@ class ConversationsManager: MessagesAdapterDelegate {
         self.callService.newMessage.filter({ (event) in
             return  event.eventType == ServiceEventType.newIncomingMessage
         })
-            .subscribe(onNext: { [unowned self] event in
-                if self.accountsService.boothMode() {
-                    return
-                }
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self else { return }
+                if self.accountsService.boothMode() { return }
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
-                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
-                    else {return}
+                      let messageContent: String = event.getEventInput(ServiceEventInput.content),
+                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
+                    else { return }
                 self.handleNewMessage(from: peerUri,
                                       to: accountId,
                                       messageId: "",
@@ -150,15 +150,14 @@ class ConversationsManager: MessagesAdapterDelegate {
         self.callService.newMessage.filter({ (event) in
             return  event.eventType == ServiceEventType.newOutgoingMessage
         })
-            .subscribe(onNext: { [unowned self] event in
-                if self.accountsService.boothMode() {
-                    return
-                }
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self else { return }
+                if self.accountsService.boothMode() { return }
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
-                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
-                    let accountURi: String = event.getEventInput(ServiceEventInput.accountUri)
-                    else {return}
+                      let messageContent: String = event.getEventInput(ServiceEventInput.content),
+                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
+                      let accountURi: String = event.getEventInput(ServiceEventInput.accountUri)
+                    else { return }
                 let message = self.conversationService.createMessage(withId: "",
                                                                      withContent: messageContent,
                                                                      byAuthor: accountURi,
@@ -180,13 +179,12 @@ class ConversationsManager: MessagesAdapterDelegate {
                 return  event.eventType == ServiceEventType.dataTransferCreated ||
                     event.eventType == ServiceEventType.dataTransferChanged
             })
-            .subscribe(onNext: { [unowned self] event in
-                if self.accountsService.boothMode() {
-                    return
-                }
-                guard   let transferId: UInt64 = event.getEventInput(ServiceEventInput.transferId),
-                    let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId),
-                    let currentAccount = self.accountsService.currentAccount else {
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self else { return }
+                if self.accountsService.boothMode() { return }
+                guard let transferId: UInt64 = event.getEventInput(ServiceEventInput.transferId),
+                      let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId),
+                      let currentAccount = self.accountsService.currentAccount else {
                         self.log.error("ConversationsManager: can't find transferInfo")
                         return
                 }
@@ -201,9 +199,10 @@ class ConversationsManager: MessagesAdapterDelegate {
                                                      updateConversation: currentAccount.id == transferInfo.accountId )
                         .subscribe(onCompleted: {
                             guard let transferInfo = self.dataTransferService
-                                .getTransferInfo(withId: transferId) else {return}
+                                .getTransferInfo(withId: transferId) else { return }
                             self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: transferInfo.accountId)
-                        }).disposed(by: self.disposeBag)
+                        })
+                        .disposed(by: self.disposeBag)
                 case .dataTransferChanged:
                     self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: transferInfo.lastEvent))")
                     var status: DataTransferStatus = .unknown
@@ -252,19 +251,19 @@ class ConversationsManager: MessagesAdapterDelegate {
             return
         }
         if let content = message[textPlainMIMEType] {
-            DispatchQueue.main.async { [unowned self] in
-                self.handleNewMessage(from: senderAccount,
-                                      to: receiverAccountId,
-                                      messageId: messageId,
-                                      message: content,
-                                      peerName: nil)
+            DispatchQueue.main.async { [weak self] in
+                self?.handleNewMessage(from: senderAccount,
+                                       to: receiverAccountId,
+                                       messageId: messageId,
+                                       message: content,
+                                       peerName: nil)
             }
         } else if let content = message[geoLocationMIMEType] {
-            DispatchQueue.main.async { [unowned self] in
-                self.handleReceivedLocationUpdate(from: senderAccount,
-                                                  to: receiverAccountId,
-                                                  messageId: messageId,
-                                                  locationJSON: content)
+            DispatchQueue.main.async { [weak self] in
+                self?.handleReceivedLocationUpdate(from: senderAccount,
+                                                   to: receiverAccountId,
+                                                   messageId: messageId,
+                                                   locationJSON: content)
             }
         }
     }
@@ -274,7 +273,7 @@ class ConversationsManager: MessagesAdapterDelegate {
               let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
 
         let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
-        guard let peerUri = JamiURI.init(schema: type, infoHach: peerUri, account: accountForMessage).uriString else {return}
+        guard let peerUri = JamiURI.init(schema: type, infoHach: peerUri, account: accountForMessage).uriString else { return }
 
         if self.conversationService.isBeginningOfLocationSharing(incoming: true, contactUri: peerUri, accountId: accountId) {
             // Handle notification
@@ -345,7 +344,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             .isAccountSip() ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
                                            infoHach: peerUri,
-                                           account: accountForMessage).uriString else {return}
+                                           account: accountForMessage).uriString else { return }
         let message = self.conversationService.createMessage(withId: messageId,
                                                              withContent: content,
                                                              byAuthor: uriString,
@@ -385,7 +384,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                     self?.notificationHandler.presentMessageNotification(data: data)
                 } else {
                     guard let hash = JamiURI(schema: URIType.ring,
-                                             infoHach: info.peer).hash else {return}
+                                             infoHach: info.peer).hash else { return }
 
                     self?.searchNameAndPresentNotification(data: data, hash: hash)
                 }
@@ -412,7 +411,8 @@ class ConversationsManager: MessagesAdapterDelegate {
                     data [NotificationUserInfoKeys.name.rawValue] = address
                     self?.notificationHandler.presentMessageNotification(data: data)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.nameService.lookupAddress(withAccount: accountId, nameserver: "", address: hash)
     }
 
@@ -425,7 +425,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
         guard let stringUri = JamiURI.init(schema: type,
                                            infoHach: uri,
-                                           account: account).uriString else {return}
+                                           account: account).uriString else { return }
         self.conversationService.messageStatusChanged(status,
                                                       for: messageId,
                                                       fromAccount: account,
@@ -437,7 +437,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             (transferInfo.lastEvent != .wait_peer_acceptance && transferInfo.lastEvent != .wait_host_acceptance) {
             return
         }
-        guard let messageData = self.conversationService.dataTransferMessageMap[transferId] else {return}
+        guard let messageData = self.conversationService.dataTransferMessageMap[transferId] else { return }
         var filename = ""
         if self.dataTransferService.acceptTransfer(withId: transferId, interactionID: messageData.messageID,
                                                    fileName: &filename, accountID: accountId,

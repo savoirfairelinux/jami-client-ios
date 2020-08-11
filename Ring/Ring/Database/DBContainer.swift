@@ -231,11 +231,11 @@ extension Connection {
     public var userVersion: Int? {
         get {
             if let version = try? scalar("PRAGMA user_version"),
-                let intVersion =  version as? Int64 {return Int(intVersion)}
+                let intVersion = version as? Int64 { return Int(intVersion) }
             return nil
         }
         set {
-            if let version = newValue {_ = try? run("PRAGMA user_version = \(version)")}
+            if let version = newValue { _ = try? run("PRAGMA user_version = \(version)") }
         }
     }
 }

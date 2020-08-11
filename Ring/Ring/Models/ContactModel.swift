@@ -28,7 +28,7 @@ class ContactModel: Equatable {
     var banned: Bool = false
     var type = URIType.ring
 
-    public static func == (lhs: ContactModel, rhs: ContactModel) -> Bool {
+    static func == (lhs: ContactModel, rhs: ContactModel) -> Bool {
         return lhs.uriString == rhs.uriString
     }
 
@@ -57,7 +57,7 @@ class ContactModel: Equatable {
             self.added = addedDate
         }
         if let banned = dictionary["banned"],
-            let isBanned  = banned.toBool() {
+            let isBanned = banned.toBool() {
             self.banned = isBanned
         }
     }
