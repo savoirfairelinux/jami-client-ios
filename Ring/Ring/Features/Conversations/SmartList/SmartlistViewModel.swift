@@ -46,9 +46,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     fileprivate let profileService: ProfilesService
     fileprivate let callService: CallsService
 
-    lazy var currentAccount: AccountModel? = {
-        return self.accountsService.currentAccount
-    }()
+    var currentAccount: AccountModel? { self.accountsService.currentAccount }
 
     var searching = PublishSubject<Bool>()
 
@@ -57,8 +55,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     lazy var hideNoConversationsMessage: Observable<Bool> = {
         return Observable<Bool>
             .combineLatest(self.conversations,
-                           self.searching.asObservable()
-                            .startWith(false),
+                           self.searching.asObservable().startWith(false),
                            resultSelector: {(conversations, searching) -> Bool in
                             if searching {return true}
                             if let convf = conversations.first {
@@ -73,16 +70,17 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         return self.accountsService
             .accountsObservable.asObservable()
             .map({ [weak self] accountsModels in
-            var items = [AccountItem]()
-            guard let self = self else { return items }
-            for account in accountsModels {
-                items.append(AccountItem(account: account,
-                                         profileObservable: self.profileService.getAccountProfile(accountId: account.id)))
-            }
-            return items
-        })
+                var items = [AccountItem]()
+                guard let self = self else { return items }
+                for account in accountsModels {
+                    items.append(AccountItem(account: account,
+                                             profileObservable: self.profileService.getAccountProfile(accountId: account.id)))
+                }
+                return items
+            })
     }()
 
+    /// For FilterConversationDataSource protocol
     var conversationViewModels = [ConversationViewModel]()
 
     func networkConnectionState() -> ConnectionType {
@@ -220,6 +218,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             .disposed(by: self.disposeBag)
     }
 
+    /// For FilterConversationDataSource protocol
     func conversationFound(conversation: ConversationViewModel?, name: String) {
         contactFoundConversation.value = conversation
     }
@@ -272,7 +271,8 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         }
     }
 
-    func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+    /// For FilterConversationDataSource protocol
+    func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
         conversationViewModel))
     }
