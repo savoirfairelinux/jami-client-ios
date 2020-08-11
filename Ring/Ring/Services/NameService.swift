@@ -1,7 +1,8 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,42 +35,43 @@ enum UsernameValidationStatus {
 
 let registeredNamesKey = "REGISTERED_NAMES_KEY"
 
-class NameService: NameRegistrationAdapterDelegate {
-    /**
-     logguer
-     */
+class NameService {
+
+    /// Logger
     private let log = SwiftyBeaver.self
 
-    /**
-     Used to make lookup name request to the daemon
-    */
+    private let disposeBag = DisposeBag()
+
+    /// Used to make lookup name request to the daemon
     fileprivate let nameRegistrationAdapter: NameRegistrationAdapter
 
     fileprivate var delayedLookupNameCall: DispatchWorkItem?
 
     fileprivate let lookupNameCallDelay = 0.5
 
-    /**
-     Status of the current username validation request
-     */
+    /// Status of the current username validation request
     var usernameValidationStatus = PublishSubject<UsernameValidationStatus>()
     fileprivate let registrationStatus = PublishSubject<ServiceEvent>()
     var sharedRegistrationStatus: Observable<ServiceEvent>
 
+    /// Status of the current username lookup request
+    var usernameLookupStatus = PublishSubject<LookupNameResponse>()
+
+    private let userSearchResponseStream = PublishSubject<UserSearchResponse>()
+    /// Triggered when we receive a UserSearchResponse from the daemon
+    let userSearchResponseShared: Observable<UserSearchResponse>
+
     init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter) {
         self.nameRegistrationAdapter = nameRegistrationAdapter
         self.sharedRegistrationStatus = registrationStatus.share()
+
+        self.userSearchResponseStream.disposed(by: self.disposeBag)
+        self.userSearchResponseShared = self.userSearchResponseStream.share()
+
         NameRegistrationAdapter.delegate = self
     }
 
-    /**
-     Status of the current username lookup request
-     */
-    var usernameLookupStatus = PublishSubject<LookupNameResponse>()
-
-    /**
-    Make a username lookup request to the daemon
-     */
+    /// Make a username lookup request to the daemon
     func lookupName(withAccount account: String, nameserver: String, name: String) {
 
         //Cancel previous lookups...
@@ -92,16 +94,12 @@ class NameService: NameRegistrationAdapterDelegate {
         }
     }
 
-    /**
-     Make an address lookup request to the daemon
-    */
+    /// Make an address lookup request to the daemon
     func lookupAddress(withAccount account: String, nameserver: String, address: String) {
         self.nameRegistrationAdapter.lookupAddress(withAccount: account, nameserver: nameserver, address: address)
     }
 
-    /**
-     Register the username into the the blockchain
-     */
+    /// Register the username into the the blockchain
     func registerName(withAccount account: String, password: String, name: String) {
         self.nameRegistrationAdapter.registerName(withAccount: account, password: password, name: name)
     }
@@ -122,13 +120,13 @@ class NameService: NameRegistrationAdapterDelegate {
             })
 
         let filteredDaemonSignals = self.sharedRegistrationStatus
-            .filter { (serviceEvent) -> Bool in
+            .filter({ (serviceEvent) -> Bool in
                 if serviceEvent.getEventInput(ServiceEventInput.accountId) != account {return false}
                 if serviceEvent.eventType != .nameRegistrationEnded {
                     return false
                 }
                 return true
-        }
+            })
         return Observable
             .combineLatest(registerName.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in
                 guard let status: NameRegistrationState = serviceEvent.getEventInput(ServiceEventInput.state)
@@ -142,7 +140,15 @@ class NameService: NameRegistrationAdapterDelegate {
             }
     }
 
-    // MARK: NameService delegate
+    /// Make a user search request to the daemon
+    func searchUser(withAccount account: String, query: String) {
+        self.nameRegistrationAdapter.searchUser(withAccount: account, query: query)
+        //self.triggerMockUserSearchResponse()
+    }
+}
+
+// MARK: NameRegistrationAdapterDelegate
+extension NameService: NameRegistrationAdapterDelegate {
 
     internal func registeredNameFound(with response: LookupNameResponse) {
 
@@ -175,5 +181,36 @@ class NameService: NameRegistrationAdapterDelegate {
         event.addEventInput(.state, value: response.state)
         event.addEventInput(.accountId, value: response.accountId)
         self.registrationStatus.onNext(event)
+    }
+
+    internal func userSearchEnded(with response: UserSearchResponse) {
+        self.log.debug("[UserSearch][NameService] response: \(String(describing: response.accountId))")
+        self.log.debug("[UserSearch][NameService] state: \(String(describing: response.state.rawValue))")
+        self.log.debug("[UserSearch][NameService] query: \(String(describing: response.query))")
+        self.log.debug("[UserSearch][NameService] results: \(String(describing: response.results))")
+
+        if response.state == .error {
+           self.triggerMockUserSearchResponse(accountid: response.accountId, query: response.query)
+        } else {
+            self.userSearchResponseStream.onNext(response)
+        }
+    }
+
+    // temporary function, if you see it please delete it or feel guilty
+    private func triggerMockUserSearchResponse(accountid: String = "", query: String = "") {
+        var mockReceivedDictionary: [String: String] = [:]
+        mockReceivedDictionary["username"] = "mockUsername"
+        mockReceivedDictionary["firstName"] = "Marco"
+        mockReceivedDictionary["lastName"] = "Datum"
+        mockReceivedDictionary["organization"] = "mockOrganization"
+        mockReceivedDictionary["profilePicture"] = "mock" // ignore for now
+
+        let newResponse = UserSearchResponse()
+        newResponse.accountId = accountid
+        newResponse.state = .found
+        newResponse.query = query
+        newResponse.results = [mockReceivedDictionary]
+
+        self.userSearchResponseStream.onNext(newResponse)
     }
 }

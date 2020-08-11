@@ -341,7 +341,7 @@ class AccountsService: AccountAdapterDelegate {
 
         //~ Filter the daemon signals to isolate the "account created" one.
         let filteredDaemonSignals = self.sharedResponseStream
-            .filter { (serviceEvent) -> Bool in
+            .filter({ (serviceEvent) -> Bool in
                 if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId {return false}
                 if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
                     throw AccountCreationError.generic
@@ -352,7 +352,7 @@ class AccountsService: AccountAdapterDelegate {
                 let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
                 let notRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Unregistered
                 return isRegistrationStateChanged && (isRegistered || notRegistered)
-        }
+            })
 
         //~ Make sure that we have the correct account added in the daemon, and return it.
         return Observable
@@ -930,12 +930,17 @@ class AccountsService: AccountAdapterDelegate {
         return false
     }
 
+    func isJams(for accountId: String) -> Bool {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
+        return !accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.managerUri)).isEmpty
+    }
+
     func enableAccount(enable: Bool, accountId: String) {
-        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.accountEnable));
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.accountEnable))
     }
 
     func enablePeerDiscovery(enable: Bool, accountId: String) {
-        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery));
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery))
     }
 
     func switchAccountPropertyTo(state: Bool, accountId: String, property: ConfigKeyModel) {

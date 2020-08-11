@@ -89,12 +89,12 @@ class ConversationCell: UITableViewCell, NibReusable {
 
         // presence
         if self.presenceIndicator != nil {
-        item.contactPresence.asObservable()
-            .observeOn(MainScheduler.instance)
-            .map { value in !value }
-            .bind(to: self.presenceIndicator!.rx.isHidden)
-            .disposed(by: self.disposeBag)
-            }
+            item.contactPresence.asObservable()
+                .observeOn(MainScheduler.instance)
+                .map { value in !value }
+                .bind(to: self.presenceIndicator!.rx.isHidden)
+                .disposed(by: self.disposeBag)
+        }
 
         // username
         item.bestName.asObservable()
