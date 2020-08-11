@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2020 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,18 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxDataSources
+#import "UserSearchResponse.h"
 
-struct ConversationSection {
-    var header: String
-    var items: [Item]
-}
+@implementation UserSearchResponse
 
-extension ConversationSection: SectionModelType {
-    typealias Item = ConversationViewModel
-
-    init(original: ConversationSection, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
+@end
