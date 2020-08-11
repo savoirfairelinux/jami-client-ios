@@ -37,10 +37,10 @@ class MessageCellLocationSharingReceived: MessageCellLocationSharing {
                 guard let self = self, let location = location else { return }
 
                 self.markerComponentObject = self.updateLocationAndMarker(location: location,
-                                                                                    imageData: conversationViewModel?.profileImageData.value,
-                                                                                    username: conversationViewModel?.userName.value,
-                                                                                    marker: self.myContactsLocationMarker,
-                                                                                    markerDump: self.markerComponentObject)
+                                                                          imageData: conversationViewModel?.profileImageData.value,
+                                                                          username: conversationViewModel?.userName.value,
+                                                                          marker: self.myContactsLocationMarker,
+                                                                          markerDump: self.markerComponentObject)
             })
             .disposed(by: self.disposeBag)
     }

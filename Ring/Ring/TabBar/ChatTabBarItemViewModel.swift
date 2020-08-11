@@ -30,14 +30,16 @@ class ChatTabBarItemViewModel: ViewModel, TabBarItemViewModel {
         let contactsService = injectionBag.contactsService
         self.itemBadgeValue = {
             return conversationService.conversationsForCurrentAccount.map({ conversations in
-                return conversations.map({ conversation in
-                    let unreadMsg = conversation.messages.filter({ message in
-                        //filtre out read messages, outgoing messages and messages that are displayed in contactrequest conversation
-                        return message.status != .displayed  && !message.isTransfer && message.incoming
-                            && (contactsService.contactRequest(withRingId: JamiURI.init(schema: URIType.ring, infoHach: message.authorURI).hash ?? "") == nil)
+                return conversations
+                    .map({ conversation in
+                        let unreadMsg = conversation.messages.filter({ message in
+                            //filtre out read messages, outgoing messages and messages that are displayed in contactrequest conversation
+                            return message.status != .displayed  && !message.isTransfer && message.incoming
+                                && (contactsService.contactRequest(withRingId: JamiURI.init(schema: URIType.ring, infoHach: message.authorURI).hash ?? "") == nil)
+                        })
+                        return unreadMsg.count
                     })
-                    return unreadMsg.count
-                }).reduce(0, +)
+                    .reduce(0, +)
             })
             }()
             .map { number in

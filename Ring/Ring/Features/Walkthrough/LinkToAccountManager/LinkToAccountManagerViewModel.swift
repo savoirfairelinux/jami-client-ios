@@ -32,8 +32,8 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
     var password = Variable<String>("")
     var manager = Variable<String>("")
     let notificationSwitch = Variable<Bool>(true)
-    fileprivate let accountsService: AccountsService
-    fileprivate let disposeBag = DisposeBag()
+    private let accountsService: AccountsService
+    private let disposeBag = DisposeBag()
     private let accountCreationState = Variable<AccountCreationState>(.unknown)
     lazy var createState: Observable<AccountCreationState> = {
         return self.accountCreationState.asObservable()
@@ -46,7 +46,7 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
                            self.manager.asObservable(),
                            self.createState) {( name: String, password: String, manager: String, state: AccountCreationState) -> Bool in
             return !name.isEmpty && !password.isEmpty && !manager.isEmpty && !state.isInProgress
-        }
+            }
     }()
 
     required init(with injectionBag: InjectionBag) {
@@ -60,7 +60,8 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
                                      password: password.value,
                                      serverUri: manager.value,
                                      emableNotifications: self.notificationSwitch.value)
-            .subscribe(onNext: { [unowned self] (_) in
+            .subscribe(onNext: { [weak self] (_) in
+                guard let self = self else { return }
                 self.accountCreationState.value = .success
                 self.enablePushNotifications(enable: self.notificationSwitch.value)
                 DispatchQueue.main.async {

@@ -87,10 +87,10 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     typealias ImageTuple = (isImage: Bool, data: UIImage?)
     private var transferedImages = [String: ImageTuple]()
 
-    fileprivate let dataTransferAdapter: DataTransferAdapter
+    private let dataTransferAdapter: DataTransferAdapter
 
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    private let disposeBag = DisposeBag()
+    private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
     let dbManager: DBManager
 
@@ -130,11 +130,14 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                 let name = pathUrl.lastPathComponent + "\n" + fileSizeWithUnit
                 fileName = name
                 //update db
-                self.dbManager.updateFileName(interactionID: interactionID, name: name, accountId: accountID).subscribe(onCompleted: { [weak self] in
-                      self?.log.debug("file name updated")
-                }, onError: { [weak self] _ in
-                     self?.log.error("update name failed")
-                }).disposed(by: self.disposeBag)
+                self.dbManager
+                    .updateFileName(interactionID: interactionID, name: name, accountId: accountID)
+                    .subscribe(onCompleted: { [weak self] in
+                        self?.log.debug("file name updated")
+                        }, onError: { [weak self] _ in
+                            self?.log.error("update name failed")
+                    })
+                    .disposed(by: self.disposeBag)
             }
             self.log.debug("DataTransferService: saving file to: \(pathUrl.path))")
             return acceptFileTransfer(withId: transferId, withPath: pathUrl.path)
@@ -151,7 +154,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         guard let pathUrl = getFilePath(fileName: fileName,
                                         inFolder: inFolder,
                                         accountID: accountID,
-                                        conversationID: conversationID) else {return nil}
+                                        conversationID: conversationID) else { return nil }
         let fileManager = FileManager.default
         var file: URL?
         if fileManager.fileExists(atPath: pathUrl.path) {
@@ -206,12 +209,12 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         guard let pathUrl = getFilePath(fileName: name,
                                         inFolder: Directories.downloads.rawValue,
                                         accountID: accountID,
-                                        conversationID: conversationID) else {return nil}
+                                        conversationID: conversationID) else { return nil }
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(
             kUTTagClassFilenameExtension,
             fileExtension,
-            nil) else {return nil}
+            nil) else { return nil }
         if UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage) {
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: pathUrl.path) {
@@ -238,7 +241,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
                                                               fileExtension,
-                                                              nil) else {return nil}
+                                                              nil) else { return nil }
         return UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage)
     }
 
@@ -279,7 +282,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                          conversationId: String) {
         guard let imagePath = self.getFilePathForTransfer(forFile: displayName,
                                                           accountID: accountId,
-                                                          conversationID: conversationId) else {return}
+                                                          conversationID: conversationId) else { return }
         do {
             try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
         } catch {
@@ -301,17 +304,18 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     // MARK: private
 
-    fileprivate func getFilePath(fileName: String, inFolder: String, accountID: String, conversationID: String) -> URL? {
+    private func getFilePath(fileName: String, inFolder: String, accountID: String, conversationID: String) -> URL? {
         let folderName = inFolder
         guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(folderName)
-            .appendingPathComponent(accountID).appendingPathComponent(conversationID)
+            .appendingPathComponent(accountID)
+            .appendingPathComponent(conversationID)
         return directoryURL.appendingPathComponent(fileName)
     }
 
-    fileprivate func getFilePathForDirectory(directory: String, fileName: String, accountID: String, conversationID: String) -> URL? {
+    private func getFilePathForDirectory(directory: String, fileName: String, accountID: String, conversationID: String) -> URL? {
         let folderName = directory
         let fileNameOnly = (fileName as NSString).deletingPathExtension
         let fileExtensionOnly = (fileName as NSString).pathExtension
@@ -320,7 +324,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(folderName)
-            .appendingPathComponent(accountID).appendingPathComponent(conversationID)
+            .appendingPathComponent(accountID)
+            .appendingPathComponent(conversationID)
         var isDirectory = ObjCBool(false)
         let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
         if directoryExists && isDirectory.boolValue {
@@ -353,7 +358,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         }
     }
 
-    fileprivate func getFilePathForTransfer(forFile fileName: String, accountID: String, conversationID: String) -> URL? {
+    private func getFilePathForTransfer(forFile fileName: String, accountID: String, conversationID: String) -> URL? {
         return self.getFilePathForDirectory(directory: Directories.downloads.rawValue,
                                             fileName: fileName,
                                             accountID: accountID,
@@ -369,11 +374,11 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     // MARK: DataTransferAdapter
 
-    fileprivate func dataTransferIdList() -> [UInt64]? {
+    private func dataTransferIdList() -> [UInt64]? {
         return self.dataTransferAdapter.dataTransferList() as? [UInt64]
     }
 
-    fileprivate func sendFile(withId transferId: inout UInt64, withInfo info: NSDataTransferInfo) -> NSDataTransferError {
+    private func sendFile(withId transferId: inout UInt64, withInfo info: NSDataTransferInfo) -> NSDataTransferError {
         var err: NSDataTransferError = .unknown
         let _id = UnsafeMutablePointer<UInt64>.allocate(capacity: 1)
         err = self.dataTransferAdapter.sendFile(with: info, withTransferId: _id)
@@ -381,19 +386,19 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return err
     }
 
-    fileprivate func acceptFileTransfer(withId transferId: UInt64, withPath filePath: String, withOffset offset: Int64 = 0) -> NSDataTransferError {
+    private func acceptFileTransfer(withId transferId: UInt64, withPath filePath: String, withOffset offset: Int64 = 0) -> NSDataTransferError {
         return self.dataTransferAdapter.acceptFileTransfer(withId: transferId, withFilePath: filePath, withOffset: offset)
     }
 
-    fileprivate func cancelDataTransfer(withId transferId: UInt64) -> NSDataTransferError {
+    private func cancelDataTransfer(withId transferId: UInt64) -> NSDataTransferError {
         return self.dataTransferAdapter.cancelDataTransfer(withId: transferId)
     }
 
-    fileprivate func dataTransferInfo(withId transferId: UInt64, withInfo info: inout NSDataTransferInfo) -> NSDataTransferError {
+    private func dataTransferInfo(withId transferId: UInt64, withInfo info: inout NSDataTransferInfo) -> NSDataTransferError {
         return self.dataTransferAdapter.dataTransferInfo(withId: transferId, with: info)
     }
 
-    fileprivate func dataTransferBytesProgress(withId transferId: UInt64, withTotal total: inout Int64, withProgress progress: inout Int64) -> NSDataTransferError {
+    private func dataTransferBytesProgress(withId transferId: UInt64, withTotal total: inout Int64, withProgress progress: inout Int64) -> NSDataTransferError {
         var err: NSDataTransferError = .unknown
         let _total = UnsafeMutablePointer<Int64>.allocate(capacity: 1)
         let _progress = UnsafeMutablePointer<Int64>.allocate(capacity: 1)

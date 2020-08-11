@@ -69,20 +69,23 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
                 if self?.viewModel.phoneNumber.last != nil {
                     self?.viewModel.phoneNumber.removeLast()
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.observableNumber
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { text in
                 self.clearButton.isHidden = text.isEmpty
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.playDefaultSound
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { play in
-                if !play {return}
+                if !play { return }
                 AudioServicesPlaySystemSound(1057)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.placeCallButton.isHidden = self.viewModel.inCallDialpad
     }
 
@@ -136,7 +139,7 @@ extension DialpadViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width/3
+        let width = collectionView.frame.width / 3
         return CGSize(width: width, height: 70)
     }
 

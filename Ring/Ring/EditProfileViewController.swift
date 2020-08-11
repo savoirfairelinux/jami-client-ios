@@ -31,7 +31,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
 
     // MARK: - members
     var model: EditProfileViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     // MARK: - functions
 
@@ -46,9 +46,12 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
             .disposed(by: disposeBag)
 
         //Binds the keyboard Send button action to the ViewModel
-        self.profileName.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
-            self.model.updateName(self.profileName.text!)
-        }).disposed(by: disposeBag)
+        self.profileName.rx.controlEvent(.editingDidEndOnExit)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.model.updateName(self.profileName.text!)
+            })
+            .disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -70,7 +73,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         self.profileName.text = self.model.name
     }
 
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+    @objc
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
 
         let alert = UIAlertController.init(title: nil,
                                            message: nil,

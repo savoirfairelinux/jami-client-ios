@@ -43,7 +43,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
 
     var blurEffect: UIVisualEffectView?
 
-    override open func didMoveToWindow() {
+    override func didMoveToWindow() {
         self.setupMessageTextView()
         super.didMoveToWindow()
         if #available(iOS 11.0, *) {
@@ -52,14 +52,14 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
             }
             self.bottomAnchor
                 .constraint(lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor,
-                                                               multiplier: 1)
+                            multiplier: 1)
                 .isActive = true
         }
         blurEffect?.removeFromSuperview()
         if #available(iOS 13.0, *) {
-            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
         } else {
-            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
         }
         self.backgroundColor = UIColor.jamiBackgroundColor
         if blurEffect != nil {

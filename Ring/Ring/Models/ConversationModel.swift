@@ -45,11 +45,11 @@ class ConversationModel: Equatable {
     self.accountId = accountId
     }
 
-    public static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
+    static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
         return (lhs.participantUri == rhs.participantUri && lhs.accountId == rhs.accountId)
     }
 
-    public func getMessage(withDaemonID daemonID: String) -> MessageModel? {
+    func getMessage(withDaemonID daemonID: String) -> MessageModel? {
         return self.messages.filter({ message in
            return message.daemonId == daemonID
         }).first

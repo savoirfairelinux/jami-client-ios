@@ -95,7 +95,8 @@ private class OutgoingLocationSharingInstance: LocationSharingInstance {
                                  repeats: false)
     }
 
-    @objc private func endSharing(timer: Timer) {
+    @objc
+    private func endSharing(timer: Timer) {
         self.locationSharingService.stopSharingLocation(accountId: self.accountId, contactUri: self.contactUri)
     }
 

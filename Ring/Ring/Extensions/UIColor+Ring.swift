@@ -46,9 +46,9 @@ extension UIColor {
     func adjust(by percentage: CGFloat = 30.0) -> UIColor? {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
         if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
-            return UIColor(red: min(red + percentage/100, 1.0),
-                           green: min(green + percentage/100, 1.0),
-                           blue: min(blue + percentage/100, 1.0),
+            return UIColor(red: min(red + percentage / 100, 1.0),
+                           green: min(green + percentage / 100, 1.0),
+                           blue: min(blue + percentage / 100, 1.0),
                            alpha: alpha)
         } else {
             return nil
@@ -67,9 +67,9 @@ extension UIColor {
         let r = Int(color >> 16) & mask
         let g = Int(color >> 8) & mask
         let b = Int(color) & mask
-        let red   = CGFloat(r) / 255.0
+        let red = CGFloat(r) / 255.0
         let green = CGFloat(g) / 255.0
-        let blue  = CGFloat(b) / 255.0
+        let blue = CGFloat(b) / 255.0
         self.init(red: red, green: green, blue: blue, alpha: 1)
     }
 

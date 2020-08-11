@@ -59,7 +59,7 @@ extension String {
     }
 
     func toMD5HexString() -> String {
-        guard let messageData = self.data(using: .utf8) else {return ""}
+        guard let messageData = self.data(using: .utf8) else { return "" }
         var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
 
         digestData.withUnsafeMutableBytes { (digestBytes: UnsafeMutableRawBufferPointer) -> Void in
@@ -112,7 +112,7 @@ extension String {
             fileIsMedia = true
         }
         let mediaExtension = ["ogg", "webm"]
-        if mediaExtension.contains(where: {$0.compare(self, options: .caseInsensitive) == .orderedSame}) {
+        if mediaExtension.contains(where: { $0.compare(self, options: .caseInsensitive) == .orderedSame }) {
             fileIsMedia = true
         }
         return fileIsMedia

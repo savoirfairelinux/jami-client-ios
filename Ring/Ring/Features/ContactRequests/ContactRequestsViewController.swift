@@ -33,9 +33,9 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     @IBOutlet weak var noInvitationsPlaceholder: UIView!
     @IBOutlet weak var noRequestsLabel: UILabel!
 
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let cellIdentifier = "ContactRequestCell"
-    fileprivate let log = SwiftyBeaver.self
+    private let disposeBag = DisposeBag()
+    private let cellIdentifier = "ContactRequestCell"
+    private let log = SwiftyBeaver.self
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,11 +47,12 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
         self.configureRingNavigationBar()
         self.tableView.rx.modelSelected(ContactRequestItem.self)
-            .subscribe({ [unowned self] item in
-                if let ringId = item.element?.contactRequest.ringId {
+            .subscribe({ [weak self] item in
+                if let self = self, let ringId = item.element?.contactRequest.ringId {
                     self.viewModel.showConversation(forRingId: ringId)
                 }
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
         self.applyL10n()
     }
 
@@ -81,26 +82,32 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         self.viewModel
             .contactRequestItems
             .observeOn(MainScheduler.instance)
-            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: ContactRequestCell.self)) { [unowned self] _, item, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: ContactRequestCell.self)) { [weak self] _, item, cell in
                 cell.configureFromItem(item)
 
                 //Accept button
                 cell.acceptButton.backgroundColor = UIColor.clear
-                cell.acceptButton.rx.tap.subscribe(onNext: { [weak self] in
-                    self?.acceptButtonTapped(withItem: item)
-                }).disposed(by: cell.disposeBag)
+                cell.acceptButton.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.acceptButtonTapped(withItem: item)
+                    })
+                    .disposed(by: cell.disposeBag)
 
                 //Discard button
                 cell.discardButton.backgroundColor = UIColor.clear
-                cell.discardButton.rx.tap.subscribe(onNext: { [weak self] in
-                    self?.discardButtonTapped(withItem: item)
-                }).disposed(by: cell.disposeBag)
+                cell.discardButton.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.discardButtonTapped(withItem: item)
+                    })
+                    .disposed(by: cell.disposeBag)
 
                 //Ban button
                 cell.banButton.backgroundColor = UIColor.clear
-                cell.banButton.rx.tap.subscribe(onNext: { [weak self] in
-                    self?.banButtonTapped(withItem: item)
-                }).disposed(by: cell.disposeBag)
+                cell.banButton.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.banButtonTapped(withItem: item)
+                    })
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
     }
@@ -115,26 +122,32 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     }
 
     func acceptButtonTapped(withItem item: ContactRequestItem) {
-        viewModel.accept(withItem: item).subscribe(onError: { [unowned self] error in
-            self.log.error("Accept trust request failed")
-            }, onCompleted: { [unowned self] in
-                self.log.info("Accept trust request done")
-        }).disposed(by: self.disposeBag)
+        viewModel.accept(withItem: item)
+            .subscribe(onError: { [weak self] error in
+                self?.log.error("Accept trust request failed")
+                }, onCompleted: { [weak self] in
+                    self?.log.info("Accept trust request done")
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func discardButtonTapped(withItem item: ContactRequestItem) {
-        viewModel.discard(withItem: item).subscribe(onError: { [unowned self] error in
-            self.log.error("Discard trust request failed")
-            }, onCompleted: { [unowned self] in
-                self.log.info("Discard trust request done")
-        }).disposed(by: self.disposeBag)
+        viewModel.discard(withItem: item)
+            .subscribe(onError: { [weak self] error in
+                self?.log.error("Discard trust request failed")
+                }, onCompleted: { [weak self] in
+                    self?.log.info("Discard trust request done")
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func banButtonTapped(withItem item: ContactRequestItem) {
-        viewModel.ban(withItem: item).subscribe(onError: { [unowned self] error in
-            self.log.error("Ban trust request failed")
-            }, onCompleted: { [unowned self] in
-                self.log.info("Ban trust request done")
-        }).disposed(by: self.disposeBag)
+        viewModel.ban(withItem: item)
+            .subscribe(onError: { [weak self] error in
+                self?.log.error("Ban trust request failed")
+                }, onCompleted: { [weak self] in
+                    self?.log.info("Ban trust request done")
+            })
+            .disposed(by: self.disposeBag)
     }
 }

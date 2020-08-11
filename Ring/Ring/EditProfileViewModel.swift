@@ -31,14 +31,17 @@ class EditProfileViewModel {
     let profileService: ProfilesService
     let accountService: AccountsService
 
-    lazy var profileImage: Observable<UIImage?> = { [unowned self] in
+    lazy var profileImage: Observable<UIImage?> = { [weak self] in
+        guard let self = self else { return Observable<UIImage?>.empty() }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
             if let account = self.accountService.currentAccount {
                 self.profileService.getAccountProfile(accountId: account.id)
                     .take(1)
                     .subscribe(onNext: { profile in
                         self.profileForCurrentAccount.onNext(profile)
-                    }).disposed(by: self.disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
             }
         })
         return profileForCurrentAccount.share()
@@ -59,7 +62,9 @@ class EditProfileViewModel {
 
     var profileForCurrentAccount = PublishSubject<Profile>()
 
-    lazy var profileName: Observable<String?> = { [unowned self] in
+    lazy var profileName: Observable<String?> = { [weak self] in
+        guard let self = self else { return Observable<String?>.empty() }
+
         return profileForCurrentAccount.share()
             .map({ profile in
                 if let name = profile.alias, !name.isEmpty {
@@ -82,22 +87,26 @@ class EditProfileViewModel {
         self.profileService = profileService
         self.accountService = accountService
         self.accountService.currentAccountChanged
-            .subscribe(onNext: { [unowned self] account in
+            .subscribe(onNext: { [weak self] account in
+                guard let self = self else { return }
                 if let selectedAccount = account {
                     self.updateProfileInfoFor(accountId: selectedAccount.id)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
       }
 
     func updateProfileInfoFor(accountId: String) {
         self.profileService.getAccountProfile(accountId: accountId)
-            .subscribe(onNext: { [unowned self] profile in
+            .subscribe(onNext: { [weak self] profile in
+                guard let self = self else { return }
                 self.profileForCurrentAccount.onNext(profile)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func saveProfile() {
-        guard let account = self.accountService.currentAccount else {return}
+        guard let account = self.accountService.currentAccount else { return }
         var photo: String?
         if let image = self.image, !image.isEqual(defaultImage),
             let imageData = image.pngData() {

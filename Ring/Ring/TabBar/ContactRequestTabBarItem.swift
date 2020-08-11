@@ -33,7 +33,8 @@ class ContactRequestTabBarItem: ViewModel, TabBarItemViewModel {
             .map({ contactRequests in
                 return contactRequests
                     .filter { $0.accountId == accountService
-                        .currentAccount?.id }
+                        .currentAccount?.id
+                    }
             })
             .map({items in
                 if items.isEmpty {

@@ -59,25 +59,26 @@ class MeCoordinator: Coordinator, StateableResponsive {
 
         self.stateSubject
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] (state) in
-            guard let state = state as? MeState else { return }
-            switch state {
-            case .meDetail:
-                self.showMeDetail()
-            case .linkNewDevice:
-                 self.showLinkDeviceWindow()
-            case .blockedContacts:
-                self.showBlockedContacts()
-            case .needToOnboard:
-                self.needToOnboard()
-            case .accountRemoved:
-                self.accountRemoved()
-            case .accountModeChanged:
-                self.accountModeChanged()
-            case .needAccountMigration(let accountId):
-                self.migrateAccount(accountId: accountId)
-            }
-        }).disposed(by: self.disposeBag)
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? MeState else { return }
+                switch state {
+                case .meDetail:
+                    self.showMeDetail()
+                case .linkNewDevice:
+                    self.showLinkDeviceWindow()
+                case .blockedContacts:
+                    self.showBlockedContacts()
+                case .needToOnboard:
+                    self.needToOnboard()
+                case .accountRemoved:
+                    self.accountRemoved()
+                case .accountModeChanged:
+                    self.accountModeChanged()
+                case .needAccountMigration(let accountId):
+                    self.migrateAccount(accountId: accountId)
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func needToOnboard() {

@@ -32,7 +32,7 @@ class CreateSipAccountViewModel: Stateable, ViewModel {
     var password = Variable<String>("")
     var sipServer = Variable<String>("")
     var port = Variable<String>("")
-    fileprivate let accountsService: AccountsService
+    private let accountsService: AccountsService
 
     required init(with injectionBag: InjectionBag) {
         self.accountsService = injectionBag.accountService
@@ -40,9 +40,9 @@ class CreateSipAccountViewModel: Stateable, ViewModel {
 
     func createSipaccount() {
         let created = self.accountsService.addSipAccount(userName: userName.value,
-                                               password: password.value,
-                                               sipServer: sipServer.value,
-                                               port: port.value)
+                                                         password: password.value,
+                                                         sipServer: sipServer.value,
+                                                         port: port.value)
         if created {
             DispatchQueue.main.async {
                 self.stateSubject.onNext(WalkthroughState.accountCreated)

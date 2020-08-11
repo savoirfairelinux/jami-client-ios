@@ -66,18 +66,19 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
 
-        self.stateSubject.subscribe(onNext: { [unowned self] (state) in
-            guard let state = state as? WalkthroughState else { return }
-            switch state {
-            case .welcomeDone(let walkthroughType):
-                self.showAddAccount(with: walkthroughType)
-            case .accountCreated, .deviceLinked:
-                self.showCreateProfile()
-            case .profileCreated:
-                self.rootViewController.dismiss(animated: true, completion: nil)
-            }
-        }).disposed(by: self.disposeBag)
-
+        self.stateSubject
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? WalkthroughState else { return }
+                switch state {
+                case .welcomeDone(let walkthroughType):
+                    self.showAddAccount(with: walkthroughType)
+                case .accountCreated, .deviceLinked:
+                    self.showCreateProfile()
+                case .profileCreated:
+                    self.rootViewController.dismiss(animated: true, completion: nil)
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func start () {

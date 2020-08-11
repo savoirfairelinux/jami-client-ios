@@ -55,7 +55,8 @@ class ConferenceParticipantView: UIView {
         self.avatarView.addGestureRecognizer(tapGestureRecognizer)
     }
 
-    @objc func showMenu() {
+    @objc
+    func showMenu() {
         let menu = UIView(frame: CGRect(x: 50, y: 50, width: menuWidth, height: menuHight))
         let blurView = UIBlurEffect(style: .light)
         let background = UIVisualEffectView(effect: blurView)
@@ -74,7 +75,8 @@ class ConferenceParticipantView: UIView {
                 self?.viewModel?.cancelCall()
                 self?.removeFromSuperview()
                 self?.delegate?.setConferenceParticipantMenu(menu: nil)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         let frame = self.convert(menu.frame, to: self.superview)
         menu.frame = frame
         self.delegate?.setConferenceParticipantMenu(menu: menu)
@@ -89,7 +91,8 @@ class ConferenceParticipantView: UIView {
                         self?.delegate?.setConferenceParticipantMenu(menu: nil)
                         self?.removeFromSuperview()
                     }
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
             Observable<(Profile?, String?)>
                 .combineLatest(self.viewModel!
                     .contactImageData!,
@@ -97,14 +100,14 @@ class ConferenceParticipantView: UIView {
                                 .displayName
                                 .asObservable()) { profile, username in
                                     return (profile, username)
-            }
+                }
             .observeOn(MainScheduler.instance)
             .subscribe({ [weak self] profileData -> Void in
                 let photoData = NSData(base64Encoded: profileData.element?.0?.photo ?? "", options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
                 let alias = profileData.element?.0?.alias
                 let nameData = profileData.element?.1
                 let name = alias != nil ? alias : nameData
-                guard let displayName = name else {return}
+                guard let displayName = name else { return }
                 self?.avatarView.subviews.forEach({ view in
                     view.removeFromSuperview()
                 })
