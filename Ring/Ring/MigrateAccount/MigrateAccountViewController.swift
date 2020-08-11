@@ -60,14 +60,15 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-         NotificationCenter.default.rx
-        .notification(UIDevice.orientationDidChangeNotification)
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { [weak self] (_) in
-            self?.migrateButton.updateGradientFrame()
-            self?.cancelButton.updateGradientFrame()
-            self?.migrateOtherAccountButton.updateGradientFrame()
-        }).disposed(by: self.disposeBag)
+        NotificationCenter.default.rx
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (_) in
+                self?.migrateButton.updateGradientFrame()
+                self?.cancelButton.updateGradientFrame()
+                self?.migrateOtherAccountButton.updateGradientFrame()
+            })
+            .disposed(by: self.disposeBag)
         explanationLabel.textColor = UIColor.jamiLabelColor
         titleLabel.textColor = UIColor.jamiTextSecondary
         passwordExplanationLabel.textColor = UIColor.jamiLabelColor
@@ -82,11 +83,13 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc func keyboardWillAppear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillAppear(withNotification: NSNotification) {
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillDisappear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillDisappear(withNotification: NSNotification) {
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
@@ -94,7 +97,8 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
         return true
     }
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         self.isKeyboardOpened = false
         self.becomeFirstResponder()
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
@@ -110,9 +114,8 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
             .disposed(by: disposeBag)
 
         self.viewModel.profileName
-            .map({ (name) -> Bool in
-                return name.isEmpty
-            }).bind(to: self.displayNameLabel.rx.isHidden)
+            .map({ (name) -> Bool in return name.isEmpty })
+            .bind(to: self.displayNameLabel.rx.isHidden)
             .disposed(by: disposeBag)
 
         self.viewModel.jamiId
@@ -120,9 +123,8 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
             .disposed(by: disposeBag)
 
         self.viewModel.jamiId
-            .map({ (jamiId) -> Bool in
-                return jamiId.isEmpty
-            }).bind(to: self.jamiIdLabel.rx.isHidden)
+            .map({ (jamiId) -> Bool in return jamiId.isEmpty })
+            .bind(to: self.jamiIdLabel.rx.isHidden)
             .disposed(by: disposeBag)
 
         self.viewModel.username
@@ -138,9 +140,8 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
             .disposed(by: disposeBag)
 
         self.viewModel.username
-            .map({ (name) -> Bool in
-                return name.isEmpty
-            }).bind(to: self.registeredNameLabel.rx.isHidden)
+            .map({ (name) -> Bool in return name.isEmpty })
+            .bind(to: self.registeredNameLabel.rx.isHidden)
             .disposed(by: disposeBag)
         passwordContainer.isHidden = !viewModel.accountHasPassword()
 
@@ -149,7 +150,7 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
                 .bind(to: self.viewModel.password)
                 .disposed(by: self.disposeBag)
 
-            self.passwordField.rx.text.map({!($0?.isEmpty ?? true)})
+            self.passwordField.rx.text.map({ !($0?.isEmpty ?? true) })
                 .bind(to: self.migrateButton.rx.isEnabled)
                 .disposed(by: self.disposeBag)
         }
@@ -169,33 +170,38 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
                 case .finished:
                     self?.dismiss(animated: false, completion: nil)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         // Bind View Actions to ViewModel
         self.migrateButton.rx.tap
             .subscribe(onNext: { [weak self] in
-            DispatchQueue.main.async {
-                self?.showLoadingView()
-            }
-            DispatchQueue.global(qos: .background).async {
-                self?.viewModel.migrateAccount()
-            }
-        }).disposed(by: self.disposeBag)
+                DispatchQueue.main.async {
+                    self?.showLoadingView()
+                }
+                DispatchQueue.global(qos: .background).async {
+                    self?.viewModel.migrateAccount()
+                }
+            })
+            .disposed(by: self.disposeBag)
 
         self.removeAccountButton.rx.tap
             .subscribe(onNext: { [weak self] in
-            self?.viewModel.removeAccount()
-        }).disposed(by: self.disposeBag)
+                self?.viewModel.removeAccount()
+            })
+            .disposed(by: self.disposeBag)
 
         self.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
-            self?.viewModel.finishWithoutMigration()
-        }).disposed(by: self.disposeBag)
+                self?.viewModel.finishWithoutMigration()
+            })
+            .disposed(by: self.disposeBag)
 
         self.migrateOtherAccountButton.rx.tap
             .subscribe(onNext: { [weak self] in
-            self?.viewModel.migrateAnotherAccount()
-        }).disposed(by: self.disposeBag)
+                self?.viewModel.migrateAnotherAccount()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func applyL10n() {

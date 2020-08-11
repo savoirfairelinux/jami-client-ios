@@ -79,25 +79,27 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         self.navigationController.setNavigationBarHidden(true, animated: false)
         self.prepareMainInterface()
 
-        self.stateSubject.subscribe(onNext: { [unowned self] (state) in
-            guard let state = state as? AppState else { return }
-            switch state {
-            case .initialLoading:
-                self.showInitialLoading()
-            case .needToOnboard(let animated, let isFirstAccount):
-                self.showWalkthrough(animated: animated, isAccountFirst: isFirstAccount)
-            case .allSet:
-                self.showMainInterface()
-            case .addAccount:
-                self.showWalkthrough(animated: false, isAccountFirst: false)
-            case .accountRemoved:
-                self.accountRemoved()
-            case .needAccountMigration(let accountId):
-                self.migrateAccount(accountId: accountId)
-            case .accountModeSwitched:
-                self.switchAccountMode()
-            }
-        }).disposed(by: self.disposeBag)
+        self.stateSubject
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? AppState else { return }
+                switch state {
+                case .initialLoading:
+                    self.showInitialLoading()
+                case .needToOnboard(let animated, let isFirstAccount):
+                    self.showWalkthrough(animated: animated, isAccountFirst: isFirstAccount)
+                case .allSet:
+                    self.showMainInterface()
+                case .addAccount:
+                    self.showWalkthrough(animated: false, isAccountFirst: false)
+                case .accountRemoved:
+                    self.accountRemoved()
+                case .needAccountMigration(let accountId):
+                    self.migrateAccount(accountId: accountId)
+                case .accountModeSwitched:
+                    self.switchAccountMode()
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     /// Starts the coordinator
@@ -162,12 +164,14 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                      withAnimation: true,
                      disposeBag: self.disposeBag)
 
-        walkthroughViewController.rx.controllerWasDismissed.subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
-            walkthroughCoordinator?.stateSubject.dispose()
-            self?.removeChildCoordinator(childCoordinator: walkthroughCoordinator)
-            self?.dispatchApplication()
-            self?.tabBarViewController.selectedIndex = 0
-        }).disposed(by: self.disposeBag)
+        walkthroughViewController.rx.controllerWasDismissed
+            .subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
+                walkthroughCoordinator?.stateSubject.dispose()
+                self?.removeChildCoordinator(childCoordinator: walkthroughCoordinator)
+                self?.dispatchApplication()
+                self?.tabBarViewController.selectedIndex = 0
+            })
+            .disposed(by: self.disposeBag)
     }
 
     /// Prepares the main interface, should only be executed once

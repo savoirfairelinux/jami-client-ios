@@ -54,6 +54,7 @@ class ConversationCell: UITableViewCell, NibReusable {
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         self.disposeBag = DisposeBag()
     }
 
@@ -66,7 +67,7 @@ class ConversationCell: UITableViewCell, NibReusable {
                                                         return (profileImage, displayName)
                                                     }
                                                     return (profileImage, username)
-            }
+        }
             .observeOn(MainScheduler.instance)
             .startWith((item.profileImageData.value, item.userName.value))
             .subscribe({ [weak self] profileData -> Void in

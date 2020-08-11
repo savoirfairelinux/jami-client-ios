@@ -29,14 +29,15 @@ protocol BoothModeConfirmationPresenter: UIViewController {
 
 class ConfirmationAlert {
     var alert = UIAlertController()
+
     func configure(title: String,
                    msg: String,
                    enable: Bool,
                    presenter: BoothModeConfirmationPresenter,
                    disposeBag: DisposeBag) {
         alert = UIAlertController(title: title,
-                                      message: msg,
-                                      preferredStyle: .alert)
+                                  message: msg,
+                                  preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
                                          style: .cancel) { [weak presenter] _ in
                                             presenter?.switchBoothModeState(state: !enable)
@@ -77,17 +78,19 @@ class ConfirmationAlert {
             textField.textAlignment = .center
             textField.borderStyle = .none
             textField.backgroundColor = UIColor.clear
-            textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
+            textField.font = UIFont.systemFont(ofSize: 11, weight: .thin)
             textField.text = L10n.AccountPage.passwordPlaceholder
         }
 
         if let textFields = alert.textFields {
-            textFields[0].rx.text.map({text in
-                if let text = text {
-                    return !text.isEmpty
-                }
-                return false
-            }).bind(to: actionConfirm.rx.isEnabled)
+            textFields[0].rx.text
+                .map({text in
+                    if let text = text {
+                        return !text.isEmpty
+                    }
+                    return false
+                })
+                .bind(to: actionConfirm.rx.isEnabled)
                 .disposed(by: disposeBag)
         }
         presenter.present(alert, animated: true, completion: nil)

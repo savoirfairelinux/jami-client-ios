@@ -62,16 +62,16 @@ class DaemonService {
     private let log = SwiftyBeaver.self
 
     /// Indicates whether the daemon is started or not.
-    fileprivate(set) internal var daemonStarted = false
+    internal private(set) var daemonStarted = false
 
     /// The DRingAdaptor making the c++ bridge between the deamon and the App Swift source code.
-    fileprivate let dRingAdaptor: DRingAdapter
+    private let dRingAdaptor: DRingAdapter
 
     /// The time interval separating each poll.
-    fileprivate let pollingTimeInterval = 0.01
+    private let pollingTimeInterval = 0.01
 
     /// The timer scheduling the calls to the poll method.
-    fileprivate var pollingTimer: Timer?
+    private var pollingTimer: Timer?
 
     // MARK: Initialization
     init(dRingAdaptor: DRingAdapter) {

@@ -40,8 +40,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         self.applyL10n()
         self.setUpTable()
         doneButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.dismiss(animated: true, completion: nil)
+            .subscribe(onNext: { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
             })
             .disposed(by: self.disposeBag)
     }
@@ -84,7 +84,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                         .observeOn(MainScheduler.instance)
                         .subscribe(onNext: { [weak self] (enable) in
                             self?.viewModel.togleHardwareAcceleration(enable: enable)
-                        }).disposed(by: cell.disposeBag)
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
 
                 case .sectionHeader(let title):

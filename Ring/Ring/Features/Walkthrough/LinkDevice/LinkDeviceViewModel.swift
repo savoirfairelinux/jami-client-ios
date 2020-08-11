@@ -59,20 +59,21 @@ class LinkDeviceViewModel: Stateable, ViewModel {
                                password: self.password.value,
                                enable: self.notificationSwitch.value)
             .subscribe(onNext: { [weak self] (account) in
-                guard let self = self else {return}
+                guard let self = self else { return }
                 self.accountCreationState.value = .success
                 Observable<Int>.timer(Durations.alertFlashDuration.value,
                                       period: nil,
                                       scheduler: MainScheduler.instance)
                     .subscribe(onNext: { [weak self] (_) in
-                        guard let self = self else {return}
+                        guard let self = self else { return }
                         self.contactService.saveContactsForLinkedAccount(accountId: account.id)
                         self.accountService.currentAccount = account
                         UserDefaults.standard
                             .set(account.id, forKey: self.accountService.selectedAccountID)
                         self.enablePushNotifications(enable: self.notificationSwitch.value)
                         self.stateSubject.onNext(WalkthroughState.deviceLinked)
-                    }).disposed(by: self.disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
                 }, onError: { [weak self] (error) in
                     if let error = error as? AccountCreationError {
                         self?.accountCreationState.value = .error(error: error)

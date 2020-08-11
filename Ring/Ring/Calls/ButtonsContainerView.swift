@@ -63,9 +63,11 @@ class ButtonsContainerView: UIView, NibLoadable {
                     case .optionsWithSpeakerphone:
                         self?.optionsWithSpeaker()
                     }
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
     }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
@@ -76,7 +78,7 @@ class ButtonsContainerView: UIView, NibLoadable {
         self.commonInit()
     }
 
-    override open func didMoveToWindow() {
+    override func didMoveToWindow() {
         super.didMoveToWindow()
         self.cancelButton.backgroundColor = UIColor.red
     }

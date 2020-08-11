@@ -50,12 +50,14 @@ class CreateProfileViewModel: Stateable, ViewModel {
     }()
 
     lazy var skipButtonTitle: Observable<String> = {
-        return profileExists.map({ exists -> String in
-            if exists {
-                return L10n.CreateProfile.profileCreated
-            }
-            return L10n.CreateProfile.skipCreateProfile
-        }).startWith(L10n.CreateProfile.skipCreateProfile)
+        return profileExists
+            .map({ exists -> String in
+                if exists {
+                    return L10n.CreateProfile.profileCreated
+                }
+                return L10n.CreateProfile.skipCreateProfile
+            })
+            .startWith(L10n.CreateProfile.skipCreateProfile)
     }()
 
     let disposeBag = DisposeBag()

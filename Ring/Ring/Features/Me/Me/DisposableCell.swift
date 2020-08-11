@@ -25,6 +25,7 @@ class DisposableCell: UITableViewCell {
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         self.disposeBag = DisposeBag()
     }
 }

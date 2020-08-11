@@ -71,7 +71,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         Observable<(Data?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
                                                   self.viewModel.displayName.asObservable()) { profileImage, username in
                                                     return (profileImage, username)
-            }
+        }
             .observeOn(MainScheduler.instance)
             .startWith((self.viewModel.profileImageData.value, self.viewModel.userName.value))
             .subscribe({ [weak self] profileData -> Void in
@@ -104,7 +104,8 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
                 self?.titleView.text = name
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func setUpTableView() {
@@ -129,8 +130,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                 return UITableViewCell()
         }
 
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,
-            ContactActions>>(configureCell: configureCell)
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ContactActions>>(configureCell: configureCell)
 
         self.viewModel.tableSection
             .observeOn(MainScheduler.instance)
@@ -159,7 +159,8 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     }
                     self?.tableView.deselectRow(at: indexPath, animated: true)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func showClearConversationConfirmation() {

@@ -30,6 +30,7 @@ class MessageCellLocationSharingSent: MessageCellLocationSharing {
     @IBOutlet weak var sentBubbleLeading: NSLayoutConstraint!
 
     @IBOutlet weak var stopSharingButton: UIButton!
+
     @IBAction func stopSharingButton(_ sender: Any) {
         self.delete(sender)
     }
