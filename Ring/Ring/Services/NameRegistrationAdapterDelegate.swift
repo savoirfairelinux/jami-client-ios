@@ -1,7 +1,8 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,4 +22,5 @@
 @objc protocol NameRegistrationAdapterDelegate {
     func registeredNameFound(with response: LookupNameResponse)
     func nameRegistrationEnded(with response: NameRegistrationResponse)
+    func userSearchEnded(with response: UserSearchResponse)
 }
