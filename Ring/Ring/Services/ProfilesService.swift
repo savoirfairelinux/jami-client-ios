@@ -62,7 +62,8 @@ class ProfilesService {
                                                object: nil)
     }
 
-    @objc private func contactAdded(_ notification: NSNotification) {
+    @objc
+    private func contactAdded(_ notification: NSNotification) {
         guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
             return
         }
@@ -76,7 +77,8 @@ class ProfilesService {
     }
 
     // swiftlint:disable cyclomatic_complexity
-    @objc private func messageReceived(_ notification: NSNotification) {
+    @objc
+    private func messageReceived(_ notification: NSNotification) {
         guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
             return
         }
@@ -94,15 +96,15 @@ class ProfilesService {
             //Parse the key to get the number of parts and the current part number
             let components = vCardKey.components(separatedBy: ",")
 
-            guard let partComponent = components.filter({$0.hasPrefix("part=")}).first else {
+            guard let partComponent = components.filter({ $0.hasPrefix("part=") }).first else {
                 return
             }
 
-            guard let ofComponent = components.filter({$0.hasPrefix("of=")}).first else {
+            guard let ofComponent = components.filter({ $0.hasPrefix("of=") }).first else {
                 return
             }
 
-            guard let idComponent = components.filter({$0.hasPrefix("x-ring/ring.profile.vcard;id=")}).first else {
+            guard let idComponent = components.filter({ $0.hasPrefix("x-ring/ring.profile.vcard;id=") }).first else {
                 return
             }
 
@@ -181,7 +183,8 @@ class ProfilesService {
             .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
             .subscribe(onNext: {profile in
                 profileObservable.onNext(profile)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func getProfile(uri: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
@@ -221,7 +224,8 @@ extension ProfilesService {
             .accountProfileObservable(for: accountId)
             .subscribe(onNext: {profile in
                 profileObservable.onNext(profile)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func updateAccountProfile(accountId: String, alias: String?, photo: String?, accountURI: String) {

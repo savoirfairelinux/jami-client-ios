@@ -72,7 +72,8 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
                     .subscribe(onNext: { [weak self, weak item] in
                         guard let contact = item else { return }
                         self?.unbanContactTapped(withItem: contact)
-                    }).disposed(by: cell.disposeBag)
+                    })
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
     }

@@ -50,7 +50,8 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                 default:
                     break
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func showProgress() {
@@ -80,7 +81,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
             UIAlertAction(title: L10n.Actions.cancelAction,
                           style: .cancel) { [unowned self] _ in
             self.dismiss(animated: true, completion: nil)
-        }
+            }
         let actionLink =
             UIAlertAction(title: L10n.Global.ok,
                           style: .default) {[unowned self] _ in
@@ -91,7 +92,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                             if let textFields = alert.textFields {
                                 self.viewModel.linkDevice(with: textFields[0].text)
                             }
-        }
+            }
         alert.addAction(actionCancel)
         alert.addAction(actionLink)
 

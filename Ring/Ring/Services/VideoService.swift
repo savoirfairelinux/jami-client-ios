@@ -374,10 +374,11 @@ class VideoService: FrameExtractorDelegate {
     func switchCamera() {
         self.camera.switchCamera()
             .subscribe(onCompleted: {
-            print("camera switched")
-        }, onError: { error in
-            print(error)
-        }).disposed(by: self.disposeBag)
+                print("camera switched")
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func setCameraOrientation(orientation: UIDeviceOrientation, forceUpdate: Bool = false) {

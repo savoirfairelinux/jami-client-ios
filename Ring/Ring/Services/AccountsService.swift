@@ -342,7 +342,7 @@ class AccountsService: AccountAdapterDelegate {
         //~ Filter the daemon signals to isolate the "account created" one.
         let filteredDaemonSignals = self.sharedResponseStream
             .filter { (serviceEvent) -> Bool in
-                if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId {return false}
+                if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId { return false }
                 if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
                     throw AccountCreationError.generic
                 } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
@@ -352,7 +352,7 @@ class AccountsService: AccountAdapterDelegate {
                 let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
                 let notRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Unregistered
                 return isRegistrationStateChanged && (isRegistered || notRegistered)
-        }
+            }
 
         //~ Make sure that we have the correct account added in the daemon, and return it.
         return Observable
@@ -369,7 +369,8 @@ class AccountsService: AccountAdapterDelegate {
                 _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString)
                 self.loadAccountsFromDaemon()
                 return accountModel
-            }.take(1)
+            }
+            .take(1)
             .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
                 self.currentAccount = accountModel
                 UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
@@ -389,7 +390,7 @@ class AccountsService: AccountAdapterDelegate {
             if !port.isEmpty {
                 accountDetails.updateValue(password, forKey: ConfigKey.localPort.rawValue)
             }
-            guard let account = self.accountAdapter.addAccount(accountDetails) else {return false}
+            guard let account = self.accountAdapter.addAccount(accountDetails) else { return false }
             _ = try self.dbManager.createDatabaseForAccount(accountId: account, createFolder: true)
             self.loadAccountsFromDaemon()
             guard let newAccount = self.getAccount(fromAccountId: account) else { return false }
@@ -426,7 +427,7 @@ class AccountsService: AccountAdapterDelegate {
         })
         //~ Filter the daemon signals to isolate the "account created" one.
         let filteredDaemonSignals = self.sharedResponseStream.filter { (serviceEvent) -> Bool in
-            if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId {return false}
+            if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId { return false }
             if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
                 throw AccountCreationError.linkError
             } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
@@ -451,7 +452,8 @@ class AccountsService: AccountAdapterDelegate {
                 _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString)
                 self.loadAccountsFromDaemon()
                 return accountModel
-            }.take(1)
+            }
+            .take(1)
             .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
                 return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
             })
@@ -467,24 +469,26 @@ class AccountsService: AccountAdapterDelegate {
     func connectToAccountManager(username: String, password: String, serverUri: String, emableNotifications: Bool) -> Observable<AccountModel> {
         let accountState = Variable<ConnectAccountState>(ConnectAccountState.initializinzg)
         let newAccountId = Variable<String>("")
-        self.sharedResponseStream.subscribe(onNext: { (event) in
-            if event.getEventInput(ServiceEventInput.registrationState) == Initializing {
-                return
-            }
-            if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                accountState.value = ConnectAccountState.networkError
-                newAccountId.value = ""
-            } else if event.eventType == ServiceEventType.registrationStateChanged,
-                event.getEventInput(ServiceEventInput.registrationState) == Registered {
-                accountState.value = ConnectAccountState.created
-            } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||
-                event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth ||
-                event.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
-                accountState.value = ConnectAccountState.error
-                newAccountId.value = ""
-            }
-        }, onError: { (_) in
-        }).disposed(by: self.disposeBag)
+        self.sharedResponseStream
+            .subscribe(onNext: { (event) in
+                if event.getEventInput(ServiceEventInput.registrationState) == Initializing {
+                    return
+                }
+                if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
+                    accountState.value = ConnectAccountState.networkError
+                    newAccountId.value = ""
+                } else if event.eventType == ServiceEventType.registrationStateChanged,
+                    event.getEventInput(ServiceEventInput.registrationState) == Registered {
+                    accountState.value = ConnectAccountState.created
+                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||
+                    event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth ||
+                    event.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
+                    accountState.value = ConnectAccountState.error
+                    newAccountId.value = ""
+                }
+            }, onError: { (_) in
+            })
+            .disposed(by: self.disposeBag)
 
         let result = Observable
             .combineLatest(accountState.asObservable()
@@ -503,7 +507,8 @@ class AccountsService: AccountAdapterDelegate {
                             } else {
                                 throw AddAccountError.unknownError
                             }
-        }.take(1)
+            }
+            .take(1)
             .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
                 self.currentAccount = accountModel
                 UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
@@ -708,7 +713,7 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func needAccountMigration(accountId: String) -> Bool {
-        guard let account = getAccount(fromAccountId: accountId) else {return false}
+        guard let account = getAccount(fromAccountId: accountId) else { return false }
         return account.status == .errorNeedMigration
     }
 
@@ -735,23 +740,23 @@ class AccountsService: AccountAdapterDelegate {
             .filter { (serviceEvent) -> Bool in
                 return serviceEvent.getEventInput(ServiceEventInput.accountId) == accountId &&
                     serviceEvent.eventType == .migrationEnded
-        }
+            }
         return Observable
             .combineLatest(saveAccount.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in
                 guard let status: String = serviceEvent.getEventInput(ServiceEventInput.state),
                 let migrationStatus = MigrationState(rawValue: status)
-                    else {return false}
+                    else { return false }
                 switch migrationStatus {
                 case .SUCCESS:
                     return true
                 default:
                     return false
                 }
-        }
+            }
     }
 
     func removeAccount(id: String) {
-        guard let account = self.getAccount(fromAccountId: id) else {return}
+        guard let account = self.getAccount(fromAccountId: id) else { return }
         let shouldRemoveFolder = AccountModelHelper.init(withAccount: account).isAccountSip()
         self.accountAdapter.removeAccount(id)
         self.loadAccountsFromDaemon()
@@ -810,7 +815,7 @@ class AccountsService: AccountAdapterDelegate {
     func exportOnRing(withPassword password: String)
         -> Completable {
             return Completable.create { [unowned self] completable in
-                let export =  self.accountAdapter.export(onRing: self.currentAccount?.id, password: password)
+                let export = self.accountAdapter.export(onRing: self.currentAccount?.id, password: password)
                 if export {
                     completable(.completed)
                 } else {
@@ -847,12 +852,12 @@ class AccountsService: AccountAdapterDelegate {
         var name = displayName
         if name.isEmpty {
             let accountDetails = getAccountDetails(fromAccountId: account)
-            name =  accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName))
+            name = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName))
         }
 
         guard let accountToUpdate = self.getAccount(fromAccountId: account),
             let accountURI = AccountModelHelper
-                .init(withAccount: accountToUpdate).uri else {return}
+                .init(withAccount: accountToUpdate).uri else { return }
         _ = self.dbManager.saveAccountProfile(alias: name, photo: photo, accountId: account, accountURI: accountURI)
     }
 
@@ -892,11 +897,13 @@ class AccountsService: AccountAdapterDelegate {
                         && accountId == accountID
                 }
                 return false
-            }).subscribe(onNext: { (event) in
+            })
+            .subscribe(onNext: { (event) in
                 if let state: Bool = event.getEventInput(.state) {
                     variable.value = state
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         return variable
     }
 
@@ -931,11 +938,11 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func enableAccount(enable: Bool, accountId: String) {
-        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.accountEnable));
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.accountEnable))
     }
 
     func enablePeerDiscovery(enable: Bool, accountId: String) {
-        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery));
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery))
     }
 
     func switchAccountPropertyTo(state: Bool, accountId: String, property: ConfigKeyModel) {
@@ -954,7 +961,8 @@ class AccountsService: AccountAdapterDelegate {
             .filter({ (event) in
                 return event.eventType == ServiceEventType.knownDevicesChanged &&
                     event.getEventInput(ServiceEventInput.accountId) == account.id
-            }).map({ _ in
+            })
+            .map({ _ in
                 return account.devices
             })
         return accountDevices.concat(newDevice)

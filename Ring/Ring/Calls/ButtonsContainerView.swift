@@ -63,9 +63,11 @@ class ButtonsContainerView: UIView, NibLoadable {
                     case .optionsWithSpeakerphone:
                         self?.optionsWithSpeaker()
                     }
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
     }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()

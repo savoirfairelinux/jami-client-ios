@@ -50,9 +50,9 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
     func setUPBlurBackground() {
         if #available(iOS 13.0, *) {
-            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
         } else {
-            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
         }
         if blurEffect != nil {
             blurEffect!.frame = self.view.bounds
@@ -65,7 +65,8 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         }
     }
 
-    @objc func remove(gesture: UISwipeGestureRecognizer) {
+    @objc
+    func remove(gesture: UISwipeGestureRecognizer) {
         if gesture.direction != UISwipeGestureRecognizer.Direction.down { return }
         self.removeView()
     }
@@ -156,12 +157,14 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         self.tableView.rowHeight = 64.0
         self.tableView.delegate = self
         self.tableView.register(cellType: SmartListCell.self)
-        self.tableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
-            if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: indexPath) {
-                self.viewModel.addContactToConference(contact: contactToAdd)
-                self.removeView()
-            }
-        }).disposed(by: disposeBag)
+        self.tableView.rx.itemSelected
+            .subscribe(onNext: { [unowned self] indexPath in
+                if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: indexPath) {
+                    self.viewModel.addContactToConference(contact: contactToAdd)
+                    self.removeView()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     func setupSearchBar() {
@@ -174,8 +177,10 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             .distinctUntilChanged()
             .bind(to: self.viewModel.search)
             .disposed(by: disposeBag)
-        self.searchBar.rx.searchButtonClicked.subscribe(onNext: { [unowned self] in
-            self.searchBar.resignFirstResponder()
-        }).disposed(by: disposeBag)
+        self.searchBar.rx.searchButtonClicked
+            .subscribe(onNext: { [unowned self] in
+                self.searchBar.resignFirstResponder()
+            })
+            .disposed(by: disposeBag)
     }
 }

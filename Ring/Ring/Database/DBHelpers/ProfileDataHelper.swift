@@ -55,7 +55,7 @@ final class ProfileDataHelper {
 
     func getAccountProfile(dataBase: Connection) -> Profile? {
         do {
-            guard let row = try dataBase.pluck(accountProfileTable) else { return nil}
+            guard let row = try dataBase.pluck(accountProfileTable) else { return nil }
             // account profile saved in db does not have uri and type,
             // return default values that need to be updated by function caller
             return Profile("", row[alias], row[photo], ProfileType.ring.rawValue)

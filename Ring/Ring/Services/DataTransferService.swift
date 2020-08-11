@@ -130,11 +130,14 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                 let name = pathUrl.lastPathComponent + "\n" + fileSizeWithUnit
                 fileName = name
                 //update db
-                self.dbManager.updateFileName(interactionID: interactionID, name: name, accountId: accountID).subscribe(onCompleted: { [weak self] in
-                      self?.log.debug("file name updated")
-                }, onError: { [weak self] _ in
-                     self?.log.error("update name failed")
-                }).disposed(by: self.disposeBag)
+                self.dbManager
+                    .updateFileName(interactionID: interactionID, name: name, accountId: accountID)
+                    .subscribe(onCompleted: { [weak self] in
+                        self?.log.debug("file name updated")
+                        }, onError: { [weak self] _ in
+                            self?.log.error("update name failed")
+                    })
+                    .disposed(by: self.disposeBag)
             }
             self.log.debug("DataTransferService: saving file to: \(pathUrl.path))")
             return acceptFileTransfer(withId: transferId, withPath: pathUrl.path)
@@ -151,7 +154,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         guard let pathUrl = getFilePath(fileName: fileName,
                                         inFolder: inFolder,
                                         accountID: accountID,
-                                        conversationID: conversationID) else {return nil}
+                                        conversationID: conversationID) else { return nil }
         let fileManager = FileManager.default
         var file: URL?
         if fileManager.fileExists(atPath: pathUrl.path) {
@@ -206,12 +209,12 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         guard let pathUrl = getFilePath(fileName: name,
                                         inFolder: Directories.downloads.rawValue,
                                         accountID: accountID,
-                                        conversationID: conversationID) else {return nil}
+                                        conversationID: conversationID) else { return nil }
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(
             kUTTagClassFilenameExtension,
             fileExtension,
-            nil) else {return nil}
+            nil) else { return nil }
         if UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage) {
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: pathUrl.path) {
@@ -238,7 +241,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
                                                               fileExtension,
-                                                              nil) else {return nil}
+                                                              nil) else { return nil }
         return UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage)
     }
 
@@ -279,7 +282,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                          conversationId: String) {
         guard let imagePath = self.getFilePathForTransfer(forFile: displayName,
                                                           accountID: accountId,
-                                                          conversationID: conversationId) else {return}
+                                                          conversationID: conversationId) else { return }
         do {
             try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
         } catch {
@@ -307,7 +310,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(folderName)
-            .appendingPathComponent(accountID).appendingPathComponent(conversationID)
+            .appendingPathComponent(accountID)
+            .appendingPathComponent(conversationID)
         return directoryURL.appendingPathComponent(fileName)
     }
 
@@ -320,7 +324,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(folderName)
-            .appendingPathComponent(accountID).appendingPathComponent(conversationID)
+            .appendingPathComponent(accountID)
+            .appendingPathComponent(conversationID)
         var isDirectory = ObjCBool(false)
         let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
         if directoryExists && isDirectory.boolValue {

@@ -169,7 +169,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 DispatchQueue.main.async {
                     self.appCoordinator.migrateAccount(accountId: account)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.accountService.initialAccountsLoading()
             .subscribe(onCompleted: {
                 //set selected account if exists
@@ -197,19 +198,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 DispatchQueue.main.asyncAfter(deadline: time) {
                     self.appCoordinator.showDatabaseError()
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.accountService.currentWillChange
             .subscribe(onNext: { account in
-                guard let currentAccount = account else {return}
+                guard let currentAccount = account else { return }
                 self.presenceService.subscribeBuddies(withAccount: currentAccount.id, withContacts: self.contactsService.contacts.value, subscribe: false)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.accountService.currentAccountChanged
             .subscribe(onNext: { account in
-                guard let currentAccount = account else {return}
+                guard let currentAccount = account else { return }
                 self.reloadDataFor(account: currentAccount)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func reloadDataFor(account: AccountModel) {
@@ -283,16 +287,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             case .denied:
                 if enabled { LocalNotificationsHelper.setNotification(enable: false) }
             case .authorized:
-                if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
+                if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
             case .provisional:
-                if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
+                if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
             @unknown default:
                 break
             }
         })
     }
 
-    @objc private func registerVoipNotifications() {
+    @objc
+    private func registerVoipNotifications() {
         self.requestNotificationAuthorization()
         self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
     }
@@ -355,7 +360,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             self.callService.refuse(callId: callID)
                 .subscribe({_ in
                     print("Call ignored")
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         default:
             // automatically answer call when user tap the notifications
             NotificationCenter.default.post(name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue),
@@ -380,7 +386,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             .take(1)
             .subscribe(onNext: { usernameLookupStatus in
                 if usernameLookupStatus.state == .found {
-                    guard let address = usernameLookupStatus.address else {return}
+                    guard let address = usernameLookupStatus.address else { return }
                     let contactUri = JamiURI(schema: URIType.ring, infoHach: address)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
                 } else {
@@ -388,7 +394,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     let contactUri = JamiURI(schema: URIType.sip, infoHach: hash)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.sip)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.nameService.lookupName(withAccount: "", nameserver: "", name: hash)
     }
 
@@ -405,7 +412,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 hash = conatactUri.hash ?? ""
                 uriString = conatactUri.uriString ?? ""
             }
-            if hash.isEmpty || uriString.isEmpty {return}
+            if hash.isEmpty || uriString.isEmpty { return }
             self.contactsService
                 .getProfileForUri(uri: uriString,
                                   accountId: account.id)
@@ -417,7 +424,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         .startCall(participant: hash,
                                    name: profile.alias ?? "",
                                    isVideo: isVideo)
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 

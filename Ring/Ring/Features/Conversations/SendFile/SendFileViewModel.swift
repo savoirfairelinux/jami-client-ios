@@ -47,7 +47,8 @@ class SendFileViewModel: Stateable, ViewModel {
             .asObservable()
             .map({ state in
                 state == .sent
-            }).share()
+            })
+            .share()
     }()
 
     lazy var hideInfo: Driver<Bool> = {
@@ -55,7 +56,8 @@ class SendFileViewModel: Stateable, ViewModel {
             .asObservable()
             .map({ [weak self] state in
                 state != .initial || !(self?.audioOnly ?? true)
-            }).share()
+            })
+            .share()
             .asDriver(onErrorJustReturn: false)
     }()
 
@@ -64,7 +66,8 @@ class SendFileViewModel: Stateable, ViewModel {
             .asObservable()
             .map({ state in
                 state == .recorded
-            }).share()
+            })
+            .share()
             .asDriver(onErrorJustReturn: false)
     }()
 
@@ -73,7 +76,8 @@ class SendFileViewModel: Stateable, ViewModel {
             .asObservable()
             .map({ state in
                 state == .recording
-            }).share()
+            })
+            .share()
     }()
 
     lazy var recordDuration: Driver<String> = {
@@ -84,7 +88,7 @@ class SendFileViewModel: Stateable, ViewModel {
                 .asObservable()
                 .filter { state in
                     return state == .recorded
-            })
+                })
             .map({ interval -> String in
                 let seconds = interval % 60
                 let minutes = (interval / 60) % 60
@@ -95,18 +99,21 @@ class SendFileViewModel: Stateable, ViewModel {
                 default:
                     return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
                 }
-            }).share()
+            })
+            .share()
         return self.recordingState
             .asObservable()
             .filter({ state in
-            return (state == .recording || state == .recorded)
-        }).flatMap({ (state) -> Observable<String>  in
-            if state == .recording {
-                return durationTimer
-            } else {
-                return emptyString
-            }
-        }).asDriver(onErrorJustReturn: "")
+                return (state == .recording || state == .recorded)
+            })
+            .flatMap({ (state) -> Observable<String>  in
+                if state == .recording {
+                    return durationTimer
+                } else {
+                    return emptyString
+                }
+            })
+            .asDriver(onErrorJustReturn: "")
     }()
 
     var audioOnly: Bool = false
@@ -128,9 +135,10 @@ class SendFileViewModel: Stateable, ViewModel {
             videoService.startCamera()
         }
         videoService.capturedVideoFrame.asObservable()
-       .subscribe(onNext: { [weak self] frame in
-            self?.playBackFrame.onNext(frame)
-        }).disposed(by: playBackDisposeBag)
+            .subscribe(onNext: { [weak self] frame in
+                self?.playBackFrame.onNext(frame)
+            })
+            .disposed(by: playBackDisposeBag)
     }
 
     func triggerRecording() {
@@ -149,14 +157,15 @@ class SendFileViewModel: Stateable, ViewModel {
         videoService.capturedVideoFrame.asObservable()
             .subscribe(onNext: { [weak self] frame in
                 self?.playBackFrame.onNext(frame)
-            }).disposed(by: playBackDisposeBag)
+            })
+            .disposed(by: playBackDisposeBag)
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         let random = String(arc4random_uniform(9999))
         let nameForRecordingFile = dateString + "_" + random
-        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile, accountID: conversation.accountId, conversationID: conversation.conversationId) else {return}
+        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile, accountID: conversation.accountId, conversationID: conversation.conversationId) else { return }
         guard let name = self.videoService
             .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
                 return
@@ -170,7 +179,7 @@ class SendFileViewModel: Stateable, ViewModel {
             .combineLatest(playerReady.asObservable(),
                            readyToSend.asObservable()) {(playerReady, fileReady) in
                             return (playerReady && fileReady)
-        }
+            }
     }()
 
     func stopRecording() {
@@ -195,7 +204,7 @@ class SendFileViewModel: Stateable, ViewModel {
         player?.closePlayer()
         self.player = nil
         let name = fileUrl.lastPathComponent
-        guard let accountId = self.accountService.currentAccount?.id else {return}
+        guard let accountId = self.accountService.currentAccount?.id else { return }
         self.fileTransferService.sendFile(filePath: self.fileName,
                                           displayName: name,
                                           accountId: accountId,
@@ -268,44 +277,51 @@ extension SendFileViewModel {
             .filter({ (ready) -> Bool in
                 return ready
             })
-        .take(1)
-        .subscribe(onNext: { [weak self] ready in
-            self?.playerReady.value = ready
-            self?.playBackDisposeBag = DisposeBag()
-            self?.subscribePlayerControls()
-        }).disposed(by: playBackDisposeBag)
+            .take(1)
+            .subscribe(onNext: { [weak self] ready in
+                self?.playerReady.value = ready
+                self?.playBackDisposeBag = DisposeBag()
+                self?.subscribePlayerControls()
+            })
+            .disposed(by: playBackDisposeBag)
     }
 
     func subscribePlayerControls() {
         player?.audioMuted.asObservable()
             .subscribe(onNext: { [weak self] muted in
                 self?.audioMuted.value = muted
-            }).disposed(by: playBackDisposeBag)
+            })
+            .disposed(by: playBackDisposeBag)
 
         player?.pause.asObservable()
             .subscribe(onNext: { [weak self] pause in
                 self?.pause.value = pause
-            }).disposed(by: playBackDisposeBag)
+            })
+            .disposed(by: playBackDisposeBag)
 
         player?.playerDuration.asObservable()
             .subscribe(onNext: { [weak self] duration in
                 self?.playerDuration.value = duration
-            }).disposed(by: playBackDisposeBag)
+            })
+            .disposed(by: playBackDisposeBag)
 
         player?.playerPosition.asObservable()
             .subscribe(onNext: { [weak self] position in
                 self?.playerPosition.onNext(position)
-            }).disposed(by: playBackDisposeBag)
+            })
+            .disposed(by: playBackDisposeBag)
 
         player?.playBackFrame.asObservable()
             .subscribe(onNext: { [weak self] image in
                 self?.playBackFrame.onNext(image)
-            }).disposed(by: playBackDisposeBag)
+            })
+            .disposed(by: playBackDisposeBag)
 
         seekTimeVariable.asObservable()
             .subscribe(onNext: { [weak self](position) in
                 self?.player?.seekTimeVariable.value = position
-            }).disposed(by: playBackDisposeBag)
+            })
+            .disposed(by: playBackDisposeBag)
     }
 
     func setCameraOrientation(orientation: UIDeviceOrientation) {

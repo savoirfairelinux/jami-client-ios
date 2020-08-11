@@ -29,6 +29,7 @@ struct AccountItem {
 
 final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerViewDelegate, RxPickerViewDataSourceType, SectionedViewDataSourceType {
     typealias Element = [AccountItem]
+
     private var items: [AccountItem] = []
 
     func model(at indexPath: IndexPath) throws -> Any {
@@ -76,14 +77,15 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
             let profileName = name.isEmpty ? nil : name
             return UIImage.defaultJamiAvatarFor(profileName: profileName,
                                                 account: account)
-            }.bind(to: accountView.avatarView.rx.image)
+        }
+        .bind(to: accountView.avatarView.rx.image)
             .disposed(by: DisposeBag())
 
         profile.map { [weak self] accountProfile in
             if let name = accountProfile.alias, !name.isEmpty {
                 return name
             }
-            guard let account = self?.items[row].account else {return ""}
+            guard let account = self?.items[row].account else { return "" }
             if !account.registeredName.isEmpty {
                 return account.registeredName
             }
@@ -93,7 +95,8 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
                 return accountName
             }
             return account.jamiId
-            }.bind(to: accountView.nameLabel.rx.text)
+        }
+        .bind(to: accountView.nameLabel.rx.text)
             .disposed(by: DisposeBag())
         return accountView
     }
@@ -102,6 +105,6 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
         Binder(self) { (adapter, items) in
             adapter.items = items
             pickerView.reloadAllComponents()
-            }.on(observedEvent)
+        }.on(observedEvent)
     }
 }

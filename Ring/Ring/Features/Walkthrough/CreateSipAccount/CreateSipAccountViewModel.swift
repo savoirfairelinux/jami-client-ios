@@ -40,9 +40,9 @@ class CreateSipAccountViewModel: Stateable, ViewModel {
 
     func createSipaccount() {
         let created = self.accountsService.addSipAccount(userName: userName.value,
-                                               password: password.value,
-                                               sipServer: sipServer.value,
-                                               port: port.value)
+                                                         password: password.value,
+                                                         sipServer: sipServer.value,
+                                                         port: port.value)
         if created {
             DispatchQueue.main.async {
                 self.stateSubject.onNext(WalkthroughState.accountCreated)

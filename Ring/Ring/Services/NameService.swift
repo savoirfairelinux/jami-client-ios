@@ -123,16 +123,16 @@ class NameService: NameRegistrationAdapterDelegate {
 
         let filteredDaemonSignals = self.sharedRegistrationStatus
             .filter { (serviceEvent) -> Bool in
-                if serviceEvent.getEventInput(ServiceEventInput.accountId) != account {return false}
+                if serviceEvent.getEventInput(ServiceEventInput.accountId) != account { return false }
                 if serviceEvent.eventType != .nameRegistrationEnded {
                     return false
                 }
                 return true
-        }
+            }
         return Observable
             .combineLatest(registerName.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in
                 guard let status: NameRegistrationState = serviceEvent.getEventInput(ServiceEventInput.state)
-                    else {return false}
+                    else { return false }
                 switch status {
                 case .success:
                     return true

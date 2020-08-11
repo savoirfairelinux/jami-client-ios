@@ -66,7 +66,7 @@ class ContactViewModel: ViewModel, Stateable {
                 self.displayName.value = alias
             }
             guard let account = self.accountService
-                .getAccount(fromAccountId: conversation.accountId) else {return}
+                .getAccount(fromAccountId: conversation.accountId) else { return }
             if let contact = self.contactService.contact(withUri: conversation.participantUri),
                 let name = contact.userName {
                 self.userName.value = name
@@ -78,13 +78,15 @@ class ContactViewModel: ViewModel, Stateable {
                     .filter({ [unowned self] lookupNameResponse in
                         return lookupNameResponse.address != nil &&
                             lookupNameResponse.address == self.conversation.participantUri
-                    }).subscribe(onNext: { [unowned self] lookupNameResponse in
+                    })
+                    .subscribe(onNext: { [unowned self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
                             self.userName.value = name
                         } else if let address = lookupNameResponse.address {
                             self.userName.value = address
                         }
-                    }).disposed(by: disposeBag)
+                    })
+                    .disposed(by: disposeBag)
                 self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: conversation.hash)
             }
             // add option block contact and clear conversation if contact exists
@@ -131,7 +133,8 @@ class ContactViewModel: ViewModel, Stateable {
                         let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                         self.profileImageData.value = data
                     }
-                }).disposed(by: disposeBag)
+                })
+                .disposed(by: disposeBag)
         }
     }
     var userName = Variable<String>("")
@@ -146,6 +149,7 @@ class ContactViewModel: ViewModel, Stateable {
         }
     }()
     var profileImageData = Variable<Data?>(nil)
+
     required init (with injectionBag: InjectionBag) {
         self.contactService = injectionBag.contactsService
         self.profileService = injectionBag.profileService
@@ -187,6 +191,7 @@ class ContactViewModel: ViewModel, Stateable {
                 self.conversationService
                     .clearHistory(conversation: self.conversation,
                                   keepConversation: false)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

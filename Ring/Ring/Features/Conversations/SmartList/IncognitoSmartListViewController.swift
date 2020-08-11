@@ -58,7 +58,8 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             .subscribe(onNext: {[weak self](_) in
                 self?.placeVideoCall.updateGradientFrame()
                 self?.placeAudioCall.updateGradientFrame()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,21 +91,25 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             .subscribe(onNext: {[weak self] (editing) in
                 self?.logoView.isHidden = editing
                 self?.boothSwitch.isHidden = editing
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         self.placeVideoCall.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.startCall(audioOnly: false)
-        }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.placeAudioCall.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.startCall(audioOnly: true)
-        }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.boothSwitch.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.confirmBoothModeAlert()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
         self.networkAlertView.isHidden = isHidden
         self.viewModel.connectionState
@@ -115,8 +120,9 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             .disposed(by: self.disposeBag)
     }
 
-    @objc func keyboardWillShow(withNotification notification: Notification) {
-        guard let userInfo: Dictionary = notification.userInfo else {return}
+    @objc
+    func keyboardWillShow(withNotification notification: Notification) {
+        guard let userInfo: Dictionary = notification.userInfo else { return }
         guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
@@ -127,7 +133,8 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
         self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
     }
 
-    @objc func keyboardWillHide(withNotification notification: Notification) {
+    @objc
+    func keyboardWillHide(withNotification notification: Notification) {
         self.searchView.searchResultsTableView.contentInset.bottom = 0
         self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = 0
     }
@@ -142,7 +149,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
         searchBarShadow.superview?.bringSubviewToFront(searchBarShadow)
 
         if #available(iOS 13.0, *) {
-            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
             visualEffectView.frame = searchBarShadow.bounds
             visualEffectView.isUserInteractionEnabled = false
             searchBarShadow.insertSubview(visualEffectView, at: 0)
@@ -153,7 +160,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             visualEffectView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
             visualEffectView.bottomAnchor.constraint(equalTo: searchBarShadow.bottomAnchor, constant: 0).isActive = true
         } else {
-            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
             visualEffectView.frame = searchBarShadow.bounds
             visualEffectView.isUserInteractionEnabled = false
             let background = UIView()
@@ -182,9 +189,9 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
 
     func confirmBoothModeAlert() {
         boothConfirmation.configure(title: L10n.AccountPage.disableBoothMode,
-                                           msg: "",
-                                           enable: false, presenter: self,
-                                           disposeBag: self.disposeBag)
+                                    msg: "",
+                                    enable: false, presenter: self,
+                                    disposeBag: self.disposeBag)
     }
 }
 

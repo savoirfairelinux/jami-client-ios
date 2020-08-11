@@ -79,18 +79,23 @@ class JamiSearchView: NSObject, UITableViewDelegate {
                 return cell
         }
         let searchResultsDatasource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
-        viewModel.searchResults.map { (conversations) -> Bool in
-            return conversations.isEmpty
-        }.subscribe(onNext: { [weak self] (hideFooterView) in
-            self?.searchResultsTableView.tableFooterView?.isHidden = hideFooterView
-        }).disposed(by: disposeBag)
+        viewModel.searchResults
+            .map({ (conversations) -> Bool in
+                return conversations.isEmpty
+            })
+            .subscribe(onNext: { [weak self] (hideFooterView) in
+                self?.searchResultsTableView.tableFooterView?.isHidden = hideFooterView
+            })
+            .disposed(by: disposeBag)
 
         self.viewModel.searchResults
             .bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
             .disposed(by: disposeBag)
-        searchResultsTableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
-            self?.searchResultsTableView.deselectRow(at: indexPath, animated: true)
-        }).disposed(by: disposeBag)
+        searchResultsTableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.searchResultsTableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
         searchResultsDatasource.titleForHeaderInSection = { dataSource, index in
             return dataSource.sectionModels[index].header
         }
@@ -101,10 +106,12 @@ class JamiSearchView: NSObject, UITableViewDelegate {
             .disposed(by: disposeBag)
         searchingLabel.textColor = UIColor.jamiLabelColor
 
-        self.viewModel.isSearching.subscribe(onNext: { [weak self] (isSearching) in
-            self?.searchResultsTableView.isHidden = !isSearching
-            self?.searchingLabel.isHidden = !isSearching
-        }).disposed(by: disposeBag)
+        self.viewModel.isSearching
+            .subscribe(onNext: { [weak self] (isSearching) in
+                self?.searchResultsTableView.isHidden = !isSearching
+                self?.searchingLabel.isHidden = !isSearching
+            })
+            .disposed(by: disposeBag)
     }
 
     private func configureSearchBar() {
@@ -118,7 +125,8 @@ class JamiSearchView: NSObject, UITableViewDelegate {
             .subscribe(onNext: { [weak self] in
                 self?.editSearch.onNext(true)
                 self?.searchBar.setShowsCancelButton(true, animated: false)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         //Hide Cancel button
         self.searchBar.rx.textDidEndEditing
@@ -129,19 +137,22 @@ class JamiSearchView: NSObject, UITableViewDelegate {
                     return
                 }
                 self.editSearch.onNext(false)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         //Cancel button event
         self.searchBar.rx.cancelButtonClicked
             .subscribe(onNext: { [weak self] in
                 self?.cancelSearch()
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         //Search button event
         self.searchBar.rx.searchButtonClicked
             .subscribe(onNext: { [weak self] in
                 self?.searchBar.resignFirstResponder()
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         searchBar.returnKeyType = .done
         searchBar.autocapitalizationType = .none

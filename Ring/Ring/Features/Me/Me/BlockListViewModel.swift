@@ -35,7 +35,7 @@ class BlockListViewModel: ViewModel {
     lazy var blockedContactsItems: Observable<[BannedContactItem]> = {
         return self.contacts.asObservable().map({ [weak self] contacts in
             var bannedItems = [BannedContactItem]()
-            _ = contacts.filter {contact in contact.banned}
+            _ = contacts.filter { contact in contact.banned }
                 .map({ contact in
                     let items = self?.initialItems.filter({ item in
                         return item.contact.hash == contact.hash
@@ -53,18 +53,20 @@ class BlockListViewModel: ViewModel {
     }()
 
     lazy var contactListNotEmpty: Observable<Bool> = {
-        return self.contacts.asObservable().map({ contacts in
-            return contacts.filter {contact in contact.banned}
-        }).map({ contacts in
-            return !contacts.isEmpty
-        })
+        return self.contacts.asObservable()
+            .map({ contacts in
+                return contacts.filter { contact in contact.banned }
+            })
+            .map({ contacts in
+                return !contacts.isEmpty
+            })
     }()
 
     // create list of banned items with photo and name
     lazy var initialItems: [BannedContactItem] = {
-        guard let accountId = currentAccountId else {return [BannedContactItem]()}
+        guard let accountId = currentAccountId else { return [BannedContactItem]() }
         return self.contactService.contacts.value
-            .filter({ contact in contact.banned})
+            .filter({ contact in contact.banned })
             .map { contact in
                 var item = BannedContactItem(withContact: contact)
                 if let uri = contact.uriString {
@@ -81,7 +83,8 @@ class BlockListViewModel: ViewModel {
                                                             return
                             }
                             item.image = data
-                        }).disposed(by: self.disposeBag)
+                        })
+                        .disposed(by: self.disposeBag)
                 }
                 if contact.userName == nil || contact.userName! == "" {
                     self.nameService.usernameLookupStatus.single()
@@ -93,11 +96,12 @@ class BlockListViewModel: ViewModel {
                             if let name = lookupNameResponse.name, !name.isEmpty {
                                 contact.userName = name
                             }
-                        }).disposed(by: self.disposeBag)
+                        })
+                        .disposed(by: self.disposeBag)
                     self.nameService.lookupAddress(withAccount: accountId, nameserver: "", address: contact.hash)
                 }
                 return item
-        }
+            }
     }()
 
     required init(with injectionBag: InjectionBag) {

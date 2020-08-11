@@ -55,29 +55,31 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.stateSubject
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] (state) in
-            guard let state = state as? ConversationState else { return }
-            switch state {
-            case .createNewAccount:
-                self.createNewAccount()
-            case .showDialpad(let inCall):
-                self.showDialpad(inCall: inCall)
-            case .showGeneralSettings:
-                self.showGeneralSettings()
-            case .navigateToCall(let call):
-                self.presentCallController(call: call)
-            case .showContactPicker(let callID):
-                self.showConferenseableList(callId: callID)
-            default:
-                break
-            }
-        }).disposed(by: self.disposeBag)
+                guard let state = state as? ConversationState else { return }
+                switch state {
+                case .createNewAccount:
+                    self.createNewAccount()
+                case .showDialpad(let inCall):
+                    self.showDialpad(inCall: inCall)
+                case .showGeneralSettings:
+                    self.showGeneralSettings()
+                case .navigateToCall(let call):
+                    self.presentCallController(call: call)
+                case .showContactPicker(let callID):
+                    self.showConferenseableList(callId: callID)
+                default:
+                    break
+                }
+            })
+            .disposed(by: self.disposeBag)
 
         self.callService.newCall
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (call) in
                 self.showIncomingCall(call: call)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
         //for iOS version less than 10 support open call from notification
@@ -88,17 +90,19 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             .subscribe(onNext: {[unowned self] _ in
                 self.navigationViewController.viewModel =
                     ChatTabBarItemViewModel(with: self.injectionBag)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     // swiftlint:disable cyclomatic_complexity
     func showIncomingCall(call: CallModel) {
         guard let account = self.accountService
             .getAccount(fromAccountId: call.accountId),
-            !call.callId.isEmpty else {return}
+            !call.callId.isEmpty else { return }
         if self.accountService.boothMode() {
             self.callService.refuse(callId: call.callId)
-                .subscribe().disposed(by: self.disposeBag)
+                .subscribe()
+                .disposed(by: self.disposeBag)
             return
         }
         guard let topController = getTopController(),
@@ -127,42 +131,45 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
                 }
                 topController.dismiss(animated: false, completion: nil)
-                guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+                guard let parent = self.parentCoordinator as? AppCoordinator else { return }
                 parent.openConversation(participantID: call.participantUri)
                 self.present(viewController: callViewController,
                              withStyle: .appear,
                              withAnimation: false,
                              withStateable: callViewController.viewModel)
-        }
+            }
         callsProvider.sharedResponseStream
             .filter({ serviceEvent in
                 if serviceEvent.eventType != ServiceEventType.callProviderAnswerCall {
                     return false
                 }
                 guard let callUUID: String = serviceEvent
-                    .getEventInput(ServiceEventInput.callUUID) else {return false}
+                    .getEventInput(ServiceEventInput.callUUID) else { return false }
                 return callUUID == call.callUUID.uuidString
-            }).subscribe(onNext: { _ in
+            })
+            .subscribe(onNext: { _ in
                 self.navigationViewController.popToRootViewController(animated: false)
                 if account.id != call.accountId {
                     self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
                 }
                 topController.dismiss(animated: false, completion: nil)
-                guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+                guard let parent = self.parentCoordinator as? AppCoordinator else { return }
                 parent.openConversation(participantID: call.participantUri)
                 self.present(viewController: callViewController,
                              withStyle: .appear,
                              withAnimation: false,
                              withStateable: callViewController.viewModel)
                 tempBag = DisposeBag()
-            }).disposed(by: tempBag)
+            })
+            .disposed(by: tempBag)
         callViewController.viewModel.dismisVC
             .share()
             .subscribe(onNext: { hide in
                 if hide {
                     tempBag = DisposeBag()
                 }
-            }).disposed(by: tempBag)
+            })
+            .disposed(by: tempBag)
     }
 
     func createNewAccount() {
@@ -258,9 +265,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         helper.presentCallNotification(data: data, callService: self.callService)
     }
 
-// MARK: - iOS 9.3 - 10
+    // MARK: - iOS 9.3 - 10
 
-    @objc func answerIncomingCall(_ notification: NSNotification) {
+    @objc
+    func answerIncomingCall(_ notification: NSNotification) {
         guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String,
             let call = self.callService.call(callID: callid) else {
                 return
@@ -273,6 +281,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                               withStyle: .present,
                               withAnimation: false,
                               withStateable: callViewController.viewModel)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

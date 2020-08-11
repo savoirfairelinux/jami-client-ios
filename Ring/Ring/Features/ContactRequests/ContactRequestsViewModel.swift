@@ -129,8 +129,8 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         guard let currentAccount = accountsService.currentAccount else { return }
 
         self.nameService.lookupAddress(withAccount: currentAccount.id,
-                                              nameserver: "",
-                                              address: item.contactRequest.ringId)
+                                       nameserver: "",
+                                       address: item.contactRequest.ringId)
     }
 
     func showConversation (forRingId ringId: String) {

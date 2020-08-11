@@ -62,7 +62,7 @@ class CallViewModel: Stateable, ViewModel {
             guard let call = self.call else {
                 return
             }
-            guard let account = self.accountService.currentAccount else {return}
+            guard let account = self.accountService.currentAccount else { return }
             isHeadsetConnected = self.audioService.isHeadsetConnected.value
             isAudioOnly = call.isAudioOnly
             let type = account.type == AccountType.sip
@@ -70,30 +70,34 @@ class CallViewModel: Stateable, ViewModel {
             self.callService
                 .currentCall(callId: call.callId)
                 .share()
-            .startWith(call)
-            .subscribe(onNext: { [weak self] call in
-                self?.currentCallVariable.value = call
-            }).disposed(by: self.callDisposeBag)
+                .startWith(call)
+                .subscribe(onNext: { [weak self] call in
+                    self?.currentCallVariable.value = call
+                })
+                .disposed(by: self.callDisposeBag)
             // do other initializong only once
             if oldValue != nil {
                 return
             }
-            self.callService.currentConferenceEvent
-                .asObservable().filter { [weak self] conference-> Bool in
+            self.callService
+                .currentConferenceEvent
+                .asObservable()
+                .filter({ [weak self] conference-> Bool in
                     return conference.calls.contains(self?.call?.callId ?? "") ||
                         conference.conferenceID == self?.rendererId
-            }
-            .subscribe(onNext: { [weak self] conf in
-                if conf.conferenceID.isEmpty {
-                    return
-                }
-                guard let updatedCall = self?.callService.call(callID: call.callId) else {return}
-                self?.call = updatedCall
-                let conferenceCreated = conf.state == ConferenceState.conferenceCreated.rawValue
-                self?.rendererId = conferenceCreated ? conf.conferenceID : self!.call!.callId
-                self?.containerViewModel?.isConference = conferenceCreated
-                self?.conferenceMode.value = conferenceCreated
-            }).disposed(by: self.disposeBag)
+                })
+                .subscribe(onNext: { [weak self] conf in
+                    if conf.conferenceID.isEmpty {
+                        return
+                    }
+                    guard let updatedCall = self?.callService.call(callID: call.callId) else { return }
+                    self?.call = updatedCall
+                    let conferenceCreated = conf.state == ConferenceState.conferenceCreated.rawValue
+                    self?.rendererId = conferenceCreated ? conf.conferenceID : self!.call!.callId
+                    self?.containerViewModel?.isConference = conferenceCreated
+                    self?.conferenceMode.value = conferenceCreated
+                })
+                .disposed(by: self.disposeBag)
             self.rendererId = call.callId
             containerViewModel =
                 ButtonsContainerViewModel(isAudioOnly: self.isAudioOnly,
@@ -102,12 +106,12 @@ class CallViewModel: Stateable, ViewModel {
                                           callID: call.callId,
                                           isSipCall: type,
                                           isIncoming: call.callType == .incoming)
-            currentCall.map({ call in
-                return call.state == .current
-            }).subscribe(onNext: { [weak self] _ in
-                self?.videoService
-                    .setCameraOrientation(orientation: UIDevice.current.orientation)
-            }).disposed(by: self.disposeBag)
+            currentCall
+                .map({ call in return call.state == .current })
+                .subscribe(onNext: { [weak self] _ in
+                    self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 
@@ -120,16 +124,15 @@ class CallViewModel: Stateable, ViewModel {
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
-                  infoHach: call.participantUri,
-                  account: account).uriString else {return nil}
+                                           infoHach: call.participantUri,
+                                           account: account).uriString else { return nil }
         return self.profileService.getProfile(uri: uriString,
                                               createIfNotexists: true, accountId: account.id)
             .filter({ profile in
-                guard let photo = profile.photo else {
-                    return false
-                }
+                guard let photo = profile.photo else { return false }
                 return true
-            }).map({ profile in
+            })
+            .map({ profile in
                 return NSData(base64Encoded: profile.photo!,
                               options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
             })
@@ -160,7 +163,8 @@ class CallViewModel: Stateable, ViewModel {
         return currentCall
             .filter({ call in
                 return call.state == .over || call.state == .failure
-            }).map({ [weak self] call in
+            })
+            .map({ [weak self] call in
                 let hide = call.state == .over || call.state == .failure
                 //if it was conference call switch to another running call
                 if hide && call.participantsCallId.count > 1 {
@@ -190,16 +194,18 @@ class CallViewModel: Stateable, ViewModel {
         return currentCall
             .startWith(self.call ?? CallModel())
             .filter({ call in
-            return call.state != .over && call.state != .inactive
-        }).map({ call in
-            if !call.displayName.isEmpty {
-                return call.displayName
-            } else if !call.registeredName.isEmpty {
-                return call.registeredName
-            } else {
-                return call.paricipantHash()
-            }
-        }).asDriver(onErrorJustReturn: "")
+                return call.state != .over && call.state != .inactive
+            })
+            .map({ call in
+                if !call.displayName.isEmpty {
+                    return call.displayName
+                } else if !call.registeredName.isEmpty {
+                    return call.registeredName
+                } else {
+                    return call.paricipantHash()
+                }
+            })
+            .asDriver(onErrorJustReturn: "")
     }()
 
     lazy var callDuration: Driver<String> = {
@@ -207,27 +213,27 @@ class CallViewModel: Stateable, ViewModel {
             .takeUntil(currentCall
                 .filter { call in
                     call.state == .over
-            })
+                })
             .map({ [weak self] (elapsed) -> String in
                 var time = elapsed
                 if let startTime = self?.call?.dateReceived {
                     time = Int(Date().timeIntervalSince1970 - startTime.timeIntervalSince1970)
                 }
                 return CallViewModel.formattedDurationFrom(interval: time)
-            }).share()
-        return currentCall.filter({ call in
-            return call.state == .current
-        }).flatMap({ _ in
-            return timer
-        }).asDriver(onErrorJustReturn: "")
+            })
+            .share()
+
+        return currentCall
+            .filter({ call in return call.state == .current })
+            .flatMap({ _ in return timer })
+            .asDriver(onErrorJustReturn: "")
     }()
 
     lazy var bottomInfo: Observable<String> = {
         return currentCall
             .startWith(self.call ?? CallModel())
-            .filter({call in
-                return call.callType == .outgoing
-            }).map({call in
+            .filter({ call in return call.callType == .outgoing })
+            .map({call in
                 switch call.state {
                 case .connecting :
                     return L10n.Calls.connecting
@@ -240,7 +246,7 @@ class CallViewModel: Stateable, ViewModel {
                 default :
                     return ""
                 }
-        })
+            })
     }()
 
     lazy var isActiveVideoCall: Observable<Bool> = { [weak self] in
@@ -260,9 +266,8 @@ class CallViewModel: Stateable, ViewModel {
                 return (call.state == .connecting ||
                     call.state == .ringing ||
                     call.state == .current)
-            }).map({ call in
-                return call.state == .connecting || call.state == .ringing
             })
+            .map({ call in return call.state == .connecting || call.state == .ringing })
         }()
 
     lazy var showCapturedFrame: Observable<Bool> = {
@@ -271,7 +276,8 @@ class CallViewModel: Stateable, ViewModel {
                 return (call.state == .connecting ||
                     call.state == .ringing ||
                     call.state == .current)
-            }).map({ call in
+            })
+            .map({ call in
                 call.state == .current
             })
         }()
@@ -292,11 +298,9 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var videoMuted: Observable<Bool> = {
-        return currentCall.filter({ call in
-            call.state == .current
-        }).map({call in
-            return call.videoMuted
-        })
+        return currentCall
+            .filter({ call in call.state == .current })
+            .map({ call in return call.videoMuted })
     }()
 
     lazy var audioButtonState: Observable<UIImage?> = {
@@ -334,11 +338,9 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var audioMuted: Observable<Bool> = {
-        return currentCall.filter({ call in
-            call.state == .current
-        }).map({call in
-            return call.audioMuted
-        })
+        return currentCall
+            .filter({ call in call.state == .current })
+            .map({ call in return call.audioMuted })
     }()
 
     lazy var pauseCallButtonState: Observable<UIImage?> = {
@@ -354,17 +356,19 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var callPaused: Observable<Bool> = {
-        return currentCall.filter({ call in
-           (call.state == .hold ||
+        return currentCall
+            .filter({ call in
+                (call.state == .hold ||
                     call.state == .unhold ||
                     call.state == .current)
-        }).map({call in
-            if  call.state == .hold ||
-                (call.state == .current && call.peerHolding) {
-                return true
-            }
-            return false
-        })
+            })
+            .map({call in
+                if  call.state == .hold ||
+                    (call.state == .current && call.peerHolding) {
+                    return true
+                }
+                return false
+            })
     }()
 
     lazy var callForConference: Observable<CallModel> = {
@@ -388,10 +392,11 @@ class CallViewModel: Stateable, ViewModel {
         callsProvider.sharedResponseStream
             .filter({ [weak self] serviceEvent in
                 guard let callUUID: String = serviceEvent
-                    .getEventInput(ServiceEventInput.callUUID) else {return false}
+                    .getEventInput(ServiceEventInput.callUUID) else { return false }
                 return callUUID == self?.call?.callUUID.uuidString
-            }).subscribe(onNext: { [weak self] serviceEvent in
-                guard let self = self else {return}
+            })
+            .subscribe(onNext: { [weak self] serviceEvent in
+                guard let self = self else { return }
                 if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
                     self.answerCall()
                         .subscribe()
@@ -399,20 +404,23 @@ class CallViewModel: Stateable, ViewModel {
                 } else if serviceEvent.eventType == ServiceEventType.callProviderCancellCall {
                     self.cancelCall(stopProvider: false)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         callsProvider.sharedResponseStream
             .filter({ serviceEvent in
                 serviceEvent.eventType == .audioActivated
-            }).subscribe(onNext: { [weak self] _ in
-                guard let self = self else {return}
+            })
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 self.audioService.startAudio()
                 //for outgoing calls ve create audio sesion with default parameters.
                 //for incoming call audio session is created, ve need to override it
                 let overrideOutput = self.call?.callTypeValue == CallType.incoming.rawValue
                 self.audioService.setDefaultOutput(toSpeaker: !self.isAudioOnly,
                                                    override: overrideOutput)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     static func formattedDurationFrom(interval: Int) -> String {
@@ -441,7 +449,8 @@ class CallViewModel: Stateable, ViewModel {
         }
         self.callService
             .hangUpCallOrConference(callId: rendererId)
-            .subscribe().disposed(by: self.disposeBag)
+            .subscribe()
+            .disposed(by: self.disposeBag)
     }
 
     func answerCall() -> Completable {
@@ -464,7 +473,8 @@ class CallViewModel: Stateable, ViewModel {
                 }
                 self?.callsProvider
                     .startCall(account: account, call: callModel)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func respondOnTap() {
@@ -483,14 +493,16 @@ class CallViewModel: Stateable, ViewModel {
                     self?.log.info("call paused")
                     }, onError: { [weak self](error) in
                         self?.log.info(error)
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         } else if call.state == .hold {
             self.callService.unhold(callId: call.callId)
                 .subscribe(onCompleted: { [weak self] in
                     self?.log.info("call unpaused")
                     }, onError: { [weak self](error) in
                         self?.log.info(error)
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 

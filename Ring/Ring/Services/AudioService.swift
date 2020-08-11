@@ -23,10 +23,10 @@ import SwiftyBeaver
 import RxSwift
 
 enum OutputPortType: Int {
-    case builtinspk     = 0
-    case bluetooth      = 1
-    case headphones     = 2
-    case receiver       = 3
+    case builtinspk = 0
+    case bluetooth = 1
+    case headphones = 2
+    case receiver = 3
 }
 
 class AudioService {
@@ -46,7 +46,8 @@ class AudioService {
         self.audioAdapter = audioAdapter
     }
 
-    @objc private func audioRouteChangeListener(_ notification: Notification) {
+    @objc
+    private func audioRouteChangeListener(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
             let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt else {
                 return

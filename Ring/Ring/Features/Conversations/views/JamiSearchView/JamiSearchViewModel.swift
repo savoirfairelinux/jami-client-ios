@@ -24,6 +24,7 @@ import RxCocoa
 
 protocol FilterConversationDataSource {
     var conversationViewModels: [ConversationViewModel] { get set }
+
     func conversationFound(conversation: ConversationViewModel?, name: String)
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel)
 }
@@ -50,7 +51,8 @@ class JamiSearchViewModel {
                                 sections.append(ConversationSection(header: L10n.Smartlist.results, items: [contactFoundConversation!]))
                             }
                             return sections
-            }).observeOn(MainScheduler.instance)
+            })
+            .observeOn(MainScheduler.instance)
     }()
 
     fileprivate var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
@@ -70,16 +72,18 @@ class JamiSearchViewModel {
         //Observes if the user is searching
         self.isSearching = searchBarText.asObservable()
             .map({ text in
-            return !text.isEmpty
-        }).observeOn(MainScheduler.instance)
+                return !text.isEmpty
+            })
+            .observeOn(MainScheduler.instance)
 
         //Observes search bar text
         searchBarText.asObservable()
             .observeOn(MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
-            self?.search(withText: text)
-        }).disposed(by: disposeBag)
+                self?.search(withText: text)
+            })
+            .disposed(by: disposeBag)
 
         //Observe username lookup
         self.nameService.usernameLookupStatus
@@ -117,7 +121,8 @@ class JamiSearchViewModel {
                         self.searchStatus.onNext("")
                     }
                 }
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
 
     fileprivate func search(withText text: String) {
@@ -128,7 +133,7 @@ class JamiSearchViewModel {
         self.filteredResults.value.removeAll()
         self.searchStatus.onNext("")
 
-        if text.isEmpty {return}
+        if text.isEmpty { return }
 
         //Filter conversations
         let filteredConversations = self.dataSource.conversationViewModels

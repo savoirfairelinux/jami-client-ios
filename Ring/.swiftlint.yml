@@ -2,7 +2,29 @@ disabled_rules: # rule identifiers to exclude from running
   - todo
 
 opt_in_rules: # some rules are only opt-in
-  - empty_count
+  - closure_spacing # can be autocorrected
+  - closure_end_indentation
+  - literal_expression_end_indentation
+  - operator_usage_whitespace
+  - unused_import
+  - explicit_self
+  - modifier_order
+  - toggle_bool
+  - empty_count # can't be autocorrected
+  #- indentation_width
+  - multiline_function_chains
+  - closing_brace_spacing
+  #- closure_body_length
+  - unused_declaration
+  - vertical_parameter_alignment_on_call
+  - collection_alignment
+  - identical_operands
+  - let_var_whitespace
+  - attributes
+  #- lower_acl_than_parent
+  #- strict_fileprivate
+  #- overridden_super_call
+  #- unowned_variable_capture
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage

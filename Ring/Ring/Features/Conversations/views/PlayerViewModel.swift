@@ -88,43 +88,45 @@ class PlayerViewModel {
             }
             return self?.incomingFrame.filter {  [weak self] (render) -> Bool in
                 render?.rendererId == self?.playerId
-                } ?? Observable.just(renderer)
+            } ?? Observable.just(renderer)
         })
             .merge()
             .subscribe(onNext: {  [weak self] (renderer) in
                 self?.playBackFrame.onNext(renderer?.data)
-            }).disposed(by: self.playBackDisposeBag)
+            })
+            .disposed(by: self.playBackDisposeBag)
 
         // subscribe for fileInfo
         self.videoService.playerInfo
             .asObservable()
-            .filter {  [weak self] (player) -> Bool in
+            .filter({  [weak self] (player) -> Bool in
                 player.playerId == self?.playerId
-        }
-        .take(1)
-        .subscribe(onNext: {  [weak self] player in
-            guard let duration = Float(player.duration),
-            duration > 0 else {
-                DispatchQueue.main.async {
-                    self?.videoService.closePlayer(playerId: self?.playerId ?? "")
+            })
+            .take(1)
+            .subscribe(onNext: {  [weak self] player in
+                guard let duration = Float(player.duration),
+                    duration > 0 else {
+                        DispatchQueue.main.async {
+                            self?.videoService.closePlayer(playerId: self?.playerId ?? "")
+                        }
+                        return
                 }
-                return
-            }
-            self?.playerDuration.value = duration
-            self?.hasVideo.value = player.hasVideo
-            if !player.hasVideo {
-                self?.startTimer()
-                self?.audioMuted.value = false
-                self?.playerReady.value = true
-                return
-            }
-            // mute audio so it is not played when extracting first frame
-            self?.audioMuted.value = true
-            self?.videoService.mutePlayerAudio(playerId: player.playerId,
-                                               mute: self?.audioMuted.value ?? true)
-            //unpause player to get first video frame
-            self?.toglePause()
-        }).disposed(by: self.playBackDisposeBag)
+                self?.playerDuration.value = duration
+                self?.hasVideo.value = player.hasVideo
+                if !player.hasVideo {
+                    self?.startTimer()
+                    self?.audioMuted.value = false
+                    self?.playerReady.value = true
+                    return
+                }
+                // mute audio so it is not played when extracting first frame
+                self?.audioMuted.value = true
+                self?.videoService.mutePlayerAudio(playerId: player.playerId,
+                                                   mute: self?.audioMuted.value ?? true)
+                //unpause player to get first video frame
+                self?.toglePause()
+            })
+            .disposed(by: self.playBackDisposeBag)
     }
 
     func userStartSeeking() {
@@ -163,12 +165,12 @@ class PlayerViewModel {
     }
 
     func toglePause() {
-        pause.value = !pause.value
+        pause.value.toggle()
         videoService.pausePlayer(playerId: playerId, pause: pause.value)
     }
 
     func muteAudio() {
-        audioMuted.value = !audioMuted.value
+        audioMuted.value.toggle()
         videoService.mutePlayerAudio(playerId: playerId, mute: audioMuted.value)
     }
 
@@ -182,7 +184,8 @@ class PlayerViewModel {
 
     var currentTime: Int64 = 0
 
-    @objc func updateTimer(timer: Timer) {
+    @objc
+    func updateTimer(timer: Timer) {
         let time = self.videoService.getPlayerPosition(playerId: self.playerId)
         if time < 0 {
             return

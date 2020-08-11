@@ -41,6 +41,7 @@ enum ConversationState: State {
 protocol ConversationNavigation: class {
 
     var injectionBag: InjectionBag { get }
+
     func addLockFlags()
 }
 
@@ -48,33 +49,35 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
 
     // swiftlint:disable cyclomatic_complexity
     func callbackPlaceCall() {
-        self.stateSubject.subscribe(onNext: { [unowned self] (state) in
-            guard let state = state as? ConversationState else { return }
-            switch state {
-            case .startCall(let contactRingId, let name):
-                self.startOutgoingCall(contactRingId: contactRingId, userName: name)
-            case .startAudioCall(let contactRingId, let name):
-                self.startOutgoingCall(contactRingId: contactRingId, userName: name, isAudioOnly: true)
-            case .conversationDetail (let conversationViewModel):
-                self.showConversation(withConversationViewModel: conversationViewModel)
-            case .contactDetail(let conversationModel):
-                self.presentContactInfo(conversation: conversationModel)
-            case .qrCode:
-                self.openQRCode()
-            case .recordFile(let conversation, let audioOnly):
-                self.openRecordFile(conversation: conversation, audioOnly: audioOnly)
-            case .fromCallToConversation(let conversation):
-                self.fromCallToConversation(withConversationViewModel: conversation)
-            case .navigateToCall(let call):
-                self.presentCallController(call: call)
-            case .needAccountMigration(let accountId):
-                self.migrateAccount(accountId: accountId)
-            case .accountModeChanged:
-                self.accountModeChanged()
-            default:
-                break
-            }
-        }).disposed(by: self.disposeBag)
+        self.stateSubject
+            .subscribe(onNext: { [unowned self] (state) in
+                guard let state = state as? ConversationState else { return }
+                switch state {
+                case .startCall(let contactRingId, let name):
+                    self.startOutgoingCall(contactRingId: contactRingId, userName: name)
+                case .startAudioCall(let contactRingId, let name):
+                    self.startOutgoingCall(contactRingId: contactRingId, userName: name, isAudioOnly: true)
+                case .conversationDetail (let conversationViewModel):
+                    self.showConversation(withConversationViewModel: conversationViewModel)
+                case .contactDetail(let conversationModel):
+                    self.presentContactInfo(conversation: conversationModel)
+                case .qrCode:
+                    self.openQRCode()
+                case .recordFile(let conversation, let audioOnly):
+                    self.openRecordFile(conversation: conversation, audioOnly: audioOnly)
+                case .fromCallToConversation(let conversation):
+                    self.fromCallToConversation(withConversationViewModel: conversation)
+                case .navigateToCall(let call):
+                    self.presentCallController(call: call)
+                case .needAccountMigration(let accountId):
+                    self.migrateAccount(accountId: accountId)
+                case .accountModeChanged:
+                    self.accountModeChanged()
+                default:
+                    break
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func migrateAccount(accountId: String) {
@@ -135,7 +138,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func fromCallToConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
-        guard let navigationController = self.rootViewController as? UINavigationController else {return}
+        guard let navigationController = self.rootViewController as? UINavigationController else { return }
         let controllers = navigationController.children
         for controller in controllers
             where controller.isKind(of: (ConversationViewController).self) {
@@ -164,7 +167,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func presentCallController (call: CallModel) {
-        guard let navController = self.rootViewController as? UINavigationController else {return}
+        guard let navController = self.rootViewController as? UINavigationController else { return }
         let controllers = navController.children
         for controller in controllers
             where controller.isKind(of: (CallViewController).self) {
