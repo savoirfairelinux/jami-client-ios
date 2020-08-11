@@ -30,9 +30,7 @@ import SwiftyBeaver
 // swiftlint:disable file_length
 class ConversationViewModel: Stateable, ViewModel {
 
-    /**
-     logguer
-     */
+    /// Logger
     private let log = SwiftyBeaver.self
 
     //Services
@@ -48,16 +46,14 @@ class ConversationViewModel: Stateable, ViewModel {
 
     private let injectionBag: InjectionBag
 
+    private let disposeBag = DisposeBag()
+
+    var messages = Variable([MessageViewModel]())
+
     private var players = [String: PlayerViewModel]()
 
-    func getPlayer(messageID: String) -> PlayerViewModel? {
-        return players[messageID]
-    }
-
-    func setPlayer(messageID: String, player: PlayerViewModel) {
-        players[messageID] = player
-    }
-
+    func getPlayer(messageID: String) -> PlayerViewModel? { return players[messageID] }
+    func setPlayer(messageID: String, player: PlayerViewModel) { players[messageID] = player }
     func closeAllPlayers() {
         let queue = DispatchQueue.global(qos: .default)
         queue.sync {
@@ -76,17 +72,45 @@ class ConversationViewModel: Stateable, ViewModel {
     lazy var typingIndicator: Observable<Bool> = {
         return self.conversationsService
             .sharedResponseStream
-            .filter { [weak self] (event) -> Bool in
+            .filter({ [weak self] (event) -> Bool in
                 return event.eventType == ServiceEventType.messageTypingIndicator &&
                     event.getEventInput(ServiceEventInput.accountId) == self?.conversation.value.accountId &&
                     event.getEventInput(ServiceEventInput.peerUri) == self?.conversation.value.hash
-            }.map { (event) -> Bool in
-            if let status: Int = event.getEventInput(ServiceEventInput.state), status == 1 {
-                return true
-            }
-            return false
-            }
+            })
+            .map({ (event) -> Bool in
+                if let status: Int = event.getEventInput(ServiceEventInput.state), status == 1 {
+                    return true
+                }
+                return false
+            })
     }()
+
+    private var contactUri: String { self.conversation.value.participantUri }
+
+    private var isJamsAccount: Bool { self.accountService.isJams(for: self.conversation.value.accountId) }
+
+    var isAccountSip: Bool = false
+
+    var displayName = Variable<String?>(nil)
+    var userName = Variable<String>("")
+    lazy var bestName: Observable<String> = {
+        return Observable
+            .combineLatest(userName.asObservable(),
+                           displayName.asObservable(),
+                           resultSelector: {(userName, displayname) in
+                            guard let displayname = displayname, !displayname.isEmpty else { return userName }
+                            return displayname
+            })
+    }()
+
+    /// My contact's profile's image data
+    var profileImageData = Variable<Data?>(nil)
+    /// My profile's image data
+    var myOwnProfileImageData: Data?
+
+    var inviteButtonIsAvailable = BehaviorSubject(value: true)
+
+    var contactPresence = Variable<Bool>(false)
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -99,251 +123,109 @@ class ConversationViewModel: Stateable, ViewModel {
         self.dataTransferService = injectionBag.dataTransferService
         self.callService = injectionBag.callService
         self.locationSharingService = injectionBag.locationSharingService
-
-        dateFormatter.dateStyle = .medium
-        hourFormatter.dateFormat = "HH:mm"
-
-        self.subscribeLocationReceivedEvent()
-        self.subscribeProfileServiceEvent()
     }
 
-    private func subscribeLocationReceivedEvent() {
-        self.locationSharingService
-            .peerUriAndLocationReceived
-            .subscribe(onNext: { [weak self] tuple in
-                guard let self = self, let peerUri = tuple.0, let conversation = self.conversation else { return }
-                let coordinates = tuple.1
-                if peerUri == conversation.value.participantUri {
-                    self.myContactsLocation.onNext(coordinates)
-                }
-            })
-           .disposed(by: self.disposeBag)
+    convenience init(with injectionBag: InjectionBag, conversation: ConversationModel) {
+        self.init(with: injectionBag)
+        self.setConversation(conversation) // required to trigger the didSet
     }
 
-    private func subscribeProfileServiceEvent() {
-        guard let account = self.accountService.currentAccount else { return }
-        self.profileService
-            .getAccountProfile(accountId: account.id)
-            .subscribe(onNext: { [weak self] profile in
-                guard let self = self else { return }
-                if let photo = profile.photo,
-                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self.myOwnProfileImageData = data
-                }
-            })
-            .disposed(by: self.disposeBag)
+    private func setConversation(_ conversation: ConversationModel) {
+        self.conversation = Variable<ConversationModel>(conversation)
+    }
+
+    convenience init(with injectionBag: InjectionBag, conversation: ConversationModel, user: JamiSearchViewModel.UserSearchModel) {
+        self.init(with: injectionBag)
+        self.userName.value = user.username
+        self.displayName.value = user.firstName + " " + user.lastName
+        self.profileImageData.value = user.profilePicture
+        self.setConversation(conversation) // required to trigger the didSet
     }
 
     var conversation: Variable<ConversationModel>! {
         didSet {
-            let contactUri = self.conversation.value.participantUri
 
-            self.conversationsService
-                .conversationsForCurrentAccount
-                .map({ [weak self] conversations in
-                    return conversations.filter({ conv -> Bool in
-                        let recipient1 = conv.participantUri
-                        let recipient2 = contactUri
-                        if recipient1 == recipient2 {
-                            return true
-                        }
-                        return false
-                    }).map({ [weak self] conversation -> (ConversationModel) in
-                        self?.conversation.value = conversation
-                        return conversation
-                    })
-                        .flatMap({ conversation in
-                            conversation.messages.map({ message -> MessageViewModel? in
-                                if let injBag = self?.injectionBag {
-                                    let lastDisplayed = self?.isLastDisplayed(messageId: message.messageId) ?? false
-                                    return MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: lastDisplayed)
-                                }
-                                return nil
-                            })
-                        }).filter { (message) -> Bool in
-                            message != nil
-                        }.map { (message) -> MessageViewModel in
-                         return message!
-                        }
-                })
-                .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { [weak self] messageViewModels in
-                    guard let self = self else { return }
-                    var msg = messageViewModels
-                    if self.peerComposingMessage {
-                        let msgModel = MessageModel(withId: "",
-                                                    receivedDate: Date(),
-                                                    content: "       ",
-                                                    authorURI: self.conversation.value.participantUri,
-                                                    incoming: true)
-                        let composingIndicator = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel, isLastDisplayed: false)
-                        composingIndicator.isComposingIndicator = true
-                        msg.append(composingIndicator)
+            if self.isJamsAccount { // fixes image and displayname not showing when adding contact for first time
+                if let profile = self.contactsService.getProfile(uri: self.contactUri, accountId: self.conversation.value.accountId),
+                    let alias = profile.alias, let photo = profile.photo {
+                    self.displayName.value = alias
+                    if let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                        self.profileImageData.value = data
                     }
-                    self.messages.value = msg
-                }).disposed(by: self.disposeBag)
-
-            self.contactsService
-                .getContactRequestVCard(forContactWithRingId: self.conversation.value.hash)
-                .subscribe(onSuccess: { [weak self] vCard in
-                    guard let imageData = vCard.imageData else {
-                        self?.log.warning("vCard for ringId: \(contactUri) has no image")
-                        return
-                    }
-                    self?.profileImageData.value = imageData
-                    self?.displayName.value = VCardUtils.getName(from: vCard)
-                })
-                .disposed(by: self.disposeBag)
-
-            self.profileService
-                .getProfile(uri: contactUri,
-                            createIfNotexists: false,
-                            accountId: self.conversation.value.accountId)
-                .subscribe(onNext: { [weak self] profile in
-                    self?.displayName.value = profile.alias
-                    if let photo = profile.photo,
-                        let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                        self?.profileImageData.value = data
-                    }
-                }).disposed(by: disposeBag)
-
-            if let account = self.accountService
-                .getAccount(fromAccountId: self.conversation.value.accountId),
-                account.type == AccountType.sip {
-                    self.userName.value = self.conversation.value.hash
-                    self.isAccountSip = true
-                    return
+                }
             }
+
+            self.subscribeConversationServiceConversations()
+
+            if !self.isJamsAccount {
+                self.subscribeContactServiceRequestVCard()
+            }
+            self.subscribeProfileServiceContactPhoto()
+
+            // Used for location sharing feature
+            self.subscribeLocationServiceLocationReceived()
+            self.subscribeProfileServiceMyPhoto()
+
+            if let account = self.accountService.getAccount(fromAccountId: self.conversation.value.accountId),
+                account.type == AccountType.sip {
+                self.userName.value = self.conversation.value.hash
+                self.isAccountSip = true
+                return
+            }
+
             // invite and block buttons
-            let contact = self.contactsService.contact(withUri: contactUri)
+            let contact = self.contactsService.contact(withUri: self.contactUri)
             if contact != nil {
                 self.inviteButtonIsAvailable.onNext(false)
             }
 
-            self.contactsService.contactStatus.filter({ cont in
-                return cont.uriString == contactUri
-            })
-                .subscribe(onNext: { [weak self] _ in
-                    self?.inviteButtonIsAvailable.onNext(false)
-                }).disposed(by: self.disposeBag)
+            self.subscribeContactServiceContactStatus()
 
-            // subscribe to presence updates for the conversation's associated contact
-            if let contactPresence = self.presenceService
-                .contactPresence[self.conversation.value.hash] {
-                self.contactPresence = contactPresence
-            } else {
-                self.contactPresence.value = false
-                presenceService.sharedResponseStream
-                    .filter({ [weak self] serviceEvent in
-                        guard let uri: String = serviceEvent
-                            .getEventInput(ServiceEventInput.uri),
-                            let accountID: String = serviceEvent
-                                .getEventInput(ServiceEventInput.accountId) else { return false }
-                        return uri == self?.conversation.value.hash &&
-                            accountID == self?.conversation.value.accountId
-                    }).subscribe(onNext: { [weak self] _ in
-                        self?.subscribePresence()
-                    }).disposed(by: self.disposeBag)
-            }
+            self.subscribePresenceServiceContactPresence()
 
-            if let contactUserName = contact?.userName {
-                self.userName.value = contactUserName
-            } else {
-                self.userName.value = self.conversation.value.hash
-                // Return an observer for the username lookup
-                self.nameService.usernameLookupStatus
-                    .filter({ [weak self] lookupNameResponse in
-                        return lookupNameResponse.address != nil &&
-                            (lookupNameResponse.address == contactUri ||
-                        lookupNameResponse.address == self?.conversation.value.hash)
-                    }).subscribe(onNext: { [weak self] lookupNameResponse in
-                        if let name = lookupNameResponse.name, !name.isEmpty {
-                            self?.userName.value = name
-                            contact?.userName = name
-                        } else if let address = lookupNameResponse.address {
-                            self?.userName.value = address
-                        }
-                    }).disposed(by: disposeBag)
-
-                self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: self.conversation.value.hash)
-            }
-            self.typingIndicator
-                .subscribe(onNext: { [weak self] (typing) in
-                if typing {
-                    self?.addComposingIndicatorMsg()
+            if !self.isJamsAccount || contact != nil {
+                if let contactUserName = contact?.userName {
+                    self.userName.value = contactUserName
                 } else {
-                    self?.removeComposingIndicatorMsg()
-                }
-            }).disposed(by: self.disposeBag)
-        }
-    }
+                    self.userName.value = self.conversation.value.hash
 
-    func subscribePresence() {
-        if let contactPresence = self.presenceService
-            .contactPresence[self.conversation.value.hash] {
-            self.contactPresence = contactPresence
-        } else {
-            self.contactPresence.value = false
+                    self.subscribeUserServiceLookupStatus()
+                    self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: self.conversation.value.hash)
+                }
+            }
+
+            self.subscribeConversationServiceTypingIndicator()
         }
     }
 
     //Displays the entire date ( for messages received before the current week )
-    private let dateFormatter = DateFormatter()
-
-    //Displays the hour of the message reception ( for messages received today )
-    private let hourFormatter = DateFormatter()
-
-    private let disposeBag = DisposeBag()
-
-    var messages = Variable([MessageViewModel]())
-
-    var displayName = Variable<String?>(nil)
-
-    var userName = Variable<String>("")
-
-    var isAccountSip: Bool = false
-
-    lazy var bestName: Observable<String> = {
-        return Observable
-            .combineLatest(userName.asObservable(),
-                           displayName.asObservable()) {(userName, displayname) in
-                            guard let displayname = displayname, !displayname.isEmpty else { return userName }
-                            return displayname
-            }
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter
     }()
 
-    // My contact's
-    var profileImageData = Variable<Data?>(nil)
+    //Displays the hour of the message reception ( for messages received today )
+    private lazy var hourFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
 
-    // Mine
-    var myOwnProfileImageData: Data?
-
-    var inviteButtonIsAvailable = BehaviorSubject(value: true)
-
-    var contactPresence = Variable<Bool>(false)
-
-    var unreadMessages: String {
-       return self.unreadMessagesCount.description
+    private var unreadMessagesCount: Int {
+        let unreadMessages = self.conversation.value.messages.filter({ $0.status != .displayed && !$0.isTransfer && $0.incoming })
+        return unreadMessages.count
     }
 
-    var hasUnreadMessages: Bool {
-        return unreadMessagesCount > 0
-    }
+    var unreadMessages: String { self.unreadMessagesCount.description }
 
-    var lastMessage: String {
-        let messages = self.messages.value
-        if let lastMessage = messages.last?.content {
-            return lastMessage
-        } else {
-            return ""
-        }
-    }
+    var hasUnreadMessages: Bool { unreadMessagesCount > 0 }
+
+    var lastMessage: String { self.messages.value.last?.content ?? "" }
 
     var lastMessageReceivedDate: String {
 
-        guard let lastMessageDate = self.conversation.value.messages.last?.receivedDate else {
-            return ""
-        }
+        guard let lastMessageDate = self.conversation.value.messages.last?.receivedDate else { return "" }
 
         let dateToday = Date()
 
@@ -370,13 +252,9 @@ class ConversationViewModel: Stateable, ViewModel {
         }
     }
 
-    var hideNewMessagesLabel: Bool {
-        return self.unreadMessagesCount == 0
-    }
+    var hideNewMessagesLabel: Bool { self.unreadMessagesCount == 0 }
 
-    var hideDate: Bool {
-        return self.conversation.value.messages.isEmpty
-    }
+    var hideDate: Bool { self.conversation.value.messages.isEmpty }
 
     func sendMessage(withContent content: String) {
         // send a contact request if this is the first message (implicitly not a contact)
@@ -400,12 +278,8 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func setMessagesAsRead() {
-        guard let account = self.accountService.currentAccount else {
-            return
-        }
-        guard let ringId = AccountModelHelper(withAccount: account).ringId  else {
-            return
-        }
+        guard let account = self.accountService.currentAccount,
+              let ringId = AccountModelHelper(withAccount: account).ringId else { return }
 
         self.conversationsService
             .setMessagesAsRead(forConversation: self.conversation.value,
@@ -417,12 +291,9 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func setMessageAsRead(daemonId: String, messageId: Int64) {
-        guard let account = self.accountService.currentAccount else {
-            return
-        }
-        guard let accountURI = AccountModelHelper(withAccount: account).ringId  else {
-            return
-        }
+        guard let account = self.accountService.currentAccount,
+              let accountURI = AccountModelHelper(withAccount: account).ringId else { return }
+
         self.conversationsService
             .setMessageAsRead(daemonId: daemonId,
                               messageID: messageId,
@@ -445,23 +316,18 @@ class ConversationViewModel: Stateable, ViewModel {
         self.messages.value.removeAll(where: { $0.messageId == messageId })
     }
 
-    fileprivate var unreadMessagesCount: Int {
-        let unreadMessages = self.conversation.value.messages
-            .filter({ message in
-                return message.status != .displayed &&
-                    !message.isTransfer && message.incoming
-        })
-        return unreadMessages.count
-    }
-
     func sendContactRequest() {
-        if let contact = self.contactsService
-            .contact(withUri: self.conversation.value.participantUri),
-            contact.banned {
-            return
+        guard let currentAccount = self.accountService.currentAccount else { return }
+
+        if self.isJamsAccount {
+            _ = self.contactsService.createProfile(with: self.contactUri,
+                                                   alias: self.displayName.value!,
+                                                   photo: self.profileImageData.value!.base64EncodedString(),
+                                                   accountId: currentAccount.id)
         }
 
-        guard let currentAccount = self.accountService.currentAccount else {
+        if let contact = self.contactsService.contact(withUri: self.conversation.value.participantUri),
+            contact.banned {
             return
         }
 
@@ -472,10 +338,13 @@ class ConversationViewModel: Stateable, ViewModel {
                 self?.log.info("contact request sent")
                 }, onError: { [weak self] (error) in
                     self?.log.info(error)
-            }).disposed(by: self.disposeBag)
-        self.presenceService.subscribeBuddy(withAccountId: currentAccount.id,
-                                            withUri: self.conversation.value.hash,
-                                            withFlag: true)
+            })
+            .disposed(by: self.disposeBag)
+
+        self.presenceService
+            .subscribeBuddy(withAccountId: currentAccount.id,
+                            withUri: self.conversation.value.hash,
+                            withFlag: true)
     }
 
     func block() {
@@ -694,7 +563,191 @@ class ConversationViewModel: Stateable, ViewModel {
     var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
 }
 
-// MARK: Sharing my location
+// MARK: Conversation didSet functions
+extension ConversationViewModel {
+
+    private func subscribeConversationServiceConversations() {
+        let contactUri = self.contactUri
+
+        self.conversationsService
+            .conversationsForCurrentAccount
+            .map({ [weak self] conversations in
+                return conversations
+                    .filter({ conv -> Bool in
+                        let recipient1 = conv.participantUri
+                        let recipient2 = contactUri
+                        return recipient1 == recipient2
+                    })
+                    .map({ [weak self] conversation -> (ConversationModel) in
+                        self?.conversation.value = conversation
+                        return conversation
+                    })
+                    .flatMap({ conversation in
+                        conversation.messages.map({ message -> MessageViewModel? in
+                            if let injBag = self?.injectionBag {
+                                let lastDisplayed = self?.isLastDisplayed(messageId: message.messageId) ?? false
+                                return MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: lastDisplayed)
+                            }
+                            return nil
+                        })
+                    })
+                    .filter({ (message) -> Bool in
+                        message != nil
+                    })
+                    .map({ (message) -> MessageViewModel in
+                        return message!
+                    })
+            })
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] messageViewModels in
+                guard let self = self else { return }
+                var msg = messageViewModels
+                if self.peerComposingMessage {
+                    let msgModel = MessageModel(withId: "",
+                                                receivedDate: Date(),
+                                                content: "       ",
+                                                authorURI: self.conversation.value.participantUri,
+                                                incoming: true)
+                    let composingIndicator = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel, isLastDisplayed: false)
+                    composingIndicator.isComposingIndicator = true
+                    msg.append(composingIndicator)
+                }
+                self.messages.value = msg
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeLocationServiceLocationReceived() {
+        self.locationSharingService
+            .peerUriAndLocationReceived
+            .subscribe(onNext: { [weak self] tuple in
+                guard let self = self, let peerUri = tuple.0, let conversation = self.conversation else { return }
+                let coordinates = tuple.1
+                if peerUri == conversation.value.participantUri {
+                    self.myContactsLocation.onNext(coordinates)
+                }
+            })
+           .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeContactServiceRequestVCard() {
+        self.contactsService
+            .getContactRequestVCard(forContactWithRingId: self.conversation.value.hash)
+            .subscribe(onSuccess: { [weak self] vCard in
+                guard let imageData = vCard.imageData else {
+                    self?.log.warning("vCard for ringId: \(String(describing: self?.contactUri)) has no image")
+                    return
+                }
+                self?.profileImageData.value = imageData
+                self?.displayName.value = VCardUtils.getName(from: vCard)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeProfileServiceContactPhoto() {
+        self.profileService
+            .getProfile(uri: self.contactUri,
+                        createIfNotexists: false,
+                        accountId: self.conversation.value.accountId)
+            .subscribe(onNext: { [weak self] profile in
+                self?.displayName.value = profile.alias
+                if let photo = profile.photo,
+                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    self?.profileImageData.value = data
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func subscribeProfileServiceMyPhoto() {
+        guard let account = self.accountService.currentAccount else { return }
+        self.profileService
+            .getAccountProfile(accountId: account.id)
+            .subscribe(onNext: { [weak self] profile in
+                guard let self = self else { return }
+                if let photo = profile.photo,
+                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    self.myOwnProfileImageData = data
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribePresenceServiceContactPresence() {
+        // subscribe to presence updates for the conversation's associated contact
+        if let contactPresence = self.presenceService.contactPresence[self.conversation.value.hash] {
+            self.contactPresence = contactPresence
+        } else {
+            self.contactPresence.value = false
+            self.presenceService
+                .sharedResponseStream
+                .filter({ [weak self] serviceEvent in
+                    guard let uri: String = serviceEvent.getEventInput(ServiceEventInput.uri),
+                        let accountID: String = serviceEvent.getEventInput(ServiceEventInput.accountId) else { return false }
+                    return uri == self?.conversation.value.hash && accountID == self?.conversation.value.accountId
+                })
+                .subscribe(onNext: { [weak self] _ in
+                    self?.subscribePresence()
+                })
+                .disposed(by: self.disposeBag)
+        }
+    }
+
+    private func subscribePresence() {
+        if let contactPresence = self.presenceService
+            .contactPresence[self.conversation.value.hash] {
+            self.contactPresence = contactPresence
+        } else {
+            self.contactPresence.value = false
+        }
+    }
+
+    private func subscribeUserServiceLookupStatus() {
+        let contact = self.contactsService.contact(withUri: self.contactUri)
+
+        // Return an observer for the username lookup
+        self.nameService
+            .usernameLookupStatus
+            .filter({ [weak self] lookupNameResponse in
+                return lookupNameResponse.address != nil &&
+                    (lookupNameResponse.address == self?.contactUri ||
+                        lookupNameResponse.address == self?.conversation.value.hash)
+            })
+            .subscribe(onNext: { [weak self] lookupNameResponse in
+                if let name = lookupNameResponse.name, !name.isEmpty {
+                    self?.userName.value = name
+                    contact?.userName = name
+                } else if let address = lookupNameResponse.address {
+                    self?.userName.value = address
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func subscribeConversationServiceTypingIndicator() {
+        self.typingIndicator
+            .subscribe(onNext: { [weak self] (typing) in
+                if typing {
+                    self?.addComposingIndicatorMsg()
+                } else {
+                    self?.removeComposingIndicatorMsg()
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeContactServiceContactStatus() {
+        self.contactsService
+            .contactStatus
+            .filter({ [weak self] in $0.uriString == self?.contactUri })
+            .subscribe(onNext: { [weak self] _ in
+                self?.inviteButtonIsAvailable.onNext(false)
+            })
+            .disposed(by: self.disposeBag)
+    }
+}
+
+// MARK: Location sharing
 extension ConversationViewModel {
 
     func isAlreadySharingLocation() -> Bool {

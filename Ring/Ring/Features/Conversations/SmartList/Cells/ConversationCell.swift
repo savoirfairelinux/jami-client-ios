@@ -60,26 +60,16 @@ class ConversationCell: UITableViewCell, NibReusable {
     func configureFromItem(_ item: ConversationSection.Item) {
         // avatar
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
-                                                  item.userName.asObservable(),
-                                                  item.displayName.asObservable()) { profileImage, username, displayName in
-                                                    if let displayName = displayName, !displayName.isEmpty {
-                                                        return (profileImage, displayName)
-                                                    }
-                                                    return (profileImage, username)
-        }
+                                                  item.bestName.asObservable()) { ($0, $1) }
             .observeOn(MainScheduler.instance)
             .startWith((item.profileImageData.value, item.userName.value))
-            .subscribe({ [weak self] profileData -> Void in
-                guard let data = profileData.element?.1 else {
-                    return
-                }
+            .subscribe({ [weak self] profileData in
+                guard let data = profileData.element?.1 else { return }
+
                 self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
-                self?.avatarView
-                    .addSubview(
-                        AvatarView(profileImageData: profileData.element?.0,
-                                   username: data,
-                                   size: self?.avatarSize ?? 40))
-                return
+                self?.avatarView.addSubview(AvatarView(profileImageData: profileData.element?.0,
+                                                       username: data,
+                                                       size: self?.avatarSize ?? 40))
             })
             .disposed(by: self.disposeBag)
 
@@ -89,12 +79,12 @@ class ConversationCell: UITableViewCell, NibReusable {
 
         // presence
         if self.presenceIndicator != nil {
-        item.contactPresence.asObservable()
-            .observeOn(MainScheduler.instance)
-            .map { value in !value }
-            .bind(to: self.presenceIndicator!.rx.isHidden)
-            .disposed(by: self.disposeBag)
-            }
+            item.contactPresence.asObservable()
+                .observeOn(MainScheduler.instance)
+                .map { value in !value }
+                .bind(to: self.presenceIndicator!.rx.isHidden)
+                .disposed(by: self.disposeBag)
+        }
 
         // username
         item.bestName.asObservable()
