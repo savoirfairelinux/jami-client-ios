@@ -28,6 +28,7 @@
 #import "DRingAdapter.h"
 #import "NameRegistrationAdapter.h"
 #import "LookupNameResponse.h"
+#import "UserSearchResponse.h"
 #import "RegistrationResponse.h"
 #import "NameRegistrationResponse.h"
 #import "MessagesAdapter.h"

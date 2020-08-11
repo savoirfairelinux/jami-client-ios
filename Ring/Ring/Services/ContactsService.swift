@@ -383,6 +383,14 @@ extension ContactsService: ContactsAdapterDelegate {
         }
     }
 
+    func createProfile(with contactUri: String, alias: String, photo: String, accountId: String) -> Profile? {
+        do {
+            return try self.dbManager.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId, alias: alias, photo: photo)
+        } catch {
+            return nil
+        }
+    }
+
     func removeAllContacts(for accountId: String) {
         DispatchQueue.global(qos: .background).async {
             for contact in self.contacts.value {
