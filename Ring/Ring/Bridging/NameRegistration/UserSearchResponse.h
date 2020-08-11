@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2020 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,18 +18,21 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxDataSources
+#import <Foundation/Foundation.h>
 
-struct ConversationSection {
-    var header: String
-    var items: [Item]
-}
+//Represents the status of the user search response from to the daemon
+typedef NS_ENUM(NSInteger, UserSearchState) {
+    UserSearchStateFound = 0,
+    UserSearchStateInvalidName,
+    UserSearchStateNotFound,
+    UserSearchStateError
+};
 
-extension ConversationSection: SectionModelType {
-    typealias Item = ConversationViewModel
+@interface UserSearchResponse : NSObject
 
-    init(original: ConversationSection, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
+@property (nonatomic, retain) NSString* accountId;
+@property (nonatomic) UserSearchState state;
+@property (nonatomic, retain) NSString* query;
+@property (nonatomic, retain) NSArray* results;
+
+@end
