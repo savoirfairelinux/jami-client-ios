@@ -97,13 +97,13 @@ struct ServiceEvent {
     /**
      Identifies the event type.
      */
-    fileprivate(set) internal var eventType: ServiceEventType
+    internal private(set) var eventType: ServiceEventType
 
     // MARK: - Private members
     /**
      Contains all the metadata of the event.
      */
-    fileprivate var inputs = [ServiceEventInput: Any]()
+    private var inputs = [ServiceEventInput: Any]()
 
     /**
      Initializer

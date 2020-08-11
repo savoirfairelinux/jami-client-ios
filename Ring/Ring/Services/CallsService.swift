@@ -48,23 +48,25 @@ enum MediaType: String, CustomStringConvertible {
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class CallsService: CallsAdapterDelegate {
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let callsAdapter: CallsAdapter
-    fileprivate let log = SwiftyBeaver.self
+    private let disposeBag = DisposeBag()
+    private let callsAdapter: CallsAdapter
+    private let log = SwiftyBeaver.self
 
     var calls = Variable<[String: CallModel]>([String: CallModel]())
     var pendingConferences = [String: Set<String>]()
 
-    fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
+    private let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
 
     let currentCallsEvents = ReplaySubject<CallModel>.create(bufferSize: 1)
     let newCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
-    fileprivate let newMessagesStream = PublishSubject<ServiceEvent>()
+    private let newMessagesStream = PublishSubject<ServiceEvent>()
     var newMessage: Observable<ServiceEvent>
     let dbManager: DBManager
+
     typealias ConferenceUpdates = (conferenceID: String, state: String, calls: Set<String>)
+
     let currentConferenceEvent: Variable<ConferenceUpdates> = Variable<ConferenceUpdates>(ConferenceUpdates("", "", Set<String>()))
     let inConferenceCalls = PublishSubject<CallModel>()
 
@@ -89,22 +91,25 @@ class CallsService: CallsAdapterDelegate {
     func currentCall(callId: String) -> Observable<CallModel> {
         return self.currentCallsEvents
             .share()
-            .filter { (call) -> Bool in
+            .filter({ (call) -> Bool in
                 call.callId == callId
-        }.asObservable()
+            })
+            .asObservable()
     }
 
     func currentConference(callId: String) -> Observable<ConferenceUpdates> {
         return self.currentConferenceEvent
         .asObservable()
             .share()
-            .filter { (conference) -> Bool in
-                guard let conf = self.calls.value[conference.conferenceID] else {return false}
+            .filter({ (conference) -> Bool in
+                guard let conf = self.calls.value[conference.conferenceID] else { return false }
                 return conf.participantsCallId.contains(callId)
-        }.asObservable()
+            })
+            .asObservable()
     }
 
-    @objc func refuseUnansweredCall(_ notification: NSNotification) {
+    @objc
+    func refuseUnansweredCall(_ notification: NSNotification) {
         guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String else {
             return
         }
@@ -113,9 +118,11 @@ class CallsService: CallsAdapterDelegate {
         }
 
         if call.state == .incoming {
-            self.refuse(callId: callid).subscribe({_ in
-                print("Call ignored")
-            }).disposed(by: self.disposeBag)
+            self.refuse(callId: callid)
+                .subscribe({_ in
+                    print("Call ignored")
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 
@@ -129,7 +136,7 @@ class CallsService: CallsAdapterDelegate {
             .filter { (callModel) -> Bool in
                 callModel.paricipantHash() == participantHash &&
                     callModel.accountId == accountID
-        }.first
+            }.first
     }
 
     func accept(call: CallModel?) -> Completable {
@@ -226,7 +233,7 @@ class CallsService: CallsAdapterDelegate {
                 if call.participantsCallId.count < 2 {
                     success = self.callsAdapter.hangUpCall(withId: callId)
                 } else {
-                    success =  self.callsAdapter.hangUpConference(callId)
+                    success = self.callsAdapter.hangUpConference(callId)
                 }
                 if success {
                     completable(.completed)
@@ -328,8 +335,9 @@ class CallsService: CallsAdapterDelegate {
         if accountID.isEmpty || callID.isEmpty {
             return
         }
-        guard let vCard = self.dbManager.accountVCard(for: accountID) else {return}
-        DispatchQueue.main.async { [unowned self] in
+        guard let vCard = self.dbManager.accountVCard(for: accountID) else { return }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             VCardUtils.sendVCard(card: vCard,
                                  callID: callID,
                                  accountID: accountID,
@@ -338,7 +346,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func sendTextMessage(callID: String, message: String, accountId: AccountModel) {
-        guard let call = self.call(callID: callID) else {return}
+        guard let call = self.call(callID: callID) else { return }
         let messageDictionary = ["text/plain": message]
         self.callsAdapter.sendTextMessage(withCallID: callID,
                                           message: messageDictionary,
@@ -446,10 +454,8 @@ class CallsService: CallsAdapterDelegate {
     func shouldCallBeAddedToConference(callId: String) -> String? {
         var confId: String?
         self.pendingConferences.keys.forEach { [unowned self] (initialCall) in
-            guard let pendigs = self.pendingConferences[initialCall],
-                !pendigs.isEmpty else {
-                    return
-            }
+            guard let pendigs = self.pendingConferences[initialCall], !pendigs.isEmpty else { return }
+
             if pendigs.contains(callId) {
                 confId = initialCall
             }
@@ -458,7 +464,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String]) {
-        guard let call = self.call(callID: callId) else {return}
+        guard let call = self.call(callID: callId) else { return }
         if  message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first != nil {
             var data = [String: Any]()
             data[ProfileNotificationsKeys.ringID.rawValue] = uri
@@ -494,11 +500,13 @@ class CallsService: CallsAdapterDelegate {
                 guard let newCall = call else { return }
                 self.newCall.value = newCall
             } else {
-                self.refuse(callId: callId).subscribe(onCompleted: { [weak self] in
-                    self?.log.debug("call refused")
-                }, onError: { [weak self] _ in
-                    self?.log.debug("Could not to refuse a call")
-                }).disposed(by: self.disposeBag)
+                self.refuse(callId: callId)
+                    .subscribe(onCompleted: { [weak self] in
+                        self?.log.debug("call refused")
+                        }, onError: { [weak self] _ in
+                            self?.log.debug("Could not to refuse a call")
+                    })
+                    .disposed(by: self.disposeBag)
             }
         }
     }
@@ -559,7 +567,7 @@ class CallsService: CallsAdapterDelegate {
             values.forEach { (call) in
                 self.call(callID: call)?.participantsCallId = conferenceCalls
             }
-            guard var callDetails = self.callsAdapter.getConferenceDetails(conferenceID) else {return}
+            guard var callDetails = self.callsAdapter.getConferenceDetails(conferenceID) else { return }
             callDetails[CallDetailKey.accountIdKey.rawValue] = self.call(callID: callId)?.accountId
             callDetails[CallDetailKey.audioOnlyKey.rawValue] = self.call(callID: callId)?.isAudioOnly.toString()
             let conf = CallModel(withCallId: conferenceID, callDetails: callDetails)
@@ -571,7 +579,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func conferenceChanged(conference conferenceID: String, state: String) {
-        guard let conference = self.call(callID: conferenceID) else {return}
+        guard let conference = self.call(callID: conferenceID) else { return }
         let conferenceCalls = Set(self.callsAdapter
             .getConferenceCalls(conferenceID))
         conference.participantsCallId = conferenceCalls
@@ -583,18 +591,18 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func conferenceRemoved(conference conferenceID: String) {
-        guard let conference = self.call(callID: conferenceID) else {return}
+        guard let conference = self.call(callID: conferenceID) else { return }
         currentConferenceEvent.value = ConferenceUpdates(conferenceID, ConferenceState.conferenceDestroyed.rawValue, conference.participantsCallId)
         self.calls.value[conferenceID] = nil
      }
 
     func updateConferences(callId: String) {
         let conferences = self.calls.value.keys.filter { (callID) -> Bool in
-            guard let callModel = self.calls.value[callID] else {return false}
+            guard let callModel = self.calls.value[callID] else { return false }
             return callModel.participantsCallId.count > 1 && callModel.participantsCallId.contains(callId)
         }
 
-        guard let conferenceID = conferences.first, let conference = call(callID: conferenceID) else {return}
+        guard let conferenceID = conferences.first, let conference = call(callID: conferenceID) else { return }
         let conferenceCalls = Set(self.callsAdapter
                   .getConferenceCalls(conferenceID))
         conference.participantsCallId = conferenceCalls

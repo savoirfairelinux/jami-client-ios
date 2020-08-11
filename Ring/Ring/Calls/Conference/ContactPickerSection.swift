@@ -28,7 +28,7 @@ struct Contact {
     var hash: String
 
     lazy var presenceStatus: Variable<Bool>?  = {
-         self.presenceService
+        self.presenceService
             .contactPresence[self.hash]
     }()
 

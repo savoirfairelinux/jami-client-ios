@@ -29,19 +29,19 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         return self.stateSubject.asObservable()
     }()
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     //Services
-    fileprivate let accountService: AccountsService
-    fileprivate let networkService: NetworkService
-    fileprivate let contactService: ContactsService
+    private let accountService: AccountsService
+    private let networkService: NetworkService
+    private let contactService: ContactsService
     let conversationService: ConversationsService
 
     lazy var currentAccount: AccountModel? = {
         return self.accountService.currentAccount
     }()
 
-    fileprivate var lookupName = BehaviorRelay<String?>(value: "")
+    private var lookupName = BehaviorRelay<String?>(value: "")
 
     var searching = PublishSubject<Bool>()
 
@@ -51,6 +51,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
     func networkConnectionState() -> ConnectionType {
         return self.networkService.connectionState.value
     }
+
     let injectionBag: InjectionBag
 
     required init(with injectionBag: InjectionBag) {
@@ -70,7 +71,8 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         contactFoundConversation.value = conversation
         lookupName.accept(name)
     }
-    fileprivate var contactFoundConversation = Variable<ConversationViewModel?>(nil)
+
+    private var contactFoundConversation = Variable<ConversationViewModel?>(nil)
 
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
     }
@@ -110,6 +112,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
                     return
                 }
                 self.stateSubject.onNext(ConversationState.startCall(contactRingId: conversation.hash, userName: username))
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 @objc public protocol GrowingTextViewDelegate: UITextViewDelegate {
-    @objc optional func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat)
+    @objc optional
+    func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat)
 }
 
 @IBDesignable
@@ -47,7 +48,7 @@ open class GrowingTextView: UITextView {
         commonInit()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -63,7 +64,7 @@ open class GrowingTextView: UITextView {
         NotificationCenter.default.removeObserver(self)
     }
 
-    open override var intrinsicContentSize: CGSize {
+    override open var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: 30)
     }
 
@@ -86,6 +87,7 @@ open class GrowingTextView: UITextView {
     }
 
     private var shouldScrollAfterHeightChanged = false
+
     override open func layoutSubviews() {
         super.layoutSubviews()
 
@@ -159,7 +161,8 @@ open class GrowingTextView: UITextView {
     }
 
     // Trim white space and new line characters when end editing.
-    @objc func textDidEndEditing(notification: Notification) {
+    @objc
+    func textDidEndEditing(notification: Notification) {
         if let sender = notification.object as? GrowingTextView, sender == self {
             if trimWhiteSpaceWhenEndEditing {
                 text = text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -170,7 +173,8 @@ open class GrowingTextView: UITextView {
     }
 
     // Limit the length of text
-    @objc func textDidChange(notification: Notification) {
+    @objc
+    func textDidChange(notification: Notification) {
         if let sender = notification.object as? GrowingTextView, sender == self {
             if maxLength > 0 && text.count > maxLength {
                 let endIndex = text.index(text.startIndex, offsetBy: maxLength)

@@ -52,7 +52,7 @@ class JamiURI {
         self.parce(infoHach: infoHach)
     }
 
-    fileprivate func parce(infoHach: String, account: AccountModel) {
+    private func parce(infoHach: String, account: AccountModel) {
         self.parce(infoHach: infoHach)
         if self.schema == .ring || self.userInfo.isEmpty {
             return
@@ -67,7 +67,7 @@ class JamiURI {
         }
     }
 
-    fileprivate func parce(infoHach: String) {
+    private func parce(infoHach: String) {
         var info = infoHach.replacingOccurrences(of: "ring:", with: "")
             .replacingOccurrences(of: "sip:", with: "")
             .replacingOccurrences(of: "@ring.dht", with: "")
@@ -77,7 +77,7 @@ class JamiURI {
             userInfo = info
             return
         }
-        if info.isEmpty {return}
+        if info.isEmpty { return }
         if info.firstIndex(of: "@") != nil {
             userInfo = String(info.split(separator: "@").first!)
             info = info.replacingOccurrences(of: userInfo + "@", with: "")

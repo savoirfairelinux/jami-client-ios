@@ -22,7 +22,7 @@ import Foundation
 import RxSwift
 
 protocol TabBarItemViewModel {
-    var itemBadgeValue: Observable<String?> {get set}
+    var itemBadgeValue: Observable<String?> { get set }
 }
 
 public enum TabBarItemType {
@@ -52,6 +52,7 @@ class BaseViewController: UINavigationController {
                 .disposed(by: self.disposeBag)
         }
     }
+
     convenience init(with type: TabBarItemType) {
         self.init()
         self.navigationBar.isTranslucent = true

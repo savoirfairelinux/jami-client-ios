@@ -55,44 +55,43 @@ class ButtonsContainerViewModel {
     lazy var currentCall: Observable<CallModel> = {
         self.callService
             .currentCall(callId: self.callID)
-            .share().asObservable()
+            .share()
+            .asObservable()
     }()
 
     private func checkCallOptions() {
         let callIsActive: Observable<Bool> = self.currentCall
             .startWith(self.callService.call(callID: self.callID) ?? CallModel())
-            .filter({ call in
-                return call.state == .current
-            }).map({_ in
-                return true
-            })
+            .filter({ call in return call.state == .current })
+            .map({ _ in return true })
 
         callIsActive
             .subscribe(onNext: { [weak self] active in
-            if !active {
-                return
-            }
-            if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-                self?.avalaibleCallOptions.onNext(.optionsWithoutSpeakerphone)
-                return
-            }
-            self?.connectToSpeaker()
-        }).disposed(by: self.disposeBag)
+                if !active {
+                    return
+                }
+                if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+                    self?.avalaibleCallOptions.onNext(.optionsWithoutSpeakerphone)
+                    return
+                }
+                self?.connectToSpeaker()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func connectToSpeaker() {
         let speakerIsAvailable: Observable<Bool> = { [unowned self] in
-            return self.audioService.enableSwitchAudio.map({ (hide)  in
-                !hide
-            })
+            return self.audioService.enableSwitchAudio.map({ (hide) in !hide })
         }()
-        speakerIsAvailable.subscribe(onNext: { [weak self] available in
-            if available {
-                self?.avalaibleCallOptions.onNext(.optionsWithSpeakerphone)
-                return
-            }
+        speakerIsAvailable
+            .subscribe(onNext: { [weak self] available in
+                if available {
+                    self?.avalaibleCallOptions.onNext(.optionsWithSpeakerphone)
+                    return
+                }
 
-            self?.avalaibleCallOptions.onNext(.optionsWithoutSpeakerphone)
-        }).disposed(by: self.disposeBag)
+                self?.avalaibleCallOptions.onNext(.optionsWithoutSpeakerphone)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

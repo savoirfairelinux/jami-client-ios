@@ -112,7 +112,7 @@ class ProgressView: UIView {
         let progresPath: UIBezierPath = UIBezierPath()
         progresPath.move(to: startPoint)
 
-        guard let point = self.currentPoint else {return}
+        guard let point = self.currentPoint else { return }
         switch numberOfCornersInPath {
         case 0:
             progresPath.addLine(to: CGPoint(x: 0, y: 0))

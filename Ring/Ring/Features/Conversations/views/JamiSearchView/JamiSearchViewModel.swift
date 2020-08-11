@@ -24,6 +24,7 @@ import RxCocoa
 
 protocol FilterConversationDataSource {
     var conversationViewModels: [ConversationViewModel] { get set }
+
     func conversationFound(conversation: ConversationViewModel?, name: String)
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel)
 }
@@ -31,11 +32,11 @@ protocol FilterConversationDataSource {
 class JamiSearchViewModel {
 
     //Services
-    fileprivate let nameService: NameService
-    fileprivate let accountsService: AccountsService
-    fileprivate let injectionBag: InjectionBag
+    private let nameService: NameService
+    private let accountsService: AccountsService
+    private let injectionBag: InjectionBag
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     lazy var searchResults: Observable<[ConversationSection]> = {
         return Observable<[ConversationSection]>
@@ -50,11 +51,12 @@ class JamiSearchViewModel {
                                 sections.append(ConversationSection(header: L10n.Smartlist.results, items: [contactFoundConversation!]))
                             }
                             return sections
-            }).observeOn(MainScheduler.instance)
+            })
+            .observeOn(MainScheduler.instance)
     }()
 
-    fileprivate var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
-    fileprivate var filteredResults = Variable([ConversationViewModel]())
+    private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
+    private var filteredResults = Variable([ConversationViewModel]())
 
     let searchBarText = Variable<String>("")
     var isSearching: Observable<Bool>!
@@ -70,21 +72,24 @@ class JamiSearchViewModel {
         //Observes if the user is searching
         self.isSearching = searchBarText.asObservable()
             .map({ text in
-            return !text.isEmpty
-        }).observeOn(MainScheduler.instance)
+                return !text.isEmpty
+            })
+            .observeOn(MainScheduler.instance)
 
         //Observes search bar text
         searchBarText.asObservable()
             .observeOn(MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
-            self?.search(withText: text)
-        }).disposed(by: disposeBag)
+                self?.search(withText: text)
+            })
+            .disposed(by: disposeBag)
 
         //Observe username lookup
         self.nameService.usernameLookupStatus
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self, unowned injectionBag] usernameLookupStatus in
+            .subscribe(onNext: { [weak self, weak injectionBag] usernameLookupStatus in
+                guard let self = self, let injectionBag = injectionBag else { return }
                 if usernameLookupStatus.state == .found &&
                     (usernameLookupStatus.name == self.searchBarText.value
                         || usernameLookupStatus.address == self.searchBarText.value) {
@@ -117,10 +122,11 @@ class JamiSearchViewModel {
                         self.searchStatus.onNext("")
                     }
                 }
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
 
-    fileprivate func search(withText text: String) {
+    private func search(withText text: String) {
         guard let currentAccount = self.accountsService.currentAccount else { return }
 
         self.contactFoundConversation.accept(nil)
@@ -128,7 +134,7 @@ class JamiSearchViewModel {
         self.filteredResults.value.removeAll()
         self.searchStatus.onNext("")
 
-        if text.isEmpty {return}
+        if text.isEmpty { return }
 
         //Filter conversations
         let filteredConversations = self.dataSource.conversationViewModels

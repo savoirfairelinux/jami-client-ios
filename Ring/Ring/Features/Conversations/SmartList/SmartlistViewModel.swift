@@ -34,17 +34,17 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         return self.stateSubject.asObservable()
     }()
 
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate var tempBag = DisposeBag()
+    private let disposeBag = DisposeBag()
+    private var tempBag = DisposeBag()
 
     //Services
-    fileprivate let conversationsService: ConversationsService
-    fileprivate let nameService: NameService
-    fileprivate let accountsService: AccountsService
-    fileprivate let contactsService: ContactsService
-    fileprivate let networkService: NetworkService
-    fileprivate let profileService: ProfilesService
-    fileprivate let callService: CallsService
+    private let conversationsService: ConversationsService
+    private let nameService: NameService
+    private let accountsService: AccountsService
+    private let contactsService: ContactsService
+    private let networkService: NetworkService
+    private let profileService: ProfilesService
+    private let callService: CallsService
 
     lazy var currentAccount: AccountModel? = {
         return self.accountsService.currentAccount
@@ -52,7 +52,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     var searching = PublishSubject<Bool>()
 
-    fileprivate var contactFoundConversation = Variable<ConversationViewModel?>(nil)
+    private var contactFoundConversation = Variable<ConversationViewModel?>(nil)
 
     lazy var hideNoConversationsMessage: Observable<Bool> = {
         return Observable<Bool>
@@ -60,12 +60,13 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                            self.searching.asObservable()
                             .startWith(false),
                            resultSelector: {(conversations, searching) -> Bool in
-                            if searching {return true}
+                            if searching { return true }
                             if let convf = conversations.first {
                                 return !convf.items.isEmpty
                             }
                             return false
-            }).observeOn(MainScheduler.instance)
+            })
+            .observeOn(MainScheduler.instance)
     }()
 
     var connectionState = PublishSubject<ConnectionType>()
@@ -88,6 +89,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     func networkConnectionState() -> ConnectionType {
         return self.networkService.connectionState.value
     }
+
     let injectionBag: InjectionBag
     //Values need to be updated when selected account changed
     var profileImageForCurrentAccount = PublishSubject<Profile>()
@@ -98,7 +100,8 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 self.profileService.getAccountProfile(accountId: account.id)
                     .subscribe(onNext: { profile in
                         self.profileImageForCurrentAccount.onNext(profile)
-                    }).disposed(by: self.tempBag)
+                    })
+                    .disposed(by: self.tempBag)
             }
         })
         return profileImageForCurrentAccount.share()
@@ -114,7 +117,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 guard let account = self.accountsService.currentAccount else {
                     return UIImage(asset: Asset.icContactPicture)!
                 }
-                guard let name = profile.alias else {return UIImage.defaultJamiAvatarFor(profileName: nil, account: account)}
+                guard let name = profile.alias else { return UIImage.defaultJamiAvatarFor(profileName: nil, account: account) }
                 let profileName = name.isEmpty ? nil : name
                 return UIImage.defaultJamiAvatarFor(profileName: profileName, account: account)
             })
@@ -128,45 +131,48 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { (conversations) in
                     self.conversationsForCurrentAccount.onNext(conversations)
-                }).disposed(by: self.tempBag)
+                })
+                .disposed(by: self.tempBag)
         })
 
-        return self.conversationsForCurrentAccount.share().map({ (conversations) in
-            return conversations
-                .sorted(by: { conversation1, conversations2 in
-                    guard let lastMessage1 = conversation1.messages.last,
-                        let lastMessage2 = conversations2.messages.last else {
-                            return conversation1.messages.count > conversations2.messages.count
-                    }
-                    return lastMessage1.receivedDate > lastMessage2.receivedDate
-                })
-                .filter({ self.contactsService.contact(withUri: $0.participantUri) != nil
-                    || (!$0.messages.isEmpty &&
-                        (self.contactsService.contactRequest(withRingId: $0.hash) == nil))
-                })
-                .compactMap({ conversationModel in
-
-                    var conversationViewModel: ConversationViewModel?
-                    if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
-                        return conversationViewModel.conversation.value == conversationModel
-                    }).first {
-                        conversationViewModel = foundConversationViewModel
-                    } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
-                        conversationViewModel = contactFound
-                        self.conversationViewModels.append(contactFound)
-                    } else {
-                        conversationViewModel = ConversationViewModel(with: self.injectionBag)
-                        conversationViewModel?.conversation = Variable<ConversationModel>(conversationModel)
-                        if let conversation = conversationViewModel {
-                            self.conversationViewModels
-                                .append(conversation)
+        return self.conversationsForCurrentAccount.share()
+            .map({ (conversations) in
+                return conversations
+                    .sorted(by: { conversation1, conversations2 in
+                        guard let lastMessage1 = conversation1.messages.last,
+                            let lastMessage2 = conversations2.messages.last else {
+                                return conversation1.messages.count > conversations2.messages.count
                         }
-                    }
-                    return conversationViewModel
-                })
-        }).map({ conversationsViewModels in
-            return [ConversationSection(header: "", items: conversationsViewModels)]
-        })
+                        return lastMessage1.receivedDate > lastMessage2.receivedDate
+                    })
+                    .filter({ self.contactsService.contact(withUri: $0.participantUri) != nil
+                        || (!$0.messages.isEmpty &&
+                            (self.contactsService.contactRequest(withRingId: $0.hash) == nil))
+                    })
+                    .compactMap({ conversationModel in
+
+                        var conversationViewModel: ConversationViewModel?
+                        if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
+                            return conversationViewModel.conversation.value == conversationModel
+                        }).first {
+                            conversationViewModel = foundConversationViewModel
+                        } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
+                            conversationViewModel = contactFound
+                            self.conversationViewModels.append(contactFound)
+                        } else {
+                            conversationViewModel = ConversationViewModel(with: self.injectionBag)
+                            conversationViewModel?.conversation = Variable<ConversationModel>(conversationModel)
+                            if let conversation = conversationViewModel {
+                                self.conversationViewModels
+                                    .append(conversation)
+                            }
+                        }
+                        return conversationViewModel
+                    })
+            })
+            .map({ conversationsViewModels in
+                return [ConversationSection(header: "", items: conversationsViewModels)]
+            })
         }()
 
     var conversationsForCurrentAccount = PublishSubject<[ConversationModel]>()
@@ -174,14 +180,16 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     func reloadDataFor(accountId: String) {
         tempBag = DisposeBag()
         self.profileService.getAccountProfile(accountId: accountId)
-            .subscribe(onNext: { [unowned self] profile in
-                self.profileImageForCurrentAccount.onNext(profile)
-            }).disposed(by: self.tempBag)
+            .subscribe(onNext: { [weak self] profile in
+                self?.profileImageForCurrentAccount.onNext(profile)
+            })
+            .disposed(by: self.tempBag)
         self.conversationsService.conversationsForCurrentAccount
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] conversations in
-                self.conversationsForCurrentAccount.onNext(conversations)
-            }).disposed(by: self.tempBag)
+            .subscribe(onNext: { [weak self] conversations in
+                self?.conversationsForCurrentAccount.onNext(conversations)
+            })
+            .disposed(by: self.tempBag)
     }
 
     lazy var currentAccountChanged: Observable<AccountModel?> = {
@@ -199,23 +207,25 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         self.injectionBag = injectionBag
 
         self.callService.newCall
-        .asObservable()
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { [weak self] _ in
-            self?.closeAllPlayers()
-        }).disposed(by: self.disposeBag)
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.closeAllPlayers()
+            })
+            .disposed(by: self.disposeBag)
 
         self.accountsService.currentAccountChanged
-            .subscribe(onNext: { [unowned self] account in
+            .subscribe(onNext: { [weak self] account in
                 if let currentAccount = account {
-                    self.reloadDataFor(accountId: currentAccount.id)
+                    self?.reloadDataFor(accountId: currentAccount.id)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         // Observe connectivity changes
         self.networkService.connectionStateObservable
-            .subscribe(onNext: { [unowned self] value in
-                self.connectionState.onNext(value)
+            .subscribe(onNext: { [weak self] value in
+                self?.connectionState.onNext(value)
             })
             .disposed(by: self.disposeBag)
     }
@@ -247,7 +257,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
             self.conversationsService
                 .clearHistory(conversation: conversationViewModel.conversation.value,
-                                    keepConversation: true)
+                              keepConversation: true)
             self.conversationViewModels.remove(at: index)
         }
     }
@@ -266,9 +276,10 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 .subscribe(onCompleted: { [weak self] in
                     self?.conversationsService
                         .clearHistory(conversation: conversationViewModel.conversation.value,
-                                            keepConversation: false)
+                                      keepConversation: false)
                     self?.conversationViewModels.remove(at: index)
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 

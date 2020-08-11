@@ -71,7 +71,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     // MARK: members
     var viewModel: SmartlistViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     private let contactPicker = CNContactPickerViewController()
 
@@ -103,7 +103,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.extendedLayoutIncludesOpaqueBars = true
     }
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         accountPickerTextView.resignFirstResponder()
         view.removeGestureRecognizer(accountsDismissTapRecognizer)
     }
@@ -142,7 +143,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         noConversationLabel.textColor = UIColor.jamiLabelColor
         dialpadButtonShadow.backgroundColor = UIColor.jamiBackgroundSecondaryColor
         dialpadButtonShadow.layer.shadowColor = UIColor.jamiLabelColor.cgColor
-        dialpadButtonShadow.layer.shadowOffset =  CGSize.zero
+        dialpadButtonShadow.layer.shadowOffset = CGSize.zero
         dialpadButtonShadow.layer.shadowRadius = 1
         dialpadButtonShadow.layer.shadowOpacity = 0.6
         dialpadButtonShadow.layer.masksToBounds = false
@@ -168,14 +169,16 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
 
         self.settingsButton.backgroundColor = nil
-        self.settingsButton.rx.tap.subscribe(onNext: { _ in
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url, completionHandler: nil)
-            }
-        }).disposed(by: self.disposeBag)
+        self.settingsButton.rx.tap
+            .subscribe(onNext: { _ in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, completionHandler: nil)
+                }
+            })
+            .disposed(by: self.disposeBag)
 
         let imageSettings = UIImage(asset: Asset.settings) as UIImage?
-        let generalSettingsButton   = UIButton(type: UIButton.ButtonType.system) as UIButton
+        let generalSettingsButton = UIButton(type: UIButton.ButtonType.system) as UIButton
         generalSettingsButton.setImage(imageSettings, for: .normal)
         generalSettingsButton.contentMode = .scaleAspectFill
         let settingsButtonItem = UIBarButtonItem(customView: generalSettingsButton)
@@ -192,7 +195,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         phoneBookButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                guard let self = self else {return}
+                guard let self = self else { return }
                 self.contactPicker.delegate = self
                 self.present(self.contactPicker, animated: true, completion: nil)
             })
@@ -203,12 +206,13 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 if let account = currentAccount {
                     let accountSip = account.type == AccountType.sip
                     self?.navigationItem
-                        .rightBarButtonItem =  accountSip ? nil : settingsButtonItem
+                        .rightBarButtonItem = accountSip ? nil : settingsButtonItem
                     self?.dialpadButtonShadow.isHidden = !accountSip
                     self?.phoneBookButton.isHidden = !accountSip
                     self?.qrScanButton.isHidden = accountSip
                 }
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         self.navigationItem.rightBarButtonItem = settingsButtonItem
         if let account = self.viewModel.currentAccount {
@@ -249,7 +253,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.openAccountsList()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.navigationItem.leftBarButtonItem = accountButtonItem
 
         dialpadButton.rx.tap
@@ -281,7 +286,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     let row = self.accountsAdapter.rowForAccountId(account: account) {
                     self.accounPicker.selectRow(row, inComponent: 0, animated: true)
                 }
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
         accounPicker.rx.modelSelected(AccountItem.self)
             .subscribe(onNext: { [weak self] model in
                 let account = model[0].account
@@ -316,8 +322,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
     }
 
-    @objc func keyboardWillShow(withNotification notification: Notification) {
-        guard let userInfo: Dictionary = notification.userInfo else {return}
+    @objc
+    func keyboardWillShow(withNotification notification: Notification) {
+        guard let userInfo: Dictionary = notification.userInfo else { return }
         guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
@@ -331,7 +338,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
     }
 
-    @objc func keyboardWillHide(withNotification notification: Notification) {
+    @objc
+    func keyboardWillHide(withNotification notification: Notification) {
         self.conversationsTableView.contentInset.bottom = 0
         self.searchView.searchResultsTableView.contentInset.bottom = 0
 
@@ -373,9 +381,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         //Register Cell
         self.conversationsTableView.register(cellType: SmartListCell.self)
         //Deselect the rows
-        self.conversationsTableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
-            self.conversationsTableView.deselectRow(at: indexPath, animated: true)
-        }).disposed(by: disposeBag)
+        self.conversationsTableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.conversationsTableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
 
         self.conversationsTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
@@ -389,7 +399,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchBarShadow.layer.masksToBounds = false
 
         if #available(iOS 13.0, *) {
-            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
             visualEffectView.frame = searchBarShadow.bounds
             visualEffectView.isUserInteractionEnabled = false
             searchBarShadow.insertSubview(visualEffectView, at: 0)
@@ -401,7 +411,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             visualEffectView.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
 
         } else {
-            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
             visualEffectView.frame = searchBarShadow.bounds
             visualEffectView.isUserInteractionEnabled = false
             let background = UIView()
@@ -425,9 +435,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         }
         self.searchView.editSearch
             .subscribe(onNext: {[weak self] (editing) in
-            self?.scanButtonLeadingConstraint.constant = editing ? -40 : 10
-            self?.viewModel.searching.onNext(editing)
-        }).disposed(by: disposeBag)
+                self?.scanButtonLeadingConstraint.constant = editing ? -40 : 10
+                self?.viewModel.searching.onNext(editing)
+            })
+            .disposed(by: disposeBag)
     }
 
     func startAccountCreation() {

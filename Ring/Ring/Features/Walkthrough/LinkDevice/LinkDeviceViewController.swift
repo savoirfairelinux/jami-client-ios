@@ -66,13 +66,17 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.applyL10n()
 
         //bind view model to view
-        self.pinInfoButton.rx.tap.subscribe(onNext: { [unowned self] (_) in
-            self.showPinInfo()
-        }).disposed(by: self.disposeBag)
+        self.pinInfoButton.rx.tap
+            .subscribe(onNext: { [weak self] (_) in
+                self?.showPinInfo()
+            })
+            .disposed(by: self.disposeBag)
 
-        self.linkButton.rx.tap.subscribe(onNext: { [unowned self] (_) in
-            self.viewModel.linkDevice()
-        }).disposed(by: self.disposeBag)
+        self.linkButton.rx.tap
+            .subscribe(onNext: { [weak self] (_) in
+                self?.viewModel.linkDevice()
+            })
+            .disposed(by: self.disposeBag)
 
         // handle linking state
         self.viewModel.createState
@@ -96,7 +100,8 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
                     if let error = error as? AccountCreationError {
                         self?.showAccountCreationError(error: error)
                     }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.linkButtonEnabledState.bind(to: self.linkButton.rx.isEnabled)
             .disposed(by: self.disposeBag)
@@ -114,7 +119,8 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         .subscribe(onNext: { [weak self] (_) in
             self?.linkButton.updateGradientFrame()
             self?.configureWalkrhroughNavigationBar()
-        }).disposed(by: self.disposeBag)
+        })
+        .disposed(by: self.disposeBag)
     }
 
     func adaptToSystemColor() {
@@ -145,20 +151,23 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         }
     }
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         self.isKeyboardOpened = false
         self.becomeFirstResponder()
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillAppear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillAppear(withNotification: NSNotification) {
         self.isKeyboardOpened = true
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
         self.setContentInset()
 
     }
 
-    @objc func keyboardWillDisappear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillDisappear(withNotification: NSNotification) {
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
         self.setContentInset()
     }

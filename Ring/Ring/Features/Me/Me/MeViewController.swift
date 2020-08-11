@@ -35,7 +35,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     // MARK: - members
     var viewModel: MeViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     private var stretchyHeader: AccountHeader!
 
     var sipCredentialsMargin: CGFloat = 0
@@ -67,7 +67,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                          object: nil)
     }
 
-    @objc private func preferredContentSizeChanged(_ notification: NSNotification) {
+    @objc
+    private func preferredContentSizeChanged(_ notification: NSNotification) {
         self.calculateSipCredentialsMargin()
     }
 
@@ -116,7 +117,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     private func configureBindings() {
         let infoButton = UIButton(type: .infoLight)
         let imageQrCode = UIImage(asset: Asset.qrCode) as UIImage?
-        let qrCodeButton   = UIButton(type: UIButton.ButtonType.custom) as UIButton
+        let qrCodeButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
         qrCodeButton.setImage(imageQrCode, for: .normal)
         self.viewModel.isAccountSip
             .asObservable()
@@ -124,17 +125,18 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .subscribe(onNext: { [weak qrCodeButton](isSip) in
                 qrCodeButton?.isHidden = isSip
                 qrCodeButton?.isEnabled = !isSip
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         let infoItem = UIBarButtonItem(customView: infoButton)
         let qrCodeButtonItem = UIBarButtonItem(customView: qrCodeButton)
         infoButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.infoItemTapped()
+            .subscribe(onNext: { [weak self] in
+                self?.infoItemTapped()
             })
             .disposed(by: self.disposeBag)
         qrCodeButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.qrCodeItemTapped()
+            .subscribe(onNext: { [weak self] in
+                self?.qrCodeItemTapped()
             })
             .disposed(by: self.disposeBag)
         self.viewModel.showActionState.asObservable()
@@ -156,7 +158,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .usernameRegistrationFailed(let errorMessage):
                     self?.showNameRegisterationFailed(error: errorMessage)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.navigationItem.rightBarButtonItem = infoItem
         self.navigationItem.leftBarButtonItem = qrCodeButtonItem
 
@@ -267,7 +270,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         })
     }
 
-    @objc func alertControllerBackgroundTapped() {
+    @objc
+    func alertControllerBackgroundTapped() {
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -308,9 +312,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     }
                     cell.selectionStyle = .none
                     cell.removeDevice.isHidden = device.isCurrent
-                    cell.removeDevice.rx.tap.subscribe(onNext: { [weak self, device] in
-                        self?.confirmRevokeDeviceAlert(deviceID: device.deviceId)
-                    }).disposed(by: cell.disposeBag)
+                    cell.removeDevice.rx.tap
+                        .subscribe(onNext: { [weak self, device] in
+                            self?.confirmRevokeDeviceAlert(deviceID: device.deviceId)
+                        })
+                        .disposed(by: cell.disposeBag)
                     cell.sizeToFit()
                     return cell
 
@@ -326,9 +332,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
-                    button.rx.tap.subscribe(onNext: { [weak self] in
-                        self?.viewModel.linkDevice()
-                    }).disposed(by: cell.disposeBag)
+                    button.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            self?.viewModel.linkDevice()
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
 
                 case .blockedList:
@@ -343,9 +351,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
-                    button.rx.tap.subscribe(onNext: { [weak self] in
-                        self?.openBlockedList()
-                    }).disposed(by: cell.disposeBag)
+                    button.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            self?.openBlockedList()
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
 
                 case .sectionHeader(let title):
@@ -367,15 +377,17 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
-                    button.rx.tap.subscribe(onNext: { [weak self] in
-                        self?.confirmRemoveAccountAlert()
-                    }).disposed(by: cell.disposeBag)
+                    button.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            self?.confirmRemoveAccountAlert()
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
                 case .jamiUserName(let label):
                     if !label.isEmpty {
                         return self.configureCellWithEnableTextCopy(text: L10n.AccountPage.username,
-                        secondaryText: label,
-                        style: .callout)
+                                                                    secondaryText: label,
+                                                                    style: .callout)
                     }
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.registerNameTitle
@@ -387,9 +399,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
-                    button.rx.tap.subscribe(onNext: { [weak self] in
-                        self?.registerUsername()
-                    }).disposed(by: cell.disposeBag)
+                    button.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            self?.registerUsername()
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
                 case .jamiID(let label):
                     return self.configureCellWithEnableTextCopy(text: "Jami ID",
@@ -413,14 +427,16 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
-                    button.rx.tap.subscribe(onNext: { [weak self] in
-                        self?.shareAccountInfo()
-                    }).disposed(by: cell.disposeBag)
+                    button.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            self?.shareAccountInfo()
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
                 case .changePassword:
                     let cell = DisposableCell()
                     cell.backgroundColor = UIColor.jamiBackgroundColor
-                    let title =  self.viewModel.hasPassword() ?
+                    let title = self.viewModel.hasPassword() ?
                         L10n.AccountPage.changePassword : L10n.AccountPage.createPassword
                     cell.textLabel?.text = title
                     cell.textLabel?.textColor = UIColor.jamiMain
@@ -431,9 +447,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
-                    button.rx.tap.subscribe(onNext: { [weak self] in
-                        self?.changePassword(title: title)
-                    }).disposed(by: cell.disposeBag)
+                    button.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            self?.changePassword(title: title)
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
                 case .notifications:
                     let cell = DisposableCell()
@@ -451,10 +469,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     switchView.rx
                         .isOn.changed
                         .debounce(0.2, scheduler: MainScheduler.instance)
-                        .distinctUntilChanged().asObservable()
+                        .distinctUntilChanged()
+                        .asObservable()
                         .subscribe(onNext: {[weak self] value in
                             self?.viewModel.enableNotifications(enable: value)
-                        }).disposed(by: cell.disposeBag)
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
                 case .peerDiscovery:
                     let cell = DisposableCell()
@@ -473,10 +493,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     switchView.rx
                         .isOn.changed
                         .debounce(0.2, scheduler: MainScheduler.instance)
-                        .distinctUntilChanged().asObservable()
+                        .distinctUntilChanged()
+                        .asObservable()
                         .subscribe(onNext: {[weak self] enable in
                             self?.viewModel.enablePeerDiscovery(enable: enable)
-                        }).disposed(by: cell.disposeBag)
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
                 case .sipUserName(let value):
                     let cell = self
@@ -516,7 +538,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .observeOn(MainScheduler.instance)
                         .subscribe(onNext: { (status) in
                             cell.detailTextLabel?.text = status
-                        }).disposed(by: cell.disposeBag)
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
                 case .boothMode:
                     let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
@@ -539,14 +562,15 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .bind(to: switchView.rx.value)
                         .disposed(by: self.disposeBag)
                     switchView.rx
-                    .isOn.changed
-                    .subscribe(onNext: {[weak self] enable in
-                        if !enable {
-                            return
-                        }
-                        self?.viewModel.switchBoothModeState.onNext(enable)
-                        self?.confirmBoothModeAlert()
-                    }).disposed(by: self.disposeBag)
+                        .isOn.changed
+                        .subscribe(onNext: {[weak self] enable in
+                            if !enable {
+                                return
+                            }
+                            self?.viewModel.switchBoothModeState.onNext(enable)
+                            self?.confirmBoothModeAlert()
+                        })
+                        .disposed(by: self.disposeBag)
                     cell.isUserInteractionEnabled = self.viewModel.hasPassword()
                     cell.textLabel?.isEnabled = self.viewModel.hasPassword()
                     cell.detailTextLabel?.isEnabled = self.viewModel.hasPassword()
@@ -570,10 +594,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     switchView.rx
                         .isOn.changed
                         .debounce(0.2, scheduler: MainScheduler.instance)
-                        .distinctUntilChanged().asObservable()
+                        .distinctUntilChanged()
+                        .asObservable()
                         .subscribe(onNext: {[weak self] enable in
                             self?.viewModel.enableAccount(enable: enable)
-                        }).disposed(by: cell.disposeBag)
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
                 }
         }
@@ -641,7 +667,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.updateSipSettings()
-            }).disposed(by: cell.disposeBag)
+            })
+            .disposed(by: cell.disposeBag)
         switch cellType {
         case .port:
             text.rx.text.orEmpty.distinctUntilChanged()
@@ -661,7 +688,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         case .sipPassword:
             cell.textLabel?.text = L10n.Account.sipPassword
             //show password button
-            let rightButton  = UIButton(type: .custom)
+            let rightButton = UIButton(type: .custom)
             rightButton.frame = CGRect(x: 0, y: 0, width: 55, height: 30)
             self.viewModel.secureTextEntry
                 .asObservable()
@@ -675,21 +702,24 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         rightButton.setImage(UIImage(asset: Asset.icShowInput),
                                              for: .normal)
                     }
-                }).disposed(by: cell.disposeBag)
+                })
+                .disposed(by: cell.disposeBag)
             rightButton.tintColor = UIColor.darkGray
             text.rightViewMode = .always
             text.rightView = rightButton
             rightButton.rx.tap
-                .subscribe(onNext: { [unowned self] _ in
-                    self.viewModel.secureTextEntry
+                .subscribe(onNext: { [weak self] _ in
+                    self?.viewModel.secureTextEntry
                         .onNext(!text.isSecureTextEntry)
-                }).disposed(by: cell.disposeBag)
+                })
+                .disposed(by: cell.disposeBag)
             text.rx.text.orEmpty.distinctUntilChanged()
                 .bind { [weak self, weak rightButton] newText in
                     self?.viewModel.sipPassword.value = newText
                     rightButton?.isHidden = newText.isEmpty
                     rightButton?.isEnabled = !newText.isEmpty
-                }.disposed(by: cell.disposeBag)
+                }
+                .disposed(by: cell.disposeBag)
         case .sipUserName:
             text.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.sipUsername)
@@ -703,8 +733,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         cell.detailTextLabel?.textColor = UIColor.clear
         var frame = CGRect(x: self.sipCredentialsMargin, y: 0,
-                                  width: self.view.frame.width - self.sipCredentialsMargin,
-                                  height: cell.frame.height)
+                           width: self.view.frame.width - self.sipCredentialsMargin,
+                           height: cell.frame.height)
         if self.view.frame.width - self.sipCredentialsMargin < text.frame.size.width {
             let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
             let size = text.frame.size
@@ -758,9 +788,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             return
         }
         guard let activeField = self
-            .findActiveTextField(in: settingsTable) else {return}
+            .findActiveTextField(in: settingsTable) else { return }
         activeField.resignFirstResponder()
-        if activeField.tag != sipCredentialsTAG {return}
+        if activeField.tag != sipCredentialsTAG { return }
         self.viewModel.updateSipSettings()
     }
 
@@ -819,7 +849,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 textField.textAlignment = .center
                 textField.borderStyle = .none
                 textField.backgroundColor = UIColor.clear
-                textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
+                textField.font = UIFont.systemFont(ofSize: 11, weight: .thin)
             }
         }
 
@@ -838,14 +868,16 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 Observable
                     .combineLatest(textFields[3].rx.text,
                                    textFields[2].rx.text) {(text1, text2) -> Bool in
-                                    return text1 == text2 }
+                                    return text1 == text2
+                    }
                     .bind(to: actionChange.rx.isEnabled)
                     .disposed(by: self.disposeBag)
             } else {
                 Observable
                     .combineLatest(textFields[0].rx.text,
                                    textFields[1].rx.text) {(text1, text2) -> Bool in
-                                    return text1 == text2 }
+                                    return text1 == text2
+                    }
                     .bind(to: actionChange.rx.isEnabled)
                     .disposed(by: self.disposeBag)
             }
@@ -900,7 +932,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             textField.textAlignment = .center
             textField.borderStyle = .none
             textField.backgroundColor = UIColor.clear
-            textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
+            textField.font = UIFont.systemFont(ofSize: 11, weight: .thin)
         }
         //password text field
         if self.viewModel.hasPassword() {
@@ -923,7 +955,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     textFields[1].text = state.message
                 }
                 }, onError: { (_) in
-            }).disposed(by: nameRegistrationBag)
+            })
+            .disposed(by: nameRegistrationBag)
         guard let textFields = controller.textFields else {
             return
         }
@@ -947,8 +980,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                 if state.isAvailable && !usernameEmpty {
                                     return true
                                 }
-                                return false }
-                .bind(to: actionRegister.rx.isEnabled).disposed(by: nameRegistrationBag)
+                                return false
+                }
+                .bind(to: actionRegister.rx.isEnabled)
+                .disposed(by: nameRegistrationBag)
         } else if textFields.count == 3 {
             // have a password. Could register when username not empty and valid and password not empty
             let passwordEmptyObservable = textFields[2]
@@ -966,8 +1001,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                 if state.isAvailable && !nameEmpty && !passwordEmpty {
                                     return true
                                 }
-                                return false}
-                .bind(to: actionRegister.rx.isEnabled).disposed(by: nameRegistrationBag)
+                                return false
+                }
+                .bind(to: actionRegister.rx.isEnabled)
+                .disposed(by: nameRegistrationBag)
         }
         //remove border around text view
         controller.textFields?[1].superview?.backgroundColor = .clear
@@ -1004,12 +1041,15 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 textField.isSecureTextEntry = true
             }
             if let textFields = alert.textFields {
-                textFields[0].rx.text.map({text in
-                    if let text = text {
-                        return !text.isEmpty
-                    }
-                    return false
-                }).bind(to: actionConfirm.rx.isEnabled).disposed(by: self.disposeBag)
+                textFields[0].rx.text
+                    .map({text in
+                        if let text = text {
+                            return !text.isEmpty
+                        }
+                        return false
+                    })
+                    .bind(to: actionConfirm.rx.isEnabled)
+                    .disposed(by: self.disposeBag)
             }
         }
         self.present(alert, animated: true, completion: nil)
@@ -1070,7 +1110,7 @@ extension MeViewController: UITableViewDelegate {
     }
 
     func shareAccountInfo() {
-        guard let content = self.viewModel.accountInfoToShare else {return}
+        guard let content = self.viewModel.accountInfoToShare else { return }
         let title = L10n.AccountPage.contactMeOnJamiTitle
         let activityViewController = UIActivityViewController(activityItems: content,
                                                               applicationActivities: nil)

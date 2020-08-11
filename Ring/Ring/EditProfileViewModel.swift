@@ -38,7 +38,8 @@ class EditProfileViewModel {
                     .take(1)
                     .subscribe(onNext: { profile in
                         self.profileForCurrentAccount.onNext(profile)
-                    }).disposed(by: self.disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
             }
         })
         return profileForCurrentAccount.share()
@@ -82,22 +83,26 @@ class EditProfileViewModel {
         self.profileService = profileService
         self.accountService = accountService
         self.accountService.currentAccountChanged
-            .subscribe(onNext: { [unowned self] account in
+            .subscribe(onNext: { [weak self] account in
+                guard let self = self else { return }
                 if let selectedAccount = account {
                     self.updateProfileInfoFor(accountId: selectedAccount.id)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
       }
 
     func updateProfileInfoFor(accountId: String) {
         self.profileService.getAccountProfile(accountId: accountId)
-            .subscribe(onNext: { [unowned self] profile in
+            .subscribe(onNext: { [weak self] profile in
+                guard let self = self else { return }
                 self.profileForCurrentAccount.onNext(profile)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func saveProfile() {
-        guard let account = self.accountService.currentAccount else {return}
+        guard let account = self.accountService.currentAccount else { return }
         var photo: String?
         if let image = self.image, !image.isEqual(defaultImage),
             let imageData = image.pngData() {

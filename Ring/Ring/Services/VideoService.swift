@@ -295,8 +295,8 @@ typealias RendererTuple = (rendererId: String, data: UIImage?)
 // swiftlint:disable file_length
 class VideoService: FrameExtractorDelegate {
 
-    fileprivate let videoAdapter: VideoAdapter
-    fileprivate let camera = FrameExtractor()
+    private let videoAdapter: VideoAdapter
+    private let camera = FrameExtractor()
 
     var cameraPosition = AVCaptureDevice.Position.front
     let incomingVideoFrame = PublishSubject<RendererTuple?>()
@@ -313,7 +313,7 @@ class VideoService: FrameExtractorDelegate {
     var angle: Int = 0
     var switchInputRequested: Bool = false
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     var recording = false
 
@@ -374,10 +374,11 @@ class VideoService: FrameExtractorDelegate {
     func switchCamera() {
         self.camera.switchCamera()
             .subscribe(onCompleted: {
-            print("camera switched")
-        }, onError: { error in
-            print(error)
-        }).disposed(by: self.disposeBag)
+                print("camera switched")
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func setCameraOrientation(orientation: UIDeviceOrientation, forceUpdate: Bool = false) {

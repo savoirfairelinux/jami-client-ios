@@ -111,7 +111,7 @@ extension Coordinator {
                                             animated: animation,
                                             completion: nil)
         case .push:
-            if let contoller: UINavigationController  = self.rootViewController as? UINavigationController {
+            if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
                 // ensure we on the root view controller
                 contoller.popViewController(animated: false)
                 contoller.pushViewController(viewController, animated: false)
@@ -119,15 +119,17 @@ extension Coordinator {
         }
 
         if let viewControllerType = VCType {
-            viewController.rx.viewDidLoad.subscribe(onNext: { [weak self] _ in
-                self?.presentingVC[viewControllerType] = false
-                }, onError: { [weak self] _ in
+            viewController.rx.viewDidLoad
+                .subscribe(onNext: { [weak self] _ in
                     self?.presentingVC[viewControllerType] = false
-                }, onCompleted: { [weak self] in
-                    self?.presentingVC[viewControllerType] = false
-                }, onDisposed: {  [weak self] in
-                    self?.presentingVC[viewControllerType] = false
-            }).disposed(by: disposeBag)
+                    }, onError: { [weak self] _ in
+                        self?.presentingVC[viewControllerType] = false
+                    }, onCompleted: { [weak self] in
+                        self?.presentingVC[viewControllerType] = false
+                    }, onDisposed: {  [weak self] in
+                        self?.presentingVC[viewControllerType] = false
+                })
+                .disposed(by: disposeBag)
         }
     }
 }

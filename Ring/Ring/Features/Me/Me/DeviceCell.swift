@@ -29,6 +29,7 @@ class DeviceCell: UITableViewCell, NibReusable {
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         self.disposeBag = DisposeBag()
     }
 }

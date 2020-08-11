@@ -103,7 +103,8 @@ class LocalNotificationsHelper {
         UNUserNotificationCenter.current().setNotificationCategories([callCategory])
     }
 
-    @objc func cancelCall(timer: Timer) {
+    @objc
+    func cancelCall(timer: Timer) {
         guard let info = timer.userInfo as? [String: String],
             let callID = info[NotificationUserInfoKeys.callID.rawValue] else {
                 self.timer?.invalidate()
@@ -140,9 +141,11 @@ class LocalNotificationsHelper {
                 print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
             }
         }
-        callService.currentCall(callId: callID).filter({ call in
-            return (call.state == .over || call.state == .failure)
-        }).single()
+        callService.currentCall(callId: callID)
+            .filter({ call in
+                return (call.state == .over || call.state == .failure)
+            })
+            .single()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { _ in
                 let content = UNMutableNotificationContent()
@@ -157,7 +160,8 @@ class LocalNotificationsHelper {
                         print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
                     }
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     class func isEnabled() -> Bool {

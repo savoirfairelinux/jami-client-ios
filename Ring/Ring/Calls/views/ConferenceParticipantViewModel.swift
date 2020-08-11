@@ -44,8 +44,8 @@ class ConferenceParticipantViewModel {
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
-                  infoHach: call.participantUri,
-                  account: account).uriString else {return nil}
+                                           infoHach: call.participantUri,
+                                           account: account).uriString else { return nil }
         return self.profileService.getProfile(uri: uriString,
                                               createIfNotexists: true, accountId: account.id)
     }()
@@ -69,7 +69,7 @@ class ConferenceParticipantViewModel {
 
     func cancelCall() {
         self.callsSercive.hangUp(callId: call.callId)
-            .subscribe(onCompleted: {
-            }).disposed(by: disposeBag)
+            .subscribe(onCompleted: { })
+            .disposed(by: disposeBag)
     }
 }

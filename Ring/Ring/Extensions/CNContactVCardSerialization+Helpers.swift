@@ -59,7 +59,7 @@ extension CNContactVCardSerialization {
         // if we need smallest image first scale it and than compress
         var scaledImage: UIImage?
         if compressedSize != nil {
-            scaledImage =  UIImage(data: image)?
+            scaledImage = UIImage(data: image)?
                 .convert(toSize: CGSize(width: 200.0, height: 200.0), scale: 1)
         }
 
@@ -80,7 +80,7 @@ extension CNContactVCardSerialization {
             photofieldName = VCardFields.photoJPEG
         }
 
-        let base64Image =  image.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+        let base64Image = image.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
         let vcardImageString = photofieldName.rawValue + base64Image + "\n"
         vCardString = vCardString.replacingOccurrences(of: VCardFields.end.rawValue, with: (vcardImageString + VCardFields.end.rawValue))
 
@@ -93,7 +93,7 @@ extension CNContactVCardSerialization {
             guard let vCard = vCards.first else { return nil }
             if let returnData = String(data: data, encoding: .utf8) {
                 let contentArr = returnData.components(separatedBy: "\n")
-                if let nameRow = contentArr.filter({String($0.prefix(3)) == VCardFields.fullName.rawValue}).first {
+                if let nameRow = contentArr.filter({ String($0.prefix(3)) == VCardFields.fullName.rawValue }).first {
                     let vcard = CNMutableContact()
                     let name = String(nameRow.suffix(nameRow.count - 3))
                     vcard.familyName = name

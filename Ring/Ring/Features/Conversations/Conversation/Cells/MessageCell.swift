@@ -170,7 +170,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
 
-    @objc func updateProgressBar(timer: Timer) {
+    @objc
+    func updateProgressBar(timer: Timer) {
         guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
         guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
@@ -181,7 +182,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
 
-    @objc func updateOutgoigTransfer(timer: Timer) {
+    @objc
+    func updateOutgoigTransfer(timer: Timer) {
         guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
         guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
