@@ -211,15 +211,26 @@ class MeViewModel: ViewModel, Stateable {
     }()
 
     lazy var otherJamiSettings: Observable<SettingsSection> = {
-        return Observable
-            .just(SettingsSection.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.other),
-                                                           .peerDiscovery,
-                                                           .blockedList,
-                                                           .accountState(state: self.accountStatus),
-                                                           .enableAccount,
-                                                           .changePassword,
-                                                           .boothMode,
-                                                           .removeAccount]))
+        let items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.other),
+                                                   .peerDiscovery,
+                                                   .blockedList,
+                                                   .accountState(state: self.accountStatus),
+                                                   .enableAccount,
+                                                   .changePassword,
+                                                   .boothMode,
+                                                   .removeAccount]
+
+        return Observable.combineLatest(Observable.just(items),
+                                        self.accountService.currentAccountChanged.asObservable().startWith(nil),
+                                        resultSelector: { (items, _) in
+                var items = items
+                if let currentAccount = self.accountService.currentAccount,
+                    self.accountService.isJams(for: currentAccount.id) {
+                    items.remove(at: items.count - 2) //remove .boothMode
+                    items.remove(at: items.count - 2) //remove .changePassword
+                }
+                return SettingsSection.accountSettings(items: items)
+            })
     }()
 
     func hasPassword() -> Bool {

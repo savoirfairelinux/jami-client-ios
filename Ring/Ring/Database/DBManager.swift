@@ -718,7 +718,8 @@ class DBManager {
         return self.interactionHepler.insert(item: interaction, dataBase: dataBase)
     }
 
-    func getProfile(for profileUri: String, createIfNotExists: Bool, accountId: String) throws -> Profile? {
+    func getProfile(for profileUri: String, createIfNotExists: Bool, accountId: String,
+                    alias: String? = nil, photo: String? = nil) throws -> Profile? {
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
         if createIfNotExists && type == ProfileType.sip {
             self.dbConnections.createAccountfolder(for: accountId)
@@ -729,10 +730,10 @@ class DBManager {
                                 createifNotExists: createIfNotExists) else { return nil }
         if self.dbConnections
             .isContactProfileExists(accountId: accountId,
-                                  profileURI: profileUri) || !createIfNotExists {
+                                    profileURI: profileUri) || !createIfNotExists {
             return getProfileFromPath(path: profilePath)
         }
-        let profile = Profile(profileUri, nil, nil, type.rawValue)
+        let profile = Profile(profileUri, alias, photo, type.rawValue)
         try self.saveProfile(profile: profile, path: profilePath)
         return getProfileFromPath(path: profilePath)
     }
@@ -761,7 +762,7 @@ class DBManager {
         contactCard.phoneNumbers = [CNLabeledValue(label: CNLabelPhoneNumberiPhone, value: CNPhoneNumber(stringValue: profile.uri))]
         if let photo = profile.photo {
             contactCard.imageData = NSData(base64Encoded: photo,
-            options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+                                           options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
         }
         let data = try CNContactVCardSerialization.dataWithImageAndUUID(from: contactCard, andImageCompression: 40000)
         try data.write(to: url)
