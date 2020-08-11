@@ -717,7 +717,8 @@ class DBManager {
         return self.interactionHepler.insert(item: interaction, dataBase: dataBase)
     }
 
-    func getProfile(for profileUri: String, createIfNotExists: Bool, accountId: String) throws -> Profile? {
+    func getProfile(for profileUri: String, createIfNotExists: Bool, accountId: String,
+                    alias: String? = nil, photo: String? = nil) throws -> Profile? {
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
         if createIfNotExists && type == ProfileType.sip {
             self.dbConnections.createAccountfolder(for: accountId)
@@ -731,7 +732,7 @@ class DBManager {
                                     profileURI: profileUri) || !createIfNotExists {
             return getProfileFromPath(path: profilePath)
         }
-        let profile = Profile(profileUri, nil, nil, type.rawValue)
+        let profile = Profile(profileUri, alias, photo, type.rawValue)
         try self.saveProfile(profile: profile, path: profilePath)
         return getProfileFromPath(path: profilePath)
     }
