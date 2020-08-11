@@ -2,6 +2,7 @@
 *  Copyright (C) 2020 Savoir-faire Linux Inc.
 *
 *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+*  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
 *
 *  This program is free software; you can redistribute it and/or modify
 *  it under the terms of the GNU General Public License as published by
@@ -24,7 +25,8 @@ import RxDataSources
 import RxCocoa
 import Reusable
 
-class JamiSearchView: NSObject, UITableViewDelegate {
+class JamiSearchView: NSObject {
+
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchingLabel: UILabel!
     @IBOutlet weak var searchResultsTableView: UITableView!
@@ -38,9 +40,9 @@ class JamiSearchView: NSObject, UITableViewDelegate {
     let incognitoHeaderHeight: CGFloat = 0
 
     func configure(with injectionBag: InjectionBag, source: FilterConversationDataSource, isIncognito: Bool) {
-        viewModel = JamiSearchViewModel(with: injectionBag, source: source)
+        self.viewModel = JamiSearchViewModel(with: injectionBag, source: source)
         self.isIncognito = isIncognito
-        setUpView()
+        self.setUpView()
     }
 
     private func setUpView() {
@@ -54,43 +56,49 @@ class JamiSearchView: NSObject, UITableViewDelegate {
     }
 
     private func configureSearchResult() {
-        let cellType = isIncognito ? IncognitoSmartListCell.self : SmartListCell.self
-        searchResultsTableView.register(cellType: cellType)
+        if self.isIncognito {
+            self.searchResultsTableView.register(cellType: IncognitoSmartListCell.self)
+            self.searchResultsTableView.rowHeight = self.incognitoCellHeight
 
-        searchResultsTableView.rowHeight = isIncognito ? incognitoCellHeight : SmartlistConstants.smartlistRowHeight
-        searchResultsTableView.backgroundColor = UIColor.jamiBackgroundColor
-        if !isIncognito {
-            searchResultsTableView.tableFooterView = UIView()
+        } else {
+            self.searchResultsTableView.register(cellType: SmartListCell.self)
+            self.searchResultsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
+            self.searchResultsTableView.tableFooterView = UIView()
         }
-        searchResultsTableView.rx.setDelegate(self).disposed(by: disposeBag)
-        let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
-            -> UITableViewCell = {
-                (   dataSource: TableViewSectionedDataSource<ConversationSection>,
-                tableView: UITableView,
-                indexPath: IndexPath,
-                conversationItem: ConversationSection.Item) in
+        self.searchResultsTableView.backgroundColor = UIColor.jamiBackgroundColor
 
-                let cell = self.isIncognito ?
-                    tableView.dequeueReusableCell(for: indexPath,
-                                                  cellType: IncognitoSmartListCell.self) :
-                    tableView.dequeueReusableCell(for: indexPath,
-                                                  cellType: SmartListCell.self)
-                cell.configureFromItem(conversationItem)
-                return cell
+        self.searchResultsTableView.rx.setDelegate(self).disposed(by: disposeBag)
+
+        let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item) -> UITableViewCell = {
+            (dataSource: TableViewSectionedDataSource<ConversationSection>,
+            tableView: UITableView,
+            indexPath: IndexPath,
+            conversationItem: ConversationSection.Item) in
+
+            let cellType = self.isIncognito ? IncognitoSmartListCell.self : SmartListCell.self
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: cellType)
+            cell.configureFromItem(conversationItem)
+            return cell
         }
         let searchResultsDatasource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
-        viewModel.searchResults.map { (conversations) -> Bool in
-            return conversations.isEmpty
-        }.subscribe(onNext: { [weak self] (hideFooterView) in
-            self?.searchResultsTableView.tableFooterView?.isHidden = hideFooterView
-        }).disposed(by: disposeBag)
 
-        self.viewModel.searchResults
+        self.viewModel
+            .searchResults
+            .map({ (conversations) -> Bool in return conversations.isEmpty })
+            .subscribe(onNext: { [weak self] (hideFooterView) in
+                self?.searchResultsTableView.tableFooterView?.isHidden = hideFooterView })
+            .disposed(by: disposeBag)
+
+        self.viewModel
+            .searchResults
             .bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
             .disposed(by: disposeBag)
-        searchResultsTableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
-            self?.searchResultsTableView.deselectRow(at: indexPath, animated: true)
-        }).disposed(by: disposeBag)
+
+        self.searchResultsTableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.searchResultsTableView.deselectRow(at: indexPath, animated: true) })
+            .disposed(by: disposeBag)
+
         searchResultsDatasource.titleForHeaderInSection = { dataSource, index in
             return dataSource.sectionModels[index].header
         }
@@ -101,10 +109,18 @@ class JamiSearchView: NSObject, UITableViewDelegate {
             .disposed(by: disposeBag)
         searchingLabel.textColor = UIColor.jamiLabelColor
 
-        self.viewModel.isSearching.subscribe(onNext: { [weak self] (isSearching) in
-            self?.searchResultsTableView.isHidden = !isSearching
-            self?.searchingLabel.isHidden = !isSearching
-        }).disposed(by: disposeBag)
+        self.viewModel.isSearching
+            .subscribe(onNext: { [weak self] (isSearching) in
+                self?.searchResultsTableView.isHidden = !isSearching
+                self?.searchingLabel.isHidden = !isSearching
+            })
+            .disposed(by: disposeBag)
+
+        self.viewModel.searchStatus
+            .subscribe(onNext: { [weak self] (searchText) in
+                self?.searchResultsTableView.contentInset.top = searchText.isEmpty ? 0 : 24
+            })
+            .disposed(by: disposeBag)
     }
 
     private func configureSearchBar() {
@@ -152,8 +168,10 @@ class JamiSearchView: NSObject, UITableViewDelegate {
         searchBar.placeholder = L10n.Smartlist.searchBarPlaceholder
         searchBar.backgroundColor = UIColor.clear
     }
+}
 
 // MARK: UITableViewDelegate
+extension JamiSearchView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let headerView = view as? UITableViewHeaderFooterView else { return }

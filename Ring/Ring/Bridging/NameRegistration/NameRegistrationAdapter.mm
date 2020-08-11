@@ -1,7 +1,8 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,6 +25,7 @@
 #import "dring/configurationmanager_interface.h"
 #import "LookupNameResponse.h"
 #import "NameRegistrationResponse.h"
+#import "UserSearchResponse.h"
 
 @implementation NameRegistrationAdapter
 
@@ -59,14 +61,28 @@ static id <NameRegistrationAdapterDelegate> _delegate;
     }));
 
     confHandlers.insert(exportable_callback<ConfigurationSignal::NameRegistrationEnded>([&](const std::string&account_id,
-                                                                                          int state,
-                                                                                          const std::string& name) {
+                                                                                            int state,
+                                                                                            const std::string& name) {
         if (NameRegistrationAdapter.delegate) {
             NameRegistrationResponse* response = [NameRegistrationResponse new];
             response.accountId = [NSString stringWithUTF8String:account_id.c_str()];
             response.state = (NameRegistrationState)state;
             response.name = [NSString stringWithUTF8String:name.c_str()];
             [NameRegistrationAdapter.delegate nameRegistrationEndedWith:response];
+        }
+    }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::UserSearchEnded>([&](const std::string&account_id,
+                                                                                      int state,
+                                                                                      const std::string&query,
+                                                                                      const std::vector<std::map<std::string,std::string>>&results) {
+        if (NameRegistrationAdapter.delegate) {
+            UserSearchResponse* response = [UserSearchResponse new];
+            response.accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            response.state = (UserSearchState)state;
+            response.query = [NSString stringWithUTF8String:query.c_str()];
+            response.results = [Utils vectorOfMapsToArray:results];
+            [NameRegistrationAdapter.delegate userSearchEndedWith:response];
         }
     }));
 
@@ -84,6 +100,10 @@ static id <NameRegistrationAdapterDelegate> _delegate;
 
 - (void)registerNameWithAccount:(NSString*)account password:(NSString*)password name:(NSString*)name {
     registerName(std::string([account UTF8String]), std::string([password UTF8String]), std::string([name UTF8String]));
+}
+
+- (void)searchUserWithAccount:(NSString*)account query:(NSString*)query {
+    searchUser(std::string([account UTF8String]), std::string([query UTF8String]));
 }
 
 #pragma mark NameRegistrationAdapterDelegate
