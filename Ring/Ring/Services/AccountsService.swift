@@ -850,10 +850,14 @@ class AccountsService: AccountAdapterDelegate {
             name =  accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName))
         }
 
-        guard let accountToUpdate = self.getAccount(fromAccountId: account),
-            let accountURI = AccountModelHelper
-                .init(withAccount: accountToUpdate).uri else {return}
-        _ = self.dbManager.saveAccountProfile(alias: name, photo: photo, accountId: account, accountURI: accountURI)
+        self.getAccountFromDaemon(fromAccountId: account)
+            .subscribe(onSuccess: { [weak self] accountToUpdate in
+                guard let self = self, let accountURI = AccountModelHelper
+                    .init(withAccount: accountToUpdate).uri else {
+                        return
+                }
+                _ = self.dbManager.saveAccountProfile(alias: name, photo: photo, accountId: account, accountURI: accountURI)
+            }).disposed(by: self.disposeBag)
     }
 
     // MARK: Push Notifications
