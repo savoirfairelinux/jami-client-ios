@@ -111,7 +111,8 @@ class ConversationViewModel: Stateable, ViewModel {
         self.locationSharingService
             .peerUriAndLocationReceived
             .subscribe(onNext: { [weak self] tuple in
-                guard let self = self, let peerUri = tuple.0, let coordinates = tuple.1, let conversation = self.conversation else { return }
+                guard let self = self, let peerUri = tuple.0, let conversation = self.conversation else { return }
+                let coordinates = tuple.1
                 if peerUri == conversation.value.participantUri {
                     self.myContactsLocation.onNext(coordinates)
                 }
