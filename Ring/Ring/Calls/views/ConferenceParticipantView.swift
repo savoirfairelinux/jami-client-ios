@@ -97,14 +97,14 @@ class ConferenceParticipantView: UIView {
                                 .displayName
                                 .asObservable()) { profile, username in
                                     return (profile, username)
-            }
+                }
             .observeOn(MainScheduler.instance)
             .subscribe({ [weak self] profileData -> Void in
                 let photoData = NSData(base64Encoded: profileData.element?.0?.photo ?? "", options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
                 let alias = profileData.element?.0?.alias
                 let nameData = profileData.element?.1
                 let name = alias != nil ? alias : nameData
-                guard let displayName = name else {return}
+                guard let displayName = name else { return }
                 self?.avatarView.subviews.forEach({ view in
                     view.removeFromSuperview()
                 })

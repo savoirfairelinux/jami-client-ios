@@ -35,17 +35,17 @@ class ContactPickerViewModel: Stateable, ViewModel {
             .combineLatest(self.contactsService.contacts.asObservable(),
                            self.callService.calls.asObservable()) {(contacts, calls) -> [ContactPickerSection] in
                             var sections = [ContactPickerSection]()
-                            guard let currentCall = self.callService.call(callID: self.currentCallId) else {return sections}
+                            guard let currentCall = self.callService.call(callID: self.currentCallId) else { return sections }
                             var callURIs = [String]()
                             var callItems = [ConferencableItem]()
                             var contactItems = [ConferencableItem]()
                             var conferences = [String: [Contact]]()
                             calls.values.forEach { call in
-                                guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else {return}
+                                guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else { return }
                                 let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
                                 let uri = JamiURI.init(schema: type, infoHach: call.participantUri, account: account)
-                                guard let uriString = uri.uriString else {return}
-                                guard let hashString = uri.hash else {return}
+                                guard let uriString = uri.uriString else { return }
+                                guard let hashString = uri.hash else { return }
                                 callURIs.append(uriString)
                                 if currentCall.participantsCallId.contains(call.callId) ||
                                     call.callId == self.currentCallId {
@@ -87,7 +87,7 @@ class ContactPickerViewModel: Stateable, ViewModel {
                                 return sections
                             }
                             contacts.forEach { contact in
-                                guard let contactUri = contact.uriString else {return}
+                                guard let contactUri = contact.uriString else { return }
                                 if callURIs.contains(contactUri) {
                                     return
                                 }
@@ -106,14 +106,14 @@ class ContactPickerViewModel: Stateable, ViewModel {
                                 sections.append(ContactPickerSection(header: "contacts", items: contactItems))
                             }
                             return sections
-        }
+            }
     }()
 
     lazy var searchResultItems: Observable<[ContactPickerSection]> = {
         return search
             .startWith("")
             .distinctUntilChanged()
-            .withLatestFrom(self.conferensableItems) { (search, targets) in (search, targets)}
+            .withLatestFrom(self.conferensableItems) { (search, targets) in (search, targets) }
             .map({ (arg) -> [ContactPickerSection] in
                 var (search, targets) = arg
                 if search.isEmpty {
@@ -139,7 +139,7 @@ class ContactPickerViewModel: Stateable, ViewModel {
                     }
                     sectionVariable.items = newItems
                     return sectionVariable
-                    }.filter { (section: ContactPickerSection) -> Bool in
+                }.filter { (section: ContactPickerSection) -> Bool in
                         return !section.items.isEmpty
                 }
                 return result
@@ -167,8 +167,8 @@ class ContactPickerViewModel: Stateable, ViewModel {
 
     func addContactToConference(contact: ConferencableItem) {
         guard let contactToAdd = contact.contacts.first else { return }
-        guard let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID) else {return}
-        guard let call = self.callService.call(callID: currentCallId) else {return}
+        guard let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID) else { return }
+        guard let call = self.callService.call(callID: currentCallId) else { return }
         if contact.conferenceID.isEmpty {
             if self.videoService.getEncodingAccelerated() {
                 self.callService.hold(callId: currentCallId).subscribe().disposed(by: disposeBag)
@@ -184,7 +184,7 @@ class ContactPickerViewModel: Stateable, ViewModel {
                 .subscribe().disposed(by: self.disposeBag)
             return
         }
-        guard let secondCall = self.callService.call(callID: contact.conferenceID) else {return}
+        guard let secondCall = self.callService.call(callID: contact.conferenceID) else { return }
         if call.participantsCallId.count == 1 {
             self.callService.joinCall(firstCall: call.callId, secondCall: secondCall.callId)
         } else {

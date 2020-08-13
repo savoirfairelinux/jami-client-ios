@@ -77,7 +77,7 @@ class JamiURI {
             userInfo = info
             return
         }
-        if info.isEmpty {return}
+        if info.isEmpty { return }
         if info.firstIndex(of: "@") != nil {
             userInfo = String(info.split(separator: "@").first!)
             info = info.replacingOccurrences(of: userInfo + "@", with: "")

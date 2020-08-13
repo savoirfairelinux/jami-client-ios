@@ -97,7 +97,7 @@ struct ServiceEvent {
     /**
      Identifies the event type.
      */
-    fileprivate(set) internal var eventType: ServiceEventType
+    internal fileprivate(set) var eventType: ServiceEventType
 
     // MARK: - Private members
     /**

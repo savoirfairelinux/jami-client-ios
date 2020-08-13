@@ -77,7 +77,7 @@ extension Reactive where Base: UIViewController {
 
         let source = self.sentMessage(#selector(Base.viewWillDisappear)).filter { _ in
             return self.base.isBeingDismissed
-            }.map { $0.first as? Bool ?? false }
+        }.map { $0.first as? Bool ?? false }
 
         return ControlEvent(events: source)
     }

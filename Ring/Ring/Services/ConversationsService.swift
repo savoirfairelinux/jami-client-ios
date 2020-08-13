@@ -313,7 +313,7 @@ class ConversationsService {
     }
 
     func status(forMessageId messageId: String) -> MessageStatus {
-        guard let status = UInt64(messageId) else { return .unknown}
+        guard let status = UInt64(messageId) else { return .unknown }
         return self.messageAdapter.status(forMessageId: status)
     }
 
@@ -342,8 +342,8 @@ class ConversationsService {
                 return messages.status != .displayed && messages.incoming && !messages.isTransfer
             })
 
-            let messagesIds = unreadMessages.map({$0.messageId}).filter({$0 >= 0})
-            let messagesDaemonIds = unreadMessages.map({$0.daemonId}).filter({!$0.isEmpty})
+            let messagesIds = unreadMessages.map({ $0.messageId }).filter({ $0 >= 0 })
+            let messagesDaemonIds = unreadMessages.map({ $0.daemonId }).filter({ !$0.isEmpty })
             messagesDaemonIds.forEach { (msgId) in
                 self.messageAdapter
                     .setMessageDisplayedFrom(conversation.hash,
@@ -376,7 +376,7 @@ class ConversationsService {
             self.dbManager
                 .deleteMessage(messagesId: messagesId, accountId: accountId)
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onCompleted: { completable(.completed) }, onError: { error in completable(.error(error))})
+                .subscribe(onCompleted: { completable(.completed) }, onError: { error in completable(.error(error)) })
                 .disposed(by: self.disposeBag)
             return Disposables.create { }
         })

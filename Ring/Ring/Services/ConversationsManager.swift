@@ -138,7 +138,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                     let messageContent: String = event.getEventInput(ServiceEventInput.content),
                     let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
-                    else {return}
+                    else { return }
                 self.handleNewMessage(from: peerUri,
                                       to: accountId,
                                       messageId: "",
@@ -158,7 +158,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                     let messageContent: String = event.getEventInput(ServiceEventInput.content),
                     let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
                     let accountURi: String = event.getEventInput(ServiceEventInput.accountUri)
-                    else {return}
+                    else { return }
                 let message = self.conversationService.createMessage(withId: "",
                                                                      withContent: messageContent,
                                                                      byAuthor: accountURi,
@@ -201,7 +201,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                                                      updateConversation: currentAccount.id == transferInfo.accountId )
                         .subscribe(onCompleted: {
                             guard let transferInfo = self.dataTransferService
-                                .getTransferInfo(withId: transferId) else {return}
+                                .getTransferInfo(withId: transferId) else { return }
                             self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: transferInfo.accountId)
                         }).disposed(by: self.disposeBag)
                 case .dataTransferChanged:
@@ -274,7 +274,7 @@ class ConversationsManager: MessagesAdapterDelegate {
               let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
 
         let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
-        guard let peerUri = JamiURI.init(schema: type, infoHach: peerUri, account: accountForMessage).uriString else {return}
+        guard let peerUri = JamiURI.init(schema: type, infoHach: peerUri, account: accountForMessage).uriString else { return }
 
         if self.conversationService.isBeginningOfLocationSharing(incoming: true, contactUri: peerUri, accountId: accountId) {
             // Handle notification
@@ -345,7 +345,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             .isAccountSip() ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
                                            infoHach: peerUri,
-                                           account: accountForMessage).uriString else {return}
+                                           account: accountForMessage).uriString else { return }
         let message = self.conversationService.createMessage(withId: messageId,
                                                              withContent: content,
                                                              byAuthor: uriString,
@@ -385,7 +385,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                     self?.notificationHandler.presentMessageNotification(data: data)
                 } else {
                     guard let hash = JamiURI(schema: URIType.ring,
-                                             infoHach: info.peer).hash else {return}
+                                             infoHach: info.peer).hash else { return }
 
                     self?.searchNameAndPresentNotification(data: data, hash: hash)
                 }
@@ -425,7 +425,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
         guard let stringUri = JamiURI.init(schema: type,
                                            infoHach: uri,
-                                           account: account).uriString else {return}
+                                           account: account).uriString else { return }
         self.conversationService.messageStatusChanged(status,
                                                       for: messageId,
                                                       fromAccount: account,
@@ -437,7 +437,7 @@ class ConversationsManager: MessagesAdapterDelegate {
             (transferInfo.lastEvent != .wait_peer_acceptance && transferInfo.lastEvent != .wait_host_acceptance) {
             return
         }
-        guard let messageData = self.conversationService.dataTransferMessageMap[transferId] else {return}
+        guard let messageData = self.conversationService.dataTransferMessageMap[transferId] else { return }
         var filename = ""
         if self.dataTransferService.acceptTransfer(withId: transferId, interactionID: messageData.messageID,
                                                    fileName: &filename, accountID: accountId,

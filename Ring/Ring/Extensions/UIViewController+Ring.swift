@@ -51,9 +51,9 @@ extension UIViewController {
     }
 
     func findPathWithActiveTextField(in table: UITableView) -> IndexPath? {
-        if table.numberOfSections <= 0 {return nil}
+        if table.numberOfSections <= 0 { return nil }
         for i in 0..<table.numberOfSections {
-            if table.numberOfRows(inSection: i) == 0 {return nil}
+            if table.numberOfRows(inSection: i) == 0 { return nil }
             for k in 0..<table.numberOfRows(inSection: i) {
                 let path = IndexPath(row: k, section: i)
                 if let row = table.cellForRow(at: path) {
@@ -75,7 +75,7 @@ extension UIViewController {
     func adaptToKeyboardState (for scrollView: UIScrollView, with disposeBag: DisposeBag) {
 
         NotificationCenter.keyboardHeight.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self, unowned scrollView] (height) in
-            let trueHeight = height>0 ? height+100 : 0.0
+            let trueHeight = height > 0 ? height + 100 : 0.0
             let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: trueHeight, right: 0.0)
 
             scrollView.contentInset = contentInsets
@@ -99,7 +99,7 @@ extension UIViewController {
             .subscribe(onNext: { [unowned self, unowned tableView] (height) in
             let trueHeight = height > 0  ? height + 100 : 0.0
             // reset insets if they were changed before
-            if tableView.contentInset.bottom > 0  && trueHeight <= 0 {
+            if tableView.contentInset.bottom > 0 && trueHeight <= 0 {
                 var contentInsets = tableView.contentInset
                 contentInsets.bottom = 0
                 tableView.contentInset = contentInsets

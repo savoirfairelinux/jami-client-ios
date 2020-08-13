@@ -62,7 +62,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
                                                         return (profileImage, profileName)
                                                     }
                                                     return (profileImage, username)
-            }
+        }
             .observeOn(MainScheduler.instance)
             .startWith((item.profileImageData.value, item.userName.value))
             .subscribe({ [weak self] profileData -> Void in

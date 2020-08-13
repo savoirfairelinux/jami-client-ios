@@ -77,7 +77,7 @@ class ConfirmationAlert {
             textField.textAlignment = .center
             textField.borderStyle = .none
             textField.backgroundColor = UIColor.clear
-            textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
+            textField.font = UIFont.systemFont(ofSize: 11, weight: .thin)
             textField.text = L10n.AccountPage.passwordPlaceholder
         }
 

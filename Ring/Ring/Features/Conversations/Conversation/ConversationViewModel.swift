@@ -80,12 +80,12 @@ class ConversationViewModel: Stateable, ViewModel {
                 return event.eventType == ServiceEventType.messageTypingIndicator &&
                     event.getEventInput(ServiceEventInput.accountId) == self?.conversation.value.accountId &&
                     event.getEventInput(ServiceEventInput.peerUri) == self?.conversation.value.hash
-        }.map { (event) -> Bool in
+            }.map { (event) -> Bool in
             if let status: Int = event.getEventInput(ServiceEventInput.state), status == 1 {
                 return true
             }
             return false
-        }
+            }
     }()
 
     required init(with injectionBag: InjectionBag) {
@@ -161,9 +161,9 @@ class ConversationViewModel: Stateable, ViewModel {
                             })
                         }).filter { (message) -> Bool in
                             message != nil
-                    }.map { (message) -> MessageViewModel in
+                        }.map { (message) -> MessageViewModel in
                          return message!
-                    }
+                        }
                 })
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] messageViewModels in
@@ -237,7 +237,7 @@ class ConversationViewModel: Stateable, ViewModel {
                         guard let uri: String = serviceEvent
                             .getEventInput(ServiceEventInput.uri),
                             let accountID: String = serviceEvent
-                                .getEventInput(ServiceEventInput.accountId) else {return false}
+                                .getEventInput(ServiceEventInput.accountId) else { return false }
                         return uri == self?.conversation.value.hash &&
                             accountID == self?.conversation.value.accountId
                     }).subscribe(onNext: { [weak self] _ in
@@ -308,7 +308,7 @@ class ConversationViewModel: Stateable, ViewModel {
                            displayName.asObservable()) {(userName, displayname) in
                             guard let displayname = displayname, !displayname.isEmpty else { return userName }
                             return displayname
-        }
+            }
     }()
 
     // My contact's
@@ -383,7 +383,7 @@ class ConversationViewModel: Stateable, ViewModel {
             self.sendContactRequest()
         }
 
-        guard let account = self.accountService.currentAccount else {return}
+        guard let account = self.accountService.currentAccount else { return }
         //if in call send sip msg
         if let call = self.callService.call(participantHash: self.conversation.value.hash, accountID: self.conversation.value.accountId) {
             self.callService.sendTextMessage(callID: call.callId, message: content, accountId: account)
@@ -430,7 +430,7 @@ class ConversationViewModel: Stateable, ViewModel {
                               accountURI: accountURI)
         self.conversation.value.messages.filter { (message) -> Bool in
             return message.daemonId == daemonId && message.messageId == messageId
-            }.first?.status = .displayed
+        }.first?.status = .displayed
     }
 
     func deleteMessage(messageId: Int64) {
@@ -445,7 +445,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     fileprivate var unreadMessagesCount: Int {
-        let unreadMessages =  self.conversation.value.messages
+        let unreadMessages = self.conversation.value.messages
             .filter({ message in
                 return message.status != .displayed &&
                     !message.isTransfer && message.incoming
@@ -548,7 +548,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil) {
-        guard let accountId = accountService.currentAccount?.id else {return}
+        guard let accountId = accountService.currentAccount?.id else { return }
         self.dataTransferService.sendFile(filePath: filePath,
                                           displayName: displayName,
                                           accountId: accountId,
@@ -557,7 +557,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func sendAndSaveFile(displayName: String, imageData: Data) {
-        guard let accountId = accountService.currentAccount?.id else {return}
+        guard let accountId = accountService.currentAccount?.id else { return }
         self.dataTransferService.sendAndSaveFile(displayName: displayName,
                                                  accountId: accountId,
                                                  peerInfoHash: self.conversation.value.hash,
@@ -566,7 +566,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func acceptTransfer(transferId: UInt64, interactionID: Int64, messageContent: inout String) -> NSDataTransferError {
-        guard let accountId = accountService.currentAccount?.id else {return .unknown}
+        guard let accountId = accountService.currentAccount?.id else { return .unknown }
         return self.dataTransferService.acceptTransfer(withId: transferId, interactionID: interactionID,
                                                        fileName: &messageContent, accountID: accountId,
                                                        conversationID: self.conversation.value.conversationId)
@@ -589,7 +589,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func isTransferImage(transferId: UInt64) -> Bool? {
-        guard let account = self.accountService.currentAccount else {return nil}
+        guard let account = self.accountService.currentAccount else { return nil }
         return self.dataTransferService.isTransferImage(withId: transferId,
                                                         accountID: account.id,
                                                         conversationID: self.conversation.value.conversationId)
@@ -645,7 +645,7 @@ class ConversationViewModel: Stateable, ViewModel {
             return
         }
         composingMessage = isComposing
-        guard let account = self.accountService.currentAccount else {return}
+        guard let account = self.accountService.currentAccount else { return }
         conversationsService
             .setIsComposingMsg(to: self.conversation.value.participantUri,
                                from: account.id,

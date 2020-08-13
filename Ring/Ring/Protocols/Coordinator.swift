@@ -111,7 +111,7 @@ extension Coordinator {
                                             animated: animation,
                                             completion: nil)
         case .push:
-            if let contoller: UINavigationController  = self.rootViewController as? UINavigationController {
+            if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
                 // ensure we on the root view controller
                 contoller.popViewController(animated: false)
                 contoller.pushViewController(viewController, animated: false)

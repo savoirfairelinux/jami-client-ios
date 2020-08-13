@@ -71,7 +71,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         Observable<(Data?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
                                                   self.viewModel.displayName.asObservable()) { profileImage, username in
                                                     return (profileImage, username)
-            }
+        }
             .observeOn(MainScheduler.instance)
             .startWith((self.viewModel.profileImageData.value, self.viewModel.userName.value))
             .subscribe({ [weak self] profileData -> Void in
@@ -129,8 +129,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                 return UITableViewCell()
         }
 
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,
-            ContactActions>>(configureCell: configureCell)
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ContactActions>>(configureCell: configureCell)
 
         self.viewModel.tableSection
             .observeOn(MainScheduler.instance)

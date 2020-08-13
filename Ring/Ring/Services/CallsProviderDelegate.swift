@@ -65,7 +65,7 @@ extension CallsProviderDelegate {
                             completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
         let isJamiAccount = account.type == AccountType.ring
-        guard let handleInfo = self.getHandleInfo(account: account, call: call) else {return}
+        guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
         let handleType = (isJamiAccount
             || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
         update.localizedCallerName = handleInfo.displayName
@@ -85,7 +85,7 @@ extension CallsProviderDelegate {
 
     func startCall(account: AccountModel, call: CallModel) {
         let isJamiAccount = account.type == AccountType.ring
-        guard let handleInfo = self.getHandleInfo(account: account, call: call) else {return}
+        guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
         let handleType = (isJamiAccount
             || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
         let contactHandle = CXHandle(type: handleType, value: handleInfo.handle)
@@ -99,7 +99,7 @@ extension CallsProviderDelegate {
     func getHandleInfo(account: AccountModel, call: CallModel) -> (displayName: String, handle: String)? {
         let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
         let uri = JamiURI.init(schema: type, infoHach: call.participantUri, account: account)
-        guard var handle = uri.hash else {return nil}
+        guard var handle = uri.hash else { return nil }
         //for sip contact if account and contact have different host name add contact host name
         if account.type == AccountType.sip {
             let accountHostname = account.details?

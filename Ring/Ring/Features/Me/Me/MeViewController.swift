@@ -116,7 +116,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     private func configureBindings() {
         let infoButton = UIButton(type: .infoLight)
         let imageQrCode = UIImage(asset: Asset.qrCode) as UIImage?
-        let qrCodeButton   = UIButton(type: UIButton.ButtonType.custom) as UIButton
+        let qrCodeButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
         qrCodeButton.setImage(imageQrCode, for: .normal)
         self.viewModel.isAccountSip
             .asObservable()
@@ -420,7 +420,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .changePassword:
                     let cell = DisposableCell()
                     cell.backgroundColor = UIColor.jamiBackgroundColor
-                    let title =  self.viewModel.hasPassword() ?
+                    let title = self.viewModel.hasPassword() ?
                         L10n.AccountPage.changePassword : L10n.AccountPage.createPassword
                     cell.textLabel?.text = title
                     cell.textLabel?.textColor = UIColor.jamiMain
@@ -661,7 +661,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         case .sipPassword:
             cell.textLabel?.text = L10n.Account.sipPassword
             //show password button
-            let rightButton  = UIButton(type: .custom)
+            let rightButton = UIButton(type: .custom)
             rightButton.frame = CGRect(x: 0, y: 0, width: 55, height: 30)
             self.viewModel.secureTextEntry
                 .asObservable()
@@ -758,9 +758,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             return
         }
         guard let activeField = self
-            .findActiveTextField(in: settingsTable) else {return}
+            .findActiveTextField(in: settingsTable) else { return }
         activeField.resignFirstResponder()
-        if activeField.tag != sipCredentialsTAG {return}
+        if activeField.tag != sipCredentialsTAG { return }
         self.viewModel.updateSipSettings()
     }
 
@@ -819,7 +819,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 textField.textAlignment = .center
                 textField.borderStyle = .none
                 textField.backgroundColor = UIColor.clear
-                textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
+                textField.font = UIFont.systemFont(ofSize: 11, weight: .thin)
             }
         }
 
@@ -838,14 +838,16 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 Observable
                     .combineLatest(textFields[3].rx.text,
                                    textFields[2].rx.text) {(text1, text2) -> Bool in
-                                    return text1 == text2 }
+                                    return text1 == text2
+                    }
                     .bind(to: actionChange.rx.isEnabled)
                     .disposed(by: self.disposeBag)
             } else {
                 Observable
                     .combineLatest(textFields[0].rx.text,
                                    textFields[1].rx.text) {(text1, text2) -> Bool in
-                                    return text1 == text2 }
+                                    return text1 == text2
+                    }
                     .bind(to: actionChange.rx.isEnabled)
                     .disposed(by: self.disposeBag)
             }
@@ -900,7 +902,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             textField.textAlignment = .center
             textField.borderStyle = .none
             textField.backgroundColor = UIColor.clear
-            textField.font =  UIFont.systemFont(ofSize: 11, weight: .thin)
+            textField.font = UIFont.systemFont(ofSize: 11, weight: .thin)
         }
         //password text field
         if self.viewModel.hasPassword() {
@@ -947,7 +949,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                 if state.isAvailable && !usernameEmpty {
                                     return true
                                 }
-                                return false }
+                                return false
+                }
                 .bind(to: actionRegister.rx.isEnabled).disposed(by: nameRegistrationBag)
         } else if textFields.count == 3 {
             // have a password. Could register when username not empty and valid and password not empty
@@ -966,7 +969,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                 if state.isAvailable && !nameEmpty && !passwordEmpty {
                                     return true
                                 }
-                                return false}
+                                return false
+                }
                 .bind(to: actionRegister.rx.isEnabled).disposed(by: nameRegistrationBag)
         }
         //remove border around text view
@@ -1070,7 +1074,7 @@ extension MeViewController: UITableViewDelegate {
     }
 
     func shareAccountInfo() {
-        guard let content = self.viewModel.accountInfoToShare else {return}
+        guard let content = self.viewModel.accountInfoToShare else { return }
         let title = L10n.AccountPage.contactMeOnJamiTitle
         let activityViewController = UIActivityViewController(activityItems: content,
                                                               applicationActivities: nil)

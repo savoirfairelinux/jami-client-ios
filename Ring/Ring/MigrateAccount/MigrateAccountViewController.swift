@@ -149,7 +149,7 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
                 .bind(to: self.viewModel.password)
                 .disposed(by: self.disposeBag)
 
-            self.passwordField.rx.text.map({!($0?.isEmpty ?? true)})
+            self.passwordField.rx.text.map({ !($0?.isEmpty ?? true) })
                 .bind(to: self.migrateButton.rx.isEnabled)
                 .disposed(by: self.disposeBag)
         }

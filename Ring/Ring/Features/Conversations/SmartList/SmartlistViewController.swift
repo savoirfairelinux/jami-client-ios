@@ -142,7 +142,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         noConversationLabel.textColor = UIColor.jamiLabelColor
         dialpadButtonShadow.backgroundColor = UIColor.jamiBackgroundSecondaryColor
         dialpadButtonShadow.layer.shadowColor = UIColor.jamiLabelColor.cgColor
-        dialpadButtonShadow.layer.shadowOffset =  CGSize.zero
+        dialpadButtonShadow.layer.shadowOffset = CGSize.zero
         dialpadButtonShadow.layer.shadowRadius = 1
         dialpadButtonShadow.layer.shadowOpacity = 0.6
         dialpadButtonShadow.layer.masksToBounds = false
@@ -175,7 +175,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         }).disposed(by: self.disposeBag)
 
         let imageSettings = UIImage(asset: Asset.settings) as UIImage?
-        let generalSettingsButton   = UIButton(type: UIButton.ButtonType.system) as UIButton
+        let generalSettingsButton = UIButton(type: UIButton.ButtonType.system) as UIButton
         generalSettingsButton.setImage(imageSettings, for: .normal)
         generalSettingsButton.contentMode = .scaleAspectFill
         let settingsButtonItem = UIBarButtonItem(customView: generalSettingsButton)
@@ -192,7 +192,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         phoneBookButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                guard let self = self else {return}
+                guard let self = self else { return }
                 self.contactPicker.delegate = self
                 self.present(self.contactPicker, animated: true, completion: nil)
             })
@@ -203,7 +203,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 if let account = currentAccount {
                     let accountSip = account.type == AccountType.sip
                     self?.navigationItem
-                        .rightBarButtonItem =  accountSip ? nil : settingsButtonItem
+                        .rightBarButtonItem = accountSip ? nil : settingsButtonItem
                     self?.dialpadButtonShadow.isHidden = !accountSip
                     self?.phoneBookButton.isHidden = !accountSip
                     self?.qrScanButton.isHidden = accountSip
@@ -317,7 +317,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
-        guard let userInfo: Dictionary = notification.userInfo else {return}
+        guard let userInfo: Dictionary = notification.userInfo else { return }
         guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
@@ -389,7 +389,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchBarShadow.layer.masksToBounds = false
 
         if #available(iOS 13.0, *) {
-            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
             visualEffectView.frame = searchBarShadow.bounds
             visualEffectView.isUserInteractionEnabled = false
             searchBarShadow.insertSubview(visualEffectView, at: 0)
@@ -401,7 +401,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             visualEffectView.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
 
         } else {
-            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
             visualEffectView.frame = searchBarShadow.bounds
             visualEffectView.isUserInteractionEnabled = false
             let background = UIView()

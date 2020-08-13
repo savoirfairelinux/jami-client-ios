@@ -46,7 +46,7 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
                            self.manager.asObservable(),
                            self.createState) {( name: String, password: String, manager: String, state: AccountCreationState) -> Bool in
             return !name.isEmpty && !password.isEmpty && !manager.isEmpty && !state.isInProgress
-        }
+            }
     }()
 
     required init(with injectionBag: InjectionBag) {

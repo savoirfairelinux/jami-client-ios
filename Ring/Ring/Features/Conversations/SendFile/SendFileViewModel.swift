@@ -84,7 +84,7 @@ class SendFileViewModel: Stateable, ViewModel {
                 .asObservable()
                 .filter { state in
                     return state == .recorded
-            })
+                })
             .map({ interval -> String in
                 let seconds = interval % 60
                 let minutes = (interval / 60) % 60
@@ -156,7 +156,7 @@ class SendFileViewModel: Stateable, ViewModel {
         let dateString = dateFormatter.string(from: date)
         let random = String(arc4random_uniform(9999))
         let nameForRecordingFile = dateString + "_" + random
-        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile, accountID: conversation.accountId, conversationID: conversation.conversationId) else {return}
+        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile, accountID: conversation.accountId, conversationID: conversation.conversationId) else { return }
         guard let name = self.videoService
             .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
                 return
@@ -170,7 +170,7 @@ class SendFileViewModel: Stateable, ViewModel {
             .combineLatest(playerReady.asObservable(),
                            readyToSend.asObservable()) {(playerReady, fileReady) in
                             return (playerReady && fileReady)
-        }
+            }
     }()
 
     func stopRecording() {
@@ -195,7 +195,7 @@ class SendFileViewModel: Stateable, ViewModel {
         player?.closePlayer()
         self.player = nil
         let name = fileUrl.lastPathComponent
-        guard let accountId = self.accountService.currentAccount?.id else {return}
+        guard let accountId = self.accountService.currentAccount?.id else { return }
         self.fileTransferService.sendFile(filePath: self.fileName,
                                           displayName: name,
                                           accountId: accountId,

@@ -80,7 +80,7 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { play in
-                if !play {return}
+                if !play { return }
                 AudioServicesPlaySystemSound(1057)
             }).disposed(by: self.disposeBag)
         self.placeCallButton.isHidden = self.viewModel.inCallDialpad
@@ -136,7 +136,7 @@ extension DialpadViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width/3
+        let width = collectionView.frame.width / 3
         return CGSize(width: width, height: 70)
     }
 

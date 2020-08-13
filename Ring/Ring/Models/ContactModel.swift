@@ -57,7 +57,7 @@ class ContactModel: Equatable {
             self.added = addedDate
         }
         if let banned = dictionary["banned"],
-            let isBanned  = banned.toBool() {
+            let isBanned = banned.toBool() {
             self.banned = isBanned
         }
     }

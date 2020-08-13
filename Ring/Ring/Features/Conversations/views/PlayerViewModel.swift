@@ -88,7 +88,7 @@ class PlayerViewModel {
             }
             return self?.incomingFrame.filter {  [weak self] (render) -> Bool in
                 render?.rendererId == self?.playerId
-                } ?? Observable.just(renderer)
+            } ?? Observable.just(renderer)
         })
             .merge()
             .subscribe(onNext: {  [weak self] (renderer) in
@@ -100,7 +100,7 @@ class PlayerViewModel {
             .asObservable()
             .filter {  [weak self] (player) -> Bool in
                 player.playerId == self?.playerId
-        }
+            }
         .take(1)
         .subscribe(onNext: {  [weak self] player in
             guard let duration = Float(player.duration),
@@ -163,12 +163,12 @@ class PlayerViewModel {
     }
 
     func toglePause() {
-        pause.value = !pause.value
+        pause.value.toggle()
         videoService.pausePlayer(playerId: playerId, pause: pause.value)
     }
 
     func muteAudio() {
-        audioMuted.value = !audioMuted.value
+        audioMuted.value.toggle()
         videoService.mutePlayerAudio(playerId: playerId, mute: audioMuted.value)
     }
 

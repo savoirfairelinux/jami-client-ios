@@ -66,7 +66,7 @@ class ConversationCell: UITableViewCell, NibReusable {
                                                         return (profileImage, displayName)
                                                     }
                                                     return (profileImage, username)
-            }
+        }
             .observeOn(MainScheduler.instance)
             .startWith((item.profileImageData.value, item.userName.value))
             .subscribe({ [weak self] profileData -> Void in

@@ -182,7 +182,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     var notCancelable = true
 
     // MARK: L10n
-    let createAccountTitle  = L10n.CreateAccount.createAccountFormTitle
+    let createAccountTitle = L10n.CreateAccount.createAccountFormTitle
     let createAccountButton = L10n.Welcome.createAccount
     let usernameTitle = L10n.CreateAccount.enterNewUsernamePlaceholder
     let passwordTitle = L10n.CreateAccount.newPasswordPlaceholder
@@ -317,7 +317,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
                             return
                         }
                         self.accountCreationState.value = .timeOut
-                }
+                    }
                 }, onError: { [unowned self] (error) in
                     if let error = error as? AccountCreationError {
                         self.accountCreationState.value = .error(error: error)

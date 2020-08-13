@@ -79,7 +79,7 @@ struct AccountModelHelper {
      - Returns: true if the account is enabled, false otherwise.
      */
     func isEnabled() -> Bool {
-        guard let details = self.account.details else {return false}
+        guard let details = self.account.details else { return false }
         return (details
             .getBool(forConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable)))
     }
@@ -90,7 +90,7 @@ struct AccountModelHelper {
      - Returns: the registration state of the account as a String.
      */
     func getRegistrationState() -> String {
-        guard let details = self.account.volatileDetails else {return ""}
+        guard let details = self.account.volatileDetails else { return "" }
         return (details
             .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountRegistrationStatus)))
     }
@@ -153,7 +153,7 @@ struct AccountModelHelper {
     }
 
     public var uri: String? {
-        guard let details = self.account.details else {return nil}
+        guard let details = self.account.details else { return nil }
         if self.account.type == AccountType.sip {
             let name = details
                 .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountUsername))
@@ -176,7 +176,7 @@ struct AccountModelHelper {
             }
             return nil
         } else {
-            guard let ringId = self.ringId else {return nil}
+            guard let ringId = self.ringId else { return nil }
             return AccountModelHelper.ringIdPrefix.appending(ringId)
         }
     }

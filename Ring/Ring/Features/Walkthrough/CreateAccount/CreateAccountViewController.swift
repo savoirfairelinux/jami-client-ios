@@ -95,7 +95,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             if self?.registerPasswordView.isHidden ?? true {
                 return
             }
-            guard let height = self?.passwordInfoLabel.frame.height else {return}
+            guard let height = self?.passwordInfoLabel.frame.height else { return }
             self?.choosePasswordViewHeightConstraint.constant = 133 + height
             self?.view.layoutIfNeeded()
         }).disposed(by: self.disposeBag)
@@ -257,7 +257,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     private func managePasswordSwitch(isOn: Bool) {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             if isOn {
-                guard let height = self?.passwordInfoLabel.frame.height else {return}
+                guard let height = self?.passwordInfoLabel.frame.height else { return }
                 self?.registerPasswordView.isHidden = false
                 self?.choosePasswordViewHeightConstraint.constant = 133 + height
                 self?.view.layoutIfNeeded()
@@ -333,7 +333,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             UIAlertAction(title: L10n.Global.ok,
                           style: .default) { [weak self](_: UIAlertAction!) -> Void in
                             self?.viewModel.finish()
-        }
+            }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
@@ -347,7 +347,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             UIAlertAction(title: L10n.Global.ok,
                           style: .default) { [weak self](_: UIAlertAction!) -> Void in
                             self?.viewModel.finish()
-        }
+            }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
