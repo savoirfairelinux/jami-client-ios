@@ -24,8 +24,10 @@ import RxCocoa
 
 class MessageCellLocationSharingSent: MessageCellLocationSharing {
 
-    private var myLocationMarker = MaplyScreenMarker()
-    private var markerComponentObject: MaplyComponentObject?
+    /// Primary location
+    private var myLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
+    /// Secondary location
+    private var myContactsLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
 
     @IBOutlet weak var sentBubbleLeading: NSLayoutConstraint!
 
@@ -37,15 +39,36 @@ class MessageCellLocationSharingSent: MessageCellLocationSharing {
     override func configureFromItem(_ conversationViewModel: ConversationViewModel, _ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
         super.configureFromItem(conversationViewModel, items, cellForRowAt: indexPath)
 
+        // Primary location
         conversationViewModel.myLocation
             .subscribe(onNext: { [weak self, weak conversationViewModel] location in
                 guard let self = self, let location = location?.coordinate else { return }
 
-                self.markerComponentObject = self.updateLocationAndMarker(location: location,
-                                                                          imageData: conversationViewModel?.myOwnProfileImageData,
-                                                                          username: conversationViewModel?.userName.value,
-                                                                          marker: self.myLocationMarker,
-                                                                          markerDump: self.markerComponentObject)
+                self.myLocation.componentObject = self.updateLocationAndMarker(location: location,
+                                                                               imageData: conversationViewModel?.myOwnProfileImageData,
+                                                                               username: conversationViewModel?.userName.value,
+                                                                               marker: self.myLocation.marker,
+                                                                               markerDump: self.myLocation.componentObject)
+            })
+            .disposed(by: self.disposeBag)
+
+        // Secondary location
+        conversationViewModel.myContactsLocation
+            .subscribe(onNext: { [weak self, weak conversationViewModel] location in
+                guard let self = self else { return }
+
+                if let location = location {
+                    self.myContactsLocation.componentObject = self.updateLocationAndMarker(location: location,
+                                                                                           imageData: conversationViewModel?.profileImageData.value,
+                                                                                           username: conversationViewModel?.userName.value,
+                                                                                           marker: self.myContactsLocation.marker,
+                                                                                           markerDump: self.myContactsLocation.componentObject,
+                                                                                           tryToAnimateToMarker: false)
+                } else if let componentObject = self.myContactsLocation.componentObject,
+                          let maplyViewController = self.maplyViewController {
+                    maplyViewController.remove(componentObject)
+                    self.myContactsLocation.componentObject = nil
+                }
             })
             .disposed(by: self.disposeBag)
 
@@ -61,7 +84,7 @@ class MessageCellLocationSharingSent: MessageCellLocationSharing {
 
     override func myPositionButtonAction(sender: UIButton!) {
         if let mapViewC = self.maplyViewController as? MaplyViewController {
-            mapViewC.animate(toPosition: self.myLocationMarker.loc, time: 0.5)
+            mapViewC.animate(toPosition: self.myLocation.marker.loc, time: 0.5)
         }
     }
 

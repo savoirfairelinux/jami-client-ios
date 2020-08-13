@@ -24,6 +24,8 @@ import RxCocoa
 
 class MessageCellLocationSharing: MessageCell {
 
+    typealias MarkerAndComponentObject = (marker: MaplyScreenMarker, componentObject: MaplyComponentObject?)
+
     private static let osmCopyrightAndLicenseURL = "https://www.openstreetmap.org/copyright"
     private static let remoteTileSourceBaseUrl = MessageCellLocationSharing.getBaseURL()
 
@@ -159,9 +161,11 @@ extension MessageCellLocationSharing {
                                  imageData: Data?,
                                  username: String?,
                                  marker: MaplyScreenMarker,
-                                 markerDump: MaplyComponentObject?) -> MaplyComponentObject? {
+                                 markerDump: MaplyComponentObject?,
+                                 tryToAnimateToMarker: Bool = true) -> MaplyComponentObject? {
         // only the first time
-        if markerDump != nil {
+        if markerDump == nil {
+            marker.layoutImportance = MAXFLOAT
             if let imageData = imageData, let circledImage = UIImage(data: imageData)?.circleMasked {
                 marker.image = circledImage
             } else {
@@ -183,7 +187,7 @@ extension MessageCellLocationSharing {
             }
             dumpToReturn = self.maplyViewController!.addScreenMarkers([marker], desc: nil)
 
-            if !locationTapped.value.1 {
+            if tryToAnimateToMarker && !locationTapped.value.1 {
                 mapViewC.animate(toPosition: maplyCoordonate, time: 0.1)
             }
         }
