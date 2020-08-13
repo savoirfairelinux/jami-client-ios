@@ -32,7 +32,7 @@ extension Reactive where Base: UIView {
                 view.alpha = 0
             } else {
                 UIView.animate(withDuration: 0.3, delay: 0.5, options: .curveEaseOut,
-                               animations: {view.alpha = 1},
+                               animations: { view.alpha = 1 },
                                completion: { _ in view.isHidden = false
                 })
             }

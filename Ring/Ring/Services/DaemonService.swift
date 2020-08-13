@@ -62,7 +62,7 @@ class DaemonService {
     private let log = SwiftyBeaver.self
 
     /// Indicates whether the daemon is started or not.
-    fileprivate(set) internal var daemonStarted = false
+    internal fileprivate(set) var daemonStarted = false
 
     /// The DRingAdaptor making the c++ bridge between the deamon and the App Swift source code.
     fileprivate let dRingAdaptor: DRingAdapter

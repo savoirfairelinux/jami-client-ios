@@ -94,15 +94,15 @@ class ProfilesService {
             //Parse the key to get the number of parts and the current part number
             let components = vCardKey.components(separatedBy: ",")
 
-            guard let partComponent = components.filter({$0.hasPrefix("part=")}).first else {
+            guard let partComponent = components.filter({ $0.hasPrefix("part=") }).first else {
                 return
             }
 
-            guard let ofComponent = components.filter({$0.hasPrefix("of=")}).first else {
+            guard let ofComponent = components.filter({ $0.hasPrefix("of=") }).first else {
                 return
             }
 
-            guard let idComponent = components.filter({$0.hasPrefix("x-ring/ring.profile.vcard;id=")}).first else {
+            guard let idComponent = components.filter({ $0.hasPrefix("x-ring/ring.profile.vcard;id=") }).first else {
                 return
             }
 

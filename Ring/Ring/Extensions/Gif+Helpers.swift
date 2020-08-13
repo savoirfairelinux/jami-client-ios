@@ -61,7 +61,7 @@ extension UIImage {
                                                              Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
         }
 
-        guard let delayDouble = delayObject as? Double else {return delay}
+        guard let delayDouble = delayObject as? Double else { return delay }
 
         delay = delayDouble
 

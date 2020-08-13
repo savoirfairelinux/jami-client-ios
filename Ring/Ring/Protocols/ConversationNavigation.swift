@@ -135,7 +135,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func fromCallToConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
-        guard let navigationController = self.rootViewController as? UINavigationController else {return}
+        guard let navigationController = self.rootViewController as? UINavigationController else { return }
         let controllers = navigationController.children
         for controller in controllers
             where controller.isKind(of: (ConversationViewController).self) {
@@ -164,7 +164,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func presentCallController (call: CallModel) {
-        guard let navController = self.rootViewController as? UINavigationController else {return}
+        guard let navController = self.rootViewController as? UINavigationController else { return }
         let controllers = navController.children
         for controller in controllers
             where controller.isKind(of: (CallViewController).self) {

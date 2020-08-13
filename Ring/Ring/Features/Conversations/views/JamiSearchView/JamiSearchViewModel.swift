@@ -128,7 +128,7 @@ class JamiSearchViewModel {
         self.filteredResults.value.removeAll()
         self.searchStatus.onNext("")
 
-        if text.isEmpty {return}
+        if text.isEmpty { return }
 
         //Filter conversations
         let filteredConversations = self.dataSource.conversationViewModels

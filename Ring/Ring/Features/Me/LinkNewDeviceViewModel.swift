@@ -85,7 +85,7 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
     }()
 
     lazy var hasPassord: Bool = {
-        guard let currentAccount = self.accountService.currentAccount else {return true}
+        guard let currentAccount = self.accountService.currentAccount else { return true }
         return AccountModelHelper(withAccount: currentAccount).hasPassword
     }()
 
@@ -94,7 +94,7 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
     let disposeBag = DisposeBag()
 
     // MARK: L10n
-    let linkDeviceTitleTitle  = L10n.LinkDevice.title
+    let linkDeviceTitleTitle = L10n.LinkDevice.title
     let explanationMessage = L10n.LinkDevice.explanationMessage
 
     required init(with injectionBag: InjectionBag) {

@@ -62,7 +62,7 @@ class CallViewModel: Stateable, ViewModel {
             guard let call = self.call else {
                 return
             }
-            guard let account = self.accountService.currentAccount else {return}
+            guard let account = self.accountService.currentAccount else { return }
             isHeadsetConnected = self.audioService.isHeadsetConnected.value
             isAudioOnly = call.isAudioOnly
             let type = account.type == AccountType.sip
@@ -82,12 +82,12 @@ class CallViewModel: Stateable, ViewModel {
                 .asObservable().filter { [weak self] conference-> Bool in
                     return conference.calls.contains(self?.call?.callId ?? "") ||
                         conference.conferenceID == self?.rendererId
-            }
+                }
             .subscribe(onNext: { [weak self] conf in
                 if conf.conferenceID.isEmpty {
                     return
                 }
-                guard let updatedCall = self?.callService.call(callID: call.callId) else {return}
+                guard let updatedCall = self?.callService.call(callID: call.callId) else { return }
                 self?.call = updatedCall
                 let conferenceCreated = conf.state == ConferenceState.conferenceCreated.rawValue
                 self?.rendererId = conferenceCreated ? conf.conferenceID : self!.call!.callId
@@ -121,7 +121,7 @@ class CallViewModel: Stateable, ViewModel {
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
                   infoHach: call.participantUri,
-                  account: account).uriString else {return nil}
+                  account: account).uriString else { return nil }
         return self.profileService.getProfile(uri: uriString,
                                               createIfNotexists: true, accountId: account.id)
             .filter({ profile in
@@ -207,7 +207,7 @@ class CallViewModel: Stateable, ViewModel {
             .takeUntil(currentCall
                 .filter { call in
                     call.state == .over
-            })
+                })
             .map({ [weak self] (elapsed) -> String in
                 var time = elapsed
                 if let startTime = self?.call?.dateReceived {
@@ -388,10 +388,10 @@ class CallViewModel: Stateable, ViewModel {
         callsProvider.sharedResponseStream
             .filter({ [weak self] serviceEvent in
                 guard let callUUID: String = serviceEvent
-                    .getEventInput(ServiceEventInput.callUUID) else {return false}
+                    .getEventInput(ServiceEventInput.callUUID) else { return false }
                 return callUUID == self?.call?.callUUID.uuidString
             }).subscribe(onNext: { [weak self] serviceEvent in
-                guard let self = self else {return}
+                guard let self = self else { return }
                 if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
                     self.answerCall()
                         .subscribe()
@@ -405,7 +405,7 @@ class CallViewModel: Stateable, ViewModel {
             .filter({ serviceEvent in
                 serviceEvent.eventType == .audioActivated
             }).subscribe(onNext: { [weak self] _ in
-                guard let self = self else {return}
+                guard let self = self else { return }
                 self.audioService.startAudio()
                 //for outgoing calls ve create audio sesion with default parameters.
                 //for incoming call audio session is created, ve need to override it

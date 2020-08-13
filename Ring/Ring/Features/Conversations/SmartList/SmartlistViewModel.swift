@@ -60,7 +60,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                            self.searching.asObservable()
                             .startWith(false),
                            resultSelector: {(conversations, searching) -> Bool in
-                            if searching {return true}
+                            if searching { return true }
                             if let convf = conversations.first {
                                 return !convf.items.isEmpty
                             }
@@ -114,7 +114,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 guard let account = self.accountsService.currentAccount else {
                     return UIImage(asset: Asset.icContactPicture)!
                 }
-                guard let name = profile.alias else {return UIImage.defaultJamiAvatarFor(profileName: nil, account: account)}
+                guard let name = profile.alias else { return UIImage.defaultJamiAvatarFor(profileName: nil, account: account) }
                 let profileName = name.isEmpty ? nil : name
                 return UIImage.defaultJamiAvatarFor(profileName: profileName, account: account)
             })

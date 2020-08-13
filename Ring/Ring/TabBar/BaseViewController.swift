@@ -22,7 +22,7 @@ import Foundation
 import RxSwift
 
 protocol TabBarItemViewModel {
-    var itemBadgeValue: Observable<String?> {get set}
+    var itemBadgeValue: Observable<String?> { get set }
 }
 
 public enum TabBarItemType {

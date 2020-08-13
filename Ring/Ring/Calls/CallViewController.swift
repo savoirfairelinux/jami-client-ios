@@ -219,7 +219,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
         self.buttonsContainer.acceptCallButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                guard let self = self else {return}
+                guard let self = self else { return }
                 self.viewModel.answerCall()
                     .subscribe()
                     .disposed(by: self.disposeBag)
@@ -413,8 +413,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         .asObservable()
         .observeOn(MainScheduler.instance)
         .subscribe(onNext: { [weak self] enteredConference in
-            guard let call = self?.viewModel.call else {return}
-            if call.state != .current {return}
+            guard let call = self?.viewModel.call else { return }
+            if call.state != .current { return }
             self?.buttonsContainer.updateView()
             self?.infoContainer.isHidden = enteredConference ? true : false
             self?.resizeCapturedVideo(withInfoContainer: false)
@@ -428,7 +428,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                                                             width: inConfViewWidth,
                                                             height: inConfViewHeight))
                 guard let injectionBag = self?.viewModel.injectionBag
-                    else {return}
+                    else { return }
                 let pendingCallViewModel =
                     ConferenceParticipantViewModel(with: call,
                                                    injectionBag: injectionBag)
@@ -449,7 +449,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     ConferenceParticipantView(frame:
                         CGRect(x: 0, y: 0,
                                width: inConfViewWidth, height: inConfViewHeight))
-                guard let injectionBag = self?.viewModel.injectionBag else {return}
+                guard let injectionBag = self?.viewModel.injectionBag else { return }
                 let pendingCallViewModel =
                     ConferenceParticipantViewModel(with: call,
                                                    injectionBag: injectionBag)
@@ -596,7 +596,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             return
         }
         //Don't change anything if the orientation change to portraitUpsideDown, faceUp or faceDown
-        if  UIDevice.current.orientation.rawValue != 5  && UIDevice.current.orientation.rawValue != 6 && UIDevice.current.orientation.rawValue != 2 {
+        if  UIDevice.current.orientation.rawValue != 5 && UIDevice.current.orientation.rawValue != 6 && UIDevice.current.orientation.rawValue != 2 {
             self.orientation = UIDevice.current.orientation
         }
         let conference = self.viewModel.conferenceMode.value
@@ -618,7 +618,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 }
             } else {
                 //Keep the 4:3 format of the video
-                let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20)/3)*4
+                let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20) / 3) * 4
                 self.capturedVideoHeightConstraint.constant = conference ? -UIScreen.main.bounds.height : -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo
                 let leftPointInfoContainer = self.infoBlurEffect?
@@ -644,7 +644,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 }
             } else {
                 //Keep the 4:3 format of the video
-                let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20)/4)*3
+                let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20) / 4) * 3
                 self.capturedVideoHeightConstraint.constant = conference ? -UIScreen.main.bounds.height : -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo
                 let leftPointInfoContainer = self.infoBlurEffect?.convert((self.infoBlurEffect?
@@ -721,7 +721,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.view.addSubview(contactPickerVC.view)
         contactPickerVC.didMove(toParent: self)
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            guard let self = self else {return}
+            guard let self = self else { return }
             contactPickerVC.view.frame = newFrame
             self.mainView.removeGestureRecognizer(self.tapGestureRecognizer)
             self.view.layoutIfNeeded()

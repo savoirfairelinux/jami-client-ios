@@ -95,7 +95,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     func showIncomingCall(call: CallModel) {
         guard let account = self.accountService
             .getAccount(fromAccountId: call.accountId),
-            !call.callId.isEmpty else {return}
+            !call.callId.isEmpty else { return }
         if self.accountService.boothMode() {
             self.callService.refuse(callId: call.callId)
                 .subscribe().disposed(by: self.disposeBag)
@@ -127,20 +127,20 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
                 }
                 topController.dismiss(animated: false, completion: nil)
-                guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+                guard let parent = self.parentCoordinator as? AppCoordinator else { return }
                 parent.openConversation(participantID: call.participantUri)
                 self.present(viewController: callViewController,
                              withStyle: .appear,
                              withAnimation: false,
                              withStateable: callViewController.viewModel)
-        }
+            }
         callsProvider.sharedResponseStream
             .filter({ serviceEvent in
                 if serviceEvent.eventType != ServiceEventType.callProviderAnswerCall {
                     return false
                 }
                 guard let callUUID: String = serviceEvent
-                    .getEventInput(ServiceEventInput.callUUID) else {return false}
+                    .getEventInput(ServiceEventInput.callUUID) else { return false }
                 return callUUID == call.callUUID.uuidString
             }).subscribe(onNext: { _ in
                 self.navigationViewController.popToRootViewController(animated: false)
@@ -148,7 +148,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
                 }
                 topController.dismiss(animated: false, completion: nil)
-                guard let parent = self.parentCoordinator as? AppCoordinator else {return}
+                guard let parent = self.parentCoordinator as? AppCoordinator else { return }
                 parent.openConversation(participantID: call.participantUri)
                 self.present(viewController: callViewController,
                              withStyle: .appear,

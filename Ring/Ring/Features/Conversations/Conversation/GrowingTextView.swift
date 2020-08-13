@@ -47,7 +47,7 @@ open class GrowingTextView: UITextView {
         commonInit()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -63,7 +63,7 @@ open class GrowingTextView: UITextView {
         NotificationCenter.default.removeObserver(self)
     }
 
-    open override var intrinsicContentSize: CGSize {
+    override open var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: 30)
     }
 

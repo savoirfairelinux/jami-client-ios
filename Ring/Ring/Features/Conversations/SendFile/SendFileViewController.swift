@@ -77,7 +77,7 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
                 //filter out upside orientation
-                if  UIDevice.current.orientation.rawValue == 5 ||   UIDevice.current.orientation.rawValue == 6 {
+                if  UIDevice.current.orientation.rawValue == 5 || UIDevice.current.orientation.rawValue == 6 {
                     return
                 }
                 guard let self = self else {
@@ -129,11 +129,11 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .bind(to: self.placeholderButton.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.readyToSend
-            .map {!$0}
+            .map { !$0 }
             .drive(self.sendButton.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.recording
-            .map {!$0}
+            .map { !$0 }
             .bind(to: self.timerLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.readyToSend
@@ -174,7 +174,7 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
 
     func configurePlayerControls() {
         self.viewModel.showPlayerControls
-            .map {!$0}
+            .map { !$0 }
             .bind(to: self.playerControls.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.playerPosition

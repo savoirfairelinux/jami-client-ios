@@ -66,7 +66,7 @@ class ContactViewModel: ViewModel, Stateable {
                 self.displayName.value = alias
             }
             guard let account = self.accountService
-                .getAccount(fromAccountId: conversation.accountId) else {return}
+                .getAccount(fromAccountId: conversation.accountId) else { return }
             if let contact = self.contactService.contact(withUri: conversation.participantUri),
                 let name = contact.userName {
                 self.userName.value = name

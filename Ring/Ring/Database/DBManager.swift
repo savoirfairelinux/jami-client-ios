@@ -331,7 +331,7 @@ class DBManager {
                 observable.on(.error(DBBridgingError.getConversationFailed))
             }
             return Disposables.create { }
-            }
+        }
     }
 
     func updateMessageStatus(daemonID: String, withStatus status: MessageStatus, accountId: String) -> Completable {
@@ -563,7 +563,7 @@ class DBManager {
         if type == ProfileType.sip {
             self.dbConnections.createAccountfolder(for: accountId)
         }
-        guard let path = self.dbConnections.contactProfilePath(accountId: accountId, profileURI: profileUri, createifNotExists: true) else {return false}
+        guard let path = self.dbConnections.contactProfilePath(accountId: accountId, profileURI: profileUri, createifNotExists: true) else { return false }
 
         let profile = Profile(profileUri, alias, image, ProfileType.ring.rawValue)
 
@@ -602,7 +602,7 @@ class DBManager {
                 // if there is no conversation for account return empty list
                 return conversationsToReturn
         }
-        for conversationID in conversations.map({$0.id}) {
+        for conversationID in conversations.map({ $0.id }) {
             guard let participants = try self.getParticipantsForConversation(conversationID: conversationID,
                 dataBase: dataBase),
                 let partisipant = participants.first else {
@@ -653,7 +653,7 @@ class DBManager {
                                  dataBase: dataBase) else {
             return nil
         }
-        return conversations.map({$0.participant})
+        return conversations.map({ $0.participant })
     }
 
     private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
@@ -675,7 +675,7 @@ class DBManager {
                                    content: content,
                                    authorURI: author,
                                    incoming: interaction.incoming)
-        let isTransfer =    interaction.type == InteractionType.iTransfer.rawValue ||
+        let isTransfer = interaction.type == InteractionType.iTransfer.rawValue ||
                             interaction.type == InteractionType.oTransfer.rawValue
         if  interaction.type == InteractionType.contact.rawValue ||
             interaction.type == InteractionType.call.rawValue {
@@ -726,7 +726,7 @@ class DBManager {
         guard let profilePath = self.dbConnections
             .contactProfilePath(accountId: accountId,
                                 profileURI: profileUri,
-                                createifNotExists: createIfNotExists) else {return nil}
+                                createifNotExists: createIfNotExists) else { return nil }
         if self.dbConnections
             .isContactProfileExists(accountId: accountId,
                                   profileURI: profileUri) || !createIfNotExists {

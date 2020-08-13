@@ -226,7 +226,7 @@ class MessageViewModel {
     }
 
     func transferedFile(conversationID: String) -> URL? {
-        guard let account = self.accountService.currentAccount else {return nil}
+        guard let account = self.accountService.currentAccount else { return nil }
         if self.lastTransferStatus != .success &&
             self.message.transferStatus != .success {
             return nil
@@ -262,7 +262,7 @@ class MessageViewModel {
                             inFolder: folderName,
                             accountID: conversationViewModel.conversation.value.accountId,
                             conversationID: conversationViewModel.conversation.value.conversationId)
-            var pathString =  path?.path ?? ""
+            var pathString = path?.path ?? ""
             if pathString.isEmpty && self.message.incoming {
                 return nil
             } else if pathString.isEmpty {
@@ -272,7 +272,7 @@ class MessageViewModel {
                                 inFolder: Directories.downloads.rawValue,
                                 accountID: conversationViewModel.conversation.value.accountId,
                                 conversationID: conversationViewModel.conversation.value.conversationId)
-                pathString =  path?.path ?? ""
+                pathString = path?.path ?? ""
                 if pathString.isEmpty {
                     return nil
                 }
@@ -288,7 +288,7 @@ class MessageViewModel {
                             conversationID: String,
                             accountId: String) -> UIImage? {
         guard let account = self.accountService
-            .getAccount(fromAccountId: accountId) else {return nil}
+            .getAccount(fromAccountId: accountId) else { return nil }
         if self.message.incoming &&
             self.lastTransferStatus != .success &&
             self.message.transferStatus != .success {

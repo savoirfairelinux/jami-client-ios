@@ -120,7 +120,7 @@ class MigrateAccountViewModel: Stateable, ViewModel {
 
     func accountHasPassword() -> Bool {
         guard let account = self.accountService
-            .getAccount(fromAccountId: registeredNamesKey) else {return true}
+            .getAccount(fromAccountId: registeredNamesKey) else { return true }
         return AccountModelHelper(withAccount: account).hasPassword
     }
 

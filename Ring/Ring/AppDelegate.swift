@@ -201,13 +201,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         self.accountService.currentWillChange
             .subscribe(onNext: { account in
-                guard let currentAccount = account else {return}
+                guard let currentAccount = account else { return }
                 self.presenceService.subscribeBuddies(withAccount: currentAccount.id, withContacts: self.contactsService.contacts.value, subscribe: false)
             }).disposed(by: self.disposeBag)
 
         self.accountService.currentAccountChanged
             .subscribe(onNext: { account in
-                guard let currentAccount = account else {return}
+                guard let currentAccount = account else { return }
                 self.reloadDataFor(account: currentAccount)
             }).disposed(by: self.disposeBag)
     }
@@ -283,9 +283,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             case .denied:
                 if enabled { LocalNotificationsHelper.setNotification(enable: false) }
             case .authorized:
-                if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
+                if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
             case .provisional:
-                if !enabled { LocalNotificationsHelper.setNotification(enable: true)}
+                if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
             @unknown default:
                 break
             }
@@ -380,7 +380,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             .take(1)
             .subscribe(onNext: { usernameLookupStatus in
                 if usernameLookupStatus.state == .found {
-                    guard let address = usernameLookupStatus.address else {return}
+                    guard let address = usernameLookupStatus.address else { return }
                     let contactUri = JamiURI(schema: URIType.ring, infoHach: address)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
                 } else {
@@ -405,7 +405,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 hash = conatactUri.hash ?? ""
                 uriString = conatactUri.uriString ?? ""
             }
-            if hash.isEmpty || uriString.isEmpty {return}
+            if hash.isEmpty || uriString.isEmpty { return }
             self.contactsService
                 .getProfileForUri(uri: uriString,
                                   accountId: account.id)

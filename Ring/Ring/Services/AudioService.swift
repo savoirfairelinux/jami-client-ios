@@ -23,10 +23,10 @@ import SwiftyBeaver
 import RxSwift
 
 enum OutputPortType: Int {
-    case builtinspk     = 0
-    case bluetooth      = 1
-    case headphones     = 2
-    case receiver       = 3
+    case builtinspk = 0
+    case bluetooth = 1
+    case headphones = 2
+    case receiver = 3
 }
 
 class AudioService {

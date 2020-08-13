@@ -97,7 +97,7 @@ class EditProfileViewModel {
     }
 
     func saveProfile() {
-        guard let account = self.accountService.currentAccount else {return}
+        guard let account = self.accountService.currentAccount else { return }
         var photo: String?
         if let image = self.image, !image.isEqual(defaultImage),
             let imageData = image.pngData() {

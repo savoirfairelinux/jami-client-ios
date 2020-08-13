@@ -57,9 +57,9 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
         }
         blurEffect?.removeFromSuperview()
         if #available(iOS 13.0, *) {
-            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
         } else {
-            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
         }
         self.backgroundColor = UIColor.jamiBackgroundColor
         if blurEffect != nil {

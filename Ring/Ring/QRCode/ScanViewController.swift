@@ -115,7 +115,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
         .notification(UIDevice.orientationDidChangeNotification)
         .observeOn(MainScheduler.instance)
         .subscribe(onNext: {[weak self] (_) in
-            guard let self = self else {return}
+            guard let self = self else { return }
             self.videoPreviewLayer?.frame = self.view.bounds
             self.updateOrientation()
             self.view.layoutSubviews()
@@ -149,7 +149,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 print("no objects returned")
                 return
             }
-            guard let metaDataObject = metadataObjects[0] as? AVMetadataMachineReadableCodeObject else {return}
+            guard let metaDataObject = metadataObjects[0] as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringCodeValue = metaDataObject.stringValue else {
                 return
             }

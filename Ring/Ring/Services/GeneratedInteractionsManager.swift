@@ -58,7 +58,7 @@ class GeneratedInteractionsManager {
                 let type = AccountModelHelper.init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
                 guard let uriString = JamiURI.init(schema: type,
                                                    infoHach: contactUri,
-                                                   account: account).uriString else {return}
+                                                   account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
                     currentAccount.id == account.id {
@@ -100,7 +100,7 @@ class GeneratedInteractionsManager {
             return
         }
         // remove conversation if it contain only generated messages
-        let messagesNotGenerated = conversation.messages.filter({!$0.isGenerated})
+        let messagesNotGenerated = conversation.messages.filter({ !$0.isGenerated })
 
         if !messagesNotGenerated.isEmpty {
             return
@@ -138,7 +138,7 @@ class GeneratedInteractionsManager {
                     .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
                 guard let stringUri = JamiURI.init(schema: type,
                                                    infoHach: contactUri,
-                                                   account: account).uriString else {return}
+                                                   account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
                     currentAccount.id == account.id {

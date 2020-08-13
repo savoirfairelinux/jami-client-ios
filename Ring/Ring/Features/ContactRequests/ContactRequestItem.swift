@@ -37,7 +37,7 @@ class ContactRequestItem {
                                 return userName
                             }
                             return displayname
-        }
+            }
     }()
 
     let disposeBag = DisposeBag()
@@ -50,7 +50,7 @@ class ContactRequestItem {
         self.profileName.value = VCardUtils.getName(from: self.contactRequest.vCard)
         guard let uri = JamiURI(schema: URIType.ring,
                                 infoHach: contactRequest.ringId)
-            .uriString else {return}
+            .uriString else { return }
         profileService.getProfile(uri: uri,
                                   createIfNotexists: false,
                                   accountId: contactRequest.accountId)

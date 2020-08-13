@@ -2089,7 +2089,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \\\"${CONFIGURATION}\\\" != \\\"Release\\\" ]; then\n  if which swiftlint > /dev/null; then\n    swiftlint\n  else\n    echo \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\n  fi\nfi;\n";
+			shellScript = "if [ \\\"${CONFIGURATION}\\\" != \\\"Release\\\" ]; then\n  if which swiftlint > /dev/null; then\n    swiftlint autocorrect > /dev/null\n    swiftlint\n  else\n    echo \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\n  fi\nfi;\n";
 		};
 		1ABE07C41F0D779F00D36361 /* ⚙️ SwiftGen Code Generation */ = {
 			isa = PBXShellScriptBuildPhase;

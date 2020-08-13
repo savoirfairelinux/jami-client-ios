@@ -116,7 +116,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
     }
 
     @objc func keyboardWillShow(withNotification notification: Notification) {
-        guard let userInfo: Dictionary = notification.userInfo else {return}
+        guard let userInfo: Dictionary = notification.userInfo else { return }
         guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
@@ -142,7 +142,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
         searchBarShadow.superview?.bringSubviewToFront(searchBarShadow)
 
         if #available(iOS 13.0, *) {
-            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
             visualEffectView.frame = searchBarShadow.bounds
             visualEffectView.isUserInteractionEnabled = false
             searchBarShadow.insertSubview(visualEffectView, at: 0)
@@ -153,7 +153,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             visualEffectView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
             visualEffectView.bottomAnchor.constraint(equalTo: searchBarShadow.bottomAnchor, constant: 0).isActive = true
         } else {
-            let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
             visualEffectView.frame = searchBarShadow.bounds
             visualEffectView.isUserInteractionEnabled = false
             let background = UIView()

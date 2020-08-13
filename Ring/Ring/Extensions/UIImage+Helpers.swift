@@ -136,10 +136,10 @@ extension UIImage {
         }
 
         let newSize = CGSize(width: newWidth, height: newHeight)
-        guard let cgImage = self.cgImage else {return self.resizeImageWith(newSize: newSize)}
+        guard let cgImage = self.cgImage else { return self.resizeImageWith(newSize: newSize) }
         let bitsPerComponent = cgImage.bitsPerComponent
         let bytesPerRow = cgImage.bytesPerRow
-        guard let colorSpace = cgImage.colorSpace else {return self.resizeImageWith(newSize: newSize)}
+        guard let colorSpace = cgImage.colorSpace else { return self.resizeImageWith(newSize: newSize) }
         let bitmapInfo = cgImage.bitmapInfo
 
         guard let context = CGContext(data: nil,
@@ -148,7 +148,7 @@ extension UIImage {
                                       bitsPerComponent: bitsPerComponent,
                                       bytesPerRow: bytesPerRow,
                                       space: colorSpace,
-                                      bitmapInfo: bitmapInfo.rawValue) else {return self.resizeImageWith(newSize: newSize)}
+                                      bitmapInfo: bitmapInfo.rawValue) else { return self.resizeImageWith(newSize: newSize) }
 
         context.interpolationQuality = .high
         context.draw(cgImage, in: CGRect(origin: .zero, size: CGSize(width: newWidth, height: newHeight)))
@@ -208,7 +208,7 @@ extension UIImage {
         self.draw(in: rect)
         // Our drawing bounds
         let textSize = text.size(withAttributes: [NSAttributedString.Key.font: textFont])
-        let textRect = CGRect(x: rect.size.width/2 - textSize.width/2, y: rect.size.height/2 - textSize.height/2,
+        let textRect = CGRect(x: rect.size.width / 2 - textSize.width / 2, y: rect.size.height / 2 - textSize.height / 2,
                               width: textSize.width, height: textSize.height)
         text.draw(in: textRect, withAttributes: textFontAttributes)
         let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
@@ -237,7 +237,7 @@ extension UIImage {
             !accountName.isEmpty {
             name = accountName
         }
-        guard let username = name else {return image}
+        guard let username = name else { return image }
         let scanner = Scanner(string: username.toMD5HexString().prefixString())
         var index: UInt64 = 0
         if scanner.scanHexInt64(&index) {

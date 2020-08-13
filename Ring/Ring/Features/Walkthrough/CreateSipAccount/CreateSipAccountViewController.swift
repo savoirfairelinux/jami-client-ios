@@ -105,7 +105,7 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
 
     func configurePasswordField() {
         let isSecureTextEntry = PublishSubject<Bool>()
-        let rightButton  = UIButton(type: .custom)
+        let rightButton = UIButton(type: .custom)
         rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         rightButton.setImage(UIImage(asset: Asset.icHideInput), for: .normal)
         passwordTextField.rx.text.orEmpty.distinctUntilChanged().bind { text in

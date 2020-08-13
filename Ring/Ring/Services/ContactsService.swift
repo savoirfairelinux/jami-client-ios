@@ -85,7 +85,7 @@ class ContactsService {
 
     func loadSipContacts(withAccount account: AccountModel) {
         guard let profiles = self.dbManager
-            .getProfilesForAccount(accountId: account.id) else {return}
+            .getProfilesForAccount(accountId: account.id) else { return }
         let contacts = profiles.map({ profile in
             return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHach: profile.uri))
         })
@@ -256,7 +256,7 @@ class ContactsService {
     }
 
     fileprivate func removeContactRequest(withRingId ringId: String) {
-        guard let contactRequestToRemove = self.contactRequests.value.filter({ $0.ringId == ringId}).first else {
+        guard let contactRequestToRemove = self.contactRequests.value.filter({ $0.ringId == ringId }).first else {
             return
         }
         guard let index = self.contactRequests.value.firstIndex(where: { $0 === contactRequestToRemove }) else {
@@ -347,7 +347,7 @@ extension ContactsService: ContactsAdapterDelegate {
     }
 
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool) {
-        guard let contactToRemove = self.contacts.value.filter({ $0.hash == uri}).first else {
+        guard let contactToRemove = self.contacts.value.filter({ $0.hash == uri }).first else {
             return
         }
         contactToRemove.banned = banned

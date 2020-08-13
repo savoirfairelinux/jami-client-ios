@@ -50,9 +50,9 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
     func setUPBlurBackground() {
         if #available(iOS 13.0, *) {
-            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
         } else {
-            blurEffect =  UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
         }
         if blurEffect != nil {
             blurEffect!.frame = self.view.bounds

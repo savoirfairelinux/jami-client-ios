@@ -151,7 +151,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         guard let pathUrl = getFilePath(fileName: fileName,
                                         inFolder: inFolder,
                                         accountID: accountID,
-                                        conversationID: conversationID) else {return nil}
+                                        conversationID: conversationID) else { return nil }
         let fileManager = FileManager.default
         var file: URL?
         if fileManager.fileExists(atPath: pathUrl.path) {
@@ -206,12 +206,12 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         guard let pathUrl = getFilePath(fileName: name,
                                         inFolder: Directories.downloads.rawValue,
                                         accountID: accountID,
-                                        conversationID: conversationID) else {return nil}
+                                        conversationID: conversationID) else { return nil }
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(
             kUTTagClassFilenameExtension,
             fileExtension,
-            nil) else {return nil}
+            nil) else { return nil }
         if UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage) {
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: pathUrl.path) {
@@ -238,7 +238,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
                                                               fileExtension,
-                                                              nil) else {return nil}
+                                                              nil) else { return nil }
         return UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage)
     }
 
@@ -279,7 +279,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                          conversationId: String) {
         guard let imagePath = self.getFilePathForTransfer(forFile: displayName,
                                                           accountID: accountId,
-                                                          conversationID: conversationId) else {return}
+                                                          conversationID: conversationId) else { return }
         do {
             try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
         } catch {
