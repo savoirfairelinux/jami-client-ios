@@ -23,8 +23,10 @@ import Reusable
 
 class MessageCellLocationSharingReceived: MessageCellLocationSharing {
 
-    private var myContactsLocationMarker = MaplyScreenMarker()
-    private var markerComponentObject: MaplyComponentObject?
+    /// Primary location
+    private var myContactsLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
+    /// Secondary location
+    private var myLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
 
     @IBOutlet weak var receivedBubbleLeading: NSLayoutConstraint!
     @IBOutlet weak var receivedBubbleTrailling: NSLayoutConstraint!
@@ -32,15 +34,34 @@ class MessageCellLocationSharingReceived: MessageCellLocationSharing {
     override func configureFromItem(_ conversationViewModel: ConversationViewModel, _ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
         super.configureFromItem(conversationViewModel, items, cellForRowAt: indexPath)
 
+        // Primary location
         conversationViewModel.myContactsLocation
             .subscribe(onNext: { [weak self, weak conversationViewModel] location in
                 guard let self = self, let location = location else { return }
 
-                self.markerComponentObject = self.updateLocationAndMarker(location: location,
-                                                                                    imageData: conversationViewModel?.profileImageData.value,
-                                                                                    username: conversationViewModel?.userName.value,
-                                                                                    marker: self.myContactsLocationMarker,
-                                                                                    markerDump: self.markerComponentObject)
+                self.myContactsLocation.componentObject = self.updateLocationAndMarker(location: location,
+                                                                                       imageData: conversationViewModel?.profileImageData.value,
+                                                                                       username: conversationViewModel?.userName.value,
+                                                                                       marker: self.myContactsLocation.marker,
+                                                                                       markerDump: self.myContactsLocation.componentObject)
+            })
+            .disposed(by: self.disposeBag)
+
+        // Secondary location
+        conversationViewModel.myLocation
+            .subscribe(onNext: { [weak self, weak conversationViewModel] location in
+                guard let self = self else { return }
+
+                if let location = location?.coordinate {
+                    self.myLocation.componentObject = self.updateLocationAndMarker(location: location,
+                                                                                   imageData: conversationViewModel?.myOwnProfileImageData,
+                                                                                   username: conversationViewModel?.userName.value,
+                                                                                   marker: self.myLocation.marker,
+                                                                                   markerDump: self.myLocation.componentObject)
+                } else if self.myLocation.componentObject != nil {
+                    self.maplyViewController!.remove(self.myLocation.componentObject!)
+                    self.myLocation.componentObject = nil
+                }
             })
             .disposed(by: self.disposeBag)
     }

@@ -250,6 +250,7 @@ extension LocationSharingService {
 
         if self.outgoingInstances.isEmpty {
             self.locationManager.stopUpdatingLocation()
+            self.currentLocation.accept(nil)
         }
 
         self.triggerDeleteLocation(accountId: accountId, peerUri: contactUri, incoming: false, shouldRefreshConversations: true)
@@ -304,6 +305,8 @@ extension LocationSharingService {
     }
 
     func stopReceivingLocation(accountId: String, contactUri: String) {
+        self.peerUriAndLocationReceived.accept((contactUri, nil))
+
         self.triggerDeleteLocation(accountId: accountId, peerUri: contactUri, incoming: true, shouldRefreshConversations: true)
 
         _ = self.incomingInstances.remove(accountId, contactUri)
