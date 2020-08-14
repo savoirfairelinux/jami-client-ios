@@ -178,10 +178,10 @@ extension UIView {
 
     func blink() {
         UIView.animate(withDuration: 1,
-            delay: 0.0,
-            options: [.curveEaseInOut,
-                      .autoreverse,
-                      .repeat],
+                       delay: 0.0,
+                       options: [.curveEaseInOut,
+                                 .autoreverse,
+                                 .repeat],
             animations: { [weak self] in
                 self?.alpha = 0.4
             },

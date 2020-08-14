@@ -35,7 +35,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     // MARK: - members
     var viewModel: MeViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     private var stretchyHeader: AccountHeader!
 
     var sipCredentialsMargin: CGFloat = 0
@@ -374,8 +374,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .jamiUserName(let label):
                     if !label.isEmpty {
                         return self.configureCellWithEnableTextCopy(text: L10n.AccountPage.username,
-                        secondaryText: label,
-                        style: .callout)
+                                                                    secondaryText: label,
+                                                                    style: .callout)
                     }
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.registerNameTitle
@@ -703,8 +703,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         cell.detailTextLabel?.textColor = UIColor.clear
         var frame = CGRect(x: self.sipCredentialsMargin, y: 0,
-                                  width: self.view.frame.width - self.sipCredentialsMargin,
-                                  height: cell.frame.height)
+                           width: self.view.frame.width - self.sipCredentialsMargin,
+                           height: cell.frame.height)
         if self.view.frame.width - self.sipCredentialsMargin < text.frame.size.width {
             let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
             let size = text.frame.size

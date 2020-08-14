@@ -80,8 +80,8 @@ class ConversationViewController: UIViewController,
                 return
             }
             self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
-            displayName: self.viewModel.displayName.value,
-            username: self.viewModel.userName.value)
+                               displayName: self.viewModel.displayName.value,
+                               username: self.viewModel.userName.value)
             self.tableView.reloadData()
         }).disposed(by: self.disposeBag)
 
@@ -661,18 +661,18 @@ class ConversationViewController: UIViewController,
         }).disposed(by: disposeBag)
     }
 
-    fileprivate func updateBottomOffset() {
+    private func updateBottomOffset() {
         self.bottomOffset = self.tableView.contentSize.height
             - ( self.tableView.frame.size.height
                 - self.tableView.contentInset.top
                 - self.tableView.contentInset.bottom )
     }
 
-    fileprivate func messagesLoadingFinished() {
+    private func messagesLoadingFinished() {
         self.spinnerView.isHidden = true
     }
 
-    fileprivate func scrollToBottomIfNeed() {
+    private func scrollToBottomIfNeed() {
         if (self.isBottomContentOffset || !self.tableView.isScrollEnabled) && !self.isExecutingDeleteMessage {
             self.scrollToBottom(animated: false)
         }
@@ -681,7 +681,7 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    fileprivate func scrollToBottom(animated: Bool) {
+    private func scrollToBottom(animated: Bool) {
         let numberOfRows = self.tableView.numberOfRows(inSection: 0)
         if  numberOfRows > 0 {
             let last = IndexPath(row: numberOfRows - 1, section: 0)
@@ -690,7 +690,7 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    fileprivate var isBottomContentOffset: Bool {
+    private var isBottomContentOffset: Bool {
         self.updateBottomOffset()
         let offset = abs((self.tableView.contentOffset.y + self.tableView.contentInset.top) - bottomOffset)
         return offset <= scrollOffsetThreshold

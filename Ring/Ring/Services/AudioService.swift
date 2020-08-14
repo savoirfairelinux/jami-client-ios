@@ -30,10 +30,10 @@ enum OutputPortType: Int {
 }
 
 class AudioService {
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let log = SwiftyBeaver.self
+    private let disposeBag = DisposeBag()
+    private let log = SwiftyBeaver.self
 
-    fileprivate let audioAdapter: AudioAdapter
+    private let audioAdapter: AudioAdapter
 
     var isHeadsetConnected = Variable<Bool>(false)
     var isOutputToSpeaker = Variable<Bool>(true)

@@ -32,8 +32,8 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
     var password = Variable<String>("")
     var manager = Variable<String>("")
     let notificationSwitch = Variable<Bool>(true)
-    fileprivate let accountsService: AccountsService
-    fileprivate let disposeBag = DisposeBag()
+    private let accountsService: AccountsService
+    private let disposeBag = DisposeBag()
     private let accountCreationState = Variable<AccountCreationState>(.unknown)
     lazy var createState: Observable<AccountCreationState> = {
         return self.accountCreationState.asObservable()

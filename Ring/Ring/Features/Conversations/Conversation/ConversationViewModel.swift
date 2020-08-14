@@ -445,7 +445,7 @@ class ConversationViewModel: Stateable, ViewModel {
         self.messages.value.removeAll(where: { $0.messageId == messageId })
     }
 
-    fileprivate var unreadMessagesCount: Int {
+    private var unreadMessagesCount: Int {
         let unreadMessages = self.conversation.value.messages
             .filter({ message in
                 return message.status != .displayed &&

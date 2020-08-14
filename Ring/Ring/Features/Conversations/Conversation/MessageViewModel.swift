@@ -51,11 +51,11 @@ enum GeneratedMessageType: String {
 
 class MessageViewModel {
 
-    fileprivate let log = SwiftyBeaver.self
+    private let log = SwiftyBeaver.self
 
-    fileprivate let accountService: AccountsService
-    fileprivate let conversationsService: ConversationsService
-    fileprivate let dataTransferService: DataTransferService
+    private let accountService: AccountsService
+    private let conversationsService: ConversationsService
+    private let dataTransferService: DataTransferService
     var message: MessageModel
 
     var shouldShowTimeString: Bool = false

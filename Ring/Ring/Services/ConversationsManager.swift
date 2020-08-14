@@ -36,9 +36,9 @@ class ConversationsManager: MessagesAdapterDelegate {
     private let locationSharingService: LocationSharingService
 
     private let disposeBag = DisposeBag()
-    fileprivate let textPlainMIMEType = "text/plain"
+    private let textPlainMIMEType = "text/plain"
     private let geoLocationMIMEType = "application/geo"
-    fileprivate let maxSizeForAutoaccept = 20 * 1024 * 1024
+    private let maxSizeForAutoaccept = 20 * 1024 * 1024
     private let notificationHandler = LocalNotificationsHelper()
 
     // swiftlint:disable cyclomatic_complexity

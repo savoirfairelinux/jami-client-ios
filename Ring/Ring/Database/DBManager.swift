@@ -275,8 +275,8 @@ class DBManager {
         }
         do {
             try _ = self.getConversationsFor(contactUri: contactUri,
-                                         createIfNotExists: true,
-                                         dataBase: dataBase, accountId: accountId)
+                                             createIfNotExists: true,
+                                             dataBase: dataBase, accountId: accountId)
         } catch {}
     }
 
@@ -414,8 +414,8 @@ class DBManager {
                 for messageId in messagesIDs {
                     if !self.interactionHepler
                         .updateInteractionStatusWithID(interactionID: messageId,
-                                                 interactionStatus: InteractionStatus(status: status).rawValue,
-                                                 dataBase: dataBase) {
+                                                       interactionStatus: InteractionStatus(status: status).rawValue,
+                                                       dataBase: dataBase) {
                         success = false
                     }
                 }
@@ -604,7 +604,7 @@ class DBManager {
         }
         for conversationID in conversations.map({ $0.id }) {
             guard let participants = try self.getParticipantsForConversation(conversationID: conversationID,
-                dataBase: dataBase),
+                                                                             dataBase: dataBase),
                 let partisipant = participants.first else {
                     continue
             }
@@ -729,7 +729,7 @@ class DBManager {
                                 createifNotExists: createIfNotExists) else { return nil }
         if self.dbConnections
             .isContactProfileExists(accountId: accountId,
-                                  profileURI: profileUri) || !createIfNotExists {
+                                    profileURI: profileUri) || !createIfNotExists {
             return getProfileFromPath(path: profilePath)
         }
         let profile = Profile(profileUri, nil, nil, type.rawValue)
@@ -761,7 +761,7 @@ class DBManager {
         contactCard.phoneNumbers = [CNLabeledValue(label: CNLabelPhoneNumberiPhone, value: CNPhoneNumber(stringValue: profile.uri))]
         if let photo = profile.photo {
             contactCard.imageData = NSData(base64Encoded: photo,
-            options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+                                           options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
         }
         let data = try CNContactVCardSerialization.dataWithImageAndUUID(from: contactCard, andImageCompression: 40000)
         try data.write(to: url)

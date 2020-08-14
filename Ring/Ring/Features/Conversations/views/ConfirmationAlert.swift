@@ -35,8 +35,8 @@ class ConfirmationAlert {
                    presenter: BoothModeConfirmationPresenter,
                    disposeBag: DisposeBag) {
         alert = UIAlertController(title: title,
-                                      message: msg,
-                                      preferredStyle: .alert)
+                                  message: msg,
+                                  preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
                                          style: .cancel) { [weak presenter] _ in
                                             presenter?.switchBoothModeState(state: !enable)

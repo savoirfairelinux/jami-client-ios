@@ -31,11 +31,11 @@ protocol FilterConversationDataSource {
 class JamiSearchViewModel {
 
     //Services
-    fileprivate let nameService: NameService
-    fileprivate let accountsService: AccountsService
-    fileprivate let injectionBag: InjectionBag
+    private let nameService: NameService
+    private let accountsService: AccountsService
+    private let injectionBag: InjectionBag
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     lazy var searchResults: Observable<[ConversationSection]> = {
         return Observable<[ConversationSection]>
@@ -53,8 +53,8 @@ class JamiSearchViewModel {
             }).observeOn(MainScheduler.instance)
     }()
 
-    fileprivate var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
-    fileprivate var filteredResults = Variable([ConversationViewModel]())
+    private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
+    private var filteredResults = Variable([ConversationViewModel]())
 
     let searchBarText = Variable<String>("")
     var isSearching: Observable<Bool>!
@@ -120,7 +120,7 @@ class JamiSearchViewModel {
             }).disposed(by: disposeBag)
     }
 
-    fileprivate func search(withText text: String) {
+    private func search(withText text: String) {
         guard let currentAccount = self.accountsService.currentAccount else { return }
 
         self.contactFoundConversation.accept(nil)

@@ -26,7 +26,7 @@ import SwiftyBeaver
 class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     var viewModel: SendFileViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     private let log = SwiftyBeaver.self
 
     @IBOutlet weak var preview: UIImageView!

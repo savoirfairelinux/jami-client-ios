@@ -34,17 +34,17 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         return self.stateSubject.asObservable()
     }()
 
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate var tempBag = DisposeBag()
+    private let disposeBag = DisposeBag()
+    private var tempBag = DisposeBag()
 
     //Services
-    fileprivate let conversationsService: ConversationsService
-    fileprivate let nameService: NameService
-    fileprivate let accountsService: AccountsService
-    fileprivate let contactsService: ContactsService
-    fileprivate let networkService: NetworkService
-    fileprivate let profileService: ProfilesService
-    fileprivate let callService: CallsService
+    private let conversationsService: ConversationsService
+    private let nameService: NameService
+    private let accountsService: AccountsService
+    private let contactsService: ContactsService
+    private let networkService: NetworkService
+    private let profileService: ProfilesService
+    private let callService: CallsService
 
     lazy var currentAccount: AccountModel? = {
         return self.accountsService.currentAccount
@@ -52,7 +52,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     var searching = PublishSubject<Bool>()
 
-    fileprivate var contactFoundConversation = Variable<ConversationViewModel?>(nil)
+    private var contactFoundConversation = Variable<ConversationViewModel?>(nil)
 
     lazy var hideNoConversationsMessage: Observable<Bool> = {
         return Observable<Bool>
@@ -247,7 +247,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
             self.conversationsService
                 .clearHistory(conversation: conversationViewModel.conversation.value,
-                                    keepConversation: true)
+                              keepConversation: true)
             self.conversationViewModels.remove(at: index)
         }
     }
@@ -266,7 +266,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 .subscribe(onCompleted: { [weak self] in
                     self?.conversationsService
                         .clearHistory(conversation: conversationViewModel.conversation.value,
-                                            keepConversation: false)
+                                      keepConversation: false)
                     self?.conversationViewModels.remove(at: index)
                 }).disposed(by: self.disposeBag)
         }

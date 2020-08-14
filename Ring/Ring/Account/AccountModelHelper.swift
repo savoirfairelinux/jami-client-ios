@@ -26,10 +26,10 @@ import SwiftyBeaver
  */
 struct AccountModelHelper {
 
-    fileprivate static let ringIdPrefix = "ring:"
-    fileprivate static let sipIdPrefix = "sip:"
+    private static let ringIdPrefix = "ring:"
+    private static let sipIdPrefix = "sip:"
 
-    fileprivate var account: AccountModel
+    private var account: AccountModel
 
     /**
      logguer

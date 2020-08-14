@@ -71,17 +71,17 @@ class AccountsService: AccountAdapterDelegate {
     /**
      Used to register the service to daemon events, injected by constructor.
      */
-    fileprivate let accountAdapter: AccountAdapter
+    private let accountAdapter: AccountAdapter
 
     /**
-     Fileprivate Accounts list.
+     private Accounts list.
      Can be used for all the operations, but won't be accessed from outside this file.
 
      - SeeAlso: `accounts`
      */
-    fileprivate var accountList: [AccountModel]
+    private var accountList: [AccountModel]
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     /**
      PublishSubject forwarding AccountRxEvent events.
@@ -91,7 +91,7 @@ class AccountsService: AccountAdapterDelegate {
      - SeeAlso: `ServiceEvent`
      - SeeAlso: `sharedResponseStream`
      */
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    private let responseStream = PublishSubject<ServiceEvent>()
     let dbManager: DBManager
     let needMigrateCurrentAccount = PublishSubject<String>()
 
@@ -101,12 +101,12 @@ class AccountsService: AccountAdapterDelegate {
      Can be used to access by constant the list of accounts.
      */
     var accounts: [AccountModel] {
-        set {
-            accountList = newValue
-        }
         get {
             let lAccounts = accountList
             return lAccounts
+        }
+        set {
+            accountList = newValue
         }
     }
 
@@ -178,7 +178,7 @@ class AccountsService: AccountAdapterDelegate {
         AccountAdapter.delegate = self
     }
 
-    fileprivate func loadAccountsFromDaemon() {
+    private func loadAccountsFromDaemon() {
         let selectedAccount = self.currentAccount
         self.accountList.removeAll()
         for accountId in accountAdapter.getAccountList() {
@@ -200,7 +200,7 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    fileprivate func loadDatabases() -> Bool {
+    private func loadDatabases() -> Bool {
         for account in accountList {
             if dbManager.isMigrationToDBv2Needed(accountId: account.id) {
                 if let accountURI = AccountModelHelper
@@ -253,7 +253,7 @@ class AccountsService: AccountAdapterDelegate {
         return !accountList.isEmpty
     }
 
-    fileprivate func reloadAccounts() {
+    private func reloadAccounts() {
         for account in accountList {
             account.details = self.getAccountDetails(fromAccountId: account.id)
             account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: account.id)
@@ -673,7 +673,7 @@ class AccountsService: AccountAdapterDelegate {
 
      - Returns the details.
      */
-    fileprivate func getInitialAccountDetails(accountType: String) throws -> [String: String] {
+    private func getInitialAccountDetails(accountType: String) throws -> [String: String] {
         let details: NSMutableDictionary = accountAdapter.getAccountTemplate(accountType)
         var accountDetails = details as NSDictionary? as? [String: String] ?? nil
         if accountDetails == nil {
@@ -692,7 +692,7 @@ class AccountsService: AccountAdapterDelegate {
 
      - Returns the details.
      */
-    fileprivate func getRingInitialAccountDetails() throws -> [String: String] {
+    private func getRingInitialAccountDetails() throws -> [String: String] {
         do {
             let defaultDetails = try getInitialAccountDetails(accountType: AccountType.ring.rawValue)
             return defaultDetails
@@ -968,7 +968,7 @@ class AccountsService: AccountAdapterDelegate {
 // MARK: - Private daemon wrappers
 extension AccountsService {
 
-    fileprivate func buildAccountFromDaemon(accountId id: String) throws -> AccountModel {
+    private func buildAccountFromDaemon(accountId id: String) throws -> AccountModel {
         let accountModel = AccountModel(withAccountId: id)
         accountModel.details = self.getAccountDetails(fromAccountId: id)
         accountModel.volatileDetails = self.getVolatileAccountDetails(fromAccountId: id)

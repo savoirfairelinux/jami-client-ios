@@ -65,7 +65,7 @@ final class ConversationDataHelper {
 
     func insert(item: Conversation, dataBase: Connection) -> Bool {
         let query = table.insert(id <- item.id,
-                                  participant <- item.participant)
+                                 participant <- item.participant)
         do {
             let rowId = try dataBase.run(query)
             guard rowId > 0 else {

@@ -34,15 +34,15 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     let callService: CallsService
-    fileprivate let contactsService: ContactsService
-    fileprivate let accountService: AccountsService
-    fileprivate let videoService: VideoService
-    fileprivate let audioService: AudioService
-    fileprivate let profileService: ProfilesService
-    fileprivate let conversationService: ConversationsService
+    private let contactsService: ContactsService
+    private let accountService: AccountsService
+    private let videoService: VideoService
+    private let audioService: AudioService
+    private let profileService: ProfilesService
+    private let conversationService: ConversationsService
 
     private let disposeBag = DisposeBag()
-    fileprivate let log = SwiftyBeaver.self
+    private let log = SwiftyBeaver.self
 
     var isHeadsetConnected = false
     var isAudioOnly = false
@@ -120,8 +120,8 @@ class CallViewModel: Stateable, ViewModel {
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
-                  infoHach: call.participantUri,
-                  account: account).uriString else { return nil }
+                                           infoHach: call.participantUri,
+                                           account: account).uriString else { return nil }
         return self.profileService.getProfile(uri: uriString,
                                               createIfNotexists: true, accountId: account.id)
             .filter({ profile in

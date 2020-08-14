@@ -48,20 +48,20 @@ enum MediaType: String, CustomStringConvertible {
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class CallsService: CallsAdapterDelegate {
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let callsAdapter: CallsAdapter
-    fileprivate let log = SwiftyBeaver.self
+    private let disposeBag = DisposeBag()
+    private let callsAdapter: CallsAdapter
+    private let log = SwiftyBeaver.self
 
     var calls = Variable<[String: CallModel]>([String: CallModel]())
     var pendingConferences = [String: Set<String>]()
 
-    fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
+    private let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
 
     let currentCallsEvents = ReplaySubject<CallModel>.create(bufferSize: 1)
     let newCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
-    fileprivate let newMessagesStream = PublishSubject<ServiceEvent>()
+    private let newMessagesStream = PublishSubject<ServiceEvent>()
     var newMessage: Observable<ServiceEvent>
     let dbManager: DBManager
     typealias ConferenceUpdates = (conferenceID: String, state: String, calls: Set<String>)
