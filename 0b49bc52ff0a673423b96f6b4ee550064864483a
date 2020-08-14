@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c56b362a_8ba64a33",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharingReceived.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-14T14:27:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60515a51_af8bc535",
+      "revId": "0b49bc52ff0a673423b96f6b4ee550064864483a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91b61fdb_286f569c",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharingReceived.swift",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "0b49bc52ff0a673423b96f6b4ee550064864483a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50068091_1ed17714",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharingReceived.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-14T14:27:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91b61fdb_286f569c",
+      "revId": "0b49bc52ff0a673423b96f6b4ee550064864483a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
