@@ -33,9 +33,9 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     @IBOutlet weak var noInvitationsPlaceholder: UIView!
     @IBOutlet weak var noRequestsLabel: UILabel!
 
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let cellIdentifier = "ContactRequestCell"
-    fileprivate let log = SwiftyBeaver.self
+    private let disposeBag = DisposeBag()
+    private let cellIdentifier = "ContactRequestCell"
+    private let log = SwiftyBeaver.self
 
     override func viewDidLoad() {
         super.viewDidLoad()

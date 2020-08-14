@@ -71,7 +71,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     // MARK: members
     var viewModel: SmartlistViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     private let contactPicker = CNContactPickerViewController()
 

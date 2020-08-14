@@ -37,10 +37,10 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     let presenceService: PresenceService
     let profileService: ProfilesService
 
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let log = SwiftyBeaver.self
+    private let disposeBag = DisposeBag()
+    private let log = SwiftyBeaver.self
 
-    fileprivate let injectionBag: InjectionBag
+    private let injectionBag: InjectionBag
 
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService
@@ -112,7 +112,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         }
     }
 
-    fileprivate func lookupUserName(withItem item: ContactRequestItem) {
+    private func lookupUserName(withItem item: ContactRequestItem) {
 
         self.nameService.usernameLookupStatus.asObservable()
             .filter({ lookupNameResponse in
@@ -129,8 +129,8 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         guard let currentAccount = accountsService.currentAccount else { return }
 
         self.nameService.lookupAddress(withAccount: currentAccount.id,
-                                              nameserver: "",
-                                              address: item.contactRequest.ringId)
+                                       nameserver: "",
+                                       address: item.contactRequest.ringId)
     }
 
     func showConversation (forRingId ringId: String) {

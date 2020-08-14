@@ -31,7 +31,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
 
     // MARK: - members
     var model: EditProfileViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     // MARK: - functions
 

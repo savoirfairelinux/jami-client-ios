@@ -29,14 +29,15 @@ protocol BoothModeConfirmationPresenter: UIViewController {
 
 class ConfirmationAlert {
     var alert = UIAlertController()
+
     func configure(title: String,
                    msg: String,
                    enable: Bool,
                    presenter: BoothModeConfirmationPresenter,
                    disposeBag: DisposeBag) {
         alert = UIAlertController(title: title,
-                                      message: msg,
-                                      preferredStyle: .alert)
+                                  message: msg,
+                                  preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
                                          style: .cancel) { [weak presenter] _ in
                                             presenter?.switchBoothModeState(state: !enable)

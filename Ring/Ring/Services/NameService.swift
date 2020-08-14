@@ -43,17 +43,17 @@ class NameService: NameRegistrationAdapterDelegate {
     /**
      Used to make lookup name request to the daemon
     */
-    fileprivate let nameRegistrationAdapter: NameRegistrationAdapter
+    private let nameRegistrationAdapter: NameRegistrationAdapter
 
-    fileprivate var delayedLookupNameCall: DispatchWorkItem?
+    private var delayedLookupNameCall: DispatchWorkItem?
 
-    fileprivate let lookupNameCallDelay = 0.5
+    private let lookupNameCallDelay = 0.5
 
     /**
      Status of the current username validation request
      */
     var usernameValidationStatus = PublishSubject<UsernameValidationStatus>()
-    fileprivate let registrationStatus = PublishSubject<ServiceEvent>()
+    private let registrationStatus = PublishSubject<ServiceEvent>()
     var sharedRegistrationStatus: Observable<ServiceEvent>
 
     init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter) {

@@ -32,7 +32,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     @IBOutlet weak var tableView: UITableView!
 
     var viewModel: ContactPickerViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     var blurEffect: UIVisualEffectView?
 

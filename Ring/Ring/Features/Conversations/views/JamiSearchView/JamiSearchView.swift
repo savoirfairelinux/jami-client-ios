@@ -29,8 +29,8 @@ class JamiSearchView: NSObject, UITableViewDelegate {
     @IBOutlet weak var searchingLabel: UILabel!
     @IBOutlet weak var searchResultsTableView: UITableView!
 
-    fileprivate var viewModel: JamiSearchViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private var viewModel: JamiSearchViewModel!
+    private let disposeBag = DisposeBag()
     var editSearch = PublishSubject<Bool>()
     var isIncognito = false
 

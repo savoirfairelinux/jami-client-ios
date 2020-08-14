@@ -66,6 +66,7 @@ class ButtonsContainerView: UIView, NibLoadable {
                 }).disposed(by: self.disposeBag)
         }
     }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()

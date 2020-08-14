@@ -57,15 +57,15 @@ class ProgressView: UIView {
     var currentProgress: CGFloat = 0
 
     var progress: CGFloat {
+        get {
+            return innerProgress / toAngleScaler
+        }
         set (newProgress) {
             target = newProgress
             currentProgress += (target - currentProgress) * 0.1
             innerProgress = currentProgress * toAngleScaler
             self.progressVariable.value = newProgress
             setImage()
-        }
-        get {
-            return innerProgress / toAngleScaler
         }
     }
 

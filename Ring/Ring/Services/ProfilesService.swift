@@ -41,9 +41,9 @@ struct Base64VCard {
 
 class ProfilesService {
 
-    fileprivate let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
-    fileprivate var base64VCards = [Int: Base64VCard]()
-    fileprivate let log = SwiftyBeaver.self
+    private let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
+    private var base64VCards = [Int: Base64VCard]()
+    private let log = SwiftyBeaver.self
 
     var profiles = [String: ReplaySubject<Profile>]()
     var accountProfiles = [String: ReplaySubject<Profile>]()

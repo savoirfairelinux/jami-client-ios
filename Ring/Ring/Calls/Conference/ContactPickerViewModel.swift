@@ -93,10 +93,10 @@ class ContactPickerViewModel: Stateable, ViewModel {
                                 }
                                 let profile = self.contactsService.getProfile(uri: contactUri, accountId: currentAccount.id)
                                 var contactToAdd = Contact(contactUri: contactUri,
-                                                            accountId: currentAccount.id,
-                                                            registrName: contact.userName ?? "",
-                                                            presService: self.presenceService,
-                                                            contactProfile: profile)
+                                                           accountId: currentAccount.id,
+                                                           registrName: contact.userName ?? "",
+                                                           presService: self.presenceService,
+                                                           contactProfile: profile)
 
                                 contactToAdd.hash = contact.hash
                                 let contactItem = ConferencableItem(conferenceID: "", contacts: [contactToAdd])
@@ -147,14 +147,14 @@ class ContactPickerViewModel: Stateable, ViewModel {
     }()
 
     let search = PublishSubject<String>()
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
-    fileprivate let contactsService: ContactsService
-    fileprivate let callService: CallsService
-    fileprivate let profileService: ProfilesService
-    fileprivate let accountService: AccountsService
-    fileprivate let presenceService: PresenceService
-    fileprivate let videoService: VideoService
+    private let contactsService: ContactsService
+    private let callService: CallsService
+    private let profileService: ProfilesService
+    private let accountService: AccountsService
+    private let presenceService: PresenceService
+    private let videoService: VideoService
 
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService

@@ -35,7 +35,9 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
     // MARK: variables
     let systemSoundId: SystemSoundID = 1016
+
     typealias VMType = ScanViewModel
+
     var scannedQrCode: Bool = false
     //captureSession manages capture activity and coordinates between input device and captures outputs
     var captureSession: AVCaptureSession?

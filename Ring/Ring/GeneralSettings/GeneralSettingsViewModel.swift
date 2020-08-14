@@ -31,6 +31,7 @@ enum GeneralSettingsSection: SectionModelType {
         case hardwareAcceleration
         case sectionHeader(title: String)
     }
+
     var items: [SectionRow] {
         switch self {
         case .generalSettings(let items):
