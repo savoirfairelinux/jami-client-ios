@@ -16,6 +16,24 @@
       "revId": "5abc64cce32cfe4bec2e4ce62af985f2bfa6e54c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42efb95e_09de71b4",
+        "filename": "Ring/.swiftlint.yml",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-14T13:03:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92cfb7f6_a75811ad",
+      "revId": "5abc64cce32cfe4bec2e4ce62af985f2bfa6e54c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
