@@ -84,7 +84,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
     var orientation = UIDevice.current.orientation
     var conferenceParticipantMenu: UIView?
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     private let log = SwiftyBeaver.self
 

@@ -38,7 +38,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
     @IBOutlet weak var searchBarShadow: UIView!
 
     var viewModel: IncognitoSmartListViewModel!
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,9 +182,9 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
 
     func confirmBoothModeAlert() {
         boothConfirmation.configure(title: L10n.AccountPage.disableBoothMode,
-                                           msg: "",
-                                           enable: false, presenter: self,
-                                           disposeBag: self.disposeBag)
+                                    msg: "",
+                                    enable: false, presenter: self,
+                                    disposeBag: self.disposeBag)
     }
 }
 

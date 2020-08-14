@@ -52,7 +52,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
             }
             self.bottomAnchor
                 .constraint(lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor,
-                                                               multiplier: 1)
+                            multiplier: 1)
                 .isActive = true
         }
         blurEffect?.removeFromSuperview()

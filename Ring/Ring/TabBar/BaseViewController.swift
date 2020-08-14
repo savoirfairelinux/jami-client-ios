@@ -52,6 +52,7 @@ class BaseViewController: UINavigationController {
                 .disposed(by: self.disposeBag)
         }
     }
+
     convenience init(with type: TabBarItemType) {
         self.init()
         self.navigationBar.isTranslucent = true

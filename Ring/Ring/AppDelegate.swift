@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private let log = SwiftyBeaver.self
 
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -249,7 +249,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     // MARK: - Ring Daemon
-    fileprivate func startDaemon() {
+    private func startDaemon() {
         do {
             try self.daemonService.startDaemon()
         } catch StartDaemonError.initializationFailure {
@@ -263,7 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
-    fileprivate func stopDaemon() {
+    private func stopDaemon() {
         do {
             try self.daemonService.stopDaemon()
         } catch StopDaemonError.daemonNotRunning {

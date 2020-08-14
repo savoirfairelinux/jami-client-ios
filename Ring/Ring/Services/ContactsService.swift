@@ -33,16 +33,16 @@ enum ContactServiceError: Error {
 
 class ContactsService {
 
-    fileprivate let contactsAdapter: ContactsAdapter
-    fileprivate let log = SwiftyBeaver.self
-    fileprivate let disposeBag = DisposeBag()
+    private let contactsAdapter: ContactsAdapter
+    private let log = SwiftyBeaver.self
+    private let disposeBag = DisposeBag()
 
     let contactRequests = Variable([ContactRequestModel]())
     let contacts = Variable([ContactModel]())
 
     let contactStatus = PublishSubject<ContactModel>()
 
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
     let dbManager: DBManager
 
@@ -209,7 +209,7 @@ class ContactsService {
                     }
                     if let photo = accountProfile.photo {
                         vCard.imageData = NSData(base64Encoded: photo,
-                                                options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+                                                 options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
                         cardChanged = true
                     }
                     if cardChanged {
@@ -255,7 +255,7 @@ class ContactsService {
         }
     }
 
-    fileprivate func removeContactRequest(withRingId ringId: String) {
+    private func removeContactRequest(withRingId ringId: String) {
         guard let contactRequestToRemove = self.contactRequests.value.filter({ $0.ringId == ringId }).first else {
             return
         }

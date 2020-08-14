@@ -127,7 +127,7 @@ class MeViewModel: ViewModel, Stateable {
         return Observable
             .combineLatest(userName.startWith(""), ringId.startWith("")) { (name, ringID) in
                 var items: [SettingsSection.SectionRow] =  [.sectionHeader(title: L10n.AccountPage.credentialsHeader),
-                                                        .jamiID(label: ringID)]
+                                                            .jamiID(label: ringID)]
                 items.append(.jamiUserName(label: name))
                 items.append(.shareAccountDetails)
             return SettingsSection
@@ -243,9 +243,9 @@ class MeViewModel: ViewModel, Stateable {
     lazy var otherSipSettings: Observable<SettingsSection> = {
         return Observable
             .just(SettingsSection.accountSettings( items: [.sectionHeader(title: ""),
-                                            .accountState(state: self.accountStatus),
-                                            .enableAccount,
-                                            .removeAccount]))
+                                                           .accountState(state: self.accountStatus),
+                                                           .enableAccount,
+                                                           .removeAccount]))
     }()
 
     lazy var sipCredentials: Observable<SettingsSection> = {

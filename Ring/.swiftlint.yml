@@ -1,5 +1,6 @@
 disabled_rules: # rule identifiers to exclude from running
   - todo
+  - closure_parameter_position
 
 opt_in_rules: # some rules are only opt-in
   - closure_spacing # can be autocorrected
@@ -12,16 +13,16 @@ opt_in_rules: # some rules are only opt-in
   - toggle_bool
   - empty_count # can't be autocorrected
   #- multiline_function_chains
-  #- closing_brace_spacing
+  - closing_brace_spacing
   #- closure_body_length
-  #- unused_declaration
-  #- vertical_parameter_alignment_on_call
-  #- collection_alignment
-  #- identical_operands
-  #- let_var_whitespace
+  - unused_declaration
+  - vertical_parameter_alignment_on_call
+  - collection_alignment
+  - identical_operands
+  - let_var_whitespace
   #- attributes
   #- lower_acl_than_parent
-  #- strict_fileprivate
+  - strict_fileprivate
   #- overridden_super_call
   #- unowned_variable_capture
 

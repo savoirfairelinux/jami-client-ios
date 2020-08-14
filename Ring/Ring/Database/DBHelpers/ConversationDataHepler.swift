@@ -36,6 +36,7 @@ final class ConversationDataHelper {
 
     // to migrate from legacy db
     let participantId = Expression<Int64>("participant_id")
+
     func migrateToDBForAccount(from oldDB: Connection,
                                to newDB: Connection,
                                accountProfileId: Int64,
@@ -65,7 +66,7 @@ final class ConversationDataHelper {
 
     func insert(item: Conversation, dataBase: Connection) -> Bool {
         let query = table.insert(id <- item.id,
-                                  participant <- item.participant)
+                                 participant <- item.participant)
         do {
             let rowId = try dataBase.run(query)
             guard rowId > 0 else {

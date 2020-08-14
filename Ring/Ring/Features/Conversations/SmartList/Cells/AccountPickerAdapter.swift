@@ -29,6 +29,7 @@ struct AccountItem {
 
 final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerViewDelegate, RxPickerViewDataSourceType, SectionedViewDataSourceType {
     typealias Element = [AccountItem]
+
     private var items: [AccountItem] = []
 
     func model(at indexPath: IndexPath) throws -> Any {

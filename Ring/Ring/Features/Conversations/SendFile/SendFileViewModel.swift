@@ -110,9 +110,9 @@ class SendFileViewModel: Stateable, ViewModel {
     }()
 
     var audioOnly: Bool = false
-    fileprivate let videoService: VideoService
-    fileprivate let accountService: AccountsService
-    fileprivate let fileTransferService: DataTransferService
+    private let videoService: VideoService
+    private let accountService: AccountsService
+    private let fileTransferService: DataTransferService
     var fileName = ""
 
     var conversation: ConversationModel!

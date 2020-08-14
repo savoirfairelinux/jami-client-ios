@@ -41,6 +41,7 @@ enum ConversationState: State {
 protocol ConversationNavigation: class {
 
     var injectionBag: InjectionBag { get }
+
     func addLockFlags()
 }
 

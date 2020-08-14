@@ -86,6 +86,7 @@ open class GrowingTextView: UITextView {
     }
 
     private var shouldScrollAfterHeightChanged = false
+
     override open func layoutSubviews() {
         super.layoutSubviews()
 

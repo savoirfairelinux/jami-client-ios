@@ -27,7 +27,7 @@ class CallsProviderDelegate: NSObject {
     private lazy var callController = CXCallController()
     let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
-    fileprivate let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     override init() {
         self.sharedResponseStream = responseStream.share()

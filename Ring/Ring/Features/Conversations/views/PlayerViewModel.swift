@@ -39,13 +39,13 @@ class PlayerViewModel {
 
     var firstFrame: UIImage?
 
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate var playBackDisposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
+    private var playBackDisposeBag = DisposeBag()
 
-    fileprivate let videoService: VideoService
-    fileprivate let filePath: String
-    fileprivate var playerId = ""
-    fileprivate var progressTimer: Timer?
+    private let videoService: VideoService
+    private let filePath: String
+    private var playerId = ""
+    private var progressTimer: Timer?
 
     init(injectionBag: InjectionBag, path: String) {
         self.videoService = injectionBag.videoService

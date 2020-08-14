@@ -146,6 +146,7 @@ class ContactViewModel: ViewModel, Stateable {
         }
     }()
     var profileImageData = Variable<Data?>(nil)
+
     required init (with injectionBag: InjectionBag) {
         self.contactService = injectionBag.contactsService
         self.profileService = injectionBag.profileService

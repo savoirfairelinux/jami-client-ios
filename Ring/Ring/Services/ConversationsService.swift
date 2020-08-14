@@ -31,12 +31,12 @@ class ConversationsService {
      */
     private let log = SwiftyBeaver.self
 
-    fileprivate let messageAdapter: MessagesAdapter
-    fileprivate let disposeBag = DisposeBag()
-    fileprivate let textPlainMIMEType = "text/plain"
+    private let messageAdapter: MessagesAdapter
+    private let disposeBag = DisposeBag()
+    private let textPlainMIMEType = "text/plain"
     private let geoLocationMIMEType = "application/geo"
 
-    fileprivate let responseStream = PublishSubject<ServiceEvent>()
+    private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
 
     var conversations = Variable([ConversationModel]())

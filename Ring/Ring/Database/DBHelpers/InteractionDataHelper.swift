@@ -56,6 +56,7 @@ final class InteractionDataHelper {
     //migrations from legacy db
     let authorId = Expression<Int64>("author_id")
     let conversationId = Expression<Int64>("conversation_id")
+
     func migrateToDBForAccount (from oldDB: Connection,
                                 to newDB: Connection,
                                 accountProfileId: Int64,
@@ -133,14 +134,14 @@ final class InteractionDataHelper {
 
     func insert(item: Interaction, dataBase: Connection) -> Int64? {
         let query = table.insert(duration <- item.duration,
-                                  author <- item.author,
-                                  conversation <- item.conversation,
-                                  timestamp <- item.timestamp,
-                                  body <- item.body,
-                                  type <- item.type,
-                                  status <- item.status,
-                                  daemonId <- item.daemonID,
-                                  incoming <- item.incoming)
+                                 author <- item.author,
+                                 conversation <- item.conversation,
+                                 timestamp <- item.timestamp,
+                                 body <- item.body,
+                                 type <- item.type,
+                                 status <- item.status,
+                                 daemonId <- item.daemonID,
+                                 incoming <- item.incoming)
         do {
             let rowId = try dataBase.run(query)
             guard rowId > 0 else {
