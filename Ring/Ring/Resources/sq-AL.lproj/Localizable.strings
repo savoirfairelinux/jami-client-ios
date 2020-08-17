@@ -132,20 +132,20 @@
 "alerts.confirmClearConversationTitle" = "Spastroje Bisedën";
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
+"alerts.noLocationPermissionsTitle" = "S’u akordua hyrje te vendndodhje";
 "alerts.errorWrongCredentials" = "S’lidhet dot te përgjegjësi i dhënë i llogarive. Ju lutemi, kontrolloni kredencialet tuaja";
 "alerts.recordVideoMessage" = "Regjistroni një mesazh video";
 "alerts.recordAudioMessage" = "Incizoni një mesazh audio";
 "alerts.uploadFile" = "Ngarkoni kartelë";
 "alerts.uploadPhoto" = "Ngarkoni foto ose film";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationServiceIsDisabled" = "Për ta lejuar Jami-in të përcaktojë vendndodhjen tuaj, aktivizoni “Shërbime Vendndodhjesh”.";
+"alerts.locationSharing" = "Jepua vendndodhjen time";
+"alerts.alreadylocationSharing" = "Ia keni dhënë tashmë vendndodhjen këtij përdoruesi";
+"alerts.locationSharingDurationTitle" = "Për sa kohë duhet dhënë vendndodhja?";
 "alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.locationSharingDuration1hour" = "1 orë";
 "alerts.mapInformation" = "Të dhëna harte";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyright" = "© Kontribues te  OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Mësoni më tepër";
 
 //Actions
@@ -160,7 +160,7 @@
 "alerts.incomingCallButtonIgnore" = "Shpërfille";
 "actions.startAudioCall" = "Thirrje Audio";
 "actions.startVideoCall" = "Thirrje Video";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "Kalo te Rregullimet";
 "actions.stopLocationSharing" = "Resht së dhëni";
 
 //Calls
@@ -289,8 +289,8 @@
 "notifications.acceptCall" = "PRANOJE";
 "notifications.refuseCall" = "HIDHE POSHTË";
 "notifications.newFile" = "Kartelë e re";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.locationSharingStarted" = "Nisi dhënia e vendndodhjes për thirrje ardhëse";
+"notifications.locationSharingStopped" = "Reshti dhënia e vendndodhjes për thirrje ardhëse";
 "dataTransfer.readableStatusAwaiting" = "Pezull…";
 "dataTransfer.readableStatusRefuse" = "Hidhe tej";
 "dataTransfer.readableStatusOngoing" = "Po shpërngulet";
@@ -310,7 +310,7 @@
 "generatedMessage.incomingCall" = "Thirrje ardhëse";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "Dhënie “live” e vendndodhjes";
 
 //General Settings
 "generalSettings.title" = "Rregullime të përgjithshme";

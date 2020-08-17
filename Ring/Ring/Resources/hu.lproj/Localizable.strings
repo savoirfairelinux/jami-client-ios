@@ -132,20 +132,20 @@
 "alerts.confirmClearConversationTitle" = "Beszélgetés törlése";
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "A fotókönyvtárhoz való hozzáférést nem adták meg";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
+"alerts.noLocationPermissionsTitle" = "Hozzáférés a tartózkodási hely nincs engedélyezve";
 "alerts.errorWrongCredentials" = "Nem lehet csatlakozni a megadott fiókkezelőhöz. Kérjük, ellenőrizze hitelesítő adatait.";
 "alerts.recordVideoMessage" = "Videoüzenet felvétele";
 "alerts.recordAudioMessage" = "Hangüzenet felvétele";
 "alerts.uploadFile" = "Fájl feltöltése";
 "alerts.uploadPhoto" = "Fénykép vagy film feltöltése";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.locationServiceIsDisabled" = "Helymeghatározási szolgáltatások bekapcsolása, hogy a „Jami” meghatározhassa a tartózkodási helyét.";
+"alerts.locationSharing" = "Saját tartózkodási hely megosztása";
+"alerts.alreadylocationSharing" = "Tartózkodási hely már megosztva ezzel a felhasználóval.";
+"alerts.locationSharingDurationTitle" = "Mennyi ideig engedélyezi a tartózkodási hely megosztása?";
+"alerts.locationSharingDuration10min" = "10 perc";
+"alerts.locationSharingDuration1hour" = "1 óra";
 "alerts.mapInformation" = "Térkép adatai";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap közreműködők";
 "alerts.openStreetMapCopyrightMoreInfo" = "Tudjon meg többet";
 
 //Actions
@@ -160,7 +160,7 @@
 "alerts.incomingCallButtonIgnore" = "Figyelmen kívül hagy";
 "actions.startAudioCall" = "Hanghívás";
 "actions.startVideoCall" = "Videóhívás";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "Beállítások megnyitása";
 "actions.stopLocationSharing" = "Megosztás leállítása";
 
 //Calls
@@ -289,8 +289,8 @@
 "notifications.acceptCall" = "ELFOGADÁS";
 "notifications.refuseCall" = "ELUTASÍTÁS";
 "notifications.newFile" = "Új fájl";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.locationSharingStarted" = "Bejövő tartózkodási hely megosztása elindítva";
+"notifications.locationSharingStopped" = "Bejövő tartózkodási hely megosztása leállítva";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
 "dataTransfer.readableStatusOngoing" = "Hívásátirányítás";
@@ -310,7 +310,7 @@
 "generatedMessage.incomingCall" = "Bejövő hívás";
 "generatedMessage.missedOutgoingCall" = "Nem fogadott kimenő hívás";
 "generatedMessage.missedIncomingCall" = "Nem fogadott bejövő hívás";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "Valós idejű hely megosztása";
 
 //General Settings
 "generalSettings.title" = "Általános beállítások";

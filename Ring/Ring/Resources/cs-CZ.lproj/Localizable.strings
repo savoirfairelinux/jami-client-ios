@@ -57,7 +57,7 @@
 "welcome.text" = "Jami je svobodný software a všeobecný dorozumívací systém, který zachovává soukromí a svobody uživatelů.";
 "welcome.linkDevice" = "Připojit toto zařízení k účtu";
 "welcome.createAccount" = "Vytvořit účet Jami";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "Připojit se ke správci účtů.";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Přeskočit";
@@ -106,12 +106,12 @@
 "linkToAccountManager.passwordLabel" = "Zadejte heslo";
 "linkToAccountManager.usernamePlaceholder" = "Uživatelské jméno";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
+"linkToAccountManager.accountManagerPlaceholder" = "Správce účtů";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nelze nalézt účet";
-"alerts.accountCannotBeFoundMessage" = "Na síti Jami nebyl účet nalezen. Ujistěte se, že byl vyveden na Jami z existujícího zařízení a že jsou přihlašovací údaje správné.";
+"alerts.accountCannotBeFoundMessage" = "Na síti Jami nebyl účet nalezen. Ujistěte se, že byl exportován na Jami z existujícího zařízení a že jsou přihlašovací údaje správné.";
 "alerts.accountAddedTitle" = "Účet přidán";
 "alerts.accountNoNetworkTitle" = "Nelze se připojit k síti";
 "alerts.accountNoNetworkMessage" = "Nebylo možno přidat účet, protože se Jami nedokázal připojit k rozptýlené síti. Prověřte své síťové připojení.";
@@ -144,7 +144,7 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "Informace o mapě";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Naučit se více";
 
@@ -161,7 +161,7 @@
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "Přestat sdílet";
 
 //Calls
 "calls.callItemTitle" = "Volat";
@@ -258,14 +258,14 @@
 //Link New Device
 "linkDevice.title" = "Připojit nové zařízení";
 "linkDevice.passwordError" = "Vámi zadané heslo neodemkne tento účet";
-"linkDevice.networkError" = "Při vyvádění došlo k chybě sítě";
-"linkDevice.defaultError" = "Při vyvádění došlo k chybě";
+"linkDevice.networkError" = "Při exportování došlo k chybě sítě";
+"linkDevice.defaultError" = "Při exportování došlo k chybě";
 "linkDevice.explanationMessage" = "Pro dokončení tohoto postupu otevřete Jami na novém zařízení a vyberte volbu „Připojit toto zařízení k účtu“. Váš PIN zůstává platný 10 po minut.";
 "linkDevice.hudMessage" = "Ověřuje se";
 
 //Contact Page
-"contactPage.startAudioCall" = "Začít zvukový hovor";
-"contactPage.startVideoCall" = "Začít obrazový hovor";
+"contactPage.startAudioCall" = "Začít hlasový hovor";
+"contactPage.startVideoCall" = "Začít video hovor";
 "contactPage.sendMessage" = "Poslat zprávu";
 "contactPage.clearConversation" = "Vyprázdnit zprávy";
 "contactPage.blockContact" = "Blokovat kontakt";
