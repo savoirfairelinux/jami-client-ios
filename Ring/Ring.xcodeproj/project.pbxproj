@@ -315,6 +315,7 @@
 		62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */; };
 		62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
 		62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
+		642AD48424EC64CE00521127 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AD48324EC64CE00521127 /* CopyableLabel.swift */; };
 		6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144324B4ACA7007203D5 /* CoreLocation.framework */; };
 		645BDD6224B5FEFE009129B1 /* WhirlyGlobeMaplyComponent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */; };
 		645BDD6324B5FEFF009129B1 /* WhirlyGlobeMaplyComponent.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -767,6 +768,7 @@
 		62DFAB2D1F9FF0D0002D6F9C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsColors.swift; sourceTree = "<group>"; };
+		642AD48324EC64CE00521127 /* CopyableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
 		6452143724B4AB43007203D5 /* WhirlyGlobeMaplyComponent.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WhirlyGlobeMaplyComponent.xcodeproj; path = "WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/WhirlyGlobeMaplyComponent.xcodeproj"; sourceTree = "<group>"; };
 		6452144124B4AC9F007203D5 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		6452144324B4ACA7007203D5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -1024,6 +1026,7 @@
 				0E438A99204F47E700402900 /* SettingsTableView.swift */,
 				0E5A668222F0B1F100AA6820 /* ProgressView.swift */,
 				0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */,
+				642AD48324EC64CE00521127 /* CopyableLabel.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2246,6 +2249,7 @@
 				62AA15C31FFC39C80064A063 /* VideoAdapterDelegate.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				56BBC9A31ED714DF00CDAF8B /* ConversationsService.swift in Sources */,
+				642AD48424EC64CE00521127 /* CopyableLabel.swift in Sources */,
 				2662FC7B246B216B00FA7782 /* JamiSearchViewModel.swift in Sources */,
 				2662FC7F246B790400FA7782 /* IncognitoSmartListViewModel.swift in Sources */,
 				446FAF1D2373427100519C4F /* SendFileViewModel.swift in Sources */,

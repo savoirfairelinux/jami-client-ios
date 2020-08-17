@@ -90,6 +90,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     AvatarView(profileImageData: profileData.element?.0,
                                username: data,
                                size: 36)
+
                 return
             })
             .disposed(by: self.disposeBag)
@@ -106,6 +107,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.titleView.text = name
             })
             .disposed(by: self.disposeBag)
+        self.stretchyHeader.jamiID.text = self.viewModel.conversation.hash
     }
 
     private func setUpTableView() {
