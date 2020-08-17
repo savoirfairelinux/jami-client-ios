@@ -22,6 +22,30 @@
       "revId": "c0a465df1abb5aee8ad5e3779e7b46d0944b8c0e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93619a45_d6000593",
+        "filename": "Ring/Ring/Database/DBManager.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-17T20:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae4d7e70_1b3ed4cb",
+      "range": {
+        "startLine": 610,
+        "startChar": 23,
+        "endLine": 610,
+        "endChar": 34
+      },
+      "revId": "c0a465df1abb5aee8ad5e3779e7b46d0944b8c0e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
