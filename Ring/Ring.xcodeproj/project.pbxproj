@@ -321,6 +321,7 @@
 		645BDD7724B7415A009129B1 /* MessageCellLocationSharingSent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 645BDD6C24B7415A009129B1 /* MessageCellLocationSharingSent.xib */; };
 		645BDD7B24B7415A009129B1 /* MessageCellLocationSharingSent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BDD7024B7415A009129B1 /* MessageCellLocationSharingSent.swift */; };
 		645BDD8124B74BCB009129B1 /* LocationSharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BDD8024B74BCB009129B1 /* LocationSharingService.swift */; };
+		648AF76D24ED7CA90004D727 /* UITextView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648AF76C24ED7CA90004D727 /* UITextView+Helpers.swift */; };
 		649AD3C324B4CFC700A0236D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144724B4ACDE007203D5 /* libsqlite3.tbd */; };
 		649AD3C624B4CFD500A0236D /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144524B4ACC8007203D5 /* libxml2.tbd */; };
 		649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144124B4AC9F007203D5 /* libc++.tbd */; };
@@ -775,6 +776,7 @@
 		645BDD6C24B7415A009129B1 /* MessageCellLocationSharingSent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellLocationSharingSent.xib; sourceTree = "<group>"; };
 		645BDD7024B7415A009129B1 /* MessageCellLocationSharingSent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellLocationSharingSent.swift; sourceTree = "<group>"; };
 		645BDD8024B74BCB009129B1 /* LocationSharingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingService.swift; sourceTree = "<group>"; };
+		648AF76C24ED7CA90004D727 /* UITextView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Helpers.swift"; sourceTree = "<group>"; };
 		64DBCD1E24DB3CA900CB5CA2 /* UserSearchResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSearchResponse.h; sourceTree = "<group>"; };
 		64DBCD2124DB3CF600CB5CA2 /* UserSearchResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserSearchResponse.m; sourceTree = "<group>"; };
 		64F8127324B8AA5200A7DE6A /* MessageCellLocationSharingReceived.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellLocationSharingReceived.swift; sourceTree = "<group>"; };
@@ -1048,6 +1050,7 @@
 				0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */,
 				62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */,
 				0E13A91B22B844B100A12A54 /* NSUserActivity+Call.swift */,
+				648AF76C24ED7CA90004D727 /* UITextView+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2134,6 +2137,7 @@
 				621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */,
 				1A2D18AC1F29149D00B2C785 /* MeCoordinator.swift in Sources */,
 				1A2D18C51F29180700B2C785 /* ContactModel.swift in Sources */,
+				648AF76D24ED7CA90004D727 /* UITextView+Helpers.swift in Sources */,
 				0E3697A8203243D3009A68CA /* BannedContactCell.swift in Sources */,
 				1A2D18F71F292D7200B2C785 /* MessageCellSent.swift in Sources */,
 				26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */,

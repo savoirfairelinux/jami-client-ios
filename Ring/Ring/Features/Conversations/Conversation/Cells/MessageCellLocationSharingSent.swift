@@ -76,6 +76,11 @@ class MessageCellLocationSharingSent: MessageCellLocationSharing {
         self.setupStopSharingButton()
     }
 
+    override func setUplocationSharingMessageTextView(username: String) {
+        super.setUplocationSharingMessageTextView(username: username)
+        self.locationSharingMessageTextView.text = L10n.Conversation.explanationSendingLocationTo + username
+    }
+
     private func setupStopSharingButton() {
         self.stopSharingButton.setTitle(L10n.Actions.stopLocationSharing, for: .normal)
         self.stopSharingButton.backgroundColor = UIColor.red
