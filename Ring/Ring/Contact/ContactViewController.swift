@@ -90,16 +90,31 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     AvatarView(profileImageData: profileData.element?.0,
                                username: data,
                                size: 36)
+
                 return
             })
             .disposed(by: self.disposeBag)
 
-        self.viewModel.userName.asDriver()
-            .drive(self.stretchyHeader.userName.rx.text)
-            .disposed(by: self.disposeBag)
+        let maxLabelWidth = UIScreen.main.bounds.size.width * 0.90
+        self.stretchyHeader.jamiID.preferredMaxLayoutWidth = maxLabelWidth
+        self.stretchyHeader.userName.preferredMaxLayoutWidth = maxLabelWidth
+        self.stretchyHeader.displayName.preferredMaxLayoutWidth = maxLabelWidth
+
         self.viewModel.displayName.asDriver()
             .drive(self.stretchyHeader.displayName.rx.text)
             .disposed(by: self.disposeBag)
+
+        self.viewModel.userName
+            .asObservable()
+            .subscribe(onNext: { username in
+                if username != self.viewModel.conversation.hash {
+                    self.stretchyHeader.userName.text = username
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.stretchyHeader.jamiID.text = self.viewModel.conversation.hash
+
         self.viewModel.titleName
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
