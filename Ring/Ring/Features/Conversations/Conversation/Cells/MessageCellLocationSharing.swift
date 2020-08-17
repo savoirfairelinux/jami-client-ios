@@ -29,6 +29,7 @@ class MessageCellLocationSharing: MessageCell {
     private static let osmCopyrightAndLicenseURL = "https://www.openstreetmap.org/copyright"
     private static let remoteTileSourceBaseUrl = MessageCellLocationSharing.getBaseURL()
 
+    @IBOutlet weak var locationSharingMessageTextView: UITextView!
     @IBOutlet weak var bubbleHeight: NSLayoutConstraint!
 
     var xButton: UIButton?
@@ -45,6 +46,11 @@ class MessageCellLocationSharing: MessageCell {
         self.preventUnnecessaryReuseCounter = 0
     }
 
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        NotificationCenter.default.addObserver(self, selector: #selector(shrink), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
     override func configureFromItem(_ conversationViewModel: ConversationViewModel, _ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
         super.configureFromItem(conversationViewModel, items, cellForRowAt: indexPath)
 
@@ -56,8 +62,18 @@ class MessageCellLocationSharing: MessageCell {
 
             self.configureTapGesture()
             self.setupOSMCopyrightButton()
+            let name = (conversationViewModel.displayName.value != nil && !conversationViewModel.displayName.value!.isEmpty) ?
+                conversationViewModel.displayName.value! : conversationViewModel.userName.value
+            self.setUplocationSharingMessageTextView(username: name)
             preventUnnecessaryReuseCounter += 1
         }
+    }
+
+    func setUplocationSharingMessageTextView(username: String) {
+        self.locationSharingMessageTextView.isEditable = false
+        self.locationSharingMessageTextView.textColor = UIColor.jamiTextBlue
+        self.locationSharingMessageTextView.backgroundColor = UIColor.jamiBackgroundColor.withAlphaComponent(0.75)
+        self.bubble.addSubview(self.locationSharingMessageTextView)
     }
 
     override func configureTapGesture() {
@@ -239,6 +255,7 @@ extension MessageCellLocationSharing {
 
 // For bigger map
 extension MessageCellLocationSharing {
+    @objc
     private func shrink() {
         if self.bubbleHeight.constant > 220 {
             self.expandOrShrink()
@@ -296,12 +313,13 @@ extension MessageCellLocationSharing {
 
 extension MessageCellLocationSharing {
     private func setupXButton() {
+        self.locationSharingMessageTextView.textContainerInset = UIEdgeInsets(top: 8, left: 52, bottom: 8, right: 8)
+        self.locationSharingMessageTextView.textAlignment = .left
+
         self.xButton = UIButton()
         let xButton = self.xButton!
-
         xButton.setBackgroundImage(UIImage(asset: Asset.closeIcon)!, for: UIControl.State.normal)
-        xButton.backgroundColor = UIColor.init(white: 0.25, alpha: 0.50)
-        xButton.cornerRadius = 5
+        xButton.tintColor = UIColor.jamiTextBlue
         self.bubble.addSubview(xButton)
 
         xButton.translatesAutoresizingMaskIntoConstraints = false
@@ -338,6 +356,9 @@ extension MessageCellLocationSharing {
     }
 
     private func removeXButton() {
+        self.locationSharingMessageTextView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        self.locationSharingMessageTextView.textAlignment = .center
+
         self.xButton?.removeFromSuperview()
         self.xButton = nil
     }
@@ -353,8 +374,9 @@ extension MessageCellLocationSharing {
             self.myPositionButton = UIButton()
             let myLocation = self.myPositionButton!
             myLocation.setImage(UIImage(asset: Asset.myLocation)!, for: .normal)
-            myLocation.backgroundColor = UIColor.init(white: 0.25, alpha: 0.50)
-            myLocation.cornerRadius = 5
+            myLocation.tintColor = UIColor.jamiTextBlue
+            myLocation.backgroundColor = UIColor.jamiBackgroundColor.withAlphaComponent(0.75)
+            myLocation.cornerRadius = 16
             self.bubble.addSubview(myLocation)
 
             myLocation.translatesAutoresizingMaskIntoConstraints = false
