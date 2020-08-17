@@ -68,6 +68,12 @@ class MessageCellLocationSharingReceived: MessageCellLocationSharing {
             .disposed(by: self.disposeBag)
     }
 
+    override func setUplocationSharingMessageTextView(username: String) {
+        super.setUplocationSharingMessageTextView(username: username)
+        self.locationSharingMessageTextView.text = L10n.Conversation.explanationReceivingLocationFrom + username
+        self.locationSharingMessageTextView.adjustHeightFromContentSize()
+    }
+
     override func updateWidth(_ shouldExpand: Bool) {
         let normalValue: CGFloat = 116
         let extendedValue: CGFloat = 16

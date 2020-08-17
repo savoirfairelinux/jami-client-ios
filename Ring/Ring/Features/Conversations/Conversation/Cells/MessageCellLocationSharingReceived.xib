@@ -18,6 +18,16 @@
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xVQ-Jk-Sxy" customClass="MessageBubble" customModule="Ring" customModuleProvider="target">
                         <rect key="frame" x="64" y="8" width="330" height="220"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBn-eM-Hsx">
+                                <rect key="frame" x="0.0" y="0.0" width="330" height="56"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="220" id="hS0-Te-OEU"/>
@@ -83,6 +93,7 @@
                 <outlet property="bubbleHeight" destination="hS0-Te-OEU" id="G9h-6Z-A7m"/>
                 <outlet property="bubbleTopConstraint" destination="R6Q-PY-A3m" id="IQA-QC-eV0"/>
                 <outlet property="leftDivider" destination="Wm5-ce-Sf6" id="EaQ-1G-8Db"/>
+                <outlet property="locationSharingMessageTextView" destination="bBn-eM-Hsx" id="LPV-Lc-9rj"/>
                 <outlet property="messageLabelMarginConstraint" destination="CbK-m1-TUR" id="8qD-tP-8QW"/>
                 <outlet property="receivedBubbleLeading" destination="qxE-d6-psE" id="aaK-f3-9Nx"/>
                 <outlet property="receivedBubbleTrailling" destination="uTe-7R-qUz" id="RXi-mN-T16"/>
