@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0e51cb3_58d4c760",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-17T19:10:02Z",
+      "side": 1,
+      "message": "is it used somewhere?",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4c2e337_2ad07f90",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-17T19:10:02Z",
+      "side": 1,
+      "message": "why it is changed to be not lazy?",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68fa65c1_0de80670",
+        "filename": "Ring/Ring/Features/Conversations/views/JamiSearchView/JamiSearchViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-17T19:10:02Z",
+      "side": 1,
+      "message": "check if values exists",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "554625ac_e8a7882a",
+        "filename": "Ring/Ring/Features/Conversations/views/JamiSearchView/JamiSearchViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-17T19:10:02Z",
+      "side": 1,
+      "message": "it is still jamiId for now",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46fc1dc5_27ef49fd",
+        "filename": "Ring/Ring/Features/Conversations/views/JamiSearchView/JamiSearchViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-17T19:10:02Z",
+      "side": 1,
+      "message": "commented",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
