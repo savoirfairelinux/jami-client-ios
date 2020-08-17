@@ -1042,7 +1042,7 @@ extension ConversationViewController: UITableViewDataSource {
                             cell.updateWidth(expanding)
                             cell.layoutIfNeeded()
                         }
-                    }, completion: nil)
+                    }, completion: { [weak cell] _ in cell?.onAnimationCompletion() })
 
                     if expanding {
                         self.tableView.scrollToRow(at: index, at: UITableView.ScrollPosition.top, animated: true)
