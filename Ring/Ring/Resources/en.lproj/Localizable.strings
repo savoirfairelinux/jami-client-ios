@@ -147,6 +147,8 @@
 "alerts.mapInformation" = "Map information";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
+"alerts.explanationSendingLocationTo" = "You are currently sharing your location with %s.";
+"alerts.explanationReceivintLocationFrom" = "You are currently receiving a live location from %s.";
 
 //Actions
 "actions.blockAction" = "Block";

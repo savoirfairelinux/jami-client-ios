@@ -227,6 +227,14 @@ internal enum L10n {
     internal static let dbFailedTitle = L10n.tr("Localizable", "alerts.dbFailedTitle")
     /// Cannot connect to provided account manager. Please check your credentials
     internal static let errorWrongCredentials = L10n.tr("Localizable", "alerts.errorWrongCredentials")
+    /// You are currently receiving a live location from %s.
+    internal static func explanationReceivintLocationFrom(_ p1: UnsafePointer<CChar>) -> String {
+      return L10n.tr("Localizable", "alerts.explanationReceivintLocationFrom", p1)
+    }
+    /// You are currently sharing your location with %s.
+    internal static func explanationSendingLocationTo(_ p1: UnsafePointer<CChar>) -> String {
+      return L10n.tr("Localizable", "alerts.explanationSendingLocationTo", p1)
+    }
     /// Incoming call from 
     internal static let incomingCallAllertTitle = L10n.tr("Localizable", "alerts.incomingCallAllertTitle")
     /// Accept
