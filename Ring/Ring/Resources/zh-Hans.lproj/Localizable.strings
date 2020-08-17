@@ -132,20 +132,20 @@
 "alerts.confirmClearConversationTitle" = "清除對話";
 "alerts.noMediaPermissionsTitle" = "未給予媒體權限";
 "alerts.noLibraryPermissionsTitle" = "無法存取相簿";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
+"alerts.noLocationPermissionsTitle" = "不允許存取位置";
 "alerts.errorWrongCredentials" = "無法連線至提供的帳號管理員。請檢查您的憑證";
 "alerts.recordVideoMessage" = "錄製影片訊息";
 "alerts.recordAudioMessage" = "錄製音訊訊息";
 "alerts.uploadFile" = "上傳檔案";
 "alerts.uploadPhoto" = "上傳照片或電影";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.locationServiceIsDisabled" = "開啟「位置服務」以讓「Jami」確定您的位置。";
+"alerts.locationSharing" = "分享我的位置";
+"alerts.alreadylocationSharing" = "已與此使用者分享位置";
+"alerts.locationSharingDurationTitle" = "位置分享應該持續多久？";
+"alerts.locationSharingDuration10min" = "10分鐘";
+"alerts.locationSharingDuration1hour" = "1小時";
 "alerts.mapInformation" = "地圖資訊";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap 貢獻者";
 "alerts.openStreetMapCopyrightMoreInfo" = "詳細資訊";
 
 //Actions
@@ -160,7 +160,7 @@
 "alerts.incomingCallButtonIgnore" = "忽略";
 "actions.startAudioCall" = "音訊通話";
 "actions.startVideoCall" = "視訊通話";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "前往設定";
 "actions.stopLocationSharing" = "停止分享";
 
 //Calls
@@ -289,8 +289,8 @@
 "notifications.acceptCall" = "接聽";
 "notifications.refuseCall" = "拒接";
 "notifications.newFile" = "新檔案";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.locationSharingStarted" = "傳來的位置分享已開始";
+"notifications.locationSharingStopped" = "傳來的位置分享已停止";
 "dataTransfer.readableStatusAwaiting" = "擱置中……";
 "dataTransfer.readableStatusRefuse" = "拒絕";
 "dataTransfer.readableStatusOngoing" = "正在傳輸";
@@ -310,7 +310,7 @@
 "generatedMessage.incomingCall" = "來電";
 "generatedMessage.missedOutgoingCall" = "未接去電";
 "generatedMessage.missedIncomingCall" = "未接來電";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "即時位置分享";
 
 //General Settings
 "generalSettings.title" = "一般設定";
