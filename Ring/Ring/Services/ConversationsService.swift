@@ -24,6 +24,7 @@ import RxSwift
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class ConversationsService {
 
     /**
@@ -180,10 +181,13 @@ class ConversationsService {
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [unowned self] _ in
                     // append new message so it can be found if a status update is received before the DB finishes reload
-                    self.conversations.value.filter({ conversation in
-                        return conversation.participantUri == recipientRingId &&
-                            conversation.accountId == toAccountId
-                    }).first?.messages.append(message)
+                    self.conversations.value
+                        .filter({ conversation in
+                            return conversation.participantUri == recipientRingId &&
+                                conversation.accountId == toAccountId
+                        })
+                        .first?.messages
+                        .append(message)
                     self.messagesSemaphore.signal()
                     if shouldRefreshConversations {
                         self.dbManager.getConversationsObservable(for: toAccountId)
@@ -197,7 +201,8 @@ class ConversationsService {
                     }, onError: { error in
                         self.messagesSemaphore.signal()
                         completable(.error(error))
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
 
             return Disposables.create { }
         })
@@ -249,7 +254,8 @@ class ConversationsService {
                         .disposed(by: (self.disposeBag))
                 }
                 }, onError: { _ in
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func generateDataTransferMessage(transferId: UInt64,
@@ -366,7 +372,8 @@ class ConversationsService {
                     completable(.completed)
                 }, onError: { error in
                     completable(.error(error))
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
             return Disposables.create { }
         })
     }
@@ -400,7 +407,8 @@ class ConversationsService {
                     .disposed(by: (self.disposeBag))
                 }, onError: { error in
                     self.log.error(error)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func removeSavedFiles(accountId: String, conversationId: String) {
@@ -409,11 +417,13 @@ class ConversationsService {
             return
         }
         let downloadsURL = documentsURL.appendingPathComponent(downloadsFolderName)
-            .appendingPathComponent(accountId).appendingPathComponent(conversationId)
+            .appendingPathComponent(accountId)
+            .appendingPathComponent(conversationId)
         try? FileManager.default.removeItem(atPath: downloadsURL.path)
         let recordedFolderName = Directories.recorded.rawValue
         let recordedURL = documentsURL.appendingPathComponent(recordedFolderName)
-            .appendingPathComponent(accountId).appendingPathComponent(conversationId)
+            .appendingPathComponent(accountId)
+            .appendingPathComponent(conversationId)
         try? FileManager.default.removeItem(atPath: recordedURL.path)
     }
 

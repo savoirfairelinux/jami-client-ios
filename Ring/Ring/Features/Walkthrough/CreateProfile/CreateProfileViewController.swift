@@ -92,9 +92,11 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         self.applyL10n()
 
         //bind view model to view
-        tapGesture.rx.event.bind(onNext: { [weak self] _ in
-            self?.dismissInfoView()
-        }).disposed(by: disposeBag)
+        tapGesture.rx.event
+            .bind(onNext: { [weak self] _ in
+                self?.dismissInfoView()
+            })
+            .disposed(by: disposeBag)
 
         // Bind ViewModel to View
         self.viewModel.skipButtonTitle.asObservable().bind(to: self.skipButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
@@ -109,12 +111,14 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         }
 
         // Bind View Actions to ViewModel
-        self.skipButton.rx.tap.subscribe(onNext: { [unowned self] in
-            if let name = self.profileName.text {
-                self.model.updateName(name)
-            }
-            self.viewModel.proceedWithAccountCreationOrDeviceLink()
-        }).disposed(by: self.disposeBag)
+        self.skipButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                if let name = self.profileName.text {
+                    self.model.updateName(name)
+                }
+                self.viewModel.proceedWithAccountCreationOrDeviceLink()
+            })
+            .disposed(by: self.disposeBag)
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         infoProfileImage.isUserInteractionEnabled = true
@@ -128,7 +132,8 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         .subscribe(onNext: { [weak self] (_) in
             self?.skipButton.updateGradientFrame()
             self?.self.configureWalkrhroughNavigationBar()
-        }).disposed(by: self.disposeBag)
+        })
+        .disposed(by: self.disposeBag)
     }
 
     func adaptToSystemColor() {

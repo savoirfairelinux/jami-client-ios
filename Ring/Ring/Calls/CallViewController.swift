@@ -136,7 +136,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 }
                 self.setAvatarView(!self.avatarView.isHidden)
                 self.callPulse.layer.cornerRadius = (self.profileImageViewWidthConstraint.constant - 20) * 0.5
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         sendMessageButton.isHidden = self.viewModel.isBoothMode()
         sendMessageButton.isEnabled = !self.viewModel.isBoothMode()
         buttonsStackView.isHidden = self.viewModel.isBoothMode()
@@ -210,12 +211,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.cancelCall(stopProvider: true)
                 self?.removeFromScreen()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.sendMessageButton.rx.tap
-        .subscribe(onNext: { [weak self] in
-            self?.viewModel.showConversations()
-            self?.dismiss(animated: false, completion: nil)
-        }).disposed(by: self.disposeBag)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.showConversations()
+                self?.dismiss(animated: false, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
 
         self.buttonsContainer.acceptCallButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -223,39 +226,46 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self.viewModel.answerCall()
                     .subscribe()
                     .disposed(by: self.disposeBag)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.buttonsContainer.dialpadButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showDialpad()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.buttonsContainer.muteAudioButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.toggleMuteAudio()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         if !(self.viewModel.call?.isAudioOnly ?? false) {
             self.buttonsContainer.muteVideoButton.rx.tap
                 .subscribe(onNext: { [weak self] in
                     self?.viewModel.toggleMuteVideo()
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
 
         self.buttonsContainer.pauseCallButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.togglePauseCall()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.buttonsContainer.switchCameraButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.switchCamera()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.buttonsContainer.switchSpeakerButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.switchSpeaker()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         //Data bindings
         self.viewModel.videoButtonState
@@ -293,7 +303,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                         self?.profileImageView.image = image
                     }
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.dismisVC
             .observeOn(MainScheduler.instance)
@@ -301,7 +312,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 if dismiss {
                     self?.removeFromScreen()
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.contactName.drive(self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
@@ -328,7 +340,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                         })
                     }
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.callDuration.drive(self.callInfoTimerLabel.rx.text)
             .disposed(by: self.disposeBag)
@@ -355,7 +368,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                         self?.incomingVideo.image = image
                     }
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.capturedFrame
             .observeOn(MainScheduler.instance)
@@ -365,7 +379,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                         self?.capturedVideo.image = image
                     }
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.showCallOptions
             .observeOn(MainScheduler.instance)
@@ -373,7 +388,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 if show {
                     self?.showContactInfo()
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.showCancelOption
             .observeOn(MainScheduler.instance)
@@ -381,7 +397,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 if show {
                     self?.showCancelButton()
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         if !self.viewModel.isAudioOnly {
             self.resizeCapturedFrame()
@@ -406,41 +423,43 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] show in
                     self?.setAvatarView(show)
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
 
         self.viewModel.conferenceMode
-        .asObservable()
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { [weak self] enteredConference in
-            guard let call = self?.viewModel.call else { return }
-            if call.state != .current { return }
-            self?.buttonsContainer.updateView()
-            self?.infoContainer.isHidden = enteredConference ? true : false
-            self?.resizeCapturedVideo(withInfoContainer: false)
-            self?.inConferenceAddContactButton.isHidden = !enteredConference
-            self?.conferenceCallsLeading.constant = enteredConference ? 0 : -80
-            // if entered conference add first participant to conference list
-            if enteredConference {
-                let callView =
-                    ConferenceParticipantView(frame: CGRect(x: 0,
-                                                            y: 0,
-                                                            width: inConfViewWidth,
-                                                            height: inConfViewHeight))
-                guard let injectionBag = self?.viewModel.injectionBag
-                    else { return }
-                let pendingCallViewModel =
-                    ConferenceParticipantViewModel(with: call,
-                                                   injectionBag: injectionBag)
-                callView.viewModel = pendingCallViewModel
-                callView.delegate = self
-                self?.conferenceCalls.insertArrangedSubview(callView, at: 0)
-            } else {
-                self?.conferenceCalls.arrangedSubviews.forEach({ (view) in
-                    view.removeFromSuperview()
-                })
-            }
-        }).disposed(by: self.disposeBag)
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] enteredConference in
+                guard let call = self?.viewModel.call else { return }
+                if call.state != .current { return }
+                self?.buttonsContainer.updateView()
+                self?.infoContainer.isHidden = enteredConference ? true : false
+                self?.resizeCapturedVideo(withInfoContainer: false)
+                self?.inConferenceAddContactButton.isHidden = !enteredConference
+                self?.conferenceCallsLeading.constant = enteredConference ? 0 : -80
+                // if entered conference add first participant to conference list
+                if enteredConference {
+                    let callView =
+                        ConferenceParticipantView(frame: CGRect(x: 0,
+                                                                y: 0,
+                                                                width: inConfViewWidth,
+                                                                height: inConfViewHeight))
+                    guard let injectionBag = self?.viewModel.injectionBag
+                        else { return }
+                    let pendingCallViewModel =
+                        ConferenceParticipantViewModel(with: call,
+                                                       injectionBag: injectionBag)
+                    callView.viewModel = pendingCallViewModel
+                    callView.delegate = self
+                    self?.conferenceCalls.insertArrangedSubview(callView, at: 0)
+                } else {
+                    self?.conferenceCalls.arrangedSubviews.forEach({ (view) in
+                        view.removeFromSuperview()
+                    })
+                }
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.callForConference
             .observeOn(MainScheduler.instance)
@@ -456,7 +475,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 callView.viewModel = pendingCallViewModel
                 callView.delegate = self
                 self?.conferenceCalls.addArrangedSubview(callView)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.callPaused
             .observeOn(MainScheduler.instance)
@@ -464,7 +484,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                 if show {
                     self?.showCallOptions()
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func setAvatarView(_ show: Bool) {
@@ -539,7 +560,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                     }, completion: nil)
                     self?.avatarViewBlurEffect.alpha = CGFloat(1)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func removeFromScreen() {

@@ -53,11 +53,13 @@ class BlockListViewModel: ViewModel {
     }()
 
     lazy var contactListNotEmpty: Observable<Bool> = {
-        return self.contacts.asObservable().map({ contacts in
-            return contacts.filter { contact in contact.banned }
-        }).map({ contacts in
-            return !contacts.isEmpty
-        })
+        return self.contacts.asObservable()
+            .map({ contacts in
+                return contacts.filter { contact in contact.banned }
+            })
+            .map({ contacts in
+                return !contacts.isEmpty
+            })
     }()
 
     // create list of banned items with photo and name
@@ -81,7 +83,8 @@ class BlockListViewModel: ViewModel {
                                                             return
                             }
                             item.image = data
-                        }).disposed(by: self.disposeBag)
+                        })
+                        .disposed(by: self.disposeBag)
                 }
                 if contact.userName == nil || contact.userName! == "" {
                     self.nameService.usernameLookupStatus.single()
@@ -93,7 +96,8 @@ class BlockListViewModel: ViewModel {
                             if let name = lookupNameResponse.name, !name.isEmpty {
                                 contact.userName = name
                             }
-                        }).disposed(by: self.disposeBag)
+                        })
+                        .disposed(by: self.disposeBag)
                     self.nameService.lookupAddress(withAccount: accountId, nameserver: "", address: contact.hash)
                 }
                 return item

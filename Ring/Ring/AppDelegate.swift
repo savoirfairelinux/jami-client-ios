@@ -169,7 +169,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 DispatchQueue.main.async {
                     self.appCoordinator.migrateAccount(accountId: account)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.accountService.initialAccountsLoading()
             .subscribe(onCompleted: {
                 //set selected account if exists
@@ -197,19 +198,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 DispatchQueue.main.asyncAfter(deadline: time) {
                     self.appCoordinator.showDatabaseError()
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.accountService.currentWillChange
             .subscribe(onNext: { account in
                 guard let currentAccount = account else { return }
                 self.presenceService.subscribeBuddies(withAccount: currentAccount.id, withContacts: self.contactsService.contacts.value, subscribe: false)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.accountService.currentAccountChanged
             .subscribe(onNext: { account in
                 guard let currentAccount = account else { return }
                 self.reloadDataFor(account: currentAccount)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func reloadDataFor(account: AccountModel) {
@@ -355,7 +359,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             self.callService.refuse(callId: callID)
                 .subscribe({_ in
                     print("Call ignored")
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         default:
             // automatically answer call when user tap the notifications
             NotificationCenter.default.post(name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue),
@@ -388,7 +393,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     let contactUri = JamiURI(schema: URIType.sip, infoHach: hash)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.sip)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.nameService.lookupName(withAccount: "", nameserver: "", name: hash)
     }
 
@@ -417,7 +423,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         .startCall(participant: hash,
                                    name: profile.alias ?? "",
                                    isVideo: isVideo)
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 

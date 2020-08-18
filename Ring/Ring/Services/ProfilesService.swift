@@ -181,7 +181,8 @@ class ProfilesService {
             .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
             .subscribe(onNext: {profile in
                 profileObservable.onNext(profile)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func getProfile(uri: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
@@ -221,7 +222,8 @@ extension ProfilesService {
             .accountProfileObservable(for: accountId)
             .subscribe(onNext: {profile in
                 profileObservable.onNext(profile)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func updateAccountProfile(accountId: String, alias: String?, photo: String?, accountURI: String) {

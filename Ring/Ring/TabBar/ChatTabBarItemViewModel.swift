@@ -29,22 +29,25 @@ class ChatTabBarItemViewModel: ViewModel, TabBarItemViewModel {
         let conversationService = injectionBag.conversationsService
         let contactsService = injectionBag.contactsService
         self.itemBadgeValue = {
-            return conversationService.conversationsForCurrentAccount.map({ conversations in
-                return conversations.map({ conversation in
-                    let unreadMsg = conversation.messages.filter({ message in
-                        //filtre out read messages, outgoing messages and messages that are displayed in contactrequest conversation
-                        return message.status != .displayed  && !message.isTransfer && message.incoming
-                            && (contactsService.contactRequest(withRingId: JamiURI.init(schema: URIType.ring, infoHach: message.authorURI).hash ?? "") == nil)
-                    })
-                    return unreadMsg.count
-                }).reduce(0, +)
-            })
+            return conversationService.conversationsForCurrentAccount
+                .map({ conversations in
+                    return conversations
+                        .map({ conversation in
+                            let unreadMsg = conversation.messages.filter({ message in
+                                //filtre out read messages, outgoing messages and messages that are displayed in contactrequest conversation
+                                return message.status != .displayed  && !message.isTransfer && message.incoming
+                                    && (contactsService.contactRequest(withRingId: JamiURI.init(schema: URIType.ring, infoHach: message.authorURI).hash ?? "") == nil)
+                            })
+                            return unreadMsg.count
+                        })
+                        .reduce(0, +)
+                })
             }()
-            .map { number in
-                     if number == 0 {
-                         return nil
-                     }
+            .map({ number in
+                if number == 0 {
+                    return nil
+                }
                 return "\(number)"
-            }
+            })
     }
 }

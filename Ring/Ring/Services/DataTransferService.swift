@@ -130,11 +130,13 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                 let name = pathUrl.lastPathComponent + "\n" + fileSizeWithUnit
                 fileName = name
                 //update db
-                self.dbManager.updateFileName(interactionID: interactionID, name: name, accountId: accountID).subscribe(onCompleted: { [weak self] in
-                      self?.log.debug("file name updated")
-                }, onError: { [weak self] _ in
-                     self?.log.error("update name failed")
-                }).disposed(by: self.disposeBag)
+                self.dbManager.updateFileName(interactionID: interactionID, name: name, accountId: accountID)
+                    .subscribe(onCompleted: { [weak self] in
+                        self?.log.debug("file name updated")
+                        }, onError: { [weak self] _ in
+                            self?.log.error("update name failed")
+                    })
+                    .disposed(by: self.disposeBag)
             }
             self.log.debug("DataTransferService: saving file to: \(pathUrl.path))")
             return acceptFileTransfer(withId: transferId, withPath: pathUrl.path)
@@ -307,7 +309,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(folderName)
-            .appendingPathComponent(accountID).appendingPathComponent(conversationID)
+            .appendingPathComponent(accountID)
+            .appendingPathComponent(conversationID)
         return directoryURL.appendingPathComponent(fileName)
     }
 
@@ -320,7 +323,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(folderName)
-            .appendingPathComponent(accountID).appendingPathComponent(conversationID)
+            .appendingPathComponent(accountID)
+            .appendingPathComponent(conversationID)
         var isDirectory = ObjCBool(false)
         let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
         if directoryExists && isDirectory.boolValue {

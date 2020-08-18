@@ -99,7 +99,8 @@ class ConversationsManager: MessagesAdapterDelegate {
                                   shouldTryToSave: shouldTryToSave)
                     .subscribe(onCompleted: { [weak self] in
                         self?.log.debug("[LocationSharingService] Location sent")
-                    }).disposed(by: self.disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
 
@@ -203,7 +204,8 @@ class ConversationsManager: MessagesAdapterDelegate {
                             guard let transferInfo = self.dataTransferService
                                 .getTransferInfo(withId: transferId) else { return }
                             self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: transferInfo.accountId)
-                        }).disposed(by: self.disposeBag)
+                        })
+                        .disposed(by: self.disposeBag)
                 case .dataTransferChanged:
                     self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: transferInfo.lastEvent))")
                     var status: DataTransferStatus = .unknown
@@ -412,7 +414,8 @@ class ConversationsManager: MessagesAdapterDelegate {
                     data [NotificationUserInfoKeys.name.rawValue] = address
                     self?.notificationHandler.presentMessageNotification(data: data)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.nameService.lookupAddress(withAccount: accountId, nameserver: "", address: hash)
     }
 

@@ -50,7 +50,8 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                 default:
                     break
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func showProgress() {

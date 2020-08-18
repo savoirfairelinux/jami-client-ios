@@ -108,38 +108,40 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
             self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
             return
         }
-        self.accountService.exportOnRing(withPassword: password).subscribe(onCompleted: {
-            if let account = self.accountService.currentAccount {
-                self.accountService.sharedResponseStream
-                    .filter({ exportComplitedEvent in
-                        return exportComplitedEvent.eventType == ServiceEventType.exportOnRingEnded
-                            && exportComplitedEvent.getEventInput(.id) == account.id
-                    })
-                    .subscribe(onNext: { [unowned self] exportComplitedEvent in
-                        if let state: Int = exportComplitedEvent.getEventInput(.state) {
-                            switch state {
-                            case ExportAccountResponse.success.rawValue:
-                                if let pin: String = exportComplitedEvent.getEventInput(.pin) {
-                                    self.generatingState.value = GeneratingPinState.success(pin: pin)
-                                } else {
+        self.accountService.exportOnRing(withPassword: password)
+            .subscribe(onCompleted: {
+                if let account = self.accountService.currentAccount {
+                    self.accountService.sharedResponseStream
+                        .filter({ exportComplitedEvent in
+                            return exportComplitedEvent.eventType == ServiceEventType.exportOnRingEnded
+                                && exportComplitedEvent.getEventInput(.id) == account.id
+                        })
+                        .subscribe(onNext: { [unowned self] exportComplitedEvent in
+                            if let state: Int = exportComplitedEvent.getEventInput(.state) {
+                                switch state {
+                                case ExportAccountResponse.success.rawValue:
+                                    if let pin: String = exportComplitedEvent.getEventInput(.pin) {
+                                        self.generatingState.value = GeneratingPinState.success(pin: pin)
+                                    } else {
+                                        self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
+                                    }
+                                case ExportAccountResponse.wrongPassword.rawValue:
+                                    self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
+                                case ExportAccountResponse.networkProblem.rawValue:
+                                    self.generatingState.value = GeneratingPinState.error(error: PinError.networkError)
+                                default:
                                     self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
                                 }
-                            case ExportAccountResponse.wrongPassword.rawValue:
-                                self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
-                            case ExportAccountResponse.networkProblem.rawValue:
-                                self.generatingState.value = GeneratingPinState.error(error: PinError.networkError)
-                            default:
-                                self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
                             }
-                        }
-                    })
-                    .disposed(by: self.disposeBag)
-            } else {
-                self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
-            }
-        }, onError: { error in
-            self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
-        }).disposed(by: self.disposeBag)
+                        })
+                        .disposed(by: self.disposeBag)
+                } else {
+                    self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
+                }
+            }, onError: { error in
+                self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func refresh() {

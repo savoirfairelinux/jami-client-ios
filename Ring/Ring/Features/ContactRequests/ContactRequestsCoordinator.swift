@@ -52,7 +52,8 @@ class ContactRequestsCoordinator: Coordinator, StateableResponsive, Conversation
             .subscribe(onNext: {[unowned self] _ in
                 self.navigationViewController.viewModel =
                     ContactRequestTabBarItem(with: self.injectionBag)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
     func addLockFlags() {
         presentingVC[VCType.contact.rawValue] = false

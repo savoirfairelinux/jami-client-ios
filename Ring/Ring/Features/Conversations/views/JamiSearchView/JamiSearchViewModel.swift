@@ -66,7 +66,8 @@ class JamiSearchViewModel {
                                 sections.append(ConversationSection(header: L10n.Smartlist.conversations, items: filteredResults))
                             }
                             return sections
-            }).observeOn(MainScheduler.instance)
+            })
+            .observeOn(MainScheduler.instance)
     }()
 
     private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
@@ -87,16 +88,18 @@ class JamiSearchViewModel {
         //Observes if the user is searching
         self.isSearching = searchBarText.asObservable()
             .map({ text in
-            return !text.isEmpty
-        }).observeOn(MainScheduler.instance)
+                return !text.isEmpty
+            })
+            .observeOn(MainScheduler.instance)
 
         //Observes search bar text
         searchBarText.asObservable()
             .observeOn(MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
-            self?.search(withText: text)
-        }).disposed(by: disposeBag)
+                self?.search(withText: text)
+            })
+            .disposed(by: disposeBag)
 
         //Observe username lookup
         self.nameService.usernameLookupStatus
@@ -130,7 +133,8 @@ class JamiSearchViewModel {
                         self.searchStatus.onNext("")
                     }
                 }
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         self.nameService
             .userSearchResponseShared
@@ -170,7 +174,8 @@ class JamiSearchViewModel {
                 } else {
                     self.searchStatus.onNext("")
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     static func removeFilteredConversations(from conversationViewModels: [ConversationViewModel],

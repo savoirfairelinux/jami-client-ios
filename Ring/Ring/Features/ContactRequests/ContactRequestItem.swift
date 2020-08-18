@@ -63,6 +63,7 @@ class ContactRequestItem {
                 if let name = profile.alias, !name.isEmpty {
                     self?.profileName.value = name
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

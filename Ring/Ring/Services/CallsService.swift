@@ -93,7 +93,8 @@ class CallsService: CallsAdapterDelegate {
             .share()
             .filter { (call) -> Bool in
                 call.callId == callId
-            }.asObservable()
+            }
+            .asObservable()
     }
 
     func currentConference(callId: String) -> Observable<ConferenceUpdates> {
@@ -103,7 +104,8 @@ class CallsService: CallsAdapterDelegate {
             .filter { (conference) -> Bool in
                 guard let conf = self.calls.value[conference.conferenceID] else { return false }
                 return conf.participantsCallId.contains(callId)
-            }.asObservable()
+            }
+            .asObservable()
     }
 
     @objc func refuseUnansweredCall(_ notification: NSNotification) {
@@ -115,9 +117,11 @@ class CallsService: CallsAdapterDelegate {
         }
 
         if call.state == .incoming {
-            self.refuse(callId: callid).subscribe({_ in
-                print("Call ignored")
-            }).disposed(by: self.disposeBag)
+            self.refuse(callId: callid)
+                .subscribe({_ in
+                    print("Call ignored")
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 
@@ -496,11 +500,13 @@ class CallsService: CallsAdapterDelegate {
                 guard let newCall = call else { return }
                 self.newCall.value = newCall
             } else {
-                self.refuse(callId: callId).subscribe(onCompleted: { [weak self] in
-                    self?.log.debug("call refused")
-                }, onError: { [weak self] _ in
-                    self?.log.debug("Could not to refuse a call")
-                }).disposed(by: self.disposeBag)
+                self.refuse(callId: callId)
+                    .subscribe(onCompleted: { [weak self] in
+                        self?.log.debug("call refused")
+                        }, onError: { [weak self] _ in
+                            self?.log.debug("Could not to refuse a call")
+                    })
+                    .disposed(by: self.disposeBag)
             }
         }
     }

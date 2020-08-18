@@ -83,12 +83,14 @@ class ConfirmationAlert {
         }
 
         if let textFields = alert.textFields {
-            textFields[0].rx.text.map({text in
-                if let text = text {
-                    return !text.isEmpty
-                }
-                return false
-            }).bind(to: actionConfirm.rx.isEnabled)
+            textFields[0].rx.text
+                .map({text in
+                    if let text = text {
+                        return !text.isEmpty
+                    }
+                    return false
+                })
+                .bind(to: actionConfirm.rx.isEnabled)
                 .disposed(by: disposeBag)
         }
         presenter.present(alert, animated: true, completion: nil)

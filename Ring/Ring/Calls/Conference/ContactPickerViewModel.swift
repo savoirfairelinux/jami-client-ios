@@ -134,12 +134,14 @@ class ContactPickerViewModel: Stateable, ViewModel {
                         }
                         mutabeItem.contacts = newContacts
                         return mutabeItem
-                    }.filter { (item: ConferencableItem) -> Bool in
+                    }
+                    .filter { (item: ConferencableItem) -> Bool in
                         return !item.contacts.isEmpty
                     }
                     sectionVariable.items = newItems
                     return sectionVariable
-                }.filter { (section: ContactPickerSection) -> Bool in
+                }
+                .filter { (section: ContactPickerSection) -> Bool in
                         return !section.items.isEmpty
                 }
                 return result
@@ -181,7 +183,8 @@ class ContactPickerViewModel: Stateable, ViewModel {
                                        withAccount: account,
                                        userName: contactToAdd.registeredName,
                                        isAudioOnly: call.isAudioOnly)
-                .subscribe().disposed(by: self.disposeBag)
+                .subscribe()
+                .disposed(by: self.disposeBag)
             return
         }
         guard let secondCall = self.callService.call(callID: contact.conferenceID) else { return }

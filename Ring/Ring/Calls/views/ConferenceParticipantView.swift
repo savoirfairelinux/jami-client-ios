@@ -74,7 +74,8 @@ class ConferenceParticipantView: UIView {
                 self?.viewModel?.cancelCall()
                 self?.removeFromSuperview()
                 self?.delegate?.setConferenceParticipantMenu(menu: nil)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         let frame = self.convert(menu.frame, to: self.superview)
         menu.frame = frame
         self.delegate?.setConferenceParticipantMenu(menu: menu)
@@ -89,7 +90,8 @@ class ConferenceParticipantView: UIView {
                         self?.delegate?.setConferenceParticipantMenu(menu: nil)
                         self?.removeFromSuperview()
                     }
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
             Observable<(Profile?, String?)>
                 .combineLatest(self.viewModel!
                     .contactImageData!,

@@ -156,12 +156,14 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         self.tableView.rowHeight = 64.0
         self.tableView.delegate = self
         self.tableView.register(cellType: SmartListCell.self)
-        self.tableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
-            if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: indexPath) {
-                self.viewModel.addContactToConference(contact: contactToAdd)
-                self.removeView()
-            }
-        }).disposed(by: disposeBag)
+        self.tableView.rx.itemSelected
+            .subscribe(onNext: { [unowned self] indexPath in
+                if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: indexPath) {
+                    self.viewModel.addContactToConference(contact: contactToAdd)
+                    self.removeView()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     func setupSearchBar() {
@@ -174,8 +176,10 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             .distinctUntilChanged()
             .bind(to: self.viewModel.search)
             .disposed(by: disposeBag)
-        self.searchBar.rx.searchButtonClicked.subscribe(onNext: { [unowned self] in
-            self.searchBar.resignFirstResponder()
-        }).disposed(by: disposeBag)
+        self.searchBar.rx.searchButtonClicked
+            .subscribe(onNext: { [unowned self] in
+                self.searchBar.resignFirstResponder()
+            })
+            .disposed(by: disposeBag)
     }
 }

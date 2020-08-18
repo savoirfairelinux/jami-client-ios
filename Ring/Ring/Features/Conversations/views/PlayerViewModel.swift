@@ -93,7 +93,8 @@ class PlayerViewModel {
             .merge()
             .subscribe(onNext: {  [weak self] (renderer) in
                 self?.playBackFrame.onNext(renderer?.data)
-            }).disposed(by: self.playBackDisposeBag)
+            })
+            .disposed(by: self.playBackDisposeBag)
 
         // subscribe for fileInfo
         self.videoService.playerInfo
@@ -101,30 +102,31 @@ class PlayerViewModel {
             .filter {  [weak self] (player) -> Bool in
                 player.playerId == self?.playerId
             }
-        .take(1)
-        .subscribe(onNext: {  [weak self] player in
-            guard let duration = Float(player.duration),
-            duration > 0 else {
-                DispatchQueue.main.async {
-                    self?.videoService.closePlayer(playerId: self?.playerId ?? "")
+            .take(1)
+            .subscribe(onNext: {  [weak self] player in
+                guard let duration = Float(player.duration),
+                    duration > 0 else {
+                        DispatchQueue.main.async {
+                            self?.videoService.closePlayer(playerId: self?.playerId ?? "")
+                        }
+                        return
                 }
-                return
-            }
-            self?.playerDuration.value = duration
-            self?.hasVideo.value = player.hasVideo
-            if !player.hasVideo {
-                self?.startTimer()
-                self?.audioMuted.value = false
-                self?.playerReady.value = true
-                return
-            }
-            // mute audio so it is not played when extracting first frame
-            self?.audioMuted.value = true
-            self?.videoService.mutePlayerAudio(playerId: player.playerId,
-                                               mute: self?.audioMuted.value ?? true)
-            //unpause player to get first video frame
-            self?.toglePause()
-        }).disposed(by: self.playBackDisposeBag)
+                self?.playerDuration.value = duration
+                self?.hasVideo.value = player.hasVideo
+                if !player.hasVideo {
+                    self?.startTimer()
+                    self?.audioMuted.value = false
+                    self?.playerReady.value = true
+                    return
+                }
+                // mute audio so it is not played when extracting first frame
+                self?.audioMuted.value = true
+                self?.videoService.mutePlayerAudio(playerId: player.playerId,
+                                                   mute: self?.audioMuted.value ?? true)
+                //unpause player to get first video frame
+                self?.toglePause()
+            })
+            .disposed(by: self.playBackDisposeBag)
     }
 
     func userStartSeeking() {

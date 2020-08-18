@@ -276,7 +276,8 @@ class ContactsService {
                 self.responseStream.onNext(event)
                 self.contactStatus.onNext(contact)
                 self.contacts.value = self.contacts.value
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -403,7 +404,8 @@ extension ContactsService: ContactsAdapterDelegate {
             self.contactRequests.value.removeAll()
             self.dbManager
                 .clearAllHistoryFor(accountId: accountId)
-                .subscribe().disposed(by: self.disposeBag)
+                .subscribe()
+                .disposed(by: self.disposeBag)
         }
     }
 }

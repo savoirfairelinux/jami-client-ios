@@ -112,6 +112,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
                     return
                 }
                 self.stateSubject.onNext(ConversationState.startCall(contactRingId: conversation.hash, userName: username))
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

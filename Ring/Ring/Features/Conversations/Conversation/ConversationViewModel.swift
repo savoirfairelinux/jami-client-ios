@@ -269,7 +269,8 @@ class ConversationViewModel: Stateable, ViewModel {
                          recipientUri: self.conversation.value.participantUri)
             .subscribe(onCompleted: { [weak self] in
                 self?.log.debug("Message sent")
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func setMessagesAsRead() {
@@ -282,7 +283,8 @@ class ConversationViewModel: Stateable, ViewModel {
                                accountURI: ringId)
             .subscribe(onCompleted: { [weak self] in
                 self?.log.debug("Messages set as read")
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
 
     func setMessageAsRead(daemonId: String, messageId: Int64) {
@@ -366,7 +368,8 @@ class ConversationViewModel: Stateable, ViewModel {
                         .clearHistory(conversation: conversation,
                                       keepConversation: false)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func ban(withItem item: ContactRequestItem) -> Observable<Void> {

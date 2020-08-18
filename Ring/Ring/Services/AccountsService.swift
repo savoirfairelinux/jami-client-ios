@@ -369,7 +369,8 @@ class AccountsService: AccountAdapterDelegate {
                 _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString)
                 self.loadAccountsFromDaemon()
                 return accountModel
-            }.take(1)
+            }
+            .take(1)
             .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
                 self.currentAccount = accountModel
                 UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
@@ -451,7 +452,8 @@ class AccountsService: AccountAdapterDelegate {
                 _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString)
                 self.loadAccountsFromDaemon()
                 return accountModel
-            }.take(1)
+            }
+            .take(1)
             .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
                 return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
             })
@@ -467,24 +469,26 @@ class AccountsService: AccountAdapterDelegate {
     func connectToAccountManager(username: String, password: String, serverUri: String, emableNotifications: Bool) -> Observable<AccountModel> {
         let accountState = Variable<ConnectAccountState>(ConnectAccountState.initializinzg)
         let newAccountId = Variable<String>("")
-        self.sharedResponseStream.subscribe(onNext: { (event) in
-            if event.getEventInput(ServiceEventInput.registrationState) == Initializing {
-                return
-            }
-            if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                accountState.value = ConnectAccountState.networkError
-                newAccountId.value = ""
-            } else if event.eventType == ServiceEventType.registrationStateChanged,
-                event.getEventInput(ServiceEventInput.registrationState) == Registered {
-                accountState.value = ConnectAccountState.created
-            } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||
-                event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth ||
-                event.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
-                accountState.value = ConnectAccountState.error
-                newAccountId.value = ""
-            }
-        }, onError: { (_) in
-        }).disposed(by: self.disposeBag)
+        self.sharedResponseStream
+            .subscribe(onNext: { (event) in
+                if event.getEventInput(ServiceEventInput.registrationState) == Initializing {
+                    return
+                }
+                if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
+                    accountState.value = ConnectAccountState.networkError
+                    newAccountId.value = ""
+                } else if event.eventType == ServiceEventType.registrationStateChanged,
+                    event.getEventInput(ServiceEventInput.registrationState) == Registered {
+                    accountState.value = ConnectAccountState.created
+                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||
+                    event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth ||
+                    event.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
+                    accountState.value = ConnectAccountState.error
+                    newAccountId.value = ""
+                }
+            }, onError: { (_) in
+            })
+            .disposed(by: self.disposeBag)
 
         let result = Observable
             .combineLatest(accountState.asObservable()
@@ -503,7 +507,8 @@ class AccountsService: AccountAdapterDelegate {
                             } else {
                                 throw AddAccountError.unknownError
                             }
-            }.take(1)
+            }
+            .take(1)
             .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
                 self.currentAccount = accountModel
                 UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
@@ -857,7 +862,8 @@ class AccountsService: AccountAdapterDelegate {
                         return
                 }
                 _ = self.dbManager.saveAccountProfile(alias: name, photo: photo, accountId: account, accountURI: accountURI)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     // MARK: Push Notifications
@@ -896,11 +902,13 @@ class AccountsService: AccountAdapterDelegate {
                         && accountId == accountID
                 }
                 return false
-            }).subscribe(onNext: { (event) in
+            })
+            .subscribe(onNext: { (event) in
                 if let state: Bool = event.getEventInput(.state) {
                     variable.value = state
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         return variable
     }
 
@@ -963,7 +971,8 @@ class AccountsService: AccountAdapterDelegate {
             .filter({ (event) in
                 return event.eventType == ServiceEventType.knownDevicesChanged &&
                     event.getEventInput(ServiceEventInput.accountId) == account.id
-            }).map({ _ in
+            })
+            .map({ _ in
                 return account.devices
             })
         return accountDevices.concat(newDevice)

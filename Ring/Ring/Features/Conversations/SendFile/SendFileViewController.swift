@@ -85,7 +85,8 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                 }
                 self.viewModel
                     .setCameraOrientation(orientation: UIDevice.current.orientation)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func applyL10() {
@@ -103,23 +104,28 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                         self?.preview.image = image
                     }
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.cancel()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.recordButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.triggerRecording()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.sendButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.sendFile()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.switchButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.switchCamera()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.hideVideoControls
             .observeOn(MainScheduler.instance)
             .bind(to: self.preview.rx.isHidden)
@@ -142,7 +148,8 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .subscribe(onNext: { [weak self] ready in
                 let audioOnly: Bool = self?.viewModel.audioOnly ?? false
                 self?.switchButton.isHidden = ready || audioOnly
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.readyToSend
             .drive(self.placeholderLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
@@ -156,7 +163,8 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                     let animated: Bool = !(self?.viewModel.audioOnly ?? false)
                     self?.dismiss(animated: animated, completion: nil)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.recording
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] recording in
@@ -165,7 +173,8 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                 } else {
                     self?.recordButton.layer.removeAllAnimations()
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.hideInfo
             .drive(self.infoLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
@@ -181,14 +190,16 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] position in
                 self?.progressSlider.value = position
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.playerDuration
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] duration in
                 let durationString = self?.durationString(microcec: duration) ?? ""
                 self?.durationLabel.text = durationString
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.pause
             .asObservable()
             .observeOn(MainScheduler.instance)
@@ -198,7 +209,8 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                     image = UIImage(asset: Asset.unpauseCall)
                 }
                 self?.togglePause.setBackgroundImage(image, for: .normal)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.audioMuted
             .asObservable()
             .observeOn(MainScheduler.instance)
@@ -208,15 +220,18 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                     image = UIImage(asset: Asset.audioOff)
                 }
                 self?.muteAudio.setBackgroundImage(image, for: .normal)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.muteAudio.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.muteAudio()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.togglePause.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.toglePause()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func durationString(microcec: Float) -> String {

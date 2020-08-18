@@ -114,15 +114,16 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
         }
         self.updateOrientation()
         NotificationCenter.default.rx
-        .notification(UIDevice.orientationDidChangeNotification)
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext: {[weak self] (_) in
-            guard let self = self else { return }
-            self.videoPreviewLayer?.frame = self.view.bounds
-            self.updateOrientation()
-            self.view.layoutSubviews()
-            self.view.layer.layoutSublayers()
-        }).disposed(by: self.disposeBag)
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {[weak self] (_) in
+                guard let self = self else { return }
+                self.videoPreviewLayer?.frame = self.view.bounds
+                self.updateOrientation()
+                self.view.layoutSubviews()
+                self.view.layer.layoutSublayers()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func updateOrientation() {

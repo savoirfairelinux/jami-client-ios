@@ -87,18 +87,19 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         NotificationCenter.default.rx
-        .notification(UIDevice.orientationDidChangeNotification)
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { [weak self] (_) in
-            self?.createAccountButton.updateGradientFrame()
-            self?.configureWalkrhroughNavigationBar()
-            if self?.registerPasswordView.isHidden ?? true {
-                return
-            }
-            guard let height = self?.passwordInfoLabel.frame.height else { return }
-            self?.choosePasswordViewHeightConstraint.constant = 133 + height
-            self?.view.layoutIfNeeded()
-        }).disposed(by: self.disposeBag)
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (_) in
+                self?.createAccountButton.updateGradientFrame()
+                self?.configureWalkrhroughNavigationBar()
+                if self?.registerPasswordView.isHidden ?? true {
+                    return
+                }
+                guard let height = self?.passwordInfoLabel.frame.height else { return }
+                self?.choosePasswordViewHeightConstraint.constant = 133 + height
+                self?.view.layoutIfNeeded()
+            })
+            .disposed(by: self.disposeBag)
         adaptToSystemColor()
     }
 
@@ -188,25 +189,26 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.viewModel.registerUsername.asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] (isOn) in
-            UIView.animate(withDuration: 0.3, animations: {
-                if isOn {
-                    self.registerUsernameHeightConstraint.constant = self.registerUsernameHeightConstraintConstant
-                    DispatchQueue.global(qos: .background).async {
-                        usleep(300000)
-                        DispatchQueue.main.async {
-                            UIView.animate(withDuration: 0.3, animations: {
-                                self.registerUsernameView.alpha = 1.0
-                            })
+                UIView.animate(withDuration: 0.3, animations: {
+                    if isOn {
+                        self.registerUsernameHeightConstraint.constant = self.registerUsernameHeightConstraintConstant
+                        DispatchQueue.global(qos: .background).async {
+                            usleep(300000)
+                            DispatchQueue.main.async {
+                                UIView.animate(withDuration: 0.3, animations: {
+                                    self.registerUsernameView.alpha = 1.0
+                                })
+                            }
                         }
+                    } else {
+                        self.registerUsernameHeightConstraint.constant = 0
+                        self.registerUsernameView.alpha = 0.0
                     }
-                } else {
-                    self.registerUsernameHeightConstraint.constant = 0
-                    self.registerUsernameView.alpha = 0.0
-                }
-                self.setContentInset()
-                self.view.layoutIfNeeded()
+                    self.setContentInset()
+                    self.view.layoutIfNeeded()
+                })
             })
-        }).disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
 
         self.viewModel.canAskForAccountCreation.bind(to: self.createAccountButton.rx.isEnabled)
             .disposed(by: self.disposeBag)
@@ -214,44 +216,51 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         // handle password error
         self.viewModel.passwordValidationState.map { $0.isValidated }
             .skipUntil(self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
-            .bind(to: self.passwordErrorLabel.rx.isHidden).disposed(by: self.disposeBag)
+            .bind(to: self.passwordErrorLabel.rx.isHidden)
+            .disposed(by: self.disposeBag)
         self.viewModel.passwordValidationState.map { $0.message }
             .skipUntil(self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
-            .bind(to: self.passwordErrorLabel.rx.text).disposed(by: self.disposeBag)
+            .bind(to: self.passwordErrorLabel.rx.text)
+            .disposed(by: self.disposeBag)
 
         // handle registration error
-        self.viewModel.usernameValidationState.asObservable().map { $0.isAvailable }
+        self.viewModel.usernameValidationState.asObservable()
+            .map { $0.isAvailable }
             .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
-            .bind(to: self.registerUsernameErrorLabel.rx.isHidden).disposed(by: self.disposeBag)
-        self.viewModel.usernameValidationState.asObservable().map { $0.message }
+            .bind(to: self.registerUsernameErrorLabel.rx.isHidden)
+            .disposed(by: self.disposeBag)
+        self.viewModel.usernameValidationState.asObservable()
+            .map { $0.message }
             .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
-            .bind(to: self.registerUsernameErrorLabel.rx.text).disposed(by: self.disposeBag)
+            .bind(to: self.registerUsernameErrorLabel.rx.text)
+            .disposed(by: self.disposeBag)
 
         // handle creation state
         self.viewModel.createState
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
-            switch state {
-            case .started:
-                self?.showAccountCreationInProgress()
-            case .success:
-                self?.hideAccountCreationHud()
-            case .nameNotRegistered:
-                self?.hideAccountCreationHud()
-                self?.showNameNotRegistered()
-            case .timeOut:
-                self?.hideAccountCreationHud()
-                self?.showTimeOutAlert()
-            default:
-                self?.hideAccountCreationHud()
-            }
-        }, onError: { [weak self] (error) in
-            self?.hideAccountCreationHud()
+                switch state {
+                case .started:
+                    self?.showAccountCreationInProgress()
+                case .success:
+                    self?.hideAccountCreationHud()
+                case .nameNotRegistered:
+                    self?.hideAccountCreationHud()
+                    self?.showNameNotRegistered()
+                case .timeOut:
+                    self?.hideAccountCreationHud()
+                    self?.showTimeOutAlert()
+                default:
+                    self?.hideAccountCreationHud()
+                }
+                }, onError: { [weak self] (error) in
+                    self?.hideAccountCreationHud()
 
-            if let error = error as? AccountCreationError {
-                self?.showAccountCreationError(error: error)
-            }
-        }).disposed(by: self.disposeBag)
+                    if let error = error as? AccountCreationError {
+                        self?.showAccountCreationError(error: error)
+                    }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func managePasswordSwitch(isOn: Bool) {
@@ -285,23 +294,27 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     private func bindViewToViewModel() {
         // Bind View Outlets to ViewModel
         self.usernameSwitch.rx.isOn.bind(to: self.viewModel.registerUsername).disposed(by: self.disposeBag)
-        self.passwordSwitch.rx.isOn.subscribe(onNext: { [weak self] isOn in
-            self?.managePasswordSwitch(isOn: isOn)
-            }).disposed(by: self.disposeBag)
+        self.passwordSwitch.rx.isOn
+            .subscribe(onNext: { [weak self] isOn in
+                self?.managePasswordSwitch(isOn: isOn)
+            })
+            .disposed(by: self.disposeBag)
         self.notificationsSwitch.rx.isOn.bind(to: self.viewModel.notificationSwitch).disposed(by: self.disposeBag)
         self.usernameTextField.rx.text.orEmpty.throttle(3, scheduler: MainScheduler.instance).distinctUntilChanged().bind(to: self.viewModel.username).disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
         self.confirmPasswordTextField.rx.text.orEmpty.bind(to: self.viewModel.confirmPassword).disposed(by: self.disposeBag)
 
         // Bind View Actions to ViewModel
-        self.createAccountButton.rx.tap.subscribe(onNext: { [unowned self] in
-            DispatchQueue.main.async {
-                self.showAccountCreationInProgress()
-            }
-            DispatchQueue.global(qos: .background).async {
-                self.viewModel.createAccount()
-            }
-        }).disposed(by: self.disposeBag)
+        self.createAccountButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                DispatchQueue.main.async {
+                    self.showAccountCreationInProgress()
+                }
+                DispatchQueue.global(qos: .background).async {
+                    self.viewModel.createAccount()
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func showAccountCreationInProgress() {

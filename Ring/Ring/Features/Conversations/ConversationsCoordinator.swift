@@ -55,29 +55,31 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.stateSubject
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] (state) in
-            guard let state = state as? ConversationState else { return }
-            switch state {
-            case .createNewAccount:
-                self.createNewAccount()
-            case .showDialpad(let inCall):
-                self.showDialpad(inCall: inCall)
-            case .showGeneralSettings:
-                self.showGeneralSettings()
-            case .navigateToCall(let call):
-                self.presentCallController(call: call)
-            case .showContactPicker(let callID):
-                self.showConferenseableList(callId: callID)
-            default:
-                break
-            }
-        }).disposed(by: self.disposeBag)
+                guard let state = state as? ConversationState else { return }
+                switch state {
+                case .createNewAccount:
+                    self.createNewAccount()
+                case .showDialpad(let inCall):
+                    self.showDialpad(inCall: inCall)
+                case .showGeneralSettings:
+                    self.showGeneralSettings()
+                case .navigateToCall(let call):
+                    self.presentCallController(call: call)
+                case .showContactPicker(let callID):
+                    self.showConferenseableList(callId: callID)
+                default:
+                    break
+                }
+            })
+            .disposed(by: self.disposeBag)
 
         self.callService.newCall
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (call) in
                 self.showIncomingCall(call: call)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
         //for iOS version less than 10 support open call from notification
@@ -88,7 +90,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             .subscribe(onNext: {[unowned self] _ in
                 self.navigationViewController.viewModel =
                     ChatTabBarItemViewModel(with: self.injectionBag)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -98,7 +101,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             !call.callId.isEmpty else { return }
         if self.accountService.boothMode() {
             self.callService.refuse(callId: call.callId)
-                .subscribe().disposed(by: self.disposeBag)
+                .subscribe()
+                .disposed(by: self.disposeBag)
             return
         }
         guard let topController = getTopController(),
@@ -142,7 +146,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 guard let callUUID: String = serviceEvent
                     .getEventInput(ServiceEventInput.callUUID) else { return false }
                 return callUUID == call.callUUID.uuidString
-            }).subscribe(onNext: { _ in
+            })
+            .subscribe(onNext: { _ in
                 self.navigationViewController.popToRootViewController(animated: false)
                 if account.id != call.accountId {
                     self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
@@ -155,14 +160,16 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                              withAnimation: false,
                              withStateable: callViewController.viewModel)
                 tempBag = DisposeBag()
-            }).disposed(by: tempBag)
+            })
+            .disposed(by: tempBag)
         callViewController.viewModel.dismisVC
             .share()
             .subscribe(onNext: { hide in
                 if hide {
                     tempBag = DisposeBag()
                 }
-            }).disposed(by: tempBag)
+            })
+            .disposed(by: tempBag)
     }
 
     func createNewAccount() {
@@ -273,6 +280,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                               withStyle: .present,
                               withAnimation: false,
                               withStateable: callViewController.viewModel)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

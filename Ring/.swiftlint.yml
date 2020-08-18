@@ -12,9 +12,9 @@ opt_in_rules: # some rules are only opt-in
   - modifier_order
   - toggle_bool
   - empty_count # can't be autocorrected
-  #- multiline_function_chains
+  - multiline_function_chains
   - closing_brace_spacing
-  #- closure_body_length
+  - closure_body_length
   - unused_declaration
   - vertical_parameter_alignment_on_call
   - collection_alignment
@@ -36,9 +36,9 @@ force_cast: warning # implicitly
 force_try:
   severity: warning # explicitly
 
-#closure_body_length:
-  #- 60 # warning
-  #- 287 # error
+closure_body_length:
+  - 60 # warning
+  - 287 # error
 
 type_body_length:
   - 300 # warning

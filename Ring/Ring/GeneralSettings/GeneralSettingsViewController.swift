@@ -84,7 +84,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                         .observeOn(MainScheduler.instance)
                         .subscribe(onNext: { [weak self] (enable) in
                             self?.viewModel.togleHardwareAcceleration(enable: enable)
-                        }).disposed(by: cell.disposeBag)
+                        })
+                        .disposed(by: cell.disposeBag)
                     return cell
 
                 case .sectionHeader(let title):

@@ -168,11 +168,13 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
 
         self.settingsButton.backgroundColor = nil
-        self.settingsButton.rx.tap.subscribe(onNext: { _ in
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url, completionHandler: nil)
-            }
-        }).disposed(by: self.disposeBag)
+        self.settingsButton.rx.tap
+            .subscribe(onNext: { _ in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, completionHandler: nil)
+                }
+            })
+            .disposed(by: self.disposeBag)
 
         let imageSettings = UIImage(asset: Asset.settings) as UIImage?
         let generalSettingsButton = UIButton(type: UIButton.ButtonType.system) as UIButton
@@ -208,7 +210,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     self?.phoneBookButton.isHidden = !accountSip
                     self?.qrScanButton.isHidden = accountSip
                 }
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         self.navigationItem.rightBarButtonItem = settingsButtonItem
         if let account = self.viewModel.currentAccount {
@@ -249,7 +252,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.openAccountsList()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.navigationItem.leftBarButtonItem = accountButtonItem
 
         dialpadButton.rx.tap
@@ -281,7 +285,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     let row = self.accountsAdapter.rowForAccountId(account: account) {
                     self.accounPicker.selectRow(row, inComponent: 0, animated: true)
                 }
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
         accounPicker.rx.modelSelected(AccountItem.self)
             .subscribe(onNext: { [weak self] model in
                 let account = model[0].account
@@ -373,9 +378,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         //Register Cell
         self.conversationsTableView.register(cellType: SmartListCell.self)
         //Deselect the rows
-        self.conversationsTableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
-            self.conversationsTableView.deselectRow(at: indexPath, animated: true)
-        }).disposed(by: disposeBag)
+        self.conversationsTableView.rx.itemSelected
+            .subscribe(onNext: { [unowned self] indexPath in
+                self.conversationsTableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
 
         self.conversationsTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
@@ -425,9 +432,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         }
         self.searchView.editSearch
             .subscribe(onNext: {[weak self] (editing) in
-            self?.scanButtonLeadingConstraint.constant = editing ? -40 : 10
-            self?.viewModel.searching.onNext(editing)
-        }).disposed(by: disposeBag)
+                self?.scanButtonLeadingConstraint.constant = editing ? -40 : 10
+                self?.viewModel.searching.onNext(editing)
+            })
+            .disposed(by: disposeBag)
     }
 
     func startAccountCreation() {

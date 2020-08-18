@@ -146,7 +146,8 @@ class MigrateAccountViewModel: Stateable, ViewModel {
                     DispatchQueue.main.async {
                         self?.migrationState.accept(AccountMigrationState.error)
                     }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func removeAccount() {

@@ -46,9 +46,11 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
             .disposed(by: disposeBag)
 
         //Binds the keyboard Send button action to the ViewModel
-        self.profileName.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: { [unowned self] _ in
-            self.model.updateName(self.profileName.text!)
-        }).disposed(by: disposeBag)
+        self.profileName.rx.controlEvent(.editingDidEndOnExit)
+            .subscribe(onNext: { [unowned self] _ in
+                self.model.updateName(self.profileName.text!)
+            })
+            .disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {

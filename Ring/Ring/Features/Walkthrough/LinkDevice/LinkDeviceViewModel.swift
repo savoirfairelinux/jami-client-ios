@@ -72,7 +72,8 @@ class LinkDeviceViewModel: Stateable, ViewModel {
                             .set(account.id, forKey: self.accountService.selectedAccountID)
                         self.enablePushNotifications(enable: self.notificationSwitch.value)
                         self.stateSubject.onNext(WalkthroughState.deviceLinked)
-                    }).disposed(by: self.disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
                 }, onError: { [weak self] (error) in
                     if let error = error as? AccountCreationError {
                         self?.accountCreationState.value = .error(error: error)

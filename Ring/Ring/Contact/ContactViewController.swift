@@ -104,7 +104,8 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
                 self?.titleView.text = name
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func setUpTableView() {
@@ -158,7 +159,8 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     }
                     self?.tableView.deselectRow(at: indexPath, animated: true)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func showClearConversationConfirmation() {

@@ -134,7 +134,8 @@ class JamiSearchView: NSObject {
             .subscribe(onNext: { [weak self] in
                 self?.editSearch.onNext(true)
                 self?.searchBar.setShowsCancelButton(true, animated: false)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         //Hide Cancel button
         self.searchBar.rx.textDidEndEditing
@@ -145,19 +146,22 @@ class JamiSearchView: NSObject {
                     return
                 }
                 self.editSearch.onNext(false)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         //Cancel button event
         self.searchBar.rx.cancelButtonClicked
             .subscribe(onNext: { [weak self] in
                 self?.cancelSearch()
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         //Search button event
         self.searchBar.rx.searchButtonClicked
             .subscribe(onNext: { [weak self] in
                 self?.searchBar.resignFirstResponder()
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         searchBar.returnKeyType = .done
         searchBar.autocapitalizationType = .none

@@ -56,7 +56,8 @@ var viewModel: LinkToAccountManagerViewModel!
         .subscribe(onNext: { [weak self] (_) in
             self?.signInButton.updateGradientFrame()
             self?.configureWalkrhroughNavigationBar()
-        }).disposed(by: self.disposeBag)
+        })
+        .disposed(by: self.disposeBag)
         adaptToSystemColor()
     }
 
@@ -83,7 +84,8 @@ var viewModel: LinkToAccountManagerViewModel!
 
     func bindViewToViewModel() {
         self.userNameTextField.rx.text.orEmpty
-            .throttle(3, scheduler: MainScheduler.instance).distinctUntilChanged()
+            .throttle(3, scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
             .bind(to: self.viewModel.userName)
             .disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty
@@ -93,10 +95,11 @@ var viewModel: LinkToAccountManagerViewModel!
             .bind(to: self.viewModel.manager).disposed(by: self.disposeBag)
         self.signInButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-            DispatchQueue.global(qos: .background).async {
-                self.viewModel.linkToAccountManager()
-            }
-        }).disposed(by: self.disposeBag)
+                DispatchQueue.global(qos: .background).async {
+                    self.viewModel.linkToAccountManager()
+                }
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.createState
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
@@ -117,7 +120,8 @@ var viewModel: LinkToAccountManagerViewModel!
                     if let error = error as? AccountCreationError {
                         self?.showAccountCreationError(error: error)
                     }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.viewModel.canLink.bind(to: self.signInButton.rx.isEnabled)
             .disposed(by: self.disposeBag)
         self.notificationsSwitch.rx.isOn.bind(to: self.viewModel.notificationSwitch).disposed(by: self.disposeBag)

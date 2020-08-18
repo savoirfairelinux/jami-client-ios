@@ -38,7 +38,8 @@ class EditProfileViewModel {
                     .take(1)
                     .subscribe(onNext: { profile in
                         self.profileForCurrentAccount.onNext(profile)
-                    }).disposed(by: self.disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
             }
         })
         return profileForCurrentAccount.share()
@@ -86,14 +87,16 @@ class EditProfileViewModel {
                 if let selectedAccount = account {
                     self.updateProfileInfoFor(accountId: selectedAccount.id)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
       }
 
     func updateProfileInfoFor(accountId: String) {
         self.profileService.getAccountProfile(accountId: accountId)
             .subscribe(onNext: { [unowned self] profile in
                 self.profileForCurrentAccount.onNext(profile)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func saveProfile() {

@@ -198,9 +198,11 @@ class MeViewModel: ViewModel, Stateable {
                             default:
                                 return L10n.Account.statusUnknown
                             }
-            }.subscribe(onNext: { status in
+            }
+            .subscribe(onNext: { status in
                 accStatus.value = status
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         return accStatus
     }()
 
@@ -311,7 +313,8 @@ class MeViewModel: ViewModel, Stateable {
                 if let currentAccount = account {
                     self.updateDataFor(account: currentAccount)
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         if let account = self.accountService.currentAccount {
             self.isAccountSip.value = account.type == AccountType.sip
         }
@@ -346,12 +349,14 @@ class MeViewModel: ViewModel, Stateable {
                     .getEventInput(ServiceEventInput.accountId),
                     accountId == account.id else { return false }
                 return true
-            }).subscribe(onNext: { serviceEvent in
+            })
+            .subscribe(onNext: { serviceEvent in
                 guard let state: String = serviceEvent
                     .getEventInput(ServiceEventInput.registrationState),
                     let accountState = AccountState(rawValue: state) else { return }
                 self.currentAccountState.onNext(accountState)
-            }).disposed(by: self.tempBag)
+            })
+            .disposed(by: self.tempBag)
         self.isAccountSip.value = account.type == AccountType.sip
         if account.type == AccountType.sip {
             sipInfoUpdated.onNext(true)
@@ -364,13 +369,15 @@ class MeViewModel: ViewModel, Stateable {
                     return false
                 }
                 return true
-            }.subscribe(onNext: { [unowned self] _ in
+            }
+            .subscribe(onNext: { [unowned self] _ in
                 if  !self.userNameForAccount(account: account).isEmpty {
                     self.currentAccountUserName
                         .onNext(self.userNameForAccount(account: account))
                 }
                 }, onError: { _ in
-            }).disposed(by: self.tempBag)
+            })
+            .disposed(by: self.tempBag)
         self.currentAccountUserName
             .onNext(self.userNameForAccount(account: account))
         if let jamiId = AccountModelHelper.init(withAccount: account).ringId {
@@ -381,13 +388,15 @@ class MeViewModel: ViewModel, Stateable {
         self.accountService.devicesObservable(account: account)
             .subscribe(onNext: { [unowned self] devices in
                 self.currentAccountDevices.onNext(devices)
-            }).disposed(by: self.tempBag)
+            })
+            .disposed(by: self.tempBag)
         self.accountService.proxyEnabled(accountID: account.id)
             .asObservable()
             .subscribe(onNext: { [unowned self] enable in
                 self.notificationsEnabled = enable
                 self.currentAccountProxy.onNext(enable)
-            }).disposed(by: self.tempBag)
+            })
+            .disposed(by: self.tempBag)
     }
 
     func userNameForAccount(account: AccountModel) -> String {
@@ -414,22 +423,26 @@ class MeViewModel: ViewModel, Stateable {
     let usernameValidationState = BehaviorRelay<UsernameValidationState>(value: .unknown)
 
     func subscribeForNameLokup(disposeBug: DisposeBag) {
-        newUsername.asObservable().subscribe(onNext: { [unowned self] username in
-            self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
-        }).disposed(by: disposeBug)
+        newUsername.asObservable()
+            .subscribe(onNext: { [unowned self] username in
+                self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+            })
+            .disposed(by: disposeBug)
 
-        nameService.usernameValidationStatus.asObservable().subscribe(onNext: {[weak self] (status) in
-            switch status {
-            case .lookingUp:
-                self?.usernameValidationState.accept(.lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability))
-            case .invalid:
-                self?.usernameValidationState.accept(.invalid(message: L10n.CreateAccount.invalidUsername))
-            case .alreadyTaken:
-                self?.usernameValidationState.accept(.unavailable(message: L10n.CreateAccount.usernameAlreadyTaken))
-            default:
-                self?.usernameValidationState.accept(.available)
-            }
-        }).disposed(by: disposeBug)
+        nameService.usernameValidationStatus.asObservable()
+            .subscribe(onNext: {[weak self] (status) in
+                switch status {
+                case .lookingUp:
+                    self?.usernameValidationState.accept(.lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability))
+                case .invalid:
+                    self?.usernameValidationState.accept(.invalid(message: L10n.CreateAccount.invalidUsername))
+                case .alreadyTaken:
+                    self?.usernameValidationState.accept(.unavailable(message: L10n.CreateAccount.usernameAlreadyTaken))
+                default:
+                    self?.usernameValidationState.accept(.available)
+                }
+            })
+            .disposed(by: disposeBug)
     }
 
     func registerUsername(username: String, password: String) {
@@ -454,7 +467,8 @@ class MeViewModel: ViewModel, Stateable {
                 }
             }, onError: { _ in
                 self.showActionState.value = .usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func changePassword(oldPassword: String, newPassword: String) -> Bool {
@@ -505,7 +519,8 @@ class MeViewModel: ViewModel, Stateable {
                         self.showActionState.value = .deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationError)
                     }
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.accountService.revokeDevice(for: accountId, withPassword: password, deviceId: deviceId)
     }
 
@@ -528,12 +543,14 @@ class MeViewModel: ViewModel, Stateable {
                         .getEventInput(ServiceEventInput.accountId),
                         accountId == account.id else { return false }
                     return true
-                }).subscribe(onNext: { serviceEvent in
+                })
+                .subscribe(onNext: { serviceEvent in
                     guard let state: String = serviceEvent
                         .getEventInput(ServiceEventInput.registrationState),
                         let accountState = AccountState(rawValue: state) else { return }
                     self.currentAccountState.onNext(accountState)
-                }).disposed(by: self.tempBag)
+                })
+                .disposed(by: self.tempBag)
         }
         return currentAccountState.share().startWith(state)
     }()
@@ -569,7 +586,8 @@ class MeViewModel: ViewModel, Stateable {
                 self.accountService.devicesObservable(account: account)
                     .subscribe(onNext: { [unowned self] device in
                         self.currentAccountDevices.onNext(device)
-                    }).disposed(by: self.tempBag)
+                    })
+                    .disposed(by: self.tempBag)
             }
         })
         return self.currentAccountDevices.share()
@@ -612,7 +630,8 @@ class MeViewModel: ViewModel, Stateable {
                 .subscribe(onNext: { [unowned self] enable in
                     self.currentAccountProxy.onNext(enable)
                     self.notificationsEnabled = enable
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
         })
         return currentAccountProxy.share()
@@ -646,7 +665,8 @@ class MeViewModel: ViewModel, Stateable {
                 if let enable = enable {
                     variable.value = enable
                 }
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         return variable
     }()
 

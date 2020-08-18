@@ -63,7 +63,8 @@ class ButtonsContainerView: UIView, NibLoadable {
                     case .optionsWithSpeakerphone:
                         self?.optionsWithSpeaker()
                     }
-                }).disposed(by: self.disposeBag)
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 

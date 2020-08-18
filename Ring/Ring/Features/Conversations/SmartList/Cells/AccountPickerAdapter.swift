@@ -62,39 +62,43 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
         let hideMigrationLabel = items[row].account.status != .errorNeedMigration
         accountView.needMigrateLabel.isHidden = hideMigrationLabel
         let profile = items[row].profileObservable
-        profile.map { [weak self] accountProfile in
-            if let photo = accountProfile.photo,
-                let data = NSData(base64Encoded: photo,
-                                  options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                return UIImage(data: data) ?? UIImage(asset: Asset.fallbackAvatar)!
-            }
-            guard let account = self?.items[row].account else {
-                return UIImage(asset: Asset.fallbackAvatar)!
-            }
-            guard let name = accountProfile.alias else {
-                return UIImage.defaultJamiAvatarFor(profileName: nil,
-                                                    account: account)}
-            let profileName = name.isEmpty ? nil : name
-            return UIImage.defaultJamiAvatarFor(profileName: profileName,
-                                                account: account)
-        }.bind(to: accountView.avatarView.rx.image)
+        profile
+            .map({ [weak self] accountProfile in
+                if let photo = accountProfile.photo,
+                    let data = NSData(base64Encoded: photo,
+                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    return UIImage(data: data) ?? UIImage(asset: Asset.fallbackAvatar)!
+                }
+                guard let account = self?.items[row].account else {
+                    return UIImage(asset: Asset.fallbackAvatar)!
+                }
+                guard let name = accountProfile.alias else {
+                    return UIImage.defaultJamiAvatarFor(profileName: nil,
+                                                        account: account)}
+                let profileName = name.isEmpty ? nil : name
+                return UIImage.defaultJamiAvatarFor(profileName: profileName,
+                                                    account: account)
+            })
+            .bind(to: accountView.avatarView.rx.image)
             .disposed(by: DisposeBag())
 
-        profile.map { [weak self] accountProfile in
-            if let name = accountProfile.alias, !name.isEmpty {
-                return name
-            }
-            guard let account = self?.items[row].account else { return "" }
-            if !account.registeredName.isEmpty {
-                return account.registeredName
-            }
-            if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-                let accountName = userNameData[account.id] as? String,
-                !accountName.isEmpty {
-                return accountName
-            }
-            return account.jamiId
-        }.bind(to: accountView.nameLabel.rx.text)
+        profile
+            .map({ [weak self] accountProfile in
+                if let name = accountProfile.alias, !name.isEmpty {
+                    return name
+                }
+                guard let account = self?.items[row].account else { return "" }
+                if !account.registeredName.isEmpty {
+                    return account.registeredName
+                }
+                if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+                    let accountName = userNameData[account.id] as? String,
+                    !accountName.isEmpty {
+                    return accountName
+                }
+                return account.jamiId
+            })
+            .bind(to: accountView.nameLabel.rx.text)
             .disposed(by: DisposeBag())
         return accountView
     }

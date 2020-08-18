@@ -58,7 +58,8 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             .subscribe(onNext: {[weak self](_) in
                 self?.placeVideoCall.updateGradientFrame()
                 self?.placeAudioCall.updateGradientFrame()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,21 +91,25 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             .subscribe(onNext: {[weak self] (editing) in
                 self?.logoView.isHidden = editing
                 self?.boothSwitch.isHidden = editing
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         self.placeVideoCall.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.startCall(audioOnly: false)
-        }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
 
         self.placeAudioCall.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.startCall(audioOnly: true)
-        }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         self.boothSwitch.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.confirmBoothModeAlert()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
         self.networkAlertView.isHidden = isHidden
         self.viewModel.connectionState

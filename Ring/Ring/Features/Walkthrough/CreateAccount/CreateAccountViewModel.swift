@@ -258,22 +258,26 @@ class CreateAccountViewModel: Stateable, ViewModel {
         self.nameService = injectionBag.nameService
 
         //Loookup name request observer
-        self.username.asObservable().subscribe(onNext: { [unowned self] username in
-            self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
-        }).disposed(by: disposeBag)
+        self.username.asObservable()
+            .subscribe(onNext: { [unowned self] username in
+                self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+            })
+            .disposed(by: disposeBag)
 
-        self.nameService.usernameValidationStatus.asObservable().subscribe(onNext: { [weak self] (status) in
-            switch status {
-            case .lookingUp:
-                self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability)
-            case .invalid:
-                self?.usernameValidationState.value = .invalid(message: L10n.CreateAccount.invalidUsername)
-            case .alreadyTaken:
-                self?.usernameValidationState.value = .unavailable(message: L10n.CreateAccount.usernameAlreadyTaken)
-            default:
-                self?.usernameValidationState.value = .available
-            }
-        }).disposed(by: self.disposeBag)
+        self.nameService.usernameValidationStatus.asObservable()
+            .subscribe(onNext: { [weak self] (status) in
+                switch status {
+                case .lookingUp:
+                    self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability)
+                case .invalid:
+                    self?.usernameValidationState.value = .invalid(message: L10n.CreateAccount.invalidUsername)
+                case .alreadyTaken:
+                    self?.usernameValidationState.value = .unavailable(message: L10n.CreateAccount.usernameAlreadyTaken)
+                default:
+                    self?.usernameValidationState.value = .available
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func createAccount() {

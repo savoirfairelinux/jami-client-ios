@@ -55,12 +55,13 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         NotificationCenter.default.rx
-        .notification(UIDevice.orientationDidChangeNotification)
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { [weak self] (_) in
-            self?.createAccountButton.updateGradientFrame()
-            self?.configureWalkrhroughNavigationBar()
-        }).disposed(by: self.disposeBag)
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (_) in
+                self?.createAccountButton.updateGradientFrame()
+                self?.configureWalkrhroughNavigationBar()
+            })
+            .disposed(by: self.disposeBag)
         adaptToSystemColor()
     }
 
@@ -108,10 +109,12 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         let rightButton = UIButton(type: .custom)
         rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         rightButton.setImage(UIImage(asset: Asset.icHideInput), for: .normal)
-        passwordTextField.rx.text.orEmpty.distinctUntilChanged().bind { text in
-            rightButton.isHidden = text.isEmpty
-            rightButton.isEnabled = !text.isEmpty
-        }.disposed(by: self.disposeBag)
+        passwordTextField.rx.text.orEmpty.distinctUntilChanged()
+            .bind { text in
+                rightButton.isHidden = text.isEmpty
+                rightButton.isEnabled = !text.isEmpty
+            }
+            .disposed(by: self.disposeBag)
         passwordTextField.rightViewMode = .always
         let rightView = UIView(frame: CGRect( x: 0, y: 0, width: 50, height: 30))
         rightView.addSubview(rightButton)
@@ -125,14 +128,16 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
                 self.passwordTextField.isSecureTextEntry.toggle()
                 isSecureTextEntry
                     .onNext(self.passwordTextField.isSecureTextEntry)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         isSecureTextEntry.asObservable()
             .subscribe(onNext: { [weak rightButton] secure in
                 let image = secure ?
                     UIImage(asset: Asset.icHideInput) :
                     UIImage(asset: Asset.icShowInput)
                 rightButton?.setImage(image, for: .normal)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func buindViewToViewModel() {
@@ -144,10 +149,11 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
             .disposed(by: self.disposeBag)
         self.createAccountButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-            DispatchQueue.global(qos: .background).async {
-                self.viewModel.createSipaccount()
-            }
-        }).disposed(by: self.disposeBag)
+                DispatchQueue.global(qos: .background).async {
+                    self.viewModel.createSipaccount()
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func applyL10n() {

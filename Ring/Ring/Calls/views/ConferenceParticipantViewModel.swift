@@ -69,7 +69,7 @@ class ConferenceParticipantViewModel {
 
     func cancelCall() {
         self.callsSercive.hangUp(callId: call.callId)
-            .subscribe(onCompleted: {
-            }).disposed(by: disposeBag)
+            .subscribe(onCompleted: { })
+            .disposed(by: disposeBag)
     }
 }
