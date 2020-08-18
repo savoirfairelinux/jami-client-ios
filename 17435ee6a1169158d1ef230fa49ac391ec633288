@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a3b9c535_c8e09150",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-18T16:19:47Z",
+      "side": 1,
+      "message": "it is better to remove it for now, it could be added when we need it",
+      "parentUuid": "87e25c76_b9093048",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f4c2e337_2ad07f90",
         "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
         "patchSetId": 14
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Because lazy variables are evaluated when they are first used and then the value it returned will be the value the var will always return. \nSo, when used with lazy, if `SmartlistViewModel.currentAccount` is called and then the `accountsService.currentAccount` changes, `SmartlistViewModel.currentAccount` will not have changed.\nWas that the intended use? And please correct me if I am wrong in my understanding of the lazy keyword.",
       "parentUuid": "f4c2e337_2ad07f90",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46dbe90a_dd0963ae",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-18T16:19:47Z",
+      "side": 1,
+      "message": "yes, it make more sense to have it not lazy",
+      "parentUuid": "021bf0b0_2f600ea0",
       "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
