@@ -16,6 +16,24 @@
       "revId": "55665bb09b95f92abda92bf17a095c8e3dd54f9e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44b0ebfd_98865784",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-18T16:13:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b5f8a87_86acef18",
+      "revId": "55665bb09b95f92abda92bf17a095c8e3dd54f9e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
