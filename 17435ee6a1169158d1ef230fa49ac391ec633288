@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "87e25c76_b9093048",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-18T15:31:26Z",
+      "side": 1,
+      "message": "No it is not. However I felt like it would be convenient to have it for future usage. Do you wish that I remove it?",
+      "parentUuid": "e0e51cb3_58d4c760",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f4c2e337_2ad07f90",
         "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2020-08-17T19:10:02Z",
       "side": 1,
       "message": "why it is changed to be not lazy?",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "021bf0b0_2f600ea0",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-18T15:31:26Z",
+      "side": 1,
+      "message": "Because lazy variables are evaluated when they are first used and then the value it returned will be the value the var will always return. \nSo, when used with lazy, if `SmartlistViewModel.currentAccount` is called and then the `accountsService.currentAccount` changes, `SmartlistViewModel.currentAccount` will not have changed.\nWas that the intended use? And please correct me if I am wrong in my understanding of the lazy keyword.",
+      "parentUuid": "f4c2e337_2ad07f90",
       "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "b6fd59c2_ad009534",
+        "filename": "Ring/Ring/Features/Conversations/views/JamiSearchView/JamiSearchViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-18T15:31:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68fa65c1_0de80670",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "554625ac_e8a7882a",
         "filename": "Ring/Ring/Features/Conversations/views/JamiSearchView/JamiSearchViewModel.swift",
         "patchSetId": 14
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "43a8fb17_365e255a",
+        "filename": "Ring/Ring/Features/Conversations/views/JamiSearchView/JamiSearchViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-18T15:31:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "554625ac_e8a7882a",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46fc1dc5_27ef49fd",
         "filename": "Ring/Ring/Features/Conversations/views/JamiSearchView/JamiSearchViewModel.swift",
         "patchSetId": 14
@@ -84,6 +156,24 @@
       "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87bdf003_2866f619",
+        "filename": "Ring/Ring/Features/Conversations/views/JamiSearchView/JamiSearchViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 803
+      },
+      "writtenOn": "2020-08-18T15:31:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46fc1dc5_27ef49fd",
+      "revId": "17435ee6a1169158d1ef230fa49ac391ec633288",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
