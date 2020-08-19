@@ -103,7 +103,8 @@ class LocalNotificationsHelper {
         UNUserNotificationCenter.current().setNotificationCategories([callCategory])
     }
 
-    @objc func cancelCall(timer: Timer) {
+    @objc
+    func cancelCall(timer: Timer) {
         guard let info = timer.userInfo as? [String: String],
             let callID = info[NotificationUserInfoKeys.callID.rawValue] else {
                 self.timer?.invalidate()

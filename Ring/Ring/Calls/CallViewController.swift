@@ -155,14 +155,16 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
     }
 
-    @objc func capturedVideoSwipped(gesture: UISwipeGestureRecognizer) {
+    @objc
+    func capturedVideoSwipped(gesture: UISwipeGestureRecognizer) {
         if self.avatarView.isHidden == false { return }
         if gesture.direction == UISwipeGestureRecognizer.Direction.left && (self.isVideoHidden == false) { return }
         if gesture.direction == UISwipeGestureRecognizer.Direction.right && (self.isVideoHidden == true) { return }
         self.hideCapturedVideo()
     }
 
-    @objc func hideCapturedVideo() {
+    @objc
+    func hideCapturedVideo() {
         //if self.isMenuShowed { return }
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             if self?.capturedVideoBlurEffect.alpha == 0 {
@@ -571,7 +573,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.dismiss(animated: false)
     }
 
-    @objc func screenTapped() {
+    @objc
+    func screenTapped() {
         if self.avatarView.isHidden {
             self.viewModel.respondOnTap()
             self.conferenceParticipantMenu?.removeFromSuperview()

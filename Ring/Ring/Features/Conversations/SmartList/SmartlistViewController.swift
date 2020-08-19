@@ -103,7 +103,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.extendedLayoutIncludesOpaqueBars = true
     }
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         accountPickerTextView.resignFirstResponder()
         view.removeGestureRecognizer(accountsDismissTapRecognizer)
     }
@@ -321,7 +322,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
     }
 
-    @objc func keyboardWillShow(withNotification notification: Notification) {
+    @objc
+    func keyboardWillShow(withNotification notification: Notification) {
         guard let userInfo: Dictionary = notification.userInfo else { return }
         guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
@@ -336,7 +338,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
     }
 
-    @objc func keyboardWillHide(withNotification notification: Notification) {
+    @objc
+    func keyboardWillHide(withNotification notification: Notification) {
         self.conversationsTableView.contentInset.bottom = 0
         self.searchView.searchResultsTableView.contentInset.bottom = 0
 

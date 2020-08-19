@@ -67,7 +67,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                          object: nil)
     }
 
-    @objc private func preferredContentSizeChanged(_ notification: NSNotification) {
+    @objc
+    private func preferredContentSizeChanged(_ notification: NSNotification) {
         self.calculateSipCredentialsMargin()
     }
 
@@ -269,7 +270,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         })
     }
 
-    @objc func alertControllerBackgroundTapped() {
+    @objc
+    func alertControllerBackgroundTapped() {
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -287,6 +289,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     // swiftlint:disable function_body_length
     // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable closure_body_length
     private func setUpDataSource() {
 
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SettingsSection.Item)

@@ -43,7 +43,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
 
     var blurEffect: UIVisualEffectView?
 
-    override open func didMoveToWindow() {
+    override func didMoveToWindow() {
         self.setupMessageTextView()
         super.didMoveToWindow()
         if #available(iOS 11.0, *) {

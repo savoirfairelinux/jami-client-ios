@@ -29,8 +29,7 @@ private enum GradientAnchor {
 
 extension UIView {
 
-    @IBInspectable
-    var cornerRadius: CGFloat {
+    @IBInspectable var cornerRadius: CGFloat {
         get {
             return self.layer.cornerRadius
         }
@@ -41,8 +40,7 @@ extension UIView {
         }
     }
 
-    @IBInspectable
-    var roundedCorners: Bool {
+    @IBInspectable var roundedCorners: Bool {
         get {
             return self.cornerRadius == self.frame.height / 2
         }
@@ -56,8 +54,7 @@ extension UIView {
         }
     }
 
-    @IBInspectable
-    var borderWidth: CGFloat {
+    @IBInspectable var borderWidth: CGFloat {
         get {
             return self.layer.borderWidth
         }
@@ -67,8 +64,7 @@ extension UIView {
         }
     }
 
-    @IBInspectable
-    var borderColor: UIColor {
+    @IBInspectable var borderColor: UIColor {
         get {
             return UIColor(cgColor: self.layer.borderColor ?? UIColor.clear.cgColor)
         }
@@ -78,9 +74,7 @@ extension UIView {
         }
     }
 
-    @IBInspectable
-    var gradientStartColor: UIColor {
-
+    @IBInspectable var gradientStartColor: UIColor {
         get {
             return self.retrieveGradientColor(for: .start)
         }
@@ -90,8 +84,7 @@ extension UIView {
         }
     }
 
-    @IBInspectable
-    var gradientEndColor: UIColor {
+    @IBInspectable var gradientEndColor: UIColor {
         get {
             return self.retrieveGradientColor(for: .end)
         }

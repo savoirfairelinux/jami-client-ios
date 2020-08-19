@@ -93,13 +93,15 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         portTextField.borderColor = UIColor.jamiTextBlue
     }
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         self.isKeyboardOpened = false
         view.endEditing(true)
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillAppear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillAppear(withNotification: NSNotification) {
         self.isKeyboardOpened = true
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
     }

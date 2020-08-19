@@ -28,7 +28,7 @@ class ContactModel: Equatable {
     var banned: Bool = false
     var type = URIType.ring
 
-    public static func == (lhs: ContactModel, rhs: ContactModel) -> Bool {
+    static func == (lhs: ContactModel, rhs: ContactModel) -> Bool {
         return lhs.uriString == rhs.uriString
     }
 

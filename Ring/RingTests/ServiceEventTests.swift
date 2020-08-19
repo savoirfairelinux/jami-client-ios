@@ -30,6 +30,7 @@ class ServiceEventTests: XCTestCase {
     private var event: ServiceEvent?
 
     override func setUp() {
+        super.setUp()
         self.event = ServiceEvent(withEventType: .accountsChanged)
     }
 

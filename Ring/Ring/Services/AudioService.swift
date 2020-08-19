@@ -46,7 +46,8 @@ class AudioService {
         self.audioAdapter = audioAdapter
     }
 
-    @objc private func audioRouteChangeListener(_ notification: Notification) {
+    @objc
+    private func audioRouteChangeListener(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
             let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt else {
                 return

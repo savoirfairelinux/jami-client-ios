@@ -55,7 +55,8 @@ class ConferenceParticipantView: UIView {
         self.avatarView.addGestureRecognizer(tapGestureRecognizer)
     }
 
-    @objc func showMenu() {
+    @objc
+    func showMenu() {
         let menu = UIView(frame: CGRect(x: 50, y: 50, width: menuWidth, height: menuHight))
         let blurView = UIBlurEffect(style: .light)
         let background = UIVisualEffectView(effect: blurView)

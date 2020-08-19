@@ -100,7 +100,8 @@ class ConversationViewController: UIViewController,
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
 
-    @objc private func applicationWillResignActive() {
+    @objc
+    private func applicationWillResignActive() {
         self.viewModel.setIsComposingMsg(isComposing: false)
     }
 
@@ -166,7 +167,8 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    @objc func imageTapped() {
+    @objc
+    func imageTapped() {
         let alert = UIAlertController.init(title: nil,
                                            message: nil,
                                            preferredStyle: .actionSheet)
@@ -350,12 +352,14 @@ class ConversationViewController: UIViewController,
     }
     // swiftlint:enable cyclomatic_complexity
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         self.becomeFirstResponder()
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillShow(withNotification notification: Notification) {
+    @objc
+    func keyboardWillShow(withNotification notification: Notification) {
         guard let userInfo: Dictionary = notification.userInfo else {
             return
         }
@@ -382,7 +386,8 @@ class ConversationViewController: UIViewController,
         self.updateBottomOffset()
     }
 
-    @objc func keyboardWillHide(withNotification notification: Notification) {
+    @objc
+    func keyboardWillHide(withNotification notification: Notification) {
         self.tableView.contentInset.bottom = self.messageAccessoryView.frame.height
         self.tableView.scrollIndicatorInsets.bottom = self.messageAccessoryView.frame.height
         self.updateBottomOffset()

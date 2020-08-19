@@ -78,7 +78,7 @@ class ButtonsContainerView: UIView, NibLoadable {
         self.commonInit()
     }
 
-    override open func didMoveToWindow() {
+    override func didMoveToWindow() {
         super.didMoveToWindow()
         self.cancelButton.backgroundColor = UIColor.red
     }

@@ -108,7 +108,8 @@ class CallsService: CallsAdapterDelegate {
             .asObservable()
     }
 
-    @objc func refuseUnansweredCall(_ notification: NSNotification) {
+    @objc
+    func refuseUnansweredCall(_ notification: NSNotification) {
         guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String else {
             return
         }

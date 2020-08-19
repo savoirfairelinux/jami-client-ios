@@ -120,7 +120,8 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             .disposed(by: self.disposeBag)
     }
 
-    @objc func keyboardWillShow(withNotification notification: Notification) {
+    @objc
+    func keyboardWillShow(withNotification notification: Notification) {
         guard let userInfo: Dictionary = notification.userInfo else { return }
         guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
@@ -132,7 +133,8 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
         self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
     }
 
-    @objc func keyboardWillHide(withNotification notification: Notification) {
+    @objc
+    func keyboardWillHide(withNotification notification: Notification) {
         self.searchView.searchResultsTableView.contentInset.bottom = 0
         self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = 0
     }

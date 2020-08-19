@@ -137,7 +137,7 @@ struct AccountModelHelper {
         return self.account
     }
 
-    public var ringId: String? {
+    var ringId: String? {
 
         let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.accountUsername)
         let accountUsername = self.account.details?.get(withConfigKeyModel: accountUsernameKey)
@@ -152,7 +152,7 @@ struct AccountModelHelper {
         }
     }
 
-    public var uri: String? {
+    var uri: String? {
         guard let details = self.account.details else { return nil }
         if self.account.type == AccountType.sip {
             let name = details
@@ -181,7 +181,7 @@ struct AccountModelHelper {
         }
     }
 
-    public var hasPassword: Bool {
+    var hasPassword: Bool {
         let noPassword: String = self.account.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword)) ?? "false"
         return noPassword == "true" ? true : false
     }

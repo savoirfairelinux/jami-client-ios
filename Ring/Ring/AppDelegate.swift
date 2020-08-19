@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
-    public lazy var injectionBag: InjectionBag = {
+    lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
                             withAccountService: self.accountService,
                             withNameService: self.nameService,
@@ -296,7 +296,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         })
     }
 
-    @objc private func registerVoipNotifications() {
+    @objc
+    private func registerVoipNotifications() {
         self.requestNotificationAuthorization()
         self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
     }

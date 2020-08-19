@@ -44,11 +44,11 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
         return items.count
     }
 
-    public func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 60
     }
 
-    public func rowForAccountId(account: AccountModel) -> Int? {
+    func rowForAccountId(account: AccountModel) -> Int? {
         return self.items.firstIndex { $0.account === account }
     }
 

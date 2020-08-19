@@ -71,7 +71,7 @@ enum SettingsSection: SectionModelType {
         }
     }
 
-    public init(original: SettingsSection, items: [SectionRow]) {
+    init(original: SettingsSection, items: [SectionRow]) {
         switch original {
         case .linkedDevices:
             self = .linkedDevices(items: items)
@@ -115,7 +115,7 @@ class MeViewModel: ViewModel, Stateable {
 
     var showActionState = Variable<ActionsState>(.noAction)
 
-    public func getRingId() -> String? {
+    func getRingId() -> String? {
         if let uri = self.accountService.currentAccount?.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername)) {
             let ringId = uri.replacingOccurrences(of: "ring:", with: "")
             return ringId

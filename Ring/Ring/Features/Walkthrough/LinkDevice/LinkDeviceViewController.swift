@@ -151,20 +151,22 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         }
     }
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         self.isKeyboardOpened = false
         self.becomeFirstResponder()
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillAppear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillAppear(withNotification: NSNotification) {
         self.isKeyboardOpened = true
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
         self.setContentInset()
-
     }
 
-    @objc func keyboardWillDisappear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillDisappear(withNotification: NSNotification) {
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
         self.setContentInset()
     }

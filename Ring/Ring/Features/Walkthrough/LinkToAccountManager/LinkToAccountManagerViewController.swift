@@ -71,13 +71,15 @@ var viewModel: LinkToAccountManagerViewModel!
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         self.isKeyboardOpened = false
         view.endEditing(true)
         self.view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillAppear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillAppear(withNotification: NSNotification) {
         self.isKeyboardOpened = true
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
     }

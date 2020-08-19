@@ -62,7 +62,8 @@ class ProfilesService {
                                                object: nil)
     }
 
-    @objc private func contactAdded(_ notification: NSNotification) {
+    @objc
+    private func contactAdded(_ notification: NSNotification) {
         guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
             return
         }
@@ -76,7 +77,8 @@ class ProfilesService {
     }
 
     // swiftlint:disable cyclomatic_complexity
-    @objc private func messageReceived(_ notification: NSNotification) {
+    @objc
+    private func messageReceived(_ notification: NSNotification) {
         guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
             return
         }

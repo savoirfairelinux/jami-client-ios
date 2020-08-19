@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 @objc public protocol GrowingTextViewDelegate: UITextViewDelegate {
-    @objc optional func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat)
+    @objc
+    optional func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat)
 }
 
 @IBDesignable
@@ -160,7 +161,8 @@ open class GrowingTextView: UITextView {
     }
 
     // Trim white space and new line characters when end editing.
-    @objc func textDidEndEditing(notification: Notification) {
+    @objc
+    func textDidEndEditing(notification: Notification) {
         if let sender = notification.object as? GrowingTextView, sender == self {
             if trimWhiteSpaceWhenEndEditing {
                 text = text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -171,7 +173,8 @@ open class GrowingTextView: UITextView {
     }
 
     // Limit the length of text
-    @objc func textDidChange(notification: Notification) {
+    @objc
+    func textDidChange(notification: Notification) {
         if let sender = notification.object as? GrowingTextView, sender == self {
             if maxLength > 0 && text.count > maxLength {
                 let endIndex = text.index(text.startIndex, offsetBy: maxLength)

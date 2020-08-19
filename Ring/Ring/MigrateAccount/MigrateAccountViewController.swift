@@ -83,11 +83,13 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc func keyboardWillAppear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillAppear(withNotification: NSNotification) {
         self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
-    @objc func keyboardWillDisappear(withNotification: NSNotification) {
+    @objc
+    func keyboardWillDisappear(withNotification: NSNotification) {
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
@@ -95,7 +97,8 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
         return true
     }
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         self.isKeyboardOpened = false
         self.becomeFirstResponder()
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)

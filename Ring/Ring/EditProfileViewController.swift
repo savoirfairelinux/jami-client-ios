@@ -72,7 +72,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         self.profileName.text = self.model.name
     }
 
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+    @objc
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
 
         let alert = UIAlertController.init(title: nil,
                                            message: nil,

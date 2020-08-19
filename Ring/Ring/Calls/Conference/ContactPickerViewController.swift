@@ -65,7 +65,8 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         }
     }
 
-    @objc func remove(gesture: UISwipeGestureRecognizer) {
+    @objc
+    func remove(gesture: UISwipeGestureRecognizer) {
         if gesture.direction != UISwipeGestureRecognizer.Direction.down { return }
         self.removeView()
     }

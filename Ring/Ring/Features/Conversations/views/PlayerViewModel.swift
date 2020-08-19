@@ -184,7 +184,8 @@ class PlayerViewModel {
 
     var currentTime: Int64 = 0
 
-    @objc func updateTimer(timer: Timer) {
+    @objc
+    func updateTimer(timer: Timer) {
         let time = self.videoService.getPlayerPosition(playerId: self.playerId)
         if time < 0 {
             return

@@ -267,7 +267,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
 // MARK: - iOS 9.3 - 10
 
-    @objc func answerIncomingCall(_ notification: NSNotification) {
+    @objc
+    func answerIncomingCall(_ notification: NSNotification) {
         guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String,
             let call = self.callService.call(callID: callid) else {
                 return

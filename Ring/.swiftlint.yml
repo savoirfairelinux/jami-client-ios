@@ -20,10 +20,10 @@ opt_in_rules: # some rules are only opt-in
   - collection_alignment
   - identical_operands
   - let_var_whitespace
-  #- attributes
-  #- lower_acl_than_parent
+  - attributes
+  - lower_acl_than_parent
   - strict_fileprivate
-  #- overridden_super_call
+  - overridden_super_call
   #- unowned_variable_capture
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
@@ -38,7 +38,7 @@ force_try:
 
 closure_body_length:
   - 60 # warning
-  - 287 # error
+  - 80 # error
 
 type_body_length:
   - 300 # warning
