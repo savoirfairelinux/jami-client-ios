@@ -59,8 +59,8 @@ class MeCoordinator: Coordinator, StateableResponsive {
 
         self.stateSubject
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] (state) in
-                guard let state = state as? MeState else { return }
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? MeState else { return }
                 switch state {
                 case .meDetail:
                     self.showMeDetail()

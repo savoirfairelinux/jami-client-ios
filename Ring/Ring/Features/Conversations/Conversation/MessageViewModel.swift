@@ -59,7 +59,8 @@ class MessageViewModel {
     var message: MessageModel
 
     var shouldShowTimeString: Bool = false
-    lazy var timeStringShown: String = { [unowned self] in
+    lazy var timeStringShown: String = { [weak self] in
+        guard let self = self else { return "" }
         return MessageViewModel.getTimeLabelString(forTime: self.receivedDate)
     }()
 

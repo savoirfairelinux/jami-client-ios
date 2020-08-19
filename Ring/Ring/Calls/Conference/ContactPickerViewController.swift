@@ -87,9 +87,10 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         self.removeView()
     }
 
-    private func removeView() {
-        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height * 2, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+    func removeView() {
+        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height * 2, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            guard let self = self else { return }
             self.view.frame = initialFrame
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.view.layoutIfNeeded()

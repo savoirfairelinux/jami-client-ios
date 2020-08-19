@@ -104,7 +104,8 @@ class JamiSearchViewModel {
         //Observe username lookup
         self.nameService.usernameLookupStatus
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self, unowned injectionBag] lookupResponse in
+            .subscribe(onNext: { [weak self, weak injectionBag] lookupResponse in
+                guard let self = self else { return }
                 if lookupResponse.state == .found && (lookupResponse.name == self.searchBarText.value || lookupResponse.address == self.searchBarText.value) {
                     if let conversation = self.dataSource.conversationViewModels
                                                           .filter({ conversationViewModel in
@@ -115,7 +116,8 @@ class JamiSearchViewModel {
 
                     } else if self.contactFoundConversation.value?.conversation.value.participantUri != lookupResponse.address &&
                         self.contactFoundConversation.value?.conversation.value.hash != lookupResponse.address,
-                        let account = self.accountsService.currentAccount {
+                        let account = self.accountsService.currentAccount,
+                        let injectionBag = injectionBag {
 
                         let uri = JamiURI.init(schema: URIType.ring, infoHach: lookupResponse.address)
                         //Create new converation

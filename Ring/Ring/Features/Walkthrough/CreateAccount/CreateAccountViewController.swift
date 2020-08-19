@@ -191,7 +191,8 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         // handle username registration visibility
         self.viewModel.registerUsername.asObservable()
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] (isOn) in
+            .subscribe(onNext: { [weak self] (isOn) in
+                guard let self = self else { return }
                 UIView.animate(withDuration: 0.3, animations: {
                     if isOn {
                         self.registerUsernameHeightConstraint.constant = self.registerUsernameHeightConstraintConstant
@@ -309,7 +310,8 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
         // Bind View Actions to ViewModel
         self.createAccountButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
                 DispatchQueue.main.async {
                     self.showAccountCreationInProgress()
                 }

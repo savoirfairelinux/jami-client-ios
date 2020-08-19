@@ -228,7 +228,8 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func initialAccountsLoading() -> Completable {
-        return Completable.create { [unowned self] completable in
+        return Completable.create { [weak self] completable in
+            guard let self = self else { return Disposables.create {} }
             self.loadAccountsFromDaemon()
             if self.accountList.isEmpty {
                 completable(.completed)
@@ -371,7 +372,8 @@ class AccountsService: AccountAdapterDelegate {
                 return accountModel
             }
             .take(1)
-            .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
+            .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
+                guard let self = self else { return Observable.empty() }
                 self.currentAccount = accountModel
                 UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
                 return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
@@ -454,7 +456,8 @@ class AccountsService: AccountAdapterDelegate {
                 return accountModel
             }
             .take(1)
-            .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
+            .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
+                guard let self = self else { return Observable.empty() }
                 return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
             })
     }
@@ -509,7 +512,8 @@ class AccountsService: AccountAdapterDelegate {
                             }
             }
             .take(1)
-            .flatMap({ [unowned self] (accountModel) -> Observable<AccountModel> in
+            .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
+                guard let self = self else { return Observable.empty() }
                 self.currentAccount = accountModel
                 UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
                 return self.getAccountFromDaemon(fromAccountId: accountModel.id).asObservable()
@@ -812,9 +816,12 @@ class AccountsService: AccountAdapterDelegate {
         self.responseStream.onNext(event)
     }
 
-    func exportOnRing(withPassword password: String)
-        -> Completable {
-            return Completable.create { [unowned self] completable in
+    func exportOnRing(withPassword password: String) -> Completable {
+            return Completable.create { [weak self] completable in
+                guard let self = self else {
+                    completable(.error(LinkNewDeviceError.unknownError))
+                    return Disposables.create {}
+                }
                 let export = self.accountAdapter.export(onRing: self.currentAccount?.id, password: password)
                 if export {
                     completable(.completed)

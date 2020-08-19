@@ -54,8 +54,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
         self.stateSubject
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] (state) in
-                guard let state = state as? ConversationState else { return }
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? ConversationState else { return }
                 switch state {
                 case .createNewAccount:
                     self.createNewAccount()
@@ -89,7 +89,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
         self.accountService.currentAccountChanged
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: {[unowned self] _ in
+            .subscribe(onNext: {[weak self] _ in
+                guard let self = self else { return }
                 self.navigationViewController.viewModel =
                     ChatTabBarItemViewModel(with: self.injectionBag)
             })

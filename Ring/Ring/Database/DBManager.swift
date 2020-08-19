@@ -335,8 +335,8 @@ class DBManager {
     }
 
     func updateMessageStatus(daemonID: String, withStatus status: MessageStatus, accountId: String) -> Completable {
-        return Completable.create { [unowned self] completable in
-            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+        return Completable.create { [weak self] completable in
+            if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 let success = self.interactionHepler
                     .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
                                                    interactionStatus: InteractionStatus(status: status).rawValue,
@@ -372,8 +372,8 @@ class DBManager {
     }
 
     func updateFileName(interactionID: Int64, name: String, accountId: String) -> Completable {
-        return Completable.create { [unowned self] completable in
-            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+        return Completable.create { [weak self] completable in
+            if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 let success = self.interactionHepler
                     .updateInteractionContentWithID(interactionID: interactionID, content: name, dataBase: dataBase)
                 if success {
@@ -389,8 +389,8 @@ class DBManager {
     }
 
     func updateTransferStatus(daemonID: String, withStatus transferStatus: DataTransferStatus, accountId: String) -> Completable {
-        return Completable.create { [unowned self] completable in
-            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+        return Completable.create { [weak self] completable in
+            if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 let success = self.interactionHepler
                     .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
                                                    interactionStatus: InteractionStatus(status: transferStatus).rawValue,
@@ -408,8 +408,8 @@ class DBManager {
     }
 
     func setMessagesAsRead(messagesIDs: [Int64], withStatus status: MessageStatus, accountId: String) -> Completable {
-        return Completable.create { [unowned self] completable in
-            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+        return Completable.create { [weak self] completable in
+            if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 var success = true
                 for messageId in messagesIDs {
                     if !self.interactionHepler
@@ -432,8 +432,8 @@ class DBManager {
     }
 
     func deleteMessage(messagesId: Int64, accountId: String) -> Completable {
-        return Completable.create { [unowned self] completable in
-            if let dataBase = self.dbConnections.forAccount(account: accountId) {
+        return Completable.create { [weak self] completable in
+            if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 if self.interactionHepler.delete(interactionId: messagesId, dataBase: dataBase) {
                     completable(.completed)
                 } else {
@@ -447,9 +447,9 @@ class DBManager {
     }
 
     func clearAllHistoryFor(accountId: String) -> Completable {
-        return Completable.create { [unowned self] completable in
+        return Completable.create { [weak self] completable in
             do {
-                guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+                guard let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) else {
                     throw DBBridgingError.deleteConversationFailed
                 }
                 try dataBase.transaction {
@@ -474,9 +474,9 @@ class DBManager {
     func clearHistoryFor(accountId: String,
                          and participantUri: String,
                          keepConversation: Bool) -> Completable {
-        return Completable.create { [unowned self] completable in
+        return Completable.create { [weak self] completable in
             do {
-                guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+                guard let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) else {
                     throw DBBridgingError.deleteConversationFailed
                 }
                 try dataBase.transaction {

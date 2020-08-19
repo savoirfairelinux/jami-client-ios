@@ -80,8 +80,8 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         self.prepareMainInterface()
 
         self.stateSubject
-            .subscribe(onNext: { [unowned self] (state) in
-                guard let state = state as? AppState else { return }
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? AppState else { return }
                 switch state {
                 case .initialLoading:
                     self.showInitialLoading()
