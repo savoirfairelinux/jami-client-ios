@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29ba9db2_ce5800cb",
+        "filename": "Ring/Ring/UI/CopyableLabel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2020-08-19T14:48:35Z",
+      "side": 1,
+      "message": "2020",
+      "revId": "4999c40ae8f605c2b62c91f02707898c7d9f0698",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
