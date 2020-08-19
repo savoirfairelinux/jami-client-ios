@@ -66,7 +66,7 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
         self.viewModel
             .blockedContactsItems
             .observeOn(MainScheduler.instance)
-            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: BannedContactCell.self)) { [unowned self] _, item, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: BannedContactCell.self)) { [weak self] _, item, cell in
                 cell.configureFromItem(item)
                 cell.unblockButton.rx.tap
                     .subscribe(onNext: { [weak self, weak item] in

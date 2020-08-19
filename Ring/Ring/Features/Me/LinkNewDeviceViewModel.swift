@@ -116,8 +116,8 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
                             return exportComplitedEvent.eventType == ServiceEventType.exportOnRingEnded
                                 && exportComplitedEvent.getEventInput(.id) == account.id
                         })
-                        .subscribe(onNext: { [unowned self] exportComplitedEvent in
-                            if let state: Int = exportComplitedEvent.getEventInput(.state) {
+                        .subscribe(onNext: { [weak self] exportComplitedEvent in
+                            if let self = self, let state: Int = exportComplitedEvent.getEventInput(.state) {
                                 switch state {
                                 case ExportAccountResponse.success.rawValue:
                                     if let pin: String = exportComplitedEvent.getEventInput(.pin) {

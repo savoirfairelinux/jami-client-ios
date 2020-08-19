@@ -66,8 +66,8 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                                       message: self.viewModel.explanationMessage,
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: L10n.Global.ok,
-                                   style: .default) { [unowned self] _ in
-            self.dismiss(animated: true, completion: nil)
+                                   style: .default) { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
@@ -79,12 +79,13 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                                       preferredStyle: .alert)
         let actionCancel =
             UIAlertAction(title: L10n.Actions.cancelAction,
-                          style: .cancel) { [unowned self] _ in
-            self.dismiss(animated: true, completion: nil)
+                          style: .cancel) { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
             }
         let actionLink =
             UIAlertAction(title: L10n.Global.ok,
-                          style: .default) {[unowned self] _ in
+                          style: .default) {[weak self] _ in
+                            guard let self = self else { return }
                             if !self.viewModel.hasPassord {
                                 self.viewModel.linkDevice(with: "")
                                 return
@@ -110,8 +111,8 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                                       message: error,
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: L10n.Global.ok,
-                                   style: .cancel) {[unowned self] _ in
-            self.dismiss(animated: true, completion: nil)
+                                   style: .cancel) {[weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)

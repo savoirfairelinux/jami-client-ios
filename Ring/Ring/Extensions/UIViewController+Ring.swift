@@ -75,7 +75,8 @@ extension UIViewController {
     func adaptToKeyboardState (for scrollView: UIScrollView, with disposeBag: DisposeBag) {
 
         NotificationCenter.keyboardHeight.observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self, unowned scrollView] (height) in
+            .subscribe(onNext: { [weak self, weak scrollView] (height) in
+                guard let self = self, let scrollView = scrollView else { return }
                 let trueHeight = height > 0 ? height + 100 : 0.0
                 let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: trueHeight, right: 0.0)
 
@@ -98,7 +99,8 @@ extension UIViewController {
     func adaptTableToKeyboardState (for tableView: UITableView, with disposeBag: DisposeBag, topOffset: CGFloat? = nil, bottomOffset: CGFloat? = nil) {
         NotificationCenter.keyboardHeight
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self, unowned tableView] (height) in
+            .subscribe(onNext: { [weak self, weak tableView] (height) in
+                guard let self = self, let tableView = tableView else { return }
                 let trueHeight = height > 0  ? height + 100 : 0.0
                 // reset insets if they were changed before
                 if tableView.contentInset.bottom > 0 && trueHeight <= 0 {

@@ -73,7 +73,8 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
     func removeView() {
         let initialFrame = CGRect(x: 0, y: self.view.frame.size.height * 2, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
-        UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            guard let self = self else { return }
             self.view.frame = initialFrame
             self.view.layoutIfNeeded()
             }, completion: { [weak self] _ in
@@ -158,8 +159,8 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         self.tableView.delegate = self
         self.tableView.register(cellType: SmartListCell.self)
         self.tableView.rx.itemSelected
-            .subscribe(onNext: { [unowned self] indexPath in
-                if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: indexPath) {
+            .subscribe(onNext: { [weak self] indexPath in
+                if let self = self, let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: indexPath) {
                     self.viewModel.addContactToConference(contact: contactToAdd)
                     self.removeView()
                 }
@@ -178,8 +179,8 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             .bind(to: self.viewModel.search)
             .disposed(by: disposeBag)
         self.searchBar.rx.searchButtonClicked
-            .subscribe(onNext: { [unowned self] in
-                self.searchBar.resignFirstResponder()
+            .subscribe(onNext: { [weak self] in
+                self?.searchBar.resignFirstResponder()
             })
             .disposed(by: disposeBag)
     }

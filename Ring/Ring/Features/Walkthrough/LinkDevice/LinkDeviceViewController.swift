@@ -67,14 +67,14 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
         //bind view model to view
         self.pinInfoButton.rx.tap
-            .subscribe(onNext: { [unowned self] (_) in
-                self.showPinInfo()
+            .subscribe(onNext: { [weak self] (_) in
+                self?.showPinInfo()
             })
             .disposed(by: self.disposeBag)
 
         self.linkButton.rx.tap
-            .subscribe(onNext: { [unowned self] (_) in
-                self.viewModel.linkDevice()
+            .subscribe(onNext: { [weak self] (_) in
+                self?.viewModel.linkDevice()
             })
             .disposed(by: self.disposeBag)
 

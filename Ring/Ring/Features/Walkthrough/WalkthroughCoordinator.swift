@@ -67,8 +67,8 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         self.injectionBag = injectionBag
 
         self.stateSubject
-            .subscribe(onNext: { [unowned self] (state) in
-                guard let state = state as? WalkthroughState else { return }
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? WalkthroughState else { return }
                 switch state {
                 case .welcomeDone(let walkthroughType):
                     self.showAddAccount(with: walkthroughType)

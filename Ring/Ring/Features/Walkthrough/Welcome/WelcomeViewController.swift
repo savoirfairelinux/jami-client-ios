@@ -76,8 +76,8 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             cancelButton.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
             let buttonItem = UIBarButtonItem(customView: cancelButton)
             cancelButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-                .subscribe(onNext: { [unowned self] in
-                    self.viewModel.cancelWalkthrough()
+                .subscribe(onNext: { [weak self] in
+                    self?.viewModel.cancelWalkthrough()
                 })
                 .disposed(by: self.disposeBag)
             self.navigationItem.leftBarButtonItem = buttonItem
@@ -86,26 +86,26 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         Observable.just(!self.viewModel.notCancelable).bind(to: self.createSipAccountButton.rx.isEnabled).disposed(by: self.disposeBag)
         // Bind View Actions to ViewModel
         self.createAccountButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.proceedWithAccountCreation()
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.proceedWithAccountCreation()
             })
             .disposed(by: self.disposeBag)
 
         self.linkDeviceButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.proceedWithLinkDevice()
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.proceedWithLinkDevice()
             })
             .disposed(by: self.disposeBag)
 
         self.createSipAccountButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.createSipAccount()
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.createSipAccount()
             })
             .disposed(by: self.disposeBag)
 
         self.connectToAccountManagerButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.linkToAccountManager()
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.linkToAccountManager()
             })
             .disposed(by: self.disposeBag)
         view.backgroundColor = UIColor.jamiBackgroundColor

@@ -71,8 +71,8 @@ class ConversationsManager: MessagesAdapterDelegate {
                 guard let contactUri = data[NotificationUserInfoKeys.participantID.rawValue],
                       let hash = JamiURI(schema: URIType.ring, infoHach: contactUri).hash else { return }
 
-                DispatchQueue.main.async { [unowned self] in
-                    self.searchNameAndPresentNotification(data: data, hash: hash)
+                DispatchQueue.main.async { [weak self] in
+                    self?.searchNameAndPresentNotification(data: data, hash: hash)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -129,10 +129,12 @@ class ConversationsManager: MessagesAdapterDelegate {
     }
 
     private func subscribeCallsEvents() {
-        self.callService.newMessage.filter({ (event) in
-            return  event.eventType == ServiceEventType.newIncomingMessage
-        })
-            .subscribe(onNext: { [unowned self] event in
+        self.callService.newMessage
+            .filter({ (event) in
+                return  event.eventType == ServiceEventType.newIncomingMessage
+            })
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self else { return }
                 if self.accountsService.boothMode() {
                     return
                 }
@@ -148,10 +150,12 @@ class ConversationsManager: MessagesAdapterDelegate {
             })
             .disposed(by: disposeBag)
 
-        self.callService.newMessage.filter({ (event) in
-            return  event.eventType == ServiceEventType.newOutgoingMessage
-        })
-            .subscribe(onNext: { [unowned self] event in
+        self.callService.newMessage
+            .filter({ (event) in
+                return  event.eventType == ServiceEventType.newOutgoingMessage
+            })
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self else { return }
                 if self.accountsService.boothMode() {
                     return
                 }
@@ -181,11 +185,12 @@ class ConversationsManager: MessagesAdapterDelegate {
                 return  event.eventType == ServiceEventType.dataTransferCreated ||
                     event.eventType == ServiceEventType.dataTransferChanged
             })
-            .subscribe(onNext: { [unowned self] event in
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self else { return }
                 if self.accountsService.boothMode() {
                     return
                 }
-                guard   let transferId: UInt64 = event.getEventInput(ServiceEventInput.transferId),
+                guard let transferId: UInt64 = event.getEventInput(ServiceEventInput.transferId),
                     let transferInfo = self.dataTransferService.getTransferInfo(withId: transferId),
                     let currentAccount = self.accountsService.currentAccount else {
                         self.log.error("ConversationsManager: can't find transferInfo")
@@ -254,19 +259,19 @@ class ConversationsManager: MessagesAdapterDelegate {
             return
         }
         if let content = message[textPlainMIMEType] {
-            DispatchQueue.main.async { [unowned self] in
-                self.handleNewMessage(from: senderAccount,
-                                      to: receiverAccountId,
-                                      messageId: messageId,
-                                      message: content,
-                                      peerName: nil)
+            DispatchQueue.main.async { [weak self] in
+                self?.handleNewMessage(from: senderAccount,
+                                       to: receiverAccountId,
+                                       messageId: messageId,
+                                       message: content,
+                                       peerName: nil)
             }
         } else if let content = message[geoLocationMIMEType] {
-            DispatchQueue.main.async { [unowned self] in
-                self.handleReceivedLocationUpdate(from: senderAccount,
-                                                  to: receiverAccountId,
-                                                  messageId: messageId,
-                                                  locationJSON: content)
+            DispatchQueue.main.async { [weak self] in
+                self?.handleReceivedLocationUpdate(from: senderAccount,
+                                                   to: receiverAccountId,
+                                                   messageId: messageId,
+                                                   locationJSON: content)
             }
         }
     }

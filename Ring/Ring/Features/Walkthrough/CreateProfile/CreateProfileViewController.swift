@@ -112,7 +112,8 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
         // Bind View Actions to ViewModel
         self.skipButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
                 if let name = self.profileName.text {
                     self.model.updateName(name)
                 }

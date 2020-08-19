@@ -47,7 +47,8 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
         self.configureRingNavigationBar()
         self.tableView.rx.modelSelected(ContactRequestItem.self)
-            .subscribe({ [unowned self] item in
+            .subscribe({ [weak self] item in
+                guard let self = self else { return }
                 if let ringId = item.element?.contactRequest.ringId {
                     self.viewModel.showConversation(forRingId: ringId)
                 }
@@ -82,7 +83,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         self.viewModel
             .contactRequestItems
             .observeOn(MainScheduler.instance)
-            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: ContactRequestCell.self)) { [unowned self] _, item, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: ContactRequestCell.self)) { [weak self] _, item, cell in
                 cell.configureFromItem(item)
 
                 //Accept button
@@ -123,30 +124,30 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     func acceptButtonTapped(withItem item: ContactRequestItem) {
         viewModel.accept(withItem: item)
-            .subscribe(onError: { [unowned self] error in
-                self.log.error("Accept trust request failed")
-                }, onCompleted: { [unowned self] in
-                    self.log.info("Accept trust request done")
+            .subscribe(onError: { [weak self] error in
+                self?.log.error("Accept trust request failed")
+                }, onCompleted: { [weak self] in
+                    self?.log.info("Accept trust request done")
             })
             .disposed(by: self.disposeBag)
     }
 
     func discardButtonTapped(withItem item: ContactRequestItem) {
         viewModel.discard(withItem: item)
-            .subscribe(onError: { [unowned self] error in
-                self.log.error("Discard trust request failed")
-                }, onCompleted: { [unowned self] in
-                    self.log.info("Discard trust request done")
+            .subscribe(onError: { [weak self] error in
+                self?.log.error("Discard trust request failed")
+                }, onCompleted: { [weak self] in
+                    self?.log.info("Discard trust request done")
             })
             .disposed(by: self.disposeBag)
     }
 
     func banButtonTapped(withItem item: ContactRequestItem) {
         viewModel.ban(withItem: item)
-            .subscribe(onError: { [unowned self] error in
-                self.log.error("Ban trust request failed")
-                }, onCompleted: { [unowned self] in
-                    self.log.info("Ban trust request done")
+            .subscribe(onError: { [weak self] error in
+                self?.log.error("Ban trust request failed")
+                }, onCompleted: { [weak self] in
+                    self?.log.info("Ban trust request done")
             })
             .disposed(by: self.disposeBag)
     }
