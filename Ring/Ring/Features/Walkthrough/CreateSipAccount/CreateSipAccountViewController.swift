@@ -126,7 +126,8 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         rightButton.tintColor = UIColor.darkGray
         passwordTextField.leftView = leftView
         rightButton.rx.tap
-            .subscribe(onNext: { [unowned self, isSecureTextEntry] _ in
+            .subscribe(onNext: { [weak self, isSecureTextEntry] _ in
+                guard let self = self else { return }
                 self.passwordTextField.isSecureTextEntry.toggle()
                 isSecureTextEntry
                     .onNext(self.passwordTextField.isSecureTextEntry)
@@ -150,7 +151,8 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
             .bind(to: self.viewModel.port)
             .disposed(by: self.disposeBag)
         self.createAccountButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
                 DispatchQueue.global(qos: .background).async {
                     self.viewModel.createSipaccount()
                 }

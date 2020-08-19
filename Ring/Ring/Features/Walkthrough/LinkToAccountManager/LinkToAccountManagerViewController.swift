@@ -96,7 +96,8 @@ var viewModel: LinkToAccountManagerViewModel!
         self.accountManagerTextField.rx.text.orEmpty
             .bind(to: self.viewModel.manager).disposed(by: self.disposeBag)
         self.signInButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
                 DispatchQueue.global(qos: .background).async {
                     self.viewModel.linkToAccountManager()
                 }

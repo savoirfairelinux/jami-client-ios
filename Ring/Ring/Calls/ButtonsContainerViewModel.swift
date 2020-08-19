@@ -38,7 +38,8 @@ class ButtonsContainerViewModel {
     var isConference = false
 
     let avalaibleCallOptions = BehaviorSubject<CallOptions>(value: .none)
-    lazy var observableCallOptions: Observable<CallOptions> = { [unowned self] in
+    lazy var observableCallOptions: Observable<CallOptions> = { [weak self] in
+        guard let self = self else { return Observable.empty() }
         return self.avalaibleCallOptions.asObservable()
     }()
 
@@ -84,7 +85,8 @@ class ButtonsContainerViewModel {
     }
 
     private func connectToSpeaker() {
-        let speakerIsAvailable: Observable<Bool> = { [unowned self] in
+        let speakerIsAvailable: Observable<Bool> = { [weak self] in
+            guard let self = self else { return Observable.empty() }
             return self.audioService.enableSwitchAudio.map({ (hide)  in
                 !hide
             })

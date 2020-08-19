@@ -309,9 +309,9 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var settings: Observable<[SettingsSection]> = {
         self.accountService.currentAccountChanged
-            .subscribe(onNext: { [unowned self] account in
+            .subscribe(onNext: { [weak self] account in
                 if let currentAccount = account {
-                    self.updateDataFor(account: currentAccount)
+                    self?.updateDataFor(account: currentAccount)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -370,8 +370,8 @@ class MeViewModel: ViewModel, Stateable {
                 }
                 return true
             }
-            .subscribe(onNext: { [unowned self] _ in
-                if  !self.userNameForAccount(account: account).isEmpty {
+            .subscribe(onNext: { [weak self] _ in
+                if let self = self, !self.userNameForAccount(account: account).isEmpty {
                     self.currentAccountUserName
                         .onNext(self.userNameForAccount(account: account))
                 }
@@ -386,15 +386,15 @@ class MeViewModel: ViewModel, Stateable {
             currentAccountJamiId.onNext("")
         }
         self.accountService.devicesObservable(account: account)
-            .subscribe(onNext: { [unowned self] devices in
-                self.currentAccountDevices.onNext(devices)
+            .subscribe(onNext: { [weak self] devices in
+                self?.currentAccountDevices.onNext(devices)
             })
             .disposed(by: self.tempBag)
         self.accountService.proxyEnabled(accountID: account.id)
             .asObservable()
-            .subscribe(onNext: { [unowned self] enable in
-                self.notificationsEnabled = enable
-                self.currentAccountProxy.onNext(enable)
+            .subscribe(onNext: { [weak self] enable in
+                self?.notificationsEnabled = enable
+                self?.currentAccountProxy.onNext(enable)
             })
             .disposed(by: self.tempBag)
     }
@@ -424,8 +424,8 @@ class MeViewModel: ViewModel, Stateable {
 
     func subscribeForNameLokup(disposeBug: DisposeBag) {
         newUsername.asObservable()
-            .subscribe(onNext: { [unowned self] username in
-                self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+            .subscribe(onNext: { [weak self] username in
+                self?.nameService.lookupName(withAccount: "", nameserver: "", name: username)
             })
             .disposed(by: disposeBug)
 
@@ -505,8 +505,8 @@ class MeViewModel: ViewModel, Stateable {
                 return deviceEvent.eventType == ServiceEventType.deviceRevocationEnded
                     && deviceEvent.getEventInput(.id) == accountId
             })
-            .subscribe(onNext: { [unowned self] deviceEvent in
-                if let state: Int = deviceEvent.getEventInput(.state),
+            .subscribe(onNext: { [weak self] deviceEvent in
+                if let self = self, let state: Int = deviceEvent.getEventInput(.state),
                     let deviceID: String = deviceEvent.getEventInput(.deviceId) {
                     switch state {
                     case DeviceRevocationState.success.rawValue:
@@ -555,9 +555,9 @@ class MeViewModel: ViewModel, Stateable {
         return currentAccountState.share().startWith(state)
     }()
 
-    lazy var userName: Observable<String> = { [unowned self] in
+    lazy var userName: Observable<String> = { [weak self] in
         var initialValue: String = ""
-        if let account = self.accountService.currentAccount {
+        if let account = self?.accountService.currentAccount {
             if !account.registeredName.isEmpty {
                 initialValue = account.registeredName
             } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
@@ -569,23 +569,24 @@ class MeViewModel: ViewModel, Stateable {
         return currentAccountUserName.share().startWith(initialValue)
     }()
 
-    lazy var ringId: Observable<String> = { [unowned self] in
+    lazy var ringId: Observable<String> = { [weak self] in
         var initialValue: String = ""
-        if let account = self.accountService.currentAccount {
+        if let account = self?.accountService.currentAccount {
             let jamiId = account.jamiId
             initialValue = jamiId
         }
         return currentAccountJamiId.share().startWith(initialValue)
     }()
 
-    lazy var linkedDevices: Observable<SettingsSection> = { [unowned self] in
+    lazy var linkedDevices: Observable<SettingsSection> = { [weak self] in
+        guard let self = self else { return Observable.empty() }
         let empptySection: SettingsSection =
             .linkedDevices(items: [.ordinary(label: "")])
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
             if let account = self.accountService.currentAccount {
                 self.accountService.devicesObservable(account: account)
-                    .subscribe(onNext: { [unowned self] device in
-                        self.currentAccountDevices.onNext(device)
+                    .subscribe(onNext: { [weak self] device in
+                        self?.currentAccountDevices.onNext(device)
                     })
                     .disposed(by: self.tempBag)
             }
@@ -621,18 +622,18 @@ class MeViewModel: ViewModel, Stateable {
             }
         }()
 
-    lazy var proxyEnabled: Observable<Bool> = { [unowned self] in
+    lazy var proxyEnabled: Observable<Bool> = { [weak self] in
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
-        if let account = self.accountService.currentAccount {
-            self.accountService.proxyEnabled(accountID: account.id)
-                .asObservable()
-                .take(1)
-                .subscribe(onNext: { [unowned self] enable in
-                    self.currentAccountProxy.onNext(enable)
-                    self.notificationsEnabled = enable
-                })
-                .disposed(by: self.disposeBag)
-        }
+            if let self = self, let account = self.accountService.currentAccount {
+                self.accountService.proxyEnabled(accountID: account.id)
+                    .asObservable()
+                    .take(1)
+                    .subscribe(onNext: { [weak self] enable in
+                        self?.currentAccountProxy.onNext(enable)
+                        self?.notificationsEnabled = enable
+                    })
+                    .disposed(by: self.disposeBag)
+            }
         })
         return currentAccountProxy.share()
     }()

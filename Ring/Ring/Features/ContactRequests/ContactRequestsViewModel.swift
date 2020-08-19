@@ -56,7 +56,8 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     lazy var contactRequestItems: Observable<[ContactRequestItem]> = {
         return self.contactsService.contactRequests
             .asObservable()
-            .map({ [unowned self] contactRequests in
+            .map({ [weak self] contactRequests in
+                guard let self = self else { return [] }
                 return contactRequests
                     .filter { $0.accountId == self.accountsService.currentAccount?.id }
                     .sorted { $0.receivedDate > $1.receivedDate }
@@ -73,9 +74,9 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     lazy var hasInvitations: Observable<Bool> = {
         return self.contactsService.contactRequests
             .asObservable()
-            .map({ [unowned self] contactRequests in
+            .map({ [weak self] contactRequests in
                 return contactRequests
-                    .filter { $0.accountId == self.accountsService.currentAccount?.id }
+                    .filter { $0.accountId == self?.accountsService.currentAccount?.id }
             })
             .map({ items in
                 return !items.isEmpty

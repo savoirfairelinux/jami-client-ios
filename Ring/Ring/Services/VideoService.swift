@@ -113,7 +113,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func startCapturing() {
-        sessionQueue.async { [unowned self] in
+        sessionQueue.async { [weak self] in
+            guard let self = self else { return }
             if self.captureSession.canSetSessionPreset(self.quality) {
                 self.captureSession.beginConfiguration()
                 self.captureSession.sessionPreset = self.quality
@@ -129,8 +130,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func stopCapturing() {
-        sessionQueue.async { [unowned self] in
-            self.captureSession.stopRunning()
+        sessionQueue.async { [weak self] in
+            self?.captureSession.stopRunning()
         }
     }
 
@@ -147,9 +148,9 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private func requestPermission() {
         sessionQueue.suspend()
-        AVCaptureDevice.requestAccess(for: AVMediaType.video) { [unowned self] granted in
-            self.permissionGranted.value = granted
-            self.sessionQueue.resume()
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] granted in
+            self?.permissionGranted.value = granted
+            self?.sessionQueue.resume()
         }
     }
 
@@ -198,7 +199,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func switchCamera() -> Completable {
-        return Completable.create { [unowned self] completable in
+        return Completable.create { [weak self] completable in
+            guard let self = self else { return Disposables.create { } }
             self.captureSession.beginConfiguration()
             guard let currentCameraInput: AVCaptureInput = self.captureSession.inputs.first else {
                 completable(.error(VideoError.switchCameraFailed))
@@ -250,7 +252,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func rotateCamera(orientation: AVCaptureVideoOrientation) -> Completable {
-        return Completable.create { [unowned self] completable in
+        return Completable.create { [weak self] completable in
+            guard let self = self else { return Disposables.create { } }
             guard self.permissionGranted.value else {
                 completable(.error(VideoError.needPermission))
                 return Disposables.create {}
@@ -284,8 +287,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
-        DispatchQueue.main.async { [unowned self] in
-            self.delegate?.captured(imageBuffer: imageBuffer, image: uiImage)
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.captured(imageBuffer: imageBuffer, image: uiImage)
         }
     }
 }

@@ -75,15 +75,15 @@ class ContactViewModel: ViewModel, Stateable {
             }
             if account.type == AccountType.ring {
                 self.nameService.usernameLookupStatus
-                    .filter({ [unowned self] lookupNameResponse in
+                    .filter({ [weak self] lookupNameResponse in
                         return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == self.conversation.participantUri
+                            lookupNameResponse.address == self?.conversation.participantUri
                     })
-                    .subscribe(onNext: { [unowned self] lookupNameResponse in
+                    .subscribe(onNext: { [weak self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
-                            self.userName.value = name
+                            self?.userName.value = name
                         } else if let address = lookupNameResponse.address {
-                            self.userName.value = address
+                            self?.userName.value = address
                         }
                     })
                     .disposed(by: disposeBag)
@@ -112,7 +112,8 @@ class ContactViewModel: ViewModel, Stateable {
             }
             self.contactService
                 .getContactRequestVCard(forContactWithRingId: conversation.participantUri)
-                .subscribe(onSuccess: { [unowned self] vCard in
+                .subscribe(onSuccess: { [weak self] vCard in
+                    guard let self = self else { return }
                     if !VCardUtils.getName(from: vCard).isEmpty {
                         self.displayName.value = VCardUtils.getName(from: vCard)
                     }
@@ -125,7 +126,8 @@ class ContactViewModel: ViewModel, Stateable {
             self.profileService.getProfile(uri: conversation.participantUri,
                                            createIfNotexists: false,
                                            accountId: conversation.accountId)
-                .subscribe(onNext: { [unowned self] profile in
+                .subscribe(onNext: { [weak self] profile in
+                    guard let self = self else { return }
                     if let alias = profile.alias, !alias.isEmpty {
                         self.displayName.value = alias
                     }
@@ -187,7 +189,8 @@ class ContactViewModel: ViewModel, Stateable {
                                                                 ban: true,
                                                                 withAccountId: accountId)
         removeCompleted.asObservable()
-            .subscribe(onCompleted: { [unowned self] in
+            .subscribe(onCompleted: { [weak self] in
+                guard let self = self else { return }
                 self.conversationService
                     .clearHistory(conversation: self.conversation,
                                   keepConversation: false)

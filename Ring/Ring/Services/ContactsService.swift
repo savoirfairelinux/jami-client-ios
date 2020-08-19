@@ -142,7 +142,8 @@ class ContactsService {
     }
 
     func accept(contactRequest: ContactRequestModel, withAccount account: AccountModel) -> Observable<Void> {
-        return Observable.create { [unowned self] observable in
+        return Observable.create { [weak self] observable in
+            guard let self = self else { return Disposables.create { } }
             let success = self.contactsAdapter.acceptTrustRequest(fromContact: contactRequest.ringId,
                                                                   withAccountId: account.id)
             if success {
@@ -176,7 +177,8 @@ class ContactsService {
     }
 
     func discard(from jamiId: String, withAccountId accountId: String) -> Observable<Void> {
-        return Observable.create { [unowned self] observable in
+        return Observable.create { [weak self] observable in
+            guard let self = self else { return Disposables.create { } }
             let success = self.contactsAdapter.discardTrustRequest(fromContact: jamiId,
                                                                    withAccountId: accountId)
 
@@ -197,7 +199,8 @@ class ContactsService {
     }
 
     func sendContactRequest(toContactRingId ringId: String, withAccount account: AccountModel) -> Completable {
-        return Completable.create { [unowned self] completable in
+        return Completable.create { [weak self] completable in
+            guard let self = self else { return Disposables.create { } }
             do {
                 var payload: Data?
                 if let accountProfile = self.dbManager.accountProfile(for: account.id) {
@@ -230,7 +233,8 @@ class ContactsService {
     }
 
     func addContact(contact: ContactModel, withAccount account: AccountModel) -> Observable<Void> {
-        return Observable.create { [unowned self] observable in
+        return Observable.create { [weak self] observable in
+            guard let self = self else { return Disposables.create { } }
             self.contactsAdapter.addContact(withURI: contact.hash, accountId: account.id)
             if self.contact(withUri: contact.uriString ?? "") == nil {
                 self.contacts.value.append(contact)
@@ -241,7 +245,8 @@ class ContactsService {
     }
 
     func removeContact(withUri uri: String, ban: Bool, withAccountId accountId: String) -> Observable<Void> {
-        return Observable.create { [unowned self] observable in
+        return Observable.create { [weak self] observable in
+            guard let self = self else { return Disposables.create { } }
             guard let hash = JamiURI
                 .init(schema: URIType.ring,
                       infoHach: uri).hash else {

@@ -382,8 +382,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.conversationsTableView.register(cellType: SmartListCell.self)
         //Deselect the rows
         self.conversationsTableView.rx.itemSelected
-            .subscribe(onNext: { [unowned self] indexPath in
-                self.conversationsTableView.deselectRow(at: indexPath, animated: true)
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.conversationsTableView.deselectRow(at: indexPath, animated: true)
             })
             .disposed(by: disposeBag)
 
