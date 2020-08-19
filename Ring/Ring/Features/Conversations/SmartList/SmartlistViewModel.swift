@@ -92,9 +92,9 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     //Values need to be updated when selected account changed
     var profileImageForCurrentAccount = PublishSubject<Profile>()
 
-    lazy var profileImage: Observable<UIImage> = { [unowned self] in
+    lazy var profileImage: Observable<UIImage> = { [weak self] in
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
-            if let account = self.accountsService.currentAccount {
+            if let self = self, let account = self.accountsService.currentAccount {
                 self.profileService.getAccountProfile(accountId: account.id)
                     .subscribe(onNext: { profile in
                         self.profileImageForCurrentAccount.onNext(profile)
@@ -112,7 +112,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                     }
                     return image
                 }
-                guard let account = self.accountsService.currentAccount else {
+                guard let account = self?.accountsService.currentAccount else {
                     return UIImage(asset: Asset.icContactPicture)!
                 }
                 guard let name = profile.alias else { return UIImage.defaultJamiAvatarFor(profileName: nil, account: account) }
@@ -122,7 +122,8 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             .startWith(UIImage(asset: Asset.icContactPicture)!)
         }()
 
-    lazy var conversations: Observable<[ConversationSection]> = { [unowned self] in
+    lazy var conversations: Observable<[ConversationSection]> = { [weak self] in
+        guard let self = self else { return Observable.empty() }
         //get initial value
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
             self.conversationsService
@@ -214,17 +215,17 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             .disposed(by: self.disposeBag)
 
         self.accountsService.currentAccountChanged
-            .subscribe(onNext: { [unowned self] account in
+            .subscribe(onNext: { [weak self] account in
                 if let currentAccount = account {
-                    self.reloadDataFor(accountId: currentAccount.id)
+                    self?.reloadDataFor(accountId: currentAccount.id)
                 }
             })
             .disposed(by: self.disposeBag)
 
         // Observe connectivity changes
         self.networkService.connectionStateObservable
-            .subscribe(onNext: { [unowned self] value in
-                self.connectionState.onNext(value)
+            .subscribe(onNext: { [weak self] value in
+                self?.connectionState.onNext(value)
             })
             .disposed(by: self.disposeBag)
     }

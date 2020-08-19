@@ -60,7 +60,8 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
                                      password: password.value,
                                      serverUri: manager.value,
                                      emableNotifications: self.notificationSwitch.value)
-            .subscribe(onNext: { [unowned self] (_) in
+            .subscribe(onNext: { [weak self] (_) in
+                guard let self = self else { return }
                 self.accountCreationState.value = .success
                 self.enablePushNotifications(enable: self.notificationSwitch.value)
                 DispatchQueue.main.async {
