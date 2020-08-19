@@ -47,7 +47,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
 
         //Binds the keyboard Send button action to the ViewModel
         self.profileName.rx.controlEvent(.editingDidEndOnExit)
-            .subscribe(onNext: { [unowned self] _ in
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 self.model.updateName(self.profileName.text!)
             })
             .disposed(by: disposeBag)

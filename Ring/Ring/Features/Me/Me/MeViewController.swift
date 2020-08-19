@@ -130,13 +130,13 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         let infoItem = UIBarButtonItem(customView: infoButton)
         let qrCodeButtonItem = UIBarButtonItem(customView: qrCodeButton)
         infoButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.infoItemTapped()
+            .subscribe(onNext: { [weak self] in
+                self?.infoItemTapped()
             })
             .disposed(by: self.disposeBag)
         qrCodeButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                self.qrCodeItemTapped()
+            .subscribe(onNext: { [weak self] in
+                self?.qrCodeItemTapped()
             })
             .disposed(by: self.disposeBag)
         self.viewModel.showActionState.asObservable()
@@ -709,8 +709,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             text.rightViewMode = .always
             text.rightView = rightButton
             rightButton.rx.tap
-                .subscribe(onNext: { [unowned self] _ in
-                    self.viewModel.secureTextEntry
+                .subscribe(onNext: { [weak self] _ in
+                    self?.viewModel.secureTextEntry
                         .onNext(!text.isSecureTextEntry)
                 })
                 .disposed(by: cell.disposeBag)

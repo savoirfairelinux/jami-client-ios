@@ -283,10 +283,10 @@ class CallsService: CallsAdapterDelegate {
         let call = CallModel(withCallId: ringId, callDetails: callDetails)
         call.state = .unknown
         call.callType = .outgoing
-        return Single<CallModel>.create(subscribe: { [unowned self] single in
-            if let callId = self.callsAdapter.placeCall(withAccountId: account.id,
-                                                        toRingId: ringId,
-                                                        details: callDetails),
+        return Single<CallModel>.create(subscribe: { [weak self] single in
+            if let self = self, let callId = self.callsAdapter.placeCall(withAccountId: account.id,
+                                                                         toRingId: ringId,
+                                                                         details: callDetails),
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
                 call.update(withDictionary: callDictionary)
                 call.callId = callId
@@ -336,7 +336,8 @@ class CallsService: CallsAdapterDelegate {
             return
         }
         guard let vCard = self.dbManager.accountVCard(for: accountID) else { return }
-        DispatchQueue.main.async { [unowned self] in
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             VCardUtils.sendVCard(card: vCard,
                                  callID: callID,
                                  accountID: accountID,
@@ -452,11 +453,9 @@ class CallsService: CallsAdapterDelegate {
 
     func shouldCallBeAddedToConference(callId: String) -> String? {
         var confId: String?
-        self.pendingConferences.keys.forEach { [unowned self] (initialCall) in
-            guard let pendigs = self.pendingConferences[initialCall],
-                !pendigs.isEmpty else {
-                    return
-            }
+        self.pendingConferences.keys.forEach { [weak self] (initialCall) in
+            guard let self = self, let pendigs = self.pendingConferences[initialCall], !pendigs.isEmpty
+                else { return }
             if pendigs.contains(callId) {
                 confId = initialCall
             }

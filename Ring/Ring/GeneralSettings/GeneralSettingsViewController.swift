@@ -40,8 +40,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         self.applyL10n()
         self.setUpTable()
         doneButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                self.dismiss(animated: true, completion: nil)
+            .subscribe(onNext: { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
             })
             .disposed(by: self.disposeBag)
     }

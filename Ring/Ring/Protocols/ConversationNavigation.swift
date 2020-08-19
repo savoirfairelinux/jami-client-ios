@@ -50,8 +50,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     // swiftlint:disable cyclomatic_complexity
     func callbackPlaceCall() {
         self.stateSubject
-            .subscribe(onNext: { [unowned self] (state) in
-                guard let state = state as? ConversationState else { return }
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? ConversationState else { return }
                 switch state {
                 case .startCall(let contactRingId, let name):
                     self.startOutgoingCall(contactRingId: contactRingId, userName: name)

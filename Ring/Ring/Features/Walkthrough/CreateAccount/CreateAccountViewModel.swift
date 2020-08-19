@@ -259,8 +259,8 @@ class CreateAccountViewModel: Stateable, ViewModel {
 
         //Loookup name request observer
         self.username.asObservable()
-            .subscribe(onNext: { [unowned self] username in
-                self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+            .subscribe(onNext: { [weak self] username in
+                self?.nameService.lookupName(withAccount: "", nameserver: "", name: username)
             })
             .disposed(by: disposeBag)
 
@@ -290,7 +290,8 @@ class CreateAccountViewModel: Stateable, ViewModel {
             .addRingAccount(username: username,
                             password: password,
                             enable: self.notificationSwitch.value)
-            .subscribe(onNext: { [unowned self] (account) in
+            .subscribe(onNext: { [weak self] (account) in
+                guard let self = self else { return }
                 if username.isEmpty {
                     self.accountCreationState.value = .success
                     DispatchQueue.main.async {
@@ -322,7 +323,8 @@ class CreateAccountViewModel: Stateable, ViewModel {
                         }
                         self.accountCreationState.value = .timeOut
                     }
-                }, onError: { [unowned self] (error) in
+                }, onError: { [weak self] (error) in
+                    guard let self = self else { return }
                     if let error = error as? AccountCreationError {
                         self.accountCreationState.value = .error(error: error)
                     } else {

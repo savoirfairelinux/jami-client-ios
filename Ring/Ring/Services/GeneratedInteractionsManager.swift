@@ -42,7 +42,8 @@ class GeneratedInteractionsManager {
     private func subscribeToContactEvents() {
         self.contactService
             .sharedResponseStream
-            .subscribe(onNext: { [unowned self] contactRequestEvent in
+            .subscribe(onNext: { [weak self] contactRequestEvent in
+                guard let self = self else { return }
                 if self.accountService.boothMode() {
                     return
                 }
@@ -111,7 +112,8 @@ class GeneratedInteractionsManager {
     private func subscribeToCallEvents() {
         self.callService
             .sharedResponseStream
-            .subscribe(onNext: { [unowned self] callEvent in
+            .subscribe(onNext: { [weak self] callEvent in
+                guard let self = self else { return }
                 if self.accountService.boothMode() {
                     return
                 }

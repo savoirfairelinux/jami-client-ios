@@ -108,15 +108,15 @@ class NameService {
         let registerName: Single<Bool> =
             Single.create(subscribe: { (single) -> Disposable in
                 let dispatchQueue = DispatchQueue(label: "nameRegistration", qos: .background)
-                dispatchQueue.async {[unowned self] in
+                dispatchQueue.async {[weak self] in
+                    guard let self = self else { return }
                     self.nameRegistrationAdapter
                         .registerName(withAccount: account,
                                       password: password,
                                       name: name)
                     single(.success(true))
                 }
-                return Disposables.create {
-                }
+                return Disposables.create { }
             })
 
         let filteredDaemonSignals = self.sharedRegistrationStatus

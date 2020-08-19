@@ -31,9 +31,9 @@ class EditProfileViewModel {
     let profileService: ProfilesService
     let accountService: AccountsService
 
-    lazy var profileImage: Observable<UIImage?> = { [unowned self] in
+    lazy var profileImage: Observable<UIImage?> = { [weak self] in
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
-            if let account = self.accountService.currentAccount {
+            if let self = self, let account = self.accountService.currentAccount {
                 self.profileService.getAccountProfile(accountId: account.id)
                     .take(1)
                     .subscribe(onNext: { profile in
@@ -48,7 +48,7 @@ class EditProfileViewModel {
                     let data = NSData(base64Encoded: photo,
                                       options: NSData.Base64DecodingOptions
                                         .ignoreUnknownCharacters) as Data? {
-                    self.image = UIImage(data: data)
+                    self?.image = UIImage(data: data)
                     guard let image = UIImage(data: data) else {
                         return UIImage(named: "add_avatar")!
                     }
@@ -60,9 +60,10 @@ class EditProfileViewModel {
 
     var profileForCurrentAccount = PublishSubject<Profile>()
 
-    lazy var profileName: Observable<String?> = { [unowned self] in
+    lazy var profileName: Observable<String?> = { [weak self] in
         return profileForCurrentAccount.share()
             .map({ profile in
+                guard let self = self else { return "" }
                 if let name = profile.alias, !name.isEmpty {
                     self.name = name
                     return name
@@ -83,8 +84,8 @@ class EditProfileViewModel {
         self.profileService = profileService
         self.accountService = accountService
         self.accountService.currentAccountChanged
-            .subscribe(onNext: { [unowned self] account in
-                if let selectedAccount = account {
+            .subscribe(onNext: { [weak self] account in
+                if let self = self, let selectedAccount = account {
                     self.updateProfileInfoFor(accountId: selectedAccount.id)
                 }
             })
@@ -93,8 +94,8 @@ class EditProfileViewModel {
 
     func updateProfileInfoFor(accountId: String) {
         self.profileService.getAccountProfile(accountId: accountId)
-            .subscribe(onNext: { [unowned self] profile in
-                self.profileForCurrentAccount.onNext(profile)
+            .subscribe(onNext: { [weak self] profile in
+                self?.profileForCurrentAccount.onNext(profile)
             })
             .disposed(by: self.disposeBag)
     }
