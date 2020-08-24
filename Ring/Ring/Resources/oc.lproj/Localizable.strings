@@ -46,6 +46,8 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "Escrivètz vòstre messatge…";
+"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
+"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 
 //Invitations
 "invitations.noInvitations" = "Cap d’invitacion";

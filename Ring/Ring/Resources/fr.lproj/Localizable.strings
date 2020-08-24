@@ -46,6 +46,8 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "Saisissez votre message...";
+"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
+"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 
 //Invitations
 "invitations.noInvitations" = "Aucune invitation";
@@ -132,20 +134,20 @@
 "alerts.confirmClearConversationTitle" = "Effacer la conversation";
 "alerts.noMediaPermissionsTitle" = "L'accès au média non autorisé";
 "alerts.noLibraryPermissionsTitle" = "L'accès à la bibliothèque de photos non autorisé";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
+"alerts.noLocationPermissionsTitle" = "L'accès à la géolocalisation non autorisé";
 "alerts.errorWrongCredentials" = "Je n'arrive pas à me connecter à votre gestionnaire de compte. Vérifiez vos éléments d'authentification.";
 "alerts.recordVideoMessage" = "Envoyer un message vidéo";
 "alerts.recordAudioMessage" = "Envoyer un message vocal";
 "alerts.uploadFile" = "Téléverser un fichier";
 "alerts.uploadPhoto" = "Téléverser une photo ou une vidéo";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationServiceIsDisabled" = "Activez le service de géolocalisation pour permettre à Jami de déterminer votre localisation.";
+"alerts.locationSharing" = "Partager votre position";
+"alerts.alreadylocationSharing" = "Vous partagez déjà votre position avec cet utilisateur";
+"alerts.locationSharingDurationTitle" = "Durée du partage de position ?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.mapInformation" = "Information sur la carte";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap contributeurs";
 "alerts.openStreetMapCopyrightMoreInfo" = "En savoir plus";
 
 //Actions
@@ -160,7 +162,7 @@
 "alerts.incomingCallButtonIgnore" = "Ignorer";
 "actions.startAudioCall" = "Appel audio";
 "actions.startVideoCall" = "Appel vidéo";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "Aller aux Paramètres";
 "actions.stopLocationSharing" = "Arrêter le partage";
 
 //Calls
@@ -289,8 +291,8 @@
 "notifications.acceptCall" = "ACCEPTER";
 "notifications.refuseCall" = "REFUSER";
 "notifications.newFile" = "Nouveau fichier";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.locationSharingStarted" = "Le partage de position entrant a démarré";
+"notifications.locationSharingStopped" = "Le partage de position entrant s'est terminé";
 "dataTransfer.readableStatusAwaiting" = "En attente ...";
 "dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transfert en cours";
@@ -310,7 +312,7 @@
 "generatedMessage.incomingCall" = "Appel entrant";
 "generatedMessage.missedOutgoingCall" = "Appel sortant manqué";
 "generatedMessage.missedIncomingCall" = "Appel entrant manqué";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "Partage de position en temps réel";
 
 //General Settings
 "generalSettings.title" = "Paramètres généraux";
