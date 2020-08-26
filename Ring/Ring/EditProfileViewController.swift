@@ -122,7 +122,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
     // MARK: - Delegates
     internal func imagePickerController(_ picker: UIImagePickerController,
                                         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        var image: UIImage!
+        var image: UIImage?
 
         if let img = info[.editedImage] as? UIImage {
             image = img
@@ -131,10 +131,12 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
             image = img
         }
 
-        image = image.convert(toSize: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale)
-        self.model.updateImage(image)
+        guard var avatar = image else { return }
+
+        avatar = avatar.convert(toSize: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale)
+        self.model.updateImage(avatar)
         profileImageView.contentMode = .scaleAspectFit
-        profileImageView.image = image.circleMasked
+        profileImageView.image = avatar.circleMasked
         dismiss(animated: true, completion: nil)
     }
 }
