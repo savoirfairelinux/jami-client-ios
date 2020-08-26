@@ -228,7 +228,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     private func infoItemTapped() {
         var compileDate: String {
-            let dateDefault = "20180131"
+            let dateDefault = ""
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYYMMdd"
             let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String ?? "Info.plist"
@@ -239,8 +239,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             }
             return dateDefault
         }
+
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+
         let versionName = L10n.Global.versionName
-        let alert = UIAlertController(title: "\nJami\nbuild: \(compileDate)\n\(versionName)", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "\nJami\nversion: \(appVersion)(\(compileDate))\n\(versionName)", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         let image = UIImageView(image: UIImage(asset: Asset.jamiIcon))
         alert.view.addSubview(image)
