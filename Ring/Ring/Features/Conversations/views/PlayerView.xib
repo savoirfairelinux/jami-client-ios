@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,6 +36,89 @@
                             <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfP-4w-tZW">
+                            <rect key="frame" x="0.0" y="340" width="400" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="0Eq-Om-7mp"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
+                                    <color key="value" white="0.0" alpha="0.11" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qa1-8d-lpc">
+                            <rect key="frame" x="0.0" y="320" width="400" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="ebw-tO-GaB"/>
+                            </constraints>
+                            <viewLayoutGuide key="safeArea" id="6ep-z0-qmR"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
+                                    <color key="value" white="0.0" alpha="0.11031142979452049" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dXV-Fd-mjl">
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="Zsu-QH-HUj"/>
+                            </constraints>
+                            <viewLayoutGuide key="safeArea" id="IJw-I4-30J"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
+                                    <color key="value" white="0.0" alpha="0.11" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4BH-wO-znU">
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="1TB-KU-bWr"/>
+                            </constraints>
+                            <viewLayoutGuide key="safeArea" id="9M7-Ks-68e"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
+                                    <color key="value" white="0.0" alpha="0.11" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFU-4q-kSY">
                             <rect key="frame" x="10" y="339" width="32" height="31"/>
                             <constraints>
@@ -72,21 +155,33 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstItem="qa1-8d-lpc" firstAttribute="trailing" secondItem="xA4-pX-MC4" secondAttribute="trailing" id="0bX-lM-e6K"/>
+                        <constraint firstItem="dXV-Fd-mjl" firstAttribute="leading" secondItem="xA4-pX-MC4" secondAttribute="leading" id="1vS-Dj-p7m"/>
+                        <constraint firstItem="4BH-wO-znU" firstAttribute="top" secondItem="xA4-pX-MC4" secondAttribute="top" id="2CD-GP-uVd"/>
+                        <constraint firstItem="dXV-Fd-mjl" firstAttribute="top" secondItem="xA4-pX-MC4" secondAttribute="top" id="3Ud-zj-A3a"/>
                         <constraint firstAttribute="bottom" secondItem="xA4-pX-MC4" secondAttribute="bottom" id="5fJ-0Q-SDk"/>
                         <constraint firstItem="Ym9-pi-QFc" firstAttribute="top" secondItem="NF5-DN-i1x" secondAttribute="top" constant="20" id="Ay1-5h-dE4"/>
+                        <constraint firstItem="4BH-wO-znU" firstAttribute="leading" secondItem="xA4-pX-MC4" secondAttribute="leading" id="BYJ-kU-pxp"/>
+                        <constraint firstItem="cfP-4w-tZW" firstAttribute="trailing" secondItem="xA4-pX-MC4" secondAttribute="trailing" id="Csp-LH-yw6"/>
                         <constraint firstItem="sFU-4q-kSY" firstAttribute="centerY" secondItem="8XG-XX-SQd" secondAttribute="centerY" id="E2d-t0-Oq7"/>
                         <constraint firstItem="xA4-pX-MC4" firstAttribute="top" secondItem="NF5-DN-i1x" secondAttribute="top" id="EZb-N3-gGQ"/>
+                        <constraint firstItem="cfP-4w-tZW" firstAttribute="bottom" secondItem="xA4-pX-MC4" secondAttribute="bottom" id="Hcx-wu-EDT"/>
+                        <constraint firstItem="dXV-Fd-mjl" firstAttribute="trailing" secondItem="xA4-pX-MC4" secondAttribute="trailing" id="SBm-3X-Wa8"/>
+                        <constraint firstItem="4BH-wO-znU" firstAttribute="trailing" secondItem="xA4-pX-MC4" secondAttribute="trailing" id="UBZ-VN-vYe"/>
                         <constraint firstItem="8XG-XX-SQd" firstAttribute="leading" secondItem="sFU-4q-kSY" secondAttribute="trailing" constant="10" id="VwL-pF-NA0"/>
                         <constraint firstItem="yln-si-MH9" firstAttribute="top" secondItem="NF5-DN-i1x" secondAttribute="top" constant="10" id="WaZ-Ce-u5s"/>
                         <constraint firstAttribute="bottom" secondItem="sFU-4q-kSY" secondAttribute="bottom" constant="30" id="X1O-69-CxO"/>
                         <constraint firstAttribute="bottom" secondItem="B7a-cw-Z2s" secondAttribute="bottom" constant="15" id="X4k-cE-HuE"/>
+                        <constraint firstItem="qa1-8d-lpc" firstAttribute="leading" secondItem="xA4-pX-MC4" secondAttribute="leading" id="Xq2-Ce-JCw"/>
                         <constraint firstAttribute="trailing" secondItem="8XG-XX-SQd" secondAttribute="trailing" constant="10" id="YYM-pX-GUN"/>
                         <constraint firstAttribute="bottom" secondItem="8XG-XX-SQd" secondAttribute="bottom" constant="32" id="Zcy-0J-9AY"/>
                         <constraint firstAttribute="trailing" secondItem="Ym9-pi-QFc" secondAttribute="trailing" constant="20" id="j2d-7s-OcN"/>
+                        <constraint firstItem="qa1-8d-lpc" firstAttribute="bottom" secondItem="xA4-pX-MC4" secondAttribute="bottom" id="oIV-fL-Ld9"/>
                         <constraint firstAttribute="trailing" secondItem="xA4-pX-MC4" secondAttribute="trailing" id="ptx-nI-K8C"/>
                         <constraint firstItem="xA4-pX-MC4" firstAttribute="leading" secondItem="NF5-DN-i1x" secondAttribute="leading" id="tw4-5C-S2J"/>
                         <constraint firstItem="8XG-XX-SQd" firstAttribute="trailing" secondItem="B7a-cw-Z2s" secondAttribute="trailing" id="uAm-Jy-jN0"/>
                         <constraint firstItem="yln-si-MH9" firstAttribute="leading" secondItem="NF5-DN-i1x" secondAttribute="leading" constant="10" id="vTY-mm-yDv"/>
+                        <constraint firstItem="cfP-4w-tZW" firstAttribute="leading" secondItem="xA4-pX-MC4" secondAttribute="leading" id="zZB-0v-Xlx"/>
                         <constraint firstItem="sFU-4q-kSY" firstAttribute="leading" secondItem="NF5-DN-i1x" secondAttribute="leading" constant="10" id="zkg-0V-GjM"/>
                     </constraints>
                 </view>
