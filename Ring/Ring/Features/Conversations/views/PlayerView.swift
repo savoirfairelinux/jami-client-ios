@@ -22,20 +22,62 @@ import UIKit
 import Reusable
 import RxSwift
 
+enum PlayerMode {
+    case fullScreen
+    case inConversationMessage
+}
+
 class PlayerView: UIView {
+
+    let MAXCONSTRAINT: CGFloat = 30
+    let MINCONSTRAINT: CGFloat = 10
+    let MAXTOPGRADIENTSIZE: CGFloat = 100
+    let MINTOPGRADIENTSIZE: CGFloat = 50
+    let MAXBOTTOMGRADIENTSIZE: CGFloat = 160
+    let MINBOTTOMGRADIENTSIZE: CGFloat = 80
+    let PLAYBUTTONBOTTOMCONSTRAINT: CGFloat = 55
+    let SLIDEBARLEADINGCONSTRAINT: CGFloat = 55
+    let MAXSIZE: CGFloat = 40
+    let MINSIZE: CGFloat = 30
+
     @IBOutlet var containerView: UIView!
     @IBOutlet weak var incomingImage: UIImageView!
     @IBOutlet weak var togglePause: UIButton!
     @IBOutlet weak var muteAudio: UIButton!
-    @IBOutlet weak var resizeView: UIButton!
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet weak var durationLabel: UILabel!
 
+    @IBOutlet weak var topGradient: UIView!
+    @IBOutlet weak var bottomGradient: UIView!
+
+    @IBOutlet weak var backgroundView: UIView!
+
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var trailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonsAllignmentConstraint: NSLayoutConstraint!
+    @IBOutlet weak var progressSliderLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomGradientViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var topGradientViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var playButtonCenterY: NSLayoutConstraint!
+    @IBOutlet weak var playButtonCenterX: NSLayoutConstraint!
+
+    @IBOutlet weak var toglePauseWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var toglePauseHeightConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var muteAudioWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var muteAudioHeightConstraint: NSLayoutConstraint!
+
     var viewModel: PlayerViewModel!
-
     let disposeBag = DisposeBag()
-
     var sliderDisposeBag = DisposeBag()
+
+    var sizeMode: PlayerMode = .inConversationMessage {
+        didSet {
+            self.sizeChanged()
+        }
+    }
 
     @IBAction func startSeekFrame(_ sender: Any) {
         sliderDisposeBag = DisposeBag()
@@ -172,5 +214,75 @@ class PlayerView: UIView {
         default:
             return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         }
+    }
+
+    func sizeChanged() {
+        switch self.sizeMode {
+        case .fullScreen:
+            backgroundView.backgroundColor = UIColor.black
+            let circleImage = makeCircleWith(size: CGSize(width: 20, height: 20),
+                                             backgroundColor: UIColor.white)
+            progressSlider.setThumbImage(circleImage, for: .normal)
+            progressSlider.setThumbImage(circleImage, for: .highlighted)
+            let topAjust: CGFloat = UIDevice.current.hasNotch ? 10 : -8
+            topConstraint.constant = MAXCONSTRAINT + topAjust
+            bottomConstraint.constant = MAXCONSTRAINT
+            trailingConstraint.constant = MAXCONSTRAINT
+            leadingConstraint.constant = MAXCONSTRAINT - 8
+            progressSliderLeadingConstraint.constant = MAXCONSTRAINT
+            toglePauseWidthConstraint.constant = MAXSIZE + 5
+            toglePauseHeightConstraint.constant = MAXSIZE
+            muteAudioWidthConstraint.constant = MAXSIZE
+            muteAudioHeightConstraint.constant = MAXSIZE
+            bottomGradientViewHeight.constant = MAXBOTTOMGRADIENTSIZE
+            topGradientViewHeight.constant = MAXTOPGRADIENTSIZE
+            playButtonCenterY.constant = PLAYBUTTONBOTTOMCONSTRAINT
+            playButtonCenterX.priority = UILayoutPriority(rawValue: 999)
+            buttonsAllignmentConstraint.priority = UILayoutPriority(rawValue: 250)
+            self.topGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 1), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
+            self.bottomGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0), UIColor(red: 0, green: 0, blue: 0, alpha: 1)], gradient: .vertical)
+            self.topGradient.layoutIfNeeded()
+            self.bottomGradient.layoutIfNeeded()
+            self.bottomGradient.updateGradientFrame()
+            self.topGradient.updateGradientFrame()
+        case .inConversationMessage:
+            let circleImage = makeCircleWith(size: CGSize(width: 15, height: 15),
+                                             backgroundColor: UIColor.white)
+            progressSlider.setThumbImage(circleImage, for: .normal)
+            progressSlider.setThumbImage(circleImage, for: .highlighted)
+            if #available(iOS 13.0, *) {
+                backgroundView.backgroundColor = UIColor.placeholderText
+            } else {
+                backgroundView.backgroundColor = UIColor.lightGray
+            }
+            bottomGradientViewHeight.constant = MINBOTTOMGRADIENTSIZE
+            topGradientViewHeight.constant = MINTOPGRADIENTSIZE
+            topConstraint.constant = MINCONSTRAINT
+            bottomConstraint.constant = MINCONSTRAINT
+            trailingConstraint.constant = MINCONSTRAINT
+            leadingConstraint.constant = MINCONSTRAINT
+            progressSliderLeadingConstraint.constant = SLIDEBARLEADINGCONSTRAINT
+            toglePauseWidthConstraint.constant = MINSIZE + 3
+            toglePauseHeightConstraint.constant = MINSIZE
+            muteAudioWidthConstraint.constant = MINSIZE
+            muteAudioHeightConstraint.constant = MINSIZE
+            playButtonCenterY.constant = 1
+            playButtonCenterX.priority = UILayoutPriority(rawValue: 250)
+            buttonsAllignmentConstraint.priority = UILayoutPriority(rawValue: 999)
+            self.topGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0.2), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
+            self.bottomGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0), UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)], gradient: .vertical)
+            self.topGradient.layoutIfNeeded()
+            self.bottomGradient.layoutIfNeeded()
+            self.bottomGradient.updateGradientFrame()
+            self.topGradient.updateGradientFrame()
+        }
+    }
+
+    func changeControlsVisibility() {
+        let alpha = bottomGradient.alpha == 0 ? 1 : 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.bottomGradient.alpha = CGFloat(alpha)
+            self.topGradient.alpha = CGFloat(alpha)
+        })
     }
 }

@@ -1105,6 +1105,16 @@ extension ConversationViewController: UITableViewDataSource {
                     tableView?.reloadData()
                 })
                 .disposed(by: cell.disposeBag)
+            cell.openPlayer
+            .subscribe(onNext: { [weak self, weak item] open in
+                guard let self = self, open, let playerPath = item?.playerPath, let player = item?.getPlayer(conversationViewModel: self.viewModel) else {
+                    return
+
+                }
+                self.inputAccessoryView.isHidden = true
+                self.viewModel.openFullScreenPlayer(path: playerPath, parentView: self, viewModel: player)
+            })
+            .disposed(by: cell.disposeBag)
             cell.playerHeight
                 .asObservable()
                 .share()

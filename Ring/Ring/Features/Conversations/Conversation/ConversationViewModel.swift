@@ -770,4 +770,8 @@ extension ConversationViewModel {
         self.locationSharingService.stopSharingLocation(accountId: account.id,
                                                         contactUri: self.conversation.value.participantUri)
     }
+
+    func openFullScreenPlayer(path: String, parentView: UIViewController, viewModel: PlayerViewModel) {
+        self.stateSubject.onNext(ConversationState.openFullScreenPlayer(path: path, parentView: parentView, viewModel: viewModel))
+    }
 }

@@ -36,6 +36,7 @@ enum ConversationState: State {
     case fromCallToConversation(conversation: ConversationViewModel)
     case needAccountMigration(accountId: String)
     case accountModeChanged
+    case openFullScreenPlayer(path: String, parentView: UIViewController, viewModel: PlayerViewModel)
 }
 
 protocol ConversationNavigation: class {
@@ -73,6 +74,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.migrateAccount(accountId: accountId)
                 case .accountModeChanged:
                     self.accountModeChanged()
+                case .openFullScreenPlayer(let path, let parentView, let viewModel):
+                    self.openFullScreenPlayer(path: path, parentView: parentView, viewModel: viewModel)
                 default:
                     break
                 }
@@ -99,6 +102,14 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStyle: .popup,
                      withAnimation: !audioOnly,
                      withStateable: recordFileViewController.viewModel)
+    }
+
+    func openFullScreenPlayer(path: String, parentView: UIViewController, viewModel: PlayerViewModel) {
+        let playerController = PlayerViewController.instantiate(with: self.injectionBag)
+        playerController.viewModel.path = path
+        playerController.viewModel.playerViewModel = viewModel
+        parentView.addChildController(playerController)
+        playerController.playerView.sizeMode = .fullScreen
     }
 
     func openQRCode () {
