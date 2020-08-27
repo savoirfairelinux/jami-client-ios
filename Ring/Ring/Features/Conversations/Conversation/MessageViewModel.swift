@@ -57,6 +57,7 @@ class MessageViewModel {
     private let conversationsService: ConversationsService
     private let dataTransferService: DataTransferService
     var message: MessageModel
+    var playerPath = ""
 
     var shouldShowTimeString: Bool = false
     lazy var timeStringShown: String = { [unowned self] in
@@ -277,6 +278,7 @@ class MessageViewModel {
                     return nil
                 }
             }
+            playerPath = pathString
             let model = PlayerViewModel(injectionBag: injectBug, path: pathString)
             conversationViewModel.setPlayer(messageID: String(self.messageId), player: model)
             return model

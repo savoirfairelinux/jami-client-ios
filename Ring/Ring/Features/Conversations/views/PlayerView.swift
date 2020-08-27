@@ -22,6 +22,11 @@ import UIKit
 import Reusable
 import RxSwift
 
+enum PlayerMode {
+    case fullScreen
+    case inConversationMessage
+}
+
 class PlayerView: UIView {
     @IBOutlet var containerView: UIView!
     @IBOutlet weak var incomingImage: UIImageView!
@@ -31,11 +36,35 @@ class PlayerView: UIView {
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet weak var durationLabel: UILabel!
 
+    @IBOutlet weak var backgroundView: UIView!
+
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var trailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var toglePauseWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var toglePauseHeightConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var muteAudioWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var muteAudioHeightConstraint: NSLayoutConstraint!
+
     var viewModel: PlayerViewModel!
 
     let disposeBag = DisposeBag()
 
     var sliderDisposeBag = DisposeBag()
+
+    var sizeMode: PlayerMode = .inConversationMessage {
+        didSet {
+            self.sizeChanged()
+        }
+    }
+
+    let MAXCONSTRAINT: CGFloat = 20
+    let MINCONSTRAINT: CGFloat = 10
+    let MAXSIZE: CGFloat = 40
+    let MINSIZE: CGFloat = 10
 
     @IBAction func startSeekFrame(_ sender: Any) {
         sliderDisposeBag = DisposeBag()
@@ -171,6 +200,37 @@ class PlayerView: UIView {
             return String(format: "%02d:%02d", minutes, seconds)
         default:
             return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        }
+    }
+
+    func sizeChanged() {
+        switch self.sizeMode {
+        case .fullScreen:
+            topConstraint.constant = MAXCONSTRAINT
+            bottomConstraint.constant = MAXCONSTRAINT
+            trailingConstraint.constant = MAXCONSTRAINT
+            leadingConstraint.constant = MAXCONSTRAINT
+            toglePauseWidthConstraint.constant = MAXSIZE
+            toglePauseHeightConstraint.constant = MAXSIZE
+            muteAudioWidthConstraint.constant = MAXSIZE
+            muteAudioHeightConstraint.constant = MAXSIZE
+            durationLabel.font = durationLabel.font.withSize(20)
+            backgroundView.backgroundColor = UIColor.black
+        case .inConversationMessage:
+            topConstraint.constant = MINCONSTRAINT
+            bottomConstraint.constant = MINCONSTRAINT
+            trailingConstraint.constant = MINCONSTRAINT
+            leadingConstraint.constant = MINCONSTRAINT
+            toglePauseWidthConstraint.constant = MINSIZE
+            toglePauseHeightConstraint.constant = MINSIZE
+            muteAudioWidthConstraint.constant = MINSIZE
+            muteAudioHeightConstraint.constant = MINSIZE
+            durationLabel.font = durationLabel.font.withSize(16)
+            if #available(iOS 13.0, *) {
+                backgroundView.backgroundColor = UIColor.placeholderText
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 }

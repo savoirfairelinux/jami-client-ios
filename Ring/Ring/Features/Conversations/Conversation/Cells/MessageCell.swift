@@ -60,6 +60,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     @IBOutlet weak var failedStatusLabel: UILabel!
     @IBOutlet weak var bubbleViewMask: UIView?
     @IBOutlet weak var messageReadIndicator: UIView?
+    @IBOutlet weak var expendButton: UIButton?
 
     private var transferImageView = UIImageView()
     private var transferProgressView = ProgressView()
@@ -532,6 +533,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             }
             let frame = CGRect(origin: origin, size: defaultSize)
             let pView = PlayerView(frame: frame)
+            pView.sizeMode = .inConversationMessage
+            self.expendButton = pView.resizeView
             pView.viewModel = player
             player.delegate = self
             self.playerView = pView
