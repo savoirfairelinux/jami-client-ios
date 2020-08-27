@@ -86,6 +86,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private var longGestureRecognizer: UILongPressGestureRecognizer?
     var tapGestureRecognizer: UITapGestureRecognizer?
 
+    let openPlayer = BehaviorRelay<(Bool)>(value: (false))
+
     // MARK: PrepareForReuse
 
     override func prepareForReuse() {
@@ -101,6 +103,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.composingMsg.removeFromSuperview()
         self.playerHeight.value = 0
         self.disposeBag = DisposeBag()
+        openPlayer.accept(false)
         super.prepareForReuse()
     }
 
@@ -194,10 +197,14 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
 
+    func hasVideoPlayer() -> Bool {
+        return playerView != nil && playerView!.viewModel.hasVideo.value
+    }
+
     // MARK: Configure
 
     func configureTapGesture() {
-        let shownByDefault = !self.timeLabel.isHidden && !showTimeTap.value
+        let shownByDefault = !self.timeLabel.isHidden && !showTimeTap.value && !hasVideoPlayer()
         if !shownByDefault {
             self.bubble.isUserInteractionEnabled = true
             self.tapGestureRecognizer = UITapGestureRecognizer()
@@ -223,6 +230,11 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     }
 
     func onTapGesture() {
+        // for player expand size on tap, for other messages show time
+        if playerView != nil {
+            openPlayer.accept(true)
+            return
+        }
         self.prepareForTapGesture()
 
         if self.timeLabel.isHidden {
@@ -417,7 +429,6 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.configureLongGesture(item.message.messageId, item.bubblePosition(), item.isTransfer, item.isLocationSharingBubble)
 
         self.prepareForReuseTapGesture()
-        self.configureTapGesture()
 
         self.configureBackgroundColor(item.content.containsOnlyEmoji, item.bubblePosition())
 
@@ -496,6 +507,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         } else if item.isTransfer {
             self.messageLabelMarginConstraint.constant = -2
         }
+
+        self.configureTapGesture()
     }
 
     private func configureTransferCell(_ item: MessageViewModel, _ conversationViewModel: ConversationViewModel) {
@@ -532,6 +545,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             }
             let frame = CGRect(origin: origin, size: defaultSize)
             let pView = PlayerView(frame: frame)
+            pView.sizeMode = .inConversationMessage
             pView.viewModel = player
             player.delegate = self
             self.playerView = pView

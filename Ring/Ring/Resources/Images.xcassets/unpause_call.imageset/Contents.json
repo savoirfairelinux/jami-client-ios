@@ -1,24 +1,24 @@
 {
   "images" : [
     {
+      "filename" : "icons8-play.png",
       "idiom" : "universal",
-      "filename" : "ic_play_arrow_white.png",
       "scale" : "1x"
     },
     {
+      "filename" : "icons8-play-2.png",
       "idiom" : "universal",
-      "filename" : "ic_play_arrow_white_2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "icons8-play-1.png",
       "idiom" : "universal",
-      "filename" : "ic_play_arrow_white_3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   },
   "properties" : {
     "template-rendering-intent" : "template"
