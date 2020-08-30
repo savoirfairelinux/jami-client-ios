@@ -150,4 +150,17 @@ extension UIViewController {
             .navigationBar.titleTextAttributes = isPortrait ?
                 attrPortrait : attrLandscape
     }
+
+    func addChildController(_ child: UIViewController) {
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+
+    func removeChildController() {
+        guard parent == parent else { return }
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
 }
