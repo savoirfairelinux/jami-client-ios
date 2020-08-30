@@ -24,6 +24,7 @@
 "global.meTabBarTitle" = "Account";
 "global.ok" = "Ok";
 "global.versionName" = "Free as in Freedom";
+"global.close" = "Close";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

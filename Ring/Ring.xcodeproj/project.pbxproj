@@ -248,6 +248,9 @@
 		1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */; };
 		1ABE07E21F0D924700D36361 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
+		26074FD924F7FF9500374570 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PlayerViewController.swift */; };
+		26074FDB24F7FFC100374570 /* PlayerContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PlayerContollerModel.swift */; };
+		26074FDD24F7FFF500374570 /* PlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26074FDC24F7FFF500374570 /* PlayerViewController.storyboard */; };
 		263B7158246D9390007044C4 /* SmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7157246D9390007044C4 /* SmartListCell.swift */; };
 		263B715A246D9556007044C4 /* IncognitoSmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */; };
 		263B715C246D96E5007044C4 /* IncognitoSmartListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263B715B246D96E5007044C4 /* IncognitoSmartListCell.xib */; };
@@ -644,6 +647,9 @@
 		1ABE07E11F0D924700D36361 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		26069B6524C9FCE8002361A3 /* ObjCHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCHandler.h; sourceTree = "<group>"; };
 		26069B6624C9FCE8002361A3 /* ObjCHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCHandler.m; sourceTree = "<group>"; };
+		26074FD824F7FF9500374570 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		26074FDA24F7FFC100374570 /* PlayerContollerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerContollerModel.swift; sourceTree = "<group>"; };
+		26074FDC24F7FFF500374570 /* PlayerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayerViewController.storyboard; sourceTree = "<group>"; };
 		26376721245315E600CDC51F /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		263B7157246D9390007044C4 /* SmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListCell.swift; sourceTree = "<group>"; };
 		263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncognitoSmartListCell.swift; sourceTree = "<group>"; };
@@ -1485,6 +1491,7 @@
 		1A2D18A71F290FAA00B2C785 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
+				26074FD524F7FF5B00374570 /* Player */,
 				0E5806F123BE42C8007D1F5D /* views */,
 				446FAF172373421500519C4F /* SendFile */,
 				1A2D18AE1F29153F00B2C785 /* Conversation */,
@@ -1658,6 +1665,16 @@
 				04399A021D1C2D9D00E99CD9 /* Images.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		26074FD524F7FF5B00374570 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				26074FD824F7FF9500374570 /* PlayerViewController.swift */,
+				26074FDA24F7FFC100374570 /* PlayerContollerModel.swift */,
+				26074FDC24F7FFF500374570 /* PlayerViewController.storyboard */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 		2662FC77246B1DD600FA7782 /* JamiSearchView */ = {
@@ -1993,6 +2010,7 @@
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
 				0E438A96204F318200402900 /* AccountHeader.xib in Resources */,
 				0E5806F723BE4325007D1F5D /* PlayerView.xib in Resources */,
+				26074FDD24F7FFF500374570 /* PlayerViewController.storyboard in Resources */,
 				62AD58462056D8EC00AF0701 /* MessageCellDataTransferSent.xib in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
@@ -2261,8 +2279,10 @@
 				0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */,
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
+				26074FD924F7FF9500374570 /* PlayerViewController.swift in Sources */,
 				0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */,
 				0EB1A5D11F8EBE23009923E2 /* DeviceCell.swift in Sources */,
+				26074FDB24F7FFC100374570 /* PlayerContollerModel.swift in Sources */,
 				4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */,
 				0E6949791FA7E71C0029B60A /* BaseViewController.swift in Sources */,
 				0EC7808F2424FDAE000A04C5 /* CustomActionTextView.swift in Sources */,
