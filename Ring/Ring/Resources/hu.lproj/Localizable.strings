@@ -46,8 +46,8 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "Üzenet írása…";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
+"conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 
 //Invitations
 "invitations.noInvitations" = "Nincs meghívás";

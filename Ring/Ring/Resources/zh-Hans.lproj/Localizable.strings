@@ -46,8 +46,8 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "輸入您的訊息……";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.explanationSendingLocationTo" = "您目前正在分享您的位置，與";
+"conversation.explanationReceivingLocationFrom" = "您正收到即時位置，從";
 
 //Invitations
 "invitations.noInvitations" = "沒有邀請";

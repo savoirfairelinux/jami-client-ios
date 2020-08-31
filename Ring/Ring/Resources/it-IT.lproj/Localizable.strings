@@ -46,8 +46,8 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "Scrivi il tuo messaggio";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.explanationSendingLocationTo" = "Stai attualmente condividendo la tua posizione con";
+"conversation.explanationReceivingLocationFrom" = "Stai attualmente ricevendo una posizione dal vivo da";
 
 //Invitations
 "invitations.noInvitations" = "Nessun invito";
@@ -134,20 +134,20 @@
 "alerts.confirmClearConversationTitle" = "Cancella conversazione";
 "alerts.noMediaPermissionsTitle" = "Non è stata concessa l'autorizzazione ai media";
 "alerts.noLibraryPermissionsTitle" = "Accesso alle foto non concesso";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
+"alerts.noLocationPermissionsTitle" = "Accesso alla posizione non concesso";
 "alerts.errorWrongCredentials" = "Impossibile connettersi al gestore account fornito. Controlla le tue credenziali";
 "alerts.recordVideoMessage" = "Registra un video messaggio";
 "alerts.recordAudioMessage" = "Registra un messaggio audio";
 "alerts.uploadFile" = "Carica file";
 "alerts.uploadPhoto" = "Carica foto o film";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationServiceIsDisabled" = "Attiva \"Servizi di localizzazione\" per consentire a \"Jami\" di determinare la tua posizione.";
+"alerts.locationSharing" = "Condividi la mia posizione";
+"alerts.alreadylocationSharing" = "Condividi già la posizione con questo utente";
+"alerts.locationSharingDurationTitle" = "Quanto dovrebbe durare la condivisione della posizione?";
 "alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.locationSharingDuration1hour" = "1 ora";
+"alerts.mapInformation" = "Informazioni mappa";
+"alerts.openStreetMapCopyright" = "© Collaboratori di OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Scopri di più";
 
 //Actions
@@ -162,7 +162,7 @@
 "alerts.incomingCallButtonIgnore" = "Ignora";
 "actions.startAudioCall" = "Chiamata audio";
 "actions.startVideoCall" = "Video chiamata";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "Vai alle impostazioni";
 "actions.stopLocationSharing" = "Ferma condivisione";
 
 //Calls
@@ -291,8 +291,8 @@
 "notifications.acceptCall" = "Accetta";
 "notifications.refuseCall" = "Rifiuta";
 "notifications.newFile" = "Nuovo file";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.locationSharingStarted" = "È stata avviata la condivisione della posizione in arrivo";
+"notifications.locationSharingStopped" = "Condivisione della posizione in arrivo interrotta";
 "dataTransfer.readableStatusAwaiting" = "In attesa...";
 "dataTransfer.readableStatusRefuse" = "Rifiuto";
 "dataTransfer.readableStatusOngoing" = "In trasferimento";
@@ -312,7 +312,7 @@
 "generatedMessage.incomingCall" = "Chiamata in arrivo";
 "generatedMessage.missedOutgoingCall" = "Chiamata persa in uscita";
 "generatedMessage.missedIncomingCall" = "Chiamata persa in arrivo";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "Condivisione della posizione in tempo reale";
 
 //General Settings
 "generalSettings.title" = "Impostazioni generali";
