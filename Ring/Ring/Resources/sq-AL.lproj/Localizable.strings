@@ -46,8 +46,8 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "Shkruani mesazhin tuaj…";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
+"conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 
 //Invitations
 "invitations.noInvitations" = "S’ka ftesa";
