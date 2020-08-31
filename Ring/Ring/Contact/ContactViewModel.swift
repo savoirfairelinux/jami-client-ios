@@ -73,11 +73,11 @@ class ContactViewModel: ViewModel, Stateable {
             } else {
                 self.userName.value = conversation.hash
             }
-            if account.type == AccountType.ring {
+            if account.type == AccountType.ring && self.userName.value == conversation.hash {
                 self.nameService.usernameLookupStatus
                     .filter({ [unowned self] lookupNameResponse in
                         return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == self.conversation.participantUri
+                            lookupNameResponse.address == self.conversation.hash
                     })
                     .subscribe(onNext: { [unowned self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
