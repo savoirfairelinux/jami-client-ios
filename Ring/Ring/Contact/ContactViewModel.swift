@@ -169,9 +169,20 @@ class ContactViewModel: ViewModel, Stateable {
     }
 
     func deleteConversation() {
-        self.conversationService
-            .clearHistory(conversation: conversation,
-                          keepConversation: false)
+        let contactRingId = conversation.participantUri
+        let accountId = conversation.accountId
+        self.contactService
+            .removeContact(withUri: contactRingId,
+                           ban: false,
+                           withAccountId: accountId)
+            .asObservable()
+            .subscribe(onCompleted: { [weak self] in
+                guard let self = self else { return }
+                self.conversationService
+                    .clearHistory(conversation: self.conversation,
+                                  keepConversation: false)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func clearConversation() {

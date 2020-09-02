@@ -240,11 +240,21 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             cvm.conversation.value == conversationViewModel.conversation.value
         })) {
             conversationViewModel.closeAllPlayers()
-
-            self.conversationsService
-                .clearHistory(conversation: conversationViewModel.conversation.value,
-                              keepConversation: false)
-            self.conversationViewModels.remove(at: index)
+            let contactUri = conversationViewModel.conversation.value.participantUri
+            let accountId = conversationViewModel.conversation.value.accountId
+            self.contactsService
+                .removeContact(withUri: contactUri,
+                               ban: false,
+                               withAccountId: accountId)
+                .asObservable()
+                .subscribe(onCompleted: { [weak self, weak conversationViewModel] in
+                    guard let conversationViewModel = conversationViewModel else { return }
+                    self?.conversationsService
+                        .clearHistory(conversation: conversationViewModel.conversation.value,
+                                      keepConversation: false)
+                    self?.conversationViewModels.remove(at: index)
+                })
+                .disposed(by: self.disposeBag)
         }
     }
 

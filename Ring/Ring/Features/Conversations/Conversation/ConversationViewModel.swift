@@ -344,34 +344,6 @@ class ConversationViewModel: Stateable, ViewModel {
                             withFlag: true)
     }
 
-    func block() {
-        let contactRingId = self.conversation.value.hash
-        let accountId = self.conversation.value.accountId
-        var blockComplete: Observable<Void>
-        let removeCompleted = self.contactsService.removeContact(withUri: contactRingId,
-                                                                 ban: true,
-                                                                 withAccountId: accountId)
-        if let contactRequest = self.contactsService.contactRequest(withRingId: contactRingId) {
-            let discardCompleted = self.contactsService.discard(from: contactRequest.ringId,
-                                                                withAccountId: accountId)
-            blockComplete = Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
-                return
-            }
-        } else {
-            blockComplete = removeCompleted
-        }
-
-        blockComplete.asObservable()
-            .subscribe(onCompleted: { [weak self] in
-                if let conversation = self?.conversation.value {
-                    self?.conversationsService
-                        .clearHistory(conversation: conversation,
-                                      keepConversation: false)
-                }
-            })
-            .disposed(by: self.disposeBag)
-    }
-
     func ban(withItem item: ContactRequestItem) -> Observable<Void> {
         let accountId = item.contactRequest.accountId
         let discardCompleted = self.contactsService.discard(from: item.contactRequest.ringId,
