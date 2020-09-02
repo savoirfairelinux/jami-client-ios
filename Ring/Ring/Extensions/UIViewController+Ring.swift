@@ -158,7 +158,7 @@ extension UIViewController {
     }
 
     func removeChildController() {
-        guard parent == parent else { return }
+        guard parent != nil else { return }
         willMove(toParent: nil)
         view.removeFromSuperview()
         removeFromParent()
