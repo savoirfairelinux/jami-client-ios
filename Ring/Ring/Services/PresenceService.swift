@@ -43,10 +43,13 @@ class PresenceService {
     func subscribeBuddies(withAccount accountId: String,
                           withContacts contacts: [ContactModel],
                           subscribe: Bool) {
-        for contact in contacts where !contact.banned {
-            subscribeBuddy(withAccountId: accountId,
-                           withUri: contact.hash,
-                           withFlag: subscribe)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            for contact in contacts where !contact.banned {
+                self.subscribeBuddy(withAccountId: accountId,
+                                    withUri: contact.hash,
+                                    withFlag: subscribe)
+            }
         }
     }
 
