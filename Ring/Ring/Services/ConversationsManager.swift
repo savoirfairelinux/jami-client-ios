@@ -254,45 +254,28 @@ class ConversationsManager: MessagesAdapterDelegate {
             return
         }
         if let content = message[textPlainMIMEType] {
-            DispatchQueue.main.async { [unowned self] in
-                self.handleNewMessage(from: senderAccount,
-                                      to: receiverAccountId,
-                                      messageId: messageId,
-                                      message: content,
-                                      peerName: nil)
-            }
+            self.handleNewMessage(from: senderAccount,
+                                  to: receiverAccountId,
+                                  messageId: messageId,
+                                  message: content,
+                                  peerName: nil)
         } else if let content = message[geoLocationMIMEType] {
-            DispatchQueue.main.async { [unowned self] in
                 self.handleReceivedLocationUpdate(from: senderAccount,
                                                   to: receiverAccountId,
                                                   messageId: messageId,
                                                   locationJSON: content)
-            }
         }
     }
 
     private func handleReceivedLocationUpdate(from peerUri: String, to accountId: String, messageId: String, locationJSON content: String) {
         guard let currentAccount = self.accountsService.currentAccount,
-              let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+            let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
 
         let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
         guard let peerUri = JamiURI.init(schema: type, infoHach: peerUri, account: accountForMessage).uriString else { return }
 
         if self.conversationService.isBeginningOfLocationSharing(incoming: true, contactUri: peerUri, accountId: accountId) {
-            // Handle notification
-            if UIApplication.shared.applicationState != .active && AccountModelHelper
-                .init(withAccount: accountForMessage).isAccountRing() &&
-                accountsService.getCurrentProxyState(accountID: accountId) {
-                var data = [String: String]()
-                data [NotificationUserInfoKeys.messageContent.rawValue] = L10n.Notifications.locationSharingStarted
-                data [NotificationUserInfoKeys.participantID.rawValue] = peerUri
-                data [NotificationUserInfoKeys.accountID.rawValue] = accountId
-
-                // only for jami accounts
-                if let hash = JamiURI(schema: URIType.ring, infoHach: peerUri).hash {
-                    self.searchNameAndPresentNotification(data: data, hash: hash)
-                }
-            }
+            self.presentNotification(from: peerUri, to: accountForMessage, message: L10n.Notifications.locationSharingStarted, peerName: nil)
 
             let shouldRefresh = currentAccount.id == accountId
 
@@ -318,26 +301,8 @@ class ConversationsManager: MessagesAdapterDelegate {
 
     func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {
         guard let currentAccount = self.accountsService.currentAccount,
-              let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-
-        if UIApplication.shared.applicationState != .active && AccountModelHelper
-            .init(withAccount: accountForMessage).isAccountRing() &&
-            accountsService.getCurrentProxyState(accountID: accountId) {
-            var data = [String: String]()
-            data [NotificationUserInfoKeys.messageContent.rawValue] = content
-            data [NotificationUserInfoKeys.participantID.rawValue] = peerUri
-            data [NotificationUserInfoKeys.accountID.rawValue] = accountId
-            if let name = peerName {
-                data [NotificationUserInfoKeys.name.rawValue] = name
-                self.notificationHandler.presentMessageNotification(data: data)
-            } else {
-                // only for jami accounts
-                if let hash = JamiURI(schema: URIType.ring,
-                                      infoHach: peerUri).hash {
-                    searchNameAndPresentNotification(data: data, hash: hash)
-                }
-            }
-        }
+            let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        self.presentNotification(from: peerUri, to: accountForMessage, message: content, peerName: peerName)
         var shouldUpdateConversationsList = false
         if currentAccount.id == accountForMessage.id {
             shouldUpdateConversationsList = true
@@ -361,38 +326,39 @@ class ConversationsManager: MessagesAdapterDelegate {
             .disposed(by: self.disposeBag)
     }
 
-    func createTransferNotification(info: NSDataTransferInfo) {
+    private func presentNotification(from peerUri: String, to account: AccountModel, message content: String, peerName: String?) {
         DispatchQueue.main.async { [weak self] in
-            if UIApplication.shared.applicationState == .active {
+            guard let self = self,
+                UIApplication.shared.applicationState != .active,
+                AccountModelHelper.init(withAccount: account).isAccountRing(),
+                self.accountsService.getCurrentProxyState(accountID: account.id) else { return }
+            var data = [String: String]()
+            data [NotificationUserInfoKeys.messageContent.rawValue] = content
+            data [NotificationUserInfoKeys.participantID.rawValue] = peerUri
+            data [NotificationUserInfoKeys.accountID.rawValue] = account.id
+            if let name = peerName {
+                data [NotificationUserInfoKeys.name.rawValue] = name
+                self.notificationHandler.presentMessageNotification(data: data)
                 return
             }
+            guard let hash = JamiURI(schema: URIType.ring, infoHach: peerUri).hash else { return }
             DispatchQueue.global(qos: .background).async {
-                guard let account = self?.accountsService.getAccount(fromAccountId: info.accountId), AccountModelHelper
-                    .init(withAccount: account).isAccountRing(),
-                    let state = self?.accountsService.getCurrentProxyState(accountID: info.accountId), state  else {
-                        return
-                }
-                var data = [String: String]()
-                var message = L10n.Notifications.newFile + " "
-                if let name = info.path.split(separator: "/").last {
-                    message += name
-                } else {
-                    message += info.path
-                }
-                data [NotificationUserInfoKeys.messageContent.rawValue] = message
-                data [NotificationUserInfoKeys.participantID.rawValue] = info.peer
-                data [NotificationUserInfoKeys.accountID.rawValue] = info.accountId
-                if let name = info.displayName {
-                    data [NotificationUserInfoKeys.name.rawValue] = name
-                    self?.notificationHandler.presentMessageNotification(data: data)
-                } else {
-                    guard let hash = JamiURI(schema: URIType.ring,
-                                             infoHach: info.peer).hash else { return }
-
-                    self?.searchNameAndPresentNotification(data: data, hash: hash)
-                }
+                self.searchNameAndPresentNotification(data: data, hash: hash)
             }
         }
+    }
+
+    func createTransferNotification(info: NSDataTransferInfo) {
+        guard let account = self.accountsService.getAccount(fromAccountId: info.accountId),
+            AccountModelHelper.init(withAccount: account).isAccountRing(),
+            self.accountsService.getCurrentProxyState(accountID: info.accountId) else { return }
+        var message = L10n.Notifications.newFile + " "
+        if let name = info.path.split(separator: "/").last {
+            message += name
+        } else {
+            message += info.path
+        }
+        self.presentNotification(from: info.peer, to: account, message: message, peerName: info.displayName)
     }
 
     func searchNameAndPresentNotification(data: [String: String], hash: String) {
@@ -406,6 +372,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                 return lookupNameResponse.address != nil &&
                     lookupNameResponse.address == hash
             })
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 if let name = lookupNameResponse.name, !name.isEmpty {
                     data [NotificationUserInfoKeys.name.rawValue] = name
