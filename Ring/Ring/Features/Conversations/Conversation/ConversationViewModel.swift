@@ -181,7 +181,7 @@ class ConversationViewModel: Stateable, ViewModel {
             if !self.isJamsAccount || contact != nil {
                 if let contactUserName = contact?.userName {
                     self.userName.value = contactUserName
-                } else {
+                } else if self.userName.value.isEmpty {
                     self.userName.value = self.conversation.value.hash
 
                     self.subscribeUserServiceLookupStatus()
