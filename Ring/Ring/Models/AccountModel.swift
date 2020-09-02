@@ -97,6 +97,9 @@ class AccountModel: Equatable {
                         ConfigKeyModel(withKey: .accountRegistrationStatus))) {
                     self.status = status
                 }
+
+                let managerConfModel = ConfigKeyModel(withKey: .managerUri)
+                self.isJams = !newDetails.get(withConfigKeyModel: managerConfModel).isEmpty
             }
         }
     }
@@ -108,6 +111,7 @@ class AccountModel: Equatable {
         return self.username.replacingOccurrences(of: "ring:", with: "")
     }
     var type = AccountType.ring
+    var isJams = false
     var status = AccountState.unregistered
     var enabled = true
 

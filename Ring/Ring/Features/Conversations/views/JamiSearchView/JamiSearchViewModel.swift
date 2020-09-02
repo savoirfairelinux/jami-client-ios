@@ -121,6 +121,9 @@ class JamiSearchViewModel {
                         //Create new converation
                         let conversation = ConversationModel(withParticipantUri: uri, accountId: account.id)
                         let newConversation = ConversationViewModel(with: injectionBag)
+                        if lookupResponse.name == self.searchBarText.value {
+                            newConversation.userName.value = lookupResponse.name
+                        }
                         newConversation.conversation = Variable<ConversationModel>(conversation)
                         self.contactFoundConversation.accept(newConversation)
                         self.dataSource.conversationFound(conversation: newConversation, name: self.searchBarText.value)

@@ -943,8 +943,8 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func isJams(for accountId: String) -> Bool {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
-        return !accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.managerUri)).isEmpty
+        guard let account = self.getAccount(fromAccountId: accountId) else { return false }
+        return account.isJams
     }
 
     func enableAccount(enable: Bool, accountId: String) {
