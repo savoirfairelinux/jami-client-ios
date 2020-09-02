@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Ftesa";
 "global.meTabBarTitle" = "Llogari";
 "global.ok" = "OK";
-"global.versionName" = "I lirë si në Liri ";
+"global.versionName" = "Together";
+"global.close" = "Mbylle";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";

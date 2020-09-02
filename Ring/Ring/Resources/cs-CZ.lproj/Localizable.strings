@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Pozvání";
 "global.meTabBarTitle" = "Účet";
 "global.ok" = "OK";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Together";
+"global.close" = "Zavřít";
 
 // Scan
 "scan.badQrCode" = "Špatný kód QR";
@@ -207,7 +208,7 @@
 "accountPage.namePlaceholder" = "Jméno";
 "accountPage.linkDeviceTitle" = "Připojit další zařízení";
 "accountPage.other" = "Ostatní";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Odstranit účet";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Odstranit";
 "accountPage.shareAccountDetails" = "Share Account Details";
@@ -310,7 +311,7 @@
 "generatedMessage.invitationAccepted" = "Pozvání přijato";
 "generatedMessage.outgoingCall" = "Odchozí hovor";
 "generatedMessage.incomingCall" = "Příchozí hovor";
-"generatedMessage.missedOutgoingCall" = "Zmeškaný odchozí hovor";
+"generatedMessage.missedOutgoingCall" = "Nepřijatý odchozí hovor";
 "generatedMessage.missedIncomingCall" = "Zmeškaný příchozí hovor";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
@@ -324,7 +325,7 @@
 "migrateAccount.explanation" = "This account needs to be migrated";
 "migrateAccount.passwordPlaceholder" = "Zadejte heslo";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Odstranit účet";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
 "migrateAccount.cancel" = "Zrušit";

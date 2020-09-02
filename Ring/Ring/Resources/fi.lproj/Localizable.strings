@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Kutsut";
 "global.meTabBarTitle" = "Tunnus";
 "global.ok" = "Vahvista";
-"global.versionName" = "Ilmainen kuin vapaus";
+"global.versionName" = "Together";
+"global.close" = "Sulje";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";

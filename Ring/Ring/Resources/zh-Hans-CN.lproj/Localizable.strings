@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "邀请";
 "global.meTabBarTitle" = "账户";
 "global.ok" = "确定";
-"global.versionName" = "\"Free as in Freedom\"";
+"global.versionName" = "Together";
+"global.close" = "关闭";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";

@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Invitații";
 "global.meTabBarTitle" = "Cont";
 "global.ok" = "Ok";
-"global.versionName" = "Liber ca în Libertate";
+"global.versionName" = "Together";
+"global.close" = "Închide";
 
 // Scan
 "scan.badQrCode" = "Cod QR greșit";

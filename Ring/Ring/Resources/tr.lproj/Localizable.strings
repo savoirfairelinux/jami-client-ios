@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Davetiyeler";
 "global.meTabBarTitle" = "Hesap";
 "global.ok" = "Tamam";
-"global.versionName" = "Özgürlükteki gibi ücretsiz";
+"global.versionName" = "Together";
+"global.close" = "Kapat";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";

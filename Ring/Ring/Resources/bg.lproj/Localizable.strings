@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Покани";
 "global.meTabBarTitle" = "Профил";
 "global.ok" = "Добре";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Together";
+"global.close" = "Затваряне";
 
 // Scan
 "scan.badQrCode" = "Грешен QR-код";

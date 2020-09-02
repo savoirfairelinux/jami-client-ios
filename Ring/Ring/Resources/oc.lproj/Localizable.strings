@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Invitacions";
 "global.meTabBarTitle" = "Compte";
 "global.ok" = "D’acòrdi";
-"global.versionName" = "Liure coma la libertat";
+"global.versionName" = "Together";
+"global.close" = "Tampar";
 
 // Scan
 "scan.badQrCode" = "Marrit QR còdi";

@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "招待";
 "global.meTabBarTitle" = "アカウント";
 "global.ok" = "OK";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Together";
+"global.close" = "閉じる";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";

@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Zaproszenia";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "Ok";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Together";
+"global.close" = "Zamknij";
 
 // Scan
 "scan.badQrCode" = "Niepoprawny kod QR";

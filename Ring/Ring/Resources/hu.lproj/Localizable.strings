@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Meghívások";
 "global.meTabBarTitle" = "Fiók";
 "global.ok" = "Rendben";
-"global.versionName" = "Szabad, mint a szabadság";
+"global.versionName" = "Together";
+"global.close" = "Bezárás";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -205,7 +206,7 @@
 "accountPage.deviceRevocationUnknownDevice" = "Ismeretlen eszköz";
 "accountPage.deviceRevocationError" = "Eszköz visszavonási hiba";
 "accountPage.namePlaceholder" = "Név";
-"accountPage.linkDeviceTitle" = "Csatlakoztasson másik eszközt";
+"accountPage.linkDeviceTitle" = "Másik eszköz összekapcsolása";
 "accountPage.other" = "Másik";
 "accountPage.removeAccountTitle" = "Fiók eltávolítása";
 "accountPage.removeAccountMessage" = "Szeretné eltávolítani ezt a fiókot ezen az eszközön? Óvatosan, ez eltávolítja a fiókot és a regisztrált neve elveszhet. Ez nem vonható vissza.";
@@ -274,11 +275,11 @@
 "contactPage.removeConversation" = "Beszélgetés törlése";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Szignál…";
+"dataTransfer.readableStatusCreated" = "Előkészítés…";
 "dataTransfer.readableStatusError" = "Hiba";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
-"dataTransfer.readableStatusOngoing" = "Hívásátirányítás";
+"dataTransfer.readableStatusOngoing" = "Hívás átadása";
 "dataTransfer.readableStatusCanceled" = "Törölve";
 "dataTransfer.sendingFailed" = "Nem sikerült elküldeni";
 "dataTransfer.readableStatusSuccess" = "Kész";
@@ -295,7 +296,7 @@
 "notifications.locationSharingStopped" = "Bejövő tartózkodási hely megosztása leállítva";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
-"dataTransfer.readableStatusOngoing" = "Hívásátirányítás";
+"dataTransfer.readableStatusOngoing" = "Hívás átadása";
 "dataTransfer.readableStatusCanceled" = "Törölve";
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";

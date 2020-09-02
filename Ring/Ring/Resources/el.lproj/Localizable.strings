@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Λογαριασμός";
 "global.ok" = "Εντάξει";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Together";
+"global.close" = "Κλείσιμο";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

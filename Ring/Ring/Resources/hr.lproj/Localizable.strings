@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Pozivi";
 "global.meTabBarTitle" = "Račun";
 "global.ok" = "U redu";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Together";
+"global.close" = "Close";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

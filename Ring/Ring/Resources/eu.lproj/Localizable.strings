@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Gonbidapenak";
 "global.meTabBarTitle" = "Kontua";
 "global.ok" = "Ados";
-"global.versionName" = "Free as in Freedom";
+"global.versionName" = "Together";
+"global.close" = "Itxi";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

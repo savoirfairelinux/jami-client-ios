@@ -23,7 +23,8 @@
 "global.contactRequestsTabBarTitle" = "دعوت ها";
 "global.meTabBarTitle" = "حساب";
 "global.ok" = "قبول";
-"global.versionName" = "آزاد مانند آزادی";
+"global.versionName" = "Together";
+"global.close" = "بستن";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
