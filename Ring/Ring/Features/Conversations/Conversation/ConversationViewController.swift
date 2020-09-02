@@ -1106,7 +1106,7 @@ extension ConversationViewController: UITableViewDataSource {
                 })
                 .disposed(by: cell.disposeBag)
             cell.openPlayer
-                .subscribe(onNext: { [weak self, weak item, weak cell] open in
+                .subscribe(onNext: { [weak self, weak item] open in
                     guard let self = self,
                         open,
                         let player = item?.getPlayer(conversationViewModel: self.viewModel) else { return }

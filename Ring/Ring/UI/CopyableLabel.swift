@@ -40,7 +40,8 @@ class CopyableLabel: UILabel {
         self.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(self.showMenu)))
     }
 
-    @objc func showMenu(_ recognizer: UILongPressGestureRecognizer) {
+    @objc
+    func showMenu(_ recognizer: UILongPressGestureRecognizer) {
         self.becomeFirstResponder()
 
         let menu = UIMenuController.shared
