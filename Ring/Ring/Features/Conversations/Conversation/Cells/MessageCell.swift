@@ -85,6 +85,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     private var longGestureRecognizer: UILongPressGestureRecognizer?
     var tapGestureRecognizer: UITapGestureRecognizer?
+    var doubleTapGestureRecognizer: UITapGestureRecognizer?
 
     let openPlayer = BehaviorRelay<(Bool)>(value: (false))
 
@@ -205,12 +206,15 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     func configureTapGesture() {
         let shownByDefault = !self.timeLabel.isHidden && !showTimeTap.value && !hasVideoPlayer()
-        if !shownByDefault {
-            self.bubble.isUserInteractionEnabled = true
-            self.tapGestureRecognizer = UITapGestureRecognizer()
-            self.tapGestureRecognizer!.rx.event.bind(onNext: { [weak self] _ in self?.onTapGesture() }).disposed(by: self.disposeBag)
-            self.bubble.addGestureRecognizer(tapGestureRecognizer!)
-        }
+        if shownByDefault { return }
+        self.bubble.isUserInteractionEnabled = true
+        self.tapGestureRecognizer = UITapGestureRecognizer()
+        self.tapGestureRecognizer?.numberOfTapsRequired = 1
+        self.tapGestureRecognizer?.delegate = self
+        self.tapGestureRecognizer!.rx.event.bind(onNext: { [weak self] _ in self?.onTapGesture() }).disposed(by: self.disposeBag)
+        self.bubble.addGestureRecognizer(tapGestureRecognizer!)
+        guard let doubleTap = doubleTapGestureRecognizer else { return }
+        self.tapGestureRecognizer?.require(toFail: doubleTap)
     }
 
     private func changeRelation(constraint: NSLayoutConstraint, relation: NSLayoutConstraint.Relation) {
@@ -681,4 +685,14 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
     // swiftlint:enable cyclomatic_complexity
+}
+
+// MARK: UIGestureRecognizerDelegate
+extension MessageCell {
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }

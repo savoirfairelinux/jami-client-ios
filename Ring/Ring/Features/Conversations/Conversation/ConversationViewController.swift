@@ -918,11 +918,11 @@ class ConversationViewController: UIViewController,
     }
 
     func addShareAction(cell: MessageCell, item: MessageViewModel) {
-        let doubleTap = UITapGestureRecognizer()
-        doubleTap.numberOfTapsRequired = 2
+        cell.doubleTapGestureRecognizer = UITapGestureRecognizer()
+        cell.doubleTapGestureRecognizer?.numberOfTapsRequired = 2
         cell.isUserInteractionEnabled = true
-        cell.addGestureRecognizer(doubleTap)
-        doubleTap.rx.event
+        cell.addGestureRecognizer(cell.doubleTapGestureRecognizer!)
+        cell.doubleTapGestureRecognizer?.rx.event
             .bind(onNext: { [weak self] _ in
                 self?.showShareMenu(transfer: item)
             })
