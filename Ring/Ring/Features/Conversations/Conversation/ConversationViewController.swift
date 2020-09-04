@@ -272,7 +272,7 @@ class ConversationViewController: UIViewController,
     }
 
     func copyImageToCache(image: UIImage, imagePath: String) {
-        guard let imageData = image.pngData() else { return }
+        guard let imageData = image.jpegData(compressionQuality: 90) else { return }
         do {
             self.log.debug("copying image to: \(String(describing: imagePath))")
             try imageData.write(to: URL(fileURLWithPath: imagePath), options: .atomic)
@@ -297,8 +297,8 @@ class ConversationViewController: UIViewController,
                 image = self.fixImageOrientation(image: img)
             }
             // copy image to tmp
-            let imageFileName = "IMG.png"
-            guard let imageData = image.pngData() else { return }
+            let imageFileName = "IMG.jpeg"
+            guard let imageData = image.jpegData(compressionQuality: 90) else { return }
             self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
         } else if picker.sourceType == UIImagePickerController.SourceType.photoLibrary {
             // image from library
@@ -309,9 +309,10 @@ class ConversationViewController: UIViewController,
             // so funky cold medina
             let pathExtension = (imageFileName as NSString).pathExtension
             if pathExtension.caseInsensitiveCompare("heic") == .orderedSame ||
-               pathExtension.caseInsensitiveCompare("heif") == .orderedSame ||
-               pathExtension.caseInsensitiveCompare("jpg") == .orderedSame {
-                imageFileName = (imageFileName as NSString).deletingPathExtension + ".png"
+                pathExtension.caseInsensitiveCompare("heif") == .orderedSame ||
+                pathExtension.caseInsensitiveCompare("jpg") == .orderedSame ||
+                pathExtension.caseInsensitiveCompare("png") == .orderedSame {
+                imageFileName = (imageFileName as NSString).deletingPathExtension + ".jpeg"
             }
 
             guard let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName) else {
