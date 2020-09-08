@@ -924,16 +924,45 @@ class ConversationViewController: UIViewController,
         cell.isUserInteractionEnabled = true
         cell.addGestureRecognizer(cell.doubleTapGestureRecognizer!)
         cell.doubleTapGestureRecognizer?.rx.event
-            .bind(onNext: { [weak self] _ in
-                self?.showShareMenu(transfer: item)
+            .bind(onNext: { [weak self, weak item] _ in
+                guard let item = item else { return }
+                self?.showShareMenu(messageModel: item)
             })
             .disposed(by: cell.disposeBag)
     }
 
-    func showShareMenu(transfer: MessageViewModel) {
-        guard let file = transfer.transferedFile(conversationID: self.viewModel.conversation.value.conversationId) else { return }
-        let itemToShare = [file]
-        let activityViewController = UIActivityViewController(activityItems: itemToShare, applicationActivities: nil)
+    func showShareMenu(messageModel: MessageViewModel) {
+        let conversation = self.viewModel.conversation.value.conversationId
+        let accountId = self.viewModel.conversation.value.accountId
+        if let file = messageModel.transferedFile(conversationID: conversation, accountId: accountId) {
+            self.presentActivitycontrollerWithItems(items: [file])
+            return
+        }
+        if messageModel
+            .getURLFromPhotoLibrary(conversationID: conversation,
+                                    completionHandler: { [weak self, weak messageModel] url in
+                                        if let url = url {
+                                            self?.presentActivitycontrollerWithItems(items: [url])
+                                            return
+                                        }
+                                        guard let messageModel = messageModel else { return }
+                                        self?.shareImage(messageModel: messageModel)
+            }) { return }
+        self.shareImage(messageModel: messageModel)
+    }
+
+    func shareImage(messageModel: MessageViewModel) {
+        let conversationId = self.viewModel.conversation.value.conversationId
+        let accountId = self.viewModel.conversation.value.accountId
+        if let image = messageModel.getTransferedImage(maxSize: 250,
+                                                       conversationID: conversationId,
+                                                       accountId: accountId) {
+            self.presentActivitycontrollerWithItems(items: [image])
+        }
+    }
+
+    func presentActivitycontrollerWithItems(items: [Any]) {
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
         activityViewController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)

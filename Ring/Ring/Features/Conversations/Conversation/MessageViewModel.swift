@@ -225,17 +225,37 @@ class MessageViewModel {
         return (name, size, identifier)
     }
 
-    func transferedFile(conversationID: String) -> URL? {
-        guard let account = self.accountService.currentAccount else { return nil }
+    func getURLFromPhotoLibrary(conversationID: String, completionHandler: @escaping (URL?) -> Void) -> Bool {
+        if self.lastTransferStatus != .success &&
+            self.message.transferStatus != .success { return false }
+        guard let identifier = transferFileData.identifier else { return false }
+        return self.dataTransferService.getFileURLFromPhotoLibrairy(identifier: identifier, completionHandler: completionHandler)
+    }
+
+    func transferedFile(conversationID: String, accountId: String) -> URL? {
+        guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return nil }
         if self.lastTransferStatus != .success &&
             self.message.transferStatus != .success {
             return nil
         }
         let transferInfo = transferFileData
-        let folderName = self.message.incoming ? Directories.downloads.rawValue : Directories.recorded.rawValue
+        if self.message.incoming {
+            return self.dataTransferService
+                .getFileUrl(fileName: transferInfo.fileName,
+                            inFolder: Directories.downloads.rawValue,
+                            accountID: account.id,
+                            conversationID: conversationID)
+        }
+
+        let recorded = self.dataTransferService
+            .getFileUrl(fileName: transferInfo.fileName,
+                        inFolder: Directories.recorded.rawValue,
+                        accountID: account.id,
+                        conversationID: conversationID)
+        guard recorded == nil, recorded?.path.isEmpty ?? true else { return recorded }
         return self.dataTransferService
             .getFileUrl(fileName: transferInfo.fileName,
-                        inFolder: folderName,
+                        inFolder: Directories.downloads.rawValue,
                         accountID: account.id,
                         conversationID: conversationID)
     }
