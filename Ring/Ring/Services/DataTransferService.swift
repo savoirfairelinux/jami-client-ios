@@ -171,9 +171,9 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     func getImage(for name: String, maxSize: CGFloat, identifier: String? = nil,
                   accountID: String, conversationID: String) -> UIImage? {
         if let localImageIdentifier = identifier {
-            if let image = self.transferedImages[localImageIdentifier] {
-                return image.data
-            }
+//            if let image = self.transferedImages[localImageIdentifier] {
+//                return image.data
+//            }
             return self.getImageFromPhotoLibrairy(identifier: localImageIdentifier, maxSize: maxSize, name: name)
         }
         if let image = self.transferedImages[conversationID + name] {
@@ -184,21 +184,31 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     }
 
     func getImageFromPhotoLibrairy(identifier: String, maxSize: CGFloat, name: String) -> UIImage? {
-        let imageManager = PHImageManager.default()
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.resizeMode = PHImageRequestOptionsResizeMode.fast
-        requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
-        requestOptions.isSynchronous = true
         var photo: UIImage?
         guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: PHFetchOptions()).firstObject else {
             return photo
         }
-        imageManager.requestImage(for: asset, targetSize: CGSize(width: maxSize, height: maxSize), contentMode: .aspectFit, options: requestOptions, resultHandler: {(result, _) -> Void in
+        let imageManager = PHImageManager.default()
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.resizeMode = PHImageRequestOptionsResizeMode.exact
+        requestOptions.isSynchronous = true
+        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: requestOptions, resultHandler: {(result, _) -> Void in
             guard let image = result else { return }
             self.transferedImages[identifier] = (true, image)
             photo = image
         })
         return photo
+    }
+
+    func getFileURLFromPhotoLibrairy(identifier: String, completionHandler: @escaping (URL?) -> Void) -> Bool {
+        guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: PHFetchOptions()).firstObject else {
+            return false
+        }
+        let option = PHContentEditingInputRequestOptions()
+        asset.requestContentEditingInput(with: option) { contentEditingInput, _ in
+            completionHandler(contentEditingInput?.fullSizeImageURL)
+        }
+        return true
     }
 
     func getImageFromFile(for name: String,
