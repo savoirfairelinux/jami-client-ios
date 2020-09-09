@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -17,7 +17,11 @@
                 <outlet property="buttonsAllignmentConstraint" destination="bWo-41-gcD" id="9ie-dS-wgV"/>
                 <outlet property="containerView" destination="ABY-u3-5VS" id="6M9-oZ-Ldm"/>
                 <outlet property="durationLabel" destination="B7a-cw-Z2s" id="bjx-eK-uqV"/>
-                <outlet property="incomingImage" destination="xA4-pX-MC4" id="f7a-Uz-dkq"/>
+                <outlet property="imageBottomConstraint" destination="TQo-st-9Jq" id="V7o-KU-IiA"/>
+                <outlet property="imageLeadingConstraint" destination="Si0-gJ-tGK" id="awz-ih-HfL"/>
+                <outlet property="imageTopConstraint" destination="Pbu-c5-kzI" id="tzP-fz-Z4F"/>
+                <outlet property="imageTrailingConstraint" destination="cbv-MY-Zg7" id="S8P-5c-v2Y"/>
+                <outlet property="incomingImage" destination="ezV-YT-sBx" id="8OR-cv-fDL"/>
                 <outlet property="leadingConstraint" destination="XLV-qe-9DE" id="lk7-jh-dhD"/>
                 <outlet property="muteAudio" destination="yln-si-MH9" id="uKn-ld-lq7"/>
                 <outlet property="muteAudioHeightConstraint" destination="w2q-ic-1oe" id="6IP-b8-tk3"/>
@@ -44,9 +48,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xA4-pX-MC4">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ezV-YT-sBx">
                             <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qa1-8d-lpc">
                             <rect key="frame" x="0.0" y="320" width="400" height="80"/>
@@ -177,24 +180,23 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="qa1-8d-lpc" firstAttribute="trailing" secondItem="xA4-pX-MC4" secondAttribute="trailing" id="0bX-lM-e6K"/>
-                        <constraint firstItem="4BH-wO-znU" firstAttribute="top" secondItem="xA4-pX-MC4" secondAttribute="top" id="2CD-GP-uVd"/>
-                        <constraint firstAttribute="bottom" secondItem="xA4-pX-MC4" secondAttribute="bottom" id="5fJ-0Q-SDk"/>
-                        <constraint firstItem="4BH-wO-znU" firstAttribute="leading" secondItem="xA4-pX-MC4" secondAttribute="leading" id="BYJ-kU-pxp"/>
-                        <constraint firstItem="xA4-pX-MC4" firstAttribute="top" secondItem="NF5-DN-i1x" secondAttribute="top" id="EZb-N3-gGQ"/>
-                        <constraint firstItem="4BH-wO-znU" firstAttribute="trailing" secondItem="xA4-pX-MC4" secondAttribute="trailing" id="UBZ-VN-vYe"/>
-                        <constraint firstItem="qa1-8d-lpc" firstAttribute="leading" secondItem="xA4-pX-MC4" secondAttribute="leading" id="Xq2-Ce-JCw"/>
+                        <constraint firstAttribute="trailing" secondItem="qa1-8d-lpc" secondAttribute="trailing" id="Cl8-c2-6ap"/>
+                        <constraint firstAttribute="trailing" secondItem="4BH-wO-znU" secondAttribute="trailing" id="NzR-ZP-aJm"/>
+                        <constraint firstItem="4BH-wO-znU" firstAttribute="top" secondItem="NF5-DN-i1x" secondAttribute="top" id="Qbw-d0-Emr"/>
                         <constraint firstItem="sFU-4q-kSY" firstAttribute="leading" secondItem="yln-si-MH9" secondAttribute="leading" priority="999" constant="-3" id="bWo-41-gcD"/>
-                        <constraint firstAttribute="trailing" secondItem="xA4-pX-MC4" secondAttribute="trailing" id="ptx-nI-K8C"/>
-                        <constraint firstItem="xA4-pX-MC4" firstAttribute="leading" secondItem="NF5-DN-i1x" secondAttribute="leading" id="tw4-5C-S2J"/>
+                        <constraint firstItem="qa1-8d-lpc" firstAttribute="leading" secondItem="NF5-DN-i1x" secondAttribute="leading" id="o57-5o-RXl"/>
                         <constraint firstAttribute="bottom" secondItem="qa1-8d-lpc" secondAttribute="bottom" id="uN6-PJ-UIw"/>
+                        <constraint firstItem="4BH-wO-znU" firstAttribute="leading" secondItem="NF5-DN-i1x" secondAttribute="leading" id="vty-JJ-K1e"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
+                <constraint firstItem="ezV-YT-sBx" firstAttribute="top" secondItem="ABY-u3-5VS" secondAttribute="top" id="Pbu-c5-kzI"/>
                 <constraint firstItem="NF5-DN-i1x" firstAttribute="top" secondItem="ABY-u3-5VS" secondAttribute="top" id="S5k-Et-mtY"/>
+                <constraint firstItem="ezV-YT-sBx" firstAttribute="leading" secondItem="ABY-u3-5VS" secondAttribute="leading" id="Si0-gJ-tGK"/>
+                <constraint firstAttribute="bottom" secondItem="ezV-YT-sBx" secondAttribute="bottom" id="TQo-st-9Jq"/>
+                <constraint firstAttribute="trailing" secondItem="ezV-YT-sBx" secondAttribute="trailing" id="cbv-MY-Zg7"/>
                 <constraint firstItem="NF5-DN-i1x" firstAttribute="leading" secondItem="hZB-yH-d67" secondAttribute="leading" id="hgC-R1-d3L"/>
                 <constraint firstItem="NF5-DN-i1x" firstAttribute="bottom" secondItem="hZB-yH-d67" secondAttribute="bottom" id="n38-Ye-yql"/>
                 <constraint firstItem="NF5-DN-i1x" firstAttribute="trailing" secondItem="hZB-yH-d67" secondAttribute="trailing" id="y4K-Ly-xAg"/>

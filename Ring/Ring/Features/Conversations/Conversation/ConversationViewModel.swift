@@ -693,8 +693,8 @@ extension ConversationViewModel {
                                                         contactUri: self.conversation.value.participantUri)
     }
 
-    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?) {
-        self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image))
+    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, frame: CGRect) {
+        self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, frame: frame))
     }
 }
 

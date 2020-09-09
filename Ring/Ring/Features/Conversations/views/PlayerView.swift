@@ -69,6 +69,11 @@ class PlayerView: UIView {
     @IBOutlet weak var muteAudioWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var muteAudioHeightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
+
     var viewModel: PlayerViewModel!
     let disposeBag = DisposeBag()
     var sliderDisposeBag = DisposeBag()
@@ -229,7 +234,7 @@ class PlayerView: UIView {
     func sizeChanged() {
         switch self.sizeMode {
         case .fullScreen:
-            self.backgroundView.backgroundColor = UIColor.black
+           // self.backgroundView.backgroundColor = UIColor.black
             let circleImage = makeCircleWith(size: CGSize(width: 15, height: 15),
                                              backgroundColor: UIColor.white)
             self.progressSlider.setThumbImage(circleImage, for: .normal)
@@ -294,6 +299,38 @@ class PlayerView: UIView {
             guard let self = self else { return }
             self.bottomGradient.alpha = CGFloat(alpha)
             self.topGradient.alpha = CGFloat(alpha)
+        })
+    }
+
+    func resizeViewFromFrame(frame: CGRect, from parentFrame: CGRect) {
+        let left: CGFloat = frame.origin.x
+        let top: CGFloat = frame.origin.y
+        let right = parentFrame.width - frame.origin.x - frame.size.width
+        let bottom = parentFrame.height - frame.origin.y - frame.size.height
+        self.imageLeadingConstraint.constant = left
+        self.imageTrailingConstraint.constant = -right
+        self.imageTopConstraint.constant = top
+        self.imageBottomConstraint.constant = bottom
+        self.bottomGradient.isHidden = true
+        self.topGradient.isHidden = true
+        self.backgroundView.backgroundColor = UIColor.clear
+        self.layoutIfNeeded()
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       options: [.curveEaseInOut],
+                       animations: { [weak self] in
+                        guard let self = self else { return }
+                        self.imageLeadingConstraint.constant = 0
+                        self.imageTrailingConstraint.constant = 0
+                        self.imageTopConstraint.constant = 0
+                        self.imageBottomConstraint.constant = 0
+                        self.layoutIfNeeded()
+            }, completion: { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                    self.bottomGradient.isHidden = false
+                    self.topGradient.isHidden = false
+                    self.backgroundView.backgroundColor = UIColor.black
+                })
         })
     }
 }
