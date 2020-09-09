@@ -36,7 +36,7 @@ enum ConversationState: State {
     case fromCallToConversation(conversation: ConversationViewModel)
     case needAccountMigration(accountId: String)
     case accountModeChanged
-    case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?)
+    case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, frame: CGRect)
     case replaceCurrentWithConversationFor(participantUri: String)
 }
 
@@ -75,8 +75,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.migrateAccount(accountId: accountId)
                 case .accountModeChanged:
                     self.accountModeChanged()
-                case .openFullScreenPreview(let parentView, let viewModel, let image):
-                    self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image)
+                case .openFullScreenPreview(let parentView, let viewModel, let image, let frame):
+                    self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, frame: frame)
                 default:
                     break
                 }
@@ -105,7 +105,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStateable: recordFileViewController.viewModel)
     }
 
-    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?) {
+    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, frame: CGRect) {
         if viewModel == nil && image == nil { return }
         let previewController = PreviewViewController.instantiate(with: self.injectionBag)
         if let viewModel = viewModel {
@@ -115,7 +115,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             previewController.viewModel.image = image
             previewController.type = .image
         }
-        parentView.addChildController(previewController)
+        parentView.addChildController(previewController, frame: frame)
         previewController.playerView?.sizeMode = .fullScreen
     }
 

@@ -61,7 +61,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     @IBOutlet weak var bubbleViewMask: UIView?
     @IBOutlet weak var messageReadIndicator: UIView?
 
-    private var transferImageView = UIImageView()
+    var transferImageView = UIImageView()
     private var transferProgressView = ProgressView()
     private var composingMsg = UIView()
 
@@ -659,6 +659,13 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
             return 300
         }
         return 250
+    }
+
+    func getInitialFrame() -> CGRect? {
+        if self.playerView != nil {
+            return self.playerView?.convert(self.playerView?.incomingImage.frame ?? CGRect.zero, to: nil)
+        }
+        return self.bubble.convert(self.transferImageView.frame, to: nil)
     }
 
     // swiftlint:enable function_body_length

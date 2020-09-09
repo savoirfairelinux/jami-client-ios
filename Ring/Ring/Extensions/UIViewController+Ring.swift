@@ -153,9 +153,12 @@ extension UIViewController {
                 attrPortrait : attrLandscape
     }
 
-    func addChildController(_ child: UIViewController) {
+    func addChildController(_ child: UIViewController, frame: CGRect) {
         addChild(child)
         view.addSubview(child.view)
+        if let child = child as? PreviewViewController {
+            child.resizeViewFromFrame(frame: frame)
+        }
         child.didMove(toParent: self)
     }
 
