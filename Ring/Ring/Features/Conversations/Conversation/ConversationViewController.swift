@@ -1135,13 +1135,15 @@ extension ConversationViewController: UITableViewDataSource {
                     tableView?.reloadData()
                 })
                 .disposed(by: cell.disposeBag)
-            cell.openPlayer
-                .subscribe(onNext: { [weak self, weak item] open in
+            cell.openPreview
+                .subscribe(onNext: { [weak self, weak item, weak cell] open in
                     guard let self = self,
-                        open,
-                        let player = item?.getPlayer(conversationViewModel: self.viewModel) else { return }
+                        open else { return }
+                    let player = item?.getPlayer(conversationViewModel: self.viewModel)
+                    let image = cell?.transferedImage
+                    if player == nil && image == nil { return }
                     self.inputAccessoryView.isHidden = true
-                    self.viewModel.openFullScreenPlayer(parentView: self, viewModel: player)
+                    self.viewModel.openFullScreenPreview(parentView: self, viewModel: player, image: image)
                 })
             .disposed(by: cell.disposeBag)
             cell.playerHeight
