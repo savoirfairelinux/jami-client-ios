@@ -115,7 +115,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             previewController.viewModel.image = image
             previewController.type = .image
         }
-        parentView.addChildController(previewController)
+        parentView.addChildController(playerController, frame: frame)
         previewController.playerView?.sizeMode = .fullScreen
     }
 
