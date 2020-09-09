@@ -743,7 +743,7 @@ extension ConversationViewModel {
                                                         contactUri: self.conversation.value.participantUri)
     }
 
-    func openFullScreenPlayer(parentView: UIViewController, viewModel: PlayerViewModel) {
-        self.stateSubject.onNext(ConversationState.openFullScreenPlayer(parentView: parentView, viewModel: viewModel))
+    func openFullScreenPlayer(parentView: UIViewController, viewModel: PlayerViewModel, frame: CGRect) {
+        self.stateSubject.onNext(ConversationState.openFullScreenPlayer(parentView: parentView, viewModel: viewModel, frame: frame))
     }
 }

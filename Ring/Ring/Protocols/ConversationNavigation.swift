@@ -36,7 +36,7 @@ enum ConversationState: State {
     case fromCallToConversation(conversation: ConversationViewModel)
     case needAccountMigration(accountId: String)
     case accountModeChanged
-    case openFullScreenPlayer(parentView: UIViewController, viewModel: PlayerViewModel)
+    case openFullScreenPlayer(parentView: UIViewController, viewModel: PlayerViewModel, frame: CGRect)
 }
 
 protocol ConversationNavigation: class {
@@ -74,8 +74,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.migrateAccount(accountId: accountId)
                 case .accountModeChanged:
                     self.accountModeChanged()
-                case .openFullScreenPlayer(let parentView, let viewModel):
-                    self.openFullScreenPlayer(parentView: parentView, viewModel: viewModel)
+                case .openFullScreenPlayer(let parentView, let viewModel, let frame):
+                    self.openFullScreenPlayer(parentView: parentView, viewModel: viewModel, frame: frame)
                 default:
                     break
                 }
@@ -104,10 +104,10 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStateable: recordFileViewController.viewModel)
     }
 
-    func openFullScreenPlayer(parentView: UIViewController, viewModel: PlayerViewModel) {
+    func openFullScreenPlayer(parentView: UIViewController, viewModel: PlayerViewModel, frame: CGRect) {
         let playerController = PlayerViewController.instantiate(with: self.injectionBag)
         playerController.viewModel.playerViewModel = viewModel
-        parentView.addChildController(playerController)
+        parentView.addChildController(playerController, frame: frame)
         playerController.playerView.sizeMode = .fullScreen
     }
 

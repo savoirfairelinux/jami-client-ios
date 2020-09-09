@@ -151,9 +151,44 @@ extension UIViewController {
                 attrPortrait : attrLandscape
     }
 
-    func addChildController(_ child: UIViewController) {
+    func addChildController(_ child: UIViewController, frame: CGRect) {
         addChild(child)
         view.addSubview(child.view)
+        let initialFrame = frame
+        let finalFrame = self.view.frame
+        let xScaleFactor = initialFrame.width / finalFrame.width
+        let yScaleFactor = initialFrame.height / finalFrame.height
+        let origin = frame
+        child.view.frame.origin = frame.origin
+
+//        child.view.center = CGPoint(
+//            x: initialFrame.midX,
+//            y: initialFrame.midY)
+          child.view.transform = CGAffineTransform(scaleX: xScaleFactor, y: yScaleFactor)
+       // let center = child.view.
+        UIView.animate(
+            withDuration: 8,
+            delay: 0.0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+          animations: {
+            child.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            child.view.frame.origin = self.view.frame.origin
+          },
+          completion: { _ in
+            //transitionContext.completeTransition(true)
+          }
+        )
+       // child.didMove(toParent: self)
+//        UIView.transition(with: self.view, duration: 0.5, options: .transitionCurlDown, animations: {
+//            self.view.addSubview(child.view)
+//        }) { (_) in
+//
+//        }
+//
+//        UIView.transitionWithView(self.view, duration: 0.5, options: .TransitionFlipFromLeft, animations: { _ in
+//            self.view.addSubview(child.view)
+//        }, completion: nil)
         child.didMove(toParent: self)
     }
 

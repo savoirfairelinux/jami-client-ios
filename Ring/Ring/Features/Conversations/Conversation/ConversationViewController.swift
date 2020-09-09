@@ -1141,7 +1141,9 @@ extension ConversationViewController: UITableViewDataSource {
                         open,
                         let player = item?.getPlayer(conversationViewModel: self.viewModel) else { return }
                     self.inputAccessoryView.isHidden = true
-                    self.viewModel.openFullScreenPlayer(parentView: self, viewModel: player)
+//                            var yourFrame = yourScrollView.convertRect(yourScrollView.frame, to: self.view)
+                    let frame = cell.bubble.superview!.convert(cell.bubble.frame, to: nil)
+                    self.viewModel.openFullScreenPlayer(parentView: self, viewModel: player, frame: frame)
                 })
             .disposed(by: cell.disposeBag)
             cell.playerHeight
