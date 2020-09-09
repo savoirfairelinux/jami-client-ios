@@ -153,9 +153,13 @@ extension UIViewController {
                 attrPortrait : attrLandscape
     }
 
-    func addChildController(_ child: UIViewController) {
+    @objc
+    func resizeFrom(initialFrame: CGRect) {}
+
+    func addChildController(_ child: UIViewController, initialFrame: CGRect) {
         addChild(child)
         view.addSubview(child.view)
+        child.resizeFrom(initialFrame: initialFrame)
         child.didMove(toParent: self)
     }
 

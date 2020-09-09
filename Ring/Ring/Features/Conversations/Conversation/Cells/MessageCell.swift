@@ -661,6 +661,13 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         return 250
     }
 
+    func getInitialFrame() -> CGRect? {
+        if self.playerView != nil {
+            return self.playerView?.convert(self.playerView?.incomingImage.frame ?? CGRect.zero, to: nil)
+        }
+        return self.bubble.convert(self.transferImageView.frame, to: nil)
+    }
+
     // swiftlint:enable function_body_length
 
     func displayTransferedImage(message: MessageViewModel, conversationID: String, accountId: String) {

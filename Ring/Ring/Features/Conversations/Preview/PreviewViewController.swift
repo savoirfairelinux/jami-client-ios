@@ -32,6 +32,11 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
 @IBOutlet weak var playerView: PlayerView!
 @IBOutlet weak var imageView: UIImageView!
 @IBOutlet private weak var hideButton: UIButton!
+@IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
+@IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
+@IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
+@IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
+@IBOutlet weak var backgroundView: UIView!
 
 // MARK: - members
     let disposeBag = DisposeBag()
@@ -62,16 +67,45 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.navigationBar.alpha = 0
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.navigationBar.alpha = 1
     }
 
     @objc
     func screenTapped() {
         self.playerView.changeControlsVisibility()
+    }
+
+    override func resizeFrom(initialFrame: CGRect) {
+        if self.type == .player {
+            self.playerView.resizeFrom(frame: initialFrame)
+            return
+        }
+        let leftConstraint: CGFloat = initialFrame.origin.x
+        let topConstraint: CGFloat = initialFrame.origin.y
+        let rightConstraint: CGFloat = self.view.frame.width - initialFrame.origin.x - initialFrame.size.width
+        let bottomConstraint: CGFloat = self.view.frame.height - initialFrame.origin.y - initialFrame.size.height
+        imageLeadingConstraint.constant = leftConstraint
+        imageTrailingConstraint.constant = -rightConstraint
+        imageTopConstraint.constant = topConstraint
+        imageBottomConstraint.constant = bottomConstraint
+        self.view.layoutIfNeeded()
+        backgroundView.alpha = 0
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       options: [.curveEaseInOut],
+                       animations: { [weak self] in
+                        guard let self = self else { return }
+                        self.imageLeadingConstraint.constant = 0
+                        self.imageTrailingConstraint.constant = 0
+                        self.imageTopConstraint.constant = 0
+                        self.imageBottomConstraint.constant = 0
+                        self.backgroundView.alpha = 1
+                        self.view.layoutIfNeeded()
+            }, completion: nil)
     }
 }

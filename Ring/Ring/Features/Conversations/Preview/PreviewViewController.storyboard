@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="edr-AU-dxH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="edr-AU-dxH">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -14,8 +14,12 @@
                 <viewController modalPresentationStyle="overCurrentContext" id="edr-AU-dxH" customClass="PreviewViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QAC-jd-TeH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Qb-6X-Utl">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kNJ-67-zFf">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
@@ -33,8 +37,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jga-0U-qXG" customClass="PlayerView" customModule="Ring" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="Jga-0U-qXG" customClass="PlayerView" customModule="Ring" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0z-cK-ISY">
@@ -45,28 +50,36 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="s0z-cK-ISY" firstAttribute="top" secondItem="dJP-6X-zM4" secondAttribute="top" priority="250" id="0CU-8Q-b0S"/>
+                            <constraint firstItem="9Qb-6X-Utl" firstAttribute="leading" secondItem="QAC-jd-TeH" secondAttribute="leading" id="39d-qj-71g"/>
                             <constraint firstItem="s0z-cK-ISY" firstAttribute="trailing" secondItem="Jga-0U-qXG" secondAttribute="trailing" constant="-25" id="IcL-2k-lX8"/>
                             <constraint firstItem="Jga-0U-qXG" firstAttribute="top" secondItem="QAC-jd-TeH" secondAttribute="top" id="Ome-jS-TQa"/>
+                            <constraint firstAttribute="bottom" secondItem="9Qb-6X-Utl" secondAttribute="bottom" id="R1V-fE-JGu"/>
                             <constraint firstItem="umc-Uj-AVs" firstAttribute="top" secondItem="QAC-jd-TeH" secondAttribute="top" id="RVi-sm-LCM"/>
                             <constraint firstItem="umc-Uj-AVs" firstAttribute="leading" secondItem="dJP-6X-zM4" secondAttribute="leading" id="XwX-7d-vQ6"/>
                             <constraint firstItem="umc-Uj-AVs" firstAttribute="trailing" secondItem="dJP-6X-zM4" secondAttribute="trailing" id="YM7-gv-hs7"/>
-                            <constraint firstAttribute="bottom" secondItem="kNJ-67-zFf" secondAttribute="bottom" id="Z3A-GV-6Py"/>
-                            <constraint firstItem="kNJ-67-zFf" firstAttribute="trailing" secondItem="dJP-6X-zM4" secondAttribute="trailing" id="Zxa-bY-zaY"/>
-                            <constraint firstItem="kNJ-67-zFf" firstAttribute="top" secondItem="QAC-jd-TeH" secondAttribute="top" id="dfd-jX-3gc"/>
+                            <constraint firstAttribute="bottom" secondItem="kNJ-67-zFf" secondAttribute="bottom" priority="999" id="Z3A-GV-6Py"/>
+                            <constraint firstItem="kNJ-67-zFf" firstAttribute="trailing" secondItem="dJP-6X-zM4" secondAttribute="trailing" priority="999" id="Zxa-bY-zaY"/>
+                            <constraint firstItem="kNJ-67-zFf" firstAttribute="top" secondItem="QAC-jd-TeH" secondAttribute="top" priority="999" id="dfd-jX-3gc"/>
                             <constraint firstItem="Jga-0U-qXG" firstAttribute="trailing" secondItem="dJP-6X-zM4" secondAttribute="trailing" id="ghI-xu-LN9"/>
                             <constraint firstAttribute="bottom" secondItem="Jga-0U-qXG" secondAttribute="bottom" id="hnX-Bb-YSU"/>
-                            <constraint firstItem="kNJ-67-zFf" firstAttribute="leading" secondItem="dJP-6X-zM4" secondAttribute="leading" id="kuI-nK-lr1"/>
+                            <constraint firstAttribute="trailing" secondItem="9Qb-6X-Utl" secondAttribute="trailing" id="ilk-ff-R1I"/>
+                            <constraint firstItem="kNJ-67-zFf" firstAttribute="leading" secondItem="dJP-6X-zM4" secondAttribute="leading" priority="999" id="kuI-nK-lr1"/>
                             <constraint firstItem="Jga-0U-qXG" firstAttribute="leading" secondItem="dJP-6X-zM4" secondAttribute="leading" id="lQU-Ek-RAG"/>
+                            <constraint firstItem="9Qb-6X-Utl" firstAttribute="top" secondItem="QAC-jd-TeH" secondAttribute="top" id="nIf-wb-wOx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dJP-6X-zM4"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backgroundView" destination="9Qb-6X-Utl" id="nva-VK-fcG"/>
                         <outlet property="hideButton" destination="s0z-cK-ISY" id="PeP-TI-Y2O"/>
+                        <outlet property="imageBottomConstraint" destination="Z3A-GV-6Py" id="4dp-wF-Ix2"/>
+                        <outlet property="imageLeadingConstraint" destination="kuI-nK-lr1" id="B3O-ys-cj4"/>
+                        <outlet property="imageTopConstraint" destination="dfd-jX-3gc" id="ijp-lj-77W"/>
+                        <outlet property="imageTrailingConstraint" destination="Zxa-bY-zaY" id="gac-QR-lKz"/>
                         <outlet property="imageView" destination="kNJ-67-zFf" id="rTG-bA-Gz6"/>
                         <outlet property="playerView" destination="Jga-0U-qXG" id="nNg-vJ-wZp"/>
                     </connections>
