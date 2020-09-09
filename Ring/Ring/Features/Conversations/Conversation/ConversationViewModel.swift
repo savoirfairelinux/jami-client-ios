@@ -26,7 +26,6 @@ import UIKit
 import RxSwift
 import SwiftyBeaver
 
-// swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class ConversationViewModel: Stateable, ViewModel {
 
@@ -695,8 +694,8 @@ extension ConversationViewModel {
                                                         contactUri: self.conversation.value.participantUri)
     }
 
-    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?) {
-        self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image))
+    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect) {
+        self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame))
     }
 }
 

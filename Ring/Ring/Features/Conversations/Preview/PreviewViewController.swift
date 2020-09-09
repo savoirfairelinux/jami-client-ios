@@ -32,6 +32,12 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
 @IBOutlet weak var playerView: PlayerView!
 @IBOutlet weak var imageView: UIImageView!
 @IBOutlet private weak var hideButton: UIButton!
+@IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
+@IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
+@IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
+@IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
+@IBOutlet weak var backgroundView: UIView!
+@IBOutlet weak var gradientView: UIView!
 
 // MARK: - members
     let disposeBag = DisposeBag()
@@ -42,6 +48,16 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.playerView.isHidden = self.type == .image
+        self.gradientView.layoutIfNeeded()
+        self.gradientView.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 1), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
+        NotificationCenter.default.rx
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (_) in
+                self?.gradientView.layoutIfNeeded()
+                self?.gradientView.updateGradientFrame()
+            })
+            .disposed(by: self.disposeBag)
         self.hideButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.parent?.inputAccessoryView?.isHidden = false
@@ -73,5 +89,34 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
     @objc
     func screenTapped() {
         self.playerView.changeControlsVisibility()
+    }
+
+    override func resizeFrom(initialFrame: CGRect) {
+        if self.type == .player {
+            self.playerView.resizeFrom(frame: initialFrame)
+            return
+        }
+        let leftConstraint: CGFloat = initialFrame.origin.x
+        let topConstraint: CGFloat = initialFrame.origin.y
+        let rightConstraint: CGFloat = self.view.frame.width - initialFrame.origin.x - initialFrame.size.width
+        let bottomConstraint: CGFloat = self.view.frame.height - initialFrame.origin.y - initialFrame.size.height
+        imageLeadingConstraint.constant = leftConstraint
+        imageTrailingConstraint.constant = -rightConstraint
+        imageTopConstraint.constant = topConstraint
+        imageBottomConstraint.constant = bottomConstraint
+        self.view.layoutIfNeeded()
+        backgroundView.alpha = 0
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       options: [.curveEaseInOut],
+                       animations: { [weak self] in
+                        guard let self = self else { return }
+                        self.imageLeadingConstraint.constant = 0
+                        self.imageTrailingConstraint.constant = 0
+                        self.imageTopConstraint.constant = 0
+                        self.imageBottomConstraint.constant = 0
+                        self.backgroundView.alpha = 1
+                        self.view.layoutIfNeeded()
+            }, completion: nil)
     }
 }

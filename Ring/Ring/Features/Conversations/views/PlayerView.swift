@@ -69,6 +69,11 @@ class PlayerView: UIView {
     @IBOutlet weak var muteAudioWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var muteAudioHeightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
+
     var viewModel: PlayerViewModel!
     let disposeBag = DisposeBag()
     var sliderDisposeBag = DisposeBag()
@@ -295,5 +300,34 @@ class PlayerView: UIView {
             self.bottomGradient.alpha = CGFloat(alpha)
             self.topGradient.alpha = CGFloat(alpha)
         })
+    }
+
+    func resizeFrom(frame: CGRect) {
+        let leftConstraint: CGFloat = frame.origin.x
+        let topConstraint: CGFloat = frame.origin.y
+        let rightConstraint: CGFloat = self.frame.width - frame.origin.x - frame.size.width
+        let bottomConstraint: CGFloat = self.frame.height - frame.origin.y - frame.size.height
+        self.imageLeadingConstraint.constant = leftConstraint
+        self.imageTrailingConstraint.constant = rightConstraint
+        self.imageTopConstraint.constant = topConstraint
+        self.imageBottomConstraint.constant = bottomConstraint
+        self.bottomGradient.alpha = 0
+        self.topGradient.alpha = 0
+        self.backgroundView.alpha = 0
+        self.layoutIfNeeded()
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       options: [.curveEaseInOut],
+                       animations: { [weak self] in
+                        guard let self = self else { return }
+                        self.imageLeadingConstraint.constant = 0
+                        self.imageTrailingConstraint.constant = 0
+                        self.imageTopConstraint.constant = 0
+                        self.imageBottomConstraint.constant = 0
+                        self.bottomGradient.alpha = 1
+                        self.topGradient.alpha = 1
+                        self.backgroundView.alpha = 1
+                        self.layoutIfNeeded()
+            }, completion: nil)
     }
 }
