@@ -129,6 +129,7 @@ class PlayerView: UIView {
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
+        if self.viewModel == nil { return }
         bindViews()
         viewModel.createPlayer()
     }

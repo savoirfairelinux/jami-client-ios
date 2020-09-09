@@ -36,7 +36,7 @@ enum ConversationState: State {
     case fromCallToConversation(conversation: ConversationViewModel)
     case needAccountMigration(accountId: String)
     case accountModeChanged
-    case openFullScreenPlayer(parentView: UIViewController, viewModel: PlayerViewModel)
+    case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?)
 }
 
 protocol ConversationNavigation: class {
@@ -74,8 +74,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.migrateAccount(accountId: accountId)
                 case .accountModeChanged:
                     self.accountModeChanged()
-                case .openFullScreenPlayer(let parentView, let viewModel):
-                    self.openFullScreenPlayer(parentView: parentView, viewModel: viewModel)
+                case .openFullScreenPreview(let parentView, let viewModel, let image):
+                    self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image)
                 default:
                     break
                 }
@@ -104,11 +104,18 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStateable: recordFileViewController.viewModel)
     }
 
-    func openFullScreenPlayer(parentView: UIViewController, viewModel: PlayerViewModel) {
-        let playerController = PlayerViewController.instantiate(with: self.injectionBag)
-        playerController.viewModel.playerViewModel = viewModel
-        parentView.addChildController(playerController)
-        playerController.playerView.sizeMode = .fullScreen
+    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?) {
+        if viewModel == nil && image == nil { return }
+        let previewController = PreviewViewController.instantiate(with: self.injectionBag)
+        if let viewModel = viewModel {
+            previewController.viewModel.playerViewModel = viewModel
+            previewController.type = .player
+        } else if let image = image {
+            previewController.viewModel.image = image
+            previewController.type = .image
+        }
+        parentView.addChildController(previewController)
+        previewController.playerView?.sizeMode = .fullScreen
     }
 
     func openQRCode () {

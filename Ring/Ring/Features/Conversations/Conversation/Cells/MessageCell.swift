@@ -61,7 +61,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     @IBOutlet weak var bubbleViewMask: UIView?
     @IBOutlet weak var messageReadIndicator: UIView?
 
-    private var transferImageView = UIImageView()
+    var transferImageView = UIImageView()
     private var transferProgressView = ProgressView()
     private var composingMsg = UIView()
 
@@ -87,7 +87,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     var tapGestureRecognizer: UITapGestureRecognizer?
     var doubleTapGestureRecognizer: UITapGestureRecognizer?
 
-    let openPlayer = BehaviorRelay<(Bool)>(value: (false))
+    let openPreview = BehaviorRelay<(Bool)>(value: (false))
 
     // MARK: PrepareForReuse
 
@@ -104,7 +104,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.composingMsg.removeFromSuperview()
         self.playerHeight.value = 0
         self.disposeBag = DisposeBag()
-        openPlayer.accept(false)
+        openPreview.accept(false)
         super.prepareForReuse()
     }
 
@@ -198,14 +198,14 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         }
     }
 
-    func hasVideoPlayer() -> Bool {
-        return playerView != nil && playerView!.viewModel.hasVideo.value
+    func supportFullScreenMode() -> Bool {
+        return (playerView != nil && playerView!.viewModel.hasVideo.value) || self.transferImageView.image != nil
     }
 
     // MARK: Configure
 
     func configureTapGesture() {
-        let shownByDefault = !self.timeLabel.isHidden && !showTimeTap.value && !hasVideoPlayer()
+        let shownByDefault = !self.timeLabel.isHidden && !showTimeTap.value && !supportFullScreenMode()
         if shownByDefault { return }
         self.bubble.isUserInteractionEnabled = true
         self.tapGestureRecognizer = UITapGestureRecognizer()
@@ -235,8 +235,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     func onTapGesture() {
         // for player expand size on tap, for other messages show time
-        if playerView != nil {
-            openPlayer.accept(true)
+        if playerView != nil || self.transferImageView.image != nil {
+            openPreview.accept(true)
             return
         }
         self.prepareForTapGesture()
