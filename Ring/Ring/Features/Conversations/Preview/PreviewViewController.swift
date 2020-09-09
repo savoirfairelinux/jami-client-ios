@@ -22,22 +22,26 @@ import UIKit
 import Reusable
 import RxSwift
 
-class PlayerViewController: UIViewController, StoryboardBased, ViewModelBased {
+enum PrevewType {
+    case player
+    case image
+}
+
+class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
 // MARK: - outlets
 @IBOutlet weak var playerView: PlayerView!
+@IBOutlet weak var imageView: UIImageView!
 @IBOutlet private weak var hideButton: UIButton!
 
 // MARK: - members
     let disposeBag = DisposeBag()
-    var viewModel: PlayerControllerModel!
+    var viewModel: PreviewControllerModel!
     var tapGestureRecognizer: UITapGestureRecognizer!
+    var type: PrevewType = .player
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let model = self.viewModel.playerViewModel else { return }
-        self.playerView.viewModel = model
-        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
-        self.view.addGestureRecognizer(tapGestureRecognizer)
+        self.playerView.isHidden = self.type == .image
         self.hideButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.parent?.inputAccessoryView?.isHidden = false
@@ -46,6 +50,14 @@ class PlayerViewController: UIViewController, StoryboardBased, ViewModelBased {
             .disposed(by: self.disposeBag)
         self.hideButton.centerYAnchor.constraint(equalTo: self.playerView.muteAudio.centerYAnchor, constant: 0).isActive = true
         self.hideButton.setTitle(L10n.Global.close, for: .normal)
+        if self.type == .image, let image = self.viewModel.image {
+            self.imageView.image = image
+            return
+        }
+        guard let model = self.viewModel.playerViewModel, let playerView = playerView else { return }
+        playerView.viewModel = model
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
