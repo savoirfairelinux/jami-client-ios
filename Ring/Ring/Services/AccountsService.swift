@@ -758,10 +758,10 @@ class AccountsService: AccountAdapterDelegate {
     func removeAccount(id: String) {
         guard let account = self.getAccount(fromAccountId: id) else { return }
         let shouldRemoveFolder = AccountModelHelper.init(withAccount: account).isAccountSip()
+        self.dbManager.removeDBForAccount(accountId: id, removeFolder: shouldRemoveFolder)
         self.accountAdapter.removeAccount(id)
         self.loadAccountsFromDaemon()
         if self.getAccount(fromAccountId: id) == nil {
-            self.dbManager.removeDBForAccount(accountId: id, removeFolder: shouldRemoveFolder)
             guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 return
             }
