@@ -227,7 +227,7 @@ withHardwareSupport:(BOOL)hardwareSupport {
     std::vector<std::map<std::string, std::string>> devInfo;
     auto setting = [Utils dictionnaryToMap:deviceInfoDict];
     devInfo.emplace_back(setting);
-    DRing::addVideoDevice(std::string([deviceName UTF8String]), &devInfo);
+    DRing::addVideoDevice(std::string([deviceName UTF8String]), devInfo);
     DRing::setDefaultDevice(std::string([deviceName UTF8String]));
 }
 
