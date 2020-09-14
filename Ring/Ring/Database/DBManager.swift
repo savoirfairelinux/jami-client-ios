@@ -764,7 +764,7 @@ class DBManager {
                                            options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
         }
         let data = try CNContactVCardSerialization.dataWithImageAndUUID(from: contactCard, andImageCompression: 40000)
-        try data.write(to: url)
+        try data?.write(to: url)
     }
 
     private func getConversationsFor(contactUri: String,
