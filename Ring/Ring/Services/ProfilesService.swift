@@ -155,6 +155,11 @@ class ProfilesService {
             }
         }
 
+        if let datautf8 = String(data: vCardData, encoding: .utf8),
+            let dataUtf16 = dataString.data(using: String.Encoding.utf16) {
+            vCardData = dataUtf16
+        }
+
         //Create the vCard, save and db and emit a new event
         if let vCard = CNContactVCardSerialization.parseToVCard(data: vCardData) {
             let name = VCardUtils.getName(from: vCard)

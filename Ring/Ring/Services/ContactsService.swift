@@ -213,7 +213,7 @@ class ContactsService {
                         cardChanged = true
                     }
                     if cardChanged {
-                        payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000)
+                        payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000, encoding: .utf8)
                     }
                 }
                 self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: account.id)

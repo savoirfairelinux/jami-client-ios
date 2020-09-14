@@ -36,7 +36,7 @@ enum VCardFields: String {
 
 extension CNContactVCardSerialization {
 
-    class func dataWithImageAndUUID(from contact: CNContact, andImageCompression compressedSize: Int?) throws -> Data {
+    class func dataWithImageAndUUID(from contact: CNContact, andImageCompression compressedSize: Int?, encoding: String.Encoding = .utf16) throws -> Data? {
 
         // recreate vCard string
         let beginString = VCardFields.begin.rawValue + "\n"
@@ -51,7 +51,7 @@ extension CNContactVCardSerialization {
 
         // if contact have an image add it to vCard data
         guard var image = contact.imageData  else {
-            return vCardString.data(using: .utf8)!
+            return vCardString.data(using: encoding)
         }
 
         var photofieldName = VCardFields.photoPNG
@@ -63,17 +63,15 @@ extension CNContactVCardSerialization {
                 .convert(toSize: CGSize(width: 200.0, height: 200.0), scale: 1)
         }
 
-        if let scaledImage = scaledImage {
-            if scaledImage.pngData() != nil {
-                image = scaledImage.pngData()!
-            }
+        if let scaledImage = scaledImage, let data = scaledImage.pngData() {
+            image = data
         }
 
         if let compressionSize = compressedSize {
             // compress image before sending vCard
             guard let compressedImage = UIImage(data: image)?
                 .convertToData(ofMaxSize: compressionSize) else {
-                    return vCardString.data(using: .utf8)!
+                    return vCardString.data(using: encoding)
             }
 
             image = compressedImage
@@ -84,7 +82,7 @@ extension CNContactVCardSerialization {
         let vcardImageString = photofieldName.rawValue + base64Image + "\n"
         vCardString = vCardString.replacingOccurrences(of: VCardFields.end.rawValue, with: (vcardImageString + VCardFields.end.rawValue))
 
-        return vCardString.data(using: .utf8)!
+        return vCardString.data(using: encoding)
     }
 
     class func parseToVCard(data: Data) -> CNContact? {
@@ -92,13 +90,18 @@ extension CNContactVCardSerialization {
         do {
             try ObjCHandler.try {
                 guard let vCards = try? CNContactVCardSerialization.contacts(with: data),
-                    let vCard = vCards.first,
-                    let returnData = String(data: data, encoding: .utf8) else { return }
+                    let vCard = vCards.first else { return }
+                var stringData = String(data: data, encoding: .utf16)
+                if stringData == nil {
+                    stringData = String(data: data, encoding: .utf8)
+                }
+                guard let returnData = stringData else { return }
                 let contentArr = returnData.components(separatedBy: "\n")
-                guard let nameRow = contentArr.filter({ String($0.prefix(3)) == VCardFields.fullName.rawValue }).first else { return }
                 let vcard = CNMutableContact()
-                let name = String(nameRow.suffix(nameRow.count - 3))
-                vcard.familyName = name
+                if let nameRow = contentArr.filter({ String($0.prefix(3)) == VCardFields.fullName.rawValue }).first {
+                    let name = String(nameRow.suffix(nameRow.count - 3))
+                    vcard.familyName = name
+                }
                 vcard.phoneNumbers = vCard.phoneNumbers
                 vcard.imageData = vCard.imageData
                 contact = vcard
