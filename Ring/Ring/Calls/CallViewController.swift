@@ -27,7 +27,7 @@ import SwiftyBeaver
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
+class CallViewController: UIViewController, StoryboardBased, ViewModelBased, ContactPickerDelegate {
 
     //preview screen
     @IBOutlet private weak var profileImageView: UIImageView!
@@ -738,6 +738,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.infoContainer.isHidden = false
     }
 
+    // MARK: ContactPickerDelegate
     func presentContactPicker(contactPickerVC: ContactPickerViewController) {
         self.addChild(contactPickerVC)
         let newFrame = CGRect(x: 0, y: self.view.frame.size.height * 0.3, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
@@ -752,6 +753,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.view.layoutIfNeeded()
             }, completion: {  _ in
         })
+    }
+
+    func contactPickerDismissed() {
+        self.addTapGesture()
     }
 }
 

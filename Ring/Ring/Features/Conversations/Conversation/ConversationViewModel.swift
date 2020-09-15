@@ -251,12 +251,15 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var hideDate: Bool { self.conversation.value.messages.isEmpty }
 
-    func sendMessage(withContent content: String) {
+    func sendMessage(withContent content: String, contactURI: String? = nil) {
         // send a contact request if this is the first message (implicitly not a contact)
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
-
+        var receipientURI = self.conversation.value.participantUri
+        if let contactURI = contactURI {
+            receipientURI = contactURI
+        }
         guard let account = self.accountService.currentAccount else { return }
         //if in call send sip msg
         if let call = self.callService.call(participantHash: self.conversation.value.hash, accountID: self.conversation.value.accountId) {
@@ -266,7 +269,7 @@ class ConversationViewModel: Stateable, ViewModel {
         self.conversationsService
             .sendMessage(withContent: content,
                          from: account,
-                         recipientUri: self.conversation.value.participantUri)
+                         recipientUri: receipientURI)
             .subscribe(onCompleted: { [weak self] in
                 self?.log.debug("Message sent")
             })
@@ -385,59 +388,6 @@ class ConversationViewModel: Stateable, ViewModel {
     func recordAudioFile() {
         closeAllPlayers()
         self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: true))
-    }
-
-    func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil) {
-        guard let accountId = accountService.currentAccount?.id else { return }
-        self.dataTransferService.sendFile(filePath: filePath,
-                                          displayName: displayName,
-                                          accountId: accountId,
-                                          peerInfoHash: self.conversation.value.hash,
-                                          localIdentifier: localIdentifier)
-    }
-
-    func sendAndSaveFile(displayName: String, imageData: Data) {
-        guard let accountId = accountService.currentAccount?.id else { return }
-        self.dataTransferService.sendAndSaveFile(displayName: displayName,
-                                                 accountId: accountId,
-                                                 peerInfoHash: self.conversation.value.hash,
-                                                 imageData: imageData,
-                                                 conversationId: self.conversation.value.conversationId)
-    }
-
-    func acceptTransfer(transferId: UInt64, interactionID: Int64, messageContent: inout String) -> NSDataTransferError {
-        guard let accountId = accountService.currentAccount?.id else { return .unknown }
-        return self.dataTransferService.acceptTransfer(withId: transferId, interactionID: interactionID,
-                                                       fileName: &messageContent, accountID: accountId,
-                                                       conversationID: self.conversation.value.conversationId)
-    }
-
-    func cancelTransfer(transferId: UInt64) -> NSDataTransferError {
-        let err = self.dataTransferService.cancelTransfer(withId: transferId)
-        if err != .success {
-            guard let currentAccount = self.accountService.currentAccount else {
-                return err
-            }
-            let peerInfoHash = conversation.value.participantUri
-            self.conversationsService.transferStatusChanged(DataTransferStatus.error, for: transferId, accountId: currentAccount.id, to: peerInfoHash)
-        }
-        return err
-    }
-
-    func getTransferProgress(transferId: UInt64) -> Float? {
-        return self.dataTransferService.getTransferProgress(withId: transferId)
-    }
-
-    func isTransferImage(transferId: UInt64) -> Bool? {
-        guard let account = self.accountService.currentAccount else { return nil }
-        return self.dataTransferService.isTransferImage(withId: transferId,
-                                                        accountID: account.id,
-                                                        conversationID: self.conversation.value.conversationId)
-    }
-
-    func getTransferSize(transferId: UInt64) -> Int64? {
-        guard let info = self.dataTransferService.getTransferInfo(withId: transferId) else { return nil }
-        return info.totalSize
     }
 
     func haveCurrentCall() -> Bool {
@@ -745,5 +695,167 @@ extension ConversationViewModel {
 
     func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?) {
         self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image))
+    }
+}
+
+// MARK: share message
+extension ConversationViewModel {
+
+    private func changeConversationIfNeeded(items: [ConferencableItem]) {
+        let contactsURIs = items.map { item -> String? in
+            item.contacts.first?.uri
+        }
+        .compactMap { $0 }
+        if contactsURIs.contains(self.conversation.value.participantUri) { return }
+        guard let selectedItemURI = contactsURIs.first else { return }
+        self.stateSubject.onNext(ConversationState.replaceCurrentWithConversationFor(participantUri: selectedItemURI))
+    }
+
+    private func shareMessage(message: MessageViewModel, with contact: Contact, fileURL: URL?, image: UIImage?, fileName: String) {
+        if !message.isTransfer {
+            self.sendMessage(withContent: message.content, contactURI: contact.uri)
+            return
+        }
+        if let url = fileURL {
+            if contact.hash == self.conversation.value.hash {
+                self.sendFile(filePath: url.path, displayName: fileName, contactHash: contact.hash)
+            } else if let data = FileManager.default.contents(atPath: url.path),
+                let convId = self.conversationsService.getConversationIdForParticipant(participantUri: contact.uri) {
+                self.sendAndSaveFile(displayName: fileName, imageData: data, contactHash: contact.hash, conversation: convId)
+            }
+            return
+        }
+        guard let image = image else { return }
+        let identifier = message.transferFileData.identifier
+        if identifier != nil {
+            self.sendImageFromPhotoLibraty(image: image, imageName: fileName, localIdentifier: identifier, contactHash: contact.hash)
+            return
+        }
+        guard let data = image.jpegData(compressionQuality: 100),
+            let convId = self.conversationsService.getConversationIdForParticipant(participantUri: contact.uri) else { return }
+        self.sendAndSaveFile(displayName: fileName, imageData: data, contactHash: contact.hash, conversation: convId)
+    }
+
+    private func shareMessage(message: MessageViewModel, with selectedContacts: [ConferencableItem]) {
+        let conversationId = self.conversation.value.conversationId
+        let accountId = self.conversation.value.accountId
+        // to send file we need to have file url or image
+        let url = message.transferedFile(conversationID: conversationId, accountId: accountId)
+        let image = url == nil ? message.getTransferedImage(maxSize: 200, conversationID: conversationId, accountId: accountId) : nil
+        var fileName = message.content
+        if message.content.contains("\n") {
+            guard let substring = message.content.split(separator: "\n").first else { return }
+            fileName = String(substring)
+        }
+        selectedContacts.forEach { (item) in
+            guard let contact = item.contacts.first else { return }
+            self.shareMessage(message: message, with: contact, fileURL: url, image: image, fileName: fileName)
+        }
+        self.changeConversationIfNeeded(items: selectedContacts)
+    }
+
+    func slectContactsToShareMessage(message: MessageViewModel) {
+        guard !message.message.isGenerated,
+            !message.message.isLocationSharing else { return }
+        self.stateSubject.onNext(ConversationState.showContactPicker(callID: "", contactSelectedCB: {[weak self] (selectedItems) in
+            self?.shareMessage(message: message, with: selectedItems)
+        }))
+    }
+}
+
+// MARK: file transfer
+extension ConversationViewModel {
+
+    func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil, contactHash: String? = nil) {
+        guard let accountId = accountService.currentAccount?.id else { return }
+        var hash = self.conversation.value.hash
+        if let contactHash = contactHash {
+            hash = contactHash
+        }
+        self.dataTransferService.sendFile(filePath: filePath,
+                                          displayName: displayName,
+                                          accountId: accountId,
+                                          peerInfoHash: hash,
+                                          localIdentifier: localIdentifier)
+    }
+
+    func sendAndSaveFile(displayName: String, imageData: Data, contactHash: String? = nil, conversation: String? = nil) {
+        guard let accountId = accountService.currentAccount?.id else { return }
+        var hash = self.conversation.value.hash
+        if let contactHash = contactHash {
+            hash = contactHash
+        }
+        var conversationId = self.conversation.value.conversationId
+        if let conversation = conversation {
+            conversationId = conversation
+        }
+        self.dataTransferService.sendAndSaveFile(displayName: displayName,
+                                                 accountId: accountId,
+                                                 peerInfoHash: hash,
+                                                 imageData: imageData,
+                                                 conversationId: conversationId)
+    }
+
+    func sendImageFromPhotoLibraty(image: UIImage, imageName: String, localIdentifier: String?, contactHash: String? = nil) {
+        var imageFileName = imageName
+        let pathExtension = (imageFileName as NSString).pathExtension
+        if pathExtension.caseInsensitiveCompare("heic") == .orderedSame ||
+            pathExtension.caseInsensitiveCompare("heif") == .orderedSame ||
+            pathExtension.caseInsensitiveCompare("jpg") == .orderedSame ||
+            pathExtension.caseInsensitiveCompare("png") == .orderedSame {
+            imageFileName = (imageFileName as NSString).deletingPathExtension + ".jpeg"
+        }
+        guard let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName) else {
+            return
+        }
+        copyImageToCache(image: image, imagePath: localCachePath.path)
+        self.sendFile(filePath: localCachePath.path,
+                      displayName: imageFileName,
+                      localIdentifier: localIdentifier,
+                      contactHash: contactHash)
+    }
+
+    private func copyImageToCache(image: UIImage, imagePath: String) {
+        guard let imageData = image.jpegData(compressionQuality: 90) else { return }
+        do {
+            try imageData.write(to: URL(fileURLWithPath: imagePath), options: .atomic)
+        } catch {
+            self.log.error("couldn't copy image to cache")
+        }
+    }
+
+    func acceptTransfer(transferId: UInt64, interactionID: Int64, messageContent: inout String) -> NSDataTransferError {
+        guard let accountId = accountService.currentAccount?.id else { return .unknown }
+        return self.dataTransferService.acceptTransfer(withId: transferId, interactionID: interactionID,
+                                                       fileName: &messageContent, accountID: accountId,
+                                                       conversationID: self.conversation.value.conversationId)
+    }
+
+    func cancelTransfer(transferId: UInt64) -> NSDataTransferError {
+        let err = self.dataTransferService.cancelTransfer(withId: transferId)
+        if err != .success {
+            guard let currentAccount = self.accountService.currentAccount else {
+                return err
+            }
+            let peerInfoHash = conversation.value.participantUri
+            self.conversationsService.transferStatusChanged(DataTransferStatus.error, for: transferId, accountId: currentAccount.id, to: peerInfoHash)
+        }
+        return err
+    }
+
+    func getTransferProgress(transferId: UInt64) -> Float? {
+        return self.dataTransferService.getTransferProgress(withId: transferId)
+    }
+
+    func isTransferImage(transferId: UInt64) -> Bool? {
+        guard let account = self.accountService.currentAccount else { return nil }
+        return self.dataTransferService.isTransferImage(withId: transferId,
+                                                        accountID: account.id,
+                                                        conversationID: self.conversation.value.conversationId)
+    }
+
+    func getTransferSize(transferId: UInt64) -> Int64? {
+        guard let info = self.dataTransferService.getTransferInfo(withId: transferId) else { return nil }
+        return info.totalSize
     }
 }
