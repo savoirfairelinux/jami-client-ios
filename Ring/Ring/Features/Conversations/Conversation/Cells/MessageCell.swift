@@ -76,8 +76,11 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     private(set) var messageId: Int64?
     private var isCopyable: Bool = false
+    private var couldBeShared: Bool = false
     private let _deleteMessage = BehaviorRelay<Bool>(value: false)
     var deleteMessage: Observable<Bool> { _deleteMessage.asObservable() }
+
+    var shareMessage = PublishSubject<Bool>()
 
     private let showTimeTap = BehaviorRelay<Bool>(value: false)
     var tappedToShowTime: Observable<Bool> { showTimeTap.asObservable() }
@@ -130,6 +133,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private func prepareForReuseLongGesture() {
         self.messageId = nil
         self.isCopyable = false
+        self.couldBeShared = false
         self._deleteMessage.accept(false)
         if let longGestureRecognizer = longGestureRecognizer {
             self.bubble.removeGestureRecognizer(longGestureRecognizer)
@@ -259,7 +263,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private func configureLongGesture(_ messageId: Int64, _ bubblePosition: BubblePosition, _ isTransfer: Bool, _ isLocationSharingBubble: Bool) {
         self.messageId = messageId
         self.isCopyable = bubblePosition != .generated && !isTransfer && !isLocationSharingBubble
-
+        self.couldBeShared = bubblePosition != .generated && !isLocationSharingBubble
         self.bubble.isUserInteractionEnabled = true
         longGestureRecognizer = UILongPressGestureRecognizer()
         longGestureRecognizer!.rx.event.bind(onNext: { [weak self] _ in self?.onLongGesture() }).disposed(by: self.disposeBag)
@@ -269,10 +273,17 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private func onLongGesture() {
         becomeFirstResponder()
         let menu = UIMenuController.shared
+        let shareItem = UIMenuItem(title: L10n.Global.share, action: NSSelectorFromString("share"))
+        menu.menuItems = [shareItem]
         if !menu.isMenuVisible {
             menu.setTargetRect(self.bubble.frame, in: self)
             menu.setMenuVisible(true, animated: true)
         }
+    }
+
+    @objc
+    func share() {
+        shareMessage.onNext(true)
     }
 
     override func copy(_ sender: Any?) {
@@ -290,7 +301,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return action == #selector(UIResponderStandardEditActions.copy) && self.isCopyable ||
-            action == #selector(UIResponderStandardEditActions.delete)
+            action == #selector(UIResponderStandardEditActions.delete) || (action == NSSelectorFromString("share") && self.couldBeShared)
     }
 
     func toggleCellTimeLabelVisibility() {
