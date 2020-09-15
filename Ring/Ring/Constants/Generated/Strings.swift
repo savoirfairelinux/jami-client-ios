@@ -447,6 +447,8 @@ internal enum L10n {
     internal static let meTabBarTitle = L10n.tr("Localizable", "global.meTabBarTitle")
     /// Ok
     internal static let ok = L10n.tr("Localizable", "global.ok")
+    /// Share
+    internal static let share = L10n.tr("Localizable", "global.share")
     /// Together
     internal static let versionName = L10n.tr("Localizable", "global.versionName")
   }

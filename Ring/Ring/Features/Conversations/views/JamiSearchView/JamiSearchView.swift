@@ -169,7 +169,6 @@ class JamiSearchView: NSObject {
         searchBar.placeholder = L10n.Smartlist.searchBarPlaceholder
         searchBar.searchBarStyle = .minimal
         searchBar.backgroundImage = UIImage()
-        searchBar.placeholder = L10n.Smartlist.searchBarPlaceholder
         searchBar.backgroundColor = UIColor.clear
     }
 }

@@ -33,13 +33,17 @@ class ConversationCell: UITableViewCell, NibReusable {
     @IBOutlet weak var lastMessageDateLabel: UILabel?
     @IBOutlet weak var lastMessagePreviewLabel: UILabel?
     @IBOutlet weak var presenceIndicator: UIView?
+    @IBOutlet weak var selectionIndicator: UIButton?
+    @IBOutlet weak var selectionContainer: UIView?
 
     var avatarSize: CGFloat { return 40 }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        self.backgroundColor = UIColor.jamiUITableViewCellSelection
-        UIView.animate(withDuration: 0.35, animations: {
-            self.backgroundColor = UIColor.jamiUITableViewCellSelection.lighten(by: 5.0)
+        let initialColor = selected ? UIColor.jamiUITableViewCellSelection : UIColor.jamiUITableViewCellSelection.lighten(by: 5.0)
+        let finalColor = selected ? UIColor.jamiUITableViewCellSelection.lighten(by: 5.0) : UIColor.clear
+        self.backgroundColor = initialColor
+        UIView.animate(withDuration: 0.35, animations: { [weak self] in
+            self?.backgroundColor = finalColor
         })
     }
 
