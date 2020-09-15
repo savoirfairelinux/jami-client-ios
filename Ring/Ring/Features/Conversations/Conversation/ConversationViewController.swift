@@ -33,7 +33,7 @@ import MobileCoreServices
 // swiftlint:disable type_body_length
 class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate {
+                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate, ContactPickerDelegate {
 
     let log = SwiftyBeaver.self
 
@@ -271,17 +271,6 @@ class ConversationViewController: UIViewController,
         self.present(imagePicker, animated: true, completion: nil)
     }
 
-    func copyImageToCache(image: UIImage, imagePath: String) {
-        guard let imageData = image.jpegData(compressionQuality: 90) else { return }
-        do {
-            self.log.debug("copying image to: \(String(describing: imagePath))")
-            try imageData.write(to: URL(fileURLWithPath: imagePath), options: .atomic)
-        } catch {
-            self.log.error("couldn't copy image to cache")
-        }
-    }
-
-    // swiftlint:disable cyclomatic_complexity
     internal func imagePickerController(_ picker: UIImagePickerController,
                                         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
@@ -300,58 +289,34 @@ class ConversationViewController: UIViewController,
             let imageFileName = "IMG.jpeg"
             guard let imageData = image.jpegData(compressionQuality: 90) else { return }
             self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
-        } else if picker.sourceType == UIImagePickerController.SourceType.photoLibrary {
-            // image from library
-            guard let phAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
-            var imageFileName = phAsset.value(forKey: "filename") as? String ?? "Unknown"
-
-            // seems that HEIC, HEIF, and JPG files in the iOS photo library start with 0x89 0x50 (png)
-            // so funky cold medina
-            let pathExtension = (imageFileName as NSString).pathExtension
-            if pathExtension.caseInsensitiveCompare("heic") == .orderedSame ||
-                pathExtension.caseInsensitiveCompare("heif") == .orderedSame ||
-                pathExtension.caseInsensitiveCompare("jpg") == .orderedSame ||
-                pathExtension.caseInsensitiveCompare("png") == .orderedSame {
-                imageFileName = (imageFileName as NSString).deletingPathExtension + ".jpeg"
-            }
-
-            guard let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName) else {
-                return
-            }
-            self.log.debug("localCachePath: \(String(describing: localCachePath))")
-
-            if phAsset.mediaType == .image {
-                if let img = info[.editedImage] as? UIImage {
-                    image = img
-                } else if let img = info[.originalImage] as? UIImage {
-                    image = img
-                }
-                // copy image to tmp
-                copyImageToCache(image: image, imagePath: localCachePath.path)
-                self.viewModel.sendFile(filePath: localCachePath.path,
-                                        displayName: imageFileName,
-                                        localIdentifier: phAsset.localIdentifier)
-            } else if phAsset.mediaType == .video {
-                PHImageManager.default().requestAVAsset(forVideo: phAsset,
-                                                        options: PHVideoRequestOptions(),
-                                                        resultHandler: { (asset, _, _) -> Void in
-                    guard let asset = asset as? AVURLAsset else {
-                        self.log.error("couldn't get asset")
-                        return
-                    }
-                    guard let videoData = NSData(contentsOf: asset.url) else {
-                        self.log.error("couldn't get movie data")
-                        return
-                    }
-                    self.log.debug("copying movie to: \(String(describing: localCachePath))")
-                    videoData.write(toFile: localCachePath.path, atomically: true)
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName,
-                                                   imageData: videoData as Data)
-                })
-            }
+            return
         }
+        guard picker.sourceType == UIImagePickerController.SourceType.photoLibrary,
+            let phAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
+        let imageFileName = phAsset.value(forKey: "filename") as? String ?? "Unknown"
+        // image from library
+        if phAsset.mediaType == .image {
+            if let img = info[.editedImage] as? UIImage {
+                image = img
+            } else if let img = info[.originalImage] as? UIImage {
+                image = img
+            }
+            self.viewModel.sendImageFromPhotoLibraty(image: image, imageName: imageFileName, localIdentifier: phAsset.localIdentifier)
+            return
+        }
+        guard phAsset.mediaType == .video else { return }
+        PHImageManager
+            .default()
+            .requestAVAsset(forVideo: phAsset,
+                            options: PHVideoRequestOptions(),
+                            resultHandler: { (asset, _, _) -> Void in
+                                guard let asset = asset as? AVURLAsset,
+                                let videoData = NSData(contentsOf: asset.url) else {
+                                    return
+                                }
+                                self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: videoData as Data)
+            })
     }
-    // swiftlint:enable cyclomatic_complexity
 
     @objc
     func dismissKeyboard() {
@@ -969,6 +934,24 @@ class ConversationViewController: UIViewController,
         activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
         self.present(activityViewController, animated: true, completion: nil)
     }
+
+    func presentContactPicker(contactPickerVC: ContactPickerViewController) {
+        self.addChild(contactPickerVC)
+        let height = UIApplication.shared.statusBarFrame.height
+        let newFrame = CGRect(x: 0, y: -height, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        contactPickerVC.view.frame = initialFrame
+        self.view.addSubview(contactPickerVC.view)
+        contactPickerVC.didMove(toParent: self)
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            guard let self = self else { return }
+            contactPickerVC.view.frame = newFrame
+            self.inputAccessoryView.isHidden = true
+            //self.mainView.removeGestureRecognizer(self.tapGestureRecognizer)
+            self.view.layoutIfNeeded()
+            }, completion: {  _ in
+        })
+    }
 }
 
 // MARK: TableDataSource
@@ -1015,6 +998,7 @@ extension ConversationViewController: UITableViewDataSource {
             self.transferCellSetup(item, cell, tableView, indexPath)
             self.locationCellSetup(item, cell)
             self.deleteCellSetup(cell)
+            self.resendCellSetup(cell)
             self.tapToShowTimeCellSetup(cell)
 
             return cell
@@ -1036,6 +1020,20 @@ extension ConversationViewController: UITableViewDataSource {
                 }
                 self.isExecutingDeleteMessage = true
                 self.viewModel.deleteMessage(messageId: messageId)
+            })
+            .disposed(by: cell.disposeBag)
+    }
+
+    private func resendCellSetup(_ cell: MessageCell) {
+        cell.shareMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak cell] (shouldResend) in
+                guard shouldResend, let self = self, let cell = cell, let messageId = cell.messageId else { return }
+
+                if cell as? MessageCellLocationSharing != nil {
+                    return
+                }
+                self.viewModel.slectContactsToShareMessage(messageId: messageId)
             })
             .disposed(by: cell.disposeBag)
     }

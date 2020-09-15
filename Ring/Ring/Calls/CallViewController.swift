@@ -27,7 +27,7 @@ import SwiftyBeaver
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
+class CallViewController: UIViewController, StoryboardBased, ViewModelBased, ContactPickerDelegate {
 
     //preview screen
     @IBOutlet private weak var profileImageView: UIImageView!

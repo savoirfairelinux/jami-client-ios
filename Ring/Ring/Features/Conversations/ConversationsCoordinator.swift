@@ -65,8 +65,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.showGeneralSettings()
                 case .navigateToCall(let call):
                     self.presentCallController(call: call)
-                case .showContactPicker(let callID):
-                    self.showConferenseableList(callId: callID)
+                case .showContactPicker(let callID, let callBack):
+                    self.showContactPicker(callId: callID, contactSelectedCB: callBack)
+                case .replaceCurrentconversationWithConversationFor(let participant):
+                    self.replaceCurrentconversationWithConversationFor(participantId: participant)
                 default:
                     break
                 }
@@ -193,10 +195,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
     }
 
-    func showConferenseableList(callId: String) {
+    func showContactPicker(callId: String, contactSelectedCB: @escaping ((_ contact: [ConferencableItem]) -> Void)) {
         let contactPickerViewController = ContactPickerViewController.instantiate(with: self.injectionBag)
+        contactPickerViewController.type = callId.isEmpty ? .forConversation : .forCall
         contactPickerViewController.viewModel.currentCallId = callId
-        if let controller = self.navigationViewController.visibleViewController as? CallViewController {
+        contactPickerViewController.viewModel.contactSelectedCB = contactSelectedCB
+        if let controller = self.navigationViewController.visibleViewController as? ContactPickerDelegate {
             controller.presentContactPicker(contactPickerVC: contactPickerViewController)
         }
     }
@@ -204,6 +208,16 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     func showGeneralSettings() {
         let settingsViewController = GeneralSettingsViewController.instantiate(with: self.injectionBag)
         self.present(viewController: settingsViewController, withStyle: .present, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
+    func replaceCurrentconversationWithConversationFor(participantId: String) {
+        guard let uriString = JamiURI(schema: URIType.ring, infoHach: participantId).uriString,
+            let model = getConversationViewModel(participantUri: uriString) else {
+                return
+        }
+        self.navigationViewController.popToRootViewController(animated: false)
+        self.showConversation(withConversationViewModel: model)
+        return
     }
 
     func puchConversation(participantId: String) {

@@ -61,6 +61,17 @@ class ConversationsService {
         self.dbManager = dbManager
     }
 
+    func getconversationIdForParticipant(participantURI: String) -> String? {
+        return self.conversations.value.filter { conversation in
+            conversation.participantUri == participantURI
+        }.first?.conversationId
+    }
+    func getconversationForParticipant(participantURI: String) -> ConversationModel? {
+        return self.conversations.value.filter { conversation in
+            conversation.participantUri == participantURI
+        }.first
+    }
+
     func getConversationsForAccount(accountId: String) -> Observable<[ConversationModel]> {
         /* if we don't have conversation that could mean the app
         just launched and we need symchronize messages status
