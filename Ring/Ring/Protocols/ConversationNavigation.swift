@@ -32,11 +32,12 @@ enum ConversationState: State {
     case showGeneralSettings
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
-    case showContactPicker(callID: String)
+    case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void))
     case fromCallToConversation(conversation: ConversationViewModel)
     case needAccountMigration(accountId: String)
     case accountModeChanged
     case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?)
+    case replaceCurrentWithConversationFor(participantUri: String)
 }
 
 protocol ConversationNavigation: class {
@@ -140,7 +141,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      lockWhilePresenting: VCType.contact.rawValue)
     }
 
-    private func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+    func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
         if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
             return
         }

@@ -559,7 +559,35 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     func showContactPickerVC() {
-        self.stateSubject.onNext(ConversationState.showContactPicker(callID: rendererId))
+        self.stateSubject.onNext(ConversationState.showContactPicker(callID: rendererId, contactSelectedCB: { [weak self] (contacts) in
+            guard let self = self,
+                let contact = contacts.first,
+                let contactToAdd = contact.contacts.first,
+                let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID),
+                let call = self.callService.call(callID: self.rendererId) else { return }
+            if contact.conferenceID.isEmpty {
+                if self.videoService.getEncodingAccelerated() {
+                    self.callService.hold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
+                    self.videoService.disableHardwareForConference()
+                    self.callService.unhold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
+                }
+                self.callService
+                    .callAndAddParticipant(participant: contactToAdd.uri,
+                                           toCall: self.rendererId,
+                                           withAccount: account,
+                                           userName: contactToAdd.registeredName,
+                                           isAudioOnly: call.isAudioOnly)
+                    .subscribe()
+                    .disposed(by: self.disposeBag)
+                return
+            }
+            guard let secondCall = self.callService.call(callID: contact.conferenceID) else { return }
+            if call.participantsCallId.count == 1 {
+                self.callService.joinCall(firstCall: call.callId, secondCall: secondCall.callId)
+            } else {
+                self.callService.joinConference(confID: contact.conferenceID, callID: self.rendererId)
+            }
+        }))
     }
 
     func showConversations() {
