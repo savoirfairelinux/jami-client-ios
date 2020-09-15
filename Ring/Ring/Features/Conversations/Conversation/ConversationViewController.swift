@@ -33,7 +33,7 @@ import MobileCoreServices
 // swiftlint:disable type_body_length
 class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate {
+                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate, ContactPickerDelegate {
 
     let log = SwiftyBeaver.self
 
@@ -969,6 +969,24 @@ class ConversationViewController: UIViewController,
         activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
         self.present(activityViewController, animated: true, completion: nil)
     }
+
+    func presentContactPicker(contactPickerVC: ContactPickerViewController) {
+        self.addChild(contactPickerVC)
+        let height = UIApplication.shared.statusBarFrame.height
+        let newFrame = CGRect(x: 0, y: -height, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        contactPickerVC.view.frame = initialFrame
+        self.view.addSubview(contactPickerVC.view)
+        contactPickerVC.didMove(toParent: self)
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            guard let self = self else { return }
+            contactPickerVC.view.frame = newFrame
+            self.inputAccessoryView.isHidden = true
+            //self.mainView.removeGestureRecognizer(self.tapGestureRecognizer)
+            self.view.layoutIfNeeded()
+            }, completion: {  _ in
+        })
+    }
 }
 
 // MARK: TableDataSource
@@ -1015,6 +1033,7 @@ extension ConversationViewController: UITableViewDataSource {
             self.transferCellSetup(item, cell, tableView, indexPath)
             self.locationCellSetup(item, cell)
             self.deleteCellSetup(cell)
+            self.resendCellSetup(cell)
             self.tapToShowTimeCellSetup(cell)
 
             return cell
@@ -1036,6 +1055,20 @@ extension ConversationViewController: UITableViewDataSource {
                 }
                 self.isExecutingDeleteMessage = true
                 self.viewModel.deleteMessage(messageId: messageId)
+            })
+            .disposed(by: cell.disposeBag)
+    }
+
+    private func resendCellSetup(_ cell: MessageCell) {
+        cell.resendMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak cell] (shouldResend) in
+                guard shouldResend, let self = self, let cell = cell, let messageId = cell.messageId else { return }
+
+                if cell as? MessageCellLocationSharing != nil {
+                    return
+                }
+                self.viewModel.resendMessage(messageId: messageId)
             })
             .disposed(by: cell.disposeBag)
     }

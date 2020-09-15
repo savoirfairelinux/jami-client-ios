@@ -25,14 +25,22 @@ import RxCocoa
 import Reusable
 import SwiftyBeaver
 
+enum ContactPickerType {
+    case forConversation
+    case forCall
+}
+
 class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelBased, UITableViewDelegate, UIGestureRecognizerDelegate {
 
     private let log = SwiftyBeaver.self
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var topViewcontainer: UIView!
 
     var viewModel: ContactPickerViewModel!
     private let disposeBag = DisposeBag()
+    var type: ContactPickerType = .forConversation
 
     var blurEffect: UIVisualEffectView?
 
@@ -46,6 +54,20 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         dismissGR.delegate = self
         self.searchBar.addGestureRecognizer(dismissGR)
         self.setUPBlurBackground()
+        topViewcontainer.isHidden = self.type == .forCall
+        self.doneButton.rx.tap
+        .subscribe(onNext: { [weak self] in
+            let paths = self?.tableView.indexPathsForSelectedRows
+            var contacts = [ConferencableItem]()
+            paths?.forEach({ (path) in
+                if let contactToAdd: ConferencableItem = try? self?.tableView.rx.model(at: path) {
+                    contacts.append(contactToAdd)
+                }
+            })
+            self?.viewModel.contactSelected(contacts: contacts)
+            self?.removeView()
+        })
+        .disposed(by: self.disposeBag)
     }
 
     func setUPBlurBackground() {
@@ -72,15 +94,17 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     func removeView() {
-        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height * 2, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
+        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height * 2, width: self.view.frame.size.width, height: self.view.frame.size.height)
         UIView.animate(withDuration: 0.2, animations: { [unowned self] in
             self.view.frame = initialFrame
             self.view.layoutIfNeeded()
             }, completion: { [weak self] _ in
                 if let parent = self?.parent as? CallViewController {
                     parent.addTapGesture()
-                    self?.didMove(toParent: nil)
+                } else if let parent = self?.parent as? ConversationViewController {
+                    parent.inputAccessoryView.isHidden = false
                 }
+                self?.didMove(toParent: nil)
                 self?.view.removeFromSuperview()
                 self?.removeFromParent()
         })
@@ -96,6 +120,9 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 contactItem: ContactPickerSection.Item) in
 
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
+                cell.selectionContainer?.isHidden = self.type == .forCall
+                cell.selectionIndicator?.backgroundColor = UIColor.clear
+                cell.selectionIndicator?.borderColor = UIColor.jamiTextBlue
                 if contactItem.contacts.count < 1 {
                     return cell
                 }
@@ -157,11 +184,23 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         self.tableView.rowHeight = 64.0
         self.tableView.delegate = self
         self.tableView.register(cellType: SmartListCell.self)
+        self.tableView.allowsMultipleSelection = self.type == .forConversation
         self.tableView.rx.itemSelected
-            .subscribe(onNext: { [unowned self] indexPath in
-                if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: indexPath) {
-                    self.viewModel.addContactToConference(contact: contactToAdd)
-                    self.removeView()
+            .subscribe(onNext: { [weak self] indexPath in
+                if self?.type == .forConversation {
+                    if let cell = self?.tableView.cellForRow(at: indexPath) as? SmartListCell {
+                        if cell.selectionIndicator?.backgroundColor == UIColor.jamiTextBlue {
+                            self?.tableView.deselectRow(at: indexPath, animated: false)
+                            cell.selectionIndicator?.backgroundColor = UIColor.clear
+                            return
+                        }
+                        cell.selectionIndicator?.backgroundColor = UIColor.jamiTextBlue
+                    }
+                    return
+                }
+                if let contactToAdd: ConferencableItem = try? self?.tableView.rx.model(at: indexPath) {
+                    self?.viewModel.contactSelected(contacts: [contactToAdd])
+                    self?.removeView()
                 }
             })
             .disposed(by: disposeBag)
@@ -183,4 +222,14 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             })
             .disposed(by: disposeBag)
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           self.navigationController?.setNavigationBarHidden(true, animated: animated)
+       }
+
+       override func viewWillDisappear(_ animated: Bool) {
+           super.viewWillDisappear(animated)
+           self.navigationController?.setNavigationBarHidden(false, animated: animated)
+       }
 }

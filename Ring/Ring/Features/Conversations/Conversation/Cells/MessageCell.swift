@@ -79,6 +79,9 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private let _deleteMessage = BehaviorRelay<Bool>(value: false)
     var deleteMessage: Observable<Bool> { _deleteMessage.asObservable() }
 
+    private let _resendMessage = BehaviorRelay<Bool>(value: false)
+    var resendMessage: Observable<Bool> { _resendMessage.asObservable() }
+
     private let showTimeTap = BehaviorRelay<Bool>(value: false)
     var tappedToShowTime: Observable<Bool> { showTimeTap.asObservable() }
     private var previousBubbleConstraint: CGFloat?
@@ -131,6 +134,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.messageId = nil
         self.isCopyable = false
         self._deleteMessage.accept(false)
+        self._resendMessage.accept(false)
         if let longGestureRecognizer = longGestureRecognizer {
             self.bubble.removeGestureRecognizer(longGestureRecognizer)
             self.longGestureRecognizer = nil
@@ -269,10 +273,17 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private func onLongGesture() {
         becomeFirstResponder()
         let menu = UIMenuController.shared
+        let resendItem = UIMenuItem(title: "Resend", action: NSSelectorFromString("resend"))
+        menu.menuItems = [resendItem]
         if !menu.isMenuVisible {
             menu.setTargetRect(self.bubble.frame, in: self)
             menu.setMenuVisible(true, animated: true)
         }
+    }
+
+    @objc
+    func resend() {
+        _resendMessage.accept(true)
     }
 
     override func copy(_ sender: Any?) {
@@ -290,7 +301,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return action == #selector(UIResponderStandardEditActions.copy) && self.isCopyable ||
-            action == #selector(UIResponderStandardEditActions.delete)
+            action == #selector(UIResponderStandardEditActions.delete) || action == NSSelectorFromString("resend")
     }
 
     func toggleCellTimeLabelVisibility() {

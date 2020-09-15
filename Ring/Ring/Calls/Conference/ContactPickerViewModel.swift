@@ -21,91 +21,30 @@
 import RxSwift
 import SwiftyBeaver
 
-class ContactPickerViewModel: Stateable, ViewModel {
+class ContactPickerViewModel: ViewModel {
     private let log = SwiftyBeaver.self
 
-    // MARK: - Rx Stateable
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    private var contactsOnly: Bool { self.currentCallId.isEmpty }
+    var contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?
+
     var currentCallId = ""
     lazy var conferensableItems: Observable<[ContactPickerSection]> = {
+        if contactsOnly {
+            return self.contactsService.contacts.asObservable().map { [weak self] contacts in
+                var sections = [ContactPickerSection]()
+                self?.addContactsToContactPickerSections(contacts: contacts, sections: &sections)
+                    return sections
+            }
+        }
         return Observable
             .combineLatest(self.contactsService.contacts.asObservable(),
-                           self.callService.calls.asObservable()) {(contacts, calls) -> [ContactPickerSection] in
+                           self.callService.calls.asObservable()) {[weak self] (contacts, calls) -> [ContactPickerSection] in
                             var sections = [ContactPickerSection]()
+                            guard let self = self else { return sections }
                             guard let currentCall = self.callService.call(callID: self.currentCallId) else { return sections }
-                            var callURIs = [String]()
-                            var callItems = [ConferencableItem]()
-                            var contactItems = [ConferencableItem]()
-                            var conferences = [String: [Contact]]()
-                            calls.values.forEach { call in
-                                guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else { return }
-                                let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
-                                let uri = JamiURI.init(schema: type, infoHach: call.participantUri, account: account)
-                                guard let uriString = uri.uriString else { return }
-                                guard let hashString = uri.hash else { return }
-                                callURIs.append(uriString)
-                                if currentCall.participantsCallId.contains(call.callId) ||
-                                    call.callId == self.currentCallId {
-                                    return
-                                }
-                                if call.state != .current || call.state != .hold || call.state != .unhold {
-                                    return
-                                }
-                                let profile = self.contactsService.getProfile(uri: uriString, accountId: call.accountId)
-                                var contact = Contact(contactUri: uriString,
-                                                      accountId: call.accountId,
-                                                      registrName: call.registeredName,
-                                                      presService: self.presenceService,
-                                                      contactProfile: profile)
-                                contact.hash = hashString
-                                if call.participantsCallId.count == 1 {
-                                    let confItem = ConferencableItem(conferenceID: call.callId, contacts: [contact])
-                                    callItems.append(confItem)
-                                } else if var conf = conferences[call.callId] {
-                                    conf.append(contact)
-                                } else {
-                                    var contacts = [Contact]()
-                                    contacts.append(contact)
-                                    conferences[call.callId] = contacts
-                                }
-                            }
-                            conferences.keys.forEach { conferenceID in
-                                guard let confContacts = conferences[conferenceID] else { return }
-                                let conferenceItem = ConferencableItem(conferenceID: conferenceID, contacts: confContacts)
-                                callItems.append(conferenceItem)
-                            }
-                            if !callItems.isEmpty {
-                                callItems.sort(by: { (first, second) -> Bool in
-                                    return first.contacts.count > second.contacts.count
-                                })
-                                sections.append(ContactPickerSection(header: "calls", items: callItems))
-                            }
-                            guard let currentAccount = self.accountService.currentAccount else {
+                            let callURIs = self.addCallsToContactPickerSections(calls: calls, sections: &sections)
+                            self.addContactsToContactPickerSections(contacts: contacts, sections: &sections, urlToExclude: callURIs)
                                 return sections
-                            }
-                            contacts.forEach { contact in
-                                guard let contactUri = contact.uriString else { return }
-                                if callURIs.contains(contactUri) {
-                                    return
-                                }
-                                let profile = self.contactsService.getProfile(uri: contactUri, accountId: currentAccount.id)
-                                var contactToAdd = Contact(contactUri: contactUri,
-                                                           accountId: currentAccount.id,
-                                                           registrName: contact.userName ?? "",
-                                                           presService: self.presenceService,
-                                                           contactProfile: profile)
-
-                                contactToAdd.hash = contact.hash
-                                let contactItem = ConferencableItem(conferenceID: "", contacts: [contactToAdd])
-                                contactItems.append(contactItem)
-                            }
-                            if !contactItems.isEmpty {
-                                sections.append(ContactPickerSection(header: "contacts", items: contactItems))
-                            }
-                            return sections
             }
     }()
 
@@ -167,31 +106,92 @@ class ContactPickerViewModel: Stateable, ViewModel {
         self.videoService = injectionBag.videoService
     }
 
-    func addContactToConference(contact: ConferencableItem) {
-        guard let contactToAdd = contact.contacts.first else { return }
-        guard let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID) else { return }
-        guard let call = self.callService.call(callID: currentCallId) else { return }
-        if contact.conferenceID.isEmpty {
-            if self.videoService.getEncodingAccelerated() {
-                self.callService.hold(callId: currentCallId).subscribe().disposed(by: disposeBag)
-                self.videoService.disableHardwareForConference()
-                self.callService.unhold(callId: currentCallId).subscribe().disposed(by: disposeBag)
-            }
-            self.callService
-                .callAndAddParticipant(participant: contactToAdd.uri,
-                                       toCall: currentCallId,
-                                       withAccount: account,
-                                       userName: contactToAdd.registeredName,
-                                       isAudioOnly: call.isAudioOnly)
-                .subscribe()
-                .disposed(by: self.disposeBag)
+    func contactSelected(contacts: [ConferencableItem]) {
+        if contacts.isEmpty { return }
+        if contactSelectedCB != nil {
+            contactSelectedCB!(contacts)
+        }
+    }
+}
+
+// MARK: - ContactPickerSections
+extension ContactPickerViewModel {
+    func addContactsToContactPickerSections(contacts: [ContactModel], sections: inout [ContactPickerSection], urlToExclude: [String] = [String]()) {
+        guard let currentAccount = self.accountService.currentAccount else {
             return
         }
-        guard let secondCall = self.callService.call(callID: contact.conferenceID) else { return }
-        if call.participantsCallId.count == 1 {
-            self.callService.joinCall(firstCall: call.callId, secondCall: secondCall.callId)
-        } else {
-            self.callService.joinConference(confID: contact.conferenceID, callID: currentCallId)
+        var contactItems = [ConferencableItem]()
+        contacts.forEach { contact in
+            guard let contactUri = contact.uriString else { return }
+            if urlToExclude.contains(contactUri) {
+                return
+            }
+            let profile = self.contactsService.getProfile(uri: contactUri, accountId: currentAccount.id)
+            var contactToAdd = Contact(contactUri: contactUri,
+                                       accountId: currentAccount.id,
+                                       registrName: contact.userName ?? "",
+                                       presService: self.presenceService,
+                                       contactProfile: profile)
+
+            contactToAdd.hash = contact.hash
+            let contactItem = ConferencableItem(conferenceID: "", contacts: [contactToAdd])
+            contactItems.append(contactItem)
         }
+        if !contactItems.isEmpty {
+            sections.append(ContactPickerSection(header: "contacts", items: contactItems))
+        }
+    }
+
+    func addCallsToContactPickerSections(calls: [String: CallModel], sections: inout [ContactPickerSection]) -> [String] {
+        var callURIs = [String]()
+        guard let currentCall = self.callService.call(callID: self.currentCallId) else {
+            return callURIs
+        }
+        var callItems = [ConferencableItem]()
+        var conferences = [String: [Contact]]()
+        calls.values.forEach { call in
+            guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else { return }
+            let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
+            let uri = JamiURI.init(schema: type, infoHach: call.participantUri, account: account)
+            guard let uriString = uri.uriString else { return }
+            guard let hashString = uri.hash else { return }
+            callURIs.append(uriString)
+            if currentCall.participantsCallId.contains(call.callId) ||
+                call.callId == self.currentCallId {
+                return
+            }
+            if call.state != .current || call.state != .hold || call.state != .unhold {
+                return
+            }
+            let profile = self.contactsService.getProfile(uri: uriString, accountId: call.accountId)
+            var contact = Contact(contactUri: uriString,
+                                  accountId: call.accountId,
+                                  registrName: call.registeredName,
+                                  presService: self.presenceService,
+                                  contactProfile: profile)
+            contact.hash = hashString
+            if call.participantsCallId.count == 1 {
+                let confItem = ConferencableItem(conferenceID: call.callId, contacts: [contact])
+                callItems.append(confItem)
+            } else if var conf = conferences[call.callId] {
+                conf.append(contact)
+            } else {
+                var contacts = [Contact]()
+                contacts.append(contact)
+                conferences[call.callId] = contacts
+            }
+        }
+        conferences.keys.forEach { conferenceID in
+            guard let confContacts = conferences[conferenceID] else { return }
+            let conferenceItem = ConferencableItem(conferenceID: conferenceID, contacts: confContacts)
+            callItems.append(conferenceItem)
+        }
+        if !callItems.isEmpty {
+            callItems.sort(by: { (first, second) -> Bool in
+                return first.contacts.count > second.contacts.count
+            })
+            sections.append(ContactPickerSection(header: "calls", items: callItems))
+        }
+        return callURIs
     }
 }

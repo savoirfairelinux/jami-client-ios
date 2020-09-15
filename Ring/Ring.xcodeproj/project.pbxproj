@@ -259,6 +259,7 @@
 		2662FC7D246B78E800FA7782 /* IncognitoSmartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */; };
 		2662FC7F246B790400FA7782 /* IncognitoSmartListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC7E246B790400FA7782 /* IncognitoSmartListViewModel.swift */; };
 		2662FC81246B793500FA7782 /* IncognitoSmartListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2662FC80246B793500FA7782 /* IncognitoSmartListViewController.storyboard */; };
+		2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
@@ -659,6 +660,7 @@
 		2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncognitoSmartListViewController.swift; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewController.swift; sourceTree = SOURCE_ROOT; };
 		2662FC7E246B790400FA7782 /* IncognitoSmartListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncognitoSmartListViewModel.swift; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewModel.swift; sourceTree = SOURCE_ROOT; };
 		2662FC80246B793500FA7782 /* IncognitoSmartListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = IncognitoSmartListViewController.storyboard; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewController.storyboard; sourceTree = SOURCE_ROOT; };
+		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
@@ -1484,6 +1486,7 @@
 				1A20418C1F1EABCC00C08435 /* StateableResponsive.swift */,
 				1A20418E1F1EAC0E00C08435 /* Coordinator.swift */,
 				0E68571020238546008B0717 /* ConversationNavigation.swift */,
+				2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2325,6 +2328,7 @@
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				1A2D18D11F29182500B2C785 /* ConversationViewController.swift in Sources */,
 				0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */,
+				2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */,
 				0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */,
 				0E49096E1FEAC0DE005CAA50 /* CallsService.swift in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
