@@ -33,6 +33,8 @@ class ConversationCell: UITableViewCell, NibReusable {
     @IBOutlet weak var lastMessageDateLabel: UILabel?
     @IBOutlet weak var lastMessagePreviewLabel: UILabel?
     @IBOutlet weak var presenceIndicator: UIView?
+    @IBOutlet weak var selectionIndicator: UIButton?
+    @IBOutlet weak var selectionContainer: UIView?
 
     var avatarSize: CGFloat { return 40 }
 

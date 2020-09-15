@@ -313,6 +313,34 @@ class ConversationViewModel: Stateable, ViewModel {
         self.messages.value.removeAll(where: { $0.messageId == messageId })
     }
 
+    func resendMessage(messageId: Int64) {
+        self.stateSubject.onNext(ConversationState.showContactPicker(callID: "", contactSelectedCB: { (_) in
+
+        }))
+//        guard let account = self.accountService.currentAccount else { return }
+//        guard let message = self.messages.value.filter({ $0.messageId == messageId }).first
+//            else { return }
+//        if message.isTransfer {
+//            let url = message.transferedFile(conversationID: self.conversation.value.conversationId, accountId: self.conversation.value.accountId)
+//            if url == nil {
+//                message.getURLFromPhotoLibrary(conversationID: self.conversation.value.conversationId, completionHandler: { (url) in
+//                    if let url = url {
+//                        self.sendFile(filePath: url.path, displayName: String(message.content.split(separator: "\n").first!))
+//                        return
+//                    }
+//                    if let image = message.getTransferedImage(maxSize: 200, conversationID: self.conversation.value.conversationId, accountId: self.conversation.value.accountId) {
+//                        guard let imageData = image.jpegData(compressionQuality: 90) else { return }
+//                        self.sendAndSaveFile(displayName: String(message.content.split(separator: "\n").first!), imageData: imageData)
+//                    }
+//                })
+//            } else {
+//                self.sendFile(filePath: url!.path, displayName: String(message.content.split(separator: "\n").first!))
+//            }
+//        } else if !message.message.isGenerated {
+//            self.sendMessage(withContent: message.content)
+//        }
+    }
+
     func sendContactRequest() {
         guard let currentAccount = self.accountService.currentAccount else { return }
 
