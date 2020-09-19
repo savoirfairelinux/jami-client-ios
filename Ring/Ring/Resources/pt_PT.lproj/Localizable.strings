@@ -25,6 +25,7 @@
 "global.ok" = "OK";
 "global.versionName" = "Together";
 "global.close" = "Fechar";
+"global.share" = "Partilhar";
 
 // Scan
 "scan.badQrCode" = "Código QR inválido";

@@ -23,8 +23,9 @@
 "global.contactRequestsTabBarTitle" = "Invitații";
 "global.meTabBarTitle" = "Cont";
 "global.ok" = "Ok";
-"global.versionName" = "Together";
+"global.versionName" = "Împreună";
 "global.close" = "Închide";
+"global.share" = "Distribuie";
 
 // Scan
 "scan.badQrCode" = "Cod QR greșit";
@@ -80,7 +81,7 @@
 "createAccount.passwordCharactersNumberError" = "6 caractere minim";
 "createAccount.passwordNotMatchingError" = "parolele nu se potrivesc";
 "createAccount.lookingForUsernameAvailability" = "caut disponibilitatea...";
-"createAccount.invalidUsername" = "numele de utilizator este greșit";
+"createAccount.invalidUsername" = "nume greșit";
 "createAccount.usernameAlreadyTaken" = "nume de utilizator deja ales";
 "createAccount.loading" = "Se încarcă";
 "createAccount.waitCreateAccountTitle" = "Se adaugă contul";

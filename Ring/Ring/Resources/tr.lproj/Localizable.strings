@@ -25,6 +25,7 @@
 "global.ok" = "Tamam";
 "global.versionName" = "Together";
 "global.close" = "Kapat";
+"global.share" = "Paylaş";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";

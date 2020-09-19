@@ -23,8 +23,9 @@
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Compte";
 "global.ok" = "OK";
-"global.versionName" = "Together";
+"global.versionName" = "Ensemble";
 "global.close" = "Fermer";
+"global.share" = "Partager";
 
 // Scan
 "scan.badQrCode" = "Code QR incorrect";

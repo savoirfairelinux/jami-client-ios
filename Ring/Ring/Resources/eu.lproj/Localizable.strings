@@ -25,6 +25,7 @@
 "global.ok" = "Ados";
 "global.versionName" = "Together";
 "global.close" = "Itxi";
+"global.share" = "Partekatu";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

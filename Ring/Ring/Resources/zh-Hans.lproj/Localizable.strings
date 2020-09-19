@@ -23,8 +23,9 @@
 "global.contactRequestsTabBarTitle" = "邀請";
 "global.meTabBarTitle" = "帳號";
 "global.ok" = "確定";
-"global.versionName" = "Together";
+"global.versionName" = "一起";
 "global.close" = "關閉";
+"global.share" = "分享";
 
 // Scan
 "scan.badQrCode" = "不正確的 QR code";

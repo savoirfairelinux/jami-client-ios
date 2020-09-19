@@ -25,6 +25,7 @@
 "global.ok" = "OK";
 "global.versionName" = "Together";
 "global.close" = "Закрыть";
+"global.share" = "Поделиться";
 
 // Scan
 "scan.badQrCode" = "Некорректный QR-код";

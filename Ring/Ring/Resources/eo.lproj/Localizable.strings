@@ -25,6 +25,7 @@
 "global.ok" = "Okej";
 "global.versionName" = "Together";
 "global.close" = "Close";
+"global.share" = "Kunhavi";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

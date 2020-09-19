@@ -25,6 +25,7 @@
 "global.ok" = "D'acord";
 "global.versionName" = "Together";
 "global.close" = "Tanca";
+"global.share" = "Comparteix";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

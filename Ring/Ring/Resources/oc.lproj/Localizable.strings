@@ -25,6 +25,7 @@
 "global.ok" = "D’acòrdi";
 "global.versionName" = "Together";
 "global.close" = "Tampar";
+"global.share" = "Share";
 
 // Scan
 "scan.badQrCode" = "Marrit QR còdi";
@@ -281,7 +282,7 @@
 "dataTransfer.readableStatusRefuse" = "Refusar";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "Fracàs del mandadís";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Acceptar";
 "dataTransfer.readableStatusCancel" = "anullar";

@@ -25,6 +25,7 @@
 "global.ok" = "Ok";
 "global.versionName" = "Together";
 "global.close" = "Luk";
+"global.share" = "Del";
 
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";

@@ -25,6 +25,7 @@
 "global.ok" = "Gerai";
 "global.versionName" = "Together";
 "global.close" = "Užverti";
+"global.share" = "Bendrinti";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";

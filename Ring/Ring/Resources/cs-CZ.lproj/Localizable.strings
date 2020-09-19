@@ -25,6 +25,7 @@
 "global.ok" = "OK";
 "global.versionName" = "Together";
 "global.close" = "Zavřít";
+"global.share" = "Sdílet";
 
 // Scan
 "scan.badQrCode" = "Špatný kód QR";
@@ -41,14 +42,14 @@
 "smartlist.noNetworkConnectivity" = "Chybí připojení";
 "smartlist.cellularAccess" = "Ujistěte se, že je v nastavení zaručen buňkový (místní) přístup";
 "smartlist.accountsTitle" = "Účty";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.addAccountButton" = "+ Přidat účet";
+"smartlist.noNumber" = "Vybraný kontakt nemá žádné číslo.";
+"smartlist.selectOneNumber" = "Vyberte jedno z čísel.";
 
 //Conversation
 "conversation.messagePlaceholder" = "Zadejte svoji zprávu...";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.explanationSendingLocationTo" = "Právě sdílíte svou polohu s ";
+"conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
 
 //Invitations
 "invitations.noInvitations" = "Žádná pozvání";
@@ -90,9 +91,9 @@
 "createAccount.EnableNotifications" = "Oznámení";
 "createAccount.Recommended" = "(doporučeno)";
 "createAccount.UsernameNotRegisteredTitle" = "Chyba sítě";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.UsernameNotRegisteredMessage" = "Účet byl vytvořen, ale uživatelské jméno nebylo registrováno.";
+"createAccount.timeoutTitle" = "Účet byl vytvořen.";
+"createAccount.timeoutMessage" = "Probíhá registrace uživatelského jména... Může to chvíli trvat.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Připojení účtu";
@@ -104,13 +105,13 @@
 "linkToAccount.explanationPinMessage" = "Pro vytvoření kódu PIN jděte do nastavení správy účtů na zařízení, jež obsahuje účet, který chcete použít. V nastavení vyberte „Připojit k tomuto účtu další zařízení“. \nDostanete PIN nezbytný k dokončení formuláře. PIN zůstává platný jen po 10 minut.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Přidat se";
 "linkToAccountManager.passwordPlaceholder" = "Heslo";
 "linkToAccountManager.passwordLabel" = "Zadejte heslo";
 "linkToAccountManager.usernamePlaceholder" = "Uživatelské jméno";
-"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.usernameLabel" = "Zadejte uživatelské jméno.";
 "linkToAccountManager.accountManagerPlaceholder" = "Správce účtů";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerLabel" = "Zadejte URI správce účtů.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nelze nalézt účet";
@@ -133,22 +134,22 @@
 "alerts.confirmDeleteConversationTitle" = "Odstranit konverzaci";
 "alerts.confirmClearConversation" = "Jste si jistý, že chcete vyprázdnit konverzaci s tímto kontaktem?";
 "alerts.confirmClearConversationTitle" = "Vyprázdnit konverzaci";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.noMediaPermissionsTitle" = "Oprávnění médií nebyla udělena.";
+"alerts.noLibraryPermissionsTitle" = "Přístup ke knihovně fotek nebyl udělen.";
+"alerts.noLocationPermissionsTitle" = "Přístup k poloze nebyl udělen.";
+"alerts.errorWrongCredentials" = "Nelze se připojit k danému správci účtů. Prosím zkontrolujte své přihlašovací údaje.";
+"alerts.recordVideoMessage" = "Nahrát video zprávu";
+"alerts.recordAudioMessage" = "Nahrát zvukovou zprávu";
+"alerts.uploadFile" = "Nahrát soubor";
+"alerts.uploadPhoto" = "Nahrát fotografii nebo film";
+"alerts.locationServiceIsDisabled" = "Zapněte „Služby polohy“, aby Jami mohl určit vaši polohu.";
+"alerts.locationSharing" = "Sdílet mou polohu";
+"alerts.alreadylocationSharing" = "Poloha je již sdílena s tímto uživatelem.";
+"alerts.locationSharingDurationTitle" = "Jak dlouho má sdílení polohy trvat?";
+"alerts.locationSharingDuration10min" = "10 minut";
+"alerts.locationSharingDuration1hour" = "1 hodina";
 "alerts.mapInformation" = "Informace o mapě";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyright" = "Přispěvatelé © OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Naučit se více";
 
 //Actions
@@ -161,9 +162,9 @@
 "alerts.incomingCallAllertTitle" = "Příchozí hovor od";
 "alerts.incomingCallButtonAccept" = "Přijmout";
 "alerts.incomingCallButtonIgnore" = "Přehlížet";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
-"actions.goToSettings" = "Go to Settings";
+"actions.startAudioCall" = "Audio hovor";
+"actions.startVideoCall" = "Video hovor";
+"actions.goToSettings" = "Jít to nastavení";
 "actions.stopLocationSharing" = "Přestat sdílet";
 
 //Calls
@@ -174,8 +175,8 @@
 "calls.connecting" = "Spojuje se…";
 "calls.searching" = "Hledá se…";
 "calls.callFinished" = "Hovor ukončen";
-"calls.currentCallWith" = "Call with ";
-"calls.haghUp" = "hang up";
+"calls.currentCallWith" = "Volat s ";
+"calls.haghUp" = "Zavěsit";
 
 //Account Page
 "accountPage.devicesListHeader" = "Zařízení";
@@ -209,31 +210,31 @@
 "accountPage.linkDeviceTitle" = "Připojit další zařízení";
 "accountPage.other" = "Ostatní";
 "accountPage.removeAccountTitle" = "Odstranit účet";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "Kliknutím na „Odstranit“ odstraníte tento účet na tomto zařízení! Tento krok nelze vrátit zpět. Vámi zaregistrované jméno může být ztraceno!";
 "accountPage.removeAccountButton" = "Odstranit";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Sdílet podrobnosti účtu";
+"accountPage.contactMeOnJamiTitle" = "Spojte se se mnou přes Jami!";
+"accountPage.contactMeOnJamiContant" = "Spojte se se mnou pomocí „%s“ na rozptýleném komunikačním systému Jami: https://jami.net";
 "accountPage.registerNameTitle" = "Zaregistrovat uživatelské jméno";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.passwordPlaceholder" = "Zadejte heslo k účtu.";
+"accountPage.usernamePlaceholder" = "Zadejte požadované uživatelské jméno.";
+"accountPage.registerNameErrorMessage" = "Zvolené uživatelské jméno není dostupné.";
+"accountPage.usernameRegistering" = "Registruje se";
 "accountPage.usernameRegisterAction" = "Zaregistrovat";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.usernameRegistrationFailed" = "Registrace selhala. Prosím zkontrolujte heslo.";
+"accountPage.createPassword" = "Vytvořit heslo";
 "accountPage.changePassword" = "Změnit heslo";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
-"accountPage.peerDiscovery" = "Auto connect on local network";
+"accountPage.oldPasswordPlaceholder" = "Zadejte staré heslo.";
+"accountPage.newPasswordPlaceholder" = "Zadejte nové heslo.";
+"accountPage.newPasswordConfirmPlaceholder" = "Potvrďte nové heslo";
+"accountPage.changePasswordError" = "Heslo je nesprávné.";
+"accountPage.enableBoothMode" = "Umožnit režim budky";
+"accountPage.disableBoothMode" = "Znemožnit režim budky";
+"accountPage.disableBoothModeExplanation" = "Prosím poskytněte heslo ke svému účtu.";
+"accountPage.boothModeExplanation" = "V režimu budky není historie konverzace ukládána a funkce Jami jsou omezeny na uskutečňování odchozích hovorů. Umožnění režimu budky odstraní všechny vaše konverzace.";
+"accountPage.noBoothMode" = "Pro umožnění režimu budky je nejdříve potřeba vytvořit heslo účtu.";
+"accountPage.boothModeAlertMessage" = "Po umožnění režimu budky budou všechny vaše konverzace odstraněny.";
+"accountPage.peerDiscovery" = "Automatické připojení na místní síti";
 
 //Account
 "account.sipUsername" = "Uživatelské jméno";
@@ -241,19 +242,19 @@
 "account.sipServer" = "Server SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Create Sip Account";
-"account.usernameLabel" = "Enter Username";
+"account.createSipAccount" = "Vytvořit účet SIP";
+"account.usernameLabel" = "Zadejte uživatelské jméno.";
 "account.passwordLabel" = "Zadejte heslo";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "Zadejte adresu.";
+"account.portLabel" = "Zadejte číslo portu.";
+"account.accountStatus" = "Stav účtu";
+"account.enableAccount" = "Povolit účet";
 "account.statusOnline" = "Připojen";
 "account.statusOffline" = "Nepřipojen";
 "account.statusConnecting" = "Spojuje se";
 "account.statusUnknown" = "Neznámé";
-"account.statusConnectionerror" = "Connection Error";
-"account.needMigration" = "account need to be migrated";
+"account.statusConnectionerror" = "Chyba spojení";
+"account.needMigration" = "Tento účet musí být převeden.";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Žádné blokované kontakty";
@@ -267,7 +268,7 @@
 "linkDevice.hudMessage" = "Ověřuje se";
 
 //Contact Page
-"contactPage.startAudioCall" = "Začít hlasový hovor";
+"contactPage.startAudioCall" = "Začít audio hovor";
 "contactPage.startVideoCall" = "Začít video hovor";
 "contactPage.sendMessage" = "Poslat zprávu";
 "contactPage.clearConversation" = "Vyprázdnit zprávy";
@@ -281,7 +282,7 @@
 "dataTransfer.readableStatusRefuse" = "Odmítnout";
 "dataTransfer.readableStatusOngoing" = "Přenáší se";
 "dataTransfer.readableStatusCanceled" = "Zrušeno";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "Odeslání selhalo";
 "dataTransfer.readableStatusSuccess" = "Dokončeno";
 "dataTransfer.readableStatusAccept" = "Přijmout";
 "dataTransfer.readableStatusCancel" = "Zrušit";
@@ -291,9 +292,9 @@
 "notifications.missedCall" = "Zmeškaný hovor";
 "notifications.acceptCall" = "PŘIJMOUT";
 "notifications.refuseCall" = "ODMÍTNOUT";
-"notifications.newFile" = "New file";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.newFile" = "Nový soubor";
+"notifications.locationSharingStarted" = "Začalo příchozí sdílení polohy.";
+"notifications.locationSharingStopped" = "Přestalo příchozí sdílení polohy.";
 "dataTransfer.readableStatusAwaiting" = "Čeká na vyřízení…";
 "dataTransfer.readableStatusRefuse" = "Odmítnout";
 "dataTransfer.readableStatusOngoing" = "Přenáší se";
@@ -301,7 +302,7 @@
 "dataTransfer.readableStatusSuccess" = "Dokončeno";
 "dataTransfer.readableStatusAccept" = "Přijmout";
 "dataTransfer.readableStatusCancel" = "Zrušit";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Stiskněte pro začátek nahrávání.";
 "dataTransfer.sendMessage" = "Odeslat";
 
 
@@ -313,22 +314,22 @@
 "generatedMessage.incomingCall" = "Příchozí hovor";
 "generatedMessage.missedOutgoingCall" = "Nepřijatý odchozí hovor";
 "generatedMessage.missedIncomingCall" = "Zmeškaný příchozí hovor";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "Sdílení aktuální polohy";
 
 //General Settings
 "generalSettings.title" = "Obecná nastavení";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "Povolit zrychlení videa";
 
 //Migrate Account
 "migrateAccount.title" = "Převod účtu";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.migrateButton" = "Převést účet";
+"migrateAccount.explanation" = "Tento účet musí být převeden.";
 "migrateAccount.passwordPlaceholder" = "Zadejte heslo";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.passwordExplanation" = "Pro převedení je potřeba zadat heslo k tomuto účtu.";
 "migrateAccount.removeAccount" = "Odstranit účet";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.error" = "Nepodařilo se převést váš účet. Můžete to zkusit znovu nebo svůj účet smazat.";
+"migrateAccount.migrating" = "Převádím…";
 "migrateAccount.cancel" = "Zrušit";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "Převést jiný účet";
 
 

@@ -25,6 +25,7 @@
 "global.ok" = "Εντάξει";
 "global.versionName" = "Together";
 "global.close" = "Κλείσιμο";
+"global.share" = "Κοινοποίηση";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

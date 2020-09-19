@@ -25,6 +25,7 @@
 "global.ok" = "V redu";
 "global.versionName" = "Together";
 "global.close" = "Zapri";
+"global.share" = "Deli";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

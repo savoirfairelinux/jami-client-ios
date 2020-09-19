@@ -23,8 +23,9 @@
 "global.contactRequestsTabBarTitle" = "Ftesa";
 "global.meTabBarTitle" = "Llogari";
 "global.ok" = "OK";
-"global.versionName" = "Together";
+"global.versionName" = "Tok";
 "global.close" = "Mbylle";
+"global.share" = "Ndajeni me të tjerë";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";

@@ -23,8 +23,9 @@
 "global.contactRequestsTabBarTitle" = "Meghívások";
 "global.meTabBarTitle" = "Fiók";
 "global.ok" = "Rendben";
-"global.versionName" = "Together";
+"global.versionName" = "Együtt";
 "global.close" = "Bezárás";
+"global.share" = "Megosztás ";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -69,7 +70,7 @@
 "createProfile.enterNameLabel" = "Adja meg a megjelenítési nevet";
 "createProfile.enterNamePlaceholder" = "Név megadása";
 "createProfile.subtitle" = "A profilja a kapcsolataival kerül megosztásra. Bármikor megváltoztathatja.";
-"createProfile.createYourAvatar" = "Megtestesülés kép létrehozása";
+"createProfile.createYourAvatar" = "Megtestesüléskép létrehozása";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Fiók létrehozása";
@@ -77,7 +78,7 @@
 "createAccount.enterNewUsernamePlaceholder" = "Felhasználónév";
 "createAccount.newPasswordPlaceholder" = "Jelszó";
 "createAccount.repeatPasswordPlaceholder" = "Jelszó megerősítése";
-"createAccount.passwordCharactersNumberError" = "Legalább 6 karakter";
+"createAccount.passwordCharactersNumberError" = "legalább 6 karakter";
 "createAccount.passwordNotMatchingError" = "A jelszavak nem egyeznek";
 "createAccount.lookingForUsernameAvailability" = "a rendelkezésre állás keresése…";
 "createAccount.invalidUsername" = "Érvénytelen felhasználónév";
@@ -101,7 +102,7 @@
 "linkToAccount.pinPlaceholder" = "PIN-kód";
 "linkToAccount.passwordLabel" = "A jelszó megadása";
 "linkToAccount.pinLabel" = "PIN-kód megadása";
-"linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához keresse meg a fiókkezelő beállításait a használni kívánt fiókot tartalmazó eszközön.  Válassza az eszközbeállításoknál a „Másik eszköz összekapcsolása ehhez a fiókhoz” lehetőséget. Meg fogja kapni az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
+"linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához keresse meg a fiókkezelő beállításait a használni kívánt fiókot tartalmazó eszközön.  Válassza az eszközbeállításoknál a „Eszköz összekapcsolása fiókhoz” lehetőséget. Meg fogja kapni az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Bejelentkezés";
@@ -206,7 +207,7 @@
 "accountPage.deviceRevocationUnknownDevice" = "Ismeretlen eszköz";
 "accountPage.deviceRevocationError" = "Eszköz visszavonási hiba";
 "accountPage.namePlaceholder" = "Név";
-"accountPage.linkDeviceTitle" = "Másik eszköz összekapcsolása";
+"accountPage.linkDeviceTitle" = "Eszköz összekapcsolása fiókhoz";
 "accountPage.other" = "Másik";
 "accountPage.removeAccountTitle" = "Fiók eltávolítása";
 "accountPage.removeAccountMessage" = "Szeretné eltávolítani ezt a fiókot ezen az eszközön? Óvatosan, ez eltávolítja a fiókot és a regisztrált neve elveszhet. Ez nem vonható vissza.";
@@ -239,7 +240,7 @@
 "account.sipUsername" = "Felhasználónév";
 "account.sipPassword" = "Jelszó";
 "account.sipServer" = "SIP-kiszolgáló";
-"account.port" = "Port";
+"account.port" = "Kikötő";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "SIP fiók létrehozása";
 "account.usernameLabel" = "Felhasználónév megadása";
@@ -259,11 +260,11 @@
 "blockListPage.noBlockedContacts" = "Nincsenek letiltott kapcsolatok";
 
 //Link New Device
-"linkDevice.title" = "Csatlakoztasson egy új eszközt";
+"linkDevice.title" = "Eszköz összekapcsolása fiókhoz";
 "linkDevice.passwordError" = "A megadott jelszó nem oldja fel ezt a fiókot";
 "linkDevice.networkError" = "Hálózati hiba történt az exportálás során";
 "linkDevice.defaultError" = "Hiba történt az exportálás során";
-"linkDevice.explanationMessage" = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön és válassza az „Ezen eszköz összekapcsolása egy fiókhoz” opciót. A PIN-kódod 10 percig érvényes.";
+"linkDevice.explanationMessage" = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön és válassza az „Eszköz összekapcsolása fiókhoz” opciót. A PIN-kódod 10 percig érvényes.";
 "linkDevice.hudMessage" = "Ellenőrzése";
 
 //Contact Page

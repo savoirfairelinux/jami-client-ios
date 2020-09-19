@@ -25,6 +25,7 @@
 "global.ok" = "OK";
 "global.versionName" = "Together";
 "global.close" = "閉じる";
+"global.share" = "共有";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";

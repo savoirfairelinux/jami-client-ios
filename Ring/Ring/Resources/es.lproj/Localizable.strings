@@ -23,8 +23,9 @@
 "global.contactRequestsTabBarTitle" = "Invitaciones";
 "global.meTabBarTitle" = "Cuenta";
 "global.ok" = "Aceptar";
-"global.versionName" = "Together";
+"global.versionName" = "Juntos";
 "global.close" = "Cerrar";
+"global.share" = "Compartir";
 
 // Scan
 "scan.badQrCode" = "Código QR incorrecto";
@@ -47,8 +48,8 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "Escribe tu mensaje...";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.explanationSendingLocationTo" = "Estás compartiendo tu ubicación con";
+"conversation.explanationReceivingLocationFrom" = "Estás recibiendo una ubicación en vivo desde";
 
 //Invitations
 "invitations.noInvitations" = "No hay invitaciones";
@@ -135,20 +136,20 @@
 "alerts.confirmClearConversationTitle" = "Vaciar conversación";
 "alerts.noMediaPermissionsTitle" = "Permiso de acceso al almacenamiento no otorgado";
 "alerts.noLibraryPermissionsTitle" = "Acceso a la galería de fotos no otorgado";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
+"alerts.noLocationPermissionsTitle" = "Acceso a la ubicación no concedido";
 "alerts.errorWrongCredentials" = "No se pudo conectar al administrador de cuenta proporcionado. Por favor verifica tus credenciales";
 "alerts.recordVideoMessage" = "Grabar mensaje de video";
 "alerts.recordAudioMessage" = "Grabar mensaje de audio";
 "alerts.uploadFile" = "Subir archivo";
 "alerts.uploadPhoto" = "Subir foto o película";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.locationServiceIsDisabled" = "Activa los \"Servicios de ubicación\" para permitir a \"Jami\" determinar tu ubicación.";
+"alerts.locationSharing" = "Compartir mi ubicación";
+"alerts.alreadylocationSharing" = "Ya se está compartiendo la ubicación con este usuario";
+"alerts.locationSharingDurationTitle" = "¿Durante cuánto tiempo se debería compartir la ubicación?";
 "alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.locationSharingDuration1hour" = "1 hora";
+"alerts.mapInformation" = "Información del mapa";
+"alerts.openStreetMapCopyright" = "© Contribuidores de OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Más información";
 
 //Actions
@@ -163,7 +164,7 @@
 "alerts.incomingCallButtonIgnore" = "Ignorar";
 "actions.startAudioCall" = "Llamada de voz";
 "actions.startVideoCall" = "Videollamada";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "Ir a Ajustes";
 "actions.stopLocationSharing" = "Dejar de compartir";
 
 //Calls
@@ -292,8 +293,8 @@
 "notifications.acceptCall" = "ACEPTAR";
 "notifications.refuseCall" = "RECHAZAR";
 "notifications.newFile" = "Nuevo archivo";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.locationSharingStarted" = "Comenzó la compartición de ubicación entrante";
+"notifications.locationSharingStopped" = "Se ha parado la compartición de ubicación entrante";
 "dataTransfer.readableStatusAwaiting" = "En espera...";
 "dataTransfer.readableStatusRefuse" = "No aceptar";
 "dataTransfer.readableStatusOngoing" = "Transfiriendo";
@@ -313,7 +314,7 @@
 "generatedMessage.incomingCall" = "Llamada entrante";
 "generatedMessage.missedOutgoingCall" = "Llamada saliente perdida";
 "generatedMessage.missedIncomingCall" = "Llamada entrante perdida";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "Compartición de ubicación en vivo";
 
 //General Settings
 "generalSettings.title" = "Ajustes generales";
