@@ -233,6 +233,11 @@ class MessageViewModel {
         return self.dataTransferService.getFileURLFromPhotoLibrairy(identifier: identifier, completionHandler: completionHandler)
     }
 
+    func removeFile(conversationID: String, accountId: String) {
+        guard let url = self.transferedFile(conversationID: conversationID, accountId: accountId) else { return }
+        self.dataTransferService.removeFile(at: url)
+    }
+
     func transferedFile(conversationID: String, accountId: String) -> URL? {
         guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return nil }
         if self.lastTransferStatus != .success &&

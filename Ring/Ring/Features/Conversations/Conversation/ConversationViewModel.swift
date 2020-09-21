@@ -313,6 +313,8 @@ class ConversationViewModel: Stateable, ViewModel {
                 self?.log.debug("Messages was deleted")
             })
             .disposed(by: disposeBag)
+        let message = self.messages.value.filter { $0.messageId == messageId }.first
+        message?.removeFile(conversationID: self.conversation.value.conversationId, accountId: account.id)
         self.messages.value.removeAll(where: { $0.messageId == messageId })
     }
 
