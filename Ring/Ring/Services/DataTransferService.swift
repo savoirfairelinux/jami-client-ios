@@ -162,6 +162,11 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return file
     }
 
+    func removeFile(at url: URL) {
+        let fileManager = FileManager.default
+        try? fileManager.removeItem(at: url)
+    }
+
     /*
      to avoid creating images multiple time keep images in dictionary
      images saved in app document folder referenced by conversationId concatinated with image name
