@@ -356,20 +356,17 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.viewModel.incomingFrame
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
-                if let image = frame {
-                    self?.spinner.stopAnimating()
-                    self?.isCallStarted = true
-                    if self?.beforeIncomingVideo.alpha != 0 {
-                        UIView.animate(withDuration: 0.4, animations: {
-                            self?.beforeIncomingVideo.alpha = 0
-                            }, completion: { [weak self] _ in
-                                self?.beforeIncomingVideo.isHidden = true
-                        })
-                    }
-                    DispatchQueue.main.async {
-                        self?.incomingVideo.image = image
-                    }
+                guard let self = self, let image = frame else { return }
+                self.spinner.stopAnimating()
+                self.isCallStarted = true
+                if self.beforeIncomingVideo.alpha != 0 {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.beforeIncomingVideo.alpha = 0
+                    }, completion: {_ in
+                        self.beforeIncomingVideo.isHidden = true
+                    })
                 }
+                self.incomingVideo.image = image
             })
             .disposed(by: self.disposeBag)
 
