@@ -92,6 +92,13 @@ class CallViewModel: Stateable, ViewModel {
                     guard let updatedCall = self?.callService.call(callID: call.callId) else { return }
                     self?.call = updatedCall
                     let conferenceCreated = conf.state == ConferenceState.conferenceCreated.rawValue
+                    if conferenceCreated {
+                        self?.callService.hold(callId: conf.conferenceID).subscribe().disposed(by: self!.disposeBag)
+                        self?.videoService.changeResolutionForConference(initialCallId: conf.conferenceID)
+                        //self.videoService.switchInput(toDevice: "camera://mediumCameraLanscape", callID: call.callId)
+                        self?.callService.unhold(callId: conf.conferenceID).subscribe().disposed(by: self!.disposeBag)
+                        //self?.videoService.changeResolutionForConference(initialCallId: conf.conferenceID)
+                    }
                     self?.rendererId = conferenceCreated ? conf.conferenceID : self!.call!.callId
                     self?.containerViewModel?.isConference = conferenceCreated
                     self?.conferenceMode.value = conferenceCreated
@@ -418,6 +425,7 @@ class CallViewModel: Stateable, ViewModel {
                 guard let self = self else { return }
                 if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
                     self.answerCall()
+                        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe()
                         .disposed(by: self.disposeBag)
                 } else if serviceEvent.eventType == ServiceEventType.callProviderCancellCall {
@@ -569,6 +577,7 @@ class CallViewModel: Stateable, ViewModel {
                 if self.videoService.getEncodingAccelerated() {
                     self.callService.hold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
                     self.videoService.disableHardwareForConference()
+                    //self.videoService.switchInput(toDevice: "camera://mediumCameraLanscape", callID: call.callId)
                     self.callService.unhold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
                 }
                 self.callService
