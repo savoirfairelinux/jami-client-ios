@@ -558,6 +558,26 @@ class CallViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: true))
     }
 
+    func getItemsForConferenceMenu(participantCallId: String, isMasterCall: Bool) -> MenuMode {
+        guard let call = self.callService.call(callID: participantCallId),
+            let conference = self.callService.call(callID: self.rendererId) else {
+            return MenuMode.onlyName
+        }
+        if call.state != CallState.current {
+            return isMasterCall ? MenuMode.onlyName : MenuMode.withoutMaximizeAndMinimize
+        }
+        let uri = isMasterCall ? "" : call.participantUri
+        guard let active = self.callService.isParticipant(participantURI: uri, activeIn: self.rendererId) else { return MenuMode.onlyName }
+        switch conference.layout {
+        case .grid:
+            return isMasterCall ? MenuMode.withoutHangUPAndMinimize :  MenuMode.withoutMinimize
+        case .oneWithSmal:
+            return active ? (isMasterCall ? MenuMode.withoutHangUp : MenuMode.all) : (isMasterCall ? MenuMode.withoutHangUPAndMinimize : MenuMode.withoutMinimize)
+        case .one:
+            return active ? (isMasterCall ? MenuMode.withoutHangUPAndMaximize : MenuMode.withoutMaximize) : (isMasterCall ? MenuMode.withoutHangUPAndMinimize : MenuMode.withoutMinimize)
+        }
+    }
+
     func showContactPickerVC() {
         self.stateSubject.onNext(ConversationState.showContactPicker(callID: rendererId, contactSelectedCB: { [weak self] (contacts) in
             guard let self = self,
@@ -619,5 +639,16 @@ class CallViewModel: Stateable, ViewModel {
             return
         }
         self.showConversations()
+    }
+
+    func setActiveParticipant(callId: String, maximize: Bool, isMasterCall: Bool) {
+        var uri: String?
+        if isMasterCall {
+            uri = ""
+        } else {
+            uri = self.callService.call(callID: callId)?.participantUri
+        }
+        guard let participantURI = uri else { return }
+        self.callService.setActiveParticipant(callId: callId, conferenceId: self.rendererId, maximixe: maximize, participantURI: participantURI)
     }
 }
