@@ -22,25 +22,30 @@ import RxSwift
 import RxCocoa
 
 class ConferenceParticipantViewModel {
-    let call: CallModel
+    let call: CallModel?
     let callsSercive: CallsService
     let profileService: ProfilesService
     let accountService: AccountsService
+    private let isMasterCall: Bool
     lazy var observableCall = {
-        self.callsSercive.currentCall(callId: call.callId)
+        self.callsSercive.currentCall(callId: call?.callId ?? "")
     }()
     let disposeBag = DisposeBag()
 
-    init(with call: CallModel, injectionBag: InjectionBag) {
+    init(with call: CallModel?, injectionBag: InjectionBag) {
         self.call = call
         self.callsSercive = injectionBag.callService
         self.profileService = injectionBag.profileService
         self.accountService = injectionBag.accountService
+        self.isMasterCall = call == nil
     }
 
     lazy var contactImageData: Observable<Profile>? = {
-        guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
+        guard let account = self.accountService.currentAccount else {
             return nil
+        }
+        guard let call = call else {
+            return self.profileService.getAccountProfile(accountId: account.id)
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
@@ -51,12 +56,20 @@ class ConferenceParticipantViewModel {
     }()
 
     lazy var displayName: Driver<String> = {
-        var name = self.call.displayName.isEmpty ? self.call.registeredName : self.call.displayName
-        name = name.isEmpty ? self.call.paricipantHash() : name
-        return Observable.just(name).asDriver(onErrorJustReturn: "")
+        return Observable.just(self.getName()).asDriver(onErrorJustReturn: "")
     }()
 
-    lazy var removeView: Observable<Bool> = {
+    func getName() -> String {
+        guard let call = call else {
+            return L10n.Account.me
+        }
+        var name = call.displayName.isEmpty ? call.registeredName : call.displayName
+        name = name.isEmpty ? call.paricipantHash() : name
+        return name
+    }
+
+    lazy var removeView: Observable<Bool>? = {
+        guard let call = call else { return nil }
         return self.observableCall
         .startWith(call)
             .map({ callModel in
@@ -68,6 +81,7 @@ class ConferenceParticipantViewModel {
     }()
 
     func cancelCall() {
+        guard let call = self.call else { return }
         self.callsSercive.hangUp(callId: call.callId)
             .subscribe(onCompleted: { })
             .disposed(by: disposeBag)

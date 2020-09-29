@@ -558,6 +558,24 @@ class CallViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: true))
     }
 
+    let menuItemsManager = ConferenceMenuItemsManager()
+
+    func getItemsForConferenceMenu(participantCallId: String?) -> MenuMode {
+        guard let callId = participantCallId else {
+            return self.getMenuItemsForMasterCall()
+        }
+        let conference = self.callService.call(callID: self.rendererId)
+        let call = self.callService.call(callID: callId)
+        let active = self.callService.isParticipant(participantURI: call?.participantUri, activeIn: self.rendererId)
+        return menuItemsManager.getMenuItemsFor(call: call, conference: conference, active: active)
+    }
+
+    private func getMenuItemsForMasterCall() -> MenuMode {
+        let conference = self.callService.call(callID: self.rendererId)
+        let active = self.callService.isParticipant(participantURI: "", activeIn: self.rendererId)
+        return menuItemsManager.getMenuItemsForMasterCall(conference: conference, active: active)
+    }
+
     func showContactPickerVC() {
         self.stateSubject.onNext(ConversationState.showContactPicker(callID: rendererId, contactSelectedCB: { [weak self] (contacts) in
             guard let self = self,
@@ -619,5 +637,9 @@ class CallViewModel: Stateable, ViewModel {
             return
         }
         self.showConversations()
+    }
+
+    func setActiveParticipant(callId: String?, maximize: Bool) {
+        self.callService.setActiveParticipant(callId: callId, conferenceId: self.rendererId, maximixe: maximize)
     }
 }
