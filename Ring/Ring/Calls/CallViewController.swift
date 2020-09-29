@@ -783,4 +783,8 @@ extension CallViewController: ConferenceParticipantViewDelegate {
         self.conferenceParticipantMenu = menuView
         conferenceCallsScrolView.addSubview(self.conferenceParticipantMenu!)
     }
+
+    func setActiveParticipant(call: CallModel) {
+        self.viewModel.setActiveParticipant(call: call)
+    }
 }

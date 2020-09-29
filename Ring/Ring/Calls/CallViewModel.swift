@@ -620,4 +620,8 @@ class CallViewModel: Stateable, ViewModel {
         }
         self.showConversations()
     }
+
+    func setActiveParticipant(call: CallModel) {
+        self.callService.setActiveParticipant(callId: call.callId, conferenceId: self.rendererId)
+    }
 }

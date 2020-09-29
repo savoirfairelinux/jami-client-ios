@@ -178,6 +178,22 @@ class CallsService: CallsAdapterDelegate {
         self.callsAdapter.joinCall(firstCall, second: secondCall)
     }
 
+    func setActiveParticipant(callId: String, conferenceId: String) {
+        guard let conference = self.call(callID: conferenceId) else { return }
+        var newLayout = CallLayout.grid
+        switch conference.layout {
+        case .grid:
+            newLayout = .oneWithSmal
+        case .oneWithSmal:
+            newLayout = .one
+        case .one:
+            newLayout = .oneWithSmal
+        }
+        conference.layout = newLayout
+        self.callsAdapter.setActiveParticipant(callId, forConference: conferenceId)
+        self.callsAdapter.setConferenceLayout(Int32(newLayout.rawValue), forConference: conferenceId)
+    }
+
     func callAndAddParticipant(participant contactId: String,
                                toCall callId: String,
                                withAccount account: AccountModel,

@@ -24,6 +24,7 @@ import RxSwift
 
 protocol ConferenceParticipantViewDelegate: class {
     func setConferenceParticipantMenu(menu: UIView?)
+    func setActiveParticipant(call: CallModel)
 }
 
 var inConfViewWidth: CGFloat = 60
@@ -57,19 +58,59 @@ class ConferenceParticipantView: UIView {
 
     @objc
     func showMenu() {
+        let marginY = 10
+        let marginX = 5
+        let maxWidth = 100
         let menu = UIView(frame: CGRect(x: 50, y: 50, width: menuWidth, height: menuHight))
         let blurView = UIBlurEffect(style: .light)
         let background = UIVisualEffectView(effect: blurView)
         background.frame = CGRect(x: 0, y: 0, width: menuWidth, height: menuHight)
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: menuWidth, height: menuHight))
+        let labelName = UILabel(frame: CGRect(x: marginX, y: 0, width: menuWidth, height: menuHight))
+        labelName.text = self.viewModel?.name
+               labelName.sizeToFit()
+               labelName.textAlignment = .center
+        let label = UILabel(frame: CGRect(x: marginX, y: Int(labelName.frame.size.height) + marginY, width: menuWidth, height: menuHight))
         label.text = L10n.Calls.haghUp
+        label.sizeToFit()
+        labelName.clipsToBounds = true
         label.textAlignment = .center
-        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: menuWidth, height: menuHight))
+        let menuButton = UIButton(frame: label.frame)
         label.adjustsFontSizeToFitWidth = true
-        menu.cornerRadius = 10
+
+        let labelResize = UILabel(frame: CGRect(x: marginX, y: Int(label.frame.origin.y + label.frame.size.height) + marginY, width: menuWidth, height: menuHight))
+        labelResize.text = "resize"
+             labelResize.sizeToFit()
+             labelResize.clipsToBounds = true
+             labelResize.textAlignment = .center
+             let menuButtonResize = UIButton(frame: labelResize.frame)
+        menuButtonResize.backgroundColor = UIColor.red
+             labelResize.adjustsFontSizeToFitWidth = true
+        background.cornerRadius = 10
+        let totalHeight = labelName.frame.size.height + CGFloat(marginY) * 2 + label.frame.size.height + labelResize.frame.size.height
+        let totalWidth = max(min(labelName.frame.size.width, CGFloat(maxWidth)), label.frame.size.width)
+        var viewFrame = menu.frame
+        viewFrame.size.height = totalHeight
+        viewFrame.size.width = totalWidth + CGFloat(marginX * 2)
+        menu.frame = viewFrame
+        background.frame = CGRect(x: 0, y: 0, width: totalWidth + CGFloat(marginX * 2), height: totalHeight)
+        var labelframe = labelName.frame
+        labelframe.size.width = totalWidth
+        labelName.frame = labelframe
+        var labelframe1 = label.frame
+        labelframe1.size.width = totalWidth
+        label.frame = labelframe1
+        var labelframe2 = label.frame
+        labelframe2.size.width = totalWidth
+        labelResize.frame = labelframe2
+        menuButtonResize.frame = label.frame
+        menuButton.frame = labelResize.frame
+        //background.frame = viewFrame
         menu.addSubview(background)
+        menu.addSubview(labelName)
         menu.addSubview(label)
         menu.addSubview(menuButton)
+        menu.addSubview(labelResize)
+        menu.addSubview(menuButtonResize)
         menuButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel?.cancelCall()
@@ -77,8 +118,19 @@ class ConferenceParticipantView: UIView {
                 self?.delegate?.setConferenceParticipantMenu(menu: nil)
             })
             .disposed(by: self.disposeBag)
+        menuButtonResize.rx.tap
+                   .subscribe(onNext: { [weak self] in
+                    self?.delegate?.setActiveParticipant(call: self!.viewModel!.call)
+                   // self?.viewModel?.resizeParticipant()
+//                       self?.viewModel?.cancelCall()
+//                       self?.removeFromSuperview()
+//                       self?.delegate?.setConferenceParticipantMenu(menu: nil)
+                   })
+                   .disposed(by: self.disposeBag)
         let frame = self.convert(menu.frame, to: self.superview)
         menu.frame = frame
+       // menu.backgroundColor = UIColor.blue
+        menu.clipsToBounds = false
         self.delegate?.setConferenceParticipantMenu(menu: menu)
     }
 
