@@ -26,21 +26,26 @@ class ConferenceParticipantViewModel {
     let callsSercive: CallsService
     let profileService: ProfilesService
     let accountService: AccountsService
+    let isMasterCall: Bool
     lazy var observableCall = {
         self.callsSercive.currentCall(callId: call.callId)
     }()
     let disposeBag = DisposeBag()
 
-    init(with call: CallModel, injectionBag: InjectionBag) {
+    init(with call: CallModel, injectionBag: InjectionBag, isMaster: Bool) {
         self.call = call
         self.callsSercive = injectionBag.callService
         self.profileService = injectionBag.profileService
         self.accountService = injectionBag.accountService
+        self.isMasterCall = isMaster
     }
 
     lazy var contactImageData: Observable<Profile>? = {
         guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
             return nil
+        }
+        if isMasterCall {
+            return self.profileService.getAccountProfile(accountId: account.id)
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
@@ -51,9 +56,21 @@ class ConferenceParticipantViewModel {
     }()
 
     lazy var displayName: Driver<String> = {
+        if isMasterCall {
+             return Observable.just("Me").asDriver(onErrorJustReturn: "")
+        }
         var name = self.call.displayName.isEmpty ? self.call.registeredName : self.call.displayName
         name = name.isEmpty ? self.call.paricipantHash() : name
         return Observable.just(name).asDriver(onErrorJustReturn: "")
+    }()
+
+    lazy var name: String = {
+        if isMasterCall {
+             return "Me"
+        }
+        var name = self.call.displayName.isEmpty ? self.call.registeredName : self.call.displayName
+        name = name.isEmpty ? self.call.paricipantHash() : name
+        return name
     }()
 
     lazy var removeView: Observable<Bool> = {

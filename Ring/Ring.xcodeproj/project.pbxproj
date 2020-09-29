@@ -261,6 +261,7 @@
 		2662FC81246B793500FA7782 /* IncognitoSmartListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2662FC80246B793500FA7782 /* IncognitoSmartListViewController.storyboard */; };
 		2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
+		26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
 		4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66E236CBC6900747177 /* ContactPickerViewController.swift */; };
@@ -662,6 +663,7 @@
 		2662FC80246B793500FA7782 /* IncognitoSmartListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = IncognitoSmartListViewController.storyboard; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewController.storyboard; sourceTree = SOURCE_ROOT; };
 		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
+		26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsMenu.swift; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
 		4430A66E236CBC6900747177 /* ContactPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewController.swift; sourceTree = "<group>"; };
@@ -1390,6 +1392,7 @@
 				0EF49A9E23828C960064CD98 /* ConferenceParticipantView.swift */,
 				0EF49AA023828CBC0064CD98 /* ConferenceParticipantViewModel.swift */,
 				0EF49AA223828CD00064CD98 /* ConferenceParticipantView.xib */,
+				26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -2278,6 +2281,7 @@
 				2662FC7B246B216B00FA7782 /* JamiSearchViewModel.swift in Sources */,
 				2662FC7F246B790400FA7782 /* IncognitoSmartListViewModel.swift in Sources */,
 				446FAF1D2373427100519C4F /* SendFileViewModel.swift in Sources */,
+				26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */,
 				62AD584A2056DADF00AF0701 /* MessageCellDataTransferReceived.swift in Sources */,
 				0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */,
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
