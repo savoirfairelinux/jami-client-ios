@@ -56,6 +56,12 @@ class ConferenceParticipantViewModel {
         return Observable.just(name).asDriver(onErrorJustReturn: "")
     }()
 
+    lazy var name: String = {
+        var name = self.call.displayName.isEmpty ? self.call.registeredName : self.call.displayName
+        name = name.isEmpty ? self.call.paricipantHash() : name
+        return name
+    }()
+
     lazy var removeView: Observable<Bool> = {
         return self.observableCall
         .startWith(call)
