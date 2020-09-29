@@ -178,6 +178,26 @@ class CallsService: CallsAdapterDelegate {
         self.callsAdapter.joinCall(firstCall, second: secondCall)
     }
 
+    func setActiveParticipant(callId: String?, conferenceId: String, maximixe: Bool) {
+        let participantURI = callId == nil ? "" : self.call(callID: callId!)?.participantUri
+        guard let conference = self.call(callID: conferenceId),
+            let uri = participantURI,
+            let isActive = self.isParticipant(participantURI: uri, activeIn: conferenceId) else { return }
+        var newLayout = CallLayout.grid
+        switch conference.layout {
+        case .grid:
+            newLayout = .oneWithSmal
+        case .oneWithSmal:
+            newLayout = isActive ? (maximixe ? .one : .grid) : .oneWithSmal
+        case .one:
+            newLayout = isActive ? .oneWithSmal : .oneWithSmal
+        }
+        conference.layout = newLayout
+        let newActiveCallId = callId == nil ? "" : callId
+        self.callsAdapter.setActiveParticipant(newActiveCallId, forConference: conferenceId)
+        self.callsAdapter.setConferenceLayout(Int32(newLayout.rawValue), forConference: conferenceId)
+    }
+
     func callAndAddParticipant(participant contactId: String,
                                toCall callId: String,
                                withAccount account: AccountModel,
@@ -609,5 +629,14 @@ class CallsService: CallsAdapterDelegate {
         conferenceCalls.forEach { (callID) in
             self.call(callID: callID)?.participantsCallId = conferenceCalls
         }
+    }
+
+    func isParticipant(participantURI: String?, activeIn conferenceId: String) -> Bool? {
+        guard let uri = participantURI,
+            let participants = self.callsAdapter.getConferenceInfo(conferenceId) as? [[String: String]] else { return nil }
+        for participant in participants where participant["uri"] == uri {
+            return participant["active"] == "true"
+        }
+        return nil
     }
 }
