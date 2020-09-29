@@ -761,26 +761,36 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 }
 
 extension CallViewController: ConferenceParticipantViewDelegate {
-    func setConferenceParticipantMenu(menu: UIView?) {
-        guard let menuView = menu else {
+    func addConferenceParticipantMenu(origin: CGPoint, displayName: String, callId: String, hangup: @escaping (() -> Void)) {
+        // remove menu if it is already present
+        if self.conferenceParticipantMenu?.frame.origin == origin {
             self.conferenceParticipantMenu?.removeFromSuperview()
             self.conferenceParticipantMenu = nil
             return
         }
-        if self.conferenceParticipantMenu?.frame == menuView.frame {
-            self.conferenceParticipantMenu?.removeFromSuperview()
-            self.conferenceParticipantMenu = nil
-            return
+        let menuView = ConferenceActionMenu(frame: CGRect(origin: origin, size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)))
+        menuView.configureWith(mode: self.viewModel.getItemsForConferenceMenu(participantCallId: callId), displayName: displayName)
+        menuView.addHangUpAction { [weak self] in
+            hangup()
+            self?.participantViewWillBeRemoved()
         }
-        let point = conferenceCallsScrolView.convert(menuView.frame.origin, to: self.view)
-        let offset = self.view.frame.size.width - point.x - menuView.frame.size.width
-        if offset < 0 {
-            conferenceCallsScrolView
-                .setContentOffset(CGPoint(x: conferenceCallsScrolView.contentOffset.x - offset,
-                                          y: 0), animated: true)
+        menuView.addMaximizeAction { [weak self] in
+            self?.conferenceParticipantMenu?.removeFromSuperview()
+            self?.conferenceParticipantMenu = nil
+            self?.viewModel.setActiveParticipant(callId: callId, maximize: true)
+        }
+        menuView.addMinimizeAction { [weak self] in
+            self?.conferenceParticipantMenu?.removeFromSuperview()
+            self?.conferenceParticipantMenu = nil
+            self?.viewModel.setActiveParticipant(callId: callId, maximize: true)
         }
         self.conferenceParticipantMenu?.removeFromSuperview()
         self.conferenceParticipantMenu = menuView
         conferenceCallsScrolView.addSubview(self.conferenceParticipantMenu!)
+    }
+
+    func participantViewWillBeRemoved() {
+        self.conferenceParticipantMenu?.removeFromSuperview()
+        self.conferenceParticipantMenu = nil
     }
 }

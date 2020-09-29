@@ -46,4 +46,6 @@
 - (NSDictionary<NSString*,NSString*>*)getConferenceDetails:(NSString*)conferenceId;
 - (NSArray<NSString*>*)getConferenceCalls:(NSString*)conferenceId;
 - (BOOL)hangUpConference:(NSString*)conferenceId;
+- (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId;
+- (void)setConferenceLayout:(int)layout forConference:(NSString*)conferenceId;
 @end

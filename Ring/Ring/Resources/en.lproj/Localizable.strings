@@ -177,6 +177,8 @@
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
