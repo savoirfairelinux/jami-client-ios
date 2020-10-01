@@ -23,7 +23,8 @@ import Reusable
 import RxSwift
 
 protocol ConferenceParticipantViewDelegate: class {
-    func setConferenceParticipantMenu(menu: UIView?)
+    func addConferenceParticipantMenu(origin: CGPoint, displayName: String, callId: String?, hangup: @escaping (() -> Void))
+    func removeMenu()
 }
 
 var inConfViewWidth: CGFloat = 60
@@ -34,8 +35,6 @@ class ConferenceParticipantView: UIView {
     @IBOutlet var avatarView: UIView!
     let disposeBag = DisposeBag()
     weak var delegate: ConferenceParticipantViewDelegate?
-    let menuWidth = 80
-    let menuHight = 40
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,38 +56,28 @@ class ConferenceParticipantView: UIView {
 
     @objc
     func showMenu() {
-        let menu = UIView(frame: CGRect(x: 50, y: 50, width: menuWidth, height: menuHight))
-        let blurView = UIBlurEffect(style: .light)
-        let background = UIVisualEffectView(effect: blurView)
-        background.frame = CGRect(x: 0, y: 0, width: menuWidth, height: menuHight)
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: menuWidth, height: menuHight))
-        label.text = L10n.Calls.haghUp
-        label.textAlignment = .center
-        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: menuWidth, height: menuHight))
-        label.adjustsFontSizeToFitWidth = true
-        menu.cornerRadius = 10
-        menu.addSubview(background)
-        menu.addSubview(label)
-        menu.addSubview(menuButton)
-        menuButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel?.cancelCall()
-                self?.removeFromSuperview()
-                self?.delegate?.setConferenceParticipantMenu(menu: nil)
-            })
-            .disposed(by: self.disposeBag)
+        guard let name = self.viewModel?.getName() else { return }
+        let callId = self.viewModel?.call?.callId
+        let menu = UIView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
         let frame = self.convert(menu.frame, to: self.superview)
-        menu.frame = frame
-        self.delegate?.setConferenceParticipantMenu(menu: menu)
+        self.delegate?
+            .addConferenceParticipantMenu(origin: frame.origin,
+                                          displayName: name,
+                                          callId: callId,
+                                          hangup: {
+                                            [weak self] in
+                                            self?.viewModel?.cancelCall()
+                                            self?.removeFromSuperview()
+            })
     }
 
     var viewModel: ConferenceParticipantViewModel? {
         didSet {
-            self.viewModel?.removeView
+            self.viewModel?.removeView?
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] remove in
                     if remove {
-                        self?.delegate?.setConferenceParticipantMenu(menu: nil)
+                        self?.delegate?.removeMenu()
                         self?.removeFromSuperview()
                     }
                 })
