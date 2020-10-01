@@ -76,9 +76,8 @@ class ConversationViewController: UIViewController,
             .notification(UIDevice.orientationDidChangeNotification)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self](_) in
-                guard let self = self else {
-                    return
-                }
+                guard let self = self,
+                UIDevice.current.portraitOrLandscape else { return }
                 self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                                    displayName: self.viewModel.displayName.value,
                                    username: self.viewModel.userName.value)

@@ -171,6 +171,15 @@ static id <VideoAdapterDelegate> _delegate;
 
 #pragma mark -
 
+-(CGSize)getRenderSize:(NSString* )sinkId {
+    auto renderer = renderers.find(std::string([sinkId UTF8String]));
+    if (renderer != renderers.end()) {
+        std::unique_lock<std::mutex> lk(renderer->second->renderMutex);
+        return CGSizeMake(renderer->second->width, renderer->second->height);
+    }
+    return CGSizeZero;
+}
+
 - (void)registerSinkTargetWithSinkId:sinkId
           withWidth:(NSInteger)w
          withHeight:(NSInteger)h

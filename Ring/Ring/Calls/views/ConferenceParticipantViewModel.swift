@@ -22,42 +22,54 @@ import RxSwift
 import RxCocoa
 
 class ConferenceParticipantViewModel {
-    let call: CallModel
-    let callsSercive: CallsService
-    let profileService: ProfilesService
-    let accountService: AccountsService
-    lazy var observableCall = {
-        self.callsSercive.currentCall(callId: call.callId)
-    }()
-    let disposeBag = DisposeBag()
+    private let call: CallModel? // for conference master call is nil
+    private let callsSercive: CallsService
+    private let profileService: ProfilesService
+    private let accountService: AccountsService
+    private let isMasterCall: Bool
+    private let disposeBag = DisposeBag()
 
-    init(with call: CallModel, injectionBag: InjectionBag) {
-        self.call = call
-        self.callsSercive = injectionBag.callService
-        self.profileService = injectionBag.profileService
-        self.accountService = injectionBag.accountService
-    }
-
-    lazy var contactImageData: Observable<Profile>? = {
-        guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
-            return nil
+    private lazy var contactImageData: Observable<String?> = {
+        guard let account = self.accountService.currentAccount else {
+            return Observable.just(nil)
+        }
+        guard let call = call else {
+            return self.profileService.getAccountProfile(accountId: account.id).map { profile in
+                if let alias = profile.alias, !alias.isEmpty {
+                    self.displayName.accept(alias)
+                }
+                return profile.photo
+            }
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
                                            infoHach: call.participantUri,
-                                           account: account).uriString else { return nil }
-        return self.profileService.getProfile(uri: uriString,
-                                              createIfNotexists: true, accountId: account.id)
+                                           account: account).uriString else { return Observable.just(nil) }
+        return profileService.getProfile(uri: uriString,
+                                         createIfNotexists: false,
+                                         accountId: account.id)
+            .map { profile in
+                if let alias = profile.alias, !alias.isEmpty {
+                    self.call?.displayName = alias
+                    self.displayName.accept(alias)
+                }
+                return profile.photo
+            }
     }()
 
-    lazy var displayName: Driver<String> = {
-        var name = self.call.displayName.isEmpty ? self.call.registeredName : self.call.displayName
-        name = name.isEmpty ? self.call.paricipantHash() : name
-        return Observable.just(name).asDriver(onErrorJustReturn: "")
+    private lazy var displayName: BehaviorRelay<String> = {
+        var initialName = ""
+        if let call = call {
+            initialName = call.getDisplayName()
+        } else if let account = self.accountService.currentAccount {
+            initialName = account.registeredName
+        }
+        return BehaviorRelay<String>(value: initialName)
     }()
 
-    lazy var removeView: Observable<Bool> = {
-        return self.observableCall
+    lazy var removeView: Observable<Bool>? = {
+        guard let call = call else { return nil }
+        return self.callsSercive.currentCall(callId: call.callId )
         .startWith(call)
             .map({ callModel in
                 return (callModel.state == .over ||
@@ -67,7 +79,34 @@ class ConferenceParticipantViewModel {
             })
     }()
 
+    lazy var avatarObservable: Observable<(String?, String?)> = {
+        return Observable<(String?, String?)>
+            .combineLatest(self.contactImageData, self.displayName.asObservable()) { image, name in
+                return (image, name)
+            }
+    }()
+
+    init(with call: CallModel?, injectionBag: InjectionBag) {
+        self.call = call
+        self.callsSercive = injectionBag.callService
+        self.profileService = injectionBag.profileService
+        self.accountService = injectionBag.accountService
+        self.isMasterCall = call == nil
+    }
+
+    func getName() -> String {
+        guard call != nil else {
+            return L10n.Account.me
+        }
+        return self.displayName.value
+    }
+
+    func getCallId() -> String? {
+        return self.call?.callId
+    }
+
     func cancelCall() {
+        guard let call = self.call else { return }
         self.callsSercive.hangUp(callId: call.callId)
             .subscribe(onCompleted: { })
             .disposed(by: disposeBag)

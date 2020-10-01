@@ -35,6 +35,7 @@ enum CallServiceError: Error {
 enum ConferenceState: String {
     case conferenceCreated
     case conferenceDestroyed
+    case infoUpdated
 }
 
 enum MediaType: String, CustomStringConvertible {
@@ -82,28 +83,11 @@ class CallsService: CallsAdapterDelegate {
                                                object: nil)
     }
 
-    func checkForIncomingCall() {
-        if let call = self.call(callID: self.newCall.value.callId), call.state == .incoming {
-            self.newCall.value = call
-        }
-    }
-
     func currentCall(callId: String) -> Observable<CallModel> {
         return self.currentCallsEvents
             .share()
             .filter { (call) -> Bool in
                 call.callId == callId
-            }
-            .asObservable()
-    }
-
-    func currentConference(callId: String) -> Observable<ConferenceUpdates> {
-        return self.currentConferenceEvent
-        .asObservable()
-            .share()
-            .filter { (conference) -> Bool in
-                guard let conf = self.calls.value[conference.conferenceID] else { return false }
-                return conf.participantsCallId.contains(callId)
             }
             .asObservable()
     }
@@ -176,6 +160,61 @@ class CallsService: CallsAdapterDelegate {
             self.pendingConferences[firstCall] = [secondCall]
         }
         self.callsAdapter.joinCall(firstCall, second: secondCall)
+    }
+
+    func isParticipant(participantURI: String?, activeIn conferenceId: String) -> Bool? {
+        guard let uri = participantURI,
+            let participantsArray = self.callsAdapter.getConferenceInfo(conferenceId) as? [[String: String]] else { return nil }
+        let participants = self.arrayToConferenceParticipants(participants: participantsArray, onlyURIAndActive: true)
+        for participant in participants where participant.uri == uri {
+            return participant.isActive
+        }
+        return nil
+    }
+
+    private func arrayToConferenceParticipants(participants: [[String: String]], onlyURIAndActive: Bool) -> [ConferenceParticipant] {
+        var conferenceParticipants = [ConferenceParticipant]()
+        for participant in participants {
+            conferenceParticipants.append(ConferenceParticipant(info: participant, onlyURIAndActive: onlyURIAndActive))
+        }
+        return conferenceParticipants
+    }
+
+    var conferenceInfos = [String: [ConferenceParticipant]]()
+
+    func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]]) {
+        let participants = self.arrayToConferenceParticipants(participants: info, onlyURIAndActive: false)
+        self.conferenceInfos[conferenceID] = participants
+        currentConferenceEvent.value = ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""])
+    }
+
+    func getConferenceParticipants(for conferenceId: String) -> [ConferenceParticipant]? {
+        return conferenceInfos[conferenceId]
+    }
+
+    func setActiveParticipant(callId: String?, conferenceId: String, maximixe: Bool) {
+        let participantURI = callId == nil ? "" : self.call(callID: callId!)?.participantUri
+        guard let conference = self.call(callID: conferenceId),
+            let uri = participantURI,
+            let isActive = self.isParticipant(participantURI: uri, activeIn: conferenceId) else { return }
+        let newLayout = isActive ? self.getNewLayoutForActiveParticipant(currentLayout: conference.layout, maximixe: maximixe) : .oneWithSmal
+        conference.layout = newLayout
+        let newActiveCallId = callId == nil ? "" : callId
+        self.callsAdapter.setActiveParticipant(newActiveCallId, forConference: conferenceId)
+        self.callsAdapter.setConferenceLayout(newLayout.rawValue, forConference: conferenceId)
+    }
+
+    private func getNewLayoutForActiveParticipant(currentLayout: CallLayout, maximixe: Bool) -> CallLayout {
+        var newLayout = CallLayout.grid
+        switch currentLayout {
+        case .grid:
+            newLayout = .oneWithSmal
+        case .oneWithSmal:
+            newLayout = maximixe ? .one : .grid
+        case .one:
+            newLayout = .oneWithSmal
+        }
+        return newLayout
     }
 
     func callAndAddParticipant(participant contactId: String,
@@ -479,7 +518,7 @@ class CallsService: CallsAdapterDelegate {
         let name = !displayName.isEmpty ? displayName : registeredName
         var event = ServiceEvent(withEventType: .newIncomingMessage)
         event.addEventInput(.content, value: message.values.first)
-        event.addEventInput(.peerUri, value: uri.replacingOccurrences(of: "@ring.dht", with: ""))
+        event.addEventInput(.peerUri, value: uri.filterOutHost())
         event.addEventInput(.name, value: name)
         event.addEventInput(.accountId, value: accountId)
         self.newMessagesStream.onNext(event)
@@ -592,7 +631,9 @@ class CallsService: CallsAdapterDelegate {
 
     func conferenceRemoved(conference conferenceID: String) {
         guard let conference = self.call(callID: conferenceID) else { return }
-        currentConferenceEvent.value = ConferenceUpdates(conferenceID, ConferenceState.conferenceDestroyed.rawValue, conference.participantsCallId)
+        self.conferenceInfos[conferenceID] = nil
+        self.currentConferenceEvent.value = ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""])
+        self.currentConferenceEvent.value = ConferenceUpdates(conferenceID, ConferenceState.conferenceDestroyed.rawValue, conference.participantsCallId)
         self.calls.value[conferenceID] = nil
      }
 

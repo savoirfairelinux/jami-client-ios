@@ -259,8 +259,14 @@
 		2662FC7D246B78E800FA7782 /* IncognitoSmartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */; };
 		2662FC7F246B790400FA7782 /* IncognitoSmartListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC7E246B790400FA7782 /* IncognitoSmartListViewModel.swift */; };
 		2662FC81246B793500FA7782 /* IncognitoSmartListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2662FC80246B793500FA7782 /* IncognitoSmartListViewController.storyboard */; };
+		2673D62A25261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62925261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift */; };
+		2673D62E252624AB000C56CB /* ConferenceMenuItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */; };
+		2673D630252657B0000C56CB /* ConferenceLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62F252657B0000C56CB /* ConferenceLayout.swift */; };
+		2673D63225267785000C56CB /* ConferenceLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */; };
+		267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267AD77D252B979F00047593 /* ConferenceParticipant.swift */; };
 		2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
+		26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
 		4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66E236CBC6900747177 /* ContactPickerViewController.swift */; };
@@ -660,8 +666,14 @@
 		2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncognitoSmartListViewController.swift; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewController.swift; sourceTree = SOURCE_ROOT; };
 		2662FC7E246B790400FA7782 /* IncognitoSmartListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncognitoSmartListViewModel.swift; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewModel.swift; sourceTree = SOURCE_ROOT; };
 		2662FC80246B793500FA7782 /* IncognitoSmartListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = IncognitoSmartListViewController.storyboard; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewController.storyboard; sourceTree = SOURCE_ROOT; };
+		2673D62925261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceMenuItemsManagerTest.swift; sourceTree = "<group>"; };
+		2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceMenuItemsManager.swift; sourceTree = "<group>"; };
+		2673D62F252657B0000C56CB /* ConferenceLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceLayout.swift; sourceTree = "<group>"; };
+		2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceLayoutHelper.swift; sourceTree = "<group>"; };
+		267AD77D252B979F00047593 /* ConferenceParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipant.swift; sourceTree = "<group>"; };
 		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
+		26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsMenu.swift; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
 		4430A66E236CBC6900747177 /* ContactPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewController.swift; sourceTree = "<group>"; };
@@ -1126,6 +1138,7 @@
 				028568231DF60E5C003A8D8D /* Fixtures */,
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
+				2673D62925261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift */,
 			);
 			path = RingTests;
 			sourceTree = "<group>";
@@ -1390,6 +1403,7 @@
 				0EF49A9E23828C960064CD98 /* ConferenceParticipantView.swift */,
 				0EF49AA023828CBC0064CD98 /* ConferenceParticipantViewModel.swift */,
 				0EF49AA223828CD00064CD98 /* ConferenceParticipantView.xib */,
+				26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1570,6 +1584,7 @@
 				1A2D18BF1F29180700B2C785 /* DeviceModel.swift */,
 				0E983E6D1FC77C3E0082103E /* ConversationModel.swift */,
 				0E49096F1FEAC1C6005CAA50 /* CallModel.swift */,
+				267AD77D252B979F00047593 /* ConferenceParticipant.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1696,6 +1711,9 @@
 				4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */,
 				4430A66E236CBC6900747177 /* ContactPickerViewController.swift */,
 				4430A670236CBC7A00747177 /* ContactPickerViewModel.swift */,
+				2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */,
+				2673D62F252657B0000C56CB /* ConferenceLayout.swift */,
+				2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */,
 			);
 			path = Conference;
 			sourceTree = "<group>";
@@ -2191,6 +2209,7 @@
 				1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */,
 				64F8127724B8AA5200A7DE6A /* MessageCellLocationSharingReceived.swift in Sources */,
 				66E6381221764C2C005EA2B0 /* GrowingTextView.swift in Sources */,
+				267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */,
 				0E7CF4DB20164B6700CD967D /* ButtonsContainerView.swift in Sources */,
 				0E49097A1FEAC9E1005CAA50 /* CallViewController.swift in Sources */,
 				1A5DC0241F3564360075E8EF /* ContactRequestModel.swift in Sources */,
@@ -2241,6 +2260,7 @@
 				1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */,
 				2662FC79246B1E1700FA7782 /* JamiSearchView.swift in Sources */,
 				0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */,
+				2673D630252657B0000C56CB /* ConferenceLayout.swift in Sources */,
 				0E6F545A22403B1D00ECC3CE /* CreateSipAccountViewModel.swift in Sources */,
 				1A2D18FC1F292DAD00B2C785 /* ConversationCell.swift in Sources */,
 				0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */,
@@ -2278,7 +2298,9 @@
 				2662FC7B246B216B00FA7782 /* JamiSearchViewModel.swift in Sources */,
 				2662FC7F246B790400FA7782 /* IncognitoSmartListViewModel.swift in Sources */,
 				446FAF1D2373427100519C4F /* SendFileViewModel.swift in Sources */,
+				26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */,
 				62AD584A2056DADF00AF0701 /* MessageCellDataTransferReceived.swift in Sources */,
+				2673D62E252624AB000C56CB /* ConferenceMenuItemsManager.swift in Sources */,
 				0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */,
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
@@ -2318,6 +2340,7 @@
 				64DBCD2224DB3CF600CB5CA2 /* UserSearchResponse.m in Sources */,
 				263B715A246D9556007044C4 /* IncognitoSmartListCell.swift in Sources */,
 				66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */,
+				2673D63225267785000C56CB /* ConferenceLayoutHelper.swift in Sources */,
 				0E5A668322F0B1F100AA6820 /* ProgressView.swift in Sources */,
 				0E96ED79225D06480016C07D /* GeneralSettingsViewModel.swift in Sources */,
 				1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */,
@@ -2356,6 +2379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2673D62A25261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift in Sources */,
 				024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */,
 				5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */,
 				04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */,
