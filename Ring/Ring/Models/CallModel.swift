@@ -55,6 +55,48 @@ enum CallDetailKey: String {
     case confID = "CONF_ID"
 }
 
+enum CallLayout: Int32 {
+    case grid
+    case oneWithSmal
+    case one
+}
+
+struct ConfernceParticipant {
+    var originX: CGFloat = 0
+    var originY: CGFloat = 0
+    var width: CGFloat = 0
+    var height: CGFloat = 0
+    var uri: String?
+    var isActive: Bool = false
+
+    init (info: [String: String]) {
+        self.uri = info["uri"]
+        if let pointX = info["x"] {
+            self.originX = CGFloat((pointX as NSString).doubleValue)
+        }
+        if let pointY = info["y"] {
+            self.originY = CGFloat((pointY as NSString).doubleValue)
+        }
+        if let participantWidth = info["w"] {
+            self.width = CGFloat((participantWidth as NSString).doubleValue)
+        }
+        if let participantHeight = info["h"] {
+            self.height = CGFloat((participantHeight as NSString).doubleValue)
+        }
+        if let participantActive = info["active"] {
+            self.isActive = participantActive == "true"
+        }
+    }
+
+    init (info: [String: String], onlyURIAndActive: Bool) {
+        self.uri = info["uri"]
+        if let participantActive = info["active"] {
+            self.isActive = participantActive == "true"
+        }
+    }
+
+}
+
 public class CallModel {
 
     var callId: String = ""
@@ -70,6 +112,7 @@ public class CallModel {
     var peerHolding: Bool = false
     var speakerActive: Bool = false
     var isAudioOnly: Bool = false
+    var layout: CallLayout = .grid
     lazy var paricipantHash = {
         self.participantUri.replacingOccurrences(of: "@ring.dht", with: "")
     }

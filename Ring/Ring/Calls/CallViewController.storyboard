@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngv-XP-7A7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngv-XP-7A7">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -220,35 +220,36 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bij-Xb-EKH">
-                                <rect key="frame" x="10" y="856" width="365" height="100"/>
+                                <rect key="frame" x="10" y="856" width="365" height="300"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7G0-Fp-Xc3">
-                                        <rect key="frame" x="10" y="10" width="345" height="60"/>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7G0-Fp-Xc3">
+                                        <rect key="frame" x="10" y="10" width="345" height="260"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="7G0-Fp-Xc3" firstAttribute="top" secondItem="bij-Xb-EKH" secondAttribute="top" constant="10" id="7hy-qG-cQS"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="GXs-Xe-tfL"/>
                                     <constraint firstAttribute="trailing" secondItem="7G0-Fp-Xc3" secondAttribute="trailing" constant="10" id="IQa-4D-dRD"/>
                                     <constraint firstItem="7G0-Fp-Xc3" firstAttribute="centerX" secondItem="bij-Xb-EKH" secondAttribute="centerX" placeholder="YES" id="JZj-B5-YW6"/>
                                     <constraint firstItem="7G0-Fp-Xc3" firstAttribute="leading" secondItem="bij-Xb-EKH" secondAttribute="leading" constant="10" id="QC5-Mh-VcC"/>
                                     <constraint firstAttribute="bottom" secondItem="7G0-Fp-Xc3" secondAttribute="bottom" constant="30" id="lUV-jq-9bZ"/>
-                                    <constraint firstAttribute="height" constant="100" id="q8G-dB-syM"/>
+                                    <constraint firstAttribute="height" constant="300" id="q8G-dB-syM"/>
                                     <constraint firstItem="7G0-Fp-Xc3" firstAttribute="height" secondItem="bij-Xb-EKH" secondAttribute="height" constant="-40" id="xAL-yn-Zen"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y08-2c-sOI">
-                                <rect key="frame" x="0.0" y="856" width="90" height="100"/>
+                                <rect key="frame" x="0.0" y="856" width="90" height="90"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J9A-jr-W2G">
-                                        <rect key="frame" x="0.0" y="3" width="90" height="94"/>
+                                        <rect key="frame" x="0.0" y="3" width="90" height="84"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZkA-ez-mlm">
-                                            <rect key="frame" x="0.0" y="0.0" width="90" height="94"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="84"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EMj-da-ljj">
                                                     <rect key="frame" x="0.0" y="0.0" width="10" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="cjm-hE-jSP">
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cjm-hE-jSP">
                                                         <rect key="frame" x="0.0" y="0.0" width="10" height="0.0"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </view>
@@ -258,10 +259,13 @@
                                                 </visualEffectView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="84" id="qjG-Vg-ndR"/>
+                                        </constraints>
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMt-dh-EHe">
-                                        <rect key="frame" x="30" y="25" width="30" height="30"/>
+                                        <rect key="frame" x="30" y="20" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Doq-cc-WlD"/>
                                             <constraint firstAttribute="width" constant="30" id="fg2-1d-RBx"/>
@@ -292,7 +296,8 @@
                                     <constraint firstItem="sMt-dh-EHe" firstAttribute="centerX" secondItem="Y08-2c-sOI" secondAttribute="centerX" id="SoJ-6Y-kuD"/>
                                     <constraint firstAttribute="bottom" secondItem="J9A-jr-W2G" secondAttribute="bottom" constant="3" id="X2U-yZ-tFL"/>
                                     <constraint firstItem="J9A-jr-W2G" firstAttribute="top" secondItem="Y08-2c-sOI" secondAttribute="top" constant="3" id="XAd-Nz-1bC"/>
-                                    <constraint firstItem="sMt-dh-EHe" firstAttribute="centerY" secondItem="Y08-2c-sOI" secondAttribute="centerY" constant="-10" id="dr3-TJ-kge"/>
+                                    <constraint firstItem="sMt-dh-EHe" firstAttribute="top" secondItem="Y08-2c-sOI" secondAttribute="top" constant="20" id="cYs-j4-5pj"/>
+                                    <constraint firstAttribute="height" constant="90" id="wv5-Q2-hGT"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5E0-lB-SkS" userLabel="AvatarView">
@@ -402,7 +407,6 @@
                             <constraint firstItem="bij-Xb-EKH" firstAttribute="top" secondItem="Y08-2c-sOI" secondAttribute="top" id="MYo-iI-3Pl"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="top" secondItem="QpJ-Sx-9dG" secondAttribute="top" id="NrK-DR-BPG"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="top" secondItem="ZK1-Be-lcD" secondAttribute="top" constant="45" id="Uew-ao-q8k"/>
-                            <constraint firstItem="bij-Xb-EKH" firstAttribute="bottom" secondItem="Y08-2c-sOI" secondAttribute="bottom" id="VqH-pf-Qje"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="trailing" secondItem="bij-Xb-EKH" secondAttribute="trailing" id="W2C-XA-mUT"/>
                             <constraint firstItem="SdV-jx-Mla" firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="top" constant="40" id="YIc-Oj-lc8"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerY" secondItem="QpJ-Sx-9dG" secondAttribute="centerY" id="bAN-gX-nPE"/>

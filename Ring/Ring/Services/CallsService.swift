@@ -178,6 +178,49 @@ class CallsService: CallsAdapterDelegate {
         self.callsAdapter.joinCall(firstCall, second: secondCall)
     }
 
+    func isParticipant(participantURI: String?, activeIn conferenceId: String) -> Bool? {
+        guard let uri = participantURI,
+            let participantsArray = self.callsAdapter.getConferenceInfo(conferenceId) as? [[String: String]] else { return nil }
+        let participants = self.arrayToConferenceParticipants(participants: participantsArray)
+        for participant in participants where participant.uri == uri {
+            return participant.isActive
+        }
+        return nil
+    }
+
+    private func arrayToConferenceParticipants(participants: [[String: String]]) -> [ConfernceParticipant] {
+        var conferenceParticipants = [ConfernceParticipant]()
+        for participant in participants {
+            conferenceParticipants.append(ConfernceParticipant(info: participant, onlyURIAndActive: true))
+        }
+        return conferenceParticipants
+    }
+
+    func setActiveParticipant(callId: String?, conferenceId: String, maximixe: Bool) {
+        let participantURI = callId == nil ? "" : self.call(callID: callId!)?.participantUri
+        guard let conference = self.call(callID: conferenceId),
+            let uri = participantURI,
+            let isActive = self.isParticipant(participantURI: uri, activeIn: conferenceId) else { return }
+        let newLayout = isActive ? self.getNewLayoutForActiveParticipant(currentLayout: conference.layout, maximixe: maximixe) : .oneWithSmal
+        conference.layout = newLayout
+        let newActiveCallId = callId == nil ? "" : callId
+        self.callsAdapter.setActiveParticipant(newActiveCallId, forConference: conferenceId)
+        self.callsAdapter.setConferenceLayout(newLayout.rawValue, forConference: conferenceId)
+    }
+
+    private func getNewLayoutForActiveParticipant(currentLayout: CallLayout, maximixe: Bool) -> CallLayout {
+        var newLayout = CallLayout.grid
+        switch currentLayout {
+        case .grid:
+            newLayout = .oneWithSmal
+        case .oneWithSmal:
+            newLayout = maximixe ? .one : .grid
+        case .one:
+            newLayout = .oneWithSmal
+        }
+        return newLayout
+    }
+
     func callAndAddParticipant(participant contactId: String,
                                toCall callId: String,
                                withAccount account: AccountModel,
