@@ -18,6 +18,8 @@ internal enum L10n {
     internal static let createSipAccount = L10n.tr("Localizable", "account.createSipAccount")
     /// Enable Account
     internal static let enableAccount = L10n.tr("Localizable", "account.enableAccount")
+    /// Me
+    internal static let me = L10n.tr("Localizable", "account.me")
     /// account need to be migrated
     internal static let needMigration = L10n.tr("Localizable", "account.needMigration")
     /// Enter Password
@@ -289,6 +291,10 @@ internal enum L10n {
     internal static let haghUp = L10n.tr("Localizable", "calls.haghUp")
     /// wants to talk to you
     internal static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo")
+    /// maximize
+    internal static let maximize = L10n.tr("Localizable", "calls.maximize")
+    /// minimize
+    internal static let minimize = L10n.tr("Localizable", "calls.minimize")
     /// Ringing…
     internal static let ringing = L10n.tr("Localizable", "calls.ringing")
     /// Searching…

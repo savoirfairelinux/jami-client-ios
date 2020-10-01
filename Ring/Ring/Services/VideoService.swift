@@ -604,6 +604,10 @@ extension VideoService: VideoAdapterDelegate {
         self.videoAdapter.stopLocalRecording(path)
         self.recording = false
     }
+
+    func getConferenceVideoSize(confId: String) -> CGSize {
+        return self.videoAdapter.getRenderSize(confId)
+    }
 }
 
 // MARK: media player

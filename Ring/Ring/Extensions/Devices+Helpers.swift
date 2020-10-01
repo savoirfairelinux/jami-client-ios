@@ -23,6 +23,11 @@ import UIKit
 
 public extension UIDevice {
 
+    var portraitOrLandscape: Bool {
+        return self.orientation != .unknown && self.orientation != .faceUp &&
+            self.orientation != .faceDown
+    }
+
     var hasNotch: Bool {
         var bottom: CGFloat = 0
         if #available(iOS 11.0, *) {

@@ -56,5 +56,6 @@
 - (bool)mutePlayerAudio:(NSString*)playerId mute:(BOOL)mute;
 - (bool)playerSeekToTime:(int)time playerId:(NSString*)playerId;
 - (int64_t)getPlayerPosition:(NSString*)playerId;
+-(CGSize)getRenderSize:(NSString* )sinkId;
 
 @end

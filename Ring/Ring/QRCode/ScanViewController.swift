@@ -117,7 +117,8 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             .notification(UIDevice.orientationDidChangeNotification)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] (_) in
-                guard let self = self else { return }
+                guard let self = self,
+                UIDevice.current.portraitOrLandscape else { return }
                 self.videoPreviewLayer?.frame = self.view.bounds
                 self.updateOrientation()
                 self.view.layoutSubviews()

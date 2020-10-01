@@ -90,6 +90,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             .notification(UIDevice.orientationDidChangeNotification)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
+                guard UIDevice.current.portraitOrLandscape else { return }
                 self?.createAccountButton.updateGradientFrame()
                 self?.configureWalkrhroughNavigationBar()
                 if self?.registerPasswordView.isHidden ?? true {
