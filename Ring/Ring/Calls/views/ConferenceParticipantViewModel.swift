@@ -22,42 +22,36 @@ import RxSwift
 import RxCocoa
 
 class ConferenceParticipantViewModel {
-    let call: CallModel
-    let callsSercive: CallsService
-    let profileService: ProfilesService
-    let accountService: AccountsService
-    lazy var observableCall = {
-        self.callsSercive.currentCall(callId: call.callId)
-    }()
-    let disposeBag = DisposeBag()
+    private let call: CallModel? // for conference master call is nil
+    private let callsSercive: CallsService
+    private let profileService: ProfilesService
+    private let accountService: AccountsService
+    private let isMasterCall: Bool
+    private let disposeBag = DisposeBag()
 
-    init(with call: CallModel, injectionBag: InjectionBag) {
-        self.call = call
-        self.callsSercive = injectionBag.callService
-        self.profileService = injectionBag.profileService
-        self.accountService = injectionBag.accountService
-    }
-
-    lazy var contactImageData: Observable<Profile>? = {
-        guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
-            return nil
+    private lazy var contactImageData: Observable<Profile> = {
+        let defaultProfile: Profile = Profile("", nil, nil, ProfileType.ring.rawValue)
+        guard let account = self.accountService.currentAccount else {
+            return Observable.just(defaultProfile)
+        }
+        guard let call = call else {
+            return self.profileService.getAccountProfile(accountId: account.id)
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
                                            infoHach: call.participantUri,
-                                           account: account).uriString else { return nil }
+                                           account: account).uriString else { return Observable.just(defaultProfile) }
         return self.profileService.getProfile(uri: uriString,
                                               createIfNotexists: true, accountId: account.id)
     }()
 
-    lazy var displayName: Driver<String> = {
-        var name = self.call.displayName.isEmpty ? self.call.registeredName : self.call.displayName
-        name = name.isEmpty ? self.call.paricipantHash() : name
-        return Observable.just(name).asDriver(onErrorJustReturn: "")
+    private lazy var displayName: Driver<String> = {
+        return Observable.just(self.getName()).asDriver(onErrorJustReturn: "")
     }()
 
-    lazy var removeView: Observable<Bool> = {
-        return self.observableCall
+    lazy var removeView: Observable<Bool>? = {
+        guard let call = call else { return nil }
+        return self.callsSercive.currentCall(callId: call.callId )
         .startWith(call)
             .map({ callModel in
                 return (callModel.state == .over ||
@@ -67,7 +61,36 @@ class ConferenceParticipantViewModel {
             })
     }()
 
+    lazy var avatarObservable: Observable<(Profile?, String?)> = {
+        return Observable<(Profile?, String?)>
+            .combineLatest(self.contactImageData, self.displayName.asObservable()) { profile, username in
+                return (profile, username)
+            }
+    }()
+
+    init(with call: CallModel?, injectionBag: InjectionBag) {
+        self.call = call
+        self.callsSercive = injectionBag.callService
+        self.profileService = injectionBag.profileService
+        self.accountService = injectionBag.accountService
+        self.isMasterCall = call == nil
+    }
+
+    func getName() -> String {
+        guard let call = call else {
+            return L10n.Account.me
+        }
+        var name = call.displayName.isEmpty ? call.registeredName : call.displayName
+        name = name.isEmpty ? call.paricipantHash() : name
+        return name
+    }
+
+    func getCallId() -> String? {
+        return self.call?.callId
+    }
+
     func cancelCall() {
+        guard let call = self.call else { return }
         self.callsSercive.hangUp(callId: call.callId)
             .subscribe(onCompleted: { })
             .disposed(by: disposeBag)

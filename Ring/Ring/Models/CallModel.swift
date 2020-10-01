@@ -55,6 +55,12 @@ enum CallDetailKey: String {
     case confID = "CONF_ID"
 }
 
+enum CallLayout: Int {
+    case grid
+    case oneWithSmal
+    case one
+}
+
 public class CallModel {
 
     var callId: String = ""
@@ -70,6 +76,7 @@ public class CallModel {
     var peerHolding: Bool = false
     var speakerActive: Bool = false
     var isAudioOnly: Bool = false
+    var layout: CallLayout = .grid
     lazy var paricipantHash = {
         self.participantUri.replacingOccurrences(of: "@ring.dht", with: "")
     }
