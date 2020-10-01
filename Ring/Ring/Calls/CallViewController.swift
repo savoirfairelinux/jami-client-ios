@@ -442,20 +442,34 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self?.conferenceCallsLeading.constant = enteredConference ? 0 : -80
                 // if entered conference add first participant to conference list
                 if enteredConference {
+                    self?.removeConferenceParticipantMenu()
+                    guard let injectionBag = self?.viewModel.injectionBag
+                    else { return }
+                    // add self as a master call
+                    let masterCallView =
+                        ConferenceParticipantView(frame: CGRect(x: 0,
+                                                                y: 0,
+                                                                width: inConfViewWidth,
+                                                                height: inConfViewHeight))
+                    let masterCallViewModel =
+                        ConferenceParticipantViewModel(with: nil,
+                                                       injectionBag: injectionBag)
+                    masterCallView.viewModel = masterCallViewModel
+                    masterCallView.delegate = self
+                    self?.conferenceCalls.insertArrangedSubview(masterCallView, at: 0)
                     let callView =
                         ConferenceParticipantView(frame: CGRect(x: 0,
                                                                 y: 0,
                                                                 width: inConfViewWidth,
                                                                 height: inConfViewHeight))
-                    guard let injectionBag = self?.viewModel.injectionBag
-                        else { return }
                     let pendingCallViewModel =
                         ConferenceParticipantViewModel(with: call,
                                                        injectionBag: injectionBag)
                     callView.viewModel = pendingCallViewModel
                     callView.delegate = self
-                    self?.conferenceCalls.insertArrangedSubview(callView, at: 0)
+                    self?.conferenceCalls.insertArrangedSubview(callView, at: 1)
                 } else {
+                    self?.removeConferenceParticipantMenu()
                     self?.conferenceCalls.arrangedSubviews.forEach({ (view) in
                         view.removeFromSuperview()
                     })
@@ -577,8 +591,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     func screenTapped() {
         if self.avatarView.isHidden {
             self.viewModel.respondOnTap()
-            self.conferenceParticipantMenu?.removeFromSuperview()
-            self.conferenceParticipantMenu = nil
+            self.removeConferenceParticipantMenu()
         }
     }
 
@@ -761,26 +774,38 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 }
 
 extension CallViewController: ConferenceParticipantViewDelegate {
-    func setConferenceParticipantMenu(menu: UIView?) {
-        guard let menuView = menu else {
-            self.conferenceParticipantMenu?.removeFromSuperview()
-            self.conferenceParticipantMenu = nil
+    func addConferenceParticipantMenu(origin: CGPoint, displayName: String, callId: String?, hangup: @escaping (() -> Void)) {
+        // remove menu if it is already present
+        if self.conferenceParticipantMenu?.frame.origin == origin {
+            self.removeConferenceParticipantMenu()
             return
         }
-        if self.conferenceParticipantMenu?.frame == menuView.frame {
-            self.conferenceParticipantMenu?.removeFromSuperview()
-            self.conferenceParticipantMenu = nil
-            return
+        let menuView = ConferenceActionMenu(frame: CGRect(origin: origin, size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)))
+        menuView.configureWith(mode: self.viewModel.getItemsForConferenceMenu(participantCallId: callId), displayName: displayName)
+        menuView.addHangUpAction { [weak self] in
+            hangup()
+            self?.removeConferenceParticipantMenu()
+        }
+        menuView.addMaximizeAction { [weak self] in
+            self?.removeConferenceParticipantMenu()
+            self?.viewModel.setActiveParticipant(callId: callId, maximize: true)
+        }
+        menuView.addMinimizeAction { [weak self] in
+            self?.removeConferenceParticipantMenu()
+            self?.viewModel.setActiveParticipant(callId: callId, maximize: true)
         }
         let point = conferenceCallsScrolView.convert(menuView.frame.origin, to: self.view)
         let offset = self.view.frame.size.width - point.x - menuView.frame.size.width
         if offset < 0 {
-            conferenceCallsScrolView
-                .setContentOffset(CGPoint(x: conferenceCallsScrolView.contentOffset.x - offset,
-                                          y: 0), animated: true)
+            conferenceCallsScrolView.setContentOffset(CGPoint(x: conferenceCallsScrolView.contentOffset.x - offset, y: 0), animated: true)
         }
-        self.conferenceParticipantMenu?.removeFromSuperview()
+        self.removeConferenceParticipantMenu()
         self.conferenceParticipantMenu = menuView
         conferenceCallsScrolView.addSubview(self.conferenceParticipantMenu!)
+    }
+
+    func removeConferenceParticipantMenu() {
+        self.conferenceParticipantMenu?.removeFromSuperview()
+        self.conferenceParticipantMenu = nil
     }
 }
