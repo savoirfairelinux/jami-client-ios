@@ -64,6 +64,9 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
             .notification(UIDevice.orientationDidChangeNotification)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
+                guard UIDevice.current.portraitOrLandscape else {
+                    return
+                }
                 self?.migrateButton.updateGradientFrame()
                 self?.cancelButton.updateGradientFrame()
                 self?.migrateOtherAccountButton.updateGradientFrame()

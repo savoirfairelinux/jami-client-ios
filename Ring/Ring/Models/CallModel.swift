@@ -32,6 +32,21 @@ enum CallState: String {
     case inactive = "INACTIVE"
     case over = "OVER"
     case unknown = "UNKNOWN"
+
+    func toString() -> String {
+        switch self {
+        case .connecting :
+            return L10n.Calls.connecting
+        case .ringing :
+            return L10n.Calls.ringing
+        case .over :
+            return L10n.Calls.callFinished
+        case .unknown :
+            return L10n.Calls.searching
+        default :
+            return ""
+        }
+    }
 }
 
 enum CallType: Int {
@@ -55,6 +70,12 @@ enum CallDetailKey: String {
     case confID = "CONF_ID"
 }
 
+enum CallLayout: Int32 {
+    case grid
+    case oneWithSmal
+    case one
+}
+
 public class CallModel {
 
     var callId: String = ""
@@ -70,8 +91,9 @@ public class CallModel {
     var peerHolding: Bool = false
     var speakerActive: Bool = false
     var isAudioOnly: Bool = false
+    var layout: CallLayout = .grid
     lazy var paricipantHash = {
-        self.participantUri.replacingOccurrences(of: "@ring.dht", with: "")
+        self.participantUri.filterOutHost()
     }
 
     var stateValue = CallState.unknown.rawValue
@@ -164,5 +186,22 @@ public class CallModel {
         if let isAudioOnly = dictionary[CallDetailKey.audioOnlyKey.rawValue]?.toBool() {
             self.isAudioOnly = isAudioOnly
         }
+    }
+
+    func getDisplayName() -> String {
+        if !self.displayName.isEmpty {
+            return self.displayName
+        } else if !self.registeredName.isEmpty {
+            return self.registeredName
+        }
+        return self.paricipantHash()
+    }
+
+    func isExists() -> Bool {
+        return self.state != .over && self.state != .inactive && self.state != .failure && self.state != .busy
+    }
+
+    func isActive() -> Bool {
+        return self.state == .connecting || self.state == .ringing || self.state == .current
     }
 }

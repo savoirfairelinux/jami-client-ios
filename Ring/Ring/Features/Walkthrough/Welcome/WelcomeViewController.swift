@@ -115,6 +115,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             .notification(UIDevice.orientationDidChangeNotification)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
+                guard UIDevice.current.portraitOrLandscape else { return }
                 self?.configureWalkrhroughNavigationBar()
                 self?.updateButtonsSize()
             })

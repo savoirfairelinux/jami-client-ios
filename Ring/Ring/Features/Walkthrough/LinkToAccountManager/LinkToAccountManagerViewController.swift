@@ -54,6 +54,7 @@ var viewModel: LinkToAccountManagerViewModel!
     NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
         .observeOn(MainScheduler.instance)
         .subscribe(onNext: { [weak self] (_) in
+            guard UIDevice.current.portraitOrLandscape else { return }
             self?.signInButton.updateGradientFrame()
             self?.configureWalkrhroughNavigationBar()
         })

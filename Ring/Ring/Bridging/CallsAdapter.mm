@@ -136,6 +136,13 @@ static id <CallsAdapterDelegate> _delegate;
                [CallsAdapter.delegate conferenceRemovedWithConference: confIdString];
            }
        }));
+    callHandlers.insert(exportable_callback<CallSignal::OnConferenceInfosUpdated>([&](const std::string& confId, const std::vector<std::map<std::string, std::string>>& info) {
+        if (CallsAdapter.delegate) {
+            auto infoDictionary = [Utils vectorOfMapsToArray: info];
+            NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
+            [CallsAdapter.delegate conferenceInfoUpdatedWithConference:confIdString info: infoDictionary];
+        }
+    }));
 
     registerSignalHandlers(callHandlers);
 }
@@ -204,6 +211,20 @@ static id <CallsAdapterDelegate> _delegate;
 
 - (BOOL)hangUpConference:(NSString*)conferenceId {
     return hangUpConference(std::string([conferenceId UTF8String]));
+}
+
+- (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId {
+    setActiveParticipant(std::string([conferenceId UTF8String]), std::string([callId UTF8String]));
+}
+
+- (void)setConferenceLayout:(int)layout forConference:(NSString*)conferenceId {
+    setConferenceLayout(std::string([conferenceId UTF8String]), layout);
+}
+
+- (NSArray*)getConferenceInfo:(NSString*)conferenceId {
+    auto result = getConferenceInfos(std::string([conferenceId UTF8String]));
+    NSArray* arrayResult = [Utils vectorOfMapsToArray:result];
+    return arrayResult;
 }
 
 - (NSDictionary<NSString*,NSString*>*)getConferenceDetails:(NSString*)conferenceId {

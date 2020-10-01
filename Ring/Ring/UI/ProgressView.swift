@@ -143,9 +143,7 @@ class ProgressView: UIView {
         self.disposeBug = DisposeBag()
         self.progress = 0.00
         self.target = 100
-        self.subviews.forEach { view in
-            view.removeFromSuperview()
-        }
+        self.removeSubviews()
         super.removeFromSuperview()
     }
 

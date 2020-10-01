@@ -76,13 +76,8 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .notification(UIDevice.orientationDidChangeNotification)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
-                //filter out upside orientation
-                if  UIDevice.current.orientation.rawValue == 5 || UIDevice.current.orientation.rawValue == 6 {
-                    return
-                }
-                guard let self = self else {
-                    return
-                }
+                guard let self = self,
+                UIDevice.current.portraitOrLandscape else { return }
                 self.viewModel
                     .setCameraOrientation(orientation: UIDevice.current.orientation)
             })
