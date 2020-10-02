@@ -29,4 +29,5 @@
     func conferenceCreated(conference conferenceID: String)
     func conferenceChanged(conference conferenceID: String, state: String)
     func conferenceRemoved(conference conferenceID: String)
+    func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]])
 }

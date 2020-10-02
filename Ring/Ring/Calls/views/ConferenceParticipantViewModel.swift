@@ -80,9 +80,7 @@ class ConferenceParticipantViewModel {
         guard let call = call else {
             return L10n.Account.me
         }
-        var name = call.displayName.isEmpty ? call.registeredName : call.displayName
-        name = name.isEmpty ? call.paricipantHash() : name
-        return name
+        return call.getDisplayName()
     }
 
     func getCallId() -> String? {

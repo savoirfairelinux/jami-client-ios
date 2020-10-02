@@ -89,6 +89,10 @@ class CallViewModel: Stateable, ViewModel {
                     if conf.conferenceID.isEmpty {
                         return
                     }
+                    if conf.state == ConferenceState.infoUpdated.rawValue {
+                        self?.layoutUpdated.accept(true)
+                        return
+                    }
                     guard let updatedCall = self?.callService.call(callID: call.callId) else { return }
                     self?.call = updatedCall
                     let conferenceCreated = conf.state == ConferenceState.conferenceCreated.rawValue
@@ -118,6 +122,8 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     // data for ViewController binding
+
+    var layoutUpdated = BehaviorRelay<Bool>(value: false)
 
     lazy var contactImageData: Observable<Data?>? = {
         guard let call = self.call,
@@ -637,5 +643,21 @@ class CallViewModel: Stateable, ViewModel {
 
     func setActiveParticipant(callId: String?, maximize: Bool) {
         self.callService.setActiveParticipant(callId: callId, conferenceId: self.rendererId, maximixe: maximize)
+    }
+
+    func getConferenceVideoSize() -> CGSize {
+        let size = self.videoService.getConferenceVideoSize()
+        return CGSize(width: size.width, height: size.height)
+    }
+
+    func getConferenceParticipants() -> [ConferenceParticipant]? {
+        guard let account = self.accountService.currentAccount,
+        let participants = self.callService.getConferenceParticipants(for: self.rendererId) else { return nil }
+        for var participant in participants where participant.uri != nil {
+            if let call = self.callService.call(participantHash: participant.uri!, accountID: account.id) {
+                participant.displayName = call.getDisplayName()
+            }
+        }
+        return self.callService.getConferenceParticipants(for: self.rendererId)
     }
 }
