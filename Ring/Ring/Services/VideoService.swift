@@ -604,6 +604,21 @@ extension VideoService: VideoAdapterDelegate {
         self.videoAdapter.stopLocalRecording(path)
         self.recording = false
     }
+
+    func getConferenceVideoSize() -> (width: CGFloat, height: CGFloat) {
+        var width: CGFloat = 0
+        var height: CGFloat = 0
+        if let deviceInfo: [String: String] = try? camera
+            .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
+                           quality: AVCaptureSession.Preset.medium),
+            let widthString = deviceInfo["width"],
+            let heightString = deviceInfo["height"] {
+            width = CGFloat((widthString as NSString).doubleValue)
+            height = CGFloat((heightString as NSString).doubleValue)
+
+        }
+        return (width, height)
+    }
 }
 
 // MARK: media player

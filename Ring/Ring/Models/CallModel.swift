@@ -61,16 +61,23 @@ enum CallLayout: Int32 {
     case one
 }
 
-struct ConfernceParticipant {
+struct ConferenceParticipant {
     var originX: CGFloat = 0
     var originY: CGFloat = 0
     var width: CGFloat = 0
     var height: CGFloat = 0
     var uri: String?
     var isActive: Bool = false
+    var displayName: String = ""
 
-    init (info: [String: String]) {
+    init (info: [String: String], onlyURIAndActive: Bool) {
         self.uri = info["uri"]
+        if let participantActive = info["active"] {
+            self.isActive = participantActive == "true"
+        }
+        if onlyURIAndActive {
+            return
+        }
         if let pointX = info["x"] {
             self.originX = CGFloat((pointX as NSString).doubleValue)
         }
@@ -83,18 +90,7 @@ struct ConfernceParticipant {
         if let participantHeight = info["h"] {
             self.height = CGFloat((participantHeight as NSString).doubleValue)
         }
-        if let participantActive = info["active"] {
-            self.isActive = participantActive == "true"
-        }
     }
-
-    init (info: [String: String], onlyURIAndActive: Bool) {
-        self.uri = info["uri"]
-        if let participantActive = info["active"] {
-            self.isActive = participantActive == "true"
-        }
-    }
-
 }
 
 public class CallModel {
@@ -207,5 +203,13 @@ public class CallModel {
         if let isAudioOnly = dictionary[CallDetailKey.audioOnlyKey.rawValue]?.toBool() {
             self.isAudioOnly = isAudioOnly
         }
+    }
+
+    func getDisplayName() -> String {
+        var name = self.displayName.isEmpty ? self.registeredName : self.displayName
+        if name.isEmpty {
+            name = self.paricipantHash()
+        }
+        return name
     }
 }
