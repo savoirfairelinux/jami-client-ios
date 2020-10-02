@@ -32,6 +32,21 @@ enum CallState: String {
     case inactive = "INACTIVE"
     case over = "OVER"
     case unknown = "UNKNOWN"
+
+    func toString() -> String {
+        switch self {
+        case .connecting :
+            return L10n.Calls.connecting
+        case .ringing :
+            return L10n.Calls.ringing
+        case .over :
+            return L10n.Calls.callFinished
+        case .unknown :
+            return L10n.Calls.searching
+        default :
+            return ""
+        }
+    }
 }
 
 enum CallType: Int {
@@ -61,42 +76,6 @@ enum CallLayout: Int32 {
     case one
 }
 
-struct ConfernceParticipant {
-    var originX: CGFloat = 0
-    var originY: CGFloat = 0
-    var width: CGFloat = 0
-    var height: CGFloat = 0
-    var uri: String?
-    var isActive: Bool = false
-
-    init (info: [String: String]) {
-        self.uri = info["uri"]
-        if let pointX = info["x"] {
-            self.originX = CGFloat((pointX as NSString).doubleValue)
-        }
-        if let pointY = info["y"] {
-            self.originY = CGFloat((pointY as NSString).doubleValue)
-        }
-        if let participantWidth = info["w"] {
-            self.width = CGFloat((participantWidth as NSString).doubleValue)
-        }
-        if let participantHeight = info["h"] {
-            self.height = CGFloat((participantHeight as NSString).doubleValue)
-        }
-        if let participantActive = info["active"] {
-            self.isActive = participantActive == "true"
-        }
-    }
-
-    init (info: [String: String], onlyURIAndActive: Bool) {
-        self.uri = info["uri"]
-        if let participantActive = info["active"] {
-            self.isActive = participantActive == "true"
-        }
-    }
-
-}
-
 public class CallModel {
 
     var callId: String = ""
@@ -114,7 +93,7 @@ public class CallModel {
     var isAudioOnly: Bool = false
     var layout: CallLayout = .grid
     lazy var paricipantHash = {
-        self.participantUri.replacingOccurrences(of: "@ring.dht", with: "")
+        self.participantUri.filterOutHost()
     }
 
     var stateValue = CallState.unknown.rawValue
@@ -207,5 +186,22 @@ public class CallModel {
         if let isAudioOnly = dictionary[CallDetailKey.audioOnlyKey.rawValue]?.toBool() {
             self.isAudioOnly = isAudioOnly
         }
+    }
+
+    func getDisplayName() -> String {
+        if !self.displayName.isEmpty {
+            return self.displayName
+        } else if !self.registeredName.isEmpty {
+            return self.registeredName
+        }
+        return self.paricipantHash()
+    }
+
+    func isExists() -> Bool {
+        return self.state != .over && self.state != .inactive && self.state != .failure && self.state != .busy
+    }
+
+    func isActive() -> Bool {
+        return self.state == .connecting || self.state == .ringing || self.state == .current
     }
 }

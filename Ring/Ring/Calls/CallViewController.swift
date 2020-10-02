@@ -71,6 +71,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var conferenceCalls: UIStackView!
     @IBOutlet weak var conferenceCallsScrolView: UIScrollView!
     @IBOutlet weak var buttonsStackView: UIStackView!
+    @IBOutlet weak var conferenceLayout: ConferenceLayout!
 
     @IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var inConferenceAddContactButton: UIView!
@@ -122,6 +123,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
         UIApplication.shared.isIdleTimerDisabled = true
         initCallAnimation()
+        self.configureConferenceLayout()
         self.inConferenceAddContactButton.isHidden = !self.viewModel.conferenceMode.value
         if callCurrent {
             self.capturedVideoBlurEffect.alpha = 1
@@ -131,7 +133,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .notification(UIDevice.orientationDidChangeNotification)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] (_) in
-                guard let self = self else {
+                guard let self = self,
+                UIDevice.current.portraitOrLandscape else {
                     return
                 }
                 self.setAvatarView(!self.avatarView.isHidden)
@@ -153,6 +156,25 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     func addTapGesture() {
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    private func configureConferenceLayout() {
+        self.updateconferenceLayoutSize()
+        self.viewModel.layoutUpdated
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] updated in
+                guard let self = self, updated else { return }
+                self.updateconferenceLayoutSize()
+                let participants = self.viewModel.getConferenceParticipants()
+                self.conferenceLayout.setParticipants(participants: participants)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func updateconferenceLayoutSize() {
+        let size = self.viewModel.getConferenceVideoSize()
+        self.conferenceLayout.setUpWithVideoSize(size: size)
     }
 
     @objc
@@ -435,6 +457,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .subscribe(onNext: { [weak self] enteredConference in
                 guard let call = self?.viewModel.call else { return }
                 if call.state != .current { return }
+                self?.updateconferenceLayoutSize() 
                 self?.buttonsContainer.updateView()
                 self?.infoContainer.isHidden = enteredConference ? true : false
                 self?.resizeCapturedVideo(withInfoContainer: false)
@@ -792,7 +815,7 @@ extension CallViewController: ConferenceParticipantViewDelegate {
         }
         menuView.addMinimizeAction { [weak self] in
             self?.removeConferenceParticipantMenu()
-            self?.viewModel.setActiveParticipant(callId: callId, maximize: true)
+            self?.viewModel.setActiveParticipant(callId: callId, maximize: false)
         }
         let point = conferenceCallsScrolView.convert(menuView.frame.origin, to: self.view)
         let offset = self.view.frame.size.width - point.x - menuView.frame.size.width

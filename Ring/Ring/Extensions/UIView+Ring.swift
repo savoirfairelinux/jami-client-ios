@@ -182,6 +182,15 @@ extension UIView {
                 self?.alpha = 1.0
         })
     }
+
+    func removeSubviews(recursive: Bool = false) {
+        self.subviews.forEach { (subview) in
+            if recursive {
+                subview.removeSubviews(recursive: recursive)
+            }
+            subview.removeFromSuperview()
+        }
+    }
 }
 
 typealias GradientPoints = (startPoint: CGPoint, endPoint: CGPoint)
