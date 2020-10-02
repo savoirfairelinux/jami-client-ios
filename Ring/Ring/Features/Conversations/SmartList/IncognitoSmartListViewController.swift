@@ -56,6 +56,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             .notification(UIDevice.orientationDidChangeNotification)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self](_) in
+                guard UIDevice.current.portraitOrLandscape else { return }
                 self?.placeVideoCall.updateGradientFrame()
                 self?.placeAudioCall.updateGradientFrame()
             })

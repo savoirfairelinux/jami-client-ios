@@ -136,6 +136,13 @@ static id <CallsAdapterDelegate> _delegate;
                [CallsAdapter.delegate conferenceRemovedWithConference: confIdString];
            }
        }));
+    callHandlers.insert(exportable_callback<CallSignal::OnConferenceInfosUpdated>([&](const std::string& confId, const std::vector<std::map<std::string, std::string>>& info) {
+        if (CallsAdapter.delegate) {
+            auto infoDictionary = [Utils vectorOfMapsToArray: info];
+            NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
+            [CallsAdapter.delegate conferenceInfoUpdatedWithConference:confIdString info: infoDictionary];
+        }
+    }));
 
     registerSignalHandlers(callHandlers);
 }

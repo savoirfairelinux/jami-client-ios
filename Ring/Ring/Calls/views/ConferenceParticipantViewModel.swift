@@ -29,24 +29,42 @@ class ConferenceParticipantViewModel {
     private let isMasterCall: Bool
     private let disposeBag = DisposeBag()
 
-    private lazy var contactImageData: Observable<Profile> = {
-        let defaultProfile: Profile = Profile("", nil, nil, ProfileType.ring.rawValue)
+    private lazy var contactImageData: Observable<String?> = {
         guard let account = self.accountService.currentAccount else {
-            return Observable.just(defaultProfile)
+            return Observable.just(nil)
         }
         guard let call = call else {
-            return self.profileService.getAccountProfile(accountId: account.id)
+            return self.profileService.getAccountProfile(accountId: account.id).map { profile in
+                if let alias = profile.alias, !alias.isEmpty {
+                    self.displayName.accept(alias)
+                }
+                return profile.photo
+            }
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
                                            infoHach: call.participantUri,
-                                           account: account).uriString else { return Observable.just(defaultProfile) }
-        return self.profileService.getProfile(uri: uriString,
-                                              createIfNotexists: true, accountId: account.id)
+                                           account: account).uriString else { return Observable.just(nil) }
+        return profileService.getProfile(uri: uriString,
+                                         createIfNotexists: false,
+                                         accountId: account.id)
+            .map { profile in
+                if let alias = profile.alias, !alias.isEmpty {
+                    self.call?.displayName = alias
+                    self.displayName.accept(alias)
+                }
+                return profile.photo
+            }
     }()
 
-    private lazy var displayName: Driver<String> = {
-        return Observable.just(self.getName()).asDriver(onErrorJustReturn: "")
+    private lazy var displayName: BehaviorRelay<String> = {
+        var initialName = ""
+        if let call = call {
+            initialName = call.getDisplayName()
+        } else if let account = self.accountService.currentAccount {
+            initialName = account.registeredName
+        }
+        return BehaviorRelay<String>(value: initialName)
     }()
 
     lazy var removeView: Observable<Bool>? = {
@@ -61,10 +79,10 @@ class ConferenceParticipantViewModel {
             })
     }()
 
-    lazy var avatarObservable: Observable<(Profile?, String?)> = {
-        return Observable<(Profile?, String?)>
-            .combineLatest(self.contactImageData, self.displayName.asObservable()) { profile, username in
-                return (profile, username)
+    lazy var avatarObservable: Observable<(String?, String?)> = {
+        return Observable<(String?, String?)>
+            .combineLatest(self.contactImageData, self.displayName.asObservable()) { image, name in
+                return (image, name)
             }
     }()
 
@@ -77,12 +95,10 @@ class ConferenceParticipantViewModel {
     }
 
     func getName() -> String {
-        guard let call = call else {
+        guard call != nil else {
             return L10n.Account.me
         }
-        var name = call.displayName.isEmpty ? call.registeredName : call.displayName
-        name = name.isEmpty ? call.paricipantHash() : name
-        return name
+        return self.displayName.value
     }
 
     func getCallId() -> String? {
