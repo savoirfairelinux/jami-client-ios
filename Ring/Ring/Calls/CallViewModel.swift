@@ -43,11 +43,12 @@ class CallViewModel: Stateable, ViewModel {
 
     private let disposeBag = DisposeBag()
     private let log = SwiftyBeaver.self
+    private let menuItemsManager = ConferenceMenuItemsManager()
 
     var isHeadsetConnected = false
     var isAudioOnly = false
 
-    lazy var currentCallVariable: Variable<CallModel> = {
+    private lazy var currentCallVariable: Variable<CallModel> = {
         Variable<CallModel>(self.call ?? CallModel())
     }()
     lazy var currentCall: Observable<CallModel> = {
@@ -89,6 +90,10 @@ class CallViewModel: Stateable, ViewModel {
                     if conf.conferenceID.isEmpty {
                         return
                     }
+                    if conf.state == ConferenceState.infoUpdated.rawValue {
+                        self?.layoutUpdated.accept(true)
+                        return
+                    }
                     guard let updatedCall = self?.callService.call(callID: call.callId) else { return }
                     self?.call = updatedCall
                     let conferenceCreated = conf.state == ConferenceState.conferenceCreated.rawValue
@@ -119,6 +124,8 @@ class CallViewModel: Stateable, ViewModel {
 
     // data for ViewController binding
 
+    var layoutUpdated = BehaviorRelay<Bool>(value: false)
+
     lazy var contactImageData: Observable<Data?>? = {
         guard let call = self.call,
             let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
@@ -131,6 +138,9 @@ class CallViewModel: Stateable, ViewModel {
         return self.profileService.getProfile(uri: uriString,
                                               createIfNotexists: true, accountId: account.id)
             .filter({ profile in
+                if let alias = profile.alias {
+                    self.call?.displayName = alias
+                }
                 guard let photo = profile.photo else {
                     return false
                 }
@@ -166,10 +176,10 @@ class CallViewModel: Stateable, ViewModel {
     lazy var dismisVC: Observable<Bool> = {
         return currentCall
             .filter({ call in
-                return call.state == .over || call.state == .failure
+                return !call.isExists()
             })
             .map({ [weak self] call in
-                let hide = call.state == .over || call.state == .failure
+                let hide = !call.isExists()
                 //if it was conference call switch to another running call
                 if hide && call.participantsCallId.count > 1 {
                     //switch to another call
@@ -198,16 +208,10 @@ class CallViewModel: Stateable, ViewModel {
         return currentCall
             .startWith(self.call ?? CallModel())
             .filter({ call in
-                return call.state != .over && call.state != .inactive
+                return call.isExists()
             })
             .map({ call in
-                if !call.displayName.isEmpty {
-                    return call.displayName
-                } else if !call.registeredName.isEmpty {
-                    return call.registeredName
-                } else {
-                    return call.paricipantHash()
-                }
+                return call.getDisplayName()
             })
             .asDriver(onErrorJustReturn: "")
     }()
@@ -216,7 +220,7 @@ class CallViewModel: Stateable, ViewModel {
         let timer = Observable<Int>.interval(1.0, scheduler: MainScheduler.instance)
             .takeUntil(currentCall
                 .filter { call in
-                    call.state == .over
+                    !call.isExists()
                 })
             .map({ [weak self] (elapsed) -> String in
                 var time = elapsed
@@ -243,18 +247,7 @@ class CallViewModel: Stateable, ViewModel {
                 return call.callType == .outgoing
             })
             .map({call in
-                switch call.state {
-                case .connecting :
-                    return L10n.Calls.connecting
-                case .ringing :
-                    return L10n.Calls.ringing
-                case .over :
-                    return L10n.Calls.callFinished
-                case .unknown :
-                    return L10n.Calls.searching
-                default :
-                    return ""
-                }
+                return call.state.toString()
             })
     }()
 
@@ -272,9 +265,7 @@ class CallViewModel: Stateable, ViewModel {
     lazy var showCancelOption: Observable<Bool> = {
         return currentCall
             .filter({ call in
-                return (call.state == .connecting ||
-                    call.state == .ringing ||
-                    call.state == .current)
+                return call.isActive()
             })
             .map({ call in
                 return call.state == .connecting || call.state == .ringing
@@ -284,9 +275,7 @@ class CallViewModel: Stateable, ViewModel {
     lazy var showCapturedFrame: Observable<Bool> = {
         return currentCall
             .filter({ call in
-                return (call.state == .connecting ||
-                    call.state == .ringing ||
-                    call.state == .current)
+                return call.isActive()
             })
             .map({ call in
                 call.state == .current
@@ -454,6 +443,29 @@ class CallViewModel: Stateable, ViewModel {
         }
     }
 
+    func respondOnTap() {
+        self.screenTapped.onNext(true)
+    }
+
+    func isBoothMode() -> Bool {
+        return self.accountService.boothMode()
+    }
+
+    func callFinished() {
+        guard let accountId = self.call?.accountId else {
+            return
+        }
+        if self.isBoothMode() {
+            self.contactsService.removeAllContacts(for: accountId)
+            return
+        }
+        self.showConversations()
+    }
+}
+
+// MARK: actions
+extension CallViewModel {
+
     func cancelCall(stopProvider: Bool) {
         guard let call = self.call else {
             return
@@ -496,11 +508,53 @@ class CallViewModel: Stateable, ViewModel {
             .disposed(by: self.disposeBag)
     }
 
-    func respondOnTap() {
-        self.screenTapped.onNext(true)
+    func showContactPickerVC() {
+        self.stateSubject.onNext(ConversationState.showContactPicker(callID: rendererId, contactSelectedCB: { [weak self] (contacts) in
+            guard let self = self,
+                let contact = contacts.first,
+                let contactToAdd = contact.contacts.first,
+                let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID),
+                let call = self.callService.call(callID: self.rendererId) else { return }
+            if contact.conferenceID.isEmpty {
+                if self.videoService.getEncodingAccelerated() {
+                    self.callService.hold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
+                    self.videoService.disableHardwareForConference()
+                    self.callService.unhold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
+                }
+                self.callService
+                    .callAndAddParticipant(participant: contactToAdd.uri,
+                                           toCall: self.rendererId,
+                                           withAccount: account,
+                                           userName: contactToAdd.registeredName,
+                                           isAudioOnly: call.isAudioOnly)
+                    .subscribe()
+                    .disposed(by: self.disposeBag)
+                return
+            }
+            guard let secondCall = self.callService.call(callID: contact.conferenceID) else { return }
+            if call.participantsCallId.count == 1 {
+                self.callService.joinCall(firstCall: call.callId, secondCall: secondCall.callId)
+            } else {
+                self.callService.joinConference(confID: contact.conferenceID, callID: self.rendererId)
+            }
+        }))
     }
 
-    // MARK: call options
+    func showConversations() {
+        guard let call = self.call else {
+            return
+        }
+        guard let uri = JamiURI(schema: URIType.ring, infoHach: call.participantUri).uriString else {
+            return
+        }
+
+        guard let conversation = self.conversationService.findConversation(withUri: uri, withAccountId: call.accountId) else {
+            return
+        }
+        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+        conversationViewModel.conversation = Variable<ConversationModel>(conversation)
+        self.stateSubject.onNext(ConversationState.fromCallToConversation(conversation: conversationViewModel))
+    }
 
     func togglePauseCall() {
         guard let call = self.call else {
@@ -557,8 +611,38 @@ class CallViewModel: Stateable, ViewModel {
     func showDialpad() {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: true))
     }
+}
+// MARK: conference layout
+extension CallViewModel {
+    func setActiveParticipant(callId: String?, maximize: Bool) {
+        self.callService.setActiveParticipant(callId: callId, conferenceId: self.rendererId, maximixe: maximize)
+    }
 
-    let menuItemsManager = ConferenceMenuItemsManager()
+    func getConferenceVideoSize() -> CGSize {
+        return self.videoService.getConferenceVideoSize(confId: self.rendererId)
+    }
+
+    func getConferenceParticipants() -> [ConferenceParticipant]? {
+        guard let account = self.accountService.currentAccount,
+            let participants = self.callService.getConferenceParticipants(for: self.rendererId),
+            let call = self.call else { return nil }
+        participants.forEach { participant in
+            guard let uri = participant.uri else { return }
+            // master call
+            if uri.isEmpty {
+                //check if master call is local or remote
+                if !self.conferenceMode.value {
+                    participant.displayName = call.getDisplayName()
+                } else {
+                    participant.displayName = L10n.Account.me
+                }
+                return
+            }
+            guard let call = self.callService.call(participantHash: uri.filterOutHost(), accountID: account.id) else { return }
+            participant.displayName = call.getDisplayName()
+        }
+        return participants
+    }
 
     func getItemsForConferenceMenu(participantCallId: String?) -> MenuMode {
         let conference = self.callService.call(callID: self.rendererId)
@@ -570,72 +654,5 @@ class CallViewModel: Stateable, ViewModel {
         let call = self.callService.call(callID: callId)
         let active = self.callService.isParticipant(participantURI: call?.participantUri, activeIn: self.rendererId)
         return menuItemsManager.getMenuItemsFor(call: call, conference: conference, active: active)
-    }
-
-    func showContactPickerVC() {
-        self.stateSubject.onNext(ConversationState.showContactPicker(callID: rendererId, contactSelectedCB: { [weak self] (contacts) in
-            guard let self = self,
-                let contact = contacts.first,
-                let contactToAdd = contact.contacts.first,
-                let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID),
-                let call = self.callService.call(callID: self.rendererId) else { return }
-            if contact.conferenceID.isEmpty {
-                if self.videoService.getEncodingAccelerated() {
-                    self.callService.hold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
-                    self.videoService.disableHardwareForConference()
-                    self.callService.unhold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
-                }
-                self.callService
-                    .callAndAddParticipant(participant: contactToAdd.uri,
-                                           toCall: self.rendererId,
-                                           withAccount: account,
-                                           userName: contactToAdd.registeredName,
-                                           isAudioOnly: call.isAudioOnly)
-                    .subscribe()
-                    .disposed(by: self.disposeBag)
-                return
-            }
-            guard let secondCall = self.callService.call(callID: contact.conferenceID) else { return }
-            if call.participantsCallId.count == 1 {
-                self.callService.joinCall(firstCall: call.callId, secondCall: secondCall.callId)
-            } else {
-                self.callService.joinConference(confID: contact.conferenceID, callID: self.rendererId)
-            }
-        }))
-    }
-
-    func showConversations() {
-        guard let call = self.call else {
-            return
-        }
-        guard let uri = JamiURI(schema: URIType.ring, infoHach: call.participantUri).uriString else {
-            return
-        }
-
-        guard let conversation = self.conversationService.findConversation(withUri: uri, withAccountId: call.accountId) else {
-            return
-        }
-        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        conversationViewModel.conversation = Variable<ConversationModel>(conversation)
-        self.stateSubject.onNext(ConversationState.fromCallToConversation(conversation: conversationViewModel))
-    }
-
-    func isBoothMode() -> Bool {
-        return self.accountService.boothMode()
-    }
-
-    func callFinished() {
-        guard let accountId = self.call?.accountId else {
-            return
-        }
-        if self.isBoothMode() {
-            self.contactsService.removeAllContacts(for: accountId)
-            return
-        }
-        self.showConversations()
-    }
-
-    func setActiveParticipant(callId: String?, maximize: Bool) {
-        self.callService.setActiveParticipant(callId: callId, conferenceId: self.rendererId, maximixe: maximize)
     }
 }

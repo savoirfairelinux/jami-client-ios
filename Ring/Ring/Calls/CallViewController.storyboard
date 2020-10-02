@@ -23,6 +23,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOE-du-fSU" customClass="ConferenceLayout" customModule="Ring" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="750" constant="812" id="u55-37-86f"/>
+                                            <constraint firstAttribute="width" priority="750" constant="375" id="xOH-zT-fou"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="conferenceLayoutHeightConstraint" destination="u55-37-86f" id="QfP-yR-VSk"/>
+                                            <outlet property="conferenceLayoutWidthConstraint" destination="xOH-zT-fou" id="0gj-8z-mw0"/>
+                                        </connections>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K0W-KI-Ul4" userLabel="Before Incoming Video">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -203,9 +214,11 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3RN-4M-qR4" secondAttribute="trailing" identifier="InfoContainerTrailingConstraint" id="5V0-5o-h5c"/>
                                     <constraint firstItem="Zmp-OX-Cez" firstAttribute="height" secondItem="DMu-Or-dd7" secondAttribute="height" id="6ZM-UX-wEQ"/>
                                     <constraint firstItem="DMu-Or-dd7" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="9tF-Ne-Pxj"/>
+                                    <constraint firstItem="BOE-du-fSU" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="AXr-7F-wPq"/>
                                     <constraint firstItem="Zmp-OX-Cez" firstAttribute="width" secondItem="DMu-Or-dd7" secondAttribute="width" id="HHk-TU-w9h"/>
                                     <constraint firstItem="3RN-4M-qR4" firstAttribute="leading" secondItem="ZVy-nB-bKJ" secondAttribute="leading" id="OAx-Xw-x6r"/>
                                     <constraint firstItem="3RN-4M-qR4" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="PNs-gW-YZp"/>
+                                    <constraint firstItem="BOE-du-fSU" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="TXL-am-F3x"/>
                                     <constraint firstItem="DMu-Or-dd7" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" id="Xd0-GB-gSC"/>
                                     <constraint firstItem="K0W-KI-Ul4" firstAttribute="width" secondItem="DMu-Or-dd7" secondAttribute="width" id="ZZ0-hX-Nwm"/>
                                     <constraint firstItem="ZK1-Be-lcD" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" constant="45" id="Zyu-M5-fjh"/>
@@ -454,6 +467,7 @@
                         <outlet property="conferenceCallsLeading" destination="Ctl-wi-6oV" id="osm-Po-RqY"/>
                         <outlet property="conferenceCallsScrolView" destination="bij-Xb-EKH" id="YxK-ru-kO4"/>
                         <outlet property="conferenceCallsTop" destination="pgr-29-Lef" id="Wug-zj-y0Q"/>
+                        <outlet property="conferenceLayout" destination="BOE-du-fSU" id="tCL-dC-2dy"/>
                         <outlet property="durationLabel" destination="zMN-6z-uXT" id="Uuf-ph-lrC"/>
                         <outlet property="inConferenceAddContactButton" destination="Y08-2c-sOI" id="4TF-6J-FAp"/>
                         <outlet property="incomingVideo" destination="DMu-Or-dd7" id="ogh-ft-54u"/>
