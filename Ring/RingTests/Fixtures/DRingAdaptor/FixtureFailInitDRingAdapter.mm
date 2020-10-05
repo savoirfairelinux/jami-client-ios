@@ -34,15 +34,10 @@
 }
 
 - (void)fini {
-    DRing::fini();
-}
-
-- (void)pollEvents {
-    DRing::pollEvents();
 }
 
 - (NSString*)getVersion {
-    return [NSString stringWithUTF8String:DRing::version()];
+    return @"";
 }
 
 @end
