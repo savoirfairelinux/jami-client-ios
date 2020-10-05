@@ -61,7 +61,7 @@
 "welcome.text" = "Jami je svobodný software a všeobecný dorozumívací systém, který zachovává soukromí a svobody uživatelů.";
 "welcome.linkDevice" = "Připojit toto zařízení k účtu";
 "welcome.createAccount" = "Vytvořit účet Jami";
-"welcome.connectToManager" = "Připojit se ke správci účtů.";
+"welcome.connectToManager" = "Připojit se ke správci účtů";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Přeskočit";
@@ -87,7 +87,7 @@
 "createAccount.waitCreateAccountTitle" = "Přidávám účet";
 "createAccount.RegisterAUsername" = "Zaregistrovat uživatelské jméno";
 "createAccount.ChooseAPassword" = "Šifrovat můj účet";
-"createAccount.PasswordInformation" = "Vyberte heslo k zašifrování dat vašeho místního účtu. Nezapomeňte, že svůj účet nebudete moci obnovit.";
+"createAccount.PasswordInformation" = "Zvolte si heslo k zašifrování dat vašeho místního účtu. Nezapomeňte, že svůj účet nebudete moci obnovit.";
 "createAccount.EnableNotifications" = "Oznámení";
 "createAccount.Recommended" = "(doporučeno)";
 "createAccount.UsernameNotRegisteredTitle" = "Chyba sítě";

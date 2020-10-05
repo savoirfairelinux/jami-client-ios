@@ -207,7 +207,7 @@
 "accountPage.deviceRevocationUnknownDevice" = "Appareil inconnu";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nom";
-"accountPage.linkDeviceTitle" = "Lier autre appareil";
+"accountPage.linkDeviceTitle" = "Associer un autre appareil";
 "accountPage.other" = "Autre";
 "accountPage.removeAccountTitle" = "Supprimer le compte";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
