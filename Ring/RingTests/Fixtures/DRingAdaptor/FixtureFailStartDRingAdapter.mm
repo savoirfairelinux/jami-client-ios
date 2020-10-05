@@ -34,15 +34,13 @@
 }
 
 - (void)fini {
-    DRing::fini();
-}
-
-- (void)pollEvents {
-    DRing::pollEvents();
+    DRingAdapter *adapter = [[DRingAdapter alloc] init];
+    [adapter fini];
 }
 
 - (NSString*)getVersion {
-    return [NSString stringWithUTF8String:DRing::version()];
+    DRingAdapter *adapter = [[DRingAdapter alloc] init];
+    return [adapter getVersion];
 }
 
 @end
