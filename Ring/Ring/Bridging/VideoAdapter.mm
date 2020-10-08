@@ -211,24 +211,16 @@ withHardwareSupport:(BOOL)hardwareSupport {
 }
 
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
-                               angle:(int)angle
-             useHardwareAcceleration:(BOOL)hardwareAccelerated
-                           recording:(BOOL)recording {
+                               angle:(int)angle{
     auto frame = DRing::getNewFrame();
     if(!frame) {
         return;
     }
     auto avframe = frame->pointer();
-    if(hardwareAccelerated && !recording) {
-        [Utils configureHardwareDecodedFrame:(AVFrame*)avframe
-                             fromImageBuffer:image
-                                       angle:(int) angle];
-    } else {
         [Utils configureFrame:(AVFrame*)avframe
               fromImageBuffer:image
                         angle:(int) angle];
 
-    }
     DRing::publishFrame();
 }
 

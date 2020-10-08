@@ -36,9 +36,7 @@
                  withHardwareSupport:(BOOL)hardwareSupport;
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId;
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
-                               angle:(int)angle
-             useHardwareAcceleration:(BOOL)hardwareAccelerated
-                           recording:(BOOL)recording;
+                               angle:(int)angle;
 - (void)setDecodingAccelerated:(BOOL)state;
 - (BOOL)getDecodingAccelerated;
 - (void)switchInput:(NSString*)deviceName;
