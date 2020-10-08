@@ -198,7 +198,6 @@ class CallViewModel: Stateable, ViewModel {
                 }
                 if hide {
                     self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
-                    self?.videoService.restoreStateAfterconference()
                     self?.callsProvider.stopCall(callUUID: call.callUUID)
                 }
                 return hide
@@ -517,11 +516,6 @@ extension CallViewModel {
                 let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID),
                 let call = self.callService.call(callID: self.rendererId) else { return }
             if contact.conferenceID.isEmpty {
-                if self.videoService.getEncodingAccelerated() {
-                    self.callService.hold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
-                    self.videoService.disableHardwareForConference()
-                    self.callService.unhold(callId: self.rendererId).subscribe().disposed(by: self.disposeBag)
-                }
                 self.callService
                     .callAndAddParticipant(participant: contactToAdd.uri,
                                            toCall: self.rendererId,

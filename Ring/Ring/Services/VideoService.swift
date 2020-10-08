@@ -308,17 +308,11 @@ class VideoService: FrameExtractorDelegate {
     var currentOrientation: AVCaptureVideoOrientation
 
     private let log = SwiftyBeaver.self
-    // acceleration for current session(may be different from setted by user
-    // for conference or when not supported by codec)
-    private var hardwareAcceleratedForCurrentSession = true
-    // taken from settings set by user
     private var hardwareAccelerationEnabledByUser = true
     var angle: Int = 0
     var switchInputRequested: Bool = false
 
     private let disposeBag = DisposeBag()
-
-    var recording = false
 
     var codec = VideoCodecs.unknown
 
@@ -326,7 +320,6 @@ class VideoService: FrameExtractorDelegate {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
         VideoAdapter.delegate = self
-        self.hardwareAcceleratedForCurrentSession = videoAdapter.getEncodingAccelerated()
         self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
         camera.delegate = self
     }
@@ -416,30 +409,6 @@ class VideoService: FrameExtractorDelegate {
             return 0
         }
     }
-
-    func disableHardwareForConference() {
-        if !hardwareAccelerationEnabledByUser {
-            return
-        }
-        videoAdapter.setEncodingAccelerated(false)
-        videoAdapter.setDecodingAccelerated(false)
-        self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-        self.videoAdapter.setDefaultDevice(camera.namePortrait)
-        self.hardwareAcceleratedForCurrentSession = false
-    }
-
-    func restoreStateAfterconference() {
-        videoAdapter.setEncodingAccelerated(hardwareAccelerationEnabledByUser)
-        videoAdapter.setDecodingAccelerated(hardwareAccelerationEnabledByUser)
-        self.hardwareAcceleratedForCurrentSession = hardwareAccelerationEnabledByUser
-        if hardwareAccelerationEnabledByUser {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
-            self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
-        } else {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-            self.videoAdapter.setDefaultDevice(camera.namePortrait)
-        }
-    }
 }
 
 extension VideoService: VideoAdapterDelegate {
@@ -471,7 +440,6 @@ extension VideoService: VideoAdapterDelegate {
         videoAdapter.setDecodingAccelerated(state)
         videoAdapter.setEncodingAccelerated(state)
         hardwareAccelerationEnabledByUser = state
-        hardwareAcceleratedForCurrentSession = state
         if state {
             self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
             self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
@@ -491,7 +459,7 @@ extension VideoService: VideoAdapterDelegate {
             switchInputRequested = !codecId.isEmpty
         }
         self.log.debug("Decoding started...")
-        let withHardware = !codecId.isEmpty ? (supportHardware() && self.hardwareAcceleratedForCurrentSession) : false
+        let withHardware = !codecId.isEmpty ? (supportHardware()) : false
         videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height, withHardwareSupport: withHardware)
     }
 
@@ -513,7 +481,6 @@ extension VideoService: VideoAdapterDelegate {
             return
         }
         self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
-        self.hardwareAcceleratedForCurrentSession = hardwareAccelerationEnabledByUser
         if hardwareAccelerationEnabledByUser {
             self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
             self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
@@ -531,10 +498,6 @@ extension VideoService: VideoAdapterDelegate {
 
     func startCamera() {
         self.videoAdapter.startCamera()
-    }
-
-    func updateEncodongPreferences() {
-        self.setEncodingAccelerated(withState: hardwareAccelerationEnabledByUser)
     }
 
     func videRecordingFinished() {
@@ -582,9 +545,7 @@ extension VideoService: VideoAdapterDelegate {
                                 orientation: self.getImageOrienation()))
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
-                                        angle: Int32(self.angle),
-                                        useHardwareAcceleration: (self.hardwareAcceleratedForCurrentSession && self.codec != .VP8),
-                                        recording: self.recording)
+                                        angle: Int32(self.angle))
     }
 
     func updateDevicePisition(position: AVCaptureDevice.Position) {
@@ -596,13 +557,11 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startLocalRecorder(audioOnly: Bool, path: String) -> String? {
-        self.recording = true
         return self.videoAdapter.startLocalRecording(path, audioOnly: audioOnly)
     }
 
     func stopLocalRecorder(path: String) {
         self.videoAdapter.stopLocalRecording(path)
-        self.recording = false
     }
 
     func getConferenceVideoSize(confId: String) -> CGSize {

@@ -130,7 +130,6 @@ class SendFileViewModel: Stateable, ViewModel {
         self.fileTransferService = injectionBag.dataTransferService
         self.injectionBag = injectionBag
         if !audioOnly {
-            videoService.updateEncodongPreferences()
             videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
             videoService.startCamera()
         }
@@ -152,7 +151,6 @@ class SendFileViewModel: Stateable, ViewModel {
     func startRecording() {
         player?.closePlayer()
         player = nil
-        videoService.updateEncodongPreferences()
         playBackDisposeBag = DisposeBag()
         videoService.capturedVideoFrame.asObservable()
             .subscribe(onNext: { [weak self] frame in
