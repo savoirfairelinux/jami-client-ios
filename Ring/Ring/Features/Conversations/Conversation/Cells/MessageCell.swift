@@ -582,8 +582,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
         Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
                                                   conversationViewModel.bestName.asObservable()) { ($0, $1) }
-            .observeOn(MainScheduler.instance)
             .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value))
+            .observeOn(MainScheduler.instance)
             .subscribe({ [weak self] profileData in
                 guard let data = profileData.element?.1 else { return }
                 self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })

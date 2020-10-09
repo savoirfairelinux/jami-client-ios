@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0KF-lS-cXQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0KF-lS-cXQ">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,18 +20,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="General Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fm1-VN-ppT">
-                                        <rect key="frame" x="80.5" y="53.5" width="214" height="38.5"/>
+                                        <rect key="frame" x="80.5" y="38.5" width="214" height="38.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="32"/>
                                         <color key="textColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NE7-nL-DvW">
-                                        <rect key="frame" x="14" y="60" width="25" height="25"/>
+                                        <rect key="frame" x="0.0" y="30" width="55" height="55"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="R0J-pI-wkz"/>
-                                            <constraint firstAttribute="width" constant="25" id="gl1-ki-xOB"/>
+                                            <constraint firstAttribute="height" constant="55" id="R0J-pI-wkz"/>
+                                            <constraint firstAttribute="width" constant="55" id="gl1-ki-xOB"/>
                                         </constraints>
                                         <color key="tintColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                                         <state key="normal" image="cross"/>
                                     </button>
                                 </subviews>
@@ -40,7 +41,7 @@
                                     <constraint firstAttribute="bottom" secondItem="NE7-nL-DvW" secondAttribute="bottom" constant="35" id="Hsx-he-cDE"/>
                                     <constraint firstAttribute="height" constant="120" id="JGl-fJ-5S9"/>
                                     <constraint firstItem="fm1-VN-ppT" firstAttribute="centerY" secondItem="NE7-nL-DvW" secondAttribute="centerY" id="TAY-0E-oeR"/>
-                                    <constraint firstItem="NE7-nL-DvW" firstAttribute="leading" secondItem="OaU-bt-R2w" secondAttribute="leading" constant="14" id="Ytg-WO-MP4"/>
+                                    <constraint firstItem="NE7-nL-DvW" firstAttribute="leading" secondItem="OaU-bt-R2w" secondAttribute="leading" id="Ytg-WO-MP4"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XAa-ES-xki">
