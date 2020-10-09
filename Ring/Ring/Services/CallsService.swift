@@ -33,6 +33,7 @@ enum CallServiceError: Error {
 }
 
 enum ConferenceState: String {
+    case conferenceWillBeCreated
     case conferenceCreated
     case conferenceDestroyed
     case infoUpdated
@@ -474,6 +475,9 @@ class CallsService: CallsAdapterDelegate {
                 if let confId = shouldCallBeAddedToConference(callId: callId) {
                     let seconds = 1.0
                     if let pendingCall = self.call(callID: confId) {
+//                        if pendingCall.participantsCallId.count == 1 {
+//                            self.currentConferenceEvent.value = ConferenceUpdates(confId, ConferenceState.conferenceWillBeCreated.rawValue, [""])
+//                        }
                         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
                             if pendingCall.participantsCallId.count == 1 {
                                 self.callsAdapter.joinCall(confId, second: callId)
@@ -650,5 +654,13 @@ class CallsService: CallsAdapterDelegate {
         conferenceCalls.forEach { (callID) in
             self.call(callID: callID)?.participantsCallId = conferenceCalls
         }
+    }
+
+    func getRunningConferences() -> [String]? {
+        return self.callsAdapter.conferences()
+    }
+
+    func getRunningCalls() -> [String]? {
+        return self.callsAdapter.calls()
     }
 }

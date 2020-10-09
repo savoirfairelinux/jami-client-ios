@@ -87,19 +87,28 @@ class CallViewModel: Stateable, ViewModel {
                         conference.conferenceID == self?.rendererId
                 })
                 .subscribe(onNext: { [weak self] conf in
+                    guard let self = self else { return }
                     if conf.conferenceID.isEmpty {
                         return
                     }
                     if conf.state == ConferenceState.infoUpdated.rawValue {
-                        self?.layoutUpdated.accept(true)
+                        self.layoutUpdated.accept(true)
                         return
                     }
-                    guard let updatedCall = self?.callService.call(callID: call.callId) else { return }
-                    self?.call = updatedCall
+
+//                    if conf.state == ConferenceState.conferenceWillBeCreated.rawValue {
+//                        self.videoService.switchInputForConference(callID: self.rendererId)
+//                        return
+//                    }
+                    if conf.state == ConferenceState.conferenceDestroyed.rawValue {
+                        self.restoreVideoSettings()
+                    }
+                    guard let updatedCall = self.callService.call(callID: call.callId) else { return }
+                    self.call = updatedCall
                     let conferenceCreated = conf.state == ConferenceState.conferenceCreated.rawValue
-                    self?.rendererId = conferenceCreated ? conf.conferenceID : self!.call!.callId
-                    self?.containerViewModel?.isConference = conferenceCreated
-                    self?.conferenceMode.value = conferenceCreated
+                    self.rendererId = conferenceCreated ? conf.conferenceID : updatedCall.callId
+                    self.containerViewModel?.isConference = conferenceCreated
+                    self.conferenceMode.value = conferenceCreated
                 })
                 .disposed(by: self.disposeBag)
             self.rendererId = call.callId
@@ -181,6 +190,7 @@ class CallViewModel: Stateable, ViewModel {
             })
             .map({ [weak self] call in
                 let hide = !call.isExists()
+                self?.restoreVideoSettings()
                 //if it was conference call switch to another running call
                 if hide && call.participantsCallId.count > 1 {
                     //switch to another call
@@ -443,6 +453,16 @@ class CallViewModel: Stateable, ViewModel {
         }
     }
 
+    func restoreVideoSettings() {
+        // if no other running conference set video default device
+        if let calls = self.callService.getRunningCalls(),
+            let call = calls.first,
+            (call != self.rendererId || calls.count > 1) {
+            return
+        }
+        self.videoService.restoreDefaultDeviceAfterConference()
+    }
+
     func respondOnTap() {
         self.screenTapped.onNext(true)
     }
@@ -516,6 +536,8 @@ extension CallViewModel {
                 let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID),
                 let call = self.callService.call(callID: self.rendererId) else { return }
             if contact.conferenceID.isEmpty {
+                self.videoService.setDefaultDeviceForConference()
+                self.videoService.switchInputForConference(callID: self.rendererId)
                 self.callService
                     .callAndAddParticipant(participant: contactToAdd.uri,
                                            toCall: self.rendererId,

@@ -229,11 +229,14 @@ withHardwareSupport:(BOOL)hardwareSupport {
     auto setting = [Utils dictionnaryToMap:deviceInfoDict];
     devInfo.emplace_back(setting);
     DRing::addVideoDevice(std::string([deviceName UTF8String]), devInfo);
-    DRing::setDefaultDevice(std::string([deviceName UTF8String]));
 }
 
 - (void)setDefaultDevice:(NSString*)deviceName {
     DRing::setDefaultDevice(std::string([deviceName UTF8String]));
+}
+
+- (NSString*)getDefaultDevice {
+    return @(DRing::getDefaultDevice().c_str());
 }
 
 - (void)setDecodingAccelerated:(BOOL)state {

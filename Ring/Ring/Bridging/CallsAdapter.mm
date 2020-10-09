@@ -193,6 +193,11 @@ static id <CallsAdapterDelegate> _delegate;
     return [Utils vectorToArray:calls];
 }
 
+- (NSArray<NSString*>*)conferences {
+    std::vector<std::string> conferences = getConferenceList();
+    return [Utils vectorToArray:conferences];
+}
+
 - (BOOL)muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted {
     return muteLocalMedia(std::string([callId UTF8String]), std::string([media UTF8String]), muted);
 }

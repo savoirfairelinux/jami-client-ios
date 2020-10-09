@@ -30,6 +30,7 @@
 
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict;
 - (void)setDefaultDevice:(NSString*)deviceName;
+- (NSString*)getDefaultDevice;
 - (void)registerSinkTargetWithSinkId:sinkId
                            withWidth:(NSInteger)w
                           withHeight:(NSInteger)h

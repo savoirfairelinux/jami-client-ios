@@ -56,6 +56,8 @@ protocol FrameExtractorDelegate: class {
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     let namePortrait = "mediumCamera"
+    let mediumCameraLanscape = "mediumLanscape"
+    let cameraLanscape1280_720 = "1280_720Lanscape"
     let nameDevice1280_720 = "1280_720Camera"
 
     private let log = SwiftyBeaver.self
@@ -87,7 +89,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         super.init()
     }
 
-    func getDeviceInfo(forPosition position: AVCaptureDevice.Position, quality: AVCaptureSession.Preset) throws -> DeviceInfo {
+    func getDeviceInfo(forPosition position: AVCaptureDevice.Position, quality: AVCaptureSession.Preset, orientation: UIDeviceOrientation) throws -> DeviceInfo {
         guard self.permissionGranted.value else {
             throw VideoError.needPermission
         }
@@ -105,10 +107,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 bestRate = frameRates.maxFrameRate
             }
         }
-        let devInfo: DeviceInfo = ["format": "BGRA",
-                                   "width": String(dimensions.height),
-                                   "height": String(dimensions.width),
+        let lanscape = orientation == .landscapeLeft || orientation == .landscapeRight
+        var devInfo: DeviceInfo = ["format": "BGRA",
                                    "rate": String(bestRate)]
+            devInfo["width"] = lanscape ? String(dimensions.width) : String(dimensions.height)
+            devInfo["height"] = lanscape ? String(dimensions.height) : String(dimensions.width)
         return devInfo
     }
 
@@ -342,23 +345,28 @@ class VideoService: FrameExtractorDelegate {
             self.log.debug("Camera successfully configured")
             let hd1280x720Device: [String: String] = try camera
                 .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
-                               quality: AVCaptureSession.Preset.hd1280x720)
+                               quality: AVCaptureSession.Preset.hd1280x720,
+                               orientation: .portrait)
             let frontPortraitCameraDevInfo: [String: String] = try camera
-                    .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
-                                   quality: AVCaptureSession.Preset.medium)
-            if self.hardwareAccelerationEnabledByUser {
-                self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
-                videoAdapter.addVideoDevice(withName: camera.namePortrait,
-                                            withDevInfo: frontPortraitCameraDevInfo)
-                videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
-                                            withDevInfo: hd1280x720Device)
-                return
-            }
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-            videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
-                                        withDevInfo: hd1280x720Device)
+                .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
+                               quality: AVCaptureSession.Preset.medium,
+                               orientation: .portrait)
+            let hd1280x720DeviceLandscape: [String: String] = try camera
+                .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
+                               quality: AVCaptureSession.Preset.hd1280x720,
+                               orientation: .landscapeLeft)
+            let mediumDeviceLandscape: [String: String] = try camera
+                .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
+                               quality: AVCaptureSession.Preset.medium,
+                               orientation: .landscapeLeft)
+            videoAdapter.addVideoDevice(withName: camera.mediumCameraLanscape,
+                                        withDevInfo: mediumDeviceLandscape)
+            videoAdapter.addVideoDevice(withName: camera.cameraLanscape1280_720,
+                                        withDevInfo: hd1280x720DeviceLandscape)
             videoAdapter.addVideoDevice(withName: camera.namePortrait,
                                         withDevInfo: frontPortraitCameraDevInfo)
+            videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
+                                        withDevInfo: hd1280x720Device)
 
         } catch let e as VideoError {
             self.log.error("Error during capture device enumeration: \(e)")
@@ -449,18 +457,42 @@ extension VideoService: VideoAdapterDelegate {
         }
     }
 
+    func setDefaultDeviceForConference() {
+        let device = hardwareAccelerationEnabledByUser ? camera.cameraLanscape1280_720 : camera.mediumCameraLanscape
+        self.videoAdapter.setDefaultDevice(device)
+    }
+
+    func restoreDefaultDeviceAfterConference() {
+        let device = hardwareAccelerationEnabledByUser ? camera.nameDevice1280_720 : camera.namePortrait
+        self.videoAdapter.setDefaultDevice(device)
+    }
+
+    func switchInputForConference(callID: String) {
+        let device = hardwareAccelerationEnabledByUser ? camera.cameraLanscape1280_720 : camera.mediumCameraLanscape
+        self.videoAdapter.switchInput("camera://" + device, forCall: callID)
+    }
+
     func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codecId: String) {
         if !codecId.isEmpty {
             self.codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.unknown
         }
         if !supportHardware() && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-            self.videoAdapter.switchInput("camera://" + camera.namePortrait, forCall: rendererId)
+            self.changeToMediumDevice(rendererId: rendererId)
             switchInputRequested = !codecId.isEmpty
         }
         self.log.debug("Decoding started...")
         let withHardware = !codecId.isEmpty ? (supportHardware()) : false
         videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height, withHardwareSupport: withHardware)
+    }
+
+    private func changeToMediumDevice(rendererId: String) {
+        self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+        let device = self.videoAdapter.getDefaultDevice()
+        var newDevice = camera.namePortrait
+        if device == camera.cameraLanscape1280_720 || device == camera.mediumCameraLanscape {
+            newDevice = camera.mediumCameraLanscape
+        }
+        self.videoAdapter.switchInput("camera://" + newDevice, forCall: rendererId)
     }
 
     func supportHardware() -> Bool {
@@ -474,20 +506,6 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startCapture(withDevice device: String) {
-        self.log.debug("Capture started...")
-        if switchInputRequested {
-            switchInputRequested = false
-            self.camera.startCapturing()
-            return
-        }
-        self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
-        if hardwareAccelerationEnabledByUser {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
-            self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
-        } else {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-            self.videoAdapter.setDefaultDevice(camera.namePortrait)
-        }
         self.camera.startCapturing()
     }
 
