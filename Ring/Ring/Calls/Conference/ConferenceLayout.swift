@@ -89,7 +89,7 @@ class ConferenceLayout: UIView {
         labelFrame.origin.x += (self.margin * widthRatio)
         labelFrame.size.width -= (self.margin * 2 * widthRatio)
         let label = UILabel(frame: labelFrame)
-        label.text = displayName
+        label.text = displayName.filterOutHost()
         label.textColor = UIColor.white
         label.textAlignment = .center
         label.font = label.font.withSize(self.textSize)
