@@ -66,8 +66,8 @@ class ConversationCell: UITableViewCell, NibReusable {
         // avatar
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
                                                   item.bestName.asObservable()) { ($0, $1) }
-            .observeOn(MainScheduler.instance)
             .startWith((item.profileImageData.value, item.userName.value))
+            .observeOn(MainScheduler.instance)
             .subscribe({ [weak self] profileData in
                 guard let data = profileData.element?.1 else { return }
 

@@ -72,8 +72,8 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                                                   self.viewModel.displayName.asObservable()) { profileImage, username in
                                                     return (profileImage, username)
         }
-            .observeOn(MainScheduler.instance)
             .startWith((self.viewModel.profileImageData.value, self.viewModel.userName.value))
+            .observeOn(MainScheduler.instance)
             .subscribe({ [weak self] profileData -> Void in
                 guard let data = profileData.element?.1 else { return }
                 self?.stretchyHeader
