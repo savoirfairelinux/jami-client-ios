@@ -50,7 +50,7 @@ enum VideoCodecs: String {
 
 protocol FrameExtractorDelegate: class {
     func captured(imageBuffer: CVImageBuffer?, image: UIImage)
-    func updateDevicePisition(position: AVCaptureDevice.Position)
+    func updateDevicePosition(position: AVCaptureDevice.Position)
 }
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -61,7 +61,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let log = SwiftyBeaver.self
 
     var quality = AVCaptureSession.Preset.hd1280x720
-    private var orientation = AVCaptureVideoOrientation.portrait
+    private let orientation = AVCaptureVideoOrientation.landscapeLeft
 
     func setQuality(quality: AVCaptureSession.Preset) {
         self.quality = quality
@@ -106,8 +106,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             }
         }
         let devInfo: DeviceInfo = ["format": "BGRA",
-                                   "width": String(dimensions.height),
-                                   "height": String(dimensions.width),
+                                   "width": String(dimensions.width),
+                                   "height": String(dimensions.height),
                                    "rate": String(bestRate)]
         return devInfo
     }
@@ -214,7 +214,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 } else {
                     newCamera = self.selectCaptureDevice(withPosition: .back)
                 }
-                self.delegate!.updateDevicePisition(position: newCamera.position)
+                self.delegate!.updateDevicePosition(position: newCamera.position)
             }
             var newVideoInput: AVCaptureDeviceInput!
             do {
@@ -247,31 +247,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             } else {
                 completable(.error(VideoError.switchCameraFailed))
             }
-            return Disposables.create { }
-        }
-    }
-
-    func rotateCamera(orientation: AVCaptureVideoOrientation) -> Completable {
-        return Completable.create { [weak self] completable in
-            guard let self = self else { return Disposables.create { } }
-            guard self.permissionGranted.value else {
-                completable(.error(VideoError.needPermission))
-                return Disposables.create {}
-            }
-            self.captureSession.beginConfiguration()
-            let videoOutput = self.captureSession.outputs[0]
-            guard let connection = videoOutput.connection(with: AVFoundation.AVMediaType.video) else {
-                completable(.error(VideoError.getConnectionFailed))
-                return Disposables.create {}
-            }
-            guard connection.isVideoOrientationSupported else {
-                completable(.error(VideoError.unsupportedParameter))
-                return Disposables.create {}
-            }
-            self.orientation = orientation
-            connection.videoOrientation = orientation
-            self.captureSession.commitConfiguration()
-            completable(.completed)
             return Disposables.create { }
         }
     }
@@ -338,27 +313,18 @@ class VideoService: FrameExtractorDelegate {
 
     func enumerateVideoInputDevices() {
         do {
-            try camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: AVCaptureVideoOrientation.portrait)
+            try camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: camera.getOrientation)
             self.log.debug("Camera successfully configured")
             let hd1280x720Device: [String: String] = try camera
                 .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
                                quality: AVCaptureSession.Preset.hd1280x720)
             let frontPortraitCameraDevInfo: [String: String] = try camera
-                    .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
-                                   quality: AVCaptureSession.Preset.medium)
-            if self.hardwareAccelerationEnabledByUser {
-                self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
-                videoAdapter.addVideoDevice(withName: camera.namePortrait,
-                                            withDevInfo: frontPortraitCameraDevInfo)
-                videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
-                                            withDevInfo: hd1280x720Device)
-                return
-            }
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-            videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
-                                        withDevInfo: hd1280x720Device)
+                .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
+                               quality: AVCaptureSession.Preset.medium)
             videoAdapter.addVideoDevice(withName: camera.namePortrait,
                                         withDevInfo: frontPortraitCameraDevInfo)
+            videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
+                                        withDevInfo: hd1280x720Device)
 
         } catch let e as VideoError {
             self.log.error("Error during capture device enumeration: \(e)")
@@ -401,10 +367,10 @@ class VideoService: FrameExtractorDelegate {
 
     func mapDeviceOrientation(orientation: AVCaptureVideoOrientation) -> Int {
         switch orientation {
-        case AVCaptureVideoOrientation.landscapeRight:
-            return cameraPosition == AVCaptureDevice.Position.front ? 90 : 270
-        case AVCaptureVideoOrientation.landscapeLeft:
+        case AVCaptureVideoOrientation.portrait:
             return cameraPosition == AVCaptureDevice.Position.front ? 270 : 90
+        case AVCaptureVideoOrientation.landscapeLeft:
+            return cameraPosition == AVCaptureDevice.Position.front ? 180 : 0
         default:
             return 0
         }
@@ -488,6 +454,7 @@ extension VideoService: VideoAdapterDelegate {
             self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
             self.videoAdapter.setDefaultDevice(camera.namePortrait)
         }
+        self.angle = self.mapDeviceOrientation(orientation: self.currentOrientation)
         self.camera.startCapturing()
     }
 
@@ -521,17 +488,17 @@ extension VideoService: VideoAdapterDelegate {
         let shouldMirror = cameraPosition == AVCaptureDevice.Position.front
         switch self.currentOrientation {
         case AVCaptureVideoOrientation.portrait:
-            return shouldMirror ? UIImage.Orientation.upMirrored :
-                UIImage.Orientation.up
-        case AVCaptureVideoOrientation.portraitUpsideDown:
-            return shouldMirror ? UIImage.Orientation.downMirrored :
-                UIImage.Orientation.down
-        case AVCaptureVideoOrientation.landscapeRight:
-            return shouldMirror ? UIImage.Orientation.rightMirrored :
-                UIImage.Orientation.right
-        case AVCaptureVideoOrientation.landscapeLeft:
             return shouldMirror ? UIImage.Orientation.leftMirrored :
                 UIImage.Orientation.left
+        case AVCaptureVideoOrientation.portraitUpsideDown:
+            return shouldMirror ? UIImage.Orientation.rightMirrored :
+                UIImage.Orientation.right
+        case AVCaptureVideoOrientation.landscapeRight:
+            return shouldMirror ? UIImage.Orientation.upMirrored :
+                UIImage.Orientation.up
+        case AVCaptureVideoOrientation.landscapeLeft:
+            return shouldMirror ? UIImage.Orientation.downMirrored :
+                UIImage.Orientation.down
         @unknown default:
             return UIImage.Orientation.up
         }
@@ -548,7 +515,7 @@ extension VideoService: VideoAdapterDelegate {
                                         angle: Int32(self.angle))
     }
 
-    func updateDevicePisition(position: AVCaptureDevice.Position) {
+    func updateDevicePosition(position: AVCaptureDevice.Position) {
         self.cameraPosition = position
     }
 
