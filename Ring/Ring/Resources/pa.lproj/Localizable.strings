@@ -148,7 +148,7 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "ਨਕਸ਼ੇ ਦੀ ਜਾਣਕਾਰੀ";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
@@ -165,7 +165,7 @@
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "ਸਾਂਝਾ ਕਰਨਾ ਬੰਦ ਕਰੋ";
 
 //Calls
 "calls.callItemTitle" = "Call";
@@ -177,6 +177,8 @@
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "ਡੀਵਾਈਸ";
@@ -255,9 +257,10 @@
 "account.statusUnknown" = "ਅਣਪਛਾਤਾ";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
+"account.me" = "ਮੈਂ";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "ਕਿਸੇ ਸੰਪਰਕ 'ਤੇ ਬੰਦਸ਼ ਨਹੀਂ ਹੈ";
 
 //Link New Device
 "linkDevice.title" = "Link a new device";

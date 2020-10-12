@@ -177,6 +177,8 @@
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivi";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Sconosciuto";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
+"account.me" = "Io";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";

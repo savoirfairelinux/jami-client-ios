@@ -177,6 +177,8 @@
 "calls.callFinished" = "通话已结束";
 "calls.currentCallWith" = "通话到";
 "calls.haghUp" = "挂断";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "设备";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "未知";
 "account.statusConnectionerror" = "连接错误";
 "account.needMigration" = "该账户需迁移";
+"account.me" = "我";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "没有被屏蔽的联系人";

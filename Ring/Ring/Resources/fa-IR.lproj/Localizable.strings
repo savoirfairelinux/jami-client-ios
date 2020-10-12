@@ -177,6 +177,8 @@
 "calls.callFinished" = "تماس پایان یافت";
 "calls.currentCallWith" = "تماس با";
 "calls.haghUp" = "قطع‌کردن";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "ناشناخته";
 "account.statusConnectionerror" = "خطای ارتباط";
 "account.needMigration" = "نیاز است که حساب شما انتقال یابد.";
+"account.me" = "من";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "مخاطب مسدودی وجود ندارد";

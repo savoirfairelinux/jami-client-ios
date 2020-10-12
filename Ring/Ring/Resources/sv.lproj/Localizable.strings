@@ -177,6 +177,8 @@
 "calls.callFinished" = "Samtalet avslutat";
 "calls.currentCallWith" = "Ring upp med";
 "calls.haghUp" = "hang up";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Okänd";
 "account.statusConnectionerror" = "Anslutningsfel";
 "account.needMigration" = "account need to be migrated";
+"account.me" = "Jag";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Inga blockerade kontakter";

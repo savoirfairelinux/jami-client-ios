@@ -148,7 +148,7 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "地図情報";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "詳細情報";
 
@@ -177,6 +177,8 @@
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "通話終了";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "デバイス";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "不明";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
+"account.me" = "自分";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "ブロックした連絡先はありません";

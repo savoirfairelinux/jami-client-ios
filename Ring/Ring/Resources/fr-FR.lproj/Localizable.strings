@@ -177,6 +177,8 @@
 "calls.callFinished" = "Appel terminé";
 "calls.currentCallWith" = "Appel avec";
 "calls.haghUp" = "Raccrocher";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Inconnu";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
+"account.me" = "Moi ";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Aucun contact bloqué";

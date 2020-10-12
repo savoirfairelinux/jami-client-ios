@@ -177,6 +177,8 @@
 "calls.callFinished" = "Puhelu päättynyt";
 "calls.currentCallWith" = "Soita";
 "calls.haghUp" = "katkaise puhelu";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Laitteet";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Tuntematon";
 "account.statusConnectionerror" = "Yhteysvirhe";
 "account.needMigration" = "tili on siirrettävä";
+"account.me" = "Minä";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "EI estettyjä yhteystietoja";

@@ -177,6 +177,8 @@
 "calls.callFinished" = "A hívás befejeződött";
 "calls.currentCallWith" = "Hívás:";
 "calls.haghUp" = "Hívás befejezése";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Ismeretlen";
 "account.statusConnectionerror" = "Csatlakozási hiba";
 "account.needMigration" = "Fiók áttelepítés szükséges";
+"account.me" = "Én";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Nincsenek letiltott kapcsolatok";

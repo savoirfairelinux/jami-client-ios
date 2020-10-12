@@ -177,6 +177,8 @@
 "calls.callFinished" = "Apel terminat";
 "calls.currentCallWith" = "Apel în curs cu";
 "calls.haghUp" = "închide";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispozitive";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Necunoscut";
 "account.statusConnectionerror" = "Eroare de Conectare";
 "account.needMigration" = "contul trebuie transferat";
+"account.me" = "Eu";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Niciun contact blocat";

@@ -177,6 +177,8 @@
 "calls.callFinished" = "Sonada acabada";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aparelhs";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Desconegut";
 "account.statusConnectionerror" = "Error desconeguda";
 "account.needMigration" = "account need to be migrated";
+"account.me" = "Ieu";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";

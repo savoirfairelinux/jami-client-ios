@@ -177,6 +177,8 @@
 "calls.callFinished" = "Hovor bol ukončený";
 "calls.currentCallWith" = "Hovor s";
 "calls.haghUp" = "zložiť";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Zariadenia";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Neznámy";
 "account.statusConnectionerror" = "Chyba pripojenia";
 "account.needMigration" = "Váš účet musí byť migrovaný";
+"account.me" = "Ja";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Žiadne blokované kontakty";

@@ -177,6 +177,8 @@
 "calls.callFinished" = "Opkald afsluttet";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheder";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Ukendt";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
+"account.me" = "Mig";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";

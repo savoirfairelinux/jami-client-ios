@@ -177,6 +177,8 @@
 "calls.callFinished" = "Oproep beëindigd";
 "calls.currentCallWith" = "Bellen met";
 "calls.haghUp" = "hang up";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Onbekend";
 "account.statusConnectionerror" = "Verbindingsfout";
 "account.needMigration" = "account need to be migrated";
+"account.me" = "Ik";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Geen geblokkeerde contacten";

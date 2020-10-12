@@ -177,6 +177,8 @@
 "calls.callFinished" = "Arama sonlandırıldı";
 "calls.currentCallWith" = "İle ara";
 "calls.haghUp" = "Aramayı sonlandır";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Bilinmeyen";
 "account.statusConnectionerror" = "Bağlantı hatası";
 "account.needMigration" = "Hesabın taşınması gerekiyor";
+"account.me" = "Ben";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Engellenmiş kişi yok";

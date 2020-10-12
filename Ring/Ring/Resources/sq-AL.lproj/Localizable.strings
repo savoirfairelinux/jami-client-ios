@@ -177,6 +177,8 @@
 "calls.callFinished" = "Thirrja përfundoi";
 "calls.currentCallWith" = "Thirre me";
 "calls.haghUp" = "mbylleni";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "I panjohur";
 "account.statusConnectionerror" = "Gabim Lidhjeje";
 "account.needMigration" = "llogari që duhet migruar";
+"account.me" = "Unë";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "S’ka kontakte të bllokuar";

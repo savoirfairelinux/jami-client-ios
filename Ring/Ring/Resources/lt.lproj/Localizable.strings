@@ -177,6 +177,8 @@
 "calls.callFinished" = "Skambutis užbaigtas";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Nežinomas";
 "account.statusConnectionerror" = "Ryšio klaida";
 "account.needMigration" = "account need to be migrated";
+"account.me" = "Aš";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Užblokuotų adresatų nėra";

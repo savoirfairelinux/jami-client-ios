@@ -177,6 +177,8 @@
 "calls.callFinished" = "Hovor ukončen";
 "calls.currentCallWith" = "Volat s ";
 "calls.haghUp" = "Zavěsit";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "Zařízení";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "Neznámé";
 "account.statusConnectionerror" = "Chyba spojení";
 "account.needMigration" = "Tento účet musí být převeden.";
+"account.me" = "Já";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Žádné blokované kontakty";

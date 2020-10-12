@@ -177,6 +177,8 @@
 "calls.callFinished" = "通話結束";
 "calls.currentCallWith" = "通話以";
 "calls.haghUp" = "掛斷";
+"calls.maximize" = "maximize";
+"calls.minimize" = "minimize";
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";
@@ -255,6 +257,7 @@
 "account.statusUnknown" = "未知";
 "account.statusConnectionerror" = "連線錯誤";
 "account.needMigration" = "需要遷移帳號";
+"account.me" = "我";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "沒有已封鎖的聯絡人";
