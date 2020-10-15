@@ -29,7 +29,7 @@ class MessageCellReceived: MessageCell {
 
     override func applyBubbleStyleToCell(_ items: [MessageViewModel]?, cellForRowAt indexPath: IndexPath) {
         super.applyBubbleStyleToCell(items, cellForRowAt: indexPath)
-        if self.messageLabel.text?.containsOnlyEmoji ?? false {
+        if self.messageLabel?.text?.containsOnlyEmoji ?? false {
             self.messageLabelTrailingConstraint.constant = 0
             self.messageLabelLeadingConstraint.constant = 0
         } else {
