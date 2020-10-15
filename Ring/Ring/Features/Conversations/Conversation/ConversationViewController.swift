@@ -430,7 +430,7 @@ class ConversationViewController: UIViewController,
         let tapGesture = UITapGestureRecognizer()
         titleView.addGestureRecognizer(tapGesture)
         tapGesture.rx.event
-            .throttle(RxTimeInterval(2), scheduler: MainScheduler.instance)
+            .throttle(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
             .bind(onNext: { [weak self] _ in
                 self?.contactTapped()
             })

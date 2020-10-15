@@ -235,7 +235,7 @@ class DBManager {
         guard let profiles = try? self.profileHepler.selectAll(dataBase: dataBase) else {
             return false
         }
-        for profile in profiles {
+        for profile in profiles ?? [] {
             if self.dbConnections.isContactProfileExists(accountId: accountId, profileURI: profile.uri) {
                 continue
             }

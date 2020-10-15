@@ -226,9 +226,10 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             dismissGR.delegate = self
             self.searchBar.addGestureRecognizer(dismissGR)
             self.rowSelectionHandler = { [weak self] row in
-                guard let contactToAdd: ConferencableItem = try? self?.tableView.rx.model(at: row) else { return }
-                self?.viewModel.contactSelected(contacts: [contactToAdd])
-                self?.removeView()
+                guard let self = self else { return }
+                guard let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: row) else { return }
+                self.viewModel.contactSelected(contacts: [contactToAdd])
+                self.removeView()
             }
         case .forConversation:
             self.searchBar.backgroundImage = UIImage()
@@ -240,7 +241,8 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                     let paths = self?.tableView.indexPathsForSelectedRows
                     var contacts = [ConferencableItem]()
                     paths?.forEach({ (path) in
-                        if let contactToAdd: ConferencableItem = try? self?.tableView.rx.model(at: path) {
+                        guard let self = self else { return }
+                        if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: path) {
                             contacts.append(contactToAdd)
                         }
                     })

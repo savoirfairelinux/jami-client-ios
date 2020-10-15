@@ -472,7 +472,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     switchView.setOn(self.viewModel.notificationsEnabled, animated: false)
                     switchView.rx
                         .isOn.changed
-                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
                         .distinctUntilChanged()
                         .asObservable()
                         .subscribe(onNext: {[weak self] value in
@@ -496,7 +496,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .disposed(by: cell.disposeBag)
                     switchView.rx
                         .isOn.changed
-                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
                         .distinctUntilChanged()
                         .asObservable()
                         .subscribe(onNext: {[weak self] enable in
@@ -597,7 +597,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .disposed(by: cell.disposeBag)
                     switchView.rx
                         .isOn.changed
-                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
                         .distinctUntilChanged()
                         .asObservable()
                         .subscribe(onNext: {[weak self] enable in
