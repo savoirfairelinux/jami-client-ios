@@ -63,15 +63,15 @@ class ContactViewModel: ViewModel, Stateable {
     var conversation: ConversationModel! {
         didSet {
             if let profile = conversation.participantProfile, let alias = profile.alias, !alias.isEmpty {
-                self.displayName.value = alias
+                self.displayName.accept(alias)
             }
             guard let account = self.accountService
                 .getAccount(fromAccountId: conversation.accountId) else { return }
             if let contact = self.contactService.contact(withUri: conversation.participantUri),
                 let name = contact.userName {
-                self.userName.value = name
+                self.userName.accept(name)
             } else {
-                self.userName.value = conversation.hash
+                self.userName.accept(conversation.hash)
             }
             if account.type == AccountType.ring && self.userName.value == conversation.hash {
                 self.nameService.usernameLookupStatus
@@ -81,9 +81,9 @@ class ContactViewModel: ViewModel, Stateable {
                     })
                     .subscribe(onNext: { [weak self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
-                            self?.userName.value = name
+                            self?.userName.accept(name)
                         } else if let address = lookupNameResponse.address {
-                            self?.userName.value = address
+                            self?.userName.accept(address)
                         }
                     })
                     .disposed(by: disposeBag)
@@ -115,12 +115,12 @@ class ContactViewModel: ViewModel, Stateable {
                 .subscribe(onSuccess: { [weak self] vCard in
                     guard let self = self else { return }
                     if !VCardUtils.getName(from: vCard).isEmpty {
-                        self.displayName.value = VCardUtils.getName(from: vCard)
+                        self.displayName.accept(VCardUtils.getName(from: vCard))
                     }
                     guard let imageData = vCard.imageData else {
                         return
                     }
-                    self.profileImageData.value = imageData
+                    self.profileImageData.accept(imageData)
                 })
                 .disposed(by: self.disposeBag)
             self.profileService.getProfile(uri: conversation.participantUri,
@@ -129,18 +129,18 @@ class ContactViewModel: ViewModel, Stateable {
                 .subscribe(onNext: { [weak self] profile in
                     guard let self = self else { return }
                     if let alias = profile.alias, !alias.isEmpty {
-                        self.displayName.value = alias
+                        self.displayName.accept(alias)
                     }
                     if let photo = profile.photo,
                         let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                        self.profileImageData.value = data
+                        self.profileImageData.accept(data)
                     }
                 })
                 .disposed(by: disposeBag)
         }
     }
-    var userName = Variable<String>("")
-    var displayName = Variable<String>("")
+    var userName = BehaviorRelay<String>(value: "")
+    var displayName = BehaviorRelay<String>(value: "")
     lazy var titleName: Observable<String> = {
         return Observable.combineLatest(userName.asObservable(),
                                         displayName.asObservable()) {(userName, displayname) in
@@ -150,7 +150,7 @@ class ContactViewModel: ViewModel, Stateable {
                                             return displayname
         }
     }()
-    var profileImageData = Variable<Data?>(nil)
+    var profileImageData = BehaviorRelay<Data?>(value: nil)
 
     required init (with injectionBag: InjectionBag) {
         self.contactService = injectionBag.contactsService

@@ -20,6 +20,7 @@
  */
 
 import RxSwift
+import RxRelay
 import SwiftyBeaver
 import Contacts
 
@@ -53,13 +54,13 @@ class CallsService: CallsAdapterDelegate {
     private let callsAdapter: CallsAdapter
     private let log = SwiftyBeaver.self
 
-    var calls = Variable<[String: CallModel]>([String: CallModel]())
+    var calls = BehaviorRelay<[String: CallModel]>(value: [String: CallModel]())
     var pendingConferences = [String: Set<String>]()
 
     private let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
 
     let currentCallsEvents = ReplaySubject<CallModel>.create(bufferSize: 1)
-    let newCall = Variable<CallModel>(CallModel(withCallId: "", callDetails: [:]))
+    let newCall = BehaviorRelay<CallModel>(value: CallModel(withCallId: "", callDetails: [:]))
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
     private let newMessagesStream = PublishSubject<ServiceEvent>()
@@ -68,7 +69,7 @@ class CallsService: CallsAdapterDelegate {
 
     typealias ConferenceUpdates = (conferenceID: String, state: String, calls: Set<String>)
 
-    let currentConferenceEvent: Variable<ConferenceUpdates> = Variable<ConferenceUpdates>(ConferenceUpdates("", "", Set<String>()))
+    let currentConferenceEvent: BehaviorRelay<ConferenceUpdates> = BehaviorRelay<ConferenceUpdates>(value: ConferenceUpdates("", "", Set<String>()))
     let inConferenceCalls = PublishSubject<CallModel>()
 
     init(withCallsAdapter callsAdapter: CallsAdapter, dbManager: DBManager) {
@@ -192,7 +193,7 @@ class CallsService: CallsAdapterDelegate {
     func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]]) {
         let participants = self.arrayToConferenceParticipants(participants: info, onlyURIAndActive: false)
         self.conferenceInfos[conferenceID] = participants
-        currentConferenceEvent.value = ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""])
+        currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
     }
 
     func getConferenceParticipants(for conferenceId: String) -> [ConferenceParticipant]? {
@@ -339,8 +340,9 @@ class CallsService: CallsAdapterDelegate {
                 call.participantsCallId.removeAll()
                 call.participantsCallId.insert(callId)
                 self.currentCallsEvents.onNext(call)
-                self.calls.value[callId] = call
-                self.calls.value = self.calls.value
+                var values = self.calls.value
+                values[callId] = call
+                self.calls.accept(values)
                 single(.success(call))
             } else {
                 single(.error(CallServiceError.placeCallFailed))
@@ -444,8 +446,9 @@ class CallsService: CallsAdapterDelegate {
                 event.addEventInput(.callTime, value: time)
                 self.responseStream.onNext(event)
                 self.currentCallsEvents.onNext(finichedCall)
-                self.calls.value[callId] = nil
-                self.calls.value = self.calls.value
+                var values = self.calls.value
+                values[callId] = nil
+                self.calls.accept(values)
                 // clear pending conferences if need
                 if self.pendingConferences.keys.contains(callId) {
                     self.pendingConferences[callId] = nil
@@ -465,8 +468,9 @@ class CallsService: CallsAdapterDelegate {
             }
             if call == nil {
                 call = CallModel(withCallId: callId, callDetails: callDictionary)
-                self.calls.value[callId] = call
-                self.calls.value = self.calls.value
+                var values = self.calls.value
+                values[callId] = call
+                self.calls.accept(values)
             } else {
                 call?.update(withDictionary: callDictionary)
             }
@@ -544,7 +548,7 @@ class CallsService: CallsAdapterDelegate {
                 }
                 //Emit the call to the observers
                 guard let newCall = call else { return }
-                self.newCall.value = newCall
+                self.newCall.accept(newCall)
             } else {
                 self.refuse(callId: callId)
                     .subscribe(onCompleted: { [weak self] in
@@ -618,9 +622,10 @@ class CallsService: CallsAdapterDelegate {
             callDetails[CallDetailKey.audioOnlyKey.rawValue] = self.call(callID: callId)?.isAudioOnly.toString()
             let conf = CallModel(withCallId: conferenceID, callDetails: callDetails)
             conf.participantsCallId = conferenceCalls
-            self.calls.value[conferenceID] = conf
-            self.calls.value = self.calls.value
-            currentConferenceEvent.value = ConferenceUpdates(conferenceID, ConferenceState.conferenceCreated.rawValue, conferenceCalls)
+            var value = self.calls.value
+            value[conferenceID] = conf
+            self.calls.accept(value)
+            currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.conferenceCreated.rawValue, conferenceCalls))
         }
     }
 
@@ -632,16 +637,20 @@ class CallsService: CallsAdapterDelegate {
         conferenceCalls.forEach { (callId) in
             guard let call = self.call(callID: callId) else { return }
             call.participantsCallId = conferenceCalls
-            self.calls.value[callId] = call
+            var values = self.calls.value
+            values[callId] = call
+            self.calls.accept(values)
         }
     }
 
     func conferenceRemoved(conference conferenceID: String) {
         guard let conference = self.call(callID: conferenceID) else { return }
         self.conferenceInfos[conferenceID] = nil
-        self.currentConferenceEvent.value = ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""])
-        self.currentConferenceEvent.value = ConferenceUpdates(conferenceID, ConferenceState.conferenceDestroyed.rawValue, conference.participantsCallId)
-        self.calls.value[conferenceID] = nil
+        self.currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
+        self.currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.conferenceDestroyed.rawValue, conference.participantsCallId))
+        var values = self.calls.value
+        values[conferenceID] = nil
+        self.calls.accept(values)
      }
 
     func updateConferences(callId: String) {

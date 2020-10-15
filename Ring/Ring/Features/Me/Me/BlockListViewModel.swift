@@ -20,6 +20,7 @@
 
 import Reusable
 import RxSwift
+import RxRelay
 
 class BlockListViewModel: ViewModel {
 
@@ -48,7 +49,7 @@ class BlockListViewModel: ViewModel {
         })
     }()
 
-    lazy var contacts: Variable<[ContactModel]> = {
+    lazy var contacts: BehaviorRelay<[ContactModel]> = {
         return self.contactService.contacts
     }()
 

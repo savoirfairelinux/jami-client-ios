@@ -182,18 +182,18 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         generalSettingsButton.setImage(imageSettings, for: .normal)
         generalSettingsButton.contentMode = .scaleAspectFill
         let settingsButtonItem = UIBarButtonItem(customView: generalSettingsButton)
-        generalSettingsButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        generalSettingsButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showGeneralSettings()
             })
             .disposed(by: self.disposeBag)
-        qrScanButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        qrScanButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.openScan()
             })
             .disposed(by: self.disposeBag)
 
-        phoneBookButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        phoneBookButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.contactPicker.delegate = self
@@ -250,7 +250,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 .widthAnchor
                 .constraint(equalToConstant: 80).isActive = true
         accountButton.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
+            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.openAccountsList()
             })
@@ -315,7 +315,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         toolbar.items = [flexibleBarButton, addBarButton]
         accountPickerTextView.inputAccessoryView = toolbar
         addAccountButton.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
+            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.startAccountCreation()
             })

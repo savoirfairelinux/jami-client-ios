@@ -20,6 +20,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import RxDataSources
 
 let hardareAccelerationKey = "HARDWARE_ACCELERATION_KEY"
@@ -55,7 +56,7 @@ class GeneralSettingsViewModel: ViewModel {
                 [.hardwareAcceleration])])
     }()
 
-    var hardwareAccelerationEnabled: Variable<Bool>
+    var hardwareAccelerationEnabled: BehaviorRelay<Bool>
 
     let videoService: VideoService
 
@@ -67,7 +68,7 @@ class GeneralSettingsViewModel: ViewModel {
         if accelerationEnabled != accelerationEnabledSettings {
             injectionBag.videoService.setHardwareAccelerated(withState: accelerationEnabled)
         }
-        hardwareAccelerationEnabled = Variable<Bool>(accelerationEnabled)
+        hardwareAccelerationEnabled = BehaviorRelay<Bool>(value: accelerationEnabled)
     }
 
     func togleHardwareAcceleration(enable: Bool) {
@@ -76,7 +77,7 @@ class GeneralSettingsViewModel: ViewModel {
         }
         self.videoService.setHardwareAccelerated(withState: enable)
         UserDefaults.standard.set(enable, forKey: hardareAccelerationKey)
-        hardwareAccelerationEnabled.value = enable
+        hardwareAccelerationEnabled.accept(enable)
     }
 
     func hardwareAccelerationEnabledSettings() -> Bool {

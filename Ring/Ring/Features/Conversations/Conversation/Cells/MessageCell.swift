@@ -71,7 +71,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     var disposeBag = DisposeBag()
 
-    var playerHeight = Variable<CGFloat>(0)
+    var playerHeight = BehaviorRelay<CGFloat>(value: 0)
 
     private(set) var messageId: Int64?
     private var isCopyable: Bool = false
@@ -109,7 +109,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.playerView?.removeFromSuperview()
         self.composingMsg.removeFromSuperview()
         self.transferImageView.image = nil
-        self.playerHeight.value = 0
+        self.playerHeight.accept(0)
         self.disposeBag = DisposeBag()
         openPreview.accept(false)
         self.messageLabel?.removeURLHandler()
@@ -432,7 +432,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.transferImageView.removeFromSuperview()
         self.playerView?.removeFromSuperview()
         self.composingMsg.removeFromSuperview()
-        self.playerHeight.value = 0
+        self.playerHeight.accept(0)
         self.bubbleViewMask?.isHidden = true
 
         guard let item = items?[indexPath.row] else { return }
@@ -639,7 +639,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         guard (self.playerView?.superview) != nil else {
             return
         }
-        playerHeight.value = height
+        playerHeight.accept(height)
     }
 
     func getMaxDimensionForTransfer() -> CGFloat {
@@ -698,7 +698,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
                 self.transferProgressView.progress = 0
                 self.transferProgressView.target = 100
                 self.transferProgressView.currentProgress = 0
-                self.transferProgressView.status.value = message.initialTransferStatus
+                self.transferProgressView.status.accept(message.initialTransferStatus)
                 self.bubble.addSubview(self.transferProgressView)
             }
         }

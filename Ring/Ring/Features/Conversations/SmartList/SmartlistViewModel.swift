@@ -22,6 +22,7 @@
  */
 
 import RxSwift
+import RxCocoa
 import SwiftyBeaver
 
 class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
@@ -50,7 +51,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     var searching = PublishSubject<Bool>()
 
-    private var contactFoundConversation = Variable<ConversationViewModel?>(nil)
+    private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
 
     lazy var hideNoConversationsMessage: Observable<Bool> = {
         return Observable<Bool>
@@ -161,7 +162,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                             self.conversationViewModels.append(contactFound)
                         } else {
                             conversationViewModel = ConversationViewModel(with: self.injectionBag)
-                            conversationViewModel?.conversation = Variable<ConversationModel>(conversationModel)
+                            conversationViewModel?.conversation = BehaviorRelay<ConversationModel>(value: conversationModel)
                             if let conversation = conversationViewModel {
                                 self.conversationViewModels
                                     .append(conversation)
@@ -232,7 +233,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     /// For FilterConversationDataSource protocol
     func conversationFound(conversation: ConversationViewModel?, name: String) {
-        contactFoundConversation.value = conversation
+        contactFoundConversation.accept(conversation)
     }
 
     func delete(conversationViewModel: ConversationViewModel) {
@@ -318,7 +319,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                                              accountId: account.id,
                                              hash: number)
         let newConversation = ConversationViewModel(with: self.injectionBag)
-        newConversation.conversation = Variable<ConversationModel>(conversation)
+        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
         self.stateSubject
             .onNext(ConversationState
                 .conversationDetail(conversationViewModel:

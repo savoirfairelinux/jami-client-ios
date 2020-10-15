@@ -20,6 +20,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import RxDataSources
 
 enum ExportAccountResponse: Int {
@@ -79,7 +80,7 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
         return self.stateSubject.asObservable()
     }()
 
-    private let generatingState = Variable(GeneratingPinState.initial)
+    private let generatingState = BehaviorRelay(value: GeneratingPinState.initial)
     lazy var observableState: Observable <GeneratingPinState> = {
         return self.generatingState.asObservable()
     }()
@@ -103,9 +104,9 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
     }
 
     func linkDevice(with password: String?) {
-        self.generatingState.value = GeneratingPinState.generatingPin
+        self.generatingState.accept(GeneratingPinState.generatingPin)
         guard let password = password else {
-            self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
+            self.generatingState.accept(GeneratingPinState.error(error: PinError.passwordError))
             return
         }
         self.accountService.exportOnRing(withPassword: password)
@@ -121,30 +122,30 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
                                 switch state {
                                 case ExportAccountResponse.success.rawValue:
                                     if let pin: String = exportComplitedEvent.getEventInput(.pin) {
-                                        self.generatingState.value = GeneratingPinState.success(pin: pin)
+                                        self.generatingState.accept(GeneratingPinState.success(pin: pin))
                                     } else {
-                                        self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
+                                        self.generatingState.accept(GeneratingPinState.error(error: PinError.defaultError))
                                     }
                                 case ExportAccountResponse.wrongPassword.rawValue:
-                                    self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
+                                    self.generatingState.accept(GeneratingPinState.error(error: PinError.passwordError))
                                 case ExportAccountResponse.networkProblem.rawValue:
-                                    self.generatingState.value = GeneratingPinState.error(error: PinError.networkError)
+                                    self.generatingState.accept(GeneratingPinState.error(error: PinError.networkError))
                                 default:
-                                    self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
+                                    self.generatingState.accept(GeneratingPinState.error(error: PinError.defaultError))
                                 }
                             }
                         })
                         .disposed(by: self.disposeBag)
                 } else {
-                    self.generatingState.value = GeneratingPinState.error(error: PinError.defaultError)
+                    self.generatingState.accept(GeneratingPinState.error(error: PinError.defaultError))
                 }
             }, onError: { error in
-                self.generatingState.value = GeneratingPinState.error(error: PinError.passwordError)
+                self.generatingState.accept(GeneratingPinState.error(error: PinError.passwordError))
             })
             .disposed(by: self.disposeBag)
     }
 
     func refresh() {
-        self.generatingState.value = GeneratingPinState.initial
+        self.generatingState.accept(GeneratingPinState.initial)
     }
 }

@@ -26,15 +26,15 @@ protocol PlayerDelegate: class {
 }
 
 class PlayerViewModel {
-    var hasVideo = Variable<Bool>(true)
-    var playerDuration = Variable<Float>(0)
+    var hasVideo = BehaviorRelay<Bool>(value: true)
+    var playerDuration = BehaviorRelay<Float>(value: 0)
     var playerPosition = PublishSubject<Float>()
-    let seekTimeVariable = Variable<Float>(0)
+    let seekTimeVariable = BehaviorRelay<Float>(value: 0)
     let playBackFrame = PublishSubject<UIImage?>()
 
-    let pause = Variable<Bool>(true)
-    let audioMuted = Variable<Bool>(true)
-    let playerReady = Variable<Bool>(false)
+    let pause = BehaviorRelay<Bool>(value: true)
+    let audioMuted = BehaviorRelay<Bool>(value: true)
+    let playerReady = BehaviorRelay<Bool>(value: false)
     weak var delegate: PlayerDelegate?
 
     var firstFrame: UIImage?
@@ -53,18 +53,18 @@ class PlayerViewModel {
     }
 
     func createPlayer() {
-        self.playerReady.value = false
+        self.playerReady.accept(false)
         let fname = "file://" + filePath
         if !self.playerId.isEmpty {
             if let frame = firstFrame {
                 self.playBackFrame.onNext(frame)
             }
-            self.playerReady.value = true
+            self.playerReady.accept(true)
             return
         }
         invalidateTimer()
         self.playerId = self.videoService.createPlayer(path: fname)
-        self.pause.value = true
+        self.pause.accept(true)
         self.playerPosition.onNext(0)
         // subscribe for frame playback
         //get first frame, pause player and seek back to first frame
@@ -80,7 +80,7 @@ class PlayerViewModel {
             self?.muteAudio()
             self?.seekToTime(time: 0)
             self?.startTimer()
-            self?.playerReady.value = true
+            self?.playerReady.accept(true)
             if let image = renderer?.data {
                 DispatchQueue.main.async {
                     self?.delegate?.extractedVideoFrame(with: image.size.height)
@@ -111,16 +111,16 @@ class PlayerViewModel {
                         }
                         return
                 }
-                self?.playerDuration.value = duration
-                self?.hasVideo.value = player.hasVideo
+                self?.playerDuration.accept(duration)
+                self?.hasVideo.accept(player.hasVideo)
                 if !player.hasVideo {
                     self?.startTimer()
-                    self?.audioMuted.value = false
-                    self?.playerReady.value = true
+                    self?.audioMuted.accept(false)
+                    self?.playerReady.accept(true)
                     return
                 }
                 // mute audio so it is not played when extracting first frame
-                self?.audioMuted.value = true
+                self?.audioMuted.accept(true)
                 self?.videoService.mutePlayerAudio(playerId: player.playerId,
                                                    mute: self?.audioMuted.value ?? true)
                 //unpause player to get first video frame
@@ -134,14 +134,14 @@ class PlayerViewModel {
         if pause.value {
             return
         }
-        pause.value = true
+        pause.accept(true)
         videoService.pausePlayer(playerId: playerId, pause: pause.value)
     }
 
     func userStopSeeking() {
         let time = Int(self.playerDuration.value * seekTimeVariable.value)
         self.videoService.seekToTime(time: time, playerId: playerId)
-        pause.value = false
+        pause.accept(false)
         videoService.pausePlayer(playerId: playerId, pause: pause.value)
         startTimer()
     }
@@ -165,12 +165,12 @@ class PlayerViewModel {
     }
 
     func toglePause() {
-        pause.value.toggle()
+        pause.accept(!pause.value)
         videoService.pausePlayer(playerId: playerId, pause: pause.value)
     }
 
     func muteAudio() {
-        audioMuted.value.toggle()
+        audioMuted.accept(!audioMuted.value)
         videoService.mutePlayerAudio(playerId: playerId, mute: audioMuted.value)
     }
 
@@ -194,7 +194,7 @@ class PlayerViewModel {
         self.playerPosition.onNext(progress)
         // if new time less than previous file is finished
         if time < currentTime {
-            pause.value = true
+            pause.accept(true)
             if let image = self.firstFrame {
                 self.playBackFrame.onNext(image)
             }

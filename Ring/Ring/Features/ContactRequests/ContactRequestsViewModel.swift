@@ -19,6 +19,7 @@
  */
 
 import RxSwift
+import RxCocoa
 import Contacts
 import SwiftyBeaver
 
@@ -121,9 +122,9 @@ class ContactRequestsViewModel: Stateable, ViewModel {
             })
             .subscribe(onNext: { lookupNameResponse in
                 if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
-                    item.userName.value = lookupNameResponse.name
+                    item.userName.accept(lookupNameResponse.name)
                 } else {
-                    item.userName.value = lookupNameResponse.address
+                    item.userName.accept(lookupNameResponse.address)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -147,7 +148,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         guard let conversation = self.conversationService.findConversation(withUri: uri, withAccountId: account.id) else {
             return
         }
-        conversationViewModel.conversation = Variable<ConversationModel>(conversation)
+        conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversationViewModel))
     }
 }
