@@ -110,7 +110,6 @@
 		0E438A9A204F47E700402900 /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E438A99204F47E700402900 /* SettingsTableView.swift */; };
 		0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */; };
 		0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48F9D21FDF150700D6CC08 /* GeneratedInteractionsManager.swift */; };
-		0E4909611FE97A94005CAA50 /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4909601FE97A94005CAA50 /* ActiveLabel.framework */; };
 		0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0E4909691FEAB156005CAA50 /* CallsAdapter.mm */; };
 		0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49096B1FEAB225005CAA50 /* CallsAdapterDelegate.swift */; };
 		0E49096E1FEAC0DE005CAA50 /* CallsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49096D1FEAC0DE005CAA50 /* CallsService.swift */; };
@@ -266,6 +265,7 @@
 		267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267AD77D252B979F00047593 /* ConferenceParticipant.swift */; };
 		2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
+		26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B708FD253610B0003974F2 /* OpenURLLabel.swift */; };
 		26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
@@ -510,7 +510,6 @@
 		0E438A99204F47E700402900 /* SettingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
 		0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		0E48F9D21FDF150700D6CC08 /* GeneratedInteractionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedInteractionsManager.swift; sourceTree = "<group>"; };
-		0E4909601FE97A94005CAA50 /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
 		0E4909681FEAB156005CAA50 /* CallsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallsAdapter.h; sourceTree = "<group>"; };
 		0E4909691FEAB156005CAA50 /* CallsAdapter.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = CallsAdapter.mm; sourceTree = "<group>"; };
 		0E49096B1FEAB225005CAA50 /* CallsAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsAdapterDelegate.swift; sourceTree = "<group>"; };
@@ -673,6 +672,7 @@
 		267AD77D252B979F00047593 /* ConferenceParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipant.swift; sourceTree = "<group>"; };
 		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
+		26B708FD253610B0003974F2 /* OpenURLLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLLabel.swift; sourceTree = "<group>"; };
 		26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsMenu.swift; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
@@ -830,7 +830,6 @@
 				628F4DCD206BF4740009C44C /* libtls.a in Frameworks */,
 				628F4DCB206BE23B0009C44C /* libssl.a in Frameworks */,
 				0E3BD4322044A41D00A50DDF /* GSKStretchyHeaderView.framework in Frameworks */,
-				0E4909611FE97A94005CAA50 /* ActiveLabel.framework in Frameworks */,
 				0E0FF1A71FC38070003898C2 /* SQLite.framework in Frameworks */,
 				5C093F011FB495830011D90E /* Differentiator.framework in Frameworks */,
 				0ED666101F9FED1C00743D42 /* AMPopTip.framework in Frameworks */,
@@ -943,7 +942,6 @@
 				628F4DCC206BF4730009C44C /* libtls.a */,
 				628F4DCA206BE23B0009C44C /* libssl.a */,
 				0E3BD4312044A41D00A50DDF /* GSKStretchyHeaderView.framework */,
-				0E4909601FE97A94005CAA50 /* ActiveLabel.framework */,
 				0E0FF1A61FC38070003898C2 /* SQLite.framework */,
 				5C093F001FB495830011D90E /* Differentiator.framework */,
 				0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */,
@@ -1049,6 +1047,7 @@
 				0E5A668222F0B1F100AA6820 /* ProgressView.swift */,
 				0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */,
 				642AD48324EC64CE00521127 /* CopyableLabel.swift */,
+				26B708FD253610B0003974F2 /* OpenURLLabel.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2100,7 +2099,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ActiveLabel.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/GSKStretchyHeaderView.framework",
 			);
 			name = "⚙️ Copy Frameworks";
@@ -2117,7 +2115,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AMPopTip.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SQLite.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ActiveLabel.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/GSKStretchyHeaderView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2293,6 +2290,7 @@
 				1A2D18B71F29164700B2C785 /* SmartlistViewModel.swift in Sources */,
 				62AA15C31FFC39C80064A063 /* VideoAdapterDelegate.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
+				26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */,
 				56BBC9A31ED714DF00CDAF8B /* ConversationsService.swift in Sources */,
 				642AD48424EC64CE00521127 /* CopyableLabel.swift in Sources */,
 				2662FC7B246B216B00FA7782 /* JamiSearchViewModel.swift in Sources */,
