@@ -26,7 +26,6 @@ import UIKit
 import Reusable
 import RxSwift
 import RxCocoa
-import ActiveLabel
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
@@ -43,7 +42,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabelMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarBotomAlignConstraint: NSLayoutConstraint!
-    @IBOutlet weak var messageLabel: ActiveLabel!
+    @IBOutlet weak var messageLabel: OpenURLLabel?
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
@@ -113,6 +112,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.playerHeight.value = 0
         self.disposeBag = DisposeBag()
         openPreview.accept(false)
+        self.messageLabel?.removeURLHandler()
         super.prepareForReuse()
     }
 
@@ -221,6 +221,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.tapGestureRecognizer?.numberOfTapsRequired = 1
         self.tapGestureRecognizer?.delegate = self
         self.tapGestureRecognizer!.rx.event.bind(onNext: { [weak self] _ in self?.onTapGesture() }).disposed(by: self.disposeBag)
+        self.tapGestureRecognizer!.cancelsTouchesInView = false
         self.bubble.addGestureRecognizer(tapGestureRecognizer!)
         guard let doubleTap = doubleTapGestureRecognizer else { return }
         self.tapGestureRecognizer?.require(toFail: doubleTap)
@@ -287,7 +288,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     }
 
     override func copy(_ sender: Any?) {
-        UIPasteboard.general.string = self.messageLabel.text
+        UIPasteboard.general.string = self.messageLabel?.text
         UIMenuController.shared.setMenuVisible(false, animated: true)
     }
 
@@ -342,23 +343,18 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.bubbleTopConstraint.constant = 8
 
         if item.isTransfer {
-            self.messageLabel.enabledTypes = []
             let contentArr = item.content.components(separatedBy: "\n")
             if contentArr.count > 1 {
-                self.messageLabel.text = contentArr[0]
+                self.messageLabel?.text = contentArr[0]
                 self.sizeLabel.text = contentArr[1]
             } else {
-                self.messageLabel.text = item.content
+                self.messageLabel?.text = item.content
             }
         } else {
-            self.messageLabel.enabledTypes = [.url]
-            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
-            self.messageLabel.handleURLTap { url in
-                let urlString = url.absoluteString
-                if let prefixedUrl = URL(string: urlString.contains("http") ? urlString : "http://\(urlString)") {
-                    UIApplication.shared.open(prefixedUrl, completionHandler: nil)
-                }
-            }
+            self.messageLabel?.isUserInteractionEnabled = true
+            self.messageLabel?.text = item.content
+            self.messageLabel?.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
+            self.messageLabel?.handleURLTap()
         }
 
         item.sequencing = { (item: MessageViewModel) -> MessageSequencing in
@@ -402,9 +398,9 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         default: break
         }
         if item.content.containsOnlyEmoji {
-            self.messageLabel.font = UIFont.systemFont(ofSize: 40.0, weight: UIFont.Weight.medium)
+            self.messageLabel?.font = UIFont.systemFont(ofSize: 40.0, weight: UIFont.Weight.medium)
         } else {
-            self.messageLabel.font = UIFont(name: "HelveticaNeue", size: 18.0)
+            self.messageLabel?.font = UIFont(name: "HelveticaNeue", size: 18.0)
         }
     }
 
@@ -454,7 +450,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
         switch item.bubblePosition() {
         case .generated:
-            self.messageLabel.setTextWithLineSpacing(withText: item.content, withLineSpacing: 10)
+            self.messageLabel?.setTextWithLineSpacing(withText: item.content, withLineSpacing: 10)
             if indexPath.row == 0 {
                 self.messageLabelMarginConstraint.constant = 4
                 self.bubbleTopConstraint.constant = 36
@@ -534,7 +530,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private func configureTransferCell(_ item: MessageViewModel, _ conversationViewModel: ConversationViewModel) {
         guard item.isTransfer else { return }
 
-        self.messageLabel.lineBreakMode = .byTruncatingMiddle
+        self.messageLabel?.lineBreakMode = .byTruncatingMiddle
 
         if item.bubblePosition() == .received {
             self.acceptButton?.tintColor = UIColor(hex: 0x00b20b, alpha: 1.0)
@@ -613,10 +609,11 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     }
 
     func addComposingMsgView() {
-        self.composingMsg = UIView(frame: self.messageLabel.frame)
+        guard let messageframe = self.messageLabel?.frame else { return }
+        self.composingMsg = UIView(frame: messageframe)
         let size: CGFloat = 10
         let margin: CGFloat = 2
-        let originY: CGFloat = self.messageLabel.frame.size.height * 0.5 - (size * 0.5)
+        let originY: CGFloat = messageframe.size.height * 0.5 - (size * 0.5)
         let point1 = UIView(frame: CGRect(x: 0, y: originY, width: size, height: size))
         let point2 = UIView(frame: CGRect(x: margin + size, y: originY, width: size, height: size))
         let point3 = UIView(frame: CGRect(x: point2.frame.origin.x + margin + size, y: originY, width: size, height: size))
