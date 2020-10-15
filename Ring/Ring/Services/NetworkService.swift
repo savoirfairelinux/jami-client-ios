@@ -22,6 +22,7 @@ import Foundation
 import Reachability
 import SwiftyBeaver
 import RxSwift
+import RxRelay
 
 enum ConnectionType {
     case none
@@ -35,7 +36,7 @@ class NetworkService {
 
     let reachability: Reachability?
 
-    var connectionState = Variable<ConnectionType>(.none)
+    var connectionState = BehaviorRelay<ConnectionType>(value: .none)
 
     lazy var connectionStateObservable: Observable<ConnectionType> = {
         return self.connectionState.asObservable()
@@ -49,14 +50,14 @@ class NetworkService {
 
         reachability?.whenReachable = { reachability in
             if reachability.connection == .wifi {
-                self.connectionState.value = .wifi
+                self.connectionState.accept(.wifi)
             } else {
-                self.connectionState.value = .cellular
+                self.connectionState.accept(.cellular)
             }
         }
 
         reachability?.whenUnreachable = { _ in
-            self.connectionState.value = .none
+            self.connectionState.accept(.none)
         }
 
         do {

@@ -22,6 +22,7 @@
 import Foundation
 import SwiftyBeaver
 import RxSwift
+import RxRelay
 import UIKit
 import AVFoundation
 
@@ -71,7 +72,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         return orientation
     }
 
-    var permissionGranted = Variable<Bool>(false)
+    var permissionGranted = BehaviorRelay<Bool>(value: false)
 
     lazy var permissionGrantedObservable: Observable<Bool> = {
         return self.permissionGranted.asObservable()
@@ -138,18 +139,18 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     func checkPermission() {
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
         case .authorized:
-            self.permissionGranted.value = true
+            self.permissionGranted.accept(true)
         case .notDetermined:
             requestPermission()
         default:
-            self.permissionGranted.value = false
+            self.permissionGranted.accept(false)
         }
     }
 
     private func requestPermission() {
         sessionQueue.suspend()
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] granted in
-            self?.permissionGranted.value = granted
+            self?.permissionGranted.accept(granted)
             self?.sessionQueue.resume()
         }
     }
@@ -270,7 +271,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
 typealias RendererTuple = (rendererId: String, data: UIImage?)
 
-// swiftlint:disable file_length
 class VideoService: FrameExtractorDelegate {
 
     private let videoAdapter: VideoAdapter

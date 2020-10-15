@@ -24,6 +24,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import SwiftyBeaver
 
 // swiftlint:disable file_length
@@ -47,7 +48,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
     private let disposeBag = DisposeBag()
 
-    var messages = Variable([MessageViewModel]())
+    var messages = BehaviorRelay(value: [MessageViewModel]())
 
     private var players = [String: PlayerViewModel]()
 
@@ -90,8 +91,8 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var isAccountSip: Bool = false
 
-    var displayName = Variable<String?>(nil)
-    var userName = Variable<String>("")
+    var displayName = BehaviorRelay<String?>(value: nil)
+    var userName = BehaviorRelay<String>(value: "")
     lazy var bestName: Observable<String> = {
         return Observable
             .combineLatest(userName.asObservable(),
@@ -103,13 +104,13 @@ class ConversationViewModel: Stateable, ViewModel {
     }()
 
     /// My contact's profile's image data
-    var profileImageData = Variable<Data?>(nil)
+    var profileImageData = BehaviorRelay<Data?>(value: nil)
     /// My profile's image data
     var myOwnProfileImageData: Data?
 
     var inviteButtonIsAvailable = BehaviorSubject(value: true)
 
-    var contactPresence = Variable<Bool>(false)
+    var contactPresence = BehaviorRelay<Bool>(value: false)
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -125,26 +126,26 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     private func setConversation(_ conversation: ConversationModel) {
-        self.conversation = Variable<ConversationModel>(conversation)
+        self.conversation = BehaviorRelay<ConversationModel>(value: conversation)
     }
 
     convenience init(with injectionBag: InjectionBag, conversation: ConversationModel, user: JamiSearchViewModel.UserSearchModel) {
         self.init(with: injectionBag)
-        self.userName.value = user.username
-        self.displayName.value = user.firstName + " " + user.lastName
-        self.profileImageData.value = user.profilePicture
+        self.userName.accept(user.username)
+        self.displayName.accept(user.firstName + " " + user.lastName)
+        self.profileImageData.accept(user.profilePicture)
         self.setConversation(conversation) // required to trigger the didSet
     }
 
-    var conversation: Variable<ConversationModel>! {
+    var conversation: BehaviorRelay<ConversationModel>! {
         didSet {
 
             if self.isJamsAccount { // fixes image and displayname not showing when adding contact for first time
                 if let profile = self.contactsService.getProfile(uri: self.contactUri, accountId: self.conversation.value.accountId),
                     let alias = profile.alias, let photo = profile.photo {
-                    self.displayName.value = alias
+                    self.displayName.accept(alias)
                     if let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                        self.profileImageData.value = data
+                        self.profileImageData.accept(data)
                     }
                 }
             }
@@ -162,7 +163,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
             if let account = self.accountService.getAccount(fromAccountId: self.conversation.value.accountId),
                 account.type == AccountType.sip {
-                self.userName.value = self.conversation.value.hash
+                self.userName.accept(self.conversation.value.hash)
                 self.isAccountSip = true
                 return
             }
@@ -179,9 +180,9 @@ class ConversationViewModel: Stateable, ViewModel {
 
             if !self.isJamsAccount || contact != nil {
                 if let contactUserName = contact?.userName {
-                    self.userName.value = contactUserName
+                    self.userName.accept(contactUserName)
                 } else if self.userName.value.isEmpty {
-                    self.userName.value = self.conversation.value.hash
+                    self.userName.accept(self.conversation.value.hash)
 
                     self.subscribeUserServiceLookupStatus()
                     self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: self.conversation.value.hash)
@@ -314,7 +315,9 @@ class ConversationViewModel: Stateable, ViewModel {
             .disposed(by: disposeBag)
         let message = self.messages.value.filter { $0.messageId == messageId }.first
         message?.removeFile(conversationID: self.conversation.value.conversationId, accountId: account.id)
-        self.messages.value.removeAll(where: { $0.messageId == messageId })
+        var values = self.messages.value
+        values.removeAll(where: { $0.messageId == messageId })
+        self.messages.accept(values)
     }
 
     func sendContactRequest() {
@@ -406,12 +409,12 @@ class ConversationViewModel: Stateable, ViewModel {
             })
             .map({ call in
                 let callIsValid = self.callIsValid(call: call)
-                self.currentCallId.value = callIsValid ? call.callId : ""
+                self.currentCallId.accept(callIsValid ? call.callId : "")
                 return callIsValid
             })
         }()
 
-    let currentCallId = Variable<String>("")
+    let currentCallId = BehaviorRelay<String>(value: "")
 
     func callIsValid (call: CallModel) -> Bool {
         return call.stateValue == CallState.hold.rawValue ||
@@ -457,7 +460,7 @@ class ConversationViewModel: Stateable, ViewModel {
         let composingIndicator = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel, isLastDisplayed: false)
         composingIndicator.isComposingIndicator = true
         messagesValue.append(composingIndicator)
-        self.messages.value = messagesValue
+        self.messages.accept(messagesValue)
     }
 
     var composingMessage: Bool = false
@@ -472,7 +475,7 @@ class ConversationViewModel: Stateable, ViewModel {
         let conversationsMsg = messagesValue.filter { (messageModel) -> Bool in
             !messageModel.isComposingIndicator
         }
-        self.messages.value = conversationsMsg
+        self.messages.accept(conversationsMsg)
     }
 
     func isLastDisplayed(messageId: Int64) -> Bool {
@@ -500,7 +503,7 @@ extension ConversationViewModel {
                         return recipient1 == recipient2
                     })
                     .map({ [weak self] conversation -> (ConversationModel) in
-                        self?.conversation.value = conversation
+                        self?.conversation.accept(conversation)
                         return conversation
                     })
                     .flatMap({ conversation in
@@ -533,7 +536,7 @@ extension ConversationViewModel {
                     composingIndicator.isComposingIndicator = true
                     msg.append(composingIndicator)
                 }
-                self.messages.value = msg
+                self.messages.accept(msg)
             })
             .disposed(by: self.disposeBag)
     }
@@ -559,8 +562,8 @@ extension ConversationViewModel {
                     self?.log.warning("vCard for ringId: \(String(describing: self?.contactUri)) has no image")
                     return
                 }
-                self?.profileImageData.value = imageData
-                self?.displayName.value = VCardUtils.getName(from: vCard)
+                self?.profileImageData.accept(imageData)
+                self?.displayName.accept(VCardUtils.getName(from: vCard))
             })
             .disposed(by: self.disposeBag)
     }
@@ -571,10 +574,10 @@ extension ConversationViewModel {
                         createIfNotexists: false,
                         accountId: self.conversation.value.accountId)
             .subscribe(onNext: { [weak self] profile in
-                self?.displayName.value = profile.alias
+                self?.displayName.accept(profile.alias)
                 if let photo = profile.photo,
                     let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self?.profileImageData.value = data
+                    self?.profileImageData.accept(data)
                 }
             })
             .disposed(by: disposeBag)
@@ -599,7 +602,7 @@ extension ConversationViewModel {
         if let contactPresence = self.presenceService.contactPresence[self.conversation.value.hash] {
             self.contactPresence = contactPresence
         } else {
-            self.contactPresence.value = false
+            self.contactPresence.accept(false)
             self.presenceService
                 .sharedResponseStream
                 .filter({ [weak self] serviceEvent in
@@ -619,7 +622,7 @@ extension ConversationViewModel {
             .contactPresence[self.conversation.value.hash] {
             self.contactPresence = contactPresence
         } else {
-            self.contactPresence.value = false
+            self.contactPresence.accept(false)
         }
     }
 
@@ -636,10 +639,10 @@ extension ConversationViewModel {
             })
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 if let name = lookupNameResponse.name, !name.isEmpty {
-                    self?.userName.value = name
+                    self?.userName.accept(name)
                     contact?.userName = name
                 } else if let address = lookupNameResponse.address {
-                    self?.userName.value = address
+                    self?.userName.accept(address)
                 }
             })
             .disposed(by: disposeBag)

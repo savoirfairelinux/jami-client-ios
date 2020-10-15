@@ -145,7 +145,15 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
     }
 
     func buindViewToViewModel() {
-        self.userNameTextField.rx.text.orEmpty.throttle(3, scheduler: MainScheduler.instance).distinctUntilChanged().bind(to: self.viewModel.userName).disposed(by: self.disposeBag)
+        self.userNameTextField
+            .rx
+            .text
+            .orEmpty
+            .throttle(Durations.threeSeconds.toTimeInterval(),
+                      scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .bind(to: self.viewModel.userName)
+            .disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
         self.serverTextField.rx.text.orEmpty.bind(to: self.viewModel.sipServer).disposed(by: self.disposeBag)
         self.portTextField.rx.text.orEmpty

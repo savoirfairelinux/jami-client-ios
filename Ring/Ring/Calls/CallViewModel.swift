@@ -21,10 +21,10 @@
  */
 
 import RxSwift
+import RxRelay
 import SwiftyBeaver
 import Contacts
 import RxCocoa
-// swiftlint:disable type_body_length
 class CallViewModel: Stateable, ViewModel {
 
     //stateable
@@ -48,15 +48,15 @@ class CallViewModel: Stateable, ViewModel {
     var isHeadsetConnected = false
     var isAudioOnly = false
 
-    private lazy var currentCallVariable: Variable<CallModel> = {
-        Variable<CallModel>(self.call ?? CallModel())
+    private lazy var currentCallVariable: BehaviorRelay<CallModel> = {
+        BehaviorRelay<CallModel>(value: self.call ?? CallModel())
     }()
     lazy var currentCall: Observable<CallModel> = {
         currentCallVariable.asObservable()
     }()
     private var callDisposeBag = DisposeBag()
 
-    var conferenceMode: Variable<Bool> = Variable<Bool>(false)
+    var conferenceMode: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
 
     var call: CallModel? {
         didSet {
@@ -73,7 +73,7 @@ class CallViewModel: Stateable, ViewModel {
                 .share()
                 .startWith(call)
                 .subscribe(onNext: { [weak self] call in
-                    self?.currentCallVariable.value = call
+                    self?.currentCallVariable.accept(call)
                 })
                 .disposed(by: self.callDisposeBag)
             // do other initializong only once
@@ -99,7 +99,7 @@ class CallViewModel: Stateable, ViewModel {
                     let conferenceCreated = conf.state == ConferenceState.conferenceCreated.rawValue
                     self?.rendererId = conferenceCreated ? conf.conferenceID : self!.call!.callId
                     self?.containerViewModel?.isConference = conferenceCreated
-                    self?.conferenceMode.value = conferenceCreated
+                    self?.conferenceMode.accept(conferenceCreated)
                 })
                 .disposed(by: self.disposeBag)
             self.rendererId = call.callId
@@ -217,7 +217,7 @@ class CallViewModel: Stateable, ViewModel {
     }()
 
     lazy var callDuration: Driver<String> = {
-        let timer = Observable<Int>.interval(1.0, scheduler: MainScheduler.instance)
+        let timer = Observable<Int>.interval(Durations.oneSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .takeUntil(currentCall
                 .filter { call in
                     !call.isExists()
@@ -547,7 +547,7 @@ extension CallViewModel {
             return
         }
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        conversationViewModel.conversation = Variable<ConversationModel>(conversation)
+        conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
         self.stateSubject.onNext(ConversationState.fromCallToConversation(conversation: conversationViewModel))
     }
 

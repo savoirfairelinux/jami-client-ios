@@ -21,6 +21,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
 class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
@@ -232,7 +233,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             return
         }
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        conversationViewModel.conversation = Variable<ConversationModel>(conversation)
+        conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
         self.pushConversation(withConversationViewModel: conversationViewModel)
     }
 

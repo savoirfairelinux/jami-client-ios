@@ -28,10 +28,10 @@ class CreateSipAccountViewModel: Stateable, ViewModel {
         return self.stateSubject.asObservable()
     }()
 
-    var userName = Variable<String>("")
-    var password = Variable<String>("")
-    var sipServer = Variable<String>("")
-    var port = Variable<String>("")
+    var userName = BehaviorRelay<String>(value: "")
+    var password = BehaviorRelay<String>(value: "")
+    var sipServer = BehaviorRelay<String>(value: "")
+    var port = BehaviorRelay<String>(value: "")
     private let accountsService: AccountsService
 
     required init(with injectionBag: InjectionBag) {

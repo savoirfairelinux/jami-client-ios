@@ -21,6 +21,7 @@
  */
 
 import RxSwift
+import RxRelay
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
@@ -40,7 +41,7 @@ class ConversationsService {
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
 
-    var conversations = Variable([ConversationModel]())
+    var conversations = BehaviorRelay(value: [ConversationModel]())
 
     var messagesSemaphore = DispatchSemaphore(value: 1)
 
@@ -78,7 +79,7 @@ class ConversationsService {
         dbManager.getConversationsObservable(for: accountId)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [weak self] conversationsModels in
-                self?.conversations.value = conversationsModels
+                self?.conversations.accept(conversationsModels)
                 if shouldUpdateMessagesStatus {
                     self?.updateMessagesStatus(accountId: accountId)
                 }
@@ -202,7 +203,7 @@ class ConversationsService {
                         self.dbManager.getConversationsObservable(for: toAccountId)
                             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                             .subscribe(onNext: { [weak self] conversationsModels in
-                                self?.conversations.value = conversationsModels
+                                self?.conversations.accept(conversationsModels)
                             })
                             .disposed(by: (self.disposeBag))
                     }
@@ -259,7 +260,7 @@ class ConversationsService {
                     self.dbManager.getConversationsObservable(for: accountId)
                         .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe(onNext: { conversationsModels in
-                            self.conversations.value = conversationsModels
+                            self.conversations.accept(conversationsModels)
                         })
                         .disposed(by: (self.disposeBag))
                 }
@@ -310,7 +311,7 @@ class ConversationsService {
                         .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe(onNext: { conversationsModels in
                             if updateConversation {
-                                self.conversations.value = conversationsModels
+                                self.conversations.accept(conversationsModels)
                             }
                             let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
                             var serviceEvent = ServiceEvent(withEventType: serviceEventType)
@@ -380,7 +381,7 @@ class ConversationsService {
                     self.dbManager.getConversationsObservable(for: accountId)
                         .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe(onNext: { [weak self] conversationsModels in
-                            self?.conversations.value = conversationsModels
+                            self?.conversations.accept(conversationsModels)
                         })
                         .disposed(by: (self.disposeBag))
                     completable(.completed)
@@ -418,7 +419,7 @@ class ConversationsService {
                     .getConversationsObservable(for: conversation.accountId)
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onNext: { [weak self] conversationsModels in
-                        self?.conversations.value = conversationsModels
+                        self?.conversations.accept(conversationsModels)
                     })
                     .disposed(by: (self.disposeBag))
                 }, onError: { error in
@@ -615,7 +616,7 @@ extension ConversationsService {
                         self.dbManager.getConversationsObservable(for: accountId)
                             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                             .subscribe(onNext: { [weak self] conversationsModels in
-                                self?.conversations.value = conversationsModels
+                                self?.conversations.accept(conversationsModels)
                             })
                             .disposed(by: (self.disposeBag))
                     }

@@ -21,6 +21,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class CreateProfileViewModel: Stateable, ViewModel {
 
@@ -29,8 +30,8 @@ class CreateProfileViewModel: Stateable, ViewModel {
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
-    var profileName = Variable<String>("")
-    var profilePhoto = Variable<UIImage?>(nil)
+    var profileName = BehaviorRelay<String>(value: "")
+    var profilePhoto = BehaviorRelay<UIImage?>(value: nil)
 
     lazy var profileExists: Observable<Bool>  = {
 

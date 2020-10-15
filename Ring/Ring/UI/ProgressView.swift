@@ -20,6 +20,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class ProgressView: UIView {
     var maximumValue: CGFloat = 100
@@ -28,8 +29,8 @@ class ProgressView: UIView {
     var statusLabel = UILabel()
 
     var disposeBug = DisposeBag()
-    var status = Variable<DataTransferStatus>(.ongoing)
-    var progressVariable = Variable<CGFloat>(0)
+    var status = BehaviorRelay<DataTransferStatus>(value: .ongoing)
+    var progressVariable = BehaviorRelay<CGFloat>(value: 0)
     lazy var statusLabelValue: Observable<String> = {
         return Observable
             .merge( status.asObservable().map({ status in
@@ -64,7 +65,7 @@ class ProgressView: UIView {
             target = newProgress
             currentProgress += (target - currentProgress) * 0.1
             innerProgress = currentProgress * toAngleScaler
-            self.progressVariable.value = newProgress
+            self.progressVariable.accept(newProgress)
             setImage()
         }
     }

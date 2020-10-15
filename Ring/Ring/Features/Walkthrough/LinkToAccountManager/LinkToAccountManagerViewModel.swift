@@ -28,13 +28,13 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
         return self.stateSubject.asObservable()
     }()
 
-    var userName = Variable<String>("")
-    var password = Variable<String>("")
-    var manager = Variable<String>("")
-    let notificationSwitch = Variable<Bool>(true)
+    var userName = BehaviorRelay<String>(value: "")
+    var password = BehaviorRelay<String>(value: "")
+    var manager = BehaviorRelay<String>(value: "")
+    let notificationSwitch = BehaviorRelay<Bool>(value: true)
     private let accountsService: AccountsService
     private let disposeBag = DisposeBag()
-    private let accountCreationState = Variable<AccountCreationState>(.unknown)
+    private let accountCreationState = BehaviorRelay<AccountCreationState>(value: .unknown)
     lazy var createState: Observable<AccountCreationState> = {
         return self.accountCreationState.asObservable()
     }()
@@ -54,7 +54,7 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
     }
 
     func linkToAccountManager() {
-        self.accountCreationState.value = .started
+        self.accountCreationState.accept(.started)
         self.accountsService
             .connectToAccountManager(username: userName.value,
                                      password: password.value,
@@ -62,16 +62,16 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
                                      emableNotifications: self.notificationSwitch.value)
             .subscribe(onNext: { [weak self] (_) in
                 guard let self = self else { return }
-                self.accountCreationState.value = .success
+                self.accountCreationState.accept(.success)
                 self.enablePushNotifications(enable: self.notificationSwitch.value)
                 DispatchQueue.main.async {
                     self.stateSubject.onNext(WalkthroughState.profileCreated)
                 }
                 }, onError: { [weak self] (error) in
                     if let error = error as? AccountCreationError {
-                        self?.accountCreationState.value = .error(error: error)
+                        self?.accountCreationState.accept(.error(error: error))
                     } else {
-                        self?.accountCreationState.value = .error(error: AccountCreationError.wrongCredentials)
+                        self?.accountCreationState.accept(.error(error: AccountCreationError.wrongCredentials))
                     }
             })
             .disposed(by: self.disposeBag)
