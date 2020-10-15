@@ -19,17 +19,40 @@
  */
 
 import Foundation
+import RxSwift
 
 public enum Durations {
     case textFieldThrottlingDuration
     case alertFlashDuration
+    case switchThrottlingDuration
+    case oneSecond
+    case halfSecond
+    case threeSeconds
+    case tenSeconds
+    case sixtySeconds
 
     var value: Double {
         switch self {
-        case .textFieldThrottlingDuration:
+        case .textFieldThrottlingDuration, .halfSecond:
             return 0.5
-        case .alertFlashDuration:
+        case .alertFlashDuration, .oneSecond:
             return 1.0
+        case .switchThrottlingDuration:
+            return 0.2
+        case .threeSeconds:
+            return 3
+        case .tenSeconds:
+            return 10
+        case .sixtySeconds:
+            return 60
         }
+    }
+
+    var milliseconds: Int {
+        return Int(self.value * 1000)
+    }
+
+    func toTimeInterval() -> RxTimeInterval {
+        return RxTimeInterval.milliseconds(milliseconds)
     }
 }

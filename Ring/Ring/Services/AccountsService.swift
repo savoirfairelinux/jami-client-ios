@@ -111,7 +111,7 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    var accountsObservable = Variable<[AccountModel]>([AccountModel]())
+    var accountsObservable = BehaviorRelay<[AccountModel]>(value: [AccountModel]())
 
     let currentAccountChanged = PublishSubject<AccountModel?>()
     let currentWillChange = PublishSubject<AccountModel?>()
@@ -188,7 +188,7 @@ class AccountsService: AccountAdapterDelegate {
             }
         }
         reloadAccounts()
-        accountsObservable.value = self.accountList
+        accountsObservable.accept(self.accountList)
         if selectedAccount != nil {
             let currentAccount = self.accountList.filter({ account in
                 return account == selectedAccount
@@ -471,24 +471,24 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func connectToAccountManager(username: String, password: String, serverUri: String, emableNotifications: Bool) -> Observable<AccountModel> {
-        let accountState = Variable<ConnectAccountState>(ConnectAccountState.initializinzg)
-        let newAccountId = Variable<String>("")
+        let accountState = BehaviorRelay<ConnectAccountState>(value: ConnectAccountState.initializinzg)
+        let newAccountId = BehaviorRelay<String>(value: "")
         self.sharedResponseStream
             .subscribe(onNext: { (event) in
                 if event.getEventInput(ServiceEventInput.registrationState) == Initializing {
                     return
                 }
                 if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                    accountState.value = ConnectAccountState.networkError
-                    newAccountId.value = ""
+                    accountState.accept(ConnectAccountState.networkError)
+                    newAccountId.accept("")
                 } else if event.eventType == ServiceEventType.registrationStateChanged,
                     event.getEventInput(ServiceEventInput.registrationState) == Registered {
-                    accountState.value = ConnectAccountState.created
+                    accountState.accept(ConnectAccountState.created)
                 } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||
                     event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth ||
                     event.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
-                    accountState.value = ConnectAccountState.error
-                    newAccountId.value = ""
+                    accountState.accept(ConnectAccountState.error)
+                    newAccountId.accept("")
                 }
             }, onError: { (_) in
             })
@@ -530,7 +530,7 @@ class AccountsService: AccountAdapterDelegate {
                 guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
                     throw AccountCreationError.wrongCredentials
                 }
-                newAccountId.value = accountId
+                newAccountId.accept(accountId)
             } catch {
             }
         }
@@ -901,8 +901,8 @@ class AccountsService: AccountAdapterDelegate {
         return proxyEnabled
     }
 
-    func proxyEnabled(accountID: String) -> Variable<Bool> {
-        let variable = Variable<Bool>(getCurrentProxyState(accountID: accountID))
+    func proxyEnabled(accountID: String) -> BehaviorRelay<Bool> {
+        let variable = BehaviorRelay<Bool>(value: getCurrentProxyState(accountID: accountID))
         self.sharedResponseStream
             .filter({ event -> Bool in
                 if let accountId: String = event.getEventInput(.accountId) {
@@ -913,7 +913,7 @@ class AccountsService: AccountAdapterDelegate {
             })
             .subscribe(onNext: { (event) in
                 if let state: Bool = event.getEventInput(.state) {
-                    variable.value = state
+                    variable.accept(state)
                 }
             })
             .disposed(by: self.disposeBag)

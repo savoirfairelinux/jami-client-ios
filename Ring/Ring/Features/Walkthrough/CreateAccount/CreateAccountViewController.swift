@@ -305,7 +305,15 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             })
             .disposed(by: self.disposeBag)
         self.notificationsSwitch.rx.isOn.bind(to: self.viewModel.notificationSwitch).disposed(by: self.disposeBag)
-        self.usernameTextField.rx.text.orEmpty.throttle(3, scheduler: MainScheduler.instance).distinctUntilChanged().bind(to: self.viewModel.username).disposed(by: self.disposeBag)
+        self.usernameTextField
+            .rx
+            .text
+            .orEmpty
+            .throttle(Durations.threeSeconds.toTimeInterval(),
+                      scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .bind(to: self.viewModel.username)
+            .disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
         self.confirmPasswordTextField.rx.text.orEmpty.bind(to: self.viewModel.confirmPassword).disposed(by: self.disposeBag)
 

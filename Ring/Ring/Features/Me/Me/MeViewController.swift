@@ -129,12 +129,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: self.disposeBag)
         let infoItem = UIBarButtonItem(customView: infoButton)
         let qrCodeButtonItem = UIBarButtonItem(customView: qrCodeButton)
-        infoButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        infoButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.infoItemTapped()
             })
             .disposed(by: self.disposeBag)
-        qrCodeButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        qrCodeButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.qrCodeItemTapped()
             })
@@ -319,7 +319,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .disposed(by: cell.disposeBag)
                     switchView.rx
                         .isOn.changed
-                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
                         .distinctUntilChanged()
                         .asObservable()
                         .subscribe(onNext: {[weak self] enable in
@@ -497,7 +497,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     switchView.setOn(self.viewModel.notificationsEnabled, animated: false)
                     switchView.rx
                         .isOn.changed
-                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
                         .distinctUntilChanged()
                         .asObservable()
                         .subscribe(onNext: {[weak self] value in
@@ -521,7 +521,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .disposed(by: cell.disposeBag)
                     switchView.rx
                         .isOn.changed
-                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
                         .distinctUntilChanged()
                         .asObservable()
                         .subscribe(onNext: {[weak self] enable in
@@ -622,7 +622,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .disposed(by: cell.disposeBag)
                     switchView.rx
                         .isOn.changed
-                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
                         .distinctUntilChanged()
                         .asObservable()
                         .subscribe(onNext: {[weak self] enable in
@@ -746,7 +746,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 .disposed(by: cell.disposeBag)
             text.rx.text.orEmpty.distinctUntilChanged()
                 .bind { [weak self, weak rightButton] newText in
-                    self?.viewModel.sipPassword.value = newText
+                    self?.viewModel.sipPassword.accept(newText)
                     rightButton?.isHidden = newText.isEmpty
                     rightButton?.isEnabled = !newText.isEmpty
                 }

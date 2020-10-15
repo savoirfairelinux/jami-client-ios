@@ -20,6 +20,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class ScanViewModel: ViewModel, Stateable {
 
@@ -44,7 +45,7 @@ class ScanViewModel: ViewModel, Stateable {
                                                                               infoHach: recipientRingId),
                                              accountId: currentAccount.id)
         let newConversation = ConversationViewModel(with: self.injectionBag)
-        newConversation.conversation = Variable<ConversationModel>(conversation)
+        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
         self.showConversation(withConversationViewModel: newConversation)
     }
 

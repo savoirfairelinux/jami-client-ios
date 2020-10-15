@@ -36,7 +36,7 @@ class SendFileViewModel: Stateable, ViewModel {
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
-    private let recordingState = Variable<RecordingState>(.initial)
+    private let recordingState = BehaviorRelay<RecordingState>(value: .initial)
 
     lazy var hideVideoControls: Observable<Bool> = {
         Observable.just(audioOnly)
@@ -83,7 +83,7 @@ class SendFileViewModel: Stateable, ViewModel {
     lazy var recordDuration: Driver<String> = {
         let emptyString = Observable.just("")
         let durationTimer = Observable<Int>
-            .interval(1.0, scheduler: MainScheduler.instance)
+            .interval(Durations.oneSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .takeUntil(self.recordingState
                 .asObservable()
                 .filter { state in
@@ -168,7 +168,7 @@ class SendFileViewModel: Stateable, ViewModel {
             .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
                 return
         }
-        recordingState.value = .recording
+        recordingState.accept(.recording)
         fileName = name
     }
 
@@ -182,7 +182,7 @@ class SendFileViewModel: Stateable, ViewModel {
 
     func stopRecording() {
         self.videoService.stopLocalRecorder(path: fileName)
-        recordingState.value = .recorded
+        recordingState.accept(.recorded)
         //create player after delay so recording could be finished
         DispatchQueue.main.asyncAfter(deadline: (.now() + 1)) { [weak self] in
             self?.createPlayer()
@@ -209,7 +209,7 @@ class SendFileViewModel: Stateable, ViewModel {
                                           peerInfoHash: self.conversation.hash,
                                           localIdentifier: nil)
         self.videoService.videRecordingFinished()
-        self.recordingState.value = .sent
+        self.recordingState.accept(.sent)
     }
 
     func cancel() {
@@ -219,7 +219,7 @@ class SendFileViewModel: Stateable, ViewModel {
         player?.closePlayer()
         self.player = nil
         self.videoService.videRecordingFinished()
-        recordingState.value = .sent
+        recordingState.accept(.sent)
         if fileName.isEmpty {
             return
         }
@@ -233,15 +233,15 @@ class SendFileViewModel: Stateable, ViewModel {
     //player
     var player: PlayerViewModel?
 
-    var playerDuration = Variable<Float>(0)
+    var playerDuration = BehaviorRelay<Float>(value: 0)
     var playerPosition = PublishSubject<Float>()
 
-    var seekTimeVariable = Variable<Float>(0) //player position set by user
+    var seekTimeVariable = BehaviorRelay<Float>(value: 0) //player position set by user
     let playBackFrame = PublishSubject<UIImage?>()
 
-    var pause = Variable<Bool>(true)
-    var audioMuted = Variable<Bool>(true)
-    var playerReady = Variable<Bool>(false)
+    var pause = BehaviorRelay<Bool>(value: true)
+    var audioMuted = BehaviorRelay<Bool>(value: true)
+    var playerReady = BehaviorRelay<Bool>(value: false)
     var playBackDisposeBag = DisposeBag()
 }
 
@@ -277,7 +277,7 @@ extension SendFileViewModel {
             })
             .take(1)
             .subscribe(onNext: { [weak self] ready in
-                self?.playerReady.value = ready
+                self?.playerReady.accept(ready)
                 self?.playBackDisposeBag = DisposeBag()
                 self?.subscribePlayerControls()
             })
@@ -287,19 +287,19 @@ extension SendFileViewModel {
     func subscribePlayerControls() {
         player?.audioMuted.asObservable()
             .subscribe(onNext: { [weak self] muted in
-                self?.audioMuted.value = muted
+                self?.audioMuted.accept(muted)
             })
             .disposed(by: playBackDisposeBag)
 
         player?.pause.asObservable()
             .subscribe(onNext: { [weak self] pause in
-                self?.pause.value = pause
+                self?.pause.accept(pause)
             })
             .disposed(by: playBackDisposeBag)
 
         player?.playerDuration.asObservable()
             .subscribe(onNext: { [weak self] duration in
-                self?.playerDuration.value = duration
+                self?.playerDuration.accept(duration)
             })
             .disposed(by: playBackDisposeBag)
 
@@ -317,7 +317,7 @@ extension SendFileViewModel {
 
         seekTimeVariable.asObservable()
             .subscribe(onNext: { [weak self](position) in
-                self?.player?.seekTimeVariable.value = position
+                self?.player?.seekTimeVariable.accept(position)
             })
             .disposed(by: playBackDisposeBag)
     }

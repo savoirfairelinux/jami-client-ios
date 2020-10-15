@@ -87,7 +87,7 @@ var viewModel: LinkToAccountManagerViewModel!
 
     func bindViewToViewModel() {
         self.userNameTextField.rx.text.orEmpty
-            .throttle(3, scheduler: MainScheduler.instance)
+            .throttle(Durations.threeSeconds.toTimeInterval(), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(to: self.viewModel.userName)
             .disposed(by: self.disposeBag)

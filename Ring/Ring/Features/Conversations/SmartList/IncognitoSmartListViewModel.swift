@@ -68,11 +68,11 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
     }
 
     func conversationFound(conversation: ConversationViewModel?, name: String) {
-        contactFoundConversation.value = conversation
+        contactFoundConversation.accept(conversation)
         lookupName.accept(name)
     }
 
-    private var contactFoundConversation = Variable<ConversationViewModel?>(nil)
+    private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
 
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
     }

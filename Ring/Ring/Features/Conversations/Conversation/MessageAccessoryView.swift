@@ -22,6 +22,7 @@
 import UIKit
 import Reusable
 import RxSwift
+import RxRelay
 
 protocol MessageAccessoryViewDelegate: class {
     func setIsComposing(isComposing: Bool)
@@ -37,8 +38,8 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
     @IBOutlet weak var emojisButtonTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var textViewHeightConstraints: NSLayoutConstraint!
-    var messageTextViewHeight = Variable<CGFloat>(0.00)
-    var messageTextViewContent = Variable<String>("")
+    var messageTextViewHeight = BehaviorRelay<CGFloat>(value: 0.00)
+    var messageTextViewContent = BehaviorRelay<String>(value: "")
     weak var delegate: MessageAccessoryViewDelegate?
 
     var blurEffect: UIVisualEffectView?
@@ -93,11 +94,11 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
                 self.layoutIfNeeded()
             }
         }
-        self.messageTextViewHeight.value = height
+        self.messageTextViewHeight.accept(height)
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        self.messageTextViewContent.value = textView.text
+        self.messageTextViewContent.accept(textView.text)
     }
 
     func editingChanges() {

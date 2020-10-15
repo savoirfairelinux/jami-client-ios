@@ -71,10 +71,10 @@ class JamiSearchViewModel {
     }()
 
     private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
-    private var filteredResults = Variable([ConversationViewModel]())
+    private var filteredResults = BehaviorRelay(value: [ConversationViewModel]())
     private let jamsResults = BehaviorRelay<[ConversationViewModel]>(value: [])
 
-    let searchBarText = Variable<String>("")
+    let searchBarText = BehaviorRelay<String>(value: "")
     var isSearching: Observable<Bool>!
     var searchStatus = PublishSubject<String>()
     let dataSource: FilterConversationDataSource
@@ -124,9 +124,9 @@ class JamiSearchViewModel {
                         let conversation = ConversationModel(withParticipantUri: uri, accountId: account.id)
                         let newConversation = ConversationViewModel(with: injectionBag)
                         if lookupResponse.name == self.searchBarText.value {
-                            newConversation.userName.value = lookupResponse.name
+                            newConversation.userName.accept(lookupResponse.name)
                         }
-                        newConversation.conversation = Variable<ConversationModel>(conversation)
+                        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
                         self.contactFoundConversation.accept(newConversation)
                         self.dataSource.conversationFound(conversation: newConversation, name: self.searchBarText.value)
                     }
@@ -200,7 +200,7 @@ class JamiSearchViewModel {
         self.contactFoundConversation.accept(nil)
         self.jamsResults.accept([])
         self.dataSource.conversationFound(conversation: nil, name: "")
-        self.filteredResults.value.removeAll()
+        self.filteredResults.accept([])
         self.searchStatus.onNext("")
 
         if text.isEmpty { return }
@@ -217,7 +217,7 @@ class JamiSearchViewModel {
                 })
 
         if !filteredConversations.isEmpty {
-            self.filteredResults.value = filteredConversations
+            self.filteredResults.accept(filteredConversations)
         }
 
         if self.accountsService.isJams(for: currentAccount.id) {
@@ -232,7 +232,7 @@ class JamiSearchViewModel {
                                                  accountId: currentAccount.id,
                                                  hash: text)
             let newConversation = ConversationViewModel(with: self.injectionBag)
-            newConversation.conversation = Variable<ConversationModel>(conversation)
+            newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
             self.contactFoundConversation.accept(newConversation)
             self.dataSource.conversationFound(conversation: newConversation, name: self.searchBarText.value)
             return
@@ -249,7 +249,7 @@ class JamiSearchViewModel {
             let conversation = ConversationModel(withParticipantUri: uri,
                                                  accountId: currentAccount.id)
             let newConversation = ConversationViewModel(with: self.injectionBag)
-            newConversation.conversation = Variable<ConversationModel>(conversation)
+            newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
             self.contactFoundConversation.accept(newConversation)
             self.dataSource.conversationFound(conversation: newConversation, name: self.searchBarText.value)
         }
