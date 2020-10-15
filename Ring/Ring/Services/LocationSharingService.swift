@@ -160,7 +160,7 @@ class LocationSharingService: NSObject {
 
     private func initialize() {
         self.currentLocation
-            .throttle(10, scheduler: MainScheduler.instance)
+            .throttle(Durations.tenSeconds.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] location in
                 guard let self = self, let location = location else { return }
                 self.doShareLocationAction(location)
@@ -321,7 +321,7 @@ extension LocationSharingService {
 
     func startReceivingService() {
         self.stopReceivingService()
-        self.receivingService = Observable<Int>.interval(60, scheduler: MainScheduler.instance)
+        self.receivingService = Observable<Int>.interval(Durations.sixtySeconds.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe({ [weak self] _ in
                 guard let self = self else { return }
 

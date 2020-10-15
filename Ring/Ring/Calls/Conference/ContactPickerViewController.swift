@@ -193,7 +193,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         self.searchBar.tintColor = UIColor.jamiMain
         self.searchBar.placeholder = L10n.Smartlist.searchBarPlaceholder
         self.searchBar.rx.text.orEmpty
-            .throttle(0.5, scheduler: MainScheduler.instance)
+            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(to: self.viewModel.search)
             .disposed(by: disposeBag)
@@ -226,9 +226,10 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             dismissGR.delegate = self
             self.searchBar.addGestureRecognizer(dismissGR)
             self.rowSelectionHandler = { [weak self] row in
-                guard let contactToAdd: ConferencableItem = try? self?.tableView.rx.model(at: row) else { return }
-                self?.viewModel.contactSelected(contacts: [contactToAdd])
-                self?.removeView()
+                guard let self = self else { return }
+                guard let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: row) else { return }
+                self.viewModel.contactSelected(contacts: [contactToAdd])
+                self.removeView()
             }
         case .forConversation:
             self.searchBar.backgroundImage = UIImage()
@@ -240,7 +241,8 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                     let paths = self?.tableView.indexPathsForSelectedRows
                     var contacts = [ConferencableItem]()
                     paths?.forEach({ (path) in
-                        if let contactToAdd: ConferencableItem = try? self?.tableView.rx.model(at: path) {
+                        guard let self = self else { return }
+                        if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: path) {
                             contacts.append(contactToAdd)
                         }
                     })

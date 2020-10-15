@@ -75,7 +75,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             cancelButton.setTitle(L10n.Actions.cancelAction, for: .normal)
             cancelButton.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
             let buttonItem = UIBarButtonItem(customView: cancelButton)
-            cancelButton.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+            cancelButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] in
                     self?.viewModel.cancelWalkthrough()
                 })

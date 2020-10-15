@@ -19,6 +19,7 @@
  */
 
 import RxSwift
+import RxCocoa
 import Contacts
 import SwiftyBeaver
 
@@ -26,9 +27,9 @@ class ContactRequestItem {
 
     let contactRequest: ContactRequestModel
 
-    let userName = Variable("")
-    let profileName = Variable("")
-    let profileImageData = Variable<Data?>(nil)
+    let userName = BehaviorRelay(value: "")
+    let profileName = BehaviorRelay(value: "")
+    let profileImageData = BehaviorRelay<Data?>(value: nil)
     lazy var bestName: Observable<String> = {
         return Observable
             .combineLatest(userName.asObservable(),
@@ -45,9 +46,9 @@ class ContactRequestItem {
     init(withContactRequest contactRequest: ContactRequestModel, profileService: ProfilesService,
          contactService: ContactsService) {
         self.contactRequest = contactRequest
-        self.userName.value = contactRequest.ringId
-        self.profileImageData.value = self.contactRequest.vCard?.imageData
-        self.profileName.value = VCardUtils.getName(from: self.contactRequest.vCard)
+        self.userName.accept(contactRequest.ringId)
+        self.profileImageData.accept(self.contactRequest.vCard?.imageData)
+        self.profileName.accept(VCardUtils.getName(from: self.contactRequest.vCard))
         guard let uri = JamiURI(schema: URIType.ring,
                                 infoHach: contactRequest.ringId)
             .uriString else { return }
@@ -58,10 +59,10 @@ class ContactRequestItem {
                 if let photo = profile.photo, !photo.isEmpty,
                     let data = NSData(base64Encoded: photo,
                                       options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self?.profileImageData.value = data
+                    self?.profileImageData.accept(data)
                 }
                 if let name = profile.alias, !name.isEmpty {
-                    self?.profileName.value = name
+                    self?.profileName.accept(name)
                 }
             })
             .disposed(by: self.disposeBag)

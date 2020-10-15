@@ -55,7 +55,7 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         self.viewModel.userStartSeeking()
         progressSlider.rx.value
         .subscribe(onNext: { [weak self] (value) in
-            self?.viewModel.seekTimeVariable.value = Float(value)
+            self?.viewModel.seekTimeVariable.accept(Float(value))
         })
         .disposed(by: self.sliderDisposeBag)
     }

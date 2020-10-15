@@ -20,6 +20,7 @@
 
 import RxDataSources
 import RxSwift
+import RxCocoa
 
 struct Contact {
     var uri: String
@@ -27,7 +28,7 @@ struct Contact {
     var registeredName: String
     var hash: String
 
-    lazy var presenceStatus: Variable<Bool>?  = {
+    lazy var presenceStatus: BehaviorRelay<Bool>?  = {
          self.presenceService
             .contactPresence[self.hash]
     }()

@@ -21,6 +21,7 @@
 import Contacts
 import SwiftyBeaver
 import RxSwift
+import RxRelay
 
 enum ContactServiceError: Error {
     case acceptTrustRequestFailed
@@ -37,8 +38,8 @@ class ContactsService {
     private let log = SwiftyBeaver.self
     private let disposeBag = DisposeBag()
 
-    let contactRequests = Variable([ContactRequestModel]())
-    let contacts = Variable([ContactModel]())
+    let contactRequests = BehaviorRelay(value: [ContactRequestModel]())
+    let contacts = BehaviorRelay(value: [ContactModel]())
 
     let contactStatus = PublishSubject<ContactModel>()
 
@@ -89,10 +90,12 @@ class ContactsService {
         let contacts = profiles.map({ profile in
             return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHach: profile.uri))
         })
-        self.contacts.value.removeAll()
+        self.contacts.accept([])
         for contact in contacts {
             if self.contacts.value.firstIndex(of: contact) == nil {
-                self.contacts.value.append(contact)
+                var values = self.contacts.value
+                values.append(contact)
+                self.contacts.accept(values)
                 self.log.debug("contact: \(String(describing: contact.userName))")
             }
         }
@@ -114,10 +117,12 @@ class ContactsService {
         if let contacts = contactsDictionaries?.map({ contactDict in
             return ContactModel(withDictionary: contactDict)
         }) {
-            self.contacts.value.removeAll()
+            self.contacts.accept([])
             for contact in contacts {
                 if self.contacts.value.firstIndex(of: contact) == nil {
-                    self.contacts.value.append(contact)
+                    var values = self.contacts.value
+                    values.append(contact)
+                    self.contacts.accept(values)
                     self.log.debug("contact: \(String(describing: contact.userName))")
                 }
             }
@@ -125,7 +130,7 @@ class ContactsService {
     }
 
     func loadContactRequests(withAccount accountId: String) {
-        self.contactRequests.value.removeAll()
+        self.contactRequests.accept([])
         //Load trust requests from daemon
         let trustRequestsDictionaries = self.contactsAdapter.trustRequests(withAccountId: accountId)
 
@@ -135,7 +140,9 @@ class ContactsService {
         }) {
             for contactRequest in contactRequests {
                 if self.contactRequest(withRingId: contactRequest.ringId) == nil {
-                    self.contactRequests.value.append(contactRequest)
+                    var values = self.contactRequests.value
+                    values.append(contactRequest)
+                    self.contactRequests.accept(values)
                 }
             }
         }
@@ -237,7 +244,9 @@ class ContactsService {
             guard let self = self else { return Disposables.create { } }
             self.contactsAdapter.addContact(withURI: contact.hash, accountId: account.id)
             if self.contact(withUri: contact.uriString ?? "") == nil {
-                self.contacts.value.append(contact)
+                var values = self.contacts.value
+                values.append(contact)
+                self.contacts.accept(values)
             }
             observable.on(.completed)
             return Disposables.create { }
@@ -267,7 +276,9 @@ class ContactsService {
         guard let index = self.contactRequests.value.firstIndex(where: { $0 === contactRequestToRemove }) else {
             return
         }
-        self.contactRequests.value.remove(at: index)
+        var values = self.contactRequests.value
+        values.remove(at: index)
+        self.contactRequests.accept(values)
     }
 
     func unbanContact(contact: ContactModel, account: AccountModel) {
@@ -280,7 +291,7 @@ class ContactsService {
                 event.addEventInput(.uri, value: contact.hash)
                 self.responseStream.onNext(event)
                 self.contactStatus.onNext(contact)
-                self.contacts.value = self.contacts.value
+                self.contacts.accept(self.contacts.value)
             })
             .disposed(by: self.disposeBag)
     }
@@ -301,7 +312,9 @@ extension ContactsService: ContactsAdapterDelegate {
                                                      vCard: vCard,
                                                      receivedDate: receivedDate,
                                                      accountId: accountId)
-            self.contactRequests.value.append(contactRequest)
+            var values = self.contactRequests.value
+            values.append(contactRequest)
+            self.contactRequests.accept(values)
             var event = ServiceEvent(withEventType: .contactRequestReceived)
             event.addEventInput(.accountId, value: accountId)
             event.addEventInput(.uri, value: senderAccount)
@@ -342,7 +355,9 @@ extension ContactsService: ContactsAdapterDelegate {
             }) {
                 for contact in contacts {
                     if self.contacts.value.firstIndex(of: contact) == nil {
-                        self.contacts.value.append(contact)
+                        var values = self.contacts.value
+                        values.append(contact)
+                        self.contacts.accept(values)
                         contactStatus.onNext(contact)
                     }
                 }
@@ -402,11 +417,11 @@ extension ContactsService: ContactsAdapterDelegate {
             for contact in self.contacts.value {
                 self.contactsAdapter.removeContact(withURI: contact.hash, accountId: accountId, ban: false)
             }
-            self.contacts.value.removeAll()
+            self.contacts.accept([])
             self.contactRequests.value.forEach { (request) in
                 self.contactsAdapter.discardTrustRequest(fromContact: request.ringId, withAccountId: accountId)
             }
-            self.contactRequests.value.removeAll()
+            self.contactRequests.accept([])
             self.dbManager
                 .clearAllHistoryFor(accountId: accountId)
                 .subscribe()

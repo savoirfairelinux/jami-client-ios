@@ -21,6 +21,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 enum PasswordValidationState {
     case validated
@@ -198,15 +199,15 @@ class CreateAccountViewModel: Stateable, ViewModel {
     private let nameService: NameService
 
     // MARK: - Rx Variables for UI binding
-    private let accountCreationState = Variable<AccountCreationState>(.unknown)
+    private let accountCreationState = BehaviorRelay<AccountCreationState>(value: .unknown)
     lazy var createState: Observable<AccountCreationState> = {
         return self.accountCreationState.asObservable()
     }()
-    let username = Variable<String>("")
-    let password = Variable<String>("")
-    let confirmPassword = Variable<String>("")
-    let registerUsername = Variable<Bool>(true)
-    let notificationSwitch = Variable<Bool>(true)
+    let username = BehaviorRelay<String>(value: "")
+    let password = BehaviorRelay<String>(value: "")
+    let confirmPassword = BehaviorRelay<String>(value: "")
+    let registerUsername = BehaviorRelay<Bool>(value: true)
+    let notificationSwitch = BehaviorRelay<Bool>(value: true)
     lazy var passwordValidationState: Observable<PasswordValidationState> = {
         return Observable.combineLatest(self.password.asObservable(), self.confirmPassword.asObservable())
         { (password: String, confirmPassword: String) -> PasswordValidationState in
@@ -225,7 +226,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
             return .validated
         }
     }()
-    lazy var usernameValidationState = Variable<UsernameValidationState>(.unknown)
+    lazy var usernameValidationState = BehaviorRelay<UsernameValidationState>(value: .unknown)
     lazy var canAskForAccountCreation: Observable<Bool> = {
         return Observable.combineLatest(self.passwordValidationState.asObservable(),
                                         self.usernameValidationState.asObservable(),
@@ -268,20 +269,20 @@ class CreateAccountViewModel: Stateable, ViewModel {
             .subscribe(onNext: { [weak self] (status) in
                 switch status {
                 case .lookingUp:
-                    self?.usernameValidationState.value = .lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability)
+                    self?.usernameValidationState.accept(.lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability))
                 case .invalid:
-                    self?.usernameValidationState.value = .invalid(message: L10n.CreateAccount.invalidUsername)
+                    self?.usernameValidationState.accept(.invalid(message: L10n.CreateAccount.invalidUsername))
                 case .alreadyTaken:
-                    self?.usernameValidationState.value = .unavailable(message: L10n.CreateAccount.usernameAlreadyTaken)
+                    self?.usernameValidationState.accept(.unavailable(message: L10n.CreateAccount.usernameAlreadyTaken))
                 default:
-                    self?.usernameValidationState.value = .available
+                    self?.usernameValidationState.accept(.available)
                 }
             })
             .disposed(by: self.disposeBag)
     }
 
     func createAccount() {
-        self.accountCreationState.value = .started
+        self.accountCreationState.accept(.started)
 
         let username = self.username.value
         let password = self.password.value
@@ -293,7 +294,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
             .subscribe(onNext: { [weak self] (account) in
                 guard let self = self else { return }
                 if username.isEmpty {
-                    self.accountCreationState.value = .success
+                    self.accountCreationState.accept(.success)
                     DispatchQueue.main.async {
                         self.stateSubject.onNext(WalkthroughState.accountCreated)
                     }
@@ -304,16 +305,16 @@ class CreateAccountViewModel: Stateable, ViewModel {
                                                                          name: username)
                     .subscribe(onNext: { registered in
                         if registered {
-                            self.accountCreationState.value = .success
+                            self.accountCreationState.accept(.success)
                             DispatchQueue.main.async {
                                 self.stateSubject
                                     .onNext(WalkthroughState.accountCreated)
                             }
                         } else {
-                            self.accountCreationState.value = .nameNotRegistered
+                            self.accountCreationState.accept(.nameNotRegistered)
                         }
                     }, onError: { _ in
-                        self.accountCreationState.value = .nameNotRegistered
+                        self.accountCreationState.accept(.nameNotRegistered)
                     })
                 DispatchQueue.main
                     .asyncAfter(deadline: .now() + 6) {
@@ -321,14 +322,14 @@ class CreateAccountViewModel: Stateable, ViewModel {
                         if self.accountCreationState.value.isCompleted {
                             return
                         }
-                        self.accountCreationState.value = .timeOut
+                        self.accountCreationState.accept(.timeOut)
                     }
                 }, onError: { [weak self] (error) in
                     guard let self = self else { return }
                     if let error = error as? AccountCreationError {
-                        self.accountCreationState.value = .error(error: error)
+                        self.accountCreationState.accept(.error(error: error))
                     } else {
-                        self.accountCreationState.value = .error(error: AccountCreationError.unknown)
+                        self.accountCreationState.accept(.error(error: AccountCreationError.unknown))
                     }
             })
             .disposed(by: self.disposeBag)

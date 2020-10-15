@@ -20,12 +20,13 @@
 
 import SwiftyBeaver
 import RxSwift
+import RxCocoa
 
 class PresenceService {
 
     private let presenceAdapter: PresenceAdapter
     private let log = SwiftyBeaver.self
-    var contactPresence: [String: Variable<Bool>]
+    var contactPresence: [String: BehaviorRelay<Bool>]
 
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
@@ -33,7 +34,7 @@ class PresenceService {
     private let disposeBag = DisposeBag()
 
     init(withPresenceAdapter presenceAdapter: PresenceAdapter) {
-        self.contactPresence = [String: Variable<Bool>]()
+        self.contactPresence = [String: BehaviorRelay<Bool>]()
         self.presenceAdapter = presenceAdapter
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
@@ -62,10 +63,10 @@ class PresenceService {
             return
         }
         if let presenceForContact = contactPresence[uri] {
-            presenceForContact.value = false
+            presenceForContact.accept(false)
             return
         }
-        let observableValue = Variable<Bool>(false)
+        let observableValue = BehaviorRelay<Bool>(value: false)
         contactPresence[uri] = observableValue
         var event = ServiceEvent(withEventType: .presenseSubscribed)
         event.addEventInput(.accountId, value: accountId)
@@ -81,10 +82,10 @@ extension PresenceService: PresenceAdapterDelegate {
                               withLineStatus lineStatus: String) {
         let value = status > 0 ? true : false
         if let presenceForContact = contactPresence[uri] {
-            presenceForContact.value = value
+            presenceForContact.accept(value)
             return
         }
-        let observableValue = Variable<Bool>(value)
+        let observableValue = BehaviorRelay<Bool>(value: value)
         contactPresence[uri] = observableValue
         log.debug("newBuddyNotification: uri=\(uri), status=\(status)")
     }

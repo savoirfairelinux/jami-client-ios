@@ -258,6 +258,7 @@
 		2662FC7D246B78E800FA7782 /* IncognitoSmartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */; };
 		2662FC7F246B790400FA7782 /* IncognitoSmartListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC7E246B790400FA7782 /* IncognitoSmartListViewModel.swift */; };
 		2662FC81246B793500FA7782 /* IncognitoSmartListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2662FC80246B793500FA7782 /* IncognitoSmartListViewController.storyboard */; };
+		266C1DBB2539F3A300978E87 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 266C1DB82539F3A300978E87 /* RxRelay.framework */; };
 		2673D62A25261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62925261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift */; };
 		2673D62E252624AB000C56CB /* ConferenceMenuItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */; };
 		2673D630252657B0000C56CB /* ConferenceLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62F252657B0000C56CB /* ConferenceLayout.swift */; };
@@ -666,6 +667,7 @@
 		2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncognitoSmartListViewController.swift; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewController.swift; sourceTree = SOURCE_ROOT; };
 		2662FC7E246B790400FA7782 /* IncognitoSmartListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncognitoSmartListViewModel.swift; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewModel.swift; sourceTree = SOURCE_ROOT; };
 		2662FC80246B793500FA7782 /* IncognitoSmartListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = IncognitoSmartListViewController.storyboard; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewController.storyboard; sourceTree = SOURCE_ROOT; };
+		266C1DB82539F3A300978E87 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		2673D62925261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceMenuItemsManagerTest.swift; sourceTree = "<group>"; };
 		2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceMenuItemsManager.swift; sourceTree = "<group>"; };
 		2673D62F252657B0000C56CB /* ConferenceLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceLayout.swift; sourceTree = "<group>"; };
@@ -821,6 +823,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				266C1DBB2539F3A300978E87 /* RxRelay.framework in Frameworks */,
 				649AD3C324B4CFC700A0236D /* libsqlite3.tbd in Frameworks */,
 				649AD3C624B4CFD500A0236D /* libxml2.tbd in Frameworks */,
 				04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */,
@@ -931,6 +934,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				266C1DB82539F3A300978E87 /* RxRelay.framework */,
 				6452144724B4ACDE007203D5 /* libsqlite3.tbd */,
 				6452144524B4ACC8007203D5 /* libxml2.tbd */,
 				6452144324B4ACA7007203D5 /* CoreLocation.framework */,
@@ -2105,6 +2109,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SQLite.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/GSKStretchyHeaderView.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
 			);
 			name = "⚙️ Copy Frameworks";
 			outputPaths = (
@@ -2121,6 +2126,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SQLite.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/GSKStretchyHeaderView.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRelay.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

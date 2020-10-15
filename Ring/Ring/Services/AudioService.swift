@@ -21,6 +21,7 @@
 import Foundation
 import SwiftyBeaver
 import RxSwift
+import RxRelay
 
 enum OutputPortType: Int {
     case builtinspk = 0
@@ -35,8 +36,8 @@ class AudioService {
 
     private let audioAdapter: AudioAdapter
 
-    var isHeadsetConnected = Variable<Bool>(false)
-    var isOutputToSpeaker = Variable<Bool>(true)
+    var isHeadsetConnected = BehaviorRelay<Bool>(value: false)
+    var isOutputToSpeaker = BehaviorRelay<Bool>(value: true)
 
     var enableSwitchAudio: Observable<Bool> {
         return self.isHeadsetConnected.asObservable()
@@ -62,7 +63,7 @@ class AudioService {
     func connectAudioSignal() {
         let bluetoothConnected = bluetoothAudioConnected()
         let headphonesConnected = headphoneAudioConnected()
-        isHeadsetConnected.value = bluetoothConnected || headphonesConnected
+        isHeadsetConnected.accept(bluetoothConnected || headphonesConnected)
 
         // Listen for audio route changes
         NotificationCenter.default.addObserver(
@@ -75,7 +76,7 @@ class AudioService {
     func overrideAudioRoute() {
         let bluetoothConnected = bluetoothAudioConnected()
         let headphonesConnected = headphoneAudioConnected()
-        isHeadsetConnected.value = bluetoothConnected || headphonesConnected
+        isHeadsetConnected.accept(bluetoothConnected || headphonesConnected)
         if bluetoothConnected {
             setAudioOutputDevice(port: OutputPortType.bluetooth)
             return
@@ -105,17 +106,17 @@ class AudioService {
     }
 
     func overrideToSpeaker() {
-        isOutputToSpeaker.value = true
+        isOutputToSpeaker.accept(true)
         setAudioOutputDevice(port: OutputPortType.builtinspk)
     }
 
     func overrideToReceiver() {
-        isOutputToSpeaker.value = false
+        isOutputToSpeaker.accept(false)
         setAudioOutputDevice(port: OutputPortType.receiver)
     }
 
     func setDefaultOutput(toSpeaker: Bool, override: Bool = false) {
-        isOutputToSpeaker.value = toSpeaker
+        isOutputToSpeaker.accept(toSpeaker)
         if override {
             overrideAudioRoute()
         }

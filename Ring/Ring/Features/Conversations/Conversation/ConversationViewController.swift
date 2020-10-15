@@ -484,7 +484,7 @@ class ConversationViewController: UIViewController,
         let tapGesture = UITapGestureRecognizer()
         titleView.addGestureRecognizer(tapGesture)
         tapGesture.rx.event
-            .throttle(RxTimeInterval(2), scheduler: MainScheduler.instance)
+            .throttle(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
             .bind(onNext: { [weak self] _ in
                 self?.contactTapped()
             })
@@ -547,7 +547,7 @@ class ConversationViewController: UIViewController,
         //set navigation buttons - call and send contact request
         let inviteItem = UIBarButtonItem()
         inviteItem.image = UIImage(named: "add_person")
-        inviteItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        inviteItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.inviteItemTapped()
             })
@@ -560,7 +560,7 @@ class ConversationViewController: UIViewController,
         // call button
         let audioCallItem = UIBarButtonItem()
         audioCallItem.image = UIImage(asset: Asset.callButton)
-        audioCallItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        audioCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.placeAudioOnlyCall()
             })
@@ -568,7 +568,7 @@ class ConversationViewController: UIViewController,
 
         let videoCallItem = UIBarButtonItem()
         videoCallItem.image = UIImage(asset: Asset.videoRunning)
-        videoCallItem.rx.tap.throttle(0.5, scheduler: MainScheduler.instance)
+        videoCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.placeCall()
             })
@@ -617,7 +617,7 @@ class ConversationViewController: UIViewController,
             })
             .disposed(by: disposeBag)
         currentCallButton.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
+            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.openCall()
             })
