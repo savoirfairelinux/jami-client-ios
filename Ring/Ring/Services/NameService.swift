@@ -172,7 +172,7 @@ extension NameService: NameRegistrationAdapterDelegate {
             }
             registeredNames[response.accountId] = response.name
             UserDefaults.standard.set(registeredNames, forKey: registeredNamesKey)
-            log.debug("Registred name : \(response.name ?? "no name")")
+            log.debug("Registered name : \(response.name ?? "no name")")
         } else {
             log.debug("Name Registration failed. State = \(response.state.rawValue)")
         }
