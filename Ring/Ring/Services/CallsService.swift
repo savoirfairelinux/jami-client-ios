@@ -192,15 +192,15 @@ class CallsService: CallsAdapterDelegate {
         return conferenceInfos[conferenceId]
     }
 
-    func setActiveParticipant(callId: String?, conferenceId: String, maximixe: Bool) {
+    func setActiveParticipant(callId: String?, conferenceId: String, maximixe: Bool, jamiId: String) {
         let participantURI = callId == nil ? "" : self.call(callID: callId!)?.participantUri
         guard let conference = self.call(callID: conferenceId),
             let uri = participantURI,
             let isActive = self.isParticipant(participantURI: uri, activeIn: conferenceId) else { return }
         let newLayout = isActive ? self.getNewLayoutForActiveParticipant(currentLayout: conference.layout, maximixe: maximixe) : .oneWithSmal
         conference.layout = newLayout
-        let newActiveCallId = callId == nil ? "" : callId
-        self.callsAdapter.setActiveParticipant(newActiveCallId, forConference: conferenceId)
+        let participant = callId == nil ? jamiId : participantURI
+        self.callsAdapter.setActiveParticipant(participant, forConference: conferenceId)
         self.callsAdapter.setConferenceLayout(newLayout.rawValue, forConference: conferenceId)
     }
 

@@ -610,7 +610,8 @@ extension CallViewModel {
 // MARK: conference layout
 extension CallViewModel {
     func setActiveParticipant(callId: String?, maximize: Bool) {
-        self.callService.setActiveParticipant(callId: callId, conferenceId: self.rendererId, maximixe: maximize)
+        guard  let jamiId = self.accountService.currentAccount?.jamiId else { return }
+        self.callService.setActiveParticipant(callId: callId, conferenceId: self.rendererId, maximixe: maximize, jamiId: jamiId)
     }
 
     func getConferenceVideoSize() -> CGSize {
