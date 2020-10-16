@@ -189,13 +189,8 @@ withHardwareSupport:(BOOL)hardwareSupport {
     renderer->width = static_cast<int>(w);
     renderer->height = static_cast<int>(h);
     renderer->rendererId = sinkId;
-    if(self.getDecodingAccelerated && hardwareSupport) {
-        renderer->bindAVSinkFunctions();
-        DRing::registerAVSinkTarget(_sinkId, renderer->avtarget);
-    } else {
-        renderer->bindSinkFunctions();
-        DRing::registerSinkTarget(_sinkId, renderer->target);
-    }
+    renderer->bindAVSinkFunctions();
+    DRing::registerAVSinkTarget(_sinkId, renderer->avtarget);
     renderers.insert(std::make_pair(_sinkId, renderer));
 }
 
