@@ -58,7 +58,7 @@
 
 //Welcome Screen
 "welcome.title" = "La benvenguda a Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Jami es un logicial liure per comunicacions universalas que respèctan la libertat e la vida privada de sos utilizaires.";
 "welcome.linkDevice" = "Associar aqueste aparelh a un compte";
 "welcome.createAccount" = "Crear un compte Jami";
 "welcome.connectToManager" = "Connexion al gestionari de compte";
@@ -84,7 +84,7 @@
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Cargament";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.waitCreateAccountTitle" = "Apondon de compte";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
@@ -124,7 +124,7 @@
 "alerts.profileTakePhoto" = "Prendre fòto";
 "alerts.profileUploadPhoto" = "Enviar fòto";
 "alerts.profileCancelPhoto" = "anullar";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "Associacion de compte";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
@@ -292,7 +292,7 @@
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
+"notifications.missedCall" = "Sonada mancada";
 "notifications.acceptCall" = "ACCEPTAR";
 "notifications.refuseCall" = "REFUSAR";
 "notifications.newFile" = "Fichièr novèl";
@@ -315,8 +315,8 @@
 "generatedMessage.invitationAccepted" = "Invitacion acceptada";
 "generatedMessage.outgoingCall" = "Outgoing call";
 "generatedMessage.incomingCall" = "Incoming call";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.missedOutgoingCall" = "Sonada sortissenta mancada";
+"generatedMessage.missedIncomingCall" = "Sonada dintrada mancada";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
@@ -324,7 +324,7 @@
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
+"migrateAccount.title" = "Migracion de compte";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "This account needs to be migrated";
 "migrateAccount.passwordPlaceholder" = "Enter password";

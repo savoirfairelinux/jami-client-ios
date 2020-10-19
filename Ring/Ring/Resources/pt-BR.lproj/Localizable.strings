@@ -177,8 +177,8 @@
 "calls.callFinished" = "Chamada terminada";
 "calls.currentCallWith" = "Chamar com";
 "calls.haghUp" = "desligar";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "maximizar";
+"calls.minimize" = "minimizar";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";

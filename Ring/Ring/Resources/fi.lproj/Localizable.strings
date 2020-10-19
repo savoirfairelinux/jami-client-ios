@@ -177,8 +177,8 @@
 "calls.callFinished" = "Puhelu päättynyt";
 "calls.currentCallWith" = "Soita";
 "calls.haghUp" = "katkaise puhelu";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "suurenna";
+"calls.minimize" = "pienennä";
 
 //Account Page
 "accountPage.devicesListHeader" = "Laitteet";

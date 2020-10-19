@@ -177,8 +177,8 @@
 "calls.callFinished" = "通話結束";
 "calls.currentCallWith" = "通話以";
 "calls.haghUp" = "掛斷";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "最大化";
+"calls.minimize" = "最小化";
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";

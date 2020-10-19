@@ -23,8 +23,8 @@
 "global.contactRequestsTabBarTitle" = "Invitations";
 "global.meTabBarTitle" = "Compte";
 "global.ok" = "d'accord";
-"global.versionName" = "Together";
-"global.close" = "Close";
+"global.versionName" = "Ensemble";
+"global.close" = "Fermer";
 "global.share" = "Partager";
 
 // Scan
@@ -77,7 +77,7 @@
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "nom d'utilisateur";
 "createAccount.newPasswordPlaceholder" = "mot de passe";
-"createAccount.repeatPasswordPlaceholder" = "Confirm password";
+"createAccount.repeatPasswordPlaceholder" = "Confirmer le mot de passe";
 "createAccount.passwordCharactersNumberError" = "6 caractères minimum";
 "createAccount.passwordNotMatchingError" = "les mots de passes ne correspondent pas";
 "createAccount.lookingForUsernameAvailability" = "Vérification de la disponibilité...";
@@ -253,7 +253,7 @@
 "account.enableAccount" = "Activer le compte";
 "account.statusOnline" = "Online";
 "account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
+"account.statusConnecting" = "En cours de connexion";
 "account.statusUnknown" = "Inconnu";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";

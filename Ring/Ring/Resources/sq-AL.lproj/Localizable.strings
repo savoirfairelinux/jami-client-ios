@@ -177,8 +177,8 @@
 "calls.callFinished" = "Thirrja përfundoi";
 "calls.currentCallWith" = "Thirre me";
 "calls.haghUp" = "mbylleni";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "maksimizoje";
+"calls.minimize" = "minimizoje";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";

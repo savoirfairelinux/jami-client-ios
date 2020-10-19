@@ -20,29 +20,29 @@
 
 // Global
 "global.homeTabBarTitle" = "דיונים";
-"global.contactRequestsTabBarTitle" = "Invitations";
+"global.contactRequestsTabBarTitle" = "הזמנות";
 "global.meTabBarTitle" = "חשבון";
-"global.ok" = "Ok";
-"global.versionName" = "Together";
-"global.close" = "Close";
-"global.share" = "Share";
+"global.ok" = "אישור";
+"global.versionName" = "יחד";
+"global.close" = "סגירה";
+"global.share" = "שיתוף";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.search" = "בחיפוש...";
 
 // Smartlist
 "smartlist.yesterday" = "אתמול";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "תוצאת חיפוש";
 "smartlist.conversations" = "דיונים";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.noNetworkConnectivity" = "אין חיבוריות רשת";
+"smartlist.searching" = "חפש...";
+"smartlist.noResults" = "אין תוצאות";
+"smartlist.noConversation" = "אין דיונים";
+"smartlist.searchBarPlaceholder" = "יש להזין שם...";
+"smartlist.noNetworkConnectivity" = "אין חיבור לרשת";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "חשבונות";
-"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.addAccountButton" = "+ הוספת חשבון";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
 
@@ -57,14 +57,14 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
+"welcome.title" = "ברוך בואך אל Jami‏ !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "יצירת חשבון Jami";
 "welcome.connectToManager" = "Connect to account manager";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "דילוג";
 "createProfile.profileCreated" = "קדימה";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -131,9 +131,9 @@
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
+"alerts.confirmDeleteConversationTitle" = "מחיקת דיון";
+"alerts.confirmClearConversation" = "האם אכן ברצונך לנקות את הדיון עם איש הקשר הזה?";
+"alerts.confirmClearConversationTitle" = "ניקוי הדיון";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.noLocationPermissionsTitle" = "Access to location not granted";
@@ -143,21 +143,21 @@
 "alerts.uploadFile" = "Upload file";
 "alerts.uploadPhoto" = "Upload photo or movie";
 "alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
+"alerts.locationSharing" = "שיתוף המיקום שלי";
 "alerts.alreadylocationSharing" = "Already sharing location with this user";
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.locationSharingDuration10min" = "10 דק׳";
+"alerts.locationSharingDuration1hour" = "שעה 1";
 "alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
-"alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
+"alerts.openStreetMapCopyright" = "© התורמים ל־OpenStreetMap";
+"alerts.openStreetMapCopyrightMoreInfo" = "מידע נוסף";
 
 //Actions
 "actions.blockAction" = "חסום";
 "actions.deleteAction" = "מחק";
 "actions.cancelAction" = "ביטול";
-"actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.clearAction" = "ניקוי";
+"actions.backAction" = "חזרה";
 "actions.doneAction" = "סיים";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "קבל";
@@ -168,12 +168,12 @@
 "actions.stopLocationSharing" = "Stop sharing";
 
 //Calls
-"calls.callItemTitle" = "קריאה";
+"calls.callItemTitle" = "שיחה";
 "calls.unknown" = "לא מוכר";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
-"calls.searching" = "Searching…";
+"calls.searching" = "בחיפוש...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -272,11 +272,11 @@
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.startVideoCall" = "התחלת שיחת וידאו";
 "contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
+"contactPage.clearConversation" = "ניקוי הצ׳אט";
 "contactPage.blockContact" = "Block Contact";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.removeConversation" = "הסרת דיון";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
@@ -291,7 +291,7 @@
 "dataTransfer.readableStatusCancel" = "ביטול";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
+"notifications.incomingCall" = "שיחה נכנסת";
 "notifications.missedCall" = "Missed Call";
 "notifications.acceptCall" = "ACCEPT";
 "notifications.refuseCall" = "REFUSE";
@@ -313,8 +313,8 @@
 "generatedMessage.contactAdded" = "Contact added";
 "generatedMessage.invitationReceived" = "Invitation received";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
-"generatedMessage.outgoingCall" = "Outgoing call";
-"generatedMessage.incomingCall" = "קריאה נכנסת";
+"generatedMessage.outgoingCall" = "שיחה יוצאת";
+"generatedMessage.incomingCall" = "שיחה נכנסת";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Missed incoming call";
 "generatedMessage.liveLocationSharing" = "Live location sharing";

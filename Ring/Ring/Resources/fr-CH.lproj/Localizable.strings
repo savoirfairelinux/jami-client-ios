@@ -257,7 +257,7 @@
 "account.statusUnknown" = "Inconnu";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
-"account.me" = "Me";
+"account.me" = "Moi";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Aucun contact bloqué";
@@ -313,8 +313,8 @@
 "generatedMessage.contactAdded" = "Contact ajouté";
 "generatedMessage.invitationReceived" = "Invitation reçue";
 "generatedMessage.invitationAccepted" = "Invitation acceptée";
-"generatedMessage.outgoingCall" = "Outgoing call";
-"generatedMessage.incomingCall" = "Incoming call";
+"generatedMessage.outgoingCall" = "Appel sortant";
+"generatedMessage.incomingCall" = "Appel entrant";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Missed incoming call";
 "generatedMessage.liveLocationSharing" = "Live location sharing";

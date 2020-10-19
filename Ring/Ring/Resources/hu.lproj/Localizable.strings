@@ -78,7 +78,7 @@
 "createAccount.enterNewUsernamePlaceholder" = "Felhasználónév";
 "createAccount.newPasswordPlaceholder" = "Jelszó";
 "createAccount.repeatPasswordPlaceholder" = "Jelszó megerősítése";
-"createAccount.passwordCharactersNumberError" = "legalább 6 karakter";
+"createAccount.passwordCharactersNumberError" = "Legalább 6 karakter";
 "createAccount.passwordNotMatchingError" = "A jelszavak nem egyeznek";
 "createAccount.lookingForUsernameAvailability" = "a rendelkezésre állás keresése…";
 "createAccount.invalidUsername" = "Érvénytelen felhasználónév";
@@ -163,7 +163,7 @@
 "alerts.incomingCallButtonAccept" = "Elfogadás";
 "alerts.incomingCallButtonIgnore" = "Figyelmen kívül hagy";
 "actions.startAudioCall" = "Hanghívás";
-"actions.startVideoCall" = "Videóhívás";
+"actions.startVideoCall" = "Videohívás";
 "actions.goToSettings" = "Beállítások megnyitása";
 "actions.stopLocationSharing" = "Megosztás leállítása";
 
@@ -177,8 +177,8 @@
 "calls.callFinished" = "A hívás befejeződött";
 "calls.currentCallWith" = "Hívás:";
 "calls.haghUp" = "Hívás befejezése";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "teljes méret";
+"calls.minimize" = "kis méret";
 
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";
@@ -272,7 +272,7 @@
 
 //Contact Page
 "contactPage.startAudioCall" = "Hanghívás indítása";
-"contactPage.startVideoCall" = "Videóhívás indítása";
+"contactPage.startVideoCall" = "Videohívás indítása";
 "contactPage.sendMessage" = "Üzenet küldése";
 "contactPage.clearConversation" = "Csevegések törlése";
 "contactPage.blockContact" = "Kapcsolat letiltása";

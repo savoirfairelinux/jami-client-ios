@@ -59,7 +59,7 @@
 //Welcome Screen
 "welcome.title" = "Bine ai venit pe Jami !";
 "welcome.text" = "Jami este o platformă de comunicare liberă și universală care păstrează libertățile și intimitatea.";
-"welcome.linkDevice" = "Asociază acest dispozitiv unui cont";
+"welcome.linkDevice" = "Asociază acest aparat unui cont";
 "welcome.createAccount" = "Creează un cont Jami";
 "welcome.connectToManager" = "Conectează-te la Administrare cont";
 
@@ -97,12 +97,12 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asocierea contului";
-"linkToAccount.linkButtonTitle" = "Asociază dispozitivul";
+"linkToAccount.linkButtonTitle" = "Asociază aparatul";
 "linkToAccount.passwordPlaceholder" = "Parolă";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Introdu Parola";
 "linkToAccount.pinLabel" = "Introdu PIN-ul";
-"linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în dispozitivul care conține contul pe care vrei să-l folosești. În Reglări alege \"Asociază alt dispozitiv acestui cont\" și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
+"linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. În Reglări alege \"Asociază alt aparat acestui cont\" și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
@@ -115,7 +115,7 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nu pot găsi contul";
-"alerts.accountCannotBeFoundMessage" = "Contul nu poate fi găsit în rețeaua Jami. Asigură-te că a fost exportat pe Jami de pe un dispozitiv existent și datele de autentificare sînt corecte.";
+"alerts.accountCannotBeFoundMessage" = "Contul nu poate fi găsit în rețeaua Jami. Asigură-te că a fost exportat pe Jami dintr-un aparat existent și datele de autentificare sînt corecte.";
 "alerts.accountAddedTitle" = "Cont Adăugat";
 "alerts.accountNoNetworkTitle" = "Nu mă pot conecta la rețea";
 "alerts.accountNoNetworkMessage" = "Contul nu poate fi adăugat deoarece Jami nu se poate conecta la rețea. Verifică conectarea la rețea.";
@@ -177,11 +177,11 @@
 "calls.callFinished" = "Apel terminat";
 "calls.currentCallWith" = "Apel în curs cu";
 "calls.haghUp" = "închide";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "mărește";
+"calls.minimize" = "micșorează";
 
 //Account Page
-"accountPage.devicesListHeader" = "Dispozitive";
+"accountPage.devicesListHeader" = "Aparate";
 "accountPage.settingsHeader" = "Reglări";
 "accountPage.username" = "Nume de Utilizator";
 "accountPage.usernameNotRegistered" = "nume de utilizator: neînscris";
@@ -191,28 +191,28 @@
 "accountPage.unblockContact" = "DEBLOCHEAZĂ";
 "accountPage.proxyAddressAlert" = "Introdu adresa proxy";
 "accountPage.enableProxy" = "Activează Proxy";
-"accountPage.noProxyExplanationLabel" = "Dispozitivul nu va primi notificări cînd proxy e dezactivat";
+"accountPage.noProxyExplanationLabel" = "Aparatul nu va primi notificări cînd proxy e dezactivat";
 "accountPage.saveProxyAddress" = "Salvează";
 "accountPage.proxyPaceholder" = "Adresa proxy";
 "accountPage.enableNotifications" = "Activează Notificările";
 "accountPage.proxyDisabledAlertTitle" = "Serverul Proxy e Dezactivat";
 "accountPage.proxyDisabledAlertBody" = "Activează serverul proxy, ca să primești notificările";
-"accountPage.revokeDeviceTitle" = "Elimină dispozitivul";
-"accountPage.revokeDeviceMessage" = "Sigur vrei să elimini acest dispozitiv? Această acțiune este ireversibilă!";
+"accountPage.revokeDeviceTitle" = "Elimină aparatul";
+"accountPage.revokeDeviceMessage" = "Sigur vrei să elimini acest aparat? Această acțiune este ireversibilă!";
 "accountPage.revokeDeviceButton" = "Elimină";
 "accountPage.revokeDevicePlaceholder" = "Introdu parola ta";
-"accountPage.deviceRevoked" = "Eliminarea dispozitivului s-a terminat";
+"accountPage.deviceRevoked" = "Eliminarea aparatului s-a terminat";
 "accountPage.deviceRevocationProgress" = "Se elimină...";
-"accountPage.deviceRevocationSuccess" = "Dispozitivul a fost eliminat";
+"accountPage.deviceRevocationSuccess" = "Aparatul a fost eliminat";
 "accountPage.deviceRevocationTryAgain" = "Încearcă din nou";
 "accountPage.deviceRevocationWrongPassword" = "Parolă greșită";
-"accountPage.deviceRevocationUnknownDevice" = "Dispozitiv necunoscut";
-"accountPage.deviceRevocationError" = "Eroare la eliminarea dispozitivului";
+"accountPage.deviceRevocationUnknownDevice" = "Aparat necunoscut";
+"accountPage.deviceRevocationError" = "Eroare la eliminarea aparatului";
 "accountPage.namePlaceholder" = "Nume";
-"accountPage.linkDeviceTitle" = "Asociază alt dispozitiv";
+"accountPage.linkDeviceTitle" = "Asociază alt aparat";
 "accountPage.other" = "Altul";
 "accountPage.removeAccountTitle" = "Elimină contul";
-"accountPage.removeAccountMessage" = "Făcînd clic pe \"Elimină\" vei elimina acest cont de pe acest dispozitiv! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
+"accountPage.removeAccountMessage" = "Făcînd clic pe \"Elimină\" vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
 "accountPage.removeAccountButton" = "Elimină";
 "accountPage.shareAccountDetails" = "Distribuie detaliile contului";
 "accountPage.contactMeOnJamiTitle" = "Contactează-mă pe Jami!";
@@ -263,11 +263,11 @@
 "blockListPage.noBlockedContacts" = "Niciun contact blocat";
 
 //Link New Device
-"linkDevice.title" = "Asociază un nou dispozitiv";
+"linkDevice.title" = "Asociază un nou aparat";
 "linkDevice.passwordError" = "Parola introdusă nu deblochează acest cont";
 "linkDevice.networkError" = "O eroare de rețea a apărut în timpul exportării";
 "linkDevice.defaultError" = "O eroare a apărut în timpul exportării";
-"linkDevice.explanationMessage" = "Pentru a completa procesul, trebuie să deschizi Jami pe noul dispozitiv și să alegi opțiunea \"Asociază acest dispozitiv unui cont\".Codul tău PIN este valabil 10 minute.";
+"linkDevice.explanationMessage" = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea \"Asociază acest aparat unui cont\".Codul tău PIN este valabil 10 minute.";
 "linkDevice.hudMessage" = "Se verifică";
 
 //Contact Page

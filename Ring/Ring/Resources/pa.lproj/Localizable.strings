@@ -263,7 +263,7 @@
 "blockListPage.noBlockedContacts" = "ਕਿਸੇ ਸੰਪਰਕ 'ਤੇ ਬੰਦਸ਼ ਨਹੀਂ ਹੈ";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "ਨਵਾਂ ਡੀਵਾਈਸ ਜੋੜੋ";
 "linkDevice.passwordError" = "ਤੁਹਾਡੇ ਦਾਖਲ ਕੀਤੇ ਪਾਸਵਰਡ ਨਾਲ ਇਹ ਖਾਤਾ ਅਣਲਾਕ ਨਹੀਂ ਹੁੰਦਾ";
 "linkDevice.networkError" = "ਨਿਰਯਾਤ ਵੇਲੇ ਕੋਈ ਨੈੱਟਵਰਕ ਗੜਬੜ ਹੋਈ";
 "linkDevice.defaultError" = "ਨਿਰਯਾਤ ਵੇਲੇ ਕੋਈ ਗੜਬੜ ਹੋਈ";
