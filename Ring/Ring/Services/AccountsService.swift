@@ -47,6 +47,7 @@ enum NotificationName: String {
     case answerCallFromNotifications
     case refuseCallFromNotifications
     case nameRegistered
+    case restoreDefaultVideoDevice
 }
 
 enum MigrationState: String {

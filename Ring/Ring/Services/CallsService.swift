@@ -81,6 +81,13 @@ class CallsService: CallsAdapterDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.refuseUnansweredCall(_:)),
                                                name: NSNotification.Name(rawValue: NotificationName.refuseCallFromNotifications.rawValue),
                                                object: nil)
+        self.calls.asObservable()
+            .subscribe(onNext: { calls in
+                if calls.isEmpty {
+                    NotificationCenter.default.post(name: NSNotification.Name(NotificationName.restoreDefaultVideoDevice.rawValue), object: nil, userInfo: nil)
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func currentCall(callId: String) -> Observable<CallModel> {

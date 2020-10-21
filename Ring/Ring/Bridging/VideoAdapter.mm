@@ -182,8 +182,7 @@ static id <VideoAdapterDelegate> _delegate;
 
 - (void)registerSinkTargetWithSinkId:sinkId
           withWidth:(NSInteger)w
-         withHeight:(NSInteger)h
-withHardwareSupport:(BOOL)hardwareSupport {
+         withHeight:(NSInteger)h{
     auto _sinkId = std::string([sinkId UTF8String]);
     auto renderer = std::make_shared<Renderer>();
     renderer->width = static_cast<int>(w);
@@ -228,6 +227,9 @@ withHardwareSupport:(BOOL)hardwareSupport {
 
 - (void)setDefaultDevice:(NSString*)deviceName {
     DRing::setDefaultDevice(std::string([deviceName UTF8String]));
+}
+- (NSString*)getDefaultDevice {
+    return @(DRing::getDefaultDevice().c_str());
 }
 
 - (void)setDecodingAccelerated:(BOOL)state {

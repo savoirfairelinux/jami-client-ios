@@ -270,7 +270,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
 typealias RendererTuple = (rendererId: String, data: UIImage?)
 
-// swiftlint:disable file_length
 class VideoService: FrameExtractorDelegate {
 
     private let videoAdapter: VideoAdapter
@@ -289,14 +288,24 @@ class VideoService: FrameExtractorDelegate {
 
     private let disposeBag = DisposeBag()
 
-    var codec = VideoCodecs.unknown
-
     init(withVideoAdapter videoAdapter: VideoAdapter) {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
         VideoAdapter.delegate = self
         self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
         camera.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(self.restoreDefaultDevice),
+                                               name: NSNotification.Name(rawValue: NotificationName.restoreDefaultVideoDevice.rawValue),
+                                               object: nil)
+    }
+
+    @objc
+    func restoreDefaultDevice() {
+        let accelerated = self.videoAdapter.getEncodingAccelerated()
+        let device = self.videoAdapter.getDefaultDevice()
+        if accelerated && device == camera.namePortrait {
+            self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
+        }
     }
 
     func setupInputs() {
@@ -407,52 +416,42 @@ extension VideoService: VideoAdapterDelegate {
         videoAdapter.setEncodingAccelerated(state)
         hardwareAccelerationEnabledByUser = state
         if state {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
             self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
         } else {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
             self.videoAdapter.setDefaultDevice(camera.namePortrait)
         }
     }
 
     func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codecId: String) {
         if !codecId.isEmpty {
-            self.codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.unknown
-        }
-        if !supportHardware() && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-            self.videoAdapter.switchInput("camera://" + camera.namePortrait, forCall: rendererId)
-            switchInputRequested = !codecId.isEmpty
+            // we do not support hardware acceleration with VP8 codec. In this case software
+            // encoding will be used. Downgrate resolution if needed. After call finished
+            // resolution will be restored in restoreDefaultDevice()
+            let codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.unknown
+            if !supportHardware(codec: codec) && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
+                self.videoAdapter.setDefaultDevice(camera.namePortrait)
+                self.videoAdapter.switchInput("camera://" + camera.namePortrait, forCall: rendererId)
+            }
         }
         self.log.debug("Decoding started...")
-        let withHardware = !codecId.isEmpty ? (supportHardware()) : false
-        videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height, withHardwareSupport: withHardware)
+        videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height)
     }
 
-    func supportHardware() -> Bool {
-        return self.codec == VideoCodecs.H264 || self.codec == VideoCodecs.H265
+    func supportHardware(codec: VideoCodecs) -> Bool {
+        return codec == VideoCodecs.H264 || codec == VideoCodecs.H265
     }
 
     func decodingStopped(withRendererId rendererId: String) {
         self.log.debug("Decoding stopped...")
         videoAdapter.removeSinkTarget(withSinkId: rendererId)
-        self.codec = VideoCodecs.unknown
     }
 
     func startCapture(withDevice device: String) {
         self.log.debug("Capture started...")
-        if switchInputRequested {
-            switchInputRequested = false
-            self.camera.startCapturing()
-            return
-        }
-        self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
-        if hardwareAccelerationEnabledByUser {
+        if device == camera.nameDevice1280_720 && self.camera.quality == AVCaptureSession.Preset.medium {
             self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
-            self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
-        } else {
+        } else if device == camera.namePortrait && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
             self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
-            self.videoAdapter.setDefaultDevice(camera.namePortrait)
         }
         self.angle = self.mapDeviceOrientation(orientation: self.currentOrientation)
         self.camera.startCapturing()
