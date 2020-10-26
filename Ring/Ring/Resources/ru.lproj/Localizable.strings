@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Приглашения";
 "global.meTabBarTitle" = "Аккаунт";
 "global.ok" = "OK";
-"global.versionName" = "Together";
+"global.versionName" = "Вместе";
 "global.close" = "Закрыть";
 "global.share" = "Поделиться";
 
@@ -48,8 +48,8 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "Введите ваше сообщение...";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
+"conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
 
 //Invitations
 "invitations.noInvitations" = "Приглашений нет";
@@ -136,20 +136,20 @@
 "alerts.confirmClearConversationTitle" = "Очистить разговор";
 "alerts.noMediaPermissionsTitle" = "Не прав доступа к медиа";
 "alerts.noLibraryPermissionsTitle" = "Не предоставлен доступ к библиотеке фотографий";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
+"alerts.noLocationPermissionsTitle" = "Доступ к местоположению не предоставлен";
 "alerts.errorWrongCredentials" = "Не удалось подключиться к предоставленному менеджеру учетных записей. Пожалуйста, проверьте Ваши учетные данные.";
 "alerts.recordVideoMessage" = "Записать видео-сообщение";
 "alerts.recordAudioMessage" = "Записать голосовое сообщение";
 "alerts.uploadFile" = "Загрузить файл";
 "alerts.uploadPhoto" = "Загрузить фото или видео";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.locationServiceIsDisabled" = "Включите «Службы определения местоположения», чтобы позволить \"Jami\" определять ваше местоположение.";
+"alerts.locationSharing" = "Транслировать мое местоположение";
+"alerts.alreadylocationSharing" = "Местоположением с этим пользователем уже поделился";
+"alerts.locationSharingDurationTitle" = "Как долго должен продолжаться обмен местоположением?";
+"alerts.locationSharingDuration10min" = "10 мин";
+"alerts.locationSharingDuration1hour" = "1 час";
 "alerts.mapInformation" = "Информация о карте";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap авторы";
 "alerts.openStreetMapCopyrightMoreInfo" = "Узнать больше";
 
 //Actions
@@ -164,7 +164,7 @@
 "alerts.incomingCallButtonIgnore" = "Игнорировать";
 "actions.startAudioCall" = "Голосовой звонок";
 "actions.startVideoCall" = "Видео звонок";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "Перейти к настройкам";
 "actions.stopLocationSharing" = "Остановить трансляцию";
 
 //Calls
@@ -177,8 +177,8 @@
 "calls.callFinished" = "Вызов завершен";
 "calls.currentCallWith" = "Вызов с";
 "calls.haghUp" = "повесить трубку";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "максимизировать";
+"calls.minimize" = "минимизировать";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
@@ -296,8 +296,8 @@
 "notifications.acceptCall" = "ПРИНЯТЬ";
 "notifications.refuseCall" = "ОТКАЗАТЬ";
 "notifications.newFile" = "Новый файл";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.locationSharingStarted" = "Начался обмен местоположениями";
+"notifications.locationSharingStopped" = "Входящий обмен местоположением остановился";
 "dataTransfer.readableStatusAwaiting" = "Ожидание…";
 "dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Передача…";
@@ -317,7 +317,7 @@
 "generatedMessage.incomingCall" = "Входящий звонок";
 "generatedMessage.missedOutgoingCall" = "Непринятый исходящий звонок";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий звонок";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
 
 //General Settings
 "generalSettings.title" = "Основные настройки";
