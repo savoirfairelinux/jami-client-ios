@@ -76,13 +76,13 @@
 "createAccount.createAccountFormTitle" = "Creează contul tău";
 "createAccount.chooseStrongPassword" = "Alege o parolă complexă pe care să ți-o amintești, ca să protejezi contul tău Jami.";
 "createAccount.enterNewUsernamePlaceholder" = "Nume de Utilizator";
-"createAccount.newPasswordPlaceholder" = "Parolă";
+"createAccount.newPasswordPlaceholder" = "Parola";
 "createAccount.repeatPasswordPlaceholder" = "Confirmă parola";
-"createAccount.passwordCharactersNumberError" = "6 caractere minim";
+"createAccount.passwordCharactersNumberError" = "minimum 6 caractere";
 "createAccount.passwordNotMatchingError" = "parolele nu se potrivesc";
 "createAccount.lookingForUsernameAvailability" = "caut disponibilitatea...";
 "createAccount.invalidUsername" = "nume greșit";
-"createAccount.usernameAlreadyTaken" = "nume de utilizator deja ales";
+"createAccount.usernameAlreadyTaken" = "nume de utilizator ales deja";
 "createAccount.loading" = "Se încarcă";
 "createAccount.waitCreateAccountTitle" = "Se adaugă contul";
 "createAccount.RegisterAUsername" = "Înscrie un nume de utilizator";
@@ -98,7 +98,7 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asocierea contului";
 "linkToAccount.linkButtonTitle" = "Asociază aparatul";
-"linkToAccount.passwordPlaceholder" = "Parolă";
+"linkToAccount.passwordPlaceholder" = "Parola";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Introdu Parola";
 "linkToAccount.pinLabel" = "Introdu PIN-ul";
@@ -106,7 +106,7 @@
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
-"linkToAccountManager.passwordPlaceholder" = "Parolă";
+"linkToAccountManager.passwordPlaceholder" = "Parola";
 "linkToAccountManager.passwordLabel" = "Introdu Parola";
 "linkToAccountManager.usernamePlaceholder" = "Nume de Utilizator";
 "linkToAccountManager.usernameLabel" = "Introdu Numele de Utilizator";
@@ -240,7 +240,7 @@
 
 //Account
 "account.sipUsername" = "Nume de Utilizator";
-"account.sipPassword" = "Parolă";
+"account.sipPassword" = "Parola";
 "account.sipServer" = "Server SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";

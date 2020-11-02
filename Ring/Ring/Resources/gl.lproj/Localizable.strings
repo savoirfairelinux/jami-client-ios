@@ -263,7 +263,7 @@
 "blockListPage.noBlockedContacts" = "Sen contactos bloqueados";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Ligar un novo dispositiov";
 "linkDevice.passwordError" = "O contrasinal introducido non desbloquea esta conta";
 "linkDevice.networkError" = "Houbo un problema na rede durante a exportación";
 "linkDevice.defaultError" = "Algo fallou no proceso de exportación";

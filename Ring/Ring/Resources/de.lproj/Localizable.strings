@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "Einladungen";
 "global.meTabBarTitle" = "Konto";
 "global.ok" = "Ok";
-"global.versionName" = "Together";
+"global.versionName" = "Zusammen";
 "global.close" = "Schließen";
 "global.share" = "Teilen";
 
@@ -121,7 +121,7 @@
 "alerts.accountNoNetworkMessage" = "Konto konnte nicht hinzugefügt werden, da Jami sich nicht mit dem verteilten Netzwerk verbinden konnte. Überprüfen sie die Verbindung ihres Gerätes.";
 "alerts.accountDefaultErrorTitle" = "Unbekannter Fehler";
 "alerts.accountDefaultErrorMessage" = "Das Konto konnte nicht erstellt werden.";
-"alerts.profileTakePhoto" = "Ein Foto aufnehmen";
+"alerts.profileTakePhoto" = "Foto aufnehmen";
 "alerts.profileUploadPhoto" = "Foto hochladen";
 "alerts.profileCancelPhoto" = "Abbrechen";
 "alerts.accountLinkedTitle" = "Verknüpfe Konto";
@@ -146,8 +146,8 @@
 "alerts.locationSharing" = "Meinen Standort freigeben";
 "alerts.alreadylocationSharing" = "Teile bereits den Standort mit dem Benutzer";
 "alerts.locationSharingDurationTitle" = "Wie lange sollte die Standortübermittlung dauern?";
-"alerts.locationSharingDuration10min" = "Zehn Minuten";
-"alerts.locationSharingDuration1hour" = "Eine Stunde";
+"alerts.locationSharingDuration10min" = "10 Minuten";
+"alerts.locationSharingDuration1hour" = "1 Stunde";
 "alerts.mapInformation" = "Informationen zur Karte";
 "alerts.openStreetMapCopyright" = "OpenStreetMap-Beitragende";
 "alerts.openStreetMapCopyrightMoreInfo" = "Mehr erfahren";
@@ -171,14 +171,14 @@
 "calls.callItemTitle" = "Anruf";
 "calls.unknown" = "Unbekannt";
 "calls.incomingCallInfo" = "möchte mit Ihnen sprechen.";
-"calls.ringing" = "Klingelt …";
-"calls.connecting" = "Verbinde...";
+"calls.ringing" = "Klingelt…";
+"calls.connecting" = "Verbinde…";
 "calls.searching" = "Suchen…";
 "calls.callFinished" = "Anruf beendet";
 "calls.currentCallWith" = "Anrufen mit";
 "calls.haghUp" = "auflegen";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "maximieren";
+"calls.minimize" = "minimieren";
 
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";
