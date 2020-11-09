@@ -198,7 +198,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
 "accountPage.proxyDisabledAlertBody" = "Që të mund të merrni njoftime, ju lutemi, aktivizoni ndërmjetësin";
 "accountPage.revokeDeviceTitle" = "Shfuqizoje pajisjen";
-"accountPage.revokeDeviceMessage" = "Jeni i sigurt se doni të shfuqizohet kjo pajisje. Ky veprim s’mund të zhbëhet.";
+"accountPage.revokeDeviceMessage" = "Jeni i sigurt se doni të shfuqizohet kjo pajisje? Ky veprim s’mund të zhbëhet.";
 "accountPage.revokeDeviceButton" = "Shfuqizoje";
 "accountPage.revokeDevicePlaceholder" = "Jepni fjalëkalimin tuaj";
 "accountPage.deviceRevoked" = "Shfuqizimi i pajisjes u plotësua";
