@@ -397,10 +397,10 @@ class AccountsService: AccountAdapterDelegate {
             _ = try self.dbManager.createDatabaseForAccount(accountId: account, createFolder: true)
             self.loadAccountsFromDaemon()
             guard let newAccount = self.getAccount(fromAccountId: account) else { return false }
-            self.currentAccount = newAccount
-            UserDefaults.standard.set(account, forKey: self.selectedAccountID)
             let accountUri = AccountModelHelper.init(withAccount: newAccount).uri ?? ""
             _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: account, accountURI: accountUri)
+            self.currentAccount = newAccount
+            UserDefaults.standard.set(account, forKey: self.selectedAccountID)
             return true
         } catch {
             return false

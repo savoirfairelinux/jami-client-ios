@@ -252,8 +252,10 @@ extension ProfilesService {
         }
         self.dbManager
             .accountProfileObservable(for: accountId)
-            .subscribe(onNext: {profile in
+            .subscribe(onNext: { profile in
                 profileObservable.onNext(profile)
+            }, onError: { (_) in
+                profileObservable.onNext(Profile("", nil, nil, ""))
             })
             .disposed(by: self.disposeBag)
     }
