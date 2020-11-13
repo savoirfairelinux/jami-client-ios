@@ -963,6 +963,10 @@ class AccountsService: AccountAdapterDelegate {
         self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery))
     }
 
+    func enableKeepAlive(enable: Bool, accountId: String) {
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.keepAliveEnabled))
+    }
+
     func switchAccountPropertyTo(state: Bool, accountId: String, property: ConfigKeyModel) {
         let accountDetails = self.getAccountDetails(fromAccountId: accountId)
         guard accountDetails.get(withConfigKeyModel: property) != state.toString() else { return }

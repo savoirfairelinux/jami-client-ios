@@ -303,6 +303,31 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 item: SettingsSection.Item) in
                 switch dataSource[indexPath] {
 
+                case .autoRegistration:
+                    let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    cell.textLabel?.text = L10n.AccountPage.autoRegistration
+                    let switchView = UISwitch()
+                    cell.selectionStyle = .none
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
+                    self.viewModel.keepAliveEnabled
+                        .asObservable()
+                        .startWith(self.viewModel.keepAliveEnabled.value)
+                        .observeOn(MainScheduler.instance)
+                        .bind(to: switchView.rx.value)
+                        .disposed(by: cell.disposeBag)
+                    switchView.rx
+                        .isOn.changed
+                        .debounce(0.2, scheduler: MainScheduler.instance)
+                        .distinctUntilChanged()
+                        .asObservable()
+                        .subscribe(onNext: {[weak self] enable in
+                            self?.viewModel.enableKeepAlive(enable: enable)
+                        })
+                        .disposed(by: cell.disposeBag)
+                    return cell
+
                 case .device(let device):
                     let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeviceCell.self)
                     cell.backgroundColor = UIColor.jamiBackgroundColor
@@ -663,7 +688,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.selectionStyle = .none
         let text = UITextField()
         text.tag = self.sipCredentialsTAG
-        text.font = UIFont.preferredFont(forTextStyle: .caption1)
+        text.font = UIFont.preferredFont(forTextStyle: .callout)
         text.returnKeyType = .done
         text.text = value
         text.sizeToFit()
@@ -693,7 +718,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             cell.textLabel?.text = L10n.Account.sipPassword
             //show password button
             let rightButton = UIButton(type: .custom)
-            rightButton.frame = CGRect(x: 0, y: 0, width: 55, height: 30)
+            var insets = rightButton.contentEdgeInsets
+            insets.right = 20.0
+            rightButton.contentEdgeInsets = insets
             self.viewModel.secureTextEntry
                 .asObservable()
                 .observeOn(MainScheduler.instance)

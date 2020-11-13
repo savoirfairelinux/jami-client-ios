@@ -53,6 +53,8 @@ internal enum L10n {
   }
 
   internal enum AccountPage {
+    /// Auto register after expiration
+    internal static let autoRegistration = L10n.tr("Localizable", "accountPage.autoRegistration")
     /// Blocked contacts
     internal static let blockedContacts = L10n.tr("Localizable", "accountPage.blockedContacts")
     /// After enabling booth mode all your conversations will be removed.

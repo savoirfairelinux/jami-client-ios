@@ -56,6 +56,7 @@ enum SettingsSection: SectionModelType {
         case changePassword
         case boothMode
         case peerDiscovery
+        case autoRegistration
     }
 
     var items: [SectionRow] {
@@ -258,6 +259,7 @@ class MeViewModel: ViewModel, Stateable {
             .just(SettingsSection.accountSettings( items: [.sectionHeader(title: ""),
                                                            .accountState(state: self.accountStatus),
                                                            .enableAccount,
+                                                           .autoRegistration,
                                                            .removeAccount]))
     }()
 
@@ -737,6 +739,16 @@ class MeViewModel: ViewModel, Stateable {
         return Variable<Bool>(true)
     }()
 
+    lazy var keepAliveEnabled: BehaviorRelay<Bool> = {
+        if let account = self.accountService.currentAccount,
+            let details = account.details {
+            let enable = details.get(withConfigKeyModel:
+                ConfigKeyModel.init(withKey: .keepAliveEnabled)).boolValue
+            return BehaviorRelay<Bool>(value: enable)
+        }
+        return BehaviorRelay<Bool>(value: true)
+    }()
+
     func enableAccount(enable: Bool) {
         if self.accountEnabled.value == enable { return }
         guard let account = self.accountService.currentAccount else { return }
@@ -749,6 +761,13 @@ class MeViewModel: ViewModel, Stateable {
             let account = self.accountService.currentAccount else { return }
         self.accountService.enablePeerDiscovery(enable: enable, accountId: account.id)
         peerDiscoveryEnabled.value = enable
+    }
+
+    func enableKeepAlive(enable: Bool) {
+        guard self.keepAliveEnabled.value != enable,
+            let account = self.accountService.currentAccount else { return }
+        self.accountService.enableKeepAlive(enable: enable, accountId: account.id)
+        keepAliveEnabled.accept(enable)
     }
 
     // MARK: Sip Credentials
