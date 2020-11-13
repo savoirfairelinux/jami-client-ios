@@ -23,6 +23,7 @@
  */
 
 import UIKit
+import PhotosUI
 import RxSwift
 import SwiftyBeaver
 
@@ -814,6 +815,30 @@ extension ConversationViewModel {
                       displayName: imageFileName,
                       localIdentifier: localIdentifier,
                       contactHash: contactHash)
+    }
+
+    func sendLiveImageFromPhotoLibraty(image: PHLivePhoto, imageName: String, localIdentifier: String?, contactHash: String? = nil) {
+//        var imageFileName = imageName
+//        let pathExtension = (imageFileName as NSString).pathExtension
+//        if pathExtension.caseInsensitiveCompare("heic") == .orderedSame ||
+//            pathExtension.caseInsensitiveCompare("heif") == .orderedSame ||
+//            pathExtension.caseInsensitiveCompare("jpg") == .orderedSame ||
+//            pathExtension.caseInsensitiveCompare("png") == .orderedSame {
+//            imageFileName = (imageFileName as NSString).deletingPathExtension + ".jpeg"
+//        }
+//        guard let localCachePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageFileName) else {
+//            return
+//        }
+//        guard let imageData = image.jpegData(compressionQuality: 90) else { return }
+//        do {
+//            try imageData.write(to: URL(fileURLWithPath: localCachePath), options: .atomic)
+//        } catch {
+//            self.log.error("couldn't copy image to cache")
+//        }
+//        self.sendFile(filePath: localCachePath.path,
+//                      displayName: imageFileName,
+//                      localIdentifier: localIdentifier,
+//                      contactHash: contactHash)
     }
 
     private func copyImageToCache(image: UIImage, imagePath: String) {

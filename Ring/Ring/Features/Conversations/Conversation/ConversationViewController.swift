@@ -23,6 +23,7 @@
  */
 
 import UIKit
+import PhotosUI
 import RxSwift
 import Reusable
 import SwiftyBeaver
@@ -33,7 +34,7 @@ import MobileCoreServices
 // swiftlint:disable type_body_length
 class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate, ContactPickerDelegate {
+                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate, ContactPickerDelegate, PHPickerViewControllerDelegate {
 
     let log = SwiftyBeaver.self
 
@@ -257,13 +258,56 @@ class ConversationViewController: UIViewController,
 
     func importImage() {
         DispatchQueue.main.async {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-            imagePicker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-            imagePicker.modalPresentationStyle = .overFullScreen
-            self.present(imagePicker, animated: true, completion: nil)
+            if #available(iOS 14, *) {
+                let photoLibrary = PHPhotoLibrary.shared()
+                var config = PHPickerConfiguration(photoLibrary: photoLibrary)
+                config.selectionLimit = 1
+              //  config.filter = PHPickerFilter.images
+                let pickerViewController = PHPickerViewController(configuration: config)
+                pickerViewController.delegate = self
+                self.present(pickerViewController, animated: true, completion: nil)
+            } else {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = true
+                imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                imagePicker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+                imagePicker.modalPresentationStyle = .overFullScreen
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+    }
+
+    @available(iOS 14, *)
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        for result in results {
+            guard let identifier = result.assetIdentifier else { continue }
+            let phAsset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil)
+            let imageFileName: String = result.itemProvider.suggestedName ?? "image"
+            if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+                result.itemProvider.loadObject(ofClass: UIImage.self, completionHandler: { (object, _) in
+                    if let image = object as? UIImage {
+                        self.viewModel.sendImageFromPhotoLibraty(image: image, imageName: imageFileName, localIdentifier: identifier)
+                    }
+                })
+            } else if result.itemProvider.canLoadObject(ofClass: PHLivePhoto.self) {
+                result.itemProvider.loadObject(ofClass: PHLivePhoto.self, completionHandler: { (object, _) in
+                    if let image = object as? PHLivePhoto {
+                        self.viewModel.sendLiveImageFromPhotoLibraty(image: image, imageName: imageFileName, localIdentifier: identifier)
+                    }
+                })
+            } else {
+                result.itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, _ in
+                    if let url = url {
+                        guard let videoData = NSData(contentsOf: url) else {
+                            return
+                        }
+                        self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: videoData as Data)
+                    }
+
+                }
+            }
         }
     }
 
