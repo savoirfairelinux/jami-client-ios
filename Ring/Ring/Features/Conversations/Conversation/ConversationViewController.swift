@@ -23,6 +23,7 @@
  */
 
 import UIKit
+import PhotosUI
 import RxSwift
 import Reusable
 import SwiftyBeaver
@@ -33,7 +34,7 @@ import MobileCoreServices
 // swiftlint:disable type_body_length
 class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate, ContactPickerDelegate {
+                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate, ContactPickerDelegate, PHPickerViewControllerDelegate {
 
     let log = SwiftyBeaver.self
 
@@ -139,14 +140,14 @@ class ConversationViewController: UIViewController,
     func checkPhotoLibraryPermission() {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
-        case .authorized:
+        case .authorized, .limited:
             self.importImage()
         case .denied, .restricted :
             self.showNoPermissionsAlert(title: L10n.Alerts.noLibraryPermissionsTitle)
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { status in
                 switch status {
-                case .authorized:
+                case .authorized, .limited:
                     self.importImage()
                 case .denied, .restricted:
                     self.showNoPermissionsAlert(title: L10n.Alerts.noLibraryPermissionsTitle)
@@ -161,13 +162,28 @@ class ConversationViewController: UIViewController,
         }
     }
 
+    func selectItamsFromPhotoLibrary() {
+        if #available(iOS 14, *) {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                var config = PHPickerConfiguration()
+                config.selectionLimit = 0
+                let pickerViewController = PHPickerViewController(configuration: config)
+                pickerViewController.delegate = self
+                self.present(pickerViewController, animated: true, completion: nil)
+            }
+        } else {
+            self.checkPhotoLibraryPermission()
+        }
+    }
+
     @objc
     func imageTapped() {
         let alert = UIAlertController.init(title: nil,
                                            message: nil,
                                            preferredStyle: .actionSheet)
         let pictureAction = UIAlertAction(title: L10n.Alerts.uploadPhoto, style: UIAlertAction.Style.default) {[weak self] _ in
-            self?.checkPhotoLibraryPermission()
+            self?.selectItamsFromPhotoLibrary()
         }
 
         let recordVideoAction = UIAlertAction(title: L10n.Alerts.recordVideoMessage, style: UIAlertAction.Style.default) {[weak self] _ in
@@ -256,7 +272,8 @@ class ConversationViewController: UIViewController,
     }
 
     func importImage() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
@@ -265,6 +282,43 @@ class ConversationViewController: UIViewController,
             imagePicker.modalPresentationStyle = .overFullScreen
             self.present(imagePicker, animated: true, completion: nil)
         }
+    }
+
+    @available(iOS 14, *)
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        results.forEach { (result) in
+            let imageFileName: String = result.itemProvider.suggestedName ?? "file"
+            let provider = result.itemProvider
+            switch self.getAssetTypeFrom(itemProvider: provider) {
+            case .image:
+                provider.loadObject(ofClass: UIImage.self) { [weak self] (object, _) in
+                    guard let self = self,
+                          let image = object as? UIImage,
+                          let imageData = image.jpegData(compressionQuality: 90) else { return }
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".jpeg", imageData: imageData)
+                }
+            case .video:
+                provider.loadDataRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] (data, _) in
+                    guard let self = self,
+                          let data = data else { return }
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".mov", imageData: data)
+                }
+            default:
+                break
+            }
+        }
+    }
+
+    @available(iOS 14, *)
+    private func getAssetTypeFrom(itemProvider: NSItemProvider) -> PHAssetMediaType {
+        if itemProvider.canLoadObject(ofClass: UIImage.self) {
+            return .image
+        }
+        if itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
+            return .video
+        }
+        return .unknown
     }
 
     internal func imagePickerController(_ picker: UIImagePickerController,
