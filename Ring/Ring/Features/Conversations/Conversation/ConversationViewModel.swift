@@ -383,12 +383,18 @@ class ConversationViewModel: Stateable, ViewModel {
 
     func recordVideoFile() {
         closeAllPlayers()
-        self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: false))
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: false))
+        }
     }
 
     func recordAudioFile() {
         closeAllPlayers()
-        self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: true))
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: true))
+        }
     }
 
     func haveCurrentCall() -> Bool {
