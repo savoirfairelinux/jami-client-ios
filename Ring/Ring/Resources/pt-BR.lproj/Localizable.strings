@@ -237,6 +237,7 @@
 "accountPage.noBoothMode" = "Para ativar o modo Booth você precisa primeiro criar a senha de conta.";
 "accountPage.boothModeAlertMessage" = "Depois de ativar o modo Booth, todas as suas conversas serão removidas.";
 "accountPage.peerDiscovery" = "Conexão automática na rede local";
+"accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
 "account.sipUsername" = "Nome do Usuário";

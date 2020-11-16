@@ -237,6 +237,7 @@
 "accountPage.noBoothMode" = "Që të aktivizohet mënyra Kabinë, lypset të krijoni një fjalëkalim llogarie së pari.";
 "accountPage.boothModeAlertMessage" = "Pas aktivizimit të mënyrës Kabinë, krej bisedat tuaja do të hiqen.";
 "accountPage.peerDiscovery" = "Vetëlidhu në rrjet vendor";
+"accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
 "account.sipUsername" = "Emër Përdoruesi";

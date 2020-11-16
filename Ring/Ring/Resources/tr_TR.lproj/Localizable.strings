@@ -237,6 +237,7 @@
 "accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Auto connect on local network";
+"accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
 "account.sipUsername" = "User Name";

@@ -237,6 +237,7 @@
 "accountPage.noBoothMode" = "Para habilitar el modo de conversación reservada, primero debe crear una contraseña de cuenta.";
 "accountPage.boothModeAlertMessage" = "Después de habilitar el modo de conversación reservada, se eliminarán todas sus conversaciones.";
 "accountPage.peerDiscovery" = "Conectar automáticamente en red local";
+"accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
 "account.sipUsername" = "Nombre de usuario";

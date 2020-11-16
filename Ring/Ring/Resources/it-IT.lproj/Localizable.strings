@@ -177,8 +177,8 @@
 "calls.callFinished" = "Chiamata terminata";
 "calls.currentCallWith" = "Chiamata con";
 "calls.haghUp" = "riaggancia";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "massimizza";
+"calls.minimize" = "minimizza";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivi";
@@ -230,13 +230,14 @@
 "accountPage.newPasswordPlaceholder" = "Inserire nuova password";
 "accountPage.newPasswordConfirmPlaceholder" = "Conferma nuova password";
 "accountPage.changePasswordError" = "La password non è corretta";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
+"accountPage.enableBoothMode" = "Abilita Modalità Chiosco";
+"accountPage.disableBoothMode" = "Disabilta Modalità Chiosco";
 "accountPage.disableBoothModeExplanation" = "Fornisci la password del tuo account";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.boothModeExplanation" = "In modalità Chiosco, la cronologia non viene salvata e le funzioni di Jami sono limitate alle chiamate. Se attivi la modalità Chiosco, tutte le tue conversazioni verranno eliminate.";
+"accountPage.noBoothMode" = "Per abilitare la modalità Chiosco è necessario prima creare la password dell'account.";
+"accountPage.boothModeAlertMessage" = "Dopo aver abilitato la modalità Chiosco, tutte le tue conversazioni verranno rimosse.";
 "accountPage.peerDiscovery" = "Connessione automatica sulla rete locale";
+"accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
 "account.sipUsername" = "Nome Utente";

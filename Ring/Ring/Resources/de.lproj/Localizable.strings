@@ -237,6 +237,7 @@
 "accountPage.noBoothMode" = "Um den Geheim-Modus zu aktivieren, müssen Sie zuerst ein Passwort für Ihr Konto erstellen.";
 "accountPage.boothModeAlertMessage" = "Nach der Aktivierung des Geheim-Modus werden alle Ihre Gespräche entfernt.";
 "accountPage.peerDiscovery" = "In lokalem Netzwerk automatisch verbinden";
+"accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
 "account.sipUsername" = "Benutzername";

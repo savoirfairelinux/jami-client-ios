@@ -237,6 +237,7 @@
 "accountPage.noBoothMode" = "要使用话亭模式，您需要先设置账户密码。";
 "accountPage.boothModeAlertMessage" = "启用话亭模式后您的现有会话都将被删除。";
 "accountPage.peerDiscovery" = "在本地网络自动连接";
+"accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
 "account.sipUsername" = "用户名";

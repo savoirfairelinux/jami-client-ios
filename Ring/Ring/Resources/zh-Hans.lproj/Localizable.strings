@@ -237,6 +237,7 @@
 "accountPage.noBoothMode" = "要啟用展示模式，您必須先建立帳號密碼。";
 "accountPage.boothModeAlertMessage" = "在啟用展示模式後，所有的對話都會被移除。";
 "accountPage.peerDiscovery" = "在區域網路上自動連線";
+"accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
 "account.sipUsername" = "使用者名稱";

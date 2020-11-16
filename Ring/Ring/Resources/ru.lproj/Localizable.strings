@@ -237,6 +237,7 @@
 "accountPage.noBoothMode" = "Для включения режима кабинки необходимо сначала создать пароль учетной записи.";
 "accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
 "accountPage.peerDiscovery" = "Авто-подключение к локальной сети";
+"accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
 "account.sipUsername" = "Имя";
