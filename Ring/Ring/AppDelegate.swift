@@ -159,7 +159,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
                                                object: nil)
         self.clearBadgeNumber()
+        if let path = self.certificatePath() {
+            setenv("CA_ROOT_FILE", path, 1)
+        }
         return true
+    }
+
+    func certificatePath() -> String? {
+        let fileName = "cacert"
+        let filExtension = "pem"
+        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        let certPath = documentsURL.appendingPathComponent(fileName).appendingPathExtension(filExtension)
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: certPath.path) {
+            return certPath.path
+        }
+        guard let certSource = Bundle.main.url(forResource: fileName, withExtension: filExtension) else {
+            return nil
+        }
+        do {
+            try fileManager.copyItem(at: certSource, to: certPath)
+            return certPath.path
+        } catch {
+            return nil
+        }
     }
 
     func prepareAccounts() {
