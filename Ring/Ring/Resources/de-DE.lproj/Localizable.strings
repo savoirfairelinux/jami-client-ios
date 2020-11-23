@@ -29,7 +29,7 @@
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.search" = "Suche ...";
 
 // Smartlist
 "smartlist.yesterday" = "Gestern";
@@ -148,7 +148,7 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "Karteninformation";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Mehr erfahren";
 
@@ -165,7 +165,7 @@
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "NICHT mehr teilen";
 
 //Calls
 "calls.callItemTitle" = "Anrufen";
@@ -173,7 +173,7 @@
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Verbinde …";
-"calls.searching" = "Searching…";
+"calls.searching" = "Suche ...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -261,10 +261,10 @@
 "account.me" = "Ich";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Keine blockierten Kontakte";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Ein neues Gerät verknüpfen";
 "linkDevice.passwordError" = "Das eingegebene Passwort passt nicht zu diesem Konto";
 "linkDevice.networkError" = "Ein Netzwerk-Fehler trat während des Exports auf";
 "linkDevice.defaultError" = "Ein Fehler trat während des Exports auf";
@@ -313,7 +313,7 @@
 //Generated Message
 "generatedMessage.contactAdded" = "Kontakt hinzugefügt";
 "generatedMessage.invitationReceived" = "Einladung erhalten";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.invitationAccepted" = "Einladung akzeptiert";
 "generatedMessage.outgoingCall" = "Ausgehende Anruf";
 "generatedMessage.incomingCall" = "Eingehender Anruf";
 "generatedMessage.missedOutgoingCall" = "Verpasster ausgehender Anruf";

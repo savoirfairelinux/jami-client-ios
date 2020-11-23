@@ -237,7 +237,7 @@
 "accountPage.noBoothMode" = "Za vklop načina govorilnice morate najprej ustvariti geslo računa.";
 "accountPage.boothModeAlertMessage" = "Ob vklopu načina govorilnice bodo odstranjeni vsi vaši pogovori.";
 "accountPage.peerDiscovery" = "Samodejno povezovanje v lokalnem omrežju";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Samodejna registracija po izteku";
 
 //Account
 "account.sipUsername" = "Uporabniško ime";

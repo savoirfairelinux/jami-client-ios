@@ -237,7 +237,7 @@
 "accountPage.noBoothMode" = "Voit ottaa kioskitilan käyttöön luomalla ensin tilin salasanan.";
 "accountPage.boothModeAlertMessage" = "Kun kioskitila on otettu käyttöön, kaikki keskustelut poistetaan.";
 "accountPage.peerDiscovery" = "Automaattinen yhteys paikallisessa verkossa";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Automaattinen rekisteröinti vanhentumisen jälkeen";
 
 //Account
 "account.sipUsername" = "Käyttäjänimi";

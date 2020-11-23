@@ -237,7 +237,7 @@
 "accountPage.noBoothMode" = "A fülke üzemmód engedélyezéséhez először létre kell hoznia egy fiók jelszavát.";
 "accountPage.boothModeAlertMessage" = "A fülke üzemmód engedélyezése után az összes beszélgetés eltávolításra kerül.";
 "accountPage.peerDiscovery" = "Ónműködő csatlakozás helyi hálózaton";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Önműködő bejegyzése a lejárat után";
 
 //Account
 "account.sipUsername" = "Felhasználónév";

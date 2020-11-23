@@ -237,7 +237,7 @@
 "accountPage.noBoothMode" = "Per abilitare la modalità Chiosco è necessario prima creare la password dell'account.";
 "accountPage.boothModeAlertMessage" = "Dopo aver abilitato la modalità Chiosco, tutte le tue conversazioni verranno rimosse.";
 "accountPage.peerDiscovery" = "Connessione automatica sulla rete locale";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Registrazione automatica dopo la scadenza";
 
 //Account
 "account.sipUsername" = "Nome Utente";

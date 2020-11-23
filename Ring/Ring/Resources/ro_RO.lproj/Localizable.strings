@@ -237,7 +237,7 @@
 "accountPage.noBoothMode" = "Pentru a activa Modul Cabină, trebuie mai întîi să creezi parola contului.";
 "accountPage.boothModeAlertMessage" = "După activarea modului cabină, toate conversațiile tale vor fi șterse.";
 "accountPage.peerDiscovery" = "Conectare automată la rețeaua locală";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Înscriere automată după expirare";
 
 //Account
 "account.sipUsername" = "Nume de Utilizator";

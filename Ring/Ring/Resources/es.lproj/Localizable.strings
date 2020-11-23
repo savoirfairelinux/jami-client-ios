@@ -237,7 +237,7 @@
 "accountPage.noBoothMode" = "Para habilitar el modo reservado, primero debe crear una contraseña de cuenta.";
 "accountPage.boothModeAlertMessage" = "Después de habilitar el modo reservado, se eliminarán todas sus conversaciones.";
 "accountPage.peerDiscovery" = "Auto conectar en red local";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Registrar automáticamente luego de la expiración";
 
 //Account
 "account.sipUsername" = "Nombre de usuario";
