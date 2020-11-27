@@ -29,7 +29,6 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     typealias VMType = WelcomeViewModel
     // MARK: outlets
-    @IBOutlet weak var welcomeTextLabel: UILabel!
     @IBOutlet weak var linkDeviceButton: DesignableButton!
     @IBOutlet weak var createAccountButton: DesignableButton!
     @IBOutlet weak var createSipAccountButton: DesignableButton!
@@ -49,8 +48,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         if self.viewModel.isAnimatable {
            self.initialAnimation()
         } else {
-            self.ringLogoBottomConstraint.constant = -220
-            self.welcomeTextLabel.alpha = 1
+            //self.ringLogoBottomConstraint.constant = -220
             self.createAccountButton.alpha = 1
             self.linkDeviceButton.alpha = 1
             self.createSipAccountButton.alpha = 1
@@ -64,7 +62,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.linkDeviceButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         self.connectToAccountManagerButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         // Bind ViewModel to View
-        self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
+
         self.viewModel.createAccount.bind(to: self.createAccountButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
         self.viewModel.linkDevice.bind(to: self.linkDeviceButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
         createSipAccountButton.setTitle(L10n.Account.createSipAccount, for: .normal)
@@ -109,7 +107,6 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             })
             .disposed(by: self.disposeBag)
         view.backgroundColor = UIColor.jamiBackgroundColor
-        self.welcomeTextLabel.textColor = UIColor.jamiLabelColor
         self.createSipAccountButton.setTitleColor(UIColor.jamiTextBlue, for: .normal)
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
@@ -128,7 +125,6 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         connectToAccountManagerButton
             .setTitle(L10n.Welcome.connectToManager, for: .normal)
         createAccountButton.setTitle(L10n.Welcome.createAccount, for: .normal)
-        welcomeTextLabel.text = L10n.Welcome.title
     }
 
     func initialAnimation() {
@@ -138,7 +134,6 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.ringLogoBottomConstraint.constant = -72
                 UIView.animate(withDuration: 0.5, animations: {
                     self?.ringLogoBottomConstraint.constant = -220
-                    self?.welcomeTextLabel.alpha = 1
                     self?.createAccountButton.alpha = 1
                     self?.linkDeviceButton.alpha = 1
                     self?.connectToAccountManagerButton.alpha = 1
