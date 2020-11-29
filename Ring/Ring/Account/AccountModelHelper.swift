@@ -144,12 +144,7 @@ struct AccountModelHelper {
         guard let userName = accountUsername else {
             return nil
         }
-        if userName.contains(AccountModelHelper.ringIdPrefix) {
-            let index = userName.range(of: AccountModelHelper.ringIdPrefix)?.upperBound
-            return String(userName[index!...])
-        } else {
-            return nil
-        }
+        return userName.replacingOccurrences(of: AccountModelHelper.ringIdPrefix, with: "")
     }
 
     var uri: String? {
