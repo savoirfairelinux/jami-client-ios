@@ -75,8 +75,8 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Créez votre compte";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "Username";
-"createAccount.newPasswordPlaceholder" = "Password";
+"createAccount.enterNewUsernamePlaceholder" = "Nom d'utilisateur";
+"createAccount.newPasswordPlaceholder" = "Mot de passe";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
@@ -84,7 +84,7 @@
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.waitCreateAccountTitle" = "Ajout d'un compte";
 "createAccount.RegisterAUsername" = "Enregistrer un nom d'utilisateur";
 "createAccount.ChooseAPassword" = "Crypter mon compte";
 "createAccount.PasswordInformation" = "Choisissez un mot de passe pour crypter votre compte local. Ne l'oubliez pas sinon vous ne pourrez pas récupérer votre compte";
@@ -98,7 +98,7 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "Password";
+"linkToAccount.passwordPlaceholder" = "Mot de passe";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Enter PIN";
@@ -106,9 +106,9 @@
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Connexion";
-"linkToAccountManager.passwordPlaceholder" = "Password";
+"linkToAccountManager.passwordPlaceholder" = "Mot de passe";
 "linkToAccountManager.passwordLabel" = "Enter Password";
-"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.usernamePlaceholder" = "Nom d'utilisateur";
 "linkToAccountManager.usernameLabel" = "Entrer nom d'utilisateur";
 "linkToAccountManager.accountManagerPlaceholder" = "Account manager";
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
@@ -154,7 +154,7 @@
 
 //Actions
 "actions.blockAction" = "Block";
-"actions.deleteAction" = "Delete";
+"actions.deleteAction" = "Supprimer";
 "actions.cancelAction" = "Annuler";
 "actions.clearAction" = "Effacer";
 "actions.backAction" = "Back";
@@ -182,8 +182,8 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
-"accountPage.username" = "Username";
+"accountPage.settingsHeader" = "Paramètres";
+"accountPage.username" = "Nom d'utilisateur";
 "accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
 "accountPage.credentialsHeader" = "Détails du compte";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -241,7 +241,7 @@
 
 //Account
 "account.sipUsername" = "User Name";
-"account.sipPassword" = "Password";
+"account.sipPassword" = "Mot de passe";
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
