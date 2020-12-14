@@ -60,7 +60,7 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Tilknyt denne enhed til en konto";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Opret en Jami-konto";
 "welcome.connectToManager" = "Connect to account manager";
 
 //Creation Profile Screen
@@ -88,7 +88,7 @@
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "Notifikationer";
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Netværksfejl";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
@@ -118,7 +118,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Konto tilføjet";
 "alerts.accountNoNetworkTitle" = "Kan ikke forbinde til netværket";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Kunne ikke tilføje kontoen fordi Jami ikke kunne få forbindelse til det distribuerede netværk. Tjek din netværksforbindelse.";
 "alerts.accountDefaultErrorTitle" = "Ukendt fejl";
 "alerts.accountDefaultErrorMessage" = "Kontoen kunne ikke oprettes.";
 "alerts.profileTakePhoto" = "Tag billede";
@@ -261,7 +261,7 @@
 "account.me" = "Mig";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Ingen blokerede kontakter";
 
 //Link New Device
 "linkDevice.title" = "Tilknyt en ny enhed";

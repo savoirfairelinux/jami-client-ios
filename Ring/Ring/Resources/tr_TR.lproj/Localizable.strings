@@ -148,7 +148,7 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "Harita bilgisi";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
@@ -165,7 +165,7 @@
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "Paylaşımı durdur";
 
 //Calls
 "calls.callItemTitle" = "Call";
@@ -182,7 +182,7 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
+"accountPage.settingsHeader" = "Ayarlar";
 "accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -281,7 +281,7 @@
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
-"dataTransfer.readableStatusError" = "Error";
+"dataTransfer.readableStatusError" = "Hata";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";

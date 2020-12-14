@@ -38,7 +38,7 @@
 "smartlist.searching" = "Suche...";
 "smartlist.noResults" = "Keine Ergebnisse";
 "smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.searchBarPlaceholder" = "Name eingeben...";
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkkonnektivität";
 "smartlist.cellularAccess" = "Bitte stellen Sie sicher, dass in den Einstellungen Mobilfunkzugriff gewährt wurde.";
 "smartlist.accountsTitle" = "Konten";
@@ -89,7 +89,7 @@
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Benachrichtigungen";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.Recommended" = "(Empfohlen)";
 "createAccount.UsernameNotRegisteredTitle" = "Netzwerkfehler";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
@@ -118,7 +118,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Konto hinzugefügt";
 "alerts.accountNoNetworkTitle" = "Kann keine Verbindung zum Netzwerk herstellen";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Das Benutzerkonto konnte nicht hinzugefügt werden, das keine Verbindung zum verteilten Netzwerk von Jami besteht. Prüfen Sie die Verbindung Ihres Geräts.";
 "alerts.accountDefaultErrorTitle" = "Unbekannter Fehler";
 "alerts.accountDefaultErrorMessage" = "Das Konto konnte nicht angelegt werden.";
 "alerts.profileTakePhoto" = "Bild aufnehmen";
@@ -215,7 +215,7 @@
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Entfernen";
 "accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
+"accountPage.contactMeOnJamiTitle" = "Kontaktiere mich bei Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
 "accountPage.registerNameTitle" = "Register a username";
 "accountPage.passwordPlaceholder" = "Enter account password";
@@ -273,11 +273,11 @@
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.startVideoCall" = "Video-Anruf beginnen";
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Clear Chat";
 "contactPage.blockContact" = "Block Contact";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.removeConversation" = "Konversation entfernen";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initialisiere …";
@@ -285,7 +285,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Ablehnen";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Abgebrochen";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Akzeptieren";
@@ -302,7 +302,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Ablehnen";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Abgebrochen";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Akzeptieren";
 "dataTransfer.readableStatusCancel" = "Abbrechen";
