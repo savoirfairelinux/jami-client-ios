@@ -102,7 +102,7 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Saisissez le mot de passe";
 "linkToAccount.pinLabel" = "Saisissez le code PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Pour générer le code PIN, rendez vous dans les paramètres de gestion du compte sur l'appareil qui contient le compte que vous souhaitez utiliser. Dans les paramètres de l'appareil, sélectionnez \"Lier un autre appareil à ce compte\". Vous allez recevoir le PIN nécessaire pour compléter ce formulaire. Le PIN est uniquement valide pour 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Connexion";
@@ -114,19 +114,19 @@
 "linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "Impossible de trouver le compte";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountAddedTitle" = "Compte ajouté";
+"alerts.accountNoNetworkTitle" = "Impossible de se connecter au réseau";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Erreur inconnue";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.accountDefaultErrorMessage" = "Le compte n'a pu être créé.";
+"alerts.profileTakePhoto" = "Prendre une photo";
+"alerts.profileUploadPhoto" = "Publier une photo";
 "alerts.profileCancelPhoto" = "Annuler";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "Liaison du compte";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.dbFailedMessage" = "Veuillez fermer l'application et tenter de la ré-ouvrir";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Bloquer ce contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -181,7 +181,7 @@
 "calls.minimize" = "minimize";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "Appareils";
 "accountPage.settingsHeader" = "Réglages";
 "accountPage.username" = "nom d'utilisateur";
 "accountPage.usernameNotRegistered" = "Le nom d'utilisateur n'est pas enregistré";
@@ -197,7 +197,7 @@
 "accountPage.enableNotifications" = "Activer les notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Revoke device";
+"accountPage.revokeDeviceTitle" = "Révoquer l'appareil ?";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Révoquer";
 "accountPage.revokeDevicePlaceholder" = "Entrer votre mot de passe";
@@ -269,7 +269,7 @@
 "linkDevice.networkError" = "Un problème de réseau est survenu pendant l'export";
 "linkDevice.defaultError" = "Une erreur est survenue pendant l'export";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "Vérification en cours";
 
 //Contact Page
 "contactPage.startAudioCall" = "Démarrer un appel audio";
