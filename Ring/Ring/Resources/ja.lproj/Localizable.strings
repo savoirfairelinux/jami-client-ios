@@ -187,7 +187,7 @@
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "プロキシを有効にする";
-"accountPage.blockedContacts" = "ブロックした連絡先";
+"accountPage.blockedContacts" = "着信拒否した連絡先";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "プロキシを有効にする";
