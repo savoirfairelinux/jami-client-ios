@@ -227,8 +227,8 @@
 "accountPage.createPassword" = "Create password";
 "accountPage.changePassword" = "Zmień hasło";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.newPasswordPlaceholder" = "Wprowadź nowe hasło";
+"accountPage.newPasswordConfirmPlaceholder" = "Potwierdź nowe hasło";
 "accountPage.changePasswordError" = "Password incorrect";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";

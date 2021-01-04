@@ -165,7 +165,7 @@
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "Arrêter le partage";
 
 //Calls
 "calls.callItemTitle" = "Call";
@@ -316,8 +316,8 @@
 "generatedMessage.invitationAccepted" = "Invitation acceptée";
 "generatedMessage.outgoingCall" = "Appel sortant";
 "generatedMessage.incomingCall" = "Appel entrant";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.missedOutgoingCall" = "Appel sortant manqué";
+"generatedMessage.missedIncomingCall" = "Appel entrant manqué";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
