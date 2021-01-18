@@ -47,7 +47,7 @@
 "smartlist.selectOneNumber" = "选择这些数字中的一个";
 
 //Conversation
-"conversation.messagePlaceholder" = "输入你的消息...";
+"conversation.messagePlaceholder" = "输入您的消息...";
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
 
@@ -66,15 +66,15 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "跳过";
 "createProfile.profileCreated" = "下一步";
-"createProfile.title" = "个性化你的个人信息";
+"createProfile.title" = "个性化您的账户资料";
 "createProfile.enterNameLabel" = "选择一个显示名";
 "createProfile.enterNamePlaceholder" = "输入名称";
 "createProfile.subtitle" = "您的资料会分享给您的联系人。您可随时修改。";
-"createProfile.createYourAvatar" = "建立你的头像";
+"createProfile.createYourAvatar" = "创建您的头像";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "创建您的账户";
-"createAccount.chooseStrongPassword" = "选择一个强密码并记住它来保护你的 Jami 帐号";
+"createAccount.chooseStrongPassword" = "选择一个强密码并记住它来保护您的 Jami 账户。";
 "createAccount.enterNewUsernamePlaceholder" = "用户名";
 "createAccount.newPasswordPlaceholder" = "密码";
 "createAccount.repeatPasswordPlaceholder" = "确认密码";
@@ -87,7 +87,7 @@
 "createAccount.waitCreateAccountTitle" = "添加账户";
 "createAccount.RegisterAUsername" = "注册一个用户名";
 "createAccount.ChooseAPassword" = "加密我的账户";
-"createAccount.PasswordInformation" = "选择一个密码来加密你的账户。请记下它，否则你将无法恢复你的账户。";
+"createAccount.PasswordInformation" = "选择一个密码来加密您的账户。请记下它，否则您将无法恢复您的账户。";
 "createAccount.EnableNotifications" = "通知";
 "createAccount.Recommended" = "（推荐）";
 "createAccount.UsernameNotRegisteredTitle" = "网络错误";
@@ -96,8 +96,8 @@
 "createAccount.timeoutMessage" = "正在注册用户名... 这可能需要一小会儿";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "链接账号";
-"linkToAccount.linkButtonTitle" = "链接设备";
+"linkToAccount.waitLinkToAccountTitle" = "账户关联";
+"linkToAccount.linkButtonTitle" = "关联设备";
 "linkToAccount.passwordPlaceholder" = "密码";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "输入密码";
@@ -124,15 +124,15 @@
 "alerts.profileTakePhoto" = "拍照";
 "alerts.profileUploadPhoto" = "上传照片";
 "alerts.profileCancelPhoto" = "取消";
-"alerts.accountLinkedTitle" = "链接账户中";
+"alerts.accountLinkedTitle" = "正在关联账户";
 "alerts.dbFailedTitle" = "启动Jami时出现了一个问题";
 "alerts.dbFailedMessage" = "请关闭应用，并试试重新启动它。";
-"alerts.confirmBlockContact" = "你确定想要封锁这个联系人？与这个联系人的对话历史也将被永久删除。";
+"alerts.confirmBlockContact" = "您确定要屏蔽这个联系人吗？与这个联系人的会话历史也将被永久删除。";
 "alerts.confirmBlockContactTitle" = "屏蔽联系人";
-"alerts.confirmDeleteConversation" = "你确定要永久删除这个对话？";
-"alerts.confirmDeleteConversationFromContact" = "你确定要删除与该联系人的对话？";
+"alerts.confirmDeleteConversation" = "您确定要永久删除这个会话吗？";
+"alerts.confirmDeleteConversationFromContact" = "您确定要删除与该联系人的对话？";
 "alerts.confirmDeleteConversationTitle" = "删除对话";
-"alerts.confirmClearConversation" = "你确定要清空与该联系人的对话？";
+"alerts.confirmClearConversation" = "您确定要清空与该联系人的会话吗？";
 "alerts.confirmClearConversationTitle" = "清空对话";
 "alerts.noMediaPermissionsTitle" = "未授予媒体权限";
 "alerts.noLibraryPermissionsTitle" = "未授予照片库访问权限";
@@ -170,7 +170,7 @@
 //Calls
 "calls.callItemTitle" = "通话";
 "calls.unknown" = "未知";
-"calls.incomingCallInfo" = "想要与你对话";
+"calls.incomingCallInfo" = "想要与您对话";
 "calls.ringing" = "正在呼叫...";
 "calls.connecting" = "正在连接…";
 "calls.searching" = "正在搜索…";
@@ -200,7 +200,7 @@
 "accountPage.revokeDeviceTitle" = "吊销设备";
 "accountPage.revokeDeviceMessage" = "您确定要吊销此设备吗？此操作不能撤销。";
 "accountPage.revokeDeviceButton" = "吊销";
-"accountPage.revokeDevicePlaceholder" = "输入你的密码";
+"accountPage.revokeDevicePlaceholder" = "输入您的密码";
 "accountPage.deviceRevoked" = "设备吊销完成";
 "accountPage.deviceRevocationProgress" = "吊销中...";
 "accountPage.deviceRevocationSuccess" = "设备已被吊销";
@@ -212,7 +212,7 @@
 "accountPage.linkDeviceTitle" = "关联另一台设备";
 "accountPage.other" = "其他";
 "accountPage.removeAccountTitle" = "移除账户";
-"accountPage.removeAccountMessage" = "点击“删除”将从此设备上删除该帐号！此操作无法撤销。同时，您也会失去已注册的用户名。";
+"accountPage.removeAccountMessage" = "点击“删除”将从此设备上删除该账户！此操作无法撤销。同时，您也会失去您的已注册用户名。";
 "accountPage.removeAccountButton" = "删除";
 "accountPage.shareAccountDetails" = "分享账户详情";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上联系我！";
@@ -237,7 +237,7 @@
 "accountPage.noBoothMode" = "要使用话亭模式，您需要先设置账户密码。";
 "accountPage.boothModeAlertMessage" = "启用话亭模式后您的现有会话都将被删除。";
 "accountPage.peerDiscovery" = "在本地网络自动连接";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "过期后自动注册";
 
 //Account
 "account.sipUsername" = "用户名";

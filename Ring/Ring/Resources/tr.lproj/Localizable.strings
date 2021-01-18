@@ -59,7 +59,7 @@
 //Welcome Screen
 "welcome.title" = "Jami'ye Hoşgeldiniz !";
 "welcome.text" = "Jami kullanıcılarının gizlilik ve özgürlüklerini sağlayan evrensel ve ücretsiz bir platformdur.";
-"welcome.linkDevice" = "Bu aygıtı bir hesaba bağla";
+"welcome.linkDevice" = "Bu aygıtı hesaba bağla";
 "welcome.createAccount" = "Bir Jami hesabı oluştur";
 "welcome.connectToManager" = "Hesap yöneticisine bağlan";
 
@@ -74,7 +74,7 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Hesabınızı oluşturun";
-"createAccount.chooseStrongPassword" = "Jami hesabınızı korumak için anımsayacağınız güçlü bir şifre seçin.";
+"createAccount.chooseStrongPassword" = "Jami hesabınızı korumak için anımsayacağınız güçlü parola seçin.";
 "createAccount.enterNewUsernamePlaceholder" = "Kullanıcı adı";
 "createAccount.newPasswordPlaceholder" = "Parola";
 "createAccount.repeatPasswordPlaceholder" = "Parolayı onayla";
@@ -87,7 +87,7 @@
 "createAccount.waitCreateAccountTitle" = "Hesap ekleniyor";
 "createAccount.RegisterAUsername" = "Bir kullanıcı adı kaydedin";
 "createAccount.ChooseAPassword" = "Hesabımı şifrele";
-"createAccount.PasswordInformation" = "Yerel hesabınızı şifrelemek için bir parola seçin. Parolayı unutmayın yoksa hesabınızı kurtaramazsınız";
+"createAccount.PasswordInformation" = "Yerel hesabınızı şifrelemek için parola seçin. Parolayı unutmayın yoksa hesabınızı kurtaramazsınız";
 "createAccount.EnableNotifications" = "Bildirimler";
 "createAccount.Recommended" = "(Önerilen)";
 "createAccount.UsernameNotRegisteredTitle" = "Ağ hatası";
@@ -102,7 +102,7 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Parola Girin";
 "linkToAccount.pinLabel" = "PIN'i gir";
-"linkToAccount.explanationPinMessage" = "PIN kodunu oluşturmak için, kullanmak istediğiniz hesabı içeren cihazdaki hesap yönetimi ayarlarına gidin. Cihaz ayarlarında \"Bu hesaba başka bir cihaz bağla\" yı seçin. Bu formu doldurmak için gerekli PIN kodunu alacaksınız. PIN sadece 10 dakika geçerlidir.";
+"linkToAccount.explanationPinMessage" = "PIN kodu oluşturmak için, hesabı kullanmak istediğiniz aygıttaki hesap yönetimi ayarlarına gidin. Aygıt ayarlarında \"Başka aygıtı bu hesaba bağla\"yı seçin. Bu formu doldurmada gereken PIN'i edineceksiniz. PIN 10 dakikalığına geçerlidir.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Oturum Aç";
@@ -197,22 +197,22 @@
 "accountPage.enableNotifications" = "Bildirimleri Etkinleştir";
 "accountPage.proxyDisabledAlertTitle" = "Vekil Sunucu Devre dışı";
 "accountPage.proxyDisabledAlertBody" = "Bildirimleri almak için lütfen vekil sunucuyu etkinleştirin";
-"accountPage.revokeDeviceTitle" = "Aygıtı feshet ";
-"accountPage.revokeDeviceMessage" = "Bu aygıtı kaldırmak istediğinize emin misiniz? Bu işlem geri alınamaz.";
-"accountPage.revokeDeviceButton" = "İptal etme";
+"accountPage.revokeDeviceTitle" = "Aygıtı kaldır";
+"accountPage.revokeDeviceMessage" = "Bu aygıtı kaldırmak istediğinize emin misiniz? Bu eylem geri alınamaz.";
+"accountPage.revokeDeviceButton" = "Kaldır";
 "accountPage.revokeDevicePlaceholder" = "Parolanızı girin";
 "accountPage.deviceRevoked" = "Aygıt iptali tamamlandı";
 "accountPage.deviceRevocationProgress" = "İptal ediliyor...";
-"accountPage.deviceRevocationSuccess" = "Aygıt iptal edildi";
+"accountPage.deviceRevocationSuccess" = "Aygıt kaldırıldı";
 "accountPage.deviceRevocationTryAgain" = "Yeniden dene";
 "accountPage.deviceRevocationWrongPassword" = "Geçersiz parola";
 "accountPage.deviceRevocationUnknownDevice" = "Bilinmeyen aygıt";
 "accountPage.deviceRevocationError" = "Aygıt iptal hatası";
-"accountPage.namePlaceholder" = "isim";
+"accountPage.namePlaceholder" = "Ad";
 "accountPage.linkDeviceTitle" = "Diğer aygıtı bağla";
 "accountPage.other" = "Diğer";
 "accountPage.removeAccountTitle" = "Hesabı Kaldır";
-"accountPage.removeAccountMessage" = "\"Kaldır\"'a tıklayarak bu cihazdaki tüm hesapları kaldıracaksınız! Bu eylem geri alınamaz. Ayrıca, kayıtlı adınız kaybolabilir.";
+"accountPage.removeAccountMessage" = "\"Kaldır\"a tıklayarak bu aygıttaki bu hesabı kaldıracaksınız! Bu eylem geri alınamaz. Ayrıca kayıtlı adınız yitebilir.";
 "accountPage.removeAccountButton" = "Kaldır";
 "accountPage.shareAccountDetails" = "Hesap Detaylarını Paylaş";
 "accountPage.contactMeOnJamiTitle" = "Benimle Jami'de iletişime geç!";
@@ -268,7 +268,7 @@
 "linkDevice.passwordError" = "Girdiğiniz parola bu hesabı açmaz";
 "linkDevice.networkError" = "Dışa aktarma esnasında bir ağ hatası oluştu";
 "linkDevice.defaultError" = "Dışa aktarma esnasında bir hata oluştu";
-"linkDevice.explanationMessage" = "İşlemi tamamlamak için yeni cihazda Jami'yi açmanız ve \"Bu cihazı bir hesaba bağla\" seçeneğini belirtmeniz gerekir. PIN kodunuz 10 dakika geçerlidir";
+"linkDevice.explanationMessage" = "Süreci tamamlamak için yeni aygıtta Jami'yi açmanız ve \"Bu aygıtı hesaba bağla\"yı seçmelisiniz. Pininiz 10 dakikalığına geçerlidir";
 "linkDevice.hudMessage" = "Doğrulama";
 
 //Contact Page
@@ -329,7 +329,7 @@
 "migrateAccount.migrateButton" = "Hesap Taşıma";
 "migrateAccount.explanation" = "Bu hesabın taşınması gerekli";
 "migrateAccount.passwordPlaceholder" = "Parolayı gir";
-"migrateAccount.passwordExplanation" = "Taşıma işlemine devam etmek için bu hesapla kullanılan bir şifre girmeniz gerekiyor";
+"migrateAccount.passwordExplanation" = "Taşıma işlemini sürdürmek için bu hesapta kullanılan parolayı girmelisiniz";
 "migrateAccount.removeAccount" = "Hesabı Kaldır";
 "migrateAccount.error" = "Hesabınız taşınamadı. Hesabınızı tekrar deneyebilir veya silebilirsiniz.";
 "migrateAccount.migrating" = "Taşınıyor...";
