@@ -24,8 +24,8 @@
 "global.meTabBarTitle" = "खाता";
 "global.ok" = "Ok";
 "global.versionName" = "Together";
-"global.close" = "Close";
-"global.share" = "Share";
+"global.close" = "बंद करे";
+"global.share" = "बाटें ";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -41,7 +41,7 @@
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.noNetworkConnectivity" = "नेटवर्क संपर्क नही है";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
-"smartlist.accountsTitle" = "Accounts";
+"smartlist.accountsTitle" = "खाते";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
@@ -101,7 +101,7 @@
 "linkToAccount.passwordPlaceholder" = "Password";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
+"linkToAccount.pinLabel" = "पिन दर्ज करें";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
@@ -123,7 +123,7 @@
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "रद्द करें";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -150,15 +150,15 @@
 "alerts.locationSharingDuration1hour" = "1 hour";
 "alerts.mapInformation" = "Map information";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
-"alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
+"alerts.openStreetMapCopyrightMoreInfo" = "और अधिक जानें";
 
 //Actions
 "actions.blockAction" = "Block";
 "actions.deleteAction" = "Delete";
-"actions.cancelAction" = "Cancel";
+"actions.cancelAction" = "रद्द करें";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Back";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "हो गया";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accept";
 "alerts.incomingCallButtonIgnore" = "Ignore";
@@ -168,7 +168,7 @@
 "actions.stopLocationSharing" = "Stop sharing";
 
 //Calls
-"calls.callItemTitle" = "Call";
+"calls.callItemTitle" = "कॉल";
 "calls.unknown" = "Unknown";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
@@ -181,8 +181,8 @@
 "calls.minimize" = "minimize";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
+"accountPage.devicesListHeader" = "उपकरण";
+"accountPage.settingsHeader" = "सेटिंग्स";
 "accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -222,7 +222,7 @@
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
-"accountPage.usernameRegisterAction" = "Register";
+"accountPage.usernameRegisterAction" = "पंजी करें";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Create password";
 "accountPage.changePassword" = "Change password";
@@ -289,7 +289,7 @@
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "रद्द करें";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -305,7 +305,7 @@
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "रद्द करें";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Send";
 
@@ -328,12 +328,12 @@
 "migrateAccount.title" = "Account migration";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordPlaceholder" = "पासवर्ड दर्ज करें";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "रद्द करें";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 
