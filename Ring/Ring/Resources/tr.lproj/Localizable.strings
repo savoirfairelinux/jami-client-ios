@@ -227,8 +227,8 @@
 "accountPage.createPassword" = "Parola oluştur";
 "accountPage.changePassword" = "Parolayı değiştir";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.newPasswordPlaceholder" = "Yeni parolayı girin";
+"accountPage.newPasswordConfirmPlaceholder" = "Yeni parolayı doğrulayın";
 "accountPage.changePasswordError" = "Password incorrect";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";

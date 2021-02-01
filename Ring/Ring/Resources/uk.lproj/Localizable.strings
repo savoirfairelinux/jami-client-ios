@@ -261,10 +261,10 @@
 "account.me" = "Я";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Заблоковані користувачі відсутні";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Прив'язати новий пристрій";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "При імпорті трапилася помилка";
