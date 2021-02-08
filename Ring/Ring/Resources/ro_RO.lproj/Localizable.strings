@@ -138,8 +138,8 @@
 "alerts.noLibraryPermissionsTitle" = "Nu ai permis accesul la poze";
 "alerts.noLocationPermissionsTitle" = "Nu ai permis localizarea";
 "alerts.errorWrongCredentials" = "Nu mă pot conecta la Administrare cont. Verifică datele de autentificare.";
-"alerts.recordVideoMessage" = "Înregistreză un mesaj video";
-"alerts.recordAudioMessage" = "Înregistreză un mesaj audio";
+"alerts.recordVideoMessage" = "Înregistrează un mesaj video";
+"alerts.recordAudioMessage" = "Înregistrează un mesaj vocal";
 "alerts.uploadFile" = "Încarcă fișierul";
 "alerts.uploadPhoto" = "Încarcă o poză sau un video";
 "alerts.locationServiceIsDisabled" = "Activează \"Localizarea\" pentru ca \"Jami\" să poată stabili poziția ta.";

@@ -146,8 +146,8 @@
 "alerts.locationSharing" = "Share my location";
 "alerts.alreadylocationSharing" = "Already sharing location with this user";
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.locationSharingDuration10min" = "10 dk";
+"alerts.locationSharingDuration1hour" = "1 saat";
 "alerts.mapInformation" = "Map information";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Daha çok  öğren";
@@ -162,9 +162,9 @@
 "alerts.incomingCallAllertTitle" = "Adlı kişiden gelen çağrı";
 "alerts.incomingCallButtonAccept" = "Kabul et";
 "alerts.incomingCallButtonIgnore" = "Göz ardı et";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
-"actions.goToSettings" = "Go to Settings";
+"actions.startAudioCall" = "Sesli Arama";
+"actions.startVideoCall" = "Görüntülü Arama";
+"actions.goToSettings" = "Ayarlara Git";
 "actions.stopLocationSharing" = "Paylaşmayı durdur";
 
 //Calls
@@ -177,7 +177,7 @@
 "calls.callFinished" = "Arama sonlandırıldı";
 "calls.currentCallWith" = "İle ara";
 "calls.haghUp" = "Aramayı sonlandır";
-"calls.maximize" = "maximize";
+"calls.maximize" = "ekranı kapla";
 "calls.minimize" = "minimize";
 
 //Account Page
@@ -226,10 +226,10 @@
 "accountPage.usernameRegistrationFailed" = "Kayıt başarısız. Lütfen parolanızı kontrol edin.";
 "accountPage.createPassword" = "Parola oluştur";
 "accountPage.changePassword" = "Parolayı değiştir";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
+"accountPage.oldPasswordPlaceholder" = "Eski parolayı girin";
 "accountPage.newPasswordPlaceholder" = "Yeni parolayı girin";
 "accountPage.newPasswordConfirmPlaceholder" = "Yeni parolayı doğrulayın";
-"accountPage.changePasswordError" = "Password incorrect";
+"accountPage.changePasswordError" = "Parola yanlış";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
 "accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
