@@ -227,14 +227,15 @@ class JamiSearchViewModel {
         }
 
         if currentAccount.type == AccountType.sip {
-            let uri = JamiURI.init(schema: URIType.sip, infoHach: text, account: currentAccount)
+            let trimmed = text.trimmedSipNumber()
+            let uri = JamiURI.init(schema: URIType.sip, infoHach: trimmed, account: currentAccount)
             let conversation = ConversationModel(withParticipantUri: uri,
                                                  accountId: currentAccount.id,
-                                                 hash: text)
+                                                 hash: trimmed)
             let newConversation = ConversationViewModel(with: self.injectionBag)
             newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
             self.contactFoundConversation.accept(newConversation)
-            self.dataSource.conversationFound(conversation: newConversation, name: self.searchBarText.value)
+            self.dataSource.conversationFound(conversation: newConversation, name: trimmed)
             return
         }
 

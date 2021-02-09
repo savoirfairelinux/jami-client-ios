@@ -139,4 +139,11 @@ extension String {
     func filterOutHost() -> String {
         return self.replacingOccurrences(of: "@ring.dht", with: "")
     }
+
+    func trimmedSipNumber() -> String {
+        return self.replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: "(", with: "")
+            .replacingOccurrences(of: ")", with: "")
+    }
 }
