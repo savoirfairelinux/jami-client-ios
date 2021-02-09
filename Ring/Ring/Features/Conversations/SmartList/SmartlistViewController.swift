@@ -584,10 +584,7 @@ extension SmartlistViewController: CNContactPickerDelegate {
     }
 
     func setNumberFromContact(contactNumber: String) {
-        var contactNumber = contactNumber.replacingOccurrences(of: "-", with: "")
-        contactNumber = contactNumber.replacingOccurrences(of: "(", with: "")
-        contactNumber = contactNumber.replacingOccurrences(of: ")", with: "")
-        self.viewModel.showSipConversation(withNumber: contactNumber)
+        self.viewModel.showSipConversation(withNumber: contactNumber.trimmedSipNumber())
     }
 
     func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
