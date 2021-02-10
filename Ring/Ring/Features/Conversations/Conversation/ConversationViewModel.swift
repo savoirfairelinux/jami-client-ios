@@ -826,7 +826,7 @@ extension ConversationViewModel {
     }
 
     private func copyImageToCache(image: UIImage, imagePath: String) {
-        guard let imageData = image.jpegData(compressionQuality: 90) else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
         do {
             try imageData.write(to: URL(fileURLWithPath: imagePath), options: .atomic)
         } catch {
