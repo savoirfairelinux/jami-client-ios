@@ -162,7 +162,7 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    func selectItamsFromPhotoLibrary() {
+    func selectItemsFromPhotoLibrary() {
         if #available(iOS 14, *) {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -183,7 +183,7 @@ class ConversationViewController: UIViewController,
                                            message: nil,
                                            preferredStyle: .actionSheet)
         let pictureAction = UIAlertAction(title: L10n.Alerts.uploadPhoto, style: UIAlertAction.Style.default) {[weak self] _ in
-            self?.selectItamsFromPhotoLibrary()
+            self?.selectItemsFromPhotoLibrary()
         }
 
         let recordVideoAction = UIAlertAction(title: L10n.Alerts.recordVideoMessage, style: UIAlertAction.Style.default) {[weak self] _ in
@@ -276,7 +276,6 @@ class ConversationViewController: UIViewController,
             guard let self = self else { return }
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.allowsEditing = true
             imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
             imagePicker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
             imagePicker.modalPresentationStyle = .overFullScreen
@@ -295,7 +294,7 @@ class ConversationViewController: UIViewController,
                 provider.loadObject(ofClass: UIImage.self) { [weak self] (object, _) in
                     guard let self = self,
                           let image = object as? UIImage,
-                          let imageData = image.jpegData(compressionQuality: 90) else { return }
+                          let imageData = image.jpegData(compressionQuality: 0.5) else { return }
                     self.viewModel.sendAndSaveFile(displayName: imageFileName + ".jpeg", imageData: imageData)
                 }
             case .video:
@@ -337,7 +336,7 @@ class ConversationViewController: UIViewController,
             }
             // copy image to tmp
             let imageFileName = "IMG.jpeg"
-            guard let imageData = image.jpegData(compressionQuality: 90) else { return }
+            guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
             self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
             return
         }
