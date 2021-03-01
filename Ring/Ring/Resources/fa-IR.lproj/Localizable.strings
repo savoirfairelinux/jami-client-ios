@@ -23,7 +23,7 @@
 "global.contactRequestsTabBarTitle" = "دعوت ها";
 "global.meTabBarTitle" = "حساب";
 "global.ok" = "قبول";
-"global.versionName" = "Together";
+"global.versionName" = "یکدیگر";
 "global.close" = "بستن";
 "global.share" = "هم‌رسانی";
 
@@ -48,8 +48,8 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "پیام خود را بنویسید...";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.explanationSendingLocationTo" = "در حال حاضر مکان خود را به اشتراک می‌گذارید";
+"conversation.explanationReceivingLocationFrom" = "در حال حاضر مکان زنده را دریافت می‌کنید از";
 
 //Invitations
 "invitations.noInvitations" = "بدون دعوت‌نامه";
@@ -177,8 +177,8 @@
 "calls.callFinished" = "تماس پایان یافت";
 "calls.currentCallWith" = "تماس با";
 "calls.haghUp" = "قطع‌کردن";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "به حداکثر رساندن";
+"calls.minimize" = "به‌حداقل‌رساندن";
 
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
@@ -237,7 +237,7 @@
 "accountPage.noBoothMode" = "برای فعال‌سازی حالت غرفه ابتدا باید گذرواژه حساب ایجاد کنید.";
 "accountPage.boothModeAlertMessage" = "بعد از فعال‌سازی حالت غرفه، تمامی گفتگوهای شما حذف می‌شوند.";
 "accountPage.peerDiscovery" = "اتصال خودکار در شبکه محلی";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "ثبت‌نام خودکار پس از انقضا";
 
 //Account
 "account.sipUsername" = "نام کاربر";
