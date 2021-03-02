@@ -40,6 +40,7 @@ class CallViewModel: Stateable, ViewModel {
     private let audioService: AudioService
     private let profileService: ProfilesService
     private let conversationService: ConversationsService
+    private let nameService: NameService
 
     private let disposeBag = DisposeBag()
     private let log = SwiftyBeaver.self
@@ -55,6 +56,8 @@ class CallViewModel: Stateable, ViewModel {
         currentCallVariable.asObservable()
     }()
     private var callDisposeBag = DisposeBag()
+
+    private var conferenceParticipantsUsernames = [String: String]()
 
     var conferenceMode: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
 
@@ -395,6 +398,7 @@ class CallViewModel: Stateable, ViewModel {
         self.audioService = injectionBag.audioService
         self.profileService = injectionBag.profileService
         self.callsProvider = injectionBag.callsProvider
+        self.nameService = injectionBag.nameService
         self.injectionBag = injectionBag
         self.conversationService = injectionBag.conversationsService
         callsProvider.sharedResponseStream
@@ -427,6 +431,19 @@ class CallViewModel: Stateable, ViewModel {
                 let overrideOutput = self.call?.callTypeValue == CallType.incoming.rawValue
                 self.audioService.setDefaultOutput(toSpeaker: !self.isAudioOnly,
                                                    override: overrideOutput)
+            })
+            .disposed(by: self.disposeBag)
+        self.nameService.usernameLookupStatus
+            .filter({ [weak self] lookupNameResponse in
+                return lookupNameResponse.address != nil &&
+                    self?.conferenceParticipantsUsernames[lookupNameResponse.address] != nil
+            })
+            .subscribe(onNext: { [weak self] lookupNameResponse in
+                guard let self = self else { return }
+                if let name = lookupNameResponse.name, !name.isEmpty, self.conferenceParticipantsUsernames[lookupNameResponse.address]!.isEmpty {
+                    self.conferenceParticipantsUsernames[lookupNameResponse.address] = name
+                    self.layoutUpdated.accept(true)
+                }
             })
             .disposed(by: self.disposeBag)
     }
@@ -634,8 +651,18 @@ extension CallViewModel {
                 }
                 return
             }
-            guard let call = self.callService.call(participantHash: uri.filterOutHost(), accountID: account.id) else { return }
-            participant.displayName = call.getDisplayName()
+            let uriWithoutHost = uri.filterOutHost()
+            if uriWithoutHost == account.jamiId {
+                participant.displayName = L10n.Account.me
+            }
+            if !participant.displayName.isEmpty && participant.displayName != uriWithoutHost {
+                conferenceParticipantsUsernames[uriWithoutHost] = participant.displayName
+            } else if let name = conferenceParticipantsUsernames[uriWithoutHost], !name.isEmpty {
+                participant.displayName = name
+            } else {
+                self.conferenceParticipantsUsernames[uriWithoutHost] = ""
+                self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: uriWithoutHost)
+            }
         }
         return participants
     }
