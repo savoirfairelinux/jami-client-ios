@@ -141,7 +141,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
                 var contact = contactItem.contacts.first!
                 cell.nameLabel.text = contact.firstLine
-                cell.lastMessagePreviewLabel?.text = contact.secondLine
+                cell.lastMessagePreviewLabel?.isHidden = true
 
                 var imageData: Data?
                 if let contactProfile = contact.profile, let photo = contactProfile.photo,
