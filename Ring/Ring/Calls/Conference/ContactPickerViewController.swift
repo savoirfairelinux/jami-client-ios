@@ -107,7 +107,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     private func setupDataSources() {
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ContactPickerSection.Item)
             -> UITableViewCell = {
-                (   dataSource: TableViewSectionedDataSource<ContactPickerSection>,
+                (   _: TableViewSectionedDataSource<ContactPickerSection>,
                 tableView: UITableView,
                 indexPath: IndexPath,
                 contactItem: ContactPickerSection.Item) in

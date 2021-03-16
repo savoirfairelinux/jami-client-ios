@@ -61,9 +61,9 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, GeneralSettingsSection.Item)
             -> UITableViewCell = {
                 ( dataSource: TableViewSectionedDataSource<GeneralSettingsSection>,
-                tableView: UITableView,
+                _: UITableView,
                 indexPath: IndexPath,
-                item: GeneralSettingsSection.Item) in
+                _: GeneralSettingsSection.Item) in
                 switch dataSource[indexPath] {
 
                 case .hardwareAcceleration:

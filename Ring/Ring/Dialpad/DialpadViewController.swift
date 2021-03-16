@@ -44,7 +44,7 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
         collectionView.backgroundColor = UIColor.jamiBackgroundColor
         self.applyL10n()
         let device = UIDevice.modelName
-        if device == "iPhone 5" || device ==  "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
+        if device == "iPhone 5" || device == "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
             labelTopConstraint.constant = 15
             labelBottomConstraint.constant = 15
         }
