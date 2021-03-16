@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
             <connections>
-                <outlet property="acceptCallButton" destination="rfz-9h-HoH" id="V6j-8E-g68"/>
                 <outlet property="backgroundBlurEffect" destination="w5l-pw-1ET" id="YYh-qB-WIL"/>
                 <outlet property="cancelButton" destination="ZxT-mA-1xU" id="4nk-iI-vPV"/>
-                <outlet property="cancelButtonBottomConstraint" destination="Ilu-Zu-JqW" id="Yeg-Ca-8pf"/>
-                <outlet property="cancelButtonCenterConstraint" destination="ls1-Ze-LXF" id="QlC-QB-oPz"/>
-                <outlet property="cancelButtonHeightConstraint" destination="kls-aA-2zS" id="CzE-vC-V5Z"/>
-                <outlet property="cancelButtonWidthConstraint" destination="0vV-4C-odp" id="beL-yR-ehA"/>
+                <outlet property="cancelButtonBottomConstraint" destination="Ilu-Zu-JqW" id="Kpe-jH-9iN"/>
+                <outlet property="cancelButtonHeightConstraint" destination="kls-aA-2zS" id="lsP-IM-HSb"/>
+                <outlet property="cancelButtonWidthConstraint" destination="0vV-4C-odp" id="guC-Z4-o2R"/>
                 <outlet property="container" destination="a9g-pf-bHy" id="6bw-CB-5qN"/>
                 <outlet property="containerHeightConstraint" destination="Gjk-7U-rEe" id="G5G-Uh-zRV"/>
                 <outlet property="containerView" destination="iN0-l3-epB" id="mcP-kY-dVO"/>
@@ -25,24 +23,24 @@
                 <outlet property="muteVideoButton" destination="W7F-nH-kda" id="MWK-JU-544"/>
                 <outlet property="pauseCallButton" destination="MPk-dB-dhR" id="W4G-AB-WFw"/>
                 <outlet property="stackView" destination="RHx-cL-CV5" id="Iz9-B0-2Rd"/>
-                <outlet property="stackViewWidthConstraint" destination="ZuV-LV-CYZ" id="ita-8Y-fAb"/>
                 <outlet property="stackViewYConstraint" destination="z8B-uv-Vcb" id="Gaj-8x-yif"/>
+                <outlet property="stopButton" destination="C1I-Lc-X8k" id="S19-uM-47H"/>
                 <outlet property="switchCameraButton" destination="RJW-4D-bPR" id="74c-XD-hdA"/>
                 <outlet property="switchSpeakerButton" destination="0VH-mO-vFE" id="1Gy-a9-FAW"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="108"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9g-pf-bHy">
-                    <rect key="frame" x="0.0" y="-122" width="375" height="200"/>
+                    <rect key="frame" x="0.0" y="-122" width="600" height="200"/>
                     <subviews>
                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w5l-pw-1ET" userLabel="Background Blur Effect">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JSn-50-Cd9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                             <vibrancyEffect>
@@ -55,9 +53,30 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </visualEffectView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RHx-cL-CV5">
-                            <rect key="frame" x="15" y="150" width="345" height="50"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="RHx-cL-CV5">
+                            <rect key="frame" x="15" y="150" width="570" height="50"/>
                             <subviews>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1I-Lc-X8k">
+                                    <rect key="frame" x="-50" y="0.0" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="fjP-5w-cIE"/>
+                                        <constraint firstAttribute="height" constant="50" id="qYY-yB-HJO"/>
+                                    </constraints>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="stop_call"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="0.0"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="25"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXL-FB-O0X">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <constraints>
@@ -80,7 +99,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7F-nH-kda">
-                                    <rect key="frame" x="74" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="130" y="0.0" width="50" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="Pn1-SS-vPN"/>
                                         <constraint firstAttribute="width" constant="50" id="jCp-ib-ySo"/>
@@ -101,7 +120,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJW-4D-bPR">
-                                    <rect key="frame" x="147.5" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="260" y="0.0" width="50" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="DRc-Jz-wSo"/>
                                         <constraint firstAttribute="width" constant="50" id="R9j-nN-Ez6"/>
@@ -122,7 +141,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPk-dB-dhR">
-                                    <rect key="frame" x="221.5" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="390" y="0.0" width="50" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="984-Na-56G"/>
                                         <constraint firstAttribute="height" constant="50" id="kIF-vP-ZJP"/>
@@ -143,7 +162,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VH-mO-vFE">
-                                    <rect key="frame" x="295" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="520" y="0.0" width="50" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="oso-jU-2U3"/>
                                         <constraint firstAttribute="height" constant="50" id="qmE-To-ipl"/>
@@ -164,7 +183,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </button>
                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izN-w3-Pc8">
-                                    <rect key="frame" x="345" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="570" y="0.0" width="50" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="PII-PT-xhP"/>
                                         <constraint firstAttribute="width" constant="50" id="wje-Ic-6hu"/>
@@ -187,12 +206,11 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" priority="250" constant="230" id="ZuV-LV-CYZ"/>
                                 <constraint firstAttribute="height" constant="50" id="gaC-GZ-ftw"/>
                             </constraints>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxT-mA-1xU">
-                            <rect key="frame" x="152.5" y="10" width="70" height="70"/>
+                            <rect key="frame" x="265" y="10" width="70" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="0vV-4C-odp"/>
                                 <constraint firstAttribute="height" constant="70" id="kls-aA-2zS"/>
@@ -212,37 +230,15 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfz-9h-HoH" userLabel="Accept">
-                            <rect key="frame" x="312.5" y="10" width="70" height="70"/>
-                            <color key="backgroundColor" red="0.45098039215686275" green="0.98039215686274506" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="70" id="cRi-F4-pPw"/>
-                                <constraint firstAttribute="height" constant="70" id="vhg-1N-VIL"/>
-                            </constraints>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="call_button"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="0.0"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="35"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="rfz-9h-HoH" firstAttribute="leading" secondItem="ZxT-mA-1xU" secondAttribute="trailing" constant="90" id="48d-Rh-4pI"/>
                         <constraint firstAttribute="bottom" secondItem="w5l-pw-1ET" secondAttribute="bottom" constant="-20" id="6qu-Nn-b1Y"/>
                         <constraint firstItem="w5l-pw-1ET" firstAttribute="top" secondItem="a9g-pf-bHy" secondAttribute="top" id="7OO-QU-y0u"/>
                         <constraint firstAttribute="height" constant="200" id="Gjk-7U-rEe"/>
                         <constraint firstAttribute="bottom" secondItem="ZxT-mA-1xU" secondAttribute="bottom" constant="120" id="Ilu-Zu-JqW"/>
-                        <constraint firstItem="rfz-9h-HoH" firstAttribute="centerY" secondItem="ZxT-mA-1xU" secondAttribute="centerY" id="NZg-SL-A31"/>
                         <constraint firstAttribute="trailing" secondItem="w5l-pw-1ET" secondAttribute="trailing" id="TnQ-lp-9B9"/>
                         <constraint firstItem="RHx-cL-CV5" firstAttribute="leading" secondItem="a9g-pf-bHy" secondAttribute="leading" constant="15" id="Y9c-4n-eid"/>
-                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="ZfR-cx-MUB"/>
                         <constraint firstItem="w5l-pw-1ET" firstAttribute="leading" secondItem="a9g-pf-bHy" secondAttribute="leading" id="bbd-5D-5So"/>
                         <constraint firstItem="RHx-cL-CV5" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="bmE-qo-8aJ"/>
                         <constraint firstItem="ZxT-mA-1xU" firstAttribute="centerX" secondItem="a9g-pf-bHy" secondAttribute="centerX" id="ls1-Ze-LXF"/>
@@ -251,6 +247,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="a9g-pf-bHy" secondAttribute="bottom" constant="30" id="YHm-ET-yjX"/>
@@ -258,13 +255,11 @@
                 <constraint firstItem="a9g-pf-bHy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uv2-qL-KQX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="32.799999999999997" y="111.54422788605699"/>
         </view>
     </objects>
     <resources>
         <image name="audio_running" width="24" height="24"/>
-        <image name="call_button" width="29" height="29"/>
         <image name="dialpad" width="37.5" height="37.5"/>
         <image name="disable_speakerphone" width="24" height="24"/>
         <image name="pause_call" width="24" height="24"/>

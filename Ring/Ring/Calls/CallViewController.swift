@@ -237,19 +237,16 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self?.removeFromScreen()
             })
             .disposed(by: self.disposeBag)
+        self.buttonsContainer.stopButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.cancelCall(stopProvider: true)
+                self?.removeFromScreen()
+            })
+            .disposed(by: self.disposeBag)
         self.sendMessageButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showConversations()
                 self?.dismiss(animated: false, completion: nil)
-            })
-            .disposed(by: self.disposeBag)
-
-        self.buttonsContainer.acceptCallButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.viewModel.answerCall()
-                    .subscribe()
-                    .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
 
