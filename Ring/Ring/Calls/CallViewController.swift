@@ -49,7 +49,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var capturedVideoBlurEffect: UIVisualEffectView!
     @IBOutlet weak var viewCapturedVideo: UIView!
     @IBOutlet private weak var infoContainer: UIView!
-    //@IBOutlet private weak var callProfileImage: UIImageView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
     @IBOutlet private weak var buttonsContainer: ButtonsContainerView!
@@ -74,8 +73,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var conferenceLayout: ConferenceLayout!
 
     @IBOutlet weak var sendMessageButton: UIButton!
-    @IBOutlet weak var inConferenceAddContactButton: UIView!
-    @IBOutlet weak var conferenceCallsLeading: NSLayoutConstraint!
     @IBOutlet weak var conferenceCallsTop: NSLayoutConstraint!
 
     var viewModel: CallViewModel!
@@ -124,7 +121,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         UIApplication.shared.isIdleTimerDisabled = true
         initCallAnimation()
         self.configureConferenceLayout()
-        self.inConferenceAddContactButton.isHidden = !self.viewModel.conferenceMode.value
         if callCurrent {
             self.capturedVideoBlurEffect.alpha = 1
             hideCapturedVideo()
@@ -144,14 +140,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         sendMessageButton.isHidden = self.viewModel.isBoothMode()
         sendMessageButton.isEnabled = !self.viewModel.isBoothMode()
         buttonsStackView.isHidden = self.viewModel.isBoothMode()
-    }
-
-    @IBAction func addParticipant(_ sender: Any) {
-        let children = self.children
-        for child in children where child.isKind(of: (ContactPickerViewController).self) {
-            return
-        }
-        self.viewModel.showContactPickerVC()
     }
 
     func addTapGesture() {
@@ -237,19 +225,16 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self?.removeFromScreen()
             })
             .disposed(by: self.disposeBag)
+        self.buttonsContainer.stopButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.cancelCall(stopProvider: true)
+                self?.removeFromScreen()
+            })
+            .disposed(by: self.disposeBag)
         self.sendMessageButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showConversations()
                 self?.dismiss(animated: false, completion: nil)
-            })
-            .disposed(by: self.disposeBag)
-
-        self.buttonsContainer.acceptCallButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.viewModel.answerCall()
-                    .subscribe()
-                    .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
 
@@ -290,7 +275,16 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self?.viewModel.switchSpeaker()
             })
             .disposed(by: self.disposeBag)
-
+        self.buttonsContainer.addParticipantButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let children = self.children
+                for child in children where child.isKind(of: (ContactPickerViewController).self) {
+                    return
+                }
+                self.viewModel.showContactPickerVC()
+            })
+            .disposed(by: self.disposeBag)
         //Data bindings
         self.viewModel.videoButtonState
             .observeOn(MainScheduler.instance)
@@ -356,8 +350,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     if self?.viewModel.isAudioOnly ?? true {
                         self?.buttonContainerHeightConstraint.constant = 200
                         self?.buttonsContainer.containerHeightConstraint.constant = 200
-                        self?.buttonsContainer.stackViewYConstraint.constant = 110
-                        self?.buttonsContainer.stackViewWidthConstraint.priority = UILayoutPriority(rawValue: 999)
                         UIView.animate(withDuration: 0.3, animations: {
                             self?.durationLabel.alpha = 1
                             self?.buttonsContainer.stackView.alpha = 1
@@ -461,25 +453,23 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self?.buttonsContainer.updateView()
                 self?.infoContainer.isHidden = enteredConference ? true : false
                 self?.resizeCapturedVideo(withInfoContainer: false)
-                self?.inConferenceAddContactButton.isHidden = !enteredConference
-                self?.conferenceCallsLeading.constant = enteredConference ? 0 : -80
                 // if entered conference add first participant to conference list
                 if enteredConference {
                     self?.removeConferenceParticipantMenu()
                     guard let injectionBag = self?.viewModel.injectionBag
                     else { return }
                     // add self as a master call
-                    let masterCallView =
+                    let mainCallView =
                         ConferenceParticipantView(frame: CGRect(x: 0,
                                                                 y: 0,
                                                                 width: inConfViewWidth,
                                                                 height: inConfViewHeight))
-                    let masterCallViewModel =
+                    let mainCallViewModel =
                         ConferenceParticipantViewModel(with: nil,
                                                        injectionBag: injectionBag)
-                    masterCallView.viewModel = masterCallViewModel
-                    masterCallView.delegate = self
-                    self?.conferenceCalls.insertArrangedSubview(masterCallView, at: 0)
+                    mainCallView.viewModel = mainCallViewModel
+                    mainCallView.delegate = self
+                    self?.conferenceCalls.insertArrangedSubview(mainCallView, at: 0)
                     let callView =
                         ConferenceParticipantView(frame: CGRect(x: 0,
                                                                 y: 0,
@@ -642,6 +632,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             DispatchQueue.main.async { [weak self] in
                 //guard let hidden = self?.infoContainer.isHidden else {return}
                 self?.resizeCapturedVideo(withInfoContainer: false)
+                self?.buttonsContainer.orientationchanged()
                 if UIDevice.current.hasNotch && (UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft) && self?.infoContainer.isHidden == false {
                     self?.buttonsContainerBottomConstraint.constant = 1
                 }
@@ -733,7 +724,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             self.infoContainer.isHidden = false
         } else {
             self.conferenceCallsScrolView.isHidden = false
-            self.inConferenceAddContactButton.isHidden = false
         }
         self.view.layoutIfNeeded()
 
@@ -763,7 +753,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     self?.infoContainer.isHidden = true
                 } else {
                     self?.conferenceCallsScrolView.isHidden = true
-                    self?.inConferenceAddContactButton.isHidden = true
                 }
                 self?.buttonsContainer.isHidden = true
         })
