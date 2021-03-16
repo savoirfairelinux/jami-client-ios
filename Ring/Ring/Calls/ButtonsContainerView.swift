@@ -22,30 +22,34 @@ import UIKit
 import Reusable
 import RxSwift
 
-class ButtonsContainerView: UIView, NibLoadable {
+class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
 
     //Outlets
     @IBOutlet var containerView: UIView!
     @IBOutlet  weak var container: UIView!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var firstPageStackView: UIStackView!
+    @IBOutlet weak var secondPageStackView: UIStackView!
     @IBOutlet weak var backgroundBlurEffect: UIVisualEffectView!
-    @IBOutlet  weak var muteAudioButton: UIButton!
-    @IBOutlet  weak var muteVideoButton: UIButton!
-    @IBOutlet  weak var pauseCallButton: UIButton!
-    @IBOutlet  weak var dialpadButton: UIButton!
-    @IBOutlet  weak var switchSpeakerButton: UIButton!
-    @IBOutlet  weak var cancelButton: UIButton!
-    @IBOutlet  weak var switchCameraButton: UIButton!
-    @IBOutlet  weak var acceptCallButton: UIButton!
+    @IBOutlet  weak var cancelButton: UIButton! // cancel pending outgoing call
+    @IBOutlet  weak var pageControl: UIPageControl!
+    @IBOutlet  weak var scrollView: UIScrollView!
 
     //Constraints
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cancelButtonCenterConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cancelButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var cancelButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var stackViewYConstraint: NSLayoutConstraint!
-    @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cancelButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
+
+    //Buttons
+    var muteAudioButton: UIButton!
+    var muteVideoButton: UIButton!
+    var pauseCallButton: UIButton!
+    var dialpadButton: UIButton!
+    var stopButton: UIButton! // stop current call
+    var switchCameraButton: UIButton!
+    var switchSpeakerButton: UIButton!
+    var addParticipantButton: UIButton!
 
     let disposeBag = DisposeBag()
     var isCallStarted: Bool = false
@@ -59,9 +63,9 @@ class ButtonsContainerView: UIView, NibLoadable {
                     case .none:
                         self?.withoutOptions()
                     case .optionsWithoutSpeakerphone:
-                        self?.optionsWithoutSpeaker()
+                        self?.update(withSpeakerEnable: false)
                     case .optionsWithSpeakerphone:
-                        self?.optionsWithSpeaker()
+                        self?.update(withSpeakerEnable: true)
                     }
                 })
                 .disposed(by: self.disposeBag)
@@ -81,6 +85,7 @@ class ButtonsContainerView: UIView, NibLoadable {
     override func didMoveToWindow() {
         super.didMoveToWindow()
         self.cancelButton.backgroundColor = UIColor.red
+        self.stopButton.backgroundColor = UIColor.red
     }
 
     func commonInit() {
@@ -88,93 +93,106 @@ class ButtonsContainerView: UIView, NibLoadable {
         addSubview(containerView)
         containerView.frame = self.bounds
         self.container.clipsToBounds = false
+        scrollView.delegate = self
+        muteAudioButton = configureButton(image: UIImage(asset: Asset.audioMuted))
+        muteVideoButton = configureButton(image: UIImage(asset: Asset.videoMuted))
+        pauseCallButton = configureButton(image: UIImage(asset: Asset.pauseCall))
+        dialpadButton = configureButton(image: UIImage(asset: Asset.dialpad))
+        stopButton = configureButton(image: UIImage(asset: Asset.stopCall))
+        stopButton.borderColor = UIColor.red
+        switchCameraButton = configureButton(image: UIImage(asset: Asset.switchCamera))
+        switchSpeakerButton = configureButton(image: UIImage(asset: Asset.enableSpeakerphone))
+        addParticipantButton = configureButton(image: UIImage(asset: Asset.addPerson))
+        pageControl.addTarget(self, action: #selector(changePage), for: UIControl.Event.valueChanged)
+    }
+
+    func configureButton(image: UIImage?) -> UIButton {
+        let button = UIButton()
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        button.cornerRadius = 25
+        button.borderWidth = 1
+        button.borderColor = UIColor.white
+        button.tintColor = UIColor.white
+        button.setImage(image, for: .normal)
+        return button
     }
 
     func withoutOptions() {
         self.container.backgroundColor = UIColor.clear
         self.backgroundBlurEffect.isHidden = true
-        switchCameraButton.isHidden = true
-        muteAudioButton.isHidden = true
-        muteVideoButton.isHidden = true
-        pauseCallButton.isHidden = true
-        dialpadButton.isHidden = true
-        switchSpeakerButton.isHidden = true
         cancelButton.isHidden = false
+        firstPageStackView.removeSubviews()
+        secondPageStackView.removeSubviews()
+        pageControl.isHidden = true
         if self.viewModel?.isIncoming ?? false {
-            acceptCallButton.isHidden = false
             cancelButtonBottomConstraint.constant = 60
-            cancelButtonCenterConstraint.constant = -80
             return
         }
-        cancelButtonCenterConstraint.constant = 0
         cancelButtonBottomConstraint.constant = 20
+        scrollView.isScrollEnabled = false
     }
 
-    func optionsWithSpeaker() {
-        acceptCallButton.isHidden = true
-        cancelButtonCenterConstraint.constant = 0
+    func update(withSpeakerEnable enable: Bool) {
         self.backgroundBlurEffect.isHidden = false
-        muteAudioButton.isHidden = false
-        if self.viewModel?.isAudioOnly ?? false {
-            muteVideoButton.isHidden = true
-            switchCameraButton.isHidden = true
-            if self.viewModel?.isSipCall ?? false {
-                dialpadButton.isHidden = false
+        cancelButton.isHidden = true
+        switchSpeakerButton.isEnabled = enable
+        let isSip = self.viewModel?.isSipCall ?? false
+        let audioOnly = self.viewModel?.isAudioOnly ?? false
+        var havePages = false
+        if isSip {
+            firstPageStackView.removeSubviews()
+            secondPageStackView.removeSubviews()
+            firstPageStackView.addArrangedSubview(stopButton)
+            firstPageStackView.addArrangedSubview(pauseCallButton)
+            firstPageStackView.addArrangedSubview(muteAudioButton)
+            firstPageStackView.addArrangedSubview(switchSpeakerButton)
+            firstPageStackView.addArrangedSubview(dialpadButton)
+        } else if audioOnly {
+            firstPageStackView.removeSubviews()
+            secondPageStackView.removeSubviews()
+            firstPageStackView.addArrangedSubview(stopButton)
+            firstPageStackView.addArrangedSubview(pauseCallButton)
+            firstPageStackView.addArrangedSubview(muteAudioButton)
+            firstPageStackView.addArrangedSubview(switchSpeakerButton)
+            firstPageStackView.addArrangedSubview(addParticipantButton)
+        } else {
+            let screenRect = UIScreen.main.bounds
+            let screenWidth: CGFloat = screenRect.size.width
+            let buttonsWidth: CGFloat = 7 * 50 + 30 * 6 //540
+            havePages = screenWidth < buttonsWidth
+            firstPageStackView.removeSubviews()
+            secondPageStackView.removeSubviews()
+            firstPageStackView.addArrangedSubview(stopButton)
+            firstPageStackView.addArrangedSubview(pauseCallButton)
+            firstPageStackView.addArrangedSubview(switchCameraButton)
+            firstPageStackView.addArrangedSubview(switchSpeakerButton)
+            firstPageStackView.addArrangedSubview(addParticipantButton)
+            if havePages {
+                secondPageStackView.addArrangedSubview(muteAudioButton)
+                secondPageStackView.addArrangedSubview(muteVideoButton)
+            } else {
+                firstPageStackView.addArrangedSubview(muteAudioButton)
+                firstPageStackView.addArrangedSubview(muteVideoButton)
             }
+        }
+        pageControl.isHidden = !havePages
+        scrollView.isScrollEnabled = havePages
+        if self.viewModel?.isAudioOnly ?? false {
             cancelButtonBottomConstraint.constant = 20
         } else {
-            muteVideoButton.isHidden = false
-            switchCameraButton.isHidden = false
             cancelButtonBottomConstraint.constant = 80
         }
-        pauseCallButton.isHidden = false
-        switchSpeakerButton.isEnabled = true
-        switchSpeakerButton.isHidden = false
-        cancelButton.isHidden = false
-        setUpConference()
         setButtonsColor()
-    }
-
-    func optionsWithoutSpeaker() {
-        acceptCallButton.isHidden = true
-        cancelButtonCenterConstraint.constant = 0
-        if self.viewModel?.isAudioOnly ?? false {
-            muteVideoButton.isHidden = true
-            switchCameraButton.isHidden = true
-            if self.viewModel?.isSipCall ?? false {
-                dialpadButton.isHidden = false
-            }
-            cancelButtonBottomConstraint.constant = 20
-        } else {
-            switchCameraButton.isHidden = false
-            muteVideoButton.isHidden = false
-            cancelButtonBottomConstraint.constant = 80
-        }
-        switchSpeakerButton.isEnabled = false
-        self.muteAudioButton.isHidden = false
-        switchSpeakerButton.isHidden = false
-        self.backgroundBlurEffect.isHidden = false
-        pauseCallButton.isHidden = false
-        cancelButton.isHidden = false
-        setUpConference()
-        setButtonsColor()
-    }
-
-    func setUpConference() {
-        if !(self.viewModel?.isConference ?? false) {
-            return
-        }
-        pauseCallButton.isHidden = true
-        muteAudioButton.isHidden = true
-        muteVideoButton.isHidden = true
-        cancelButtonBottomConstraint.constant = 0
     }
 
     func updateView() {
-        if switchSpeakerButton.isEnabled && !switchSpeakerButton.isHidden {
-            self.optionsWithSpeaker()
+        if firstPageStackView.subviews.isEmpty {
+            self.withoutOptions()
+        } else if switchSpeakerButton.isEnabled && !switchSpeakerButton.isHidden {
+            self.update(withSpeakerEnable: true)
         } else if !switchSpeakerButton.isHidden {
-            self.optionsWithoutSpeaker()
+            self.update(withSpeakerEnable: false)
         }
     }
 
@@ -202,4 +220,16 @@ class ButtonsContainerView: UIView, NibLoadable {
         muteVideoButton.borderColor = UIColor.white
         switchCameraButton.tintColor = UIColor.white
     }
+
+    @objc
+    func changePage(sender: AnyObject) {
+        let xpoint = CGFloat(pageControl.currentPage) * scrollView.frame.size.width
+        scrollView.setContentOffset(CGPoint(x: xpoint, y: 0), animated: true)
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
+        pageControl.currentPage = Int(pageNumber)
+    }
+
 }
