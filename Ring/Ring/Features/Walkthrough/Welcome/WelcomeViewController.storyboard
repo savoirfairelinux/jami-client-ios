@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
     <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,12 +32,12 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to jami !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
-                                                <rect key="frame" x="383.5" y="221" width="257.5" height="43"/>
+                                                <rect key="frame" x="383.5" y="221" width="257" height="43"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="36"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                                 <rect key="frame" x="362" y="304" width="300" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="FEf-kf-jCs"/>
@@ -50,7 +51,7 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
-                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                                 <rect key="frame" x="362" y="374" width="300" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="YW4-Sc-61P"/>
@@ -64,7 +65,7 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
-                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wd6-vQ-gaH" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wd6-vQ-gaH" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                                 <rect key="frame" x="362" y="444" width="300" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="dWY-2h-Jo8"/>
@@ -72,14 +73,14 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                                <state key="normal" title="Connect to account manager">
+                                                <state key="normal" title="Connect to a JAMS server">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
-                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHN-iS-Mdb" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHN-iS-Mdb" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                                 <rect key="frame" x="362" y="514" width="300" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="o1x-x5-0z2"/>
@@ -93,7 +94,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="djg-zh-qNA" secondAttribute="centerX" id="2I1-0R-aRl"/>
                                             <constraint firstItem="E4b-Zv-unB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="djg-zh-qNA" secondAttribute="leading" constant="20" id="5VL-fW-ruk"/>
@@ -130,6 +131,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="ahR-LE-Or6"/>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="hvJ-fJ-PMc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="X8i-r8-BbF" firstAttribute="top" secondItem="Dg0-kS-rT7" secondAttribute="top" id="4Eh-OM-QvP"/>
@@ -139,7 +141,6 @@
                             <constraint firstItem="hvJ-fJ-PMc" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bu0-90-MB5" secondAttribute="trailing" constant="20" id="h6u-zb-Bvk"/>
                             <constraint firstItem="bu0-90-MB5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hvJ-fJ-PMc" secondAttribute="leading" constant="20" id="pf3-7r-uP4"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="hvJ-fJ-PMc"/>
                     </view>
                     <navigationItem key="navigationItem" id="SVR-Ry-7d7"/>
                     <connections>
@@ -156,7 +157,24 @@
             <point key="canvasLocation" x="-333.60000000000002" y="29.55665024630542"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="QLK-gs-fOJ">
+            <size key="intrinsicContentSize" width="231" height="34"/>
+        </designable>
+        <designable name="Wd6-vQ-gaH">
+            <size key="intrinsicContentSize" width="203" height="34"/>
+        </designable>
+        <designable name="bu0-90-MB5">
+            <size key="intrinsicContentSize" width="173" height="34"/>
+        </designable>
+        <designable name="kHN-iS-Mdb">
+            <size key="intrinsicContentSize" width="171" height="39"/>
+        </designable>
+    </designables>
     <resources>
         <image name="jamiIcon" width="100" height="95"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
