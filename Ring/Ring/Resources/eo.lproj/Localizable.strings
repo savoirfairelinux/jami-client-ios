@@ -61,7 +61,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Ligi tiun aparaton al konto";
 "welcome.createAccount" = "Create a Jami account";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Entajpu Pasvorton";
 "linkToAccountManager.usernamePlaceholder" = "Uzantnomo";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Ne trovantas konton";

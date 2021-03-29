@@ -61,7 +61,7 @@
 "welcome.text" = "Jami is een vrij en universeel communicatieplatform, dat de privacy en vrijheden van haar gebruikers eerbiedigt";
 "welcome.linkDevice" = "Dit apparaat aan een account koppelen";
 "welcome.createAccount" = "Een Jami-account aanmaken";
-"welcome.connectToManager" = "Verbinden met accountbeheer";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Overslaan";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Voer wachtwoord in";
 "linkToAccountManager.usernamePlaceholder" = "Gebruikersnaam";
 "linkToAccountManager.usernameLabel" = "Voer gebruikersnaam in";
-"linkToAccountManager.accountManagerPlaceholder" = "Accountbeheer";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Account kan niet gevonden worden";

@@ -61,7 +61,7 @@
 "welcome.text" = "Jami este o platformă de comunicare liberă și universală care păstrează libertățile și intimitatea.";
 "welcome.linkDevice" = "Asociază acest aparat unui cont";
 "welcome.createAccount" = "Creează un cont Jami";
-"welcome.connectToManager" = "Conectează-te la Administrare cont";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Omite";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Introdu Parola";
 "linkToAccountManager.usernamePlaceholder" = "Nume de Utilizator";
 "linkToAccountManager.usernameLabel" = "Introdu Numele de Utilizator";
-"linkToAccountManager.accountManagerPlaceholder" = "Administrare cont";
-"linkToAccountManager.accountManagerLabel" = "Introdu URI Administrare cont";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nu pot găsi contul";

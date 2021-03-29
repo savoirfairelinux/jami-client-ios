@@ -61,7 +61,7 @@
 "welcome.text" = "Jami on vapaa ja universaali viestintäalusta joka turvaa käyttäjien yksityisyyden ja vapaudet";
 "welcome.linkDevice" = "Yhdistä tämä laite tiliin";
 "welcome.createAccount" = "Tee Jami-tili";
-"welcome.connectToManager" = "Yhteyden muodostaminen tilinhallintaan";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Ohita";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Syötä salasana";
 "linkToAccountManager.usernamePlaceholder" = "Käyttäjänimi";
 "linkToAccountManager.usernameLabel" = "Anna käyttäjänimi";
-"linkToAccountManager.accountManagerPlaceholder" = "Tilin hallinta";
-"linkToAccountManager.accountManagerLabel" = "Anna tilinhallinnan verkko-osoite";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Tiliä ei löydy";

@@ -61,7 +61,7 @@
 "welcome.text" = "Jami - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
 "welcome.linkDevice" = "Привязать это устройство к аккаунту";
 "welcome.createAccount" = "Создать учётную запись Jami";
-"welcome.connectToManager" = "Подключиться к менеджеру учетной записи";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустить";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Введите пароль";
 "linkToAccountManager.usernamePlaceholder" = "Имя пользователя";
 "linkToAccountManager.usernameLabel" = "Введите имя пользователя";
-"linkToAccountManager.accountManagerPlaceholder" = "Менеджер учетной записи";
-"linkToAccountManager.accountManagerLabel" = "Введите URI-адрес менеджера учетных записей";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не удалось найти аккаунт";

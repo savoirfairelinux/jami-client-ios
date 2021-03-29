@@ -61,7 +61,7 @@
 "welcome.text" = "Jami është një platformë e lirë dhe universale komunikimesh që ruan privatësinë dhe liritë e përdoruesve";
 "welcome.linkDevice" = "Lidheni këtë pajisje me një llogari";
 "welcome.createAccount" = "Krijoni një llogari Jami";
-"welcome.connectToManager" = "Lidhuni me përgjegjësin e llogarive";
+"welcome.connectToManager" = "Lidhu me një shërbyes JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Anashkaloje";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Jepni Fjalëkalimin";
 "linkToAccountManager.usernamePlaceholder" = "Emër përdoruesi";
 "linkToAccountManager.usernameLabel" = "Jepni Emër Përdoruesi";
-"linkToAccountManager.accountManagerPlaceholder" = "Përgjegjës llogarish";
-"linkToAccountManager.accountManagerLabel" = "Jepni URI përgjegjësi llogarish";
+"linkToAccountManager.accountManagerPlaceholder" = "URL JAM-i";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "S’gjendet dot llogari";

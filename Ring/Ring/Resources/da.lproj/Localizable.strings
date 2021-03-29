@@ -61,7 +61,7 @@
 "welcome.text" = "Jami er en gratis og universel kommunikationsplatform som respekterer sine brugeres privatliv og frihed";
 "welcome.linkDevice" = "Tilknyt denne enhed til en konto";
 "welcome.createAccount" = "Opret en Jami-konto";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Spring over";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Indtast kodeord";
 "linkToAccountManager.usernamePlaceholder" = "Brugernavn";
 "linkToAccountManager.usernameLabel" = "Indtast Brugernavn";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan ikke finde konto";

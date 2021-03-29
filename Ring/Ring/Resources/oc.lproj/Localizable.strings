@@ -61,7 +61,7 @@
 "welcome.text" = "Jami es un logicial liure per comunicacions universalas que respèctan la libertat e la vida privada de sos utilizaires.";
 "welcome.linkDevice" = "Associar aqueste aparelh a un compte";
 "welcome.createAccount" = "Crear un compte Jami";
-"welcome.connectToManager" = "Connexion al gestionari de compte";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Saultar";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Picatz vòstre senhal";
 "linkToAccountManager.usernamePlaceholder" = "Nom d’utilizaire";
 "linkToAccountManager.usernameLabel" = "Picatz vòstre nom d’utilizaire";
-"linkToAccountManager.accountManagerPlaceholder" = "Gestionari de compte";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Impossible de trobar aqueste compte";

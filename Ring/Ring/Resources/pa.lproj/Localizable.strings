@@ -61,7 +61,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "ਇਹ ਡੀਵਾਈਸ ਕਿਸੇ ਖਾਤੇ ਨਾਲ ਲਿੰਕ ਕਰੋ";
 "welcome.createAccount" = "Jami ਖਾਤਾ ਬਣਾਓ";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "ਲੰਘਾਓ";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "ਪਾਸਵਰਡ ਦਾਖਲ ਕਰੋ";
 "linkToAccountManager.usernamePlaceholder" = "ਵਰਤੋਂਕਾਰ ਨਾਂ";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "ਖਾਤਾ ਲੱਭਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ";

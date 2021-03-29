@@ -61,7 +61,7 @@
 "welcome.text" = "Jami ist eine freie und universelle Kommunikationsplattform und respektiert die Freiheiten und Privatsphäre der Benutzer. ";
 "welcome.linkDevice" = "Dieses Gerät mit einem Konto verknüpfen";
 "welcome.createAccount" = "Ein Jami-Konto erstellen";
-"welcome.connectToManager" = "Mit Kontoverwalter verbinden";
+"welcome.connectToManager" = "Verbindung zum JAMS Server herstellen";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Überspringen";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Passwort eingeben";
 "linkToAccountManager.usernamePlaceholder" = "Benutzername";
 "linkToAccountManager.usernameLabel" = "Benutzername eingeben";
-"linkToAccountManager.accountManagerPlaceholder" = "Kontoverwalter";
-"linkToAccountManager.accountManagerLabel" = "Kontoverwalter URI angeben";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kann Konto nicht finden";

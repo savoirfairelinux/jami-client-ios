@@ -61,7 +61,7 @@
 "welcome.text" = "Ring jest wolnym oprogramowaniem do uniwersalnej komunikacji, respektującym wolności i prywatność swoich użytkowników";
 "welcome.linkDevice" = "Połącz to urządzenie z kontem";
 "welcome.createAccount" = "Stwórz konto Jami";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Pomiń";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Wpisz hasło";
 "linkToAccountManager.usernamePlaceholder" = "Nazwa użytkownika";
 "linkToAccountManager.usernameLabel" = "Wprowadź Nazwę Użytkownika";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nie można znaleźć konta";

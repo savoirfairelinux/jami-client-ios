@@ -61,7 +61,7 @@
 "welcome.text" = "Jami je slobodná a univerzálna komunikačná platforma, ktorá zachováva súkromie a slobodu používateľov.";
 "welcome.linkDevice" = "Prepojiť toto zariadenie s účtom";
 "welcome.createAccount" = "Vytvoriť Jami účet";
-"welcome.connectToManager" = "Pripojiť k správcovi účtu";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskočiť";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Zadajte heslo";
 "linkToAccountManager.usernamePlaceholder" = "Používateľské meno";
 "linkToAccountManager.usernameLabel" = "Zadajte používateľské meno";
-"linkToAccountManager.accountManagerPlaceholder" = "Správca účtu";
-"linkToAccountManager.accountManagerLabel" = "Zadajte URI správcu účtu";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Účet sa nedá nájsť";

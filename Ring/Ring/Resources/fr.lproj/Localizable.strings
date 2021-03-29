@@ -61,7 +61,7 @@
 "welcome.text" = "Jami est un logiciel libre de communication universel qui protège la vie privée et les libertés de ses utilisateurs.";
 "welcome.linkDevice" = "Lier cet appareil à un compte";
 "welcome.createAccount" = "Créer un compte Jami";
-"welcome.connectToManager" = "Se connecter à partir d'un serveur d'entreprise";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Passer";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Entrez le mot de passe";
 "linkToAccountManager.usernamePlaceholder" = "Nom d'utilisateur";
 "linkToAccountManager.usernameLabel" = "Entrer l'identifiant";
-"linkToAccountManager.accountManagerPlaceholder" = "Gestionnaire de compte";
-"linkToAccountManager.accountManagerLabel" = "Entrez l'URI du gestionnaire de compte";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Compte introuvable";

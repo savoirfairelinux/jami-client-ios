@@ -61,7 +61,7 @@
 "welcome.text" = "Ring 是一个保护用户的隐私和自由的通用自由软件。";
 "welcome.linkDevice" = "将此设备与一个账户进行关联";
 "welcome.createAccount" = "创建一个Jami账户";
-"welcome.connectToManager" = "连接到账户管理器";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "跳过";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "输入密码";
 "linkToAccountManager.usernamePlaceholder" = "用户名";
 "linkToAccountManager.usernameLabel" = "输入用户名";
-"linkToAccountManager.accountManagerPlaceholder" = "账户管理器";
-"linkToAccountManager.accountManagerLabel" = "输入账户管理器的 URI";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "无法找到账户";

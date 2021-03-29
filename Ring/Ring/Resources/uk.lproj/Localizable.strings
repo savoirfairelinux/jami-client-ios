@@ -61,7 +61,7 @@
 "welcome.text" = "Джамі — це вільна та універсальна платформа для зв'язку, яка оберігає приватність і свободи користувачів";
 "welcome.linkDevice" = "Прив'язати цей пристрій до облікового запису";
 "welcome.createAccount" = "Створити обліковий запис Джамі";
-"welcome.connectToManager" = "Connect to account manager";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустити";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Enter Password";
 "linkToAccountManager.usernamePlaceholder" = "Ім’я";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не можу знайти обліковий запис";

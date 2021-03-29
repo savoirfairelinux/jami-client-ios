@@ -61,7 +61,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Ligar este dispositivo a unha conta";
 "welcome.createAccount" = "Crear conta Jami";
-"welcome.connectToManager" = "Conectar ao xestor da conta";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Saltar";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Escribe Contrasinal";
 "linkToAccountManager.usernamePlaceholder" = "Nome de usuaria";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "Account manager";
-"linkToAccountManager.accountManagerLabel" = "Enter account manager URI";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Non se atopou a conta";

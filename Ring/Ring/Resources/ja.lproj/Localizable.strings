@@ -61,7 +61,7 @@
 "welcome.text" = "Jamiは、世界中のユーザーと繋がることができる、ユーザーの自由とプライバシーを尊重したフリーソフトウェアです。";
 "welcome.linkDevice" = "このデバイスをアカウントへリンク";
 "welcome.createAccount" = "Jamiアカウントを作成";
-"welcome.connectToManager" = "アカウントマネージャーに接続";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "スキップ";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "パスワードを入力してください";
 "linkToAccountManager.usernamePlaceholder" = "ユーザー名";
 "linkToAccountManager.usernameLabel" = "ユーザー名を入力してください";
-"linkToAccountManager.accountManagerPlaceholder" = "アカウントマネージャー";
-"linkToAccountManager.accountManagerLabel" = "アカウントマネージャーURIを入力";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "アカウントが見つかりません";

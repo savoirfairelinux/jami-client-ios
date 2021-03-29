@@ -61,7 +61,7 @@
 "welcome.text" = "جمی یک بستر ارتباطی رایگان و جهانی است، که حریم خصوصی و آزادی کاربران را حفظ می‌کند";
 "welcome.linkDevice" = "پیوند این دستگاه به یک حساب";
 "welcome.createAccount" = "ایجاد یک حساب جمی";
-"welcome.connectToManager" = "اتصال به مدیریت حساب";
+"welcome.connectToManager" = "اتصال به یک سرور JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "پرش";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "گذرواژه را وارد کنید";
 "linkToAccountManager.usernamePlaceholder" = "نام کاربری";
 "linkToAccountManager.usernameLabel" = "نام‌کاربری را وارد کنید";
-"linkToAccountManager.accountManagerPlaceholder" = "مدیر حساب کاربری";
-"linkToAccountManager.accountManagerLabel" = "ورود URI مدیریت حساب";
+"linkToAccountManager.accountManagerPlaceholder" = "آدرس JAMS";
+"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "نمی توان حساب را پیدا کرد";
