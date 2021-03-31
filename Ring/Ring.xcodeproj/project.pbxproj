@@ -267,6 +267,7 @@
 		2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
 		26929FD425659E5F0052A601 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 26929FD125659E5F0052A601 /* cacert.pem */; };
+		269B849626151AC10015BC72 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269B849326151AC10015BC72 /* libgit2.a */; };
 		26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B708FD253610B0003974F2 /* OpenURLLabel.swift */; };
 		26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */; };
 		26DA813224B641A5006C6E23 /* ProfilesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */; };
@@ -677,6 +678,7 @@
 		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
 		26929FD125659E5F0052A601 /* cacert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cacert.pem; sourceTree = "<group>"; };
+		269B849326151AC10015BC72 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = ../DEPS/arm64/lib/libgit2.a; sourceTree = "<group>"; };
 		26B708FD253610B0003974F2 /* OpenURLLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLLabel.swift; sourceTree = "<group>"; };
 		26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsMenu.swift; sourceTree = "<group>"; };
 		26DA813024B641A5006C6E23 /* ProfilesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilesAdapter.h; sourceTree = "<group>"; };
@@ -825,6 +827,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				269B849626151AC10015BC72 /* libgit2.a in Frameworks */,
 				266C1DBB2539F3A300978E87 /* RxRelay.framework in Frameworks */,
 				649AD3C324B4CFC700A0236D /* libsqlite3.tbd in Frameworks */,
 				649AD3C624B4CFD500A0236D /* libxml2.tbd in Frameworks */,
@@ -936,6 +939,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				269B849326151AC10015BC72 /* libgit2.a */,
 				266C1DB82539F3A300978E87 /* RxRelay.framework */,
 				6452144724B4ACDE007203D5 /* libsqlite3.tbd */,
 				6452144524B4ACC8007203D5 /* libxml2.tbd */,
