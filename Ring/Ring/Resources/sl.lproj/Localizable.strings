@@ -61,7 +61,7 @@
 "welcome.text" = "Jami je brezplačen univerzalna komunikacijska platforma, ki spoštuje svobodo in zasebnost svojih uporabnikov.";
 "welcome.linkDevice" = "Poveži napravo z računom";
 "welcome.createAccount" = "Ustvari Jami račun";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Poveži se z JAMS strežnikom";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskoči";

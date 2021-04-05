@@ -28,7 +28,7 @@
 "global.share" = "Distribuie";
 
 // Scan
-"scan.badQrCode" = "Cod QR greșit";
+"scan.badQrCode" = "Codul QR e greșit";
 "scan.search" = "Căutare...";
 
 // Smartlist
@@ -42,7 +42,7 @@
 "smartlist.noNetworkConnectivity" = "Nicio legătură la rețea";
 "smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis în reglările tale";
 "smartlist.accountsTitle" = "Conturi";
-"smartlist.addAccountButton" = "+ Adaugă un Cont";
+"smartlist.addAccountButton" = "+ Adaugă un cont";
 "smartlist.noNumber" = "Contactul ales nu are niciun număr";
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
 
@@ -61,7 +61,7 @@
 "welcome.text" = "Jami este o platformă de comunicare liberă și universală care păstrează libertățile și intimitatea.";
 "welcome.linkDevice" = "Asociază acest aparat unui cont";
 "welcome.createAccount" = "Creează un cont Jami";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Conectează-te la un server JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Omite";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "Introdu Parola";
 "linkToAccountManager.usernamePlaceholder" = "Nume de Utilizator";
 "linkToAccountManager.usernameLabel" = "Introdu Numele de Utilizator";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
+"linkToAccountManager.accountManagerLabel" = "Introdu URL-ul JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nu pot găsi contul";

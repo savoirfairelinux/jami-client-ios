@@ -61,7 +61,7 @@
 "welcome.text" = "Jami er en gratis og universell kommunikasjonsplattform som ivaretar brukernes personvern og friheter";
 "welcome.linkDevice" = "Lenk denne enheten til en konto";
 "welcome.createAccount" = "Opprett en Jami-konto";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Koble til en JAMS tjener";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Hopp over";

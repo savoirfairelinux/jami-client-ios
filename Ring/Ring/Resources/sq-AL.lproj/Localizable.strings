@@ -111,7 +111,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Emër përdoruesi";
 "linkToAccountManager.usernameLabel" = "Jepni Emër Përdoruesi";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAM-i";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Jepni URL JAMS-i";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "S’gjendet dot llogari";

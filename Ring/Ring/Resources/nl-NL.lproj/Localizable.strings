@@ -157,7 +157,7 @@
 "actions.deleteAction" = "Verwijderen";
 "actions.cancelAction" = "Cancel";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.backAction" = "Terug";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accept";
@@ -181,13 +181,13 @@
 "calls.minimize" = "minimize";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "Apparaten";
 "accountPage.settingsHeader" = "Instellingen";
 "accountPage.username" = "Gebruikersnaam";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Blocked contacts";
+"accountPage.blockedContacts" = "Geblokkeerde contacten";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -197,7 +197,7 @@
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Revoke device";
+"accountPage.revokeDeviceTitle" = "Apparaat terugtrekken";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
@@ -264,7 +264,7 @@
 "blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Koppel een nieuw apparaat";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "An error occured during the export";
@@ -281,7 +281,7 @@
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
-"dataTransfer.readableStatusError" = "Error";
+"dataTransfer.readableStatusError" = "Fout";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
@@ -328,7 +328,7 @@
 "migrateAccount.title" = "Account migration";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordPlaceholder" = "Wachtwoord invoeren";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";

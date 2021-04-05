@@ -61,7 +61,7 @@
 "welcome.text" = "Ring 是一个保护用户的隐私和自由的通用自由软件。";
 "welcome.linkDevice" = "将此设备与一个账户进行关联";
 "welcome.createAccount" = "创建一个Jami账户";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "连接到 JAMS 服务器";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "跳过";

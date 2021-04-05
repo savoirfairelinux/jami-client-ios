@@ -61,7 +61,7 @@
 "welcome.text" = "A Jami egy szabad szoftver az egyetemes közlés emelvény, mely tiszteletben tartja a felhasználók szabadságát és magán szféráját";
 "welcome.linkDevice" = "Ezen eszköz összekapcsolása egy fiókhoz";
 "welcome.createAccount" = "Jami-fiók létrehozása";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Csatlakozás a JAMS kiszolgálóhoz";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Átugrani";
@@ -110,8 +110,8 @@
 "linkToAccountManager.passwordLabel" = "A jelszó megadása";
 "linkToAccountManager.usernamePlaceholder" = "Felhasználónév";
 "linkToAccountManager.usernameLabel" = "Felhasználónév megadása";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL-je";
+"linkToAccountManager.accountManagerLabel" = "JAMS URL-címe megadása";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "A fiók nem található";

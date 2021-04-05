@@ -61,7 +61,7 @@
 "welcome.text" = "Jami kullanıcılarının gizlilik ve özgürlüklerini sağlayan evrensel ve ücretsiz bir platformdur.";
 "welcome.linkDevice" = "Bu aygıtı hesaba bağla";
 "welcome.createAccount" = "Bir Jami hesabı oluştur";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Bir JAMS sunucusuna bağlan";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Atla";

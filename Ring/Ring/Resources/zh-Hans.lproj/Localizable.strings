@@ -61,7 +61,7 @@
 "welcome.text" = "Jami 是一個自由且通用的通訊平臺，其尊重使用者的隱私與自由。";
 "welcome.linkDevice" = "連結這個裝置到一個帳號";
 "welcome.createAccount" = "建立 Jami 帳號";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "連線至 JAMS 伺服器";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "略過";
@@ -111,7 +111,7 @@
 "linkToAccountManager.usernamePlaceholder" = "使用者名稱";
 "linkToAccountManager.usernameLabel" = "輸入使用者名稱";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "輸入 JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "找不到帳號";
