@@ -274,10 +274,10 @@
 //Contact Page
 "contactPage.startAudioCall" = "Începe un Apel Audio";
 "contactPage.startVideoCall" = "Începe un Apel Video";
-"contactPage.sendMessage" = "Trimite un Mesaj";
-"contactPage.clearConversation" = "Șterge Discuția";
-"contactPage.blockContact" = "Blochează Contactul";
-"contactPage.removeConversation" = "Șterge Conversația";
+"contactPage.sendMessage" = "Trimite un mesaj";
+"contactPage.clearConversation" = "Șterge discuția";
+"contactPage.blockContact" = "Blochează contactul";
+"contactPage.removeConversation" = "Șterge conversația";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inițializare...";
@@ -292,8 +292,8 @@
 "dataTransfer.readableStatusCancel" = "Renunță";
 
 //Notifications
-"notifications.incomingCall" = "Apel Primit";
-"notifications.missedCall" = "Apel Pierdut";
+"notifications.incomingCall" = "Apel primit";
+"notifications.missedCall" = "Apel pierdut";
 "notifications.acceptCall" = "ACCEPTĂ";
 "notifications.refuseCall" = "REFUZĂ";
 "notifications.newFile" = "Fișier nou";
@@ -326,7 +326,7 @@
 
 //Migrate Account
 "migrateAccount.title" = "Transferul contului";
-"migrateAccount.migrateButton" = "Transferă Contul";
+"migrateAccount.migrateButton" = "Transferă contul";
 "migrateAccount.explanation" = "Acest cont trebuie transferat";
 "migrateAccount.passwordPlaceholder" = "Introdu parola";
 "migrateAccount.passwordExplanation" = "Pentru a continua transferul, trebuie să introduci o parolă care a fost folosită pentru acest cont.";
@@ -334,6 +334,6 @@
 "migrateAccount.error" = "Transferul contului tău nu a reușit. Poți încerca din nou sau șterge acest cont.";
 "migrateAccount.migrating" = "Se transferă...";
 "migrateAccount.cancel" = "Renunță";
-"migrateAccount.migrateAnother" = "Transferă alt Cont";
+"migrateAccount.migrateAnother" = "Transferă alt cont";
 
 
