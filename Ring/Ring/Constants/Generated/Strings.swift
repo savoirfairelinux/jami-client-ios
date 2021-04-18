@@ -8,7 +8,7 @@ import Foundation
 // MARK: - Strings
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:disable nesting type_body_length type_name
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
   internal enum Account {
@@ -499,9 +499,9 @@ internal enum L10n {
   }
 
   internal enum LinkToAccountManager {
-    /// Enter account manager URI
+    /// Enter JAMS URL
     internal static let accountManagerLabel = L10n.tr("Localizable", "linkToAccountManager.accountManagerLabel")
-    /// Account manager
+    /// JAMS URL
     internal static let accountManagerPlaceholder = L10n.tr("Localizable", "linkToAccountManager.accountManagerPlaceholder")
     /// Enter Password
     internal static let passwordLabel = L10n.tr("Localizable", "linkToAccountManager.passwordLabel")
@@ -592,7 +592,7 @@ internal enum L10n {
   }
 
   internal enum Welcome {
-    /// Connect to account manager
+    /// Connect to a JAMS server
     internal static let connectToManager = L10n.tr("Localizable", "welcome.connectToManager")
     /// Create a Jami account
     internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount")
@@ -605,7 +605,7 @@ internal enum L10n {
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:enable nesting type_body_length type_name
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
 
@@ -619,7 +619,11 @@ extension L10n {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type

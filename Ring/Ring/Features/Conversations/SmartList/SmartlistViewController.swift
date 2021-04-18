@@ -351,7 +351,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         //Configure cells closure for the datasources
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
             -> UITableViewCell = {
-                (   dataSource: TableViewSectionedDataSource<ConversationSection>,
+                (   _: TableViewSectionedDataSource<ConversationSection>,
                     tableView: UITableView,
                     indexPath: IndexPath,
                     conversationItem: ConversationSection.Item) in

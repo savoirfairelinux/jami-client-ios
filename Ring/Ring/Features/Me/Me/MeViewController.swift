@@ -300,7 +300,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 ( dataSource: TableViewSectionedDataSource<SettingsSection>,
                 tableView: UITableView,
                 indexPath: IndexPath,
-                item: SettingsSection.Item) in
+                _: SettingsSection.Item) in
                 switch dataSource[indexPath] {
 
                 case .autoRegistration:

@@ -66,7 +66,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                 var data = [String: String]()
                 data[NotificationUserInfoKeys.messageContent.rawValue] = event.getEventInput(ServiceEventInput.content)
                 data[NotificationUserInfoKeys.participantID.rawValue] = event.getEventInput(ServiceEventInput.peerUri)
-                data[NotificationUserInfoKeys.accountID.rawValue] =  event.getEventInput(ServiceEventInput.accountId)
+                data[NotificationUserInfoKeys.accountID.rawValue] = event.getEventInput(ServiceEventInput.accountId)
 
                 guard let contactUri = data[NotificationUserInfoKeys.participantID.rawValue],
                       let hash = JamiURI(schema: URIType.ring, infoHach: contactUri).hash else { return }
