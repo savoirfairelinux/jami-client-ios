@@ -70,7 +70,7 @@ class JamiSearchView: NSObject {
         self.searchResultsTableView.rx.setDelegate(self).disposed(by: disposeBag)
 
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item) -> UITableViewCell = {
-            (dataSource: TableViewSectionedDataSource<ConversationSection>,
+            (_: TableViewSectionedDataSource<ConversationSection>,
             tableView: UITableView,
             indexPath: IndexPath,
             conversationItem: ConversationSection.Item) in

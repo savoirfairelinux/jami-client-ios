@@ -553,7 +553,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 }
                 if self.viewModel.isAudioOnly {
                     let device = UIDevice.modelName
-                    if device == "iPhone 5" || device ==  "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
+                    if device == "iPhone 5" || device == "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
                         self.durationLabel.isHidden = true
                         self.buttonsContainerBottomConstraint.constant = -10
                     }
