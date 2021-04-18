@@ -250,6 +250,7 @@
 		26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PreviewViewController.swift */; };
 		26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */; };
 		26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */; };
+		262AA984262C724700DC34AD /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AA981262C724700DC34AD /* libfmt.a */; };
 		263B7158246D9390007044C4 /* SmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7157246D9390007044C4 /* SmartListCell.swift */; };
 		263B715A246D9556007044C4 /* IncognitoSmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */; };
 		263B715C246D96E5007044C4 /* IncognitoSmartListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263B715B246D96E5007044C4 /* IncognitoSmartListCell.xib */; };
@@ -660,6 +661,7 @@
 		26074FD824F7FF9500374570 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContollerModel.swift; sourceTree = "<group>"; };
 		26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewViewController.storyboard; sourceTree = "<group>"; };
+		262AA981262C724700DC34AD /* libfmt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmt.a; path = ../DEPS/arm64/lib/libfmt.a; sourceTree = "<group>"; };
 		26376721245315E600CDC51F /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		263B7157246D9390007044C4 /* SmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListCell.swift; sourceTree = "<group>"; };
 		263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncognitoSmartListCell.swift; sourceTree = "<group>"; };
@@ -827,6 +829,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				262AA984262C724700DC34AD /* libfmt.a in Frameworks */,
 				269B849626151AC10015BC72 /* libgit2.a in Frameworks */,
 				266C1DBB2539F3A300978E87 /* RxRelay.framework in Frameworks */,
 				649AD3C324B4CFC700A0236D /* libsqlite3.tbd in Frameworks */,
@@ -939,6 +942,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				262AA981262C724700DC34AD /* libfmt.a */,
 				269B849326151AC10015BC72 /* libgit2.a */,
 				266C1DB82539F3A300978E87 /* RxRelay.framework */,
 				6452144724B4ACDE007203D5 /* libsqlite3.tbd */,
