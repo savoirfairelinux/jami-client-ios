@@ -111,7 +111,7 @@
 "linkToAccountManager.usernamePlaceholder" = "用户名";
 "linkToAccountManager.usernameLabel" = "输入用户名";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "输入 JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "无法找到账户";
@@ -130,10 +130,10 @@
 "alerts.confirmBlockContact" = "您确定要屏蔽这个联系人吗？与这个联系人的会话历史也将被永久删除。";
 "alerts.confirmBlockContactTitle" = "屏蔽联系人";
 "alerts.confirmDeleteConversation" = "您确定要永久删除这个会话吗？";
-"alerts.confirmDeleteConversationFromContact" = "您确定要删除与该联系人的对话？";
-"alerts.confirmDeleteConversationTitle" = "删除对话";
+"alerts.confirmDeleteConversationFromContact" = "您确定要删除与该联系人的会话吗？";
+"alerts.confirmDeleteConversationTitle" = "删除会话";
 "alerts.confirmClearConversation" = "您确定要清空与该联系人的会话吗？";
-"alerts.confirmClearConversationTitle" = "清空对话";
+"alerts.confirmClearConversationTitle" = "清空会话";
 "alerts.noMediaPermissionsTitle" = "未授予媒体权限";
 "alerts.noLibraryPermissionsTitle" = "未授予照片库访问权限";
 "alerts.noLocationPermissionsTitle" = "未授予访问位置权限";
@@ -235,7 +235,7 @@
 "accountPage.disableBoothModeExplanation" = "请输入您的账户密码";
 "accountPage.boothModeExplanation" = "话亭模式中，不会保存会话历史，且 jami 的功能会受限为外拨电话。启用话亭模式后，现有会话将全部被删除。";
 "accountPage.noBoothMode" = "要使用话亭模式，您需要先设置账户密码。";
-"accountPage.boothModeAlertMessage" = "启用话亭模式后您的现有会话都将被删除。";
+"accountPage.boothModeAlertMessage" = "启用话亭模式后，您的现有会话都将被删除。";
 "accountPage.peerDiscovery" = "在本地网络自动连接";
 "accountPage.autoRegistration" = "过期后自动注册";
 

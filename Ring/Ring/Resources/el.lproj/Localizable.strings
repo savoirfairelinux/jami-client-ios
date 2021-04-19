@@ -60,15 +60,15 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Σύνδεση αυτής της συσκευής με ένα λογαριασμό";
-"welcome.createAccount" = "Create a Jami account";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.createAccount" = "Δημιουργία λογαριασμού Jami";
+"welcome.connectToManager" = "Σύνδεση σε έναν  διακομιστή JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Επόμενο";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "Εισάγετε όνομα";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
@@ -197,7 +197,7 @@
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Revoke device";
+"accountPage.revokeDeviceTitle" = "Αφαίρεση συσκευής";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
@@ -240,7 +240,7 @@
 "accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "Όνομα Χρήστη";
 "account.sipPassword" = "Συνθηματικό";
 "account.sipServer" = "SIP Server";
 "account.port" = "Θύρα";
@@ -311,7 +311,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
+"generatedMessage.contactAdded" = "Η επαφή προστέθηκε";
 "generatedMessage.invitationReceived" = "Invitation received";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Εξερχόμενη κλήση";

@@ -111,7 +111,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Nome de usuário";
 "linkToAccountManager.usernameLabel" = "Digite o nome de usuário";
 "linkToAccountManager.accountManagerPlaceholder" = "URL de JAMS";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Insira a URL JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Não foi possível localizar conta";

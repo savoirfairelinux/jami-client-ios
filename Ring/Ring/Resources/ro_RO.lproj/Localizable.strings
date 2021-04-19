@@ -42,7 +42,7 @@
 "smartlist.noNetworkConnectivity" = "Nicio legătură la rețea";
 "smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis în reglările tale";
 "smartlist.accountsTitle" = "Conturi";
-"smartlist.addAccountButton" = "+ Adaugă un cont";
+"smartlist.addAccountButton" = "„+” Adaugă un cont";
 "smartlist.noNumber" = "Contactul ales nu are niciun număr";
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
 
@@ -75,7 +75,7 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Creează contul tău";
 "createAccount.chooseStrongPassword" = "Alege o parolă complexă pe care să ți-o amintești, ca să protejezi contul tău Jami.";
-"createAccount.enterNewUsernamePlaceholder" = "Nume de Utilizator";
+"createAccount.enterNewUsernamePlaceholder" = "Nume de utilizator";
 "createAccount.newPasswordPlaceholder" = "Parola";
 "createAccount.repeatPasswordPlaceholder" = "Confirmă parola";
 "createAccount.passwordCharactersNumberError" = "minimum 6 caractere";
@@ -92,7 +92,7 @@
 "createAccount.Recommended" = "(Recomandat)";
 "createAccount.UsernameNotRegisteredTitle" = "Eroare de rețea";
 "createAccount.UsernameNotRegisteredMessage" = "Contul a fost creat, dar numele de utilizator nu a fost înscris";
-"createAccount.timeoutTitle" = "Cont Creat";
+"createAccount.timeoutTitle" = "Cont creat";
 "createAccount.timeoutMessage" = "Înscriere în curs a numelui de utilizator... Poate dura cîteva clipe.";
 
 //Link To Account form
@@ -100,38 +100,38 @@
 "linkToAccount.linkButtonTitle" = "Asociază aparatul";
 "linkToAccount.passwordPlaceholder" = "Parola";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Introdu Parola";
+"linkToAccount.passwordLabel" = "Introdu parola";
 "linkToAccount.pinLabel" = "Introdu PIN-ul";
-"linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. În Reglări alege \"Asociază alt aparat acestui cont\" și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
+"linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. În „Reglări” alege „Asociază alt aparat acestui cont” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
 "linkToAccountManager.passwordPlaceholder" = "Parola";
-"linkToAccountManager.passwordLabel" = "Introdu Parola";
-"linkToAccountManager.usernamePlaceholder" = "Nume de Utilizator";
-"linkToAccountManager.usernameLabel" = "Introdu Numele de Utilizator";
+"linkToAccountManager.passwordLabel" = "Introdu parola";
+"linkToAccountManager.usernamePlaceholder" = "Nume de utilizator";
+"linkToAccountManager.usernameLabel" = "Introdu numele de utilizator";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Introdu URL-ul JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nu pot găsi contul";
 "alerts.accountCannotBeFoundMessage" = "Contul nu poate fi găsit în rețeaua Jami. Asigură-te că a fost exportat pe Jami dintr-un aparat existent și datele de autentificare sînt corecte.";
-"alerts.accountAddedTitle" = "Cont Adăugat";
+"alerts.accountAddedTitle" = "Cont adăugat";
 "alerts.accountNoNetworkTitle" = "Nu mă pot conecta la rețea";
 "alerts.accountNoNetworkMessage" = "Contul nu poate fi adăugat deoarece Jami nu se poate conecta la rețea. Verifică conectarea la rețea.";
 "alerts.accountDefaultErrorTitle" = "Eroare necunoscută";
 "alerts.accountDefaultErrorMessage" = "Contul nu a putut fi creat";
 "alerts.profileTakePhoto" = "Fă o poză";
 "alerts.profileUploadPhoto" = "Încarcă o poză";
-"alerts.profileCancelPhoto" = "Renunță";
+"alerts.profileCancelPhoto" = "Anulează";
 "alerts.accountLinkedTitle" = "Se asociază contul";
 "alerts.dbFailedTitle" = "O eroare s-a produs cînd Jami se deschidea";
 "alerts.dbFailedMessage" = "Închide aplicația și încearcă să o deschizi din nou";
-"alerts.confirmBlockContact" = "Sigur vrei să blochezi acest contact? Conversația cu acest contact va fi, de asemenea, ștearsă definitiv.";
-"alerts.confirmBlockContactTitle" = "Blochează Contactul";
+"alerts.confirmBlockContact" = "Sigur vrei să blochezi acest contact? Conversația cu acest contact va fi ștearsă definitiv.";
+"alerts.confirmBlockContactTitle" = "Blochează contactul";
 "alerts.confirmDeleteConversation" = "Chiar vrei să ștergi această conversație?";
 "alerts.confirmDeleteConversationFromContact" = "Chiar vrei să ștergi conversația cu acest contact?";
-"alerts.confirmDeleteConversationTitle" = "Șterge Conversația";
+"alerts.confirmDeleteConversationTitle" = "Șterge conversația";
 "alerts.confirmClearConversation" = "Chiar vrei să ștergi conversația cu acest contact?";
 "alerts.confirmClearConversationTitle" = "Șterge conversația";
 "alerts.noMediaPermissionsTitle" = "Nu ai permis accesul la Media";
@@ -142,20 +142,20 @@
 "alerts.recordAudioMessage" = "Înregistrează un mesaj vocal";
 "alerts.uploadFile" = "Încarcă fișierul";
 "alerts.uploadPhoto" = "Încarcă o poză sau un video";
-"alerts.locationServiceIsDisabled" = "Activează \"Localizarea\" pentru ca \"Jami\" să poată stabili poziția ta.";
+"alerts.locationServiceIsDisabled" = "Activează „Localizarea” pentru ca Jami să poată stabili poziția ta.";
 "alerts.locationSharing" = "Distribuie poziția mea";
 "alerts.alreadylocationSharing" = "Acestui utilizator i-am trimis deja poziția mea";
 "alerts.locationSharingDurationTitle" = "Cît timp trebuie să distribui poziția?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 oră";
-"alerts.mapInformation" = "Detalii pe Hartă";
+"alerts.mapInformation" = "Detalii pe hartă";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap colaboratori";
 "alerts.openStreetMapCopyrightMoreInfo" = "Află mai multe";
 
 //Actions
 "actions.blockAction" = "Blochează";
 "actions.deleteAction" = "Șterge";
-"actions.cancelAction" = "Renunță";
+"actions.cancelAction" = "Anulează";
 "actions.clearAction" = "Șterge";
 "actions.backAction" = "Înapoi";
 "actions.doneAction" = "Făcut";
@@ -183,20 +183,20 @@
 //Account Page
 "accountPage.devicesListHeader" = "Aparate";
 "accountPage.settingsHeader" = "Reglări";
-"accountPage.username" = "Nume de Utilizator";
+"accountPage.username" = "Nume de utilizator";
 "accountPage.usernameNotRegistered" = "nume de utilizator: neînscris";
-"accountPage.credentialsHeader" = "Detaliile Contului";
+"accountPage.credentialsHeader" = "Detaliile contului";
 "accountPage.enableProxy" = "Activează Proxy";
 "accountPage.blockedContacts" = "Contacte blocate";
 "accountPage.unblockContact" = "DEBLOCHEAZĂ";
 "accountPage.proxyAddressAlert" = "Introdu adresa proxy";
 "accountPage.enableProxy" = "Activează Proxy";
-"accountPage.noProxyExplanationLabel" = "Aparatul nu va primi notificări cînd proxy e dezactivat";
+"accountPage.noProxyExplanationLabel" = "Aparatul nu va primi notificări dacă Proxy e dezactivat";
 "accountPage.saveProxyAddress" = "Salvează";
-"accountPage.proxyPaceholder" = "Adresa proxy";
-"accountPage.enableNotifications" = "Activează Notificările";
-"accountPage.proxyDisabledAlertTitle" = "Serverul Proxy e Dezactivat";
-"accountPage.proxyDisabledAlertBody" = "Activează serverul proxy, ca să primești notificările";
+"accountPage.proxyPaceholder" = "Adresa Proxy";
+"accountPage.enableNotifications" = "Activează notificările";
+"accountPage.proxyDisabledAlertTitle" = "Serverul Proxy e dezactivat";
+"accountPage.proxyDisabledAlertBody" = "Activează serverul Proxy, ca să primești notificările";
 "accountPage.revokeDeviceTitle" = "Elimină aparatul";
 "accountPage.revokeDeviceMessage" = "Sigur vrei să elimini acest aparat? Această acțiune este ireversibilă!";
 "accountPage.revokeDeviceButton" = "Elimină";
@@ -212,11 +212,11 @@
 "accountPage.linkDeviceTitle" = "Asociază alt aparat";
 "accountPage.other" = "Altul";
 "accountPage.removeAccountTitle" = "Elimină contul";
-"accountPage.removeAccountMessage" = "Făcînd clic pe \"Elimină\" vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
+"accountPage.removeAccountMessage" = "Făcînd clic pe „Elimină” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
 "accountPage.removeAccountButton" = "Elimină";
 "accountPage.shareAccountDetails" = "Distribuie detaliile contului";
 "accountPage.contactMeOnJamiTitle" = "Contactează-mă pe Jami!";
-"accountPage.contactMeOnJamiContant" = "Contactează-mă folosind \"%s\" pe platforma distribuită de comunicare Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contactează-mă folosind „%s” pe platforma distribuită de comunicare Jami: https://jami.net";
 "accountPage.registerNameTitle" = "Înscrie un nume de utilizator";
 "accountPage.passwordPlaceholder" = "Introdu parola contului";
 "accountPage.usernamePlaceholder" = "Introdu numele de utilizator";
@@ -228,35 +228,35 @@
 "accountPage.changePassword" = "Schimbă parola";
 "accountPage.oldPasswordPlaceholder" = "Introdu parola veche";
 "accountPage.newPasswordPlaceholder" = "Introdu parola nouă";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirmă noua parolă";
+"accountPage.newPasswordConfirmPlaceholder" = "Confirmă parola nouă";
 "accountPage.changePasswordError" = "Parola e greșită";
-"accountPage.enableBoothMode" = "Activează Modul Cabină";
-"accountPage.disableBoothMode" = "Dezactivează Modul Cabină";
+"accountPage.enableBoothMode" = "Activează „Modul Cabină”";
+"accountPage.disableBoothMode" = "Dezactivează „Modul Cabină”";
 "accountPage.disableBoothModeExplanation" = "Introdu parola contului tău";
-"accountPage.boothModeExplanation" = "În modul Cabină cronologia conversațiilor nu e salvată și Jami este limitat la efectuarea de apeluri. Dacă activezi modul Cabină, toate conversațiile tale vor fi șterse.";
-"accountPage.noBoothMode" = "Pentru a activa Modul Cabină, trebuie mai întîi să creezi parola contului.";
+"accountPage.boothModeExplanation" = "În „Modul Cabină” cronologia conversațiilor nu e salvată și Jami este limitat la efectuarea de apeluri. Dacă activezi „Modul Cabină”, toate conversațiile tale vor fi șterse.";
+"accountPage.noBoothMode" = "Pentru a activa „Modul Cabină”, trebuie mai întîi să creezi parola contului.";
 "accountPage.boothModeAlertMessage" = "După activarea modului cabină, toate conversațiile tale vor fi șterse.";
 "accountPage.peerDiscovery" = "Conectare automată la rețeaua locală";
 "accountPage.autoRegistration" = "Înscriere automată după expirare";
 
 //Account
-"account.sipUsername" = "Nume de Utilizator";
+"account.sipUsername" = "Nume de utilizator";
 "account.sipPassword" = "Parola";
 "account.sipServer" = "Server SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Creează un cont SIP";
-"account.usernameLabel" = "Introdu Numele de Utilizator";
-"account.passwordLabel" = "Introdu Parola";
-"account.serverLabel" = "Introdu Adresa";
-"account.portLabel" = "Introdu Numărul Portului";
-"account.accountStatus" = "Starea Contului";
-"account.enableAccount" = "Activează Contul";
+"account.usernameLabel" = "Introdu numele de utilizator";
+"account.passwordLabel" = "Introdu parola";
+"account.serverLabel" = "Introdu adresa";
+"account.portLabel" = "Introdu numărul Portului";
+"account.accountStatus" = "Starea contului";
+"account.enableAccount" = "Activează contul";
 "account.statusOnline" = "Conectat";
 "account.statusOffline" = "Deconectat";
 "account.statusConnecting" = "Se conectează";
 "account.statusUnknown" = "Necunoscut";
-"account.statusConnectionerror" = "Eroare de Conectare";
+"account.statusConnectionerror" = "Eroare de conectare";
 "account.needMigration" = "contul trebuie transferat";
 "account.me" = "Eu";
 
@@ -268,7 +268,7 @@
 "linkDevice.passwordError" = "Parola introdusă nu deblochează acest cont";
 "linkDevice.networkError" = "O eroare de rețea a apărut în timpul exportării";
 "linkDevice.defaultError" = "O eroare a apărut în timpul exportării";
-"linkDevice.explanationMessage" = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea \"Asociază acest aparat unui cont\".Codul tău PIN este valabil 10 minute.";
+"linkDevice.explanationMessage" = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea „Asociază acest aparat unui cont”. Codul tău PIN este valabil 10 minute.";
 "linkDevice.hudMessage" = "Se verifică";
 
 //Contact Page
@@ -289,7 +289,7 @@
 "dataTransfer.sendingFailed" = "Trimitere nereușită";
 "dataTransfer.readableStatusSuccess" = "Terminat";
 "dataTransfer.readableStatusAccept" = "Acceptă";
-"dataTransfer.readableStatusCancel" = "Renunță";
+"dataTransfer.readableStatusCancel" = "Anulează";
 
 //Notifications
 "notifications.incomingCall" = "Apel primit";
@@ -305,7 +305,7 @@
 "dataTransfer.readableStatusCanceled" = "Anulat";
 "dataTransfer.readableStatusSuccess" = "Terminat";
 "dataTransfer.readableStatusAccept" = "Acceptă";
-"dataTransfer.readableStatusCancel" = "Renunță";
+"dataTransfer.readableStatusCancel" = "Anulează";
 "dataTransfer.infoMessage" = "Apasă pentru a începe înregistrarea";
 "dataTransfer.sendMessage" = "Trimite";
 
@@ -333,7 +333,7 @@
 "migrateAccount.removeAccount" = "Elimină contul";
 "migrateAccount.error" = "Transferul contului tău nu a reușit. Poți încerca din nou sau șterge acest cont.";
 "migrateAccount.migrating" = "Se transferă...";
-"migrateAccount.cancel" = "Renunță";
+"migrateAccount.cancel" = "Anulează";
 "migrateAccount.migrateAnother" = "Transferă alt cont";
 
 
