@@ -230,7 +230,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
         // handle registration error
         self.viewModel.usernameValidationState.asObservable()
-            .map { $0.isAvailable }
+            .map { $0.isDefault }
             .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
             .bind(to: self.registerUsernameErrorLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
@@ -238,6 +238,14 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             .map { $0.message }
             .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
             .bind(to: self.registerUsernameErrorLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        self.viewModel.usernameValidationState.asObservable()
+            .map { $0.isAvailable }
+            .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
+            .observeOn(MainScheduler.instance)
+            .subscribe { available in
+                self.registerUsernameErrorLabel.textColor = available ? UIColor.jamiSuccess : UIColor.jamiFailure
+            }
             .disposed(by: self.disposeBag)
 
         // handle creation state

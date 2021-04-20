@@ -48,14 +48,23 @@ enum PasswordValidationState {
 
 enum UsernameValidationState {
     case unknown
-    case available
+    case available(message: String)
     case lookingForAvailibility(message: String)
     case invalid(message: String)
     case unavailable(message: String)
 
     var isAvailable: Bool {
         switch self {
-        case .available, .unknown:
+        case .available:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var isDefault: Bool {
+        switch self {
+        case .unknown:
             return true
         default:
             return false
@@ -64,8 +73,10 @@ enum UsernameValidationState {
 
     var message: String {
         switch self {
-        case .available, .unknown:
+        case .unknown:
             return ""
+        case .available(let message):
+            return message
         case .lookingForAvailibility(let message):
             return message
         case .invalid(let message):
@@ -274,8 +285,10 @@ class CreateAccountViewModel: Stateable, ViewModel {
                     self?.usernameValidationState.accept(.invalid(message: L10n.CreateAccount.invalidUsername))
                 case .alreadyTaken:
                     self?.usernameValidationState.accept(.unavailable(message: L10n.CreateAccount.usernameAlreadyTaken))
+                case .valid:
+                    self?.usernameValidationState.accept(.available(message: L10n.CreateAccount.usernameValid))
                 default:
-                    self?.usernameValidationState.accept(.available)
+                    self?.usernameValidationState.accept(.unknown)
                 }
             })
             .disposed(by: self.disposeBag)
