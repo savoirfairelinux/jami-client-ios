@@ -122,6 +122,19 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             })
             .startWith(UIImage(asset: Asset.icContactPicture)!)
         }()
+    lazy var accountName: Observable<String> = { [weak self] in
+        return profileImageForCurrentAccount.share()
+            .map({ profile in
+                if let alias = profile.alias {
+                    if !alias.isEmpty { return alias }
+                }
+                guard let account = self?.accountsService.currentAccount else {
+                    return ""
+                }
+                return account.registeredName.isEmpty ? account.jamiId : account.registeredName
+            })
+            .startWith("")
+        }()
 
     lazy var conversations: Observable<[ConversationSection]> = { [weak self] in
         guard let self = self else { return Observable.empty() }
