@@ -221,6 +221,18 @@ static id <CallsAdapterDelegate> _delegate;
     setConferenceLayout(std::string([conferenceId UTF8String]), layout);
 }
 
+- (void)setConferenceModerator:(NSString*)participantId forConference:(NSString*)conferenceId active:(BOOL)isActive {
+    setModerator(std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
+}
+
+- (void)muteConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId active:(BOOL)isActive {
+    muteParticipant(std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
+}
+
+- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId {
+    hangupParticipant(std::string([conferenceId UTF8String]), std::string([participantId UTF8String]));
+}
+
 - (NSArray*)getConferenceInfo:(NSString*)conferenceId {
     auto result = getConferenceInfos(std::string([conferenceId UTF8String]));
     NSArray* arrayResult = [Utils vectorOfMapsToArray:result];
