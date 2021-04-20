@@ -26,6 +26,10 @@ class ConferenceParticipant {
     var uri: String?
     var isActive: Bool = false
     var displayName: String = ""
+    var isModerator: Bool = false
+    var isAudioLocalyMuted: Bool = false
+    var isAudioMuted: Bool = false
+    var isVideoMuted: Bool = false
 
     init (info: [String: String], onlyURIAndActive: Bool) {
         self.uri = info["uri"]
@@ -46,6 +50,18 @@ class ConferenceParticipant {
         }
         if let participantHeight = info["h"] {
             self.height = CGFloat((participantHeight as NSString).doubleValue)
+        }
+        if let videoMuted = info["videoMuted"] {
+            self.isVideoMuted = videoMuted.boolValue
+        }
+        if let audioLocalMuted = info["audioLocalMuted"] {
+            self.isAudioLocalyMuted = audioLocalMuted.boolValue
+        }
+        if let audioModeratorMuted = info["audioModeratorMuted"] {
+            self.isAudioMuted = audioModeratorMuted.boolValue
+        }
+        if let isModerator = info["isModerator"] {
+            self.isModerator = isModerator.boolValue
         }
     }
 }

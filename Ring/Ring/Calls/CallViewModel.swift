@@ -48,6 +48,7 @@ class CallViewModel: Stateable, ViewModel {
 
     var isHeadsetConnected = false
     var isAudioOnly = false
+    var isHostCall = false
 
     private lazy var currentCallVariable: BehaviorRelay<CallModel> = {
         BehaviorRelay<CallModel>(value: self.call ?? CallModel())
@@ -86,23 +87,36 @@ class CallViewModel: Stateable, ViewModel {
             self.callService.currentConferenceEvent
                 .asObservable()
                 .filter({ [weak self] conference-> Bool in
-                    return conference.calls.contains(self?.call?.callId ?? "") ||
-                        conference.conferenceID == self?.rendererId
+                    guard let self = self else { return false }
+                    return conference.calls.contains(self.call?.callId ?? "") ||
+                        conference.conferenceID == self.rendererId
                 })
                 .subscribe(onNext: { [weak self] conf in
+                    guard let self = self else { return }
                     if conf.conferenceID.isEmpty {
                         return
                     }
                     if conf.state == ConferenceState.infoUpdated.rawValue {
-                        self?.layoutUpdated.accept(true)
+                        self.layoutUpdated.accept(true)
+                        guard let account = self.accountService.currentAccount, !self.isHostCall else {
+                            return
+                        }
+                        let isModerator = self.callService.isModerator(participantId: account.jamiId, inConference: conf.conferenceID)
+                        if isModerator != self.containerViewModel?.isConference {
+//                            guard let updatedCall = self.callService.call(callID: call.callId) else { return }
+//                            self.call = updatedCall
+                            self.containerViewModel?.isConference = isModerator
+                            self.conferenceMode.accept(isModerator)
+                        }
                         return
                     }
-                    guard let updatedCall = self?.callService.call(callID: call.callId) else { return }
-                    self?.call = updatedCall
+                    guard let updatedCall = self.callService.call(callID: call.callId) else { return }
+                    self.call = updatedCall
                     let conferenceCreated = conf.state == ConferenceState.conferenceCreated.rawValue
-                    self?.rendererId = conferenceCreated ? conf.conferenceID : self!.call!.callId
-                    self?.containerViewModel?.isConference = conferenceCreated
-                    self?.conferenceMode.accept(conferenceCreated)
+                    self.rendererId = conferenceCreated ? conf.conferenceID : self.call!.callId
+                    self.isHostCall = conferenceCreated
+                    self.containerViewModel?.isConference = conferenceCreated
+                    self.conferenceMode.accept(conferenceCreated)
                 })
                 .disposed(by: self.disposeBag)
             self.rendererId = call.callId
@@ -627,13 +641,24 @@ extension CallViewModel {
 }
 // MARK: conference layout
 extension CallViewModel {
-    func setActiveParticipant(callId: String?, maximize: Bool) {
-        guard  let jamiId = self.accountService.currentAccount?.jamiId else { return }
-        self.callService.setActiveParticipant(callId: callId, conferenceId: self.rendererId, maximixe: maximize, jamiId: jamiId)
+    func setActiveParticipant(jamiId: String, maximize: Bool) {
+        self.callService.setActiveParticipant(conferenceId: self.rendererId, maximixe: maximize, jamiId: jamiId.filterOutHost())
     }
 
     func getConferenceVideoSize() -> CGSize {
         return self.videoService.getConferenceVideoSize(confId: self.rendererId)
+    }
+
+    func muteParticipant(participantId: String, active: Bool) {
+        self.callService.muteParticipant(confId: self.rendererId, participantId: participantId.filterOutHost(), active: active)
+    }
+
+    func setModeratorParticipant(participantId: String, active: Bool) {
+        self.callService.setModeratorParticipant(confId: self.rendererId, participantId: participantId.filterOutHost(), active: active)
+    }
+
+    func hangupParticipant(participantId: String) {
+        self.callService.hangupParticipant(confId: self.rendererId, participantId: participantId.filterOutHost())
     }
 
     func getConferenceParticipants() -> [ConferenceParticipant]? {
@@ -645,7 +670,7 @@ extension CallViewModel {
             // master call
             if uri.isEmpty {
                 //check if master call is local or remote
-                if !self.conferenceMode.value {
+                if !self.isHostCall {
                     participant.displayName = call.getDisplayName()
                 } else {
                     participant.displayName = L10n.Account.me
@@ -673,15 +698,47 @@ extension CallViewModel {
         return participants
     }
 
-    func getItemsForConferenceMenu(participantCallId: String?) -> MenuMode {
-        let conference = self.callService.call(callID: self.rendererId)
-        // menu for master call
-        guard let callId = participantCallId else {
-            let active = self.callService.isParticipant(participantURI: "", activeIn: self.rendererId)
-            return menuItemsManager.getMenuItemsForMasterCall(conference: conference, active: active)
+    func getConferencePartisipant(participantId: String) -> ConferenceParticipant? {
+        guard let participants = self.getConferenceParticipants() else { return nil }
+        return participants.filter { participant in
+            return participant.uri?.filterOutHost() == participantId.filterOutHost()
+        }.first
+    }
+
+    func isLocalCall(participantId: String) -> Bool {
+        guard let account = self.accountService.currentAccount else { return false }
+        return account.jamiId == participantId.filterOutHost()
+    }
+
+    func isHostCall(participantId: String) -> Bool {
+        guard let account = self.accountService.currentAccount else { return false }
+        if self.isHostCall {
+            return account.jamiId == participantId.filterOutHost()
         }
-        let call = self.callService.call(callID: callId)
-        let active = self.callService.isParticipant(participantURI: call?.participantUri, activeIn: self.rendererId)
-        return menuItemsManager.getMenuItemsFor(call: call, conference: conference, active: active)
+        return call?.participantUri.filterOutHost() == participantId.filterOutHost()
+    }
+
+    func isCurrentModerator() -> Bool {
+        guard let account = self.accountService.currentAccount else { return false }
+        return self.callService.isModerator(participantId: account.jamiId, inConference: self.rendererId)
+    }
+
+    func getItemsForConferenceMenu(participantId: String, callId: String) -> [MenuItem] {
+        let conference = self.callService.call(callID: self.rendererId)
+        let active = self.callService.isParticipant(participantURI: participantId, activeIn: self.rendererId)
+        // menu for local call
+        if self.isLocalCall(participantId: participantId) || participantId.isEmpty {
+            return menuItemsManager.getMenuItemsForLocalCall(conference: conference, active: active)
+        }
+        let isModerator = self.isCurrentModerator()
+        var role = RoleInCall.regular
+        let callIsHost = self.isHostCall(participantId: participantId)
+        if self.isHostCall {
+            role = RoleInCall.host
+        } else if isModerator {
+            role = RoleInCall.moderator
+        }
+        let participantCall = isModerator ? call : self.callService.call(callID: callId)
+        return menuItemsManager.getMenuItemsFor(call: participantCall, isHost: callIsHost, conference: conference, active: active, role: role)
     }
 }
