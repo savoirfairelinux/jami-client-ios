@@ -49,4 +49,7 @@
 - (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId;
 - (void)setConferenceLayout:(int)layout forConference:(NSString*)conferenceId;
 - (NSArray*)getConferenceInfo:(NSString*)conferenceId;
+- (void)setConferenceModerator:(NSString*)participantId forConference:(NSString*)conferenceId active:(BOOL)isActive;
+- (void)muteConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId active:(BOOL)isActive;
+- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId;
 @end
