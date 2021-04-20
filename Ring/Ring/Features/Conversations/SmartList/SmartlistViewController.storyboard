@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Raw-Ee-7sK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Raw-Ee-7sK">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +26,7 @@
                             </tableView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="opE-y7-3Rm">
                                 <rect key="frame" x="0.0" y="-80" width="375" height="747"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGv-QU-VSD">
                                 <rect key="frame" x="168" y="126" width="39.5" height="19.5"/>
@@ -104,7 +105,7 @@
                                 <rect key="frame" x="0.0" y="-106" width="375" height="166"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" placeholder="Enter name..." translatesAutoresizingMaskIntoConstraints="NO" id="xPr-nI-I35">
-                                        <rect key="frame" x="1" y="110" width="324" height="56"/>
+                                        <rect key="frame" x="11" y="110" width="314" height="56"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="4yw-AN-guZ"/>
@@ -145,7 +146,7 @@
                                     <constraint firstItem="Eta-uf-Ija" firstAttribute="leading" secondItem="xPr-nI-I35" secondAttribute="trailing" id="SnW-M7-wRB"/>
                                     <constraint firstItem="Eta-uf-Ija" firstAttribute="trailing" secondItem="RSG-bY-flb" secondAttribute="trailing" id="fK5-6j-fKX"/>
                                     <constraint firstItem="Eta-uf-Ija" firstAttribute="leading" secondItem="RSG-bY-flb" secondAttribute="leading" id="ggB-jL-tbn"/>
-                                    <constraint firstItem="xPr-nI-I35" firstAttribute="leading" secondItem="DKd-eF-L6f" secondAttribute="leading" constant="1" id="m1O-ZV-Pkx"/>
+                                    <constraint firstItem="xPr-nI-I35" firstAttribute="leading" secondItem="DKd-eF-L6f" secondAttribute="leading" constant="11" id="m1O-ZV-Pkx"/>
                                     <constraint firstItem="Eta-uf-Ija" firstAttribute="bottom" secondItem="RSG-bY-flb" secondAttribute="bottom" id="wOa-Ne-n5e"/>
                                     <constraint firstAttribute="bottom" secondItem="xPr-nI-I35" secondAttribute="bottom" id="xcp-FC-G0l"/>
                                 </constraints>
@@ -176,7 +177,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="GEI-dw-9ar"/>
                                     <constraint firstAttribute="trailing" secondItem="k8G-Me-4BI" secondAttribute="trailing" id="a7d-Q1-Fvz"/>
@@ -234,6 +235,7 @@
                         <outlet property="qrScanButton" destination="Eta-uf-Ija" id="Hh0-vy-8EK"/>
                         <outlet property="scanButtonLeadingConstraint" destination="O7M-He-7UH" id="cvF-Wd-TJT"/>
                         <outlet property="searchBarShadow" destination="DKd-eF-L6f" id="CKZ-ws-ag1"/>
+                        <outlet property="searchFieldTrailing" destination="AhH-s9-pfe" id="rhp-oZ-ZJo"/>
                         <outlet property="searchView" destination="Y4B-5f-ij4" id="FtS-9R-atZ"/>
                         <outlet property="settingsButton" destination="iaz-fd-fEz" id="R2O-R8-BDk"/>
                         <outlet property="tableTopConstraint" destination="TVk-tz-qtF" id="lIj-Yu-ZL7"/>
@@ -257,5 +259,11 @@
         <image name="phone_book" width="37.5" height="37.5"/>
         <image name="qr_code_scan" width="32" height="32"/>
         <image name="settings_icon" width="24" height="24"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

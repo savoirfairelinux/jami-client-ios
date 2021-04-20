@@ -60,6 +60,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var qrScanButton: UIButton!
     @IBOutlet weak var phoneBookButton: UIButton!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchFieldTrailing: NSLayoutConstraint!
     @IBOutlet weak var networkAlertView: UIView!
     @IBOutlet weak var searchView: JamiSearchView!
 
@@ -68,6 +69,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     let accountPickerTextView = UITextField(frame: CGRect.zero)
     let accountsAdapter = AccountPickerAdapter()
     var accountsDismissTapRecognizer: UITapGestureRecognizer!
+    var accountView = UIView()
+    var accountWidth = NSLayoutConstraint()
+    let nameLabelTag = 100
+    let triangleTag = 200
+    let openAccountTag = 300
+    let margin: CGFloat = 10
+    let size: CGFloat = 32
+    let triangleViewSize: CGFloat = 12
 
     // MARK: members
     var viewModel: SmartlistViewModel!
@@ -101,6 +110,16 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.layer.zPosition = -0
         self.extendedLayoutIncludesOpaqueBars = true
+        NotificationCenter.default.rx
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {[weak self](_) in
+                guard let self = self,
+                UIDevice.current.portraitOrLandscape else { return }
+                self.updateAccountItemSize()
+            })
+            .disposed(by: self.disposeBag)
+
     }
 
     @objc
@@ -128,7 +147,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func applyL10n() {
-        self.navigationItem.title = L10n.Global.homeTabBarTitle
         noConversationLabel.text = L10n.Smartlist.noConversation
         self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
         self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
@@ -233,23 +251,67 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         accountButton.roundedCorners = true
         accountButton.clipsToBounds = true
         accountButton.contentMode = .scaleAspectFill
-        let size: CGFloat = 32
         accountButton.cornerRadius = size * 0.5
-        accountButton.frame = CGRect(x: 0, y: 0, width: size, height: size)
+        accountButton.frame = CGRect(x: 6, y: 0, width: size, height: size)
         accountButton.imageEdgeInsets = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4)
-        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: size))
-        containerView.addSubview(accountButton)
-        let accountButtonItem = UIBarButtonItem(customView: containerView)
+        let screenRect = UIScreen.main.bounds
+        let screenWidth = screenRect.size.width
+        let window = UIApplication.shared.keyWindow
+        let leftPadding: CGFloat = window?.safeAreaInsets.left ?? 0
+        let maxWidth: CGFloat = screenWidth - 45 - margin * 3 - leftPadding * 2
+        let accountNameX: CGFloat = accountButton.frame.origin.x + accountButton.frame.size.width + margin
+        let triangleViewX: CGFloat = maxWidth - triangleViewSize - 2
+        let triangleViewY: CGFloat = size * 0.5
+        let accountNameWidth: CGFloat = maxWidth - triangleViewSize - size - margin * 2
+        let accountName = UILabel(frame: CGRect(x: accountNameX, y: 5, width: accountNameWidth, height: size))
+        accountName.tag = nameLabelTag
+        let triangleView = UIView(frame: CGRect(x: triangleViewX, y: triangleViewY, width: triangleViewSize, height: triangleViewSize))
+        triangleView.tag = triangleTag
+        let heightWidth = triangleView.frame.size.width
+        let path = CGMutablePath()
+
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: heightWidth / 2, y: heightWidth / 2))
+        path.addLine(to: CGPoint(x: heightWidth, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 0))
+
+        let shape = CAShapeLayer()
+        shape.path = path
+        shape.fillColor = UIColor.jamiTextBlue.cgColor
+        triangleView.layer.insertSublayer(shape, at: 0)
+        accountName.textAlignment = .left
+        accountName.font = UIFont.systemFont(ofSize: 18.0)
+        accountName.lineBreakMode = .byTruncatingTail
+        accountName.textColor = UIColor.jamiTextBlue
+        let openButton = UIButton(type: .custom)
+        openButton.frame = CGRect(x: 0, y: 0, width: maxWidth, height: size)
+        openButton.tag = openAccountTag
+        self.viewModel.accountName
+            .subscribe(onNext: { name in
+                accountName.text = name
+                accountName.sizeToFit()
+                var frame = accountName.frame
+                frame.size.width = min(frame.size.width, maxWidth - 70)
+                accountName.frame = frame
+        })
+        .disposed(by: self.disposeBag)
+        accountView = UIView(frame: CGRect(x: 0, y: 0, width: maxWidth, height: size))
+        accountView.addSubview(accountButton)
+        accountView.addSubview(accountName)
+        accountView.addSubview(triangleView)
+        accountView.addSubview(openButton)
+        let accountButtonItem = UIBarButtonItem(customView: accountView)
         accountButtonItem
             .customView?
             .translatesAutoresizingMaskIntoConstraints = false
         accountButtonItem.customView?
                 .heightAnchor
                 .constraint(equalToConstant: size).isActive = true
-        accountButtonItem.customView?
-                .widthAnchor
-                .constraint(equalToConstant: 80).isActive = true
-        accountButton.rx.tap
+        accountWidth = accountView
+            .widthAnchor
+            .constraint(equalToConstant: maxWidth)
+        accountWidth.isActive = true
+        openButton.rx.tap
             .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.openAccountsList()
@@ -263,6 +325,42 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             })
             .disposed(by: self.disposeBag)
         self.conversationsTableView.tableFooterView = UIView()
+    }
+
+    func updateAccountItemSize() {
+        let screenRect = UIScreen.main.bounds
+        let screenWidth = screenRect.size.width
+        let window = UIApplication.shared.keyWindow
+        let leftPadding: CGFloat = window?.safeAreaInsets.left ?? 0
+        searchFieldTrailing.constant = leftPadding
+        let maxWidth: CGFloat = screenWidth - 45 - margin * 3 - leftPadding * 2
+        accountWidth.constant = maxWidth
+        var accountFrame = accountView.frame
+        accountFrame.size.width = maxWidth
+        accountView.frame = accountFrame
+        if let triangle = accountView.subviews.filter({ view in
+            return view.tag == triangleTag
+        }).first {
+            var triangleFrame = triangle.frame
+            let triangleViewX: CGFloat = maxWidth - triangleViewSize - 2
+            triangleFrame.origin.x = triangleViewX
+            triangle.frame = triangleFrame
+        }
+        if let name = accountView.subviews.filter({ view in
+            return view.tag == nameLabelTag
+        }).first {
+            var nameFrame = name.frame
+            let accountNameWidth: CGFloat = maxWidth - triangleViewSize - size - margin * 2
+            nameFrame.size.width = accountNameWidth
+            name.frame = nameFrame
+        }
+        if let button = accountView.subviews.filter({ view in
+            return view.tag == openAccountTag
+        }).first {
+            var buttonFrame = button.frame
+            buttonFrame.size.width = maxWidth
+            button.frame = buttonFrame
+        }
     }
 
     func confugureAccountPicker() {
