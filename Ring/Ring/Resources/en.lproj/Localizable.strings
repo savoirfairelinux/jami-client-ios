@@ -185,6 +185,10 @@
 "calls.haghUp" = "hang up";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";

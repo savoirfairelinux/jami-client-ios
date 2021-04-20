@@ -128,7 +128,7 @@ class MeViewModel: ViewModel, Stateable {
         return Observable
             .combineLatest(userName.startWith(""), ringId.startWith("")) { (name, ringID) in
                 var items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.credentialsHeader),
-                                                            .jamiID(label: ringID)]
+                                                           .jamiID(label: ringID)]
                 items.append(.jamiUserName(label: name))
                 items.append(.shareAccountDetails)
             return SettingsSection

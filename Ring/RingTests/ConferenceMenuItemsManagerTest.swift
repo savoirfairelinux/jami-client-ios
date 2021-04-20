@@ -31,58 +31,58 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         super.tearDown()
     }
 
-    func testGetMenuItemsForMasterCallNil() {
+    func testGetMenuItemsForLocalCallNil() {
         let manager = ConferenceMenuItemsManager()
         let conference: CallModel? = nil
         let active = true
-        XCTAssertTrue(manager.getMenuItemsForMasterCall(conference: conference, active: active) == MenuMode.onlyName)
+        XCTAssertTrue(manager.getMenuItemsForLocalCall(conference: conference, active: active) == [.name])
     }
 
-    func testGetMenuItemsForeMasterCallWithoutActiveCall() {
+    func testGetMenuItemsForeLocalCallWithoutActiveCall() {
         let manager = ConferenceMenuItemsManager()
         let conference = CallModel()
         let active: Bool? = nil
-        XCTAssertTrue(manager.getMenuItemsForMasterCall(conference: conference, active: active) == MenuMode.onlyName)
+        XCTAssertTrue(manager.getMenuItemsForLocalCall(conference: conference, active: active) == [.name])
     }
 
-    func testGetMenuItemsForMasterCallWithConferenceGridLayout() {
+    func testGetMenuItemsForLocalCallWithConferenceGridLayout() {
         let manager = ConferenceMenuItemsManager()
         let conference = CallModel()
         conference.layout = .grid
         let active = true
-        XCTAssertTrue(manager.getMenuItemsForMasterCall(conference: conference, active: active) == MenuMode.withoutHangUPAndMinimize)
+        XCTAssertTrue(manager.getMenuItemsForLocalCall(conference: conference, active: active) == [.name, .maximize, .muteAudio])
     }
 
-    func testGetMenuItemsForActiveMasterCallWithConferenceOneWithSmalLayout() {
+    func testGetMenuItemsForActiveLocalCallWithConferenceOneWithSmalLayout() {
         let manager = ConferenceMenuItemsManager()
         let conference = CallModel()
         conference.layout = .oneWithSmal
         let active = true
-        XCTAssertTrue(manager.getMenuItemsForMasterCall(conference: conference, active: active) == MenuMode.withoutHangUp)
+        XCTAssertTrue(manager.getMenuItemsForLocalCall(conference: conference, active: active) == [.name, .maximize, .minimize, .muteAudio])
     }
 
-    func testGetMenuItemsForNotActiveMasterCallWithConferenceOneWithSmalLayout() {
+    func testGetMenuItemsForNotActiveLocalCallWithConferenceOneWithSmalLayout() {
         let manager = ConferenceMenuItemsManager()
         let conference = CallModel()
         conference.layout = .oneWithSmal
         let active = false
-        XCTAssertTrue(manager.getMenuItemsForMasterCall(conference: conference, active: active) == MenuMode.withoutHangUPAndMinimize)
+        XCTAssertTrue(manager.getMenuItemsForLocalCall(conference: conference, active: active) == [.name, .maximize, .muteAudio])
     }
 
-    func testGetMenuItemsForActiveMasterCallWithConferenceOneLayout() {
+    func testGetMenuItemsForActiveLocalCallWithConferenceOneLayout() {
         let manager = ConferenceMenuItemsManager()
         let conference = CallModel()
         conference.layout = .one
         let active = true
-        XCTAssertTrue(manager.getMenuItemsForMasterCall(conference: conference, active: active) == MenuMode.withoutHangUPAndMaximize)
+        XCTAssertTrue(manager.getMenuItemsForLocalCall(conference: conference, active: active) == [.name, .minimize, .muteAudio])
     }
 
-    func testGetMenuItemsForNotActiveMasterCallWithConferenceOneLayout() {
+    func testGetMenuItemsForNotActiveLocalCallWithConferenceOneLayout() {
         let manager = ConferenceMenuItemsManager()
         let conference = CallModel()
         conference.layout = .one
         let active = false
-        XCTAssertTrue(manager.getMenuItemsForMasterCall(conference: conference, active: active) == MenuMode.withoutHangUPAndMinimize)
+        XCTAssertTrue(manager.getMenuItemsForLocalCall(conference: conference, active: active) == [.name, .maximize, .muteAudio])
     }
 
     func testGetMenuItemsForNilConference() {
@@ -90,7 +90,9 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let conference: CallModel? = nil
         let call: CallModel? = CallModel()
         let active = true
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.onlyName)
+        let role = RoleInCall.host
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name])
     }
 
     func testGetMenuItemsForNilCall() {
@@ -98,7 +100,9 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let conference: CallModel? = CallModel()
         let call: CallModel? = nil
         let active = true
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.onlyName)
+        let role = RoleInCall.host
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name])
     }
 
     func testGetMenuItemsWithoutActiveCall() {
@@ -106,8 +110,10 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let conference: CallModel? = CallModel()
         let call: CallModel? = CallModel()
         call?.state = .current
+        let role = RoleInCall.host
         let active: Bool? = nil
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.onlyName)
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name])
     }
 
     func testGetMenuItemsForConnectingCall() {
@@ -115,8 +121,10 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let conference: CallModel? = CallModel()
         let call: CallModel? = CallModel()
         call?.state = .connecting
+        let role = RoleInCall.host
         let active: Bool? = true
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.withoutMaximizeAndMinimize)
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name, .hangup])
     }
 
     func testGetMenuItemsForRingingCall() {
@@ -124,8 +132,10 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let conference: CallModel? = CallModel()
         let call: CallModel? = CallModel()
         call?.state = .ringing
+        let role = RoleInCall.host
         let active: Bool? = true
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.withoutMaximizeAndMinimize)
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name, .hangup])
     }
 
     func testGetMenuItemsForHoldingCall() {
@@ -133,8 +143,10 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let conference: CallModel? = CallModel()
         let call: CallModel? = CallModel()
         call?.state = .hold
+        let role = RoleInCall.host
         let active: Bool? = true
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.withoutMaximizeAndMinimize)
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name, .hangup])
     }
 
     func testGetMenuItemsForCallWithConferenceGridLayout() {
@@ -143,8 +155,10 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         conference?.layout = .grid
         let call: CallModel? = CallModel()
         call?.state = .current
+        let role = RoleInCall.host
         let active: Bool? = true
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.withoutMinimize)
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name, .maximize, .muteAudio, .setModerator, .hangup])
     }
 
     func testGetMenuItemsForActiveCallWithConferenceOneWithSmalLayout() {
@@ -152,9 +166,11 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let conference: CallModel? = CallModel()
         conference?.layout = .oneWithSmal
         let call: CallModel? = CallModel()
+        let role = RoleInCall.host
         call?.state = .current
         let active: Bool? = true
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.all)
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name, .maximize, .minimize, .muteAudio, .setModerator, .hangup])
     }
 
     func testGetMenuItemsForNotActiveCallWithConferenceOneWithSmalLayout() {
@@ -162,9 +178,11 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let conference: CallModel? = CallModel()
         conference?.layout = .oneWithSmal
         let call: CallModel? = CallModel()
+        let role = RoleInCall.host
         call?.state = .current
         let active: Bool? = false
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.withoutMinimize)
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name, .maximize, .muteAudio, .setModerator, .hangup])
     }
 
     func testGetMenuItemsForActiveCallWithConferenceOneLayout() {
@@ -173,8 +191,10 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         conference?.layout = .one
         let call: CallModel? = CallModel()
         call?.state = .current
+        let role = RoleInCall.host
         let active: Bool? = true
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.withoutMaximize)
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name, .minimize, .muteAudio, .setModerator, .hangup])
     }
 
     func testGetMenuItemsForNotActiveCallWithConferenceOneLayout() {
@@ -183,7 +203,9 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         conference?.layout = .one
         let call: CallModel? = CallModel()
         call?.state = .current
+        let role = RoleInCall.host
         let active: Bool? = false
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, conference: conference, active: active) == MenuMode.withoutMinimize)
+        let isHost = false
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role) == [.name, .maximize, .muteAudio, .setModerator, .hangup])
     }
 }

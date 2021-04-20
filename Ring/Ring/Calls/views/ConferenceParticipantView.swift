@@ -23,7 +23,7 @@ import Reusable
 import RxSwift
 
 protocol ConferenceParticipantViewDelegate: class {
-    func addConferenceParticipantMenu(origin: CGPoint, displayName: String, callId: String?, hangup: @escaping (() -> Void))
+    func addConferenceParticipantMenu(origin: CGPoint, displayName: String, participantId: String, callId: String?, hangup: @escaping (() -> Void))
     func removeConferenceParticipantMenu()
 }
 
@@ -63,12 +63,14 @@ class ConferenceParticipantView: UIView {
     @objc
     func showMenu() {
         guard let name = self.viewModel?.getName() else { return }
+        let participantId: String = self.viewModel?.getParticipantId() ?? ""
         let callId = self.viewModel?.getCallId()
         let menu = UIView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
         let frame = self.convert(menu.frame, to: self.superview)
         self.delegate?
             .addConferenceParticipantMenu(origin: frame.origin,
                                           displayName: name,
+                                          participantId: participantId,
                                           callId: callId,
                                           hangup: {
                                             [weak self] in

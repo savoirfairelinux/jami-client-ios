@@ -21,52 +21,67 @@
 import UIKit
 import RxSwift
 
-enum MenuMode {
-    case withoutHangUp // for master call
-    case withoutMaximize
-    case withoutMinimize
-    case withoutMaximizeAndMinimize
-    case withoutHangUPAndMinimize
-    case withoutHangUPAndMaximize
-    case onlyName
-    case all
+enum MenuItem {
+    case name
+    case hangup
+    case minimize
+    case maximize
+    case setModerator
+    case muteAudio
 }
 
 class ConferenceActionMenu: UIView {
     private let marginY: CGFloat = 20
     private let marginX: CGFloat = 20
-    private let maxWidth: CGFloat = 120
+    private let maxWidth: CGFloat = 200
     private let menuItemWidth: CGFloat = 80
     private let menuItemHight: CGFloat = 30
     private let textSize: CGFloat = 20
     private var hangUpButton: UIButton?
     private var maximizeButton: UIButton?
     private var minimizeButton: UIButton?
+    private var setModeratorButton: UIButton?
+    private var muteAudioButton: UIButton?
     private let disposeBag = DisposeBag()
+    private var muteLabelText: String = ""
+    private var moderatorLabelText: String = ""
+    private var muteButtonEnabled: Bool = false
+    private var hasSetMute: Bool = false
 
-    func configureWith(mode: MenuMode, displayName: String) {
+    func configureWith(items: [MenuItem], displayName: String, muteText: String, moderatorText: String, muteEnabled: Bool) {
         self.addDisplayName(displayName: displayName)
-        switch mode {
-        case .withoutHangUp:
-            self.configureWithoutHangUP()
-        case .withoutMaximize:
-            self.configureWithoutMaximize()
-        case .withoutMinimize:
-            self.configureWithoutMinimize()
-        case .withoutMaximizeAndMinimize:
-            self.configureWithoutMaximizeAndMinimize()
-        case .withoutHangUPAndMinimize:
-            self.configureWithoutHangUPAndMinimize()
-        case .withoutHangUPAndMaximize:
-            self.configureWithoutHangUPAndMaximize()
-        case .all:
-            self.configureWithAllItems()
-        case .onlyName:
-            break
+        muteLabelText = muteText
+        moderatorLabelText = moderatorText
+        muteButtonEnabled = muteEnabled
+        let itemsWithoutName = items.filter { item in
+            item != .name
+        }
+        if !itemsWithoutName.isEmpty {
+        for index in 1...itemsWithoutName.count {
+            let position: CGFloat = self.marginY * CGFloat((index + 1)) + menuItemHight * CGFloat(index)
+            self.addItem(item: itemsWithoutName[index - 1], positionY: position)
+        }
         }
         self.updateWidth()
         self.updateHeight()
         self.addBackground()
+    }
+
+    func addItem(item: MenuItem, positionY: CGFloat) {
+        switch item {
+        case .minimize:
+            self.addMinimizeButton(positionY: positionY)
+        case .maximize:
+            self.addMaximizeButton(positionY: positionY)
+        case .setModerator:
+            self.addSetModeratorButton(positionY: positionY)
+        case .muteAudio:
+            self.addMuteAudioButton(positionY: positionY)
+        case .hangup:
+            self.addHangUpButton(positionY: positionY)
+        case .name:
+            break
+        }
     }
 
     func addHangUpAction(hangup: @escaping (() -> Void)) {
@@ -87,6 +102,20 @@ class ConferenceActionMenu: UIView {
         guard let button = minimizeButton else { return }
         button.rx.tap
             .subscribe(onNext: { minimize() })
+            .disposed(by: self.disposeBag)
+    }
+
+    func addSetModeratorAction(setModerator: @escaping (() -> Void)) {
+        guard let button = setModeratorButton else { return }
+        button.rx.tap
+            .subscribe(onNext: { setModerator() })
+            .disposed(by: self.disposeBag)
+    }
+
+    func addMuteAction(mute: @escaping (() -> Void)) {
+        guard let button = muteAudioButton else { return }
+        button.rx.tap
+            .subscribe(onNext: { mute() })
             .disposed(by: self.disposeBag)
     }
 
@@ -142,6 +171,34 @@ class ConferenceActionMenu: UIView {
         self.addSubview(self.minimizeButton!)
     }
 
+    private func addSetModeratorButton(positionY: CGFloat) {
+        let setModeratotLabel = UILabel(frame: CGRect(x: marginX, y: positionY, width: menuItemWidth, height: menuItemHight))
+        setModeratotLabel.font = setModeratotLabel.font.withSize(self.textSize)
+        setModeratotLabel.text = moderatorLabelText
+        setModeratotLabel.sizeToFit()
+        setModeratotLabel.textAlignment = .center
+        self.setModeratorButton = UIButton(frame: setModeratotLabel.frame)
+        self.addSubview(setModeratotLabel)
+        self.addSubview(self.setModeratorButton!)
+    }
+
+    private func addMuteAudioButton(positionY: CGFloat) {
+        let muteAudioLabel = UILabel(frame: CGRect(x: marginX, y: positionY, width: menuItemWidth, height: menuItemHight))
+        muteAudioLabel.font = muteAudioLabel.font.withSize(self.textSize)
+        muteAudioLabel.text = muteLabelText
+        muteAudioLabel.sizeToFit()
+        muteAudioLabel.textAlignment = .center
+        if #available(iOS 13.0, *) {
+            muteAudioLabel.textColor = muteButtonEnabled ? UIColor.label : UIColor.quaternaryLabel
+        } else {
+            muteAudioLabel.textColor = muteButtonEnabled ? UIColor.white : UIColor.lightText
+        }
+        self.addSubview(muteAudioLabel)
+        if !muteButtonEnabled { return }
+        self.muteAudioButton = UIButton(frame: muteAudioLabel.frame)
+        self.addSubview(self.muteAudioButton!)
+    }
+
     private func updateHeight() {
         var numberOfLabels: CGFloat = 0
         self.subviews.forEach { (childView) in
@@ -166,50 +223,5 @@ class ConferenceActionMenu: UIView {
         self.subviews.forEach { (childView) in
             childView.frame.size.width = finalWidth
         }
-    }
-
-    private func configureWithoutHangUP() {
-        let firstY: CGFloat = CGFloat(self.marginY * 2 + menuItemHight)
-        let secondY: CGFloat = CGFloat(self.marginY * 3 + menuItemHight * 2)
-        self.addMaximizeButton(positionY: firstY)
-        self.addMinimizeButton(positionY: secondY)
-    }
-
-    private func configureWithoutMaximize() {
-        let firstY: CGFloat = CGFloat(self.marginY * 2 + menuItemHight)
-        let secondY: CGFloat = CGFloat(self.marginY * 3 + menuItemHight * 2)
-        self.addHangUpButton(positionY: firstY)
-        self.addMinimizeButton(positionY: secondY)
-    }
-
-    private func configureWithoutMinimize() {
-        let firstY: CGFloat = CGFloat(self.marginY * 2 + menuItemHight)
-        let secondY: CGFloat = CGFloat(self.marginY * 3 + menuItemHight * 2)
-        self.addHangUpButton(positionY: firstY)
-        self.addMaximizeButton(positionY: secondY)
-    }
-
-    private func configureWithoutMaximizeAndMinimize() {
-        let firstY: CGFloat = CGFloat(self.marginY * 2 + menuItemHight)
-        self.addHangUpButton(positionY: firstY)
-    }
-
-    private func configureWithoutHangUPAndMinimize() {
-        let firstY: CGFloat = CGFloat(self.marginY * 2 + menuItemHight)
-        self.addMaximizeButton(positionY: firstY)
-    }
-
-    private func configureWithoutHangUPAndMaximize() {
-        let firstY: CGFloat = CGFloat(self.marginY * 2 + menuItemHight)
-        self.addMinimizeButton(positionY: firstY)
-    }
-
-    private func configureWithAllItems() {
-        let firstY: CGFloat = CGFloat(self.marginY * 2 + menuItemHight)
-        let secondY: CGFloat = CGFloat(self.marginY * 3 + menuItemHight * 2)
-        let thirdtY: CGFloat = CGFloat(self.marginY * 4 + menuItemHight * 3)
-        self.addHangUpButton(positionY: firstY)
-        self.addMaximizeButton(positionY: secondY)
-        self.addMinimizeButton(positionY: thirdtY)
     }
 }

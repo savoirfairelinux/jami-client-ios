@@ -297,12 +297,20 @@ internal enum L10n {
     internal static let maximize = L10n.tr("Localizable", "calls.maximize")
     /// minimize
     internal static let minimize = L10n.tr("Localizable", "calls.minimize")
+    /// mute audio
+    internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio")
+    /// unset moderator
+    internal static let removeModerator = L10n.tr("Localizable", "calls.removeModerator")
     /// Ringing…
     internal static let ringing = L10n.tr("Localizable", "calls.ringing")
     /// Searching…
     internal static let searching = L10n.tr("Localizable", "calls.searching")
+    /// set moderator
+    internal static let setModerator = L10n.tr("Localizable", "calls.setModerator")
     /// Unknown
     internal static let unknown = L10n.tr("Localizable", "calls.unknown")
+    /// unmute audio
+    internal static let unmuteAudio = L10n.tr("Localizable", "calls.unmuteAudio")
   }
 
   internal enum ContactPage {
