@@ -370,6 +370,8 @@ internal enum L10n {
     internal static let usernameNotRegisteredMessage = L10n.tr("Localizable", "createAccount.UsernameNotRegisteredMessage")
     /// Network error
     internal static let usernameNotRegisteredTitle = L10n.tr("Localizable", "createAccount.UsernameNotRegisteredTitle")
+    /// username is available
+    internal static let usernameValid = L10n.tr("Localizable", "createAccount.usernameValid")
     /// Adding account
     internal static let waitCreateAccountTitle = L10n.tr("Localizable", "createAccount.waitCreateAccountTitle")
   }

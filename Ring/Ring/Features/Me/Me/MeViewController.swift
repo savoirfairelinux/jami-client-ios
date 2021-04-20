@@ -979,13 +979,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .subscribe(onNext: { [weak controller] (state) in
                 //update name lookup message
                 guard let textFields = controller?.textFields,
-                    textFields.count >= 2 else { return }
-                if state.isAvailable {
-                    textFields[1].text = ""
-                } else {
-                    textFields[1].text = state.message
-                }
-                }, onError: { (_) in
+                      textFields.count >= 2 else { return }
+                textFields[1].text = state.message
+                textFields[1].textColor = state.isAvailable ? UIColor.jamiSuccess : UIColor.jamiFailure
+            }, onError: { (_) in
             })
             .disposed(by: nameRegistrationBag)
         guard let textFields = controller.textFields else {

@@ -440,8 +440,10 @@ class MeViewModel: ViewModel, Stateable {
                     self?.usernameValidationState.accept(.invalid(message: L10n.CreateAccount.invalidUsername))
                 case .alreadyTaken:
                     self?.usernameValidationState.accept(.unavailable(message: L10n.CreateAccount.usernameAlreadyTaken))
+                case .valid:
+                    self?.usernameValidationState.accept(.available(message: L10n.CreateAccount.usernameValid))
                 default:
-                    self?.usernameValidationState.accept(.available)
+                    self?.usernameValidationState.accept(.unknown)
                 }
             })
             .disposed(by: disposeBug)
