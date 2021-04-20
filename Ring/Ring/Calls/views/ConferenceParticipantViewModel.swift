@@ -22,18 +22,20 @@ import RxSwift
 import RxCocoa
 
 class ConferenceParticipantViewModel {
-    private let call: CallModel? // for conference master call is nil
+    private let callId: String? // for conference master or for moderator call is nil
+    private let participantId: String
+    private let participantUserName: String
     private let callsSercive: CallsService
     private let profileService: ProfilesService
     private let accountService: AccountsService
-    private let isMasterCall: Bool
+    private let isLocal: Bool
     private let disposeBag = DisposeBag()
 
     private lazy var contactImageData: Observable<String?> = {
         guard let account = self.accountService.currentAccount else {
             return Observable.just(nil)
         }
-        guard let call = call else {
+        if !isLocal {
             return self.profileService.getAccountProfile(accountId: account.id).map { profile in
                 if let alias = profile.alias, !alias.isEmpty {
                     self.displayName.accept(alias)
@@ -43,14 +45,13 @@ class ConferenceParticipantViewModel {
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
-                                           infoHach: call.participantUri,
+                                           infoHach: participantId,
                                            account: account).uriString else { return Observable.just(nil) }
         return profileService.getProfile(uri: uriString,
                                          createIfNotexists: false,
                                          accountId: account.id)
             .map { profile in
                 if let alias = profile.alias, !alias.isEmpty {
-                    self.call?.displayName = alias
                     self.displayName.accept(alias)
                 }
                 return profile.photo
@@ -59,8 +60,8 @@ class ConferenceParticipantViewModel {
 
     private lazy var displayName: BehaviorRelay<String> = {
         var initialName = ""
-        if let call = call {
-            initialName = call.getDisplayName()
+        if !isLocal {
+            initialName = participantUserName
         } else if let account = self.accountService.currentAccount {
             initialName = account.registeredName
         }
@@ -68,9 +69,8 @@ class ConferenceParticipantViewModel {
     }()
 
     lazy var removeView: Observable<Bool>? = {
-        guard let call = call else { return nil }
-        return self.callsSercive.currentCall(callId: call.callId )
-        .startWith(call)
+        guard let callId = callId else { return nil }
+        return self.callsSercive.currentCall(callId: callId)
             .map({ callModel in
                 return (callModel.state == .over ||
                     callModel.state == .failure ||
@@ -86,28 +86,34 @@ class ConferenceParticipantViewModel {
             }
     }()
 
-    init(with call: CallModel?, injectionBag: InjectionBag) {
-        self.call = call
+    init(with callId: String?, injectionBag: InjectionBag, isLocal: Bool, participantId: String, participantUserName: String) {
+        self.callId = callId
         self.callsSercive = injectionBag.callService
         self.profileService = injectionBag.profileService
         self.accountService = injectionBag.accountService
-        self.isMasterCall = call == nil
+        self.isLocal = isLocal
+        self.participantId = participantId
+        self.participantUserName = participantUserName
     }
 
     func getName() -> String {
-        guard call != nil else {
+        if isLocal {
             return L10n.Account.me
         }
         return self.displayName.value
     }
 
     func getCallId() -> String? {
-        return self.call?.callId
+        return self.callId
+    }
+
+    func getParticipantId() -> String {
+        return participantId
     }
 
     func cancelCall() {
-        guard let call = self.call else { return }
-        self.callsSercive.hangUp(callId: call.callId)
+        guard let callId = self.callId else { return }
+        self.callsSercive.hangUp(callId: callId)
             .subscribe(onCompleted: { })
             .disposed(by: disposeBag)
     }

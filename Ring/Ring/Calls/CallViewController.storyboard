@@ -209,10 +209,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bij-Xb-EKH">
-                                <rect key="frame" x="0.0" y="856" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="856" width="375" height="360"/>
                                 <subviews>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7G0-Fp-Xc3">
-                                        <rect key="frame" x="10" y="10" width="355" height="260"/>
+                                        <rect key="frame" x="10" y="10" width="355" height="320"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -222,7 +222,7 @@
                                     <constraint firstItem="7G0-Fp-Xc3" firstAttribute="centerX" secondItem="bij-Xb-EKH" secondAttribute="centerX" placeholder="YES" id="JZj-B5-YW6"/>
                                     <constraint firstItem="7G0-Fp-Xc3" firstAttribute="leading" secondItem="bij-Xb-EKH" secondAttribute="leading" constant="10" id="QC5-Mh-VcC"/>
                                     <constraint firstAttribute="bottom" secondItem="7G0-Fp-Xc3" secondAttribute="bottom" constant="30" id="lUV-jq-9bZ"/>
-                                    <constraint firstAttribute="height" constant="300" id="q8G-dB-syM"/>
+                                    <constraint firstAttribute="height" constant="360" id="q8G-dB-syM"/>
                                     <constraint firstItem="7G0-Fp-Xc3" firstAttribute="height" secondItem="bij-Xb-EKH" secondAttribute="height" constant="-40" id="xAL-yn-Zen"/>
                                 </constraints>
                             </scrollView>

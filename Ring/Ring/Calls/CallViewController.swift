@@ -156,6 +156,27 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self.updateconferenceLayoutSize()
                 let participants = self.viewModel.getConferenceParticipants()
                 self.conferenceLayout.setParticipants(participants: participants)
+                guard let particip = participants, self.viewModel.isCurrentModerator(), !self.viewModel.isHostCall else { return }
+                self.conferenceCalls.arrangedSubviews.forEach({ (view) in
+                    view.removeFromSuperview()
+                })
+                for participant in particip {
+                    let callView =
+                        ConferenceParticipantView(frame:
+                            CGRect(x: 0, y: 0,
+                                   width: inConfViewWidth, height: inConfViewHeight))
+                    let injectionBag = self.viewModel.injectionBag
+                    //                    init(with callId: String?, injectionBag: InjectionBag, isLocal: Bool, participantId: String, participantUserName: String)
+                    let pendingCallViewModel =
+                        ConferenceParticipantViewModel(with: nil,
+                                                       injectionBag: injectionBag,
+                                                       isLocal: false,
+                                                       participantId: participant.uri ?? "",
+                                                       participantUserName: participant.displayName)
+                    callView.viewModel = pendingCallViewModel
+                    callView.delegate = self
+                    self.conferenceCalls.addArrangedSubview(callView)
+                }
             })
             .disposed(by: self.disposeBag)
     }
@@ -447,43 +468,51 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] enteredConference in
-                guard let call = self?.viewModel.call else { return }
+                guard let call = self?.viewModel.call,
+                      let self = self else { return }
                 if call.state != .current { return }
-                self?.updateconferenceLayoutSize()
-                self?.buttonsContainer.updateView()
-                self?.infoContainer.isHidden = enteredConference ? true : false
-                self?.resizeCapturedVideo(withInfoContainer: false)
+                self.updateconferenceLayoutSize()
+                self.buttonsContainer.updateView()
+                self.infoContainer.isHidden = enteredConference ? true : false
+                self.resizeCapturedVideo(withInfoContainer: false)
+                if self.viewModel.isCurrentModerator() { return }
                 // if entered conference add first participant to conference list
                 if enteredConference {
-                    self?.removeConferenceParticipantMenu()
-                    guard let injectionBag = self?.viewModel.injectionBag
-                    else { return }
+                    self.removeConferenceParticipantMenu()
+                    let injectionBag = self.viewModel.injectionBag
                     // add self as a master call
                     let mainCallView =
                         ConferenceParticipantView(frame: CGRect(x: 0,
                                                                 y: 0,
                                                                 width: inConfViewWidth,
                                                                 height: inConfViewHeight))
+//                    init(with callId: String?, injectionBag: InjectionBag, isLocal: Bool, participantId: String, participantUserName: String)
                     let mainCallViewModel =
                         ConferenceParticipantViewModel(with: nil,
-                                                       injectionBag: injectionBag)
+                                                       injectionBag: injectionBag,
+                                                       isLocal: true,
+                                                       participantId: "",
+                                                       participantUserName: "")
                     mainCallView.viewModel = mainCallViewModel
                     mainCallView.delegate = self
-                    self?.conferenceCalls.insertArrangedSubview(mainCallView, at: 0)
+                    self.conferenceCalls.insertArrangedSubview(mainCallView, at: 0)
                     let callView =
                         ConferenceParticipantView(frame: CGRect(x: 0,
                                                                 y: 0,
                                                                 width: inConfViewWidth,
                                                                 height: inConfViewHeight))
                     let pendingCallViewModel =
-                        ConferenceParticipantViewModel(with: call,
-                                                       injectionBag: injectionBag)
+                        ConferenceParticipantViewModel(with: call.callId,
+                                                       injectionBag: injectionBag,
+                                                       isLocal: false,
+                                                       participantId: call.paricipantHash(),
+                                                       participantUserName: call.displayName)
                     callView.viewModel = pendingCallViewModel
                     callView.delegate = self
-                    self?.conferenceCalls.insertArrangedSubview(callView, at: 1)
+                    self.conferenceCalls.insertArrangedSubview(callView, at: 1)
                 } else {
-                    self?.removeConferenceParticipantMenu()
-                    self?.conferenceCalls.arrangedSubviews.forEach({ (view) in
+                    self.removeConferenceParticipantMenu()
+                    self.conferenceCalls.arrangedSubviews.forEach({ (view) in
                         view.removeFromSuperview()
                     })
                 }
@@ -493,17 +522,26 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.viewModel.callForConference
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] call in
+                guard let self = self else { return }
+                if self.viewModel.isLocalCall(participantId: call.participantUri) {
+                    return
+                }
+                if self.viewModel.isCurrentModerator() { return }
                 let callView =
                     ConferenceParticipantView(frame:
                         CGRect(x: 0, y: 0,
                                width: inConfViewWidth, height: inConfViewHeight))
-                guard let injectionBag = self?.viewModel.injectionBag else { return }
+                let injectionBag = self.viewModel.injectionBag
+                //                    init(with callId: String?, injectionBag: InjectionBag, isLocal: Bool, participantId: String, participantUserName: String)
                 let pendingCallViewModel =
-                    ConferenceParticipantViewModel(with: call,
-                                                   injectionBag: injectionBag)
+                    ConferenceParticipantViewModel(with: call.callId,
+                                                   injectionBag: injectionBag,
+                                                   isLocal: false,
+                                                   participantId: call.paricipantHash(),
+                                                   participantUserName: call.displayName)
                 callView.viewModel = pendingCallViewModel
                 callView.delegate = self
-                self?.conferenceCalls.addArrangedSubview(callView)
+                self.conferenceCalls.addArrangedSubview(callView)
             })
             .disposed(by: self.disposeBag)
 
@@ -786,26 +824,55 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 }
 
 extension CallViewController: ConferenceParticipantViewDelegate {
-    func addConferenceParticipantMenu(origin: CGPoint, displayName: String, callId: String?, hangup: @escaping (() -> Void)) {
+    func addConferenceParticipantMenu(origin: CGPoint, displayName: String, participantId: String, callId: String?, hangup: @escaping (() -> Void)) {
         // remove menu if it is already present
         if self.conferenceParticipantMenu?.frame.origin == origin {
             self.removeConferenceParticipantMenu()
             return
         }
         let menuView = ConferenceActionMenu(frame: CGRect(origin: origin, size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)))
-        menuView.configureWith(mode: self.viewModel.getItemsForConferenceMenu(participantCallId: callId), displayName: displayName)
+        var muteEnabled = false
+        var muteText = ""
+        var moderatorText = ""
+        var isModerator = false
+        var isAudioMuted = false
+
+        if let participant = self.viewModel.getConferencePartisipant(participantId: participantId) {
+            muteEnabled = !participant.isAudioLocalyMuted
+            muteText = participant.isAudioMuted ? L10n.Calls.unmuteAudio : L10n.Calls.muteAudio
+            moderatorText = participant.isModerator ? L10n.Calls.removeModerator : L10n.Calls.setModerator
+            isModerator = participant.isModerator
+            isAudioMuted = participant.isAudioMuted
+        }
+
+        menuView.configureWith(items: self.viewModel.getItemsForConferenceMenu(participantId: participantId),
+                               displayName: displayName,
+                               muteText: muteText,
+                               moderatorText: moderatorText,
+                               muteEnabled: muteEnabled)
         menuView.addHangUpAction { [weak self] in
-            hangup()
+            self?.viewModel.hangupParticipant(participantId: participantId)
             self?.removeConferenceParticipantMenu()
         }
         menuView.addMaximizeAction { [weak self] in
             self?.removeConferenceParticipantMenu()
-            self?.viewModel.setActiveParticipant(callId: callId, maximize: true)
+            self?.viewModel.setActiveParticipant(jamiId: participantId, maximize: true)
         }
         menuView.addMinimizeAction { [weak self] in
             self?.removeConferenceParticipantMenu()
-            self?.viewModel.setActiveParticipant(callId: callId, maximize: false)
+            self?.viewModel.setActiveParticipant(jamiId: participantId, maximize: false)
         }
+
+        menuView.addSetModeratorAction { [weak self] in
+            self?.removeConferenceParticipantMenu()
+            self?.viewModel.setModeratorParticipant(participantId: participantId, active: !isModerator)
+        }
+
+        menuView.addMuteAction { [weak self] in
+            self?.removeConferenceParticipantMenu()
+            self?.viewModel.muteParticipant(participantId: participantId, active: !isAudioMuted)
+        }
+
         let point = conferenceCallsScrolView.convert(menuView.frame.origin, to: self.view)
         let offset = self.view.frame.size.width - point.x - menuView.frame.size.width
         if offset < 0 {

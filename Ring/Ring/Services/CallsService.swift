@@ -174,7 +174,7 @@ class CallsService: CallsAdapterDelegate {
         guard let uri = participantURI,
             let participantsArray = self.callsAdapter.getConferenceInfo(conferenceId) as? [[String: String]] else { return nil }
         let participants = self.arrayToConferenceParticipants(participants: participantsArray, onlyURIAndActive: true)
-        for participant in participants where participant.uri == uri {
+        for participant in participants where participant.uri?.filterOutHost() == uri.filterOutHost() {
             return participant.isActive
         }
         return nil
@@ -196,19 +196,24 @@ class CallsService: CallsAdapterDelegate {
         currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
     }
 
+    func isModerator(participantId: String, inConference confId: String) -> Bool {
+        let participants = self.conferenceInfos[confId]
+        let participant = participants?.filter({ confParticipant in
+            return confParticipant.uri?.filterOutHost() == participantId.filterOutHost()
+        }).first
+        return participant?.isModerator ?? false
+    }
+
     func getConferenceParticipants(for conferenceId: String) -> [ConferenceParticipant]? {
         return conferenceInfos[conferenceId]
     }
 
-    func setActiveParticipant(callId: String?, conferenceId: String, maximixe: Bool, jamiId: String) {
-        let participantURI = callId == nil ? "" : self.call(callID: callId!)?.participantUri
+    func setActiveParticipant(conferenceId: String, maximixe: Bool, jamiId: String) {
         guard let conference = self.call(callID: conferenceId),
-            let uri = participantURI,
-            let isActive = self.isParticipant(participantURI: uri, activeIn: conferenceId) else { return }
+              let isActive = self.isParticipant(participantURI: jamiId, activeIn: conferenceId) else { return }
         let newLayout = isActive ? self.getNewLayoutForActiveParticipant(currentLayout: conference.layout, maximixe: maximixe) : .oneWithSmal
         conference.layout = newLayout
-        let participant = callId == nil ? jamiId : participantURI
-        self.callsAdapter.setActiveParticipant(participant, forConference: conferenceId)
+        self.callsAdapter.setActiveParticipant(jamiId, forConference: conferenceId)
         self.callsAdapter.setConferenceLayout(newLayout.rawValue, forConference: conferenceId)
     }
 
@@ -666,5 +671,17 @@ class CallsService: CallsAdapterDelegate {
         conferenceCalls.forEach { (callID) in
             self.call(callID: callID)?.participantsCallId = conferenceCalls
         }
+    }
+
+    func muteParticipant(confId: String, participantId: String, active: Bool) {
+        self.callsAdapter.muteConferenceParticipant(participantId.filterOutHost(), forConference: confId, active: active)
+    }
+
+    func setModeratorParticipant(confId: String, participantId: String, active: Bool) {
+        self.callsAdapter.setConferenceModerator(participantId.filterOutHost(), forConference: confId, active: active)
+    }
+
+    func hangupParticipant(confId: String, participantId: String) {
+        self.callsAdapter.hangupConferenceParticipant(participantId.filterOutHost(), forConference: confId)
     }
 }

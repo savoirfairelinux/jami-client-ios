@@ -17,41 +17,109 @@
 *  along with this program; if not, write to the Free Software
 *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
 */
-
+enum RoleInCall {
+    case moderator
+    case host
+    case regular
+}
 class ConferenceMenuItemsManager {
-    func getMenuItemsForMasterCall(conference: CallModel?, active: Bool?) -> MenuMode {
+    func getMenuItemsForLocalCall(conference: CallModel?, active: Bool?) -> [MenuItem] {
+        var menu = [MenuItem]()
+        menu.append(.name)
         guard let conference = conference else {
-            return MenuMode.onlyName
+            return menu
         }
         guard let active = active else {
-            return MenuMode.onlyName
+            return menu
         }
         switch conference.layout {
         case .grid:
-            return MenuMode.withoutHangUPAndMinimize
+            menu.append(.maximize)
         case .oneWithSmal:
-            return active ? MenuMode.withoutHangUp : MenuMode.withoutHangUPAndMinimize
+            menu.append(.maximize)
+            if active {
+                menu.append(.minimize)
+            }
         case .one:
-            return active ? MenuMode.withoutHangUPAndMaximize : MenuMode.withoutHangUPAndMinimize
+            if active {
+                menu.append(.minimize)
+            } else {
+                menu.append(.maximize)
+            }
         }
+        return menu
     }
 
-    func getMenuItemsFor(call: CallModel?, conference: CallModel?, active: Bool?) -> MenuMode {
+    func getMenuItemsFor(call: CallModel?, isHost: Bool, conference: CallModel?, active: Bool?, role: RoleInCall) -> [MenuItem] {
+        var menu = [MenuItem]()
+        menu.append(.name)
         guard let conference = conference,
             let call = call else {
-                return MenuMode.onlyName
+            return menu
         }
         if call.state != CallState.current {
-            return MenuMode.withoutMaximizeAndMinimize
+            menu.append(.hangup)
+            return menu
         }
-        guard let active = active else { return MenuMode.onlyName }
+        guard let active = active else {
+            return menu
+        }
         switch conference.layout {
         case .grid:
-            return MenuMode.withoutMinimize
+            menu.append(.maximize)
+            switch role {
+            case .host:
+                menu.append(.muteAudio)
+                menu.append(.setModerator)
+                menu.append(.hangup)
+            case .moderator:
+                menu.append(.muteAudio)
+                if !isHost {
+                    menu.append(.hangup)
+                }
+            case .regular:
+                break
+            }
         case .oneWithSmal:
-            return active ? MenuMode.all : MenuMode.withoutMinimize
+            if active {
+                menu.append(.minimize)
+                menu.append(.maximize)
+            } else {
+                menu.append(.maximize)
+            }
+            switch role {
+            case .host:
+                menu.append(.muteAudio)
+                menu.append(.setModerator)
+                menu.append(.hangup)
+            case .moderator:
+                menu.append(.muteAudio)
+                if !isHost {
+                    menu.append(.hangup)
+                }
+            case .regular:
+                break
+            }
         case .one:
-            return active ? MenuMode.withoutMaximize : MenuMode.withoutMinimize
+            if active {
+                menu.append(.minimize)
+            } else {
+                menu.append(.maximize)
+            }
+            switch role {
+            case .host:
+                menu.append(.muteAudio)
+                menu.append(.setModerator)
+                menu.append(.hangup)
+            case .moderator:
+                menu.append(.muteAudio)
+                if !isHost {
+                    menu.append(.hangup)
+                }
+            case .regular:
+                break
+            }
         }
+        return menu
     }
 }
