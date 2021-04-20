@@ -128,7 +128,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func applyL10n() {
-        self.navigationItem.title = L10n.Global.homeTabBarTitle
         noConversationLabel.text = L10n.Smartlist.noConversation
         self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
         self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
@@ -234,11 +233,52 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         accountButton.clipsToBounds = true
         accountButton.contentMode = .scaleAspectFill
         let size: CGFloat = 32
+        let margin: CGFloat = 10
         accountButton.cornerRadius = size * 0.5
-        accountButton.frame = CGRect(x: 0, y: 0, width: size, height: size)
+        accountButton.frame = CGRect(x: 6, y: 0, width: size, height: size)
         accountButton.imageEdgeInsets = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4)
-        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: size))
+        let screenRect = UIScreen.main.bounds
+        let screenWidth = screenRect.size.width
+        let maxWidth: CGFloat = screenWidth - 45 - margin * 3
+        let accountNameX: CGFloat = accountButton.frame.origin.x + accountButton.frame.size.width + margin
+        let accountName = UILabel(frame: CGRect(x: accountNameX, y: 5, width: maxWidth, height: size))
+        let triangleViewX: CGFloat = maxWidth - 14
+        let triangleViewY: CGFloat = size * 0.5
+        let triangleViewSize: CGFloat = 12
+        let triangleView = UIView(frame: CGRect(x: triangleViewX, y: triangleViewY, width: triangleViewSize, height: triangleViewSize))
+        let heightWidth = triangleView.frame.size.width
+        let path = CGMutablePath()
+
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: heightWidth / 2, y: heightWidth / 2))
+        path.addLine(to: CGPoint(x: heightWidth, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 0))
+
+        let shape = CAShapeLayer()
+        shape.path = path
+        shape.fillColor = UIColor.jamiTextBlue.cgColor
+
+        triangleView.layer.insertSublayer(shape, at: 0)
+        accountName.textAlignment = .left
+        accountName.font = UIFont.systemFont(ofSize: 18.0)
+        accountName.lineBreakMode = .byTruncatingTail
+        accountName.textColor = UIColor.jamiTextBlue
+        let openButton = UIButton(type: .custom)
+        openButton.frame = CGRect(x: 0, y: 0, width: maxWidth, height: size)
+        self.viewModel.accountName
+            .subscribe(onNext: { name in
+                accountName.text = name
+                accountName.sizeToFit()
+                var frame = accountName.frame
+                frame.size.width = min(frame.size.width, maxWidth - 70)
+                accountName.frame = frame
+        })
+        .disposed(by: self.disposeBag)
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: maxWidth, height: size))
         containerView.addSubview(accountButton)
+        containerView.addSubview(accountName)
+        containerView.addSubview(triangleView)
+        containerView.addSubview(openButton)
         let accountButtonItem = UIBarButtonItem(customView: containerView)
         accountButtonItem
             .customView?
@@ -248,8 +288,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 .constraint(equalToConstant: size).isActive = true
         accountButtonItem.customView?
                 .widthAnchor
-                .constraint(equalToConstant: 80).isActive = true
-        accountButton.rx.tap
+                .constraint(equalToConstant: maxWidth).isActive = true
+        openButton.rx.tap
             .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.openAccountsList()
