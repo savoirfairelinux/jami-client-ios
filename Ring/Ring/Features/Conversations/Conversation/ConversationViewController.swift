@@ -30,6 +30,12 @@ import SwiftyBeaver
 import Photos
 import MobileCoreServices
 
+enum PreviewType {
+    case save
+    case share
+    case all
+}
+
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
 class ConversationViewController: UIViewController,
@@ -940,47 +946,71 @@ class ConversationViewController: UIViewController,
         cell.doubleTapGestureRecognizer?.rx.event
             .bind(onNext: { [weak self, weak item] _ in
                 guard let item = item else { return }
-                self?.showShareMenu(messageModel: item)
+                self?.showShareMenu(messageModel: item, type: .all)
             })
             .disposed(by: cell.disposeBag)
     }
 
-    func showShareMenu(messageModel: MessageViewModel) {
+    func showShareMenu(messageModel: MessageViewModel, type: PreviewType) {
         let conversation = self.viewModel.conversation.value.conversationId
         let accountId = self.viewModel.conversation.value.accountId
         if let file = messageModel.transferedFile(conversationID: conversation, accountId: accountId) {
-            self.presentActivitycontrollerWithItems(items: [file])
+            self.presentActivityControllerWithItems(items: [file], type: type)
             return
         }
         if messageModel
             .getURLFromPhotoLibrary(conversationID: conversation,
                                     completionHandler: { [weak self, weak messageModel] url in
                                         if let url = url {
-                                            self?.presentActivitycontrollerWithItems(items: [url])
+                                            self?.presentActivityControllerWithItems(items: [url], type: type)
                                             return
                                         }
                                         guard let messageModel = messageModel else { return }
-                                        self?.shareImage(messageModel: messageModel)
+                                        self?.shareImage(messageModel: messageModel, type: type)
             }) { return }
-        self.shareImage(messageModel: messageModel)
+        self.shareImage(messageModel: messageModel, type: type)
     }
 
-    func shareImage(messageModel: MessageViewModel) {
+    func shareImage(messageModel: MessageViewModel, type: PreviewType) {
         let conversationId = self.viewModel.conversation.value.conversationId
         let accountId = self.viewModel.conversation.value.accountId
         if let image = messageModel.getTransferedImage(maxSize: 250,
                                                        conversationID: conversationId,
                                                        accountId: accountId) {
-            self.presentActivitycontrollerWithItems(items: [image])
+            self.presentActivityControllerWithItems(items: [image], type: type)
         }
     }
 
-    func presentActivitycontrollerWithItems(items: [Any]) {
+    func presentActivityControllerWithItems(items: [Any], type: PreviewType) {
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
         activityViewController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
-        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
+        var excludedActivityTypes = [UIActivity.ActivityType]()
+        switch type {
+        case .save:
+            excludedActivityTypes = [UIActivity.ActivityType.airDrop,
+                                     UIActivity.ActivityType.postToTencentWeibo,
+                                     UIActivity.ActivityType.postToVimeo,
+                                     UIActivity.ActivityType.postToFlickr,
+                                     UIActivity.ActivityType.mail,
+                                     UIActivity.ActivityType.message,
+                                     UIActivity.ActivityType.postToWeibo,
+                                     UIActivity.ActivityType.postToTwitter,
+                                     UIActivity.ActivityType.postToFacebook]
+        case .share:
+            excludedActivityTypes = [UIActivity.ActivityType.print,
+                                     UIActivity.ActivityType.copyToPasteboard,
+                                     UIActivity.ActivityType.assignToContact,
+                                     UIActivity.ActivityType.saveToCameraRoll,
+                                     UIActivity.ActivityType.addToReadingList,
+                                     UIActivity.ActivityType.openInIBooks,
+                                     UIActivity.ActivityType.markupAsPDF]
+        case .all:
+            break
+        }
+
+        activityViewController.excludedActivityTypes = excludedActivityTypes
         self.present(activityViewController, animated: true, completion: nil)
     }
 
@@ -992,8 +1022,8 @@ class ConversationViewController: UIViewController,
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
-        let newFrame = CGRect(x: 0, y: -statusBarHeight, width: screenWidth, height: screenHeight)
-        let initialFrame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: screenHeight)
+        let newFrame = CGRect(x: 0, y: -statusBarHeight, width: screenWidth, height: screenHeight + statusBarHeight)
+        let initialFrame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: screenHeight + statusBarHeight)
         contactPickerVC.view.frame = initialFrame
         self.view.addSubview(contactPickerVC.view)
         contactPickerVC.didMove(toParent: self)
@@ -1054,7 +1084,7 @@ extension ConversationViewController: UITableViewDataSource {
             self.transferCellSetup(item, cell, tableView, indexPath)
             self.locationCellSetup(item, cell)
             self.deleteCellSetup(cell)
-            self.shareMessageCellSeUp(cell, item: item)
+            self.messageCellActionsSetUp(cell, item: item)
             self.tapToShowTimeCellSetup(cell)
 
             return cell
@@ -1080,12 +1110,51 @@ extension ConversationViewController: UITableViewDataSource {
             .disposed(by: cell.disposeBag)
     }
 
-    private func shareMessageCellSeUp(_ cell: MessageCell, item: MessageViewModel) {
+    private func messageCellActionsSetUp(_ cell: MessageCell, item: MessageViewModel) {
         cell.shareMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak item] (shouldShare) in
+                guard shouldShare, let item = item else { return }
+                self?.showShareMenu(messageModel: item, type: .share)
+            })
+            .disposed(by: cell.disposeBag)
+        cell.forwardMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak item] (shouldForward) in
+                guard shouldForward, let item = item else { return }
+                self?.viewModel.slectContactsToShareMessage(message: item)
+            })
+            .disposed(by: cell.disposeBag)
+        cell.saveMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak item] (shouldSave) in
+                guard shouldSave, let item = item else { return }
+                self?.showShareMenu(messageModel: item, type: .save)
+            })
+            .disposed(by: cell.disposeBag)
+        cell.resendMessage
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak item] (shouldResend) in
                 guard shouldResend, let item = item else { return }
-                self?.viewModel.slectContactsToShareMessage(message: item)
+                self?.viewModel.resendMessage(message: item)
+            })
+            .disposed(by: cell.disposeBag)
+        cell.shareOrSaveMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak item] (shouldSave) in
+                guard shouldSave, let item = item else { return }
+                self?.showShareMenu(messageModel: item, type: .all)
+            })
+            .disposed(by: cell.disposeBag)
+        cell.previewMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak item, weak cell] (shouldPreview) in
+                guard shouldPreview, let item = item, let cell = cell, let self = self, let initialFrame = cell.getInitialFrame() else { return }
+                let player = item.getPlayer(conversationViewModel: self.viewModel)
+                let image = cell.transferedImage
+                if player == nil && image == nil { return }
+                self.inputAccessoryView.isHidden = true
+                self.viewModel.openFullScreenPreview(parentView: self, viewModel: player, image: image, initialFrame: initialFrame, delegate: cell)
             })
             .disposed(by: cell.disposeBag)
     }
@@ -1187,13 +1256,13 @@ extension ConversationViewController: UITableViewDataSource {
                 .disposed(by: cell.disposeBag)
             cell.openPreview
                 .subscribe(onNext: { [weak self, weak item, weak cell] open in
-                    guard let self = self, open,
-                        let initialFrame = cell?.getInitialFrame() else { return }
+                    guard let self = self, open, let cell = cell,
+                        let initialFrame = cell.getInitialFrame() else { return }
                     let player = item?.getPlayer(conversationViewModel: self.viewModel)
-                    let image = cell?.transferedImage
+                    let image = cell.transferedImage
                     if player == nil && image == nil { return }
                     self.inputAccessoryView.isHidden = true
-                    self.viewModel.openFullScreenPreview(parentView: self, viewModel: player, image: image, initialFrame: initialFrame)
+                    self.viewModel.openFullScreenPreview(parentView: self, viewModel: player, image: image, initialFrame: initialFrame, delegate: cell)
                 })
                 .disposed(by: cell.disposeBag)
             cell.playerHeight

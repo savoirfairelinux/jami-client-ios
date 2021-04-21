@@ -30,8 +30,7 @@ import SwiftyBeaver
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
-
+class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewControllerDelegate {
     // MARK: Properties
 
     let log = SwiftyBeaver.self
@@ -76,10 +75,17 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     private(set) var messageId: Int64?
     private var isCopyable: Bool = false
     private var couldBeShared: Bool = false
+    private var couldBeResend: Bool = false
+    private var couldBeForward: Bool = false
     private let _deleteMessage = BehaviorRelay<Bool>(value: false)
     var deleteMessage: Observable<Bool> { _deleteMessage.asObservable() }
 
     var shareMessage = PublishSubject<Bool>()
+    var shareOrSaveMessage = PublishSubject<Bool>()
+    var forwardMessage = PublishSubject<Bool>()
+    var saveMessage = PublishSubject<Bool>()
+    var resendMessage = PublishSubject<Bool>()
+    var previewMessage = PublishSubject<Bool>()
 
     private let showTimeTap = BehaviorRelay<Bool>(value: false)
     var tappedToShowTime: Observable<Bool> { showTimeTap.asObservable() }
@@ -134,6 +140,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.messageId = nil
         self.isCopyable = false
         self.couldBeShared = false
+        self.couldBeResend = false
+        self.couldBeForward = false
         self._deleteMessage.accept(false)
         if let longGestureRecognizer = longGestureRecognizer {
             self.bubble.removeGestureRecognizer(longGestureRecognizer)
@@ -208,7 +216,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     }
 
     func supportFullScreenMode() -> Bool {
-        return (playerView != nil && playerView!.viewModel.hasVideo.value) || self.transferImageView.image != nil
+        return (playerView != nil && playerView!.viewModel.hasVideo.value) || self.transferImageView.image != nil && couldBeShared
     }
 
     // MARK: Configure
@@ -261,10 +269,12 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.showTimeTap.accept(true)
     }
 
-    private func configureLongGesture(_ messageId: Int64, _ bubblePosition: BubblePosition, _ isTransfer: Bool, _ isLocationSharingBubble: Bool) {
+    private func configureLongGesture(_ messageId: Int64, _ bubblePosition: BubblePosition, _ isTransfer: Bool, _ isLocationSharingBubble: Bool, isStatusIsSuccess: Bool) {
         self.messageId = messageId
         self.isCopyable = bubblePosition != .generated && !isTransfer && !isLocationSharingBubble
-        self.couldBeShared = bubblePosition != .generated && !isLocationSharingBubble
+        self.couldBeShared = isTransfer && isStatusIsSuccess
+        self.couldBeForward = bubblePosition != .generated && !isLocationSharingBubble && (isStatusIsSuccess || !isTransfer)
+        self.couldBeResend = !isStatusIsSuccess && bubblePosition == .sent && isTransfer
         self.bubble.isUserInteractionEnabled = true
         longGestureRecognizer = UILongPressGestureRecognizer()
         longGestureRecognizer!.rx.event.bind(onNext: { [weak self] _ in self?.onLongGesture() }).disposed(by: self.disposeBag)
@@ -275,7 +285,16 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         becomeFirstResponder()
         let menu = UIMenuController.shared
         let shareItem = UIMenuItem(title: L10n.Global.share, action: NSSelectorFromString("share"))
-        menu.menuItems = [shareItem]
+        let forwardItem = UIMenuItem(title: L10n.Global.forward, action: NSSelectorFromString("forward"))
+        let saveItem = UIMenuItem(title: L10n.Global.save, action: NSSelectorFromString("save"))
+        let resendItem = UIMenuItem(title: L10n.Global.resend, action: NSSelectorFromString("resend"))
+        let previewItem = UIMenuItem(title: L10n.Global.preview, action: NSSelectorFromString("preview"))
+        menu.menuItems = [previewItem, shareItem, forwardItem, saveItem]
+        if self.couldBeShared && !self.couldBeForward && !self.couldBeResend {
+            menu.menuItems = [previewItem, shareItem, saveItem]
+        } else if self.couldBeResend {
+            menu.menuItems = [resendItem]
+        }
         if !menu.isMenuVisible {
             menu.setTargetRect(self.bubble.frame, in: self)
             menu.setMenuVisible(true, animated: true)
@@ -285,6 +304,34 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
     @objc
     func share() {
         shareMessage.onNext(true)
+    }
+
+    @objc
+    func forward() {
+        forwardMessage.onNext(true)
+    }
+
+    @objc
+    func save() {
+        saveMessage.onNext(true)
+    }
+
+    @objc
+    func resend() {
+        resendMessage.onNext(true)
+    }
+    @objc
+    func preview() {
+        previewMessage.onNext(true)
+    }
+    func deleteFile() {
+        _deleteMessage.accept(true)
+    }
+    func shareFile() {
+        shareOrSaveMessage.onNext(true)
+    }
+    func forwardFile() {
+        forwardMessage.onNext(true)
     }
 
     override func copy(_ sender: Any?) {
@@ -302,7 +349,12 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return action == #selector(UIResponderStandardEditActions.copy) && self.isCopyable ||
-            action == #selector(UIResponderStandardEditActions.delete) || (action == NSSelectorFromString("share") && self.couldBeShared)
+            action == #selector(UIResponderStandardEditActions.delete) ||
+            (action == NSSelectorFromString("forward") && self.couldBeForward) ||
+            (action == NSSelectorFromString("share") && self.couldBeShared) ||
+            (action == NSSelectorFromString("resend") && self.couldBeResend) ||
+            (action == NSSelectorFromString("save") && self.couldBeShared) ||
+            (action == NSSelectorFromString("preview") && self.couldBeShared)
     }
 
     func toggleCellTimeLabelVisibility() {
@@ -441,7 +493,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate {
         self.configureCellTimeLabel(item)
 
         self.prepareForReuseLongGesture()
-        self.configureLongGesture(item.message.messageId, item.bubblePosition(), item.isTransfer, item.isLocationSharingBubble)
+        self.configureLongGesture(item.message.messageId, item.bubblePosition(), item.isTransfer, item.isLocationSharingBubble, isStatusIsSuccess: item.initialTransferStatus == .success)
 
         self.prepareForReuseTapGesture()
 

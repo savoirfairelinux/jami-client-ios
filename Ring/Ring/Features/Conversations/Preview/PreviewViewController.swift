@@ -27,6 +27,12 @@ enum PrevewType {
     case image
 }
 
+protocol PreviewViewControllerDelegate: class {
+    func deleteFile()
+    func shareFile()
+    func forwardFile()
+}
+
 class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
 // MARK: - outlets
 @IBOutlet weak var playerView: PlayerView!
@@ -38,12 +44,17 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
 @IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
 @IBOutlet weak var backgroundView: UIView!
 @IBOutlet weak var gradientView: UIView!
+@IBOutlet weak var shareButton: UIButton!
+@IBOutlet weak var deleteButton: UIButton!
+@IBOutlet weak var forwardButton: UIButton!
+@IBOutlet weak var buttonsContainer: UIStackView!
 
 // MARK: - members
     let disposeBag = DisposeBag()
     var viewModel: PreviewControllerModel!
     var tapGestureRecognizer: UITapGestureRecognizer!
     var type: PrevewType = .player
+    weak var delegate: PreviewViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,8 +78,36 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
             .disposed(by: self.disposeBag)
         self.hideButton.centerYAnchor.constraint(equalTo: self.playerView.muteAudio.centerYAnchor, constant: 0).isActive = true
         self.hideButton.setTitle(L10n.Global.close, for: .normal)
+//        self.shareButton.isUserInteractionEnabled = self.type == .image
+//        self.deleteButton.isUserInteractionEnabled = self.type == .image
+//        self.forwardButton.isUserInteractionEnabled = self.type == .image
+        buttonsContainer.isHidden = self.type != .image
         if self.type == .image, let image = self.viewModel.image {
             self.imageView.image = image
+            let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(startZooming(_:)))
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(pinchGesture)
+            self.shareButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.parent?.inputAccessoryView?.isHidden = false
+                    self?.removeChildController()
+                    self?.share()
+                })
+                .disposed(by: self.disposeBag)
+            self.deleteButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.parent?.inputAccessoryView?.isHidden = false
+                    self?.removeChildController()
+                    self?.delete()
+                })
+                .disposed(by: self.disposeBag)
+            self.forwardButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.parent?.inputAccessoryView?.isHidden = false
+                    self?.removeChildController()
+                    self?.forward()
+                })
+                .disposed(by: self.disposeBag)
             return
         }
         guard let model = self.viewModel.playerViewModel, let playerView = playerView else { return }
@@ -76,6 +115,14 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
+
+    @objc
+     private func startZooming(_ sender: UIPinchGestureRecognizer) {
+       let scaleResult = sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale)
+       guard let scale = scaleResult, scale.a > 1, scale.d > 1 else { return }
+       sender.view?.transform = scale
+       sender.scale = 1
+     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -119,5 +166,20 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
                         self.backgroundView.alpha = 1
                         self.view.layoutIfNeeded()
             }, completion: nil)
+    }
+    func share() {
+        if let delegate = self.delegate {
+            delegate.shareFile()
+        }
+    }
+    func delete() {
+        if let delegate = self.delegate {
+            delegate.deleteFile()
+        }
+    }
+    func forward() {
+        if let delegate = self.delegate {
+            delegate.forwardFile()
+        }
     }
 }
