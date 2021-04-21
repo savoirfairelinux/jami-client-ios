@@ -325,7 +325,7 @@ internal enum L10n {
     internal static let explanationReceivingLocationFrom = L10n.tr("Localizable", "conversation.explanationReceivingLocationFrom")
     /// You are currently sharing your location with 
     internal static let explanationSendingLocationTo = L10n.tr("Localizable", "conversation.explanationSendingLocationTo")
-    /// Type your message...
+    /// Write message to 
     internal static let messagePlaceholder = L10n.tr("Localizable", "conversation.messagePlaceholder")
   }
 
