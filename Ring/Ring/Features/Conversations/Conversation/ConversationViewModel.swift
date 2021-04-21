@@ -103,6 +103,18 @@ class ConversationViewModel: Stateable, ViewModel {
             })
     }()
 
+    lazy var bestIdentifier: Observable<String> = {
+        return Observable
+            .combineLatest(userName.asObservable(),
+                           displayName.asObservable(),
+                           resultSelector: {(userName, displayname) in
+                            guard let displayname = displayname, !displayname.isEmpty else {
+                                return userName.isEmpty ? self.conversation.value.participantUri : userName
+                            }
+                            return displayname
+            })
+    }()
+
     /// My contact's profile's image data
     var profileImageData = BehaviorRelay<Data?>(value: nil)
     /// My profile's image data

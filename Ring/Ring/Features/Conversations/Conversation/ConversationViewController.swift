@@ -621,6 +621,15 @@ class ConversationViewController: UIViewController,
                 self?.viewModel.openCall()
             })
             .disposed(by: self.disposeBag)
+        viewModel.bestIdentifier
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] name in
+                guard !name.isEmpty else { return }
+                let placeholder = L10n.Conversation.messagePlaceholder + name
+                self?.messageAccessoryView.setPlaceholder(placeholder: placeholder)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func inviteItemTapped() {
