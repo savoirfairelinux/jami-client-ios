@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Close";
 "global.share" = "Share";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

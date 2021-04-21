@@ -34,7 +34,7 @@ import MobileCoreServices
 // swiftlint:disable type_body_length
 class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate, ContactPickerDelegate, PHPickerViewControllerDelegate {
+                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased, MessageAccessoryViewDelegate, ContactPickerDelegate, PHPickerViewControllerDelegate, UIDocumentInteractionControllerDelegate {
 
     let log = SwiftyBeaver.self
 
@@ -954,18 +954,47 @@ class ConversationViewController: UIViewController,
             .disposed(by: cell.disposeBag)
     }
 
+    func saveImageToGalery (image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let allert = UIAlertController(title: "Failed to save image to galery", message: error.localizedDescription, preferredStyle: .alert)
+            allert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(allert, animated: true)
+        }
+    }
+
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        if let navigationController = self.navigationController {
+            return navigationController
+        }
+        return self
+    }
+
+    func openDocument(messageModel: MessageViewModel) {
+        let conversation = self.viewModel.conversation.value.conversationId
+        let accountId = self.viewModel.conversation.value.accountId
+        guard let url = messageModel.transferedFile(conversationID: conversation, accountId: accountId),
+              FileManager().fileExists(atPath: url.path) else { return }
+        let interactionController = UIDocumentInteractionController(url: url)
+        interactionController.delegate = self
+        interactionController.presentPreview(animated: true)
+    }
+
     func showShareMenu(messageModel: MessageViewModel) {
         let conversation = self.viewModel.conversation.value.conversationId
         let accountId = self.viewModel.conversation.value.accountId
         if let file = messageModel.transferedFile(conversationID: conversation, accountId: accountId) {
-            self.presentActivitycontrollerWithItems(items: [file])
+            self.presentActivityControllerWithItems(items: [file])
             return
         }
         if messageModel
             .getURLFromPhotoLibrary(conversationID: conversation,
                                     completionHandler: { [weak self, weak messageModel] url in
                                         if let url = url {
-                                            self?.presentActivitycontrollerWithItems(items: [url])
+                                            self?.presentActivityControllerWithItems(items: [url])
                                             return
                                         }
                                         guard let messageModel = messageModel else { return }
@@ -980,16 +1009,15 @@ class ConversationViewController: UIViewController,
         if let image = messageModel.getTransferedImage(maxSize: 250,
                                                        conversationID: conversationId,
                                                        accountId: accountId) {
-            self.presentActivitycontrollerWithItems(items: [image])
+            self.presentActivityControllerWithItems(items: [image])
         }
     }
 
-    func presentActivitycontrollerWithItems(items: [Any]) {
+    func presentActivityControllerWithItems(items: [Any]) {
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
         activityViewController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
-        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
         self.present(activityViewController, animated: true, completion: nil)
     }
 
@@ -1001,8 +1029,8 @@ class ConversationViewController: UIViewController,
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
-        let newFrame = CGRect(x: 0, y: -statusBarHeight, width: screenWidth, height: screenHeight)
-        let initialFrame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: screenHeight)
+        let newFrame = CGRect(x: 0, y: -statusBarHeight, width: screenWidth, height: screenHeight + statusBarHeight)
+        let initialFrame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: screenHeight + statusBarHeight)
         contactPickerVC.view.frame = initialFrame
         self.view.addSubview(contactPickerVC.view)
         contactPickerVC.didMove(toParent: self)
@@ -1063,7 +1091,7 @@ extension ConversationViewController: UITableViewDataSource {
             self.transferCellSetup(item, cell, tableView, indexPath)
             self.locationCellSetup(item, cell)
             self.deleteCellSetup(cell)
-            self.shareMessageCellSeUp(cell, item: item)
+            self.messageCellActionsSetUp(cell, item: item)
             self.tapToShowTimeCellSetup(cell)
 
             return cell
@@ -1089,12 +1117,47 @@ extension ConversationViewController: UITableViewDataSource {
             .disposed(by: cell.disposeBag)
     }
 
-    private func shareMessageCellSeUp(_ cell: MessageCell, item: MessageViewModel) {
+    private func messageCellActionsSetUp(_ cell: MessageCell, item: MessageViewModel) {
         cell.shareMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak item] (shouldShare) in
+                guard shouldShare, let item = item else { return }
+                self?.showShareMenu(messageModel: item)
+            })
+            .disposed(by: cell.disposeBag)
+        cell.forwardMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak item] (shouldForward) in
+                guard shouldForward, let item = item else { return }
+                self?.viewModel.slectContactsToShareMessage(message: item)
+            })
+            .disposed(by: cell.disposeBag)
+        cell.saveMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak cell] (shouldSave) in
+                guard shouldSave, let cell = cell, let image = cell.transferedImage else { return }
+                self?.saveImageToGalery(image: image)
+            })
+            .disposed(by: cell.disposeBag)
+        cell.resendMessage
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak item] (shouldResend) in
                 guard shouldResend, let item = item else { return }
-                self?.viewModel.slectContactsToShareMessage(message: item)
+                self?.viewModel.resendMessage(message: item)
+            })
+            .disposed(by: cell.disposeBag)
+        cell.previewMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak item, weak cell] (shouldPreview) in
+                guard shouldPreview, let item = item, let cell = cell, let self = self, let initialFrame = cell.getInitialFrame() else { return }
+                let player = item.getPlayer(conversationViewModel: self.viewModel)
+                let image = cell.transferedImage
+                if player == nil && image == nil {
+                    self.openDocument(messageModel: item)
+                    return
+                }
+                self.inputAccessoryView.isHidden = true
+                self.viewModel.openFullScreenPreview(parentView: self, viewModel: player, image: image, initialFrame: initialFrame, delegate: cell)
             })
             .disposed(by: cell.disposeBag)
     }
@@ -1196,13 +1259,16 @@ extension ConversationViewController: UITableViewDataSource {
                 .disposed(by: cell.disposeBag)
             cell.openPreview
                 .subscribe(onNext: { [weak self, weak item, weak cell] open in
-                    guard let self = self, open,
-                        let initialFrame = cell?.getInitialFrame() else { return }
-                    let player = item?.getPlayer(conversationViewModel: self.viewModel)
-                    let image = cell?.transferedImage
-                    if player == nil && image == nil { return }
+                    guard let self = self, open, let cell = cell, let item = item,
+                        let initialFrame = cell.getInitialFrame() else { return }
+                    let player = item.getPlayer(conversationViewModel: self.viewModel)
+                    let image = cell.transferedImage
+                    if player == nil && image == nil {
+                        self.openDocument(messageModel: item)
+                        return
+                    }
                     self.inputAccessoryView.isHidden = true
-                    self.viewModel.openFullScreenPreview(parentView: self, viewModel: player, image: image, initialFrame: initialFrame)
+                    self.viewModel.openFullScreenPreview(parentView: self, viewModel: player, image: image, initialFrame: initialFrame, delegate: cell)
                 })
                 .disposed(by: cell.disposeBag)
             cell.playerHeight

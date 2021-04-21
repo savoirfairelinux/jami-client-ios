@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZwP-Qn-oLY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZwP-Qn-oLY">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +11,7 @@
         <!--Contact Picker View Controller-->
         <scene sceneID="QZd-Vi-EyD">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="ZwP-Qn-oLY" customClass="ContactPickerViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" id="ZwP-Qn-oLY" customClass="ContactPickerViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TtT-WG-OAE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,10 +40,16 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Bdz-kj-0K4">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZ0-vA-uc5">
+                                        <rect key="frame" x="182" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="C1b-Mo-dnW"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfK-DS-kt1">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="90"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AM-a0-weG">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AM-a0-weG">
                                                 <rect key="frame" x="364" y="45" width="30" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             </button>
@@ -55,7 +61,7 @@
                                         </constraints>
                                     </view>
                                     <searchBar contentMode="redraw" searchBarStyle="prominent" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ht5-JP-L4t">
-                                        <rect key="frame" x="0.0" y="90" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="140" width="414" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Ott-Go-5mf"/>
                                         </constraints>
@@ -63,7 +69,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="i1P-Li-H82">
-                                        <rect key="frame" x="0.0" y="134" width="414" height="684"/>
+                                        <rect key="frame" x="0.0" y="184" width="414" height="634"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="delegate" destination="ZwP-Qn-oLY" id="EoQ-WF-bN4"/>
@@ -71,7 +77,6 @@
                                     </tableView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="cfK-DS-kt1" firstAttribute="top" secondItem="Bdz-kj-0K4" secondAttribute="top" id="4Ai-6C-pS6"/>
                                     <constraint firstAttribute="trailing" secondItem="i1P-Li-H82" secondAttribute="trailing" id="4SM-vM-mgc"/>
                                     <constraint firstAttribute="bottom" secondItem="i1P-Li-H82" secondAttribute="bottom" id="MtY-d8-Qac"/>
                                     <constraint firstItem="cfK-DS-kt1" firstAttribute="leading" secondItem="Bdz-kj-0K4" secondAttribute="leading" id="RVA-PE-P1b"/>
@@ -82,6 +87,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="HLr-8o-AJK"/>
                         <constraints>
                             <constraint firstItem="VI3-Wm-odB" firstAttribute="top" secondItem="Bdz-kj-0K4" secondAttribute="top" id="0qq-2Q-k11"/>
                             <constraint firstItem="VI3-Wm-odB" firstAttribute="leading" secondItem="Bdz-kj-0K4" secondAttribute="leading" id="5pC-zY-2Vk"/>
@@ -92,12 +98,12 @@
                             <constraint firstItem="HLr-8o-AJK" firstAttribute="bottom" secondItem="VI3-Wm-odB" secondAttribute="bottom" id="l3e-iB-s2n"/>
                             <constraint firstItem="VI3-Wm-odB" firstAttribute="trailing" secondItem="Bdz-kj-0K4" secondAttribute="trailing" id="sVI-Ny-tp3"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="HLr-8o-AJK"/>
                     </view>
                     <connections>
                         <outlet property="doneButton" destination="6AM-a0-weG" id="2yX-Fh-qwe"/>
                         <outlet property="searchBar" destination="ht5-JP-L4t" id="adL-r1-B3M"/>
                         <outlet property="tableView" destination="i1P-Li-H82" id="Hbd-c3-3WV"/>
+                        <outlet property="topSpace" destination="C1b-Mo-dnW" id="0UO-Q0-o1H"/>
                         <outlet property="topViewContainer" destination="cfK-DS-kt1" id="s5H-k8-YXw"/>
                     </connections>
                 </viewController>

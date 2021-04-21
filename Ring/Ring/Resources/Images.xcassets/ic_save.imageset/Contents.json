@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "trash-can-outline.png",
+      "filename" : "tray-arrow-down.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "trash-can-outline-2.png",
+      "filename" : "tray-arrow-down-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "trash-can-outline-3.png",
+      "filename" : "tray-arrow-down-4.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -21,7 +21,6 @@
     "version" : 1
   },
   "properties" : {
-    "preserves-vector-representation" : true,
     "template-rendering-intent" : "template"
   }
 }
