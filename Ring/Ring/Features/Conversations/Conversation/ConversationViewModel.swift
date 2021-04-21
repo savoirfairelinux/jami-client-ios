@@ -102,7 +102,6 @@ class ConversationViewModel: Stateable, ViewModel {
                             return displayname
             })
     }()
-
     /// My contact's profile's image data
     var profileImageData = BehaviorRelay<Data?>(value: nil)
     /// My profile's image data

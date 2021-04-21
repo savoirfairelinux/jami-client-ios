@@ -147,6 +147,7 @@ open class GrowingTextView: UITextView {
                 // Otherwise user placeholder and inherit `text` attributes
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = textAlignment
+                paragraphStyle.lineBreakMode = .byTruncatingTail
                 var attributes: [NSAttributedString.Key: Any] = [
                     .foregroundColor: placeholderColor,
                     .paragraphStyle: paragraphStyle
