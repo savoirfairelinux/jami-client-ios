@@ -703,8 +703,8 @@ extension ConversationViewModel {
                                                         contactUri: self.conversation.value.participantUri)
     }
 
-    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect) {
-        self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame))
+    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
+        self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate))
     }
 }
 
@@ -762,6 +762,36 @@ extension ConversationViewModel {
             self.shareMessage(message: message, with: contact, fileURL: url, image: image, fileName: fileName)
         }
         self.changeConversationIfNeeded(items: selectedContacts)
+    }
+
+    func resendMessage(message: MessageViewModel) {
+        guard !message.message.isGenerated,
+              !message.message.isLocationSharing else { return }
+        if !message.message.isTransfer {
+            self.sendMessage(withContent: message.content, contactURI: conversation.value.participantUri)
+            return
+        }
+        let conversationId = self.conversation.value.conversationId
+        let accountId = self.conversation.value.accountId
+        var fileName = message.content
+        if message.content.contains("\n") {
+            guard let substring = message.content.split(separator: "\n").first else { return }
+            fileName = String(substring)
+        }
+        if let url = message.transferedFile(conversationID: conversationId, accountId: accountId) {
+            self.sendFile(filePath: url.path, displayName: fileName, contactHash: self.conversation.value.hash)
+            return
+        }
+        if let image = message.getTransferedImage(maxSize: 200, conversationID: conversationId, accountId: accountId) {
+            let identifier = message.transferFileData.identifier
+            if identifier != nil {
+                self.sendImageFromPhotoLibraty(image: image, imageName: fileName, localIdentifier: identifier, contactHash: self.conversation.value.hash)
+                return
+            }
+            if let data = image.jpegData(compressionQuality: 100) {
+                self.sendAndSaveFile(displayName: fileName, imageData: data, contactHash: self.conversation.value.hash, conversation: self.conversation.value.conversationId)
+            }
+        }
     }
 
     func slectContactsToShareMessage(message: MessageViewModel) {

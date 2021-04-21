@@ -37,6 +37,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var topViewContainer: UIView!
+    @IBOutlet weak var topSpace: NSLayoutConstraint!
 
     var viewModel: ContactPickerViewModel!
     private let disposeBag = DisposeBag()
@@ -224,6 +225,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             let dismissGR = UISwipeGestureRecognizer(target: self, action: #selector(remove(gesture:)))
             dismissGR.direction = UISwipeGestureRecognizer.Direction.down
             dismissGR.delegate = self
+            topSpace.constant = 0
             self.searchBar.addGestureRecognizer(dismissGR)
             self.rowSelectionHandler = { [weak self] row in
                 guard let self = self else { return }
@@ -236,6 +238,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             self.searchBar.backgroundColor = UIColor.clear
             self.doneButton.setTitle(L10n.Actions.cancelAction, for: .normal)
             self.doneButton.setTitleColor(UIColor.jamiTextBlue, for: .normal)
+            topSpace.constant = 50
             self.doneButton.rx.tap
                 .subscribe(onNext: { [weak self] in
                     let paths = self?.tableView.indexPathsForSelectedRows

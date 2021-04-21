@@ -68,6 +68,7 @@ class MessageViewModel {
     var isComposingIndicator: Bool = false
 
     var isLocationSharingBubble: Bool { return self.message.isLocationSharing }
+    var isText: Bool { return !self.message.isLocationSharing && !self.message.isGenerated && !self.message.isTransfer }
 
     private let disposeBag = DisposeBag()
     let injectBug: InjectionBag

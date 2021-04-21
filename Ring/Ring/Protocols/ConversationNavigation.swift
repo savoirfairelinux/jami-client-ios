@@ -36,7 +36,7 @@ enum ConversationState: State {
     case fromCallToConversation(conversation: ConversationViewModel)
     case needAccountMigration(accountId: String)
     case accountModeChanged
-    case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect)
+    case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate)
     case replaceCurrentWithConversationFor(participantUri: String)
 }
 
@@ -75,8 +75,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.migrateAccount(accountId: accountId)
                 case .accountModeChanged:
                     self.accountModeChanged()
-                case .openFullScreenPreview(let parentView, let viewModel, let image, let initialFrame):
-                    self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame)
+                case .openFullScreenPreview(let parentView, let viewModel, let image, let initialFrame, let delegate):
+                    self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate)
                 default:
                     break
                 }
@@ -105,9 +105,10 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStateable: recordFileViewController.viewModel)
     }
 
-    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect) {
+    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
         if viewModel == nil && image == nil { return }
         let previewController = PreviewViewController.instantiate(with: self.injectionBag)
+        previewController.delegate = delegate
         if let viewModel = viewModel {
             previewController.viewModel.playerViewModel = viewModel
             previewController.type = .player

@@ -321,6 +321,8 @@ internal enum L10n {
   }
 
   internal enum Conversation {
+    /// Failed to save image to galery
+    internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage")
     /// You are currently receiving a live location from 
     internal static let explanationReceivingLocationFrom = L10n.tr("Localizable", "conversation.explanationReceivingLocationFrom")
     /// You are currently sharing your location with 
@@ -451,12 +453,20 @@ internal enum L10n {
     internal static let close = L10n.tr("Localizable", "global.close")
     /// Invitations
     internal static let contactRequestsTabBarTitle = L10n.tr("Localizable", "global.contactRequestsTabBarTitle")
+    /// Forward
+    internal static let forward = L10n.tr("Localizable", "global.forward")
     /// Conversations
     internal static let homeTabBarTitle = L10n.tr("Localizable", "global.homeTabBarTitle")
     /// Account
     internal static let meTabBarTitle = L10n.tr("Localizable", "global.meTabBarTitle")
     /// Ok
     internal static let ok = L10n.tr("Localizable", "global.ok")
+    /// Preview
+    internal static let preview = L10n.tr("Localizable", "global.preview")
+    /// Resend
+    internal static let resend = L10n.tr("Localizable", "global.resend")
+    /// Save
+    internal static let save = L10n.tr("Localizable", "global.save")
     /// Share
     internal static let share = L10n.tr("Localizable", "global.share")
     /// Together
