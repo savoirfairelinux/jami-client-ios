@@ -38,7 +38,7 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
     @IBOutlet weak var emojisButtonTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var textViewHeightConstraints: NSLayoutConstraint!
-    var messageTextViewHeight = BehaviorRelay<CGFloat>(value: 0.00)
+    var messageTextViewHeight = BehaviorRelay<CGFloat>(value: 34.00)
     var messageTextViewContent = BehaviorRelay<String>(value: "")
     weak var delegate: MessageAccessoryViewDelegate?
 

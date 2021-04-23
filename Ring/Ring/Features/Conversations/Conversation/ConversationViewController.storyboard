@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O1m-sW-gim">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O1m-sW-gim">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,7 +19,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yc2-Jn-6vm">
                                 <rect key="frame" x="0.0" y="-50" width="375" height="717"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" id="Cd7-Fm-IM5">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -37,7 +38,7 @@
                                 <color key="textColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehB-ol-cdx">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehB-ol-cdx">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="e7R-TC-NQ2"/>
@@ -71,9 +72,9 @@
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="mrp-Ty-hZO"/>
                         <constraints>
                             <constraint firstItem="ehB-ol-cdx" firstAttribute="leading" secondItem="lhx-ny-Zct" secondAttribute="leading" id="AUO-95-xlZ"/>
-                            <constraint firstItem="XRu-HM-jhQ" firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="D1h-vM-lOK"/>
                             <constraint firstAttribute="trailing" secondItem="6Wq-EJ-CAF" secondAttribute="trailing" id="EuA-fk-PFm"/>
                             <constraint firstAttribute="bottom" secondItem="6Wq-EJ-CAF" secondAttribute="bottom" id="QKw-Wp-ff0"/>
                             <constraint firstItem="yc2-Jn-6vm" firstAttribute="leading" secondItem="lhx-ny-Zct" secondAttribute="leading" id="RmT-dh-QdK"/>
@@ -86,18 +87,19 @@
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="bottom" secondItem="ehB-ol-cdx" secondAttribute="bottom" id="bi2-5t-Ueh"/>
                             <constraint firstAttribute="trailing" secondItem="ehB-ol-cdx" secondAttribute="trailing" id="hsT-qM-JJP"/>
                             <constraint firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="m6U-Gp-jhl"/>
+                            <constraint firstAttribute="bottom" secondItem="XRu-HM-jhQ" secondAttribute="bottom" id="qDd-08-1Ga"/>
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="top" secondItem="mrp-Ty-hZO" secondAttribute="top" id="ucp-wl-kSP"/>
                             <constraint firstItem="6Wq-EJ-CAF" firstAttribute="top" secondItem="lhx-ny-Zct" secondAttribute="top" id="v3Q-NK-vb1"/>
                             <constraint firstItem="XRu-HM-jhQ" firstAttribute="width" secondItem="yc2-Jn-6vm" secondAttribute="width" id="vBi-yc-6H9"/>
                             <constraint firstItem="6Wq-EJ-CAF" firstAttribute="leading" secondItem="lhx-ny-Zct" secondAttribute="leading" id="was-ym-C9C"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="mrp-Ty-hZO"/>
                     </view>
                     <connections>
                         <outlet property="callButtonHeightConstraint" destination="e7R-TC-NQ2" id="5uM-Sy-1EZ"/>
                         <outlet property="currentCallButton" destination="ehB-ol-cdx" id="hXv-aJ-8DN"/>
                         <outlet property="currentCallLabel" destination="5cj-ge-3dv" id="HaN-nP-GKW"/>
                         <outlet property="spinnerView" destination="6Wq-EJ-CAF" id="XKK-Rh-rmd"/>
+                        <outlet property="tableBottomConstraint" destination="m6U-Gp-jhl" id="kiK-kW-KGd"/>
                         <outlet property="tableView" destination="yc2-Jn-6vm" id="neM-4t-MpC"/>
                     </connections>
                 </viewController>
@@ -106,4 +108,9 @@
             <point key="canvasLocation" x="844" y="-1179.7601199400301"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

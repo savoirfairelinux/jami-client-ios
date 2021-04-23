@@ -48,16 +48,15 @@ class ConversationViewController: UIViewController,
     var viewModel: ConversationViewModel!
     var messageViewModels: [MessageViewModel]?
     var textFieldShouldEndEditing = false
-    var bottomOffset: CGFloat = 0
-    private let scrollOffsetThreshold: CGFloat = 600
     private let messageGroupingInterval = 10 * 60 // 10 minutes
-    var bottomHeight: CGFloat = 0.00
+    var keyboardHeight: CGFloat = 0.00
     var isExecutingDeleteMessage: Bool = false
 
     @IBOutlet weak var currentCallButton: UIButton!
     @IBOutlet weak var currentCallLabel: UILabel!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableBottomConstraint: NSLayoutConstraint!
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
 
@@ -405,28 +404,26 @@ class ConversationViewController: UIViewController,
         let keyboardHeight = keyboardRectangle.height
 
         var heightOffset = CGFloat(0.0)
+        let acFrameH = self.messageAccessoryView.frame.height
         if keyboardHeight != self.messageAccessoryView.frame.height {
             if UIDevice.current.hasNotch {
                 heightOffset = -35
             }
             self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
+            let newheight = keyboardHeight + heightOffset
+            self.tableBottomConstraint.constant = newheight
         }
 
-        self.tableView.contentInset.bottom = keyboardHeight + heightOffset
-        self.tableView.scrollIndicatorInsets.bottom = keyboardHeight + heightOffset
-        self.bottomHeight = keyboardHeight + heightOffset
+        //self.tableBottomConstraint.constant = keyboardHeight + self.messageAccessoryView.frame.height
 
         if keyboardHeight > self.messageAccessoryView.frame.height {
             self.scrollToBottom(animated: false)
         }
-        self.updateBottomOffset()
     }
 
     @objc
     func keyboardWillHide(withNotification notification: Notification) {
-        self.tableView.contentInset.bottom = self.messageAccessoryView.frame.height
-        self.tableView.scrollIndicatorInsets.bottom = self.messageAccessoryView.frame.height
-        self.updateBottomOffset()
+        self.tableBottomConstraint.constant = self.messageAccessoryView.frame.height
     }
 
     func setupNavTitle(profileImageData: Data?, displayName: String? = nil, username: String?) {
@@ -561,8 +558,8 @@ class ConversationViewController: UIViewController,
             })
             .disposed(by: self.disposeBag)
 
-        self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
-        self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
+       // self.tableView.contentInset.bottom = 20
+//        self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
 
         //set navigation buttons - call and send contact request
         let inviteItem = UIBarButtonItem()
@@ -717,29 +714,30 @@ class ConversationViewController: UIViewController,
         self.tableView.rx.methodInvoked(#selector(UITableView.reloadData))
             .subscribe(onNext: { [weak self] _ in
                 self?.scrollToBottomIfNeed()
-                self?.updateBottomOffset()
+                //self?.updateBottomOffset()
             })
             .disposed(by: disposeBag)
     }
 
-    private func updateBottomOffset() {
-        self.bottomOffset = self.tableView.contentSize.height
-            - ( self.tableView.frame.size.height
-                - self.tableView.contentInset.top
-                - self.tableView.contentInset.bottom )
-    }
+//    private func updateBottomOffset() {
+//        self.bottomOffset = self.tableView.contentSize.height
+//            - ( self.tableView.frame.size.height
+//                - self.tableView.contentInset.top
+//                - self.tableView.contentInset.bottom )
+//    }
 
     private func messagesLoadingFinished() {
         self.spinnerView.isHidden = true
     }
 
     private func scrollToBottomIfNeed() {
-        if (self.isBottomContentOffset || !self.tableView.isScrollEnabled) && !self.isExecutingDeleteMessage {
-            self.scrollToBottom(animated: false)
-        }
-        if self.isExecutingDeleteMessage {
-            self.isExecutingDeleteMessage = false
-        }
+        self.scrollToBottom(animated: false)
+//        if (self.isBottomContentOffset || !self.tableView.isScrollEnabled) && !self.isExecutingDeleteMessage {
+//            self.scrollToBottom(animated: false)
+//        }
+//        if self.isExecutingDeleteMessage {
+//            self.isExecutingDeleteMessage = false
+//        }
     }
 
     private func scrollToBottom(animated: Bool) {
@@ -747,15 +745,17 @@ class ConversationViewController: UIViewController,
         if  numberOfRows > 0 {
             let last = IndexPath(row: numberOfRows - 1, section: 0)
             self.tableView.isScrollEnabled = true
+            log.debug("scroll to botom number of rows: \(last)")
+            log.debug("()")
             self.tableView.scrollToRow(at: last, at: .bottom, animated: animated)
         }
     }
 
-    private var isBottomContentOffset: Bool {
-        self.updateBottomOffset()
-        let offset = abs((self.tableView.contentOffset.y + self.tableView.contentInset.top) - bottomOffset)
-        return offset <= scrollOffsetThreshold
-    }
+//    private var isBottomContentOffset: Bool {
+//        self.updateBottomOffset()
+//        let offset = abs((self.tableView.contentOffset.y + self.tableView.contentInset.top) - bottomOffset)
+//        return offset <= scrollOffsetThreshold
+//    }
 
     override var inputAccessoryView: UIView {
         return self.messageAccessoryView
@@ -795,10 +795,11 @@ class ConversationViewController: UIViewController,
 
         self.messageAccessoryView.messageTextViewHeight.asObservable()
             .subscribe(onNext: { [weak self] height in
-                self?.tableView.contentInset.bottom = (self?.bottomHeight ?? 0) + height - 35
-                self?.tableView.scrollIndicatorInsets.bottom = (self?.bottomHeight ?? 0) + height - 35
-                self?.scrollToBottom(animated: true)
-                self?.updateBottomOffset()
+                self?.tableBottomConstraint.constant = height + 20
+//                self?.tableView.contentInset.bottom = (self?.bottomHeight ?? 0) + height - 35
+//                self?.tableView.scrollIndicatorInsets.bottom = (self?.bottomHeight ?? 0) + height - 35
+//                self?.scrollToBottom(animated: true)
+//                self?.updateBottomOffset()
             })
             .disposed(by: self.disposeBag)
 
