@@ -68,13 +68,6 @@ static id <MessagesAdapterDelegate> _delegate;
         }
     }));
 
-    confHandlers.insert(exportable_callback<DebugSignal::MessageSend>([&](const std::string& message) {
-        if (MessagesAdapter.delegate) {
-            NSString* messageSend = [NSString stringWithUTF8String:message.c_str()];
-            NSLog(@"MessageSend = %@",messageSend);
-        }
-    }));
-
     confHandlers.insert(exportable_callback<ConfigurationSignal::ComposingStatusChanged>([&](const std::string& account_id, const std::string& from, int status) {
         if (MessagesAdapter.delegate) {
             NSString* fromPeer =  [NSString stringWithUTF8String:from.c_str()];
