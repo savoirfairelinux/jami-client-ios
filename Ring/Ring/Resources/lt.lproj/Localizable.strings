@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Užverti";
 "global.share" = "Bendrinti";
+"global.forward" = "Forward";
+"global.save" = "Įrašyti";
+"global.resend" = "Resend";
+"global.preview" = "Peržiūra";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Pasirinkite vieną iš numerių";
 
 //Conversation
-"conversation.messagePlaceholder" = "Rašykite žinutę...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Pakvietimų nėra";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "tikrinamas prieinamumas…";
 "createAccount.invalidUsername" = "neteisingas naudotojo vardas";
 "createAccount.usernameAlreadyTaken" = "naudotojo vardas jau užimtas";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Įkeliama";
 "createAccount.waitCreateAccountTitle" = "Pridedama paskyra";
 "createAccount.RegisterAUsername" = "Register a username";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "hang up";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";

@@ -43,7 +43,7 @@
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "कोई नेटवर्क कनेक्टिविटी नहीं";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "Accounts";
 "smartlist.addAccountButton" = "+ Add Account";
@@ -192,7 +192,7 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
+"accountPage.settingsHeader" = "सेटिंग्स";
 "accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -218,7 +218,7 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Name";
+"accountPage.namePlaceholder" = "नाम ";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Remove account";
@@ -324,10 +324,10 @@
 "generatedMessage.contactAdded" = "Contact added";
 "generatedMessage.invitationReceived" = "Invitation received";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
-"generatedMessage.outgoingCall" = "Outgoing call";
-"generatedMessage.incomingCall" = "Incoming call";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.outgoingCall" = "आउटगोइंग कॉल";
+"generatedMessage.incomingCall" = "फोन आ रहा है ";
+"generatedMessage.missedOutgoingCall" = "मिस्ड आउटगोइंग कॉल";
+"generatedMessage.missedIncomingCall" = "मिस्ड इनकमिंग कॉल";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings

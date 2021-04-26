@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "閉じる";
 "global.share" = "共有";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
-"conversation.messagePlaceholder" = "メッセージを入力...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "招待はありません";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "利用可能か確認しています…";
 "createAccount.invalidUsername" = "不正なユーザー名";
 "createAccount.usernameAlreadyTaken" = "このユーザー名は既に取得されています。";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "読み込み中";
 "createAccount.waitCreateAccountTitle" = "アカウントを追加";
 "createAccount.RegisterAUsername" = "ユーザー名を登録";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "通話終了";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "デバイス";

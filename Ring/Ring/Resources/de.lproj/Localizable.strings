@@ -26,6 +26,10 @@
 "global.versionName" = "Zusammen";
 "global.close" = "Schließen";
 "global.share" = "Teilen";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Eine der Nummern auswählen";
 
 //Conversation
-"conversation.messagePlaceholder" = "Schreibe deine Nachricht";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "Sie teilen Ihren Standort derzeit mit";
 "conversation.explanationReceivingLocationFrom" = "Sie erhalten derzeit einen Live-Standort von";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Keine Einladungen";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "Verfügbarkeit des Benutzernamens wird geprüft …";
 "createAccount.invalidUsername" = "Ungültiger Benutzername";
 "createAccount.usernameAlreadyTaken" = "Dieser Benutzername ist bereits vergeben";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Lade";
 "createAccount.waitCreateAccountTitle" = "Konto hinzufügen";
 "createAccount.RegisterAUsername" = "Benutzername registrieren";
@@ -111,7 +117,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Benutzername";
 "linkToAccountManager.usernameLabel" = "Benutzername eingeben";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "JAMS URL eingeben";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kann Konto nicht finden";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "auflegen";
 "calls.maximize" = "maximieren";
 "calls.minimize" = "minimieren";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";

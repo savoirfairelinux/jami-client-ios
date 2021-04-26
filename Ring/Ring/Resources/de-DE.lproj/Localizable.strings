@@ -26,6 +26,10 @@
 "global.versionName" = "Gemeinsam";
 "global.close" = "Schließen";
 "global.share" = "Freigeben";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Fehlerhafter QR-Code";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Wählen Sie eine der Zahlen";
 
 //Conversation
-"conversation.messagePlaceholder" = "Geben Sie eine Nachricht ein...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "Sie teilen Ihren aktuellen Standort mit ";
 "conversation.explanationReceivingLocationFrom" = "Sie erhalten derzeit den aktuellen Standort von";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Keine Einladungen";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "Prüfe Erreichbarkeit...";
 "createAccount.invalidUsername" = "Ungültiger Benutzername";
 "createAccount.usernameAlreadyTaken" = "Benutzername bereits vergeben";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Laden...";
 "createAccount.waitCreateAccountTitle" = "Konto wird hinzugefügt";
 "createAccount.RegisterAUsername" = "Einen Benutzernamen registrieren";
@@ -111,7 +117,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Benutzername";
 "linkToAccountManager.usernameLabel" = "Benutzername eingeben";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS-URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "JAMS-URL eingeben";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Konto nicht gefunden";
@@ -149,7 +155,7 @@
 "alerts.locationSharingDuration10min" = "10 Minuten";
 "alerts.locationSharingDuration1hour" = "1 Stunde";
 "alerts.mapInformation" = "Karteninformation";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap Mitarbeiter";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap Mitwirkende";
 "alerts.openStreetMapCopyrightMoreInfo" = "Mehr erfahren";
 
 //Actions
@@ -179,6 +185,10 @@
 "calls.haghUp" = "Auflegen";
 "calls.maximize" = "Maximieren";
 "calls.minimize" = "Minimieren";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";
@@ -214,7 +224,7 @@
 "accountPage.removeAccountTitle" = "Account entfernen";
 "accountPage.removeAccountMessage" = "Wenn Sie \"Entfernen\" drücken, wird dieses Konto von diesem Gerät entfernt. Diese Aktion kann nicht rückgängig gemacht werden. Möglichweise geht dann auch der registrierte Name verloren.";
 "accountPage.removeAccountButton" = "Entfernen";
-"accountPage.shareAccountDetails" = "Konto-Details mitteilen";
+"accountPage.shareAccountDetails" = "Kontodetails teilen";
 "accountPage.contactMeOnJamiTitle" = "Kontaktiere mich bei Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontaktieren Sie mich unter dem Namen \"%s\" auf Jami, der verteilten Kommunikations-Plattform: https://jami.net";
 "accountPage.registerNameTitle" = "Einen Benutzernamen registrieren";

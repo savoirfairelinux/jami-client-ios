@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Chiudi";
 "global.share" = "Condividi";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
-"conversation.messagePlaceholder" = "Type your message...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
@@ -61,7 +66,7 @@
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Collega questo dispositivo a un account";
 "welcome.createAccount" = "Crea un account Jami";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Connettiti a un server JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Salta";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "nome utente non valido";
 "createAccount.usernameAlreadyTaken" = "nome utente già utilizzato";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Caricamento";
 "createAccount.waitCreateAccountTitle" = "Aggiunta account ";
 "createAccount.RegisterAUsername" = "Register a username";
@@ -110,7 +116,7 @@
 "linkToAccountManager.passwordLabel" = "Inserisci Password";
 "linkToAccountManager.usernamePlaceholder" = "Nome utente";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
@@ -179,6 +185,10 @@
 "calls.haghUp" = "hang up";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivi";

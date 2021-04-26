@@ -26,6 +26,10 @@
 "global.versionName" = "Tok";
 "global.close" = "Mbylle";
 "global.share" = "Ndajeni me të tjerë";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
 
 //Conversation
-"conversation.messagePlaceholder" = "Shkruani mesazhin tuaj…";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "S’ka ftesa";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "po shihet për pasje…";
 "createAccount.invalidUsername" = "emër përdoruesi i pavlefshëm";
 "createAccount.usernameAlreadyTaken" = "emër përdoruesi tashmë i zënë";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Po ngarkohet";
 "createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
 "createAccount.RegisterAUsername" = "Regjistroni një emër përdoruesi";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "mbylleni";
 "calls.maximize" = "maksimizoje";
 "calls.minimize" = "minimizoje";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";

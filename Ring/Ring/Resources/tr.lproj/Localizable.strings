@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Kapat";
 "global.share" = "Paylaş";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Numaralardan birini seçin";
 
 //Conversation
-"conversation.messagePlaceholder" = "İletinizi yazın...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Davetiye yok";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "kullanılabilirliğine bakılıyor...";
 "createAccount.invalidUsername" = "geçersiz kullanıcı adı";
 "createAccount.usernameAlreadyTaken" = "kullanıcı adı önceden alınmış";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Yükleniyor";
 "createAccount.waitCreateAccountTitle" = "Hesap ekleniyor";
 "createAccount.RegisterAUsername" = "Bir kullanıcı adı kaydedin";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "Aramayı sonlandır";
 "calls.maximize" = "ekranı kapla";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";

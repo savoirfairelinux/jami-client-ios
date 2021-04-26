@@ -26,6 +26,10 @@
 "global.versionName" = "Ensemble";
 "global.close" = "Fermer";
 "global.share" = "Partager";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Code QR incorrect";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Choisir un des numéros";
 
 //Conversation
-"conversation.messagePlaceholder" = "Saisissez votre message...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "Vous partagez actuellement votre position avec";
 "conversation.explanationReceivingLocationFrom" = "Vous recevez actuellement la position de ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Aucune invitation";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "Vérification de la disponibilité...";
 "createAccount.invalidUsername" = "Nom d'utilisateur invalide";
 "createAccount.usernameAlreadyTaken" = "Ce nom d'utilisateur est déjà utilisé";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Chargement";
 "createAccount.waitCreateAccountTitle" = "Ajout du compte";
 "createAccount.RegisterAUsername" = "Enregistrer un nom d'utilisateur";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "Raccrocher";
 "calls.maximize" = "maximiser";
 "calls.minimize" = "minimiser";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Appareils";

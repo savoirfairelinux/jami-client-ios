@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Zavřít";
 "global.share" = "Sdílet";
+"global.forward" = "Forward";
+"global.save" = "Uložit";
+"global.resend" = "Resend";
+"global.preview" = "Náhled";
 
 // Scan
 "scan.badQrCode" = "Špatný kód QR";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Vyberte jedno z čísel.";
 
 //Conversation
-"conversation.messagePlaceholder" = "Zadejte svoji zprávu...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "Právě sdílíte svou polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Žádná pozvání";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "Zjišťuje se dostupnost…";
 "createAccount.invalidUsername" = "Neplatné uživatelské jméno";
 "createAccount.usernameAlreadyTaken" = "Uživatelské jméno již zabráno";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Nahrávání";
 "createAccount.waitCreateAccountTitle" = "Přidávám účet";
 "createAccount.RegisterAUsername" = "Zaregistrovat uživatelské jméno";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "Zavěsit";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Zařízení";

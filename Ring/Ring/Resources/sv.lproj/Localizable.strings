@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Stäng";
 "global.share" = "Dela";
+"global.forward" = "Forward";
+"global.save" = "Spara";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Välj ett nummer";
 
 //Conversation
-"conversation.messagePlaceholder" = "Skriv ditt meddelande...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Inga inbjudningar";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "söker tillgänglighet...";
 "createAccount.invalidUsername" = "Ogiltigt användarnamn";
 "createAccount.usernameAlreadyTaken" = "Användarnamnet är upptaget";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Läser in";
 "createAccount.waitCreateAccountTitle" = "Lägger till konto";
 "createAccount.RegisterAUsername" = "Registrera ett användarnamn";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "hang up";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";

@@ -26,6 +26,10 @@
 "global.versionName" = "یکدیگر";
 "global.close" = "بستن";
 "global.share" = "هم‌رسانی";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "یکی از شماره‌ها را انتخاب کنید";
 
 //Conversation
-"conversation.messagePlaceholder" = "پیام خود را بنویسید...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "در حال حاضر مکان خود را به اشتراک می‌گذارید";
 "conversation.explanationReceivingLocationFrom" = "در حال حاضر مکان زنده را دریافت می‌کنید از";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "بدون دعوت‌نامه";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "بررسی در‌دسترس بودن…";
 "createAccount.invalidUsername" = "نام کاربری نامعتبر";
 "createAccount.usernameAlreadyTaken" = "نام کاربری قبلاً برداشته شده";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "بارگذاری...";
 "createAccount.waitCreateAccountTitle" = "در حال افزودن حساب";
 "createAccount.RegisterAUsername" = "ثبت یک نام‌کاربری";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "قطع‌کردن";
 "calls.maximize" = "به حداکثر رساندن";
 "calls.minimize" = "به‌حداقل‌رساندن";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";

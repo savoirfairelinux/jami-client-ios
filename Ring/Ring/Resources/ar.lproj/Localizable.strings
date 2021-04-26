@@ -26,6 +26,10 @@
 "global.versionName" = "معا";
 "global.close" = "إغلاق";
 "global.share" = "مشاركة";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "حدد أحد الأرقام";
 
 //Conversation
-"conversation.messagePlaceholder" = "اكتب رسالتك...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "أنت تشارك موقعك حاليًا مع";
 "conversation.explanationReceivingLocationFrom" = "أنت تتلقى حاليًا موقعًا مباشرًا من";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "لم تــرد أي دعوة";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "اسم المستخدم غير صالح";
 "createAccount.usernameAlreadyTaken" = "هذا الاسم غير متوفر";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "جاري التحميل";
 "createAccount.waitCreateAccountTitle" = "في طور إضافة حساب";
 "createAccount.RegisterAUsername" = "Register a username";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "hang up";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "الأجهزة";

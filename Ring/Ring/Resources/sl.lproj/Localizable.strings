@@ -26,6 +26,10 @@
 "global.versionName" = "Skupaj";
 "global.close" = "Zapri";
 "global.share" = "Deli";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Napačna QR koda";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Izberi eno od številk";
 
 //Conversation
-"conversation.messagePlaceholder" = "Napišite sporočilo...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "Trenutno v živo delite svojo lokacijo z ";
 "conversation.explanationReceivingLocationFrom" = "Trenutno v živo dobivate podatek o lokaciji od";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Ni povabil";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "preverjam ali je na voljo...";
 "createAccount.invalidUsername" = "napačno uporabniško ime";
 "createAccount.usernameAlreadyTaken" = "uporabniško ime je zasedeno";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Nalaganje";
 "createAccount.waitCreateAccountTitle" = "Dodajanje računa";
 "createAccount.RegisterAUsername" = "Registracija uporabniškega imena";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "odloži";
 "calls.maximize" = "maksimaliziraj";
 "calls.minimize" = "minimaliziraj";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Naprave";

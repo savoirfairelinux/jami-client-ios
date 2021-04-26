@@ -26,6 +26,10 @@
 "global.versionName" = "一起";
 "global.close" = "關閉";
 "global.share" = "分享";
+"global.forward" = "Forward";
+"global.save" = "儲存";
+"global.resend" = "Resend";
+"global.preview" = "預覽";
 
 // Scan
 "scan.badQrCode" = "不正確的 QR code";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "選取其中一個號碼";
 
 //Conversation
-"conversation.messagePlaceholder" = "輸入您的訊息……";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "您目前正在分享您的位置，與";
 "conversation.explanationReceivingLocationFrom" = "您正收到即時位置，從";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "沒有邀請";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "正在確認是否可用……";
 "createAccount.invalidUsername" = "無效的使用者名稱";
 "createAccount.usernameAlreadyTaken" = "使用者名稱已被使用";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "正在載入";
 "createAccount.waitCreateAccountTitle" = "正在加入帳號";
 "createAccount.RegisterAUsername" = "註冊使用者名稱";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "掛斷";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";

@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Luk";
 "global.share" = "Del";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Vælg et af numrene";
 
 //Conversation
-"conversation.messagePlaceholder" = "Skriv din besked...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "Du deler i øjeblikket din lokation med";
 "conversation.explanationReceivingLocationFrom" = "Du modtager i øjeblikket en live lokation fra";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Ingen invitationer";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "ugyldigt brugernavn";
 "createAccount.usernameAlreadyTaken" = "brugernavn er allerede anvendt";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Indlæser";
 "createAccount.waitCreateAccountTitle" = "Tilføjer konto";
 "createAccount.RegisterAUsername" = "Registrér et brugernavn";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "læg på";
 "calls.maximize" = "maksimér";
 "calls.minimize" = "minimér";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheder";

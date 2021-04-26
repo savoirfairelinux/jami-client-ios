@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Sluiten";
 "global.share" = "Delen";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Verkeerde QR-code";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Kies één van de nummers";
 
 //Conversation
-"conversation.messagePlaceholder" = "Typ uw bericht…";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Geen uitnodigingen";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "beschikbaarheid wordt gecontroleerd…";
 "createAccount.invalidUsername" = "ongeldige gebruikersnaam";
 "createAccount.usernameAlreadyTaken" = "gebruikersnaam reeds in gebruik";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Laden";
 "createAccount.waitCreateAccountTitle" = "Account wordt toegevoegd";
 "createAccount.RegisterAUsername" = "Een gebruikersnaam registreren";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "hang up";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";

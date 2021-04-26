@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Itxi";
 "global.share" = "Partekatu";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
-"conversation.messagePlaceholder" = "Type your message...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "erabiltzaile-izen baliogabea";
 "createAccount.usernameAlreadyTaken" = "erabiltzaile-izena hartuta dago";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Kargatzen";
 "createAccount.waitCreateAccountTitle" = "Kontua gehitzen";
 "createAccount.RegisterAUsername" = "Register a username";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "hang up";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Gailuak";

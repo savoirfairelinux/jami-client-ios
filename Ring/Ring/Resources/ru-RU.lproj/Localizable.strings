@@ -26,6 +26,10 @@
 "global.versionName" = "Together";
 "global.close" = "Закрыть";
 "global.share" = "Поделится";
+"global.forward" = "Forward";
+"global.save" = "Сохранить";
+"global.resend" = "Resend";
+"global.preview" = "Предпросмотр";
 
 // Scan
 "scan.badQrCode" = "Плохой QR-code";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Выберите один из номеров";
 
 //Conversation
-"conversation.messagePlaceholder" = "Введите ваше сообщение...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "неверное имя пользователя ";
 "createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Загрузка";
 "createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
 "createAccount.RegisterAUsername" = "Register a username";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "hang up";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";

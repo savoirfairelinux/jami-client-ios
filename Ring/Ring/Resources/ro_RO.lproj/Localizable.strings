@@ -26,6 +26,10 @@
 "global.versionName" = "Împreună";
 "global.close" = "Închide";
 "global.share" = "Distribuie";
+"global.forward" = "Forward";
+"global.save" = "Salvează";
+"global.resend" = "Resend";
+"global.preview" = "Previzualizare";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
 
 //Conversation
-"conversation.messagePlaceholder" = "Scrie mesajul tău...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Nu sînt invitații";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "caut disponibilitatea...";
 "createAccount.invalidUsername" = "nume greșit";
 "createAccount.usernameAlreadyTaken" = "nume de utilizator ales deja";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Se încarcă";
 "createAccount.waitCreateAccountTitle" = "Se adaugă contul";
 "createAccount.RegisterAUsername" = "Înscrie un nume de utilizator";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "închide";
 "calls.maximize" = "mărește";
 "calls.minimize" = "micșorează";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aparate";

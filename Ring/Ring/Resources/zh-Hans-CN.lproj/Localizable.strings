@@ -26,6 +26,10 @@
 "global.versionName" = "一起";
 "global.close" = "关闭";
 "global.share" = "共享";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "选择这些数字中的一个";
 
 //Conversation
-"conversation.messagePlaceholder" = "输入您的消息...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "没有邀请";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "正在验证可用性";
 "createAccount.invalidUsername" = "无效的用户名";
 "createAccount.usernameAlreadyTaken" = "用户名已被他人使用";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "载入中";
 "createAccount.waitCreateAccountTitle" = "添加账户";
 "createAccount.RegisterAUsername" = "注册一个用户名";
@@ -91,7 +97,7 @@
 "createAccount.EnableNotifications" = "通知";
 "createAccount.Recommended" = "（推荐）";
 "createAccount.UsernameNotRegisteredTitle" = "网络错误";
-"createAccount.UsernameNotRegisteredMessage" = "账户已被创建但是用户名未被注册";
+"createAccount.UsernameNotRegisteredMessage" = "账户已创建，但用户名未注册";
 "createAccount.timeoutTitle" = "已创建账户";
 "createAccount.timeoutMessage" = "正在注册用户名... 这可能需要一小会儿";
 
@@ -179,6 +185,10 @@
 "calls.haghUp" = "挂断";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "设备";
@@ -212,7 +222,7 @@
 "accountPage.linkDeviceTitle" = "关联另一台设备";
 "accountPage.other" = "其他";
 "accountPage.removeAccountTitle" = "移除账户";
-"accountPage.removeAccountMessage" = "点击“删除”将从此设备上删除该账户！此操作无法撤销。同时，您也会失去您的已注册用户名。";
+"accountPage.removeAccountMessage" = "点击“删除”将从此设备上删除该账户！此操作无法撤销。同时，您也会失去您的注册用户名。";
 "accountPage.removeAccountButton" = "删除";
 "accountPage.shareAccountDetails" = "分享账户详情";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上联系我！";

@@ -26,6 +26,10 @@
 "global.versionName" = "Yhdessä";
 "global.close" = "Sulje";
 "global.share" = "Jako";
+"global.forward" = "Forward";
+"global.save" = "Save";
+"global.resend" = "Resend";
+"global.preview" = "Preview";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
@@ -47,9 +51,10 @@
 "smartlist.selectOneNumber" = "Valitse yksi numeroista";
 
 //Conversation
-"conversation.messagePlaceholder" = "Kirjoita viestisi...";
+"conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "Jaat sijaintisi tällä hetkellä";
 "conversation.explanationReceivingLocationFrom" = "Saat parhaillaan suoraa sijaintia";
+"conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
 "invitations.noInvitations" = "Ei kutsuja";
@@ -83,6 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "etsitään saatavuutta…";
 "createAccount.invalidUsername" = "käyttäjätunnus ei kelpaa";
 "createAccount.usernameAlreadyTaken" = "käyttäjätunnus on jo varattu";
+"createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Ladataan";
 "createAccount.waitCreateAccountTitle" = "Lisätään tunnusta";
 "createAccount.RegisterAUsername" = "Rekisteröi käyttäjänimi";
@@ -179,6 +185,10 @@
 "calls.haghUp" = "katkaise puhelu";
 "calls.maximize" = "suurenna";
 "calls.minimize" = "pienennä";
+"calls.setModerator" = "set moderator";
+"calls.removeModerator" = "unset moderator";
+"calls.muteAudio" = "mute audio";
+"calls.unmuteAudio" = "unmute audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Laitteet";
