@@ -202,6 +202,8 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
             pauseCallButton.borderColor = UIColor.gray
             muteAudioButton.tintColor = UIColor.gray
             muteAudioButton.borderColor = UIColor.gray
+            addParticipantButton.tintColor = UIColor.gray
+            addParticipantButton.borderColor = UIColor.gray
             dialpadButton.tintColor = UIColor.gray
             dialpadButton.borderColor = UIColor.gray
             switchSpeakerButton.tintColor = UIColor.gray
@@ -212,6 +214,8 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         pauseCallButton.borderColor = UIColor.white
         muteAudioButton.tintColor = UIColor.white
         muteAudioButton.borderColor = UIColor.white
+        addParticipantButton.tintColor = UIColor.white
+        addParticipantButton.borderColor = UIColor.white
         dialpadButton.tintColor = UIColor.white
         dialpadButton.borderColor = UIColor.white
         switchSpeakerButton.tintColor = UIColor.white
