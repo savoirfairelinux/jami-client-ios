@@ -139,6 +139,12 @@ class ContactsService {
             return ContactRequestModel(withDictionary: dictionary, accountId: accountId)
         }) {
             for contactRequest in contactRequests {
+                let validContact = self.contacts.value.filter { contact in
+                    contact.hash == contactRequest.ringId && !contact.banned
+                }.first
+                if validContact != nil {
+                    return
+                }
                 if self.contactRequest(withRingId: contactRequest.ringId) == nil {
                     var values = self.contactRequests.value
                     values.append(contactRequest)
@@ -154,6 +160,7 @@ class ContactsService {
             let success = self.contactsAdapter.acceptTrustRequest(fromContact: contactRequest.ringId,
                                                                   withAccountId: account.id)
             if success {
+                self.removeContactRequest(withRingId: contactRequest.ringId)
                 var stringImage: String?
                 if let vCard = contactRequest.vCard, let image = vCard.imageData {
                     stringImage = image.base64EncodedString()
@@ -305,7 +312,13 @@ extension ContactsService: ContactsAdapterDelegate {
         if let contactVCard = CNContactVCardSerialization.parseToVCard(data: payload) {
             vCard = contactVCard
         }
-
+        // check if contact exists
+        let validContact = self.contacts.value.filter { contact in
+            contact.hash == senderAccount && !contact.banned
+        }.first
+        if validContact != nil {
+            return
+        }
         //Update trust request list
         if self.contactRequest(withRingId: senderAccount) == nil {
             let contactRequest = ContactRequestModel(withRingId: senderAccount,
