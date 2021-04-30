@@ -31,6 +31,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         return self.navigationViewController
     }
 
+   // var smartListViewController = UIViewController()
+
     var childCoordinators = [Coordinator]()
     var parentCoordinator: Coordinator?
 
@@ -238,15 +240,17 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func start() {
-        self.navigationViewController.viewControllers.removeAll()
-        let boothMode = self.accountService.boothMode()
-        if boothMode {
-            let smartListViewController = IncognitoSmartListViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
-            return
-        }
-        let smartListViewController = SmartlistViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
+//        self.navigationViewController.viewControllers.removeAll()
+//        let boothMode = self.accountService.boothMode()
+//        if boothMode {
+//            let smartListViewController1 = IncognitoSmartListViewController.instantiate(with: self.injectionBag)
+//            self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController1.viewModel)
+//            self.smartListViewController = smartListViewController1
+//            return
+//        }
+//        let smartListViewController1 = SmartlistViewController.instantiate(with: self.injectionBag)
+//        self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController1.viewModel)
+//        self.smartListViewController = smartListViewController1
     }
 
     func getConversationViewModel(participantUri: String) -> ConversationViewModel? {

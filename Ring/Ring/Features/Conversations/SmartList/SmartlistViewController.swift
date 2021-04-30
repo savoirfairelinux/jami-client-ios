@@ -32,8 +32,8 @@ import QuartzCore
 //Constants
 struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 64.0
-    static let tableHeaderViewHeight: CGFloat = 142.0
-    static let firstSectionHeightForHeader: CGFloat = 51.0
+    static let tableHeaderViewHeight: CGFloat = 0.0
+    static let firstSectionHeightForHeader: CGFloat = 0.0
     static let networkAllerHeight: CGFloat = 56.0
     static let tableViewOffset: CGFloat = 80.0
 
@@ -52,15 +52,15 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var networkAlertLabel: UILabel!
     @IBOutlet weak var cellularAlertLabel: UILabel!
     @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var dialpadButton: UIButton!
     @IBOutlet weak var dialpadButtonShadow: UIView!
-    @IBOutlet weak var searchBarShadow: UIView!
-    @IBOutlet weak var qrScanButton: UIButton!
-    @IBOutlet weak var phoneBookButton: UIButton!
-    @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var searchFieldTrailing: NSLayoutConstraint!
+    //@IBOutlet weak var searchBarShadow: UIView!
+    //@IBOutlet weak var qrScanButton: UIButton!
+   // @IBOutlet weak var phoneBookButton: UIButton!
+   // @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
+   // @IBOutlet weak var searchFieldTrailing: NSLayoutConstraint!
     @IBOutlet weak var networkAlertView: UIView!
     @IBOutlet weak var searchView: JamiSearchView!
 
@@ -107,9 +107,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
          */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        self.tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBar.layer.zPosition = -0
-        self.extendedLayoutIncludesOpaqueBars = true
+//        self.tabBarController?.tabBar.isHidden = false
+//        self.tabBarController?.tabBar.layer.zPosition = -0
+//        self.extendedLayoutIncludesOpaqueBars = true
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
             .observeOn(MainScheduler.instance)
@@ -130,21 +130,40 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?
-            .navigationBar
-            .layer.shadowColor = UIColor.clear.cgColor
-        navigationController?
-            .navigationBar
-            .setBackgroundImage(UIImage(),
-                                for: UIBarMetrics.default)
+//        navigationController?
+//            .navigationBar
+//            .layer.shadowColor = UIColor.white.cgColor
+//        navigationController?
+//            .navigationBar
+//            .setBackgroundImage(UIImage(),
+//                                for: UIBarMetrics.default)
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
                                     NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
         self.viewModel.closeAllPlayers()
-        self.tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBar.layer.zPosition = -0
+//        self.tabBarController?.tabBar.isHidden = false
+//        self.tabBarController?.tabBar.layer.zPosition = -0
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+       // self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        navigationController?.hidesBarsOnSwipe = true
+    }
+
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//       //Check the scroll direction here
+//        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0 {
+//           // print("Show")
+//            self.navigationController?.setNavigationBarHidden(false, animated: true)
+//           // self.navigationController?.setToolbarHidden(false, animated: true)
+//        } else {
+//           // print("Hide")
+//            self.navigationController?.setNavigationBarHidden(true, animated: true)
+//           // self.navigationController?.setToolbarHidden(true, animated: true)
+//        }
+//    }
 
     func applyL10n() {
         noConversationLabel.text = L10n.Smartlist.noConversation
@@ -169,8 +188,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .bind(to: self.noConversationsView.rx.isHidden)
             .disposed(by: disposeBag)
         let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
-        self.networkAlertViewTopConstraint.constant = !isHidden ? 0.0 : -SmartlistConstants.networkAllerHeight
-        tableTopConstraint.constant = !isHidden ?  -(SmartlistConstants.tableViewOffset - SmartlistConstants.networkAllerHeight) : -SmartlistConstants.tableViewOffset
+//        self.networkAlertViewTopConstraint.constant = !isHidden ? 0.0 : -SmartlistConstants.networkAllerHeight
+       // tableTopConstraint.constant = !isHidden ?  -(SmartlistConstants.tableViewOffset - SmartlistConstants.networkAllerHeight) : -SmartlistConstants.tableViewOffset
         self.networkAlertView.isHidden = isHidden
         self.viewModel.connectionState
             .subscribe(onNext: { [weak self] connectionState in
@@ -179,7 +198,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 let isHidden = connectionState == .none ? false : true
                 UIView.animate(withDuration: 0.25) { [weak self] in
                     self?.networkAlertViewTopConstraint.constant = CGFloat(newAlertHeight)
-                    self?.tableTopConstraint.constant = CGFloat(newTableViewTop)
+                   // self?.tableTopConstraint.constant = CGFloat(newTableViewTop)
                     self?.view.layoutIfNeeded()
                 }
                 self?.networkAlertView.isHidden = isHidden
@@ -205,19 +224,19 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 self?.viewModel.showGeneralSettings()
             })
             .disposed(by: self.disposeBag)
-        qrScanButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.openScan()
-            })
-            .disposed(by: self.disposeBag)
+        //qrScanButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] in
+//                self?.openScan()
+//            })
+//            .disposed(by: self.disposeBag)
 
-        phoneBookButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.contactPicker.delegate = self
-                self.present(self.contactPicker, animated: true, completion: nil)
-            })
-            .disposed(by: self.disposeBag)
+//        phoneBookButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] in
+//                guard let self = self else { return }
+//                self.contactPicker.delegate = self
+//                self.present(self.contactPicker, animated: true, completion: nil)
+//            })
+//            .disposed(by: self.disposeBag)
         self.viewModel.currentAccountChanged
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] currentAccount in
@@ -226,23 +245,23 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                     self?.navigationItem
                         .rightBarButtonItem = accountSip ? nil : settingsButtonItem
                     self?.dialpadButtonShadow.isHidden = !accountSip
-                    self?.phoneBookButton.isHidden = !accountSip
-                    self?.qrScanButton.isHidden = accountSip
+                   // self?.phoneBookButton.isHidden = !accountSip
+                   // self?.qrScanButton.isHidden = accountSip
                 }
             })
             .disposed(by: disposeBag)
 
         self.navigationItem.rightBarButtonItem = settingsButtonItem
-        if let account = self.viewModel.currentAccount {
-            if account.type == AccountType.sip {
-                self.navigationItem.rightBarButtonItem = nil
-                self.qrScanButton.isHidden = true
-                self.phoneBookButton.isHidden = false
-            } else {
-                self.qrScanButton.isHidden = false
-                self.phoneBookButton.isHidden = true
-            }
-        }
+//        if let account = self.viewModel.currentAccount {
+//            if account.type == AccountType.sip {
+//                self.navigationItem.rightBarButtonItem = nil
+//               // self.qrScanButton.isHidden = true
+//                self.phoneBookButton.isHidden = false
+//            } else {
+//               // self.qrScanButton.isHidden = false
+//                self.phoneBookButton.isHidden = true
+//            }
+//        }
 
         //create accounts button
         let accountButton = UIButton(type: .custom)
@@ -332,7 +351,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let screenWidth = screenRect.size.width
         let window = UIApplication.shared.keyWindow
         let leftPadding: CGFloat = window?.safeAreaInsets.left ?? 0
-        searchFieldTrailing.constant = leftPadding
+       // searchFieldTrailing.constant = leftPadding
         let maxWidth: CGFloat = screenWidth - 45 - margin * 3 - leftPadding * 2
         accountWidth.constant = maxWidth
         var accountFrame = accountView.frame
@@ -426,14 +445,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
-        guard let tabBarHeight = (self.tabBarController?.tabBar.frame.size.height) else {
-            return
-        }
+//        guard let tabBarHeight = (self.tabBarController?.tabBar.frame.size.height) else {
+//            return
+//        }
 
-        self.conversationsTableView.contentInset.bottom = keyboardHeight - tabBarHeight
-        self.searchView.searchResultsTableView.contentInset.bottom = keyboardHeight - tabBarHeight
-        self.conversationsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
-        self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight - tabBarHeight
+        self.conversationsTableView.contentInset.bottom = keyboardHeight// - tabBarHeight
+        self.searchView.searchResultsTableView.contentInset.bottom = keyboardHeight// - tabBarHeight
+        self.conversationsTableView.scrollIndicatorInsets.bottom = keyboardHeight //- tabBarHeight
+        self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight// - tabBarHeight
     }
 
     @objc
@@ -487,53 +506,80 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         self.conversationsTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
+   // lazy var searchBar = UISearchBar(frame: CGRect.zero)
+   // private let searchController = UISearchController(searchResultsController: nil)
+    let searchController: CustomSearchController = {
 
+        let searchController = CustomSearchController(searchResultsController: nil)
+
+        searchController.searchBar.placeholder = "New Search"
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.definesPresentationContext = true
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.setup()
+        //searchController.searchBar
+       // searchController.searchBar.showsBookmarkButton = true
+        //searchController.searchBar.showsSearchResultsButton = true
+        //searchController.scanButton = scanbutton
+        //searchController.searchBar.setImage(image!, for: .resultsList, state: .normal)
+
+       return searchController
+    }()
     func setupSearchBar() {
-        searchBarShadow.backgroundColor = UIColor.clear
-        self.searchBarShadow.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
-        self.searchBarShadow.layer.shadowOffset = CGSize(width: 0.0, height: 1.5)
-        self.searchBarShadow.layer.shadowOpacity = 0.2
-        self.searchBarShadow.layer.shadowRadius = 3
-        self.searchBarShadow.layer.masksToBounds = false
+       // self.navigationItem.searchController = searchController
+       // navigationController!.navigationBar.sizeToFit()
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
 
-        if #available(iOS 13.0, *) {
-            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
-            visualEffectView.frame = searchBarShadow.bounds
-            visualEffectView.isUserInteractionEnabled = false
-            searchBarShadow.insertSubview(visualEffectView, at: 0)
-            visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-            visualEffectView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
-            visualEffectView.trailingAnchor.constraint(equalTo: self.searchBarShadow.trailingAnchor, constant: 0).isActive = true
-            visualEffectView.leadingAnchor.constraint(equalTo: self.searchBarShadow.leadingAnchor, constant: 0).isActive = true
-            visualEffectView.topAnchor.constraint(equalTo: self.searchBarShadow.topAnchor, constant: 0).isActive = true
-            visualEffectView.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
-
-        } else {
-            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-            visualEffectView.frame = searchBarShadow.bounds
-            visualEffectView.isUserInteractionEnabled = false
-            let background = UIView()
-            background.frame = searchBarShadow.bounds
-            background.backgroundColor = UIColor(red: 245, green: 245, blue: 245, alpha: 1.0)
-            background.alpha = 0.7
-            searchBarShadow.insertSubview(background, at: 0)
-            searchBarShadow.insertSubview(visualEffectView, at: 0)
-            background.translatesAutoresizingMaskIntoConstraints = false
-            visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-            visualEffectView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
-            background.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
-            visualEffectView.trailingAnchor.constraint(equalTo: self.searchBarShadow.trailingAnchor, constant: 0).isActive = true
-            background.trailingAnchor.constraint(equalTo: self.searchBarShadow.trailingAnchor, constant: 0).isActive = true
-            visualEffectView.leadingAnchor.constraint(equalTo: self.searchBarShadow.leadingAnchor, constant: 0).isActive = true
-            background.leadingAnchor.constraint(equalTo: self.searchBarShadow.leadingAnchor, constant: 0).isActive = true
-            visualEffectView.topAnchor.constraint(equalTo: self.searchBarShadow.topAnchor, constant: 0).isActive = true
-            background.topAnchor.constraint(equalTo: self.searchBarShadow.topAnchor, constant: 0).isActive = true
-            visualEffectView.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
-            background.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
-        }
+//        searchBar = UISearchBar()
+//        searchBar.sizeToFit()
+//        navigationItem.titleView = searchBar
+//        searchBarShadow.backgroundColor = UIColor.clear
+//        self.searchBarShadow.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+//        self.searchBarShadow.layer.shadowOffset = CGSize(width: 0.0, height: 1.5)
+//        self.searchBarShadow.layer.shadowOpacity = 0.2
+//        self.searchBarShadow.layer.shadowRadius = 3
+//        self.searchBarShadow.layer.masksToBounds = false
+//
+//        if #available(iOS 13.0, *) {
+//            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+//            visualEffectView.frame = searchBarShadow.bounds
+//            visualEffectView.isUserInteractionEnabled = false
+//            searchBarShadow.insertSubview(visualEffectView, at: 0)
+//            visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+//            visualEffectView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
+//            visualEffectView.trailingAnchor.constraint(equalTo: self.searchBarShadow.trailingAnchor, constant: 0).isActive = true
+//            visualEffectView.leadingAnchor.constraint(equalTo: self.searchBarShadow.leadingAnchor, constant: 0).isActive = true
+//            visualEffectView.topAnchor.constraint(equalTo: self.searchBarShadow.topAnchor, constant: 0).isActive = true
+//            visualEffectView.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
+//
+//        } else {
+//            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+//            visualEffectView.frame = searchBarShadow.bounds
+//            visualEffectView.isUserInteractionEnabled = false
+//            let background = UIView()
+//            background.frame = searchBarShadow.bounds
+//            background.backgroundColor = UIColor(red: 245, green: 245, blue: 245, alpha: 1.0)
+//            background.alpha = 0.7
+//            searchBarShadow.insertSubview(background, at: 0)
+//            searchBarShadow.insertSubview(visualEffectView, at: 0)
+//            background.translatesAutoresizingMaskIntoConstraints = false
+//            visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+//            visualEffectView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
+//            background.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
+//            visualEffectView.trailingAnchor.constraint(equalTo: self.searchBarShadow.trailingAnchor, constant: 0).isActive = true
+//            background.trailingAnchor.constraint(equalTo: self.searchBarShadow.trailingAnchor, constant: 0).isActive = true
+//            visualEffectView.leadingAnchor.constraint(equalTo: self.searchBarShadow.leadingAnchor, constant: 0).isActive = true
+//            background.leadingAnchor.constraint(equalTo: self.searchBarShadow.leadingAnchor, constant: 0).isActive = true
+//            visualEffectView.topAnchor.constraint(equalTo: self.searchBarShadow.topAnchor, constant: 0).isActive = true
+//            background.topAnchor.constraint(equalTo: self.searchBarShadow.topAnchor, constant: 0).isActive = true
+//            visualEffectView.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
+//            background.bottomAnchor.constraint(equalTo: self.searchBarShadow.bottomAnchor, constant: 0).isActive = true
+//        }
         self.searchView.editSearch
             .subscribe(onNext: {[weak self] (editing) in
-                self?.scanButtonLeadingConstraint.constant = editing ? -40 : 10
+                //self?.scanButtonLeadingConstraint.constant = editing ? -40 : 10
                 self?.viewModel.searching.onNext(editing)
             })
             .disposed(by: disposeBag)
@@ -598,21 +644,21 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
 extension SmartlistViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let headerView = view as? UITableViewHeaderFooterView else { return }
-        headerView.tintColor = .clear
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            if tableView == self.conversationsTableView {
-                return SmartlistConstants.tableHeaderViewHeight
-            }
-            return SmartlistConstants.tableHeaderViewHeight + SmartlistConstants.firstSectionHeightForHeader
-        } else {
-            return SmartlistConstants.tableHeaderViewHeight
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+//        headerView.tintColor = .clear
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if section == 0 {
+//            if tableView == self.conversationsTableView {
+//                return SmartlistConstants.tableHeaderViewHeight
+//            }
+//            return SmartlistConstants.tableHeaderViewHeight + SmartlistConstants.firstSectionHeightForHeader
+//        } else {
+//            return SmartlistConstants.tableHeaderViewHeight
+//        }
+//    }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let block = UITableViewRowAction(style: .normal, title: "Block") { _, index in

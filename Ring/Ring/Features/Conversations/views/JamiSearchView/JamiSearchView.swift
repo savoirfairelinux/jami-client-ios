@@ -47,7 +47,7 @@ class JamiSearchView: NSObject {
 
     private func setUpView() {
         configureSearchResult()
-        configureSearchBar()
+        //configureSearchBar()
     }
     private func cancelSearch() {
         self.searchBar.text = ""
