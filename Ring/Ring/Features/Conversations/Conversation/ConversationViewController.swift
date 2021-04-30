@@ -113,6 +113,9 @@ class ConversationViewController: UIViewController,
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
+                           displayName: self.viewModel.displayName.value,
+                           username: self.viewModel.userName.value)
     }
 
     private func importDocument() {
@@ -434,7 +437,7 @@ class ConversationViewController: UIViewController,
         var userNameYOffset = CGFloat(9.0)
         var nameSize = CGFloat(18.0)
         let navbarFrame = self.navigationController?.navigationBar.frame
-        let totalHeight = ((navbarFrame?.size.height ?? 0) + (navbarFrame?.origin.y ?? 0)) / 2
+        let totalHeight = (44 + (navbarFrame?.origin.y ?? 0)) / 2
 
         // Replace "< Home" with a back arrow while we are crunching everything to the left side of the bar for now.
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_button")
@@ -538,10 +541,6 @@ class ConversationViewController: UIViewController,
                 self?.takePicture()
             })
             .disposed(by: self.disposeBag)
-
-        self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
-                           displayName: self.viewModel.displayName.value,
-                           username: self.viewModel.userName.value)
 
         Observable<(Data?, String?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
                                                            self.viewModel.displayName.asObservable(),

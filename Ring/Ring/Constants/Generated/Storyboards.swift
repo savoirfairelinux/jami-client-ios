@@ -107,11 +107,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<Ring.LinkNewDeviceViewController>(storyboard: LinkNewDeviceViewController.self)
   }
-  internal enum MeDetailViewController: StoryboardType {
-    internal static let storyboardName = "MeDetailViewController"
-
-    internal static let initialScene = InitialSceneType<Ring.MeDetailViewController>(storyboard: MeDetailViewController.self)
-  }
   internal enum MeViewController: StoryboardType {
     internal static let storyboardName = "MeViewController"
 

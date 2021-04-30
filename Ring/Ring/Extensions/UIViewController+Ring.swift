@@ -132,14 +132,19 @@ extension UIViewController {
         self.navigationController?.navigationBar.barStyle = .default
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 1.5)
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0.2
-        self.navigationController?.navigationBar.layer.shadowRadius = 3
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
+        self.navigationController?.navigationBar.layer.shadowRadius = 2
         self.navigationController?.navigationBar.layer.masksToBounds = false
         self.navigationController?.navigationBar.shadowImage = UIImage()
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
+        if #available(iOS 13.0, *) {
+            self.navigationController?.navigationBar.barTintColor = UIColor.systemBackground
+        } else {
+            self.navigationController?.navigationBar.barTintColor = UIColor.white
+        }
     }
 
     func configureWalkrhroughNavigationBar() {

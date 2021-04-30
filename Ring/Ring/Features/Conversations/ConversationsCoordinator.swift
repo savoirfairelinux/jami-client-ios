@@ -33,8 +33,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     var childCoordinators = [Coordinator]()
     var parentCoordinator: Coordinator?
+    var smartListViewController = UIViewController()
 
-    private let navigationViewController = BaseViewController(with: TabBarItemType.chat)
+    private var navigationViewController = UINavigationController()
     let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
@@ -65,11 +66,23 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 case .showGeneralSettings:
                     self.showGeneralSettings()
                 case .navigateToCall(let call):
-                    self.presentCallController(call: call)
+                    self.navigateToCall(call: call)
                 case .showContactPicker(let callID, let callBack):
                     self.showContactPicker(callId: callID, contactSelectedCB: callBack)
                 case .replaceCurrentWithConversationFor(let participantUri):
                     self.replaceCurrentWithConversationFor(participantUri: participantUri)
+                case .showAccountSettings:
+                    self.showAccountSettings()
+                case .accountRemoved:
+                    self.popToSmartList()
+                case .needToOnboard:
+                    self.needToOnboard()
+                case .accountModeChanged:
+                    self.accountModeChanged()
+                case .migrateAccount(let accountId):
+                    self.migrateAccount(accountId: accountId)
+                case .returnToSmartList:
+                    self.popToSmartList()
                 default:
                     break
                 }
@@ -83,22 +96,38 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self.showIncomingCall(call: call)
             })
             .disposed(by: self.disposeBag)
-        self.navigationViewController.viewModel = ChatTabBarItemViewModel(with: self.injectionBag)
         self.callbackPlaceCall()
-        //for iOS version less than 10 support open call from notification
-        NotificationCenter.default.addObserver(self, selector: #selector(self.answerIncomingCall(_:)), name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue), object: nil)
-
-        self.accountService.currentAccountChanged
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: {[weak self] _ in
-                guard let self = self else { return }
-                self.navigationViewController.viewModel =
-                    ChatTabBarItemViewModel(with: self.injectionBag)
-            })
-            .disposed(by: self.disposeBag)
     }
 
-    // swiftlint:disable cyclomatic_complexity
+    func needToOnboard() {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.needToOnboard(animated: false, isFirstAccount: true))
+        }
+    }
+    func accountModeChanged() {
+        self.start()
+    }
+
+    func migrateAccount(accountId: String) {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.needAccountMigration(accountId: accountId))
+        }
+    }
+
+    func showAccountSettings() {
+        let meCoordinator = MeCoordinator(with: self.injectionBag)
+        meCoordinator.parentCoordinator = self
+        meCoordinator.setNavigationController(controller: self.navigationViewController)
+        self.addChildCoordinator(childCoordinator: meCoordinator)
+        meCoordinator.start()
+        self.smartListViewController.rx.viewWillAppear
+            .take(1)
+            .subscribe(onNext: { [weak self, weak meCoordinator] (_) in
+                self?.removeChildCoordinator(childCoordinator: meCoordinator)
+        })
+        .disposed(by: self.disposeBag)
+    }
+
     func showIncomingCall(call: CallModel) {
         guard let account = self.accountService
             .getAccount(fromAccountId: call.accountId),
@@ -120,28 +149,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         var tempBag = DisposeBag()
         call.callUUID = UUID()
         callsProvider
-            .reportIncomingCall(account: account, call: call) { _ in
-                // if starting CallKit failed fallback to jami call screen
-                if UIApplication.shared.applicationState != .active {
-                    if AccountModelHelper
-                        .init(withAccount: account).isAccountSip() ||
-                        !self.accountService.getCurrentProxyState(accountID: account.id) {
-                        return
-                    }
-                    self.triggerCallNotifications(call: call)
-                    return
-                }
-                if account.id != call.accountId {
-                    self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
-                }
-                topController.dismiss(animated: false, completion: nil)
-                guard let parent = self.parentCoordinator as? AppCoordinator else { return }
-                parent.openConversation(participantID: call.participantUri)
-                self.present(viewController: callViewController,
-                             withStyle: .appear,
-                             withAnimation: false,
-                             withStateable: callViewController.viewModel)
-            }
+            .reportIncomingCall(account: account, call: call, completion: nil)
         callsProvider.sharedResponseStream
             .filter({ serviceEvent in
                 if serviceEvent.eventType != ServiceEventType.callProviderAnswerCall {
@@ -152,13 +160,14 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 return callUUID == call.callUUID.uuidString
             })
             .subscribe(onNext: { _ in
-                self.navigationViewController.popToRootViewController(animated: false)
+                topController.dismiss(animated: false, completion: nil)
+                self.popToSmartList()
                 if account.id != call.accountId {
                     self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
                 }
-                topController.dismiss(animated: false, completion: nil)
-                guard let parent = self.parentCoordinator as? AppCoordinator else { return }
-                parent.openConversation(participantID: call.participantUri)
+                self.popToSmartList()
+                if let model = self.getConversationViewModel(participantUri: call.paricipantHash()) { self.showConversation(withConversationViewModel: model)
+                }
                 self.present(viewController: callViewController,
                              withStyle: .appear,
                              withAnimation: false,
@@ -209,16 +218,20 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     func showGeneralSettings() {
         let settingsViewController = GeneralSettingsViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: settingsViewController, withStyle: .present, withAnimation: true, disposeBag: self.disposeBag)
+        self.present(viewController: settingsViewController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
     }
 
     func replaceCurrentWithConversationFor(participantUri: String) {
         guard let model = getConversationViewModel(participantUri: participantUri) else { return }
-        self.navigationViewController.popToRootViewController(animated: false)
+        self.popToSmartList()
         self.showConversation(withConversationViewModel: model)
     }
 
-    func puchConversation(participantId: String) {
+    func popToSmartList() {
+        navigationViewController.popToViewController(smartListViewController, animated: false)
+    }
+
+    func pushConversation(participantId: String) {
         guard let account = accountService.currentAccount else {
             return
         }
@@ -238,15 +251,27 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func start() {
-        self.navigationViewController.viewControllers.removeAll()
         let boothMode = self.accountService.boothMode()
         if boothMode {
-            let smartListViewController = IncognitoSmartListViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
+            let smartViewController = IncognitoSmartListViewController.instantiate(with: self.injectionBag)
+            self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
+            smartListViewController = smartViewController
             return
         }
-        let smartListViewController = SmartlistViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: smartListViewController, withStyle: .show, withAnimation: true, withStateable: smartListViewController.viewModel)
+        let smartViewController = SmartlistViewController.instantiate(with: self.injectionBag)
+        let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
+        contactRequestsViewController.viewModel.state.takeUntil(contactRequestsViewController.rx.deallocated)
+                    .subscribe(onNext: { [weak self] (state) in
+                        self?.stateSubject.onNext(state)
+                    })
+                    .disposed(by: self.disposeBag)
+        smartViewController.addContactRequestVC(controller: contactRequestsViewController)
+        self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
+        smartListViewController = smartViewController
+    }
+
+    func setNavigationController(controller: UINavigationController) {
+        navigationViewController = controller
     }
 
     func getConversationViewModel(participantUri: String) -> ConversationViewModel? {
@@ -264,36 +289,5 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     func addLockFlags() {
         presentingVC[VCType.contact.rawValue] = false
         presentingVC[VCType.conversation.rawValue] = false
-    }
-
-    //open call controller when button navigate to call pressed
-
-    func triggerCallNotifications(call: CallModel) {
-        var data = [String: String]()
-        data [NotificationUserInfoKeys.name.rawValue] = call.displayName
-        data [NotificationUserInfoKeys.callID.rawValue] = call.callId
-        data [NotificationUserInfoKeys.accountID.rawValue] = call.accountId
-        let helper = LocalNotificationsHelper()
-        helper.presentCallNotification(data: data, callService: self.callService)
-    }
-
-// MARK: - iOS 9.3 - 10
-
-    @objc
-    func answerIncomingCall(_ notification: NSNotification) {
-        guard let callid = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String,
-            let call = self.callService.call(callID: callid) else {
-                return
-        }
-        let callViewController = CallViewController.instantiate(with: self.injectionBag)
-        callViewController.viewModel.call = call
-        callViewController.viewModel.answerCall()
-            .subscribe(onCompleted: { [weak self] in
-                self?.present(viewController: callViewController,
-                              withStyle: .present,
-                              withAnimation: false,
-                              withStateable: callViewController.viewModel)
-            })
-            .disposed(by: self.disposeBag)
     }
 }
