@@ -189,6 +189,49 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             })
         }()
 
+    lazy var unreadMessages: Observable<Int> = {[weak self] in
+        guard let self = self else {
+            return Observable.just(0)
+        }
+        return self.conversationsForCurrentAccount
+            .share()
+            .map { conversations -> Int in
+                var result = 0
+                for conversation in conversations {
+                    result += conversation.messages.filter({ $0.status != .displayed && !$0.isTransfer && $0.incoming }).count
+                }
+                return result
+            }
+    }()
+
+    lazy var unhandeledRequests: Observable<Int> = {[weak self] in
+        guard let self = self else {
+            return Observable.just(0)
+        }
+        return self.contactsService.contactRequests
+            .asObservable()
+            .map({ contactRequests -> Int in
+                guard let account = self.accountsService.currentAccount else {
+                    return 0
+                }
+                return contactRequests.filter { $0.accountId == account.id }.count
+            })
+    }()
+    typealias BageValues = (messages: Int, requests: Int)
+    lazy var updateSegmentControl: Observable<BageValues> = {[weak self] in
+        guard let self = self else {
+            let value: BageValues = (0, 0)
+            return Observable.just(value)
+        }
+        return Observable<BageValues>
+            .combineLatest(self.unreadMessages,
+                           self.unhandeledRequests,
+                           resultSelector: {(messages, requests) -> BageValues in
+                            return (messages, requests)
+            })
+            .observeOn(MainScheduler.instance)
+        }()
+
     var conversationsForCurrentAccount = PublishSubject<[ConversationModel]>()
 
     func reloadDataFor(accountId: String) {
@@ -312,6 +355,10 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
         conversationViewModel))
+    }
+
+    func showAccountSettings() {
+        self.stateSubject.onNext(ConversationState.showAccountSettings)
     }
 
     func closeAllPlayers() {

@@ -23,10 +23,8 @@ import RxSwift
 
 /// Represents Me navigation state
 ///
-/// - meDetail: user want its account detail
 /// -linkDevice: link new device to account
 public enum MeState: State {
-    case meDetail
     case linkNewDevice
     case blockedContacts
     case needToOnboard
@@ -42,12 +40,11 @@ class MeCoordinator: Coordinator, StateableResponsive {
     var rootViewController: UIViewController {
         return self.navigationViewController
     }
-
     var parentCoordinator: Coordinator?
 
     var childCoordinators = [Coordinator]()
 
-    private let navigationViewController = BaseViewController(with: TabBarItemType.account)
+    private var navigationViewController = UINavigationController()
     private let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
@@ -62,8 +59,6 @@ class MeCoordinator: Coordinator, StateableResponsive {
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? MeState else { return }
                 switch state {
-                case .meDetail:
-                    self.showMeDetail()
                 case .linkNewDevice:
                     self.showLinkDeviceWindow()
                 case .blockedContacts:
@@ -82,26 +77,26 @@ class MeCoordinator: Coordinator, StateableResponsive {
     }
 
     func needToOnboard() {
-        if let parent = self.parentCoordinator as? AppCoordinator {
-            parent.stateSubject.onNext(AppState.needToOnboard(animated: false, isFirstAccount: true))
+        if let parent = self.parentCoordinator as? ConversationsCoordinator {
+            parent.stateSubject.onNext(ConversationState.needToOnboard)
         }
     }
 
     func accountModeChanged() {
-        if let parent = self.parentCoordinator as? AppCoordinator {
-            parent.stateSubject.onNext(AppState.accountModeSwitched)
+        if let parent = self.parentCoordinator as? ConversationsCoordinator {
+            parent.stateSubject.onNext(ConversationState.accountModeChanged)
         }
     }
 
     func migrateAccount(accountId: String) {
-        if let parent = self.parentCoordinator as? AppCoordinator {
-            parent.stateSubject.onNext(AppState.needAccountMigration(accountId: accountId))
+        if let parent = self.parentCoordinator as? ConversationsCoordinator {
+            parent.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
         }
     }
 
     func accountRemoved() {
-        if let parent = self.parentCoordinator as? AppCoordinator {
-            parent.stateSubject.onNext(AppState.accountRemoved)
+        if let parent = self.parentCoordinator as? ConversationsCoordinator {
+            parent.stateSubject.onNext(ConversationState.accountRemoved)
         }
     }
 
@@ -110,6 +105,10 @@ class MeCoordinator: Coordinator, StateableResponsive {
         meViewController.model = EditProfileViewModel(profileService: self.injectionBag.profileService,
                                                       accountService: self.injectionBag.accountService)
         self.present(viewController: meViewController, withStyle: .show, withAnimation: true, withStateable: meViewController.viewModel)
+    }
+
+    func setNavigationController(controller: UINavigationController) {
+        navigationViewController = controller
     }
 
     private func showBlockedContacts() {
@@ -123,11 +122,6 @@ class MeCoordinator: Coordinator, StateableResponsive {
                      withAnimation: true,
                      lockWhilePresenting: VCType.blockList.rawValue,
                      disposeBag: self.disposeBag)
-    }
-
-    private func showMeDetail () {
-        let meDetailViewController = MeDetailViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: meDetailViewController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
     }
 
     private func showLinkDeviceWindow() {

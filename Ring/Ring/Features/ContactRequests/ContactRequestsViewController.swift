@@ -67,7 +67,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     }
 
     func applyL10n() {
-        self.navigationItem.title = L10n.Global.contactRequestsTabBarTitle
         self.noRequestsLabel.text = L10n.Invitations.noInvitations
     }
 

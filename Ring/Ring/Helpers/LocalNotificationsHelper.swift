@@ -118,52 +118,6 @@ class LocalNotificationsHelper {
         self.timer = nil
     }
 
-    func presentCallNotification(data: [String: String], callService: CallsService) {
-        let title = NotificationCallTitle.incomingCall.getString()
-        guard let name = data [NotificationUserInfoKeys.name.rawValue],
-            let callID = data [NotificationUserInfoKeys.callID.rawValue] else {
-                return
-        }
-        timer = Timer.scheduledTimer(timeInterval: 60,
-                                     target: self,
-                                     selector: #selector(cancelCall),
-                                     userInfo: [NotificationUserInfoKeys.callID.rawValue: callID],
-                                     repeats: false)
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = name
-        content.userInfo = data
-        content.categoryIdentifier = self.callCategory
-        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-        let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
-        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
-            if let error = error {
-                print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-            }
-        }
-        callService.currentCall(callId: callID)
-            .filter({ call in
-                return (call.state == .over || call.state == .failure)
-            })
-            .single()
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                let content = UNMutableNotificationContent()
-                content.title = NotificationCallTitle.missedCall.getString()
-                content.body = name
-                content.sound = UNNotificationSound.default
-                content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
-                let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-                let notificationRequest = UNNotificationRequest(identifier: callID, content: content, trigger: notificationTrigger)
-                UNUserNotificationCenter.current().add(notificationRequest) { (error) in
-                    if let error = error {
-                        print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-                    }
-                }
-            })
-            .disposed(by: self.disposeBag)
-    }
-
     class func isEnabled() -> Bool {
         return UserDefaults.standard.bool(forKey: enbleNotificationsKey)
     }
