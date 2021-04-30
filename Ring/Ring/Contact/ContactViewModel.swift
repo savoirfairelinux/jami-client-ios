@@ -183,6 +183,8 @@ class ContactViewModel: ViewModel, Stateable {
                 self.conversationService
                     .clearHistory(conversation: self.conversation,
                                   keepConversation: false)
+                self.stateSubject.onNext(ConversationState
+                    .returnToSmartList)
             })
             .disposed(by: self.disposeBag)
     }
@@ -205,6 +207,8 @@ class ContactViewModel: ViewModel, Stateable {
                 self.conversationService
                     .clearHistory(conversation: self.conversation,
                                   keepConversation: false)
+                self.stateSubject.onNext(ConversationState
+                    .returnToSmartList)
             })
             .disposed(by: self.disposeBag)
     }

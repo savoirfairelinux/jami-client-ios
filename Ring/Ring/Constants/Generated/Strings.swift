@@ -431,7 +431,7 @@ internal enum L10n {
   }
 
   internal enum GeneralSettings {
-    /// General settings
+    /// Advanced settings
     internal static let title = L10n.tr("Localizable", "generalSettings.title")
     /// Enable video acceleration
     internal static let videoAcceleration = L10n.tr("Localizable", "generalSettings.videoAcceleration")
@@ -459,13 +459,11 @@ internal enum L10n {
   internal enum Global {
     /// Close
     internal static let close = L10n.tr("Localizable", "global.close")
-    /// Invitations
-    internal static let contactRequestsTabBarTitle = L10n.tr("Localizable", "global.contactRequestsTabBarTitle")
     /// Forward
     internal static let forward = L10n.tr("Localizable", "global.forward")
     /// Conversations
     internal static let homeTabBarTitle = L10n.tr("Localizable", "global.homeTabBarTitle")
-    /// Account
+    /// Account Settings
     internal static let meTabBarTitle = L10n.tr("Localizable", "global.meTabBarTitle")
     /// Ok
     internal static let ok = L10n.tr("Localizable", "global.ok")
@@ -583,14 +581,22 @@ internal enum L10n {
   }
 
   internal enum Smartlist {
+    /// About Jami
+    internal static let aboutJami = L10n.tr("Localizable", "smartlist.aboutJami")
+    /// Account Settings
+    internal static let accountSettings = L10n.tr("Localizable", "smartlist.accountSettings")
     /// Accounts
     internal static let accountsTitle = L10n.tr("Localizable", "smartlist.accountsTitle")
     /// + Add Account
     internal static let addAccountButton = L10n.tr("Localizable", "smartlist.addAccountButton")
+    /// Advanced Settings
+    internal static let advancedSettings = L10n.tr("Localizable", "smartlist.advancedSettings")
     /// Be sure cellular access is granted in your settings
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess")
     /// Conversations
     internal static let conversations = L10n.tr("Localizable", "smartlist.conversations")
+    /// Invitations
+    internal static let invitations = L10n.tr("Localizable", "smartlist.invitations")
     /// No conversations
     internal static let noConversation = L10n.tr("Localizable", "smartlist.noConversation")
     /// No network connectivity
@@ -599,8 +605,10 @@ internal enum L10n {
     internal static let noNumber = L10n.tr("Localizable", "smartlist.noNumber")
     /// No results
     internal static let noResults = L10n.tr("Localizable", "smartlist.noResults")
-    /// Search Result
+    /// Public Directory
     internal static let results = L10n.tr("Localizable", "smartlist.results")
+    /// Search for new or existing contact...
+    internal static let searchBar = L10n.tr("Localizable", "smartlist.searchBar")
     /// Enter name...
     internal static let searchBarPlaceholder = L10n.tr("Localizable", "smartlist.searchBarPlaceholder")
     /// Searching...
