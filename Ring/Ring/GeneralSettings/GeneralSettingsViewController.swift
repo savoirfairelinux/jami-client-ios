@@ -28,9 +28,6 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
     var viewModel: GeneralSettingsViewModel!
     let disposeBag = DisposeBag()
 
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var tilteLabel: UILabel!
-
     @IBOutlet weak var settingsTable: UITableView!
 
     override func viewDidLoad() {
@@ -39,22 +36,24 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         settingsTable.backgroundColor = UIColor.jamiBackgroundColor
         self.applyL10n()
         self.setUpTable()
-        doneButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.dismiss(animated: true, completion: nil)
-            })
-            .disposed(by: self.disposeBag)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar
+            .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
+                                    NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor]
     }
 
     func setUpTable() {
-        self.settingsTable.estimatedRowHeight = 35
+        self.settingsTable.estimatedRowHeight = 50
         self.settingsTable.rowHeight = UITableView.automaticDimension
         self.settingsTable.tableFooterView = UIView()
         self.setUpDataSource()
     }
 
     func applyL10n() {
-        tilteLabel.text = L10n.GeneralSettings.title
+        self.navigationItem.title = L10n.GeneralSettings.title
     }
 
     private func setUpDataSource() {
