@@ -54,7 +54,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         self.injectionBag = injectionBag
     }
 
-    lazy var contactRequestItems: Observable<[ContactRequestItem]> = {
+    lazy var contactRequestItemsNotFiltered: Observable<[ContactRequestItem]> = {
         return self.contactsService.contactRequests
             .asObservable()
             .map({ [weak self] contactRequests in
@@ -70,6 +70,17 @@ class ContactRequestsViewModel: Stateable, ViewModel {
                         return item
                     }
             })
+    }()
+
+    let filter = BehaviorRelay(value: "")
+
+    lazy var contactRequestItems: Observable<[ContactRequestItem]> = {
+        return Observable
+            .combineLatest(contactRequestItemsNotFiltered, filter.asObservable()) { (requests, filter) -> [ContactRequestItem] in
+                return requests.filter { request in
+                    return request.userName.value.contains(filter) || request.profileName.value.contains(filter) || filter.isEmpty
+                }
+            }
     }()
 
     lazy var hasInvitations: Observable<Bool> = {

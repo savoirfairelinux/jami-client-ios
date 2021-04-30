@@ -75,7 +75,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
                     .addSubview(
                         AvatarView(profileImageData: profileData.element?.0,
                                    username: data,
-                                   size: 40))
+                                   size: 50))
                 return
             })
             .disposed(by: self.disposeBag)
