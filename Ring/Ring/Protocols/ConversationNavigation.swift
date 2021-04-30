@@ -38,6 +38,10 @@ enum ConversationState: State {
     case accountModeChanged
     case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate)
     case replaceCurrentWithConversationFor(participantUri: String)
+    case showAccountSettings
+    case accountRemoved
+    case needToOnboard
+    case migrateAccount(accountId: String)
 }
 
 protocol ConversationNavigation: class {
@@ -70,11 +74,9 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 case .fromCallToConversation(let conversation):
                     self.fromCallToConversation(withConversationViewModel: conversation)
                 case .navigateToCall(let call):
-                    self.presentCallController(call: call)
+                    self.navigateToCall(call: call)
                 case .needAccountMigration(let accountId):
                     self.migrateAccount(accountId: accountId)
-                case .accountModeChanged:
-                    self.accountModeChanged()
                 case .openFullScreenPreview(let parentView, let viewModel, let image, let initialFrame, let delegate):
                     self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate)
                 default:
@@ -87,11 +89,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     func migrateAccount(accountId: String) {
         if let parent = self.parentCoordinator as? AppCoordinator {
             parent.stateSubject.onNext(AppState.needAccountMigration(accountId: accountId))
-        }
-    }
-    func accountModeChanged() {
-        if let parent = self.parentCoordinator as? AppCoordinator {
-            parent.stateSubject.onNext(AppState.accountModeSwitched)
         }
     }
 
@@ -167,7 +164,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     return
                 }
         }
-        navigationController.popToRootViewController(animated: false)
         self.showConversation(withConversationViewModel: conversationViewModel)
     }
 
@@ -185,7 +181,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      lockWhilePresenting: VCType.conversation.rawValue)
     }
 
-    func presentCallController (call: CallModel) {
+    func navigateToCall (call: CallModel) {
         guard let navController = self.rootViewController as? UINavigationController else { return }
         let controllers = navController.children
         for controller in controllers

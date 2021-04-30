@@ -36,7 +36,7 @@ class ConversationCell: UITableViewCell, NibReusable {
     @IBOutlet weak var selectionIndicator: UIButton?
     @IBOutlet weak var selectionContainer: UIView?
 
-    var avatarSize: CGFloat { return 40 }
+    var avatarSize: CGFloat { return 50 }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         let initialColor = selected ? UIColor.jamiUITableViewCellSelection : UIColor.jamiUITableViewCellSelection.lighten(by: 5.0)
@@ -74,7 +74,7 @@ class ConversationCell: UITableViewCell, NibReusable {
                 self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
                 self?.avatarView.addSubview(AvatarView(profileImageData: profileData.element?.0,
                                                        username: data,
-                                                       size: self?.avatarSize ?? 40))
+                                                       size: self?.avatarSize ?? 50))
             })
             .disposed(by: self.disposeBag)
 

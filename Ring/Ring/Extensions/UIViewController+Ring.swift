@@ -132,9 +132,9 @@ extension UIViewController {
         self.navigationController?.navigationBar.barStyle = .default
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 1.5)
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0.2
-        self.navigationController?.navigationBar.layer.shadowRadius = 3
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
+        self.navigationController?.navigationBar.layer.shadowRadius = 2
         self.navigationController?.navigationBar.layer.masksToBounds = false
         self.navigationController?.navigationBar.shadowImage = UIImage()
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]

@@ -67,7 +67,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     }
 
     func applyL10n() {
-        self.navigationItem.title = L10n.Global.contactRequestsTabBarTitle
         self.noRequestsLabel.text = L10n.Invitations.noInvitations
     }
 
@@ -75,6 +74,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         self.tableView.estimatedRowHeight = 100.0
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.allowsSelection = true
+        self.tableView.tableFooterView = UIView()
 
         //Register cell
         self.tableView.register(cellType: ContactRequestCell.self)
