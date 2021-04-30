@@ -33,8 +33,6 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         self.view.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         super.viewDidLoad()
 
-        self.showInitialAlert()
-
         self.viewModel.observableState
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
@@ -52,6 +50,11 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                 }
             })
             .disposed(by: self.disposeBag)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.showInitialAlert()
     }
 
     private func showProgress() {

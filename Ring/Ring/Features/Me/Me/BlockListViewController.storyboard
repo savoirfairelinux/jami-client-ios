@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cWr-kq-EfK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cWr-kq-EfK">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Block List View Controller-->
         <scene sceneID="CDw-GO-ni9">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" id="cWr-kq-EfK" customClass="BlockListViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cWr-kq-EfK" customClass="BlockListViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YKN-B2-7X7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" estimatedRowHeight="72" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eGc-th-VK5">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No blocked contacts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUo-eH-a0f">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -27,18 +28,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="wN6-Fz-tau"/>
                         <constraints>
                             <constraint firstItem="eGc-th-VK5" firstAttribute="top" secondItem="YKN-B2-7X7" secondAttribute="top" id="5Nj-Mt-QeY"/>
                             <constraint firstItem="nUo-eH-a0f" firstAttribute="top" secondItem="YKN-B2-7X7" secondAttribute="top" id="6YC-L1-UO0"/>
                             <constraint firstItem="nUo-eH-a0f" firstAttribute="leading" secondItem="wN6-Fz-tau" secondAttribute="leading" id="7G3-4b-v8w"/>
                             <constraint firstItem="nUo-eH-a0f" firstAttribute="trailing" secondItem="wN6-Fz-tau" secondAttribute="trailing" id="DwO-qn-bYX"/>
-                            <constraint firstItem="wN6-Fz-tau" firstAttribute="bottom" secondItem="nUo-eH-a0f" secondAttribute="bottom" id="gsh-dP-Os8"/>
+                            <constraint firstItem="nUo-eH-a0f" firstAttribute="bottom" secondItem="eGc-th-VK5" secondAttribute="bottom" id="GcN-Wl-7s4"/>
+                            <constraint firstAttribute="bottom" secondItem="eGc-th-VK5" secondAttribute="bottom" id="Zty-gx-bJ1"/>
                             <constraint firstItem="eGc-th-VK5" firstAttribute="trailing" secondItem="wN6-Fz-tau" secondAttribute="trailing" id="uq4-pz-rcL"/>
                             <constraint firstItem="eGc-th-VK5" firstAttribute="leading" secondItem="wN6-Fz-tau" secondAttribute="leading" id="xU3-rh-8zX"/>
-                            <constraint firstItem="eGc-th-VK5" firstAttribute="bottom" secondItem="wN6-Fz-tau" secondAttribute="bottom" id="xqa-be-YtG"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="wN6-Fz-tau"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="noBlockedContactLabel" destination="nUo-eH-a0f" id="0zv-9l-3GL"/>
                         <outlet property="tableView" destination="eGc-th-VK5" id="4JY-jU-2Xb"/>
@@ -49,4 +51,9 @@
             <point key="canvasLocation" x="0.80000000000000004" y="136.28185907046478"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

@@ -66,6 +66,7 @@ internal enum Asset {
   internal static let phoneBook = ImageAsset(name: "phone_book")
   internal static let qrCode = ImageAsset(name: "qr_code")
   internal static let qrCodeScan = ImageAsset(name: "qr_code_scan")
+  internal static let remove = ImageAsset(name: "remove")
   internal static let revokeDevice = ImageAsset(name: "revoke_device")
   internal static let ringLogo = ImageAsset(name: "ring_logo")
   internal static let rowSelected = ColorAsset(name: "row_selected")

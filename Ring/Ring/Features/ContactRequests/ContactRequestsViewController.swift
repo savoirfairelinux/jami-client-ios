@@ -67,7 +67,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     }
 
     func applyL10n() {
-        self.navigationItem.title = L10n.Global.contactRequestsTabBarTitle
         self.noRequestsLabel.text = L10n.Invitations.noInvitations
     }
 
@@ -75,6 +74,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         self.tableView.estimatedRowHeight = 100.0
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.allowsSelection = true
+        self.tableView.tableFooterView = UIView()
 
         //Register cell
         self.tableView.register(cellType: ContactRequestCell.self)
@@ -91,6 +91,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 cell.acceptButton.rx.tap
                     .subscribe(onNext: { [weak self] in
                         self?.acceptButtonTapped(withItem: item)
+                        self?.view.isHidden = true
                     })
                     .disposed(by: cell.disposeBag)
 
@@ -99,6 +100,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 cell.discardButton.rx.tap
                     .subscribe(onNext: { [weak self] in
                         self?.discardButtonTapped(withItem: item)
+                        self?.view.isHidden = true
                     })
                     .disposed(by: cell.disposeBag)
 
@@ -107,6 +109,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 cell.banButton.rx.tap
                     .subscribe(onNext: { [weak self] in
                         self?.banButtonTapped(withItem: item)
+                        self?.view.isHidden = true
                     })
                     .disposed(by: cell.disposeBag)
             }
@@ -119,6 +122,16 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             .hasInvitations
             .observeOn(MainScheduler.instance)
             .bind(to: self.noInvitationsPlaceholder.rx.isHidden)
+            .disposed(by: self.disposeBag)
+
+        self.viewModel
+            .hasInvitations
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {[weak self] hasInvitation in
+                if !hasInvitation {
+                    self?.view.isHidden = true
+                }
+            })
             .disposed(by: self.disposeBag)
     }
 

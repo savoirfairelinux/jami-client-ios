@@ -256,6 +256,10 @@ class ConversationViewModel: Stateable, ViewModel {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
+        let contact = self.contactsService.contact(withUri: self.conversation.value.participantUri)
+        if contact == nil {
+            self.sendContactRequest()
+        }
         var receipientURI = self.conversation.value.participantUri
         if let contactURI = contactURI {
             receipientURI = contactURI
@@ -367,12 +371,20 @@ class ConversationViewModel: Stateable, ViewModel {
         if self.conversation.value.messages.isEmpty {
             self.sendContactRequest()
         }
+        let contact = self.contactsService.contact(withUri: self.conversation.value.participantUri)
+        if contact == nil {
+            self.sendContactRequest()
+        }
         self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: self.conversation.value.hash, userName: self.displayName.value ?? self.userName.value))
     }
 
     func startAudioCall() {
         if self.conversation.value.messages.isEmpty {
+            self.sendContactRequest()
+        }
+        let contact = self.contactsService.contact(withUri: self.conversation.value.participantUri)
+        if contact == nil {
             self.sendContactRequest()
         }
         self.closeAllPlayers()
@@ -690,6 +702,10 @@ extension ConversationViewModel {
         if self.conversation.value.messages.isEmpty {
                self.sendContactRequest()
         }
+        let contact = self.contactsService.contact(withUri: self.conversation.value.participantUri)
+        if contact == nil {
+            self.sendContactRequest()
+        }
 
         guard let account = self.accountService.currentAccount else { return }
         self.locationSharingService.startSharingLocation(from: account.id,
@@ -808,6 +824,10 @@ extension ConversationViewModel {
 
     func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil, contactHash: String? = nil) {
         guard let accountId = accountService.currentAccount?.id else { return }
+        let contact = self.contactsService.contact(withUri: self.conversation.value.participantUri)
+        if contact == nil {
+            self.sendContactRequest()
+        }
         var hash = self.conversation.value.hash
         if let contactHash = contactHash {
             hash = contactHash
@@ -821,6 +841,10 @@ extension ConversationViewModel {
 
     func sendAndSaveFile(displayName: String, imageData: Data, contactHash: String? = nil, conversation: String? = nil) {
         guard let accountId = accountService.currentAccount?.id else { return }
+        let contact = self.contactsService.contact(withUri: self.conversation.value.participantUri)
+        if contact == nil {
+            self.sendContactRequest()
+        }
         var hash = self.conversation.value.hash
         if let contactHash = contactHash {
             hash = contactHash
