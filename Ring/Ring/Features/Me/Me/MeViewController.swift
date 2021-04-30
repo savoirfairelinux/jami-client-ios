@@ -75,8 +75,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
-                                    NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
+            .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
+                                    NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor]
     }
 
     func applyL10n() {
@@ -96,7 +96,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         }
         headerView.backgroundColor = UIColor.jamiBackgroundColor
         self.stretchyHeader = headerView
-        let point = CGPoint(x: 0, y: 100)
+        let point = CGPoint(x: 0, y: 120)
         self.stretchyHeader.frame.origin = point
         self.settingsTable.addSubview(self.stretchyHeader)
         self.settingsTable.delegate = self
@@ -115,7 +115,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     private func configureBindings() {
-        let infoButton = UIButton(type: .infoLight)
         let imageQrCode = UIImage(asset: Asset.qrCode) as UIImage?
         let qrCodeButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
         qrCodeButton.setImage(imageQrCode, for: .normal)
@@ -127,13 +126,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 qrCodeButton?.isEnabled = !isSip
             })
             .disposed(by: self.disposeBag)
-        let infoItem = UIBarButtonItem(customView: infoButton)
         let qrCodeButtonItem = UIBarButtonItem(customView: qrCodeButton)
-        infoButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.infoItemTapped()
-            })
-            .disposed(by: self.disposeBag)
         qrCodeButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.qrCodeItemTapped()
@@ -160,8 +153,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 }
             })
             .disposed(by: self.disposeBag)
-        self.navigationItem.rightBarButtonItem = infoItem
-        self.navigationItem.leftBarButtonItem = qrCodeButtonItem
+        self.navigationItem.rightBarButtonItem = qrCodeButtonItem
 
         //setup Table
         self.settingsTable.estimatedRowHeight = 35
@@ -224,35 +216,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             alert.addAction(actionOk)
             self.present(alert, animated: true, completion: nil)
         }
-    }
-
-    private func infoItemTapped() {
-        var compileDate: String {
-            let dateDefault = ""
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "YYYYMMdd"
-            let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String ?? "Info.plist"
-            if let infoPath = Bundle.main.path(forResource: bundleName, ofType: nil),
-                let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
-                let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date {
-                return dateFormatter.string(from: infoDate)
-            }
-            return dateDefault
-        }
-
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-
-        let versionName = L10n.Global.versionName
-        let alert = UIAlertController(title: "\nJami\nversion: \(appVersion)(\(compileDate))\n\(versionName)", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
-        let image = UIImageView(image: UIImage(asset: Asset.jamiIcon))
-        alert.view.addSubview(image)
-        image.translatesAutoresizingMaskIntoConstraints = false
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: alert.view, attribute: .centerX, multiplier: 1, constant: 0))
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerY, relatedBy: .equal, toItem: alert.view, attribute: .top, multiplier: 1, constant: 0.0))
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
-        self.present(alert, animated: true, completion: nil)
     }
 
     private func qrCodeItemTapped() {
@@ -1091,12 +1054,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                          style: .cancel)
         let actionConfirm = UIAlertAction(title: L10n.AccountPage.removeAccountButton,
                                           style: .destructive) { [weak self] _ in
-                                            UIView.animate(withDuration: 0.1, animations: {
-                                                self?.view.alpha = 0
-                                            }, completion: { _ in
-                                                self?.viewModel.startAccountRemoving()
-                                                self?.view.alpha = 1
-                                            })
+            self?.viewModel.startAccountRemoving()
         }
         alert.addAction(actionCancel)
         alert.addAction(actionConfirm)
