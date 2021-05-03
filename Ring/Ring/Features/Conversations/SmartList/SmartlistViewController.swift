@@ -32,10 +32,10 @@ import QuartzCore
 //Constants
 struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 64.0
-    static let tableHeaderViewHeight: CGFloat = 142.0
+    static let tableHeaderViewHeight: CGFloat = 0.0
     static let firstSectionHeightForHeader: CGFloat = 51.0
     static let networkAllerHeight: CGFloat = 56.0
-    static let tableViewOffset: CGFloat = 80.0
+    static let tableViewOffset: CGFloat = 0.0
 
 }
 
@@ -52,7 +52,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var networkAlertLabel: UILabel!
     @IBOutlet weak var cellularAlertLabel: UILabel!
     @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var dialpadButton: UIButton!
     @IBOutlet weak var dialpadButtonShadow: UIView!
@@ -141,9 +141,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
                                     NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
         self.viewModel.closeAllPlayers()
-        self.tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBar.layer.zPosition = -0
+//        self.tabBarController?.tabBar.isHidden = false
+//        self.tabBarController?.tabBar.layer.zPosition = -0
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.hidesBarsOnSwipe = true
     }
 
     func applyL10n() {
@@ -170,7 +175,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: disposeBag)
         let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
         self.networkAlertViewTopConstraint.constant = !isHidden ? 0.0 : -SmartlistConstants.networkAllerHeight
-        tableTopConstraint.constant = !isHidden ?  -(SmartlistConstants.tableViewOffset - SmartlistConstants.networkAllerHeight) : -SmartlistConstants.tableViewOffset
+//        tableTopConstraint.constant = !isHidden ?  -(SmartlistConstants.tableViewOffset - SmartlistConstants.networkAllerHeight) : -SmartlistConstants.tableViewOffset
         self.networkAlertView.isHidden = isHidden
         self.viewModel.connectionState
             .subscribe(onNext: { [weak self] connectionState in
@@ -179,7 +184,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 let isHidden = connectionState == .none ? false : true
                 UIView.animate(withDuration: 0.25) { [weak self] in
                     self?.networkAlertViewTopConstraint.constant = CGFloat(newAlertHeight)
-                    self?.tableTopConstraint.constant = CGFloat(newTableViewTop)
+                    //self?.tableTopConstraint.constant = CGFloat(newTableViewTop)
                     self?.view.layoutIfNeeded()
                 }
                 self?.networkAlertView.isHidden = isHidden
