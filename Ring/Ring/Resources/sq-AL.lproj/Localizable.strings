@@ -26,10 +26,10 @@
 "global.versionName" = "Tok";
 "global.close" = "Mbylle";
 "global.share" = "Ndajeni me të tjerë";
-"global.forward" = "Forward";
-"global.save" = "Save";
-"global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.forward" = "Përcille";
+"global.save" = "Ruaje";
+"global.resend" = "Ridërgoje";
+"global.preview" = "Paraparje";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -51,10 +51,10 @@
 "smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Shkruani mesazh për";
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "S’u arrit të dërgohet figurë te galeri";
 
 //Invitations
 "invitations.noInvitations" = "S’ka ftesa";
@@ -88,7 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "po shihet për pasje…";
 "createAccount.invalidUsername" = "emër përdoruesi i pavlefshëm";
 "createAccount.usernameAlreadyTaken" = "emër përdoruesi tashmë i zënë";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "emri i përdoruesit është i lirë";
 "createAccount.loading" = "Po ngarkohet";
 "createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
 "createAccount.RegisterAUsername" = "Regjistroni një emër përdoruesi";
@@ -185,10 +185,10 @@
 "calls.haghUp" = "mbylleni";
 "calls.maximize" = "maksimizoje";
 "calls.minimize" = "minimizoje";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "vëre moderator";
+"calls.removeModerator" = "hiqe nga moderator";
+"calls.muteAudio" = "hiqi zërin";
+"calls.unmuteAudio" = "ktheji zërin";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";

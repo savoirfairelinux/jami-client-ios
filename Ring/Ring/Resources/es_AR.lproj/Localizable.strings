@@ -27,9 +27,9 @@
 "global.close" = "Cerrar";
 "global.share" = "Compartir";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Guardar";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Previsualización";
 
 // Scan
 "scan.badQrCode" = "Código QR erróneo";

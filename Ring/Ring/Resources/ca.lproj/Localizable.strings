@@ -27,9 +27,9 @@
 "global.close" = "Tanca";
 "global.share" = "Comparteix";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Desa";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Previsualitzar";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

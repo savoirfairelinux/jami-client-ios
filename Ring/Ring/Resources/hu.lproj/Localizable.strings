@@ -26,10 +26,10 @@
 "global.versionName" = "Együtt";
 "global.close" = "Bezárás";
 "global.share" = "Megosztás ";
-"global.forward" = "Forward";
-"global.save" = "Save";
-"global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.forward" = "Hívásátirányítás";
+"global.save" = "Mentés";
+"global.resend" = "Újraküldés";
+"global.preview" = "Előnézet";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -51,10 +51,10 @@
 "smartlist.selectOneNumber" = "Válasszon egy számot";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Üzenet írása következőknek:";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Nem sikerült menteni a képet a kepgyűjteménybe";
 
 //Invitations
 "invitations.noInvitations" = "Nincs meghívás";
@@ -88,7 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "a rendelkezésre állás keresése…";
 "createAccount.invalidUsername" = "Érvénytelen felhasználónév";
 "createAccount.usernameAlreadyTaken" = "A felhasználó név már foglalt";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "A felhasználónév elérhető";
 "createAccount.loading" = "Betöltés…";
 "createAccount.waitCreateAccountTitle" = "Fiók hozzáadása";
 "createAccount.RegisterAUsername" = "Felhasználónév bejegyeztetése";
@@ -185,10 +185,10 @@
 "calls.haghUp" = "Hívás befejezése";
 "calls.maximize" = "teljes méret";
 "calls.minimize" = "kis méret";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "Moderátor beállítása";
+"calls.removeModerator" = "Moderátor megszüntetése";
+"calls.muteAudio" = "Mikrofon elnémítása";
+"calls.unmuteAudio" = "Mikrofon némítás feloldása";
 
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";

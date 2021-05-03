@@ -27,9 +27,9 @@
 "global.close" = "بستن";
 "global.share" = "هم‌رسانی";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "ذخیره";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "پیش‌نمایش";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";

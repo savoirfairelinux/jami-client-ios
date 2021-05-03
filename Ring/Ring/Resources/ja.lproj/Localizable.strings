@@ -27,9 +27,9 @@
 "global.close" = "閉じる";
 "global.share" = "共有";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "保存";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "プレビュー";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";

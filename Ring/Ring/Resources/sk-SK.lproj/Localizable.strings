@@ -27,9 +27,9 @@
 "global.close" = "Zavrieť";
 "global.share" = "Zdieľať";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Uložiť";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Náhľad";
 
 // Scan
 "scan.badQrCode" = "Zlý QR kód";

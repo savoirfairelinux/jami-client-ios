@@ -27,9 +27,9 @@
 "global.close" = "Kapat";
 "global.share" = "Paylaş";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Kaydet";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Önizle";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";

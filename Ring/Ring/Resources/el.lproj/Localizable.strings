@@ -27,9 +27,9 @@
 "global.close" = "Κλείσιμο";
 "global.share" = "Κοινοποίηση";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Αποθήκευση";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Προεπισκόπηση";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

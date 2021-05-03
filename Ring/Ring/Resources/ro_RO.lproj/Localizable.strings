@@ -26,9 +26,9 @@
 "global.versionName" = "Împreună";
 "global.close" = "Închide";
 "global.share" = "Distribuie";
-"global.forward" = "Forward";
+"global.forward" = "Trimite";
 "global.save" = "Salvează";
-"global.resend" = "Resend";
+"global.resend" = "Trimite din nou";
 "global.preview" = "Previzualizare";
 
 // Scan
@@ -46,15 +46,15 @@
 "smartlist.noNetworkConnectivity" = "Nicio legătură la rețea";
 "smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis în reglările tale";
 "smartlist.accountsTitle" = "Conturi";
-"smartlist.addAccountButton" = "„+” Adaugă un cont";
+"smartlist.addAccountButton" = "+ Adaugă un cont";
 "smartlist.noNumber" = "Contactul ales nu are niciun număr";
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Scrie pentru";
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Salvarea imaginii nu a reușit";
 
 //Invitations
 "invitations.noInvitations" = "Nu sînt invitații";
@@ -88,7 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "caut disponibilitatea...";
 "createAccount.invalidUsername" = "nume greșit";
 "createAccount.usernameAlreadyTaken" = "nume de utilizator ales deja";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "nume de utilizator disponibil";
 "createAccount.loading" = "Se încarcă";
 "createAccount.waitCreateAccountTitle" = "Se adaugă contul";
 "createAccount.RegisterAUsername" = "Înscrie un nume de utilizator";
@@ -185,10 +185,10 @@
 "calls.haghUp" = "închide";
 "calls.maximize" = "mărește";
 "calls.minimize" = "micșorează";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "Pune un moderator";
+"calls.removeModerator" = "Elimină moderatorul";
+"calls.muteAudio" = "Mut";
+"calls.unmuteAudio" = "sonor activat";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aparate";

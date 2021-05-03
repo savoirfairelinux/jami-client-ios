@@ -27,9 +27,9 @@
 "global.close" = "Luk";
 "global.share" = "Del";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Gem";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Forvisning";
 
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";

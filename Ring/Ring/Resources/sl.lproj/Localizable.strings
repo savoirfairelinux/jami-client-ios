@@ -27,9 +27,9 @@
 "global.close" = "Zapri";
 "global.share" = "Deli";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Shrani";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Predogled";
 
 // Scan
 "scan.badQrCode" = "Napačna QR koda";

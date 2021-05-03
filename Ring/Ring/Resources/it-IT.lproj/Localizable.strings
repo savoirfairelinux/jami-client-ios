@@ -26,35 +26,35 @@
 "global.versionName" = "Together";
 "global.close" = "Chiudi";
 "global.share" = "Condividi";
-"global.forward" = "Forward";
-"global.save" = "Save";
-"global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.forward" = "Inoltra";
+"global.save" = "Salva";
+"global.resend" = "Invia di nuovo";
+"global.preview" = "Anteprima";
 
 // Scan
 "scan.badQrCode" = "Codice QR errato";
-"scan.search" = "Ricerca in corso ...";
+"scan.search" = "Ricerca in corso…";
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Risultati ricerca";
 "smartlist.conversations" = "Conversazioni";
-"smartlist.searching" = "Ricerca in corso ...";
+"smartlist.searching" = "Ricerca in corso…";
 "smartlist.noResults" = "Nessun risultato";
 "smartlist.noConversation" = "Nessuna conversazione";
-"smartlist.searchBarPlaceholder" = "Inserisci nome...";
+"smartlist.searchBarPlaceholder" = "Inserisci nome…";
 "smartlist.noNetworkConnectivity" = "Assenza di connessione di rete";
 "smartlist.cellularAccess" = "Assicurati che l'accesso cellulare sia garantito nelle tue impostazioni";
-"smartlist.accountsTitle" = "Accounts";
+"smartlist.accountsTitle" = "Account";
 "smartlist.addAccountButton" = "+ Aggiungi account";
 "smartlist.noNumber" = "Il contatto selezionato non ha nessun numero";
 "smartlist.selectOneNumber" = "Seleziona uno dei numeri";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Scrivi a";
 "conversation.explanationSendingLocationTo" = "Stai attualmente condividendo la tua posizione con";
 "conversation.explanationReceivingLocationFrom" = "Stai attualmente ricevendo una posizione dal vivo da";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Impossibile salvare l'immagine nella galleria";
 
 //Invitations
 "invitations.noInvitations" = "Nessun invito";
@@ -75,7 +75,7 @@
 "createProfile.enterNameLabel" = "Inserisci nome di visualizzazione";
 "createProfile.enterNamePlaceholder" = "Inserisci nome";
 "createProfile.subtitle" = "Il tuo profilo sarà condiviso con i tuoi contatti. Puoi cambiare questa impostazione in qualsiasi momento.";
-"createProfile.createYourAvatar" = "Crea il tuo avatar";
+"createProfile.createYourAvatar" = "Crea il tuo profilo";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Crea il tuo account";
@@ -85,14 +85,14 @@
 "createAccount.repeatPasswordPlaceholder" = "Conferma password";
 "createAccount.passwordCharactersNumberError" = "Minimo 6 caratteri";
 "createAccount.passwordNotMatchingError" = "le passwords non corrispondono";
-"createAccount.lookingForUsernameAvailability" = "ricerca disponibilità...";
+"createAccount.lookingForUsernameAvailability" = "ricerca disponibilità…";
 "createAccount.invalidUsername" = "nome utente non valido";
 "createAccount.usernameAlreadyTaken" = "nome utente già utilizzato";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "il nome utente è disponibile";
 "createAccount.loading" = "Caricamento in corso";
 "createAccount.waitCreateAccountTitle" = "Aggiungi account";
 "createAccount.RegisterAUsername" = "Registra un nome utente";
-"createAccount.ChooseAPassword" = "Cripta il mio account";
+"createAccount.ChooseAPassword" = "Crittografa il mio account";
 "createAccount.PasswordInformation" = "Scegliete una password per crittografare il tuo account locale. Non dimenticarla o non sarai in grado di recuperare il tuo account";
 "createAccount.EnableNotifications" = "Notifiche";
 "createAccount.Recommended" = "(Consigliato)";
@@ -185,10 +185,10 @@
 "calls.haghUp" = "riaggancia";
 "calls.maximize" = "massimizza";
 "calls.minimize" = "minimizza";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "imposta moderatore";
+"calls.removeModerator" = "rimuovi moderatore";
+"calls.muteAudio" = "disattiva l'audio";
+"calls.unmuteAudio" = "attiva l'audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivi";
@@ -297,7 +297,7 @@
 "dataTransfer.readableStatusOngoing" = "In trasferimento";
 "dataTransfer.readableStatusCanceled" = "Annullato";
 "dataTransfer.sendingFailed" = "Impossibile inviare";
-"dataTransfer.readableStatusSuccess" = "Completa";
+"dataTransfer.readableStatusSuccess" = "Completo";
 "dataTransfer.readableStatusAccept" = "Accetta";
 "dataTransfer.readableStatusCancel" = "Annulla";
 
@@ -313,7 +313,7 @@
 "dataTransfer.readableStatusRefuse" = "Rifiuto";
 "dataTransfer.readableStatusOngoing" = "In trasferimento";
 "dataTransfer.readableStatusCanceled" = "Annullato";
-"dataTransfer.readableStatusSuccess" = "Completa";
+"dataTransfer.readableStatusSuccess" = "Completo";
 "dataTransfer.readableStatusAccept" = "Accetta";
 "dataTransfer.readableStatusCancel" = "Annulla";
 "dataTransfer.infoMessage" = "Premere per avviare la registrazione";
@@ -326,8 +326,8 @@
 "generatedMessage.invitationAccepted" = "Invito accettato";
 "generatedMessage.outgoingCall" = "Chiamata in uscita";
 "generatedMessage.incomingCall" = "Chiamata in arrivo";
-"generatedMessage.missedOutgoingCall" = "Chiamata persa in uscita";
-"generatedMessage.missedIncomingCall" = "Chiamata persa in arrivo";
+"generatedMessage.missedOutgoingCall" = "Chiamata in uscita persa";
+"generatedMessage.missedIncomingCall" = "Chiamata in arrivo persa";
 "generatedMessage.liveLocationSharing" = "Condivisione della posizione in tempo reale";
 
 //General Settings

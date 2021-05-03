@@ -29,7 +29,7 @@
 "global.forward" = "Forward";
 "global.save" = "Save";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "ਝਲਕ ਵੇਖੋ";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

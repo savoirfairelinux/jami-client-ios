@@ -27,9 +27,9 @@
 "global.close" = "关闭";
 "global.share" = "共享";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "保存";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "预览";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";

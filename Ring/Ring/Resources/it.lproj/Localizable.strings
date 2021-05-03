@@ -26,9 +26,9 @@
 "global.versionName" = "Together";
 "global.close" = "Chiudi";
 "global.share" = "Condividi";
-"global.forward" = "Forward";
-"global.save" = "Save";
-"global.resend" = "Resend";
+"global.forward" = "Inoltra";
+"global.save" = "Salvare";
+"global.resend" = "Invia di nuovo";
 "global.preview" = "Preview";
 
 // Scan
@@ -51,10 +51,10 @@
 "smartlist.selectOneNumber" = "Select one of the numbers";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Scrivi a";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Impossibile salvare l'immagine nella galleria";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
@@ -85,10 +85,10 @@
 "createAccount.repeatPasswordPlaceholder" = "Confermare password";
 "createAccount.passwordCharactersNumberError" = "6 caratteri minimo";
 "createAccount.passwordNotMatchingError" = "le passwords non corrispondono";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "ricerca disponibilità...";
 "createAccount.invalidUsername" = "nome utente non valido";
 "createAccount.usernameAlreadyTaken" = "nome utente già utilizzato";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "il nome utente è disponibile";
 "createAccount.loading" = "Caricamento";
 "createAccount.waitCreateAccountTitle" = "Aggiunta account ";
 "createAccount.RegisterAUsername" = "Register a username";
@@ -185,10 +185,10 @@
 "calls.haghUp" = "hang up";
 "calls.maximize" = "maximize";
 "calls.minimize" = "minimize";
-"calls.setModerator" = "set moderator";
+"calls.setModerator" = "Metti un moderatore";
 "calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.muteAudio" = "disattiva l'audio";
+"calls.unmuteAudio" = "attiva l'audio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivi";
@@ -323,11 +323,11 @@
 //Generated Message
 "generatedMessage.contactAdded" = "Contatto aggiunto";
 "generatedMessage.invitationReceived" = "Invito ricevuto";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.invitationAccepted" = "Invito accettato";
 "generatedMessage.outgoingCall" = "Chiamata in uscita";
 "generatedMessage.incomingCall" = "Chiamata in arrivo";
 "generatedMessage.missedOutgoingCall" = "Chiamata in uscita persa";
-"generatedMessage.missedIncomingCall" = "Chiamata in entrata persa";
+"generatedMessage.missedIncomingCall" = "Chiamata in arrivo persa";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings

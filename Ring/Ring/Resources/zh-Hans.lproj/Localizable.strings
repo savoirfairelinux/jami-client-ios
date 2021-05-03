@@ -26,9 +26,9 @@
 "global.versionName" = "一起";
 "global.close" = "關閉";
 "global.share" = "分享";
-"global.forward" = "Forward";
+"global.forward" = "轉寄";
 "global.save" = "儲存";
-"global.resend" = "Resend";
+"global.resend" = "重新傳送";
 "global.preview" = "預覽";
 
 // Scan
@@ -51,10 +51,10 @@
 "smartlist.selectOneNumber" = "選取其中一個號碼";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "編寫訊息給";
 "conversation.explanationSendingLocationTo" = "您目前正在分享您的位置，與";
 "conversation.explanationReceivingLocationFrom" = "您正收到即時位置，從";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "將圖片儲存到相簿失敗";
 
 //Invitations
 "invitations.noInvitations" = "沒有邀請";
@@ -88,7 +88,7 @@
 "createAccount.lookingForUsernameAvailability" = "正在確認是否可用……";
 "createAccount.invalidUsername" = "無效的使用者名稱";
 "createAccount.usernameAlreadyTaken" = "使用者名稱已被使用";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "使用者名稱不可用";
 "createAccount.loading" = "正在載入";
 "createAccount.waitCreateAccountTitle" = "正在加入帳號";
 "createAccount.RegisterAUsername" = "註冊使用者名稱";
@@ -185,10 +185,10 @@
 "calls.haghUp" = "掛斷";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "設定主持人";
+"calls.removeModerator" = "取消設定主持人";
+"calls.muteAudio" = "靜音";
+"calls.unmuteAudio" = "取消靜音";
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";

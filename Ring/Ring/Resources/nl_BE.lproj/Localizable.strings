@@ -27,9 +27,9 @@
 "global.close" = "Sluiten";
 "global.share" = "Delen";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Opslaan";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Voorbeeld";
 
 // Scan
 "scan.badQrCode" = "Verkeerde QR-code";

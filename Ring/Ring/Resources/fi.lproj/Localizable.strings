@@ -27,9 +27,9 @@
 "global.close" = "Sulje";
 "global.share" = "Jako";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "Tallenna";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Esikatselu";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
