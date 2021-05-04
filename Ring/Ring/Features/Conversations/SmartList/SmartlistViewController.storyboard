@@ -235,6 +235,7 @@
                         <outlet property="qrScanButton" destination="Eta-uf-Ija" id="Hh0-vy-8EK"/>
                         <outlet property="scanButtonLeadingConstraint" destination="O7M-He-7UH" id="cvF-Wd-TJT"/>
                         <outlet property="searchBarShadow" destination="DKd-eF-L6f" id="CKZ-ws-ag1"/>
+                        <outlet property="searchBarTopConstraint" destination="gbl-PR-kL4" id="8Aw-gn-vEZ"/>
                         <outlet property="searchFieldTrailing" destination="AhH-s9-pfe" id="rhp-oZ-ZJo"/>
                         <outlet property="searchView" destination="Y4B-5f-ij4" id="FtS-9R-atZ"/>
                         <outlet property="settingsButton" destination="iaz-fd-fEz" id="R2O-R8-BDk"/>

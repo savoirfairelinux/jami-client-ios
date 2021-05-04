@@ -52,6 +52,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var networkAlertLabel: UILabel!
     @IBOutlet weak var cellularAlertLabel: UILabel!
     @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var dialpadButton: UIButton!
@@ -119,7 +120,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 self.updateAccountItemSize()
             })
             .disposed(by: self.disposeBag)
-
     }
 
     @objc
@@ -144,6 +144,109 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.layer.zPosition = -0
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        originalY = (self.navigationController?.navigationBar.frame.origin.y)!
+        originaloffset = self.conversationsTableView.contentOffset.y
+    }
+
+//    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+//       if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+//          navigationController?.setNavigationBarHidden(true, animated: true)
+//
+//       } else {
+//          navigationController?.setNavigationBarHidden(false, animated: true)
+//       }
+//    }
+
+    var previousScrollY: CGFloat = 0
+    var originalY: CGFloat = 0
+    var originaloffset: CGFloat = 0
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yorigin = scrollView.contentOffset.y
+        let distance = yorigin - previousScrollY
+       // previousScrollY = yorigin
+        var frame = self.navigationController?.navigationBar.frame
+        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y < 0 {
+            if (frame?.origin.y)! > 0 && distance > 0 {
+                previousScrollY = yorigin
+                frame?.origin.y -= distance
+                var top = searchBarTopConstraint.constant
+                top -= distance
+                UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+                    self.navigationController?.navigationBar.frame = frame!
+                    var alpha: CGFloat = (self.navigationItem.leftBarButtonItem?.customView!.alpha)!
+                    if alpha > 0 {
+                    alpha -= 0.1
+                    }
+                    self.navigationItem.leftBarButtonItem?.customView?.alpha = alpha
+                    self.searchBarTopConstraint.constant = top
+                    //let navigationBackgroundView = self.navigationController?.navigationBar.ri
+                   // navigationBackgroundView?.alpha = 0.7
+                    self.view.layoutIfNeeded()
+                }) { (_) in
+                    // Follow up animations...
+                }
+            }
+       // } else if yorigin <= 300 {
+        } else {
+            if (frame?.origin.y)! < originalY && distance < 0 {
+                previousScrollY = scrollView.contentOffset.y
+                let scrollDist = min(abs(distance), abs(originalY - (frame?.origin.y)!))
+                frame?.origin.y += scrollDist
+                var top = searchBarTopConstraint.constant
+                top -= distance
+                UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+                    self.navigationController?.navigationBar.frame = frame!
+                    var alpha: CGFloat = (self.navigationItem.leftBarButtonItem?.customView!.alpha)!
+                    if alpha < 1 {
+                        alpha += 0.1
+                    }
+                    self.navigationItem.leftBarButtonItem?.customView?.alpha = alpha
+                    self.searchBarTopConstraint.constant = top
+                   // let navigationBackgroundView = self.navigationController?.navigationBar.subviews.first
+                    self.view.layoutIfNeeded()
+                }) { (_) in
+                    // Follow up animations...
+                }
+            }
+        }
+        previousScrollY = yorigin
+        frame?.origin.y -= distance
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+            self.navigationController?.navigationBar.frame = frame!
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            // Follow up animations...
+        }
+    }
+
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        scrollingFinished(scrollView: scrollView)
+//    }
+//
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if decelerate {
+            //didEndDecelerating will be called for sure
+            return
+        }
+        scrollingFinished(scrollView: scrollView)
+    }
+
+    func scrollingFinished(scrollView: UIScrollView) {
+        var frame = self.navigationController?.navigationBar.frame
+        if (frame?.origin.y)! < originalY && (frame?.origin.y)! > 0 {
+            previousScrollY = scrollView.contentOffset.y
+            frame?.origin.y = originalY
+            UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+                self.navigationController?.navigationBar.frame = frame!
+                self.conversationsTableView.contentOffset.y = self.originaloffset
+                self.previousScrollY = self.originaloffset
+                self.navigationItem.leftBarButtonItem?.customView?.alpha = 1
+                self.searchBarTopConstraint.constant = -106
+                self.view.layoutIfNeeded()
+            }) { (_) in
+                // Follow up animations...
+            }
+        }
     }
 
     func applyL10n() {

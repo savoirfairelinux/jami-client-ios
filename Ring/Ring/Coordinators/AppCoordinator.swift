@@ -66,9 +66,10 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     // MARK: Private members
     private let navigationController = UINavigationController()
-    private let tabBarViewController = UITabBarController()
+   // private let tabBarViewController = UITabBarController()
     private let injectionBag: InjectionBag
     private var mainInterfaceReady = false
+   // private var mainViewController = UIViewController()
 
     /// Initializer
     ///
@@ -111,11 +112,11 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     }
 
     func accountRemoved() {
-        self.tabBarViewController.selectedIndex = 0
+       // self.tabBarViewController.selectedIndex = 0
     }
     func switchAccountMode() {
         self.childCoordinators[0].start()
-        self.tabBarViewController.selectedIndex = 0
+        //self.tabBarViewController.selectedIndex = 0
     }
 
     func migrateAccount(accountId: String) {
@@ -169,7 +170,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                 walkthroughCoordinator?.stateSubject.dispose()
                 self?.removeChildCoordinator(childCoordinator: walkthroughCoordinator)
                 self?.dispatchApplication()
-                self?.tabBarViewController.selectedIndex = 0
+               // self?.tabBarViewController.selectedIndex = 0
             })
             .disposed(by: self.disposeBag)
     }
@@ -179,38 +180,62 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         guard self.mainInterfaceReady == false else {
             return
         }
-
         let conversationsCoordinator = ConversationsCoordinator(with: self.injectionBag)
         conversationsCoordinator.parentCoordinator = self
-        let contactRequestsCoordinator = ContactRequestsCoordinator(with: self.injectionBag)
-        contactRequestsCoordinator.parentCoordinator = self
-        let meCoordinator = MeCoordinator(with: self.injectionBag)
-        meCoordinator.parentCoordinator = self
-        self.tabBarViewController.tabBar.tintColor = UIColor.jamiMain
-        self.tabBarViewController.view.backgroundColor = UIColor.white
-
-        self.tabBarViewController.viewControllers = [conversationsCoordinator.rootViewController,
-                                                     contactRequestsCoordinator.rootViewController,
-                                                     meCoordinator.rootViewController]
-
         self.addChildCoordinator(childCoordinator: conversationsCoordinator)
-        self.addChildCoordinator(childCoordinator: contactRequestsCoordinator)
-        self.addChildCoordinator(childCoordinator: meCoordinator)
-
-        conversationsCoordinator.start()
-        contactRequestsCoordinator.start()
-        meCoordinator.start()
+//        self.mainViewController = conversationsCoordinator.rootViewController
+//        let contactRequestsCoordinator = ContactRequestsCoordinator(with: self.injectionBag)
+//        contactRequestsCoordinator.parentCoordinator = self
+//        let meCoordinator = MeCoordinator(with: self.injectionBag)
+//        meCoordinator.parentCoordinator = self
+//        self.tabBarViewController.tabBar.tintColor = UIColor.jamiMain
+//        self.tabBarViewController.view.backgroundColor = UIColor.white
+//
+//        self.tabBarViewController.viewControllers = [conversationsCoordinator.rootViewController,
+//                                                     contactRequestsCoordinator.rootViewController,
+//                                                     meCoordinator.rootViewController]
+//
+//        self.addChildCoordinator(childCoordinator: conversationsCoordinator)
+//        self.addChildCoordinator(childCoordinator: contactRequestsCoordinator)
+//        self.addChildCoordinator(childCoordinator: meCoordinator)
+//
+//        conversationsCoordinator.start()
+//        contactRequestsCoordinator.start()
+//        meCoordinator.start()
 
         self.mainInterfaceReady = true
     }
 
     /// Presents the main interface
     private func showMainInterface () {
-        self.navigationController.setViewControllers([self.tabBarViewController], animated: true)
+        let boothMode = self.injectionBag.accountService.boothMode()
+        if boothMode {
+            let smartListViewController = IncognitoSmartListViewController.instantiate(with: self.injectionBag)
+            self.navigationController.setViewControllers([smartListViewController], animated: true)
+           // self.smartListViewController = smartListViewController
+            return
+        }
+        let smartListViewController = SmartlistViewController.instantiate(with: self.injectionBag)
+        self.navigationController.setViewControllers([smartListViewController], animated: true)
+        //self.smartListViewController = smartListViewController1
+//        let conversationsCoordinator = ConversationsCoordinator(with: self.injectionBag)
+//        conversationsCoordinator.parentCoordinator = self
+//        self.addChildCoordinator(childCoordinator: conversationsCoordinator)
+//       // self.mainViewController = conversationsCoordinator.rootViewController
+//      //  if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
+//        conversationsCoordinator.start()
+//        self.present(viewController: conversationsCoordinator.smartListViewController,
+//                     withStyle: .show,
+//                     withAnimation: true,
+//                     disposeBag: self.disposeBag)
+//
+       // }
+        //self.navigationController.setViewControllers([self.mainViewController], animated: true)
+//        self.navigationController.setViewControllers([self.tabBarViewController], animated: true)
     }
 
     func openConversation (participantID: String) {
-        self.tabBarViewController.selectedIndex = 0
+        //self.tabBarViewController.selectedIndex = 0
         if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
             conversationCoordinator.puchConversation(participantId: participantID)
         }
@@ -218,7 +243,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     func startCall(participant: String, name: String, isVideo: Bool) {
         DispatchQueue.main.async {
-            self.tabBarViewController.selectedIndex = 0
+           // self.tabBarViewController.selectedIndex = 0
             for child in self.childCoordinators {
                 if let childCoordinattor = child as? ConversationsCoordinator {
                     if isVideo {
