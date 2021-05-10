@@ -144,8 +144,8 @@
 "alerts.noLibraryPermissionsTitle" = "Accesso alle foto non concesso";
 "alerts.noLocationPermissionsTitle" = "Accesso alla posizione non concesso";
 "alerts.errorWrongCredentials" = "Impossibile connettersi al gestore account fornito. Controlla le tue credenziali";
-"alerts.recordVideoMessage" = "Registra un video messaggio";
-"alerts.recordAudioMessage" = "Registra un messaggio audio";
+"alerts.recordVideoMessage" = "Registra un videomessaggio";
+"alerts.recordAudioMessage" = "Registra un audiomessaggio";
 "alerts.uploadFile" = "Carica file";
 "alerts.uploadPhoto" = "Carica foto o film";
 "alerts.locationServiceIsDisabled" = "Attiva \"Servizi di localizzazione\" per consentire a \"Jami\" di determinare la tua posizione.";
@@ -169,7 +169,7 @@
 "alerts.incomingCallButtonAccept" = "Accetta";
 "alerts.incomingCallButtonIgnore" = "Ignora";
 "actions.startAudioCall" = "Chiamata audio";
-"actions.startVideoCall" = "Video chiamata";
+"actions.startVideoCall" = "Videochiamata";
 "actions.goToSettings" = "Vai alle impostazioni";
 "actions.stopLocationSharing" = "Ferma condivisione";
 

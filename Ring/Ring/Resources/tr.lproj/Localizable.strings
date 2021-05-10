@@ -23,10 +23,10 @@
 "global.contactRequestsTabBarTitle" = "Davetiyeler";
 "global.meTabBarTitle" = "Hesap";
 "global.ok" = "Tamam";
-"global.versionName" = "Together";
+"global.versionName" = "Birlikte";
 "global.close" = "Kapat";
 "global.share" = "Paylaş";
-"global.forward" = "Forward";
+"global.forward" = "İlet";
 "global.save" = "Kaydet";
 "global.resend" = "Resend";
 "global.preview" = "Önizle";
@@ -51,9 +51,9 @@
 "smartlist.selectOneNumber" = "Numaralardan birini seçin";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.messagePlaceholder" = "Şuna ileti yaz:";
+"conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
+"conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
 "conversation.errorSavingImage" = "Failed to save image to galery";
 
 //Invitations
@@ -63,9 +63,9 @@
 
 //Welcome Screen
 "welcome.title" = "Jami'ye Hoşgeldiniz !";
-"welcome.text" = "Jami kullanıcılarının gizlilik ve özgürlüklerini sağlayan evrensel ve ücretsiz bir platformdur.";
+"welcome.text" = "Jami, kullanıcılarının gizlilik ve özgürlüklerini sağlayan evrensel ve özgür platformdur.";
 "welcome.linkDevice" = "Bu aygıtı hesaba bağla";
-"welcome.createAccount" = "Bir Jami hesabı oluştur";
+"welcome.createAccount" = "Jami hesabı oluştur";
 "welcome.connectToManager" = "Bir JAMS sunucusuna bağlan";
 
 //Creation Profile Screen
@@ -91,7 +91,7 @@
 "createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Yükleniyor";
 "createAccount.waitCreateAccountTitle" = "Hesap ekleniyor";
-"createAccount.RegisterAUsername" = "Bir kullanıcı adı kaydedin";
+"createAccount.RegisterAUsername" = "Kullanıcı adı kaydet";
 "createAccount.ChooseAPassword" = "Hesabımı şifrele";
 "createAccount.PasswordInformation" = "Yerel hesabınızı şifrelemek için parola seçin. Parolayı unutmayın yoksa hesabınızı kurtaramazsınız";
 "createAccount.EnableNotifications" = "Bildirimler";
@@ -117,11 +117,11 @@
 "linkToAccountManager.usernamePlaceholder" = "Kullanıcı adı";
 "linkToAccountManager.usernameLabel" = "Kullanıcı Adını Girin";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "JAMS URL'si gir";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Hesap bulunamadı";
-"alerts.accountCannotBeFoundMessage" = "Hesap Jami ağı üzerinde bulunamadı. Var olan bir aygıttan, Jami üzerinde dışa aktarıldığından ve sağladığı bilgilerin doğru olduğundan emin olun.";
+"alerts.accountCannotBeFoundMessage" = "Hesap Jami ağı üzerinde bulunamadı. Var olan aygıttan, Jami üzerinde dışa aktarıldığından ve sağladığı bilgilerin doğru olduğundan emin olun.";
 "alerts.accountAddedTitle" = "Hesap Eklendi";
 "alerts.accountNoNetworkTitle" = "Ağa bağlanılamıyor";
 "alerts.accountNoNetworkMessage" = "Hesap eklenemiyor çünkü Jami dağıtık ağa bağlanamıyor. Bağlanabilirliğinizi denetleyin.";
@@ -132,7 +132,7 @@
 "alerts.profileCancelPhoto" = "İptal";
 "alerts.accountLinkedTitle" = "Hesap bağlama";
 "alerts.dbFailedTitle" = "Jami başlatılırken bir hata oluştu";
-"alerts.dbFailedMessage" = "Lütfen uygulamayı kapatın ve tekrar açmayı deneyin";
+"alerts.dbFailedMessage" = "Lütfen uygulamayı kapatın ve yeniden açmayı deneyin";
 "alerts.confirmBlockContact" = "Bu kişiyi engellemek istediğinize emin misiniz? Bu kişiyle olan konuşma geçmişi de kalıcı olarak silinecek.";
 "alerts.confirmBlockContactTitle" = "Kişiyi Engelle";
 "alerts.confirmDeleteConversation" = "Bu konuşmayı kalıcı olarak silmek istediğinizden emin misiniz?";
@@ -142,20 +142,20 @@
 "alerts.confirmClearConversationTitle" = "Görüşmeyi temizle";
 "alerts.noMediaPermissionsTitle" = "Medya izni verilmedi";
 "alerts.noLibraryPermissionsTitle" = "Fotoğraf kitaplığına erişim izni verilmedi";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
-"alerts.errorWrongCredentials" = "Sağlanan hesap yöneticisine bağlanılamıyor. Lütfen kimlik bilgilerinizi kontrol edin";
+"alerts.noLocationPermissionsTitle" = "Konum erişim izni verilmedi";
+"alerts.errorWrongCredentials" = "Sağlanan hesap yöneticisine bağlanılamıyor. Lütfen kimlik bilgilerinizi denetleyin";
 "alerts.recordVideoMessage" = "Video mesajı kaydet ";
 "alerts.recordAudioMessage" = "Sesli mesaj kaydet ";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.uploadFile" = "Dosya yükle";
+"alerts.uploadPhoto" = "Fotoğraf veya video yükle";
+"alerts.locationServiceIsDisabled" = "\"Jami\"nin konumunuzu saptaması için \"Konum Servisleri\"ni açın.";
+"alerts.locationSharing" = "Konumumu paylaş";
+"alerts.alreadylocationSharing" = "Bu kullanıcıyla hâlihazırda konum paylaşılıyor";
+"alerts.locationSharingDurationTitle" = "Konum paylaşımı ne zamana dek sürmeli?";
 "alerts.locationSharingDuration10min" = "10 dk";
 "alerts.locationSharingDuration1hour" = "1 saat";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.mapInformation" = "Harita bilgisi";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap katkıcıları";
 "alerts.openStreetMapCopyrightMoreInfo" = "Daha çok  öğren";
 
 //Actions
@@ -227,13 +227,13 @@
 "accountPage.shareAccountDetails" = "Hesap Detaylarını Paylaş";
 "accountPage.contactMeOnJamiTitle" = "Benimle Jami'de iletişime geç!";
 "accountPage.contactMeOnJamiContant" = "Jami dağıtılmış iletişim platformunda \"%s\" kullanarak bana ulaşın: https://jami.net";
-"accountPage.registerNameTitle" = "Bir kullanıcı adı kaydedin";
+"accountPage.registerNameTitle" = "Kullanıcı adı kaydet";
 "accountPage.passwordPlaceholder" = "Hesap parolanızı girin";
 "accountPage.usernamePlaceholder" = "İstenen kullanıcı adını girin";
 "accountPage.registerNameErrorMessage" = "Seçilen kullanıcı adı uygun değil";
 "accountPage.usernameRegistering" = "Kayıt ediliyor";
 "accountPage.usernameRegisterAction" = "Kaydol";
-"accountPage.usernameRegistrationFailed" = "Kayıt başarısız. Lütfen parolanızı kontrol edin.";
+"accountPage.usernameRegistrationFailed" = "Kayıt başarısız. Lütfen parolanızı denetleyin.";
 "accountPage.createPassword" = "Parola oluştur";
 "accountPage.changePassword" = "Parolayı değiştir";
 "accountPage.oldPasswordPlaceholder" = "Eski parolayı girin";
@@ -242,11 +242,11 @@
 "accountPage.changePasswordError" = "Parola yanlış";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
+"accountPage.disableBoothModeExplanation" = "Lütfen hesap parolanızı sağlayın";
 "accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
 "accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
-"accountPage.peerDiscovery" = "Yerel ağda otomatik bağlan ";
+"accountPage.peerDiscovery" = "Yerel ağda kendiliğinden bağlan";
 "accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
@@ -262,8 +262,8 @@
 "account.portLabel" = "Port numarası girin";
 "account.accountStatus" = "Hesap Durumu";
 "account.enableAccount" = "Hesabı etkinleştir";
-"account.statusOnline" = "Çevrimiçi";
-"account.statusOffline" = "Çevrimdışı";
+"account.statusOnline" = "Çevrim İçi";
+"account.statusOffline" = "Çevrim Dışı";
 "account.statusConnecting" = "Bağlanılıyor";
 "account.statusUnknown" = "Bilinmeyen";
 "account.statusConnectionerror" = "Bağlantı hatası";
@@ -274,7 +274,7 @@
 "blockListPage.noBlockedContacts" = "Engellenmiş kişi yok";
 
 //Link New Device
-"linkDevice.title" = "Yeni bir aygıt bağlayın";
+"linkDevice.title" = "Yeni aygıt bağla";
 "linkDevice.passwordError" = "Girdiğiniz parola bu hesabı açmaz";
 "linkDevice.networkError" = "Dışa aktarma esnasında bir ağ hatası oluştu";
 "linkDevice.defaultError" = "Dışa aktarma esnasında bir hata oluştu";
@@ -307,8 +307,8 @@
 "notifications.acceptCall" = "KABUL ET";
 "notifications.refuseCall" = "REDDET";
 "notifications.newFile" = "Yeni dosya";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.locationSharingStarted" = "Gelen konum paylaşımı başlatıldı";
+"notifications.locationSharingStopped" = "Gelen konum paylaşımı durduruldu";
 "dataTransfer.readableStatusAwaiting" = "Bekliyor...";
 "dataTransfer.readableStatusRefuse" = "Geri Çevir";
 "dataTransfer.readableStatusOngoing" = "Aktarıyor";
@@ -328,7 +328,7 @@
 "generatedMessage.incomingCall" = "Gelen arama";
 "generatedMessage.missedOutgoingCall" = "Yanıtsız giden arama";
 "generatedMessage.missedIncomingCall" = "Yanıtsız gelen arama";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "Canlı konum paylaşımı";
 
 //General Settings
 "generalSettings.title" = "Genel ayarlar";
@@ -341,7 +341,7 @@
 "migrateAccount.passwordPlaceholder" = "Parolayı gir";
 "migrateAccount.passwordExplanation" = "Taşıma işlemini sürdürmek için bu hesapta kullanılan parolayı girmelisiniz";
 "migrateAccount.removeAccount" = "Hesabı Kaldır";
-"migrateAccount.error" = "Hesabınız taşınamadı. Hesabınızı tekrar deneyebilir veya silebilirsiniz.";
+"migrateAccount.error" = "Hesabınız taşınamadı. Yeniden deneyebilir veya hesabınızı silebilirsiniz.";
 "migrateAccount.migrating" = "Taşınıyor...";
 "migrateAccount.cancel" = "İptal";
 "migrateAccount.migrateAnother" = "Başka Bir Hesap Taşı";
